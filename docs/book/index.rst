@@ -16,10 +16,12 @@ The Book
     currencies
     countries
     zones
+    addresses
+    customer_and_shopuser
+    adminuser
     products
     attributes
     taxons
-    addresses
     inventory
     orders
     checkout
@@ -28,8 +30,6 @@ The Book
     taxation
     pricing
     promotions
-    users_and_groups
-    adminuser
     content
     emails
     settings

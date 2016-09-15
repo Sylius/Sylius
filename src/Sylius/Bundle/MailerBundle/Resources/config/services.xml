@@ -11,60 +11,44 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <parameters>
-        <parameter key="sylius.form.type.email_template_choice.class">Sylius\Bundle\MailerBundle\Form\Type\EmailTemplateChoiceType</parameter>
-        <parameter key="sylius.email_sender.class">Sylius\Component\Mailer\Sender\Sender</parameter>
-        <parameter key="sylius.email_provider.class">Sylius\Component\Mailer\Provider\EmailProvider</parameter>
-        <parameter key="sylius.mailer.default_settings_provider.class">Sylius\Component\Mailer\Provider\DefaultSettingsProvider</parameter>
-
-        <parameter key="sylius.email_renderer.adapter.abstract.class">Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter</parameter>
-        <parameter key="sylius.email_renderer.adapter.twig.class">Sylius\Bundle\MailerBundle\Renderer\Adapter\TwigAdapter</parameter>
-
-        <parameter key="sylius.email_sender.adapter.abstract.class">Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter</parameter>
-        <parameter key="sylius.email_sender.adapter.swiftmailer.class">Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.form.type.email_template_choice" class="%sylius.form.type.email_template_choice.class%">
+        <service id="sylius.form.type.email_template_choice" class="Sylius\Bundle\MailerBundle\Form\Type\EmailTemplateChoiceType">
             <argument>%sylius.mailer.templates%</argument>
             <tag name="form.type" alias="sylius_email_template_choice" />
         </service>
-        <service id="sylius.email_provider" class="%sylius.email_provider.class%">
+        <service id="sylius.email_provider" class="Sylius\Component\Mailer\Provider\EmailProvider">
             <argument type="service" id="sylius.factory.email" />
             <argument type="service" id="sylius.repository.email" />
             <argument>%sylius.mailer.emails%</argument>
         </service>
-        <service id="sylius.email_sender" class="%sylius.email_sender.class%">
+        <service id="sylius.email_sender" class="Sylius\Component\Mailer\Sender\Sender">
             <argument type="service" id="sylius.email_renderer.adapter" />
             <argument type="service" id="sylius.email_sender.adapter" />
             <argument type="service" id="sylius.email_provider" />
             <argument type="service" id="sylius.mailer.default_settings_provider" />
         </service>
 
-        <service id="sylius.mailer.default_settings_provider" class="%sylius.mailer.default_settings_provider.class%">
+        <service id="sylius.mailer.default_settings_provider" class="Sylius\Component\Mailer\Provider\DefaultSettingsProvider">
             <argument>%sylius.mailer.sender_name%</argument>
             <argument>%sylius.mailer.sender_address%</argument>
         </service>
 
-        <service id="sylius.email_renderer.adapter.abstract" class="%sylius.email_renderer.adapter.abstract.class%" abstract="true">
+        <service id="sylius.email_renderer.adapter.abstract" class="Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter" abstract="true">
             <call method="setEventDispatcher">
                 <argument type="service" id="event_dispatcher" />
             </call>
         </service>
-        <service id="sylius.email_renderer.adapter.twig" class="%sylius.email_renderer.adapter.twig.class%" parent="sylius.email_renderer.adapter.abstract">
+        <service id="sylius.email_renderer.adapter.twig" class="Sylius\Bundle\MailerBundle\Renderer\Adapter\TwigAdapter" parent="sylius.email_renderer.adapter.abstract">
             <argument type="service" id="twig" />
         </service>
 
-        <service id="sylius.email_sender.adapter.abstract" class="%sylius.email_sender.adapter.abstract.class%" abstract="true">
+        <service id="sylius.email_sender.adapter.abstract" class="Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter" abstract="true">
             <call method="setEventDispatcher">
                 <argument type="service" id="event_dispatcher" />
             </call>
         </service>
-        <service id="sylius.email_sender.adapter.swiftmailer" class="%sylius.email_sender.adapter.swiftmailer.class%" parent="sylius.email_sender.adapter.abstract">
+        <service id="sylius.email_sender.adapter.swiftmailer" class="Sylius\Bundle\MailerBundle\Sender\Adapter\SwiftMailerAdapter" parent="sylius.email_sender.adapter.abstract">
             <argument type="service" id="mailer" />
         </service>
     </services>

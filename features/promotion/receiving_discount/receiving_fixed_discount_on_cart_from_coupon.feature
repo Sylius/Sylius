@@ -15,8 +15,7 @@ Feature: Receiving fixed discount on cart from coupon
         Given this promotion gives "$10.00" discount to every order
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
-        Then I should be notified that promotion coupon has been added to the cart
-        And my cart total should be "$90.00"
+        Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
 
     @ui

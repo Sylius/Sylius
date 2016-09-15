@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
@@ -113,12 +114,14 @@ final class PromotionContext implements Context
     /**
      * @Given the store has promotion :promotionName with coupon :couponCode
      * @Given the store has also promotion :promotionName with coupon :couponCode
+     * @Given the store has a promotion :promotionName with a coupon :couponCode that is limited to :usageLimit usages
      */
-    public function thereIsPromotionWithCoupon($promotionName, $couponCode)
+    public function thereIsPromotionWithCoupon($promotionName, $couponCode, $usageLimit = null)
     {
         /** @var CouponInterface $coupon */
         $coupon = $this->couponFactory->createNew();
         $coupon->setCode($couponCode);
+        $coupon->setUsageLimit($usageLimit);
 
         $promotion = $this->testPromotionFactory
             ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
@@ -437,6 +440,26 @@ final class PromotionContext implements Context
     public function itIsCouponBasedPromotion(PromotionInterface $promotion)
     {
         $promotion->setCouponBased(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(the promotion) was disabled for the (channel "[^"]+")$/
+     */
+    public function thePromotionWasDisabledForTheChannel(PromotionInterface $promotion, ChannelInterface $channel)
+    {
+        $promotion->removeChannel($channel);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the (coupon "[^"]+") was used up to its usage limit$/
+     */
+    public function theCouponWasUsed(CouponInterface $coupon)
+    {
+        $coupon->setUsed($coupon->getUsageLimit());
 
         $this->objectManager->flush();
     }

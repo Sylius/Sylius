@@ -12,7 +12,13 @@ sylius:
             last_name: Nachname
             email: E-Mail
             phone_number: Telefonnummer
+            gender: Geschlecht
+            birthday: Geburtstag
             billing_address: Rechnungsadresse
             different_billing_address: Eine andere Rechnungsadresse benutzen?
+            only_customer_registration: Account erstellen?
+            subscribed_to_newsletter: Newsletter abonnieren
     gender:
         unknown: Unbekannt
+        male: Männlich
+        female: Weiblich

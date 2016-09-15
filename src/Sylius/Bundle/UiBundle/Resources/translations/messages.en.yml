@@ -7,6 +7,8 @@ sylius:
         option:
             name: Name
         notes: Extra notes
+        variant:
+            tracked: Tracked
     ui:
         abandoned: Abandoned
         about: About
@@ -87,6 +89,7 @@ sylius:
         category: Category
         category_requirements: Category requirements
         change_address: Change address
+        change_file: Change file
         change_password: Change password
         change_payment_method: Change payment method
         change_shipping_method: Change shipping method
@@ -214,6 +217,7 @@ sylius:
         discount: Discount
         discounted_unit_price: 'Discounted unit price'
         edit: Edit
+        edit_admin_user: 'Edit administrator'
         edit_association_type: 'Edit Association type'
         edit_channel: Edit channel
         edit_country: Edit country
@@ -232,6 +236,7 @@ sylius:
         edit_promotion_coupon: Edit promotion coupon
         edit_report: 'Edit report'
         edit_route: 'Edit route'
+        edit_shipping_address: Edit shipping address
         edit_shipping_method: Edit shipping method
         edit_static_content: 'Edit static content'
         edit_tax_category: Edit tax category
@@ -455,7 +460,7 @@ sylius:
         new_zone: 'New zone'
         newest_products: 'Newest products'
         next: Next
-        no: No
+        "no": No
         no_account: 'No account yet'
         no_account: no account
         no_association_types_to_display: 'There are no association types defined'
@@ -482,6 +487,7 @@ sylius:
         not_empty: Not empty
         not_in: Not in
         not_verified: Not verified
+        not_tracked: Not tracked
         notes: Notes
         notify_customer: 'Notify Customer'
         number: Number
@@ -560,6 +566,7 @@ sylius:
         promotion_configuration: Promotion configuration
         promotion_coupons: Coupons
         promotion_details: 'Promotion details'
+        promotion_discount: Promotion discount
         promotion_information: Promotion information
         promotion_total: 'Promotion total'
         promotions: Promotions
@@ -768,7 +775,7 @@ sylius:
         welcome: Welcome
         welcome_to_our_store: 'Welcome to our store'
         welcome_to_your_space: 'Welcome to your space'
-        yes: Yes
+        "yes": Yes
         you_are_customer_since: 'You are customer since'
         you_have_no_addresses_defined: 'You have no addresses defined'
         you_have_no_new_orders: 'You have no new orders'

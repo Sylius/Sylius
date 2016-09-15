@@ -13,3 +13,12 @@ sylius:
             not_blank: Por favor selecione a categoria de imposto.
         name:
             not_blank: Introduza o nome da taxa de imposto.
+        amount:
+            not_blank: Por favor introduza o valor da taxa de imposto.
+        calculator:
+            not_blank: Por favor selecione a calculadora de imposto.
+        zone:
+            not_blank: Por favor selecione a zona fiscal.
+        code:
+            not_blank: Por favor introduza o código de taxa de imposto.
+            unique: Já existe uma taxa de imposto com o código introduzido.

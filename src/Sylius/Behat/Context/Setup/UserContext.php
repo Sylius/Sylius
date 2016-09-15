@@ -89,7 +89,7 @@ final class UserContext implements Context
      */
     public function thereIsUserIdentifiedBy($email, $password = 'sylius')
     {
-        $user = $this->userFactory->create(['email' => $email, 'password' => $password]);
+        $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
 
         $this->sharedStorage->set('user', $user);
 
@@ -101,7 +101,7 @@ final class UserContext implements Context
      */
     public function thereIsUserWithShippingCountry($email, $password, $country)
     {
-        $user = $this->userFactory->create(['email' => $email, 'password' => $password]);
+        $user = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
 
         $customer = $user->getCustomer();
         $customer->setShippingAddress($this->createAddress($customer->getFirstName(), $customer->getLastName(), $country));

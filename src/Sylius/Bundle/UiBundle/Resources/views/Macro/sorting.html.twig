@@ -1,0 +1,18 @@
+{% macro sortedHeader(definition, field, attributes, direction) %}
+    {% from _self import getSortingLink %}
+
+    <th class="sortable sorted {{ 'asc' == direction ? 'ascending' : 'descending'}}">
+        <a href="{{ getSortingLink(definition, field.name, attributes, direction) }}">{{ field.label|trans }}</a>
+    </th>
+{% endmacro %}
+
+{% macro sortableHeader(definition, field, attributes, direction) %}
+    {% from _self import getSortingLink %}
+
+    <th class="sortable"><a href="{{ getSortingLink(definition, field.name, attributes, 'asc') }}">{{ field.label|trans }}<i class="sort icon"></i></a></th>
+{% endmacro %}
+
+{% macro getSortingLink(definition, fieldName, attributes, direction) %}
+    {% set sorting = {'sorting': {(fieldName): {'path': definition.sorting[fieldName]['path'], 'direction': (direction == 'desc' ? 'asc' : 'desc')}}} %}
+    {{ path(attributes.get('_route'), attributes.get('_route_params')|merge(sorting)) }}
+{% endmacro %}

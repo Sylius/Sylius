@@ -104,6 +104,7 @@ final class ProductContext implements Context
 
     /**
      * @Then I should be on :product product detailed page
+     * @Then I should still be on product :product page
      */
     public function iShouldBeOnProductDetailedPage(ProductInterface $product)
     {
@@ -207,6 +208,30 @@ final class ProductContext implements Context
         Assert::true(
             $this->taxonShowPage->isProductWithPriceOnList($productName, $productPrice),
             sprintf("The product %s with price %s should appear on page, but it does not.", $productName, $productPrice)
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that (this product) does not have sufficient stock$/
+     */
+    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
+    {
+       $this->showPage->waitForValidationErrors(3);
+
+        Assert::true(
+            $this->showPage->hasProductOutOfStockValidationMessage($product),
+            sprintf('I should see validation message for %s product', $product->getName())
+        );
+    }
+
+    /**
+     * @Then /^I should not be notified that (this product) does not have sufficient stock$/
+     */
+    public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
+    {
+        Assert::false(
+            $this->showPage->hasProductOutOfStockValidationMessage($product),
+            sprintf('I should see validation message for %s product', $product->getName())
         );
     }
 }

@@ -11,68 +11,28 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="sylius.form.type.shipping_calculator_choice.class">Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType</parameter>
-
-        <parameter key="sylius.form.type.shipping_rule_unit_count_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Rule\UnitCountConfigurationType</parameter>
-
-        <parameter key="sylius.composite_shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\CompositeMethodsResolver</parameter>
-        <parameter key="sylius.shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\ShippingMethodsResolver</parameter>
-
-        <parameter key="sylius.resolver.default_shipping_method.class">Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolver</parameter>
-
-        <parameter key="sylius.registry.shipping_calculator.class">Sylius\Component\Registry\ServiceRegistry</parameter>
-        <parameter key="sylius.shipping_calculator.class">Sylius\Component\Shipping\Calculator\DelegatingCalculator</parameter>
-
-        <parameter key="sylius.registry.shipping_rule_checker.class">Sylius\Component\Registry\ServiceRegistry</parameter>
-
-        <parameter key="sylius.registry.shipping_methods_resolver.class">Sylius\Component\Registry\PrioritizedServiceRegistry</parameter>
         <parameter key="sylius.shipping_methods_resolver.interface">Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface</parameter>
-
-        <parameter key="sylius.shipping_eligibility_checker.class">Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker</parameter>
-
-        <parameter key="sylius.shipping_calculator.flat_rate.class">Sylius\Component\Shipping\Calculator\FlatRateCalculator</parameter>
-        <parameter key="sylius.form.type.shipping_calculator.flat_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType</parameter>
-
-        <parameter key="sylius.shipping_calculator.per_unit_rate.class">Sylius\Component\Shipping\Calculator\PerUnitRateCalculator</parameter>
-        <parameter key="sylius.form.type.shipping_calculator.per_unit_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerUnitRateConfigurationType</parameter>
-
-        <parameter key="sylius.shipping_calculator.flexible_rate.class">Sylius\Component\Shipping\Calculator\FlexibleRateCalculator</parameter>
-        <parameter key="sylius.form.type.shipping_calculator.flexible_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType</parameter>
-
-        <parameter key="sylius.shipping_calculator.weight_rate.class">Sylius\Component\Shipping\Calculator\WeightRateCalculator</parameter>
-        <parameter key="sylius.form.type.shipping_calculator.weight_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType</parameter>
-
-        <parameter key="sylius.shipping_calculator.volume_rate.class">Sylius\Component\Shipping\Calculator\VolumeRateCalculator</parameter>
-        <parameter key="sylius.form.type.shipping_calculator.volume_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\VolumeRateConfigurationType</parameter>
-
-        <parameter key="sylius.form.type.shipment_ship.class">Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType</parameter>
-
-        <parameter key="sylius.processor.shipment_processor.class">Sylius\Component\Shipping\Processor\ShipmentProcessor</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.shipping_eligibility_checker" class="%sylius.shipping_eligibility_checker.class%" />
+        <service id="sylius.shipping_eligibility_checker" class="Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker" />
 
-        <service id="sylius.registry.shipping_rule_checker" class="%sylius.registry.shipping_rule_checker.class%" >
+        <service id="sylius.registry.shipping_rule_checker" class="Sylius\Component\Registry\ServiceRegistry" >
             <argument>Sylius\Component\Shipping\Checker\RuleCheckerInterface</argument>
             <argument>shipping rule checker</argument>
         </service>
 
-        <service id="sylius.registry.shipping_methods_resolver" class="%sylius.registry.shipping_methods_resolver.class%">
+        <service id="sylius.registry.shipping_methods_resolver" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
             <argument>%sylius.shipping_methods_resolver.interface%</argument>
             <argument>Shipping methods resolver</argument>
         </service>
 
-        <service id="sylius.composite_shipping_methods_resolver" class="%sylius.composite_shipping_methods_resolver.class%">
+        <service id="sylius.composite_shipping_methods_resolver" class="Sylius\Component\Shipping\Resolver\CompositeMethodsResolver">
             <argument type="service" id="sylius.registry.shipping_methods_resolver" />
         </service>
-        <service id="sylius.shipping_methods_resolver" class="%sylius.shipping_methods_resolver.class%">
+        <service id="sylius.shipping_methods_resolver" class="Sylius\Component\Shipping\Resolver\ShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.shipping_eligibility_checker" />
             <tag name="sylius.shipping_method_resolver" type="default" label="Default" />
@@ -85,66 +45,65 @@
             <tag name="form.type" alias="sylius_shipping_method_choice" />
         </service>
 
-        <service id="sylius.resolver.default_shipping_method" class="%sylius.resolver.default_shipping_method.class%">
+        <service id="sylius.resolver.default_shipping_method" class="Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
         </service>
 
-        <service id="sylius.form.type.shipping_calculator_choice" class="%sylius.form.type.shipping_calculator_choice.class%">
+        <service id="sylius.form.type.shipping_calculator_choice" class="Sylius\Bundle\ShippingBundle\Form\Type\CalculatorChoiceType">
             <argument>%sylius.shipping_calculators%</argument>
             <tag name="form.type" alias="sylius_shipping_calculator_choice" />
         </service>
 
-        <service id="sylius.registry.shipping_calculator" class="%sylius.registry.shipping_calculator.class%" >
+        <service id="sylius.registry.shipping_calculator" class="Sylius\Component\Registry\ServiceRegistry" >
             <argument>Sylius\Component\Shipping\Calculator\CalculatorInterface</argument>
             <argument>shipping calculator</argument>
         </service>
-        <service id="sylius.shipping_calculator" class="%sylius.shipping_calculator.class%">
+        <service id="sylius.shipping_calculator" class="Sylius\Component\Shipping\Calculator\DelegatingCalculator">
             <argument type="service" id="sylius.registry.shipping_calculator" />
         </service>
 
-        <service id="sylius.shipping_calculator.flat_rate" class="%sylius.shipping_calculator.flat_rate.class%">
+        <service id="sylius.shipping_calculator.flat_rate" class="Sylius\Component\Shipping\Calculator\FlatRateCalculator">
             <tag name="sylius.shipping_calculator" calculator="flat_rate" label="sylius.form.shipping_calculator.flat_rate_configuration.label" />
         </service>
-        <service id="sylius.form.type.shipping_calculator.flat_rate" class="%sylius.form.type.shipping_calculator.flat_rate.class%">
+        <service id="sylius.form.type.shipping_calculator.flat_rate" class="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlatRateConfigurationType">
             <tag name="form.type" alias="sylius_shipping_calculator_flat_rate" />
         </service>
 
-        <service id="sylius.shipping_calculator.per_unit_rate" class="%sylius.shipping_calculator.per_unit_rate.class%">
+        <service id="sylius.shipping_calculator.per_unit_rate" class="Sylius\Component\Shipping\Calculator\PerUnitRateCalculator">
             <tag name="sylius.shipping_calculator" calculator="per_unit_rate" label="sylius.form.shipping_calculator.per_unit_rate_configuration.label" />
         </service>
-        <service id="sylius.form.type.shipping_calculator.per_unit_rate" class="%sylius.form.type.shipping_calculator.per_unit_rate.class%">
+        <service id="sylius.form.type.shipping_calculator.per_unit_rate" class="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerUnitRateConfigurationType">
             <tag name="form.type" alias="sylius_shipping_calculator_per_unit_rate" />
         </service>
 
-        <service id="sylius.shipping_calculator.flexible_rate" class="%sylius.shipping_calculator.flexible_rate.class%">
+        <service id="sylius.shipping_calculator.flexible_rate" class="Sylius\Component\Shipping\Calculator\FlexibleRateCalculator">
             <tag name="sylius.shipping_calculator" calculator="flexible_rate" label="sylius.form.shipping_calculator.flexible_rate_configuration.label" />
         </service>
-        <service id="sylius.form.type.shipping_calculator.flexible_rate" class="%sylius.form.type.shipping_calculator.flexible_rate.class%">
+        <service id="sylius.form.type.shipping_calculator.flexible_rate" class="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType">
             <tag name="form.type" alias="sylius_shipping_calculator_flexible_rate" />
         </service>
 
-        <service id="sylius.shipping_calculator.weight_rate" class="%sylius.shipping_calculator.weight_rate.class%">
+        <service id="sylius.shipping_calculator.weight_rate" class="Sylius\Component\Shipping\Calculator\WeightRateCalculator">
             <tag name="sylius.shipping_calculator" calculator="weight_rate" label="sylius.form.shipping_calculator.weight_rate_configuration.label" />
         </service>
-        <service id="sylius.form.type.shipping_calculator.weight_rate" class="%sylius.form.type.shipping_calculator.weight_rate.class%">
+        <service id="sylius.form.type.shipping_calculator.weight_rate" class="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType">
             <tag name="form.type" alias="sylius_shipping_calculator_weight_rate" />
         </service>
 
-        <service id="sylius.shipping_calculator.volume_rate" class="%sylius.shipping_calculator.volume_rate.class%">
+        <service id="sylius.shipping_calculator.volume_rate" class="Sylius\Component\Shipping\Calculator\VolumeRateCalculator">
             <tag name="sylius.shipping_calculator" calculator="volume_rate" label="sylius.form.shipping_calculator.volume_rate_configuration.label" />
         </service>
-        <service id="sylius.form.type.shipping_calculator.volume_rate" class="%sylius.form.type.shipping_calculator.volume_rate.class%">
+        <service id="sylius.form.type.shipping_calculator.volume_rate" class="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\VolumeRateConfigurationType">
             <tag name="form.type" alias="sylius_shipping_calculator_volume_rate" />
         </service>
 
-        <service id="sylius.form.type.shipment_ship" class="%sylius.form.type.shipment_ship.class%">
+        <service id="sylius.form.type.shipment_ship" class="Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType">
             <argument>%sylius.model.shipment.class%</argument>
             <tag name="form.type" alias="sylius_shipment_ship" />
         </service>
 
-        <service id="sylius.processor.shipment_processor" class="%sylius.processor.shipment_processor.class%">
+        <service id="sylius.processor.shipment_processor" class="Sylius\Component\Shipping\Processor\ShipmentProcessor">
             <argument type="service" id="sm.factory" />
         </service>
     </services>
-
 </container>

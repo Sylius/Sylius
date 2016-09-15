@@ -166,7 +166,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^the (product "[^"]+") has "([^"]+)" variant priced at ("[^"]+")$/
+     * @Given /^the (product "[^"]+") has(?:| a) "([^"]+)" variant priced at ("[^"]+")$/
      * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+")$/
      */
     public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price)
@@ -331,7 +331,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^there (?:is|are) (\d+) (?:item|unit)(?:s) of (product "([^"]+)") available in the inventory$/
+     * @Given /^there (?:is|are) (\d+) (?:item|unit)(?:|s) of (product "([^"]+)") available in the inventory$/
      * @When product :product quantity is changed to :quantity
      */
     public function thereIsQuantityOfProducts($quantity, ProductInterface $product)
@@ -399,6 +399,48 @@ final class ProductContext implements Context
     public function thisProductHasThisProductOption(ProductInterface $product, OptionInterface $option)
     {
         $product->addOption($option);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^there are ([^"]+) items of ("[^"]+" variant of product "[^"]+") available in the inventory$/
+     */
+    public function thereAreItemsOfProductInVariantAvailableInTheInventory($quantity, ProductVariantInterface $productVariant)
+    {
+        $productVariant->setTracked(true);
+        $productVariant->setOnHand($quantity);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("[^"]+" product) is tracked by the inventory$/
+     */
+    public function theProductIsTrackedByTheInventory(ProductInterface $product)
+    {
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setTracked(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("[^"]+" product variant) is tracked by the inventory$/
+     */
+    public function theProductVariantIsTrackedByTheInventory(ProductVariantInterface $productVariant)
+    {
+        $productVariant->setTracked(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the (product "[^"]+") changed its price to ("[^"]+")$/
+     */
+    public function theProductChangedItsPriceTo(ProductInterface $product, $price)
+    {
+        $product->getFirstVariant()->setPrice($price);
 
         $this->objectManager->flush();
     }

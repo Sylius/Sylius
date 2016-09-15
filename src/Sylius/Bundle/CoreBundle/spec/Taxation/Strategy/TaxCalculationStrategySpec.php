@@ -12,14 +12,11 @@
 namespace spec\Sylius\Bundle\CoreBundle\Taxation\Strategy;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy;
-use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
-use Sylius\Component\Core\Taxation\Strategy\AbstractTaxCalculationStrategy;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 
 /**
@@ -38,12 +35,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy');
-    }
-
-    function it_extends_abstract_tax_calculation_strategy()
-    {
-        $this->shouldHaveType(AbstractTaxCalculationStrategy::class);
+        $this->shouldHaveType(TaxCalculationStrategy::class);
     }
 
     function it_implements_a_tax_calculation_strategy_interface()
@@ -59,10 +51,9 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
     function it_throws_an_exception_if_any_of_the_applicators_are_not_of_the_correct_type(
         OrderTaxesApplicatorInterface $applicatorOne,
         OrderTaxesApplicatorInterface $applicatorTwo,
-        \stdClass $applicatorThree,
-        SettingsInterface $settings
+        \stdClass $applicatorThree
     ) {
-        $this->beConstructedWith('order_items_based', [$applicatorOne, $applicatorTwo, $applicatorThree], $settings);
+        $this->beConstructedWith('order_items_based', [$applicatorOne, $applicatorTwo, $applicatorThree]);
 
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }

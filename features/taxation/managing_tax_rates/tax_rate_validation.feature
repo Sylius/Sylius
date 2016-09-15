@@ -58,7 +58,7 @@ Feature: Tax rate validation
 
     @ui
     Scenario: Trying to remove amount from existing tax rate
-        Given the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within "US" zone
+        Given the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
         And I want to modify this tax rate
         When I remove its amount
         And I try to save my changes
@@ -67,7 +67,7 @@ Feature: Tax rate validation
 
     @ui
     Scenario: Trying to remove name from existing tax rate
-        Given the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within "US" zone
+        Given the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
         And I want to modify this tax rate
         When I remove its name
         And I try to save my changes

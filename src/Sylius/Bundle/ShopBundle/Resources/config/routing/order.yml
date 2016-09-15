@@ -7,7 +7,7 @@ sylius_shop_order_pay:
     defaults:
         _controller: sylius.controller.order:payAction
         _sylius:
-            redirect: sylius_shop_checkout_thank_you
+            redirect: sylius_shop_thank_you
             after_pay:
                 route: sylius_shop_order_after_pay
                 parameters: { orderId: $orderId }
@@ -19,7 +19,7 @@ sylius_shop_order_after_pay:
         _controller: sylius.controller.order:afterPayAction
         _sylius:
             redirect:
-                route: sylius_shop_checkout_thank_you
+                route: sylius_shop_thank_you
 
 sylius_shop_order_payment_method_update:
     path: /{orderId}/change-payment-method
@@ -34,4 +34,4 @@ sylius_shop_order_payment_method_update:
                 method: find
                 arguments: [$orderId]
             redirect:
-                route: sylius_shop_checkout_thank_you
+                route: sylius_shop_thank_you

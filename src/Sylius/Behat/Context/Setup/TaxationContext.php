@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -58,12 +59,18 @@ final class TaxationContext implements Context
     private $zoneRepository;
 
     /**
+     * @var ObjectManager
+     */
+    private $objectManager;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $taxRateFactory
      * @param FactoryInterface $taxCategoryFactory
      * @param RepositoryInterface $taxRateRepository
      * @param TaxCategoryRepositoryInterface $taxCategoryRepository
      * @param ZoneRepositoryInterface $zoneRepository
+     * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -71,7 +78,8 @@ final class TaxationContext implements Context
         FactoryInterface $taxCategoryFactory,
         RepositoryInterface $taxRateRepository,
         TaxCategoryRepositoryInterface $taxCategoryRepository,
-        ZoneRepositoryInterface $zoneRepository
+        ZoneRepositoryInterface $zoneRepository,
+        ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->taxRateFactory = $taxRateFactory;
@@ -79,11 +87,12 @@ final class TaxationContext implements Context
         $this->taxRateRepository = $taxRateRepository;
         $this->taxCategoryRepository = $taxCategoryRepository;
         $this->zoneRepository = $zoneRepository;
+        $this->objectManager = $objectManager;
     }
 
     /**
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
-     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone identified by :taxRateCode code 
+     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
+     * @Given the store has :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone identified by the :taxRateCode code
      * @Given /^the store has "([^"]+)" tax rate of ([^"]+)% for "([^"]+)" for (the rest of the world)$/
      */
     public function storeHasTaxRateWithinZone(
@@ -116,7 +125,7 @@ final class TaxationContext implements Context
     }
 
     /**
-     * @Given the store has included in price :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within :zone zone
+     * @Given the store has included in price :taxRateName tax rate of :taxRateAmount% for :taxCategoryName within the :zone zone
      */
     public function storeHasIncludedInPriceTaxRateWithinZone($taxRateName, $taxRateAmount, $taxCategoryName, ZoneInterface $zone)
     {
@@ -145,6 +154,16 @@ final class TaxationContext implements Context
         foreach ($taxCategories as $taxCategory) {
             $this->taxCategoryRepository->remove($taxCategory);
         }
+    }
+
+    /**
+     * @Given /^the ("[^"]+" tax rate) has changed to ([^"]+)%$/
+     */
+    public function theTaxRateIsOfAmount(TaxRateInterface $taxRate, $amount)
+    {
+        $taxRate->setAmount($this->getAmountFromString($amount));
+
+        $this->objectManager->flush();
     }
 
     /**

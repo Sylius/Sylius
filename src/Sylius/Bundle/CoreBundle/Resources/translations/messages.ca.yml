@@ -50,15 +50,6 @@ sylius:
             code: Codi
         product_variant:
             tax_category: "Categoria d'impost"
-        settings:
-            general:
-                currency: Moneda predeterminada
-                locale: Llengua
-                meta_description: Metadescripció
-                meta_keywords: Meta keywords
-                title: Títol de pàgina
-            taxation:
-                default_tax_zone: "Zona d'impostos per defecte"
         shipment_filter:
             created_at_from: Des de
             created_at_to: A
@@ -71,7 +62,9 @@ sylius:
         shipping_method:
             zone: Zona
         taxon:
+            code: Codi
             file: Seleccioneu la imatge
+            images: Imatges
         taxonomy:
             file: Seleccioneu la imatge
         user:

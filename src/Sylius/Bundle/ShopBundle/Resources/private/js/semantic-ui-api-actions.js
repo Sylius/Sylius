@@ -12,6 +12,7 @@
 
     $.fn.api.settings.api = {
         'user check': '/user-check',
-        'login check': '/login-check'
+        'login check': '/login-check',
+        'cart': '/cart'
     };
 })(jQuery);

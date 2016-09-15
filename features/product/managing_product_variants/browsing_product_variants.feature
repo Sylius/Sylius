@@ -14,3 +14,14 @@ Feature: Browsing product variants
     Scenario: Browsing product variants in store
         When I want to view all variants of this product
         Then I should see 1 variant in the list
+
+    @ui
+    Scenario: Being informed that product variant is not tracked
+        When I want to view all variants of this product
+        Then I should see that the "Wyborowa Vodka Exquisite" variant is not tracked
+
+    @ui
+    Scenario: Being informed about on hand quantity of a product variant
+        Given the "Wyborowa Vodka Exquisite" product variant is tracked by the inventory
+        When I want to view all variants of this product
+        Then I should see that the "Wyborowa Vodka Exquisite" variant has zero on hand quantity

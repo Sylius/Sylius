@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
@@ -167,11 +167,13 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
     {
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(123);
+        $order->getCurrencyCode()->willReturn('EUR');
 
         $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
         $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn($payment);
 
         $payment->setAmount(123)->shouldBeCalled();
+        $payment->setCurrencyCode('EUR')->shouldBeCalled();
 
         $this->process($order);
     }

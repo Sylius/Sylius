@@ -23,15 +23,11 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 class DelegatingCalculator implements DelegatingCalculatorInterface
 {
     /**
-     * Calculator registry.
-     *
      * @var ServiceRegistryInterface
      */
     protected $registry;
 
     /**
-     * Constructor.
-     *
      * @param ServiceRegistryInterface $registry
      */
     public function __construct(ServiceRegistryInterface $registry)

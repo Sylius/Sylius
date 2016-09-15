@@ -1,0 +1,37 @@
+{
+    "id": @integer@,
+    "completed_at": "@string@.isDateTime()",
+    "number": @string@,
+    "items": @array@,
+    "items_total": @integer@,
+    "adjustments": @array@,
+    "comments": [],
+    "adjustments_total": @integer@,
+    "total": @integer@,
+    "state": "new",
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "expires_at": "@string@.isDateTime()",
+    "channel": {
+        "id": @integer@,
+        "code": "CHANNEL",
+        "name": "Channel",
+        "description": "Lorem ipsum",
+        "hostname": "localhost",
+        "color": "black",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "enabled": true,
+        "tax_calculation_strategy": "order_items_based",
+        "_links": {
+            "self": {
+                "href": @string@
+            }
+        }
+    },
+    "shipping_address": @...@,
+    "billing_address": @...@,
+    "payments": @array@,
+    "shipments": @array@,
+    "checkout_state": "completed"
+}

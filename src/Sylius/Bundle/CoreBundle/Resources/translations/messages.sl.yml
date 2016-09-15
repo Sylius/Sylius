@@ -35,6 +35,7 @@ sylius:
             currencies: Valute
             shipping_methods: Načini dostave
             payment_methods: Načini plačil
+            tax_zone_default: Privzeta davčna cona
             theme: Tema
             hostname: Ime gostitelja
         image:
@@ -66,16 +67,6 @@ sylius:
             code: Koda
         product_variant:
             tax_category: Kategorija davka
-        settings:
-            general:
-                currency: Privzeta valuta
-                locale: Jezik
-                tracking_code:
-                    Tracking code (for example: Koda Google Analytics)
-            taxation:
-                default_tax_calculation_strategy: Privzeta strategija izračuna davka
-            security:
-                enabled: Omogočeno?
         shipment_filter:
             created_at_from: Od
             created_at_to: Za
@@ -90,6 +81,9 @@ sylius:
             channel: Vsi kanali
         shipping_method:
             zone: Cona
+        taxon:
+            code: Koda
+            images: Slike
         user:
             groups: Skupine
             roles: Vloge

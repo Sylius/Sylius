@@ -1,0 +1,24 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+{% block title %}{{ parent() }} {{ 'sylius.ui.order'|trans ~' #'~ order.number }}{% endblock %}
+
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
+{% block content %}
+    {{ headers.default('sylius.ui.edit_shipping_address'|trans, 'pencil', null) }}
+
+    {% include 'SyliusAdminBundle:Order/Breadcrumb:_updateShippingAddress.html.twig' %}
+
+    {{ form_start(form, {'action': path('sylius_admin_order_shipping_address_update', {'id': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    <div class="ui segment">
+        <input type="hidden" name="_method" value="PATCH" />
+        {% include '@SyliusAdmin/Common/Form/_address.html.twig' with {'form': form.shippingAddress} %}
+
+        {% include 'SyliusUiBundle:Form:_saveChanges.html.twig' with {'cancel_path': path('sylius_admin_order_index')} %}
+    </div>
+    {{ form_row(form._token) }}
+    {{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

@@ -29,8 +29,6 @@ class PricingExtension extends \Twig_Extension
     protected $helper;
 
     /**
-     * Constructor.
-     *
      * @param PricingHelper $helper
      */
     public function __construct(PricingHelper $helper)

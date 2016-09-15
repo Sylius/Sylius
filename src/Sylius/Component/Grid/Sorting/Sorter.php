@@ -29,8 +29,12 @@ class Sorter implements SorterInterface
 
         $sorting = $parameters->has('sorting') ? $parameters->get('sorting') : $grid->getSorting();
 
-        foreach ($sorting as $field => $direction) {
-            $expressionBuilder->addOrderBy($field, $direction);
+        foreach ($sorting as $field => $options) {
+            if (!isset($options['direction'])) {
+                $options['direction'] = 'desc';
+            }
+
+            $expressionBuilder->addOrderBy($options['path'], $options['direction']);
         }
     }
 }

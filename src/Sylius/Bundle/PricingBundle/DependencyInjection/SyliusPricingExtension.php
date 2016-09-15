@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PricingBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Processor;
+use Sylius\Bundle\PricingBundle\Form\Extension\PriceableTypeExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
@@ -20,18 +20,10 @@ use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Pricing extension
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusPricingExtension extends Extension
+final class SyliusPricingExtension extends Extension
 {
-    protected $configFiles = [
-        'services.xml',
-        'templating.xml',
-        'twig.xml',
-    ];
-
     /**
      * {@inheritdoc}
      */
@@ -40,10 +32,10 @@ class SyliusPricingExtension extends Extension
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        foreach ($config['forms'] as $formType) {
-            $class = '%sylius.form.extension.priceable.class%';
+        $loader->load('services.xml');
 
-            $definition = new Definition($class);
+        foreach ($config['forms'] as $formType) {
+            $definition = new Definition(PriceableTypeExtension::class);
             $definition
                 ->setArguments([
                     $formType,
@@ -55,10 +47,6 @@ class SyliusPricingExtension extends Extension
 
             $container->setDefinition(sprintf('sylius.form.extension.priceable.%s', $formType), $definition);
         }
-
-        $loader->load('services.xml');
-        $loader->load('templating.xml');
-        $loader->load('twig.xml');
     }
 
     /**

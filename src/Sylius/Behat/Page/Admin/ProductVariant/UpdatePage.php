@@ -37,6 +37,24 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $this->getDocument()->fillField('Price', $price);
     }
 
+    public function disableTracking()
+    {
+        $this->getElement('tracked')->uncheck();
+    }
+
+    public function enableTracking()
+    {
+        $this->getElement('tracked')->check();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTracked()
+    {
+        return $this->getElement('tracked')->isChecked();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -45,6 +63,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_variant_code',
             'price' => '#sylius_product_variant_price',
+            'tracked' => '#sylius_product_variant_tracked',
         ]);
     }
 }

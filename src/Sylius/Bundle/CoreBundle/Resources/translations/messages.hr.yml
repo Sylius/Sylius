@@ -59,15 +59,6 @@ sylius:
             code: ISO kod
         product_variant:
             tax_category: Kategorija artikla
-        settings:
-            general:
-                currency: Zadana valuta
-                locale: Jezik
-                meta_description: Opis (Meta Description)
-                meta_keywords: Ključne riječi (Meta Keywords)
-                title: Naslov stranice
-            taxation:
-                default_tax_zone: Zadana porezna zona
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
@@ -80,7 +71,9 @@ sylius:
         shipping_method:
             zone: Regija
         taxon:
+            code: ISO kod
             file: Odaberite sliku
+            images: Slike
         taxonomy:
             file: Odaberite sliku
         user:

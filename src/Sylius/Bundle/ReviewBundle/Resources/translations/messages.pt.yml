@@ -10,5 +10,8 @@ sylius:
             comment: Comentário
             author: Autor
             status:
+                label: Estado
                 new: Novo
+                approved: Aprovado
+                rejected: Rejeitado
             submit: Submeter

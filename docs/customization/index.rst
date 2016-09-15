@@ -11,5 +11,7 @@ The Customization Guide
     validation
     menu
     template
+    translation
+    state_machine
 
 .. include:: /customization/map.rst.inc

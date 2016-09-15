@@ -52,15 +52,6 @@ sylius:
             code: Code
         product_variant:
             tax_category: Steuerkategorie
-        settings:
-            general:
-                currency: Standardwährung
-                locale: Sprache
-                meta_description: Meta-Beschreibung
-                meta_keywords: Meta-Stichwörter
-                title: Titel der Seite
-            taxation:
-                default_tax_zone: Standard Steuerzone
         shipment_filter:
             created_at_from: Von
             created_at_to: zu
@@ -73,6 +64,7 @@ sylius:
         shipping_method:
             zone: Zone
         taxon:
+            code: Code
             file: Foto auswählen
         taxonomy:
             file: Foto auswählen

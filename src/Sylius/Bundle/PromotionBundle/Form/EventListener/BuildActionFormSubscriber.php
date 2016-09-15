@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\ActionInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
+final class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
      * Get action configuration

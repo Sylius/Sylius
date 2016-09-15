@@ -82,7 +82,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_shop_checkout_thank_you';
+        return 'sylius_shop_thank_you';
     }
 
     /**

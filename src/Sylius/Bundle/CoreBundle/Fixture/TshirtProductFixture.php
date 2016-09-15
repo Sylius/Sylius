@@ -122,30 +122,30 @@ final class TshirtProductFixture extends AbstractFixture
         ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
-            ['name' => 'T-Shirt brand', 'code' => 'TSHIRT-BRAND', 'type' => TextAttributeType::TYPE],
-            ['name' => 'T-Shirt collection', 'code' => 'TSHIRT-COLLECTION', 'type' => TextAttributeType::TYPE],
-            ['name' => 'T-Shirt material', 'code' => 'TSHIRT-MATERIAL', 'type' => TextAttributeType::TYPE],
+            ['name' => 'T-Shirt brand', 'code' => 't_shirt_brand', 'type' => TextAttributeType::TYPE],
+            ['name' => 'T-Shirt collection', 'code' => 't_shirt_collection', 'type' => TextAttributeType::TYPE],
+            ['name' => 'T-Shirt material', 'code' => 't_shirt_material', 'type' => TextAttributeType::TYPE],
         ]]);
 
         $this->productOptionFixture->load(['custom' => [
             [
                 'name' => 'T-Shirt color',
-                'code' => 'TSHIRT-COLOR',
+                'code' => 't_shirt_color',
                 'values' => [
-                    'TSHIRT-COLOR-RED' => 'Red',
-                    'TSHIRT-COLOR-BLACK' => 'Black',
-                    'TSHIRT-COLOR-WHITE' => 'White',
+                    't_shirt_color_red' => 'Red',
+                    't_shirt_color_black' => 'Black',
+                    't_shirt_color_white' => 'White',
                 ],
             ],
             [
                 'name' => 'T-Shirt size',
-                'code' => 'TSHIRT-SIZE',
+                'code' => 't_shirt_size',
                 'values' => [
-                    'TSHIRT-SIZE-S' => 'S',
-                    'TSHIRT-SIZE-M' => 'M',
-                    'TSHIRT-SIZE-L' => 'L',
-                    'TSHIRT-SIZE-XL' => 'XL',
-                    'TSHIRT-SIZE-XXL' => 'XXL',
+                    't_shirt_size_s' => 'S',
+                    't_shirt_size_m' => 'M',
+                    't_shirt_size_l' => 'L',
+                    't_shirt_size_xl' => 'XL',
+                    't_shirt_size_xxl' => 'XXL',
                 ],
             ],
         ]]);
@@ -160,9 +160,9 @@ final class TshirtProductFixture extends AbstractFixture
                 'main_taxon' => $categoryTaxonCode,
                 'taxons' => [$categoryTaxonCode],
                 'product_attributes' => [
-                    'TSHIRT-brand' => $this->faker->randomElement(['Nike', 'Adidas', 'JKM-476 Streetwear', 'Potato', 'Centipede Wear']),
-                    'TSHIRT-COLLECTION' => sprintf('Sylius %s %s', $this->faker->randomElement(['Summer', 'Winter', 'Spring', 'Autumn']), mt_rand(1995, 2012)),
-                    'TSHIRT-MATERIAL' => $this->faker->randomElement(['Centipede', 'Wool', 'Centipede 10% / Wool 90%', 'Potato 100%']),
+                    't_shirt_brand' => $this->faker->randomElement(['Nike', 'Adidas', 'JKM-476 Streetwear', 'Potato', 'Centipede Wear']),
+                    't_shirt_collection' => sprintf('Sylius %s %s', $this->faker->randomElement(['Summer', 'Winter', 'Spring', 'Autumn']), mt_rand(1995, 2012)),
+                    't_shirt_material' => $this->faker->randomElement(['Centipede', 'Wool', 'Centipede 10% / Wool 90%', 'Potato 100%']),
                 ],
                 'images' => [sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg')],
             ];

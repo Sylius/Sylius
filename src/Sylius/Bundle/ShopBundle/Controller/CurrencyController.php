@@ -11,14 +11,14 @@
 
 namespace Sylius\Bundle\ShopBundle\Controller;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Currency\CurrencyStorageInterface;
+use Sylius\Component\Core\Currency\Handler\CurrencyChangeHandlerInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -41,34 +41,26 @@ final class CurrencyController
     private $currencyProvider;
 
     /**
-     * @var ChannelContextInterface
+     * @var CurrencyChangeHandlerInterface
      */
-    private $channelContext;
-
-    /**
-     * @var CurrencyStorageInterface
-     */
-    private $currencyStorage;
+    private $currencyChangeHandler;
 
     /**
      * @param EngineInterface $templatingEngine
      * @param CurrencyContextInterface $currencyContext
      * @param CurrencyProviderInterface $currencyProvider
-     * @param ChannelContextInterface $channelContext
-     * @param CurrencyStorageInterface $currencyStorage
+     * @param CurrencyChangeHandlerInterface $currencyChangeHandler
      */
     public function __construct(
         EngineInterface $templatingEngine,
         CurrencyContextInterface $currencyContext,
         CurrencyProviderInterface $currencyProvider,
-        ChannelContextInterface $channelContext,
-        CurrencyStorageInterface $currencyStorage
+        CurrencyChangeHandlerInterface $currencyChangeHandler
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->currencyContext = $currencyContext;
         $this->currencyProvider = $currencyProvider;
-        $this->channelContext = $channelContext;
-        $this->currencyStorage = $currencyStorage;
+        $this->currencyChangeHandler = $currencyChangeHandler;
     }
 
     /**
@@ -90,8 +82,15 @@ final class CurrencyController
      */
     public function switchCurrencyAction(Request $request, $code)
     {
-        $this->currencyStorage->set($this->channelContext->getChannel(), $code);
+        if (!in_array($code, $this->currencyProvider->getAvailableCurrenciesCodes())) {
+            throw new HttpException(
+                Response::HTTP_NOT_ACCEPTABLE,
+                sprintf('The currency code "%s" is invalid.', $code)
+            );
+        }
 
-        return new RedirectResponse($request->headers->get('referer'));
+        $this->currencyChangeHandler->handle($code);
+
+        return new RedirectResponse($request->headers->get('referer', $request->getBaseUrl()));
     }
 }

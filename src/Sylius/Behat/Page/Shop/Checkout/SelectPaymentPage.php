@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
@@ -33,13 +32,6 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
      */
     public function selectPaymentMethod($paymentMethod)
     {
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver) {
-            $this->getDriver()->executeScript(sprintf('$(\'.item:contains("%s") .ui.radio.checkbox\').checkbox(\'check\')', $paymentMethod));
-
-            return;
-        }
-
         $paymentMethodElement = $this->getElement('payment_method');
         $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
     }
@@ -77,7 +69,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
 
     public function changeShippingMethod()
     {
-        $this->getDocument()->pressButton('Change shipping method');
+        $this->getDocument()->clickLink('Change shipping method');
     }
 
     public function changeShippingMethodByStepLabel()

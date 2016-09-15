@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\RuleInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class BuildRuleFormSubscriber extends AbstractConfigurationSubscriber
+final class BuildRuleFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
      * Get Rule configuration

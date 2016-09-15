@@ -181,6 +181,14 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function hasItemWithCode($code)
+    {
+        return $this->hasItemWith($code, '.sylius-product-variant-code');
+    }
+
+    /**
      * {@inheritdoc]
      */
     public function hasProductOutOfStockValidationMessage(ProductInterface $product)
@@ -234,6 +242,16 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     public function updateCart()
     {
         $this->getElement('update_button')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function waitForRedirect($timeout)
+    {
+        $this->getDocument()->waitFor($timeout, function () {
+            return $this->isOpen();
+        });
     }
 
     /**

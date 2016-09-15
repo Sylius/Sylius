@@ -14,26 +14,26 @@ namespace Sylius\Component\Promotion\Generator;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Instruction implements InstructionInterface
+final class Instruction implements InstructionInterface
 {
     /**
      * @var int
      */
-    protected $amount = 5;
+    private $amount = 5;
     /**
      * @var int
      */
-    protected $codeLength = 6;
+    private $codeLength = 6;
 
     /**
      * @var \DateTime
      */
-    protected $expiresAt;
+    private $expiresAt;
 
     /**
      * @var int
      */
-    protected $usageLimit;
+    private $usageLimit;
 
     /**
      * @return int

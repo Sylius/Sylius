@@ -125,6 +125,22 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I disable its inventory tracking
+     */
+    public function iDisableItsTracking()
+    {
+        $this->updatePage->disableTracking();
+    }
+
+    /**
+     * @When I enable its inventory tracking
+     */
+    public function iEnableItsTracking()
+    {
+        $this->updatePage->enableTracking();
+    }
+
+    /**
      * @When /^I set its price to ("(?:€|£|\$)[^"]+")$/
      */
     public function iSetItsPriceTo($price)
@@ -146,7 +162,8 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I want to view all variants of (this product)$/
+     * @When /^I (?:|want to )view all variants of (this product)$/
+     * @When /^I view all variants of the (product "[^"]+")$/
      */
     public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product)
     {
@@ -212,12 +229,12 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I want to modify the :productVariant product variant
+     * @When /^I want to modify the ("[^"]+" product variant)$/
      * @When /^I want to modify (this product variant)$/
      */
     public function iWantToModifyAProduct(ProductVariantInterface $productVariant)
     {
-        $this->updatePage->open(['id' => $productVariant->getId()]);
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
     }
 
     /**
@@ -262,6 +279,65 @@ final class ManagingProductVariantsContext implements Context
     public function iRemoveItsNameFromTranslation()
     {
         $this->updatePage->nameIt('');
+    }
+
+    /**
+     * @Then /^the variant "([^"]+)" should have (\d+) items on hand$/
+     */
+    public function thisVariantShouldHaveItemsOnHand($productVariantName, $quantity)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceWithSpecificElementOnPage(['name' => $productVariantName], sprintf('td > div.ui.label:contains("%s")', $quantity)),
+            sprintf('The product variant %s should have %s items on hand, but it does not.',$productVariantName, $quantity)
+        );
+    }
+
+    /**
+     * @Then /^inventory of (this variant) should not be tracked$/
+     */
+    public function thisProductVariantShouldNotBeTracked(ProductVariantInterface $productVariant)
+    {
+        $this->iWantToModifyAProduct($productVariant);
+
+        Assert::false(
+            $this->updatePage->isTracked(),
+            'This variant should not be tracked, but it is.'
+        );
+    }
+
+    /**
+     * @Then /^inventory of (this variant) should be tracked$/
+     */
+    public function thisProductVariantShouldBeTracked(ProductVariantInterface $productVariant)
+    {
+        $this->iWantToModifyAProduct($productVariant);
+
+        Assert::true(
+            $this->updatePage->isTracked(),
+            'This variant should be tracked, but it is not.'
+        );
+    }
+
+    /**
+     * @Then /^I should see that the ("([^"]+)" variant) is not tracked$/
+     */
+    public function iShouldSeeThatIsNotTracked(ProductVariantInterface $productVariant)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName(), 'inventory' => 'Not tracked']),
+            sprintf('This "%s" variant should have label not tracked, but it does not have', $productVariant->getName())
+        );
+    }
+
+    /**
+     * @Then /^I should see that the ("[^"]+" variant) has zero on hand quantity$/
+     */
+    public function iShouldSeeThatTheVariantHasZeroOnHandQuantity(ProductVariantInterface $productVariant)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName(), 'inventory' => '0 Available on hand']),
+            sprintf('This "%s" variant should have 0 on hand quantity, but it does not.', $productVariant->getName())
+        );
     }
 
     /**

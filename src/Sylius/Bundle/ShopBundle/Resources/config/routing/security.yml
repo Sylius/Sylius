@@ -40,7 +40,7 @@ sylius_shop_request_password_reset_token:
             redirect: sylius_shop_login
 
 sylius_shop_password_resetting:
-    resource: @SyliusUserBundle/Resources/config/routing/password_reset.yml
+    resource: "@SyliusUserBundle/Resources/config/routing/password_reset.yml"
     prefix: /resetting
 
 sylius_shop_user_check_action:

@@ -60,4 +60,13 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @param TaxonInterface $taxon
      */
     public function selectMainTaxon(TaxonInterface $taxon);
+
+    public function disableTracking();
+
+    public function enableTracking();
+
+    /**
+     * @return bool
+     */
+    public function isTracked();
 }

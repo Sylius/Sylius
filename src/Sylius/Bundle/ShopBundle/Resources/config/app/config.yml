@@ -9,6 +9,19 @@ sylius_grid:
         action:
             show_order: "SyliusShopBundle:Grid/Action:show_order.html.twig"
 
+sylius_shop:
+    checkout_resolver:
+        pattern: /checkout/.+
+        route_map:
+            cart:
+                route: sylius_shop_checkout_address
+            addressed:
+                route: sylius_shop_checkout_select_shipping
+            shipping_selected:
+                route: sylius_shop_checkout_select_payment
+            payment_selected:
+                route: sylius_shop_checkout_complete
+
 liip_imagine:
     filter_sets:
         sylius_shop_product_tiny_thumbnail:

@@ -3,4 +3,4 @@
 
 sylius_promotion:
     prefix: /promotions
-    resource: @SyliusPromotionBundle/Resources/config/routing/promotion.yml
+    resource: "@SyliusPromotionBundle/Resources/config/routing/promotion.yml"

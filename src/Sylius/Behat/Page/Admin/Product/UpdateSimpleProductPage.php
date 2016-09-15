@@ -100,6 +100,23 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return $taxonName === $this->getDocument()->find('css', '.search > .text')->getText();
     }
 
+    public function disableTracking()
+    {
+        $this->getElement('tracked')->uncheck();
+    }
+
+    public function enableTracking()
+    {
+        $this->getElement('tracked')->check();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTracked()
+    {
+        return $this->getElement('tracked')->isChecked();
+    }
 
     /**
      * {@inheritdoc}
@@ -115,6 +132,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'search' => '.ui.fluid.search.selection.dropdown',
             'search_item_selected' => 'div.menu > div.item.selected',
             'taxonomy' => 'a[data-tab="taxonomy"]',
+            'tracked' => '#sylius_product_variant_tracked',
         ]);
     }
 

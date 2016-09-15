@@ -87,9 +87,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @When I save my changes
+     * @When I update my cart
      */
-    public function iSaveMyChanges()
+    public function iUpdateMyCart()
     {
         $this->summaryPage->updateCart();
     }
@@ -289,15 +289,15 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given I added :variant variant of product :product to the cart
-     * @When I add :variant variant of product :product to the cart
-     * @When I have :variant variant of product :product in the cart
+     * @Given I added :variantName variant of product :product to the cart
+     * @When I add :variantName variant of product :product to the cart
+     * @When I have :variantName variant of product :product in the cart
      * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      */
-    public function iAddProductToTheCartSelectingVariant($variant, ProductInterface $product)
+    public function iAddProductToTheCartSelectingVariant($variantName, ProductInterface $product)
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
-        $this->productShowPage->addToCartWithVariant($variant);
+        $this->productShowPage->addToCartWithVariant($variantName);
 
         $this->sharedStorage->set('product', $product);
     }
@@ -324,10 +324,12 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be on my cart summary page
+     * @Then /^I should be(?: on| redirected to) my cart summary page$/
      */
     public function shouldBeOnMyCartSummaryPage()
     {
+        $this->summaryPage->waitForRedirect(3);
+
         Assert::true(
             $this->summaryPage->isOpen(),
             'Cart summary page should be open, but it does not.'
@@ -372,6 +374,17 @@ final class CartContext implements Context
         Assert::true(
             $this->summaryPage->hasItemWithVariantNamed($variantName),
             sprintf('The product with variant %s should appear on the list, but it does not.', $variantName)
+        );
+    }
+
+    /**
+     * @Then this item should have code :variantCode
+     */
+    public function thisItemShouldHaveCode($variantCode)
+    {
+        Assert::true(
+            $this->summaryPage->hasItemWithCode($variantCode),
+            sprintf('The product with code %s should appear on the list, but it does not.', $variantCode)
         );
     }
 

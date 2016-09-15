@@ -68,19 +68,6 @@ sylius:
             code: Код
         product_variant:
             tax_category: Категория налогов
-        settings:
-            general:
-                currency: Валюта по умолчанию
-                locale: Язык
-                meta_description: Описание метаданных
-                meta_keywords: Ключевые слова метаданных
-                title: Заголовок страницы
-                tracking_code:
-                    Tracking code (for example: Трекинг код (например код для Google Analytics)
-            taxation:
-                default_tax_zone: Налоговая зона по умолчанию
-            security:
-                enabled: Включить?
         shipment_filter:
             created_at_from: От
             created_at_to: До
@@ -96,7 +83,9 @@ sylius:
         shipping_method:
             zone: Зона
         taxon:
+            code: Код
             file: Выберите изображение
+            images: Изображения
         taxonomy:
             file: Выберите изображение
         user:

@@ -12,3 +12,4 @@ sylius:
     taxonomy:
         name:
             max_length: O nome da taxonomia não deve ter mais que 255 caracteres.
+            not_blank: Por favor introduza o nome da taxonomia.

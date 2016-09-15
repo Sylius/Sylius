@@ -18,3 +18,4 @@ Feature: Adding a product with selected variant to the cart
         And there should be one item in my cart
         And this item should have name "T-shirt banana"
         And this item should have variant "Small logo"
+        And this item should have code "SMALL_LOGO"

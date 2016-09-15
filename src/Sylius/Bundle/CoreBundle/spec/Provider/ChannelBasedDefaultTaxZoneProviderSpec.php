@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\CoreBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;

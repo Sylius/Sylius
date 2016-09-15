@@ -62,16 +62,6 @@ interface ProductVariantInterface extends
     public function removeImage(ProductVariantImageInterface $image);
 
     /**
-     * @return int
-     */
-    public function getSold();
-
-    /**
-     * @param int $sold
-     */
-    public function setSold($sold);
-
-    /**
      * @return float
      */
     public function getWeight();

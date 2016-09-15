@@ -1,7 +1,7 @@
 {% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 
 <td colspan="2" id="promotion-discounts">
-    <strong>{{ 'sylius.checkout.finalize.order.promotion_discount'|trans }}</strong>:
+    <strong>{{ 'sylius.ui.promotion_discount'|trans }}</strong>:
     {% set orderPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPromotionAdjustment)) %}
     {% if not orderPromotions is empty %}
         <ul class="ui relaxed list">

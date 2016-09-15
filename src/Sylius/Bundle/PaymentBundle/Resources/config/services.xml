@@ -11,47 +11,34 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="sylius.form.type.payment_gateway_choice.class">Sylius\Bundle\PaymentBundle\Form\Type\PaymentGatewayChoiceType</parameter>
-        <parameter key="sylius.form.type.payment_methods_choice.class">Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType</parameter>
-
-        <parameter key="sylius.composite_payment_methods_resolver.class">Sylius\Component\Payment\Resolver\CompositeMethodsResolver</parameter>
-        <parameter key="sylius.payment_methods_resolver.class">Sylius\Component\Payment\Resolver\PaymentMethodsResolver</parameter>
-
-        <parameter key="sylius.registry.payment_methods_resolver.class">Sylius\Component\Registry\PrioritizedServiceRegistry</parameter>
         <parameter key="sylius.payment_methods_resolver.interface">Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface</parameter>
-
     </parameters>
 
     <services>
-        <service id="sylius.form.type.payment_gateway_choice" class="%sylius.form.type.payment_gateway_choice.class%">
+        <service id="sylius.form.type.payment_gateway_choice" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentGatewayChoiceType">
             <argument>%sylius.payment_gateways%</argument>
             <tag name="form.type" alias="sylius_payment_gateway_choice" />
         </service>
-        <service id="sylius.registry.payment_methods_resolver" class="%sylius.registry.payment_methods_resolver.class%">
+        <service id="sylius.registry.payment_methods_resolver" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
             <argument>%sylius.payment_methods_resolver.interface%</argument>
             <argument>Payment methods resolver</argument>
         </service>
 
-        <service id="sylius.composite_payment_methods_resolver" class="%sylius.composite_payment_methods_resolver.class%">
+        <service id="sylius.composite_payment_methods_resolver" class="Sylius\Component\Payment\Resolver\CompositeMethodsResolver">
             <argument type="service" id="sylius.registry.payment_methods_resolver" />
         </service>
 
-        <service id="sylius.payment_methods_resolver" class="%sylius.payment_methods_resolver.class%">
+        <service id="sylius.payment_methods_resolver" class="Sylius\Component\Payment\Resolver\PaymentMethodsResolver">
             <argument type="service" id="sylius.repository.payment_method" />
             <tag name="sylius.payment_method_resolver" type="default" label="Default" />
         </service>
 
-        <service id="sylius.form.type.payment_method_choice" class="%sylius.form.type.payment_method_choice.class%">
+        <service id="sylius.form.type.payment_method_choice" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType">
             <argument type="service" id="sylius.composite_payment_methods_resolver" />
             <argument type="service" id="sylius.repository.payment_method" />
             <tag name="form.type" alias="sylius_payment_method_choice" />
         </service>
     </services>
-
 </container>

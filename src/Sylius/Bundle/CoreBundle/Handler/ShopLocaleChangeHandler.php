@@ -63,7 +63,7 @@ final class ShopLocaleChangeHandler implements LocaleChangeHandlerInterface
         try {
             $this->localeStorage->set($this->channelContext->getChannel(), $code);
         } catch (ChannelNotFoundException $exception) {
-            throw new HandleException(self::class, 'Sylius cannot found the channel', $exception);
+            throw new HandleException(self::class, 'Sylius could not find the channel.', $exception);
         }
 
         $this->eventDispatcher->dispatch(SyliusLocaleEvents::CODE_CHANGED, new GenericEvent($code));
