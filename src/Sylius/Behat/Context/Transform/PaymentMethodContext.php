@@ -38,15 +38,15 @@ final class PaymentMethodContext implements Context
      * @Transform /^"([^"]+)" payment(s)?$/
      * @Transform :paymentMethod
      */
-    public function getPaymentMethodByName($paymentMethodName)
+    public function getPaymentMethodByName($paymentMethod)
     {
-        $paymentMethod = $this->paymentMethodRepository->findOneByName($paymentMethodName);
+        $paymentMethodObject = $this->paymentMethodRepository->findOneByName($paymentMethod);
 
         Assert::notNull(
-            $paymentMethod,
-            sprintf('Payment method with name "%s" does not exist', $paymentMethodName)
+            $paymentMethodObject,
+            sprintf('Payment method with name "%s" does not exist', $paymentMethod)
         );
 
-        return $paymentMethod;
+        return $paymentMethodObject;
     }
 }
