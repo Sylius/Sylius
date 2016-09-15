@@ -17,7 +17,7 @@ Feature: Deleting an order
     @domain
     Scenario: Deleted order should disappear from the registry
         When I delete the order "#00000022"
-        And this order should not exist in the registry
+        Then this order should not exist in the registry
 
     @domain
     Scenario: Payments of a deleted order should disappear from the registry
