@@ -7,7 +7,7 @@ Feature: Tax rate unique code validation
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a tax category "Sports gear"
-        And the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within "US" zone identified by "UNITED_STATES_SALES_TAX" code
+        And the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone identified by the "UNITED_STATES_SALES_TAX" code
         And I am logged in as an administrator
 
     @ui

@@ -251,7 +251,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given the customer have chosen to order in the :currencyCode currency
+     * @Given the customer has chosen to order in the :currencyCode currency
      * @Given I have chosen to order in the :currencyCode currency
      */
     public function theCustomerChoseTheCurrency($currencyCode)
