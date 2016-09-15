@@ -71,16 +71,16 @@ EOT;
 
     /**
      * @param int $orderId
-     * @param int $shippingMethodId
+     * @param int $shippingMethodCode
      */
-    protected function selectOrderShippingMethod($orderId, $shippingMethodId)
+    protected function selectOrderShippingMethod($orderId, $shippingMethodCode)
     {
         $data =
 <<<EOT
         {
             "shipments": [
                 {
-                    "method": {$shippingMethodId}
+                    "method": "{$shippingMethodCode}"
                 }
             ]
         }
