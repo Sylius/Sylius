@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CustomerBundle\Doctrine\ORM;
+namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
