@@ -7,7 +7,6 @@
             <div class="ui segment">
                 {{ form_row(form.code) }}
                 {% if product.simple %}
-                    {{ form_row(form.variant.code) }}
                     {{ form_row(form.variant.price) }}
                     {{ form_row(form.variant.onHand) }}
                     {{ form_row(form.variant.tracked) }}
