@@ -1,6 +1,8 @@
 The Book
 ========
 
+The Developer's guide to leveraging the flexibility of Sylius.
+
 .. toctree::
     :hidden:
 
