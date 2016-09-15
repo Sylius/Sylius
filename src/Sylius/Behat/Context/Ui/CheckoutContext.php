@@ -170,11 +170,35 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I have tried to open checkout addressing page
+     * @When I try to open checkout addressing page
      */
-    public function iHaveTriedToOpenCheckoutAddressingPage()
+    public function iTryToOpenCheckoutAddressingPage()
     {
         $this->addressPage->tryToOpen();
+    }
+
+    /**
+     * @When I try to open checkout shipping page
+     */
+    public function iTryToOpenCheckoutShippingPage()
+    {
+        $this->selectShippingPage->tryToOpen();
+    }
+
+    /**
+     * @When I try to open checkout payment page
+     */
+    public function iTryToOpenCheckoutPaymentPage()
+    {
+        $this->selectPaymentPage->tryToOpen();
+    }
+
+    /**
+     * @When I try to open checkout complete page
+     */
+    public function iTryToOpenCheckoutCompletePage()
+    {
+        $this->completePage->tryToOpen();
     }
 
     /**
