@@ -11,19 +11,10 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.form.type.gender.class">Sylius\Bundle\CustomerBundle\Form\Type\GenderType</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.form.type.gender" class="%sylius.form.type.gender.class%">
+        <service id="sylius.form.type.gender" class="Sylius\Bundle\CustomerBundle\Form\Type\GenderType">
             <tag name="form.type" alias="sylius_gender" />
         </service>
     </services>
-
 </container>
