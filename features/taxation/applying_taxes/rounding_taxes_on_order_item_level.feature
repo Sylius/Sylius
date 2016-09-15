@@ -7,8 +7,8 @@ Feature: Round taxes on order item level
     Background:
         Given the store operates on a single channel in "United States"
         And default tax zone is "US"
-        And the store has "US VAT" tax rate of 23% for "Clothes" within "US" zone
-        And the store has "Low VAT" tax rate of 10% for "Mugs" within "US" zone
+        And the store has "US VAT" tax rate of 23% for "Clothes" within the "US" zone
+        And the store has "Low VAT" tax rate of 10% for "Mugs" within the "US" zone
         And the store has a product "PHP T-Shirt" priced at "$10.10"
         And it belongs to "Clothes" tax category
         And the store has a product "Symfony Mug" priced at "$45.95"

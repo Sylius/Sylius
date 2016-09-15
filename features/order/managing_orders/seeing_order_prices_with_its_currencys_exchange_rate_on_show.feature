@@ -12,9 +12,9 @@ Feature: Seeing all prices calculated accordingly to it's currency's exchange ra
         And that channel allows to shop using the "USD" currency
         And that channel allows to shop using the "GBP" currency with exchange rate 2.00
         And that channel uses the "USD" currency by default
-        And the store has "Low VAT" tax rate of 10% for "Lowered EN services" within "EN" zone
+        And the store has "Low VAT" tax rate of 10% for "Lowered EN services" within the "EN" zone
         And the store allows paying with "Cash on Delivery"
-        And the store has "DHL" shipping method with "$20.00" fee within "EN" zone
+        And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
         And the store has a product "Angel T-Shirt" priced at "$20.00"
         And it belongs to "Lowered EN services" tax category
         And there is a promotion "Order's Extravaganza"
@@ -70,7 +70,7 @@ Feature: Seeing all prices calculated accordingly to it's currency's exchange ra
     @ui
     Scenario: All of a placed order's prices are in the currency's chosen by the customer and it's exchange rate
         Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
-        And the customer have chosen to order in the "GBP" currency
+        And the customer has chosen to order in the "GBP" currency
         And the customer bought a single "Angel T-Shirt"
         And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "British Virgin Islands"
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "British Virgin Islands"
@@ -92,7 +92,7 @@ Feature: Seeing all prices calculated accordingly to it's currency's exchange ra
     @ui
     Scenario: All of a placed order's prices are in the currency's chosen by the customer and it's exchange rate at the time of placing
         Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
-        And the customer have chosen to order in the "GBP" currency
+        And the customer has chosen to order in the "GBP" currency
         And the customer bought a single "Angel T-Shirt"
         And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "British Virgin Islands"
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "British Virgin Islands"

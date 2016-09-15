@@ -13,7 +13,7 @@ Feature: Viewing details of an order
         And that channel allows to shop using the "GBP" currency with exchange rate 3.0
         And that channel uses the "USD" currency by default
         And the store allows paying with "Cash on Delivery"
-        And the store has "DHL" shipping method with "$20.00" fee within "EN" zone
+        And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
         And the store has a product "Angel T-Shirt" priced at "$20.00"
         And I am a logged in customer
         And I placed an order "#00000666"

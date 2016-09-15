@@ -8,7 +8,7 @@ Feature: Deleting a zone
         Given the store has a zone "North America" with code "NA"
         And the store also has a zone "South America" with code "SA"
         And the store has a tax category "Sports gear"
-        And the store has "Sales Tax" tax rate of 20% for "Sports gear" within "SA" zone
+        And the store has "Sales Tax" tax rate of 20% for "Sports gear" within the "SA" zone
         And I am logged in as an administrator
 
     @ui
