@@ -276,7 +276,8 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^(this user) has(?:| added) (\d+) (products "[^"]+") (?:to|in) the cart$/
+     * @Given /^(this user) has (\d+) (products "[^"]+") in the cart$/
+     * @Given /^(this user) added (\d+) (products "[^"]+") to the cart$/
      */
     public function thisCustomerHasAddedProductsToTheCart(ShopUserInterface $shopUser, $quantity, ProductInterface $product)
     {

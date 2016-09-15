@@ -104,7 +104,6 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @When /^I mark (this order) as a paid$/
-     * @When /^I mark (the order of "[^"]+") as a paid$/
      */
     public function iMarkThisOrderAsAPaid(OrderInterface $order)
     {

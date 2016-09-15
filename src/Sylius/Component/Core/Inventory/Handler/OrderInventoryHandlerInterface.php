@@ -9,17 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Inventory\Updater;
+namespace Sylius\Component\Core\Inventory\Handler;
 
+use Sylius\Component\Core\Exception\HandleException;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface IncreasingQuantityUpdaterInterface
+interface OrderInventoryHandlerInterface
 {
     /**
      * @param OrderInterface $order
+     *
+     * @throws HandleException
      */
-    public function increase(OrderInterface $order);
+    public function handle(OrderInterface $order);
 }

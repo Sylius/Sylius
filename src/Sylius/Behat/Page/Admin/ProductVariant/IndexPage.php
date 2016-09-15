@@ -23,28 +23,20 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasOnHandQuantity(ProductVariantInterface $productVariant, $quantity)
+    public function getOnHandQuantityFor(ProductVariantInterface $productVariant)
     {
-        try {
-            $onHandQuantity = (int) $this->getElement('onHandQuantity', ['%id%' => $productVariant->getId()])->getText();
-
-            return $quantity === $onHandQuantity;
-        } catch (ElementNotFoundException $exception) {
-            return false;
-        }
+        return (int) $this->getElement('onHandQuantity', ['%id%' => $productVariant->getId()])->getText();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasOnHoldQuantity(ProductVariantInterface $productVariant, $quantity)
+    public function getOnHoldQuantityFor(ProductVariantInterface $productVariant)
     {
         try {
-            $onHoldQuantity = (int) $this->getElement('onHoldQuantity', ['%id%' => $productVariant->getId()])->getText();
-
-            return $quantity === $onHoldQuantity;
+            return (int) $this->getElement('onHoldQuantity', ['%id%' => $productVariant->getId()])->getText();
         } catch (ElementNotFoundException $exception) {
-            return false;
+            return 0;
         }
     }
 
@@ -54,8 +46,8 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
     public function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'onHandQuantity' => '#sylius-%id%-on-hand-quantity',
-            'onHoldQuantity' => '#sylius-%id%-on-hold-quantity',
+            'onHandQuantity' => '.onHand[data-product-variant-id="%id%"]',
+            'onHoldQuantity' => '.onHold[data-product-variant-id="%id%"]',
         ]);
     }
 }

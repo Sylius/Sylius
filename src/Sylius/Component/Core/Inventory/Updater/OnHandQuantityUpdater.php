@@ -19,17 +19,30 @@ use Webmozart\Assert\Assert;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class OnHandQuantityUpdater implements DecreasingQuantityUpdaterInterface
+final class OnHandQuantityUpdater implements OrderQuantityUpdaterInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function increase(OrderInterface $order)
+    {
+        /** @var OrderItemInterface $orderItem */
+        foreach ($order->getItems() as $orderItem) {
+            $variant = $orderItem->getVariant();
+
+            if ($variant->isTracked()) {
+                $variant->setOnHand($variant->getOnHand() + $orderItem->getQuantity());
+            }
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
     public function decrease(OrderInterface $order)
     {
-        $orderItems = $order->getItems();
-        foreach ($orderItems as $orderItem) {
-            /** @var OrderItemInterface $orderItem */
-            /** @var ProductVariantInterface $variant */
+        /** @var OrderItemInterface $orderItem */
+        foreach ($order->getItems() as $orderItem) {
             $variant = $orderItem->getVariant();
 
             if ($variant->isTracked()) {

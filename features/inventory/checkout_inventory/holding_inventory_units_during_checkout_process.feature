@@ -11,21 +11,22 @@ Feature: Holding inventory units during checkout
         And there are 5 units of product "Iron Maiden T-Shirt" available in the inventory
         And the store ships everywhere for free
         And the store allows paying offline
-        And there is a user "sylius@example.com" identified by "sylius"
+        And there is a customer "sylius@example.com" that placed an order "#00000022"
         And I am logged in as an administrator
 
     @ui
     Scenario: Holding inventory units
-        Given this user has added 3 products "Iron Maiden T-Shirt" to the cart
-        And this user bought those products
-        When I view all variants of the product "Iron Maiden T-Shirt"
-        Then I should know that 3 units of this product is hold
+        Given the customer bought 3 "Iron Maiden T-Shirt" products
+        And the customer chose "Free" shipping method to "United States" with "offline" payment
+        When I view variants of the product "Iron Maiden T-Shirt"
+        Then 3 units of this product should be on hold
+        And 5 units of this product should be on hand
 
     @ui
     Scenario: Release hold units after order has been paid
-        Given this user has added 3 products "Iron Maiden T-Shirt" to the cart
-        And this user bought this product
-        When I view the summary of this order made by "sylius@example.com"
-        And I mark the order of "sylius@example.com" as a paid
-        And I view all variants of the product "Iron Maiden T-Shirt"
-        Then I should not know about on hold quantity of this product
+        Given the customer bought 3 "Iron Maiden T-Shirt" products
+        And the customer chose "Free" shipping method to "United States" with "offline" payment
+        And this order is already paid
+        When I view variants of the product "Iron Maiden T-Shirt"
+        Then 2 units of this product should be on hand
+        And there should be no units of this product on hold

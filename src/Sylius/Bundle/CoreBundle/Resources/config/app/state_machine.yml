@@ -102,7 +102,7 @@ winzou_state_machine:
             after:
                 sylius_order_paid:
                     on: ["pay"]
-                    do: ["@sylius.handler.paid_order_inventory", "handle"]
+                    do: ["@sylius.handler.order_inventory", "handle"]
                     args: ["object"]
 
     sylius_payment:

@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class OnHoldQuantityUpdater implements IncreasingQuantityUpdaterInterface, DecreasingQuantityUpdaterInterface
+final class OnHoldQuantityUpdater implements OrderQuantityUpdaterInterface
 {
     /**
      * {@inheritdoc}
@@ -28,7 +28,6 @@ final class OnHoldQuantityUpdater implements IncreasingQuantityUpdaterInterface,
     {
         /** @var OrderItemInterface $orderItem */
         foreach ($order->getItems() as $orderItem) {
-            /** @var ProductVariantInterface $variant */
             $variant = $orderItem->getVariant();
 
             if ($variant->isTracked()) {
@@ -42,9 +41,8 @@ final class OnHoldQuantityUpdater implements IncreasingQuantityUpdaterInterface,
      */
     public function decrease(OrderInterface $order)
     {
+        /** @var OrderItemInterface $orderItem */
         foreach ($order->getItems() as $orderItem) {
-            /** @var OrderItemInterface $orderItem */
-            /** @var ProductVariantInterface $variant */
             $variant = $orderItem->getVariant();
 
             if ($variant->isTracked()) {

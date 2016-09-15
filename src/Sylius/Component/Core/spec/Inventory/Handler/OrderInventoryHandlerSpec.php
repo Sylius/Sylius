@@ -13,37 +13,39 @@ namespace spec\Sylius\Component\Core\Inventory\Handler;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Exception\HandleException;
-use Sylius\Component\Core\Inventory\Handler\PaidOrderInventoryHandler;
-use Sylius\Component\Core\Inventory\Handler\PaidOrderInventoryHandlerInterface;
-use Sylius\Component\Core\Inventory\Updater\DecreasingQuantityUpdaterInterface;
-use Sylius\Component\Core\Inventory\Updater\IncreasingQuantityUpdaterInterface;
+use Sylius\Component\Core\Inventory\Handler\OrderInventoryHandler;
+use Sylius\Component\Core\Inventory\Updater\OrderQuantityUpdaterInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * @mixin PaidOrderInventoryHandler
+ * @mixin OrderInventoryHandler
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class PaidOrderInventoryHandlerSpec extends ObjectBehavior
+final class OrderInventoryHandlerSpec extends ObjectBehavior
 {
+    function let(
+        OrderQuantityUpdaterInterface $onHandQuantityUpdater,
+        OrderQuantityUpdaterInterface $onHoldQuantityUpdater
+    ) {
+        $this->beConstructedWith($onHandQuantityUpdater, $onHoldQuantityUpdater);
+    }
+
     function it_is_initializable()
     {
-        $this->shouldHaveType(PaidOrderInventoryHandler::class);
+        $this->shouldHaveType(OrderInventoryHandler::class);
     }
 
     function it_implements_paid_order_inventory_handler()
     {
-        $this->shouldImplement(PaidOrderInventoryHandlerInterface::class);
+        $this->shouldImplement(OrderInventoryHandler::class);
     }
 
     function it_handles_inventory_for_paid_order(
-        DecreasingQuantityUpdaterInterface $onHandQuantityUpdater,
-        DecreasingQuantityUpdaterInterface $onHoldQuantityUpdater,
+        OrderQuantityUpdaterInterface $onHandQuantityUpdater,
+        OrderQuantityUpdaterInterface $onHoldQuantityUpdater,
         OrderInterface $order
     ) {
-        $this->addDecreasingQuantityUpdater($onHandQuantityUpdater);
-        $this->addDecreasingQuantityUpdater($onHoldQuantityUpdater);
-
         $onHandQuantityUpdater->decrease($order)->shouldBeCalled();
         $onHoldQuantityUpdater->decrease($order)->shouldBeCalled();
 
@@ -51,17 +53,11 @@ final class PaidOrderInventoryHandlerSpec extends ObjectBehavior
     }
 
     function it_throws_handle_exception_if_decreasing_quantity_updater_fails(
-        DecreasingQuantityUpdaterInterface $onHandQuantityUpdater,
+        OrderQuantityUpdaterInterface $onHandQuantityUpdater,
         OrderInterface $order
     ) {
-        $this->addDecreasingQuantityUpdater($onHandQuantityUpdater);
         $onHandQuantityUpdater->decrease($order)->willThrow(\InvalidArgumentException::class);
 
-        $this->shouldThrow(HandleException::class)->during('handle', [$order]);
-    }
-
-    function it_throws_handle_exception_if_there_is_no_nested_decreasing_updaters(OrderInterface $order)
-    {
         $this->shouldThrow(HandleException::class)->during('handle', [$order]);
     }
 }

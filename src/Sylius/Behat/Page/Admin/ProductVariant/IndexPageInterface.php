@@ -21,17 +21,15 @@ interface IndexPageInterface extends BaseIndexPageInterface
 {
     /**
      * @param ProductVariantInterface $productVariant
-     * @param int $quantity
      *
-     * @return bool
+     * @return int
      */
-    public function hasOnHandQuantity(ProductVariantInterface $productVariant, $quantity);
+    public function getOnHandQuantityFor(ProductVariantInterface $productVariant);
 
     /**
      * @param ProductVariantInterface $productVariant
-     * @param int $quantity
      *
-     * @return bool
+     * @return int
      */
-    public function hasOnHoldQuantity(ProductVariantInterface $productVariant, $quantity);
+    public function getOnHoldQuantityFor(ProductVariantInterface $productVariant);
 }

@@ -163,7 +163,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @When /^I (?:|want to )view all variants of (this product)$/
-     * @When /^I view all variants of the (product "[^"]+")$/
+     * @When /^I view(?:| all) variants of the (product "[^"]+")$/
      */
     public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product)
     {
@@ -341,24 +341,53 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then /^I should know that (\d+) units of (this product) is hold$/
+     * @Then /^(\d+) units of (this product) should be on hold$/
      */
-    public function iShouldKnowThatUnitsOfThisProductIsHold($quantity, ProductInterface $product)
+    public function unitsOfThisProductShouldBeOnHold($quantity, ProductInterface $product)
     {
-        Assert::true(
-            $this->indexPage->hasOnHoldQuantity($product->getFirstVariant(), $quantity),
-            sprintf('This "%s" variant should has "%s" quantity, but it does not.', $product->getFirstVariant()->getName(), $quantity)
+        Assert::eq(
+            $quantity,
+            $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant()),
+            sprintf(
+                'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
+                $product->getFirstVariant()->getName(),
+                $quantity,
+                $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant())
+            )
         );
     }
 
     /**
-     * @Then /^I should not know about on hold quantity of (this product)$/
+     * @Then /^(\d+) units of (this product) should be on hand$/
      */
-    public function iShouldNotKnowAboutOnHoldQuantityOfThisProduct(ProductInterface $product)
+    public function unitsOfThisProductShouldBeOnHand($quantity, ProductInterface $product)
     {
-        Assert::false(
-            $this->indexPage->hasOnHoldQuantity($product->getFirstVariant(), 1),
-            sprintf('This "%s" variant should not have on hold quantity, but it does.', $product->getFirstVariant()->getName())
+        Assert::eq(
+            $quantity,
+            $this->indexPage->getOnHandQuantityFor($product->getFirstVariant()),
+            sprintf(
+                'Unexpected on hand quantity for "%s" variant. It should be "%s" but is "%s"',
+                $product->getFirstVariant()->getName(),
+                $quantity,
+                $this->indexPage->getOnHandQuantityFor($product->getFirstVariant())
+            )
+        );
+    }
+
+    /**
+     * @Then /^there should be no units of (this product) on hold$/
+     */
+    public function thereShouldBeNoUnitsOfThisProductOnHold(ProductInterface $product)
+    {
+        Assert::eq(
+            0,
+            $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant()),
+            sprintf(
+                'Unexpected on hand quantity for "%s" variant. It should be "%s" but is "%s"',
+                $product->getFirstVariant()->getName(),
+                0,
+                $this->indexPage->getOnHandQuantityFor($product->getFirstVariant())
+            )
         );
     }
 
