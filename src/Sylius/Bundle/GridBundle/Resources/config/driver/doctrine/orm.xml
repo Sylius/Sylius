@@ -11,26 +11,15 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd"
->
-
-    <parameters>
-        <parameter key="sylius.grid_driver.doctrine.orm.class">Sylius\Bundle\GridBundle\Doctrine\ORM\Driver</parameter>
-        <parameter key="sylius.grid_driver.doctrine.dbal.class">Sylius\Bundle\GridBundle\Doctrine\DBAL\Driver</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.grid_driver.doctrine.orm" class="%sylius.grid_driver.doctrine.orm.class%">
+        <service id="sylius.grid_driver.doctrine.orm" class="Sylius\Bundle\GridBundle\Doctrine\ORM\Driver">
             <argument type="service" id="doctrine.orm.entity_manager" />
             <tag name="sylius.grid_driver" alias="doctrine/orm" />
         </service>
-        <service id="sylius.grid_driver.doctrine.dbal" class="%sylius.grid_driver.doctrine.dbal.class%">
+        <service id="sylius.grid_driver.doctrine.dbal" class="Sylius\Bundle\GridBundle\Doctrine\DBAL\Driver">
             <argument type="service" id="doctrine.dbal.default_connection" />
             <tag name="sylius.grid_driver" alias="doctrine/dbal" />
         </service>
     </services>
-
 </container>
