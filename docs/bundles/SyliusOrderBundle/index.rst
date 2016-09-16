@@ -14,5 +14,6 @@ It also includes a super flexible adjustments feature, which serves as a basis f
    adjustments
    builder
    services
+   cart_actions
    summary
    processors
