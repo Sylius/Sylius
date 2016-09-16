@@ -226,6 +226,7 @@ class OrderController extends ResourceController
                 'configuration' => $configuration,
                 $this->metadata->getName() => $resource,
                 'form' => $form->createView(),
+                'cart' => $resource,
             ])
             ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
         ;

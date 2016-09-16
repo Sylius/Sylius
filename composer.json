@@ -107,8 +107,6 @@
         "sylius/api-bundle": "self.version",
         "sylius/attribute": "self.version",
         "sylius/attribute-bundle": "self.version",
-        "sylius/cart": "self.version",
-        "sylius/cart-bundle": "self.version",
         "sylius/contact": "self.version",
         "sylius/contact-bundle": "self.version",
         "sylius/content-bundle": "self.version",
