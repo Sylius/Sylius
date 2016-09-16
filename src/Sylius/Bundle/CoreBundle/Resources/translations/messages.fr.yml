@@ -138,6 +138,7 @@ sylius:
             name: Commentaire sur la commande
         shipment_confirmation:
             name: "Confirmation d'expédition"
+            content: 'Votre commande n° %number% a bien été envoyée par %method%.<br/>Vous pouvez suivre sa livraison grâce au numéro de tracking %tracking%.<br/><br/>Merci pour votre commande.'
         user_confirmation:
             name: "Confirmation d'utilisateur"
             subject: Bienvenue dans notre boutique

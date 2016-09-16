@@ -10,6 +10,8 @@ sylius:
         option:
             name: Nom
         notes: Notes supplémentaires
+        variant:
+            tracked: Suivi des stocks
     ui:
         abandoned: Abandonné
         about: À propos
@@ -41,16 +43,19 @@ sylius:
         adding_new_email: "Email en cours d'ajout"
         adding_new_locale: Ajout de nouveaux paramètres régionaux
         additional_information: Information supplémentaire
+        address: Adresse
         addressing: Adressage
         addressing_step: Adresse de livraison
         adjustments: Ajustements
         administration: Administration
         administration_dashboard: Tableau de bord
         administration_panel_login: "Connexion à l'espace d'administration"
+        admin_users: Administrateurs
         all: Tous
         all_your_addresses: Toutes vos adresses
         amount: Montant
         an_error_occurred: "Une erreur s'est produite"
+        api: Api
         apply_coupon: Coupon de réduction
         are_your_sure_you_want_to_perform_this_action: Êtes-vous sûr de vouloir effectuer cette action ?
         association: Association
@@ -87,6 +92,7 @@ sylius:
         category: Catégorie
         category_requirements: Exigences de la catégorie
         change_address: "Modifier l'adresse"
+        change_file: Changer le fichier
         change_password: Changer votre mot de passe
         change_payment_method: Modifier le mode de paiement
         change_shipping_method: Modifier le mode de livraison
@@ -214,6 +220,7 @@ sylius:
         discount: Réduction
         discounted_unit_price: Prix unitaire réduit
         edit: Modifier
+        edit_admin_user: "Modifier l'administrateur"
         edit_association_type: "Modifier le type d'association"
         edit_channel: Modifier le canal de distribution
         edit_country: Modifier le pays
@@ -295,6 +302,7 @@ sylius:
         extra_notes: Notes supplémentaires
         failed: Échoué
         faqs: FAQs
+        female: Féminin
         filter: Filtrer
         filters: Filtres
         first_name: Prénom
@@ -355,6 +363,7 @@ sylius:
         links: Liens
         list_coupons: Liste des coupons
         list_variants: Liste des variantes
+        locale: Locale
         locales: Locales
         lock: Vérouiller
         locked: Verrouillé
@@ -364,8 +373,10 @@ sylius:
         login_sylius_store: 'Connexion <small>Boutique Sylius</small>'
         logout: Déconnexion
         main_taxon: Taxinomie principale
+        male: Masculin
         manage: Gérer
         manage_adjustments: Gérer les ajustements
+        manage_admin_users: Gérer les administrateurs
         manage_attributes: Gérer les propriétés
         manage_attributes_of_your_products: Gérer les attributs de vos produits
         manage_categorization_of_your_products: Gérer les catégories de vos produits
@@ -416,6 +427,7 @@ sylius:
         n_a: N/A
         name: Nom
         new: Nouveau
+        new_admin_user: Nouvel administrateur
         new_channel: Nouveau canal
         new_comment_posted_on_order: Un nouveau commentaire a été laissé sur la commande
         new_country: Nouveau pays
@@ -553,6 +565,7 @@ sylius:
         promotion_configuration: Configuration des promotions
         promotion_coupons: Coupons de réduction
         promotion_details: Détails de la promotion
+        promotion_discount: Remises
         promotion_information: Information de la promotion
         promotion_total: Total des remises
         promotions: Promotions
@@ -653,6 +666,7 @@ sylius:
         street: Adresse
         string_blocks: Blocs de type chaine
         subject: Sujet
+        subscribed_to_newsletter: Abonnez-vous à la newsletter
         subtotal: Sous-total
         success: Succès
         summary: Résumé

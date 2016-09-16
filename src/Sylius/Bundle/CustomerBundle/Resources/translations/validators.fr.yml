@@ -16,6 +16,8 @@ sylius:
             max: 'Le nom ne doit pas contenir plus de {{ limit }} caractères.'
             min: 'Le nom doit contenir au moins {{ limit }} caractères.'
             not_blank: Veuillez saisir votre nom.
+        gender:
+            not_blank: Veuillez choisir votre sexe.
         email:
             already_used: Cet e-mail est déjà utilisé, veuillez vous connecter ou procéder à la réinitialisation du mot de passe oublié.
             max: "L'e-mail ne doit pas contenir plus de {{ limit }} caractères."

@@ -12,6 +12,7 @@ sylius:
                     products: Produits
                     taxons: Famille de tags
                 configuration:
+                    admin_users: Administrateurs
                     channels: Canaux
                     countries: Pays
                     currencies: Devises
