@@ -1,10 +1,10 @@
 {% if data.isTracked %}
 <div class="ui {{ data.onHand > 0 ? 'green' : 'red' }} icon label">
     <i class="cube icon"></i>
-    {{ data.onHand }} {{ 'sylius.ui.available_on_hand'|trans }}
+    <span class="onHand" data-product-variant-id="{{ data.id }}">{{ data.onHand }}</span> {{ 'sylius.ui.available_on_hand'|trans }}
     {% if data.onHold > 0 %}
     <div class="detail">
-        {{ data.onHold }} {{ 'sylius.ui.reserved'|trans }}
+        <span class="onHold" data-product-variant-id="{{ data.id }}">{{ data.onHold }}</span> {{ 'sylius.ui.reserved'|trans }}
     </div>
     {% endif %}
 </div>

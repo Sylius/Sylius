@@ -95,6 +95,7 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @When I view the summary of the order :order
+     * @When /^I view the summary of (this order made by "[^"]+")$/
      */
     public function iSeeTheOrder(OrderInterface $order)
     {

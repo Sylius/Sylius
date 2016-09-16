@@ -7,18 +7,26 @@ default:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
+                - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.shop_security
 
+                - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.order
+                - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
 
-                - sylius.behat.context.ui.checkout
                 - sylius.behat.context.ui.shop.cart
-
+                - sylius.behat.context.ui.checkout
+                - sylius.behat.context.ui.admin.managing_product_variants
             filters:
                 tags: "@checkout_inventory && @ui"

@@ -276,6 +276,17 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given /^(this user) has (\d+) (products "[^"]+") in the cart$/
+     * @Given /^(this user) added (\d+) (products "[^"]+") to the cart$/
+     */
+    public function thisCustomerHasAddedProductsToTheCart(ShopUserInterface $shopUser, $quantity, ProductInterface $product)
+    {
+        $this->sharedSecurityService->performActionAsShopUser($shopUser, function () use ($quantity, $product) {
+            $this->iAddQuantityOfProductsToTheCart($quantity, $product);
+        });
+    }
+
+    /**
      * @Given /^I added (products "([^"]+)" and "([^"]+)") to the cart$/
      * @When /^I add (products "([^"]+)" and "([^"]+)") to the cart$/
      * @Given /^I added (products "([^"]+)", "([^"]+)" and "([^"]+)") to the cart$/

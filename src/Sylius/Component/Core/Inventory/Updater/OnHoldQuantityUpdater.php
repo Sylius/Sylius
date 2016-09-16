@@ -17,9 +17,9 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class OnHandQuantityUpdater implements OrderQuantityUpdaterInterface
+final class OnHoldQuantityUpdater implements OrderQuantityUpdaterInterface
 {
     /**
      * {@inheritdoc}
@@ -31,7 +31,7 @@ final class OnHandQuantityUpdater implements OrderQuantityUpdaterInterface
             $variant = $orderItem->getVariant();
 
             if ($variant->isTracked()) {
-                $variant->setOnHand($variant->getOnHand() + $orderItem->getQuantity());
+                $variant->setOnHold($variant->getOnHold() + $orderItem->getQuantity());
             }
         }
     }
@@ -46,9 +46,13 @@ final class OnHandQuantityUpdater implements OrderQuantityUpdaterInterface
             $variant = $orderItem->getVariant();
 
             if ($variant->isTracked()) {
-                Assert::greaterThanEq(($variant->getOnHand() - $orderItem->getQuantity()), 0, sprintf('Not enough units to decrease the inventory of a variant "%s".', $variant->getName()));
+                Assert::greaterThanEq(
+                    ($variant->getOnHold() - $orderItem->getQuantity()),
+                    0,
+                    sprintf('Not enough units to decrease the inventory of a variant "%s".', $variant->getName())
+                );
 
-                $variant->setOnHand($variant->getOnHand() - $orderItem->getQuantity());
+                $variant->setOnHold($variant->getOnHold() - $orderItem->getQuantity());
             }
         }
     }

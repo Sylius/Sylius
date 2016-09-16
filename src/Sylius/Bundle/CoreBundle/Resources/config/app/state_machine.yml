@@ -36,6 +36,10 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'create'", "'sylius_order'"]
+                sylius_hold_inventory:
+                    on: ["complete"]
+                    do: ["@sylius.inventory.on_hold_quantity_updater", "increase"]
+                    args: ["object"]
                 sylius_create_payment:
                     on: ["complete"]
                     do: ["@sm.callback.cascade_transition", "apply"]
@@ -98,7 +102,7 @@ winzou_state_machine:
             after:
                 sylius_order_paid:
                     on: ["pay"]
-                    do: ["@sylius.inventory.on_hand_quantity_updater", "decrease"]
+                    do: ["@sylius.handler.order_inventory", "handle"]
                     args: ["object"]
 
     sylius_payment:

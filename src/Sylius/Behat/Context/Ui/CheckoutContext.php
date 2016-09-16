@@ -202,7 +202,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given /^(this user) bought this product$/
+     * @Given /^(this user) bought(?: this product| those products)$/
      */
     public function thisUserBought(ShopUserInterface $user)
     {

@@ -14,10 +14,15 @@ namespace Sylius\Component\Core\Inventory\Updater;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface OnHandQuantityUpdaterInterface
+interface OrderQuantityUpdaterInterface
 {
+    /**
+     * @param OrderInterface $order
+     */
+    public function increase(OrderInterface $order);
+
     /**
      * @var OrderInterface $order
      */

@@ -13,8 +13,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface;
+use Sylius\Behat\Page\Admin\ProductVariant\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -163,7 +163,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @When /^I (?:|want to )view all variants of (this product)$/
-     * @When /^I view all variants of the (product "[^"]+")$/
+     * @When /^I view(?:| all) variants of the (product "[^"]+")$/
      */
     public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product)
     {
@@ -337,6 +337,57 @@ final class ManagingProductVariantsContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName(), 'inventory' => '0 Available on hand']),
             sprintf('This "%s" variant should have 0 on hand quantity, but it does not.', $productVariant->getName())
+        );
+    }
+
+    /**
+     * @Then /^(\d+) units of (this product) should be on hold$/
+     */
+    public function unitsOfThisProductShouldBeOnHold($quantity, ProductInterface $product)
+    {
+        Assert::eq(
+            $quantity,
+            $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant()),
+            sprintf(
+                'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
+                $product->getFirstVariant()->getName(),
+                $quantity,
+                $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant())
+            )
+        );
+    }
+
+    /**
+     * @Then /^(\d+) units of (this product) should be on hand$/
+     */
+    public function unitsOfThisProductShouldBeOnHand($quantity, ProductInterface $product)
+    {
+        Assert::eq(
+            $quantity,
+            $this->indexPage->getOnHandQuantityFor($product->getFirstVariant()),
+            sprintf(
+                'Unexpected on hand quantity for "%s" variant. It should be "%s" but is "%s"',
+                $product->getFirstVariant()->getName(),
+                $quantity,
+                $this->indexPage->getOnHandQuantityFor($product->getFirstVariant())
+            )
+        );
+    }
+
+    /**
+     * @Then /^there should be no units of (this product) on hold$/
+     */
+    public function thereShouldBeNoUnitsOfThisProductOnHold(ProductInterface $product)
+    {
+        Assert::eq(
+            0,
+            $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant()),
+            sprintf(
+                'Unexpected on hand quantity for "%s" variant. It should be "%s" but is "%s"',
+                $product->getFirstVariant()->getName(),
+                0,
+                $this->indexPage->getOnHandQuantityFor($product->getFirstVariant())
+            )
         );
     }
 
