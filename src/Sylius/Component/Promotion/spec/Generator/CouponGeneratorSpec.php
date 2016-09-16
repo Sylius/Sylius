@@ -67,7 +67,6 @@ final class CouponGeneratorSpec extends ObjectBehavior
         $coupon->setPromotion($promotion)->shouldBeCalled();
         $coupon->setCode(Argument::any())->shouldBeCalled();
         $coupon->setUsageLimit(null)->shouldBeCalled();
-        $coupon->setExpiresAt(null)->shouldBeCalled();
 
         $objectManager->persist($coupon)->shouldBeCalled();
         $objectManager->flush()->shouldBeCalled();

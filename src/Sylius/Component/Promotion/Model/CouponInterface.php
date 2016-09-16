@@ -53,16 +53,6 @@ interface CouponInterface extends CodeAwareInterface, TimestampableInterface, Re
     public function setPromotion(PromotionInterface $promotion = null);
 
     /**
-     * @return \DateTime
-     */
-    public function getExpiresAt();
-
-    /**
-     * @param \DateTime $expiresAt
-     */
-    public function setExpiresAt(\DateTime $expiresAt = null);
-
-    /**
      * @return bool
      */
     public function isValid();

@@ -76,7 +76,6 @@ final class CouponGenerator implements CouponGeneratorInterface
             $coupon->setPromotion($promotion);
             $coupon->setCode($code);
             $coupon->setUsageLimit($instruction->getUsageLimit());
-            $coupon->setExpiresAt($instruction->getExpiresAt());
 
             $generatedCoupons[$code] = $coupon;
 

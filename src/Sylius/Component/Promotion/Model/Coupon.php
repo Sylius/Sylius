@@ -46,11 +46,6 @@ class Coupon implements CouponInterface
     protected $promotion;
 
     /**
-     * @var \DateTime
-     */
-    protected $expiresAt;
-
-    /**
      * {@inheritdoc}
      */
     public function getId()
@@ -133,29 +128,9 @@ class Coupon implements CouponInterface
     /**
      * {@inheritdoc}
      */
-    public function getExpiresAt()
-    {
-        return $this->expiresAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setExpiresAt(\DateTime $expiresAt = null)
-    {
-        $this->expiresAt = $expiresAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isValid()
     {
         if (null !== $this->usageLimit && $this->used >= $this->usageLimit) {
-            return false;
-        }
-
-        if (null !== $this->expiresAt && $this->expiresAt < new \DateTime()) {
             return false;
         }
 
