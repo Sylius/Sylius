@@ -27,9 +27,5 @@
             <argument>%sylius.model.product.class%</argument>
             <tag name="form.type" alias="sylius_api_product" />
         </service>
-        <service id="sylius.form.type.api.checkout_address" class="Sylius\Bundle\CoreBundle\Form\Type\Api\Checkout\AddressType">
-            <argument>%sylius.model.cart.class%</argument>
-            <tag name="form.type" alias="sylius_api_checkout_address" />
-        </service>
     </services>
 </container>

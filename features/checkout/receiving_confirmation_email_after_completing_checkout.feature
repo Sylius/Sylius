@@ -13,9 +13,7 @@ Feature: Receiving confirmation email after finalizing checkout
     @ui @email
     Scenario: Order confirmation gets sent after finalizing checkout
         Given I have product "Sig Sauer P226" in the cart
-        When I complete addressing step with email "john@example.com" and "United States" as shipping country
-        And I select "Free" shipping method
-        And I complete the shipping step
-        And I choose "Offline" payment method
-        And I confirm my order
-        Then an email concerning the order of "john@example.com" should be sent to him
+        And I have completed addressing step with email "john@example.com" and "United States" as shipping country
+        And I proceed order with free shipping method and offline payment
+        When I confirm my order
+        Then an email with the summary of order placed by "john@example.com" should be sent to him

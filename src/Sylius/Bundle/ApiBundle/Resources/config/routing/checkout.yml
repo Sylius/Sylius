@@ -22,15 +22,12 @@ sylius_api_checkout_show:
         _controller: sylius.controller.order:showAction
 
 sylius_api_checkout_addressing:
-    path: /addressing/{orderId}/{customerId}
+    path: /addressing/{orderId}
     methods: [PUT]
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
-            form:
-                type: sylius_api_checkout_address
-                options:
-                    customer: expr:service('sylius.repository.customer').find($customerId)
+            form: sylius_checkout_address
             repository:
                 method: find
                 arguments: [$orderId]

@@ -81,7 +81,7 @@ final class EmailContext implements Context
     }
 
     /**
-     * @Then /^an email concerning the (order of "([^"]+)") should be sent to him$/
+     * @Then /^an email with the summary of (order placed by "([^"]+)") should be sent to him$/
      */
     public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order)
     {
