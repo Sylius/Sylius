@@ -23,21 +23,6 @@ class Cart extends Order implements CartInterface
      */
     protected $expiresAt;
 
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->incrementExpiresAt();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIdentifier()
-    {
-        return $this->getId();
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -59,17 +44,6 @@ class Cart extends Order implements CartInterface
      */
     public function setExpiresAt(\DateTime $expiresAt = null)
     {
-        $this->expiresAt = $expiresAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function incrementExpiresAt()
-    {
-        $expiresAt = new \DateTime();
-        $expiresAt->add(new \DateInterval('PT3H'));
-
         $this->expiresAt = $expiresAt;
     }
 }
