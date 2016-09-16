@@ -29,6 +29,7 @@ class VariantRepository extends EntityRepository implements VariantRepositoryInt
             ->leftJoin('o.translations', 'translation')
             ->where('translation.name = :name')
             ->setParameter('name', $name)
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
         ;
