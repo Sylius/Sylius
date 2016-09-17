@@ -996,7 +996,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->getResponseCode()->willReturn(204);
 
-        $expectedView = View::create($resource, 204);
+        $expectedView = View::create(null, 204);
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->updateAction($request)->shouldReturn($response);
@@ -1263,7 +1263,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->getResponseCode()->willReturn(204);
 
-        $expectedView = View::create($resource, 204);
+        $expectedView = View::create(null, 204);
 
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
