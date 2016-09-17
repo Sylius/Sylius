@@ -7,7 +7,6 @@ sylius:
             not_blank: Bitte wählen Sie die Standardwährung für diesen Kanal.
         default_locale:
             not_blank: Bitte wählen Sie die Standardsprache für diesen Kanal.
-            choice_not_in_locale: Bitte wählen Sie die Standard aus einem der konfigurierten locales.
     checkout:
         shipping_method:
             not_blank: Bitte wählen Sie eine Versandart aus.
