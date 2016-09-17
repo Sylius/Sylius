@@ -57,7 +57,7 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
      */
     public function create(MetadataInterface $metadata, Request $request)
     {
-        $parameters = array_merge($this->defaultParameters, $this->parseApiParameters($request));
+        $parameters = array_replace_recursive($this->defaultParameters, $this->parseApiParameters($request));
         $parameters = $this->parametersParser->parseRequestValues($parameters, $request);
 
         return new $this->configurationClass($metadata, $request, new Parameters($parameters));

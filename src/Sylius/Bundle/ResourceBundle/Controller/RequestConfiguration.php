@@ -92,6 +92,23 @@ class RequestConfiguration
     }
 
     /**
+     * @return integer
+     */
+    public function getResponseCode()
+    {
+        $responseCode = $this->parameters->get('response_code');
+
+        if (is_array($responseCode)) {
+            $controller = $this->request->attributes->get('_controller');
+            if (preg_match('/^.+\:(.+)Action$/i', $controller, $matches)) {
+                return $responseCode[$matches['1']];
+            }
+        }
+
+        return $responseCode;
+    }
+
+    /**
      * @param $name
      *
      * @return null|string
@@ -256,7 +273,7 @@ class RequestConfiguration
      */
     public function isLimited()
     {
-        return (bool) $this->parameters->get('limit', false);
+        return (bool)$this->parameters->get('limit', false);
     }
 
     /**
@@ -267,7 +284,7 @@ class RequestConfiguration
         $limit = null;
 
         if ($this->isLimited()) {
-            $limit = (int) $this->parameters->get('limit', 10);
+            $limit = (int)$this->parameters->get('limit', 10);
         }
 
         return $limit;
@@ -278,7 +295,7 @@ class RequestConfiguration
      */
     public function isPaginated()
     {
-        return (bool) $this->parameters->get('paginate', true);
+        return (bool)$this->parameters->get('paginate', true);
     }
 
     /**
@@ -286,7 +303,7 @@ class RequestConfiguration
      */
     public function getPaginationMaxPerPage()
     {
-        return (int) $this->parameters->get('paginate', 10);
+        return (int)$this->parameters->get('paginate', 10);
     }
 
     /**
@@ -294,7 +311,7 @@ class RequestConfiguration
      */
     public function isFilterable()
     {
-        return (bool) $this->parameters->get('filterable', false);
+        return (bool)$this->parameters->get('filterable', false);
     }
 
     /**
@@ -318,7 +335,7 @@ class RequestConfiguration
      */
     public function isSortable()
     {
-        return (bool) $this->parameters->get('sortable', false);
+        return (bool)$this->parameters->get('sortable', false);
     }
 
     /**
@@ -509,7 +526,7 @@ class RequestConfiguration
             return $this->getRequest()->isXmlHttpRequest();
         }
 
-        return (bool) $redirect['header'];
+        return (bool)$redirect['header'];
     }
 
     public function getVars()
@@ -518,7 +535,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param array  $parameters
+     * @param array $parameters
      * @param object $resource
      *
      * @return array
