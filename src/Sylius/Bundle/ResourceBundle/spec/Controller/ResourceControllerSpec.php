@@ -594,6 +594,8 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
 
+        $configuration->getResponseCode()->willReturn(201);
+
         $expectedView = View::create($newResource, 201);
 
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
@@ -992,7 +994,9 @@ final class ResourceControllerSpec extends ObjectBehavior
         $manager->flush()->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
-        $expectedView = View::create(null, 204);
+        $configuration->getResponseCode()->willReturn(204);
+
+        $expectedView = View::create($resource, 204);
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->updateAction($request)->shouldReturn($response);
@@ -1257,7 +1261,9 @@ final class ResourceControllerSpec extends ObjectBehavior
         $repository->remove($resource)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldBeCalled();
 
-        $expectedView = View::create(null, 204);
+        $configuration->getResponseCode()->willReturn(204);
+
+        $expectedView = View::create($resource, 204);
 
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
@@ -1516,6 +1522,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         $manager->flush()->shouldBeCalled();
 
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+
+        $configuration->getResponseCode()->willReturn(200);
 
         $expectedView = View::create($resource, 200);
 
