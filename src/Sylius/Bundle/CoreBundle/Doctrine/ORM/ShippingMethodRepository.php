@@ -23,6 +23,19 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     /**
      * {@inheritdoc}
      */
+    public function createListQueryBuilder($locale)
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->setParameter('locale', $locale)
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel)
     {
         return $this->createQueryBuilder('o')

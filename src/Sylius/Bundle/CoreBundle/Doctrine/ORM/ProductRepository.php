@@ -26,11 +26,13 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createListQueryBuilder()
+    public function createListQueryBuilder($locale)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->setParameter('locale', $locale)
         ;
     }
 

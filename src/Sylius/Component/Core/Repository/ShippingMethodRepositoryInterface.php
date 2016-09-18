@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface as BaseShippingMethodRepositoryInterface;
 
@@ -19,6 +20,13 @@ use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface as Ba
  */
 interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepositoryInterface
 {
+    /**
+     * @param string $locale
+     *
+     * @return QueryBuilder
+     */
+    public function createListQueryBuilder($locale);
+
     /**
      * @param array $zones
      * @param ChannelInterface $channel
