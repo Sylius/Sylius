@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CartBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\View\View;
 use Sylius\Component\Cart\CartActions;
+use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Modifier\CartModifierInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
@@ -72,6 +73,8 @@ class CartItemController extends Controller
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
             }
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
+
+            $this->saveCartInSession($request, $cart);
 
             return $this->redirectHandler->redirectToResource($configuration, $newResource);
         }
@@ -134,6 +137,32 @@ class CartItemController extends Controller
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
 
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
+    }
+
+    /**
+     * @param Request $request
+     * @param CartInterface $cart
+     */
+    protected function saveCartInSession(Request $request, CartInterface $cart)
+    {
+        $session = $request->getSession();
+
+        if (!$session->has($this->getSessionCartKey($cart))) {
+            $session->set(
+                sprintf('%s.%s', $this->getSessionCartKey($cart), $cart->getChannel()->getCode()),
+                $cart->getId()
+            );
+        }
+    }
+
+    /**
+     * @param CartInterface $cart
+     *
+     * @return string
+     */
+    protected function getSessionCartKey(CartInterface $cart)
+    {
+        return sprintf('_sylius.cart.%s', $cart->getChannel()->getCode());
     }
 
     /**
