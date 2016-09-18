@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CartBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\View\View;
 use Sylius\Component\Cart\CartActions;
+use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Modifier\CartModifierInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
@@ -62,9 +63,7 @@ class CartItemController extends Controller
             $cart = $this->getCurrentCart();
             $this->getCartModifier()->addToCart($cart, $newResource);
 
-            $cartManager = $this->getCartManager();
-            $cartManager->persist($cart);
-            $cartManager->flush();
+            $this->saveCart($cart);
 
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
@@ -121,9 +120,7 @@ class CartItemController extends Controller
 
         $this->repository->remove($resource);
 
-        $cartManager = $this->getCartManager();
-        $cartManager->persist($cart);
-        $cartManager->flush();
+        $this->saveCart($cart);
 
         $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
@@ -158,5 +155,15 @@ class CartItemController extends Controller
     private function getCartManager()
     {
         return $this->get('sylius.manager.cart');
+    }
+
+    /**
+     * @param CartInterface $cart
+     */
+    private function saveCart(CartInterface $cart)
+    {
+        $cartManager = $this->getCartManager();
+        $cartManager->persist($cart);
+        $cartManager->flush();
     }
 }
