@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.shipping_method.class%
+                    class: "%sylius.model.shipping_method.class%"
             sorting:
                 code:
                     path: code

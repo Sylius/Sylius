@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.product_option.class%
+                    class: "%sylius.model.product_option.class%"
             fields:
                 code:
                     type: string

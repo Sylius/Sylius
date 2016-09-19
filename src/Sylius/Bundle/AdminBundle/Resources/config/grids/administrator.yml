@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.admin_user.class%
+                    class: "%sylius.model.admin_user.class%"
             sorting:
                 created_at:
                     path: createdAt
