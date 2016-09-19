@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Api;
 
-use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType as BaseOrderItemType;
-use Sylius\Component\Core\Model\ProductVariant;
+use Sylius\Bundle\CoreBundle\Form\Type\OrderItemType as BaseOrderItemType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -28,8 +28,11 @@ class OrderItemType extends BaseOrderItemType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('variant', 'entity_hidden', [
-                'data_class' => ProductVariant::class,
+            ->add('variant', 'sylius_product_variant_to_identifier', [
+                'class' => $options['variant_data_class'],
+                'constraints' => [
+                    new NotBlank(),
+                ],
             ])
         ;
     }

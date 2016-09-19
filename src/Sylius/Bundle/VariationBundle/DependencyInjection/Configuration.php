@@ -14,6 +14,8 @@ namespace Sylius\Bundle\VariationBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceToHiddenIdentifierType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceToIdentifierType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\VariationBundle\Form\Type\OptionTranslationType;
 use Sylius\Bundle\VariationBundle\Form\Type\OptionType;
@@ -90,6 +92,8 @@ class Configuration implements ConfigurationInterface
                                                 ->children()
                                                     ->scalarNode('default')->defaultValue(VariantType::class)->cannotBeEmpty()->end()
                                                     ->scalarNode('from_identifier')->defaultValue(ResourceFromIdentifierType::class)->cannotBeEmpty()->end()
+                                                    ->scalarNode('to_identifier')->defaultValue(ResourceToIdentifierType::class)->cannotBeEmpty()->end()
+                                                    ->scalarNode('to_hidden_identifier')->defaultValue(ResourceToHiddenIdentifierType::class)->cannotBeEmpty()->end()
                                                 ->end()
                                             ->end()
                                         ->end()
@@ -106,6 +110,14 @@ class Configuration implements ConfigurationInterface
                                                 ->prototype('scalar')->end()
                                                 ->defaultValue(['sylius'])
                                                 ->cannotBeEmpty()
+                                            ->end()
+                                            ->arrayNode('to_identifier')
+                                                ->prototype('scalar')->end()
+                                                ->defaultValue(['sylius'])
+                                            ->end()
+                                            ->arrayNode('to_hidden_identifier')
+                                                ->prototype('scalar')->end()
+                                                ->defaultValue(['sylius'])
                                             ->end()
                                         ->end()
                                     ->end()

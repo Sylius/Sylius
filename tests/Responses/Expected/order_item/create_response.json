@@ -1,0 +1,14 @@
+{
+    "id": @integer@,
+    "order": @array@,
+    "quantity": 2,
+    "unit_price": 10000,
+    "total": 20000,
+    "immutable": false,
+    "units": @array@,
+    "units_total": 20000,
+    "adjustments": [],
+    "adjustments_total": 0,
+    "variant": @array@,
+    "_links": @array@
+}

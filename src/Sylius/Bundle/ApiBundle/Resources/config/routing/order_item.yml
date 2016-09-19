@@ -18,6 +18,9 @@ sylius_api_order_item_create:
     defaults:
         _controller: sylius.controller.order_item:createAction
         _sylius:
+            factory:
+                method: createForOrder
+                arguments: [expr:service('sylius.repository.order').find($orderId)]
             form: sylius_api_order_item
 
 sylius_api_order_item_update:
