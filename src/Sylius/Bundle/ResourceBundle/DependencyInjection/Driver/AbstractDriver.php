@@ -122,18 +122,15 @@ abstract class AbstractDriver implements DriverInterface
 
         $definition = new Definition($factoryClass);
 
+        $definitionArgs = [$modelClass];
         if (in_array(TranslatableFactoryInterface::class, class_implements($factoryClass))) {
             $decoratedDefinition = new Definition(Factory::class);
-            $decoratedDefinition->setArguments([$modelClass]);
+            $decoratedDefinition->setArguments($definitionArgs);
 
-            $definition->setArguments([$decoratedDefinition, new Reference('sylius_resource.translation.locale_provider')]);
-
-            $container->setDefinition($metadata->getServiceId('factory'), $definition);
-
-            return;
+            $definitionArgs = [$decoratedDefinition, new Reference('sylius_resource.translation.locale_provider')];
         }
 
-        $definition->setArguments([$modelClass]);
+        $definition->setArguments($definitionArgs);
 
         $container->setDefinition($metadata->getServiceId('factory'), $definition);
     }
