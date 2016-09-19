@@ -33,5 +33,6 @@ The Book
     content
     emails
     settings
+    adjustments
 
 .. include:: /book/map.rst.inc
