@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.product.class%
+                    class: "%sylius.model.product.class%"
                     repository:
                         method: createListQueryBuilder
             sorting:

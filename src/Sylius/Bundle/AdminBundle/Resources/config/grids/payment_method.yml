@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.payment_method.class%
+                    class: "%sylius.model.payment_method.class%"
                     repository:
                         method: createListQueryBuilder
             fields:

@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.currency.class%
+                    class: "%sylius.model.currency.class%"
             sorting:
                 code:
                     path: code
