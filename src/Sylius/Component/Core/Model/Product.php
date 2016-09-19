@@ -75,22 +75,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getMetadataClassIdentifier()
-    {
-        return self::METADATA_CLASS_IDENTIFIER;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMetadataIdentifier()
-    {
-        return $this->getMetadataClassIdentifier().'-'.$this->getId();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getVariantSelectionMethod()
     {
         return $this->variantSelectionMethod;
