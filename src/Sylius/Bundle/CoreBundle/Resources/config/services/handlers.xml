@@ -27,26 +27,20 @@
             <tag name="sylius.locale_change" />
         </service>
 
-        <service id="sylius.handler.currency_change" class="Sylius\Component\Core\Currency\Handler\CompositeCurrencyChangeHandler">
-            <call method="addHandler">
-                <argument type="service">
-                    <service class="Sylius\Bundle\CoreBundle\Handler\CartCurrencyChangeHandler">
-                        <argument type="service" id="sylius.context.cart" />
-                        <argument type="service" id="sylius.updater.order.exchange_rate" />
-                        <argument type="service" id="event_dispatcher" />
-                        <argument type="service" id="doctrine.orm.entity_manager" />
-                    </service>
-                </argument>
-            </call>
-            <call method="addHandler">
-                <argument type="service">
-                    <service class="Sylius\Bundle\CoreBundle\Handler\ShopCurrencyChangeHandler">
-                        <argument type="service" id="sylius.storage.currency" />
-                        <argument type="service" id="sylius.context.channel.composite" />
-                        <argument type="service" id="event_dispatcher" />
-                    </service>
-                </argument>
-            </call>
+        <service id="sylius.handler.currency_change" class="Sylius\Component\Core\Currency\Handler\CompositeCurrencyChangeHandler" />
+
+        <service  id="sylius.handler.currency_change.cart" class="Sylius\Bundle\CoreBundle\Handler\CartCurrencyChangeHandler">
+            <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.updater.order.exchange_rate" />
+            <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <tag name="sylius.currency_change" />
+        </service>
+        <service id="sylius.handler.currency_change.shop" class="Sylius\Bundle\CoreBundle\Handler\ShopCurrencyChangeHandler">
+            <argument type="service" id="sylius.storage.currency" />
+            <argument type="service" id="sylius.context.channel.composite" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="sylius.currency_change" />
         </service>
     </services>
 </container>
