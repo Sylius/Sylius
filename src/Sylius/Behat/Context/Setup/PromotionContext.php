@@ -131,7 +131,27 @@ final class PromotionContext implements Context
 
         $this->promotionRepository->add($promotion);
         $this->sharedStorage->set('promotion', $promotion);
-        $this->sharedStorage->set('coupon', $coupon);
+        $this->sharedStorage->set('promotion_coupon', $coupon);
+    }
+
+    /**
+     * @Given /^(this promotion) has already expired$/
+     */
+    public function thisPromotionHasExpired(PromotionInterface $promotion)
+    {
+        $promotion->setEndsAt(new \DateTime('1 day ago'));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion coupon) has already expired$/
+     */
+    public function thisPromotionCouponHasExpired(CouponInterface $coupon)
+    {
+        $coupon->setExpiresAt(new \DateTime('1 day ago'));
+
+        $this->objectManager->flush();
     }
 
     /**
