@@ -29,8 +29,6 @@ interface ProductVariantInterface extends
     PriceableInterface,
     TaxableInterface
 {
-    const METADATA_CLASS_IDENTIFIER = 'ProductVariant';
-
     /**
      * @return Collection|ProductVariantImageInterface[]
      */

@@ -49,11 +49,6 @@ final class ProductSpec extends ObjectBehavior
         $this->shouldHaveType(SyliusProduct::class);
     }
 
-    function it_has_metadata_class_identifier()
-    {
-        $this->getMetadataClassIdentifier()->shouldReturn('Product');
-    }
-
     function it_initializes_taxon_collection_by_default()
     {
         $this->getTaxons()->shouldHaveType(Collection::class);

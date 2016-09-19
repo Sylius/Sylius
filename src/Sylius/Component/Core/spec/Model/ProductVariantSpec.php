@@ -43,11 +43,6 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Product\Model\Variant');
     }
 
-    function it_has_metadata_class_identifier()
-    {
-        $this->getMetadataClassIdentifier()->shouldReturn('ProductVariant');
-    }
-
     function it_should_not_have_price_by_default()
     {
         $this->getPrice()->shouldReturn(null);
