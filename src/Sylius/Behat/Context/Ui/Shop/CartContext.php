@@ -418,23 +418,34 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be notified that promotion coupon has been added to the cart
+     * @Then I should be notified that the promotion coupon has been applied
      */
-    public function iShouldBeNotifiedThatPromotionCouponHasBeenAddedToTheCart()
+    public function iShouldBeNotifiedThatPromotionCouponHasBeenApplied()
     {
         $this->notificationChecker->checkNotification(
-            'Your promotion coupon has been added to the cart.',
+            'Your promotion coupon has been applied.',
             NotificationType::success()
         );
     }
 
     /**
-     * @Then I should be notified that promotion coupon is not valid
+     * @Then I should be notified that the promotion coupon is invalid
      */
-    public function iShouldBeNotifiedThatPromotionCouponIsNotValid()
+    public function iShouldBeNotifiedThatPromotionCouponIsInvalid()
     {
         $this->notificationChecker->checkNotification(
-            'Your promotion coupon is not valid.',
+            'Your promotion coupon is invalid.',
+            NotificationType::failure()
+        );
+    }
+
+    /**
+     * @Then I should be notified that the promotion coupon has expired
+     */
+    public function iShouldBeNotifiedThatPromotionCouponHasExpired()
+    {
+        $this->notificationChecker->checkNotification(
+            'Your promotion coupon has expired.',
             NotificationType::failure()
         );
     }
