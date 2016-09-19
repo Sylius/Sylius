@@ -12,12 +12,12 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Taxonomy\Model\TaxonInterface as VariableTaxonInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface TaxonInterface extends VariableTaxonInterface
+interface TaxonInterface extends BaseTaxonInterface
 {
     /**
      * @return Collection|ProductInterface[]
@@ -47,9 +47,9 @@ interface TaxonInterface extends VariableTaxonInterface
     public function getImages();
 
     /**
-     * @param $code
+     * @param string $code
      *
-     * @return TaxonImageInterface|null;
+     * @return TaxonImageInterface|null
      */
     public function getImageByCode($code);
 
