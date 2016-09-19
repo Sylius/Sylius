@@ -11,7 +11,7 @@ sylius_shop_cart_summary:
 
 sylius_shop_cart_save:
     path: /
-    methods: [POST, PUT, PATCH]
+    methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.order:saveAction
         _sylius:

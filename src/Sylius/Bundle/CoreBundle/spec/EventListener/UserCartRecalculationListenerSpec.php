@@ -50,20 +50,6 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
         $this->recalculateCartWhileLogin($event);
     }
 
-    function it_throws_exception_if_provided_cart_is_not_order(
-        CartContextInterface $cartContext,
-        OrderProcessorInterface $orderProcessor,
-        Event $event
-    ) {
-        $cartContext->getCart()->willReturn('cart');
-        $orderProcessor->process('cart')->shouldNotBeCalled();
-
-        $this
-            ->shouldThrow(new UnexpectedTypeException('cart', OrderInterface::class))
-            ->during('recalculateCartWhileLogin', [$event])
-        ;
-    }
-
     function it_does_nothing_if_cannot_find_cart(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,

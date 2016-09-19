@@ -90,8 +90,6 @@ class OrderItemController extends ResourceController
             $cartManager->persist($cart);
             $cartManager->flush();
 
-            $this->eventDispatcher->dispatchPostEvent('sylius.cart_item.post_create', $configuration, $newResource);
-
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
             }
@@ -140,7 +138,6 @@ class OrderItemController extends ResourceController
         }
 
         $cart = $this->getCurrentCart();
-
         $this->getOrderModifier()->removeFromOrder($cart, $resource);
 
         $this->repository->remove($resource);
@@ -203,7 +200,7 @@ class OrderItemController extends ResourceController
      */
     protected function getContext()
     {
-        return $this->container->get('sylius.context.cart');
+        return $this->get('sylius.context.cart');
     }
 
     /**
@@ -211,7 +208,7 @@ class OrderItemController extends ResourceController
      */
     protected function getEventDispatcher()
     {
-        return $this->container->get('event_dispatcher');
+        return $this->get('event_dispatcher');
     }
 
     /**
