@@ -160,5 +160,3 @@ Learn more:
 
 * :doc:`Product - Bundle Documentation </bundles/SyliusProductBundle/index>`
 * :doc:`Product - Component Documentation </components/Product/index>`
-* :doc:`Variation- Bundle Documentation </bundles/SyliusVariationBundle/index>`
-* :doc:`Variation - Component Documentation </components/Variation/index>`

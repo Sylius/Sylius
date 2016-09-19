@@ -16,3 +16,11 @@ sylius:
         association:
             type: Association Type
             product: Associated Product
+        variant:
+            name: Name
+        option:
+            name: Name
+            values: Possible values
+        option_value:
+            add_value: Add value
+            value: Value

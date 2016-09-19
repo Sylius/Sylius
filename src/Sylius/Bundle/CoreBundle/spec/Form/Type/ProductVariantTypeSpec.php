@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
+use Sylius\Bundle\ProductBundle\Form\Type\VariantType;
 use Symfony\Component\Form\FormTypeInterface;
 
 final class ProductVariantTypeSpec extends ObjectBehavior

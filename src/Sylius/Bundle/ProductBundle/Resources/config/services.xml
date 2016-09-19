@@ -22,6 +22,15 @@
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
 
         <parameter key="sylius.form.listener.product_variant_generator.class">Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber</parameter>
+
+        <parameter key="sylius.event_subscriber.variation.load_metadata.class">Sylius\Bundle\ProductBundle\EventListener\LoadMetadataSubscriber</parameter>
+
+        <parameter key="sylius.validator.variant.unique.class">Sylius\Bundle\ProductBundle\Validator\VariantUniqueValidator</parameter>
+        <parameter key="sylius.validator.variant.combination.class">Sylius\Bundle\ProductBundle\Validator\VariantCombinationValidator</parameter>
+
+        <parameter key="sylius.generator.variant.class">Sylius\Component\Product\Generator\VariantGenerator</parameter>
+
+        <parameter key="sylius.variant_resolver.default.class">Sylius\Component\Product\Resolver\DefaultVariantResolver</parameter>
     </parameters>
 
     <services>
@@ -34,6 +43,28 @@
 
         <service id="sylius.form.listener.product_variant_generator" class="%sylius.form.listener.product_variant_generator.class%">
             <argument type="service" id="sylius.generator.variant" />
+        </service>
+
+        <service id="sylius.event_subscriber.variation.load_metadata" class="%sylius.event_subscriber.variation.load_metadata.class%">
+            <tag name="doctrine.event_subscriber" />
+            <argument>%sylius.variation.variables%</argument>
+        </service>
+
+        <service id="sylius.validator.variant.unique" class="%sylius.validator.variant.unique.class%">
+            <argument type="service" id="sylius.repository.variant" />
+            <tag name="validator.constraint_validator" alias="sylius.validator.variant.unique" />
+        </service>
+        <service id="sylius.validator.variant.combination" class="%sylius.validator.variant.combination.class%">
+            <tag name="validator.constraint_validator" alias="sylius.validator.variant.combination" />
+        </service>
+
+        <service id="sylius.generator.variant" class="%sylius.generator.variant.class%">
+            <argument type="service" id="sylius.factory.product_variant" />
+            <argument type="service" id="sylius.set_builder.cartesian" />
+        </service>
+
+        <service id="sylius.variant_resolver.default" class="%sylius.variant_resolver.default.class%">
+            <tag name="sylius.variant_resolver.default" type="default" />
         </service>
     </services>
 

@@ -41,7 +41,6 @@ Don't worry, everything was automatically installed via Composer.
             new Sylius\Bundle\ProductBundle\SyliusProductBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
-            new Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

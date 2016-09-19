@@ -142,6 +142,13 @@ sylius_product:
                     model: Sylius\Component\Core\Model\ProductTranslation
                     form:
                         default: Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType
+        product_variant:
+            classes:
+                model: Sylius\Component\Core\Model\ProductVariant
+                interface: Sylius\Component\Core\Model\ProductVariantInterface
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
 
 sylius_promotion:
     resources:
@@ -249,13 +256,3 @@ sylius_customer:
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\CustomerType
-
-sylius_variation:
-    resources:
-        product:
-            variant:
-                classes:
-                    model: Sylius\Component\Core\Model\ProductVariant
-                    repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
-                    form:
-                        default: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType

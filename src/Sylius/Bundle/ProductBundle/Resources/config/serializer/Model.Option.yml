@@ -1,3 +1,10 @@
 Sylius\Component\Product\Model\Option:
     exclusion_policy: ALL
     xml_root_name: option
+    properties:
+        code:
+            exopse: true
+            type: string
+        name:
+            expose: true
+            type: string

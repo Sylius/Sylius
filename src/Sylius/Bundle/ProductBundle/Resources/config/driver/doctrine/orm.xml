@@ -18,7 +18,7 @@
 
     <parameters>
         <parameter key="sylius.repository.product_attribute.class">Sylius\Bundle\AttributeBundle\Doctrine\ORM\AttributeRepository</parameter>
-        <parameter key="sylius.repository.product_option.class">Sylius\Bundle\VariationBundle\Doctrine\ORM\OptionRepository</parameter>
+        <parameter key="sylius.repository.product_option.class">Sylius\Bundle\ProductBundle\Doctrine\ORM\OptionRepository</parameter>
     </parameters>
 
 </container>

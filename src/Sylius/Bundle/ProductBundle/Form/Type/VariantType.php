@@ -11,24 +11,27 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
-use Sylius\Bundle\VariationBundle\Form\Type\VariantType as BaseVariantType;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ProductBundle\Form\EventListener\BuildVariantFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Product variant form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class VariantType extends BaseVariantType
+class VariantType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
+            ->add('name', 'text', [
+                'required' => false,
+                'label' => 'sylius.form.variant.name',
+            ])
             ->add('availableOn', 'datetime', [
                 'required' => false,
                 'date_widget' => 'single_text',
@@ -41,6 +44,17 @@ class VariantType extends BaseVariantType
                 'time_widget' => 'single_text',
                 'label' => 'sylius.form.product_variant.available_until',
             ])
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
+
+        $builder->addEventSubscriber(new BuildVariantFormSubscriber($builder->getFormFactory()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_product_variant';
     }
 }
