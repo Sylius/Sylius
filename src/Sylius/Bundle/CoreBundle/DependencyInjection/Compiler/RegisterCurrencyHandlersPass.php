@@ -30,7 +30,7 @@ final class RegisterCurrencyHandlersPass implements CompilerPassInterface
         }
 
         $compositeLocaleHandler = $container->findDefinition('sylius.handler.currency_change');
-        foreach ($container->findTaggedServiceIds('sylius.currency_change') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('sylius.currency.change_handler') as $id => $attributes) {
             $priority = isset($attributes[0]['priority']) ? (int) $attributes[0]['priority'] : 0;
 
             $compositeLocaleHandler->addMethodCall('addHandler', [new Reference($id), $priority]);

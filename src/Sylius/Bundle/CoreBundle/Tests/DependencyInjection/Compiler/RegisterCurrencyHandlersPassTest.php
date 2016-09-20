@@ -34,7 +34,7 @@ final class RegisterCurrencyHandlersPassTest extends AbstractCompilerPassTestCas
         $this->setDefinition('sylius.handler.currency_change', $compositeLocaleChangeHandler);
 
         $cartLocaleChangeHandler = new Definition(CartCurrencyChangeHandler::class);
-        $cartLocaleChangeHandler->addTag('sylius.currency_change');
+        $cartLocaleChangeHandler->addTag('sylius.currency.change_handler');
 
         $this->setDefinition('sylius.handler.currency_change.cart', $cartLocaleChangeHandler);
 
@@ -58,7 +58,7 @@ final class RegisterCurrencyHandlersPassTest extends AbstractCompilerPassTestCas
         $this->setDefinition('sylius.handler.currency_change', $compositeLocaleChangeHandler);
 
         $cartLocaleChangeHandler = new Definition(CartCurrencyChangeHandler::class);
-        $cartLocaleChangeHandler->addTag('sylius.currency_change', ['priority' => 5]);
+        $cartLocaleChangeHandler->addTag('sylius.currency.change_handler', ['priority' => 5]);
 
         $this->setDefinition('sylius.handler.currency_change.cart', $cartLocaleChangeHandler);
 

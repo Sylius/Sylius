@@ -18,13 +18,13 @@
         <service id="sylius.handler.locale_change.cart" class="Sylius\Bundle\CoreBundle\Handler\CartLocaleChangeHandler">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.manager.order" />
-            <tag name="sylius.locale_change" />
+            <tag name="sylius.locale.change_handler" />
         </service>
         <service id="sylius.handler.locale_change.shop" class="Sylius\Bundle\CoreBundle\Handler\ShopLocaleChangeHandler">
             <argument type="service" id="sylius.storage.locale" />
             <argument type="service" id="sylius.context.channel.composite" />
             <argument type="service" id="event_dispatcher" />
-            <tag name="sylius.locale_change" />
+            <tag name="sylius.locale.change_handler" />
         </service>
 
         <service id="sylius.handler.currency_change" class="Sylius\Component\Core\Currency\Handler\CompositeCurrencyChangeHandler" />
@@ -34,13 +34,13 @@
             <argument type="service" id="sylius.updater.order.exchange_rate" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="doctrine.orm.entity_manager" />
-            <tag name="sylius.currency_change" />
+            <tag name="sylius.currency.change_handler" />
         </service>
         <service id="sylius.handler.currency_change.shop" class="Sylius\Bundle\CoreBundle\Handler\ShopCurrencyChangeHandler">
             <argument type="service" id="sylius.storage.currency" />
             <argument type="service" id="sylius.context.channel.composite" />
             <argument type="service" id="event_dispatcher" />
-            <tag name="sylius.currency_change" />
+            <tag name="sylius.currency.change_handler" />
         </service>
     </services>
 </container>

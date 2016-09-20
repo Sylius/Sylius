@@ -34,7 +34,7 @@ final class RegisterLocaleHandlersPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('sylius.handler.locale_change', $compositeLocaleChangeHandler);
 
         $cartLocaleChangeHandler = new Definition(CartLocaleChangeHandler::class);
-        $cartLocaleChangeHandler->addTag('sylius.locale_change');
+        $cartLocaleChangeHandler->addTag('sylius.locale.change_handler');
 
         $this->setDefinition('sylius.handler.locale_change.cart', $cartLocaleChangeHandler);
 
@@ -58,7 +58,7 @@ final class RegisterLocaleHandlersPassTest extends AbstractCompilerPassTestCase
         $this->setDefinition('sylius.handler.locale_change', $compositeLocaleChangeHandler);
 
         $cartLocaleChangeHandler = new Definition(CartLocaleChangeHandler::class);
-        $cartLocaleChangeHandler->addTag('sylius.locale_change', ['priority' => 5]);
+        $cartLocaleChangeHandler->addTag('sylius.locale.change_handler', ['priority' => 5]);
 
         $this->setDefinition('sylius.handler.locale_change.cart', $cartLocaleChangeHandler);
 
