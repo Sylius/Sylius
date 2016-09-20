@@ -43,10 +43,9 @@
         </service>
         <service id="sylius.listener.image_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener">
             <argument type="service" id="sylius.image_uploader" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadImage" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadImage" />
         </service>
-
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder" />

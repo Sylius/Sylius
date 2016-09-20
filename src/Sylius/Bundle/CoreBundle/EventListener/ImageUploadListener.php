@@ -11,11 +11,14 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
+/**
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ */
 class ImageUploadListener
 {
     /**
@@ -34,26 +37,25 @@ class ImageUploadListener
     /**
      * @param GenericEvent $event
      */
-    public function uploadTaxonImage(GenericEvent $event)
+    public function uploadImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
-        Assert::isInstanceOf($subject, TaxonInterface::class);
+        Assert::isInstanceOf($subject, ImageAwareInterface::class);
 
-        $this->uploadTaxonImages($subject);
+        $this->uploadImages($subject);
     }
 
     /**
-     * @param TaxonInterface $taxon
+     * @param ImageAwareInterface $subject
      */
-    private function uploadTaxonImages(TaxonInterface $taxon)
+    private function uploadImages(ImageAwareInterface $subject)
     {
-        $images = $taxon->getImages();
+        $images = $subject->getImages();
         foreach ($images as $image) {
             if ($image->hasFile()) {
                 $this->uploader->upload($image);
             }
 
-            // Upload failed? Let's remove that image.
             if (null === $image->getPath()) {
                 $images->removeElement($image);
             }

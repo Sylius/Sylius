@@ -13,8 +13,8 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener;
+use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -32,25 +32,25 @@ final class ImageUploadListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener');
+        $this->shouldHaveType(ImageUploadListener::class);
     }
 
-    function it_uses_image_uploader_to_upload_taxon_images(
+    function it_uses_image_uploader_to_upload_images(
         GenericEvent $event,
-        TaxonInterface $taxon,
+        ImageAwareInterface $subject,
         ImageInterface $image,
         ImageUploaderInterface $uploader
     ) {
-        $event->getSubject()->willReturn($taxon);
-        $taxon->getImages()->willReturn([$image]);
+        $event->getSubject()->willReturn($subject);
+        $subject->getImages()->willReturn([$image]);
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('some_path');
         $uploader->upload($image)->shouldBeCalled();
 
-        $this->uploadTaxonImage($event);
+        $this->uploadImage($event);
     }
 
-    function it_throws_exception_if_event_subject_is_not_a_taxon(
+    function it_throws_exception_if_event_subject_is_not_an_image_aware(
         GenericEvent $event,
         \stdClass $object
     ) {
@@ -58,7 +58,7 @@ final class ImageUploadListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->duringUploadTaxonImage($event)
+            ->duringUploadImage($event)
         ;
     }
 }
