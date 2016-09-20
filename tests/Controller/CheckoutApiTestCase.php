@@ -40,7 +40,6 @@ class CheckoutApiTestCase extends JsonApiTestCase
     protected function addressOrder($orderId)
     {
         $this->loadFixturesFromFile('resources/countries.yml');
-        $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
         $data =
 <<<EOT
@@ -61,11 +60,14 @@ class CheckoutApiTestCase extends JsonApiTestCase
                 "city": "Groot Zundert",
                 "postcode": "88-888"
             },
-            "differentBillingAddress": true
+            "differentBillingAddress": true,
+            "customer": {
+                "email": "john@doe.com"
+            }
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $orderId, $customers['customer_Oliver']->getId());
+        $url = sprintf('/api/checkouts/addressing/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 

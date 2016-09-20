@@ -58,6 +58,7 @@ final class OrderContext implements Context
 
     /**
      * @Transform /^this order made by "([^"]+)"$/
+     * @Transform /^order placed by "([^"]+)"$/
      * @Transform /^the order of "([^"]+)"$/
      */
     public function getOrderByCustomer($email)

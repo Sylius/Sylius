@@ -81,6 +81,20 @@ final class EmailContext implements Context
     }
 
     /**
+     * @Then /^an email with the summary of (order placed by "([^"]+)") should be sent to him$/
+     */
+    public function anEmailWithOrderConfirmationShouldBeSentTo(OrderInterface $order)
+    {
+        $this->assertEmailContainsMessageTo(
+            sprintf(
+                'Your order no. %s has been successfully placed.',
+                $order->getNumber()
+            ),
+            $order->getCustomer()->getEmailCanonical()
+        );
+    }
+
+    /**
      * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)"$/
      */
     public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(OrderInterface $order, $recipient)

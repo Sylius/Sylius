@@ -133,6 +133,7 @@ sylius:
     email:
         order_confirmation:
             name: Order confirmation
+            content: Your order no. %number% has been successfully placed.<br/><br/>Thank you for shopping at our store!
         order_comment:
             name: Order comment
         shipment_confirmation:
