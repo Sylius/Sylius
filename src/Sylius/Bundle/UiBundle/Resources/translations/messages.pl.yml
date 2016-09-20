@@ -386,7 +386,7 @@ sylius:
         new_zone: Nowa strefa
         newest_products: Najnowsze produkty
         next: Następne
-        "no": false
+        no_label: false
         no_account: brak konta
         no_comment: Bez komentarza
         no_default_billing_address: Brak domyślnego adresu rozliczeniowego
@@ -597,7 +597,7 @@ sylius:
         warning: Ostrzeżenie
         welcome_to_our_store: Zapraszamy do naszego sklepu
         welcome_to_your_space: Witaj w swoim panelu
-        "yes": true
+        yes_label: true
         you_are_customer_since: Jesteś naszym klientem od
         you_have_no_addresses_defined: Nie masz ustawionych adresów
         you_have_no_new_orders: Brak nowych zamówień

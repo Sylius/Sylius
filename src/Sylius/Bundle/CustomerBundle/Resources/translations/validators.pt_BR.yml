@@ -2,12 +2,27 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    group:
+        name:
+            max: 'Nome do grupo não pode ter mais do que {{ limit }} caracteres.'
+            min: 'Nome do Grupo deve ter no mínimo {{ limit }} caracteres.'
+            not_blank: Informe o nome do Grupo.
     customer:
         first_name:
+            max: 'O campo nome não pode ser maior que {{ limit }} caracteres.'
+            min: 'Nome deve ter ao menos {{ limit }} caracteres.'
             not_blank: Por favor, digite seu nome.
         last_name:
+            max: 'Sobrenome não pode ser maior que {{ limit }} caracteres.'
+            min: 'Sobrenome deve ter no mínimo {{ limit }} caracteres.'
             not_blank: Por favor, digite seu sobrenome.
+        gender:
+            not_blank: Por favor, escolha o seu sexo.
         email:
+            already_used: Este email já está registrado, por favor realize o Login ou esqueceu sua senha.
+            max: 'Sobrenome não pode ser maior que {{ limit }} caracteres.'
+            min: 'Email deve ter ao menos {{ limit }} caracteres.'
             not_blank: Por favor, insira seu email.
             invalid: Este email é inválido.
+            unique: Este e-mail já está sendo usado.
             registered: Este email já está registrado, por favor realize o Login ou esqueceu sua senha.

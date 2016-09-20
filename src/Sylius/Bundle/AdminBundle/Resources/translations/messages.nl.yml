@@ -12,6 +12,7 @@ sylius:
                     products: Producten
                     taxons: Taxons
                 configuration:
+                    admin_users: Beheerders
                     channels: Kanalen
                     countries: Landen
                     currencies: "Valuta's"
@@ -33,5 +34,5 @@ sylius:
                     orders: Bestellingen
                 content:
                     header: Inhoud
-                    static_contents: Statische content
+                    static_contents: Statische inhoud
                     routes: Routes

@@ -17,7 +17,7 @@ sylius:
         members: Jäsenet
         message: Viesti
         next: Seuraava
-        "no": false
+        no_label: false
         parent: Vanhempi
         phone_number: Puhelinnumero
         postcode: Postinumero
@@ -26,4 +26,4 @@ sylius:
         street: Katuosoite
         topic: Aihe
         username: Käyttäjänimi
-        "yes": true
+        yes_label: true
