@@ -17,30 +17,38 @@ Feature: Receiving fixed discount on cart from coupon
         And I use coupon with code "SANTA2016"
         Then my cart total should be "$90.00"
         And my discount should be "-$10.00"
-        And I should be notified that the promotion coupon has been applied
 
     @ui
     Scenario: Receiving no discount from invalid coupon
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2011"
-        Then my cart total should be "$100.00"
+        Then I should be notified that the promotion coupon is invalid
+        And my cart total should be "$100.00"
         And there should be no discount
-        And I should be notified that the promotion coupon is invalid
 
     @ui
     Scenario: Receiving no discount from expired coupon
         Given this promotion coupon has already expired
         When I add product "PHP T-Shirt" to the cart
-        And I use coupon with code "SANTA2011"
-        Then my cart total should be "$100.00"
+        And I use coupon with code "SANTA2016"
+        Then I should be notified that the promotion coupon has expired
+        And my cart total should be "$100.00"
         And there should be no discount
-        And I should be notified that the promotion coupon has expired
 
     @ui
     Scenario: Receiving no discount from valid coupon from expired promotion
         Given this promotion has already expired
         When I add product "PHP T-Shirt" to the cart
-        And I use coupon with code "SANTA2011"
-        Then my cart total should be "$100.00"
+        And I use coupon with code "SANTA2016"
+        Then I should be notified that the promotion coupon has expired
+        And my cart total should be "$100.00"
         And there should be no discount
-        And I should be notified that the promotion coupon has expired
+
+    @ui
+    Scenario: Receiving no discount from valid coupon that has reached its usage limit
+        Given this promotion coupon has already reached its usage limit
+        When I add product "PHP T-Shirt" to the cart
+        And I use coupon with code "SANTA2016"
+        Then I should be notified that the promotion coupon has reached its usage limit
+        And my cart total should be "$100.00"
+        And there should be no discount

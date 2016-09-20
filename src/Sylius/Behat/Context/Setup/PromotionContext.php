@@ -130,8 +130,10 @@ final class PromotionContext implements Context
         $promotion->setCouponBased(true);
 
         $this->promotionRepository->add($promotion);
+
         $this->sharedStorage->set('promotion', $promotion);
         $this->sharedStorage->set('promotion_coupon', $coupon);
+        $this->sharedStorage->set('coupon', $coupon);
     }
 
     /**
@@ -150,6 +152,17 @@ final class PromotionContext implements Context
     public function thisPromotionCouponHasExpired(CouponInterface $coupon)
     {
         $coupon->setExpiresAt(new \DateTime('1 day ago'));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion coupon) has already reached its usage limit$/
+     */
+    public function thisPromotionCouponHasReachedItsUsageLimit(CouponInterface $coupon)
+    {
+        $coupon->setUsed(42);
+        $coupon->setUsageLimit(42);
 
         $this->objectManager->flush();
     }
