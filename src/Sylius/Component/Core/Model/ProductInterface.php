@@ -25,7 +25,8 @@ interface ProductInterface extends
     BaseProductInterface,
     TaxonsAwareInterface,
     ChannelsAwareInterface,
-    ReviewableInterface
+    ReviewableInterface,
+    ImageAwareInterface
 {
     /*
      * Variant selection methods.
@@ -97,14 +98,4 @@ interface ProductInterface extends
      * @return int
      */
     public function getPrice();
-
-    /**
-     * @return ImageInterface
-     */
-    public function getImage();
-
-    /**
-     * @return ImageInterface[]
-     */
-    public function getImages();
 }

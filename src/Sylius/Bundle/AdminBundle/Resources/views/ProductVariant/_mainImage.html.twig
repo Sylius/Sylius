@@ -1,3 +1,0 @@
-{% set path = product_variant.image is not null ? product_variant.image.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) : 'http://placehold.it/50x50' %}
-
-<img src="{{ path }}" alt="" class="ui bordered image" />

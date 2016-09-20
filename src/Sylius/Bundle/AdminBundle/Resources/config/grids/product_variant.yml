@@ -10,12 +10,6 @@ sylius_grid:
                         arguments:
                             productId: $productId
             fields:
-                image:
-                    type: twig
-                    label: sylius.ui.image
-                    path: .
-                    options:
-                        template: SyliusAdminBundle:ProductVariant/Field:image.html.twig
                 name:
                     type: twig
                     path: .

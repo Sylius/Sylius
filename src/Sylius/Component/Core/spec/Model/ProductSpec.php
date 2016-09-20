@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -22,6 +23,8 @@ use Sylius\Component\Product\Model\Product as SyliusProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
+ * @mixin Product
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -42,6 +45,11 @@ final class ProductSpec extends ObjectBehavior
     function it_implements_Sylius_core_product_interface()
     {
         $this->shouldImplement(ProductInterface::class);
+    }
+
+    function it_implements_image_aware_interface()
+    {
+        $this->shouldImplement(ImageAwareInterface::class);
     }
 
     function it_extends_Sylius_product_model()
@@ -131,21 +139,32 @@ final class ProductSpec extends ObjectBehavior
         $this->getPrice()->shouldReturn(null);
     }
 
-    function it_returns_first_variants_image_as_product_image(
-        ImageInterface $image,
-        VariantInterface $variant
-    ) {
-        $variant->getImage()->willReturn($image);
-        $this->addVariant($variant);
-
-        $this->getImage()->shouldReturn($image);
+    function it_initializes_image_collection_by_default()
+    {
+        $this->getImages()->shouldHaveType(Collection::class);
     }
 
-    function it_returns_null_as_product_image_if_product_has_no_variants(VariantInterface $variant)
+    function it_adds_an_image(ImageInterface $image)
     {
-        $variant->setProduct(null)->shouldBeCalled();
-        $this->removeVariant($variant);
+        $this->addImage($image);
+        $this->hasImages()->shouldReturn(true);
+        $this->hasImage($image)->shouldReturn(true);
+    }
 
-        $this->getImage()->shouldReturn(null);
+    function it_removes_an_image(ImageInterface $image)
+    {
+        $this->addImage($image);
+        $this->removeImage($image);
+        $this->hasImage($image)->shouldReturn(false);
+    }
+
+    function it_returns_an_image_by_code(ImageInterface $image)
+    {
+        $image->getCode()->willReturn('thumbnail');
+        $image->setOwner($this)->shouldBeCalled();
+
+        $this->addImage($image);
+
+        $this->getImageByCode('thumbnail')->shouldReturn($image);
     }
 }
