@@ -13,9 +13,10 @@ namespace spec\Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ImageAwareInterface;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\Taxon;
-use Sylius\Component\Core\Model\TaxonImageInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 
 /**
  * @mixin Taxon
@@ -34,29 +35,34 @@ final class TaxonSpec extends ObjectBehavior
         $this->shouldImplement(TaxonInterface::class);
     }
 
+    function it_implements_image_aware_interface()
+    {
+        $this->shouldImplement(ImageAwareInterface::class);
+    }
+
     function it_initializes_image_collection_by_default()
     {
         $this->getImages()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_an_image(TaxonImageInterface $image)
+    function it_adds_an_image(ImageInterface $image)
     {
         $this->addImage($image);
         $this->hasImages()->shouldReturn(true);
         $this->hasImage($image)->shouldReturn(true);
     }
 
-    function it_removes_an_image(TaxonImageInterface $image)
+    function it_removes_an_image(ImageInterface $image)
     {
         $this->addImage($image);
         $this->removeImage($image);
         $this->hasImage($image)->shouldReturn(false);
     }
 
-    function it_returns_an_image_by_code(TaxonImageInterface $image)
+    function it_returns_an_image_by_code(ImageInterface $image)
     {
         $image->getCode()->willReturn('thumbnail');
-        $image->setTaxon($this)->shouldBeCalled();
+        $image->setOwner($this)->shouldBeCalled();
 
         $this->addImage($image);
 

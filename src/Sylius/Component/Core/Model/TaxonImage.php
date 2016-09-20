@@ -11,47 +11,9 @@
 
 namespace Sylius\Component\Core\Model;
 
-class TaxonImage extends Image implements TaxonImageInterface
+/**
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ */
+class TaxonImage extends Image
 {
-    /**
-     * @var string
-     */
-    protected $code;
-
-    /**
-     * @var ProductVariantInterface
-     */
-    protected $taxon;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxon()
-    {
-        return $this->taxon;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTaxon(TaxonInterface $taxon = null)
-    {
-        $this->taxon = $taxon;
-    }
 }

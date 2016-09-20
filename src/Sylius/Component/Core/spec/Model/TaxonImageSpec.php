@@ -33,26 +33,4 @@ final class TaxonImageSpec extends ObjectBehavior
     {
         $this->shouldHaveType(Image::class);
     }
-
-    function it_does_not_have_a_taxon_by_default()
-    {
-        $this->getTaxon()->shouldReturn(null);
-    }
-
-    function its_taxon_is_mutable(TaxonInterface $taxon)
-    {
-        $this->setTaxon($taxon);
-        $this->getTaxon()->shouldReturn($taxon);
-    }
-
-    function it_does_not_have_a_code_by_default()
-    {
-        $this->getCode()->shouldReturn(null);
-    }
-
-    function its_code_is_mutable()
-    {
-        $this->setCode('thumbnail');
-        $this->getCode()->shouldReturn('thumbnail');
-    }
 }
