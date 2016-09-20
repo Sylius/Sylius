@@ -31,13 +31,13 @@ interface TableAccessorInterface
 
     /**
      * @param NodeElement $table
-     * @param string $columnName
+     * @param string $fieldName
      *
      * @return array
      *
      * @throws \InvalidArgumentException
      */
-    public function getIndexedColumn(NodeElement $table, $columnName);
+    public function getIndexedColumn(NodeElement $table, $fieldName);
 
     /**
      * @param NodeElement $table

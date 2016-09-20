@@ -596,7 +596,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theFirstOrderShouldHaveNumber($number)
     {
-        $actualNumber = $this->indexPage->getColumnFields('Number')[0];
+        $actualNumber = $this->indexPage->getColumnFields('number')[0];
 
         Assert::eq(
             $actualNumber,

@@ -1,7 +1,7 @@
 {% macro sortedHeader(definition, field, attributes, direction) %}
     {% from _self import getSortingLink %}
 
-    <th class="sortable sorted {{ 'asc' == direction ? 'ascending' : 'descending'}}">
+    <th class="sortable sorted {{ 'asc' == direction ? 'ascending' : 'descending'}} sylius-grid-column-{{ field.name }}">
         <a href="{{ getSortingLink(definition, field.name, attributes, direction) }}">{{ field.label|trans }}</a>
     </th>
 {% endmacro %}
@@ -9,7 +9,7 @@
 {% macro sortableHeader(definition, field, attributes, direction) %}
     {% from _self import getSortingLink %}
 
-    <th class="sortable"><a href="{{ getSortingLink(definition, field.name, attributes, 'asc') }}">{{ field.label|trans }}<i class="sort icon"></i></a></th>
+    <th class="sortable sylius-grid-column-{{ field.name }}"><a href="{{ getSortingLink(definition, field.name, attributes, 'asc') }}">{{ field.label|trans }}<i class="sort icon"></i></a></th>
 {% endmacro %}
 
 {% macro getSortingLink(definition, fieldName, attributes, direction) %}
