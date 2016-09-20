@@ -25,7 +25,7 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
      */
     public function getOnHandQuantityFor(ProductVariantInterface $productVariant)
     {
-        return (int) $this->getElement('onHandQuantity', ['%id%' => $productVariant->getId()])->getText();
+        return (int) $this->getElement('on_hand_quantity', ['%id%' => $productVariant->getId()])->getText();
     }
 
     /**
@@ -34,7 +34,7 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
     public function getOnHoldQuantityFor(ProductVariantInterface $productVariant)
     {
         try {
-            return (int) $this->getElement('onHoldQuantity', ['%id%' => $productVariant->getId()])->getText();
+            return (int) $this->getElement('on_hold_quantity', ['%id%' => $productVariant->getId()])->getText();
         } catch (ElementNotFoundException $exception) {
             return 0;
         }
@@ -46,8 +46,8 @@ final class IndexPage extends BaseIndexPage implements IndexPageInterface
     public function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'onHandQuantity' => '.onHand[data-product-variant-id="%id%"]',
-            'onHoldQuantity' => '.onHold[data-product-variant-id="%id%"]',
+            'on_hand_quantity' => '.onHand[data-product-variant-id="%id%"]',
+            'on_hold_quantity' => '.onHold[data-product-variant-id="%id%"]',
         ]);
     }
 }

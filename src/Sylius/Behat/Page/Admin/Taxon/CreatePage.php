@@ -127,11 +127,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_taxon_code',
+            'description' => '#sylius_taxon_translations_en_US_description',
             'images' => '#sylius_taxon_images',
             'name' => '#sylius_taxon_translations_en_US_name',
             'parent' => '#sylius_taxon_parent',
             'permalink' => '#sylius_taxon_translations_en_US_permalink',
-            'description' => '#sylius_taxon_translations_en_US_description',
             'tree' => '.ui.list',
         ]);
     }

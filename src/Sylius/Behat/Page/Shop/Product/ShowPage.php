@@ -105,11 +105,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $message = sprintf('%s does not have sufficient stock.', $product->getName());
 
-        if (!$this->hasElement('validation-errors')) {
+        if (!$this->hasElement('validation_errors')) {
             return false;
         }
 
-        return $this->getElement('validation-errors')->getText() === $message;
+        return $this->getElement('validation_errors')->getText() === $message;
     }
 
     /**
@@ -117,7 +117,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function waitForValidationErrors($timeout)
     {
-        $errorsContainer = $this->getElement('selecting-variants');
+        $errorsContainer = $this->getElement('selecting_variants');
 
         $this->getDocument()->waitFor($timeout, function () use ($errorsContainer) {
             return false !== $errorsContainer->has('css', '[class ~="sylius-validation-error"]');
@@ -137,7 +137,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function isOutOfStock()
     {
-        return $this->hasElement('out-of-stock');
+        return $this->hasElement('out_of_stock');
     }
 
     /**
@@ -164,10 +164,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_merge(parent::getDefinedElements(), [
             'attributes' => '#sylius-product-attributes',
             'name' => '#sylius-product-name',
-            'out-of-stock' => '#sylius-product-out-of-stock',
+            'out_of_stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
-            'selecting-variants' => "#sylius-product-selecting-variant",
-            'validation-errors' => '.sylius-validation-error'
+            'selecting_variants' => "#sylius-product-selecting-variant",
+            'validation_errors' => '.sylius-validation-error'
         ]);
     }
 }

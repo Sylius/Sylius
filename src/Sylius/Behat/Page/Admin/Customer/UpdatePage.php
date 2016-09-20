@@ -26,8 +26,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function getFullName()
     {
-        $firstNameElement = $this->getElement('first name')->getValue();
-        $lastNameElement = $this->getElement('last name')->getValue();
+        $firstNameElement = $this->getElement('first_name')->getValue();
+        $lastNameElement = $this->getElement('last_name')->getValue();
 
         return sprintf('%s %s', $firstNameElement, $lastNameElement);
     }
@@ -45,7 +45,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function getFirstName()
     {
-        return $this->getElement('first name')->getValue();
+        return $this->getElement('first_name')->getValue();
     }
 
     /**
@@ -61,7 +61,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function getLastName()
     {
-        return $this->getElement('last name')->getValue();
+        return $this->getElement('last_name')->getValue();
     }
 
     /**
@@ -116,9 +116,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_customer_email',
-            'first name' => '#sylius_customer_firstName',
-            'last name' => '#sylius_customer_lastName',
             'enabled' => '#sylius_customer_user_enabled',
+            'first_name' => '#sylius_customer_firstName',
+            'last_name' => '#sylius_customer_lastName',
             'password' => '#sylius_customer_user_password',
         ]);
     }

@@ -172,13 +172,13 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_channel_code',
             'currencies' => '#sylius_channel_currencies',
-            'tax_calculation_strategy' => '#sylius_channel_taxCalculationStrategy',
             'default_tax_zone' => '#sylius_channel_defaultTaxZone',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
             'name' => '#sylius_channel_name',
             'payment_methods' => '#sylius_channel_paymentMethods',
             'shipping_methods' => '#sylius_channel_shippingMethods',
+            'tax_calculation_strategy' => '#sylius_channel_taxCalculationStrategy',
         ]);
     }
 }

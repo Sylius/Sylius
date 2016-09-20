@@ -110,14 +110,14 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'dropdown' => 'i.dropdown',
-            'logout' => '#sylius-logout-button',
-            'total_sales' => '#total-sales',
-            'new_orders' => '#new-orders',
-            'new_customers' => '#new-customers',
             'average_order_value' => '#average-order-value',
             'customer_list' => '#customers',
+            'dropdown' => 'i.dropdown',
+            'logout' => '#sylius-logout-button',
+            'new_customers' => '#new-customers',
+            'new_orders' => '#new-orders',
             'order_list' => '#orders',
+            'total_sales' => '#total-sales',
         ]);
     }
 }

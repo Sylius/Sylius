@@ -208,27 +208,27 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_first_name' => '#sylius_checkout_address_billingAddress_firstName',
-            'billing_last_name' => '#sylius_checkout_address_billingAddress_lastName',
-            'billing_street' => '#sylius_checkout_address_billingAddress_street',
+            'billing_city' => '#sylius_checkout_address_billingAddress_city',
             'billing_country' => '#sylius_checkout_address_billingAddress_countryCode',
             'billing_country_province' => '[name="sylius_checkout_address[billingAddress][provinceCode]"]',
-            'billing_city' => '#sylius_checkout_address_billingAddress_city',
+            'billing_first_name' => '#sylius_checkout_address_billingAddress_firstName',
+            'billing_last_name' => '#sylius_checkout_address_billingAddress_lastName',
             'billing_postcode' => '#sylius_checkout_address_billingAddress_postcode',
+            'billing_street' => '#sylius_checkout_address_billingAddress_street',
             'checkout_subtotal' => '#checkout-subtotal',
             'customer_email' => '#sylius_checkout_address_customer_email',
             'different_billing_address' => '#sylius_checkout_address_differentBillingAddress',
             'different_billing_address_label' => '#sylius_checkout_address_differentBillingAddress ~ label',
-            'shipping_first_name' => '#sylius_checkout_address_shippingAddress_firstName',
-            'shipping_last_name' => '#sylius_checkout_address_shippingAddress_lastName',
-            'shipping_street' => '#sylius_checkout_address_shippingAddress_street',
+            'login_button' => '#sylius-api-login-submit',
+            'login_password' => 'input[type=\'password\']',
+            'next_step' => '#next-step',
+            'shipping_city' => '#sylius_checkout_address_shippingAddress_city',
             'shipping_country' => '#sylius_checkout_address_shippingAddress_countryCode',
             'shipping_country_province' => '[name="sylius_checkout_address[shippingAddress][provinceCode]"]',
-            'shipping_city' => '#sylius_checkout_address_shippingAddress_city',
+            'shipping_first_name' => '#sylius_checkout_address_shippingAddress_firstName',
+            'shipping_last_name' => '#sylius_checkout_address_shippingAddress_lastName',
             'shipping_postcode' => '#sylius_checkout_address_shippingAddress_postcode',
-            'next_step' => '#next-step',
-            'login_password' => 'input[type=\'password\']',
-            'login_button' => '#sylius-api-login-submit',
+            'shipping_street' => '#sylius_checkout_address_shippingAddress_street',
         ]);
     }
 

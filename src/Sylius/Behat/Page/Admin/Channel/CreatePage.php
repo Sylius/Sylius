@@ -128,12 +128,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_channel_code',
-            'enabled' => '#sylius_channel_enabled',
-            'name' => '#sylius_channel_name',
-            'default_currency' => '#sylius_channel_defaultCurrency',
             'currencies' => '#sylius_channel_currencies',
+            'default_currency' => '#sylius_channel_defaultCurrency',
             'default_locale' => '#sylius_channel_defaultLocale',
+            'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
+            'name' => '#sylius_channel_name',
         ]);
     }
 }
