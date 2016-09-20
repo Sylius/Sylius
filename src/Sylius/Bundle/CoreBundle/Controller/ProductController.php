@@ -15,9 +15,7 @@ use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\ResourceActions;
-use Sylius\Component\Variation\Model\OptionValueInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -54,11 +52,8 @@ class ProductController extends ResourceController
      *
      * @return View
      */
-    private function prepareHtmlRequestView(
-        ProductInterface $resource,
-        RequestConfiguration $configuration,
-        View $view
-    ) {
+    private function prepareHtmlRequestView(ProductInterface $resource, RequestConfiguration $configuration, View $view)
+    {
         $templateData = [
             'configuration' => $configuration,
             'metadata' => $this->metadata,
@@ -84,23 +79,11 @@ class ProductController extends ResourceController
      */
     private function getVariantsPrices(ProductInterface $product)
     {
-        $variantsPrices = [];
-
         if (ProductInterface::VARIANT_SELECTION_MATCH === $product->getVariantSelectionMethod()) {
-            /** @var ProductVariantInterface $variant */
-            foreach ($product->getVariants() as $variant) {
-                $optionMap = [];
-                /** @var OptionValueInterface $option */
-                foreach ($variant->getOptions() as $option) {
-                    $optionMap[$option->getOption()->getCode()] = $option->getValue();
-                }
-
-                $optionMap['value'] = $variant->getPrice();
-
-                $variantsPrices[] = $optionMap;
-            }
+            return $this
+                ->get('sylius.provider.product_variants_prices')
+                ->provideVariantsPrices($product)
+            ;
         }
-
-        return $variantsPrices;
     }
 }

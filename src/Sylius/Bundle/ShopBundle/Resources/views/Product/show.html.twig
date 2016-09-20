@@ -22,7 +22,9 @@
             <p>{{ product.shortDescription }}</p>
         </div>
         <div class="ui segment">
-            {% include '@SyliusShop/Product/Show/_variantsPrices.html.twig' with { 'variantsPrices': variantsPrices } %}
+            {% if variantsPrices is defined %}
+                {% include '@SyliusShop/Product/Show/_variantsPrices.html.twig' with { 'variantsPrices': variantsPrices } %}
+            {% endif %}
             {% include '@SyliusShop/Product/Show/_inventory.html.twig' %}
         </div>
         <div class="ui hidden divider"></div>
