@@ -17,7 +17,7 @@ How to add a country?
 To give you a better insight into Countries, let's have a look on how to prepare and add a Country to the system programmatically.
 We will do it with a province at once.
 
-You will need factories for countries and for provinces for creating them:
+You will need factories for countries and provinces in order to create them:
 
 .. code-block:: php
 
@@ -61,7 +61,7 @@ Finally you will need a repository for countries to add the country to your syst
 
     $countryRepository->add($country);
 
-From now on the country will be available to use in your system
+From now on the country will be available to use in your system.
 
 Learn more
 ----------

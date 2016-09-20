@@ -1,7 +1,9 @@
 Customizing Controllers
 =======================
 
-All **Sylius** resources are using the `` Sylius\Bundle\ResourceBundle\Controller\ResourceController`` as default, but some of them have been already extended in Bundles.
+All **Sylius** resources are using the
+`Sylius/Bundle/ResourceBundle/Controller/ResourceController <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ResourceBundle/Controller/ResourceController.php>`_
+as default, but some of them have been already extended in Bundles.
 If you want to override some controller action, check which controller you should be extending.
 
 .. note::

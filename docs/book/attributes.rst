@@ -79,7 +79,7 @@ Finally let's find a product that will have your newly created attribute.
 
    $product->addAttribute($hardcover);
 
-Now let's see what ahs to be done if you would like to add an attribute of ``integer`` type. Let's find such a one in the repository,
+Now let's see what has to be done if you would like to add an attribute of ``integer`` type. Let's find such a one in the repository,
 it will be for example the ``BOOK-PAGES`` attribute.
 
 .. code-block:: php

@@ -4,7 +4,6 @@ Symfony Bundles
 .. toctree::
     :hidden:
 
-    general/index
     SyliusAddressingBundle/index
     SyliusAttributeBundle/index
     SyliusCartBundle/index

@@ -73,7 +73,8 @@ We cannot create a Payment without an Order, therefore let's assume that you hav
 Payment Methods
 ---------------
 
-A [PaymentMethod] represents a way that your customer pays during the checkout process. It holds a reference to a specific *gateway* with custom configuration.
+A **PaymentMethod** represents a way that your customer pays during the checkout process.
+It holds a reference to a specific ``gateway`` with custom configuration.
 You can have different payment methods using the same gateway, like PayPal or Stripe.
 
 How to create a PaymentMethod programmatically?
@@ -129,8 +130,8 @@ It can provide valuable information when debugging the payment process.
 PayPal Error Code 10409
 -----------------------
 
-The 10409 code lso known as the *"Checkout token was issued for a merchant account other than yours"* error.
-You have most likely changed the PayPal credentials from *config.yml* during the checkout process. Clear the cache and try again:
+The 10409 code, also known as the *"Checkout token was issued for a merchant account other than yours"* error.
+You have most likely changed the PayPal credentials from ``config.yml`` during the checkout process. Clear the cache and try again:
 
 .. code-block:: bash
 

@@ -1,7 +1,7 @@
 Forms
 =====
 
-The bundle ships with a set of useful form types for all models. You can use the defaults or :doc:`override them </bundles/general/overriding_forms>` with your own forms.
+The bundle ships with a set of useful form types for all models. You can use the defaults or :doc:`override them </customization/form>` with your own forms.
 
 Product form
 ------------
@@ -85,4 +85,4 @@ There are a few more form types, which can become useful when integrating the bu
 
 ``sylius_product_to_identifier`` can be used to render a text field, which will transform the value into a product.
 
-**If you need to customize existing fields or add your own, please read the** :doc:`overriding forms chapter </bundles/general/overriding_forms>`.
+**If you need to customize existing fields or add your own, please read the** :doc:`overriding forms chapter </customization/form>`.

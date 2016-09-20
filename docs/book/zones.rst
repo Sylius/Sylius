@@ -47,7 +47,7 @@ Now give it a code, name and type:
     // available types are the type constants from the ZoneInterface
     $zone->setType(ZoneInterface::TYPE_PROVINCE);
 
-Finally get the zones repository from the container nd add the newly created zone to the system
+Finally get the zones repository from the container and add the newly created zone to the system.
 
 .. code-block:: php
 
