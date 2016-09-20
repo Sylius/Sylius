@@ -538,6 +538,6 @@ final class ProductContext implements Context
      */
     private function convertToCode($productName)
     {
-        return StringInflector::nameToUpercaseCode($productName);
+        return StringInflector::nameToUppercaseCode($productName);
     }
 }
