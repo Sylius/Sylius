@@ -11,32 +11,32 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\PromotionBundle\Form\DataTransformer\CouponToCodeTransformer;
+use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Component\Promotion\Model\CouponInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Coupon to code type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class CouponToCodeType extends AbstractType
+class CouponToCodeType extends AbstractType implements DataTransformerInterface
 {
     /**
-     * @var CouponToCodeTransformer
+     * @var ObjectRepository
      */
-    protected $couponToCodeTransformer;
+    private $couponRepository;
 
     /**
-     * See CouponType description for information about data class.
-     *
-     * @param CouponToCodeTransformer $couponToCodeTransformer
+     * @param ObjectRepository $couponRepository
      */
-    public function __construct(CouponToCodeTransformer $couponToCodeTransformer)
+    public function __construct(ObjectRepository $couponRepository)
     {
-        $this->couponToCodeTransformer = $couponToCodeTransformer;
+        $this->couponRepository = $couponRepository;
     }
 
     /**
@@ -44,7 +44,7 @@ class CouponToCodeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addModelTransformer($this->couponToCodeTransformer);
+        $builder->addModelTransformer($this);
     }
 
     /**
@@ -56,8 +56,45 @@ class CouponToCodeType extends AbstractType
             ->setDefaults([
                 'data_class' => null,
                 'label' => 'sylius.ui.code',
+                'validation_groups' => function (FormInterface $form) {
+                    $groups = ['sylius']; // Regular validation groups
+
+                    if ((bool) $form->getData()) { // Validate the coupon if it was sent
+                        $groups[] = 'sylius_promotion_coupon';
+                    }
+
+                    return $groups;
+                }
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function transform($coupon)
+    {
+        if (null === $coupon) {
+            return '';
+        }
+
+        if (!$coupon instanceof CouponInterface) {
+            throw new UnexpectedTypeException($coupon, CouponInterface::class);
+        }
+
+        return $coupon->getCode();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reverseTransform($code)
+    {
+        if (!$code) {
+            return null;
+        }
+
+        return $this->couponRepository->findOneBy(['code' => $code]);
     }
 
     /**
