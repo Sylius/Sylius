@@ -135,6 +135,15 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function selectOption($optionName, $optionValue)
+    {
+        $optionElement = $this->getElement('option_select', ['%option-name%' => strtoupper($optionName)]);
+        $optionElement->selectOption($optionValue);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isOutOfStock()
     {
         return $this->hasElement('out_of_stock');
