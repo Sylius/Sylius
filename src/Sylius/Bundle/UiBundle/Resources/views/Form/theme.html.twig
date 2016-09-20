@@ -169,12 +169,14 @@
     </div>
 {% endblock %}
 
-{% block sylius_image_widget %}
+{% block sylius_product_image_widget %}
     <div class="ui upload box segment">
+        {{ form_row(form.code) }}
         {% if form.vars.value.path|default(null) is null %}
             <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file'|trans }}</label>
         {% else %}
-            <img class="ui small bordered image" src="{{ form.vars.value.path|imagine_filter('sylius_small') }}" alt="" />
+            <img class="ui small bordered image" src="{{ form.vars.value.path|imagine_filter('sylius_small') }}" alt="{{ form.vars.value.code }}" />
+            <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.change_file'|trans }}</label>
         {% endif %}
         <div class="ui hidden element">
             {{ form_widget(form.file) }}

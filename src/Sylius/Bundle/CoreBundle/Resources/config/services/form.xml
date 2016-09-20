@@ -13,6 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
+        <parameter key="sylius.form.type.product_image.class">Sylius\Bundle\CoreBundle\Form\Type\ProductImageType</parameter>
         <parameter key="sylius.form.type.taxon_image.class">Sylius\Bundle\CoreBundle\Form\Type\TaxonImageType</parameter>
         <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
         <parameter key="sylius.form.type.locale.class">Sylius\Bundle\CoreBundle\Form\Type\LocaleType</parameter>
@@ -35,6 +36,10 @@
     </parameters>
 
     <services>
+        <service id="sylius.form.type.product_image" class="%sylius.form.type.product_image.class%">
+            <argument>%sylius.model.product_image.class%</argument>
+            <tag name="form.type" alias="sylius_product_image" />
+        </service>
         <service id="sylius.form.type.taxon_image" class="%sylius.form.type.taxon_image.class%">
             <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="form.type" alias="sylius_taxon_image" />
