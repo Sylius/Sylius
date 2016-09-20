@@ -48,13 +48,13 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     {
         $this->clickAttributesTabIfItsNotActive();
 
-        $attributeOption = $this->getElement('attributes-choice')->find('css', sprintf('option:contains("%s")', $attribute));
+        $attributeOption = $this->getElement('attributes_choice')->find('css', sprintf('option:contains("%s")', $attribute));
         $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
 
         $this->getDocument()->pressButton('Add attributes');
         $this->waitForFormElement();
 
-        $this->getElement('attribute-value', ['%attribute%' => $attribute])->setValue($value);
+        $this->getElement('attribute_value', ['%attribute%' => $attribute])->setValue($value);
     }
 
     /**
@@ -64,7 +64,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     {
         $this->clickAttributesTabIfItsNotActive();
 
-        $this->getElement('attribute-delete-button', ['%attribute%' => $attribute])->press();
+        $this->getElement('attribute_delete_button', ['%attribute%' => $attribute])->press();
     }
 
     /**
@@ -81,9 +81,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'attribute-value' => '.attribute .label:contains("%attribute%") ~ input',
-            'attribute-delete-button' => '.attribute .label:contains("%attribute%") ~ button',
-            'attributes-choice' => 'select[name="sylius_product_attribute_choice"]',
+            'attribute_delete_button' => '.attribute .label:contains("%attribute%") ~ button',
+            'attribute_value' => '.attribute .label:contains("%attribute%") ~ input',
+            'attributes_choice' => 'select[name="sylius_product_attribute_choice"]',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
             'name' => '#sylius_product_translations_en_US_name',

@@ -128,12 +128,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements()
     {
         return [
-            'starts_at' => '#sylius_promotion_startsAt',
-            'ends_at' => '#sylius_promotion_endsAt',
             'actions' => '#sylius_promotion_actions',
             'code' => '#sylius_promotion_code',
+            'ends_at' => '#sylius_promotion_endsAt',
             'name' => '#sylius_promotion_name',
             'rules' => '#sylius_promotion_rules',
+            'starts_at' => '#sylius_promotion_startsAt',
         ];
     }
 

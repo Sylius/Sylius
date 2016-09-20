@@ -114,8 +114,8 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             'next_step' => '#next-step',
             'order_cannot_be_shipped_message' => '#sylius-order-cannot-be-shipped',
             'shipping_method' => '[name="sylius_checkout_select_shipping[shipments][0][method]"]',
-            'shipping_method_option' => '.item:contains("%shipping_method%") input',
             'shipping_method_fee' => '.item:contains("%shipping_method%") .fee',
+            'shipping_method_option' => '.item:contains("%shipping_method%") input',
         ]);
     }
 }

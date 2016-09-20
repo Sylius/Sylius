@@ -362,6 +362,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'billing_address' => '#billing-address',
             'customer' => '#customer',
             'items_total' => '#items-total',
+            'order_notes' => '#sylius-order-notes',
+            'order_state' => 'div.sub.header > span.ui.label',
             'payments' => '#payments',
             'promotion_discounts' => '#promotion-discounts',
             'promotion_total' => '#promotion-total',
@@ -373,8 +375,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'tax_total' => '#tax-total',
             'taxes' => '#taxes',
             'total' => '#total',
-            'order_state' => 'div.sub.header > span.ui.label',
-            'order_notes' => '#sylius-order-notes',
         ]);
     }
 

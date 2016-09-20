@@ -53,10 +53,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'name' => '#sylius_admin_user_username',
             'email' => '#sylius_admin_user_email',
-            'password' => '#sylius_admin_user_plainPassword',
             'enabled' => '#sylius_admin_user_enabled',
+            'name' => '#sylius_admin_user_username',
+            'password' => '#sylius_admin_user_plainPassword',
         ]);
     }
 }

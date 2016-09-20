@@ -48,10 +48,10 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'username' => '#sylius_admin_user_username',
             'email' => '#sylius_admin_user_email',
-            'password' => '#sylius_admin_user_plainPassword',
             'enabled' => '#sylius_admin_user_enabled',
+            'password' => '#sylius_admin_user_plainPassword',
+            'username' => '#sylius_admin_user_username',
         ]);
     }
 }

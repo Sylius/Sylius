@@ -126,11 +126,11 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return array_merge(parent::getDefinedElements(), [
             'attribute' => '.attribute .label:contains("%attribute%") ~ input',
             'code' => '#sylius_product_code',
-            'price' => '#sylius_product_variant_price',
             'name' => '#sylius_product_translations_en_US_name',
-            'tab' => '.menu [data-tab="%name%"]',
+            'price' => '#sylius_product_variant_price',
             'search' => '.ui.fluid.search.selection.dropdown',
             'search_item_selected' => 'div.menu > div.item.selected',
+            'tab' => '.menu [data-tab="%name%"]',
             'taxonomy' => 'a[data-tab="taxonomy"]',
             'tracked' => '#sylius_product_variant_tracked',
         ]);

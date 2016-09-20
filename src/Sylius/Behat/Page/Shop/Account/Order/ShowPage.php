@@ -155,11 +155,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'billing_address' => '#billing-address',
             'number' => '#number',
             'order_items' => '#sylius-order',
+            'payments' => '#payments',
+            'product_price' => '#sylius-order td:nth-child(2)',
             'shipping_address' => '#shipping-address',
             'subtotal' => '#subtotal',
             'total' => '#total',
-            'payments' => '#payments',
-            'product_price' => '#sylius-order td:nth-child(2)'
         ]);
     }
 

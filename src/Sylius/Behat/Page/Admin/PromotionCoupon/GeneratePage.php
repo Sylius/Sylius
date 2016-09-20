@@ -98,10 +98,10 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'amount' => '#sylius_promotion_coupon_generate_instruction_amount',
-            'usage_limit' => '#sylius_promotion_coupon_generate_instruction_usageLimit',
-            'expires_at' => '#sylius_promotion_coupon_generate_instruction_expiresAt',
             'code_length' => '#sylius_promotion_coupon_generate_instruction_codeLength',
+            'expires_at' => '#sylius_promotion_coupon_generate_instruction_expiresAt',
             'form' => '.two.column.stackable.grid',
+            'usage_limit' => '#sylius_promotion_coupon_generate_instruction_usageLimit',
         ]);
     }
 

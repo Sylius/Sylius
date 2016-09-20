@@ -54,26 +54,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function getToggleableElement()
-    {
-        return $this->getElement('enabled');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getDefinedElements()
-    {
-        return array_merge(parent::getDefinedElements(), [
-            'enabled' => '#sylius_country_enabled',
-            'code' => '#sylius_country_code',
-            'provinces' => '#sylius_country_provinces',
-        ]);
-    }
-
-    /**
      * @param string $provinceName
      */
     public function removeProvince($provinceName)
@@ -165,6 +145,26 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         return $foundElement->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getToggleableElement()
+    {
+        return $this->getElement('enabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_country_code',
+            'enabled' => '#sylius_country_enabled',
+            'provinces' => '#sylius_country_provinces',
+        ]);
     }
 
     /**

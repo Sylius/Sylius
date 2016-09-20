@@ -90,11 +90,11 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
         return array_merge(parent::getDefinedElements(), [
             'address_step_label' => '.steps a:contains("Address")',
             'checkout_subtotal' => '#checkout-subtotal',
-            'shipping_step_label' => '.steps a:contains("Shipping")',
             'next_step' => '#next-step',
             'order_cannot_be_paid_message' => '#sylius-order-cannot-be-paid',
             'payment_method' => '[name="sylius_checkout_select_payment[payments][0][method]"]',
             'payment_method_option' => '.item:contains("%payment_method%") input',
+            'shipping_step_label' => '.steps a:contains("Shipping")',
         ]);
     }
 }
