@@ -132,7 +132,10 @@ final class BookProductFixture extends AbstractFixture
                     'book_isbn' => $this->faker->isbn13,
                     'book_pages' => $this->faker->numberBetween(42, 1024),
                 ],
-                'images' => [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg')],
+                'images' => [
+                    'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'),
+                    'thumbnail' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg'),
+                ],
             ];
         }
 

@@ -13,8 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantImageInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -52,7 +52,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     /**
      * @var FactoryInterface
      */
-    private $productVariantImageFactory;
+    private $productImageFactory;
 
     /**
      * @var ImageUploaderInterface
@@ -79,7 +79,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
      * @param FactoryInterface $productVariantFactory
      * @param ProductVariantGeneratorInterface $variantGenerator
      * @param FactoryInterface $productAttributeValueFactory
-     * @param FactoryInterface $productVariantImageFactory
+     * @param FactoryInterface $productImageFactory
      * @param ImageUploaderInterface $imageUploader
      * @param RepositoryInterface $taxonRepository
      * @param RepositoryInterface $productAttributeRepository
@@ -92,7 +92,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         FactoryInterface $productVariantFactory,
         ProductVariantGeneratorInterface $variantGenerator,
         FactoryInterface $productAttributeValueFactory,
-        FactoryInterface $productVariantImageFactory,
+        FactoryInterface $productImageFactory,
         ImageUploaderInterface $imageUploader,
         RepositoryInterface $taxonRepository,
         RepositoryInterface $productAttributeRepository,
@@ -103,7 +103,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         $this->productFactory = $productFactory;
         $this->productVariantFactory = $productVariantFactory;
         $this->variantGenerator = $variantGenerator;
-        $this->productVariantImageFactory = $productVariantImageFactory;
+        $this->productImageFactory = $productImageFactory;
         $this->imageUploader = $imageUploader;
         $this->localeRepository = $localeRepository;
 
@@ -230,17 +230,18 @@ final class ProductExampleFactory implements ExampleFactoryInterface
             $productVariant->setCode(sprintf('%s-variant#%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
 
-            foreach ($options['images'] as $imagePath) {
-                /** @var ProductVariantImageInterface $productVariantImage */
-                $productVariantImage = $this->productVariantImageFactory->createNew();
-                $productVariantImage->setFile(new UploadedFile($imagePath, basename($imagePath)));
-
-                $this->imageUploader->upload($productVariantImage);
-
-                $productVariant->addImage($productVariantImage);
-            }
-
             ++$i;
+        }
+
+        foreach ($options['images'] as $imageCode => $imagePath) {
+            /** @var ImageInterface $productImage */
+            $productImage = $this->productImageFactory->createNew();
+            $productImage->setCode($imageCode);
+            $productImage->setFile(new UploadedFile($imagePath, basename($imagePath)));
+
+            $this->imageUploader->upload($productImage);
+
+            $product->addImage($productImage);
         }
 
         return $product;
