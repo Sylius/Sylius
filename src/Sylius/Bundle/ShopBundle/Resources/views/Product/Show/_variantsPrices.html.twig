@@ -1,0 +1,5 @@
+<div id="variantsPrices">
+{% for variantPrice in variantsPrices %}
+    <div {% for option, value in variantPrice %}data-{{ option }}="{% if option == 'value' %}{{ value|sylius_price }}{% else %}{{ value }}{% endif %}" {% endfor %}></div>
+{% endfor %}
+</div>

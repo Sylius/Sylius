@@ -1,3 +1,3 @@
 {% for option_form in form.variant %}
-    {{ form_row(option_form) }}
+    {{ form_row(option_form, { 'attr': { 'data-option': option_form.vars.name } }) }}
 {% endfor %}

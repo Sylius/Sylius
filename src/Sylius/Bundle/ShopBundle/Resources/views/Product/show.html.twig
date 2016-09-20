@@ -22,6 +22,7 @@
             <p>{{ product.shortDescription }}</p>
         </div>
         <div class="ui segment">
+            {% include '@SyliusShop/Product/Show/_variantsPrices.html.twig' with { 'variantsPrices': variantsPrices } %}
             {% include '@SyliusShop/Product/Show/_inventory.html.twig' %}
         </div>
         <div class="ui hidden divider"></div>
@@ -36,4 +37,29 @@
 {% include '@SyliusShop/Product/Show/_tabs.html.twig' %}
 
 {% include '@SyliusShop/Product/Show/_associations.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script>
+        $(document).ready(function() {
+            if ($('#variantsPrices').length > 0) {
+                $('[name*="sylius_cart_item[variant]"]').on('change', function() {
+                    $selector = '';
+
+                    $('#sylius-product-adding-to-cart select').each(function() {
+                        $selector += '[data-'+$(this).attr('data-option')+'="'+$(this).find('option:selected').text()+'"]';
+                    });
+
+                    $price = $($selector).attr('data-value');
+                    if ($price !== undefined) {
+                        $('#product-price').text($price);
+                    } else {
+                        $('#product-price').text('unavailable');
+                    }
+                });
+            }
+        });
+    </script>
 {% endblock %}
