@@ -24,11 +24,13 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use Sylius\Component\Product\Model\ProductTranslationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -55,6 +57,11 @@ final class ProductContext implements Context
      * @var ProductFactoryInterface
      */
     private $productFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $productTranslationFactory;
 
     /**
      * @var AttributeFactoryInterface
@@ -110,6 +117,7 @@ final class ProductContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param ProductRepositoryInterface $productRepository
      * @param ProductFactoryInterface $productFactory
+     * @param FactoryInterface $productTranslationFactory
      * @param AttributeFactoryInterface $productAttributeFactory
      * @param FactoryInterface $productVariantFactory
      * @param FactoryInterface $attributeValueFactory
@@ -125,6 +133,7 @@ final class ProductContext implements Context
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
         ProductFactoryInterface $productFactory,
+        FactoryInterface $productTranslationFactory,
         AttributeFactoryInterface $productAttributeFactory,
         FactoryInterface $attributeValueFactory,
         FactoryInterface $productVariantFactory,
@@ -139,6 +148,7 @@ final class ProductContext implements Context
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
         $this->productFactory = $productFactory;
+        $this->productTranslationFactory = $productTranslationFactory;
         $this->productAttributeFactory = $productAttributeFactory;
         $this->attributeValueFactory = $attributeValueFactory;
         $this->productVariantFactory = $productVariantFactory;
@@ -171,10 +181,44 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given the store( also) has a product :productName with code :code
+     */
+    public function storeHasProductWithCode($productName, $code)
+    {
+        $product = $this->createProduct($productName, 0);
+
+        $product->setCode($code);
+
+        if ($this->sharedStorage->has('channel')) {
+            $channel = $this->sharedStorage->get('channel');
+            $product->addChannel($channel);
+        }
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^(this product) is named "([^"]+)" in "([^"]+)"$/
+     */
+    public function thisProductIsNamedIn(ProductInterface $product, $name, $locale)
+    {
+        /** @var ProductTranslationInterface $productTranslation */
+        $productTranslation = $this->productTranslationFactory->createNew();
+        $productTranslation->setName($name);
+        $productTranslation->setSlug(StringInflector::nameToLowercaseCode($name));
+        $productTranslation->setLocale($locale);
+
+        $product->addTranslation($productTranslation);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given the store has a :productName configurable product
      */
     public function storeHasAConfigurableProduct($productName)
     {
+        /** @var ProductInterface $product */
         $product = $this->productFactory->createNew();
 
         $product->setName($productName);
