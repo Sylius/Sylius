@@ -52,7 +52,7 @@ class ProductController extends ResourceController
      *
      * @return View
      */
-    private function prepareHtmlRequestView(ProductInterface $resource, RequestConfiguration $configuration, View $view)
+    protected function prepareHtmlRequestView(ProductInterface $resource, RequestConfiguration $configuration, View $view)
     {
         $templateData = [
             'configuration' => $configuration,
@@ -61,7 +61,10 @@ class ProductController extends ResourceController
             $this->metadata->getName() => $resource,
         ];
 
-        if (!$resource->isSimple()) {
+        if (
+            !$resource->isSimple() &&
+            ProductInterface::VARIANT_SELECTION_MATCH === $resource->getVariantSelectionMethod()
+        ) {
             $templateData['variantsPrices'] = $this->getVariantsPrices($resource);
         }
 
@@ -77,13 +80,11 @@ class ProductController extends ResourceController
      *
      * @return array
      */
-    private function getVariantsPrices(ProductInterface $product)
+    protected function getVariantsPrices(ProductInterface $product)
     {
-        if (ProductInterface::VARIANT_SELECTION_MATCH === $product->getVariantSelectionMethod()) {
-            return $this
-                ->get('sylius.provider.product_variants_prices')
-                ->provideVariantsPrices($product)
-            ;
-        }
+        return $this
+            ->get('sylius.provider.product_variants_prices')
+            ->provideVariantsPrices($product)
+        ;
     }
 }

@@ -246,6 +246,8 @@ final class ProductContext implements Context
      */
     public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price)
     {
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
+
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createNew();
 

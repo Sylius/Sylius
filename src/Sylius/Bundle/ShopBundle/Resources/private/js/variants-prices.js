@@ -1,6 +1,9 @@
 $(document).ready(function() {
+
     if ($('#variantsPrices').length > 0) {
         handleProductOptionsChange();
+    } else if ($("#sylius-product-variants").length > 0) {
+        handleProductVariantsChange();
     }
 });
 
@@ -19,5 +22,12 @@ function handleProductOptionsChange() {
         } else {
             $('#product-price').text($('#variantsPrices').attr('data-unavailable-text'));
         }
+    });
+}
+
+function handleProductVariantsChange() {
+    $('[name="sylius_cart_item[variant]"]').on('change', function() {
+        $price = $(this).parents('tr').find('td:nth-child(2)').text();
+        $('#product-price').text($price);
     });
 }

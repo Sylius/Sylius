@@ -104,4 +104,9 @@ interface ShowPageInterface extends PageInterface
      * @param string $optionValue
      */
     public function selectOption($optionName, $optionValue);
+
+    /**
+     * @param string $variantName
+     */
+    public function selectVariant($variantName);
 }
