@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface as BaseVariantInterface;
@@ -29,36 +28,6 @@ interface ProductVariantInterface extends
     PriceableInterface,
     TaxableInterface
 {
-    /**
-     * @return Collection|ProductVariantImageInterface[]
-     */
-    public function getImages();
-
-    /**
-     * Get variant main image if any.
-     * Fall-back on product master variant
-     *
-     * @return ImageInterface
-     */
-    public function getImage();
-
-    /**
-     * @param ProductVariantImageInterface $image
-     *
-     * @return bool
-     */
-    public function hasImage(ProductVariantImageInterface $image);
-
-    /**
-     * @param ProductVariantImageInterface $image
-     */
-    public function addImage(ProductVariantImageInterface $image);
-
-    /**
-     * @param ProductVariantImageInterface $image
-     */
-    public function removeImage(ProductVariantImageInterface $image);
-
     /**
      * @return float
      */
