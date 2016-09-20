@@ -170,6 +170,7 @@
             <argument type="service" id="sylius.repository.shipping_method" container="symfony" />
             <argument type="service" id="sylius.repository.zone" container="symfony" />
             <argument type="service" id="sylius.factory.shipping_method" container="symfony" />
+            <argument type="service" id="sylius.factory.shipping_method_translation" container="symfony" />
             <argument type="service" id="sylius.manager.shipping_method" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
