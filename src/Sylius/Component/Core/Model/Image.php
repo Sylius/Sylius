@@ -13,7 +13,10 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
-class Image implements ImageInterface
+/**
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ */
+abstract class Image implements ImageInterface
 {
     use TimestampableTrait;
 
@@ -21,6 +24,11 @@ class Image implements ImageInterface
      * @var int
      */
     protected $id;
+
+    /**
+     * @var string
+     */
+    protected $code;
 
     /**
      * @var \SplFileInfo
@@ -31,6 +39,11 @@ class Image implements ImageInterface
      * @var string
      */
     protected $path;
+
+    /**
+     * @var ImageAwareInterface
+     */
+    protected $owner;
 
     public function __construct()
     {
@@ -43,6 +56,22 @@ class Image implements ImageInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**
@@ -91,5 +120,21 @@ class Image implements ImageInterface
     public function setPath($path)
     {
         $this->path = $path;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOwner(ImageAwareInterface $owner = null)
+    {
+        $this->owner = $owner;
     }
 }
