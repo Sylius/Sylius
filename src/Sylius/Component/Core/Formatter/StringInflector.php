@@ -41,7 +41,7 @@ class StringInflector
      *
      * @return string
      */
-    public static function nameToUpercaseCode($value)
+    public static function nameToUppercaseCode($value)
     {
         return strtoupper(self::nameToCode($value));
     }
