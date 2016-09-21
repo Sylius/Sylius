@@ -542,4 +542,11 @@ final class OrderSpec extends ObjectBehavior
 
         $this->getOrderPromotionTotal()->shouldReturn(-400);
     }
+
+    function it_has_a_token_value()
+    {
+        $this->setTokenValue('xyzasdxqwe');
+
+        $this->getTokenValue()->shouldReturn('xyzasdxqwe');
+    }
 }

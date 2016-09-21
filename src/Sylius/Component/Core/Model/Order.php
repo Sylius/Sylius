@@ -102,6 +102,11 @@ class Order extends BaseOrder implements OrderInterface
      */
     protected $promotions;
 
+    /**
+     * @var string
+     */
+    protected $tokenValue;
+
     public function __construct()
     {
         parent::__construct();
@@ -580,5 +585,21 @@ class Order extends BaseOrder implements OrderInterface
         }
 
         return $orderPromotionTotal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTokenValue($tokenValue)
+    {
+        $this->tokenValue = $tokenValue;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTokenValue()
+    {
+        return $this->tokenValue;
     }
 }

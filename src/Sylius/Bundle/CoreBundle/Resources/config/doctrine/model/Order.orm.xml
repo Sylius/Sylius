@@ -78,6 +78,8 @@
             <gedmo:versioned />
         </many-to-many>
 
+        <field type="string" name="tokenValue" column="token_value" />
+
         <gedmo:loggable />
     </mapped-superclass>
 
