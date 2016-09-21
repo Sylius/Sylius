@@ -8,7 +8,7 @@ Feature: Adding a new product with images
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @todo
+    @ui @javascript
     Scenario: Adding a new simple product with a single image
         Given I want to create a new simple product
         When I specify its code as "LAMBORGHINI_GALLARDO"
@@ -17,10 +17,9 @@ Feature: Adding a new product with images
         And I attach the "lamborghini.jpg" image with a code "banner"
         And I add it
         Then I should be notified that it has been successfully created
-        And the product "Lamborghini Gallardo Model" should appear in the shop
-        And this product should have an image with a code "banner"
+        And the product "Lamborghini Gallardo Model" should have an image with a code "banner"
 
-    @todo
+    @ui @javascript
     Scenario: Adding a new simple product with multiple images
         Given I want to create a new simple product
         When I specify its code as "LAMBORGHINI_GALLARDO"
@@ -30,11 +29,10 @@ Feature: Adding a new product with images
         And I attach the "lamborghini.jpg" image with a code "thumbnail"
         And I add it
         Then I should be notified that it has been successfully created
-        And the product "Lamborghini Gallardo Model" should appear in the shop
-        And this product should have an image with a code "banner"
+        And the product "Lamborghini Gallardo Model" should have an image with a code "banner"
         And this product should have an image with a code "thumbnail"
 
-    @todo
+    @ui @javascript
     Scenario: Adding a new configurable product with a single image
         Given the store has a product option "Model scale" with a code "model_scale"
         And this product option has the "1:43" option value with code "model_scale_medium"
@@ -46,5 +44,4 @@ Feature: Adding a new product with images
         And I attach the "lamborghini.jpg" image with a code "banner"
         And I add it
         Then I should be notified that it has been successfully created
-        And the product "Lamborghini Gallardo Model" should appear in the shop
-        And this product should have an image with a code "banner"
+        And the product "Lamborghini Gallardo Model" should have an image with a code "banner"

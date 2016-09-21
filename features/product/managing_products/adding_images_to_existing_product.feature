@@ -8,16 +8,16 @@ Feature: Adding images to an existing product
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @todo
+    @ui @javascript
     Scenario: Adding a single image to an existing simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And I want to modify this product
         When I attach the "lamborghini.jpg" image with a code "banner"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product should have an image with a code "banner"
+        And the product "Lamborghini Gallardo Model" should have an image with a code "banner"
 
-    @todo
+    @ui @javascript
     Scenario: Adding multiple images to an existing taxon
         Given the store has a product "Lamborghini Gallardo Model"
         And I want to modify this product
@@ -25,14 +25,14 @@ Feature: Adding images to an existing product
         And I attach the "lamborghini.jpg" image with a code "thumbnail"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product should have an image with a code "banner"
+        And the product "Lamborghini Gallardo Model" should have an image with a code "banner"
         And this product should have also an image with a code "thumbnail"
 
-    @todo
+    @ui @javascript
     Scenario: Adding a single image to an existing configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And I want to modify this product
         When I attach the "lamborghini.jpg" image with a code "banner"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product should have an image with a code "banner"
+        And the product "Lamborghini Gallardo Model" should have an image with a code "banner"

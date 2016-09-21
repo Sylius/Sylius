@@ -44,4 +44,10 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      * @param string $attribute
      */
     public function removeAttribute($attribute);
+
+    /**
+     * @param string $code
+     * @param string $path
+     */
+    public function attachImageWithCode($code, $path);
 }
