@@ -182,7 +182,7 @@ class ResourceController extends Controller
             $view
                 ->setTemplate($configuration->getTemplate(ResourceActions::SHOW . '.html'))
                 ->setTemplateVar($this->metadata->getName())
-                ->setData($this->getShowTemplateData($configuration, $resource))
+                ->setData($this->provideShowTemplateData($configuration, $resource))
             ;
         }
 
@@ -207,7 +207,7 @@ class ResourceController extends Controller
             $view
                 ->setTemplate($configuration->getTemplate(ResourceActions::INDEX . '.html'))
                 ->setTemplateVar($this->metadata->getPluralName())
-                ->setData($this->getIndexTemplateData($configuration, $resources))
+                ->setData($this->provideIndexTemplateData($configuration, $resources))
             ;
         }
 
@@ -259,7 +259,7 @@ class ResourceController extends Controller
         }
 
         $view = View::create()
-            ->setData($this->getCreateTemplateData($configuration, $newResource, $form))
+            ->setData($this->provideFormTemplateData($configuration, $newResource, $form))
             ->setTemplate($configuration->getTemplate(ResourceActions::CREATE . '.html'))
         ;
 
@@ -315,7 +315,7 @@ class ResourceController extends Controller
         }
 
         $view = View::create()
-            ->setData($this->getUpdateTemplateData($configuration, $resource, $form))
+            ->setData($this->provideFormTemplateData($configuration, $resource, $form))
             ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
         ;
 
@@ -519,7 +519,7 @@ class ResourceController extends Controller
     /**
      * @param RequestConfiguration $configuration
      *
-     * @return \Sylius\Component\Resource\Model\ResourceInterface
+     * @return ResourceInterface
      *
      * @throws NotFoundHttpException
      */
@@ -538,7 +538,7 @@ class ResourceController extends Controller
      *
      * @return array
      */
-    protected function getShowTemplateData(RequestConfiguration $configuration, ResourceInterface $resource)
+    protected function provideShowTemplateData(RequestConfiguration $configuration, ResourceInterface $resource)
     {
         return [
             'configuration' => $configuration,
@@ -554,7 +554,7 @@ class ResourceController extends Controller
      *
      * @return array
      */
-    protected function getIndexTemplateData(RequestConfiguration $configuration, $resources)
+    protected function provideIndexTemplateData(RequestConfiguration $configuration, $resources)
     {
         return [
             'configuration' => $configuration,
@@ -566,42 +566,12 @@ class ResourceController extends Controller
 
     /**
      * @param RequestConfiguration $configuration
-     * @param ResourceInterface $newResource
-     * @param FormInterface $form
-     *
-     * @return array
-     */
-    protected function getCreateTemplateData(
-        RequestConfiguration $configuration,
-        ResourceInterface $newResource,
-        FormInterface $form
-    ) {
-        return $this->getFormTemplateData($configuration, $newResource, $form);
-    }
-
-    /**
-     * @param RequestConfiguration $configuration
      * @param ResourceInterface $resource
      * @param FormInterface $form
      *
      * @return array
      */
-    protected function getUpdateTemplateData(
-        RequestConfiguration $configuration,
-        ResourceInterface $resource,
-        FormInterface $form
-    ) {
-        return $this->getFormTemplateData($configuration, $resource, $form);
-    }
-
-    /**
-     * @param RequestConfiguration $configuration
-     * @param ResourceInterface $resource
-     * @param FormInterface $form
-     *
-     * @return array
-     */
-    protected function getFormTemplateData(
+    protected function provideFormTemplateData(
         RequestConfiguration $configuration,
         ResourceInterface $resource,
         FormInterface $form
