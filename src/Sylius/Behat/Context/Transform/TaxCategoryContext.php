@@ -40,13 +40,14 @@ final class TaxCategoryContext implements Context
      */
     public function getTaxCategoryByName($taxCategoryName)
     {
-        $taxCategory = $this->taxCategoryRepository->findOneByName($taxCategoryName);
+        $taxCategories = $this->taxCategoryRepository->findByName($taxCategoryName);
 
-        Assert::notNull(
-            $taxCategory,
-            sprintf('Tax category with name "%s" does not exist', $taxCategoryName)
+        Assert::eq(
+            1,
+            count($taxCategories),
+            sprintf('%d tax categories has been found with name "%s".', count($taxCategories), $taxCategoryName)
         );
 
-        return $taxCategory;
+        return $taxCategories[0];
     }
 }

@@ -40,12 +40,14 @@ final class ProductOptionContext implements Context
      */
     public function getProductOptionByName($productOptionName)
     {
-        $productOption = $this->productOptionRepository->findOneByName($productOptionName);
-        Assert::notNull(
-            $productOption,
-            sprintf('Product option with name "%s" does not exist in the product option repository.', $productOptionName)
+        $productOptions = $this->productOptionRepository->findByName($productOptionName);
+
+        Assert::eq(
+            1,
+            count($productOptions),
+            sprintf('%d product options has been found with name "%s".', count($productOptions), $productOptionName)
         );
 
-        return $productOption;
+        return $productOptions[0];
     }
 }

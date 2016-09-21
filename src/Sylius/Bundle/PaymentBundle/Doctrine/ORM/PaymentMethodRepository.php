@@ -22,7 +22,7 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
     /**
      * {@inheritdoc}
      */
-    public function findByName(array $names)
+    public function findByName($name)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -31,7 +31,7 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
             ->setParameter('name', $name)
             ->getQuery()
             ->getResult()
-            ;
+        ;
     }
 
     /**
