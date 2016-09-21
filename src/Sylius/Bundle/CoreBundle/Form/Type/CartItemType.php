@@ -63,7 +63,7 @@ class CartItemType extends AbstractResourceType
             $type = Product::VARIANT_SELECTION_CHOICE === $options['product']->getVariantSelectionMethod() ? 'sylius_product_variant_choice' : 'sylius_product_variant_match';
 
             $builder->add('variant', $type, [
-                'variable' => $options['product'],
+                'product' => $options['product'],
             ]);
         }
     }

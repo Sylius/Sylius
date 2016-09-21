@@ -56,6 +56,18 @@
             <argument type="service" id="sylius.set_builder.cartesian" />
         </service>
 
+        <service id="sylius.form.type.product_option_value_choice" class="Sylius\Bundle\ProductBundle\Form\Type\OptionValueChoiceType">
+            <tag name="form.type" alias="sylius_product_option_value_choice" />
+        </service>
+
+        <service id="sylius.form.type.product_variant_choice" class="Sylius\Bundle\ProductBundle\Form\Type\VariantChoiceType">
+            <tag name="form.type" alias="sylius_product_variant_choice" />
+        </service>
+
+        <service id="sylius.form.type.product_variant_match" class="Sylius\Bundle\ProductBundle\Form\Type\VariantMatchType">
+            <tag name="form.type" alias="sylius_product_variant_match" />
+        </service>
+
         <service id="sylius.variant_resolver.default" class="%sylius.variant_resolver.default.class%">
             <tag name="sylius.variant_resolver.default" type="default" />
         </service>
