@@ -13,7 +13,7 @@ security:
         admin:
             switch_user: true
             context: admin
-            pattern: /admin/.*
+            pattern: /admin(?:/.*)?$
             form_login:
                 provider: sylius_admin_user_provider
                 login_path: sylius_admin_login
