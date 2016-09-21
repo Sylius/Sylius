@@ -17,7 +17,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\ProductVariantImage" table="sylius_product_variant_image">
-        <many-to-one field="variant" target-entity="Sylius\Component\Product\Model\VariantInterface" inversed-by="images" />
+        <many-to-one field="variant" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" inversed-by="images" />
     </mapped-superclass>
 
 </doctrine-mapping>

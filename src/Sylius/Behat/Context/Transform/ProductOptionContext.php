@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Product\Repository\OptionRepositoryInterface;
+use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -21,14 +21,14 @@ use Webmozart\Assert\Assert;
 final class ProductOptionContext implements Context
 {
     /**
-     * @var OptionRepositoryInterface
+     * @var ProductOptionRepositoryInterface
      */
     private $productOptionRepository;
 
     /**
-     * @param OptionRepositoryInterface $productOptionRepository
+     * @param ProductOptionRepositoryInterface $productOptionRepository
      */
-    public function __construct(OptionRepositoryInterface $productOptionRepository)
+    public function __construct(ProductOptionRepositoryInterface $productOptionRepository)
     {
         $this->productOptionRepository = $productOptionRepository;
     }

@@ -17,8 +17,8 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeVal
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Product\Model\OptionInterface as BaseOptionInterface;
-use Sylius\Component\Product\Model\VariantInterface as BaseVariantInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface as BaseOptionInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface as BaseVariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Sylius\Bundle\ProductBundle\Doctrine\ORM\VariantRepository as BaseVariantRepository;
+use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository as BaseVariantRepository;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 
 /**

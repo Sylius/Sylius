@@ -78,7 +78,7 @@
         <service id="sylius.fixture.example_factory.product" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory">
             <argument type="service" id="sylius.factory.product" />
             <argument type="service" id="sylius.factory.product_variant" />
-            <argument type="service" id="sylius.generator.variant" />
+            <argument type="service" id="sylius.generator.product_variant" />
             <argument type="service" id="sylius.factory.product_attribute_value" />
             <argument type="service" id="sylius.factory.product_variant_image" />
             <argument type="service" id="sylius.image_uploader" />

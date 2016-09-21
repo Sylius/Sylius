@@ -76,7 +76,7 @@
             <argument type="service" id="sylius.repository.customer" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
             <argument type="service" id="sm.factory" container="symfony" />
-            <argument type="service" id="sylius.variant_resolver.default" container="symfony" />
+            <argument type="service" id="sylius.product_variant_resolver.default" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
@@ -99,7 +99,7 @@
             <argument type="service" id="sylius.factory.product_option" container="symfony" />
             <argument type="service" id="sylius.factory.product_option_value" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
-            <argument type="service" id="sylius.variant_resolver.default" container="symfony" />
+            <argument type="service" id="sylius.product_variant_resolver.default" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

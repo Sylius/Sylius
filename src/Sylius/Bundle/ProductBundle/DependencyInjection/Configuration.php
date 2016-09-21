@@ -15,31 +15,31 @@ use Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType;
-use Sylius\Bundle\ProductBundle\Form\Type\VariantType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ProductBundle\Form\Type\OptionTranslationType;
-use Sylius\Bundle\ProductBundle\Form\Type\OptionType;
-use Sylius\Bundle\ProductBundle\Form\Type\OptionValueTranslationType;
-use Sylius\Bundle\ProductBundle\Form\Type\OptionValueType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionTranslationType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueTranslationType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueType;
 use Sylius\Component\Product\Factory\ProductFactory;
 use Sylius\Component\Product\Factory\ProductVariantFactory;
-use Sylius\Component\Product\Model\Option;
-use Sylius\Component\Product\Model\OptionInterface;
-use Sylius\Component\Product\Model\OptionTranslation;
-use Sylius\Component\Product\Model\OptionTranslationInterface;
-use Sylius\Component\Product\Model\OptionValue;
-use Sylius\Component\Product\Model\OptionValueInterface;
-use Sylius\Component\Product\Model\OptionValueTranslation;
-use Sylius\Component\Product\Model\OptionValueTranslationInterface;
+use Sylius\Component\Product\Model\ProductOption;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionTranslation;
+use Sylius\Component\Product\Model\ProductOptionTranslationInterface;
+use Sylius\Component\Product\Model\ProductOptionValue;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use Sylius\Component\Product\Model\ProductOptionValueTranslation;
+use Sylius\Component\Product\Model\ProductOptionValueTranslationInterface;
 use Sylius\Component\Product\Model\Product;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductTranslation;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
-use Sylius\Component\Product\Model\Variant;
-use Sylius\Component\Product\Model\VariantInterface;
+use Sylius\Component\Product\Model\ProductVariant;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -160,15 +160,15 @@ final class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(Variant::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(VariantInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(ProductVariant::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ProductVariantInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(ProductVariantFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue(VariantType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('default')->defaultValue(ProductVariantType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('from_identifier')->defaultValue(ResourceFromIdentifierType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
@@ -198,15 +198,15 @@ final class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(Option::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(OptionInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(ProductOption::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ProductOptionInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue(OptionType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('default')->defaultValue(ProductOptionType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
@@ -229,15 +229,15 @@ final class Configuration implements ConfigurationInterface
                                         ->arrayNode('classes')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('model')->defaultValue(OptionTranslation::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('interface')->defaultValue(OptionTranslationInterface::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('model')->defaultValue(ProductOptionTranslation::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('interface')->defaultValue(ProductOptionTranslationInterface::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                                 ->arrayNode('form')
                                                     ->addDefaultsIfNotSet()
                                                     ->children()
-                                                        ->scalarNode('default')->defaultValue(OptionTranslationType::class)->cannotBeEmpty()->end()
+                                                        ->scalarNode('default')->defaultValue(ProductOptionTranslationType::class)->cannotBeEmpty()->end()
                                                     ->end()
                                                 ->end()
                                             ->end()
@@ -262,15 +262,15 @@ final class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(OptionValue::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(OptionValueInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(ProductOptionValue::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ProductOptionValueInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->cannotBeEmpty()->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue(OptionValueType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('default')->defaultValue(ProductOptionValueType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -292,15 +292,15 @@ final class Configuration implements ConfigurationInterface
                                             ->isRequired()
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('model')->defaultValue(OptionValueTranslation::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('interface')->defaultValue(OptionValueTranslationInterface::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('model')->defaultValue(ProductOptionValueTranslation::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('interface')->defaultValue(ProductOptionValueTranslationInterface::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                                 ->arrayNode('form')
                                                     ->addDefaultsIfNotSet()
                                                     ->children()
-                                                        ->scalarNode('default')->defaultValue(OptionValueTranslationType::class)->cannotBeEmpty()->end()
+                                                        ->scalarNode('default')->defaultValue(ProductOptionValueTranslationType::class)->cannotBeEmpty()->end()
                                                     ->end()
                                                 ->end()
                                             ->end()

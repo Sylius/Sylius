@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -80,7 +80,7 @@ final class ProductAttributeExampleFactory implements ExampleFactoryInterface
     {
         $options = $this->optionsResolver->resolve($options);
         
-        /** @var OptionInterface $productAttribute */
+        /** @var ProductOptionInterface $productAttribute */
         $productAttribute = $this->productAttributeFactory->createTyped($options['type']);
         $productAttribute->setCode($options['code']);
 

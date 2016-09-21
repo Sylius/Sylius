@@ -20,7 +20,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
@@ -402,7 +402,7 @@ final class CartContext implements Context
     /**
      * @When I add :product with :productOption :productOptionValue to the cart
      */
-    public function iAddThisProductWithToTheCart(ProductInterface $product, OptionInterface $productOption, $productOptionValue)
+    public function iAddThisProductWithToTheCart(ProductInterface $product, ProductOptionInterface $productOption, $productOptionValue)
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
 

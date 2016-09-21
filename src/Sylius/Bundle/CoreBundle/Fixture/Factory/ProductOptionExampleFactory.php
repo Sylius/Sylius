@@ -13,8 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Product\Model\OptionInterface;
-use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -96,8 +96,8 @@ final class ProductOptionExampleFactory implements ExampleFactoryInterface
     public function create(array $options = [])
     {
         $options = $this->optionsResolver->resolve($options);
-        
-        /** @var OptionInterface $productOption */
+
+        /** @var ProductOptionInterface $productOption */
         $productOption = $this->productOptionFactory->createNew();
         $productOption->setCode($options['code']);
 
@@ -109,7 +109,7 @@ final class ProductOptionExampleFactory implements ExampleFactoryInterface
         }
 
         foreach ($options['values'] as $code => $value) {
-            /** @var OptionValueInterface $productOptionValue */
+            /** @var ProductOptionValueInterface $productOptionValue */
             $productOptionValue = $this->productOptionValueFactory->createNew();
             $productOptionValue->setCode($code);
 

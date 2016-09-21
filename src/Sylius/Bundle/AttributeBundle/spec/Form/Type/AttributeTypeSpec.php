@@ -30,7 +30,7 @@ final class AttributeTypeSpec extends ObjectBehavior
 {
     function let(FormBuilder $builder, FormFactoryInterface $formFactory, ServiceRegistryInterface $attributeTypeRegistry)
     {
-        $this->beConstructedWith('Attribute', ['sylius'], 'server', $attributeTypeRegistry);
+        $this->beConstructedWith('ProductAttribute', ['sylius'], 'server', $attributeTypeRegistry);
 
         $builder->getFormFactory()->willReturn($formFactory);
     }
@@ -77,7 +77,7 @@ final class AttributeTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'Attribute', 'validation_groups' => ['sylius']])->shouldBeCalled();
+        $resolver->setDefaults(['data_class' => 'ProductAttribute', 'validation_groups' => ['sylius']])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

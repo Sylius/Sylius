@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Product\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -30,7 +30,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class ImageUploadListenerSpec extends ObjectBehavior
 {
-    function let(ImageUploaderInterface $uploader, VariantResolverInterface $variantResolver)
+    function let(ImageUploaderInterface $uploader, ProductVariantResolverInterface $variantResolver)
     {
         $this->beConstructedWith($uploader, $variantResolver);
     }
@@ -61,7 +61,7 @@ final class ImageUploadListenerSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         ImageInterface $image,
         ImageUploaderInterface $uploader,
-        VariantResolverInterface $variantResolver
+        ProductVariantResolverInterface $variantResolver
     ) {
         $event->getSubject()->willReturn($product);
         $product->isSimple()->willReturn(true);

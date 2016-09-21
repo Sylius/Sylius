@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class SimpleProductSubscriber implements EventSubscriberInterface
+final class SimpleProductSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}

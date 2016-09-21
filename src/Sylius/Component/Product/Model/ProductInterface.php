@@ -39,7 +39,7 @@ interface ProductInterface extends
      */
     public function hasVariants();
     /**
-     * @return Collection|VariantInterface[]
+     * @return Collection|ProductVariantInterface[]
      */
     public function getVariants();
     /**
@@ -47,25 +47,25 @@ interface ProductInterface extends
      */
     public function setVariants(Collection $variants);
     /**
-     * @param VariantInterface $variant
+     * @param ProductVariantInterface $variant
      */
-    public function addVariant(VariantInterface $variant);
+    public function addVariant(ProductVariantInterface $variant);
     /**
-     * @param VariantInterface $variant
+     * @param ProductVariantInterface $variant
      */
-    public function removeVariant(VariantInterface $variant);
+    public function removeVariant(ProductVariantInterface $variant);
     /**
-     * @param VariantInterface $variant
+     * @param ProductVariantInterface $variant
      *
      * @return bool
      */
-    public function hasVariant(VariantInterface $variant);
+    public function hasVariant(ProductVariantInterface $variant);
     /**
      * @return bool
      */
     public function hasOptions();
     /**
-     * @return Collection|OptionInterface[]
+     * @return Collection|ProductOptionInterface[]
      */
     public function getOptions();
     /**
@@ -73,19 +73,19 @@ interface ProductInterface extends
      */
     public function setOptions(Collection $options);
     /**
-     * @param OptionInterface $option
+     * @param ProductOptionInterface $option
      */
-    public function addOption(OptionInterface $option);
+    public function addOption(ProductOptionInterface $option);
     /**
-     * @param OptionInterface $option
+     * @param ProductOptionInterface $option
      */
-    public function removeOption(OptionInterface $option);
+    public function removeOption(ProductOptionInterface $option);
     /**
-     * @param OptionInterface $option
+     * @param ProductOptionInterface $option
      *
      * @return bool
      */
-    public function hasOption(OptionInterface $option);
+    public function hasOption(ProductOptionInterface $option);
 
     /**
      * @return bool

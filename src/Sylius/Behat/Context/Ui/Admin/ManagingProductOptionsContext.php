@@ -16,7 +16,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductOption\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductOption\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -74,7 +74,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Given I want to modify the :productOption product option
      */
-    public function iWantToModifyAProductOption(OptionInterface $productOption)
+    public function iWantToModifyAProductOption(ProductOptionInterface $productOption)
     {
         $this->updatePage->open(['id' => $productOption->getId()]);
     }
@@ -217,7 +217,7 @@ final class ManagingProductOptionsContext implements Context
      * @Then /^(this product option) should still be named "([^"]+)"$/
      * @Then /^(this product option) name should be "([^"]+)"$/
      */
-    public function thisProductOptionNameShouldStillBe(OptionInterface $productOption, $productOptionName)
+    public function thisProductOptionNameShouldStillBe(ProductOptionInterface $productOption, $productOptionName)
     {
         $this->iBrowseProductOptions();
 
@@ -277,7 +277,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then /^(this product option) should have the "([^"]*)" option value$/
      */
-    public function thisProductOptionShouldHaveTheOptionValue(OptionInterface $productOption, $optionValue)
+    public function thisProductOptionShouldHaveTheOptionValue(ProductOptionInterface $productOption, $optionValue)
     {
         $this->iWantToModifyAProductOption($productOption);
 
@@ -290,7 +290,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then /^(this product option) should not have the "([^"]*)" option value$/
      */
-    public function thisProductOptionShouldNotHaveTheOptionValue(OptionInterface $productOption, $optionValue)
+    public function thisProductOptionShouldNotHaveTheOptionValue(ProductOptionInterface $productOption, $optionValue)
     {
         $this->iWantToModifyAProductOption($productOption);
 

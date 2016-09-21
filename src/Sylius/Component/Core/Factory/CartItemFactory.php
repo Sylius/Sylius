@@ -13,7 +13,7 @@ namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Product\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -26,15 +26,15 @@ final class CartItemFactory implements CartItemFactoryInterface
     private $decoratedFactory;
 
     /**
-     * @var VariantResolverInterface
+     * @var ProductVariantResolverInterface
      */
     private $variantResolver;
 
     /**
      * @param FactoryInterface $decoratedFactory
-     * @param VariantResolverInterface $variantResolver
+     * @param ProductVariantResolverInterface $variantResolver
      */
-    public function __construct(FactoryInterface $decoratedFactory, VariantResolverInterface $variantResolver)
+    public function __construct(FactoryInterface $decoratedFactory, ProductVariantResolverInterface $variantResolver)
     {
         $this->decoratedFactory = $decoratedFactory;
         $this->variantResolver = $variantResolver;

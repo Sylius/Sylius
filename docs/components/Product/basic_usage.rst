@@ -68,7 +68,7 @@ Product variants management
 
    <?php
 
-   use Sylius\Component\Product\Model\Variant;
+   use Sylius\Component\Product\Model\ProductVariant;
 
    $variant = new Variant();
    $availableVariant = new Variant();

@@ -16,7 +16,7 @@ namespace Sylius\Component\Product\SetBuilder;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartesianSetBuilder implements SetBuilderInterface
+final class CartesianSetBuilder implements SetBuilderInterface
 {
     /**
      * {@inheritdoc}

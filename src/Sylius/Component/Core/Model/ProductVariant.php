@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Pricing\Calculators;
-use Sylius\Component\Product\Model\Variant as BaseVariant;
+use Sylius\Component\Product\Model\ProductVariant as BaseVariant;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
 

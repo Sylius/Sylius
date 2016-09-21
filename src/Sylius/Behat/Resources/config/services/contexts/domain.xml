@@ -23,7 +23,7 @@
             <argument type="service" id="sylius.repository.order_item" container="symfony"/>
             <argument type="service" id="sylius.repository.address" container="symfony"/>
             <argument type="service" id="sylius.repository.adjustment" container="symfony"/>
-            <argument type="service" id="sylius.variant_resolver.default" container="symfony"/>
+            <argument type="service" id="sylius.product_variant_resolver.default" container="symfony"/>
             <tag name="sylius.behat.context" />
         </service>
 

@@ -174,7 +174,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $optionValueElement = $itemElement->find('css', $selector);
 
         if (null === $optionValueElement) {
-            throw new ElementNotFoundException($this->getSession(), sprintf('Option value of "%s"', $optionName), 'css', $selector);
+            throw new ElementNotFoundException($this->getSession(), sprintf('ProductOption value of "%s"', $optionName), 'css', $selector);
         }
 
         return $optionValue === $optionValueElement->getText();

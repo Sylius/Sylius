@@ -57,19 +57,19 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Product\Model\Variant">
+    <class name="Sylius\Component\Product\Model\ProductVariant">
         <property name="code">
             <constraint name="NotBlank">
                 <option name="message">sylius.option.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <constraint name="Sylius\Bundle\ProductBundle\Validator\Constraint\VariantCombination">
+        <constraint name="Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination">
             <option name="groups">sylius</option>
         </constraint>
     </class>
 
-    <class name="Sylius\Component\Product\Model\Option">
+    <class name="Sylius\Component\Product\Model\ProductOption">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">code</option>
             <option name="message">sylius.option.code.unique</option>
@@ -94,7 +94,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Product\Model\OptionTranslation">
+    <class name="Sylius\Component\Product\Model\ProductOptionTranslation">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.option.name.not_blank</option>
@@ -110,7 +110,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Product\Model\OptionValue">
+    <class name="Sylius\Component\Product\Model\ProductOptionValue">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">code</option>
             <option name="message">sylius.option_value.code.unique</option>
@@ -127,7 +127,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Product\Model\OptionValueTranslation">
+    <class name="Sylius\Component\Product\Model\ProductOptionValueTranslation">
         <property name="value">
             <constraint name="NotBlank">
                 <option name="message">sylius.option_value.value.not_blank</option>

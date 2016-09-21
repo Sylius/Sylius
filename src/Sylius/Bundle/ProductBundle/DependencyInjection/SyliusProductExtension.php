@@ -12,12 +12,12 @@
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Component\Product\Model\Attribute;
-use Sylius\Component\Product\Model\AttributeInterface;
-use Sylius\Component\Product\Model\AttributeTranslation;
-use Sylius\Component\Product\Model\AttributeTranslationInterface;
-use Sylius\Component\Product\Model\AttributeValue;
-use Sylius\Component\Product\Model\AttributeValueInterface;
+use Sylius\Component\Product\Model\ProductAttribute;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeTranslation;
+use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
+use Sylius\Component\Product\Model\ProductAttributeValue;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -46,7 +46,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
         $formDefinition = $container->getDefinition('sylius.form.type.product_variant_generation');
         $formDefinition->addArgument($container->getDefinition('sylius.form.listener.product_variant_generator'));
 
-        $container->getDefinition('sylius.form.type.product')->addArgument(new Reference('sylius.variant_resolver.default'));
+        $container->getDefinition('sylius.form.type.product')->addArgument(new Reference('sylius.product_variant_resolver.default'));
     }
 
     /**
@@ -75,20 +75,20 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
                     'subject' => $config['resources']['product']['classes']['model'],
                     'attribute' => [
                         'classes' => [
-                            'model' => Attribute::class,
-                            'interface' => AttributeInterface::class,
+                            'model' => ProductAttribute::class,
+                            'interface' => ProductAttributeInterface::class,
                         ],
                         'translation' => [
                             'classes' => [
-                                'model' => AttributeTranslation::class,
-                                'interface' => AttributeTranslationInterface::class,
+                                'model' => ProductAttributeTranslation::class,
+                                'interface' => ProductAttributeTranslationInterface::class,
                             ],
                         ],
                     ],
                     'attribute_value' => [
                         'classes' => [
-                            'model' => AttributeValue::class,
-                            'interface' => AttributeValueInterface::class,
+                            'model' => ProductAttributeValue::class,
+                            'interface' => ProductAttributeValueInterface::class,
                         ],
                     ],
                 ],

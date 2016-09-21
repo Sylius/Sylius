@@ -13,7 +13,9 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -25,7 +27,7 @@ final class ProductVariantSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\ProductVariant');
+        $this->shouldHaveType(ProductVariant::class);
     }
 
     function it_implements_Sylius_product_variant_interface()
@@ -40,7 +42,7 @@ final class ProductVariantSpec extends ObjectBehavior
 
     function it_extends_Sylius_product_variant_model()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\Variant');
+        $this->shouldHaveType(BaseProductVariant::class);
     }
 
     function it_should_not_have_price_by_default()

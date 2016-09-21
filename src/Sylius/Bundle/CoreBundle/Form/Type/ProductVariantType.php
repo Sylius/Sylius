@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\ProductBundle\Form\Type\VariantType as BaseVariantType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductVariantType extends BaseVariantType
+class ProductVariantType extends BaseProductVariantType
 {
     /**
      * {@inheritdoc}

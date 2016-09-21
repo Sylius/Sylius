@@ -406,7 +406,7 @@ final class ManagingProductsContext implements Context
         Assert::same(
             $value,
             $this->updateSimpleProductPage->getAttributeValue($attribute),
-            sprintf('Attribute "%s" should have value "%s" but it does not.', $attribute, $value)
+            sprintf('ProductAttribute "%s" should have value "%s" but it does not.', $attribute, $value)
         );
     }
 
