@@ -13,9 +13,10 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -42,6 +43,11 @@ final class PaymentContext implements Context
     private $paymentMethodFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $paymentMethodTranslationFactory;
+
+    /**
      * @var PaymentMethodNameToGatewayConverterInterface
      */
     private $paymentMethodNameToGatewayConverter;
@@ -55,6 +61,7 @@ final class PaymentContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param PaymentMethodRepositoryInterface $paymentMethodRepository
      * @param FactoryInterface $paymentMethodFactory
+     * @param FactoryInterface $paymentMethodTranslationFactory
      * @param PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter
      * @param ObjectManager $objectManager
      */
@@ -62,12 +69,14 @@ final class PaymentContext implements Context
         SharedStorageInterface $sharedStorage,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         FactoryInterface $paymentMethodFactory,
+        FactoryInterface $paymentMethodTranslationFactory,
         PaymentMethodNameToGatewayConverterInterface $paymentMethodNameToGatewayConverter,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->paymentMethodFactory = $paymentMethodFactory;
+        $this->paymentMethodTranslationFactory = $paymentMethodTranslationFactory;
         $this->paymentMethodNameToGatewayConverter = $paymentMethodNameToGatewayConverter;
         $this->objectManager = $objectManager;
     }
@@ -87,6 +96,21 @@ final class PaymentContext implements Context
     public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
     {
         $this->createPaymentMethodFromNameAndCode($paymentMethodName, $paymentMethodCode);
+    }
+
+    /**
+     * @Given /^(this payment method) is named "([^"]+)" in "([^"]+)"$/
+     */
+    public function thisPaymentMethodIsNamedIn(PaymentMethodInterface $paymentMethod, $name, $locale)
+    {
+        /** @var PaymentMethodTranslationInterface $translation */
+        $translation = $this->paymentMethodTranslationFactory->createNew();
+        $translation->setName($name);
+        $translation->setLocale($locale);
+
+        $paymentMethod->addTranslation($translation);
+
+        $this->objectManager->flush();
     }
 
     /**

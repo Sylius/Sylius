@@ -18,5 +18,6 @@ default:
 
                 - sylius.behat.context.ui.admin.managing_payment_methods
                 - sylius.behat.context.ui.admin.notification
+                - sylius.behat.context.ui.shop.locale
             filters:
                 tags: "@managing_payment_methods && @ui"
