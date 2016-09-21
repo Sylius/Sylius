@@ -14,8 +14,6 @@ namespace Sylius\Bundle\ProductBundle\Validator\Constraint;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Unique variant property constraint.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  *
  * @Annotation
@@ -45,7 +43,7 @@ class VariantUnique extends Constraint
      */
     public function validatedBy()
     {
-        return 'sylius.validator.variant.unique';
+        return 'sylius.validator.product_variant.unique';
     }
 
     /**

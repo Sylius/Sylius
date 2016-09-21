@@ -19,8 +19,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
- * Unique variant constraint validator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantUniqueValidator extends ConstraintValidator

@@ -24,8 +24,8 @@
             <argument type="service" id="sylius.generator.variant" />
         </service>
 
-        <service id="sylius.validator.variant.unique" class="Sylius\Bundle\ProductBundle\Validator\VariantUniqueValidator">
-            <argument type="service" id="sylius.repository.variant" />
+        <service id="sylius.validator.product_variant.unique" class="Sylius\Bundle\ProductBundle\Validator\VariantUniqueValidator">
+            <argument type="service" id="sylius.repository.product_variant" />
             <tag name="validator.constraint_validator" alias="sylius.validator.variant.unique" />
         </service>
         <service id="sylius.validator.variant.combination" class="Sylius\Bundle\ProductBundle\Validator\VariantCombinationValidator">

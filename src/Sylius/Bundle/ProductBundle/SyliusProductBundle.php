@@ -41,7 +41,6 @@ class SyliusProductBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new ServicesPass());
-        $container->addCompilerPass(new ValidatorPass());
     }
 
     /**
