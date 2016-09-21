@@ -27,12 +27,4 @@ interface AttributeRepositoryInterface extends RepositoryInterface
      * @return AttributeInterface[]
      */
     public function findByName($name, $locale);
-
-    /**
-     * @param array $criteria
-     * @param array $sorting
-     *
-     * @return PagerfantaInterface
-     */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null);
 }

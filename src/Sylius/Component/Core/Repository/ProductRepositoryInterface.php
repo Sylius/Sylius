@@ -39,15 +39,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * @return PagerfantaInterface
      */
     public function createByTaxonAndChannelPaginator(TaxonInterface $taxon, ChannelInterface $channel);
-
-    /**
-     * @param array $criteria
-     * @param array $sorting
-     *
-     * @return PagerfantaInterface
-     */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null);
-
     /**
      * @param int $id
      *

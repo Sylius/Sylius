@@ -36,33 +36,4 @@ class AttributeRepository extends EntityRepository implements AttributeRepositor
             ->getResult()
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null)
-    {
-        $queryBuilder = $this->createQueryBuilder('o')
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
-        ;
-
-        if (!empty($criteria['name'])) {
-            $queryBuilder
-                ->andWhere('translation.name LIKE :name')
-                ->setParameter('name', '%'.$criteria['name'].'%')
-            ;
-        }
-
-        if (empty($sorting)) {
-            if (!is_array($sorting)) {
-                $sorting = [];
-            }
-            $sorting['updatedAt'] = 'desc';
-        }
-
-        $this->applySorting($queryBuilder, $sorting);
-
-        return $this->getPaginator($queryBuilder);
-    }
 }

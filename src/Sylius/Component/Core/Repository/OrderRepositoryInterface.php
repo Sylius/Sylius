@@ -92,14 +92,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null);
-
-    /**
-     * @param array $criteria
-     * @param array $sorting
-     *
-     * @return PagerfantaInterface
-     */
     public function createCheckoutsPaginator(array $criteria = null, array $sorting = null);
 
     /**

@@ -80,43 +80,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null)
-    {
-        $queryBuilder = $this->createQueryBuilder('o')
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
-            ->addSelect('variant')
-            ->leftJoin('o.variants', 'variant')
-        ;
-
-        if (!empty($criteria['name'])) {
-            $queryBuilder
-                ->andWhere('translation.name LIKE :name')
-                ->setParameter('name', '%'.$criteria['name'].'%')
-            ;
-        }
-        if (!empty($criteria['code'])) {
-            $queryBuilder
-                ->andWhere('variant.code = :code')
-                ->setParameter('code', $criteria['code'])
-            ;
-        }
-
-        if (empty($sorting)) {
-            if (!is_array($sorting)) {
-                $sorting = [];
-            }
-            $sorting['updatedAt'] = 'desc';
-        }
-
-        $this->applySorting($queryBuilder, $sorting);
-
-        return $this->getPaginator($queryBuilder);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findForDetailsPage($id)
     {
         $queryBuilder = $this->createQueryBuilder('o');
