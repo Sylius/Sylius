@@ -12,7 +12,7 @@ function handleProductOptionsChange() {
         $selector = '';
 
         $('#sylius-product-adding-to-cart select').each(function() {
-            $selector += '[data-'+$(this).attr('data-option')+'="'+$(this).find('option:selected').text()+'"]';
+            $selector += '[data-' + $(this).attr('data-option') + '="' + $(this).find('option:selected').text() + '"]';
         });
 
         $price = $($selector).attr('data-value');

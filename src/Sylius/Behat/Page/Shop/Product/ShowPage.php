@@ -208,6 +208,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'attributes' => '#sylius-product-attributes',
             'main_image' => '#main-image',
             'name' => '#sylius-product-name',
+            'option_select' => '#sylius_cart_item_variant_%option-name%',
             'out_of_stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
             'selecting_variants' => "#sylius-product-selecting-variant",

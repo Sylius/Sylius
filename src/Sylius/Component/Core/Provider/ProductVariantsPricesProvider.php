@@ -18,7 +18,7 @@ use Sylius\Component\Product\Model\OptionValueInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ProductVariantsPricesProvider implements ProductVariantsPricesProviderInterface
+final class ProductVariantsPricesProvider implements ProductVariantsPricesProviderInterface
 {
     /**
      * {@inheritdoc}

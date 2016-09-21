@@ -46,26 +46,26 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @param ProductInterface $resource
+     * @param ProductInterface $product
      * @param RequestConfiguration $configuration
      * @param View $view
      *
      * @return View
      */
-    protected function prepareHtmlRequestView(ProductInterface $resource, RequestConfiguration $configuration, View $view)
+    protected function prepareHtmlRequestView(ProductInterface $product, RequestConfiguration $configuration, View $view)
     {
         $templateData = [
             'configuration' => $configuration,
             'metadata' => $this->metadata,
-            'resource' => $resource,
-            $this->metadata->getName() => $resource,
+            'resource' => $product,
+            $this->metadata->getName() => $product,
         ];
 
         if (
-            !$resource->isSimple() &&
-            ProductInterface::VARIANT_SELECTION_MATCH === $resource->getVariantSelectionMethod()
+            $product->isConfigurable() &&
+            ProductInterface::VARIANT_SELECTION_MATCH === $product->getVariantSelectionMethod()
         ) {
-            $templateData['variantsPrices'] = $this->getVariantsPrices($resource);
+            $templateData['variantsPrices'] = $this->getVariantsPrices($product);
         }
 
         return $view

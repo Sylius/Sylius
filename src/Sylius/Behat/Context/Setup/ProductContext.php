@@ -172,8 +172,7 @@ final class ProductContext implements Context
         $product->setDescription('Awesome '.$productName);
 
         if ($this->sharedStorage->has('channel')) {
-            $channel = $this->sharedStorage->get('channel');
-            $product->addChannel($channel);
+            $product->addChannel($this->sharedStorage->get('channel'));
         }
 
         $this->saveProduct($product);

@@ -76,7 +76,7 @@ final class ProductContext implements Context
 
     /**
      * @When /^I check (this product)'s details/
-     * @When I check product :product details
+     * @When I view product :product
      */
     public function iOpenProductPage(ProductInterface $product)
     {
@@ -190,6 +190,7 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then the product price should be :price
      * @Then I should see the product price :price
      */
     public function iShouldSeeTheProductPrice($price)

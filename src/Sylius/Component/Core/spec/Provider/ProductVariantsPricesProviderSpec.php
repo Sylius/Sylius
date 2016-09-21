@@ -16,8 +16,8 @@ use Sylius\Component\Core\Provider\ProductVariantsPricesProvider;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
-use Sylius\Component\Product\Model\OptionInterface;
-use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -35,13 +35,13 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
     }
 
     function it_provides_array_containing_product_variant_options_map_with_corresponding_price(
-        OptionInterface $colorOption,
-        OptionInterface $sizeOption,
-        OptionValueInterface $black,
-        OptionValueInterface $large,
-        OptionValueInterface $small,
-        OptionValueInterface $white,
         ProductInterface $tShirt,
+        ProductOptionInterface $colorOption,
+        ProductOptionInterface $sizeOption,
+        ProductOptionValueInterface $black,
+        ProductOptionValueInterface $large,
+        ProductOptionValueInterface $small,
+        ProductOptionValueInterface $white,
         ProductVariantInterface $blackLargeTShirt,
         ProductVariantInterface $blackSmallTShirt,
         ProductVariantInterface $whiteLargeTShirt,
