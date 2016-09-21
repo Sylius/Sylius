@@ -234,4 +234,15 @@ final class ProductContext implements Context
             sprintf('I should see validation message for %s product', $product->getName())
         );
     }
+
+    /**
+     * @Then I should see a main image
+     */
+    public function iShouldSeeAMainImage()
+    {
+        Assert::true(
+            $this->showPage->isMainImageDisplayed(),
+            'The main image should have been displayed.'
+        );
+    }
 }

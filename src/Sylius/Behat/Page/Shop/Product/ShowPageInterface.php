@@ -93,4 +93,9 @@ interface ShowPageInterface extends PageInterface
      * @return string
      */
     public function getPrice();
+
+    /**
+     * @return bool
+     */
+    public function isMainImageDisplayed();
 }

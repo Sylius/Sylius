@@ -13,14 +13,17 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
+use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
@@ -29,6 +32,7 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -78,6 +82,11 @@ final class ProductContext implements Context
     private $productOptionValueFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $productImageFactory;
+
+    /**
      * @var ObjectManager
      */
     private $objectManager;
@@ -88,6 +97,16 @@ final class ProductContext implements Context
     private $defaultVariantResolver;
 
     /**
+     * @var ImageUploaderInterface
+     */
+    private $imageUploader;
+
+    /**
+     * @var array
+     */
+    private $minkParameters;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param ProductRepositoryInterface $productRepository
      * @param ProductFactoryInterface $productFactory
@@ -96,8 +115,11 @@ final class ProductContext implements Context
      * @param FactoryInterface $attributeValueFactory
      * @param FactoryInterface $productOptionFactory
      * @param FactoryInterface $productOptionValueFactory
+     * @param FactoryInterface $productImageFactory
      * @param ObjectManager $objectManager
      * @param ProductVariantResolverInterface $defaultVariantResolver
+     * @param ImageUploaderInterface $imageUploader
+     * @param array $minkParameters
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -108,8 +130,11 @@ final class ProductContext implements Context
         FactoryInterface $productVariantFactory,
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
+        FactoryInterface $productImageFactory,
         ObjectManager $objectManager,
-        ProductVariantResolverInterface $defaultVariantResolver
+        ProductVariantResolverInterface $defaultVariantResolver,
+        ImageUploaderInterface $imageUploader,
+        array $minkParameters
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
@@ -119,8 +144,11 @@ final class ProductContext implements Context
         $this->productVariantFactory = $productVariantFactory;
         $this->productOptionFactory = $productOptionFactory;
         $this->productOptionValueFactory = $productOptionValueFactory;
+        $this->productImageFactory = $productImageFactory;
         $this->objectManager = $objectManager;
+        $this->imageUploader = $imageUploader;
         $this->defaultVariantResolver = $defaultVariantResolver;
+        $this->minkParameters = $minkParameters;
     }
 
     /**
@@ -446,6 +474,24 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) has(?:| also) an image "([^"]+)" with a code "([^"]+)"$/
+     */
+    public function thisProductHasAnImageWithACode(ProductInterface $product, $imagePath, $imageCode)
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        /** @var ImageInterface $productImage */
+        $productImage = $this->productImageFactory->createNew();
+        $productImage->setFile(new UploadedFile($filesPath.$imagePath, basename($imagePath)));
+        $productImage->setCode($imageCode);
+        $this->imageUploader->upload($productImage);
+
+        $product->addImage($productImage);
+
+        $this->objectManager->flush($product);
+    }
+
+    /**
      * @param string $type
      * @param string $name
      * @param string $code
@@ -539,5 +585,15 @@ final class ProductContext implements Context
     private function convertToCode($productName)
     {
         return StringInflector::nameToUppercaseCode($productName);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return NodeElement
+     */
+    private function getParameter($name)
+    {
+        return isset($this->minkParameters[$name]) ? $this->minkParameters[$name] : null;
     }
 }
