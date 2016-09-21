@@ -29,6 +29,7 @@ class OptionRepository extends EntityRepository implements OptionRepositoryInter
             ->leftJoin('o.translations', 'translation')
             ->where('translation.name = :name')
             ->setParameter('name', $name)
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
         ;

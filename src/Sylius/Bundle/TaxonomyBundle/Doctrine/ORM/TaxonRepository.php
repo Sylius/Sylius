@@ -116,6 +116,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->leftJoin('o.translations', 'translation')
             ->where('translation.name = :name')
             ->setParameter('name', $name)
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -144,7 +145,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->orderBy('o.root')
             ->addOrderBy('o.left')
         ;
-    
+
         return $queryBuilder->getQuery()->getResult();
     }
 

@@ -43,6 +43,7 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
             ->leftJoin('o.translations', 'translation')
             ->where('translation.name = :name')
             ->setParameter('name', $name)
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
         ;

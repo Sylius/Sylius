@@ -30,6 +30,7 @@ class ProductRepository extends EntityRepository implements ProductRepositoryInt
             ->leftJoin('o.translations', 'translation')
             ->where('translation.name = :name')
             ->setParameter('name', $name)
+            ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult()
         ;
