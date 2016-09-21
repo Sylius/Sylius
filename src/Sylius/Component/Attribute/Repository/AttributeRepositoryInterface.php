@@ -23,9 +23,9 @@ interface AttributeRepositoryInterface extends RepositoryInterface
     /**
      * @param string $name
      *
-     * @return AttributeInterface|null
+     * @return AttributeInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name);
 
     /**
      * @param array $criteria

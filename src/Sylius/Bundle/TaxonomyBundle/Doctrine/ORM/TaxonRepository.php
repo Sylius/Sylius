@@ -109,7 +109,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findByName($name)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -117,7 +117,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->where('translation.name = :name')
             ->setParameter('name', $name)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 

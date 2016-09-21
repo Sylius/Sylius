@@ -23,7 +23,7 @@ class AttributeRepository extends EntityRepository implements AttributeRepositor
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findByName($name)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -31,7 +31,7 @@ class AttributeRepository extends EntityRepository implements AttributeRepositor
             ->where('translation.name = :name')
             ->setParameter('name', $name)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 

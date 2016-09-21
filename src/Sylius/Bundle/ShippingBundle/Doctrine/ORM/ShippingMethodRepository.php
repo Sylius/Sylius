@@ -22,7 +22,7 @@ class ShippingMethodRepository extends EntityRepository implements ShippingMetho
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findByName($name)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -30,7 +30,7 @@ class ShippingMethodRepository extends EntityRepository implements ShippingMetho
             ->where('translation.name = :name')
             ->setParameter('name', $name)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 }

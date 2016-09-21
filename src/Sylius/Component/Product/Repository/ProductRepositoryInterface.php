@@ -22,9 +22,9 @@ interface ProductRepositoryInterface extends RepositoryInterface
     /**
      * @param string $name
      *
-     * @return ProductInterface|null
+     * @return ProductInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name);
 
     /**
      * @param string $slug

@@ -22,7 +22,7 @@ interface OptionRepositoryInterface extends RepositoryInterface
     /**
      * @param string $name
      *
-     * @return OptionInterface|null
+     * @return OptionInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name);
 }

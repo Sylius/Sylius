@@ -28,25 +28,10 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
             ->where('translation.name = :name')
-            ->setParameter('name', $names)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findOneByName($name)
-    {
-        return $this->createQueryBuilder('o')
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
-            ->where('translation.name = :name')
             ->setParameter('name', $name)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult()
+            ;
     }
 
     /**

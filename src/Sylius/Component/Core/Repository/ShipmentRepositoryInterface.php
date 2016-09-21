@@ -31,9 +31,9 @@ interface ShipmentRepositoryInterface extends RepositoryInterface
     /**
      * @param string $name
      *
-     * @return ShipmentInterface|null
+     * @return ShipmentInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name);
 
     /**
      * @param array $criteria

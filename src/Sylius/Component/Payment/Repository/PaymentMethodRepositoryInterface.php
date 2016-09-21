@@ -26,12 +26,5 @@ interface PaymentMethodRepositoryInterface extends RepositoryInterface
      * @return PaymentMethodInterface[]
      */
     public function findByName(array $names);
-
-    /**
-     * @param string $name
-     *
-     * @return PaymentMethodInterface|null
-     */
-    public function findOneByName($name);
 }
 

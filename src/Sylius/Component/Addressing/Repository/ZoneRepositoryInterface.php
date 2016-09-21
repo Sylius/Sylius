@@ -22,7 +22,7 @@ interface ZoneRepositoryInterface extends RepositoryInterface
     /**
      * @param string $name
      *
-     * @return ZoneInterface|null
+     * @return ZoneInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name);
 }

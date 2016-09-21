@@ -36,7 +36,7 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findByName($name)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -44,7 +44,7 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
             ->where('translation.name = :name')
             ->setParameter('name', $name)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 

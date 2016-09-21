@@ -22,7 +22,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findByName($name)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('members')
@@ -30,7 +30,7 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
             ->where('o.name = :name')
             ->setParameter('name', $name)
             ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 }
