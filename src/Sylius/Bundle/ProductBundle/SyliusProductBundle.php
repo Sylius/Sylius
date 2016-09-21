@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusProductBundle extends AbstractResourceBundle
+final class SyliusProductBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}
