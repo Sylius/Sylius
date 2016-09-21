@@ -537,7 +537,7 @@ final class ManagingProductsContext implements Context
             $this->createConfigurableProductPage,
             $this->updateSimpleProductPage,
             $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        ], $this->sharedStorage->has('product') ? $this->sharedStorage->get('product') : null);
 
         $currentPage->attachImageWithCode($code, $path);
     }
