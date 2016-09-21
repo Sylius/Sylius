@@ -622,7 +622,7 @@ final class ManagingOrdersContext implements Context
     public function thisOrderShipmentStateShouldBe($shippingState)
     {
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['Shipping state' => $shippingState]),
+            $this->indexPage->isSingleResourceOnPage(['shippingState' => $shippingState]),
             sprintf('Order should have %s shipping state', $shippingState)
         );
     }
@@ -635,7 +635,7 @@ final class ManagingOrdersContext implements Context
     public function theOrderShouldHavePaymentState(OrderInterface $order, $orderPaymentState)
     {
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['payment state' => $orderPaymentState]),
+            $this->indexPage->isSingleResourceOnPage(['paymentState' => $orderPaymentState]),
             sprintf('Cannot find order with "%s" order payment state in the list.', $orderPaymentState)
         );
     }
@@ -669,7 +669,7 @@ final class ManagingOrdersContext implements Context
     public function iShouldSeeTheOrderWithTotal($orderNumber, $total)
     {
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['Total' => $total]),
+            $this->indexPage->isSingleResourceOnPage(['total' => $total]),
             sprintf('The total of order "%s" is not "%s".', $orderNumber, $total)
         );
     }

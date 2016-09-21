@@ -28,6 +28,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
 
         $row = $tableAccessor->getRowWithFields($table, ['email' => $customer->getEmail()]);
 
-        return $tableAccessor->getFieldFromRow($table, $row, 'Confirmed')->getText();
+        return $tableAccessor->getFieldFromRow($table, $row, 'confirmed')->getText();
     }
 }

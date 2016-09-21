@@ -216,6 +216,6 @@ final class TableAccessor implements TableAccessorInterface
      */
     private function getColumnFieldName(NodeElement $column)
     {
-        return preg_replace('/.*sylius-grid-column-([^ ]+).*$/', '\1', $column->getAttribute('class'));
+        return preg_replace('/.*sylius-table-column-([^ ]+).*$/', '\1', $column->getAttribute('class'));
     }
 }

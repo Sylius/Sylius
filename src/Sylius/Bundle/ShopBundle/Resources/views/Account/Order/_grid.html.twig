@@ -21,7 +21,7 @@
                         {{ sorting.sortableHeader(definition, field, app.request.attributes, sortingDirection) }}
                     {% endif %}
                 {% else %}
-                    <th>{{ field.label|trans }}</th>
+                    <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
                 {% endif %}
             {% endfor %}
             {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}

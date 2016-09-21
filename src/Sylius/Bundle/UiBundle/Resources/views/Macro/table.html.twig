@@ -11,11 +11,11 @@
                 {{ sorting.sortableHeader(definition, field, requestAttributes, sortingDirection) }}
             {% endif %}
         {% else %}
-            <th class="sylius-grid-column-{{ field.name }}">{{ field.label|trans }}</th>
+            <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
         {% endif %}
     {% endfor %}
     {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
-        <th>{{ 'sylius.ui.actions'|trans }}</th>
+        <th class="sylius-table-column-actions">{{ 'sylius.ui.actions'|trans }}</th>
     {% endif %}
 {% endmacro %}
 
