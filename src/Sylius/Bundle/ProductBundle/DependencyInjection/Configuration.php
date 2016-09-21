@@ -25,6 +25,7 @@ use Sylius\Bundle\ProductBundle\Form\Type\OptionType;
 use Sylius\Bundle\ProductBundle\Form\Type\OptionValueTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\OptionValueType;
 use Sylius\Component\Product\Factory\ProductFactory;
+use Sylius\Component\Product\Factory\ProductVariantFactory;
 use Sylius\Component\Product\Model\Option;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\OptionTranslation;
@@ -163,7 +164,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(VariantInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(ProductVariantFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
