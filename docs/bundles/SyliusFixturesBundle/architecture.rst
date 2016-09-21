@@ -37,6 +37,36 @@ persist some entities in the database, upload some files, dispatch some events o
 They implement the ``Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface`` and need to be registered under
 the ``sylius_fixtures.fixture`` tag in order to be used in suite configuration.
 
+.. code-block:: yaml
+
+    services:
+        app.fixture.my_fixture:
+            class: MyFixture
+            tags:
+                -  { name:  sylius_fixtures.fixture }
+
+.. code-block:: php
+
+    <?php
+    class MyFixture implements \Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface {
+    
+        // part of \Symfony\Component\Config\Definition\ConfigurationInterface
+        public function getConfigTreeBuilder() {
+            $treeBuilder = new TreeBuilder();
+            $treeBuilder->root($this->getName());
+
+            return $treeBuilder;
+        }
+    
+        public function load(array $options) {
+            // ...
+        }
+    
+        public function getName() {
+            return 'my_fixture';
+        }
+    }
+
 .. note::
 
     The former interface extends the ``ConfigurationInterface``, which is widely known from ``Configuration`` classes
