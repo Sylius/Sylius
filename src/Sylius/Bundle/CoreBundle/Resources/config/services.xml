@@ -92,5 +92,7 @@
             <argument type="service" id="sylius.templating.helper.product_variants_prices" />
             <tag name="twig.extension" />
         </service>
+
+        <service id="sylius.unique_id_based_order_token_assigner" class="Sylius\Component\Core\TokenAssigner\UniqueIdBasedOrderTokenAssigner" />
     </services>
 </container>
