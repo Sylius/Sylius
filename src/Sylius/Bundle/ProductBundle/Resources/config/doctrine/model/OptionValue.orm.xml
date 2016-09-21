@@ -19,6 +19,12 @@
         </id>
 
         <field name="code" column="code" type="string" unique="true" />
+
+        <many-to-one target-entity="Sylius\Component\Product\Model\OptionInterface" field="option" inversed-by="values">
+            <join-columns>
+                <join-column name="option_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+            </join-columns>
+        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

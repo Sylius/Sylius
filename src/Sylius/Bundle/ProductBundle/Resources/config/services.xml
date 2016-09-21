@@ -23,8 +23,6 @@
 
         <parameter key="sylius.form.listener.product_variant_generator.class">Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber</parameter>
 
-        <parameter key="sylius.event_subscriber.variation.load_metadata.class">Sylius\Bundle\ProductBundle\EventListener\LoadMetadataSubscriber</parameter>
-
         <parameter key="sylius.validator.variant.unique.class">Sylius\Bundle\ProductBundle\Validator\VariantUniqueValidator</parameter>
         <parameter key="sylius.validator.variant.combination.class">Sylius\Bundle\ProductBundle\Validator\VariantCombinationValidator</parameter>
 
@@ -43,11 +41,6 @@
 
         <service id="sylius.form.listener.product_variant_generator" class="%sylius.form.listener.product_variant_generator.class%">
             <argument type="service" id="sylius.generator.variant" />
-        </service>
-
-        <service id="sylius.event_subscriber.variation.load_metadata" class="%sylius.event_subscriber.variation.load_metadata.class%">
-            <tag name="doctrine.event_subscriber" />
-            <argument>%sylius.variation.variables%</argument>
         </service>
 
         <service id="sylius.validator.variant.unique" class="%sylius.validator.variant.unique.class%">

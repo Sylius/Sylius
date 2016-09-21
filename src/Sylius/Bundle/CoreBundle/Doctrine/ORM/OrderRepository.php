@@ -94,7 +94,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->leftJoin('payments.method', 'paymentMethods')
             ->leftJoin('item.variant', 'variant')
             ->leftJoin('variant.images', 'image')
-            ->leftJoin('variant.object', 'product')
+            ->leftJoin('variant.product', 'product')
             ->leftJoin('variant.options', 'optionValue')
             ->leftJoin('optionValue.option', 'option')
             ->leftJoin('o.billingAddress', 'billingAddress')

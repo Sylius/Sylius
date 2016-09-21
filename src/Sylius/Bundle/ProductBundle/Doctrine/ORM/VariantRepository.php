@@ -33,7 +33,7 @@ class VariantRepository extends EntityRepository implements VariantRepositoryInt
     public function createQueryBuilderWithProduct($productId)
     {
         return $this->createQueryBuilder('o')
-            ->where('o.object = :productId')
+            ->where('o.product = :productId')
             ->setParameter('productId', $productId)
         ;
     }

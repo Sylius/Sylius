@@ -35,7 +35,7 @@
             <gedmo:versioned />
         </one-to-many>
 
-        <one-to-many field="variants" target-entity="Sylius\Component\Product\Model\VariantInterface" mapped-by="object" orphan-removal="true">
+        <one-to-many field="variants" target-entity="Sylius\Component\Product\Model\VariantInterface" mapped-by="product" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
