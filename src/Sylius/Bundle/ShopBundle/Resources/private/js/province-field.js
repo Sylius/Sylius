@@ -14,12 +14,15 @@
         $('select[name$="[countryCode]"]').on('change', function(event) {
             var $select = $(event.currentTarget);
             var $provinceContainer = $select.parents('.field').next('div.province-container');
-            var provinceName = $select.attr('name').replace('country', 'province');
+
+            var provinceSelectFieldName = $select.attr('name').replace('country', 'province');
+            var provinceInputFieldName = $select.attr('name').replace('countryCode', 'provinceName');
 
             if ('' === $select.val()) {
                 $provinceContainer.fadeOut('slow', function () {
                     $provinceContainer.html('');
                 });
+
                 return;
             }
 
@@ -28,11 +31,20 @@
                     $provinceContainer.fadeOut('slow', function () {
                         $provinceContainer.html('');
                     });
+                } else if (-1 !== response.content.indexOf('select')) {
+                    $provinceContainer.fadeOut('slow', function () {
+                        $provinceContainer.html(response.content.replace(
+                            'name="sylius_address_province"',
+                            'name="' + provinceSelectFieldName + '"'
+                        ));
+
+                        $provinceContainer.fadeIn();
+                    });
                 } else {
                     $provinceContainer.fadeOut('slow', function () {
                         $provinceContainer.html(response.content.replace(
                             'name="sylius_address_province"',
-                            'name="' + provinceName + '"'
+                            'name="' + provinceInputFieldName + '"'
                         ));
 
                         $provinceContainer.fadeIn();

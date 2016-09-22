@@ -55,6 +55,9 @@
         <field name="provinceCode" column="province_code" type="string" nullable="true">
             <gedmo:versioned />
         </field>
+        <field name="provinceName" column="province_name" type="string" nullable="true">
+            <gedmo:versioned />
+        </field>
 
         <gedmo:loggable />
     </mapped-superclass>

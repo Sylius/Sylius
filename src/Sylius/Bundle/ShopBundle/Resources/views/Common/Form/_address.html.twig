@@ -8,6 +8,8 @@
 <div class="province-container field" data-url="{{ path('sylius_shop_province_choice') }}">
     {% if form.provinceCode is defined %}
         {{ form_row(form.provinceCode, {'attr': {'class': 'ui dropdown'}}) }}
+    {% elseif form.provinceName is defined %}
+        {{ form_row(form.provinceName) }}
     {% endif %}
 </div>
 <div class="two fields">

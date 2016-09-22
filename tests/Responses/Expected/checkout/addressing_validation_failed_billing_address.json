@@ -12,7 +12,8 @@
                     "countryCode": {},
                     "street": {},
                     "city": {},
-                    "postcode": {}
+                    "postcode": {},
+                    "provinceName": {}
                 }
             },
             "billingAddress": {

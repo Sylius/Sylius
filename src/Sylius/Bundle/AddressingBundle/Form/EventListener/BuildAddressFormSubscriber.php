@@ -26,6 +26,7 @@ use Symfony\Component\Form\FormInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jan Góralski <jan.goralski@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
@@ -84,9 +85,15 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
+        $form = $event->getForm();
+
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->createProvinceCodeChoiceForm($country, $address->getProvinceCode()));
+            $form->add($this->createProvinceCodeChoiceForm($country, $address->getProvinceCode()));
+
+            return;
         }
+
+        $form->add($this->createProvinceNameTextForm($address->getProvinceName()));
     }
 
     /**
@@ -111,9 +118,15 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
             return;
         }
 
+        $form = $event->getForm();
+
         if ($country->hasProvinces()) {
-            $event->getForm()->add($this->createProvinceCodeChoiceForm($country));
+            $form->add($this->createProvinceCodeChoiceForm($country));
+
+            return;
         }
+
+        $form->add($this->createProvinceNameTextForm());
     }
 
     /**
@@ -127,10 +140,27 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         return
             $this
                 ->formFactory
-                    ->createNamed('provinceCode', 'sylius_province_code_choice', $provinceCode, [
+                ->createNamed('provinceCode', 'sylius_province_code_choice', $provinceCode, [
                     'country' => $country,
                     'auto_initialize' => false,
-            ])
+                ])
+            ;
+    }
+
+    /**
+     * @param string|null $provinceName
+     *
+     * @return FormInterface
+     */
+    private function createProvinceNameTextForm($provinceName = null)
+    {
+        return
+            $this
+                ->formFactory
+                    ->createNamed('provinceName', 'text', $provinceName, [
+                    'required' => false,
+                    'auto_initialize' => false,
+                ])
         ;
     }
 }

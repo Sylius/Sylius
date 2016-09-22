@@ -65,7 +65,7 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
     @ui
     Scenario: Prices get updated on re-selecting payment method step
         Given I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed order with "Pigeon Mail" shipping method and "Offline" payment
+        And I proceed with "Pigeon Mail" shipping method and "Offline" payment
         When the exchange rate for currency "GBP" was changed to 3.00
         And I decide to change the payment method
         Then the "The Pug Mug" product should have unit price "£30.00"

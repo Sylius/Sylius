@@ -21,4 +21,4 @@ sylius_province_delete:
 sylius_province_choice_form:
     path: /choice-form
     defaults:
-        _controller: sylius.controller.province:choiceFormAction
+        _controller: sylius.controller.province:choiceOrTextFieldFormAction

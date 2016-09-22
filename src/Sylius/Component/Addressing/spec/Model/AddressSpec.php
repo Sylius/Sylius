@@ -126,6 +126,17 @@ final class AddressSpec extends ObjectBehavior
         $this->getProvinceCode()->shouldReturn('DU');
     }
 
+    function it_has_no_province_name_by_default()
+    {
+        $this->getProvinceName()->shouldReturn(null);
+    }
+
+    function its_province_name_is_mutable()
+    {
+        $this->setProvinceName('Utah');
+        $this->getProvinceName()->shouldReturn('Utah');
+    }
+
     function it_has_no_company_by_default()
     {
         $this->getCompany()->shouldReturn(null);

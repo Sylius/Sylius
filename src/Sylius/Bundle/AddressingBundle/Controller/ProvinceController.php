@@ -34,7 +34,7 @@ class ProvinceController extends ResourceController
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
      */
-    public function choiceFormAction(Request $request)
+    public function choiceOrTextFieldFormAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         if (!$configuration->isHtmlRequest() || null === $countryCode = $request->query->get('countryCode')) {
@@ -47,7 +47,19 @@ class ProvinceController extends ResourceController
         }
 
         if (!$country->hasProvinces()) {
-            return new JsonResponse(['content' => false]);
+            $form = $this->createProvinceTextForm();
+
+            $view = View::create()
+                ->setData([
+                    'metadata' => $this->metadata,
+                    'form' => $form->createView(),
+                ])
+                ->setTemplate($configuration->getTemplate('_provinceText.html'))
+            ;
+
+            return new JsonResponse([
+                'content' => $this->viewHandler->handle($configuration, $view)->getContent(),
+            ]);
         }
 
         $form = $this->createProvinceChoiceForm($country);
@@ -57,7 +69,7 @@ class ProvinceController extends ResourceController
                 'metadata' => $this->metadata,
                 'form' => $form->createView(),
             ])
-            ->setTemplate($configuration->getTemplate('_provinceChoiceForm.html'))
+            ->setTemplate($configuration->getTemplate('_provinceChoice.html'))
         ;
 
         return new JsonResponse([
@@ -76,6 +88,17 @@ class ProvinceController extends ResourceController
             'country' => $country,
             'label' => 'sylius.form.address.province',
             'empty_value' => 'sylius.form.province.select',
+        ]);
+    }
+
+    /**
+     * @return FormInterface
+     */
+    protected function createProvinceTextForm()
+    {
+        return $this->get('form.factory')->createNamed('sylius_address_province', 'text', null, [
+            'required' => false,
+            'label' => 'sylius.form.address.province',
         ]);
     }
 }
