@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Taxon;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
@@ -48,6 +49,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function specifyPermalink($permalink, $languageCode);
 
     /**
+     * @return bool
+     */
+    public function isImageCodeDisabled();
+
+    /**
      * @param string $code
      * @param string $path
      */
@@ -77,4 +83,13 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $path
      */
     public function changeImageWithCode($code, $path);
+
+    /**
+     * @param string $element
+     *
+     * @return string
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getValidationMessageForImage($element);
 }

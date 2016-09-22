@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,6 +24,11 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingTaxonsContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var CreatePageInterface
      */
@@ -39,15 +45,18 @@ final class ManagingTaxonsContext implements Context
     private $currentPageResolver;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
@@ -67,6 +76,8 @@ final class ManagingTaxonsContext implements Context
      */
     public function iWantToModifyATaxon(TaxonInterface $taxon)
     {
+        $this->sharedStorage->set('taxon', $taxon);
+
         $this->updatePage->open(['id' => $taxon->getId()]);
     }
 
@@ -369,5 +380,38 @@ final class ManagingTaxonsContext implements Context
     public function iChangeItsImageToPathForTheCode($path, $code)
     {
         $this->updatePage->changeImageWithCode($code, $path);
+    }
+
+    /**
+     * @Then I should be notified that the image with this code already exists
+     */
+    public function iShouldBeNotifiedThatTheImageWithThisCodeAlreadyExists()
+    {
+        Assert::same($this->updatePage->getValidationMessageForImage('code'), 'Image code must be unique within this taxon.');
+    }
+
+    /**
+     * @Then /^there should still be only one image in (this taxon)$/
+     */
+    public function thereShouldStillBeOnlyOneImageInThisTaxon(TaxonInterface $taxon)
+    {
+        $this->iWantToModifyATaxon($taxon);
+
+        Assert::eq(
+            1,
+            $this->updatePage->countImages(),
+            'This taxon has %2$s images, but it should have only one.'
+        );
+    }
+
+    /**
+     * @Then the image code field should be disabled
+     */
+    public function theImageCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isImageCodeDisabled(),
+            'Image code field should be disabled but it is not.'
+        );
     }
 }
