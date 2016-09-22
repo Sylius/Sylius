@@ -6,19 +6,19 @@ sylius_grid:
                 options:
                     class: "%sylius.model.customer.class%"
             sorting:
-                created_at:
+                createdAt:
                     path: createdAt
             fields:
-                first_name:
+                firstName:
                     type: string
                     label: sylius.ui.first_name
-                last_name:
+                lastName:
                     type: string
                     label: sylius.ui.last_name
                 email:
                     type: string
                     label: sylius.ui.email
-                created_at:
+                createdAt:
                     type: datetime
                     label: sylius.ui.registration_date
                     options:

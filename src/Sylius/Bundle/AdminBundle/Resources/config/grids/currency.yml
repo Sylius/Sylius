@@ -16,7 +16,7 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
-                exchange_rate:
+                exchangeRate:
                     type: string
                     label: sylius.ui.exchange_rate
                 enabled:
