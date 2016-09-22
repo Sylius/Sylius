@@ -39,7 +39,7 @@ var paths = {
 gulp.task('admin-js', function () {
     return gulp.src(paths.admin.js)
         .pipe(concat('app.js'))
-        .pipe(gulpif(env === 'prod', uglify))
+        .pipe(gulpif(env === 'prod', uglify()))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(adminRootPath + 'js/'))
     ;
@@ -60,7 +60,7 @@ gulp.task('admin-css', function() {
     return merge(cssStream, sassStream)
         .pipe(order(['css-files.css', 'sass-files.scss']))
         .pipe(concat('style.css'))
-        .pipe(gulpif(env === 'prod', uglifycss))
+        .pipe(gulpif(env === 'prod', uglifycss()))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(adminRootPath + 'css/'))
         .pipe(livereload())
