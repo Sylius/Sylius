@@ -95,7 +95,9 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function nextStep()
     {
-        $this->getElement('next_step')->press();
+        if (!$this->getElement('next_step')->hasClass('disabled')) {
+            $this->getElement('next_step')->press();
+        }
     }
 
     public function changeAddress()
@@ -111,6 +113,32 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     /**
      * {@inheritdoc}
      */
+    public function getValidationMessageForShipment()
+    {
+        $foundElement = $this->getElement('shipment');
+        if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Items element');
+        }
+
+        $validationMessage = $foundElement->find('css', '.pointing');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
+        }
+
+        return $validationMessage->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasNoAvailableShippingMethodsWarning()
+    {
+        return $this->hasElement('warning_no_shipping_methods');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -118,11 +146,12 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             'checkout_subtotal' => '#checkout-subtotal',
             'next_step' => '#next-step',
             'order_cannot_be_shipped_message' => '#sylius-order-cannot-be-shipped',
-            'shipping_method_option' => '.item:contains("%shipping_method%") input',
+            'shipment' => '.items',
             'shipping_method' => '[name="sylius_checkout_select_shipping[shipments][0][method]"]',
             'shipping_method_fee' => '.item:contains("%shipping_method%") .fee',
             'shipping_method_select' => '.item:contains("%shipping_method%") > .field > .ui.radio.checkbox',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',
+            'warning_no_shipping_methods' => '#sylius-order-cannot-be-shipped'
         ]);
     }
 }
