@@ -20,14 +20,12 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -80,11 +78,6 @@ final class CheckoutContext implements Context
     private $orderRepository;
 
     /**
-     * @var SharedSecurityServiceInterface
-     */
-    private $sharedSecurityService;
-
-    /**
      * @var FactoryInterface
      */
     private $addressFactory;
@@ -103,7 +96,6 @@ final class CheckoutContext implements Context
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
      * @param OrderRepositoryInterface $orderRepository
-     * @param SharedSecurityServiceInterface $sharedSecurityService
      * @param FactoryInterface $addressFactory
      * @param CurrentPageResolverInterface $currentPageResolver
      */
@@ -116,7 +108,6 @@ final class CheckoutContext implements Context
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
         OrderRepositoryInterface $orderRepository,
-        SharedSecurityServiceInterface $sharedSecurityService,
         FactoryInterface $addressFactory,
         CurrentPageResolverInterface $currentPageResolver
     ) {
@@ -128,7 +119,6 @@ final class CheckoutContext implements Context
         $this->selectShippingPage = $selectShippingPage;
         $this->completePage = $completePage;
         $this->orderRepository = $orderRepository;
-        $this->sharedSecurityService = $sharedSecurityService;
         $this->addressFactory = $addressFactory;
         $this->currentPageResolver = $currentPageResolver;
     }
@@ -199,17 +189,6 @@ final class CheckoutContext implements Context
     public function iTryToOpenCheckoutCompletePage()
     {
         $this->completePage->tryToOpen();
-    }
-
-    /**
-     * @Given /^(this user) bought(?: this product| those products)$/
-     */
-    public function thisUserBought(ShopUserInterface $user)
-    {
-        $this->sharedSecurityService->performActionAsShopUser($user, function () {
-            $this->iProceedSelectingPaymentMethod();
-            $this->iConfirmMyOrder();
-        });
     }
 
     /**

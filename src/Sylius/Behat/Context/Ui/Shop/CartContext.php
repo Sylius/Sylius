@@ -17,8 +17,6 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\SharedSecurityServiceInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -52,29 +50,21 @@ final class CartContext implements Context
     private $notificationChecker;
 
     /**
-     * @var SharedSecurityServiceInterface
-     */
-    private $sharedSecurityService;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param SummaryPageInterface $summaryPage
      * @param ShowPageInterface $productShowPage
      * @param NotificationCheckerInterface $notificationChecker
-     * @param SharedSecurityServiceInterface $sharedSecurityService
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SummaryPageInterface $summaryPage,
         ShowPageInterface $productShowPage,
-        NotificationCheckerInterface $notificationChecker,
-        SharedSecurityServiceInterface $sharedSecurityService
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->summaryPage = $summaryPage;
         $this->productShowPage = $productShowPage;
         $this->notificationChecker = $notificationChecker;
-        $this->sharedSecurityService = $sharedSecurityService;
     }
 
     /**
@@ -263,16 +253,6 @@ final class CartContext implements Context
         $this->productShowPage->addToCart();
 
         $this->sharedStorage->set('product', $product);
-    }
-
-    /**
-     * @Given /^(this user) has ("[^"]+" product) in the cart$/
-     */
-    public function thisUserHasProductInTheCart(ShopUserInterface $user, ProductInterface $product)
-    {
-        $this->sharedSecurityService->performActionAsShopUser($user, function () use ($product) {
-            $this->iAddProductToTheCart($product);
-        });
     }
 
     /**
