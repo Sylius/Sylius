@@ -29,13 +29,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function createListQueryBuilder();
 
     /**
-     * @param int $id
-     *
-     * @return null|ProductInterface
-     */
-    public function findForDetailsPage($id);
-
-    /**
      * @param ChannelInterface $channel
      * @param int $count
      *

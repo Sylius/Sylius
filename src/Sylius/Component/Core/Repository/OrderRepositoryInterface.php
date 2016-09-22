@@ -52,14 +52,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @param CustomerInterface $customer
      * @param array $sorting
      *
-     * @return PagerfantaInterface
-     */
-    public function createPaginatorByCustomer(CustomerInterface $customer, array $sorting = []);
-
-    /**
-     * @param CustomerInterface $customer
-     * @param array $sorting
-     *
      * @return OrderInterface[]
      */
     public function findByCustomer(CustomerInterface $customer, array $sorting = []);

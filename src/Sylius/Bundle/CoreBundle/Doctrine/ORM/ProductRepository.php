@@ -37,30 +37,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findForDetailsPage($id)
-    {
-        $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder
-            ->select('o, option, variant')
-            ->leftJoin('o.options', 'option')
-            ->leftJoin('o.variants', 'variant')
-            ->leftJoin('variant.images', 'image')
-            ->addSelect('image')
-            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
-            ->setParameter('id', $id)
-        ;
-
-        $result = $queryBuilder
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-
-        return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findLatestByChannel(ChannelInterface $channel, $count)
     {
         return $this->createQueryBuilder('o')

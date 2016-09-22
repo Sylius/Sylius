@@ -55,17 +55,6 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     /**
      * {@inheritdoc}
      */
-    public function createPaginatorByCustomer(CustomerInterface $customer, array $sorting = [])
-    {
-        $queryBuilder = $this->createByCustomerQueryBuilder($customer);
-        $this->applySorting($queryBuilder, $sorting);
-
-        return $this->getPaginator($queryBuilder);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findByCustomer(CustomerInterface $customer, array $sorting = [])
     {
         $queryBuilder = $this->createByCustomerQueryBuilder($customer);
