@@ -202,6 +202,14 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $subtotalTable->find('css', sprintf('#item-%s-subtotal', $itemSlug))->getText();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingAddressCountry()
+    {
+        return $this->getElement('shipping_country')->find('css', 'option:selected')->getText();
+    }
+
     public function nextStep()
     {
         $this->getElement('next_step')->press();

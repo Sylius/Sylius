@@ -81,6 +81,11 @@ interface AddressPageInterface extends SymfonyPageInterface
      */
     public function getItemSubtotal($itemName);
 
+    /**
+     * @return string
+     */
+    public function getShippingAddressCountry();
+
     public function nextStep();
 
     public function backToStore();

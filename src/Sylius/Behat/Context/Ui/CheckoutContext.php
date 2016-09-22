@@ -316,6 +316,30 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should have :countryName selected as country
+     */
+    public function iShouldHaveSelectedAsCountry($countryName)
+    {
+        Assert::eq(
+            $countryName,
+            $this->addressPage->getShippingAddressCountry(),
+            sprintf('Shipping country should be %s but is not.', $countryName)
+        );
+    }
+
+    /**
+     * @Then I should have no country selected
+     */
+    public function iShouldHaveNoCountrySelected()
+    {
+        Assert::eq(
+            'Select',
+            $this->addressPage->getShippingAddressCountry(),
+            'Shipping country should not be selected.'
+        );
+    }
+
+    /**
      * @When I complete the addressing step
      * @When I try to complete the addressing step
      */
