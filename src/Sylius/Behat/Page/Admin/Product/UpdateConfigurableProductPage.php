@@ -120,6 +120,17 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
+    public function changeImageWithCode($code, $path)
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        $imageForm = $this->getImageElementByCode($code);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');

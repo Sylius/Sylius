@@ -8,7 +8,7 @@ Feature: Changing images of an existing product
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @todo
+    @ui @javascript
     Scenario: Changing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "ford.jpg" with a code "thumbnail"
@@ -18,7 +18,7 @@ Feature: Changing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should have an image with a code "thumbnail"
 
-    @todo
+    @ui @javascript
     Scenario: Changing a single image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "ford.jpg" with a code "thumbnail"
