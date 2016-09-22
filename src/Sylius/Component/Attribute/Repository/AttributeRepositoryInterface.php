@@ -22,10 +22,11 @@ interface AttributeRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param string $name
+     * @param string $locale
      *
-     * @return AttributeInterface|null
+     * @return AttributeInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name, $locale);
 
     /**
      * @param array $criteria

@@ -40,13 +40,14 @@ final class ShippingMethodContext implements Context
      */
     public function getShippingMethodByName($shippingMethodName)
     {
-        $shippingMethod = $this->shippingMethodRepository->findOneByName($shippingMethodName);
+        $shippingMethods = $this->shippingMethodRepository->findByName($shippingMethodName, 'en_US');
 
-        Assert::notNull(
-            $shippingMethod,
-            sprintf('Shipping method with name "%s" does not exist', $shippingMethodName)
+        Assert::eq(
+            1,
+            count($shippingMethods),
+            sprintf('%d shippinf methods has been found with name "%s".', count($shippingMethods), $shippingMethodName)
         );
 
-        return $shippingMethod;
+        return $shippingMethods[0];
     }
 }

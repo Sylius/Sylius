@@ -41,14 +41,15 @@ final class ProductContext implements Context
      */
     public function getProductByName($productName)
     {
-        $product = $this->productRepository->findOneByName($productName);
+        $products = $this->productRepository->findByName($productName, 'en_US');
 
-        Assert::notNull(
-            $product,
-            sprintf('Product with name "%s" does not exist', $productName)
+        Assert::eq(
+            1,
+            count($products),
+            sprintf('%d products has been found with name "%s".', count($products), $productName)
         );
 
-        return $product;
+        return $products[0];
     }
 
     /**

@@ -70,10 +70,11 @@ interface TaxonRepositoryInterface extends RepositoryInterface
 
     /**
      * @param string $name
+     * @param string $locale
      *
-     * @return TaxonInterface|null
+     * @return TaxonInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name, $locale);
 
     /**
      * @return QueryBuilder

@@ -21,10 +21,11 @@ interface ProductRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param string $name
+     * @param string $locale
      *
-     * @return ProductInterface|null
+     * @return ProductInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name, $locale);
 
     /**
      * @param string $slug

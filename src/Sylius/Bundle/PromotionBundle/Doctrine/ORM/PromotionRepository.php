@@ -45,14 +45,9 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findByName($name)
     {
-        return $this->createQueryBuilder('o')
-            ->where('o.name = :name')
-            ->setParameter('name', $name)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->findBy(['name' => $name]);
     }
 
     /**

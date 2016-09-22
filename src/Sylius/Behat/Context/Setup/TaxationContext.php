@@ -22,6 +22,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -173,12 +174,18 @@ final class TaxationContext implements Context
      */
     private function getOrCreateTaxCategory($taxCategoryName)
     {
-        $taxCategory = $this->taxCategoryRepository->findOneByName($taxCategoryName);
-        if (null === $taxCategory) {
-            $taxCategory = $this->createTaxCategory($taxCategoryName);
+        $taxCategories = $this->taxCategoryRepository->findByName($taxCategoryName);
+        if (empty($taxCategories)) {
+            return $this->createTaxCategory($taxCategoryName);
         }
 
-        return $taxCategory;
+        Assert::eq(
+            1,
+            count($taxCategories),
+            sprintf('%d tax categories has been found with name "%s".', count($taxCategories), $taxCategoryName)
+        );
+
+        return $taxCategories[0];
     }
 
     /**

@@ -41,13 +41,14 @@ final class ChannelContext implements Context
      */
     public function getChannelByName($channelName)
     {
-        $channel = $this->channelRepository->findOneByName($channelName);
+        $channels = $this->channelRepository->findByName($channelName);
 
-        Assert::notNull(
-            $channel,
-            sprintf('Channel with name "%s" does not exist', $channelName)
+        Assert::eq(
+            1,
+            count($channels),
+            sprintf('%d channels has been found with name "%s".', count($channels), $channelName)
         );
 
-        return $channel;
+        return $channels[0];
     }
 }

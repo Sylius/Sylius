@@ -22,16 +22,9 @@ class VariantRepository extends EntityRepository implements VariantRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findByName($name)
     {
-        return $this->createQueryBuilder('o')
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
-            ->where('translation.name = :name')
-            ->setParameter('name', $name)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $this->findBy(['name' => $name]);
     }
 
     /**
