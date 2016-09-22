@@ -56,6 +56,7 @@ class ImageUploadListener
                 $this->uploader->upload($image);
             }
 
+            // Upload failed? Let's remove that image.
             if (null === $image->getPath()) {
                 $images->removeElement($image);
             }

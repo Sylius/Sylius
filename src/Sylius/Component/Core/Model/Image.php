@@ -11,15 +11,11 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
-
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 abstract class Image implements ImageInterface
 {
-    use TimestampableTrait;
-
     /**
      * @var int
      */

@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface ImageInterface extends ResourceInterface, TimestampableInterface
+interface ImageInterface extends ResourceInterface
 {
     /**
      * @return string
