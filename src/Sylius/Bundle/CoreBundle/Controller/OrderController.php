@@ -47,7 +47,7 @@ class OrderController extends ResourceController
         $order = $this->repository->findOneForPayment($orderId);
         Assert::notNull($order);
 
-        $payment = $order->getLastPayment();
+        $payment = $order->getLastNewPayment();
         $captureToken = $this->getTokenFactory()->createCaptureToken(
             $payment->getMethod()->getGateway(),
             $payment,

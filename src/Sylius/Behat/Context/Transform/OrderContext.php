@@ -49,7 +49,7 @@ final class OrderContext implements Context
      */
     public function getOrderByNumber($orderNumber)
     {
-        $orderNumber = (int) $this->getOrderNumber($orderNumber);
+        $orderNumber = $this->getOrderNumber($orderNumber);
         $order = $this->orderRepository->findOneBy(['number' => $orderNumber]);
 
         Assert::notNull($order, sprintf('Cannot find order with number %s', $orderNumber));

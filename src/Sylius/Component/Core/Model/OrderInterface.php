@@ -169,11 +169,9 @@ interface OrderInterface extends
     public function getLastShipment();
 
     /**
-     * @param $state
-     *
      * @return null|PaymentInterface
      */
-    public function getLastPayment($state = PaymentInterface::STATE_NEW);
+    public function getLastNewPayment();
 
     /**
      * @return bool
