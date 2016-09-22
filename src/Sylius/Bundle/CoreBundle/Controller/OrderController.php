@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
-use FOS\RestBundle\View\View;
-use Gedmo\Loggable\Entity\LogEntry;
 use Payum\Core\Registry\RegistryInterface;
 use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
@@ -36,42 +34,6 @@ use Webmozart\Assert\Assert;
 
 class OrderController extends ResourceController
 {
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     *
-     * @throws NotFoundHttpException
-     */
-    public function historyAction(Request $request)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        /** @var $order OrderInterface */
-        $order = $this->findOr404($configuration);
-
-        $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
-
-        $items = [];
-        foreach ($order->getItems() as $item) {
-            $items[] = $repository->getLogEntries($item);
-        }
-
-        $view = View::create()
-            ->setTemplate($configuration->getTemplate('history.html'))
-            ->setData([
-                'order' => $order,
-                'logs' => [
-                    'order' => $repository->getLogEntries($order),
-                    'order_items' => $items,
-                    'billing_address' => $repository->getLogEntries($order->getBillingAddress()),
-                    'shipping_address' => $repository->getLogEntries($order->getShippingAddress()),
-                ],
-            ])
-        ;
-
-        return $this->viewHandler->handle($configuration, $view);
-    }
-
     /**
      * @param Request $request
      * @param int $orderId
@@ -121,21 +83,24 @@ class OrderController extends ResourceController
 
     /**
      * @param Request $request
+     * @param mixed $orderId
+     * @param string $orderTokenValue
      *
      * @return Response
      */
-    public function thankYouAction(Request $request)
+    public function thankYouAction(Request $request, $orderId, $orderTokenValue)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $orderId = $request->get('orderId');
-        Assert::notNull($orderId);
+        /** @var OrderInterface $order */
         $order = $this->repository->findOneForPayment($orderId);
         Assert::notNull($order);
 
-        $payment = $order->getLastPayment();
-        if (null !== $payment && $payment->getMethod()->getGateway() === 'offline') {
-            return $this->redirectToRoute('sylius_shop_order_pay', ['orderId' => $orderId]);
+        if ($order->getTokenValue() !== $orderTokenValue) {
+            return $this->redirectToRoute(
+                $configuration->getParameters()->get('after_failure[route]', null, true),
+                $configuration->getParameters()->get('after_failure[parameters]', [], true)
+            );
         }
 
         return $this->render($configuration->getParameters()->get('template'), ['order' => $order]);

@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_shop_order_pay:
-    path: /{orderId}/pay
+    path: /{orderId}/{orderTokenValue}/pay
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:payAction
@@ -11,12 +11,15 @@ sylius_shop_order_pay:
                 route: sylius_shop_thank_you
                 parameters:
                     orderId: $orderId
+                    orderTokenValue: $orderTokenValue
             after_pay:
                 route: sylius_shop_order_after_pay
-                parameters: { orderId: $orderId }
+                parameters:
+                    orderId: $orderId
+                    orderTokenValue: $orderTokenValue
 
 sylius_shop_order_after_pay:
-    path: /{orderId}/after-pay
+    path: /{orderId}/{orderTokenValue}/after-pay
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:afterPayAction
@@ -25,9 +28,10 @@ sylius_shop_order_after_pay:
                 route: sylius_shop_thank_you
                 parameters:
                     orderId: $orderId
+                    orderTokenValue: $orderTokenValue
 
 sylius_shop_order_payment_method_update:
-    path: /{orderId}/change-payment-method
+    path: /{orderId}/{orderTokenValue}/change-payment-method
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.order:updateAction
@@ -42,3 +46,14 @@ sylius_shop_order_payment_method_update:
                 route: sylius_shop_thank_you
                 parameters:
                     orderId: $orderId
+                    orderTokenValue: $orderTokenValue
+
+sylius_shop_thank_you:
+    path: /{orderId}/{orderTokenValue}/thank-you
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:thankYouAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:thankYou.html.twig
+            after_failure:
+                route: sylius_shop_homepage

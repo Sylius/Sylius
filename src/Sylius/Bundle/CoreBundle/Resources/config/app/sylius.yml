@@ -119,7 +119,6 @@ sylius_payment:
         payment:
             classes:
                 model: Sylius\Component\Core\Model\Payment
-                controller: Sylius\Bundle\CoreBundle\Controller\PaymentController
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentRepository
         payment_method:
             classes:

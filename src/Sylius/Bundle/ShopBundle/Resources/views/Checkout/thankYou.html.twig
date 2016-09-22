@@ -22,7 +22,7 @@
                 {% else %}
                     <i class="circular payment icon"></i>
                     <div class="content">
-                        {{ render(url('sylius_shop_payment_method_update', {'paymentId': order.payments.last().id} )) }}
+                        {{ render(url('sylius_shop_order_payment_method_update', {'orderId': order.id} )) }}
                         {{ 'sylius.ui.payment_ready_to_pay'|trans }}
                         <a href="{{ path('sylius_shop_order_pay', {'orderId': order.id}) }}" id="sylius-pay-link" class="ui primary button">
                             {{ 'sylius.ui.pay'|trans }}
