@@ -39,8 +39,19 @@ final class OrderTypeSpec extends ObjectBehavior
 
     function it_builds_form_with_items_collection_field(FormBuilderInterface $builder)
     {
-        $builder->add('items', 'collection', Argument::any())
-            ->willReturn($builder);
+        $builder
+            ->add('items', 'collection', Argument::any())
+            ->willReturn($builder)
+            ->shouldBeCalled()
+        ;
+
+        $builder
+            ->add('notes', 'text', [
+                'label' => 'sylius.ui.notes',
+            ])
+            ->willReturn($builder)
+            ->shouldBeCalled()
+        ;
 
         $this->buildForm($builder, []);
     }

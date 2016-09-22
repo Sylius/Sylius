@@ -3,6 +3,10 @@ UPGRADE
 
 ## From 0.19 to 1.0.0-alpha
 
+### CartBundle
+
+ * Merge ``Cart`` component and ``CartBundle`` into ``Order\Core`` component and ``Order\CoreBundle``.
+
 ### WebBundle
  
  * Removed ``WebBundle``. See ``ShopBundle`` for the website and ``AdminBundle`` for administration-related.

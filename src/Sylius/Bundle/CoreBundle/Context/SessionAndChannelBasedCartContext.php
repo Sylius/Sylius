@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Context;
 
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Core\Repository\CartRepositoryInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -34,9 +34,9 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
     private $sessionKeyName;
 
     /**
-     * @var CartRepositoryInterface
+     * @var OrderRepositoryInterface
      */
-    private $cartRepository;
+    private $orderRepository;
 
     /**
      * @var ChannelContextInterface
@@ -47,18 +47,18 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
      * @param SessionInterface $session
      * @param string $sessionKeyName
      * @param ChannelContextInterface $channelContext
-     * @param CartRepositoryInterface $cartRepository
+     * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
         SessionInterface $session, 
         $sessionKeyName, 
         ChannelContextInterface $channelContext,
-        CartRepositoryInterface $cartRepository
+        OrderRepositoryInterface $orderRepository
     ) {
         $this->session = $session;
         $this->sessionKeyName = $sessionKeyName;
         $this->channelContext = $channelContext;
-        $this->cartRepository = $cartRepository;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -76,7 +76,7 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
             throw new CartNotFoundException('Sylius was not able to find the cart in session');
         }
         
-        $cart = $this->cartRepository->findCartByIdAndChannel(
+        $cart = $this->orderRepository->findCartByIdAndChannel(
             $this->session->get(sprintf('%s.%s', $this->sessionKeyName, $channel->getCode())),
             $channel
         );

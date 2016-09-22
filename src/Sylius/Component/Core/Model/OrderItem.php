@@ -11,13 +11,13 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Cart\Model\CartItem;
+use Sylius\Component\Order\Model\OrderItem as BaseOrderItem;
 use Sylius\Component\Order\Model\OrderItemInterface as BaseOrderItemInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderItem extends CartItem implements OrderItemInterface
+class OrderItem extends BaseOrderItem implements OrderItemInterface
 {
     /**
      * @var ProductVariantInterface

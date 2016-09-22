@@ -26,20 +26,6 @@ sylius_association:
                     model: Sylius\Component\Product\Model\ProductAssociation
                     interface: Sylius\Component\Product\Model\ProductAssociationInterface
 
-sylius_cart:
-    resources:
-        cart:
-            classes:
-                model: "%sylius.model.order.class%"
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
-                form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\CartType
-        cart_item:
-            classes:
-                model: "%sylius.model.order_item.class%"
-                form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\CartItemType
-
 sylius_channel:
     resources:
         channel:

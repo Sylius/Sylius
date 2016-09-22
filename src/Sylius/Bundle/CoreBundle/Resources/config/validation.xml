@@ -124,7 +124,7 @@
             </constraint>
         </property>
     </class>
-    <class name="Sylius\Component\Cart\Model\CartItem">
+    <class name="Sylius\Component\Order\Model\OrderItem">
         <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
             <option name="stockablePath">variant</option>
             <option name="groups">

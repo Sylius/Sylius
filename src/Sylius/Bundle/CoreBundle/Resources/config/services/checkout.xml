@@ -14,11 +14,11 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sylius.form.type.checkout_address" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType">
-            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.model.order.class%</argument>
             <tag name="form.type" alias="sylius_checkout_address" />
         </service>
         <service id="sylius.form.type.checkout_select_shipping" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType">
-            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.model.order.class%</argument>
             <tag name="form.type" alias="sylius_checkout_select_shipping" />
         </service>
         <service id="sylius.form.type.checkout_shipment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType">
@@ -26,7 +26,7 @@
             <tag name="form.type" alias="sylius_checkout_shipment" />
         </service>
         <service id="sylius.form.type.checkout_select_payment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType">
-            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.model.order.class%</argument>
             <tag name="form.type" alias="sylius_checkout_select_payment" />
         </service>
         <service id="sylius.form.type.checkout_payment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType">
@@ -34,7 +34,7 @@
             <tag name="form.type" alias="sylius_checkout_payment" />
         </service>
         <service id="sylius.form.type.checkout_complete" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType">
-            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.model.order.class%</argument>
             <tag name="form.type" alias="sylius_checkout_complete" />
         </service>
     </services>

@@ -147,5 +147,12 @@
             <argument type="service" id="sylius.repository.customer" />
             <tag name="form.type" alias="sylius_customer_registration" />
         </service>
+
+        <service id="sylius.form.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Type\CartItemType">
+            <argument>%sylius.model.order_item.class%</argument>
+            <argument>%sylius.validation_groups.order_item%</argument>
+            <argument type="service" id="sylius.form.data_mapper.order_item_quantity"/>
+            <tag name="form.type" alias="sylius_cart_item" />
+        </service>
     </services>
 </container>

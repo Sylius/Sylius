@@ -38,7 +38,7 @@
             <argument type="service" id="session" />
             <argument>_sylius.cart</argument>
             <argument type="service" id="sylius.context.channel.cached" />
-            <argument type="service" id="sylius.repository.cart" />
+            <argument type="service" id="sylius.repository.order" />
         </service>
 
         <service id="sylius.currency_provider.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedCurrencyProvider" decorates="sylius.currency_provider">

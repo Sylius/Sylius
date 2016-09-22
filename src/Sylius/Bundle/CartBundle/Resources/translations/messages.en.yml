@@ -1,5 +1,0 @@
-sylius:
-    form:
-        cart_item:
-            quantity: Quantity
-            

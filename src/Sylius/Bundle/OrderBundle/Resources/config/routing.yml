@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_cart_summary:
+    path: /
+    defaults: { _controller: sylius.controller.order:summaryAction }
+
+sylius_cart_save:
+    path: /save
+    defaults: { _controller: sylius.controller.order:saveAction }
+
+sylius_cart_clear:
+    path: /clear
+    defaults: { _controller: sylius.controller.order:clearAction }
+
+sylius_cart_item_add:
+    path: /add
+    defaults: { _controller: sylius.controller.order_item:addAction }
+
+sylius_cart_item_remove:
+    path: /{id}/remove
+    defaults: { _controller: sylius.controller.order_item:removeAction }

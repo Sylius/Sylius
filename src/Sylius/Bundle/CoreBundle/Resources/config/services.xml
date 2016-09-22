@@ -78,15 +78,17 @@
         <service id="sylius.form.event_subscriber.set_customer" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber">
             <argument type="service" id="sylius.repository.customer" />
         </service>
-        <service id="sylius.custom_factory.cart_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.cart_item">
-            <argument type="service" id="sylius.custom_factory.cart_item.inner" />
-            <argument type="service" id="sylius.variant_resolver.default" />
-        </service>
         <service id="sylius.inventory.on_hand_quantity_updater" class="Sylius\Component\Core\Inventory\Updater\OnHandQuantityUpdater"/>
         <service id="sylius.inventory.on_hold_quantity_updater" class="Sylius\Component\Core\Inventory\Updater\OnHoldQuantityUpdater" />
         <service id="sylius.handler.order_inventory" class="Sylius\Component\Core\Inventory\Handler\OrderInventoryHandler">
             <argument type="service" id="sylius.inventory.on_hand_quantity_updater" />
             <argument type="service" id="sylius.inventory.on_hold_quantity_updater" />
         </service>
+
+        <service id="sylius.custom_factory.order_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.order_item">
+            <argument type="service" id="sylius.custom_factory.order_item.inner" />
+            <argument type="service" id="sylius.variant_resolver.default" />
+        </service>
+        <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
     </services>
 </container>

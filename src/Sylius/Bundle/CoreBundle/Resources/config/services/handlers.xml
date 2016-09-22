@@ -18,7 +18,7 @@
                 <argument type="service">
                     <service class="Sylius\Bundle\CoreBundle\Handler\CartLocaleChangeHandler">
                         <argument type="service" id="sylius.context.cart" />
-                        <argument type="service" id="sylius.manager.cart" />
+                        <argument type="service" id="sylius.manager.order" />
                     </service>
                 </argument>
             </call>

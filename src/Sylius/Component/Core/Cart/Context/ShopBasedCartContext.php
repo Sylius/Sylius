@@ -11,9 +11,8 @@
 
 namespace Sylius\Component\Core\Cart\Context;
 
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -36,7 +35,7 @@ final class ShopBasedCartContext implements CartContextInterface
     private $shopperContext;
 
     /**
-     * @var CartInterface|null
+     * @var OrderInterface|null
      */
     private $cart;
 

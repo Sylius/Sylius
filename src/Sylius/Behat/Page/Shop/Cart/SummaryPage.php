@@ -264,7 +264,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'cart_items' => '#sylius-cart-items',
             'cart_total' => '#sylius-cart-button',
             'clear_button' => '#sylius-cart-clear',
-            'coupon_field' => '#sylius_cart_promotionCoupon',
+            'coupon_field' => '#sylius_order_promotionCoupon',
             'grand_total' => '#sylius-cart-grand-total',
             'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
             'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',

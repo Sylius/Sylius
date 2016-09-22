@@ -7,7 +7,6 @@ Symfony Bundles
     general/index
     SyliusAddressingBundle/index
     SyliusAttributeBundle/index
-    SyliusCartBundle/index
     SyliusFixturesBundle/index
     SyliusGridBundle/index
     SyliusInventoryBundle/index

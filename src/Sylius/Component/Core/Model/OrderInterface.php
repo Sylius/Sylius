@@ -12,19 +12,20 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Channel\Model\ChannelAwareInterface;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponAwarePromotionSubjectInterface;
-use Sylius\Component\Customer\Model\CustomerAwareInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OrderInterface extends
-    CartInterface,
+    BaseOrderInterface,
     PaymentsSubjectInterface,
     CountablePromotionSubjectInterface,
     CouponAwarePromotionSubjectInterface,

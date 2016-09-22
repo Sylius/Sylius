@@ -29,6 +29,8 @@
 
         <parameter key="sylius.order_number_assigner.class">Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner</parameter>
         <parameter key="sylius.sequential_order_number_generator.class">Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator</parameter>
+
+        <parameter key="sylius.listener.session_cart.class"></parameter>
     </parameters>
 
     <services>
@@ -61,5 +63,27 @@
         </service>
 
         <service id="sylius.order_processing.order_processor" class="Sylius\Component\Order\Processor\CompositeOrderProcessor" />
+
+        <service id="sylius.listener.session_cart" class="Sylius\Bundle\OrderBundle\EventListener\SessionCartSubscriber">
+            <argument type="service" id="sylius.context.cart" />
+            <argument>_sylius.cart</argument>
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="sylius.cart.order_modifier" class="Sylius\Component\Order\Modifier\OrderModifier">
+            <argument type="service" id="sylius.order_processing.order_processor" />
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
+        </service>
+        <service id="sylius.context.cart_new" class="Sylius\Component\Order\Context\CartContext">
+            <argument type="service" id="sylius.factory.order" />
+            <tag name="sylius.cart_context" priority="-999" />
+        </service>
+        <service id="sylius.context.cart_session_based" class="Sylius\Bundle\OrderBundle\Context\SessionBasedCartContext">
+            <argument type="service" id="session" />
+            <argument>_sylius.cart</argument>
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.cart_context" priority="-777" />
+        </service>
+        <service id="sylius.context.cart" class="Sylius\Component\Order\Context\CompositeCartContext" />
     </services>
 </container>

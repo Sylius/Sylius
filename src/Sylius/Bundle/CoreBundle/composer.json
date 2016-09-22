@@ -31,7 +31,6 @@
         "sylius/addressing-bundle": "^1.0",
         "sylius/api-bundle": "^1.0",
         "sylius/attribute-bundle": "^1.0",
-        "sylius/cart-bundle": "^1.0",
         "sylius/content-bundle": "^1.0",
         "sylius/currency-bundle": "^1.0",
         "sylius/customer-bundle": "^1.0",
