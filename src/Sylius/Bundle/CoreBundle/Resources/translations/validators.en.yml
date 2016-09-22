@@ -29,6 +29,9 @@ sylius:
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
+    taxon_image:
+        code:
+            unique: Image code must be unique within this taxon.
     user:
         email:
             unique: This email is already used.
