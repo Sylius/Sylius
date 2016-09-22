@@ -94,6 +94,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Given /^I am viewing the summary of (this order)$/
      * @When I view the summary of the order :order
      * @When /^I view the summary of (this order made by "[^"]+")$/
      */
@@ -103,7 +104,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When /^I mark (this order) as a paid$/
+     * @When /^I mark (this order) as paid$/
      */
     public function iMarkThisOrderAsAPaid(OrderInterface $order)
     {
@@ -120,7 +121,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Given /^I ship (this order)$/
+     * @When /^I ship (this order)$/
      */
     public function iShipThisOrder(OrderInterface $order)
     {
@@ -544,7 +545,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then it should have a :state state
+     * @Then it should( still) have a :state state
      */
     public function itShouldHaveState($state)
     {
