@@ -34,14 +34,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function createByCustomerQueryBuilder(CustomerInterface $customer);
 
     /**
-     * @param \DateTime $expiresAt
-     * @param string $state
-     *
-     * @return OrderInterface[]
-     */
-    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_NEW);
-
-    /**
      * @param CustomerInterface $customer
      * @param CouponInterface $coupon
      *
@@ -71,13 +63,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return OrderInterface[]
      */
     public function findByCustomer(CustomerInterface $customer, array $sorting = []);
-
-    /**
-     * @param int $id
-     *
-     * @return OrderInterface|null
-     */
-    public function findForDetailsPage($id);
     
     /**
      * @param int $id
@@ -93,41 +78,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return PagerfantaInterface
      */
     public function createCheckoutsPaginator(array $criteria = null, array $sorting = null);
-
-    /**
-     * @param \DateTime $from
-     * @param \DateTime $to
-     * @param string|null $state
-     *
-     * @return OrderInterface[]
-     */
-    public function findBetweenDates(\DateTime $from, \DateTime $to, $state = null);
-
-    /**
-     * @param \DateTime $from
-     * @param \DateTime $to
-     * @param string|null $state
-     *
-     * @return int
-     */
-    public function countBetweenDates(\DateTime $from, \DateTime $to, $state = null);
-
-    /**
-     * @param \DateTime $from
-     * @param \DateTime $to
-     * @param string|null $state
-     *
-     * @return int
-     */
-    public function revenueBetweenDates(\DateTime $from, \DateTime $to, $state = null);
-
-    /**
-     * @param array $sorting
-     * @param int $limit
-     *
-     * @return OrderInterface[]
-     */
-    public function findCompleted(array $sorting = [], $limit = 5);
 
     /**
      * @param string $number

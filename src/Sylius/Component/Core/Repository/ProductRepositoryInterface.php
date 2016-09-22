@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -22,23 +23,11 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProduc
  */
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
+    /**
+     * @return QueryBuilder
+     */
     public function createListQueryBuilder();
 
-    /**
-     * @param TaxonInterface $taxon
-     * @param array $criteria
-     *
-     * @return PagerfantaInterface
-     */
-    public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = []);
-
-    /**
-     * @param TaxonInterface $taxon
-     * @param ChannelInterface $channel
-     *
-     * @return PagerfantaInterface
-     */
-    public function createByTaxonAndChannelPaginator(TaxonInterface $taxon, ChannelInterface $channel);
     /**
      * @param int $id
      *
