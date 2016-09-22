@@ -46,7 +46,7 @@ final class ProductVariantContext implements Context
      */
     public function getProductVariantByNameAndProduct($variantName, $productName)
     {
-        $products = $this->productRepository->findByName($productName);
+        $products = $this->productRepository->findByName($productName, 'en_US');
 
         Assert::eq(
             1,

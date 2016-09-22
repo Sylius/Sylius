@@ -40,7 +40,7 @@ final class PaymentMethodContext implements Context
      */
     public function getPaymentMethodByName($paymentMethodName)
     {
-        $paymentMethods = $this->paymentMethodRepository->findByName($paymentMethodName);
+        $paymentMethods = $this->paymentMethodRepository->findByName($paymentMethodName, 'en_US');
 
         Assert::eq(
             1,

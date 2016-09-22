@@ -40,7 +40,7 @@ final class ShippingMethodContext implements Context
      */
     public function getShippingMethodByName($shippingMethodName)
     {
-        $shippingMethods = $this->shippingMethodRepository->findByName($shippingMethodName);
+        $shippingMethods = $this->shippingMethodRepository->findByName($shippingMethodName, 'en_US');
 
         Assert::eq(
             1,

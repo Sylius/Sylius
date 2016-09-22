@@ -176,7 +176,7 @@ final class TaxationContext implements Context
     {
         $taxCategories = $this->taxCategoryRepository->findByName($taxCategoryName);
         if (empty($taxCategories)) {
-            $taxCategories = [$this->createTaxCategory($taxCategoryName)];
+            return $this->createTaxCategory($taxCategoryName);
         }
 
         Assert::eq(

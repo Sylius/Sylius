@@ -40,7 +40,7 @@ final class ProductOptionContext implements Context
      */
     public function getProductOptionByName($productOptionName)
     {
-        $productOptions = $this->productOptionRepository->findByName($productOptionName);
+        $productOptions = $this->productOptionRepository->findByName($productOptionName, 'en_US');
 
         Assert::eq(
             1,

@@ -41,7 +41,7 @@ final class ProductContext implements Context
      */
     public function getProductByName($productName)
     {
-        $products = $this->productRepository->findByName($productName);
+        $products = $this->productRepository->findByName($productName, 'en_US');
 
         Assert::eq(
             1,

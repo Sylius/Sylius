@@ -45,7 +45,7 @@ final class TaxonContext implements Context
      */
     public function getTaxonByName($name)
     {
-        $taxons = $this->taxonRepository->findByName($name);
+        $taxons = $this->taxonRepository->findByName($name, 'en_US');
 
         Assert::eq(
             1,

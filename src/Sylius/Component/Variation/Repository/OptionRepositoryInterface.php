@@ -21,8 +21,9 @@ interface OptionRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param string $name
+     * @param string $locale
      *
      * @return OptionInterface[]
      */
-    public function findByName($name);
+    public function findByName($name, $locale);
 }
