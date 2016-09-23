@@ -53,6 +53,10 @@
             });
         });
 
+        if('' !== $('select[name$="[countryCode]"]').val()) {
+            $('select[name$="[countryCode]"]').trigger('change');
+        }
+
         if('' === $.trim($('div.province-container').text())) {
             $('select.country-select').trigger('change');
         }
