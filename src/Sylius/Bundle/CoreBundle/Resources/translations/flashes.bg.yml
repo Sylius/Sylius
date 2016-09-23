@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        cart_clear_completed: Количката е почистена успешно.
+        cart_save_completed: Количката е актуализирана успешно.
+        item_add_completed: Артикулът е добавен в кошницата.
+        item_add_error: Възникна грешка при добавяне на елемент в кошницата.
+        item_remove_completed: Артикулът е премахнат от кошницата.
+        item_remove_error: Възникна грешка при премахването на елемент от количката.

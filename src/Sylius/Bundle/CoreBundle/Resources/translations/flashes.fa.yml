@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: سبد خرید با موفقیت خالی شد.
+        cart_save_completed: سبد خرید با موفقیت به روز شد.
+        item_add_completed: کالا با موفقیت به سبد خرید اضافه شد.
+        item_add_error: هنگام افزودن کالا به سبد خرید اشکالی رخ داد.
+        item_remove_completed: محصول از سبد خرید حذف شد.
+        item_remove_error: هنگام حذف کالا از سبد خرید اشکالی رخ داد.
         restricted_zone_removal: 'محصول %product% از سبد خرید شما حذف شد زیرا در کشور/شهر شما قابل ارائه نیست.'
     checkout:
         restricted_zone: این کالا در کشور شما عرضه نمی شود.

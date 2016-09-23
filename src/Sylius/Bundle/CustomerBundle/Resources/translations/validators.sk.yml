@@ -2,12 +2,25 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    group:
+        name:
+            max: 'Názov skupiny nesmie byť dlhší ako {{ limit }} znakov.'
+            min: 'Názov skupiny musí obsahovať minimálne {{ limit }} znakov.'
+            not_blank: Zadajte názov skupiny.
     customer:
         first_name:
+            max: 'Meno nesmie byť dlhšie ako {{ limit }} znakov.'
+            min: 'Meno musí obsahovať minimálne {{ limit }} znakov.'
             not_blank: Zadajte Vaše krstné meno.
         last_name:
+            max: 'Priezvisko nesmie byť dlhšie ako {{ limit }} znakov.'
             not_blank: Zadajte Vaše priezvisko.
+        gender:
+            not_blank: Pohlavie musí byť vyplnené.
         email:
+            already_used: Tento e-mail sa už používa, prosím prihláste sa alebo použite reset hesla.
+            max: 'E-mail nesmie byť dlhší ako {{ limit }} znakov.'
+            min: 'E-mail musí byť aspoň {{ limit }} znakov.'
             not_blank: Zadajte Váš email.
             invalid: Tento email je neplatný.
             registered: Tento e-mail je už registrovaný, prosím prihláste sa alebo použite reset hesla.

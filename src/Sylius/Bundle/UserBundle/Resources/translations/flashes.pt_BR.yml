@@ -15,3 +15,12 @@ sylius:
                 success: Sua senha foi alterada com sucesso!
         reset_password:
             requested: Se você tiver especificou o e-mail existente no nosso sistema, nós mandamos uma instrução sobre como redefinir sua senha.
+        verification:
+            error: O token de verificação é inválido.
+            notice:
+                verified: Este e-mail já foi verificado.
+            success: O seu endereço de e-mail foi verificado com sucesso.
+            request:
+                success: Um e-mail com um link de verificação foi enviado para seu endereço de e-mail.
+    customer:
+        register: Obrigado por se registar. Por favor verifique o seu e-mail para verificar a sua conta.

@@ -2,6 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_currency:
+            not_blank: Por favor insira a moeda padrão do canal.
+        default_locale:
+            not_blank: Introduza a localidade padrão do canal.
     checkout:
         shipping_method:
             not_blank: Por favor selecione um método de envio.
@@ -27,3 +32,9 @@ sylius:
     product_translation:
         short_description:
             max: 'Breve descrição não pode ser maior que {{ limit }} caracteres.'
+    user:
+        email:
+            unique: Este e-mail já está sendo usado.
+        username:
+            unique: Este nome de utilizador já foi utilizado.
+            not_blank: Por favor, digite seu nome.

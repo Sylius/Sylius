@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        cart_clear_completed: تم مسح العربة بنجاح.
+        cart_save_completed: تم بنجاح تحديث العربة.
+        item_add_completed: تم إضافة العنصر إلى عربة التسوق.
+        item_add_error: حدث خطأ أثناء إضافة العنصر إلى عربة التسوق.
+        item_remove_completed: وقد تم إزالة العنصر من سلة.
+        item_remove_error: حدث خطأ أثناء إزالة العنصر من سلة.

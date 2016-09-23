@@ -2,9 +2,20 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_currency:
+            not_blank: Zadajte predvolenú menu pre kanál.
+        default_locale:
+            not_blank: Zadajte predvolený jazyk pre kanál.
     checkout:
         shipping_method:
             not_blank: Prosím zadajte spôsob dopravy.
+    customer:
+        currency_code:
+            not_valid: Zadaný kód meny nie je neplatný.
+    order:
+        currency_code:
+            not_valid: Zadaný kód meny nie je neplatný.
     locale:
         code:
             not_blank: Zadajte kód jazyka.

@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Кошик було успішно очищено.
+        cart_save_completed: Кошик було успішно оновлено.
+        item_add_completed: Елемент був доданий в кошик.
+        item_add_error: Сталася помилка під час додавання елемента в кошик.
+        item_remove_completed: Елемент видалено з кошика.
+        item_remove_error: Сталася помилка під час видалення елемента з кошику.
         restricted_zone_removal: 'Продукт %product% видалений з кошика, тому що він не доступний у вашій країні.'
     checkout:
         restricted_zone: Цей продукт не є доступна у вашій країні.

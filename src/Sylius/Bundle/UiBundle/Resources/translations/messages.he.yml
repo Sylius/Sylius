@@ -5,10 +5,10 @@ sylius:
     ui:
         city: עיר
         company: חברה
-        "no": false
+        no_label: false
         phone_number: מספר טלפון
         postcode: מיקוד
         province: מחוז
         provinces: מחוזות
         street: רחוב
-        "yes": true
+        yes_label: true

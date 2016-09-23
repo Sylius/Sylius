@@ -15,3 +15,7 @@ sylius:
                 success: Vaše heslo bolo úspešne zmenené!
         reset_password:
             requested: Ak zadaný e-mail existuje v našom systéme, poslali sme naň inštrukcie ako si obnoviť Vaše heslo.
+        verification:
+            error: Verifikačný kód je neplatný.
+            notice:
+                verified: Váš e-mail je už overený.

@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Karta u fshi me sukses.
+        cart_save_completed: Karta u përditësua me sukses.
+        item_add_completed: Artikulli u shtua në kartë.
+        item_add_error: Gabim gjatë shtimit të artikullit në kartë.
+        item_remove_completed: Artikulli u fshi nga karta.
+        item_remove_error: Gabim gjatë fshirjes së artikullit nga karta.
         restricted_zone_removal: 'Produkti %product% i fshirë nga karroca sepse nuk është i vlefshëm në vendin tuaj.'
     checkout:
         restricted_zone: Ky produkt nuk është i vlefshëm në vendin tuaj.
