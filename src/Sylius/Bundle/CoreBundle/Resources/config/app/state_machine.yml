@@ -38,7 +38,7 @@ winzou_state_machine:
                     args: ["object", "event", "'create'", "'sylius_order'"]
                 sylius_hold_inventory:
                     on: ["complete"]
-                    do: ["@sylius.inventory.on_hold_quantity_updater", "increase"]
+                    do: ["@sylius.inventory.order_inventory_operator", "hold"]
                     args: ["object"]
                 sylius_create_payment:
                     on: ["complete"]
@@ -90,7 +90,6 @@ winzou_state_machine:
                 from: [cart]
                 to: awaiting_payment
             partially_pay:
-                from: [awaiting_payment]
                 to: partially_paid
             cancel:
                 from: [awaiting_payment]
@@ -102,7 +101,7 @@ winzou_state_machine:
             after:
                 sylius_order_paid:
                     on: ["pay"]
-                    do: ["@sylius.handler.order_inventory", "handle"]
+                    do: ["@sylius.inventory.order_inventory_operator", "sell"]
                     args: ["object"]
 
     sylius_payment:
@@ -152,6 +151,11 @@ winzou_state_machine:
                     on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'cancel'", "'sylius_order_shipping'"]
+                sylis_cancel_order:
+                    on: ["cancel"]
+                    do: ["@sylius.inventory.order_inventory_operator", "cancel"]
+                    args: ["object"]
+
 
     sylius_shipment:
         callbacks:
