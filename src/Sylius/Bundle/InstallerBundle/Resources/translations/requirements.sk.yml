@@ -6,6 +6,7 @@ sylius:
         header: Rozšírenia
         accelerator:
             header: Akcelerátor
+            help: Povoliť Zend OpCache (vysoko odporúčané).
         apc: APC
         ctype: Ctype
         gd: GD

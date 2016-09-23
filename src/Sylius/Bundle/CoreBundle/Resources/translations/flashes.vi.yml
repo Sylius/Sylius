@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Giỏ hàng đã được xóa thành công.
+        cart_save_completed: Giỏ hàng đã được cập nhật thành công.
+        item_add_completed: Sản phẩm đã được thêm vào giỏ hàng.
+        item_add_error: Xuất hiện lỗi trong khi thêm sản phẩm vào giỏ hàng.
+        item_remove_completed: Sản phẩm đã được xoá khỏi giỏ hàng.
+        item_remove_error: Xuất hiện lỗi trong khi loại bỏ sản phẩm khỏi giỏ hàng.
         restricted_zone_removal: 'Sản phẩm %product% đã bị xoá khỏi giỏ hàng vì nó không nằm trong danh mục sản phẩm ở quốc gia của bạn.'
     checkout:
         restricted_zone: Sản phẩm này không nằm trong danh sách bán ở quốc gia của bạn.

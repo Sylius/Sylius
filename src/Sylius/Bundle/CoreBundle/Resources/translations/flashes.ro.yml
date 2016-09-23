@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Coșul a fost golit cu succes.
+        cart_save_completed: Coșul a fost actualizat cu succes.
+        item_add_completed: Produsul a fost adăugat în coș.
+        item_add_error: A apărut o eroare la adăugarea produsului in coş.
+        item_remove_completed: Produsul a fost scos din coș.
+        item_remove_error: A apărut o eroare la ștergerea produsului din coș.
         restricted_zone_removal: 'Produsul %product% a fost scos din coș, deoarece nu este disponibil în ţara dumneavoastră.'
     checkout:
         restricted_zone: Acest produs nu este disponibil în ţara dumneavoastră.

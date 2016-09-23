@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Krepšelis buvo sėkmingai išvalytas.
+        cart_save_completed: Krepšelis buvo sėkmingai atnaujintas.
+        item_add_completed: Prekė įdėta į krepšelį.
+        item_add_error: Įvyko klaida bandant įdėti prekę į krepšelį.
+        item_remove_completed: Prekė pašalinta iš krepšelio.
+        item_remove_error: Įvyko klaida bandant pašalinti prekę iš krepšelio.
         restricted_zone_removal: 'Produktas %product% pašalintas iš krepšelio, kadangi netinkamas jūsų šaliai.'
     checkout:
         restricted_zone: Šis produktas netinkamas jūsų šaliai.

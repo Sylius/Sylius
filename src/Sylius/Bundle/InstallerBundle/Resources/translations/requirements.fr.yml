@@ -6,6 +6,7 @@ sylius:
         header: Extensions
         accelerator:
             header: Accélérateur
+            help: Activez le OpCache Zend (fortement recommandé).
         apc: APC
         ctype: CType
         gd: GD

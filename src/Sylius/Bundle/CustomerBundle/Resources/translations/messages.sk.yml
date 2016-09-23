@@ -12,7 +12,10 @@ sylius:
             last_name: Priezvisko
             email: Email
             phone_number: Telefónne číslo
+            gender: Pohlavie
+            birthday: Dátum narodenia
             billing_address: Fakturačná adresa
             different_billing_address: Použiť inú fakturačnú adresu?
+            only_customer_registration: Vytvoriť účet?
     gender:
         unknown: Neznáme

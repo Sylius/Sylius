@@ -30,4 +30,5 @@ sylius:
             description: Descrição
             enabled: Habilitado?
             gateway: Gateway
+            instructions: Instruções
             name: Nome

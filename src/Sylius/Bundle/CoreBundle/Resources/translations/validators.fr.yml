@@ -5,6 +5,8 @@ sylius:
     channel:
         default_currency:
             not_blank: Veuillez sélectionner un canal par défaut pour la devise.
+        default_locale:
+            not_blank: Veuillez renseigner la locale par défaut du canal.
     checkout:
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
@@ -33,3 +35,6 @@ sylius:
     user:
         email:
             unique: Cet e-mail est déjà utilisé.
+        username:
+            unique: "Ce nom d'utilisateur est déjà utilisé."
+            not_blank: "Veuillez entrer un nom d'utilisateur."

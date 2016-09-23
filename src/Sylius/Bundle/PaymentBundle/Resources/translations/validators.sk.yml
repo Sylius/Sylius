@@ -19,6 +19,9 @@ sylius:
             min_length: 'CVV kód na karte nesmie obsahovať viac ako {{ limit }} číslic.'
         expiry_year:
             not_blank: Prosím vyberte rok expirácie.
+    payment:
+        currency_code:
+            not_valid: Zadaný kód meny nie je neplatný.
     payment_method:
         gateway:
             not_blank: Prosím zvolťe spôsob platby.
