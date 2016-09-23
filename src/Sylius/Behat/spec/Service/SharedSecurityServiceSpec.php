@@ -17,7 +17,6 @@ use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedSecurityService;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
@@ -29,9 +28,9 @@ use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
  */
 final class SharedSecurityServiceSpec extends ObjectBehavior
 {
-    function let(SecurityServiceInterface $adminSecurityService, SecurityServiceInterface $shopSecurityService)
+    function let(SecurityServiceInterface $adminSecurityService)
     {
-        $this->beConstructedWith($adminSecurityService, $shopSecurityService);
+        $this->beConstructedWith($adminSecurityService);
     }
 
     function it_is_initializable()
@@ -79,47 +78,6 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
         $wrappedOrder = $order->getWrappedObject();
         $this->performActionAsAdminUser(
             $adminUser,
-            function () use ($wrappedOrder) {
-                $wrappedOrder->complete();
-            }
-        );
-    }
-
-    function it_performs_action_as_given_shop_user_and_restore_previous_token(
-        SecurityServiceInterface $shopSecurityService,
-        TokenInterface $token,
-        OrderInterface $order,
-        ShopUserInterface $shopUser
-    ) {
-        $shopSecurityService->getCurrentToken()->willReturn($token);
-        $shopSecurityService->logIn($shopUser)->shouldBeCalled();
-        $order->complete()->shouldBeCalled();
-        $shopSecurityService->restoreToken($token)->shouldBeCalled();
-        $shopSecurityService->logOut()->shouldNotBeCalled();
-
-        $wrappedOrder = $order->getWrappedObject();
-        $this->performActionAsShopUser(
-            $shopUser,
-            function () use ($wrappedOrder) {
-                $wrappedOrder->complete();
-            }
-        );
-    }
-
-    function it_performs_action_as_given_shop_user_and_logout(
-        SecurityServiceInterface $shopSecurityService,
-        OrderInterface $order,
-        ShopUserInterface $shopUser
-    ) {
-        $shopSecurityService->getCurrentToken()->willThrow(TokenNotFoundException::class);
-        $shopSecurityService->logIn($shopUser)->shouldBeCalled();
-        $order->complete()->shouldBeCalled();
-        $shopSecurityService->restoreToken(Argument::any())->shouldNotBeCalled();
-        $shopSecurityService->logOut()->shouldBeCalled();
-
-        $wrappedOrder = $order->getWrappedObject();
-        $this->performActionAsShopUser(
-            $shopUser,
             function () use ($wrappedOrder) {
                 $wrappedOrder->complete();
             }
