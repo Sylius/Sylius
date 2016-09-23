@@ -17,7 +17,7 @@ winzou_state_machine:
                 from: [cart]
                 to: new
             cancel:
-                from: [new]
+                from: [new, fulfilled]
                 to: cancelled
             fulfill:
                 from: [new]

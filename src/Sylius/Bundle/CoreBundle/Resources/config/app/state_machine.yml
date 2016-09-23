@@ -114,7 +114,7 @@ winzou_state_machine:
                     args: ["object.getOrder()"]
                 update_order_payment_state:
                     on: ["complete"]
-                    do: ["@sylius.order_processing.state_resolver", "resolvePaymentState"]
+                    do: ["@sylius.order_processing.state_resolver", "resolve"]
                     args: ["object.getOrder()"]
 
     sylius_order:
@@ -162,7 +162,7 @@ winzou_state_machine:
                     args: ["object"]
                 update_order_shipping_state:
                     on: ["ship"]
-                    do: ["@sylius.order_processing.state_resolver", "resolveShippingState"]
+                    do: ["@sylius.order_processing.state_resolver", "resolve"]
                     args: ["object.getOrder()"]
 
     sylius_review:

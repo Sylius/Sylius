@@ -34,4 +34,4 @@ Feature: Shipping an order
     Scenario: Checking the shipment state of a completed order
         Given this order has already been shipped
         When I browse orders
-        Then this order should have order shipment state "Shipped"
+        Then this order should have order shipping state "Shipped"
