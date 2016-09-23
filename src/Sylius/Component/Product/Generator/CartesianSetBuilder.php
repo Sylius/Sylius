@@ -9,22 +9,35 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Product\SetBuilder;
+namespace Sylius\Component\Product\Generator;
 
 /**
  * Builds the Cartesian product set from one or more given sets.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class CartesianSetBuilder implements SetBuilderInterface
+final class CartesianSetBuilder
 {
     /**
-     * {@inheritdoc}
+     * @param array $setTuples
+     *
+     * @return array
      *
      * @throws \InvalidArgumentException If the array is empty.
      * @throws \InvalidArgumentException If the array does not contain arrays of set tuples.
      */
-    public function build(array $setTuples, $isRecursiveStep = false)
+    public function build(array $setTuples)
+    {
+        return $this->doBuild($setTuples, false);
+    }
+
+    /**
+     * @param array $setTuples
+     * @param bool $isRecursiveStep
+     *
+     * @return array
+     */
+    private function doBuild(array $setTuples, $isRecursiveStep)
     {
         $countTuples = count($setTuples);
 
@@ -47,7 +60,7 @@ final class CartesianSetBuilder implements SetBuilderInterface
         $a = array_shift($setTuples);
         $k = array_shift($keys);
 
-        $b = $this->build($setTuples, true);
+        $b = $this->doBuild($setTuples, true);
 
         $result = [];
 

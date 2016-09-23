@@ -9,22 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Product\SetBuilder;
+namespace spec\Sylius\Component\Product\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Product\SetBuilder\SetBuilderInterface;
+use Sylius\Component\Product\Generator\CartesianSetBuilder;
 
 /**
+ * @mixin CartesianSetBuilder
+ *
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
 final class CartesianSetBuilderSpec extends ObjectBehavior
 {
-    function it_is_a_set_builder()
-    {
-        $this->shouldImplement(SetBuilderInterface::class);
-    }
-
     function it_requires_an_array_of_set_tuples_to_build_from()
     {
         $tupleSetNotInArray = ['a', 'b', 'c'];

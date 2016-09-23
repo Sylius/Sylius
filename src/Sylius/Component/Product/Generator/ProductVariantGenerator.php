@@ -14,7 +14,6 @@ namespace Sylius\Component\Product\Generator;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
-use Sylius\Component\Product\SetBuilder\SetBuilderInterface;
 
 /**
  * Variant generator service implementation.
@@ -38,18 +37,17 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
     protected $variantFactory;
 
     /**
-     * @var SetBuilderInterface
+     * @var CartesianSetBuilder
      */
     private $setBuilder;
 
     /**
      * @param FactoryInterface $variantFactory
-     * @param SetBuilderInterface $setBuilder
      */
-    public function __construct(FactoryInterface $variantFactory, SetBuilderInterface $setBuilder)
+    public function __construct(FactoryInterface $variantFactory)
     {
         $this->variantFactory = $variantFactory;
-        $this->setBuilder = $setBuilder;
+        $this->setBuilder = new CartesianSetBuilder();
     }
 
     /**
