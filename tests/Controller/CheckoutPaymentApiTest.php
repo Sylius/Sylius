@@ -138,7 +138,7 @@ EOT;
         $orderId = $checkoutData['order1']->getId();
         $this->addressOrder($orderId);
         $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
-        $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getId());
+        $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getCode());
 
         $data =
 <<<EOT
