@@ -144,8 +144,7 @@ Your class needs to be extending this base class.
             $this->checkAccessToOrder($order);
 
             $orderStateResolver = $this->get('sylius.order_processing.state_resolver');
-            $orderStateResolver->resolvePaymentState($order);
-            $orderStateResolver->resolveShippingState($order);
+            $orderStateResolver->resolve($order);
 
             $this->getOrderManager()->flush();
 

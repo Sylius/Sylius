@@ -627,6 +627,19 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then the order :order should have order shipment state :orderShipmentState
+     * @Then /^(this order) should have order shipment state "([^"]+)"$/
+     * @Then /^(its) shipment state should be "([^"]+)"$/
+     */
+    public function theOrderShouldHaveShipmentState(OrderInterface $order, $orderShipmentState)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['shipment state' => $orderShipmentState]),
+            sprintf('Cannot find order with "%s" order shipment state on the list.', $orderShipmentState)
+        );
+    }
+
+    /**
      * @Then /^there should be(?:| only) (\d+) payments?$/
      */
     public function theOrderShouldHaveNumberOfPayments($number)
