@@ -460,7 +460,7 @@ sylius:
         new_zone: 'New zone'
         newest_products: 'Newest products'
         next: Next
-        no_label: No
+        no_label: 'No'
         no_account: 'No account yet'
         no_account: no account
         no_association_types_to_display: 'There are no association types defined'
@@ -775,7 +775,7 @@ sylius:
         welcome: Welcome
         welcome_to_our_store: 'Welcome to our store'
         welcome_to_your_space: 'Welcome to your space'
-        yes_label: Yes
+        yes_label: 'Yes'
         you_are_customer_since: 'You are customer since'
         you_have_no_addresses_defined: 'You have no addresses defined'
         you_have_no_new_orders: 'You have no new orders'
