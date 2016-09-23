@@ -53,7 +53,7 @@ sylius:
         name: Tên
         new_country: Tạo quốc gia mới
         newest_products: Sản phẩm mới nhất
-        "no": false
+        no_label: false
         number_of_orders: Số lượng đơn đặt hàng
         options: Tùy chọn
         order_value: Giá trị đơn đặt hàng
@@ -90,4 +90,4 @@ sylius:
         title: Tiêu đề
         total: Tổng cộng
         warning: Cảnh báo
-        "yes": true
+        yes_label: true

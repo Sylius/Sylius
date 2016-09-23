@@ -298,7 +298,7 @@ sylius:
         new_zone: Yeni bölge
         newest_products: Yeni Ürünler
         next: Sonraki
-        "no": false
+        no_label: false
         no_comment: Yorum yok
         no_default_billing_address: Hiçbir varsayılan fatura adresi ayarlanmadı
         no_default_shipping_address: Hiçbir varsayılan teslim adresi ayarlanmadı
@@ -474,7 +474,7 @@ sylius:
         volume_based_pricing: Temel birim fiyat
         warning: Dikkat
         welcome_to_your_space: Alanınıza hoş geldiniz
-        "yes": true
+        yes_label: true
         you_are_customer_since: den beri müşterisiniz
         you_have_no_new_orders: Yeni bir spiariş yoktur
         your_cart_is_empty: Sepetiniz boş

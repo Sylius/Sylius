@@ -458,7 +458,7 @@ sylius:
         new_zone: Nueva zona
         newest_products: Novedades
         next: Siguiente
-        "no": false
+        no_label: false
         no_account: sin cuenta
         no_association_types_to_display: No hay tipos de asociación definidos
         no_comment: No hay comentarios
@@ -768,7 +768,7 @@ sylius:
         welcome: Bienvenido/a
         welcome_to_our_store: Bienvenido a nuestra tienda
         welcome_to_your_space: Bienvenido a tu espacio
-        "yes": true
+        yes_label: true
         you_are_customer_since: Eres cliente desde
         you_have_no_addresses_defined: No tiene ninguna dirección definida
         you_have_no_new_orders: No tiene pedidos nuevos

@@ -3,5 +3,5 @@
 
 sylius:
     ui:
-        "no": false
-        "yes": true
+        no_label: false
+        yes_label: true
