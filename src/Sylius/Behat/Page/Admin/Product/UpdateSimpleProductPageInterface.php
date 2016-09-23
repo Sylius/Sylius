@@ -69,4 +69,17 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isTracked();
+
+    /**
+     * @param string $code
+     *
+     * @return bool
+     */
+    public function isImageWithCodeDisplayed($code);
+
+    /**
+     * @param string $code
+     * @param string $path
+     */
+    public function attachImageWithCode($code, $path);
 }

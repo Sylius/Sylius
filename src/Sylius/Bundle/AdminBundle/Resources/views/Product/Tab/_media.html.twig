@@ -1,6 +1,6 @@
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
 <div class="ui tab" data-tab="media">
     <h3 class="ui dividing header">{{ 'sylius.ui.media'|trans }}</h3>
-    {% if form.variant is defined %}
-    {{ form_row(form.variant.images, {'label': false}) }}
-    {% endif %}
+    {{ form_row(form.images, {'label': false}) }}
 </div>

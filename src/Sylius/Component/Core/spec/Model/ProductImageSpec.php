@@ -14,20 +14,18 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Image;
 use Sylius\Component\Core\Model\ImageAwareInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Model\TaxonImage;
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\Model\ProductImage;
 
 /**
- * @mixin TaxonImage
+ * @mixin ProductImage
  *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class TaxonImageSpec extends ObjectBehavior
+final class ProductImageSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(TaxonImage::class);
+        $this->shouldHaveType(ProductImage::class);
     }
 
     function it_extends_an_image()

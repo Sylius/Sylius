@@ -17,7 +17,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface TaxonInterface extends BaseTaxonInterface
+interface TaxonInterface extends BaseTaxonInterface, ImageAwareInterface
 {
     /**
      * @return Collection|ProductInterface[]
@@ -35,31 +35,31 @@ interface TaxonInterface extends BaseTaxonInterface
     public function hasImages();
 
     /**
-     * @param TaxonImageInterface $image
+     * @param ImageInterface $image
      *
      * @return bool
      */
-    public function hasImage(TaxonImageInterface $image);
+    public function hasImage(ImageInterface $image);
 
     /**
-     * @return Collection|TaxonImageInterface[]
+     * @return Collection|ImageInterface[]
      */
     public function getImages();
 
     /**
      * @param string $code
      *
-     * @return TaxonImageInterface|null
+     * @return ImageInterface|null
      */
     public function getImageByCode($code);
 
     /**
-     * @param TaxonImageInterface $image
+     * @param ImageInterface $image
      */
-    public function removeImage(TaxonImageInterface $image);
+    public function removeImage(ImageInterface $image);
 
     /**
-     * @param TaxonImageInterface $image
+     * @param ImageInterface $image
      */
-    public function addImage(TaxonImageInterface $image);
+    public function addImage(ImageInterface $image);
 }

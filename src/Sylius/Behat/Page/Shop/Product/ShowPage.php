@@ -159,15 +159,35 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function isMainImageDisplayed()
+    {
+        $imageElement = $this->getElement('main_image');
+
+        if (null === $imageElement) {
+            return false;
+        }
+
+        $imageUrl = $imageElement->getAttribute('src');
+        $this->getDriver()->visit($imageUrl);
+        $pageText = $this->getDocument()->getText();
+        $this->getDriver()->back();
+
+        return false === stripos($pageText, '404 Not Found');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'attributes' => '#sylius-product-attributes',
+            'main_image' => '#main-image',
             'name' => '#sylius-product-name',
             'out_of_stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
             'selecting_variants' => "#sylius-product-selecting-variant",
-            'validation_errors' => '.sylius-validation-error'
+            'validation_errors' => '.sylius-validation-error',
         ]);
     }
 }

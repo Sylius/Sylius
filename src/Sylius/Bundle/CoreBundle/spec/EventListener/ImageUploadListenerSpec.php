@@ -12,15 +12,10 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener;
+use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Model\Taxon;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -30,78 +25,32 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class ImageUploadListenerSpec extends ObjectBehavior
 {
-    function let(ImageUploaderInterface $uploader, ProductVariantResolverInterface $variantResolver)
+    function let(ImageUploaderInterface $uploader)
     {
-        $this->beConstructedWith($uploader, $variantResolver);
+        $this->beConstructedWith($uploader);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener');
+        $this->shouldHaveType(ImageUploadListener::class);
     }
 
     function it_uses_image_uploader_to_upload_images(
         GenericEvent $event,
-        ProductVariantInterface $variant,
+        ImageAwareInterface $subject,
         ImageInterface $image,
         ImageUploaderInterface $uploader
     ) {
-        $event->getSubject()->willReturn($variant);
-        $variant->getImages()->willReturn([$image]);
+        $event->getSubject()->willReturn($subject);
+        $subject->getImages()->willReturn([$image]);
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('some_path');
         $uploader->upload($image)->shouldBeCalled();
 
-        $this->uploadProductVariantImage($event);
+        $this->uploadImage($event);
     }
 
-    function it_uses_image_uploader_to_upload_images_for_simple_product(
-        GenericEvent $event,
-        ProductInterface $product,
-        ProductVariantInterface $variant,
-        ImageInterface $image,
-        ImageUploaderInterface $uploader,
-        ProductVariantResolverInterface $variantResolver
-    ) {
-        $event->getSubject()->willReturn($product);
-        $product->isSimple()->willReturn(true);
-        $variantResolver->getVariant($product)->willReturn($variant);
-        $variant->getImages()->willReturn([$image]);
-        $image->hasFile()->willReturn(true);
-        $image->getPath()->willReturn('some_path');
-        $uploader->upload($image)->shouldBeCalled();
-
-        $this->uploadProductImage($event);
-    }
-
-    function it_does_nothing_when_product_is_not_simple(
-        GenericEvent $event,
-        ProductInterface $product,
-        ImageUploaderInterface $uploader
-    ) {
-        $event->getSubject()->willReturn($product);
-        $product->isSimple()->willReturn(false);
-        $uploader->upload(Argument::any())->shouldNotBeCalled();
-
-        $this->uploadProductImage($event);
-    }
-
-    function it_uses_image_uploader_to_upload_taxon_images(
-        GenericEvent $event,
-        TaxonInterface $taxon,
-        ImageInterface $image,
-        ImageUploaderInterface $uploader
-    ) {
-        $event->getSubject()->willReturn($taxon);
-        $taxon->getImages()->willReturn([$image]);
-        $image->hasFile()->willReturn(true);
-        $image->getPath()->willReturn('some_path');
-        $uploader->upload($image)->shouldBeCalled();
-
-        $this->uploadTaxonImage($event);
-    }
-
-    function it_throws_exception_if_event_subject_is_not_a_product_variant(
+    function it_throws_exception_if_event_subject_is_not_an_image_aware(
         GenericEvent $event,
         \stdClass $object
     ) {
@@ -109,31 +58,7 @@ final class ImageUploadListenerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->duringUploadProductVariantImage($event)
-        ;
-    }
-
-    function it_throws_exception_if_event_subject_is_not_a_product(
-        GenericEvent $event,
-        \stdClass $object
-    ) {
-        $event->getSubject()->willReturn($object);
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->duringUploadProductImage($event)
-        ;
-    }
-
-    function it_throws_exception_if_event_subject_is_not_a_taxon(
-        GenericEvent $event,
-        \stdClass $object
-    ) {
-        $event->getSubject()->willReturn($object);
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->duringUploadTaxonImage($event)
+            ->duringUploadImage($event)
         ;
     }
 }

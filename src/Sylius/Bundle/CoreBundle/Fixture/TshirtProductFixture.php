@@ -164,7 +164,10 @@ final class TshirtProductFixture extends AbstractFixture
                     't_shirt_collection' => sprintf('Sylius %s %s', $this->faker->randomElement(['Summer', 'Winter', 'Spring', 'Autumn']), mt_rand(1995, 2012)),
                     't_shirt_material' => $this->faker->randomElement(['Centipede', 'Wool', 'Centipede 10% / Wool 90%', 'Potato 100%']),
                 ],
-                'images' => [sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg')],
+                'images' => [
+                    'main' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'),
+                    'thumbnail' => sprintf('%s/../Resources/fixtures/%s', __DIR__, 't-shirts.jpg'),
+                ],
             ];
         }
 

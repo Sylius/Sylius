@@ -43,15 +43,11 @@
         </service>
         <service id="sylius.listener.image_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener">
             <argument type="service" id="sylius.image_uploader" />
-            <argument type="service" id="sylius.product_variant_resolver.default" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.product_variant.pre_create" method="uploadProductVariantImage" />
-            <tag name="kernel.event_listener" event="sylius.product_variant.pre_update" method="uploadProductVariantImage" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadImage" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadImage" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadImage" />
+            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadImage" />
         </service>
-
         <service id="sylius.listener.order_recalculation" class="Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener">
             <argument type="service" id="sylius.order_processing.order_processor" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder" />

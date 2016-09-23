@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Product\Model\ProductVariant as BaseVariant;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -59,11 +57,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $tracked = false;
 
     /**
-     * @var Collection|ProductVariantImageInterface[]
-     */
-    protected $images;
-
-    /**
      * @var float
      */
     protected $weight;
@@ -87,13 +80,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      * @var TaxCategoryInterface
      */
     protected $taxCategory;
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        $this->images = new ArrayCollection();
-    }
 
     /**
      * @return string
@@ -259,54 +245,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getShippingCategory()
     {
         return $this->getProduct()->getShippingCategory();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasImage(ProductVariantImageInterface $image)
-    {
-        return $this->images->contains($image);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImage()
-    {
-        if ($this->images->isEmpty()) {
-            return null;
-        }
-
-        return $this->images->first();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addImage(ProductVariantImageInterface $image)
-    {
-        if (!$this->hasImage($image)) {
-            $image->setVariant($this);
-            $this->images->add($image);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeImage(ProductVariantImageInterface $image)
-    {
-        $image->setVariant(null);
-        $this->images->removeElement($image);
     }
 
     /**

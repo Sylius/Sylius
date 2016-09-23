@@ -9,11 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Model;
+namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class TaxonImage extends Image
+class ProductImageType extends ImageType
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_product_image';
+    }
 }

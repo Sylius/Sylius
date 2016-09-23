@@ -14,26 +14,26 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
-use Sylius\Bundle\CoreBundle\Form\Type\TaxonImageType;
+use Sylius\Bundle\CoreBundle\Form\Type\ProductImageType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**
- * @mixin TaxonImageType
+ * @mixin ProductImageType
  *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class TaxonImageTypeSpec extends ObjectBehavior
+final class ProductImageTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('TaxonImage', []);
+        $this->beConstructedWith('ProductImage', []);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(TaxonImageType::class);
+        $this->shouldHaveType(ProductImageType::class);
     }
 
     function it_is_a_form_type()
@@ -65,6 +65,6 @@ final class TaxonImageTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_taxon_image');
+        $this->getName()->shouldReturn('sylius_product_image');
     }
 }

@@ -38,6 +38,7 @@ sylius:
             theme: Theme
             hostname: Hostname
         image:
+            code: Code
             file: Image
         locale:
             code: Code
@@ -55,6 +56,7 @@ sylius:
             id: ID
             title: Title
         product:
+            images: Images
             restricted_zone: Restricted zone
             shipping_category: Shipping category
             short_description: Short description
@@ -102,7 +104,6 @@ sylius:
         variant:
             depth: Depth
             height: Height
-            images: Images
             on_hand: Current stock
             price: Price
             original_price: Original price

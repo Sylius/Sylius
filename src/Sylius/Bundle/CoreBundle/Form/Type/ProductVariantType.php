@@ -40,13 +40,6 @@ class ProductVariantType extends BaseProductVariantType
             ->add('onHand', 'integer', [
                 'label' => 'sylius.form.variant.on_hand',
             ])
-            ->add('images', 'collection', [
-                'type' => 'sylius_image',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label' => 'sylius.form.variant.images',
-            ])
             ->add('width', 'number', [
                 'required' => false,
                 'label' => 'sylius.form.variant.width',

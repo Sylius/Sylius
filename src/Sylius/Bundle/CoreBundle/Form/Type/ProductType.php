@@ -44,6 +44,13 @@ class ProductType extends BaseProductType
                 'label' => 'sylius.form.product.variant_selection_method',
                 'choices' => Product::getVariantSelectionMethodLabels(),
             ])
+            ->add('images', 'collection', [
+                'type' => 'sylius_product_image',
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => 'sylius.form.product.images',
+            ])
         ;
     }
 }
