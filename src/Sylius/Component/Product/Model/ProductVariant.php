@@ -116,14 +116,6 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setOptions(Collection $options)
-    {
-        $this->options = $options;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function addOption(ProductOptionValueInterface $option)
     {
         if (!$this->hasOption($option)) {

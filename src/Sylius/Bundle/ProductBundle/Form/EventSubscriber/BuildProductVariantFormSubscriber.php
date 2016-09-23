@@ -60,13 +60,12 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
             return;
         }
 
-        // Get related variable object.
-        $variable = $productVariant->getProduct();
+        $product = $productVariant->getProduct();
 
-        // If the object has options, lets add this configuration field.
-        if ($variable->hasOptions()) {
+        // If the product has options, lets add this configuration field.
+        if ($product->hasOptions()) {
             $form->add($this->factory->createNamed('options', 'sylius_product_option_value_collection', $productVariant->getOptions(), [
-                'options' => $variable->getOptions(),
+                'options' => $product->getOptions(),
                 'auto_initialize' => false,
             ]));
         }

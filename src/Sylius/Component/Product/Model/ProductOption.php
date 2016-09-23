@@ -38,13 +38,6 @@ class ProductOption implements ProductOptionInterface
     protected $code;
 
     /**
-     * Displayed to user.
-     *
-     * @var string
-     */
-    protected $name;
-
-    /**
      * @var Collection|ProductOptionValueInterface[]
      */
     protected $values;
@@ -111,14 +104,6 @@ class ProductOption implements ProductOptionInterface
     public function getValues()
     {
         return $this->values;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setValues(Collection $values)
-    {
-        $this->values = $values;
     }
 
     /**

@@ -340,18 +340,6 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setVariants(Collection $variants)
-    {
-        $this->variants->clear();
-
-        foreach ($variants as $variant) {
-            $this->addVariant($variant);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function addVariant(BaseVariantInterface $variant)
     {
         if (!$this->hasVariant($variant)) {
@@ -393,14 +381,6 @@ class Product implements ProductInterface
     public function getOptions()
     {
         return $this->options;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOptions(Collection $options)
-    {
-        $this->options = $options;
     }
 
     /**

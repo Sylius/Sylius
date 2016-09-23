@@ -38,48 +38,49 @@ interface ProductInterface extends
      * @return bool
      */
     public function hasVariants();
+
     /**
      * @return Collection|ProductVariantInterface[]
      */
     public function getVariants();
-    /**
-     * @param Collection $variants
-     */
-    public function setVariants(Collection $variants);
+
     /**
      * @param ProductVariantInterface $variant
      */
     public function addVariant(ProductVariantInterface $variant);
+
     /**
      * @param ProductVariantInterface $variant
      */
     public function removeVariant(ProductVariantInterface $variant);
+
     /**
      * @param ProductVariantInterface $variant
      *
      * @return bool
      */
     public function hasVariant(ProductVariantInterface $variant);
+
     /**
      * @return bool
      */
     public function hasOptions();
+
     /**
      * @return Collection|ProductOptionInterface[]
      */
     public function getOptions();
-    /**
-     * @param Collection $options
-     */
-    public function setOptions(Collection $options);
+
     /**
      * @param ProductOptionInterface $option
      */
     public function addOption(ProductOptionInterface $option);
+
     /**
      * @param ProductOptionInterface $option
      */
     public function removeOption(ProductOptionInterface $option);
+
     /**
      * @param ProductOptionInterface $option
      *

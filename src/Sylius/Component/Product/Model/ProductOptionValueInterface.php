@@ -31,15 +31,11 @@ interface ProductOptionValueInterface extends ResourceInterface, CodeAwareInterf
     public function setOption(ProductOptionInterface $option = null);
 
     /**
-     * Get internal value.
-     *
      * @return string
      */
     public function getValue();
 
     /**
-     * Set internal value.
-     *
      * @param string $value
      */
     public function setValue($value);

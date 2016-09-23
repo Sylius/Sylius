@@ -218,12 +218,6 @@ final class ProductSpec extends ObjectBehavior
         $this->hasOptions()->shouldReturn(true);
     }
 
-    function its_options_collection_should_be_mutable(Collection $options)
-    {
-        $this->setOptions($options);
-        $this->getOptions()->shouldReturn($options);
-    }
-
     function it_should_add_option_properly(ProductOptionInterface $option)
     {
         $this->addOption($option);

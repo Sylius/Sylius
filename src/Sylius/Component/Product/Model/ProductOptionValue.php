@@ -33,11 +33,6 @@ class ProductOptionValue implements ProductOptionValueInterface
     protected $code;
 
     /**
-     * @var string
-     */
-    protected $value;
-
-    /**
      * @var ProductOptionInterface
      */
     protected $option;

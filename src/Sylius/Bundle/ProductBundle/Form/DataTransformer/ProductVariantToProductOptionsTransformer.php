@@ -70,9 +70,9 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
     /**
      * @param ProductOptionValueInterface[] $options
      *
-     * @return null|ProductVariantInterface
+     * @return ProductVariantInterface|null
      */
-    private function matches($options)
+    private function matches(array $options)
     {
         foreach ($this->product->getVariants() as $variant) {
             foreach ($options as $option) {

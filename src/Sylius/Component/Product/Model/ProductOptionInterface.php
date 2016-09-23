@@ -29,36 +29,21 @@ interface ProductOptionInterface extends
     TranslatableInterface
 {
     /**
-     * Returns all option values.
-     *
      * @return Collection|ProductOptionValueInterface[]
      */
     public function getValues();
 
     /**
-     * Sets all option values.
-     *
-     * @param Collection $optionValues
-     */
-    public function setValues(Collection $optionValues);
-
-    /**
-     * Adds option value.
-     *
      * @param ProductOptionValueInterface $optionValue
      */
     public function addValue(ProductOptionValueInterface $optionValue);
 
     /**
-     * Removes option value.
-     *
      * @param ProductOptionValueInterface $optionValue
      */
     public function removeValue(ProductOptionValueInterface $optionValue);
 
     /**
-     * Checks whether option has given value.
-     *
      * @param ProductOptionValueInterface $optionValue
      *
      * @return bool

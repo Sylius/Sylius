@@ -51,7 +51,7 @@ to bind an attribute and a value to a specific product.
 
 .. _component_product_model_variant-interface:
 
-VariantInterface
-~~~~~~~~~~~~~~~~
+ProductVariantInterface
+~~~~~~~~~~~~~~~~~~~~~~~
 
 This interface should be implemented by models binding a product with a specific combination of attributes.

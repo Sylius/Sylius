@@ -40,11 +40,6 @@ interface ProductVariantInterface extends TimestampableInterface, ResourceInterf
     public function getOptions();
 
     /**
-     * @param Collection $options
-     */
-    public function setOptions(Collection $options);
-
-    /**
      * @param ProductOptionValueInterface $option
      */
     public function addOption(ProductOptionValueInterface $option);
