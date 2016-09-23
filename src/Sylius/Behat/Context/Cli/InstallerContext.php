@@ -12,12 +12,11 @@
 namespace Sylius\Behat\Context\Cli;
 
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\InstallerBundle\Command\InstallSampleDataCommand;
-use Sylius\Bundle\InstallerBundle\Command\SetupCommand;
+use Sylius\Bundle\CoreBundle\Installer\Command\InstallSampleDataCommand;
+use Sylius\Bundle\CoreBundle\Installer\Command\SetupCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Webmozart\Assert\Assert;
 

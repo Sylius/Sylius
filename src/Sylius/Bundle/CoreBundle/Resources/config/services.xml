@@ -23,6 +23,8 @@
         <import resource="services/fixtures_factories.xml" />
         <import resource="services/form.xml" />
         <import resource="services/handlers.xml" />
+        <import resource="services/installer.xml" />
+        <import resource="services/installer_requirements.xml" />
         <import resource="services/listeners.xml" />
         <import resource="services/order_processor.xml" />
         <import resource="services/pricing.xml" />
