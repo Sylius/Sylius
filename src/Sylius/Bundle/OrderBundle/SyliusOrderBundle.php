@@ -44,7 +44,6 @@ class SyliusOrderBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterProcessorsPass());
-        $container->addCompilerPass(new RegisterOrderStateResolversPass());
         $container->addCompilerPass(new RegisterCartContextsPass());
     }
 

@@ -24,7 +24,7 @@ use Sylius\Component\Core\OrderShippingTransitions;
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class OrderShipmentStateResolver implements StateResolverInterface
+class OrderShippingStateResolver implements StateResolverInterface
 {
     /**
      * @var FactoryInterface

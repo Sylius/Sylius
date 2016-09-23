@@ -2,7 +2,7 @@
 Feature: Order gets fulfilled after it's been paid and shipped
     In order to know which orders don't need further monitoring
     As an Administrator
-    I want order which have been paid and shipped to be fulfilled
+    I want orders which have been paid and shipped to be fulfilled
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -44,7 +44,7 @@ Feature: Order gets fulfilled after it's been paid and shipped
         Then its state should be "New"
 
     @ui
-    Scenario: Cancelling a fulfilled order
-        Given this order is already fulfilled
-        When I cancel this order
-        Then its state should be "Cancelled"
+    Scenario: Fulfilled orders cannot be cancelled
+        When I mark this order as paid
+        And I ship this order
+        Then I should not be able to cancel this order

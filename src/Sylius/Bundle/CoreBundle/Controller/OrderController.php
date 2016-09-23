@@ -110,11 +110,6 @@ class OrderController extends ResourceController
 
         $status = new GetStatus($token);
         $this->getPayum()->getGateway($token->getGatewayName())->execute($status);
-        $payment = $status->getFirstModel();
-        $order = $payment->getOrder();
-
-        $orderStateResolver = $this->getOrderStateResolver();
-        $orderStateResolver->resolve($order);
 
         $this->getOrderManager()->flush();
 
@@ -311,14 +306,6 @@ class OrderController extends ResourceController
     protected function getEventDispatcher()
     {
         return $this->container->get('event_dispatcher');
-    }
-
-    /**
-     * @return StateResolverInterface
-     */
-    private function getOrderStateResolver()
-    {
-        return $this->get('sylius.order_processing.state_resolver');
     }
 
     /**

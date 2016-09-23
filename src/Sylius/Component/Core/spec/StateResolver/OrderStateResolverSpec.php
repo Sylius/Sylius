@@ -13,12 +13,12 @@ namespace spec\Sylius\Component\Core\StateResolver;
 
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
-use Sylius\Component\Core\OrderPaymentStates;
-use Sylius\Component\Core\StateResolver\OrderStateResolver;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderShippingStates;
+use Sylius\Component\Core\StateResolver\OrderStateResolver;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 

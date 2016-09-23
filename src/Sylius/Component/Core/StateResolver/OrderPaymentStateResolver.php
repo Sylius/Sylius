@@ -45,32 +45,24 @@ class OrderPaymentStateResolver implements StateResolverInterface
     public function resolve(OrderInterface $order)
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
+        $completedPaymentTotal = 0;
 
-        if (OrderPaymentStates::STATE_PAID === $order->getPaymentState()) {
+        $payments = $order->getPayments()->filter(function (PaymentInterface $payment) {
+            return PaymentInterface::STATE_COMPLETED === $payment->getState();
+        });
+
+        foreach ($payments as $payment) {
+            $completedPaymentTotal += $payment->getAmount();
+        }
+
+        if (0 < $payments->count() && $completedPaymentTotal >= $order->getTotal()) {
+            $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PAY);
             return;
         }
 
-        if ($order->hasPayments()) {
-            $completedPaymentTotal = 0;
-            $payments = $order->getPayments()->filter(function (PaymentInterface $payment) {
-                return PaymentInterface::STATE_COMPLETED === $payment->getState();
-            });
-
-            foreach ($payments as $payment) {
-                $completedPaymentTotal += $payment->getAmount();
-            }
-
-            if (0 < $payments->count() && $completedPaymentTotal >= $order->getTotal()) {
-                $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PAY);
-
-                return;
-            }
-
-            if ($completedPaymentTotal < $order->getTotal() && 0 < $completedPaymentTotal) {
-                $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY);
-
-                return;
-            }
+        if ($completedPaymentTotal < $order->getTotal() && 0 < $completedPaymentTotal) {
+            $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY);
+            return;
         }
     }
 

@@ -17,18 +17,18 @@ use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\StateResolver\OrderShipmentStateResolver;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
+use Sylius\Component\Core\StateResolver\OrderShippingStateResolver;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 /**
- * @mixin OrderShipmentStateResolver
+ * @mixin OrderShippingStateResolver
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class OrderShipmentStateResolverSpec extends ObjectBehavior
+final class OrderShippingStateResolverSpec extends ObjectBehavior
 {
     function let(FactoryInterface $stateMachineFactory)
     {
@@ -37,7 +37,7 @@ final class OrderShipmentStateResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(OrderShipmentStateResolver::class);
+        $this->shouldHaveType(OrderShippingStateResolver::class);
     }
 
     function it_implements_Sylius_order_state_resolver_interface()
