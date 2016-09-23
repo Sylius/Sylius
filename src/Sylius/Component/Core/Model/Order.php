@@ -368,7 +368,7 @@ class Order extends BaseOrder implements OrderInterface
     }
 
     /**
-     * @return null|BaseCouponInterface
+     * {@inheritdoc}
      */
     public function getPromotionCoupon()
     {
@@ -468,14 +468,12 @@ class Order extends BaseOrder implements OrderInterface
     }
 
     /**
-     * Gets the last updated shipment of the order
-     *
-     * @return false|ShipmentInterface
+     * {@inheritdoc}
      */
     public function getLastShipment()
     {
         if ($this->shipments->isEmpty()) {
-            return false;
+            return null;
         }
 
         $last = $this->shipments->first();
