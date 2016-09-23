@@ -336,7 +336,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I complete the shipping step
+     * @When /^I(?:| try to) complete the shipping step$/
      */
     public function iCompleteTheShippingStep()
     {
@@ -1167,6 +1167,47 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->completePage->hasBillingProvinceName($provinceName),
             sprintf('Cannot find billing address with province %s', $provinceName)
+        );
+    }
+
+    /**
+     * @When I do not select a shipping method
+     */
+    public function iDoNotSelectAShippingMethod()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+    
+    /**
+     * @Then I should still be on the shipping step
+     */
+    public function iShouldStillBeOnTheShippingStep()
+    {
+        Assert::true(
+            $this->selectShippingPage->isOpen(),
+            'Select shipping page should be open, but it does not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the shipping method is required
+     */
+    public function iShouldBeNotifiedThatTheShippingMethodIsRequired()
+    {
+        Assert::same(
+            $this->selectShippingPage->getValidationMessageForShipment(),
+            'Please select shipping method.'
+        );
+    }
+
+    /**
+     * @Then there should be information about no shipping methods available form my shipping address
+     */
+    public function thereShouldBeInformationAboutNoShippingMethodsAvailableFormMyShippingAddress()
+    {
+        Assert::true(
+            $this->selectShippingPage->hasNoAvailableShippingMethodsWarning(),
+            'There should be warning about no available shipping methods, but it does not.'
         );
     }
 

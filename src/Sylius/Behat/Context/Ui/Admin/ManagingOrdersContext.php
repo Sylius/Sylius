@@ -724,7 +724,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the ([^"]+) is required$/
+     * @Then /^I should be notified that the (last name|first name|city|street) is required$/
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {

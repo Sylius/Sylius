@@ -19,11 +19,6 @@
             <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="onImplicitLogin" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
         </service>
-        <service id="sylius.listener.order_state" class="Sylius\Bundle\CoreBundle\EventListener\OrderStateListener">
-            <argument type="service" id="sylius.order_processing.state_resolver" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="resolveOrderStates" priority="-100" />
-            <tag name="kernel.event_listener" event="winzou.state_machine.post_transition" method="resolveOrderStatesOnTransition" priority="-100" />
-        </service>
         <service id="sylius.listener.order_payment" class="Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener">
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateOrderPayment" />
         </service>

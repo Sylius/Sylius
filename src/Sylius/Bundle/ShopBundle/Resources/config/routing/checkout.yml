@@ -39,7 +39,10 @@ sylius_shop_checkout_select_shipping:
             event: select_shipping
             flash: false
             template: SyliusShopBundle:Checkout:selectShipping.html.twig
-            form: sylius_checkout_select_shipping
+            form:
+                type: sylius_checkout_select_shipping
+                options:
+                    validation_groups: sylius_checkout_select_shipping
             repository:
                 method: find
                 arguments: [expr:service('sylius.context.cart').getCart()]

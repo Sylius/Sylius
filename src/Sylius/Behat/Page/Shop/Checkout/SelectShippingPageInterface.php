@@ -55,4 +55,14 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
     public function changeAddress();
 
     public function changeAddressByStepLabel();
+
+    /**
+     * @return string
+     */
+    public function getValidationMessageForShipment();
+
+    /**
+     * @return bool
+     */
+    public function hasNoAvailableShippingMethodsWarning();
 }
