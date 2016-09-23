@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -27,15 +28,15 @@ final class ProductVariantContext implements Context
     private $productRepository;
 
     /**
-     * @var ProductVariantRepositoryInterface
+     * @var RepositoryInterface
      */
     private $productVariantRepository;
 
     /**
      * @param ProductRepositoryInterface $productRepository
-     * @param ProductVariantRepositoryInterface $productVariantRepository
+     * @param RepositoryInterface $productVariantRepository
      */
-    public function __construct(ProductRepositoryInterface $productRepository, ProductVariantRepositoryInterface $productVariantRepository)
+    public function __construct(ProductRepositoryInterface $productRepository, RepositoryInterface $productVariantRepository)
     {
         $this->productRepository = $productRepository;
         $this->productVariantRepository = $productVariantRepository;

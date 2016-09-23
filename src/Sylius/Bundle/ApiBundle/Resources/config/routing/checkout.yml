@@ -8,7 +8,7 @@ sylius_api_checkout_index:
         _controller: sylius.controller.order:indexAction
         _sylius:
             repository:
-                method:    createCheckoutsPaginator
+                method: createCheckoutsPaginator
                 arguments: [$criteria, $sorting]
             paginate:  $limit
             sortable:  true

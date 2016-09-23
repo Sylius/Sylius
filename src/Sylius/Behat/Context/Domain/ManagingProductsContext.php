@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Doctrine\DBAL\DBALException;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
@@ -37,7 +36,7 @@ final class ManagingProductsContext implements Context
     private $productRepository;
 
     /**
-     * @var ProductVariantRepositoryInterface
+     * @var RepositoryInterface
      */
     private $productVariantRepository;
 
@@ -49,13 +48,13 @@ final class ManagingProductsContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $productRepository
-     * @param ProductVariantRepositoryInterface $productVariantRepository
+     * @param RepositoryInterface $productVariantRepository
      * @param RepositoryInterface $productReviewRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $productRepository,
-        ProductVariantRepositoryInterface $productVariantRepository,
+        RepositoryInterface $productVariantRepository,
         RepositoryInterface $productReviewRepository
     ) {
         $this->sharedStorage = $sharedStorage;

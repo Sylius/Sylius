@@ -21,14 +21,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface PaymentRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param array|null $criteria
-     * @param array|null $sorting
-     *
-     * @return Pagerfanta
-     */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null);
-
-    /**
      * @param mixed $orderId
      * @param mixed $id
      *
