@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\OrderProcessing\StateResolver;
+namespace spec\Sylius\Component\Core\StateResolver;
 
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\OrderPaymentStates;
-use Sylius\Component\Core\OrderProcessing\StateResolver\OrderStateResolver;
+use Sylius\Component\Core\StateResolver\OrderStateResolver;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;

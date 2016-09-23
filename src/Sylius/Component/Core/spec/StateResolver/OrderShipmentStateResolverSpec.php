@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\OrderProcessing\StateResolver;
+namespace spec\Sylius\Component\Core\StateResolver;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
@@ -17,7 +17,7 @@ use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\OrderProcessing\StateResolver\OrderShipmentStateResolver;
+use Sylius\Component\Core\StateResolver\OrderShipmentStateResolver;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;

@@ -28,6 +28,7 @@
         <import resource="services/pricing.xml" />
         <import resource="services/promotion.xml" />
         <import resource="services/sitemap.xml" />
+        <import resource="services/state_resolvers.xml" />
         <import resource="services/taxation.xml" />
         <import resource="services/templating.xml" />
         <import resource="services/validators.xml" />

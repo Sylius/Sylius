@@ -13,19 +13,6 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.order_processing.state_resolver.payment" class="Sylius\Component\Core\OrderProcessing\StateResolver\OrderPaymentStateResolver">
-            <argument type="service" id="sm.factory" />
-            <tag name="sylius.order.state_resolver" />
-        </service>
-        <service id="sylius.order_processing.state_resolver.shipment" class="Sylius\Component\Core\OrderProcessing\StateResolver\OrderShipmentStateResolver">
-            <argument type="service" id="sm.factory" />
-            <tag name="sylius.order.state_resolver" />
-        </service>
-        <service id="sylius.order_processing.state_resolver.order" class="Sylius\Component\Core\OrderProcessing\StateResolver\OrderStateResolver">
-            <argument type="service" id="sm.factory" />
-            <tag name="sylius.order.state_resolver" />
-        </service>
-
         <service id="sylius.order_processing.order_exchange_rate_processor" class="Sylius\Component\Core\OrderProcessing\OrderExchangeRateProcessor">
             <argument type="service" id="sylius.updater.order.exchange_rate" />
             <tag name="sylius.order_processor" />

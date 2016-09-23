@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\OrderProcessing\StateResolver;
+namespace Sylius\Component\Core\StateResolver;
 
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\OrderPaymentStates;
