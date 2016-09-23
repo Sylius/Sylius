@@ -10,6 +10,8 @@ sylius:
         option:
             name: Name
         notes: Weitere Hinweise
+        variant:
+            tracked: Verfolgen
     ui:
         abandoned: Abgebrochen
         about: Über
@@ -90,6 +92,7 @@ sylius:
         category: Kategorie
         category_requirements: Kategorievoraussetzungen
         change_address: Adresse ändern
+        change_file: Datei ändern
         change_password: Passwort ändern
         change_payment_method: Zahlart ändern
         change_shipping_method: Versandart ändern
@@ -217,6 +220,7 @@ sylius:
         discount: Nachlass
         discounted_unit_price: Reduzierter Stückpreis
         edit: Bearbeiten
+        edit_admin_user: Administrator bearbeiten
         edit_association_type: Verbindungstyp bearbeiten
         edit_channel: Kanal bearbeiten
         edit_country: Land bearbeiten
@@ -484,6 +488,7 @@ sylius:
         not_empty: Nicht leer
         not_in: Nicht in
         not_verified: Nicht verifiziert
+        not_tracked: Nicht verfolgen
         notes: Notizen
         notify_customer: Kunde benachrichtigen
         number: Nummer
@@ -562,6 +567,7 @@ sylius:
         promotion_configuration: Promotionsverwaltung
         promotion_coupons: Gutscheine
         promotion_details: Aktion anzeigen
+        promotion_discount: Rabatt
         promotion_information: Aktionsinformationen
         promotion_total: Reklame gesamt
         promotions: Aktionen
