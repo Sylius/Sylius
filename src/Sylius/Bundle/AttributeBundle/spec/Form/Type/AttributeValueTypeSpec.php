@@ -27,7 +27,7 @@ final class AttributeValueTypeSpec extends ObjectBehavior
 {
     function let(EntityRepository $attributeRepository)
     {
-        $this->beConstructedWith('AttributeValue', ['sylius'], 'server', $attributeRepository);
+        $this->beConstructedWith('ProductAttributeValue', ['sylius'], 'server', $attributeRepository);
     }
 
     function it_is_initializable()
@@ -56,7 +56,7 @@ final class AttributeValueTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'AttributeValue', 'validation_groups' => ['sylius']])->shouldBeCalled();
+        $resolver->setDefaults(['data_class' => 'ProductAttributeValue', 'validation_groups' => ['sylius']])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

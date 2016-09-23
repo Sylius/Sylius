@@ -43,7 +43,7 @@
         </service>
         <service id="sylius.listener.image_upload" class="Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener">
             <argument type="service" id="sylius.image_uploader" />
-            <argument type="service" id="sylius.variant_resolver.default" />
+            <argument type="service" id="sylius.product_variant_resolver.default" />
             <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadProductImage" />
             <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadProductImage" />
             <tag name="kernel.event_listener" event="sylius.product_variant.pre_create" method="uploadProductVariantImage" />

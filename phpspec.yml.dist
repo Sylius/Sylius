@@ -27,7 +27,6 @@ suites:
     Taxation: { namespace: Sylius\Component\Taxation, psr4_prefix: Sylius\Component\Taxation, spec_path: src/Sylius/Component/Taxation, src_path: src/Sylius/Component/Taxation }
     Taxonomy: { namespace: Sylius\Component\Taxonomy, psr4_prefix: Sylius\Component\Taxonomy, spec_path: src/Sylius/Component/Taxonomy, src_path: src/Sylius/Component/Taxonomy }
     User: { namespace: Sylius\Component\User, psr4_prefix: Sylius\Component\User, spec_path: src/Sylius/Component/User, src_path: src/Sylius/Component/User }
-    Variation: { namespace: Sylius\Component\Variation, psr4_prefix: Sylius\Component\Variation, spec_path: src/Sylius/Component/Variation, src_path: src/Sylius/Component/Variation }
 
     AssociationBundle: { namespace: Sylius\Bundle\AssociationBundle, psr4_prefix: Sylius\Bundle\AssociationBundle, spec_path: src/Sylius/Bundle/AssociationBundle, src_path: src/Sylius/Bundle/AssociationBundle }
     AddressingBundle: { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle, src_path: src/Sylius/Bundle/AddressingBundle }
@@ -64,7 +63,6 @@ suites:
     ThemeBundle: { namespace: Sylius\Bundle\ThemeBundle, psr4_prefix: Sylius\Bundle\ThemeBundle , spec_path: src/Sylius/Bundle/ThemeBundle, src_path: src/Sylius/Bundle/ThemeBundle }
     UiBundle: { namespace: Sylius\Bundle\UiBundle, psr4_prefix: Sylius\Bundle\UiBundle, spec_path: src/Sylius/Bundle/UiBundle, src_path: src/Sylius/Bundle/UiBundle }
     UserBundle: { namespace: Sylius\Bundle\UserBundle, psr4_prefix: Sylius\Bundle\UserBundle, spec_path: src/Sylius/Bundle/UserBundle, src_path: src/Sylius/Bundle/UserBundle }
-    VariationBundle: { namespace: Sylius\Bundle\VariationBundle, psr4_prefix: Sylius\Bundle\VariationBundle, spec_path: src/Sylius/Bundle/VariationBundle, src_path: src/Sylius/Bundle/VariationBundle }
 
     Behat: { namespace: Sylius\Behat, psr4_prefix: Sylius\Behat, spec_path: src/Sylius/Behat, src_path: src/Sylius/Behat }
 

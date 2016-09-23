@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Behat\Page\SymfonyPage;
 
@@ -54,7 +54,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function addToCartWithOption(OptionInterface $option, $optionValue)
+    public function addToCartWithOption(ProductOptionInterface $option, $optionValue)
     {
         $select = $this->getDocument()->find('css', sprintf('select#sylius_cart_item_variant_%s', $option->getCode()));
 

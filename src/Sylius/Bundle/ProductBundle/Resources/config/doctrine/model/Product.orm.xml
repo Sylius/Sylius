@@ -28,14 +28,14 @@
             <gedmo:versioned />
         </field>
 
-        <one-to-many field="attributes" target-entity="Sylius\Component\Product\Model\AttributeValueInterface" mapped-by="subject" orphan-removal="true">
+        <one-to-many field="attributes" target-entity="Sylius\Component\Product\Model\ProductAttributeValueInterface" mapped-by="subject" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
             <gedmo:versioned />
         </one-to-many>
 
-        <one-to-many field="variants" target-entity="Sylius\Component\Product\Model\VariantInterface" mapped-by="object" orphan-removal="true">
+        <one-to-many field="variants" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" mapped-by="product" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
@@ -49,7 +49,7 @@
             <gedmo:versioned />
         </one-to-many>
 
-        <many-to-many field="options" target-entity="Sylius\Component\Product\Model\OptionInterface">
+        <many-to-many field="options" target-entity="Sylius\Component\Product\Model\ProductOptionInterface">
             <cascade>
                 <cascade-persist />
             </cascade>

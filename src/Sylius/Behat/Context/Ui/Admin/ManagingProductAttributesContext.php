@@ -16,7 +16,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductAttribute\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductAttribute\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Product\Model\AttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -128,7 +128,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When /^I want to edit (this product attribute)$/
      */
-    public function iWantToEditThisAttribute(AttributeInterface $productAttribute)
+    public function iWantToEditThisAttribute(ProductAttributeInterface $productAttribute)
     {
         $this->updatePage->open(['id' => $productAttribute->getId()]);
     }
@@ -255,7 +255,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @When /^I delete (this product attribute)$/
      */
-    public function iDeleteThisProductAttribute(AttributeInterface $productAttribute)
+    public function iDeleteThisProductAttribute(ProductAttributeInterface $productAttribute)
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['code' => $productAttribute->getCode(), 'name' => $productAttribute->getName()]);
@@ -264,7 +264,7 @@ final class ManagingProductAttributesContext implements Context
     /**
      * @Then /^(this product attribute) should no longer exist in the registry$/
      */
-    public function thisProductAttributeShouldNoLongerExistInTheRegistry(AttributeInterface $productAttribute)
+    public function thisProductAttributeShouldNoLongerExistInTheRegistry(ProductAttributeInterface $productAttribute)
     {
         Assert::false(
             $this->indexPage->isSingleResourceOnPage(['code' => $productAttribute->getCode()]),

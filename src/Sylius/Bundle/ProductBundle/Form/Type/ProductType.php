@@ -15,7 +15,7 @@ use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ProductOptionFieldSubscribe
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\SimpleProductSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -25,22 +25,22 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ProductType extends AbstractResourceType
 {
     /**
-     * @var VariantResolverInterface
+     * @var ProductVariantResolverInterface
      */
     private $variantResolver;
 
     /**
      * @param string $dataClass FQCN
      * @param string[] $validationGroups
-     * @param VariantResolverInterface $variantResolver
+     * @param ProductVariantResolverInterface $variantResolver
      */
-    public function __construct($dataClass, $validationGroups, VariantResolverInterface $variantResolver)
+    public function __construct($dataClass, $validationGroups, ProductVariantResolverInterface $variantResolver)
     {
         parent::__construct($dataClass, $validationGroups);
 
         $this->variantResolver = $variantResolver;
     }
-    
+
     /**
      * {@inheritdoc}
      */

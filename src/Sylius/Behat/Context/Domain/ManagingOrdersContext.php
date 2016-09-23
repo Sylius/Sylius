@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -51,7 +51,7 @@ final class ManagingOrdersContext implements Context
     private $adjustmentRepository;
 
     /**
-     * @var VariantResolverInterface
+     * @var ProductVariantResolverInterface
      */
     private $variantResolver;
 
@@ -61,7 +61,7 @@ final class ManagingOrdersContext implements Context
      * @param RepositoryInterface $orderItemRepository
      * @param RepositoryInterface $addressRepository
      * @param RepositoryInterface $adjustmentRepository
-     * @param VariantResolverInterface $variantResolver
+     * @param ProductVariantResolverInterface $variantResolver
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -69,7 +69,7 @@ final class ManagingOrdersContext implements Context
         RepositoryInterface $orderItemRepository,
         RepositoryInterface $addressRepository,
         RepositoryInterface $adjustmentRepository,
-        VariantResolverInterface $variantResolver
+        ProductVariantResolverInterface $variantResolver
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;

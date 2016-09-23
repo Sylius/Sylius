@@ -51,15 +51,7 @@ to bind an attribute and a value to a specific product.
 
 .. _component_product_model_variant-interface:
 
-VariantInterface
-~~~~~~~~~~~~~~~~
+ProductVariantInterface
+~~~~~~~~~~~~~~~~~~~~~~~
 
-This interface should be implemented by models binding
-a product with a specific combination of attributes.
-
-.. note::
-   This interface extends the :ref:`component_variation_model_variant-interface`.
-
-   For more information go to `Sylius API VariantInterface`_.
-
-.. _Sylius API VariantInterface: http://api.sylius.org/Sylius/Component/Product/Model/VariantInterface.html
+This interface should be implemented by models binding a product with a specific combination of attributes.

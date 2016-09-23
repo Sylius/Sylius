@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Product\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Association\Model\AssociableInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
@@ -18,7 +19,6 @@ use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Variation\Model\VariableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -32,9 +32,62 @@ interface ProductInterface extends
     ProductTranslationInterface,
     AssociableInterface,
     CodeAwareInterface,
-    TranslatableInterface,
-    VariableInterface
+    TranslatableInterface
 {
+    /**
+     * @return bool
+     */
+    public function hasVariants();
+
+    /**
+     * @return Collection|ProductVariantInterface[]
+     */
+    public function getVariants();
+
+    /**
+     * @param ProductVariantInterface $variant
+     */
+    public function addVariant(ProductVariantInterface $variant);
+
+    /**
+     * @param ProductVariantInterface $variant
+     */
+    public function removeVariant(ProductVariantInterface $variant);
+
+    /**
+     * @param ProductVariantInterface $variant
+     *
+     * @return bool
+     */
+    public function hasVariant(ProductVariantInterface $variant);
+
+    /**
+     * @return bool
+     */
+    public function hasOptions();
+
+    /**
+     * @return Collection|ProductOptionInterface[]
+     */
+    public function getOptions();
+
+    /**
+     * @param ProductOptionInterface $option
+     */
+    public function addOption(ProductOptionInterface $option);
+
+    /**
+     * @param ProductOptionInterface $option
+     */
+    public function removeOption(ProductOptionInterface $option);
+
+    /**
+     * @param ProductOptionInterface $option
+     *
+     * @return bool
+     */
+    public function hasOption(ProductOptionInterface $option);
+
     /**
      * @return bool
      */
@@ -74,7 +127,7 @@ interface ProductInterface extends
      * @param ProductAssociationInterface $association
      */
     public function removeAssociation(ProductAssociationInterface $association);
-    
+
     /**
      * @return bool
      */

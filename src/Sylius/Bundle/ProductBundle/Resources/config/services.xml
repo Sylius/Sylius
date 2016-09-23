@@ -11,30 +11,37 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.set_builder.cartesian.class">Sylius\Component\Variation\SetBuilder\CartesianSetBuilder</parameter>
-
-        <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
-
-        <parameter key="sylius.form.listener.product_variant_generator.class">Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.set_builder.cartesian" class="%sylius.set_builder.cartesian.class%" />
+        <service id="sylius.set_builder.cartesian" class="Sylius\Component\Product\SetBuilder\CartesianSetBuilder" />
 
-        <service id="sylius.validator.product.unique" class="%sylius.validator.product.unique.class%">
-            <argument type="service" id="sylius.repository.product" />
-            <tag name="validator.constraint_validator" alias="sylius.validator.product.unique" />
+        <service id="sylius.form.listener.product_variant_generator" class="Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber">
+            <argument type="service" id="sylius.generator.product_variant" />
         </service>
 
-        <service id="sylius.form.listener.product_variant_generator" class="%sylius.form.listener.product_variant_generator.class%">
-            <argument type="service" id="sylius.generator.variant" />
+        <service id="sylius.validator.product_variant_combination" class="Sylius\Bundle\ProductBundle\Validator\ProductVariantCombinationValidator">
+            <tag name="validator.constraint_validator" alias="sylius.validator.product_variant_combination" />
+        </service>
+
+        <service id="sylius.generator.product_variant" class="Sylius\Component\Product\Generator\ProductVariantGenerator">
+            <argument type="service" id="sylius.factory.product_variant" />
+            <argument type="service" id="sylius.set_builder.cartesian" />
+        </service>
+
+        <service id="sylius.form.type.product_option_value_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueChoiceType">
+            <tag name="form.type" alias="sylius_product_option_value_choice" />
+        </service>
+
+        <service id="sylius.form.type.product_variant_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantChoiceType">
+            <tag name="form.type" alias="sylius_product_variant_choice" />
+        </service>
+
+        <service id="sylius.form.type.product_variant_match" class="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantMatchType">
+            <tag name="form.type" alias="sylius_product_variant_match" />
+        </service>
+
+        <service id="sylius.product_variant_resolver.default" class="Sylius\Component\Product\Resolver\DefaultProductVariantResolver">
+            <tag name="sylius.product_variant_resolver.default" type="default" />
         </service>
     </services>
-
 </container>

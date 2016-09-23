@@ -34,6 +34,5 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
     Taxation/index
     Taxonomy/index
     User/index
-    Variation/index
 
 .. include:: /components/map.rst.inc

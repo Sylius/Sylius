@@ -15,14 +15,17 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Association\Model\AssociableInterface;
-use Sylius\Component\Product\Model\AttributeValueInterface;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\Product;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Product\Model\VariantInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
+ * @mixin Product
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -36,7 +39,7 @@ final class ProductSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\Product');
+        $this->shouldHaveType(Product::class);
     }
 
     function it_implements_Sylius_product_interface()
@@ -128,7 +131,7 @@ final class ProductSpec extends ObjectBehavior
         $this->getAttributes()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_adds_attribute(AttributeValueInterface $attribute)
+    function it_adds_attribute(ProductAttributeValueInterface $attribute)
     {
         $attribute->setProduct($this)->shouldBeCalled();
 
@@ -136,7 +139,7 @@ final class ProductSpec extends ObjectBehavior
         $this->hasAttribute($attribute)->shouldReturn(true);
     }
 
-    function it_removes_attribute(AttributeValueInterface $attribute)
+    function it_removes_attribute(ProductAttributeValueInterface $attribute)
     {
         $attribute->setProduct($this)->shouldBeCalled();
 
@@ -155,8 +158,8 @@ final class ProductSpec extends ObjectBehavior
     }
 
     function its_hasVariants_should_return_true_only_if_multiple_variants_are_defined(
-        VariantInterface $firstVariant,
-        VariantInterface $secondVariant
+        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $secondVariant
     ) {
         $firstVariant->setProduct($this)->shouldBeCalled();
         $secondVariant->setProduct($this)->shouldBeCalled();
@@ -172,7 +175,7 @@ final class ProductSpec extends ObjectBehavior
         $this->getAvailableVariants()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_does_not_include_unavailable_variants_in_available_variants(VariantInterface $variant)
+    function it_does_not_include_unavailable_variants_in_available_variants(ProductVariantInterface $variant)
     {
         $variant->isAvailable()->willReturn(false);
 
@@ -183,8 +186,8 @@ final class ProductSpec extends ObjectBehavior
     }
 
     function it_returns_available_variants(
-        VariantInterface $unavailableVariant,
-        VariantInterface $variant
+        ProductVariantInterface $unavailableVariant,
+        ProductVariantInterface $variant
     ) {
         $unavailableVariant->isAvailable()->willReturn(false);
         $variant->isAvailable()->willReturn(true);
@@ -209,25 +212,19 @@ final class ProductSpec extends ObjectBehavior
         $this->hasOptions()->shouldReturn(false);
     }
 
-    function its_hasOptions_should_return_true_only_if_any_options_defined(OptionInterface $option)
+    function its_hasOptions_should_return_true_only_if_any_options_defined(ProductOptionInterface $option)
     {
         $this->addOption($option);
         $this->hasOptions()->shouldReturn(true);
     }
 
-    function its_options_collection_should_be_mutable(Collection $options)
-    {
-        $this->setOptions($options);
-        $this->getOptions()->shouldReturn($options);
-    }
-
-    function it_should_add_option_properly(OptionInterface $option)
+    function it_should_add_option_properly(ProductOptionInterface $option)
     {
         $this->addOption($option);
         $this->hasOption($option)->shouldReturn(true);
     }
 
-    function it_should_remove_option_properly(OptionInterface $option)
+    function it_should_remove_option_properly(ProductOptionInterface $option)
     {
         $this->addOption($option);
         $this->hasOption($option)->shouldReturn(true);

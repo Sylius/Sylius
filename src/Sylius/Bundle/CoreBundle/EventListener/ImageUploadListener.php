@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
@@ -27,15 +27,15 @@ class ImageUploadListener
     protected $uploader;
 
     /**
-     * @var VariantResolverInterface
+     * @var ProductVariantResolverInterface
      */
     protected $variantResolver;
 
     /**
      * @param ImageUploaderInterface $uploader
-     * @param VariantResolverInterface $variantResolver
+     * @param ProductVariantResolverInterface $variantResolver
      */
-    public function __construct(ImageUploaderInterface $uploader, VariantResolverInterface $variantResolver)
+    public function __construct(ImageUploaderInterface $uploader, ProductVariantResolverInterface $variantResolver)
     {
         $this->uploader = $uploader;
         $this->variantResolver = $variantResolver;

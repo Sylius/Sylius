@@ -19,11 +19,11 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Product\Model\AttributeInterface;
-use Sylius\Component\Product\Model\AttributeValueInterface;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
+use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -45,7 +45,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     private $productVariantFactory;
 
     /**
-     * @var VariantGeneratorInterface
+     * @var ProductVariantGeneratorInterface
      */
     private $variantGenerator;
 
@@ -77,7 +77,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     /**
      * @param FactoryInterface $productFactory
      * @param FactoryInterface $productVariantFactory
-     * @param VariantGeneratorInterface $variantGenerator
+     * @param ProductVariantGeneratorInterface $variantGenerator
      * @param FactoryInterface $productAttributeValueFactory
      * @param FactoryInterface $productVariantImageFactory
      * @param ImageUploaderInterface $imageUploader
@@ -90,7 +90,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     public function __construct(
         FactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
-        VariantGeneratorInterface $variantGenerator,
+        ProductVariantGeneratorInterface $variantGenerator,
         FactoryInterface $productAttributeValueFactory,
         FactoryInterface $productVariantImageFactory,
         ImageUploaderInterface $imageUploader,
@@ -152,7 +152,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
 
                         Assert::notNull($productAttribute);
 
-                        /** @var AttributeValueInterface $productAttributeValue */
+                        /** @var ProductAttributeValueInterface $productAttributeValue */
                         $productAttributeValue = $productAttributeValueFactory->createNew();
                         $productAttributeValue->setAttribute($productAttribute);
                         $productAttributeValue->setValue($value ?: $this->getRandomValueForProductAttribute($productAttribute));
@@ -259,23 +259,23 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     }
 
     /**
-     * @param AttributeInterface $productAttribute
+     * @param ProductAttributeInterface $productAttribute
      *
      * @return mixed
      */
-    private function getRandomValueForProductAttribute(AttributeInterface $productAttribute)
+    private function getRandomValueForProductAttribute(ProductAttributeInterface $productAttribute)
     {
         switch ($productAttribute->getStorageType()) {
-            case AttributeValueInterface::STORAGE_BOOLEAN:
+            case ProductAttributeValueInterface::STORAGE_BOOLEAN:
                 return $this->faker->boolean;
-            case AttributeValueInterface::STORAGE_INTEGER:
+            case ProductAttributeValueInterface::STORAGE_INTEGER:
                 return $this->faker->numberBetween(0, 10000);
-            case AttributeValueInterface::STORAGE_FLOAT:
+            case ProductAttributeValueInterface::STORAGE_FLOAT:
                 return $this->faker->randomFloat(4, 0, 10000);
-            case AttributeValueInterface::STORAGE_TEXT:
+            case ProductAttributeValueInterface::STORAGE_TEXT:
                 return $this->faker->sentence;
-            case AttributeValueInterface::STORAGE_DATE:
-            case AttributeValueInterface::STORAGE_DATETIME:
+            case ProductAttributeValueInterface::STORAGE_DATE:
+            case ProductAttributeValueInterface::STORAGE_DATETIME:
                 return $this->faker->dateTimeThisCentury;
             default:
                 throw new \BadMethodCallException();

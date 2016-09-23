@@ -148,8 +148,8 @@ final class ManagingProductsContext implements Context
      */
     public function thereAreNoVariants(ProductInterface $product)
     {
-        $variants = $this->productVariantRepository->findBy(['object' => $product]);
-        
+        $variants = $this->productVariantRepository->findBy(['product' => $product]);
+
         Assert::same($variants, []);
     }
 }

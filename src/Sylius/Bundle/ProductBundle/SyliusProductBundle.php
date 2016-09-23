@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusProductBundle extends AbstractResourceBundle
+final class SyliusProductBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}
@@ -41,7 +41,6 @@ class SyliusProductBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new ServicesPass());
-        $container->addCompilerPass(new ValidatorPass());
     }
 
     /**

@@ -24,7 +24,7 @@ final class AttributeTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('AttributeTranslation', ['sylius'], 'server');
+        $this->beConstructedWith('ProductAttributeTranslation', ['sylius'], 'server');
     }
 
     function it_is_initializable()
@@ -50,7 +50,7 @@ final class AttributeTranslationTypeSpec extends ObjectBehavior
 
     function it_defines_assigned_data_class(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['data_class' => 'AttributeTranslation', 'validation_groups' => ['sylius']])->shouldBeCalled();
+        $resolver->setDefaults(['data_class' => 'ProductAttributeTranslation', 'validation_groups' => ['sylius']])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

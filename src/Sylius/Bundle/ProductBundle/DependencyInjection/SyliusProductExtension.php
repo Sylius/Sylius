@@ -11,26 +11,13 @@
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
-use Sylius\Bundle\ProductBundle\Form\Type\VariantType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Component\Product\Factory\ProductVariantFactory;
-use Sylius\Component\Product\Model\Attribute;
-use Sylius\Component\Product\Model\AttributeInterface;
-use Sylius\Component\Product\Model\AttributeTranslation;
-use Sylius\Component\Product\Model\AttributeTranslationInterface;
-use Sylius\Component\Product\Model\AttributeValue;
-use Sylius\Component\Product\Model\AttributeValueInterface;
-use Sylius\Component\Product\Model\Option;
-use Sylius\Component\Product\Model\OptionInterface;
-use Sylius\Component\Product\Model\OptionTranslation;
-use Sylius\Component\Product\Model\OptionTranslationInterface;
-use Sylius\Component\Product\Model\OptionValue;
-use Sylius\Component\Product\Model\OptionValueInterface;
-use Sylius\Component\Product\Model\OptionValueTranslation;
-use Sylius\Component\Product\Model\OptionValueTranslationInterface;
-use Sylius\Component\Product\Model\Variant;
-use Sylius\Component\Product\Model\VariantInterface;
-use Sylius\Component\Resource\Factory;
+use Sylius\Component\Product\Model\ProductAttribute;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeTranslation;
+use Sylius\Component\Product\Model\ProductAttributeTranslationInterface;
+use Sylius\Component\Product\Model\ProductAttributeValue;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
@@ -38,11 +25,9 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Product catalog extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusProductExtension extends AbstractResourceExtension implements PrependExtensionInterface
+final class SyliusProductExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -56,18 +41,12 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $formDefinition = $container->getDefinition('sylius.form.type.product_variant_generation');
         $formDefinition->addArgument($container->getDefinition('sylius.form.listener.product_variant_generator'));
-        
-        $container->getDefinition('sylius.form.type.product')->addArgument(new Reference('sylius.variant_resolver.default'));
+
+        $container->getDefinition('sylius.form.type.product')->addArgument(new Reference('sylius.product_variant_resolver.default'));
     }
 
     /**
@@ -78,7 +57,6 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
         $this->prependAttribute($container, $config);
-        $this->prependVariation($container, $config);
     }
 
     /**
@@ -92,78 +70,25 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         }
 
         $container->prependExtensionConfig('sylius_attribute', [
-                'resources' => [
-                    'product' => [
-                        'subject' => $config['resources']['product']['classes']['model'],
-                        'attribute' => [
-                            'classes' => [
-                                'model' => Attribute::class,
-                                'interface' => AttributeInterface::class,
-                            ],
-                            'translation' => [
-                                'classes' => [
-                                    'model' => AttributeTranslation::class,
-                                    'interface' => AttributeTranslationInterface::class,
-                                ],
-                            ],
-                        ],
-                        'attribute_value' => [
-                            'classes' => [
-                                'model' => AttributeValue::class,
-                                'interface' => AttributeValueInterface::class,
-                            ],
-                        ],
-                    ],
-                ], ]
-        );
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     * @param array $config
-     */
-    private function prependVariation(ContainerBuilder $container, array $config)
-    {
-        if (!$container->hasExtension('sylius_variation')) {
-            return;
-        }
-
-        $container->prependExtensionConfig('sylius_variation', [
             'resources' => [
                 'product' => [
-                    'variable' => $config['resources']['product']['classes']['model'],
-                    'variant' => [
+                    'subject' => $config['resources']['product']['classes']['model'],
+                    'attribute' => [
                         'classes' => [
-                            'model' => Variant::class,
-                            'interface' => VariantInterface::class,
-                            'factory' => ProductVariantFactory::class,
-                            'form' => [
-                                'default' => VariantType::class,
-                            ],
-                        ],
-                    ],
-                    'option' => [
-                        'classes' => [
-                            'model' => Option::class,
-                            'interface' => OptionInterface::class,
+                            'model' => ProductAttribute::class,
+                            'interface' => ProductAttributeInterface::class,
                         ],
                         'translation' => [
                             'classes' => [
-                                'model' => OptionTranslation::class,
-                                'interface' => OptionTranslationInterface::class,
+                                'model' => ProductAttributeTranslation::class,
+                                'interface' => ProductAttributeTranslationInterface::class,
                             ],
                         ],
                     ],
-                    'option_value' => [
+                    'attribute_value' => [
                         'classes' => [
-                            'model' => OptionValue::class,
-                            'interface' => OptionValueInterface::class,
-                        ],
-                        'translation' => [
-                            'classes' => [
-                                'model' => OptionValueTranslation::class,
-                                'interface' => OptionValueTranslationInterface::class,
-                            ],
+                            'model' => ProductAttributeValue::class,
+                            'interface' => ProductAttributeValueInterface::class,
                         ],
                     ],
                 ],

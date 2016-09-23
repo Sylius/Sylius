@@ -11,7 +11,7 @@ sylius_api_product_variant_index:
             sortable: true
             filterable: true
             criteria:
-                object: $productId
+                product: $productId
 
 sylius_api_product_variant_create:
     path: /
@@ -26,7 +26,7 @@ sylius_api_product_variant_update:
         _controller: sylius.controller.product_variant:updateAction
         _sylius:
             criteria:
-                object: $productId
+                product: $productId
                 master: false
 
 sylius_api_product_variant_delete:
@@ -36,7 +36,7 @@ sylius_api_product_variant_delete:
         _controller: sylius.controller.product_variant:deleteAction
         _sylius:
             criteria:
-                object: $productId
+                product: $productId
                 master: false
 
 sylius_api_product_variant_show:
@@ -46,5 +46,5 @@ sylius_api_product_variant_show:
         _controller: sylius.controller.product_variant:showAction
         _sylius:
             criteria:
-                object: $productId
+                product: $productId
                 master: false

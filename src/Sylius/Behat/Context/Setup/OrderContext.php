@@ -37,7 +37,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -105,7 +105,7 @@ final class OrderContext implements Context
     private $stateMachineFactory;
 
     /**
-     * @var VariantResolverInterface
+     * @var ProductVariantResolverInterface
      */
     private $variantResolver;
 
@@ -122,7 +122,7 @@ final class OrderContext implements Context
      * @param RepositoryInterface $customerRepository
      * @param ObjectManager $objectManager
      * @param StateMachineFactoryInterface $stateMachineFactory
-     * @param VariantResolverInterface $variantResolver
+     * @param ProductVariantResolverInterface $variantResolver
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -137,7 +137,7 @@ final class OrderContext implements Context
         RepositoryInterface $customerRepository,
         ObjectManager $objectManager,
         StateMachineFactoryInterface $stateMachineFactory,
-        VariantResolverInterface $variantResolver
+        ProductVariantResolverInterface $variantResolver
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;

@@ -12,12 +12,15 @@
 namespace spec\Sylius\Component\Product\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Product\Factory\ProductFactory;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
+ * @mixin ProductFactory
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
@@ -32,7 +35,7 @@ final class ProductFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Factory\ProductFactory');
+        $this->shouldHaveType(ProductFactory::class);
     }
 
     function it_implements_product_factory_interface()
@@ -50,7 +53,7 @@ final class ProductFactorySpec extends ObjectBehavior
     function it_creates_new_product_with_variant(
         FactoryInterface $factory,
         ProductInterface $product,
-        VariantInterface $variant,
+        ProductVariantInterface $variant,
         FactoryInterface $variantFactory
     ) {
         $variantFactory->createNew()->willReturn($variant);

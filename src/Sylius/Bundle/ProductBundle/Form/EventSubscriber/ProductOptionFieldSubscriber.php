@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -21,17 +21,17 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ProductOptionFieldSubscriber implements EventSubscriberInterface
+final class ProductOptionFieldSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var VariantResolverInterface
+     * @var ProductVariantResolverInterface
      */
     private $variantResolver;
 
     /**
-     * @param VariantResolverInterface $variantResolver
+     * @param ProductVariantResolverInterface $variantResolver
      */
-    public function __construct(VariantResolverInterface $variantResolver)
+    public function __construct(ProductVariantResolverInterface $variantResolver)
     {
         $this->variantResolver = $variantResolver;
     }
@@ -62,11 +62,11 @@ class ProductOptionFieldSubscriber implements EventSubscriberInterface
         $disableOptions = (null !== $this->variantResolver->getVariant($product)) && (false === $product->hasVariants());
 
         $form->add(
-            'options', 
+            'options',
             'sylius_product_option_choice', [
-                'required' => false, 
-                'disabled' => $disableOptions, 
-                'multiple' => true, 
+                'required' => false,
+                'disabled' => $disableOptions,
+                'multiple' => true,
                 'label' => 'sylius.form.product.options',
             ]
         );

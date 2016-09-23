@@ -50,7 +50,6 @@
         "sylius/taxonomy-bundle": "^1.0",
         "sylius/theme-bundle": "^1.0",
         "sylius/user-bundle": "^1.0",
-        "sylius/variation-bundle": "^1.0",
         "sylius/association-bundle": "^1.0",
         "sylius/review-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8",

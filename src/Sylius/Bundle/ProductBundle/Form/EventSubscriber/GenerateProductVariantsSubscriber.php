@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
+use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -21,17 +21,17 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class GenerateProductVariantsSubscriber implements EventSubscriberInterface
+final class GenerateProductVariantsSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var VariantGeneratorInterface
+     * @var ProductVariantGeneratorInterface
      */
     private $generator;
 
     /**
-     * @param VariantGeneratorInterface $generator
+     * @param ProductVariantGeneratorInterface $generator
      */
-    public function __construct(VariantGeneratorInterface $generator)
+    public function __construct(ProductVariantGeneratorInterface $generator)
     {
         $this->generator = $generator;
     }

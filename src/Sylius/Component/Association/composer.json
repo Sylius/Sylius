@@ -32,7 +32,6 @@
 
         "sylius/resource": "^1.0",
         "sylius/attribute": "^1.0",
-        "sylius/variation": "^1.0",
         "doctrine/collections": "^1.0.0"
     },
     "require-dev": {
