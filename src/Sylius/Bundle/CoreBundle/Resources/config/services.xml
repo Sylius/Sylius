@@ -38,11 +38,6 @@
         <service id="sylius.integer_distributor" class="Sylius\Component\Core\Distributor\IntegerDistributor" />
         <service id="sylius.proportional_integer_distributor" class="Sylius\Component\Core\Distributor\ProportionalIntegerDistributor" />
         <service id="sylius.invoice_number_generator" class="Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator" />
-        <service id="sylius.order.purger" class="Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger">
-            <argument type="service" id="sylius.manager.order" />
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sm.factory" />
-        </service>
         <service id="sylius.image_uploader" class="Sylius\Component\Core\Uploader\ImageUploader">
             <argument type="service">
                 <service class="Gaufrette\Filesystem">
