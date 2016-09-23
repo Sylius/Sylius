@@ -1171,9 +1171,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I do not select a shipping method
+     * @When I do not select any shipping method
      */
-    public function iDoNotSelectAShippingMethod()
+    public function iDoNotSelectAnyShippingMethod()
     {
         // Intentionally left blank to fulfill context expectation
     }
@@ -1201,13 +1201,24 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then there should be information about no shipping methods available form my shipping address
+     * @Then there should be information about no shipping methods available for my shipping address
      */
-    public function thereShouldBeInformationAboutNoShippingMethodsAvailableFormMyShippingAddress()
+    public function thereShouldBeInformationAboutNoShippingMethodsAvailableForMyShippingAddress()
     {
         Assert::true(
             $this->selectShippingPage->hasNoAvailableShippingMethodsWarning(),
             'There should be warning about no available shipping methods, but it does not.'
+        );
+    }
+
+    /**
+     * @Then I should not be able to complete the shipping step
+     */
+    public function iShouldNotBeAbleToCompleteTheShippingStep()
+    {
+        Assert::true(
+            $this->selectShippingPage->isNextStepButtonUnavailable(),
+            'The next step button should be disabled, but it does not.'
         );
     }
 

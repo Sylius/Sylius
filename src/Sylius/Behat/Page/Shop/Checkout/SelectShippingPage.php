@@ -95,9 +95,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function nextStep()
     {
-        if (!$this->getElement('next_step')->hasClass('disabled')) {
-            $this->getElement('next_step')->press();
-        }
+        $this->getElement('next_step')->press();
     }
 
     public function changeAddress()
@@ -134,6 +132,14 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     public function hasNoAvailableShippingMethodsWarning()
     {
         return $this->hasElement('warning_no_shipping_methods');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isNextStepButtonUnavailable()
+    {
+        return $this->getElement('next_step')->hasClass('disabled');
     }
 
     /**
