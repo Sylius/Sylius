@@ -57,7 +57,6 @@
             <tag name="kernel.event_subscriber" event="kernel.exception" />
         </service>
 
-
         <service id="sylius.form.extension.collection"
                  class="%sylius.form.extension.collection.class%">
             <tag name="form.type_extension" alias="collection" />

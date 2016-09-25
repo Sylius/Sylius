@@ -26,6 +26,8 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
+use Sylius\Bundle\ResourceBundle\ResourceControllerEvents;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -171,7 +173,7 @@ class ResourceController extends Controller
         $this->isGrantedOr403($configuration, ResourceActions::SHOW);
         $resource = $this->findOr404($configuration);
 
-        $this->eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource);
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::SHOW, $configuration, $resource);
 
         $view = View::create($resource);
 
@@ -238,7 +240,7 @@ class ResourceController extends Controller
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $newResource = $form->getData();
 
-            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
+            $event = $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource);
 
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {
                 throw new HttpException($event->getErrorCode(), $event->getMessage());
@@ -250,7 +252,7 @@ class ResourceController extends Controller
             }
 
             $this->repository->add($newResource);
-            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
+            $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
@@ -296,7 +298,7 @@ class ResourceController extends Controller
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $resource = $form->getData();
 
-            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
+            $event = $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource);
 
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {
                 throw new HttpException($event->getErrorCode(), $event->getMessage());
@@ -312,7 +314,7 @@ class ResourceController extends Controller
             }
 
             $this->manager->flush();
-            $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+            $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
@@ -353,7 +355,7 @@ class ResourceController extends Controller
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->findOr404($configuration);
 
-        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
+        $event = $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource);
 
         if ($event->isStopped() && !$configuration->isHtmlRequest()) {
             throw new HttpException($event->getErrorCode(), $event->getMessage());
@@ -365,7 +367,7 @@ class ResourceController extends Controller
         }
 
         $this->repository->remove($resource);
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
@@ -388,7 +390,7 @@ class ResourceController extends Controller
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
         $resource = $this->findOr404($configuration);
 
-        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $event = $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource);
 
         if ($event->isStopped() && !$configuration->isHtmlRequest()) {
             throw new HttpException($event->getErrorCode(), $event->getMessage());
@@ -406,7 +408,7 @@ class ResourceController extends Controller
         $this->stateMachine->apply($configuration, $resource);
         $this->manager->flush();
 
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create($resource, Response::HTTP_OK));
@@ -451,9 +453,9 @@ class ResourceController extends Controller
         $resource = $this->findOr404($configuration);
         $resource->setEnabled($enabled);
 
-        $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource);
         $this->manager->flush();
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
@@ -503,9 +505,9 @@ class ResourceController extends Controller
             $accessor->getValue($resource, $position) + $movement
         );
 
-        $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource);
         $this->manager->flush();
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+        $this->eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));

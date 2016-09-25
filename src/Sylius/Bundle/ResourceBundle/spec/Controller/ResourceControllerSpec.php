@@ -17,7 +17,6 @@ use PhpSpec\ObjectBehavior;
 use PhpSpec\Wrapper\Collaborator;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
-use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\NewResourceFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RedirectHandlerInterface;
@@ -45,6 +44,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sylius\Bundle\ResourceBundle\Controller\EventDispatcherInterface;
+use Sylius\Bundle\ResourceBundle\ResourceControllerEvents;
 
 /**
  * @mixin ResourceController
@@ -171,7 +172,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $configuration->isHtmlRequest()->willReturn(true);
         $configuration->getTemplate(ResourceActions::SHOW . '.html')->willReturn('SyliusShopBundle:Product:show.html.twig');
 
-        $eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::SHOW, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create()
             ->setData([
@@ -214,7 +215,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(false);
 
-        $eventDispatcher->dispatch(ResourceActions::SHOW, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::SHOW, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create($resource);
 
@@ -483,13 +484,13 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource)->willReturn($event);
         $event->isStopped()->willReturn(true);
 
         $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
 
         $repository->add($newResource)->shouldNotBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldNotBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource)->willReturn($event);
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
 
         $redirectHandler->redirectToIndex($configuration, $newResource)->willReturn($redirectResponse);
@@ -536,11 +537,11 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
         $repository->add($newResource)->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $newResource)->willReturn($redirectResponse);
@@ -586,11 +587,11 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
         $repository->add($newResource)->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
 
@@ -637,13 +638,13 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, $configuration, $newResource)->willReturn($event);
         $event->isStopped()->willReturn(true);
         $event->getMessage()->willReturn('You cannot add a new product right now.');
         $event->getErrorCode()->willReturn(500);
 
         $repository->add($newResource)->shouldNotBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldNotBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, $configuration, $newResource)->shouldNotBeCalled();
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
 
         $this
@@ -880,12 +881,12 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
         $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
 
         $manager->flush()->shouldNotBeCalled();
-        $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
+        $eventDispatcher->dispatch(Argument::any())->shouldNotBeCalled();
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
 
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
@@ -936,11 +937,11 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
         $manager->flush()->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
@@ -986,11 +987,11 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
         $manager->flush()->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create(null, 204);
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
@@ -1034,13 +1035,13 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
         $event->getMessage()->willReturn('Cannot update this channel.');
         $event->getErrorCode()->willReturn(500);
 
         $manager->flush()->shouldNotBeCalled();
-        $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, Argument::cetera())->shouldNotBeCalled();
 
         $this
             ->shouldThrow(new HttpException(500, 'Cannot update this channel.'))
@@ -1092,12 +1093,12 @@ final class ResourceControllerSpec extends ObjectBehavior
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
         $manager->flush()->shouldBeCalled();
         $stateMachine->apply($configuration, $resource)->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
@@ -1173,11 +1174,11 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(true);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
         $repository->remove($resource)->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, $configuration, $resource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToIndex($configuration, $resource)->willReturn($redirectResponse);
@@ -1212,11 +1213,11 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(true);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
 
         $repository->remove($resource)->shouldNotBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldNotBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, $configuration, $resource)->shouldNotBeCalled();
         $flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource)->shouldNotBeCalled();
 
         $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
@@ -1251,11 +1252,11 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(false);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
         $repository->remove($resource)->shouldBeCalled();
-        $eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create(null, 204);
 
@@ -1289,14 +1290,14 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(false);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
         $event->getMessage()->willReturn('Cannot delete this product.');
         $event->getErrorCode()->willReturn(500);
 
         $repository->remove($resource)->shouldNotBeCalled();
 
-        $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_DELETE, Argument::cetera())->shouldNotBeCalled();
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
         $flashHelper->addFlashFromEvent(Argument::any())->shouldNotBeCalled();
 
@@ -1374,7 +1375,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(true);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
         $stateMachine->can($configuration, $resource)->willReturn(false);
@@ -1382,7 +1383,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $stateMachine->apply($configuration, $resource)->shouldNotBeCalled();
         $objectManager->flush()->shouldNotBeCalled();
 
-        $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, Argument::cetera())->shouldNotBeCalled();
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
         $flashHelper->addFlashFromEvent(Argument::any())->shouldNotBeCalled();
 
@@ -1421,14 +1422,14 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(true);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
         $stateMachine->can($configuration, $resource)->willReturn(true);
         $stateMachine->apply($configuration, $resource)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 
-        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
         $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
@@ -1465,13 +1466,13 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(true);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
 
         $manager->flush()->shouldNotBeCalled();
         $stateMachine->apply($resource)->shouldNotBeCalled();
 
-        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldNotBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource)->shouldNotBeCalled();
         $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldNotBeCalled();
 
         $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
@@ -1508,14 +1509,14 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(false);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
         $stateMachine->can($configuration, $resource)->willReturn(true);
         $stateMachine->apply($configuration, $resource)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 
-        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, $configuration, $resource)->shouldBeCalled();
 
         $expectedView = View::create($resource, 200);
 
@@ -1551,7 +1552,7 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $configuration->isHtmlRequest()->willReturn(false);
 
-        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
         $event->getMessage()->willReturn('Cannot approve this product.');
         $event->getErrorCode()->willReturn(500);
@@ -1559,7 +1560,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $stateMachine->apply($configuration, $resource)->shouldNotBeCalled();
         $objectManager->flush()->shouldNotBeCalled();
 
-        $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_UPDATE, Argument::cetera())->shouldNotBeCalled();
         $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
         $flashHelper->addFlashFromEvent(Argument::any())->shouldNotBeCalled();
 
