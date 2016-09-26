@@ -157,6 +157,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $images = $this->getElement('images');
         $items = $images->findAll('css', 'div[data-form-collection="item"]');
 
+        Assert::notEmpty($items);
+
         return end($items);
     }
 }
