@@ -1,4 +1,5 @@
 <div class="ui unmargined segments">
+    {% set disabled = false %}
     {% for payment in order.payments %}
         <div class="ui segment">
             <div class="ui dividing header">{{ 'sylius.ui.payment'|trans }} #{{ loop.index }}</div>
@@ -22,15 +23,25 @@
                         </div>
                     </div>
                 {% else %}
-                    <div class="ui icon message" id="sylius-order-cannot-be-shipped">
-                        <i class="warning sign icon"></i>
-                        <div class="content">
-                            <div class="header">{{ 'sylius.ui.warning'|trans }}</div>
-                            <p>{{ 'sylius.ui.no_payment_methods_available'|trans }}.</p>
-                        </div>
-                    </div>
+                    {% set disabled = true %}
+                    {% include '@SyliusShop/Checkout/SelectPayment/_no_payment_methods_available.twig' %}
                 {% endfor %}
             </div>
         </div>
+    {% else %}
+        {% set disabled = true %}
+        {% include '@SyliusShop/Checkout/SelectPayment/_no_payment_methods_available.twig' %}
     {% endfor %}
+</div>
+<div class="ui hidden divider"></div>
+<div class="ui two column grid">
+    <div class="column">
+        <a href="{{ path('sylius_shop_checkout_select_shipping') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.change_shipping_method'|trans }}</a>
+    </div>
+    <div class="right aligned column">
+        <button type="submit" id="next-step" class="ui large primary icon labeled {% if disabled %} disabled {% endif %} button">
+            <i class="arrow right icon"></i>
+            {{ 'sylius.ui.next'|trans }}
+        </button>
+    </div>
 </div>
