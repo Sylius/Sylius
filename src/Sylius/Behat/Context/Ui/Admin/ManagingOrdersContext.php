@@ -354,6 +354,20 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then /^(its) code should be "([^"]+)"$/
+     */
+    public function itemCodeShouldBe($itemName, $code)
+    {
+        $itemCodeOnPage = $this->showPage->getItemCode($itemName);
+
+        Assert::same(
+            $itemCodeOnPage,
+            $code,
+            'Item code is %s, but should be %s.'
+        );
+    }
+
+    /**
      * @Then /^(its) unit price should be ([^"]+)$/
      */
     public function itemUnitPriceShouldBe($itemName, $unitPrice)

@@ -153,6 +153,13 @@ interface ShowPageInterface extends SymfonyPageInterface
      *
      * @return string
      */
+    public function getItemCode($itemName);
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
     public function getItemUnitPrice($itemName);
 
     /**

@@ -236,6 +236,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getItemCode($itemName)
+    {
+        return $this->getItemProperty($itemName, 'sylius-product-variant-code');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getItemUnitPrice($itemName)
     {
         return $this->getItemProperty($itemName, 'unit-price');
