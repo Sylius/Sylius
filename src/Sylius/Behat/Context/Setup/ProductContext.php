@@ -20,17 +20,16 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
-use Sylius\Component\Product\Model\ProductTranslationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
@@ -198,17 +197,16 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) is named "([^"]+)" in "([^"]+)"$/
+     * @Given /^(this product) is named "([^"]+)" (in the "([^"]+)" locale)$/
      */
     public function thisProductIsNamedIn(ProductInterface $product, $name, $locale)
     {
-        /** @var ProductTranslationInterface $productTranslation */
-        $productTranslation = $this->productTranslationFactory->createNew();
-        $productTranslation->setName($name);
-        $productTranslation->setSlug(StringInflector::nameToLowercaseCode($name));
-        $productTranslation->setLocale($locale);
+        /** @var ProductTranslationInterface $translation */
+        $translation = $this->productTranslationFactory->createNew();
+        $translation->setLocale($locale);
+        $translation->setName($name);
 
-        $product->addTranslation($productTranslation);
+        $product->addTranslation($translation);
 
         $this->objectManager->flush();
     }

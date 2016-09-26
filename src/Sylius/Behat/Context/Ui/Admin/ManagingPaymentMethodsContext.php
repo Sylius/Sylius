@@ -218,7 +218,7 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $actualValue = $this->indexPage->getColumnFields($field)[0];
 
-        Assert::eq(
+        Assert::same(
             $actualValue,
             $value,
             sprintf('Expected first payment method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
@@ -242,8 +242,8 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $foundRows = $this->indexPage->countItems();
 
-        Assert::eq(
-            ((int) $amount),
+        Assert::same(
+            (int) $amount,
             $foundRows,
             '%2$s rows with payment methods should appear on page, %s rows has been found'
         );

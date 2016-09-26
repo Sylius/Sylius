@@ -111,14 +111,14 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given /^(this shipping method) is named "([^"]+)" in "([^"]+)"$/
+     * @Given /^(this shipping method) is named "([^"]+)" in the "([^"]+)" locale$/
      */
-    public function thisShippingMethodIsNamedIn(ShippingMethodInterface $shippingMethod, $name, $locale)
+    public function thisShippingMethodIsNamedInLocale(ShippingMethodInterface $shippingMethod, $name, $locale)
     {
         /** @var ShippingMethodTranslationInterface $translation */
         $translation = $this->shippingMethodTranslationFactory->createNew();
-        $translation->setName($name);
         $translation->setLocale($locale);
+        $translation->setName($name);
 
         $shippingMethod->addTranslation($translation);
 

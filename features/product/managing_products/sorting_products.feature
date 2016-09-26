@@ -1,5 +1,5 @@
 @managing_products
-Feature: Sorting products on list
+Feature: Sorting listed products
     In order to change the order by which products are displayed
     As an Administrator
     I want to sort products
@@ -8,11 +8,11 @@ Feature: Sorting products on list
         Given the store operates on a single channel in "United States"
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And the store has a product "Berserk Pug" with code "B_PUG"
-        And this product is named "Szałowy Mops" in "Polish (Poland)"
+        And this product is named "Szałowy Mops" in the "Polish (Poland)" locale
         And the store also has a product "Pug of Love" with code "L_PUG"
-        And this product is named "Mops Miłości" in "Polish (Poland)"
+        And this product is named "Mops Miłości" in the "Polish (Poland)" locale
         And the store also has a product "Xtreme Pug" with code "X_PUG"
-        And this product is named "Ekstremalny Mops" in "Polish (Poland)"
+        And this product is named "Ekstremalny Mops" in the "Polish (Poland)" locale
         And I am logged in as an administrator
 
     @ui

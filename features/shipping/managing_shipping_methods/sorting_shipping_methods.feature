@@ -1,5 +1,5 @@
 @managing_shipping_methods
-Feature: Sorting shipping methods on list
+Feature: Sorting listed shipping methods
     In order to change the order by which shipping methods are displayed
     As an Administrator
     I want to sort shipping methods
@@ -8,11 +8,11 @@ Feature: Sorting shipping methods on list
         Given the store operates on a single channel in "United States"
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And the store allows shipping with "Aardvark Stagecoach" identified by "ground"
-        And this shipping method is named "Dyliżans Mrówkojadów" in "Polish (Poland)"
+        And this shipping method is named "Dyliżans Mrówkojadów" in the "Polish (Poland)" locale
         And the store also allows shipping with "Narwhal Submarine" identified by "marine"
-        And this shipping method is named "Łódź Podwodna Morskich Jednorożców" in "Polish (Poland)"
+        And this shipping method is named "Łódź Podwodna Morskich Jednorożców" in the "Polish (Poland)" locale
         And the store also allows shipping with "Pug Blimp" identified by "aerial"
-        And this shipping method is named "Sterowiec Mopsów" in "Polish (Poland)"
+        And this shipping method is named "Sterowiec Mopsów" in the "Polish (Poland)" locale
         And I am logged in as an administrator
 
     @ui

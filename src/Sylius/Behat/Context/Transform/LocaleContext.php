@@ -35,6 +35,7 @@ final class LocaleContext implements Context
     /**
      * @Transform :language
      * @Transform :localeCode
+     * @Transform /^in the "([^"]+)" locale$/
      */
     public function castToLocaleCode($localeName)
     {

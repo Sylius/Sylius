@@ -99,14 +99,14 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given /^(this payment method) is named "([^"]+)" in "([^"]+)"$/
+     * @Given /^(this payment method) is named "([^"]+)" in the "([^"]+)" locale$/
      */
     public function thisPaymentMethodIsNamedIn(PaymentMethodInterface $paymentMethod, $name, $locale)
     {
         /** @var PaymentMethodTranslationInterface $translation */
         $translation = $this->paymentMethodTranslationFactory->createNew();
-        $translation->setName($name);
         $translation->setLocale($locale);
+        $translation->setName($name);
 
         $paymentMethod->addTranslation($translation);
 

@@ -317,7 +317,7 @@ final class ManagingShippingMethodsContext implements Context
     {
         $actualValue = $this->indexPage->getColumnFields($field)[0];
 
-        Assert::eq(
+        Assert::same(
             $actualValue,
             $value,
             sprintf('Expected first shipping method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)

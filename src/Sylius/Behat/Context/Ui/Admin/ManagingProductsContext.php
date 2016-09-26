@@ -254,7 +254,7 @@ final class ManagingProductsContext implements Context
     {
         $actualValue = $this->indexPage->getColumnFields($field)[0];
 
-        Assert::eq(
+        Assert::same(
             $actualValue,
             $value,
             sprintf('Expected first product\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
@@ -278,7 +278,7 @@ final class ManagingProductsContext implements Context
     {
         $foundRows = $this->indexPage->countItems();
 
-        Assert::eq(
+        Assert::same(
             $numberOfProducts,
             $foundRows,
             '%s rows with products should appear on page, %s rows has been found'

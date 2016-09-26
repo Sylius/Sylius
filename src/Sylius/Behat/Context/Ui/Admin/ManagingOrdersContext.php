@@ -648,7 +648,7 @@ final class ManagingOrdersContext implements Context
     public function theOrderShouldHaveShipmentState(OrderInterface $order, $orderShipmentState)
     {
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['shipping state' => $orderShipmentState]),
+            $this->indexPage->isSingleResourceOnPage(['shippingState' => $orderShipmentState]),
             sprintf('Cannot find order with "%s" order shipping state on the list.', $orderShipmentState)
         );
     }

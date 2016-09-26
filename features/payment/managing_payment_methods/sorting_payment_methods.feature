@@ -1,5 +1,5 @@
 @managing_payment_methods
-Feature: Sorting payment methods on list
+Feature: Sorting listed payment methods
     In order to change the order by which payment methods are displayed
     As an Administrator
     I want to sort the payment methods
@@ -8,25 +8,25 @@ Feature: Sorting payment methods on list
         Given the store operates on a single channel in "United States"
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And the store has a payment method "Paypal Express Checkout" with a code "express_checkout"
-        And this payment method is named "Ekspresowy Paypal" in "Polish (Poland)"
-        And the store has a payment method "Offline" with a code "paying_offline"
-        And this payment method is named "Płatność Offline" in "Polish (Poland)"
-        And the store has a payment method "Cash on Delivery" with a code "personal_payment"
-        And this payment method is named "Pięniądze przy Odbiorze albo Życie" in "Polish (Poland)"
+        And this payment method is named "Ekspresowy Paypal" in the "Polish (Poland)" locale
+        And the store has a payment method "Offline" with a code "offline"
+        And this payment method is named "Płatność Offline" in the "Polish (Poland)" locale
+        And the store has a payment method "Cash on Delivery" with a code "cash_on_delivery"
+        And this payment method is named "Płatność Przy Odbiorze" in the "Polish (Poland)" locale
         And I am logged in as an administrator
 
     @ui
     Scenario: Payment methods are sorted by code in ascending order by default
         When I browse payment methods
         Then I should see 3 payment methods in the list
-        And the first payment method on the list should have code "express_checkout"
+        And the first payment method on the list should have code "cash_on_delivery"
 
     @ui
     Scenario: Changing the order of sorting by code
         Given I am browsing payment methods
         When I switch the way payment methods are sorted by code
         Then I should see 3 payment methods in the list
-        And the first payment method on the list should have code "personal_payment"
+        And the first payment method on the list should have code "offline"
 
     @ui
     Scenario: Payment methods can be sorted by their names
