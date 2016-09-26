@@ -65,7 +65,7 @@ final class ConvertPaymentToPaypalExpressActionSpec extends ObjectBehavior
 
         $order->getId()->willReturn(92);
         $order->getId()->willReturn(92);
-        $order->getCurrencyCode()->willReturn('USD');
+        $order->getCurrencyCode()->willReturn('PLN');
         $order->getTotal()->willReturn(22000);
         $order->getItems()->willReturn([$orderItem]);
         $order->getAdjustmentsTotalRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->willReturn(0);
@@ -84,20 +84,20 @@ final class ConvertPaymentToPaypalExpressActionSpec extends ObjectBehavior
         $payment->getOrder()->willReturn($order);
 
         $invoiceNumberGenerator->generate($order, $payment)->willReturn('19-92');
-        $currencyConverter->convertFromBase(22000, 'USD')->willReturn(22000);
-        $currencyConverter->convertFromBase(20000, 'USD')->willReturn(20000);
-        $currencyConverter->convertFromBase(2000, 'USD')->willReturn(2000);
+        $currencyConverter->convertFromBase(22000, 'PLN')->willReturn(88000);
+        $currencyConverter->convertFromBase(20000, 'PLN')->willReturn(80000);
+        $currencyConverter->convertFromBase(2000, 'PLN')->willReturn(8000);
 
         $details = [
             'PAYMENTREQUEST_0_INVNUM' => '19-92',
-            'PAYMENTREQUEST_0_CURRENCYCODE' => 'USD',
-            'PAYMENTREQUEST_0_AMT' => 220.00,
-            'PAYMENTREQUEST_0_ITEMAMT' => 220.00,
+            'PAYMENTREQUEST_0_CURRENCYCODE' => 'PLN',
+            'PAYMENTREQUEST_0_AMT' => 880.00,
+            'PAYMENTREQUEST_0_ITEMAMT' => 880.00,
             'L_PAYMENTREQUEST_0_NAME0' => 'Lamborghini Aventador Model',
-            'L_PAYMENTREQUEST_0_AMT0' => 200.00,
+            'L_PAYMENTREQUEST_0_AMT0' => 800.00,
             'L_PAYMENTREQUEST_0_QTY0' => 1,
             'L_PAYMENTREQUEST_0_NAME1' => 'Shipping Total',
-            'L_PAYMENTREQUEST_0_AMT1' => 20.00,
+            'L_PAYMENTREQUEST_0_AMT1' => 80.00,
             'L_PAYMENTREQUEST_0_QTY1' => 1,
         ];
 
