@@ -18,7 +18,7 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\ProductImage" table="sylius_product_image">
         <unique-constraints>
-            <unique-constraint columns="owner_id,code" name="code_idx" />
+            <unique-constraint columns="owner_id,code" name="product_image_code_idx" />
         </unique-constraints>
 
         <many-to-one field="owner" target-entity="Sylius\Component\Product\Model\ProductInterface" inversed-by="images">
