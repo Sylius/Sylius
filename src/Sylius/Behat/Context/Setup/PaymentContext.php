@@ -91,6 +91,7 @@ final class PaymentContext implements Context
 
     /**
      * @Given the payment method :paymentMethod is disabled
+     * @Given /^(this payment method) is disabled$/
      */
     public function theStoreHasAPaymentMethodDisabled(PaymentMethodInterface $paymentMethod)
     {
