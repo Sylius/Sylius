@@ -1,6 +1,6 @@
 @managing_products
 Feature: Removing images of an existing product
-    In order to remove images of my products
+    In order to get rid of obsolete images of my products
     As an Administrator
     I want to be able to remove images from an existing product
 
@@ -12,8 +12,8 @@ Feature: Removing images of an existing product
     Scenario: Removing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
-        And I want to modify this product
-        When I remove an image with a code "thumbnail"
+        When I want to modify this product
+        And I remove an image with a code "thumbnail"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product should not have images
@@ -22,8 +22,8 @@ Feature: Removing images of an existing product
     Scenario: Removing a single image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
-        And I want to modify this product
-        When I remove an image with a code "thumbnail"
+        When I want to modify this product
+        And I remove an image with a code "thumbnail"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product should not have images
@@ -33,9 +33,9 @@ Feature: Removing images of an existing product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
         And this product has also an image "lamborghini.jpg" with a code "main"
-        And I want to modify this product
-        When I remove an image with a code "thumbnail"
-        When I remove also an image with a code "main"
+        When I want to modify this product
+        And I remove an image with a code "thumbnail"
+        And I remove also an image with a code "main"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product should not have images
@@ -45,9 +45,9 @@ Feature: Removing images of an existing product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
         And this product has also an image "lamborghini.jpg" with a code "main"
-        And I want to modify this product
-        When I remove an image with a code "thumbnail"
-        When I remove also an image with a code "main"
+        When I want to modify this product
+        And I remove an image with a code "thumbnail"
+        And I remove also an image with a code "main"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product should not have images
@@ -57,8 +57,8 @@ Feature: Removing images of an existing product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
         And this product has also an image "lamborghini.jpg" with a code "main"
-        And I want to modify this product
-        When I remove an image with a code "thumbnail"
+        When I want to modify this product
+        And I remove an image with a code "thumbnail"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product should have an image with a code "main"
@@ -69,8 +69,8 @@ Feature: Removing images of an existing product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
         And this product has also an image "lamborghini.jpg" with a code "main"
-        And I want to modify this product
-        When I remove an image with a code "thumbnail"
+        When I want to modify this product
+        And I remove an image with a code "thumbnail"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product should have an image with a code "main"
@@ -79,8 +79,8 @@ Feature: Removing images of an existing product
     @ui @javascript
     Scenario: Adding multiple images and removing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
-        And I want to modify this product
-        When I attach the "lamborghini.jpg" image with a code "thumbnail"
+        When I want to modify this product
+        And I attach the "lamborghini.jpg" image with a code "thumbnail"
         And I attach the "lamborghini.jpg" image with a code "main"
         And I remove the first image
         And I save my changes
@@ -91,8 +91,8 @@ Feature: Removing images of an existing product
     @ui @javascript
     Scenario: Adding multiple images and removing a single image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
-        And I want to modify this product
-        When I attach the "lamborghini.jpg" image with a code "thumbnail"
+        When I want to modify this product
+        And I attach the "lamborghini.jpg" image with a code "thumbnail"
         And I attach the "lamborghini.jpg" image with a code "main"
         And I remove the first image
         And I save my changes

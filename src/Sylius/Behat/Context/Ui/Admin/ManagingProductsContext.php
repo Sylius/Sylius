@@ -632,7 +632,7 @@ final class ManagingProductsContext implements Context
             $this->updateConfigurableProductPage,
         ], $this->sharedStorage->get('product'));
 
-        Assert::eq(
+        Assert::same(
             0,
             $currentPage->countImages(),
             'This product has %2$s, but it should not have.'
