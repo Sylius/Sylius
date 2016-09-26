@@ -154,6 +154,14 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     }
 
     /**
+     * @return bool
+     */
+    public function isImageCodeDisabled()
+    {
+        return 'disabled' === $this->getLastImageElement()->findField('Code')->getAttribute('disabled');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getCodeElement()

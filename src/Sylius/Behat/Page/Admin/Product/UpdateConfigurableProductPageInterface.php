@@ -82,4 +82,9 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
      * @return int
      */
     public function countImages();
+
+    /**
+     * @return bool
+     */
+    public function isImageCodeDisabled();
 }

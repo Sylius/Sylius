@@ -28,14 +28,14 @@ Feature: Changing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should have an image with a code "thumbnail"
 
-    @todo
+    @ui
     Scenario: Unable to change an image's code of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
         And I want to modify this product
         Then the image code field should be disabled
 
-    @todo
+    @ui
     Scenario: Unable to change an image's code of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with a code "thumbnail"

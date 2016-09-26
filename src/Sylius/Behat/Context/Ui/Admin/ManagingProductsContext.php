@@ -640,6 +640,51 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the image code field should be disabled
+     */
+    public function theImageCodeFieldShouldBeDisabled()
+    {
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $this->sharedStorage->get('product'));
+
+        Assert::true(
+            $currentPage->isImageCodeDisabled(),
+            'Image code field should be disabled but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the image with this code already exists
+     */
+    public function iShouldBeNotifiedThatTheImageWithThisCodeAlreadyExists()
+    {
+        Assert::same($this->updateSimpleProductPage->getValidationMessageForImage('code'), 'Image code must be unique within this product.');
+    }
+
+    /**
+     * @Then there should still be only one image in the :product product
+     */
+    public function thereShouldStillBeOnlyOneImageInThisTaxon(ProductInterface $product)
+    {
+        $this->iWantToModifyAProduct($product);
+
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $product);
+
+        Assert::same(
+            1,
+            $currentPage->countImages(),
+            'This product has %2$s images, but it should have only one.'
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */

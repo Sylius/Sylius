@@ -10,7 +10,7 @@ Feature: Product image unique code validation within a product
         And the "Lamborghini Gallardo Model" product has an image "lamborghini.jpg" with a code "thumbnail"
         And I am logged in as an administrator
 
-    @todo
+    @ui @javascript
     Scenario: Adding images with the same code to different products
         When I want to modify the "Ford Capri Model" product
         And I attach the "ford.jpg" image with a code "thumbnail"
@@ -18,7 +18,7 @@ Feature: Product image unique code validation within a product
         Then I should be notified that it has been successfully edited
         And this product should have an image with a code "thumbnail"
 
-    @todo
+    @ui @javascript
     Scenario: Trying to add an image with a code that is already used by other image of this product
         When I want to modify the "Lamborghini Gallardo Model" product
         And I attach the "ford.jpg" image with a code "thumbnail"
