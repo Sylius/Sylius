@@ -8,7 +8,7 @@ Feature: Removing images of an existing product
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @todo
+    @ui @javascript
     Scenario: Removing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
@@ -18,7 +18,7 @@ Feature: Removing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should not have images
 
-    @todo
+    @ui @javascript
     Scenario: Removing a single image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
@@ -28,7 +28,7 @@ Feature: Removing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should not have images
 
-    @todo
+    @ui @javascript
     Scenario: Removing all images of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
@@ -40,7 +40,7 @@ Feature: Removing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should not have images
 
-    @todo
+    @ui @javascript
     Scenario: Removing all images of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
@@ -52,7 +52,7 @@ Feature: Removing images of an existing product
         Then I should be notified that it has been successfully edited
         And this product should not have images
 
-    @todo
+    @ui @javascript
     Scenario: Removing only one image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
@@ -64,7 +64,7 @@ Feature: Removing images of an existing product
         And this product should have an image with a code "main"
         But this product should not have an image with a code "thumbnail"
 
-    @todo
+    @ui @javascript
     Scenario: Removing only one image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And this product has an image "lamborghini.jpg" with a code "thumbnail"
@@ -76,7 +76,7 @@ Feature: Removing images of an existing product
         And this product should have an image with a code "main"
         But this product should not have an image with a code "thumbnail"
 
-    @todo
+    @ui @javascript
     Scenario: Adding multiple images and removing a single image of a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         And I want to modify this product
@@ -88,7 +88,7 @@ Feature: Removing images of an existing product
         And this product should have an image with a code "main"
         But this product should not have an image with a code "thumbnail"
 
-    @todo
+    @ui @javascript
     Scenario: Adding multiple images and removing a single image of a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         And I want to modify this product

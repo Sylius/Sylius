@@ -550,7 +550,7 @@ final class ManagingProductsContext implements Context
     {
         $this->sharedStorage->set('product', $product);
 
-        /** @var UpdatePageInterface $currentPage */
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
             $this->updateSimpleProductPage,
             $this->updateConfigurableProductPage,
@@ -559,6 +559,23 @@ final class ManagingProductsContext implements Context
         Assert::true(
             $currentPage->isImageWithCodeDisplayed($code),
             sprintf('Image with a code %s should have been displayed.', $code)
+        );
+    }
+
+    /**
+     * @Then /^(this product) should not have(?:| also) an image with a code "([^"]*)"$/
+     */
+    public function thisProductShouldNotHaveAnImageWithCode(ProductInterface $product, $code)
+    {
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $product);
+
+        Assert::false(
+            $currentPage->isImageWithCodeDisplayed($code),
+            sprintf('Image with a code %s should not have been displayed.', $code)
         );
     }
 
@@ -574,6 +591,52 @@ final class ManagingProductsContext implements Context
         ], $this->sharedStorage->get('product'));
 
         $currentPage->changeImageWithCode($code, $path);
+    }
+
+    /**
+     * @When /^I remove(?:| also) an image with a code "([^"]*)"$/
+     */
+    public function iRemoveAnImageWithACode($code)
+    {
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $this->sharedStorage->get('product'));
+
+        $currentPage->removeImageWithCode($code);
+    }
+
+    /**
+     * @When I remove the first image
+     */
+    public function iRemoveTheFirstImage()
+    {
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $this->sharedStorage->get('product'));
+
+        $currentPage->removeFirstImage();
+    }
+
+    /**
+     * @Then this product should not have images
+     */
+    public function thisProductShouldNotHaveImages()
+    {
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $this->sharedStorage->get('product'));
+
+        Assert::eq(
+            0,
+            $currentPage->countImages(),
+            'This product has %2$s, but it should not have.'
+        );
     }
 
     /**
