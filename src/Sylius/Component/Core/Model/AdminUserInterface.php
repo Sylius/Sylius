@@ -19,4 +19,14 @@ use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 interface AdminUserInterface extends BaseUserInterface
 {
     const DEFAULT_ADMIN_ROLE = 'ROLE_ADMINISTRATION_ACCESS';
+
+    /**
+     * @return string
+     */
+    public function getLocaleCode();
+
+    /**
+     * @param string $code
+     */
+    public function setLocaleCode($code);
 }

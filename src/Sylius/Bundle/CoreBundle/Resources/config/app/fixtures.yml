@@ -79,11 +79,13 @@ sylius_fixtures:
                                 username: "John Doe"
                                 password: sylius
                                 enabled: true
+                                localeCode: "%locale%"
                             -
                                 email: api@example.com
                                 username: "Luke Brushwood"
                                 password: sylius-api
                                 enabled: true
+                                localeCode: "%locale%"
                                 api: true
 
                 tax_category:
