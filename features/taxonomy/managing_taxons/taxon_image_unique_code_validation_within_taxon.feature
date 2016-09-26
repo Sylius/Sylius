@@ -24,4 +24,4 @@ Feature: Taxon image unique code validation within a taxon
         And I attach the "mugs.jpg" image with a code "banner"
         And I try to save my changes
         Then I should be notified that the image with this code already exists
-        And there should still be only one image in this taxon
+        And there should still be only one image in the "T-Shirts" taxon
