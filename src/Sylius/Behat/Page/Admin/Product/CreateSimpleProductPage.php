@@ -81,7 +81,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
         $imageForm = $this->getLastImageElement();
         $imageForm->fillField('Code', $code);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.'products/'.$path);
     }
 
     /**

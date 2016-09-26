@@ -120,7 +120,7 @@ final class TaxonomyContext implements Context
         $filesPath = $this->getParameter('files_path');
 
         $taxonImage = $this->taxonImageFactory->createNew();
-        $taxonImage->setFile(new UploadedFile($filesPath.$imagePath, basename($imagePath)));
+        $taxonImage->setFile(new UploadedFile($filesPath.'taxons/'.$imagePath, basename($imagePath)));
         $taxonImage->setCode($imageCode);
         $this->imageUploader->upload($taxonImage);
 
