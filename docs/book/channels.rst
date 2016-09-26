@@ -14,7 +14,18 @@ In the modern world of e-commerce your website is no longer the only point of sa
 
 Or pretty much any other channel type you can imagine.
 
-**What may differ between channels?** Particularly anything from your shop configuration: - products, - currencies, - locales (language), - themes.
+**What may differ between channels?** Particularly anything from your shop configuration:
+
+* products,
+* currencies,
+* locales (language),
+* themes,
+* hostnames,
+* taxes,
+* payment and shipping methods.
+
+A **Channel** has a ``code``, a ``name`` and a ``color``.
+
 In order to make the system more convenient for the administrator - there is just one, shared admin panel. Also users are shared among the channels.
 
 .. tip::

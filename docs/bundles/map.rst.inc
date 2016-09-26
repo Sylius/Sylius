@@ -1,4 +1,3 @@
-* :doc:`/bundles/general/index`
 * :doc:`/bundles/SyliusAddressingBundle/index`
 * :doc:`/bundles/SyliusAttributeBundle/index`
 * :doc:`/bundles/SyliusFixturesBundle/index`

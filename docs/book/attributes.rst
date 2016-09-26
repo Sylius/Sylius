@@ -36,14 +36,20 @@ To give you a better insight into Attributes, let's have a look how to prepare a
 To assign Attributes to Products firstly you will need a factory for ProductAttributes.
 The AttributeFactory has a special method createTyped($type), where $type is a string.
 
+The Attribute needs a ``code`` and a ``name`` before it can be saved in the repository.
+
 .. code-block:: php
 
    /** @var AttributeFactoryInterface $attributeFactory */
-   $attributeFactory = $this->get('sylius.factory.product_attribute');
+   $attributeFactory = $this->container->get('sylius.factory.product_attribute');
 
    /** @var AttributeInterface $attribute */
    $attribute = $attributeFactory->createTyped('text');
+
    $attribute->setName('Book cover');
+   $attribute->setCode('book_cover');
+
+   $this->container->get('sylius.repository.product_attribute')->add($attribute);
 
 In order to assign value to your Attribute you will need a factory of ProductAttributeValues,
 use it to create a new value object.
@@ -51,7 +57,7 @@ use it to create a new value object.
 .. code-block:: php
 
    /** @var FactoryInterface $attributeValueFactory */
-   $attributeValueFactory = $this->get('sylius.factory.product_attribute_value');
+   $attributeValueFactory = $this->container->get('sylius.factory.product_attribute_value');
 
    /** @var AttributeValueInterface $hardcover */
    $hardcover = $attributeValueFactory->createNew();
@@ -64,23 +70,39 @@ Attach the new AttributeValue to your Attribute and set its ``value``, which is 
 
    $hardcover->setValue('hardcover');
 
-Finally let's prepare a product that will have your newly created attribute and then add it to the system using a repository.
+Finally let's find a product that will have your newly created attribute.
 
 .. code-block:: php
 
-   /** @var ProductFactoryInterface */
-   $productFactory = $this->get('sylius.factory.product');
    /** @var ProductInterface $product */
-   $product = $productFactory->createNew();
+   $product = $this->container->get('sylius.repository.product')->findOneBy(['code' => 'code']);
 
    $product->addAttribute($hardcover);
 
-   /** @var productRepositoryInterface $productRepository */
-   $productRepository = $this->get('sylius.repository.product');
+Now let's see what has to be done if you would like to add an attribute of ``integer`` type. Let's find such a one in the repository,
+it will be for example the ``BOOK-PAGES`` attribute.
 
-   $productRepository->add($product);
+.. code-block:: php
 
-Your Product will now have an Attribute with two possible values.
+   /** @var AttributeInterface $bookPagesAttribute */
+   $bookPagesAttribute = $this->container->get('sylius.repository.product_attribute')->findOneBy(['code' => 'BOOK-PAGES']);
+
+   /** @var AttributeValueInterface $pages */
+   $pages = $attributeValueFactory->createNew();
+
+   $pages->setAttribute($bookPagesAttribute);
+
+   $pages->setValue(500);
+
+   $product->addAttribute($pages);
+
+After adding attributes remember to **flush the product manager**.
+
+.. code-block:: php
+
+   $this->container->get('sylius.manager.product')->flush();
+
+Your Product will now have two Attributes.
 
 Learn more
 ----------
