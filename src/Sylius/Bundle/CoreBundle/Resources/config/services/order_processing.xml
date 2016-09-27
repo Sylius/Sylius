@@ -24,9 +24,9 @@
             <tag name="sylius.order_processor" />
         </service>
 
-        <service id="sylius.order_processing.order_exchange_payment_processor" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
+        <service id="sylius.order_processing.order_payment_processor" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
             <argument type="service" id="sylius.factory.payment"/>
-            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.payment_method_resolver.default" />
             <tag name="sylius.order_processor" />
         </service>
 

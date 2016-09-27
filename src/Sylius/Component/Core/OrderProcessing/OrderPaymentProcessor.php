@@ -15,12 +15,16 @@ use Sylius\Component\Core\Model\OrderInterface as CoreOrderInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
+use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class OrderPaymentProcessor implements OrderProcessorInterface
 {
@@ -30,11 +34,17 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     private $paymentFactory;
 
     /**
+     * @var DefaultPaymentMethodResolverInterface
+     */
+    private $defaultPaymentMethodResolver;
+
+    /**
      * @param PaymentFactoryInterface $paymentFactory
      */
-    public function __construct(PaymentFactoryInterface $paymentFactory)
+    public function __construct(PaymentFactoryInterface $paymentFactory, DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver)
     {
         $this->paymentFactory = $paymentFactory;
+        $this->defaultPaymentMethodResolver = $defaultPaymentMethodResolver;
     }
 
     /**
@@ -57,26 +67,30 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
             return;
         }
 
-        /** @var $payment PaymentInterface */
-        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
-        $this->setPaymentMethodIfNeeded($order, $payment);
-
-        $order->addPayment($payment);
+        $this->createNewPayment($order);
     }
 
     /**
      * @param OrderInterface $order
-     * @param PaymentInterface $payment
      */
-    private function setPaymentMethodIfNeeded(OrderInterface $order, PaymentInterface $payment)
+    private function createNewPayment(OrderInterface $order)
     {
+        /** @var $payment PaymentInterface */
+        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
+
+        $paymentMethod = $this->getDefaultPaymentMethod($payment, $order);
         $lastPayment = $this->getLastPayment($order);
 
-        if (null === $lastPayment) {
+        if (null !== $lastPayment) {
+            $paymentMethod = $lastPayment->getMethod();
+        }
+        
+        if (null === $paymentMethod) {
             return;
         }
 
-        $payment->setMethod($lastPayment->getMethod());
+        $payment->setMethod($paymentMethod);
+        $order->addPayment($payment);
     }
 
     /**
@@ -87,5 +101,23 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     private function getLastPayment(OrderInterface $order)
     {
         return $order->getLastPayment(PaymentInterface::STATE_CANCELLED) ?: $order->getLastPayment(PaymentInterface::STATE_FAILED);
+    }
+
+    /**
+     * @param PaymentInterface $payment
+     * @param OrderInterface $order
+     *
+     * @return null|PaymentMethodInterface
+     */
+    private function getDefaultPaymentMethod(PaymentInterface $payment, OrderInterface $order)
+    {
+        try {
+            $payment->setOrder($order);
+            $paymentMethod = $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
+
+            return $paymentMethod;
+        } catch (UnresolvedDefaultPaymentMethodException $exception) {
+            return null;
+        }
     }
 }
