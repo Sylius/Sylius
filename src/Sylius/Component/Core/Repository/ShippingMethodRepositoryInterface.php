@@ -26,4 +26,11 @@ interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepository
      * @return array
      */
     public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel);
+
+    /**
+     * @param ChannelInterface $channel
+     *
+     * @return array
+     */
+    public function findEnabledForChannel(ChannelInterface $channel);
 }

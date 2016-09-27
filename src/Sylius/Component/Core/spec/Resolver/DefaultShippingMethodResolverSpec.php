@@ -16,8 +16,10 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Core\Resolver\DefaultShippingMethodResolver;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
-use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
@@ -32,7 +34,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Resolver\DefaultShippingMethodResolver');
+        $this->shouldHaveType(DefaultShippingMethodResolver::class);
     }
 
     function it_implements_default_shipping_method_resolver_interface()
@@ -46,56 +48,32 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
-        ShippingMethodInterface $thirdShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository
     ) {
-        $shippingMethodRepository
-            ->findBy(['enabled' => true])
-            ->willReturn([$firstShippingMethod, $secondShippingMethod, $thirdShippingMethod])
-        ;
-
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
 
-        $channel->hasShippingMethod($firstShippingMethod)->willReturn(false);
-        $channel->hasShippingMethod($secondShippingMethod)->willReturn(true);
-        $channel->hasShippingMethod($thirdShippingMethod)->willReturn(true);
+        $shippingMethodRepository
+            ->findEnabledForChannel($channel)
+            ->willReturn([$firstShippingMethod, $secondShippingMethod])
+        ;
 
-        $this->getDefaultShippingMethod($shipment)->shouldReturn($secondShippingMethod);
+
+        $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
     }
 
     function it_throws_exception_if_there_is_no_enabled_shipping_methods(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ShipmentInterface $shipment
-    ) {
-        $shippingMethodRepository->findBy(['enabled' => true])->willReturn([]);
-
-        $this
-            ->shouldThrow(UnresolvedDefaultShippingMethodException::class)
-            ->during('getDefaultShippingMethod', [$shipment])
-        ;
-    }
-
-    function it_throws_exception_if_there_is_no_enabled_shipping_methods_for_channel(
-        ChannelInterface $channel,
-        OrderInterface $order,
         ShipmentInterface $shipment,
-        ShippingMethodInterface $firstShippingMethod,
-        ShippingMethodInterface $secondShippingMethod,
-        ShippingMethodInterface $thirdShippingMethod,
-        ShippingMethodRepositoryInterface $shippingMethodRepository
+        ChannelInterface $channel,
+        OrderInterface $order
     ) {
-        $shippingMethodRepository
-            ->findBy(['enabled' => true])
-            ->willReturn([$firstShippingMethod, $secondShippingMethod, $thirdShippingMethod])
-        ;
 
         $shipment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
 
-        $channel->hasShippingMethod($firstShippingMethod)->willReturn(false);
-        $channel->hasShippingMethod($secondShippingMethod)->willReturn(false);
-        $channel->hasShippingMethod($thirdShippingMethod)->willReturn(false);
+        $shippingMethodRepository
+            ->findEnabledForChannel($channel)->willReturn([]);
 
         $this
             ->shouldThrow(UnresolvedDefaultShippingMethodException::class)
@@ -103,9 +81,8 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_passed_shipment_is_not_core_shipment_object(
-        \Sylius\Component\Shipping\Model\ShipmentInterface $shipment
-    ) {
+    function it_throws_exception_if_passed_shipment_is_not_core_shipment_object(BaseShipmentInterface $shipment)
+    {
         $this->shouldThrow(\InvalidArgumentException::class)->during('getDefaultShippingMethod', [$shipment]);
     }
 }

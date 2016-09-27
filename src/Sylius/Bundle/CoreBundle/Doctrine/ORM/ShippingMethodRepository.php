@@ -35,4 +35,18 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
             ->getResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findEnabledForChannel(ChannelInterface $channel)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.enabled = true')
+            ->andWhere('o IN (:channelShippingMethods)')
+            ->setParameter('channelShippingMethods', $channel->getShippingMethods()->toArray())
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
