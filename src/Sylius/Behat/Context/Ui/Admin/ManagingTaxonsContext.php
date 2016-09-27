@@ -370,4 +370,37 @@ final class ManagingTaxonsContext implements Context
     {
         $this->updatePage->changeImageWithCode($code, $path);
     }
+
+    /**
+     * @Then I should be notified that the image with this code already exists
+     */
+    public function iShouldBeNotifiedThatTheImageWithThisCodeAlreadyExists()
+    {
+        Assert::same($this->updatePage->getValidationMessageForImage('code'), 'Image code must be unique within this taxon.');
+    }
+
+    /**
+     * @Then there should still be only one image in the :taxon taxon
+     */
+    public function thereShouldStillBeOnlyOneImageInThisTaxon(TaxonInterface $taxon)
+    {
+        $this->iWantToModifyATaxon($taxon);
+
+        Assert::eq(
+            1,
+            $this->updatePage->countImages(),
+            'This taxon has %2$s images, but it should have only one.'
+        );
+    }
+
+    /**
+     * @Then the image code field should be disabled
+     */
+    public function theImageCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isImageCodeDisabled(),
+            'Image code field should be disabled but it is not.'
+        );
+    }
 }

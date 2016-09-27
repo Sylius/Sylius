@@ -17,3 +17,8 @@ Feature: Changing images of an existing taxon
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this taxon should have an image with a code "banner"
+
+    @ui
+    Scenario: Unable to change a code of an image
+        When I want to modify the "T-Shirts" taxon
+        Then the image code field should be disabled

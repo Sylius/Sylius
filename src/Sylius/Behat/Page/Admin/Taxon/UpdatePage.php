@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Taxon;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -123,6 +124,29 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
         $imageForm = $this->getImageElementByCode($code);
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationMessageForImage($element)
+    {
+        $provinceForm = $this->getLastImageElement();
+
+        $foundElement = $provinceForm->find('css', '.pointing');
+        if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.pointing');
+        }
+
+        return $foundElement->getText();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isImageCodeDisabled()
+    {
+        return 'disabled' === $this->getLastImageElement()->findField('Code')->getAttribute('disabled');
     }
 
     /**
