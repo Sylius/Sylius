@@ -1,5 +1,11 @@
 <a href="#" class="ui fluid image">
-    {% set path = product.imageByCode('main') is not null ? product.imageByCode('main').path|imagine_filter('sylius_shop_product_large_thumbnail') : 'http://placehold.it/400x300' %}
+    {% if product.imageByCode('main') is not null %}
+        {% set path = product.imageByCode('main').path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
+    {% elseif product.images.first %}
+        {% set path = product.images.first.path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
+    {% else %}
+        {% set path = 'http://placehold.it/400x300' %}
+    {% endif %}
 
     <img src="{{ path }}" id="main-image" alt="" />
 </a>
