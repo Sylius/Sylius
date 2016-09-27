@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductImage;
+use Sylius\Component\Core\Model\ProductImageInterface;
 use Sylius\Component\Core\Model\TaxonImage;
+use Sylius\Component\Core\Model\TaxonImageInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -62,7 +62,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(ProductImage::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(ImageInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ProductImageInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()
@@ -76,7 +76,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(TaxonImage::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(ImageInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(TaxonImageInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()

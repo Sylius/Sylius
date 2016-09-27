@@ -57,7 +57,7 @@
             <join-column name="main_taxon_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <one-to-many field="images" target-entity="Sylius\Component\Core\Model\ProductImage" mapped-by="owner" orphan-removal="true">
+        <one-to-many field="images" target-entity="Sylius\Component\Core\Model\ProductImageInterface" mapped-by="owner" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>

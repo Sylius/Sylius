@@ -14,6 +14,6 @@ namespace Sylius\Component\Core\Model;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class TaxonImage extends Image
+class TaxonImage extends Image implements TaxonImageInterface
 {
 }

@@ -12,8 +12,8 @@
 namespace Sylius\Component\Core\Model;
 
 /**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ * @author Saidul Islam <saidul.04@gmail.com>
  */
-class ProductImage extends Image implements ProductImageInterface
+interface TaxonImageInterface extends ImageInterface
 {
 }
