@@ -5,6 +5,4 @@ sylius:
     ui:
         city: Bandar
         company: Syarikat
-        "no": false
         postcode: Poskod
-        "yes": true

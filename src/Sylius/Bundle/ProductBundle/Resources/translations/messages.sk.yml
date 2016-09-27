@@ -19,3 +19,11 @@ sylius:
         association:
             type: Typ priradenia
             product: Priradený produkt
+        variant:
+            name: Názov
+        option:
+            name: Názov
+            values: Možné hodnoty
+        option_value:
+            add_value: Pridať hodnotu
+            value: Hodnota

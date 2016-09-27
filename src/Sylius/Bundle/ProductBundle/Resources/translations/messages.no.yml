@@ -14,3 +14,11 @@ sylius:
             available_on: Tilgjengelig
         association_type:
             name: Navn
+        variant:
+            name: Navn
+        option:
+            name: Navn
+            values: Mulige verdier
+        option_value:
+            add_value: Legg til verdi
+            value: Verdi

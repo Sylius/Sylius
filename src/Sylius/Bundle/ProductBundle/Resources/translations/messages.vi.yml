@@ -8,3 +8,7 @@ sylius:
             options: Tùy chọn
         association_type:
             name: Tên
+        variant:
+            name: Tên
+        option:
+            name: Tên

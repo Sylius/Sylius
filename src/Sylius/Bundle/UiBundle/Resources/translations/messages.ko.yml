@@ -12,9 +12,7 @@ sylius:
         confirmation_title: 확인
         current_password: 현재 비밀번호
         new_password: 새로운 비밀번호
-        "no": false
         phone_number: 전화번호
         presentation: 소개
         remember_me: 아이디/암호 저장
         scope: 범위
-        "yes": true

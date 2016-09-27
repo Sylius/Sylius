@@ -285,7 +285,6 @@ sylius:
         new_zone: Nauja zona
         newest_products: Naujausi produktai
         next: Pirmyn
-        "no": false
         no_comment: Nėra komentaro
         no_default_billing_address: Nėra numatytojo atsiskaitymo adreso
         no_default_shipping_address: Nėra numatytojo pristatymo adreso
@@ -457,7 +456,6 @@ sylius:
         volume_based_pricing: Apimtimi pagrįsta kainodara
         warning: Dėmesio
         welcome_to_your_space: Sveiki atvykę į savo erdvę
-        "yes": true
         you_are_customer_since: Jūs esate klientas nuo
         you_have_no_new_orders: Jūs neturite naujų užsakymų
         your_cart_is_empty: Jūsų krepšelis yra tuščias

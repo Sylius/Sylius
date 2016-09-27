@@ -19,3 +19,11 @@ sylius:
         association:
             type: Tipos de asociación
             product: Producto asociado
+        variant:
+            name: Nombre
+        option:
+            name: Nombre
+            values: Valores posibles
+        option_value:
+            add_value: Añadir valor
+            value: Valor

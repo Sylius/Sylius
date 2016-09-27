@@ -15,3 +15,11 @@ sylius:
             available_on: Prieinamas nuo
         association_type:
             name: Pavadinimas
+        variant:
+            name: Pavadinimas
+        option:
+            name: Pavadinimas
+            values: Galimos reikšmės
+        option_value:
+            add_value: Pridėti reikšmę
+            value: Reikšmė

@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Košarica je bila uspešno izpraznjena.
+        cart_save_completed: Košarica je bila uspešno posodobljena.
+        item_add_completed: Izdelek je dodan v košarico.
+        item_add_error: Med dodajanjem izdelka v košarico je prišlo do napake.
+        item_remove_completed: Izdelek je bil odstranjen iz košarice.
+        item_remove_error: Med odstranjevanjem izdelka iz košarice je prišlo do napake.
         restricted_zone_removal: 'Izdelek %product% je bil odstranjen iz košarice, ker ni na voljo v vaši državi.'
     checkout:
         restricted_zone: Ta izdelek ni na voljo v vaši državi.

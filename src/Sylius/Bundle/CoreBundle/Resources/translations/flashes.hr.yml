@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Košarica je uspješno uklonjena.
+        cart_save_completed: Košarica je uspješno ažurirana.
+        item_add_completed: Artikal je uspješno dodan u košaricu.
+        item_add_error: Došlo je do pogreške kod dodavanja artikla u košaricu.
+        item_remove_completed: Artikal je uspješno izbrisan iz košarice.
+        item_remove_error: Došlo je do pogreške prilikom brisanja artikla iz košarice.
         restricted_zone_removal: 'Proizvod %product% je uklonjen iz košarice jer nije dostupan u vašoj državi.'
     checkout:
         restricted_zone: Ovaj proizvod nije dostupan u vašoj državi.

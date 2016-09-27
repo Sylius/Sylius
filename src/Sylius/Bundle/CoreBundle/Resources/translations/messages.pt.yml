@@ -40,6 +40,7 @@ sylius:
             theme: Aparência
             hostname: Nome do servidor
         image:
+            code: Código
             file: Imagem
         locale:
             code: Código
@@ -57,6 +58,7 @@ sylius:
             id: Nº
             title: Título
         product:
+            images: Imagens
             restricted_zone: Zona restrita
             shipping_category: Categoria de transporte
             short_description: Descrição breve
@@ -104,7 +106,6 @@ sylius:
         variant:
             depth: Profundidade
             height: Altura
-            images: Imagens
             on_hand: Disponibilidade
             price: Preço
             original_price: Preço original

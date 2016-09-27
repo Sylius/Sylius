@@ -26,6 +26,7 @@ sylius:
             currency_default: Standardwährung
             tax_zone_default: Standard Steuerzone
         image:
+            code: Code
             file: Bild
         locale:
             code: Code

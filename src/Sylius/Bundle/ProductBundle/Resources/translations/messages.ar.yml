@@ -7,3 +7,9 @@ sylius:
             name: الاسم
         association_type:
             name: الاسم
+        variant:
+            name: الاسم
+        option:
+            name: الاسم
+        option_value:
+            value: القيمة

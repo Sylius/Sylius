@@ -15,3 +15,11 @@ sylius:
             available_on: Mevcut üzerine
         association_type:
             name: Ad
+        variant:
+            name: Ad
+        option:
+            name: Ad
+            values: Olası değerler
+        option_value:
+            add_value: Değer ekle
+            value: Değer

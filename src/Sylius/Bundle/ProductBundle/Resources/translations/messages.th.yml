@@ -19,3 +19,11 @@ sylius:
         association:
             type: ชนิดที่เกี่ยวข้อง
             product: สินค้าที่เกี่ยวข้อง
+        variant:
+            name: ชื่อ
+        option:
+            name: ชื่อ
+            values: ค่าที่เป็นไปได้
+        option_value:
+            add_value: เพิ่มค่า
+            value: ค่า

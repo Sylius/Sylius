@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Der Warenkorb wurde geleert.
+        cart_save_completed: Der Warenkorb wurde erfolgreich aktualisiert.
+        item_add_completed: Das Produkt wurde zum Warenkorb hinzugefügt.
+        item_add_error: Beim hinzufügen des Artikels ist ein Fehler aufgetreten.
+        item_remove_completed: Das Produkt wurde vom Warenkorb entfernt.
+        item_remove_error: Beim entfernen des Artikels ist ein Fehler aufgetreten.
         restricted_zone_removal: 'Das Produkt: %product% wurde aus dem Warenkorb entfernt, da es in Ihrem Land nicht verfügbar ist.'
     checkout:
         restricted_zone: Dieses Produkt ist in Ihrem Land nicht verfügbar.

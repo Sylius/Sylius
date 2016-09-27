@@ -14,3 +14,11 @@ sylius:
             available_on: У наяўнасці з
         association_type:
             name: Імя
+        variant:
+            name: Імя
+        option:
+            name: Імя
+            values: Магчымыя значэнні
+        option_value:
+            add_value: Дадаць значэнне
+            value: Значэнне

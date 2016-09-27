@@ -25,7 +25,6 @@ sylius:
         members: Mitglieder
         message: Nachricht
         name: Name
-        "no": false
         number: Nummer
         payment_state: Zahlungsstatus
         phone_number: Telefonnummber
@@ -44,5 +43,4 @@ sylius:
         unit_price: Stückpreis
         variant: Variante
         variant_selection_method: Varianten
-        "yes": true
         zone: Zone

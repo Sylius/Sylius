@@ -22,6 +22,7 @@ sylius:
             total_to: 合計金額(上限)
             payment_state: 入金状況
         product:
+            images: 画像
             short_description: 商品概要
             variant_selection_method: バリエーション指定方法
         product_filter:
@@ -52,7 +53,6 @@ sylius:
         user_filter:
             query: 検索
         variant:
-            images: 画像
             on_hand: 在庫
             price: 価格
         guest:

@@ -25,6 +25,7 @@ sylius:
             currency_default: Προεπιλεγμένο νόμισμα
             tax_zone_default: Προεπιλεγμένη φορολογική ζώνη
         image:
+            code: Κώδικος
             file: Εικόνα
         locale:
             code: Κώδικος
@@ -38,6 +39,7 @@ sylius:
             id: ID
             title: Τίτλος
         product:
+            images: Εικόνες
             restricted_zone: Απαγορευμένη ζώνη
             shipping_category: Κατηγορία αποστολής
             short_description: Σύντομη περιγραφή
@@ -80,7 +82,6 @@ sylius:
         variant:
             depth: Βάθος
             height: Ύψος
-            images: Εικόνες
             on_hand: Τρέχων απόθεμα
             price: Τιμή
             sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ

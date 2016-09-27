@@ -32,6 +32,7 @@ sylius:
             payment_methods: Способи оплати
             tax_zone_default: Податкова зона за замовчуванням
         image:
+            code: Код
             file: Зображення
         locale:
             code: Код
@@ -48,6 +49,7 @@ sylius:
             id: ID
             title: Назва
         product:
+            images: Зображення
             restricted_zone: Заборонена зона
             shipping_category: Категорія доставки
             short_description: Короткий опис
@@ -91,7 +93,6 @@ sylius:
         variant:
             depth: Глибина
             height: Висота
-            images: Зображення
             on_hand: Кількість на складі
             price: Ціна
             sku: Артикул

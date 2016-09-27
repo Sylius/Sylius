@@ -40,6 +40,7 @@ sylius:
             theme: Template
             hostname: Server-Name
         image:
+            code: Code
             file: Foto
         locale:
             code: Code
@@ -57,6 +58,7 @@ sylius:
             id: ID
             title: Titel
         product:
+            images: Fotos
             restricted_zone: Beschränktes Versandgebiet
             shipping_category: Versandkategorie
             short_description: Kurzbeschreibung
@@ -104,7 +106,6 @@ sylius:
         variant:
             depth: Tiefe
             height: Höhe
-            images: Fotos
             on_hand: Auf Lager
             price: Preis
             original_price: Ursprünglicher Preis

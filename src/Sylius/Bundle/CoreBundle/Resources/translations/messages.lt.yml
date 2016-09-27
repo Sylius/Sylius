@@ -36,6 +36,7 @@ sylius:
             payment_methods: Mokėjimo būdai
             tax_zone_default: Numatyta mokesčių zona
         image:
+            code: Kodas
             file: Paveikslėlis
         locale:
             code: Kodas
@@ -53,6 +54,7 @@ sylius:
             id: ID
             title: Pavadinimas
         product:
+            images: Paveikslėliai
             restricted_zone: Apribota zona
             shipping_category: Pristatymo kategorija
             short_description: Trumpas aprašymas
@@ -99,7 +101,6 @@ sylius:
         variant:
             depth: Gylis
             height: Aukštis
-            images: Paveikslėliai
             on_hand: Dabartinės atsargos
             price: Kaina
             sku: Kodas

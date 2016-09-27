@@ -39,6 +39,7 @@ sylius:
             theme: قالب
             hostname: نام میزبان
         image:
+            code: نام انگلیسی
             file: عکس
         locale:
             code: نام انگلیسی
@@ -56,6 +57,7 @@ sylius:
             id: شناسه
             title: عنوان
         product:
+            images: عکس ها
             restricted_zone: مناطق ممنوع
             shipping_category: نوع ارسال
             short_description: شرح کوتاه
@@ -103,7 +105,6 @@ sylius:
         variant:
             depth: عمق
             height: طول
-            images: عکس ها
             on_hand: موجودی
             price: قیمت
             original_price: قيمت ابتدایی

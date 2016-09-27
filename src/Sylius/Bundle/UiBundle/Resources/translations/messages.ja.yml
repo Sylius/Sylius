@@ -148,7 +148,6 @@ sylius:
         new_zone: ゾーンを登録
         newest_products: 新着商品
         next: 次へ
-        "no": false
         no_default_billing_address: sylius.account.address.default.no_billing
         no_default_shipping_address: sylius.account.address.default.no_shipping
         no_description: 説明未設定
@@ -241,7 +240,6 @@ sylius:
         view_more: 詳細
         warning: 警告
         welcome_to_your_space: お客様専用ページへようこそ
-        "yes": true
         you_are_customer_since: ご登録日時
         you_have_no_new_orders: 新規注文はありません。
         your_cart_is_empty: カートには何もありません。

@@ -10,6 +10,8 @@ sylius:
         option:
             name: Nombre
         notes: Notas adicionales
+        variant:
+            tracked: Con seguimiento
     ui:
         abandoned: Abandonado
         about: Sobre
@@ -90,6 +92,7 @@ sylius:
         category: Categoría
         category_requirements: Requisitos de la categoría
         change_address: Cambiar dirección
+        change_file: Modificar fichero
         change_password: Cambiar contraseña
         change_payment_method: Cambiar modo de pago
         change_shipping_method: Cambiar método de envío
@@ -217,6 +220,7 @@ sylius:
         discount: Descuento
         discounted_unit_price: Precio unitario con descuento
         edit: Editar
+        edit_admin_user: Editar administrador
         edit_association_type: Editar tipo de asociación
         edit_channel: Editar canal
         edit_country: Editar país
@@ -235,6 +239,7 @@ sylius:
         edit_promotion_coupon: Editar el cupón de la promoción
         edit_report: Editar reporte
         edit_route: Editar ruta
+        edit_shipping_address: Editar dirección de envío
         edit_shipping_method: Editar método de envío
         edit_static_content: Editar contenido estático
         edit_tax_category: Editar categoría de impuesto
@@ -458,7 +463,7 @@ sylius:
         new_zone: Nueva zona
         newest_products: Novedades
         next: Siguiente
-        "no": false
+        no_label: 'No'
         no_account: sin cuenta
         no_association_types_to_display: No hay tipos de asociación definidos
         no_comment: No hay comentarios
@@ -484,6 +489,7 @@ sylius:
         not_empty: No está vacío
         not_in: No en
         not_verified: No verificada
+        not_tracked: Sin seguimiento
         notes: Notas
         notify_customer: Notificar al cliente
         number: Número
@@ -562,6 +568,7 @@ sylius:
         promotion_configuration: Configuración de la promoción
         promotion_coupons: sylius.breadcrumb.promotion_coupon.index
         promotion_details: Detalles de la promoción
+        promotion_discount: Descuento promocional
         promotion_information: Información de la promoción
         promotion_total: Total descuentos
         promotions: Promociones
@@ -768,7 +775,7 @@ sylius:
         welcome: Bienvenido/a
         welcome_to_our_store: Bienvenido a nuestra tienda
         welcome_to_your_space: Bienvenido a tu espacio
-        "yes": true
+        yes_label: Sí
         you_are_customer_since: Eres cliente desde
         you_have_no_addresses_defined: No tiene ninguna dirección definida
         you_have_no_new_orders: No tiene pedidos nuevos

@@ -30,6 +30,7 @@ sylius:
             payment_methods: Metode de plată
             tax_zone_default: Zona de taxă implicită
         image:
+            code: Cod
             file: Imagine
         locale:
             code: Cod
@@ -46,6 +47,7 @@ sylius:
             id: Id
             title: Titlu
         product:
+            images: Imagini
             restricted_zone: Zonă cu restricție
             shipping_category: Categoria de livrare
             short_description: Descriere scurtă
@@ -88,7 +90,6 @@ sylius:
         variant:
             depth: Adâncime
             height: Înălţime
-            images: Imagini
             on_hand: Stoc curent
             price: Preț
             sku: SKU

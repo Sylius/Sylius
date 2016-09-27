@@ -6,10 +6,8 @@ sylius:
         city: 城市
         company: 公司
         members: 會員
-        "no": false
         postcode: 郵編
         province: 省
         provinces: 省份
         scope: 範圍
         street: 街道
-        "yes": true

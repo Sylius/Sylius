@@ -19,3 +19,11 @@ sylius:
         association:
             type: Vrsta združenja
             product: Povezani izdelek
+        variant:
+            name: Ime
+        option:
+            name: Ime
+            values: Možne vrednosti
+        option_value:
+            add_value: Dodajte vrednost
+            value: Vrednost

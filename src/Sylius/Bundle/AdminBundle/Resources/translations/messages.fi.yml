@@ -5,5 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                configuration:
+                    admin_users: Ylläpitäjät
+                    countries: Maat
                 content:
                     header: Sisältö

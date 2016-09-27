@@ -34,7 +34,6 @@ sylius:
         menu_nodes: Menu node
         message: Pesan
         name: Nama
-        "no": false
         number: Nomor
         password: Kata sandi
         phone_number: Nomor telepon
@@ -57,5 +56,4 @@ sylius:
         unit_price: Harga Satuan
         variant: Varian
         variant_selection_method: Metode Pilih Varian
-        "yes": true
         zone: Zona

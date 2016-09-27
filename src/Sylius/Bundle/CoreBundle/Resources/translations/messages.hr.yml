@@ -32,6 +32,7 @@ sylius:
             payment_methods: Načini plaćanja
             tax_zone_default: Zadana porezna zona
         image:
+            code: ISO kod
             file: Fotografija
         locale:
             code: ISO kod
@@ -48,6 +49,7 @@ sylius:
             id: ID
             title: Naslov
         product:
+            images: Slike
             restricted_zone: Ograničena zona pristupa
             shipping_category: Kategorija pošiljke
             short_description: Kratak opis
@@ -91,7 +93,6 @@ sylius:
         variant:
             depth: Dubina
             height: Visina
-            images: Slike
             on_hand: Treutno dostupno
             price: Cijena
             sku: KOD (SKU)

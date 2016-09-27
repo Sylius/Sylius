@@ -9,3 +9,7 @@ sylius:
             meta_description: Meta Deskripsi
         association_type:
             name: Nama
+        variant:
+            name: Nama
+        option:
+            name: Nama

@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Keranjang Belanja telah berhasil dihapus.
+        cart_save_completed: Keranjang Belanja telah berhasil diperbarui.
+        item_add_completed: Item telah ditambahkan ke keranjang belanja.
+        item_add_error: Terjadi kesalahan saat menambahkan item ke keranjang.
+        item_remove_completed: Item dihapus dari keranjang belanja.
+        item_remove_error: Terjadi kesalahan saat menghapus item dari keranjang.
         restricted_zone_removal: 'Produk produk % dihapus dari keranjang karena itu tidak tersedia di negara Anda.'
     checkout:
         restricted_zone: Produk ini tidak tersedia di negara Anda.

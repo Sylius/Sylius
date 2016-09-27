@@ -393,7 +393,6 @@ sylius:
         new_zone: Zonë e re
         newest_products: Produktet më të reja
         next: Hapi tjetër
-        "no": false
         no_account: asnje llogari
         no_association_types_to_display: Nuk ka tipologji lidhjesh te percaktuar
         no_comment: Asnjë koment
@@ -657,7 +656,6 @@ sylius:
         welcome: Mirësevini
         welcome_to_our_store: Mirë se erdhët në arkivin tone
         welcome_to_your_space: Mirë se erdhët në hapësirën tuaj
-        "yes": true
         you_are_customer_since: Ti je blerës qysh prej
         you_have_no_addresses_defined: Nuk ke adresë të përcaktuar
         you_have_no_new_orders: Nuk ke porosi të reja

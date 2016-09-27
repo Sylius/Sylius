@@ -36,6 +36,7 @@ sylius:
             payment_methods: Ödeme Yöntemleri
             tax_zone_default: Varsayılan vergi bölgesi
         image:
+            code: Kod
             file: Resim
         locale:
             code: Kod
@@ -53,6 +54,7 @@ sylius:
             id: ID
             title: Başlık
         product:
+            images: Resimleri
             restricted_zone: Kısıtlı bölge
             shipping_category: Teslimat kategorisi
             short_description: Kısa açıklama
@@ -99,7 +101,6 @@ sylius:
         variant:
             depth: Derinliği
             height: Yüksekliği
-            images: Resimleri
             on_hand: Mevcut stok
             price: Fiyatı
             sku: Stok Kodu

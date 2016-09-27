@@ -30,6 +30,7 @@ sylius:
             payment_methods: Betalingsmetoder
             tax_zone_default: Standard moms zone
         image:
+            code: Kode
             file: Billede
         locale:
             code: Kode
@@ -46,6 +47,7 @@ sylius:
             id: ID
             title: Titel
         product:
+            images: Billeder
             restricted_zone: Begrænset zone
             shipping_category: Fragt kategori
             short_description: Kort beskrivelse
@@ -88,7 +90,6 @@ sylius:
         variant:
             depth: Dybde
             height: Højde
-            images: Billeder
             on_hand: Nuværende lager antal
             price: Pris
             sku: SKU

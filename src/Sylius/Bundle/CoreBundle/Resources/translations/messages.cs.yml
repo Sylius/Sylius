@@ -36,6 +36,7 @@ sylius:
             payment_methods: Způsoby platby
             tax_zone_default: Výchozí sazba DPH
         image:
+            code: Kód
             file: Obrázek
         locale:
             code: Kód
@@ -53,6 +54,7 @@ sylius:
             id: ID
             title: Název
         product:
+            images: Obrázky
             restricted_zone: Zóna s omezeným přístupem
             shipping_category: Typ dopravy
             short_description: Stručný popis
@@ -99,7 +101,6 @@ sylius:
         variant:
             depth: Hloubka
             height: Výška
-            images: Obrázky
             on_hand: Aktuálně skladem
             price: Cena
             sku: SKU

@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: "La cistella de la compra s'ha esborrat amb èxit."
+        cart_save_completed: "La cistella de la compra s'ha actualitzat correctament."
+        item_add_completed: "El producte s'ha afegit a la cistella."
+        item_add_error: "S'ha produït un error al afegir el producte a la cistella."
+        item_remove_completed: "El producte s'ha esborrat de la cistella."
+        item_remove_error: "S'ha produït un error en treure el producte de la cistella."
         restricted_zone_removal: 'Hem retirat el producte %product%, ja que no està disponible al seu país.'
     checkout:
         restricted_zone: Aquest producte no està disponible al seu país.

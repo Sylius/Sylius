@@ -140,20 +140,42 @@ sylius:
         create_group: Criar grupo
         create_imagine_block: Criar bloco imagine
         create_locale: Criar a localidade
+        create_menu: Criar menu
+        create_menu_node: Criar menu conteudo
         create_new_coupon: Criar novo cupom
+        create_new_page: Criar nova página
+        create_new_report: Criar novo relatório
+        create_option: Criar opção
         create_order: Criar pedido
         create_payment: Criar pagamento
         create_payment_method: Criar meio de pagamento
         create_product: Criar produto
+        create_product_association: Criar a associação do produto
+        create_product_association_type: Criar o tipo de associação de produto
+        create_product_attribute: Criar atributo de produto
         create_promotion: Criar promoção
+        create_redirect_route: Criar a rota de redirecionamento
+        create_report: Criar relatório
+        create_route: Criar Rota
         create_shipping_category: Criar categoria de envio
         create_shipping_method: Criar método de envio
+        create_simple_block: Criar bloco simples
+        create_slideshow_block: Criar bloco slideshow
+        create_string_block: Criar bloco de sequência de caracteres
         create_tax_category: Criar categoria de imposto
         create_tax_rate: Criar imposto
         create_taxon: Criar táxon
+        create_user: Criar utilizador
         create_variant: Criar variação
         create_zone: Criar zona
         created_at: Data de criação
+        creating_a_new_imagine_block: Criação de um novo bloco de imaginar
+        creating_a_new_simple_block: Criação de um novo bloco simples
+        creating_a_new_slideshow_block: Criação de um novo bloco de apresentação de slides
+        creating_a_new_string_block: Criação de um novo bloco de sequência de caracteres
+        creating_menu: Criar menu
+        creating_menu_node: Criar menu conteudo
+        creating_new_page: Criar nova página
         creation_time: Data de criação
         currencies: Moedas
         current_orders: Encomendas atuais
@@ -163,41 +185,81 @@ sylius:
         customer: Cliente
         customers: Clientes
         dashboard: Painel de Instrumentos
+        data: Dados
         date: Data
+        default_billing_address: Endereço de cobrança padrão
         default_currency: Moeda padrão
         default_locale: Localidade padrão
+        default_shipping_address: Endereço de envio padrão
         delete: Apagar
         delete_image: Deletar imagem
+        deleted: Eliminado
+        delivery_and_shipping: Envio e entrega
         description: Descrição
+        details: Detalhes
+        disable: Desactivar
+        disabled: Inactivo
+        discount: Desconto
+        discounted_unit_price: Preço unitário com desconto
         edit: Editar
         editing_country: Editando país
         editing_coupon: Editando cupom
+        editing_email: Edição de E-mail
+        editing_imagine_block: Edição do bloco imaginar
+        editing_menu: Editar menu
+        editing_menu_node: Editar menu conteudo
+        editing_option: Opção de edição
         editing_order: Editar pedido
+        editing_page: Página de edição
         editing_payment: Editando pagamento
         editing_payment_method: Editando meio de pagamento
+        editing_permission: Editar permissão
         editing_product: Editando produto
         editing_promotion: Editando promoção
+        editing_redirect_route: Edição de rota de redirecionamento
+        editing_review: Editar revisão
+        editing_role: Editar papel
+        editing_route: Edição de rota
+        editing_shipment: Edição da expedição
         editing_shipping_category: Editando categoria de envio
         editing_shipping_method: Editando método de envio
+        editing_simple_block: Editar bloco simples
+        editing_slideshow_block: Edição de bloco slideshow
+        editing_string_block: Bloco de sequência de caracteres de edição
         editing_tax_category: Editando categoria de imposto
         editing_taxon: Editando táxon
+        editing_user: Editar utilizador
         editing_variant: Editando variação
         editing_zone: Editando zona
         email: Endereço de email
+        email_templates: Templates de Email
         emails: Emails
+        empty: Vazio
+        enable: Activado
         enabled: Ativado
+        end_date: Data de fim
         ends_at: Termina em
+        ends_with: Termina com
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Aproveite todos os recursos que estão disponíveis no seu espaço pessoal para visualizar e gerir os seus dados
+        enter_your_code: Digite seu código
+        equal: Igual
         error: Erro
         exchange_rate: Taxa de câmbio
         exclusive: Exclusivo
         existing_customer: Cliente cadastrado
         expiration_and_usage_limits: Limites de uso e validade
         expires_at: Expira em
+        extra_information: Informação extra
         extra_notes: Notas extra
         failed: Falhou
+        faqs: FAQs
+        female: Feminino
         filter: Filtrar
+        filters: Filtros
         first_name: Nome próprio
+        forgot_password: Esqueci a password
+        fulfill: Preencher
+        fulfilled: Cheio
         gateway: Gateway
         general_info: Informações gerais
         general_settings: Configurações gerais
@@ -205,8 +267,13 @@ sylius:
         generate_coupons: Gerar cupons
         generate_variants: Gerar variações
         generating_coupons: Gerando cupons
+        go: Avançar
+        go_to_dashboard: Ir para o painel de controlo
         grand_total: Total
         groups: Grupos
+        guest: Convidado
+        guest_customer: Cliente convidado
+        have_an_account_already: Já tem uma conta
         home: Home
         hostname: Nome do servidor
         id: Nº
@@ -269,7 +336,6 @@ sylius:
         new_taxon: Novo táxon
         new_zone: Nova zona
         newest_products: Novos produtos
-        "no": false
         no_description: Sem descrição
         no_promotion: Sem promoções
         no_shipping_charges: Nenhuma taxa de entrega foi aplicada
@@ -398,7 +464,6 @@ sylius:
         volume_based_pricing: Preço com base no volume
         warning: Aviso
         welcome_to_our_store: Bem-vindo à nossa loja
-        "yes": true
         you_have_no_new_orders: Não tem novas encomendas
         your_cart_is_empty: Seu carrinho está vazio
         your_products: Seus produtos

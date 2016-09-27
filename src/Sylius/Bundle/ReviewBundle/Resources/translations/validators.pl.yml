@@ -7,5 +7,7 @@ sylius:
             not_blank: Tytuł recenzji nie może być pusty.
             min_length: Tytuł recenzji musi mieć co najmniej 2 znaki
             max_length: Tytuł recenzji nie powinien przekraczać 255 znaków
+        rating:
+            not_blank: Nie może brakować oceny recenzji.
         author:
             already_exists: Ten e-mail jest już zarejestrowany, proszę się zalogować lub użyć opcji przypominania hasła.

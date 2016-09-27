@@ -250,7 +250,6 @@ sylius:
         new_password: Nytt lösenord
         new_promotion_coupon: Ny kampanjkupong
         new_tax_category: Ny skattekategori
-        "no": false
         no_account: inget konto
         no_promotion: Ingen kampanj applicerad
         no_requirement: Inget krav
@@ -380,7 +379,6 @@ sylius:
         view_and_edit_cart: Visa och redigera varukorg
         void: Tom
         welcome_to_our_store: Välkommen till vår butik
-        "yes": true
         you_may_also_like: Du kanske även gillar
         your_cart_is_empty: Din varukorg är tom
         your_profile: Din profil

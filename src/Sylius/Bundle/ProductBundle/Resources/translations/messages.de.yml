@@ -19,3 +19,11 @@ sylius:
         association:
             type: Verbindungs-Typ
             product: Zugehöriges Produkt
+        variant:
+            name: Name
+        option:
+            name: Name
+            values: Mögliche Werte
+        option_value:
+            add_value: Wert hinzufügen
+            value: Wert

@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: O carrinho foi limpo com sucesso.
+        cart_save_completed: O carrinho foi atualizado com sucesso.
+        item_add_completed: O produto foi adicionado ao carrinho.
+        item_add_error: Ocorreu um erro ao adicionar o produto ao carrinho.
+        item_remove_completed: O produto foi removido do carrinho.
+        item_remove_error: Ocorreu um erro ao remover o produto ao carrinho.
         restricted_zone_removal: 'Produto %product% removido do carrinho dado que não está disponível no seu país.'
     checkout:
         restricted_zone: Este produto não está disponível no seu país.

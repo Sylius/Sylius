@@ -14,17 +14,24 @@ sylius:
             street: Katuosoite
             province: Lääni
         country:
+            add_province: Lisää maakunta
             name: Nimi
+            provinces: Maakunnat
             select: Valitse
+            enabled: Aktiivinen
         province:
             name: Nimi
+            abbreviation: Lyhenne
             select: Valitse
         zone:
+            add_member: Lisää jäsen
             members: Jäsenet
             name: Nimi
             type: Tyyppi
             types:
+                country: Maa
                 province: Lääni
+                zone: Alue
             select: Valitse
         zone_member:
             select: Valitse

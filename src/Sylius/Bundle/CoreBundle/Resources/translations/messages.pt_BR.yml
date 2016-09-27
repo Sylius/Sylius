@@ -40,6 +40,7 @@ sylius:
             theme:  Tema
             hostname: Nome do host
         image:
+            code: Código
             file: Imagem
         locale:
             code: Código
@@ -57,6 +58,7 @@ sylius:
             id: ID
             title: Título
         product:
+            images: Imagens
             restricted_zone: Zona restrita
             shipping_category: Categoria de expedição
             short_description: Breve descrição
@@ -104,7 +106,6 @@ sylius:
         variant:
             depth: Profundidade
             height: Altura
-            images: Imagens
             on_hand: Estoque atual
             price: Preço
             original_price: Preço original
@@ -134,6 +135,7 @@ sylius:
     email:
         order_confirmation:
             name: Confirmação de compra
+            content: 'Seu pedido no. %number% foi recebido com sucesso.<br/><br/>Obrigado por comprar em nossa loja!'
         order_comment:
             name: Comentários do pedido
         shipment_confirmation:

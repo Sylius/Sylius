@@ -15,3 +15,11 @@ sylius:
             available_on: Dostupný od
         association_type:
             name: Jméno
+        variant:
+            name: Jméno
+        option:
+            name: Jméno
+            values: Možné hodnoty
+        option_value:
+            add_value: Přidání hodnoty
+            value: Hodnota

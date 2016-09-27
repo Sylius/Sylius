@@ -203,7 +203,6 @@ sylius:
         new_zone: Zonă nouă
         newest_products: Produse noi
         next: Pasul următor
-        "no": false
         no_default_billing_address: Nu există adresă de facturare implicită
         no_default_shipping_address: Nu există adresă de livrare implicită
         no_description: Fără descriere
@@ -337,7 +336,6 @@ sylius:
         void: Nulă
         warning: Atenție
         welcome_to_your_space: Bine ați venit
-        "yes": true
         you_are_customer_since: Sunt client din
         you_have_no_new_orders: Nu aveți nici o comandă nouă
         your_cart_is_empty: Coșul este gol

@@ -213,7 +213,6 @@ sylius:
         new_zone: Нова зона
         newest_products: Найновіші продукти
         next: Наступний
-        "no": false
         no_default_billing_address: Немає платіжної адреси за замовчуванням
         no_default_shipping_address: Немає адреси доставки за замовчуванням
         no_description: Немає опису
@@ -354,7 +353,6 @@ sylius:
         void: Порожнє
         warning: Попередження
         welcome_to_your_space: Ласкаво просимо до вашого простору
-        "yes": true
         you_are_customer_since: Ви є клієнтом з
         you_have_no_new_orders: У вас немає нових замовлень
         your_cart_is_empty: Ваш кошик пустий

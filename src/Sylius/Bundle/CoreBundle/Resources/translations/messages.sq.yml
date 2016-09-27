@@ -39,6 +39,7 @@ sylius:
             theme: Tema
             hostname: Emri i hostit
         image:
+            code: Kodi
             file: Imazhi
         locale:
             code: Kodi
@@ -56,6 +57,7 @@ sylius:
             id: ID
             title: Titulli
         product:
+            images: Imazhet
             restricted_zone: Zonë e kufizuar
             shipping_category: Kategoria e dërgesës
             short_description: Përshkrim i shkurtër
@@ -103,7 +105,6 @@ sylius:
         variant:
             depth: Thellësia
             height: Lartësia
-            images: Imazhet
             on_hand: Fondi aktual
             price: Çmimi
             original_price: Çmimi fillestar
