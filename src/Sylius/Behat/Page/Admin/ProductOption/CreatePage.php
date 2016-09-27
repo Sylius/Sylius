@@ -15,6 +15,7 @@ use Behat\Mink\Element\Element;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -79,6 +80,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $optionValues = $this->getElement('values');
         $items = $optionValues->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::notEmpty($items);
 
         return end($items);
     }

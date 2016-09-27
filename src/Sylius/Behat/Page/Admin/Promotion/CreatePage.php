@@ -15,6 +15,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -145,6 +146,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     private function getLastAddedCollectionItem($collection)
     {
         $rules = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::notEmpty($rules);
 
         return end($rules);
     }

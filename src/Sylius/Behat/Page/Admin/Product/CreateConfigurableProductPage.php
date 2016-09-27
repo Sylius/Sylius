@@ -14,6 +14,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -87,6 +88,8 @@ class CreateConfigurableProductPage extends BaseCreatePage implements CreateConf
     {
         $images = $this->getElement('images');
         $items = $images->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::notEmpty($items);
 
         return end($items);
     }
