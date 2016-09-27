@@ -20,7 +20,6 @@ use Prophecy\Argument;
  */
 final class UnresolvedDefaultPaymentMethodExceptionSpec extends ObjectBehavior
 {
-    
     function it_is_initializable()
     {
         $this->shouldHaveType(UnresolvedDefaultPaymentMethodException::class);

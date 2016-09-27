@@ -1223,7 +1223,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I do not select any payment method
+     * @When I do not select any payment method
      */
     public function iDoNotSelectAnyPaymentMethod()
     {
@@ -1236,8 +1236,8 @@ final class CheckoutContext implements Context
     public function iShouldNotBeAbleToCompleteThePaymentStep()
     {
         Assert::true(
-            $this->selectPaymentPage->hasNoAvailableNextStepButton(),
-           'The "next step" button should be disabled, but it does not.'
+            $this->selectPaymentPage->isNextStepButtonUnavailable(),
+           'The "next step" button should be disabled.'
         );
     }
 

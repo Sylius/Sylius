@@ -54,7 +54,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
         $this->addressOrder($orderId);
 
         $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PATCH', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/payment_invalid_order_state', Response::HTTP_INTERNAL_SERVER_ERROR);

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Payment\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -52,7 +51,7 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         $this->getDefaultPaymentMethod($payment)->shouldReturn($firstPaymentMethod);
     }
 
-    function it_throws_exception_if_there_is_no_enabled_payment_methods(
+    function it_throws_exception_if_there_are_no_enabled_payment_methods(
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentInterface $payment
     ) {

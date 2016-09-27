@@ -100,7 +100,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
-     public function hasNoAvailableNextStepButton()
+     public function isNextStepButtonUnavailable()
      {
          return $this->getElement('next_step')->hasClass('disabled');
      }

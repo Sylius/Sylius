@@ -16,19 +16,19 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as CorePaymentInterface;
+use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Core\Resolver\DefaultPaymentMethodResolver;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $paymentMethodRepository)
+    function let(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
         $this->beConstructedWith($paymentMethodRepository);
     }
@@ -50,46 +50,29 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
 
     function it_throws_unresolved_default_payment_method_exception_if_there_is_no_enabled_payment_methods_in_database(
         CorePaymentInterface $payment,
-        RepositoryInterface $paymentMethodRepository
-    ) {
-        $paymentMethodRepository->findBy(['enabled' => true])->willReturn([]);
-
-        $this->shouldThrow(UnresolvedDefaultPaymentMethodException::class)->during('getDefaultPaymentMethod', [$payment]);
-    }
-
-    function it_throws_unresolved_default_payment_method_exception_if_channel_has_not_any_payment_method_from_enabled(
-        CorePaymentInterface $payment,
-        RepositoryInterface $paymentMethodRepository,
-        PaymentMethodInterface $firstPaymentMethod,
-        PaymentMethodInterface $secondPaymentMethod,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
         ChannelInterface $channel,
         OrderInterface $order
     ) {
-        $paymentMethodRepository->findBy(['enabled' => true])->willReturn([$firstPaymentMethod, $secondPaymentMethod]);
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
-
-        $channel->hasPaymentMethod($firstPaymentMethod)->willReturn(false);
-        $channel->hasPaymentMethod($secondPaymentMethod)->willReturn(false);
+        $paymentMethodRepository->findEnabledForChannel($channel)->willReturn([]);
 
         $this->shouldThrow(UnresolvedDefaultPaymentMethodException::class)->during('getDefaultPaymentMethod', [$payment]);
     }
 
     function it_returns_first_payment_method_from_availables_which_is_enclosed_in_channel(
         CorePaymentInterface $payment,
-        RepositoryInterface $paymentMethodRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
         PaymentMethodInterface $firstPaymentMethod,
         PaymentMethodInterface $secondPaymentMethod,
         ChannelInterface $channel,
         OrderInterface $order
     ) {
-        $paymentMethodRepository->findBy(['enabled' => true])->willReturn([$firstPaymentMethod, $secondPaymentMethod]);
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
+        $paymentMethodRepository->findEnabledForChannel($channel)->willReturn([$firstPaymentMethod, $secondPaymentMethod]);
 
-        $channel->hasPaymentMethod($firstPaymentMethod)->willReturn(false);
-        $channel->hasPaymentMethod($secondPaymentMethod)->willReturn(true);
-
-        $this->getDefaultPaymentMethod($payment)->shouldReturn($secondPaymentMethod);
+        $this->getDefaultPaymentMethod($payment)->shouldReturn($firstPaymentMethod);
     }
 }

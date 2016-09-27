@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PaymentInterface as CorePaymentInterface;
+use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
@@ -25,14 +26,14 @@ use Webmozart\Assert\Assert;
 class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
 {
     /**
-     * @var RepositoryInterface
+     * @var PaymentMethodRepositoryInterface
      */
     protected $paymentMethodRepository;
 
     /**
-     * @param RepositoryInterface $paymentMethodRepository
+     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
      */
-    public function __construct(RepositoryInterface $paymentMethodRepository)
+    public function __construct(PaymentMethodRepositoryInterface $paymentMethodRepository)
     {
         $this->paymentMethodRepository = $paymentMethodRepository;
     }
@@ -45,20 +46,14 @@ class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterf
         /** @var CorePaymentInterface $subject */
         Assert::isInstanceOf($subject, CorePaymentInterface::class);
 
-        $paymentMethods = $this->paymentMethodRepository->findBy(['enabled' => true]);
+        /** @var ChannelInterface $channel */
+        $channel = $subject->getOrder()->getChannel();
+        
+        $paymentMethods = $this->paymentMethodRepository->findEnabledForChannel($channel);
         if (empty($paymentMethods)) {
             throw new UnresolvedDefaultPaymentMethodException();
         }
-
-        /** @var ChannelInterface $channel */
-        $channel = $subject->getOrder()->getChannel();
-
-        foreach ($paymentMethods as $paymentMethod) {
-            if ($channel->hasPaymentMethod($paymentMethod)) {
-                return $paymentMethod;
-            }
-        }
-
-        throw new UnresolvedDefaultPaymentMethodException();
+        
+        return $paymentMethods[0];
     }
 }

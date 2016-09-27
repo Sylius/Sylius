@@ -1,8 +1,8 @@
 @checkout
 Feature: Preventing payment step completion without a selected method
-    In order to be prevent from finish payment step without selected method
+    In order to be prevented from finishing payment step without selecting a method
     As a Customer
-    I want to be prevent from finish payment step without selected method
+    I want to be prevented from finishing the payment step with no method selected
 
     Background:
         Given the store operates on a single channel in "United States"
