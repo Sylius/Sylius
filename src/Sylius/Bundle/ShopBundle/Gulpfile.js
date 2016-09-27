@@ -37,7 +37,7 @@ var paths = {
 gulp.task('shop-js', function () {
     return gulp.src(paths.shop.js)
         .pipe(concat('app.js'))
-        .pipe(gulpif(env === 'prod', uglify))
+        .pipe(gulpif(env === 'prod', uglify()))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(shopRootPath + 'js/'))
     ;
@@ -58,7 +58,7 @@ gulp.task('shop-css', function() {
     return merge(cssStream, sassStream)
         .pipe(order(['css-files.css', 'sass-files.scss']))
         .pipe(concat('style.css'))
-        .pipe(gulpif(env === 'prod', uglifycss))
+        .pipe(gulpif(env === 'prod', uglifycss()))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(shopRootPath + 'css/'))
         .pipe(livereload())
