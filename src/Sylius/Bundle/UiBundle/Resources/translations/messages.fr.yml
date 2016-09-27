@@ -239,6 +239,7 @@ sylius:
         edit_promotion_coupon: Modifier le coupon de promotion
         edit_report: Modifier le rapport
         edit_route: Éditer la route
+        edit_shipping_address: "Modifier l'adresse de livraison"
         edit_shipping_method: Mettre à jour la méthode de livraison
         edit_static_content: Éditer le contenu statique
         edit_tax_category: Éditer la catégorie de taxe
@@ -308,6 +309,7 @@ sylius:
         first_name: Prénom
         forgot_password: Mot de passe oublié
         fulfill: Remplir
+        fulfilled: Complétée
         gateway: Passerelle
         general_info: Informations générales
         general_settings: Paramètres généraux
@@ -461,7 +463,7 @@ sylius:
         new_zone: Nouvelle zone
         newest_products: Nouveautés
         next: Suivant
-        "no": false
+        no_label: Non
         no_account: Aucun compte
         no_association_types_to_display: "Il n'y a aucun association de défini"
         no_comment: Aucun commentaire
@@ -487,6 +489,7 @@ sylius:
         not_empty: Non vide
         not_in: Pas dans
         not_verified: Non vérifié
+        not_tracked: Pas de suivi des stocks
         notes: Notes
         notify_customer: Informer le client
         number: Numéro
@@ -752,7 +755,7 @@ sylius:
         usage: Utilisation
         usage_limit: "Limite d'utilisation"
         used: Utilisé
-        user_confirmation_name: "Confirmation d'utilisateur"
+        user_confirmation_name: "Confirmation de l'utilisateur"
         user_details: "Détails d'un utilisateur"
         username: Identifiant
         users_list_of_all_users_registered_in_store: Utilisateurs
@@ -772,7 +775,7 @@ sylius:
         welcome: Bienvenue
         welcome_to_our_store: Bienvenue dans notre boutique
         welcome_to_your_space: Bienvenue dans votre espace
-        "yes": true
+        yes_label: Oui
         you_are_customer_since: Vous êtes client depuis
         you_have_no_addresses_defined: "Vous n'avez défini aucune adresse"
         you_have_no_new_orders: "Vous n'avez aucune nouvelle commande"

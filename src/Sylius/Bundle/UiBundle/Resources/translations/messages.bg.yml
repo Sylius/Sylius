@@ -166,7 +166,6 @@ sylius:
         new_zone: Нова зона
         newest_products: Най-новите продукти
         next: Нататък
-        "no": false
         no_default_billing_address: Адрес за фактуриране НЕ по подразбиране
         no_default_shipping_address: Адрес за доставка НЕ по подразбиране
         no_description: Няма описание
@@ -272,7 +271,6 @@ sylius:
         view_more: Виж повече
         warning: Внимание
         welcome_to_your_space: Добре дошли във вашето лично пространство
-        "yes": true
         you_are_customer_since: Вие сте клиент от
         you_have_no_new_orders: Няма нови поръчки
         your_cart_is_empty: Вашата кошница е празна

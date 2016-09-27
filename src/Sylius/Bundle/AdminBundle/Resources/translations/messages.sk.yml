@@ -12,6 +12,7 @@ sylius:
                     products: Produkty
                     taxons: Kategórie
                 configuration:
+                    admin_users: Administrátor
                     channels: Kanály
                     countries: Krajiny
                     currencies: Meny

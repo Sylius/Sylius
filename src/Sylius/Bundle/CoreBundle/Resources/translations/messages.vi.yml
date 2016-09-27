@@ -17,6 +17,7 @@ sylius:
             locales: Miền địa phương
             payment_methods: Phương thức thanh toán
         image:
+            code: Mã
             file: Hình ảnh
         locale:
             code: Mã
@@ -24,6 +25,7 @@ sylius:
             id: ID
             title: Tiêu đề
         product:
+            images: Hình ảnh
             channels: Kênh
         product_filter:
             name: Tên
@@ -42,7 +44,6 @@ sylius:
             query: Tìm kiếm
         variant:
             height: Chiều cao
-            images: Hình ảnh
             price: Giá
             sku: MÃ SẢN PHẨM
             width: Chiều rộng

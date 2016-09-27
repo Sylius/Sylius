@@ -26,6 +26,7 @@ sylius:
             currency_default: Mata uang default
             tax_zone_default: Standar Zona Pajak
         image:
+            code: Kode
             file: Gambar
         locale:
             code: Kode
@@ -39,6 +40,7 @@ sylius:
             id: ID
             title: Judul
         product:
+            images: Gambar
             restricted_zone: Zona Terbatas
             shipping_category: Kategori Pengiriman
             short_description: Deskripsi singkat
@@ -81,7 +83,6 @@ sylius:
         variant:
             depth: Tebal
             height: Tinggi
-            images: Gambar
             on_hand: Stok
             price: Harga
             sku: SKU

@@ -52,7 +52,6 @@ sylius:
         name: Nom
         new: Nou
         next: Següent
-        "no": false
         no_default_billing_address: Cap adreça de facturació per defecte
         no_default_shipping_address: "Cap adreça d'enviament per defecte"
         number: Nombre
@@ -92,6 +91,5 @@ sylius:
         void: Buit
         warning: Avís
         welcome_to_your_space: Benvingut al teu espai
-        "yes": true
         you_are_customer_since: Ets client des de
         zone: Zona

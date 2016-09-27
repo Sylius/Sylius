@@ -290,7 +290,6 @@ sylius:
         new_zone: Nová zóna
         newest_products: Nejnovější produkty
         next: Další
-        "no": false
         no_comment: Žádné komentáře
         no_default_billing_address: Žádná výchozí fakturační adresa
         no_default_shipping_address: Žádná výchozí dodací adresu
@@ -461,7 +460,6 @@ sylius:
         volume_based_pricing: Cena na základě objemu
         warning: Varování
         welcome_to_your_space: Vítejte ve Vašem prostoru
-        "yes": true
         you_are_customer_since: Zákazníkem jste od
         you_have_no_new_orders: Nemáte žádné nové objednávky
         your_cart_is_empty: Váš košík je prázdný

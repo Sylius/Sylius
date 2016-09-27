@@ -19,3 +19,11 @@ sylius:
         association:
             type: Kapcsolódó típus
             product: Kapcsolódó termék
+        variant:
+            name: Név
+        option:
+            name: Név
+            values: Lehetséges értékek
+        option_value:
+            add_value: Adja hozzá az értéket
+            value: Érték

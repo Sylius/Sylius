@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Indkøbskurven er blevet tømt.
+        cart_save_completed: Indkøbskurven er blevet opdateret.
+        item_add_completed: Varen er blevet tilføjet til indkøbskurven.
+        item_add_error: Der opstod en fejl under tilføjelse af varen til indkøbskurven.
+        item_remove_completed: Varen er blevet fjernet fra indkøbskurven.
+        item_remove_error: Der opstod en fejl i forsøget på at fjerne en vare fra indkøbskurven.
         restricted_zone_removal: 'Produktet %product% er fjernet fra indkøbskurven, da det ikke er tilgængeligt i dit land.'
     checkout:
         restricted_zone: Dette produkt er ikke tilgængelig i dit land.

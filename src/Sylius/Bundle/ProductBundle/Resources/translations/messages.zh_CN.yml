@@ -19,3 +19,11 @@ sylius:
         association:
             type: 关联类型
             product: 相关的产品
+        variant:
+            name: 名称
+        option:
+            name: 名称
+            values: 可能的值
+        option_value:
+            add_value: 添加值
+            value: 值

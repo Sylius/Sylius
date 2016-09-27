@@ -220,6 +220,7 @@ sylius:
         discount: Desconto
         discounted_unit_price: Preço unitário com desconto
         edit: Editar
+        edit_admin_user: Editar administrador
         edit_association_type: Editar um tipo de associação
         edit_channel: Editar canal
         edit_country: Editar o país
@@ -238,6 +239,7 @@ sylius:
         edit_promotion_coupon: Editar o cupom de promoção
         edit_report: Editar relatório
         edit_route: Editar a rota
+        edit_shipping_address: Editar endereço de entrega
         edit_shipping_method: Editar método de envio
         edit_static_content: Editar conteúdo estático
         edit_tax_category: Editar categoria de imposto
@@ -461,7 +463,7 @@ sylius:
         new_zone: Nova zona
         newest_products: Novos produtos
         next: Próxima
-        "no": false
+        no_label: Não
         no_account: Nenhuma conta
         no_association_types_to_display: Não há nenhum tipo de associação definido
         no_comment: Nenhum comentário
@@ -773,7 +775,7 @@ sylius:
         welcome: Bem-Vindo
         welcome_to_our_store: Bem-vindo à nossa loja
         welcome_to_your_space: Bem-vindo ao seu espaço
-        "yes": true
+        yes_label: Sim
         you_are_customer_since: Você é cliente desde
         you_have_no_addresses_defined: Você não tem nenhum endereço definido
         you_have_no_new_orders: Você não possui pedidos

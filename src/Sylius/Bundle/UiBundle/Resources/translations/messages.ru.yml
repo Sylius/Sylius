@@ -270,7 +270,6 @@ sylius:
         new_zone: Новая зона
         newest_products: Новейшие продукты
         next: Следующее
-        "no": false
         no_default_billing_address: sylius.account.address.default.no_billing
         no_default_shipping_address: sylius.account.address.default.no_shipping
         no_description: Нет описания
@@ -442,7 +441,6 @@ sylius:
         warning: Предупреждение
         welcome_to_our_store: Добро пожаловать в наш магазин
         welcome_to_your_space: Добро пожаловать в ваш кабинет
-        "yes": true
         you_are_customer_since: Вы являетесь клиентом с
         you_have_no_addresses_defined: Вы не указали ни одного адреса
         you_have_no_new_orders: У вас нет новых заказов

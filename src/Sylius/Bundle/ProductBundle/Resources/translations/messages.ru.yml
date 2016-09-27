@@ -19,3 +19,11 @@ sylius:
         association:
             type: Тип взаимосвязи
             product: Связанные продукты
+        variant:
+            name: Название
+        option:
+            name: Название
+            values: Возможные значения
+        option_value:
+            add_value: Добавить значение
+            value: Значение

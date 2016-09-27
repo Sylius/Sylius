@@ -84,7 +84,6 @@ sylius:
         new_zone: Νεα ζώνη
         newest_products: Νεότερα προϊόντα
         next: Επόμενο
-        "no": false
         no_promotion: Δεν έχει εφαρμοστεί προώθηση
         no_shipping_charges: Δεν έχουν εφαρμοστεί έξοδα αποστολής
         no_taxes: Δεν έχουν εφαρμοστεί φόροι
@@ -148,7 +147,6 @@ sylius:
         variant: Παραλλαγή
         variant_selection_method: Μέθοδος επιλογής παραλλαγής
         warning: Προειδοποίηση
-        "yes": true
         your_cart_is_empty: Το καλάθι είναι άδειο
         zone: Ζώνη
         zone_details: Λεπτομέρειες ζώνης

@@ -131,7 +131,6 @@ sylius:
         new_zone: Нова зона
         newest_products: Најновији производи
         next: Следећа
-        "no": false
         no_default_billing_address: Нема подразумеване адреса за плаћање
         no_default_shipping_address: Нема подразумеване адреса за слање
         no_description: Нема описа
@@ -219,7 +218,6 @@ sylius:
         view_more: Више
         warning: Упозпрење
         welcome_to_your_space: Добро дошли на Вашу страницу
-        "yes": true
         you_are_customer_since: Ви сте купац још од
         you_have_no_new_orders: Нема нових наруџбина
         your_cart_is_empty: Ваша корпа је празна

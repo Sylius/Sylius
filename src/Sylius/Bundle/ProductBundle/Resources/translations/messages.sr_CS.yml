@@ -9,3 +9,7 @@ sylius:
             available_on: Dostupno
         association_type:
             name: Ime
+        variant:
+            name: Ime
+        option:
+            name: Ime

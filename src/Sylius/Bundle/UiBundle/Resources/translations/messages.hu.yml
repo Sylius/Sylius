@@ -453,7 +453,6 @@ sylius:
         new_zone: Új zóna
         newest_products: Legújabb termékek
         next: Következő
-        "no": false
         no_account: nincs fiók
         no_association_types_to_display: Nincsenek kapcsolat típusok meghatározva
         no_comment: Nincs megjegyzés
@@ -758,7 +757,6 @@ sylius:
         welcome: Üdözlünk
         welcome_to_our_store: Üdvözöljük áruházunkban
         welcome_to_your_space: Üdvözöljük az Ön tárhelyén
-        "yes": true
         you_are_customer_since: Ön ügyfél
         you_have_no_addresses_defined: Nincs címed meghatározva
         you_have_no_new_orders: Nincsenek új megrendelések

@@ -39,6 +39,7 @@ sylius:
             theme: Тема оформления
             hostname: Хост
         image:
+            code: Код
             file: Изображение
         locale:
             code: Код
@@ -56,6 +57,7 @@ sylius:
             id: ID
             title: Название
         product:
+            images: Изображения
             restricted_zone: Зона ограничений
             shipping_category: Категория доставки
             short_description: Короткое описание
@@ -103,7 +105,6 @@ sylius:
         variant:
             depth: Глубина
             height: Высота
-            images: Изображения
             on_hand: Количество на складе
             price: Цена
             original_price: Исходная цена

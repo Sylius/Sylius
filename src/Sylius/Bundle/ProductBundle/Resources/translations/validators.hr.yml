@@ -14,3 +14,20 @@ sylius:
         sku:
             not_blank: Unesite alternativni kod proizvoda.
             unique: Alternativni kod proizvoda mora biti jedinstven.
+        combination: Verzija sa ovim opcijama već postoji.
+    option:
+        code:
+            not_blank: Unesite kod opcije.
+            unique: Opcija s unesenim kodom već postoji.
+        name:
+            not_blank: Unesite naziv svojstva.
+            min_length: 'Naziv svojstva mora imati najmanje jedan znak.|Naziv svojstva proizvoda mora imati najmanje {{ limit }} znakova.'
+            max_length: 'Naziv svojstva ne smije biti duži od jednog znaka.|Naziv svojstva ne smije biti duži od {{ limit }} znakova.'
+        values:
+            min_count: 'Unesite barem {{ limit }} opciju artikla.|nesite barem {{ limit }} opciju artikla.'
+    option_value:
+        code:
+            not_blank: Unesite vrijednost opcije koda.
+            unique: Vrijednost opcije unesenog koda već postoji.
+        value:
+            not_blank: Unesite vrijednost svojstva.

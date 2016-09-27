@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: Košík byl úspěšně vyprázdněn.
+        cart_save_completed: Košík byl úspěšně aktualizován.
+        item_add_completed: Položka byla přidána do košíku.
+        item_add_error: Nastala chyba při přidávání položky do košíku.
+        item_remove_completed: Položka byla odebrána z košíku.
+        item_remove_error: Nastala chyba při odebírání položky z košíku.
         restricted_zone_removal: 'Produkt %product% byl odebrán z košíku z důvodu nedostupnosti ve Vaší zemi.'
     checkout:
         restricted_zone: Tento produkt není ve Vaší zemi dostupný.

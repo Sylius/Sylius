@@ -199,7 +199,6 @@ sylius:
         new_zone: Новая зона
         newest_products: Навінкі
         next: Далей
-        "no": false
         no_default_billing_address: Няма галоўнага адраса для аплаты
         no_default_shipping_address: Галоўны адрас для дастаўкі адсутнічае
         no_description: Няма апісання
@@ -332,7 +331,6 @@ sylius:
         void: Пусты
         warning: Папярэджанне
         welcome_to_your_space: Вітаем у вашай прасторы
-        "yes": true
         you_are_customer_since: "Вы з'яўляецеся пакупніком з"
         you_have_no_new_orders: У вас няма новых замоваў
         your_cart_is_empty: Ваш кошык пусты

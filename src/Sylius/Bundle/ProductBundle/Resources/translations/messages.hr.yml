@@ -14,3 +14,11 @@ sylius:
             available_on: Dostupno
         association_type:
             name: Naziv grupe
+        variant:
+            name: Naziv grupe
+        option:
+            name: Naziv grupe
+            values: Moguće vrijednosti
+        option_value:
+            add_value: Dodaj vrijednost
+            value: Vrijednost

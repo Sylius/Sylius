@@ -131,7 +131,6 @@ sylius:
         new_zone: Nova zona
         newest_products: Najnoviji proizvodi
         next: Sledeća
-        "no": false
         no_default_billing_address: Nema podrazumevane adrese plaćanja
         no_default_shipping_address: Nema podrazumevane adrese isporuke
         no_description: Nema opisa
@@ -208,7 +207,6 @@ sylius:
         users_list_of_all_users_registered_in_store: 'Korisnici <small>Lista svih registrovanih korisnika</small>'
         view_more: Više
         warning: Upozorenje
-        "yes": true
         you_have_no_new_orders: Nema novih narudžbina
         your_cart_is_empty: Korpa je prazna
         zone_details: Detalji zone

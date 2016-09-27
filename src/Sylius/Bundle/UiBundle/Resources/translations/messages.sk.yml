@@ -9,8 +9,12 @@ sylius:
             remember_me: Zapamätať si ma
         option:
             name: Názov
+        notes: Ďalšie poznámky
+        variant:
+            tracked: Sledované
     ui:
         abandoned: Opustený
+        about: O nás
         access_token: Prístupový token
         account_credentials: Prihlasovacie údaje
         account_panel_outline: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore
@@ -261,6 +265,7 @@ sylius:
         existing_customer: Existujúci zákazník
         expires_at: Platnosť do
         extra_information: Ďalšie informácie
+        extra_notes: Ďalšie poznámky
         failed: Neúspešná
         filter: Filter
         first_name: Meno
@@ -401,7 +406,6 @@ sylius:
         new_zone: Nová zóna
         newest_products: Najnovšie produkty
         next: Ďalej
-        "no": false
         no_account: Žiadny účet
         no_association_types_to_display: Neexistujú žiadne typy priradení
         no_comment: Žiadne komentáre
@@ -672,7 +676,6 @@ sylius:
         welcome: Vitajte
         welcome_to_our_store: Vitajte v našom obchode
         welcome_to_your_space: Vitajte vo vašom priestore
-        "yes": true
         you_are_customer_since: Ste zákazníkom od
         you_have_no_addresses_defined: Nemáte uložené žiadne adresy
         you_have_no_new_orders: Nemáte žiadne nové objednávky

@@ -40,6 +40,7 @@ sylius:
             theme: ธีม
             hostname: Hostname
         image:
+            code: รหัส
             file: รูปภาพ
         locale:
             code: รหัส
@@ -57,6 +58,7 @@ sylius:
             id: ID
             title: หัวข้อ
         product:
+            images: ภาพ
             restricted_zone: จำกัดโซน
             shipping_category: ประเภทการจัดส่ง
             short_description: คำอธิบายโดยย่อ
@@ -104,7 +106,6 @@ sylius:
         variant:
             depth: ความลึก
             height: ความสูง
-            images: ภาพ
             on_hand: จำนวนสินค้าปัจจุบัน
             price: ราคา
             original_price: ราคาทุน

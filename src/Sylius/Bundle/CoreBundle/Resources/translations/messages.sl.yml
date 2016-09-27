@@ -39,6 +39,7 @@ sylius:
             theme: Tema
             hostname: Ime gostitelja
         image:
+            code: Koda
             file: Slika
         locale:
             code: Koda
@@ -56,6 +57,7 @@ sylius:
             id: ID
             title: Naslov
         product:
+            images: Slike
             restricted_zone: Območje z omejitvami
             shipping_category: Kategorija dostave
             short_description: Kratek opis
@@ -94,7 +96,6 @@ sylius:
         variant:
             depth: Globina
             height: Višina
-            images: Slike
             on_hand: Trenutna zaloga
             price: Cena
             original_price: Prvotna cena

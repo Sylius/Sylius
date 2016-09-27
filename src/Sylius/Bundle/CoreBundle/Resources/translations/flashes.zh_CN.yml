@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: 购物车已清空。
+        cart_save_completed: 已成功更新购物车。
+        item_add_completed: 商品已添加到购物车。
+        item_add_error: 商品添加到购物车时发生错误 。
+        item_remove_completed: 已从购物车中移除该商品。
+        item_remove_error: 从购物车中删除商品时出错。
         restricted_zone_removal: '产品%product%从购物车中删除，因为它不在有效的国家范围。'
     checkout:
         restricted_zone: 这种产品在您的国家无效。

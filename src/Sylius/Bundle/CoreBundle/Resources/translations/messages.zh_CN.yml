@@ -39,6 +39,7 @@ sylius:
             theme: 主题
             hostname: 主机名
         image:
+            code: 代码
             file: 图像
         locale:
             code: 代码
@@ -56,6 +57,7 @@ sylius:
             id: ID
             title: 标题
         product:
+            images: 图像
             restricted_zone: 限制的区
             shipping_category: 送货类别
             short_description: 简短说明：
@@ -103,7 +105,6 @@ sylius:
         variant:
             depth: 深度
             height: 高度
-            images: 图像
             on_hand: 当前货架
             price: 价格
             original_price: 原价

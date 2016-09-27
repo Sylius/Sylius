@@ -40,6 +40,7 @@ sylius:
             theme: Thème
             hostname: "Nom d'hôte"
         image:
+            code: Code
             file: Image
         locale:
             code: Code
@@ -57,6 +58,7 @@ sylius:
             id: ID
             title: Titre
         product:
+            images: Images
             restricted_zone: Restriction de zone
             shipping_category: Catégorie de livraison
             short_description: Brève description
@@ -104,7 +106,6 @@ sylius:
         variant:
             depth: Profondeur
             height: Hauteur
-            images: Images
             on_hand: Stock actuel
             price: Prix
             original_price: "Prix d'origine"
@@ -134,13 +135,14 @@ sylius:
     email:
         order_confirmation:
             name: Confirmation de commande
+            content: 'Votre commande n° %number% a été passée avec succès. <br/> <br/> Merci pour votre commande !'
         order_comment:
             name: Commentaire sur la commande
         shipment_confirmation:
             name: "Confirmation d'expédition"
             content: 'Votre commande n° %number% a bien été envoyée par %method%.<br/>Vous pouvez suivre sa livraison grâce au numéro de tracking %tracking%.<br/><br/>Merci pour votre commande.'
         user_confirmation:
-            name: "Confirmation d'utilisateur"
+            name: "Confirmation de l'utilisateur"
             subject: Bienvenue dans notre boutique
             content: 'Bienvenue sur notre boutique<br/><br/>Votre compte a bien été enregistré.<br/>Merci %username%.'
         password_reset:
@@ -150,7 +152,7 @@ sylius:
             name: "Vérification de l'adresse e-mail"
             content: 'Pour vérifier votre adresse email, visitez %url%'
     payum_gateway:
-        cash_on_delivery: Paiement à réception
+        cash_on_delivery: Paiement à à la livraison
         offline: Hors-ligne
         paypal_express_checkout: Paiement via PayPal Express
     shipping_method_resolver:

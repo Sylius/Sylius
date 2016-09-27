@@ -351,7 +351,6 @@ sylius:
         new_zone: Nova regija
         newest_products: Najnoviji proizvodi
         next: Sljedeća
-        "no": false
         no_association_types_to_display: Nema definiranih tipova poveznica
         no_comment: Nema komentara
         no_default_billing_address: sylius.account.address.default.no_billing
@@ -592,7 +591,6 @@ sylius:
         welcome: Dobrodošli
         welcome_to_our_store: Dobrodošli na našu trgovinu
         welcome_to_your_space: Dobrodošli u vaš kutak
-        "yes": true
         you_are_customer_since: Vi ste kupac od
         you_have_no_addresses_defined: Nemate unešenih adresa
         you_have_no_new_orders: Nema novih narudžbi

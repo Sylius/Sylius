@@ -19,3 +19,11 @@ sylius:
         association:
             type: Tipi i lidhjes
             product: Produkti i lidhur
+        variant:
+            name: Emri
+        option:
+            name: Emri
+            values: Vlera të mundshme
+        option_value:
+            add_value: Shto vlerën
+            value: Vlera

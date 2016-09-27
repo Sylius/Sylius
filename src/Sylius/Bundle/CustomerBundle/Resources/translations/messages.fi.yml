@@ -3,6 +3,22 @@
 
 sylius:
     form:
+        group:
+            name: Nimi
+            roles: Roolit
         customer:
+            first_name: Etunimi
+            groups: Ryhmät
+            last_name: Sukunimi
             email: Sähköpostiosoite
             phone_number: Puhelinnumero
+            gender: Sukupuoli
+            birthday: Syntymäaika
+            billing_address: Laskutusosoite
+            different_billing_address: Käytä eri osoitetta laskutukseen?
+            only_customer_registration: Luo tili?
+            subscribed_to_newsletter: Tilaa uutiskirje
+    gender:
+        unknown: Tuntematon
+        male: Mies
+        female: Nainen

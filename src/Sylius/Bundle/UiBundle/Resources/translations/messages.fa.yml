@@ -376,7 +376,6 @@ sylius:
         new_zone: منطقه جدید
         newest_products: جدیدترین کالاها
         next: بعدی
-        "no": false
         no_account: بدون شناسه کاربری
         no_association_types_to_display: هیچ نوع ارتباط تعریف شده ای وجود ندارد
         no_comment: بدون نظر
@@ -635,7 +634,6 @@ sylius:
         welcome: خوش آمدید
         welcome_to_our_store: به فروشگاه ما خوش آمدید
         welcome_to_your_space: به صفحه ی شخصیتان خوش آمدید
-        "yes": true
         you_are_customer_since: تاریخ ثبت نام در فروشگاه
         you_have_no_addresses_defined: هیچ آدرسی در حساب شما ثبت نشده است
         you_have_no_new_orders: سفارش جدیدی ندارید

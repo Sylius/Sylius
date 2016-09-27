@@ -30,6 +30,7 @@ sylius:
             payment_methods: Betalingsmetoder
             tax_zone_default: Standard skattesone
         image:
+            code: Kode
             file: Bilde
         locale:
             code: Kode
@@ -46,6 +47,7 @@ sylius:
             id: ID
             title: Tittel
         product:
+            images: Bilder
             restricted_zone: Begrenset sone
             shipping_category: Fraktkategori
             short_description: Kort beskrivelse
@@ -88,7 +90,6 @@ sylius:
         variant:
             depth: Dybde
             height: Høyde
-            images: Bilder
             on_hand: På lager
             price: Pris
             sku: Strekkode

@@ -5,25 +5,142 @@ sylius:
     form:
         login:
             username: Käyttäjänimi
+            password: Salasana
+            remember_me: Muista minut
+        option:
+            name: Nimi
+        notes: Muistiinpanot
+        variant:
+            tracked: Seurattu
     ui:
+        abandoned: Hylätty
+        about: Tietoja
+        access_token: Käyttöoikeustunnus
+        access_your_store_account_or_create_a_new_one: Kirjaudu kauppatunnuksellesi tai luo uusi tunnus
+        account_credentials: Tunnukset
+        action: Toiminto
+        actions: Toiminnot
+        add: Lisää
+        add_action: Lisää toiminto
+        add_attributes: Lisää määritteitä
+        add_channel: Lisää kanava
+        add_choice: Lisää valinta
+        add_coupon: Lisää kuponki
+        add_image: Lisää kuva
+        add_member: Lisää jäsen
+        add_menu_element: Lisää valikon osa
+        add_new_email: Lisää uusi sähköpostiosoite
+        add_new_permission: Lisää uusi käyttöoikeus
+        add_new_role: Lisää uusi rooli
+        add_province: Lisää maakunta
+        add_rule: Lisää sääntö
+        add_to_cart: Lisää koriin
+        add_value: Lisää arvo
+        adding_new_customer_groups: Lisätään uutta asiakasryhmää
+        adding_new_email: Lisätään uutta sähköpostiosoitetta
+        additional_information: Lisätietoja
+        address: Osoite
+        administration: Ylläpito
+        admin_users: Ylläpitäjät
+        all: Kaikki
+        all_your_addresses: Kaikki osoitteesi
+        amount: Summa
+        an_error_occurred: Tapahtui virhe
+        api: API
+        apply_coupon: Lisää kuponki
+        are_your_sure_you_want_to_perform_this_action: Oletko varma, että haluat suorittaa tämän toiminnon?
         back: Edellinen
+        checkout: Kassa
+        choose_file: Valitse tiedosto
         city: Kaupunki
+        clear_cart: Tyhjennä ostoskori
+        clear_filters: Tyhjennä suodattimet
+        code: Koodi
+        color: Väri
+        comment: Kommentti
         company: Yritys
+        confirmation: Vahvistus
+        confirmation_title: Vahvistus
+        contact_us: Ota yhteyttä
+        contain_variants: Sisältää muuttujia
+        contains: Sisältää
         content: Sisältö
+        countries: Maat
+        country: Maa
+        country_details: Maatiedot
+        coupon: Kuponki
+        coupons: Kupongit
+        create: Luo
+        create_a_new_address: Luo uusi osoite
+        create_a_new_customer_account: Luo uusi asiakastili
+        create_an_account: Luo tili
+        create_country: Luo maa
+        create_currency: Luo valuutta
+        create_customer: Luo asiakas
+        create_group: Luo ryhmä
+        create_menu: Luo valikko
+        create_new_coupon: Luo uusi kuponki
+        create_new_page: Luo uusi sivu
+        create_new_report: Luo uusi raportti
+        create_option: Luo vaihtoehto
+        create_order: Luo tilaus
+        create_payment: Luo maksu
+        create_payment_method: Luo maksutapa
+        create_product: Luo tuote
+        create_promotion: Luo kampanja
+        create_redirect_route: Luo uudelleenohjaus
         currency: Valuutta
+        current_password: Nykyinen salasana
+        customer_orders: Asiakkaan tilaukset
+        customer_since: Asiakas alkaen
+        customers: Asiakkaat
+        dashboard: Hallintapaneeli
+        date: Päivämäärä
+        default_billing_address: Oletusarvoinen laskutusosoite
+        default_currency: Oletusvaluutta
+        default_shipping_address: Oletusarvoinen toimitusosoite
+        delete: Poista
+        delete_image: Poista kuva
+        deleted: Poistettu
+        description: Kuvaus
+        details: Lisätiedot
+        disable: Ota pois käytöstä
+        disabled: Poistettu käytöstä
+        discount: Alennus
+        discounted_unit_price: Alennettu yksikköhinta
+        edit: Muokkaa
+        edit_channel: Muokkaa kanavaa
+        edit_country: Muokkaa maata
+        edit_coupon: Muokkaa kuponkia
+        edit_currency: Muokkaa valuuttaa
+        edit_customer: Muokkaa asiakkaan tietoja
+        edit_group: Muokkaa ryhmää
+        edit_payment_method: Muokkaa maksutapaa
+        edit_product: Muokkaa tuotetta
+        edit_promotion: Muokkaa kampanjaa
+        edit_promotion_coupon: Muokkaa kampanjakuponkia
+        edit_report: Muokkaa raporttia
+        edit_route: Muokkaa reittiä
+        edit_shipping_address: Muokkaa toimitusosoitetta
+        edit_shipping_method: Muokkaa toimitustapaa
         email: Sähköpostiosoite
         exchange_rate: Vaihtokurssi
+        extra_notes: Muistiinpanot
         label: Otsikko
         members: Jäsenet
         message: Viesti
+        new_password: Uusi salasana
         next: Seuraava
-        "no": false
         parent: Vanhempi
         phone_number: Puhelinnumero
         postcode: Postinumero
         pricing: Hinnoittelu
+        promotion_coupons: Kupongit
         province: Lääni
+        provinces: Maakunnat
+        remember_me: Muista minut
         street: Katuosoite
+        subscribed_to_newsletter: Tilaa uutiskirje
         topic: Aihe
+        translations: Käännökset
         username: Käyttäjänimi
-        "yes": true

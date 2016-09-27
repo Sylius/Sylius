@@ -14,3 +14,9 @@ sylius:
             available_on: Tilgængelig
         association_type:
             name: Navn
+        variant:
+            name: Navn
+        option:
+            name: Navn
+        option_value:
+            add_value: Tilføj værdi

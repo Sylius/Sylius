@@ -196,7 +196,6 @@ sylius:
         new_zone: Ny zone
         newest_products: Nyeste produkter
         next: Næste
-        "no": false
         no_default_billing_address: Ingen standard betalingsadresse
         no_default_shipping_address: Ingen standard leveringsadresse
         no_description: Ingen beskrivelse
@@ -327,7 +326,6 @@ sylius:
         view_more: Se mere
         warning: Advarsel
         welcome_to_your_space: Velkommen til din personlige oversigt
-        "yes": true
         you_are_customer_since: Du er kunde siden
         you_have_no_new_orders: Du har ingen nye ordrer
         your_cart_is_empty: Din kurv er tom

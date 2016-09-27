@@ -447,7 +447,6 @@ sylius:
         new_zone: Nieuwe zone toevoegen
         newest_products: Nieuwste producten
         next: Volgende
-        "no": false
         no_account: geen account
         no_association_types_to_display: Er zijn geen relatie typen gedefinieerd
         no_comment: Geen commentaar
@@ -750,7 +749,6 @@ sylius:
         welcome: Welkom
         welcome_to_our_store: Welkom in jouw winkel
         welcome_to_your_space: Welkom in uw account
-        "yes": true
         you_are_customer_since: U bent klant sinds
         you_have_no_addresses_defined: U heeft geen adressen gedefinieerd
         you_have_no_new_orders: U heeft geen nieuwe bestellingen

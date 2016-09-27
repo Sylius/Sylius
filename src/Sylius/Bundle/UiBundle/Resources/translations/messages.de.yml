@@ -462,7 +462,6 @@ sylius:
         new_zone: Neues Gebiet
         newest_products: Neueste Produkte
         next: Nächstes Bild
-        "no": false
         no_account: Kein Konto
         no_association_types_to_display: Es sind keine Verbindungen definiert
         no_comment: Kein Kommentar
@@ -774,7 +773,6 @@ sylius:
         welcome: Wilkommen
         welcome_to_our_store: Willkommen Sie in unserem Shop
         welcome_to_your_space: Willkommen in deinem persönlichen Bereich
-        "yes": true
         you_are_customer_since: Kunde seit
         you_have_no_addresses_defined: Sie haben keine Adressen angelegt
         you_have_no_new_orders: Sie haben keine neuen Bestellungen

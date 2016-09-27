@@ -3,6 +3,12 @@
 
 sylius:
     cart:
+        cart_clear_completed: A kosár kiürítése megtörtént.
+        cart_save_completed: A kosár tartalmának módosítása megtörtént.
+        item_add_completed: A kiválasztott elem a kosárba került.
+        item_add_error: Hiba történt a kosárba helyezés közben.
+        item_remove_completed: Az termék törölve lett a kosárból.
+        item_remove_error: Hiba az elem kosárból való eltávolítása közben.
         restricted_zone_removal: 'Ez a termék: %product% törölve lett a kosárból, mivel nem áll rendelkezésre az Ön országában.'
     checkout:
         restricted_zone: Ez a termék nem áll rendelkezése az Ön országában.

@@ -39,6 +39,7 @@ sylius:
             theme: Téma
             hostname: Hostname
         image:
+            code: Kód
             file: Obrázok
         locale:
             code: Kód
@@ -56,6 +57,7 @@ sylius:
             id: ID
             title: Názov
         product:
+            images: Obrázky
             restricted_zone: Zóna s obmedzeným prístupom
             shipping_category: Kategória doručenia
             short_description: Krátky popis
@@ -103,7 +105,6 @@ sylius:
         variant:
             depth: Hĺbka
             height: Výška
-            images: Obrázky
             on_hand: Položiek na sklade
             price: Cena
             original_price: Pôvodná cena

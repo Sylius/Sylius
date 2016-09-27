@@ -14,3 +14,14 @@ sylius:
         sku:
             not_blank: Vă rugăm să completați codul SKU a variantei.
             unique: Codul SKU a variantei trebuie să fie unic.
+        combination: O variantă cu acest set de opţiuni există deja.
+    option:
+        name:
+            not_blank: Vă rugăm să completați numele opţiunii.
+            min_length: 'Numele opţiunii trebuie să conţină cel puţin un caracter.|Numele opţiunii trebuie să conţină cel puţin {{ limit }} caractere.'
+            max_length: 'Numele opţiunii nu poate depăși un caracter.|Numele opţiunii nu poate depăși {{ limit }} de caractere.'
+        values:
+            min_count: 'Vă rugăm să adăugaţi cel puțin {{ limit }} valori pentru opțiune.|Vă rugăm să adăugaţi cel puțin {{ limit }} valori pentru opțiune.'
+    option_value:
+        value:
+            not_blank: Vă rugăm să completați valoarea opţiunii.

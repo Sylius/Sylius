@@ -2,5 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    cart:
+        cart_clear_completed: Korpa je uspešno ispražnjena.
+        cart_save_completed: Korpa je uspešno ažurirana.
+        item_add_completed: Stavka je dodata u korpu.
+        item_add_error: Dogodila se greška dok se stavka dodavala u korpu.
+        item_remove_completed: Stavka je izbačena iz korpe.
+        item_remove_error: Dogodila se greška dok se stavka uklanjala iz korpe.
     checkout:
         unknown: Nepoznata greška plaćanja.

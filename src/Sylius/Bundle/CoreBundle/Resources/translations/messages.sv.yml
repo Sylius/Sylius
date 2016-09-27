@@ -40,6 +40,7 @@ sylius:
             theme: Tema
             hostname: Värdnamn
         image:
+            code: Kod
             file: Bild
         locale:
             code: Kod
@@ -57,6 +58,7 @@ sylius:
             id: ID
             title: Titel
         product:
+            images: Bilder
             restricted_zone: Begränsat område
             shipping_category: Kategori
             short_description: Kort beskrivning
@@ -103,7 +105,6 @@ sylius:
         variant:
             depth: Djup
             height: Höjd
-            images: Bilder
             on_hand: I lager
             price: Pris
             original_price: Ursprungligt pris

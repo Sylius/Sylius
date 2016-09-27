@@ -6,11 +6,9 @@ sylius:
         city: Stad
         company: Maatskappy
         members: Lede
-        "no": false
         postcode: Poskode
         presentation: Weergawe
         province: Provinsie
         provinces: Provinsies
         scope: Gebied
         street: Straat
-        "yes": true

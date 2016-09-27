@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    cart:
+        cart_clear_completed: Ostoskori on tyhjennetty.
+        cart_save_completed: Ostoskori on päivitetty.
+        item_add_completed: Tuote on lisätty ostoskoriin.
+        item_add_error: Virhe lisättäessä tuotetta ostoskoriin.
+        item_remove_completed: Tuote poistettiin ostoskorista.
+        item_remove_error: Virhe poistettaessa tuotetta.

@@ -2,5 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    cart:
+        cart_clear_completed: カートを空にしました。
+        cart_save_completed: カートに保存しました。
+        item_add_completed: 商品をカートに追加しました。
+        item_add_error: 商品をカートに追加できませんでした。
+        item_remove_completed: 商品をカートから削除しました。
+        item_remove_error: 商品をカートから削除できませんでした。
     checkout:
         success: ご注文を承りました。

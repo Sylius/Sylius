@@ -26,6 +26,7 @@ sylius:
             currency_default: Moneda predeterminada
             tax_zone_default: "Zona d'impostos per defecte"
         image:
+            code: Codi
             file: Imatge
         locale:
             code: Codi
@@ -40,6 +41,7 @@ sylius:
             id: ID
             title: Títol
         product:
+            images: Imatges
             restricted_zone: Àrea restringida
             shipping_category: "Categoria d'enviament"
             short_description: Descripció breu
@@ -82,7 +84,6 @@ sylius:
         variant:
             depth: Profunditat
             height: Alçada
-            images: Imatges
             on_hand: Stock actual
             price: Preu
             sku: SKU

@@ -40,6 +40,7 @@ sylius:
             theme: Thema
             hostname: Hostnaam
         image:
+            code: Code
             file: Afbeelding
         locale:
             code: Code
@@ -57,6 +58,7 @@ sylius:
             id: ID
             title: Titel
         product:
+            images: Afbeeldingen
             restricted_zone: Beperkte zone
             shipping_category: Verzend categorie
             short_description: Korte omschrijving
@@ -104,7 +106,6 @@ sylius:
         variant:
             depth: Diepte
             height: Hoogte
-            images: Afbeeldingen
             on_hand: Huidige voorraad
             price: Prijs
             original_price: Oorspronkelijke prijs

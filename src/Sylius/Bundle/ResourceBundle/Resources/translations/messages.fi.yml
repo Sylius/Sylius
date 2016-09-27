@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    ui:
-        "no": false
-        "yes": true
+    form:
+        collection:
+            add: Lisää

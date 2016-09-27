@@ -19,3 +19,11 @@ sylius:
         association:
             type: Rodzaj powiązania
             product: Powiązany produkt
+        variant:
+            name: Nazwa
+        option:
+            name: Nazwa
+            values: Możliwe wartości
+        option_value:
+            add_value: Dodaj wartość
+            value: Wartość

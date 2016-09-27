@@ -452,7 +452,6 @@ sylius:
         new_zone: เพิ่มโซน
         newest_products: สินค้าใหม่ล่าสุด
         next: ถัดไป
-        "no": false
         no_account: ไม่มีบัญชี
         no_association_types_to_display: ไม่มีชนิดความสัมพันธ์กำหนดไว้
         no_comment: ไม่มีความเห็น
@@ -763,7 +762,6 @@ sylius:
         welcome: ยินดีต้อนรับ
         welcome_to_our_store: ยินดีต้อนรับสู่ร้านของเรา
         welcome_to_your_space: ยินดีต้อนรับสู่พื้นที่ของคุณ
-        "yes": true
         you_are_customer_since: คุณเป็นลูกค้าตั้งแต่
         you_have_no_addresses_defined: คุณไม่มีที่อยู่กำหนดไว้
         you_have_no_new_orders: คุณมีไม่มีใบสั่งซื้อใหม่

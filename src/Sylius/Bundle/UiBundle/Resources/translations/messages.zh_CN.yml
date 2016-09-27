@@ -420,7 +420,6 @@ sylius:
         new_zone: 新的区域
         newest_products: 最新产品
         next: 下一步
-        "no": false
         no_account: 没有账户
         no_association_types_to_display: 没有定义产品关联类型
         no_comment: 无注释
@@ -697,7 +696,6 @@ sylius:
         welcome: 欢迎
         welcome_to_our_store: 欢迎来到我们的商店
         welcome_to_your_space: 欢迎来到您的共享空间
-        "yes": true
         you_are_customer_since: 您是客户自从
         you_have_no_addresses_defined: 你有没有定义任何地址
         you_have_no_new_orders: 你有没有新的订单

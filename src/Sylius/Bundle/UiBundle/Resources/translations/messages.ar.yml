@@ -25,7 +25,6 @@ sylius:
         message: الرسالة
         name: الاسم
         new: جديد
-        "no": false
         pages: الصفحات
         password: كلمة السر
         phone_number: رقم الهاتف
@@ -37,4 +36,3 @@ sylius:
         scope: نطاق
         street: الشارع
         topic: الموضوع
-        "yes": true
