@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
-use DateTimeZone;
 use Symfony\Component\Translation\TranslatorInterface;
 
 class SettingsRequirements extends RequirementCollection

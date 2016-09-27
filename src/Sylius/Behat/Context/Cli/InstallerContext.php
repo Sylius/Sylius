@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Cli;
 
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\CoreBundle\Installer\Command\InstallSampleDataCommand;
-use Sylius\Bundle\CoreBundle\Installer\Command\SetupCommand;
+use Sylius\Bundle\CoreBundle\Command\InstallSampleDataCommand;
+use Sylius\Bundle\CoreBundle\Command\SetupCommand;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Tester\CommandTester;
