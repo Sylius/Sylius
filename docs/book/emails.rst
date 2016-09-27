@@ -7,73 +7,120 @@ E-Mails
 Sylius is sending various e-mails and this chapter is a reference about all of them. Continue reading to learn what e-mails are sent, when and how to customize the templates.
 To understand how e-mail sending works internally, please refer to :doc:`SyliusMailerBundle documentation </bundles/SyliusMailerBundle/index>`.
 
-User Confirmation E-Mail
-------------------------
+User Confirmation
+-----------------
 
-Every time new customer registers via registration form or checkout, ``user_confirmation`` e-mail is sent to him.
-The default template is
+Every time a customer registers via the registration form, a user confirmation e-mail is sent to them.
 
-.. code-block:: text
+**Code**: ``user_confirmation``
 
-    SyliusWebBundle:Email:userConfirmation.html.twig
+**The default template**: ``SyliusCoreBundle:Email:userConfirmation.html.twig``
 
 You also have the following parameters available:
 
-user
-    Instance of the user model
+* ``user``: Instance of the user model
+
+Email Verification
+------------------
+
+When a customer registers via the registration form, besides the User Confirmation an Email Verification is sent.
+
+**Code**: ``verification_token``
+
+**The default template**: ``SyliusCoreBundle:Email:verification.html.twig``
+
+You also have the following parameters available:
+
+* ``user``: Instance of the user model
+
+Password Reset
+--------------
+
+This e-mail is used when the user requests to reset their password in the login form.
+
+**Code**: ``reset_password_token``
+
+**The default template**: ``SyliusCoreBundle:Email:passwordReset.html.twig``
+
+You also have the following parameters available:
+
+* ``user``: Instance of the user model
 
 Order Confirmation
 ------------------
 
-This e-mail is sent when order is paid. Unique code is ``order_confirmation``. Template name is:
+This e-mail is sent when order is paid.
 
-.. code-block:: text
+**Code**: ``order_confirmation``
 
-    SyliusWebBundle:Email:orderConfirmation.html.twig
+**The default template**: ``SyliusCoreBundle:Email:orderConfirmation.html.twig``
 
 You also have the following parameters available:
 
-order
-    Instance of the user order
-order.user
-    Customer
-order.shippingAddress
-    Shipping address
-order.billingAddress
-    Billing address
-order.items
-    Collection of order items
+* ``order``: Instance of the order, with all its data
 
 Order Comment
 -------------
 
-In the backend, you can comment orders and optionally notify the customer via e-mail with code ``order_comment``, this template is used:
+In the backend, you can comment orders and optionally notify the customer via e-mail.
 
-.. code-block:: text
+**Code**: ``order_comment``
 
-    SyliusWebBundle:Email:orderComment.html.twig
+**The default template**: ``SyliusWebBundle:Email:orderComment.html.twig``
 
-You also have the following parameters available:
+You have the following parameters available:
 
-comment:
-    Comment instance
-order
-    Instance of the user order
-order.user
-    Customer
-order.shippingAddress
-    Shipping address
-order.billingAddress
-    Billing address
-order.items
-    Collection of order items
+* ``comment``: Comment instance
+* ``order``: Instance of the order, with all its data
 
-Final Thoughts
---------------
+Shipment Confirmation
+---------------------
 
-...
+This e-mail is sent when the order's shipping process has started.
+
+**Code**: ``shipment_confirmation``
+
+**The default template**: ``SyliusCoreBundle:Email:shipmentConfirmation.html.twig``
+
+You have the following parameters available:
+
+* ``shipment``: Shipment instance
+* ``order``: Instance of the order, with all its data
+
+How to send an Email programmatically?
+--------------------------------------
+
+For sending emails **Sylius** is using a dedicated service - **Sender**. Additionally we have **EmailManagers**
+for Order Confirmation(`OrderEmailManager <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/EmailManager/OrderEmailManager.php>`_)
+and for Shipment Confirmation(`ShipmentEmailManager <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/EmailManager/ShipmentEmailManager.php>`_).
+
+.. tip::
+
+    While using **Sender** you have the available emails of Sylius available under constants in:
+
+    * `Core - Emails <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Mailer/Emails.php>`_
+    * `User - Emails <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/UserBundle/Mailer/Emails.php>`_
+
+Example using **Sender**:
+
+.. code-block:: php
+
+    /** @var SenderInterface $sender */
+    $sender = $this->container->get('sylius.email_sender');
+
+    $sender->send(\Sylius\Bundle\UserBundle\Mailer\Emails::EMAIL_VERIFICATION_TOKEN, ['bannanowa@gmail.com'], ['user' => $user]);
+
+Example using **EmailManager**:
+
+.. code-block:: php
+
+    /** @var OrderEmailManager $sender */
+    $orderEmailManager = $this->container->get('sylius.email_manager.order');
+
+    $orderEmailManager->sendConfirmationEmail($order);
 
 Learn more
 ----------
 
-* ...
+* :doc:`Mailer - Component Documentation </components/Mailer/index>`
+* :doc:`Mailer - Bundle Documentation </bundles/SyliusMailerBundle/index>`
