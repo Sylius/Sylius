@@ -114,7 +114,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
 
         $imageForm = $this->getLastImageElement();
         $imageForm->fillField('Code', $code);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.'products/'.$path);
     }
 
     /**
@@ -125,7 +125,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $filesPath = $this->getParameter('files_path');
 
         $imageForm = $this->getImageElementByCode($code);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.'products/'.$path);
     }
 
     /**

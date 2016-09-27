@@ -68,7 +68,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
         $imageForm = $this->getLastImageElement();
         $imageForm->fillField('Code', $code);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.'taxons/'.$path);
     }
 
     /**
@@ -123,7 +123,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $filesPath = $this->getParameter('files_path');
 
         $imageForm = $this->getImageElementByCode($code);
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.'taxons/'.$path);
     }
 
     /**
