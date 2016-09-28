@@ -27,7 +27,7 @@
         <service id="sylius.listener.request_locale_setter" class="Sylius\Bundle\LocaleBundle\Listener\RequestLocaleSetter">
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.locale_provider" />
-            <tag name="kernel.event_listener" event="kernel.request" priority="64" />
+            <tag name="kernel.event_listener" event="kernel.request" priority="4" />
         </service>
 
         <service id="sylius.templating.helper.locale" class="Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper">

@@ -41,3 +41,5 @@ sylius:
         username:
             unique: This username is already used.
             not_blank: Please enter your name.
+        locale_code:
+            not_blank: Please choose a locale.
