@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
-use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCoupon;
-use Sylius\Component\Promotion\Model\Coupon;
+use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponExpiry;
+use Sylius\Component\Promotion\Model\CouponInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -20,36 +20,28 @@ use Webmozart\Assert\Assert;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class PromotionCouponValidator extends ConstraintValidator
+final class PromotionCouponExpiryValidator extends ConstraintValidator
 {
     /**
      * {@inheritdoc}
      */
     public function validate($value, Constraint $constraint)
     {
-        /** @var PromotionCoupon $constraint */
-        Assert::isInstanceOf($constraint, PromotionCoupon::class);
+        /** @var PromotionCouponExpiry$constraint */
+        Assert::isInstanceOf($constraint, PromotionCouponExpiry::class);
 
-        if (!$value instanceof Coupon) {
-            $this->context->addViolation($constraint->invalidMessage);
-
+        if (!$value instanceof CouponInterface) {
             return;
         }
 
         if ($value->getExpiresAt() !== null && $value->getExpiresAt() < new \DateTime()) {
-            $this->context->addViolation($constraint->expiredMessage);
+            $this->context->addViolation($constraint->message);
 
             return;
         }
 
         if ($value->getPromotion()->getEndsAt() !== null && $value->getPromotion()->getEndsAt() < new \DateTime()) {
-            $this->context->addViolation($constraint->expiredMessage);
-
-            return;
-        }
-
-        if ($value->getUsageLimit() !== null && $value->getUsageLimit() <= $value->getUsed()) {
-            $this->context->addViolation($constraint->usageLimitMessage);
+            $this->context->addViolation($constraint->message);
 
             return;
         }
