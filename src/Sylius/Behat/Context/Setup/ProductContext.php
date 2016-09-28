@@ -475,6 +475,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) has(?:| also) an image "([^"]+)" with a code "([^"]+)"$/
+     * @Given /^the ("[^"]+" product) has(?:| also) an image "([^"]+)" with a code "([^"]+)"$/
      */
     public function thisProductHasAnImageWithACode(ProductInterface $product, $imagePath, $imageCode)
     {

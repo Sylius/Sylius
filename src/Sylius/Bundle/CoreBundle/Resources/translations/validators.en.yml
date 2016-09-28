@@ -17,6 +17,9 @@ sylius:
         code:
             not_blank: Please enter locale code.
             unique: This locale already exists.
+    product_image:
+        code:
+            unique: Image code must be unique within this product.
     product_variant:
         onHand:
             min: On hand must be greater than {{ limit }}.

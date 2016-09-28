@@ -13,6 +13,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -190,6 +191,31 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $imageElements = $this->getImageElements();
 
         return count($imageElements);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isImageCodeDisabled()
+    {
+        return 'disabled' === $this->getLastImageElement()->findField('Code')->getAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationMessageForImage()
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $imageForm = $this->getLastImageElement();
+
+        $foundElement = $imageForm->find('css', '.pointing');
+        if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.pointing');
+        }
+
+        return $foundElement->getText();
     }
 
     /**
