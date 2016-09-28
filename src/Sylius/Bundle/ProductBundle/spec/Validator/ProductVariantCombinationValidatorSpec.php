@@ -75,7 +75,7 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         ProductVariantInterface $variant,
         ProductVariantInterface $existingVariant,
         ProductInterface $variable,
-        ProductOptionValueInterface $option,
+        ProductOptionValueInterface $optionValue,
         $context
     ) {
         $constraint = new ProductVariantCombination([
@@ -84,9 +84,9 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
 
         $variant->getProduct()->willReturn($variable);
 
-        $variant->getOptions()->willReturn(new ArrayCollection([$option->getWrappedObject()]));
+        $variant->getOptionValues()->willReturn(new ArrayCollection([$optionValue->getWrappedObject()]));
 
-        $existingVariant->hasOption($option)->willReturn(true);
+        $existingVariant->hasOptionValue($optionValue)->willReturn(true);
 
         $variable->hasVariants()->willReturn(true);
         $variable->hasOptions()->willReturn(true);

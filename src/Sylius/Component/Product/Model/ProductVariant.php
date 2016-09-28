@@ -45,7 +45,7 @@ class ProductVariant implements ProductVariantInterface
     /**
      * @var Collection|ProductOptionValueInterface[]
      */
-    protected $options;
+    protected $optionValues;
 
     /**
      * @var \DateTime
@@ -59,7 +59,7 @@ class ProductVariant implements ProductVariantInterface
 
     public function __construct()
     {
-        $this->options = new ArrayCollection();
+        $this->optionValues = new ArrayCollection();
 
         $this->createdAt = new \DateTime();
         $this->availableOn = new \DateTime();
@@ -108,37 +108,37 @@ class ProductVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getOptions()
+    public function getOptionValues()
     {
-        return $this->options;
+        return $this->optionValues;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addOption(ProductOptionValueInterface $option)
+    public function addOptionValue(ProductOptionValueInterface $optionValue)
     {
-        if (!$this->hasOption($option)) {
-            $this->options->add($option);
+        if (!$this->hasOptionValue($optionValue)) {
+            $this->optionValues->add($optionValue);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeOption(ProductOptionValueInterface $option)
+    public function removeOptionValue(ProductOptionValueInterface $optionValue)
     {
-        if ($this->hasOption($option)) {
-            $this->options->removeElement($option);
+        if ($this->hasOptionValue($optionValue)) {
+            $this->optionValues->removeElement($optionValue);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasOption(ProductOptionValueInterface $option)
+    public function hasOptionValue(ProductOptionValueInterface $optionValue)
     {
-        return $this->options->contains($option);
+        return $this->optionValues->contains($optionValue);
     }
 
     /**

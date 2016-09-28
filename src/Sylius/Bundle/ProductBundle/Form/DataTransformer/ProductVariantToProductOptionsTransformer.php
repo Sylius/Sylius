@@ -48,7 +48,7 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
             throw new UnexpectedTypeException($value, ProductVariantInterface::class);
         }
 
-        return $value->getOptions()->toArray();
+        return $value->getOptionValues()->toArray();
     }
 
     /**
@@ -68,15 +68,15 @@ final class ProductVariantToProductOptionsTransformer implements DataTransformer
     }
 
     /**
-     * @param ProductOptionValueInterface[] $options
+     * @param ProductOptionValueInterface[] $optionValues
      *
      * @return ProductVariantInterface|null
      */
-    private function matches(array $options)
+    private function matches(array $optionValues)
     {
         foreach ($this->product->getVariants() as $variant) {
-            foreach ($options as $option) {
-                if (null === $option || !$variant->hasOption($option)) {
+            foreach ($optionValues as $optionValue) {
+                if (null === $optionValue || !$variant->hasOptionValue($optionValue)) {
                     continue 2;
                 }
             }

@@ -58,12 +58,12 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
         $event->getData()->shouldBeCalled()->willReturn($variant);
 
         $variant->getProduct()->shouldBeCalled()->willReturn($variable);
-        $variant->getOptions()->shouldBeCalled()->willReturn([$optionValue]);
+        $variant->getOptionValues()->shouldBeCalled()->willReturn([$optionValue]);
         $variable->getOptions()->shouldBeCalled()->willReturn([$options]);
         $variable->hasOptions()->shouldBeCalled()->willReturn(true);
 
         $factory->createNamed(
-            'options',
+            'optionValues',
             'sylius_product_option_value_collection',
             [$optionValue],
             [

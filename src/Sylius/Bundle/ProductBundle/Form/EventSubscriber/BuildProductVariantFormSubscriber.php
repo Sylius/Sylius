@@ -64,7 +64,7 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
 
         // If the product has options, lets add this configuration field.
         if ($product->hasOptions()) {
-            $form->add($this->factory->createNamed('options', 'sylius_product_option_value_collection', $productVariant->getOptions(), [
+            $form->add($this->factory->createNamed('optionValues', 'sylius_product_option_value_collection', $productVariant->getOptionValues(), [
                 'options' => $product->getOptions(),
                 'auto_initialize' => false,
             ]));
