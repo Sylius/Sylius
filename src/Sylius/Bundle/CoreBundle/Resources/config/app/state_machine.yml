@@ -40,14 +40,14 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sylius.inventory.order_inventory_operator", "hold"]
                     args: ["object"]
-                sylius_create_payment:
-                    on: ["complete"]
-                    do: ["@sm.callback.cascade_transition", "apply"]
-                    args: ["object.getPayments()", "event", "'create'", "'sylius_payment'"]
                 sylius_request_shipping:
                     on: ["complete"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'request_shipping'", "'sylius_order_shipping'"]
+                sylius_request_payment:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'request_payment'", "'sylius_order_payment'"]
 
     sylius_order_shipping:
         class: "%sylius.model.order.class%"
@@ -149,10 +149,6 @@ winzou_state_machine:
                     on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object.getShipments()", "event", "'cancel'", "'sylius_shipment'"]
-                sylius_request_payment:
-                    on: ["create"]
-                    do: ["@sm.callback.cascade_transition", "apply"]
-                    args: ["object", "event", "'request_payment'", "'sylius_order_payment'"]
                 sylius_cancel_order_payment:
                     on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]
