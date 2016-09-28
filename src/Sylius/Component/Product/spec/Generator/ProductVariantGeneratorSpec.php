@@ -29,9 +29,9 @@ use Sylius\Component\Product\SetBuilder\SetBuilderInterface;
  */
 final class ProductVariantGeneratorSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $variantFactory, SetBuilderInterface $setBuilder)
+    function let(FactoryInterface $variantFactory)
     {
-        $this->beConstructedWith($variantFactory, $setBuilder);
+        $this->beConstructedWith($variantFactory);
     }
 
     function it_is_initializable()
@@ -57,7 +57,6 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         ProductOptionValue $blackColor,
         ProductOptionValue $redColor,
         ProductOptionValue $whiteColor,
-        SetBuilderInterface $setBuilder,
         ProductInterface $productVariable,
         ProductVariantInterface $permutationVariant
     ) {
@@ -71,12 +70,6 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         $blackColor->getId()->willReturn('black1');
         $whiteColor->getId()->willReturn('white2');
         $redColor->getId()->willReturn('red3');
-
-        $setBuilder->build([
-            ['black1', 'white2', 'red3'],
-        ])->willReturn([
-            ['black1', 'white2', 'red3'],
-        ]);
 
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setProduct($productVariable)->shouldBeCalled();
@@ -96,7 +89,6 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         ProductOptionValue $redColor,
         ProductOptionValue $smallSize,
         ProductOptionValue $whiteColor,
-        SetBuilderInterface $setBuilder,
         ProductInterface $productVariable,
         ProductVariantInterface $permutationVariant
     ) {
@@ -113,21 +105,6 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         $smallSize->getId()->willReturn('small4');
         $mediumSize->getId()->willReturn('medium5');
         $largeSize->getId()->willReturn('large6');
-
-        $setBuilder->build([
-            ['black1', 'white2', 'red3'],
-            ['small4', 'medium5', 'large6'],
-        ])->willReturn([
-            ['black1', 'small4'],
-            ['black1', 'medium5'],
-            ['black1', 'large6'],
-            ['white2', 'small4'],
-            ['white2', 'medium5'],
-            ['white2', 'large6'],
-            ['red3', 'small4'],
-            ['red3', 'medium5'],
-            ['red3', 'large6'],
-        ]);
 
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setProduct($productVariable)->shouldBeCalled();
