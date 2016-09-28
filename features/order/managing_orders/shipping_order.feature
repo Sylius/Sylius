@@ -29,3 +29,9 @@ Feature: Shipping an order
         Given this order has already been shipped
         When I view the summary of the order "#00000666"
         Then I should not be able to ship this order
+
+    @ui
+    Scenario: Checking the shipment state of a completed order
+        Given this order has already been shipped
+        When I browse orders
+        Then this order should have order shipping state "Shipped"

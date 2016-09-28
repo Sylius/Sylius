@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\OrderProcessing;
+namespace Sylius\Component\Order\StateResolver;
 
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -21,10 +21,5 @@ interface StateResolverInterface
     /**
      * @param OrderInterface $order
      */
-    public function resolvePaymentState(OrderInterface $order);
-
-    /**
-     * @param OrderInterface $order
-     */
-    public function resolveShippingState(OrderInterface $order);
+    public function resolve(OrderInterface $order);
 }

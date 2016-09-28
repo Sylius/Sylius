@@ -145,10 +145,6 @@ Your class needs to be extending this base class.
             $order = $payment->getOrder();
             $this->checkAccessToOrder($order);
 
-            $orderStateResolver = $this->get('sylius.order_processing.state_resolver');
-            $orderStateResolver->resolvePaymentState($order);
-            $orderStateResolver->resolveShippingState($order);
-
             $this->getOrderManager()->flush();
 
             $emailManager = $this->get('sylius.email_manager.order');

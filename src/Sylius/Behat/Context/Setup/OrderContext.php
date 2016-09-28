@@ -433,8 +433,7 @@ final class OrderContext implements Context
      */
     public function thisOrderIsAlreadyPaid(OrderInterface $order)
     {
-        $payment = $order->getLastPayment();
-        $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::TRANSITION_COMPLETE);
+        $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
         $this->objectManager->flush();
     }
@@ -466,8 +465,20 @@ final class OrderContext implements Context
      */
     private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition)
     {
-        $shipment = $order->getShipments()->first();
-        $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH)->apply($transition);
+        foreach ($order->getShipments() as $shipment) {
+            $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH)->apply($transition);
+        }
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param string $transition
+     */
+    private function applyPaymentTransitionOnOrder(OrderInterface $order, $transition)
+    {
+        foreach ($order->getPayments() as $payment) {
+            $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH)->apply($transition);
+        }
     }
 
     /**

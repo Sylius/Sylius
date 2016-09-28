@@ -20,9 +20,9 @@ use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Sylius\Component\Order\SyliusCartEvents;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -30,7 +30,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Webmozart\Assert\Assert;
@@ -111,12 +110,6 @@ class OrderController extends ResourceController
 
         $status = new GetStatus($token);
         $this->getPayum()->getGateway($token->getGatewayName())->execute($status);
-        $payment = $status->getFirstModel();
-        $order = $payment->getOrder();
-
-        $orderStateResolver = $this->getOrderStateResolver();
-        $orderStateResolver->resolvePaymentState($order);
-        $orderStateResolver->resolveShippingState($order);
 
         $this->getOrderManager()->flush();
 
@@ -313,14 +306,6 @@ class OrderController extends ResourceController
     protected function getEventDispatcher()
     {
         return $this->container->get('event_dispatcher');
-    }
-
-    /**
-     * @return StateResolverInterface
-     */
-    private function getOrderStateResolver()
-    {
-        return $this->get('sylius.order_processing.state_resolver');
     }
 
     /**

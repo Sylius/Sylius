@@ -94,6 +94,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Given /^I am viewing the summary of (this order)$/
      * @When I view the summary of the order :order
      * @When /^I view the summary of (this order made by "[^"]+")$/
      */
@@ -103,7 +104,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When /^I mark (this order) as a paid$/
+     * @When /^I mark (this order) as paid$/
      */
     public function iMarkThisOrderAsAPaid(OrderInterface $order)
     {
@@ -120,7 +121,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Given /^I ship (this order)$/
+     * @When /^I ship (this order)$/
      */
     public function iShipThisOrder(OrderInterface $order)
     {
@@ -558,7 +559,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then it should have a :state state
+     * @Then it should( still) have a :state state
      */
     public function itShouldHaveState($state)
     {
@@ -636,6 +637,19 @@ final class ManagingOrdersContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['payment state' => $orderPaymentState]),
             sprintf('Cannot find order with "%s" order payment state in the list.', $orderPaymentState)
+        );
+    }
+
+    /**
+     * @Then the order :order should have order shipping state :orderShipmentState
+     * @Then /^(this order) should have order shipping state "([^"]+)"$/
+     * @Then /^(its) shipping state should be "([^"]+)"$/
+     */
+    public function theOrderShouldHaveShipmentState(OrderInterface $order, $orderShipmentState)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['shipping state' => $orderShipmentState]),
+            sprintf('Cannot find order with "%s" order shipping state on the list.', $orderShipmentState)
         );
     }
 

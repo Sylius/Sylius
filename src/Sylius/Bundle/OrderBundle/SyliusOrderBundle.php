@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\OrderBundle;
 
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
+use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterOrderStateResolversPass;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
