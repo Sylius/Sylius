@@ -7,10 +7,10 @@
                 {{ form_row(form.originalPrice) }}
             </div>
         </div>
-        {% if form.options is defined and form.options|length > 0 %}
+        {% if form.optionValues is defined and form.optionValues|length > 0 %}
         <div class="ui segment">
             <h4 class="ui dividing header">{{ 'sylius.ui.options'|trans }}</h4>
-            {% for option_form in form.options %}
+            {% for option_form in form.optionValues %}
                 {{ form_row(option_form) }}
             {% endfor %}
         </div>

@@ -2,12 +2,12 @@
     {% set product = data.product %}
     {{ data.name is null ? product.name : data.name }}
 </span>
-{% if data.options|length > 0 %}
+{% if data.optionValues|length > 0 %}
     <br>
     <div class="ui horizontal divided list">
-        {% for option in data.options %}
+        {% for optionValue in data.optionValues %}
             <div class="item">
-                {{ option.value }}
+                {{ optionValue.value }}
             </div>
         {% endfor %}
     </div>

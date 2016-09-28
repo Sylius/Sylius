@@ -73,7 +73,7 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
 
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setProduct($productVariable)->shouldBeCalled();
-        $permutationVariant->addOption(Argument::type(ProductOptionValue::class))->shouldBeCalled();
+        $permutationVariant->addOptionValue(Argument::type(ProductOptionValue::class))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 
         $this->generate($productVariable);
@@ -108,7 +108,7 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
 
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setProduct($productVariable)->shouldBeCalled();
-        $permutationVariant->addOption(Argument::type(ProductOptionValue::class))->shouldBeCalled();
+        $permutationVariant->addOptionValue(Argument::type(ProductOptionValue::class))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 
         $this->generate($productVariable);

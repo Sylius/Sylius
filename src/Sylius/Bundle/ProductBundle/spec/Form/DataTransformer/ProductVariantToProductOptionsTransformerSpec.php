@@ -47,10 +47,10 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
         $this->shouldThrow(UnexpectedTypeException::class)->duringTransform([]);
     }
 
-    function it_should_transform_variant_into_variant_options(ProductVariantInterface $variant, Collection $options)
+    function it_should_transform_variant_into_variant_options(ProductVariantInterface $variant, Collection $optionValues)
     {
-        $variant->getOptions()->willReturn($options);
-        $options->toArray()->willReturn([]);
+        $variant->getOptionValues()->willReturn($optionValues);
+        $optionValues->toArray()->willReturn([]);
 
         $this->transform($variant)->shouldReturn([]);
     }
@@ -87,7 +87,7 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
     ) {
         $variable->getVariants()->willReturn([$variant]);
 
-        $variant->hasOption($optionValue)->willReturn(true);
+        $variant->hasOptionValue($optionValue)->willReturn(true);
 
         $this->reverseTransform([$optionValue])->shouldReturn($variant);
     }
@@ -99,7 +99,7 @@ final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
     ) {
         $variable->getVariants()->willReturn([$variant]);
 
-        $variant->hasOption($optionValue)->willReturn(false);
+        $variant->hasOptionValue($optionValue)->willReturn(false);
 
         $this->reverseTransform([$optionValue])->shouldReturn(null);
     }

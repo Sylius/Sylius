@@ -91,10 +91,10 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
 
         if (is_array($permutation)) {
             foreach ($permutation as $id) {
-                $variant->addOption($optionMap[$id]);
+                $variant->addOptionValue($optionMap[$id]);
             }
         } else {
-            $variant->addOption($optionMap[$permutation]);
+            $variant->addOptionValue($optionMap[$permutation]);
         }
 
         return $variant;

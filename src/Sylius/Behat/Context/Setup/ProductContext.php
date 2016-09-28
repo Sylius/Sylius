@@ -411,7 +411,7 @@ final class ProductContext implements Context
 
         $optionValue = $this->sharedStorage->get(sprintf('%s_option_value',$optionValueName));
 
-        $variant->addOption($optionValue);
+        $variant->addOptionValue($optionValue);
         $variant->setPrice($price);
         $variant->setCode(sprintf("%s_%s", $product->getCode(), $optionValueName));
 
