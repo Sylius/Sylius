@@ -8,7 +8,7 @@ How to send a custom e-mail?
     go to `Sending configurable e-mails in Symfony Blogpost <http://sylius.org/blog/sending-configurable-e-mails-in-symfony>`_.
 
 Currently **Sylius** is sending e-mails only in a few "must-have" cases - see :doc:`E-mails documentation </book/emails>`.
-Of course these cases may not be sufficient for your business needs, if so you will need to create your own custom e-mails inside the system.
+Of course these cases may not be sufficient for your business needs. If so, you will need to create your own custom e-mails inside the system.
 
 On a basic example we will now teach how to do it.
 
@@ -50,8 +50,6 @@ To achieve that you will need to:
         sender:
             name: Example.com
             address: no-reply@example.com
-        templates:
-            app.email.order_confirmation.name: "AppBundle:Email:out_of_stock.html.twig"
         emails:
             out_of_stock:
                 subject: "A product has become out of stock!"
@@ -67,7 +65,7 @@ To achieve that you will need to:
 ---------------------------------
 
 * It will need the **EmailSender**, the **AvailabilityChecker** and the **AdminUser Repository**.
-* It will operate on the **Order** where it needs to check each OrderItem, get their **ProductVariants** from Units and check if they are available.
+* It will operate on the **Order** where it needs to check each OrderItem, get their **ProductVariants** and check if they are available.
 
 .. code-block:: php
 
@@ -117,18 +115,19 @@ To achieve that you will need to:
          */
         public function sendOutOfStockEmail(OrderInterface $order)
         {
-            $admins = $this->adminUserRepository->findAll();
+            // get all admins, but remember to put them into an array
+            $admins = $this->adminUserRepository->findAll()->toArray();
 
             foreach($order->getItems() as $item) {
-                $unit = $item->getUnits()->first();
-                $variant = $unit->getStockable();
+                $variant = $item->getVariant();
 
-                $outOfStock = $this->availabilityChecker->isStockSufficient($variant, 1);
+                $stockIsSufficient = $this->availabilityChecker->isStockSufficient($variant, 1);
 
-                if ($outOfStock) {
+                if ($stockIsSufficient) {
                     continue;
                 }
-                    $this->emailSender->send('out_of_stock', $admins, ['variant' => $variant]);
+
+                $this->emailSender->send('out_of_stock', $admins, ['variant' => $variant]);
             }
         }
     }
