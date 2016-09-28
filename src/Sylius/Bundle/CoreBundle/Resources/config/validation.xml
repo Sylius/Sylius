@@ -152,15 +152,6 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Core\Model\Shipment">
-        <property name="method">
-            <constraint name="NotBlank">
-                <option name="message">sylius.shipment.shipping_method.not_blank</option>
-                <option name="groups">sylius_checkout_select_shipping</option>
-            </constraint>
-        </property>
-    </class>
-
     <class name="Sylius\Component\Core\Model\Taxon">
         <property name="images">
             <constraint name="Valid" />
