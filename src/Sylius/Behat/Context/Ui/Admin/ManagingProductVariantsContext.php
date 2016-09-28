@@ -392,6 +392,24 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then the :variant variant should have :amount items on hold
+     * @Then /^(this variant) should have (\d+) items on hold$/
+     */
+    public function thisVariantShouldHaveItemsOnHold(ProductVariantInterface $variant, $amount)
+    {
+        Assert::same(
+            $amount,
+            $this->indexPage->getOnHoldQuantityFor($variant),
+            sprintf(
+                'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
+                $variant->getName(),
+                $amount,
+                $this->indexPage->getOnHandQuantityFor($variant)
+            )
+        );
+    }
+
+    /**
      * @param string $element
      * @param $message
      */

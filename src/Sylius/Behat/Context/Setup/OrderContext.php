@@ -430,6 +430,7 @@ final class OrderContext implements Context
 
     /**
      * @Given /^(this order) is already paid$/
+     * @Given the order :order is already paid
      */
     public function thisOrderIsAlreadyPaid(OrderInterface $order)
     {
@@ -439,10 +440,13 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer canceled (this order)$/
-     * @Given /^(this order) was canceled$/
+     * @Given /^the customer cancelled (this order)$/
+     * @Given /^(this order) was cancelled$/
+     * @Given the order :order was cancelled
+     * @Given I cancelled the order :order
+     * @Given /^I cancelled (this order)$/
      */
-    public function theCustomerCanceledThisOrder(OrderInterface $order)
+    public function theCustomerCancelledThisOrder(OrderInterface $order)
     {
         $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CANCEL);
 
