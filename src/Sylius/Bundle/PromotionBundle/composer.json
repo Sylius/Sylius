@@ -32,6 +32,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^3.0",
+        "phpunit/phpunit": "^5.5",
         "doctrine/orm": "^2.4.8,<2.5",
         "symfony/form": "^2.8",
         "symfony/validator": "^2.8"
