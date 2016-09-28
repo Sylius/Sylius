@@ -88,4 +88,16 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @param string $path
      */
     public function changeImageWithCode($code, $path);
+
+    /**
+     * @param string $code
+     */
+    public function removeImageWithCode($code);
+
+    public function removeFirstImage();
+
+    /**
+     * @return int
+     */
+    public function countImages();
 }

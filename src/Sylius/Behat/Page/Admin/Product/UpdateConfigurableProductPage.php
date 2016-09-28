@@ -16,8 +16,6 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Templating\Tests\Storage\FileStorageTest;
 use Webmozart\Assert\Assert;
 
 /**
@@ -131,6 +129,33 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
+    public function removeImageWithCode($code)
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $imageElement = $this->getImageElementByCode($code);
+        $imageElement->clickLink('Delete');
+    }
+
+    public function removeFirstImage()
+    {
+        $imageElement = $this->getFirstImageElement();
+        $imageElement->clickLink('Delete');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countImages()
+    {
+        $imageElements = $this->getImageElements();
+
+        return count($imageElements);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');
@@ -188,15 +213,36 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     }
 
     /**
+     * @return NodeElement[]
+     */
+    private function getImageElements()
+    {
+        $images = $this->getElement('images');
+
+        return $images->findAll('css', 'div[data-form-collection="item"]');
+    }
+
+    /**
      * @return NodeElement
      */
     private function getLastImageElement()
     {
-        $images = $this->getElement('images');
-        $items = $images->findAll('css', 'div[data-form-collection="item"]');
+        $imageElements = $this->getImageElements();
 
-        Assert::notEmpty($items);
+        Assert::notEmpty($imageElements);
 
-        return end($items);
+        return end($imageElements);
+    }
+
+    /**
+     * @return NodeElement
+     */
+    private function getFirstImageElement()
+    {
+        $imageElements = $this->getImageElements();
+
+        Assert::notEmpty($imageElements);
+
+        return reset($imageElements);
     }
 }
