@@ -3,7 +3,7 @@ SyliusInventoryBundle [![Build status...](https://secure.travis-ci.org/Sylius/Sy
 
 Flexible inventory management for [**Symfony2**](http://symfony.com) ecommerce applications.
 
-It was heavily inspired by [Spree inventory system](http://guides.spreecommerce.com/inventory.html).
+It was heavily inspired by [Spree inventory system](http://guides.spreecommerce.org/developer/inventory.html).
 
 Sylius
 ------
