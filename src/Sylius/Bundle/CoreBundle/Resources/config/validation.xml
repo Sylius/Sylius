@@ -100,24 +100,21 @@
         <property name="currencyCode">
             <constraint name="Currency">
                 <option name="message">sylius.order.currency_code.not_valid</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
         <property name="promotionCoupon">
             <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponNotNull">
                 <option name="groups">
-                    <value>sylius_promotion_coupon</value>
                     <value>sylius</value>
+                    <value>sylius_promotion_coupon</value>
                 </option>
             </constraint>
             <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponUsageLimit">
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
+                <option name="groups">sylius</option>
             </constraint>
             <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponExpiry">
-                <option name="groups">
-                    <value>sylius</value>
-                </option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
