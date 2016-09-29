@@ -45,8 +45,8 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
         $optionMap = [];
 
         /** @var ProductOptionValueInterface $option */
-        foreach ($variant->getOptions() as $option) {
-            $optionMap[$option->getOption()->getCode()] = $option->getValue();
+        foreach ($variant->getOptionValues() as $option) {
+            $optionMap[$option->getOptionCode()] = $option->getValue();
         }
 
         $optionMap['value'] = $variant->getPrice();

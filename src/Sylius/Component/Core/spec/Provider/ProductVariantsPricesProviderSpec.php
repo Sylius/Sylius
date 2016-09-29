@@ -36,8 +36,6 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
 
     function it_provides_array_containing_product_variant_options_map_with_corresponding_price(
         ProductInterface $tShirt,
-        ProductOptionInterface $colorOption,
-        ProductOptionInterface $sizeOption,
         ProductOptionValueInterface $black,
         ProductOptionValueInterface $large,
         ProductOptionValueInterface $small,
@@ -54,23 +52,20 @@ final class ProductVariantsPricesProviderSpec extends ObjectBehavior
             $whiteLargeTShirt
         ]);
 
-        $colorOption->getCode()->willReturn('t_shirt_color');
-        $sizeOption->getCode()->willReturn('t_shirt_size');
-
-        $blackSmallTShirt->getOptions()->willReturn([$black, $small]);
-        $whiteSmallTShirt->getOptions()->willReturn([$white, $small]);
-        $blackLargeTShirt->getOptions()->willReturn([$black, $large]);
-        $whiteLargeTShirt->getOptions()->willReturn([$white, $large]);
+        $blackSmallTShirt->getOptionValues()->willReturn([$black, $small]);
+        $whiteSmallTShirt->getOptionValues()->willReturn([$white, $small]);
+        $blackLargeTShirt->getOptionValues()->willReturn([$black, $large]);
+        $whiteLargeTShirt->getOptionValues()->willReturn([$white, $large]);
 
         $blackSmallTShirt->getPrice()->willReturn(1000);
         $whiteSmallTShirt->getPrice()->willReturn(1500);
         $blackLargeTShirt->getPrice()->willReturn(2000);
         $whiteLargeTShirt->getPrice()->willReturn(2500);
 
-        $black->getOption()->willReturn($colorOption);
-        $white->getOption()->willReturn($colorOption);
-        $small->getOption()->willReturn($sizeOption);
-        $large->getOption()->willReturn($sizeOption);
+        $black->getOptionCode()->willReturn('t_shirt_color');
+        $white->getOptionCode()->willReturn('t_shirt_color');
+        $small->getOptionCode()->willReturn('t_shirt_size');
+        $large->getOptionCode()->willReturn('t_shirt_size');
 
         $black->getValue()->willReturn('Black');
         $white->getValue()->willReturn('White');
