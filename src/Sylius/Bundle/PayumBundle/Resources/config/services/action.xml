@@ -14,8 +14,9 @@
         </service>
 
         <!-- PayPal -->
-        <service id="sylius.payum.action.convert_payment_to_paypal_express" class="Sylius\Bundle\PayumBundle\Action\ConvertPaymentToPaypalExpressAction">
+        <service id="sylius.payum.action.convert_payment_to_paypal_express" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentToPaypalExpressAction">
             <argument type="service" id="sylius.invoice_number_generator" />
+            <argument type="service" id="sylius.currency_converter" />
             <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.convert_payment" />
         </service>
         <service id="sylius.payum.paypal_express_checkout.action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ResolveNextRouteAction">
@@ -23,7 +24,7 @@
         </service>
 
         <!-- Offline -->
-        <service id="sylius.payum.offline.action.convert_payment" class="Sylius\Bundle\PayumBundle\Action\ConvertPaymentToOfflineAction">
+        <service id="sylius.payum.offline.action.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentToOfflineAction">
             <tag name="payum.action" factory="offline" alias="sylius.convert_payment" />
         </service>
         <service id="sylus.payum.offline.action.status" class="Sylius\Bundle\PayumBundle\Action\Offline\StatusAction">

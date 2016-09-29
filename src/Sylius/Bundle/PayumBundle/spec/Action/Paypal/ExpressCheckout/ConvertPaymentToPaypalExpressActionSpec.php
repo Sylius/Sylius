@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\PayumBundle\Action;
+namespace spec\Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout;
 
 use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\Convert;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PayumBundle\Action\ConvertPaymentToPaypalExpressAction;
+use Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentToPaypalExpressAction;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
