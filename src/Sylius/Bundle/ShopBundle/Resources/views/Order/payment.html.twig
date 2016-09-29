@@ -1,11 +1,10 @@
-{{ form_start(form, {'action': path('sylius_shop_order_payment_method_update', {'orderId': order.id}), 'attr': {'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path('sylius_shop_payment_method_update', {'paymentId': payment.id}), 'attr': {'novalidate': 'novalidate'}}) }}
 <input type="hidden" name="_method" value="PUT" />
 <div class="ui segment">
     <div class="sub header">{{ 'sylius.ui.change_payment_method'|trans }}</div>
     <div class="ui fluid stackable items">
-        {% set payment_form = form.payments[order.payments|length -1] %}
-        {{ form_errors(payment_form.method) }}
-        {% for payment_method_choice in payment_form.method %}
+        {{ form_errors(form) }}
+        {% for payment_method_choice in form.method.children %}
             <div class="item">
                 <div class="field">
                     <div class="ui radio checkbox">
