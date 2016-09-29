@@ -23,7 +23,7 @@ Feature: Inventory releasing on order cancellation
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought 3 items of "Green" variant of product "T-shirt banana"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
-        And I cancelled the order "#00000022"
+        And the order "#00000022" was cancelled
         When I view all variants of the product "T-shirt banana"
         Then the variant "Green" should have 5 items on hand
         And the "Green" variant should have 0 items on hold
@@ -34,7 +34,7 @@ Feature: Inventory releasing on order cancellation
         And the customer bought 3 items of "Green" variant of product "T-shirt banana"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the order "#00000022" is already paid
-        And I cancelled this order
+        And the order "#00000022" was cancelled
         When I view all variants of the product "T-shirt banana"
         Then the variant "Green" should have 5 items on hand
         And the "Green" variant should have 0 items on hold
@@ -45,7 +45,7 @@ Feature: Inventory releasing on order cancellation
         And the customer bought 3 items of "Green" variant of product "T-shirt banana"
         And the customer bought 2 items of "Red" variant of product "T-shirt banana"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
-        And I cancelled the order "#00000023"
+        And the order "#00000023" was cancelled
         When I view all variants of the product "T-shirt banana"
         Then the variant "Green" should have 5 items on hand
         And the "Green" variant should have 0 items on hold
@@ -59,7 +59,7 @@ Feature: Inventory releasing on order cancellation
         And the customer bought 2 items of "Red" variant of product "T-shirt banana"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the order "#00000023" is already paid
-        And I cancelled this order
+        And the order "#00000023" was cancelled
         When I view all variants of the product "T-shirt banana"
         Then the variant "Green" should have 5 items on hand
         And the "Green" variant should have 0 items on hold
@@ -72,13 +72,11 @@ Feature: Inventory releasing on order cancellation
         And the customer bought 3 items of "Green" variant of product "T-shirt banana"
         And the customer bought 2 items of "Yellow" variant of product "Skirt watermelon"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
-        And I cancelled the order "#00000024"
-        When I view all variants of the product "T-shirt banana"
-        Then the variant "Green" should have 5 items on hand
-        And the "Green" variant should have 0 items on hold
-        When I view all variants of the product "Skirt watermelon"
-        Then the variant "Yellow" should have 5 items on hand
-        And the "Yellow" variant should have 0 items on hold
+        And the order "#00000024" was cancelled
+        Then the "Green" variant of "T-shirt banana" product should have 5 items on hand
+        And the "Green" variant of "T-shirt banana" product should have 0 items on hold
+        And the "Yellow" variant of "Skirt watermelon" product should have 5 items on hand
+        And the "Yellow" variant of "Skirt watermelon" product should have 0 items on hold
 
     @ui
     Scenario: Verify the reserved inventory and quantity of product's items is back in stock after cancellation of paid order with two variants of differents products
@@ -87,10 +85,8 @@ Feature: Inventory releasing on order cancellation
         And the customer bought 2 items of "Yellow" variant of product "Skirt watermelon"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the order "#00000024" is already paid
-        And I cancelled this order
-        When I view all variants of the product "T-shirt banana"
-        Then the variant "Green" should have 5 items on hand
-        And the "Green" variant should have 0 items on hold
-        When I view all variants of the product "Skirt watermelon"
-        Then the variant "Yellow" should have 5 items on hand
-        And the "Yellow" variant should have 0 items on hold
+        And the order "#00000024" was cancelled
+        Then the "Green" variant of "T-shirt banana" product should have 5 items on hand
+        And the "Green" variant of "T-shirt banana" product should have 0 items on hold
+        And the "Yellow" variant of "Skirt watermelon" product should have 5 items on hand
+        And the "Yellow" variant of "Skirt watermelon" product should have 0 items on hold

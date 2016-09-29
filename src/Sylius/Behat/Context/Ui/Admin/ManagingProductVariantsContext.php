@@ -293,6 +293,19 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then /^the "([^"]+)" variant of ("[^"]+" product) should have (\d+) items on hand$/
+     */
+    public function theVariantOfProductShouldHaveItemsOnHand($productVariantName, ProductInterface $product, $quantity)
+    {
+        $this->indexPage->open(['productId' => $product->getId()]);
+
+        Assert::true(
+            $this->indexPage->isSingleResourceWithSpecificElementOnPage(['name' => $productVariantName], sprintf('td > div.ui.label:contains("%s")', $quantity)),
+            sprintf('The product variant %s should have %s items on hand, but it does not.',$productVariantName, $quantity)
+        );
+    }
+
+    /**
      * @Then /^inventory of (this variant) should not be tracked$/
      */
     public function thisProductVariantShouldNotBeTracked(ProductVariantInterface $productVariant)
@@ -397,6 +410,25 @@ final class ManagingProductVariantsContext implements Context
      */
     public function thisVariantShouldHaveItemsOnHold(ProductVariantInterface $variant, $amount)
     {
+        Assert::same(
+            $amount,
+            $this->indexPage->getOnHoldQuantityFor($variant),
+            sprintf(
+                'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
+                $variant->getName(),
+                $amount,
+                $this->indexPage->getOnHandQuantityFor($variant)
+            )
+        );
+    }
+
+    /**
+     * @Then the :variant variant of :product product should have :amount items on hold
+     */
+    public function theVariantOfProductShouldHaveItemsOnHold(ProductVariantInterface $variant, ProductInterface $product, $amount)
+    {
+        $this->indexPage->open(['productId' => $product->getId()]);
+
         Assert::same(
             $amount,
             $this->indexPage->getOnHoldQuantityFor($variant),
