@@ -17,7 +17,7 @@ sylius_shop_order_after_pay:
         _controller: sylius.controller.payum:afterCaptureAction
 
 sylius_shop_order_payment_method_update:
-    path: /{tokenValue}/change-payment-method
+    path: /{orderId}/{lastNewPaymentId}/change-payment-method
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.order:updateAction
@@ -26,13 +26,12 @@ sylius_shop_order_payment_method_update:
             template: SyliusShopBundle:Order:payment.html.twig
             form: sylius_checkout_select_payment
             redirect:
-                route: sylius_shop_order_show_details
+                route: sylius_shop_order_pay
                 parameters:
-                    tokenValue: $tokenValue
+                    lastNewPaymentId: $lastNewPaymentId
             repository:
-                method: findOneBy
-                arguments:
-                    [tokenValue: $tokenValue]
+                method: find
+                arguments: [$orderId]
 
 sylius_shop_order_thank_you:
     path: /thank-you

@@ -4,6 +4,7 @@
     <div class="content">
         <div class="header" id="payment-method">
             {{ payment.method }}
+            {{ payment.state }}
         </div>
         <p>{{ payment.amount|sylius_price(payment.currencyCode, payment.order.exchangeRate) }}</p>
     </div>

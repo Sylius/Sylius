@@ -1,14 +1,10 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-    {% set lastPayment = order.getLastNewPayment() %}
+    {% set lastNewPayment = order.getLastNewPayment() %}
     {% include '@SyliusShop/Common/Order/_summary.html.twig' %}
 
     {% if order.paymentState is not same as ('paid') %}
-        {{ render(url('sylius_shop_order_payment_method_update', {'tokenValue': order.tokenValue} )) }}
-        {{ 'sylius.ui.payment_ready_to_pay'|trans }}
-        <a href="{{ path('sylius_shop_order_pay', {'lastNewPaymentId': lastPayment.id}) }}" id="sylius-pay-link" class="ui primary button">
-            {{ 'sylius.ui.pay'|trans }}
-        </a>
+        {{ render(url('sylius_shop_order_payment_method_update', {'orderId': order.id, 'lastNewPaymentId': lastNewPayment.id} )) }}
     {% endif %}
 {% endblock %}
