@@ -1,0 +1,14 @@
+sylius_shop_payment_method_update:
+    path: /{paymentId}/change-payment-method
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.payment:updateAction
+        _sylius:
+            permission: false
+            template: SyliusShopBundle:Order:payment.html.twig
+            form: sylius_checkout_payment
+            repository:
+                method: find
+                arguments: [$paymentId]
+            redirect:
+                route: sylius_shop_thank_you

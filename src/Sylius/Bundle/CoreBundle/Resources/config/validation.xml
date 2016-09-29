@@ -83,6 +83,9 @@
         <property name="shipments">
             <constraint name="Valid" />
         </property>
+        <property name="payments">
+            <constraint name="Valid" />
+        </property>
         <property name="currencyCode">
             <constraint name="Currency">
                 <option name="message">sylius.order.currency_code.not_valid</option>

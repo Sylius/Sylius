@@ -30,6 +30,9 @@
         </service>
         <service id="sylius.form.type.checkout_select_payment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType">
             <argument>%sylius.model.order.class%</argument>
+            <argument type="collection">
+                <argument>sylius</argument>
+            </argument>
             <tag name="form.type" alias="sylius_checkout_select_payment" />
         </service>
         <service id="sylius.form.type.checkout_payment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType">

@@ -92,6 +92,22 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
+    public function hasNoAvailablePaymentMethodsWarning()
+    {
+        return $this->hasElement('warning_no_payment_methods');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+     public function isNextStepButtonUnavailable()
+     {
+         return $this->getElement('next_step')->hasClass('disabled');
+     }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -102,6 +118,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
             'payment_method_option' => '.item:contains("%payment_method%") input',
             'payment_method_select' => '.item:contains("%payment_method%") > .field > .ui.radio.checkbox',
             'shipping_step_label' => '.steps a:contains("Shipping")',
+            'warning_no_payment_methods' => '#sylius-order-cannot-be-paid',
         ]);
     }
 }

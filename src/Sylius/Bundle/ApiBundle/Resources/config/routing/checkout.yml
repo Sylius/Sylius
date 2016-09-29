@@ -51,7 +51,7 @@ sylius_api_checkout_select_shipping:
 
 sylius_api_checkout_select_payment:
     path: /select-payment/{orderId}
-    methods: [PUT]
+    methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:

@@ -17,9 +17,15 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\Payment\Model\Payment">
-        <property name="currency">
+        <property name="currencyCode">
             <constraint name="Currency">
                 <option name="message">sylius.payment.currency_code.not_valid</option>
+            </constraint>
+        </property>
+        <property name="method">
+            <constraint name="NotBlank">
+                <option name="message">sylius.payment.method.not_blank</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>
@@ -115,15 +121,6 @@
         <property name="expiryYear">
             <constraint name="NotBlank">
                 <option name="message">sylius.credit_card.expiry_year.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-    </class>
-
-    <class name="Sylius\Component\Payment\Model\Payment">
-        <property name="method">
-            <constraint name="NotBlank">
-                <option name="message">sylius.payment.method.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

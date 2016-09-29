@@ -19,6 +19,9 @@ sylius:
     payment:
         currency_code:
             not_valid: The currency code you entered is invalid.
+        method:
+            not_blank: 'Please select a payment method.'
+            
     payment_method:
         gateway:
             not_blank: Please select payment method gateway.
