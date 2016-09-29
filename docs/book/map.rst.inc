@@ -24,6 +24,7 @@
 * :doc:`/book/taxation`
 * :doc:`/book/pricing`
 * :doc:`/book/promotions`
+* :doc:`/book/coupons`
 * :doc:`/book/content`
 * :doc:`/book/emails`
 * :doc:`/book/settings`
