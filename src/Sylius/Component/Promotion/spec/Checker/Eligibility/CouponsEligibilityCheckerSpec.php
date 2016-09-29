@@ -14,8 +14,8 @@ namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\Eligibility\CouponsEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
-use Sylius\Component\Promotion\Model\CouponAwarePromotionSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponAwarePromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -37,9 +37,9 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
     }
 
     function it_dispatches_event_and_returns_true_if_subject_coupons_are_eligible_to_promotion(
-        CouponAwarePromotionSubjectInterface $subject,
+        PromotionCouponAwarePromotionSubjectInterface $subject,
         PromotionInterface $promotion,
-        CouponInterface $coupon
+        PromotionCouponInterface $coupon
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
         $promotion->isCouponBased()->willReturn(true);
@@ -50,10 +50,10 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
     }
 
     function it_returns_false_if_subject_coupons_are_not_eligible_to_promotion(
-        CouponAwarePromotionSubjectInterface $subject,
+        PromotionCouponAwarePromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         PromotionInterface $otherPromotion,
-        CouponInterface $coupon
+        PromotionCouponInterface $coupon
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
         $promotion->isCouponBased()->willReturn(true);
@@ -64,7 +64,7 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
     }
 
     function it_returns_false_if_subject_has_no_coupon(
-        CouponAwarePromotionSubjectInterface $subject,
+        PromotionCouponAwarePromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ) {
         $subject->getPromotionCoupon()->willReturn(null);

@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\CouponInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepositoryInterface;
@@ -35,11 +35,11 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * @param CustomerInterface $customer
-     * @param CouponInterface $coupon
+     * @param PromotionCouponInterface $coupon
      *
      * @return int
      */
-    public function countByCustomerAndCoupon(CustomerInterface $customer, CouponInterface $coupon);
+    public function countByCustomerAndCoupon(CustomerInterface $customer, PromotionCouponInterface $coupon);
 
     /**
      * @param CustomerInterface $customer

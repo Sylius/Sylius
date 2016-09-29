@@ -15,44 +15,45 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
-use Sylius\Component\Promotion\Generator\CouponGeneratorInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGenerator;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
 use Sylius\Component\Promotion\Generator\InstructionInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
+use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class CouponGeneratorSpec extends ObjectBehavior
+final class PromotionCouponGeneratorSpec extends ObjectBehavior
 {
     function let(
-        FactoryInterface $couponFactory,
-        CouponRepositoryInterface $couponRepository,
+        FactoryInterface $promotionCouponFactory,
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
         ObjectManager $objectManager,
         GenerationPolicyInterface $generationPolicy
     ) {
-        $this->beConstructedWith($couponFactory, $couponRepository, $objectManager, $generationPolicy);
+        $this->beConstructedWith($promotionCouponFactory, $promotionCouponRepository, $objectManager, $generationPolicy);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Generator\CouponGenerator');
+        $this->shouldHaveType(PromotionCouponGenerator::class);
     }
 
     function it_should_implement_Sylius_promotion_coupon_generator_interface()
     {
-        $this->shouldImplement(CouponGeneratorInterface::class);
+        $this->shouldImplement(PromotionCouponGeneratorInterface::class);
     }
 
     function it_should_generate_coupons_according_to_instruction(
-        FactoryInterface $couponFactory,
-        CouponRepositoryInterface $couponRepository,
+        FactoryInterface $promotionCouponFactory,
+        PromotionCouponRepositoryInterface $promotionCouponRepository,
         ObjectManager $objectManager,
         PromotionInterface $promotion,
-        CouponInterface $coupon,
+        PromotionCouponInterface $promotionCoupon,
         InstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy
     ) {
@@ -62,14 +63,14 @@ final class CouponGeneratorSpec extends ObjectBehavior
         $instruction->getCodeLength()->willReturn(6);
         $generationPolicy->isGenerationPossible($instruction)->willReturn(true);
 
-        $couponFactory->createNew()->willReturn($coupon);
-        $couponRepository->findOneBy(Argument::any())->willReturn(null);
-        $coupon->setPromotion($promotion)->shouldBeCalled();
-        $coupon->setCode(Argument::any())->shouldBeCalled();
-        $coupon->setUsageLimit(null)->shouldBeCalled();
-        $coupon->setExpiresAt(null)->shouldBeCalled();
+        $promotionCouponFactory->createNew()->willReturn($promotionCoupon);
+        $promotionCouponRepository->findOneBy(Argument::any())->willReturn(null);
+        $promotionCoupon->setPromotion($promotion)->shouldBeCalled();
+        $promotionCoupon->setCode(Argument::any())->shouldBeCalled();
+        $promotionCoupon->setUsageLimit(null)->shouldBeCalled();
+        $promotionCoupon->setExpiresAt(null)->shouldBeCalled();
 
-        $objectManager->persist($coupon)->shouldBeCalled();
+        $objectManager->persist($promotionCoupon)->shouldBeCalled();
         $objectManager->flush()->shouldBeCalled();
 
         $this->generate($promotion, $instruction);
@@ -88,8 +89,8 @@ final class CouponGeneratorSpec extends ObjectBehavior
     }
 
     function it_throws_invalid_argument_exception_when_code_length_is_not_between_one_and_forty(
-        CouponInterface $coupon,
-        FactoryInterface $couponFactory,
+        PromotionCouponInterface $promotionCoupon,
+        FactoryInterface $promotionCouponFactory,
         GenerationPolicyInterface $generationPolicy,
         PromotionInterface $promotion,
         InstructionInterface $instruction
@@ -97,7 +98,7 @@ final class CouponGeneratorSpec extends ObjectBehavior
         $instruction->getAmount()->willReturn(16);
         $instruction->getCodeLength()->willReturn(-1);
         $generationPolicy->isGenerationPossible($instruction)->willReturn(true);
-        $couponFactory->createNew()->willReturn($coupon);
+        $promotionCouponFactory->createNew()->willReturn($promotionCoupon);
         $this->shouldThrow(\InvalidArgumentException::class)->during('generate', [$promotion, $instruction]);
 
         $instruction->getCodeLength()->willReturn(45);

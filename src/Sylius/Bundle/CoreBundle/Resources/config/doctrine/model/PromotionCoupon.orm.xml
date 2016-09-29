@@ -16,7 +16,7 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\Coupon" table="sylius_promotion_coupon">
+    <mapped-superclass name="Sylius\Component\Core\Model\PromotionCoupon" table="sylius_promotion_coupon">
         <field type="integer" name="perCustomerUsageLimit" column="per_customer_usage_limit" nullable="true" />
     </mapped-superclass>
 

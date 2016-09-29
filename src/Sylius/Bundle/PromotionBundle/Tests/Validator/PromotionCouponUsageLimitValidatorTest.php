@@ -4,7 +4,7 @@ namespace Sylius\Bundle\PromotionBundle\Tests\Validator;
 
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponUsageLimit;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Symfony\Component\Validator\Validation;
 
 /**
@@ -19,8 +19,8 @@ final class PromotionCouponUsageLimitValidatorTest extends \PHPUnit_Framework_Te
     {
         $validator = Validation::createValidatorBuilder()->getValidator();
 
-        /** @var CouponInterface|ObjectProphecy $coupon */
-        $coupon = $this->prophesize(CouponInterface::class);
+        /** @var PromotionCouponInterface|ObjectProphecy $coupon */
+        $coupon = $this->prophesize(PromotionCouponInterface::class);
         $coupon->getUsageLimit()->willReturn(null);
 
         $violations = $validator->validateValue($coupon->reveal(), new PromotionCouponUsageLimit());
@@ -35,8 +35,8 @@ final class PromotionCouponUsageLimitValidatorTest extends \PHPUnit_Framework_Te
     {
         $validator = Validation::createValidatorBuilder()->getValidator();
 
-        /** @var CouponInterface|ObjectProphecy $coupon */
-        $coupon = $this->prophesize(CouponInterface::class);
+        /** @var PromotionCouponInterface|ObjectProphecy $coupon */
+        $coupon = $this->prophesize(PromotionCouponInterface::class);
         $coupon->getUsageLimit()->willReturn(10);
         $coupon->getUsed()->willReturn(9);
 
@@ -52,8 +52,8 @@ final class PromotionCouponUsageLimitValidatorTest extends \PHPUnit_Framework_Te
     {
         $validator = Validation::createValidatorBuilder()->getValidator();
 
-        /** @var CouponInterface|ObjectProphecy $coupon */
-        $coupon = $this->prophesize(CouponInterface::class);
+        /** @var PromotionCouponInterface|ObjectProphecy $coupon */
+        $coupon = $this->prophesize(PromotionCouponInterface::class);
         $coupon->getUsageLimit()->willReturn(10);
         $coupon->getUsed()->willReturn(10);
 

@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface CouponInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
+interface PromotionCouponInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * @return int

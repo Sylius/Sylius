@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Core\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\CouponInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -45,7 +45,7 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
     function it_returns_true_if_subject_coupon_is_eligible_to_promotion_and_coupon_usage_limit_is_0(
         OrderInterface $subject,
         PromotionInterface $promotion,
-        CouponInterface $coupon
+        PromotionCouponInterface $coupon
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
         $promotion->isCouponBased()->willReturn(true);
@@ -61,7 +61,7 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $subject,
         PromotionInterface $promotion,
-        CouponInterface $coupon,
+        PromotionCouponInterface $coupon,
         CustomerInterface $customer
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
@@ -80,7 +80,7 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $subject,
         PromotionInterface $promotion,
-        CouponInterface $coupon,
+        PromotionCouponInterface $coupon,
         CustomerInterface $customer
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
@@ -99,7 +99,7 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $subject,
         PromotionInterface $promotion,
-        CouponInterface $coupon,
+        PromotionCouponInterface $coupon,
         CustomerInterface $customer
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
@@ -116,7 +116,7 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
         OrderRepositoryInterface $orderRepository,
         OrderInterface $subject,
         PromotionInterface $promotion,
-        CouponInterface $coupon,
+        PromotionCouponInterface $coupon,
         CustomerInterface $customer
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);

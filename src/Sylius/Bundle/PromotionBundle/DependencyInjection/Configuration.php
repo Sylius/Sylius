@@ -19,11 +19,11 @@ use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Promotion\Factory\CouponFactory;
+use Sylius\Component\Promotion\Factory\PromotionCouponFactory;
 use Sylius\Component\Promotion\Model\Action;
 use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\Coupon;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCoupon;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\Promotion;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\Rule;
@@ -182,11 +182,11 @@ final class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(Coupon::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(CouponInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(PromotionCoupon::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PromotionCouponInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(CouponController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(CouponFactory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(PromotionCouponFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()

@@ -12,22 +12,25 @@
 namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCoupon;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
+ * @mixin PromotionCoupon
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-final class CouponSpec extends ObjectBehavior
+final class PromotionCouponSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Model\Coupon');
+        $this->shouldHaveType(PromotionCoupon::class);
     }
 
     function it_should_be_Sylius_coupon()
     {
-        $this->shouldImplement(CouponInterface::class);
+        $this->shouldImplement(PromotionCouponInterface::class);
     }
 
     function it_should_not_have_id_by_default()

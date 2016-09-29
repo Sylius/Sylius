@@ -65,7 +65,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Promotion\Model\Coupon">
+    <class name="Sylius\Component\Promotion\Model\PromotionCoupon">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">code</option>
             <option name="message">sylius.promotion_coupon.code.unique</option>

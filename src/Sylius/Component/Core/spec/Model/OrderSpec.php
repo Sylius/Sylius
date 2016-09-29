@@ -25,7 +25,7 @@ use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Order\Model\Order as BaseOrder;
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
@@ -353,7 +353,7 @@ final class OrderSpec extends ObjectBehavior
         $this->shouldNotHaveShipment($shipment);
     }
 
-    function it_has_promotion_coupon(CouponInterface $coupon)
+    function it_has_promotion_coupon(PromotionCouponInterface $coupon)
     {
         $this->setPromotionCoupon($coupon);
         $this->getPromotionCoupon()->shouldReturn($coupon);

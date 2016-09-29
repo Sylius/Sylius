@@ -82,7 +82,7 @@ class Promotion implements PromotionInterface
     protected $couponBased = false;
 
     /**
-     * @var Collection|CouponInterface[]
+     * @var Collection|PromotionCouponInterface[]
      */
     protected $coupons;
 
@@ -299,7 +299,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCoupon(CouponInterface $coupon)
+    public function hasCoupon(PromotionCouponInterface $coupon)
     {
         return $this->coupons->contains($coupon);
     }
@@ -307,7 +307,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function addCoupon(CouponInterface $coupon)
+    public function addCoupon(PromotionCouponInterface $coupon)
     {
         if (!$this->hasCoupon($coupon)) {
             $coupon->setPromotion($this);
@@ -318,7 +318,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function removeCoupon(CouponInterface $coupon)
+    public function removeCoupon(PromotionCouponInterface $coupon)
     {
         $coupon->setPromotion(null);
         $this->coupons->removeElement($coupon);

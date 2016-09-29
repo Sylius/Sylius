@@ -11,8 +11,8 @@ Feature: Applying promotion coupon with usage limit
         And this promotion gives "$10.00" discount to every order
 
     @ui
-    Scenario: Receiving discount from valid promotion coupon with a usage limit
-        Given this promotion coupon can be used 5 times
+    Scenario: Receiving discount from valid coupon with a usage limit
+        Given this coupon can be used 5 times
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
         Then my cart total should be "$90.00"
@@ -20,9 +20,9 @@ Feature: Applying promotion coupon with usage limit
 
     @ui
     Scenario: Receiving no discount from valid coupon that has reached its usage limit
-        Given this promotion coupon has already reached its usage limit
+        Given this coupon has already reached its usage limit
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
-        Then I should be notified that the promotion coupon has reached its usage limit
+        Then I should be notified that the coupon has reached its usage limit
         And my cart total should be "$100.00"
         And there should be no discount

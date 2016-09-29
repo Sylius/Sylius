@@ -11,8 +11,8 @@ Feature: Applying promotion coupon with an expiration date
         And this promotion gives "$10.00" discount to every order
 
     @ui
-    Scenario: Receiving discount from valid promotion coupon with an expiration date
-        Given this promotion coupon expires tomorrow
+    Scenario: Receiving discount from valid coupon with an expiration date
+        Given this coupon expires tomorrow
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
         Then my cart total should be "$90.00"
@@ -20,10 +20,10 @@ Feature: Applying promotion coupon with an expiration date
 
     @ui
     Scenario: Receiving no discount from expired coupon
-        Given this promotion coupon has already expired
+        Given this coupon has already expired
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
-        Then I should be notified that the promotion coupon has expired
+        Then I should be notified that the coupon has expired
         And my cart total should be "$100.00"
         And there should be no discount
 
@@ -32,6 +32,6 @@ Feature: Applying promotion coupon with an expiration date
         Given this promotion has already expired
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
-        Then I should be notified that the promotion coupon has expired
+        Then I should be notified that the coupon has expired
         And my cart total should be "$100.00"
         And there should be no discount

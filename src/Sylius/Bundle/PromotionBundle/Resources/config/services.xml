@@ -96,7 +96,7 @@
             <argument>Sylius\Component\Promotion\Generator\Instruction</argument>
             <tag name="form.type" alias="sylius_promotion_coupon_generate_instruction" />
         </service>
-        <service id="sylius.generator.promotion_coupon" class="Sylius\Component\Promotion\Generator\CouponGenerator">
+        <service id="sylius.generator.promotion_coupon" class="Sylius\Component\Promotion\Generator\PromotionCouponGenerator">
             <argument type="service" id="sylius.factory.promotion_coupon" />
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.manager.promotion_coupon" />

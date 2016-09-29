@@ -12,13 +12,13 @@
 namespace Sylius\Component\Promotion\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface CouponRepositoryInterface extends RepositoryInterface
+interface PromotionCouponRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param int $codeLength
