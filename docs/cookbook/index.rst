@@ -6,5 +6,6 @@ Cookbook
 
     installation-commands
     registry
+    custom-email
 
 .. include:: /cookbook/map.rst.inc
