@@ -23,7 +23,7 @@ var paths = {
         ],
         sass: [
             '../UiBundle/Resources/private/sass/**',
-            'ShopBundle/Resources/private/scss/**'
+            'Resources/private/scss/**'
         ],
         css: [
             '../../../../node_modules/semantic-ui-css/semantic.min.css'
