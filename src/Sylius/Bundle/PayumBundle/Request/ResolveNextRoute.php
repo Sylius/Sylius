@@ -16,7 +16,7 @@ use Payum\Core\Request\Generic;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class ResolveNextRoute extends Generic
+class ResolveNextRoute extends Generic
 {
     /**
      * @var string
