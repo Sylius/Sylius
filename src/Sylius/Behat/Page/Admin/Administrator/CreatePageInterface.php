@@ -34,4 +34,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $password
      */
     public function specifyPassword($password);
+
+    /**
+     * @param string $localeCode
+     */
+    public function specifyLocale($localeCode);
 }

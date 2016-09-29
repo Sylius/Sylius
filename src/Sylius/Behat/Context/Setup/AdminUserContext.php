@@ -85,6 +85,5 @@ final class AdminUserContext implements Context
 
         $this->userRepository->add($adminUser);
         $this->sharedStorage->set('administrator', $adminUser);
-        $this->sharedStorage->set('admin', $adminUser);
     }
 }

@@ -124,6 +124,14 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I specify its locale to :localeCode
+     */
+    public function iSpecifyItsLocaleTo($localeCode)
+    {
+        $this->createPage->specifyLocale($localeCode);
+    }
+
+    /**
      * @When I set my locale to :localeCode
      */
     public function iSetMyLocaleTo($localeCode)

@@ -91,17 +91,17 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function logOut()
+    public function getSubHeader()
     {
-        $this->getElement('logout')->click();
+        return trim($this->getElement('sub_header')->getText());
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasSubHeader($subHeader)
+    public function logOut()
     {
-        return $subHeader === trim($this->getElement('sub_header')->getText());
+        $this->getElement('logout')->click();
     }
 
     /**

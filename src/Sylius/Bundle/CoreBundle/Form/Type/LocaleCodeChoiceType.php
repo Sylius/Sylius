@@ -42,7 +42,7 @@ class LocaleCodeChoiceType extends AbstractType
         $resolver->setDefaults([
             'choices' => $this->getLocalesCodes(),
             'choices_as_values' => true,
-            'empty_value' => null,
+            'placeholder' => null,
         ]);
     }
 

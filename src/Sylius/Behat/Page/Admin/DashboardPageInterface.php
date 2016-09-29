@@ -47,13 +47,11 @@ interface DashboardPageInterface extends SymfonyPageInterface
      * @return int
      */
     public function getAverageOrderValue();
-    
-    public function logOut();
 
     /**
-     * @param string $subHeader
-     *
-     * @return bool
+     * @return string
      */
-    public function hasSubHeader($subHeader);
+    public function getSubHeader();
+
+    public function logOut();
 }

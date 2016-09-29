@@ -63,10 +63,12 @@ final class LocaleContext implements Context
         $this->dashboardPage->open();
 
         $expectedSubHeader = $this->translate('sylius.ui.overview_of_your_store', $localeCode);
+        $actualSubHeader = $this->dashboardPage->getSubHeader();
 
-        Assert::true(
-            $this->dashboardPage->hasSubHeader($expectedSubHeader),
-            sprintf('"%s" should be visible on the dashboard.', $expectedSubHeader)
+        Assert::same(
+            $actualSubHeader,
+            $expectedSubHeader,
+            sprintf('Dashboard header should say "%s", but says "%s" instead.', $expectedSubHeader, $actualSubHeader)
         );
     }
 

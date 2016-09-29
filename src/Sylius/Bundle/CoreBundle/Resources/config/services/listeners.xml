@@ -76,5 +76,10 @@
             <tag name="doctrine.event_listener" event="prePersist" />
             <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
+        <service id="sylius.translator.listener" class="Symfony\Component\HttpKernel\EventListener\TranslatorListener">
+            <argument type="service" id="translator" />
+            <argument type="service" id="request_stack" />
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" priority="2" />
+        </service>
     </services>
 </container>

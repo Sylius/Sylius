@@ -37,10 +37,6 @@ final class AdminUserContext implements Context
      */
     public function getLoggedAdminUser()
     {
-        return
-            $this->sharedStorage->has('administrator') ?
-            $this->sharedStorage->get('administrator') :
-            $this->sharedStorage->get('admin')
-        ;
+        return $this->sharedStorage->get('administrator');
     }
 }
