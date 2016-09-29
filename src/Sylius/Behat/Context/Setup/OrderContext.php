@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\CouponInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
@@ -346,7 +346,7 @@ final class OrderContext implements Context
     /**
      * @Given the customer bought a single :product using :coupon coupon
      */
-    public function theCustomerBoughtSingleUsing(ProductInterface $product, CouponInterface $coupon)
+    public function theCustomerBoughtSingleUsing(ProductInterface $product, PromotionCouponInterface $coupon)
     {
         $order = $this->addProductVariantToOrder($this->variantResolver->getVariant($product), $product->getPrice());
         $order->setPromotionCoupon($coupon);

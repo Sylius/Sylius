@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponUsageLimit;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Webmozart\Assert\Assert;
@@ -30,7 +30,7 @@ final class PromotionCouponUsageLimitValidator extends ConstraintValidator
         /** @var PromotionCouponUsageLimit $constraint */
         Assert::isInstanceOf($constraint, PromotionCouponUsageLimit::class);
 
-        if (!$value instanceof CouponInterface) {
+        if (!$value instanceof PromotionCouponInterface) {
             return;
         }
 

@@ -4,7 +4,7 @@ namespace Sylius\Bundle\PromotionBundle\Tests\Validator;
 
 use Prophecy\Prophecy\ObjectProphecy;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponExpiry;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Symfony\Component\Validator\Validation;
 
@@ -24,8 +24,8 @@ final class PromotionCouponExpiryValidatorTest extends \PHPUnit_Framework_TestCa
         $promotion = $this->prophesize(PromotionInterface::class);
         $promotion->getEndsAt()->willReturn(null);
 
-        /** @var CouponInterface|ObjectProphecy $coupon */
-        $coupon = $this->prophesize(CouponInterface::class);
+        /** @var PromotionCouponInterface|ObjectProphecy $coupon */
+        $coupon = $this->prophesize(PromotionCouponInterface::class);
         $coupon->getExpiresAt()->willReturn(null);
         $coupon->getPromotion()->willReturn($promotion->reveal());
 
@@ -45,8 +45,8 @@ final class PromotionCouponExpiryValidatorTest extends \PHPUnit_Framework_TestCa
         $promotion = $this->prophesize(PromotionInterface::class);
         $promotion->getEndsAt()->willReturn(null);
 
-        /** @var CouponInterface|ObjectProphecy $coupon */
-        $coupon = $this->prophesize(CouponInterface::class);
+        /** @var PromotionCouponInterface|ObjectProphecy $coupon */
+        $coupon = $this->prophesize(PromotionCouponInterface::class);
         $coupon->getExpiresAt()->willReturn(new \DateTime('tomorrow'));
         $coupon->getPromotion()->willReturn($promotion->reveal());
 
@@ -66,8 +66,8 @@ final class PromotionCouponExpiryValidatorTest extends \PHPUnit_Framework_TestCa
         $promotion = $this->prophesize(PromotionInterface::class);
         $promotion->getEndsAt()->willReturn(null);
 
-        /** @var CouponInterface|ObjectProphecy $coupon */
-        $coupon = $this->prophesize(CouponInterface::class);
+        /** @var PromotionCouponInterface|ObjectProphecy $coupon */
+        $coupon = $this->prophesize(PromotionCouponInterface::class);
         $coupon->getExpiresAt()->willReturn(new \DateTime('yesterday'));
         $coupon->getPromotion()->willReturn($promotion->reveal());
 
@@ -87,8 +87,8 @@ final class PromotionCouponExpiryValidatorTest extends \PHPUnit_Framework_TestCa
         $promotion = $this->prophesize(PromotionInterface::class);
         $promotion->getEndsAt()->willReturn(null);
 
-        /** @var CouponInterface|ObjectProphecy $coupon */
-        $coupon = $this->prophesize(CouponInterface::class);
+        /** @var PromotionCouponInterface|ObjectProphecy $coupon */
+        $coupon = $this->prophesize(PromotionCouponInterface::class);
         $coupon->getExpiresAt()->willReturn(null);
         $coupon->getPromotion()->willReturn($promotion->reveal());
 
@@ -108,8 +108,8 @@ final class PromotionCouponExpiryValidatorTest extends \PHPUnit_Framework_TestCa
         $promotion = $this->prophesize(PromotionInterface::class);
         $promotion->getEndsAt()->willReturn(new \DateTime('tomorrow'));
 
-        /** @var CouponInterface|ObjectProphecy $coupon */
-        $coupon = $this->prophesize(CouponInterface::class);
+        /** @var PromotionCouponInterface|ObjectProphecy $coupon */
+        $coupon = $this->prophesize(PromotionCouponInterface::class);
         $coupon->getExpiresAt()->willReturn(null);
         $coupon->getPromotion()->willReturn($promotion->reveal());
 
@@ -129,8 +129,8 @@ final class PromotionCouponExpiryValidatorTest extends \PHPUnit_Framework_TestCa
         $promotion = $this->prophesize(PromotionInterface::class);
         $promotion->getEndsAt()->willReturn(new \DateTime('yesterday'));
 
-        /** @var CouponInterface|ObjectProphecy $coupon */
-        $coupon = $this->prophesize(CouponInterface::class);
+        /** @var PromotionCouponInterface|ObjectProphecy $coupon */
+        $coupon = $this->prophesize(PromotionCouponInterface::class);
         $coupon->getExpiresAt()->willReturn(null);
         $coupon->getPromotion()->willReturn($promotion->reveal());
 
@@ -150,8 +150,8 @@ final class PromotionCouponExpiryValidatorTest extends \PHPUnit_Framework_TestCa
         $promotion = $this->prophesize(PromotionInterface::class);
         $promotion->getEndsAt()->willReturn(new \DateTime('yesterday'));
 
-        /** @var CouponInterface|ObjectProphecy $coupon */
-        $coupon = $this->prophesize(CouponInterface::class);
+        /** @var PromotionCouponInterface|ObjectProphecy $coupon */
+        $coupon = $this->prophesize(PromotionCouponInterface::class);
         $coupon->getExpiresAt()->willReturn(new \DateTime('yesterday'));
         $coupon->getPromotion()->willReturn($promotion->reveal());
 

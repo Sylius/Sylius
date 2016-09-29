@@ -11,19 +11,19 @@
 
 namespace Sylius\Component\Promotion\Factory;
 
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface CouponFactoryInterface extends FactoryInterface
+interface PromotionCouponFactoryInterface extends FactoryInterface
 {
     /**
      * @param PromotionInterface $promotionId
      *
-     * @return CouponInterface
+     * @return PromotionCouponInterface
      *
      * @throws \InvalidArgumentException
      */

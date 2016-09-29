@@ -14,6 +14,6 @@ Feature: Denying usage of unexisting promotion coupon
     Scenario: Receiving no discount from unexisting coupon
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2011"
-        Then I should be notified that the promotion coupon is invalid
+        Then I should be notified that the coupon is invalid
         And my cart total should be "$100.00"
         And there should be no discount

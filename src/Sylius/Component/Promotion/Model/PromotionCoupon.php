@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class Coupon implements CouponInterface
+class PromotionCoupon implements PromotionCouponInterface
 {
     use TimestampableTrait;
 

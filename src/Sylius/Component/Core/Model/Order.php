@@ -20,7 +20,7 @@ use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\Order\Model\Order as BaseOrder;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
-use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
 use Webmozart\Assert\Assert;
 

@@ -25,7 +25,7 @@ final class CouponTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Coupon', ['sylius']);
+        $this->beConstructedWith('PromotionCoupon', ['sylius']);
     }
 
     function it_is_initializable()
@@ -62,7 +62,7 @@ final class CouponTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults([
-                'data_class' => 'Coupon',
+                'data_class' => 'PromotionCoupon',
                 'validation_groups' => ['sylius'],
             ])
             ->shouldBeCalled()

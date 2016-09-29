@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -69,8 +69,8 @@ class CouponToCodeType extends AbstractType implements DataTransformerInterface
             return '';
         }
 
-        if (!$coupon instanceof CouponInterface) {
-            throw new UnexpectedTypeException($coupon, CouponInterface::class);
+        if (!$coupon instanceof PromotionCouponInterface) {
+            throw new UnexpectedTypeException($coupon, PromotionCouponInterface::class);
         }
 
         return $coupon->getCode();

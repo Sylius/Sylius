@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Eligibility;
 
-use Sylius\Component\Core\Model\CouponInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
@@ -51,7 +51,7 @@ final class CouponsEligibilityChecker implements PromotionEligibilityCheckerInte
         }
 
         $coupon = $promotionSubject->getPromotionCoupon();
-        if (!$coupon instanceof CouponInterface) {
+        if (!$coupon instanceof PromotionCouponInterface) {
             return false;
         }
 

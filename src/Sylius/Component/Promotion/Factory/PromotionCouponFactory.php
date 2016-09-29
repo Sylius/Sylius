@@ -18,7 +18,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class CouponFactory implements CouponFactoryInterface
+final class PromotionCouponFactory implements PromotionCouponFactoryInterface
 {
     /**
      * @var FactoryInterface

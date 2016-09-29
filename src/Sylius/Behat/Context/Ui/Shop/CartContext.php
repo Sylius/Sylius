@@ -418,9 +418,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be notified that the promotion coupon has been applied
+     * @Then I should be notified that the coupon has been applied
      */
-    public function iShouldBeNotifiedThatPromotionCouponHasBeenApplied()
+    public function iShouldBeNotifiedThatCouponHasBeenApplied()
     {
         $this->notificationChecker->checkNotification(
             'Your promotion coupon has been applied.',
@@ -429,9 +429,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be notified that the promotion coupon is invalid
+     * @Then I should be notified that the coupon is invalid
      */
-    public function iShouldBeNotifiedThatPromotionCouponIsInvalid()
+    public function iShouldBeNotifiedThatCouponIsInvalid()
     {
         Assert::eq(
             $this->summaryPage->getPromotionCouponValidationMessage(),
@@ -440,9 +440,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be notified that the promotion coupon has expired
+     * @Then I should be notified that the coupon has expired
      */
-    public function iShouldBeNotifiedThatPromotionCouponHasExpired()
+    public function iShouldBeNotifiedThatCouponHasExpired()
     {
         Assert::eq(
             $this->summaryPage->getPromotionCouponValidationMessage(),
@@ -451,9 +451,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be notified that the promotion coupon has reached its usage limit
+     * @Then I should be notified that the coupon has reached its usage limit
      */
-    public function iShouldBeNotifiedThatPromotionCouponHasReachedItsUsageLimit()
+    public function iShouldBeNotifiedThatCouponHasReachedItsUsageLimit()
     {
         Assert::eq(
             $this->summaryPage->getPromotionCouponValidationMessage(),

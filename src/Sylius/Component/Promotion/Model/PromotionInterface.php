@@ -114,16 +114,16 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function setCouponBased($couponBased);
 
     /**
-     * @return Collection|CouponInterface[]
+     * @return Collection|PromotionCouponInterface[]
      */
     public function getCoupons();
 
     /**
-     * @param CouponInterface $coupon
+     * @param PromotionCouponInterface $coupon
      *
      * @return bool
      */
-    public function hasCoupon(CouponInterface $coupon);
+    public function hasCoupon(PromotionCouponInterface $coupon);
 
     /**
      * @return bool
@@ -131,14 +131,14 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function hasCoupons();
 
     /**
-     * @param CouponInterface $coupon
+     * @param PromotionCouponInterface $coupon
      */
-    public function addCoupon(CouponInterface $coupon);
+    public function addCoupon(PromotionCouponInterface $coupon);
 
     /**
-     * @param CouponInterface $coupon
+     * @param PromotionCouponInterface $coupon
      */
-    public function removeCoupon(CouponInterface $coupon);
+    public function removeCoupon(PromotionCouponInterface $coupon);
 
     /**
      * @return Collection|RuleInterface[]

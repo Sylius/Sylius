@@ -12,12 +12,12 @@
 namespace Sylius\Bundle\PromotionBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
+use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CouponRepository extends EntityRepository implements CouponRepositoryInterface
+class PromotionCouponRepository extends EntityRepository implements PromotionCouponRepositoryInterface
 {
     /**
      * {@inheritdoc}

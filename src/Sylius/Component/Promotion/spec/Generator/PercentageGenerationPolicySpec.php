@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
 use Sylius\Component\Promotion\Generator\InstructionInterface;
 use Sylius\Component\Promotion\Generator\PercentageGenerationPolicy;
-use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
+use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
 /**
  * @mixin PercentageGenerationPolicy
@@ -24,7 +24,7 @@ use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
  */
 final class PercentageGenerationPolicySpec extends ObjectBehavior
 {
-    function let(CouponRepositoryInterface $couponRepository)
+    function let(PromotionCouponRepositoryInterface $couponRepository)
     {
         $this->beConstructedWith($couponRepository, 0.5);
     }
@@ -41,7 +41,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
 
     function it_examine_possibility_of_coupon_generation(
         InstructionInterface $instruction,
-        CouponRepositoryInterface $couponRepository
+        PromotionCouponRepositoryInterface $couponRepository
     ) {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
@@ -52,7 +52,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
 
     function it_returns_possible_generation_amount(
         InstructionInterface $instruction,
-        CouponRepositoryInterface $couponRepository
+        PromotionCouponRepositoryInterface $couponRepository
     ) {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);

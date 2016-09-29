@@ -274,8 +274,8 @@ which is able to apply and revert single promotions on a subject implementing th
 
 .. _component_promotion_generator_coupon-generator:
 
-CouponGenerator
----------------
+PromotionCouponGenerator
+------------------------
 
 In order to automate the process of coupon generation the component provides us with a Coupon Generator.
 
@@ -285,7 +285,7 @@ In order to automate the process of coupon generation the component provides us 
 
     use Sylius\Component\Promotion\Model\Promotion;
     use Sylius\Component\Promotion\Generator\Instruction;
-    use Sylius\Component\Promotion\Generator\CouponGenerator;
+    use Sylius\Component\Promotion\Generator\PromotionCouponGenerator;
 
     $promotion = new Promotion();
 
@@ -295,7 +295,7 @@ In order to automate the process of coupon generation the component provides us 
      * @param RepositoryInterface    $repository
      * @param EntityManagerInterface $manager
      */
-    $generator = new CouponGenerator($repository, $manager);
+    $generator = new PromotionCouponGenerator($repository, $manager);
 
     //This will generate and persist 5 coupons into the database
     //basing on the instruction provided for the given promotion object
