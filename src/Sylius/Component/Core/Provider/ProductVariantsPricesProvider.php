@@ -13,7 +13,7 @@ namespace Sylius\Component\Core\Provider;
 
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -44,7 +44,7 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
     {
         $optionMap = [];
 
-        /** @var OptionValueInterface $option */
+        /** @var ProductOptionValueInterface $option */
         foreach ($variant->getOptions() as $option) {
             $optionMap[$option->getOption()->getCode()] = $option->getValue();
         }

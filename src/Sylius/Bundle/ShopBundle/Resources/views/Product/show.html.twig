@@ -23,7 +23,7 @@
         </div>
         <div class="ui segment">
             {% if variantsPrices is defined %}
-                {% include '@SyliusShop/Product/Show/_variantsPrices.html.twig' with { 'variantsPrices': variantsPrices } %}
+                {% include '@SyliusShop/Product/Show/_variantsPrices.html.twig' with { 'variantsPrices': sylius_product_variant_prices(product) } %}
             {% endif %}
             {% include '@SyliusShop/Product/Show/_inventory.html.twig' %}
         </div>
