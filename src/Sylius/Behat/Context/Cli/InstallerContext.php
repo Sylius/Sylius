@@ -177,6 +177,7 @@ final class InstallerContext implements Context
         $this->inputChoices['e-mail'] = 'test@admin.com';
         $this->inputChoices['password'] = 'pswd1$';
         $this->inputChoices['confirmation'] = $this->inputChoices['password'];
+        $this->inputChoices['localeCode'] = 'en_US';
     }
 
     /**
