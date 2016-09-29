@@ -14,14 +14,10 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\View\View;
 use Payum\Core\Registry\RegistryInterface;
-use Payum\Core\Security\GenericTokenFactoryInterface;
-use Payum\Core\Security\HttpRequestVerifierInterface;
-use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Sylius\Component\Order\SyliusCartEvents;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -34,78 +30,6 @@ use Webmozart\Assert\Assert;
 
 class OrderController extends ResourceController
 {
-    /**
-     * @param Request $request
-     * @param int $orderId
-     *
-     * @return Response
-     */
-    public function payAction(Request $request, $orderId)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $order = $this->repository->findOneForPayment($orderId);
-        Assert::notNull($order);
-
-        $payment = $order->getLastNewPayment();
-        $captureToken = $this->getTokenFactory()->createCaptureToken(
-            $payment->getMethod()->getGateway(),
-            $payment,
-            $configuration->getParameters()->get('after_pay[route]', null, true),
-            $configuration->getParameters()->get('after_pay[parameters]', [], true)
-        );
-
-        return $this->redirect($captureToken->getTargetUrl());
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function afterPayAction(Request $request)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $token = $this->getHttpRequestVerifier()->verify($request);
-        $this->getHttpRequestVerifier()->invalidate($token);
-
-        $status = new GetStatus($token);
-        $this->getPayum()->getGateway($token->getGatewayName())->execute($status);
-
-        $this->getOrderManager()->flush();
-
-        return $this->redirectToRoute(
-            $configuration->getParameters()->get('redirect[route]', null, true),
-            $configuration->getParameters()->get('redirect[parameters]', [], true)
-        );
-    }
-
-    /**
-     * @param Request $request
-     * @param mixed $orderId
-     * @param string $orderTokenValue
-     *
-     * @return Response
-     */
-    public function thankYouAction(Request $request, $orderId, $orderTokenValue)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        /** @var OrderInterface $order */
-        $order = $this->repository->findOneForPayment($orderId);
-        Assert::notNull($order);
-
-        if ($order->getTokenValue() !== $orderTokenValue) {
-            return $this->redirectToRoute(
-                $configuration->getParameters()->get('after_failure[route]', null, true),
-                $configuration->getParameters()->get('after_failure[parameters]', [], true)
-            );
-        }
-
-        return $this->render($configuration->getParameters()->get('template'), ['order' => $order]);
-    }
-
     /**
      * @param Request $request
      *
@@ -187,6 +111,39 @@ class OrderController extends ResourceController
                 'cart' => $resource,
             ])
             ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
+        ;
+
+        return $this->viewHandler->handle($configuration, $view);
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function thankYouAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $orderId = $request->getSession()->get('sylius_order_id', null);
+
+        if (null === $orderId) {
+            return $this->redirectHandler->redirectToRoute(
+                $configuration,
+                $configuration->getParameters()->get('after_failure[route]', 'sylius_shop_cart_summary', true),
+                $configuration->getParameters()->get('after_failure[parameters]', [], true)
+            );
+        }
+
+        $request->getSession()->remove('sylius_order_id');
+        $order = $this->repository->find($orderId);
+        Assert::notNull($order);
+
+        $view = View::create()
+            ->setData([
+                'order' => $order
+            ])
+            ->setTemplate($configuration->getParameters()->get('template'))
         ;
 
         return $this->viewHandler->handle($configuration, $view);
@@ -287,21 +244,5 @@ class OrderController extends ResourceController
     private function getPayum()
     {
         return $this->get('payum');
-    }
-
-    /**
-     * @return GenericTokenFactoryInterface
-     */
-    private function getTokenFactory()
-    {
-        return $this->getPayum()->getTokenFactory();
-    }
-
-    /**
-     * @return HttpRequestVerifierInterface
-     */
-    private function getHttpRequestVerifier()
-    {
-        return $this->getPayum()->getHttpRequestVerifier();
     }
 }
