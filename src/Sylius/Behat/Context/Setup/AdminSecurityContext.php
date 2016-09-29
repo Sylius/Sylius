@@ -71,7 +71,7 @@ final class AdminSecurityContext implements Context
 
         $this->securityService->logIn($user);
 
-        $this->sharedStorage->set('admin', $user);
+        $this->sharedStorage->set('administrator', $user);
     }
 
     /**
@@ -84,6 +84,6 @@ final class AdminSecurityContext implements Context
 
         $this->securityService->logIn($user);
 
-        $this->sharedStorage->set('admin', $user);
+        $this->sharedStorage->set('administrator', $user);
     }
 }

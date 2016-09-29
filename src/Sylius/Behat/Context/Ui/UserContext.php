@@ -93,7 +93,7 @@ final class UserContext implements Context
      */
     public function iTryDeletingMyOwnAccount()
     {
-        $admin = $this->sharedStorage->get('admin');
+        $admin = $this->sharedStorage->get('administrator');
 
         $this->customerShowPage->open(['id' => $admin->getId()]);
     }
