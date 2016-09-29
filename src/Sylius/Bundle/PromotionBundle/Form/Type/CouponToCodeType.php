@@ -56,15 +56,6 @@ class CouponToCodeType extends AbstractType implements DataTransformerInterface
             ->setDefaults([
                 'data_class' => null,
                 'label' => 'sylius.ui.code',
-                'validation_groups' => function (FormInterface $form) {
-                    $groups = ['sylius']; // Regular validation groups
-
-                    if ((bool) $form->getData()) { // Validate the coupon if it was sent
-                        $groups[] = 'sylius_promotion_coupon';
-                    }
-
-                    return $groups;
-                }
             ])
         ;
     }
