@@ -96,6 +96,24 @@ Accessing the Administration Panel
     Have a look at the ``/admin`` url, where you will find the administration panel.
     Remember that you have to be logged in as an administrator using the credentials provided while installing Sylius.
 
+How to start developing? - Project Structure
+--------------------------------------------
+
+After you have successfully gone through the installation process of **Sylius-Standard** you are probably going to start developing within the framework of Sylius.
+
+In the root directory of your project you will find these important subdirectories:
+
+* ``app/config/`` - here you will be adding the yaml configuration files including routing, security, state machines configurations etc.
+* ``app/logs/`` - these are the logs of your application
+* ``app/cache/`` - this is the cache of you project
+* ``src/`` - this is where you will be adding all you custom logic in the ``AppBundle``
+* ``web/`` - there you will be placing assets of your project
+
+.. tip::
+
+    As it was mentioned before we are basing on Symfony, that is why we've adopted its approach to architecture. Read more `in the Symfony documentation <http://symfony.com/doc/current/quick_tour/the_architecture.html>`_.
+    Read also about the `best practices while structuring your project <http://symfony.com/doc/current/best_practices/creating-the-project.html#structuring-the-application>`_.
+
 Contributing
 ------------
 
