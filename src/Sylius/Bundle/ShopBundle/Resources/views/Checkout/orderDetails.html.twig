@@ -5,6 +5,6 @@
     {% include '@SyliusShop/Common/Order/_summary.html.twig' %}
 
     {% if order.paymentState is not same as ('paid') %}
-        {{ render(url('sylius_shop_order_payment_method_update', {'orderId': order.id, 'lastNewPaymentId': lastNewPayment.id} )) }}
+        {{ render(url('sylius_shop_payment_method_update', {'paymentId': lastNewPayment.id, 'orderTokenValue': order.tokenValue} )) }}
     {% endif %}
 {% endblock %}

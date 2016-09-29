@@ -1,5 +1,4 @@
-{% set lastNewPayment = order.getLastNewPayment() %}
-{{ form_start(form, {'action': path('sylius_shop_order_payment_method_update', { 'orderId': order.id, 'lastNewPaymentId': lastNewPayment.id}), 'attr': {'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path('sylius_shop_payment_method_update', {'paymentId': payment.id, 'orderTokenValue': payment.getOrder().getTokenValue()}), 'attr': {'novalidate': 'novalidate'}}) }}
 <input type="hidden" name="_method" value="PUT" />
 <div class="ui segment">
     <div class="sub header">{{ 'sylius.ui.change_payment_method'|trans }}</div>

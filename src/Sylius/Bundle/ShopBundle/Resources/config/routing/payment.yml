@@ -1,5 +1,5 @@
 sylius_shop_payment_method_update:
-    path: /{paymentId}/change-payment-method
+    path: /{paymentId}/{orderTokenValue}/change-payment-method
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.payment:updateAction
@@ -11,4 +11,6 @@ sylius_shop_payment_method_update:
                 method: find
                 arguments: [$paymentId]
             redirect:
-                route: sylius_shop_thank_you
+                route: sylius_shop_order_pay
+                parameters:
+                    lastNewPaymentId: $paymentId
