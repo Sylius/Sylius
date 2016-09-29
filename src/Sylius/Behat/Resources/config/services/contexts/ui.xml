@@ -18,6 +18,13 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.ui.admin.locale" class="Sylius\Behat\Context\Ui\Admin\LocaleContext" scope="scenario">
+            <argument type="service" id="sylius.behat.page.admin.administrator.update" />
+            <argument type="service" id="sylius.behat.page.admin.dashboard" />
+            <argument type="service" id="translator" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.login" class="Sylius\Behat\Context\Ui\Admin\LoginContext" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
             <argument type="service" id="sylius.behat.page.admin.login" />

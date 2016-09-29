@@ -133,6 +133,11 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.transform.admin" class="Sylius\Behat\Context\Transform\AdminUserContext" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.transform.zone" class="Sylius\Behat\Context\Transform\ZoneContext" scope="scenario">
             <argument type="service" id="sylius.repository.zone" container="symfony" />
             <tag name="sylius.behat.context" />

@@ -99,6 +99,14 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasSubHeader($subHeader)
+    {
+        return $subHeader === trim($this->getElement('sub_header')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_dashboard';
@@ -118,6 +126,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'new_orders' => '#new-orders',
             'order_list' => '#orders',
             'total_sales' => '#total-sales',
+            'sub_header' => '.ui.header .content .sub.header',
         ]);
     }
 }

@@ -45,6 +45,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function changeLocale($localeCode)
+    {
+        $this->getElement('locale')->selectOption($localeCode);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -52,6 +60,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'enabled' => '#sylius_admin_user_enabled',
             'password' => '#sylius_admin_user_plainPassword',
             'username' => '#sylius_admin_user_username',
+            'locale' => '#sylius_admin_user_localeCode',
         ]);
     }
 }
