@@ -118,9 +118,9 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             throw new ElementNotFoundException($this->getSession(), 'Items element');
         }
 
-        $validationMessage = $foundElement->find('css', '.pointing');
+        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
         }
 
         return $validationMessage->getText();

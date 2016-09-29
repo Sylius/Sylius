@@ -210,9 +210,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
         $imageForm = $this->getLastImageElement();
 
-        $foundElement = $imageForm->find('css', '.pointing');
+        $foundElement = $imageForm->find('css', '.sylius-validation-error');
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.pointing');
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
         }
 
         return $foundElement->getText();

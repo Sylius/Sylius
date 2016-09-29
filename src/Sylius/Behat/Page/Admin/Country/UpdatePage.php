@@ -140,9 +140,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $provinceForm = $this->getLastProvinceElement();
 
-        $foundElement = $provinceForm->find('css', '.pointing');
+        $foundElement = $provinceForm->find('css', '.sylius-validation-error');
         if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.pointing');
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
         }
 
         return $foundElement->getText();
