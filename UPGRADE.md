@@ -3,6 +3,14 @@ UPGRADE
 
 ## From 0.19 to 1.0.0-alpha
 
+### Product and ProductBundle
+
+ * Renamed ``options`` property to ``optionValues`` in ``ProductVariant``
+
+### Currency and CurrencyBundle
+
+ * Removed ``EuropeanCentralBankImporter`` and ``OpenExchangeRatesImporter``
+
 ### Variation and VariationBundle
 
  * Merge ``Variation`` component and ``VariationBundle`` into ``Product`` component and ``ProductBundle``.
