@@ -2,36 +2,22 @@
 # (c) Paweł Jędrzejewski
 
 sylius_shop_order_pay:
-    path: /{orderId}/{orderTokenValue}/pay
+    path: /{lastNewPaymentId}/pay
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:payAction
+        _controller: sylius.controller.payum:prepareCaptureAction
         _sylius:
             redirect:
-                route: sylius_shop_thank_you
-                parameters:
-                    orderId: $orderId
-                    orderTokenValue: $orderTokenValue
-            after_pay:
                 route: sylius_shop_order_after_pay
-                parameters:
-                    orderId: $orderId
-                    orderTokenValue: $orderTokenValue
 
 sylius_shop_order_after_pay:
-    path: /{orderId}/{orderTokenValue}/after-pay
+    path: /after-pay
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:afterPayAction
-        _sylius:
-            redirect:
-                route: sylius_shop_thank_you
-                parameters:
-                    orderId: $orderId
-                    orderTokenValue: $orderTokenValue
+        _controller: sylius.controller.payum:afterCaptureAction
 
 sylius_shop_order_payment_method_update:
-    path: /{orderId}/{orderTokenValue}/change-payment-method
+    path: /{tokenValue}/change-payment-method
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.order:updateAction
@@ -39,21 +25,33 @@ sylius_shop_order_payment_method_update:
             permission: false
             template: SyliusShopBundle:Order:payment.html.twig
             form: sylius_checkout_select_payment
-            repository:
-                method: find
-                arguments: [$orderId]
             redirect:
-                route: sylius_shop_thank_you
+                route: sylius_shop_order_show_details
                 parameters:
-                    orderId: $orderId
-                    orderTokenValue: $orderTokenValue
+                    tokenValue: $tokenValue
+            repository:
+                method: findOneBy
+                arguments:
+                    [tokenValue: $tokenValue]
 
-sylius_shop_thank_you:
-    path: /{orderId}/{orderTokenValue}/thank-you
+sylius_shop_order_thank_you:
+    path: /thank-you
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:thankYouAction
         _sylius:
             template: SyliusShopBundle:Checkout:thankYou.html.twig
-            after_failure:
-                route: sylius_shop_homepage
+
+sylius_shop_order_show_details:
+    path: /{tokenValue}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:orderDetails.html.twig
+            grid: sylius_shop_account_order
+            section: shop_account
+            repository:
+                method: findOneBy
+                arguments:
+                    [tokenValue: $tokenValue]

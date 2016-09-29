@@ -88,8 +88,7 @@ sylius_shop_checkout_complete:
             redirect:
                 route: sylius_shop_order_pay
                 parameters:
-                    orderId: expr:service('sylius.context.cart').getCart().getId()
-                    orderTokenValue: expr:service('sylius.context.cart').getCart().getTokenValue()
+                    lastNewPaymentId: expr:service('sylius.context.cart').getCart().getLastNewPayment().getId()
             form:
                 type: sylius_checkout_complete
                 options:

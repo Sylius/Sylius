@@ -361,11 +361,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I want to browse thank you page for :order
+     * @When I want to browse thank you page
      */
-    public function iWantToBrowseThankYouPageForThisOrder(OrderInterface $order)
+    public function iWantToBrowseThankYouPageForThisOrder()
     {
-        $this->thankYouPage->open(['orderId' => $order->getId(), 'orderTokenValue' => $order->getTokenValue()]);
+        $this->thankYouPage->open();
     }
 
     /**

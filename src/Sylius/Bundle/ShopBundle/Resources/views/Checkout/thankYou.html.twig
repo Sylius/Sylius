@@ -5,30 +5,13 @@
     <div class="ui grid">
         <div class="center aligned sixteen wide column">
             <h1 class="ui icon header">
-                {% set lastPayment = order.getLastNewPayment() %}
-                {% if order.paymentState is same as('paid') or lastPayment.getMethod.getGateway is same as('offline') %}
+                {% set lastPayment = order.payments.last() %}
                     <i class="circular rocket icon"></i>
                     <div class="content" id="sylius-thank-you">
                         {{ 'sylius.ui.thank_you'|trans }}
                         <div class="sub header">{{ 'sylius.ui.placed_an_order'|trans }}</div>
+                        <a href="{{ path('sylius_shop_order_show_details', { 'tokenValue': order.tokenValue }) }}">{{ 'sylius.ui.show_order_details'|trans }}</a>
                     </div>
-                {% elseif lastPayment.getMethod.getGateway is same as('offline') %}
-                    <i class="circular rocket icon"></i>
-                    <div class="content" id="sylius-thank-you">
-                        {{ 'sylius.ui.thank_you'|trans }}
-                        <div class="sub header">{{ 'sylius.ui.placed_an_order'|trans }}</div>
-                        {{ render(url('sylius_shop_order_payment_method_update', {'orderId': order.id} )) }}
-                    </div>
-                {% else %}
-                    <i class="circular payment icon"></i>
-                    <div class="content">
-                        {{ render(url('sylius_shop_order_payment_method_update', {'orderId': order.id} )) }}
-                        {{ 'sylius.ui.payment_ready_to_pay'|trans }}
-                        <a href="{{ path('sylius_shop_order_pay', {'orderId': order.id}) }}" id="sylius-pay-link" class="ui primary button">
-                            {{ 'sylius.ui.pay'|trans }}
-                        </a>
-                    </div>
-                {% endif %}
                 {% if lastPayment.method.instructions is not null %}
                     <div id="sylius-payment-method-instructions" class="sub header">
                         {{ lastPayment.method.instructions }}

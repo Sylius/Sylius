@@ -21,4 +21,5 @@ Feature: Changing the method after order confirmation
         And I have cancelled my PayPal payment
         When I change payment method to "Offline"
         And I confirm my changes
+        And I try to pay again
         Then I should see the thank you page
