@@ -68,7 +68,6 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $variant->getOnHold()->willReturn(10);
         $variant->getOnHand()->willReturn(10);
 
-
         $variant->getName()->willReturn('Red Skirt');
 
         $variant->setOnHold(0)->shouldBeCalled();
@@ -169,5 +168,64 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $variant->getName()->willReturn('Red Skirt');
         
         $this->shouldThrow(\InvalidArgumentException::class)->during('sell', [$order]);
+    }
+
+    function it_does_nothing_if_variant_is_not_tracked_during_cancelling(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $variant
+    ) {
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
+        $order->getItems()->willReturn([$orderItem]);
+        $orderItem->getVariant()->willReturn($variant);
+        $variant->isTracked()->willReturn(false);
+
+        $variant->setOnHold(Argument::any())->shouldNotBeCalled();
+
+        $this->cancel($order);
+    }
+
+    function it_does_nothing_if_variant_is_not_tracked_and_order_is_paid_during_cancelling(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $variant
+    ) {
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_PAID);
+        $order->getItems()->willReturn([$orderItem]);
+        $orderItem->getVariant()->willReturn($variant);
+        $variant->isTracked()->willReturn(false);
+
+        $variant->setOnHand(Argument::any())->shouldNotBeCalled();
+
+        $this->cancel($order);
+    }
+
+    function it_does_nothing_if_variant_is_not_tracked_during_holding(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $variant
+    ) {
+        $order->getItems()->willReturn([$orderItem]);
+        $orderItem->getVariant()->willReturn($variant);
+        $variant->isTracked()->willReturn(false);
+
+        $variant->setOnHold(Argument::any())->shouldNotBeCalled();
+
+        $this->hold($order);
+    }
+
+    function it_does_nothing_if_variant_is_not_tracked_during_selling(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        ProductVariantInterface $variant
+    ) {
+        $order->getItems()->willReturn([$orderItem]);
+        $orderItem->getVariant()->willReturn($variant);
+        $variant->isTracked()->willReturn(false);
+
+        $variant->setOnHold(Argument::any())->shouldNotBeCalled();
+        $variant->setOnHand(Argument::any())->shouldNotBeCalled();
+
+        $this->sell($order);
     }
 }
