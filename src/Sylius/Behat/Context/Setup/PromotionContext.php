@@ -157,12 +157,32 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(this promotion coupon) expires tomorrow$/
+     */
+    public function thisPromotionCouponExpiresTomorrow(CouponInterface $coupon)
+    {
+        $coupon->setExpiresAt(new \DateTime('tomorrow'));
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this promotion coupon) has already reached its usage limit$/
      */
     public function thisPromotionCouponHasReachedItsUsageLimit(CouponInterface $coupon)
     {
         $coupon->setUsed(42);
         $coupon->setUsageLimit(42);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this promotion coupon) can be used (\d+) times?$/
+     */
+    public function thisPromotionCouponCanBeUsedNTimes(CouponInterface $coupon, $usageLimit)
+    {
+        $coupon->setUsageLimit($usageLimit);
 
         $this->objectManager->flush();
     }
