@@ -26,7 +26,7 @@ final class PromotionCouponUsageLimit extends Constraint
      */
     public function getTargets()
     {
-        return [self::PROPERTY_CONSTRAINT];
+        return [self::PROPERTY_CONSTRAINT, self::CLASS_CONSTRAINT];
     }
 
     /**
