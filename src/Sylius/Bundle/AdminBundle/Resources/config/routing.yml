@@ -1,12 +1,5 @@
-sylius_admin_root:
-    path: /
-    defaults:
-        _controller: FrameworkBundle:Redirect:redirect
-        route: sylius_admin_dashboard
-        permanent: true
-
 sylius_admin_dashboard:
-    path: /dashboard
+    path: /
     defaults:
         _controller: sylius.controller.admin.dashboard:indexAction
 
