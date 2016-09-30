@@ -11,4 +11,6 @@ sylius_shop_payment_method_update:
                 method: find
                 arguments: [$paymentId]
             redirect:
-                route: sylius_shop_thank_you
+                route: sylius_shop_order_pay
+                parameters:
+                    lastNewPaymentId: $paymentId

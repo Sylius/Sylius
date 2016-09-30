@@ -242,7 +242,7 @@ final class OrderContext implements Context
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
-        $payment = $order->getLastPayment();
+        $payment = $order->getLastNewPayment();
         $payment->setMethod($paymentMethod);
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
@@ -282,7 +282,7 @@ final class OrderContext implements Context
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
-        $payment = $order->getLastPayment();
+        $payment = $order->getLastNewPayment();
         $payment->setMethod($paymentMethod);
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);

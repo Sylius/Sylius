@@ -80,7 +80,8 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @Given /^I confirm my order with paypal payment$/
+     * @When /^I confirm my order with paypal payment$/
+     * @Given /^I have confirmed my order with paypal payment$/
      */
     public function iConfirmMyOrderWithPaypalPayment()
     {

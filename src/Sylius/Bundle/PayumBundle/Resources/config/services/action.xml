@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Generic -->
+        <service id="sylius.payum.action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
+            <tag name="payum.action" all="true" alias="sylius.capture_payment" />
+        </service>
+        <service id="sylius.payum.action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">
+            <tag name="payum.action" all="true" />
+        </service>
+
+        <!-- PayPal -->
+        <service id="sylius.payum.action.convert_payment_to_paypal_express" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentToPaypalExpressAction">
+            <argument type="service" id="sylius.invoice_number_generator" />
+            <argument type="service" id="sylius.currency_converter" />
+            <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.convert_payment" />
+        </service>
+        <service id="sylius.payum.paypal_express_checkout.action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ResolveNextRouteAction">
+            <tag name="payum.action" factory="paypal_express_checkout" aliast="sylius.paypal_express_checkout_resolve_next_route" />
+        </service>
+
+        <!-- Offline -->
+        <service id="sylius.payum.offline.action.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentToOfflineAction">
+            <tag name="payum.action" factory="offline" alias="sylius.convert_payment" />
+        </service>
+        <service id="sylus.payum.offline.action.status" class="Sylius\Bundle\PayumBundle\Action\Offline\StatusAction">
+            <tag name="payum.action" factory="offline" alias="sylius.offline_status"/>
+        </service>
+        <service id="sylius.payum.offline.action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Offline\ResolveNextRouteAction">
+            <tag name="payum.action" factory="offline" aliast="sylius.offline_resolve_next_route" />
+        </service>
+    </services>
+</container>

@@ -59,7 +59,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
             return;
         }
 
-        $newPayment = $order->getLastPayment(PaymentInterface::STATE_NEW);
+        $newPayment = $order->getLastNewPayment();
         if (null !== $newPayment) {
             $newPayment->setCurrencyCode($order->getCurrencyCode());
             $newPayment->setAmount($order->getTotal());
@@ -84,7 +84,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         if (null !== $lastPayment) {
             $paymentMethod = $lastPayment->getMethod();
         }
-        
+
         if (null === $paymentMethod) {
             return;
         }
@@ -96,11 +96,26 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     /**
      * @param OrderInterface $order
      *
-     * @return null|PaymentInterface
+     * @return bool|PaymentInterface
      */
     private function getLastPayment(OrderInterface $order)
     {
-        return $order->getLastPayment(PaymentInterface::STATE_CANCELLED) ?: $order->getLastPayment(PaymentInterface::STATE_FAILED);
+        return $this->getLastPaymentWithState($order, PaymentInterface::STATE_CANCELLED) ?: $this->getLastPaymentWithState($order, PaymentInterface::STATE_FAILED);
+    }
+
+    /**
+     * @param CoreOrderInterface $order
+     * @param string $state
+     *
+     * @return null|PaymentInterface
+     */
+    private function getLastPaymentWithState(CoreOrderInterface $order, $state)
+    {
+        $lastPayment = $order->getPayments()->filter(function (PaymentInterface $payment) use ($state) {
+            return $payment->getState() === $state;
+        })->last();
+
+        return $lastPayment !== false ? $lastPayment : null;
     }
 
     /**

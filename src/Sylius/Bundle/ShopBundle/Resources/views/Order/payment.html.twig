@@ -14,7 +14,7 @@
                 {{ form_label(payment_method_choice) }}
             </div>
         {% endfor %}
-        <button type="submit" class="ui right floated button"> {{ 'sylius.ui.save'|trans }} </button>
+        <button type="submit" class="ui right floated button" id="sylius-pay-link"> {{ 'sylius.ui.pay'|trans }} </button>
     </div>
     {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}

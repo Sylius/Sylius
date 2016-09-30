@@ -40,6 +40,10 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sylius.inventory.order_inventory_operator", "hold"]
                     args: ["object"]
+                sylius_assign_token:
+                    on: ["complete"]
+                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
+                    args: ["object"]
 
     sylius_order_shipping:
         class: "%sylius.model.order.class%"
@@ -161,7 +165,6 @@ winzou_state_machine:
                     on: ["cancel"]
                     do: ["@sylius.inventory.order_inventory_operator", "cancel"]
                     args: ["object"]
-
 
     sylius_shipment:
         callbacks:

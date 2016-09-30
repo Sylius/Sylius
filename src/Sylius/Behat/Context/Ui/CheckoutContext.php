@@ -24,6 +24,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -357,6 +358,14 @@ final class CheckoutContext implements Context
     public function iDecideToChangeMyShippingMethod()
     {
         $this->selectPaymentPage->changeShippingMethod();
+    }
+
+    /**
+     * @When I want to browse thank you page
+     */
+    public function iWantToBrowseThankYouPageForThisOrder()
+    {
+        $this->thankYouPage->open();
     }
 
     /**
@@ -950,11 +959,6 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeAbleToPayAgain()
     {
-        Assert::true(
-            $this->thankYouPage->isOpen(),
-            'I should be on thank you page, but I am not.'
-        );
-
         Assert::true(
             $this->thankYouPage->hasPayAction(),
             'I should be able to pay, but I am not able to.'

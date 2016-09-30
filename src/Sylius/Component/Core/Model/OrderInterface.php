@@ -169,11 +169,9 @@ interface OrderInterface extends
     public function getLastShipment();
 
     /**
-     * @param $state
-     *
      * @return null|PaymentInterface
      */
-    public function getLastPayment($state = PaymentInterface::STATE_NEW);
+    public function getLastNewPayment();
 
     /**
      * @return bool
@@ -194,4 +192,14 @@ interface OrderInterface extends
      * @return int
      */
     public function getOrderPromotionTotal();
+
+    /**
+     * @param string $tokenValue
+     */
+    public function setTokenValue($tokenValue);
+
+    /**
+     * @return string
+     */
+    public function getTokenValue();
 }
