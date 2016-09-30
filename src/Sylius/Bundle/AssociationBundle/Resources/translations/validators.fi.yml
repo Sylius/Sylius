@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    association_type:
+        name:
+            not_blank: Syötä yhdistyksen nimi.
+            min_length: 'Yhdistyksen nimen on oltava vähintään 1 merkin pituinen.|Yhdistyksen nimen on oltava vähintään {{ limit }} merkkiä pitkä.'
+            max_length: 'Yhdistyksen nimi saa olla korkeintaan 1 merkin mittainen.|Yhdistyksen nimi saa olla korkeintaan {{ limit }} merkkiä pitkä.'
+        code:
+            unique: Tällä koodilla on jo yhdistys.
+            not_blank: Syötä yhdistyksen koodi.

@@ -5,8 +5,34 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    attributes: Ominaisuudet
+                    header: Luettelo
+                    options: Asetukset
+                    products: Tuotteet
+                    taxons: Veroryhmät
                 configuration:
                     admin_users: Ylläpitäjät
+                    channels: Kanavat
                     countries: Maat
+                    currencies: Valuutat
+                    header: Asetukset
+                    locales: Alueet
+                    payment_methods: Maksutavat
+                    shipping_methods: Toimitustavat
+                    tax_categories: Veroluokat
+                    tax_rates: Veroasteet
+                    zones: Vyöhykkeet
+                marketing:
+                    header: Markkinointi
+                    promotions: Kampanjat
+                customers:
+                    customers: Asiakkaat
+                    header: Asiakas
+                sales:
+                    header: Myynnit
+                    orders: Tilaukset
                 content:
                     header: Sisältö
+                    static_contents: Vakiosisältö
+                    routes: Reitit

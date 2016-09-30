@@ -30,4 +30,5 @@ sylius:
             description: Popis
             enabled: Zapnuté?
             gateway: Brána
+            instructions: Inštrukcie
             name: Názov

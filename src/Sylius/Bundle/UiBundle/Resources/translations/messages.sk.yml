@@ -16,6 +16,7 @@ sylius:
         abandoned: Opustený
         about: O nás
         access_token: Prístupový token
+        access_your_store_account_or_create_a_new_one: Prihláste sa do vašeho účtu, alebo si vytvorte nový účet
         account_credentials: Prihlasovacie údaje
         account_panel_outline: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore
         action: Akcia
@@ -42,15 +43,20 @@ sylius:
         adding_new_email: Pridánie nového e-mailu
         adding_new_locale: Pridávam nový jazyk
         additional_information: Doplňujúce informácie
+        address: Adresa
+        addressing: Adresy
         addressing_step: Doručenie
         adjustments: Úpravy
         administration: Administrácia
         administration_dashboard: Administračný panel
         administration_panel_login: Prihásenie do administračného rozhrania
+        admin_users: Administrátory
         all: Všetky
         all_your_addresses: Všetky vaše adresy
         amount: Suma
         an_error_occurred: Vyskytla sa chyba
+        api: API
+        apply_coupon: Použiť kupón
         are_your_sure_you_want_to_perform_this_action: Ste si istý, že chcete vykonať túto akciu?
         association: Priradenia
         association_types: Typy priradenia
@@ -61,8 +67,12 @@ sylius:
         availability: Dostupnosť
         available_for_channels: Dostupné pre kanály
         available_on: Dostupný od
+        available_on_hand: Dostupné na sklade
         available_until: Dostupný do
+        average_order_value: Priemerná hodnota objednávky
+        awaiting_payment: Čaká na zaplatenie
         back: Späť
+        back_to_store: Späť do obchodu
         backorder: Predobjednať
         backordered: Predobjednané
         balance_due: Nedoplatok
@@ -75,15 +85,22 @@ sylius:
         calculator: Spôsob vypočtu
         cancel: Zrušiť
         cancelled: Zrušená
+        cart: Košík
         cart_locked: Košík uzamknutý
         cart_summary: Obsah košíka
         categorization: Kategórie
         category: Kategória
         category_requirements: Požiadavky pre kategóriu
+        change_address: Zmena adresy
+        change_file: Zmeniť súbor
+        change_password: Zmena hesla
+        change_payment_method: Zmeniť spôsob platby
+        change_shipping_method: Zmeniť spôsob dopravy
         change_your_password: Zmena hesla
         channel: Kanál
         channels: Kanály
         charges_and_taxes: Poplatky a dane
+        checking_out_as: Nakupujúci ako
         checkout: Košík
         choose_file: Vybrať súbor
         city: Mesto
@@ -93,13 +110,16 @@ sylius:
         color: Farba
         comment: Komentár
         company: Spoločnosť
+        complete: Dokončené
         completed: Dokončená
+        configurable_product: Nastaviteľný produkt
         configuration: Konfigurácia
         configure_channels_available_in_your_store: Nastavte dostupné kanály vo vašom obchode
         confirm_your_action: Potvrďte vašu akciu
         confirmation: Potvrdenie
         confirmation_title: Potvrdenie
         confirmed: Potvrdený
+        contact_us: Kontaktujte nás
         contain_variants: Obsahuje produktové varianty
         contains: Obsahuje
         content: Obsah
@@ -111,6 +131,8 @@ sylius:
         coupons: Kupóny
         create: Vytvoriť
         create_a_new_address: Vytvoriť novú adresu
+        create_a_new_customer_account: Vytvoriť nový účet
+        create_an_account: Vytvoriť účet
         create_association_type: Vytvoriť typ priradenia
         create_country: Vytvoriť krajinu
         create_currency: Vytvoriť menu
@@ -166,8 +188,10 @@ sylius:
         current_stock: Položiek na sklade
         customer: Zákazník
         customer_can_login_to_the_store: Zákazník sa môže prihlásiť do obchodu
+        customer_care: Starostlivosť o zákazníkov
         customer_details: Detail zákazníka
         customer_id: ID zákazníka
+        customer_login: Prihlásenie
         customer_not_notified: Upozornenie nebolo poslané
         customer_notified: Upozornenie poslané
         customer_orders: Objednávky zákazníka
@@ -188,6 +212,7 @@ sylius:
         delete: Odstrániť
         delete_image: Odstrániť obrázok
         deleted: Zmazané
+        delivery_and_shipping: Doručenie a doprava
         description: Popis
         details: Podrobnosti
         disable: Vypnúť
@@ -195,6 +220,7 @@ sylius:
         discount: Zľava
         discounted_unit_price: Zľavnená jednotková cena
         edit: Upraviť
+        edit_admin_user: Upraviť administrátora
         edit_association_type: Upraviť typ priradenia
         edit_channel: Úprava kanálu
         edit_country: Upraviť krajinu
@@ -205,14 +231,21 @@ sylius:
         edit_locale: Upraviť jazyk
         edit_my_address: Upraviť moju adresu
         edit_payment_method: Úprava spôsobu platby
+        edit_product: Upraviť produkt
         edit_product_attribute: Upraviť produktovú vlastnosť
         edit_product_option: Upraviť produktovú voľbu
+        edit_product_variant: Upraviť produktový variant
         edit_promotion: Upraviť propagáciu
+        edit_promotion_coupon: Upraviť zľavový kupón
         edit_report: Úprava reportu
+        edit_route: Úpraviť URL cestu
+        edit_shipping_address: Upraviť dodaciu adresu
         edit_shipping_method: Úpraviť spôsob doručenia
+        edit_static_content: Upraviť statický obsah
         edit_tax_category: Úprava daňovej kategórie
         edit_tax_rate: Upraviť sadzbu dane
         edit_taxon: Úpraviť kategóriu
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Úpraviť položky, uplatniť kupón alebo prejsť na objednávku
         edit_your_personal_information: Upraviť osobné údaje
         edit_zone: Upraviť zónu
         editing_attribute: Úprava vlastnosti
@@ -248,7 +281,7 @@ sylius:
         editing_user: Úprava používateľa
         editing_variant: Upravujem variantu
         editing_zone: Upravujem zónu
-        email: Email
+        email: E-mail
         email_templates: Šablóny e-mailov
         emails: E-maily
         empty: Prázdne
@@ -258,19 +291,25 @@ sylius:
         ends_at: Koniec
         ends_with: Končí na
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore
+        enter_your_code: Zadajte Váš kód
         equal: Rovná sa
         error: Chyba
         exchange_rate: Výmenný kurz
         exclusive: Exkluzívne
         existing_customer: Existujúci zákazník
+        expiration_and_usage_limits: Expirácia a limit použitia
         expires_at: Platnosť do
         extra_information: Ďalšie informácie
         extra_notes: Ďalšie poznámky
         failed: Neúspešná
+        faqs: Často kladené otázky
+        female: Žena
         filter: Filter
+        filters: Filtre
         first_name: Meno
         forgot_password: Zabudli ste heslo
         fulfill: Vybaviť
+        fulfilled: Vybavené
         gateway: Brána
         general_info: Všeobecné informácie
         general_settings: Všeobecné nastavenia
@@ -284,12 +323,15 @@ sylius:
         groups: Zákaznícke skupiny
         guest: Návštevník
         guest_customer: Návšetvník
+        have_an_account_already: Už máte účet
+        hello: Ahoj
         hello_name: 'Ahoj <b>%name%</b>'
         hide_deleted: Skryť odstránené
         home: Úvod
         hostname: Hostname
         id: ID
         identifier: Identifikátor
+        if_you_have_an_account_sign_in_with_your_email_address: Ak máte konto, prihláste sa pomocou e-mailovej adresy
         image: Obrázok
         images: Obrázky
         imagine_blocks: Obrazové bloky
@@ -319,8 +361,11 @@ sylius:
         last_week_revenue: Príjmy za minulý týždeň
         lastname: Priezvisko
         latest_orders: Posledné objednávky
+        latest_products: Najnovšie produkty
         links: Odkazy
         list_coupons: Zoznam kupónov
+        list_variants: Zoznam variantov
+        locale: Jazyk
         locales: Jazyky
         lock: Zamknúť
         locked: Zamknuté
@@ -330,8 +375,10 @@ sylius:
         login_sylius_store: 'Prihlásenie do <small>Sylius obchodu</small>'
         logout: Odhlásiť
         main_taxon: Hlavná kategória
+        male: Muž
         manage: Správa
         manage_adjustments: Spravovať úpravy
+        manage_admin_users: Správovať administrátorov
         manage_attributes: Správa vlastnosti
         manage_attributes_of_your_products: Spravovať vlastnosti vašich produktov
         manage_categorization_of_your_products: Spravovať kategorizáciu produktov
@@ -362,9 +409,13 @@ sylius:
         manage_tax_rates: Spravovať sadzby dane
         manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov
         manage_users: Správa užívateľov
+        manage_variants: Spravovať varianty
         manage_your_customers: Spravovať vašich zákazníkov
+        manage_your_personal_information_and_preferences: Spravovať svoje osobné údaje a nastavenia
+        manage_your_product_catalog: Spravovať Váš produktový katalóg
         manage_zones: Spravovať zóny
         marketing: Marketing
+        media: Média
         members: Členovia
         menu_nodes: Menu elementy
         menus: Menu
@@ -378,14 +429,17 @@ sylius:
         n_a: Nie je k dispozícii
         name: Názov
         new: Nová
+        new_admin_user: Nový administrátor
         new_channel: Nový kanál
         new_comment_posted_on_order: Nová poznámka k objednávke
         new_country: Nová krajina
         new_coupon: Nový kupón
         new_currency: Nová mena
         new_customer: Nový zákazník
+        new_customers: Noví zákazníci
         new_locale: Nový jazyk
         new_order: Nová objednávka
+        new_orders: Nové objednávky
         new_password: Nové heslo
         new_payment: Nová platba
         new_payment_method: Nový spôsob platby
@@ -395,10 +449,13 @@ sylius:
         new_product_option: Nová produktová voľba
         new_product_variant: Nová varianta produktu
         new_promotion: Nové propagácia
+        new_promotion_coupon: Nový zľavový kupón
         new_review: Nová recenzia
         new_role: Nová rola
+        new_route: Nová URL cesta
         new_shipping_category: Nová kategória doručenia
         new_shipping_method: Nový spôsob doručenia
+        new_static_content: Nový statický obsah
         new_tax_category: Nová daňová kategoria
         new_tax_rate: Nová sadzba dane
         new_taxon: Nová kategória
@@ -406,12 +463,14 @@ sylius:
         new_zone: Nová zóna
         newest_products: Najnovšie produkty
         next: Ďalej
+        no_label: Nie
         no_account: Žiadny účet
         no_association_types_to_display: Neexistujú žiadne typy priradení
         no_comment: Žiadne komentáre
         no_default_billing_address: Nemáte predvolenú fakturačnú adresu
         no_default_shipping_address: Nemáte predvolenú doručovaciu adresu
         no_description: Žiadny popis
+        no_payment_methods_available: V súčasnosti neexistujú žiadne spôsoby platby dostupné pre vašu objednávku
         no_pricing_configuration: Neexistuje cenová konfigurácia
         no_promotion: Nie sú uplatnené žiadne akcie
         no_requirement: Žiadne podmienky
@@ -419,6 +478,7 @@ sylius:
         no_results_to_display: Neexistujú žiadne vysledky na zobrazenie
         no_shipping_category: Žiadna kategória doručenia
         no_shipping_charges: Nie sú uplatnené žiadne poplatky za dopravu
+        no_shipping_methods_available: V súčasnosti neexistujú žiadne spôsoby dopravy dostupné pre vašu dodaciu adresu
         no_short_description: '<i>Žiadny stručný popis</i>'
         no_sku: Žiadny skladový kód (SKU)
         no_tax_category: Žiadna daňová kategória
@@ -428,6 +488,9 @@ sylius:
         not_contains: Neobsahuje
         not_empty: Nie je prázdny
         not_in: Nie je v
+        not_verified: Neoverené
+        not_tracked: Nesledovať
+        notes: Poznámky
         notify_customer: Upozorniť zákazníka
         number: Číslo
         number_of_orders: Počet objednávok
@@ -440,9 +503,11 @@ sylius:
         order_comments: Poznámky k objednávke
         order_confirmation_name: Potvrdenie objednávky
         order_details: Detaily Vašej objednávky
+        order_history: História objednávok
         order_item_product: Položka
         order_state: Stav objednávky
         order_summary: Prehľad objednávky
+        order_total: Celková cena objednávky
         order_value: Cena objednávky
         ordered: Objednané
         orders: Objednávky
@@ -451,7 +516,9 @@ sylius:
         overview_of_your_store: Prehľad Vášho obchodu
         page: Stránka
         pages: Stránky
+        paid: Zaplatené
         parent: Nadradená kategória
+        partially_paid: Čiastočne zaplatené
         partially_shipped: Čiastočne dodané
         password: Heslo
         payment: Platba
@@ -459,13 +526,18 @@ sylius:
         payment_method: Spôsob platby
         payment_methods: Spôsoby platby
         payment_mode: Spôsob platby
+        payment_ready_to_pay: Môžete uskutočniť Vašu platbu
         payment_state: Stav platby
         payments: Platby
+        pay: Zaplatiť
+        pay_again: Kliknite zaplaiť pre zopakovanie platby
         pending: Čakajúca
         per_customer_usage_limit: Obmedzenie použitia pre zákazníka
         permissions: Oprávnenia
+        personal_information: Osobné údaje
         phone_number: Telefónne číslo
         place_order: Potvrdiť objednávku
+        placed_an_order: Úspešne ste zrealizovali objednávku.
         placed_at: Vytvorené
         postcode: PSČ
         powered_by: Vytvorené v systéme
@@ -474,6 +546,7 @@ sylius:
         price: Cena
         pricing: Cenník produktov
         priority: Priorita
+        privacy_policy: Zásady ochrany osobných údajov
         process_your_orders: Spracovať vaše objednávky
         processing: Spracúvava sa
         product: Produkt
@@ -486,6 +559,7 @@ sylius:
         product_options: Produktové volby
         product_review: Produktová recenzia
         product_reviews: Produktové recenzie
+        product_variants: Produtové varianty
         products: Produkty
         products_categorized_as_name: 'Produkty kategorizované ako "%name%"'
         products_categorized_under_taxon_taxon: 'Produkty <small>kategorizované pod "%taxon%"</small>'
@@ -494,6 +568,7 @@ sylius:
         promotion_configuration: Nastavenie propagácii
         promotion_coupons: Kupóny
         promotion_details: Detail propagácie
+        promotion_discount: Zľava
         promotion_information: Informacie o propagácii
         promotion_total: Zľavy celkom
         promotions: Akcie
@@ -513,13 +588,17 @@ sylius:
         refunded: Vrátené peniaze
         register: Registrovať
         register_button: Registrovať
+        register_in_the_store: Zaregistrujte sa
+        registered_customers: Registrovaní používatelia
         registration_create_an_account_in_store: 'Registráciá, <small>vytvoriť účet v obchode</small>'
         registration_date: Dátum registrácie
         release_inventory: Uvolnenie skladových položkiek
         remember_me: Zapamätať si ma
         remove_attribute: Odstrániť vlastnosť
+        repeat_new_password: Zopakujte nové heslo
         report_details: Detail reportu
         reports: Reporty
+        reserved: Rezervované
         reset: Obnoviť
         reset_button: Obnoviť
         reset_password: Obnoviť heslo
@@ -527,6 +606,7 @@ sylius:
         retail_price: Predajná cena
         return: Vrátiť
         returned: Vrátená
+        returns_policy: Reklamačný poriadok
         revert: Vrátiť spať
         review_details: Detail recenzie
         reviews: Recenzie
@@ -540,16 +620,22 @@ sylius:
         scope: Rozsah
         search: Vyhľadať
         security_settings: Bezpečnostné nastavenia
+        select_taxon: Vyberte kategóriu
+        set_a_new_password_for_your_account: Nastaviť nové heslo k vašemu účtu
         set_as_default_billing_address: Nastaviť ako predvolenú fakturačnú adresu
         set_as_default_shipping_address: Nastaviť ako predvolenú dodaciu adresu
         ship: Dodanie
+        ship_to: Odoslať do
+        shipment: Zásielka
         shipment_confirmation_name: Potvrdenie odoslania zásielky
         shipment_details: Detaily zásielky
         shipment_mode: Spôsob doručenia
         shipment_state: Stav zásielky
         shipments: Zásielky
         shipped: Odoslané
+        shipping: Doručenie
         shipping_address: Adresa doručenia
+        shipping_and_payment_methods: Dodacie a platobné metódy
         shipping_categories: Kategórie doručenia
         shipping_category: Kategória doručenia
         shipping_charges: Poplatky za dopravu
@@ -559,15 +645,18 @@ sylius:
         shipping_state: Stav dodávky
         shipping_total: Doprava celkom
         shop_by: Nakupovať podľa
+        shop_by_brand: Nakupovať podľa značky
         show: Zobraziť
         show_all: Zobraziť všetky
         show_deleted: Zobraziť odstránené
         show_in_store: Zobraziť v obchode
         show_metadata: Zobraziť metadáta
         sign_in: Prihlásiť
+        sign_in_here: Prihláste sa
         sign_in_to_the_store_or_create_new_account: 'Prihlásiť sa do obchodu <small>alebo vytvoriť nový účet</small>'
         sign_out: Odhlásiť
         simple_blocks: Obsahové bloky
+        simple_product: Jednoduchý produkt
         sku: Skladový kód (SKU)
         slideshow: Prezentácia
         slideshow_blocks: Prezentáčné (slideshow) bloky
@@ -575,16 +664,19 @@ sylius:
         starts_at: Začiatok
         starts_with: Začína na
         state: Stav
+        static_contents: Statický obsah
         status: Stav
         street: Ulica
         string_blocks: Textové bloky
         subject: Predmet
+        subscribed_to_newsletter: Prihlásiť sa k odberu noviniek
         subtotal: Medzisúčet
         success: Úspech
         summary: Zhrnutie
         support: Podpora
         sylius_logo: Sylius
         tax: Daň
+        tax_categories: Daňové kategórie
         tax_category: Daňová kategória
         tax_rate_details: Podrobnosti sadzby dane
         tax_rates: Sadzby dane
@@ -592,7 +684,10 @@ sylius:
         taxation_categories: Daňové kategórie
         taxation_settings: Nastavenie zdaňovania
         taxes: Dane
+        taxonomy: Kategorizácia
         taxons: Kategórie
+        terms_and_conditions: Podmienky používania
+        thank_you: Ďakujeme Vám!
         thank_you_for_your_order: Ďakujeme za vašu objednávku
         theme: Téma
         there_are_no_attributes_configured: Nie sú nakonfigurované žiadne vlastnosti
@@ -654,6 +749,7 @@ sylius:
         unlimited: Neobmedzené
         unlock: Odomknúť
         update: Upraviť
+        update_cart: Aktualizovať košík
         update_product_association_type: Upraviť typ produktového priradenia
         updating_tax_rate: Úprava sadzby dane
         usage: Použitie
@@ -667,7 +763,10 @@ sylius:
         variant: Variant
         variant_selection_method: Spôsob výberu produktového variantu
         variants: Varianty
+        verified: Overené
+        verify: Overiť
         view: Zobraziť
+        view_and_edit_cart: Zobraziť a upraviť košík
         view_more: Zobraziť viac
         view_product_details: 'Zobraziť podrobnosti pre %product%'
         void: Neplatná
@@ -676,13 +775,18 @@ sylius:
         welcome: Vitajte
         welcome_to_our_store: Vitajte v našom obchode
         welcome_to_your_space: Vitajte vo vašom priestore
+        yes_label: Áno
         you_are_customer_since: Ste zákazníkom od
         you_have_no_addresses_defined: Nemáte uložené žiadne adresy
         you_have_no_new_orders: Nemáte žiadne nové objednávky
+        you_may_also_like: Mohlo by sa Vám páčiť
         your_cart_is_empty: Váš košík je prázdny
         your_last_5_orders: Posledných 5 objednávok
         your_order_has_been_shipped: Vaša objednávka bola odoslaná
         your_products: Vaše produkty
+        your_profile: Váš profil
+        your_shopping_cart: Váš nákupný košík
+        your_store: Zobraziť obchod
         zone: Zóna
         zone_consisting_of_countries: Zóna pozostávajúca z krajín
         zone_consisting_of_other_zones: Zóna pozostávajúca z iných oblastí

@@ -14,6 +14,7 @@ sylius:
             not_blank: Zadajte Vaše krstné meno.
         last_name:
             max: 'Priezvisko nesmie byť dlhšie ako {{ limit }} znakov.'
+            min: 'Priezvisko musí obsahovať minimálne {{ limit }} znakov.'
             not_blank: Zadajte Vaše priezvisko.
         gender:
             not_blank: Pohlavie musí byť vyplnené.
@@ -21,6 +22,7 @@ sylius:
             already_used: Tento e-mail sa už používa, prosím prihláste sa alebo použite reset hesla.
             max: 'E-mail nesmie byť dlhší ako {{ limit }} znakov.'
             min: 'E-mail musí byť aspoň {{ limit }} znakov.'
-            not_blank: Zadajte Váš email.
-            invalid: Tento email je neplatný.
+            not_blank: Zadajte Váš e-mail.
+            invalid: Tento e-mail je neplatný.
+            unique: Tento e-mail sa už používa.
             registered: Tento e-mail je už registrovaný, prosím prihláste sa alebo použite reset hesla.

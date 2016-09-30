@@ -9,6 +9,7 @@ sylius:
             not_blank: Lisää kaupunki.
         country:
             not_blank: Valitse maa.
+            disabled: Valittu maa on poistettu käytöstä. Valitse jokin toinen maa.
         first_name:
             max_length: Etunimi saa olla korkeintaan 255 merkin pituinen|Etunimi saa olla korkeintaan 255 merkin pituinen.
             min_length: Etunimen tulee olla vähintään kahden merkin pituinen|Etunimen tulee olla vähintään kahden merkin pituinen.
@@ -27,8 +28,18 @@ sylius:
             max_length: Postiosoite saa olla korkeintaan 255 merkin pituinen|Postiosoite saa olla korkeintaan 255 merkin pituinen.
             min_length: Postiosoitteen tulee olla vähintään kahden merkin pituinen|Postiosoitteen tulee olla vähintään kahden merkin pituinen.
             not_blank: Lisää postiosoite.
+    country:
+        code:
+            not_blank: Syötä maan ISO-koodi.
+            unique: Maan ISO-koodin on oltava yksilöllinen.
     province:
+        code:
+            min_length: Maakunnan nimen on oltava vähintään 5 merkkiä pitkä|Maakunnan nimen on oltava vähintään 5 merkkiä pitkä.
+            not_blank: Syötä maakunnan koodi.
+            regex: 'Maakunnan koodin tulee olla seuraavassa muodossa: XX-XX (esim. US-FL).'
+            unique: Maankunnan koodin on oltava yksilöllinen.
         name:
             max_length: Maakunnan nimi saa olla enintään 255 merkkiä pitkä|Maakunnan nimi ei saa yli 255 merkkiä pitkä.
             min_length: Maakunnan nimen on oltava vähintään 2 merkkiä pitkä|Maakunnan nimen on oltava vähintään 2 merkkiä pitkä.
             not_blank: Lisää maakunta.
+            unique: Maankunnan nimi on oltava yksilöllinen.

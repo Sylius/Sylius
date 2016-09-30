@@ -35,6 +35,7 @@ sylius:
             currencies: Meny
             shipping_methods: Spôsoby doručenia
             payment_methods: Spôsoby platby
+            tax_calculation_strategy: Spôsob výpočtu dane
             tax_zone_default: Predvolené daňové pásmo
             theme: Téma
             hostname: Hostname
@@ -116,7 +117,7 @@ sylius:
                 attribute: Vlastnosť
                 value: Hodnota
         guest:
-            email: Email
+            email: E-mail
         product_association:
             product: Priradený produkt
             type: Typ priradenia
@@ -134,12 +135,25 @@ sylius:
     email:
         order_confirmation:
             name: Potvrdenie objednávky
+            content: 'Vaša objednávka č. %number% bola úspešne vytvorená.<br/> <br/> Ďakujem vám za nákup v našom obchode!'
         order_comment:
             name: Poznámka k objednávke
         shipment_confirmation:
             name: Potvrdenie odoslania zásielky
+            content: 'Vaša objednávka č. %number% bola odoslaná na %method%.<br/> Pomocou kódu %tracking%, môžete skontrolovať jej polohu.<br/><br/> Ďakujem vám za nákup v našom obchode.'
         user_confirmation:
             name: Potvrdenie registrácie použivateľa
             subject: Vitajte v našom obchode
+            content: 'Vitajte v našom obchode <br/> <br/> Boli ste úspešne zaregistrovaný.<br/> Ďakujem vám %username%.'
         password_reset:
             name: Obnoviť heslo
+            content: '<h3>Dobrý deň %username%</h3> Na obnovenie hesla prosím navštívte %url%.'
+        verification:
+            name: Overenie e-mailovej adresy
+            content: 'Pre overenie e-mailovej adresy - prosím navštívte %url%'
+    payum_gateway:
+        cash_on_delivery: Dobierka
+        offline: Offline
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: Podľa zóný a kanálu
