@@ -273,7 +273,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function thisCouponShouldBeValidUntil(\DateTime $date)
     {
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['Expires at' => date('d-m-Y', $date->getTimestamp())]),
+            $this->indexPage->isSingleResourceOnPage(['expiresAt' => date('d-m-Y', $date->getTimestamp())]),
             sprintf('There should be coupon with expires date %s', date('d-m-Y', $date->getTimestamp()))
         );
     }
@@ -284,7 +284,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function thisCouponShouldHaveUsageLimit($limit)
     {
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['Usage limit' => $limit]),
+            $this->indexPage->isSingleResourceOnPage(['usageLimit' => $limit]),
             sprintf('There should be coupon with %s usage limit', $limit)
         );
     }
@@ -295,7 +295,7 @@ final class ManagingPromotionCouponsContext implements Context
     public function thisCouponShouldHavePerCustomerUsageLimit($limit)
     {
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['Per customer usage limit' => $limit]),
+            $this->indexPage->isSingleResourceOnPage(['perCustomerUsageLimit' => $limit]),
             sprintf('There should be coupon with %s per customer usage limit', $limit)
         );
     }

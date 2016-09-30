@@ -49,7 +49,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $table = $this->getElement('table');
 
         $row = $tableAccessor->getRowWithFields($table, ['code' => $currency->getCode()]);
-        $enabledField = $tableAccessor->getFieldFromRow($table, $row, 'Enabled');
+        $enabledField = $tableAccessor->getFieldFromRow($table, $row, 'enabled');
 
         return $enabledField->getText() === $status;
     }

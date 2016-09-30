@@ -302,11 +302,36 @@ final class ManagingShippingMethodsContext implements Context
         $this->assertFieldValidationMessage($field, 'This value should not be blank.');
     }
     /**
+     * @Given I am browsing shipping methods
      * @When I want to browse shipping methods
      */
     public function iWantToBrowseShippingMethods()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @Then the first shipping method on the list should have :field :value
+     */
+    public function theFirstShippingMethodOnTheListShouldHave($field, $value)
+    {
+        $actualValue = $this->indexPage->getColumnFields($field)[0];
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected first shipping method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @When I switch the way shipping methods are sorted by :field
+     * @When I start sorting shipping methods by :field
+     * @Given the shipping methods are already sorted by :field
+     */
+    public function iSortShippingMethodsBy($field)
+    {
+        $this->indexPage->sortBy($field);
     }
 
     /**

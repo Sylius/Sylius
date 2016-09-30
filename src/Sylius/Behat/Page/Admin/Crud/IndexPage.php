@@ -129,7 +129,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $table = $this->getElement('table');
 
         $deletedRow = $tableAccessor->getRowWithFields($table, $parameters);
-        $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'Actions');
+        $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'actions');
 
         $actionButtons->pressButton('Delete');
     }

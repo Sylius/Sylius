@@ -202,9 +202,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Given the product :productName should appear in the shop
-     * @Given the product :productName should be in the shop
-     * @Given this product should still be named :productName
+     * @Then the product :productName should appear in the shop
+     * @Then the product :productName should be in the shop
+     * @Then this product should still be named :productName
      */
     public function theProductShouldAppearInTheShop($productName)
     {
@@ -217,11 +217,58 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Given I am browsing products
      * @When I want to browse products
      */
     public function iWantToBrowseProducts()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @Then I should( still) see a product with :field :value
+     */
+    public function iShouldSeeProductWith($field, $value)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage([$field => $value]),
+            sprintf('The product with %s "%s" has not been found.', $field, $value)
+        );
+    }
+
+    /**
+     * @Then I should not see any product with :field :value
+     */
+    public function iShouldNotSeeAnyProductWith($field, $value)
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage([$field => $value]),
+            sprintf('The product with %s "%s" has been found.', $field, $value)
+        );
+    }
+
+    /**
+     * @Then the first product on the list should have :field :value
+     */
+    public function theFirstProductOnTheListShouldHave($field, $value)
+    {
+        $actualValue = $this->indexPage->getColumnFields($field)[0];
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected first product\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @When I switch the way products are sorted by :field
+     * @When I start sorting products by :field
+     * @Given the products are already sorted by :field
+     */
+    public function iSortProductsBy($field)
+    {
+        $this->indexPage->sortBy($field);
     }
 
     /**
@@ -231,7 +278,7 @@ final class ManagingProductsContext implements Context
     {
         $foundRows = $this->indexPage->countItems();
 
-        Assert::eq(
+        Assert::same(
             $numberOfProducts,
             $foundRows,
             '%s rows with products should appear on page, %s rows has been found'

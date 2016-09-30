@@ -25,7 +25,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
      */
     public function isAbleToManageCouponsFor(PromotionInterface $promotion)
     {
-        $actions = $this->getPromotionFieldsWithHeader($promotion, 'Actions');
+        $actions = $this->getPromotionFieldsWithHeader($promotion, 'actions');
 
         return $actions->hasLink('List coupons');
     }
@@ -35,7 +35,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
      */
     public function isCouponBasedFor(PromotionInterface $promotion)
     {
-        $coupons = $this->getPromotionFieldsWithHeader($promotion, 'Coupons');
+        $coupons = $this->getPromotionFieldsWithHeader($promotion, 'couponBased');
 
         return 'Yes' === $coupons->getText();
     }

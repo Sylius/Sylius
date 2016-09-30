@@ -52,9 +52,9 @@ final class TableAccessor implements TableAccessorInterface
     /**
      * {@inheritdoc}
      */
-    public function getIndexedColumn(NodeElement $table, $columnName)
+    public function getIndexedColumn(NodeElement $table, $fieldName)
     {
-        $columnIndex = $this->getColumnIndex($table, $columnName);
+        $columnIndex = $this->getColumnIndex($table, $fieldName);
 
         $rows = $table->findAll('css', 'tbody > tr');
         Assert::notEmpty($rows, 'There are no rows!');
@@ -80,7 +80,9 @@ final class TableAccessor implements TableAccessorInterface
         $sortableArray = [];
         /** @var NodeElement $sortable */
         foreach ($sortableHeaders as $sortable) {
-            $sortableArray[strtolower($sortable->getText())] = $sortable;
+            $fieldName = $this->getColumnFieldName($sortable);
+
+            $sortableArray[$fieldName] = $sortable;
         }
 
         return $sortableArray;
@@ -107,7 +109,7 @@ final class TableAccessor implements TableAccessorInterface
         $rows = $table->findAll('css', 'tr');
         Assert::notEmpty($rows, 'There are no rows!');
 
-        $fields = $this->replaceColumnNamesWithColumnIds($table, $fields);
+        $fields = $this->replaceColumnNamesWithColumnIndexes($table, $fields);
 
         $matchedRows = [];
         /** @var NodeElement[] $rows */
@@ -156,7 +158,7 @@ final class TableAccessor implements TableAccessorInterface
      *
      * @throws \Exception
      */
-    private function replaceColumnNamesWithColumnIds(NodeElement $table, array $fields)
+    private function replaceColumnNamesWithColumnIndexes(NodeElement $table, array $fields)
     {
         $replacedFields = [];
         foreach ($fields as $columnName => $expectedValue) {
@@ -170,28 +172,30 @@ final class TableAccessor implements TableAccessorInterface
 
     /**
      * @param NodeElement $table
-     * @param string $columnName
+     * @param string $fieldName
      *
      * @return int
      *
-     * @throws \Exception If column was not found
+     * @throws \InvalidArgumentException
      */
-    private function getColumnIndex(NodeElement $table, $columnName)
+    private function getColumnIndex(NodeElement $table, $fieldName)
     {
         $rows = $table->findAll('css', 'tr');
         Assert::notEmpty($rows, 'There are no rows!');
 
-        /** @var NodeElement $firstRow */
-        $firstRow = $rows[0];
-        $columns = $firstRow->findAll('css', 'th,td');
-        foreach ($columns as $index => $column) {
-            /** @var NodeElement $column */
-            if (0 === stripos($column->getText(), $columnName)) {
+        /** @var NodeElement $headerRow */
+        $headerRow = $rows[0];
+        $headers = $headerRow->findAll('css', 'th,td');
+
+        /** @var NodeElement $column */
+        foreach ($headers as $index => $column) {
+            $columnFieldName = $this->getColumnFieldName($column);
+            if ($fieldName === $columnFieldName) {
                 return $index;
             }
         }
 
-        throw new \InvalidArgumentException(sprintf('Column with name "%s" not found!', $columnName));
+        throw new \InvalidArgumentException(sprintf('Column with name "%s" not found!', $fieldName));
     }
 
     /**
@@ -203,5 +207,15 @@ final class TableAccessor implements TableAccessorInterface
     private function containsSearchedValue($sourceText, $searchedValue)
     {
         return false !== stripos(trim($sourceText), $searchedValue);
+    }
+
+    /**
+     * @param NodeElement $column
+     *
+     * @return string
+     */
+    private function getColumnFieldName(NodeElement $column)
+    {
+        return preg_replace('/.*sylius-table-column-([^ ]+).*$/', '\1', $column->getAttribute('class'));
     }
 }

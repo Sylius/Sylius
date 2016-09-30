@@ -123,7 +123,7 @@ final class ManagingCustomersContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['Email' => $customer->getEmail()]),
+            $this->indexPage->isSingleResourceOnPage(['email' => $customer->getEmail()]),
             sprintf('Customer with email %s should exist but it does not.', $customer->getEmail())
         );
     }
@@ -212,7 +212,7 @@ final class ManagingCustomersContext implements Context
     public function iShouldSeeTheCustomerInTheList($email)
     {
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['Email' => $email]),
+            $this->indexPage->isSingleResourceOnPage(['email' => $email]),
             sprintf('Customer with email %s should exist but it does not.', $email)
         );
     }

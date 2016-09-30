@@ -136,7 +136,7 @@ final class ManagingChannelsContext implements Context
         $this->iWantToBrowseChannels();
 
         Assert::true($this->indexPage->isSingleResourceOnPage(
-            ['name' => $channelName]),
+            ['nameAndDescription' => $channelName]),
             sprintf('Channel with name %s has not been found.', $channelName)
         );
     }
@@ -250,7 +250,7 @@ final class ManagingChannelsContext implements Context
             $this->indexPage->isSingleResourceOnPage(
                 [
                     'code' => $channel->getCode(),
-                    'name' => $channelName,
+                    'nameAndDescription' => $channelName,
                 ]
             ),
             sprintf('Channel name %s has not been assigned properly.', $channelName)
@@ -343,7 +343,7 @@ final class ManagingChannelsContext implements Context
     public function iDeleteChannel(ChannelInterface $channel)
     {
         $this->indexPage->open();
-        $this->indexPage->deleteResourceOnPage(['name' => $channel->getName()]);
+        $this->indexPage->deleteResourceOnPage(['nameAndDescription' => $channel->getName()]);
     }
 
     /**
@@ -352,7 +352,7 @@ final class ManagingChannelsContext implements Context
     public function thisChannelShouldNoLongerExistInTheRegistry($channelName)
     {
         Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['name' => $channelName]),
+            $this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $channelName]),
             sprintf('Channel with name %s exists but should not.', $channelName)
         );
     }
@@ -538,7 +538,7 @@ final class ManagingChannelsContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(
                 [
-                    'name' => $channel->getName(),
+                    'nameAndDescription' => $channel->getName(),
                     'enabled' => $state,
                 ]
             ), sprintf('Channel with name %s and state %s has not been found.', $channel->getName(), $state)

@@ -5,10 +5,15 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.shipping_method.class%"
+                    repository:
+                        method: createListQueryBuilder
+                        arguments: ["%locale%"]
             sorting:
                 code:
                     path: code
                     direction: asc
+                name:
+                    path: translation.name
             fields:
                 code:
                     type: string

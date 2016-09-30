@@ -20,6 +20,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -55,6 +56,11 @@ final class ProductContext implements Context
      * @var ProductFactoryInterface
      */
     private $productFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $productTranslationFactory;
 
     /**
      * @var AttributeFactoryInterface
@@ -110,6 +116,7 @@ final class ProductContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param ProductRepositoryInterface $productRepository
      * @param ProductFactoryInterface $productFactory
+     * @param FactoryInterface $productTranslationFactory
      * @param AttributeFactoryInterface $productAttributeFactory
      * @param FactoryInterface $productVariantFactory
      * @param FactoryInterface $attributeValueFactory
@@ -125,6 +132,7 @@ final class ProductContext implements Context
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
         ProductFactoryInterface $productFactory,
+        FactoryInterface $productTranslationFactory,
         AttributeFactoryInterface $productAttributeFactory,
         FactoryInterface $attributeValueFactory,
         FactoryInterface $productVariantFactory,
@@ -139,6 +147,7 @@ final class ProductContext implements Context
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
         $this->productFactory = $productFactory;
+        $this->productTranslationFactory = $productTranslationFactory;
         $this->productAttributeFactory = $productAttributeFactory;
         $this->attributeValueFactory = $attributeValueFactory;
         $this->productVariantFactory = $productVariantFactory;
@@ -171,10 +180,43 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given the store( also) has a product :productName with code :code
+     */
+    public function storeHasProductWithCode($productName, $code)
+    {
+        $product = $this->createProduct($productName, 0);
+
+        $product->setCode($code);
+
+        if ($this->sharedStorage->has('channel')) {
+            $channel = $this->sharedStorage->get('channel');
+            $product->addChannel($channel);
+        }
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^(this product) is named "([^"]+)" (in the "([^"]+)" locale)$/
+     */
+    public function thisProductIsNamedIn(ProductInterface $product, $name, $locale)
+    {
+        /** @var ProductTranslationInterface $translation */
+        $translation = $this->productTranslationFactory->createNew();
+        $translation->setLocale($locale);
+        $translation->setName($name);
+
+        $product->addTranslation($translation);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given the store has a :productName configurable product
      */
     public function storeHasAConfigurableProduct($productName)
     {
+        /** @var ProductInterface $product */
         $product = $this->productFactory->createNew();
 
         $product->setName($productName);

@@ -12,10 +12,8 @@
 namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProductRepositoryInterface;
 
 /**
@@ -24,9 +22,11 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProduc
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
     /**
+     * @param string $locale
+     *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder();
+    public function createListQueryBuilder($locale);
 
     /**
      * @param ChannelInterface $channel

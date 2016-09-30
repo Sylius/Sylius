@@ -27,7 +27,7 @@ Feature: Sorting orders by their number
         But the first order should have number "#000000003"
 
     @ui
-    Scenario: I change the number sorting order
+    Scenario: Changing the number sorting order
         Given I am browsing orders
         When I switch the way orders are sorted by number
         Then I should see an order with "#000000003" number
