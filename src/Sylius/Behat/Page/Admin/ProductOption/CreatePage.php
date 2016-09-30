@@ -52,9 +52,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function checkValidationMessageForOptionValues($message)
     {
-        $optionValuesValidationElement = $this->getElement('values_validation')->find('css', '.ui.pointing');
+        $optionValuesValidationElement = $this->getElement('values_validation')->find('css', '.sylius-validation-error');
         if (null === $optionValuesValidationElement) {
-            throw new ElementNotFoundException($this->getDriver(), 'product option validation box', 'css', '.ui.pointing');
+            throw new ElementNotFoundException($this->getDriver(), 'product option validation box', 'css', '.sylius-validation-error');
         }
 
         return $optionValuesValidationElement->getText() === $message;

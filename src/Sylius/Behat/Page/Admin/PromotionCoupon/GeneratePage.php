@@ -120,7 +120,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
             throw new ElementNotFoundException($this->getSession(), 'Element', 'css', '#sylius_promotion_coupon_instruction_amount');
         }
 
-        return $message === $foundElement->find('css', '.pointing')->getText();
+        return $message === $foundElement->find('css', '.sylius-validation-error')->getText();
     }
 
     /**
