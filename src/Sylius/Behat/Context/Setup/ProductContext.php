@@ -366,31 +366,27 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) has option "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
+     * @Given /^(this product) has option "([^"]+)" with values "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function thisProductHasOptionWithValues(ProductInterface $product, $optionName, $firstValue, $secondValue)
-    {
-        /** @var ProductOptionInterface $variant */
+    public function thisProductHasOptionWithValues(
+        ProductInterface $product,
+        $optionName,
+        $firstValue,
+        $secondValue,
+        $thirdValue = null
+    ) {
+        /** @var ProductOptionInterface $option */
         $option = $this->productOptionFactory->createNew();
 
         $option->setName($optionName);
         $option->setCode(strtoupper($optionName));
 
-        /** @var ProductOptionValueInterface $optionValue */
-        $firstOptionValue = $this->productOptionValueFactory->createNew();
+        $firstOptionValue = $this->addProductOption($option, $firstValue, 'POV1');
+        $secondOptionValue = $this->addProductOption($option, $secondValue, 'POV2');
 
-        $firstOptionValue->setValue($firstValue);
-        $firstOptionValue->setCode('POV1');
-        $firstOptionValue->setOption($option);
-
-        /** @var ProductOptionValueInterface $optionValue */
-        $secondOptionValue = $this->productOptionValueFactory->createNew();
-
-        $secondOptionValue->setValue($secondValue);
-        $secondOptionValue->setCode('POV2');
-        $secondOptionValue->setOption($option);
-
-        $option->addValue($firstOptionValue);
-        $option->addValue($secondOptionValue);
+        if (null !== $thirdValue) {
+            $thirdOptionValue = $this->addProductOption($option, $thirdValue, 'POV3');
+        }
 
         $product->addOption($option);
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
@@ -398,6 +394,9 @@ final class ProductContext implements Context
         $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
         $this->sharedStorage->set(sprintf('%s_option_%s_value', $firstValue, strtolower($optionName)), $firstOptionValue);
         $this->sharedStorage->set(sprintf('%s_option_%s_value', $secondValue, strtolower($optionName)), $secondOptionValue);
+        if (null !== $thirdValue) {
+            $this->sharedStorage->set(sprintf('%s_option_%s_value', $thirdValue, strtolower($optionName)), $thirdOptionValue);
+        }
 
         $this->objectManager->persist($option);
         $this->objectManager->persist($firstOptionValue);
@@ -603,6 +602,27 @@ final class ProductContext implements Context
         $variant->setCode($product->getCode());
 
         return $product;
+    }
+
+    /**
+     * @param ProductOptionInterface $option
+     * @param string $value
+     * @param string $code
+     *
+     * @return ProductOptionValueInterface
+     */
+    private function addProductOption(ProductOptionInterface $option, $value, $code)
+    {
+        /** @var ProductOptionValueInterface $optionValue */
+        $optionValue = $this->productOptionValueFactory->createNew();
+
+        $optionValue->setValue($value);
+        $optionValue->setCode($code);
+        $optionValue->setOption($option);
+
+        $option->addValue($optionValue);
+
+        return $optionValue;
     }
 
     /**
