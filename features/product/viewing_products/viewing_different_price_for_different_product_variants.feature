@@ -2,7 +2,7 @@
 Feature: Viewing different price for different product variants
     In order to see product variant price
     As a Visitor
-    I want to be able to see proper price for each product variant
+    I want to be able to see a proper price for each product variant
 
     Background:
         Given the store operates on a single channel in "United States"

@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Twig;
 
 use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
-use Sylius\Component\Core\Model\ProductInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -38,18 +37,8 @@ final class ProductVariantsPricesExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sylius_product_variant_prices', [$this, 'getVariantsPrices']),
+            new \Twig_SimpleFunction('sylius_product_variant_prices', [$this->productVariantsPricesHelper, 'getPrices']),
         ];
-    }
-
-    /**
-     * @param ProductInterface $product
-     *
-     * @return array
-     */
-    public function getVariantsPrices(ProductInterface $product)
-    {
-        return $this->productVariantsPricesHelper->getPrices($product);
     }
 
     /**
