@@ -6,6 +6,7 @@ Cookbook
 
     installation-commands
     registry
+    custom-model
     custom-email
     paypal
 
