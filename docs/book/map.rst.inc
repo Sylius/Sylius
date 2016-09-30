@@ -28,3 +28,4 @@
 * :doc:`/book/content`
 * :doc:`/book/emails`
 * :doc:`/book/settings`
+* :doc:`/book/adjustments`

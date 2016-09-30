@@ -36,5 +36,6 @@ The Developer's guide to leveraging the flexibility of Sylius.
     content
     emails
     settings
+    adjustments
 
 .. include:: /book/map.rst.inc
