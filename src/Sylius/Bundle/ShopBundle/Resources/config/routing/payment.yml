@@ -1,5 +1,5 @@
 sylius_shop_payment_method_update:
-    path: /{paymentId}/{orderTokenValue}/change-payment-method
+    path: /{paymentId}/change-payment-method
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.payment:updateAction

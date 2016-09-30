@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -51,16 +52,16 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         PaymentMethod $paymentMethod
     ) {
+        $payments = new ArrayCollection();
+        $order->getPayments()->willReturn($payments);
+
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(null);
+        $order->getLastNewPayment()->willReturn(null);
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
         $payment->setOrder($order);
-            
-        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
-        $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn(null);
 
         $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->willReturn($paymentMethod);
 
@@ -78,14 +79,18 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentMethodInterface $paymentMethodFromLastCancelledPayment
     ) {
+        $payments = new ArrayCollection();
+        $payments->add($cancelledPayment->getWrappedObject());
+        $order->getPayments()->willReturn($payments);
+
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(null);
+        $order->getLastNewPayment()->willReturn(null);
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
 
-        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($cancelledPayment);
+        $cancelledPayment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
         $cancelledPayment->getMethod()->willReturn($paymentMethodFromLastCancelledPayment);
 
         $payment->setMethod($paymentMethodFromLastCancelledPayment)->shouldBeCalled();
@@ -102,15 +107,18 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentMethodInterface $paymentMethodFromLastFailedPayment
     ) {
+        $payments = new ArrayCollection();
+        $payments->add($failedPayment->getWrappedObject());
+        $order->getPayments()->willReturn($payments);
+
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(null);
+        $order->getLastNewPayment()->willReturn(null);
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
 
-        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
-        $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn($failedPayment);
+        $failedPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
         $failedPayment->getMethod()->willReturn($paymentMethodFromLastFailedPayment);
 
         $payment->setMethod($paymentMethodFromLastFailedPayment)->shouldBeCalled();
@@ -127,11 +135,12 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order
     ) {
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn($newPaymentReadyToPay);
+        $payments = new ArrayCollection();
+        $payments->add($cancelledPayment);
+        $order->getPayments()->willReturn($payments);
 
-        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($cancelledPayment);
-        $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn(null);
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+        $order->getLastNewPayment()->willReturn($newPaymentReadyToPay);
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
@@ -149,15 +158,15 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
     ) {
+        $payments = new ArrayCollection();
+        $order->getPayments()->willReturn($payments);
+
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(null);
+        $order->getLastNewPayment()->willReturn(null);
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
-
-        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
-        $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn(null);
 
         $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->shouldBeCalled();
 
@@ -170,12 +179,15 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 
     function it_sets_orders_total_on_payment_amount_when_payment_is_new(OrderInterface $order, PaymentInterface $payment)
     {
+        $payments = new ArrayCollection();
+        $order->getPayments()->willReturn($payments);
+
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(123);
         $order->getCurrencyCode()->willReturn('EUR');
 
         $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
-        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn($payment);
+        $order->getLastNewPayment()->willReturn($payment);
 
         $payment->setAmount(123)->shouldBeCalled();
         $payment->setCurrencyCode('EUR')->shouldBeCalled();
