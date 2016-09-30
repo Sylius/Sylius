@@ -86,5 +86,12 @@
             <argument type="service" id="sylius.product_variant_resolver.default" />
         </service>
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
+
+        <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider" />
+
+        <service id="sylius.twig.extension.product_variants_prices" class="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" public="false">
+            <argument type="service" id="sylius.templating.helper.product_variants_prices" />
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>

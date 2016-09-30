@@ -450,10 +450,18 @@ class Product implements ProductInterface
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function isSimple()
     {
         return 1 === $this->variants->count() && !$this->hasOptions();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isConfigurable()
+    {
+        return !$this->isSimple();
     }
 }

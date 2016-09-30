@@ -132,4 +132,9 @@ interface ProductInterface extends
      * @return bool
      */
     public function isSimple();
+
+    /**
+     * @return bool
+     */
+    public function isConfigurable();
 }

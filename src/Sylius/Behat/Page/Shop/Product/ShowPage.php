@@ -11,9 +11,10 @@
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Sylius\Component\Product\Model\ProductOptionInterface;
-use Sylius\Component\Product\Model\ProductInterface;
+use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -43,10 +44,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function addToCartWithVariant($variant)
     {
-        $item = $this->getDocument()->find('css', sprintf('#sylius-product-variants tbody tr:contains("%s")', $variant));
-        $radio = $item->find('css', 'input');
-
-        $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
+        $this->selectVariant($variant);
 
         $this->getDocument()->pressButton('Add to cart');
     }
@@ -135,6 +133,32 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function selectOption($optionName, $optionValue)
+    {
+        $optionElement = $this->getElement('option_select', ['%option-name%' => strtoupper($optionName)]);
+        $optionElement->selectOption($optionValue);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function selectVariant($variantName)
+    {
+        $variantRadio = $this->getElement('variant_radio', ['%variant-name%' => $variantName]);
+
+        $driver = $this->getDriver();
+        if ($driver instanceof Selenium2Driver) {
+            $variantRadio->click();
+
+            return;
+        }
+
+        $this->getDocument()->fillField($variantRadio->getAttribute('name'), $variantRadio->getAttribute('value'));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isOutOfStock()
     {
         return $this->hasElement('out_of_stock');
@@ -184,10 +208,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'attributes' => '#sylius-product-attributes',
             'main_image' => '#main-image',
             'name' => '#sylius-product-name',
+            'option_select' => '#sylius_cart_item_variant_%option-name%',
             'out_of_stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
             'selecting_variants' => "#sylius-product-selecting-variant",
             'validation_errors' => '.sylius-validation-error',
+            'variant_radio' => '#sylius-product-variants tbody tr:contains("%variant-name%") input',
         ]);
     }
 }

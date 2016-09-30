@@ -11,15 +11,13 @@
 
 namespace spec\Sylius\Component\Product\Model;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Association\Model\AssociableInterface;
 use Sylius\Component\Product\Model\Product;
-use Sylius\Component\Product\Model\ProductAttributeValueInterface;
-use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
+use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
@@ -290,5 +288,39 @@ final class ProductSpec extends ObjectBehavior
         $this->removeAssociation($association);
 
         $this->hasAssociation($association)->shouldReturn(false);
+    }
+
+    function it_is_simple_if_it_has_one_variant_and_no_options(ProductVariantInterface $variant)
+    {
+        $variant->setProduct($this)->shouldBeCalled();
+        $this->addVariant($variant);
+
+        $this->isSimple()->shouldReturn(true);
+        $this->isConfigurable()->shouldReturn(false);
+    }
+
+    function it_is_configurable_if_it_has_at_least_two_variants(
+        ProductVariantInterface $firstVariant,
+        ProductVariantInterface $secondVariant
+    ) {
+        $firstVariant->setProduct($this)->shouldBeCalled();
+        $this->addVariant($firstVariant);
+        $secondVariant->setProduct($this)->shouldBeCalled();
+        $this->addVariant($secondVariant);
+
+        $this->isConfigurable()->shouldReturn(true);
+        $this->isSimple()->shouldReturn(false);
+    }
+
+    function it_is_configurable_if_it_has_one_variant_and_at_least_one_option(
+        ProductOptionInterface $option,
+        ProductVariantInterface $variant
+    ) {
+        $variant->setProduct($this)->shouldBeCalled();
+        $this->addVariant($variant);
+        $this->addOption($option);
+
+        $this->isConfigurable()->shouldReturn(true);
+        $this->isSimple()->shouldReturn(false);
     }
 }

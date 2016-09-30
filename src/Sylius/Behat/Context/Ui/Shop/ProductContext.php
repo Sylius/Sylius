@@ -76,6 +76,7 @@ final class ProductContext implements Context
 
     /**
      * @When /^I check (this product)'s details/
+     * @When I view product :product
      */
     public function iOpenProductPage(ProductInterface $product)
     {
@@ -189,6 +190,7 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then the product price should be :price
      * @Then I should see the product price :price
      */
     public function iShouldSeeTheProductPrice($price)
@@ -198,6 +200,22 @@ final class ProductContext implements Context
             $this->showPage->getPrice(),
             'Product should have price %2$s, but it has %s'
         );
+    }
+
+    /**
+     * @When I set its :optionName to :optionValue
+     */
+    public function iSetItsOptionTo($optionName, $optionValue)
+    {
+        $this->showPage->selectOption($optionName, $optionValue);
+    }
+
+    /**
+     * @When I select :variantName variant
+     */
+    public function iSelectVariant($variantName)
+    {
+        $this->showPage->selectVariant($variantName);
     }
 
     /**

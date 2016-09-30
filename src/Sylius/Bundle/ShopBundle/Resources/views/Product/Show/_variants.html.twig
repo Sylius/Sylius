@@ -23,7 +23,7 @@
             </td>
             <td>{{ variant.price|sylius_price }}</td>
             <td class="right aligned">
-                {{ form_row(form.variant[loop.index0], {'label': false}) }}
+                {{ form_widget(form.variant[loop.index0], {'label': false}) }}
             </td>
         </tr>
     {% endfor %}

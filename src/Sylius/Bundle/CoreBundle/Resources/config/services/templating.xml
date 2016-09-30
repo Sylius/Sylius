@@ -24,5 +24,10 @@
             <argument type="service" id="sylius.context.currency" />
             <tag name="templating.helper" alias="sylius_price" />
         </service>
+
+        <service id="sylius.templating.helper.product_variants_prices" class="Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper">
+            <argument type="service" id="sylius.provider.product_variants_prices" />
+            <tag name="templating.helper" alias="sylius_product_variants_prices" />
+        </service>
     </services>
 </container>

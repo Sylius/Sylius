@@ -172,8 +172,7 @@ final class ProductContext implements Context
         $product->setDescription('Awesome '.$productName);
 
         if ($this->sharedStorage->has('channel')) {
-            $channel = $this->sharedStorage->get('channel');
-            $product->addChannel($channel);
+            $product->addChannel($this->sharedStorage->get('channel'));
         }
 
         $this->saveProduct($product);
@@ -223,6 +222,11 @@ final class ProductContext implements Context
         $product->setCode($this->convertToCode($productName));
         $product->setDescription('Awesome '.$productName);
 
+        if ($this->sharedStorage->has('channel')) {
+            $channel = $this->sharedStorage->get('channel');
+            $product->addChannel($channel);
+        }
+
         $this->saveProduct($product);
     }
 
@@ -241,6 +245,8 @@ final class ProductContext implements Context
      */
     public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price)
     {
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
+
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createNew();
 
@@ -368,7 +374,7 @@ final class ProductContext implements Context
         $option = $this->productOptionFactory->createNew();
 
         $option->setName($optionName);
-        $option->setCode('PO1');
+        $option->setCode(strtoupper($optionName));
 
         /** @var ProductOptionValueInterface $optionValue */
         $firstOptionValue = $this->productOptionValueFactory->createNew();
@@ -390,9 +396,9 @@ final class ProductContext implements Context
         $product->addOption($option);
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
-        $this->sharedStorage->set(sprintf('%s_option',$optionName), $option);
-        $this->sharedStorage->set(sprintf('%s_option_value',$firstValue), $firstOptionValue);
-        $this->sharedStorage->set(sprintf('%s_option_value',$secondValue), $secondOptionValue);
+        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
+        $this->sharedStorage->set(sprintf('%s_option_%s_value', $firstValue, strtolower($optionName)), $firstOptionValue);
+        $this->sharedStorage->set(sprintf('%s_option_%s_value', $secondValue, strtolower($optionName)), $secondOptionValue);
 
         $this->objectManager->persist($option);
         $this->objectManager->persist($firstOptionValue);
@@ -444,14 +450,14 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) is available in "([^"]+)" size priced at ("[^"]+")$/
+     * @Given /^(this product) is available in "([^"]+)" ([^"]+) priced at ("[^"]+")$/
      */
-    public function thisProductIsAvailableInSize(ProductInterface $product, $optionValueName, $price)
+    public function thisProductIsAvailableInSize(ProductInterface $product, $optionValueName, $optionName, $price)
     {
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createNew();
 
-        $optionValue = $this->sharedStorage->get(sprintf('%s_option_value',$optionValueName));
+        $optionValue = $this->sharedStorage->get(sprintf('%s_option_%s_value', $optionValueName, $optionName));
 
         $variant->addOptionValue($optionValue);
         $variant->setPrice($price);

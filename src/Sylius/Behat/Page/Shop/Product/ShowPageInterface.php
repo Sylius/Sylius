@@ -98,4 +98,15 @@ interface ShowPageInterface extends PageInterface
      * @return bool
      */
     public function isMainImageDisplayed();
+
+    /**
+     * @param string $optionName
+     * @param string $optionValue
+     */
+    public function selectOption($optionName, $optionValue);
+
+    /**
+     * @param string $variantName
+     */
+    public function selectVariant($variantName);
 }
