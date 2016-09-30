@@ -20,6 +20,9 @@ sylius:
         code:
             not_blank: Zadajte kód jazyka.
             unique: Tento jazyk už existuje.
+    product_image:
+        code:
+            unique: Kód obrázku musí byť pre tento produkt unikátny.
     product_variant:
         onHand:
             min: 'Počet položiek na sklade musí byť viac ako {{ limit }}.'
@@ -32,3 +35,12 @@ sylius:
     product_translation:
         short_description:
             max: 'Stručný popis nesmie byť dlhší ako {{ limit }} znakov.'
+    taxon_image:
+        code:
+            unique: Kód obrázku musí byť pre túto kategóriu unikátny.
+    user:
+        email:
+            unique: Tento e-mail sa už používa.
+        username:
+            unique: Toto používateľské meno sa už používa.
+            not_blank: Zadajte svoje meno.

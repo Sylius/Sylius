@@ -30,9 +30,13 @@ sylius:
         header: súborový systém
         cache:
             header: cache
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: existuje
         logs:
             header: záznamy
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: neexistuje
         not_writable: nie je zapisovateľný
         parameters:
@@ -58,3 +62,4 @@ sylius:
             header: Zastaralé časové pásmo
             help: 'Časové pásmo %timezone% je zastaralé. Opravte si Váš súbor php.ini (zoznam zastaralých časových pasiem http://php.net/manual/en/timezones.others.php).'
         version: Verzia PHP
+        version_recommended: Odporúčaná verzia PHP

@@ -3,5 +3,9 @@
 
 sylius:
     form:
+        promotion:
+            channels: Kanavat
+        product:
+            channels: Kanavat
         guest:
             email: Sähköpostiosoite

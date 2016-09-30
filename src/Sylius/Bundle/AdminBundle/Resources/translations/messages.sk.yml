@@ -34,4 +34,5 @@ sylius:
                     orders: Objednávky
                 content:
                     header: Obsah
+                    static_contents: Statický obsah
                     routes: URL cesty

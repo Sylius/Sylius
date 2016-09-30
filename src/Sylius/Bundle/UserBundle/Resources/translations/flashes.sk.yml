@@ -19,3 +19,8 @@ sylius:
             error: Verifikačný kód je neplatný.
             notice:
                 verified: Váš e-mail je už overený.
+            success: Váš e-mail bol úspešne overený.
+            request:
+                success: E-mail s potvrdzujúcim odkazom bol odoslaný na vašú e-mailovú adresu.
+    customer:
+        register: Ďakujeme za registráciu, skontrolujte si e-mail pre overenie vašeho účtu.

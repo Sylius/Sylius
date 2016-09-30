@@ -50,6 +50,7 @@ sylius:
         apply_coupon: Lisää kuponki
         are_your_sure_you_want_to_perform_this_action: Oletko varma, että haluat suorittaa tämän toiminnon?
         back: Edellinen
+        channels: Kanavat
         checkout: Kassa
         choose_file: Valitse tiedosto
         city: Kaupunki
@@ -91,6 +92,7 @@ sylius:
         create_redirect_route: Luo uudelleenohjaus
         currency: Valuutta
         current_password: Nykyinen salasana
+        customer: Asiakas
         customer_orders: Asiakkaan tilaukset
         customer_since: Asiakas alkaen
         customers: Asiakkaat
@@ -127,20 +129,26 @@ sylius:
         exchange_rate: Vaihtokurssi
         extra_notes: Muistiinpanot
         label: Otsikko
+        marketing: Markkinointi
         members: Jäsenet
         message: Viesti
         new_password: Uusi salasana
         next: Seuraava
+        orders: Tilaukset
         parent: Vanhempi
         phone_number: Puhelinnumero
         postcode: Postinumero
         pricing: Hinnoittelu
         promotion_coupons: Kupongit
+        promotions: Kampanjat
         province: Lääni
         provinces: Maakunnat
         remember_me: Muista minut
+        sales: Myynnit
+        sales_this_month: Myynnit
         street: Katuosoite
         subscribed_to_newsletter: Tilaa uutiskirje
         topic: Aihe
         translations: Käännökset
         username: Käyttäjänimi
+        zones: Vyöhykkeet
