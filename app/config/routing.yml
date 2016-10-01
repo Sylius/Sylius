@@ -1,6 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
-    
+
+sylius_admin_dashboard_redirect:
+    path: /admin
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: sylius_admin_dashboard
+        permanent: true
+
 sylius_shop:
     resource: "@SyliusShopBundle/Resources/config/routing.yml"
 
