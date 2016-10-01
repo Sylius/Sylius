@@ -43,8 +43,8 @@ class CapturePaymentAction extends GatewayAwareAction
             } catch (RequestNotSupportedException $e) {
                 $payumPayment = new PayumPayment();
                 $payumPayment->setNumber($order->getNumber());
-                $payumPayment->setTotalAmount($order->getTotal());
-                $payumPayment->setCurrencyCode($order->getCurrencyCode());
+                $payumPayment->setTotalAmount($payment->getAmount());
+                $payumPayment->setCurrencyCode($payment->getCurrencyCode());
                 $payumPayment->setClientEmail($order->getCustomer()->getEmail());
                 $payumPayment->setClientId($order->getCustomer()->getId());
                 $payumPayment->setDescription(sprintf(
