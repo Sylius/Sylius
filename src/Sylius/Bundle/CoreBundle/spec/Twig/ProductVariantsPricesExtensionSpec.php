@@ -39,20 +39,11 @@ final class ProductVariantsPricesExtensionSpec extends ObjectBehavior
         $this->shouldHaveType(\Twig_Extension::class);
     }
 
-    function it_has_functions()
+    function it_has_functions(ProductVariantsPricesHelper $productVariantsPricesHelper)
     {
         $this->getFunctions()->shouldHaveFunction(
-            new \Twig_SimpleFunction('sylius_product_variant_prices', [$this, 'getVariantsPrices'])
+            new \Twig_SimpleFunction('sylius_product_variant_prices', [$productVariantsPricesHelper, 'getPrices'])
         );
-    }
-
-    function it_uses_helper_to_get_variants_prices(
-        ProductInterface $product,
-        ProductVariantsPricesHelper $productVariantsPricesHelper
-    ) {
-        $productVariantsPricesHelper->getPrices($product)->willReturn([['color' => 'purple', 'value' => 12345]]);
-
-        $this->getVariantsPrices($product)->shouldReturn([['color' => 'purple', 'value' => 12345]]);
     }
 
     function it_has_name()
