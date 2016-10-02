@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface as CoreOrderInterface;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -39,12 +40,23 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     private $defaultPaymentMethodResolver;
 
     /**
-     * @param PaymentFactoryInterface $paymentFactory
+     * @var CurrencyConverterInterface
      */
-    public function __construct(PaymentFactoryInterface $paymentFactory, DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver)
+    private $currencyConverter;
+
+    /**
+     * @param PaymentFactoryInterface $paymentFactory
+     * @param DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
+     * @param CurrencyConverterInterface $currencyConverter
+     *
+     */
+    public function __construct(PaymentFactoryInterface $paymentFactory,
+                                DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+                                CurrencyConverterInterface $currencyConverter)
     {
         $this->paymentFactory = $paymentFactory;
         $this->defaultPaymentMethodResolver = $defaultPaymentMethodResolver;
+        $this->currencyConverter = $currencyConverter;
     }
 
     /**
@@ -62,7 +74,10 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         $newPayment = $order->getLastNewPayment();
         if (null !== $newPayment) {
             $newPayment->setCurrencyCode($order->getCurrencyCode());
-            $newPayment->setAmount($order->getTotal());
+            $newPayment->setAmount($this->currencyConverter->convertFromBase(
+                $order->getTotal(),
+                $order->getCurrencyCode()
+            ));
 
             return;
         }
@@ -71,12 +86,15 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param OrderInterface $order
+     * @param CoreOrderInterface $order
      */
-    private function createNewPayment(OrderInterface $order)
+    private function createNewPayment(CoreOrderInterface $order)
     {
         /** @var $payment PaymentInterface */
-        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
+        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode(
+            $this->currencyConverter->convertFromBase($order->getTotal(), $order->getCurrencyCode()),
+            $order->getCurrencyCode()
+        );
 
         $paymentMethod = $this->getDefaultPaymentMethod($payment, $order);
         $lastPayment = $this->getLastPayment($order);

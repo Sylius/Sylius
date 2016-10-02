@@ -17,6 +17,7 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethod;
@@ -30,9 +31,11 @@ use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
  */
 final class OrderPaymentProcessorSpec extends ObjectBehavior
 {
-    function let(PaymentFactoryInterface $paymentFactory, DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver)
+    function let(PaymentFactoryInterface $paymentFactory,
+                 DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+                 CurrencyConverterInterface $currencyConverter)
     {
-        $this->beConstructedWith($paymentFactory, $defaultPaymentMethodResolver);
+        $this->beConstructedWith($paymentFactory, $defaultPaymentMethodResolver, $currencyConverter);
     }
 
     function it_is_initializable()
@@ -50,6 +53,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order,
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+        CurrencyConverterInterface $currencyConverter,
         PaymentMethod $paymentMethod
     ) {
         $payments = new ArrayCollection();
@@ -65,6 +69,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 
         $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->willReturn($paymentMethod);
 
+        $currencyConverter->convertFromBase(1234, 'EUR')->willReturn(1234);
+
         $payment->setOrder($order)->shouldBeCalled();
         $payment->setMethod($paymentMethod)->shouldBeCalled();
         $order->addPayment($payment)->shouldBeCalled();
@@ -77,7 +83,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         PaymentInterface $cancelledPayment,
         OrderInterface $order,
-        PaymentMethodInterface $paymentMethodFromLastCancelledPayment
+        PaymentMethodInterface $paymentMethodFromLastCancelledPayment,
+        CurrencyConverterInterface $currencyConverter
     ) {
         $payments = new ArrayCollection();
         $payments->add($cancelledPayment->getWrappedObject());
@@ -89,6 +96,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
+        $currencyConverter->convertFromBase(1234, 'EUR')->willReturn(1234);
 
         $cancelledPayment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
         $cancelledPayment->getMethod()->willReturn($paymentMethodFromLastCancelledPayment);
@@ -105,7 +113,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         PaymentInterface $failedPayment,
         OrderInterface $order,
-        PaymentMethodInterface $paymentMethodFromLastFailedPayment
+        PaymentMethodInterface $paymentMethodFromLastFailedPayment,
+        CurrencyConverterInterface $currencyConverter
     ) {
         $payments = new ArrayCollection();
         $payments->add($failedPayment->getWrappedObject());
@@ -117,6 +126,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
+        $currencyConverter->convertFromBase(1234, 'EUR')->willReturn(1234);
 
         $failedPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
         $failedPayment->getMethod()->willReturn($paymentMethodFromLastFailedPayment);
@@ -133,7 +143,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $newPaymentReadyToPay,
         PaymentInterface $cancelledPayment,
         PaymentInterface $payment,
-        OrderInterface $order
+        OrderInterface $order,
+        CurrencyConverterInterface $currencyConverter
     ) {
         $payments = new ArrayCollection();
         $payments->add($cancelledPayment);
@@ -145,6 +156,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
+        $currencyConverter->convertFromBase(1234, 'EUR')->willReturn(1234);
 
         $payment->setMethod($cancelledPayment)->shouldNotBeCalled();
         $order->addPayment($payment)->shouldNotBeCalled();
@@ -156,7 +168,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         PaymentFactoryInterface $paymentFactory,
         PaymentInterface $payment,
         OrderInterface $order,
-        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+        CurrencyConverterInterface $currencyConverter
     ) {
         $payments = new ArrayCollection();
         $order->getPayments()->willReturn($payments);
@@ -170,6 +183,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 
         $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->shouldBeCalled();
 
+        $currencyConverter->convertFromBase(1234, 'EUR')->willReturn(1234);
+
         $payment->setOrder($order)->shouldBeCalled();
         $payment->setMethod(Argument::any())->shouldNotBeCalled();
         $order->addPayment($payment)->shouldNotBeCalled();
@@ -177,7 +192,10 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_sets_orders_total_on_payment_amount_when_payment_is_new(OrderInterface $order, PaymentInterface $payment)
+    function it_sets_orders_total_on_payment_amount_when_payment_is_new(
+        OrderInterface $order,
+        PaymentInterface $payment,
+        CurrencyConverterInterface $currencyConverter)
     {
         $payments = new ArrayCollection();
         $order->getPayments()->willReturn($payments);
@@ -191,6 +209,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 
         $payment->setAmount(123)->shouldBeCalled();
         $payment->setCurrencyCode('EUR')->shouldBeCalled();
+
+        $currencyConverter->convertFromBase(123, 'EUR')->willReturn(123);
 
         $this->process($order);
     }
