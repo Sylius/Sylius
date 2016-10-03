@@ -20,7 +20,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface OrderInterface extends
     AdjustableInterface,
-    CommentAwareInterface,
     ResourceInterface,
     TimestampableInterface
 {
