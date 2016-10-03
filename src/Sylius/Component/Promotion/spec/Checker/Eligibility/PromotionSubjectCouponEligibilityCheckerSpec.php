@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Checker\Eligibility\CouponsEligibilityChecker;
+use Sylius\Component\Promotion\Checker\Eligibility\PromotionSubjectCouponEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponAwarePromotionSubjectInterface;
@@ -20,18 +20,18 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @mixin CouponsEligibilityChecker
+ * @mixin PromotionSubjectCouponEligibilityChecker
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class CouponsEligibilityCheckerSpec extends ObjectBehavior
+final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(CouponsEligibilityChecker::class);
+        $this->shouldHaveType(PromotionSubjectCouponEligibilityChecker::class);
     }
 
-    function it_implements_coupons_eligibility_checker_interface()
+    function it_implements_promotion_eligibility_checker_interface()
     {
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }

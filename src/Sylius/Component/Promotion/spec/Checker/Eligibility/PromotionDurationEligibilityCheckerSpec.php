@@ -12,21 +12,21 @@
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Checker\Eligibility\DatesEligibilityChecker;
+use Sylius\Component\Promotion\Checker\Eligibility\PromotionDurationEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @mixin DatesEligibilityChecker
+ * @mixin PromotionDurationEligibilityChecker
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class DatesEligibilityCheckerSpec extends ObjectBehavior
+final class PromotionDurationEligibilityCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(DatesEligibilityChecker::class);
+        $this->shouldHaveType(PromotionDurationEligibilityChecker::class);
     }
 
     function it_implements_promotion_eligibility_checker_interface()

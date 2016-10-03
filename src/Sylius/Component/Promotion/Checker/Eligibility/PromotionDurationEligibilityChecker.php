@@ -17,21 +17,25 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class UsageLimitEligibilityChecker implements PromotionEligibilityCheckerInterface
+final class PromotionDurationEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
     {
-        if (null === $usageLimit = $promotion->getUsageLimit()) {
-            return true;
+        $now = new \DateTime();
+
+        $startsAt = $promotion->getStartsAt();
+        if (null !== $startsAt && $now < $startsAt) {
+            return false;
         }
 
-        if ($promotion->getUsed() < $usageLimit) {
-            return true;
+        $endsAt = $promotion->getEndsAt();
+        if (null !== $endsAt && $now > $endsAt) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 }

@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class CouponsEligibilityChecker implements PromotionEligibilityCheckerInterface
+final class PromotionSubjectCouponEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
      * {@inheritdoc}
@@ -26,7 +26,7 @@ final class CouponsEligibilityChecker implements PromotionEligibilityCheckerInte
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
     {
         if (!$promotion->isCouponBased()) {
-            throw new UnsupportedPromotionException('Only coupon based promotions can be evaluated by this checker.');
+            return true;
         }
 
         if (!$promotionSubject instanceof PromotionCouponAwarePromotionSubjectInterface) {

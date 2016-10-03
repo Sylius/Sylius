@@ -13,20 +13,20 @@ namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
-use Sylius\Component\Promotion\Checker\Eligibility\UsageLimitEligibilityChecker;
+use Sylius\Component\Promotion\Checker\Eligibility\PromotionUsageLimitEligibilityChecker;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @mixin UsageLimitEligibilityChecker
+ * @mixin PromotionUsageLimitEligibilityChecker
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class UsageLimitEligibilityCheckerSpec extends ObjectBehavior
+final class PromotionUsageLimitEligibilityCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(UsageLimitEligibilityChecker::class);
+        $this->shouldHaveType(PromotionUsageLimitEligibilityChecker::class);
     }
 
     function it_implements_promotion_eligibility_checker_interface()

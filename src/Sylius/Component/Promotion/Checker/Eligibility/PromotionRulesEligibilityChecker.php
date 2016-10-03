@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Promotion\Checker\Eligibility;
 
+use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
@@ -19,7 +20,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class RulesEligibilityChecker implements PromotionEligibilityCheckerInterface
+final class PromotionRulesEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
      * @var ServiceRegistryInterface

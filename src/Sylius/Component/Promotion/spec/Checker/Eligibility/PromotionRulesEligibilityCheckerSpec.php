@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
-use Sylius\Component\Promotion\Checker\Eligibility\RulesEligibilityChecker;
+use Sylius\Component\Promotion\Checker\Eligibility\PromotionRulesEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -21,11 +21,11 @@ use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
- * @mixin RulesEligibilityChecker
+ * @mixin PromotionRulesEligibilityChecker
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class RulesEligibilityCheckerSpec extends ObjectBehavior
+final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $rulesRegistry)
     {
@@ -34,7 +34,7 @@ final class RulesEligibilityCheckerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(RulesEligibilityChecker::class);
+        $this->shouldHaveType(PromotionRulesEligibilityChecker::class);
     }
 
     function it_implements_promotion_eligibility_checker_interface()
