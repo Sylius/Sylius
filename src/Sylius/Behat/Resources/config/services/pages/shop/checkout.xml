@@ -18,6 +18,7 @@
         <parameter key="sylius.behat.page.shop.checkout.select_shipping.class">Sylius\Behat\Page\Shop\Checkout\SelectShippingPage</parameter>
         <parameter key="sylius.behat.page.shop.checkout.complete.class">Sylius\Behat\Page\Shop\Checkout\CompletePage</parameter>
         <parameter key="sylius.behat.page.shop.checkout.thank_you.class">Sylius\Behat\Page\Shop\Checkout\ThankYouPage</parameter>
+        <parameter key="sylius.behat.page.shop.checkout.order_details.class">Sylius\Behat\Page\Shop\Checkout\OrderDetailsPage</parameter>
     </parameters>
 
     <services>
@@ -28,5 +29,6 @@
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>
         <service id="sylius.behat.page.shop.checkout.thank_you" class="%sylius.behat.page.shop.checkout.thank_you.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.checkout.order_details" class="%sylius.behat.page.shop.checkout.order_details.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
     </services>
 </container>

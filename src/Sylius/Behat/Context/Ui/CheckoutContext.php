@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\OrderDetailsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
@@ -74,6 +75,11 @@ final class CheckoutContext implements Context
     private $completePage;
 
     /**
+     * @var OrderDetailsPageInterface
+     */
+    private $orderDetails;
+
+    /**
      * @var OrderRepositoryInterface
      */
     private $orderRepository;
@@ -96,6 +102,7 @@ final class CheckoutContext implements Context
      * @param ThankYouPageInterface $thankYouPage
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
+     * @param OrderDetailsPageInterface $orderDetails
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $addressFactory
      * @param CurrentPageResolverInterface $currentPageResolver
@@ -108,6 +115,7 @@ final class CheckoutContext implements Context
         ThankYouPageInterface $thankYouPage,
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
+        OrderDetailsPageInterface $orderDetails,
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $addressFactory,
         CurrentPageResolverInterface $currentPageResolver
@@ -119,6 +127,7 @@ final class CheckoutContext implements Context
         $this->thankYouPage = $thankYouPage;
         $this->selectShippingPage = $selectShippingPage;
         $this->completePage = $completePage;
+        $this->orderDetails = $orderDetails;
         $this->orderRepository = $orderRepository;
         $this->addressFactory = $addressFactory;
         $this->currentPageResolver = $currentPageResolver;

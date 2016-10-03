@@ -11,12 +11,12 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface ThankYouPageInterface extends PageInterface
+interface ThankYouPageInterface extends SymfonyPageInterface
 {
     /**
      * @return bool
@@ -29,24 +29,10 @@ interface ThankYouPageInterface extends PageInterface
     public function getInstructions();
 
     /**
-     * @return bool
-     */
-    public function hasPayAction();
-    
-    public function pay();
-
-    /**
      * @param int $timeout
      * @param array $parameters
      *
      * @throws \InvalidArgumentException
      */
     public function waitForResponse($timeout, array $parameters = []);
-
-    /**
-     * @param string $paymentMethodName
-     */
-    public function choosePaymentMethod($paymentMethodName);
-
-    public function saveChanges();
 }
