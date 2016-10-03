@@ -43,4 +43,16 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
 
         $this->promotionManager->flush();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function decrement(OrderInterface $order)
+    {
+        foreach ($order->getPromotions() as $promotion) {
+            $promotion->decrementUsed();
+        }
+
+        $this->promotionManager->flush();
+    }
 }

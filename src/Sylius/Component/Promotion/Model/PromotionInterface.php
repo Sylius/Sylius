@@ -83,6 +83,8 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
 
     public function incrementUsed();
 
+    public function decrementUsed();
+
     /**
      * @return \DateTime
      */

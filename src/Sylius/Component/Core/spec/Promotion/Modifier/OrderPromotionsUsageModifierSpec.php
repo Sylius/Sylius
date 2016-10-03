@@ -40,7 +40,7 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         $this->shouldImplement(OrderPromotionsUsageModifierInterface::class);
     }
 
-    function it_increases_usage_of_promotions_applied_on_order(
+    function it_increment_usage_of_promotions_applied_on_order(
         ObjectManager $promotionManager,
         OrderInterface $order,
         PromotionInterface $firstPromotion,
@@ -54,5 +54,21 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         $promotionManager->flush()->shouldBeCalled();
 
         $this->increment($order);
+    }
+
+    function it_decrements_usage_of_promotions_applied_on_order(
+        ObjectManager $promotionManager,
+        OrderInterface $order,
+        PromotionInterface $firstPromotion,
+        PromotionInterface $secondPromotion
+    ) {
+        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+
+        $firstPromotion->decrementUsed()->shouldBeCalled();
+        $secondPromotion->decrementUsed()->shouldBeCalled();
+
+        $promotionManager->flush()->shouldBeCalled();
+
+        $this->decrement($order);
     }
 }
