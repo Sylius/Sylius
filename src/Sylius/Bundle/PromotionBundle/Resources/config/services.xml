@@ -58,6 +58,10 @@
             <argument type="service" id="sylius.repository.promotion_coupon" />
         </service>
 
+        <service id="sylius.validator.promotion_subject_coupon" class="Sylius\Bundle\PromotionBundle\Validator\PromotionSubjectCouponValidator">
+            <argument type="service" id="sylius.promotion_eligibility_checker" />
+            <tag name="validator.constraint_validator" alias="sylius_promotion_subject_validator" />
+        </service>
         <service id="sylius.validator.date_range" class="Sylius\Bundle\PromotionBundle\Validator\PromotionDateRangeValidator">
             <tag name="validator.constraint_validator" alias="sylius_promotion_date_range_validator" />
         </service>

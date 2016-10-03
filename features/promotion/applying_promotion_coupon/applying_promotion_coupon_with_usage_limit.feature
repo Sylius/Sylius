@@ -23,6 +23,6 @@ Feature: Applying promotion coupon with usage limit
         Given this coupon has already reached its usage limit
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
-        Then I should be notified that the coupon has reached its usage limit
+        Then I should be notified that the coupon is invalid
         And my cart total should be "$100.00"
         And there should be no discount

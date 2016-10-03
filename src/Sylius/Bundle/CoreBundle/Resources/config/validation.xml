@@ -85,6 +85,10 @@
     </class>
 
     <class name="Sylius\Component\Core\Model\Order">
+        <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionSubjectCoupon">
+            <option name="groups">sylius_promotion_coupon</option>
+        </constraint>
+
         <property name="shippingAddress">
             <constraint name="Valid" />
         </property>
@@ -106,14 +110,6 @@
         <property name="promotionCoupon">
             <constraint name="NotNull">
                 <option name="message">sylius.promotion_coupon.is_invalid</option>
-                <option name="groups">sylius_promotion_coupon</option>
-            </constraint>
-
-            <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponUsageLimit">
-                <option name="groups">sylius_promotion_coupon</option>
-            </constraint>
-
-            <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponExpiry">
                 <option name="groups">sylius_promotion_coupon</option>
             </constraint>
         </property>

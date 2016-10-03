@@ -11,22 +11,21 @@
 
 namespace Sylius\Bundle\PromotionBundle\Validator\Constraints;
 
-use Sylius\Bundle\PromotionBundle\Validator\PromotionCouponExpiryValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class PromotionCouponExpiry extends Constraint
+final class PromotionSubjectCoupon extends Constraint
 {
-    public $message = 'sylius.promotion_coupon.has_expired';
+    public $message = 'sylius.promotion_coupon.is_invalid';
 
     /**
      * {@inheritdoc}
      */
     public function getTargets()
     {
-        return [self::PROPERTY_CONSTRAINT, self::CLASS_CONSTRAINT];
+        return [self::CLASS_CONSTRAINT];
     }
 
     /**
@@ -34,6 +33,6 @@ final class PromotionCouponExpiry extends Constraint
      */
     public function validatedBy()
     {
-        return PromotionCouponExpiryValidator::class;
+        return 'sylius_promotion_subject_validator';
     }
 }

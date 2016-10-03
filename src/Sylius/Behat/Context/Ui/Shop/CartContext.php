@@ -440,28 +440,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be notified that the coupon has expired
-     */
-    public function iShouldBeNotifiedThatCouponHasExpired()
-    {
-        Assert::eq(
-            $this->summaryPage->getPromotionCouponValidationMessage(),
-            'Coupon code has expired.'
-        );
-    }
-
-    /**
-     * @Then I should be notified that the coupon has reached its usage limit
-     */
-    public function iShouldBeNotifiedThatCouponHasReachedItsUsageLimit()
-    {
-        Assert::eq(
-            $this->summaryPage->getPromotionCouponValidationMessage(),
-            'Coupon code has reached its usage limit.'
-        );
-    }
-
-    /**
      * @Then total price of :productName item should be :productPrice
      */
     public function thisItemPriceShouldBe($productName, $productPrice)
