@@ -91,6 +91,7 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @Given I want to browse promotions
+     * @When I browse promotions
      */
     public function iWantToBrowsePromotions()
     {
@@ -488,6 +489,18 @@ final class ManagingPromotionsContext implements Context
         Assert::same(
             $this->createPage->getValidationMessageForAction(),
             'The value of a percentage discount must be at least 0%.'
+        );
+    }
+
+    /**
+     * @Then the promotion :promotion should be used :usage time(s)
+     */
+    public function thePromotionShouldBeUsedTime(PromotionInterface $promotion, $usage)
+    {
+        Assert::same(
+            $usage,
+            $this->indexPage->getUsageNumber($promotion),
+            'Promotion should be used %s times, but is %2$s.'
         );
     }
 
