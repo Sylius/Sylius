@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\OrderDetailsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
@@ -74,6 +75,11 @@ final class CheckoutContext implements Context
     private $completePage;
 
     /**
+     * @var OrderDetailsPageInterface
+     */
+    private $orderDetails;
+
+    /**
      * @var OrderRepositoryInterface
      */
     private $orderRepository;
@@ -96,6 +102,7 @@ final class CheckoutContext implements Context
      * @param ThankYouPageInterface $thankYouPage
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
+     * @param OrderDetailsPageInterface $orderDetails
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $addressFactory
      * @param CurrentPageResolverInterface $currentPageResolver
@@ -108,6 +115,7 @@ final class CheckoutContext implements Context
         ThankYouPageInterface $thankYouPage,
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
+        OrderDetailsPageInterface $orderDetails,
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $addressFactory,
         CurrentPageResolverInterface $currentPageResolver
@@ -119,6 +127,7 @@ final class CheckoutContext implements Context
         $this->thankYouPage = $thankYouPage;
         $this->selectShippingPage = $selectShippingPage;
         $this->completePage = $completePage;
+        $this->orderDetails = $orderDetails;
         $this->orderRepository = $orderRepository;
         $this->addressFactory = $addressFactory;
         $this->currentPageResolver = $currentPageResolver;
@@ -190,6 +199,14 @@ final class CheckoutContext implements Context
     public function iTryToOpenCheckoutCompletePage()
     {
         $this->completePage->tryToOpen();
+    }
+
+    /**
+     * @When /^I want to browse order details for (this order)$/
+     */
+    public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order)
+    {
+        $this->orderDetails->open(['tokenValue' => $order->getTokenValue()]);
     }
 
     /**
@@ -471,7 +488,7 @@ final class CheckoutContext implements Context
      */
     public function iChangePaymentMethodTo($paymentMethodName)
     {
-        $this->thankYouPage->choosePaymentMethod($paymentMethodName);
+        $this->orderDetails->choosePaymentMethod($paymentMethodName);
     }
 
     /**
@@ -955,13 +972,24 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should be able to pay again
+     * @Then /^I should be able to pay(?| again)$/
      */
     public function iShouldBeAbleToPayAgain()
     {
         Assert::true(
-            $this->thankYouPage->hasPayAction(),
+            $this->orderDetails->hasPayAction(),
             'I should be able to pay, but I am not able to.'
+        );
+    }
+
+    /**
+     * @Then I should not be able to pay
+     */
+    public function iShouldNotBeAbleToPayAgain()
+    {
+        Assert::false(
+            $this->orderDetails->hasPayAction(),
+            'I should not be able to pay, but I am able to.'
         );
     }
 
@@ -1023,14 +1051,6 @@ final class CheckoutContext implements Context
         $this->iSpecifyTheEmail($email);
         $this->iSpecifyTheShippingAddressAs($address);
         $this->iCompleteTheAddressingStep();
-    }
-
-    /**
-     * @Given I confirm my changes
-     */
-    public function iConfirmMyChanges()
-    {
-        $this->thankYouPage->saveChanges();
     }
 
     /**

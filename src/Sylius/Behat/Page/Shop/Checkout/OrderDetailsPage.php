@@ -15,44 +15,40 @@ use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
+final class OrderDetailsPage extends SymfonyPage implements OrderDetailsPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function hasThankYouMessage()
+    public function hasPayAction()
     {
-        $thankYouMessage = $this->getElement('thank_you')->getText();
-
-        return false !== strpos($thankYouMessage, 'Thank you!');
+        return $this->hasElement('pay_link');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getInstructions()
+    public function pay()
     {
-        return $this->getElement('instructions')->getText();
+        $this->getElement('pay_link')->click();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function waitForResponse($timeout, array $parameters = [])
+    public function choosePaymentMethod($paymentMethodName)
     {
-        $this->getDocument()->waitFor($timeout, function () use ($parameters) {
-            return $this->isOpen($parameters);
-        });
+        $paymentMethodElement = $this->getElement('payment_method', ['%name%' => $paymentMethodName]);
+        $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
     }
-    
+
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getRouteName()
     {
-        return 'sylius_shop_thank_you';
+        return 'sylius_shop_order_show_details';
     }
 
     /**
@@ -62,6 +58,8 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'instructions' => '#sylius-payment-method-instructions',
+            'pay_link' => '#sylius-pay-link',
+            'payment_method' => '.item:contains("%name%") input',
             'thank_you' => '#sylius-thank-you',
         ]);
     }

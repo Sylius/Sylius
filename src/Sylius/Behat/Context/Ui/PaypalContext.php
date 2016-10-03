@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
-use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\OrderDetailsPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -36,9 +36,9 @@ final class PaypalContext implements Context
     private $paypalExpressCheckoutPage;
 
     /**
-     * @var ThankYouPageInterface
+     * @var OrderDetailsPageInterface
      */
-    private $thankYouPage;
+    private $orderDetails;
 
     /**
      * @var CompletePageInterface
@@ -58,7 +58,7 @@ final class PaypalContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param ThankYouPageInterface $thankYouPage
+     * @param OrderDetailsPageInterface $orderDetails
      * @param CompletePageInterface $summaryPage
      * @param PaypalApiMocker $paypalApiMocker
      * @param OrderRepositoryInterface $orderRepository
@@ -66,14 +66,14 @@ final class PaypalContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
-        ThankYouPageInterface $thankYouPage,
+        OrderDetailsPageInterface $orderDetails,
         CompletePageInterface $summaryPage,
         PaypalApiMocker $paypalApiMocker,
         OrderRepositoryInterface $orderRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
-        $this->thankYouPage = $thankYouPage;
+        $this->orderDetails = $orderDetails;
         $this->summaryPage = $summaryPage;
         $this->paypalApiMocker = $paypalApiMocker;
         $this->orderRepository = $orderRepository;
@@ -122,6 +122,6 @@ final class PaypalContext implements Context
     public function iTryToPayAgain()
     {
         $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->thankYouPage->pay();
+        $this->orderDetails->pay();
     }
 }
