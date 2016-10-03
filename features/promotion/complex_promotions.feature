@@ -1,4 +1,4 @@
-@promotion
+@applying_promotion_rules
 Feature: Receiving a discount based on a configured promotion
     In order to pay less for my order during a promotion period
     As a Customer
@@ -15,7 +15,6 @@ Feature: Receiving a discount based on a configured promotion
         And this product belongs to "Dresses"
         And the store has a product "Rammstein bow tie" priced at "$10.00"
         And this product belongs to "Formal attire"
-        And the store has "DHL" shipping method with "$10.00" fee
 
     @ui
     Scenario: Receiving a discount on the first order
@@ -34,19 +33,18 @@ Feature: Receiving a discount based on a configured promotion
         And I add product "Black Sabbath jacket" to the cart
         Then product "Black Sabbath jacket" price should be decreased by "$10.00"
         And my cart total should be "$170.00"
-        And my discount should be "-$10.00"
 
     @ui
     Scenario: Receiving a discount on items and shipping from one promotion based on items total
-        Given there is a promotion "Jackets and shipping discount"
+        Given the store has "DHL" shipping method with "$10.00" fee
+        And there is a promotion "Jackets and shipping discount"
         And it gives "$10.00" off on every product classified as "Jackets" and a free shipping to every order with items total equal at least "$500.00"
         And I am a logged in customer
         When I add 7 products "Black Sabbath jacket" to the cart
         And I proceed selecting "DHL" shipping method
         Then theirs price should be decreased by "$70.00"
         And my cart total should be "$630.00"
-        And my discount should be "-$80.00"
-        And my cart shipping total should be "$10.00"
+        And my cart shipping total should be "$0.00"
 
     @ui
     Scenario: Receiving a discount on items and the whole order from one promotion based on items total
@@ -55,7 +53,7 @@ Feature: Receiving a discount based on a configured promotion
         When I add 7 products "Black Sabbath jacket" to the cart
         Then theirs price should be decreased by "$140.00"
         And my cart total should be "$510.00"
-        And my discount should be "-$190.00"
+        And my discount should be "-$50.00"
 
     @ui
     Scenario: Receiving a discount on products from multiple taxons based on products from different taxons
@@ -65,4 +63,3 @@ Feature: Receiving a discount based on a configured promotion
         Then product "Metallica dress" price should be decreased by "$5.00"
         And product "Rammstein bow tie" price should be decreased by "$1.00"
         And my cart total should be "$134.00"
-        And my discount should be "-$6.00"
