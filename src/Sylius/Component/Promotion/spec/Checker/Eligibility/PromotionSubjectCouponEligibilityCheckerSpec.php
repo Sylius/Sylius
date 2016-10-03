@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionSubjectCouponEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
@@ -26,6 +27,11 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
 {
+    function let(PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker)
+    {
+        $this->beConstructedWith($promotionCouponEligibilityChecker);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(PromotionSubjectCouponEligibilityChecker::class);
@@ -36,49 +42,69 @@ final class PromotionSubjectCouponEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
 
-    function it_dispatches_event_and_returns_true_if_subject_coupons_are_eligible_to_promotion(
-        PromotionCouponAwarePromotionSubjectInterface $subject,
+    function it_returns_true_if_subject_coupons_are_eligible_to_promotion(
+        PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker,
+        PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion,
-        PromotionCouponInterface $coupon
+        PromotionCouponInterface $promotionCoupon
     ) {
-        $subject->getPromotionCoupon()->willReturn($coupon);
         $promotion->isCouponBased()->willReturn(true);
 
-        $coupon->getPromotion()->willReturn($promotion);
+        $promotionSubject->getPromotionCoupon()->willReturn($promotionCoupon);
+        $promotionCoupon->getPromotion()->willReturn($promotion);
 
-        $this->isEligible($subject, $promotion)->shouldReturn(true);
-    }
+        $promotionCouponEligibilityChecker->isEligible($promotionSubject, $promotionCoupon)->willReturn(true);
 
-    function it_returns_false_if_subject_coupons_are_not_eligible_to_promotion(
-        PromotionCouponAwarePromotionSubjectInterface $subject,
-        PromotionInterface $promotion,
-        PromotionInterface $otherPromotion,
-        PromotionCouponInterface $coupon
-    ) {
-        $subject->getPromotionCoupon()->willReturn($coupon);
-        $promotion->isCouponBased()->willReturn(true);
-
-        $coupon->getPromotion()->willReturn($otherPromotion);
-
-        $this->isEligible($subject, $promotion)->shouldReturn(false);
-    }
-
-    function it_returns_false_if_subject_has_no_coupon(
-        PromotionCouponAwarePromotionSubjectInterface $subject,
-        PromotionInterface $promotion
-    ) {
-        $subject->getPromotionCoupon()->willReturn(null);
-        $promotion->isCouponBased()->willReturn(true);
-
-        $this->isEligible($subject, $promotion)->shouldReturn(false);
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(true);
     }
 
     function it_returns_false_if_subject_is_not_coupon_aware(
-        PromotionSubjectInterface $subject,
+        PromotionSubjectInterface $promotionSubject,
         PromotionInterface $promotion
     ) {
         $promotion->isCouponBased()->willReturn(true);
 
-        $this->isEligible($subject, $promotion)->shouldReturn(false);
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(false);
+    }
+
+    function it_returns_false_if_subject_has_no_coupon(
+        PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
+        PromotionInterface $promotion
+    ) {
+        $promotion->isCouponBased()->willReturn(true);
+
+        $promotionSubject->getPromotionCoupon()->willReturn(null);
+
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(false);
+    }
+
+    function it_returns_false_if_subject_coupons_comes_from_an_another_promotion(
+        PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
+        PromotionInterface $promotion,
+        PromotionInterface $otherPromotion,
+        PromotionCouponInterface $promotionCoupon
+    ) {
+        $promotion->isCouponBased()->willReturn(true);
+
+        $promotionSubject->getPromotionCoupon()->willReturn($promotionCoupon);
+        $promotionCoupon->getPromotion()->willReturn($otherPromotion);
+
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(false);
+    }
+
+    function it_returns_false_if_subject_coupons_is_not_eligible(
+        PromotionCouponEligibilityCheckerInterface $promotionCouponEligibilityChecker,
+        PromotionCouponAwarePromotionSubjectInterface $promotionSubject,
+        PromotionInterface $promotion,
+        PromotionCouponInterface $promotionCoupon
+    ) {
+        $promotion->isCouponBased()->willReturn(true);
+
+        $promotionSubject->getPromotionCoupon()->willReturn($promotionCoupon);
+        $promotionCoupon->getPromotion()->willReturn($promotion);
+
+        $promotionCouponEligibilityChecker->isEligible($promotionSubject, $promotionCoupon)->willReturn(false);
+
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(false);
     }
 }
