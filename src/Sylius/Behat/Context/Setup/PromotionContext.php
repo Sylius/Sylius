@@ -112,6 +112,21 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given there is a promotion :promotionName limited to :usageLimit usages
+     */
+    public function thereIsPromotionLimitedToUsages($promotionName, $usageLimit)
+    {
+        $promotion = $this->testPromotionFactory
+            ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
+        ;
+
+        $promotion->setUsageLimit($usageLimit);
+
+        $this->promotionRepository->add($promotion);
+        $this->sharedStorage->set('promotion', $promotion);
+    }
+
+    /**
      * @Given the store has promotion :promotionName with coupon :couponCode
      * @Given the store has also promotion :promotionName with coupon :couponCode
      * @Given the store has a promotion :promotionName with a coupon :couponCode that is limited to :usageLimit usages
