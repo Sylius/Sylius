@@ -22,4 +22,9 @@ interface OrderPromotionsUsageModifierInterface
      * @param OrderInterface $order
      */
     public function increment(OrderInterface $order);
+
+    /**
+     * @param OrderInterface $order
+     */
+    public function decrement(OrderInterface $order);
 }

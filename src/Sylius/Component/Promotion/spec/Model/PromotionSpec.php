@@ -15,10 +15,13 @@ use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
+use Sylius\Component\Promotion\Model\Promotion;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 
 /**
+ * @mixin Promotion
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class PromotionSpec extends ObjectBehavior
@@ -95,9 +98,13 @@ final class PromotionSpec extends ObjectBehavior
         $this->getUsed()->shouldReturn(5);
     }
 
-    function its_used_should_be_incrementable()
+    function its_increments_and_decrements_its_used_value()
     {
         $this->incrementUsed();
+        $this->incrementUsed();
+        $this->getUsed()->shouldReturn(2);
+
+        $this->decrementUsed();
         $this->getUsed()->shouldReturn(1);
     }
 
