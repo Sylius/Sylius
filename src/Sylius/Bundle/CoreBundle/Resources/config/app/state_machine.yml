@@ -44,6 +44,10 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
                     args: ["object"]
+                sylius_increment_promotions_usages:
+                    on: ["complete"]
+                    do: ["@sylius.modifier.usage_modifier", "increment"]
+                    args: ["object"]
 
     sylius_order_shipping:
         class: "%sylius.model.order.class%"
