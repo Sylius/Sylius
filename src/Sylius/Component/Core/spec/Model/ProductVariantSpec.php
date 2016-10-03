@@ -12,11 +12,10 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
@@ -30,14 +29,19 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->shouldHaveType(ProductVariant::class);
     }
 
-    function it_implements_Sylius_product_variant_interface()
+    function it_implements_product_variant_interface()
     {
         $this->shouldImplement(ProductVariantInterface::class);
     }
 
-    function it_implements_Sylius_taxable_interface()
+    function it_implements_taxable_interface()
     {
         $this->shouldImplement(TaxableInterface::class);
+    }
+
+    function it_implements_shippable_interface()
+    {
+        $this->shouldImplement(ShippableInterface::class);
     }
 
     function it_extends_Sylius_product_variant_model()
@@ -86,29 +90,6 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(round(3.1 * 100));
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice([310]);
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(new \stdClass());
-    }
-
-    function it_implements_Sylius_shippable_interface()
-    {
-        $this->shouldImplement('Sylius\Component\Shipping\Model\ShippableInterface');
-    }
-
-    function it_returns_null_if_product_has_no_shipping_category(ProductInterface $product)
-    {
-        $this->setProduct($product);
-
-        $product->getShippingCategory()->willReturn(null)->shouldBeCalled();
-        $this->getShippingCategory()->shouldReturn(null);
-    }
-
-    function it_returns_the_product_shipping_category(
-        ProductInterface $product,
-        ShippingCategoryInterface $shippingCategory
-    ) {
-        $this->setProduct($product);
-
-        $product->getShippingCategory()->willReturn($shippingCategory)->shouldBeCalled();
-        $this->getShippingCategory()->shouldReturn($shippingCategory);
     }
 
     function it_has_no_weight_by_default()

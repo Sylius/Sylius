@@ -19,7 +19,6 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -51,13 +50,11 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
     /**
      * @param FactoryInterface $shippingMethodFactory
      * @param RepositoryInterface $zoneRepository
-     * @param RepositoryInterface $shippingCategoryRepository
      * @param RepositoryInterface $localeRepository
      */
     public function __construct(
         FactoryInterface $shippingMethodFactory,
         RepositoryInterface $zoneRepository,
-        RepositoryInterface $shippingCategoryRepository,
         RepositoryInterface $localeRepository
     ) {
         $this->shippingMethodFactory = $shippingMethodFactory;
@@ -82,9 +79,6 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
                 ->setDefault('zone', LazyOption::randomOne($zoneRepository))
                 ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
                 ->setNormalizer('zone', LazyOption::findOneBy($zoneRepository, 'code'))
-                ->setDefined('shipping_category')
-                ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
-                ->setNormalizer('shipping_category', LazyOption::findOneBy($shippingCategoryRepository, 'code'))
                 ->setDefault('calculator', function (Options $options) {
                     return ['type' => DefaultCalculators::FLAT_RATE, 'configuration' => ['amount' => $this->faker->randomNumber(4)]];
                 })
@@ -105,10 +99,6 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
         $shippingMethod->setZone($options['zone']);
         $shippingMethod->setCalculator($options['calculator']['type']);
         $shippingMethod->setConfiguration($options['calculator']['configuration']);
-
-        if (array_key_exists('shipping_category', $options)) {
-            $shippingMethod->setCategory($options['shipping_category']);
-        }
 
         foreach ($this->getLocales() as $localeCode) {
             $shippingMethod->setCurrentLocale($localeCode);

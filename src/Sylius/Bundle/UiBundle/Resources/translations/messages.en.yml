@@ -154,7 +154,6 @@ sylius:
         create_redirect_route: 'Create redirect route'
         create_report: 'Create report'
         create_route: 'Create route'
-        create_shipping_category: 'Create shipping category'
         create_shipping_method: 'Create shipping method'
         create_simple_block: 'Create simple block'
         create_slideshow_block: 'Create slideshow block'
@@ -268,7 +267,6 @@ sylius:
         editing_role: 'Editing role'
         editing_route: 'Editing route'
         editing_shipment: 'Editing shipment'
-        editing_shipping_category: 'Editing shipping category'
         editing_shipping_method: 'Editing shipping method'
         editing_simple_block: 'Editing simple block'
         editing_slideshow_block: 'Editing slideshow block'
@@ -450,7 +448,6 @@ sylius:
         new_review: 'New review'
         new_role: 'New role'
         new_route: 'New route'
-        new_shipping_category: 'New shipping category'
         new_shipping_method: 'New shipping method'
         new_static_content: 'New static content'
         new_tax_category: 'New tax category'
@@ -474,7 +471,6 @@ sylius:
         no_requirement: No requirement
         no_results: 'No results'
         no_results_to_display: There are no results to display
-        no_shipping_category: 'No shipping category'
         no_shipping_charges: No shipping charges applied
         no_shipping_methods_available: There are currently no shipping methods available for your shipping address
         no_short_description: '<i>No short description</i>'
@@ -637,7 +633,6 @@ sylius:
         shipping_address: 'Shipping address'
         shipping_and_payment_methods: Shipping and payment methods
         shipping_categories: 'Shipping Categories'
-        shipping_category: 'Shipping category'
         shipping_charges: 'Shipping charges'
         shipping_method: 'Shipping method'
         shipping_method_details: 'Shipping method details'

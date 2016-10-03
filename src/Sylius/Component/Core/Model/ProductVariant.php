@@ -242,14 +242,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingCategory()
-    {
-        return $this->getProduct()->getShippingCategory();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getWeight()
     {
         return $this->weight;
