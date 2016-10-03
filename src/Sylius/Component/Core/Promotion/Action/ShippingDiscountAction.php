@@ -80,7 +80,7 @@ class ShippingDiscountAction implements PromotionActionInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_shipping_discount_configuration';
+        return 'sylius_promotion_action_percentage_discount_configuration';
     }
 
     /**

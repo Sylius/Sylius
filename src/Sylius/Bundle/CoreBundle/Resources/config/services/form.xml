@@ -111,9 +111,6 @@
             <argument type="service" id="sylius.repository.taxon" />
             <tag name="form.type" alias="sylius_promotion_rule_total_of_items_from_taxon_configuration" />
         </service>
-        <service id="sylius.form.type.promotion_action.shipping_discount_configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType">
-            <tag name="form.type" alias="sylius_promotion_action_shipping_discount_configuration" />
-        </service>
 
         <service id="sylius.form.type.price_calculator.channel_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelBasedConfigurationType">
             <argument type="service" id="sylius.repository.channel" />
