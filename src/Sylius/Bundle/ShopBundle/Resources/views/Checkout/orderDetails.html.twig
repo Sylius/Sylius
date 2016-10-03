@@ -4,7 +4,7 @@
     {% set lastNewPayment = order.getLastNewPayment() %}
     {% include '@SyliusShop/Common/Order/_summary.html.twig' %}
 
-    {% if order.paymentState is not same as ('paid') and order.paymentState is not same as ('cancelled') %}
+    {% if order.paymentState not in ['paid', 'cancelled'] %}
         {{ render(url('sylius_shop_payment_method_update', {'paymentId': lastNewPayment.id} )) }}
     {% endif %}
 {% endblock %}

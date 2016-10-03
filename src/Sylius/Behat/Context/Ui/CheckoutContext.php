@@ -202,6 +202,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^I want to browse order details for (this order)$/
+     */
+    public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order)
+    {
+        $this->orderDetails->open(['tokenValue' => $order->getTokenValue()]);
+    }
+
+    /**
      * @When /^I specify the shipping (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      * @When /^I specify the shipping (address for "[^"]+" from "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+")$/
      * @When /^I (do not specify any shipping address) information$/
@@ -480,7 +488,7 @@ final class CheckoutContext implements Context
      */
     public function iChangePaymentMethodTo($paymentMethodName)
     {
-        $this->thankYouPage->choosePaymentMethod($paymentMethodName);
+        $this->orderDetails->choosePaymentMethod($paymentMethodName);
     }
 
     /**
@@ -964,13 +972,24 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should be able to pay again
+     * @Then /^I should be able to pay(?| again)$/
      */
     public function iShouldBeAbleToPayAgain()
     {
         Assert::true(
-            $this->thankYouPage->hasPayAction(),
+            $this->orderDetails->hasPayAction(),
             'I should be able to pay, but I am not able to.'
+        );
+    }
+
+    /**
+     * @Then I should not be able to pay
+     */
+    public function iShouldNotBeAbleToPayAgain()
+    {
+        Assert::false(
+            $this->orderDetails->hasPayAction(),
+            'I should not be able to pay, but I am able to.'
         );
     }
 
@@ -1032,14 +1051,6 @@ final class CheckoutContext implements Context
         $this->iSpecifyTheEmail($email);
         $this->iSpecifyTheShippingAddressAs($address);
         $this->iCompleteTheAddressingStep();
-    }
-
-    /**
-     * @Given I confirm my changes
-     */
-    public function iConfirmMyChanges()
-    {
-        $this->thankYouPage->saveChanges();
     }
 
     /**
