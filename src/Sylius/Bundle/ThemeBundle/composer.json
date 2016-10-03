@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "symfony/symfony": "^2.8",
+        "symfony/symfony": "^2.8|^3.0",
         "zendframework/zend-hydrator": "^1.0|^2.0"
     },
     "require-dev": {
