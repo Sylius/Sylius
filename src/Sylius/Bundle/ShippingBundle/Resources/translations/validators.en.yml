@@ -2,15 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    shipping_category:
-        name:
-            max_length: 'Category name must not be longer than {{ limit }} characters.'
-            min_length: 'Category name must be at least {{ limit }} characters long.'
-            not_blank: 'Please enter shipping category name.'
-        code:
-            not_blank: 'Please enter shipping category code.'
-            unique: 'The shipping category with given code already exists.'
-
     shipping_method:
         calculator:
             max_length: sylius.shipping_method.calculator.max_length   # FIXME

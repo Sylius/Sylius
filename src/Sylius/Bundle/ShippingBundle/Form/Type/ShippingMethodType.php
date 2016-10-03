@@ -73,17 +73,6 @@ class ShippingMethodType extends AbstractResourceType
                 'type' => 'sylius_shipping_method_translation',
                 'label' => 'sylius.form.shipping_method.translations',
             ])
-            ->add('category', 'sylius_shipping_category_choice', [
-                'required' => false,
-                'empty_value' => 'sylius.ui.no_requirement',
-                'label' => 'sylius.form.shipping_method.category',
-            ])
-            ->add('categoryRequirement', 'choice', [
-                'choices' => ShippingMethod::getCategoryRequirementLabels(),
-                'multiple' => false,
-                'expanded' => true,
-                'label' => 'sylius.form.shipping_method.category_requirement',
-            ])
             ->add('calculator', 'sylius_shipping_calculator_choice', [
                 'label' => 'sylius.form.shipping_method.calculator',
             ])

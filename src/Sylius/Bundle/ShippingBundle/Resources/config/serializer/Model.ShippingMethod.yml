@@ -12,9 +12,6 @@ Sylius\Component\Shipping\Model\ShippingMethod:
         enabled:
             expose: true
             type: boolean
-        categoryRequirement:
-            expose: true
-            type: integer
         calculator:
             expose: true
             type: string
@@ -37,10 +34,3 @@ Sylius\Component\Shipping\Model\ShippingMethod:
                 route: sylius_api_shipping_method_show
                 parameters:
                     id: expr(object.getId())
-        #- rel: category
-        #  href:
-        #        route: sylius_api_shipping_category_show
-        #        parameters:
-        #            id: expr(object.getCategory().getId())
-        #        exclusion:
-        #            exclude_if: expr(object.getCategory() === null)
