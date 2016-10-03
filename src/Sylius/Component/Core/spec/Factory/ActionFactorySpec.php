@@ -18,7 +18,7 @@ use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
 use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountAction;
 use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountAction;
-use Sylius\Component\Core\Promotion\Action\ShippingDiscountAction;
+use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountAction;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -91,13 +91,13 @@ final class ActionFactorySpec extends ObjectBehavior
         $this->createUnitPercentageDiscount(0.1)->shouldReturn($action);
     }
 
-    function it_creates_shipping_discount_action_with_given_discount_rate($decoratedFactory, ActionInterface $action)
+    function it_creates_shipping_percentage_discount_action_with_given_discount_rate($decoratedFactory, ActionInterface $action)
     {
         $decoratedFactory->createNew()->willReturn($action);
 
-        $action->setType(ShippingDiscountAction::TYPE)->shouldBeCalled();
+        $action->setType(ShippingPercentageDiscountAction::TYPE)->shouldBeCalled();
         $action->setConfiguration(['percentage' => 0.1])->shouldBeCalled();
 
-        $this->createPercentageShippingDiscount(0.1)->shouldReturn($action);
+        $this->createShippingPercentageDiscount(0.1)->shouldReturn($action);
     }
 }
