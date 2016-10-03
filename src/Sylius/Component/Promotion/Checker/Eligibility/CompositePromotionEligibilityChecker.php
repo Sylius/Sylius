@@ -42,17 +42,12 @@ final class CompositePromotionEligibilityChecker implements PromotionEligibility
      */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
     {
-        $result = false;
         foreach ($this->promotionEligibilityCheckers as $promotionEligibilityChecker) {
-            try {
-                if (!$promotionEligibilityChecker->isEligible($promotionSubject, $promotion)) {
-                    return false;
-                }
-
-                $result = true;
-            } catch (UnsupportedPromotionException $exception) {}
+            if (!$promotionEligibilityChecker->isEligible($promotionSubject, $promotion)) {
+                return false;
+            }
         }
 
-        return $result;
+        return true;
     }
 }
