@@ -12,7 +12,6 @@
 namespace Sylius\Component\Shipping\Resolver;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
@@ -24,22 +23,14 @@ class ShippingMethodsResolver implements ShippingMethodsResolverInterface
      * @var ObjectRepository
      */
     protected $shippingMethodRepository;
-
-    /**
-     * @var ShippingMethodEligibilityCheckerInterface
-     */
-    protected $eligibilityChecker;
-
+    
     /**
      * @param ObjectRepository $shippingMethodRepository
-     * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
     public function __construct(
-        ObjectRepository $shippingMethodRepository,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+        ObjectRepository $shippingMethodRepository
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
-        $this->eligibilityChecker = $eligibilityChecker;
     }
 
     /**
@@ -47,15 +38,7 @@ class ShippingMethodsResolver implements ShippingMethodsResolverInterface
      */
     public function getSupportedMethods(ShippingSubjectInterface $subject)
     {
-        $methods = [];
-
-        foreach ($this->shippingMethodRepository->findBy(['enabled' => true]) as $shippingMethod) {
-            if ($this->eligibilityChecker->isEligible($subject, $shippingMethod)) {
-                $methods[] = $shippingMethod;
-            }
-        }
-
-        return $methods;
+        return $this->shippingMethodRepository->findBy(['enabled' => true]);
     }
 
     /**
