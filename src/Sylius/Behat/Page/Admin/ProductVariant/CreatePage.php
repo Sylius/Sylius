@@ -40,11 +40,21 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function selectOption($optionName, $optionValue)
+    {
+        $optionName = strtoupper($optionName);
+        $this->getElement('option_select', ['%option-name%' => $optionName])->selectOption($optionValue);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_variant_code',
             'price' => '#sylius_product_variant_price',
+            'option_select' => '#sylius_product_variant_optionValues_%option-name%'
         ]);
     }
 }

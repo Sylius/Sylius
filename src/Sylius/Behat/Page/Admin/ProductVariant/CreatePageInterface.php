@@ -32,4 +32,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $name
      */
     public function nameIt($name);
+
+    /**
+     * @param string $optionName
+     * @param string $optionValue
+     */
+    public function selectOption($optionName, $optionValue);
 }

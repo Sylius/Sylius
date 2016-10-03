@@ -442,6 +442,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I set its :optionName option as :optionValue
+     */
+    public function iSetItsOptionAs($optionName, $optionValue)
+    {
+        $this->createPage->selectOption($optionName, $optionValue);
+    }
+
+    /**
      * @param string $element
      * @param $message
      */
