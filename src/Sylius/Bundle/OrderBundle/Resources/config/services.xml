@@ -11,54 +11,39 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
-
-        <parameter key="sylius.order_item_quantity_modifier.class">Sylius\Component\Order\Modifier\OrderItemQuantityModifier</parameter>
-        <parameter key="sylius.form.data_mapper.property_path.class">Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper</parameter>
-        <parameter key="sylius.form.data_mapper.order_item_quantity.class">Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper</parameter>
-
-        <parameter key="sylius.adjustments_aggregator.class">Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator</parameter>
-
-        <parameter key="sylius.custom_factory.adjustment.class">Sylius\Component\Order\Factory\AdjustmentFactory</parameter>
-
-        <parameter key="sylius.order_number_assigner.class">Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner</parameter>
-        <parameter key="sylius.sequential_order_number_generator.class">Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator</parameter>
-
-        <parameter key="sylius.listener.session_cart.class"></parameter>
-    </parameters>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/order_processing.xml"/>
+        <import resource="services/templating.xml"/>
+        <import resource="services/twig.xml"/>
+    </imports>
 
     <services>
-        <service id="sylius.callback.complete_order" class="%sylius.callback.complete_order.class%" />
+        <service id="sylius.callback.complete_order" class="Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback" />
 
-        <service id="sylius.order_item_quantity_modifier" class="%sylius.order_item_quantity_modifier.class%">
+        <service id="sylius.order_item_quantity_modifier" class="Sylius\Component\Order\Modifier\OrderItemQuantityModifier">
             <argument type="service" id="sylius.factory.order_item_unit" />
         </service>
-        <service id="sylius.form.data_mapper.property_path" class="%sylius.form.data_mapper.property_path.class%">
+        <service id="sylius.form.data_mapper.property_path" class="Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper">
             <argument type="service" id="property_accessor" />
         </service>
-        <service id="sylius.form.data_mapper.order_item_quantity" class="%sylius.form.data_mapper.order_item_quantity.class%">
+        <service id="sylius.form.data_mapper.order_item_quantity" class="Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper">
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <argument type="service" id="sylius.form.data_mapper.property_path" />
         </service>
 
-        <service id="sylius.adjustments_aggregator" class="%sylius.adjustments_aggregator.class%" />
+        <service id="sylius.adjustments_aggregator" class="Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator" />
 
-        <service id="sylius.custom_factory.adjustment" class="%sylius.custom_factory.adjustment.class%" decorates="sylius.factory.adjustment" public="false">
+        <service id="sylius.custom_factory.adjustment" class="Sylius\Component\Order\Factory\AdjustmentFactory" decorates="sylius.factory.adjustment" public="false">
             <argument type="service" id="sylius.custom_factory.adjustment.inner" />
         </service>
 
-        <service id="sylius.sequential_order_number_generator" class="%sylius.sequential_order_number_generator.class%">
+        <service id="sylius.sequential_order_number_generator" class="Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator">
             <argument type="service" id="sylius.repository.order_sequence" />
             <argument type="service" id="sylius.factory.order_sequence" />
         </service>
 
-        <service id="sylius.order_number_assigner" class="%sylius.order_number_assigner.class%">
+        <service id="sylius.order_number_assigner" class="Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner">
             <argument type="service" id="sylius.sequential_order_number_generator" />
         </service>
 
