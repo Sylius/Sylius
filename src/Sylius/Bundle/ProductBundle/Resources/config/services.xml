@@ -29,6 +29,10 @@
             <tag name="form.type" alias="sylius_product_option_value_choice" />
         </service>
 
+        <service id="sylius.form.type.product_option_value_collection" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueCollectionType">
+            <tag name="form.type" alias="sylius_product_option_value_collection" />
+        </service>
+
         <service id="sylius.form.type.product_variant_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantChoiceType">
             <tag name="form.type" alias="sylius_product_variant_choice" />
         </service>
