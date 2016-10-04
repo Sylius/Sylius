@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        channel:
+            name: Име
+            description: Описание
+            url: URL-адрес
+            enabled: Включено
+            color: Цвят

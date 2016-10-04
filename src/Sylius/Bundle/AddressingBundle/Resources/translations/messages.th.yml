@@ -4,7 +4,7 @@
 sylius:
     form:
         address:
-            city: จังหวัด
+            city: เขต/อำเภอ
             company: บริษัท
             country: ประเทศ
             first_name: ชื่อ

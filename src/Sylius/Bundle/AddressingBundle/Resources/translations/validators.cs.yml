@@ -35,20 +35,26 @@ sylius:
             unique: ISO kód země musí být unikátní.
     province:
         code:
+            min_length: Kód provincie musí mít nejméně 5 znaků|Kód provincie musí mít nejméně 5 znaků.
             not_blank: Zadejte prosím kód provincie.
+            regex: Kód provincie by měl mít následující formát XX-XX (např. US-FL).
             unique: Provincie kód musí být jedinečný.
         name:
             max_length: Název státu nesmí být delší než 255 znaků|Název státu nesmí být delší než 255 znaků.
             min_length: Název státu musí být dlouhý nejméně 2 znaky|Název státu musí být dlouhý nejméně 2 znaky.
             not_blank: Zadejte prosím název státu.
+            unique: Název provincie musí být jedinečný.
     zone:
         code:
             not_blank: Zadejte prosím kód zóny.
+            unique: Kód zóny musí být jedinečný.
         members:
             min_count: 'Prosím přidejte alespoň {{ limit }} člena oblasti.'
         name:
             max_length: Název oblasti nesmí být delší než 255 znaků|Název oblasti nesmí být delší než 255 znaků.
+            min_length: Název zóny musí obsahovat alespoň 2 znaky|Název zóny musí obsahovat alespoň 2 znaky.
             not_blank: Prosím zadejte název oblasti.
     zone_member:
         code:
             not_blank: Prosím zvolte člena zóny.
+        unique: Zvolený člen zóny je již v této zóně.

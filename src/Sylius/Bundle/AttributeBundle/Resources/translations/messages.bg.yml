@@ -5,3 +5,24 @@ sylius:
     form:
         attribute:
             add: добавяне
+            choices: Избор
+            code: Код
+            name: Име
+            translations: Преводи
+        attribute_type:
+            checkbox: Отметка
+            configuration: Конфигурация
+            date: Дата
+            datetime: Дата и час
+            integer: Целочислено
+            percent: Процент
+            text: Текст
+            validation: Проверка
+        attribute_type_configuration:
+            datetime:
+                format: Форматиране
+            date:
+                format: Форматиране
+            text:
+                min: Минимална дължина
+                max: Макс. дължина

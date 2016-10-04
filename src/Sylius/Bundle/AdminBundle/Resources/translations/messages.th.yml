@@ -12,6 +12,7 @@ sylius:
                     products: สินค้า
                     taxons: การจัดหมวดหมู่
                 configuration:
+                    admin_users: ผู้ดูแลระบบ
                     channels: ช่องทางจำหน่าย
                     countries: ประเทศ
                     currencies: สกุลเงิน

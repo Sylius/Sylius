@@ -17,6 +17,7 @@ sylius:
             billing_address: ที่อยู่สำหรับออกใบเสร็จ
             different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
             only_customer_registration: สร้างบัญชี?
+            subscribed_to_newsletter: สมัครรับจดหมายข่าว
     gender:
         unknown: ไม่ทราบสถานะ
         male: ชาย

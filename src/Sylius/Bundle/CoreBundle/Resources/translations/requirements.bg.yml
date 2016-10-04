@@ -3,8 +3,24 @@
 
 sylius:
     extensions:
+        header: разширения
+        accelerator:
+            header: Ускорител
+        fileinfo: Инфо за файл
         "off": false
         "on": true
+        session_start: Сесия
+    filesystem:
+        header: файлова система
+        cache:
+            header: кеш
+        exists: съществува
+        not_exists: не съществува
+        not_writable: не е записваемо
+        writable: записваемо
     settings:
+        header: Настройки и версия на PHP
         "off": false
         "on": true
+        timezone: часова зона
+        version: Версия на PHP

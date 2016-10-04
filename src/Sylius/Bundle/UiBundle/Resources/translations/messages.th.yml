@@ -10,6 +10,8 @@ sylius:
         option:
             name: ชื่อ
         notes: หมายเหตุเพิ่มเติม
+        variant:
+            tracked: ติดตาม
     ui:
         abandoned: ถูกละทิ้ง
         about: เกี่ยวกับเรา
@@ -41,16 +43,19 @@ sylius:
         adding_new_email: เพิ่มอีเมลใหม่
         adding_new_locale: เพิ่มตำแหน่งที่ตั้งใหม่
         additional_information: ข้อมูลเพิ่มเติม
+        address: ที่อยู่
         addressing: ที่อยู่
         addressing_step: กำหนดที่อยู่
         adjustments: การปรับปรุง
         administration: การจัดการระบบ
         administration_dashboard: แดชบอร์ดสำหรับผู้ดูแลระบบ
         administration_panel_login: เข้าสู่ระบบ Admin
+        admin_users: ผู้ดูแลระบบ
         all: ทั้งหมด
         all_your_addresses: รายการที่อยู่ทั้งหมดของคุณ
         amount: ยอดรวม
         an_error_occurred: เกิดข้อผิดพลาด
+        api: Api
         apply_coupon: ใช้คูปอง
         are_your_sure_you_want_to_perform_this_action: คุณแน่ใจหรือคุณต้องการดำเนินการนี้?
         association: ความสัมพันธ์
@@ -87,6 +92,7 @@ sylius:
         category: หมวดหมู่
         category_requirements: ข้อกำหนดสำหรับหมวดหมู่
         change_address: เปลี่ยนที่อยู่
+        change_file: เลือกไฟล์
         change_password: เปลี่ยนรหัสผ่าน
         change_payment_method: แก้ไขวิธีการชำระเงิน
         change_shipping_method: แก้ไขวิธีการขนส่ง
@@ -97,7 +103,7 @@ sylius:
         checking_out_as: กำลังชำระเงินด้วย
         checkout: ชำระเงิน
         choose_file: เลือกไฟล์
-        city: จังหวัด
+        city: เขต/อำเภอ
         clear_cart: ล้างรถเข็น
         clear_filters: ล้างการกรอง
         code: รหัส
@@ -214,6 +220,7 @@ sylius:
         discount: ส่วนลด
         discounted_unit_price: ราคาลดต่อหน่วยราคา
         edit: แก้ไข
+        edit_admin_user: แก้ไขผู้ดูแลระบบ
         edit_association_type: แก้ไขชนิดความสัมพันธ์
         edit_channel: แก้ไขช่องทางจำหน่าย
         edit_country: แก้ไขประเทศ
@@ -232,6 +239,7 @@ sylius:
         edit_promotion_coupon: แก้ไขคูปองโปรโมชั่น
         edit_report: แก้ไขรายงาน
         edit_route: แก้ไข route
+        edit_shipping_address: แก้ไข ที่อยู่ในการจัดส่ง
         edit_shipping_method: แก้ไขวิธีการจัดส่ง
         edit_static_content: แก้ไข Static content
         edit_tax_category: แก้ไขประเภทภาษี
@@ -357,6 +365,7 @@ sylius:
         links: ลิงก์
         list_coupons: รายการคูปอง
         list_variants: รายการสินค้าย่อย
+        locale: ภาษา
         locales: ภาษา
         lock: ล็อค
         locked: ล็อคแล้ว
@@ -369,6 +378,7 @@ sylius:
         male: ชาย
         manage: จัดการ
         manage_adjustments: จัดการการปรับปรุง
+        manage_admin_users: จัดการผู้ดูแลระบบ
         manage_attributes: การจัดการคุณลักษณะ (Attribute)
         manage_attributes_of_your_products: จัดการคุณสมบัติของสินค้าของคุณ
         manage_categorization_of_your_products: จัดการภาษี
@@ -419,16 +429,17 @@ sylius:
         n_a: N/A
         name: ชื่อ
         new: รายการใหม่
+        new_admin_user: ผู้ดูแลระบบใหม่
         new_channel: เพิ่มช่องทางจำหน่าย
-        new_comment_posted_on_order: เพิ่มความคิดเห็นใหม่บนรายการสั่งซื้อ
+        new_comment_posted_on_order: ความคิดเห็นใหม่บนรายการสั่งซื้อ
         new_country: ประเทศใหม่
         new_coupon: คูปองใหม่
         new_currency: เพิ่มสกุลเงิน
         new_customer: ลูกค้าใหม่
-        new_customers: เพิ่มลูกค้า
+        new_customers: ลูกค้าใหม่
         new_locale: ตำแหน่งที่ตั้งใหม่
         new_order: เพิ่มใบสั่งซื้อ
-        new_orders: เพิ่มใบสั่งซื้อ
+        new_orders: ใบสั่งซื้อใหม่
         new_password: รหัสผ่านใหม่
         new_payment: เพิ่มการชำระเงิน
         new_payment_method: เพิ่มวิธีการชำระเงิน
@@ -452,6 +463,7 @@ sylius:
         new_zone: เพิ่มโซน
         newest_products: สินค้าใหม่ล่าสุด
         next: ถัดไป
+        no_label: ไม่ใช่
         no_account: ไม่มีบัญชี
         no_association_types_to_display: ไม่มีชนิดความสัมพันธ์กำหนดไว้
         no_comment: ไม่มีความเห็น
@@ -477,6 +489,7 @@ sylius:
         not_empty: ไม่ว่างเปล่า
         not_in: ไม่ได้อยู่ใน
         not_verified: ยังไม่ยืนยัน
+        not_tracked: ไม่ได้ติดตาม
         notes: หมายเหตุ
         notify_customer: แจ้งให้ลูกค้าทราบ
         number: หมายเลข
@@ -488,7 +501,7 @@ sylius:
         order: ใบสั่งซื้อ
         order_comment_name: ความเห็นเกี่ยวกับการสั่งซื้อ
         order_comments: ความเห็นเกี่ยวกับการสั่งซื้อ
-        order_confirmation_name: ยืนยันการสั่งซื้อ
+        order_confirmation_name: รายละเอียดใบสั่งซื้อ
         order_details: รายละเอียดใบสั่งซื้อ
         order_history: ประวัติการสั่งซื้อ
         order_item_product: รายการ
@@ -557,6 +570,7 @@ sylius:
         promotion_configuration: กำหนดค่าโปรโมชั่น
         promotion_coupons: คูปอง
         promotion_details: รายละเอียดโปรโมชั่น
+        promotion_discount: ส่วนลดจากโปรโมชั่น
         promotion_information: ข้อมูลโปรโมชั่น
         promotion_total: รวมโปรโมชั่น
         promotions: โปรโมชั่น
@@ -615,7 +629,7 @@ sylius:
         ship: จัดส่ง
         ship_to: จัดส่งไปยัง
         shipment: การจัดส่ง
-        shipment_confirmation_name: ยืนยันการจัดส่ง
+        shipment_confirmation_name: รายละเอียดการจัดส่ง
         shipment_details: รายละเอียดการจัดส่ง
         shipment_mode: โหมดการจัดส่ง
         shipment_state: สถานะการจัดส่ง
@@ -639,6 +653,7 @@ sylius:
         show_deleted: แสดงรายการที่ลบ
         show_in_store: แสดงในร้าน
         show_metadata: แสดง Metadata
+        show_order_details: แสดงรายละเอียดใบสั่ง
         sign_in: ลงชื่อเข้าใช้
         sign_in_here: ลงชื่อเข้าใช้ที่นี่
         sign_in_to_the_store_or_create_new_account: 'เข้าสู่ระบบ <small>หรือสร้างบัญชีใหม่</small>'
@@ -654,9 +669,10 @@ sylius:
         state: สถานะ
         static_contents: Static contents
         status: สถานะ
-        street: ถนน
+        street: ที่อยู่
         string_blocks: สายบล็อก
         subject: ชื่อเรื่อง
+        subscribed_to_newsletter: สมัครรับจดหมายข่าว
         subtotal: ยอดรวม
         success: สำเร็จ
         summary: สรุปรายการ
@@ -762,6 +778,7 @@ sylius:
         welcome: ยินดีต้อนรับ
         welcome_to_our_store: ยินดีต้อนรับสู่ร้านของเรา
         welcome_to_your_space: ยินดีต้อนรับสู่พื้นที่ของคุณ
+        yes_label: ใช่
         you_are_customer_since: คุณเป็นลูกค้าตั้งแต่
         you_have_no_addresses_defined: คุณไม่มีที่อยู่กำหนดไว้
         you_have_no_new_orders: คุณมีไม่มีใบสั่งซื้อใหม่
