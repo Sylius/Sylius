@@ -53,4 +53,11 @@ class AdminUserSpec extends ObjectBehavior
         $this->setLastName('Doe');
         $this->getLastName()->shouldReturn('Doe');
     }
+
+    function it_has_mutable_locale_code()
+    {
+        $this->getLocaleCode()->shouldReturn(null);
+        $this->setLocaleCode('en_US');
+        $this->getLocaleCode()->shouldReturn('en_US');
+    }
 }

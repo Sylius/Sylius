@@ -29,6 +29,11 @@ class AdminUser extends User implements AdminUserInterface
     protected $lastName;
 
     /**
+     * @var string
+     */
+    protected $localeCode;
+
+    /**
      * {@inheritdoc}
      */
     public function __construct()
@@ -68,5 +73,21 @@ class AdminUser extends User implements AdminUserInterface
     public function setLastName($lastName)
     {
         $this->lastName = $lastName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocaleCode()
+    {
+        return $this->localeCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocaleCode($code)
+    {
+        $this->localeCode = $code;
     }
 }

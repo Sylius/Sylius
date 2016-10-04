@@ -44,6 +44,7 @@
 
         <service id="sylius.fixture.example_factory.admin_user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory">
             <argument type="service" id="sylius.factory.admin_user" />
+            <argument>%locale%</argument>
         </service>
 
         <service id="sylius.fixture.example_factory.product_option" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductOptionExampleFactory">

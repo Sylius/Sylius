@@ -85,6 +85,13 @@
         <service id="sylius.context.locale.core" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale">
             <call method="addContext">
                 <argument type="service">
+                    <service class="Sylius\Bundle\CoreBundle\Context\AdminBasedLocaleContext">
+                        <argument type="service" id="security.token_storage" />
+                    </service>
+                </argument>
+            </call>
+            <call method="addContext">
+                <argument type="service">
                     <service class="Sylius\Bundle\LocaleBundle\Context\RequestBasedLocaleContext">
                         <argument type="service" id="request_stack" />
                         <argument type="service" id="sylius.locale_provider" />

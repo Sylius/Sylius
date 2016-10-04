@@ -91,6 +91,14 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getSubHeader()
+    {
+        return trim($this->getElement('sub_header')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function logOut()
     {
         $this->getElement('logout')->click();
@@ -118,6 +126,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'new_orders' => '#new-orders',
             'order_list' => '#orders',
             'total_sales' => '#total-sales',
+            'sub_header' => '.ui.header .content .sub.header',
         ]);
     }
 }

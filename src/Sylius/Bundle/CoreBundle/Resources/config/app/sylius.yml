@@ -226,7 +226,7 @@ sylius_user:
                     model: Sylius\Component\Core\Model\AdminUser
                     repository: Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository
                     form:
-                        default: Sylius\Bundle\UserBundle\Form\Type\UserType
+                        default: Sylius\Bundle\CoreBundle\Form\Type\AdminUserType
         shop:
             user:
                 classes:

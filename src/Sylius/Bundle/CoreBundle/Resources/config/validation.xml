@@ -43,6 +43,17 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="localeCode">
+            <constraint name="NotBlank">
+                <option name="message">sylius.user.locale_code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="max">12</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 
     <class name="Sylius\Component\Core\Model\Channel">

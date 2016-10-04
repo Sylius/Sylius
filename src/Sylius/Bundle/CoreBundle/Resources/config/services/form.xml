@@ -62,9 +62,12 @@
             <argument type="service" id="sylius.form.event_subscriber.add_shop_user_type" />
             <tag name="form.type" alias="sylius_customer" />
         </service>
-
         <service id="sylius.form.type.list" class="Sylius\Bundle\CoreBundle\Form\Type\ListType">
             <tag name="form.type" alias="list" />
+        </service>
+        <service id="sylius.form.type.locale_code_choice" class="Sylius\Bundle\CoreBundle\Form\Type\LocaleCodeChoiceType">
+            <argument type="service" id="sylius.repository.locale"/>
+            <tag name="form.type" alias="sylius_locale_code_choice"/>
         </service>
 
         <service id="sylius.form.type.tax_calculation_strategy_choice" class="Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType">

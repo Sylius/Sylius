@@ -103,6 +103,7 @@ EOT
         }
 
         $user->setEnabled(true);
+        $user->setLocaleCode($this->locale->getCode());
 
         $userManager->persist($user);
         $userManager->flush();

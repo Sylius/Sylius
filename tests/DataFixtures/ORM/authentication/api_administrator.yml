@@ -23,3 +23,4 @@ Sylius\Component\Core\Model\AdminUser:
         enabled: true
         email: api@sylius.com
         username: sylius
+        localeCode: en

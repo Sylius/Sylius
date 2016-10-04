@@ -50,11 +50,20 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function specifyLocale($localeCode)
+    {
+        $this->getElement('locale_code')->selectOption($localeCode);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'email' => '#sylius_admin_user_email',
             'enabled' => '#sylius_admin_user_enabled',
+            'locale_code' => '#sylius_admin_user_localeCode',
             'name' => '#sylius_admin_user_username',
             'password' => '#sylius_admin_user_plainPassword',
         ]);

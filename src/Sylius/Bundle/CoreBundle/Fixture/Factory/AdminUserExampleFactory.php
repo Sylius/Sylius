@@ -38,8 +38,9 @@ final class AdminUserExampleFactory implements ExampleFactoryInterface
 
     /**
      * @param FactoryInterface $userFactory
+     * @param string $localeCode
      */
-    public function __construct(FactoryInterface $userFactory)
+    public function __construct(FactoryInterface $userFactory, $localeCode)
     {
         $this->userFactory = $userFactory;
 
@@ -57,6 +58,7 @@ final class AdminUserExampleFactory implements ExampleFactoryInterface
                 })
                 ->setAllowedTypes('enabled', 'bool')
                 ->setDefault('password', 'password123')
+                ->setDefault('locale_code', $localeCode)
                 ->setDefault('api', false)
         ;
     }
@@ -75,6 +77,7 @@ final class AdminUserExampleFactory implements ExampleFactoryInterface
         $user->setPlainPassword($options['password']);
         $user->setEnabled($options['enabled']);
         $user->addRole('ROLE_ADMINISTRATION_ACCESS');
+        $user->setLocaleCode($options['locale_code']);
 
         if ($options['api']) {
             $user->addRole('ROLE_API_ACCESS');
