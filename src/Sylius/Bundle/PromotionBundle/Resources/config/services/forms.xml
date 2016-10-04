@@ -42,7 +42,7 @@
         <service id="sylius.form.type.promotion_action.percentage_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType">
             <tag name="form.type" alias="sylius_promotion_action_percentage_discount_configuration" />
         </service>
-        <service id="sylius.form.type.promotion_coupon_to_code" class="Sylius\Bundle\PromotionBundle\Form\Type\CouponToCodeType">
+        <service id="sylius.form.type.promotion_coupon_to_code" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponToCodeType">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <tag name="form.type" alias="sylius_promotion_coupon_to_code" />
         </service>

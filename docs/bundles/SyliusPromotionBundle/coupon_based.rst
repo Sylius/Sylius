@@ -14,7 +14,7 @@ Coupon to code transformer
 
 ``SyliusPromotionBundle`` provides a way to transform a simple string code to a real ``PromotionCoupon`` object (and vice versa). This is done via the ``Sylius\Bundle\PromotionBundle\Form\DataTransformer\CouponToCodeTransformer`` class.
 
-This data transformer is used by default with the ``Sylius\Bundle\PromotionBundle\Form\Type\CouponToCodeType`` form, provided as the service ``sylius.form.type.promotion_coupon_to_code``.
+This data transformer is used by default with the ``Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponToCodeType`` form, provided as the service ``sylius.form.type.promotion_coupon_to_code``.
 
 .. note::
 

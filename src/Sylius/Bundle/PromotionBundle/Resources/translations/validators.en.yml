@@ -24,8 +24,6 @@ sylius:
         usage_limit:
             min: Coupon usage limit must be at least {{ limit }}.
         is_invalid: Coupon code is invalid.
-        has_expired: Coupon code has expired.
-        reached_usage_limit: Coupon code has reached its usage limit.
     promotion_coupon_generate_instruction:
         amount:
             min: Amount of coupons to generate must be at least {{ limit }}.

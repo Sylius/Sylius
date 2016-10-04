@@ -132,7 +132,6 @@ final class PromotionContext implements Context
         $this->promotionRepository->add($promotion);
 
         $this->sharedStorage->set('promotion', $promotion);
-        $this->sharedStorage->set('promotion_coupon', $coupon);
         $this->sharedStorage->set('coupon', $coupon);
     }
 

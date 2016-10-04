@@ -11,32 +11,31 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class CouponToCodeType extends AbstractType implements DataTransformerInterface
+final class PromotionCouponToCodeType extends AbstractType implements DataTransformerInterface
 {
     /**
-     * @var ObjectRepository
+     * @var RepositoryInterface
      */
-    private $couponRepository;
+    private $promotionCouponRepository;
 
     /**
-     * @param ObjectRepository $couponRepository
+     * @param RepositoryInterface $promotionCouponRepository
      */
-    public function __construct(ObjectRepository $couponRepository)
+    public function __construct(RepositoryInterface $promotionCouponRepository)
     {
-        $this->couponRepository = $couponRepository;
+        $this->promotionCouponRepository = $promotionCouponRepository;
     }
 
     /**
@@ -81,11 +80,11 @@ class CouponToCodeType extends AbstractType implements DataTransformerInterface
      */
     public function reverseTransform($code)
     {
-        if (!$code) {
+        if (null === $code || '' === $code) {
             return null;
         }
 
-        return $this->couponRepository->findOneBy(['code' => $code]);
+        return $this->promotionCouponRepository->findOneBy(['code' => $code]);
     }
 
     /**

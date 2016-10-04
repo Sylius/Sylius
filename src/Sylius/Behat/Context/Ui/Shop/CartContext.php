@@ -418,22 +418,11 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be notified that the coupon has been applied
-     */
-    public function iShouldBeNotifiedThatCouponHasBeenApplied()
-    {
-        $this->notificationChecker->checkNotification(
-            'Your promotion coupon has been applied.',
-            NotificationType::success()
-        );
-    }
-
-    /**
      * @Then I should be notified that the coupon is invalid
      */
     public function iShouldBeNotifiedThatCouponIsInvalid()
     {
-        Assert::eq(
+        Assert::same(
             $this->summaryPage->getPromotionCouponValidationMessage(),
             'Coupon code is invalid.'
         );

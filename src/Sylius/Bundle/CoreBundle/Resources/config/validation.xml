@@ -184,43 +184,6 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Core\Model\TaxRate">
-        <property name="zone">
-            <constraint name="NotBlank">
-                <option name="message">sylius.tax_rate.zone.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-    </class>
-
-    <class name="Sylius\Component\Order\Model\OrderItem">
-        <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
-            <option name="stockablePath">variant</option>
-            <option name="groups">
-                <value>sylius_checkout_complete</value>
-                <value>sylius</value>
-            </option>
-        </constraint>
-    </class>
-
-    <class name="Sylius\Component\Core\Model\Channel">
-        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntity">
-            <option name="groups">sylius</option>
-        </constraint>
-        <property name="defaultCurrency">
-            <constraint name="NotBlank">
-                <option name="message">sylius.channel.default_currency.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-        <property name="defaultLocale">
-            <constraint name="NotBlank">
-                <option name="message">sylius.channel.default_locale.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-    </class>
-
     <class name="Sylius\Component\Core\Model\Taxon">
         <property name="images">
             <constraint name="Valid" />
@@ -247,5 +210,4 @@
             </constraint>
         </property>
     </class>
-
 </constraint-mapping>
