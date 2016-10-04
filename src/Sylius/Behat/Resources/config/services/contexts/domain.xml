@@ -60,5 +60,10 @@
             <argument type="service" id="sylius.repository.shipment" container="symfony"/>
             <tag name="sylius.behat.context" />
         </service>
+
+        <service id="sylius.behat.context.domain.cart" class="Sylius\Behat\Context\Domain\CartContext">
+            <argument type="service" id="sylius.repository.order" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
     </services>
 </container>
