@@ -13,7 +13,7 @@ Feature: Adding a new promotion with action
         Given I want to create a new promotion
         When I specify its code as "10_for_all_products"
         And I name it "$10.00 for all products!"
-        And I add the "Order fixed discount" action configured with $10.00
+        And I add the "Order fixed discount" action configured with amount of "$10.00"
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10.00 for all products!" promotion should appear in the registry

@@ -52,7 +52,7 @@ Feature: Promotion validation
         And I try to save my changes
         Then I should be notified that promotion cannot end before it start
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Trying to add a new promotion without specifying a percentage discount
         Given I want to create a new promotion
         When I specify its code as "christmas_Sale"
@@ -62,7 +62,7 @@ Feature: Promotion validation
         Then I should be notified that this value should not be blank
         And promotion with name "Christmas sale" should not be added
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Trying to add a new promotion with a wrong percentage discount
         Given I want to create a new promotion
         When I specify its code as "christmas_Sale"

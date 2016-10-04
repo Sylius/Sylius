@@ -176,12 +176,23 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the "Order fixed discount" action configured with $:amount
+     * @Given /^I add the "([^"]+)" action configured with amount of ("(?:€|£|\$)[^"]+")$/
      */
-    public function stepDefinition($amount)
+    public function iAddTheActionConfiguredWithAmount($actionType, $amount)
     {
-        $this->createPage->addAction('Order fixed discount');
+        $this->createPage->addAction($actionType);
         $this->createPage->fillActionOption('Amount', $amount);
+    }
+
+    /**
+     * @Given I add the :actionType action configured with percentage of :percentage%
+     * @Given I add the :actionType action configured without percentage
+     *
+     */
+    public function iAddTheActionConfiguredWithPercentage($actionType, $percentage = null)
+    {
+        $this->createPage->addAction($actionType);
+        $this->createPage->fillActionOption('Percentage', $percentage);
     }
 
     /**
@@ -445,6 +456,22 @@ final class ManagingPromotionsContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::same($currentPage->getValidationMessage('ends_at'), 'End date cannot be set prior start date.');
+    }
+
+    /**
+     * @Then I should be notified that this value should not be blank
+     */
+    public function iShouldBeNotifiedThatThisValueShouldNotBeBlank()
+    {
+        Assert::same($this->createPage->getValidationMessageForAction(), 'This value should not be blank.');
+    }
+
+    /**
+     * @Then I should be notified that percentage discount must be a maximum of 100%
+     */
+    public function iShouldBeNotifiedThatPercentageDiscountMustBeAMaximumOf100()
+    {
+        Assert::same($this->createPage->getValidationMessageForAction(), 'Percentage discount must be a maximum of 100%.');
     }
 
     /**
