@@ -47,4 +47,11 @@ interface OrderRepositoryInterface extends RepositoryInterface
      * @return OrderInterface|null
      */
     public function findCartById($id);
+
+    /**
+     * @param \DateTime $limitDate
+     *
+     * @return OrderInterface[]
+     */
+    public function findExpiredCarts(\DateTime $limitDate);
 }

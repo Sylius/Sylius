@@ -103,6 +103,7 @@ sylius_order:
         order_item_unit:
             classes:
                 model: Sylius\Component\Core\Model\OrderItemUnit
+    cart_expires_after: 3 hours
 
 sylius_payment:
     resources:
