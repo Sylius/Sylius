@@ -89,10 +89,25 @@
         <property name="currencyCode">
             <constraint name="Currency">
                 <option name="message">sylius.order.currency_code.not_valid</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="promotionCoupon">
+            <constraint name="NotNull">
+                <option name="message">sylius.promotion_coupon.is_invalid</option>
+                <option name="groups">sylius_promotion_coupon</option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponUsageLimit">
+                <option name="groups">sylius_promotion_coupon</option>
+            </constraint>
+
+            <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionCouponExpiry">
+                <option name="groups">sylius_promotion_coupon</option>
             </constraint>
         </property>
     </class>
-    
+
     <class name="Sylius\Component\Order\Model\OrderItem">
         <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
             <option name="stockablePath">variant</option>
@@ -157,6 +172,43 @@
         <property name="zone">
             <constraint name="NotBlank">
                 <option name="message">sylius.shipping_method.zone.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Core\Model\TaxRate">
+        <property name="zone">
+            <constraint name="NotBlank">
+                <option name="message">sylius.tax_rate.zone.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Sylius\Component\Order\Model\OrderItem">
+        <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
+            <option name="stockablePath">variant</option>
+            <option name="groups">
+                <value>sylius_checkout_complete</value>
+                <value>sylius</value>
+            </option>
+        </constraint>
+    </class>
+
+    <class name="Sylius\Component\Core\Model\Channel">
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntity">
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="defaultCurrency">
+            <constraint name="NotBlank">
+                <option name="message">sylius.channel.default_currency.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="defaultLocale">
+            <constraint name="NotBlank">
+                <option name="message">sylius.channel.default_locale.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

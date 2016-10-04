@@ -418,24 +418,46 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be notified that promotion coupon has been added to the cart
+     * @Then I should be notified that the coupon has been applied
      */
-    public function iShouldBeNotifiedThatPromotionCouponHasBeenAddedToTheCart()
+    public function iShouldBeNotifiedThatCouponHasBeenApplied()
     {
         $this->notificationChecker->checkNotification(
-            'Your promotion coupon has been added to the cart.',
+            'Your promotion coupon has been applied.',
             NotificationType::success()
         );
     }
 
     /**
-     * @Then I should be notified that promotion coupon is not valid
+     * @Then I should be notified that the coupon is invalid
      */
-    public function iShouldBeNotifiedThatPromotionCouponIsNotValid()
+    public function iShouldBeNotifiedThatCouponIsInvalid()
     {
-        $this->notificationChecker->checkNotification(
-            'Your promotion coupon is not valid.',
-            NotificationType::failure()
+        Assert::eq(
+            $this->summaryPage->getPromotionCouponValidationMessage(),
+            'Coupon code is invalid.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the coupon has expired
+     */
+    public function iShouldBeNotifiedThatCouponHasExpired()
+    {
+        Assert::eq(
+            $this->summaryPage->getPromotionCouponValidationMessage(),
+            'Coupon code has expired.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the coupon has reached its usage limit
+     */
+    public function iShouldBeNotifiedThatCouponHasReachedItsUsageLimit()
+    {
+        Assert::eq(
+            $this->summaryPage->getPromotionCouponValidationMessage(),
+            'Coupon code has reached its usage limit.'
         );
     }
 

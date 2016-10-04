@@ -151,4 +151,9 @@ interface SummaryPageInterface extends PageInterface
      * @param int $timeout
      */
     public function waitForRedirect($timeout);
+
+    /**
+     * @return string
+     */
+    public function getPromotionCouponValidationMessage();
 }

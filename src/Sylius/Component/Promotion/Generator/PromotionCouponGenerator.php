@@ -13,16 +13,16 @@ namespace Sylius\Component\Promotion\Generator;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
+use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class CouponGenerator implements CouponGeneratorInterface
+final class PromotionCouponGenerator implements PromotionCouponGeneratorInterface
 {
     /**
      * @var FactoryInterface
@@ -30,7 +30,7 @@ final class CouponGenerator implements CouponGeneratorInterface
     private $couponFactory;
 
     /**
-     * @var CouponRepositoryInterface
+     * @var PromotionCouponRepositoryInterface
      */
     private $couponRepository;
 
@@ -46,13 +46,13 @@ final class CouponGenerator implements CouponGeneratorInterface
 
     /**
      * @param FactoryInterface $couponFactory
-     * @param CouponRepositoryInterface $couponRepository
+     * @param PromotionCouponRepositoryInterface $couponRepository
      * @param ObjectManager $objectManager
      * @param GenerationPolicyInterface $generationPolicy
      */
     public function __construct(
         FactoryInterface $couponFactory,
-        CouponRepositoryInterface $couponRepository,
+        PromotionCouponRepositoryInterface $couponRepository,
         ObjectManager $objectManager,
         GenerationPolicyInterface $generationPolicy
     ) {

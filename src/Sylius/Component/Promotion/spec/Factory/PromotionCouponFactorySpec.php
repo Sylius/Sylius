@@ -12,19 +12,19 @@
 namespace spec\Sylius\Component\Promotion\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Factory\CouponFactory;
-use Sylius\Component\Promotion\Factory\CouponFactoryInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Factory\PromotionCouponFactory;
+use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin CouponFactory
+ * @mixin PromotionCouponFactory
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class CouponFactorySpec extends ObjectBehavior
+final class PromotionCouponFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory)
     {
@@ -33,7 +33,7 @@ final class CouponFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(CouponFactory::class);
+        $this->shouldHaveType(PromotionCouponFactory::class);
     }
 
     function it_is_a_resource_factory()
@@ -43,10 +43,10 @@ final class CouponFactorySpec extends ObjectBehavior
 
     function it_implements_coupon_factory_interface()
     {
-        $this->shouldImplement(CouponFactoryInterface::class);
+        $this->shouldImplement(PromotionCouponFactoryInterface::class);
     }
 
-    function it_creates_new_coupon(FactoryInterface $factory, CouponInterface $coupon)
+    function it_creates_new_coupon(FactoryInterface $factory, PromotionCouponInterface $coupon)
     {
         $factory->createNew()->willReturn($coupon);
 
@@ -68,7 +68,7 @@ final class CouponFactorySpec extends ObjectBehavior
     function it_creates_a_coupon_and_assigns_a_promotion_to_id(
         FactoryInterface $factory,
         PromotionInterface $promotion,
-        CouponInterface $coupon
+        PromotionCouponInterface $coupon
     ) {
         $factory->createNew()->willReturn($coupon);
         $promotion->getName()->willReturn('Christmas sale');

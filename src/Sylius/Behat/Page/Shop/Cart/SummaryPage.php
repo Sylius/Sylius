@@ -257,6 +257,14 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getPromotionCouponValidationMessage()
+    {
+        return $this->getElement('promotion_coupon_validation_message')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -271,6 +279,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
             'product_unit_price' => '#sylius-cart-items tr:contains("%name%") .sylius-unit-price',
             'product_unit_regular_price' => '#sylius-cart-items tr:contains("%name%") .sylius-regular-unit-price',
+            'promotion_coupon_validation_message' => '.field.error:contains("Coupon") .sylius-validation-error',
             'promotion_total' => '#sylius-cart-promotion-total',
             'save_button' => '#sylius-save',
             'shipping_total' => '#sylius-cart-shipping-total',

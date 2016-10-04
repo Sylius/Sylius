@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Checker\Eligibility;
 
-use Sylius\Component\Promotion\Model\CouponAwarePromotionSubjectInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponAwarePromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -29,7 +29,7 @@ final class CouponsEligibilityChecker implements PromotionEligibilityCheckerInte
             throw new UnsupportedPromotionException('Only coupon based promotions can be evaluated by this checker.');
         }
 
-        if (!$promotionSubject instanceof CouponAwarePromotionSubjectInterface) {
+        if (!$promotionSubject instanceof PromotionCouponAwarePromotionSubjectInterface) {
             return false;
         }
 

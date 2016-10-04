@@ -20,9 +20,9 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Promotion\Factory\CouponFactoryInterface;
+use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
@@ -42,7 +42,7 @@ final class PromotionContext implements Context
     private $actionFactory;
 
     /**
-     * @var CouponFactoryInterface
+     * @var PromotionCouponFactoryInterface
      */
     private $couponFactory;
 
@@ -69,7 +69,7 @@ final class PromotionContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ActionFactoryInterface $actionFactory
-     * @param CouponFactoryInterface $couponFactory
+     * @param PromotionCouponFactoryInterface $couponFactory
      * @param RuleFactoryInterface $ruleFactory
      * @param TestPromotionFactoryInterface $testPromotionFactory
      * @param PromotionRepositoryInterface $promotionRepository
@@ -78,7 +78,7 @@ final class PromotionContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ActionFactoryInterface $actionFactory,
-        CouponFactoryInterface $couponFactory,
+        PromotionCouponFactoryInterface $couponFactory,
         RuleFactoryInterface $ruleFactory,
         TestPromotionFactoryInterface $testPromotionFactory,
         PromotionRepositoryInterface $promotionRepository,
@@ -118,7 +118,7 @@ final class PromotionContext implements Context
      */
     public function thereIsPromotionWithCoupon($promotionName, $couponCode, $usageLimit = null)
     {
-        /** @var CouponInterface $coupon */
+        /** @var PromotionCouponInterface $coupon */
         $coupon = $this->couponFactory->createNew();
         $coupon->setCode($couponCode);
         $coupon->setUsageLimit($usageLimit);
@@ -130,8 +130,61 @@ final class PromotionContext implements Context
         $promotion->setCouponBased(true);
 
         $this->promotionRepository->add($promotion);
+
         $this->sharedStorage->set('promotion', $promotion);
+        $this->sharedStorage->set('promotion_coupon', $coupon);
         $this->sharedStorage->set('coupon', $coupon);
+    }
+
+    /**
+     * @Given /^(this promotion) has already expired$/
+     */
+    public function thisPromotionHasExpired(PromotionInterface $promotion)
+    {
+        $promotion->setEndsAt(new \DateTime('1 day ago'));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this coupon) has already expired$/
+     */
+    public function thisCouponHasExpired(PromotionCouponInterface $coupon)
+    {
+        $coupon->setExpiresAt(new \DateTime('1 day ago'));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this coupon) expires tomorrow$/
+     */
+    public function thisCouponExpiresTomorrow(PromotionCouponInterface $coupon)
+    {
+        $coupon->setExpiresAt(new \DateTime('tomorrow'));
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this coupon) has already reached its usage limit$/
+     */
+    public function thisCouponHasReachedItsUsageLimit(PromotionCouponInterface $coupon)
+    {
+        $coupon->setUsed(42);
+        $coupon->setUsageLimit(42);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this coupon) can be used (\d+) times?$/
+     */
+    public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, $usageLimit)
+    {
+        $coupon->setUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -457,7 +510,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^the (coupon "[^"]+") was used up to its usage limit$/
      */
-    public function theCouponWasUsed(CouponInterface $coupon)
+    public function theCouponWasUsed(PromotionCouponInterface $coupon)
     {
         $coupon->setUsed($coupon->getUsageLimit());
 

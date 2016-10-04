@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Promotion\Model\Coupon as BaseCoupon;
+use Sylius\Component\Promotion\Model\PromotionCoupon as BasePromotionCoupon;
 
-class Coupon extends BaseCoupon implements CouponInterface
+class PromotionCoupon extends BasePromotionCoupon implements PromotionCouponInterface
 {
     /**
      * @var int
