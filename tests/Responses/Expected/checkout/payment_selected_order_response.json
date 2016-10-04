@@ -3,7 +3,6 @@
   "items": @array@,
   "items_total": @integer@,
   "adjustments": @array@,
-  "comments": [],
   "adjustments_total": @integer@,
   "total": @integer@,
   "state": "cart",
