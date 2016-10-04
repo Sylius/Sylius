@@ -100,4 +100,19 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->getOneOrNullResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findExpiredCarts(\DateTime $terminalDate)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.state = :state')
+            ->andWhere('o.updatedAt = :terminalDate')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('terminalDate', $terminalDate)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
