@@ -59,7 +59,7 @@ final class ProductOptionFieldSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
 
         /** Options should be disabled for configurable product if it has at least one defined variant */
-        $disableOptions = (null !== $this->variantResolver->getVariant($product)) && (false === $product->hasVariants());
+        $disableOptions = (null !== $this->variantResolver->getVariant($product)) && $product->hasVariants();
 
         $form->add(
             'options',
