@@ -7,7 +7,7 @@ If you need to manage shipments, shipping methods and deal with complex cost cal
 help you a lot!
 
 Your products or whatever you need to deliver, can be categorized under unlimited set of categories.
-You can display appropriate shipping methods available to the user, based on object category, weight, dimensions and anything you can imagine.
+You can display appropriate shipping methods available to the user, based on weight, dimensions and anything you can imagine.
 
 Flexible shipping cost calculation system allows you to create your own calculator services.
 
@@ -17,11 +17,9 @@ Flexible shipping cost calculation system allows you to create your own calculat
    installation
    shippable_interface
    shipping_subject_interface
-   shipping_categories
    shipping_method
    calculating_shipping_cost
    default_calculators
    custom_calculators
    resolving_available_methods
-   shipping_requirements
    summary

@@ -61,42 +61,6 @@ ShipmentItems have the following properties:
 
 .. _Sylius API ShipmentItem: http://api.sylius.org/Sylius/Component/Shipping/Model/ShipmentItem.html
 
-
-ShippingCategory
-----------------
-
-**ShippingCategory** object represents category which can be common for **ShippingMethod** and object which implements
-**ShippableInterface**.
-ShippingCategory has the following properties:
-
-+---------------+-------------------------------------+
-| Property      | Description                         |
-+===============+=====================================+
-| id            | Unique id of the ShippingCategory   |
-+---------------+-------------------------------------+
-| code          | Unique code of the ShippingCategory |
-+---------------+-------------------------------------+
-| name          | e.g. "Regular"                      |
-+---------------+-------------------------------------+
-| description   | e.g. “Regular weight items”         |
-+---------------+-------------------------------------+
-| createdAt     | Creation time                       |
-+---------------+-------------------------------------+
-| updatedAt     | Last update time                    |
-+---------------+-------------------------------------+
-
-.. hint::
-    To understand relationship between **ShippingMethod** and shippable object base on **ShippingCategory** go to
-    :doc:`/bundles/SyliusShippingBundle/shipping_requirements`.
-
-.. note::
-    This model implements the :ref:`component_shipping_model_shipping-category-interface`.
-
-    For more detailed information go to `Sylius API ShippingCategory`_.
-
-.. _Sylius API ShippingCategory: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingCategory.html
-
-
 ShippingMethod
 --------------
 
@@ -109,10 +73,6 @@ It has the following properties:
 | id                  | Unique id of the ShippingMethod                                         |
 +---------------------+-------------------------------------------------------------------------+
 | code                | Unique code of the ShippingMethod                                       |
-+---------------------+-------------------------------------------------------------------------+
-| category            | e.g. "Regular"                                                          |
-+---------------------+-------------------------------------------------------------------------+
-| categoryRequirement | Reference to constant from ShippingMethodInterface                      |
 +---------------------+-------------------------------------------------------------------------+
 | enabled             | Boolean flag of enablement                                              |
 +---------------------+-------------------------------------------------------------------------+

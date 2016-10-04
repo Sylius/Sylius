@@ -56,28 +56,12 @@ This interface should be implemented by model representing physical object which
 
 .. _Sylius API ShippableInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippableInterface.html
 
-.. _component_shipping_model_shipping-category-interface:
-
-ShippingCategoryInterface
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This interface should be implemented by model representing a shipping category and it is required if you want to classify
-shipments and connect it with right shipment method.
-
-.. note::
-    This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`.
-
-    For more detailed information go to `Sylius API ShippingCategoryInterface`_.
-
-.. _Sylius API ShippingCategoryInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingCategoryInterface.html
-
 .. _component_shipping_model_shipping-method-interface:
 
 ShippingMethodInterface
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-This interface provides default requirements for system of matching shipping methods with shipments based on **ShippingCategory**
-and allows to add a new restriction to a basic shipping method.
+This interface allows to add a new restriction to a basic shipping method.
 
 .. note::
     This interface extends the :ref:`component_resource_model_code-aware-interface`, :ref:`component_resource_model_timestampable-interface`
@@ -174,19 +158,6 @@ This interface should be implemented by an object, which checks if a shipping su
     For more detailed information go to `Sylius API RuleCheckerInterface`_.
 
 .. _Sylius API RuleCheckerInterface: http://api.sylius.org/Sylius/Component/Shipping/Checker/RuleCheckerInterface.html
-
-
-.. _component_shipping_checker_shipping-method-eligibility-checker-interface:
-
-ShippingMethodEligibilityCheckerInterface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This interface should be implemented by an object, which checks if the given shipping subject is eligible for the shipping method rules.
-
-.. note::
-    For more detailed information go to `Sylius API ShippingMethodEligibilityCheckerInterface`_.
-
-.. _Sylius API ShippingMethodEligibilityCheckerInterface: http://api.sylius.org/Sylius/Component/Shipping/Checker/ShippingMethodEligibilityCheckerInterface.html
 
 
 Processor Interfaces

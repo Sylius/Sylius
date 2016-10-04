@@ -10,15 +10,9 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
     <?php
 
     use Sylius\Component\Shipping\Model\ShippableInterface;
-    use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
     class Wardrobe implements ShippableInterface
     {
-        /**
-         * @var ShippingCategoryInterface
-         */
-        private $category;
-
         /**
          * @var int
          */
@@ -104,56 +98,13 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
         {
             // TODO: Implement getShippingDepth() method.
         }
-
-        /**
-         * {@inheritdoc}
-         */
-        public function getShippingCategory()
-        {
-            return $this->category;
-        }
-
-        /**
-         * @param ShippingCategoryInterface $category
-         */
-        public function setShippingCategory(ShippingCategoryInterface $category)
-        {
-            $this->category = $category;
-        }
     }
-
-Shipping Category
------------------
-
-Every shipping category has three identifiers, an ID, code and name. You can access those by calling ``->getId()``, ``->getCode()`` and ``->getName()``
-methods respectively. The name is mutable, so you can change them by calling and ``->setName('Regular')`` on the shipping category instance.
 
 Shipping Method
 ---------------
 
 Every shipping method has three identifiers, an ID code and name. You can access those by calling ``->getId()``, ``->gerCode()`` and ``->getName()``
 methods respectively. The name is mutable, so you can change them by calling  ``->setName('FedEx')`` on the shipping method instance.
-
-Setting Shipping Category
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Every shipping method can have shipping category. You can simply set or unset it by calling ``->setCategory()``.
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Shipping\Model\ShippingMethod;
-    use Sylius\Component\Shipping\Model\ShippingCategory;
-    use Sylius\Component\Shipping\Model\ShippingMethodInterface;
-
-    $shippingCategory = new ShippingCategory();
-    $shippingCategory->setName('Regular'); // Regular weight items
-
-    $shippingMethod = new ShippingMethod();
-    $shippingMethod->setCategory($shippingCategory); //default null, detach
-    $shippingMethod->getCategory(); // Output will be ShippingCategory object
-    $shippingMethod->setCategory(null);
 
 Setting Rule
 ~~~~~~~~~~~~
@@ -389,107 +340,3 @@ container. The calculators are retrieved by name.
 
 .. _InvalidArgumentException: http://php.net/manual/en/class.invalidargumentexception.php
 .. _UndefinedShippingMethodException: http://api.sylius.org/Sylius/Component/Shipping/Calculator/UndefinedShippingMethodException.html
-
-Resolvers
----------
-
-.. _method-resolver:
-
-ShippingMethodsResolver
-~~~~~~~~~~~~~~~~~~~~~~~
-
-Sylius has flexible system for displaying the shipping methods available for given shippables (subjects which implement
-**ShippableInterface**), which is base on **ShippingCategory** objects and category requirements. The requirements are constant
-default defined in **ShippingMethodInterface**. To provide information about the number of allowed methods it use **ShippingMethodResolver**.
-
-First you need to create a few instances of **ShippingCategory** class:
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Shipping\Model\ShippingCategory;
-
-    $shippingCategory = new ShippingCategory();
-    $shippingCategory->setName('Regular');
-    $shippingCategory1 = new ShippingCategory();
-    $shippingCategory1->setName('Light');
-
-Next you have to create a repository w which holds a few instaces of **ShippingMethod**. An InMemoryRepository,
-which holds a collection of **ShippingMethod** objects, was used. The configuration is shown below:
-
-.. code-block:: php
-
-    <?php
-
-    // ...
-    // notice:
-    // $categories = array($shippingCategory, $shippingCategory1);
-
-    $firstMethod = new ShippingMethod();
-    $firstMethod->setCategory($categories[0]);
-
-    $secondMethod = new ShippingMethod();
-    $secondMethod->setCategory($categories[1]);
-
-    $thirdMethod = new ShippingMethod();
-    $thirdMethod->setCategory($categories[1]);
-    // ...
-
-Finally you can create a method resolver:
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Shipping\Model\ShippingCategory;
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
-    use Sylius\Component\Shipping\Model\RuleInterface;
-    use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry;
-    use Sylius\Component\Shipping\Checker\ItemCountRuleChecker;
-    use Sylius\Component\Shipping\Resolver\ShippingMethodsResolver;
-    use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker;
-
-    $ruleCheckerRegistry = new RuleCheckerRegistry();
-    $methodEligibilityChecker = new shippingMethodEligibilityChecker($ruleCheckerRegistry);
-
-    $shippingRepository = new InMemoryRepository(); //it has collection of shipping methods
-
-    $wardrobe = new Wardrobe();
-    $wardrobe->setShippingCategory($shippingCategory);
-    $wardrobe2 = new Wardrobe();
-    $wardrobe2->setShippingCategory($shippingCategory1);
-
-    $shipmentItem = new ShipmentItem();
-    $shipmentItem->setShippable($wardrobe);
-    $shipmentItem2 = new ShipmentItem();
-    $shipmentItem2->setShippable($wardrobe2);
-
-    $shipment = new Shipment();
-    $shipment->addItem($shipmentItem);
-    $shipment->addItem($shipmentItem2);
-
-    $methodResolver = new ShippingMethodsResolver($shippingRepository, $methodEligibilityChecker);
-    $methodResolver->getSupportedMethods($shipment);
-
-The ``->getSupportedMethods($shipment)`` method return the number of methods allowed for shipment object.
-There are a few possibilities:
-
-1. All shippable objects and all ShippingMethod have category *Regular*. The returned number will be 3.
-
-2. All ShippingMethod and one shippable object have category *Regular*. Second shippable object has category *Light*. The returned number will be 3.
-
-3. Two ShippingMethod and one shippable object have category *Regular*. Second shippable object and one ShippingMethod have category *Light*. The returned number will be 3.
-
-4. Two ShippingMethod and one shippable object have category *Regular*. Second shippable object and second ShippingMethod have category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_NONE. The returned number will be 2.
-
-5. Two ShippingMethod and all shippable objects have category *Regular*. Second ShippingMethod has category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_NONE. The returned number will be 3.
-
-6. Two ShippingMethod and one shippable object have category *Regular*. Second shippable object and second ShippingMethod have category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_ALL. The returned number will be 2.
-
-7. Two ShippingMethod have category *Regular*. All shippable object and second ShippingMethod have category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_ALL. The returned number will be 1.
-
-.. note::
-    The categoryRequirement property in  **ShippingMethod** is set default to CATEGORY_REQUIREMENT_MATCH_ANY.
-    For more detailed information about requirements please go to :doc:`/bundles/SyliusShippingBundle/shipping_requirements`.
