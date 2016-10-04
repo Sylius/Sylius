@@ -58,17 +58,16 @@ class CapturePaymentAction extends GatewayAwareAction
                 $this->gateway->execute($convert = new Convert($payment, 'array', $request->getToken()));
                 $payment->setDetails($convert->getResult());
             } catch (RequestNotSupportedException $e) {
+                $totalAmount = $this->convertPrice($order->getTotal(), $order->getCurrencyCode());
                 $payumPayment = new PayumPayment();
                 $payumPayment->setNumber($order->getNumber());
-                $payumPayment->setTotalAmount(
-                    $this->convertAndFormatPrice($order->getTotal(), $order->getCurrencyCode())
-                );
+                $payumPayment->setTotalAmount($totalAmount);
                 $payumPayment->setCurrencyCode($order->getCurrencyCode());
                 $payumPayment->setClientEmail($order->getCustomer()->getEmail());
                 $payumPayment->setClientId($order->getCustomer()->getId());
                 $payumPayment->setDescription(sprintf(
                     'Payment contains %d items for a total of %01.2f',
-                    $order->getItems()->count(), $order->getTotal() / 100
+                    $order->getItems()->count(), $totalAmount
                 ));
                 $payumPayment->setDetails($payment->getDetails());
 
@@ -104,7 +103,7 @@ class CapturePaymentAction extends GatewayAwareAction
      *
      * @return float
      */
-    private function convertAndFormatPrice($price, $currencyCode)
+    private function convertPrice($price, $currencyCode)
     {
         return round($this->currencyConverter->convertFromBase($price, $currencyCode) / 100, 2);
     }
