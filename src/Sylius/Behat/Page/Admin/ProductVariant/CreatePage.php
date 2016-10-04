@@ -53,8 +53,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_variant_code',
+            'option_select' => '#sylius_product_variant_optionValues_%option-name%',
             'price' => '#sylius_product_variant_price',
-            'option_select' => '#sylius_product_variant_optionValues_%option-name%'
         ]);
     }
 }

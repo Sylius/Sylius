@@ -442,7 +442,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I set its :optionName option as :optionValue
+     * @When I set its :optionName option to :optionValue
      */
     public function iSetItsOptionAs($optionName, $optionValue)
     {

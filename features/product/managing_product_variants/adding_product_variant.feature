@@ -22,9 +22,9 @@ Feature: Adding a new product variant
     @ui
     Scenario: Adding a new product variant with specific option's value
         Given I want to create a new variant of this product
-        When I specify its code as "VODKA_WYBOROWA_ORANGE"
+        When I specify its code as "VODKA_WYBOROWA_MELON"
         And I set its price to "$80.00"
-        And I set its "Taste" option as "Melon"
+        And I set its "Taste" option to "Melon"
         And I add it
         Then I should be notified that it has been successfully created
-        And the "VODKA_WYBOROWA_ORANGE" variant of the "Wyborowa Vodka" product should appear in the shop
+        And the "VODKA_WYBOROWA_MELON" variant of the "Wyborowa Vodka" product should appear in the shop

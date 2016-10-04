@@ -42,7 +42,7 @@ class ProductOptionValueCollectionType extends AbstractType
         }
         foreach ($options['options'] as $i => $option) {
             if (!$option instanceof ProductOptionInterface) {
-                throw new InvalidConfigurationException('Each object passed as option list must implement "Sylius\Component\Variation\Model\OptionInterface"');
+                throw new InvalidConfigurationException(sprintf('Each object passed as option list must implement "%s"', ProductOptionInterface::class));
             }
             $builder->add((string) $option->getCode(), 'sylius_product_option_value_choice', [
                 'label' => $option->getName() ?: $option->getCode(),
