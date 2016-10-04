@@ -16,13 +16,13 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
@@ -183,6 +183,16 @@ final class PromotionContext implements Context
     public function thisCouponCanBeUsedNTimes(PromotionCouponInterface $coupon, $usageLimit)
     {
         $coupon->setUsageLimit($usageLimit);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this coupon) can be used once per customer$/
+     */
+    public function thisCouponCanBeUsedOncePerCustomer(PromotionCouponInterface $coupon)
+    {
+        $coupon->setPerCustomerUsageLimit(1);
 
         $this->objectManager->flush();
     }

@@ -27,9 +27,9 @@ final class PromotionCouponSpec extends ObjectBehavior
         $this->shouldImplement(PromotionCouponInterface::class);
     }
 
-    public function it_should_have_zero_per_customer_usage_limit_by_default()
+    public function it_should_have_null_per_customer_usage_limit_by_default()
     {
-        $this->getPerCustomerUsageLimit()->shouldReturn(0);
+        $this->getPerCustomerUsageLimit()->shouldReturn(null);
     }
 
     public function its_per_customer_usage_limit_should_be_mutable()

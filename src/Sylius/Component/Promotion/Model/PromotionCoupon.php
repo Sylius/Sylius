@@ -31,7 +31,7 @@ class PromotionCoupon implements PromotionCouponInterface
     protected $code;
 
     /**
-     * @var int
+     * @var int|null
      */
     protected $usageLimit;
 

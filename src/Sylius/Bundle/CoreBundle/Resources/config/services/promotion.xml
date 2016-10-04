@@ -64,8 +64,11 @@
             <tag name="sylius.promotion_action" type="shipping_discount" label="Shipping percentage discount" />
         </service>
 
-        <service id="sylius.promotion.eligibility_checker.coupons" class="Sylius\Component\Core\Promotion\Checker\Eligibility\CouponsEligibilityChecker">
+        <service id="sylius.promotion.eligibility_checker.promotion_coupon_per_customer_usage_limit"
+                 class="Sylius\Component\Core\Promotion\Checker\Eligibility\PromotionCouponPerCustomerUsageLimitEligibilityChecker"
+                 public="false">
             <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
 
         <service id="sylius.promotion_filter.taxon" class="Sylius\Component\Core\Promotion\Filter\TaxonFilter" />

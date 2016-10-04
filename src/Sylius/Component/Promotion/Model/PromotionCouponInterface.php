@@ -21,12 +21,12 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 interface PromotionCouponInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**
-     * @return int
+     * @return int|null
      */
     public function getUsageLimit();
 
     /**
-     * @param int $usageLimit
+     * @param int|null $usageLimit
      */
     public function setUsageLimit($usageLimit);
 
