@@ -21,7 +21,7 @@
 
         <parameter key="sylius.mongodb_.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
 
-        <parameter key="sylius.expression_language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
+        <parameter key="sylius.expression_language.class">Symfony\Component\DependencyInjection\ExpressionLanguage</parameter>
 
         <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension</parameter>
         <parameter key="sylius.form.type.resource_to_hidden_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceToHiddenIdentifierType</parameter>
@@ -43,11 +43,7 @@
     <services>
         <service id="sylius.resource_registry" class="%sylius.resource_registry.class%" />
 
-        <service id="sylius.expression_language" class="%sylius.expression_language.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-        </service>
+        <service id="sylius.expression_language" class="%sylius.expression_language.class%" />
 
         <service id="sylius.event_subscriber.resource_delete" class="%sylius.event_subscriber.resource_delete.class%">
             <argument type="service" id="router" />

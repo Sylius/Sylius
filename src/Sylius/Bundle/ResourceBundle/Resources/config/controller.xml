@@ -38,6 +38,7 @@
         <!-- tmp -->
         <service id="sylius.controller.parameters" class="Sylius\Bundle\ResourceBundle\Controller\Parameters" />
         <service id="sylius.resource_controller.parameters_parser" class="%sylius.resource_controller.parameters_parser.class%">
+            <argument type="service" id="service_container" />
             <argument type="service" id="sylius.expression_language" />
         </service>
         <service id="sylius.resource_controller.request_configuration_factory" class="%sylius.resource_controller.request_configuration_factory.class%">
