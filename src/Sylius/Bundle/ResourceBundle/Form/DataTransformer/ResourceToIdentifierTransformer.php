@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
-use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Webmozart\Assert\Assert;
 
@@ -22,17 +21,17 @@ use Webmozart\Assert\Assert;
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ResourceToIdentifierTransformer implements DataTransformerInterface
+final class ResourceToIdentifierTransformer implements DataTransformerInterface
 {
     /**
      * @var RepositoryInterface
      */
-    protected $repository;
+    private $repository;
 
     /**
      * @var string
      */
-    protected $identifier;
+    private $identifier;
 
     /**
      * @param RepositoryInterface $repository
@@ -53,13 +52,9 @@ class ResourceToIdentifierTransformer implements DataTransformerInterface
             return '';
         }
 
-        $class = $this->repository->getClassName();
-        Assert::isInstanceOf($value, $class);
+        Assert::isInstanceOf($value, $this->repository->getClassName());
 
-
-        $accessor = PropertyAccess::createPropertyAccessor();
-
-        return $accessor->getValue($value, $this->identifier);
+        return PropertyAccess::createPropertyAccessor()->getValue($value, $this->identifier);
     }
 
     /**
@@ -71,8 +66,8 @@ class ResourceToIdentifierTransformer implements DataTransformerInterface
             return null;
         }
 
-        $entity = $this->repository->findOneBy([$this->identifier => $value]);
-        if (null === $entity) {
+        $resource = $this->repository->findOneBy([$this->identifier => $value]);
+        if (null === $resource) {
             throw new TransformationFailedException(sprintf(
                 'Object "%s" with identifier "%s"="%s" does not exist.',
                 $this->repository->getClassName(),
@@ -81,6 +76,6 @@ class ResourceToIdentifierTransformer implements DataTransformerInterface
             ));
         }
 
-        return $entity;
+        return $resource;
     }
 }
