@@ -12,12 +12,9 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\IdentifierToResourceTransformer;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Symfony\Component\Form\Test\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -31,40 +28,7 @@ final class ResourceFromIdentifierTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType');
-    }
-
-    function it_builds_a_form(FormBuilderInterface $builder)
-    {
-        $builder
-            ->addModelTransformer(Argument::type(IdentifierToResourceTransformer::class))
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $this->buildForm($builder, ['identifier' => 'identifier']);
-    }
-
-    function it_has_options(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults(['identifier' => 'id'])
-            ->shouldBeCalled()
-            ->willReturn($resolver)
-        ;
-
-        $resolver
-            ->setAllowedTypes('identifier', 'string')
-            ->shouldBeCalled()
-            ->willReturn($resolver)
-        ;
-
-        $this->configureOptions($resolver);
-    }
-
-    function it_has_a_parent()
-    {
-        $this->getParent()->shouldReturn('entity');
+        $this->shouldHaveType(ResourceFromIdentifierType::class);
     }
 
     function it_has_a_name(MetadataInterface $metadata)
