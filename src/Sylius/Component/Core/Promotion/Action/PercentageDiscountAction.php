@@ -13,7 +13,6 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;

@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class ShippingPercentageDiscountAction implements PromotionActionInterface
 {
-    const TYPE = 'shipping_discount';
+    const TYPE = 'shipping_percentage_discount';
 
     /**
      * @var FactoryInterface

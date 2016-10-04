@@ -185,11 +185,11 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the :actionType action configured with percentage of :percentage%
-     * @Given I add the :actionType action configured without percentage
+     * @Given I add the :actionType action configured with a percentage value of :percentage%
+     * @Given I add the :actionType action configured without a percentage value
      *
      */
-    public function iAddTheActionConfiguredWithPercentage($actionType, $percentage = null)
+    public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
     {
         $this->createPage->addAction($actionType);
         $this->createPage->fillActionOption('Percentage', $percentage);
@@ -463,15 +463,32 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatThisValueShouldNotBeBlank()
     {
-        Assert::same($this->createPage->getValidationMessageForAction(), 'This value should not be blank.');
+        Assert::same(
+            $this->createPage->getValidationMessageForAction(),
+            'This value should not be blank.'
+        );
     }
 
     /**
-     * @Then I should be notified that percentage discount must be a maximum of 100%
+     * @Then I should be notified that the maximum value of a percentage discount is 100%
      */
-    public function iShouldBeNotifiedThatPercentageDiscountMustBeAMaximumOf100()
+    public function iShouldBeNotifiedThatTheMaximumValueOfAPercentageDiscountIs100()
     {
-        Assert::same($this->createPage->getValidationMessageForAction(), 'Percentage discount must be a maximum of 100%.');
+        Assert::same(
+            $this->createPage->getValidationMessageForAction(),
+            'The maximum value of a percentage discount is 100%.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that a percentage discount value must be at least 0%
+     */
+    public function iShouldBeNotifiedThatAPercentageDiscountValueMustBeAtLeast0()
+    {
+        Assert::same(
+            $this->createPage->getValidationMessageForAction(),
+            'The value of a percentage discount must be at least 0%.'
+        );
     }
 
     /**

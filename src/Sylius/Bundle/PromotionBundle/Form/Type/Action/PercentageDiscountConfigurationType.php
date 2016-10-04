@@ -35,7 +35,7 @@ class PercentageDiscountConfigurationType extends AbstractType
                     new NotBlank(),
                     new Type(['type' => 'numeric']),
                     new Range([
-                        'min' => 0.01,
+                        'min' => 0,
                         'max' => 1,
                         'minMessage' => 'sylius.action.percentage_discount_configuration.min',
                         'maxMessage' => 'sylius.action.percentage_discount_configuration.max',
