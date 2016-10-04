@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
-use Sylius\Component\Order\Model\CommentInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
@@ -65,47 +64,5 @@ class MailerListener
         }
 
         $this->emailSender->send(Emails::USER_CONFIRMATION, [$email], ['user' => $user]);
-    }
-
-    /**
-     * @param GenericEvent $event
-     *
-     * @throws UnexpectedTypeException
-     */
-    public function sendOrderCommentEmail(GenericEvent $event)
-    {
-        $comment = $event->getSubject();
-
-        if (!$comment instanceof CommentInterface) {
-            throw new UnexpectedTypeException(
-                $comment,
-                'Sylius\Component\Order\Model\CommentInterface'
-            );
-        }
-
-        if (!$comment->getNotifyCustomer()) {
-            return;
-        }
-
-        if (null === $order = $comment->getOrder()) {
-            return;
-        }
-
-        if (null === $order->getCustomer()) {
-            return;
-        }
-
-        if (null === ($email = $order->getCustomer()->getEmail()) || empty($email)) {
-            return;
-        }
-
-        $this->emailSender->send(
-            Emails::ORDER_COMMENT,
-            [$email],
-            [
-                'order' => $order,
-                'comment' => $comment,
-            ]
-        );
     }
 }
