@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
+final class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
 {
     const API_VERSION_HEADER = 'Accept';
     const API_GROUPS_HEADER = 'Accept';
@@ -74,16 +74,12 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
     {
         $parameters = [];
 
-        if ($request->headers->has(self::API_VERSION_HEADER)) {
-            if (preg_match(self::API_VERSION_REGEXP, $request->headers->get(self::API_VERSION_HEADER), $matches)) {
-                $parameters['serialization_version'] = $matches['version'];
-            }
+        if (preg_match(self::API_VERSION_REGEXP, $request->headers->get(self::API_VERSION_HEADER), $matches)) {
+            $parameters['serialization_version'] = $matches['version'];
         }
 
-        if ($request->headers->has(self::API_GROUPS_HEADER)) {
-            if (preg_match(self::API_GROUPS_REGEXP, $request->headers->get(self::API_GROUPS_HEADER), $matches)) {
-                $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
-            }
+        if (preg_match(self::API_GROUPS_REGEXP, $request->headers->get(self::API_GROUPS_HEADER), $matches)) {
+            $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
         }
 
         return array_merge($request->attributes->get('_sylius', []), $parameters);

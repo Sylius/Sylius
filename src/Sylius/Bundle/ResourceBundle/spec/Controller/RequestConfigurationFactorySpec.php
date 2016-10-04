@@ -35,7 +35,7 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory');
+        $this->shouldHaveType(RequestConfigurationFactory::class);
     }
 
     function it_implements_request_configuration_factory_interface()
@@ -53,12 +53,13 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
 
-        $headersBag->has('Accept')->willReturn(false);
+        $headersBag->get('Accept')->willReturn(null);
 
-        $configuration = ['template' => ':Product:show.html.twig'];
-
-        $attributesBag->get('_sylius', [])->willReturn($configuration);
-        $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
+        $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:show.html.twig']);
+        $parametersParser
+            ->parseRequestValues(['template' => ':Product:show.html.twig'], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
 
         $this->create($metadata, $request)->shouldHaveType(RequestConfiguration::class);
     }
@@ -73,10 +74,11 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
 
-        $configuration = ['template' => ':Product:list.html.twig'];
-
-        $attributesBag->get('_sylius', [])->willReturn($configuration);
-        $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
+        $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:list.html.twig']);
+        $parametersParser
+            ->parseRequestValues(['template' => ':Product:list.html.twig'], $request)
+            ->willReturn(['template' => ':Product:list.html.twig'])
+        ;
 
         $this->create($metadata, $request)->isSortable()->shouldReturn(false);
     }
@@ -88,18 +90,17 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
         ParameterBag $headersBag,
         ParameterBag $attributesBag
     ) {
-        $defaultParameters = ['sortable' => true];
-
-        $this->beConstructedWith($parametersParser, RequestConfiguration::class, $defaultParameters);
+        $this->beConstructedWith($parametersParser, RequestConfiguration::class, ['sortable' => true]);
 
         $request->headers = $headersBag;
         $request->attributes = $attributesBag;
 
-        $configuration = ['template' => ':Product:list.html.twig'];
-        $attributesBag->get('_sylius', [])->willReturn($configuration);
+        $attributesBag->get('_sylius', [])->willReturn(['template' => ':Product:list.html.twig']);
 
-        $configuration = ['template' => ':Product:list.html.twig', 'sortable' => true];
-        $parametersParser->parseRequestValues($configuration, $request)->willReturn($configuration);
+        $parametersParser
+            ->parseRequestValues(['template' => ':Product:list.html.twig', 'sortable' => true], $request)
+            ->willReturn(['template' => ':Product:list.html.twig', 'sortable' => true])
+        ;
 
         $this->create($metadata, $request)->isSortable()->shouldReturn(true);
     }
