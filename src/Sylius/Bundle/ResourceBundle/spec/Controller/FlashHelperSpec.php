@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelper;
+use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -20,83 +21,116 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Translation\MessageCatalogueInterface;
+use Symfony\Component\Translation\TranslatorBagInterface;
 
 /**
  * @mixin FlashHelper
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class FlashHelperSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, TranslatorInterface $translator)
+    function let(SessionInterface $session, TranslatorBagInterface $translator)
     {
-        $this->beConstructedWith($session, $translator);
+        $this->beConstructedWith($session, $translator, 'en');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\FlashHelper');
+        $this->shouldHaveType(FlashHelper::class);
     }
 
     function it_implements_flash_helper_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface');
+        $this->shouldImplement(FlashHelperInterface::class);
     }
 
-    function it_adds_appropriate_flash_for_html_request(
+    function it_adds_resource_message_by_default(
         SessionInterface $session,
+        TranslatorBagInterface $translator,
+        MessageCatalogueInterface $messageCatalogue,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
         MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
     ) {
         $metadata->getApplicationName()->willReturn('sylius');
-        $metadata->getName()->willReturn('product');
         $metadata->getHumanizedName()->willReturn('product');
 
         $requestConfiguration->getMetadata()->willReturn($metadata);
-        $requestConfiguration->isHtmlRequest()->willReturn(true);
+        $requestConfiguration->getFlashMessage(ResourceActions::CREATE)->willReturn('sylius.product.create');
+
+        $translator->getCatalogue('en')->willReturn($messageCatalogue);
+
+        $messageCatalogue->has('sylius.product.create', 'flashes')->willReturn(false);
 
         $session->getBag('flashes')->willReturn($flashBag);
-        $requestConfiguration->getFlashMessage(ResourceActions::CREATE)->willReturn('sylius.product.create');
-        $translator->trans('sylius.product.create', ['%resource%' => 'Product'], 'flashes')->willReturn('Product has been created successfully, bueno!');
-
-        $flashBag->add('success', 'Product has been created successfully, bueno!')->shouldBeCalled();
+        $flashBag->add(
+            'success',
+            [
+                'message' => 'sylius.resource.create',
+                'parameters' => ['%resource%' => 'Product'],
+            ]
+        )->shouldBeCalled();
 
         $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
     }
 
-    function it_uses_default_translation_if_message_is_not_translated(
+    function it_adds_overwritten_message(
         SessionInterface $session,
+        TranslatorBagInterface $translator,
+        MessageCatalogueInterface $messageCatalogue,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
         MetadataInterface $metadata,
         RequestConfiguration $requestConfiguration,
         ResourceInterface $resource
     ) {
         $metadata->getApplicationName()->willReturn('sylius');
-        $metadata->getName()->willReturn('product');
         $metadata->getHumanizedName()->willReturn('product');
 
         $requestConfiguration->getMetadata()->willReturn($metadata);
-        $requestConfiguration->isHtmlRequest()->willReturn(true);
+        $requestConfiguration->getFlashMessage(ResourceActions::CREATE)->willReturn('sylius.product.create');
+
+        $translator->getCatalogue('en')->willReturn($messageCatalogue);
+
+        $messageCatalogue->has('sylius.product.create', 'flashes')->willReturn(true);
 
         $session->getBag('flashes')->willReturn($flashBag);
-        $requestConfiguration->getFlashMessage(ResourceActions::CREATE)->willReturn('sylius.product.create');
-        $translator->trans('sylius.product.create', ['%resource%' => 'Product'], 'flashes')->willReturn('sylius.product.create');
-        $translator->trans('sylius.resource.create', ['%resource%' => 'Product'], 'flashes')->willReturn('Product has been successfully created.');
-
-        $flashBag->add('success', 'Product has been successfully created.')->shouldBeCalled();
+        $flashBag->add('success', 'sylius.product.create')->shouldBeCalled();
 
         $this->addSuccessFlash($requestConfiguration, ResourceActions::CREATE, $resource);
     }
 
-    function it_adds_flash_from_event(
+    function it_adds_custom_message(
+        SessionInterface $session,
+        TranslatorBagInterface $translator,
+        MessageCatalogueInterface $messageCatalogue,
+        FlashBagInterface $flashBag,
+        MetadataInterface $metadata,
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource
+    ) {
+        $metadata->getApplicationName()->willReturn('app');
+        $metadata->getHumanizedName()->willReturn('book');
+
+        $requestConfiguration->getMetadata()->willReturn($metadata);
+        $requestConfiguration->getFlashMessage('send')->willReturn('app.book.send');
+
+        $translator->getCatalogue('en')->willReturn($messageCatalogue);
+
+        $messageCatalogue->has('app.book.send', 'flashes')->willReturn(true);
+
+        $session->getBag('flashes')->willReturn($flashBag);
+        $flashBag->add('success', 'app.book.send')->shouldBeCalled();
+
+        $this->addSuccessFlash($requestConfiguration, 'send', $resource);
+    }
+
+    function it_adds_message_from_event(
         SessionInterface $session,
         FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
         RequestConfiguration $requestConfiguration,
         ResourceControllerEvent $event
     ) {
@@ -105,9 +139,13 @@ final class FlashHelperSpec extends ObjectBehavior
         $event->getMessageParameters()->willReturn(['%name%' => 'Germany Sylius Webshop']);
 
         $session->getBag('flashes')->willReturn($flashBag);
-        $translator->trans('sylius.channel.cannot_be_deleted', ['%name%' => 'Germany Sylius Webshop'], 'flashes')->willReturn('Channel "Germany Sylius Webshop" cannot be deleted.');
 
-        $flashBag->add(ResourceControllerEvent::TYPE_WARNING, 'Channel "Germany Sylius Webshop" cannot be deleted.')->shouldBeCalled();
+        $flashBag->add(ResourceControllerEvent::TYPE_WARNING,
+            [
+                'message' => 'sylius.channel.cannot_be_deleted',
+                'parameters' => ['%name%' => 'Germany Sylius Webshop']
+            ]
+        )->shouldBeCalled();
 
         $this->addFlashFromEvent($requestConfiguration, $event);
     }
