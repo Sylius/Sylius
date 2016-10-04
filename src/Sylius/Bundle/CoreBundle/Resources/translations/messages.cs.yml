@@ -29,12 +29,16 @@ sylius:
             roles: Role
         channel:
             taxonomies: Taxonomie
+            locale_default: Výchozí Jazyk
             locales: Lokalizace
             currency_default: Výchozí měna
             currencies: Měny
             shipping_methods: Způsoby dopravy
             payment_methods: Způsoby platby
+            tax_calculation_strategy: Strategie výpočtu daně
             tax_zone_default: Výchozí sazba DPH
+            theme: Vzhled
+            hostname: Hostname
         image:
             code: Kód
             file: Obrázek
@@ -103,6 +107,7 @@ sylius:
             height: Výška
             on_hand: Aktuálně skladem
             price: Cena
+            original_price: Původní cena
             sku: SKU
             weight: Hmotnost
             width: Šířka
@@ -112,6 +117,9 @@ sylius:
                 value: Hodnota
         guest:
             email: Email
+        product_association:
+            product: Související produkt
+            type: Typy asociace
         product_association_type:
             name: Jméno
         promotion_rule:
@@ -130,3 +138,17 @@ sylius:
             name: Potvrzení odeslání
         user_confirmation:
             name: Potvrzení uživatele
+            subject: Vítejte v našem obchodě
+            content: 'Vítejte v našem obchodě <br/> <br/> jste se právě zaregistrovali. <br/> Děkujeme vám %username%.'
+        password_reset:
+            name: Obnovení hesla
+            content: '<h3>Dobrý den %username%</h3> Chcete-li obnovit vaše heslo - navštivte %url% <br/> <br/> S pozdravem, tým.'
+        verification:
+            name: Ověření emailové adresy
+            content: 'Chcete-li ověřit svou e-mailovou adresu - prosím navštivte %url%'
+    payum_gateway:
+        cash_on_delivery: Platba na dobírku
+        offline: Offline
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: Podle zóny a kanálu

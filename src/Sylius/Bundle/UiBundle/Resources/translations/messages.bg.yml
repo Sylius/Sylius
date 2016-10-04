@@ -36,6 +36,7 @@ sylius:
         choose_file: Избор на файл
         city: Град
         clear_cart: Изчисти кошницата
+        color: Цвят
         company: Фирма
         confirmation: Потвърждение
         confirmation_title: Потвърждение
@@ -70,6 +71,7 @@ sylius:
         current_promotions: Текущи промоции
         dashboard: Табло
         data: Данни
+        date: Дата
         default_billing_address: По подразбиране адрес за фактуриране
         default_shipping_address: Адрес за доставка по подразбиране
         delete: Изтрий
@@ -97,6 +99,7 @@ sylius:
         editing_zone: Редактиране на зона
         email: Имейл
         error: Грешка
+        exchange_rate: Обменен курс
         existing_customer: Съществуващ клиент
         filter: Филтър
         fulfill: Изпълни
@@ -198,6 +201,7 @@ sylius:
         postcode: Пощенски код
         presentation: Презентация
         previous: Предишна
+        pricing: Ценообразуване
         product: Продукт
         product_details_viewing_product_product: 'Продукт детайли <small>Преглед на продукт "<strong>%product%</strong>"</small>'
         products: Продукти
@@ -262,6 +266,7 @@ sylius:
         total_qty: Общо количество
         total_registrations: Общо регистрации
         tracking_number: Номер за проследяване
+        translations: Преводи
         unavailable: Не е налично
         updating_tax_rate: Актуализиране на данъчна ставка
         used: Използвани

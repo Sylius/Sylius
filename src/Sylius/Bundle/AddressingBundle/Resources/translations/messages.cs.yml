@@ -21,6 +21,7 @@ sylius:
             enabled: Povoleno
         province:
             name: Jméno
+            abbreviation: Zkratka
             select: Vybrat
         zone:
             add_member: Přidat člena

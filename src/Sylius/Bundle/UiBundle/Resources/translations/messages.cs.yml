@@ -9,8 +9,14 @@ sylius:
             remember_me: Pamatuj si mě
         option:
             name: Jméno
+        notes: Další poznámky
+        variant:
+            tracked: Sledované
     ui:
+        abandoned: Opuštěné
         access_token: Přístupový token
+        access_your_store_account_or_create_a_new_one: Přihlaste se k vašemu účtu nebo vytvořte nový
+        account_credentials: Přihlašovací údaje k účtu
         action: Akce
         actions: Akce
         add: Přidat
@@ -33,17 +39,28 @@ sylius:
         adding_new_customer_groups: Přidání nové skupiny zákazníků
         adding_new_email: Přidání nového e-mailu
         adding_new_locale: Přidání nového národního prostředí (locale)
+        address: Adresa
         addressing_step: Krok řešení
         adjustments: Úpravy
         administration: Administrace
         administration_dashboard: Nástěnka administrace
+        all: Všechno
         all_your_addresses: Všechny adresy
         amount: Částka
+        an_error_occurred: Vyskytla se chyba
+        api: Rozhraní API
+        apply_coupon: Použít poukaz
+        are_your_sure_you_want_to_perform_this_action: Jste si jisti, že chcete provést tuto operaci?
+        association: Asociace
+        association_types: Typy asociace
+        associations: Asociace
         assortment: Sortiment
         attributes: Atributy
         author: Autor
         availability: Dostupnost
+        available_for_channels: K dispozici pro kanály
         available_on: Dostupný od
+        available_until: Dostupné do
         back: Zpět
         backorder: Doobjednání
         balance_due: Nedoplatek
@@ -136,6 +153,7 @@ sylius:
         date: Datum
         default_billing_address: Výchozí fakturační adresa
         default_currency: Výchozí měna
+        default_locale: Výchozí Jazyk
         default_shipping_address: Výchozí dodací adresa
         delete: Odstranit
         delete_image: Odstranit obrázek
@@ -191,6 +209,7 @@ sylius:
         exclusive: Exkluzivní
         existing_customer: Stávající zákazník
         expires_at: Končí v
+        extra_notes: Další poznámky
         failed: Neúspěšné
         filter: Filtr
         first_name: Křestní Jméno
@@ -209,6 +228,7 @@ sylius:
         guest_customer: Neregistrovaný náštěvník
         hide_deleted: Skrýt odstraněné
         home: Domů
+        hostname: Hostname
         id: ID
         image: Obrázek
         images: Obrázky
@@ -316,6 +336,7 @@ sylius:
         order_summary: Shrnutí objednávky
         order_value: Hodnota objednávky
         orders: Objednávky
+        original_price: Původní cena
         out_of_stock: Není skladam
         overview_of_your_store: Přehled obchodu
         page: Strana
@@ -341,6 +362,8 @@ sylius:
         priority: Priorita
         processing: Zpracovává se
         product: Produkt
+        product_association_index: Asociace
+        product_association_type_index: Typy asociace
         product_attributes: Atributy produktu
         product_details_viewing_product_product: 'Podrobnosti produktu <small>zobrazení produktu "<strong>%product%</strong>"</small>'
         product_options: Volby produktů
@@ -426,6 +449,7 @@ sylius:
         taxation_settings: Nastavení zdanění
         taxes: DPH
         taxons: Taxony
+        theme: Vzhled
         there_are_no_images_for_this_product: Pro tento produkt nejsou žádné obrázky
         there_are_no_options_for_this_product: Pro tento produkt nejsou žádné nastavení
         there_are_no_taxons_for_this_product: Tento produkt nemá žádné taxony
@@ -459,6 +483,7 @@ sylius:
         void: Neplatné
         volume_based_pricing: Cena na základě objemu
         warning: Varování
+        welcome_to_our_store: Vítejte v našem obchodě
         welcome_to_your_space: Vítejte ve Vašem prostoru
         you_are_customer_since: Zákazníkem jste od
         you_have_no_new_orders: Nemáte žádné nové objednávky

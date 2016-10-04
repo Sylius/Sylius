@@ -8,6 +8,7 @@ sylius:
             min_length: 'Název vlastnosti musí mít alespoň 1 znak.|Název vlastnosti musí mít alespoň {{ limit }} znaků.'
             max_length: 'Název atributu nesmí být delší než 1 znak. |Název atributu nesmí být delší než {{ limit }} znaků.'
         code:
+            not_blank: Prosím zadejte kód vlastnosti.
             unique: Tento kód je již používán.
         presentation:
             not_blank: Prosím zadejte vlastnost prezentace.

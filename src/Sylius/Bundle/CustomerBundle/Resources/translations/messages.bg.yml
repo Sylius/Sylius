@@ -3,6 +3,18 @@
 
 sylius:
     form:
+        group:
+            name: Име
+            roles: Роли
         customer:
+            first_name: Собствено име
+            groups: Групи
+            last_name: Фамилно име
             email: Имейл
             phone_number: Телефонен номер
+            gender: Пол
+            birthday: Рожден ден
+    gender:
+        unknown: Неизвестно
+        male: Мъжки
+        female: Женски
