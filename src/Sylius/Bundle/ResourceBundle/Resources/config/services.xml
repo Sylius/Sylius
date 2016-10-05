@@ -11,41 +11,17 @@
 
 -->
 
-<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xmlns="http://symfony.com/schema/dic/services"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="sylius.resource_registry.class">Sylius\Component\Resource\Metadata\Registry</parameter>
-
-        <parameter key="sylius.mongodb_.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
-
-        <parameter key="sylius.expression_language.class">Symfony\Component\DependencyInjection\ExpressionLanguage</parameter>
-
-        <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension</parameter>
-        <parameter key="sylius.form.type.resource_to_hidden_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceToHiddenIdentifierType</parameter>
-        <parameter key="sylius.form.type.resource_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceToIdentifierType</parameter>
-        <parameter key="sylius.form.extension.date.class">Sylius\Bundle\ResourceBundle\Form\Extension\DateExtension</parameter>
-        <parameter key="sylius.form.type.resource_choice.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType</parameter>
-
-        <parameter key="sylius.event_subscriber.resource_delete.class">Sylius\Bundle\ResourceBundle\EventListener\ResourceDeleteSubscriber</parameter>
-
-        <parameter key="sylius.validator.enabled.class">Sylius\Bundle\ResourceBundle\Validator\EnabledValidator</parameter>
-        <parameter key="sylius.validator.disabled.class">Sylius\Bundle\ResourceBundle\Validator\DisabledValidator</parameter>
-
-        <!-- Sylius State Machine -->
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
-
-        <parameter key="symfony.expression.language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.resource_registry" class="%sylius.resource_registry.class%" />
+        <service id="sylius.resource_registry" class="Sylius\Component\Resource\Metadata\Registry" />
 
-        <service id="sylius.expression_language" class="%sylius.expression_language.class%" />
+        <service id="sylius.expression_language" class="Symfony\Component\DependencyInjection\ExpressionLanguage" />
 
-        <service id="sylius.event_subscriber.resource_delete" class="%sylius.event_subscriber.resource_delete.class%">
+        <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\ResourceBundle\EventListener\ResourceDeleteSubscriber">
             <argument type="service" id="router" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
@@ -53,16 +29,14 @@
             <tag name="kernel.event_subscriber" event="kernel.exception" />
         </service>
 
-
-        <service id="sylius.form.extension.collection"
-                 class="%sylius.form.extension.collection.class%">
+        <service id="sylius.form.extension.collection" class="Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension">
             <tag name="form.type_extension" alias="collection" />
         </service>
 
-        <service id="sylius.validator.enabled" class="%sylius.validator.enabled.class%">
+        <service id="sylius.validator.enabled" class="Sylius\Bundle\ResourceBundle\Validator\EnabledValidator">
             <tag name="validator.constraint_validator" alias="sylius_resource_enabled_validator" />
         </service>
-        <service id="sylius.validator.disabled" class="%sylius.validator.disabled.class%">
+        <service id="sylius.validator.disabled" class="Sylius\Bundle\ResourceBundle\Validator\DisabledValidator">
             <tag name="validator.constraint_validator" alias="sylius_resource_disabled_validator" />
         </service>
     </services>

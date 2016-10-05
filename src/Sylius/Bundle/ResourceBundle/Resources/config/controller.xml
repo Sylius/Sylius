@@ -11,67 +11,44 @@
 
 -->
 
-<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xmlns="http://symfony.com/schema/dic/services"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.resource_controller.request_configuration.class">Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration</parameter>
-        <parameter key="sylius.resource_controller.parameters_parser.class">Sylius\Bundle\ResourceBundle\Controller\ParametersParser</parameter>
-        <parameter key="sylius.resource_controller.request_configuration_factory.class">Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory</parameter>
-        <parameter key="sylius.resource_controller.new_resource_factory.class">Sylius\Bundle\ResourceBundle\Controller\NewResourceFactory</parameter>
-        <parameter key="sylius.resource_controller.single_resource_provider.class">Sylius\Bundle\ResourceBundle\Controller\SingleResourceProvider</parameter>
-        <parameter key="sylius.resource_controller.resources_resolver.class">Sylius\Bundle\ResourceBundle\Controller\ResourcesResolver</parameter>
-        <parameter key="sylius.resource_controller.resources_collection_provider.class">Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider</parameter>
-        <parameter key="sylius.resource_controller.form_factory.class">Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactory</parameter>
-        <parameter key="sylius.resource_controller.redirect_handler.class">Sylius\Bundle\ResourceBundle\Controller\RedirectHandler</parameter>
-        <parameter key="sylius.resource_controller.authorization_checker.disabled.class">Sylius\Bundle\ResourceBundle\Controller\DisabledAuthorizationChecker</parameter>
-        <parameter key="sylius.resource_controller.flash_helper.class">Sylius\Bundle\ResourceBundle\Controller\FlashHelper</parameter>
-        <parameter key="sylius.resource_controller.event_dispatcher.class">Sylius\Bundle\ResourceBundle\Controller\EventDispatcher</parameter>
-        <parameter key="sylius.resource_controller.pagerfanta_representation_factory.class">Hateoas\Representation\Factory\PagerfantaFactory</parameter>
-        <parameter key="sylius.resource_controller.view_handler.class">Sylius\Bundle\ResourceBundle\Controller\ViewHandler</parameter>
-        <parameter key="sylius.resource_controller.state_machine.class">Sylius\Bundle\ResourceBundle\Controller\StateMachine</parameter>
-    </parameters>
-
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <!-- tmp -->
         <service id="sylius.controller.parameters" class="Sylius\Bundle\ResourceBundle\Controller\Parameters" />
-        <service id="sylius.resource_controller.parameters_parser" class="%sylius.resource_controller.parameters_parser.class%">
+        <service id="sylius.resource_controller.parameters_parser" class="Sylius\Bundle\ResourceBundle\Controller\ParametersParser">
             <argument type="service" id="service_container" />
             <argument type="service" id="sylius.expression_language" />
         </service>
-        <service id="sylius.resource_controller.request_configuration_factory" class="%sylius.resource_controller.request_configuration_factory.class%">
+        <service id="sylius.resource_controller.request_configuration_factory" class="Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory">
             <argument type="service" id="sylius.resource_controller.parameters_parser" />
-            <argument>%sylius.resource_controller.request_configuration.class%</argument>
+            <argument>Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration</argument>
             <argument>%sylius.resource.settings%</argument>
         </service>
-        <service id="sylius.resource_controller.new_resource_factory" class="%sylius.resource_controller.new_resource_factory.class%" />
-        <service id="sylius.resource_controller.single_resource_provider" class="%sylius.resource_controller.single_resource_provider.class%" />
-        <service id="sylius.resource_controller.pagerfanta_representation_factory" class="%sylius.resource_controller.pagerfanta_representation_factory.class%" />
-        <service id="sylius.resource_controller.resources_resolver" class="%sylius.resource_controller.resources_resolver.class%" />
-        <service id="sylius.resource_controller.resources_collection_provider" class="%sylius.resource_controller.resources_collection_provider.class%">
+        <service id="sylius.resource_controller.new_resource_factory" class="Sylius\Bundle\ResourceBundle\Controller\NewResourceFactory" />
+        <service id="sylius.resource_controller.single_resource_provider" class="Sylius\Bundle\ResourceBundle\Controller\SingleResourceProvider" />
+        <service id="sylius.resource_controller.pagerfanta_representation_factory" class="Hateoas\Representation\Factory\PagerfantaFactory" />
+        <service id="sylius.resource_controller.resources_resolver" class="Sylius\Bundle\ResourceBundle\Controller\ResourcesResolver" />
+        <service id="sylius.resource_controller.resources_collection_provider" class="Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider">
             <argument type="service" id="sylius.resource_controller.resources_resolver" />
             <argument type="service" id="sylius.resource_controller.pagerfanta_representation_factory" />
         </service>
-        <service id="sylius.resource_controller.form_factory" class="%sylius.resource_controller.form_factory.class%">
+        <service id="sylius.resource_controller.form_factory" class="Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactory">
             <argument type="service" id="form.factory" />
         </service>
-        <service id="sylius.resource_controller.redirect_handler" class="%sylius.resource_controller.redirect_handler.class%">
+        <service id="sylius.resource_controller.redirect_handler" class="Sylius\Bundle\ResourceBundle\Controller\RedirectHandler">
             <argument type="service" id="router" />
         </service>
-        <service id="sylius.resource_controller.authorization_checker.disabled" class="%sylius.resource_controller.authorization_checker.disabled.class%" />
-        <service id="sylius.resource_controller.flash_helper" class="%sylius.resource_controller.flash_helper.class%">
+        <service id="sylius.resource_controller.authorization_checker.disabled" class="Sylius\Bundle\ResourceBundle\Controller\DisabledAuthorizationChecker" />
+        <service id="sylius.resource_controller.flash_helper" class="Sylius\Bundle\ResourceBundle\Controller\FlashHelper">
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
         </service>
-        <service id="sylius.resource_controller.event_dispatcher" class="%sylius.resource_controller.event_dispatcher.class%">
+        <service id="sylius.resource_controller.event_dispatcher" class="Sylius\Bundle\ResourceBundle\Controller\EventDispatcher">
             <argument type="service" id="event_dispatcher" />
         </service>
-        <service id="sylius.resource_controller.view_handler" class="%sylius.resource_controller.view_handler.class%">
+        <service id="sylius.resource_controller.view_handler" class="Sylius\Bundle\ResourceBundle\Controller\ViewHandler">
             <argument type="service" id="fos_rest.view_handler" />
         </service>
-        <service id="sylius.resource_controller.state_machine" class="%sylius.resource_controller.state_machine.class%">
+        <service id="sylius.resource_controller.state_machine" class="Sylius\Bundle\ResourceBundle\Controller\StateMachine">
             <argument type="service" id="sm.factory" />
         </service>
     </services>

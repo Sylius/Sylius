@@ -11,27 +11,16 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.storage.cookie.class">Sylius\Component\Storage\CookieStorage</parameter>
-        <parameter key="sylius.storage.doctrine_cache.class">Sylius\Component\Storage\DoctrineCacheStorage</parameter>
-        <parameter key="sylius.storage.session.class">Sylius\Component\Storage\SessionStorage</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.storage.cookie" class="%sylius.storage.cookie.class%" public="false">
+        <service id="sylius.storage.cookie" class="Sylius\Component\Storage\CookieStorage" public="false">
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
         </service>
 
-        <service id="sylius.storage.session" class="%sylius.storage.session.class%" public="false">
+        <service id="sylius.storage.session" class="Sylius\Component\Storage\SessionStorage" public="false">
             <argument type="service" id="session" />
         </service>
     </services>
-
 </container>
