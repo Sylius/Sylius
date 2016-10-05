@@ -34,9 +34,9 @@ This column type works exactly the same way as *string*, but expects *DateTime* 
         grids:
             app_user:
                 fields:
-                    email:
-                        type: string
-                        label: app.ui.email
+                    birthday:
+                        type: datetime
+                        label: app.ui.birthday
                         options:
                             format: 'Y:m:d H:i:s' # this is the default value, but you can modify it
 
@@ -79,6 +79,3 @@ Boolean column type expects the value to be boolean and renders a default or cus
                     status:
                         type: boolean
                         label: app.ui.status
-                        options:
-                            path: accountDetails.enabled # Optional!
-                            template: :Grid/Column:_userStatus.html.twig # Optional!

@@ -83,14 +83,14 @@ That's it. SyliusResourceBundle allows to generate a default CRUD interface incl
             alias: app.supplier
             section: admin
             templates: SyliusAdminBundle:Crud
+            except: ['show']
             redirect: update
             grid: app_admin_supplier
             vars:
                 all:
                     subheader: app.ui.supplier # define a translation key for your entity subheader
                 index:
-                    # choose an icon that will be displayed next to the subheader
-                    icon: 'file image outline'
+                    icon: 'file image outline' # choose an icon that will be displayed next to the subheader
         type: sylius.resource
 
 .. code-block:: yaml
@@ -113,6 +113,10 @@ This will generate the following paths:
  * */admin/suppliers/{id}/edit* - [``GET/PUT``] - Editing an existing tournament.
  * */admin/suppliers/{id}* - [``DELETE``] - Deleting specific tournament.
  * */admin/suppliers/{id}* - [``GET``] - Displaying specific tournament.
+
+.. tip::
+
+    `In the Semantic UI documentation <http://semantic-ui.com/elements/icon.html>`_ you can find all possible icons you can choose for your grid.
 
 .. tip::
 
@@ -188,6 +192,11 @@ Actions Configuration
 ---------------------
 
 Next step is adding some actions to the grid: create, update and delete.
+
+.. note::
+
+    There are two types of actions that can be added to a grid: ``main`` which "influence" the whole grid (like adding new objects)
+    and ``item`` which influence one row of the grid (one object) like editing or deleting.
 
 .. code-block:: yaml
 
