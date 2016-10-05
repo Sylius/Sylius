@@ -12,8 +12,10 @@
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -27,11 +29,28 @@ final class CartContext implements Context
     private $orderRepository;
 
     /**
-     * @param OrderRepositoryInterface $orderRepository
+     * @var ObjectManager
      */
-    public function __construct(OrderRepositoryInterface $orderRepository)
-    {
+    private $orderManager;
+
+    /**
+     * @var ExpiredCartsRemoverInterface
+     */
+    private $expiredCartsRemover;
+
+    /**
+     * @param OrderRepositoryInterface $orderRepository
+     * @param ObjectManager $orderManager
+     * @param ExpiredCartsRemoverInterface $expiredCartsRemover
+     */
+    public function __construct(
+        OrderRepositoryInterface $orderRepository,
+        ObjectManager $orderManager,
+        ExpiredCartsRemoverInterface $expiredCartsRemover
+    ) {
         $this->orderRepository = $orderRepository;
+        $this->orderManager = $orderManager;
+        $this->expiredCartsRemover = $expiredCartsRemover;
     }
 
     /**
@@ -40,6 +59,9 @@ final class CartContext implements Context
     public function heAbandonedHisCartHoursAgo(OrderInterface $cart, $amount, $time)
     {
         $cart->setUpdatedAt(new \DateTime('-'.$amount.' '.$time));
+        $this->orderManager->flush();
+
+        $this->expiredCartsRemover->remove();
     }
 
     /**
@@ -47,10 +69,20 @@ final class CartContext implements Context
      */
     public function thisCartShouldBeDeletedFromRegistry(OrderInterface $cart)
     {
-        $cart = $this->orderRepository->find($cart->getId());
         Assert::null(
-            $cart,
+            $cart->getId(),
             'This cart should not exist in registry but it does.'
+        );
+    }
+
+    /**
+     * @Then /^(this cart) should be still in the registry$/
+     */
+    public function thisCartShouldBeStillInTheRegistry(OrderInterface $cart)
+    {
+        Assert::notNull(
+            $cart->getId(),
+            'This cart should be in registry but it is not.'
         );
     }
 }
