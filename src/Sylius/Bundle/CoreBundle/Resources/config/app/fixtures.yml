@@ -108,7 +108,7 @@ sylius_fixtures:
                             books_tax:
                                 name: Books Sales Tax 2%
                                 zone: US
-                                category: clothing
+                                category: books
                             default_sales_tax:
                                 name: Sales Tax 20%
                                 zone: US
