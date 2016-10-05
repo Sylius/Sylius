@@ -7,6 +7,7 @@
     <services>
         <!-- Generic -->
         <service id="sylius.payum.action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
+            <argument type="service" id="sylius.currency_converter" />
             <tag name="payum.action" all="true" alias="sylius.capture_payment" />
         </service>
         <service id="sylius.payum.action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">
@@ -20,7 +21,7 @@
             <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.convert_payment" />
         </service>
         <service id="sylius.payum.paypal_express_checkout.action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ResolveNextRouteAction">
-            <tag name="payum.action" factory="paypal_express_checkout" aliast="sylius.paypal_express_checkout_resolve_next_route" />
+            <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.paypal_express_checkout_resolve_next_route" />
         </service>
 
         <!-- Offline -->
@@ -31,7 +32,7 @@
             <tag name="payum.action" factory="offline" alias="sylius.offline_status"/>
         </service>
         <service id="sylius.payum.offline.action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Offline\ResolveNextRouteAction">
-            <tag name="payum.action" factory="offline" aliast="sylius.offline_resolve_next_route" />
+            <tag name="payum.action" factory="offline" alias="sylius.offline_resolve_next_route" />
         </service>
     </services>
 </container>

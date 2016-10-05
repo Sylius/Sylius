@@ -18,10 +18,25 @@ use Payum\Core\Model\Payment as PayumPayment;
 use Payum\Core\Request\Capture;
 use Payum\Core\Request\Convert;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
 class CapturePaymentAction extends GatewayAwareAction
 {
+    /**
+     * @var CurrencyConverterInterface
+     */
+    private $currencyConverter;
+
+    /**
+     * @param CurrencyConverterInterface $currencyConverter
+     */
+    public function __construct(CurrencyConverterInterface $currencyConverter)
+    {
+        $this->currencyConverter = $currencyConverter;
+    }
+
     /**
      * {@inheritdoc}
      *
@@ -33,6 +48,8 @@ class CapturePaymentAction extends GatewayAwareAction
 
         /** @var $payment SyliusPaymentInterface */
         $payment = $request->getModel();
+
+        /** @var OrderInterface $order */
         $order = $payment->getOrder();
 
         $this->gateway->execute($status = new GetStatus($payment));
@@ -41,15 +58,16 @@ class CapturePaymentAction extends GatewayAwareAction
                 $this->gateway->execute($convert = new Convert($payment, 'array', $request->getToken()));
                 $payment->setDetails($convert->getResult());
             } catch (RequestNotSupportedException $e) {
+                $totalAmount = $this->convertPrice($order->getTotal(), $order->getCurrencyCode());
                 $payumPayment = new PayumPayment();
                 $payumPayment->setNumber($order->getNumber());
-                $payumPayment->setTotalAmount($order->getTotal());
+                $payumPayment->setTotalAmount($totalAmount);
                 $payumPayment->setCurrencyCode($order->getCurrencyCode());
                 $payumPayment->setClientEmail($order->getCustomer()->getEmail());
                 $payumPayment->setClientId($order->getCustomer()->getId());
                 $payumPayment->setDescription(sprintf(
                     'Payment contains %d items for a total of %01.2f',
-                    $order->getItems()->count(), $order->getTotal() / 100
+                    $order->getItems()->count(), $totalAmount
                 ));
                 $payumPayment->setDetails($payment->getDetails());
 
@@ -76,6 +94,17 @@ class CapturePaymentAction extends GatewayAwareAction
         return
             $request instanceof Capture &&
             $request->getModel() instanceof SyliusPaymentInterface
-        ;
+            ;
+    }
+
+    /**
+     * @param int $price
+     * @param string $currencyCode
+     *
+     * @return float
+     */
+    private function convertPrice($price, $currencyCode)
+    {
+        return round($this->currencyConverter->convertFromBase($price, $currencyCode) / 100, 2);
     }
 }
