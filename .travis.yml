@@ -66,3 +66,6 @@ after_failure:
 
 after_script:
     - etc/travis/run-suite after_script "${SYLIUS_SUITE}"
+
+notifications:
+    email: false
