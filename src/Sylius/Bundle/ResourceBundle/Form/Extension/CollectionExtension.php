@@ -26,13 +26,8 @@ class CollectionExtension extends AbstractTypeExtension
      */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
-        if (array_key_exists('button_add_label', $options)) {
-            $view->vars['button_add_label'] = $options['button_add_label'];
-        }
-
-        if (array_key_exists('button_delete_label', $options)) {
-            $view->vars['button_delete_label'] = $options['button_delete_label'];
-        }
+        $view->vars['button_add_label'] = $options['button_add_label'];
+        $view->vars['button_delete_label'] = $options['button_delete_label'];
     }
 
     /**
@@ -40,11 +35,6 @@ class CollectionExtension extends AbstractTypeExtension
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefined([
-            'button_add_label',
-            'button_delete_label',
-        ]);
-
         $resolver->setDefaults([
             'button_add_label' => 'sylius.form.collection.add',
             'button_delete_label' => 'sylius.form.collection.delete',
