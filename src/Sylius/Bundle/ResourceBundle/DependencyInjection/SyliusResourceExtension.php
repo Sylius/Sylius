@@ -36,26 +36,15 @@ final class SyliusResourceExtension extends Extension
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $configFiles = [
-            'services.xml',
-            'controller.xml',
-            'storage.xml',
-            'routing.xml',
-            'twig.xml',
-            'console.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $bundles = $container->getParameter('kernel.bundles');
         if (array_key_exists('SyliusGridBundle', $bundles)) {
-            $loader->load('grid.xml');
+            $loader->load('services/integrations/grid.xml');
         }
 
         if ($config['translation']['enabled']) {
-            $loader->load('translation.xml');
+            $loader->load('services/integrations/translation.xml');
 
             $container->setAlias('sylius_resource.translation.locale_provider', $config['translation']['locale_provider']);
             $container->setAlias('sylius_resource.translation.locale_context', $config['translation']['locale_context']);
@@ -81,7 +70,7 @@ final class SyliusResourceExtension extends Extension
         }
 
         foreach ($drivers as $driver) {
-            $loader->load(sprintf('driver/%s.xml', $driver));
+            $loader->load(sprintf('services/integrations/%s.xml', $driver));
         }
     }
 

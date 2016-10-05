@@ -12,6 +12,14 @@
 -->
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/console.xml" />
+        <import resource="services/controller.xml" />
+        <import resource="services/routing.xml" />
+        <import resource="services/storage.xml" />
+        <import resource="services/twig.xml" />
+    </imports>
+
     <parameters>
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
     </parameters>
