@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Api;
+namespace Sylius\Bundle\ApiBundle\Form\Type;
 
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType as BaseOrderItemType;
 use Sylius\Component\Core\Model\ProductVariant;

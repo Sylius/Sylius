@@ -23,14 +23,15 @@
         "php": "^5.6|^7.0",
 
         "friendsofsymfony/oauth-server-bundle": "~1.4",
-        "sylius/resource-bundle": "^1.0",
-        "symfony/framework-bundle": "^2.8"
+        "sylius/core-bundle": "^1.0",
+        "symfony/framework-bundle": "^2.8",
+        "symfony/form": "^2.8",
+        "symfony/validator": "^2.8"
     },
     "require-dev": {
         "doctrine/orm": "^2.4",
         "phpspec/phpspec": "^3.0",
         "phpunit/phpunit": "^4.8",
-        "symfony/form": "^2.8",
         "twig/twig": "^1.0"
     },
     "config": {

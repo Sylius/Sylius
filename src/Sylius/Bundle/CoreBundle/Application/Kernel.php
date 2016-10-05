@@ -80,7 +80,6 @@ class Kernel extends HttpKernel
 
             new \Sonata\IntlBundle\SonataIntlBundle(),
             new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
-            new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new \FOS\RestBundle\FOSRestBundle(),
 
             new \FOS\ElasticaBundle\FOSElasticaBundle(),

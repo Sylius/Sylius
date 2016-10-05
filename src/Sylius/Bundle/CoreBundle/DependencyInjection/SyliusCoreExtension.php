@@ -32,7 +32,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
      */
     private static $bundles = [
         'sylius_addressing',
-        'sylius_api',
         'sylius_attribute',
         'sylius_channel',
         'sylius_currency',
