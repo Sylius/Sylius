@@ -510,8 +510,8 @@ final class ManagingProductsContext implements Context
     public function theOptionFieldShouldBeDisabled()
     {
         Assert::true(
-            $this->updateConfigurableProductPage->isCodeDisabled(),
-            'Option should be immutable, but it does not.'
+            $this->updateConfigurableProductPage->isProductOptionsDisabled(),
+            'Options field should be immutable, but it does not.'
         );
     }
 
