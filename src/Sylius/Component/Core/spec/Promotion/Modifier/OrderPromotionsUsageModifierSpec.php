@@ -25,11 +25,6 @@ use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterfa
  */
 final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
 {
-    function let(ObjectManager $promotionManager)
-    {
-        $this->beConstructedWith($promotionManager);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType(OrderPromotionsUsageModifier::class);
@@ -41,7 +36,6 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
     }
 
     function it_increment_usage_of_promotions_applied_on_order(
-        ObjectManager $promotionManager,
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
@@ -51,13 +45,10 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         $firstPromotion->incrementUsed()->shouldBeCalled();
         $secondPromotion->incrementUsed()->shouldBeCalled();
 
-        $promotionManager->flush()->shouldBeCalled();
-
         $this->increment($order);
     }
 
     function it_decrements_usage_of_promotions_applied_on_order(
-        ObjectManager $promotionManager,
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
@@ -66,8 +57,6 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
 
         $firstPromotion->decrementUsed()->shouldBeCalled();
         $secondPromotion->decrementUsed()->shouldBeCalled();
-
-        $promotionManager->flush()->shouldBeCalled();
 
         $this->decrement($order);
     }

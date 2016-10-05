@@ -20,19 +20,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifierInterface
 {
     /**
-     * @var ObjectManager
-     */
-    private $promotionManager;
-
-    /**
-     * @param ObjectManager $promotionManager
-     */
-    public function __construct(ObjectManager $promotionManager)
-    {
-        $this->promotionManager = $promotionManager;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function increment(OrderInterface $order)
@@ -40,8 +27,6 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
         foreach ($order->getPromotions() as $promotion) {
             $promotion->incrementUsed();
         }
-
-        $this->promotionManager->flush();
     }
 
     /**
@@ -52,7 +37,5 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
         foreach ($order->getPromotions() as $promotion) {
             $promotion->decrementUsed();
         }
-
-        $this->promotionManager->flush();
     }
 }
