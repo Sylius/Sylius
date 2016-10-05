@@ -38,6 +38,6 @@ final class SyliusOrderExtension extends AbstractResourceExtension
         $orderItemType = $container->getDefinition('sylius.form.type.order_item');
         $orderItemType->addArgument(new Reference('sylius.form.data_mapper.order_item_quantity'));
 
-        $container->setParameter('sylius_order.cart_expiration_period', $config['cart_expires_after']);
+        $container->setParameter('sylius_order.cart_expiration_period', $config['expiration']['cart']);
     }
 }

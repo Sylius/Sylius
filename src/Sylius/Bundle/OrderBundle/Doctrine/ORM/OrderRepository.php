@@ -104,7 +104,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findExpiredCarts(\DateTime $terminalDate)
+    public function findCartsNotModifiedSince(\DateTime $terminalDate)
     {
         return $this->createQueryBuilder('o')
             ->where('o.state = :state')

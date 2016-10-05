@@ -170,7 +170,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given a customer :customer started checkout
+     * @Given a customer :customer added something to cart
      */
     public function customerStartedCheckout(CustomerInterface $customer)
     {

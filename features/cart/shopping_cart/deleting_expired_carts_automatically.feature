@@ -8,13 +8,13 @@ Feature: Deleting expired carts automatically
         Given the store operates on a single channel in "United States"
 
     @domain
-    Scenario: Having cart deleted after 3 hours of idleness
-        Given a customer "john.doe@gmail.com" started checkout
-        And he abandoned the cart 4 hours ago
-        Then this cart should be deleted from registry
+    Scenario: Having cart deleted after 4 days of idleness
+        Given a customer "john.doe@gmail.com" added something to cart
+        And he abandoned the cart 4 days ago
+        Then this cart should be automatically deleted
 
     @domain
     Scenario: Having idle cart in registry if expiration time has not been reached
-        Given a customer "john.doe@gmail.com" started checkout
-        And he abandoned the cart 1 hours ago
-        Then this cart should be still in the registry
+        Given a customer "john.doe@gmail.com" added something to cart
+        And he abandoned the cart 1 day ago
+        Then this cart should not be deleted

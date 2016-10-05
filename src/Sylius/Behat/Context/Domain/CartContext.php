@@ -54,7 +54,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^(?:|he|she) abandoned (the cart) ([^"]+) (hours|minutes|seconds) ago$/
+     * @Given /^(?:|he|she) abandoned (the cart) (\d+) (day|days|hour|hours) ago$/
      */
     public function heAbandonedHisCartHoursAgo(OrderInterface $cart, $amount, $time)
     {
@@ -65,9 +65,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^(this cart) should be deleted from registry$/
+     * @Then /^(this cart) should be automatically deleted$/
      */
-    public function thisCartShouldBeDeletedFromRegistry(OrderInterface $cart)
+    public function thisCartShouldBeAutomaticallyDeleted(OrderInterface $cart)
     {
         Assert::null(
             $cart->getId(),
@@ -76,9 +76,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then /^(this cart) should be still in the registry$/
+     * @Then /^(this cart) should not be deleted$/
      */
-    public function thisCartShouldBeStillInTheRegistry(OrderInterface $cart)
+    public function thisCartShouldNotBeDeleted(OrderInterface $cart)
     {
         Assert::notNull(
             $cart->getId(),

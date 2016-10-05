@@ -18,9 +18,9 @@ use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- *
  * @mixin ExpiredCartsRemover
+ *
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ExpiredCartsRemoverSpec extends ObjectBehavior
 {
@@ -40,11 +40,11 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
     }
 
     function it_removes_cart_which_has_been_updated_before_configured_date(
+        OrderRepositoryInterface $orderRepository,
         OrderInterface $firstCart,
-        OrderInterface $secondCart,
-        OrderRepositoryInterface $orderRepository
+        OrderInterface $secondCart
     ) {
-        $orderRepository->findExpiredCarts(new \DateTime('-2 months'))->willReturn([
+        $orderRepository->findCartsNotModifiedSince(new \DateTime('-2 months'))->willReturn([
             $firstCart,
             $secondCart
         ]);

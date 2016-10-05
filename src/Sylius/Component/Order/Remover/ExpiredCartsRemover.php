@@ -40,9 +40,9 @@ final class ExpiredCartsRemover implements ExpiredCartsRemoverInterface
 
     public function remove()
     {
-        $expiredCarts = $this->orderRepository->findExpiredCarts(new \DateTime('-'.$this->expirationPeriod));
-        foreach ($expiredCarts as $cart) {
-            $this->orderRepository->remove($cart);
+        $expiredCarts = $this->orderRepository->findCartsNotModifiedSince(new \DateTime('-'.$this->expirationPeriod));
+        foreach ($expiredCarts as $expiredCart) {
+            $this->orderRepository->remove($expiredCart);
         }
     }
 }
