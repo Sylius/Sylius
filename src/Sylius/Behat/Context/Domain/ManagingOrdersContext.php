@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -51,6 +52,11 @@ final class ManagingOrdersContext implements Context
     private $adjustmentRepository;
 
     /**
+     * @var ObjectManager
+     */
+    private $orderManager;
+
+    /**
      * @var ProductVariantResolverInterface
      */
     private $variantResolver;
@@ -61,6 +67,7 @@ final class ManagingOrdersContext implements Context
      * @param RepositoryInterface $orderItemRepository
      * @param RepositoryInterface $addressRepository
      * @param RepositoryInterface $adjustmentRepository
+     * @param ObjectManager $orderManager
      * @param ProductVariantResolverInterface $variantResolver
      */
     public function __construct(
@@ -69,6 +76,7 @@ final class ManagingOrdersContext implements Context
         RepositoryInterface $orderItemRepository,
         RepositoryInterface $addressRepository,
         RepositoryInterface $adjustmentRepository,
+        ObjectManager $orderManager,
         ProductVariantResolverInterface $variantResolver
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -76,6 +84,7 @@ final class ManagingOrdersContext implements Context
         $this->orderItemRepository = $orderItemRepository;
         $this->addressRepository = $addressRepository;
         $this->adjustmentRepository = $adjustmentRepository;
+        $this->orderManager = $orderManager;
         $this->variantResolver = $variantResolver;
     }
 
@@ -142,5 +151,26 @@ final class ManagingOrdersContext implements Context
         $adjustments = $this->adjustmentRepository->findBy(['id' => $adjustments]);
 
         Assert::same($adjustments, []);
+    }
+
+    /**
+     * @Given /^(this order) has not been paid for (\d+) (day|days|hour|hours)$/
+     */
+    public function thisOrderHasNotBeenPaidForDays(OrderInterface $order, $amount, $time)
+    {
+        $order->setCompletedAt(new \DateTime('-'.$amount.' '.$time));
+        $this->orderManager->flush();
+    }
+
+    /**
+     * @Then /^(this order) should be automatically cancelled$/
+     */
+    public function thisOrderShouldBeAutomaticallyCancelled(OrderInterface $order)
+    {
+        Assert::same(
+            OrderInterface::STATE_CANCELLED,
+            $order->getState(),
+            'Order should be cancelled but its not.'
+        );
     }
 }
