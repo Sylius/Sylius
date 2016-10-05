@@ -13,10 +13,9 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceSelectionToIdentifierCollectionTransformer;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-
-// Since the root namespace "spec" is not in our autoload
-require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';
 
 final class ResourceSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavior
 {
@@ -27,7 +26,7 @@ final class ResourceSelectionToIdentifierCollectionTransformerSpec extends Objec
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceSelectionToIdentifierCollectionTransformer');
+        $this->shouldHaveType(ResourceSelectionToIdentifierCollectionTransformer::class);
     }
 
     function it_does_transform_null_value()
@@ -57,14 +56,14 @@ final class ResourceSelectionToIdentifierCollectionTransformerSpec extends Objec
         $this->shouldThrow(UnexpectedTypeException::class)->duringReverseTransform('string');
     }
 
-    function it_does_reverse_transform_array_value(FakeEntity $entity)
+    function it_does_reverse_transform_array_value(ResourceInterface $entity)
     {
         $entity->getId()->willReturn(1);
 
         $this->reverseTransform([$entity])->shouldHaveCount(1);
     }
 
-    function it_does_reverse_transform_array_of_arrays_value(FakeEntity $entityOne, FakeEntity $entityTwo)
+    function it_does_reverse_transform_array_of_arrays_value(ResourceInterface $entityOne, ResourceInterface $entityTwo)
     {
         $entityOne->getId()->willReturn(1);
         $entityTwo->getId()->willReturn(1);

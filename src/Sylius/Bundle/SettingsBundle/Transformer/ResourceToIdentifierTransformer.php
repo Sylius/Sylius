@@ -11,16 +11,34 @@
 
 namespace Sylius\Bundle\SettingsBundle\Transformer;
 
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer as BaseTransformer;
-use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceToIdentifierTransformer extends BaseTransformer implements ParameterTransformerInterface
+final class ResourceToIdentifierTransformer implements ParameterTransformerInterface
 {
+    /**
+     * @var RepositoryInterface
+     */
+    private $repository;
+
+    /**
+     * @var string
+     */
+    private $identifier;
+
+    /**
+     * @param RepositoryInterface $repository
+     * @param string $identifier
+     */
+    public function __construct(RepositoryInterface $repository, $identifier = 'id')
+    {
+        $this->repository = $repository;
+        $this->identifier = $identifier;
+    }
+
     /**
      * {@inheritdoc}
      */

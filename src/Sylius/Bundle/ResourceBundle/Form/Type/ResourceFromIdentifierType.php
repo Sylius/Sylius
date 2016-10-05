@@ -12,10 +12,12 @@
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\IdentifierToResourceTransformer;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\ReversedTransformer;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -49,7 +51,7 @@ class ResourceFromIdentifierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addModelTransformer(
-            new IdentifierToResourceTransformer($this->repository, $options['identifier'])
+            new ReversedTransformer(new ResourceToIdentifierTransformer($this->repository, $options['identifier']))
         );
     }
 
