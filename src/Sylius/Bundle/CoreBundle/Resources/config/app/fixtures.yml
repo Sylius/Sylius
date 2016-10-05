@@ -52,12 +52,12 @@ sylius_fixtures:
                                 currencies:
                                     - "%currency%"
                                 shipping_methods:
-                                    - ups
-                                    - dhl_express
-                                    - fedex
+                                    - "ups"
+                                    - "dhl_express"
+                                    - "fedex"
                                 payment_methods:
-                                    - cash_on_delivery
-                                    - bank_transfer
+                                    - "cash_on_delivery"
+                                    - "bank_transfer"
 
                 regular_user:
                     name: shop_user
@@ -65,25 +65,25 @@ sylius_fixtures:
                         random: 20
                         custom:
                             -
-                                email: shop@example.com
-                                first_name: John
-                                last_name: Doe
-                                password: sylius
+                                email: "shop@example.com"
+                                first_name: "John"
+                                last_name: "Doe"
+                                password: "sylius"
 
                 admin_user:
                     name: admin_user
                     options:
                         custom:
                             -
-                                email: sylius@example.com
+                                email: "sylius@example.com"
                                 username: "John Doe"
-                                password: sylius
+                                password: "sylius"
                                 enabled: true
                                 locale_code: "%locale%"
                             -
-                                email: api@example.com
+                                email: "api@example.com"
                                 username: "Luke Brushwood"
-                                password: sylius-api
+                                password: "sylius-api"
                                 enabled: true
                                 locale_code: "%locale%"
                                 api: true
@@ -103,16 +103,16 @@ sylius_fixtures:
                         custom:
                             clothing_tax:
                                 name: "Clothing Sales Tax 7%"
-                                zone: US
-                                category: clothing
+                                zone: "US"
+                                category: "clothing"
                             books_tax:
                                 name: "Books Sales Tax 2%"
-                                zone: US
-                                category: books
+                                zone: "US"
+                                category: "books"
                             default_sales_tax:
                                 name: "Sales Tax 20%"
-                                zone: US
-                                category: other
+                                zone: "US"
+                                category: "other"
 
                 mug_product:
                     options:
