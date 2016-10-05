@@ -86,7 +86,7 @@ final class LocaleFixture extends AbstractFixture
             ->children()
                 ->arrayNode('locales')
                     ->useAttributeAsKey('code')
-                    ->prototype('scalar')
+                    ->prototype('boolean')
                         ->defaultTrue()
         ;
     }
