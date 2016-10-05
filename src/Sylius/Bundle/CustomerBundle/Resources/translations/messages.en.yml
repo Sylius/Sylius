@@ -1,8 +1,5 @@
 sylius:
     form:
-        group:
-            name: Name
-            roles: Roles
         customer:
             first_name: First name
             group: Group
@@ -15,6 +12,9 @@ sylius:
             different_billing_address: Use different address for billing?
             only_customer_registration: Create account?
             subscribed_to_newsletter: Subscribe to the newsletter
+        customer_group:
+            name: Name
+            roles: Roles
     gender:
         unknown: Unknown
         male: Male

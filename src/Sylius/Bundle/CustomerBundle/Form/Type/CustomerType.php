@@ -34,7 +34,7 @@ class CustomerType extends CustomerProfileType
                 'label' => 'sylius.form.customer.last_name',
                 'required' => false,
             ])
-            ->add('group', 'sylius_group_choice', [
+            ->add('group', 'sylius_customer_group_choice', [
                 'label' => 'sylius.form.customer.group',
                 'required' => false,
             ])

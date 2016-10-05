@@ -15,11 +15,10 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * User group form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class GroupType extends AbstractResourceType
+class CustomerGroupType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -28,7 +27,7 @@ class GroupType extends AbstractResourceType
     {
         $builder
             ->add('name', 'text', [
-                'label' => 'sylius.form.group.name',
+                'label' => 'sylius.form.customer_group.name',
             ])
         ;
     }
@@ -38,6 +37,6 @@ class GroupType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_group';
+        return 'sylius_customer_group';
     }
 }

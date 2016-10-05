@@ -11,14 +11,13 @@
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator;
-use Sylius\Component\Customer\Model\GroupInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
@@ -48,7 +47,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
     function it_recalculates_prices_adding_customer_to_the_context(
         DelegatingCalculatorInterface $priceCalculator,
         CustomerInterface $customer,
-        GroupInterface $group,
+        CustomerGroupInterface $group,
         OrderInterface $order,
         OrderItemInterface $item,
         PriceableInterface $variant
@@ -100,7 +99,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         ChannelInterface $channel,
         DelegatingCalculatorInterface $priceCalculator,
         CustomerInterface $customer,
-        GroupInterface $group,
+        CustomerGroupInterface $group,
         OrderInterface $order,
         OrderItemInterface $item,
         PriceableInterface $variant

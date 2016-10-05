@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Customer\Model\Customer;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Customer\Model\GroupableInterface;
 
 /**
  * @mixin Customer
