@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Order\Updater\UnpaidOrdersStateUpdaterInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Webmozart\Assert\Assert;
@@ -62,6 +63,11 @@ final class ManagingOrdersContext implements Context
     private $variantResolver;
 
     /**
+     * @var UnpaidOrdersStateUpdaterInterface
+     */
+    private $unpaidOrdersStateUpdater;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param OrderRepositoryInterface $orderRepository
      * @param RepositoryInterface $orderItemRepository
@@ -69,6 +75,7 @@ final class ManagingOrdersContext implements Context
      * @param RepositoryInterface $adjustmentRepository
      * @param ObjectManager $orderManager
      * @param ProductVariantResolverInterface $variantResolver
+     * @param UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -77,7 +84,8 @@ final class ManagingOrdersContext implements Context
         RepositoryInterface $addressRepository,
         RepositoryInterface $adjustmentRepository,
         ObjectManager $orderManager,
-        ProductVariantResolverInterface $variantResolver
+        ProductVariantResolverInterface $variantResolver,
+        UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
@@ -86,6 +94,7 @@ final class ManagingOrdersContext implements Context
         $this->adjustmentRepository = $adjustmentRepository;
         $this->orderManager = $orderManager;
         $this->variantResolver = $variantResolver;
+        $this->unpaidOrdersStateUpdater = $unpaidOrdersStateUpdater;
     }
 
     /**
@@ -160,6 +169,8 @@ final class ManagingOrdersContext implements Context
     {
         $order->setCompletedAt(new \DateTime('-'.$amount.' '.$time));
         $this->orderManager->flush();
+
+        $this->unpaidOrdersStateUpdater->cancel();
     }
 
     /**

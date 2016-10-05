@@ -25,6 +25,7 @@
             <argument type="service" id="sylius.repository.adjustment" container="symfony"/>
             <argument type="service" id="sylius.manager.order" container="symfony"/>
             <argument type="service" id="sylius.product_variant_resolver.default" container="symfony"/>
+            <argument type="service" id="sylius.unpaid_orders_state_updater" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
