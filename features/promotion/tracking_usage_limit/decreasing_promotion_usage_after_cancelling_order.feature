@@ -2,7 +2,7 @@
 Feature: Decreasing a promotion usage after cancelling an order
     In order to properly limit promotion usage
     As an Administrator
-    I want to have a promotion usage limit decreased after order cancellation
+    I want to have a promotion usage decreased after order cancellation
 
     Background:
         Given the store operates on a single channel in "United States"

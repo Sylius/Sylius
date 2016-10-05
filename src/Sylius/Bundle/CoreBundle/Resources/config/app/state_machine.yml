@@ -46,7 +46,7 @@ winzou_state_machine:
                     args: ["object"]
                 sylius_increment_promotions_usages:
                     on: ["complete"]
-                    do: ["@sylius.modifier.usage_modifier", "increment"]
+                    do: ["@sylius.promotion_usage_modifier", "increment"]
                     args: ["object"]
 
     sylius_order_shipping:
@@ -171,7 +171,7 @@ winzou_state_machine:
                     args: ["object"]
                 sylius_decrement_promotions_usages:
                     on: ["cancel"]
-                    do: ["@sylius.modifier.usage_modifier", "decrement"]
+                    do: ["@sylius.promotion_usage_modifier", "decrement"]
                     args: ["object"]
 
     sylius_shipment:

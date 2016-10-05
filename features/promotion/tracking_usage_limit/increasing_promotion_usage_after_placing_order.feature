@@ -2,7 +2,7 @@
 Feature: Increasing a promotion usage after placing an order
     In order to limit promotion usage
     As an Administrator
-    I want to have a promotion usage limit increased after order placement
+    I want to have a promotion usage increased after order placement
 
     Background:
         Given the store operates on a single channel in "United States"

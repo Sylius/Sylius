@@ -116,9 +116,7 @@ final class PromotionContext implements Context
      */
     public function thereIsPromotionLimitedToUsages($promotionName, $usageLimit)
     {
-        $promotion = $this->testPromotionFactory
-            ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
-        ;
+        $promotion = $this->testPromotionFactory->createForChannel($promotionName, $this->sharedStorage->get('channel'));
 
         $promotion->setUsageLimit($usageLimit);
 
