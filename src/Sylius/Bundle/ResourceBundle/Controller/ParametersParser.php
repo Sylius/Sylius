@@ -11,25 +11,33 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Dosena Ishmael <nukboon@gmail.com>
  */
-class ParametersParser implements ParametersParserInterface
+final class ParametersParser implements ParametersParserInterface
 {
+    /**
+     * @var ContainerInterface
+     */
+    private $container;
+
     /**
      * @var ExpressionLanguage
      */
     private $expression;
 
     /**
+     * @param ContainerInterface $container
      * @param ExpressionLanguage $expression
      */
-    public function __construct(ExpressionLanguage $expression)
+    public function __construct(ContainerInterface $container, ExpressionLanguage $expression)
     {
+        $this->container = $container;
         $this->expression = $expression;
     }
 
@@ -59,7 +67,7 @@ class ParametersParser implements ParametersParserInterface
                     }
                 }
 
-                $parameters[$key] = $this->expression->evaluate($service);
+                $parameters[$key] = $this->expression->evaluate($service, ['container' => $this->container]);
             }
         }
 

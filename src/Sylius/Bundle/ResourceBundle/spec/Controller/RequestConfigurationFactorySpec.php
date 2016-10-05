@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParser;
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
@@ -28,7 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
  */
 final class RequestConfigurationFactorySpec extends ObjectBehavior
 {
-    function let(ParametersParser $parametersParser)
+    function let(ParametersParserInterface $parametersParser)
     {
         $this->beConstructedWith($parametersParser, RequestConfiguration::class);
     }
@@ -44,9 +45,9 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
     }
 
     function it_creates_configuration_from_resource_metadata_and_request(
+        ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
-        ParametersParser $parametersParser,
         ParameterBag $headersBag,
         ParameterBag $attributesBag
     ) {
@@ -65,9 +66,9 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
     }
 
     function it_creates_configuration_without_default_settings(
+        ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
-        ParametersParser $parametersParser,
         ParameterBag $headersBag,
         ParameterBag $attributesBag
     ) {
@@ -84,9 +85,9 @@ final class RequestConfigurationFactorySpec extends ObjectBehavior
     }
 
     function it_creates_configuration_with_default_settings(
+        ParametersParserInterface $parametersParser,
         MetadataInterface $metadata,
         Request $request,
-        ParametersParser $parametersParser,
         ParameterBag $headersBag,
         ParameterBag $attributesBag
     ) {
