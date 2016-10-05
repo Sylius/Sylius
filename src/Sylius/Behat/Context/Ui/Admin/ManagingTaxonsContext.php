@@ -376,7 +376,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldBeNotifiedThatTheImageWithThisCodeAlreadyExists()
     {
-        Assert::same($this->updatePage->getValidationMessageForImage('code'), 'Image code must be unique within this taxon.');
+        Assert::same($this->updatePage->getValidationMessageForImage(), 'Image code must be unique within this taxon.');
     }
 
     /**
@@ -401,6 +401,19 @@ final class ManagingTaxonsContext implements Context
         Assert::true(
             $this->updatePage->isImageCodeDisabled(),
             'Image code field should be disabled but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the :imageNumber image should have an unique code
+     */
+    public function iShouldBeNotifiedThatTheFirstImageShouldHaveAnUniqueCode($imageNumber)
+    {
+        preg_match_all('!\d+!', $imageNumber, $matches);
+
+        Assert::same(
+            $this->updatePage->getValidationMessageForImageAtPlace((int) $matches[0]), 
+            'Image code must be unique within this taxon.'
         );
     }
 }
