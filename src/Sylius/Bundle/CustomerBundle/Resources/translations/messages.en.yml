@@ -5,7 +5,7 @@ sylius:
             roles: Roles
         customer:
             first_name: First name
-            groups: Groups
+            group: Group
             last_name: Last name
             email: Email
             phone_number: Phone number

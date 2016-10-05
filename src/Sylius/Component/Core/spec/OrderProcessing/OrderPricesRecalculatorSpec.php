@@ -14,11 +14,12 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator;
+use Sylius\Component\Customer\Model\GroupInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Customer\Model\GroupableInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
@@ -45,9 +46,9 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
     }
 
     function it_recalculates_prices_adding_customer_to_the_context(
-        ArrayCollection $groups,
         DelegatingCalculatorInterface $priceCalculator,
-        GroupableInterface $customer,
+        CustomerInterface $customer,
+        GroupInterface $group,
         OrderInterface $order,
         OrderItemInterface $item,
         PriceableInterface $variant
@@ -56,15 +57,14 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $order->getChannel()->willReturn(null);
         $order->getItems()->willReturn([$item]);
 
-        $customer->getGroups()->willReturn($groups);
-        $groups->toArray()->willReturn(['group1', 'group2']);
+        $customer->getGroup()->willReturn($group);
 
         $item->isImmutable()->willReturn(false);
         $item->getQuantity()->willReturn(5);
         $item->getVariant()->willReturn($variant);
 
         $priceCalculator
-            ->calculate($variant, ['customer' => $customer, 'groups' => ['group1', 'group2'], 'quantity' => 5])
+            ->calculate($variant, ['customer' => $customer, 'groups' => [$group], 'quantity' => 5])
             ->willReturn(10)
         ;
         $item->setUnitPrice(10)->shouldBeCalled();
@@ -97,10 +97,10 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
     }
 
     function it_recalculates_prices_adding_channel_and_customer_to_the_context(
-        ArrayCollection $groups,
         ChannelInterface $channel,
         DelegatingCalculatorInterface $priceCalculator,
-        GroupableInterface $customer,
+        CustomerInterface $customer,
+        GroupInterface $group,
         OrderInterface $order,
         OrderItemInterface $item,
         PriceableInterface $variant
@@ -109,8 +109,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
         $order->getItems()->willReturn([$item]);
 
-        $customer->getGroups()->willReturn($groups);
-        $groups->toArray()->willReturn(['group1', 'group2']);
+        $customer->getGroup()->willReturn($group);
 
         $item->isImmutable()->willReturn(false);
         $item->getQuantity()->willReturn(5);
@@ -121,7 +120,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
                 $variant,
                 [
                     'customer' => $customer,
-                    'groups' => ['group1', 'group2'],
+                    'groups' => [$group],
                     'channel' => [$channel],
                     'quantity' => 5
                 ]

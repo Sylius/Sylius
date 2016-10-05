@@ -107,6 +107,16 @@ interface CustomerInterface extends
     public function isFemale();
 
     /**
+     * @return CustomerGroupInterface
+     */
+    public function getGroup();
+
+    /**
+     * @param CustomerGroupInterface $group
+     */
+    public function setGroup(CustomerGroupInterface $group);
+
+    /**
      * @return string
      */
     public function getPhoneNumber();
