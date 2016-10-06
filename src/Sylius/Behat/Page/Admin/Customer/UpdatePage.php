@@ -104,6 +104,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getGroupName()
+    {
+        return $this->getElement('group')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getToggleableElement()
     {
         return $this->getElement('enabled');
@@ -118,6 +126,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'email' => '#sylius_customer_email',
             'enabled' => '#sylius_customer_user_enabled',
             'first_name' => '#sylius_customer_firstName',
+            'group' => '#sylius_customer_group',
             'last_name' => '#sylius_customer_lastName',
             'password' => '#sylius_customer_user_password',
         ]);

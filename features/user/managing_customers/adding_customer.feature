@@ -16,7 +16,7 @@ Feature: Adding a new customer
         Then I should be notified that it has been successfully created
         And the customer "l.skywalker@gmail.com" should appear in the store
         
-    @ui @todo
+    @ui
     Scenario: Adding a new customer with full details
         Given I want to create a new customer
         When I specify their first name as "Luke"

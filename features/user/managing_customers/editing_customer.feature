@@ -37,7 +37,7 @@ Feature: Editing a customer
         Then I should be notified that it has been successfully edited
         And this customer should be subscribed to the newsletter
 
-    @ui @todo
+    @ui
     Scenario: Selecting a group for an existing customer
         Given the store has a customer group "Retail"
         And the store has customer "Mike Ross" with email "ross@teammike.com"
