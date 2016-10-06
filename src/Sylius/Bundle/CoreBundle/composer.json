@@ -29,7 +29,6 @@
         "mathiasverraes/money": "~1.2",
         "sylius/core": "^1.0",
         "sylius/addressing-bundle": "^1.0",
-        "sylius/api-bundle": "^1.0",
         "sylius/attribute-bundle": "^1.0",
         "sylius/content-bundle": "^1.0",
         "sylius/currency-bundle": "^1.0",
