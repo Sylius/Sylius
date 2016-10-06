@@ -15,7 +15,7 @@ A rule is configured via the ``configuration`` attribute which is an array seria
 Configuration is always strict, which means, that if you set ``count`` to **4** for cart quantity rule, orders with equal or more than **4** quantity will be eligible.
 
 PromotionAction
-------
+---------------
 
 An ``PromotionAction`` defines the the nature of the discount. Common actions are :
 

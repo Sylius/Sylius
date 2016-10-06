@@ -37,29 +37,29 @@
             <tag name="sylius.promotion_rule_checker" type="total_of_items_from_taxon" label="Total price of items from taxon" />
         </service>
 
-        <service id="sylius.promotion_action.fixed_discount" class="Sylius\Component\Core\Promotion\Action\FixedDiscountAction">
+        <service id="sylius.promotion_action.fixed_discount" class="Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand">
             <argument type="service" id="sylius.proportional_integer_distributor" />
             <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
             <tag name="sylius.promotion_action" type="order_fixed_discount" label="Order fixed discount" />
         </service>
-        <service id="sylius.promotion_action.unit_fixed_discount" class="Sylius\Component\Core\Promotion\Action\UnitFixedDiscountAction">
+        <service id="sylius.promotion_action.unit_fixed_discount" class="Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.promotion_filter.price_range" />
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <tag name="sylius.promotion_action" type="unit_fixed_discount" label="Item fixed discount" />
         </service>
-        <service id="sylius.promotion_action.percentage_discount" class="Sylius\Component\Core\Promotion\Action\PercentageDiscountAction">
+        <service id="sylius.promotion_action.percentage_discount" class="Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand">
             <argument type="service" id="sylius.proportional_integer_distributor" />
             <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
             <tag name="sylius.promotion_action" type="order_percentage_discount" label="Order percentage discount" />
         </service>
-        <service id="sylius.promotion_action.unit_percentage_discount" class="Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountAction">
+        <service id="sylius.promotion_action.unit_percentage_discount" class="Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.promotion_filter.price_range" />
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <tag name="sylius.promotion_action" type="unit_percentage_discount" label="Item percentage discount" />
         </service>
-        <service id="sylius.promotion_action.shipping_percentage_discount" class="Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountAction">
+        <service id="sylius.promotion_action.shipping_percentage_discount" class="Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand">
             <argument type="service" id="sylius.factory.adjustment" />
             <tag name="sylius.promotion_action" type="shipping_percentage_discount" label="Shipping percentage discount" />
         </service>

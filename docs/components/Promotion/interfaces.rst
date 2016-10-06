@@ -36,7 +36,7 @@ This interface should be implemented by models representing a **Promotion**.
 .. _component_promotion_model_action-interface:
 
 PromotionActionInterface
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 This interface should be implemented by models representing an **PromotionAction**.
 
