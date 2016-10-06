@@ -11,32 +11,32 @@
 
 namespace Sylius\Component\Core\Factory;
 
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface RuleFactoryInterface extends FactoryInterface
+interface PromotionRuleFactoryInterface extends FactoryInterface
 {
     /**
      * @param int $count
      *
-     * @return RuleInterface
+     * @return PromotionRuleInterface
      */
     public function createCartQuantity($count);
 
     /**
      * @param int $amount
      *
-     * @return RuleInterface
+     * @return PromotionRuleInterface
      */
     public function createItemTotal($amount);
 
     /**
      * @param array $taxons
      *
-     * @return RuleInterface
+     * @return PromotionRuleInterface
      */
     public function createTaxon(array $taxons);
 
@@ -44,7 +44,7 @@ interface RuleFactoryInterface extends FactoryInterface
      * @param string $taxon
      * @param int $amount
      *
-     * @return RuleInterface
+     * @return PromotionRuleInterface
      */
     public function createItemsFromTaxonTotal($taxon, $amount);
 
@@ -52,14 +52,14 @@ interface RuleFactoryInterface extends FactoryInterface
      * @param string $taxon
      * @param int $count
      *
-     * @return RuleInterface
+     * @return PromotionRuleInterface
      */
     public function createContainsTaxon($taxon, $count);
 
     /**
      * @param int $nth
      *
-     * @return RuleInterface
+     * @return PromotionRuleInterface
      */
     public function createNthOrder($nth);
 }

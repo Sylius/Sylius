@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -146,7 +146,7 @@ final class PromotionSpec extends ObjectBehavior
         $this->getRules()->shouldHaveType(Collection::class);
     }
 
-    function it_should_add_rules_properly(RuleInterface $rule)
+    function it_should_add_rules_properly(PromotionRuleInterface $rule)
     {
         $this->hasRule($rule)->shouldReturn(false);
 
@@ -156,7 +156,7 @@ final class PromotionSpec extends ObjectBehavior
         $this->hasRule($rule)->shouldReturn(true);
     }
 
-    function it_should_remove_rules_properly(RuleInterface $rule)
+    function it_should_remove_rules_properly(PromotionRuleInterface $rule)
     {
         $this->hasRule($rule)->shouldReturn(false);
 

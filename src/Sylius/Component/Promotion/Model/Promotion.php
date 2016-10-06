@@ -87,7 +87,7 @@ class Promotion implements PromotionInterface
     protected $coupons;
 
     /**
-     * @var Collection|RuleInterface[]
+     * @var Collection|PromotionRuleInterface[]
      */
     protected $rules;
 
@@ -343,7 +343,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function hasRule(RuleInterface $rule)
+    public function hasRule(PromotionRuleInterface $rule)
     {
         return $this->rules->contains($rule);
     }
@@ -351,7 +351,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function addRule(RuleInterface $rule)
+    public function addRule(PromotionRuleInterface $rule)
     {
         if (!$this->hasRule($rule)) {
             $rule->setPromotion($this);
@@ -362,7 +362,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function removeRule(RuleInterface $rule)
+    public function removeRule(PromotionRuleInterface $rule)
     {
         $rule->setPromotion(null);
         $this->rules->removeElement($rule);

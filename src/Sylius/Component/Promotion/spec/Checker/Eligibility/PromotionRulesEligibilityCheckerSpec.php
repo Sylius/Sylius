@@ -17,7 +17,7 @@ use Sylius\Component\Promotion\Checker\Eligibility\PromotionRulesEligibilityChec
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
@@ -55,8 +55,8 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         ServiceRegistryInterface $rulesRegistry,
         RuleCheckerInterface $firstRuleChecker,
         RuleCheckerInterface $secondRuleChecker,
-        RuleInterface $firstRule,
-        RuleInterface $secondRule,
+        PromotionRuleInterface $firstRule,
+        PromotionRuleInterface $secondRule,
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ) {
@@ -82,8 +82,8 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         ServiceRegistryInterface $rulesRegistry,
         RuleCheckerInterface $firstRuleChecker,
         RuleCheckerInterface $secondRuleChecker,
-        RuleInterface $firstRule,
-        RuleInterface $secondRule,
+        PromotionRuleInterface $firstRule,
+        PromotionRuleInterface $secondRule,
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ) {
@@ -109,8 +109,8 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         ServiceRegistryInterface $rulesRegistry,
         RuleCheckerInterface $firstRuleChecker,
         RuleCheckerInterface $secondRuleChecker,
-        RuleInterface $firstRule,
-        RuleInterface $secondRule,
+        PromotionRuleInterface $firstRule,
+        PromotionRuleInterface $secondRule,
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ) {

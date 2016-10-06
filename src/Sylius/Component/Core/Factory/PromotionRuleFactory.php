@@ -17,13 +17,13 @@ use Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class RuleFactory implements RuleFactoryInterface
+class PromotionRuleFactory implements PromotionRuleFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -51,7 +51,7 @@ class RuleFactory implements RuleFactoryInterface
      */
     public function createCartQuantity($count)
     {
-        /** @var RuleInterface $rule */
+        /** @var PromotionRuleInterface $rule */
         $rule = $this->createNew();
         $rule->setType(CartQuantityRuleChecker::TYPE);
         $rule->setConfiguration(['count' => $count]);
@@ -64,7 +64,7 @@ class RuleFactory implements RuleFactoryInterface
      */
     public function createItemTotal($amount)
     {
-        /** @var RuleInterface $rule */
+        /** @var PromotionRuleInterface $rule */
         $rule = $this->createNew();
         $rule->setType(ItemTotalRuleChecker::TYPE);
         $rule->setConfiguration(['amount' => $amount]);
@@ -77,7 +77,7 @@ class RuleFactory implements RuleFactoryInterface
      */
     public function createTaxon(array $taxons)
     {
-        /** @var RuleInterface $rule */
+        /** @var PromotionRuleInterface $rule */
         $rule = $this->createNew();
         $rule->setType(TaxonRuleChecker::TYPE);
         $rule->setConfiguration(['taxons' => $taxons]);
@@ -90,7 +90,7 @@ class RuleFactory implements RuleFactoryInterface
      */
     public function createItemsFromTaxonTotal($taxon, $amount)
     {
-        /** @var RuleInterface $rule */
+        /** @var PromotionRuleInterface $rule */
         $rule = $this->createNew();
         $rule->setType(TotalOfItemsFromTaxonRuleChecker::TYPE);
         $rule->setConfiguration(['taxon' => $taxon, 'amount' => $amount]);
@@ -103,7 +103,7 @@ class RuleFactory implements RuleFactoryInterface
      */
     public function createContainsTaxon($taxon, $count)
     {
-        /** @var RuleInterface $rule */
+        /** @var PromotionRuleInterface $rule */
         $rule = $this->createNew();
         $rule->setType(ContainsTaxonRuleChecker::TYPE);
         $rule->setConfiguration(['taxon' => $taxon, 'count' => $count]);
@@ -116,7 +116,7 @@ class RuleFactory implements RuleFactoryInterface
      */
     public function createNthOrder($nth)
     {
-        /** @var RuleInterface $rule */
+        /** @var PromotionRuleInterface $rule */
         $rule = $this->createNew();
         $rule->setType(NthOrderRuleChecker::TYPE);
         $rule->setConfiguration(['nth' => $nth]);

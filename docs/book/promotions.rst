@@ -52,17 +52,17 @@ The types of rules that are configured in **Sylius** by default are:
 * **Nth Order** - checks if this is for example the second order made by the customer,
 * **Shipping Country** - checks if the order's shipping address is in a given country.
 
-How to create a new Rule programmatically?
-''''''''''''''''''''''''''''''''''''''''''
+How to create a new PromotionRule programmatically?
+'''''''''''''''''''''''''''''''''''''''''''''''''''
 
-Creating a **Rule** is really simple since we have the `RuleFactory <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/Factory/RuleFactory.php>`_.
+Creating a **PromotionRule** is really simple since we have the `PromotionRuleFactory <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/Factory/PromotionRuleFactory.php>`_.
 It has dedicated methods for creating all types of rules available by default.
 
 In the example you can see how to create a simple Cart Quantity rule. It will check if there are at least 5 items in the cart.
 
 .. code-block:: php
 
-   /** @var RuleFactoryInterface $ruleFactory */
+   /** @var PromotionRuleFactoryInterface $ruleFactory */
    $ruleFactory = $this->container->get('sylius.factory.promotion_rule');
 
    $quantityRule = $ruleFactory->createCartQuantity('5');
@@ -113,7 +113,7 @@ In the example below you can how to create a simple Fixed Discount action, that 
    This happens via the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ service.
    See details of **applying Promotions** below.
 
-And finally after you have an **Action** and a **Rule** assigned to the **Promotion** add it to the repository.
+And finally after you have an **Action** and a **PromotionRule** assigned to the **Promotion** add it to the repository.
 
 .. code-block:: php
 

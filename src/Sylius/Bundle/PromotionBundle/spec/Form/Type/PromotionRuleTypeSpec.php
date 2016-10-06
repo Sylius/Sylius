@@ -13,9 +13,9 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
-use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
 use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
@@ -23,19 +23,21 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin PromotionRuleType
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class RuleTypeSpec extends ObjectBehavior
+final class PromotionRuleTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $checkerRegistry)
     {
-        $this->beConstructedWith('Rule', $checkerRegistry);
+        $this->beConstructedWith('PromotionRule', $checkerRegistry);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(RuleType::class);
+        $this->shouldHaveType(PromotionRuleType::class);
     }
 
     function it_is_configuration_form_type()
@@ -54,7 +56,7 @@ final class RuleTypeSpec extends ObjectBehavior
 
         $builder->getFormFactory()->willReturn($factory);
         $builder->addEventSubscriber(
-            Argument::type(BuildRuleFormSubscriber::class)
+            Argument::type(BuildPromotionRuleFormSubscriber::class)
         )->shouldBeCalled();
 
         $this->buildForm($builder, [
@@ -66,7 +68,7 @@ final class RuleTypeSpec extends ObjectBehavior
     {
         $resolver
             ->setDefaults([
-                'data_class' => 'Rule',
+                'data_class' => 'PromotionRule',
                 'validation_groups' => ['Default'],
             ])
             ->shouldBeCalled()

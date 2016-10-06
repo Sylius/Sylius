@@ -3,9 +3,10 @@ Models
 
 All the models of this bundle are defined in ``Sylius\Component\Promotion\Model``.
 
-Rule
-----
-A ``Rule`` is used to check if your order is eligible to the promotion. A promotion can have none, one or several rules. ``SyliusPromotionBundle`` comes with 2 types of rules :
+PromotionRule
+-------------
+
+A ``PromotionRule`` is used to check if your order is eligible to the promotion. A promotion can have none, one or several rules. ``SyliusPromotionBundle`` comes with 2 types of rules :
 
  - cart quantity rule : quantity of the order is checked
  - item total rule : the amount of the order is checked
