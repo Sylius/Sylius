@@ -16,14 +16,13 @@ use Sylius\Bundle\OrderBundle\Controller\CartController;
 use Sylius\Bundle\OrderBundle\Controller\CartItemController;
 use Sylius\Bundle\OrderBundle\Controller\CommentController;
 use Sylius\Bundle\OrderBundle\Controller\OrderItemController;
-use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository;
-use Sylius\Component\Order\Factory\OrderItemUnitFactory;
 use Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType;
 use Sylius\Bundle\OrderBundle\Form\Type\CommentType;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Component\Order\Factory\OrderItemUnitFactory;
 use Sylius\Component\Order\Model\Adjustment;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\Comment;
@@ -67,6 +66,7 @@ class Configuration implements ConfigurationInterface
         ;
 
         $this->addResourcesSection($rootNode);
+        $this->addExpirationPeriodsSection($rootNode);
 
         return $treeBuilder;
     }
@@ -204,6 +204,22 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function addExpirationPeriodsSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('expiration')
+                    ->children()
+                        ->scalarNode('cart')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
             ->end()

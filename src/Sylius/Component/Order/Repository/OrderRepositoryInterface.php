@@ -47,4 +47,11 @@ interface OrderRepositoryInterface extends RepositoryInterface
      * @return OrderInterface|null
      */
     public function findCartById($id);
+
+    /**
+     * @param \DateTime $terminalDate
+     *
+     * @return OrderInterface[]
+     */
+    public function findCartsNotModifiedSince(\DateTime $terminalDate);
 }

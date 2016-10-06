@@ -170,6 +170,18 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given a customer :customer added something to cart
+     */
+    public function customerStartedCheckout(CustomerInterface $customer)
+    {
+        $cart = $this->createCart($customer);
+
+        $this->sharedStorage->set('cart', $cart);
+
+        $this->orderRepository->add($cart);
+    }
+
+    /**
      * @Given /^(I) placed (an order "[^"]+")$/
      */
     public function iPlacedAnOrder(UserInterface $user, $orderNumber)
@@ -531,12 +543,35 @@ final class OrderContext implements Context
         $currencyCode = null,
         $localeCode = null
     ) {
-        $order = $this->orderFactory->createNew();
+        $order = $this->createCart($customer, $channel, $currencyCode, $localeCode);
 
-        $order->setCustomer($customer);
         if (null !== $number) {
             $order->setNumber($number);
         }
+
+        $order->complete();
+
+        return $order;
+    }
+
+    /**
+     * @param CustomerInterface $customer
+     * @param ChannelInterface|null $channel
+     * @param null $currencyCode
+     * @param null $localeCode
+     *
+     * @return OrderInterface
+     */
+    private function createCart(
+        CustomerInterface $customer,
+        ChannelInterface $channel = null,
+        $currencyCode = null,
+        $localeCode = null
+    ) {
+        /** @var OrderInterface $order */
+        $order = $this->orderFactory->createNew();
+
+        $order->setCustomer($customer);
         $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
         $order->setCurrencyCode((null !== $currencyCode) ? $currencyCode : $this->sharedStorage->get('currency')->getCode());
         $order->setLocaleCode((null !== $localeCode) ? $localeCode : $this->sharedStorage->get('locale')->getCode());
@@ -546,7 +581,6 @@ final class OrderContext implements Context
 
         $order->setCurrencyCode($currency->getCode());
         $order->setExchangeRate($currency->getExchangeRate());
-        $order->complete();
 
         return $order;
     }
