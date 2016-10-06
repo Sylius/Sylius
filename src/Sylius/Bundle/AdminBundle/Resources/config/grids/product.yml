@@ -12,6 +12,8 @@ sylius_grid:
                 code:
                     path: code
                     direction: asc
+                createdAt:
+                    path: createdAt
                 name:
                     path: translation.name
             fields:
@@ -27,6 +29,11 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
+                createdAt:
+                    type: datetime
+                    label: sylius.ui.creation_date
+                    options:
+                        format: d-m-Y H:i
                 enabled:
                     type: twig
                     label: sylius.ui.enabled

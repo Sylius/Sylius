@@ -732,6 +732,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I start sorting products by creation date
+     */
+    public function iStartSortingProductsByCreationDate()
+    {
+        $this->indexPage->sortBy('createdAt');
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */
