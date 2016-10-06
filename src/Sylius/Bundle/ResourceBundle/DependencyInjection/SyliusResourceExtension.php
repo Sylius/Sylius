@@ -68,19 +68,20 @@ final class SyliusResourceExtension extends Extension
         $this->loadResources($config['resources'], $container);
     }
 
-    private function loadPersistence(array $enabledDrivers, array $resources, LoaderInterface $loader)
+    private function loadPersistence(array $drivers, array $resources, LoaderInterface $loader)
     {
         foreach ($resources as $alias => $resource) {
-            if (!in_array($resource['driver'], $enabledDrivers)) {
+            if (!in_array($resource['driver'], $drivers, true)) {
                 throw new InvalidArgumentException(sprintf(
                     'Resource "%s" uses driver "%s", but this driver has not been enabled.',
-                    $alias, $resource['driver']
+                    $alias,
+                    $resource['driver']
                 ));
             }
         }
 
-        foreach ($enabledDrivers as $enabledDriver) {
-            $loader->load(sprintf('driver/%s.xml', $enabledDriver));
+        foreach ($drivers as $driver) {
+            $loader->load(sprintf('driver/%s.xml', $driver));
         }
     }
 
