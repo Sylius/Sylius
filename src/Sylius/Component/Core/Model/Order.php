@@ -493,18 +493,6 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function isInvoiceAvailable()
-    {
-        if (false !== $lastShipment = $this->getLastShipment()) {
-            return in_array($lastShipment->getState(), [ShipmentInterface::STATE_RETURNED, ShipmentInterface::STATE_SHIPPED]);
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function hasPromotion(BasePromotionInterface $promotion)
     {
         return $this->promotions->contains($promotion);

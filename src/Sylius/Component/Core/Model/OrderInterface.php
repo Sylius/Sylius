@@ -174,11 +174,6 @@ interface OrderInterface extends
     public function getLastNewPayment();
 
     /**
-     * @return bool
-     */
-    public function isInvoiceAvailable();
-
-    /**
      * @return int
      */
     public function getTaxTotal();
