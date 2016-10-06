@@ -181,7 +181,19 @@ final class ManagingOrdersContext implements Context
         Assert::same(
             OrderInterface::STATE_CANCELLED,
             $order->getState(),
-            'Order should be cancelled but its not.'
+            'Order should be cancelled, but its not.'
+        );
+    }
+
+    /**
+     * @Then /^(this order) should not be cancelled$/
+     */
+    public function thisOrderShouldNotBeCancelled(OrderInterface $order)
+    {
+        Assert::notSame(
+            OrderInterface::STATE_CANCELLED,
+            $order->getState(),
+            'Order should not be cancelled, but its is.'
         );
     }
 }

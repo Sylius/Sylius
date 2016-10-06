@@ -17,3 +17,11 @@ Feature: Cancelling unpaid orders automatically
         And the customer chose "Free" shipping method to "United States" with "Paypal Express Checkout" payment
         And this order has not been paid for 10 days
         Then this order should be automatically cancelled
+
+    @domain
+    Scenario: Having unpaid order not cancelled if expiration time has not been reached
+        And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
+        And the customer bought a single "PHP T-Shirt"
+        And the customer chose "Free" shipping method to "United States" with "Paypal Express Checkout" payment
+        And this order has not been paid for 2 days
+        Then this order should not be cancelled
