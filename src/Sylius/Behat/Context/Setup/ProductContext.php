@@ -664,4 +664,14 @@ final class ProductContext implements Context
     {
         return isset($this->minkParameters[$name]) ? $this->minkParameters[$name] : null;
     }
+
+    /**
+     * @Given this product was created at :date
+     */
+    public function thisProductWasCreatedAt($date)
+    {
+        $dateOfCreation = date_create_from_format('d-m-Y', $date);
+
+        $this->sharedStorage->get('product')->setCreatedAt($dateOfCreation);
+    }
 }

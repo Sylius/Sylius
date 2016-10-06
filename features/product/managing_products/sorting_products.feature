@@ -9,10 +9,13 @@ Feature: Sorting listed products
         And that channel allows to shop using "English (United States)" and "Polish (Poland)" locales
         And the store has a product "Berserk Pug" with code "B_PUG"
         And this product is named "Szałowy Mops" in the "Polish (Poland)" locale
+        And this product was created at "06-10-2016"
         And the store also has a product "Pug of Love" with code "L_PUG"
         And this product is named "Mops Miłości" in the "Polish (Poland)" locale
+        And this product was created at "05-10-2016"
         And the store also has a product "Xtreme Pug" with code "X_PUG"
         And this product is named "Ekstremalny Mops" in the "Polish (Poland)" locale
+        And this product was created at "06-09-2016"
         And I am logged in as an administrator
 
     @ui
@@ -66,3 +69,11 @@ Feature: Sorting listed products
         And I should see a product with name "Xtreme Pug"
         And the first product on the list should have name "Berserk Pug"
         But I should not see any product with name "Mops Miłości"
+
+    @ui
+    Scenario: Products can be sorted by their creation dates
+        Given I am browsing products
+        When I start sorting products by creation date
+        Then I should see 3 products in the list
+        And I should see a product with name "Xtreme Pug"
+        But the first product on the list should have name "Berserk Pug"
