@@ -19,7 +19,6 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMethodInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -67,11 +66,6 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $shippingMethods;
 
     /**
-     * @var BaseTaxonInterface[]|Collection
-     */
-    protected $taxons;
-
-    /**
      * @var string
      */
     protected $themeName;
@@ -84,7 +78,6 @@ class Channel extends BaseChannel implements ChannelInterface
         $this->locales = new ArrayCollection();
         $this->paymentMethods = new ArrayCollection();
         $this->shippingMethods = new ArrayCollection();
-        $this->taxons = new ArrayCollection();
     }
 
     /**
@@ -325,49 +318,5 @@ class Channel extends BaseChannel implements ChannelInterface
     public function hasPaymentMethod(PaymentMethodInterface $paymentMethod)
     {
         return $this->paymentMethods->contains($paymentMethod);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxons()
-    {
-        return $this->taxons;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTaxons(Collection $taxons)
-    {
-        $this->taxons = $taxons;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addTaxon(BaseTaxonInterface $taxon)
-    {
-        if (!$this->hasTaxon($taxon)) {
-            $this->taxons->add($taxon);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeTaxon(BaseTaxonInterface $taxon)
-    {
-        if ($this->hasTaxon($taxon)) {
-            $this->taxons->removeElement($taxon);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasTaxon(BaseTaxonInterface $taxon)
-    {
-        return $this->taxons->contains($taxon);
     }
 }
