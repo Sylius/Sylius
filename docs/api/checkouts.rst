@@ -144,7 +144,7 @@ The response will contain the updated order information.
             "email_canonical": "xschaefer@example.com",
             "enabled": true,
             "expired": false,
-            "groups": [],
+            "group": [],
             "id": 5,
             "locked": false,
             "roles": [],

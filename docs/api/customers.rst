@@ -272,7 +272,7 @@ Example Response
         "first_name":"Levi",
         "last_name":"Friesen",
         "gender":"u",
-        "groups":[
+        "group":[
 
         ]
     }
@@ -356,7 +356,7 @@ Example Response
         "first_name":"John",
         "last_name":"Diggle",
         "gender":"m",
-        "groups":[
+        "group":[
 
         ]
     }
@@ -410,7 +410,7 @@ Example Response
                         "Please choose your gender."
                     ]
                 },
-                "groups":{
+                "group":{
 
                 }
             }
@@ -529,7 +529,7 @@ Example Response
                         "Please choose your gender."
                     ]
                 },
-                "groups":{
+                "group":{
 
                 }
             }

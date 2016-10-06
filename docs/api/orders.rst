@@ -116,7 +116,7 @@ The response will contain the newly created order information.
                         "email":"ygrant@example.com",
                         "email_canonical":"ygrant@example.com",
                         "enabled":false,
-                        "groups":[
+                        "group":[
 
                         ],
                         "locked":false,
@@ -306,7 +306,7 @@ Response
             "email":"ygrant@example.com",
             "email_canonical":"ygrant@example.com",
             "enabled":false,
-            "groups":[
+            "group":[
 
             ],
             "locked":false,
@@ -391,7 +391,7 @@ Response
             "email":"chelsie.witting@example.com",
             "email_canonical":"chelsie.witting@example.com",
             "enabled":true,
-            "groups":[
+            "group":[
 
             ],
             "locked":false,
