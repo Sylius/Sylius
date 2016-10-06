@@ -132,13 +132,13 @@ final class CurrencyContext implements Context
      */
     public function thatChannelAllowsToShopUsingAndCurrencies(ChannelInterface $channel, ...$currenciesCodes)
     {
-        $currencies = new ArrayCollection();
-
-        foreach ($currenciesCodes as $currencyCode) {
-            $currencies[] = $this->provideCurrency($currencyCode);
+        foreach ($channel->getCurrencies() as $currency) {
+            $channel->removeCurrency($currency);
         }
 
-        $channel->setCurrencies($currencies);
+        foreach ($currenciesCodes as $currencyCode) {
+            $channel->addCurrency($this->provideCurrency($currencyCode));
+        }
 
         $this->channelManager->flush();
     }

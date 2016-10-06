@@ -80,12 +80,6 @@ final class CountrySpec extends ObjectBehavior
         $this->hasProvinces()->shouldReturn(false);
     }
 
-    function its_provinces_are_mutable(Collection $provinces)
-    {
-        $this->setProvinces($provinces);
-        $this->getProvinces()->shouldReturn($provinces);
-    }
-
     function it_adds_province(ProvinceInterface $province)
     {
         $this->addProvince($province);

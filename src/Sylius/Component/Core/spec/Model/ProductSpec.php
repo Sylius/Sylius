@@ -62,12 +62,6 @@ final class ProductSpec extends ObjectBehavior
         $this->getTaxons()->shouldHaveType(Collection::class);
     }
 
-    function its_taxons_are_mutable(Collection $taxons)
-    {
-        $this->setTaxons($taxons);
-        $this->getTaxons()->shouldReturn($taxons);
-    }
-
     function its_variant_selection_method_is_choice_by_default()
     {
         $this->getVariantSelectionMethod()->shouldReturn(Product::VARIANT_SELECTION_CHOICE);

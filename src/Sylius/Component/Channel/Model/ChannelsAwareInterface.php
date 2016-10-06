@@ -26,11 +26,6 @@ interface ChannelsAwareInterface
     public function getChannels();
 
     /**
-     * @param Collection $collection
-     */
-    public function setChannels(Collection $collection);
-
-    /**
      * @param ChannelInterface $channel
      *
      * @return bool
