@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.form.type.promotion_rule.collection" class="Sylius\Bundle\PromotionBundle\Form\Type\RuleCollectionType">
+            <argument type="service" id="sylius.registry.promotion_rule_checker" />
+            <tag name="form.type" alias="sylius_promotion_rule_collection" />
+        </service>
+        <service id="sylius.form.type.promotion_action.collection" class="Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType">
+            <argument type="service" id="sylius.registry.promotion_action" />
+            <tag name="form.type" alias="sylius_promotion_action_collection" />
+        </service>
+
+        <service id="sylius.form.type.promotion_rule_choice" class="Sylius\Bundle\PromotionBundle\Form\Type\RuleChoiceType">
+            <argument>%sylius.promotion_rules%</argument>
+            <tag name="form.type" alias="sylius_promotion_rule_choice" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.item_total_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_rule_item_total_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.cart_quantity_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_rule_cart_quantity_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_action_choice" class="Sylius\Bundle\PromotionBundle\Form\Type\ActionChoiceType">
+            <argument>%sylius.promotion_actions%</argument>
+            <tag name="form.type" alias="sylius_promotion_action_choice" />
+        </service>
+        <service id="sylius.form.type.promotion_action.fixed_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_action_fixed_discount_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_action.percentage_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_action_percentage_discount_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_coupon_to_code" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponToCodeType">
+            <argument type="service" id="sylius.repository.promotion_coupon" />
+            <tag name="form.type" alias="sylius_promotion_coupon_to_code" />
+        </service>
+
+        <service id="sylius.form.type.promotion_coupon_generate_instruction" class="Sylius\Bundle\PromotionBundle\Form\Type\CouponGenerateInstructionType">
+            <argument>Sylius\Component\Promotion\Generator\Instruction</argument>
+            <tag name="form.type" alias="sylius_promotion_coupon_generate_instruction" />
+        </service>
+    </services>
+</container>

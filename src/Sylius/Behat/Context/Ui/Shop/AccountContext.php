@@ -164,7 +164,7 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the ([^"]+) is required$/
+     * @Then /^I should be notified that the (email|password|city|street|first name|last name) is required$/
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
@@ -172,7 +172,7 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the ([^"]+) is invalid$/
+     * @Then /^I should be notified that the (email) is invalid$/
      */
     public function iShouldBeNotifiedThatElementIsInvalid($element)
     {

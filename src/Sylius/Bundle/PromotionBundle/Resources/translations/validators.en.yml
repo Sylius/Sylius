@@ -23,6 +23,7 @@ sylius:
             unique: This coupon already exists.
         usage_limit:
             min: Coupon usage limit must be at least {{ limit }}.
+        is_invalid: Coupon code is invalid.
     promotion_coupon_generate_instruction:
         amount:
             min: Amount of coupons to generate must be at least {{ limit }}.

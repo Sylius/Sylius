@@ -113,19 +113,19 @@ the ``CountablePromotionSubjectInterface``.
 
 .. _component_promotion_model_promotion-coupon-aware-subject-interface:
 
-CouponAwarePromotionSubjectInterface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PromotionCouponAwarePromotionSubjectInterface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To make the object able to get its associated coupon, the object class needs to implement
-the ``CouponAwarePromotionSubjectInterface``.
+the ``PromotionCouponAwarePromotionSubjectInterface``.
 
 .. note::
 
     This interface extends the :ref:`component_promotion_model_promotion-subject-interface`.
 
-    You will find more information about this interface in `Sylius API CouponAwarePromotionSubjectInterface`_.
+    You will find more information about this interface in `Sylius API PromotionCouponAwarePromotionSubjectInterface`_.
 
-.. _Sylius API CouponAwarePromotionSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/CouponAwarePromotionSubjectInterface.html
+.. _Sylius API PromotionCouponAwarePromotionSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCouponAwarePromotionSubjectInterface.html
 
 .. _component_promotion_model_promotion-coupons-aware-subject-interface:
 
@@ -215,16 +215,16 @@ In order to be able to find active promotions in your system you should create a
 
 .. _component_promotion_generator_coupon-generator-interface:
 
-CouponGeneratorInterface
-~~~~~~~~~~~~~~~~~~~~~~~~
+PromotionCouponGeneratorInterface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In order to automate the process of coupon generation your system needs to have a service that will implement this interface.
 
 .. note::
 
-    For more detailed information about this interface go to `Sylius API CouponGeneratorInterface`_.
+    For more detailed information about this interface go to `Sylius API PromotionCouponGeneratorInterface`_.
 
-.. _Sylius API CouponGeneratorInterface: http://api.sylius.org/Sylius/Component/Promotion/Generator/CouponGeneratorInterface.html
+.. _Sylius API PromotionCouponGeneratorInterface: http://api.sylius.org/Sylius/Component/Promotion/Generator/PromotionCouponGeneratorInterface.html
 
 .. _component_promotion_model_action-action-interface:
 

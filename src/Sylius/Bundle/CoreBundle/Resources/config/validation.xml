@@ -85,6 +85,10 @@
     </class>
 
     <class name="Sylius\Component\Core\Model\Order">
+        <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionSubjectCoupon">
+            <option name="groups">sylius_promotion_coupon</option>
+        </constraint>
+
         <property name="shippingAddress">
             <constraint name="Valid" />
         </property>
@@ -100,10 +104,17 @@
         <property name="currencyCode">
             <constraint name="Currency">
                 <option name="message">sylius.order.currency_code.not_valid</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="promotionCoupon">
+            <constraint name="NotNull">
+                <option name="message">sylius.promotion_coupon.is_invalid</option>
+                <option name="groups">sylius_promotion_coupon</option>
             </constraint>
         </property>
     </class>
-    
+
     <class name="Sylius\Component\Order\Model\OrderItem">
         <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
             <option name="stockablePath">variant</option>
@@ -199,5 +210,4 @@
             </constraint>
         </property>
     </class>
-
 </constraint-mapping>

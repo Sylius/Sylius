@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Generator;
 
-use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
+use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 final class PercentageGenerationPolicy implements GenerationPolicyInterface
 {
     /**
-     * @var CouponRepositoryInterface
+     * @var PromotionCouponRepositoryInterface
      */
     private $couponRepository;
 
@@ -32,7 +32,7 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
     /**
      * {@inheritdoc}
      */
-    public function __construct(CouponRepositoryInterface $couponRepository, $ratio = 0.5)
+    public function __construct(PromotionCouponRepositoryInterface $couponRepository, $ratio = 0.5)
     {
         $this->couponRepository = $couponRepository;
         $this->ratio = $ratio;

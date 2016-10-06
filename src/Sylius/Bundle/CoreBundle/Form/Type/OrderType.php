@@ -13,11 +13,11 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
- * Order form type.
- * We add two addresses to form, and that's all.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderType extends BaseOrderType
@@ -38,5 +38,21 @@ class OrderType extends BaseOrderType
                 'required' => false,
             ])
         ;
+    }
+
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        /** @var OptionsResolver $resolver */
+        parent::setDefaultOptions($resolver);
+
+        $resolver->setDefault('validation_groups', function (FormInterface $form) {
+            $validationGroups = $this->validationGroups;
+
+            if ((bool) $form->get('promotionCoupon')->getNormData()) { // Validate the coupon if it was sent
+                $validationGroups[] = 'sylius_promotion_coupon';
+            }
+
+            return $validationGroups;
+        });
     }
 }
