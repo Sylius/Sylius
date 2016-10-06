@@ -30,7 +30,7 @@
         "phpspec/phpspec": "^3.0",
         "symfony/form": "^2.8",
         "twig/twig": "^1.0",
-        "doctrine/orm": "^2.4.8,<2.5"
+        "doctrine/orm": "^2.4.8"
     },
     "config": {
         "bin-dir": "bin"

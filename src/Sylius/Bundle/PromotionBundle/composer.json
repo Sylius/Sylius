@@ -31,10 +31,9 @@
         "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {
-        "doctrine/orm": "^2.4.8,<2.5",
+        "doctrine/orm": "^2.4.8",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0.0",
         "phpspec/phpspec": "^3.0",
-        "phpunit/phpunit": "^5.5",
         "symfony/form": "^2.8",
         "symfony/validator": "^2.8"
     },
