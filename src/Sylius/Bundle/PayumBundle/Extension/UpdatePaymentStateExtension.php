@@ -15,6 +15,7 @@ use Payum\Core\Extension\Context;
 use Payum\Core\Extension\ExtensionInterface;
 use Payum\Core\Request\Generic;
 use Payum\Core\Request\GetStatusInterface;
+use Payum\Core\Request\Notify;
 use SM\Factory\FactoryInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Payment\Model\PaymentInterface;
@@ -64,7 +65,7 @@ class UpdatePaymentStateExtension implements ExtensionInterface
             return;
         }
 
-        if (false === $request instanceof GetStatusInterface) {
+        if (false === $request instanceof GetStatusInterface && false === $request instanceof Notify) {
             return;
         }
 
