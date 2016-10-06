@@ -72,7 +72,7 @@ class OrderItemController extends ResourceController
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $newResource = $form->getData();
 
-            $event = $this->eventDispatcher->dispatchPreEvent('sylius.cart_item.pre_create', $configuration, $newResource);
+            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
 
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {
                 throw new HttpException($event->getErrorCode(), $event->getMessage());
@@ -89,6 +89,8 @@ class OrderItemController extends ResourceController
             $cartManager = $this->getCartManager();
             $cartManager->persist($cart);
             $cartManager->flush();
+
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
