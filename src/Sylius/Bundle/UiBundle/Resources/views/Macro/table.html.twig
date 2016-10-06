@@ -3,12 +3,12 @@
 
     {% for field in definition.fields %}
         {% if grid.isSortableBy(field.name) %}
-            {% set sortingDirection = grid.getSortingOrder(field.name) %}
+            {% set sortingOrder = grid.getSortingOrder(field.name) %}
 
             {% if grid.isSortedBy(field.name) %}
-                {{ sorting.sortedHeader(definition, field, requestAttributes, sortingDirection) }}
+                {{ sorting.sortedHeader(definition, field, requestAttributes, sortingOrder, grid.parameters.all) }}
             {% else %}
-                {{ sorting.sortableHeader(definition, field, requestAttributes, sortingDirection) }}
+                {{ sorting.sortableHeader(definition, field, requestAttributes, sortingOrder, grid.parameters.all) }}
             {% endif %}
         {% else %}
             <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
