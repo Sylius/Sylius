@@ -181,14 +181,14 @@ Below you can see how it works:
     <?php
 
     use Sylius\Component\Promotion\Model\Promotion;
+    use Sylius\Component\Promotion\Model\PromotionAction;
     use Sylius\Component\Promotion\Model\PromotionRule;
-    use Sylius\Component\Promotion\Model\Action;
     use Sylius\Component\Promotion\Checker\CompositePromotionEligibilityChecker;
     use AppBundle\Entity\Ticket;
 
     $checkerRegistry = new ServiceRegistry('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
+    $actionRegistry = new ServiceRegistry('Sylius\Component\Promotion\Model\PromotionActionInterface');
     $ruleRegistry = new ServiceRegistry('Sylius\Component\Promotion\Model\PromotionRuleInterface');
-    $actionRegistry = new ServiceRegistry('Sylius\Component\Promotion\Model\ActionInterface');
 
     $dispatcher = new EventDispatcher();
 
@@ -206,7 +206,7 @@ Below you can see how it works:
     $promotion->setName('Test');
 
     // And a new action for that promotion, that will give a fixed discount of 10
-    $action = new Action();
+    $action = new PromotionAction();
     $action->setType('fixed_discount');
     $action->setConfiguration(array('amount' => 10));
     $action->setPromotion($promotion);
@@ -250,13 +250,13 @@ which is able to apply and revert single promotions on a subject implementing th
 
     <?php
 
-    use Sylius\Component\Promotion\Action\PromotionApplicator;
+    use Sylius\Component\Promotion\PromotionAction\PromotionApplicator;
     use Sylius\Component\Promotion\Model\Promotion;
     use Sylius\Component\Registry\ServiceRegistry;
     use AppBundle\Entity\Ticket;
 
     // In order for the applicator to work properly you need to have your actions created and registered before.
-    $registry = new ServiceRegistry('Sylius\Component\Promotion\Model\ActionInterface');
+    $registry = new ServiceRegistry('Sylius\Component\Promotion\Model\PromotionActionInterface');
     $promotionApplicator = new PromotionApplicator($registry);
 
     $promotion = new Promotion();

@@ -92,7 +92,7 @@ class Promotion implements PromotionInterface
     protected $rules;
 
     /**
-     * @var Collection|ActionInterface[]
+     * @var Collection|PromotionActionInterface[]
      */
     protected $actions;
 
@@ -387,7 +387,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAction(ActionInterface $action)
+    public function hasAction(PromotionActionInterface $action)
     {
         return $this->actions->contains($action);
     }
@@ -395,7 +395,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function addAction(ActionInterface $action)
+    public function addAction(PromotionActionInterface $action)
     {
         if (!$this->hasAction($action)) {
             $action->setPromotion($this);
@@ -406,7 +406,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAction(ActionInterface $action)
+    public function removeAction(PromotionActionInterface $action)
     {
         $action->setPromotion(null);
         $this->actions->removeElement($action);

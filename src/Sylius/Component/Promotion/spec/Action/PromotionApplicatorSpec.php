@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Promotion\Action;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -44,7 +44,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionActionCommandInterface $action,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
-        ActionInterface $actionModel
+        PromotionActionInterface $actionModel
     ) {
         $configuration = [];
 
@@ -65,7 +65,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         PromotionActionCommandInterface $action,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
-        ActionInterface $actionModel
+        PromotionActionInterface $actionModel
     ) {
         $configuration = [];
 

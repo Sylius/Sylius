@@ -78,7 +78,7 @@ In the example you can see how to create a simple Cart Quantity rule. It will ch
 Promotion Actions
 -----------------
 
-What happens with the Order when the rules of a Promotion are fulfilled - this is an **Action**.
+What happens with the Order when the rules of a Promotion are fulfilled - this is an **PromotionAction**.
 
 There are a few kinds of actions in **Sylius**:
 
@@ -89,17 +89,17 @@ There are a few kinds of actions in **Sylius**:
 * add product (for example: gives a free bonus sticker)
 * shipping discount (for example: - 6$ on the costs of shipping)
 
-How to create an Action programmatically?
-'''''''''''''''''''''''''''''''''''''''''
+How to create an PromotionAction programmatically?
+''''''''''''''''''''''''''''''''''''''''''''''''''
 
-In order to create a new Action we can use the dedicated `ActionFactory <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/Factory/ActionFactory.php>`_.
+In order to create a new PromotionAction we can use the dedicated `PromotionActionFactory <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/Factory/PromotionActionFactory.php>`_.
 
 It has special methods for creating all types of actions available by default.
 In the example below you can how to create a simple Fixed Discount action, that reduces the total of an order by 10$.
 
 .. code-block:: php
 
-   /** @var ActionFactoryInterface $actionFactory */
+   /** @var PromotionActionFactoryInterface $actionFactory */
    $actionFactory = $this->container->get('sylius.factory.promotion_action');
 
    $action = $actionFactory->createFixedDiscount(10);
@@ -113,7 +113,7 @@ In the example below you can how to create a simple Fixed Discount action, that 
    This happens via the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ service.
    See details of **applying Promotions** below.
 
-And finally after you have an **Action** and a **PromotionRule** assigned to the **Promotion** add it to the repository.
+And finally after you have an **PromotionAction** and a **PromotionRule** assigned to the **Promotion** add it to the repository.
 
 .. code-block:: php
 
@@ -136,7 +136,7 @@ How to apply a Promotion manually?
 
 Let's assume that you would like to **apply a 10% discount on everything** somewhere in your code.
 
-To achieve that, create a Promotion with an Action that gives 10% discount. You don't need rules.
+To achieve that, create a Promotion with an PromotionAction that gives 10% discount. You don't need rules.
 
 .. code-block:: php
 
@@ -146,7 +146,7 @@ To achieve that, create a Promotion with an Action that gives 10% discount. You 
    $promotion->setCode('discount_10%');
    $promotion->setName('10% discount');
 
-   /** @var ActionFactoryInterface $actionFactory */
+   /** @var PromotionActionFactoryInterface $actionFactory */
    $actionFactory = $this->container->get('sylius.factory.promotion_action');
 
    $action = $actionFactory->createPercentageDiscount(10);

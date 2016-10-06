@@ -59,7 +59,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Promotion\Model\Action">
+    <class name="Sylius\Component\Promotion\Model\PromotionAction">
         <property name="configuration">
             <constraint name="Valid" />
         </property>

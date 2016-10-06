@@ -40,8 +40,8 @@ Let's create a promotion that will have a single coupon that activates the free 
 
    $promotion->addCoupon($coupon);
 
-   // Now create an Action that will take place after applying this promotion - 100% discount on shipping
-   /** @var ActionFactoryInterface $actionFactory */
+   // Now create an PromotionAction that will take place after applying this promotion - 100% discount on shipping
+   /** @var PromotionActionFactoryInterface $actionFactory */
    $actionFactory = $this->container->get('sylius.factory.promotion_action');
 
    // Provide the amount in float ( 1 = 100% )

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\EventListener;
 
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\PromotionActionInterface;
 
 /**
  * This listener adds configuration form to a action,
@@ -20,18 +20,18 @@ use Sylius\Component\Promotion\Model\ActionInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
+final class BuildPromotionActionFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
      * Get action configuration
      *
-     * @param ActionInterface $action
+     * @param PromotionActionInterface $action
      *
      * @return array
      */
     protected function getConfiguration($action)
     {
-        if ($action instanceof ActionInterface && null !== $action->getConfiguration()) {
+        if ($action instanceof PromotionActionInterface && null !== $action->getConfiguration()) {
             return $action->getConfiguration();
         }
 
@@ -41,13 +41,13 @@ final class BuildActionFormSubscriber extends AbstractConfigurationSubscriber
     /**
      * Get action type
      *
-     * @param ActionInterface $action
+     * @param PromotionActionInterface $action
      *
      * @return null|string
      */
     protected function getRegistryIdentifier($action)
     {
-        if ($action instanceof ActionInterface && null !== $action->getType()) {
+        if ($action instanceof PromotionActionInterface && null !== $action->getType()) {
             return $action->getType();
         }
 

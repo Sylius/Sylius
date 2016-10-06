@@ -12,17 +12,17 @@
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
-use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ActionFactory implements ActionFactoryInterface
+class PromotionActionFactory implements PromotionActionFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -89,10 +89,11 @@ class ActionFactory implements ActionFactoryInterface
      * @param string $type
      * @param array $configuration
      *
-     * @return ActionInterface
+     * @return PromotionActionInterface
      */
     private function createAction($type, array $configuration)
     {
+        /** @var PromotionActionInterface $action */
         $action = $this->createNew();
         $action->setType($type);
         $action->setConfiguration($configuration);

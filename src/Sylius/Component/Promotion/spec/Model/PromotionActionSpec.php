@@ -12,22 +12,23 @@
 namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\PromotionAction;
+use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-final class ActionSpec extends ObjectBehavior
+final class PromotionActionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Model\Action');
+        $this->shouldHaveType(PromotionAction::class);
     }
 
     function it_should_be_Sylius_promotion_action()
     {
-        $this->shouldImplement(ActionInterface::class);
+        $this->shouldImplement(PromotionActionInterface::class);
     }
 
     function it_should_not_have_id_by_default()

@@ -14,7 +14,7 @@ namespace Sylius\Component\Promotion\Model;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class Action implements ActionInterface
+class PromotionAction implements PromotionActionInterface
 {
     /**
      * @var mixed

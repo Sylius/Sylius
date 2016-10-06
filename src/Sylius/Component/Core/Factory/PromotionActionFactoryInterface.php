@@ -11,46 +11,46 @@
 
 namespace Sylius\Component\Core\Factory;
 
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface ActionFactoryInterface extends FactoryInterface
+interface PromotionActionFactoryInterface extends FactoryInterface
 {
     /**
      * @param int $amount
      *
-     * @return ActionInterface
+     * @return PromotionActionInterface
      */
     public function createFixedDiscount($amount);
 
     /**
      * @param int $amount
      *
-     * @return ActionInterface
+     * @return PromotionActionInterface
      */
     public function createUnitFixedDiscount($amount);
 
     /**
      * @param float $percentage
      *
-     * @return ActionInterface
+     * @return PromotionActionInterface
      */
     public function createPercentageDiscount($percentage);
 
     /**
      * @param float $percentage
      *
-     * @return ActionInterface
+     * @return PromotionActionInterface
      */
     public function createUnitPercentageDiscount($percentage);
 
     /**
      * @param float $percentage
      *
-     * @return ActionInterface
+     * @return PromotionActionInterface
      */
     public function createShippingPercentageDiscount($percentage);
 }

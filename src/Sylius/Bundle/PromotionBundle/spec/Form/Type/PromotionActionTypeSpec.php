@@ -13,10 +13,10 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber;
-use Sylius\Bundle\PromotionBundle\Form\Type\ActionType;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -26,16 +26,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class ActionTypeSpec extends ObjectBehavior
+final class PromotionActionTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $actionRegistry)
     {
-        $this->beConstructedWith('Action', $actionRegistry);
+        $this->beConstructedWith('PromotionAction', $actionRegistry);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ActionType::class);
+        $this->shouldHaveType(PromotionActionType::class);
     }
 
     function it_is_configuration_form_type()
@@ -54,7 +54,7 @@ final class ActionTypeSpec extends ObjectBehavior
 
         $builder->getFormFactory()->willReturn($factory);
         $builder->addEventSubscriber(
-            Argument::type(BuildActionFormSubscriber::class)
+            Argument::type(BuildPromotionActionFormSubscriber::class)
         )->shouldBeCalled();
 
         $this->buildForm($builder, [

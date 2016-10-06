@@ -14,10 +14,10 @@ A ``PromotionRule`` is used to check if your order is eligible to the promotion.
 A rule is configured via the ``configuration`` attribute which is an array serialized into database. For cart quantity rules, you have to configure the ``count`` key, whereas the ``amount`` key is used for item total rules.
 Configuration is always strict, which means, that if you set ``count`` to **4** for cart quantity rule, orders with equal or more than **4** quantity will be eligible.
 
-Action
+PromotionAction
 ------
 
-An ``Action`` defines the the nature of the discount. Common actions are :
+An ``PromotionAction`` defines the the nature of the discount. Common actions are :
 
 - percentage discount
 - fixed amount discount

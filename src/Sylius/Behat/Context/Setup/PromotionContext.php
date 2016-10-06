@@ -13,16 +13,16 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Factory\ActionFactoryInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
@@ -37,7 +37,7 @@ final class PromotionContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ActionFactoryInterface
+     * @var PromotionActionFactoryInterface
      */
     private $actionFactory;
 
@@ -68,7 +68,7 @@ final class PromotionContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param ActionFactoryInterface $actionFactory
+     * @param PromotionActionFactoryInterface $actionFactory
      * @param PromotionCouponFactoryInterface $couponFactory
      * @param PromotionRuleFactoryInterface $ruleFactory
      * @param TestPromotionFactoryInterface $testPromotionFactory
@@ -77,7 +77,7 @@ final class PromotionContext implements Context
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ActionFactoryInterface $actionFactory,
+        PromotionActionFactoryInterface $actionFactory,
         PromotionCouponFactoryInterface $couponFactory,
         PromotionRuleFactoryInterface $ruleFactory,
         TestPromotionFactoryInterface $testPromotionFactory,
@@ -596,11 +596,11 @@ final class PromotionContext implements Context
 
     /**
      * @param PromotionInterface $promotion
-     * @param ActionInterface $action
+     * @param PromotionActionInterface $action
      * @param array $configuration
      * @param PromotionRuleInterface|null $rule
      */
-    private function persistPromotion(PromotionInterface $promotion, ActionInterface $action, array $configuration, PromotionRuleInterface $rule = null)
+    private function persistPromotion(PromotionInterface $promotion, PromotionActionInterface $action, array $configuration, PromotionRuleInterface $rule = null)
     {
         $configuration = array_merge($configuration, $action->getConfiguration());
         $action->setConfiguration($configuration);
