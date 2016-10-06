@@ -180,6 +180,7 @@ final class Configuration implements ConfigurationInterface
                     ->defaultValue([SyliusResourceBundle::DRIVER_DOCTRINE_ORM])
                     ->prototype('enum')->values(SyliusResourceBundle::getAvailableDrivers())->end()
                 ->end()
-            ->end();
+            ->end()
+        ;
     }
 }
