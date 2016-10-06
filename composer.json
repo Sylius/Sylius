@@ -98,7 +98,8 @@
         "phpspec/phpspec": "^3.0",
         "phpunit/phpunit": "~4.1",
         "se/selenium-server-standalone": "^2.52",
-        "friends-of-behat/performance-extension": "^1.0"
+        "friends-of-behat/performance-extension": "^1.0",
+        "friends-of-behat/variadic-extension": "^0.1.0"
     },
     "replace": {
         "sylius/addressing": "self.version",

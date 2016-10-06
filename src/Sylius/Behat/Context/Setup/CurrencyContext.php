@@ -130,19 +130,11 @@ final class CurrencyContext implements Context
      * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
      * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
      */
-    public function thatChannelAllowsToShopUsingAndCurrencies(
-        ChannelInterface $channel,
-        $firstCurrencyCode,
-        $secondCurrencyCode = null,
-        $thirdCurrencyCode = null
-    ) {
+    public function thatChannelAllowsToShopUsingAndCurrencies(ChannelInterface $channel, ...$currenciesCodes)
+    {
         $currencies = new ArrayCollection();
 
-        foreach ([$firstCurrencyCode, $secondCurrencyCode, $thirdCurrencyCode] as $currencyCode) {
-            if (null === $currencyCode) {
-                break;
-            }
-
+        foreach ($currenciesCodes as $currencyCode) {
             $currencies[] = $this->provideCurrency($currencyCode);
         }
 

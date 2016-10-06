@@ -110,19 +110,11 @@ final class LocaleContext implements Context
      * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/
      * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" locales$/
      */
-    public function thatChannelAllowsToShopUsingAndLocales(
-        ChannelInterface $channel,
-        $firstLocaleName,
-        $secondLocaleName = null,
-        $thirdLocaleName = null
-    ) {
+    public function thatChannelAllowsToShopUsingAndLocales(ChannelInterface $channel, ...$localesNames)
+    {
         $locales = new ArrayCollection();
 
-        foreach ([$firstLocaleName, $secondLocaleName, $thirdLocaleName] as $localeName) {
-            if (null === $localeName) {
-                break;
-            }
-
+        foreach ($localesNames as $localeName) {
             $locales[] = $this->provideLocale($this->localeConverter->convertNameToCode($localeName));
         }
 
