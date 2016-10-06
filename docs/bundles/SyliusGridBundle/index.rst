@@ -21,6 +21,6 @@ Some of the features worth mentioning:
     field_types
     field_configuration
     filters
-    custom_column_type
+    custom_field_type
     custom_filter
     configuration

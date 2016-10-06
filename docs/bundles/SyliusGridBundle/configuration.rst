@@ -1,15 +1,22 @@
 Configuration Reference
 =======================
 
+Here you will find all configuration options of ``sylius_grid``.
+
 .. code-block:: yaml
 
     sylius_grid:
         grids:
             app_user: # Your grid name
-                driver: doctrine/orm # Data source driver
+                driver:
+                    name: doctrine/orm # Data source driver
+                    options:
+                        class: AppBundle\Entity\user
                 resource: app.user # Resource name
                 sorting:
-                    name: asc
+                    name:
+                        path: name
+                        direction: asc
                 fields:
                     name:
                         type: twig # Type of field
@@ -21,6 +28,7 @@ Configuration Reference
                 filters:
                     name:
                         type: string # Type of filter
+                        label: app.ui.name
                 actions:
                     main:
                         create:
