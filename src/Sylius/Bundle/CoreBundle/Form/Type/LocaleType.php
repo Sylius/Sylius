@@ -25,6 +25,11 @@ use Symfony\Component\Intl\Intl;
 class LocaleType extends BaseLocaleType
 {
     /**
+     * @var string
+     */
+    private $baseLocale;
+
+    /**
      * @var RepositoryInterface
      */
     private $localeRepository;
@@ -32,12 +37,18 @@ class LocaleType extends BaseLocaleType
     /**
      * {@inheritdoc}
      *
+     * @param string $baseLocale
      * @param RepositoryInterface $localeRepository
      */
-    public function __construct($dataClass, array $validationGroups = [], RepositoryInterface $localeRepository)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups = [],
+        $baseLocale,
+        RepositoryInterface $localeRepository
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
+        $this->baseLocale = $baseLocale;
         $this->localeRepository = $localeRepository;
     }
 
@@ -69,6 +80,15 @@ class LocaleType extends BaseLocaleType
 
             $form = $event->getForm();
             $form->add('code', 'locale', $nameOptions);
+
+            if ($this->baseLocale !== $locale->getCode()) {
+                return;
+            }
+
+            $form->add('enabled', 'checkbox', [
+                'label' => 'sylius.form.locale.enabled',
+                'disabled' => true,
+            ]);
         });
     }
 

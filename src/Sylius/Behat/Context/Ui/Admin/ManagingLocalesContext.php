@@ -103,6 +103,17 @@ final class ManagingLocalesContext implements Context
     }
 
     /**
+     * @Then I should not be able to disable this locale
+     */
+    public function iCannotDisableIt()
+    {
+        Assert::true(
+            $this->updatePage->canBeDisabled(),
+            'I should not be able to disable this locale'
+        );
+    }
+
+    /**
      * @When I save my changes
      */
     public function iSaveMyChanges()
