@@ -228,13 +228,13 @@ In order to automate the process of coupon generation your system needs to have 
 
 .. _component_promotion_model_action-action-interface:
 
-PromotionActionInterface
-~~~~~~~~~~~~~~~~~~~~~~~~
+PromotionActionCommandInterface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This interface should be implemented by services that execute actions on the promotion subjects.
 
 .. note::
 
-    You will find more information about this interface in `Sylius API PromotionActionInterface`_.
+    You will find more information about this interface in `Sylius API PromotionActionCommandInterface`_.
 
-.. _Sylius API PromotionActionInterface: http://api.sylius.org/Sylius/Component/Promotion/Action/PromotionActionInterface.html
+.. _Sylius API PromotionActionCommandInterface: http://api.sylius.org/Sylius/Component/Promotion/Action/PromotionActionCommandInterface.html

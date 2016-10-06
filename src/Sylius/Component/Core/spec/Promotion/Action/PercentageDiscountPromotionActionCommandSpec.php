@@ -18,20 +18,20 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Promotion\Action\PercentageDiscountAction;
+use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @mixin PercentageDiscountAction
+ * @mixin PercentageDiscountPromotionActionCommand
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class PercentageDiscountActionSpec extends ObjectBehavior
+final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
     function let(
         ProportionalIntegerDistributorInterface $distributor,
@@ -42,12 +42,12 @@ final class PercentageDiscountActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(PercentageDiscountAction::class);
+        $this->shouldHaveType(PercentageDiscountPromotionActionCommand::class);
     }
 
     function it_implements_promotion_action_interface()
     {
-        $this->shouldImplement(PromotionActionInterface::class);
+        $this->shouldImplement(PromotionActionCommandInterface::class);
     }
 
     function it_uses_distributor_and_applicator_to_execute_promotion_action(

@@ -19,7 +19,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionActionInterface
+interface PromotionActionCommandInterface
 {
     /**
      * Applies the promotion to its subject.

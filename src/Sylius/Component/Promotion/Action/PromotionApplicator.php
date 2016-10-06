@@ -39,7 +39,7 @@ final class PromotionApplicator implements PromotionApplicatorInterface
     public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         foreach ($promotion->getActions() as $action) {
-            $this->getActionByType($action->getType())->execute($subject, $action->getConfiguration(), $promotion);
+            $this->getActionCommandByType($action->getType())->execute($subject, $action->getConfiguration(), $promotion);
         }
 
         $subject->addPromotion($promotion);
@@ -51,7 +51,7 @@ final class PromotionApplicator implements PromotionApplicatorInterface
     public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
         foreach ($promotion->getActions() as $action) {
-            $this->getActionByType($action->getType())->revert($subject, $action->getConfiguration(), $promotion);
+            $this->getActionCommandByType($action->getType())->revert($subject, $action->getConfiguration(), $promotion);
         }
 
         $subject->removePromotion($promotion);
@@ -60,9 +60,9 @@ final class PromotionApplicator implements PromotionApplicatorInterface
     /**
      * @param string $type
      *
-     * @return PromotionActionInterface
+     * @return PromotionActionCommandInterface
      */
-    private function getActionByType($type)
+    private function getActionCommandByType($type)
     {
         return $this->registry->get($type);
     }

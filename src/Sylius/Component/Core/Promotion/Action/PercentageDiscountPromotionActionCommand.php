@@ -12,24 +12,24 @@
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class FixedDiscountAction extends DiscountAction
+class PercentageDiscountPromotionActionCommand extends DiscountPromotionActionCommand
 {
-    const TYPE = 'order_fixed_discount';
+    const TYPE = 'order_percentage_discount';
 
     /**
      * @var ProportionalIntegerDistributorInterface
      */
-    private $proportionalDistributor;
+    private $distributor;
 
     /**
      * @var UnitsPromotionAdjustmentsApplicatorInterface
@@ -37,14 +37,14 @@ class FixedDiscountAction extends DiscountAction
     private $unitsPromotionAdjustmentsApplicator;
 
     /**
-     * @param ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
+     * @param ProportionalIntegerDistributorInterface $distributor
      * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
      */
     public function __construct(
-        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
-        $this->proportionalDistributor = $proportionalIntegerDistributor;
+        $this->distributor = $distributor;
         $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
     }
 
@@ -53,23 +53,24 @@ class FixedDiscountAction extends DiscountAction
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
+        /** @var OrderInterface $subject */
         if (!$this->isSubjectValid($subject)) {
             return;
         }
 
         $this->isConfigurationValid($configuration);
 
-        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['amount']);
+        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['percentage']);
         if (0 === $promotionAmount) {
             return;
         }
 
-        $itemsTotals = [];
-        foreach ($subject->getItems() as $item) {
-            $itemsTotals[] = $item->getTotal();
+        $itemsTotal = [];
+        foreach ($subject->getItems() as $orderItem) {
+            $itemsTotal[] = $orderItem->getTotal();
         }
 
-        $splitPromotion = $this->proportionalDistributor->distribute($itemsTotals, $promotionAmount);
+        $splitPromotion = $this->distributor->distribute($itemsTotal, $promotionAmount);
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
     }
 
@@ -78,7 +79,7 @@ class FixedDiscountAction extends DiscountAction
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_fixed_discount_configuration';
+        return 'sylius_promotion_action_percentage_discount_configuration';
     }
 
     /**
@@ -86,18 +87,19 @@ class FixedDiscountAction extends DiscountAction
      */
     protected function isConfigurationValid(array $configuration)
     {
-        Assert::keyExists($configuration, 'amount');
-        Assert::integer($configuration['amount']);
+        if (!isset($configuration['percentage']) || !is_float($configuration['percentage'])) {
+            throw new \InvalidArgumentException('"percentage" must be set and must be a float.');
+        }
     }
 
     /**
      * @param int $promotionSubjectTotal
-     * @param int $targetPromotionAmount
+     * @param int $percentage
      *
      * @return int
      */
-    private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
+    private function calculateAdjustmentAmount($promotionSubjectTotal, $percentage)
     {
-        return -1 * min($promotionSubjectTotal, $targetPromotionAmount);
+        return -1 * (int) round($promotionSubjectTotal * $percentage);
     }
 }

@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
@@ -30,7 +30,7 @@ final class BuildActionFormSubscriberSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $registry,
-        PromotionActionInterface $action,
+        PromotionActionCommandInterface $action,
         FormFactoryInterface $factory
     ) {
         $action->getConfigurationFormType()->willReturn('sylius_promotion_action_fixed_discount_configuration');

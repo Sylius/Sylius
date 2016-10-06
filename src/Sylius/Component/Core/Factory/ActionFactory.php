@@ -11,11 +11,11 @@
 
 namespace Sylius\Component\Core\Factory;
 
-use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
-use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountAction;
-use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountAction;
-use Sylius\Component\Core\Promotion\Action\PercentageDiscountAction;
-use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountAction;
+use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\PercentageDiscountPromotionActionCommand;
 use Sylius\Component\Promotion\Model\ActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -50,7 +50,7 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createFixedDiscount($amount)
     {
-        return $this->createAction(FixedDiscountAction::TYPE, ['amount' => $amount]);
+        return $this->createAction(FixedDiscountPromotionActionCommand::TYPE, ['amount' => $amount]);
     }
 
     /**
@@ -58,7 +58,7 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createUnitFixedDiscount($amount)
     {
-        return $this->createAction(UnitFixedDiscountAction::TYPE, ['amount' => $amount]);
+        return $this->createAction(UnitFixedDiscountPromotionActionCommand::TYPE, ['amount' => $amount]);
     }
 
     /**
@@ -66,7 +66,7 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createPercentageDiscount($percentage)
     {
-        return $this->createAction(PercentageDiscountAction::TYPE, ['percentage' => $percentage]);
+        return $this->createAction(PercentageDiscountPromotionActionCommand::TYPE, ['percentage' => $percentage]);
     }
 
     /**
@@ -74,7 +74,7 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createUnitPercentageDiscount($percentage)
     {
-        return $this->createAction(UnitPercentageDiscountAction::TYPE, ['percentage' => $percentage]);
+        return $this->createAction(UnitPercentageDiscountPromotionActionCommand::TYPE, ['percentage' => $percentage]);
     }
 
     /**
@@ -82,7 +82,7 @@ class ActionFactory implements ActionFactoryInterface
      */
     public function createShippingPercentageDiscount($percentage)
     {
-        return $this->createAction(ShippingPercentageDiscountAction::TYPE, ['percentage' => $percentage]);
+        return $this->createAction(ShippingPercentageDiscountPromotionActionCommand::TYPE, ['percentage' => $percentage]);
     }
 
     /**
