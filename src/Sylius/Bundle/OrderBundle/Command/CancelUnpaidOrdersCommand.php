@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class RemoveExpiredCartsCommand extends ContainerAwareCommand
+class CancelUnpaidOrdersCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}
@@ -26,8 +26,8 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
     protected function configure()
     {
         $this
-            ->setName('sylius:remove-expired-carts')
-            ->setDescription('Removes carts that have been idle for a configured period. Configuration parameter - sylius_order.cart_expires_after.');
+            ->setName('sylius:cancel-unpaid-orders')
+            ->setDescription('Removes order that have been unpaid for a configured period. Configuration parameter - sylius_order.order_expiration_period.');
         ;
     }
 
@@ -36,12 +36,12 @@ class RemoveExpiredCartsCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $expirationTime = $this->getContainer()->getParameter('sylius_order.cart_expiration_period');
+        $expirationTime = $this->getContainer()->getParameter('sylius_order.order_expiration_period');
         $output->writeln(
-            sprintf('Command will remove carts that have been idle for <info>%s</info>.', $expirationTime)
+            sprintf('Command will cancel orders that have been unpaid for <info>%s</info>.', $expirationTime)
         );
 
-        $expiredCartsRemover = $this->getContainer()->get('sylius.expired_carts_remover');
-        $expiredCartsRemover->remove();
+        $unpaidCartsStateUpdater = $this->getContainer()->get('sylius.unpaid_orders_state_updater');
+        $unpaidCartsStateUpdater->cancel();
     }
 }

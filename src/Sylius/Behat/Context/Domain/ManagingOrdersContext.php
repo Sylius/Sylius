@@ -12,10 +12,12 @@
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Order\Updater\UnpaidOrdersStateUpdaterInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Webmozart\Assert\Assert;
@@ -51,9 +53,19 @@ final class ManagingOrdersContext implements Context
     private $adjustmentRepository;
 
     /**
+     * @var ObjectManager
+     */
+    private $orderManager;
+
+    /**
      * @var ProductVariantResolverInterface
      */
     private $variantResolver;
+
+    /**
+     * @var UnpaidOrdersStateUpdaterInterface
+     */
+    private $unpaidOrdersStateUpdater;
 
     /**
      * @param SharedStorageInterface $sharedStorage
@@ -61,7 +73,9 @@ final class ManagingOrdersContext implements Context
      * @param RepositoryInterface $orderItemRepository
      * @param RepositoryInterface $addressRepository
      * @param RepositoryInterface $adjustmentRepository
+     * @param ObjectManager $orderManager
      * @param ProductVariantResolverInterface $variantResolver
+     * @param UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -69,14 +83,18 @@ final class ManagingOrdersContext implements Context
         RepositoryInterface $orderItemRepository,
         RepositoryInterface $addressRepository,
         RepositoryInterface $adjustmentRepository,
-        ProductVariantResolverInterface $variantResolver
+        ObjectManager $orderManager,
+        ProductVariantResolverInterface $variantResolver,
+        UnpaidOrdersStateUpdaterInterface $unpaidOrdersStateUpdater
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
         $this->addressRepository = $addressRepository;
         $this->adjustmentRepository = $adjustmentRepository;
+        $this->orderManager = $orderManager;
         $this->variantResolver = $variantResolver;
+        $this->unpaidOrdersStateUpdater = $unpaidOrdersStateUpdater;
     }
 
     /**
@@ -142,5 +160,40 @@ final class ManagingOrdersContext implements Context
         $adjustments = $this->adjustmentRepository->findBy(['id' => $adjustments]);
 
         Assert::same($adjustments, []);
+    }
+
+    /**
+     * @Given /^(this order) has not been paid for (\d+) (day|days|hour|hours)$/
+     */
+    public function thisOrderHasNotBeenPaidForDays(OrderInterface $order, $amount, $time)
+    {
+        $order->setCompletedAt(new \DateTime('-'.$amount.' '.$time));
+        $this->orderManager->flush();
+
+        $this->unpaidOrdersStateUpdater->cancel();
+    }
+
+    /**
+     * @Then /^(this order) should be automatically cancelled$/
+     */
+    public function thisOrderShouldBeAutomaticallyCancelled(OrderInterface $order)
+    {
+        Assert::same(
+            OrderInterface::STATE_CANCELLED,
+            $order->getState(),
+            'Order should be cancelled, but its not.'
+        );
+    }
+
+    /**
+     * @Then /^(this order) should not be cancelled$/
+     */
+    public function thisOrderShouldNotBeCancelled(OrderInterface $order)
+    {
+        Assert::notSame(
+            OrderInterface::STATE_CANCELLED,
+            $order->getState(),
+            'Order should not be cancelled, but its is.'
+        );
     }
 }

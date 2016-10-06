@@ -220,6 +220,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('expiration')
                     ->children()
                         ->scalarNode('cart')->cannotBeEmpty()->end()
+                        ->scalarNode('order')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
             ->end()
