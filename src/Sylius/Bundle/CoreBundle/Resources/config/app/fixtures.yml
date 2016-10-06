@@ -105,14 +105,17 @@ sylius_fixtures:
                                 name: "Clothing Sales Tax 7%"
                                 zone: "US"
                                 category: "clothing"
+                                amount: 0.07
                             books_tax:
                                 name: "Books Sales Tax 2%"
                                 zone: "US"
                                 category: "books"
+                                amount: 0.02
                             default_sales_tax:
                                 name: "Sales Tax 20%"
                                 zone: "US"
                                 category: "other"
+                                amount: 0.2
 
                 mug_product:
                     options:
