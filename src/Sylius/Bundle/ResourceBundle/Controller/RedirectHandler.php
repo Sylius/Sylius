@@ -15,12 +15,13 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RedirectHandler implements RedirectHandlerInterface
+final class RedirectHandler implements RedirectHandlerInterface
 {
     /**
      * @var RouterInterface
@@ -40,18 +41,19 @@ class RedirectHandler implements RedirectHandlerInterface
      */
     public function redirectToResource(RequestConfiguration $configuration, ResourceInterface $resource)
     {
-        $routes = $this->router->getRouteCollection();
-        $redirectRouteName = $configuration->getRedirectRoute(ResourceActions::SHOW);
-
-        if (null === $routes->get($redirectRouteName)) {
-            $redirectRouteName = $configuration->getRedirectRoute(ResourceActions::INDEX);
+        try {
+            return $this->redirectToRoute(
+                $configuration,
+                $configuration->getRedirectRoute(ResourceActions::SHOW),
+                $configuration->getRedirectParameters($resource)
+            );
+        } catch (RouteNotFoundException $exception) {
+            return $this->redirectToRoute(
+                $configuration,
+                $configuration->getRedirectRoute(ResourceActions::INDEX),
+                $configuration->getRedirectParameters($resource)
+            );
         }
-
-        return $this->redirectToRoute(
-            $configuration,
-            $redirectRouteName,
-            $configuration->getRedirectParameters($resource)
-        );
     }
 
     /**
