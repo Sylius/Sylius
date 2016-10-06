@@ -83,6 +83,7 @@ final class LocaleContext implements Context
     /**
      * @Given the store has locale :localeCode
      * @Given the store is( also) available in :localeCode
+     * @Given the locale :localeCode is enabled
      */
     public function theStoreHasLocale($localeCode)
     {
