@@ -1,9 +1,9 @@
 Custom Filter
 =============
 
-Sylius grids come with a lot of built-in filters, but there are use-cases where you need something more than basic filter. Grids allow you to define your own filter types!
+Sylius Grids come with built-in filters, but there are use-cases where you need something more than basic filter. Grids allow you to define your own filter types!
 
-To add a new filter, we need to create appropriate class and form type.
+To add a new filter, we need to create an appropriate class and form type.
 
 .. code-block:: php
 
@@ -12,12 +12,12 @@ To add a new filter, we need to create appropriate class and form type.
     namespace App\Grid\Filter;
 
     use Sylius\Component\Grid\Data\DataSourceInterface;
-    use Sylius\Component\Grid\Filter\FilterInterface;
+    use Sylius\Component\Grid\Filtering\FilterInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-    class TournamentStatisticsFilter implements FilterInterface
+    class SuppliersStatisticsFilter implements FilterInterface
     {
-        public function apply(DataSourceInterface $dataSource, $data, array $options = array())
+        public function apply(DataSourceInterface $dataSource, $name, $data, array $options = array())
         {
             // Your filtering logic. DataSource is kind of query builder.
             // $data['stats'] contains the submitted value!
@@ -37,7 +37,7 @@ To add a new filter, we need to create appropriate class and form type.
 
         public function getType()
         {
-            return 'tournament_statistics'
+            return 'supplier_statistics';
         }
     }
 
@@ -72,28 +72,36 @@ And the form type:
             ;
         }
 
-        public function getType()
+        public function getName()
         {
             return 'sylius_filter_tournament_statistics'; // The name is important to be sylius_filter_NAME
         }
     }
 
-That is all. Now let register your new filter type as service.
+Create a template for the filter, similar to the existing ones:
+
+.. code-block:: html
+
+    # AppBundle/Resources/views/Grid/Filter/suppliers_statistics.html.twig
+    {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
+    {{ form_row(form) }}
+
+That is all. Now let's register your new filter type as service.
 
 .. code-block:: yaml
 
     # app/config/services.yml
 
     services:
-        app.grid.filter.tournament_statistics:
-            class: App\Grid\Filter\TournamentStatisticsFilter
+        app.grid.filter.suppliers_statistics:
+            class: AppBundle\Grid\Filter\SuppliersStatisticsFilter
             tags:
-                - { name: sylius.grid_filter, type: tournament_statistics }
-        app.form.type.filter.tournament_statistics:
-            class: AppBundle\Form\Type\Filter\TournamentStatisticsFilterType
+                - { name: sylius.grid_filter, type: suppliers_statistics }
+        app.form.type.grid.filter.suppliers_statistics:
+            class: AppBundle\Form\Type\Filter\SuppliersStatisticsFilterType
             tags:
-                - { name: form.type, alias: sylius_filter_tournament_statistics }
-
+                - { name: form.type, alias: sylius_grid_filter_suppliers_statistics }
 
 Now you can use your new filter type in the grid configuration!
 
@@ -109,3 +117,6 @@ Now you can use your new filter type in the grid configuration!
                         type: tournament_statistics
                         options:
                             range: [0, 100]
+        templates:
+            filter:
+                suppliers_statistics: "AppBundle:Grid/Filter:suppliers_statistics.html.twig"
