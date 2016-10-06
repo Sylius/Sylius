@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PayumBundle\Extension;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Payum\Core\Extension\Context;
 use Payum\Core\Extension\ExtensionInterface;
 use Payum\Core\Request\Generic;
@@ -29,11 +30,18 @@ class UpdatePaymentStateExtension implements ExtensionInterface
     protected $factory;
 
     /**
-     * @param FactoryInterface $factory
+     * @var ObjectManager
      */
-    public function __construct(FactoryInterface $factory)
+    protected $objectManager;
+
+    /**
+     * @param FactoryInterface $factory
+     * @param ObjectManager $objectManager
+     */
+    public function __construct(FactoryInterface $factory, ObjectManager $objectManager)
     {
         $this->factory = $factory;
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -91,6 +99,9 @@ class UpdatePaymentStateExtension implements ExtensionInterface
 
         if (null !== $transition = $stateMachine->getTransitionToState($nextState)) {
             $stateMachine->apply($transition);
+
+            $this->objectManager->persist($payment);
+            $this->objectManager->flush();
         }
     }
 }

@@ -7,6 +7,7 @@
     <services>
         <service id="sylius.payum.extension.update_payment_state" class="Sylius\Bundle\PayumBundle\Extension\UpdatePaymentStateExtension">
             <argument type="service" id="sm.factory" />
+            <argument type="service" id="sylius.manager.payment" />
             <tag name="payum.extension" all="true" />
         </service>
     </services>
