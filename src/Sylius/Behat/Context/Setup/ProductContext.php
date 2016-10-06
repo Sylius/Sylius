@@ -180,10 +180,11 @@ final class ProductContext implements Context
 
     /**
      * @Given the store( also) has a product :productName with code :code
+     * @Given the store( also) has a product :productName with code :code, created at :date
      */
-    public function storeHasProductWithCode($productName, $code)
+    public function storeHasProductWithCode($productName, $code, $date = null)
     {
-        $product = $this->createProduct($productName, 0);
+        $product = $this->createProduct($productName, 0, $date);
 
         $product->setCode($code);
 
@@ -589,13 +590,14 @@ final class ProductContext implements Context
      *
      * @return ProductInterface
      */
-    private function createProduct($productName, $price = 0)
+    private function createProduct($productName, $price = 0, $date = null)
     {
         /** @var ProductInterface $product */
         $product = $this->productFactory->createWithVariant();
 
         $product->setName($productName);
         $product->setCode($this->convertToCode($productName));
+        $product->setCreatedAt(new \DateTime($date));
 
         $variant = $this->defaultVariantResolver->getVariant($product);
         $variant->setPrice($price);
