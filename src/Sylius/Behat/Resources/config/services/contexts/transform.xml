@@ -48,6 +48,11 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.transform.customer_group" class="Sylius\Behat\Context\Transform\CustomerGroupContext" scope="scenario">
+            <argument type="service" id="sylius.repository.customer_group" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.transform.date_time" class="Sylius\Behat\Context\Transform\DateTimeContext" scope="scenario">
             <tag name="sylius.behat.context" />
         </service>

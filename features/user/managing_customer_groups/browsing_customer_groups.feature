@@ -9,8 +9,8 @@ Feature: Browsing customer groups
         And the store has a customer group "Wholesale"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Browsing customer groups in the store
-        When I want to see all customer groups in the store
+        When I want to browse customer groups of the store
         Then I should see 2 customer groups in the list
         And I should see the customer group "Retail" in the list

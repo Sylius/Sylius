@@ -8,9 +8,9 @@ Feature: Editing a customer group
         Given the store has a customer group "Retail"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Changing name of an existing customer group
-        And I want to edit this customer group
+        When I want to edit this customer group
         And I specify its name as "Wholesale"
         And I save my changes
         Then I should be notified that it has been successfully edited
