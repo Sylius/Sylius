@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\PayumBundle\DependencyInjection;
 
+use Payum\Bundle\PayumBundle\DependencyInjection\MainConfiguration as PayumConfiguration;
+use Payum\Bundle\PayumBundle\DependencyInjection\PayumExtension;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,11 +20,9 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * Payum extension.
- *
  * @author Maksim Kotlyar
  */
-class SyliusPayumExtension extends AbstractResourceExtension implements PrependExtensionInterface
+final class SyliusPayumExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -34,18 +34,11 @@ class SyliusPayumExtension extends AbstractResourceExtension implements PrependE
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $container->setParameter('payum.template.layout', $config['template']['layout']);
         $container->setParameter('payum.template.obtain_credit_card', $config['template']['obtain_credit_card']);
     }
-
 
     /**
      * {@inheritdoc}
@@ -56,10 +49,12 @@ class SyliusPayumExtension extends AbstractResourceExtension implements PrependE
             return;
         }
 
-        $config = $container->getExtensionConfig('payum');
         $gateways = [];
-        foreach (array_keys($config[0]['gateways']) as $gatewayKey) {
-            $gateways[$gatewayKey] = 'sylius.payum_gateway.'.$gatewayKey;
+        $configs = $container->getExtensionConfig('payum');
+        foreach ($configs as $config) {
+            foreach (array_keys($config['gateways']) as $gatewayKey) {
+                $gateways[$gatewayKey] = 'sylius.payum_gateway.' . $gatewayKey;
+            }
         }
 
         $container->prependExtensionConfig('sylius_payment', ['gateways' => $gateways]);
