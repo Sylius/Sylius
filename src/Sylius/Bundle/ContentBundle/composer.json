@@ -25,11 +25,8 @@
         "jackalope/jackalope-doctrine-dbal": "^1.1.2",
         "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8",
-        "symfony-cmf/block-bundle": "~1.2",
-        "symfony-cmf/content-bundle": "~1.2",
-        "symfony-cmf/create-bundle": "~1.2",
-        "symfony-cmf/media-bundle": "~1.2",
-        "symfony-cmf/routing-bundle": "~1.2"
+        "symfony-cmf/content-bundle": "^1.3",
+        "symfony-cmf/routing-bundle": "^1.4"
     },
     "require-dev": {
         "liip/imagine-bundle": "^1.0",
