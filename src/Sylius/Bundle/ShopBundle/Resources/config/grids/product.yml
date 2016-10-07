@@ -1,0 +1,25 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_grid:
+    grids:
+        sylius_shop_product:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product.class%"
+                    repository:
+                        method: createQueryBuilderForEnabledByTaxonCodeAndChannel
+                        arguments:
+                            code: $code
+                            channel: 'expr:service("sylius.context.channel").getChannel()'
+            sorting:
+                createdAt:
+                    path: createdAt
+                    direction: asc
+            fields:
+                createdAt:
+                    type: datetime
+                    label: sylius.ui.date
+                    options:
+                        format: m/d/Y

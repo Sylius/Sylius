@@ -1,13 +1,41 @@
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
-{% if products|length > 0 %}
-<div class="ui three column stackable grid">
-    {% for product in products %}
-        <div class="column">
-            {% include '@SyliusShop/Product/_simpleBox.html.twig' %}
+{% set definition = resources.definition %}
+{% set fieldName = definition.fields['createdAt'].name %}
+<div class="ui vertical fluid accordion menu">
+    <div class="item">
+        <a class="active title">
+            <i class="dropdown icon"></i>
+            {{ 'sylius.ui.sort_by_date'|trans }}
+        </a>
+        <div class="active content">
+            <div class="ui form">
+                <div class="grouped fields">
+                    <div class="field">
+                        <a href="{{ path('sylius_shop_taxon_show', {
+                            'sorting': {(fieldName): {'direction': 'asc'}},
+                            'permalink': resources.parameters.get('permalink')})
+                        }}">{{ 'sylius.ui.form_the_oldest'|trans }}</a>
+                    </div>
+                    <div class="field">
+                        <a href="{{ path('sylius_shop_taxon_show',{
+                            'sorting': {(fieldName): {'direction': 'desc'}},
+                            'permalink': resources.parameters.get('permalink')})
+                        }}">{{ 'sylius.ui.form_the_latest'|trans }}</a>
+                    </div>
+                </div>
+            </div>
         </div>
-    {% endfor %}
+    </div>
 </div>
+{% if resources.data|length > 0 %}
+    <div class="ui three column stackable grid" id="products">
+        {% for product in resources.data %}
+            <div class="column">
+                {% include '@SyliusShop/Product/_simpleBox.html.twig' %}
+            </div>
+        {% endfor %}
+    </div>
 {% else %}
-{{ messages.info('sylius.ui.no_results_to_display'|trans) }}
+    {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
 {% endif %}

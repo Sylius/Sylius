@@ -39,6 +39,22 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
+    public function createQueryBuilderForEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel)
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.taxons', 'taxon')
+            ->andWhere('taxon.code = :code')
+            ->innerJoin('o.channels', 'channel')
+            ->andWhere('channel = :channel')
+            ->andWhere('o.enabled = true')
+            ->setParameter('code', $code)
+            ->setParameter('channel', $channel)
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findLatestByChannel(ChannelInterface $channel, $count)
     {
         return $this->createQueryBuilder('o')
