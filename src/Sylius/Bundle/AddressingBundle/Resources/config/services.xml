@@ -52,9 +52,6 @@
             <tag name="twig.extension" />
         </service>
 
-        <service id="sylius.validator.shippable_address" class="Sylius\Bundle\AddressingBundle\Validator\Constraints\ShippableAddressConstraintValidator">
-            <tag name="validator.constraint_validator" alias="sylius_shippable_address_validator" />
-        </service>
         <service id="sylius.validator.valid_province_address" class="Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator">
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.repository.province" />

@@ -17,9 +17,6 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\Addressing\Model\Address">
-        <constraint name="Sylius\Bundle\AddressingBundle\Validator\Constraints\ShippableAddressConstraint">
-            <option name="groups">shippable</option>
-        </constraint>
         <constraint name="Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraint">
             <option name="groups">
                 <value>sylius_shipping_address_update</value>
