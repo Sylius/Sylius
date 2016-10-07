@@ -404,7 +404,7 @@ final class CartContext implements Context
     {
         Assert::same(
             $this->summaryPage->getQuantity($productName),
-            $quantity,
+            (int) $quantity,
             'The quantity of product should be %2$s, but it is %s'
         );
     }

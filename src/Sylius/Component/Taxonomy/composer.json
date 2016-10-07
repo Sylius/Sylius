@@ -25,7 +25,7 @@
         "sylius/resource": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.0"
+        "phpspec/phpspec": "^3.1"
     },
     "config": {
         "bin-dir": "bin"

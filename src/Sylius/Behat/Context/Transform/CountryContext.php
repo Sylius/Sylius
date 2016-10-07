@@ -45,7 +45,7 @@ final class CountryContext implements Context
 
     /**
      * @Transform /^country "([^"]+)"$/
-     * @Transform /^"([^"]+)" (?:as shipping |)country$/
+     * @Transform /^"([^"]+)" country$/
      */
     public function getCountryByName($countryName)
     {

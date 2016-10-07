@@ -35,7 +35,7 @@
         "doctrine/collections": "^1.0.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.0"
+        "phpspec/phpspec": "^3.1"
     },
     "config": {
         "bin-dir": "bin"

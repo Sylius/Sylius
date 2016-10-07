@@ -28,8 +28,8 @@
     },
     "require-dev": {
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-        "phpspec/phpspec": "^3.0",
-        "phpunit/phpunit": "^4.8",
+        "phpspec/phpspec": "^3.1",
+        "phpunit/phpunit": "^5.6",
         "symfony/form": "^2.8",
         "twig/twig": "^1.0"
     },

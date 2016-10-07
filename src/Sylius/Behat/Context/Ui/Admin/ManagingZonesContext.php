@@ -331,8 +331,8 @@ final class ManagingZonesContext implements Context
     {
         $resourcesOnPage = $this->indexPage->countItems();
 
-        Assert::eq(
-            $number,
+        Assert::same(
+            (int) $number,
             $resourcesOnPage,
             sprintf('On list should be %d zones but get %d', $number, $resourcesOnPage)
         );

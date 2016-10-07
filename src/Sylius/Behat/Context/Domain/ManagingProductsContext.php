@@ -79,7 +79,7 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When /^I delete the ("[^"]+" product)$/
-     * @When /^I try to delete the ("([^"]+)" product)$/
+     * @When /^I try to delete the ("[^"]+" product)$/
      */
     public function iDeleteTheProduct(ProductInterface $product)
     {
