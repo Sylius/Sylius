@@ -12,28 +12,28 @@ sylius:
             phone_number: Номер телефону
             postcode: Iндекс
             street: Вулиця
-            province: Область
+            province: Регіон
         country:
-            add_province: Додати провінцію
-            name: Країна
-            provinces: Області
+            add_province: Додати регіон
+            name: Назва країни
+            provinces: Регіони
             select: Виберіть
             enabled: Увімкнено
         province:
-            name: Ім’я
+            name: Назва регіону
             abbreviation: Абревіатура
             select: Виберіть
         zone:
-            add_member: Додати члена групи
-            members: Члени
+            add_member: Додати учасника
+            members: Учасники
             name: Назва
             type: Тип
             types:
                 country: Країна
-                province: Область
+                province: Регіон
                 zone: Зона
-            scope: Сфера
+            scope: Покриття
             select: Виберіть
-            select_scope: Виберіть область
+            select_scope: Виберіть покриття
         zone_member:
             select: Виберіть
