@@ -93,5 +93,9 @@
         </service>
 
         <service id="sylius.unique_id_based_order_token_assigner" class="Sylius\Component\Core\TokenAssigner\UniqueIdBasedOrderTokenAssigner" />
+
+        <service id="sylius.storage.session" class="Sylius\Component\Storage\SessionStorage" public="false">
+            <argument type="service" id="session" />
+        </service>
     </services>
 </container>
