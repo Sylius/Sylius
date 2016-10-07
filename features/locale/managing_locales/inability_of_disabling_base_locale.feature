@@ -11,5 +11,5 @@ Feature: Inability of disabling the base locale
     Scenario:
         Given the store operates on a single channel
         And it uses the "English (United States)" locale by default
-        And I want to edit this locale
+        When I want to edit this locale
         Then I should not be able to disable this locale

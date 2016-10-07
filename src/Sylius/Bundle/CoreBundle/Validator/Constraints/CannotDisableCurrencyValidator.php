@@ -11,13 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CannotDisableCurrencyValidator extends ConstraintValidator
+final class CannotDisableCurrencyValidator extends ConstraintValidator
 {
     /**
      * @var string
@@ -37,9 +39,13 @@ class CannotDisableCurrencyValidator extends ConstraintValidator
      */
     public function validate($currency, Constraint $constraint)
     {
+        Assert::isInstanceOf($currency, CurrencyInterface::class);
+        Assert::isInstanceOf($constraint, CannotDisableCurrency::class);
+
         if ($currency->getCode() !== $this->baseCurrency) {
             return;
         }
+
         if ($currency->isEnabled()) {
             return;
         }

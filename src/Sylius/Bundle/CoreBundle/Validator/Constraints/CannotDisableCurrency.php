@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CannotDisableCurrency extends Constraint
+final class CannotDisableCurrency extends Constraint
 {
     /**
      * @var string

@@ -11,5 +11,5 @@ Feature: Inability of disabling the base currency
     Scenario:
         Given the store operates on a single channel
         And it uses the "USD" currency by default
-        And I want to edit this currency
+        When I want to edit this currency
         Then I should not be able to disable this currency
