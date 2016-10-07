@@ -1,16 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-cmf_block:
-    persistence:
-        phpcr:
-            block_basepath: /cms/blocks
-            string_document_class: "%sylius.model.string_block.class%"
-            simple_document_class: "%sylius.model.simple_block.class%"
-            imagine_document_class: "%sylius.model.imagine_block.class%"
-            action_document_class: "%sylius.model.action_block.class%"
-            slideshow_document_class: "%sylius.model.slideshow_block.class%"
-
 cmf_content:
     persistence:
         phpcr:
@@ -22,11 +12,6 @@ cmf_core:
     persistence:
         phpcr:
             enabled: true
-
-cmf_media:
-    persistence:
-        phpcr:
-            media_basepath: /cms/medias
 
 cmf_routing:
     chain:
@@ -44,40 +29,3 @@ doctrine_cache:
     providers:
         phpcr_meta: "%sylius.cache%"
         phpcr_nodes: "%sylius.cache%"
-
-liip_imagine:
-    filter_sets:
-        slideshow_default:
-            data_loader: cmf_media_doctrine_phpcr
-            format: jpg
-            quality: 90
-            filters:
-                thumbnail: { size: [850, 300], mode: inset }
-        slideshow_small:
-            data_loader: cmf_media_doctrine_phpcr
-            format: jpg
-            quality: 90
-            filters:
-                thumbnail: { size: [260, 200], mode: inset }
-        slideshow_medium:
-            data_loader: cmf_media_doctrine_phpcr
-            format: jpg
-            quality: 90
-            filters:
-                thumbnail: { size: [850, 300], mode: inset }
-        slideshow_large:
-            data_loader: cmf_media_doctrine_phpcr
-            format: jpg
-            quality: 90
-            filters:
-                thumbnail: { size: [1170, 380], mode: inset }
-        image_upload_thumbnail:
-            quality: 85
-            format: jpg
-            data_loader: cmf_media_doctrine_phpcr
-            filters:
-                thumbnail: { size: [300, 150], mode: inset }
-
-twig:
-    form_themes:
-        - "CmfMediaBundle:Form:fields.html.twig"
