@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AdminBundle\Controller;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -47,8 +48,8 @@ class DashboardController
      */
     public function indexAction(Request $request)
     {
-        $stats = $this->statisticsProvider->getStatistics();
+        $statistics = $this->statisticsProvider->getStatistics();
 
-        return $this->templatingEngine->renderResponse('SyliusAdminBundle:Dashboard:index.html.twig', ['statistics' => $stats]);
+        return $this->templatingEngine->renderResponse('SyliusAdminBundle:Dashboard:index.html.twig', ['statistics' => $statistics]);
     }
 }
