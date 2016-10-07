@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "63dfbeebe7a52e7c130fb552eca0f9b4",
-    "content-hash": "5f9723cba8d82eb3b6be379c8746375d",
+    "hash": "096ea8f8521cb8a5894d21d914aa31e7",
+    "content-hash": "10d47d5d2cdc51a4db57c6dc19aada13",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -9598,6 +9598,47 @@
             ],
             "description": "Accelerates Behat using features available only for newer PHP versions.",
             "time": "2016-07-22 21:46:29"
+        },
+        {
+            "name": "friends-of-behat/variadic-extension",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfBehat/VariadicExtension.git",
+                "reference": "d85fcc04318938f5af8799c73b16c9ec3fc8d40e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfBehat/VariadicExtension/zipball/d85fcc04318938f5af8799c73b16c9ec3fc8d40e",
+                "reference": "d85fcc04318938f5af8799c73b16c9ec3fc8d40e",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "^3.1",
+                "php": "^5.6|^7.0",
+                "symfony/dependency-injection": "~2.5||~3.0"
+            },
+            "require-dev": {
+                "friends-of-behat/test-context": "^0.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfBehat\\VariadicExtension\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Łukasz Chruściel",
+                    "email": "lchrusciel@gmail.com"
+                }
+            ],
+            "description": "Variadic support for behat context arguments",
+            "time": "2016-08-25 22:34:32"
         },
         {
             "name": "hwi/oauth-bundle",
