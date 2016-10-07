@@ -181,13 +181,13 @@ Below you can see how it works:
     <?php
 
     use Sylius\Component\Promotion\Model\Promotion;
-    use Sylius\Component\Promotion\Model\Rule;
+    use Sylius\Component\Promotion\Model\PromotionRule;
     use Sylius\Component\Promotion\Model\Action;
     use Sylius\Component\Promotion\Checker\CompositePromotionEligibilityChecker;
     use AppBundle\Entity\Ticket;
 
     $checkerRegistry = new ServiceRegistry('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
-    $ruleRegistry = new ServiceRegistry('Sylius\Component\Promotion\Model\RuleInterface');
+    $ruleRegistry = new ServiceRegistry('Sylius\Component\Promotion\Model\PromotionRuleInterface');
     $actionRegistry = new ServiceRegistry('Sylius\Component\Promotion\Model\ActionInterface');
 
     $dispatcher = new EventDispatcher();
@@ -214,7 +214,7 @@ Below you can see how it works:
     $actionRegistry->register('fixed_discount', $action);
 
     // That promotion will also have a rule - works for item amounts over 2
-    $rule = new Rule();
+    $rule = new PromotionRule();
     $rule->setType('item_count');
 
     $configuration = array('count' => 2);

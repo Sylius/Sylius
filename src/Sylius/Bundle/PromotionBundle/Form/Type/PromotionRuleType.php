@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class RuleType extends AbstractConfigurationType
+class PromotionRuleType extends AbstractConfigurationType
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,7 @@ class RuleType extends AbstractConfigurationType
                 ],
             ])
             ->addEventSubscriber(
-                new BuildRuleFormSubscriber($this->registry, $builder->getFormFactory(), $options['configuration_type'])
+                new BuildPromotionRuleFormSubscriber($this->registry, $builder->getFormFactory(), $options['configuration_type'])
             )
         ;
     }

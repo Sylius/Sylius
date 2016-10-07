@@ -15,7 +15,7 @@ use Sylius\Bundle\PromotionBundle\Controller\CouponController;
 use Sylius\Bundle\PromotionBundle\Form\Type\ActionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\CouponType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
-use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -26,8 +26,8 @@ use Sylius\Component\Promotion\Model\PromotionCoupon;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\Promotion;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\Rule;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\PromotionRule;
+use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -120,15 +120,15 @@ final class Configuration implements ConfigurationInterface
                                 ->arrayNode('classes')
                                     ->addDefaultsIfNotSet()
                                     ->children()
-                                        ->scalarNode('model')->defaultValue(Rule::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(RuleInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('model')->defaultValue(PromotionRule::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(PromotionRuleInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue(RuleType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('default')->defaultValue(PromotionRuleType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

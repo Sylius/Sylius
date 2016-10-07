@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Factory\ActionFactoryInterface;
-use Sylius\Component\Core\Factory\RuleFactoryInterface;
+use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -23,7 +23,7 @@ use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
@@ -47,7 +47,7 @@ final class PromotionContext implements Context
     private $couponFactory;
 
     /**
-     * @var RuleFactoryInterface
+     * @var PromotionRuleFactoryInterface
      */
     private $ruleFactory;
 
@@ -70,7 +70,7 @@ final class PromotionContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param ActionFactoryInterface $actionFactory
      * @param PromotionCouponFactoryInterface $couponFactory
-     * @param RuleFactoryInterface $ruleFactory
+     * @param PromotionRuleFactoryInterface $ruleFactory
      * @param TestPromotionFactoryInterface $testPromotionFactory
      * @param PromotionRepositoryInterface $promotionRepository
      * @param ObjectManager $objectManager
@@ -79,7 +79,7 @@ final class PromotionContext implements Context
         SharedStorageInterface $sharedStorage,
         ActionFactoryInterface $actionFactory,
         PromotionCouponFactoryInterface $couponFactory,
-        RuleFactoryInterface $ruleFactory,
+        PromotionRuleFactoryInterface $ruleFactory,
         TestPromotionFactoryInterface $testPromotionFactory,
         PromotionRepositoryInterface $promotionRepository,
         ObjectManager $objectManager
@@ -576,9 +576,9 @@ final class PromotionContext implements Context
      * @param PromotionInterface $promotion
      * @param int $discount
      * @param array $configuration
-     * @param RuleInterface $rule
+     * @param PromotionRuleInterface $rule
      */
-    private function createFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], RuleInterface $rule = null)
+    private function createFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
     {
         $this->persistPromotion($promotion, $this->actionFactory->createFixedDiscount($discount), $configuration, $rule);
     }
@@ -587,9 +587,9 @@ final class PromotionContext implements Context
      * @param PromotionInterface $promotion
      * @param float $discount
      * @param array $configuration
-     * @param RuleInterface $rule
+     * @param PromotionRuleInterface $rule
      */
-    private function createPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], RuleInterface $rule = null)
+    private function createPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
     {
         $this->persistPromotion($promotion, $this->actionFactory->createPercentageDiscount($discount), $configuration, $rule);
     }
@@ -598,9 +598,9 @@ final class PromotionContext implements Context
      * @param PromotionInterface $promotion
      * @param ActionInterface $action
      * @param array $configuration
-     * @param RuleInterface|null $rule
+     * @param PromotionRuleInterface|null $rule
      */
-    private function persistPromotion(PromotionInterface $promotion, ActionInterface $action, array $configuration, RuleInterface $rule = null)
+    private function persistPromotion(PromotionInterface $promotion, ActionInterface $action, array $configuration, PromotionRuleInterface $rule = null)
     {
         $configuration = array_merge($configuration, $action->getConfiguration());
         $action->setConfiguration($configuration);

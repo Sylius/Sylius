@@ -14,7 +14,7 @@ namespace Sylius\Component\Promotion\Checker\Eligibility;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
@@ -55,11 +55,11 @@ final class PromotionRulesEligibilityChecker implements PromotionEligibilityChec
 
     /**
      * @param PromotionSubjectInterface $subject
-     * @param RuleInterface $rule
+     * @param PromotionRuleInterface $rule
      *
      * @return bool
      */
-    protected function isEligibleToRule(PromotionSubjectInterface $subject, RuleInterface $rule)
+    protected function isEligibleToRule(PromotionSubjectInterface $subject, PromotionRuleInterface $rule)
     {
         /** @var RuleCheckerInterface $checker */
         $checker = $this->ruleRegistry->get($rule->getType());

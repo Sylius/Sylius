@@ -13,24 +13,24 @@ namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\Rule;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Model\PromotionRule;
+use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 
 /**
- * @mixin Rule
+ * @mixin PromotionRule
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-final class RuleSpec extends ObjectBehavior
+final class PromotionRuleSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(Rule::class);
+        $this->shouldHaveType(PromotionRule::class);
     }
 
     function it_should_be_Sylius_promotion_rule()
     {
-        $this->shouldImplement(RuleInterface::class);
+        $this->shouldImplement(PromotionRuleInterface::class);
     }
 
     function it_should_not_have_id_by_default()

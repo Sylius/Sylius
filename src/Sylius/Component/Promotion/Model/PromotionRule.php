@@ -14,7 +14,7 @@ namespace Sylius\Component\Promotion\Model;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class Rule implements RuleInterface
+class PromotionRule implements PromotionRuleInterface
 {
     /**
      * @var mixed

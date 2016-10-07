@@ -74,12 +74,12 @@ This interface should be implemented by models representing a **Coupon**.
 
 .. _component_promotion_model_rule-interface:
 
-RuleInterface
-~~~~~~~~~~~~~
+PromotionRuleInterface
+~~~~~~~~~~~~~~~~~~~~~~
 
-This interface should be implemented by models representing a **Rule**.
+This interface should be implemented by models representing a **PromotionRule**.
 
-A **RuleInterface** has two defined types by default:
+A **PromotionRuleInterface** has two defined types by default:
 
 +-----------------------+------------+
 | Related constant      | Type       |
@@ -91,9 +91,9 @@ A **RuleInterface** has two defined types by default:
 
 .. note::
 
-    You will find more information about this interface in `Sylius API RuleInterface`_.
+    You will find more information about this interface in `Sylius API PromotionRuleInterface`_.
 
-.. _Sylius API RuleInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/RuleInterface.html
+.. _Sylius API PromotionRuleInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionRuleInterface.html
 
 .. _component_promotion_model_promotion-countable-subject-interface:
 

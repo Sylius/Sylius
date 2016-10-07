@@ -82,10 +82,10 @@ The coupon is represented by a **Coupon** instance. It has the following propert
 
 .. _component_promotion_model_rule:
 
-Rule
-----
+PromotionRule
+-------------
 
-The promotion rule is represented by a **Rule** instance. Rule is a requirement that has to be satisfied by the promotion subject.
+The promotion rule is represented by a **PromotionRule** instance. PromotionRule is a requirement that has to be satisfied by the promotion subject.
 It has the following properties as default:
 
 +----------------+------------------------------------------+
