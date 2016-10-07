@@ -23,10 +23,11 @@ class SingleResourceProvider implements SingleResourceProviderInterface
      */
     public function get(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
-        if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
-            $callable = [$repository, $repositoryMethod];
+        $repositoryMethod = $requestConfiguration->getRepositoryMethod();
+        if (null !== $repositoryMethod) {
+            $arguments = array_values($requestConfiguration->getRepositoryArguments());
 
-            return call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
+            return $repository->$repositoryMethod(...$arguments);
         }
 
         $criteria = [];

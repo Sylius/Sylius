@@ -47,10 +47,10 @@ class Driver implements DriverInterface
         $repository = $this->entityManager->getRepository($configuration['class']);
 
         if (isset($configuration['repository']['method'])) {
-            $callable = [$repository, $configuration['repository']['method']];
-            $arguments = isset($configuration['repository']['arguments']) ? $configuration['repository']['arguments'] : [];
+            $method = $configuration['repository']['method'];
+            $arguments = isset($configuration['repository']['arguments']) ? array_values($configuration['repository']['arguments']) : [];
 
-            $queryBuilder = call_user_func_array($callable, $arguments);
+            $queryBuilder = $repository->$method(...$arguments);
         } else {
             $queryBuilder = $repository->createQueryBuilder('o');
         }
