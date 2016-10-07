@@ -41,6 +41,7 @@
         <service id="sylius.resource_controller.flash_helper" class="Sylius\Bundle\ResourceBundle\Controller\FlashHelper">
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
+            <argument>%locale%</argument>
         </service>
         <service id="sylius.resource_controller.event_dispatcher" class="Sylius\Bundle\ResourceBundle\Controller\EventDispatcher">
             <argument type="service" id="event_dispatcher" />
