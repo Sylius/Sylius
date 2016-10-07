@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusContentExtension extends AbstractResourceExtension
+final class SyliusContentExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -34,9 +34,6 @@ class SyliusContentExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
-
-        $imagineBlock = $container->getDefinition('sylius.form.type.imagine_block');
-        $imagineBlock->addArgument(new Reference('liip_imagine.filter.configuration'));
 
         $staticContentRepository = $container->getDefinition('sylius.repository.static_content');
         $staticContentRepository->addArgument(new Parameter('cmf_content.persistence.phpcr.content_basepath'));
