@@ -134,6 +134,17 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
+     * @Then I should not be able to disable this currency
+     */
+    public function iCannotDisableIt()
+    {
+        Assert::true(
+            $this->updatePage->canBeDisabled(),
+            'I should not be able to disable this currency'
+        );
+    }
+
+    /**
      * @When I save my changes
      * @When I try to save my changes
      */
