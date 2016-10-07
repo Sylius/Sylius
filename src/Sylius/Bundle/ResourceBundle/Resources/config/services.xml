@@ -17,7 +17,6 @@
         <import resource="services/controller.xml" />
         <import resource="services/routing.xml" />
         <import resource="services/storage.xml" />
-        <import resource="services/twig.xml" />
     </imports>
 
     <parameters>
