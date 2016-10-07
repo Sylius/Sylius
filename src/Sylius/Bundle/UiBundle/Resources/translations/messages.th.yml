@@ -563,8 +563,8 @@ sylius:
         product_reviews: รีวิวสินค้า
         product_variants: ผลิตภัณฑ์ย่อย
         products: สินค้า
-        products_categorized_as_name: 'สินค้าที่ถูกกำหนดประเภทไว้ภายใต้ "%name%"'
-        products_categorized_under_taxon_taxon: 'สินค้า <small>ถูกจัดไว้ภายใต้ "%taxon%"</small>'
+        products_categorized_as_name: 'สินค้าในหมวด %name%'
+        products_categorized_under_taxon_taxon: 'สินค้าในหมวด %taxon%'
         products_index_of_all_products_in_your_store: 'สินค้า <small>สินค้าทั้งหมดในร้านค้าของคุณ</small>'
         profile: ข้อมูลส่วนตัว
         promotion_configuration: กำหนดค่าโปรโมชั่น

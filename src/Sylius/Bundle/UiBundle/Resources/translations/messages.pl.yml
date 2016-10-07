@@ -67,6 +67,7 @@ sylius:
         available_on_hand: Dostępny od ręki
         available_until: Dostępne do
         average_order_value: Średnia wartość zamówienia
+        awaiting_payment: Oczekujące na płatność
         back: Wróć
         back_to_store: Powrót do sklepu
         backorder: Zamówiony
@@ -105,6 +106,7 @@ sylius:
         company: Firma
         complete: Zakończ
         completed: Zakończone
+        configurable_product: Konfigurowalny produkt
         configuration: Konfiguracja
         configure_channels_available_in_your_store: Skonfiguruj kanały dostępne w twoim sklepie
         confirm_your_action: Potwierdź akcję
@@ -260,6 +262,7 @@ sylius:
         enabled: Włączone
         end_date: Data zakończenia
         ends_at: Data zakończenia
+        ends_with: Kończy się na
         enter_your_code: Wprowadź swój kod
         equal: Równe
         error: Błąd
@@ -373,6 +376,7 @@ sylius:
         manage_your_product_catalog: Zarządzaj katalogiem produktów
         manage_zones: Zarządzanie strefami
         marketing: Marketing
+        media: Media
         members: Kraje należące do strefy
         menu_nodes: Węzły menu
         menus: Menu
@@ -495,6 +499,7 @@ sylius:
         pricing: Cennik
         priority: Priorytet
         privacy_policy: Polityka Prywatności
+        process_your_orders: Przetwarzaj swoje zamówienia
         processing: Przetwarzany
         product: Produkt
         product_association_index: Powiązanie
@@ -511,10 +516,12 @@ sylius:
         promotion_configuration: Konfiguracja promocji
         promotion_coupons: Kupony
         promotion_details: Szczegóły promocji
+        promotion_discount: Rabaty
         promotion_total: Rabaty łącznie
         promotions: Promocje
         province: Województwo
         provinces: Województwa
+        purchased_from: Kupione w
         qty: Ilość
         qty_max: Ilość maks.
         qty_min: Ilość min.
@@ -577,6 +584,7 @@ sylius:
         show_all: Pokaż wszystko
         show_deleted: Pokaż usunięte
         show_in_store: Pokaż w sklepie
+        show_order_details: Pokaż szczegóły zamówienia
         sign_in: Zaloguj
         sign_in_to_the_store_or_create_new_account: 'Zaloguj się do sklepu <small>lub utwórz nowe konto</small>'
         sign_out: Wyloguj
@@ -587,6 +595,7 @@ sylius:
         slideshow_blocks: Bloki pokazu slajdów
         start_date: Data rozpoczęcia
         starts_at: Data rozpoczęcia
+        starts_with: Rozpoczyna się od
         state: Status
         status: Status
         street: Adres

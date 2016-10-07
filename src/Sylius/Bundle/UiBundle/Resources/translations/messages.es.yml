@@ -651,6 +651,7 @@ sylius:
         show_deleted: Mostrar eliminados
         show_in_store: Mostrar en la tienda
         show_metadata: Mostrar metadatos
+        show_order_details: Mostrar detalles del pedido
         sign_in: Inicia sesión
         sign_in_here: Inicie sesión aquí
         sign_in_to_the_store_or_create_new_account: 'Inicia sesión <small>o crea una cuenta</small>'

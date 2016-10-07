@@ -20,6 +20,9 @@ sylius:
         code:
             not_blank: Por favor introduzca el código del idioma.
             unique: Este idioma ya existe.
+    product_image:
+        code:
+            unique: El código de imagen debe ser único en este producto.
     product_variant:
         onHand:
             min: 'Las existencias deben ser mayores que {{ limit }}.'
@@ -32,9 +35,14 @@ sylius:
     product_translation:
         short_description:
             max: 'Breve descripción. No debe superar {{ limit }} caractéres.'
+    taxon_image:
+        code:
+            unique: El código de imagen debe ser único en este taxón.
     user:
         email:
             unique: Este correo electrónico ya está en uso.
         username:
             unique: Este nombre de usuario ya está en uso.
             not_blank: Por favor, introduzca su nombre.
+        locale_code:
+            not_blank: Por favor, selecciona un idioma.

@@ -6,22 +6,26 @@ sylius:
         admin:
             main:
                 catalog:
+                    attributes: Атрибути
+                    header: Каталог
                     options: Опції
-                    products: Продукти
+                    products: Продукція
                     taxons: Таксони
                 configuration:
+                    admin_users: Адміністратори
                     channels: Канали
                     countries: Країни
+                    currencies: Валюти
                     header: Конфігурація
                     locales: Локалі
-                    payment_methods: Варіанти оплати
+                    payment_methods: Методи оплати
                     shipping_methods: Методи доставки
                     tax_categories: Категорії оподаткування
                     tax_rates: Податкові ставки
-                    zones: Пояси
+                    zones: Зони
                 marketing:
                     header: Маркетинг
-                    promotions: Промо-акції
+                    promotions: Промоції
                 customers:
                     customers: Клієнти
                     header: Клієнт
@@ -29,5 +33,6 @@ sylius:
                     header: Продажі
                     orders: Замовлення
                 content:
-                    header: Зміст
+                    header: Вміст
+                    static_contents: Статичний вміст
                     routes: Маршрути

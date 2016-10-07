@@ -16,8 +16,8 @@ sylius:
         add_attributes: Додати атрибути
         add_coupon: Додати купон
         add_image: Додати зображення
-        add_member: Додати члена групи
-        add_province: Додати провінцію
+        add_member: Додати учасника
+        add_province: Додати регіон
         add_rule: Додати правило
         add_to_cart: У кошик
         add_value: Додати значення
@@ -186,7 +186,7 @@ sylius:
         manage_tax_rates: Керувати податковими ставками
         manage_zones: Керувати зонами
         marketing: Маркетинг
-        members: Члени
+        members: Учасники
         menu_nodes: Елементи меню
         menus: Меню
         message: Повідомлення
@@ -263,9 +263,9 @@ sylius:
         promotion_coupons: Купони
         promotion_details: Подробиці акції
         promotion_total: Загальна сума промо-знижки
-        promotions: Промо-акції
-        province: Область
-        provinces: Області
+        promotions: Промоції
+        province: Регіон
+        provinces: Регіони
         qty: К-сть
         quantity: К-сть
         ready: Готовий
@@ -287,7 +287,7 @@ sylius:
         sales_this_month: Продажі
         save: Зберегти
         save_changes: Зберегти зміни
-        scope: Сфера
+        scope: Покриття
         search: Пошук
         security_settings: Налаштування безпеки
         set_as_default_billing_address: Встановити як платіжну адресу за замовчуванням
@@ -360,4 +360,4 @@ sylius:
         your_products: Ваші продукти
         zone: Зона
         zone_details: Подробиці про зону
-        zones: Пояси
+        zones: Зони
