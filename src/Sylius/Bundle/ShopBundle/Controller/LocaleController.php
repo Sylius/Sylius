@@ -81,7 +81,7 @@ final class LocaleController
      *
      * @return Response
      */
-    public function switchLocaleAction(Request $request, $code)
+    public function switchAction(Request $request, $code)
     {
         if (!in_array($code, $this->localeProvider->getAvailableLocalesCodes())) {
             throw new HttpException(
