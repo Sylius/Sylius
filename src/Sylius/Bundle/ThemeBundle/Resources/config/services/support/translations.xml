@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.theme.translation.translator" class="Sylius\Bundle\ThemeBundle\Translation\Translator" public="false">
+        <service id="sylius.theme.translation.translator" class="Sylius\Bundle\ThemeBundle\Translation\Translator" decorates="translator.default" public="false">
             <argument type="service" id="sylius.theme.translation.loader_provider" />
             <argument type="service" id="sylius.theme.translation.resource_provider" />
             <argument type="service" id="sylius.theme.translation.fallback_locales_provider" />

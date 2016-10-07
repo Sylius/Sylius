@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SyliusThemeBundle extends Bundle
+final class SyliusThemeBundle extends Bundle
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,6 @@ class SyliusThemeBundle extends Bundle
         $themeExtension->addConfigurationSourceFactory(new FilesystemConfigurationSourceFactory());
         $themeExtension->addConfigurationSourceFactory(new TestConfigurationSourceFactory());
 
-        $container->addCompilerPass(new TranslatorAliasingPass());
         $container->addCompilerPass(new TranslatorFallbackLocalesPass());
         $container->addCompilerPass(new TranslatorLoaderProviderPass());
         $container->addCompilerPass(new TranslatorResourceProviderPass());
