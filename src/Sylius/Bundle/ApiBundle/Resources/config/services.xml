@@ -29,9 +29,5 @@
             <argument type="service" id="sylius.form.data_mapper.order_item_quantity"/>
             <tag name="form.type" alias="sylius_api_order_item" />
         </service>
-        <service id="sylius.form.type.api.product" class="Sylius\Bundle\CoreBundle\Form\Type\Api\ProductType">
-            <argument>%sylius.model.product.class%</argument>
-            <tag name="form.type" alias="sylius_api_product" />
-        </service>
     </services>
 </container>
