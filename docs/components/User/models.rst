@@ -89,7 +89,7 @@ As default has the following properties:
     This model implements ``UserInterface``
 
 CustomerGroup
------
+-------------
 
 The customer group is represented as a **CustomerGroup** instance. It can be used to classify customers.
 As default has the following properties:

@@ -14,6 +14,5 @@
     "first_name": "Roy",
     "last_name": "Doe",
     "birthday": "@string@.isDateTime()",
-    "gender": "u",
-    "groups": []
+    "gender": "u"
 }
