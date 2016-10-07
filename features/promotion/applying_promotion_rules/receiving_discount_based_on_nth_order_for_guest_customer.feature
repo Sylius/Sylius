@@ -15,7 +15,7 @@ Feature: Receiving discount based on nth order
         Given there is a promotion "1st order promotion"
         And it gives "$20.00" off customer's 1st order
         And I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "john.doe@example.com" and "United States" as shipping country
+        When I complete addressing step with email "john.doe@example.com" and "United States" based shipping address
         Then my cart total should be "$80.00"
         And my discount should be "-$20.00"
 
@@ -25,7 +25,7 @@ Feature: Receiving discount based on nth order
         And it gives "$20.00" off customer's 1st order
         And the customer "john.doe@example.com" has already placed an order "#001"
         And I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "john.doe@example.com" and "United States" as shipping country
+        When I complete addressing step with email "john.doe@example.com" and "United States" based shipping address
         Then my cart total should be "$100.00"
         And there should be no discount
 
@@ -34,6 +34,6 @@ Feature: Receiving discount based on nth order
         Given there is a promotion "2nd order promotion"
         And it gives "$10.00" off customer's 2nd order
         And I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "john.doe@example.com" and "United States" as shipping country
+        When I complete addressing step with email "john.doe@example.com" and "United States" based shipping address
         Then my cart total should be "$100.00"
         And there should be no discount

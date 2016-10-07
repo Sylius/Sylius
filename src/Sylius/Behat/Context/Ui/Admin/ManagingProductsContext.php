@@ -279,7 +279,7 @@ final class ManagingProductsContext implements Context
         $foundRows = $this->indexPage->countItems();
 
         Assert::same(
-            $numberOfProducts,
+            (int) $numberOfProducts,
             $foundRows,
             '%s rows with products should appear on page, %s rows has been found'
         );

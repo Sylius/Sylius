@@ -258,7 +258,7 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Then /^(this currency) should still have exchange rate equal to ((\d+)\.(\d+))$/
+     * @Then /^(this currency) should still have exchange rate equal to ([0-9\.]+)$/
      */
     public function theCurrencyShouldStillHaveExchangeRateEquals(CurrencyInterface $currency, $exchangeRate)
     {
@@ -288,8 +288,8 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldSeeCurrenciesInTheList($amountOfCurrencies)
     {
-        Assert::eq(
-            $amountOfCurrencies,
+        Assert::same(
+            (int) $amountOfCurrencies,
             $this->indexPage->countItems(),
             sprintf(
                 'Amount of currencies should be equal %d, but was %d.',

@@ -200,8 +200,8 @@ final class ManagingPromotionsContext implements Context
      */
     public function thereShouldBePromotion($number)
     {
-        Assert::eq(
-            $number,
+        Assert::same(
+            (int) $number,
             $this->indexPage->countItems(),
             'I should see %s promotions but i see only %2$s'
         );

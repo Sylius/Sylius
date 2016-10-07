@@ -30,7 +30,7 @@ final class ManagingCustomersContext implements Context
      * @var SharedStorageInterface
      */
     private $sharedStorage;
-    
+
     /**
      * @var IndexPageInterface
      */
@@ -159,7 +159,7 @@ final class ManagingCustomersContext implements Context
     public function iWantToChangeMyPassword()
     {
         $customer = $this->sharedStorage->get('customer');
-        
+
         $this->updatePage->open(['id' => $customer->getId()]);
     }
 
@@ -199,7 +199,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldSeeCustomersInTheList($amountOfCustomers)
     {
-        Assert::eq(
+        Assert::same(
             (int) $amountOfCustomers,
             $this->indexPage->countItems(),
             sprintf('Amount of customers should be equal %s, but is not.', $amountOfCustomers)
