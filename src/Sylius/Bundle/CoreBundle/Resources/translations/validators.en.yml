@@ -7,6 +7,9 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Please select shipping method.
+    currency:
+        enabled:
+            cannot_disable_base: The base currency cannot be disabled.
     customer:
         currency_code:
             not_valid: The currency code you entered is invalid.
