@@ -218,9 +218,10 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('expiration')
+                    ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('cart')->cannotBeEmpty()->end()
-                        ->scalarNode('order')->cannotBeEmpty()->end()
+                        ->scalarNode('cart')->defaultValue('2 days')->cannotBeEmpty()->end()
+                        ->scalarNode('order')->defaultValue('5 days')->cannotBeEmpty()->end()
                     ->end()
                 ->end()
             ->end()

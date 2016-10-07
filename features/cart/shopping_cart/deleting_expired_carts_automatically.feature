@@ -1,6 +1,6 @@
 @shopping_cart
 Feature: Deleting expired carts automatically
-    In order to get rid of started but not finished orders
+    In order to remove started but not finished orders after 2 days of idleness
     As an Administrator
     I want to have expired carts automatically deleted
 
