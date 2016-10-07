@@ -557,8 +557,8 @@ final class OrderContext implements Context
     /**
      * @param CustomerInterface $customer
      * @param ChannelInterface|null $channel
-     * @param null $currencyCode
-     * @param null $localeCode
+     * @param string|null $currencyCode
+     * @param string|null $localeCode
      *
      * @return OrderInterface
      */
@@ -586,7 +586,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @param $count
+     * @param int $count
      *
      * @return CustomerInterface[]
      */

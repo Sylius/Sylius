@@ -1,6 +1,6 @@
 @managing_orders
 Feature: Cancelling unpaid orders automatically
-    In order to get rid of completed but not paid orders
+    In order to get rid of completed orders after 5 days of being unpaid
     As an Administrator
     I want to have unpaid orders automatically cancelled
 
@@ -12,16 +12,16 @@ Feature: Cancelling unpaid orders automatically
 
     @domain
     Scenario: Having order cancelled after 10 days of being unpaid
-        And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
+        Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "PHP T-Shirt"
         And the customer chose "Free" shipping method to "United States" with "Paypal Express Checkout" payment
-        And this order has not been paid for 10 days
+        When this order has not been paid for 10 days
         Then this order should be automatically cancelled
 
     @domain
     Scenario: Having unpaid order not cancelled if expiration time has not been reached
-        And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
+        Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "PHP T-Shirt"
         And the customer chose "Free" shipping method to "United States" with "Paypal Express Checkout" payment
-        And this order has not been paid for 2 days
+        When this order has not been paid for 2 days
         Then this order should not be cancelled

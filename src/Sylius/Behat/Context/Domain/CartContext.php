@@ -56,12 +56,10 @@ final class CartContext implements Context
     /**
      * @Given /^(?:|he|she) abandoned (the cart) (\d+) (day|days|hour|hours) ago$/
      */
-    public function heAbandonedHisCartHoursAgo(OrderInterface $cart, $amount, $time)
+    public function theyAbandonedTheirCart(OrderInterface $cart, $amount, $time)
     {
         $cart->setUpdatedAt(new \DateTime('-'.$amount.' '.$time));
         $this->orderManager->flush();
-
-        $this->expiredCartsRemover->remove();
     }
 
     /**
@@ -69,6 +67,8 @@ final class CartContext implements Context
      */
     public function thisCartShouldBeAutomaticallyDeleted(OrderInterface $cart)
     {
+        $this->expiredCartsRemover->remove();
+
         Assert::null(
             $cart->getId(),
             'This cart should not exist in registry but it does.'
@@ -80,6 +80,8 @@ final class CartContext implements Context
      */
     public function thisCartShouldNotBeDeleted(OrderInterface $cart)
     {
+        $this->expiredCartsRemover->remove();
+
         Assert::notNull(
             $cart->getId(),
             'This cart should be in registry but it is not.'

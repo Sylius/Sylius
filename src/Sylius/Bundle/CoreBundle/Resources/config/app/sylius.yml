@@ -103,9 +103,6 @@ sylius_order:
         order_item_unit:
             classes:
                 model: Sylius\Component\Core\Model\OrderItemUnit
-    expiration:
-        cart: 2 days
-        order: 5 days
 
 sylius_payment:
     resources:

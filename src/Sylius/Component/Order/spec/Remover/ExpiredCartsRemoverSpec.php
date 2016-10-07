@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Order\Remover;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Remover\ExpiredCartsRemover;
 use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
@@ -44,7 +45,7 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         OrderInterface $firstCart,
         OrderInterface $secondCart
     ) {
-        $orderRepository->findCartsNotModifiedSince(new \DateTime('-2 months'))->willReturn([
+        $orderRepository->findCartsNotModifiedSince(Argument::type('\DateTime'))->willReturn([
             $firstCart,
             $secondCart
         ]);
