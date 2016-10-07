@@ -84,6 +84,13 @@
         </constraint>
     </class>
 
+    <class name="Sylius\Component\Locale\Model\Locale">
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\CannotDisableLocale">
+            <option name="message">sylius.locale.enabled.cannot_disable_base</option>
+            <option name="groups">sylius</option>
+        </constraint>
+    </class>
+
     <class name="Sylius\Component\Core\Model\Order">
         <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionSubjectCoupon">
             <option name="groups">sylius_promotion_coupon</option>

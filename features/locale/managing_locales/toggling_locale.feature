@@ -1,26 +1,27 @@
 @managing_locales
 Feature: Toggling a locale
-    In order to change locales in which the service is available to my customers
+    In order to change locales in which the store is available to my customers
     As an Administrator
-    I want to be able to switch state of locale between enable and disable
+    I want to be able to change availability of locales in store
 
     Background:
-        Given the store is available in the Armenian language
+        Given the store operates on a single channel
+        And that channel allows to shop using "English (United States)", "Spanish (Mexico)" and "Portuguese (Brazil)" locales
+        And it uses the "English (United States)" locale by default
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Disabling the locale
-        Given the Armenian language is enabled
-        When I disable the Armenian language
-        Then I should be notified about success
-        And this locale should still appear in the registry
-        But it should be disabled
-        And store should not be available in the Armenian language
+        Given the locale "Spanish (Mexico)" is enabled
+        And I want to edit this locale
+        When I disable it
+        And I save my changes
+        Then the store should not be available in the "Spanish (Mexico)" locale
 
-    @todo
+    @ui
     Scenario: Enabling the locale
-        Given the Armenian language is disabled
-        When I enable the Armenian language
-        Then I should be notified about success
-        And it should be enabled
-        And store should be available in the Armenian language
+        Given the locale "Portuguese (Brazil)" is disabled
+        And I want to edit this locale
+        When I enable it
+        And I save my changes
+        Then the store should be available in the "Portuguese (Brazil)" locale

@@ -17,6 +17,8 @@ sylius:
         code:
             not_blank: Please enter locale code.
             unique: This locale already exists.
+        enabled:
+            cannot_disable_base: The base locale cannot be disabled.
     product_image:
         code:
             unique: Image code must be unique within this product.

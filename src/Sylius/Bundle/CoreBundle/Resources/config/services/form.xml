@@ -53,6 +53,7 @@
         <service id="sylius.form.type.locale" class="%sylius.form.type.locale.class%">
             <argument>%sylius.model.locale.class%</argument>
             <argument>%sylius.validation_groups.locale%</argument>
+            <argument>%locale%</argument>
             <argument type="service" id="sylius.repository.locale" />
             <tag name="form.type" alias="sylius_locale" />
         </service>
