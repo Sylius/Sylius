@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Promotion;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 /**
@@ -88,4 +89,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param \DateTime $dateTime
      */
     public function setEndsAt(\DateTime $dateTime);
+
+    /**
+     * @return string
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getValidationMessageForAction();
 }

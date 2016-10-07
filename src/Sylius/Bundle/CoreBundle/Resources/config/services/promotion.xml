@@ -59,9 +59,9 @@
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <tag name="sylius.promotion_action" type="unit_percentage_discount" label="Item percentage discount" />
         </service>
-        <service id="sylius.promotion_action.shipping_discount" class="Sylius\Component\Core\Promotion\Action\ShippingDiscountAction">
+        <service id="sylius.promotion_action.shipping_percentage_discount" class="Sylius\Component\Core\Promotion\Action\ShippingPercentageDiscountAction">
             <argument type="service" id="sylius.factory.adjustment" />
-            <tag name="sylius.promotion_action" type="shipping_discount" label="Shipping percentage discount" />
+            <tag name="sylius.promotion_action" type="shipping_percentage_discount" label="Shipping percentage discount" />
         </service>
 
         <service id="sylius.promotion.eligibility_checker.promotion_coupon_per_customer_usage_limit"

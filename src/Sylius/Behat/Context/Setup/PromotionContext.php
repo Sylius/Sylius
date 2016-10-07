@@ -256,7 +256,7 @@ final class PromotionContext implements Context
      */
     public function itGivesPercentageDiscountOnShippingToEveryOrder(PromotionInterface $promotion, $discount)
     {
-        $action = $this->actionFactory->createPercentageShippingDiscount($discount);
+        $action = $this->actionFactory->createShippingPercentageDiscount($discount);
         $promotion->addAction($action);
 
         $this->objectManager->flush();
@@ -443,7 +443,7 @@ final class PromotionContext implements Context
         TaxonInterface $taxon,
         $targetAmount
     ) {
-        $freeShippingAction = $this->actionFactory->createPercentageShippingDiscount(1);
+        $freeShippingAction = $this->actionFactory->createShippingPercentageDiscount(1);
         $promotion->addAction($freeShippingAction);
 
         $rule = $this->ruleFactory->createItemTotal($targetAmount);

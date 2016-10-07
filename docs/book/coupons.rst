@@ -45,7 +45,7 @@ Let's create a promotion that will have a single coupon that activates the free 
    $actionFactory = $this->container->get('sylius.factory.promotion_action');
 
    // Provide the amount in float ( 1 = 100% )
-   $action = $actionFactory->createPercentageShippingDiscount(1);
+   $action = $actionFactory->createShippingPercentageDiscount(1);
 
    $promotion->addAction($action);
 

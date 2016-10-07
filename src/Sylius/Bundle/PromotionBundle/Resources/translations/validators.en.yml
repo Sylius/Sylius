@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    action:
+        percentage_discount_configuration:
+            min: The value of a percentage discount must be at least 0%.
+            max: The maximum value of a percentage discount is 100%.
     promotion:
         code:
             unique: The promotion with given code already exists.
