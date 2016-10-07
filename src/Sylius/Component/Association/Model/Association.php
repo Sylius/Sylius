@@ -12,7 +12,6 @@
 namespace Sylius\Component\Association\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
@@ -39,7 +38,7 @@ class Association implements AssociationInterface
     protected $owner;
 
     /**
-     * @var Collection<AssociableInterface>
+     * @var AssociableInterface[]
      */
     protected $associatedObjects;
 

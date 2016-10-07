@@ -36,9 +36,6 @@ class AssociationType implements AssociationTypeInterface
      */
     protected $name;
 
-    /**
-     * @param string $name
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -46,7 +43,7 @@ class AssociationType implements AssociationTypeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function __toString()
     {
@@ -84,6 +81,7 @@ class AssociationType implements AssociationTypeInterface
     {
         return $this->name;
     }
+
     /**
      * {@inheritdoc}
      */

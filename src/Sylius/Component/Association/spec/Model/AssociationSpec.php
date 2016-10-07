@@ -13,10 +13,13 @@ namespace spec\Sylius\Component\Association\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Association\Model\AssociableInterface;
+use Sylius\Component\Association\Model\Association;
 use Sylius\Component\Association\Model\AssociationInterface;
 use Sylius\Component\Association\Model\AssociationType;
 
 /**
+ * @mixin Association
+ *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -24,7 +27,7 @@ final class AssociationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Association\Model\Association');
+        $this->shouldHaveType(Association::class);
     }
 
     function it_implements_association_interface()
@@ -32,13 +35,13 @@ final class AssociationSpec extends ObjectBehavior
         $this->shouldHaveType(AssociationInterface::class);
     }
 
-    function it_has_owner_object(AssociableInterface $product)
+    function it_has_owner(AssociableInterface $product)
     {
         $this->setOwner($product);
         $this->getOwner()->shouldReturn($product);
     }
 
-    function it_has_association_type_object(AssociationType $associationType)
+    function it_has_type(AssociationType $associationType)
     {
         $this->setType($associationType);
         $this->getType()->shouldReturn($associationType);
@@ -53,8 +56,10 @@ final class AssociationSpec extends ObjectBehavior
     function it_checks_if_product_is_associated(AssociableInterface $product)
     {
         $this->hasAssociatedObject($product)->shouldReturn(false);
+
         $this->addAssociatedObject($product);
         $this->hasAssociatedObject($product)->shouldReturn(true);
+
         $this->removeAssociatedObject($product);
         $this->hasAssociatedObject($product)->shouldReturn(false);
     }
