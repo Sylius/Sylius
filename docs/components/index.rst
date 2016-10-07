@@ -30,7 +30,6 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
     Registry/index
     Resource/index
     Shipping/index
-    Storage/index
     Taxation/index
     Taxonomy/index
     User/index

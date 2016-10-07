@@ -45,8 +45,8 @@
             <argument type="service" id="sylius.context.channel" />
         </service>
 
-        <service id="sylius.storage.currency" class="Sylius\Component\Core\Currency\CurrencyStorage">
-            <argument type="service" id="sylius.storage.session" />
+        <service id="sylius.storage.currency" class="Sylius\Component\Core\Currency\SessionBasedCurrencyStorage">
+            <argument type="service" id="session" />
         </service>
 
         <service id="sylius.context.currency.core" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency">
@@ -78,8 +78,8 @@
             <argument>%locale%</argument>
         </service>
 
-        <service id="sylius.storage.locale" class="Sylius\Component\Core\Locale\LocaleStorage">
-            <argument type="service" id="sylius.storage.session" />
+        <service id="sylius.storage.locale" class="Sylius\Component\Core\Locale\SessionBasedLocaleStorage">
+            <argument type="service" id="session" />
         </service>
 
         <service id="sylius.context.locale.core" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale">

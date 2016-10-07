@@ -16,7 +16,6 @@
         <import resource="services/console.xml" />
         <import resource="services/controller.xml" />
         <import resource="services/routing.xml" />
-        <import resource="services/storage.xml" />
     </imports>
 
     <parameters>

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "096ea8f8521cb8a5894d21d914aa31e7",
-    "content-hash": "10d47d5d2cdc51a4db57c6dc19aada13",
+    "hash": "ae6c239b6ea45b3b7bf05be52d9fe3f9",
+    "content-hash": "3ad3b198a80706399d89c8efc51a017d",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -8443,7 +8443,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -8536,7 +8536,7 @@
             ],
             "authors": [
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }

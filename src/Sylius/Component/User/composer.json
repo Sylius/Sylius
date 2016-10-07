@@ -32,7 +32,6 @@
 
         "doctrine/collections": "^1.1",
         "sylius/resource": "^1.0",
-        "sylius/storage": "^1.0",
         "symfony/security": "^2.8",
         "symfony/polyfill-mbstring": "~1.0"
     },

@@ -4,26 +4,26 @@ namespace spec\Sylius\Component\Core\Locale;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Core\Locale\LocaleStorage;
+use Sylius\Component\Core\Locale\SessionBasedLocaleStorage;
 use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Storage\StorageInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * @mixin LocaleStorage
+ * @mixin SessionBasedLocaleStorage
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class LocaleStorageSpec extends ObjectBehavior
+final class SessionBasedLocaleStorageSpec extends ObjectBehavior
 {
-    function let(StorageInterface $storage)
+    function let(SessionInterface $session)
     {
-        $this->beConstructedWith($storage);
+        $this->beConstructedWith($session);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(LocaleStorage::class);
+        $this->shouldHaveType(SessionBasedLocaleStorage::class);
     }
 
     function it_is_a_locale_storage()
@@ -32,34 +32,34 @@ final class LocaleStorageSpec extends ObjectBehavior
     }
 
     function it_sets_locale_for_given_channel(
-        StorageInterface $storage,
+        SessionInterface $session,
         ChannelInterface $channel
     ) {
         $channel->getCode()->willReturn('web');
 
-        $storage->setData('_locale_web', 'BTC')->shouldBeCalled();
+        $session->set('_locale_web', 'BTC')->shouldBeCalled();
 
         $this->set($channel, 'BTC');
     }
 
     function it_gets_locale_for_given_channel(
-        StorageInterface $storage,
+        SessionInterface $session,
         ChannelInterface $channel
     ) {
         $channel->getCode()->willReturn('web');
 
-        $storage->getData('_locale_web')->willReturn('BTC');
+        $session->get('_locale_web')->willReturn('BTC');
 
         $this->get($channel)->shouldReturn('BTC');
     }
 
     function it_throws_a_locale_not_found_exception_if_storage_does_not_have_locale_code_for_given_channel(
-        StorageInterface $storage,
+        SessionInterface $session,
         ChannelInterface $channel
     ) {
         $channel->getCode()->willReturn('web');
 
-        $storage->getData('_locale_web')->willReturn(null);
+        $session->get('_locale_web')->willReturn(null);
 
         $this->shouldThrow(LocaleNotFoundException::class)->during('get', [$channel]);
     }
