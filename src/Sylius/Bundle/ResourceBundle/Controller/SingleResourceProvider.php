@@ -26,6 +26,13 @@ class SingleResourceProvider implements SingleResourceProviderInterface
         if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
             $callable = [$repository, $repositoryMethod];
 
+            if (!method_exists($repository, $repositoryMethod)) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Method "%s" does not exist on repository of class "%s"',
+                    $repositoryMethod, get_class($repository)
+                ));
+            }
+
             return call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
         }
 
@@ -33,7 +40,17 @@ class SingleResourceProvider implements SingleResourceProviderInterface
         $request = $requestConfiguration->getRequest();
 
         if ($request->attributes->has('id')) {
-            return $repository->find($request->attributes->get('id'));
+            $identifier = $request->attributes->get('id');
+            $resource = $repository->find($identifier);
+
+            if (!$resource) {
+                throw new \InvalidArgumentException(sprintf(
+                    'Could not find resource by ID "%s" from repository "%s"',
+                    $identifier, get_class($repository)
+                ));
+            }
+
+            return $resource;
         }
 
         if ($request->attributes->has('slug')) {
@@ -42,6 +59,15 @@ class SingleResourceProvider implements SingleResourceProviderInterface
 
         $criteria = array_merge($criteria, $requestConfiguration->getCriteria());
 
-        return $repository->findOneBy($criteria);
+        $resource = $repository->findOneBy($criteria);
+
+        if (!$resource) {
+            throw new \InvalidArgumentException(sprintf(
+                'Could not find resource by criteria "%s" in repository "%s"',
+                json_encode($criteria), get_class($repository)
+            ));
+        }
+
+        return $resource;
     }
 }
