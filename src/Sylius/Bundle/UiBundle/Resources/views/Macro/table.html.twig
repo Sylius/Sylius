@@ -2,16 +2,18 @@
     {% import 'SyliusUiBundle:Macro:sorting.html.twig' as sorting %}
 
     {% for field in definition.fields %}
-        {% if grid.isSortableBy(field.name) %}
-            {% set sortingOrder = grid.getSortingOrder(field.name) %}
+        {% if field.enabled %}
+            {% if grid.isSortableBy(field.name) %}
+                {% set sortingOrder = grid.getSortingOrder(field.name) %}
 
-            {% if grid.isSortedBy(field.name) %}
-                {{ sorting.sortedHeader(definition, field, requestAttributes, sortingOrder, grid.parameters.all) }}
+                {% if grid.isSortedBy(field.name) %}
+                    {{ sorting.sortedHeader(definition, field, requestAttributes, sortingOrder, grid.parameters.all) }}
+                {% else %}
+                    {{ sorting.sortableHeader(definition, field, requestAttributes, sortingOrder, grid.parameters.all) }}
+                {% endif %}
             {% else %}
-                {{ sorting.sortableHeader(definition, field, requestAttributes, sortingOrder, grid.parameters.all) }}
+                <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
             {% endif %}
-        {% else %}
-            <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
         {% endif %}
     {% endfor %}
     {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
@@ -21,7 +23,9 @@
 
 {% macro row(grid, definition, row) %}
     {% for field in definition.fields %}
-        <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
+        {% if field.enabled %}
+            <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
+        {% endif %}
     {% endfor %}
     {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
         <td>
