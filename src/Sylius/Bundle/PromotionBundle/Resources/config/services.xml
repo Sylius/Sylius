@@ -40,7 +40,7 @@
             <argument>rule checker</argument>
         </service>
         <service id="sylius.registry.promotion_action" class="Sylius\Component\Registry\ServiceRegistry">
-            <argument>Sylius\Component\Promotion\Action\PromotionActionInterface</argument>
+            <argument>Sylius\Component\Promotion\Action\PromotionActionCommandInterface</argument>
             <argument>promotion action</argument>
         </service>
 

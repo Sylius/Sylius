@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Webmozart\Assert\Assert;
@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-abstract class DiscountAction implements PromotionActionInterface
+abstract class DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
     /**
      * @param array $configuration

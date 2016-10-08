@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface ActionInterface extends ResourceInterface
+interface PromotionActionInterface extends ResourceInterface
 {
     /**
      * @return string

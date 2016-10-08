@@ -107,10 +107,10 @@ It has the following properties as default:
 
 .. _component_promotion_model_action:
 
-Action
-------
+PromotionAction
+---------------
 
-The promotion action is represented by an **Action** instance. Action takes place if the rules of a promotion are satisfied.
+The promotion action is represented by an **PromotionAction** instance. PromotionAction takes place if the rules of a promotion are satisfied.
 It has the following properties as default:
 
 +----------------+------------------------------------------+

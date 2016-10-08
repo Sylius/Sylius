@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class ActionType extends AbstractConfigurationType
+class PromotionActionType extends AbstractConfigurationType
 {
     /**
      * {@inheritdoc}
@@ -34,7 +34,7 @@ class ActionType extends AbstractConfigurationType
                 ],
             ])
             ->addEventSubscriber(
-                new BuildActionFormSubscriber(
+                new BuildPromotionActionFormSubscriber(
                     $this->registry,
                     $builder->getFormFactory(),
                     (isset($options['configuration_type'])) ? $options['configuration_type'] : null

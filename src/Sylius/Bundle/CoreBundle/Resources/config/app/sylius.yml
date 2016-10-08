@@ -160,7 +160,7 @@ sylius_promotion:
                     default: Sylius\Bundle\CoreBundle\Form\Type\CouponType
         promotion_action:
             classes:
-                factory: Sylius\Component\Core\Factory\ActionFactory
+                factory: Sylius\Component\Core\Factory\PromotionActionFactory
 
 sylius_resource:
     translation:

@@ -168,16 +168,16 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function removeRule(PromotionRuleInterface $rule);
 
     /**
-     * @return Collection|ActionInterface[]
+     * @return Collection|PromotionActionInterface[]
      */
     public function getActions();
 
     /**
-     * @param ActionInterface $action
+     * @param PromotionActionInterface $action
      *
      * @return bool
      */
-    public function hasAction(ActionInterface $action);
+    public function hasAction(PromotionActionInterface $action);
 
     /**
      * @return bool
@@ -185,12 +185,12 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function hasActions();
 
     /**
-     * @param ActionInterface $action
+     * @param PromotionActionInterface $action
      */
-    public function addAction(ActionInterface $action);
+    public function addAction(PromotionActionInterface $action);
 
     /**
-     * @param ActionInterface $action
+     * @param PromotionActionInterface $action
      */
-    public function removeAction(ActionInterface $action);
+    public function removeAction(PromotionActionInterface $action);
 }

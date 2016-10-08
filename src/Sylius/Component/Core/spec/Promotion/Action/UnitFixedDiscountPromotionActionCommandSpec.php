@@ -19,16 +19,19 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Promotion\Action\UnitDiscountAction;
+use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
+ * @mixin UnitFixedDiscountPromotionActionCommand
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class UnitFixedDiscountActionSpec extends ObjectBehavior
+final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $adjustmentFactory,
@@ -40,12 +43,12 @@ final class UnitFixedDiscountActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\UnitFixedDiscountAction');
+        $this->shouldHaveType(UnitFixedDiscountPromotionActionCommand::class);
     }
 
     function it_is_discount_action()
     {
-        $this->shouldHaveType(UnitDiscountAction::class);
+        $this->shouldHaveType(UnitDiscountPromotionActionCommand::class);
     }
 
     function it_applies_fixed_discount_on_every_unit_in_order(

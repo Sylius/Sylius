@@ -18,16 +18,19 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Promotion\Action\UnitDiscountAction;
+use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
+use Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
+ * @mixin UnitPercentageDiscountPromotionActionCommand
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class UnitPercentageDiscountActionSpec extends ObjectBehavior
+final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $adjustmentFactory,
@@ -39,12 +42,12 @@ final class UnitPercentageDiscountActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountAction');
+        $this->shouldHaveType(UnitPercentageDiscountPromotionActionCommand::class);
     }
 
     function it_is_item_discount_action()
     {
-        $this->shouldHaveType(UnitDiscountAction::class);
+        $this->shouldHaveType(UnitDiscountPromotionActionCommand::class);
     }
 
     function it_applies_percentage_discount_on_every_unit_in_order(

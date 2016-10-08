@@ -35,12 +35,12 @@ This interface should be implemented by models representing a **Promotion**.
 
 .. _component_promotion_model_action-interface:
 
-ActionInterface
-~~~~~~~~~~~~~~~
+PromotionActionInterface
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-This interface should be implemented by models representing an **Action**.
+This interface should be implemented by models representing an **PromotionAction**.
 
-An **ActionInterface** has two defined types by default:
+An **PromotionActionInterface** has two defined types by default:
 
 +--------------------------+---------------------+
 | Related constant         | Type                |
@@ -52,9 +52,9 @@ An **ActionInterface** has two defined types by default:
 
 .. note::
 
-    You will find more information about this interface in `Sylius API ActionInterface`_.
+    You will find more information about this interface in `Sylius API PromotionActionInterface`_.
 
-.. _Sylius API ActionInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/ActionInterface.html
+.. _Sylius API PromotionActionInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionActionInterface.html
 
 .. _component_promotion_model_coupon-interface:
 
@@ -228,13 +228,13 @@ In order to automate the process of coupon generation your system needs to have 
 
 .. _component_promotion_model_action-action-interface:
 
-PromotionActionInterface
-~~~~~~~~~~~~~~~~~~~~~~~~
+PromotionActionCommandInterface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This interface should be implemented by services that execute actions on the promotion subjects.
 
 .. note::
 
-    You will find more information about this interface in `Sylius API PromotionActionInterface`_.
+    You will find more information about this interface in `Sylius API PromotionActionCommandInterface`_.
 
-.. _Sylius API PromotionActionInterface: http://api.sylius.org/Sylius/Component/Promotion/Action/PromotionActionInterface.html
+.. _Sylius API PromotionActionCommandInterface: http://api.sylius.org/Sylius/Component/Promotion/Action/PromotionActionCommandInterface.html

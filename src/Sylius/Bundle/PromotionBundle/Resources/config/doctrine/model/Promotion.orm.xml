@@ -42,7 +42,7 @@
                 <cascade-all />
             </cascade>
         </one-to-many>
-        <one-to-many field="actions" target-entity="Sylius\Component\Promotion\Model\ActionInterface" mapped-by="promotion" orphan-removal="true">
+        <one-to-many field="actions" target-entity="Sylius\Component\Promotion\Model\PromotionActionInterface" mapped-by="promotion" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>

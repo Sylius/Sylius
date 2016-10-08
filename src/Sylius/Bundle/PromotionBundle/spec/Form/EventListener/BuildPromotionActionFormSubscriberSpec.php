@@ -14,9 +14,9 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber;
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
-use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSubscriber;
+use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
+use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
@@ -24,13 +24,15 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
+ * @mixin BuildPromotionActionFormSubscriber
+ *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class BuildActionFormSubscriberSpec extends ObjectBehavior
+final class BuildPromotionActionFormSubscriberSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $registry,
-        PromotionActionInterface $action,
+        PromotionActionCommandInterface $action,
         FormFactoryInterface $factory
     ) {
         $action->getConfigurationFormType()->willReturn('sylius_promotion_action_fixed_discount_configuration');
@@ -41,7 +43,7 @@ final class BuildActionFormSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(BuildActionFormSubscriber::class);
+        $this->shouldHaveType(BuildPromotionActionFormSubscriber::class);
     }
 
     function it_is_configuration_subscriber()
@@ -51,7 +53,7 @@ final class BuildActionFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_events()
     {
-        $this::getSubscribedEvents()->shouldReturn([
+        static::getSubscribedEvents()->shouldReturn([
             FormEvents::PRE_SET_DATA => 'preSetData',
             FormEvents::POST_SET_DATA => 'postSetData',
             FormEvents::PRE_SUBMIT => 'preSubmit',
@@ -59,9 +61,9 @@ final class BuildActionFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_adds_configuration_fields_in_pre_set_data(
-        $factory,
+        FormFactoryInterface $factory,
+        PromotionActionInterface $action,
         FormEvent $event,
-        ActionInterface $action,
         Form $form,
         Form $field
     ) {
@@ -82,9 +84,8 @@ final class BuildActionFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_adds_configuration_fields_in_pre_submit_data(
-        $factory,
+        FormFactoryInterface $factory,
         FormEvent $event,
-        ActionInterface $action,
         Form $form,
         Form $field
     ) {
@@ -103,8 +104,8 @@ final class BuildActionFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_sets_type_in_post_set_data(
+        PromotionActionInterface $action,
         FormEvent $event,
-        ActionInterface $action,
         Form $form
     ) {
         $event->getData()->willReturn($action);

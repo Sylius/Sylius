@@ -14,7 +14,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Promotion\Action\PromotionActionInterface;
+use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingPercentageDiscountAction implements PromotionActionInterface
+class ShippingPercentageDiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
     const TYPE = 'shipping_percentage_discount';
 
