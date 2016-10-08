@@ -70,19 +70,7 @@ final class ShippingMethodTypeSpec extends ObjectBehavior
             ->add('translations', 'sylius_translations', Argument::any())
             ->willReturn($builder)
         ;
-
-        $builder
-            ->add('category', 'sylius_shipping_category_choice', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('categoryRequirement', 'choice', Argument::type('array'))
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
+        
         $builder
             ->add('calculator', 'sylius_shipping_calculator_choice', Argument::any())
             ->shouldBeCalled()

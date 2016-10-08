@@ -7,11 +7,6 @@
                 {{ form_row(form.zone) }}
             </div>
             {{ form_row(form.enabled) }}
-            <h4 class="ui dividing header">{{ 'sylius.ui.category_requirements'|trans }}</h4>
-            {{ form_row(form.category) }}
-            {% for categoryRequirementChoiceForm in form.categoryRequirement %}
-                {{ form_row(categoryRequirementChoiceForm) }}
-            {% endfor %}
             <h4 class="ui dividing header">{{ 'sylius.ui.charges_and_taxes'|trans }}</h4>
             {{ form_row(form.taxCategory) }}
             {{ form_row(form.calculator) }}

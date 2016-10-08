@@ -39,18 +39,6 @@ class ShippingMethod implements ShippingMethodInterface
     protected $code;
 
     /**
-     * @var ShippingCategoryInterface
-     */
-    protected $category;
-
-    /**
-     * The one of 3 requirement variants.
-     *
-     * @var int
-     */
-    protected $categoryRequirement = ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY;
-
-    /**
      * @var string
      */
     protected $calculator;
@@ -99,47 +87,7 @@ class ShippingMethod implements ShippingMethodInterface
     {
         $this->code = $code;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCategory(ShippingCategoryInterface $category = null)
-    {
-        $this->category = $category;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategoryRequirement()
-    {
-        return $this->categoryRequirement;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCategoryRequirement($categoryRequirement)
-    {
-        $this->categoryRequirement = $categoryRequirement;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCategoryRequirementLabel()
-    {
-        return self::getCategoryRequirementLabels()[$this->categoryRequirement];
-    }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -202,17 +150,5 @@ class ShippingMethod implements ShippingMethodInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-    }
-
-    /**
-     * @return array
-     */
-    public static function getCategoryRequirementLabels()
-    {
-        return [
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE => 'None of the units have to match the method category',
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY => 'At least 1 unit has to match the method category',
-            ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL => 'All units has to match the method category',
-        ];
     }
 }

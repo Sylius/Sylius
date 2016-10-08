@@ -18,14 +18,9 @@
             <argument type="service" id="sylius.repository.locale" />
         </service>
 
-        <service id="sylius.fixture.example_factory.shipping_category" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ShippingCategoryExampleFactory">
-            <argument type="service" id="sylius.factory.shipping_category" />
-        </service>
-
         <service id="sylius.fixture.example_factory.shipping_method" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ShippingMethodExampleFactory">
             <argument type="service" id="sylius.factory.shipping_method" />
             <argument type="service" id="sylius.repository.zone" />
-            <argument type="service" id="sylius.repository.shipping_category" />
             <argument type="service" id="sylius.repository.locale" />
         </service>
 

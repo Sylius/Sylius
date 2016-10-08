@@ -21,7 +21,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
@@ -35,10 +34,9 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
 {
     function let(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneMatcherInterface $zoneMatcher,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+        ZoneMatcherInterface $zoneMatcher
     ) {
-        $this->beConstructedWith($shippingMethodRepository, $zoneMatcher, $eligibilityChecker);
+        $this->beConstructedWith($shippingMethodRepository, $zoneMatcher);
     }
 
     function it_is_initializable()
@@ -52,7 +50,6 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
     }
 
     function it_returns_shipping_methods_matched_for_shipment_order_shipping_address_and_order_channel(
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         AddressInterface $address,
         ChannelInterface $channel,
         OrderInterface $order,
@@ -75,14 +72,10 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
             ->willReturn([$firstShippingMethod, $secondShippingMethod])
         ;
 
-        $eligibilityChecker->isEligible($shipment, $firstShippingMethod)->willReturn(true);
-        $eligibilityChecker->isEligible($shipment, $secondShippingMethod)->willReturn(true);
-
         $this->getSupportedMethods($shipment)->shouldReturn([$firstShippingMethod, $secondShippingMethod]);
     }
 
     function it_returns_empty_array_if_zone_matcher_could_not_match_any_zone(
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         OrderInterface $order,
         AddressInterface $address,
         ChannelInterface $channel,
@@ -96,36 +89,6 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $zoneMatcher->matchAll($address)->willReturn([]);
 
         $this->getSupportedMethods($shipment)->shouldReturn([]);
-    }
-
-    function it_returns_only_shipping_methods_that_are_eligible(
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
-        AddressInterface $address,
-        ChannelInterface $channel,
-        OrderInterface $order,
-        ShipmentInterface $shipment,
-        ShippingMethodInterface $firstShippingMethod,
-        ShippingMethodInterface $secondShippingMethod,
-        ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneInterface $firstZone,
-        ZoneInterface $secondZone,
-        ZoneMatcherInterface $zoneMatcher
-    ) {
-        $shipment->getOrder()->willReturn($order);
-        $order->getShippingAddress()->willReturn($address);
-        $order->getChannel()->willReturn($channel);
-
-        $zoneMatcher->matchAll($address)->willReturn([$firstZone, $secondZone]);
-
-        $eligibilityChecker->isEligible($shipment, $firstShippingMethod)->willReturn(false);
-        $eligibilityChecker->isEligible($shipment, $secondShippingMethod)->willReturn(true);
-
-        $shippingMethodRepository
-            ->findEnabledForZonesAndChannel([$firstZone, $secondZone], $channel)
-            ->willReturn([$firstShippingMethod, $secondShippingMethod])
-        ;
-
-        $this->getSupportedMethods($shipment)->shouldReturn([$secondShippingMethod]);
     }
 
     function it_supports_shipments_with_order_and_its_shipping_address_defined(

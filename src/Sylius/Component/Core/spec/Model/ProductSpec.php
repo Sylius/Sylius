@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageAwareInterface;
@@ -19,8 +20,8 @@ use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Product\Model\Product as SyliusProduct;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Product\Model\Product as BaseProduct;
+use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 /**
  * @mixin Product
@@ -39,10 +40,10 @@ final class ProductSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\Product');
+        $this->shouldHaveType(Product::class);
     }
 
-    function it_implements_Sylius_core_product_interface()
+    function it_implements_core_product_interface()
     {
         $this->shouldImplement(ProductInterface::class);
     }
@@ -52,9 +53,9 @@ final class ProductSpec extends ObjectBehavior
         $this->shouldImplement(ImageAwareInterface::class);
     }
 
-    function it_extends_Sylius_product_model()
+    function it_extends_base_product_model()
     {
-        $this->shouldHaveType(SyliusProduct::class);
+        $this->shouldHaveType(BaseProduct::class);
     }
 
     function it_initializes_taxon_collection_by_default()
@@ -66,6 +67,39 @@ final class ProductSpec extends ObjectBehavior
     {
         $this->setTaxons($taxons);
         $this->getTaxons()->shouldReturn($taxons);
+    }
+
+    function its_returns_taxons_which_has_root_taxons_code_same_as_given(
+        BaseTaxonInterface $firstTaxon,
+        BaseTaxonInterface $secondTaxon,
+        BaseTaxonInterface $firstRootTaxon,
+        BaseTaxonInterface $secondRootTaxon
+    ) {
+        $this->setTaxons(new ArrayCollection([$firstTaxon->getWrappedObject(), $secondTaxon->getWrappedObject()]));
+
+        $firstTaxon->getRoot()->willReturn($firstRootTaxon);
+        $firstRootTaxon->getCode()->willReturn('t-shirts');
+
+        $secondTaxon->getRoot()->willReturn($secondRootTaxon);
+        $secondRootTaxon->getCode()->willReturn('underwear');
+
+        $this->getTaxons('t-shirts')->shouldBeLike(new ArrayCollection([$firstTaxon->getWrappedObject()]));
+    }
+
+    function it_initializes_channel_collection_by_default()
+    {
+        $this->getChannels()->shouldHaveType(Collection::class);
+    }
+
+    function its_channel_collection_is_mutable(Collection $channel)
+    {
+        $this->setChannels($channel);
+        $this->getChannels()->shouldReturn($channel);
+    }
+
+    function it_initializes_reviews_collection_by_default()
+    {
+        $this->getReviews()->shouldHaveType(Collection::class);
     }
 
     function its_variant_selection_method_is_choice_by_default()
@@ -85,18 +119,7 @@ final class ProductSpec extends ObjectBehavior
             ->duringSetVariantSelectionMethod('foo')
         ;
     }
-
-    function it_has_no_shipping_category_by_default()
-    {
-        $this->getShippingCategory()->shouldReturn(null);
-    }
-
-    function its_shipping_category_is_mutable(ShippingCategoryInterface $shippingCategory)
-    {
-        $this->setShippingCategory($shippingCategory);
-        $this->getShippingCategory()->shouldReturn($shippingCategory);
-    }
-
+    
     function it_has_no_main_taxon_by_default()
     {
         $this->getMainTaxon()->shouldReturn(null);

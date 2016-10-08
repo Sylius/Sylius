@@ -53,18 +53,6 @@ Configuration Reference
                             default: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType
                     validation_groups:
                         default: [ sylius ]
-            shipping_category:
-                classes:
-                    model:      Sylius\Component\Shipping\Model\ShippingCategory
-                    interface:  Sylius\Component\Shipping\Model\ShippingCategoryInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                    repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType
-                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
-                validation_groups:
-                    default: [ sylius ]
 
         validation_groups:
             shipping_calculator_flat_rate_configuration: [sylius]

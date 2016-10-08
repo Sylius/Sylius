@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Shipping\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
@@ -62,37 +61,6 @@ final class ShippingMethodSpec extends ObjectBehavior
     {
         $this->setEnabled(false);
         $this->shouldNotBeEnabled();
-    }
-
-    function it_does_not_belong_to_category_by_default()
-    {
-        $this->getCategory()->shouldReturn(null);
-    }
-
-    function it_allows_assigning_itself_to_category(ShippingCategoryInterface $category)
-    {
-        $this->setCategory($category);
-        $this->getCategory()->shouldReturn($category);
-    }
-
-    function it_allows_detaching_itself_from_category(ShippingCategoryInterface $category)
-    {
-        $this->setCategory($category);
-        $this->getCategory()->shouldReturn($category);
-
-        $this->setCategory(null);
-        $this->getCategory()->shouldReturn(null);
-    }
-
-    function it_has_match_any_category_requirement_by_default()
-    {
-        $this->getCategoryRequirement()->shouldReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
-    }
-
-    function its_category_matching_requirement_is_mutable()
-    {
-        $this->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
-        $this->getCategoryRequirement()->shouldReturn(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
     }
 
     function it_is_unnamed_by_default()

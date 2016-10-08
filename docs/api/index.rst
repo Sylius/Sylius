@@ -13,7 +13,6 @@ The API Guide
     users
     customers
     shipments
-    shipping_categories
     payments
     promotions
 

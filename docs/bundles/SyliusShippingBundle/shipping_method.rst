@@ -10,10 +10,6 @@ The Shipping Method
 +---------------------+----------------------------------------------+
 | name                | Name of the shipping method                  |
 +---------------------+----------------------------------------------+
-| category            | Reference to **ShippingCategory** (optional) |
-+---------------------+----------------------------------------------+
-| categoryRequirement | Category requirement                         |
-+---------------------+----------------------------------------------+
 | calculator          | Name of the cost calculator                  |
 +---------------------+----------------------------------------------+
 | configuration       | Configuration for the calculator             |

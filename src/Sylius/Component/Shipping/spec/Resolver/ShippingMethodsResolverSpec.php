@@ -13,9 +13,9 @@ namespace spec\Sylius\Component\Shipping\Resolver;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
@@ -23,11 +23,8 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
  */
 final class ShippingMethodsResolverSpec extends ObjectBehavior
 {
-    function let(
-        ObjectRepository $methodRepository,
-        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
-    ) {
-        $this->beConstructedWith($methodRepository, $eligibilityChecker);
+    function let(ShippingMethodRepositoryInterface $methodRepository) {
+        $this->beConstructedWith($methodRepository);
     }
 
     function it_is_initializable()
@@ -41,8 +38,7 @@ final class ShippingMethodsResolverSpec extends ObjectBehavior
     }
 
     function it_returns_all_methods_eligible_for_given_subject(
-        $methodRepository,
-        $eligibilityChecker,
+        ShippingMethodRepositoryInterface $methodRepository,
         ShippingSubjectInterface $subject,
         ShippingMethodInterface $method1,
         ShippingMethodInterface $method2,
@@ -51,10 +47,6 @@ final class ShippingMethodsResolverSpec extends ObjectBehavior
         $methods = [$method1, $method2, $method3];
         $methodRepository->findBy(['enabled' => true])->shouldBeCalled()->willReturn($methods);
 
-        $eligibilityChecker->isEligible($subject, $method1)->shouldBeCalled()->willReturn(true);
-        $eligibilityChecker->isEligible($subject, $method2)->shouldBeCalled()->willReturn(true);
-        $eligibilityChecker->isEligible($subject, $method3)->shouldBeCalled()->willReturn(false);
-
-        $this->getSupportedMethods($subject)->shouldReturn([$method1, $method2]);
+        $this->getSupportedMethods($subject)->shouldReturn([$method1, $method2, $method3]);
     }
 }

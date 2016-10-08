@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 /**
@@ -35,11 +34,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      * @var Collection|BaseTaxonInterface[]
      */
     protected $taxons;
-
-    /**
-     * @var ShippingCategoryInterface
-     */
-    protected $shippingCategory;
 
     /**
      * @var ChannelInterface[]|Collection
@@ -164,22 +158,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     public function hasTaxon(BaseTaxonInterface $taxon)
     {
         return $this->taxons->contains($taxon);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCategory()
-    {
-        return $this->shippingCategory;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingCategory(ShippingCategoryInterface $category = null)
-    {
-        $this->shippingCategory = $category;
     }
 
     /**

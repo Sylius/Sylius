@@ -1,5 +1,0 @@
-Sylius\Component\Shipping\Model\ShippingCategory:
-    shipping_category_{1..3}:
-        code: SC<current()>
-        name: Shipping Category <current()>
-        description: <sentence($nbWords = 6)>

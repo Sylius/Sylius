@@ -47,14 +47,8 @@ sylius:
                 amount: Amount
                 division: Division
 
-        shipping_category:
-            description: Description
-            name: Name
-
         shipping_method:
             calculator: Calculator
-            category: Category
-            category_requirement: Category requirement
             configuration: Configuration
             description: Description
             enabled: Enabled

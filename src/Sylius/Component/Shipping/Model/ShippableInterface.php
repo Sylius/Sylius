@@ -40,9 +40,4 @@ interface ShippableInterface
      * @return int
      */
     public function getShippingDepth();
-
-    /**
-     * @return ShippingCategoryInterface
-     */
-    public function getShippingCategory();
 }
