@@ -128,6 +128,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('type')->isRequired()->cannotBeEmpty()->end()
                                         ->scalarNode('label')->cannotBeEmpty()->end()
                                         ->scalarNode('path')->cannotBeEmpty()->end()
+                                        ->scalarNode('enabled')->defaultTrue()->end()
                                         ->arrayNode('options')
                                             ->prototype('variable')->end()
                                         ->end()

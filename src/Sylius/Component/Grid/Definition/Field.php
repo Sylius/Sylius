@@ -37,6 +37,11 @@ class Field
     private $label;
 
     /**
+     * @var boolean
+     */
+    private $enabled = true;
+
+    /**
      * @var array
      */
     private $options = [];
@@ -111,6 +116,22 @@ class Field
     public function setLabel($label)
     {
         $this->label = $label;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
     }
 
     /**

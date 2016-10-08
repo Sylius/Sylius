@@ -36,6 +36,9 @@ class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
             if (array_key_exists('label', $fieldConfiguration)) {
                 $field->setLabel($fieldConfiguration['label']);
             }
+            if (array_key_exists('enabled', $fieldConfiguration)) {
+                $field->setEnabled($fieldConfiguration['enabled']);
+            }
             if (array_key_exists('options', $fieldConfiguration)) {
                 $field->setOptions($fieldConfiguration['options']);
             }
