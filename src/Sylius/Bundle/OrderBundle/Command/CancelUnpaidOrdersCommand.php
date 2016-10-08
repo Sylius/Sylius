@@ -43,5 +43,7 @@ class CancelUnpaidOrdersCommand extends ContainerAwareCommand
 
         $unpaidCartsStateUpdater = $this->getContainer()->get('sylius.unpaid_orders_state_updater');
         $unpaidCartsStateUpdater->cancel();
+
+        $this->getContainer()->get('sylius.manager.order')->flush();
     }
 }
