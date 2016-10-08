@@ -1,5 +1,5 @@
 {% macro default(text) %}
-    <span class="ui label">{{ text }}</span>
+    <span class="ui label">{{ text|trans }}</span>
 {% endmacro %}
 
 {% macro status(status) %}
@@ -10,12 +10,6 @@
     {% else %}
         {{ labels.disabled() }}
     {% endif %}
-{% endmacro %}
-
-{% macro default(text) %}
-    <span class="ui label">
-        {{ text|trans }}
-    </span>
 {% endmacro %}
 
 {% macro enabled() %}

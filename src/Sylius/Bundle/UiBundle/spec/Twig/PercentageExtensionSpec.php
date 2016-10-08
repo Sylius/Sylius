@@ -12,16 +12,18 @@
 namespace spec\Sylius\Bundle\UiBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Bundle\UiBundle\Twig\PercentageExtension;
 
 /**
+ * @mixin PercentageExtension
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class PercentageExtensionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UiBundle\Twig\PercentageExtension');
+        $this->shouldHaveType(PercentageExtension::class);
     }
 
     function it_is_twig_extension()
