@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxRateType extends AbstractResourceType
+final class TaxRateType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -28,7 +28,6 @@ class TaxRateType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('name', 'text', [
                 'label' => 'sylius.form.tax_rate.name',
             ])
@@ -45,6 +44,7 @@ class TaxRateType extends AbstractResourceType
             ->add('includedInPrice', 'checkbox', [
                 'label' => 'sylius.form.tax_rate.included_in_price',
             ])
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }
 

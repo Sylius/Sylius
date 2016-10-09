@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class CountryType extends AbstractResourceType
+final class CountryType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -28,14 +28,14 @@ class CountryType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new AddCodeFormSubscriber('country'))
             ->add('provinces', 'collection', [
-                'type' => 'sylius_province',
+                'entry_type' => 'sylius_province',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'button_add_label' => 'sylius.form.country.add_province',
             ])
+            ->addEventSubscriber(new AddCodeFormSubscriber('country'))
         ;
     }
 

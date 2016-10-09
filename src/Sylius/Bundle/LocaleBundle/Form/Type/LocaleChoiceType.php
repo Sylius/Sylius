@@ -70,7 +70,7 @@ class LocaleChoiceType extends AbstractType
                 'choice_list' => $choiceList,
                 'enabled' => null,
                 'label' => 'sylius.form.locale.locale',
-                'empty_value' => 'sylius.form.locale.select',
+                'placeholder' => 'sylius.form.locale.select',
             ])
         ;
     }

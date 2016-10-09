@@ -15,8 +15,6 @@
     <parameters>
         <parameter key="sylius.form.type.product_image.class">Sylius\Bundle\CoreBundle\Form\Type\ProductImageType</parameter>
         <parameter key="sylius.form.type.taxon_image.class">Sylius\Bundle\CoreBundle\Form\Type\TaxonImageType</parameter>
-        <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
-        <parameter key="sylius.form.type.locale.class">Sylius\Bundle\CoreBundle\Form\Type\LocaleType</parameter>
 
         <parameter key="sylius.validation_groups.customer" type="collection">
             <parameter>sylius</parameter>
@@ -43,25 +41,6 @@
         <service id="sylius.form.type.taxon_image" class="%sylius.form.type.taxon_image.class%">
             <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="form.type" alias="sylius_taxon_image" />
-        </service>
-        <service id="sylius.form.type.country" class="%sylius.form.type.country.class%">
-            <argument>%sylius.model.country.class%</argument>
-            <argument>%sylius.validation_groups.country%</argument>
-            <argument type="service" id="sylius.repository.country" />
-            <tag name="form.type" alias="sylius_country" />
-        </service>
-        <service id="sylius.form.type.locale" class="%sylius.form.type.locale.class%">
-            <argument>%sylius.model.locale.class%</argument>
-            <argument>%sylius.validation_groups.locale%</argument>
-            <argument>%locale%</argument>
-            <argument type="service" id="sylius.repository.locale" />
-            <tag name="form.type" alias="sylius_locale" />
-        </service>
-        <service id="sylius.form.type.customer" class="%sylius.form.type.customer.class%">
-            <argument>%sylius.model.customer.class%</argument>
-            <argument>%sylius.validation_groups.customer%</argument>
-            <argument type="service" id="sylius.form.event_subscriber.add_shop_user_type" />
-            <tag name="form.type" alias="sylius_customer" />
         </service>
         <service id="sylius.form.type.list" class="Sylius\Bundle\CoreBundle\Form\Type\ListType">
             <tag name="form.type" alias="list" />
@@ -154,6 +133,55 @@
             <argument>%sylius.validation_groups.order_item%</argument>
             <argument type="service" id="sylius.form.data_mapper.order_item_quantity"/>
             <tag name="form.type" alias="sylius_cart_item" />
+        </service>
+
+        <!-- Extensions -->
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\CouponTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\PromotionBundle\Form\Type\CouponType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\CustomerTypeExtension">
+            <argument type="service" id="sylius.form.event_subscriber.add_shop_user_type" />
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\CustomerBundle\Form\Type\CustomerType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\LocaleTypeExtension">
+            <argument>%locale%</argument>
+            <argument type="service" id="sylius.repository.locale" />
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\OrderItemTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\OrderBundle\Form\Type\OrderItemType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\OrderTypeExtension">
+            <argument>%sylius.validation_groups.order%</argument>
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\OrderBundle\Form\Type\OrderType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\ProductTranslationTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\ProductTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\ShippingMethodTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\TaxonTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\CountryTypeExtension">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" />
+        </service>
+        <service class="Sylius\Bundle\CoreBundle\Form\Extension\TaxRateTypeExtension">
+            <tag name="form.type_extension" extended_type="Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType" />
         </service>
     </services>
 </container>

@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -23,8 +25,9 @@ use Symfony\Component\Intl\Intl;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CountryType extends AbstractResourceType
+final class CountryTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var RepositoryInterface
@@ -32,15 +35,11 @@ class CountryType extends AbstractResourceType
     private $countryRepository;
 
     /**
-     * {@inheritdoc}
-     *
      * @param RepositoryInterface $countryRepository
      */
-    public function __construct($dataClass, array $validationGroups = [], RepositoryInterface $countryRepository)
+    public function __construct(RepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;
-
-        parent::__construct($dataClass, $validationGroups);
     }
 
     /**
@@ -48,6 +47,14 @@ class CountryType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $builder
+            ->add('enabled', 'checkbox', [
+                'label' => 'sylius.form.country.enabled',
+            ])
+        ;
+
+        $builder->getEventDispatcher()->removeSubscriber(new AddCodeFormSubscriber());
+
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             // Adding dynamically created isoName field
             $nameOptions = [
@@ -69,27 +76,14 @@ class CountryType extends AbstractResourceType
             $form = $event->getForm();
             $form->add('code', 'country', $nameOptions);
         });
-
-        $builder
-            ->add('provinces', 'collection', [
-                'type' => 'sylius_province',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'button_add_label' => 'sylius.form.country.add_province',
-            ])
-            ->add('enabled', 'checkbox', [
-                'label' => 'sylius.form.country.enabled',
-            ])
-        ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getExtendedType()
     {
-        return 'sylius_country';
+        return CountryType::class;
     }
 
     /**

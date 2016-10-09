@@ -9,17 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType as BaseCustomerType;
+use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CustomerType extends BaseCustomerType
+final class CustomerTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var EventSubscriberInterface
@@ -27,16 +29,10 @@ class CustomerType extends BaseCustomerType
     private $addUserFormSubscriber;
 
     /**
-     * @param string $dataClass
-     * @param string[] $validationGroups
      * @param EventSubscriberInterface $addUserFormSubscriber
      */
-    public function __construct(
-        $dataClass,
-        array $validationGroups = [],
-        EventSubscriberInterface $addUserFormSubscriber
-    ) {
-        parent::__construct($dataClass, $validationGroups);
+    public function __construct(EventSubscriberInterface $addUserFormSubscriber)
+    {
         $this->addUserFormSubscriber = $addUserFormSubscriber;
     }
 
@@ -45,10 +41,7 @@ class CustomerType extends BaseCustomerType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
-        $builder
-            ->addEventSubscriber($this->addUserFormSubscriber);
+        $builder->addEventSubscriber($this->addUserFormSubscriber);
     }
 
     /**
@@ -56,10 +49,14 @@ class CustomerType extends BaseCustomerType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
-        ]);
+        $resolver->setDefault('cascade_validation', true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return CustomerType::class;
     }
 }

@@ -9,26 +9,27 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Component\Core\Model\Product;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
+
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProductType extends BaseProductType
+final class ProductTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('channels', 'sylius_channel_choice', [
                 'multiple' => true,
@@ -52,5 +53,13 @@ class ProductType extends BaseProductType
                 'label' => 'sylius.form.product.images',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return ProductType::class;
     }
 }

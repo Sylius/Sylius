@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductVariantType extends AbstractResourceType
+final class ProductVariantType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
