@@ -14,8 +14,8 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -113,13 +113,13 @@ final class LocaleContext implements Context
      */
     public function thatChannelAllowsToShopUsingAndLocales(ChannelInterface $channel, ...$localesNames)
     {
-        $locales = new ArrayCollection();
-
-        foreach ($localesNames as $localeName) {
-            $locales[] = $this->provideLocale($this->localeConverter->convertNameToCode($localeName));
+        foreach ($channel->getLocales() as $locale) {
+            $channel->removeLocale($locale);
         }
 
-        $channel->setLocales($locales);
+        foreach ($localesNames as $localeName) {
+            $channel->addLocale($this->provideLocale($this->localeConverter->convertNameToCode($localeName)));
+        }
 
         $this->channelManager->flush();
     }

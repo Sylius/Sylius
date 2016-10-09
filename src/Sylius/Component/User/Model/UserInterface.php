@@ -157,13 +157,6 @@ interface UserInterface extends
     public function hasRole($role);
 
     /**
-     * This overwrites any previous roles.
-     *
-     * @param array $roles
-     */
-    public function setRoles(array $roles);
-
-    /**
      * @param string $role
      */
     public function addRole($role);

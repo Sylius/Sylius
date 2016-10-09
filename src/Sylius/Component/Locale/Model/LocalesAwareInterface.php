@@ -26,11 +26,6 @@ interface LocalesAwareInterface
     public function getLocales();
 
     /**
-     * @param Collection $collection
-     */
-    public function setLocales(Collection $collection);
-
-    /**
      * @param LocaleInterface $locale
      *
      * @return bool

@@ -14,11 +14,11 @@ namespace Sylius\Component\Product\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface as BaseOptionInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface as BaseVariantInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Product\Model\ProductOptionInterface as BaseOptionInterface;
-use Sylius\Component\Product\Model\ProductVariantInterface as BaseVariantInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -241,16 +241,6 @@ class Product implements ProductInterface
     public function getAttributes()
     {
         return $this->attributes;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAttributes(Collection $attributes)
-    {
-        foreach ($attributes as $attribute) {
-            $this->addAttribute($attribute);
-        }
     }
 
     /**

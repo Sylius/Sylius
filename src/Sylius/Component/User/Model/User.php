@@ -120,12 +120,12 @@ class User implements UserInterface
     protected $oauthAccounts;
 
     /**
-     * @var string 
+     * @var string
      */
     protected $email;
 
     /**
-     * @var string 
+     * @var string
      */
     protected $emailCanonical;
 
@@ -162,7 +162,7 @@ class User implements UserInterface
     {
         $this->email = $email;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -170,7 +170,7 @@ class User implements UserInterface
     {
         return $this->emailCanonical;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -178,7 +178,7 @@ class User implements UserInterface
     {
         $this->emailCanonical = $emailCanonical;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -399,18 +399,6 @@ class User implements UserInterface
     public function getRoles()
     {
         return $this->roles;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRoles(array $roles)
-    {
-        $this->roles = [];
-
-        foreach ($roles as $role) {
-            $this->addRole($role);
-        }
     }
 
     /**

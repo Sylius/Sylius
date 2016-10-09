@@ -61,11 +61,6 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
     public function getMembers();
 
     /**
-     * @param Collection|ZoneMemberInterface[] $members
-     */
-    public function setMembers(Collection $members);
-
-    /**
      * @return bool
      */
     public function hasMembers();

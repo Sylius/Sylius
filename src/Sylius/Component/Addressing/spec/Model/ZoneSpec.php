@@ -69,12 +69,6 @@ final class ZoneSpec extends ObjectBehavior
         $this->hasMembers()->shouldReturn(false);
     }
 
-    function its_members_are_mutable(Collection $members)
-    {
-        $this->setMembers($members);
-        $this->getMembers()->shouldReturn($members);
-    }
-
     function it_adds_member(ZoneMemberInterface $member)
     {
         $this->addMember($member);

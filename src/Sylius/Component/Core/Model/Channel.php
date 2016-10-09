@@ -171,14 +171,6 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrencies(Collection $currencies)
-    {
-        $this->currencies = $currencies;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function addCurrency(CurrencyInterface $currency)
     {
         if (!$this->hasCurrency($currency)) {
@@ -210,14 +202,6 @@ class Channel extends BaseChannel implements ChannelInterface
     public function getLocales()
     {
         return $this->locales;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setLocales(Collection $locales)
-    {
-        $this->locales = $locales;
     }
 
     /**

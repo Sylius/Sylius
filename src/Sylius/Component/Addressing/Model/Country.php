@@ -89,14 +89,6 @@ class Country implements CountryInterface
     /**
      * {@inheritdoc}
      */
-    public function setProvinces(Collection $provinces)
-    {
-        $this->provinces = $provinces;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function hasProvinces()
     {
         return !$this->provinces->isEmpty();

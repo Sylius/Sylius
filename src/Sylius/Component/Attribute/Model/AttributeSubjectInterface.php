@@ -27,11 +27,6 @@ interface AttributeSubjectInterface
     public function getAttributes();
 
     /**
-     * @param Collection $attributes
-     */
-    public function setAttributes(Collection $attributes);
-
-    /**
      * @param AttributeValueInterface $attribute
      */
     public function addAttribute(AttributeValueInterface $attribute);

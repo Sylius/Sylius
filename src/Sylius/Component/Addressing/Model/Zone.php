@@ -160,14 +160,6 @@ class Zone implements ZoneInterface
     /**
      * {@inheritdoc}
      */
-    public function setMembers(Collection $members)
-    {
-        $this->members = $members;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function hasMembers()
     {
         return !$this->members->isEmpty();

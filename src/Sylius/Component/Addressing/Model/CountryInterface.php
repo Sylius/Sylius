@@ -29,11 +29,6 @@ interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeA
     public function getProvinces();
 
     /**
-     * @param Collection $provinces
-     */
-    public function setProvinces(Collection $provinces);
-
-    /**
      * @return bool
      */
     public function hasProvinces();
