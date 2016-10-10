@@ -11,10 +11,14 @@
 
 namespace spec\Sylius\Component\Taxonomy\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
+ * @mixin Taxon
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -28,10 +32,10 @@ final class TaxonSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Taxonomy\Model\Taxon');
+        $this->shouldHaveType(Taxon::class);
     }
 
-    function it_implements_Sylius_taxon_interface()
+    function it_implements_taxon_interface()
     {
         $this->shouldImplement(TaxonInterface::class);
     }
@@ -41,7 +45,7 @@ final class TaxonSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_mutable_code()
+    function its_code_is_mutable()
     {
         $this->setCode('TX2');
         $this->getCode()->shouldReturn('TX2');
@@ -156,7 +160,7 @@ final class TaxonSpec extends ObjectBehavior
 
     function it_initializes_child_taxon_collection_by_default()
     {
-        $this->getChildren()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getChildren()->shouldHaveType(Collection::class);
     }
 
     function it_allows_to_check_if_given_taxon_is_its_child(TaxonInterface $taxon)
