@@ -23,7 +23,6 @@ suites:
     Resource: { namespace: Sylius\Component\Resource, psr4_prefix: Sylius\Component\Resource, spec_path: src/Sylius/Component/Resource, src_path: src/Sylius/Component/Resource }
     Review: { namespace: Sylius\Component\Review, psr4_prefix: Sylius\Component\Review, spec_path: src/Sylius/Component/Review, src_path: src/Sylius/Component/Review }
     Shipping: { namespace: Sylius\Component\Shipping, psr4_prefix: Sylius\Component\Shipping, spec_path: src/Sylius/Component/Shipping, src_path: src/Sylius/Component/Shipping }
-    Storage: { namespace: Sylius\Component\Storage, psr4_prefix: Sylius\Component\Storage, spec_path: src/Sylius/Component/Storage, src_path: src/Sylius/Component/Storage }
     Taxation: { namespace: Sylius\Component\Taxation, psr4_prefix: Sylius\Component\Taxation, spec_path: src/Sylius/Component/Taxation, src_path: src/Sylius/Component/Taxation }
     Taxonomy: { namespace: Sylius\Component\Taxonomy, psr4_prefix: Sylius\Component\Taxonomy, spec_path: src/Sylius/Component/Taxonomy, src_path: src/Sylius/Component/Taxonomy }
     User: { namespace: Sylius\Component\User, psr4_prefix: Sylius\Component\User, spec_path: src/Sylius/Component/User, src_path: src/Sylius/Component/User }

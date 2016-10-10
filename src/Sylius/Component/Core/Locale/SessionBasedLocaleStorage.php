@@ -13,24 +13,24 @@ namespace Sylius\Component\Core\Locale;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Storage\StorageInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class LocaleStorage implements LocaleStorageInterface
+final class SessionBasedLocaleStorage implements LocaleStorageInterface
 {
     /**
-     * @var StorageInterface
+     * @var SessionInterface
      */
-    private $storage;
+    private $session;
 
     /**
-     * @param StorageInterface $storage
+     * @param SessionInterface $session
      */
-    public function __construct(StorageInterface $storage)
+    public function __construct(SessionInterface $session)
     {
-        $this->storage = $storage;
+        $this->session = $session;
     }
 
     /**
@@ -38,7 +38,7 @@ final class LocaleStorage implements LocaleStorageInterface
      */
     public function set(ChannelInterface $channel, $localeCode)
     {
-        $this->storage->setData($this->provideKey($channel), $localeCode);
+        $this->session->set($this->provideKey($channel), $localeCode);
     }
 
     /**
@@ -46,7 +46,7 @@ final class LocaleStorage implements LocaleStorageInterface
      */
     public function get(ChannelInterface $channel)
     {
-        $localeCode = $this->storage->getData($this->provideKey($channel));
+        $localeCode = $this->session->get($this->provideKey($channel));
         if (null === $localeCode) {
             throw new LocaleNotFoundException('No locale is set for current channel!');
         }

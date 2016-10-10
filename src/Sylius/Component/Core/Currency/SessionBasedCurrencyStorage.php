@@ -13,24 +13,24 @@ namespace Sylius\Component\Core\Currency;
 
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
-use Sylius\Component\Storage\StorageInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class CurrencyStorage implements CurrencyStorageInterface
+final class SessionBasedCurrencyStorage implements CurrencyStorageInterface
 {
     /**
-     * @var StorageInterface
+     * @var SessionInterface
      */
-    private $storage;
+    private $session;
 
     /**
-     * @param StorageInterface $storage
+     * @param SessionInterface $session
      */
-    public function __construct(StorageInterface $storage)
+    public function __construct(SessionInterface $session)
     {
-        $this->storage = $storage;
+        $this->session = $session;
     }
 
     /**
@@ -38,7 +38,7 @@ final class CurrencyStorage implements CurrencyStorageInterface
      */
     public function set(ChannelInterface $channel, $currencyCode)
     {
-        $this->storage->setData($this->provideKey($channel), $currencyCode);
+        $this->session->set($this->provideKey($channel), $currencyCode);
     }
 
     /**
@@ -46,7 +46,7 @@ final class CurrencyStorage implements CurrencyStorageInterface
      */
     public function get(ChannelInterface $channel)
     {
-        $currencyCode = $this->storage->getData($this->provideKey($channel));
+        $currencyCode = $this->session->get($this->provideKey($channel));
         if (null === $currencyCode) {
             throw new CurrencyNotFoundException('No currency is set for current channel!');
         }
