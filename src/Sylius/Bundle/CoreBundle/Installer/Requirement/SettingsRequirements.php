@@ -19,26 +19,26 @@ class SettingsRequirements extends RequirementCollection
 
     public function __construct(TranslatorInterface $translator)
     {
-        parent::__construct($translator->trans('sylius.settings.header', [], 'requirements'));
+        parent::__construct($translator->trans('sylius.installer.settings.header', []));
 
         $this
             ->add(new Requirement(
-                $translator->trans('sylius.settings.timezone', [], 'requirements'),
+                $translator->trans('sylius.installer.settings.timezone', []),
                 $this->isOn('date.timezone'),
                 true
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.settings.version_recommended', [], 'requirements'),
+                $translator->trans('sylius.installer.settings.version_recommended', []),
                 version_compare(phpversion(), self::RECOMMENDED_PHP_VERSION, '>='),
                 false
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.settings.detect_unicode', [], 'requirements'),
+                $translator->trans('sylius.installer.settings.detect_unicode', []),
                 !$this->isOn('detect_unicode'),
                 false
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.settings.session.auto_start', [], 'requirements'),
+                $translator->trans('sylius.installer.settings.session.auto_start', []),
                 !$this->isOn('session.auto_start'),
                 false
             ))
