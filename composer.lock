@@ -5387,16 +5387,16 @@
         },
         {
             "name": "payum/omnipay-bridge",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/OmnipayBridge.git",
-                "reference": "8a95c773af2925c749b6a799b8cab460d766e556"
+                "reference": "85f22db7205b46cadb65540d1f35e819527713b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/OmnipayBridge/zipball/8a95c773af2925c749b6a799b8cab460d766e556",
-                "reference": "8a95c773af2925c749b6a799b8cab460d766e556",
+                "url": "https://api.github.com/repos/Payum/OmnipayBridge/zipball/85f22db7205b46cadb65540d1f35e819527713b6",
+                "reference": "85f22db7205b46cadb65540d1f35e819527713b6",
                 "shasum": ""
             },
             "require": {
@@ -5443,7 +5443,7 @@
                 "omnipay",
                 "payment"
             ],
-            "time": "2016-09-15 13:14:26"
+            "time": "2016-10-10 16:53:08"
         },
         {
             "name": "payum/payum",
@@ -8459,7 +8459,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -8552,7 +8552,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
