@@ -26,7 +26,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}

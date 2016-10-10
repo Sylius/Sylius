@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class SyliusReviewExtension extends AbstractResourceExtension
+final class SyliusReviewExtension extends AbstractResourceExtension
 {
     /**
      * @var array

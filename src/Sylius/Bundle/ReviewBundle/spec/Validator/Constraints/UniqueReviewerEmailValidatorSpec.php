@@ -52,10 +52,10 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
     }
 
     function it_validates_if_user_with_given_email_is_already_registered(
-        $userRepository,
-        $tokenStorage,
-        $authorizationChecker,
-        $context,
+        UserRepository $userRepository,
+        TokenStorageInterface $tokenStorage,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ExecutionContext $context,
         TokenInterface $token,
         UniqueReviewerEmail $constraint,
         ReviewInterface $review,
