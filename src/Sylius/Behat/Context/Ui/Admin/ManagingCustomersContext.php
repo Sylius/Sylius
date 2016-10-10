@@ -137,6 +137,14 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I select :group as their group
+     */
+    public function iSelectGroup($group)
+    {
+        $this->createPage->chooseGroup($group);
+    }
+
+    /**
      * @When I specify its birthday as :birthday
      */
     public function iSpecifyItsBirthdayAs($birthday)
@@ -549,6 +557,20 @@ final class ManagingCustomersContext implements Context
         Assert::true(
             $this->showPage->hasBillingProvinceName($provinceName),
             sprintf('Cannot find shipping address with province %s', $provinceName)
+        );
+    }
+
+    /**
+     * @Then /^(this customer) should have "([^"]+)" as their group$/
+     */
+    public function thisCustomerShouldHaveAsTheirGroup(CustomerInterface $customer, $groupName)
+    {
+        $this->updatePage->open(['id' => $customer->getId()]);
+
+        Assert::same(
+            $groupName,
+            $this->updatePage->getGroupName(),
+            sprintf('Customer should have %s as group, but it does not', $groupName)
         );
     }
 }

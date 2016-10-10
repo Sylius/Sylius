@@ -48,5 +48,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
      */
     public function chooseGender($gender);
 
+    /**
+     * @param string $group
+     */
+    public function chooseGroup($group);
+
     public function selectCreateAccount();
 }

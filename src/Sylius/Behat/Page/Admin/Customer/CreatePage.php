@@ -69,6 +69,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function chooseGroup($group)
+    {
+        $this->getDocument()->selectFieldOption('Group', $group);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function selectCreateAccount()
     {
         $this->getDocument()->find('css', 'label[for=sylius_customer_create_user]')->click();
