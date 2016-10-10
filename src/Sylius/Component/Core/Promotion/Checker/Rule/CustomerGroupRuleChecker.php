@@ -39,7 +39,11 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        if ($configuration['groups'] === $customer->getGroup()->getId()) {
+        if (is_null($customer->getGroup())) {
+            return false;
+        }
+
+        if ($configuration['group'] === $customer->getGroup()->getId()) {
             return true;
         }
 
