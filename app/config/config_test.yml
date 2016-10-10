@@ -36,6 +36,12 @@ payum:
             password: TEST
             signature: TEST
             sandbox: true
+        credit_card:
+            factory: stripe_checkout
+            secret_key: EDITME
+            publishable_key: EDITME
+            payum.template.layout: SyliusShopBundle::Checkout/layout.html.twig
+            payum.template.obtain_token: SyliusPayumBundle::Action/Stripe/obtainCheckoutToken.html.twig
 
 swiftmailer:
     disable_delivery: true
