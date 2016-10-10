@@ -40,7 +40,7 @@ final class SyliusFixturesExtension extends Extension implements PrependExtensio
      */
     public function prepend(ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/driver'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $extensionsNamesToConfigurationFiles = [
             'doctrine' => 'doctrine/orm.xml',
@@ -53,7 +53,7 @@ final class SyliusFixturesExtension extends Extension implements PrependExtensio
                 continue;
             }
 
-            $loader->load($configurationFile);
+            $loader->load('services/integrations/' . $configurationFile);
         }
     }
 
