@@ -263,4 +263,51 @@ final class ProductContext implements Context
             'The main image should have been displayed.'
         );
     }
+
+    /**
+     * @When I start sorting products from the :direction
+     */
+    public function iSortProductsBy($direction)
+    {
+        $this->taxonShowPage->sortByDate($direction);
+    }
+
+    /**
+     * @Then I should see :numberOfProducts products in the list
+     */
+    public function iShouldSeeProductsInTheList($numberOfProducts)
+    {
+        $foundRows = $this->taxonShowPage->countProductsItems();
+
+        Assert::same(
+            (int) $numberOfProducts,
+            $foundRows,
+            '%s rows with products should appear on page, %s rows has been found'
+        );
+    }
+
+    /**
+     * @Then I should see a product with name :name
+     */
+    public function iShouldSeeProductWithName($name)
+    {
+        Assert::true(
+            $this->taxonShowPage->isProductOnPageWithName($name),
+            sprintf('The product with name "%s" has not been found.', $name)
+        );
+    }
+
+    /**
+     * @Then the first product on the list should have name :name
+     */
+    public function theFirstProductOnTheListShouldHaveName($name)
+    {
+        $actualName = $this->taxonShowPage->getFirstProductNameFromList();
+
+        Assert::same(
+            $actualName,
+            $name,
+            sprintf('Expected first product\'s name to be "%s", but it is "%s".', $name, $actualName)
+        );
+    }
 }
