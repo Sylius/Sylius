@@ -14,9 +14,12 @@ namespace spec\Sylius\Component\Attribute\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 
 /**
+ * @mixin Attribute
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -30,10 +33,10 @@ final class AttributeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Attribute\Model\Attribute');
+        $this->shouldHaveType(Attribute::class);
     }
 
-    function it_implements_Sylius_attribute_interface()
+    function it_implements_attribute_interface()
     {
         $this->shouldImplement(AttributeInterface::class);
     }

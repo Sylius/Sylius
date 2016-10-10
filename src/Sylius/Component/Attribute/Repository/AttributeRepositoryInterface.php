@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Attribute\Repository;
 
-use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

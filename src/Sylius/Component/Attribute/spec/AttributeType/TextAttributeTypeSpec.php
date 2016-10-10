@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Attribute\AttributeType;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
+use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Symfony\Component\Validator\Constraints\Length;
@@ -24,13 +25,15 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 
 /**
+ * @mixin TextAttributeType
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class TextAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Attribute\AttributeType\TextAttributeType');
+        $this->shouldHaveType(TextAttributeType::class);
     }
 
     function it_implements_attribute_type_interface()

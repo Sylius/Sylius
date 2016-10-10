@@ -13,15 +13,18 @@ namespace spec\Sylius\Component\Attribute\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
+use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 
 /**
+ * @mixin DatetimeAttributeType
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DatetimeAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Attribute\AttributeType\DatetimeAttributeType');
+        $this->shouldHaveType(DatetimeAttributeType::class);
     }
 
     function it_implements_attribute_type_interface()
