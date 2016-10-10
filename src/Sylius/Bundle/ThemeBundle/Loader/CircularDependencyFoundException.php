@@ -16,14 +16,13 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CircularDependencyFoundException extends \DomainException
+final class CircularDependencyFoundException extends \DomainException
 {
     /**
      * @param ThemeInterface[] $themes
-     * @param int $code
      * @param \Exception $previous
      */
-    public function __construct(array $themes, $code = 0, \Exception $previous = null)
+    public function __construct(array $themes, \Exception $previous = null)
     {
         $cycle = $this->getCycleFromArray($themes);
 
@@ -33,7 +32,7 @@ class CircularDependencyFoundException extends \DomainException
             $this->formatCycleToString($cycle)
         );
 
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message, 0, $previous);
     }
 
     /**

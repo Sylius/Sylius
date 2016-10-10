@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Configuration;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Configuration\CompositeConfigurationProvider;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 
@@ -30,7 +29,7 @@ final class CompositeConfigurationProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\CompositeConfigurationProvider');
+        $this->shouldHaveType(CompositeConfigurationProvider::class);
     }
 
     function it_implements_configuration_provider_interface()

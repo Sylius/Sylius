@@ -31,7 +31,7 @@ final class TemplatePathsCacheClearerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Templating\Cache\Clearer\TemplatePathsCacheClearer');
+        $this->shouldHaveType(TemplatePathsCacheClearer::class);
     }
 
     function it_implements_cache_clearer_interface()

@@ -14,7 +14,6 @@ namespace Sylius\Bundle\ThemeBundle;
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationSourceFactory;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestConfigurationSourceFactory;
 use Sylius\Bundle\ThemeBundle\DependencyInjection\SyliusThemeExtension;
-use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorAliasingPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorFallbackLocalesPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorLoaderProviderPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorResourceProviderPass;

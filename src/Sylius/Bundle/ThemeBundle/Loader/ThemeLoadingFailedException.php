@@ -14,6 +14,6 @@ namespace Sylius\Bundle\ThemeBundle\Loader;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeLoadingFailedException extends \DomainException
+final class ThemeLoadingFailedException extends \DomainException
 {
 }

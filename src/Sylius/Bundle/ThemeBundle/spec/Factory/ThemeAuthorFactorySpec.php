@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactory;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
@@ -26,7 +25,7 @@ final class ThemeAuthorFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactory');
+        $this->shouldHaveType(ThemeAuthorFactory::class);
     }
 
     function it_implements_theme_author_factory_interface()

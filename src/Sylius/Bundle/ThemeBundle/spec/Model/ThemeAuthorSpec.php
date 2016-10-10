@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 
 /**
@@ -24,7 +23,7 @@ final class ThemeAuthorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Model\ThemeAuthor');
+        $this->shouldHaveType(ThemeAuthor::class);
     }
 
     function it_implements_theme_author_interface()

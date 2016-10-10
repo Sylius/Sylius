@@ -25,32 +25,32 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class AssetsInstaller implements AssetsInstallerInterface
+final class AssetsInstaller implements AssetsInstallerInterface
 {
     /**
      * @var Filesystem
      */
-    protected $filesystem;
+    private $filesystem;
 
     /**
      * @var KernelInterface
      */
-    protected $kernel;
+    private $kernel;
 
     /**
      * @var ThemeRepositoryInterface
      */
-    protected $themeRepository;
+    private $themeRepository;
 
     /**
      * @var ThemeHierarchyProviderInterface
      */
-    protected $themeHierarchyProvider;
+    private $themeHierarchyProvider;
 
     /**
      * @var PathResolverInterface
      */
-    protected $pathResolver;
+    private $pathResolver;
 
     /**
      * @param Filesystem $filesystem
@@ -129,7 +129,7 @@ class AssetsInstaller implements AssetsInstallerInterface
      *
      * @return int
      */
-    protected function installThemedBundleAssets(ThemeInterface $theme, $originDir, $targetDir, $symlinkMask)
+    private function installThemedBundleAssets(ThemeInterface $theme, $originDir, $targetDir, $symlinkMask)
     {
         $effectiveSymlinkMask = $symlinkMask;
 
@@ -163,7 +163,7 @@ class AssetsInstaller implements AssetsInstallerInterface
      *
      * @return int
      */
-    protected function installVanillaBundleAssets($originDir, $targetDir, $symlinkMask)
+    private function installVanillaBundleAssets($originDir, $targetDir, $symlinkMask)
     {
         return $this->installAsset($originDir, $targetDir, $symlinkMask);
     }
@@ -175,7 +175,7 @@ class AssetsInstaller implements AssetsInstallerInterface
      *
      * @return int
      */
-    protected function installAsset($origin, $target, $symlinkMask)
+    private function installAsset($origin, $target, $symlinkMask)
     {
         if (AssetsInstallerInterface::RELATIVE_SYMLINK === $symlinkMask) {
             try {
@@ -212,7 +212,7 @@ class AssetsInstaller implements AssetsInstallerInterface
      *
      * @throws IOException When failed to make symbolic link, if requested.
      */
-    protected function doInstallAsset($origin, $target, $symlink)
+    private function doInstallAsset($origin, $target, $symlink)
     {
         if ($symlink) {
             $this->doSymlinkAsset($origin, $target);
@@ -229,7 +229,7 @@ class AssetsInstaller implements AssetsInstallerInterface
      *
      * @return array
      */
-    protected function findAssetsPaths(BundleInterface $bundle, array $themes = [])
+    private function findAssetsPaths(BundleInterface $bundle, array $themes = [])
     {
         $sources = [];
 

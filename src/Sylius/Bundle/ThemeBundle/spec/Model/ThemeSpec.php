@@ -31,7 +31,7 @@ final class ThemeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Model\Theme');
+        $this->shouldHaveType(Theme::class);
     }
 
     function it_implements_theme_interface()

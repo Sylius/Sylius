@@ -11,18 +11,33 @@
 
 namespace Sylius\Bundle\ThemeBundle\Asset\Installer;
 
+use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareInterface
+final class OutputAwareAssetsInstaller implements AssetsInstallerInterface, OutputAwareInterface
 {
+    /**
+     * @var AssetsInstallerInterface
+     */
+    private $assetsInstaller;
+
     /**
      * @var OutputInterface
      */
-    protected $output;
+    private $output;
+
+    /**
+     * @param AssetsInstallerInterface $assetsInstaller
+     */
+    public function __construct(AssetsInstallerInterface $assetsInstaller)
+    {
+        $this->assetsInstaller = $assetsInstaller;
+        $this->output = new NullOutput();
+    }
 
     /**
      * {@inheritdoc}
@@ -37,11 +52,9 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareI
      */
     public function installAssets($targetDir, $symlinkMask)
     {
-        if ($this->hasOutput()) {
-            $this->output->writeln($this->provideExpectationComment($symlinkMask));
-        }
+        $this->output->writeln($this->provideExpectationComment($symlinkMask));
 
-        return parent::installAssets($targetDir, $symlinkMask);
+        return $this->assetsInstaller->installAssets($targetDir, $symlinkMask);
     }
 
     /**
@@ -49,31 +62,13 @@ class OutputAwareAssetsInstaller extends AssetsInstaller implements OutputAwareI
      */
     public function installBundleAssets(BundleInterface $bundle, $targetDir, $symlinkMask)
     {
-        $sources = $this->findAssetsPaths($bundle);
+        $this->output->writeln(sprintf('Installing assets for <comment>%s</comment>', $bundle->getNamespace(), $targetDir));
 
-        if (empty($sources)) {
-            return $symlinkMask;
-        }
+        $effectiveSymlinkMask = $this->assetsInstaller->installBundleAssets($bundle, $targetDir, $symlinkMask);
 
-        if ($this->hasOutput()) {
-            $this->output->writeln(sprintf('Installing assets for <comment>%s</comment>', $bundle->getNamespace(), $targetDir));
-        }
-
-        $effectiveSymlinkMask = parent::installBundleAssets($bundle, $targetDir, $symlinkMask);
-
-        if ($this->hasOutput()) {
-            $this->output->writeln($this->provideResultComment($symlinkMask, $effectiveSymlinkMask));
-        }
+        $this->output->writeln($this->provideResultComment($symlinkMask, $effectiveSymlinkMask));
 
         return $effectiveSymlinkMask;
-    }
-
-    /**
-     * @return bool
-     */
-    private function hasOutput()
-    {
-        return null !== $this->output;
     }
 
     /**

@@ -54,7 +54,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\ThemeLoader');
+        $this->shouldHaveType(ThemeLoader::class);
     }
 
     function it_implements_theme_loader_interface()

@@ -16,7 +16,7 @@ use Sylius\Bundle\ThemeBundle\Asset\Installer\AssetsInstallerInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class AssetTest extends ThemeBundleTestCase
+final class AssetTest extends ThemeBundleTestCase
 {
     protected function tearDown()
     {

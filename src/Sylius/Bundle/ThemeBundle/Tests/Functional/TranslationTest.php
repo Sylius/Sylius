@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TranslationTest extends ThemeBundleTestCase
+final class TranslationTest extends ThemeBundleTestCase
 {
     public function testTranslations()
     {

@@ -30,7 +30,7 @@ final class JsonFileConfigurationLoaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Filesystem\JsonFileConfigurationLoader');
+        $this->shouldHaveType(JsonFileConfigurationLoader::class);
     }
 
     function it_implements_configuration_loader_interface()

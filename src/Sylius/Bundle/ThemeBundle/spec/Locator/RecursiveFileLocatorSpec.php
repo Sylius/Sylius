@@ -32,7 +32,7 @@ final class RecursiveFileLocatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Locator\RecursiveFileLocator');
+        $this->shouldHaveType(RecursiveFileLocator::class);
     }
 
     function it_implements_sylius_file_locator_interface()

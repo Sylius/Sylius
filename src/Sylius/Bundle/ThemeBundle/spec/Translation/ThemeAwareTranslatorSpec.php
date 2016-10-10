@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\ThemeAwareTranslator;
