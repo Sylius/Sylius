@@ -227,7 +227,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::same(
             $this->indexPage->countItems(),
-            $number,
+            (int) $number,
             sprintf('There should be %s administrators, but got %s', $number, $this->indexPage->countItems())
         );
     }

@@ -267,8 +267,8 @@ final class ManagingProductOptionsContext implements Context
     {
         $foundRows = $this->indexPage->countItems();
 
-        Assert::eq(
-            $amount,
+        Assert::same(
+            (int) $amount,
             $foundRows,
             '%2$s rows with product options should appear on page, %s rows has been found'
         );

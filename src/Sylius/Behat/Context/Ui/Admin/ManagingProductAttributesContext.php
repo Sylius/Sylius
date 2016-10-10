@@ -246,7 +246,7 @@ final class ManagingProductAttributesContext implements Context
     public function iShouldSeeCustomersInTheList($amountOfProductAttributes)
     {
         Assert::same(
-            $amountOfProductAttributes,
+            (int) $amountOfProductAttributes,
             $this->indexPage->countItems(),
             sprintf('Amount of product attributes should be equal %s, but is not.', $amountOfProductAttributes)
         );

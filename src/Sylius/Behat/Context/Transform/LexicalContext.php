@@ -37,14 +37,6 @@ final class LexicalContext implements Context
     }
 
     /**
-     * @Transform /^(?:\d+)$/
-     */
-    public function getAmountFromString($amount)
-    {
-        return (int) $amount;
-    }
-
-    /**
      * @param string $price
      *
      * @throws \InvalidArgumentException

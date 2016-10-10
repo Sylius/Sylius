@@ -358,8 +358,8 @@ final class ManagingProductVariantsContext implements Context
      */
     public function unitsOfThisProductShouldBeOnHold($quantity, ProductInterface $product)
     {
-        Assert::eq(
-            $quantity,
+        Assert::same(
+            (int) $quantity,
             $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant()),
             sprintf(
                 'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
@@ -375,8 +375,8 @@ final class ManagingProductVariantsContext implements Context
      */
     public function unitsOfThisProductShouldBeOnHand($quantity, ProductInterface $product)
     {
-        Assert::eq(
-            $quantity,
+        Assert::same(
+            (int) $quantity,
             $this->indexPage->getOnHandQuantityFor($product->getFirstVariant()),
             sprintf(
                 'Unexpected on hand quantity for "%s" variant. It should be "%s" but is "%s"',
@@ -411,7 +411,7 @@ final class ManagingProductVariantsContext implements Context
     public function thisVariantShouldHaveItemsOnHold(ProductVariantInterface $variant, $amount)
     {
         Assert::same(
-            $amount,
+            (int) $amount,
             $this->indexPage->getOnHoldQuantityFor($variant),
             sprintf(
                 'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
