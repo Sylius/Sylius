@@ -31,7 +31,7 @@ final class SymfonyConfigurationProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\SymfonyConfigurationProcessor');
+        $this->shouldHaveType(SymfonyConfigurationProcessor::class);
     }
 
     function it_implements_configuration_processor_interface()

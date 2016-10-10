@@ -31,7 +31,7 @@ final class TranslationFilesFinderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder');
+        $this->shouldHaveType(TranslationFilesFinder::class);
     }
 
     function it_implements_translation_resource_finder_interface()

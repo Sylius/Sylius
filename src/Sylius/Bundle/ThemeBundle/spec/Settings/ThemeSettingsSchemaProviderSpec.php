@@ -14,7 +14,6 @@ namespace spec\Sylius\Bundle\ThemeBundle\Settings;
 use org\bovigo\vfs\vfsStream as VfsStream;
 use org\bovigo\vfs\vfsStreamDirectory as VfsStreamDirectory;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProvider;
@@ -39,7 +38,7 @@ final class ThemeSettingsSchemaProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProvider');
+        $this->shouldHaveType(ThemeSettingsSchemaProvider::class);
     }
 
     function it_implements_theme_settings_schema_provider_interface()

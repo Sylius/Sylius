@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ThemeBundle\Form\Type;
 
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;

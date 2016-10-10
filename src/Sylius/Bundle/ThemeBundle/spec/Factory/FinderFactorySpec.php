@@ -25,7 +25,7 @@ final class FinderFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Factory\FinderFactory');
+        $this->shouldHaveType(FinderFactory::class);
     }
 
     function it_implements_finder_factory_interface()

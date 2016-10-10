@@ -29,7 +29,7 @@ final class OrderingTranslationFilesFinderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\Finder\OrderingTranslationFilesFinder');
+        $this->shouldHaveType(OrderingTranslationFilesFinder::class);
     }
 
     function it_implements_Translation_Files_Finder_interface()

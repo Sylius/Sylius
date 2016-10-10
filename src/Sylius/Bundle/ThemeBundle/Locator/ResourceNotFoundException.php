@@ -16,7 +16,7 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ResourceNotFoundException extends \RuntimeException
+final class ResourceNotFoundException extends \RuntimeException
 {
     /**
      * @param string $resourceName

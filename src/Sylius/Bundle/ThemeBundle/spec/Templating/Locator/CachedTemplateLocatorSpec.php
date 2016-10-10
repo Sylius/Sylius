@@ -34,7 +34,7 @@ final class CachedTemplateLocatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Templating\Locator\CachedTemplateLocator');
+        $this->shouldHaveType(CachedTemplateLocator::class);
     }
 
     function it_implements_template_locator_interface()

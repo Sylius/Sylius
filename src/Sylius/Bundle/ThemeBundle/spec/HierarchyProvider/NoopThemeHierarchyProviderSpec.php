@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\HierarchyProvider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\HierarchyProvider\NoopThemeHierarchyProvider;
 use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
@@ -26,7 +25,7 @@ final class NoopThemeHierarchyProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\HierarchyProvider\NoopThemeHierarchyProvider');
+        $this->shouldHaveType(NoopThemeHierarchyProvider::class);
     }
 
     function it_implements_theme_hierarchy_provider_interface()

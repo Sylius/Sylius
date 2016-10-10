@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Loader\ThemeLoadingFailedException;
 
 /**
@@ -24,7 +23,7 @@ final class ThemeLoadingFailedExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\ThemeLoadingFailedException');
+        $this->shouldHaveType(ThemeLoadingFailedException::class);
     }
 
     function it_is_a_domain_exception()

@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\ThemeBundle\Templating;
 
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * TemplateNameParser converts template names from the short notation

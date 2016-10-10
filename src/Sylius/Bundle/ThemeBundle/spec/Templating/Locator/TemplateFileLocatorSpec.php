@@ -40,7 +40,7 @@ final class TemplateFileLocatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateFileLocator');
+        $this->shouldHaveType(TemplateFileLocator::class);
     }
 
     function it_implements_file_locator_interface()

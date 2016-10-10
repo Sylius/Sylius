@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Controller\ThemeScreenshotController;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
@@ -34,13 +33,13 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
     function let(ThemeRepositoryInterface $themeRepository)
     {
         $this->beConstructedWith($themeRepository);
-        
+
         $this->fixturesPath = realpath(__DIR__ . '/../Fixtures');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Controller\ThemeScreenshotController');
+        $this->shouldHaveType(ThemeScreenshotController::class);
     }
 
     function it_streams_screenshot_as_a_response(ThemeRepositoryInterface $themeRepository, ThemeInterface $theme)

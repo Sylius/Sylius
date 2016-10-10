@@ -13,12 +13,16 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.theme.asset.assets_installer" class="Sylius\Bundle\ThemeBundle\Asset\Installer\OutputAwareAssetsInstaller">
+        <service id="sylius.theme.asset.assets_installer" class="Sylius\Bundle\ThemeBundle\Asset\Installer\AssetsInstaller">
             <argument type="service" id="filesystem" />
             <argument type="service" id="kernel" />
             <argument type="service" id="sylius.repository.theme" />
             <argument type="service" id="sylius.theme.hierarchy_provider" />
             <argument type="service" id="sylius.theme.asset.path_resolver" />
+        </service>
+
+        <service id="sylius.theme.asset.assets_installer.output_aware" class="Sylius\Bundle\ThemeBundle\Asset\Installer\OutputAwareAssetsInstaller" decorates="sylius.theme.asset.assets_installer">
+            <argument type="service" id="sylius.theme.asset.assets_installer.output_aware.inner" />
         </service>
 
         <service id="sylius.theme.asset.path_resolver" class="Sylius\Bundle\ThemeBundle\Asset\PathResolver" public="false" />

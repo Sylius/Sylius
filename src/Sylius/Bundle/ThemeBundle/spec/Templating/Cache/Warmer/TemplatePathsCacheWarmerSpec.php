@@ -40,7 +40,7 @@ final class TemplatePathsCacheWarmerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Templating\Cache\Warmer\TemplatePathsCacheWarmer');
+        $this->shouldHaveType(TemplatePathsCacheWarmer::class);
     }
 
     function it_implements_cache_warmer_interface()

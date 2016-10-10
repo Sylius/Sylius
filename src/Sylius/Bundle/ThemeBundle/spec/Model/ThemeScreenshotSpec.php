@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 
 /**
@@ -29,7 +28,7 @@ final class ThemeScreenshotSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot');
+        $this->shouldHaveType(ThemeScreenshot::class);
     }
 
     function it_has_path()

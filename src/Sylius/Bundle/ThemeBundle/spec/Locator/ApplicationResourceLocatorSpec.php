@@ -32,7 +32,7 @@ final class ApplicationResourceLocatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Locator\ApplicationResourceLocator');
+        $this->shouldHaveType(ApplicationResourceLocator::class);
     }
 
     function it_implements_resource_locator_interface()

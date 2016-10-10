@@ -16,8 +16,8 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Extension\Extension;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
@@ -39,19 +39,19 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
     public function load(array $config, ContainerBuilder $container)
     {
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
         if ($config['assets']['enabled']) {
-            $loader->load('support/assets.xml');
+            $loader->load('services/integrations/assets.xml');
         }
 
         if ($config['templating']['enabled']) {
-            $loader->load('support/templating.xml');
+            $loader->load('services/integrations/templating.xml');
         }
 
         if ($config['translations']['enabled']) {
-            $loader->load('support/translations.xml');
+            $loader->load('services/integrations/translations.xml');
         }
 
         $this->resolveConfigurationSources($container, $config);
@@ -66,7 +66,7 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
      */
     public function prepend(ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $this->prependSyliusSettings($container, $loader);
         $this->prependTwig($container, $loader);
@@ -104,7 +104,7 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
             return;
         }
 
-        $loader->load('integration/settings.xml');
+        $loader->load('services/integrations/settings.xml');
     }
 
     /**
@@ -117,7 +117,7 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
             return;
         }
 
-        $loader->load('integration/twig.xml');
+        $loader->load('services/integrations/twig.xml');
     }
 
     /**

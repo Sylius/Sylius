@@ -39,7 +39,7 @@ final class ThemeSettingsManagerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsManager');
+        $this->shouldHaveType(ThemeSettingsManager::class);
     }
 
     function it_implements_theme_settings_manager_interface()
