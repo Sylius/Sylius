@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Customer\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
