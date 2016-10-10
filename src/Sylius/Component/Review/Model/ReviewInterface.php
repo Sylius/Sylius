@@ -25,19 +25,14 @@ interface ReviewInterface extends TimestampableInterface, ResourceInterface
     const STATUS_REJECTED = 'rejected';
 
     /**
-     * @param string $title
-     */
-    public function setTitle($title);
-
-    /**
      * @return string
      */
     public function getTitle();
 
     /**
-     * @param int $rating
+     * @param string $title
      */
-    public function setRating($rating);
+    public function setTitle($title);
 
     /**
      * @return int
@@ -45,9 +40,9 @@ interface ReviewInterface extends TimestampableInterface, ResourceInterface
     public function getRating();
 
     /**
-     * @param string $comment
+     * @param int $rating
      */
-    public function setComment($comment);
+    public function setRating($rating);
 
     /**
      * @return string
@@ -55,9 +50,9 @@ interface ReviewInterface extends TimestampableInterface, ResourceInterface
     public function getComment();
 
     /**
-     * @param ReviewerInterface $author
+     * @param string $comment
      */
-    public function setAuthor(ReviewerInterface $author = null);
+    public function setComment($comment);
 
     /**
      * @return ReviewerInterface
@@ -65,14 +60,19 @@ interface ReviewInterface extends TimestampableInterface, ResourceInterface
     public function getAuthor();
 
     /**
-     * @param string $status
+     * @param ReviewerInterface $author
      */
-    public function setStatus($status);
+    public function setAuthor(ReviewerInterface $author = null);
 
     /**
      * @return string
      */
     public function getStatus();
+
+    /**
+     * @param string $status
+     */
+    public function setStatus($status);
 
     /**
      * @return ReviewableInterface
