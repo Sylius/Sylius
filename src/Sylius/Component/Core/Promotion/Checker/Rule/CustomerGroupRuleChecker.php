@@ -39,7 +39,7 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        if (is_null($customer->getGroup())) {
+        if (null === $customer->getGroup()) {
             return false;
         }
 
