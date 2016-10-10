@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Taxon translation form type.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class TaxonTranslationType extends AbstractResourceType

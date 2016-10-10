@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\TaxonomyBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -19,6 +20,12 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
+/**
+ * @mixin BuildTaxonFormSubscriber
+ *
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
+ */
 final class BuildTaxonFormSubscriberSpec extends ObjectBehavior
 {
     function let(FormFactoryInterface $factory)
@@ -28,7 +35,7 @@ final class BuildTaxonFormSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber');
+        $this->shouldHaveType(BuildTaxonFormSubscriber::class);
     }
 
     function it_is_a_subscriber()
@@ -38,32 +45,39 @@ final class BuildTaxonFormSubscriberSpec extends ObjectBehavior
 
     function it_subscribes_to_event()
     {
-        $this::getSubscribedEvents()->shouldReturn([
-            FormEvents::PRE_SET_DATA => 'preSetData',
-        ]);
+        $this::getSubscribedEvents()->shouldReturn(
+            [
+                FormEvents::PRE_SET_DATA => 'preSetData',
+            ]
+        );
     }
 
     function it_adds_a_parent_form(
-        $factory,
+        FormFactoryInterface $factory,
         FormEvent $event,
         FormInterface $form,
         TaxonInterface $taxon,
         TaxonInterface $parent,
         FormInterface $parentForm
     ) {
-        $event->getForm()->shouldBeCalled()->willReturn($form);
-        $event->getData()->shouldBeCalled()->willReturn($taxon);
+        $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($taxon);
 
-        $taxon->getId()->shouldBeCalled()->willReturn(null);
-        $taxon->getParent()->shouldBeCalled()->willReturn($parent);
+        $taxon->getId()->willReturn(null);
+        $taxon->getParent()->willReturn($parent);
 
-        $factory->createNamed('parent', 'sylius_taxon_choice', $parent, [
-            'filter' => null,
-            'required' => false,
-            'label' => 'sylius.form.taxon.parent',
-            'empty_value' => '---',
-            'auto_initialize' => false,
-        ])->shouldBeCalled()->willReturn($parentForm);
+        $factory
+            ->createNamed('parent', 'sylius_taxon_choice', $parent,
+                [
+                    'filter' => null,
+                    'required' => false,
+                    'label' => 'sylius.form.taxon.parent',
+                    'empty_value' => '---',
+                    'auto_initialize' => false,
+                ]
+            )
+            ->willReturn($parentForm)
+        ;
 
         $form->add($parentForm)->shouldBeCalled();
 
