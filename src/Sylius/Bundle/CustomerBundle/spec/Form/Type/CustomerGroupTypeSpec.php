@@ -13,19 +13,25 @@ namespace spec\Sylius\Bundle\CustomerBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-final class GroupTypeSpec extends ObjectBehavior
+/**
+ * @mixin CustomerGroupType
+ *
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ */
+final class CustomerGroupTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Group', ['sylius']);
+        $this->beConstructedWith('CustomerGroup', ['sylius']);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CustomerBundle\Form\Type\GroupType');
+        $this->shouldHaveType(CustomerGroupType::class);
     }
 
     function it_is_a_form()
@@ -35,13 +41,17 @@ final class GroupTypeSpec extends ObjectBehavior
 
     function it_builds_a_form(FormBuilderInterface $builder)
     {
-        $builder->add('name', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
+        $builder
+            ->add('name', 'text', Argument::type('array'))
+            ->shouldbeCalled()
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder);
     }
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_group');
+        $this->getName()->shouldReturn('sylius_customer_group');
     }
 }

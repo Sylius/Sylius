@@ -42,6 +42,13 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.setup.customer_group" class="Sylius\Behat\Context\Setup\CustomerGroupContext" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.repository.customer_group" container="symfony" />
+            <argument type="service" id="sylius.factory.customer_group" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.setup.geographical" class="Sylius\Behat\Context\Setup\GeographicalContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.factory.country" container="symfony" />

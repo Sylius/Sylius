@@ -46,7 +46,7 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
         $context = [];
         if (null !== $customer = $order->getCustomer()) {
             $context['customer'] = $customer;
-            $context['groups'] = $customer->getGroups()->toArray();
+            $context['groups'] = [$customer->getGroup()];
         }
 
         if (null !== $order->getChannel()) {

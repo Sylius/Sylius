@@ -13,6 +13,5 @@
     "email_canonical": "john.diggle@example.com",
     "first_name": "John",
     "last_name": "Diggle",
-    "gender": "m",
-    "groups": []
+    "gender": "m"
 }

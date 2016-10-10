@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface GroupInterface extends ResourceInterface
+interface CustomerGroupInterface extends ResourceInterface
 {
     /**
      * @return string

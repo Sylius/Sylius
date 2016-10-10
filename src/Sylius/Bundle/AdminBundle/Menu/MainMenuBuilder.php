@@ -90,6 +90,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabel('sylius.menu.admin.main.customers.customers')
             ->setLabelAttribute('icon', 'users')
         ;
+
+        $customerSubMenu
+            ->addChild('groups', ['route' => 'sylius_admin_customer_group_index'])
+            ->setLabel('sylius.menu.admin.main.customers.groups')
+            ->setLabelAttribute('icon', 'archive')
+        ;
     }
 
     /**

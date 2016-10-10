@@ -12,13 +12,12 @@
 namespace Sylius\Component\Customer\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class Customer implements CustomerInterface, GroupableInterface
+class Customer implements CustomerInterface
 {
     use TimestampableTrait;
 
@@ -58,9 +57,9 @@ class Customer implements CustomerInterface, GroupableInterface
     protected $gender = CustomerInterface::UNKNOWN_GENDER;
 
     /**
-     * @var Collection|GroupInterface[]
+     * @var CustomerGroupInterface
      */
-    protected $groups;
+    protected $group;
 
     /**
      * @var string
@@ -209,50 +208,17 @@ class Customer implements CustomerInterface, GroupableInterface
     /**
      * {@inheritdoc}
      */
-    public function getGroups()
+    public function getGroup()
     {
-        return $this->groups;
+        return $this->group;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasGroup($name)
+    public function setGroup(CustomerGroupInterface $group)
     {
-        return in_array($name, $this->getGroupNames(), true);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getGroupNames()
-    {
-        $names = [];
-        foreach ($this->groups as $group) {
-            $names[] = $group->getName();
-        }
-
-        return $names;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addGroup(GroupInterface $group)
-    {
-        if (!$this->groups->contains($group)) {
-            $this->groups->add($group);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeGroup(GroupInterface $group)
-    {
-        if ($this->groups->contains($group)) {
-            $this->groups->removeElement($group);
-        }
+        $this->group = $group;
     }
 
     /**

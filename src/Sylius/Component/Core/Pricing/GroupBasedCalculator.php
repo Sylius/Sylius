@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Pricing;
 
-use Sylius\Component\Customer\Model\GroupInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -39,6 +39,6 @@ class GroupBasedCalculator extends AbstractCalculator
      */
     protected function getClassName()
     {
-        return GroupInterface::class;
+        return CustomerGroupInterface::class;
     }
 }

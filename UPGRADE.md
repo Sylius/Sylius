@@ -3,6 +3,11 @@ UPGRADE
 
 ## From 0.19 to 1.0.0-alpha
 
+### Customer
+
+ * Renamed ``Group`` to ``CustomerGroup``
+ * Changed relation between ``CustomerGroup`` and ``Customer`` to one-to-many
+
 ### Product and ProductBundle
 
  * Renamed ``options`` property to ``optionValues`` in ``ProductVariant``

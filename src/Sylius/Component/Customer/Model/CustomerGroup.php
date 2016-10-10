@@ -15,7 +15,7 @@ namespace Sylius\Component\Customer\Model;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class Group implements GroupInterface
+class CustomerGroup implements CustomerGroupInterface
 {
     /**
      * @var mixed

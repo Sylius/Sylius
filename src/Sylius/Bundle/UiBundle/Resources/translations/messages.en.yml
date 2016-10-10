@@ -134,7 +134,6 @@ sylius:
         create_country: 'Create country'
         create_currency: 'Create currency'
         create_customer: 'Create customer'
-        create_group: 'Create group'
         create_imagine_block: 'Create imagine block'
         create_locale: 'Create locale'
         create_menu: 'Create menu'
@@ -187,6 +186,7 @@ sylius:
         customer_can_login_to_the_store: Customer can login to the store
         customer_care: Customer Care
         customer_details: 'Customer details'
+        customer_groups: Customer groups
         customer_id: 'Customer ID'
         customer_login: Customer login
         customer_not_notified: 'Customer not notified'
@@ -224,7 +224,6 @@ sylius:
         edit_coupon: Edit coupon
         edit_currency: Edit currency
         edit_customer: Edit customer
-        edit_group: 'Edit group'
         edit_locale: 'Edit locale'
         edit_my_address: 'Edit my address'
         edit_payment_method: Edit payment method
@@ -317,7 +316,6 @@ sylius:
         go: Go
         go_to_dashboard: 'Go to dashboard'
         grand_total: 'Grand total'
-        groups: Groups
         guest: Guest
         guest_customer: Guest customer
         have_an_account_already: Have an account already
@@ -385,6 +383,7 @@ sylius:
         manage_coupons: Manage coupons
         manage_currencies_available_in_the_store: Manage currencies available in the store
         manage_customers: 'Manage customers'
+        manage_customer_groups: Manage groups of your customers
         manage_discounts_and_promotional_campaigns: Manage discounts and promotional campaigns
         manage_emails: 'Manage Emails'
         manage_geographical_zones: Manage geographical zones
@@ -699,7 +698,6 @@ sylius:
         there_are_no_currencies_to_display: 'There are no currencies to display'
         there_are_no_customers_to_display: 'There are no customers to display'
         there_are_no_emails_configured: 'There are no emails configured'
-        there_are_no_groups_to_display: 'There are no groups to display'
         there_are_no_images_for_this_product: 'There are no images for this product'
         there_are_no_inventory_items_to_display: 'There are no inventory items to display'
         there_are_no_inventory_units_to_display: 'There are no inventory units to display'

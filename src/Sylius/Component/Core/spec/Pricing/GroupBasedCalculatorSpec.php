@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Core\Pricing;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
-use Sylius\Component\Customer\Model\GroupInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -47,7 +47,7 @@ final class GroupBasedCalculatorSpec extends ObjectBehavior
 
     function it_returns_the_default_price_if_configuration_does_not_exist_for_group(
         PriceableInterface $priceable,
-        GroupInterface $group
+        CustomerGroupInterface $group
     ) {
         $configuration = [
             42 => 4999,
@@ -64,7 +64,7 @@ final class GroupBasedCalculatorSpec extends ObjectBehavior
 
     function it_returns_the_price_for_group_if_configuration_exists(
         PriceableInterface $priceable,
-        GroupInterface $group
+        CustomerGroupInterface $group
     ) {
         $configuration = [
             42 => 4999,
@@ -80,8 +80,8 @@ final class GroupBasedCalculatorSpec extends ObjectBehavior
 
     function it_returns_the_lowest_price_if_more_than_1_group_provided_in_context(
         PriceableInterface $priceable,
-        GroupInterface $group1,
-        GroupInterface $group2
+        CustomerGroupInterface $group1,
+        CustomerGroupInterface $group2
     ) {
         $configuration = [
             42 => 4999,

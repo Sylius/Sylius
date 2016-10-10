@@ -4,6 +4,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/country.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/currency.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/customer.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/customer_group.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/locale.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/order.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/payment_method.yml" }

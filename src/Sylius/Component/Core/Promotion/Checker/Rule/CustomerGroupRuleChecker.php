@@ -11,12 +11,11 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\User\Model\GroupableInterface;
-use Sylius\Component\User\Model\GroupInterface;
 
 /**
  * @author Antonio Perić <antonio@locastic.com>
@@ -36,15 +35,12 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        if (!$customer instanceof GroupableInterface) {
+        if (!$customer instanceof CustomerInterface) {
             return false;
         }
 
-        /* @var GroupInterface $group */
-        foreach ($customer->getGroups() as $group) {
-            if ($configuration['groups'] == $group->getId()) {
-                return true;
-            }
+        if ($configuration['groups'] === $customer->getGroup()->getId()) {
+            return true;
         }
 
         return false;

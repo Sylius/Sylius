@@ -54,7 +54,7 @@ final class UsernameOrEmailProviderSpec extends ObjectBehavior
 
     function it_does_not_support_other_classes()
     {
-        $this->supportsClass('Sylius\Component\User\Model\GroupInterface')->shouldReturn(false);
+        $this->supportsClass('Sylius\Component\User\Model\CustomerGroupInterface')->shouldReturn(false);
         $this->supportsClass('Acme\Fake\Class')->shouldReturn(false);
     }
 

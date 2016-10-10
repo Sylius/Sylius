@@ -18,6 +18,9 @@ sylius_admin_currency:
 sylius_admin_customer:
     resource: "@SyliusAdminBundle/Resources/config/routing/customer.yml"
 
+sylius_admin_customer_group:
+    resource: "@SyliusAdminBundle/Resources/config/routing/customer_group.yml"
+
 sylius_admin_locale:
     resource: "@SyliusAdminBundle/Resources/config/routing/locale.yml"
 
