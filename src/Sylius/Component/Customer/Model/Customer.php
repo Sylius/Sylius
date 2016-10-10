@@ -73,7 +73,6 @@ class Customer implements CustomerInterface
 
     public function __construct()
     {
-        $this->groups = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
