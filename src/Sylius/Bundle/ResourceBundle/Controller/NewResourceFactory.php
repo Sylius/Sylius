@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class NewResourceFactory implements NewResourceFactoryInterface
+final class NewResourceFactory implements NewResourceFactoryInterface
 {
     /**
      * {@inheritdoc}
@@ -27,9 +27,8 @@ class NewResourceFactory implements NewResourceFactoryInterface
             return $factory->createNew();
         }
 
-        $callable = [$factory, $method];
-        $arguments = $requestConfiguration->getFactoryArguments();
+        $arguments = array_values($requestConfiguration->getFactoryArguments());
 
-        return call_user_func_array($callable, $arguments);
+        return $factory->$method(...$arguments);
     }
 }
