@@ -24,7 +24,7 @@ Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/la
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
+All information about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
 
 Mailing lists
 -------------

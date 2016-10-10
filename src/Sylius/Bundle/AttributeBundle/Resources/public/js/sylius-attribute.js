@@ -19,7 +19,7 @@
     }
 
     function modifyModalOnItemDelete() {
-        $('a[data-form-collection="delete"]').on('mousedown', function(){
+        $('a[data-form-collection="delete"]').on('mousedown', function() {
             setTimeout(function(){
                 controlAttributesList();
             }, 500);
@@ -31,7 +31,7 @@
             $(this).css('display', 'block');
             $(this).find('input').attr('checked', false);
         });
-        $.each($('#attributes .collection-item'), function(){
+        $.each($('#attributes .collection-item'), function() {
             var usedAttributeId =  $(this).find('input').val();
 
             $('#attributes-modal').find('input[value="'+usedAttributeId+'"]').parent().css('display', 'none');
@@ -39,7 +39,7 @@
     }
 
     function modifyAttributeForms(data) {
-        $.each($(data).find('input,select,textarea'), function(){
+        $.each($(data).find('input,select,textarea'), function() {
             if ($(this).attr('data-name') != null) {
                 $(this).attr('name', $(this).attr('data-name'));
             }

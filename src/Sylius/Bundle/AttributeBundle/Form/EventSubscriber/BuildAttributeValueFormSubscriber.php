@@ -17,11 +17,12 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
+final class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var RepositoryInterface
@@ -68,9 +69,11 @@ class BuildAttributeValueFormSubscriber implements EventSubscriberInterface
     {
         $attributeValue = $event->getData();
 
-        if (!isset($attributeValue['attribute'])) {
-            throw new \InvalidArgumentException('Cannot create an attribute value form on pre submit event without an "attribute" key in data.');
-        }
+        Assert::keyExists(
+            $attributeValue,
+            'attribute',
+            'Cannot create an attribute value form on pre submit event without an "attribute" key in data.'
+        );
 
         $form = $event->getForm();
         $attribute = $this->attributeRepository->find($attributeValue['attribute']);

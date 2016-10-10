@@ -13,6 +13,8 @@ namespace Sylius\Bundle\AttributeBundle\Controller;
 
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Attribute\Model\AttributeInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -78,12 +80,7 @@ class AttributeController extends ResourceController
 
         $attributes = $attributeRepository->findBy(['id' => $choices]);
         foreach ($attributes as $attribute) {
-            $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
-
-            $options = ['label' => $attribute->getName()];
-
-            $form = $this->get('form.factory')->createNamed('value', $attributeForm, null, $options);
-            $forms[$attribute->getId()] = $form->createView();
+            $forms[$attribute->getId()] = $this->getAttributeForm($attribute);
         }
 
         return $this->render($template, [
@@ -91,5 +88,22 @@ class AttributeController extends ResourceController
             'count' => $request->query->get('count'),
             'metadata' => $this->metadata,
         ]);
+    }
+
+    /**
+     * @param AttributeInterface $attribute
+     *
+     * @return FormView
+     */
+    private function getAttributeForm(AttributeInterface $attribute)
+    {
+        $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
+
+        $form = $this
+            ->get('form.factory')
+            ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName()])
+        ;
+
+        return $form->createView();
     }
 }

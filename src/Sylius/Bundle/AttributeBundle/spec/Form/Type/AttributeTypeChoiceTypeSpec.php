@@ -12,10 +12,13 @@
 namespace spec\Sylius\Bundle\AttributeBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin AttributeTypeChoiceType
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class AttributeTypeChoiceTypeSpec extends ObjectBehavior
@@ -27,7 +30,7 @@ final class AttributeTypeChoiceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType');
+        $this->shouldHaveType(AttributeTypeChoiceType::class);
     }
 
     function it_is_abstract_type()
