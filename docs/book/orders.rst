@@ -35,6 +35,23 @@ Then get a channel to which you would like to add your Order. You can get it fro
 
     $order->setChannel($channel);
 
+Next give your order a locale code.
+
+.. code-block:: php
+
+    /** @var string $localeCode */
+    $localeCode = $this->container->get('sylius.context.locale')->getLocaleCode();
+
+    $order->setLocaleCode($localeCode);
+
+And a currency code:
+
+.. code-block:: php
+
+    $currencyCode = $this->container->get('sylius.context.currency')->getCurrencyCode();
+
+    $order->setCurrencyCode($currencyCode);
+
 What is more the proper Order instance should also have the **Customer** assigned.
 You can get it from the repository by email.
 
@@ -90,7 +107,7 @@ The Order State Machine
 
 Order has also its own state, which can have the following values:
 
-* ``cart`` - before the checkout is completed,
+* ``cart`` - before the checkout is completed, it is the initial state of an Order,
 * ``new`` - when checkout is completed the cart is transformed into a ``new`` order,
 * ``fulfilled`` - when the order payments and shipments are completed,
 * ``cancelled`` - when the order was cancelled.
