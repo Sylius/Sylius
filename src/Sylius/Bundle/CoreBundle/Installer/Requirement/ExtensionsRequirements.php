@@ -18,104 +18,104 @@ class ExtensionsRequirements extends RequirementCollection
 {
     public function __construct(TranslatorInterface $translator)
     {
-        parent::__construct($translator->trans('sylius.extensions.header', [], 'requirements'));
+        parent::__construct($translator->trans('sylius.installer.extensions.header', []));
 
         $this
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.json_encode', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.json_encode', []),
                 function_exists('json_encode'),
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'JSON'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'JSON'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.session_start', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.session_start', []),
                 function_exists('session_start'),
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'session'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'session'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.ctype', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.ctype', []),
                 function_exists('ctype_alpha'),
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'ctype'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'ctype'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.token_get_all', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.token_get_all', []),
                 function_exists('token_get_all'),
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'JSON'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'JSON'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.simplexml_import_dom', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.simplexml_import_dom', []),
                 function_exists('simplexml_import_dom'),
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'SimpleXML'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'SimpleXML'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.apc', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.apc', []),
                 !(function_exists('apc_store') && ini_get('apc.enabled')) || version_compare(phpversion('apc'), '3.0.17', '>='),
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'APC (>=3.0.17)'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'APC (>=3.0.17)'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.pcre', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.pcre', []),
                 defined('PCRE_VERSION') ? ((float) PCRE_VERSION) > 8.0 : false,
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'PCRE (>=8.0)'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'PCRE (>=8.0)'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.php_xml', [], 'requirements'),
-                class_exists(\DomDocument::class),
+                $translator->trans('sylius.installer.extensions.php_xml', []),
+                class_exists(\DOMDocument::class),
                 false,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'PHP-XML'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'PHP-XML'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.mbstring', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.mbstring', []),
                 function_exists('mb_strlen'),
                 false,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'mbstring'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'mbstring'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.iconv', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.iconv', []),
                 function_exists('iconv'),
                 false,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'iconv'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'iconv'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.exif', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.exif', []),
                 function_exists('exif_read_data'),
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'exif'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'exif'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.intl', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.intl', []),
                 extension_loaded('intl'),
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'intl'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'intl'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.fileinfo', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.fileinfo', []),
                 extension_loaded('fileinfo'),
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'fileinfo'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'fileinfo'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.accelerator.header', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.accelerator.header', []),
                 !empty(ini_get('opcache.enable')),
                 false,
-                $translator->trans('sylius.extensions.accelerator.help', [], 'requirements')
+                $translator->trans('sylius.installer.extensions.accelerator.help', [])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.pdo', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.pdo', []),
                 class_exists('PDO'),
                 false,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'PDO'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'PDO'])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.extensions.gd', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.gd', []),
                 defined('GD_VERSION'),
                 true,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'gd'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'gd'])
             ))
         ;
 
@@ -134,10 +134,10 @@ class ExtensionsRequirements extends RequirementCollection
             }
 
             $this->add(new Requirement(
-                $translator->trans('sylius.extensions.icu', [], 'requirements'),
+                $translator->trans('sylius.installer.extensions.icu', []),
                 version_compare($version, '4.0', '>='),
                 false,
-                $translator->trans('sylius.extensions.help', ['%extension%' => 'ICU (>=4.0)'], 'requirements')
+                $translator->trans('sylius.installer.extensions.help', ['%extension%' => 'ICU (>=4.0)'])
             ));
         }
     }

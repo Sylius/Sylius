@@ -17,30 +17,30 @@ class FilesystemRequirements extends RequirementCollection
 {
     public function __construct(TranslatorInterface $translator, $root, $cacheDir, $logDir)
     {
-        parent::__construct($translator->trans('sylius.filesystem.header', [], 'requirements'));
+        parent::__construct($translator->trans('sylius.installer.filesystem.header', []));
 
         $this
             ->add(new Requirement(
-                $translator->trans('sylius.filesystem.vendors', [], 'requirements'),
+                $translator->trans('sylius.installer.filesystem.vendors', []),
                 is_dir($root.'/../vendor')
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.filesystem.cache.header', [], 'requirements'),
+                $translator->trans('sylius.installer.filesystem.cache.header', []),
                 is_writable($cacheDir),
                 true,
-                $translator->trans('sylius.filesystem.cache.help', ['%path%' => $cacheDir], 'requirements')
+                $translator->trans('sylius.installer.filesystem.cache.help', ['%path%' => $cacheDir])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.filesystem.logs.header', [], 'requirements'),
+                $translator->trans('sylius.installer.filesystem.logs.header', []),
                 is_writable($logDir),
                 true,
-                $translator->trans('sylius.filesystem.logs.help', ['%path%' => $logDir], 'requirements')
+                $translator->trans('sylius.installer.filesystem.logs.help', ['%path%' => $logDir])
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.filesystem.parameters.header', [], 'requirements'),
+                $translator->trans('sylius.installer.filesystem.parameters.header', []),
                 is_writable($root.'/config/parameters.yml'),
                 true,
-                $translator->trans('sylius.filesystem.parameters.help', ['%path%' => $root.'/config/parameters.yml'], 'requirements')
+                $translator->trans('sylius.installer.filesystem.parameters.help', ['%path%' => $root.'/config/parameters.yml'])
             ))
         ;
     }
