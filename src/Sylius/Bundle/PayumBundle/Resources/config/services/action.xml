@@ -13,15 +13,15 @@
         <service id="sylius.payum.action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">
             <tag name="payum.action" all="true" />
         </service>
+        <service id="sylius.payum.action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\ResolveNextRouteAction">
+            <tag name="payum.action" all="true" alias="sylius.resolve_next_route" />
+        </service>
 
         <!-- PayPal -->
         <service id="sylius.payum.action.convert_payment_to_paypal_express" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentToPaypalExpressAction">
             <argument type="service" id="sylius.invoice_number_generator" />
             <argument type="service" id="sylius.currency_converter" />
             <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.convert_payment" />
-        </service>
-        <service id="sylius.payum.paypal_express_checkout.action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ResolveNextRouteAction">
-            <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.paypal_express_checkout_resolve_next_route" />
         </service>
 
         <!-- Offline -->

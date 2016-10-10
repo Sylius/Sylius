@@ -36,10 +36,6 @@ payum:
             password: TEST
             signature: TEST
             sandbox: true
-        stripe_checkout:
-            factory: stripe_checkout
-            secret_key: TEST
-            publishable_key: TEST
 
 swiftmailer:
     disable_delivery: true
@@ -47,13 +43,6 @@ swiftmailer:
     spool:
         type: file
         path: "%kernel.cache_dir%/spool"
-
-sylius_payment:
-    gateways:
-        cc: Credit Card
-        test: Test
-        stripe_checkout: Stripe
-        paypal_express_checkout: Paypal Express Checkout
 
 sylius_theme:
     sources:
