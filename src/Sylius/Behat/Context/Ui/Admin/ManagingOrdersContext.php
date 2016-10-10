@@ -215,8 +215,8 @@ final class ManagingOrdersContext implements Context
     {
         $itemsCount = $this->showPage->countItems();
 
-        Assert::eq(
-            $amount,
+        Assert::same(
+            (int) $amount,
             $itemsCount,
             sprintf('There should be %d items, but get %d.', $amount, $itemsCount)
         );
@@ -660,7 +660,7 @@ final class ManagingOrdersContext implements Context
     {
         $actualNumberOfPayments = $this->showPage->getPaymentsCount();
 
-        Assert::eq($number, $actualNumberOfPayments);
+        Assert::same((int) $number, $actualNumberOfPayments);
     }
 
     /**

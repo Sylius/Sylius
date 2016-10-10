@@ -13,7 +13,7 @@ Feature: Paying offline during checkout as guest
     @ui
     Scenario: Successfully placing an order
         Given I have product "PHP T-Shirt" in the cart
-        When I complete addressing step with email "john@example.com" and "United States" as shipping country
+        When I complete addressing step with email "john@example.com" and "United States" based shipping address
         And I select "Free" shipping method
         And I complete the shipping step
         And I choose "Offline" payment method

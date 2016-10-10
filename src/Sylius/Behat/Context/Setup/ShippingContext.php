@@ -84,7 +84,7 @@ final class ShippingContext implements Context
 
     /**
      * @Given the store ships everything for free within the :zone zone
-     * @Given /^the store ships everything for free for (the rest of the world)$/
+     * @Given /^the store ships everything for free for the (rest of the world)$/
      */
     public function storeShipsEverythingForFree(ZoneInterface $zone = null)
     {
@@ -137,7 +137,7 @@ final class ShippingContext implements Context
     /**
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee$/
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee within the ("[^"]+" zone)$/
-     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee for (the rest of the world)$/
+     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee for the (rest of the world)$/
      */
     public function storeHasShippingMethodWithFee($shippingMethodName, $fee, ZoneInterface $zone = null)
     {
@@ -166,15 +166,15 @@ final class ShippingContext implements Context
     public function theStoreHasShippingMethodWithFeeOnFistUnitAndOnNext($shippingMethodName, $fee, $perUnitFee, $limit)
     {
         $this->createShippingMethod(
-            $shippingMethodName, 
-            null, 
-            null, 
-            'en', 
-            ['first_unit_cost' => $fee, 'additional_unit_cost' => $perUnitFee, 'additional_unit_limit' => $limit], 
+            $shippingMethodName,
+            null,
+            null,
+            'en',
+            ['first_unit_cost' => $fee, 'additional_unit_cost' => $perUnitFee, 'additional_unit_limit' => $limit],
             DefaultCalculators::FLEXIBLE_RATE
         );
     }
-    
+
     /**
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee not assigned to any channel$/
      */

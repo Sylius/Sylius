@@ -249,8 +249,8 @@ final class ManagingPromotionCouponsContext implements Context
     {
         $this->indexPage->open(['promotionId' => $promotion->getId()]);
 
-        Assert::eq(
-            $number,
+        Assert::same(
+            (int) $number,
             $this->indexPage->countItems(),
             'There should be %s coupons but is %s'
         );

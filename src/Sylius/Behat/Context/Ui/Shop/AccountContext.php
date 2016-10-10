@@ -377,7 +377,7 @@ final class AccountContext implements Context
     public function iShouldSeeItemsInTheList($numberOfItems)
     {
         Assert::same(
-            $numberOfItems,
+            (int) $numberOfItems,
             $this->orderShowPage->countItems(),
             '%s items should appear on order page, but %s rows has been found'
         );

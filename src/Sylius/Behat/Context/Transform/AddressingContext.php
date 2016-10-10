@@ -45,7 +45,7 @@ final class AddressingContext implements Context
 
     /**
      * @Transform /^to "([^"]+)"$/
-     * @Transform /^"([^"]+)" as shipping country$/
+     * @Transform /^"([^"]+)" based \w+ address$/
      */
     public function createNewAddress($countryName)
     {
@@ -63,7 +63,7 @@ final class AddressingContext implements Context
     {
         $countryCode = $this->countryNameConverter->convertToCode($countryName);
         $customerName = explode(' ', $customerName);
-        
+
         return $this->createAddress($countryCode, $customerName[0], $customerName[1], $cityName, $street, $postcode, $provinceName);
     }
 

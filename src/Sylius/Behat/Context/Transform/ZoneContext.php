@@ -54,7 +54,6 @@ final class ZoneContext implements Context
 
     /**
      * @Transform /^rest of the world$/
-     * @Transform /^the rest of the world$/
      */
     public function getRestOfTheWorldZone()
     {

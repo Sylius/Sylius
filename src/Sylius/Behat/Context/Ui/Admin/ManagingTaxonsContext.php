@@ -283,8 +283,8 @@ final class ManagingTaxonsContext implements Context
     {
         $taxonsOnPage = $this->createPage->countTaxons();
 
-        Assert::eq(
-            $number,
+        Assert::same(
+            (int) $number,
             $taxonsOnPage,
             sprintf('On list should be %d taxons but get %d.', $number, $taxonsOnPage)
         );

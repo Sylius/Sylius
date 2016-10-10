@@ -164,7 +164,7 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given /^(that channel)(?: also|) allows to shop using the "([^"]+)" currency with exchange rate (\d+)\.(\d+)$/
+     * @Given /^(that channel)(?: also|) allows to shop using the "([^"]+)" currency with exchange rate ([0-9\.]+)$/
      */
     public function thatChannelAllowsToShopUsingCurrency(ChannelInterface $channel, $currencyCode, $exchangeRate = 1.0)
     {
@@ -176,8 +176,8 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given /^the exchange rate for (currency "[^"]+") was changed to ((\d+)\.(\d+))$/
-     * @Given /^the ("[^"]+" currency) has an exchange rate of ((\d+)\.(\d+))$/
+     * @Given /^the exchange rate for (currency "[^"]+") was changed to ([0-9\.]+)$/
+     * @Given /^the ("[^"]+" currency) has an exchange rate of ([0-9\.]+)$/
      */
     public function theExchangeRateForWasChangedTo(CurrencyInterface $currency, $exchangeRate)
     {

@@ -25,7 +25,7 @@
         "sylius/registry": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.0",
+        "phpspec/phpspec": "^3.1",
         "symfony/property-access": "^2.8"
     },
     "config": {

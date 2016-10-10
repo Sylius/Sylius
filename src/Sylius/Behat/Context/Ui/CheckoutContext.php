@@ -1042,8 +1042,8 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given /^I have completed addressing step with email "([^"]+)" and ("([^"]+)" as shipping country)$/
-     * @When /^I complete addressing step with email "([^"]+)" and ("([^"]+)" as shipping country)$/
+     * @Given /^I have completed addressing step with email "([^"]+)" and ("[^"]+" based shipping address)$/
+     * @When /^I complete addressing step with email "([^"]+)" and ("[^"]+" based shipping address)$/
      */
     public function iCompleteAddressingStepWithEmail($email, AddressInterface $address)
     {
@@ -1201,7 +1201,7 @@ final class CheckoutContext implements Context
     {
         // Intentionally left blank to fulfill context expectation
     }
-    
+
     /**
      * @Then I should still be on the shipping step
      */
