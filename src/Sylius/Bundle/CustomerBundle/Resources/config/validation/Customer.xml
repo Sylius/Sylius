@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Component\Customer\Model\Customer">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="message">sylius.customer.email.unique</option>
+            <option name="fields">emailCanonical</option>
+            <option name="errorPath">email</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="firstName">
+            <constraint name="NotBlank">
+                <option name="message">sylius.customer.first_name.not_blank</option>
+                <option name="groups">sylius_customer_profile</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.customer.first_name.min</option>
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.customer.first_name.max</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="lastName">
+            <constraint name="NotBlank">
+                <option name="message">sylius.customer.last_name.not_blank</option>
+                <option name="groups">sylius_customer_profile</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.customer.last_name.min</option>
+                <option name="max">255</option>
+                <option name="maxMessage">sylius.customer.last_name.max</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="gender">
+            <constraint name="NotBlank">
+                <option name="message">sylius.customer.gender.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="email">
+            <constraint name="NotBlank">
+                <option name="message">sylius.customer.email.not_blank</option>
+                <option name="groups">
+                    <value>sylius</value>
+                    <value>sylius_customer_guest</value>
+                </option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.customer.email.min</option>
+                <option name="max">254</option>
+                <option name="maxMessage">sylius.customer.email.max</option>
+                <option name="groups">
+                    <value>sylius</value>
+                    <value>sylius_customer_guest</value>
+                </option>
+            </constraint>
+            <constraint name="Email">
+                <option name="message">sylius.customer.email.invalid</option>
+                <option name="groups">
+                    <value>sylius</value>
+                    <value>sylius_customer_guest</value>
+                </option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>
