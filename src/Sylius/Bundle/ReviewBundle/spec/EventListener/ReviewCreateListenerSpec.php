@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ReviewBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ReviewBundle\EventListener\ReviewCreateListener;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
@@ -19,6 +20,8 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
+ * @mixin ReviewCreateListener
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ReviewCreateListenerSpec extends ObjectBehavior
@@ -30,7 +33,7 @@ final class ReviewCreateListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\EventListener\ReviewCreateListener');
+        $this->shouldHaveType(ReviewCreateListener::class);
     }
 
     function it_adds_currently_logged_customer_as_author_to_newly_created_review_if_it_has_no_author_yet(
@@ -52,7 +55,10 @@ final class ReviewCreateListenerSpec extends ObjectBehavior
     {
         $event->getSubject()->willReturn('badObject')->shouldBeCalled();
 
-        $this->shouldThrow(new UnexpectedTypeException('badObject', ReviewInterface::class))->during('ensureReviewHasAuthor', [$event]);
+        $this
+            ->shouldThrow(new UnexpectedTypeException('badObject', ReviewInterface::class))
+            ->during('ensureReviewHasAuthor', [$event])
+        ;
     }
 
     function it_does_nothing_if_review_already_has_author(

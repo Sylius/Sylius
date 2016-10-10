@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ReviewBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmail;
+use Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmailValidator;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -23,6 +24,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\ExecutionContext;
 
 /**
+ * @mixin UniqueReviewerEmailValidator
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
@@ -40,7 +43,7 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmailValidator');
+        $this->shouldHaveType(UniqueReviewerEmailValidator::class);
     }
 
     function it_extends_constraint_validator_class()
@@ -67,7 +70,10 @@ final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
         $userRepository->findOneByEmail('john.doe@example.com')->willReturn($existingUser);
         $constraint->message = 'This email is already registered. Please log in.';
 
-        $context->addViolationAt('author', 'This email is already registered. Please log in.', [], null)->shouldBeCalled();
+        $context
+            ->addViolationAt('author', 'This email is already registered. Please log in.', [], null)
+            ->shouldBeCalled()
+        ;
 
         $this->validate($review, $constraint);
     }

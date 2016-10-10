@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ReviewBundle\Validator\Constraints;
 
+use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
+use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -60,6 +62,7 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
      */
     public function validate($review, Constraint $constraint)
     {
+        /* @var $customer ReviewerInterface */
         $customer = $review->getAuthor();
 
         $token = $this->tokenStorage->getToken();

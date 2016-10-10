@@ -12,9 +12,12 @@
 namespace spec\Sylius\Bundle\ReviewBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmail;
 use Symfony\Component\Validator\Constraint;
 
 /**
+ * @mixin UniqueReviewerEmail
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
@@ -22,7 +25,7 @@ final class UniqueReviewerEmailSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmail');
+        $this->shouldHaveType(UniqueReviewerEmail::class);
     }
 
     function it_extends_constraint_class()
@@ -30,7 +33,7 @@ final class UniqueReviewerEmailSpec extends ObjectBehavior
         $this->shouldHaveType(Constraint::class);
     }
 
-    function it_has_message()
+    function it_has_a_message()
     {
         $this->message->shouldReturn('sylius.review.author.already_exists');
     }
