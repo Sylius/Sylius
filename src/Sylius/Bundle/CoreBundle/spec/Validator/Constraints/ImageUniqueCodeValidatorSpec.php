@@ -40,35 +40,33 @@ final class ImageUniqueCodeValidatorSpec extends ObjectBehavior
     
     function it_adds_violation_if_there_two_images_with_the_same_owner_which_have_same_codes(
         ImageInterface $firstImage,
-        ImageInterface $secondImage,
-        ImageAwareInterface $owner
+        ImageInterface $secondImage
     ) {
-        $firstImage->getOwner()->willReturn($owner);
-        $secondImage->getOwner()->willReturn($owner);
-
         $firstImage->getCode()->willReturn('car');
         $secondImage->getCode()->willReturn('car');
 
-        $this->bulidViolation('[0].code', Argument::type('string'))->shouldBeCalled();
-        $this->bulidViolation('[1].code', Argument::type('string'))->shouldBeCalled();
+        $this->addViolationAt('[0].code', Argument::type('string'))->shouldBeCalled();
+        $this->addViolationAt('[1].code', Argument::type('string'))->shouldBeCalled();
 
-        $this->validate(new ArrayCollection($firstImage->getWrappedObject(), $secondImage->getWrappedObject()), new ImageUniqueCode());
+        $this->validate(
+            new ArrayCollection($firstImage->getWrappedObject(), $secondImage->getWrappedObject()),
+            new ImageUniqueCode()
+        );
     }
 
     function it_does_not_add_violation_if_there_is_no_duplication_of_a_code(
         ImageInterface $firstImage,
-        ImageInterface $secondImage,
-        ImageAwareInterface $owner
+        ImageInterface $secondImage
     ) {
-        $firstImage->getOwner()->willReturn($owner);
-        $secondImage->getOwner()->willReturn($owner);
-
         $firstImage->getCode()->willReturn('car');
         $secondImage->getCode()->willReturn('wipers');
 
-        $this->bulidViolation('[0].code', Argument::type('string'))->shouldNotBeCalled();
-        $this->bulidViolation('[1].code', Argument::type('string'))->shouldNotBeCalled();
+        $this->addViolationAt('[0].code', Argument::type('string'))->shouldNotBeCalled();
+        $this->addViolationAt('[1].code', Argument::type('string'))->shouldNotBeCalled();
 
-        $this->validate(new ArrayCollection($firstImage->getWrappedObject(), $secondImage->getWrappedObject()), new ImageUniqueCode());
+        $this->validate(
+            new ArrayCollection($firstImage->getWrappedObject(), $secondImage->getWrappedObject()),
+            new ImageUniqueCode()
+        );
     }
 }

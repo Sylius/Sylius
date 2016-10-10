@@ -412,7 +412,7 @@ final class ManagingTaxonsContext implements Context
         preg_match_all('!\d+!', $imageNumber, $matches);
 
         Assert::same(
-            $this->updatePage->getValidationMessageForImageAtPlace((int) $matches[0]), 
+            $this->updatePage->getValidationMessageForImageAtPlace(((int) $matches[0][0]) - 1),
             'Image code must be unique within this taxon.'
         );
     }

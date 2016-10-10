@@ -26,17 +26,19 @@ class ImageUniqueCodeValidator extends ConstraintValidator
      */
     public function validate($images, Constraint $constraint)
     {
+        $imagesCodes = [];
+
         /** @var ImageInterface[] $images */
         foreach ($images as $key => $image) {
-            $filteredImages = $images->filter(function(ImageInterface $imageFromObject) use ($image) {
-                return $imageFromObject->getOwner() === $image->getOwner()
-                        && $imageFromObject->getCode() === $image->getCode()
-                        && $imageFromObject !== $image
-                ;
-            });
+            if (!array_key_exists($image->getCode(), $imagesCodes)) {
+                $imagesCodes[$image->getCode()] = $key;
+                continue;
+            }
 
-            if(0 !== count($filteredImages)) {
-                $this->context->addViolationAt(sprintf('[%d].code', $key), $constraint->message);
+            $this->context->addViolationAt(sprintf('[%d].code', $key), $constraint->message);
+            if (false !== $imagesCodes[$image->getCode()]) {
+                $this->context->addViolationAt(sprintf('[%d].code', $imagesCodes[$image->getCode()]), $constraint->message);
+                $imagesCodes[$image->getCode()] = false;
             }
         }
     }

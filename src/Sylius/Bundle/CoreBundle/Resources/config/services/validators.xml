@@ -33,8 +33,5 @@
             <argument>%currency%</argument>
             <tag name="validator.constraint_validator" alias="sylius_cannot_disable_currency" />
         </service>
-        <service id="sylius.validator.unique.image_code" class="Sylius\Bundle\CoreBundle\Validator\Constraints\ImageUniqueCodeValidator">
-            <tag name="validator.constraint_validator" alias="image_unique_code" />
-        </service>
     </services>
 </container>
