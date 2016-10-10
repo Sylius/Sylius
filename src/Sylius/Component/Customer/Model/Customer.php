@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Customer\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
@@ -73,7 +72,6 @@ class Customer implements CustomerInterface
 
     public function __construct()
     {
-        $this->groups = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
