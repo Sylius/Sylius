@@ -4,6 +4,7 @@ sylius:
             not_blank: Please enter channel default currency.
         default_locale:
             not_blank: Please enter channel default locale.
+            choice_not_in_locale: Please select the default from one of the configured locales.
     checkout:
         shipping_method:
             not_blank: Please select shipping method.

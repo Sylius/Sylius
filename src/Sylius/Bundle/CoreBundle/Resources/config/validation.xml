@@ -215,6 +215,12 @@
                 <option name="message">sylius.tax_rate.zone.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\Choice">
+                <option name="groups">sylius</option>
+                <option name="callback">getLocales</option>
+                <option name="message">sylius.channel.default_locale.choice_not_in_locale</option>
+                <option name="strict">true</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>
