@@ -16,11 +16,6 @@ $ composer install
 $ bin/phpspec run -fpretty
 ```
 
-Documentation
--------------
-
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusAssociationBundle/index.html).
-
 Contributing
 ------------
 

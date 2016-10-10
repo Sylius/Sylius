@@ -13,11 +13,14 @@ namespace spec\Sylius\Bundle\AssociationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AssociationBundle\Form\Type\AssociationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Association\Model\Association;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
+ * @mixin AssociationType
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class AssociationTypeSpec extends ObjectBehavior
@@ -29,7 +32,7 @@ final class AssociationTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AssociationBundle\Form\Type\AssociationType');
+        $this->shouldHaveType(AssociationType::class);
     }
 
     function it_extends_abstract_resource_type()
@@ -44,6 +47,7 @@ final class AssociationTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($formBuilder)
         ;
+
         $formBuilder
             ->add('product', 'sylius_product_choice', Argument::cetera())
             ->shouldBeCalled()
