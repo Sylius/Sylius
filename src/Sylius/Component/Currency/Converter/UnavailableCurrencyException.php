@@ -12,8 +12,6 @@
 namespace Sylius\Component\Currency\Converter;
 
 /**
- * Exception thrown when someone requests unavailable currency.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class UnavailableCurrencyException extends \InvalidArgumentException

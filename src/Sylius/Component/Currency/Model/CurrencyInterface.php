@@ -26,8 +26,6 @@ interface CurrencyInterface extends
     ResourceInterface
 {
     /**
-     * Get the human-friendly name.
-     *
      * @return string
      */
     public function getName();

@@ -21,6 +21,8 @@ interface CurrencyNameConverterInterface
      * @param string $locale
      *
      * @return string
+     *
+     * @throws \InvalidArgumentException
      */
-    public function convertToCode($name, $locale = 'en');
+    public function convertToCode($name, $locale);
 }

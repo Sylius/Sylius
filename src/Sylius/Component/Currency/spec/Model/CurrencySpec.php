@@ -12,22 +12,26 @@
 namespace spec\Sylius\Component\Currency\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
+/**
+ * @mixin Currency
+ */
 final class CurrencySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Currency\Model\Currency');
+        $this->shouldHaveType(Currency::class);
     }
 
-    function it_implements_Sylius_currency_interface()
+    function it_implements_a_currency_interface()
     {
         $this->shouldImplement(CurrencyInterface::class);
     }
 
-    function it_implements_Sylius_toggleable_interface()
+    function it_implements_a_toggleable_interface()
     {
         $this->shouldImplement(ToggleableInterface::class);
     }
@@ -96,10 +100,8 @@ final class CurrencySpec extends ObjectBehavior
         $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
-    function its_creation_date_is_mutable()
+    function its_creation_date_is_mutable(\DateTime $date)
     {
-        $date = new \DateTime();
-
         $this->setCreatedAt($date);
         $this->getCreatedAt()->shouldReturn($date);
     }
@@ -109,10 +111,8 @@ final class CurrencySpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    function its_last_update_date_is_mutable(\DateTime $date)
     {
-        $date = new \DateTime();
-
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
