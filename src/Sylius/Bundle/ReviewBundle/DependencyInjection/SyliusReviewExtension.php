@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class SyliusReviewExtension extends AbstractResourceExtension
+final class SyliusReviewExtension extends AbstractResourceExtension
 {
     /**
      * @var array
@@ -37,21 +37,13 @@ class SyliusReviewExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
+        $loader->load('services.xml');
+
         foreach ($config['resources'] as $name => $parameters) {
             $this->addRequiredArgumentsToForms($name, $parameters, $container);
         }
 
-        foreach ($this->reviewSubjects as $subject) {
-            $this->addProperTagToReviewDeleteListener($subject, $container);
-        }
-
-        $configFiles = [
-            'services.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $this->addProperTagToReviewDeleteListener($container);
     }
 
     /**
@@ -100,10 +92,9 @@ class SyliusReviewExtension extends AbstractResourceExtension
     }
 
     /**
-     * @param string $resourceName
      * @param ContainerBuilder $container
      */
-    private function addProperTagToReviewDeleteListener($resourceName, ContainerBuilder $container)
+    private function addProperTagToReviewDeleteListener(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('sylius.listener.review_delete')) {
             return;

@@ -13,11 +13,15 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @mixin TaxonChoiceType
+ */
 final class TaxonChoiceTypeSpec extends ObjectBehavior
 {
     function let(TaxonRepositoryInterface $taxonRepository)
@@ -27,7 +31,7 @@ final class TaxonChoiceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType');
+        $this->shouldHaveType(TaxonChoiceType::class);
     }
 
     function it_is_a_form_type()
@@ -37,12 +41,32 @@ final class TaxonChoiceTypeSpec extends ObjectBehavior
 
     function it_has_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setDefaults(Argument::withKey('root'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setDefaults(Argument::withKey('filter'))->shouldBeCalled()->willReturn($resolver);
+        $resolver
+            ->setDefaults(Argument::withKey('choice_list'))
+            ->shouldBeCalled()
+            ->willReturn($resolver)
+        ;
+        $resolver
+            ->setDefaults(Argument::withKey('root'))
+            ->shouldBeCalled()
+            ->willReturn($resolver)
+        ;
+        $resolver
+            ->setDefaults(Argument::withKey('filter'))
+            ->shouldBeCalled()
+            ->willReturn($resolver)
+        ;
 
-        $resolver->setAllowedTypes('root', [TaxonInterface::class, 'string', 'null'])->shouldBeCalled()->willReturn($resolver);
-        $resolver->setAllowedTypes('filter', ['callable', 'null'])->shouldBeCalled()->willReturn($resolver);
+        $resolver
+            ->setAllowedTypes('root', [TaxonInterface::class, 'string', 'null'])
+            ->shouldBeCalled()
+            ->willReturn($resolver)
+        ;
+        $resolver
+            ->setAllowedTypes('filter', ['callable', 'null'])
+            ->shouldBeCalled()
+            ->willReturn($resolver)
+        ;
 
         $this->configureOptions($resolver, []);
     }

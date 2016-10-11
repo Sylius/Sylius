@@ -72,26 +72,6 @@ interface TaxonInterface extends
     public function removeChild(TaxonInterface $taxon);
 
     /**
-     * @return string
-     */
-    public function getName();
-
-    /**
-     * @param string $name
-     */
-    public function setName($name);
-
-    /**
-     * @return string
-     */
-    public function getPermalink();
-
-    /**
-     * @param string $permalink
-     */
-    public function setPermalink($permalink);
-
-    /**
      * @return int
      */
     public function getLeft();

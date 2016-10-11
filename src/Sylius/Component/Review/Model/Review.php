@@ -73,14 +73,6 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTitle()
     {
         return $this->title;
@@ -89,9 +81,9 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function setRating($rating)
+    public function setTitle($title)
     {
-        $this->rating = $rating;
+        $this->title = $title;
     }
 
     /**
@@ -105,9 +97,9 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function setComment($comment)
+    public function setRating($rating)
     {
-        $this->comment = $comment;
+        $this->rating = $rating;
     }
 
     /**
@@ -121,9 +113,9 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function setAuthor(ReviewerInterface $author = null)
+    public function setComment($comment)
     {
-        $this->author = $author;
+        $this->comment = $comment;
     }
 
     /**
@@ -137,9 +129,9 @@ class Review implements ReviewInterface
     /**
      * {@inheritdoc}
      */
-    public function setStatus($status)
+    public function setAuthor(ReviewerInterface $author = null)
     {
-        $this->status = $status;
+        $this->author = $author;
     }
 
     /**
@@ -148,6 +140,14 @@ class Review implements ReviewInterface
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
     }
 
     /**

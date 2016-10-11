@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class RegisterReviewFactoryPass implements CompilerPassInterface
+final class RegisterReviewFactoryPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

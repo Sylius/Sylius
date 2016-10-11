@@ -37,12 +37,12 @@ interface ReviewableInterface
     public function removeReview(ReviewInterface $review);
 
     /**
-     * @param float $averageRating
-     */
-    public function setAverageRating($averageRating);
-
-    /**
      * @return float
      */
     public function getAverageRating();
+
+    /**
+     * @param float $averageRating
+     */
+    public function setAverageRating($averageRating);
 }

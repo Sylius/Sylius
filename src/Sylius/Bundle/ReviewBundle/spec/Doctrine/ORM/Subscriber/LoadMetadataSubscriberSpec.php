@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReviewBundle\EventListener;
+namespace spec\Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManager;
@@ -18,8 +18,11 @@ use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
 
 /**
+ * @mixin LoadMetadataSubscriber
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
@@ -46,7 +49,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\EventListener\LoadMetadataSubscriber');
+        $this->shouldHaveType(LoadMetadataSubscriber::class);
     }
 
     function it_implements_event_subscriber()
@@ -66,14 +69,13 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         EntityManager $entityManager,
         LoadClassMetadataEventArgs $eventArguments
     ) {
-        $eventArguments->getClassMetadata()->willReturn($metadata)->shouldBeCalled();
-        $eventArguments->getEntityManager()->willReturn($entityManager)->shouldBeCalled();
-        $entityManager->getMetadataFactory()->willReturn($metadataFactory)->shouldBeCalled();
+        $eventArguments->getClassMetadata()->willReturn($metadata);
+        $eventArguments->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($metadataFactory);
 
         $classMetadataInfo->fieldMappings = ['id' => ['columnName' => 'id']];
-        $metadataFactory->getMetadataFor('AcmeBundle\Entity\ReviewableModel')->willReturn($classMetadataInfo)->shouldBeCalled();
-        $metadataFactory->getMetadataFor('AcmeBundle\Entity\ReviewerModel')->willReturn($classMetadataInfo)->shouldBeCalled();
-
+        $metadataFactory->getMetadataFor('AcmeBundle\Entity\ReviewableModel')->willReturn($classMetadataInfo);
+        $metadataFactory->getMetadataFor('AcmeBundle\Entity\ReviewerModel')->willReturn($classMetadataInfo);
         $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewModel');
 
         $metadata->mapManyToOne([
@@ -111,10 +113,9 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
         EntityManager $entityManager,
         LoadClassMetadataEventArgs $eventArguments
     ) {
-        $eventArguments->getClassMetadata()->willReturn($metadata)->shouldBeCalled();
-        $eventArguments->getEntityManager()->willReturn($entityManager)->shouldBeCalled();
-        $entityManager->getMetadataFactory()->willReturn($metadataFactory)->shouldBeCalled();
-
+        $eventArguments->getClassMetadata()->willReturn($metadata);
+        $eventArguments->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($metadataFactory);
         $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewableModel');
 
         $metadata->mapOneToMany([
@@ -149,10 +150,10 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
             ],
         ]);
 
-        $eventArguments->getClassMetadata()->willReturn($metadata)->shouldBeCalled();
-        $eventArguments->getEntityManager()->willReturn($entityManager)->shouldBeCalled();
-        $entityManager->getMetadataFactory()->willReturn($metadataFactory)->shouldBeCalled();
-        $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewModel')->shouldBeCalled();
+        $eventArguments->getClassMetadata()->willReturn($metadata);
+        $eventArguments->getEntityManager()->willReturn($entityManager);
+        $entityManager->getMetadataFactory()->willReturn($metadataFactory);
+        $metadata->getName()->willReturn('AcmeBundle\Entity\ReviewModel');
 
         $metadata->mapManyToOne(Argument::type('array'))->shouldNotBeCalled();
         $metadata->mapManyToOne(Argument::type('array'))->shouldNotBeCalled();

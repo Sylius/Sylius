@@ -14,10 +14,13 @@ namespace spec\Sylius\Bundle\ReviewBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin ReviewType
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
@@ -30,7 +33,7 @@ final class ReviewTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Form\Type\ReviewType');
+        $this->shouldHaveType(ReviewType::class);
     }
 
     function it_is_abstract_type_object()

@@ -14,10 +14,6 @@ $ composer install
 $ bin/phpspec run -fpretty
 ```
 
-Documentation
--------------
-
-
 Contributing
 ------------
 

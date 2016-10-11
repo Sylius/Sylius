@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewCreateListener
+final class ReviewCreateListener
 {
     /**
      * @var CustomerContextInterface

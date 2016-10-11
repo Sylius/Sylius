@@ -28,6 +28,7 @@ class AverageRatingCalculator implements ReviewableRatingCalculatorInterface
         $reviewsNumber = 0;
         $reviews = $reviewable->getReviews();
 
+        /** @var ReviewInterface $review */
         foreach ($reviews as $review) {
             if (ReviewInterface::STATUS_ACCEPTED === $review->getStatus()) {
                 ++$reviewsNumber;

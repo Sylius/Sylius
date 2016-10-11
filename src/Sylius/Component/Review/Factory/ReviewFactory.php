@@ -18,7 +18,7 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ReviewFactory implements ReviewFactoryInterface
+final class ReviewFactory implements ReviewFactoryInterface
 {
     /**
      * @var FactoryInterface

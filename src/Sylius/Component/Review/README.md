@@ -1,16 +1,12 @@
 Review Component [![Build status...](https://secure.travis-ci.org/Sylius/Review.png?branch=master)](http://travis-ci.org/Sylius/Review)
 =================
 
+E-Commerce PHP component for managing reviews.
 
 Sylius
 ------
 
 Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
-
-Documentation
--------------
-
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/components/Review/index.html).
 
 Contributing
 ------------

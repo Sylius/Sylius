@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusTaxonomyExtension extends AbstractResourceExtension
+final class SyliusTaxonomyExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -33,12 +33,6 @@ class SyliusTaxonomyExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
     }
 }

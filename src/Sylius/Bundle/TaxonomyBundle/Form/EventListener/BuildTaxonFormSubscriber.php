@@ -18,11 +18,9 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
- * Adds the parent taxon field choice.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildTaxonFormSubscriber implements EventSubscriberInterface
+final class BuildTaxonFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var FormFactoryInterface
@@ -48,8 +46,6 @@ class BuildTaxonFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Builds proper taxon form after setting the product.
-     *
      * @param FormEvent $event
      */
     public function preSetData(FormEvent $event)
@@ -60,18 +56,22 @@ class BuildTaxonFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $event->getForm()->add($this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(), [
-            'filter' => $this->getFilterTaxonOption($taxon),
-            'required' => false,
-            'label' => 'sylius.form.taxon.parent',
-            'empty_value' => '---',
-            'auto_initialize' => false,
-        ]));
+        $event
+            ->getForm()
+            ->add(
+                $this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(),
+                    [
+                        'filter' => $this->getFilterTaxonOption($taxon),
+                        'required' => false,
+                        'label' => 'sylius.form.taxon.parent',
+                        'empty_value' => '---',
+                        'auto_initialize' => false,
+                    ]
+                ))
+        ;
     }
 
     /**
-     * Get the closure to filter taxon collection.
-     *
      * @param TaxonInterface $taxon
      *
      * @return callable|null

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReviewBundle\EventListener;
+namespace Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
@@ -19,7 +19,7 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class LoadMetadataSubscriber implements EventSubscriber
+final class LoadMetadataSubscriber implements EventSubscriber
 {
     /**
      * @var array

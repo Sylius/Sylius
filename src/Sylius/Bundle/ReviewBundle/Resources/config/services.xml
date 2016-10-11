@@ -13,12 +13,12 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.event_subscriber.review.load_metadata" class="Sylius\Bundle\ReviewBundle\EventListener\LoadMetadataSubscriber">
+        <service id="sylius.doctrine.orm.event_subscriber.load_metadata.review" class="Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber">
             <argument>%sylius.review.subjects%</argument>
             <tag name="doctrine.event_subscriber" />
         </service>
 
-        <service id="sylius.review.validator.unique_reviewer_email" class="Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmailValidator">
+        <service id="sylius.validator.unique_reviewer_email" class="Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmailValidator">
             <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.authorization_checker" />
@@ -30,20 +30,20 @@
             <tag name="kernel.event_listener" event="sylius.product_review.pre_create" method="ensureReviewHasAuthor" />
         </service>
         <service id="sylius.listener.review_change" class="Sylius\Bundle\ReviewBundle\EventListener\ReviewChangeListener">
-            <argument type="service" id="sylius.review.updater.average_rating" />
+            <argument type="service" id="sylius.average_rating_updater" />
             <tag name="kernel.event_listener" event="sylius.product_review.post_update" method="recalculateSubjectRating" />
             <tag name="kernel.event_listener" event="sylius.product_review.post_delete" method="recalculateSubjectRating" />
         </service>
 
-        <service id="sylius.review.calculator.average_rating" class="Sylius\Component\Review\Calculator\AverageRatingCalculator" />
-        <service id="sylius.review.updater.average_rating" class="Sylius\Bundle\ReviewBundle\Updater\AverageRatingUpdater">
-            <argument type="service" id="sylius.review.calculator.average_rating" />
+        <service id="sylius.average_rating_calculator" class="Sylius\Component\Review\Calculator\AverageRatingCalculator" />
+        <service id="sylius.average_rating_updater" class="Sylius\Bundle\ReviewBundle\Updater\AverageRatingUpdater">
+            <argument type="service" id="sylius.average_rating_calculator" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
         </service>
-        <service id="sylius.review.remover.reviewer_reviews" class="Sylius\Bundle\ReviewBundle\Remover\ReviewerReviewsRemover">
+        <service id="sylius.reviewer_reviews_remover" class="Sylius\Bundle\ReviewBundle\Remover\ReviewerReviewsRemover">
             <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.manager.product_review" />
-            <argument type="service" id="sylius.review.updater.average_rating" />
+            <argument type="service" id="sylius.average_rating_updater" />
         </service>
     </services>
 </container>

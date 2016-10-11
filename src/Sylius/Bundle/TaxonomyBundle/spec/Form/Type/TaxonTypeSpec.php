@@ -15,12 +15,16 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
 use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin TaxonType
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -33,7 +37,7 @@ final class TaxonTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType');
+        $this->shouldHaveType(TaxonType::class);
     }
 
     function it_is_a_form_type()
@@ -41,12 +45,12 @@ final class TaxonTypeSpec extends ObjectBehavior
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder, FormFactoryInterface $factory)
+    function it_builds_form_with_proper_fields(FormBuilderInterface $builder, FormFactoryInterface $factory)
     {
         $builder->getFormFactory()->willReturn($factory);
 
         $builder
-            ->addEventSubscriber(Argument::type(BuildTaxonFormSubscriber::class))
+            ->add('translations', 'sylius_translations', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -58,7 +62,7 @@ final class TaxonTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('translations', 'sylius_translations', Argument::any())
+            ->addEventSubscriber(Argument::type(BuildTaxonFormSubscriber::class))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
