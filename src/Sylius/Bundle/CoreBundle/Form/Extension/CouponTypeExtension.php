@@ -9,30 +9,36 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\PromotionBundle\Form\Type\CouponType as BaseCouponType;
+use Sylius\Bundle\PromotionBundle\Form\Type\CouponType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Coupon form.
- *
  * @author Myke Hines <myke@webhines.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CouponType extends BaseCouponType
+final class CouponTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('perCustomerUsageLimit', 'integer', [
                 'label' => 'sylius.form.coupon.per_customer_usage_limit',
                 'required' => false,
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return CouponType::class;
     }
 }

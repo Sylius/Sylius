@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProductVariantType extends BaseProductVariantType
+final class ProductVariantTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('price', 'sylius_money', [
                 'label' => 'sylius.form.variant.price',
@@ -62,5 +62,13 @@ class ProductVariantType extends BaseProductVariantType
                 'label' => 'sylius.form.product_variant.tax_category',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return ProductVariantType::class;
     }
 }

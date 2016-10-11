@@ -9,28 +9,38 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType as BaseTaxonType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class TaxonType extends BaseTaxonType
+/**
+ * @author Jan Góralski <jan.goralski@lakion.com>
+ */
+final class TaxonTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('images', 'collection', [
-                'type' => 'sylius_taxon_image',
+                'entry_type' => 'sylius_taxon_image',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'sylius.form.taxon.images',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return TaxonType::class;
     }
 }

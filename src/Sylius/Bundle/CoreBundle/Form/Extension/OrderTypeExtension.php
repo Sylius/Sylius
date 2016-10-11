@@ -9,26 +9,38 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
+use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class OrderType extends BaseOrderType
+final class OrderTypeExtension extends AbstractTypeExtension
 {
+    /**
+     * @var array
+     */
+    private $validationGroups;
+
+    /**
+     * @param array $validationGroups
+     */
+    public function __construct($validationGroups)
+    {
+        $this->validationGroups = $validationGroups;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('shippingAddress', 'sylius_address')
             ->add('billingAddress', 'sylius_address')
@@ -40,19 +52,27 @@ class OrderType extends BaseOrderType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
-        /** @var OptionsResolver $resolver */
-        parent::setDefaultOptions($resolver);
-
         $resolver->setDefault('validation_groups', function (FormInterface $form) {
             $validationGroups = $this->validationGroups;
 
-            if ((bool) $form->get('promotionCoupon')->getNormData()) { // Validate the coupon if it was sent
+            if (null !== $form->get('promotionCoupon')->getNormData()) { // Validate the coupon if it was sent
                 $validationGroups[] = 'sylius_promotion_coupon';
             }
 
             return $validationGroups;
         });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return OrderType::class;
     }
 }

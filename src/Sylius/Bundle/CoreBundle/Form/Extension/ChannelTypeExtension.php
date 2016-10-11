@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType as BaseChannelType;
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ChannelType extends BaseChannelType
+final class ChannelTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('locales', 'sylius_locale_choice', [
                 'label' => 'sylius.form.channel.locales',
@@ -35,7 +35,7 @@ class ChannelType extends BaseChannelType
             ->add('defaultLocale', 'sylius_locale_choice', [
                 'label' => 'sylius.form.channel.locale_default',
                 'required' => true,
-                'empty_value' => null,
+                'placeholder' => null,
             ])
             ->add('currencies', 'sylius_currency_choice', [
                 'label' => 'sylius.form.channel.currencies',
@@ -57,7 +57,7 @@ class ChannelType extends BaseChannelType
                 'label' => 'sylius.form.channel.theme',
                 'required' => false,
                 'empty_data' => null,
-                'empty_value' => 'sylius.ui.no_theme',
+                'placeholder' => 'sylius.ui.no_theme',
             ])
             ->add('shippingMethods', 'sylius_shipping_method_choice', [
                 'label' => 'sylius.form.channel.shipping_methods',
@@ -68,5 +68,13 @@ class ChannelType extends BaseChannelType
                 'multiple' => true,
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return ChannelType::class;
     }
 }
