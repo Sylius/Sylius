@@ -113,8 +113,6 @@ and of course flush your order after that via the manager.
 **What happens during the transition?**
 
 The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ is run.
-It is responsible for creating new **Shipments** for each OrderItemUnit of your order and a new **Payment** if they do not exist yet.
-Therefore this transition is preparing the order for the two next steps of checkout.
 
 Selecting shipping
 ~~~~~~~~~~~~~~~~~~

@@ -1,5 +1,5 @@
-Using the Installer commands
-============================
+How to use installer commands?
+==============================
 
 Sylius platform ships with the ``sylius:install`` command, which takes care of creating the database, schema, dumping the assets and basic store configuration.
 
