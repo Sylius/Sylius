@@ -8,8 +8,6 @@ sylius:
                 amount: Ποσό
             percentage_discount_configuration:
                 percentage: Ποσοστό
-            shipping_discount_configuration:
-                percentage: Ποσοστό
             type: Τύπος
         rule:
             contains_product_configuration:

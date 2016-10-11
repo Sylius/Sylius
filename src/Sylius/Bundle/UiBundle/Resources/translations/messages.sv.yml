@@ -185,7 +185,6 @@ sylius:
         forgot_password: Glömt lösenordet
         gateway: Portal
         generate_coupons: Generera kuponger
-        groups: Grupper
         have_an_account_already: Har redan ett konto
         hello: Hej
         home: Hem

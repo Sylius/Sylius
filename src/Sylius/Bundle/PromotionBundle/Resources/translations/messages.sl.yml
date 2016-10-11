@@ -8,8 +8,6 @@ sylius:
                 amount: Znesek
             percentage_discount_configuration:
                 percentage: Odstotki
-            shipping_discount_configuration:
-                percentage: Odstotki
             type: Vrsta
         rule:
             taxonomy_configuration:

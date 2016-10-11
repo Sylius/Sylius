@@ -20,6 +20,8 @@ sylius:
                     zones: Zone
                 marketing:
                     promotions: Promoţii
+                customers:
+                    groups: Grupuri
                 sales:
                     header: Vânzări
                     orders: Comenzi

@@ -101,7 +101,6 @@ sylius:
         create_a_new_address: Vytvořit novou adresu
         create_country: Vytvořit zemi
         create_currency: Vytvořit měnu
-        create_group: Vytvořit skupinu
         create_imagine_block: Vytvořit imagine blok
         create_locale: Vytvořit národní prostředí (locale)
         create_menu: Vytvořit menu
@@ -161,7 +160,6 @@ sylius:
         description: Popis
         disable: Zakázat
         edit: Úpravy
-        edit_group: Upravit skupinu
         edit_locale: Upravit národní prostředí (locale)
         edit_my_address: Upravit adresu
         edit_your_personal_information: Upravit osobní údaje
@@ -223,7 +221,6 @@ sylius:
         generating_coupons: Generování kupónů
         go_to_dashboard: Přejít na dashboard
         grand_total: Celkem
-        groups: Skupiny
         guest: Neregistrovaný náštěvník
         guest_customer: Neregistrovaný náštěvník
         hide_deleted: Skrýt odstraněné

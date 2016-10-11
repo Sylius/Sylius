@@ -137,7 +137,6 @@ sylius:
         create_country: Land erstellen
         create_currency: Währung erstellen
         create_customer: Kunde erstellen
-        create_group: Gruppe anlegen
         create_imagine_block: Slideshow Block erstellen
         create_locale: Gebietsschema anlegen
         create_menu: Menü hinzufügen
@@ -227,7 +226,6 @@ sylius:
         edit_coupon: Gutscheincode bearbeiten
         edit_currency: Währung bearbeiten
         edit_customer: Kunde bearbeiten
-        edit_group: Gruppe bearbeiten
         edit_locale: Gebietsschema bearbeiten
         edit_my_address: Adresse bearbeiten
         edit_payment_method: Zahlart bearbeiten
@@ -319,7 +317,6 @@ sylius:
         go: Los
         go_to_dashboard: Zum Dashboard
         grand_total: Gesamtbetrag
-        groups: Gruppen
         guest: Gastbestellung
         guest_customer: Gast Kunde
         have_an_account_already: Du hast bereits einen Acoount
@@ -696,7 +693,6 @@ sylius:
         there_are_no_currencies_to_display: Es wurden noch keine Gutscheine angelegt
         there_are_no_customers_to_display: Es wurden noch keine Kunden angelegt
         there_are_no_emails_configured: Es wurden noch keine Emails konfiguriert
-        there_are_no_groups_to_display: Es wurden noch keine Gruppen angelegt
         there_are_no_images_for_this_product: Keine Bilder für dieses Produkt vorhanden
         there_are_no_inventory_items_to_display: Keine Lagerbestand anzeigbar
         there_are_no_inventory_units_to_display: Es gibt keine Lagereinheiten anzuzeigen

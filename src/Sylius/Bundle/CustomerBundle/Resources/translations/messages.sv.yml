@@ -3,12 +3,8 @@
 
 sylius:
     form:
-        group:
-            name: Namn
-            roles: Roller
         customer:
             first_name: Förnamn
-            groups: Grupper
             last_name: Efternamn
             email: E-post
             phone_number: Telefonnummer
@@ -17,6 +13,9 @@ sylius:
             billing_address: Faktureringsadress
             different_billing_address: Använda annan adress för fakturering?
             only_customer_registration: Skapa konto?
+        customer_group:
+            name: Namn
+            roles: Roller
     gender:
         unknown: Okänd
         male: Man

@@ -3,12 +3,8 @@
 
 sylius:
     form:
-        group:
-            name: Nome
-            roles: Papéis
         customer:
             first_name: Nome
-            groups: Grupos
             last_name: Sobrenome
             email: Email
             phone_number: Número de Telefone
@@ -18,6 +14,9 @@ sylius:
             different_billing_address: Utilizar um endereço diferente para cobrança?
             only_customer_registration: Criar conta?
             subscribed_to_newsletter: Increver-se ao newsletter
+        customer_group:
+            name: Nome
+            roles: Papéis
     gender:
         unknown: DESCONHECIDO
         male: Masculino

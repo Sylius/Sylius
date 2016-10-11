@@ -8,8 +8,6 @@ sylius:
                 amount: Hoeveelheid
             percentage_discount_configuration:
                 percentage: Percentage
-            shipping_discount_configuration:
-                percentage: Percentage
             type: Type
         rule:
             taxonomy_configuration:

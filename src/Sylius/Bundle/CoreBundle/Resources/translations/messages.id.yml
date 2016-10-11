@@ -92,3 +92,10 @@ sylius:
             email: Email
         product_association_type:
             name: Nama
+    installer:
+        extensions:
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true

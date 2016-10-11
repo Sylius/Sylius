@@ -132,6 +132,62 @@ sylius:
             total_of_items_from_taxon:
                 taxon: Kategória
                 amount: Suma
+    installer:
+        extensions:
+            header: Rozšírenia
+            accelerator:
+                header: Akcelerátor
+                help: Povoliť Zend OpCache (vysoko odporúčané).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: 'Nainštalujte a povoľte rozšírenie %extension%.'
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: súborový systém
+            cache:
+                header: cache
+            exists: existuje
+            logs:
+                header: záznamy
+            not_exists: neexistuje
+            not_writable: nie je zapisovateľný
+            parameters:
+                header: parameters.yml
+            vendors: vendors
+            writable: zapisovateľné
+        settings:
+            header: Verzia PHP a nastavenia
+            any: akékoľvek
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: nie sú zastarelé
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: časové pásmo
+            timezone_deprecated:
+                header: Zastaralé časové pásmo
+                help: 'Časové pásmo %timezone% je zastaralé. Opravte si Váš súbor php.ini (zoznam zastaralých časových pasiem http://php.net/manual/en/timezones.others.php).'
+            version: Verzia PHP
+            version_recommended: Odporúčaná verzia PHP
     email:
         order_confirmation:
             name: Potvrdenie objednávky

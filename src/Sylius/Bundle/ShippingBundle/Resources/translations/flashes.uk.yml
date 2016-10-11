@@ -4,4 +4,4 @@
 sylius:
     shipment:
         ship:
-            success: Доставку завершено.
+            success: Доставка виконана.

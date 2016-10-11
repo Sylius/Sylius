@@ -8,38 +8,50 @@ sylius:
                 amount: Кількість
             percentage_discount_configuration:
                 percentage: Відсоток
-            shipping_discount_configuration:
-                percentage: Percentage
             type: Тип
         rule:
             taxonomy_configuration:
                 taxons: Таксони
-                exclude: Виключити
+                exclude: Виключення
             contains_product_configuration:
-                variants: Продукти
-                exclude: Виключити
+                variants: Продукція
+                exclude: Виключення
             cart_quantity_configuration:
                 count: Кількість
+                equal: Дорівнює
             item_total_configuration:
                 amount: Кількість
             nth_order_configuration:
                 nth: N-ний
+            customer_loyalty_configuration:
+                time: Час
+                unit:
+                    days: Дні(-ів)
+                    weeks: Тижні(-ів)
+                    months: Місяці(-ів)
+                    years: Роки(-ів)
+                    header: Одиниця виміру
+                after: Користувач, створений після цього періоду
             shipping_country_configuration:
                 country: Країна
             type: Тип
         coupon:
             usage_limit: Обмеження використання
+            expires_at: Дійсний до
         coupon_generate_instruction:
-            amount: Кількість
+            amount: Обсяг
             usage_limit: Обмеження використання
+            expires_at: Дійсний до
+            code_length: Довжина коду
         promotion:
             actions: Дії
             add_action: Додати дію
             add_rule: Додати правило
             coupon_based: На основі купону
+            exclusive: Ексклюзивно
             description: Опис
-            ends_at: Закінчується
-            name: Ім’я
+            ends_at: Кінець дії
+            name: Назва
             rules: Правила
-            starts_at: Початок
+            starts_at: Початок дії
             usage_limit: Обмеження використання

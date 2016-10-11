@@ -66,7 +66,6 @@ sylius:
         create: Creează
         create_a_new_address: Creeare adresă nouă
         create_country: Adăugare țară
-        create_group: Creează grup
         create_locale: Creeare localizare
         create_new_coupon: Creeare cod promoțional
         create_new_page: Creeare pagină nouă
@@ -99,7 +98,6 @@ sylius:
         deleted: Șters
         description: Descriere
         edit: Editare
-        edit_group: Editare grup
         edit_locale: Editare setări localizare
         edit_my_address: Modificare adresă
         edit_your_personal_information: Editaţi informaţiile personale
@@ -136,7 +134,6 @@ sylius:
         generate_variants: Generează variante
         generating_coupons: Generare coduri promoționale
         grand_total: Total
-        groups: Grupuri
         hide_deleted: Ascunde cele şterse
         home: Pagina principală
         id: Id

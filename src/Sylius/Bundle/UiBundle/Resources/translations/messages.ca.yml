@@ -36,7 +36,6 @@ sylius:
         failed: "S'ha produït un error"
         first_name: Nom
         gateway: Pasarel·la
-        groups: Grups
         id: ID
         image: Imatge
         images: Imatges

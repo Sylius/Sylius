@@ -137,7 +137,6 @@ sylius:
         create_country: Vytvoriť krajinu
         create_currency: Vytvoriť menu
         create_customer: Vytvoriť zákazníka
-        create_group: Vytvoriť skupinu
         create_imagine_block: Vytvoriť obrazový blok
         create_locale: Vytvoriť jazyk
         create_menu: Vytvoriť menu
@@ -227,7 +226,6 @@ sylius:
         edit_coupon: Upraviť kupón
         edit_currency: Úprava meny
         edit_customer: Úprava zákazníka
-        edit_group: Upraviť skupinu
         edit_locale: Upraviť jazyk
         edit_my_address: Upraviť moju adresu
         edit_payment_method: Úprava spôsobu platby
@@ -320,7 +318,6 @@ sylius:
         go: Pokračovať
         go_to_dashboard: Prejsť na administračný panel
         grand_total: Celkový súčet
-        groups: Zákaznícke skupiny
         guest: Návštevník
         guest_customer: Návšetvník
         have_an_account_already: Už máte účet
@@ -698,7 +695,6 @@ sylius:
         there_are_no_currencies_to_display: Nie sú definováne žiadne meny
         there_are_no_customers_to_display: Nie sú žiadný zákazníci na zobrazenie
         there_are_no_emails_configured: Nie sú nastavené žiadne e-maily
-        there_are_no_groups_to_display: Neexistujú žiadne skupiny na zobrazenie
         there_are_no_images_for_this_product: Pre produkt neexistujú žiadne obrázky
         there_are_no_inventory_items_to_display: Neexistujú žiadne kladové položky na zobrazenie
         there_are_no_inventory_units_to_display: Nie sú žiadne skladové položky k zobrazeniu

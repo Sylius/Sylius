@@ -137,7 +137,6 @@ sylius:
         create_country: Criar país
         create_currency: Criar moeda
         create_customer: Criar cliente
-        create_group: Criar grupo
         create_imagine_block: Criar bloco imagine
         create_locale: Criar a localidade
         create_menu: Criar menu
@@ -270,7 +269,6 @@ sylius:
         go: Avançar
         go_to_dashboard: Ir para o painel de controlo
         grand_total: Total
-        groups: Grupos
         guest: Convidado
         guest_customer: Cliente convidado
         have_an_account_already: Já tem uma conta

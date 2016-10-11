@@ -19,6 +19,8 @@ sylius:
                     zones: Зоны
                 marketing:
                     promotions: Прамоцыі
+                customers:
+                    groups: Групы
                 sales:
                     header: Продаж
                     orders: Замовы

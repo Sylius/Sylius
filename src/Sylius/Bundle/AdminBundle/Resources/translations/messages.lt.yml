@@ -24,6 +24,7 @@ sylius:
                     promotions: Akcijos
                 customers:
                     customers: Klientai
+                    groups: Grupės
                     header: Klienta
                 sales:
                     header: Pardavimai

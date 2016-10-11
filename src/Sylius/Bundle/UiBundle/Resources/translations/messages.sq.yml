@@ -109,7 +109,6 @@ sylius:
         create_country: Zgjidh vendin
         create_currency: Krijo llojin e monedhës
         create_customer: Krijo blerësin
-        create_group: Krijo grup
         create_imagine_block: Krijo bllok figure
         create_locale: Shkruaj lokalizimin
         create_menu: Krijo menu
@@ -191,7 +190,6 @@ sylius:
         edit_country: Modifiko shtetin
         edit_currency: Modifiko valuten
         edit_customer: Modifiko klientin
-        edit_group: Afisho grupin
         edit_locale: Afisho vendin
         edit_my_address: Afisho adresën time
         edit_payment_method: Modifiko metoden e pageses
@@ -270,7 +268,6 @@ sylius:
         go: Shko
         go_to_dashboard: Shko te paneli kryesor
         grand_total: Totali
-        groups: Grupet
         guest: I ftuar
         guest_customer: Blerës i ftuar
         hello_name: 'Përshëndetje <b>%name%</b>'
@@ -584,7 +581,6 @@ sylius:
         there_are_no_currencies_to_display: "Nuk ka asnjë lloj monedhe për t'u shfaqur"
         there_are_no_customers_to_display: "Nuk ka asnjë blerës për t'u shfaqur"
         there_are_no_emails_configured: Nuk ka asnjë Email të konfiguruar
-        there_are_no_groups_to_display: "Nuk ka asnjë grup për t'u shfaqur"
         there_are_no_images_for_this_product: Nuk ka pamje për këtë produkt
         there_are_no_inventory_items_to_display: "Nuk ka asnjë artikull inventari për t'u shfaqur"
         there_are_no_inventory_units_to_display: "Nuk ka njësi të listës për t'u shfaqur"

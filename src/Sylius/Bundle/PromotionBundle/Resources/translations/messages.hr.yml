@@ -8,8 +8,6 @@ sylius:
                 amount: Iznos
             percentage_discount_configuration:
                 percentage: Postotak
-            shipping_discount_configuration:
-                percentage: Postotak
             type: Vrsta
         rule:
             taxonomy_configuration:

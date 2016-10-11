@@ -8,8 +8,6 @@ sylius:
                 amount: Сумма
             percentage_discount_configuration:
                 percentage: Процент
-            shipping_discount_configuration:
-                percentage: Процент
             type: Тип
         rule:
             taxonomy_configuration:

@@ -83,7 +83,6 @@ sylius:
         create_a_new_address: Yeni bir adres oluşturun
         create_country: Ülke ekle
         create_currency: Para birimi oluştur
-        create_group: Grup oluştur
         create_imagine_block: Oluşturma bloğu hayal
         create_locale: Dil oluştur
         create_menu: Menü Oluştur
@@ -147,7 +146,6 @@ sylius:
         description: Açıklama
         disable: Devre dışı
         edit: Düzenle
-        edit_group: Grubu düzenle
         edit_locale: Dil düzenle
         edit_my_address: Adresi düzenle
         edit_report: Raporu Düzenle
@@ -210,7 +208,6 @@ sylius:
         generating_coupons: Kuponlar oluşturmak
         go_to_dashboard: Arayüze git
         grand_total: Toplam
-        groups: Gruplar
         guest: Konuk
         guest_customer: Konuk müşteri
         hide_deleted: Silineni gizle

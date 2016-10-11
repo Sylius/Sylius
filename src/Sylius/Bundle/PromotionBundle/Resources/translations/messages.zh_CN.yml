@@ -8,8 +8,6 @@ sylius:
                 amount: 金额
             percentage_discount_configuration:
                 percentage: 百分比
-            shipping_discount_configuration:
-                percentage: 百分比
             type: 类型
         rule:
             taxonomy_configuration:

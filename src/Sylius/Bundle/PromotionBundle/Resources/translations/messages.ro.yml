@@ -8,8 +8,6 @@ sylius:
                 amount: Valoare
             percentage_discount_configuration:
                 percentage: Procent
-            shipping_discount_configuration:
-                percentage: Procent
             type: Tip
         rule:
             taxonomy_configuration:

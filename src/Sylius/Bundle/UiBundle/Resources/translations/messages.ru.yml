@@ -85,7 +85,6 @@ sylius:
         create_country: Добавить поселок, село
         create_currency: Добавить валюту
         create_customer: Создание клиента
-        create_group: Создать группу
         create_imagine_block: Создать блок-изображение
         create_locale: Добавить язык
         create_menu_node: Создание пункта меню
@@ -136,7 +135,6 @@ sylius:
         description: Описание
         edit: Редактировать
         edit_association_type: Редактировать тип взаимосвязи
-        edit_group: Редактировать группу
         edit_locale: Редактировать язык
         edit_my_address: sylius.account.address.update
         edit_your_personal_information: Edit my personal information
@@ -186,7 +184,6 @@ sylius:
         generating_coupons: Генерирование купонов
         go_to_dashboard: Перейти в панель управления
         grand_total: Всего в корзине
-        groups: Группы
         guest: Гость
         guest_customer: Гость
         hello_name: 'Здравствуйте, <b>%name%</b>'

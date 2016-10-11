@@ -117,7 +117,6 @@ sylius:
         create_country: 创建国家
         create_currency: 创建货币
         create_customer: 创建客户
-        create_group: 创建组
         create_imagine_block: 创造图像块
         create_locale: 创建区域设置
         create_menu: 创建菜单
@@ -204,7 +203,6 @@ sylius:
         edit_coupon: 编辑优惠券
         edit_currency: 编辑货币
         edit_customer: 编辑客户
-        edit_group: 编辑组
         edit_locale: 编辑区域设置
         edit_my_address: 编辑我的地址
         edit_payment_method: 编辑付款方式
@@ -288,7 +286,6 @@ sylius:
         go: 前往
         go_to_dashboard: 前往仪表盘
         grand_total: 总计
-        groups: 团体
         guest: 游客
         guest_customer: 来宾客户
         hello_name: '您好 <b>%name%</b>！'
@@ -624,7 +621,6 @@ sylius:
         there_are_no_currencies_to_display: 没有任何货币
         there_are_no_customers_to_display: 没有任何客户
         there_are_no_emails_configured: 没有配置电子邮件
-        there_are_no_groups_to_display: 没有可以显示的组。
         there_are_no_images_for_this_product: 该产品产品没有任何图片
         there_are_no_inventory_items_to_display: 没有可显示的库存项
         there_are_no_inventory_units_to_display: 没有可显示的库存单位

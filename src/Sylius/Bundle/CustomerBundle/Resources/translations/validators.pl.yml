@@ -2,11 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    group:
-        name:
-            max: 'Nazwa grupy nie może być dłuższa niż {{ limit }} znaków.'
-            min: 'Nazwa grupy nie może być krótsza niż {{ limit }} znaków.'
-            not_blank: Proszę podać nazwę grupy.
     customer:
         first_name:
             max: 'Imię nie może być dłuższe niż {{ limit }} znaków.'

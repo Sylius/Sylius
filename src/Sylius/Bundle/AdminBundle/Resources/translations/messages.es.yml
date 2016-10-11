@@ -28,6 +28,7 @@ sylius:
                     promotions: Promociones
                 customers:
                     customers: Clientes
+                    groups: Grupos
                     header: Cliente
                 sales:
                     header: Ventas

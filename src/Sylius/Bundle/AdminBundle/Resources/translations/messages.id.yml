@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                customers:
+                    groups: Kelompok
                 content:
                     header: Isi
                     routes: Rute

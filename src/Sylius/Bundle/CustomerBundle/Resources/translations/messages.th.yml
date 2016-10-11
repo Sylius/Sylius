@@ -3,12 +3,8 @@
 
 sylius:
     form:
-        group:
-            name: ชื่อ
-            roles: Roles
         customer:
             first_name: ชื่อ
-            groups: กลุ่ม
             last_name: นามสกุล
             email: อีเมล
             phone_number: หมายเลขโทรศัพท์
@@ -18,6 +14,9 @@ sylius:
             different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
             only_customer_registration: สร้างบัญชี?
             subscribed_to_newsletter: สมัครรับจดหมายข่าว
+        customer_group:
+            name: ชื่อ
+            roles: Roles
     gender:
         unknown: ไม่ทราบสถานะ
         male: ชาย

@@ -8,8 +8,6 @@ sylius:
                 amount: مبلغ
             percentage_discount_configuration:
                 percentage: درصد
-            shipping_discount_configuration:
-                percentage: درصد
             type: نوع
         rule:
             taxonomy_configuration:

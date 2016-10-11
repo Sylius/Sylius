@@ -58,7 +58,6 @@ sylius:
         general_settings: Γενικές ρυθμίσεις
         generate: Δημιουργία
         grand_total: Γενικό σύνολο
-        groups: Ομάδες
         home: Αρχική
         id: ID
         image: Εικόνα

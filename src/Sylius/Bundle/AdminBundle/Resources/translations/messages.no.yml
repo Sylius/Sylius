@@ -19,6 +19,8 @@ sylius:
                     zones: Soner
                 marketing:
                     promotions: Kampanjer
+                customers:
+                    groups: Grupper
                 sales:
                     header: Salg
                     orders: Bestillinger

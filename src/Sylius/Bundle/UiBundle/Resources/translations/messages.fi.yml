@@ -78,7 +78,6 @@ sylius:
         create_country: Luo maa
         create_currency: Luo valuutta
         create_customer: Luo asiakas
-        create_group: Luo ryhmä
         create_menu: Luo valikko
         create_new_coupon: Luo uusi kuponki
         create_new_page: Luo uusi sivu
@@ -116,7 +115,6 @@ sylius:
         edit_coupon: Muokkaa kuponkia
         edit_currency: Muokkaa valuuttaa
         edit_customer: Muokkaa asiakkaan tietoja
-        edit_group: Muokkaa ryhmää
         edit_payment_method: Muokkaa maksutapaa
         edit_product: Muokkaa tuotetta
         edit_promotion: Muokkaa kampanjaa

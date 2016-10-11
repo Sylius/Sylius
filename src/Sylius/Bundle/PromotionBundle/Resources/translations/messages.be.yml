@@ -8,8 +8,6 @@ sylius:
                 amount: Сума
             percentage_discount_configuration:
                 percentage: Адсотак
-            shipping_discount_configuration:
-                percentage: Адсотак
             type: Тып
         rule:
             taxonomy_configuration:

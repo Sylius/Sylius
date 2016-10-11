@@ -17,6 +17,8 @@ sylius:
         about: O stronie
         access_token: Token dostępowy
         access_your_store_account_or_create_a_new_one: Zaloguj się na swoje konto lub stwórz nowe
+        account_credentials: Dane konta
+        account_panel_outline: Korzystaj ze wszystkich funkcji, które są dostępne w przestrzeni osobistej, aby wyświetlać, śledzić i zarządzać twoimi danymi
         action: Akcja
         actions: Akcje
         add: Dodaj
@@ -130,7 +132,6 @@ sylius:
         create_country: Dodaj kraj
         create_currency: Utwórz walutę
         create_customer: Stwórz klienta
-        create_group: Dodaj grupę
         create_imagine_block: Utwórz blok zdjęciowy
         create_locale: Dodaj ustawienia regionalne
         create_menu: Utwórz Menu
@@ -205,7 +206,6 @@ sylius:
         edit_coupon: Edytuj kupon
         edit_currency: Edytuj walutę
         edit_customer: Edytuj klienta
-        edit_group: Edytuj grupę
         edit_locale: Edytuj ustawienia regionalne
         edit_my_address: Edytuj adres
         edit_payment_method: Edytuj metodę płatności
@@ -263,6 +263,7 @@ sylius:
         end_date: Data zakończenia
         ends_at: Data zakończenia
         ends_with: Kończy się na
+        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Korzystaj ze wszystkich funkcji, które są dostępne w przestrzeni osobistej, aby wyświetlać, śledzić i zarządzać twoimi danymi
         enter_your_code: Wprowadź swój kod
         equal: Równe
         error: Błąd
@@ -291,7 +292,6 @@ sylius:
         go: Przejdź
         go_to_dashboard: Przejdź do panelu
         grand_total: Łącznie
-        groups: Grupy
         guest: Gość
         guest_customer: Gość
         have_an_account_already: Masz już konto
@@ -628,7 +628,6 @@ sylius:
         there_are_no_currencies_to_display: Brak walut do wyświetlenia
         there_are_no_customers_to_display: Brak klientów do wyświetlenia
         there_are_no_emails_configured: Brak skonfigurowanych adresów e-mail
-        there_are_no_groups_to_display: Brak grup do wyświetlenia
         there_are_no_images_for_this_product: Brak zdjęć dla tego produktu
         there_are_no_options_for_this_product: Brak wariantów dla tego produktu
         there_are_no_permissions_defined: Brak zdefiniowanych uprawnień

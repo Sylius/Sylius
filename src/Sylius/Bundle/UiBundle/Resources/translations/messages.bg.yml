@@ -48,7 +48,6 @@ sylius:
         create: Създай
         create_a_new_address: Добави нов адрес
         create_country: Създаване страна
-        create_group: Създаване на група
         create_locale: Създаване на езикова променлива
         create_new_coupon: Създаване на нов купон
         create_new_page: Създаване на нова страница
@@ -78,7 +77,6 @@ sylius:
         delete_image: Изтриване на изображение
         deleted: Изтрито
         edit: Редактирай
-        edit_group: Редактиране на група
         edit_locale: Редактиране на езикова променлива
         edit_my_address: Редактиране на моя адрес
         edit_your_personal_information: Редактиране на личните данни

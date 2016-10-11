@@ -2,11 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    group:
-        name:
-            max: 'Názov skupiny nesmie byť dlhší ako {{ limit }} znakov.'
-            min: 'Názov skupiny musí obsahovať minimálne {{ limit }} znakov.'
-            not_blank: Zadajte názov skupiny.
     customer:
         first_name:
             max: 'Meno nesmie byť dlhšie ako {{ limit }} znakov.'

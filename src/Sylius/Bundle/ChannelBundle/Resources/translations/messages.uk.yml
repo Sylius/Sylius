@@ -4,7 +4,7 @@
 sylius:
     form:
         channel:
-            name: Ім’я
+            name: Назва
             description: Опис
             url: URL
             enabled: Увімкнено

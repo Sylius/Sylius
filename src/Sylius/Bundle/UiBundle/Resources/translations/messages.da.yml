@@ -62,7 +62,6 @@ sylius:
         create: Opret
         create_a_new_address: Opret en ny adresse
         create_country: Opret land
-        create_group: Opret gruppe
         create_locale: Opret landestandard
         create_new_coupon: Opret ny kupon
         create_new_page: Opret ny side
@@ -94,7 +93,6 @@ sylius:
         deleted: Slettet
         description: Beskrivelse
         edit: Rediger
-        edit_group: Rediger gruppe
         edit_locale: Rediger landestandard
         edit_my_address: Rediger min adresse
         edit_your_personal_information: Redigere dine personlige oplysninger
@@ -131,7 +129,6 @@ sylius:
         generate_variants: Generer varianter
         generating_coupons: Genererer kuponer
         grand_total: Pris i alt
-        groups: Grupper
         hide_deleted: Skjul slettede
         home: Hjem
         id: ID

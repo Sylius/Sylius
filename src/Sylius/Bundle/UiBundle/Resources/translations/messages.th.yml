@@ -137,7 +137,6 @@ sylius:
         create_country: สร้างประเทศ
         create_currency: สร้างสกุลเงิน
         create_customer: สร้างลูกค้า
-        create_group: สร้างกลุ่ม
         create_imagine_block: สร้างบล็อกรูปภาพ
         create_locale: สร้างตำแหน่งที่ตั้ง
         create_menu: สร้างเมนู
@@ -227,7 +226,6 @@ sylius:
         edit_coupon: แก้ไขคูปอง
         edit_currency: แก้ไขสกุลเงิน
         edit_customer: แก้ไขข้อมูลลูกค้า
-        edit_group: แก้ไขกลุ่ม
         edit_locale: แก้ไขตำแหน่งที่ตั้ง
         edit_my_address: แก้ไขที่อยู่ของฉัน
         edit_payment_method: แก้ไขวิธีการชำระเงิน
@@ -320,7 +318,6 @@ sylius:
         go: Go
         go_to_dashboard: ไปที่แดชบอร์ด
         grand_total: ผลรวมทั้งหมด
-        groups: กลุ่ม
         guest: ผู้เยี่ยมชม
         guest_customer: ลูกค้าบุคคลทั่วไป
         have_an_account_already: มีบัญชีอยู่แล้ว
@@ -701,7 +698,6 @@ sylius:
         there_are_no_currencies_to_display: ไม่มีรายการสกุลเงิน
         there_are_no_customers_to_display: ไม่มีรายการลูกค้า
         there_are_no_emails_configured: ไม่มีการกำหนดค่าอีเมล
-        there_are_no_groups_to_display: ไม่มีรายการกลุ่มลูกค้า
         there_are_no_images_for_this_product: ไม่มีภาพสำหรับผลิตภัณฑ์นี้
         there_are_no_inventory_items_to_display: ไม่มีรายการสินค้าคงคลัง
         there_are_no_inventory_units_to_display: ไม่มีการแสดงหน่วยสินค้าคงคลัง

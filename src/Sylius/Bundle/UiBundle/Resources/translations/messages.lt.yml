@@ -82,7 +82,6 @@ sylius:
         create_a_new_address: Pridėti naują adresą
         create_country: Sukurti šalį
         create_currency: Sukurti valiutą
-        create_group: Grupės kūrimas
         create_imagine_block: Sukurti paveikslėlių bloką
         create_locale: Sukurti lokalę
         create_menu: Sukurti meniu
@@ -140,7 +139,6 @@ sylius:
         deleted: Pašalintas
         description: Aprašymas
         edit: Redaguoti
-        edit_group: Redaguoti grupę
         edit_locale: Lokalės redagavimas
         edit_my_address: Redaguoti adresą
         edit_report: Redaguoti ataskaitą
@@ -201,7 +199,6 @@ sylius:
         generating_coupons: Kuponų generavimas
         go_to_dashboard: Eiti į prietaisų skydelį
         grand_total: Viso
-        groups: Grupės
         guest: Svečias
         guest_customer: Svečias klientas
         hide_deleted: Slėpti pašalintus

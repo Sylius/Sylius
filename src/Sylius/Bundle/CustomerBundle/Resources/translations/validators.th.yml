@@ -2,11 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    group:
-        name:
-            max: 'ชื่อกลุ่มต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'
-            min: 'ชื่อกลุ่มต้องมีความยาวไม่น้อยกว่า {{ limit }} อักษร'
-            not_blank: กรุณาระบุชื่อกลุ่ม
     customer:
         first_name:
             max: 'ชื่อต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'

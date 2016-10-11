@@ -28,6 +28,7 @@ sylius:
                     promotions: โปรโมชั่น
                 customers:
                     customers: ลูกค้า
+                    groups: กลุ่ม
                     header: ลูกค้า
                 sales:
                     header: ยอดขาย

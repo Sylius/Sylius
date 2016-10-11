@@ -8,8 +8,6 @@ sylius:
                 amount: Miktar
             percentage_discount_configuration:
                 percentage: Yüzde
-            shipping_discount_configuration:
-                percentage: Yüzde
             type: Türü
         rule:
             taxonomy_configuration:

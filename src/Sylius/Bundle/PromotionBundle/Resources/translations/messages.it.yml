@@ -8,8 +8,6 @@ sylius:
                 amount: Valore
             percentage_discount_configuration:
                 percentage: '% Percentuale'
-            shipping_discount_configuration:
-                percentage: '% Percentuale'
             type: Tipo
         rule:
             taxonomy_configuration:

@@ -8,8 +8,6 @@ sylius:
                 amount: Beløb
             percentage_discount_configuration:
                 percentage: Procent
-            shipping_discount_configuration:
-                percentage: Procent
             type: Type
         rule:
             taxonomy_configuration:

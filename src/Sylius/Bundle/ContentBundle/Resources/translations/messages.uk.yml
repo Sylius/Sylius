@@ -4,103 +4,103 @@
 sylius:
     form:
         action_block:
-            action_name: Дія
+            action_name: Назва дії
             id: ID
-            publish_end_date: Опублікувати до
-            publish_start_date: Опублікувати від
-            publishable: Опублікований
+            publish_end_date: Кінцева дата публікації
+            publish_start_date: Початкова дата публікації
+            publishable: Опубліковано
         imagine_block:
             filter: Фільтр
             image: Зображення
             internal_name: "Внутрішнє ім'я"
-            label: Назва
+            label: Етикетка
             link_url: URL посилання
             parent: "Батьківський об'єкт"
-            publish_end_date: Опублікувати до
-            publish_start_date: Опублікувати від
-            publishable: Опублікований
-            slideshow_small: Мале слайд-шоу (по ширині контекту)
-            slideshow_medium: Середнє слайд-шоу (по ширині контекту)
-            slideshow_large: Велике слайд-шоу (повний розмір)
+            publish_end_date: Кінцева дата публікації
+            publish_start_date: Початкова дата публікації
+            publishable: Опубліковано
+            slideshow_small: Мале слайд-шоу (збоку)
+            slideshow_medium: Середнє слайд-шоу (вміст)
+            slideshow_large: Велике слайд-шоу (на всю ширину)
         menu:
-            childrens: Нащадки
-            display: Відобразити
-            display_children: Відобразити нащадків
-            label: Назва
-            name: Ім’я
+            childrens: "Дочірні об'єкти"
+            display: Показувати
+            display_children: "Показувати дочірні об'єкти"
+            label: Етикетка
+            name: Назва
             parent: "Батьківський об'єкт"
-            publish_end_date: Опублікувати до
-            publish_start_date: Опублікувати від
-            publishable: Опублікований
+            publish_end_date: Кінцева дата публікації
+            publish_start_date: Початкова дата публікації
+            publishable: Опубліковано
             route: Маршрут
-            uri: Адрес
+            uri: URI
         menu_block:
             body: Тіло
             id: ID
-            name: Ім’я
-            publish_end_date: Опублікувати до
-            publish_start_date: Опублікувати від
-            publishable: Опублікований
+            name: Назва
+            publish_end_date: Кінцева дата публікації
+            publish_start_date: Початкова дата публікації
+            publishable: Опубліковано
         menu_node_block:
-            content: Зміст
-            display: Відобразити
-            display_children: Відобразити нащадків
-            internal_name: "Внутрішнє ім'я"
-            label: Назва
-            link_type: Тип посилання
-            publish_end_date: Опублікувати до
-            publish_start_date: Опублікувати від
-            publishable: Опублікований
+            content: Вміст
+            display: Показувати
+            display_children: "Показувати дочірні об'єкти"
+            internal_name: Внутрішня назва
+            label: Етикетка
+            link_type: "Тип зв'язку"
+            publish_end_date: Кінцева дата публікації
+            publish_start_date: Початкова дата публікації
+            publishable: Опубліковано
             route: Маршрут
-            uri: Адрес
+            uri: URI
         redirect_route:
             id: ID
-            name: Ім’я
-            route_name: Назва маршруту
-            uri: Адрес
+            name: Назва
+            route_name: Назва_маршруту
+            uri: URI
         reference_block:
             body: Тіло
             id: ID
-            publish_end_date: Опублікувати до
-            publish_start_date: Опублікувати від
-            publishable: Опублікований
-            title: Назва
+            publish_end_date: Кінцева дата публікації
+            publish_start_date: Початкова дата публікації
+            publishable: Опубліковано
+            title: Заголовок
         route:
-            content: Зміст
-            name: Ім’я
+            content: Вміст
+            name: Назва
             parent: "Батьківський об'єкт"
         simple_block:
             body: Тіло
             internal_name: "Внутрішнє ім'я"
             parent: "Батьківський об'єкт"
-            publish_end_date: Опублікувати до
-            publish_start_date: Опублікувати від
-            publishable: Опублікований
-            title: Назва
+            publish_end_date: Кінцева дата публікації
+            publish_start_date: Початкова дата публікації
+            publishable: Опубліковано
+            title: Заголовок
         slideshow_block:
             add_slide: Додати слайд
-            childrens: Нащадки
+            childrens: "Дочірні об'єкти"
             internal_name: "Внутрішнє ім'я"
             parent: "Батьківський об'єкт"
-            publish_end_date: Опублікувати до
-            publish_start_date: Опублікувати від
-            publishable: Опублікований
-            title: Назва
+            publish_end_date: Кінцева дата публікації
+            publish_start_date: Початкова дата публікації
+            publishable: Опубліковано
+            title: Заголовок
         static_content:
             body: Тіло
             id: ID
             internal_name: "Внутрішнє ім'я"
             menu_nodes: Елементи меню
             parent: "Батьківський об'єкт"
-            publish_end_date: Опублікувати до
-            publish_start_date: Опублікувати від
-            publishable: Опублікований
+            publish_end_date: Кінцева дата публікації
+            publish_start_date: Початкова дата публікації
+            publishable: Опубліковано
             routes: Маршрути
             title: Заголовок
         string_block:
             body: Тіло
             id: ID
-            name: Ім’я
-            publish_end_date: Опублікувати до
-            publish_start_date: Опублікувати від
-            publishable: Опублікований
+            name: Назва
+            publish_end_date: Кінцева дата публікації
+            publish_start_date: Початкова дата публікації
+            publishable: Опубліковано

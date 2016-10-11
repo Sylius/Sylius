@@ -4,9 +4,12 @@
 sylius:
     form:
         priceable:
-            price: Ціна
+            price: Вартість
             calculator: Ціноутворення
-            configuration: Конфігурація
+            configuration: Налаштування
         pricing:
             volume_based:
-                price: Ціна
+                label: Налаштування ціноутворення
+                min: Мінімальний обсяг
+                max: Максимальний обсяг
+                price: Вартість

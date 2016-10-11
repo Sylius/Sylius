@@ -132,6 +132,21 @@ sylius:
             total_of_items_from_taxon:
                 taxon: Táxon
                 amount: Quantia
+    installer:
+        extensions:
+            header: extensões
+            accelerator:
+                header: Accelerator
+                help: Habilite o Zend OpCache (altamente recomendado).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            icu: ICU
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true
     email:
         order_confirmation:
             name: Confirmação de encomenda

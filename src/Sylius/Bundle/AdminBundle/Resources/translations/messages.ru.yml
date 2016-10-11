@@ -27,6 +27,7 @@ sylius:
                     promotions: Рекламные акции
                 customers:
                     customers: Клиенты
+                    groups: Группы
                     header: Клиент
                 sales:
                     header: Продажи

@@ -4,21 +4,26 @@
 sylius:
     form:
         product:
-            name: Ім’я
+            name: Назва
             description: Опис
+            attributes: Атрибути
             options: Опції
             meta_keywords: Мета ключові слова
             meta_description: Мета-опис
             taxons: Таксони
         product_variant:
-            available_on: Доступно
+            available_on: Доступно на
+            available_until: Доступно до
         association_type:
-            name: Ім’я
+            name: Назва
+        association:
+            type: Тип асоціювання
+            product: Асоційований продукт
         variant:
-            name: Ім’я
+            name: Назва
         option:
-            name: Ім’я
-            values: Можливих значень
+            name: Назва
+            values: Можливі значення
         option_value:
             add_value: Додати значення
             value: Значення
