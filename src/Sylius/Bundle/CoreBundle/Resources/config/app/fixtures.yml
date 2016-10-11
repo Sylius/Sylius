@@ -58,6 +58,7 @@ sylius_fixtures:
                                 payment_methods:
                                     - "cash_on_delivery"
                                     - "bank_transfer"
+                                enabled: true
 
                 regular_user:
                     name: shop_user
