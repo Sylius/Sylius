@@ -45,9 +45,9 @@ final class SorterSpec extends ObjectBehavior
     ) {
         $parameters->has('sorting')->willReturn(false);
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
-        $grid->getSorting()->willReturn(['name' => ['path' => 'name' , 'direction' => 'desc']]);
+        $grid->getSorting()->willReturn(['name' => ['path' => 'translation.name', 'direction' => 'desc']]);
 
-        $expressionBuilder->addOrderBy('name', 'desc')->shouldBeCalled();
+        $expressionBuilder->addOrderBy('translation.name', 'desc')->shouldBeCalled();
 
         $this->sort($dataSource, $grid, $parameters);
     }
@@ -59,12 +59,12 @@ final class SorterSpec extends ObjectBehavior
         ExpressionBuilderInterface $expressionBuilder
     ) {
         $parameters->has('sorting')->willReturn(true);
-        $parameters->get('sorting')->willReturn(['name' => ['path' => 'name', 'direction' => 'asc']]);
+        $parameters->get('sorting')->willReturn(['name' => ['direction' => 'asc']]);
 
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
-        $grid->getSorting()->willReturn(['name' => 'asc']);
+        $grid->getSorting()->willReturn(['name' => ['path' => 'translation.name', 'direction' => 'desc']]);
 
-        $expressionBuilder->addOrderBy('name', 'asc')->shouldBeCalled();
+        $expressionBuilder->addOrderBy('translation.name', 'asc')->shouldBeCalled();
 
         $this->sort($dataSource, $grid, $parameters);
     }

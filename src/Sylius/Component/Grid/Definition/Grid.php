@@ -10,6 +10,8 @@
 
 namespace Sylius\Component\Grid\Definition;
 
+use Webmozart\Assert\Assert;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -120,6 +122,18 @@ class Grid
     public function setSorting(array $sorting)
     {
         $this->sorting = $sorting;
+    }
+
+    /**
+     * @param string $fieldName
+     *
+     * @return bool
+     */
+    public function isSortableBy($fieldName)
+    {
+        Assert::true($this->hasField($fieldName), sprintf('Field "%s" does not exist.', $fieldName));
+
+        return array_key_exists($fieldName, $this->getSorting());
     }
 
     /**
