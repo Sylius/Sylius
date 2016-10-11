@@ -99,7 +99,8 @@
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^3.1",
         "phpunit/phpunit": "^5.6",
-        "se/selenium-server-standalone": "^2.52"
+        "se/selenium-server-standalone": "^2.52",
+        "stripe/stripe-php": "^4.0"
     },
     "replace": {
         "sylius/addressing": "self.version",

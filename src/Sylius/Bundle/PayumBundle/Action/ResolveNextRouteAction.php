@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout;
+namespace Sylius\Bundle\PayumBundle\Action;
 
 use Payum\Core\Action\ActionInterface;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout;
+namespace spec\Sylius\Bundle\PayumBundle\Action;
 
 use Payum\Core\Action\ActionInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ResolveNextRouteAction;
+use Sylius\Bundle\PayumBundle\Action\ResolveNextRouteAction;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
