@@ -19,7 +19,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PricingExtension extends \Twig_Extension
+final class PricingExtension extends \Twig_Extension
 {
     /**
      * Templating helper.

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\PricingBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Calculator\VolumeBasedCalculator;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -37,7 +38,7 @@ final class PriceableTypeExtensionSpec extends ObjectBehavior
         $calculatorRegistry,
         $subscriber,
         FormBuilderInterface $builder,
-        VolumeBasedCalculator $calculator,
+        CalculatorInterface $calculator,
         FormBuilderInterface $formBuilder,
         FormInterface $form
     ) {

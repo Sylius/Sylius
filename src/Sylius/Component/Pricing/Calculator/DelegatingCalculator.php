@@ -20,7 +20,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DelegatingCalculator implements DelegatingCalculatorInterface
+final class DelegatingCalculator implements DelegatingCalculatorInterface
 {
     /**
      * @var ServiceRegistryInterface

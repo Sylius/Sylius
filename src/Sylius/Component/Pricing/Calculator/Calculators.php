@@ -26,4 +26,8 @@ class Calculators
 
     // Volume based pricing.
     const VOLUME_BASED = 'volume_based';
+
+    private function __construct()
+    {
+    }
 }

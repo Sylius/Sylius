@@ -42,7 +42,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Antoine Goutenoir <antoine@goutenoir.com>
  */
-class VolumeBasedCalculator implements CalculatorInterface
+final class VolumeBasedCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}

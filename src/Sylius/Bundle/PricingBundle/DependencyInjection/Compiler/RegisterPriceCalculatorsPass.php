@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RegisterPriceCalculatorsPass implements CompilerPassInterface
+final class RegisterPriceCalculatorsPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

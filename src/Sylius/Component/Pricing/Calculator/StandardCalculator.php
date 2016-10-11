@@ -18,7 +18,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StandardCalculator implements CalculatorInterface
+final class StandardCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}

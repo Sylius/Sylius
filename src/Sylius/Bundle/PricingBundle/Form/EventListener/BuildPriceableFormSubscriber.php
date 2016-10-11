@@ -28,7 +28,7 @@ use Symfony\Component\Form\FormInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildPriceableFormSubscriber implements EventSubscriberInterface
+final class BuildPriceableFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ServiceRegistryInterface
@@ -117,7 +117,7 @@ class BuildPriceableFormSubscriber implements EventSubscriberInterface
      * @param string        $calculatorType
      * @param array         $data
      */
-    protected function addConfigurationFields(FormInterface $form, $calculatorType, array $data = [])
+    private function addConfigurationFields(FormInterface $form, $calculatorType, array $data = [])
     {
         /** @var CalculatorInterface $calculator */
         $calculator = $this->calculatorRegistry->get($calculatorType);
