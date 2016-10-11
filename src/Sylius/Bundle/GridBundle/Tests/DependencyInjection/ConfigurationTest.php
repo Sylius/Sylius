@@ -166,7 +166,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_does_not_require_sorting_direction_and_uses_descending_by_default()
+    public function it_does_not_require_sorting_direction_and_uses_ascending_by_default()
     {
         $this->assertProcessedConfigurationEquals(
             [[
@@ -190,7 +190,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         'sorting' => [
                             'code' => [
                                 'path' => 'code',
-                                'direction' => 'desc',
+                                'direction' => 'asc',
                             ]
                         ],
                         'fields' => [],

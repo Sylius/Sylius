@@ -12,14 +12,8 @@
         <thead>
         <tr>
             {% for field in definition.fields %}
-                {% if grid.isSortableBy(field.name) %}
-                    {% set sortingDirection = grid.getSortingOrder(field.name) %}
-
-                    {% if grid.isSortedBy(field.name) %}
-                        {{ sorting.sortedHeader(definition, field, app.request.attributes, sortingDirection, grid.parameters.all) }}
-                    {% else %}
-                        {{ sorting.sortableHeader(definition, field, app.request.attributes, sortingDirection, grid.parameters.all) }}
-                    {% endif %}
+                {% if definition.isSortableBy(field.name) %}
+                    {{ sorting.tableHeader(grid, field, app.request.attributes) }}
                 {% else %}
                     <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
                 {% endif %}
