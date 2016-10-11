@@ -37,8 +37,6 @@ file via an interactive script. Please follow the steps. If you hit enter, the d
     secret (EDITME):
     locale (en_US):
     currency (USD):
-    wkhtmltopdf.bin_path (/usr/bin/wkhtmltopdf):
-    wkhtmltoimage.bin_path (/usr/bin/wkhtmltoimage):
 
 After everything is in place, run the following commands:
 
