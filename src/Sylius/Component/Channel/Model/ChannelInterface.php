@@ -19,7 +19,11 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ChannelInterface extends CodeAwareInterface, TimestampableInterface, ToggleableInterface, ResourceInterface
+interface ChannelInterface extends
+    CodeAwareInterface,
+    TimestampableInterface,
+    ToggleableInterface,
+    ResourceInterface
 {
     /**
      * @return string
