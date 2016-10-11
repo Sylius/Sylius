@@ -12,6 +12,7 @@ The Customization Guide
     menu
     template
     translation
+    flash
     state_machine
 
 .. include:: /customization/map.rst.inc
