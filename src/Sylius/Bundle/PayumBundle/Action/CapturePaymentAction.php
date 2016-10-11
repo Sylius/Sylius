@@ -22,7 +22,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
-class CapturePaymentAction extends GatewayAwareAction
+final class CapturePaymentAction extends GatewayAwareAction
 {
     /**
      * @var CurrencyConverterInterface
