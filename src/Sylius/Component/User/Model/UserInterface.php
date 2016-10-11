@@ -97,18 +97,19 @@ interface UserInterface extends
     public function setPasswordResetToken($passwordResetToken);
 
     /**
-     * Sets the timestamp that the user requested a password reset.
-     *
+     * @return null|\DateTime
+     */
+    public function getPasswordRequestedAt();
+
+    /**
      * @param null|\DateTime $date
      */
     public function setPasswordRequestedAt(\DateTime $date = null);
 
     /**
-     * Checks whether the password reset request has expired.
+     * @param \DateInterval $ttl
      *
-     * @param \DateInterval $ttl Requests older than this time interval will be considered expired
-     *
-     * @return bool true if the user's password request is non expired, false otherwise
+     * @return bool
      */
     public function isPasswordRequestNonExpired(\DateInterval $ttl);
 
@@ -167,15 +168,11 @@ interface UserInterface extends
     public function removeRole($role);
 
     /**
-     * Gets connected OAuth accounts.
-     *
      * @return Collection|UserOAuthInterface[]
      */
     public function getOAuthAccounts();
 
     /**
-     * Gets connected OAuth account.
-     *
      * @param string $provider
      *
      * @return null|UserOAuthInterface
@@ -183,8 +180,6 @@ interface UserInterface extends
     public function getOAuthAccount($provider);
 
     /**
-     * Connects OAuth account.
-     *
      * @param UserOAuthInterface $oauth
      */
     public function addOAuthAccount(UserOAuthInterface $oauth);

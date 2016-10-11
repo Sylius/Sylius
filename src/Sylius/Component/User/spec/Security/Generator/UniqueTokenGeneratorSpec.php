@@ -31,7 +31,7 @@ final class UniqueTokenGeneratorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\User\Security\Generator\UniqueTokenGenerator');
+        $this->shouldHaveType(UniqueTokenGenerator::class);
     }
 
     function it_implements_generator_interface()

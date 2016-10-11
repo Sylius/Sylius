@@ -24,12 +24,12 @@ final class UniqueTokenGenerator implements GeneratorInterface
     /**
      * @var UniquenessCheckerInterface
      */
-    protected $uniquenessChecker;
+    private $uniquenessChecker;
 
     /**
      * @var int
      */
-    protected $tokenLength;
+    private $tokenLength;
 
     /**
      * @param UniquenessCheckerInterface $uniquenessChecker

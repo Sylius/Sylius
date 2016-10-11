@@ -24,12 +24,12 @@ final class UniquePinGenerator implements GeneratorInterface
     /**
      * @var UniquenessCheckerInterface
      */
-    protected $uniquenessChecker;
+    private $uniquenessChecker;
 
     /**
      * @var int
      */
-    protected $pinLength;
+    private $pinLength;
 
     /**
      * @param UniquenessCheckerInterface $uniquenessChecker

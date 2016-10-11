@@ -140,6 +140,14 @@ class User implements UserInterface
     }
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return (string) $this->getUsername();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getId()
@@ -410,9 +418,7 @@ class User implements UserInterface
     }
 
     /**
-     * Gets the timestamp that the user requested a password reset.
-     *
-     * @return null|\DateTime
+     * {@inheritdoc}
      */
     public function getPasswordRequestedAt()
     {
@@ -496,16 +502,6 @@ class User implements UserInterface
             $this->oauthAccounts->add($oauth);
             $oauth->setUser($this);
         }
-    }
-
-    /**
-     * Returns username.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return (string) $this->getUsername();
     }
 
     /**
