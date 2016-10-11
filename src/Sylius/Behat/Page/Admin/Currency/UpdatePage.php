@@ -20,7 +20,18 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
     use Toggles;
-    
+
+    /**
+     * {@inheritdoc}
+     */
+    public function canBeDisabled()
+    {
+        $toggleableElement = $this->getToggleableElement();
+        $this->assertCheckboxState($toggleableElement, true);
+
+        return $toggleableElement->hasAttribute('disabled');
+    }
+
     /**
      * {@inheritdoc}
      */
