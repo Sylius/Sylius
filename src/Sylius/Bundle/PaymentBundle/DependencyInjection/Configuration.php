@@ -42,7 +42,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
