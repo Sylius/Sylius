@@ -2,17 +2,49 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_currency:
+            not_blank: Будь ласка, введіть типову валюту для каналу.
+        default_locale:
+            not_blank: Будь ласка, введіть типову локаль каналу.
+    checkout:
+        shipping_method:
+            not_blank: Будь ласка, виберіть спосіб доставки.
+    customer:
+        currency_code:
+            not_valid: Код валюти, що ви ввели, не є вірним.
+    order:
+        currency_code:
+            not_valid: Код валюти, що ви ввели, не є вірним.
     locale:
         code:
             not_blank: Будь ласка, введіть код локалі.
             unique: Ця локаль вже існує.
+        enabled:
+            cannot_disable_base: Базова локаль не може бути недоступною.
+    product_image:
+        code:
+            unique: Код зображення має бути унікальним в межах цього продукту.
     product_variant:
         onHand:
-            min: 'На руках має бути більше, ніж {{ limit }}.'
-            not_blank: Будь ласка, вкажіть кількість товару на складі.
+            min: 'Кількість товару під рукою має бути більшою за {{ limit }}.'
+            not_blank: Будь ласка, вкажіть кількість товару під рукою.
         price:
             min: Ціна не має бути негативною.
             not_blank: Будь ласка, введіть ціну.
+        original_price:
+            min: Початкова ціна не має бути негативною.
+    product_translation:
+        short_description:
+            max: 'Стислий опис має містити не більше {{ limit }} символів.'
+    taxon_image:
+        code:
+            unique: Код зображення має бути унікальним в межах цього таксону.
     user:
         email:
-            unique: Ця email вже використовується.
+            unique: Ця адреса електронної пошти вже використовується.
+        username:
+            unique: "Це ім'я користувача вже використовується."
+            not_blank: "Будь ласка, введіть ваше ім'я."
+        locale_code:
+            not_blank: Будь ласка, виберіть локаль.

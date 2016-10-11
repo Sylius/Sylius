@@ -108,7 +108,6 @@ sylius:
         create_country: ایجاد کشور
         create_currency: ایجاد ارز
         create_customer: ایجاد کاربر
-        create_group: ایجاد گروه
         create_imagine_block: ایجاد بلاک عکس
         create_locale: ایجاد زبان
         create_menu: ایجاد منو
@@ -189,7 +188,6 @@ sylius:
         edit_country: ویرایش کشور
         edit_currency: ویرایش واحد پولی
         edit_customer: ویرایش مشتری
-        edit_group: ویرایش گروه
         edit_locale: ویرایش زبان
         edit_my_address: ویرایش آدرس من
         edit_payment_method: ویرایش روش پرداخت
@@ -262,7 +260,6 @@ sylius:
         generating_coupons: ایجاد کد تخفیف
         go_to_dashboard: رفتن به داشبورد
         grand_total: هزینه نهایی
-        groups: گروه ها
         guest: می خواهم بدون ثبت نام ادامه دهم
         guest_customer: مشتری مهمان
         hello_name: 'سلام <b>%name%</b>'
@@ -565,7 +562,6 @@ sylius:
         there_are_no_currencies_to_display: ارزی برای نمایش وجود ندارد
         there_are_no_customers_to_display: هیچ مشتری برای نمایش وجود ندارد
         there_are_no_emails_configured: هیچ ایمیلی پیکربندی نشده
-        there_are_no_groups_to_display: هیچ گروهی برای نمایش وجود ندارد
         there_are_no_images_for_this_product: هیچ عکسی برای این محصول تعریف نشده است
         there_are_no_inventory_items_to_display: هیچ آیتم انباری برای مشاهده وجود ندارد
         there_are_no_inventory_units_to_display: هیچ واحد انباری برای نمایش وجود ندارد

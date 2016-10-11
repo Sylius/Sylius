@@ -8,8 +8,6 @@ sylius:
                 amount: Částka
             percentage_discount_configuration:
                 percentage: Procentní podíl
-            shipping_discount_configuration:
-                percentage: Procentní podíl
             type: Typ
         rule:
             taxonomy_configuration:

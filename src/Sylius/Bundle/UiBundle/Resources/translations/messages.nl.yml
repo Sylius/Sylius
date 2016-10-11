@@ -129,7 +129,6 @@ sylius:
         create_country: Nieuw land
         create_currency: Valuta maken
         create_customer: Nieuwe klant
-        create_group: Nieuwe groep
         create_imagine_block: Nieuw afbeeldingsblok
         create_locale: Nieuwe locatie
         create_menu: Menu aanmaken
@@ -218,7 +217,6 @@ sylius:
         edit_coupon: Coupon bewerken
         edit_currency: Bewerk valuta
         edit_customer: Bewerk klant
-        edit_group: Bewerk groep
         edit_locale: Bewerk locatie
         edit_my_address: Bewerk mijn adres
         edit_payment_method: Bewerk betaalmethode
@@ -308,7 +306,6 @@ sylius:
         go: Ga
         go_to_dashboard: Ga naar dashboard
         grand_total: Totaal
-        groups: Groepen
         guest: Gast
         guest_customer: Gast klant
         have_an_account_already: Je hebt reeds een account
@@ -672,7 +669,6 @@ sylius:
         there_are_no_currencies_to_display: "Er zijn geen valuta's om weer te geven"
         there_are_no_customers_to_display: Zijn er geen klanten om weer te geven
         there_are_no_emails_configured: Er zijn geen e-mails geconfigureerd
-        there_are_no_groups_to_display: Er zijn geen groepen om weer te geven
         there_are_no_images_for_this_product: Er zijn geen afbeeldingen voor dit product
         there_are_no_inventory_items_to_display: Er zijn geen voorraadgegevens om weer te geven
         there_are_no_inventory_units_to_display: Er zijn geen inventaris eenheden om weer te geven

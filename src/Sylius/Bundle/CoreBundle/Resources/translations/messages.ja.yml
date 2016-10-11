@@ -57,3 +57,10 @@ sylius:
             price: 価格
         guest:
             email: メールアドレス
+    installer:
+        extensions:
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true

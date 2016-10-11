@@ -6,29 +6,42 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Кількість
+                equal: Дорівнює
+            type: Тип правила
         shipment:
-            state: Статус
+            state: Стан
             states:
-                checkout: Оформити замовлення
+                checkout: Підрахунок
                 pending: В очікуванні
-                ready: Готовий
-                shipped: Відправлено
-                returned: Повернуто
-                cancelled: Відхилено
-            tracking_code: Трекінг-код
+                ready: Готове
+                shipped: Доставлене
+                returned: Повернене
+                cancelled: Скасоване
+            tracking_code: Код відстеження
         shipping_calculator:
             flat_rate_configuration:
+                label: Фіксована ставка за доставку
                 amount: Кількість
+            flexible_rate_configuration:
+                label: Гнучкий тариф
+                additional_unit_cost: Вартість додаткової одиниці
+                additional_unit_limit: Ліміт додаткових одиниць
+                first_unit_cost: Вартість першої одиниці
             per_unit_rate_configuration:
+                label: Фіксована ставка за одиницю
                 amount: Кількість
             weight_rate_configuration:
+                label: Тариф за вагою
+                fixed: Фіксована сума
+                variable: Змінна сума
                 division: Ділення
             volume_rate_configuration:
+                label: Тариф за обсягом
                 amount: Кількість
                 division: Ділення
         shipping_category:
             description: Опис
-            name: Ім’я
+            name: Назва
         shipping_method:
             calculator: Калькулятор
             category: Категорія
@@ -36,6 +49,6 @@ sylius:
             configuration: Конфігурація
             description: Опис
             enabled: Увімкнено
-            name: Ім’я
+            name: Назва
             tax_category: Категорія податку
             translations: Переклади

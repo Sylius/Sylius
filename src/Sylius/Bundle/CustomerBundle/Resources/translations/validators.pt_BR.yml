@@ -2,11 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    group:
-        name:
-            max: 'Nome do grupo não pode ter mais do que {{ limit }} caracteres.'
-            min: 'Nome do Grupo deve ter no mínimo {{ limit }} caracteres.'
-            not_blank: Informe o nome do Grupo.
     customer:
         first_name:
             max: 'O campo nome não pode ser maior que {{ limit }} caracteres.'

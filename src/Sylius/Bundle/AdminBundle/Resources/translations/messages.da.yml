@@ -19,6 +19,8 @@ sylius:
                     zones: Zoner
                 marketing:
                     promotions: Kampagner
+                customers:
+                    groups: Grupper
                 sales:
                     header: Salg
                     orders: Ordrer

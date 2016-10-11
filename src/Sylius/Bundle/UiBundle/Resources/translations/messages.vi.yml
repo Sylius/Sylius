@@ -30,7 +30,6 @@ sylius:
         existing_customer: Khách hàng hiện tại
         general_settings: Cài đặt chung
         generate: Tạo
-        groups: Nhóm
         id: ID
         image: Hình ảnh
         images: Hình ảnh

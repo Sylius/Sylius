@@ -137,7 +137,6 @@ sylius:
         create_country: Criar país
         create_currency: Criar moeda
         create_customer: Criar cliente
-        create_group: Cria grupo
         create_imagine_block: Criar bloco imaginário
         create_locale: Criar a localidade
         create_menu: Criar menu
@@ -227,7 +226,6 @@ sylius:
         edit_coupon: Editar cupom
         edit_currency: Editar moeda
         edit_customer: Editar cliente
-        edit_group: Editar grupo
         edit_locale: Editar a localidade
         edit_my_address: Editar meu endereço
         edit_payment_method: Edite o método de pagamento
@@ -320,7 +318,6 @@ sylius:
         go: Prosseguir
         go_to_dashboard: Ir para o painel
         grand_total: Total
-        groups: Grupos
         guest: Visitante
         guest_customer: Usuário visitante
         have_an_account_already: Já tem uma conta
@@ -698,7 +695,6 @@ sylius:
         there_are_no_currencies_to_display: Não há nenhuma moeda para exibir
         there_are_no_customers_to_display: Não há nenhum cliente para exibir
         there_are_no_emails_configured: Não há nenhum email configurado
-        there_are_no_groups_to_display: Não há nenhum grupo para exibir
         there_are_no_images_for_this_product: Não há imagens para este produto
         there_are_no_inventory_items_to_display: Não há itens no estoque
         there_are_no_inventory_units_to_display: Não há itens no estoque para exibir

@@ -3,16 +3,15 @@
 
 sylius:
     form:
-        group:
-            name: Naam
-            roles: Rollen
         customer:
             first_name: Voornaam
-            groups: Groepen
             last_name: Achternaam
             email: E-mail
             phone_number: Telefoonnummer
             billing_address: Factuuradres
             different_billing_address: Gebruik een ander factuuradres?
+        customer_group:
+            name: Naam
+            roles: Rollen
     gender:
         unknown: Onbekend

@@ -49,3 +49,10 @@ sylius:
             width: Chiều rộng
         product_association_type:
             name: Tên
+    installer:
+        extensions:
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true

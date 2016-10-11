@@ -28,6 +28,7 @@ sylius:
                     promotions: Promóciók
                 customers:
                     customers: Ügyfelek
+                    groups: Csoportok
                     header: Ügyfél
                 sales:
                     header: Értékesítés

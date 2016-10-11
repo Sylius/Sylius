@@ -81,3 +81,10 @@ sylius:
             email: E-Mail
         product_association_type:
             name: Name
+    installer:
+        extensions:
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true

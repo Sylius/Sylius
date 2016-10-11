@@ -9,4 +9,4 @@ sylius:
             parent: "Батьківський об'єкт"
             permalink: Постійне посилання
         taxonomy:
-            name: Ім’я
+            name: Назва

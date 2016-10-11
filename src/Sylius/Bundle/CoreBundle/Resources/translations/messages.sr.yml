@@ -7,3 +7,10 @@ sylius:
             payment_state: Стање плаћања
         product_variant:
             tax_category: Категорија производа
+    installer:
+        extensions:
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true

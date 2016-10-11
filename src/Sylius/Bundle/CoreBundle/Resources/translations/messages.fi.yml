@@ -9,3 +9,10 @@ sylius:
             channels: Kanavat
         guest:
             email: Sähköpostiosoite
+    installer:
+        extensions:
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true

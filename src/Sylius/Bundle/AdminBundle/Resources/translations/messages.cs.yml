@@ -28,6 +28,7 @@ sylius:
                     promotions: Akce
                 customers:
                     customers: Zákazníci
+                    groups: Skupiny
                     header: Zákazník
                 sales:
                     header: Prodeje

@@ -96,7 +96,6 @@ sylius:
         create_country: Ustvarite državo
         create_currency: Ustvarite valuto
         create_customer: Ustvarjanje kupca
-        create_group: Ustvarite skupino
         create_imagine_block: Ustvarite blok imagine
         create_locale: Ustvarjanje področne nastavitve
         create_menu: Ustvarite meni
@@ -172,7 +171,6 @@ sylius:
         disable: Onemogoči
         edit: Urejanje
         edit_association_type: Uredite vrsto združenja
-        edit_group: Urejanje skupine
         edit_locale: Urejanje področne nastavitve
         edit_my_address: Uredite svoj naslov
         edit_report: Uredi poročilo
@@ -236,7 +234,6 @@ sylius:
         generating_coupons: Generiranje kuponov
         go_to_dashboard: Pojdite na nadzorno ploščo
         grand_total: Skupaj
-        groups: Skupine
         guest: Gost
         guest_customer: Kupec gost
         hello_name: 'Pozdravljeni, <b>%name%</b>'
@@ -508,7 +505,6 @@ sylius:
         there_are_no_currencies_to_display: Nobena valuta ni na voljo za prikaz
         there_are_no_customers_to_display: Za prikaz ni na voljo nobenega kupca
         there_are_no_emails_configured: Nastavljene ni nobene e-pošte
-        there_are_no_groups_to_display: Ni skupin za prikaz
         there_are_no_images_for_this_product: Za ta izdelek ni na voljo nobene slike
         there_are_no_inventory_items_to_display: Za prikaz ni elementov zaloge
         there_are_no_inventory_units_to_display: Enote inventarja niso na voljo za prikaz

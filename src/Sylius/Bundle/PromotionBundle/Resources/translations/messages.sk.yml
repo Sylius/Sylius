@@ -8,8 +8,6 @@ sylius:
                 amount: Suma
             percentage_discount_configuration:
                 percentage: Percentuálne
-            shipping_discount_configuration:
-                percentage: Percentuálne
             type: Typ
         rule:
             taxonomy_configuration:

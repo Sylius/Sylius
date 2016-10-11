@@ -5,32 +5,40 @@ sylius:
     form:
         action:
             add_product_configuration:
-                price: Ціна одиниці
+                price: Ціна за одиницю
                 quantity: Кількість
-                variant: Варіант
+                variant: Різновид
+            customer_group: Група клієнтів
         block:
             body: Тіло
             id: ID
-            title: Назва
+            title: Заголовок
         cart:
             coupon: Купон
         checkout:
             addressing:
-                different_billing_address: Використовувати іншу платіжну адресу?
+                different_billing_address: Використати іншу адресу для виставлення рахунків?
             payment_method: Спосіб оплати
-            shipping_method: Метод доставки
+            shipping_method: Спосіб доставки
         promotion:
             channels: Канали
+        coupon:
+            per_customer_usage_limit: Ліміт використання на клієнта
         group:
-            name: Ім’я
+            name: Назва
             roles: Ролі
         channel:
-            taxonomies: Категоризація
+            taxonomies: Таксономії
+            locale_default: Типова локаль
             locales: Локалі
-            currency_default: Валюта за замовчуванням
+            currency_default: Типова валюта
+            currencies: Валюти
             shipping_methods: Методи доставки
             payment_methods: Способи оплати
+            tax_calculation_strategy: Стратегія податкового розрахунку
             tax_zone_default: Податкова зона за замовчуванням
+            theme: Тема
+            hostname: "Ім'я хоста"
         image:
             code: Код
             file: Зображення
@@ -44,6 +52,7 @@ sylius:
             total_from: Від
             total_to: До
             payment_state: Статус платежу
+            channel: Усі канали
         page:
             body: Тіло
             id: ID
@@ -54,6 +63,7 @@ sylius:
             shipping_category: Категорія доставки
             short_description: Короткий опис
             variant_selection_method: Метод вибору варіанту
+            main_taxon: Основний таксон
             channels: Канали
             enabled: Увімкнено
         product_filter:
@@ -66,23 +76,26 @@ sylius:
             created_at_to: До
             number: Номер замовлення
             shipping_address: "Ім'я одержувача"
+            channel: Усі канали
         payment_filter:
             created_at_from: Від
             created_at_to: До
             number: Номер замовлення
+            billing_address: "Ім'я платника"
+            channel: Усі канали
         shipping_method:
             zone: Зона
         taxon:
             code: Код
-            file: Обрати зображення
+            file: Вибрати зображення
             images: Зображення
         taxonomy:
-            file: Обрати зображення
+            file: Вибрати зображення
         user:
-            billing_address: Платіжна адреса
-            different_billing_address: Використовувати іншу платіжну адресу?
-            enabled: Ввімкнено
-            first_name: Iм’я
+            billing_address: Адреса для рахунків
+            different_billing_address: Використати іншу адресу для рахунків?
+            enabled: Увімкнено
+            first_name: "Iм'я"
             groups: Групи
             roles: Ролі
             last_name: Прізвище
@@ -93,31 +106,110 @@ sylius:
         variant:
             depth: Глибина
             height: Висота
-            on_hand: Кількість на складі
+            on_hand: Поточний запас
             price: Ціна
+            original_price: Початкова ціна
             sku: Артикул
             weight: Вага
             width: Ширина
         attribute:
             product_attribute_value:
+                attribute: Атрибут
                 value: Значення
         guest:
-            email: Email
+            email: Адреса електронної пошти
+        product_association:
+            product: Асоційований продукт
+            type: Тип асоціювання
         product_association_type:
-            name: Ім’я
+            name: Назва
         promotion_rule:
             contains_taxon:
-                count: Кількість
+                taxon: Таксон
+                count: Підрахунок
             taxon:
                 taxons: Таксони
             total_of_items_from_taxon:
-                amount: Кількість
+                taxon: Таксон
+                amount: Обсяг
+    installer:
+        extensions:
+            header: розширення
+            accelerator:
+                header: Прискорювач
+                help: Увімкнути Zend OpCache (настійно рекомендується).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: 'Установити й увімкнути розширення %extension%.'
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Багатобайтові рядки (Multibyte String)
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Сесія (Session)
+            simplexml_import_dom: SimpleXML
+            token_get_all: Лексер (Tokenizer)
+        filesystem:
+            header: файлова система
+            cache:
+                header: кеш
+            exists: існує
+            logs:
+                header: журнали
+            not_exists: не існує
+            not_writable: відсутня можливість запису
+            parameters:
+                header: parameters.yml
+            vendors: постачальники
+            writable: наявна можливість запису
+        settings:
+            header: Версія PHP та налаштування
+            any: будь-які
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: не є застарілим
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: часовий пояс
+            timezone_deprecated:
+                header: Застарілий часовий пояс
+                help: 'Часовий пояс %timezone% застарілий. Виправте ваш файл php.ini (перелік застарілих часових поясів http://php.net/manual/en/timezones.others.php).'
+            version: Версія PHP
+            version_recommended: Рекомендована версія PHP
     email:
         order_confirmation:
             name: Підтвердження замовлення
+            content: 'Ваше замовлення № %number% було успішно розміщено.<br/><br/>Дякуємо вам за купівлю в нашій крамниці!'
         order_comment:
             name: Коментар до замовлення
         shipment_confirmation:
-            name: Підтвердження відвантаження
+            name: Підтвердження відправки товару
+            content: 'Ваше замовлення № %number% було відправлено за допомогою %method%.<br/>Ви можете перевіряти його розташування за допомогою коду відстеження "%tracking%".<br/><br/>Дякуємо вам за успішну угоду.'
         user_confirmation:
             name: Підтвердження користувача
+            subject: Ласкаво просимо до нашої крамниці
+            content: 'Ласкаво просимо до нашої крамниці<br/><br/>Ви тільки-но зареєструвались.<br/>Дякуємо вам, %username%.'
+        password_reset:
+            name: Відновлення паролю
+            content: '<h3>Вітаємо, %username%</h3>Аби відновити ваш пароль - будь ласка, перейдіть за посиланням %url%<br/><br/>З повагою, команда крамниці.'
+        verification:
+            name: Перевірка адреси електронної пошти
+            content: 'Для того, щоб підтвердити вашу адресу електронної пошти - будь ласка, перейдіть за посиланням %url%'
+    payum_gateway:
+        cash_on_delivery: Накладений платіж
+        offline: Автономний
+        paypal_express_checkout: Платіж PayPal Express
+    shipping_method_resolver:
+        by_zones_and_channel: З використанням зон і каналу

@@ -8,8 +8,6 @@ sylius:
                 amount: Quantia
             percentage_discount_configuration:
                 percentage: Porcentagem
-            shipping_discount_configuration:
-                percentage: Porcentagem
             type: Tipo
         rule:
             taxonomy_configuration:

@@ -23,6 +23,7 @@ sylius:
                     promotions: Promocije
                 customers:
                     customers: Kupci
+                    groups: Grupe
                     header: Kupac
                 sales:
                     header: Prodaja

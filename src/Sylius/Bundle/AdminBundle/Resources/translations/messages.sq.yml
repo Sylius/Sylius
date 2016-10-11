@@ -27,6 +27,7 @@ sylius:
                     promotions: Reklamat
                 customers:
                     customers: Blerësit
+                    groups: Grupet
                     header: Blerësi
                 sales:
                     header: Shitjet

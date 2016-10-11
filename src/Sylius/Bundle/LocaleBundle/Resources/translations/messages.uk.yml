@@ -5,4 +5,4 @@ sylius:
     form:
         locale:
             enabled: Увімкнено
-            name: Ім’я
+            name: Назва

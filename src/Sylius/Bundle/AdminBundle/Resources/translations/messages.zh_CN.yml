@@ -27,6 +27,7 @@ sylius:
                     promotions: 促销活动
                 customers:
                     customers: 客户
+                    groups: 团体
                     header: 客户
                 sales:
                     header: 销售额

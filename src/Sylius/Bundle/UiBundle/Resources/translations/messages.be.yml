@@ -64,7 +64,6 @@ sylius:
         create: Стварыць
         create_a_new_address: Стварыць новы адрас
         create_country: Стварыць краіну
-        create_group: Стварыць групу
         create_locale: Стварыць лакацыю
         create_new_coupon: Стварыць новы купон
         create_new_page: Стварыць новую старонку
@@ -97,7 +96,6 @@ sylius:
         deleted: Выдалена
         description: Апісанне
         edit: Рэдагаваць
-        edit_group: Рэдагаваць групу
         edit_locale: Рэдагаваць лакацыю
         edit_my_address: Рэдагаваць адрас
         edit_your_personal_information: Рэдагаваць асабістыя звесткі
@@ -134,7 +132,6 @@ sylius:
         generate_variants: Стварыць варыянты
         generating_coupons: Купоны генеруюцца
         grand_total: Усяго
-        groups: Групы
         hide_deleted: Схаваць выдаленае
         home: На галоўную
         id: ID

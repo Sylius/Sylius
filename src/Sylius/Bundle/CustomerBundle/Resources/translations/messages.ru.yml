@@ -3,16 +3,15 @@
 
 sylius:
     form:
-        group:
-            name: Название
-            roles: Роли
         customer:
             first_name: Имя
-            groups: Группы
             last_name: Фамилия
             email: Email
             phone_number: Контактный телефон
             billing_address: Адрес для выставления счета
             different_billing_address: Использовать другой адрес для составления счета?
+        customer_group:
+            name: Название
+            roles: Роли
     gender:
         unknown: Неизвестен

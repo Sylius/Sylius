@@ -3,12 +3,8 @@
 
 sylius:
     form:
-        group:
-            name: Nimi
-            roles: Roolit
         customer:
             first_name: Etunimi
-            groups: Ryhmät
             last_name: Sukunimi
             email: Sähköpostiosoite
             phone_number: Puhelinnumero

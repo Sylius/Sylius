@@ -16,6 +16,8 @@ sylius:
                     zones: Ζώνες
                 marketing:
                     promotions: Προσφορές
+                customers:
+                    groups: Ομάδες
                 sales:
                     orders: Παραγγελίες
                 content:

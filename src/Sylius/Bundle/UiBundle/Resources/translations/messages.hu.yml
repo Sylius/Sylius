@@ -133,7 +133,6 @@ sylius:
         create_country: Ország létrehozása
         create_currency: Pénznem létrehozása
         create_customer: Vevő létrehozása
-        create_group: Csoport létrehozása
         create_imagine_block: Kép blokk létrehozása
         create_locale: Terület létrehozása
         create_menu: Menü létehozása
@@ -222,7 +221,6 @@ sylius:
         edit_coupon: Kupon módosítása
         edit_currency: Pénznem módosítása
         edit_customer: Vevő módosítása
-        edit_group: Csoport szerkesztése
         edit_locale: Terület szerkesztése
         edit_my_address: Címem szerkesztése
         edit_payment_method: Fizetési mód módosítása
@@ -313,7 +311,6 @@ sylius:
         go: Mehet
         go_to_dashboard: Irány az irányítópult
         grand_total: Végösszeg
-        groups: Csoportok
         guest: Vendég
         guest_customer: Vendég ügyfél
         have_an_account_already: Már van egy fiókod
@@ -680,7 +677,6 @@ sylius:
         there_are_no_currencies_to_display: Nincsenek megjeleníthető pénznemek
         there_are_no_customers_to_display: Nincsenek megjeleníthető vevők
         there_are_no_emails_configured: Nincsenek bekonfigurált email címek
-        there_are_no_groups_to_display: Nincsnek megjeleníthető csoportok
         there_are_no_images_for_this_product: Nincs kép a termékről
         there_are_no_inventory_items_to_display: Nincsenek tételek raktárkészleten
         there_are_no_inventory_units_to_display: Nincsenek készletegységek a megjelenítéséhez

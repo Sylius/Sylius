@@ -25,6 +25,7 @@ sylius:
                     promotions: Promosyonlar
                 customers:
                     customers: Müşteriler
+                    groups: Gruplar
                     header: Müşteri
                 sales:
                     header: Satışlar

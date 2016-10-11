@@ -17,3 +17,10 @@ sylius:
             tax_category: Kategorija proizvoda
         product_association_type:
             name: Ime
+    installer:
+        extensions:
+            "off": false
+            "on": true
+        settings:
+            "off": false
+            "on": true

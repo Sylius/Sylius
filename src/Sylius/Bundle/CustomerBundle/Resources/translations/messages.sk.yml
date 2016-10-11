@@ -3,12 +3,8 @@
 
 sylius:
     form:
-        group:
-            name: Názov
-            roles: Role
         customer:
             first_name: Meno
-            groups: Zákaznícke skupiny
             last_name: Priezvisko
             email: E-mail
             phone_number: Telefónne číslo
@@ -18,6 +14,9 @@ sylius:
             different_billing_address: Použiť inú fakturačnú adresu?
             only_customer_registration: Vytvoriť účet?
             subscribed_to_newsletter: Prihlásiť sa k odberu noviniek
+        customer_group:
+            name: Názov
+            roles: Role
     gender:
         unknown: Neznáme
         male: Muž

@@ -27,6 +27,7 @@ sylius:
                     promotions: فروش های ویژه
                 customers:
                     customers: مشتریان
+                    groups: گروه ها
                     header: مشتری
                 sales:
                     header: میزان فروش ماه جاری

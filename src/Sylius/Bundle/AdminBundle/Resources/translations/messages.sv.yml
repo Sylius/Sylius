@@ -28,6 +28,7 @@ sylius:
                     promotions: Kampanjer
                 customers:
                     customers: Kunder
+                    groups: Grupper
                     header: Kunder
                 sales:
                     header: Försäljning

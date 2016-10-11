@@ -121,6 +121,59 @@ sylius:
                 taxons: Kategoriler
             total_of_items_from_taxon:
                 amount: Miktar
+    installer:
+        extensions:
+            header: Eklentiler
+            accelerator:
+                header: Hızlandırıcı
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: '%extension% uzantısını yükelyin ve aktif edin.'
+            iconv: Iconv
+            exif: Exif
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP XML
+            session_start: Oturum
+            simplexml_import_dom: SimpleXML
+            token_get_all: Simgeleştirici
+        filesystem:
+            header: dosya sistemi
+            cache:
+                header: önbellek
+            exists: mevcut
+            logs:
+                header: loglar
+            not_exists: mevcut değil
+            not_writable: yazılabilir değil
+            parameters:
+                header: parameters.yml
+            vendors: vendors
+            writable: yazılabilir
+        settings:
+            header: PHP sürümü ve ayarları
+            any: herhangi bir
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: kaldırılmamış
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: zaman dilimi
+            timezone_deprecated:
+                header: Kullanılmayan Zaman Dilimi
+                help: '%timezone% zaman dilimi kaldırılmıştır. php.ini dosyanızda gerekli düzenlemeyi yapın. (Kaldırılan tüm zaman dilimleri http://php.net/manual/en/timezones.others.php).'
+            version: PHP versiyon
     email:
         order_confirmation:
             name: Sipariş Onayı

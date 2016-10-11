@@ -6,7 +6,7 @@ sylius:
         default_currency:
             not_blank: Proszę podać domyślną walutę kanału.
         default_locale:
-            not_blank: Wprowadź domyślny język kanału dystrybucji.
+            not_blank: Proszę podać domyślny język kanału dystrybucji.
     checkout:
         shipping_method:
             not_blank: Proszę wybrać metodę dostawy.
@@ -20,6 +20,8 @@ sylius:
         code:
             not_blank: Proszę podać kod ISO języka.
             unique: Ten język jest już skonfigurowany.
+        enabled:
+            cannot_disable_base: Nie można wyłączyć podstawowych ustawień regionalnych.
     product_variant:
         onHand:
             min: 'Dostępna ilość musi być większa niż {{ limit }}.'
@@ -38,3 +40,5 @@ sylius:
         username:
             unique: Ta nazwa użytkownika jest już używana.
             not_blank: Wpisz swoje imię.
+        locale_code:
+            not_blank: Proszę wybrać ustawienia regionalne.
