@@ -44,6 +44,10 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
                     args: ["object"]
+                sylius_increment_promotions_usages:
+                    on: ["complete"]
+                    do: ["@sylius.promotion_usage_modifier", "increment"]
+                    args: ["object"]
 
     sylius_order_shipping:
         class: "%sylius.model.order.class%"
@@ -164,6 +168,10 @@ winzou_state_machine:
                 sylis_cancel_order:
                     on: ["cancel"]
                     do: ["@sylius.inventory.order_inventory_operator", "cancel"]
+                    args: ["object"]
+                sylius_decrement_promotions_usages:
+                    on: ["cancel"]
+                    do: ["@sylius.promotion_usage_modifier", "decrement"]
                     args: ["object"]
 
     sylius_shipment:

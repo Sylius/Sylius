@@ -235,6 +235,14 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
+    public function decrementUsed()
+    {
+        --$this->used;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getStartsAt()
     {
         return $this->startsAt;

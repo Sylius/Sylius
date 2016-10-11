@@ -21,6 +21,18 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
     /**
+     * @param PromotionInterface $promotion
+     *
+     * @return int
+     */
+    public function getUsageNumber(PromotionInterface $promotion)
+    {
+        $usage = $this->getPromotionFieldsWithHeader($promotion, 'usage');
+
+        return (int) $usage->find('css', 'span:first-child')->getText();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function isAbleToManageCouponsFor(PromotionInterface $promotion)
