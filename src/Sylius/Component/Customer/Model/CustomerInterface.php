@@ -17,14 +17,12 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface CustomerInterface extends
-    TimestampableInterface,
-    ResourceInterface
+interface CustomerInterface extends TimestampableInterface, ResourceInterface
 {
     const UNKNOWN_GENDER = 'u';
     const MALE_GENDER = 'm';
     const FEMALE_GENDER = 'f';
-    
+
     /**
      * @return string
      */
