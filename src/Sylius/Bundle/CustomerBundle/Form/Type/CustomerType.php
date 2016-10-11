@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CustomerBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,11 +27,11 @@ class CustomerType extends CustomerProfileType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('firstName', 'text', [
+            ->add('firstName', TextType::class, [
                 'label' => 'sylius.form.customer.first_name',
                 'required' => false,
             ])
-            ->add('lastName', 'text', [
+            ->add('lastName', TextType::class, [
                 'label' => 'sylius.form.customer.last_name',
                 'required' => false,
             ])
