@@ -17,11 +17,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * Channel extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusChannelExtension extends AbstractResourceExtension
+final class SyliusChannelExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -40,7 +38,7 @@ class SyliusChannelExtension extends AbstractResourceExtension
         if ($config['debug']) {
             $loader->load('debug.xml');
 
-            $container->getDefinition('sylius.collector.channel')->replaceArgument(2, true);
+            $container->getDefinition('sylius.channel_collector')->replaceArgument(2, true);
         }
 
         $container->getDefinition('sylius.repository.channel')->setLazy(true);

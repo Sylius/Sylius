@@ -28,19 +28,19 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
      */
     public function it_collects_tagged_channel_contexts()
     {
-        $this->setDefinition('sylius.context.channel.composite', new Definition());
+        $this->setDefinition('sylius.channel_context.composite', new Definition());
         $this->setDefinition(
-            'sylius.context.channel.tagged_one',
-            (new Definition())->addTag('sylius.context.channel')
+            'sylius.channel_context.tagged_one',
+            (new Definition())->addTag('sylius.channel_context')
         );
 
         $this->compile();
 
-        $this->assertContainerBuilderHasAlias('sylius.context.channel', 'sylius.context.channel.composite');
+        $this->assertContainerBuilderHasAlias('sylius.channel_context', 'sylius.channel_context.composite');
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.context.channel',
+            'sylius.channel_context',
             'addContext',
-            [new Reference('sylius.context.channel.tagged_one')]
+            [new Reference('sylius.channel_context.tagged_one')]
         );
     }
 
@@ -49,19 +49,19 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
      */
     public function it_collects_tagged_channel_contexts_with_priority()
     {
-        $this->setDefinition('sylius.context.channel.composite', new Definition());
+        $this->setDefinition('sylius.channel_context.composite', new Definition());
         $this->setDefinition(
-            'sylius.context.channel.tagged_one',
-            (new Definition())->addTag('sylius.context.channel', ['priority' => 42])
+            'sylius.channel_context.tagged_one',
+            (new Definition())->addTag('sylius.channel_context', ['priority' => 42])
         );
 
         $this->compile();
 
-        $this->assertContainerBuilderHasAlias('sylius.context.channel', 'sylius.context.channel.composite');
+        $this->assertContainerBuilderHasAlias('sylius.channel_context', 'sylius.channel_context.composite');
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.context.channel',
+            'sylius.channel_context',
             'addContext',
-            [new Reference('sylius.context.channel.tagged_one'), 42]
+            [new Reference('sylius.channel_context.tagged_one'), 42]
         );
     }
 
@@ -70,19 +70,19 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
      */
     public function it_does_not_add_method_calls_to_the_overriding_service_if_the_composite_service_is_overridden()
     {
-        $this->setDefinition('sylius.context.channel', new Definition());
-        $this->setDefinition('sylius.context.channel.composite', new Definition());
+        $this->setDefinition('sylius.channel_context', new Definition());
+        $this->setDefinition('sylius.channel_context.composite', new Definition());
         $this->setDefinition(
-            'sylius.context.channel.tagged_one',
-            (new Definition())->addTag('sylius.context.channel')
+            'sylius.channel_context.tagged_one',
+            (new Definition())->addTag('sylius.channel_context')
         );
 
         $this->compile();
 
         $this->assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
-            'sylius.context.channel',
+            'sylius.channel_context',
             'addContext',
-            [new Reference('sylius.context.channel.tagged_one')]
+            [new Reference('sylius.channel_context.tagged_one')]
         );
     }
 
@@ -91,19 +91,19 @@ class CompositeChannelContextPassTest extends AbstractCompilerPassTestCase
      */
     public function it_still_adds_method_calls_to_composite_context_even_if_it_was_overridden()
     {
-        $this->setDefinition('sylius.context.channel', new Definition());
-        $this->setDefinition('sylius.context.channel.composite', new Definition());
+        $this->setDefinition('sylius.channel_context', new Definition());
+        $this->setDefinition('sylius.channel_context.composite', new Definition());
         $this->setDefinition(
-            'sylius.context.channel.tagged_one',
-            (new Definition())->addTag('sylius.context.channel')
+            'sylius.channel_context.tagged_one',
+            (new Definition())->addTag('sylius.channel_context')
         );
 
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.context.channel.composite',
+            'sylius.channel_context.composite',
             'addContext',
-            [new Reference('sylius.context.channel.tagged_one')]
+            [new Reference('sylius.channel_context.tagged_one')]
         );
     }
 

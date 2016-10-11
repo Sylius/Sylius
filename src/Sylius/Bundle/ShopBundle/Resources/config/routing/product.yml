@@ -12,4 +12,4 @@ sylius_shop_product_show:
                 method: findOneBySlugAndChannel
                 arguments:
                     - $slug
-                    - 'expr:service("sylius.context.channel").getChannel()'
+                    - 'expr:service("sylius.channel_context").getChannel()'
