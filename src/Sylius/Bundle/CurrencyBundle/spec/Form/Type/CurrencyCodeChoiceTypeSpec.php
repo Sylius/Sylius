@@ -12,12 +12,15 @@
 namespace spec\Sylius\Bundle\CurrencyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyCodeChoiceType;
 use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin CurrencyCodeChoiceType
+ *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 final class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
@@ -29,7 +32,7 @@ final class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyCodeChoiceType');
+        $this->shouldHaveType(CurrencyCodeChoiceType::class);
     }
 
     function it_is_a_form_type()
@@ -43,20 +46,21 @@ final class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
         Currency $currency
     ) {
         $currencyRepository->findBy(['enabled' => true])->willReturn([$currency]);
-        $currency->getCode()->shouldBeCalled()->willReturn('EUR');
-        $currency->getName()->shouldBeCalled()->willReturn('Euro');
+        $currency->getCode()->willReturn('EUR');
+        $currency->getName()->willReturn('Euro');
 
         $resolver
             ->setDefaults([
                 'choice_translation_domain' => false,
                 'choices' => ['EUR' => 'EUR - Euro'],
             ])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->configureOptions($resolver);
     }
 
-    function it_has_valid_name()
+    function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_currency_code_choice');
     }

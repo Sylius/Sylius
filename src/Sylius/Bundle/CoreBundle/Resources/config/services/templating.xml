@@ -21,7 +21,7 @@
 
         <service id="sylius.templating.helper.price.core" class="Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper" decorates="sylius.templating.helper.price" lazy="true">
             <argument type="service" id="sylius.templating.helper.price.core.inner" />
-            <argument type="service" id="sylius.context.currency" />
+            <argument type="service" id="sylius.currency_context" />
             <tag name="templating.helper" alias="sylius_price" />
         </service>
 

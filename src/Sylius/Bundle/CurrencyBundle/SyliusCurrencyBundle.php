@@ -15,11 +15,9 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
- * Currency bundle.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusCurrencyBundle extends AbstractResourceBundle
+final class SyliusCurrencyBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

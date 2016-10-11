@@ -36,7 +36,7 @@
         </service>
 
         <service id="sylius.behat.context.transform.currency" class="Sylius\Behat\Context\Transform\CurrencyContext" scope="scenario">
-            <argument type="service" id="sylius.converter.currency_name" container="symfony" />
+            <argument type="service" id="sylius.currency_name_converter" container="symfony" />
             <argument type="service" id="sylius.repository.currency" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>

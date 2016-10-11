@@ -1,7 +1,7 @@
 sylius:
     form:
         currency:
-            exchange_rate: Exchange rate
-            enabled: Enabled
             base: Base currency
             code: Name
+            enabled: Enabled
+            exchange_rate: Exchange rate
