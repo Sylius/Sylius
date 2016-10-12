@@ -59,20 +59,6 @@ You also have the following parameters available:
 
 * ``order``: Instance of the order, with all its data
 
-Order Comment
--------------
-
-In the backend, you can comment orders and optionally notify the customer via e-mail.
-
-**Code**: ``order_comment``
-
-**The default template**: ``SyliusWebBundle:Email:orderComment.html.twig``
-
-You have the following parameters available:
-
-* ``comment``: Comment instance
-* ``order``: Instance of the order, with all its data
-
 Shipment Confirmation
 ---------------------
 
