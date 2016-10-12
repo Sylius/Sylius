@@ -27,12 +27,19 @@ Let's create a promotion that will have a single coupon that activates the free 
 
    $promotion->setCode('free_shipping');
    $promotion->setName('Free Shipping');
-   // Remember to set a channel for your promotion!
+
+Remember to set a **channel** for your promotion and to make it **couponBased**!
+
+..code-block:: php
+
    $promotion->addChannel($this->container->get('sylius.repository.channel')->findOneBy(['code' => 'US_Web_Store']));
 
    $promotion->setCouponBased(true);
 
-   // Now create a couponand add it to
+Then create a coupon and add it to the promotion:
+
+.. code-block:: php
+
    /** @var CouponInterface $coupon */
    $coupon = $this->container->get('sylius.factory.promotion_coupon')->createNew();
 
@@ -40,11 +47,14 @@ Let's create a promotion that will have a single coupon that activates the free 
 
    $promotion->addCoupon($coupon);
 
-   // Now create an PromotionAction that will take place after applying this promotion - 100% discount on shipping
+Now create an PromotionAction that will take place after applying this promotion - 100% discount on shipping
+
+.. code-block:: php
+
    /** @var PromotionActionFactoryInterface $actionFactory */
    $actionFactory = $this->container->get('sylius.factory.promotion_action');
 
-   // Provide the amount in float ( 1 = 100% )
+   // Provide the amount in float ( 1 = 100%, 0.1 = 10% )
    $action = $actionFactory->createShippingPercentageDiscount(1);
 
    $promotion->addAction($action);
@@ -53,7 +63,7 @@ Let's create a promotion that will have a single coupon that activates the free 
 
 Finally to see the effects of your promotion with couponyou need to **apply a coupon on the Order**.
 
-How to apply a couponto an Order?
+How to apply a coupon to an Order?
 ----------------------------------
 
 To apply you promotion with coupon that gives 100% discount on the shipping costs
