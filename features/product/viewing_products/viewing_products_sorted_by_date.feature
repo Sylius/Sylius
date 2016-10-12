@@ -29,3 +29,19 @@ Feature: Sorting listed products
         Then I should see 3 products in the list
         And I should see a product with name "Berserk Pug"
         But the first product on the list should have name "Xtreme Pug"
+
+    @todo
+    Scenario: Sorting products by their names with descending order
+        When I browse products from taxon "Fluffy Pets"
+        And I start sorting products by name in descending order
+        Then I should see 3 products in the list
+        And I should see a product with name "Pug of Love"
+        But the first product on the list should have name "Xtreme Pug"
+
+    @todo
+    Scenario: Sorting products by their names with ascending order
+        When I browse products from taxon "Fluffy Pets"
+        And I start sorting products by name in ascending order
+        Then I should see 3 products in the list
+        And I should see a product with name "Pug of Love"
+        But the first product on the list should have name "Berserk Pug"
