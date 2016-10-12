@@ -11,7 +11,7 @@ sylius_shop_partial_product_index_latest:
             repository:
                 method: findLatestByChannel
                 arguments:
-                    - "expr:service('sylius.channel_context').getChannel()"
+                    - "expr:service('sylius.context.channel').getChannel()"
                     - $count
 
 sylius_shop_partial_product_index_by_taxon_code:
@@ -25,4 +25,4 @@ sylius_shop_partial_product_index_by_taxon_code:
                 method: findEnabledByTaxonCodeAndChannel
                 arguments:
                     - $code
-                    - 'expr:service("sylius.channel_context").getChannel()'
+                    - 'expr:service("sylius.context.channel").getChannel()'

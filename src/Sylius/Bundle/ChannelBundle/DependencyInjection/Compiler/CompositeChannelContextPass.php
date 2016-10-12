@@ -19,9 +19,9 @@ final class CompositeChannelContextPass extends PrioritizedCompositeServicePass
     public function __construct()
     {
         parent::__construct(
-            'sylius.channel_context',
-            'sylius.channel_context.composite',
-            'sylius.channel_context',
+            'sylius.context.channel',
+            'sylius.context.channel.composite',
+            'sylius.context.channel',
             'addContext'
         );
     }

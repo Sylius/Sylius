@@ -19,9 +19,9 @@ final class CompositeRequestResolverPass extends PrioritizedCompositeServicePass
     public function __construct()
     {
         parent::__construct(
-            'sylius.channel_context.request_based.resolver',
-            'sylius.channel_context.request_based.resolver.composite',
-            'sylius.channel_context.request_based.resolver',
+            'sylius.context.channel.request_based.resolver',
+            'sylius.context.channel.request_based.resolver.composite',
+            'sylius.context.channel.request_based.resolver',
             'addResolver'
         );
     }

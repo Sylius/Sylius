@@ -18,7 +18,7 @@
             <tag name="form.type" alias="sylius_currency_code_choice" />
         </service>
 
-        <service id="sylius.currency_context" class="Sylius\Component\Currency\Context\ImmutableCurrencyContext">
+        <service id="sylius.context.currency" class="Sylius\Component\Currency\Context\ImmutableCurrencyContext">
             <argument>%sylius_currency.currency%</argument>
         </service>
 

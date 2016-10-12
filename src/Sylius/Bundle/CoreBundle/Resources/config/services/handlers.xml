@@ -22,7 +22,7 @@
         </service>
         <service id="sylius.handler.locale_change.shop" class="Sylius\Bundle\CoreBundle\Handler\ShopLocaleChangeHandler">
             <argument type="service" id="sylius.storage.locale" />
-            <argument type="service" id="sylius.channel_context.composite" />
+            <argument type="service" id="sylius.context.channel.composite" />
             <argument type="service" id="event_dispatcher" />
             <tag name="sylius.locale.change_handler" />
         </service>
@@ -38,7 +38,7 @@
         </service>
         <service id="sylius.handler.currency_change.shop" class="Sylius\Bundle\CoreBundle\Handler\ShopCurrencyChangeHandler">
             <argument type="service" id="sylius.storage.currency" />
-            <argument type="service" id="sylius.channel_context.composite" />
+            <argument type="service" id="sylius.context.channel.composite" />
             <argument type="service" id="event_dispatcher" />
             <tag name="sylius.currency.change_handler" />
         </service>
