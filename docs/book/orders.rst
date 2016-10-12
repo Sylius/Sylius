@@ -21,7 +21,7 @@ To programmatically create an Order you will of course need a factory.
 .. code-block:: php
 
     /** @var FactoryInterface $order */
-    $orderFactory = $this->get('sylius.factory.order');
+    $orderFactory = $this->container->get('sylius.factory.order');
 
     /** @var OrderInterface $order */
     $order = $orderFactory->createNew();
@@ -98,7 +98,7 @@ Finally you have to save your order using the repository.
 .. code-block:: php
 
     /** @var OrderRepositoryInterface $orderRepository */
-    $orderRepository = $this->get('sylius.repository.order');
+    $orderRepository = $this->container->get('sylius.repository.order');
 
     $orderRepository->add($order);
 
@@ -115,6 +115,103 @@ Order has also its own state, which can have the following values:
 .. tip::
 
     The state machine of order is an obvious extension to the :doc:`state machine of checkout </book/checkout>`.
+
+Shipments of an Order
+---------------------
+
+An **Order** in Sylius holds a collection of Shipments on it. Each shipment in that collection has its own shipping method and has its own state machine.
+This lets you to divide an order into several different shipments that have own shipping states (like sending physical objects via DHL and sending a link to downloadable files via e-mail).
+
+.. tip::
+
+    If you are not familiar with the shipments concept :doc:`check the documentation</book/shipments>`.
+
+How to add a Shipment to an Order?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You will need to create a shipment, give it a desired shipping method and add it to the order.
+Remember to process the order using order processor and then flush the order manager.
+
+.. code-block:: php
+
+    /** @var ShipmentInterface $shipment */
+    $shipment = $this->container->get('sylius.factory.shipment')->createNew();
+
+    $shipment->setMethod($this->container->get('sylius.repository.shipping_method')->findOneBy(['code' => 'UPS']));
+
+    $order->addShipment($shipment);
+
+    $this->container->get('sylius.order_processing.order_processor')->process($order);
+    $this->container->get('sylius.manager.order')->flush();
+
+Shipping costs of an Order
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Shipping costs of an order are stored as Adjustments. When a new shipment is added to a cart the order processor assigns
+a shipping adjustment to the order that holds the cost.
+
+Shipping a Shipment with a state machine transition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Just like in every state machine you can execute its transitions manually. To **ship** a shipment of an order you have to apply
+two transitions ``request_shipping`` and ``ship``.
+
+.. code-block:: php
+
+    $stateMachineFactory = $this->container->get('sm.factory');
+
+    $stateMachine = $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH);
+    $stateMachine->apply(OrderShippingTransitions::TRANSITION_REQUEST_SHIPPING);
+    $stateMachine->apply(OrderShippingTransitions::TRANSITION_SHIP);
+
+    $this->container->get('sylius.manager.order')->flush();
+
+After that the ``shippingState`` of your order will be ``shipped``.
+
+Payments of an Order
+--------------------
+
+An **Order** in Sylius holds a collection of Payments on it. Each payment in that collection has its own payment method and has its own payment state.
+It lets you to divide paying for an order into several different methods that have own payment states.
+
+.. tip::
+
+    If you are not familiar with the Payments concept :doc:`check the documentation</book/payments>`.
+
+How to add a Payment to an Order?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+You will need to create a payment, give it a desired payment method and add it to the order.
+Remember to process the order using order processor and then flush the order manager.
+
+.. code-block:: php
+
+    /** @var PaymentInterface $payment */
+    $payment = $this->container->get('sylius.factory.payment')->createNew();
+
+    $payment->setMethod($this->container->get('sylius.repository.payment_method')->findOneBy(['code' => 'offline']));
+
+    $payment->setCurrencyCode($currencyCode);
+
+    $order->addPayment($payment);
+
+Shipping a Shipment with a state machine transition
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Just like in every state machine you can execute its transitions manually. To **pay** for a payment of an order you have to apply
+two transitions ``request_payment`` and ``pay``.
+
+.. code-block:: php
+
+    $stateMachineFactory = $this->container->get('sm.factory');
+
+    $stateMachine = $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
+    $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
+    $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY);
+
+    $this->container->get('sylius.manager.order')->flush();
+
+**If it was the only payment assigned to that order** now the ``paymentState`` of your order will be ``paid``.
 
 Learn more
 ----------
