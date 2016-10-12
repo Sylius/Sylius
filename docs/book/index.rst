@@ -27,6 +27,7 @@ The Books helps to understand how Sylius works.
     taxons
     inventory
     orders
+    adjustments
     checkout
     shipments
     payments
@@ -34,9 +35,8 @@ The Books helps to understand how Sylius works.
     pricing
     promotions
     coupons
-    content
     emails
+    content
     settings
-    adjustments
 
 .. include:: /book/map.rst.inc
