@@ -29,29 +29,29 @@ class MoneyHelper extends Helper implements MoneyHelperInterface
     /**
      * @var string
      */
-    private $defaultLocale;
+    private $defaultLocaleCode;
 
     /**
      * @param MoneyFormatterInterface $moneyFormatter
      * @param string $defaultCurrencyCode
-     * @param string $defaultLocale
+     * @param string $defaultLocaleCode
      */
-    public function __construct(MoneyFormatterInterface $moneyFormatter, $defaultCurrencyCode, $defaultLocale)
+    public function __construct(MoneyFormatterInterface $moneyFormatter, $defaultCurrencyCode, $defaultLocaleCode)
     {
         $this->moneyFormatter = $moneyFormatter;
         $this->defaultCurrencyCode = $defaultCurrencyCode;
-        $this->defaultLocale = $defaultLocale;
+        $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function formatAmount($amount, $currencyCode = null, $locale = null)
+    public function formatAmount($amount, $currencyCode = null, $localeCode = null)
     {
-        $locale = $locale ?: $this->defaultLocale;
+        $localeCode = $localeCode ?: $this->defaultLocaleCode;
         $currencyCode = $currencyCode ?: $this->defaultCurrencyCode;
 
-        return $this->moneyFormatter->format($amount, $currencyCode, $locale);
+        return $this->moneyFormatter->format($amount, $currencyCode, $localeCode);
     }
 
     /**

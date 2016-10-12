@@ -24,10 +24,10 @@ final class MoneyFormatterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter');
+        $this->shouldHaveType(MoneyFormatter::class);
     }
 
-    function it_implements_amount_formatter_interface()
+    function it_implements_money_formatter_interface()
     {
         $this->shouldImplement(MoneyFormatterInterface::class);
     }
@@ -41,6 +41,6 @@ final class MoneyFormatterSpec extends ObjectBehavior
 
     function it_formats_money_using_default_locale_if_not_given()
     {
-        $this->format(500, 'EUR')->shouldReturn('€5.00');
+        $this->format(500, 'USD')->shouldReturn('$5.00');
     }
 }

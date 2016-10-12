@@ -12,16 +12,19 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Form\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\MoneyBundle\Form\DataTransformer\SyliusMoneyTransformer;
 use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 
 /**
+ * @mixin SyliusMoneyTransformer
+ *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 final class SyliusMoneyTransformerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Form\DataTransformer\SyliusMoneyTransformer');
+        $this->shouldHaveType(SyliusMoneyTransformer::class);
     }
 
     function it_extends_money_to_localized_string_transformer_class()

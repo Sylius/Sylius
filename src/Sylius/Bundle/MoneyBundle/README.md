@@ -16,11 +16,6 @@ $ composer install
 $ bin/phpspec run -f pretty
 ```
 
-Documentation
--------------
-
-Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusInventoryBundle/index.html).
-
 Code examples
 -------------
 

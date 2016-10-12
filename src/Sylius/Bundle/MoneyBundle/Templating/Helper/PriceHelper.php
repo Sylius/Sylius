@@ -39,7 +39,7 @@ class PriceHelper extends Helper implements PriceHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function convertAndFormatAmount($amount, $currencyCode = null, $exchangeRate = null, $locale = null)
+    public function convertAndFormatAmount($amount, $currencyCode = null, $exchangeRate = null, $localeCode = null)
     {
         if (null !== $currencyCode && $exchangeRate !== null) {
             $amount = (int) round($amount * $exchangeRate);
@@ -49,7 +49,7 @@ class PriceHelper extends Helper implements PriceHelperInterface
             $amount = $this->currencyConverter->convertFromBase($amount, $currencyCode);
         }
 
-        return $this->moneyHelper->formatAmount($amount, $currencyCode, $locale);
+        return $this->moneyHelper->formatAmount($amount, $currencyCode, $localeCode);
     }
 
     /**

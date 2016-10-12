@@ -27,12 +27,12 @@ final class MoneyHelperSpec extends ObjectBehavior
 {
     function let(MoneyFormatterInterface $moneyFormatter)
     {
-        $this->beConstructedWith($moneyFormatter, 'EUR', 'en_US');
+        $this->beConstructedWith($moneyFormatter, 'USD', 'en_US');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper');
+        $this->shouldHaveType(MoneyHelper::class);
     }
 
     function it_is_a_templating_helper()
@@ -45,24 +45,25 @@ final class MoneyHelperSpec extends ObjectBehavior
         $this->shouldImplement(MoneyHelperInterface::class);
     }
 
-    function it_formats_money_using_default_currency_and_locale_if_only_amount_is_given(MoneyFormatterInterface $moneyFormatter)
-    {
-        $moneyFormatter->format(500, 'EUR', 'en_US')->willReturn('€5.00');
+    function it_formats_money_using_default_currency_and_locale_if_only_amount_is_given(
+        MoneyFormatterInterface $moneyFormatter
+    ) {
+        $moneyFormatter->format(500, 'USD', 'en_US')->willReturn('$5.00');
 
-        $this->formatAmount(500)->shouldReturn('€5.00');
+        $this->formatAmount(500)->shouldReturn('$5.00');
     }
 
     function it_formats_money_using_default_locale_if_not_given(MoneyFormatterInterface $moneyFormatter)
     {
-        $moneyFormatter->format(312, 'EUR', 'en_US')->willReturn('€3.12');
+        $moneyFormatter->format(312, 'USD', 'en_US')->willReturn('$3.12');
 
-        $this->formatAmount(312, 'EUR')->shouldReturn('€3.12');
+        $this->formatAmount(312, 'USD')->shouldReturn('$3.12');
     }
 
     function it_formats_money_using_given_currency_and_locale(MoneyFormatterInterface $moneyFormatter)
     {
-        $moneyFormatter->format(2500, 'USD', 'fr_FR')->willReturn('$25.00');
+        $moneyFormatter->format(2500, 'EUR', 'fr_FR')->willReturn('€25.00');
 
-        $this->formatAmount(2500, 'USD', 'fr_FR')->shouldReturn('$25.00');
+        $this->formatAmount(2500, 'EUR', 'fr_FR')->shouldReturn('€25.00');
     }
 }

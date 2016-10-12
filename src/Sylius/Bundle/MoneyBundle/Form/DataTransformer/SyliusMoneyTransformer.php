@@ -14,8 +14,6 @@ namespace Sylius\Bundle\MoneyBundle\Form\DataTransformer;
 use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedStringTransformer;
 
 /**
- * Transformer ensures proper rounding of float value to an integer.
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class SyliusMoneyTransformer extends MoneyToLocalizedStringTransformer
