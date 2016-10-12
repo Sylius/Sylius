@@ -72,8 +72,24 @@ final class GridSpec extends ObjectBehavior
 
     function it_can_have_sorting_configuration()
     {
-        $this->setSorting(['name' => 'desc']);
-        $this->getSorting()->shouldReturn(['name' => 'desc']);
+        $this->setSorting(['name' => ['path' => 'name', 'direction' => 'desc']]);
+        $this->getSorting()->shouldReturn(['name' => ['path' => 'name', 'direction' => 'desc']]);
+    }
+
+    function it_throws_invalid_argument_exception_on_checking_the_sortablility_of_non_existent_field()
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('isSortableBy', ['pug']);
+    }
+
+    function it_check_whether_a_field_is_sortable(Field $nameField)
+    {
+        $nameField->getName()->willReturn('name');
+        $this->addField($nameField);
+
+        $this->isSortableBy('name')->shouldReturn(false);
+
+        $this->setSorting(['name' => ['path' => 'name', 'direction' => 'desc']]);
+        $this->isSortableBy('name')->shouldReturn(true);
     }
 
     function it_does_not_have_any_fields_by_default()

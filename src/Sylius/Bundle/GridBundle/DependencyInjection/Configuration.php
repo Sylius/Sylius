@@ -117,7 +117,7 @@ class Configuration implements ConfigurationInterface
                                 ->prototype('array')
                                     ->children()
                                         ->scalarNode('path')->isRequired()->cannotBeEmpty()->end()
-                                        ->enumNode('direction')->values(['asc', 'desc'])->defaultValue('desc')->end()
+                                        ->enumNode('direction')->values(['asc', 'desc'])->defaultValue('asc')->end()
                                     ->end()
                                 ->end()
                             ->end()

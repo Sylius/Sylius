@@ -1,20 +1,21 @@
-{% macro sortedHeader(definition, field, attributes, direction, parameters) %}
-    {% from _self import getSortingLink %}
+{% macro tableHeader(grid, field, attributes) %}
+    {% from _self import link %}
+    {% set direction = grid.getSortingOrder(field.name) %}
+    {% set icon = null %}
 
-    <th class="sortable sorted {{ 'asc' == direction ? 'ascending' : 'descending'}} sylius-table-column-{{ field.name }}">
-        <a href="{{ getSortingLink(definition, field.name, attributes, direction, parameters) }}">{{ field.label|trans }}</a>
+    {% if grid.isSortedBy(field.name) %}
+        <th class="sortable sorted {{ direction == 'desc' ? 'descending' : 'ascending' }} sylius-table-column-{{ field.name }}">
+    {% else %}
+        {% set icon = '<i class="sort icon"></i>' %}
+        <th class="sortable sylius-table-column-{{ field.name }}">
+    {% endif %}
+        <a href="{{ link(grid.definition, field.name, attributes, direction, grid.parameters.all) }}">{{ field.label|trans }}{{ icon|raw }}</a>
     </th>
 {% endmacro %}
 
-{% macro sortableHeader(definition, field, attributes, direction, parameters) %}
-    {% from _self import getSortingLink %}
-
-    <th class="sortable sylius-table-column-{{ field.name }}"><a href="{{ getSortingLink(definition, field.name, attributes, 'asc', parameters) }}">{{ field.label|trans }}<i class="sort icon"></i></a></th>
-{% endmacro %}
-
-{% macro getSortingLink(definition, fieldName, attributes, direction, parameters) %}
+{% macro link(definition, fieldName, attributes, direction, parameters) %}
     {% set params = attributes.get('_route_params')|merge(parameters)|merge({'page': 1}) %}
-    {% set sorting = {'sorting': {(fieldName): {'path': definition.sorting[fieldName]['path'], 'direction': (direction == 'desc' ? 'asc' : 'desc')}}} %}
+    {% set sorting = {'sorting': {(fieldName): {'direction': (direction == 'desc' ? 'asc' : 'desc')}}} %}
 
     {{ path(attributes.get('_route'), params|merge(sorting)) }}
 {% endmacro %}

@@ -74,24 +74,12 @@ class GridView
     /**
      * @param string $fieldName
      *
-     * @return bool
-     */
-    public function isSortableBy($fieldName)
-    {
-        $this->assertFieldExists($fieldName);
-
-        return array_key_exists($fieldName, $this->getDefinition()->getSorting());
-    }
-
-    /**
-     * @param string $fieldName
-     *
      * @return string
      */
     public function getSortingOrder($fieldName)
     {
         $this->assertFieldExists($fieldName);
-        Assert::true($this->isSortableBy($fieldName), sprintf('Field "%s" is not sortable.', $fieldName));
+        Assert::true($this->definition->isSortableBy($fieldName), sprintf('Field "%s" is not sortable.', $fieldName));
 
         return $this->getCurrentlySortedBy()[$fieldName]['direction'];
     }
@@ -104,7 +92,7 @@ class GridView
     public function isSortedBy($fieldName)
     {
         $this->assertFieldExists($fieldName);
-        Assert::true($this->isSortableBy($fieldName), sprintf('Field "%s" is not sortable.', $fieldName));
+        Assert::true($this->definition->isSortableBy($fieldName), sprintf('Field "%s" is not sortable.', $fieldName));
 
         if ($this->parameters->has('sorting')) {
             return array_key_exists($fieldName, $this->parameters->get('sorting'));

@@ -34,7 +34,8 @@ class Sorter implements SorterInterface
                 $options['direction'] = 'desc';
             }
 
-            $expressionBuilder->addOrderBy($options['path'], $options['direction']);
+            $property = $grid->getSorting()[$field]['path'];
+            $expressionBuilder->addOrderBy($property, $options['direction']);
         }
     }
 }

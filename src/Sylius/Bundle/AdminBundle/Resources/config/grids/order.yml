@@ -10,6 +10,7 @@ sylius_grid:
             sorting:
                 number:
                     path: number
+                    direction: desc
                 date:
                     path: createdAt
             fields:

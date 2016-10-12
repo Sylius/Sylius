@@ -78,6 +78,7 @@ sylius:
         blocks: Blocks
         body: Body
         browse_products: 'Browse products'
+        browse_your_orders_from_the_past: 'Browse your orders from the past'
         build: Build
         calculator: Calculator
         cancel: Cancel
