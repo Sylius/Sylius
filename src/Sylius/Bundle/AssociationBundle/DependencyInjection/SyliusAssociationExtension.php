@@ -56,7 +56,10 @@ final class SyliusAssociationExtension extends AbstractResourceExtension
         $container->setParameter('sylius.association.subjects', $subjects);
 
         foreach ($resources as $subjectName => $subjectConfig) {
-            $this->resolveResourceConfiguration($subjectConfig, $subjectName);
+            $resolvedResources = array_merge(
+                $resolvedResources,
+                $this->resolveResourceConfiguration($subjectConfig, $resolvedResources, $subjectName)
+            );
         }
 
         return $resolvedResources;
@@ -64,9 +67,12 @@ final class SyliusAssociationExtension extends AbstractResourceExtension
 
     /**
      * @param array $subjectConfig
+     * @param array $resolvedResources
      * @param string $subjectName
+     *
+     * @return array
      */
-    private function resolveResourceConfiguration(array $subjectConfig, $subjectName)
+    private function resolveResourceConfiguration(array $subjectConfig, array $resolvedResources, $subjectName)
     {
         foreach ($subjectConfig as $resourceName => $resourceConfig) {
             if (!is_array($resourceConfig)) {
@@ -76,6 +82,8 @@ final class SyliusAssociationExtension extends AbstractResourceExtension
             $resolvedResources[$subjectName.'_'.$resourceName] = $resourceConfig;
             $resolvedResources[$subjectName.'_'.$resourceName]['subject'] = $subjectName;
         }
+
+        return $resolvedResources;
     }
 
     /**

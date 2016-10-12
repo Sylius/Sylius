@@ -32,7 +32,7 @@ class ProductOptionValueCollectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ($this->areOptionsValid($options['options'])) {
+        if ($this->areOptionsValid($options)) {
             throw new InvalidConfigurationException(
                 'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
             );

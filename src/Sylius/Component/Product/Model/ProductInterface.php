@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Association\Model\AssociableInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\SlugAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
@@ -28,6 +29,7 @@ interface ProductInterface extends
     AssociableInterface,
     AttributeSubjectInterface,
     CodeAwareInterface,
+    ResourceInterface,
     SlugAwareInterface,
     TimestampableInterface,
     ToggleableInterface,
