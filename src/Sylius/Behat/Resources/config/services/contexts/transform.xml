@@ -62,7 +62,7 @@
         </service>
 
         <service id="sylius.behat.context.transform.locale" class="Sylius\Behat\Context\Transform\LocaleContext" scope="scenario">
-            <argument type="service" id="sylius.converter.locale" container="symfony" />
+            <argument type="service" id="sylius.locale_converter" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

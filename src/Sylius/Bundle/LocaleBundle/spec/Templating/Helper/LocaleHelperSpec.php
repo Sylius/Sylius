@@ -52,7 +52,7 @@ final class LocaleHelperSpec extends ObjectBehavior
         $this->convertCodeToName('fr_FR')->shouldReturn('French (France)');
     }
 
-    function it_has_name()
+    function it_has_a_name()
     {
         $this->getName()->shouldReturn('sylius_locale');
     }

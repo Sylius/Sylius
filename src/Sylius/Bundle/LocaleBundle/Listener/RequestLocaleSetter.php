@@ -36,6 +36,8 @@ final class RequestLocaleSetter
 
     /**
      * @param GetResponseEvent $event
+     *
+     * @throws LocaleNotFoundException
      */
     public function onKernelRequest(GetResponseEvent $event)
     {

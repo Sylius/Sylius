@@ -22,7 +22,7 @@
             <argument>%sylius_locale.locale%</argument>
         </service>
 
-        <service id="sylius.converter.locale" class="Sylius\Component\Locale\Converter\LocaleConverter" />
+        <service id="sylius.locale_converter" class="Sylius\Component\Locale\Converter\LocaleConverter" />
 
         <service id="sylius.listener.request_locale_setter" class="Sylius\Bundle\LocaleBundle\Listener\RequestLocaleSetter">
             <argument type="service" id="sylius.context.locale" />
@@ -31,7 +31,7 @@
         </service>
 
         <service id="sylius.templating.helper.locale" class="Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper">
-            <argument type="service" id="sylius.converter.locale" />
+            <argument type="service" id="sylius.locale_converter" />
             <tag name="templating.helper" alias="sylius_locale" />
         </service>
 

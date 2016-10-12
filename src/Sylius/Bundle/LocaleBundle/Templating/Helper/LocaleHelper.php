@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 
-use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
-use Symfony\Component\Intl\Intl;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
