@@ -129,11 +129,26 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getValidationMessageForImage($element)
+    public function getValidationMessageForImage()
     {
         $provinceForm = $this->getLastImageElement();
 
         $foundElement = $provinceForm->find('css', '.sylius-validation-error');
+        if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
+        }
+
+        return $foundElement->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationMessageForImageAtPlace($place) {
+        
+        $images = $this->getImageElements();
+        
+        $foundElement = $images[$place]->find('css', '.sylius-validation-error');
         if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
         }

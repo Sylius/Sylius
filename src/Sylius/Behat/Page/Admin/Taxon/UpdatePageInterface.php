@@ -85,11 +85,18 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function changeImageWithCode($code, $path);
 
     /**
-     * @param string $element
-     *
      * @return string
      *
      * @throws ElementNotFoundException
      */
-    public function getValidationMessageForImage($element);
+    public function getValidationMessageForImage();
+
+    /**
+     * @param int $place
+     * 
+     * @return string 
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getValidationMessageForImageAtPlace($place);
 }

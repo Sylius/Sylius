@@ -25,3 +25,12 @@ Feature: Taxon image unique code validation within a taxon
         And I try to save my changes
         Then I should be notified that the image with this code already exists
         And there should still be only one image in the "T-Shirts" taxon
+
+    @ui @javascript
+    Scenario: Trying to add images with the same code
+        When I want to modify the "Mugs" taxon
+        And I attach the "t-shirts.jpg" image with a code "banner"
+        And I attach the "mugs.jpg" image with a code "banner"
+        And I try to save my changes
+        Then I should be notified that the 1st image should have an unique code
+        And I should be notified that the 2nd image should have an unique code
