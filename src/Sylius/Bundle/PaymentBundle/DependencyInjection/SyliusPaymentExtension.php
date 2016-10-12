@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Parameter;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusPaymentExtension extends AbstractResourceExtension
+final class SyliusPaymentExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}

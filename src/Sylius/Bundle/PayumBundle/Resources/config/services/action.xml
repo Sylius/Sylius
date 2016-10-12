@@ -6,33 +6,33 @@
 
     <services>
         <!-- Generic -->
-        <service id="sylius.payum.action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
+        <service id="sylius.payum_action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
             <argument type="service" id="sylius.currency_converter" />
             <tag name="payum.action" all="true" alias="sylius.capture_payment" />
         </service>
-        <service id="sylius.payum.action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">
+        <service id="sylius.payum_action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">
             <tag name="payum.action" all="true" />
         </service>
-        <service id="sylius.payum.action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\ResolveNextRouteAction">
+        <service id="sylius.payum_action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\ResolveNextRouteAction">
             <tag name="payum.action" all="true" alias="sylius.resolve_next_route" />
         </service>
 
         <!-- PayPal -->
-        <service id="sylius.payum.action.convert_payment_to_paypal_express" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentToPaypalExpressAction">
+        <service id="sylius.payum_action.paypal_express_checkout.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentAction">
             <argument type="service" id="sylius.invoice_number_generator" />
             <argument type="service" id="sylius.currency_converter" />
-            <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.convert_payment" />
+            <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.paypal_express_checkout.convert_payment" />
         </service>
 
         <!-- Offline -->
-        <service id="sylius.payum.offline.action.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentToOfflineAction">
-            <tag name="payum.action" factory="offline" alias="sylius.convert_payment" />
+        <service id="sylius.payum_action.offline.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentAction">
+            <tag name="payum.action" factory="offline" alias="sylius.offline.convert_payment" />
         </service>
-        <service id="sylus.payum.offline.action.status" class="Sylius\Bundle\PayumBundle\Action\Offline\StatusAction">
-            <tag name="payum.action" factory="offline" alias="sylius.offline_status"/>
+        <service id="sylus.payum_action.offline.status" class="Sylius\Bundle\PayumBundle\Action\Offline\StatusAction">
+            <tag name="payum.action" factory="offline" alias="sylius.offline.status"/>
         </service>
-        <service id="sylius.payum.offline.action.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Offline\ResolveNextRouteAction">
-            <tag name="payum.action" factory="offline" alias="sylius.offline_resolve_next_route" />
+        <service id="sylius.payum_action.offline.resolve_next_route" class="Sylius\Bundle\PayumBundle\Action\Offline\ResolveNextRouteAction">
+            <tag name="payum.action" factory="offline" alias="sylius.offline.resolve_next_route" />
         </service>
     </services>
 </container>

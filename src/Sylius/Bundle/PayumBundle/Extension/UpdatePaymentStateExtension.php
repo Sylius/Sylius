@@ -21,7 +21,7 @@ use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 
-class UpdatePaymentStateExtension implements ExtensionInterface
+final class UpdatePaymentStateExtension implements ExtensionInterface
 {
     /**
      * @var FactoryInterface

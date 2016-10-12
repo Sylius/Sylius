@@ -26,17 +26,17 @@
             <argument>Payment methods resolver</argument>
         </service>
 
-        <service id="sylius.composite_payment_methods_resolver" class="Sylius\Component\Payment\Resolver\CompositeMethodsResolver">
+        <service id="sylius.payment_methods_resolver" class="Sylius\Component\Payment\Resolver\CompositeMethodsResolver">
             <argument type="service" id="sylius.registry.payment_methods_resolver" />
         </service>
 
-        <service id="sylius.payment_methods_resolver" class="Sylius\Component\Payment\Resolver\PaymentMethodsResolver">
+        <service id="sylius.payment_methods_resolver.default" class="Sylius\Component\Payment\Resolver\PaymentMethodsResolver" public="false">
             <argument type="service" id="sylius.repository.payment_method" />
             <tag name="sylius.payment_method_resolver" type="default" label="Default" />
         </service>
 
         <service id="sylius.form.type.payment_method_choice" class="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType">
-            <argument type="service" id="sylius.composite_payment_methods_resolver" />
+            <argument type="service" id="sylius.payment_methods_resolver" />
             <argument type="service" id="sylius.repository.payment_method" />
             <tag name="form.type" alias="sylius_payment_method_choice" />
         </service>

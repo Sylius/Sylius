@@ -22,8 +22,6 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Payment method choice type for document/entity/phpcr_document choice form types.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

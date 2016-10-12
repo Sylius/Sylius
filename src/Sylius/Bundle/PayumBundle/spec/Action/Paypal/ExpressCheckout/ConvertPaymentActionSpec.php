@@ -15,7 +15,7 @@ use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\Convert;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentToPaypalExpressAction;
+use Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentAction;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -26,11 +26,11 @@ use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
 /**
- * @mixin ConvertPaymentToPaypalExpressAction
+ * @mixin ConvertPaymentAction
  *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ConvertPaymentToPaypalExpressActionSpec extends ObjectBehavior
+final class ConvertPaymentActionSpec extends ObjectBehavior
 {
     function let(
         InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
@@ -41,7 +41,7 @@ final class ConvertPaymentToPaypalExpressActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ConvertPaymentToPaypalExpressAction::class);
+        $this->shouldHaveType(ConvertPaymentAction::class);
     }
 
     function it_implements_action_interface()

@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\PricingBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PricingBundle\Form\Extension\PriceableTypeExtension;
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Calculator\VolumeBasedCalculator;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -21,6 +23,9 @@ use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
+/**
+ * @mixin PriceableTypeExtension
+ */
 final class PriceableTypeExtensionSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $calculatorRegistry, EventSubscriberInterface $subscriber)
@@ -30,14 +35,14 @@ final class PriceableTypeExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PricingBundle\Form\Extension\PriceableTypeExtension');
+        $this->shouldHaveType(PriceableTypeExtension::class);
     }
 
     function it_builds_form(
-        $calculatorRegistry,
-        $subscriber,
+        ServiceRegistryInterface $calculatorRegistry,
+        EventSubscriberInterface $subscriber,
         FormBuilderInterface $builder,
-        VolumeBasedCalculator $calculator,
+        CalculatorInterface $calculator,
         FormBuilderInterface $formBuilder,
         FormInterface $form
     ) {

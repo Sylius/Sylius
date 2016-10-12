@@ -17,7 +17,7 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class CompositeMethodsResolver implements PaymentMethodsResolverInterface
+final class CompositeMethodsResolver implements PaymentMethodsResolverInterface
 {
     /**
      * @var PrioritizedServiceRegistryInterface

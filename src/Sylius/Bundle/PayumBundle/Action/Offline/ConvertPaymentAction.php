@@ -20,7 +20,7 @@ use Payum\Offline\Constants;
 /**
  * @author Antonio Peric <antonio@locastic.com>
  */
-class ConvertPaymentToOfflineAction implements ActionInterface
+final class ConvertPaymentAction implements ActionInterface
 {
     /**
      * {@inheritdoc}

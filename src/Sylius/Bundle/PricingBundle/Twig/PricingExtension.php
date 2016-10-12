@@ -15,15 +15,11 @@ use Sylius\Bundle\PricingBundle\Templating\Helper\PricingHelper;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
- * Sylius pricing Twig helper.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PricingExtension extends \Twig_Extension
+final class PricingExtension extends \Twig_Extension
 {
     /**
-     * Templating helper.
-     *
      * @var PricingHelper
      */
     protected $helper;
@@ -47,8 +43,6 @@ class PricingExtension extends \Twig_Extension
     }
 
     /**
-     * Returns calculated price for given priceable.
-     *
      * @param PriceableInterface $priceable
      * @param array              $context
      *

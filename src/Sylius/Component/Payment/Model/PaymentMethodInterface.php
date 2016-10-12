@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
- * Payment method interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface PaymentMethodInterface extends

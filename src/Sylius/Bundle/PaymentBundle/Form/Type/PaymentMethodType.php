@@ -16,8 +16,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Payment method form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PaymentMethodType extends AbstractResourceType

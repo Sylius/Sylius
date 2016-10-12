@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -22,6 +23,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin PaymentMethodChoiceType
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class PaymentMethodChoiceTypeSpec extends ObjectBehavior
@@ -33,7 +36,7 @@ final class PaymentMethodChoiceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType');
+        $this->shouldHaveType(PaymentMethodChoiceType::class);
     }
 
     function it_is_an_abstract_type()

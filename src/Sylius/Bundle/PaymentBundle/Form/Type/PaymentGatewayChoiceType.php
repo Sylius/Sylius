@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Payment gateway choice type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PaymentGatewayChoiceType extends AbstractType

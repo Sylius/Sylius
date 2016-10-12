@@ -18,7 +18,7 @@ use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
+final class DefaultPaymentMethodResolver implements DefaultPaymentMethodResolverInterface
 {
     /**
      * @var PaymentMethodRepositoryInterface

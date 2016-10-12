@@ -23,12 +23,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * This listener adds configuration form to the priceable object.
- * if selected calculator requires one.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildPriceableFormSubscriber implements EventSubscriberInterface
+final class BuildPriceableFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ServiceRegistryInterface
@@ -111,13 +108,11 @@ class BuildPriceableFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Add configuration fields to the form.
-     *
      * @param FormInterface $form
-     * @param string        $calculatorType
-     * @param array         $data
+     * @param string $calculatorType
+     * @param array $data
      */
-    protected function addConfigurationFields(FormInterface $form, $calculatorType, array $data = [])
+    private function addConfigurationFields(FormInterface $form, $calculatorType, array $data = [])
     {
         /** @var CalculatorInterface $calculator */
         $calculator = $this->calculatorRegistry->get($calculatorType);

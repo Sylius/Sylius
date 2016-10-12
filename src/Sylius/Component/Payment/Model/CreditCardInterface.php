@@ -19,9 +19,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  */
 interface CreditCardInterface extends PaymentSourceInterface, TimestampableInterface, ResourceInterface
 {
-    /**
-     * Supported CC brands.
-     */
     const BRAND_VISA = 'visa';
     const BRAND_MASTERCARD = 'mastercard';
     const BRAND_DISCOVER = 'discover';
@@ -46,9 +43,6 @@ interface CreditCardInterface extends PaymentSourceInterface, TimestampableInter
     public function setToken($token);
 
     /**
-     * Get the type of credit card.
-     * VISA, MasterCard...
-     *
      * @return string
      */
     public function getType();

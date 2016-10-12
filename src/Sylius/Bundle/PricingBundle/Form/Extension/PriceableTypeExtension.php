@@ -22,11 +22,9 @@ use Symfony\Component\Form\FormView;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PriceableTypeExtension extends AbstractTypeExtension
+final class PriceableTypeExtension extends AbstractTypeExtension
 {
     /**
-     * Priceable object form type.
-     *
      * @var string
      */
     protected $extendedType;
@@ -42,7 +40,7 @@ class PriceableTypeExtension extends AbstractTypeExtension
     protected $calculatorRegistry;
 
     /**
-     * @param string                   $extendedType
+     * @param string $extendedType
      * @param ServiceRegistryInterface $calculatorRegistry
      * @param EventSubscriberInterface $formSubscriber
      */

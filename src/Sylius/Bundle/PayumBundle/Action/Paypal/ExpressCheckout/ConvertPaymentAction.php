@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
-class ConvertPaymentToPaypalExpressAction implements ActionInterface
+final class ConvertPaymentAction implements ActionInterface
 {
     /**
      * @var InvoiceNumberGeneratorInterface

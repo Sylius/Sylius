@@ -13,10 +13,14 @@ namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @mixin PaymentMethodTranslationType
+ */
 final class PaymentMethodTranslationTypeSpec extends ObjectBehavior
 {
     function let()
@@ -26,7 +30,7 @@ final class PaymentMethodTranslationTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType');
+        $this->shouldHaveType(PaymentMethodTranslationType::class);
     }
 
     function it_is_a_form_type()
