@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Taxon;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -50,5 +51,43 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $container = $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName))->getParent();
 
         return $productPrice === $container->find('css', '.sylius-product-price')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sortByDate($direction)
+    {
+        $this->getDocument()->find('css', sprintf('a:contains("%s")', $direction))->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countProductsItems()
+    {
+        $productsList = $this->getDocument()->find('css', '#products');
+        
+        $products = $productsList->findAll('css','.column > .card');
+        
+        return count($products);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isProductOnPageWithName($name)
+    {
+        return null !== $this->getDocument()->find('css', sprintf('.content > a:contains("%s")', $name));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFirstProductNameFromList()
+    {
+        $productsList = $this->getDocument()->find('css', '#products');
+
+        return $productsList->find('css', '.content > a')->getText();
     }
 }

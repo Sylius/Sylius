@@ -21,8 +21,8 @@ sylius_shop_partial_product_index_by_taxon_code:
         _controller: sylius.controller.product:indexAction
         _sylius:
             template: $template
-            repository:
-                method: findEnabledByTaxonCodeAndChannel
-                arguments:
-                    - $code
-                    - 'expr:service("sylius.context.channel").getChannel()'
+            grid: sylius_shop_product
+            vars:
+                route:
+                    parameters:
+                        $code: $code
