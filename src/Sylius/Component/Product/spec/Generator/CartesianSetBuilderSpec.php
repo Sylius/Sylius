@@ -38,7 +38,7 @@ final class CartesianSetBuilderSpec extends ObjectBehavior
     {
         $set = ['a', 'b', 'c'];
 
-        $this->build([$set], false)->shouldReturn($set);
+        $this->build([$set])->shouldReturn($set);
     }
 
     function it_builds_the_Cartesian_product_set_from_two_sets()
@@ -46,7 +46,7 @@ final class CartesianSetBuilderSpec extends ObjectBehavior
         $setA = ['a', 'b', 'c'];
         $setB = ['1', '2', '3'];
 
-        $this->build([$setA, $setB], false)->shouldReturn([
+        $this->build([$setA, $setB])->shouldReturn([
             ['a', '1'],
             ['a', '2'],
             ['a', '3'],
@@ -67,7 +67,7 @@ final class CartesianSetBuilderSpec extends ObjectBehavior
         $setB = ['1', '2', '3'];
         $setC = ['!', '@', '$'];
 
-        $this->build([$setA, $setB, $setC], false)->shouldReturn([
+        $this->build([$setA, $setB, $setC])->shouldReturn([
             ['a', '1', '!'], ['a', '1', '@'], ['a', '1', '$'],
             ['a', '2', '!'], ['a', '2', '@'], ['a', '2', '$'],
             ['a', '3', '!'], ['a', '3', '@'], ['a', '3', '$'],
