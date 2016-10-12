@@ -71,16 +71,6 @@ And configure doctrine extensions which are used by the bundle.
                 sluggable: true
                 timestampable: true
 
-Routing configuration
----------------------
-
-Add the following to your ``app/config/routing.yml``.
-
-.. code-block:: yaml
-
-    sylius_product:
-        resource: "@SyliusProductBundle/Resources/config/routing.yml"
-
 Updating database schema
 ------------------------
 
