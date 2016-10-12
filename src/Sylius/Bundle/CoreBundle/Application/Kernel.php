@@ -61,7 +61,6 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\GridBundle\SyliusGridBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
 
-            new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
             new \Symfony\Cmf\Bundle\ContentBundle\CmfContentBundle(),
             new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
@@ -80,10 +79,8 @@ class Kernel extends HttpKernel
             new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new \FOS\RestBundle\FOSRestBundle(),
 
-            new \FOS\ElasticaBundle\FOSElasticaBundle(),
             new \Knp\Bundle\GaufretteBundle\KnpGaufretteBundle(),
             new \Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new \Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new \Liip\ImagineBundle\LiipImagineBundle(),
             new \Payum\Bundle\PayumBundle\PayumBundle(),
             new \JMS\SerializerBundle\JMSSerializerBundle(),

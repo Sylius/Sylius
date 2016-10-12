@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cd83661299233d8a1c6e868cc85ac216",
-    "content-hash": "5d196071da3c40d562a93a358d9be93f",
+    "hash": "f9b173fafc60ed4e16f604ccf229d997",
+    "content-hash": "f4ddd9b3574990f2ea110c586b3d3ab1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1267,90 +1267,6 @@
                 "phpcr"
             ],
             "time": "2016-08-31 09:33:44"
-        },
-        {
-            "name": "friendsofsymfony/elastica-bundle",
-            "version": "v3.2.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfSymfony/FOSElasticaBundle.git",
-                "reference": "70ea4d0cb0ebdac011d6dc978bfec59ff5e927bb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSElasticaBundle/zipball/70ea4d0cb0ebdac011d6dc978bfec59ff5e927bb",
-                "reference": "70ea4d0cb0ebdac011d6dc978bfec59ff5e927bb",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2",
-                "psr/log": "~1.0",
-                "ruflin/elastica": "~2.1",
-                "symfony/console": "~2.1|~3.0",
-                "symfony/form": "~2.1|~3.0",
-                "symfony/framework-bundle": "~2.3|~3.0",
-                "symfony/property-access": "~2.3|~3.0"
-            },
-            "require-dev": {
-                "doctrine/doctrine-bundle": "~1.2",
-                "doctrine/orm": "~2.4",
-                "doctrine/phpcr-bundle": "~1.2",
-                "jackalope/jackalope-doctrine-dbal": "~1.1",
-                "jms/serializer-bundle": "@stable",
-                "knplabs/knp-components": "~1.2",
-                "knplabs/knp-paginator-bundle": "~2.4",
-                "pagerfanta/pagerfanta": "~1.0",
-                "phpunit/phpunit": "~4.1",
-                "propel/propel1": "1.6.*",
-                "symfony/browser-kit": "~2.3|~3.0",
-                "symfony/expression-language": "~2.4|~3.0",
-                "symfony/serializer": "~2.7|~3.0",
-                "symfony/twig-bundle": "~2.3|~3.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "FOS\\ElasticaBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Tim Nagel",
-                    "email": "tim@nagel.com.au"
-                },
-                {
-                    "name": "Richard Miller",
-                    "email": "richard.miller@limethinking.co.uk"
-                },
-                {
-                    "name": "FriendsOfSymfony Community",
-                    "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle/contributors"
-                },
-                {
-                    "name": "Jeremy Mikola",
-                    "email": "jmikola@gmail.com"
-                }
-            ],
-            "description": "Elasticsearch PHP integration for your Symfony2 project using Elastica",
-            "homepage": "https://github.com/FriendsOfSymfony/FOSElasticaBundle",
-            "keywords": [
-                "doctrine2",
-                "elastica",
-                "elasticsearch",
-                "mongodb",
-                "propel",
-                "search"
-            ],
-            "time": "2016-10-04 12:27:23"
         },
         {
             "name": "friendsofsymfony/oauth-server-bundle",
@@ -2881,128 +2797,6 @@
             "time": "2016-09-22 12:24:40"
         },
         {
-            "name": "knplabs/knp-snappy",
-            "version": "0.4.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KnpLabs/snappy.git",
-                "reference": "44f7a9b37d5686fd7db4c1e9569a802a5d16923f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/44f7a9b37d5686fd7db4c1e9569a802a5d16923f",
-                "reference": "44f7a9b37d5686fd7db4c1e9569a802a5d16923f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "symfony/process": "~2.3|~3.0"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.7"
-            },
-            "suggest": {
-                "h4cc/wkhtmltoimage-amd64": "Provides wkhtmltoimage-amd64 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "h4cc/wkhtmltoimage-i386": "Provides wkhtmltoimage-i386 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "h4cc/wkhtmltopdf-amd64": "Provides wkhtmltopdf-amd64 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "h4cc/wkhtmltopdf-i386": "Provides wkhtmltopdf-i386 binary for Linux-compatible machines, use version `~0.12` as dependency",
-                "wemersonjanuario/wkhtmltopdf-windows": "Provides wkhtmltopdf executable for Windows, use version `~0.12` as dependency"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.5.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "Knp\\Snappy": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "KnpLabs Team",
-                    "homepage": "http://knplabs.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://github.com/KnpLabs/snappy/contributors"
-                }
-            ],
-            "description": "PHP5 library allowing thumbnail, snapshot or PDF generation from a url or a html page. Wrapper for wkhtmltopdf/wkhtmltoimage.",
-            "homepage": "http://github.com/KnpLabs/snappy",
-            "keywords": [
-                "knp",
-                "knplabs",
-                "pdf",
-                "snapshot",
-                "thumbnail",
-                "wkhtmltopdf"
-            ],
-            "time": "2015-11-17 13:16:27"
-        },
-        {
-            "name": "knplabs/knp-snappy-bundle",
-            "version": "v1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/KnpLabs/KnpSnappyBundle.git",
-                "reference": "efda38a2f9eb47830eb2a7642541abaaf5a1d34f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpSnappyBundle/zipball/efda38a2f9eb47830eb2a7642541abaaf5a1d34f",
-                "reference": "efda38a2f9eb47830eb2a7642541abaaf5a1d34f",
-                "shasum": ""
-            },
-            "require": {
-                "knplabs/knp-snappy": "~0.1",
-                "php": ">=5.3.2",
-                "symfony/finder": "~2.3|~3.0",
-                "symfony/framework-bundle": "~2.3|~3.0",
-                "symfony/validator": "~2.3|~3.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Knp\\Bundle\\SnappyBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "KnpLabs Team",
-                    "homepage": "http://knplabs.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://github.com/KnpLabs/KnpSnappyBundle/contributors"
-                }
-            ],
-            "description": "Easily create PDF and images in Symfony2 by converting Twig/HTML templates.",
-            "homepage": "http://github.com/KnpLabs/KnpSnappyBundle",
-            "keywords": [
-                "bundle",
-                "knp",
-                "knplabs",
-                "pdf",
-                "snappy"
-            ],
-            "time": "2015-11-11 17:40:14"
-        },
-        {
             "name": "league/uri",
             "version": "4.2.0",
             "source": {
@@ -4045,16 +3839,16 @@
         },
         {
             "name": "omnipay/migs",
-            "version": "v2.2.0",
+            "version": "v2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/omnipay-migs.git",
-                "reference": "896492fb8de36021a5252ab41d608d0b3dac49ec"
+                "reference": "c15be0960ae578d60cabc7c0a2895da41430821f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/omnipay-migs/zipball/896492fb8de36021a5252ab41d608d0b3dac49ec",
-                "reference": "896492fb8de36021a5252ab41d608d0b3dac49ec",
+                "url": "https://api.github.com/repos/thephpleague/omnipay-migs/zipball/c15be0960ae578d60cabc7c0a2895da41430821f",
+                "reference": "c15be0960ae578d60cabc7c0a2895da41430821f",
                 "shasum": ""
             },
             "require": {
@@ -4099,7 +3893,7 @@
                 "pay",
                 "payment"
             ],
-            "time": "2016-09-14 09:27:57"
+            "time": "2016-09-22 01:58:30"
         },
         {
             "name": "omnipay/mollie",
@@ -6095,16 +5889,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "5277094ed527a1c4477177d102fe4c53551953e0"
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/5277094ed527a1c4477177d102fe4c53551953e0",
-                "reference": "5277094ed527a1c4477177d102fe4c53551953e0",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+                "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
                 "shasum": ""
             },
             "require": {
@@ -6138,64 +5932,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2016-09-19 16:02:08"
-        },
-        {
-            "name": "ruflin/elastica",
-            "version": "2.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ruflin/Elastica.git",
-                "reference": "0df1d7b513960ba11d3075652dcd71fcab8dd37a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ruflin/Elastica/zipball/0df1d7b513960ba11d3075652dcd71fcab8dd37a",
-                "reference": "0df1d7b513960ba11d3075652dcd71fcab8dd37a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3",
-                "psr/log": "~1.0"
-            },
-            "require-dev": {
-                "guzzlehttp/guzzle": "5.3.*",
-                "munkie/elasticsearch-thrift-php": "1.4.*"
-            },
-            "suggest": {
-                "egeloen/http-adapter": "Allow using httpadapter transport",
-                "guzzlehttp/guzzle": "Allow using guzzle 5.3.x as the http transport (Requires php 5.4)",
-                "monolog/monolog": "Logging request",
-                "munkie/elasticsearch-thrift-php": "Allow using thrift transport"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Elastica\\": "lib/Elastica/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Nicolas Ruflin",
-                    "homepage": "http://ruflin.com/"
-                }
-            ],
-            "description": "Elasticsearch Client",
-            "homepage": "http://elastica.io/",
-            "keywords": [
-                "client",
-                "search"
-            ],
-            "time": "2015-10-19 07:09:10"
+            "time": "2016-10-10 12:19:37"
         },
         {
             "name": "sensio/distribution-bundle",
@@ -8889,70 +8626,6 @@
             "time": "2016-01-13 17:06:48"
         },
         {
-            "name": "cocur/slugify",
-            "version": "v2.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cocur/slugify.git",
-                "reference": "57a00e06a382928e350cc7bbb13b19f1b8f4e73a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cocur/slugify/zipball/57a00e06a382928e350cc7bbb13b19f1b8f4e73a",
-                "reference": "57a00e06a382928e350cc7bbb13b19f1b8f4e73a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "require-dev": {
-                "laravel/framework": "~5.1",
-                "latte/latte": "~2.2",
-                "league/container": "^2.2.0",
-                "mikey179/vfsstream": "~1.6",
-                "mockery/mockery": "~0.9",
-                "nette/di": "~2.2",
-                "phpunit/phpunit": "~4.8|~5.2",
-                "pimple/pimple": "~1.1",
-                "plumphp/plum": "~0.1",
-                "silex/silex": "~1.3",
-                "symfony/config": "~2.4|~3.0",
-                "symfony/dependency-injection": "~2.4|~3.0",
-                "symfony/http-kernel": "~2.4|~3.0",
-                "twig/twig": "~1.12",
-                "zendframework/zend-modulemanager": "~2.2",
-                "zendframework/zend-servicemanager": "~2.2",
-                "zendframework/zend-view": "~2.2"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Cocur\\Slugify\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ivo Bathke",
-                    "email": "ivo.bathke@gmail.com"
-                },
-                {
-                    "name": "Florian Eckerstorfer",
-                    "email": "florian@eckerstorfer.co",
-                    "homepage": "https://florian.ec"
-                }
-            ],
-            "description": "Converts a string into a slug.",
-            "keywords": [
-                "slug",
-                "slugify"
-            ],
-            "time": "2016-08-09 20:10:17"
-        },
-        {
             "name": "coduo/php-matcher",
             "version": "2.0.1",
             "source": {
@@ -9065,65 +8738,6 @@
                 "to string"
             ],
             "time": "2016-01-20 18:29:02"
-        },
-        {
-            "name": "fabpot/php-cs-fixer",
-            "version": "v1.12.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "baa7112bef3b86c65fcfaae9a7a50436e3902b41"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/baa7112bef3b86c65fcfaae9a7a50436e3902b41",
-                "reference": "baa7112bef3b86c65fcfaae9a7a50436e3902b41",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": "^5.3.6 || >=7.0 <7.2",
-                "sebastian/diff": "^1.1",
-                "symfony/console": "^2.3 || ^3.0",
-                "symfony/event-dispatcher": "^2.1 || ^3.0",
-                "symfony/filesystem": "^2.1 || ^3.0",
-                "symfony/finder": "^2.1 || ^3.0",
-                "symfony/process": "^2.3 || ^3.0",
-                "symfony/stopwatch": "^2.5 || ^3.0"
-            },
-            "conflict": {
-                "hhvm": "<3.9"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^4.5|^5",
-                "satooshi/php-coveralls": "^1.0"
-            },
-            "bin": [
-                "php-cs-fixer"
-            ],
-            "type": "application",
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\CS\\": "Symfony/CS/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Dariusz Rumiński",
-                    "email": "dariusz.ruminski@gmail.com"
-                },
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                }
-            ],
-            "description": "A tool to automatically fix PHP code style",
-            "abandoned": "friendsofphp/php-cs-fixer",
-            "time": "2016-09-27 07:57:59"
         },
         {
             "name": "friends-of-behat/performance-extension",
@@ -9407,76 +9021,6 @@
                 "webtest"
             ],
             "time": "2015-06-15 20:19:33"
-        },
-        {
-            "name": "jms/translation-bundle",
-            "version": "1.3.1",
-            "target-dir": "JMS/TranslationBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/schmittjoh/JMSTranslationBundle.git",
-                "reference": "e79fe1cd77e7749223c870bdae0bd400c21a102d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/JMSTranslationBundle/zipball/e79fe1cd77e7749223c870bdae0bd400c21a102d",
-                "reference": "e79fe1cd77e7749223c870bdae0bd400c21a102d",
-                "shasum": ""
-            },
-            "require": {
-                "nikic/php-parser": "^1.4 || ^2.0",
-                "php": "^5.3.3 || ^7.0",
-                "symfony/console": "^2.3 || ^3.0",
-                "symfony/framework-bundle": "^2.3 || ^3.0"
-            },
-            "conflict": {
-                "twig/twig": "<1.12"
-            },
-            "require-dev": {
-                "jms/di-extra-bundle": "^1.1",
-                "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
-                "nyholm/nsa": "^1.0.1",
-                "phpunit/phpunit": "4.8.27",
-                "psr/log": "^1.0",
-                "sensio/framework-extra-bundle": "^2.3 || ^3.0",
-                "symfony/expression-language": "^2.6 || ^3.0",
-                "symfony/symfony": "^2.3 || ^3.0",
-                "twig/twig": "^1.12"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.4-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "JMS\\TranslationBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache2"
-            ],
-            "authors": [
-                {
-                    "name": "Johannes M. Schmitt",
-                    "email": "schmittjoh@gmail.com"
-                }
-            ],
-            "description": "Puts the Symfony Translation Component on steroids",
-            "homepage": "http://jmsyst.com/bundles/JMSTranslationBundle",
-            "keywords": [
-                "extract",
-                "extraction",
-                "i18n",
-                "interface",
-                "multilanguage",
-                "translation",
-                "ui",
-                "webinterface"
-            ],
-            "time": "2016-08-13 23:17:44"
         },
         {
             "name": "kriswallsmith/buzz",
@@ -9961,57 +9505,6 @@
                 "test"
             ],
             "time": "2016-07-15 19:50:38"
-        },
-        {
-            "name": "nikic/php-parser",
-            "version": "v2.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/4dd659edadffdc2143e4753df655d866dbfeedf0",
-                "reference": "4dd659edadffdc2143e4753df655d866dbfeedf0",
-                "shasum": ""
-            },
-            "require": {
-                "ext-tokenizer": "*",
-                "php": ">=5.4"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "bin": [
-                "bin/php-parse"
-            ],
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "PhpParser\\": "lib/PhpParser"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Nikita Popov"
-                }
-            ],
-            "description": "A PHP parser written in PHP",
-            "keywords": [
-                "parser",
-                "php"
-            ],
-            "time": "2016-09-16 12:04:44"
         },
         {
             "name": "openlss/lib-array2xml",
@@ -11415,206 +10908,6 @@
             "time": "2016-02-04 12:56:52"
         },
         {
-            "name": "sonata-project/block-bundle",
-            "version": "2.3.12",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sonata-project/SonataBlockBundle.git",
-                "reference": "181992c7a0a12bc7cf93bf90f47ae7b6ab9c0a38"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataBlockBundle/zipball/181992c7a0a12bc7cf93bf90f47ae7b6ab9c0a38",
-                "reference": "181992c7a0a12bc7cf93bf90f47ae7b6ab9c0a38",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/common": "^2.3",
-                "sonata-project/cache": "^1.0",
-                "sonata-project/core-bundle": "^2.3,>=2.3.10",
-                "symfony/form": "^2.3 || ^3.0",
-                "symfony/http-kernel": "^2.3 || ^3.0"
-            },
-            "require-dev": {
-                "knplabs/knp-menu-bundle": "^2.0",
-                "sllh/php-cs-fixer-styleci-bridge": "^2.0",
-                "sonata-project/admin-bundle": "^2.3",
-                "symfony/phpunit-bridge": "^2.7 || ^3.0"
-            },
-            "suggest": {
-                "knplabs/knp-menu-bundle": "^2.0",
-                "sonata-project/cache-bundle": "^2.1"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sonata\\BlockBundle\\": ""
-                },
-                "files": [
-                    "Resources/stubs/symfony2.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sonata Community",
-                    "homepage": "https://github.com/sonata-project/SonataBlockBundle/contributors"
-                },
-                {
-                    "name": "Thomas Rabaix",
-                    "email": "thomas.rabaix@sonata-project.org",
-                    "homepage": "https://sonata-project.org"
-                }
-            ],
-            "description": "Symfony SonataBlockBundle",
-            "homepage": "https://sonata-project.org/bundles/block",
-            "keywords": [
-                "block",
-                "sonata"
-            ],
-            "time": "2016-05-07 14:53:14"
-        },
-        {
-            "name": "sonata-project/cache",
-            "version": "1.0.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sonata-project/cache.git",
-                "reference": "f2f6be96c270d6a2b1f26fdc1d6edcb586b60691"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/cache/zipball/f2f6be96c270d6a2b1f26fdc1d6edcb586b60691",
-                "reference": "f2f6be96c270d6a2b1f26fdc1d6edcb586b60691",
-                "shasum": ""
-            },
-            "require-dev": {
-                "doctrine/orm": "~2.2",
-                "doctrine/phpcr-odm": "~1.0",
-                "fabpot/php-cs-fixer": "~0.1|~1.0",
-                "jackalope/jackalope-doctrine-dbal": "~1.0",
-                "predis/predis": "~0.8,<1.0",
-                "psr/log": "~1.0",
-                "symfony/phpunit-bridge": "~2.7|~3.0"
-            },
-            "suggest": {
-                "doctrine/orm": "ORM support",
-                "doctrine/phpcr-odm": "PHPCR ODM support",
-                "ext-apc": "Caching with ext/apc",
-                "ext-memcached": "Caching with ext/memcached",
-                "predis/predis": "Install redis php"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sonata\\Cache\\Tests\\": "test/",
-                    "Sonata\\Cache\\": "lib/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Thomas Rabaix",
-                    "email": "thomas.rabaix@gmail.com",
-                    "homepage": "https://sonata-project.org/"
-                }
-            ],
-            "description": "Cache library",
-            "homepage": "https://github.com/sonata-project/cache",
-            "keywords": [
-                "cache",
-                "memcached",
-                "mongodb",
-                "redis"
-            ],
-            "time": "2015-09-18 14:40:58"
-        },
-        {
-            "name": "sonata-project/core-bundle",
-            "version": "2.3.11",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/sonata-project/SonataCoreBundle.git",
-                "reference": "363b3fe289a4244d98168486bc3b4b74baa8536f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataCoreBundle/zipball/363b3fe289a4244d98168486bc3b4b74baa8536f",
-                "reference": "363b3fe289a4244d98168486bc3b4b74baa8536f",
-                "shasum": ""
-            },
-            "require": {
-                "cocur/slugify": "~1.4|~2.0",
-                "symfony/config": "~2.3|~3.0",
-                "symfony/form": "~2.3|~3.0",
-                "symfony/http-foundation": "~2.3|~3.0",
-                "symfony/property-access": "~2.3|~3.0",
-                "symfony/translation": "~2.3|~3.0",
-                "symfony/validator": "~2.3|~3.0",
-                "twig/twig": "~1.23"
-            },
-            "require-dev": {
-                "doctrine/orm": "~2.4",
-                "doctrine/phpcr-odm": "~1.0",
-                "friendsofsymfony/rest-bundle": "~1.1|~2.0",
-                "jackalope/jackalope-doctrine-dbal": "~1.0",
-                "jms/serializer-bundle": "~0.11|~1.0",
-                "matthiasnoback/symfony-config-test": "~0.4|~1.0",
-                "matthiasnoback/symfony-dependency-injection-test": "~0.7",
-                "sensio/framework-extra-bundle": "~2.3|~3.0",
-                "sllh/php-cs-fixer-styleci-bridge": "^2.0",
-                "sonata-project/exporter": "~1.3",
-                "symfony/phpunit-bridge": "~2.7"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.3.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Sonata\\CoreBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Sonata Community",
-                    "homepage": "https://github.com/sonata-project/SonataCoreBundle/contributors"
-                },
-                {
-                    "name": "Thomas Rabaix",
-                    "email": "thomas.rabaix@sonata-project.org"
-                }
-            ],
-            "description": "Symfony SonataCoreBundle",
-            "homepage": "https://sonata-project.org/bundles/core",
-            "keywords": [
-                "sonata"
-            ],
-            "time": "2016-04-22 13:54:51"
-        },
-        {
             "name": "stripe/stripe-php",
             "version": "v4.0.0",
             "source": {
@@ -11668,139 +10961,6 @@
                 "stripe"
             ],
             "time": "2016-09-28 17:53:54"
-        },
-        {
-            "name": "symfony-cmf/block-bundle",
-            "version": "1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony-cmf/block-bundle.git",
-                "reference": "6e4425718a4e9a7ce98584ce1c86e871e37310f7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/block-bundle/zipball/6e4425718a4e9a7ce98584ce1c86e871e37310f7",
-                "reference": "6e4425718a4e9a7ce98584ce1c86e871e37310f7",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/phpcr-bundle": "^1.0",
-                "doctrine/phpcr-odm": "^1.0",
-                "php": "^5.3.9|^7.0",
-                "sonata-project/block-bundle": ">=2.2.12,<2.5",
-                "symfony-cmf/core-bundle": "^1.1",
-                "symfony/framework-bundle": "^2.3"
-            },
-            "conflict": {
-                "symfony/framework-bundle": ">=2.3.0,<2.3.2"
-            },
-            "require-dev": {
-                "sonata-project/cache-bundle": ">=2.1.3,<2.1.6",
-                "sonata-project/doctrine-phpcr-admin-bundle": "^1.1",
-                "symfony-cmf/menu-bundle": "^1.1|^2.0",
-                "symfony-cmf/testing": "^1.3",
-                "twig/twig": "^1.14.2|^2.0"
-            },
-            "suggest": {
-                "eko/feedbundle": "When using the RssBlock",
-                "liip/imagine-bundle": "When using the ImagineBlock",
-                "sonata-project/cache-bundle": "To add caching support for block loading",
-                "symfony-cmf/media-bundle": "When using the ImagineBlock"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Cmf\\Bundle\\BlockBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony CMF Community",
-                    "homepage": "https://github.com/symfony-cmf/BlockBundle/contributors"
-                }
-            ],
-            "description": "Symfony CMF Block Bundle",
-            "homepage": "http://cmf.symfony.com",
-            "keywords": [
-                "Symfony CMF",
-                "block",
-                "content fragments"
-            ],
-            "time": "2016-06-22 08:36:20"
-        },
-        {
-            "name": "symfony-cmf/media-bundle",
-            "version": "1.3.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony-cmf/media-bundle.git",
-                "reference": "77d34a3f9d1febe3f8f392e306bb0c886ef8fc82"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/media-bundle/zipball/77d34a3f9d1febe3f8f392e306bb0c886ef8fc82",
-                "reference": "77d34a3f9d1febe3f8f392e306bb0c886ef8fc82",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.3.9|^7.0",
-                "symfony/framework-bundle": "~2.3|~3.0"
-            },
-            "require-dev": {
-                "doctrine/annotations": "^1.1.2",
-                "doctrine/phpcr-odm": "^1.3",
-                "jms/serializer-bundle": "^0.12|^1.0",
-                "liip/imagine-bundle": "^1.0.4",
-                "mikey179/vfsstream": "^1.2",
-                "symfony-cmf/testing": "^1.3",
-                "twig/twig": "^1.12|^2.0"
-            },
-            "suggest": {
-                "helios-ag/fm-elfinder-bundle": "When using the elFinder media browser",
-                "jms/serializer-bundle": "When using the serializer handler",
-                "knplabs/gaufrette": "When using the Gaufrette adapter",
-                "liip/imagine-bundle": "To integrate with the Imagine library for processing images",
-                "phpcr/phpcr-utils": "When using the Gaufrette adapter",
-                "symfony-cmf/core-bundle": "Simplifies configuration with other CMF bundles"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.3-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Cmf\\Bundle\\MediaBundle\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Symfony CMF Community",
-                    "homepage": "https://github.com/symfony-cmf/MediaBundle/contributors"
-                }
-            ],
-            "description": "Symfony CMF Media Bundle",
-            "homepage": "http://cmf.symfony.com",
-            "keywords": [
-                "Symfony CMF",
-                "image",
-                "media"
-            ],
-            "time": "2016-06-14 11:28:56"
         }
     ],
     "aliases": [],

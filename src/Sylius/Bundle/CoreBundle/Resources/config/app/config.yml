@@ -71,16 +71,6 @@ knp_gaufrette:
         sylius_image:
             adapter: "%sylius.uploader.filesystem%"
 
-knp_snappy:
-    pdf:
-        enabled: true
-        binary: "%wkhtmltopdf.bin_path%"
-        options: []
-    image:
-        enabled: true
-        binary: "%wkhtmltoimage.bin_path%"
-        options: []
-
 liip_imagine:
     loaders:
         default:
@@ -115,11 +105,6 @@ payum:
             factory: offline
         cash_on_delivery:
             factory: offline
-
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        sonata.block.service.text: ~
 
 stof_doctrine_extensions:
     default_locale: "%locale%"
