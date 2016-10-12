@@ -26,7 +26,7 @@ final class ImmutableLocaleProviderSpec extends ObjectBehavior
     {
         $locales = [
             'pl_PL' => true,
-            'en_US' => false
+            'en_US' => false,
         ];
 
         $this->beConstructedWith($locales, 'pl_PL');

@@ -38,7 +38,7 @@ final class FakeChannelContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelContext');
+        $this->shouldHaveType(FakeChannelContext::class);
     }
 
     function it_implements_channel_context_interface()

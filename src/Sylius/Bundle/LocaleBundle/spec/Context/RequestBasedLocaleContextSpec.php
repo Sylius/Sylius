@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\LocaleBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\LocaleBundle\Context\RequestBasedLocaleContext;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;

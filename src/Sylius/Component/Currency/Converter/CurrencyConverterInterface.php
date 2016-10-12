@@ -12,29 +12,27 @@
 namespace Sylius\Component\Currency\Converter;
 
 /**
- * Interface to be implemented by the currency converter service.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CurrencyConverterInterface
 {
     /**
-     * Convert given value in base currency to equal amount in target currency.
-     *
-     * @param int    $value
+     * @param int $value
      * @param string $targetCurrencyCode
      *
      * @return int
+     *
+     * @throws UnavailableCurrencyException
      */
     public function convertFromBase($value, $targetCurrencyCode);
 
     /**
-     * Convert given value in actual currency to equal amount in base currency.
-     *
-     * @param int    $value
+     * @param int $value
      * @param string $sourceCurrencyCode
      *
      * @return int
+     *
+     * @throws UnavailableCurrencyException
      */
     public function convertToBase($value, $sourceCurrencyCode);
 }

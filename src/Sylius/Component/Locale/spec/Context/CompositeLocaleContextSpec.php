@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Context\CompositeLocaleContext;
-use Sylius\Component\Locale\Model\LocaleInterface;
 
 /**
  * @mixin CompositeLocaleContext

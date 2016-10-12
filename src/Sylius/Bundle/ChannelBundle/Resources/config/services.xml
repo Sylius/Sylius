@@ -33,11 +33,11 @@
             <tag name="sylius.context.channel.request_based.resolver" />
         </service>
 
-        <service id="sylius.collector.channel" class="Sylius\Bundle\ChannelBundle\Collector\ChannelCollector" public="false">
+        <service id="sylius.channel_collector" class="Sylius\Bundle\ChannelBundle\Collector\ChannelCollector" public="false">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.context.channel" />
             <argument>false</argument>
-            <tag name="data_collector" template="SyliusChannelBundle:Collector:channel.html.twig" id="sylius.collector.channel" />
+            <tag name="data_collector" template="SyliusChannelBundle:Collector:channel.html.twig" id="sylius.channel_collector" />
         </service>
     </services>
 </container>

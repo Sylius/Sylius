@@ -29,7 +29,7 @@ final class ImmutableCurrencyContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Currency\Context\ImmutableCurrencyContext');
+        $this->shouldHaveType(ImmutableCurrencyContext::class);
     }
 
     function it_is_a_currency_context()
@@ -37,7 +37,7 @@ final class ImmutableCurrencyContextSpec extends ObjectBehavior
         $this->shouldImplement(CurrencyContextInterface::class);
     }
 
-    function it_gets_currency()
+    function it_gets_a_currency()
     {
         $this->getCurrencyCode()->shouldReturn('EUR');
     }

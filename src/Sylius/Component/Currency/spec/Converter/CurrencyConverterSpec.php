@@ -12,11 +12,15 @@
 namespace spec\Sylius\Component\Currency\Converter;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Currency\Converter\CurrencyConverter;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Currency\Converter\UnavailableCurrencyException;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @mixin CurrencyConverter
+ */
 final class CurrencyConverterSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $currencyRepository)
@@ -26,25 +30,27 @@ final class CurrencyConverterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Currency\Converter\CurrencyConverter');
+        $this->shouldHaveType(CurrencyConverter::class);
     }
 
-    function it_implements_Sylius_currency_converter_interface()
+    function it_implements_a_currency_converter_interface()
     {
         $this->shouldImplement(CurrencyConverterInterface::class);
     }
 
-    function it_converts_to_any_currency(CurrencyInterface $currency, $currencyRepository)
-    {
-        $currencyRepository->findOneBy(['code' => 'USD'])->shouldBeCalled()->willReturn($currency);
-        $currency->getExchangeRate()->shouldBeCalled()->willReturn(1.30);
+    function it_converts_to_any_currency(
+        RepositoryInterface $currencyRepository,
+        CurrencyInterface $currency
+    ) {
+        $currencyRepository->findOneBy(['code' => 'USD'])->willReturn($currency);
+        $currency->getExchangeRate()->willReturn(1.30);
 
         $this->convertFromBase(6555, 'USD')->shouldReturn(8522);
     }
 
     function it_throws_exception_if_currency_is_not_found($currencyRepository)
     {
-        $currencyRepository->findOneBy(['code' => 'EUR'])->shouldBeCalled()->willReturn(null);
+        $currencyRepository->findOneBy(['code' => 'EUR'])->willReturn(null);
 
         $this
             ->shouldThrow(new UnavailableCurrencyException('EUR'))
@@ -52,10 +58,12 @@ final class CurrencyConverterSpec extends ObjectBehavior
         ;
     }
 
-    function it_converts_to_base_currency(CurrencyInterface $currency, $currencyRepository)
-    {
-        $currencyRepository->findOneBy(['code' => 'PLN'])->shouldBeCalled()->willReturn($currency);
-        $currency->getExchangeRate()->shouldBeCalled()->willReturn(0.25);
+    function it_converts_to_base_currency(
+        RepositoryInterface $currencyRepository,
+        CurrencyInterface $currency
+    ) {
+        $currencyRepository->findOneBy(['code' => 'PLN'])->willReturn($currency);
+        $currency->getExchangeRate()->willReturn(0.25);
 
         $this->convertToBase(10000, 'PLN')->shouldReturn(40000);
     }

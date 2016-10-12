@@ -13,10 +13,14 @@ namespace spec\Sylius\Bundle\LocaleBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\Form\FormBuilder;
+use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin LocaleType
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class LocaleTypeSpec extends ObjectBehavior
@@ -28,44 +32,45 @@ final class LocaleTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\LocaleBundle\Form\Type\LocaleType');
+        $this->shouldHaveType(LocaleType::class);
     }
 
     function it_is_a_form_type()
     {
-        $this->shouldImplement('Symfony\Component\Form\FormTypeInterface');
+        $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_should_build_form_with_proper_fields(FormBuilder $builder)
+    function it_should_build_form_with_proper_fields(FormBuilderInterface $builder)
     {
         $builder
             ->add('code', 'locale', Argument::any())
-            ->willReturn($builder)
             ->shouldBeCalled()
+            ->willReturn($builder)
         ;
 
         $builder
             ->add('enabled', 'checkbox', Argument::any())
-            ->willReturn($builder)
             ->shouldBeCalled()
+            ->willReturn($builder)
         ;
 
         $this->buildForm($builder, []);
     }
 
-    function it_should_define_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
+    function it_defines_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
                 'data_class' => \Locale::class,
                 'validation_groups' => ['sylius'],
             ])
-            ->shouldBeCalled();
+            ->shouldBeCalled()
+        ;
 
         $this->configureOptions($resolver);
     }
 
-    function it_has_valid_name()
+    function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_locale');
     }

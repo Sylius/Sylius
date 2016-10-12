@@ -25,7 +25,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -38,7 +38,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('currency')->defaultValue('EUR')->cannotBeEmpty()->end()
+                ->scalarNode('currency')->defaultValue('USD')->cannotBeEmpty()->end()
             ->end()
         ;
 

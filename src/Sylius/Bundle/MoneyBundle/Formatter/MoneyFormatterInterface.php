@@ -21,6 +21,8 @@ interface MoneyFormatterInterface
      * @param string $locale
      *
      * @return string
+     *
+     * @throws \InvalidArgumentException
      */
     public function format($amount, $currencyCode, $locale = 'en');
 }

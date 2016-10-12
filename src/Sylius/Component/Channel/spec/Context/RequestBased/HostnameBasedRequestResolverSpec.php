@@ -32,7 +32,7 @@ final class HostnameBasedRequestResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver');
+        $this->shouldHaveType(HostnameBasedRequestResolver::class);
     }
 
     function it_implements_request_resolver_interface()

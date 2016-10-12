@@ -29,6 +29,6 @@
         <field fieldName="updatedAt" name="updatedAt" type="date">
             <gedmo:timestampable on="update"/>
         </field>
-
     </mapped-superclass>
+
 </doctrine-mongo-mapping>

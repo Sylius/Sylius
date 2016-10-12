@@ -19,11 +19,9 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Channels bundle.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusChannelBundle extends AbstractResourceBundle
+final class SyliusChannelBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

@@ -19,7 +19,11 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface LocaleInterface extends ResourceInterface, CodeAwareInterface, TimestampableInterface, ToggleableInterface
+interface LocaleInterface extends
+    ResourceInterface,
+    CodeAwareInterface,
+    TimestampableInterface,
+    ToggleableInterface
 {
     /**
      * @param string|null $locale
