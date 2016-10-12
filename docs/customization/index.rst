@@ -1,6 +1,8 @@
 The Customization Guide
 =======================
 
+The Customization Guide is helpful while wanting to adapt Sylius to your personal business needs.
+
 .. toctree::
     :hidden:
 

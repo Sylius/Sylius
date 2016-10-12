@@ -126,8 +126,9 @@ To achieve that you will need to:
                 if ($stockIsSufficient) {
                     continue;
                 }
-
-                $this->emailSender->send('out_of_stock', $admins, ['variant' => $variant]);
+                foreach($admins as $admin) {
+                    $this->emailSender->send('out_of_stock', $admin->getEmail(), ['variant' => $variant]);
+                }
             }
         }
     }

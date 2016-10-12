@@ -54,6 +54,14 @@ You will need to add these few lines to the ``state_machine.yml``:
 
 After that your new transition will be available alongside other transitions that already were definded in that state machine.
 
+How to remove a state and its transitions?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. warning::
+
+    If you are willing do remove a state or a transition you have to override **the whole states/transitions section**
+    of the state machine you are willing to modify.
+
 How to add a new callback?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -66,7 +74,7 @@ You will need to add these few lines to the ``state_machine.yml``:
 
     # app/config/state_machine.yml
     winzou_state_machine:
-        sylius_order:e
+        sylius_order:
             callbacks:
                 after:
                     sylius_send_email:

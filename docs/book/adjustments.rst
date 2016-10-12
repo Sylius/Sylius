@@ -35,7 +35,7 @@ The adjustment needs also the ``amount`` - which is the amount of money that wil
    The ``amount`` is always saved in the **base currency**.
 
 Additionally you can set the ``label`` that will be displayed on the order view and whether your adjustment is ``neutral`` -
-**neutral adjustments** do not affect the order's total.
+**neutral adjustments** do not affect the order's total (like for example taxes included in price).
 
 .. code-block:: php
 

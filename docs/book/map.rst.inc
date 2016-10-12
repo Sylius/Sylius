@@ -18,6 +18,7 @@
 * :doc:`/book/taxons`
 * :doc:`/book/inventory`
 * :doc:`/book/orders`
+* :doc:`/book/adjustments`
 * :doc:`/book/checkout`
 * :doc:`/book/shipments`
 * :doc:`/book/payments`
@@ -25,7 +26,6 @@
 * :doc:`/book/pricing`
 * :doc:`/book/promotions`
 * :doc:`/book/coupons`
-* :doc:`/book/content`
 * :doc:`/book/emails`
+* :doc:`/book/content`
 * :doc:`/book/settings`
-* :doc:`/book/adjustments`

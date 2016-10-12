@@ -1,7 +1,8 @@
 The Book
 ========
 
-The Developer's guide to leveraging the flexibility of Sylius.
+The Developer's guide to leveraging the flexibility of Sylius. Here you will find all the concepts used in Sylius.
+The Books helps to understand how Sylius works.
 
 .. toctree::
     :hidden:
@@ -26,6 +27,7 @@ The Developer's guide to leveraging the flexibility of Sylius.
     taxons
     inventory
     orders
+    adjustments
     checkout
     shipments
     payments
@@ -33,9 +35,8 @@ The Developer's guide to leveraging the flexibility of Sylius.
     pricing
     promotions
     coupons
-    content
     emails
+    content
     settings
-    adjustments
 
 .. include:: /book/map.rst.inc
