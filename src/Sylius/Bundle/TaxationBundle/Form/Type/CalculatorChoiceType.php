@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Calculator choice type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CalculatorChoiceType extends AbstractType
