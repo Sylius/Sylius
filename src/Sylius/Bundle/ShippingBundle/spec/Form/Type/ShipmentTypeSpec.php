@@ -13,10 +13,13 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 
 /**
+ * @mixin ShipmentType
+ *
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
 final class ShipmentTypeSpec extends ObjectBehavior
@@ -33,7 +36,7 @@ final class ShipmentTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType');
+        $this->shouldHaveType(ShipmentType::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)

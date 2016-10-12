@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Shipping method translation form type.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 class ShippingMethodTranslationType extends AbstractResourceType

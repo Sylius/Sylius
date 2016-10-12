@@ -16,11 +16,14 @@ use SM\Factory\FactoryInterface;
 use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
+use Sylius\Component\Shipping\Processor\ShipmentProcessor;
 use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\Shipping\ShipmentUnitTransitions;
 
 /**
+ * @mixin ShipmentProcessor
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class ShipmentProcessorSpec extends ObjectBehavior
@@ -32,7 +35,7 @@ final class ShipmentProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Processor\ShipmentProcessor');
+        $this->shouldHaveType(ShipmentProcessor::class);
     }
 
     function it_implements_Sylius_shipment_processor_interface()
@@ -41,7 +44,7 @@ final class ShipmentProcessorSpec extends ObjectBehavior
     }
 
     function it_updates_shipment_states(
-        $factory,
+        FactoryInterface $factory,
         ShipmentInterface $shipment,
         StateMachineInterface $sm
     ) {
@@ -53,7 +56,7 @@ final class ShipmentProcessorSpec extends ObjectBehavior
     }
 
     function it_updates_unit_states(
-        $factory,
+        FactoryInterface $factory,
         ShipmentUnitInterface $unit,
         StateMachineInterface $sm
     ) {

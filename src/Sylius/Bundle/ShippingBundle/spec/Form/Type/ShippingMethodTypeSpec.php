@@ -15,9 +15,9 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
-use Sylius\Component\Shipping\Calculator\PerUnitRateCalculator;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -26,6 +26,8 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin ShippingMethodType
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -45,12 +47,17 @@ final class ShippingMethodTypeSpec extends ObjectBehavior
         $checkerRegistry->all()->willReturn([]);
     }
 
+    function it_is_initializable()
+    {
+        $this->shouldHaveType(ShippingMethodType::class);
+    }
+
     function it_is_a_form_type()
     {
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder, $calculatorRegistry)
+    function it_builds_form_with_proper_fields(FormBuilder $builder, ServiceRegistryInterface $calculatorRegistry)
     {
         $calculatorRegistry->all()->willReturn([]);
 
@@ -96,7 +103,7 @@ final class ShippingMethodTypeSpec extends ObjectBehavior
 
     function it_adds_build_shipping_method_event_subscriber(
         FormBuilder $builder,
-        $calculatorRegistry
+        ServiceRegistryInterface $calculatorRegistry
     ) {
         $calculatorRegistry->all()->willReturn([]);
         $builder->add(Argument::any(), Argument::cetera())->willReturn($builder);
@@ -117,15 +124,15 @@ final class ShippingMethodTypeSpec extends ObjectBehavior
     }
 
     function it_builds_prototypes_forms_for_calculators(
-        $calculatorRegistry,
+        ServiceRegistryInterface $calculatorRegistry,
         FormBuilder $builder,
         FormBuilder $flatRateFormBuilder,
         Form $flatRateForm,
-        FlatRateCalculator $flatRateCalculator,
+        CalculatorInterface $flatRateCalculator,
         FormBuilder $perUnitFormBuilder,
         Form $perUnitForm,
-        PerUnitRateCalculator $perUnitRateCalculator,
-        $formRegistry
+        CalculatorInterface $perUnitRateCalculator,
+        FormRegistryInterface $formRegistry
     ) {
         $builder
             ->add(Argument::any(), Argument::cetera())

@@ -13,16 +13,19 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Calculator\FlexibleRateCalculator;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
+ * @mixin FlexibleRateCalculator
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class FlexibleRateCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\FlexibleRateCalculator');
+        $this->shouldHaveType(FlexibleRateCalculator::class);
     }
 
     function it_should_implement_Sylius_shipping_calculator_interface()

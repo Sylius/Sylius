@@ -16,8 +16,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Shipping category form.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingCategoryType extends AbstractResourceType

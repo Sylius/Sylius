@@ -12,15 +12,18 @@
 namespace spec\Sylius\Component\Shipping\Exception;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 
 /**
+ * @mixin UnresolvedDefaultShippingMethodException
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class UnresolvedDefaultShippingMethodExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException');
+        $this->shouldHaveType(UnresolvedDefaultShippingMethodException::class);
     }
 
     function it_is_an_exception()

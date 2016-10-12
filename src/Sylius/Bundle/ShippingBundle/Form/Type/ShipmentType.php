@@ -15,9 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Shipping form type.
- */
 class ShipmentType extends AbstractResourceType
 {
     /**

@@ -20,5 +20,4 @@ class UnresolvedDefaultShippingMethodException extends \Exception
     {
         parent::__construct('Default shipping method could not be resolved!');
     }
-
 }

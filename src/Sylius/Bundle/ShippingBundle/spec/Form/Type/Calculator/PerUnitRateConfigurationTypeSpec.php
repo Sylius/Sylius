@@ -13,18 +13,21 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerUnitRateConfigurationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin PerUnitRateConfigurationType
+ *
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
 final class PerUnitRateConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerUnitRateConfigurationType');
+        $this->shouldHaveType(PerUnitRateConfigurationType::class);
     }
 
     function it_is_a_form()
