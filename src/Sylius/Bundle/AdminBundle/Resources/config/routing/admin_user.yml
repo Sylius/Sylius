@@ -1,17 +1,18 @@
-sylius_admin_administrator:
+sylius_admin_admin_user:
     resource: |
         alias: sylius.admin_user
         section: admin
+        path: users
         templates: SyliusAdminBundle:Crud
         except: ['show']
         redirect: index
-        grid: sylius_admin_administrator
+        grid: sylius_admin_admin_user
         permission: true
         vars:
             all:
-                subheader: sylius.ui.manage_admin_users
+                subheader: sylius.ui.manage_users_able_to_access_administration_panel
                 templates:
-                    form: SyliusAdminBundle:Administrator:_form.html.twig
+                    form: SyliusAdminBundle:AdminUser:_form.html.twig
             index:
                 icon: users
     type: sylius.resource

@@ -77,16 +77,20 @@ sylius_fixtures:
                         custom:
                             -
                                 email: "sylius@example.com"
-                                username: "John Doe"
+                                username: "sylius"
                                 password: "sylius"
                                 enabled: true
                                 locale_code: "%locale%"
+                                first_name: "John"
+                                last_name: "Doe"
                             -
                                 email: "api@example.com"
-                                username: "Luke Brushwood"
+                                username: "api"
                                 password: "sylius-api"
                                 enabled: true
                                 locale_code: "%locale%"
+                                first_name: "Luke"
+                                last_name: "Brushwood"
                                 api: true
 
                 tax_category:

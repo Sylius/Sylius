@@ -408,6 +408,7 @@ sylius:
         manage_tax_rates: 'Manage tax rates'
         manage_taxation_of_your_products: Manage taxation of your products
         manage_users: 'Manage users'
+        manage_users_able_to_access_administration_panel: "Manage users able to access the administration panel"
         manage_variants: Manage variants
         manage_your_customers: Manage your customers
         manage_your_personal_information_and_preferences: Manage your personal information and preferences
@@ -541,6 +542,7 @@ sylius:
         placed_at: 'Placed at'
         postcode: Postcode
         powered_by: Powered by
+        preferences: Preferences
         presentation: Presentation
         previous: Previous
         price: Price

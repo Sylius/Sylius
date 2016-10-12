@@ -1,6 +1,6 @@
 sylius_grid:
     grids:
-        sylius_admin_administrator:
+        sylius_admin_admin_user:
             driver:
                 name: doctrine/orm
                 options:
@@ -8,37 +8,49 @@ sylius_grid:
             sorting:
                 createdAt: asc
             fields:
+                firstName:
+                    type: string
+                    label: sylius.ui.first_name
+                    sortable: ~
+                lastName:
+                    type: string
+                    label: sylius.ui.last_name
+                    sortable: ~
                 username:
                     type: string
                     label: sylius.ui.username
+                    sortable: ~
                 email:
                     type: string
                     label: sylius.ui.email
+                    sortable: ~
                 createdAt:
                     type: datetime
                     label: sylius.ui.registration_date
                     sortable: ~
                     options:
                         format: d-m-Y H:i
-                confirmed:
+                enabled:
                     type: twig
-                    label: sylius.ui.confirmed
-                    path: .
+                    label: sylius.ui.enabled
+                    sortable: ~
                     options:
-                        template: SyliusAdminBundle:Administrator/Field:confirmed.html.twig
-                api:
-                    type: twig
-                    label: sylius.ui.api
-                    path: .
-                    options:
-                        template: SyliusAdminBundle:Administrator/Field:api.html.twig
+                        template: SyliusAdminBundle:Grid/Field:enabled.html.twig
             filters:
                 email:
                     type: string
                     label: sylius.ui.email
                 username:
                     type: string
+                    label: sylius.ui.username
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
+                name:
+                    type: string
                     label: sylius.ui.name
+                    options:
+                        fields: [firstName, lastName]
             actions:
                 main:
                     create:
