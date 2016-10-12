@@ -14,6 +14,7 @@ namespace Sylius\Bundle\UiBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -41,8 +42,11 @@ final class SecurityController
      * @param FormFactoryInterface $formFactory
      * @param EngineInterface $templatingEngine
      */
-    public function __construct(AuthenticationUtils $authenticationUtils, FormFactoryInterface $formFactory, EngineInterface $templatingEngine)
-    {
+    public function __construct(
+        AuthenticationUtils $authenticationUtils,
+        FormFactoryInterface $formFactory,
+        EngineInterface $templatingEngine
+    ) {
         $this->authenticationUtils = $authenticationUtils;
         $this->formFactory = $formFactory;
         $this->templatingEngine = $templatingEngine;
@@ -50,6 +54,8 @@ final class SecurityController
 
     /**
      * @param Request $request
+     *
+     * @return Response
      */
     public function loginAction(Request $request)
     {

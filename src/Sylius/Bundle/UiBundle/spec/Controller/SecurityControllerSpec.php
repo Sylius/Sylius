@@ -36,7 +36,7 @@ final class SecurityControllerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UiBundle\Controller\SecurityController');
+        $this->shouldHaveType(SecurityController::class);
     }
 
     function it_renders_login_form(

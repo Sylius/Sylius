@@ -13,11 +13,15 @@ namespace spec\Sylius\Bundle\ApiBundle\Model;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use FOS\OAuthServerBundle\Entity\ClientManager;
+use FOS\OAuthServerBundle\Entity\ClientManager as FOSClientManager;
 use FOS\OAuthServerBundle\Model\ClientInterface;
 use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ApiBundle\Model\ClientManager;
 
+/**
+ * @mixin ClientManager
+ */
 final class ClientManagerSpec extends ObjectBehavior
 {
     function let(EntityManager $em, EntityRepository $repository, $clientClass = 'Client/Class/String')
@@ -28,12 +32,12 @@ final class ClientManagerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ApiBundle\Model\ClientManager');
+        $this->shouldHaveType(ClientManager::class);
     }
 
     function it_extends_fos_oauth_server_client_manager()
     {
-        $this->shouldHaveType(ClientManager::class);
+        $this->shouldHaveType(FOSClientManager::class);
     }
 
     function it_implements_fos_oauth_server_client_manager_interface()
@@ -43,7 +47,7 @@ final class ClientManagerSpec extends ObjectBehavior
 
     function it_finds_client_by_public_id(ClientInterface $client, $repository)
     {
-        $repository->findOneBy(['randomId' => 'random_string'])->shouldBeCalled()->willReturn($client);
+        $repository->findOneBy(['randomId' => 'random_string'])->willReturn($client);
 
         $this->findClientByPublicId('random_string')->shouldReturn($client);
     }

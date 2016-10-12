@@ -11,17 +11,9 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.menu_builder.admin.main.class">Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.menu_builder.admin.main" class="%sylius.menu_builder.admin.main.class%" parent="sylius.menu_builder">
+        <service id="sylius.menu_builder.admin.main" class="Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder" parent="sylius.menu_builder">
             <argument type="service" id="sylius.resource_controller.authorization_checker" />
         </service>
         <service id="sylius.menu.admin.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.admin.main" factory-method="createMenu" scope="request">
@@ -29,5 +21,4 @@
             <tag name="knp_menu.menu" alias="sylius.admin.main" />
         </service>
     </services>
-
 </container>

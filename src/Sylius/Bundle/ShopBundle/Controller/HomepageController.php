@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ShopBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

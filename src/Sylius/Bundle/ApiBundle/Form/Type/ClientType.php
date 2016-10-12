@@ -12,11 +12,10 @@
 namespace Sylius\Bundle\ApiBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Api client type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ClientType extends AbstractResourceType
@@ -27,7 +26,7 @@ class ClientType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('secret', 'text', [
+            ->add('secret', TextType::class, [
                 'label' => 'sylius.form.api_client.secret',
             ])
         ;

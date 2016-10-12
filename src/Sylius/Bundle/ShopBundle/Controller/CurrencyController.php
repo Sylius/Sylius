@@ -80,7 +80,7 @@ final class CurrencyController
      *
      * @return Response
      */
-    public function switchCurrencyAction(Request $request, $code)
+    public function switchAction(Request $request, $code)
     {
         if (!in_array($code, $this->currencyProvider->getAvailableCurrenciesCodes())) {
             throw new HttpException(

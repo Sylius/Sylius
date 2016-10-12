@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
- * Api bundle.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusApiBundle extends AbstractResourceBundle

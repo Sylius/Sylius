@@ -11,11 +11,7 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sylius\Bundle\ApiBundle\Model\RefreshToken" table="sylius_api_refresh_token">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
@@ -28,5 +24,4 @@
             <join-column name="user_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
     </mapped-superclass>
-
 </doctrine-mapping>
