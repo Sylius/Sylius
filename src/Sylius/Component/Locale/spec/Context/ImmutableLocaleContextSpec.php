@@ -32,7 +32,7 @@ final class ImmutableLocaleContextSpec extends ObjectBehavior
         $this->shouldHaveType(ImmutableLocaleContext::class);
     }
 
-    function it_is_Sylius_locale_context()
+    function it_is_a_locale_context()
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }
