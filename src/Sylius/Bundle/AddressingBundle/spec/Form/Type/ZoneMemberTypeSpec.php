@@ -20,6 +20,8 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin ZoneMemberType
+ *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class ZoneMemberTypeSpec extends ObjectBehavior
@@ -31,17 +33,12 @@ final class ZoneMemberTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType');
+        $this->shouldHaveType(ZoneMemberType::class);
     }
 
     function it_is_a_form_type()
     {
         $this->shouldImplement(FormTypeInterface::class);
-    }
-
-    function it_is_a_Sylius_zone_member_type()
-    {
-        $this->shouldHaveType(ZoneMemberType::class);
     }
 
     function it_has_a_valid_name()

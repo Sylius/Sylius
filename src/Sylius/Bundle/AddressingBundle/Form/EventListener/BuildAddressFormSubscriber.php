@@ -22,13 +22,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * This listener adds the province field to form if needed.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jan Góralski <jan.goralski@lakion.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class BuildAddressFormSubscriber implements EventSubscriberInterface
+final class BuildAddressFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ObjectRepository
@@ -62,8 +60,6 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Removes or adds a province field based on the country set.
-     *
      * @param FormEvent $event
      */
     public function preSetData(FormEvent $event)
@@ -97,8 +93,6 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Removes or adds a province field based on the country set on submitted form.
-     *
      * @param FormEvent $event
      */
     public function preSubmit(FormEvent $event)

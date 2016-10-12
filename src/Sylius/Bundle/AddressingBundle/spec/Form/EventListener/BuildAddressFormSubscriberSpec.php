@@ -11,12 +11,11 @@
 
 namespace spec\Sylius\Bundle\AddressingBundle\Form\EventListener;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -25,6 +24,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
+ * @mixin BuildAddressFormSubscriber
+ *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
@@ -37,7 +38,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber');
+        $this->shouldHaveType(BuildAddressFormSubscriber::class);
     }
 
     function it_is_a_subscriber()

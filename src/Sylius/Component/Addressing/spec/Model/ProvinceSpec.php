@@ -13,17 +13,20 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\Province;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 
 /**
+ * @mixin Province
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProvinceSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Addressing\Model\Province');
+        $this->shouldHaveType(Province::class);
     }
 
     function it_implements_Sylius_country_province_interface()

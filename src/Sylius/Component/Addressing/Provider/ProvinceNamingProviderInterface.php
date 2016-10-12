@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Addressing\Provider;
+
 use Sylius\Component\Addressing\Model\AddressInterface;
 
 /**

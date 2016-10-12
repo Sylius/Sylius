@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Parameter;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class RegisterZoneFactoryPass implements CompilerPassInterface
+final class RegisterZoneFactoryPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
