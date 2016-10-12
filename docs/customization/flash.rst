@@ -25,9 +25,9 @@ In order to customize a resource flash in your project:
     You can create different files for different locales (languages). For example ``flashes.pl.yml`` should hold only polish flashes,
     as they will be visible when the current locale is ``PL``. Check :doc:`Locales </book/locales>` docs for more information.
 
-3. In this file configure the desired flash key and give it a translation.
+2. In this file configure the desired flash key and give it a translation.
 
-If you would like to change the flash message while creating a new Taxon, you will need to configure the flash under
+If you would like to change the flash message while updating a Taxon, you will need to configure the flash under
 the ``sylius.taxon.update`` key:
 
 .. code-block:: yaml
