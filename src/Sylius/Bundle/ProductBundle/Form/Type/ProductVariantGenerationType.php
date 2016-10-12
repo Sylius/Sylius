@@ -23,10 +23,10 @@ class ProductVariantGenerationType extends AbstractResourceType
     /**
      * @var EventSubscriberInterface
      */
-    private $generateProductVariants;
+    private $generateProductVariantsSubscriber;
 
     /**
-     * @param string $dataClass FQCN
+     * @param string $dataClass
      * @param string[] $validationGroups
      * @param EventSubscriberInterface $generateProductVariants
      */
@@ -34,7 +34,7 @@ class ProductVariantGenerationType extends AbstractResourceType
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->generateProductVariants = $generateProductVariants;
+        $this->generateProductVariantsSubscriber = $generateProductVariants;
     }
 
     /**
@@ -49,7 +49,7 @@ class ProductVariantGenerationType extends AbstractResourceType
                 'allow_delete' => true,
                 'by_reference' => false,
             ])
-            ->addEventSubscriber($this->generateProductVariants);
+            ->addEventSubscriber($this->generateProductVariantsSubscriber);
         ;
     }
 

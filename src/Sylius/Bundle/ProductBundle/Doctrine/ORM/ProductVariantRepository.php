@@ -32,7 +32,8 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
      */
     public function createQueryBuilderWithProduct($productId)
     {
-        return $this->createQueryBuilder('o')
+        return $this
+            ->createQueryBuilder('o')
             ->where('o.product = :productId')
             ->setParameter('productId', $productId)
         ;

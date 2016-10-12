@@ -18,8 +18,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
- * Form event listener that builds variant form dynamically based on data.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class BuildProductVariantFormSubscriber implements EventSubscriberInterface
@@ -42,12 +40,12 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
      */
     public static function getSubscribedEvents()
     {
-        return [FormEvents::PRE_SET_DATA => 'preSetData'];
+        return [
+            FormEvents::PRE_SET_DATA => 'preSetData',
+        ];
     }
 
     /**
-     * Builds proper variant form after setting the product.
-     *
      * @param FormEvent $event
      */
     public function preSetData(FormEvent $event)
@@ -62,12 +60,13 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
 
         $product = $productVariant->getProduct();
 
-        // If the product has options, lets add this configuration field.
-        if ($product->hasOptions()) {
-            $form->add($this->factory->createNamed('optionValues', 'sylius_product_option_value_collection', $productVariant->getOptionValues(), [
-                'options' => $product->getOptions(),
-                'auto_initialize' => false,
-            ]));
+        if (!$product->hasOptions()) {
+            return;
         }
+
+        $form->add($this->factory->createNamed('optionValues', 'sylius_product_option_value_collection', $productVariant->getOptionValues(), [
+            'options' => $product->getOptions(),
+            'auto_initialize' => false,
+        ]));
     }
 }

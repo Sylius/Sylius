@@ -61,14 +61,11 @@ final class ProductOptionFieldSubscriber implements EventSubscriberInterface
         /** Options should be disabled for configurable product if it has at least one defined variant */
         $disableOptions = (null !== $this->variantResolver->getVariant($product)) && $product->hasVariants();
 
-        $form->add(
-            'options',
-            'sylius_product_option_choice', [
-                'required' => false,
-                'disabled' => $disableOptions,
-                'multiple' => true,
-                'label' => 'sylius.form.product.options',
-            ]
-        );
+        $form->add('options', 'sylius_product_option_choice', [
+            'required' => false,
+            'disabled' => $disableOptions,
+            'multiple' => true,
+            'label' => 'sylius.form.product.options',
+        ]);
     }
 }

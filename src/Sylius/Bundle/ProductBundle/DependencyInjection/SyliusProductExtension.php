@@ -44,7 +44,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
         $loader->load('services.xml');
 
         $formDefinition = $container->getDefinition('sylius.form.type.product_variant_generation');
-        $formDefinition->addArgument($container->getDefinition('sylius.form.listener.product_variant_generator'));
+        $formDefinition->addArgument($container->getDefinition('sylius.form.event_subscriber.product_variant_generator'));
 
         $container->getDefinition('sylius.form.type.product')->addArgument(new Reference('sylius.product_variant_resolver.default'));
     }

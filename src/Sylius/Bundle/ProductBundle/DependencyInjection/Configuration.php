@@ -11,7 +11,10 @@
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
-use Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionTranslationType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueTranslationType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType;
@@ -20,12 +23,10 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionTranslationType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueTranslationType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueType;
 use Sylius\Component\Product\Factory\ProductFactory;
 use Sylius\Component\Product\Factory\ProductVariantFactory;
+use Sylius\Component\Product\Model\Product;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOption;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionTranslation;
@@ -34,8 +35,6 @@ use Sylius\Component\Product\Model\ProductOptionValue;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductOptionValueTranslation;
 use Sylius\Component\Product\Model\ProductOptionValueTranslationInterface;
-use Sylius\Component\Product\Model\Product;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductTranslation;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
 use Sylius\Component\Product\Model\ProductVariant;
