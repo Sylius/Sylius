@@ -19,6 +19,7 @@ use Payum\Offline\Constants;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentAction;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
  * @mixin ConvertPaymentAction
@@ -64,13 +65,14 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
     function it_supports_only_converting_to_array_from_payment(
         Convert $fromSomethingElseToSomethingElseRequest,
         Convert $fromPaymentToArrayRequest,
-        PaymentInterface $payment
+        PaymentInterface $payment,
+        PaymentMethodInterface $method
     ) {
         $fromPaymentToArrayRequest->getTo()->willReturn('array');
         $fromPaymentToArrayRequest->getSource()->willReturn($payment);
 
-        $fromSomethingElseToSomethingElseRequest->getTo()->willReturn(Argument::any());
-        $fromSomethingElseToSomethingElseRequest->getSource()->willReturn(Argument::any());
+        $fromSomethingElseToSomethingElseRequest->getTo()->willReturn('json');
+        $fromSomethingElseToSomethingElseRequest->getSource()->willReturn($method);
 
         $this->supports($fromPaymentToArrayRequest)->shouldReturn(true);
         $this->supports($fromSomethingElseToSomethingElseRequest)->shouldReturn(false);

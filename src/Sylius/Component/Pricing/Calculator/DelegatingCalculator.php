@@ -15,9 +15,6 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
- * This class delegates the calculation of charge for particular subject
- * to a correct calculator instance, based on the type defined on the priceable.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DelegatingCalculator implements DelegatingCalculatorInterface

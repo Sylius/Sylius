@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Volume based pricing configuration form type.
- *
  * @author Liverbool <nukboon@gmail.com>
  */
 class VolumePriceConfigurationType extends AbstractType

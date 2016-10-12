@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Volume based pricing configuration form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VolumeBasedConfigurationType extends AbstractType

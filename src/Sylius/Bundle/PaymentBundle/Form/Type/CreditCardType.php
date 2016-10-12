@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Credit Card Form Type.
- *
  * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
 class CreditCardType extends AbstractResourceType
@@ -77,8 +75,6 @@ class CreditCardType extends AbstractResourceType
     }
 
     /**
-     * Get months to add as choices in expiryMonth.
-     *
      * @return array
      */
     private function getMonthChoices()

@@ -14,8 +14,6 @@ namespace Sylius\Component\Pricing\Calculator;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
- * Standard pricing calculator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class StandardCalculator implements CalculatorInterface

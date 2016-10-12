@@ -16,8 +16,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all price calculators in the container.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class RegisterPriceCalculatorsPass implements CompilerPassInterface

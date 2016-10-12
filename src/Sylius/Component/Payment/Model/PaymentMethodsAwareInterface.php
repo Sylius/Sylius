@@ -14,8 +14,6 @@ namespace Sylius\Component\Payment\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface for object referencing multiple payment methods.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface PaymentMethodsAwareInterface

@@ -14,17 +14,13 @@ namespace Sylius\Component\Pricing\Calculator;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
- * Delegating calculator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface DelegatingCalculatorInterface
 {
     /**
-     * Calculate the price for given subject.
-     *
      * @param PriceableInterface $subject
-     * @param array              $context
+     * @param array $context
      *
      * @return int
      */

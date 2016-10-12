@@ -16,8 +16,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Payment form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PaymentType extends AbstractResourceType
