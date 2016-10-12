@@ -52,9 +52,9 @@ final class ProductFactorySpec extends ObjectBehavior
 
     function it_creates_new_product_with_variant(
         FactoryInterface $factory,
+        FactoryInterface $variantFactory,
         ProductInterface $product,
-        ProductVariantInterface $variant,
-        FactoryInterface $variantFactory
+        ProductVariantInterface $variant
     ) {
         $variantFactory->createNew()->willReturn($variant);
 

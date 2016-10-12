@@ -12,14 +12,15 @@
 namespace spec\Sylius\Component\Product\Resolver;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 /**
+ * @mixin DefaultProductVariantResolver
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class DefaultProductVariantResolverSpec extends ObjectBehavior
@@ -46,7 +47,7 @@ final class DefaultProductVariantResolverSpec extends ObjectBehavior
         $this->getVariant($product)->shouldReturn($variant);
     }
 
-    function it_returns_null_if_first_variant_is_not_definied(ProductInterface $product, Collection $variants)
+    function it_returns_null_if_first_variant_is_not_defined(Collection $variants, ProductInterface $product)
     {
         $product->getVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(true);

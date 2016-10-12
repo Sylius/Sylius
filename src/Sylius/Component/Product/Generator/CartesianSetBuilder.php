@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Product\Generator;
 
+use Webmozart\Assert\Assert;
+
 /**
  * Builds the Cartesian product set from one or more given sets.
  *
@@ -45,18 +47,9 @@ final class CartesianSetBuilder
             return reset($setTuples);
         }
 
-        if (0 === $countTuples) {
-            throw new \InvalidArgumentException('The set builder requires a single array of one or more array sets.');
-        }
-
-        foreach ($setTuples as $tuple) {
-            if (!is_array($tuple)) {
-                throw new \InvalidArgumentException('The set builder requires a single array of one or more array sets.');
-            }
-        }
+        $setTuples = $this->validateTuples($setTuples, $countTuples);
 
         $keys = array_keys($setTuples);
-
         $a = array_shift($setTuples);
         $k = array_shift($keys);
 
@@ -65,17 +58,52 @@ final class CartesianSetBuilder
         $result = [];
 
         foreach ($a as $valueA) {
-            if ($valueA) {
-                foreach ($b as $valueB) {
-                    if ($isRecursiveStep) {
-                        $result[] = array_merge([$valueA], (array) $valueB);
-                    } else {
-                        $result[] = [$k => $valueA] + array_combine($keys, (array) $valueB);
-                    }
-                }
+            if (!$valueA) {
+                continue;
+            }
+
+            foreach ($b as $valueB) {
+                $result[] = $this->getResult($isRecursiveStep, $k, $keys, $valueA, $valueB);
             }
         }
 
         return $result;
+    }
+
+    /**
+     * @param array $setTuples
+     * @param int $countTuples
+     *
+     * @return array
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function validateTuples(array $setTuples, $countTuples)
+    {
+        Assert::notEq(0, $countTuples, 'The set builder requires a single array of one or more array sets.1');
+
+        foreach ($setTuples as $tuple) {
+            Assert::isArray($tuple, 'The set builder requires a single array of one or more array sets.');
+        }
+
+        return $setTuples;
+    }
+
+    /**
+     * @param bool $isRecursiveStep
+     * @param mixed $k
+     * @param array $keys
+     * @param mixed $valueA
+     * @param mixed $valueB
+     *
+     * @return array
+     */
+    private function getResult($isRecursiveStep, $k, array $keys, $valueA, $valueB)
+    {
+        if ($isRecursiveStep) {
+            return array_merge([$valueA], (array) $valueB);
+        }
+
+        return [$k => $valueA] + array_combine($keys, (array) $valueB);
     }
 }

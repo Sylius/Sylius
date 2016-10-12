@@ -17,15 +17,12 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
- * Model implementing this interface represents the option type, which can be
- * attached to an object.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProductOptionInterface extends
     CodeAwareInterface,
-    TimestampableInterface,
     ProductOptionTranslationInterface,
+    TimestampableInterface,
     TranslatableInterface
 {
     /**
