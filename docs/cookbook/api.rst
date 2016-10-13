@@ -1,13 +1,11 @@
-How to add a custom model?
-==========================
+How to use Sylius API?
+======================
 
-In some cases you may be needing to add new models to your application in order to cover unique business needs.
-The proccess of extending Sylius with new entities is simple and intuitive.
+In some cases you may be needing to manipulate the resources of your application via its API.
+This guide aims to introduce you to the world of Sylius API. For more sophisticated examples and cases follow the :doc:`API Guide </api/index>`.
 
-As an example we will take a **Supplier entity**, which may be really useful for shop maintenance.
-
-Authenitication
----------------
+Authentication
+--------------
 
 Creating OAuth client:
 
@@ -27,7 +25,12 @@ Run your application on a built-in server:
 
     $ php app/console server:start localhost:8000
 
-To obtain authorization token for the ``api@example.com`` user with password ``sylius-api`` run:
+.. tip::
+
+    If you have run Sylius fixtures(``$ php app/console sylius:fixtures:load``) you will have a default user for API already configured.
+    It is the ``api@example.com`` user with password ``sylius-api``.
+
+To obtain authorization token for the default user run:
 
 .. code-block:: bash
 
@@ -55,7 +58,10 @@ Use the ``access_token`` in the request that will create a new Supplier (:doc:`t
 Viewing a single resource instance via API
 ------------------------------------------
 
-If you would like to see the newly created resource use this command with ``1`` as ``{id)``. Remember to use **the authorization token**.
+If you would like to show details of a resource use this command with object's id as ``{id)``.
+Remember to use **the authorization token**.
+
+Assuming that you have created a supplier in the previous step, it will have id = 1.
 
 .. code-block:: bash
 
