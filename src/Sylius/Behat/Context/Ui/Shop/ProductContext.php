@@ -265,7 +265,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I start sorting products from the :typeOfSort(?:| price)
+     * @When /^I start sorting products from the (\w+)(?:| price)$/
      */
     public function iSortProductsBy($typeOfSort)
     {
