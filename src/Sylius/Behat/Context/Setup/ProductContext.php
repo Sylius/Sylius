@@ -180,11 +180,10 @@ final class ProductContext implements Context
 
     /**
      * @Given the store( also) has a product :productName with code :code
-     * @Given the store( also) has a product :productName with code :code, created at :date
      */
-    public function storeHasProductWithCode($productName, $code, $date = null)
+    public function storeHasProductWithCode($productName, $code)
     {
-        $product = $this->createProduct($productName, 0, $date);
+        $product = $this->createProduct($productName, 0);
 
         $product->setCode($code);
 
@@ -540,12 +539,17 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product)'s price is "([^"]+)"$/
+     * @Given /^the store(?:| also) has a product ("[^"]+") created at "(\d+\-\d+\-\d+)" and priced at ("(?:€|£|￥|\$)((?:\d+\.)?\d+)")$/
      */
-    public function thisProductPriceIs(ProductInterface $product, $price)
+    public function theStoreHasAProductCreatedAtAndPricedAt($productName, $date, $price)
     {
-        $product->getFirstVariant()->setPrice($this->getPriceFromString($price));
-        $this->objectManager->flush($product);
+        $product = $this->createProduct($productName, $price, $date);
+
+        if ($this->sharedStorage->has('channel')) {
+            $product->addChannel($this->sharedStorage->get('channel'));
+        }
+
+        $this->saveProduct($product);
     }
 
     /**
