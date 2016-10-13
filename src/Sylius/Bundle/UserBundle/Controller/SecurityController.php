@@ -14,32 +14,23 @@ namespace Sylius\Bundle\UserBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class SecurityController extends Controller
+class SecurityController extends Controller
 {
     /**
      * Login form action.
      */
     public function loginAction(Request $request)
     {
-        $template = $request->attributes->get('_sylius[template]', true);
-        if (null === $template) {
-            throw new HttpException(
-                Response::HTTP_NOT_ACCEPTABLE,
-                'The routing attribute "_sylius[template]" needs to be configured.'
-            );
-        }
-
-        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_security_login');
-
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
+        $template = $request->attributes->get('_sylius[template]', 'SyliusUserBundle:Security:login.html.twig', true);
+        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_security_login', true);
         $form = $this->get('form.factory')->createNamed('', $formType);
 
         return $this->renderLogin($template, [

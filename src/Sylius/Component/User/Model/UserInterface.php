@@ -97,12 +97,12 @@ interface UserInterface extends
     public function setPasswordResetToken($passwordResetToken);
 
     /**
-     * @return null|\DateTime
+     * @return \DateTime|null
      */
     public function getPasswordRequestedAt();
 
     /**
-     * @param null|\DateTime $date
+     * @param \DateTime|null $date
      */
     public function setPasswordRequestedAt(\DateTime $date = null);
 
@@ -129,17 +129,17 @@ interface UserInterface extends
     public function setVerifiedAt(\DateTime $verifiedAt = null);
 
     /**
-     * @param \DateTime $date
+     * @param \DateTime|null $date
      */
     public function setCredentialsExpireAt(\DateTime $date = null);
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getLastLogin();
 
     /**
-     * @param \DateTime $time
+     * @param \DateTime|null $time
      */
     public function setLastLogin(\DateTime $time = null);
 
@@ -175,7 +175,7 @@ interface UserInterface extends
     /**
      * @param string $provider
      *
-     * @return null|UserOAuthInterface
+     * @return UserOAuthInterface|null
      */
     public function getOAuthAccount($provider);
 

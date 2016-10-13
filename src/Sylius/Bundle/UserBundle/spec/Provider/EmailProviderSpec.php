@@ -16,7 +16,6 @@ use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
 use Sylius\Bundle\UserBundle\Provider\EmailProvider;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
