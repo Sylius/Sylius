@@ -284,12 +284,12 @@ In order to automate the process of coupon generation the component provides us 
     <?php
 
     use Sylius\Component\Promotion\Model\Promotion;
-    use Sylius\Component\Promotion\Generator\Instruction;
+    use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
     use Sylius\Component\Promotion\Generator\PromotionCouponGenerator;
 
     $promotion = new Promotion();
 
-    $instruction = new Instruction(); // $amount = 5 by default
+    $instruction = new PromotionCouponGeneratorInstruction(); // $amount = 5 by default
 
     /**
      * @param RepositoryInterface    $repository

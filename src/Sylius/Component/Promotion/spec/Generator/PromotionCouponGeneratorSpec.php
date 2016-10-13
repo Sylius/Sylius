@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Exception\FailedGenerationException;
 use Sylius\Component\Promotion\Generator\PromotionCouponGenerator;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInterface;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
-use Sylius\Component\Promotion\Generator\InstructionInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
@@ -54,7 +54,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         ObjectManager $objectManager,
         PromotionInterface $promotion,
         PromotionCouponInterface $promotionCoupon,
-        InstructionInterface $instruction,
+        PromotionCouponGeneratorInstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy
     ) {
         $instruction->getAmount()->willReturn(1);
@@ -79,7 +79,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
     function it_throws_failed_generation_exception_when_generation_is_not_possible(
         GenerationPolicyInterface $generationPolicy,
         PromotionInterface $promotion,
-        InstructionInterface $instruction
+        PromotionCouponGeneratorInstructionInterface $instruction
     ) {
         $instruction->getAmount()->willReturn(16);
         $instruction->getCodeLength()->willReturn(1);
@@ -93,7 +93,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         FactoryInterface $promotionCouponFactory,
         GenerationPolicyInterface $generationPolicy,
         PromotionInterface $promotion,
-        InstructionInterface $instruction
+        PromotionCouponGeneratorInstructionInterface $instruction
     ) {
         $instruction->getAmount()->willReturn(16);
         $instruction->getCodeLength()->willReturn(-1);

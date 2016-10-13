@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Promotion\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
-use Sylius\Component\Promotion\Generator\InstructionInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Generator\PercentageGenerationPolicy;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
@@ -40,7 +40,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     }
 
     function it_examine_possibility_of_coupon_generation(
-        InstructionInterface $instruction,
+        PromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository
     ) {
         $instruction->getAmount()->willReturn(17);
@@ -51,7 +51,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
     }
 
     function it_returns_possible_generation_amount(
-        InstructionInterface $instruction,
+        PromotionCouponGeneratorInstructionInterface $instruction,
         PromotionCouponRepositoryInterface $couponRepository
     ) {
         $instruction->getAmount()->willReturn(17);
@@ -62,7 +62,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $this->getPossibleGenerationAmount($instruction)->shouldReturn(7.0);
     }
 
-    function it_throws_invalid_argument_exception_when_expected_amount_is_null(InstructionInterface $instruction)
+    function it_throws_invalid_argument_exception_when_expected_amount_is_null(PromotionCouponGeneratorInstructionInterface $instruction)
     {
         $instruction->getAmount()->willReturn(null);
         $instruction->getCodeLength()->willReturn(1);
@@ -71,7 +71,7 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('getPossibleGenerationAmount', [$instruction]);
     }
 
-    function it_throws_invalid_argument_exception_when_expecte_code_length_is_null(InstructionInterface $instruction)
+    function it_throws_invalid_argument_exception_when_expecte_code_length_is_null(PromotionCouponGeneratorInstructionInterface $instruction)
     {
         $instruction->getAmount()->willReturn(18);
         $instruction->getCodeLength()->willReturn(null);

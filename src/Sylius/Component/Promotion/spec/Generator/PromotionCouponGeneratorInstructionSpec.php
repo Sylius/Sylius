@@ -12,24 +12,24 @@
 namespace spec\Sylius\Component\Promotion\Generator;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Generator\Instruction;
-use Sylius\Component\Promotion\Generator\InstructionInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 
 /**
- * @mixin Instruction
+ * @mixin PromotionCouponGeneratorInstruction
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class InstructionSpec extends ObjectBehavior
+final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Generator\Instruction');
+        $this->shouldHaveType('Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction');
     }
 
     function it_implements_instruction_interface()
     {
-        $this->shouldImplement(InstructionInterface::class);
+        $this->shouldImplement(PromotionCouponGeneratorInstructionInterface::class);
     }
 
     function it_should_have_amount_equal_to_5_by_default()

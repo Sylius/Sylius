@@ -42,7 +42,7 @@ class CouponController extends ResourceController
             throw new NotFoundHttpException('Promotion not found.');
         }
 
-        $form = $this->container->get('form.factory')->create('sylius_promotion_coupon_generate_instruction');
+        $form = $this->container->get('form.factory')->create('sylius_promotion_coupon_generator_instruction');
 
         if ($form->handleRequest($request)->isValid()) {
             $this->getGenerator()->generate($promotion, $form->getData());

@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CouponGenerateInstructionType extends AbstractResourceType
+class PromotionCouponGeneratorInstructionType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -48,6 +48,6 @@ class CouponGenerateInstructionType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_promotion_coupon_generate_instruction';
+        return 'sylius_promotion_coupon_generator_instruction';
     }
 }

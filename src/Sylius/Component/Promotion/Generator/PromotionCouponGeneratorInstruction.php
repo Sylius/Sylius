@@ -14,7 +14,7 @@ namespace Sylius\Component\Promotion\Generator;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class Instruction implements InstructionInterface
+final class PromotionCouponGeneratorInstruction implements PromotionCouponGeneratorInstructionInterface
 {
     /**
      * @var int

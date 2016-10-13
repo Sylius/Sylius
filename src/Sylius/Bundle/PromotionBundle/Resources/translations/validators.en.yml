@@ -28,7 +28,7 @@ sylius:
         usage_limit:
             min: Coupon usage limit must be at least {{ limit }}.
         is_invalid: Coupon code is invalid.
-    promotion_coupon_generate_instruction:
+    promotion_coupon_generator_instruction:
         amount:
             min: Amount of coupons to generate must be at least {{ limit }}.
             not_blank: Please enter amount of coupons to generate.

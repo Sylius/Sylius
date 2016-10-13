@@ -14,7 +14,7 @@ namespace Sylius\Component\Promotion\Generator;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface InstructionInterface
+interface PromotionCouponGeneratorInstructionInterface
 {
     /**
      * @return int

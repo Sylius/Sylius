@@ -83,7 +83,7 @@ Coupon Generator
 
 Making up new codes might become difficult if you would like to prepare a lot of coupons at once. That is why Sylius
 provides a service that generates random codes for you - `CouponGenerator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Promotion/Generator/CouponGenerator.php>`_.
-In its **Instruction** you can define the amount of coupons that will be generated, length of their codes, expiration date and usage limit.
+In its **PromotionCouponGeneratorInstruction** you can define the amount of coupons that will be generated, length of their codes, expiration date and usage limit.
 
 .. code-block:: php
 
@@ -94,9 +94,9 @@ In its **Instruction** you can define the amount of coupons that will be generat
    /** @var CouponGeneratorInterface $generator */
    $generator = $this->container->get('sylius.generator.promotion_coupon');
 
-   // Then create a new empty Intruction
-   /** @var InstructionInterface $instruction */
-   $instruction = new Instruction();
+   // Then create a new empty PromotionCouponGeneratorInstruction
+   /** @var PromotionCouponGeneratorInstructionInterface $instruction */
+   $instruction = new PromotionCouponGeneratorInstruction();
 
    // By default the instruction will generate 5 coupons with codes of length equal to 6
    // You can easily change it with the ``setAmount()`` and ``setLength()`` methods

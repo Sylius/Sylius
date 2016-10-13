@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\PromotionBundle\Validator\Constraints\CouponPossibleGenerationAmount;
 use Sylius\Bundle\PromotionBundle\Validator\CouponGenerationAmountValidator;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
-use Sylius\Component\Promotion\Generator\InstructionInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -45,7 +45,7 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
 
     function it_adds_violation(
         ExecutionContextInterface $context,
-        InstructionInterface $instruction,
+        PromotionCouponGeneratorInstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy
     ) {
         $constraint = new CouponPossibleGenerationAmount();
@@ -61,7 +61,7 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
 
     function it_not_adds_violation(
         ExecutionContextInterface $context,
-        InstructionInterface $instruction,
+        PromotionCouponGeneratorInstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy
     ) {
         $constraint = new CouponPossibleGenerationAmount();

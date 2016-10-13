@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Promotion\Exception;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
-use Sylius\Component\Promotion\Generator\InstructionInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 
 /**
  * @mixin FailedGenerationException
@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Generator\InstructionInterface;
  */
 final class FailedGenerationExceptionSpec extends ObjectBehavior
 {
-    function let(InstructionInterface $instruction, \InvalidArgumentException $previousException)
+    function let(PromotionCouponGeneratorInstructionInterface $instruction, \InvalidArgumentException $previousException)
     {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
