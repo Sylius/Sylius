@@ -70,6 +70,23 @@ If you would like to see a list of all instances of your resource use such a com
 
     $ curl -i -H "Authorization: Bearer DEF" http://localhost:8000/api/suppliers/
 
+Updating a single resource instance via API
+-------------------------------------------
+
+If you would like to modify the whole existing resource use such a command (with a valid authorization token of course):
+
+.. code-block:: bash
+
+    $ curl -i -X PUT -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Modified Name", "description": "Modified description", "enabled": false}' http://localhost:8000/api/suppliers/1
+
+Partially updating a single resource instance via API
+-----------------------------------------------------
+
+If you would like to update just one field of a resource use the PATCH method with such a command:
+
+.. code-block:: bash
+
+    $ curl -i -X PATCH -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"enabled": true}' http://localhost:8000/api/suppliers/1
 
 Learn more
 ----------
