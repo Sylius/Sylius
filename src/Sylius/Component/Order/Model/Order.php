@@ -63,7 +63,6 @@ class Order implements OrderInterface
     protected $adjustmentsTotal = 0;
 
     /**
-     * Calculated total.
      * Items total + adjustments total.
      *
      * @var int
@@ -93,22 +92,6 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function isCompleted()
-    {
-        return null !== $this->completedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function complete()
-    {
-        $this->completedAt = new \DateTime();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getCompletedAt()
     {
         return $this->completedAt;
@@ -120,6 +103,22 @@ class Order implements OrderInterface
     public function setCompletedAt(\DateTime $completedAt = null)
     {
         $this->completedAt = $completedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isCompleted()
+    {
+        return null !== $this->completedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function complete()
+    {
+        $this->completedAt = new \DateTime();
     }
 
     /**
@@ -249,17 +248,17 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setState($state)
+    public function getState()
     {
-        $this->state = $state;
+        return $this->state;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getState()
+    public function setState($state)
     {
-        return $this->state;
+        $this->state = $state;
     }
 
     /**

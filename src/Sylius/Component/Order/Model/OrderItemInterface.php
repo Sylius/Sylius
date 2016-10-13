@@ -15,8 +15,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * Interface for order line item model.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, ResourceInterface

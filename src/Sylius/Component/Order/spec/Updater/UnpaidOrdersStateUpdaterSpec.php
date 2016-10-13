@@ -37,7 +37,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         $this->shouldHaveType(UnpaidOrdersStateUpdater::class);
     }
 
-    function it_implements_expired_orders_state_updater_interface()
+    function it_implements_an_expired_orders_state_updater_interface()
     {
         $this->shouldImplement(UnpaidOrdersStateUpdaterInterface::class);
     }

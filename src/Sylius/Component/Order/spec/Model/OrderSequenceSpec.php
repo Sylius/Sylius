@@ -12,10 +12,6 @@
 namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Order\Model\AdjustmentInterface;
-use Sylius\Component\Order\Model\OrderItemInterface;
-use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Order\Model\OrderSequence;
 use Sylius\Component\Order\Model\OrderSequenceInterface;
 
@@ -28,7 +24,7 @@ final class OrderSequenceSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Order\Model\OrderSequence');
+        $this->shouldHaveType(OrderSequence::class);
     }
 
     function it_implements_order_sequence_interface()

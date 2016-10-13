@@ -27,8 +27,10 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
  */
 final class OrderModifierSpec extends ObjectBehavior
 {
-    function let(OrderProcessorInterface $orderProcessor, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
-    {
+    function let(
+        OrderProcessorInterface $orderProcessor,
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier
+    ) {
         $this->beConstructedWith($orderProcessor, $orderItemQuantityModifier);
     }
 
@@ -37,7 +39,7 @@ final class OrderModifierSpec extends ObjectBehavior
         $this->shouldHaveType(OrderModifier::class);
     }
 
-    function it_implements_order_modifier_interface()
+    function it_implements_an_order_modifier_interface()
     {
         $this->shouldImplement(OrderModifierInterface::class);
     }
@@ -55,7 +57,7 @@ final class OrderModifierSpec extends ObjectBehavior
         $this->addToOrder($order, $orderItem);
     }
 
-    function it_adds_new_item_to_order_if_different_order_item_is_in_a_order(
+    function it_adds_new_item_to_an_order_if_different_order_item_is_in_an_order(
         OrderInterface $order,
         OrderItemInterface $existingItem,
         OrderItemInterface $newItem,
@@ -74,7 +76,7 @@ final class OrderModifierSpec extends ObjectBehavior
         $this->addToOrder($order, $newItem);
     }
 
-    function it_changes_quntity_of_item_if_same_order_item_already_exists(
+    function it_changes_quantity_of_an_item_if_same_order_item_already_exists(
         OrderInterface $order,
         OrderItemInterface $existingItem,
         OrderItemInterface $newItem,
@@ -95,7 +97,7 @@ final class OrderModifierSpec extends ObjectBehavior
         $this->addToOrder($order, $newItem);
     }
 
-    function it_removes_order_item_from_order(
+    function it_removes_an_order_item_from_an_order(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderProcessorInterface $orderProcessor

@@ -35,12 +35,12 @@ final class ExpiredCartsRemoverSpec extends ObjectBehavior
         $this->shouldHaveType(ExpiredCartsRemover::class);
     }
 
-    function it_implements_expired_carts_remover_interface()
+    function it_implements_an_expired_carts_remover_interface()
     {
         $this->shouldImplement(ExpiredCartsRemoverInterface::class);
     }
 
-    function it_removes_cart_which_has_been_updated_before_configured_date(
+    function it_removes_a_cart_which_has_been_updated_before_configured_date(
         OrderRepositoryInterface $orderRepository,
         OrderInterface $firstCart,
         OrderInterface $secondCart
