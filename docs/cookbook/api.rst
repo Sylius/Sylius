@@ -88,9 +88,19 @@ If you would like to update just one field of a resource use the PATCH method wi
 
     $ curl -i -X PATCH -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"enabled": true}' http://localhost:8000/api/suppliers/1
 
+Deleting a single resource instance via API
+-------------------------------------------
+
+To delete a resource instance you need to call such a command (with an authorization token):
+
+.. code-block:: bash
+
+    $ curl -i -X DELETE -H "Authorization: Bearer DEF" http://localhost:8000/artists/1
+
 Learn more
 ----------
 
 * :doc:`API Guide </api/index>`
 * :doc:`ResourceBundle documentation </bundles/SyliusResourceBundle/index>`
 * :doc:`Customization Guide </customization/index>`
+* `The Lionframe docs <http://lakion.com/lionframe>`_
