@@ -13,6 +13,10 @@ namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -45,16 +49,16 @@ class UserType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('username', 'text', [
+            ->add('username', TextType::class, [
                 'label' => 'sylius.form.user.username',
             ])
-            ->add('email', 'email', [
+            ->add('email', EmailType::class, [
                 'label' => 'sylius.form.user.email',
             ])
-            ->add('plainPassword', 'password', [
+            ->add('plainPassword', PasswordType::class, [
                 'label' => 'sylius.form.user.password.label',
             ])
-            ->add('enabled', 'checkbox', [
+            ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.user.enabled',
             ])
         ;

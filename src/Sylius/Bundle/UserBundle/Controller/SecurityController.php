@@ -13,6 +13,7 @@ namespace Sylius\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -56,15 +57,12 @@ class SecurityController extends Controller
     }
 
     /**
-     * Renders the login template with the given parameters. Overwrite this function in
-     * an extended controller to provide additional data for the login template.
+     * @param string $template
+     * @param array $data
      *
-     * @param string $template The view template name
-     * @param array  $data
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    protected function renderLogin($template, array $data)
+    private function renderLogin($template, array $data)
     {
         return $this->render($template, $data);
     }

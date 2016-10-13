@@ -19,10 +19,8 @@ use Sylius\Component\User\Model\UserInterface;
 interface UserLoginInterface
 {
     /**
-     * Log in user.
-     *
      * @param UserInterface $user
-     * @param string        $firewallName
+     * @param string $firewallName
      */
     public function login(UserInterface $user, $firewallName = 'main');
 }

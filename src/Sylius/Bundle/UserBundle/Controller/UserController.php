@@ -21,6 +21,7 @@ use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,15 +34,20 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class UserController extends ResourceController
 {
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function changePasswordAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        if (!$this->container->get('security.context')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->container->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             throw new AccessDeniedException('You have to be registered user to access this section.');
         }
 
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
         $changePassword = new ChangePassword();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_change_password', true);
@@ -61,20 +67,38 @@ class UserController extends ResourceController
         );
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function requestPasswordResetTokenAction(Request $request)
     {
-        $generator = $this->container->get(sprintf('sylius.%s.generator.password_reset_token', $this->metadata->getName()));
+        /** @var GeneratorInterface $generator */
+        $generator = $this->container->get(sprintf('sylius.%s.token_generator.password_reset', $this->metadata->getName()));
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
     public function requestPasswordResetPinAction(Request $request)
     {
-        $generator = $this->container->get(sprintf('sylius.%s.generator.password_reset_pin', $this->metadata->getName()));
+        /** @var GeneratorInterface $generator */
+        $generator = $this->container->get(sprintf('sylius.%s.pin_generator.password_reset', $this->metadata->getName()));
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
 
+    /**
+     * @param Request $request
+     * @param string $token
+     *
+     * @return Response
+     */
     public function resetPasswordAction(Request $request, $token)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -89,12 +113,12 @@ class UserController extends ResourceController
             return $this->handleExpiredToken($configuration, $token, $user);
         }
 
-        $changePassword = new PasswordReset();
+        $passwordReset = new PasswordReset();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_reset_password', true);
-        $form = $this->createResourceForm($configuration, $formType, $changePassword);
+        $form = $this->createResourceForm($configuration, $formType, $passwordReset);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            return $this->handleResetPassword($request, $configuration, $user, $changePassword->getPassword());
+            return $this->handleResetPassword($request, $configuration, $user, $passwordReset->getPassword());
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -177,7 +201,7 @@ class UserController extends ResourceController
             return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
         }
 
-        $tokenGenerator = $this->container->get(sprintf('sylius.%s.generator.email_verification_token', $this->metadata->getName()));
+        $tokenGenerator = $this->container->get(sprintf('sylius.%s.token_generator.email_verification', $this->metadata->getName()));
         $user->setEmailVerificationToken($tokenGenerator->generate());
 
         $this->manager->flush();
@@ -194,6 +218,13 @@ class UserController extends ResourceController
         return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
     }
 
+    /**
+     * @param Request $request
+     * @param GeneratorInterface $generator
+     * @param string $senderEvent
+     *
+     * @return Response
+     */
     protected function prepareResetPasswordRequest(Request $request, GeneratorInterface $generator, $senderEvent)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -213,7 +244,7 @@ class UserController extends ResourceController
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
             }
 
-            $this->addFlash('success', 'sylius.user.reset_password.requested');
+            $this->addFlash('success', 'sylius.user.password.reset.requested');
             $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_user_security_login', true);
 
             return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
@@ -231,12 +262,23 @@ class UserController extends ResourceController
         );
     }
 
+    /**
+     * @param string $type
+     * @param string $message
+     */
     protected function addFlash($type, $message)
     {
         $translator = $this->container->get('translator');
         $this->container->get('session')->getFlashBag()->add($type, $translator->trans($message, [], 'flashes'));
     }
 
+    /**
+     * @param RequestConfiguration $configuration
+     * @param string $type
+     * @param mixed $resource
+     *
+     * @return FormInterface
+     */
     protected function createResourceForm(RequestConfiguration $configuration, $type, $resource)
     {
         if (!$configuration->isHtmlRequest()) {
@@ -264,9 +306,9 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($user, Response::HTTP_BAD_REQUEST));
         }
 
-        $this->addFlash('error', 'sylius.user.password.token_expired');
+        $this->addFlash('error', 'sylius.user.password.reset.token_expired');
 
-        $url = $this->generateResetPasswordRequestUrl($token);
+        $url = $this->generateRequestPasswordResetUrl($token);
 
         return new RedirectResponse($url);
     }
@@ -275,8 +317,6 @@ class UserController extends ResourceController
      * @param GeneratorInterface $generator
      * @param UserInterface $user
      * @param string $senderEvent
-     *
-     * @return Response
      */
     protected function handleResetPasswordRequest(GeneratorInterface $generator, UserInterface $user, $senderEvent)
     {
@@ -298,7 +338,7 @@ class UserController extends ResourceController
      * @param UserInterface $user
      * @param string $newPassword
      *
-     * @return RedirectResponse
+     * @return Response
      */
     protected function handleResetPassword(Request $request, RequestConfiguration $configuration, UserInterface $user, $newPassword)
     {
@@ -329,7 +369,7 @@ class UserController extends ResourceController
      * @param UserInterface $user
      * @param string $newPassword
      *
-     * @return RedirectResponse
+     * @return Response
      */
     protected function handleChangePassword(Request $request, RequestConfiguration $configuration, UserInterface $user, $newPassword)
     {
@@ -357,7 +397,7 @@ class UserController extends ResourceController
      *
      * @return string
      */
-    protected function generateResetPasswordRequestUrl($token)
+    protected function generateRequestPasswordResetUrl($token)
     {
         $router = $this->container->get('router');
 

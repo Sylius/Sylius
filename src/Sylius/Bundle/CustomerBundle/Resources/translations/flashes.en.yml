@@ -1,0 +1,3 @@
+sylius:
+    customer:
+        register: "Thank you for registering, check your email to verify your account."

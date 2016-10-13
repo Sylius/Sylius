@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\UserBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -19,6 +20,8 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
 
 /**
+ * @mixin AddUserFormSubscriber
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class AddUserFormSubscriberSpec extends ObjectBehavior
@@ -30,7 +33,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber');
+        $this->shouldHaveType(AddUserFormSubscriber::class);
     }
 
     function it_is_event_subscriber_instance()

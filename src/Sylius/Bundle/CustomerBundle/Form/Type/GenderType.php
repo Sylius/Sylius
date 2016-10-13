@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CustomerBundle\Form\Type;
 
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -39,7 +40,7 @@ class GenderType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**

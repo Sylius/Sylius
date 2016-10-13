@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class TokenUniquenessChecker implements UniquenessCheckerInterface
+final class TokenUniquenessChecker implements UniquenessCheckerInterface
 {
     /**
      * @var RepositoryInterface

@@ -15,11 +15,9 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
 /**
- * User bundle.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusUserBundle extends AbstractResourceBundle
+final class SyliusUserBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

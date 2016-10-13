@@ -33,7 +33,7 @@ final class AuthenticationSuccessHandlerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler');
+        $this->shouldHaveType(AuthenticationSuccessHandler::class);
     }
 
     function it_extends_default_authentication_success_handler()
@@ -46,10 +46,8 @@ final class AuthenticationSuccessHandlerSpec extends ObjectBehavior
         $this->shouldImplement(AuthenticationSuccessHandlerInterface::class);
     }
 
-    function it_returns_json_response_if_it_was_ajax_call(
-        Request $request,
-        TokenInterface $token
-    ) {
+    function it_returns_json_response_if_request_is_xml_based(Request $request, TokenInterface $token)
+    {
         $request->isXmlHttpRequest()->willReturn(true);
 
         $this->onAuthenticationSuccess($request, $token);

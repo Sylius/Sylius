@@ -12,12 +12,16 @@
 namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\UserBundle\EventListener\UserReloaderListener;
 use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
+ * @mixin UserReloaderListener
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class UserReloaderListenerSpec extends ObjectBehavior
@@ -29,10 +33,10 @@ final class UserReloaderListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserReloaderListener');
+        $this->shouldHaveType(UserReloaderListener::class);
     }
 
-    function it_reloads_user($userReloader, GenericEvent $event, UserInterface $user)
+    function it_reloads_user(UserReloaderInterface $userReloader, GenericEvent $event, UserInterface $user)
     {
         $event->getSubject()->willReturn($user);
 
@@ -41,11 +45,17 @@ final class UserReloaderListenerSpec extends ObjectBehavior
         $this->reloadUser($event);
     }
 
-    function it_throw_exception_for_other_implementations_then_user_interface($userReloader, GenericEvent $event, UserInterface $user)
-    {
-        $user = '';
-        $event->getSubject()->willReturn($user);
-        $this->shouldThrow(new UnexpectedTypeException($user, UserInterface::class))
-            ->duringReloadUser($event);
+    function it_throws_exception_when_reloading_not_a_user_interface(
+        UserReloaderInterface $userReloader,
+        GenericEvent $event
+    ) {
+        $event->getSubject()->willReturn('user');
+
+        $userReloader->reloadUser(Argument::any())->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(new UnexpectedTypeException('user', UserInterface::class))
+            ->during('reloadUser', [$event])
+        ;
     }
 }

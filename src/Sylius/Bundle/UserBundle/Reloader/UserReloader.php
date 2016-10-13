@@ -17,7 +17,7 @@ use Sylius\Component\User\Model\UserInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserReloader implements UserReloaderInterface
+final class UserReloader implements UserReloaderInterface
 {
     /**
      * @var ObjectManager

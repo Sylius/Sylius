@@ -30,7 +30,7 @@ class PasswordResetRequest
     }
 
     /**
-     * @param string $email the email
+     * @param string $email
      */
     public function setEmail($email)
     {

@@ -18,8 +18,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Mailer listener for User actions.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class MailerListener

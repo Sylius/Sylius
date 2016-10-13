@@ -28,11 +28,6 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This class contains the configuration information for the bundle.
- *
- * This information is solely responsible for how the different configuration
- * sections are normalized, and merged.
- *
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

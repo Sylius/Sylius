@@ -12,6 +12,10 @@
 namespace Sylius\Bundle\CustomerBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -25,16 +29,16 @@ class CustomerProfileType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('firstName', 'text', [
+            ->add('firstName', TextType::class, [
                 'label' => 'sylius.form.customer.first_name',
             ])
-            ->add('lastName', 'text', [
+            ->add('lastName', TextType::class, [
                 'label' => 'sylius.form.customer.last_name',
             ])
-            ->add('email', 'email', [
+            ->add('email', EmailType::class, [
                 'label' => 'sylius.form.customer.email',
             ])
-            ->add('birthday', 'birthday', [
+            ->add('birthday', BirthdayType::class, [
                 'label' => 'sylius.form.customer.birthday',
                 'widget' => 'single_text',
                 'required' => false,
@@ -42,11 +46,11 @@ class CustomerProfileType extends AbstractResourceType
             ->add('gender', 'sylius_gender', [
                 'label' => 'sylius.form.customer.gender',
             ])
-            ->add('phoneNumber', 'text', [
+            ->add('phoneNumber', TextType::class, [
                 'required' => false,
                 'label' => 'sylius.form.customer.phone_number',
             ])
-            ->add('subscribedToNewsletter', 'checkbox', [
+            ->add('subscribedToNewsletter', CheckboxType::class, [
                 'required' => false,
                 'label' => 'sylius.form.customer.subscribed_to_newsletter',
             ])

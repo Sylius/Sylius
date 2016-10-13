@@ -4,9 +4,9 @@
 security:
     providers:
         sylius_admin_user_provider:
-            id: sylius.admin_user.provider.email_or_name_based
+            id: sylius.admin_user_provider.email_or_name_based
         sylius_shop_user_provider:
-            id: sylius.shop_user.provider.email_or_name_based
+            id: sylius.shop_user_provider.email_or_name_based
     encoders:
         Sylius\Component\User\Model\UserInterface: sha512
     firewalls:

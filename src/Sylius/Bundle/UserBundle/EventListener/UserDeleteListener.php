@@ -18,8 +18,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * User delete listener.
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -38,7 +36,7 @@ class UserDeleteListener
 
     /**
      * @param TokenStorageInterface $tokenStorage
-     * @param SessionInterface         $session
+     * @param SessionInterface $session
      */
     public function __construct(TokenStorageInterface $tokenStorage, SessionInterface $session)
     {
@@ -48,11 +46,12 @@ class UserDeleteListener
 
     /**
      * @param GenericEvent $event
+     *
+     * @throws UnexpectedTypeException
      */
     public function deleteUser(GenericEvent $event)
     {
         $user = $event->getSubject();
-
         if (!$user instanceof UserInterface) {
             throw new UnexpectedTypeException(
                 $user,
@@ -60,7 +59,9 @@ class UserDeleteListener
             );
         }
 
-        if (($token = $this->tokenStorage->getToken()) && ($loggedUser = $token->getUser()) && ($loggedUser->getId() === $user->getId())) {
+        $token = $this->tokenStorage->getToken();
+
+        if ((null !== $token) && ($loggedUser = $token->getUser()) && ($loggedUser->getId() === $user->getId())) {
             $event->stopPropagation();
             $this->session->getBag('flashes')->add('error', 'Cannot remove currently logged in user.');
         }

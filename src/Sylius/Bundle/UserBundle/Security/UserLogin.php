@@ -43,11 +43,14 @@ class UserLogin implements UserLoginInterface
 
     /**
      * @param TokenStorageInterface $tokenStorage
-     * @param UserCheckerInterface     $userChecker
+     * @param UserCheckerInterface $userChecker
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher)
-    {
+    public function __construct(
+        TokenStorageInterface $tokenStorage,
+        UserCheckerInterface $userChecker,
+        EventDispatcherInterface $eventDispatcher
+    ) {
         $this->tokenStorage = $tokenStorage;
         $this->userChecker = $userChecker;
         $this->eventDispatcher = $eventDispatcher;
@@ -72,7 +75,7 @@ class UserLogin implements UserLoginInterface
 
     /**
      * @param UserInterface $user
-     * @param string        $firewallName
+     * @param string $firewallName
      *
      * @return UsernamePasswordToken
      */
