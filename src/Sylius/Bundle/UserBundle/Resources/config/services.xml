@@ -24,12 +24,12 @@
         </service>
 
         <!-- Utils -->
-        <service id="sylius.user.canonicalizer" class="Sylius\Component\User\Canonicalizer\Canonicalizer" />
-        <service id="sylius.user.password_encoder" class="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder">
+        <service id="sylius.canonicalizer" class="Sylius\Component\User\Canonicalizer\Canonicalizer" />
+        <service id="sylius.security.password_encoder" class="Sylius\Bundle\UserBundle\Security\UserPasswordEncoder">
             <argument type="service" id="security.encoder_factory" />
         </service>
-        <service id="sylius.user.password_updater" class="Sylius\Component\User\Security\PasswordUpdater">
-            <argument type="service" id="sylius.user.password_encoder" />
+        <service id="sylius.security.password_updater" class="Sylius\Component\User\Security\PasswordUpdater">
+            <argument type="service" id="sylius.security.password_encoder" />
         </service>
 
         <service id="sylius.security.user_login" class="Sylius\Bundle\UserBundle\Security\UserLogin">
@@ -40,7 +40,7 @@
 
         <!-- Listeners -->
         <service id="sylius.listener.password_updater" class="Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener">
-            <argument type="service" id="sylius.user.password_updater" />
+            <argument type="service" id="sylius.security.password_updater" />
             <tag name="kernel.event_listener" event="sylius.user.pre_password_reset" method="genericEventUpdater" />
             <tag name="kernel.event_listener" event="sylius.user.pre_password_change" method="genericEventUpdater" />
             <tag name="doctrine.event_listener" event="prePersist" />
@@ -71,5 +71,4 @@
             <tag name="form.type" alias="sylius_user_change_password" />
         </service>
     </services>
-
 </container>

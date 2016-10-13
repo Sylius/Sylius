@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -25,10 +27,10 @@ class UserLoginType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('_username', 'text', [
+            ->add('_username', TextType::class, [
                 'label' => 'sylius.form.user.email',
             ])
-            ->add('_password', 'password', [
+            ->add('_password', PasswordType::class, [
                 'label' => 'sylius.form.user.password.label',
             ])
         ;

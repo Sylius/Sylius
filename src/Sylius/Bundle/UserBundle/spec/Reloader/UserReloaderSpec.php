@@ -13,10 +13,13 @@ namespace spec\Sylius\Bundle\UserBundle\Reloader;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UserBundle\Reloader\UserReloader;
 use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
+ * @mixin UserReloader
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class UserReloaderSpec extends ObjectBehavior
@@ -28,7 +31,7 @@ final class UserReloaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Reloader\UserReloader');
+        $this->shouldHaveType(UserReloader::class);
     }
 
     function it_implements_user_reloader_interface()
@@ -36,7 +39,7 @@ final class UserReloaderSpec extends ObjectBehavior
         $this->shouldImplement(UserReloaderInterface::class);
     }
 
-    function it_reloads_user($objectManager, UserInterface $user)
+    function it_reloads_user(ObjectManager $objectManager, UserInterface $user)
     {
         $objectManager->refresh($user)->shouldBeCalled();
 

@@ -13,23 +13,33 @@ namespace Sylius\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class SecurityController extends Controller
+final class SecurityController extends Controller
 {
     /**
      * Login form action.
      */
     public function loginAction(Request $request)
     {
+        $template = $request->attributes->get('_sylius[template]', true);
+        if (null === $template) {
+            throw new HttpException(
+                Response::HTTP_NOT_ACCEPTABLE,
+                'The routing attribute "_sylius[template]" needs to be configured.'
+            );
+        }
+
+        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_security_login');
+
         $authenticationUtils = $this->get('security.authentication_utils');
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $template = $request->attributes->get('_sylius[template]', 'SyliusUserBundle:Security:login.html.twig', true);
-        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_security_login', true);
         $form = $this->get('form.factory')->createNamed('', $formType);
 
         return $this->renderLogin($template, [
@@ -56,15 +66,12 @@ class SecurityController extends Controller
     }
 
     /**
-     * Renders the login template with the given parameters. Overwrite this function in
-     * an extended controller to provide additional data for the login template.
+     * @param string $template
+     * @param array $data
      *
-     * @param string $template The view template name
-     * @param array  $data
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
-    protected function renderLogin($template, array $data)
+    private function renderLogin($template, array $data)
     {
         return $this->render($template, $data);
     }

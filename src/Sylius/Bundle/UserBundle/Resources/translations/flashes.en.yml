@@ -3,15 +3,12 @@ sylius:
         email:
             not_exist: User with this email does not exist.
         password:
-            invalid: Wrong current password.
-            request:
-                success: We send you an email with instructions to reset your password!
             reset:
                 success: Your password has been reset successfully!
+                token_expired: The password reset token has expired,
+                requested: If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.
             change:
                 success: Your password has been changed successfully!
-        reset_password:
-            requested: If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.
         verification:
             error: The verification token is invalid.
             notice:
@@ -19,5 +16,3 @@ sylius:
             success: Your email has been successfully verified.
             request:
                 success: An email with the verification link has been sent to your email address.
-    customer:
-        register: Thank you for registering, check your email to verify your account.

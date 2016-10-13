@@ -68,7 +68,7 @@ class AddUserFormSubscriber implements EventSubscriberInterface
 
             return;
         }
-        
+
         Assert::isInstanceOf($normData, UserAwareInterface::class);
 
         if ($this->isUserDataEmpty($data) && null === $normData->getUser()) {

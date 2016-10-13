@@ -57,7 +57,7 @@ class SyliusApiExtension extends AbstractResourceExtension implements PrependExt
             'refresh_token_class' => $resourcesConfig['api_refresh_token']['classes']['model'],
             'auth_code_class' => $resourcesConfig['api_auth_code']['classes']['model'],
             'service' => [
-                'user_provider' => 'sylius.admin_user.provider.email_or_name_based',
+                'user_provider' => 'sylius.admin_user_provider.email_or_name_based',
                 'client_manager' => 'sylius.oauth_server.client_manager',
             ],
         ]);

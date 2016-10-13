@@ -12,12 +12,15 @@
 namespace spec\Sylius\Bundle\UserBundle\Security;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UserBundle\Security\UserPasswordEncoder;
 use Sylius\Component\User\Model\CredentialsHolderInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 /**
+ * @mixin UserPasswordEncoder
+ *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 final class UserPasswordEncoderSpec extends ObjectBehavior
@@ -29,7 +32,7 @@ final class UserPasswordEncoderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Security\UserPasswordEncoder');
+        $this->shouldHaveType(UserPasswordEncoder::class);
     }
 
     function it_implements_password_updater_interface()
@@ -37,8 +40,11 @@ final class UserPasswordEncoderSpec extends ObjectBehavior
         $this->shouldImplement(UserPasswordEncoderInterface::class);
     }
 
-    function it_encodes_password(EncoderFactoryInterface $encoderFactory, PasswordEncoderInterface $passwordEncoder, CredentialsHolderInterface $user)
-    {
+    function it_encodes_password(
+        EncoderFactoryInterface $encoderFactory,
+        PasswordEncoderInterface $passwordEncoder,
+        CredentialsHolderInterface $user
+    ) {
         $user->getPlainPassword()->willReturn('topSecretPlainPassword');
         $user->getSalt()->willReturn('typicalSalt');
         $encoderFactory->getEncoder(get_class($user->getWrappedObject()))->willReturn($passwordEncoder);

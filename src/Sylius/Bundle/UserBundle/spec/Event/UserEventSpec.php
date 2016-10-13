@@ -12,8 +12,12 @@
 namespace spec\Sylius\Bundle\UserBundle\Event;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\User\Model\UserInterface;
 
+/**
+ * @mixin UserEvent
+ */
 final class UserEventSpec extends ObjectBehavior
 {
     function let(UserInterface $user)
@@ -23,10 +27,10 @@ final class UserEventSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Event\UserEvent');
+        $this->shouldHaveType(UserEvent::class);
     }
 
-    function it_has_user($user)
+    function it_has_user(UserInterface $user)
     {
         $this->getUser()->shouldReturn($user);
     }

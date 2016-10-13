@@ -18,7 +18,7 @@
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
         </service>
         <service id="sylius.validator.customer_initializer" class="Sylius\Bundle\CoreBundle\Validator\Initializer\CustomerInitializer">
-            <argument type="service" id="sylius.user.canonicalizer" />
+            <argument type="service" id="sylius.canonicalizer" />
             <tag name="validator.initializer" />
         </service>
         <service id="sylius.validator.unique.registered_user" class="Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUserValidator">
