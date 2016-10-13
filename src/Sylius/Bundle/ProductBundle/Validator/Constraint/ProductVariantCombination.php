@@ -14,14 +14,13 @@ namespace Sylius\Bundle\ProductBundle\Validator\Constraint;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * Unique option values combination for variant constraint.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
- *
- * @Annotation
  */
 class ProductVariantCombination extends Constraint
 {
+    /**
+     * @var string
+     */
     public $message = 'sylius.product_variant.combination';
 
     /**

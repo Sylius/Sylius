@@ -13,18 +13,21 @@ namespace spec\Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler\RegisterAttributeFactoryPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
+ * @mixin RegisterAttributeFactoryPass
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class RegisterAttributeFactoryPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler\RegisterAttributeFactoryPass');
+        $this->shouldHaveType(RegisterAttributeFactoryPass::class);
     }
 
     function it_implements_compiler_pass_interface()
@@ -45,7 +48,13 @@ final class RegisterAttributeFactoryPassSpec extends ObjectBehavior
 
         $container->getDefinition('sylius.factory.product_attribute')->willReturn($oldAttributeFactoryDefinition);
 
-        $container->setDefinition('sylius.factory.product_attribute', Argument::type('Symfony\Component\DependencyInjection\Definition'))->willReturn($newAttributeFactoryDefinition);
+        $container
+            ->setDefinition(
+                'sylius.factory.product_attribute',
+                Argument::type('Symfony\Component\DependencyInjection\Definition')
+            )
+            ->willReturn($newAttributeFactoryDefinition)
+        ;
         $newAttributeFactoryDefinition->addArgument($oldAttributeFactoryDefinition)->shouldBeCalled();
         $newAttributeFactoryDefinition->addArgument($attributeTypeRegistryDefinition)->shouldBeCalled();
 

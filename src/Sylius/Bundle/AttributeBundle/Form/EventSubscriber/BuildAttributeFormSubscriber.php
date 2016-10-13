@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class BuildAttributeFormSubscriber implements EventSubscriberInterface
+final class BuildAttributeFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var FormFactoryInterface

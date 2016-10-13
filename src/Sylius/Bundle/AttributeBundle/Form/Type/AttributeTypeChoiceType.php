@@ -40,7 +40,7 @@ class AttributeTypeChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choice_translation_domain' => false,
-                'choices' => $this->attributeTypes
+                'choices' => $this->attributeTypes,
             ])
         ;
     }

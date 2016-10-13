@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

@@ -45,22 +45,22 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_adds_options_on_pre_set_data_event(
-        FormFactoryInterface $factory,
         FormEvent $event,
+        FormFactoryInterface $factory,
         FormInterface $form,
         FormInterface $optionsForm,
         ProductInterface $variable,
-        ProductVariantInterface $variant,
+        ProductOptionInterface $options,
         ProductOptionValueInterface $optionValue,
-        ProductOptionInterface $options
+        ProductVariantInterface $variant
     ) {
-        $event->getForm()->shouldBeCalled()->willReturn($form);
-        $event->getData()->shouldBeCalled()->willReturn($variant);
+        $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($variant);
 
-        $variant->getProduct()->shouldBeCalled()->willReturn($variable);
-        $variant->getOptionValues()->shouldBeCalled()->willReturn([$optionValue]);
-        $variable->getOptions()->shouldBeCalled()->willReturn([$options]);
-        $variable->hasOptions()->shouldBeCalled()->willReturn(true);
+        $variant->getProduct()->willReturn($variable);
+        $variant->getOptionValues()->willReturn([$optionValue]);
+        $variable->getOptions()->willReturn([$options]);
+        $variable->hasOptions()->willReturn(true);
 
         $factory->createNamed(
             'optionValues',
@@ -70,7 +70,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
                 'options' => [$options],
                 'auto_initialize' => false,
             ]
-        )->shouldBeCalled()->willReturn($optionsForm);
+        )->willReturn($optionsForm);
 
         $form->add($optionsForm)->shouldBeCalled();
 

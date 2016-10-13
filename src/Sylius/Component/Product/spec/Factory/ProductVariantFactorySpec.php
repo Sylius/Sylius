@@ -17,7 +17,6 @@ use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @mixin ProductVariantFactory
@@ -53,7 +52,7 @@ final class ProductVariantFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($variant);
     }
 
-    function it_creates_a_variant_and_assigns_a_product_to_id(
+    function it_creates_a_variant_and_assigns_a_product_to_it(
         FactoryInterface $factory,
         ProductInterface $product,
         ProductVariantInterface $variant

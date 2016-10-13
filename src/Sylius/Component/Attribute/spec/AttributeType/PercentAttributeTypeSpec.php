@@ -13,15 +13,18 @@ namespace spec\Sylius\Component\Attribute\AttributeType;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
+use Sylius\Component\Attribute\AttributeType\PercentAttributeType;
 
 /**
+ * @mixin PercentAttributeType
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PercentAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Attribute\AttributeType\PercentAttributeType');
+        $this->shouldHaveType(PercentAttributeType::class);
     }
 
     function it_implements_attribute_type_interface()

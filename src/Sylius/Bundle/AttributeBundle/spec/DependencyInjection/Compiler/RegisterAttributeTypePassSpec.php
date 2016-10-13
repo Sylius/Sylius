@@ -12,19 +12,22 @@
 namespace spec\Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler\RegisterAttributeTypePass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
+ * @mixin RegisterAttributeTypePass
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class RegisterAttributeTypePassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\DependencyInjection\Compiler\RegisterAttributeTypePass');
+        $this->shouldHaveType(RegisterAttributeTypePass::class);
     }
 
     function it_implements_compiler_pass_interface()
@@ -44,7 +47,10 @@ final class RegisterAttributeTypePassSpec extends ObjectBehavior
         ];
         $container->findTaggedServiceIds('sylius.attribute.type')->willReturn($attributeTypeServices);
 
-        $attributeTypeRegistryDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.attribute_type.test')])->shouldBeCalled();
+        $attributeTypeRegistryDefinition
+            ->addMethodCall('register', ['test', new Reference('sylius.form.type.attribute_type.test')])
+            ->shouldBeCalled()
+        ;
         $container->setParameter('sylius.attribute.attribute_types', ['test' => 'Test attribute type'])->shouldBeCalled();
 
         $this->process($container);
@@ -58,8 +64,10 @@ final class RegisterAttributeTypePassSpec extends ObjectBehavior
         $this->process($container);
     }
 
-    function it_throws_exception_if_any_attribute_type_has_improper_attributes(ContainerBuilder $container, Definition $attributeTypeDefinition)
-    {
+    function it_throws_exception_if_any_attribute_type_has_improper_attributes(
+        ContainerBuilder $container,
+        Definition $attributeTypeDefinition
+    ) {
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(true);
         $container->getDefinition('sylius.registry.attribute_type')->willReturn($attributeTypeDefinition);
 
@@ -69,9 +77,14 @@ final class RegisterAttributeTypePassSpec extends ObjectBehavior
             ],
         ];
         $container->findTaggedServiceIds('sylius.attribute.type')->willReturn($attributeTypeServices);
-        $attributeTypeDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.attribute_type.test')])->shouldNotBeCalled();
+        $attributeTypeDefinition
+            ->addMethodCall('register', ['test', new Reference('sylius.form.type.attribute_type.test')])
+            ->shouldNotBeCalled()
+        ;
 
-        $this->shouldThrow(new \InvalidArgumentException('Tagged attribute type needs to have `attribute-type` and `label` attributes.'))
-            ->during('process', [$container]);
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Tagged attribute type needs to have `attribute-type` and `label` attributes.'))
+            ->during('process', [$container])
+        ;
     }
 }

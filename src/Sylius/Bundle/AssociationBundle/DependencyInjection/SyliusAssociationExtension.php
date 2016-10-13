@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class SyliusAssociationExtension extends AbstractResourceExtension
+final class SyliusAssociationExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -34,14 +34,7 @@ class SyliusAssociationExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
         foreach ($config['resources'] as $subjectName => $subjectConfig) {
-            foreach ($subjectConfig as $resourceName => $resourceConfig) {
-                if (!is_array($resourceConfig)) {
-                    continue;
-                }
-
-                $formDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName);
-                $formDefinition->addArgument($subjectName);
-            }
+            $this->resolveFormsConfiguration($subjectConfig, $subjectName, $container);
         }
     }
 
@@ -63,14 +56,50 @@ class SyliusAssociationExtension extends AbstractResourceExtension
         $container->setParameter('sylius.association.subjects', $subjects);
 
         foreach ($resources as $subjectName => $subjectConfig) {
-            foreach ($subjectConfig as $resourceName => $resourceConfig) {
-                if (is_array($resourceConfig)) {
-                    $resolvedResources[$subjectName.'_'.$resourceName] = $resourceConfig;
-                    $resolvedResources[$subjectName.'_'.$resourceName]['subject'] = $subjectName;
-                }
-            }
+            $resolvedResources = array_merge(
+                $resolvedResources,
+                $this->resolveResourceConfiguration($subjectConfig, $resolvedResources, $subjectName)
+            );
         }
 
         return $resolvedResources;
+    }
+
+    /**
+     * @param array $subjectConfig
+     * @param array $resolvedResources
+     * @param string $subjectName
+     *
+     * @return array
+     */
+    private function resolveResourceConfiguration(array $subjectConfig, array $resolvedResources, $subjectName)
+    {
+        foreach ($subjectConfig as $resourceName => $resourceConfig) {
+            if (!is_array($resourceConfig)) {
+                continue;
+            }
+
+            $resolvedResources[$subjectName.'_'.$resourceName] = $resourceConfig;
+            $resolvedResources[$subjectName.'_'.$resourceName]['subject'] = $subjectName;
+        }
+
+        return $resolvedResources;
+    }
+
+    /**
+     * @param array $subjectConfig
+     * @param string $subjectName
+     * @param ContainerBuilder $container
+     */
+    private function resolveFormsConfiguration(array $subjectConfig, $subjectName, ContainerBuilder $container)
+    {
+        foreach ($subjectConfig as $resourceName => $resourceConfig) {
+            if (!is_array($resourceConfig)) {
+                continue;
+            }
+
+            $formDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName);
+            $formDefinition->addArgument($subjectName);
+        }
     }
 }

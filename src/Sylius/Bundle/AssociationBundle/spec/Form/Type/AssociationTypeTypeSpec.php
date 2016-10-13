@@ -13,12 +13,15 @@ namespace spec\Sylius\Bundle\AssociationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AssociationBundle\Form\Type\AssociationTypeType;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Association\Model\AssociationType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
+ * @mixin AssociationTypeType
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class AssociationTypeTypeSpec extends ObjectBehavior
@@ -30,7 +33,7 @@ final class AssociationTypeTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AssociationBundle\Form\Type\AssociationTypeType');
+        $this->shouldHaveType(AssociationTypeType::class);
     }
 
     function it_extends_abstract_resource_type()
@@ -45,6 +48,7 @@ final class AssociationTypeTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($formBuilder)
         ;
+
         $formBuilder
             ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->shouldBeCalled()

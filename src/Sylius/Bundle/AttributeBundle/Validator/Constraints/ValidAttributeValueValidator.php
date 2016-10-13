@@ -21,7 +21,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ValidAttributeValueValidator extends ConstraintValidator
+final class ValidAttributeValueValidator extends ConstraintValidator
 {
     /**
      * @var ServiceRegistryInterface

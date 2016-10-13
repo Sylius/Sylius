@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusAttributeExtension extends AbstractResourceExtension
+final class SyliusAttributeExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -39,31 +39,10 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         }
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
-
-        foreach ($config['resources'] as $subjectName => $subjectConfig) {
-            foreach ($subjectConfig as $resourceName => $resourceConfig) {
-                if (!is_array($resourceConfig)) {
-                    continue;
-                }
-
-                $formDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName);
-                $formDefinition->addArgument($subjectName);
-
-                if (isset($resourceConfig['translation'])) {
-                    $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName.'_translation');
-                    $formTranslationDefinition->addArgument($subjectName);
-                }
-
-                if (false !== strpos($resourceName, 'value')) {
-                    $formDefinition->addArgument($container->getDefinition('sylius.repository.'.$subjectName.'_attribute'));
-                }
-            }
-        }
+        $this->resolveSubjectsConfigutaion($config['resources'], $container);
     }
 
     /**
-     * Resolve resources for every subject.
-     *
      * @param array $resources
      * @param ContainerBuilder $container
      *
@@ -90,5 +69,34 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         }
 
         return $resolvedResources;
+    }
+
+    /**
+     * @param array $resources
+     * @param ContainerBuilder $container
+     */
+    private function resolveSubjectsConfigutaion(array $resources, ContainerBuilder $container)
+    {
+        foreach ($resources as $subjectName => $subjectConfig) {
+            foreach ($subjectConfig as $resourceName => $resourceConfig) {
+                if (!is_array($resourceConfig)) {
+                    continue;
+                }
+
+                $formDefinition = $container->getDefinition(sprintf('sylius.form.type.%s_%s', $subjectName, $resourceName));
+                $formDefinition->addArgument($subjectName);
+
+                if (isset($resourceConfig['translation'])) {
+                    $formTranslationDefinition = $container
+                        ->getDefinition(sprintf('sylius.form.type.%s_%s_translation', $subjectName, $resourceName))
+                    ;
+                    $formTranslationDefinition->addArgument($subjectName);
+                }
+
+                if (false !== strpos($resourceName, 'value')) {
+                    $formDefinition->addArgument($container->getDefinition(sprintf('sylius.repository.%s_attribute', $subjectName)));
+                }
+            }
+        }
     }
 }

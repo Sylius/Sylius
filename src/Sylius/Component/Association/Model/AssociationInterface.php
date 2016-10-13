@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Association\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
@@ -36,27 +35,27 @@ interface AssociationInterface extends TimestampableInterface, ResourceInterface
     public function getOwner();
 
     /**
-     * @param AssociableInterface
+     * @param AssociableInterface|null $owner
      */
     public function setOwner(AssociableInterface $owner = null);
 
     /**
-     * @return Collection
+     * @return AssociableInterface[]
      */
     public function getAssociatedObjects();
 
     /**
-     * @param AssociableInterface
+     * @param AssociableInterface $associatedObject
      */
     public function addAssociatedObject(AssociableInterface $associatedObject);
 
     /**
-     * @param AssociableInterface
+     * @param AssociableInterface $associatedObject
      */
     public function removeAssociatedObject(AssociableInterface $associatedObject);
 
     /**
-     * @param AssociableInterface
+     * @param AssociableInterface $associatedObject
      *
      * @return bool
      */

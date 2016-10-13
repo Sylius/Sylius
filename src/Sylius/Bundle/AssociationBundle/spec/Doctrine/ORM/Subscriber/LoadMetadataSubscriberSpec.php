@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AssociationBundle\EventListener;
+namespace spec\Sylius\Bundle\AssociationBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManager;
@@ -17,8 +17,11 @@ use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\AssociationBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
 
 /**
+ * @mixin LoadMetadataSubscriber
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class LoadMetadataSubscriberSpec extends ObjectBehavior
@@ -44,7 +47,7 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AssociationBundle\EventListener\LoadMetadataSubscriber');
+        $this->shouldHaveType(LoadMetadataSubscriber::class);
     }
 
     function it_is_a_doctrine_event_subscriber()

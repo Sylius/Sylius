@@ -13,7 +13,6 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Component\Product\Model\ProductAssociation" table="sylius_product_association">
-    </mapped-superclass>
+    <mapped-superclass name="Sylius\Component\Product\Model\ProductAssociation" table="sylius_product_association" />
 
 </doctrine-mapping>

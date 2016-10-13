@@ -13,7 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.form.listener.product_variant_generator" class="Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber">
+        <service id="sylius.form.event_subscriber.product_variant_generator" class="Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber">
             <argument type="service" id="sylius.generator.product_variant" />
         </service>
 
@@ -28,15 +28,12 @@
         <service id="sylius.form.type.product_option_value_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueChoiceType">
             <tag name="form.type" alias="sylius_product_option_value_choice" />
         </service>
-
         <service id="sylius.form.type.product_option_value_collection" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueCollectionType">
             <tag name="form.type" alias="sylius_product_option_value_collection" />
         </service>
-
         <service id="sylius.form.type.product_variant_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantChoiceType">
             <tag name="form.type" alias="sylius_product_variant_choice" />
         </service>
-
         <service id="sylius.form.type.product_variant_match" class="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantMatchType">
             <tag name="form.type" alias="sylius_product_variant_match" />
         </service>

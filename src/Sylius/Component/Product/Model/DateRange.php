@@ -37,20 +37,16 @@ final class DateRange
     }
 
     /**
-     * Checks whether current datetime meets two requirements:
-     * is greater than $start or equal,
-     * is smaller than $end or equal.
-     * Checks only these conditions which values ($start, $end) are not null.
-     *
      * @return bool
      */
     public function isInRange()
     {
-        if ($this->start > new \DateTime() || ($this->end !== null && $this->end < new \DateTime())) {
-            return false;
-        }
+        $now = new \DateTime();
 
-        return true;
+        return !(
+            (null !== $this->start && $now < $this->start) ||
+            (null !== $this->end && $now > $this->end)
+        );
     }
 
     /**

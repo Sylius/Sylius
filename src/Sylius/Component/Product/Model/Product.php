@@ -13,9 +13,7 @@ namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
-use Sylius\Component\Product\Model\ProductOptionInterface as BaseOptionInterface;
-use Sylius\Component\Product\Model\ProductVariantInterface as BaseVariantInterface;
+use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
@@ -52,17 +50,17 @@ class Product implements ProductInterface
     protected $availableUntil;
 
     /**
-     * @var Collection|BaseAttributeValueInterface[]
+     * @var Collection|AttributeValueInterface[]
      */
     protected $attributes;
 
     /**
-     * @var Collection|BaseVariantInterface[]
+     * @var Collection|ProductVariantInterface[]
      */
     protected $variants;
 
     /**
-     * @var Collection|BaseOptionInterface[]
+     * @var Collection|ProductOptionInterface[]
      */
     protected $options;
 
@@ -246,7 +244,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addAttribute(BaseAttributeValueInterface $attribute)
+    public function addAttribute(AttributeValueInterface $attribute)
     {
         if (!$this->hasAttribute($attribute)) {
             $attribute->setProduct($this);
@@ -257,7 +255,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeAttribute(BaseAttributeValueInterface $attribute)
+    public function removeAttribute(AttributeValueInterface $attribute)
     {
         if ($this->hasAttribute($attribute)) {
             $this->attributes->removeElement($attribute);
@@ -268,7 +266,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasAttribute(BaseAttributeValueInterface $attribute)
+    public function hasAttribute(AttributeValueInterface $attribute)
     {
         return $this->attributes->contains($attribute);
     }
@@ -322,7 +320,7 @@ class Product implements ProductInterface
      */
     public function getAvailableVariants()
     {
-        return $this->variants->filter(function (BaseVariantInterface $variant) {
+        return $this->variants->filter(function (ProductVariantInterface $variant) {
             return $variant->isAvailable();
         });
     }
@@ -330,7 +328,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addVariant(BaseVariantInterface $variant)
+    public function addVariant(ProductVariantInterface $variant)
     {
         if (!$this->hasVariant($variant)) {
             $variant->setProduct($this);
@@ -341,7 +339,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeVariant(BaseVariantInterface $variant)
+    public function removeVariant(ProductVariantInterface $variant)
     {
         if ($this->hasVariant($variant)) {
             $variant->setProduct(null);
@@ -352,7 +350,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasVariant(BaseVariantInterface $variant)
+    public function hasVariant(ProductVariantInterface $variant)
     {
         return $this->variants->contains($variant);
     }
@@ -376,7 +374,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function addOption(BaseOptionInterface $option)
+    public function addOption(ProductOptionInterface $option)
     {
         if (!$this->hasOption($option)) {
             $this->options->add($option);
@@ -386,7 +384,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function removeOption(BaseOptionInterface $option)
+    public function removeOption(ProductOptionInterface $option)
     {
         if ($this->hasOption($option)) {
             $this->options->removeElement($option);
@@ -396,7 +394,7 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function hasOption(BaseOptionInterface $option)
+    public function hasOption(ProductOptionInterface $option)
     {
         return $this->options->contains($option);
     }

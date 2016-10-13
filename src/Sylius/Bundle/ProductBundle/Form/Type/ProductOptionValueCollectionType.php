@@ -32,18 +32,19 @@ class ProductOptionValueCollectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (!isset($options['options']) ||
-            !is_array($options['options']) &&
-            !($options['options'] instanceof \Traversable && $options['options'] instanceof \ArrayAccess)
-        ) {
+        if ($this->areOptionsValid($options)) {
             throw new InvalidConfigurationException(
                 'array or (\Traversable and \ArrayAccess) of "Sylius\Component\Variation\Model\OptionInterface" must be passed to collection'
             );
         }
+
         foreach ($options['options'] as $i => $option) {
             if (!$option instanceof ProductOptionInterface) {
-                throw new InvalidConfigurationException(sprintf('Each object passed as option list must implement "%s"', ProductOptionInterface::class));
+                throw new InvalidConfigurationException(
+                    sprintf('Each object passed as option list must implement "%s"', ProductOptionInterface::class)
+                );
             }
+
             $builder->add((string) $option->getCode(), 'sylius_product_option_value_choice', [
                 'label' => $option->getName() ?: $option->getCode(),
                 'option' => $option,
@@ -68,5 +69,19 @@ class ProductOptionValueCollectionType extends AbstractType
     public function getName()
     {
         return 'sylius_product_option_value_collection';
+    }
+
+    /**
+     * @param mixed $options
+     *
+     * @return bool
+     */
+    private function areOptionsValid($options)
+    {
+        return
+            !isset($options['options']) ||
+            !is_array($options['options']) &&
+            !($options['options'] instanceof \Traversable && $options['options'] instanceof \ArrayAccess)
+        ;
     }
 }

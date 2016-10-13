@@ -17,15 +17,16 @@
     </parameters>
 
     <services>
-        <service id="sylius.event_subscriber.attribute.load_metadata" class="Sylius\Bundle\AttributeBundle\EventListener\LoadMetadataSubscriber">
-            <tag name="doctrine.event_subscriber" />
+        <service id="sylius.doctrine.orm.event_subscriber.load_metadata.attribute" class="Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber">
             <argument>%sylius.attribute.subjects%</argument>
+            <tag name="doctrine.event_subscriber" />
         </service>
 
         <service id="sylius.registry.attribute_type" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>%sylius.model.attribute.interface%</argument>
             <argument>attribute type</argument>
         </service>
+
         <service id="sylius.form.type.attribute_type_choice" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType">
             <argument>%sylius.attribute.attribute_types%</argument>
             <tag name="form.type" alias="sylius_attribute_type_choice" />

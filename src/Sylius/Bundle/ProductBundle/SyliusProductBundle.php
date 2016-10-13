@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ProductBundle;
 
 use Sylius\Bundle\ProductBundle\DependencyInjection\Compiler\ServicesPass;
-use Sylius\Bundle\ProductBundle\DependencyInjection\Compiler\ValidatorPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AttributeBundle\EventListener;
+namespace spec\Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManager;
@@ -18,8 +18,11 @@ use Doctrine\ORM\Mapping\ClassMetadataFactory;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
 
 /**
+ * @mixin LoadMetadataSubscriber
+ *
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
 final class LoadMetadataSubscriberSpec extends ObjectBehavior
@@ -45,15 +48,15 @@ final class LoadMetadataSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\EventListener\LoadMetadataSubscriber');
+        $this->shouldHaveType(LoadMetadataSubscriber::class);
     }
 
-    function it_is_a_Doctrine_event_subscriber()
+    function it_is_a_doctrine_event_subscriber()
     {
         $this->shouldImplement(EventSubscriber::class);
     }
 
-    function it_subscribes_to_loadClassMetadata_events_dispatched_by_Doctrine()
+    function it_subscribes_load_class_metadata_event()
     {
         $this->getSubscribedEvents()->shouldReturn(['loadClassMetadata']);
     }

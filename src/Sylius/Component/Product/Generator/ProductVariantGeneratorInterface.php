@@ -14,19 +14,14 @@ namespace Sylius\Component\Product\Generator;
 use Sylius\Component\Product\Model\ProductInterface;
 
 /**
- * Interface for variant generating service.
- *
- * It is used to create all possible (non-existing) variations
- * of given object based on its options.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ProductVariantGeneratorInterface
 {
     /**
-     * Generate all possible variants if they don't exist currently.
+     * @param ProductInterface $product
      *
-     * @param ProductInterface $variable
+     * @throws \InvalidArgumentException
      */
-    public function generate(ProductInterface $variable);
+    public function generate(ProductInterface $product);
 }

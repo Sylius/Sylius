@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ServicesPass implements CompilerPassInterface
+final class ServicesPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

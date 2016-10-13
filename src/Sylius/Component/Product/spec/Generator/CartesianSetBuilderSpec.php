@@ -22,6 +22,11 @@ use Sylius\Component\Product\Generator\CartesianSetBuilder;
  */
 final class CartesianSetBuilderSpec extends ObjectBehavior
 {
+    function it_is_initializable()
+    {
+        $this->shouldHaveType(CartesianSetBuilder::class);
+    }
+
     function it_requires_an_array_of_set_tuples_to_build_from()
     {
         $tupleSetNotInArray = ['a', 'b', 'c'];
@@ -34,14 +39,14 @@ final class CartesianSetBuilderSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringBuild([], Argument::any());
     }
 
-    function it_returns_the_same_set_as_the_Cartesian_product_when_only_one_was_given()
+    function it_returns_the_same_set_as_the_cartesian_product_when_only_one_was_given()
     {
         $set = ['a', 'b', 'c'];
 
         $this->build([$set], false)->shouldReturn($set);
     }
 
-    function it_builds_the_Cartesian_product_set_from_two_sets()
+    function it_builds_the_cartesian_product_set_from_two_sets()
     {
         $setA = ['a', 'b', 'c'];
         $setB = ['1', '2', '3'];
@@ -61,7 +66,7 @@ final class CartesianSetBuilderSpec extends ObjectBehavior
         ]);
     }
 
-    function it_builds_the_Cartesian_product_set_from_more_than_two_sets()
+    function it_builds_the_cartesian_product_set_from_more_than_two_sets()
     {
         $setA = ['a', 'b', 'c'];
         $setB = ['1', '2', '3'];

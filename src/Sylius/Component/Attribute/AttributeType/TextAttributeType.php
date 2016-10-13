@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextAttributeType implements AttributeTypeInterface
+final class TextAttributeType implements AttributeTypeInterface
 {
     const TYPE = 'text';
 

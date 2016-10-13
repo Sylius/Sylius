@@ -30,7 +30,7 @@ class ProductType extends AbstractResourceType
     private $variantResolver;
 
     /**
-     * @param string $dataClass FQCN
+     * @param string $dataClass
      * @param string[] $validationGroups
      * @param ProductVariantResolverInterface $variantResolver
      */
