@@ -94,12 +94,12 @@ sylius_order:
                 controller: Sylius\Bundle\CoreBundle\Controller\OrderController
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\OrderType
+                    default: Sylius\Bundle\CoreBundle\Form\Type\Order\OrderType
         order_item:
             classes:
                 model: Sylius\Component\Core\Model\OrderItem
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\OrderItemType
+                    default: Sylius\Bundle\CoreBundle\Form\Type\Order\OrderItemType
         order_item_unit:
             classes:
                 model: Sylius\Component\Core\Model\OrderItemUnit
@@ -125,18 +125,18 @@ sylius_product:
                 model: Sylius\Component\Core\Model\Product
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\ProductType
+                    default: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductType
             translation:
                 classes:
                     model: Sylius\Component\Core\Model\ProductTranslation
                     form:
-                        default: Sylius\Bundle\CoreBundle\Form\Type\ProductTranslationType
+                        default: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductTranslationType
         product_variant:
             classes:
                 model: Sylius\Component\Core\Model\ProductVariant
                 repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\ProductVariantType
+                    default: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductVariantType
 
 sylius_promotion:
     resources:
@@ -148,7 +148,7 @@ sylius_promotion:
                 model: Sylius\Component\Core\Model\Promotion
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\PromotionType
+                    default: Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionType
         promotion_rule:
             classes:
                 factory: Sylius\Component\Core\Factory\PromotionRuleFactory
@@ -157,7 +157,7 @@ sylius_promotion:
                 model: Sylius\Component\Core\Model\PromotionCoupon
                 repository: Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionCouponRepository
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\CouponType
+                    default: Sylius\Bundle\CoreBundle\Form\Type\Promotion\CouponType
         promotion_action:
             classes:
                 factory: Sylius\Component\Core\Factory\PromotionActionFactory
@@ -174,7 +174,7 @@ sylius_review:
                 classes:
                     model: Sylius\Component\Core\Model\ProductReview
                     form:
-                        default: Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType
+                        default: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType
             reviewer:
                 classes:
                     model: "%sylius.model.customer.class%"
@@ -210,7 +210,7 @@ sylius_taxonomy:
                 model: Sylius\Component\Core\Model\Taxon
                 repository: Sylius\Bundle\TaxonomyBundle\Doctrine\ORM\TaxonRepository
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\TaxonType
+                    default: Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonType
 
 sylius_user:
     resources:
@@ -220,15 +220,15 @@ sylius_user:
                     model: Sylius\Component\Core\Model\AdminUser
                     repository: Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository
                     form:
-                        default: Sylius\Bundle\CoreBundle\Form\Type\AdminUserType
+                        default: Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType
         shop:
             user:
                 classes:
                     model: Sylius\Component\Core\Model\ShopUser
                     repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
                     form:
-                        default: Sylius\Bundle\CoreBundle\Form\Type\ShopUserType
-                        registration: Sylius\Bundle\CoreBundle\Form\Type\UserRegistrationType
+                        default: Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType
+                        registration: Sylius\Bundle\CoreBundle\Form\Type\User\UserRegistrationType
         admin_oauth:
             user:
                 classes:
@@ -243,4 +243,4 @@ sylius_customer:
                 model: Sylius\Component\Core\Model\Customer
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\CustomerType
+                    default: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerType
