@@ -265,11 +265,11 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I start sorting products from the :direction
+     * @When I start sorting products from the :typeOfSort(?:| price)
      */
-    public function iSortProductsBy($direction)
+    public function iSortProductsBy($typeOfSort)
     {
-        $this->taxonShowPage->sortByDate($direction);
+        $this->taxonShowPage->sortBy($typeOfSort);
     }
 
     /**

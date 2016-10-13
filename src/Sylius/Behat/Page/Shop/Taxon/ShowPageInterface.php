@@ -37,9 +37,9 @@ interface ShowPageInterface
     public function isProductWithPriceOnList($productName, $productPrice);
 
     /**
-     * @param string $direction
+     * @param string $typeOfSort
      */
-    public function sortByDate($direction);
+    public function sortBy($typeOfSort);
 
     /**
      * @return int
