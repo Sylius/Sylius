@@ -28,7 +28,7 @@ final class InventoryUnitSpec extends ObjectBehavior
         $this->shouldHaveType(InventoryUnit::class);
     }
 
-    function it_implements_Sylius_inventory_unit_interface()
+    function it_implements_inventory_unit_interface()
     {
         $this->shouldImplement(InventoryUnitInterface::class);
     }

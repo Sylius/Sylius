@@ -11,13 +11,11 @@
 
 namespace Sylius\Component\Inventory\Operator;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\SyliusStockableEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -43,15 +41,13 @@ final class InventoryOperator implements InventoryOperatorInterface
      */
     public function hold(StockableInterface $stockable, $quantity)
     {
-        if ($quantity < 0) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
-        }
+        Assert::greaterThan($quantity, 0, 'Quantity of units must be greater than 0.');
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_HOLD, new GenericEvent($stockable));
+        $this->dispatchEvent(SyliusStockableEvents::PRE_HOLD, $stockable);
 
         $stockable->setOnHold($stockable->getOnHold() + $quantity);
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_HOLD, new GenericEvent($stockable));
+        $this->dispatchEvent(SyliusStockableEvents::POST_HOLD, $stockable);
     }
 
     /**
@@ -59,14 +55,21 @@ final class InventoryOperator implements InventoryOperatorInterface
      */
     public function release(StockableInterface $stockable, $quantity)
     {
-        if ($quantity < 0) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
-        }
+        Assert::greaterThan($quantity, 0, 'Quantity of units must be greater than 0.');
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_RELEASE, new GenericEvent($stockable));
+        $this->dispatchEvent(SyliusStockableEvents::PRE_RELEASE, $stockable);
 
         $stockable->setOnHold($stockable->getOnHold() - $quantity);
 
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_RELEASE, new GenericEvent($stockable));
+        $this->dispatchEvent(SyliusStockableEvents::POST_RELEASE, $stockable);
+    }
+
+    /**
+     * @param string $event
+     * @param StockableInterface $stockable
+     */
+    private function dispatchEvent($event, StockableInterface $stockable)
+    {
+        $this->eventDispatcher->dispatch($event, new GenericEvent($stockable));
     }
 }

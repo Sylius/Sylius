@@ -16,5 +16,5 @@ use Sylius\Component\Inventory\InventoryUnitTransitions;
 
 class InventoryUnitController extends ResourceController
 {
-    protected $stateMachineGraph = InventoryUnitTransitions::GRAPH;
+    protected $stateMachineGraph = 'sylius_inventory_unit';
 }

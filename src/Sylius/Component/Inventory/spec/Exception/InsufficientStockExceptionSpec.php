@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Inventory\Operator;
+namespace spec\Sylius\Component\Inventory\Exception;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Inventory\Exception\InsufficientStockException;
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Component\Inventory\Operator\InsufficientStockException;
 
 /**
  * @mixin InsufficientStockException

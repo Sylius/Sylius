@@ -9,13 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Inventory\Operator;
+namespace Sylius\Component\Inventory\Exception;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * Thrown when decreasing stockable quantity while it is insufficient.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class InsufficientStockException extends \UnderflowException
