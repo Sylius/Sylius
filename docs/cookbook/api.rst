@@ -25,7 +25,7 @@ Run your application on a built-in server:
 
 .. code-block:: bash
 
-    $ php ap/console server:start localhost:8000
+    $ php app/console server:start localhost:8000
 
 To obtain authorization token for the ``api@example.com`` user with password ``sylius-api`` run:
 
@@ -38,6 +38,38 @@ This will give you such a response:
 .. code-block:: bash
 
     {"access_token":"DEF","expires_in":3600,"token_type":"bearer","scope":null,"refresh_token":"GHI"}
+
+Creating a new resource instance via API
+----------------------------------------
+
+Use the ``access_token`` in the request that will create a new Supplier (:doc:`that we were creating in another cookbook</cookbook/custom-model>`).
+
+.. code-block:: bash
+
+    $ curl -i -X POST -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Example", "description": "Lorem ipsum", "enabled": true}' http://localhost:8000/api/suppliers/
+
+.. tip::
+
+    Read more about authorizing in API :doc:`here </api/authorization>`.
+
+Viewing a single resource instance via API
+------------------------------------------
+
+If you would like to see the newly created resource use this command with ``1`` as ``{id)``. Remember to use **the authorization token**.
+
+.. code-block:: bash
+
+    $ curl -i -H "Authorization: Bearer DEF" http://localhost:8000/api/suppliers/{id}
+
+Viewing an index of resource via API
+------------------------------------
+
+If you would like to see a list of all instances of your resource use such a command (provide the authorization token!):
+
+.. code-block:: bash
+
+    $ curl -i -H "Authorization: Bearer DEF" http://localhost:8000/api/suppliers/
+
 
 Learn more
 ----------
