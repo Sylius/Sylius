@@ -31,5 +31,5 @@ winzou_state_machine:
             after:
                 sylius_complete:
                     on: "create"
-                    do: ["@sylius.callback.complete_order", "completeOrder"]
+                    do: ["@sylius.complete_order_callback", "completeOrder"]
                     args: ["object"]

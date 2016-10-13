@@ -20,6 +20,8 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
+ * @mixin SessionBasedCartContext
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SessionBasedCartContextSpec extends ObjectBehavior
@@ -34,12 +36,12 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
         $this->shouldHaveType(SessionBasedCartContext::class);
     }
 
-    function it_implements_cart_context_interface()
+    function it_implements_a_cart_context_interface()
     {
         $this->shouldImplement(CartContextInterface::class);
     }
 
-    function it_returns_cart_based_on_id_stored_in_session(
+    function it_returns_a_cart_based_on_id_stored_in_session(
         SessionInterface $session,
         OrderRepositoryInterface $orderRepository,
         OrderInterface $cart
@@ -51,14 +53,14 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_throws_cart_not_found_exception_if_session_key_does_not_exist(SessionInterface $session)
+    function it_throws_a_cart_not_found_exception_if_session_key_does_not_exist(SessionInterface $session)
     {
         $session->has('session_key_name')->willReturn(false);
 
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
 
-    function it_throws_cart_not_found_exception_and_removes_id_from_session_when_cart_is_not_found(
+    function it_throws_a_cart_not_found_exception_and_removes_id_from_session_when_cart_is_not_found(
         SessionInterface $session,
         OrderRepositoryInterface $orderRepository
     ) {

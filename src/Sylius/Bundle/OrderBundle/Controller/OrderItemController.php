@@ -226,7 +226,7 @@ class OrderItemController extends ResourceController
      */
     private function getOrderModifier()
     {
-        return $this->get('sylius.cart.order_modifier');
+        return $this->get('sylius.order_modifier');
     }
 
     /**

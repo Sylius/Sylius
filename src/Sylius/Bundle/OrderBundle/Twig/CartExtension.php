@@ -13,12 +13,11 @@ namespace Sylius\Bundle\OrderBundle\Twig;
 
 use Sylius\Bundle\OrderBundle\Templating\Helper\CartHelper;
 use Sylius\Component\Order\Model\OrderInterface;
-use Symfony\Component\Form\FormView;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartExtension extends \Twig_Extension
+final class CartExtension extends \Twig_Extension
 {
     /**
      * @var CartHelper
@@ -39,9 +38,7 @@ class CartExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-             new \Twig_SimpleFunction('sylius_cart_exists', [$this, 'hasCart']),
              new \Twig_SimpleFunction('sylius_cart_get', [$this, 'getCurrentCart']),
-             new \Twig_SimpleFunction('sylius_cart_form', [$this, 'getItemFormView']),
         ];
     }
 
@@ -51,24 +48,6 @@ class CartExtension extends \Twig_Extension
     public function getCurrentCart()
     {
         return $this->helper->getCurrentCart();
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasCart()
-    {
-        return $this->helper->hasCart();
-    }
-
-    /**
-     * @param array $options
-     *
-     * @return FormView
-     */
-    public function getItemFormView(array $options = [])
-    {
-        return $this->helper->getItemFormView($options);
     }
 
     /**

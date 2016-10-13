@@ -13,12 +13,15 @@ namespace spec\Sylius\Bundle\OrderBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin OrderItemType
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class OrderItemTypeSpec extends ObjectBehavior
@@ -30,7 +33,7 @@ final class OrderItemTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Form\Type\OrderItemType');
+        $this->shouldHaveType(OrderItemType::class);
     }
 
     function it_is_a_form_type()
@@ -38,30 +41,32 @@ final class OrderItemTypeSpec extends ObjectBehavior
         $this->shouldHaveType(AbstractType::class);
     }
 
-    function it_builds_form_with_quantity_and_unit_price_fields($orderItemQuantityDataMapper, FormBuilderInterface $builder)
-    {
+    function it_builds_a_form_with_quantity_and_unit_price_fields(
+        DataMapperInterface $orderItemQuantityDataMapper,
+        FormBuilderInterface $builder
+    ) {
         $builder
             ->add('quantity', 'integer', Argument::any())
-            ->willReturn($builder)
             ->shouldBeCalled()
+            ->willReturn($builder)
         ;
 
         $builder
             ->add('unitPrice', 'sylius_money', Argument::any())
-            ->willReturn($builder)
             ->shouldBeCalled()
+            ->willReturn($builder)
         ;
 
         $builder
             ->setDataMapper($orderItemQuantityDataMapper)
-            ->willReturn($builder)
             ->shouldBeCalled()
+            ->willReturn($builder)
         ;
 
         $this->buildForm($builder, []);
     }
 
-    function it_defines_assigned_data_class(OptionsResolver $resolver)
+    function it_defines_an_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
@@ -74,7 +79,7 @@ final class OrderItemTypeSpec extends ObjectBehavior
         $this->configureOptions($resolver);
     }
 
-    function it_has_valid_name()
+    function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_order_item');
     }

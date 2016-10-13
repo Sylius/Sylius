@@ -30,8 +30,11 @@ class OrderItemType extends AbstractResourceType
      * @param array $validationGroups
      * @param DataMapperInterface $orderItemQuantityDataMapper
      */
-    public function __construct($dataClass, array $validationGroups = [], DataMapperInterface $orderItemQuantityDataMapper)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups = [],
+        DataMapperInterface $orderItemQuantityDataMapper
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->orderItemQuantityDataMapper = $orderItemQuantityDataMapper;

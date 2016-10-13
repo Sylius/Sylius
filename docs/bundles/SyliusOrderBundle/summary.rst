@@ -51,24 +51,9 @@ Configuration reference
                 classes:
                     model:      Sylius\Component\Order\Model\Adjustment
                     interface:  Sylius\Component\Order\Model\AdjustmentInterface
-                    controller: Sylius\Bundle\OrderBundle\Controller\AdjustmentController
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType
-                validation_groups:
-                     default: [ sylius ]
-            comment:
-                classes:
-                    model:      Sylius\Component\Order\Model\Comment
-                    interface:  Sylius\Component\Order\Model\CommentInterface
-                    controller: Sylius\Bundle\OrderBundle\Controller\CommentController
-                    repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\OrderBundle\Form\Type\CommentType
-                validation_groups:
-                     default: [ sylius ]
 
 
 `phpspec2 <http://phpspec.net>`_ examples

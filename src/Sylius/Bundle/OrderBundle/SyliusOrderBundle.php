@@ -12,19 +12,16 @@
 namespace Sylius\Bundle\OrderBundle;
 
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
-use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterOrderStateResolversPass;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Sales order management bundle.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-class SyliusOrderBundle extends AbstractResourceBundle
+final class SyliusOrderBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

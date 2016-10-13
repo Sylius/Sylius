@@ -16,6 +16,8 @@ use Sylius\Bundle\OrderBundle\Templating\Helper\CartHelper;
 use Sylius\Bundle\OrderBundle\Twig\CartExtension;
 
 /**
+ * @mixin CartExtension
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CartExtensionSpec extends ObjectBehavior
