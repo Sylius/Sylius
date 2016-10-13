@@ -12,13 +12,17 @@
 namespace spec\Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock;
 use Symfony\Component\Validator\Constraint;
 
+/**
+ * @mixin InStock
+ */
 final class InStockSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock');
+        $this->shouldHaveType(InStock::class);
     }
 
     function it_is_a_constraint()
@@ -33,6 +37,6 @@ final class InStockSpec extends ObjectBehavior
 
     function it_has_a_target()
     {
-        $this->getTargets()->shouldReturn('class');
+        $this->getTargets()->shouldReturn(Constraint::CLASS_CONSTRAINT);
     }
 }
