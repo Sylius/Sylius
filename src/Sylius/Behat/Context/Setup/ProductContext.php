@@ -540,6 +540,15 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product)'s price is "([^"]+)"$/
+     */
+    public function thisProductPriceIs(ProductInterface $product, $price)
+    {
+        $product->getFirstVariant()->setPrice($this->getPriceFromString($price));
+        $this->objectManager->flush($product);
+    }
+
+    /**
      * @param string $type
      * @param string $name
      * @param string $code

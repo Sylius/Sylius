@@ -56,9 +56,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function sortByDate($direction)
+    public function sortBy($typeOfSort)
     {
-        $this->getDocument()->find('css', sprintf('a:contains("%s")', $direction))->click();
+        $this->getDocument()->find('css', sprintf('a:contains("%s")', $typeOfSort))->click();
     }
 
     /**
