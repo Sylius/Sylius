@@ -1,27 +1,53 @@
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
 {% set definition = resources.definition %}
-{% set fieldName = definition.fields['createdAt'].name %}
+{% set dateFieldName = definition.fields['createdAt'].name %}
+{% set priceFieldName = definition.fields['price'].name %}
+
 <div class="ui vertical fluid accordion menu">
     <div class="item">
-        <a class="active title">
+        <a class="title">
             <i class="dropdown icon"></i>
             {{ 'sylius.ui.sort_by_date'|trans }}
         </a>
-        <div class="active content">
+        <div class="content">
             <div class="ui form">
                 <div class="grouped fields">
                     <div class="field">
                         <a href="{{ path('sylius_shop_taxon_show', {
-                            'sorting': {(fieldName): {'direction': 'asc'}},
+                            'sorting': {(dateFieldName): {'direction': 'asc'}},
                             'permalink': resources.parameters.get('permalink')})
-                        }}">{{ 'sylius.ui.form_the_oldest'|trans }}</a>
+                        }}">{{ 'sylius.ui.from_the_oldest'|trans }}</a>
                     </div>
                     <div class="field">
                         <a href="{{ path('sylius_shop_taxon_show',{
-                            'sorting': {(fieldName): {'direction': 'desc'}},
+                            'sorting': {(dateFieldName): {'direction': 'desc'}},
                             'permalink': resources.parameters.get('permalink')})
-                        }}">{{ 'sylius.ui.form_the_latest'|trans }}</a>
+                        }}">{{ 'sylius.ui.from_the_latest'|trans }}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item">
+        <a class="title">
+            <i class="dropdown icon"></i>
+            {{ 'sylius.ui.sort_by_price'|trans }}
+        </a>
+        <div class="content">
+            <div class="ui form">
+                <div class="grouped fields">
+                    <div class="field">
+                        <a href="{{ path('sylius_shop_taxon_show', {
+                            'sorting': {(priceFieldName): {'direction': 'asc'}},
+                            'permalink': resources.parameters.get('permalink')})
+                        }}">{{ 'sylius.ui.from_the_lowest_price'|trans }}</a>
+                    </div>
+                    <div class="field">
+                        <a href="{{ path('sylius_shop_taxon_show',{
+                            'sorting': {(priceFieldName): {'direction': 'desc'}},
+                            'permalink': resources.parameters.get('permalink')})
+                        }}">{{ 'sylius.ui.from_the_highest_price'|trans }}</a>
                     </div>
                 </div>
             </div>

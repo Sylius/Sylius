@@ -17,9 +17,12 @@ sylius_grid:
                 createdAt:
                     path: createdAt
                     direction: asc
+                price:
+                    path: variant.price
             fields:
                 createdAt:
                     type: datetime
-                    label: sylius.ui.date
                     options:
                         format: m/d/Y
+                price:
+                    type: int

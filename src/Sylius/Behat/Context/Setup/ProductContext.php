@@ -553,6 +553,20 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the store(?:| also) has a product ("[^"]+") created at "(\d+\-\d+\-\d+)" and priced at ("(?:€|£|￥|\$)((?:\d+\.)?\d+)")$/
+     */
+    public function theStoreHasAProductCreatedAtAndPricedAt($productName, $date, $price)
+    {
+        $product = $this->createProduct($productName, $price, $date);
+
+        if ($this->sharedStorage->has('channel')) {
+            $product->addChannel($this->sharedStorage->get('channel'));
+        }
+
+        $this->saveProduct($product);
+    }
+
+    /**
      * @param string $type
      * @param string $name
      * @param string $code
