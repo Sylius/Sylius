@@ -96,54 +96,7 @@ The output should be:
 .. image:: ../_images/container_debug_supplier.png
     :align: center
 
-6. Optionally try to use Sylius API to create new resource
-----------------------------------------------------------
-
-.. note::
-
-    Using API is not mandatory. It is just a nice moment for you to try it out. If you are not interested go to the next point of this cookbook.
-
-Creating OAuth client:
-
-.. code-block:: bash
-
-    $ php app/console sylius:oauth-server:create-client --grant-type="password" --grant-type="refresh_token" --grant-type="token"
-
-It will give you such a response:
-
-.. code-block:: bash
-
-    A new client with public id XYZ, secret ABC has been added
-
-Run your application on a built-in server:
-
-.. code-block:: bash
-
-    $ php ap/console server:start localhost:8000
-
-To obtain authorization token for the ``api@example.com`` user with password ``sylius-api`` run:
-
-.. code-block:: bash
-
-    $ curl http://localhost:8000/api/oauth/v2/token -d "client_id"=XYZ -d "client_secret"=ABC -d "grant_type"=password -d "username"=api@example.com -d "password"=sylius-api
-
-This will give you such a response:
-
-.. code-block:: bash
-
-    {"access_token":"DEF","expires_in":3600,"token_type":"bearer","scope":null,"refresh_token":"GHI"}
-
-Use the ``access_token`` in the request that will create a new Supplier.
-
-.. code-block:: bash
-
-    $ curl -i -X POST -H "Content-Type: application/json" -H "Authorization: Bearer DEF" -d '{"name": "Example", "description": "Lorem ipsum", "enabled": true}' http://localhost:8000/api/suppliers/
-
-.. tip::
-
-    Read more about authorizing in API :doc:`here </api/authorization>`. Different requests to Sylius API are described in `the Lionframe docs <http://lakion.com/lionframe>`_.
-
-7. Define grid structure for the new entity
+6. Define grid structure for the new entity
 -------------------------------------------
 
 To have templates for your Entity administration out of the box you can use Grids. Here you can see how to configure a grid for the Supplier entity.
@@ -194,7 +147,7 @@ Remember to import your grid in the ``app/config/grids/grids.yml`` file which ha
     imports:
         - { resource: "grids/grids.yml" }
 
-8. Define routing for entity administration
+7. Define routing for entity administration
 -------------------------------------------
 
 Having a grid prepared we can configure routing for the entity administration:
@@ -232,7 +185,7 @@ should be also included in the ``app/config/routing.yml``.
         resource: 'routing/admin.yml'
         prefix: /admin
 
-9. Add entity administration to the admin menu
+8. Add entity administration to the admin menu
 ----------------------------------------------
 
 .. tip::
