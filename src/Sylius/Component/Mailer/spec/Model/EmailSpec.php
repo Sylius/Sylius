@@ -12,16 +12,20 @@
 namespace spec\Sylius\Component\Mailer\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Mailer\Model\Email;
 use Sylius\Component\Mailer\Model\EmailInterface;
 
+/**
+ * @mixin Email
+ */
 final class EmailSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Mailer\Model\Email');
+        $this->shouldHaveType(Email::class);
     }
 
-    function it_implements_Sylius_email_interface()
+    function it_implements_email_interface()
     {
         $this->shouldImplement(EmailInterface::class);
     }
@@ -47,21 +51,25 @@ final class EmailSpec extends ObjectBehavior
         $this->setSubject('foo');
         $this->getSubject()->shouldReturn('foo');
     }
+
     function its_content_is_mutable()
     {
         $this->setContent('foo content');
         $this->getContent()->shouldReturn('foo content');
     }
+
     function its_template_is_mutable()
     {
         $this->setContent('template.html.twig');
         $this->getContent()->shouldReturn('template.html.twig');
     }
+
     function its_sender_name_is_mutable()
     {
         $this->setSenderName('Example');
         $this->getSenderName()->shouldReturn('Example');
     }
+
     function its_sender_address_is_mutable()
     {
         $this->setSenderAddress('no-reply@example.com');

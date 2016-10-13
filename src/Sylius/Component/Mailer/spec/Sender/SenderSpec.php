@@ -19,8 +19,11 @@ use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInterface;
+use Sylius\Component\Mailer\Sender\Sender;
 
 /**
+ * @mixin Sender
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SenderSpec extends ObjectBehavior
@@ -36,18 +39,18 @@ final class SenderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Mailer\Sender\Sender');
+        $this->shouldHaveType(Sender::class);
     }
 
     function it_sends_an_email_through_the_adapter(
-        $rendererAdapter,
-        $senderAdapter,
-        $provider,
         EmailInterface $email,
-        RenderedEmail $renderedEmail
+        EmailProviderInterface $provider,
+        RenderedEmail $renderedEmail,
+        RendererAdapterInterface $rendererAdapter,
+        SenderAdapterInterface $senderAdapter
     ) {
-        $provider->getEmail('bar')->shouldBeCalled()->willReturn($email);
-        $email->isEnabled()->shouldBeCalled()->willReturn(true);
+        $provider->getEmail('bar')->willReturn($email);
+        $email->isEnabled()->willReturn(true);
         $email->getSenderAddress()->shouldBeCalled();
         $email->getSenderName()->shouldBeCalled();
 
@@ -60,13 +63,13 @@ final class SenderSpec extends ObjectBehavior
     }
 
     function it_does_not_send_disabled_emails(
-        RendererAdapterInterface $rendererAdapter,
-        SenderAdapterInterface $senderAdapter,
+        EmailInterface $email,
         EmailProvider $provider,
-        EmailInterface $email
+        RendererAdapterInterface $rendererAdapter,
+        SenderAdapterInterface $senderAdapter
     ) {
-        $provider->getEmail('bar')->shouldBeCalled()->willReturn($email);
-        $email->isEnabled()->shouldBeCalled()->willReturn(false);
+        $provider->getEmail('bar')->willReturn($email);
+        $email->isEnabled()->willReturn(false);
 
         $rendererAdapter->render($email, ['foo' => 2])->shouldNotBeCalled();
         $senderAdapter->send(['john@example.com'], 'mail@sylius.org', 'Sylius Mailer', null, $email, [])->shouldNotBeCalled();

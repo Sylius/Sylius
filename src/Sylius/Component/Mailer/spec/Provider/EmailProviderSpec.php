@@ -13,12 +13,13 @@ namespace spec\Sylius\Component\Mailer\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Mailer\Model\EmailInterface;
+use Sylius\Component\Mailer\Provider\EmailProvider;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin \Sylius\Component\Mailer\Provider\EmailProvider
+ * @mixin EmailProvider
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -52,10 +53,10 @@ final class EmailProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Mailer\Provider\EmailProvider');
+        $this->shouldHaveType(EmailProvider::class);
     }
 
-    function it_implements_Sylius_email_provider_interface()
+    function it_implements_email_provider_interface()
     {
         $this->shouldImplement(EmailProviderInterface::class);
     }
@@ -67,13 +68,13 @@ final class EmailProviderSpec extends ObjectBehavior
         $this->getEmail('user_confirmation')->shouldReturn($email);
     }
 
-    function it_looks_for_an_email_in_configuration_when_not_found_via_repository(
+    function it_looks_for_an_email_in_configuration_when_it_cannot_be_found_via_repository(
+        EmailInterface $email,
         FactoryInterface $factory,
-        RepositoryInterface $repository,
-        EmailInterface $email
+        RepositoryInterface $repository
     ) {
-        $repository->findOneBy(['code' => 'user_confirmation'])->shouldBeCalled()->willReturn(null);
-        $factory->createNew()->shouldBeCalled()->willReturn($email);
+        $repository->findOneBy(['code' => 'user_confirmation'])->willReturn(null);
+        $factory->createNew()->willReturn($email);
 
         $email->setCode('user_confirmation')->shouldBeCalled();
         $email->setSubject('Hello test!')->shouldBeCalled();
@@ -85,13 +86,13 @@ final class EmailProviderSpec extends ObjectBehavior
         $this->getEmail('user_confirmation')->shouldReturn($email);
     }
 
-    function it_complains_if_email_does_not_exist($repository)
+    function it_complains_if_email_does_not_exist(RepositoryInterface $repository)
     {
         $repository->findOneBy(['code' => 'foo'])->willReturn(null);
 
         $this
             ->shouldThrow(new \InvalidArgumentException('Email with code "foo" does not exist!'))
-            ->duringGetEmail('foo')
+            ->during('getEmail', ['foo'])
         ;
     }
 }

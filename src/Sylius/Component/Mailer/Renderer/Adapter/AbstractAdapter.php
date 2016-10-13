@@ -25,13 +25,9 @@ abstract class AbstractAdapter implements AdapterInterface
 
     /**
      * @param  EventDispatcherInterface $dispatcher
-     *
-     * @return $this
      */
     public function setEventDispatcher(EventDispatcherInterface $dispatcher)
     {
         $this->dispatcher = $dispatcher;
-
-        return $this;
     }
 }

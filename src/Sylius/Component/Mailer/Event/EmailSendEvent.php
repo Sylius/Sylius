@@ -17,7 +17,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class EmailSendEvent extends Event
+final class EmailSendEvent extends Event
 {
     /**
      * @var mixed
@@ -45,12 +45,8 @@ class EmailSendEvent extends Event
      * @param EmailInterface $email
      * @param array $data
      */
-    public function __construct(
-        $message,
-        EmailInterface $email,
-        array $data,
-        array $recipients = []
-    ) {
+    public function __construct($message, EmailInterface $email, array $data, array $recipients = [])
+    {
         $this->message = $message;
         $this->email = $email;
         $this->data = $data;

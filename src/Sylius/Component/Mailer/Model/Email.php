@@ -62,7 +62,7 @@ class Email implements EmailInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getId()
     {

@@ -22,8 +22,6 @@ use Sylius\Component\Mailer\Renderer\RenderedEmail;
 interface AdapterInterface
 {
     /**
-     * Send an e-mail.
-     *
      * @param array  $recipients
      * @param string $senderAddress
      * @param string $senderName
