@@ -52,7 +52,7 @@
         <service id="sylius.context.currency.core" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency">
             <call method="addContext">
                 <argument type="service">
-                    <service class="Sylius\Component\Core\Context\StorageBasedCurrencyContext">
+                    <service class="Sylius\Component\Core\Currency\Context\StorageBasedCurrencyContext">
                         <argument type="service" id="sylius.context.channel" />
                         <argument type="service" id="sylius.storage.currency" />
                         <argument type="service" id="sylius.currency_provider" />
@@ -100,7 +100,7 @@
             </call>
             <call method="addContext">
                 <argument type="service">
-                    <service class="Sylius\Component\Core\Context\StorageBasedLocaleContext">
+                    <service class="Sylius\Component\Core\Locale\Context\StorageBasedLocaleContext">
                         <argument type="service" id="sylius.context.channel" />
                         <argument type="service" id="sylius.storage.locale" />
                         <argument type="service" id="sylius.locale_provider" />

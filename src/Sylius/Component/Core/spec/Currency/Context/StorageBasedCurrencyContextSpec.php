@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Core\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Core\Context\StorageBasedCurrencyContext;
+use Sylius\Component\Core\Currency\Context\StorageBasedCurrencyContext;
 use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
