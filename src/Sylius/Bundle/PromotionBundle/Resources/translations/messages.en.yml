@@ -23,7 +23,7 @@ sylius:
         promotion_coupon:
             expires_at: Expires at
             usage_limit: Usage limit
-        promotion_coupon_generate_instruction:
+        promotion_coupon_generator_instruction:
             amount: Amount
             code_length: Code length
             expires_at: Expires at

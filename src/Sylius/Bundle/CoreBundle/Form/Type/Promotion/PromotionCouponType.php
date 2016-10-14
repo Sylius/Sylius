@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion;
 
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType as BasePromotionCouponType;
 use Symfony\Component\Form\FormBuilderInterface;
