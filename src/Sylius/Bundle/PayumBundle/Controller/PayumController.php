@@ -113,12 +113,13 @@ final class PayumController
         $configuration = $this->requestConfigurationFactory->create($this->paymentMetadata, $request);
 
         $token = $this->getHttpRequestVerifier()->verify($request);
-        $this->getHttpRequestVerifier()->invalidate($token);
 
         $status = new GetStatus($token);
         $this->payum->getGateway($token->getGatewayName())->execute($status);
         $resolveNextRoute = new ResolveNextRoute($status->getFirstModel());
         $this->payum->getGateway($token->getGatewayName())->execute($resolveNextRoute);
+
+        $this->getHttpRequestVerifier()->invalidate($token);
 
         return $this->viewHandler->handle(
             $configuration,

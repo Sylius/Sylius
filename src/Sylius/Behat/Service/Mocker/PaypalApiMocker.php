@@ -41,8 +41,28 @@ class PaypalApiMocker
         $this->mocker = $mocker;
         $this->responseLoader = $responseLoader;
     }
-   
-    public function mockApiSuccessfulPaymentResponse()
+
+    /**
+     * @param callable $action
+     */
+    public function performActionInApiInitializeScope(callable $action)
+    {
+        $this->mockApiPaymentInitializeResponse();
+        $action();
+        $this->mocker->unmockAll();
+    }
+
+    /**
+     * @param callable $action
+     */
+    public function performActionInApiSuccessfulScope(callable $action)
+    {
+        $this->mockApiSuccessfulPaymentResponse();
+        $action();
+        $this->mocker->unmockAll();
+    }
+
+    private function mockApiSuccessfulPaymentResponse()
     {
         $mockedResponse = $this->responseLoader->getMockedResponse('Paypal/paypal_api_successful_payment.json');
         $firstGetExpressCheckoutDetailsStream = $this->mockStream($mockedResponse['firstGetExpressCheckoutDetails']);
@@ -63,8 +83,8 @@ class PaypalApiMocker
             ->andReturn($firstGetExpressCheckoutDetailsResponse, $doExpressCheckoutPaymentResponse, $secondGetExpressCheckoutDetailsResponse, $getTransactionDetailsResponse)
         ;
     }
-    
-    public function mockApiPaymentInitializeResponse()
+
+    private function mockApiPaymentInitializeResponse()
     {
         $mockedResponse = $this->responseLoader->getMockedResponse('Paypal/paypal_api_initialize_payment.json');
         $setExpressCheckoutStream = $this->mockStream($mockedResponse['setExpressCheckout']);
