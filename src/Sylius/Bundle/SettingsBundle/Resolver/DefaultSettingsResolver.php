@@ -15,9 +15,6 @@ use Doctrine\ORM\NonUniqueResultException;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Default implementation that resolves settings in the simplest way possible. It tries to find a schema by it's name
- * and optionally the given namespace.
- *
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
 final class DefaultSettingsResolver implements SettingsResolverInterface

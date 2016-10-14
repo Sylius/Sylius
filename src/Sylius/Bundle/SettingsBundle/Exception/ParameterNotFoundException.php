@@ -14,17 +14,17 @@ namespace Sylius\Bundle\SettingsBundle\Exception;
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-class ParameterNotFoundException extends \InvalidArgumentException
+final class ParameterNotFoundException extends \InvalidArgumentException
 {
     /**
      * @param string $parameter
      * @param int $code
-     * @param Exception $previous
+     * @param \Exception|null $previousException
      */
-    public function __construct($parameter, $code = 0, \Exception $previous = null)
+    public function __construct($parameter, $code = 0, \Exception $previousException = null)
     {
         $message = sprintf('Parameter with name "%s" does not exist.', $parameter);
 
-        parent::__construct($message, $code, $previous);
+        parent::__construct($message, $code, $previousException);
     }
 }

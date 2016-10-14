@@ -12,11 +12,6 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <parameters>
-        <parameter key="sylius.settings.schema_interface">Sylius\Bundle\SettingsBundle\Schema\SchemaInterface</parameter>
-        <parameter key="sylius.settings.resolver_interface">Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface</parameter>
-    </parameters>
-
     <services>
         <service id="sylius.controller.settings" class="Sylius\Bundle\SettingsBundle\Controller\SettingsController">
             <call method="setContainer">
@@ -24,12 +19,12 @@
             </call>
         </service>
 
-        <service id="sylius.settings.form_factory" class="Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory">
+        <service id="sylius.form_factory.settings" class="Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactory">
             <argument type="service" id="sylius.registry.settings_schema" />
             <argument type="service" id="form.factory" />
         </service>
 
-        <service id="sylius.settings.manager" class="Sylius\Bundle\SettingsBundle\Manager\SettingsManager">
+        <service id="sylius.manager.settings" class="Sylius\Bundle\SettingsBundle\Manager\SettingsManager">
             <argument type="service" id="sylius.registry.settings_schema" />
             <argument type="service" id="sylius.registry.settings_resolver" />
             <argument type="service" id="sylius.manager.settings" />
@@ -38,25 +33,25 @@
         </service>
 
         <service id="sylius.registry.settings_schema" class="Sylius\Component\Registry\ServiceRegistry" lazy="true">
-            <argument>%sylius.settings.schema_interface%</argument>
+            <argument>Sylius\Bundle\SettingsBundle\Schema\SchemaInterface</argument>
             <argument>Settings schema</argument>
         </service>
 
         <service id="sylius.registry.settings_resolver" class="Sylius\Bundle\SettingsBundle\Resolver\ResolverServiceRegistry" lazy="true">
             <argument type="service">
                 <service class="Sylius\Component\Registry\ServiceRegistry">
-                    <argument>%sylius.settings.resolver_interface%</argument>
+                    <argument>Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface</argument>
                     <argument>Settings resolver</argument>
                 </service>
             </argument>
-            <argument type="service" id="sylius.settings.default_resolver"/>
+            <argument type="service" id="sylius.settings_resolver.default"/>
         </service>
 
-        <service id="sylius.settings.default_resolver" class="Sylius\Bundle\SettingsBundle\Resolver\DefaultSettingsResolver">
+        <service id="sylius.settings_resolver.default" class="Sylius\Bundle\SettingsBundle\Resolver\DefaultSettingsResolver">
             <argument type="service" id="sylius.repository.settings" />
         </service>
 
-        <service id="sylius.settings.doctrine.transform_settings_listener" class="Sylius\Bundle\SettingsBundle\Doctrine\EventListener\ParameterTransformerListener">
+        <service id="sylius.doctrine.settings_parameter_transformer_listener" class="Sylius\Bundle\SettingsBundle\Doctrine\EventListener\ParameterTransformerListener">
             <argument type="service" id="service_container"/>
             <tag name="doctrine.event_listener" event="onFlush"/>
             <tag name="doctrine.event_listener" event="postFlush"/>
@@ -64,7 +59,7 @@
         </service>
 
         <service id="sylius.templating.helper.settings" class="Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper">
-            <argument type="service" id="sylius.settings.manager" />
+            <argument type="service" id="sylius.manager.settings" />
             <tag name="templating.helper" alias="sylius_settings" />
         </service>
 

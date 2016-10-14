@@ -17,8 +17,6 @@ namespace Sylius\Bundle\SettingsBundle\Transformer;
 interface ParameterTransformerInterface
 {
     /**
-     * Transform the parameter into format which is suitable for storage.
-     *
      * @param mixed $value
      *
      * @return mixed
@@ -26,8 +24,6 @@ interface ParameterTransformerInterface
     public function transform($value);
 
     /**
-     * Transform parameter value back into it's original form.
-     *
      * @param mixed $value
      *
      * @return mixed

@@ -14,9 +14,13 @@ namespace spec\Sylius\Bundle\SettingsBundle\Templating\Helper;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
+use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper;
 use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
+/**
+ * @mixin SettingsHelper
+ */
 final class SettingsHelperSpec extends ObjectBehavior
 {
     function let(SettingsManagerInterface $settingsManager)
@@ -26,7 +30,7 @@ final class SettingsHelperSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper');
+        $this->shouldHaveType(SettingsHelper::class);
     }
 
     function it_implements_settings_helper_interface()
@@ -34,12 +38,12 @@ final class SettingsHelperSpec extends ObjectBehavior
         $this->shouldImplement(SettingsHelperInterface::class);
     }
 
-    function it_should_be_a_Twig_extension()
+    function it_is_a_twig_helper()
     {
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_should_return_settings_by_namespace(SettingsManagerInterface $settingsManager, SettingsInterface $settings)
+    function it_returns_settings_by_namespace(SettingsManagerInterface $settingsManager, SettingsInterface $settings)
     {
         $settingsManager->load('sylius_taxation')->willReturn($settings);
 

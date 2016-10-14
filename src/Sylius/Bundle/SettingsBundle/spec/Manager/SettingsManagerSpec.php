@@ -13,12 +13,15 @@ namespace spec\Sylius\Bundle\SettingsBundle\Manager;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Manager\SettingsManager;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
+ * @mixin SettingsManager
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SettingsManagerSpec extends ObjectBehavior
@@ -41,10 +44,10 @@ final class SettingsManagerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Manager\SettingsManager');
+        $this->shouldHaveType(SettingsManager::class);
     }
 
-    function it_should_be_a_Sylius_settings_manager()
+    function it_should_be_a_settings_manager()
     {
         $this->shouldImplement(SettingsManagerInterface::class);
     }

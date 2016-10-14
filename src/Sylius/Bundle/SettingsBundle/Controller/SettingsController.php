@@ -27,9 +27,6 @@ use Symfony\Component\Validator\Exception\ValidatorException;
 class SettingsController extends FOSRestController
 {
     /**
-     * Get a specific settings data.
-     * This controller action only used for Rest API.
-     *
      * @param Request $request
      *
      * @return Response
@@ -103,7 +100,7 @@ class SettingsController extends FOSRestController
      */
     protected function getSettingsManager()
     {
-        return $this->get('sylius.settings.manager');
+        return $this->get('sylius.manager.settings');
     }
 
     /**
@@ -111,7 +108,7 @@ class SettingsController extends FOSRestController
      */
     protected function getSettingsFormFactory()
     {
-        return $this->get('sylius.settings.form_factory');
+        return $this->get('sylius.form_factory.settings');
     }
 
     /**

@@ -16,12 +16,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all settings schemas in the schema registry.
- * Save the configuration names in parameter for the provider.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RegisterSchemasPass implements CompilerPassInterface
+final class RegisterSchemasPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -38,8 +35,11 @@ class RegisterSchemasPass implements CompilerPassInterface
         foreach ($taggedServicesIds as $id => $tags) {
             foreach ($tags as $attributes) {
                 if (!isset($attributes['alias'])) {
-                    throw new \InvalidArgumentException(sprintf('Service "%s" must define the "alias" attribute on "sylius.settings_schema" tags.', $id));
+                    throw new \InvalidArgumentException(
+                        sprintf('Service "%s" must define the "alias" attribute on "sylius.settings_schema" tags.', $id)
+                    );
                 }
+
                 $schemaRegistry->addMethodCall('register', [$attributes['alias'], new Reference($id)]);
             }
         }
