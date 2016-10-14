@@ -32,7 +32,13 @@ parameters:
     database_password: vagrant
 ```
 
-From now you should be able to access your Sylius project at [http://sylius.dev/](http://sylius.dev/)
+From now you should be able to access your Sylius project at [http://sylius.dev/app_dev.php](http://sylius.dev/app_dev.php)
+
+Installing your assets manually
+
+```
+    vagrant ssh -c 'cd /var/www/sylius && ./node_modules/.bin/gulp'
+```
 
 # Troubleshooting
 

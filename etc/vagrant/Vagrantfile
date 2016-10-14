@@ -18,5 +18,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
         # Shell provisioning
         sylius_config.vm.provision :shell, :path => "shell_provisioner/run.sh"
+        sylius_config.vm.provision :shell, privileged: false, path: "shell_provisioner/module/sylius.sh"
     end
 end

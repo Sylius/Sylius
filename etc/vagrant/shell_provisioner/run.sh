@@ -18,7 +18,7 @@ DEPENDENCIES=(
     php
     mysql
     apache
-    sylius
+    node
 )
 
 for MODULE in ${DEPENDENCIES[@]}; do
