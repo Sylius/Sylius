@@ -11,11 +11,10 @@
 
 namespace spec\Sylius\Component\Grid\View;
 
+use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\View\GridView;
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @mixin GridView

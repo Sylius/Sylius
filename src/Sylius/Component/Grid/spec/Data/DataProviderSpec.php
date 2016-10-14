@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Grid\Data;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\Data\DataProvider;
 use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Data\DataSourceInterface;
@@ -21,7 +20,6 @@ use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Filtering\FiltersApplicatorInterface;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\Sorting\SorterInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * @mixin DataProvider
@@ -37,7 +35,7 @@ final class DataProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Data\DataProvider');
+        $this->shouldHaveType(DataProvider::class);
     }
 
     function it_implements_grid_data_provider_interface()

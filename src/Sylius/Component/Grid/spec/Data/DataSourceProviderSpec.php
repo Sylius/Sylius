@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Grid\Data;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\Data\DataSourceProvider;
 use Sylius\Component\Grid\Data\DataSourceProviderInterface;
 use Sylius\Component\Grid\Data\DriverInterface;
@@ -35,7 +34,7 @@ final class DataSourceProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Data\DataSourceProvider');
+        $this->shouldHaveType(DataSourceProvider::class);
     }
 
     function it_implements_grid_data_provider_interface()

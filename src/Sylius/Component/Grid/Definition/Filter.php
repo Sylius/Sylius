@@ -52,11 +52,11 @@ class Filter
      * @param string $name
      * @param string $type
      *
-     * @return Filter
+     * @return self
      */
     public static function fromNameAndType($name, $type)
     {
-        return new Filter($name, $type);
+        return new self($name, $type);
     }
 
     /**

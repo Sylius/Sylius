@@ -18,7 +18,7 @@ use Sylius\Component\Grid\Parameters;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Sorter implements SorterInterface
+final class Sorter implements SorterInterface
 {
     /**
      * {@inheritdoc}

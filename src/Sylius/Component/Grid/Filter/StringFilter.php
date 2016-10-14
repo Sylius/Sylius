@@ -18,7 +18,7 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StringFilter implements FilterInterface
+final class StringFilter implements FilterInterface
 {
     const NAME = 'string';
 
@@ -70,7 +70,7 @@ class StringFilter implements FilterInterface
      * @param ExpressionBuilderInterface $expressionBuilder
      * @param string $type
      * @param string $field
-     * @param mixed  $value
+     * @param mixed $value
      *
      * @return ExpressionBuilderInterface
      */

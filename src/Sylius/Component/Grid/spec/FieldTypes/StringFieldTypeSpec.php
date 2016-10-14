@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Grid\FieldTypes;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
@@ -32,7 +31,7 @@ final class StringFieldTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\FieldTypes\StringFieldType');
+        $this->shouldHaveType(StringFieldType::class);
     }
 
     function it_is_a_grid_field_type()

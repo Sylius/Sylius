@@ -11,14 +11,13 @@
 
 namespace spec\Sylius\Component\Grid\Sorting;
 
+use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\Sorting\Sorter;
 use Sylius\Component\Grid\Sorting\SorterInterface;
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @mixin Sorter

@@ -14,7 +14,7 @@ namespace Sylius\Component\Grid\Definition;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
+final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
 {
     /**
      * {@inheritdoc}

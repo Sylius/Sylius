@@ -13,13 +13,13 @@ namespace Sylius\Component\Grid\FieldTypes;
 
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
-use Webmozart\Assert\Assert;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DatetimeFieldType implements FieldTypeInterface
+final class DatetimeFieldType implements FieldTypeInterface
 {
     /**
      * @var DataExtractorInterface

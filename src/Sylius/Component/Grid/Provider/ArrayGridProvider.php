@@ -12,11 +12,12 @@
 namespace Sylius\Component\Grid\Provider;
 
 use Sylius\Component\Grid\Definition\ArrayToDefinitionConverterInterface;
+use Sylius\Component\Grid\Definition\Grid;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ArrayGridProvider implements GridProviderInterface
+final class ArrayGridProvider implements GridProviderInterface
 {
     /**
      * @var Grid[]

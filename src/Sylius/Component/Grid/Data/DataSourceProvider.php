@@ -18,7 +18,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DataSourceProvider implements DataSourceProviderInterface
+final class DataSourceProvider implements DataSourceProviderInterface
 {
     /**
      * @var ServiceRegistryInterface

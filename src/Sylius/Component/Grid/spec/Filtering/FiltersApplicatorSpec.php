@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Grid\Filtering;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
@@ -36,7 +35,7 @@ final class FiltersApplicatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Filtering\FiltersApplicator');
+        $this->shouldHaveType(FiltersApplicator::class);
     }
 
     function it_implements_filters_applicator_interface()
