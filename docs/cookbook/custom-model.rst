@@ -96,7 +96,16 @@ The output should be:
 .. image:: ../_images/container_debug_supplier.png
     :align: center
 
-6. Define grid structure for the new entity
+6. Optionally try to use Sylius API to create new resource
+----------------------------------------------------------
+
+See how to work with API in :doc:`the separate cookbook here </cookbook/api>`.
+
+.. note::
+
+    Using API is not mandatory. It is just a nice moment for you to try it out. If you are not interested go to the next point of this cookbook.
+
+7. Define grid structure for the new entity
 -------------------------------------------
 
 To have templates for your Entity administration out of the box you can use Grids. Here you can see how to configure a grid for the Supplier entity.
@@ -147,7 +156,7 @@ Remember to import your grid in the ``app/config/grids/grids.yml`` file which ha
     imports:
         - { resource: "grids/grids.yml" }
 
-7. Define routing for entity administration
+8. Define routing for entity administration
 -------------------------------------------
 
 Having a grid prepared we can configure routing for the entity administration:
@@ -185,7 +194,7 @@ should be also included in the ``app/config/routing.yml``.
         resource: 'routing/admin.yml'
         prefix: /admin
 
-8. Add entity administration to the admin menu
+9. Add entity administration to the admin menu
 ----------------------------------------------
 
 .. tip::
