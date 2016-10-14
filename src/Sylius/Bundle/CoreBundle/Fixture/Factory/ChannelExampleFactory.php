@@ -81,7 +81,7 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
                 ->setDefault('default_locale', function (Options $options) {
                     return $this->faker->randomElement($options['locales']);
                 })
-                ->setAllowedTypes('default_locale', LocaleInterface::class)
+                ->setAllowedTypes('default_locale', ['string', LocaleInterface::class])
                 ->setNormalizer('default_locale', LazyOption::findOneBy($localeRepository, 'code'))
                 ->setDefault('locales', LazyOption::all($localeRepository))
                 ->setAllowedTypes('locales', 'array')
@@ -89,7 +89,7 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
                 ->setDefault('default_currency', function (Options $options) {
                     return $this->faker->randomElement($options['currencies']);
                 })
-                ->setAllowedTypes('default_currency', CurrencyInterface::class)
+                ->setAllowedTypes('default_currency', ['string', CurrencyInterface::class])
                 ->setNormalizer('default_currency', LazyOption::findOneBy($currencyRepository, 'code'))
                 ->setDefault('currencies', LazyOption::all($currencyRepository))
                 ->setAllowedTypes('currencies', 'array')
