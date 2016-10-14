@@ -15,23 +15,26 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
+use Sylius\Component\Core\Test\Services\RandomInvoiceNumberGenerator;
 
 /**
+ * @mixin RandomInvoiceNumberGenerator
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class RandomInvoiceNumberGeneratorSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Test\Services\RandomInvoiceNumberGenerator');
+        $this->shouldHaveType(RandomInvoiceNumberGenerator::class);
     }
 
-    public function it_is_invoice_number_generator()
+    public function it_is_an_invoice_number_generator()
     {
         $this->shouldImplement(InvoiceNumberGeneratorInterface::class);
     }
 
-    public function it_generates_random_invoice_number(OrderInterface $order, PaymentInterface $payment)
+    public function it_generates_a_random_invoice_number(OrderInterface $order, PaymentInterface $payment)
     {
         $this->generate($order, $payment)->shouldBeString();
     }

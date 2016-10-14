@@ -18,7 +18,6 @@ use Sylius\Component\Core\Inventory\Operator\OrderInventoryOperatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 
 /**
@@ -33,7 +32,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->shouldHaveType(OrderInventoryOperator::class);
     }
 
-    function it_implements_order_inventory_operator_interface()
+    function it_implements_an_order_inventory_operator_interface()
     {
         $this->shouldImplement(OrderInventoryOperatorInterface::class);
     }
@@ -116,7 +115,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
     }
 
 
-    function it_throws_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_cancelling(
+    function it_throws_an_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_cancelling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -135,7 +134,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('cancel', [$order]);
     }
 
-    function it_throws_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_selling(
+    function it_throws_an_invalid_argument_exception_if_difference_between_on_hold_and_item_quantity_is_smaller_than_zero_during_selling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant
@@ -152,7 +151,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('sell', [$order]);
     }
 
-    function it_throws_invalid_argument_exception_if_difference_between_on_hand_and_item_quantity_is_smaller_than_zero_during_selling(
+    function it_throws_an_invalid_argument_exception_if_difference_between_on_hand_and_item_quantity_is_smaller_than_zero_during_selling(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $variant

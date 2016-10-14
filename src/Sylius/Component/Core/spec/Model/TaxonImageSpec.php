@@ -14,9 +14,7 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Image;
 use Sylius\Component\Core\Model\ImageAwareInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonImage;
-use Sylius\Component\Core\Model\TaxonInterface;
 
 /**
  * @mixin TaxonImage

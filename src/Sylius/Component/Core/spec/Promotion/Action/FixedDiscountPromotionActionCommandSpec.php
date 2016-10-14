@@ -50,7 +50,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->shouldImplement(PromotionActionCommandInterface::class);
     }
 
-    function it_uses_distributor_and_applicator_to_execute_promotion_action(
+    function it_uses_a_distributor_and_applicator_to_execute_promotion_action(
         OrderInterface $order,
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
@@ -132,7 +132,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['amount' => 0], $promotion);
     }
 
-    function it_throws_exception_if_configuration_is_invalid(OrderInterface $order, PromotionInterface $promotion)
+    function it_throws_an_exception_if_configuration_is_invalid(OrderInterface $order, PromotionInterface $promotion)
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -145,7 +145,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_subject_is_not_an_order(
+    function it_throws_an_exception_if_subject_is_not_an_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ) {
@@ -155,7 +155,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ;
     }
 
-    function it_reverts_order_units_order_promotion_adjustments(
+    function it_reverts_an_order_units_order_promotion_adjustments(
         AdjustmentInterface $firstAdjustment,
         AdjustmentInterface $secondAdjustment,
         OrderInterface $order,
@@ -192,7 +192,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, [], $promotion);
     }
 
-    function it_throws_exception_while_reverting_subject_which_is_not_order(
+    function it_throws_an_exception_while_reverting_subject_which_is_not_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ) {
@@ -202,7 +202,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_configuration_form_type()
+    function it_has_a_configuration_form_type()
     {
         $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_fixed_discount_configuration');
     }

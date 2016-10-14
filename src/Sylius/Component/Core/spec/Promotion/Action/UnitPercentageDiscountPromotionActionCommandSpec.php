@@ -45,15 +45,15 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->shouldHaveType(UnitPercentageDiscountPromotionActionCommand::class);
     }
 
-    function it_is_item_discount_action()
+    function it_is_an_item_discount_action()
     {
         $this->shouldHaveType(UnitDiscountPromotionActionCommand::class);
     }
 
     function it_applies_percentage_discount_on_every_unit_in_order(
-        $adjustmentFactory,
-        $priceRangeFilter,
-        $taxonFilter,
+        FactoryInterface $adjustmentFactory,
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
@@ -107,7 +107,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->execute($order, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
     }
 
-    function it_throws_exception_if_passed_subject_is_not_order(
+    function it_throws_an_exception_if_passed_subject_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ) {
@@ -117,7 +117,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ;
     }
 
-    function it_reverts_proper_promotion_adjustment_from_all_units(
+    function it_reverts_a_proper_promotion_adjustment_from_all_units(
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $items,
@@ -151,7 +151,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->revert($order, ['percentage' => 0.2], $promotion);
     }
 
-    function it_throws_exception_if_passed_subject_to_revert_is_not_order(
+    function it_throws_an_exception_if_passed_subject_to_revert_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ) {
@@ -161,7 +161,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ;
     }
 
-    function it_has_configuration_form_type()
+    function it_has_a_configuration_form_type()
     {
         $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_percentage_discount_configuration');
     }

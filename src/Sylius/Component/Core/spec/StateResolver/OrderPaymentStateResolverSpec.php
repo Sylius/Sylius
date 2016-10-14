@@ -40,12 +40,12 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->shouldHaveType(OrderPaymentStateResolver::class);
     }
 
-    function it_implements_Sylius_order_state_resolver_interface()
+    function it_implements_an_order_state_resolver_interface()
     {
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_marks_order_as_completed_if_fully_paid(
+    function it_marks_an_order_as_completed_if_fully_paid(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -68,7 +68,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_order_as_completed_if_fully_paid_multiple_payments(
+    function it_marks_an_order_as_completed_if_fully_paid_multiple_payments(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -94,7 +94,7 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_order_as_partially_paid_if_one_of_the_payment_is_processing(
+    function it_marks_an_order_as_partially_paid_if_one_of_the_payment_is_processing(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,

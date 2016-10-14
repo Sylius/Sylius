@@ -52,7 +52,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order)
+    function it_does_not_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->getShipments()->willReturn([]);

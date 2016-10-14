@@ -16,11 +16,14 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
+use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
+ * @mixin ProductVariant
+ * 
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProductVariantSpec extends ObjectBehavior
@@ -30,27 +33,27 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->shouldHaveType(ProductVariant::class);
     }
 
-    function it_implements_Sylius_product_variant_interface()
+    function it_implements_a_product_variant_interface()
     {
         $this->shouldImplement(ProductVariantInterface::class);
     }
 
-    function it_implements_Sylius_taxable_interface()
+    function it_implements_a_taxable_interface()
     {
         $this->shouldImplement(TaxableInterface::class);
     }
 
-    function it_extends_Sylius_product_variant_model()
+    function it_extends_a_product_variant_model()
     {
         $this->shouldHaveType(BaseProductVariant::class);
     }
 
-    function it_should_not_have_price_by_default()
+    function it_does_not_have_price_by_default()
     {
         $this->getPrice()->shouldReturn(null);
     }
 
-    function it_should_not_have_original_price_by_default()
+    function it_does_not_have_original_price_by_default()
     {
         $this->getOriginalPrice()->shouldReturn(null);
     }
@@ -72,11 +75,11 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->setPrice(410);
         $this->getPrice()->shouldBeInteger();
 
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(4.1 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice('410');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(round(4.1 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice([410]);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(new \stdClass());
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(4.1 * 100);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice('410');
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(round(4.1 * 100));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice([410]);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(new \stdClass());
     }
 
     function its_original_price_should_accept_only_integer()
@@ -88,9 +91,9 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(new \stdClass());
     }
 
-    function it_implements_Sylius_shippable_interface()
+    function it_implements_a_shippable_interface()
     {
-        $this->shouldImplement('Sylius\Component\Shipping\Model\ShippableInterface');
+        $this->shouldImplement(ShippableInterface::class);
     }
 
     function it_returns_null_if_product_has_no_shipping_category(ProductInterface $product)

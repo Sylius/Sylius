@@ -35,12 +35,12 @@ final class TaxonSpec extends ObjectBehavior
         $this->shouldImplement(TaxonInterface::class);
     }
 
-    function it_implements_image_aware_interface()
+    function it_implements_an_image_aware_interface()
     {
         $this->shouldImplement(ImageAwareInterface::class);
     }
 
-    function it_initializes_image_collection_by_default()
+    function it_initializes_an_image_collection_by_default()
     {
         $this->getImages()->shouldHaveType(Collection::class);
     }

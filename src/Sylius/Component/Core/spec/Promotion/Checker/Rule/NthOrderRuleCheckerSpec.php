@@ -38,19 +38,19 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(NthOrderRuleChecker::class);
     }
 
-    function it_implements_rule_checker_interface()
+    function it_implements_a_rule_checker_interface()
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_recognizes_subject_without_customer_as_not_eligible(OrderInterface $subject)
+    function it_recognizes_a_subject_without_customer_as_not_eligible(OrderInterface $subject)
     {
         $subject->getCustomer()->willReturn(null);
 
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_recognizes_subject_as_not_eligible_if_nth_order_is_zero(
+    function it_recognizes_a_subject_as_not_eligible_if_nth_order_is_zero(
         CustomerInterface $customer,
         OrderInterface $subject,
         OrderRepositoryInterface $ordersRepository
@@ -63,7 +63,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_recognizes_subject_as_not_eligible_if_nth_order_is_less_then_configured(
+    function it_recognizes_a_subject_as_not_eligible_if_nth_order_is_less_then_configured(
         CustomerInterface $customer,
         OrderInterface $subject,
         OrderRepositoryInterface $ordersRepository
@@ -76,7 +76,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_recognizes_subject_as_not_eligible_if_nth_order_is_greater_than_configured(
+    function it_recognizes_a_subject_as_not_eligible_if_nth_order_is_greater_than_configured(
         CustomerInterface $customer,
         OrderInterface $subject,
         OrderRepositoryInterface $ordersRepository
@@ -89,7 +89,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_recognizes_subject_as_eligible_if_nth_order_is_equal_with_configured(
+    function it_recognizes_a_subject_as_eligible_if_nth_order_is_equal_with_configured(
         CustomerInterface $customer,
         OrderInterface $subject,
         OrderRepositoryInterface $ordersRepository
@@ -102,7 +102,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(true);
     }
 
-    function it_recognizes_subject_as_eligible_if_nth_order_is_one_and_customer_is_not_in_database(
+    function it_recognizes_a_subject_as_eligible_if_nth_order_is_one_and_customer_is_not_in_database(
         CustomerInterface $customer,
         OrderInterface $subject
     ) {
@@ -113,7 +113,7 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['nth' => 1])->shouldReturn(true);
     }
 
-    function it_recognizes_subject_as_not_eligible_if_it_is_first_order_of_new_customer_and_promotion_is_for_more_than_one_order(
+    function it_recognizes_a_subject_as_not_eligible_if_it_is_first_order_of_new_customer_and_promotion_is_for_more_than_one_order(
         CustomerInterface $customer,
         OrderInterface $subject
     ) {
@@ -123,13 +123,13 @@ final class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_recognizes_subject_as_not_eligible_if_configuration_is_invalid(OrderInterface $subject)
+    function it_recognizes_a_subject_as_not_eligible_if_configuration_is_invalid(OrderInterface $subject)
     {
         $this->isEligible($subject, [])->shouldReturn(false);
         $this->isEligible($subject, ['nth' => 'string'])->shouldReturn(false);
     }
 
-    function it_throws_exception_if_subject_is_not_order(PromotionSubjectInterface $subject)
+    function it_throws_an_exception_if_subject_is_not_order(PromotionSubjectInterface $subject)
     {
         $this
             ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))

@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Product\Model\Product as SyliusProduct;
+use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
@@ -39,25 +39,25 @@ final class ProductSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\Product');
+        $this->shouldHaveType(Product::class);
     }
 
-    function it_implements_Sylius_core_product_interface()
+    function it_implements_a_product_interface()
     {
         $this->shouldImplement(ProductInterface::class);
     }
 
-    function it_implements_image_aware_interface()
+    function it_implements_an_image_aware_interface()
     {
         $this->shouldImplement(ImageAwareInterface::class);
     }
 
-    function it_extends_Sylius_product_model()
+    function it_extends_a_product_model()
     {
-        $this->shouldHaveType(SyliusProduct::class);
+        $this->shouldHaveType(BaseProduct::class);
     }
 
-    function it_initializes_taxon_collection_by_default()
+    function it_initializes_a_taxon_collection_by_default()
     {
         $this->getTaxons()->shouldHaveType(Collection::class);
     }
@@ -75,7 +75,7 @@ final class ProductSpec extends ObjectBehavior
     function it_throws_exception_if_any_other_value_is_given_as_variant_selection_method()
     {
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringSetVariantSelectionMethod('foo')
         ;
     }
@@ -102,14 +102,14 @@ final class ProductSpec extends ObjectBehavior
         $this->getMainTaxon()->shouldReturn($taxon);
     }
 
-    function it_returns_first_variant(VariantInterface $variant)
+    function it_returns_a_first_variant(VariantInterface $variant)
     {
         $this->addVariant($variant);
 
         $this->getFirstVariant()->shouldReturn($variant);
     }
 
-    function it_returns_null_as_first_variant_if_product_has_no_variants(VariantInterface $variant)
+    function it_returns_a_null_as_first_variant_if_a_product_has_no_variants(VariantInterface $variant)
     {
         $variant->setProduct(null)->shouldBeCalled();
         $this->removeVariant($variant);
@@ -117,7 +117,7 @@ final class ProductSpec extends ObjectBehavior
         $this->getFirstVariant()->shouldReturn(null);
     }
 
-    function it_returns_first_variants_price_as_product_price(VariantInterface $variant)
+    function it_returns_a_first_variants_price_as_product_price(VariantInterface $variant)
     {
         $variant->getPrice()->willReturn(1000);
         $this->addVariant($variant);
@@ -125,7 +125,7 @@ final class ProductSpec extends ObjectBehavior
         $this->getPrice()->shouldReturn(1000);
     }
 
-    function it_returns_null_as_product_price_if_product_has_no_variants(VariantInterface $variant)
+    function it_returns_a_null_as_product_price_if_a_product_has_no_variants(VariantInterface $variant)
     {
         $variant->setProduct(null)->shouldBeCalled();
         $this->removeVariant($variant);

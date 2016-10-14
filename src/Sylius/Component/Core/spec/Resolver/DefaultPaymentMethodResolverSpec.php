@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as CorePaymentInterface;
@@ -38,17 +37,18 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         $this->shouldHaveType(DefaultPaymentMethodResolver::class);
     }
 
-    function it_implements_payment_method_resolver_interface()
+    function it_implements_a_payment_method_resolver_interface()
     {
         $this->shouldImplement(DefaultPaymentMethodResolverInterface::class);
     }
 
-    function it_throws_invalid_argument_exception_if_subject_not_implements_core_payment_interface(PaymentInterface $payment)
-    {
+    function it_throws_an_invalid_argument_exception_if_subject_not_implements_core_payment_interface(
+        PaymentInterface $payment
+    ) {
         $this->shouldThrow(\InvalidArgumentException::class)->during('getDefaultPaymentMethod', [$payment]);
     }
 
-    function it_throws_unresolved_default_payment_method_exception_if_there_is_no_enabled_payment_methods_in_database(
+    function it_throws_an_unresolved_default_payment_method_exception_if_there_is_no_enabled_payment_methods_in_database(
         CorePaymentInterface $payment,
         PaymentMethodRepositoryInterface $paymentMethodRepository,
         ChannelInterface $channel,
@@ -58,7 +58,10 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
         $paymentMethodRepository->findEnabledForChannel($channel)->willReturn([]);
 
-        $this->shouldThrow(UnresolvedDefaultPaymentMethodException::class)->during('getDefaultPaymentMethod', [$payment]);
+        $this
+            ->shouldThrow(UnresolvedDefaultPaymentMethodException::class)
+            ->during('getDefaultPaymentMethod', [$payment])
+        ;
     }
 
     function it_returns_first_payment_method_from_availables_which_is_enclosed_in_channel(
@@ -71,7 +74,10 @@ final class DefaultPaymentMethodResolverSpec extends ObjectBehavior
     ) {
         $payment->getOrder()->willReturn($order);
         $order->getChannel()->willReturn($channel);
-        $paymentMethodRepository->findEnabledForChannel($channel)->willReturn([$firstPaymentMethod, $secondPaymentMethod]);
+        $paymentMethodRepository
+            ->findEnabledForChannel($channel)
+            ->willReturn([$firstPaymentMethod, $secondPaymentMethod])
+        ;
 
         $this->getDefaultPaymentMethod($payment)->shouldReturn($firstPaymentMethod);
     }

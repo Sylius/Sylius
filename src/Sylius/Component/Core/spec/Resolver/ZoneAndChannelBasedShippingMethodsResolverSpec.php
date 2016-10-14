@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -43,10 +42,10 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver');
+        $this->shouldHaveType(ZoneAndChannelBasedShippingMethodsResolver::class);
     }
 
-    function it_implements_shipping_methods_by_zones_and_channel_resolver_interface()
+    function it_implements_a_shipping_methods_by_zones_and_channel_resolver_interface()
     {
         $this->shouldImplement(ShippingMethodsResolverInterface::class);
     }
@@ -81,7 +80,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $this->getSupportedMethods($shipment)->shouldReturn([$firstShippingMethod, $secondShippingMethod]);
     }
 
-    function it_returns_empty_array_if_zone_matcher_could_not_match_any_zone(
+    function it_returns_an_empty_array_if_zone_matcher_could_not_match_any_zone(
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker,
         OrderInterface $order,
         AddressInterface $address,

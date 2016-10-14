@@ -32,12 +32,12 @@ final class ContainsProductRuleCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(ContainsProductRuleChecker::class);
     }
 
-    function it_is_sylius_rule_checker()
+    function it_is_a_rule_checker()
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_throws_exception_on_invalid_subject(PromotionSubjectInterface $subject)
+    function it_throws_an_exception_on_invalid_subject(PromotionSubjectInterface $subject)
     {
         $this->shouldThrow(UnsupportedTypeException::class)->duringIsEligible($subject, []);
     }

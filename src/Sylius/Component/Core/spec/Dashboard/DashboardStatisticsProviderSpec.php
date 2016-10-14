@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Dashboard;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Dashboard\DashboardStatistics;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProvider;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
@@ -33,10 +32,10 @@ final class DashboardStatisticsProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Dashboard\DashboardStatisticsProvider');
+        $this->shouldHaveType(DashboardStatisticsProvider::class);
     }
 
-    function it_implements_dashboard_statistics_provider_interface()
+    function it_implements_a_dashboard_statistics_provider_interface()
     {
         $this->shouldImplement(DashboardStatisticsProviderInterface::class);
     }

@@ -45,7 +45,7 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_returns_available_active_locale(
+    function it_returns_an_available_active_locale(
         ChannelContextInterface $channelContext,
         LocaleStorageInterface $localeStorage,
         LocaleProviderInterface $localeProvider,

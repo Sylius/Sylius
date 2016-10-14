@@ -2,20 +2,19 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 
 /**
- * @mixin \Sylius\Component\Core\Model\OrderItem
+ * @mixin OrderItem
  */
 final class OrderItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\OrderItem');
+        $this->shouldHaveType(OrderItem::class);
     }
 
     function it_returns_0_tax_total_when_there_are_no_units()

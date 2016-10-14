@@ -37,7 +37,7 @@ final class StorageBasedCurrencyContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Context\StorageBasedCurrencyContext');
+        $this->shouldHaveType(StorageBasedCurrencyContext::class);
     }
 
     function it_is_a_currency_context()
@@ -45,7 +45,7 @@ final class StorageBasedCurrencyContextSpec extends ObjectBehavior
         $this->shouldImplement(CurrencyContextInterface::class);
     }
 
-    function it_returns_available_active_currency(
+    function it_returns_an_available_active_currency(
         ChannelContextInterface $channelContext,
         CurrencyStorageInterface $currencyStorage,
         CurrencyProviderInterface $currencyProvider,

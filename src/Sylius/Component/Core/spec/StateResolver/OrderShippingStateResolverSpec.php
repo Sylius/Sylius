@@ -40,12 +40,12 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         $this->shouldHaveType(OrderShippingStateResolver::class);
     }
 
-    function it_implements_Sylius_order_state_resolver_interface()
+    function it_implements_an_order_state_resolver_interface()
     {
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_marks_order_as_shipped_if_all_shipments_delivered(
+    function it_marks_an_order_as_shipped_if_all_shipments_delivered(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         ShipmentInterface $shipment1,
@@ -68,7 +68,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_order_as_partially_shipped_if_some_shipments_are_delivered(
+    function it_marks_an_order_as_partially_shipped_if_some_shipments_are_delivered(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         ShipmentInterface $shipment1,
@@ -91,7 +91,7 @@ final class OrderShippingStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_does_not_mark_order_if_it_is_already_in_this_shipping_state(
+    function it_does_not_mark_an_order_if_it_is_already_in_this_shipping_state(
         FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         ShipmentInterface $shipment1,

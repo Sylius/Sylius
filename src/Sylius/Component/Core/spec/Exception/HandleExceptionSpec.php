@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Handler\LocaleChangeHandler;
 use Sylius\Component\Core\Exception\HandleException;
 
 /**
@@ -24,7 +23,7 @@ final class HandleExceptionSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(LocaleChangeHandler::class, 'request does not have locale code');
+        $this->beConstructedWith(HandleException::class, 'request does not have locale code');
     }
 
     function it_is_initializable()
@@ -37,12 +36,12 @@ final class HandleExceptionSpec extends ObjectBehavior
         $this->shouldHaveType(\RuntimeException::class);
     }
 
-    function it_has_message()
+    function it_has_a_message()
     {
         $this->getMessage()->shouldReturn(
             sprintf(
                 '%s was unable to handle this request. request does not have locale code',
-                LocaleChangeHandler::class
+                HandleException::class
             )
         );
     }

@@ -30,8 +30,10 @@ use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
  */
 final class OrderPaymentProcessorSpec extends ObjectBehavior
 {
-    function let(PaymentFactoryInterface $paymentFactory, DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver)
-    {
+    function let(
+        PaymentFactoryInterface $paymentFactory,
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
+    ) {
         $this->beConstructedWith($paymentFactory, $defaultPaymentMethodResolver);
     }
 
@@ -73,7 +75,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
     }
 
     function it_sets_payment_method_from_last_cancelled_payment_during_processing(
-        $paymentFactory,
+        PaymentFactoryInterface $paymentFactory,
         PaymentInterface $payment,
         PaymentInterface $cancelledPayment,
         OrderInterface $order,
@@ -101,7 +103,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
     }
 
     function it_sets_payment_method_from_last_failed_payment_during_processing(
-        $paymentFactory,
+        PaymentFactoryInterface $paymentFactory,
         PaymentInterface $payment,
         PaymentInterface $failedPayment,
         OrderInterface $order,
@@ -177,8 +179,10 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_sets_orders_total_on_payment_amount_when_payment_is_new(OrderInterface $order, PaymentInterface $payment)
-    {
+    function it_sets_orders_total_on_payment_amount_when_payment_is_new(
+        OrderInterface $order,
+        PaymentInterface $payment
+    ) {
         $payments = new ArrayCollection();
         $order->getPayments()->willReturn($payments);
 
