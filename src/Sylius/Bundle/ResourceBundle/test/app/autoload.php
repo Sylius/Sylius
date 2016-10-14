@@ -9,7 +9,6 @@
  * file that was distributed with this source code.
  */
 
-use Composer\Autoload\ClassLoader;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
 $loader = require __DIR__.'/../../vendor/autoload.php';

@@ -12,9 +12,12 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Event;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Event\ResourceEvent;
 
 /**
+ * @mixin ResourceControllerEvent
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceControllerEventSpec extends ObjectBehavior
@@ -26,7 +29,7 @@ final class ResourceControllerEventSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent');
+        $this->shouldHaveType(ResourceControllerEvent::class);
     }
 
     function it_stops_event_propagation()

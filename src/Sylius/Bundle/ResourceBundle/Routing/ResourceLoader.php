@@ -23,7 +23,7 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceLoader implements LoaderInterface
+final class ResourceLoader implements LoaderInterface
 {
     /**
      * @var RegistryInterface

@@ -13,7 +13,6 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.controller.parameters" class="Sylius\Bundle\ResourceBundle\Controller\Parameters" />
         <service id="sylius.resource_controller.parameters_parser" class="Sylius\Bundle\ResourceBundle\Controller\ParametersParser">
             <argument type="service" id="service_container" />
             <argument type="service" id="sylius.expression_language" />

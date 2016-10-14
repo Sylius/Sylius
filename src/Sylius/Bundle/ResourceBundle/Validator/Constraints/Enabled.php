@@ -11,12 +11,13 @@
 
 namespace Sylius\Bundle\ResourceBundle\Validator\Constraints;
 
+use Sylius\Bundle\ResourceBundle\Validator\EnabledValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class Enabled extends Constraint
+final class Enabled extends Constraint
 {
     public $message = 'sylius.resource.not_enabled';
 
@@ -33,6 +34,6 @@ class Enabled extends Constraint
      */
     public function validatedBy()
     {
-        return 'sylius_resource_enabled_validator';
+        return EnabledValidator::class;
     }
 }

@@ -24,7 +24,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class DoctrineODMDriver extends AbstractDoctrineDriver
+final class DoctrineODMDriver extends AbstractDoctrineDriver
 {
     /**
      * {@inheritdoc}

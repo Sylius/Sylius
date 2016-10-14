@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\ResourceBundle\Tests\Command;
 
-use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Bundle\ResourceBundle\Command\DebugResourceCommand;
-use Symfony\Component\Console\Tester\CommandTester;
 use Sylius\Component\Resource\Metadata\Metadata;
+use Sylius\Component\Resource\Metadata\RegistryInterface;
+use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class DebugResourceCommandTest extends \PHPUnit_Framework_TestCase
+final class DebugResourceCommandTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var RegistryInterface

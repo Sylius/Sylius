@@ -17,6 +17,8 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * @mixin ResourceFromIdentifierType
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ResourceFromIdentifierTypeSpec extends ObjectBehavior

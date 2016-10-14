@@ -35,7 +35,7 @@ final class DefaultFormBuilderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Doctrine\ORM\Form\Builder\DefaultFormBuilder');
+        $this->shouldHaveType(DefaultFormBuilder::class);
     }
 
     function it_is_a_default_form_builder()

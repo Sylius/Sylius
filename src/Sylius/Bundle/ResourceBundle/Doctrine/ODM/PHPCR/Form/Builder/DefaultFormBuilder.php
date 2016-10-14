@@ -11,14 +11,12 @@
 
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder;
 
-use Doctrine\DBAL\Types\Type;
+use Doctrine\ODM\PHPCR\DocumentManagerInterface;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Subscriber\DefaultPathSubscriber;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Subscriber\NameResolverSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Builder\DefaultFormBuilderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Doctrine\ODM\PHPCR\DocumentManagerInterface;
-use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Subscriber\DefaultPathSubscriber;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Subscriber\NameResolverSubscriber;
 
 /**
  * @author Daniel Leech <daniel@dantleech.com>

@@ -40,7 +40,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider');
+        $this->shouldHaveType(ResourcesCollectionProvider::class);
     }
 
     function it_implements_resources_collection_provider_interface()

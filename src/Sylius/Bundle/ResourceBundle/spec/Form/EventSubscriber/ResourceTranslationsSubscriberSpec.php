@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\EventSubscriber;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\ResourceTranslationsSubscriber;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -23,6 +23,8 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
 /**
+ * @mixin ResourceTranslationsSubscriber
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ResourceTranslationsSubscriberSpec extends ObjectBehavior
@@ -34,7 +36,7 @@ final class ResourceTranslationsSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\EventSubscriber\ResourceTranslationsSubscriber');
+        $this->shouldHaveType(ResourceTranslationsSubscriber::class);
     }
 
     function it_implements_event_subscriber_interface()

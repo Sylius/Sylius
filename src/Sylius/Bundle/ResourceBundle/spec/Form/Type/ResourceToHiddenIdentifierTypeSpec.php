@@ -11,16 +11,18 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceToHiddenIdentifierType;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin ResourceToHiddenIdentifierType
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ResourceToHiddenIdentifierTypeSpec extends ObjectBehavior
@@ -32,7 +34,7 @@ final class ResourceToHiddenIdentifierTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\Type\ResourceToHiddenIdentifierType');
+        $this->shouldHaveType(ResourceToHiddenIdentifierType::class);
     }
 
     function it_builds_a_form(FormBuilderInterface $builder)

@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ResourceTranslationsSubscriber implements EventSubscriberInterface
+final class ResourceTranslationsSubscriber implements EventSubscriberInterface
 {
     /**
      * @var array

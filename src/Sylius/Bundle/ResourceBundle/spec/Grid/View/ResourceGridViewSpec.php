@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Grid\View;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Component\Grid\Definition\Grid;
@@ -38,7 +37,7 @@ final class ResourceGridViewSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView');
+        $this->shouldHaveType(ResourceGridView::class);
     }
 
     function it_extends_default_GridView()

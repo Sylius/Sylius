@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourcesResolver implements ResourcesResolverInterface
+final class ResourcesResolver implements ResourcesResolverInterface
 {
     /**
      * {@inheritdoc}

@@ -18,6 +18,9 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 
+/**
+ * @mixin ResourceToIdentifierTransformer
+ */
 final class ResourceToIdentifierTransformerSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)

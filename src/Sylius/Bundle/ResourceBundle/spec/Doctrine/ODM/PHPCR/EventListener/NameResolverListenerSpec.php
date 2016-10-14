@@ -11,26 +11,21 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener;
-use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
+use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
 use PHPCR\NodeInterface;
+use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
  * @author Daniel Leech <daniel@dantleech.com>
  */
 final class NameResolverListenerSpec extends ObjectBehavior
 {
-    function let(
-        DocumentManagerInterface $documentManager
-    )
+    function let(DocumentManagerInterface $documentManager)
     {
-        $this->beConstructedWith(
-            $documentManager
-        );
+        $this->beConstructedWith($documentManager);
     }
 
     function it_is_initializable()

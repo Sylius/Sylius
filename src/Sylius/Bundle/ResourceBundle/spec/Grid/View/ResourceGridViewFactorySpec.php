@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Grid\View;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
@@ -38,7 +37,7 @@ final class ResourceGridViewFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactory');
+        $this->shouldHaveType(ResourceGridViewFactory::class);
     }
 
     function it_implements_resource_grid_view_factory_interface()

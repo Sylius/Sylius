@@ -22,10 +22,10 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
- * @author Ben Davies <ben.davies@gmail.com>
  * @mixin ODMRepositoryClassSubscriber
- *
  * @require Doctrine\ODM\MongoDB\Events
+ *
+ * @author Ben Davies <ben.davies@gmail.com>
  */
 final class ODMRepositoryClassSubscriberSpec extends ObjectBehavior
 {
@@ -39,7 +39,7 @@ final class ODMRepositoryClassSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\EventListener\ODMRepositoryClassSubscriber');
+        $this->shouldHaveType(ODMRepositoryClassSubscriber::class);
     }
 
     function it_implements_event_subscriber_interface()

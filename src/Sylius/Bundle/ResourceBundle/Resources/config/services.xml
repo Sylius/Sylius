@@ -38,12 +38,5 @@
         <service id="sylius.form.extension.collection" class="Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension">
             <tag name="form.type_extension" alias="collection" />
         </service>
-
-        <service id="sylius.validator.enabled" class="Sylius\Bundle\ResourceBundle\Validator\EnabledValidator">
-            <tag name="validator.constraint_validator" alias="sylius_resource_enabled_validator" />
-        </service>
-        <service id="sylius.validator.disabled" class="Sylius\Bundle\ResourceBundle\Validator\DisabledValidator">
-            <tag name="validator.constraint_validator" alias="sylius_resource_disabled_validator" />
-        </service>
     </services>
 </container>

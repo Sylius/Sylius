@@ -34,7 +34,7 @@ final class ViewHandlerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ViewHandler');
+        $this->shouldHaveType(ViewHandler::class);
     }
 
     function it_implements_view_handler_interface()

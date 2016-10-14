@@ -2,12 +2,9 @@
 
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
-use PHPCR\Util\NodeHelper;
 use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
+use PHPCR\Util\NodeHelper;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**

@@ -27,6 +27,9 @@ abstract class AbstractDoctrineSubscriber implements EventSubscriber
      */
     protected $resourceRegistry;
 
+    /**
+     * @var RuntimeReflectionService
+     */
     private $reflectionService;
 
     /**

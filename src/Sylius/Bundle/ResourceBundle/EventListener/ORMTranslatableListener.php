@@ -31,7 +31,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * @author Prezent Internet B.V. <info@prezent.nl>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ORMTranslatableListener implements EventSubscriber
+final class ORMTranslatableListener implements EventSubscriber
 {
     /**
      * @var RegistryInterface

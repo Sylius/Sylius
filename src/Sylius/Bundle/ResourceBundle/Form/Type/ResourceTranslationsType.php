@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class ResourceTranslationsType extends AbstractType
+class ResourceTranslationsType extends AbstractType
 {
     /**
      * @var LocaleProviderInterface
