@@ -41,20 +41,20 @@ interface PromotionRuleFactoryInterface extends FactoryInterface
     public function createTaxon(array $taxons);
 
     /**
-     * @param string $taxon
+     * @param string $taxonCode
      * @param int $amount
      *
      * @return PromotionRuleInterface
      */
-    public function createItemsFromTaxonTotal($taxon, $amount);
+    public function createItemsFromTaxonTotal($taxonCode, $amount);
 
     /**
-     * @param string $taxon
+     * @param string $taxonCode
      * @param int $count
      *
      * @return PromotionRuleInterface
      */
-    public function createContainsTaxon($taxon, $count);
+    public function createContainsTaxon($taxonCode, $count);
 
     /**
      * @param int $nth

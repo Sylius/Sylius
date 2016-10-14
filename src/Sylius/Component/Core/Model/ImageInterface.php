@@ -20,11 +20,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface ImageInterface extends ResourceInterface, CodeAwareInterface
 {
     /**
-     * @return bool
-     */
-    public function hasFile();
-
-    /**
      * @return null|\SplFileInfo
      */
     public function getFile();
@@ -33,6 +28,11 @@ interface ImageInterface extends ResourceInterface, CodeAwareInterface
      * @param \SplFileInfo $file
      */
     public function setFile(\SplFileInfo $file);
+
+    /**
+     * @return bool
+     */
+    public function hasFile();
 
     /**
      * @return string
@@ -50,7 +50,7 @@ interface ImageInterface extends ResourceInterface, CodeAwareInterface
     public function getOwner();
 
     /**
-     * @param ImageAwareInterface $owner
+     * @param ImageAwareInterface|null $owner
      */
     public function setOwner(ImageAwareInterface $owner = null);
 }

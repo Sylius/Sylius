@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Component\Core\Model\OrderInterface as CoreOrderInterface;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
@@ -40,9 +40,12 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
 
     /**
      * @param PaymentFactoryInterface $paymentFactory
+     * @param DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
      */
-    public function __construct(PaymentFactoryInterface $paymentFactory, DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver)
-    {
+    public function __construct(
+        PaymentFactoryInterface $paymentFactory,
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
+    ) {
         $this->paymentFactory = $paymentFactory;
         $this->defaultPaymentMethodResolver = $defaultPaymentMethodResolver;
     }
@@ -50,10 +53,10 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(OrderInterface $order)
+    public function process(BaseOrderInterface $order)
     {
-        /** @var CoreOrderInterface $order */
-        Assert::isInstanceOf($order, CoreOrderInterface::class);
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         if (OrderInterface::STATE_CANCELLED === $order->getState()) {
             return;
@@ -71,9 +74,9 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param OrderInterface $order
+     * @param BaseOrderInterface $order
      */
-    private function createNewPayment(OrderInterface $order)
+    private function createNewPayment(BaseOrderInterface $order)
     {
         /** @var $payment PaymentInterface */
         $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
@@ -100,16 +103,18 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
      */
     private function getLastPayment(OrderInterface $order)
     {
-        return $this->getLastPaymentWithState($order, PaymentInterface::STATE_CANCELLED) ?: $this->getLastPaymentWithState($order, PaymentInterface::STATE_FAILED);
+        return $this
+            ->getLastPaymentWithState($order, PaymentInterface::STATE_CANCELLED) ?: $this->getLastPaymentWithState($order, PaymentInterface::STATE_FAILED)
+        ;
     }
 
     /**
-     * @param CoreOrderInterface $order
+     * @param OrderInterface $order
      * @param string $state
      *
      * @return null|PaymentInterface
      */
-    private function getLastPaymentWithState(CoreOrderInterface $order, $state)
+    private function getLastPaymentWithState(OrderInterface $order, $state)
     {
         $lastPayment = $order->getPayments()->filter(function (PaymentInterface $payment) use ($state) {
             return $payment->getState() === $state;

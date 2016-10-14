@@ -25,7 +25,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
     use TimestampableTrait;
 
     /**
-     * @var ArrayCollection
+     * @var Collection|ProductInterface
      */
     protected $products;
 

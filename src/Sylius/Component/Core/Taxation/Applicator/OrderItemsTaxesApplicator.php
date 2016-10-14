@@ -104,7 +104,9 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
      */
     private function addAdjustment(OrderItemUnitInterface $unit, $taxAmount, $label, $included)
     {
-        $unitTaxAdjustment = $this->adjustmentFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included);
+        $unitTaxAdjustment = $this->adjustmentFactory
+            ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included)
+        ;
         $unit->addAdjustment($unitTaxAdjustment);
     }
 }

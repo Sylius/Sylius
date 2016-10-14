@@ -83,22 +83,6 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getThemeName()
-    {
-        return $this->themeName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setThemeName($themeName)
-    {
-        $this->themeName = $themeName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultCurrency()
     {
         return $this->defaultCurrency;
@@ -302,5 +286,21 @@ class Channel extends BaseChannel implements ChannelInterface
     public function hasPaymentMethod(PaymentMethodInterface $paymentMethod)
     {
         return $this->paymentMethods->contains($paymentMethod);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getThemeName()
+    {
+        return $this->themeName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setThemeName($themeName)
+    {
+        $this->themeName = $themeName;
     }
 }

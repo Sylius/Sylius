@@ -70,8 +70,11 @@ class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsAp
      * @param PromotionInterface $promotion
      * @param int $itemPromotionAmount
      */
-    private function applyAdjustmentsOnItemUnits(OrderItemInterface $item, PromotionInterface $promotion, $itemPromotionAmount)
-    {
+    private function applyAdjustmentsOnItemUnits(
+        OrderItemInterface $item,
+        PromotionInterface $promotion,
+        $itemPromotionAmount
+    ) {
         $splitPromotionAmount = $this->distributor->distribute($itemPromotionAmount, $item->getQuantity());
 
         $i = 0;

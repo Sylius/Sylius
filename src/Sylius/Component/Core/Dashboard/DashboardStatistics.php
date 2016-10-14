@@ -34,14 +34,11 @@ class DashboardStatistics
     private $numberOfNewCustomers;
 
     /**
-     * @var int
-     */
-    private $averageOrderValue;
-
-    /**
      * @param int $totalSales
      * @param int $numberOfNewOrders
      * @param int $numberOfNewCustomers
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($totalSales, $numberOfNewOrders, $numberOfNewCustomers)
     {

@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Promotion\Modifier;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**

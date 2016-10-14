@@ -35,15 +35,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * @return QueryBuilder
      */
     public function createQueryBuilderForEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel);
-
-    /**
-     * @param ChannelInterface $channel
-     * @param int $count
-     *
-     * @return ProductInterface[]
-     */
-    public function findLatestByChannel(ChannelInterface $channel, $count);
-
     /**
      * @param mixed $id
      * @param ChannelInterface $channel
@@ -53,18 +44,27 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function findOneByIdAndChannel($id, ChannelInterface $channel = null);
 
     /**
-     * @param string $code
-     * @param ChannelInterface $channel
-     * 
-     * @return ProductInterface[]|null
-     */
-    public function findEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel);
-
-    /**
      * @param string $slug
      * @param ChannelInterface $channel
      *
      * @return ProductInterface|null
      */
     public function findOneBySlugAndChannel($slug, ChannelInterface $channel);
+
+    /**
+     * @param ChannelInterface $channel
+     * @param int $count
+     *
+     * @return ProductInterface[]
+     */
+    public function findLatestByChannel(ChannelInterface $channel, $count);
+
+
+    /**
+     * @param string $code
+     * @param ChannelInterface $channel
+     *
+     * @return ProductInterface[]|null
+     */
+    public function findEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel);
 }

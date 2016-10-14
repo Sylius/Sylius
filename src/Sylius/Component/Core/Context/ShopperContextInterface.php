@@ -25,5 +25,4 @@ interface ShopperContextInterface extends
     LocaleContextInterface,
     CustomerContextInterface
 {
-
 }

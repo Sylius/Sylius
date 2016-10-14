@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Component\Core\Model\OrderInterface as CoreOrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
@@ -50,10 +50,10 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(OrderInterface $order)
+    public function process(BaseOrderInterface $order)
     {
-        /** @var CoreOrderInterface $order */
-        Assert::isInstanceOf($order, CoreOrderInterface::class);
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         if ($order->isEmpty()) {
             $order->removeShipments();
@@ -75,11 +75,11 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param OrderInterface $order
+     * @param BaseOrderInterface $order
      *
      * @return ShipmentInterface
      */
-    private function getOrderShipment(OrderInterface $order)
+    private function getOrderShipment(BaseOrderInterface $order)
     {
         if ($order->hasShipments()) {
             return $order->getShipments()->first();

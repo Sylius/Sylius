@@ -20,6 +20,8 @@ interface OrderUpdaterInterface
 {
     /**
      * @param OrderInterface $order
+     *
+     * @throws \InvalidArgumentException
      */
     public function update(OrderInterface $order);
 }

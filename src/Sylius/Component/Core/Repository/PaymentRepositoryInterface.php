@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Repository;
 
-use Pagerfanta\Pagerfanta;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 

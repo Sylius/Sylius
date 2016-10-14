@@ -280,17 +280,17 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function setAverageRating($averageRating)
+    public function getAverageRating()
     {
-        $this->averageRating = $averageRating;
+        return $this->averageRating;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAverageRating()
+    public function setAverageRating($averageRating)
     {
-        return $this->averageRating;
+        $this->averageRating = $averageRating;
     }
 
     /**

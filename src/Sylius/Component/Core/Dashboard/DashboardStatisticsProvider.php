@@ -33,8 +33,10 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
      * @param OrderRepositoryInterface $orderRepository
      * @param CustomerRepositoryInterface $customerRepository
      */
-    public function __construct(OrderRepositoryInterface $orderRepository, CustomerRepositoryInterface $customerRepository)
-    {
+    public function __construct(
+        OrderRepositoryInterface $orderRepository,
+        CustomerRepositoryInterface $customerRepository
+    ) {
         $this->orderRepository = $orderRepository;
         $this->customerRepository = $customerRepository;
     }

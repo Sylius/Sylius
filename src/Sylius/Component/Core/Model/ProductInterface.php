@@ -46,6 +46,8 @@ interface ProductInterface extends
 
     /**
      * @param string $variantSelectionMethod
+     *
+     * @throws \InvalidArgumentException
      */
     public function setVariantSelectionMethod($variantSelectionMethod);
 
