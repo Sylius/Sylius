@@ -87,7 +87,6 @@ sylius:
         confirmed: Potvrđeno
         contact_us: Kontaktirajte nas
         contain_variants: Postoje varijante
-        content: Sadržaj
         countries: Države
         country: Država
         country_details: Detalji države
@@ -227,7 +226,6 @@ sylius:
         existing_customer: Postojeći kupac
         failed: Neuspješno
         faqs: Česta pitanja
-        filter: Filter
         filters: Filteri
         first_name: Ime
         forgot_password: Zaboravljena lozinka
@@ -266,7 +264,6 @@ sylius:
         item: sylius.order_item.product
         items: Stavke
         items_total: Ukupno artikala
-        label: Oznaka
         last_login: Posljednja prijava
         last_name: Prezime
         last_update: Ažurirano

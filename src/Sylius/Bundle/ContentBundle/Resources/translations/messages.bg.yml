@@ -3,89 +3,13 @@
 
 sylius:
     form:
-        action_block:
-            action_name: Име на действието
-            id: ID
-            publish_end_date: Крайна дата на публикуване
-            publish_start_date: Публикуване на начална дата
-        imagine_block:
-            filter: Филтър
-            internal_name: Вътрешно име
-            label: Етикет
-            parent: Родител
-            publish_end_date: Крайна дата на публикуване
-            publish_start_date: Публикуване на начална дата
-            slideshow_medium: Слайдшоу среда (съдържание)
-        menu:
-            childrens: Наследници
-            display: Екран
-            display_children: Наследници на Дисплея
-            label: Етикет
-            name: Име
-            parent: Родител
-            publish_end_date: Крайна дата на публикуване
-            publish_start_date: Публикуване на начална дата
-            route: Маршрут
-            uri: URI
-        menu_block:
-            body: Тяло
-            id: ID
-            name: Име
-            publish_end_date: Крайна дата на публикуване
-            publish_start_date: Публикуване на начална дата
-        menu_node_block:
-            content: Съдържание
-            display: Екран
-            display_children: Наследници на Дисплея
-            internal_name: Вътрешно име
-            label: Етикет
-            link_type: Тип връзка
-            publish_end_date: Крайна дата на публикуване
-            publish_start_date: Публикуване на начална дата
-            route: Маршрут
-            uri: URI
-        redirect_route:
-            id: ID
-            name: Име
-            route_name: Име на пътя
-            uri: URI
-        reference_block:
-            body: Тяло
-            id: ID
-            publish_end_date: Крайна дата на публикуване
-            publish_start_date: Публикуване на начална дата
-            title: Заглавие
         route:
-            content: Съдържание
             name: Име
             parent: Източник
-        simple_block:
-            body: Тяло
-            internal_name: Вътрешно име
-            parent: Източник
-            publish_end_date: Крайна дата на публикуване
-            publish_start_date: Публикуване на начална дата
-            title: Заглавие
-        slideshow_block:
-            childrens: Наследници
-            internal_name: Вътрешно име
-            parent: Източник
-            publish_end_date: Крайна дата на публикуване
-            publish_start_date: Публикуване на начална дата
-            title: Заглавие
         static_content:
             body: Тяло
-            id: ID
             internal_name: Вътрешно име
             menu_nodes: Меню деца
             parent: Родител
-            publish_end_date: Крайна дата на публикуване
-            publish_start_date: Публикуване на начална дата
             routes: Маршрути
             title: Заглавие
-        string_block:
-            body: Тяло
-            id: ID
-            name: Име
-            publish_end_date: Крайна дата на публикуване
-            publish_start_date: Публикуване на начална дата

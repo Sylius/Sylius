@@ -33,5 +33,4 @@ sylius:
                     header: Prodaja
                     orders: Naročila
                 content:
-                    header: Vsebina
                     routes: Poti

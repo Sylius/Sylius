@@ -6,15 +6,10 @@ sylius:
         email:
             not_exist: Użytkownik z tym adresem email nie istnieje.
         password:
-            invalid: Błędne hasło.
-            request:
-                success: Wysłaliśmy e-mail z instrukcjami dotyczącymi resetowania hasła!
             reset:
                 success: Hasło zostało pomyślnie zresetowane!
             change:
                 success: Pomyślnie zmieniono hasło!
-        reset_password:
-            requested: Jeśli adres e-mail, który podałeś istniej w systemie, wysłaliśmy na niego z instrukcjami dotyczącymi resetowania hasła.
         verification:
             error: Token weryfikacyjny jest nieprawidłowy.
             notice:
@@ -22,5 +17,3 @@ sylius:
             success: Twój adres email został pomyślnie zweryfikowany.
             request:
                 success: Wiadomość z linkiem weryfikacyjnym została wysłana na twój adres email.
-    customer:
-        register: Dziękujemy za rejestrację, sprawdź swoją skrzynkę email aby zweryfikować konto.

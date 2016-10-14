@@ -114,7 +114,6 @@ sylius:
         contact_us: Contacteer ons
         contain_variants: Bevat Varianten
         contains: Bevat
-        content: Inhoud
         countries: Landen
         country: Land
         country_details: Land details
@@ -291,7 +290,6 @@ sylius:
         extra_notes: Extra opmerkingen
         failed: Mislukt
         faqs: FAQs
-        filter: Filter
         filters: Filters
         first_name: Voornaam
         forgot_password: Wachtwoord vergeten
@@ -337,7 +335,6 @@ sylius:
         items: Items
         items_total: Artikelen Totaal
         jump_to_page: Ga naar pagina
-        label: Label
         last_login: Laatst ingelogd
         last_name: Achternaam
         last_update: Laatst bijgewerkt

@@ -4,6 +4,6 @@
 sylius:
     form:
         currency:
-            exchange_rate: Valutakurs
-            enabled: Aktivert
             code: Navn
+            enabled: Aktivert
+            exchange_rate: Valutakurs

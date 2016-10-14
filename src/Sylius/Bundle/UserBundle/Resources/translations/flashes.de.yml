@@ -6,15 +6,10 @@ sylius:
         email:
             not_exist: Benutzer mit dieser E-Mail ist nicht vorhanden.
         password:
-            invalid: Ihr aktuelles Passwort ist nicht korrekt.
-            request:
-                success: Wir haben Ihnen eine Email mit der Anleitung zum Zurücksetzen des Passworts geschickt!
             reset:
                 success: Ihr Passwort wurde erfolgreich zurückgesetzt!
             change:
                 success: Ihr Passwort wurde erfolgreich geändert!
-        reset_password:
-            requested: Wenn die Email, die Sie angegeben haben, im System gespeichert ist, haben wir Ihnen eine Anleitung geschickt, mit der Sie Ihr Passwort zurücksetzen können.
         verification:
             error: Der Überprüfungs-Token ist ungültig.
             notice:
@@ -22,5 +17,3 @@ sylius:
             success: Ihre E-Mail-Adresse wurde erfolgreich bestätigt.
             request:
                 success: Ein Bestätigungslink wurde an Ihre E-Mail-Adresse geschickt.
-    customer:
-        register: Vielen Dank für Ihre Registrierung. Überprüfen Sie Ihre E-Mails und bestätigen Sie Ihren Account.

@@ -4,7 +4,7 @@
 sylius:
     form:
         review:
-            title: Tittel
             author: Forfatter
             status:
                 new: Ny
+            title: Tittel

@@ -4,6 +4,6 @@
 sylius:
     form:
         currency:
-            exchange_rate: Směnný kurz
-            enabled: Povoleno
             code: Jméno
+            enabled: Povoleno
+            exchange_rate: Směnný kurz

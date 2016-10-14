@@ -4,7 +4,7 @@
 sylius:
     form:
         review:
-            title: Назва
             author: Аўтар
             status:
                 new: Новы
+            title: Назва

@@ -29,7 +29,6 @@ sylius:
         city: Град
         clear_cart: Испразни корпу
         company: Компанија
-        content: Садржај
         countries: Земље
         country_details: Детаљи земље
         create: Креирај
@@ -75,7 +74,6 @@ sylius:
         editing_zone: Ажурирање зоне
         error: Грешка
         existing_customer: Постојећа муштерија
-        filter: Филтер
         general_info: Опсте информације
         general_settings: Генерална подешавања
         generate: Генериши

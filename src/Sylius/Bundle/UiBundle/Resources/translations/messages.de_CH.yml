@@ -21,7 +21,6 @@ sylius:
         first_name: Vorname
         id: ID
         image: Bild
-        label: Bezeichnung
         members: Mitglieder
         message: Nachricht
         name: Name

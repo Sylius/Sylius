@@ -196,7 +196,6 @@ sylius:
         existing_customer: Varolan Müşteri
         expires_at: Süre sonu: 
         failed: Başarısız oldu
-        filter: Filtrele
         first_name: Ad
         fulfill: Stokta
         gateway: Ağ Geçidi
@@ -228,7 +227,6 @@ sylius:
         item: Öğe
         items: Öğeler
         items_total: Toplam tutar
-        label: Etiket
         last_login: Son oturum açma tarihi
         last_name: Soyad
         last_update: Son gücelleme

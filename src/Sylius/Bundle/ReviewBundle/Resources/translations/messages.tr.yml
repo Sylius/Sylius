@@ -4,8 +4,8 @@
 sylius:
     form:
         review:
-            title: Başlık
-            comment: Yorum
             author: Hazırlayan
+            comment: Yorum
             status:
                 new: Yeni
+            title: Başlık

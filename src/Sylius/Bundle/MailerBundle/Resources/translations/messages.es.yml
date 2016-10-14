@@ -8,6 +8,5 @@ sylius:
             subject: Asunto
             sender_name: Nombre del remitente
             sender_address: Correo electónico del remitente
-            content: Contenido
             template: Plantilla
             no_template: Usar plantilla personalizada

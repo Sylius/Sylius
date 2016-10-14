@@ -4,7 +4,7 @@
 sylius:
     form:
         currency:
-            exchange_rate: อัตราแลกเปลี่ยน
-            enabled: เปิดใช้งานแล้ว
             base: ฐานสกุลเงิน
             code: ชื่อ
+            enabled: เปิดใช้งานแล้ว
+            exchange_rate: อัตราแลกเปลี่ยน

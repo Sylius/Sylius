@@ -6,9 +6,6 @@ sylius:
         email:
             not_exist: Bu e-posta adresi ile kayıtlı bir kullanıcı yok.
         password:
-            invalid: Yanlış şifre.
-            request:
-                success: Şifrenizi sıfırlamanız için size talimatlar ile birlikte bir e-posta gönderdik!
             reset:
                 success: Şifreniz başarı ile sıfırlandı!
             change:

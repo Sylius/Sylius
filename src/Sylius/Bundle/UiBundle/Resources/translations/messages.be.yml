@@ -54,7 +54,6 @@ sylius:
         confirmation: Пацверджанне
         confirmation_title: Пацверджанне
         contain_variants: Змясціць варыянты
-        content: Змест
         countries: Краіны
         country: Краіна
         country_details: Дэталі краіны
@@ -121,7 +120,6 @@ sylius:
         exchange_rate: Абменны курс
         existing_customer: Існуючы пакупнік
         failed: Памылка
-        filter: Фільтр
         first_name: Імя
         fulfill: Выканаць
         gateway: Шлюз

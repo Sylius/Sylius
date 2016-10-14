@@ -4,8 +4,8 @@
 sylius:
     form:
         review:
-            title: Naslov
-            comment: Komentar
             author: Avtor
+            comment: Komentar
             status:
                 new: Novo
+            title: Naslov

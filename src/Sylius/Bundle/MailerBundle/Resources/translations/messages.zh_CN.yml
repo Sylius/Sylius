@@ -8,6 +8,5 @@ sylius:
             subject: 主题
             sender_name: 发件人姓名
             sender_address: 发件人地址
-            content: 内容
             template: 模板
             no_template: 使用自定义模板

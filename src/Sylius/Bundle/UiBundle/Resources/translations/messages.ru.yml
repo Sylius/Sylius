@@ -72,7 +72,6 @@ sylius:
         confirmation: Подтверждение
         confirmation_title: Подтверждение
         contain_variants: Содержит варианты
-        content: Контент
         countries: Страны
         country: Страна
         country_details: Информация о стране
@@ -172,7 +171,6 @@ sylius:
         existing_customer: Существующий клиент
         expires_at: Истекает
         failed: Провален
-        filter: Фильтр
         first_name: Имя
         fulfill: Завершён
         gateway: Терминал
@@ -205,7 +203,6 @@ sylius:
         invoice: Счет-фактура
         item: Товар
         items_total: Всего товаров
-        label: Заголовок
         last_login: Последний вход
         last_name: Фамилия
         last_update: Последнее изменение

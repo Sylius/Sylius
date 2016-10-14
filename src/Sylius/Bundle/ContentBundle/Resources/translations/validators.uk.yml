@@ -2,71 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    imagine_block:
-        name:
-            not_blank: Будь ласка, введіть назву блоку зображень.
-        label:
-            not_blank: Будь ласка, введіть етикетку блоку зображень.
-        filter:
-            not_blank: Будь ласка, введіть фільтр блоку зображень.
-        image:
-            not_blank: Будь ласка, введіть зображення блоку зображень.
-        start_date:
-            invalid_date: Початкова дата публікації невірна.
-        end_date:
-            invalid_date: Кінцева дата публікації невірна.
-    menu:
-        name:
-            not_blank: Будь ласка, введіть назву меню.
-        label:
-            not_blank: Будь ласка, введіть етикетку меню.
-        start_date:
-            invalid_date: Початкова дата публікації невірна.
-        end_date:
-            invalid_date: Кінцева дата публікації невірна.
-    menu_node:
-        name:
-            not_blank: Будь ласка, введіть назву пункту меню.
-        label:
-            not_blank: Будь ласка, введіть етикетку пункту меню.
-        start_date:
-            invalid_date: Початкова дата публікації невірна.
-        end_date:
-            invalid_date: Кінцева дата публікації невірна.
     route:
         name:
             not_blank: Будь ласка, введіть назву маршруту.
         content:
             not_blank: Будь ласка, введіть зміст маршруту.
-        start_date:
-            invalid_date: Початкова дата публікації невірна.
-        end_date:
-            invalid_date: Кінцева дата публікації невірна.
-    slideshow_block:
-        name:
-            not_blank: Будь ласка, введіть назву слайд-шоу.
-        title:
-            not_blank: Будь ласка, введіть заголовок слайд-шоу.
-        start_date:
-            invalid_date: Початкова дата публікації невірна.
-        end_date:
-            invalid_date: Кінцева дата публікації невірна.
-    simple_block:
-        name:
-            not_blank: Будь ласка, введіть назву простого блоку.
-        title:
-            not_blank: Будь ласка, введіть заголовок простого блоку.
-        body:
-            not_blank: Будь ласка, введіть тіло простого блоку.
-        start_date:
-            invalid_date: Початкова дата публікації невірна.
-        end_date:
-            invalid_date: Кінцева дата публікації невірна.
-    string_block:
-        name:
-            not_blank: Будь ласка, введіть назву простого блоку.
-        body:
-            not_blank: Будь ласка, введіть тіло простого блоку.
         start_date:
             invalid_date: Початкова дата публікації невірна.
         end_date:

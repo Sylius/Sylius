@@ -52,7 +52,6 @@ sylius:
         confirmation: Bekræftelse
         confirmation_title: Bekræftelse
         contain_variants: Indeholder varianter
-        content: Indhold
         countries: Lande
         country: Land
         country_details: Lande detaljer
@@ -118,7 +117,6 @@ sylius:
         exchange_rate: Vekselkurs
         existing_customer: Eksisterende kunde
         failed: Mislykkedes
-        filter: Filter
         first_name: Fornavn
         fulfill: Udfør
         gateway: Gateway

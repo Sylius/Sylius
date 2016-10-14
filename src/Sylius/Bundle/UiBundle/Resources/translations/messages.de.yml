@@ -122,7 +122,6 @@ sylius:
         contact_us: Kontaktieren Sie uns
         contain_variants: Enthält Varianten
         contains: Enthält
-        content: Inhalt
         countries: Länder
         country: Land
         country_details: Landdetails
@@ -301,7 +300,6 @@ sylius:
         failed: Fehlgeschlagen
         faqs: FAQs
         female: Weiblich
-        filter: Filtern
         filters: Filter
         first_name: Vorname
         forgot_password: Passwort vergessen
@@ -348,7 +346,6 @@ sylius:
         items: Artikel
         items_total: Gesamtanzahl
         jump_to_page: Wechsel zur Seite
-        label: Bezeichnung
         last_login: Letzter Login
         last_name: Nachname
         last_update: Letztes Update

@@ -3,11 +3,11 @@
 
 sylius:
     review:
+        author:
+            already_exists: Este endereço de e-mail já se encontra registado. Faça login ou redefina a sua palavra-passe.
+        rating:
+            not_blank: Deve verificar a classificação da avaliação.
         title:
             not_blank: O título da avaliação não deve estar vazio.
             min_length: Revisão de título deve ter pelo menos 2 caracteres
             max_length: O título da avaliação não deve ter mais que 255 caracteres
-        rating:
-            not_blank: Deve verificar a classificação da avaliação.
-        author:
-            already_exists: Este endereço de e-mail já se encontra registado. Faça login ou redefina a sua palavra-passe.

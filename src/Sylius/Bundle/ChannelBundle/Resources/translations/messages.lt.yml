@@ -4,8 +4,8 @@
 sylius:
     form:
         channel:
-            name: Pavadinimas
-            description: Aprašymas
-            url: URL
-            enabled: Įjungta
             color: Spalva
+            description: Aprašymas
+            enabled: Įjungta
+            name: Pavadinimas
+            url: URL

@@ -123,7 +123,6 @@ sylius:
         exchange_rate: Cursul de schimb
         existing_customer: Client existent
         failed: Eșuată
-        filter: Filtrează
         first_name: Prenume
         fulfill: Vânzare
         gateway: Gateway
@@ -149,7 +148,6 @@ sylius:
         invoice: Factură
         item: Produs
         items_total: Produse
-        label: Label
         last_login: Ultima autentificare
         last_name: Nume
         last_update: Data modificării

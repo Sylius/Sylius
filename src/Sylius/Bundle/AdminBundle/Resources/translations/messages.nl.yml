@@ -34,6 +34,5 @@ sylius:
                     header: Verkoop
                     orders: Bestellingen
                 content:
-                    header: Inhoud
                     static_contents: Statische inhoud
                     routes: Routes

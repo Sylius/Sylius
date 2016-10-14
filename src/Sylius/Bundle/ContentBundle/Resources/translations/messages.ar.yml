@@ -3,79 +3,8 @@
 
 sylius:
     form:
-        action_block:
-            action_name: اسم الاجراء
-            publish_end_date: تاريخ نهاية النشر
-            publish_start_date: تاريخ بدء النشر
-            publishable: تم النشر
-        imagine_block:
-            internal_name: اسم داخلي
-            label: ملصق
-            link_url: الرابط URL
-            publish_end_date: تاريخ نهاية النشر
-            publish_start_date: تاريخ بدء النشر
-            publishable: تم النشر
-            slideshow_small: عرض الشرائح الصغيرة (جانب)
-            slideshow_medium: عرض الشرائح المتوسطة (المحتوى)
-            slideshow_large: عرض الشرائح الكبيرة (عرض كامل)
-        menu:
-            childrens: أطفال
-            display: عرض
-            display_children: عرض الأطفال
-            label: ملصق
-            name: الاسم
-            publish_end_date: تاريخ نهاية النشر
-            publish_start_date: تاريخ بدء النشر
-            publishable: تم النشر
-            route: طريق
-            uri: URI
-        menu_block:
-            name: الاسم
-            publish_end_date: تاريخ نهاية النشر
-            publish_start_date: تاريخ بدء النشر
-            publishable: تم النشر
-        menu_node_block:
-            display: عرض
-            display_children: عرض الأطفال
-            internal_name: اسم داخلي
-            label: ملصق
-            link_type: نوع الرابط
-            publish_end_date: تاريخ نهاية النشر
-            publish_start_date: تاريخ بدء النشر
-            publishable: تم النشر
-            route: طريق
-            uri: URI
-        redirect_route:
-            name: الاسم
-            route_name: اسم_الطريف
-            uri: URI
-        reference_block:
-            publish_end_date: تاريخ نهاية النشر
-            publish_start_date: تاريخ بدء النشر
-            publishable: تم النشر
         route:
             name: الاسم
-        simple_block:
-            internal_name: اسم داخلي
-            publish_end_date: تاريخ نهاية النشر
-            publish_start_date: تاريخ بدء النشر
-            publishable: تم النشر
-        slideshow_block:
-            add_slide: إضافة شريحة
-            childrens: أطفال
-            internal_name: اسم داخلي
-            publish_end_date: تاريخ نهاية النشر
-            publish_start_date: تاريخ بدء النشر
-            publishable: تم النشر
         static_content:
-            internal_name: اسم داخلي
             menu_nodes: عقدة القائمة
-            publish_end_date: تاريخ نهاية النشر
-            publish_start_date: تاريخ بدء النشر
-            publishable: تم النشر
             routes: طرق
-        string_block:
-            name: الاسم
-            publish_end_date: تاريخ نهاية النشر
-            publish_start_date: تاريخ بدء النشر
-            publishable: تم النشر

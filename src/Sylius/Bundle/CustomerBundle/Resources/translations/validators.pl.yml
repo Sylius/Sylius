@@ -21,3 +21,8 @@ sylius:
             invalid: Ten e-mail jest nieprawidłowy.
             unique: Ten e-mail jest już używany.
             registered: Ten e-mail jest już zarejestrowany, proszę się zalogować lub użyć opcji przypominania hasła.
+    customer_group:
+        name:
+            max: 'Nazwa grupy klientów nie może być dłuższa niż {{ limit }} znaków.'
+            min: 'Nazwa grupy klientów musi mieć co najmniej {{ limit }} znaków.'
+            not_blank: Wprowadź nazwę grupy klientów.

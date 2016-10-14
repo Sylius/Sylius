@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
+            author: Autori
+            comment: Koment
             header: Shto nje recension
             rating: Vlersimi
-            title: Titulli
-            comment: Koment
-            author: Autori
             status:
+                approved: I aprovuar
                 label: Statusi
                 new: E re
-                approved: I aprovuar
                 rejected: I refuzuar
             submit: Vazhdo
+            title: Titulli

@@ -34,6 +34,5 @@ sylius:
                     header: Prodeje
                     orders: Objednávky
                 content:
-                    header: Obsah
                     static_contents: Statický obsah
                     routes: Cesty

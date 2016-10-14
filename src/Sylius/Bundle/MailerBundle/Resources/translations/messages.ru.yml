@@ -7,6 +7,5 @@ sylius:
             enabled: Активен
             sender_name: Имя отправителя
             sender_address: Адрес отправителя
-            content: Контент
             template: Шаблон
             no_template: Использовать пользовательский шаблон

@@ -95,7 +95,6 @@ sylius:
         confirmed: تایید شده
         contain_variants: شامل ترکیبات
         contains: محتویات
-        content: آیتم های محتوایی
         countries: كشور‌ها
         country: كشور
         country_details: جزئیات کشور
@@ -247,7 +246,6 @@ sylius:
         existing_customer: از قبل عضو هستم
         expires_at: انقضا در تاریخ
         failed: پرداخت ناموفق
-        filter: فیلتر
         first_name: نام
         forgot_password: فراموشی کلمه عبور
         fulfill: ارسال
@@ -287,7 +285,6 @@ sylius:
         item: کالا
         items: آیتم ها
         items_total: جمع قیمت کالا
-        label: عنوان منو
         last_login: آخرین ورود
         last_name: نام خانوادگی
         last_update: آخرین به روز رسانی

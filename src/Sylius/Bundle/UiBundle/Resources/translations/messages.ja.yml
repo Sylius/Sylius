@@ -82,7 +82,6 @@ sylius:
         email: メールアドレス
         error: エラー
         existing_customer: 登録済の顧客
-        filter: F絞り込む
         first_name: 名
         general_info: sylius.promotion.general_info
         general_settings: sylius.breadcrumb.general_settings

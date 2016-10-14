@@ -15,7 +15,7 @@ sylius:
         city: Kota
         code: Kode
         company: Perusahaan
-        content: Isi
+        content: Konten
         coupon: Kupon
         currency: Mata Uang
         current_stock: Stok
@@ -26,7 +26,6 @@ sylius:
         id: ID
         image: Gambar
         images: Gambar
-        label: Label
         last_name: Nama belakang
         lastname: Nama belakang
         members: Anggota

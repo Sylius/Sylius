@@ -10,6 +10,9 @@ sylius:
     checkout:
         shipping_method:
             not_blank: กรุณาเลือกวิธีการจัดส่ง
+    currency:
+        enabled:
+            cannot_disable_base: ไม่สามารถปิดใช้งานสกุลเงินฐาน
     customer:
         currency_code:
             not_valid: รหัสสกุลเงินที่คุณป้อนไม่ถูกต้อง
@@ -20,6 +23,8 @@ sylius:
         code:
             not_blank: กรุณาระบุรหัสภาษา
             unique: มีภาษานี้อยู่แล้ว
+        enabled:
+            cannot_disable_base: ไม่สามารถปิดใช้งานภาษาที่เป็นค่าเริ่มต้นได้
     product_image:
         code:
             unique: รหัสภาพต้องไม่ซ้ำกันภายในสินค้านี้

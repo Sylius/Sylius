@@ -8,6 +8,6 @@ sylius:
             subject: ชื่อเรื่อง
             sender_name: ชื่อผู้ส่ง
             sender_address: ที่อยู่ผู้ส่ง
-            content: เนื้อหา
+            content: เนื้อหาในเว็บ
             template: แม่แบบ
             no_template: ใช้ Template แบบกำหนดเอง

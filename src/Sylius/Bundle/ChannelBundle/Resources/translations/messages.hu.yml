@@ -4,8 +4,8 @@
 sylius:
     form:
         channel:
-            name: Név
-            description: Leírás
-            url: Webcím
-            enabled: Engedélyezve
             color: Szín
+            description: Leírás
+            enabled: Engedélyezve
+            name: Név
+            url: Webcím

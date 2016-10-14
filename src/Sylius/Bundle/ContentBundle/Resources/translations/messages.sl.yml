@@ -3,104 +3,12 @@
 
 sylius:
     form:
-        action_block:
-            action_name: Ime dejanja
-            id: Id
-            publish_end_date: Končni datum objave
-            publish_start_date: Začetni datum objave
-            publishable: Objavljeno
-        imagine_block:
-            filter: Filter
-            image: Slika
-            internal_name: Notranje ime
-            label: Oznaka
-            link_url: URL povezave
-            parent: Nadrejeni
-            publish_end_date: Končni datum objave
-            publish_start_date: Začetni datum objave
-            publishable: Objavljeno
-            slideshow_small: Majhno predvajanje (stransko)
-            slideshow_medium: Srednje predvajanje (vsebina)
-            slideshow_large: Veliko predvajanje (polna širina)
-        menu:
-            childrens: Podrejeni
-            display: Prikaz
-            display_children: Prikaz podrejenih
-            label: Oznaka
-            name: Ime
-            parent: Nadrejeni
-            publish_end_date: Končni datum objave
-            publish_start_date: Začetni datum objave
-            publishable: Objavljeno
-            route: Pot
-            uri: URI
-        menu_block:
-            body: Telo
-            id: Id
-            name: Ime
-            publish_end_date: Končni datum objave
-            publish_start_date: Začetni datum objave
-            publishable: Objavljeno
-        menu_node_block:
-            content: Vsebina
-            display: Prikaz
-            display_children: Prikaz podrejenih
-            internal_name: Notranje ime
-            label: Oznaka
-            link_type: Vrsta povezave
-            publish_end_date: Končni datum objave
-            publish_start_date: Začetni datum objave
-            publishable: Objavljeno
-            route: Pot
-            uri: URI
-        redirect_route:
-            id: Id
-            name: Ime
-            route_name: Route_name
-            uri: URI
-        reference_block:
-            body: Telo
-            id: Id
-            publish_end_date: Končni datum objave
-            publish_start_date: Začetni datum objave
-            publishable: Objavljeno
-            title: Naslov
         route:
-            content: Vsebina
             name: Ime
             parent: Nadrejeni
-        simple_block:
-            body: Telo
-            internal_name: Notranje ime
-            parent: Nadrejeni
-            publish_end_date: Končni datum objave
-            publish_start_date: Začetni datum objave
-            publishable: Objavljeno
-            title: Naslov
-        slideshow_block:
-            add_slide: Dodaj drsnik
-            childrens: Podrejeni
-            internal_name: Notranje ime
-            parent: Nadrejeni
-            publish_end_date: Končni datum objave
-            publish_start_date: Začetni datum objave
-            publishable: Objavljeno
-            title: Naslov
         static_content:
             body: Telo
-            id: Id
-            internal_name: Notranje ime
             menu_nodes: Vozlišča menija
             parent: Nadrejeni
-            publish_end_date: Končni datum objave
-            publish_start_date: Začetni datum objave
-            publishable: Objavljeno
             routes: Poti
             title: Naslov
-        string_block:
-            body: Telo
-            id: ID
-            name: Ime
-            publish_end_date: Končni datum objave
-            publish_start_date: Začetni datum objave
-            publishable: Objavljeno

@@ -5,6 +5,7 @@ sylius:
     form:
         customer:
             first_name: ชื่อ
+            group: กลุ่มลูกค้า
             last_name: นามสกุล
             email: อีเมล
             phone_number: หมายเลขโทรศัพท์

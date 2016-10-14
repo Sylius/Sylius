@@ -2,71 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    imagine_block:
-        name:
-            not_blank: Blok İsmi Giriniz Lütfen Hayal Ederek
-        label:
-            not_blank: Blok İsmi Giriniz Lütfen Hayal Ederek.
-        filter:
-            not_blank: Lütfen girin blok filtre düşünün.
-        image:
-            not_blank: Lütfen seçin blok görüntü hayal.
-        start_date:
-            invalid_date: Yayımlama başlangıç tarihi geçersiz.
-        end_date:
-            invalid_date: Yayımlama bitiş tarihi geçersiz.
-    menu:
-        name:
-            not_blank: Lütfen menü adını girin.
-        label:
-            not_blank: Menü etiketini giriniz.
-        start_date:
-            invalid_date: Yayımlama başlangıç tarihi geçersiz.
-        end_date:
-            invalid_date: Yayımlama bitiş tarihi geçersiz.
-    menu_node:
-        name:
-            not_blank: Lütfen menü düğüm adı girin.
-        label:
-            not_blank: Lütfen menü düğüm etiketi girin.
-        start_date:
-            invalid_date: Yayımlama başlangıç tarihi geçersiz.
-        end_date:
-            invalid_date: Yayımlama bitiş tarihi geçersiz.
     route:
         name:
             not_blank: Lütfen yol adı girin.
         content:
             not_blank: Lütfen yol içeriğini girin.
-        start_date:
-            invalid_date: Yayımlama başlangıç tarihi geçersiz.
-        end_date:
-            invalid_date: Yayımlama bitiş tarihi geçersiz.
-    slideshow_block:
-        name:
-            not_blank: Slayt gösterisi adı giriniz.
-        title:
-            not_blank: Slayt başlık giriniz.
-        start_date:
-            invalid_date: Yayımlama başlangıç tarihi geçersiz.
-        end_date:
-            invalid_date: Yayımlama bitiş tarihi geçersiz.
-    simple_block:
-        name:
-            not_blank: Basit blok adı giriniz.
-        title:
-            not_blank: Lütfen basit blok başlığı girin.
-        body:
-            not_blank: Basit blok vücut giriniz.
-        start_date:
-            invalid_date: Yayımlama başlangıç tarihi geçersiz.
-        end_date:
-            invalid_date: Yayımlama bitiş tarihi geçersiz.
-    string_block:
-        name:
-            not_blank: Basit blok adı giriniz.
-        body:
-            not_blank: Basit blok vücut giriniz.
         start_date:
             invalid_date: Yayımlama başlangıç tarihi geçersiz.
         end_date:

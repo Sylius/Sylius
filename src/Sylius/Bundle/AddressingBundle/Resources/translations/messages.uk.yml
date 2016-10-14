@@ -7,10 +7,10 @@ sylius:
             city: Місто
             company: Компанія
             country: Країна
-            first_name: Iм’я
+            first_name: "Iм'я"
             last_name: Прізвище
             phone_number: Номер телефону
-            postcode: Iндекс
+            postcode: Поштовий індекс
             street: Вулиця
             province: Регіон
         country:

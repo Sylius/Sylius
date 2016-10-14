@@ -83,7 +83,6 @@ sylius:
         confirmation_title: Potrditev
         confirmed: Potrjeno
         contain_variants: Vsebuje variante
-        content: Vsebina
         countries: Države
         country: Država
         country_details: Podrobnosti države
@@ -222,7 +221,6 @@ sylius:
         existing_customer: Obstoječa stranka
         expires_at: Poteče dne
         failed: Ni uspelo
-        filter: Filter
         forgot_password: Pozabljeno geslo
         fulfill: Izpolnitev
         gateway: Prehod
@@ -259,7 +257,6 @@ sylius:
         item: Izdelek
         items: Izdelki
         items_total: Elementi skupaj
-        label: Oznaka
         last_login: Zadnja prijava
         last_update: Zadnja posodobitev
         last_week_orders: Naročila prejšnjega tedna

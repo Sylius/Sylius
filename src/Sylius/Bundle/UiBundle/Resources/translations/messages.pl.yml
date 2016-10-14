@@ -44,6 +44,7 @@ sylius:
         adding_new_locale: Dodaj nowe ustawienia regionalne
         additional_information: Dodatkowe informacje
         address: Adres
+        addressing: Adresowanie
         addressing_step: Adres
         adjustments: Dostosowanie
         administration: Administracja
@@ -74,10 +75,12 @@ sylius:
         back_to_store: Powrót do sklepu
         backorder: Zamówiony
         balance_due: Saldo do zapłaty
+        bill_to: Rachunek dla
         billing_address: Adres do rachunku
         blocks: Bloki
         body: Zawartość
         browse_products: Przeglądaj produkty
+        browse_your_orders_from_the_past: Przeglądaj poprzednie zamówienia
         build: Zbuduj
         calculator: Kalkulator
         cancel: Anuluj
@@ -129,19 +132,24 @@ sylius:
         create_a_new_address: Dodaj nowy adres
         create_a_new_customer_account: Utwórz nowe konto klienta
         create_an_account: Utwórz konto
+        create_association_type: Utwórz typ powiązania
         create_country: Dodaj kraj
         create_currency: Utwórz walutę
         create_customer: Stwórz klienta
         create_imagine_block: Utwórz blok zdjęciowy
         create_locale: Dodaj ustawienia regionalne
         create_menu: Utwórz Menu
+        create_menu_node: Utwórz węzeł menu
         create_new_coupon: Dodaj nowy kupon promocyjny
         create_new_page: Dodaj nową stronę
         create_new_report: Utwórz nowy raport
+        create_option: Dodaj wariant
         create_order: Dodaj zamówienie
         create_payment: Dodaj płatność
         create_payment_method: Dodaj metodę płatności
         create_product: Dodaj produkt
+        create_product_association: Utwórz powiązanie produktu
+        create_product_association_type: Utwórz typ powiązania produktu
         create_product_attribute: Utwórz atrybut produktu
         create_promotion: Dodaj promocję
         create_redirect_route: Utwórz przekierowanie
@@ -164,6 +172,7 @@ sylius:
         creating_a_new_slideshow_block: 'Tworzenie nowego bloku - pokaz slajdów'
         creating_a_new_string_block: Tworzenie bloku tekstowego
         creating_menu: Tworzenie menu
+        creating_menu_node: Utwórz węzeł menu
         creating_new_page: Tworzenie nowej strony
         creating_redirect_route: Tworzenie przekierowania
         creating_route: Tworzenie trasy
@@ -176,13 +185,21 @@ sylius:
         current_promotions: Aktualne promocje
         current_stock: Dostępny
         customer: Klient
+        customer_can_login_to_the_store: Klient może logować się do sklepu
         customer_care: Obsługa klienta
         customer_details: Dane Klienta
+        customer_groups: Grupy klientów
         customer_id: ID klienta
         customer_not_notified: Klient nie został powiadomiony
         customer_notified: Klient powiadomiony
         customer_orders: Zamówienia klienta
+        customer_since: Klient od
         customers: Klienci
+        customers_list_of_all_customers_in_store: 'Klienci <small>Lista wszystkich klientów sklepu</small>'
+        customize_default_metadata: Dostosuj domyślne metadane
+        customize_metadata: Dostosuj metadane
+        customize_products_metadata: Dostosuj metadane produktów
+        customizing_metadata: Dostosowywanie metadanych
         dashboard: Panel
         data: Dane
         date: Data
@@ -217,11 +234,13 @@ sylius:
         edit_promotion_coupon: Edytuj kupon promocyjny
         edit_report: Edytuj raport
         edit_route: Edytuj trasę
+        edit_shipping_address: Edytuj adres wysyłki
         edit_shipping_method: Edytuj metodę wysyłki
         edit_static_content: Edytuj zawartość statyczną
         edit_tax_category: Edytuj kategorię podatkową
         edit_tax_rate: Edytuj stawkę podatkową
         edit_taxon: Edytuj takson
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Edytuj swoje przedmioty, podaj kod rabatowy, albo przejdź do kasy
         edit_your_personal_information: Edycja moich danych
         edit_zone: Edytuj strefę
         editing_attribute: Edytowanie atrybutu
@@ -233,6 +252,8 @@ sylius:
         editing_email: Edycja wiadomości E-mail
         editing_imagine_block: Edycja bloku zdjęciowego
         editing_menu: Edycja menu
+        editing_menu_node: Edytowanie węzła menu
+        editing_option: Edycja opcji
         editing_order: Edycja zamówienia
         editing_page: Edycja strony
         editing_payment: Edycja płatności
@@ -296,11 +317,13 @@ sylius:
         guest_customer: Gość
         have_an_account_already: Masz już konto
         hello: Witaj
+        hello_name: 'Witaj <b>%name%</b>'
         hide_deleted: Ukryj usunięte
         home: Panel
         hostname: Nazwa hosta
         id: ID
         identifier: Identyfikator
+        if_you_have_an_account_sign_in_with_your_email_address: Jeśli masz konto, zaloguj się przy użyciu adresu e-mail
         image: Zdjęcie
         images: Zdjęcia
         imagine_blocks: Bloki zdjęciowe
@@ -319,7 +342,6 @@ sylius:
         items: Produkty
         items_total: Produkty łącznie
         jump_to_page: Przejdź na stronę
-        label: Etykieta
         last_login: Ostatnio zalogowany
         last_name: Nazwisko
         last_update: Ostatnia aktualizacja
@@ -336,6 +358,7 @@ sylius:
         locales: Ustawienia regionalne
         lock: Blokada
         locked: Zablokowany
+        logged_in_as: 'Zalogowany jako %username%'
         login: Zaloguj
         login_button: Zaloguj
         logout: Wyloguj
@@ -492,7 +515,7 @@ sylius:
         placed_an_order: Złożyłeś zamówienie.
         placed_at: Umieszczone w
         postcode: Kod pocztowy
-        powered_by: Wspierane przez
+        powered_by: Zasilany przez
         presentation: Nazwa publiczna
         previous: Poprzednie
         price: Cena

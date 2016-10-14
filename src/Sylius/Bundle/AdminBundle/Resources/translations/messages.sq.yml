@@ -33,5 +33,4 @@ sylius:
                     header: Shitjet
                     orders: Porositë
                 content:
-                    header: Përmbajtja
                     routes: Rrugët

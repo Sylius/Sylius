@@ -4,8 +4,8 @@
 sylius:
     currency:
         code:
+            exact_length: Kód meny musí mať presne 3 znaky.
             not_blank: Vyberte kód meny.
             unique: Kód meny musí byť jedinečný.
-            exact_length: Kód meny musí mať presne 3 znaky.
         exchange_rate:
             not_blank: Zadajte výmenný kurz.

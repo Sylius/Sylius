@@ -90,7 +90,6 @@ sylius:
         confirmation: Potvrzení
         confirmation_title: Potvrzení
         contain_variants: Obsahuje varianty
-        content: Obsah
         countries: Země
         country: Země
         country_details: Podrobnosti země
@@ -209,7 +208,6 @@ sylius:
         expires_at: Končí v
         extra_notes: Další poznámky
         failed: Neúspěšné
-        filter: Filtr
         first_name: Křestní Jméno
         fulfill: Splnit
         gateway: Brána
@@ -241,7 +239,6 @@ sylius:
         item: Položka
         items: Položky
         items_total: Celkem položek
-        label: Popisek
         last_login: Poslední přihlášení
         last_name: Příjmení
         last_update: Poslední aktualizace
