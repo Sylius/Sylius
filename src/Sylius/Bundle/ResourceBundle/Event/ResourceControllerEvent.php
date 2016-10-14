@@ -46,7 +46,8 @@ class ResourceControllerEvent extends GenericEvent
     /**
      * @param string $message
      * @param string $type
-     * @param array  $parameters
+     * @param array $parameters
+     * @param int $errorCode
      */
     public function stop($message, $type = self::TYPE_ERROR, $parameters = [], $errorCode = 500)
     {
@@ -108,8 +109,6 @@ class ResourceControllerEvent extends GenericEvent
 
     /**
      * @param array $messageParameters
-     *
-     * @return $this
      */
     public function setMessageParameters(array $messageParameters)
     {
