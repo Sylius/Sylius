@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Order\Updater;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use SM\Factory\Factory;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -50,7 +51,7 @@ final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
         StateMachineInterface $firstOrderStateMachine,
         StateMachineInterface $secondOrderStateMachine
     ) {
-        $orderRepository->findOrdersUnpaidSince(new \DateTime('-10 months'))->willReturn([
+        $orderRepository->findOrdersUnpaidSince(Argument::type(\DateTime::class))->willReturn([
            $firstOrder,
            $secondOrder
         ]);
