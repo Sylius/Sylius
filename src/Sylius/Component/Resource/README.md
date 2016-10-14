@@ -6,7 +6,9 @@ Resource management layer for Sylius and PHP apps.
 Sylius
 ------
 
-Modern ecommerce for PHP and Symfony2. Visit [Sylius.org](http://sylius.org).
+![Sylius](http://sylius.org/assets/img/logo.png)
+
+Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.org](http://sylius.org).
 
 Documentation
 -------------
@@ -16,29 +18,27 @@ Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/la
 Contributing
 ------------
 
-All instructions for contributing to Sylius can be found in the [Contributing Guide](http://docs.sylius.org/en/latest/contributing/index.html).
+[This page](http://docs.sylius.org/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
 
-Support
--------
+Follow Sylius' Development
+--------------------------
 
-If you have a question regarding the usage of this library, please ask on
-[Stackoverflow](http://stackoverflow.com). You should use "sylius"
-tag when posting and make sure to [browse existing questions](http://stackoverflow.com/questions/tagged/sylius).
+If you want to keep up with the updates and latest features, follow us on the following channels:
 
-Sylius on Twitter
------------------
+* [Official Blog](https://sylius.org/blog)
+* [Sylius on Twitter](https://twitter.com/Sylius)
+* [Sylius on Facebook](https://facebook.com/SyliusEcommerce)
 
-[Follow the official Sylius account on Twitter!](http://twitter.com/Sylius).
-
-Bug Tracking
+Bug tracking
 ------------
 
-If you find a bug, please refer to the [Reporting a Bug](http://docs.sylius.org/en/latest/contributing/code/bugs.html) guide.
+Sylius uses [GitHub issues](https://github.com/Sylius/Sylius/issues).
+If you have found bug, please create an issue.
 
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/Resource/blob/master/LICENSE).
+License can be found [here](https://github.com/Sylius/Sylius/blob/master/LICENSE).
 
 Authors
 -------

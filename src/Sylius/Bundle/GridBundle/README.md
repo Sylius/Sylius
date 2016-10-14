@@ -6,69 +6,42 @@ Advanced grids for your Symfony2 project.
 Sylius
 ------
 
-**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
+![Sylius](http://sylius.org/assets/img/logo.png)
 
-[phpspec](http://phpspec.net) examples
---------------------------------------
-
-```bash
-$ composer install
-$ bin/phpspec run -f pretty
-```
+Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.org](http://sylius.org).
 
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://docs.sylius.org).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusGridBundle/index.html).
 
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
+[This page](http://docs.sylius.org/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
 
-Mailing lists
--------------
+Follow Sylius' Development
+--------------------------
 
-### Users
+If you want to keep up with the updates and latest features, follow us on the following channels:
 
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
-
-### Developers
-
-To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
-
-Sylius twitter account
-----------------------
-
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
+* [Official Blog](https://sylius.org/blog)
+* [Sylius on Twitter](https://twitter.com/Sylius)
+* [Sylius on Facebook](https://facebook.com/SyliusEcommerce)
 
 Bug tracking
 ------------
 
-This bundle uses [GitHub issues](https://github.com/Sylius/Sylius/issues).
+Sylius uses [GitHub issues](https://github.com/Sylius/Sylius/issues).
 If you have found bug, please create an issue.
-
-Versioning
-----------
-
-Releases will be numbered with the format `major.minor.patch`.
-
-And constructed with the following guidelines.
-
-* Breaking backwards compatibility bumps the major.
-* New additions without breaking backwards compatibility bumps the minor.
-* Bug fixes and misc changes bump the patch.
-
-For more information on SemVer, please visit [semver.org website](http://semver.org/).  
-This versioning method is same for all **Sylius** bundles and applications.
 
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusGridBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/Sylius/blob/master/LICENSE).
 
 Authors
 -------
 
-The bundle was originally created by [Paweł Jędrzejewski](https://twitter.com/pjedrzejewski).
-See the list of [contributors](https://github.com/Sylius/SyliusGridBundle/contributors).
+The bundle was originally created by [Paweł Jędrzejewski](http://pjedrzejewski.com).
+See the list of [contributors](https://github.com/Sylius/Sylius/contributors).
