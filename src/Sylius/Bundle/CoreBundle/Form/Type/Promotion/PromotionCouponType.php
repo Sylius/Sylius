@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion;
+namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\PromotionBundle\Form\Type\CouponType as BaseCouponType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType as BasePromotionCouponType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Myke Hines <myke@webhines.com>
  */
-class CouponType extends BaseCouponType
+class PromotionCouponType extends BasePromotionCouponType
 {
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ class CouponType extends BaseCouponType
 
         $builder
             ->add('perCustomerUsageLimit', 'integer', [
-                'label' => 'sylius.form.coupon.per_customer_usage_limit',
+                'label' => 'sylius.form.promotion_coupon.per_customer_usage_limit',
                 'required' => false,
             ])
         ;

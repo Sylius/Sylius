@@ -38,7 +38,7 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
         $this->shouldHaveType(CouponGenerationAmountValidator::class);
     }
 
-    function it_is_constraint_validator()
+    function it_is_a_constraint_validator()
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
@@ -59,7 +59,7 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
         $this->validate($instruction, $constraint);
     }
 
-    function it_not_adds_violation(
+    function it_does_not_add_violation(
         ExecutionContextInterface $context,
         PromotionCouponGeneratorInstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy

@@ -28,7 +28,7 @@ class PromotionActionType extends AbstractConfigurationType
     {
         $builder
             ->add('type', 'sylius_promotion_action_choice', [
-                'label' => 'sylius.form.action.type',
+                'label' => 'sylius.form.promotion_action.type',
                 'attr' => [
                     'data-form-collection' => 'update',
                 ],

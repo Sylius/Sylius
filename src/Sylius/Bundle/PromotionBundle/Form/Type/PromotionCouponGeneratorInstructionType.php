@@ -26,18 +26,18 @@ class PromotionCouponGeneratorInstructionType extends AbstractResourceType
     {
         $builder
             ->add('amount', 'integer', [
-                'label' => 'sylius.form.coupon_generate_instruction.amount',
+                'label' => 'sylius.form.promotion_coupon_generator_instruction.amount',
             ])
             ->add('codeLength', 'integer', [
-                'label' => 'sylius.form.coupon_generate_instruction.code_length',
+                'label' => 'sylius.form.promotion_coupon_generator_instruction.code_length',
             ])
             ->add('usageLimit', 'integer', [
                 'required' => false,
-                'label' => 'sylius.form.coupon_generate_instruction.usage_limit',
+                'label' => 'sylius.form.promotion_coupon_generator_instruction.usage_limit',
             ])
             ->add('expiresAt', 'date', [
                 'required' => false,
-                'label' => 'sylius.form.coupon_generate_instruction.expires_at',
+                'label' => 'sylius.form.promotion_coupon_generator_instruction.expires_at',
                 'widget' => 'single_text',
             ])
         ;

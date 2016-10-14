@@ -2,27 +2,41 @@
 # (c) Paweł Jędrzejewski
 sylius:
     form:
-        action:
+        promotion:
+            actions: Actions
+            add_action: Add action
+            add_rule: Add rule
+            coupon_based: Coupon based
+            description: Description
+            ends_at: Ends at
+            exclusive: Exclusive
+            name: Name
+            rules: Rules
+            starts_at: Starts at
+            usage_limit: Usage limit
+        promotion_action:
             fixed_discount_configuration:
                 amount: Amount
             percentage_discount_configuration:
                 percentage: Percentage
             type: Type
-        rule:
-            taxonomy_configuration:
-                taxons: Taxons
-                exclude: Exclude
-            contains_product_configuration:
-                variants: Products
-                exclude: Exclude
+        promotion_coupon:
+            expires_at: Expires at
+            usage_limit: Usage limit
+        promotion_coupon_generate_instruction:
+            amount: Amount
+            code_length: Code length
+            expires_at: Expires at
+            usage_limit: Usage limit
+        promotion_rule:
             cart_quantity_configuration:
                 count: Count
                 equal: Equal
-            item_total_configuration:
-                amount: Amount
-            nth_order_configuration:
-                nth: Nth
+            contains_product_configuration:
+                exclude: Exclude
+                variants: Products
             customer_loyalty_configuration:
+                after: User created after this period
                 time: Time
                 unit:
                     days: Days
@@ -30,27 +44,13 @@ sylius:
                     months: Months
                     years: Years
                     header: Unit
-                after: User created after this period
+            item_total_configuration:
+                amount: Amount
+            nth_order_configuration:
+                nth: Nth
             shipping_country_configuration:
                 country: Country
+            taxonomy_configuration:
+                exclude: Exclude
+                taxons: Taxons
             type: Type
-        coupon:
-            usage_limit: Usage limit
-            expires_at: Expires at
-        coupon_generate_instruction:
-            amount: Amount
-            usage_limit: Usage limit
-            expires_at: Expires at
-            code_length: Code length
-        promotion:
-            actions: Actions
-            add_action: Add action
-            add_rule: Add rule
-            coupon_based: Coupon based
-            exclusive: Exclusive
-            description: Description
-            ends_at: Ends at
-            name: Name
-            rules: Rules
-            starts_at: Starts at
-            usage_limit: Usage limit

@@ -20,11 +20,9 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Promotions are used to give discounts or other types of rewards to customers.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class SyliusPromotionBundle extends AbstractResourceBundle
+final class SyliusPromotionBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}

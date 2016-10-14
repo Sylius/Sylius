@@ -42,7 +42,7 @@ class ContainsProductConfigurationType extends AbstractType
     {
         $builder
             ->add('variant', 'sylius_product_variant_from_identifier', [
-                'label' => 'sylius.form.action.add_product_configuration.variant',
+                'label' => 'sylius.form.promotion_action.add_product_configuration.variant',
                 'class' => $this->variantRepository->getClassName(),
                 'constraints' => [
                     new NotBlank(),
@@ -50,20 +50,20 @@ class ContainsProductConfigurationType extends AbstractType
                 ],
             ])
             ->add('count', 'integer', [
-                'label' => 'sylius.form.rule.cart_quantity_configuration.count',
+                'label' => 'sylius.form.promotion_rule.cart_quantity_configuration.count',
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'numeric']),
                 ],
             ])
             ->add('equal', 'checkbox', [
-                'label' => 'sylius.form.rule.cart_quantity_configuration.equal',
+                'label' => 'sylius.form.promotion_rule.cart_quantity_configuration.equal',
                 'constraints' => [
                     new Type(['type' => 'bool']),
                 ],
             ])
             ->add('exclude', 'checkbox', [
-                'label' => 'sylius.form.rule.contains_product_configuration.exclude',
+                'label' => 'sylius.form.promotion_rule.contains_product_configuration.exclude',
                 'constraints' => [
                     new Type(['type' => 'bool']),
                 ],

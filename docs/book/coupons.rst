@@ -78,8 +78,8 @@ And after that call the OrderProcessor on the order to have the promotion applie
 
    $this->container->get('sylius.order_processing.order_processor')->process($order);
 
-Coupon Generator
-----------------
+Promotion Coupon Generator
+--------------------------
 
 Making up new codes might become difficult if you would like to prepare a lot of coupons at once. That is why Sylius
 provides a service that generates random codes for you - `CouponGenerator <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Promotion/Generator/CouponGenerator.php>`_.
@@ -92,7 +92,7 @@ In its **PromotionCouponGeneratorInstruction** you can define the amount of coup
 
    // Get the CouponGenerator service
    /** @var CouponGeneratorInterface $generator */
-   $generator = $this->container->get('sylius.generator.promotion_coupon');
+   $generator = $this->container->get('sylius.promotion_coupon_generator');
 
    // Then create a new empty PromotionCouponGeneratorInstruction
    /** @var PromotionCouponGeneratorInstructionInterface $instruction */

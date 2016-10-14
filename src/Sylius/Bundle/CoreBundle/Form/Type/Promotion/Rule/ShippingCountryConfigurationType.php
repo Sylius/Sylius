@@ -26,7 +26,7 @@ class ShippingCountryConfigurationType extends AbstractType
     {
         $builder
             ->add('country', 'sylius_country_code_choice', [
-                'label' => 'sylius.form.rule.shipping_country_configuration.country',
+                'label' => 'sylius.form.promotion_rule.shipping_country_configuration.country',
                 'empty_value' => 'sylius.form.country.select',
             ])
         ;

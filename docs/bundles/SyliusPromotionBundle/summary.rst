@@ -48,11 +48,11 @@ Summary
                 classes:
                     model:      Sylius\Component\Promotion\Model\Coupon
                     interface:  Sylius\Component\Promotion\Model\CouponInterface
-                    controller: Sylius\Bundle\PromotionBundle\Controller\CouponController
+                    controller: Sylius\Bundle\PromotionBundle\Controller\PromotionCouponController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\PromotionsBundle\Form\Type\CouponType
+                        default: Sylius\Bundle\PromotionsBundle\Form\Type\PromotionCouponType
                 validation_groups:
                     default: [ sylius ]
 

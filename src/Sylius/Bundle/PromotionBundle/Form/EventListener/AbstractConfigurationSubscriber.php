@@ -136,15 +136,11 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     }
 
     /**
-     * Return the identifier of the rule/action registered in the registry
-     *
      * @return string
      */
     abstract protected function getRegistryIdentifier($model);
 
     /**
-     * Return the rule/action configuration
-     *
      * @return array
      */
     abstract protected function getConfiguration($model);

@@ -18,7 +18,7 @@ use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
 use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -45,26 +45,28 @@ final class PromotionRuleTypeSpec extends ObjectBehavior
         $this->shouldHaveType(AbstractConfigurationType::class);
     }
 
-    function it_builds_form(
-        FormBuilder $builder,
-        FormFactoryInterface $factory
-    ) {
+    function it_builds_a_form(FormBuilderInterface $builder, FormFactoryInterface $factory)
+    {
+        $builder->getFormFactory()->willReturn($factory);
+
         $builder
             ->add('type', 'sylius_promotion_rule_choice', Argument::type('array'))
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $builder->getFormFactory()->willReturn($factory);
-        $builder->addEventSubscriber(
-            Argument::type(BuildPromotionRuleFormSubscriber::class)
-        )->shouldBeCalled();
+        $builder
+            ->addEventSubscriber(Argument::type(BuildPromotionRuleFormSubscriber::class))
+            ->shouldBeCalled()
+            ->shouldBeCalled()
+        ;
 
         $this->buildForm($builder, [
             'configuration_type' => 'configuration_form_type',
         ]);
     }
 
-    function it_should_define_assigned_data_class(OptionsResolver $resolver)
+    function it_defines_an_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([

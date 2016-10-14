@@ -13,49 +13,43 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.promotion.eligibility_checker.promotion_coupon_duration"
+        <service id="sylius.promotion_coupon_duration_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponDurationEligibilityChecker"
                  public="false">
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
-
-        <service id="sylius.promotion.eligibility_checker.promotion_coupon_usage_limit"
+        <service id="sylius.promotion_coupon_usage_limit_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponUsageLimitEligibilityChecker"
                  public="false">
             <tag name="sylius.promotion_coupon_eligibility_checker" />
         </service>
-
         <service id="sylius.promotion_coupon_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionCouponEligibilityChecker">
             <argument type="collection" />
         </service>
 
-        <service id="sylius.promotion.eligibility_checker.promotion_duration"
+        <service id="sylius.promotion_duration_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionDurationEligibilityChecker"
                  public="false">
             <tag name="sylius.promotion_eligibility_checker" />
         </service>
-
-        <service id="sylius.promotion.eligibility_checker.promotion_usage_limit"
+        <service id="sylius.promotion_usage_limit_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionUsageLimitEligibilityChecker"
                  public="false">
             <tag name="sylius.promotion_eligibility_checker" />
         </service>
-
-        <service id="sylius.promotion.eligibility_checker.promotion_subject_coupon"
+        <service id="sylius.promotion_subject_coupon_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionSubjectCouponEligibilityChecker"
                  public="false">
             <argument type="service" id="sylius.promotion_coupon_eligibility_checker" />
             <tag name="sylius.promotion_eligibility_checker" />
         </service>
-
-        <service id="sylius.promotion.eligibility_checker.promotion_rules"
+        <service id="sylius.promotion_rules_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\PromotionRulesEligibilityChecker"
                  public="false">
-            <argument type="service" id="sylius.registry.promotion_rule_checker" />
+            <argument type="service" id="sylius.registry_promotion_rule_checker" />
             <tag name="sylius.promotion_eligibility_checker" />
         </service>
-
         <service id="sylius.promotion_eligibility_checker"
                  class="Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionEligibilityChecker">
             <argument type="collection" />

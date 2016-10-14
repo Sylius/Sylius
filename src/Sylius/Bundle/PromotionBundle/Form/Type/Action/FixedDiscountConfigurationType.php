@@ -17,8 +17,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Fixed discount action configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class FixedDiscountConfigurationType extends AbstractType
@@ -30,7 +28,7 @@ class FixedDiscountConfigurationType extends AbstractType
     {
         $builder
             ->add('amount', 'sylius_money', [
-                'label' => 'sylius.form.action.fixed_discount_configuration.amount',
+                'label' => 'sylius.form.promotion_action.fixed_discount_configuration.amount',
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'numeric']),

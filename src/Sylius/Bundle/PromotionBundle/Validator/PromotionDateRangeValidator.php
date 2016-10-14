@@ -42,9 +42,11 @@ final class PromotionDateRangeValidator extends ConstraintValidator
         }
 
         if ($value->getStartsAt()->getTimestamp() > $value->getEndsAt()->getTimestamp()) {
-            $this->context->buildViolation($constraint->message)
+            $this->context
+                ->buildViolation($constraint->message)
                 ->atPath('endsAt')
-                ->addViolation();
+                ->addViolation()
+            ;
         }
     }
 }

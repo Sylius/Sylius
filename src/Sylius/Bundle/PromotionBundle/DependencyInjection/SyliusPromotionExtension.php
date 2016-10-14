@@ -35,14 +35,8 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
 
         $this->mapFormValidationGroupsParameters($config, $container);
 
-        $configFiles = [
-            'services.xml',
-            sprintf('driver/%s.xml', $config['driver']),
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
+        $loader->load(sprintf('driver/%s.xml', $config['driver']));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
         $this->overwriteCouponFactory($container);
@@ -50,11 +44,11 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
 
         $container
             ->getDefinition('sylius.form.type.promotion_action')
-            ->replaceArgument(1, new Reference('sylius.registry.promotion_action'))
+            ->replaceArgument(1, new Reference('sylius.registry_promotion_action'))
         ;
         $container
             ->getDefinition('sylius.form.type.promotion_rule')
-            ->replaceArgument(1, new Reference('sylius.registry.promotion_rule_checker'))
+            ->replaceArgument(1, new Reference('sylius.registry_promotion_rule_checker'))
         ;
     }
 
@@ -68,9 +62,7 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
         $couponFactoryDefinition->setClass(Factory::class);
 
         $decoratedCouponFactoryDefinition = new Definition($couponFactoryClass);
-        $decoratedCouponFactoryDefinition
-            ->addArgument($couponFactoryDefinition)
-        ;
+        $decoratedCouponFactoryDefinition->addArgument($couponFactoryDefinition);
 
         $container->setDefinition('sylius.factory.promotion_coupon', $decoratedCouponFactoryDefinition);
     }

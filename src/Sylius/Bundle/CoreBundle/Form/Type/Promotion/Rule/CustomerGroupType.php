@@ -42,7 +42,7 @@ class CustomerGroupType extends AbstractType
     {
         $builder
             ->add('group', 'sylius_customer_group_from_identifier', [
-                'label' => 'sylius.form.action.customer_group',
+                'label' => 'sylius.form.promotion_action.customer_group',
                 'property' => 'name',
                 'class' => $this->groupRepository->getClassName(),
                 'constraints' => [

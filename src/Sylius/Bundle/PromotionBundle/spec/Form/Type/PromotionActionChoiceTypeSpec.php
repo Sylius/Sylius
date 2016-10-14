@@ -12,13 +12,16 @@
 namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin PromotionActionChoiceType
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-final class ActionChoiceTypeSpec extends ObjectBehavior
+final class PromotionActionChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -27,15 +30,15 @@ final class ActionChoiceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\ActionChoiceType');
+        $this->shouldHaveType(PromotionActionChoiceType::class);
     }
 
-    function it_should_be_a_form_type()
+    function it_is_a_form_type()
     {
         $this->shouldHaveType(AbstractType::class);
     }
 
-    function it_should_set_action_types_to_choose_from(OptionsResolver $resolver)
+    function it_sets_action_types_to_choose_from(OptionsResolver $resolver)
     {
         $resolver->setDefaults(['choices' => []])->shouldBeCalled();
 

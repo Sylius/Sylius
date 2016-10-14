@@ -28,26 +28,26 @@ class CustomerLoyaltyConfigurationType extends AbstractType
     {
         $builder
             ->add('time', 'integer', [
-                'label' => 'sylius.form.rule.customer_loyalty_configuration.time',
+                'label' => 'sylius.form.promotion_rule.customer_loyalty_configuration.time',
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'numeric']),
                 ],
             ])
             ->add('unit', 'choice', [
-                'label' => 'sylius.form.rule.customer_loyalty_configuration.unit.header',
+                'label' => 'sylius.form.promotion_rule.customer_loyalty_configuration.unit.header',
                 'choices' => [
-                    'days' => 'sylius.form.rule.customer_loyalty_configuration.unit.days',
-                    'weeks' => 'sylius.form.rule.customer_loyalty_configuration.unit.weeks',
-                    'months' => 'sylius.form.rule.customer_loyalty_configuration.unit.months',
-                    'years' => 'sylius.form.rule.customer_loyalty_configuration.unit.years',
+                    'days' => 'sylius.form.promotion_rule.customer_loyalty_configuration.unit.days',
+                    'weeks' => 'sylius.form.promotion_rule.customer_loyalty_configuration.unit.weeks',
+                    'months' => 'sylius.form.promotion_rule.customer_loyalty_configuration.unit.months',
+                    'years' => 'sylius.form.promotion_rule.customer_loyalty_configuration.unit.years',
                 ],
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
             ->add('after', 'checkbox', [
-                'label' => 'sylius.form.rule.customer_loyalty_configuration.after',
+                'label' => 'sylius.form.promotion_rule.customer_loyalty_configuration.after',
             ])
         ;
     }

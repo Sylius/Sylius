@@ -30,13 +30,17 @@ class PromotionRuleType extends AbstractConfigurationType
     {
         $builder
             ->add('type', 'sylius_promotion_rule_choice', [
-                'label' => 'sylius.form.rule.type',
+                'label' => 'sylius.form.promotion_rule.type',
                 'attr' => [
                     'data-form-collection' => 'update',
                 ],
             ])
             ->addEventSubscriber(
-                new BuildPromotionRuleFormSubscriber($this->registry, $builder->getFormFactory(), $options['configuration_type'])
+                new BuildPromotionRuleFormSubscriber(
+                    $this->registry,
+                    $builder->getFormFactory(),
+                    $options['configuration_type']
+                )
             )
         ;
     }

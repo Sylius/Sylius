@@ -46,7 +46,7 @@ final class BuildPromotionActionFormSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType(BuildPromotionActionFormSubscriber::class);
     }
 
-    function it_is_configuration_subscriber()
+    function it_is_a_configuration_subscriber()
     {
         $this->shouldImplement(AbstractConfigurationSubscriber::class);
     }
@@ -72,11 +72,10 @@ final class BuildPromotionActionFormSubscriberSpec extends ObjectBehavior
         $action->getType()->willReturn('test_action');
         $action->getConfiguration()->willReturn([]);
 
-        $factory->createNamed(
-            'configuration',
-            'sylius_promotion_action_fixed_discount_configuration',
-            Argument::cetera()
-        )->willReturn($field);
+        $factory
+            ->createNamed('configuration', 'sylius_promotion_action_fixed_discount_configuration', Argument::cetera())
+            ->willReturn($field)
+        ;
 
         $form->add($field)->shouldBeCalled();
 
@@ -92,11 +91,10 @@ final class BuildPromotionActionFormSubscriberSpec extends ObjectBehavior
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn(['type' => 'test_action']);
 
-        $factory->createNamed(
-            'configuration',
-            'sylius_promotion_action_fixed_discount_configuration',
-            Argument::cetera()
-        )->willReturn($field);
+        $factory
+            ->createNamed('configuration', 'sylius_promotion_action_fixed_discount_configuration', Argument::cetera())
+            ->willReturn($field)
+        ;
 
         $form->add($field)->shouldBeCalled();
 

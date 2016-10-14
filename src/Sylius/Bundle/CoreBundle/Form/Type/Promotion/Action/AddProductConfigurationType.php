@@ -42,7 +42,7 @@ class AddProductConfigurationType extends AbstractType
     {
         $builder
             ->add('variant', 'sylius_product_variant_from_identifier', [
-                'label' => 'sylius.form.action.add_product_configuration.variant',
+                'label' => 'sylius.form.promotion_action.add_product_configuration.variant',
                 'class' => $this->variantRepository->getClassName(),
                 'constraints' => [
                     new NotBlank(),
@@ -50,7 +50,7 @@ class AddProductConfigurationType extends AbstractType
                 ],
             ])
             ->add('quantity', 'integer', [
-                'label' => 'sylius.form.action.add_product_configuration.quantity',
+                'label' => 'sylius.form.promotion_action.add_product_configuration.quantity',
                 'empty_data' => 1,
                 'constraints' => [
                     new NotBlank(),
@@ -58,7 +58,7 @@ class AddProductConfigurationType extends AbstractType
                 ],
             ])
             ->add('price', 'sylius_money', [
-                'label' => 'sylius.form.action.add_product_configuration.price',
+                'label' => 'sylius.form.promotion_action.add_product_configuration.price',
                 'empty_data' => 0,
                 'constraints' => [
                     new NotBlank(),
