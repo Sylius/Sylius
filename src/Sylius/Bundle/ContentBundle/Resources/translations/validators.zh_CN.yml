@@ -2,71 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    imagine_block:
-        name:
-            not_blank: 请输入图片块的名称。
-        label:
-            not_blank: 请输入图片块的名称。
-        filter:
-            not_blank: 请输入图像块筛选器。
-        image:
-            not_blank: 请选择图片块名称。
-        start_date:
-            invalid_date: 开始日期无效。
-        end_date:
-            invalid_date: 发布结束日期是无效的。
-    menu:
-        name:
-            not_blank: 请输入菜单名称
-        label:
-            not_blank: 请输入菜单标签。
-        start_date:
-            invalid_date: 开始日期无效。
-        end_date:
-            invalid_date: 发布结束日期是无效的。
-    menu_node:
-        name:
-            not_blank: 请输入菜单节点名称。
-        label:
-            not_blank: 请输入菜单节点标签。
-        start_date:
-            invalid_date: 开始日期无效。
-        end_date:
-            invalid_date: 发布结束日期是无效的。
     route:
         name:
             not_blank: 请输入路由名称。
         content:
             not_blank: 请输入路由的内容。
-        start_date:
-            invalid_date: 开始日期无效。
-        end_date:
-            invalid_date: 发布结束日期是无效的。
-    slideshow_block:
-        name:
-            not_blank: 请输入幻灯片显示名称。
-        title:
-            not_blank: 请输入幻灯片标题。
-        start_date:
-            invalid_date: 开始日期无效。
-        end_date:
-            invalid_date: 发布结束日期是无效的。
-    simple_block:
-        name:
-            not_blank: 请输入简单的块的名称。
-        title:
-            not_blank: 请输入简单的区块标题。
-        body:
-            not_blank: 请输入简单的区块正文。
-        start_date:
-            invalid_date: 开始日期无效。
-        end_date:
-            invalid_date: 发布结束日期是无效的。
-    string_block:
-        name:
-            not_blank: 请输入区块的名称。
-        body:
-            not_blank: 请输入区块的正文。
         start_date:
             invalid_date: 开始日期无效。
         end_date:

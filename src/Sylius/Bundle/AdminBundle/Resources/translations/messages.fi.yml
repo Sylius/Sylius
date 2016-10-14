@@ -33,6 +33,5 @@ sylius:
                     header: Myynnit
                     orders: Tilaukset
                 content:
-                    header: Sisältö
                     static_contents: Vakiosisältö
                     routes: Reitit

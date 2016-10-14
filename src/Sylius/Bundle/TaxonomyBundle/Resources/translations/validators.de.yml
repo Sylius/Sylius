@@ -3,12 +3,12 @@
 
 sylius:
     taxon:
+        code:
+            not_blank: Bitte geben Sie einen Code für die Produktgruppe ein.
+            unique: Es existiert bereits ein Taxon mit diesem Code.
         name:
             max_length: Taxon darf nicht länger als 255 Zeichen sein.
             not_blank: Bitte Taxonname eingeben.
-        code:
-            unique: Es existiert bereits ein Taxon mit diesem Code.
-            not_blank: Bitte geben Sie einen Code für die Produktgruppe ein.
     taxonomy:
         name:
             max_length: Name darf nicht länger als 255 Zeichen sein.

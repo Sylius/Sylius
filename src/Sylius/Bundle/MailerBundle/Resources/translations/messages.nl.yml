@@ -8,6 +8,5 @@ sylius:
             subject: Onderwerp
             sender_name: Naam afzender
             sender_address: Adres afzender
-            content: Inhoud
             template: Sjabloon
             no_template: Gebruik aangepaste sjabloon

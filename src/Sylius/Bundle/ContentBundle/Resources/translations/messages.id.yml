@@ -3,76 +3,10 @@
 
 sylius:
     form:
-        action_block:
-            action_name: Nama Action
-            id: Id
-            publish_end_date: Tanggal terakhir publikasi
-            publish_start_date: Tanggal mulai publikasi
-        imagine_block:
-            image: Gambar
-            internal_name: Nama internal
-            label: Label
-            parent: Induk
-            publish_end_date: Tanggal terakhir publikasi
-            publish_start_date: Tanggal mulai publikasi
-            slideshow_medium: Slideshow menengah (isi)
-        menu:
-            childrens: Turunan
-            display: Tampilan
-            display_children: Tampilan Turunan
-            label: Label
-            name: Nama
-            parent: Induk
-            publish_end_date: Tanggal terakhir publikasi
-            publish_start_date: Tanggal mulai publikasi
-            route: Rute
-            uri: URI
-        menu_block:
-            body: Body
-            id: Id
-            name: Nama
-            publish_end_date: Tanggal terakhir publikasi
-            publish_start_date: Tanggal mulai publikasi
-        menu_node_block:
-            content: Isi
-            display: Tampilan
-            display_children: Tampilan Turunan
-            internal_name: Nama internal
-            label: Label
-            link_type: Jenis link
-            publish_end_date: Tanggal terakhir publikasi
-            publish_start_date: Tanggal mulai publikasi
-            route: Rute
-            uri: URI
-        redirect_route:
-            id: Id
-            name: Nama
-            route_name: nama_rute
-            uri: URI
-        reference_block:
-            body: Body
-            id: Id
-            publish_end_date: Tanggal terakhir publikasi
-            publish_start_date: Tanggal mulai publikasi
-            title: Judul
         route:
             content: Konten
             name: Nama
             parent: Induk
-        simple_block:
-            body: Body
-            internal_name: Nama internal
-            parent: Induk
-            publish_end_date: Tanggal terakhir publikasi
-            publish_start_date: Tanggal mulai publikasi
-            title: Judul
-        slideshow_block:
-            childrens: Turunan
-            internal_name: Nama internal
-            parent: Induk
-            publish_end_date: Tanggal terakhir publikasi
-            publish_start_date: Tanggal mulai publikasi
-            title: Judul
         static_content:
             body: Body
             id: Id
@@ -83,9 +17,3 @@ sylius:
             publish_start_date: Tanggal mulai publikasi
             routes: Rute
             title: Judul
-        string_block:
-            body: Body
-            id: ID
-            name: Nama
-            publish_end_date: Tanggal terakhir publikasi
-            publish_start_date: Tanggal mulai publikasi

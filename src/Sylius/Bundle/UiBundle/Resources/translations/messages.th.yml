@@ -6,7 +6,7 @@ sylius:
         login:
             username: ชื่อผู้ใช้
             password: รหัสผ่าน
-            remember_me: จำการการเข้าระบบของฉันไว้
+            remember_me: จำการเข้าระบบของฉันไว้
         option:
             name: ชื่อ
         notes: หมายเหตุเพิ่มเติม
@@ -81,6 +81,7 @@ sylius:
         blocks: บล็อก
         body: Body
         browse_products: ค้นหาผลิตภัณฑ์
+        browse_your_orders_from_the_past: เรียกดูใบสั่งซื้อที่ผ่านมาของคุณ
         build: สร้าง
         calculator: การคำนวณราคา
         cancel: ยกเลิก
@@ -122,7 +123,7 @@ sylius:
         contact_us: ติดต่อเรา
         contain_variants: หลากหลายรูปแบบ
         contains: ประกอบด้วย
-        content: เนื้อหา
+        content: เนื้อหาในเว็บ
         countries: ประเทศ
         country: ประเทศ
         country_details: รายละเอียดประเทศ
@@ -189,6 +190,7 @@ sylius:
         customer_can_login_to_the_store: ลูกค้าสามารถเข้าสู่ระบบได้
         customer_care: การดูแลลูกค้า
         customer_details: รายละเอียดลูกค้า
+        customer_groups: กลุ่มลูกค้า
         customer_id: ID ของลูกค้า
         customer_login: เข้าสู่ระบบ
         customer_not_notified: ลูกค้าที่ไม่ได้รับแจ้ง
@@ -306,6 +308,8 @@ sylius:
         filters: กรองข้อมูล
         first_name: ชื่อ
         forgot_password: ลืมรหัสผ่าน
+        from_the_latest: จากล่าสุด
+        from_the_oldest: จากเก่าที่สุด
         fulfill: Fulfill
         fulfilled: ดำเนินการเสร็จสิ้น
         gateway: ช่องทางการชำระเงิน
@@ -385,6 +389,7 @@ sylius:
         manage_coupons: จัดการตัวเลือก
         manage_currencies_available_in_the_store: จัดการสกุลเงิน
         manage_customers: จัดการลูกค้า
+        manage_customer_groups: จัดการกลุ่มลูกค้าของคุณ
         manage_discounts_and_promotional_campaigns: จัดการส่วนลดและแคมเปญส่งเสริมการขาย
         manage_emails: จัดการอีเมล
         manage_geographical_zones: จัดการโซนทางภูมิศาสตร์
@@ -588,11 +593,11 @@ sylius:
         register: ลงทะเบียน
         register_button: ลงทะเบียน
         register_in_the_store: ลงทะเบียนกับการร้านค้า
-        registered_customers: ลูกค้าที่ลงทะเบียน
+        registered_customers: ลูกค้าที่ลงทะเบียนแล้ว
         registration_create_an_account_in_store: 'ลงทะเบียน<small>สร้างบัญชีเพื่อใช้ในร้านค้า</small>'
         registration_date: วันที่สมัครสมาชิก
         release_inventory: รายการสินค้าคงคลัง
-        remember_me: จำฉันไว้
+        remember_me: จำการเข้าระบบของฉันไว้
         remove_attribute: ลบคุณลักษณะ (Attribute)
         repeat_new_password: ใส่รหัสอีกครั้ง
         report_details: รายละเอียดของรายงาน
@@ -660,6 +665,7 @@ sylius:
         sku: SKU
         slideshow: ภาพสไลด์
         slideshow_blocks: สไลด์บล็อก
+        sort_by_date: เรียงตามวัน
         start_date: วันที่เริ่มต้น
         starts_at: เริ่มต้น
         starts_with: เริ่มต้นด้วย

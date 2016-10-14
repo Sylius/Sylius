@@ -65,7 +65,6 @@ sylius:
         contact_us: Ota yhteyttä
         contain_variants: Sisältää muuttujia
         contains: Sisältää
-        content: Sisältö
         countries: Maat
         country: Maa
         country_details: Maatiedot
@@ -126,7 +125,6 @@ sylius:
         email: Sähköpostiosoite
         exchange_rate: Vaihtokurssi
         extra_notes: Muistiinpanot
-        label: Otsikko
         marketing: Markkinointi
         members: Jäsenet
         message: Viesti

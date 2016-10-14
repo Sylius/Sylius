@@ -8,6 +8,5 @@ sylius:
             subject: Oggetto
             sender_name: Nome mittente
             sender_address: Indirizzo mittente
-            content: Contenuto
             template: Modello
             no_template: Usa modello personalizzato

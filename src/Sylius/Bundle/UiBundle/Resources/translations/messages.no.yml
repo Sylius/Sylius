@@ -55,7 +55,6 @@ sylius:
         confirmation: Bekreft
         confirmation_title: Bekreft
         contain_variants: Inneholder varianter
-        content: Innhold
         countries: Land
         country: Land
         country_details: Detaljer for land
@@ -121,7 +120,6 @@ sylius:
         exchange_rate: Valutakurs
         existing_customer: Eksisterende kunde
         failed: Mislyktes
-        filter: Filtrer
         first_name: Fornavn
         fulfill: Oppfylle
         gateway: Rute
@@ -147,7 +145,6 @@ sylius:
         invoice: Faktura
         item: Produkt
         items_total: Antall varer
-        label: Etikett
         last_login: Siste pålogging
         last_name: Etternavn
         last_update: Sist oppdatert

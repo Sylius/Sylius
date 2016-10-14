@@ -2,71 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    imagine_block:
-        name:
-            not_blank: Zadejte prosím že název imagine bloku.
-        label:
-            not_blank: Zadejte prosím popisek imagine bloku.
-        filter:
-            not_blank: Zadejte prosím filtr imagine bloku.
-        image:
-            not_blank: Vyberte si prosím obrázek imagine bloku.
-        start_date:
-            invalid_date: Datum začátku publikace je neplatné.
-        end_date:
-            invalid_date: Datum konce publikace je neplatné.
-    menu:
-        name:
-            not_blank: Zadejte název menu.
-        label:
-            not_blank: Zadejte popisek menu.
-        start_date:
-            invalid_date: Datum začátku publikace je neplatné.
-        end_date:
-            invalid_date: Datum konce publikace je neplatné.
-    menu_node:
-        name:
-            not_blank: Zadejte název uzlu menu.
-        label:
-            not_blank: Zadejte popisek uzlu menu.
-        start_date:
-            invalid_date: Datum začátku publikace je neplatné.
-        end_date:
-            invalid_date: Datum konce publikace je neplatné.
     route:
         name:
             not_blank: Zadejte prosím název trasy.
         content:
             not_blank: Zadejte prosím obsah cesty.
-        start_date:
-            invalid_date: Datum začátku publikace je neplatné.
-        end_date:
-            invalid_date: Datum konce publikace je neplatné.
-    slideshow_block:
-        name:
-            not_blank: Zadejte název prezentace.
-        title:
-            not_blank: Zadejte titulek prezentace.
-        start_date:
-            invalid_date: Datum začátku publikace je neplatné.
-        end_date:
-            invalid_date: Datum konce publikace je neplatné.
-    simple_block:
-        name:
-            not_blank: Zadejte název pro jednoduchý blok.
-        title:
-            not_blank: Zadejte titulek pro jednoduchý blok.
-        body:
-            not_blank: Vložte tělo jednoduchého bloku.
-        start_date:
-            invalid_date: Datum začátku publikace je neplatné.
-        end_date:
-            invalid_date: Datum konce publikace je neplatné.
-    string_block:
-        name:
-            not_blank: Zadejte název pro jednoduchý blok.
-        body:
-            not_blank: Vložte tělo jednoduchého bloku.
         start_date:
             invalid_date: Datum začátku publikace je neplatné.
         end_date:

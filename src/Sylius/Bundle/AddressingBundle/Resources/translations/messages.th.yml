@@ -11,7 +11,7 @@ sylius:
             last_name: นามสกุล
             phone_number: หมายเลขโทรศัพท์
             postcode: รหัสไปรษณีย์
-            street: ถนน
+            street: ที่อยู่
             province: จังหวัด
         country:
             add_province: เพิ่มจังหวัด

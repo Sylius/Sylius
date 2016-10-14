@@ -118,7 +118,6 @@ sylius:
         contact_us: Kapcsolat
         contain_variants: Változatokat tartalmaz
         contains: Tartalmaz
-        content: Tartalom
         countries: Országok
         country: Ország
         country_details: Ország részletek
@@ -296,7 +295,6 @@ sylius:
         failed: Sikertelen
         faqs: GYIK
         female: Nő
-        filter: Szűrő
         filters: Szűrők
         first_name: Keresztnév
         forgot_password: Elfelejtett jelszó
@@ -342,7 +340,6 @@ sylius:
         items: Elemek
         items_total: Tételek összesen
         jump_to_page: Ugrás az oldalra
-        label: Címke
         last_login: Utolsó bejelentkezés
         last_name: Vezetéknév
         last_update: Utolsó frissítés

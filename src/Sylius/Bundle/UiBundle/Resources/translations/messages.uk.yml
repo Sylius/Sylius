@@ -119,7 +119,6 @@ sylius:
         contact_us: "Зв'язатися з нами"
         contain_variants: Містять варіанти
         contains: Містить
-        content: Вміст
         countries: Країни
         country: Країна
         country_details: Подробиці про країну
@@ -252,7 +251,6 @@ sylius:
         expires_at: Дійсний до
         extra_notes: Додаткові примітки
         failed: Невдало
-        filter: Фільтр
         first_name: "Iм'я"
         fulfill: Виконано
         fulfilled: Виконано
@@ -281,7 +279,6 @@ sylius:
         invoice: Рахунок
         item: Елемент
         items_total: Загальна кількість елементів
-        label: Етикетка
         last_login: Останній вхід
         last_name: Прізвище
         last_update: Останнє оновлення
@@ -375,7 +372,7 @@ sylius:
         phone_number: Номер телефону
         place_order: Розмістити замовлення
         placed_at: Розміщено
-        postcode: Iндекс
+        postcode: Поштовий індекс
         presentation: Презентація
         previous: Попередній
         price: Ціна

@@ -97,7 +97,6 @@ sylius:
         confirmed: Konfirmuar
         contain_variants: Përmban variante
         contains: Përmban
-        content: Përmbajtja
         countries: Vendet
         country_details: Hollësi për vendin
         coupon: Kuponi
@@ -254,7 +253,6 @@ sylius:
         expires_at: Skadon më
         extra_information: Informacione shtese
         failed: Nuk u krye
-        filter: Filtri
         first_name: Emri
         forgot_password: Harruat fjalëkalimin
         fulfill: Përmbyll
@@ -296,7 +294,6 @@ sylius:
         items: Artikujt
         items_total: Totali i artikujve
         jump_to_page: Kerce ne faqen
-        label: Etiketa
         last_login: Login i fundit
         last_name: Mbiemri
         last_update: Ndryshimi i fundit

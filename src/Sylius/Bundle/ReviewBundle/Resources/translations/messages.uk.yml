@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
+            author: Автор
+            comment: Коментар
             header: Додати відгук
             rating: Рейтинг
-            title: Заголовок
-            comment: Коментар
-            author: Автор
             status:
+                approved: Затверджений
                 label: Стан
                 new: Новий
-                approved: Затверджений
                 rejected: Відхилений
             submit: Продовжити
+            title: Заголовок

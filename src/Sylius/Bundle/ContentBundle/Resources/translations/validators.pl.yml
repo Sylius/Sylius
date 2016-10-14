@@ -2,71 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    imagine_block:
-        name:
-            not_blank: Wprowadź nazwę bloku zdjęciowego.
-        label:
-            not_blank: Wprowadź etykietę dla bloku zdjęciowego.
-        filter:
-            not_blank: Wprowadź filtr dla bloku zdjęciowego.
-        image:
-            not_blank: Wybierz zdjęcie dla bloku zdjęciowego.
-        start_date:
-            invalid_date: Data publikacji jest nieprawidłowa.
-        end_date:
-            invalid_date: Data zakończenia publikacji jest nieprawidłowa.
-    menu:
-        name:
-            not_blank: Wprowadź nazwę menu.
-        label:
-            not_blank: Wprowadź etykietę menu.
-        start_date:
-            invalid_date: Data publikacji jest nieprawidłowa.
-        end_date:
-            invalid_date: Data zakończenia publikacji jest nieprawidłowa.
-    menu_node:
-        name:
-            not_blank: Wprowadź nazwę węzła menu.
-        label:
-            not_blank: Wprowadź etykietę węzła menu.
-        start_date:
-            invalid_date: Data publikacji jest nieprawidłowa.
-        end_date:
-            invalid_date: Data zakończenia publikacji jest nieprawidłowa.
     route:
         name:
             not_blank: Wprowadź nazwę URL.
         content:
             not_blank: Wprowadź URL.
-        start_date:
-            invalid_date: Data publikacji jest nieprawidłowa.
-        end_date:
-            invalid_date: Data zakończenia publikacji jest nieprawidłowa.
-    slideshow_block:
-        name:
-            not_blank: Wprowadź nazwę pokazu slajdów.
-        title:
-            not_blank: Wprowadź tytuł pokazu slajdów.
-        start_date:
-            invalid_date: Data publikacji jest nieprawidłowa.
-        end_date:
-            invalid_date: Data zakończenia publikacji jest nieprawidłowa.
-    simple_block:
-        name:
-            not_blank: Wprowadź nazwę bloku.
-        title:
-            not_blank: Wprowadź tytuł bloku.
-        body:
-            not_blank: Wprowadź zawartość bloku.
-        start_date:
-            invalid_date: Data publikacji jest nieprawidłowa.
-        end_date:
-            invalid_date: Data zakończenia publikacji jest nieprawidłowa.
-    string_block:
-        name:
-            not_blank: Wprowadź nazwę bloku.
-        body:
-            not_blank: Wprowadź zawartość bloku.
         start_date:
             invalid_date: Data publikacji jest nieprawidłowa.
         end_date:

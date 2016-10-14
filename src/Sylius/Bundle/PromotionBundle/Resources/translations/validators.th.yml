@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    action:
+        percentage_discount_configuration:
+            min: 'ค่าของเปอร์เซ็นต์ส่วนลดต้องน้อย 0%'
+            max: 'ค่าสูงสุดของเปอร์เซ็นต์ส่วนลดคือ 100%'
     promotion:
         code:
             unique: รหัสโปรโมชั่นนี้ถูกใช้งานแล้ว
@@ -23,6 +27,7 @@ sylius:
             unique: คูปองนี้มีอยู่แล้ว
         usage_limit:
             min: 'ขีดจำกัดการใช้คูปองต้องระบุอย่างน้อย {{ limit }}'
+        is_invalid: รหัสคูปองไม่ถูกต้อง
     promotion_coupon_generate_instruction:
         amount:
             min: 'จำนวนการสร้างคูปองต้องระบุอย่างน้อย {{ limit }}'

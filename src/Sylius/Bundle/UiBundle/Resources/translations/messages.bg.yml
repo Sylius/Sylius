@@ -41,7 +41,6 @@ sylius:
         confirmation: Потвърждение
         confirmation_title: Потвърждение
         contain_variants: Съдържа варианти
-        content: Съдържание
         countries: Страни
         country_details: Информация за страните
         coupons: Купони
@@ -99,7 +98,6 @@ sylius:
         error: Грешка
         exchange_rate: Обменен курс
         existing_customer: Съществуващ клиент
-        filter: Филтър
         fulfill: Изпълни
         general_info: Обща информация
         general_settings: Общи Настройки
@@ -120,7 +118,6 @@ sylius:
         invoice: Фактура
         item: артикул
         items_total: Общо елементи
-        label: Етикет
         last_login: Последно влизане
         last_update: Последно обновяване
         last_week_orders: Пръчки за седмицата

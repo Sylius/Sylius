@@ -4,8 +4,8 @@
 sylius:
     currency:
         code:
+            exact_length: Le code de la devise doit comporter exactement 3 caractères.
             not_blank: Veuillez choisir le code de la devise.
             unique: Le code de la devise doit être unique.
-            exact_length: Le code de la devise doit comporter exactement 3 caractères.
         exchange_rate:
             not_blank: Veuillez entrer le taux de change.

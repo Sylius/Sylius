@@ -104,7 +104,6 @@ sylius:
         contact_us: 联系我们
         contain_variants: 包含变种
         contains: 包含
-        content: 内容
         countries: 国家
         country: 国家
         country_details: 国家详细信息
@@ -272,7 +271,6 @@ sylius:
         extra_information: 额外信息
         failed: 失败
         faqs: 常见问题
-        filter: 筛选器
         first_name: 名字
         forgot_password: 忘记密码
         fulfill: 完成
@@ -314,7 +312,6 @@ sylius:
         items: 项目
         items_total: 总计项目
         jump_to_page: 跳转到页
-        label: 标签
         last_login: 最后登录时间
         last_name: 姓氏
         last_update: 最后一次更新

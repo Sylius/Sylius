@@ -4,8 +4,8 @@
 sylius:
     form:
         review:
-            title: Pavadinimas
-            comment: Komentaras
             author: Autorius
+            comment: Komentaras
             status:
                 new: Naujas
+            title: Pavadinimas

@@ -2,71 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    imagine_block:
-        name:
-            not_blank: Vul een afbeeldingsbloknaam in.
-        label:
-            not_blank: Vul een imagine bloklabel in.
-        filter:
-            not_blank: Vul een imagine blokfilter in.
-        image:
-            not_blank: Kies een imagine blokafbeelding.
-        start_date:
-            invalid_date: Start datum publiceren ongeldig.
-        end_date:
-            invalid_date: Eind datum publiceren ongeldig.
-    menu:
-        name:
-            not_blank: Voer menunaam in.
-        label:
-            not_blank: Voer menulabel in.
-        start_date:
-            invalid_date: Start datum publiceren ongeldig.
-        end_date:
-            invalid_date: Eind datum publiceren ongeldig.
-    menu_node:
-        name:
-            not_blank: Voer menu node naam in.
-        label:
-            not_blank: 'Voer menu "node" label in.'
-        start_date:
-            invalid_date: Start datum publiceren ongeldig.
-        end_date:
-            invalid_date: Eind datum publiceren ongeldig.
     route:
         name:
             not_blank: Voer menu route naam in.
         content:
             not_blank: Voer menu route inhoud in.
-        start_date:
-            invalid_date: Start datum publiceren ongeldig.
-        end_date:
-            invalid_date: Eind datum publiceren ongeldig.
-    slideshow_block:
-        name:
-            not_blank: Voer slideshow naam in.
-        title:
-            not_blank: Voer slideshow titel in.
-        start_date:
-            invalid_date: Start datum publiceren ongeldig.
-        end_date:
-            invalid_date: Eind datum publiceren ongeldig.
-    simple_block:
-        name:
-            not_blank: Voer eenvoudige blok naam in.
-        title:
-            not_blank: Voer eenvoudige bloktitel in.
-        body:
-            not_blank: Voer eenvoudige blok raamwerk in.
-        start_date:
-            invalid_date: Start datum publiceren ongeldig.
-        end_date:
-            invalid_date: Eind datum publiceren ongeldig.
-    string_block:
-        name:
-            not_blank: Voer eenvoudige blok naam in.
-        body:
-            not_blank: Voer eenvoudige blok inhoud in.
         start_date:
             invalid_date: Start datum publiceren ongeldig.
         end_date:

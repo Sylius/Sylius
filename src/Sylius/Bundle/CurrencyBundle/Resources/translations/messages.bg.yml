@@ -4,7 +4,7 @@
 sylius:
     form:
         currency:
-            exchange_rate: Обменен курс
-            enabled: Включено
             base: Основна валута
             code: Име
+            enabled: Включено
+            exchange_rate: Обменен курс

@@ -4,7 +4,7 @@
 sylius:
     form:
         review:
-            title: Titlu
             author: Autor
             status:
                 new: Nouă
+            title: Titlu

@@ -2,6 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    action:
+        percentage_discount_configuration:
+            min: 'Wartość rabatu procentowego musi wynosić co najmniej 0%.'
+            max: 'Maksymalna wartość rabatu procentowego to 100%.'
     promotion:
         code:
             unique: Promocja z podanym kodem już istnieje.
@@ -23,6 +27,7 @@ sylius:
             unique: Ten kupon już istnieje.
         usage_limit:
             min: 'Ograniczenie użycia musi wynosić co najmniej {{ limit }}.'
+        is_invalid: Kod rabatowy jest nieprawidłowy.
     promotion_coupon_generate_instruction:
         amount:
             min: 'Liczba kuponów do wygenerowania musi wynosić co najmniej {{ limit }}.'

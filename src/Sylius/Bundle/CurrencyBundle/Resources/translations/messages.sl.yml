@@ -4,6 +4,6 @@
 sylius:
     form:
         currency:
-            exchange_rate: Menjalni tečaj
-            enabled: Omogočeno
             code: Ime
+            enabled: Omogočeno
+            exchange_rate: Menjalni tečaj

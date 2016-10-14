@@ -6,7 +6,6 @@ sylius:
         email:
             not_exist: Nėra vartotojo su tokiu el. pašto adresu.
         password:
-            invalid: Klaidingas dabartinis slaptažodis.
             reset:
                 success: Jūsų slaptažodis atstatytas sėkmingai!
             change:

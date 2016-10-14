@@ -24,5 +24,3 @@ sylius:
                 sales:
                     header: Продаж
                     orders: Замовы
-                content:
-                    header: Змест

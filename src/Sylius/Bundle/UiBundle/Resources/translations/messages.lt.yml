@@ -187,7 +187,6 @@ sylius:
         existing_customer: Esamas klientas
         expires_at: Nustoja galioti
         failed: Nepavyko
-        filter: Filtruoti
         first_name: Vardas
         fulfill: Išpildyti
         gateway: Apmokėjimo kanalas
@@ -218,7 +217,6 @@ sylius:
         item: Produktas
         items: Elementai
         items_total: Iš viso prekių
-        label: Etiketė
         last_login: Paskutinis prisijungimas
         last_name: Pavardė
         last_update: Paskutinis atnaujinimas

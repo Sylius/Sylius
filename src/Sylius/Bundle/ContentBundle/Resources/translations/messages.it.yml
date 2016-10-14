@@ -3,104 +3,14 @@
 
 sylius:
     form:
-        action_block:
-            action_name: "Nome dell'azione"
-            id: ID
-            publish_end_date: Data di fine pubblicazione
-            publish_start_date: Data di inizio pubblicazione
-            publishable: Pubblicato
-        imagine_block:
-            filter: Filtri
-            image: Immagine
-            internal_name: Nome interno
-            label: Etichetta
-            link_url: URL Link
-            parent: Genitore
-            publish_end_date: Data di fine pubblicazione
-            publish_start_date: Data di inizio pubblicazione
-            publishable: Pubblicato
-            slideshow_small: Slideshow piccola (lato)
-            slideshow_medium: Slideshow medio (contenuto)
-            slideshow_large: Slideshow larga (larghezza completa)
-        menu:
-            childrens: Figli
-            display: Mostra
-            display_children: Mostra figli
-            label: Etichetta
-            name: Nome
-            parent: Genitore
-            publish_end_date: Data di fine pubblicazione
-            publish_start_date: Data di inizio pubblicazione
-            publishable: Pubblicato
-            route: Percorso
-            uri: URI
-        menu_block:
-            body: Testo
-            id: ID
-            name: Nome
-            publish_end_date: Data di fine pubblicazione
-            publish_start_date: Data di inizio pubblicazione
-            publishable: Pubblicato
-        menu_node_block:
-            content: Contenuto
-            display: Mostra
-            display_children: Mostra figli
-            internal_name: Nome interno
-            label: Etichetta
-            link_type: Tipo di Link
-            publish_end_date: Data di fine pubblicazione
-            publish_start_date: Data di inizio pubblicazione
-            publishable: Pubblicato
-            route: Percorso
-            uri: URI
-        redirect_route:
-            id: ID
-            name: Nome
-            route_name: Route_name
-            uri: URI
-        reference_block:
-            body: Testo
-            id: ID
-            publish_end_date: Data di fine pubblicazione
-            publish_start_date: Data di inizio pubblicazione
-            publishable: Pubblicato
-            title: Titolo
         route:
-            content: Contenuto
             name: Nome
             parent: Genitore
-        simple_block:
-            body: Testo
-            internal_name: Nome interno
-            parent: Genitore
-            publish_end_date: Data di fine pubblicazione
-            publish_start_date: Data di inizio pubblicazione
-            publishable: Pubblicato
-            title: Titolo
-        slideshow_block:
-            add_slide: Aggiungi diapositiva
-            childrens: Figli
-            internal_name: Nome interno
-            parent: Genitore
-            publish_end_date: Data di fine pubblicazione
-            publish_start_date: Data di inizio pubblicazione
-            publishable: Pubblicato
-            title: Titolo
         static_content:
             body: Testo
-            id: ID
-            internal_name: Nome interno
             menu_nodes: Nodi menu
             parent: Genitore
             publish_end_date: Data di fine pubblicazione
             publish_start_date: Data di inizio pubblicazione
-            publishable: Pubblicato
             routes: Rotte
             title: Titolo
-        string_block:
-            body: Testo
-            id: ID
-            name: Nome
-            publish_end_date: Data di fine pubblicazione
-            publish_start_date: Data di inizio pubblicazione
-            publishable: Pubblicato

@@ -3,12 +3,12 @@
 
 sylius:
     taxon:
+        code:
+            not_blank: Introduzca un código de taxón.
+            unique: Ya existe un taxón con ese código.
         name:
             max_length: El nombre del taxón no debe ser más largo de 255 caracteres.
             not_blank: Por favor, introduzca el nombre del taxón.
-        code:
-            unique: Ya existe un taxón con ese código.
-            not_blank: Introduzca un código de taxón.
     taxonomy:
         name:
             max_length: El nombre de la taxonomía no debe ser más largo de 255 caracteres.

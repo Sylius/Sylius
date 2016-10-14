@@ -6,15 +6,10 @@ sylius:
         email:
             not_exist: Gebruiker met deze e-mail bestaat niet.
         password:
-            invalid: Huidige wachtwoord is foutief.
-            request:
-                success: We hebben u een e-mail gestuurd met instructies om uw wachtwoord te herstellen!
             reset:
                 success: Uw wachtwoord is succesvol hersteld!
             change:
                 success: Uw wachtwoord is succesvol veranderd!
-        reset_password:
-            requested: Als het opgegeven e-mailadres bestaat in ons systeem, dan hebben we daar instructies naar toe verstuurd hoe het wachtwoord te herstellen.
         verification:
             error: De verificatie-token is ongeldig.
             notice:
@@ -22,5 +17,3 @@ sylius:
             success: Je e-mailadres is geverifieerd.
             request:
                 success: Een e-mail met de verificatielink is verstuurd naar je e-mailadres.
-    customer:
-        register: Bedankt voor het registreren, controleer je e-mail om je account te bevestigen.

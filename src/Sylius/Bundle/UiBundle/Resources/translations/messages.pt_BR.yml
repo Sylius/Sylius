@@ -122,7 +122,6 @@ sylius:
         contact_us: Contate-nos
         contain_variants: Contêm variantes
         contains: Contém
-        content: Conteúdo
         countries: Países
         country: País
         country_details: Detalhes do país
@@ -302,7 +301,6 @@ sylius:
         failed: Falhou
         faqs: Perguntas freqüentes
         female: Feminino
-        filter: Filtrar
         filters: Filtros
         first_name: Nome
         forgot_password: Esqueceu a senha
@@ -349,7 +347,6 @@ sylius:
         items: Produtos
         items_total: Total de itens
         jump_to_page: Ir para a página
-        label: Rótulo
         last_login: Último login
         last_name: Sobrenome
         last_update: Data de atualização

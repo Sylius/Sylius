@@ -3,104 +3,14 @@
 
 sylius:
     form:
-        action_block:
-            action_name: Názov akcie
-            id: Id
-            publish_end_date: Dátum ukončenia zverejnenia
-            publish_start_date: Dátum začiatku zverejnenia
-            publishable: Uverejnené
-        imagine_block:
-            filter: Filter
-            image: Obrázok
-            internal_name: Inerný názov
-            label: Popis
-            link_url: URL odkaz
-            parent: Nadradená kategória
-            publish_end_date: Dátum ukončenia zverejnenia
-            publish_start_date: Dátum začiatku zverejnenia
-            publishable: Uverejnené
-            slideshow_small: Slideshow malý (po strane)
-            slideshow_medium: Slideshow Stredný (obsah)
-            slideshow_large: Slideshow veľký (celá šírka)
-        menu:
-            childrens: Podradené záznamy
-            display: Zobraziť
-            display_children: Zobraziť podradené záznamy
-            label: Popis
-            name: Názov
-            parent: Nadradená kategória
-            publish_end_date: Dátum ukončenia zverejnenia
-            publish_start_date: Dátum začiatku zverejnenia
-            publishable: Uverejnené
-            route: URL Cesta
-            uri: URI
-        menu_block:
-            body: Obsah
-            id: Id
-            name: Názov
-            publish_end_date: Dátum ukončenia zverejnenia
-            publish_start_date: Dátum začiatku zverejnenia
-            publishable: Uverejnené
-        menu_node_block:
-            content: Obsah
-            display: Zobraziť
-            display_children: Zobraziť podradené záznamy
-            internal_name: Inerný názov
-            label: Popis
-            link_type: Typ odkazu
-            publish_end_date: Dátum ukončenia zverejnenia
-            publish_start_date: Dátum začiatku zverejnenia
-            publishable: Uverejnené
-            route: Cesta
-            uri: URI
-        redirect_route:
-            id: Id
-            name: Názov
-            route_name: Názov URL cesty
-            uri: URI
-        reference_block:
-            body: Obsah
-            id: Id
-            publish_end_date: Dátum ukončenia zverejnenia
-            publish_start_date: Dátum začiatku zverejnenia
-            publishable: Uverejnené
-            title: Názov
         route:
-            content: Obsah
             name: Názov
             parent: Nadradená kategória
-        simple_block:
-            body: Obsah
-            internal_name: Interný názov
-            parent: Nadradená kategória
-            publish_end_date: Dátum ukončenia zverejnenia
-            publish_start_date: Dátum začiatku zverejnenia
-            publishable: Uverejnené
-            title: Názov
-        slideshow_block:
-            add_slide: Pridať
-            childrens: Podradené záznamy
-            internal_name: Inetrný názov
-            parent: Nadradená kategória
-            publish_end_date: Dátum ukončenia zverejnenia
-            publish_start_date: Dátum začiatku zverejnenia
-            publishable: Uverejnené
-            title: Názov
         static_content:
             body: Obsah
-            id: Id
-            internal_name: Inerný názov
             menu_nodes: Menu elementy
             parent: Nadradená kategória
             publish_end_date: Dátum ukončenia zverejnenia
             publish_start_date: Dátum začiatku zverejnenia
-            publishable: Uverejnené
             routes: URL cesty
             title: Názov
-        string_block:
-            body: Obsah
-            id: ID
-            name: Názov
-            publish_end_date: Dátum ukončenia zverejnenia
-            publish_start_date: Dátum začiatku zverejnenia
-            publishable: Uverejnené

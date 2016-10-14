@@ -122,7 +122,6 @@ sylius:
         contact_us: Kontaktujte nás
         contain_variants: Obsahuje produktové varianty
         contains: Obsahuje
-        content: Obsah
         countries: Krajiny
         country: Krajina
         country_details: Podrobnosti o krajine
@@ -302,7 +301,6 @@ sylius:
         failed: Neúspešná
         faqs: Často kladené otázky
         female: Žena
-        filter: Filter
         filters: Filtre
         first_name: Meno
         forgot_password: Zabudli ste heslo
@@ -349,7 +347,6 @@ sylius:
         items: Položky
         items_total: Položiek celkom
         jump_to_page: Prejsť na stranu
-        label: Popis
         last_login: Posledné prihlásenie
         last_name: Priezvisko
         last_update: Posledná aktualizácia

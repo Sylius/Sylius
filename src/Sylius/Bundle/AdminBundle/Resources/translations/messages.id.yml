@@ -8,5 +8,5 @@ sylius:
                 customers:
                     groups: Kelompok
                 content:
-                    header: Isi
+                    header: Konten
                     routes: Rute

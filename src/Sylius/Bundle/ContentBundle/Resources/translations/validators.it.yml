@@ -2,71 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    imagine_block:
-        name:
-            not_blank: "Inserisci il nome del blocco dell'immagine."
-        label:
-            not_blank: "Inserisci il nome del blocco dell'immagine."
-        filter:
-            not_blank: "Inserisci il filtro del blocco dell'immagine."
-        image:
-            not_blank: "Scegli l'immagine del blocco dell'immagine."
-        start_date:
-            invalid_date: Data di inizio della pubblicazione non valida.
-        end_date:
-            invalid_date: Data di fine della pubblicazione non valida.
-    menu:
-        name:
-            not_blank: Inserisci il nome del menù.
-        label:
-            not_blank: Inserisci il nome del menù.
-        start_date:
-            invalid_date: Data di inizio della pubblicazione non valida.
-        end_date:
-            invalid_date: Data di fine della pubblicazione non valida.
-    menu_node:
-        name:
-            not_blank: Inserisci il nome del nodo del menù.
-        label:
-            not_blank: "Inserisci l'etichetta del nodo del menù."
-        start_date:
-            invalid_date: Data di inizio della pubblicazione non valida.
-        end_date:
-            invalid_date: Data di fine della pubblicazione non valida.
     route:
         name:
             not_blank: Inserisci il nome della rotta.
         content:
             not_blank: Inserisci il contenuto della rotta.
-        start_date:
-            invalid_date: Data di inizio della pubblicazione non valida.
-        end_date:
-            invalid_date: Data di fine della pubblicazione non valida.
-    slideshow_block:
-        name:
-            not_blank: Inserisci il nome della slideshow.
-        title:
-            not_blank: Inserisci il titolo della slideshow.
-        start_date:
-            invalid_date: Data di inizio della pubblicazione non valida.
-        end_date:
-            invalid_date: Data di fine della pubblicazione non valida.
-    simple_block:
-        name:
-            not_blank: Inserisci il nome del blocco semplice.
-        title:
-            not_blank: Inserisci il titolo del blocco semplice.
-        body:
-            not_blank: Inserisci il contenuto del blocco semplice.
-        start_date:
-            invalid_date: Data di inizio della pubblicazione non valida.
-        end_date:
-            invalid_date: Data di fine della pubblicazione non valida.
-    string_block:
-        name:
-            not_blank: Inserisci il nome del blocco semplice.
-        body:
-            not_blank: Inserisci il contenuto del blocco semplice.
         start_date:
             invalid_date: Data di inizio della pubblicazione non valida.
         end_date:

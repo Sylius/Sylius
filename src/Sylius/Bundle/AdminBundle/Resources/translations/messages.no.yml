@@ -25,5 +25,4 @@ sylius:
                     header: Salg
                     orders: Bestillinger
                 content:
-                    header: Innhold
                     routes: Ruter

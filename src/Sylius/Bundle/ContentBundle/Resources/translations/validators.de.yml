@@ -2,71 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    imagine_block:
-        name:
-            not_blank: Bitte gib einen Namen für den Image Block ein.
-        label:
-            not_blank: Bitte gib ein Label für den Image Block ein.
-        filter:
-            not_blank: Bitte gib einen Filter für den Image Block ein.
-        image:
-            not_blank: Bitte wähle ein Bild für den Image Block.
-        start_date:
-            invalid_date: Das Veröffentlichungsdatum ist ungültig.
-        end_date:
-            invalid_date: Das Enddatum ist ungültig.
-    menu:
-        name:
-            not_blank: Bitte gib einen Namen für das Menü ein.
-        label:
-            not_blank: Bitte gib ein Label für das Menü ein.
-        start_date:
-            invalid_date: Das Veröffentlichungsdatum ist ungültig.
-        end_date:
-            invalid_date: Das Enddatum ist ungültig.
-    menu_node:
-        name:
-            not_blank: Bitte gib einen Namen für den Menüknoten ein.
-        label:
-            not_blank: Bitte gib ein Label für den Menüknoten ein.
-        start_date:
-            invalid_date: Das Veröffentlichungsdatum ist ungültig.
-        end_date:
-            invalid_date: Das Enddatum ist ungültig.
     route:
         name:
             not_blank: Bitte gib einen Namen für die Route ein.
         content:
             not_blank: Bitte gib einen Inhalt für die Route ein.
-        start_date:
-            invalid_date: Das Veröffentlichungsdatum ist ungültig.
-        end_date:
-            invalid_date: Das Enddatum ist ungültig.
-    slideshow_block:
-        name:
-            not_blank: Bitte gib einen Namen für die Slidesshow ein.
-        title:
-            not_blank: Bitte gib einen Titel für die Slideshow ein.
-        start_date:
-            invalid_date: Das Veröffentlichungsdatum ist ungültig.
-        end_date:
-            invalid_date: Das Enddatum ist ungültig.
-    simple_block:
-        name:
-            not_blank: Bitte gib einen Namen für den einfachen Block ein.
-        title:
-            not_blank: Bitte gib einen Titel für den einfachen Block ein.
-        body:
-            not_blank: Bitte gib etwas in den Body des einfachen Blocks ein.
-        start_date:
-            invalid_date: Das Veröffentlichungsdatum ist ungültig.
-        end_date:
-            invalid_date: Das Enddatum ist ungültig.
-    string_block:
-        name:
-            not_blank: Bitte gib einen Namen für den einfachen Block ein.
-        body:
-            not_blank: Bitte gib etwas in den Body des einfachen Blocks ein.
         start_date:
             invalid_date: Das Veröffentlichungsdatum ist ungültig.
         end_date:

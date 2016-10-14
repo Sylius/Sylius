@@ -6,15 +6,10 @@ sylius:
         email:
             not_exist: Nem létezik felhasználó ezzel az email címmel.
         password:
-            invalid: Hibás jelenlegi jelszó.
-            request:
-                success: Küldtünk Önnek egy E-mailt, a jelszava visszaállításának instrukcióival!
             reset:
                 success: Jelszava sikeresen visszaállítva!
             change:
                 success: Jelszavát sikeresen megváltoztattuk!
-        reset_password:
-            requested: Ha az általad megadott email létezik rendszerünkben, akkor küldtünk egy emailt a további instrukciókkal.
         verification:
             error: Ez ellenőrzőkód hibás.
             notice:
@@ -22,5 +17,3 @@ sylius:
             success: Email címe megerősítése sikeres.
             request:
                 success: Egy megerősítő link el lett küldve az e-mail címére.
-    customer:
-        register: Köszönjük a regisztrációt, ellenőrizze leveleit hogy megtudja erősíteni fiókját.

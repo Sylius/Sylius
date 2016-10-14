@@ -10,6 +10,9 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Proszę wybrać metodę dostawy.
+    currency:
+        enabled:
+            cannot_disable_base: Podstawowa waluta nie może być wyłączona.
     customer:
         currency_code:
             not_valid: Wprowadzony kod waluty jest nieprawidłowy.

@@ -34,6 +34,6 @@ sylius:
                     header: ยอดขาย
                     orders: ใบสั่งซื้อ
                 content:
-                    header: เนื้อหา
+                    header: เนื้อหาในเว็บ
                     static_contents: Static contents
                     routes: Routes

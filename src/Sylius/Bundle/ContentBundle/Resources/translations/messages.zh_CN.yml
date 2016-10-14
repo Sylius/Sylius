@@ -3,104 +3,12 @@
 
 sylius:
     form:
-        action_block:
-            action_name: 方法名
-            id: Id
-            publish_end_date: 结束日期
-            publish_start_date: 开始日期
-            publishable: 发布
-        imagine_block:
-            filter: 筛选器
-            image: 图像
-            internal_name: 内部名称
-            label: 标签
-            link_url: 链接 URL
-            parent: 上一级
-            publish_end_date: 发布结束日期
-            publish_start_date: 发布开始日期
-            publishable: 发布
-            slideshow_small: 幻灯片 小 （侧）
-            slideshow_medium: 幻灯片 中（内容）
-            slideshow_large: 幻灯片 大 （全宽）
-        menu:
-            childrens: 子项目
-            display: 显示
-            display_children: 显示子项目
-            label: 标签
-            name: 名称
-            parent: 上一级
-            publish_end_date: 发布结束日期
-            publish_start_date: 发布开始日期
-            publishable: 发布
-            route: 路由
-            uri: URI
-        menu_block:
-            body: 正文
-            id: Id
-            name: 名称
-            publish_end_date: 发布结束日期
-            publish_start_date: 发布开始日期
-            publishable: 发布
-        menu_node_block:
-            content: 内容
-            display: 显示
-            display_children: 显示子项目
-            internal_name: 内部名称
-            label: 标签
-            link_type: 链接类型
-            publish_end_date: 发布结束日期
-            publish_start_date: 发布开始日期
-            publishable: 发布
-            route: 路由
-            uri: URI
-        redirect_route:
-            id: Id
-            name: 名称
-            route_name: 路由名称
-            uri: URI
-        reference_block:
-            body: 正文
-            id: Id
-            publish_end_date: 发布结束日期
-            publish_start_date: 发布开始日期
-            publishable: 发布
-            title: 标题
         route:
-            content: 内容
             name: 名称
             parent: 上一级
-        simple_block:
-            body: 正文
-            internal_name: 内部名称
-            parent: 上一级
-            publish_end_date: 发布结束日期
-            publish_start_date: 发布开始日期
-            publishable: 发布
-            title: 标题
-        slideshow_block:
-            add_slide: 添加幻灯片
-            childrens: 子项目
-            internal_name: 内部名称
-            parent: 上一级
-            publish_end_date: 发布结束日期
-            publish_start_date: 发布开始日期
-            publishable: 发布
-            title: 标题
         static_content:
             body: 正文
-            id: Id
-            internal_name: 内部名称
             menu_nodes: 菜单节点
             parent: 上一级
-            publish_end_date: 发布结束日期
-            publish_start_date: 发布开始日期
-            publishable: 发布
             routes: 路由
             title: 标题
-        string_block:
-            body: 正文
-            id: ID
-            name: 名称
-            publish_end_date: 发布结束日期
-            publish_start_date: 发布开始日期
-            publishable: 发布

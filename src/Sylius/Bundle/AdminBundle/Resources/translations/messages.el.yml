@@ -20,5 +20,3 @@ sylius:
                     groups: Ομάδες
                 sales:
                     orders: Παραγγελίες
-                content:
-                    header: Περιεχόμενο

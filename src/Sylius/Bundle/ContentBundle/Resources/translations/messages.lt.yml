@@ -3,104 +3,16 @@
 
 sylius:
     form:
-        action_block:
-            action_name: Veiksmo pavadinimas
-            id: Id
-            publish_end_date: Publikavimo pabaigos data
-            publish_start_date: Publikavimo pradžios data
-            publishable: Paskelbta
-        imagine_block:
-            filter: Filtruoti
-            image: Paveikslėlis
-            internal_name: Vidinis pavadinimas
-            label: Etiketė
-            link_url: Nuorodos URL
-            parent: Motininis elementas
-            publish_end_date: Publikavimo pabaigos data
-            publish_start_date: Publikavimo pradžios data
-            publishable: Paskelbta
-            slideshow_small: Skaidrių demonstravimo mažas (šone)
-            slideshow_medium: Vidutinė prezentacija (turinys)
-            slideshow_large: Didelė prezentacija (pilno pločio)
-        menu:
-            childrens: Dukteriniai elementai
-            display: Rodymas
-            display_children: Rodyti dukterinius elementus
-            label: Etiketė
-            name: Pavadinimas
-            parent: Motininis elementas
-            publish_end_date: Publikavimo pabaigos data
-            publish_start_date: Publikavimo pradžios data
-            publishable: Paskelbta
-            route: Maršrutas
-            uri: URI
-        menu_block:
-            body: Bloko turinys
-            id: Id
-            name: Pavadinimas
-            publish_end_date: Publikavimo pabaigos data
-            publish_start_date: Publikavimo pradžios data
-            publishable: Paskelbta
-        menu_node_block:
-            content: Turinys
-            display: Rodymas
-            display_children: Rodyti dukterinius elementus
-            internal_name: Vidinis pavadinimas
-            label: Etiketė
-            link_type: Saito tipas
-            publish_end_date: Publikavimo pabaigos data
-            publish_start_date: Publikavimo pradžios data
-            publishable: Paskelbta
-            route: Maršrutas
-            uri: URI
-        redirect_route:
-            id: Id
-            name: Pavadinimas
-            route_name: Maršruto_pavadinimas
-            uri: URI
-        reference_block:
-            body: Bloko turinys
-            id: Id
-            publish_end_date: Publikavimo pabaigos data
-            publish_start_date: Publikavimo pradžios data
-            publishable: Paskelbta
-            title: Pavadinimas
         route:
             content: Turinys
             name: Pavadinimas
             parent: Motininis elementas
-        simple_block:
-            body: Bloko turinys
-            internal_name: Vidinis pavadinimas
-            parent: Motininis elementas
-            publish_end_date: Publikavimo pabaigos data
-            publish_start_date: Publikavimo pradžios data
-            publishable: Paskelbta
-            title: Antraštė
-        slideshow_block:
-            add_slide: Pridėti skaidrę
-            childrens: Dukteriniai elementai
-            internal_name: Vidinis pavadinimas
-            parent: Motininis elementas
-            publish_end_date: Publikavimo pabaigos data
-            publish_start_date: Publikavimo pradžios data
-            publishable: Paskelbta
-            title: Pavadinimas
         static_content:
             body: Bloko turinys
             id: Id
             internal_name: Vidinis pavadinimas
             menu_nodes: Meniu elementai
             parent: Motininis elementas
-            publish_end_date: Publikavimo pabaigos data
-            publish_start_date: Publikavimo pradžios data
             publishable: Paskelbta
             routes: Maršrutai
             title: Pavadinimas
-        string_block:
-            body: Bloko turinys
-            id: ID
-            name: Pavadinimas
-            publish_end_date: Publikavimo pabaigos data
-            publish_start_date: Publikavimo pradžios data
-            publishable: Paskelbta

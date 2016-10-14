@@ -4,14 +4,14 @@
 sylius:
     form:
         review:
+            author: نويسنده
+            comment: نظر
             header: افزودن بررسی جدید
             rating: امتیازدهی
-            title: عنوان
-            comment: نظر
-            author: نويسنده
             status:
+                approved: تایید شده
                 label: وضعیت
                 new: پرداخت ثبت شده
-                approved: تایید شده
                 rejected: رد شده
             submit: ثبت
+            title: عنوان

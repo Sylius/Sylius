@@ -28,7 +28,6 @@ sylius:
         code: Κώδικος
         company: Εταιρεία
         configuration: Παραμετροποίηση
-        content: Περιεχόμενο
         countries: Χώρες
         country: Χώρα
         country_details: Λεπτομέρειες χώρας
@@ -52,7 +51,6 @@ sylius:
         ends_at: Τελειώνει σε
         error: Σφάλμα
         existing_customer: Υφιστάμενος Πελάτης
-        filter: Φίλτρο
         first_name: Όνομα
         gateway: Πύλη
         general_settings: Γενικές ρυθμίσεις

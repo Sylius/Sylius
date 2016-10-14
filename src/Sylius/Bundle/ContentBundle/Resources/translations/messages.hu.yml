@@ -3,104 +3,12 @@
 
 sylius:
     form:
-        action_block:
-            action_name: A művelet neve
-            id: Azonosító
-            publish_end_date: Megjelenítés vége
-            publish_start_date: Megjelenítés kezdete
-            publishable: Megjelent
-        imagine_block:
-            filter: Szűrő
-            image: Kép
-            internal_name: Belső név
-            label: Címke
-            link_url: Link címe
-            parent: Szülő
-            publish_end_date: Megjelenítés vége
-            publish_start_date: Megjelenítés kezdete
-            publishable: Megjelent
-            slideshow_small: Diavetítés (kicsi) (oldalt)
-            slideshow_medium: Diavetítés (közepes) (tartalomnál)
-            slideshow_large: Diavetítés (nagy) (teljes szélességben)
-        menu:
-            childrens: Gyerekek
-            display: Megmutat
-            display_children: Gyerekek megmutatása
-            label: Címke
-            name: Név
-            parent: Szülő
-            publish_end_date: Megjelenítés vége
-            publish_start_date: Megjelenítés kezdete
-            publishable: Megjelent
-            route: Útvonal
-            uri: URI
-        menu_block:
-            body: Törzs
-            id: Azonosító
-            name: Név
-            publish_end_date: Megjelenítés vége
-            publish_start_date: Megjelenítés kezdete
-            publishable: Megjelent
-        menu_node_block:
-            content: Tartalom
-            display: Megmutat
-            display_children: Gyerekek megmutatása
-            internal_name: Belső név
-            label: Címke
-            link_type: Link típusa
-            publish_end_date: Megjelenítés vége
-            publish_start_date: Megjelenítés kezdete
-            publishable: Megjelent
-            route: Útvonal
-            uri: URI
-        redirect_route:
-            id: Azonosító
-            name: Név
-            route_name: Útvonal neve
-            uri: URI
-        reference_block:
-            body: Törzs
-            id: Azonosító
-            publish_end_date: Megjelenítés vége
-            publish_start_date: Megjelenítés kezdete
-            publishable: Megjelent
-            title: Cím
         route:
-            content: Tartalom
             name: Név
             parent: Szülő
-        simple_block:
-            body: Törzs
-            internal_name: Belső név
-            parent: Szülő
-            publish_end_date: Megjelenítés vége
-            publish_start_date: Megjelenítés kezdete
-            publishable: Megjelent
-            title: Cím
-        slideshow_block:
-            add_slide: Dia hozzáadása
-            childrens: Gyerekek
-            internal_name: Belső név
-            parent: Szülő
-            publish_end_date: Megjelenítés vége
-            publish_start_date: Megjelenítés kezdete
-            publishable: Megjelent
-            title: Cím
         static_content:
             body: Törzs
-            id: Azonosító
-            internal_name: Belső név
             menu_nodes: Menüpont hozzáadása
             parent: Szülő
-            publish_end_date: Megjelenítés vége
-            publish_start_date: Megjelenítés kezdete
-            publishable: Megjelent
             routes: Útvonalak
             title: Cím
-        string_block:
-            body: Törzs
-            id: Azonosító
-            name: Név
-            publish_end_date: Megjelenítés vége
-            publish_start_date: Megjelenítés kezdete
-            publishable: Megjelent

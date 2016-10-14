@@ -4,8 +4,8 @@
 sylius:
     form:
         channel:
-            name: Emri
-            description: Përshkrimi
-            url: URL
-            enabled: E aktivizuar
             color: Ngjyra
+            description: Përshkrimi
+            enabled: E aktivizuar
+            name: Emri
+            url: URL

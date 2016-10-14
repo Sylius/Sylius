@@ -179,7 +179,6 @@ sylius:
         extra_notes: Extra anteckningar
         failed: Misslyckad
         faqs: FAQs
-        filter: Filter
         filters: Filter
         first_name: Förnamn
         forgot_password: Glömt lösenordet
@@ -199,7 +198,6 @@ sylius:
         inventory_index: Lager
         item: Artikel
         jump_to_page: Hoppa till sida
-        label: Etikett
         last_name: Efternamn
         last_updated: Senast uppdaterad
         lastname: Efternamn

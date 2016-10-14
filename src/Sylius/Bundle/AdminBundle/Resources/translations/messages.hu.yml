@@ -34,6 +34,5 @@ sylius:
                     header: Értékesítés
                     orders: Rendelések
                 content:
-                    header: Tartalom
                     static_contents: Állandó tartalom
                     routes: Útvonalak
