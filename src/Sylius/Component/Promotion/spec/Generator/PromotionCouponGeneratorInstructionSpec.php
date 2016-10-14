@@ -24,15 +24,15 @@ final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction');
+        $this->shouldHaveType(PromotionCouponGeneratorInstruction::class);
     }
 
-    function it_implements_instruction_interface()
+    function it_implements_an_promotion_coupon_genarator_instruction_interface()
     {
         $this->shouldImplement(PromotionCouponGeneratorInstructionInterface::class);
     }
 
-    function it_should_have_amount_equal_to_5_by_default()
+    function it_has_amount_equal_to_5_by_default()
     {
         $this->getAmount()->shouldReturn(5);
     }
@@ -43,12 +43,12 @@ final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior
         $this->getAmount()->shouldReturn(500);
     }
 
-    function it_should_not_have_usage_limit_by_default()
+    function it_does_not_have_usage_limit_by_default()
     {
         $this->getUsageLimit()->shouldReturn(null);
     }
 
-    function its_usage_limit_should_be_mutable()
+    function its_usage_limit_is_mutable()
     {
         $this->setUsageLimit(3);
         $this->getUsageLimit()->shouldReturn(3);

@@ -14,10 +14,13 @@ namespace spec\Sylius\Component\Promotion\Provider;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Promotion\Provider\ActivePromotionsProvider;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
+ * @mixin ActivePromotionsProvider
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ActivePromotionsProviderSpec extends ObjectBehavior
@@ -29,7 +32,7 @@ final class ActivePromotionsProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Provider\ActivePromotionsProvider');
+        $this->shouldHaveType(ActivePromotionsProvider::class);
     }
 
     function it_implements_active_promotions_provider_interface()
@@ -38,7 +41,7 @@ final class ActivePromotionsProviderSpec extends ObjectBehavior
     }
 
     function it_provides_active_promotions(
-        $promotionRepository,
+        PromotionRepositoryInterface $promotionRepository,
         PromotionInterface $promotion1,
         PromotionInterface $promotion2,
         PromotionSubjectInterface $subject

@@ -29,7 +29,7 @@ final class PromotionCouponUsageLimitEligibilityCheckerSpec extends ObjectBehavi
         $this->shouldHaveType(PromotionCouponUsageLimitEligibilityChecker::class);
     }
 
-    function it_is_promotion_coupon_eligibility_checker()
+    function it_is_a_promotion_coupon_eligibility_checker()
     {
         $this->shouldImplement(PromotionCouponEligibilityCheckerInterface::class);
     }

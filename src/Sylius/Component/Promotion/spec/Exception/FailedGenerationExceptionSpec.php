@@ -22,8 +22,10 @@ use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInte
  */
 final class FailedGenerationExceptionSpec extends ObjectBehavior
 {
-    function let(PromotionCouponGeneratorInstructionInterface $instruction, \InvalidArgumentException $previousException)
-    {
+    function let(
+        PromotionCouponGeneratorInstructionInterface $instruction,
+        \InvalidArgumentException $previousException
+    ) {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
         $this->beConstructedWith($instruction, 0, $previousException);
@@ -31,20 +33,23 @@ final class FailedGenerationExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Exception\FailedGenerationException');
+        $this->shouldHaveType(FailedGenerationException::class);
     }
 
-    function it_is_a_exception()
+    function it_is_an_exception()
     {
         $this->shouldHaveType(\InvalidArgumentException::class);
     }
 
-    function it_has_proper_message()
+    function it_has_a_proper_message()
     {
-        $this->getMessage()->shouldReturn('Invalid coupon code length or coupons amount. It is not possible to generate 17 unique coupons with 1 code length');
+        $this
+            ->getMessage()
+            ->shouldReturn('Invalid coupon code length or coupons amount. It is not possible to generate 17 unique coupons with 1 code length')
+        ;
     }
 
-    function it_has_proper_previous_exception(\InvalidArgumentException $previousException)
+    function it_has_a_proper_previous_exception(\InvalidArgumentException $previousException)
     {
         $this->getPrevious()->shouldReturn($previousException);
     }

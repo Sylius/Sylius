@@ -17,6 +17,8 @@ use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
+ * @mixin PromotionAction
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class PromotionActionSpec extends ObjectBehavior
@@ -26,44 +28,44 @@ final class PromotionActionSpec extends ObjectBehavior
         $this->shouldHaveType(PromotionAction::class);
     }
 
-    function it_should_be_Sylius_promotion_action()
+    function it_is_a_promotion_action()
     {
         $this->shouldImplement(PromotionActionInterface::class);
     }
 
-    function it_should_not_have_id_by_default()
+    function it_does_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_have_type_by_default()
+    function it_does_not_have_type_by_default()
     {
         $this->getType()->shouldReturn(null);
     }
 
-    function its_type_should_be_mutable()
+    function its_type_is_mutable()
     {
         $this->setType('test_action');
         $this->getType()->shouldReturn('test_action');
     }
 
-    function it_should_initialize_array_for_configuration_by_default()
+    function it_initializes_array_for_configuration_by_default()
     {
         $this->getConfiguration()->shouldReturn([]);
     }
 
-    function its_configuration_should_be_mutable()
+    function its_configuration_is_mutable()
     {
         $this->setConfiguration(['value' => 500]);
         $this->getConfiguration()->shouldReturn(['value' => 500]);
     }
 
-    function it_should_not_have_promotion_by_default()
+    function it_does_not_have_a_promotion_by_default()
     {
         $this->getPromotion()->shouldReturn(null);
     }
 
-    function its_promotion_by_should_be_mutable(PromotionInterface $promotion)
+    function its_promotion_is_mutable(PromotionInterface $promotion)
     {
         $this->setPromotion($promotion);
         $this->getPromotion()->shouldReturn($promotion);

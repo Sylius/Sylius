@@ -37,12 +37,12 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(PromotionRulesEligibilityChecker::class);
     }
 
-    function it_implements_promotion_eligibility_checker_interface()
+    function it_implements_a_promotion_eligibility_checker_interface()
     {
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
 
-    function it_recognizes_subject_as_eligible_if_promotion_has_no_rules(
+    function it_recognizes_a_subject_as_eligible_if_a_promotion_has_no_rules(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ) {
@@ -51,7 +51,7 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
-    function it_recognizes_subject_as_eligible_if_all_of_promotion_rules_are_fulfilled(
+    function it_recognizes_a_subject_as_eligible_if_all_of_promotion_rules_are_fulfilled(
         ServiceRegistryInterface $rulesRegistry,
         RuleCheckerInterface $firstRuleChecker,
         RuleCheckerInterface $secondRuleChecker,
@@ -78,7 +78,7 @@ final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
-    function it_recognizes_subject_as_not_eligible_if_any_of_promotion_rules_is_not_fulfilled(
+    function it_recognizes_a_subject_as_not_eligible_if_any_of_promotion_rules_is_not_fulfilled(
         ServiceRegistryInterface $rulesRegistry,
         RuleCheckerInterface $firstRuleChecker,
         RuleCheckerInterface $secondRuleChecker,

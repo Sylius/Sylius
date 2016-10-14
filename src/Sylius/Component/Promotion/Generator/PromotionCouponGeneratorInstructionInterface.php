@@ -22,9 +22,19 @@ interface PromotionCouponGeneratorInstructionInterface
     public function getAmount();
 
     /**
+     * @param int $amount
+     */
+    public function setAmount($amount);
+
+    /**
      * @return int
      */
     public function getCodeLength();
+
+    /**
+     * @param int $codeLength
+     */
+    public function setCodeLength($codeLength);
 
     /**
      * @return \DateTime
@@ -32,7 +42,17 @@ interface PromotionCouponGeneratorInstructionInterface
     public function getExpiresAt();
 
     /**
+     * @param \DateTime $expiresAt
+     */
+    public function setExpiresAt(\DateTime $expiresAt = null);
+
+    /**
      * @return int
      */
     public function getUsageLimit();
+
+    /**
+     * @param int $usageLimit
+     */
+    public function setUsageLimit($usageLimit);
 }

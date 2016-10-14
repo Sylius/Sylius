@@ -12,7 +12,6 @@
 namespace Sylius\Component\Promotion\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -25,7 +24,7 @@ interface PromotionCouponRepositoryInterface extends RepositoryInterface
      *
      * @return int
      */
-    public function countCouponsByCodeLength($codeLength);
+    public function countByCodeLength($codeLength);
 
     /**
      * @param int $promotionId

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionCouponEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionCouponEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
@@ -35,7 +34,7 @@ final class CompositePromotionCouponEligibilityCheckerSpec extends ObjectBehavio
         $this->shouldHaveType(CompositePromotionCouponEligibilityChecker::class);
     }
 
-    function it_is_promotion_eligibility_checker()
+    function it_is_a_promotion_eligibility_checker()
     {
         $this->shouldImplement(PromotionCouponEligibilityCheckerInterface::class);
     }
@@ -74,7 +73,7 @@ final class CompositePromotionCouponEligibilityCheckerSpec extends ObjectBehavio
         $this->isEligible($promotionSubject, $promotionCoupon)->shouldReturn(false);
     }
 
-    function it_stops_chcecking_at_the_first_failing_eligibility_checker(
+    function it_stops_checking_at_the_first_failing_eligibility_checker(
         PromotionCouponEligibilityCheckerInterface $firstPromotionCouponEligibilityChecker,
         PromotionCouponEligibilityCheckerInterface $secondPromotionCouponEligibilityChecker,
         PromotionSubjectInterface $promotionSubject,

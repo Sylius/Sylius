@@ -28,43 +28,43 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(ItemTotalRuleChecker::class);
     }
 
-    function it_should_be_Sylius_rule_checker()
+    function it_is_be_a_rule_checker()
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_should_recognize_empty_subject_as_not_eligible(PromotionSubjectInterface $subject)
+    function it_recognizes_an_empty_subject_as_not_eligible(PromotionSubjectInterface $subject)
     {
-        $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(0);
+        $subject->getPromotionSubjectTotal()->willReturn(0);
 
         $this->isEligible($subject, ['amount' => 500])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_subject_total_is_less_then_configured(
+    function it_recognizes_a_subject_as_not_eligible_if_a_subject_total_is_less_then_configured(
         PromotionSubjectInterface $subject
     ) {
-        $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(400);
+        $subject->getPromotionSubjectTotal()->willReturn(400);
 
         $this->isEligible($subject, ['amount' => 500])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_subject_total_is_greater_then_configured(
+    function it_recognizes_a_subject_as_eligible_if_a_subject_total_is_greater_then_configured(
         PromotionSubjectInterface $subject
     ) {
-        $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(600);
+        $subject->getPromotionSubjectTotal()->willReturn(600);
 
         $this->isEligible($subject, ['amount' => 500])->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_eligible_if_subject_total_is_equal_with_configured(
+    function it_recognizes_a_subject_as_eligible_if_a_subject_total_is_equal_with_configured(
         PromotionSubjectInterface $subject
     ) {
-        $subject->getPromotionSubjectTotal()->shouldBeCalled()->willReturn(500);
+        $subject->getPromotionSubjectTotal()->willReturn(500);
 
         $this->isEligible($subject, ['amount' => 500])->shouldReturn(true);
     }
 
-    function it_should_return_subject_total_configuration_form_type()
+    function it_returns_a_subject_total_configuration_form_type()
     {
         $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_item_total_configuration');
     }

@@ -36,7 +36,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     private $usageLimit;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getAmount()
     {
@@ -44,7 +44,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     }
 
     /**
-     * @param int $amount
+     * {@inheritdoc}
      */
     public function setAmount($amount)
     {
@@ -52,7 +52,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getCodeLength()
     {
@@ -60,7 +60,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     }
 
     /**
-     * @param int $codeLength
+     * {@inheritdoc}
      */
     public function setCodeLength($codeLength)
     {
@@ -68,7 +68,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getExpiresAt()
     {
@@ -76,7 +76,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * {@inheritdoc}
      */
     public function setExpiresAt(\DateTime $expiresAt = null)
     {
@@ -84,7 +84,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getUsageLimit()
     {
@@ -92,7 +92,7 @@ final class PromotionCouponGeneratorInstruction implements PromotionCouponGenera
     }
 
     /**
-     * @param int $usageLimit
+     * {@inheritdoc}
      */
     public function setUsageLimit($usageLimit)
     {

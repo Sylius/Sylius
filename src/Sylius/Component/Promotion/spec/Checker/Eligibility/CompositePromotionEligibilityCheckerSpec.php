@@ -3,7 +3,6 @@
 namespace spec\Sylius\Component\Promotion\Checker\Eligibility;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionEligibilityChecker;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -26,7 +25,7 @@ final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(CompositePromotionEligibilityChecker::class);
     }
 
-    function it_is_promotion_eligibility_checker()
+    function it_is_a_promotion_eligibility_checker()
     {
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }

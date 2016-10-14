@@ -74,7 +74,7 @@ final class PercentageGenerationPolicy implements GenerationPolicyInterface
             'Code length or amount cannot be null.'
         );
 
-        $generatedAmount = $this->couponRepository->countCouponsByCodeLength($expectedCodeLength);
+        $generatedAmount = $this->couponRepository->countByCodeLength($expectedCodeLength);
 
         return floor(pow(16, $expectedCodeLength) * $this->ratio - $generatedAmount);
     }

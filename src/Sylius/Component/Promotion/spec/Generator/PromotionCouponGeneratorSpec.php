@@ -25,6 +25,8 @@ use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
+ * @mixin PromotionCouponGenerator
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class PromotionCouponGeneratorSpec extends ObjectBehavior
@@ -35,7 +37,12 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         ObjectManager $objectManager,
         GenerationPolicyInterface $generationPolicy
     ) {
-        $this->beConstructedWith($promotionCouponFactory, $promotionCouponRepository, $objectManager, $generationPolicy);
+        $this->beConstructedWith(
+            $promotionCouponFactory,
+            $promotionCouponRepository,
+            $objectManager,
+            $generationPolicy
+        );
     }
 
     function it_is_initializable()
@@ -43,12 +50,12 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         $this->shouldHaveType(PromotionCouponGenerator::class);
     }
 
-    function it_should_implement_Sylius_promotion_coupon_generator_interface()
+    function it_implements_a_promotion_coupon_generator_interface()
     {
         $this->shouldImplement(PromotionCouponGeneratorInterface::class);
     }
 
-    function it_should_generate_coupons_according_to_instruction(
+    function it_generates_coupons_according_to_an_instruction(
         FactoryInterface $promotionCouponFactory,
         PromotionCouponRepositoryInterface $promotionCouponRepository,
         ObjectManager $objectManager,
@@ -76,7 +83,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         $this->generate($promotion, $instruction);
     }
 
-    function it_throws_failed_generation_exception_when_generation_is_not_possible(
+    function it_throws_a_failed_generation_exception_when_generation_is_not_possible(
         GenerationPolicyInterface $generationPolicy,
         PromotionInterface $promotion,
         PromotionCouponGeneratorInstructionInterface $instruction
@@ -88,7 +95,7 @@ final class PromotionCouponGeneratorSpec extends ObjectBehavior
         $this->shouldThrow(FailedGenerationException::class)->during('generate', [$promotion, $instruction]);
     }
 
-    function it_throws_invalid_argument_exception_when_code_length_is_not_between_one_and_forty(
+    function it_throws_an_invalid_argument_exception_when_code_length_is_not_between_one_and_forty(
         PromotionCouponInterface $promotionCoupon,
         FactoryInterface $promotionCouponFactory,
         GenerationPolicyInterface $generationPolicy,
