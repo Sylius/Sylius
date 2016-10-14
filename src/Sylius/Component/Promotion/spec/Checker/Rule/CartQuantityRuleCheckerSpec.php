@@ -28,43 +28,43 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(CartQuantityRuleChecker::class);
     }
 
-    function it_should_be_Sylius_rule_checker()
+    function it_is_a_rule_checker()
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_should_recognize_empty_subject_as_not_eligible(CountablePromotionSubjectInterface $subject)
+    function it_recognizes_empty_subject_as_not_eligible(CountablePromotionSubjectInterface $subject)
     {
-        $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(0);
+        $subject->getPromotionSubjectCount()->willReturn(0);
 
         $this->isEligible($subject, ['count' => 10])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_cart_quantity_is_less_then_configured(
+    function it_recognizes_a_subject_as_not_eligible_if_a_cart_quantity_is_less_then_configured(
         CountablePromotionSubjectInterface $subject
     ) {
-        $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(7);
+        $subject->getPromotionSubjectCount()->willReturn(7);
 
         $this->isEligible($subject, ['count' => 10])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_cart_quantity_is_greater_then_configured(
+    function it_recognizes_a_subject_as_eligible_if_a_cart_quantity_is_greater_then_configured(
         CountablePromotionSubjectInterface $subject
     ) {
-        $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(12);
+        $subject->getPromotionSubjectCount()->willReturn(12);
 
         $this->isEligible($subject, ['count' => 10])->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_eligible_if_cart_quantity_is_equal_with_configured(
+    function it_recognizes_a_subject_as_eligible_if_a_cart_quantity_is_equal_with_configured(
         CountablePromotionSubjectInterface $subject
     ) {
-        $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(10);
+        $subject->getPromotionSubjectCount()->willReturn(10);
 
         $this->isEligible($subject, ['count' => 10])->shouldReturn(true);
     }
 
-    function it_should_return_cart_quantity_configuration_form_type()
+    function it_returns_a_cart_quantity_configuration_form_type()
     {
         $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_cart_quantity_configuration');
     }

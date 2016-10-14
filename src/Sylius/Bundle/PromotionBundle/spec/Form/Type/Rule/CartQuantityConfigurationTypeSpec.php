@@ -13,25 +13,28 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type\Rule;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
+ * @mixin CartQuantityConfigurationType
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class CartQuantityConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType');
+        $this->shouldHaveType(CartQuantityConfigurationType::class);
     }
 
-    function it_should_be_a_form_type()
+    function it_is_a_form_type()
     {
         $this->shouldHaveType(AbstractType::class);
     }
 
-    function it_should_build_form_with_count_field_and_equal_checkbox(FormBuilder $builder)
+    function it_builds_form_with_count_field_and_equal_checkbox(FormBuilderInterface $builder)
     {
         $builder
             ->add('count', 'integer', Argument::any())

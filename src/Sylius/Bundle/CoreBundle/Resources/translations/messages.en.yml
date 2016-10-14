@@ -1,12 +1,5 @@
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Unit price
-                quantity: Quantity
-                variant: Variant
-            customer_group:
-                Customer group
         block:
             body: Body
             id: ID
@@ -20,7 +13,14 @@ sylius:
             shipping_method: Shipping Method
         promotion:
             channels: Channels
-        coupon:
+        promotion_action:
+            add_product_configuration:
+                price: Unit price
+                quantity: Quantity
+                variant: Variant
+            customer_group:
+                Customer group
+        promotion_coupon:
             per_customer_usage_limit: Per-Customer Usage Limit
         group:
             name: Name

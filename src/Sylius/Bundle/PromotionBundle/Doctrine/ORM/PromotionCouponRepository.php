@@ -22,17 +22,15 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     /**
      * {@inheritdoc}
      */
-    public function countCouponsByCodeLength($codeLength)
+    public function countByCodeLength($codeLength)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
-        $count = (int) $queryBuilder->select($queryBuilder->expr()->count('o'))
+        return (int) $queryBuilder->select($queryBuilder->expr()->count('o'))
             ->where($queryBuilder->expr()->eq($queryBuilder->expr()->length('o.code'), $codeLength))
             ->getQuery()
             ->getSingleScalarResult()
         ;
-
-        return $count;
     }
 
     /**

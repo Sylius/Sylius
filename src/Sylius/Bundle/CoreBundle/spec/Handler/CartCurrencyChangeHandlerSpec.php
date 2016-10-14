@@ -21,9 +21,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Updater\OrderUpdaterInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Sylius\Component\Order\Event\CartEvent;
 use Sylius\Component\Order\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @mixin CartCurrencyChangeHandler
@@ -73,7 +73,7 @@ final class CartCurrencyChangeHandlerSpec extends ObjectBehavior
         $orderManager->persist($cart)->shouldBeCalled();
         $orderManager->flush()->shouldBeCalled();
 
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, Argument::type(CartEvent::class))->shouldBeCalled();
+        $eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, Argument::type(GenericEvent::class))->shouldBeCalled();
 
         $this->handle('USD');
     }

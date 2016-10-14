@@ -28,44 +28,44 @@ final class PromotionRuleSpec extends ObjectBehavior
         $this->shouldHaveType(PromotionRule::class);
     }
 
-    function it_should_be_Sylius_promotion_rule()
+    function it_is_a_promotion_rule()
     {
         $this->shouldImplement(PromotionRuleInterface::class);
     }
 
-    function it_should_not_have_id_by_default()
+    function it_does_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function it_should_not_have_type_by_default()
+    function it_does_not_have_type_by_default()
     {
         $this->getType()->shouldReturn(null);
     }
 
-    function its_type_should_be_mutable()
+    function its_type_is_mutable()
     {
         $this->setType('type');
         $this->getType()->shouldReturn('type');
     }
 
-    function it_should_initialize_array_for_configuration_by_default()
+    function it_initializes_array_for_configuration_by_default()
     {
         $this->getConfiguration()->shouldReturn([]);
     }
 
-    function its_configuration_should_be_mutable()
+    function its_configuration_is_mutable()
     {
         $this->setConfiguration(['value' => 500]);
         $this->getConfiguration()->shouldReturn(['value' => 500]);
     }
 
-    function it_should_not_have_promotion_by_default()
+    function it_does_not_have_a_promotion_by_default()
     {
         $this->getPromotion()->shouldReturn(null);
     }
 
-    function its_promotion_by_should_be_mutable(PromotionInterface $promotion)
+    function its_promotion_by_is_mutable(PromotionInterface $promotion)
     {
         $this->setPromotion($promotion);
         $this->getPromotion()->shouldReturn($promotion);

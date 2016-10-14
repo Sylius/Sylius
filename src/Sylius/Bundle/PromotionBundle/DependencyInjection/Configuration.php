@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\PromotionBundle\DependencyInjection;
 
-use Sylius\Bundle\PromotionBundle\Controller\CouponController;
+use Sylius\Bundle\PromotionBundle\Controller\PromotionCouponController;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType;
-use Sylius\Bundle\PromotionBundle\Form\Type\CouponType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -184,13 +184,13 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(PromotionCoupon::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(PromotionCouponInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(CouponController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(PromotionCouponController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(PromotionCouponFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
-                                                ->scalarNode('default')->defaultValue(CouponType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('default')->defaultValue(PromotionCouponType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

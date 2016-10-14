@@ -56,6 +56,8 @@ interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
 
     /**
      * @param int $amount
+     *
+     * @throws \InvalidArgumentException
      */
     public function setAmount($amount);
 
@@ -70,8 +72,15 @@ interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
     public function setNeutral($neutral);
 
     /**
-     * Is charge?
-     *
+     * @return bool
+     */
+    public function isLocked();
+
+    public function lock();
+
+    public function unlock();
+
+    /**
      * Adjustments with amount < 0 are called "charges".
      *
      * @return bool
@@ -79,18 +88,11 @@ interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
     public function isCharge();
 
     /**
-     * Is credit?
-     *
      * Adjustments with amount > 0 are called "credits".
      *
      * @return bool
      */
     public function isCredit();
-
-    /**
-     * @return bool
-     */
-    public function isLocked();
 
     /**
      * @return string
@@ -101,8 +103,4 @@ interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
      * @param string $originCode
      */
     public function setOriginCode($originCode);
-
-    public function lock();
-
-    public function unlock();
 }

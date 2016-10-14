@@ -29,7 +29,7 @@ final class PromotionUsageLimitEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(PromotionUsageLimitEligibilityChecker::class);
     }
 
-    function it_implements_promotion_eligibility_checker_interface()
+    function it_implements_a_promotion_eligibility_checker_interface()
     {
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }

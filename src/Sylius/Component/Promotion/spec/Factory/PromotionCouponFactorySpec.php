@@ -16,7 +16,6 @@ use Sylius\Component\Promotion\Factory\PromotionCouponFactory;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -41,19 +40,19 @@ final class PromotionCouponFactorySpec extends ObjectBehavior
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_implements_coupon_factory_interface()
+    function it_implements_a_coupon_factory_interface()
     {
         $this->shouldImplement(PromotionCouponFactoryInterface::class);
     }
 
-    function it_creates_new_coupon(FactoryInterface $factory, PromotionCouponInterface $coupon)
+    function it_creates_a_new_coupon(FactoryInterface $factory, PromotionCouponInterface $coupon)
     {
         $factory->createNew()->willReturn($coupon);
 
         $this->createNew()->shouldReturn($coupon);
     }
 
-    function it_throws_invalid_argument_exception_when_promotion_is_not_coupon_based(
+    function it_throws_an_invalid_argument_exception_when_promotion_is_not_coupon_based(
         PromotionInterface $promotion
     ) {
         $promotion->getName()->willReturn('Christmas sale');

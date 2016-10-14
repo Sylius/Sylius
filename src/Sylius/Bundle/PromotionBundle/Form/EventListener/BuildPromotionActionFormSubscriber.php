@@ -23,8 +23,6 @@ use Sylius\Component\Promotion\Model\PromotionActionInterface;
 final class BuildPromotionActionFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
-     * Get action configuration
-     *
      * @param PromotionActionInterface $action
      *
      * @return array
@@ -39,8 +37,6 @@ final class BuildPromotionActionFormSubscriber extends AbstractConfigurationSubs
     }
 
     /**
-     * Get action type
-     *
      * @param PromotionActionInterface $action
      *
      * @return null|string

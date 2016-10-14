@@ -37,13 +37,15 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function findLatest($count);
 
     /**
-     * @param string $orderNumber
+     * @param string $number
      *
      * @return OrderInterface|null
      */
-    public function findOneByNumber($orderNumber);
+    public function findOneByNumber($number);
 
     /**
+     * @param mixed $id
+     *
      * @return OrderInterface|null
      */
     public function findCartById($id);

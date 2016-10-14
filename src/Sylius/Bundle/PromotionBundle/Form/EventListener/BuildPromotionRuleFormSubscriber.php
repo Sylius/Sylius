@@ -23,8 +23,6 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 final class BuildPromotionRuleFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
-     * Get PromotionRule configuration
-     *
      * @param PromotionRuleInterface $rule
      *
      * @return array
@@ -39,8 +37,6 @@ final class BuildPromotionRuleFormSubscriber extends AbstractConfigurationSubscr
     }
 
     /**
-     * Get rule type
-     *
      * @param PromotionRuleInterface $rule
      *
      * @return null|string

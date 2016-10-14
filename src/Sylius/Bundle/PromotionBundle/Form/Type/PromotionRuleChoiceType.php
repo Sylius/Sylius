@@ -15,24 +15,24 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Promotion action choice type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ActionChoiceType extends AbstractType
+class PromotionRuleChoiceType extends AbstractType
 {
-    protected $actions;
+    protected $rules;
 
-    public function __construct(array $actions)
+    public function __construct(array $rules)
     {
-        $this->actions = $actions;
+        $this->rules = $rules;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'choices' => $this->actions,
-        ]);
+        $resolver
+            ->setDefaults([
+                'choices' => $this->rules,
+            ])
+        ;
     }
 
     public function getParent()
@@ -42,6 +42,6 @@ class ActionChoiceType extends AbstractType
 
     public function getName()
     {
-        return 'sylius_promotion_action_choice';
+        return 'sylius_promotion_rule_choice';
     }
 }

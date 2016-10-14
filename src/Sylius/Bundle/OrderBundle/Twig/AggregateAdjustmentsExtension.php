@@ -16,7 +16,7 @@ use Sylius\Bundle\OrderBundle\Templating\Helper\AdjustmentsHelper;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AggregateAdjustmentsExtension extends \Twig_Extension
+final class AggregateAdjustmentsExtension extends \Twig_Extension
 {
     /**
      * @var AdjustmentsHelper

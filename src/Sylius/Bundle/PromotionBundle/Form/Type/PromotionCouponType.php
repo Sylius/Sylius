@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class CouponType extends AbstractResourceType
+class PromotionCouponType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -27,11 +27,11 @@ class CouponType extends AbstractResourceType
     {
         $builder
             ->add('usageLimit', 'integer', [
-                'label' => 'sylius.form.coupon.usage_limit',
+                'label' => 'sylius.form.promotion_coupon.usage_limit',
                 'required' => false,
             ])
             ->add('expiresAt', 'date', [
-                'label' => 'sylius.form.coupon.expires_at',
+                'label' => 'sylius.form.promotion_coupon.expires_at',
                 'widget' => 'single_text',
                 'empty_value' => ['year' => '-', 'month' => '-', 'day' => '-'],
                 'required' => false,

@@ -13,11 +13,14 @@ namespace spec\Sylius\Bundle\OrderBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin OrderType
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class OrderTypeSpec extends ObjectBehavior
@@ -29,7 +32,7 @@ final class OrderTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Form\Type\OrderType');
+        $this->shouldHaveType(OrderType::class);
     }
 
     function it_is_a_form_type()
@@ -37,26 +40,26 @@ final class OrderTypeSpec extends ObjectBehavior
         $this->shouldHaveType(AbstractType::class);
     }
 
-    function it_builds_form_with_items_collection_field(FormBuilderInterface $builder)
+    function it_builds_a_form_with_items_collection_field(FormBuilderInterface $builder)
     {
         $builder
             ->add('items', 'collection', Argument::any())
-            ->willReturn($builder)
             ->shouldBeCalled()
+            ->willReturn($builder)
         ;
 
         $builder
             ->add('notes', 'text', [
                 'label' => 'sylius.ui.notes',
             ])
-            ->willReturn($builder)
             ->shouldBeCalled()
+            ->willReturn($builder)
         ;
 
         $this->buildForm($builder, []);
     }
 
-    function it_defines_assigned_data_class(OptionsResolver $resolver)
+    function it_defines_an_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
@@ -69,7 +72,7 @@ final class OrderTypeSpec extends ObjectBehavior
         $this->configureOptions($resolver);
     }
 
-    function it_has_valid_name()
+    function it_has_a_valid_name()
     {
         $this->getName()->shouldReturn('sylius_order');
     }

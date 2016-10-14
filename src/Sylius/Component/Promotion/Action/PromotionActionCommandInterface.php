@@ -15,15 +15,11 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Executes promotion action on given subject.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface PromotionActionCommandInterface
 {
     /**
-     * Applies the promotion to its subject.
-     *
      * @param PromotionSubjectInterface $subject
      * @param array                     $configuration
      * @param PromotionInterface        $promotion
@@ -33,8 +29,6 @@ interface PromotionActionCommandInterface
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
 
     /**
-     * Revert the promotion from its subject
-     *
      * @param PromotionSubjectInterface $subject
      * @param array                     $configuration
      * @param PromotionInterface        $promotion
@@ -44,8 +38,6 @@ interface PromotionActionCommandInterface
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
 
     /**
-     * Returns the form name related to this action.
-     *
      * @return string
      */
     public function getConfigurationFormType();

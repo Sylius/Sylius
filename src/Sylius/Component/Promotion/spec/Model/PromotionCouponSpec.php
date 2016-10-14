@@ -28,61 +28,61 @@ final class PromotionCouponSpec extends ObjectBehavior
         $this->shouldHaveType(PromotionCoupon::class);
     }
 
-    function it_should_be_Sylius_coupon()
+    function it_is_a_promotion_coupon()
     {
         $this->shouldImplement(PromotionCouponInterface::class);
     }
 
-    function it_should_not_have_id_by_default()
+    function it_does_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
 
-    function its_code_should_be_mutable()
+    function its_code_is_mutable()
     {
         $this->setCode('xxx');
         $this->getCode()->shouldReturn('xxx');
     }
 
-    function it_should_not_have_code_by_default()
+    function it_does_not_have_code_by_default()
     {
         $this->getCode()->shouldReturn(null);
     }
 
-    function it_should_have_no_usage_limit_by_default()
+    function it_has_no_usage_limit_by_default()
     {
         $this->getUsageLimit()->shouldReturn(null);
     }
 
-    function its_usage_limit_should_be_mutable()
+    function its_usage_limit_is_mutable()
     {
         $this->setUsageLimit(10);
         $this->getUsageLimit()->shouldReturn(10);
     }
 
-    function it_should_not_be_used_by_default()
+    function it_does_not_have_used_by_default()
     {
         $this->getUsed()->shouldReturn(0);
     }
 
-    function its_used_should_be_mutable()
+    function its_used_is_mutable()
     {
         $this->setUsed(5);
         $this->getUsed()->shouldReturn(5);
     }
 
-    function its_used_should_be_incrementable()
+    function its_used_is_incrementable()
     {
         $this->incrementUsed();
         $this->getUsed()->shouldReturn(1);
     }
 
-    function it_should_not_have_promotion_by_default()
+    function it_does_not_have_promotion_by_default()
     {
         $this->getPromotion()->shouldReturn(null);
     }
 
-    function its_promotion_by_should_be_mutable(PromotionInterface $promotion)
+    function its_promotion_by_is_mutable(PromotionInterface $promotion)
     {
         $this->setPromotion($promotion);
         $this->getPromotion()->shouldReturn($promotion);

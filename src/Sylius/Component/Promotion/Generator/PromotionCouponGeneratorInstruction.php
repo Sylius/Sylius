@@ -14,7 +14,7 @@ namespace Sylius\Component\Promotion\Generator;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class Instruction implements InstructionInterface
+final class PromotionCouponGeneratorInstruction implements PromotionCouponGeneratorInstructionInterface
 {
     /**
      * @var int
@@ -36,7 +36,7 @@ final class Instruction implements InstructionInterface
     private $usageLimit;
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getAmount()
     {
@@ -44,7 +44,7 @@ final class Instruction implements InstructionInterface
     }
 
     /**
-     * @param int $amount
+     * {@inheritdoc}
      */
     public function setAmount($amount)
     {
@@ -52,7 +52,7 @@ final class Instruction implements InstructionInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getCodeLength()
     {
@@ -60,7 +60,7 @@ final class Instruction implements InstructionInterface
     }
 
     /**
-     * @param int $codeLength
+     * {@inheritdoc}
      */
     public function setCodeLength($codeLength)
     {
@@ -68,7 +68,7 @@ final class Instruction implements InstructionInterface
     }
 
     /**
-     * @return \DateTime
+     * {@inheritdoc}
      */
     public function getExpiresAt()
     {
@@ -76,7 +76,7 @@ final class Instruction implements InstructionInterface
     }
 
     /**
-     * @param \DateTime $expiresAt
+     * {@inheritdoc}
      */
     public function setExpiresAt(\DateTime $expiresAt = null)
     {
@@ -84,7 +84,7 @@ final class Instruction implements InstructionInterface
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getUsageLimit()
     {
@@ -92,7 +92,7 @@ final class Instruction implements InstructionInterface
     }
 
     /**
-     * @param int $usageLimit
+     * {@inheritdoc}
      */
     public function setUsageLimit($usageLimit)
     {

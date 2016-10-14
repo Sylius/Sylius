@@ -29,13 +29,6 @@ interface OrderInterface extends
     const STATE_FULFILLED = 'fulfilled';
 
     /**
-     * @return bool
-     */
-    public function isCompleted();
-
-    public function complete();
-
-    /**
      * @return \DateTime
      */
     public function getCompletedAt();
@@ -44,6 +37,13 @@ interface OrderInterface extends
      * @param null|\DateTime $completedAt
      */
     public function setCompletedAt(\DateTime $completedAt = null);
+
+    /**
+     * @return bool
+     */
+    public function isCompleted();
+
+    public function complete();
 
     /**
      * @return string
@@ -66,7 +66,7 @@ interface OrderInterface extends
     public function setNotes($notes);
 
     /**
-     * @return Collection|OrderItemInterface[] An array or collection of OrderItemInterface
+     * @return Collection|OrderItemInterface[]
      */
     public function getItems();
 

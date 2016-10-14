@@ -12,6 +12,7 @@
 namespace Sylius\Component\Order\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -56,9 +57,6 @@ class Adjustment implements AdjustmentInterface
     protected $amount = 0;
 
     /**
-     * Is adjustment neutral?
-     * Should it modify the order total?
-     *
      * @var bool
      */
     protected $neutral = false;
@@ -176,9 +174,7 @@ class Adjustment implements AdjustmentInterface
      */
     public function setAmount($amount)
     {
-        if (!is_int($amount)) {
-            throw new \InvalidArgumentException('Amount must be an integer.');
-        }
+        Assert::integer($amount, 'Amount must be an integer.');
 
         $this->amount = $amount;
         if (!$this->isNeutral()) {
@@ -215,17 +211,11 @@ class Adjustment implements AdjustmentInterface
         return $this->locked;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function lock()
     {
         $this->locked = true;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function unlock()
     {
         $this->locked = false;
@@ -274,23 +264,33 @@ class Adjustment implements AdjustmentInterface
     /**
      * @param AdjustableInterface $adjustable
      *
-     * @throws \InvalidArgumentException when adjustable class is not supported
+     * @throws \InvalidArgumentException
      */
     private function assignAdjustable(AdjustableInterface $adjustable)
     {
         if ($adjustable instanceof OrderInterface) {
             $this->order = $adjustable;
-        } elseif ($adjustable instanceof OrderItemInterface) {
-            $this->orderItem = $adjustable;
-        } elseif ($adjustable instanceof OrderItemUnitInterface) {
-            $this->orderItemUnit = $adjustable;
-        } else {
-            throw new \InvalidArgumentException('Given adjustable object class is not supported.');
+
+            return;
         }
+
+        if ($adjustable instanceof OrderItemInterface) {
+            $this->orderItem = $adjustable;
+
+            return;
+        }
+
+        if ($adjustable instanceof OrderItemUnitInterface) {
+            $this->orderItemUnit = $adjustable;
+
+            return;
+        }
+
+        throw new \InvalidArgumentException('Given adjustable object class is not supported.');
     }
 
     /**
-     * @throws \LogicException when adjustment is locked
+     * @throws \LogicException
      */
     private function assertNotLocked()
     {

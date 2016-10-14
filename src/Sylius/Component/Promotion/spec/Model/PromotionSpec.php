@@ -28,15 +28,15 @@ final class PromotionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Model\Promotion');
+        $this->shouldHaveType(Promotion::class);
     }
 
-    function it_should_be_Sylius_promotion()
+    function it_is_a_promotion()
     {
         $this->shouldImplement(PromotionInterface::class);
     }
 
-    function it_should_not_have_id_by_default()
+    function it_does_not_have_id_by_default()
     {
         $this->getId()->shouldReturn(null);
     }
@@ -47,19 +47,19 @@ final class PromotionSpec extends ObjectBehavior
         $this->getCode()->shouldReturn('P1');
     }
 
-    function its_name_should_be_mutable()
+    function its_name_is_mutable()
     {
         $this->setName('New Year Sale');
         $this->getName()->shouldReturn('New Year Sale');
     }
 
-    function its_description_should_be_mutable()
+    function its_description_is_mutable()
     {
         $this->setDescription('New Year Sale 50% off.');
         $this->getDescription()->shouldReturn('New Year Sale 50% off.');
     }
 
-    function its_priority_should_be_mutable()
+    function its_priority_is_mutable()
     {
         $this->setPriority(5);
         $this->getPriority()->shouldReturn(5);
@@ -70,29 +70,29 @@ final class PromotionSpec extends ObjectBehavior
         $this->isExclusive()->shouldReturn(false);
     }
 
-    function its_exclusive_should_be_mutable()
+    function its_exclusive_is_mutable()
     {
         $this->setExclusive(true);
         $this->isExclusive()->shouldReturn(true);
     }
 
-    function it_should_have_no_usage_limit_by_default()
+    function it_does_not_have_usage_limit_by_default()
     {
         $this->getUsageLimit()->shouldReturn(null);
     }
 
-    function its_usage_limit_should_be_mutable()
+    function its_usage_limit_is_mutable()
     {
         $this->setUsageLimit(10);
         $this->getUsageLimit()->shouldReturn(10);
     }
 
-    function it_should_not_be_used_by_default()
+    function it_does_not_have_used_by_default()
     {
         $this->getUsed()->shouldReturn(0);
     }
 
-    function its_used_should_be_mutable()
+    function its_used_is_mutable()
     {
         $this->setUsed(5);
         $this->getUsed()->shouldReturn(5);
@@ -108,24 +108,24 @@ final class PromotionSpec extends ObjectBehavior
         $this->getUsed()->shouldReturn(1);
     }
 
-    function its_starts_at_should_be_mutable(\DateTime $date)
+    function its_starts_at_is_mutable(\DateTime $date)
     {
         $this->setStartsAt($date);
         $this->getStartsAt()->shouldReturn($date);
     }
 
-    function its_ends_at_should_be_mutable(\DateTime $date)
+    function its_ends_at_is_mutable(\DateTime $date)
     {
         $this->setEndsAt($date);
         $this->getEndsAt()->shouldReturn($date);
     }
 
-    function it_should_initialize_coupons_collection_by_default()
+    function it_initializes_coupons_collection_by_default()
     {
         $this->getCoupons()->shouldHaveType(Collection::class);
     }
 
-    function it_should_add_coupons_properly(PromotionCouponInterface $coupon)
+    function it_adds_coupons_properly(PromotionCouponInterface $coupon)
     {
         $this->hasCoupon($coupon)->shouldReturn(false);
 
@@ -135,7 +135,7 @@ final class PromotionSpec extends ObjectBehavior
         $this->hasCoupon($coupon)->shouldReturn(true);
     }
 
-    function it_should_remove_coupons_properly(PromotionCouponInterface $coupon)
+    function it_removes_coupons_properly(PromotionCouponInterface $coupon)
     {
         $this->hasCoupon($coupon)->shouldReturn(false);
 
@@ -148,12 +148,12 @@ final class PromotionSpec extends ObjectBehavior
         $this->hasCoupon($coupon)->shouldReturn(false);
     }
 
-    function it_should_initialize_rules_collection_by_default()
+    function it_initializes_rules_collection_by_default()
     {
         $this->getRules()->shouldHaveType(Collection::class);
     }
 
-    function it_should_add_rules_properly(PromotionRuleInterface $rule)
+    function it_adds_rules_properly(PromotionRuleInterface $rule)
     {
         $this->hasRule($rule)->shouldReturn(false);
 
@@ -163,7 +163,7 @@ final class PromotionSpec extends ObjectBehavior
         $this->hasRule($rule)->shouldReturn(true);
     }
 
-    function it_should_remove_rules_properly(PromotionRuleInterface $rule)
+    function it_removes_rules_properly(PromotionRuleInterface $rule)
     {
         $this->hasRule($rule)->shouldReturn(false);
 
@@ -176,12 +176,12 @@ final class PromotionSpec extends ObjectBehavior
         $this->hasRule($rule)->shouldReturn(false);
     }
 
-    function it_should_initialize_actions_collection_by_default()
+    function it_initializes_actions_collection_by_default()
     {
         $this->getActions()->shouldHaveType(Collection::class);
     }
 
-    function it_should_add_actions_properly(PromotionActionInterface $action)
+    function it_adds_actions_properly(PromotionActionInterface $action)
     {
         $this->hasAction($action)->shouldReturn(false);
 
@@ -191,7 +191,7 @@ final class PromotionSpec extends ObjectBehavior
         $this->hasAction($action)->shouldReturn(true);
     }
 
-    function it_should_remove_actions_properly(PromotionActionInterface $action)
+    function it_removes_actions_properly(PromotionActionInterface $action)
     {
         $this->hasAction($action)->shouldReturn(false);
 

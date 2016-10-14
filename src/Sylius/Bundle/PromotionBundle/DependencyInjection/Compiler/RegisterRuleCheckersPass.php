@@ -20,13 +20,16 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 final class RegisterRuleCheckersPass implements CompilerPassInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.registry.promotion_rule_checker')) {
+        if (!$container->hasDefinition('sylius.registry_promotion_rule_checker')) {
             return;
         }
 
-        $registry = $container->getDefinition('sylius.registry.promotion_rule_checker');
+        $registry = $container->getDefinition('sylius.registry_promotion_rule_checker');
         $checkers = [];
 
         $checkersServices = $container->findTaggedServiceIds('sylius.promotion_rule_checker');

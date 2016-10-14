@@ -32,14 +32,14 @@
         </service>
 
         <service id="sylius.promotion_applicator" class="Sylius\Component\Promotion\Action\PromotionApplicator">
-            <argument type="service" id="sylius.registry.promotion_action" />
+            <argument type="service" id="sylius.registry_promotion_action" />
         </service>
 
-        <service id="sylius.registry.promotion_rule_checker" class="Sylius\Component\Registry\ServiceRegistry">
+        <service id="sylius.registry_promotion_rule_checker" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface</argument>
             <argument>rule checker</argument>
         </service>
-        <service id="sylius.registry.promotion_action" class="Sylius\Component\Registry\ServiceRegistry">
+        <service id="sylius.registry_promotion_action" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>Sylius\Component\Promotion\Action\PromotionActionCommandInterface</argument>
             <argument>promotion action</argument>
         </service>
@@ -48,13 +48,13 @@
             <argument type="service" id="sylius.repository.promotion" />
         </service>
 
-        <service id="sylius.generator.promotion_coupon" class="Sylius\Component\Promotion\Generator\PromotionCouponGenerator">
+        <service id="sylius.promotion_coupon_generator" class="Sylius\Component\Promotion\Generator\PromotionCouponGenerator">
             <argument type="service" id="sylius.factory.promotion_coupon" />
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.manager.promotion_coupon" />
-            <argument type="service" id="sylius.generator.promotion_coupon.percentage_policy" />
+            <argument type="service" id="sylius.promotion_coupon_generator.percentage_policy" />
         </service>
-        <service id="sylius.generator.promotion_coupon.percentage_policy" class="Sylius\Component\Promotion\Generator\PercentageGenerationPolicy">
+        <service id="sylius.promotion_coupon_generator.percentage_policy" class="Sylius\Component\Promotion\Generator\PercentageGenerationPolicy">
             <argument type="service" id="sylius.repository.promotion_coupon" />
         </service>
 
@@ -66,7 +66,7 @@
             <tag name="validator.constraint_validator" alias="sylius_promotion_date_range_validator" />
         </service>
         <service id="sylius.validator.promotion_coupon_generation_amount" class="Sylius\Bundle\PromotionBundle\Validator\CouponGenerationAmountValidator">
-            <argument type="service" id="sylius.generator.promotion_coupon.percentage_policy" />
+            <argument type="service" id="sylius.promotion_coupon_generator.percentage_policy" />
             <tag name="validator.constraint_validator" alias="sylius_coupon_generation_amount_validator" />
         </service>
     </services>

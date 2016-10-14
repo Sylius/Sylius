@@ -13,7 +13,6 @@ namespace Sylius\Component\Order\Modifier;
 
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
-use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 /**
@@ -72,7 +71,10 @@ final class OrderModifier implements OrderModifierInterface
     {
         foreach ($order->getItems() as $existingItem) {
             if ($item->equals($existingItem)) {
-                $this->orderItemQuantityModifier->modify($existingItem, $existingItem->getQuantity() + $item->getQuantity());
+                $this->orderItemQuantityModifier->modify(
+                    $existingItem,
+                    $existingItem->getQuantity() + $item->getQuantity()
+                );
 
                 return;
             }

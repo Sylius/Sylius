@@ -73,17 +73,14 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findOneByNumber($orderNumber)
+    public function findOneByNumber($number)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
-            ->andWhere('o.number = :orderNumber')
-            ->setParameter('orderNumber', $orderNumber)
-        ;
-
         return $queryBuilder
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->andWhere('o.number = :number')
+            ->setParameter('number', $number)
             ->getQuery()
             ->getOneOrNullResult()
         ;

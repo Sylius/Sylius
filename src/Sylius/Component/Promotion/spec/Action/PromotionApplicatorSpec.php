@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
+use Sylius\Component\Promotion\Action\PromotionApplicator;
 use Sylius\Component\Promotion\Action\PromotionApplicatorInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -20,6 +21,8 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
+ * @mixin PromotionApplicator
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class PromotionApplicatorSpec extends ObjectBehavior
@@ -31,15 +34,15 @@ final class PromotionApplicatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Action\PromotionApplicator');
+        $this->shouldHaveType(PromotionApplicator::class);
     }
 
-    function it_should_be_Sylius_promotion_applicator()
+    function it_should_be_a_promotion_applicator()
     {
         $this->shouldImplement(PromotionApplicatorInterface::class);
     }
 
-    function it_should_execute_all_actions_registered(
+    function it_executes_all_actions_registered(
         ServiceRegistryInterface $registry,
         PromotionActionCommandInterface $action,
         PromotionSubjectInterface $subject,
@@ -48,10 +51,10 @@ final class PromotionApplicatorSpec extends ObjectBehavior
     ) {
         $configuration = [];
 
-        $registry->get('test_action')->shouldBeCalled()->willReturn($action);
-        $promotion->getActions()->shouldBeCalled()->willReturn([$actionModel]);
-        $actionModel->getType()->shouldBeCalled()->willReturn('test_action');
-        $actionModel->getConfiguration()->shouldBeCalled()->willReturn($configuration);
+        $registry->get('test_action')->willReturn($action);
+        $promotion->getActions()->willReturn([$actionModel]);
+        $actionModel->getType()->willReturn('test_action');
+        $actionModel->getConfiguration()->willReturn($configuration);
 
         $action->execute($subject, $configuration, $promotion)->shouldBeCalled();
 
@@ -60,7 +63,7 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         $this->apply($subject, $promotion);
     }
 
-    function it_should_revert_all_actions_registered(
+    function it_reverts_all_actions_registered(
         ServiceRegistryInterface $registry,
         PromotionActionCommandInterface $action,
         PromotionSubjectInterface $subject,
@@ -69,10 +72,10 @@ final class PromotionApplicatorSpec extends ObjectBehavior
     ) {
         $configuration = [];
 
-        $registry->get('test_action')->shouldBeCalled()->willReturn($action);
-        $promotion->getActions()->shouldBeCalled()->willReturn([$actionModel]);
-        $actionModel->getType()->shouldBeCalled()->willReturn('test_action');
-        $actionModel->getConfiguration()->shouldBeCalled()->willReturn($configuration);
+        $registry->get('test_action')->willReturn($action);
+        $promotion->getActions()->willReturn([$actionModel]);
+        $actionModel->getType()->willReturn('test_action');
+        $actionModel->getConfiguration()->willReturn($configuration);
 
         $action->revert($subject, $configuration, $promotion)->shouldBeCalled();
 

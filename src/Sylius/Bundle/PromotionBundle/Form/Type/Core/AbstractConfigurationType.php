@@ -25,6 +25,10 @@ abstract class AbstractConfigurationType extends AbstractResourceType
      */
     protected $registry;
 
+    /**
+     * @param string $dataClass
+     * @param ServiceRegistryInterface $registry
+     */
     public function __construct($dataClass, ServiceRegistryInterface $registry)
     {
         parent::__construct($dataClass, ['Default']);

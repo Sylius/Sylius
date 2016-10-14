@@ -14,9 +14,6 @@ namespace Sylius\Component\Order\Context;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
- * Interface to be implemented by the service providing the currently used
- * cart.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CartContextInterface

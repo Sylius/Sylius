@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Promotion\Generator;
 
-use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
@@ -21,9 +20,9 @@ interface PromotionCouponGeneratorInterface
 {
     /**
      * @param PromotionInterface $promotion
-     * @param InstructionInterface $instruction
+     * @param PromotionCouponGeneratorInstructionInterface $instruction
      *
      * @return array of generated coupons with coupon code as a key
      */
-    public function generate(PromotionInterface $promotion, InstructionInterface $instruction);
+    public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction);
 }

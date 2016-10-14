@@ -18,9 +18,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Updater\OrderUpdaterInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Sylius\Component\Order\Event\CartEvent;
 use Sylius\Component\Order\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -80,7 +80,7 @@ final class CartCurrencyChangeHandler implements CurrencyChangeHandlerInterface
             $this->orderManager->persist($cart);
             $this->orderManager->flush();
 
-            $this->eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new CartEvent($cart));
+            $this->eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
         } catch (CartNotFoundException $exception) {
             throw new HandleException(self::class, 'Sylius was unable to find the cart.', $exception);
         }

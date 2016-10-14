@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollectionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleCollectionType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormConfigInterface;
@@ -22,9 +22,11 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin PromotionRuleCollectionType
+ *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class ActionCollectionTypeSpec extends ObjectBehavior
+final class PromotionRuleCollectionTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $registry)
     {
@@ -33,10 +35,10 @@ final class ActionCollectionTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ActionCollectionType::class);
+        $this->shouldHaveType(PromotionRuleCollectionType::class);
     }
 
-    function it_is_configuration_collection_type()
+    function it_is_a_configuration_collection_type()
     {
         $this->shouldHaveType(AbstractConfigurationCollectionType::class);
     }
@@ -45,12 +47,14 @@ final class ActionCollectionTypeSpec extends ObjectBehavior
         FormBuilderInterface $builder,
         FormBuilderInterface $prototype,
         FormInterface $form,
-        $registry
+        ServiceRegistryInterface $registry
     ) {
         $registry->all()->willReturn(['configuration_kind' => '']);
 
-        $builder->create('name', 'sylius_promotion_action', ['configuration_type' => 'configuration_kind'])
-            ->willReturn($prototype);
+        $builder
+            ->create('name', 'sylius_promotion_rule', ['configuration_type' => 'configuration_kind'])
+            ->willReturn($prototype)
+        ;
 
         $prototype->getForm()->willReturn($form);
 
@@ -59,12 +63,12 @@ final class ActionCollectionTypeSpec extends ObjectBehavior
         $this->buildForm($builder, [
             'registry' => $registry,
             'prototype_name' => 'name',
-            'type' => 'sylius_promotion_action',
+            'type' => 'sylius_promotion_rule',
             'options' => [],
         ]);
     }
 
-    function it_builds_view(
+    function it_builds_a_view(
         FormConfigInterface $config,
         FormView $view,
         FormInterface $form,
@@ -78,26 +82,27 @@ final class ActionCollectionTypeSpec extends ObjectBehavior
         $this->buildView($view, $form, []);
     }
 
-    function it_should_have_default_option(OptionsResolver $resolver)
+    function it_has_a_default_option(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
-                'type' => 'sylius_promotion_action',
+                'type' => 'sylius_promotion_rule',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-            ])->shouldBeCalled()
+            ])
+            ->shouldBeCalled()
         ;
         $this->configureOptions($resolver);
     }
 
-    function it_has_collection_as_parent()
+    function it_has_a_parent()
     {
         $this->getParent()->shouldReturn('collection');
     }
 
-    function it_has_name()
+    function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_promotion_action_collection');
+        $this->getName()->shouldReturn('sylius_promotion_rule_collection');
     }
 }

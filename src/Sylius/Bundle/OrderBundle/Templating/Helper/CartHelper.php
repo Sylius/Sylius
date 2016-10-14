@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Templating\Helper;
 
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
@@ -74,6 +75,7 @@ class CartHelper extends Helper
      */
     public function getItemFormView(array $options = [])
     {
+        /** @var OrderItemInterface $cartItem */
         $cartItem = $this->orderItemFactory->createNew();
         $this->orderItemQuantityModifier->modify($cartItem, 1);
 

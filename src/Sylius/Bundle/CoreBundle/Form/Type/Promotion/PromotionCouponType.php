@@ -9,39 +9,30 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType as BasePromotionCouponType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Comment form type.
+ * Coupon form.
  *
  * @author Myke Hines <myke@webhines.com>
  */
-class CommentType extends AbstractResourceType
+class PromotionCouponType extends BasePromotionCouponType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        parent::buildForm($builder, $options);
+
         $builder
-            ->add('comment', 'textarea', [
-                'label' => 'sylius.form.comment.comment',
+            ->add('perCustomerUsageLimit', 'integer', [
+                'label' => 'sylius.form.promotion_coupon.per_customer_usage_limit',
                 'required' => false,
             ])
-            ->add('notifyCustomer', 'checkbox', [
-                'label' => 'sylius.form.comment.notify_customer',
-            ])
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_comment';
     }
 }

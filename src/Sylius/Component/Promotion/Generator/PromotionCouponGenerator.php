@@ -13,7 +13,6 @@ namespace Sylius\Component\Promotion\Generator;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Promotion\Exception\FailedGenerationException;
-use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -65,7 +64,7 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     /**
      * {@inheritdoc}
      */
-    public function generate(PromotionInterface $promotion, InstructionInterface $instruction)
+    public function generate(PromotionInterface $promotion, PromotionCouponGeneratorInstructionInterface $instruction)
     {
         $generatedCoupons = [];
 
@@ -93,6 +92,8 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
      * @param array $generatedCoupons
      *
      * @return string
+     *
+     * @throws \InvalidArgumentException
      */
     private function generateUniqueCode($codeLength, array $generatedCoupons)
     {
@@ -122,11 +123,11 @@ final class PromotionCouponGenerator implements PromotionCouponGeneratorInterfac
     }
 
     /**
-     * @param InstructionInterface $instruction
+     * @param PromotionCouponGeneratorInstructionInterface $instruction
      *
      * @throws FailedGenerationException
      */
-    private function assertGenerationIsPossible(InstructionInterface $instruction)
+    private function assertGenerationIsPossible(PromotionCouponGeneratorInstructionInterface $instruction)
     {
         if (!$this->generationPolicy->isGenerationPossible($instruction)) {
             throw new FailedGenerationException($instruction);

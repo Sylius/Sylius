@@ -14,8 +14,6 @@ namespace Sylius\Component\Order;
 final class SyliusCartEvents
 {
     const CART_CHANGE = 'sylius.cart_change';
-    const CART_INITIALIZE = 'sylius.cart.initialize';
-    const CART_ABANDON = 'sylius.cart.abandon';
 
     private function __construct()
     {

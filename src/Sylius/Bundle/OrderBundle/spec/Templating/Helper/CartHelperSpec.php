@@ -23,6 +23,9 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Templating\Helper\Helper;
 
+/**
+ * @mixin CartHelper
+ */
 final class CartHelperSpec extends ObjectBehavior
 {
     function let(
@@ -44,42 +47,44 @@ final class CartHelperSpec extends ObjectBehavior
         $this->shouldHaveType(Helper::class);
     }
 
-    function its_getCurrentCart_returns_current_cart_via_provider($cartContext, OrderInterface $cart)
-    {
+    function it_returns_current_cart_via_provider(
+        CartContextInterface $cartContext,
+        OrderInterface $cart
+    ) {
         $cartContext->getCart()->willReturn($cart);
 
         $this->getCurrentCart()->shouldReturn($cart);
     }
 
-    function its_getItemFormView_returns_a_form_view_of_cart_item_form(
-        $formFactory,
-        $itemFactory,
-        $orderItemQuantityModifier,
+    function it_returns_a_form_view_of_a_cart_item_form(
+        FactoryInterface $itemFactory,
+        FormFactoryInterface $formFactory,
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         OrderItemInterface $item,
         FormInterface $form,
         FormView $formView
     ) {
-        $itemFactory->createNew()->shouldBeCalled()->willReturn($item);
+        $itemFactory->createNew()->willReturn($item);
         $orderItemQuantityModifier->modify($item, 1)->shouldBeCalled();
 
-        $formFactory->create('sylius_cart_item', $item, [])->shouldBeCalled()->willReturn($form);
+        $formFactory->create('sylius_cart_item', $item, [])->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $this->getItemFormView()->shouldReturn($formView);
     }
 
-    function its_getItemFormView_uses_given_options_when_creating_form(
-        $itemFactory,
-        $formFactory,
-        $orderItemQuantityModifier,
+    function it_uses_given_options_when_creating_a_form(
+        FactoryInterface $itemFactory,
+        FormFactoryInterface $formFactory,
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         FormInterface $form,
         FormView $formView,
         OrderItemInterface $item
     ) {
-        $itemFactory->createNew()->shouldBeCalled()->willReturn($item);
+        $itemFactory->createNew()->willReturn($item);
         $orderItemQuantityModifier->modify($item, 1)->shouldBeCalled();
 
-        $formFactory->create('sylius_cart_item', $item, ['foo' => 'bar'])->shouldBeCalled()->willReturn($form);
+        $formFactory->create('sylius_cart_item', $item, ['foo' => 'bar'])->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $this->getItemFormView(['foo' => 'bar'])->shouldReturn($formView);

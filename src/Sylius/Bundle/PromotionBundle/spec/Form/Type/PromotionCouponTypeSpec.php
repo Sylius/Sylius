@@ -9,27 +9,31 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\OrderBundle\Form\Type;
+namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @mixin PromotionCouponType
+ *
+ * @author Saša Stamenković <umpirsky@gmail.com>
  */
-final class AdjustmentTypeSpec extends ObjectBehavior
+final class PromotionCouponTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Adjustment', ['sylius']);
+        $this->beConstructedWith('PromotionCoupon', ['sylius']);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType');
+        $this->shouldHaveType(PromotionCouponType::class);
     }
 
     function it_is_a_form_type()
@@ -37,41 +41,39 @@ final class AdjustmentTypeSpec extends ObjectBehavior
         $this->shouldHaveType(AbstractType::class);
     }
 
-    function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
+    function it_builds_a_form_with_proper_fields(FormBuilderInterface $builder)
     {
         $builder
-            ->add('type', 'text', Argument::any())
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('label', 'text', Argument::any())
+            ->add('usageLimit', 'integer', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('amount', 'sylius_money', Argument::any())
+            ->add('expiresAt', 'date', Argument::any())
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $this->buildForm($builder, []);
     }
 
-    function it_defines_assigned_data_class(OptionsResolver $resolver)
+    function it_defines_an_assigned_data_class(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
-                'data_class' => 'Adjustment',
+                'data_class' => 'PromotionCoupon',
                 'validation_groups' => ['sylius'],
             ])
             ->shouldBeCalled()
         ;
 
         $this->configureOptions($resolver);
-    }
-
-    function it_has_valid_name()
-    {
-        $this->getName()->shouldReturn('sylius_adjustment');
     }
 }

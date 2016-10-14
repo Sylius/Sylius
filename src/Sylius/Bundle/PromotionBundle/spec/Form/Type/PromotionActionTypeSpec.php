@@ -16,13 +16,13 @@ use Prophecy\Argument;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
-use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin PromotionActionType
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
@@ -38,24 +38,25 @@ final class PromotionActionTypeSpec extends ObjectBehavior
         $this->shouldHaveType(PromotionActionType::class);
     }
 
-    function it_is_configuration_form_type()
+    function it_is_a_configuration_form_type()
     {
         $this->shouldHaveType(AbstractConfigurationType::class);
     }
 
-    function it_builds_form(
-        FormBuilder $builder,
-        FormFactoryInterface $factory
-    ) {
+    function it_builds_a_form(FormBuilderInterface $builder, FormFactoryInterface $factory)
+    {
+        $builder->getFormFactory()->willReturn($factory);
+
         $builder
             ->add('type', 'sylius_promotion_action_choice', Argument::type('array'))
+            ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $builder->getFormFactory()->willReturn($factory);
-        $builder->addEventSubscriber(
-            Argument::type(BuildPromotionActionFormSubscriber::class)
-        )->shouldBeCalled();
+        $builder->addEventSubscriber(Argument::type(BuildPromotionActionFormSubscriber::class))
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, [
             'configuration_type' => 'configuration_form_type',

@@ -17,31 +17,44 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class RuleChoiceType extends AbstractType
+class PromotionActionChoiceType extends AbstractType
 {
-    protected $rules;
+    /**
+     * @var array
+     */
+    protected $actions;
 
-    public function __construct(array $rules)
+    /**
+     * @param array $actions
+     */
+    public function __construct(array $actions)
     {
-        $this->rules = $rules;
+        $this->actions = $actions;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setDefaults([
-                'choices' => $this->rules,
-            ])
-        ;
+        $resolver->setDefaults([
+            'choices' => $this->actions,
+        ]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent()
     {
         return 'choice';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return 'sylius_promotion_rule_choice';
+        return 'sylius_promotion_action_choice';
     }
 }

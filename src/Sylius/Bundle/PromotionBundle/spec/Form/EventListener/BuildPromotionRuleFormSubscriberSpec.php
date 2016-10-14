@@ -48,7 +48,7 @@ final class BuildPromotionRuleFormSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType(BuildPromotionRuleFormSubscriber::class);
     }
 
-    function it_is_configuration_subscriber()
+    function it_is_a_configuration_subscriber()
     {
         $this->shouldImplement(AbstractConfigurationSubscriber::class);
     }
@@ -75,7 +75,10 @@ final class BuildPromotionRuleFormSubscriberSpec extends ObjectBehavior
         $rule->getType()->willReturn(ItemTotalRuleChecker::TYPE);
         $rule->getConfiguration()->willReturn([]);
 
-        $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())->shouldBeCalled()->willReturn($field);
+        $factory
+            ->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())
+            ->willReturn($field)
+        ;
         $form->add($field)->shouldBeCalled();
 
         $this->preSetData($event);
@@ -90,7 +93,10 @@ final class BuildPromotionRuleFormSubscriberSpec extends ObjectBehavior
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn(['type' => ItemTotalRuleChecker::TYPE]);
 
-        $factory->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())->shouldBeCalled()->willReturn($field);
+        $factory
+            ->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())
+            ->willReturn($field)
+        ;
         $form->add($field)->shouldBeCalled();
 
         $this->preSubmit($event);
