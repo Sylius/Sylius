@@ -43,6 +43,13 @@ interface ShippingMethodInterface extends
     public function setCategory(ShippingCategoryInterface $category = null);
 
     /**
+     * Get the one of matching requirements.
+     * For example, a method can apply to shipment on 3 different conditions.
+     *
+     * 1) None of shippables matches the category.
+     * 2) At least one of shippables matches the category.
+     * 3) All shippables have to match the method category.
+     *
      * @return int
      */
     public function getCategoryRequirement();

@@ -22,6 +22,8 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 interface ZoneMatcherInterface
 {
     /**
+     * Returns the best matching zone for given address.
+     *
      * @param AddressInterface $address
      * @param string|null      $scope
      *
@@ -30,6 +32,8 @@ interface ZoneMatcherInterface
     public function match(AddressInterface $address, $scope = null);
 
     /**
+     * Returns all matching zones for given address.
+     *
      * @param AddressInterface $address
      * @param string|null      $scope
      *
