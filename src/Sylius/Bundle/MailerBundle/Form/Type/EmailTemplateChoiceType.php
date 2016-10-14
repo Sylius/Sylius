@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Form choice type for email templates.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class EmailTemplateChoiceType extends AbstractType

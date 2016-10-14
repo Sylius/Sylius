@@ -12,20 +12,22 @@
 namespace spec\Sylius\Bundle\MailerBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\MailerBundle\Form\Type\EmailTemplateChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @mixin EmailTemplateChoiceType
+ */
 final class EmailTemplateChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith([
-            'template' => 'my_template',
-        ]);
+        $this->beConstructedWith(['template' => 'my_template']);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MailerBundle\Form\Type\EmailTemplateChoiceType');
+        $this->shouldHaveType(EmailTemplateChoiceType::class);
     }
 
     function it_has_options(OptionsResolver $resolver)

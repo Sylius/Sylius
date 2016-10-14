@@ -14,8 +14,6 @@ namespace Sylius\Component\Mailer\Provider;
 use Sylius\Component\Mailer\Model\EmailInterface;
 
 /**
- * Returns e-mail information.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface EmailProviderInterface

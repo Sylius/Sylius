@@ -18,8 +18,6 @@ use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPas
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Settings system for ecommerce Symfony2 applications.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusSettingsBundle extends AbstractResourceBundle

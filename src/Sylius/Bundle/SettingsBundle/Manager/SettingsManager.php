@@ -84,7 +84,6 @@ final class SettingsManager implements SettingsManagerInterface
         /** @var SettingsResolverInterface $resolver */
         $resolver = $this->resolverRegistry->get($schemaAlias);
 
-        // try to resolve settings for schema alias and namespace
         $settings = $resolver->resolve($schemaAlias, $namespace);
 
         if (!$settings) {
@@ -99,7 +98,7 @@ final class SettingsManager implements SettingsManagerInterface
         $schema->buildSettings($settingsBuilder);
 
         // Remove unknown settings' parameters (e.g. From a previous version of the settings schema)
-        if (true === $ignoreUnknown) {
+        if ($ignoreUnknown) {
             foreach ($parameters as $name => $value) {
                 if (!$settingsBuilder->isDefined($name)) {
                     unset($parameters[$name]);

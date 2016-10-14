@@ -22,8 +22,6 @@ interface StockableInterface
     public function getInventoryName();
 
     /**
-     * Simply checks if there any stock available.
-     *
      * @return bool
      */
     public function isInStock();
@@ -34,7 +32,7 @@ interface StockableInterface
     public function getOnHold();
 
     /**
-     * @param int
+     * @param int $onHold
      */
     public function setOnHold($onHold);
 

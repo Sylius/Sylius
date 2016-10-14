@@ -17,8 +17,6 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="sylius.inventory_operator.noop" class="Sylius\Component\Inventory\Operator\NoopInventoryOperator" />
-
         <service id="sylius.availability_checker.default" class="Sylius\Component\Inventory\Checker\AvailabilityChecker" />
 
         <service id="sylius.validator.in_stock" class="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator">

@@ -17,12 +17,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * Mailer extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-class SyliusMailerExtension extends AbstractResourceExtension
+final class SyliusMailerExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}

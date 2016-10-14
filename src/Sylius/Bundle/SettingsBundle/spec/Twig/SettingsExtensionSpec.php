@@ -29,10 +29,10 @@ final class SettingsExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Twig\SettingsExtension');
+        $this->shouldHaveType(SettingsExtension::class);
     }
 
-    function it_should_be_a_Twig_extension()
+    function it_should_be_a_twig_extension()
     {
         $this->shouldHaveType(\Twig_Extension::class);
     }
