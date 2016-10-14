@@ -54,9 +54,9 @@ interface MetadataInterface
     /**
      * @param string $name
      *
-     * @throws \InvalidArgumentException
-     *
      * @return string|array
+     *
+     * @throws \InvalidArgumentException
      */
     public function getParameter($name);
 
@@ -68,7 +68,7 @@ interface MetadataInterface
     public function getParameters();
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return bool
      */
@@ -77,14 +77,14 @@ interface MetadataInterface
     /**
      * @param string $name
      *
-     * @throws \InvalidArgumentException
-     *
      * @return string|array
+     *
+     * @throws \InvalidArgumentException
      */
     public function getClass($name);
 
     /**
-     * @param $name
+     * @param string $name
      *
      * @return bool
      */

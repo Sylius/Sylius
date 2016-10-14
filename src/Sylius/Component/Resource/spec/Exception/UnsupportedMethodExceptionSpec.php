@@ -12,8 +12,11 @@
 namespace spec\Sylius\Component\Resource\Exception;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
+ * @mixin UnsupportedMethodException
+ *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class UnsupportedMethodExceptionSpec extends ObjectBehavior
@@ -25,7 +28,7 @@ final class UnsupportedMethodExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Exception\UnsupportedMethodException');
+        $this->shouldHaveType(UnsupportedMethodException::class);
     }
 
     function it_extends_exception()

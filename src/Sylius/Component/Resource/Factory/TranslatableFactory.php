@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TranslatableFactory implements TranslatableFactoryInterface
+final class TranslatableFactory implements TranslatableFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -42,6 +42,8 @@ class TranslatableFactory implements TranslatableFactoryInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnexpectedTypeException
      */
     public function createNew()
     {

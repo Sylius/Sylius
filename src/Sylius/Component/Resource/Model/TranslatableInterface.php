@@ -17,8 +17,6 @@ namespace Sylius\Component\Resource\Model;
 interface TranslatableInterface
 {
     /**
-     * Translation helper method.
-     *
      * @param string $locale
      *
      * @return TranslationInterface

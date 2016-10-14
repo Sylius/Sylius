@@ -12,8 +12,6 @@
 namespace Sylius\Component\Resource\Factory;
 
 /**
- * Interface for factories creating translatable resources.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TranslatableFactoryInterface extends FactoryInterface

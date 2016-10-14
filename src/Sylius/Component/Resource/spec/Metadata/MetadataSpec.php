@@ -12,10 +12,11 @@
 namespace spec\Sylius\Component\Resource\Metadata;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Metadata\Metadata;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 /**
- * @mixin \Sylius\Component\Resource\Metadata\Metadata
+ * @mixin Metadata
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -42,7 +43,7 @@ final class MetadataSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Metadata\Metadata');
+        $this->shouldHaveType(Metadata::class);
     }
 
     function it_implements_metadata_interface()
