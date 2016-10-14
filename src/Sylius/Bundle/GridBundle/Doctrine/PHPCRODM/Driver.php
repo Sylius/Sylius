@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
+use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
-use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 
-class Driver implements DriverInterface
+final class Driver implements DriverInterface
 {
     /**
      * Driver name

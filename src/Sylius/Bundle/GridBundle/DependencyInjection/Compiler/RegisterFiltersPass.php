@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RegisterFiltersPass implements CompilerPassInterface
+final class RegisterFiltersPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

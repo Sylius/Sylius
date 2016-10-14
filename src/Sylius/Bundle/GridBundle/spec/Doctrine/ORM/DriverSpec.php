@@ -15,7 +15,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\GridBundle\Doctrine\ORM\DataSource;
 use Sylius\Bundle\GridBundle\Doctrine\ORM\Driver;
 use Sylius\Component\Grid\Data\DriverInterface;
@@ -35,7 +34,7 @@ final class DriverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\GridBundle\Doctrine\ORM\Driver');
+        $this->shouldHaveType(Driver::class);
     }
 
     function it_implements_grid_driver()

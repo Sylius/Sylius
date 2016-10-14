@@ -11,25 +11,22 @@
 
 namespace spec\Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Doctrine\ODM\PHPCR\DocumentManagerInterface;
-use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\DataSource;
-use Sylius\Component\Grid\Data\DataSourceInterface;
 use Doctrine\Common\Collections\Expr\Comparison;
-use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
-use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
-use Doctrine\ODM\PHPCR\Query\Builder\ConstraintAndx;
 use Doctrine\Common\Collections\Expr\Value;
 use Doctrine\ODM\PHPCR\Query\Builder\ConstraintComparison;
 use Doctrine\ODM\PHPCR\Query\Builder\ConstraintOrx;
-use Sylius\Component\Grid\Parameters;
-use Pagerfanta\Pagerfanta;
 use Doctrine\ODM\PHPCR\Query\Builder\OrderBy;
 use Doctrine\ODM\PHPCR\Query\Builder\Ordering;
+use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
+use Pagerfanta\Pagerfanta;
+use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\DataSource;
+use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
+use Sylius\Component\Grid\Data\DataSourceInterface;
+use Sylius\Component\Grid\Parameters;
 
 /**
- * @mixin Driver
+ * @mixin DataSource
  */
 final class DataSourceSpec extends ObjectBehavior
 {

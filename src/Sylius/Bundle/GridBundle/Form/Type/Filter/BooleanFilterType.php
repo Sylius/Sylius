@@ -13,8 +13,8 @@ namespace Sylius\Bundle\GridBundle\Form\Type\Filter;
 
 use Sylius\Component\Grid\Filter\BooleanFilter;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -24,7 +24,7 @@ class BooleanFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
@@ -36,12 +36,8 @@ class BooleanFilterType extends AbstractType
                     BooleanFilter::FALSE => 'sylius.ui.no_label',
                 ],
             ])
-            ->setOptional([
-                'field'
-            ])
-            ->setAllowedTypes([
-                'field' => ['string']
-            ])
+            ->setDefined('field')
+            ->setAllowedTypes('field', 'string')
         ;
     }
 
@@ -50,7 +46,7 @@ class BooleanFilterType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**

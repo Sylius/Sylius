@@ -11,13 +11,15 @@
 
 namespace spec\Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Doctrine\Common\Collections\ExpressionBuilder as CollectionsExpressionBuilder;
-use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
 use Doctrine\Common\Collections\Expr\Comparison;
+use Doctrine\Common\Collections\ExpressionBuilder as CollectionsExpressionBuilder;
+use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
 use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExtraComparison;
 
+/**
+ * @mixin ExpressionBuilder
+ */
 final class ExpressionBuilderSpec extends ObjectBehavior
 {
     function let(CollectionsExpressionBuilder $expressionBuilder)

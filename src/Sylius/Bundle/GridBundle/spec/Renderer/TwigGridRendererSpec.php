@@ -46,7 +46,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\GridBundle\Renderer\TwigGridRenderer');
+        $this->shouldHaveType(TwigGridRenderer::class);
     }
 
     function it_is_a_grid_renderer()

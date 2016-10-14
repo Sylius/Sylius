@@ -11,14 +11,14 @@
 
 namespace spec\Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Grid\Data\DriverInterface;
-use Sylius\Component\Grid\Parameters;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use Doctrine\ODM\PHPCR\DocumentRepository;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
+use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\DataSource;
+use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\Driver;
+use Sylius\Component\Grid\Data\DriverInterface;
+use Sylius\Component\Grid\Parameters;
 
 /**
  * @mixin Driver
@@ -32,7 +32,7 @@ final class DriverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\Driver');
+        $this->shouldHaveType(Driver::class);
     }
 
     function it_implements_grid_driver()

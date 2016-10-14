@@ -9,18 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\GridBundle\Tests\DependencyInjection;
+namespace Sylius\Bundle\GridBundle\Tests\Doctrine\PHPCRODM;
 
-use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
-use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionVisitor;
-use Doctrine\Common\Collections\Expr\Comparison;
-use Doctrine\ODM\PHPCR\Query\Builder\ConverterInterface;
-use Doctrine\ODM\PHPCR\Query\Builder\OperandStaticLiteral;
-use Doctrine\ODM\PHPCR\Query\Builder\OperandDynamicField;
-use Doctrine\ODM\PHPCR\Query\Builder\ConstraintComparison;
-use Doctrine\ODM\PHPCR\Query\Builder\AbstractNode;
 use Doctrine\ODM\PHPCR\Query\Builder\AbstractLeafNode;
+use Doctrine\ODM\PHPCR\Query\Builder\AbstractNode;
+use Doctrine\ODM\PHPCR\Query\Builder\ConstraintComparison;
 use Doctrine\ODM\PHPCR\Query\Builder\ConstraintFieldIsset;
+use Doctrine\ODM\PHPCR\Query\Builder\OperandDynamicField;
+use Doctrine\ODM\PHPCR\Query\Builder\OperandStaticLiteral;
 
 /**
  * Creates a string representation of any given PHPCR-ODM QueryBuilder

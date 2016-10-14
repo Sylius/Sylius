@@ -18,7 +18,7 @@ use Sylius\Component\Grid\Parameters;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Driver implements DriverInterface
+final class Driver implements DriverInterface
 {
     const NAME = 'doctrine/orm';
 
