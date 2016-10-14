@@ -17,11 +17,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
- * Adds all resources to the registry.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RegisterResourcesPass implements CompilerPassInterface
+final class RegisterResourcesPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

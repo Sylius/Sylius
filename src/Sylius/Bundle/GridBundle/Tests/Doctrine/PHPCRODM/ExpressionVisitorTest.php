@@ -9,22 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\GridBundle\Tests\DependencyInjection;
+namespace Sylius\Bundle\GridBundle\Tests\Doctrine\PHPCRODM;
 
+use Doctrine\Common\Collections\Expr\Comparison;
+use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionVisitor;
-use Doctrine\Common\Collections\Expr\Comparison;
-use Doctrine\ODM\PHPCR\Query\Builder\AbstractNode;
-use Doctrine\ODM\PHPCR\Query\Builder\AbstractLeafNode;
-use Doctrine\ODM\PHPCR\Query\Builder\OperandDynamicField;
-use Doctrine\ODM\PHPCR\Query\Builder\ConstraintComparison;
-use Doctrine\ODM\PHPCR\Query\Builder\OperandStaticLiteral;
-use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExtraComparison;
 
-require(__DIR__ . '/QueryBuilderWalker.php');
-
-class ExpressionVisitorTest extends \PHPUnit_Framework_TestCase
+final class ExpressionVisitorTest extends \PHPUnit_Framework_TestCase
 {
     private $queryBuilder;
     private $visitor;

@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\GridBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
@@ -20,7 +19,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusGridExtension extends Extension
+final class SyliusGridExtension extends Extension
 {
     /**
      * {@inheritdoc}

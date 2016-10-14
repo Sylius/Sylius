@@ -14,26 +14,26 @@ namespace Sylius\Component\Registry;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ServiceRegistry implements ServiceRegistryInterface
+final class ServiceRegistry implements ServiceRegistryInterface
 {
     /**
      * @var array
      */
-    protected $services = [];
+    private $services = [];
 
     /**
      * Interface which is required by all services.
      *
      * @var string
      */
-    protected $interface;
+    private $interface;
 
     /**
      * Human readable context for these services, e.g. "grid field"
      *
      * @var string
      */
-    protected $context;
+    private $context;
 
     /**
      * @param string $interface

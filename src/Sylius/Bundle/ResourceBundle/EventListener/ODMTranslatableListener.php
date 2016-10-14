@@ -23,25 +23,19 @@ use Sylius\Component\Resource\Model\TranslationInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Prezent Internet B.V. <info@prezent.nl>
  */
-class ODMTranslatableListener implements EventSubscriber
+final class ODMTranslatableListener implements EventSubscriber
 {
     /**
-     * Locale to use for translations.
-     *
      * @var string
      */
     private $currentLocale;
 
     /**
-     * Locale to use when the current locale is not available.
-     *
      * @var string
      */
     private $fallbackLocale;
 
     /**
-     * Mapping.
-     *
      * @var array
      */
     private $mappings;

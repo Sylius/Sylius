@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Grid\Filter;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Filter\StringFilter;
@@ -27,7 +26,7 @@ final class StringFilterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Filter\StringFilter');
+        $this->shouldHaveType(StringFilter::class);
     }
 
     function it_implements_filter_interface()
@@ -62,8 +61,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_data_containing_empty_strings(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    )
-    {
+    ) {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->isNull('firstName')->willReturn('EXPR');
@@ -87,8 +85,7 @@ final class StringFilterSpec extends ObjectBehavior
     function it_filters_data_containing_a_string(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
-    )
-    {
+    ) {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR');

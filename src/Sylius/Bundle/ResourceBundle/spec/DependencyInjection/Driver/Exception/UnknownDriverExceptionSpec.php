@@ -12,8 +12,11 @@
 namespace spec\Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException;
 
 /**
+ * @mixin UnknownDriverException
+ *
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
 final class UnknownDriverExceptionSpec extends ObjectBehavior
@@ -25,7 +28,7 @@ final class UnknownDriverExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException');
+        $this->shouldHaveType(UnknownDriverException::class);
     }
 
     function it_extends_exception()

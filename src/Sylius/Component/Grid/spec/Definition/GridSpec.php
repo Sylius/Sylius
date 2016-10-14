@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Grid\Definition;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\ActionGroup;
 use Sylius\Component\Grid\Definition\Field;
@@ -37,7 +36,7 @@ final class GridSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Definition\Grid');
+        $this->shouldHaveType(Grid::class);
     }
 
     function it_has_code()

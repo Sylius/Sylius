@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Taxation\Calculator;
 
-use Sylius\Component\Registry\ServiceRegistry;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
@@ -20,14 +20,14 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 final class DelegatingCalculator implements CalculatorInterface
 {
     /**
-     * @var ServiceRegistry
+     * @var ServiceRegistryInterface
      */
     private $calculatorsRegistry;
 
     /**
-     * @param ServiceRegistry $serviceRegistry
+     * @param ServiceRegistryInterface $serviceRegistry
      */
-    public function __construct(ServiceRegistry $serviceRegistry)
+    public function __construct(ServiceRegistryInterface $serviceRegistry)
     {
         $this->calculatorsRegistry = $serviceRegistry;
     }

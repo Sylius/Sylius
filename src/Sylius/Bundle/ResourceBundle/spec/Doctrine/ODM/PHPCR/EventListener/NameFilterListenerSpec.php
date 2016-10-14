@@ -11,26 +11,20 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameFilterListener;
-use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
-use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
-use PHPCR\NodeInterface;
+use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
+use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameFilterListener;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
  * @author Daniel Leech <daniel@dantleech.com>
  */
 final class NameFilterListenerSpec extends ObjectBehavior
 {
-    function let(
-        DocumentManagerInterface $documentManager
-    )
+    function let(DocumentManagerInterface $documentManager)
     {
-        $this->beConstructedWith(
-            $documentManager
-        );
+        $this->beConstructedWith($documentManager);
     }
 
     function it_is_initializable()
@@ -42,8 +36,7 @@ final class NameFilterListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
-    )
-    {
+    ) {
         $document = new \stdClass();
         $event->getSubject()->willReturn($document);
         $documentManager->getClassMetadata('stdClass')->willReturn($metadata);
@@ -56,8 +49,7 @@ final class NameFilterListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
-    )
-    {
+    ) {
         $document = new \stdClass();
         $event->getSubject()->willReturn($document);
         $documentManager->getClassMetadata('stdClass')->willReturn($metadata);
@@ -72,8 +64,7 @@ final class NameFilterListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
-    )
-    {
+    ) {
         $this->beConstructedWith($documentManager, '_');
 
         $document = new \stdClass();

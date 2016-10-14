@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
  * @author Ivan Molchanov <ivan.molchanov@opensoftdev.ru>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
+final class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 {
     /**
      * @return array

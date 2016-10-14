@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 /**
  * @author Ben Davies <ben.davies@gmail.com>
  */
-class ORMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
+final class ORMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
 {
     /**
      * @return array

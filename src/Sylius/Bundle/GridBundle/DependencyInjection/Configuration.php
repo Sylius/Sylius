@@ -19,7 +19,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -56,8 +56,8 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('drivers')
                     ->info('Enable drivers which are distributed with this bundle')
                     ->validate()
-                    ->ifTrue(function ($value) use ($validDrivers) { 
-                        return 0 !== count(array_diff($value, $validDrivers)); 
+                    ->ifTrue(function ($value) use ($validDrivers) {
+                        return 0 !== count(array_diff($value, $validDrivers));
                     })
                         ->thenInvalid(sprintf('Invalid driver specified in %%s, valid drivers: ["%s"]', implode('", "', $validDrivers)))
                     ->end()

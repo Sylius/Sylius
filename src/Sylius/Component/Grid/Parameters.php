@@ -14,7 +14,7 @@ namespace Sylius\Component\Grid;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Parameters
+final class Parameters
 {
     /**
      * @var array

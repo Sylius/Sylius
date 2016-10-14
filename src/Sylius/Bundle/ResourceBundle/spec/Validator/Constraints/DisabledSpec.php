@@ -12,10 +12,12 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Validator\Constraints\Disabled;
+use Sylius\Bundle\ResourceBundle\Validator\DisabledValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @mixin \Sylius\Bundle\ResourceBundle\Validator\Constraints\Disabled
+ * @mixin Disabled
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
@@ -23,7 +25,7 @@ final class DisabledSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Validator\Constraints\Disabled');
+        $this->shouldHaveType(Disabled::class);
     }
 
     function it_is_constraint()
@@ -41,8 +43,8 @@ final class DisabledSpec extends ObjectBehavior
         $this->getTargets()->shouldContain(Constraint::CLASS_CONSTRAINT);
     }
 
-    function it_is_validated_by_service()
+    function it_is_validated_by_disabled_validator()
     {
-        $this->validatedBy()->shouldReturn('sylius_resource_disabled_validator');
+        $this->validatedBy()->shouldReturn(DisabledValidator::class);
     }
 }

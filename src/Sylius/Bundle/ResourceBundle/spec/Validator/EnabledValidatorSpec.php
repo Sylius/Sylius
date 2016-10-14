@@ -13,13 +13,14 @@ namespace spec\Sylius\Bundle\ResourceBundle\Validator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Validator\Constraints;
+use Sylius\Bundle\ResourceBundle\Validator\Constraints\Enabled;
+use Sylius\Bundle\ResourceBundle\Validator\EnabledValidator;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * @mixin \Sylius\Bundle\ResourceBundle\Validator\EnabledValidator
+ * @mixin EnabledValidator
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
@@ -32,7 +33,7 @@ final class EnabledValidatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Validator\EnabledValidator');
+        $this->shouldHaveType(EnabledValidator::class);
     }
 
     function it_is_constraint_validator()
@@ -40,46 +41,39 @@ final class EnabledValidatorSpec extends ObjectBehavior
         $this->shouldHaveType(ConstraintValidatorInterface::class);
     }
 
-    function it_does_not_apply_to_null_values(ExecutionContextInterface $context, Constraints\Enabled $constraint)
+    function it_does_not_apply_to_null_values(ExecutionContextInterface $context)
     {
         $context->addViolation(Argument::cetera())->shouldNotBeCalled();
 
-        $this->validate(null, $constraint);
+        $this->validate(null, new Enabled());
     }
 
-    function it_throws_an_exception_if_subject_does_not_implement_toggleable_interface(
-        ExecutionContextInterface $context,
-        Constraints\Enabled $constraint,
-        \stdClass $subject
-    ) {
+    function it_throws_an_exception_if_subject_does_not_implement_toggleable_interface(ExecutionContextInterface $context)
+    {
         $context->addViolation(Argument::cetera())->shouldNotBeCalled();
 
-        $this->shouldThrow(\InvalidArgumentException::class)->duringValidate($subject, $constraint);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringValidate(new \stdClass(), new Enabled());
     }
 
     function it_adds_violation_if_subject_is_disabled(
         ExecutionContextInterface $context,
-        Constraints\Enabled $constraint,
         ToggleableInterface $subject
     ) {
-        $constraint->message = 'Violation message';
-
         $subject->isEnabled()->shouldBeCalled()->willReturn(false);
 
-        $context->addViolation($constraint->message, Argument::cetera())->shouldBeCalled();
+        $context->addViolation(Argument::cetera())->shouldBeCalled();
 
-        $this->validate($subject, $constraint);
+        $this->validate($subject, new Enabled());
     }
 
     function it_does_not_add_violation_if_subject_is_enabled(
         ExecutionContextInterface $context,
-        Constraints\Enabled $constraint,
         ToggleableInterface $subject
     ) {
         $subject->isEnabled()->shouldBeCalled()->willReturn(true);
 
         $context->addViolation(Argument::cetera())->shouldNotBeCalled();
 
-        $this->validate($subject, $constraint);
+        $this->validate($subject, new Enabled());
     }
 }

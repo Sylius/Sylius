@@ -14,11 +14,11 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\DriverProvider;
 use Sylius\Component\Resource\Metadata\Metadata;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

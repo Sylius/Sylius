@@ -14,6 +14,9 @@ namespace spec\Sylius\Component\Resource\Event;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Event\ResourceEvent;
 
+/**
+ * @mixin ResourceEvent
+ */
 final class ResourceEventSpec extends ObjectBehavior
 {
     function let()
@@ -23,7 +26,7 @@ final class ResourceEventSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Event\ResourceEvent');
+        $this->shouldHaveType(ResourceEvent::class);
     }
 
     function it_stops_event_propagation()
@@ -49,7 +52,7 @@ final class ResourceEventSpec extends ObjectBehavior
 
     function its_message_type_is_mutable()
     {
-        $this->setMessageType(ResourceEvent::TYPE_SUCCESS)->shouldReturn($this);
+        $this->setMessageType(ResourceEvent::TYPE_SUCCESS);
         $this->getMessageType()->shouldReturn(ResourceEvent::TYPE_SUCCESS);
     }
 
@@ -60,7 +63,7 @@ final class ResourceEventSpec extends ObjectBehavior
 
     function its_message_is_mutable()
     {
-        $this->setMessage('message')->shouldReturn($this);
+        $this->setMessage('message');
         $this->getMessage()->shouldReturn('message');
     }
 
@@ -71,7 +74,7 @@ final class ResourceEventSpec extends ObjectBehavior
 
     function its_message_parameter_is_mutable()
     {
-        $this->setMessageParameters(['parameters'])->shouldReturn($this);
+        $this->setMessageParameters(['parameters']);
         $this->getMessageParameters()->shouldReturn(['parameters']);
     }
 }

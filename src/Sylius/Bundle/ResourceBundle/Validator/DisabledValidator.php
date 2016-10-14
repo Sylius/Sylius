@@ -18,7 +18,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class DisabledValidator extends ConstraintValidator
+final class DisabledValidator extends ConstraintValidator
 {
     /**
      * {@inheritdoc}

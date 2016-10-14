@@ -11,15 +11,11 @@
 
 namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
-use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
-use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
-use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Doctrine\Common\Collections\Expr\Comparison;
-use Doctrine\Common\Collections\Expr\Value;
-use Doctrine\ODM\PHPCR\Query\Builder\AbstractNode;
-use Doctrine\ODM\PHPCR\Query\Builder\OperandFactory;
+use Doctrine\Common\Collections\Expr\CompositeExpression;
 use Doctrine\Common\Collections\Expr\Expression;
-use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExtraComparison;
+use Doctrine\ODM\PHPCR\Query\Builder\AbstractNode;
+use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 
 /**
  * Walks a Doctrine\Commons\Expr object graph and builds up a PHPCR-ODM
@@ -83,21 +79,9 @@ class ExpressionVisitor
 
             case ExtraComparison::IS_NOT_NULL:
                 return $parentNode->fieldIsset($this->getField($field));
-
-            default:
-                throw new \RuntimeException("Unknown comparison operator: " . $comparison->getOperator());
         }
 
-        return $parentNode;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function walkValue(Value $value, OperandFactory $parentNode)
-    {
-        throw new \BadMethodCallException('What is this even used for?');
-        return $parentNode->literal($value->getValue());
+        throw new \RuntimeException('Unknown comparison operator: ' . $comparison->getOperator());
     }
 
     /**
@@ -147,7 +131,7 @@ class ExpressionVisitor
      * Walk the given expression to build up the PHPCR-ODM query builder.
      *
      * @param Expression $expr
-     * @param AbstractNode $parentNode
+     * @param AbstractNode|null $parentNode
      */
     public function dispatch(Expression $expr, AbstractNode $parentNode = null)
     {
@@ -159,22 +143,28 @@ class ExpressionVisitor
             case ($expr instanceof Comparison):
                 return $this->walkComparison($expr, $parentNode);
 
-            case ($expr instanceof Value):
-                return $this->walkValue($expr, $parentNode);
-
             case ($expr instanceof CompositeExpression):
                 return $this->walkCompositeExpression($expr, $parentNode);
-
-            default:
-                throw new \RuntimeException("Unknown Expression " . get_class($expr));
         }
+
+        throw new \RuntimeException('Unknown Expression: ' . get_class($expr));
     }
 
+    /**
+     * @param string $field
+     *
+     * @return string
+     */
     private function getField($field)
     {
         return Driver::QB_SOURCE_ALIAS . '.' . $field;
     }
 
+    /**
+     * @param AbstractNode $parentNode
+     * @param string $field
+     * @param array $values
+     */
     private function getInConstraint(AbstractNode $parentNode, $field, array $values)
     {
         $orNode = $parentNode->orx();

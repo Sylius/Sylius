@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
+final class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
 {
     /**
      * @var DataProviderInterface

@@ -16,8 +16,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Resource controller configuration.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
@@ -27,17 +25,17 @@ class RequestConfiguration
     /**
      * @var Request
      */
-    protected $request;
+    private $request;
 
     /**
      * @var MetadataInterface
      */
-    protected $metadata;
+    private $metadata;
 
     /**
      * @var Parameters
      */
-    protected $parameters;
+    private $parameters;
 
     /**
      * @param MetadataInterface $metadata

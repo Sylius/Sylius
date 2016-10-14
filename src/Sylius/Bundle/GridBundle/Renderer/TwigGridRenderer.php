@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TwigGridRenderer implements GridRendererInterface
+final class TwigGridRenderer implements GridRendererInterface
 {
     /**
      * @var \Twig_Environment
@@ -89,8 +89,7 @@ class TwigGridRenderer implements GridRendererInterface
     }
 
     /**
-     * @param Field $field
-     * @param $data
+     * {@inheritdoc}
      */
     public function renderField(GridView $gridView, Field $field, $data)
     {
@@ -108,7 +107,8 @@ class TwigGridRenderer implements GridRendererInterface
      */
     public function renderAction(GridView $gridView, Action $action, $data = null)
     {
-        if (!isset($this->actionTemplates[$type = $action->getType()])) {
+        $type = $action->getType();
+        if (!isset($this->actionTemplates[$type])) {
             throw new \InvalidArgumentException(sprintf('Missing template for action type "%s".', $type));
         }
 
@@ -124,7 +124,8 @@ class TwigGridRenderer implements GridRendererInterface
      */
     public function renderFilter(GridView $gridView, Filter $filter)
     {
-        if (!isset($this->filterTemplates[$type = $filter->getType()])) {
+        $type = $type = $filter->getType();
+        if (!isset($this->filterTemplates[$type])) {
             throw new \InvalidArgumentException(sprintf('Missing template for filter type "%s".', $type));
         }
 

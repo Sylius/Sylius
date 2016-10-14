@@ -21,7 +21,7 @@ use Sylius\Component\Grid\Parameters;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DataSource implements DataSourceInterface
+final class DataSource implements DataSourceInterface
 {
     /**
      * @var QueryBuilder

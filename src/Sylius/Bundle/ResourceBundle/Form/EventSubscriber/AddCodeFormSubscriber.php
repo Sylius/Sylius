@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class AddCodeFormSubscriber implements EventSubscriberInterface
+final class AddCodeFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var string

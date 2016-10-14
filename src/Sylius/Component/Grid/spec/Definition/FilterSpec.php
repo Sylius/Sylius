@@ -11,9 +11,8 @@
 
 namespace spec\Sylius\Component\Grid\Definition;
 
-use Sylius\Component\Grid\Definition\Filter;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Component\Grid\Definition\Filter;
 
 /**
  * @mixin Filter
@@ -29,7 +28,7 @@ final class FilterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Definition\Filter');
+        $this->shouldHaveType(Filter::class);
     }
 
     function it_has_name()

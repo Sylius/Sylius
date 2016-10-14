@@ -63,11 +63,11 @@ class Field
      * @param string $name
      * @param string $type
      *
-     * @return Field
+     * @return self
      */
     public static function fromNameAndType($name, $type)
     {
-        return new Field($name, $type);
+        return new self($name, $type);
     }
 
     /**

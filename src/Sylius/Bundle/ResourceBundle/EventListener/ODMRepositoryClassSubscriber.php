@@ -18,7 +18,7 @@ use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 /**
  * @author Ben Davies <ben.davies@gmail.com>
  */
-class ODMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
+final class ODMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
 {
     /**
      * @return array

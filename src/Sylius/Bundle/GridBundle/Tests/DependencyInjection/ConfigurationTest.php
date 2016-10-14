@@ -18,7 +18,7 @@ use Sylius\Bundle\GridBundle\Doctrine\ORM\Driver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+final class ConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 

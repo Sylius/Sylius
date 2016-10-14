@@ -23,9 +23,9 @@
     </parameters>
 
     <services>
-        <service id="sylius.resource_registry" class="Sylius\Component\Resource\Metadata\Registry" />
+        <service id="sylius.resource_registry" class="Sylius\Component\Resource\Metadata\Registry" public="false" />
 
-        <service id="sylius.expression_language" class="Symfony\Component\DependencyInjection\ExpressionLanguage" />
+        <service id="sylius.expression_language" class="Symfony\Component\DependencyInjection\ExpressionLanguage" public="false" />
 
         <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\ResourceBundle\EventListener\ResourceDeleteSubscriber">
             <argument type="service" id="router" />
@@ -37,13 +37,6 @@
 
         <service id="sylius.form.extension.collection" class="Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension">
             <tag name="form.type_extension" alias="collection" />
-        </service>
-
-        <service id="sylius.validator.enabled" class="Sylius\Bundle\ResourceBundle\Validator\EnabledValidator">
-            <tag name="validator.constraint_validator" alias="sylius_resource_enabled_validator" />
-        </service>
-        <service id="sylius.validator.disabled" class="Sylius\Bundle\ResourceBundle\Validator\DisabledValidator">
-            <tag name="validator.constraint_validator" alias="sylius_resource_disabled_validator" />
         </service>
     </services>
 </container>

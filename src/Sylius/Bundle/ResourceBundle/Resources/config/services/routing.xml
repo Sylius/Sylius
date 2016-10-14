@@ -13,10 +13,11 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.routing.route_factory" class="Sylius\Bundle\ResourceBundle\Routing\RouteFactory" />
-        <service id="sylius.routing.loader.resource" class="Sylius\Bundle\ResourceBundle\Routing\ResourceLoader">
+        <service id="sylius.routing.loader.resource" class="Sylius\Bundle\ResourceBundle\Routing\ResourceLoader" public="false">
             <argument type="service" id="sylius.resource_registry" />
-            <argument type="service" id="sylius.routing.route_factory" />
+            <argument type="service">
+                <service class="Sylius\Bundle\ResourceBundle\Routing\RouteFactory" />
+            </argument>
             <tag name="routing.loader" />
         </service>
     </services>

@@ -18,7 +18,7 @@ use Sylius\Component\Grid\Parameters;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GridViewFactory implements GridViewFactoryInterface
+final class GridViewFactory implements GridViewFactoryInterface
 {
     /**
      * @var DataProviderInterface

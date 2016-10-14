@@ -35,7 +35,7 @@ final class PrioritizedServiceRegistrySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Registry\PrioritizedServiceRegistry');
+        $this->shouldHaveType(PrioritizedServiceRegistry::class);
     }
 
     function it_implements_prioritized_service_registry_interface()

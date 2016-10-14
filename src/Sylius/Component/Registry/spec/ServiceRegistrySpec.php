@@ -17,9 +17,12 @@ use PhpSpec\ObjectBehavior;
 use spec\Sylius\Component\Registry\Fixture\SampleServiceInterface;
 use Sylius\Component\Registry\ExistingServiceException;
 use Sylius\Component\Registry\NonExistingServiceException;
+use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
+ * @mixin ServiceRegistry
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ServiceRegistrySpec extends ObjectBehavior
@@ -31,7 +34,7 @@ final class ServiceRegistrySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Registry\ServiceRegistry');
+        $this->shouldHaveType(ServiceRegistry::class);
     }
 
     function it_implements_service_registry_interface()

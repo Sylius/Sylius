@@ -51,13 +51,11 @@ class Action
      * @param string $name
      * @param string $type
      *
-     * @return Action
+     * @return self
      */
     public static function fromNameAndType($name, $type)
     {
-        $field = new Action($name, $type);
-
-        return $field;
+        return new self($name, $type);
     }
 
     /**

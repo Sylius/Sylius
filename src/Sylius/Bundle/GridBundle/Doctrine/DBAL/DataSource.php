@@ -15,12 +15,13 @@ use Doctrine\DBAL\Query\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineDbalAdapter;
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Grid\Data\DataSourceInterface;
+use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Parameters;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DataSource implements DataSourceInterface
+final class DataSource implements DataSourceInterface
 {
     /**
      * @var QueryBuilder

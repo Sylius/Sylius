@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusGridBundle extends Bundle
+final class SyliusGridBundle extends Bundle
 {
     /**
      * {@inheritdoc}

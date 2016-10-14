@@ -11,25 +11,22 @@
 
 namespace spec\Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
-use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Doctrine\ODM\PHPCR\DocumentManagerInterface;
-use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\DataSource;
-use Sylius\Component\Grid\Data\DataSourceInterface;
 use Doctrine\Common\Collections\Expr\Comparison;
-use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
-use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
-use Doctrine\ODM\PHPCR\Query\Builder\ConstraintAndx;
 use Doctrine\Common\Collections\Expr\Value;
 use Doctrine\ODM\PHPCR\Query\Builder\ConstraintComparison;
 use Doctrine\ODM\PHPCR\Query\Builder\ConstraintOrx;
-use Sylius\Component\Grid\Parameters;
-use Pagerfanta\Pagerfanta;
 use Doctrine\ODM\PHPCR\Query\Builder\OrderBy;
 use Doctrine\ODM\PHPCR\Query\Builder\Ordering;
+use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
+use Pagerfanta\Pagerfanta;
+use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\DataSource;
+use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
+use Sylius\Component\Grid\Data\DataSourceInterface;
+use Sylius\Component\Grid\Parameters;
 
 /**
- * @mixin Driver
+ * @mixin DataSource
  */
 final class DataSourceSpec extends ObjectBehavior
 {
@@ -54,8 +51,7 @@ final class DataSourceSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ConstraintOrx $constraint,
         ConstraintComparison $comparisonConstraint
-    )
-    {
+    ) {
         $queryBuilder->orWhere()->willReturn($constraint);
         $value->getValue()->willReturn('value');
         $comparison->getValue()->willReturn($value);
@@ -72,8 +68,7 @@ final class DataSourceSpec extends ObjectBehavior
 
     function it_should_throw_an_exception_if_an_unknown_condition_is_passed(
         Comparison $comparison
-    )
-    {
+    ) {
         $this->shouldThrow(
             new \RuntimeException('Unknown restrict condition "foo"')
         )->during('restrict', [ $comparison, 'foo' ]);
@@ -81,29 +76,24 @@ final class DataSourceSpec extends ObjectBehavior
 
     function it_should_return_the_expression_builder(
         ExpressionBuilder $expressionBuilder
-    )
-    {
+    ) {
         $this->getExpressionBuilder()->shouldReturn($expressionBuilder);
     }
 
     function it_should_get_the_data(
-        ExpressionBuilder $expressionBuilder,
-        Parameters $parameters
-    )
-    {
+        ExpressionBuilder $expressionBuilder
+    ) {
         $expressionBuilder->getOrderBys()->willReturn([]);
-        $parameters->get('page', 1)->willReturn(1);
-        $this->getData($parameters)->shouldHaveType(Pagerfanta::class);
+
+        $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }
 
     function it_should_set_the_order_on_the_query_builder(
         QueryBuilder $queryBuilder,
         ExpressionBuilder $expressionBuilder,
-        Parameters $parameters,
         OrderBy $orderBy,
         Ordering $ordering
-    )
-    {
+    ) {
         $expressionBuilder->getOrderBys()->willReturn([
             'foo' => 'asc',
             'bar' => 'desc'
@@ -114,18 +104,15 @@ final class DataSourceSpec extends ObjectBehavior
         $ordering->field('o.foo')->shouldBeCalled();
         $ordering->field('o.bar')->shouldBeCalled();
 
-        $parameters->get('page', 1)->willReturn(1);
-        $this->getData($parameters)->shouldHaveType(Pagerfanta::class);
+        $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }
 
     function it_should_set_the_order_on_the_query_builder_as_fields_only(
         QueryBuilder $queryBuilder,
         ExpressionBuilder $expressionBuilder,
-        Parameters $parameters,
         OrderBy $orderBy,
         Ordering $ordering
-    )
-    {
+    ) {
         $expressionBuilder->getOrderBys()->willReturn([
             'foo',
             'bar',
@@ -136,7 +123,6 @@ final class DataSourceSpec extends ObjectBehavior
         $ordering->field('o.foo')->shouldBeCalled();
         $ordering->field('o.bar')->shouldBeCalled();
 
-        $parameters->get('page', 1)->willReturn(1);
-        $this->getData($parameters)->shouldHaveType(Pagerfanta::class);
+        $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }
 }

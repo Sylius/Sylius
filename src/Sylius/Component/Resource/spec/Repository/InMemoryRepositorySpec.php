@@ -24,6 +24,8 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 require_once __DIR__ . '/../Fixtures/SampleBookResourceInterface.php';
 
 /**
+ * @mixin InMemoryRepository
+ *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class InMemoryRepositorySpec extends ObjectBehavior
