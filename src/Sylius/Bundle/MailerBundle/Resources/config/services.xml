@@ -39,7 +39,7 @@
                 <argument type="service" id="event_dispatcher" />
             </call>
         </service>
-        <service id="sylius.email_renderer.adapter.twig" class="Sylius\Bundle\MailerBundle\Renderer\Adapter\TwigAdapter" parent="sylius.email_renderer.adapter.abstract">
+        <service id="sylius.email_renderer.adapter.twig" class="Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter" parent="sylius.email_renderer.adapter.abstract">
             <argument type="service" id="twig" />
         </service>
 

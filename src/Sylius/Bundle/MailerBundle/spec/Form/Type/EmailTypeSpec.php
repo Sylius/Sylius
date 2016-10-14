@@ -13,12 +13,15 @@ namespace spec\Sylius\Bundle\MailerBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\MailerBundle\Form\Type\EmailType;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin EmailType
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class EmailTypeSpec extends ObjectBehavior
@@ -30,7 +33,7 @@ final class EmailTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MailerBundle\Form\Type\EmailType');
+        $this->shouldHaveType(EmailType::class);
     }
 
     function it_is_a_form_type()
@@ -38,7 +41,7 @@ final class EmailTypeSpec extends ObjectBehavior
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_should_build_form_with_proper_fields(FormBuilder $builder)
+    function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
             ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
@@ -56,29 +59,29 @@ final class EmailTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('senderAddress', 'email', argument::any())
-            ->willreturn($builder)
+            ->add('senderAddress', 'email', Argument::any())
+            ->willReturn($builder)
         ;
 
         $builder
-            ->add('content', 'textarea', argument::any())
-            ->willreturn($builder)
+            ->add('content', 'textarea', Argument::any())
+            ->willReturn($builder)
         ;
 
         $builder
-            ->add('subject', 'text', argument::any())
-            ->willreturn($builder)
+            ->add('subject', 'text', Argument::any())
+            ->willReturn($builder)
         ;
 
         $builder
-            ->add('template', 'sylius_email_template_choice', argument::any())
-            ->willreturn($builder)
+            ->add('template', 'sylius_email_template_choice', Argument::any())
+            ->willReturn($builder)
         ;
 
         $this->buildForm($builder, []);
     }
 
-    function it_should_define_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
+    function it_defines_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([

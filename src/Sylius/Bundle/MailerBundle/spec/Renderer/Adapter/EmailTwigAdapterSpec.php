@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\MailerBundle\Renderer\Adapter;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\MailerBundle\Renderer\Adapter\EmailTwigAdapter;
 use Sylius\Component\Mailer\Event\EmailRenderEvent;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter;
@@ -20,7 +21,10 @@ use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-final class TwigAdapterSpec extends ObjectBehavior
+/**
+ * @mixin EmailTwigAdapter
+ */
+final class EmailTwigAdapterSpec extends ObjectBehavior
 {
     function let(\Twig_Environment $twig)
     {
@@ -29,7 +33,7 @@ final class TwigAdapterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MailerBundle\Renderer\Adapter\TwigAdapter');
+        $this->shouldHaveType(EmailTwigAdapter::class);
     }
 
     function it_is_an_adapter()
@@ -38,11 +42,11 @@ final class TwigAdapterSpec extends ObjectBehavior
     }
 
     function it_renders_an_email(
-        $twig,
-        EmailInterface $email,
+        \Twig_Environment $twig,
         \Twig_Template $template,
-        EventDispatcherInterface $dispatcher,
+        EmailInterface $email,
         EmailRenderEvent $event,
+        EventDispatcherInterface $dispatcher,
         RenderedEmail $renderedEmail
     ) {
         $this->setEventDispatcher($dispatcher);
@@ -67,8 +71,8 @@ final class TwigAdapterSpec extends ObjectBehavior
 
     function it_creates_and_renders_an_email(
         EmailInterface $email,
-        EventDispatcherInterface $dispatcher,
         EmailRenderEvent $event,
+        EventDispatcherInterface $dispatcher,
         RenderedEmail $renderedEmail
     ) {
         $this->setEventDispatcher($dispatcher);

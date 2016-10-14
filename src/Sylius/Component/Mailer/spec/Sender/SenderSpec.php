@@ -14,7 +14,6 @@ namespace spec\Sylius\Component\Mailer\Sender;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Provider\DefaultSettingsProviderInterface;
-use Sylius\Component\Mailer\Provider\EmailProvider;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
 use Sylius\Component\Mailer\Renderer\Adapter\AdapterInterface as RendererAdapterInterface;
 use Sylius\Component\Mailer\Renderer\RenderedEmail;
@@ -64,7 +63,7 @@ final class SenderSpec extends ObjectBehavior
 
     function it_does_not_send_disabled_emails(
         EmailInterface $email,
-        EmailProvider $provider,
+        EmailProviderInterface $provider,
         RendererAdapterInterface $rendererAdapter,
         SenderAdapterInterface $senderAdapter
     ) {

@@ -17,7 +17,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-final class EmailRenderEvent extends Event
+class EmailRenderEvent extends Event
 {
     /**
      * @var RenderedEmail

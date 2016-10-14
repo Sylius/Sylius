@@ -18,8 +18,6 @@ use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 
 /**
- * Default Sylius sender.
- *
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
@@ -54,7 +52,8 @@ class SwiftMailerAdapter extends AbstractAdapter
         $message = \Swift_Message::newInstance()
             ->setSubject($renderedEmail->getSubject())
             ->setFrom([$senderAddress => $senderName])
-            ->setTo($recipients);
+            ->setTo($recipients)
+        ;
 
         $message->setBody($renderedEmail->getBody(), 'text/html');
 

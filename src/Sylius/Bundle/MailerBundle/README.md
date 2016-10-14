@@ -19,7 +19,7 @@ $ bin/phpspec run -f pretty
 Documentation
 -------------
 
-Documentation is available on [**docs.sylius.org**](http://sylius.org/en/latest/bundles/SyliusMailerBundle/index.html).
+Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/latest/bundles/SyliusMailerBundle/index.html).
 
 Contributing
 ------------

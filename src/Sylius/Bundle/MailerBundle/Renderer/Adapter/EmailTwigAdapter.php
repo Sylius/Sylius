@@ -18,13 +18,11 @@ use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 
 /**
- * Default Sylius Twig renderer.
- *
  * @author Daniel Richter <nexyz9@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-class TwigAdapter extends AbstractAdapter
+class EmailTwigAdapter extends AbstractAdapter
 {
     /**
      * @var \Twig_Environment
@@ -44,6 +42,25 @@ class TwigAdapter extends AbstractAdapter
      */
     public function render(EmailInterface $email, array $data = [])
     {
+        $renderedEmail = $this->getRenderedEmail($email, $data);
+
+        /** @var EmailRenderEvent $event */
+        $event = $this->dispatcher->dispatch(
+            SyliusMailerEvents::EMAIL_PRE_RENDER,
+            new EmailRenderEvent($renderedEmail)
+        );
+
+        return $event->getRenderedEmail();
+    }
+
+    /**
+     * @param EmailInterface $email
+     * @param array $data
+     *
+     * @return RenderedEmail
+     */
+    private function getRenderedEmail(EmailInterface $email, array $data)
+    {
         if (null !== $email->getTemplate()) {
             $data = $this->twig->mergeGlobals($data);
 
@@ -52,22 +69,18 @@ class TwigAdapter extends AbstractAdapter
 
             $subject = $template->renderBlock('subject', $data);
             $body = $template->renderBlock('body', $data);
-        } else {
-            $twig = new \Twig_Environment(new \Twig_Loader_Array([]));
 
-            $subjectTemplate = $twig->createTemplate($email->getSubject());
-            $bodyTemplate = $twig->createTemplate($email->getContent());
-
-            $subject = $subjectTemplate->render($data);
-            $body = $bodyTemplate->render($data);
+            return new RenderedEmail($subject, $body);
         }
 
-        /** @var EmailRenderEvent $event */
-        $event = $this->dispatcher->dispatch(
-            SyliusMailerEvents::EMAIL_PRE_RENDER,
-            new EmailRenderEvent(new RenderedEmail($subject, $body))
-        );
+        $twig = new \Twig_Environment(new \Twig_Loader_Array([]));
 
-        return $event->getRenderedEmail();
+        $subjectTemplate = $twig->createTemplate($email->getSubject());
+        $bodyTemplate = $twig->createTemplate($email->getContent());
+
+        $subject = $subjectTemplate->render($data);
+        $body = $bodyTemplate->render($data);
+
+        return new RenderedEmail($subject, $body);
     }
 }

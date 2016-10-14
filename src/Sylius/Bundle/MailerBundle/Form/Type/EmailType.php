@@ -28,8 +28,8 @@ class EmailType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('enabled', 'checkbox', [
-                'required' => false,
                 'label' => 'sylius.form.email.enabled',
+                'required' => false,
             ])
             ->add('senderName', 'text', [
                 'label' => 'sylius.form.email.sender_name',
