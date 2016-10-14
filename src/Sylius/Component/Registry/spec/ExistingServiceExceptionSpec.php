@@ -12,8 +12,11 @@
 namespace spec\Sylius\Component\Registry;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Registry\ExistingServiceException;
 
 /**
+ * @mixin ExistingServiceException
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class ExistingServiceExceptionSpec extends ObjectBehavior
@@ -25,7 +28,7 @@ final class ExistingServiceExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Registry\ExistingServiceException');
+        $this->shouldHaveType(ExistingServiceException::class);
     }
 
     function it_is_an_exception()
@@ -35,6 +38,6 @@ final class ExistingServiceExceptionSpec extends ObjectBehavior
 
     function it_is_an_invalid_argument_exception()
     {
-        $this->shouldHaveType('InvalidArgumentException');
+        $this->shouldHaveType(\InvalidArgumentException::class);
     }
 }
