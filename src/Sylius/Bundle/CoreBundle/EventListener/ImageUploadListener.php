@@ -19,12 +19,12 @@ use Webmozart\Assert\Assert;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ImageUploadListener
+final class ImageUploadListener
 {
     /**
      * @var ImageUploaderInterface
      */
-    protected $uploader;
+    private $uploader;
 
     /**
      * @param ImageUploaderInterface $uploader

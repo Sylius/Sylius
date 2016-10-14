@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class InstallSampleDataCommand extends AbstractInstallCommand
+final class InstallSampleDataCommand extends AbstractInstallCommand
 {
     /**
      * {@inheritdoc}

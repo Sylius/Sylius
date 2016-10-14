@@ -12,14 +12,13 @@
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ImageUniqueCodeValidator extends ConstraintValidator
+final class ImageUniqueCodeValidator extends ConstraintValidator
 {
     /**
      * {@inheritdoc}

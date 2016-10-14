@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\Security\Core\Exception\AccountStatusException;
 
@@ -21,12 +21,12 @@ use Symfony\Component\Security\Core\Exception\AccountStatusException;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserAutoLoginListener
+final class UserAutoLoginListener
 {
     /**
      * @var UserLoginInterface
      */
-    protected $userLogin;
+    private $userLogin;
 
     /**
      * @param UserLoginInterface $userLogin

@@ -12,10 +12,13 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Form\DataTransformer\ArrayToStringTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
+ * @mixin ArrayToStringTransformer
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ArrayToStringTransformerSpec extends ObjectBehavior
@@ -27,7 +30,7 @@ final class ArrayToStringTransformerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\DataTransformer\ArrayToStringTransformer');
+        $this->shouldHaveType(ArrayToStringTransformer::class);
     }
 
     function it_implements_form_data_transformer_interface()

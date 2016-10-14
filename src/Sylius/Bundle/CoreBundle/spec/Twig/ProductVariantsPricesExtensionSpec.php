@@ -15,12 +15,11 @@ use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
 use Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension;
-use Sylius\Component\Core\Model\ProductInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- *
  * @mixin ProductVariantsPricesExtension
+ *
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ProductVariantsPricesExtensionSpec extends ObjectBehavior
 {

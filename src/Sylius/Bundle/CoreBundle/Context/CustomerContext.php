@@ -11,16 +11,16 @@
 
 namespace Sylius\Bundle\CoreBundle\Context;
 
-use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerContext implements CustomerContextInterface
+final class CustomerContext implements CustomerContextInterface
 {
     /**
      * @var TokenStorageInterface

@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class ChannelDeletionListener
+final class ChannelDeletionListener
 {
     /**
      * @var ChannelRepository

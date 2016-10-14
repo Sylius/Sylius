@@ -17,7 +17,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CannotDisableLocaleValidator extends ConstraintValidator
+final class CannotDisableLocaleValidator extends ConstraintValidator
 {
     /**
      * @var string

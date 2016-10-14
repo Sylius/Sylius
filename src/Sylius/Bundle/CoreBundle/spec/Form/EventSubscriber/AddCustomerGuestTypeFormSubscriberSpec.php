@@ -13,9 +13,9 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormEvent;
@@ -36,7 +36,7 @@ final class AddCustomerGuestTypeFormSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber');
+        $this->shouldHaveType(AddCustomerGuestTypeFormSubscriber::class);
     }
 
     function it_is_an_event_subscriber()

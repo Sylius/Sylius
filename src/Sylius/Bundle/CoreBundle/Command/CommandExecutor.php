@@ -22,7 +22,7 @@ use Symfony\Component\Process\Exception\RuntimeException;
  * @author Romain Monceau <romain@akeneo.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CommandExecutor
+final class CommandExecutor
 {
     /**
      * @var InputInterface

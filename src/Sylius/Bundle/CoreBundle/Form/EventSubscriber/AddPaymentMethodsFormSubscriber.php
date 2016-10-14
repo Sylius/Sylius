@@ -14,13 +14,11 @@ namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class AddPaymentMethodsFormSubscriber implements EventSubscriberInterface
+final class AddPaymentMethodsFormSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}

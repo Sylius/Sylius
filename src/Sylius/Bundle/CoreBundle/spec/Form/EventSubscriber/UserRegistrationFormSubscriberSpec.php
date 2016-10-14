@@ -21,15 +21,17 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
+ * @mixin UserRegistrationFormSubscriber
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class UserRegistrationFormSubscriberSpec extends ObjectBehavior
+final class UserRegistrationFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType(UserRegistrationFormSubscriber::class);
     }
-    
+
     function it_is_an_event_subscriber()
     {
         $this->shouldImplement(EventSubscriberInterface::class);

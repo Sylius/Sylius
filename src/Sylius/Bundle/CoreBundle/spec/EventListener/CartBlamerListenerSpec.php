@@ -32,7 +32,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CartBlamerListenerSpec extends ObjectBehavior
+final class CartBlamerListenerSpec extends ObjectBehavior
 {
     function let(ObjectManager $cartManager, CartContextInterface $cartContext)
     {
@@ -41,7 +41,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener');
+        $this->shouldHaveType(CartBlamerListener::class);
     }
 
     function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_implicit_login(

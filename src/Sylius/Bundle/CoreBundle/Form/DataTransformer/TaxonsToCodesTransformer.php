@@ -21,7 +21,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxonsToCodesTransformer implements DataTransformerInterface
+final class TaxonsToCodesTransformer implements DataTransformerInterface
 {
     /**
      * @var TaxonRepositoryInterface

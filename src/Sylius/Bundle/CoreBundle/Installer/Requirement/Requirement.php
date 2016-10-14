@@ -11,27 +11,27 @@
 
 namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
-class Requirement
+final class Requirement
 {
     /**
      * @var string
      */
-    protected $label;
+    private $label;
 
     /**
      * @var bool
      */
-    protected $fulfilled;
+    private $fulfilled;
 
     /**
      * @var bool
      */
-    protected $required;
+    private $required;
 
     /**
      * @var string|null
      */
-    protected $help;
+    private $help;
 
     /**
      * @param string $label

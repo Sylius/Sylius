@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CommandDirectoryChecker
+final class CommandDirectoryChecker
 {
     /**
      * @var string

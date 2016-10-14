@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\EventListener\MailerListener;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
@@ -32,7 +33,7 @@ final class MailerListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\MailerListener');
+        $this->shouldHaveType(MailerListener::class);
     }
 
     function it_throws_an_exception_if_event_subject_is_not_a_customer_instance_sending_confirmation(

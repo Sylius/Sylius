@@ -15,7 +15,7 @@ use RuntimeException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CheckRequirementsCommand extends AbstractInstallCommand
+final class CheckRequirementsCommand extends AbstractInstallCommand
 {
     /**
      * {@inheritdoc}

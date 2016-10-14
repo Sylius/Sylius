@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserRegistrationFormSubscriber implements EventSubscriberInterface
+final class UserRegistrationFormSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}

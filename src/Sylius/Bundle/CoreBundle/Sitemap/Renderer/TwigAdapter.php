@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace Sylius\Bundle\CoreBundle\Sitemap\Renderer;
 
 use Sylius\Bundle\CoreBundle\Sitemap\Exception\TemplateNotFoundException;
@@ -18,7 +18,7 @@ use Symfony\Component\Templating\EngineInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class TwigAdapter implements RendererAdapterInterface
+final class TwigAdapter implements RendererAdapterInterface
 {
     /**
      * @var EngineInterface

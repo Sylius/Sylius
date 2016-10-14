@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SetupCommand extends AbstractInstallCommand
+final class SetupCommand extends AbstractInstallCommand
 {
     /**
      * @var CurrencyInterface

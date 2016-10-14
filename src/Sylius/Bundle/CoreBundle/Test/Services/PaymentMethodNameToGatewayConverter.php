@@ -17,7 +17,7 @@ use Payum\Core\Registry\RegistryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PaymentMethodNameToGatewayConverter implements PaymentMethodNameToGatewayConverterInterface
+final class PaymentMethodNameToGatewayConverter implements PaymentMethodNameToGatewayConverterInterface
 {
     /**
      * @var RegistryInterface

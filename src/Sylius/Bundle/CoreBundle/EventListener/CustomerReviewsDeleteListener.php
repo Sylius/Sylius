@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class CustomerReviewsDeleteListener
+final class CustomerReviewsDeleteListener
 {
     /**
      * @var ReviewerReviewsRemoverInterface

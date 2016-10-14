@@ -16,9 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ImageUniqueCode;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\ImageUniqueCodeValidator;
-use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Model\ImageInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
@@ -32,12 +30,12 @@ final class ImageUniqueCodeValidatorSpec extends ObjectBehavior
     {
         $this->shouldHaveType(ImageUniqueCodeValidator::class);
     }
-    
+
     function it_extends_constraint_validator()
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }
-    
+
     function it_adds_violation_if_there_two_images_with_the_same_owner_which_have_same_codes(
         ImageInterface $firstImage,
         ImageInterface $secondImage

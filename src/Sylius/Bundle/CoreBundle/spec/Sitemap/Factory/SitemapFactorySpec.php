@@ -12,17 +12,21 @@
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactory;
 use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactoryInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\Sitemap;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 
 /**
+ * @mixin SitemapFactory
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactory');
+        $this->shouldHaveType(SitemapFactory::class);
     }
 
     function it_implements_sitemap_factory_interface()
@@ -30,31 +34,8 @@ final class SitemapFactorySpec extends ObjectBehavior
         $this->shouldImplement(SitemapFactoryInterface::class);
     }
 
-    function it_creates_empty_sitemap(SitemapInterface $sitemap)
+    function it_creates_empty_sitemap()
     {
-        $sitemap->getUrls()->willReturn([]);
-        $sitemap->getLastModification()->willReturn(null);
-        $sitemap->getLocalization()->willReturn(null);
-
-        $this->createNew()->shouldBeSameAs($sitemap);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMatchers()
-    {
-        return [
-            'beSameAs' => function ($subject, $key) {
-                if (!$subject instanceof SitemapInterface || !$key instanceof SitemapInterface) {
-                    return false;
-                }
-
-                return $subject->getLastModification() === $key->getLastModification()
-                    && $subject->getLocalization() === $key->getLocalization()
-                    && $subject->getUrls() === $key->getUrls()
-                ;
-            },
-        ];
+        $this->createNew()->shouldBeLike(new Sitemap());
     }
 }

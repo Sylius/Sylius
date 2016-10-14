@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddPaymentMethodsFormSubscriber;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -20,13 +21,15 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
 /**
+ * @mixin AddPaymentMethodsFormSubscriber
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class AddPaymentMethodsFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddPaymentMethodsFormSubscriber');
+        $this->shouldHaveType(AddPaymentMethodsFormSubscriber::class);
     }
 
     function it_is_an_event_subscriber()

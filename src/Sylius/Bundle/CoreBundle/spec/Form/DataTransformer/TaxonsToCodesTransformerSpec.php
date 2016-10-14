@@ -14,13 +14,15 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
+ * @mixin TaxonsToCodesTransformer
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class TaxonsToCodesTransformerSpec extends ObjectBehavior
@@ -32,7 +34,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer');
+        $this->shouldHaveType(TaxonsToCodesTransformer::class);
     }
 
     function it_implements_data_transformer_interface()

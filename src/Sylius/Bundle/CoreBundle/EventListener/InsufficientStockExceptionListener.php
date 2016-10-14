@@ -26,22 +26,22 @@ final class InsufficientStockExceptionListener
     /**
      * @var UrlGeneratorInterface
      */
-    protected $router;
+    private $router;
 
     /**
      * @var SessionInterface
      */
-    protected $session;
+    private $session;
 
     /**
      * @var TranslatorInterface
      */
-    protected $translator;
+    private $translator;
 
     /**
      * @var string
      */
-    protected $redirectTo;
+    private $redirectTo;
 
     /**
      * @param UrlGeneratorInterface $router

@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class SetCustomerFormSubscriber implements EventSubscriberInterface
+final class SetCustomerFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var RepositoryInterface
@@ -39,7 +39,7 @@ class SetCustomerFormSubscriber implements EventSubscriberInterface
      */
     public static function getSubscribedEvents()
     {
-        return [ 
+        return [
             FormEvents::PRE_SUBMIT => 'preSubmit',
         ];
     }
@@ -47,7 +47,7 @@ class SetCustomerFormSubscriber implements EventSubscriberInterface
     /**
      * @param FormEvent $event
      */
-    public function preSubmit(FormEvent $event) 
+    public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
 
@@ -60,7 +60,7 @@ class SetCustomerFormSubscriber implements EventSubscriberInterface
         // assign customer only if there is no corresponding user account
         if (null !== $customer && null === $customer->getUser()) {
             $form = $event->getForm();
-            $form->setData($customer);        
+            $form->setData($customer);
         }
     }
 }

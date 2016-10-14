@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Process\Exception\RuntimeException;
 
-class InstallCommand extends AbstractInstallCommand
+final class InstallCommand extends AbstractInstallCommand
 {
     /**
      * @var array

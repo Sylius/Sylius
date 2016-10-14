@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CannotDisableLocale extends Constraint
+final class CannotDisableLocale extends Constraint
 {
     /**
      * @var string

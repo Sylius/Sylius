@@ -14,9 +14,12 @@ namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Renderer;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Renderer\RendererAdapterInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRenderer;
 use Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRendererInterface;
 
 /**
+ * @mixin SitemapRenderer
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapRendererSpec extends ObjectBehavior
@@ -28,7 +31,7 @@ final class SitemapRendererSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRenderer');
+        $this->shouldHaveType(SitemapRenderer::class);
     }
 
     function it_implements_sitemap_renderer_interface()

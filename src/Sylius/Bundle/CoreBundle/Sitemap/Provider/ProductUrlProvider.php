@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace Sylius\Bundle\CoreBundle\Sitemap\Provider;
 
 use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactoryInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ProductUrlProvider implements UrlProviderInterface
+final class ProductUrlProvider implements UrlProviderInterface
 {
     /**
      * @var RepositoryInterface

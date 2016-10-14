@@ -13,9 +13,12 @@ namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Doctrine\Common\Persistence\ManagerRegistry;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
+ * @mixin HasEnabledEntityValidator
+ *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 final class HasEnabledEntityValidatorSpec extends ObjectBehavior
@@ -27,7 +30,7 @@ final class HasEnabledEntityValidatorSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator');
+        $this->shouldHaveType(HasEnabledEntityValidator::class);
     }
 
     public function it_is_a_constraint_validator()

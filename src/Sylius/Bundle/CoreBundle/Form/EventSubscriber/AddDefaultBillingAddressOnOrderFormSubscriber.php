@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddDefaultBillingAddressOnOrderFormSubscriber implements EventSubscriberInterface
+final class AddDefaultBillingAddressOnOrderFormSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}

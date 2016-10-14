@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  *
  * @author Liverbool <nukboon@gmail.com>
  */
-class CheckoutAddressingListener
+final class CheckoutAddressingListener
 {
     /**
      * @param GenericEvent $event

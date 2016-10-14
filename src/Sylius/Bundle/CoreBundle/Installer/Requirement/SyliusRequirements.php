@@ -14,10 +14,16 @@ namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 use ArrayIterator;
 use IteratorAggregate;
 
-class SyliusRequirements implements IteratorAggregate
+final class SyliusRequirements implements IteratorAggregate
 {
-    protected $collections = [];
+    /**
+     * @var RequirementCollection[]
+     */
+    private $collections = [];
 
+    /**
+     * @param RequirementCollection[] $requirementCollections
+     */
     public function __construct(array $requirementCollections)
     {
         foreach ($requirementCollections as $requirementCollection) {
@@ -25,15 +31,19 @@ class SyliusRequirements implements IteratorAggregate
         }
     }
 
+    /**
+     * @return ArrayIterator
+     */
     public function getIterator()
     {
         return new ArrayIterator($this->collections);
     }
 
+    /**
+     * @param RequirementCollection $collection
+     */
     public function add(RequirementCollection $collection)
     {
         $this->collections[] = $collection;
-
-        return $this;
     }
 }

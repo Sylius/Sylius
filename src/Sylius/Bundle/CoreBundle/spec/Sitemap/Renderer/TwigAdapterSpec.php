@@ -12,13 +12,15 @@
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Renderer;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Renderer\RendererAdapterInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Renderer\TwigAdapter;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
+ * @mixin TwigAdapter
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class TwigAdapterSpec extends ObjectBehavior
@@ -30,7 +32,7 @@ final class TwigAdapterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Sitemap\Renderer\TwigAdapter');
+        $this->shouldHaveType(TwigAdapter::class);
     }
 
     function it_implements_renderer_adapter_interface()

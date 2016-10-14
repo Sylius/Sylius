@@ -11,9 +11,8 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Context;
 
-use Sylius\Bundle\CoreBundle\Context\AdminBasedLocaleContext;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Context\AdminBasedLocaleContext;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;

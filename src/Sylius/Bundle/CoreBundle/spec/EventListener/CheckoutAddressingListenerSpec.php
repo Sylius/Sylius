@@ -12,21 +12,20 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Automatic set customer's default addressing
- *
  * @author Liverbool <nukboon@gmail.com>
  */
 final class CheckoutAddressingListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener');
+        $this->shouldHaveType(CheckoutAddressingListener::class);
     }
 
     function it_throws_exception_if_event_has_non_order_subject(GenericEvent $event, \stdClass $invalidSubject)

@@ -31,7 +31,7 @@ final class PriceHelperSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper');
+        $this->shouldHaveType(PriceHelper::class);
     }
 
     function it_is_a_templating_helper()
