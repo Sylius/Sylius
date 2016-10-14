@@ -27,9 +27,6 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * A select form which allows the user to select
- * a method that supports given shippables aware.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShippingMethodChoiceType extends AbstractType

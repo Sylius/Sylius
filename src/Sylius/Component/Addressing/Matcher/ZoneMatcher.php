@@ -17,9 +17,6 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * This implementation can match addresses against zones by country and province.
- * It also handles sub-zones.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -32,8 +29,6 @@ class ZoneMatcher implements ZoneMatcherInterface
     protected $zoneRepository;
 
     /**
-     * Zone matching priorities.
-     *
      * @var array
      */
     protected $priorities = [

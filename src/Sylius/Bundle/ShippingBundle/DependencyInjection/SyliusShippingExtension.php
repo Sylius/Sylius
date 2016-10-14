@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusShippingExtension extends AbstractResourceExtension
+final class SyliusShippingExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}

@@ -22,13 +22,16 @@ use Sylius\Component\Shipping\ShipmentUnitTransitions;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShipmentProcessor implements ShipmentProcessorInterface
+final class ShipmentProcessor implements ShipmentProcessorInterface
 {
     /**
      * @var FactoryInterface
      */
-    protected $factory;
+    private $factory;
 
+    /**
+     * @param FactoryInterface $factory
+     */
     public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;

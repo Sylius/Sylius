@@ -16,7 +16,7 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FlatRateCalculator implements CalculatorInterface
+final class FlatRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}
@@ -25,6 +25,7 @@ class FlatRateCalculator implements CalculatorInterface
     {
         return (int) $configuration['amount'];
     }
+
     /**
      * {@inheritdoc}
      */

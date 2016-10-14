@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusTaxationExtension extends AbstractResourceExtension
+final class SyliusTaxationExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}

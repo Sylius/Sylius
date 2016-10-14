@@ -13,13 +13,17 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Calculator\VolumeRateCalculator;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
+/**
+ * @mixin VolumeRateCalculator
+ */
 final class VolumeRateCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\VolumeRateCalculator');
+        $this->shouldHaveType(VolumeRateCalculator::class);
     }
 
     function it_should_implement_Sylius_shipping_calculator_interface()

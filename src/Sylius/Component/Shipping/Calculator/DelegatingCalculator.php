@@ -15,17 +15,14 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
- * This class delegates the calculation of charge for particular shipping subject
- * to a correct calculator instance, based on the name defined on the shipping method.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DelegatingCalculator implements DelegatingCalculatorInterface
+final class DelegatingCalculator implements DelegatingCalculatorInterface
 {
     /**
      * @var ServiceRegistryInterface
      */
-    protected $registry;
+    private $registry;
 
     /**
      * @param ServiceRegistryInterface $registry

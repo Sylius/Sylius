@@ -16,7 +16,7 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FlexibleRateCalculator implements CalculatorInterface
+final class FlexibleRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}

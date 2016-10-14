@@ -12,15 +12,18 @@
 namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException;
 
 /**
+ * @mixin UndefinedShippingMethodException
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class UndefinedShippingMethodExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException');
+        $this->shouldHaveType(UndefinedShippingMethodException::class);
     }
 
     function it_is_an_exception()

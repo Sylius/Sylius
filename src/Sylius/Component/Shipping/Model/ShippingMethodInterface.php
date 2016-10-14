@@ -28,7 +28,6 @@ interface ShippingMethodInterface extends
     ToggleableInterface,
     TranslatableInterface
 {
-    // Shippables requirement to match given method.
     const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
     const CATEGORY_REQUIREMENT_MATCH_ANY = 1;
     const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
@@ -44,13 +43,6 @@ interface ShippingMethodInterface extends
     public function setCategory(ShippingCategoryInterface $category = null);
 
     /**
-     * Get the one of matching requirements.
-     * For example, a method can apply to shipment on 3 different conditions.
-     *
-     * 1) None of shippables matches the category.
-     * 2) At least one of shippables matches the category.
-     * 3) All shippables have to match the method category.
-     *
      * @return int
      */
     public function getCategoryRequirement();
@@ -66,29 +58,21 @@ interface ShippingMethodInterface extends
     public function getCategoryRequirementLabel();
 
     /**
-     * Get calculator name assigned for this shipping method.
-     *
      * @return string
      */
     public function getCalculator();
 
     /**
-     * Set calculator name assigned for this shipping method.
-     *
      * @param string $calculator
      */
     public function setCalculator($calculator);
 
     /**
-     * Get any extra configuration for calculator.
-     *
      * @return array
      */
     public function getConfiguration();
 
     /**
-     * Set extra configuration for calculator.
-     *
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);

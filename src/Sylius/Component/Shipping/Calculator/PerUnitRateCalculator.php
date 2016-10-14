@@ -16,7 +16,7 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PerUnitRateCalculator implements CalculatorInterface
+final class PerUnitRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}

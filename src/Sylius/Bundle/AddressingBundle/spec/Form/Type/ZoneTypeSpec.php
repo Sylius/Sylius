@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\FormBuilder;
@@ -20,6 +21,8 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin ZoneType
+ *
  * @author Julien Janvier <j.janvier@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -33,7 +36,7 @@ final class ZoneTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ZoneType');
+        $this->shouldHaveType(ZoneType::class);
     }
 
     function it_is_a_form_type()

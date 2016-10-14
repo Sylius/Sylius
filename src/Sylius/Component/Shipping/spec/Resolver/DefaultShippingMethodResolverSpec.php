@@ -16,9 +16,12 @@ use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolver;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
+ * @mixin DefaultShippingMethodResolver
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DefaultShippingMethodResolverSpec extends ObjectBehavior
@@ -30,7 +33,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolver');
+        $this->shouldHaveType(DefaultShippingMethodResolver::class);
     }
 
     function it_implements_default_shipping_method_resolver_interface()

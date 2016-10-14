@@ -36,10 +36,6 @@ class TaxRate implements TaxRateInterface
     protected $category;
 
     /**
-     * Name of tax rate.
-     *
-     * Can be 'EU VAT'.
-     *
      * @var string
      */
     protected $name;

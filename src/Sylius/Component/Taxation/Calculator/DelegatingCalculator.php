@@ -15,18 +15,18 @@ use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
 /**
- * Delegating calculator.
- * It uses proper calculator to calculate the amount of tax.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DelegatingCalculator implements CalculatorInterface
+final class DelegatingCalculator implements CalculatorInterface
 {
     /**
      * @var ServiceRegistry
      */
     private $calculatorsRegistry;
 
+    /**
+     * @param ServiceRegistry $serviceRegistry
+     */
     public function __construct(ServiceRegistry $serviceRegistry)
     {
         $this->calculatorsRegistry = $serviceRegistry;

@@ -14,10 +14,13 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin ProvinceCodeChoiceType
+ *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class ProvinceCodeChoiceTypeSpec extends ObjectBehavior
@@ -29,7 +32,7 @@ final class ProvinceCodeChoiceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType');
+        $this->shouldHaveType(ProvinceCodeChoiceType::class);
     }
 
     function it_extends_province_choice_type()

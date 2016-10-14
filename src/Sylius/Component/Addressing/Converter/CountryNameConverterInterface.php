@@ -22,7 +22,7 @@ interface CountryNameConverterInterface
      *
      * @return string
      *
-     * @throws \InvalidArgumentException If name is not found in country code registry.
+     * @throws \InvalidArgumentException
      */
     public function convertToCode($name, $locale = 'en');
 }

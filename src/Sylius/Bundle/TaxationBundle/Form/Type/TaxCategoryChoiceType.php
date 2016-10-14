@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Base tax category choice type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 abstract class TaxCategoryChoiceType extends AbstractType

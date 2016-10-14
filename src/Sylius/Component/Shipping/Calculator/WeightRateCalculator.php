@@ -16,7 +16,7 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class WeightRateCalculator implements CalculatorInterface
+final class WeightRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}

@@ -31,7 +31,7 @@ final class ShipmentShipTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType');
+        $this->shouldHaveType(ShipmentShipType::class);
     }
 
     function it_is_a_form_type()

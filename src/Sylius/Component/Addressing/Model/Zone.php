@@ -124,8 +124,6 @@ class Zone implements ZoneInterface
     }
 
     /**
-     * Returns all zone types available.
-     *
      * @return array of self::TYPE_*
      */
     public static function getTypes()

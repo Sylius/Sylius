@@ -13,9 +13,12 @@ namespace spec\Sylius\Component\Shipping\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Shipping\Model\ShippingMethod;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
+ * @mixin ShippingMethod
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -29,7 +32,7 @@ final class ShippingMethodSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Model\ShippingMethod');
+        $this->shouldHaveType(ShippingMethod::class);
     }
 
     function it_implements_Sylius_shipping_method_interface()

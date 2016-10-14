@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\AddressingBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraint;
+use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\Country;
 use Sylius\Component\Addressing\Model\Province;
@@ -23,6 +24,8 @@ use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
+ * @mixin ProvinceAddressConstraintValidator
+ *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
@@ -34,7 +37,7 @@ final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator');
+        $this->shouldHaveType(ProvinceAddressConstraintValidator::class);
     }
 
     function it_throws_exception_if_the_value_is_not_an_address(Constraint $constraint)

@@ -13,9 +13,12 @@ namespace spec\Sylius\Component\Addressing\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMember;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
+ * @mixin ZoneMember
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
@@ -23,7 +26,7 @@ final class ZoneMemberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Addressing\Model\ZoneMember');
+        $this->shouldHaveType(ZoneMember::class);
     }
 
     function it_implements_zone_member_interface()

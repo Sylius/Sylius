@@ -16,11 +16,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all shipping calculators in calculator registry service.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RegisterCalculatorsPass implements CompilerPassInterface
+final class RegisterCalculatorsPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

@@ -13,12 +13,15 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin ProvinceType
+ *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 final class ProvinceTypeSpec extends ObjectBehavior
@@ -30,7 +33,7 @@ final class ProvinceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType');
+        $this->shouldHaveType(ProvinceType::class);
     }
 
     function it_is_a_form_type()

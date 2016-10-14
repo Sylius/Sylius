@@ -16,7 +16,7 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 /**
  * @author Antonio Peric <antonio@locastic.com>
  */
-class VolumeRateCalculator implements CalculatorInterface
+final class VolumeRateCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}

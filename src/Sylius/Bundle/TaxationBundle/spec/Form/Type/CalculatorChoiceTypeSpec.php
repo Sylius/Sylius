@@ -12,10 +12,13 @@
 namespace spec\Sylius\Bundle\TaxationBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\TaxationBundle\Form\Type\CalculatorChoiceType;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
+ * @mixin CalculatorChoiceType
+ *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 final class CalculatorChoiceTypeSpec extends ObjectBehavior
@@ -27,7 +30,7 @@ final class CalculatorChoiceTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\TaxationBundle\Form\Type\CalculatorChoiceType');
+        $this->shouldHaveType(CalculatorChoiceType::class);
     }
 
     function it_is_a_form_type()

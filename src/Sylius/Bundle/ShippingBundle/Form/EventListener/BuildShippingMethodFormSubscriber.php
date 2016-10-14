@@ -21,23 +21,16 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormRegistryInterface;
 
 /**
- * This listener adds configuration form to a method, if
- * selected calculator requires one.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
 {
     /**
-     * It hold registry of all calculators.
-     *
      * @var ServiceRegistryInterface
      */
     private $calculatorRegistry;
 
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
     private $factory;
@@ -71,8 +64,6 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Add the calculator configuration if any.
-     *
      * @param FormEvent $event
      */
     public function preSetData(FormEvent $event)
@@ -87,8 +78,6 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Add the calculator configuration if any.
-     *
      * @param FormEvent $event
      */
     public function preSubmit(FormEvent $event)
@@ -103,11 +92,9 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * Add the calculator configuration fields.
-     *
      * @param FormInterface $form
-     * @param string        $calculatorName
-     * @param array         $data
+     * @param string $calculatorName
+     * @param array $data
      */
     protected function addConfigurationFields(FormInterface $form, $calculatorName, array $data = [])
     {

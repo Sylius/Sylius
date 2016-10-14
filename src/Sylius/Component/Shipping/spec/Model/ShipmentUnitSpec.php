@@ -26,7 +26,7 @@ final class ShipmentUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Model\ShipmentUnit');
+        $this->shouldHaveType(ShipmentUnit::class);
     }
 
     function it_implements_Sylius_shipment_unit_interface()

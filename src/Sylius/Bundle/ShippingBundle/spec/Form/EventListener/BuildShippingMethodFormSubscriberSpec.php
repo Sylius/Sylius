@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
@@ -22,6 +23,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormRegistryInterface;
 
+/**
+ * @mixin BuildShippingMethodFormSubscriber
+ */
 final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory, FormRegistryInterface $formRegistry)
@@ -31,7 +35,7 @@ final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber');
+        $this->shouldHaveType(BuildShippingMethodFormSubscriber::class);
     }
 
     function it_is_a_subscriber()

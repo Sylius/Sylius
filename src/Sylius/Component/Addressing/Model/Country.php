@@ -30,8 +30,6 @@ class Country implements CountryInterface
     protected $id;
 
     /**
-     * Country code ISO 3166-1 alpha-2.
-     *
      * @var string
      */
     protected $code;

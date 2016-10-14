@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneFactory implements ZoneFactoryInterface
+final class ZoneFactory implements ZoneFactoryInterface
 {
     /**
      * @var FactoryInterface

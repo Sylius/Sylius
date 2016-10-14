@@ -21,8 +21,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ZoneTypeChoiceType extends AbstractType
 {
     /**
-     * Default zone type choices.
-     *
      * @var string[]
      */
     protected $choices = [
