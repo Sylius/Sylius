@@ -38,5 +38,6 @@ The Books helps to understand how Sylius works.
     emails
     content
     settings
+    fixtures
 
 .. include:: /book/map.rst.inc
