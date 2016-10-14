@@ -13,42 +13,42 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.resource_controller.parameters_parser" class="Sylius\Bundle\ResourceBundle\Controller\ParametersParser">
+        <service id="sylius.resource_controller.parameters_parser" class="Sylius\Bundle\ResourceBundle\Controller\ParametersParser" public="false">
             <argument type="service" id="service_container" />
             <argument type="service" id="sylius.expression_language" />
         </service>
-        <service id="sylius.resource_controller.request_configuration_factory" class="Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory">
+        <service id="sylius.resource_controller.request_configuration_factory" class="Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactory" public="false">
             <argument type="service" id="sylius.resource_controller.parameters_parser" />
             <argument>Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration</argument>
             <argument>%sylius.resource.settings%</argument>
         </service>
-        <service id="sylius.resource_controller.new_resource_factory" class="Sylius\Bundle\ResourceBundle\Controller\NewResourceFactory" />
-        <service id="sylius.resource_controller.single_resource_provider" class="Sylius\Bundle\ResourceBundle\Controller\SingleResourceProvider" />
-        <service id="sylius.resource_controller.pagerfanta_representation_factory" class="Hateoas\Representation\Factory\PagerfantaFactory" />
-        <service id="sylius.resource_controller.resources_resolver" class="Sylius\Bundle\ResourceBundle\Controller\ResourcesResolver" />
-        <service id="sylius.resource_controller.resources_collection_provider" class="Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider">
+        <service id="sylius.resource_controller.new_resource_factory" class="Sylius\Bundle\ResourceBundle\Controller\NewResourceFactory" public="false" />
+        <service id="sylius.resource_controller.single_resource_provider" class="Sylius\Bundle\ResourceBundle\Controller\SingleResourceProvider" public="false" />
+        <service id="sylius.resource_controller.pagerfanta_representation_factory" class="Hateoas\Representation\Factory\PagerfantaFactory" public="false" />
+        <service id="sylius.resource_controller.resources_resolver" class="Sylius\Bundle\ResourceBundle\Controller\ResourcesResolver" public="false" />
+        <service id="sylius.resource_controller.resources_collection_provider" class="Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProvider" public="false">
             <argument type="service" id="sylius.resource_controller.resources_resolver" />
             <argument type="service" id="sylius.resource_controller.pagerfanta_representation_factory" />
         </service>
-        <service id="sylius.resource_controller.form_factory" class="Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactory">
+        <service id="sylius.resource_controller.form_factory" class="Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactory" public="false">
             <argument type="service" id="form.factory" />
         </service>
-        <service id="sylius.resource_controller.redirect_handler" class="Sylius\Bundle\ResourceBundle\Controller\RedirectHandler">
+        <service id="sylius.resource_controller.redirect_handler" class="Sylius\Bundle\ResourceBundle\Controller\RedirectHandler" public="false">
             <argument type="service" id="router" />
         </service>
-        <service id="sylius.resource_controller.authorization_checker.disabled" class="Sylius\Bundle\ResourceBundle\Controller\DisabledAuthorizationChecker" />
-        <service id="sylius.resource_controller.flash_helper" class="Sylius\Bundle\ResourceBundle\Controller\FlashHelper">
+        <service id="sylius.resource_controller.authorization_checker.disabled" class="Sylius\Bundle\ResourceBundle\Controller\DisabledAuthorizationChecker" public="false" />
+        <service id="sylius.resource_controller.flash_helper" class="Sylius\Bundle\ResourceBundle\Controller\FlashHelper" public="false">
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
             <argument>%locale%</argument>
         </service>
-        <service id="sylius.resource_controller.event_dispatcher" class="Sylius\Bundle\ResourceBundle\Controller\EventDispatcher">
+        <service id="sylius.resource_controller.event_dispatcher" class="Sylius\Bundle\ResourceBundle\Controller\EventDispatcher" public="false">
             <argument type="service" id="event_dispatcher" />
         </service>
-        <service id="sylius.resource_controller.view_handler" class="Sylius\Bundle\ResourceBundle\Controller\ViewHandler">
+        <service id="sylius.resource_controller.view_handler" class="Sylius\Bundle\ResourceBundle\Controller\ViewHandler" public="false">
             <argument type="service" id="fos_rest.view_handler" />
         </service>
-        <service id="sylius.resource_controller.state_machine" class="Sylius\Bundle\ResourceBundle\Controller\StateMachine">
+        <service id="sylius.resource_controller.state_machine" class="Sylius\Bundle\ResourceBundle\Controller\StateMachine" public="false">
             <argument type="service" id="sm.factory" />
         </service>
     </services>

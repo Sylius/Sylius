@@ -51,8 +51,7 @@ final class DataSourceSpec extends ObjectBehavior
         QueryBuilder $queryBuilder,
         ConstraintOrx $constraint,
         ConstraintComparison $comparisonConstraint
-    )
-    {
+    ) {
         $queryBuilder->orWhere()->willReturn($constraint);
         $value->getValue()->willReturn('value');
         $comparison->getValue()->willReturn($value);
@@ -69,8 +68,7 @@ final class DataSourceSpec extends ObjectBehavior
 
     function it_should_throw_an_exception_if_an_unknown_condition_is_passed(
         Comparison $comparison
-    )
-    {
+    ) {
         $this->shouldThrow(
             new \RuntimeException('Unknown restrict condition "foo"')
         )->during('restrict', [ $comparison, 'foo' ]);
@@ -78,15 +76,13 @@ final class DataSourceSpec extends ObjectBehavior
 
     function it_should_return_the_expression_builder(
         ExpressionBuilder $expressionBuilder
-    )
-    {
+    ) {
         $this->getExpressionBuilder()->shouldReturn($expressionBuilder);
     }
 
     function it_should_get_the_data(
         ExpressionBuilder $expressionBuilder
-    )
-    {
+    ) {
         $expressionBuilder->getOrderBys()->willReturn([]);
 
         $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
@@ -97,8 +93,7 @@ final class DataSourceSpec extends ObjectBehavior
         ExpressionBuilder $expressionBuilder,
         OrderBy $orderBy,
         Ordering $ordering
-    )
-    {
+    ) {
         $expressionBuilder->getOrderBys()->willReturn([
             'foo' => 'asc',
             'bar' => 'desc'
@@ -117,8 +112,7 @@ final class DataSourceSpec extends ObjectBehavior
         ExpressionBuilder $expressionBuilder,
         OrderBy $orderBy,
         Ordering $ordering
-    )
-    {
+    ) {
         $expressionBuilder->getOrderBys()->willReturn([
             'foo',
             'bar',

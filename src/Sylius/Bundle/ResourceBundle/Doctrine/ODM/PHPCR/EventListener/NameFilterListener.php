@@ -41,8 +41,7 @@ class NameFilterListener
     public function __construct(
         DocumentManagerInterface $documentManager,
         $replacementCharacter = ' '
-    )
-    {
+    ) {
         $this->documentManager = $documentManager;
         $this->replacementCharacter = $replacementCharacter;
     }

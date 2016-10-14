@@ -39,8 +39,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $event->getSubject()->willReturn(new \stdClass());
         $documentManager->getClassMetadata(\stdClass::class)->willReturn(
             $documentMetadata
@@ -59,8 +58,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -85,8 +83,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $subjectDocument = new \stdClass();
         $parentDocument = new \stdClass();
 
@@ -108,8 +105,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         DocumentManagerInterface $documentManager,
         SessionInterface $session,
         NodeInterface $node
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -144,8 +140,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -174,8 +169,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $subjectDocument = new \stdClass();
 
         $event->getSubject()->willReturn($subjectDocument);

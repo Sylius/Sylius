@@ -20,7 +20,7 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
  *
  * If a node already exists with the same name, then a numerical index will be
  * appended to the name.
- * 
+ *
  * @author Daniel Leech <daniel@dantleech.com>
  */
 class NameResolverListener
@@ -35,8 +35,7 @@ class NameResolverListener
      */
     public function __construct(
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $this->documentManager = $documentManager;
     }
 

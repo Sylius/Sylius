@@ -33,8 +33,7 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
      */
     public function __construct(
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $this->documentManager = $documentManager;
     }
 

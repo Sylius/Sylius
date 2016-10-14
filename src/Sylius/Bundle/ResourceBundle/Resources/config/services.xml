@@ -23,9 +23,9 @@
     </parameters>
 
     <services>
-        <service id="sylius.resource_registry" class="Sylius\Component\Resource\Metadata\Registry" />
+        <service id="sylius.resource_registry" class="Sylius\Component\Resource\Metadata\Registry" public="false" />
 
-        <service id="sylius.expression_language" class="Symfony\Component\DependencyInjection\ExpressionLanguage" />
+        <service id="sylius.expression_language" class="Symfony\Component\DependencyInjection\ExpressionLanguage" public="false" />
 
         <service id="sylius.event_subscriber.resource_delete" class="Sylius\Bundle\ResourceBundle\EventListener\ResourceDeleteSubscriber">
             <argument type="service" id="router" />

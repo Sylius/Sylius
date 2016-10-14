@@ -36,8 +36,7 @@ final class NameFilterListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
-    )
-    {
+    ) {
         $document = new \stdClass();
         $event->getSubject()->willReturn($document);
         $documentManager->getClassMetadata('stdClass')->willReturn($metadata);
@@ -50,8 +49,7 @@ final class NameFilterListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
-    )
-    {
+    ) {
         $document = new \stdClass();
         $event->getSubject()->willReturn($document);
         $documentManager->getClassMetadata('stdClass')->willReturn($metadata);
@@ -66,8 +64,7 @@ final class NameFilterListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         DocumentManagerInterface $documentManager,
         ClassMetadata $metadata
-    )
-    {
+    ) {
         $this->beConstructedWith($documentManager, '_');
 
         $document = new \stdClass();

@@ -37,8 +37,7 @@ final class NameResolverListenerSpec extends ObjectBehavior
         DocumentManagerInterface $documentManager,
         ResourceControllerEvent $event,
         ClassMetadata $metadata
-    )
-    {
+    ) {
         $document = new \stdClass();
         $event->getSubject()->willReturn($document);
         $documentManager->getClassMetadata('stdClass')->willReturn($metadata);
@@ -54,8 +53,7 @@ final class NameResolverListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $metadata,
         NodeInterface $node
-    )
-    {
+    ) {
         $document = new \stdClass();
         $parentDocument = new \stdClass();
         $event->getSubject()->willReturn($document);
@@ -80,8 +78,7 @@ final class NameResolverListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $metadata,
         NodeInterface $node
-    )
-    {
+    ) {
         $document = new \stdClass();
         $parentDocument = new \stdClass();
         $existingDocument = new \stdClass();
