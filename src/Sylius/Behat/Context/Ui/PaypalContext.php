@@ -85,8 +85,9 @@ final class PaypalContext implements Context
      */
     public function iConfirmMyOrderWithPaypalPayment()
     {
-        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->summaryPage->confirmOrder();
+        $this->paypalApiMocker->performActionInApiInitializeScope(function () {
+            $this->summaryPage->confirmOrder();
+        });
     }
 
     /**
@@ -102,8 +103,9 @@ final class PaypalContext implements Context
      */
     public function iSignInToPaypalAndPaySuccessfully()
     {
-        $this->paypalApiMocker->mockApiSuccessfulPaymentResponse();
-        $this->paypalExpressCheckoutPage->pay();
+        $this->paypalApiMocker->performActionInApiSuccessfulScope(function () {
+            $this->paypalExpressCheckoutPage->pay();
+        });
     }
 
     /**
@@ -121,7 +123,8 @@ final class PaypalContext implements Context
      */
     public function iTryToPayAgain()
     {
-        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->orderDetails->pay();
+        $this->paypalApiMocker->performActionInApiInitializeScope(function () {
+            $this->orderDetails->pay();
+        });
     }
 }

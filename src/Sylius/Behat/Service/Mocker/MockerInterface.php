@@ -32,4 +32,11 @@ interface MockerInterface
      * @return MockInterface
      */
     public function mockService($serviceId, $className);
+
+    /**
+     * @param string $serviceId
+     */
+    public function unmockService($serviceId);
+
+    public function unmockAll();
 }
