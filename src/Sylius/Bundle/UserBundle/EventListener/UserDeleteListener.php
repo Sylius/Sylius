@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -47,17 +47,12 @@ class UserDeleteListener
     /**
      * @param GenericEvent $event
      *
-     * @throws UnexpectedTypeException
+     * @throws \InvalidArgumentException
      */
     public function deleteUser(GenericEvent $event)
     {
         $user = $event->getSubject();
-        if (!$user instanceof UserInterface) {
-            throw new UnexpectedTypeException(
-                $user,
-                UserInterface::class
-            );
-        }
+        Assert::isInstanceOf($user, UserInterface::class);
 
         $token = $this->tokenStorage->getToken();
 

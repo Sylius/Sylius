@@ -12,6 +12,7 @@
 namespace Sylius\Component\User\Security;
 
 use Sylius\Component\User\Model\CredentialsHolderInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * Pbkdf2PasswordEncoder uses the PBKDF2 (Password-Based Key Derivation Function 2).
@@ -55,7 +56,7 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
      * @param string $algorithm
      * @param bool $encodeHashAsBase64
      * @param int $iterations
-     * @param int $length
+     * @param int $length of the result of encoding
      */
     public function __construct($algorithm = 'sha512', $encodeHashAsBase64 = true, $iterations = 1000, $length = 40)
     {
@@ -67,6 +68,8 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \LogicException when the algorithm is not supported
      */
     public function encode(CredentialsHolderInterface $user)
     {
@@ -84,12 +87,11 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
      */
     private function encodePassword($plainPassword, $salt)
     {
-        if ($this->isPasswordTooLong($plainPassword)) {
-            throw new \InvalidArgumentException(sprintf(
-                'The password must be at most %d characters long.',
-                self::MAX_PASSWORD_LENGTH
-            ));
-        }
+        Assert::lessThanEq(
+            strlen($plainPassword),
+            self::MAX_PASSWORD_LENGTH,
+            sprintf('The password must be at most %d characters long.', self::MAX_PASSWORD_LENGTH)
+        );
 
         if (!in_array($this->algorithm, hash_algos(), true)) {
             throw new \LogicException(sprintf('The algorithm "%s" is not supported.', $this->algorithm));
@@ -98,15 +100,5 @@ final class UserPbkdf2PasswordEncoder implements UserPasswordEncoderInterface
         $digest = hash_pbkdf2($this->algorithm, $plainPassword, $salt, $this->iterations, $this->length, true);
 
         return $this->encodeHashAsBase64 ? base64_encode($digest) : bin2hex($digest);
-    }
-
-    /**
-     * @param string $password
-     *
-     * @return bool
-     */
-    private function isPasswordTooLong($password)
-    {
-        return strlen($password) > self::MAX_PASSWORD_LENGTH;
     }
 }
