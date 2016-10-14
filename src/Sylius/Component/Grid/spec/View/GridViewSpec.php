@@ -23,9 +23,9 @@ use Sylius\Component\Grid\View\GridView;
  */
 final class GridViewSpec extends ObjectBehavior
 {
-    function let(Grid $gridDefinition, Parameters $parameters)
+    function let(Grid $gridDefinition)
     {
-        $this->beConstructedWith(['foo', 'bar'], $gridDefinition, $parameters);
+        $this->beConstructedWith(['foo', 'bar'], $gridDefinition, new Parameters());
     }
 
     function it_is_initializable()
@@ -43,15 +43,13 @@ final class GridViewSpec extends ObjectBehavior
         $this->getDefinition()->shouldReturn($gridDefinition);
     }
 
-    function it_has_parameters(Parameters $parameters)
+    function it_has_parameters()
     {
-        $this->getParameters()->shouldReturn($parameters);
+        $this->getParameters()->shouldBeLike(new Parameters());
     }
 
-    function it_uses_the_first_sorting_parameter_from_definition_if_not_provided_in_parameters(
-        Grid $gridDefinition,
-        Parameters $parameters
-    ) {
+    function it_uses_the_first_sorting_parameter_from_definition_if_not_provided_in_parameters(Grid $gridDefinition)
+    {
         $gridDefinition->hasField('foo')->willReturn(true);
         $gridDefinition->hasField('name')->willReturn(true);
         $gridDefinition->hasField('code')->willReturn(true);
@@ -65,14 +63,16 @@ final class GridViewSpec extends ObjectBehavior
         $gridDefinition->isSortableBy('name')->willReturn(true);
         $gridDefinition->isSortableBy('code')->willReturn(true);
 
-        $parameters->has('sorting')->willReturn(false);
-
         $this->isSortedBy('code')->shouldReturn(false);
         $this->isSortedBy('name')->shouldReturn(true);
     }
 
-    function it_knows_which_field_it_has_been_sorted_by(Grid $gridDefinition, Parameters $parameters)
+    function it_knows_which_field_it_has_been_sorted_by(Grid $gridDefinition)
     {
+        $this->beConstructedWith(['foo', 'bar'], $gridDefinition, new Parameters([
+            'sorting' => ['name' => ['direction' => 'asc']],
+        ]));
+
         $gridDefinition->hasField('foo')->willReturn(true);
         $gridDefinition->hasField('name')->willReturn(true);
         $gridDefinition->hasField('code')->willReturn(true);
@@ -86,9 +86,6 @@ final class GridViewSpec extends ObjectBehavior
 
         $gridDefinition->isSortableBy('name')->willReturn(true);
         $gridDefinition->isSortableBy('code')->willReturn(true);
-
-        $parameters->has('sorting')->willReturn(true);
-        $parameters->get('sorting')->willReturn(['name' => ['direction' => 'asc']]);
 
         $this->isSortedBy('name')->shouldReturn(true);
         $this->isSortedBy('code')->shouldReturn(false);

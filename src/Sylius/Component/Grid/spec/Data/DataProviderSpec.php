@@ -48,9 +48,10 @@ final class DataProviderSpec extends ObjectBehavior
         DataSourceInterface $dataSource,
         FiltersApplicatorInterface $filtersApplicator,
         SorterInterface $sorter,
-        Grid $grid,
-        Parameters $parameters
+        Grid $grid
     ) {
+        $parameters = new Parameters();
+
         $dataSourceProvider->getDataSource($grid, $parameters)->willReturn($dataSource);
 
         $filtersApplicator->apply($dataSource, $grid, $parameters)->shouldBeCalled();

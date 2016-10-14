@@ -40,23 +40,22 @@ final class DriverSpec extends ObjectBehavior
         $this->shouldImplement(DriverInterface::class);
     }
 
-    function it_throws_exception_if_class_is_undefined(Parameters $parameters)
+    function it_throws_exception_if_class_is_undefined()
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getDataSource', [[], $parameters]);
+            ->during('getDataSource', [[], new Parameters()]);
         ;
     }
 
     function it_creates_data_source_via_doctrine_phpcrodm_query_builder(
         DocumentManagerInterface $documentManager,
         DocumentRepository $documentRepository,
-        QueryBuilder $queryBuilder,
-        Parameters $parameters
+        QueryBuilder $queryBuilder
     ) {
         $documentManager->getRepository('App:Book')->willReturn($documentRepository);
         $documentRepository->createQueryBuilder('o')->willReturn($queryBuilder);
 
-        $this->getDataSource(['class' => 'App:Book'], $parameters)->shouldHaveType(DataSource::class);
+        $this->getDataSource(['class' => 'App:Book'], new Parameters())->shouldHaveType(DataSource::class);
     }
 }

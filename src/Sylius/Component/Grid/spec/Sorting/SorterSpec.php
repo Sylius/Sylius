@@ -38,11 +38,11 @@ final class SorterSpec extends ObjectBehavior
 
     function it_sorts_the_data_source_via_expression_builder_based_on_the_grid_definition(
         Grid $grid,
-        Parameters $parameters,
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ) {
-        $parameters->has('sorting')->willReturn(false);
+        $parameters = new Parameters();
+
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
         $grid->getSorting()->willReturn(['name' => ['path' => 'translation.name', 'direction' => 'desc']]);
 
@@ -53,12 +53,10 @@ final class SorterSpec extends ObjectBehavior
 
     function it_sorts_the_data_source_via_expression_builder_based_on_sorting_parameter(
         Grid $grid,
-        Parameters $parameters,
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ) {
-        $parameters->has('sorting')->willReturn(true);
-        $parameters->get('sorting')->willReturn(['name' => ['direction' => 'asc']]);
+        $parameters = new Parameters(['sorting' => ['name' => ['direction' => 'asc']]]);
 
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
         $grid->getSorting()->willReturn(['name' => ['path' => 'translation.name', 'direction' => 'desc']]);

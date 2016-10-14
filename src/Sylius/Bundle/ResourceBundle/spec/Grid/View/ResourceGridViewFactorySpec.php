@@ -49,15 +49,16 @@ final class ResourceGridViewFactorySpec extends ObjectBehavior
         DataProviderInterface $dataProvider,
         ParametersParserInterface $parametersParser,
         Grid $grid,
-        Parameters $parameters,
         MetadataInterface $resourceMetadata,
         Request $request,
         RequestConfiguration $requestConfiguration
     ) {
+        $parameters = new Parameters();
+
         $expectedResourceGridView = new ResourceGridView(
             ['foo', 'bar'],
             $grid->getWrappedObject(),
-            $parameters->getWrappedObject(),
+            $parameters,
             $resourceMetadata->getWrappedObject(),
             $requestConfiguration->getWrappedObject()
         );
@@ -73,20 +74,7 @@ final class ResourceGridViewFactorySpec extends ObjectBehavior
 
         $dataProvider->getData($grid, $parameters)->willReturn(['foo', 'bar']);
 
-        $this->create($grid, $parameters, $resourceMetadata, $requestConfiguration)->shouldBeSameResourceGridViewAs($expectedResourceGridView);
-    }
-
-    public function getMatchers()
-    {
-        return [
-            'beSameResourceGridViewAs' => function ($subject, $key) {
-                if (!$subject instanceof ResourceGridView || !$key instanceof ResourceGridView) {
-                    return false;
-                }
-
-                return serialize($subject) === serialize($key);
-            },
-        ];
+        $this->create($grid, $parameters, $resourceMetadata, $requestConfiguration)->shouldBeLike($expectedResourceGridView);
     }
 }
 

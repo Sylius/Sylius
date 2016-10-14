@@ -43,10 +43,11 @@ final class GridViewFactorySpec extends ObjectBehavior
 
     function it_uses_data_provider_to_create_a_view_with_data_and_definition(
         DataProviderInterface $dataProvider,
-        Grid $grid,
-        Parameters $parameters
+        Grid $grid
     ) {
-        $expectedGridView = new GridView(['foo', 'bar'], $grid->getWrappedObject(), $parameters->getWrappedObject());
+        $parameters = new Parameters();
+
+        $expectedGridView = new GridView(['foo', 'bar'], $grid->getWrappedObject(), $parameters);
 
         $dataProvider->getData($grid, $parameters)->willReturn(['foo', 'bar']);
 

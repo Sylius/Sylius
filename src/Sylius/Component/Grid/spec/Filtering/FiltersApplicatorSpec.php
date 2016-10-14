@@ -48,11 +48,9 @@ final class FiltersApplicatorSpec extends ObjectBehavior
         FilterInterface $stringFilter,
         Grid $grid,
         Filter $filter,
-        Parameters $parameters,
         DataSourceInterface $dataSource
     ) {
-        $parameters->has('criteria')->willReturn(true);
-        $parameters->get('criteria')->willReturn(['keywords' => 'Banana', 'enabled' => true]);
+        $parameters = new Parameters(['criteria' => ['keywords' => 'Banana', 'enabled' => true]]);
 
         $grid->hasFilter('keywords')->willReturn(true);
         $grid->hasFilter('enabled')->willReturn(false);

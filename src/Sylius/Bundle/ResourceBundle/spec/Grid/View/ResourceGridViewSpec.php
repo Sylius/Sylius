@@ -28,11 +28,10 @@ final class ResourceGridViewSpec extends ObjectBehavior
 {
     function let(
         Grid $gridDefinition,
-        Parameters $parameters,
         MetadataInterface $resourceMetadata,
         RequestConfiguration $requestConfiguration
     ) {
-        $this->beConstructedWith(['foo', 'bar'], $gridDefinition, $parameters, $resourceMetadata, $requestConfiguration);
+        $this->beConstructedWith(['foo', 'bar'], $gridDefinition, new Parameters(), $resourceMetadata, $requestConfiguration);
     }
 
     function it_is_initializable()

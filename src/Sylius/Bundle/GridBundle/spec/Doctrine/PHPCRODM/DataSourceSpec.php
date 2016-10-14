@@ -87,19 +87,17 @@ final class DataSourceSpec extends ObjectBehavior
     }
 
     function it_should_get_the_data(
-        ExpressionBuilder $expressionBuilder,
-        Parameters $parameters
+        ExpressionBuilder $expressionBuilder
     )
     {
         $expressionBuilder->getOrderBys()->willReturn([]);
-        $parameters->get('page', 1)->willReturn(1);
-        $this->getData($parameters)->shouldHaveType(Pagerfanta::class);
+
+        $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }
 
     function it_should_set_the_order_on_the_query_builder(
         QueryBuilder $queryBuilder,
         ExpressionBuilder $expressionBuilder,
-        Parameters $parameters,
         OrderBy $orderBy,
         Ordering $ordering
     )
@@ -114,14 +112,12 @@ final class DataSourceSpec extends ObjectBehavior
         $ordering->field('o.foo')->shouldBeCalled();
         $ordering->field('o.bar')->shouldBeCalled();
 
-        $parameters->get('page', 1)->willReturn(1);
-        $this->getData($parameters)->shouldHaveType(Pagerfanta::class);
+        $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }
 
     function it_should_set_the_order_on_the_query_builder_as_fields_only(
         QueryBuilder $queryBuilder,
         ExpressionBuilder $expressionBuilder,
-        Parameters $parameters,
         OrderBy $orderBy,
         Ordering $ordering
     )
@@ -136,7 +132,6 @@ final class DataSourceSpec extends ObjectBehavior
         $ordering->field('o.foo')->shouldBeCalled();
         $ordering->field('o.bar')->shouldBeCalled();
 
-        $parameters->get('page', 1)->willReturn(1);
-        $this->getData($parameters)->shouldHaveType(Pagerfanta::class);
+        $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }
 }
