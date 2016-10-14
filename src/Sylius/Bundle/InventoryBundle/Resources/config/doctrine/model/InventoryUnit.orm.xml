@@ -20,10 +20,6 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-
-        <many-to-one field="stockable" target-entity="Sylius\Component\Inventory\Model\StockableInterface">
-            <join-column name="stockable_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
-        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>
