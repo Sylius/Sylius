@@ -14,11 +14,11 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\OrderInterface as CoreOrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Webmozart\Assert\Assert;
@@ -63,10 +63,10 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(OrderInterface $order)
+    public function process(BaseOrderInterface $order)
     {
-        /** @var CoreOrderInterface $order */
-        Assert::isInstanceOf($order, CoreOrderInterface::class);
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         $this->clearTaxes($order);
         if ($order->isEmpty()) {
@@ -91,11 +91,11 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param CoreOrderInterface $order
+     * @param OrderInterface $order
      *
      * @return ZoneInterface|null
      */
-    private function getTaxZone(CoreOrderInterface $order)
+    private function getTaxZone(OrderInterface $order)
     {
         $shippingAddress = $order->getShippingAddress();
         $zone = null;
@@ -108,9 +108,9 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param OrderInterface $order
+     * @param BaseOrderInterface $order
      */
-    private function clearTaxes(OrderInterface $order)
+    private function clearTaxes(BaseOrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         foreach ($order->getItems() as $item) {

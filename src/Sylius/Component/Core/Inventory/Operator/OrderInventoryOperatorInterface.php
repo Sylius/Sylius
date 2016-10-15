@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Core\Inventory\Operator;
+
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
@@ -19,6 +20,8 @@ interface OrderInventoryOperatorInterface
 {
     /**
      * @param OrderInterface $order
+     *
+     * @throws \InvalidArgumentException
      */
     public function cancel(OrderInterface $order);
     
@@ -29,6 +32,8 @@ interface OrderInventoryOperatorInterface
 
     /**
      * @param OrderInterface $order
+     *
+     * @throws \InvalidArgumentException
      */
     public function sell(OrderInterface $order);
 }

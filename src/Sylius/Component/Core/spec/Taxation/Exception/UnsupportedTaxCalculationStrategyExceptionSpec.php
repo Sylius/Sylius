@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Taxation\Exception;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 
 /**
@@ -24,10 +23,10 @@ final class UnsupportedTaxCalculationStrategyExceptionSpec extends ObjectBehavio
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException');
+        $this->shouldHaveType(UnsupportedTaxCalculationStrategyException::class);
     }
 
-    function it_extends_exception()
+    function it_extends_an_exception()
     {
         $this->shouldBeAnInstanceOf(\RuntimeException::class);
     }

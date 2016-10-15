@@ -124,6 +124,14 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
+    public function getOriginalPrice()
+    {
+        return $this->originalPrice;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setOriginalPrice($originalPrice)
     {
         if (null !== $originalPrice && !is_int($originalPrice)) {
@@ -131,14 +139,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         }
 
         $this->originalPrice = $originalPrice;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOriginalPrice()
-    {
-        return $this->originalPrice;
     }
 
     /**
@@ -216,19 +216,19 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setTracked($tracked)
+    public function isTracked()
     {
-        Assert::boolean($tracked);
-
-        $this->tracked = $tracked;
+        return $this->tracked;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isTracked()
+    public function setTracked($tracked)
     {
-        return $this->tracked;
+        Assert::boolean($tracked);
+
+        $this->tracked = $tracked;
     }
 
     /**

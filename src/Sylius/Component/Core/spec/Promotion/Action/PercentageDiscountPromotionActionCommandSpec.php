@@ -45,7 +45,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->shouldHaveType(PercentageDiscountPromotionActionCommand::class);
     }
 
-    function it_implements_promotion_action_interface()
+    function it_implements_a_promotion_action_interface()
     {
         $this->shouldImplement(PromotionActionCommandInterface::class);
     }
@@ -92,7 +92,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['percentage' => 0.1], $promotion);
     }
 
-    function it_throws_exception_if_configuration_is_invalid(OrderInterface $order, PromotionInterface $promotion)
+    function it_throws_an_exception_if_configuration_is_invalid(OrderInterface $order, PromotionInterface $promotion)
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
@@ -152,7 +152,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, [], $promotion);
     }
 
-    function it_throws_exception_while_reverting_subject_which_is_not_order(
+    function it_throws_an_exception_while_reverting_subject_which_is_not_order(
         PromotionInterface $promotion,
         PromotionSubjectInterface $subject
     ) {
@@ -162,7 +162,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_configuration_form_type()
+    function it_has_a_configuration_form_type()
     {
         $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_percentage_discount_configuration');
     }

@@ -75,6 +75,8 @@ interface ProductVariantInterface extends
 
     /**
      * @param int|null $originalPrice
+     *
+     * @throws \InvalidArgumentException
      */
     public function setOriginalPrice($originalPrice);
 

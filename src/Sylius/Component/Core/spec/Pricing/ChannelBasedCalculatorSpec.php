@@ -14,10 +14,13 @@ namespace spec\Sylius\Component\Core\Pricing;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Component\Core\Pricing\ChannelBasedCalculator;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
+ * @mixin ChannelBasedCalculator
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ChannelBasedCalculatorSpec extends ObjectBehavior
@@ -29,15 +32,15 @@ final class ChannelBasedCalculatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Pricing\ChannelBasedCalculator');
+        $this->shouldHaveType(ChannelBasedCalculator::class);
     }
 
-    function it_implements_calculator_interface()
+    function it_implements_a_calculator_interface()
     {
         $this->shouldImplement(CalculatorInterface::class);
     }
 
-    function it_calculates_subject_price_based_on_current_channel(
+    function it_calculates_a_subject_price_based_on_current_channel(
         $channelContext,
         ChannelInterface $channel,
         PriceableInterface $subject
@@ -50,7 +53,7 @@ final class ChannelBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($subject, [], [])->shouldReturn(1400);
     }
 
-    function it_returns_defaul_price_if_current_channel_price_is_not_configured(
+    function it_returns_a_default_price_if_current_channel_price_is_not_configured(
         $channelContext,
         ChannelInterface $channel,
         PriceableInterface $subject
@@ -64,7 +67,7 @@ final class ChannelBasedCalculatorSpec extends ObjectBehavior
         $this->calculate($subject, [], [])->shouldReturn(2000);
     }
 
-    function it_has_type()
+    function it_has_a_type()
     {
         $this->getType()->shouldReturn('channel_based');
     }

@@ -51,14 +51,6 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /**
      * {@inheritdoc}
      */
-    public static function getTranslationClass()
-    {
-        return ShippingMethodTranslation::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTaxCategory()
     {
         return $this->taxCategory;
@@ -70,5 +62,13 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     public function setTaxCategory(TaxCategoryInterface $category = null)
     {
         $this->taxCategory = $category;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getTranslationClass()
+    {
+        return ShippingMethodTranslation::class;
     }
 }

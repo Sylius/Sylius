@@ -29,19 +29,19 @@ final class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(CustomerLoyaltyRuleChecker::class);
     }
 
-    function it_should_be_Sylius_rule_checker()
+    function it_is_a_rule_checker()
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_should_recognize_no_customer_as_not_eligible(OrderInterface $subject)
+    function it_recognizes_no_customer_as_not_eligible(OrderInterface $subject)
     {
         $subject->getCustomer()->willReturn(null);
 
         $this->isEligible($subject, ['time' => 30, 'unit' => 'days'])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_customer_is_created_after_configured(
+    function it_recognizes_a_subject_as_not_eligible_if_customer_is_created_after_configured(
         OrderInterface $subject,
         TimestampableInterface $customer
     ) {
@@ -51,7 +51,7 @@ final class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['time' => 30, 'unit' => 'days'])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_customer_is_created_before_configured(
+    function it_recognizes_a_subject_as_eligible_if_customer_is_created_before_configured(
         OrderInterface $subject,
         TimestampableInterface $customer
     ) {
@@ -61,7 +61,7 @@ final class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['time' => 30, 'unit' => 'days'])->shouldReturn(true);
     }
 
-    function it_should_recognize_subject_as_eligible_if_customer_is_created_after_configured(
+    function it_recognizes_a_subject_as_eligible_if_customer_is_created_after_configured(
         OrderInterface $subject,
         TimestampableInterface $customer
     ) {
@@ -71,7 +71,7 @@ final class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['time' => 30, 'unit' => 'days', 'after' => true])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_customer_is_created_before_configured(
+    function it_recognizes_a_subject_as_not_eligible_if_customer_is_created_before_configured(
         OrderInterface $subject,
         TimestampableInterface $customer
     ) {

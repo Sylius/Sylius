@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Component\Core\Model\OrderInterface as CoreOrderInterface;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Webmozart\Assert\Assert;
@@ -38,10 +38,10 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(OrderInterface $order)
+    public function process(BaseOrderInterface $order)
     {
-        /** @var CoreOrderInterface $order */
-        Assert::isInstanceOf($order, CoreOrderInterface::class);
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         $context = [];
         if (null !== $customer = $order->getCustomer()) {

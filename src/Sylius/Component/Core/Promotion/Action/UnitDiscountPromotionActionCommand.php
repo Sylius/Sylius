@@ -96,8 +96,10 @@ abstract class UnitDiscountPromotionActionCommand implements PromotionActionComm
      *
      * @return AdjustmentInterface
      */
-    protected function createAdjustment(PromotionInterface $promotion, $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-    {
+    protected function createAdjustment(
+        PromotionInterface $promotion,
+        $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT
+    ) {
         /** @var AdjustmentInterface $adjustment */
         $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType($type);

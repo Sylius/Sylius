@@ -12,19 +12,22 @@
 namespace spec\Sylius\Component\Core\Distributor;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Distributor\IntegerDistributor;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 
 /**
+ * @mixin IntegerDistributor
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class IntegerDistributorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Distributor\IntegerDistributor');
+        $this->shouldHaveType(IntegerDistributor::class);
     }
 
-    function it_implements_integer_distributor_interface()
+    function it_implements_an_integer_distributor_interface()
     {
         $this->shouldImplement(IntegerDistributorInterface::class);
     }
@@ -42,9 +45,15 @@ final class IntegerDistributorSpec extends ObjectBehavior
         $this->distribute(-1000, 3)->shouldReturn([-334, -333, -333]);
     }
 
-    function it_throws_exception_if_number_of_targets_is_not_integer_or_below_1()
+    function it_throws_an_exception_if_number_of_targets_is_not_integer_or_below_1()
     {
-        $this->shouldThrow(new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.'))->during('distribute', [1000, 'test']);
-        $this->shouldThrow(new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.'))->during('distribute', [1000, 0]);
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.'))
+            ->during('distribute', [1000, 'test'])
+        ;
+        $this
+            ->shouldThrow(new \InvalidArgumentException('Number of targets must be an integer, bigger than 0.'))
+            ->during('distribute', [1000, 0])
+        ;
     }
 }

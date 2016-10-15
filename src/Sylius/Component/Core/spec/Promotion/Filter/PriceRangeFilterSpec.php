@@ -15,18 +15,21 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
+use Sylius\Component\Core\Promotion\Filter\PriceRangeFilter;
 
 /**
+ * @mixin PriceRangeFilter
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PriceRangeFilterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Filter\PriceRangeFilter');
+        $this->shouldHaveType(PriceRangeFilter::class);
     }
 
-    function it_implements_filter_interface()
+    function it_implements_a_filter_interface()
     {
         $this->shouldImplement(FilterInterface::class);
     }

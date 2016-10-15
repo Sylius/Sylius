@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Core\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
-use Sylius\Component\Core\Context\StorageBasedLocaleContext;
+use Sylius\Component\Core\Locale\Context\StorageBasedLocaleContext;
 use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
@@ -45,7 +45,7 @@ final class StorageBasedLocaleContextSpec extends ObjectBehavior
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_returns_available_active_locale(
+    function it_returns_an_available_active_locale(
         ChannelContextInterface $channelContext,
         LocaleStorageInterface $localeStorage,
         LocaleProviderInterface $localeProvider,

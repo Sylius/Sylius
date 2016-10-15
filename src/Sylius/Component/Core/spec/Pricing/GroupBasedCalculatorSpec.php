@@ -12,21 +12,24 @@
 namespace spec\Sylius\Component\Core\Pricing;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Pricing\GroupBasedCalculator;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
 /**
+ * @mixin GroupBasedCalculator
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class GroupBasedCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Pricing\GroupBasedCalculator');
+        $this->shouldHaveType(GroupBasedCalculator::class);
     }
 
-    function it_implements_Sylius_pricing_calculator_interface()
+    function it_implements_a_pricing_calculator_interface()
     {
         $this->shouldImplement(CalculatorInterface::class);
     }

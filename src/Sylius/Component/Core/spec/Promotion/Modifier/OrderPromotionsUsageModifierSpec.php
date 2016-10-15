@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Component\Core\Promotion\Modifier;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
@@ -19,9 +18,9 @@ use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- *
  * @mixin OrderPromotionsUsageModifier
+ *
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
 {
@@ -30,12 +29,12 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         $this->shouldHaveType(OrderPromotionsUsageModifier::class);
     }
 
-    function it_implements_order_promotions_usage_modifier_interface()
+    function it_implements_an_order_promotions_usage_modifier_interface()
     {
         $this->shouldImplement(OrderPromotionsUsageModifierInterface::class);
     }
 
-    function it_increment_usage_of_promotions_applied_on_order(
+    function it_increments_a_usage_of_promotions_applied_on_order(
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion
@@ -48,7 +47,7 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         $this->increment($order);
     }
 
-    function it_decrements_usage_of_promotions_applied_on_order(
+    function it_decrements_a_usage_of_promotions_applied_on_order(
         OrderInterface $order,
         PromotionInterface $firstPromotion,
         PromotionInterface $secondPromotion

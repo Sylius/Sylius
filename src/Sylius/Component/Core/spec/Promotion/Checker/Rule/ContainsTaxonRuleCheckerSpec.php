@@ -39,7 +39,7 @@ final class ContainsTaxonRuleCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(ContainsTaxonRuleChecker::class);
     }
 
-    function it_implements_rule_checker_interface()
+    function it_implements_a_rule_checker_interface()
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
@@ -98,7 +98,7 @@ final class ContainsTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['taxon' => 'bows', 'count' => 15])->shouldReturn(false);
     }
 
-    function it_does_not_check_item_if_its_product_has_no_required_taxon(
+    function it_does_not_check_an_item_if_its_product_has_no_required_taxon(
         OrderInterface $order,
         OrderItemInterface $compositeBowItem,
         OrderItemInterface $longswordItem,
@@ -141,7 +141,7 @@ final class ContainsTaxonRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($order, ['taxon' => 'bows', 'count' => 10])->shouldReturn(false);
     }
 
-    function it_throws_exception_if_the_promotion_subject_is_not_an_order(PromotionSubjectInterface $subject)
+    function it_throws_an_exception_if_the_promotion_subject_is_not_an_order(PromotionSubjectInterface $subject)
     {
         $this
             ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))
@@ -149,7 +149,7 @@ final class ContainsTaxonRuleCheckerSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_configuration_type()
+    function it_has_a_configuration_type()
     {
         $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_contains_taxon_configuration');
     }

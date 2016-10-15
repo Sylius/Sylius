@@ -11,24 +11,26 @@
 
 namespace spec\Sylius\Component\Core\Promotion\Filter;
 
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
+use Sylius\Component\Core\Promotion\Filter\TaxonFilter;
 
 /**
+ * @mixin TaxonFilter
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class TaxonFilterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Filter\TaxonFilter');
+        $this->shouldHaveType(TaxonFilter::class);
     }
 
-    function it_implements_filter_interface()
+    function it_implements_a_filter_interface()
     {
         $this->shouldImplement(FilterInterface::class);
     }

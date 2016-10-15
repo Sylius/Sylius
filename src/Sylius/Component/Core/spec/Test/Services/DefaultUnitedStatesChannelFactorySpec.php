@@ -68,12 +68,12 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         $this->shouldHaveType(DefaultUnitedStatesChannelFactory::class);
     }
 
-    function it_implements_default_channel_factory_interface()
+    function it_implements_a_default_channel_factory_interface()
     {
         $this->shouldImplement(DefaultChannelFactoryInterface::class);
     }
 
-    function it_creates_default_united_states_channel_with_country_zone_and_usd_as_default_currency(
+    function it_creates_a_default_united_states_channel_with_country_zone_and_usd_as_default_currency(
         RepositoryInterface $channelRepository,
         RepositoryInterface $countryRepository,
         RepositoryInterface $currencyRepository,

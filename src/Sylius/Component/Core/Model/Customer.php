@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
@@ -21,7 +22,7 @@ use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 class Customer extends BaseCustomer implements CustomerInterface, ProductReviewerInterface
 {
     /**
-     * @var ArrayCollection
+     * @var Collection|OrderInterface[]
      */
     protected $orders;
 
@@ -36,7 +37,7 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     protected $shippingAddress;
 
     /**
-     * @var ArrayCollection
+     * @var Collection|AddressInterface[]
      */
     protected $addresses;
 
@@ -64,6 +65,14 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     /**
      * {@inheritdoc}
      */
+    public function getBillingAddress()
+    {
+        return $this->billingAddress;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setBillingAddress(AddressInterface $billingAddress = null)
     {
         $this->billingAddress = $billingAddress;
@@ -76,9 +85,9 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     /**
      * {@inheritdoc}
      */
-    public function getBillingAddress()
+    public function getShippingAddress()
     {
-        return $this->billingAddress;
+        return $this->shippingAddress;
     }
 
     /**
@@ -91,14 +100,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
         if (null !== $shippingAddress) {
             $this->addAddress($shippingAddress);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingAddress()
-    {
-        return $this->shippingAddress;
     }
 
     /**
@@ -140,14 +141,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     /**
      * {@inheritdoc}
      */
-    public function hasUser()
-    {
-        return null !== $this->user;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getUser()
     {
         return $this->user;
@@ -165,7 +158,15 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     }
 
     /**
-     * @param ShopUserInterface $user
+     * {@inheritdoc}
+     */
+    public function hasUser()
+    {
+        return null !== $this->user;
+    }
+
+    /**
+     * @param ShopUserInterface|null $user
      */
     protected function assignCustomer(ShopUserInterface $user = null)
     {

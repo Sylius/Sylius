@@ -91,8 +91,6 @@ class Order extends BaseOrder implements OrderInterface
     protected $paymentState = OrderPaymentStates::STATE_CART;
 
     /**
-     * It depends on the status of all order shipments.
-     *
      * @var string
      */
     protected $shippingState = OrderShippingStates::STATE_CART;

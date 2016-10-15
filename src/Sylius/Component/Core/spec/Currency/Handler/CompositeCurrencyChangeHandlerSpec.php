@@ -29,17 +29,17 @@ final class CompositeCurrencyChangeHandlerSpec extends ObjectBehavior
         $this->shouldHaveType(CompositeCurrencyChangeHandler::class);
     }
 
-    function it_implements_currency_change_handler_interface()
+    function it_implements_a_currency_change_handler_interface()
     {
         $this->shouldImplement(CurrencyChangeHandlerInterface::class);
     }
 
-    function it_throws_handle_exception_when_there_are_no_nested_handlers_defined()
+    function it_throws_a_handle_exception_when_there_are_no_nested_handlers_defined()
     {
         $this->shouldThrow(HandleException::class)->during('handle', ['USD']);
     }
 
-    function it_throws_handle_exception_when_any_of_nested_handlers_throws_it(
+    function it_throws_a_handle_exception_when_any_of_nested_handlers_throws_it(
         CurrencyChangeHandlerInterface $currencyChangeHandler
     ) {
         $currencyChangeHandler->handle(Argument::any())->willThrow(HandleException::class);

@@ -29,9 +29,9 @@ interface ShipmentRepositoryInterface extends RepositoryInterface
 
     /**
      * @param string $name
-     * @param string $locale
+     * @param string $localeCode
      *
      * @return ShipmentInterface[]
      */
-    public function findByName($name, $locale);
+    public function findByName($name, $localeCode);
 }

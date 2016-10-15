@@ -125,6 +125,8 @@ interface OrderInterface extends
 
     /**
      * @param string
+     *
+     * @throws \InvalidArgumentException
      */
     public function setCurrencyCode($currencyCode);
 
@@ -140,6 +142,8 @@ interface OrderInterface extends
 
     /**
      * @return string
+     *
+     * @throws \InvalidArgumentException
      */
     public function getLocaleCode();
 

@@ -36,19 +36,19 @@ final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         $this->shouldHaveType(ShippingCountryRuleChecker::class);
     }
 
-    function it_should_be_Sylius_rule_checker()
+    function it_is_a_rule_checker()
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_should_recognize_no_shipping_address_as_not_eligible(OrderInterface $subject)
+    function it_recognizes_no_shipping_address_as_not_eligible(OrderInterface $subject)
     {
         $subject->getShippingAddress()->willReturn(null);
 
         $this->isEligible($subject, [])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_country_does_not_match(
+    function it_recognizes_a_subject_as_not_eligible_if_country_does_not_match(
         OrderInterface $subject,
         AddressInterface $address,
         CountryInterface $country,
@@ -63,7 +63,7 @@ final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['country' => 'NL'])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_eligible_if_country_match(
+    function it_recognizes_a_subject_as_eligible_if_country_match(
         OrderInterface $subject,
         AddressInterface $address,
         CountryInterface $country,

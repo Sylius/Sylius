@@ -28,17 +28,17 @@ final class CompositeLocaleChangeHandlerSpec extends ObjectBehavior
         $this->shouldHaveType(CompositeLocaleChangeHandler::class);
     }
 
-    function it_implements_locale_change_handler_interface()
+    function it_implements_a_locale_change_handler_interface()
     {
         $this->shouldImplement(LocaleChangeHandlerInterface::class);
     }
 
-    function it_throws_handle_exception_if_there_are_no_nested_handlers_defined()
+    function it_throws_a_handle_exception_if_there_are_no_nested_handlers_defined()
     {
         $this->shouldThrow(HandleException::class)->during('handle', ['en_GB']);
     }
 
-    function it_throws_handle_exception_if_some_of_the_nested_handler_throws_it(
+    function it_throws_a_handle_exception_if_some_of_the_nested_handler_throws_it(
         LocaleChangeHandlerInterface $localeChangeHandler
     ) {
         $localeChangeHandler->handle('en_GB')->willThrow(HandleException::class);
@@ -47,7 +47,7 @@ final class CompositeLocaleChangeHandlerSpec extends ObjectBehavior
         $this->shouldThrow(HandleException::class)->during('handle', ['en_GB']);
     }
 
-    function it_handles_locale_changing_by_all_nested_handlers(
+    function it_handles_a_locale_changing_by_all_nested_handlers(
         LocaleChangeHandlerInterface $firstLocaleChangeHandler,
         LocaleChangeHandlerInterface $secondLocaleChangeHandler
     ) {

@@ -13,38 +13,42 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\Shipment;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\Shipment;
+use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
 
+/**
+ * @mixin Shipment
+ */
 final class ShipmentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\Shipment');
+        $this->shouldHaveType(Shipment::class);
     }
 
-    function it_should_implement_Sylius_core_shipment_interface()
+    function it_implements_a_shipment_interface()
     {
         $this->shouldImplement(ShipmentInterface::class);
     }
 
-    function it_should_extend_Sylius_shipment_mapped_superclass()
+    function it_extends_a_base_shipment()
     {
-        $this->shouldHaveType(Shipment::class);
+        $this->shouldHaveType(BaseShipment::class);
     }
 
-    function it_should_not_belong_to_an_order_by_default()
+    function it_does_not_belong_to_an_order_by_default()
     {
         $this->getOrder()->shouldReturn(null);
     }
 
-    function it_should_allow_attaching_itself_to_an_order(OrderInterface $order)
+    function it_allows_attaching_itself_to_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);
     }
 
-    function it_should_allow_detaching_itself_from_an_order(OrderInterface $order)
+    function it_allows_detaching_itself_from_an_order(OrderInterface $order)
     {
         $this->setOrder($order);
         $this->getOrder()->shouldReturn($order);

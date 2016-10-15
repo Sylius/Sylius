@@ -17,7 +17,6 @@ use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**

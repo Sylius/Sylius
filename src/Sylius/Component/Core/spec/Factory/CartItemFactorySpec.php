@@ -37,7 +37,7 @@ final class CartItemFactorySpec extends ObjectBehavior
         $this->shouldHaveType(CartItemFactory::class);
     }
 
-    function it_implements_cart_item_factory_interface()
+    function it_implements_a_cart_item_factory_interface()
     {
         $this->shouldImplement(CartItemFactoryInterface::class);
     }
@@ -47,7 +47,7 @@ final class CartItemFactorySpec extends ObjectBehavior
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_creates_new_cart_item(FactoryInterface $decoratedFactory, OrderItemInterface $cartItem)
+    function it_creates_a_new_cart_item(FactoryInterface $decoratedFactory, OrderItemInterface $cartItem)
     {
         $decoratedFactory->createNew()->willReturn($cartItem);
 

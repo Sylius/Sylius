@@ -33,9 +33,6 @@ class AdminUser extends User implements AdminUserInterface
      */
     protected $localeCode;
 
-    /**
-     * {@inheritdoc}
-     */
     public function __construct()
     {
         parent::__construct();
@@ -44,7 +41,7 @@ class AdminUser extends User implements AdminUserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFirstName()
     {
@@ -52,7 +49,7 @@ class AdminUser extends User implements AdminUserInterface
     }
 
     /**
-     * @param string $firstName
+     * {@inheritdoc}
      */
     public function setFirstName($firstName)
     {
@@ -60,7 +57,7 @@ class AdminUser extends User implements AdminUserInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getLastName()
     {
@@ -68,7 +65,7 @@ class AdminUser extends User implements AdminUserInterface
     }
 
     /**
-     * @param string $lastName
+     * {@inheritdoc}
      */
     public function setLastName($lastName)
     {

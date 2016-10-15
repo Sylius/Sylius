@@ -35,12 +35,12 @@ class OrderExchangeRateUpdaterSpec extends ObjectBehavior
         $this->shouldHaveType(OrderExchangeRateUpdater::class);
     }
 
-    function it_implements_order_updater_interface()
+    function it_implements_an_order_updater_interface()
     {
         $this->shouldImplement(OrderUpdaterInterface::class);
     }
 
-    function it_throws_exception_when_currency_from_order_was_not_found_in_the_system(
+    function it_throws_an_exception_when_currency_from_order_was_not_found_in_the_system(
         RepositoryInterface $currencyRepository,
         OrderInterface $order
     ) {

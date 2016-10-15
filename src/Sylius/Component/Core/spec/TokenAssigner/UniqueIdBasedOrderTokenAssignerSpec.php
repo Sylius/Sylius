@@ -29,12 +29,12 @@ final class UniqueIdBasedOrderTokenAssignerSpec extends ObjectBehavior
         $this->shouldHaveType(UniqueIdBasedOrderTokenAssigner::class);
     }
 
-    function it_is_order_token_assigner()
+    function it_is_an_order_token_assigner()
     {
         $this->shouldImplement(OrderTokenAssignerInterface::class);
     }
 
-    function it_assigns_token_value_for_order(OrderInterface $order)
+    function it_assigns_a_token_value_for_order(OrderInterface $order)
     {
         $order->setTokenValue(Argument::type('string'))->shouldBeCalled();
 

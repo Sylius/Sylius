@@ -23,6 +23,8 @@ use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
+ * @mixin DefaultShippingMethodResolver
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DefaultShippingMethodResolverSpec extends ObjectBehavior
@@ -37,7 +39,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         $this->shouldHaveType(DefaultShippingMethodResolver::class);
     }
 
-    function it_implements_default_shipping_method_resolver_interface()
+    function it_implements_a_default_shipping_method_resolver_interface()
     {
         $this->shouldImplement(DefaultShippingMethodResolverInterface::class);
     }
@@ -62,7 +64,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
     }
 
-    function it_throws_exception_if_there_is_no_enabled_shipping_methods(
+    function it_throws_an_exception_if_there_is_no_enabled_shipping_methods(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentInterface $shipment,
         ChannelInterface $channel,
@@ -81,7 +83,7 @@ final class DefaultShippingMethodResolverSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_exception_if_passed_shipment_is_not_core_shipment_object(BaseShipmentInterface $shipment)
+    function it_throws_an_exception_if_passed_shipment_is_not_core_shipment_object(BaseShipmentInterface $shipment)
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('getDefaultShippingMethod', [$shipment]);
     }

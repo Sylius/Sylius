@@ -50,15 +50,15 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Test\Services\DefaultChannelFactory');
+        $this->shouldHaveType(DefaultChannelFactory::class);
     }
 
-    function it_implements_default_channel_factory_interface()
+    function it_implements_a_default_channel_factory_interface()
     {
         $this->shouldImplement(DefaultChannelFactoryInterface::class);
     }
 
-    function it_creates_default_channel_and_persist_it(
+    function it_creates_a_default_channel_and_persist_it(
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,

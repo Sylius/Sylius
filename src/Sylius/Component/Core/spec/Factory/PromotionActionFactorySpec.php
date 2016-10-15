@@ -39,12 +39,12 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->shouldHaveType(PromotionActionFactory::class);
     }
 
-    function it_implements_action_factory_interface()
+    function it_implements_an_action_factory_interface()
     {
         $this->shouldImplement(PromotionActionFactoryInterface::class);
     }
 
-    function it_creates_new_action_with_default_action_factory(
+    function it_creates_a_new_action_with_a_default_action_factory(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ) {
@@ -53,7 +53,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($promotionAction);
     }
 
-    function it_creates_new_fixed_discount_action_with_given_amount(
+    function it_creates_a_new_fixed_discount_action_with_a_given_amount(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ) {
@@ -65,7 +65,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createFixedDiscount(1000)->shouldReturn($promotionAction);
     }
 
-    function it_creates_unit_fixed_discount_action_with_given_amount(
+    function it_creates_an_unit_fixed_discount_action_with_a_given_amount(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ) {
@@ -77,7 +77,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createUnitFixedDiscount(1000)->shouldReturn($promotionAction);
     }
 
-    function it_creates_percentage_discount_action_with_given_discount_rate(
+    function it_creates_a_percentage_discount_action_with_a_given_discount_rate(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ) {
@@ -89,7 +89,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createPercentageDiscount(0.1)->shouldReturn($promotionAction);
     }
 
-    function it_creates_unit_percentage_discount_action_with_given_discount_rate(
+    function it_creates_an_unit_percentage_discount_action_with_given_a_discount_rate(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ) {
@@ -101,7 +101,7 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createUnitPercentageDiscount(0.1)->shouldReturn($promotionAction);
     }
 
-    function it_creates_shipping_percentage_discount_action_with_given_discount_rate(
+    function it_creates_a_shipping_percentage_discount_action_with_a_given_discount_rate(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ) {

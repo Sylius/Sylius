@@ -16,7 +16,6 @@ use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
-use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
 
 /**

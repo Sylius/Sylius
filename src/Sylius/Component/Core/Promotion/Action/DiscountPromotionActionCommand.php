@@ -50,6 +50,8 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
      * @param PromotionSubjectInterface $subject
      *
      * @return bool
+     *
+     * @throws \InvalidArgumentException
      */
     protected function isSubjectValid(PromotionSubjectInterface $subject)
     {
@@ -62,8 +64,10 @@ abstract class DiscountPromotionActionCommand implements PromotionActionCommandI
      * @param OrderItemUnitInterface $unit
      * @param PromotionInterface $promotion
      */
-    private function removeUnitOrderPromotionAdjustmentsByOrigin(OrderItemUnitInterface $unit, PromotionInterface $promotion)
-    {
+    private function removeUnitOrderPromotionAdjustmentsByOrigin(
+        OrderItemUnitInterface $unit,
+        PromotionInterface $promotion
+    ) {
         foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
             if ($promotion->getCode() === $adjustment->getOriginCode()) {
                 $unit->removeAdjustment($adjustment);

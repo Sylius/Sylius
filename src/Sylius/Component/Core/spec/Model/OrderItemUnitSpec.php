@@ -42,17 +42,17 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->shouldHaveType(OrderItemUnit::class);
     }
 
-    function it_implements_order_item_unit_interface()
+    function it_implements_an_order_item_unit_interface()
     {
         $this->shouldImplement(OrderItemUnitInterface::class);
     }
 
-    function it_implements_inventory_unit_interface()
+    function it_implements_an_inventory_unit_interface()
     {
         $this->shouldImplement(InventoryUnitInterface::class);
     }
 
-    function it_implements_shipment_unit_interface()
+    function it_implements_a_shipment_unit_interface()
     {
         $this->shouldImplement(ShipmentUnitInterface::class);
     }
@@ -80,14 +80,14 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn($updatedAt);
     }
 
-    function it_stockable_is_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
+    function its_stockable_is_an_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
     {
         $orderItem->getVariant()->willReturn($variant);
 
         $this->getStockable()->shouldReturn($variant);
     }
 
-    function its_shippable_is_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
+    function its_shippable_is_an_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
     {
         $orderItem->getVariant()->willReturn($variant);
 
@@ -99,7 +99,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getTaxTotal()->shouldReturn(0);
     }
 
-    function it_returns_sum_of_neutral_and_non_neutral_tax_adjustments_as_tax_total(
+    function it_returns_a_sum_of_neutral_and_non_neutral_tax_adjustments_as_tax_total(
         OrderItemInterface $orderItem,
         AdjustmentInterface $nonNeutralTaxAdjustment,
         AdjustmentInterface $neutralTaxAdjustment

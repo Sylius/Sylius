@@ -40,10 +40,10 @@ final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicator');
+        $this->shouldHaveType(UnitsPromotionAdjustmentsApplicator::class);
     }
 
-    function it_implements_units_promotion_adjustments_applicator_interface()
+    function it_implements_an_units_promotion_adjustments_applicator_interface()
     {
         $this->shouldImplement(UnitsPromotionAdjustmentsApplicatorInterface::class);
     }

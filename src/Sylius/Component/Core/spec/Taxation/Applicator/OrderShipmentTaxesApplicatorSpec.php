@@ -44,18 +44,18 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Taxation\Applicator\OrderShipmentTaxesApplicator');
+        $this->shouldHaveType(OrderShipmentTaxesApplicator::class);
     }
 
-    function it_implements_order_shipment_taxes_applicator_interface()
+    function it_implements_an_order_shipment_taxes_applicator_interface()
     {
         $this->shouldImplement(OrderTaxesApplicatorInterface::class);
     }
 
     function it_applies_shipment_taxes_on_order_based_on_shipment_adjustments_promotions_and_rate(
-        $adjustmentsFactory,
-        $calculator,
-        $taxRateResolver,
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        TaxRateResolverInterface $taxRateResolver,
         AdjustmentInterface $shippingTaxAdjustment,
         Collection $shippingAdjustments,
         OrderInterface $order,
@@ -78,16 +78,19 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
 
         $calculator->calculate(1000, $taxRate)->willReturn(100);
 
-        $adjustmentsFactory->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 100, false)->willReturn($shippingTaxAdjustment);
+        $adjustmentsFactory
+            ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, 'Simple tax (10%)', 100, false)
+            ->willReturn($shippingTaxAdjustment)
+        ;
         $order->addAdjustment($shippingTaxAdjustment)->shouldBeCalled();
 
         $this->apply($order, $zone);
     }
 
     function it_does_nothing_if_there_are_no_shipment_taxes_on_order(
-        $adjustmentsFactory,
-        $calculator,
-        $taxRateResolver,
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        TaxRateResolverInterface $taxRateResolver,
         Collection $shippingAdjustments,
         OrderInterface $order,
         ShipmentInterface $shipment,
@@ -112,8 +115,11 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_does_nothing_if_order_has_no_shipment($taxRateResolver, OrderInterface $order, ZoneInterface $zone)
-    {
+    function it_does_nothing_if_order_has_no_shipment(
+        TaxRateResolverInterface $taxRateResolver,
+        OrderInterface $order,
+        ZoneInterface $zone
+    ) {
         $order->getLastShipment()->willReturn(null);
         $taxRateResolver->resolve(Argument::any())->shouldNotBeCalled();
 
@@ -121,7 +127,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_tax_rate_cannot_be_resolved(
-        $taxRateResolver,
+        TaxRateResolverInterface $taxRateResolver,
         Collection $shippingAdjustments,
         OrderInterface $order,
         ShipmentInterface $shipment,
@@ -140,7 +146,7 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_order_has_no_shipping_adjustments(
-        $taxRateResolver,
+        TaxRateResolverInterface $taxRateResolver,
         Collection $shippingAdjustments,
         OrderInterface $order,
         ShipmentInterface $shipment,

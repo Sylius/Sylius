@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Promotion\Filter;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Model\ProductInterface;
 
 /**

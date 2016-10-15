@@ -45,18 +45,18 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator');
+        $this->shouldHaveType(OrderItemUnitsTaxesApplicator::class);
     }
 
-    function it_implements_order_shipment_taxes_applicator_interface()
+    function it_implements_an_order_shipment_taxes_applicator_interface()
     {
         $this->shouldImplement(OrderTaxesApplicatorInterface::class);
     }
 
     function it_applies_taxes_on_units_based_on_item_total_and_rate(
-        $adjustmentsFactory,
-        $calculator,
-        $taxRateResolver,
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        TaxRateResolverInterface $taxRateResolver,
         AdjustmentInterface $taxAdjustment1,
         AdjustmentInterface $taxAdjustment2,
         Collection $items,
@@ -128,8 +128,8 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_tax_rate_cannot_be_resolved(
-        $calculator,
-        $taxRateResolver,
+        CalculatorInterface $calculator,
+        TaxRateResolverInterface $taxRateResolver,
         Collection $items,
         OrderInterface $order,
         OrderItemInterface $orderItem,
@@ -153,9 +153,9 @@ final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
     }
 
     function it_does_not_apply_taxes_with_amount_0(
-        $adjustmentsFactory,
-        $calculator,
-        $taxRateResolver,
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        TaxRateResolverInterface $taxRateResolver,
         Collection $items,
         Collection $units,
         OrderInterface $order,

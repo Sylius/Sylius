@@ -40,19 +40,21 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->shouldHaveType(PromotionRuleFactory::class);
     }
 
-    function it_implements_rule_factory_interface()
+    function it_implements_a_rule_factory_interface()
     {
         $this->shouldImplement(PromotionRuleFactoryInterface::class);
     }
 
-    function it_uses_decorated_factory_to_create_new_rule_object(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
-    {
+    function it_uses_a_decorated_factory_to_create_new_rule_object(
+        FactoryInterface $decoratedFactory,
+        PromotionRuleInterface $rule
+    ) {
         $decoratedFactory->createNew()->willReturn($rule);
 
         $this->createNew()->shouldReturn($rule);
     }
 
-    function it_creates_cart_quantity_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
+    function it_creates_a_cart_quantity_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(CartQuantityRuleChecker::TYPE)->shouldBeCalled();
@@ -61,7 +63,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createCartQuantity(5)->shouldReturn($rule);
     }
 
-    function it_creates_item_total_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
+    function it_creates_an_item_total_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(ItemTotalRuleChecker::TYPE)->shouldBeCalled();
@@ -70,7 +72,7 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createItemTotal(1000)->shouldReturn($rule);
     }
 
-    function it_creates_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
+    function it_creates_a_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(TaxonRuleChecker::TYPE)->shouldBeCalled();
@@ -79,8 +81,10 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createTaxon([1, 6])->shouldReturn($rule);
     }
 
-    function it_creates_total_of_items_from_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
-    {
+    function it_creates_a_total_of_items_from_taxon_rule(
+        FactoryInterface $decoratedFactory,
+        PromotionRuleInterface $rule
+    ) {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(TotalOfItemsFromTaxonRuleChecker::TYPE)->shouldBeCalled();
         $rule->setConfiguration(['taxon' => 'spears', 'amount' => 1000])->shouldBeCalled();

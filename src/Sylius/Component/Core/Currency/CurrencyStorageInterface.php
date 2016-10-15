@@ -28,7 +28,7 @@ interface CurrencyStorageInterface
     /**
      * @param ChannelInterface $channel
      *
-     * @return string Currency code
+     * @return string
      *
      * @throws CurrencyNotFoundException
      */

@@ -31,7 +31,7 @@ final class SessionBasedLocaleStorageSpec extends ObjectBehavior
         $this->shouldImplement(LocaleStorageInterface::class);
     }
 
-    function it_sets_locale_for_given_channel(
+    function it_sets_a_locale_for_a_given_channel(
         SessionInterface $session,
         ChannelInterface $channel
     ) {
@@ -42,7 +42,7 @@ final class SessionBasedLocaleStorageSpec extends ObjectBehavior
         $this->set($channel, 'BTC');
     }
 
-    function it_gets_locale_for_given_channel(
+    function it_gets_a_locale_for_a_given_channel(
         SessionInterface $session,
         ChannelInterface $channel
     ) {

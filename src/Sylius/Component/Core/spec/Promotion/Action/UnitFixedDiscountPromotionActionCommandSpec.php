@@ -46,15 +46,15 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->shouldHaveType(UnitFixedDiscountPromotionActionCommand::class);
     }
 
-    function it_is_discount_action()
+    function it_is_a_discount_action()
     {
         $this->shouldHaveType(UnitDiscountPromotionActionCommand::class);
     }
 
-    function it_applies_fixed_discount_on_every_unit_in_order(
-        $adjustmentFactory,
-        $priceRangeFilter,
-        $taxonFilter,
+    function it_applies_a_fixed_discount_on_every_unit_in_order(
+        FactoryInterface $adjustmentFactory,
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
@@ -109,7 +109,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_does_not_apply_promotions_with_amount_0(
-        $adjustmentFactory,
+        FactoryInterface $adjustmentFactory,
         OrderInterface $order,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
@@ -124,9 +124,9 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_does_not_apply_bigger_promotions_than_unit_total(
-        $adjustmentFactory,
-        $priceRangeFilter,
-        $taxonFilter,
+        FactoryInterface $adjustmentFactory,
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
@@ -180,7 +180,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['amount' => 1000, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
     }
 
-    function it_throws_exception_if_passed_subject_to_execute_is_not_order(
+    function it_throws_an_exception_if_passed_subject_to_execute_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ) {
@@ -190,7 +190,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ;
     }
 
-    function it_revert_proper_promotion_adjustment_from_all_units(
+    function it_reverts_a_proper_promotion_adjustment_from_all_units(
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $items,
@@ -224,7 +224,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->revert($order, ['amount' => 1000], $promotion);
     }
 
-    function it_throws_exception_if_passed_subject_to_revert_is_not_order(
+    function it_throws_an_exception_if_passed_subject_to_revert_is_not_order(
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ) {
@@ -234,7 +234,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_configuration_form_type()
+    function it_has_a_configuration_form_type()
     {
         $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_fixed_discount_configuration');
     }

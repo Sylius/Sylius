@@ -40,12 +40,12 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->shouldHaveType(ShopBasedCartContext::class);
     }
 
-    function it_implements_cart_context_interface()
+    function it_implements_a_cart_context_interface()
     {
         $this->shouldImplement(CartContextInterface::class);
     }
 
-    function it_creates_cart_if_does_not_exist_with_shop_basic_configuration(
+    function it_creates_a_cart_if_does_not_exist_with_shop_basic_configuration(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         OrderInterface $cart,
@@ -67,7 +67,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_throws_cart_not_found_exception_if_channel_is_undefined(
+    function it_throws_a_cart_not_found_exception_if_channel_is_undefined(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         OrderInterface $cart
@@ -81,7 +81,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_cart_not_found_exception_if_currency_code_is_undefined(
+    function it_throws_a_cart_not_found_exception_if_currency_code_is_undefined(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         ChannelInterface $channel,
@@ -97,7 +97,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_cart_not_found_exception_if_locale_code_is_undefined(
+    function it_throws_a_cart_not_found_exception_if_locale_code_is_undefined(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         ChannelInterface $channel,

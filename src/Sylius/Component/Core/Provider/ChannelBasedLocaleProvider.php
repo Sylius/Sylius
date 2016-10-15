@@ -14,7 +14,6 @@ namespace Sylius\Component\Core\Provider;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 

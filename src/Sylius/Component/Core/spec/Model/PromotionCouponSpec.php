@@ -15,6 +15,9 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\PromotionCoupon;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 
+/**
+ * @mixin PromotionCoupon
+ */
 final class PromotionCouponSpec extends ObjectBehavior
 {
     public function it_is_initializable()
@@ -22,12 +25,12 @@ final class PromotionCouponSpec extends ObjectBehavior
         $this->shouldHaveType(PromotionCoupon::class);
     }
 
-    public function it_should_be_Sylius_coupon()
+    public function it_is_a_promotion_coupon()
     {
         $this->shouldImplement(PromotionCouponInterface::class);
     }
 
-    public function it_should_have_null_per_customer_usage_limit_by_default()
+    public function it_does_have_null_per_customer_usage_limit_by_default()
     {
         $this->getPerCustomerUsageLimit()->shouldReturn(null);
     }

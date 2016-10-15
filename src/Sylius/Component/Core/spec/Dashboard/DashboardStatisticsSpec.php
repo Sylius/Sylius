@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Core\Dashboard;
 
 use Sylius\Component\Core\Dashboard\DashboardStatistics;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @mixin DashboardStatistics
@@ -29,10 +28,10 @@ final class DashboardStatisticsSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Dashboard\DashboardStatistics');
+        $this->shouldHaveType(DashboardStatistics::class);
     }
 
-    function it_throws_exception_if_any_of_values_if_not_an_int()
+    function it_throws_an_exception_if_any_of_values_if_not_an_int()
     {
         $this->beConstructedWith('string', 2.5, 'foo');
 
@@ -57,7 +56,7 @@ final class DashboardStatisticsSpec extends ObjectBehavior
         $this->getNumberOfNewCustomers()->shouldReturn(10);
     }
 
-    function it_calculates_average_order_value()
+    function it_calculates_an_average_order_value()
     {
         $this->getAverageOrderValue()->shouldReturn(107);
     }

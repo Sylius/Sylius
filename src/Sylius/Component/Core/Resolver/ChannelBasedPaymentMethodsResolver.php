@@ -51,8 +51,8 @@ final class ChannelBasedPaymentMethodsResolver implements PaymentMethodsResolver
     public function supports(BasePaymentInterface $payment)
     {
         return $payment instanceof PaymentInterface &&
-                null !== $payment->getOrder() &&
-                null !== $payment->getOrder()->getChannel()
+            null !== $payment->getOrder() &&
+            null !== $payment->getOrder()->getChannel()
         ;
     }
 }

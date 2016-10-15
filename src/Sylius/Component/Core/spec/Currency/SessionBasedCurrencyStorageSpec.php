@@ -31,7 +31,7 @@ final class SessionBasedCurrencyStorageSpec extends ObjectBehavior
         $this->shouldImplement(CurrencyStorageInterface::class);
     }
 
-    function it_sets_currency_for_given_channel(
+    function it_sets_a_currency_for_a_given_channel(
         SessionInterface $session,
         ChannelInterface $channel
     ) {
@@ -42,7 +42,7 @@ final class SessionBasedCurrencyStorageSpec extends ObjectBehavior
         $this->set($channel, 'BTC');
     }
 
-    function it_gets_currency_for_given_channel(
+    function it_gets_a_currency_for_a_given_channel(
         SessionInterface $session,
         ChannelInterface $channel
     ) {
