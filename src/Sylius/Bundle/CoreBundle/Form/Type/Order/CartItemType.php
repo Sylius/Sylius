@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Order;
 
-use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType as BaseOrderItemType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;

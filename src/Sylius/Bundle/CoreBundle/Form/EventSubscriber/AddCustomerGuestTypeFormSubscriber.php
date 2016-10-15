@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddCustomerGuestTypeFormSubscriber implements EventSubscriberInterface
+final class AddCustomerGuestTypeFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var string

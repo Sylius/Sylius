@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Pagerfanta\Pagerfanta;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 

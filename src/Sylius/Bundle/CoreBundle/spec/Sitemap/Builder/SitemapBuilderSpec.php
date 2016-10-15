@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Builder;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Sitemap\Builder\SitemapBuilder;
 use Sylius\Bundle\CoreBundle\Sitemap\Builder\SitemapBuilderInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactoryInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
@@ -20,6 +20,8 @@ use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Provider\UrlProviderInterface;
 
 /**
+ * @mixin SitemapBuilder
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapBuilderSpec extends ObjectBehavior
@@ -31,7 +33,7 @@ final class SitemapBuilderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Sitemap\Builder\SitemapBuilder');
+        $this->shouldHaveType(SitemapBuilder::class);
     }
 
     function it_implements_sitemap_builder_interface()

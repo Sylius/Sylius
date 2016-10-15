@@ -20,12 +20,12 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class MailerListener
+final class MailerListener
 {
     /**
      * @var SenderInterface
      */
-    protected $emailSender;
+    private $emailSender;
 
     /**
      * @param SenderInterface $emailSender

@@ -11,19 +11,16 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener as BasePasswordUpdaterListener;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * User update listener.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class PasswordUpdaterListener extends BasePasswordUpdaterListener
+final class PasswordUpdaterListener extends BasePasswordUpdaterListener
 {
     /**
      * @param GenericEvent $event
@@ -35,7 +32,7 @@ class PasswordUpdaterListener extends BasePasswordUpdaterListener
         if (!$customer instanceof CustomerInterface) {
             throw new UnexpectedTypeException(
                 $customer,
-                'Sylius\Component\Core\Model\CustomerInterface'
+                CustomerInterface::class
             );
         }
 

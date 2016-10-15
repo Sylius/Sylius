@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Validator\Initializer;
 
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Validator\ObjectInitializerInterface;
 
 /**

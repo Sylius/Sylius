@@ -16,11 +16,11 @@ use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvider;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -32,32 +32,32 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
+final class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
     /**
      * @var FactoryInterface
      */
-    protected $oauthFactory;
+    private $oauthFactory;
 
     /**
      * @var RepositoryInterface
      */
-    protected $oauthRepository;
+    private $oauthRepository;
 
     /**
      * @var FactoryInterface
      */
-    protected $customerFactory;
-    
+    private $customerFactory;
+
     /**
      * @var FactoryInterface
      */
-    protected $userFactory;
+    private $userFactory;
 
     /**
      * @var ObjectManager
      */
-    protected $userManager;
+    private $userManager;
 
     /**
      * @param string $supportedUserClass
@@ -128,7 +128,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      *
      * @return SyliusUserInterface
      */
-    protected function createUserByOAuthUserResponse(UserResponseInterface $response)
+    private function createUserByOAuthUserResponse(UserResponseInterface $response)
     {
         /** @var \Sylius\Component\User\Model\UserInterface $user */
         $user = $this->userFactory->createNew();
@@ -165,7 +165,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      *
      * @return UserInterface
      */
-    protected function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response)
+    private function updateUserByOAuthUserResponse(UserInterface $user, UserResponseInterface $response)
     {
         $oauth = $this->oauthFactory->createNew();
         $oauth->setIdentifier($response->getUsername());

@@ -4,7 +4,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
@@ -40,7 +39,7 @@ final class GeographicalFixtureSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture');
+        $this->shouldHaveType(GeographicalFixture::class);
     }
 
     function it_is_a_fixture()

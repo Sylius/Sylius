@@ -15,11 +15,11 @@ use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Handler\CartLocaleChangeHandler;
-use Sylius\Component\Order\Context\CartContextInterface;
-use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Core\Exception\HandleException;
 use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
 
 /**
  * @mixin CartLocaleChangeHandler

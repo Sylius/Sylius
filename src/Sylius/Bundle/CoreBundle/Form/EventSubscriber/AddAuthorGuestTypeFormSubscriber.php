@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddAuthorGuestTypeFormSubscriber implements EventSubscriberInterface
+final class AddAuthorGuestTypeFormSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}
@@ -41,7 +41,7 @@ class AddAuthorGuestTypeFormSubscriber implements EventSubscriberInterface
         /** @var ReviewInterface $review */
         $review = $event->getData();
         $author = $form->getConfig()->getOption('author');
-        
+
         Assert::isInstanceOf($review, ReviewInterface::class);
 
         if (null === $author && null === $review->getAuthor()) {

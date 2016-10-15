@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class InstallAssetsCommand extends AbstractInstallCommand
+final class InstallAssetsCommand extends AbstractInstallCommand
 {
     /**
      * {@inheritdoc}

@@ -17,7 +17,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ArrayToStringTransformer implements DataTransformerInterface
+final class ArrayToStringTransformer implements DataTransformerInterface
 {
     /**
      * @var string

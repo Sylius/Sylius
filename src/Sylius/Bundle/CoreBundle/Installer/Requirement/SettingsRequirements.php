@@ -13,10 +13,13 @@ namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
-class SettingsRequirements extends RequirementCollection
+final class SettingsRequirements extends RequirementCollection
 {
     const RECOMMENDED_PHP_VERSION = '7.0';
 
+    /**
+     * @param TranslatorInterface $translator
+     */
     public function __construct(TranslatorInterface $translator)
     {
         parent::__construct($translator->trans('sylius.installer.settings.header', []));

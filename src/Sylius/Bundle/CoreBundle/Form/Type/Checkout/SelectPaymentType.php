@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

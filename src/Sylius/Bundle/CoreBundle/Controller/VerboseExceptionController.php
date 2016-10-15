@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Log\DebugLoggerInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class VerboseExceptionController extends BaseExceptionController
+final class VerboseExceptionController extends BaseExceptionController
 {
     /**
      * {@inheritdoc}

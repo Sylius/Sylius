@@ -12,17 +12,21 @@
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactory;
 use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactoryInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrl;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 
 /**
+ * @mixin SitemapUrlFactory
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapUrlFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactory');
+        $this->shouldHaveType(SitemapUrlFactory::class);
     }
 
     function it_implements_sitemap_url_factory_interface()
@@ -30,32 +34,8 @@ final class SitemapUrlFactorySpec extends ObjectBehavior
         $this->shouldImplement(SitemapUrlFactoryInterface::class);
     }
 
-    function it_creates_empty_sitemap_url(SitemapUrlInterface $sitemapUrl)
+    function it_creates_empty_sitemap_url()
     {
-        $sitemapUrl->getLastModification()->willReturn(null);
-        $sitemapUrl->getLocalization()->willReturn(null);
-        $sitemapUrl->getPriority()->willReturn(null);
-        $sitemapUrl->getChangeFrequency()->willReturn('');
-
-        $this->createNew()->shouldBeSameAs($sitemapUrl);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMatchers()
-    {
-        return [
-            'beSameAs' => function ($subject, $key) {
-                if (!$subject instanceof SitemapUrlInterface || !$key instanceof SitemapUrlInterface) {
-                    return false;
-                }
-
-                return $subject->getChangeFrequency() === $key->getChangeFrequency()
-                    && $subject->getLocalization() === $key->getLocalization()
-                    && $subject->getLastModification() === $key->getLastModification()
-                    && $subject->getPriority() === $key->getPriority();
-            },
-        ];
+        $this->createNew()->shouldBeLike(new SitemapUrl());
     }
 }

@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 
 /**

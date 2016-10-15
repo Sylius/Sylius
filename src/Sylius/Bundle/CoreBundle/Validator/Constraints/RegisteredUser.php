@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class RegisteredUser extends Constraint
+final class RegisteredUser extends Constraint
 {
     public $message = 'This email is already registered. Please log in.';
 

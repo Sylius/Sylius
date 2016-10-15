@@ -12,21 +12,19 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
- * User update listener.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class CanonicalizerListener
+final class CanonicalizerListener
 {
     /**
      * @var CanonicalizerInterface
      */
-    protected $canonicalizer;
+    private $canonicalizer;
 
     /**
      * @param CanonicalizerInterface $canonicalizer

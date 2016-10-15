@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Customer;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

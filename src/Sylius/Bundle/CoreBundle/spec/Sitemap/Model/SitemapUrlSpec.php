@@ -13,16 +13,19 @@ namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\ChangeFrequency;
+use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrl;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 
 /**
+ * @mixin SitemapUrl
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapUrlSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrl');
+        $this->shouldHaveType(SitemapUrl::class);
     }
 
     function it_implements_sitemap_url_interface()

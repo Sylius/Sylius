@@ -17,6 +17,7 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 
@@ -24,7 +25,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener');
+        $this->shouldHaveType(DefaultUsernameORMListener::class);
     }
 
     function it_sets_usernames_on_customer_create(

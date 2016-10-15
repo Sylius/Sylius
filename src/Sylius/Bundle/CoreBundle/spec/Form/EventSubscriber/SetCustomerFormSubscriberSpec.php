@@ -12,15 +12,17 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
 /**
+ * @mixin SetCustomerFormSubscriber
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class SetCustomerFormSubscriberSpec extends ObjectBehavior
@@ -32,7 +34,7 @@ final class SetCustomerFormSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber');
+        $this->shouldHaveType(SetCustomerFormSubscriber::class);
     }
 
     function it_is_an_event_subscriber()

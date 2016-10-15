@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
-use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface

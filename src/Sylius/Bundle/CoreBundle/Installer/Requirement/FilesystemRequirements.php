@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
-class FilesystemRequirements extends RequirementCollection
+final class FilesystemRequirements extends RequirementCollection
 {
     public function __construct(TranslatorInterface $translator, $root, $cacheDir, $logDir)
     {

@@ -18,12 +18,12 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 /**
  * @author Hussein Jafferjee <hussein@jafferjee.ca>
  */
-class ShipmentEmailManager
+final class ShipmentEmailManager
 {
     /**
      * @var SenderInterface
      */
-    protected $emailSender;
+    private $emailSender;
 
     /**
      * @param SenderInterface $emailSender

@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 use Sylius\Bundle\ContentBundle\Document\StaticContent;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

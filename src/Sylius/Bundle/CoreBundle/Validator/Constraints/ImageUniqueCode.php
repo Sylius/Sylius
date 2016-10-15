@@ -16,15 +16,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ImageUniqueCode extends Constraint
+final class ImageUniqueCode extends Constraint
 {
     public $message = 'This code should be unique.';
-
-    /**
-     * {@inheritdoc}
-     */
-    public function validatedBy()
-    {
-        return get_class($this).'Validator';
-    }
 }

@@ -15,7 +15,7 @@ use Doctrine\DBAL\Schema\AbstractSchemaManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class InstallDatabaseCommand extends AbstractInstallCommand
+final class InstallDatabaseCommand extends AbstractInstallCommand
 {
     /**
      * {@inheritdoc}

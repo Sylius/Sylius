@@ -18,12 +18,12 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
 /**
  * @author Hussein Jafferjee <hussein@jafferjee.ca>
  */
-class OrderEmailManager
+final class OrderEmailManager
 {
     /**
      * @var SenderInterface
      */
-    protected $emailSender;
+    private $emailSender;
 
     /**
      * @param SenderInterface $emailSender

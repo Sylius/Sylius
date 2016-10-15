@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRendererInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Builder\SitemapBuilderInterface;
+use Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRendererInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**

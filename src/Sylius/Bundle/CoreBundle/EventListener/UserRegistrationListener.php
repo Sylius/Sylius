@@ -23,22 +23,22 @@ use Webmozart\Assert\Assert;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class UserRegistrationListener
+final class UserRegistrationListener
 {
     /**
      * @var ObjectManager
      */
-    protected $userManager;
+    private $userManager;
 
     /**
      * @var GeneratorInterface
      */
-    protected $tokenGenerator;
+    private $tokenGenerator;
 
     /**
      * @var EventDispatcherInterface
      */
-    protected $eventDispatcher;
+    private $eventDispatcher;
 
     /**
      * @param ObjectManager $userManager
@@ -72,7 +72,7 @@ class UserRegistrationListener
     /**
      * @param ShopUserInterface $user
      */
-    protected function handleUserVerificationToken(ShopUserInterface $user)
+    private function handleUserVerificationToken(ShopUserInterface $user)
     {
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);

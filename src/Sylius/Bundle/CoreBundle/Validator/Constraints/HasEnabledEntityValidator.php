@@ -24,17 +24,17 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class HasEnabledEntityValidator extends ConstraintValidator
+final class HasEnabledEntityValidator extends ConstraintValidator
 {
     /**
      * @var ManagerRegistry
      */
-    protected $registry;
+    private $registry;
 
     /**
      * @var PropertyAccessor
      */
-    protected $accessor;
+    private $accessor;
 
     /**
      * @param ManagerRegistry $registry

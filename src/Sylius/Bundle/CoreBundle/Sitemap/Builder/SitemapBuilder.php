@@ -8,17 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace Sylius\Bundle\CoreBundle\Sitemap\Builder;
 
 use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactoryInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Provider\UrlProviderInterface;
-use Symfony\Component\DependencyInjection\ContainerAware;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SitemapBuilder implements SitemapBuilderInterface
+final class SitemapBuilder implements SitemapBuilderInterface
 {
     /**
      * @var SitemapFactoryInterface
