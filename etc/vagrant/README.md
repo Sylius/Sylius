@@ -1,14 +1,14 @@
 # Description
 This configuration includes following software:
 
-* PHP 5.4.19 
-* MySQL 5.5.32
-* GIT 1.7.9.5
+* Debian 8.1
+* PHP 7.0
+* MySQL 5.6 Percona Server
 * Apache 2.2.22
-* Vim
-* MC (Midnight commander)
-* Curl
 * Composer
+* Curl
+* Vim
+* Git
 
 # Usage
 
@@ -25,7 +25,20 @@ While waiting for Vagrant to start up, you should add an entry into /etc/hosts f
 10.0.0.200      sylius.dev
 ```
 
-From now you should be able to access your Sylius project at [http://sylius.dev/](http://sylius.dev/)
+Setup your db password in parameters.yml
+
+```
+parameters:
+    database_password: vagrant
+```
+
+From now you should be able to access your Sylius project at [http://sylius.dev/app_dev.php](http://sylius.dev/app_dev.php)
+
+Installing your assets manually
+
+```
+    vagrant ssh -c 'cd /var/www/sylius && ./node_modules/.bin/gulp'
+```
 
 # Troubleshooting
 
@@ -36,4 +49,11 @@ To view the application logs, run the following commands:
 ```bash
 $ tail -f /dev/shm/sylius/app/logs/prod.log
 $ tail -f /dev/shm/sylius/app/logs/dev.log
+```
+
+To view the apache logs, run the following commands:
+
+```bash
+$ tail -f /var/log/apache2/sylius_error.log
+$ tail -f /var/log/apache2/sylius_access.log
 ```
