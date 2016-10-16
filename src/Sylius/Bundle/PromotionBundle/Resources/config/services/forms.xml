@@ -34,8 +34,14 @@
         <service id="sylius.form.type.promotion_action.fixed_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType">
             <tag name="form.type" alias="sylius_promotion_action_fixed_discount_configuration" />
         </service>
+        <service id="sylius.form.type.promotion_action.unit_fixed_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_action_unit_fixed_discount_configuration" />
+        </service>
         <service id="sylius.form.type.promotion_action.percentage_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType">
             <tag name="form.type" alias="sylius_promotion_action_percentage_discount_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_action.unit_percentage_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitPercentageDiscountConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_action_unit_percentage_discount_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.item_total_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType">
             <tag name="form.type" alias="sylius_promotion_rule_item_total_configuration" />

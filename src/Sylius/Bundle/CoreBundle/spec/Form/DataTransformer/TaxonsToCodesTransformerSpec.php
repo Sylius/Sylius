@@ -25,22 +25,22 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 {
-    function let(TaxonRepositoryInterface $taxonRepository)
+    public function let(TaxonRepositoryInterface $taxonRepository)
     {
         $this->beConstructedWith($taxonRepository);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(TaxonsToCodesTransformer::class);
     }
 
-    function it_implements_data_transformer_interface()
+    public function it_implements_data_transformer_interface()
     {
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_transforms_array_of_taxons_codes_to_taxons_collection(
+    public function it_transforms_array_of_taxons_codes_to_taxons_collection(
         TaxonRepositoryInterface $taxonRepository,
         TaxonInterface $bows,
         TaxonInterface $swords
@@ -49,10 +49,10 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 
         $taxons = new ArrayCollection([$bows->getWrappedObject(), $swords->getWrappedObject()]);
 
-        $this->transform(['taxons' => ['bows', 'swords']])->shouldBeCollection($taxons);
+        $this->transform(['bows', 'swords'])->shouldBeCollection($taxons);
     }
 
-    function it_transforms_only_existing_taxons(
+    public function it_transforms_only_existing_taxons(
         TaxonRepositoryInterface $taxonRepository,
         TaxonInterface $bows
     ) {
@@ -60,15 +60,15 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 
         $taxons = new ArrayCollection([$bows->getWrappedObject()]);
 
-        $this->transform(['taxons' => ['bows', 'swords']])->shouldBeCollection($taxons);
+        $this->transform(['bows', 'swords'])->shouldBeCollection($taxons);
     }
 
-    function it_transforms_empty_array_into_empty_collection()
+    public function it_transforms_empty_array_into_empty_collection()
     {
         $this->transform([])->shouldBeCollection(new ArrayCollection([]));
     }
 
-    function it_throws_exception_if_value_to_transform_is_not_array()
+    public function it_throws_exception_if_value_to_transform_is_not_array()
     {
         $this
             ->shouldThrow(new UnexpectedTypeException('badObject', 'array'))
@@ -76,7 +76,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_reverse_transforms_into_array_of_taxons_codes(
+    public function it_reverse_transforms_into_array_of_taxons_codes(
         TaxonInterface $axes,
         TaxonInterface $shields
     ) {
@@ -84,12 +84,12 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         $shields->getCode()->willReturn('shields');
 
         $this
-            ->reverseTransform(new ArrayCollection(['taxons' => [$axes->getWrappedObject(), $shields->getWrappedObject()]]))
-            ->shouldReturn(['taxons' => ['axes', 'shields']])
+            ->reverseTransform(new ArrayCollection([$axes->getWrappedObject(), $shields->getWrappedObject()]))
+            ->shouldReturn(['axes', 'shields'])
         ;
     }
 
-    function it_throws_exception_if_reverse_transformed_object_is_not_collection()
+    public function it_throws_exception_if_reverse_transformed_object_is_not_collection()
     {
         $this
             ->shouldThrow(new UnexpectedTypeException('badObject', Collection::class))
@@ -97,22 +97,9 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    function it_returns_empty_array_if_passed_collection_is_empty()
+    public function it_returns_empty_array_if_passed_collection_is_empty()
     {
         $this->reverseTransform(new ArrayCollection())->shouldReturn([]);
-    }
-
-    function it_returns_empty_array_if_passed_collection_has_no_taxon_element()
-    {
-        $this->reverseTransform(new ArrayCollection(['test' => ['test']]))->shouldReturn([]);
-    }
-
-    function it_throws_exception_while_reverse_transform_if_taxons_element_is_not_an_array(TaxonInterface $axes)
-    {
-        $this
-            ->shouldThrow(new \InvalidArgumentException('"taxons" element of collection should be Traversable'))
-            ->during('reverseTransform', [new ArrayCollection(['taxons' => $axes->getWrappedObject()])])
-        ;
     }
 
     /**

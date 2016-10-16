@@ -30,7 +30,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
-    function let(
+    public function let(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter
@@ -38,20 +38,31 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->beConstructedWith($adjustmentFactory, $priceRangeFilter, $taxonFilter);
     }
 
-    function it_is_initializable()
+    public function it_is_initializable()
     {
         $this->shouldHaveType(UnitPercentageDiscountPromotionActionCommand::class);
     }
 
+<<<<<<< 79e1ae723f64dd234dbbb0a1b0829f58988422ab
     function it_is_an_item_discount_action()
+=======
+    public function it_is_item_discount_action()
+>>>>>>> added taxons filters
     {
         $this->shouldHaveType(UnitDiscountPromotionActionCommand::class);
     }
 
+<<<<<<< 79e1ae723f64dd234dbbb0a1b0829f58988422ab
     function it_applies_percentage_discount_on_every_unit_in_order(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
+=======
+    public function it_applies_percentage_discount_on_every_unit_in_order(
+        $adjustmentFactory,
+        $priceRangeFilter,
+        $taxonFilter,
+>>>>>>> added taxons filters
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
@@ -105,7 +116,11 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->execute($order, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
     }
 
+<<<<<<< 79e1ae723f64dd234dbbb0a1b0829f58988422ab
     function it_throws_an_exception_if_passed_subject_is_not_order(
+=======
+    public function it_throws_exception_if_passed_subject_is_not_order(
+>>>>>>> added taxons filters
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ) {
@@ -115,7 +130,11 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ;
     }
 
+<<<<<<< 79e1ae723f64dd234dbbb0a1b0829f58988422ab
     function it_reverts_a_proper_promotion_adjustment_from_all_units(
+=======
+    public function it_reverts_proper_promotion_adjustment_from_all_units(
+>>>>>>> added taxons filters
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $items,
@@ -149,7 +168,11 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $this->revert($order, ['percentage' => 0.2], $promotion);
     }
 
+<<<<<<< 79e1ae723f64dd234dbbb0a1b0829f58988422ab
     function it_throws_an_exception_if_passed_subject_to_revert_is_not_order(
+=======
+    public function it_throws_exception_if_passed_subject_to_revert_is_not_order(
+>>>>>>> added taxons filters
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion
     ) {
@@ -159,8 +182,12 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         ;
     }
 
+<<<<<<< 79e1ae723f64dd234dbbb0a1b0829f58988422ab
     function it_has_a_configuration_form_type()
+=======
+    public function it_has_configuration_form_type()
+>>>>>>> added taxons filters
     {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_percentage_discount_configuration');
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_unit_percentage_discount_configuration');
     }
 }

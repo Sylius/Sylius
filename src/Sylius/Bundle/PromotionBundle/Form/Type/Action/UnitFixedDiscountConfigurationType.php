@@ -9,18 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\PromotionBundle\Form\Type\Filter;
+namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
 
-use Symfony\Component\Form\AbstractType;
-use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Type;
+use Sylius\Bundle\PromotionBundle\Form\Type\Filter\ActionFiltersType;
 
 /**
  * @author Viorel Craescu <viorel@craescu.com>
  * @author Gabi Udrescu <gabriel.udr@gmail.com>
  */
-class PriceRangeType extends AbstractType
+class UnitFixedDiscountConfigurationType extends FixedDiscountConfigurationType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -28,15 +26,18 @@ class PriceRangeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('min', MoneyType::class, [
-            'constraints' => [
-                new Type(['type' => 'numeric']),
-            ],
+        parent::buildForm($builder, $options);
+
+        $builder->add('filters', ActionFiltersType::class, [
+            'empty_data' => [],
         ]);
-        $builder->add('max', MoneyType::class, [
-            'constraints' => [
-                new Type(['type' => 'numeric']),
-            ],
-        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return 'sylius_promotion_action_unit_fixed_discount_configuration';
     }
 }
