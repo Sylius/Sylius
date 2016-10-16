@@ -38,8 +38,8 @@ class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotion
 
     /**
      * @param FactoryInterface $adjustmentFactory
-     * @param FilterInterface $priceRangeFilter
-     * @param FilterInterface $taxonFilter
+     * @param FilterInterface  $priceRangeFilter
+     * @param FilterInterface  $taxonFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
@@ -75,12 +75,12 @@ class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotion
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_percentage_discount_configuration';
+        return 'sylius_promotion_action_unit_percentage_discount_configuration';
     }
 
     /**
      * @param OrderItemInterface $item
-     * @param int $promotionAmount
+     * @param int                $promotionAmount
      * @param PromotionInterface $promotion
      */
     private function setUnitsAdjustments(OrderItemInterface $item, $promotionAmount, PromotionInterface $promotion)
