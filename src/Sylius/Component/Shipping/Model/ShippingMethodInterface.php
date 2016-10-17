@@ -33,6 +33,16 @@ interface ShippingMethodInterface extends
     const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
 
     /**
+     * @return int
+     */
+    public function getPosition();
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position);
+
+    /**
      * @return null|ShippingCategoryInterface
      */
     public function getCategory();

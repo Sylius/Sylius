@@ -38,6 +38,11 @@ class ShippingMethod implements ShippingMethodInterface
     protected $code;
 
     /**
+     * @var int
+     */
+    protected $position;
+
+    /**
      * @var ShippingCategoryInterface
      */
     protected $category;
@@ -61,7 +66,6 @@ class ShippingMethod implements ShippingMethodInterface
     {
         $this->initializeTranslationsCollection();
 
-        $this->rules = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -95,6 +99,22 @@ class ShippingMethod implements ShippingMethodInterface
     public function setCode($code)
     {
         $this->code = $code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 
     /**
