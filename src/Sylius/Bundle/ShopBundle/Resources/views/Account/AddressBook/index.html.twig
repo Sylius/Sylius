@@ -1,0 +1,33 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'sylius.ui.address_book'|trans }}</div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+    <div class="ui segment">
+        <h1 class="ui dividing header">
+            {{ 'sylius.ui.address_book'|trans }}
+            <div class="sub header">{{ 'sylius.ui.browse_your_addresses'|trans }}</div>
+        </h1>
+        <div class="ui stackable grid">
+            <div class="ten wide column">
+                {{ messages.info('sylius.ui.no_default_address'|trans) }}
+            </div>
+            <div class="six wide column">
+                {% if(addresses is empty) %}
+                    {{ messages.info('sylius.ui.no_addresses'|trans) }}
+                {% else %}
+                    {% include '@SyliusShop/Account/AddressBook/_addresses.html.twig' with {'addresses': addresses} %}
+                {% endif %}
+             </div>
+        </div>
+    </div>
+{% endblock %}

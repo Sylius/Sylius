@@ -1,0 +1,21 @@
+<div class="ui accordion addresses">
+    {% for address in addresses %}
+        <div class="title">
+            <i class="dropdown icon"></i>
+            <strong>{{ address.firstName }} {{ address.lastName }}</strong>
+        </div>
+        <div class="content">
+            {% if address.company %}
+                {{ address.company }}<br/>
+            {% endif %}
+            {{ address.phoneNumber }}<br/>
+            {{ address.street }}<br/>
+            {{ address.city }}<br/>
+            {% if address|sylius_province_name is not empty %}
+                {{ address|sylius_province_name }}<br/>
+            {% endif %}
+            <i class="{{ address.countryCode|lower }} flag"></i>
+            {{ address.countryCode|sylius_country_name|upper }} {{ address.postcode }}
+        </div>
+    {% endfor %}
+</div>
