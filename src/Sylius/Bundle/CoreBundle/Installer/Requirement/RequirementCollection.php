@@ -14,17 +14,17 @@ namespace Sylius\Bundle\CoreBundle\Installer\Requirement;
 use ArrayIterator;
 use IteratorAggregate;
 
-final class RequirementCollection implements IteratorAggregate
+abstract class RequirementCollection implements IteratorAggregate
 {
     /**
      * @var string
      */
-    private $label;
+    protected $label;
 
     /**
      * @var Requirement[]
      */
-    private $requirements = [];
+    protected $requirements = [];
 
     /**
      * @param string $label
@@ -52,9 +52,12 @@ final class RequirementCollection implements IteratorAggregate
 
     /**
      * @param Requirement $requirement
+     * @return RequirementCollection
      */
     public function add(Requirement $requirement)
     {
         $this->requirements[] = $requirement;
+
+        return $this;
     }
 }
