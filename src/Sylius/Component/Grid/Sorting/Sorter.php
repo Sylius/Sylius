@@ -12,6 +12,7 @@
 namespace Sylius\Component\Grid\Sorting;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
+use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 
@@ -27,15 +28,13 @@ final class Sorter implements SorterInterface
     {
         $expressionBuilder = $dataSource->getExpressionBuilder();
 
-        $sorting = $parameters->has('sorting') ? $parameters->get('sorting') : $grid->getSorting();
+        $sorting = $parameters->get('sorting', $grid->getSorting());
 
-        foreach ($sorting as $field => $options) {
-            if (!isset($options['direction'])) {
-                $options['direction'] = 'desc';
-            }
+        foreach ($sorting as $field => $order) {
+            $gridField = $grid->getField($field);
+            $property = $gridField->getSortable();
 
-            $property = $grid->getSorting()[$field]['path'];
-            $expressionBuilder->addOrderBy($property, $options['direction']);
+            $expressionBuilder->addOrderBy($property, $order);
         }
     }
 }

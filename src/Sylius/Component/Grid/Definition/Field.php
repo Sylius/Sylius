@@ -42,6 +42,11 @@ class Field
     private $enabled = true;
 
     /**
+     * @var string|null
+     */
+    private $sortable;
+
+    /**
      * @var array
      */
     private $options = [];
@@ -132,6 +137,30 @@ class Field
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
+    }
+
+    /**
+     * @param string|null $sortable
+     */
+    public function setSortable($sortable)
+    {
+        $this->sortable = $sortable ?: $this->name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSortable()
+    {
+        return $this->sortable;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSortable()
+    {
+        return null !== $this->sortable;
     }
 
     /**

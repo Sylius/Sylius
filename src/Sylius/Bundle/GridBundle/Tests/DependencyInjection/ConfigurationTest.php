@@ -28,13 +28,11 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function it_requires_only_grid_name_and_uses_doctrine_orm_as_default_driver()
     {
         $this->assertProcessedConfigurationEquals(
-            [
-                [
-                    'grids' => [
-                        'sylius_admin_tax_category' => null
-                    ],
+            [[
+                'grids' => [
+                    'sylius_admin_tax_category' => null
                 ],
-            ],
+            ]],
             [
                 'grids' => [
                     'sylius_admin_tax_category' => [
@@ -42,10 +40,10 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                             'name' => Driver::NAME,
                             'options' => [],
                         ],
-                        'sorting' => [],
                         'fields' => [],
                         'filters' => [],
                         'actions' => [],
+                        'sorting' => [],
                     ]
                 ],
                 'drivers' => [ 'doctrine/orm' ]
@@ -59,7 +57,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function its_driver_cannot_be_empty()
     {
         $this->assertConfigurationIsInvalid(
-            [
+            [[
                 'grids' => [
                     'sylius_admin_tax_category' => [
                         'driver' => [
@@ -67,7 +65,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         ]
                     ]
                 ]
-            ]
+            ]]
         );
     }
 
@@ -77,7 +75,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function it_requires_field_type_to_be_defined()
     {
         $this->assertConfigurationIsInvalid(
-            [
+            [[
                 'grids' => [
                     'sylius_admin_tax_category' => [
                         'fields' => [
@@ -87,49 +85,41 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         ]
                     ]
                 ]
-            ]
+            ]]
         );
     }
 
     /**
      * @test
      */
-    public function it_requires_sorting_path_to_be_defined()
+    public function it_requires_sorting_default_field_to_be_defined()
     {
         $this->assertConfigurationIsInvalid(
-            [
+            [[
                 'grids' => [
                     'sylius_admin_tax_category' => [
-                        'sorting' => [
-                            'code' => [
-                                'direction' => 'desc',
-                            ]
-                        ]
+                        'sorting'
                     ]
                 ]
-            ]
+            ]]
         );
     }
 
     /**
      * @test
      */
-    public function its_sorting_direction_can_be_only_ascending_or_descending()
+    public function its_sorting_order_can_be_only_ascending_or_descending()
     {
         $this->assertConfigurationIsValid(
             [[
                 'grids' => [
                     'sylius_admin_tax_category' => [
                         'sorting' => [
-                            'code' => [
-                                'path' => 'code',
-                                'direction' => 'asc',
-                            ]
+                            'code' => 'asc',
                         ]
                     ]
                 ]
-            ]],
-            'grids.*.sorting.*'
+            ]]
         );
 
         $this->assertConfigurationIsValid(
@@ -137,10 +127,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'grids' => [
                     'sylius_admin_tax_category' => [
                         'sorting' => [
-                            'code' => [
-                                'path' => 'code',
-                                'direction' => 'desc',
-                            ]
+                            'code' => 'desc',
                         ]
                     ]
                 ]
@@ -148,58 +135,45 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertConfigurationIsInvalid(
-            [
+            [[
                 'grids' => [
                     'sylius_admin_tax_category' => [
                         'sorting' => [
-                            'code' => [
-                                'path' => 'code',
-                                'direction' => 'left',
-                            ]
+                            'code' => 'left',
                         ]
                     ]
                 ]
-            ]
+            ]]
         );
     }
 
     /**
      * @test
      */
-    public function it_does_not_require_sorting_direction_and_uses_ascending_by_default()
+    public function it_does_require_sorting_order_to_be_declared()
     {
-        $this->assertProcessedConfigurationEquals(
+        $this->assertConfigurationIsInvalid(
             [[
                 'grids' => [
                     'sylius_admin_tax_category' => [
                         'sorting' => [
-                            'code' => [
-                                'path' => 'code'
-                            ]
+                            'code',
                         ]
                     ]
                 ]
-            ]],
-            [
+            ]]
+        );
+
+        $this->assertConfigurationIsValid(
+            [[
                 'grids' => [
                     'sylius_admin_tax_category' => [
-                        'driver' => [
-                            'name' => Driver::NAME,
-                            'options' => [],
-                        ],
                         'sorting' => [
-                            'code' => [
-                                'path' => 'code',
-                                'direction' => 'asc',
-                            ]
-                        ],
-                        'fields' => [],
-                        'filters' => [],
-                        'actions' => [],
+                            'code' => 'asc',
+                        ]
                     ]
-                ],
-                'drivers' => [ 'doctrine/orm' ]
-            ]
+                ]
+            ]]
         );
     }
 
