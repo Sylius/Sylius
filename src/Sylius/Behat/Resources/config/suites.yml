@@ -44,6 +44,7 @@ imports:
     - suites/ui/product/managing_product_association_types.yml
     - suites/ui/product/managing_product_attributes.yml
     - suites/ui/product/managing_product_options.yml
+    - suites/ui/product/managing_product_reviews.yml
     - suites/ui/product/managing_product_variants.yml
     - suites/ui/product/managing_products.yml
     - suites/ui/product/viewing_product_reviews.yml
