@@ -6,8 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.admin_user.class%"
             sorting:
-                createdAt:
-                    path: createdAt
+                createdAt: asc
             fields:
                 username:
                     type: string
@@ -18,6 +17,7 @@ sylius_grid:
                 createdAt:
                     type: datetime
                     label: sylius.ui.registration_date
+                    sortable: ~
                     options:
                         format: d-m-Y H:i
                 confirmed:

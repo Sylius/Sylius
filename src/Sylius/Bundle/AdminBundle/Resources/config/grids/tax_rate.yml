@@ -6,9 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.tax_rate.class%"
             sorting:
-                name:
-                    path: name
-                    direction: asc
+                name: asc
             fields:
                 code:
                     type: string
@@ -16,6 +14,7 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
+                    sortable: ~
                 zone:
                     type: string
                     label: sylius.ui.zone

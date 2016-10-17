@@ -14,12 +14,11 @@ sylius_grid:
                             code: $code
                             channel: 'expr:service("sylius.context.channel").getChannel()'
             sorting:
-                createdAt:
-                    path: createdAt
-                    direction: asc
+                createdAt: asc
             fields:
                 createdAt:
                     type: datetime
                     label: sylius.ui.date
+                    sortable: ~
                     options:
                         format: m/d/Y

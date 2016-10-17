@@ -6,8 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.customer.class%"
             sorting:
-                createdAt:
-                    path: createdAt
+                createdAt: desc
             fields:
                 firstName:
                     type: string
@@ -21,6 +20,7 @@ sylius_grid:
                 createdAt:
                     type: datetime
                     label: sylius.ui.registration_date
+                    sortable: ~
                     options:
                         format: d-m-Y H:i
                 confirmed:

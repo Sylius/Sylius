@@ -6,13 +6,12 @@ sylius_grid:
                 options:
                     class: "%sylius.model.customer_group.class%"
             sorting:
-                name:
-                    path: name
-                    direction: asc
+                name: asc
             fields:
                 name:
                     type: string
                     label: sylius.ui.name
+                    sortable: ~
             filters:
                 name:
                     type: string
