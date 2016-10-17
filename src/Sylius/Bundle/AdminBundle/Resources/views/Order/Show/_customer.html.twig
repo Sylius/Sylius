@@ -11,4 +11,12 @@
             {{ customer.email }}
         </a>
     </div>
+    {% if customer.phoneNumber is not empty %}
+    <div class="extra content">
+        <span>
+            <i class="phone icon"></i>
+            {{ customer.phoneNumber }}
+        </span>
+    </div>
+    {% endif %}
 </div>
