@@ -14,9 +14,11 @@ namespace Sylius\Bundle\SettingsBundle\Resolver;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
+ * Cannot be final, because it is proxied 
+ * 
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-final class ResolverServiceRegistry implements ServiceRegistryInterface
+class ResolverServiceRegistry implements ServiceRegistryInterface
 {
     /**
      * @var ServiceRegistryInterface
