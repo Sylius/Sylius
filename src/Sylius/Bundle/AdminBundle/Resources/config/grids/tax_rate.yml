@@ -11,6 +11,7 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 name:
                     type: string
                     label: sylius.ui.name

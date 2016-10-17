@@ -11,7 +11,7 @@
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {%- for error in errors -%}
-            <div class="ui red label sylius-validation-error" style="margin-bottom: 10px;">
+            <div class="ui red pointing label sylius-validation-error">
                 {{ error.message }}
             </div>
         {%- endfor -%}

@@ -27,12 +27,11 @@ sylius_grid:
                     options:
                         template: SyliusAdminBundle:Promotion/Field:usage.html.twig
             filters:
-                code:
+                search:
                     type: string
-                    label: sylius.ui.code
-                name:
-                    type: string
-                    label: sylius.ui.name
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, name]
                 couponBased:
                     type: boolean
                     label: sylius.ui.coupons

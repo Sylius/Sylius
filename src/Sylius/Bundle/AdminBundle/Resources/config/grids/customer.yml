@@ -11,33 +11,39 @@ sylius_grid:
                 firstName:
                     type: string
                     label: sylius.ui.first_name
+                    sortable: ~
                 lastName:
                     type: string
                     label: sylius.ui.last_name
+                    sortable: ~
                 email:
                     type: string
                     label: sylius.ui.email
+                    sortable: ~
                 createdAt:
                     type: datetime
                     label: sylius.ui.registration_date
                     sortable: ~
                     options:
                         format: d-m-Y H:i
-                confirmed:
+                enabled:
                     type: twig
-                    label: sylius.ui.confirmed
+                    label: sylius.ui.enabled
                     path: .
                     options:
-                        template: SyliusAdminBundle:Customer/Field:confirmed.html.twig
-            filters:
-                email:
-                    type: string
-                    label: sylius.ui.email
-                name:
-                    type: string
-                    label: sylius.ui.name
+                        template: SyliusAdminBundle:Customer/Field:enabled.html.twig
+                verified:
+                    type: twig
+                    label: sylius.ui.verified
+                    path: .
                     options:
-                        fields: [firstName, lastName]
+                        template: SyliusAdminBundle:Customer/Field:verified.html.twig
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [email, firstName, lastName]
             actions:
                 main:
                     create:

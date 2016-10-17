@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.admin_user.class%"
             sorting:
-                createdAt: asc
+                createdAt: desc
             fields:
                 firstName:
                     type: string
@@ -37,20 +37,14 @@ sylius_grid:
                     options:
                         template: SyliusAdminBundle:Grid/Field:enabled.html.twig
             filters:
-                email:
+                search:
                     type: string
-                    label: sylius.ui.email
-                username:
-                    type: string
-                    label: sylius.ui.username
+                    label: sylius.ui.search
+                    options:
+                        fields: [email, username, firstName, lastName]
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled
-                name:
-                    type: string
-                    label: sylius.ui.name
-                    options:
-                        fields: [firstName, lastName]
             actions:
                 main:
                     create:

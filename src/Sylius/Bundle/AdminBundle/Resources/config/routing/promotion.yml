@@ -14,4 +14,8 @@ sylius_admin_promotion:
                     form: SyliusAdminBundle:Promotion:_form.html.twig
             index:
                 icon: in cart
+            update:
+                templates:
+                    form: SyliusAdminBundle:Promotion:_form.html.twig
+                    toolbar: SyliusAdminBundle:Promotion/Toolbar:_update.html.twig
     type: sylius.resource

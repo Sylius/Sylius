@@ -24,13 +24,13 @@
         <div class="ui segment">
             {% include '@SyliusAdmin/Order/Show/_summary.html.twig' %}
         </div>
+        {% include '@SyliusAdmin/Order/Show/_notes.html.twig' %}
     </div>
     <div class="four wide column">
         {% include '@SyliusAdmin/Order/Show/_customer.html.twig' %}
         {% include '@SyliusAdmin/Order/Show/_addresses.html.twig' %}
         {% include '@SyliusAdmin/Order/Show/_payments.html.twig' %}
         {% include '@SyliusAdmin/Order/Show/_shipments.html.twig' %}
-        {% include '@SyliusAdmin/Order/Show/_notes.html.twig' %}
     </div>
 </div>
 {% endblock %}

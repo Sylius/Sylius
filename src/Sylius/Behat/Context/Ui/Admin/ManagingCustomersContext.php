@@ -373,7 +373,7 @@ final class ManagingCustomersContext implements Context
         $this->indexPage->open();
 
         Assert::eq(
-            'Yes',
+            'Enabled',
             $this->indexPage->getCustomerAccountStatus($customer),
             'Customer account should be enabled, but it does not.'
         );
@@ -387,7 +387,7 @@ final class ManagingCustomersContext implements Context
         $this->indexPage->open();
 
         Assert::eq(
-            'No',
+            'Disabled',
             $this->indexPage->getCustomerAccountStatus($customer),
             'Customer account should be disabled, but it does not.'
         );

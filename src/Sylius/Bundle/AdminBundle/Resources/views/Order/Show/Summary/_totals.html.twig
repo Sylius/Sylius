@@ -11,15 +11,19 @@
 </tr>
 <tr>
     <td colspan="4" id="shipping-charges">
-        <strong>{{ 'sylius.ui.shipping_charges'|trans }}</strong>:
         {% if not order.adjustments(shippingAdjustment).isEmpty() %}
-            <ul class="ui relaxed list">
+            <div class="ui relaxed divided list">
                 {% for adjustment in order.adjustments(shippingAdjustment) %}
-                    <li class="item">
-                        {{ adjustment.label }} {{ adjustment.amount|sylius_price(order.currencyCode, order.exchangeRate) }}
-                    </li>
+                    <div class="item">
+                        <div class="content">
+                            <span class="header">{{ adjustment.label }}</span>
+                            <div class="description">
+                                {{ adjustment.amount|sylius_price(order.currencyCode, order.exchangeRate) }}
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
             <p><small>{{ 'sylius.ui.no_shipping_charges'|trans }}</small></p>
         {% endif %}
@@ -31,18 +35,22 @@
 </tr>
 <tr>
     <td colspan="4" id="taxes">
-        <strong>{{ 'sylius.ui.taxes'|trans }}</strong>:
         {% set taxAdjustments = order.getAdjustmentsRecursively(taxAdjustment) %}
         {% if taxAdjustments is not empty %}
-            <ul class="ui relaxed list">
+            <div class="ui relaxed divided list">
                 {% for taxLabel, taxAmount in sylius_aggregate_adjustments(taxAdjustments) %}
-                    <li class="item">
-                        {{ taxLabel }} {{ taxAmount|sylius_price(order.currencyCode, order.exchangeRate) }}
-                    </li>
+                    <div class="item">
+                        <div class="content">
+                            <span class="header">{{ taxLabel }}</span>
+                            <div class="description">
+                                {{ taxAmount|sylius_price(order.currencyCode, order.exchangeRate) }}
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
-            <p><small>{{ 'sylius.ui.no_taxes'|trans }}</small></p>
+            <p>{{ 'sylius.ui.no_taxes'|trans }}.</p>
         {% endif %}
     </td>
     <td colspan="4" id="tax-total" class="right aligned">
@@ -52,18 +60,22 @@
 </tr>
 <tr>
     <td colspan="4" id="promotion-discounts">
-        <strong>{{ 'sylius.ui.discount'|trans }}</strong>:
         {% set orderPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPromotionAdjustment)) %}
         {% if not orderPromotions is empty %}
-            <ul class="ui relaxed list">
+            <div class="ui relaxed divided list">
                 {% for label, amount in orderPromotions %}
-                    <li class="item">
-                        {{ label }} {% if not amount == 0 %}-{% endif %}{{ (-1 * amount)|sylius_price(order.currencyCode, order.exchangeRate) }}
-                    </li>
+                    <div class="item">
+                        <div class="content">
+                            <span class="header">{{ label }}</span>
+                            <div class="description">
+                                {% if not amount == 0 %}-{% endif %}{{ (-1 * amount)|sylius_price(order.currencyCode, order.exchangeRate) }}
+                            </div>
+                        </div>
+                    </div>
                 {% endfor %}
-            </ul>
+            </div>
         {% else %}
-            <p><small>{{ 'sylius.ui.no_promotion'|trans }}</small></p>
+            <p>{{ 'sylius.ui.no_promotion'|trans }}.</p>
         {% endif %}
     </td>
     <td colspan="4" id="promotion-total" class="right aligned">

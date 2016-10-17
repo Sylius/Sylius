@@ -203,6 +203,7 @@ sylius:
         dashboard: Dashboard
         data: Data
         date: Date
+        default: Default
         default_billing_address: 'Default billing address'
         default_currency: 'Default currency'
         default_locale: 'Default locale'
@@ -675,7 +676,7 @@ sylius:
         street: Street
         string_blocks: 'String blocks'
         subject: Subject
-        subscribed_to_newsletter: Subscribe to the newsletter
+        subscribed_to_newsletter: Subscribed to the newsletter
         subtotal: Subtotal
         success: Success
         summary: Summary
@@ -696,6 +697,7 @@ sylius:
         thank_you: Thank you!
         thank_you_for_your_order: 'Thank you for your order'
         theme: Theme
+        the_instructions_below_will_be_displayed_to_the_customer: 'The instructions below will be displayed to the customer'
         there_are_no_attributes_configured: 'There are no attributes configured'
         there_are_no_blocks_to_display: 'There are no blocks to display'
         there_are_no_channels_configured: 'There are no channels configured'

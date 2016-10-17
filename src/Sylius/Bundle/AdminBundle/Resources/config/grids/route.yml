@@ -14,10 +14,6 @@ sylius_grid:
                     label: sylius.ui.content
                     options:
                         template: SyliusAdminBundle:Route/Field:content.html.twig
-            filters:
-                name:
-                    type: string
-                    label: sylius.ui.name
             actions:
                 main:
                     create:

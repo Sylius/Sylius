@@ -13,7 +13,7 @@ sylius_grid:
                 channel:
                     type: twig
                     label: sylius.ui.channel
-                    path: channel
+                    sortable: ~
                     options:
                         template: SyliusAdminBundle:Order/Field:channel.html.twig
                 number:
@@ -33,11 +33,13 @@ sylius_grid:
                 customer:
                     type: twig
                     label: sylius.ui.customer
+                    sortable: customer.lastName
                     options:
                         template: SyliusAdminBundle:Order/Field:customer.html.twig
                 state:
                     type: twig
                     label: sylius.ui.state
+                    sortable: ~
                     options:
                         template: SyliusAdminBundle:Grid/Field:state.html.twig
                         vars:
@@ -45,6 +47,7 @@ sylius_grid:
                 paymentState:
                     type: twig
                     label: sylius.ui.payment_state
+                    sortable: ~
                     options:
                         template: SyliusAdminBundle:Grid/Field:state.html.twig
                         vars:
@@ -52,6 +55,7 @@ sylius_grid:
                 shippingState:
                     type: twig
                     label: sylius.ui.shipping_state
+                    sortable: ~
                     options:
                         template: SyliusAdminBundle:Grid/Field:state.html.twig
                         vars:
@@ -60,6 +64,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.total
                     path: .
+                    sortable: total
                     options:
                         template: SyliusAdminBundle:Order/Field:total.html.twig
             filters:

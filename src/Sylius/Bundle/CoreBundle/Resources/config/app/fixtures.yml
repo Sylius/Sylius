@@ -107,16 +107,19 @@ sylius_fixtures:
                     options:
                         custom:
                             clothing_tax:
+                                code: "clothing_sales_tax_7"
                                 name: "Clothing Sales Tax 7%"
                                 zone: "US"
                                 category: "clothing"
                                 amount: 0.07
                             books_tax:
+                                code: "books_sales_tax_2"
                                 name: "Books Sales Tax 2%"
                                 zone: "US"
                                 category: "books"
                                 amount: 0.02
                             default_sales_tax:
+                                code: "sales_tax_20"
                                 name: "Sales Tax 20%"
                                 zone: "US"
                                 category: "other"

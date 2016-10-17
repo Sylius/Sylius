@@ -11,6 +11,7 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 nameAndDescription:
                     type: twig
                     label: sylius.ui.name
