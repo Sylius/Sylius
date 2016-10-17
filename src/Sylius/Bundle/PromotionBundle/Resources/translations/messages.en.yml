@@ -35,15 +35,6 @@ sylius:
             contains_product_configuration:
                 exclude: Exclude
                 variants: Products
-            customer_loyalty_configuration:
-                after: User created after this period
-                time: Time
-                unit:
-                    days: Days
-                    weeks: Weeks
-                    months: Months
-                    years: Years
-                    header: Unit
             item_total_configuration:
                 amount: Amount
             nth_order_configuration:
