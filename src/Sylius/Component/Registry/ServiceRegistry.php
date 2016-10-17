@@ -12,9 +12,11 @@
 namespace Sylius\Component\Registry;
 
 /**
+ * Cannot be final, because it is proxied
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class ServiceRegistry implements ServiceRegistryInterface
+class ServiceRegistry implements ServiceRegistryInterface
 {
     /**
      * @var array
