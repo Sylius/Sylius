@@ -22,6 +22,9 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 final class SyliusGridBundle extends Bundle
 {
+    const DRIVER_DOCTRINE_ORM = 'doctrine/orm';
+    const DRIVER_DOCTRINE_PHPCR_ODM = 'doctrine/phpcr-odm';
+
     /**
      * {@inheritdoc}
      */
@@ -32,5 +35,16 @@ final class SyliusGridBundle extends Bundle
         $container->addCompilerPass(new RegisterDriversPass());
         $container->addCompilerPass(new RegisterFiltersPass());
         $container->addCompilerPass(new RegisterFieldTypesPass());
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function getAvailableDrivers()
+    {
+        return [
+            self::DRIVER_DOCTRINE_ORM,
+            self::DRIVER_DOCTRINE_PHPCR_ODM,
+        ];
     }
 }

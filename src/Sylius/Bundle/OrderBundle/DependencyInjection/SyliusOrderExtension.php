@@ -33,7 +33,7 @@ final class SyliusOrderExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
+        $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
         $orderItemType = $container->getDefinition('sylius.form.type.order_item');
         $orderItemType->addArgument(new Reference('sylius.form.data_mapper.order_item_quantity'));

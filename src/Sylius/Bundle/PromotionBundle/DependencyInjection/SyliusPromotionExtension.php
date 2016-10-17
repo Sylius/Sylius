@@ -36,7 +36,7 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
         $this->mapFormValidationGroupsParameters($config, $container);
 
         $loader->load('services.xml');
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
+        $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
         $this->overwriteCouponFactory($container);

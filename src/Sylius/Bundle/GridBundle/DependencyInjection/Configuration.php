@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\GridBundle\DependencyInjection;
 
 use Sylius\Bundle\GridBundle\Doctrine\ORM\Driver as DoctrineORMDriver;
+use Sylius\Bundle\GridBundle\SyliusGridBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -38,31 +39,11 @@ final class Configuration implements ConfigurationInterface
 
     private function addDriversSection(ArrayNodeDefinition $node)
     {
-        // determine which drivers are distributed with this bundle
-        $driverDir = __DIR__ . '/../Resources/config/driver';
-        $iterator = new \RecursiveDirectoryIterator($driverDir);
-        foreach (new \RecursiveIteratorIterator($iterator) as $file) {
-            if ($file->getExtension() !== 'xml') {
-                continue;
-            }
-
-            // we use the parent directory name in addition to the filename to
-            // determine the name of the driver (e.g. doctrine/orm)
-            $validDrivers[] = str_replace('\\','/',substr($file->getPathname(), 1 + strlen($driverDir), -4));
-        }
-
         $node
             ->children()
                 ->arrayNode('drivers')
-                    ->info('Enable drivers which are distributed with this bundle')
-                    ->validate()
-                    ->ifTrue(function ($value) use ($validDrivers) {
-                        return 0 !== count(array_diff($value, $validDrivers));
-                    })
-                        ->thenInvalid(sprintf('Invalid driver specified in %%s, valid drivers: ["%s"]', implode('", "', $validDrivers)))
-                    ->end()
-                    ->defaultValue(['doctrine/orm'])
-                    ->prototype('scalar')->end()
+                    ->defaultValue([SyliusGridBundle::DRIVER_DOCTRINE_ORM])
+                    ->prototype('enum')->values(SyliusGridBundle::getAvailableDrivers())->end()
                 ->end()
             ->end()
         ;
