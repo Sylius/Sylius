@@ -100,7 +100,7 @@ class SettingsController extends FOSRestController
      */
     protected function getSettingsManager()
     {
-        return $this->get('sylius.manager.settings');
+        return $this->get('sylius.settings_manager');
     }
 
     /**
