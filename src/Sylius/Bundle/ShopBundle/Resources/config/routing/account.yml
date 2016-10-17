@@ -44,3 +44,7 @@ sylius_shop_account_change_password:
 sylius_shop_account_order:
     resource: "@SyliusShopBundle/Resources/config/routing/account/order.yml"
     prefix: /orders
+
+sylius_shop_account_address_book:
+    resource: "@SyliusShopBundle/Resources/config/routing/account/address_book.yml"
+    prefix: /address-book

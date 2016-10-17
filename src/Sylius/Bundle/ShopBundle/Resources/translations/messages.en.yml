@@ -10,3 +10,4 @@ sylius:
                 personal_information: Personal information
                 change_password: Change password
                 order_history: Order history
+                address_book: Address book
