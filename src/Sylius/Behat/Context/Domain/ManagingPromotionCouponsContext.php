@@ -46,6 +46,14 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @When /^I delete ("[^"]+" coupon) related to (this promotion)$/
+     */
+    public function iDeleteCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion)
+    {
+        $promotion->removeCoupon($coupon);
+        $this->couponRepository->remove($coupon);
+    }
+
+    /**
      * @When /^I try to delete ("[^"]+" coupon) related to (this promotion)$/
      */
     public function iTryToDeleteCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion)

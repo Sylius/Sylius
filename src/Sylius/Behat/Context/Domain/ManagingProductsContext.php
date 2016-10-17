@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Domain;
 use Behat\Behat\Context\Context;
 use Doctrine\DBAL\DBALException;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -65,12 +66,18 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When /^I delete the ("[^"]+" variant of product "[^"]+")$/
-     * @When /^I try to delete the ("[^"]+" variant of product "[^"]+")$/
      */
     public function iDeleteTheVariantOfProduct(ProductVariantInterface $productVariant)
     {
+        $this->productVariantRepository->remove($productVariant);
+    }
+
+    /**
+     * @When /^I try to delete the ("[^"]+" variant of product "[^"]+")$/
+     */
+    public function iTryToDeleteTheVariantOfProduct(ProductVariantInterface $productVariant)
+    {
         try {
-            $this->sharedStorage->set('product_variant_id', $productVariant->getId());
             $this->productVariantRepository->remove($productVariant);
         } catch (DBALException $exception) {
             $this->sharedStorage->set('last_exception', $exception);
@@ -79,12 +86,18 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When /^I delete the ("[^"]+" product)$/
-     * @When /^I try to delete the ("[^"]+" product)$/
      */
     public function iDeleteTheProduct(ProductInterface $product)
     {
+        $this->productRepository->remove($product);
+    }
+
+    /**
+     * @When /^I try to delete the ("[^"]+" product)$/
+     */
+    public function iTryToDeleteTheProduct(ProductInterface $product)
+    {
         try {
-            $this->sharedStorage->set('product_id', $product->getId());
             $this->productRepository->remove($product);
         } catch (DBALException $exception) {
             $this->sharedStorage->set('last_exception', $exception);
@@ -100,35 +113,26 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then this variant should not exist in the product catalog
+     * @Then /^(this variant) should not exist in the product catalog$/
      */
-    public function productVariantShouldNotExistInTheProductCatalog()
+    public function productVariantShouldNotExistInTheProductCatalog(ProductVariantInterface $productVariant)
     {
-        $productVariantId = $this->sharedStorage->get('product_variant_id');
-        $productVariant = $this->productVariantRepository->find($productVariantId);
-
-        Assert::null($productVariant);
+        Assert::null($this->productVariantRepository->findOneBy(['code' => $productVariant->getCode()]));
     }
 
     /**
-     * @Then this variant should still exist in the product catalog
+     * @Then /^(this variant) should still exist in the product catalog$/
      */
-    public function productVariantShouldExistInTheProductCatalog()
+    public function productVariantShouldExistInTheProductCatalog(ProductVariantInterface $productVariant)
     {
-        $productVariantId = $this->sharedStorage->get('product_variant_id');
-        $productVariant = $this->productVariantRepository->find($productVariantId);
-
         Assert::notNull($productVariant);
     }
 
     /**
-     * @Then this product should still exist in the product catalog
+     * @Then /^(this product) should still exist in the product catalog$/
      */
-    public function productShouldExistInTheProductCatalog()
+    public function productShouldExistInTheProductCatalog(ProductInterface $product)
     {
-        $productId = $this->sharedStorage->get('product_id');
-        $product = $this->productRepository->find($productId);
-
         Assert::notNull($product);
     }
 
