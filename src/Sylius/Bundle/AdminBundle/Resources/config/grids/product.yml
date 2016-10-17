@@ -31,14 +31,11 @@ sylius_grid:
                     options:
                         template: SyliusAdminBundle:Grid/Field:enabled.html.twig
             filters:
-                code:
+                search:
                     type: string
-                    label: sylius.ui.code
-                name:
-                    type: string
-                    label: sylius.ui.name
+                    label: sylius.ui.search
                     options:
-                        fields: [translation.name]
+                        fields: [code, translation.name]
                 enabled:
                     type: boolean
                     label: sylius.ui.enabled

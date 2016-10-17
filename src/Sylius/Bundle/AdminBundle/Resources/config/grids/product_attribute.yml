@@ -18,6 +18,7 @@ sylius_grid:
                 type:
                     type: twig
                     label: sylius.ui.type
+                    sortable: ~
                     options:
                         template: SyliusAdminBundle:Grid/Field:label.html.twig
             filters:
