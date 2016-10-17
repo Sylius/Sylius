@@ -40,10 +40,10 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                             'name' => Driver::NAME,
                             'options' => [],
                         ],
+                        'sorting' => [],
                         'fields' => [],
                         'filters' => [],
                         'actions' => [],
-                        'sorting' => [],
                     ]
                 ],
                 'drivers' => [ 'doctrine/orm' ]

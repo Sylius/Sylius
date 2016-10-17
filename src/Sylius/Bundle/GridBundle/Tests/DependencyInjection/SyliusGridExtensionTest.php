@@ -45,6 +45,7 @@ final class SyliusGridExtensionTest extends AbstractExtensionTestCase
                         'class' => 'Sylius\Component\Taxation\Model\TaxCategory'
                     ]
                 ],
+                'sorting' => [],
                 'fields' => [],
                 'filters' => [],
                 'actions' => [],
