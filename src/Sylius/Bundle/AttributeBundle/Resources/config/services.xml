@@ -12,6 +12,10 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/attribute_types.xml" />
+    </imports>
+
     <parameters>
         <parameter key="sylius.model.attribute.interface">Sylius\Component\Attribute\AttributeType\AttributeTypeInterface</parameter>
     </parameters>

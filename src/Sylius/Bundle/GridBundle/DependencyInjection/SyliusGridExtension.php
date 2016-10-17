@@ -42,7 +42,7 @@ final class SyliusGridExtension extends Extension
         $container->setAlias('sylius.grid.data_extractor', 'sylius.grid.data_extractor.property_access');
 
         foreach ($config['drivers'] as $enabledDriver) {
-            $path = sprintf('driver/%s.xml', $enabledDriver);
+            $path = sprintf('services/integrations/%s.xml', $enabledDriver);
             $loader->load($path);
         }
     }
