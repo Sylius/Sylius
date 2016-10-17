@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_inventory:
+    resources:
+        inventory_unit:
+            classes:
+                model: "%sylius.model.order_item_unit.class%"

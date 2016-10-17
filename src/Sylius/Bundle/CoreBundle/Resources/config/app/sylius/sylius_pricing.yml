@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_pricing:
+    forms:
+        - sylius_product_variant
