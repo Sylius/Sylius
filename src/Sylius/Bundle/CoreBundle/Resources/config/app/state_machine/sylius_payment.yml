@@ -4,7 +4,7 @@ winzou_state_machine:
             after:
                 process_order:
                     on: ["fail", "cancel"]
-                    do: ["@sylius.order_processing.order_processor", "process"]
+                    do: ["@sylius.order_processing.order_payment_processor", "process"]
                     args: ["object.getOrder()"]
                 update_order_payment_state:
                     on: ["complete"]
