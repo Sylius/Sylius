@@ -59,7 +59,7 @@ First step is to implement the simple interface.
             return $this->taxCategory;
         }
 
-        public function setTaxCategory(TaxCategoryInterface $taxCategory) // This method is not required.
+        public function setTaxCategory(TaxCategoryInterface $taxCategory)
         {
             $this->taxCategory = $taxCategory;
         }
@@ -79,12 +79,21 @@ Second and last task is to define the relation inside ``Resources/config/doctrin
         <entity name="AcmeBundle\Entity\Guest" table="acme_guests">
             <!-- your mappings... -->
 
-            <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">
+            <many-to-one
+                field="taxCategory"
+                target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface"
+            >
                 <join-column name="tax_category_id" referenced-column-name="id" nullable="false" />
             </many-to-one>
         </entity>
 
     </doctrine-mapping>
+
+ Updating database schema again.
+
+.. code-block:: bash
+
+php app/console doctrine:schema:update --force
 
 Done! Now your **Guest** model can be used in Sylius taxation engine.
 
