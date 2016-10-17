@@ -18,7 +18,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.name
                     path: .
-                    sortable: translation.name
+                    sortable: name
                     options:
                         template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
                 themeName:

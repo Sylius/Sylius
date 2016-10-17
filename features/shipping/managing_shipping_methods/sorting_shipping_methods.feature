@@ -33,7 +33,7 @@ Feature: Sorting listed shipping methods
         Given I am browsing shipping methods
         When I start sorting shipping methods by name
         Then I should see 3 shipping methods in the list
-        And the first shipping method on the list should have name "Pug Blimp"
+        And the first shipping method on the list should have name "Aardvark Stagecoach"
 
     @ui
     Scenario: Changing the order of sorting shipping methods by their names
@@ -41,7 +41,7 @@ Feature: Sorting listed shipping methods
         And the shipping methods are already sorted by name
         When I switch the way shipping methods are sorted by name
         Then I should see 3 shipping methods in the list
-        And the first shipping method on the list should have name "Aardvark Stagecoach"
+        And the first shipping method on the list should have name "Pug Blimp"
 
     @ui
     Scenario: Shipping methods are always sorted in the default locale
@@ -49,4 +49,4 @@ Feature: Sorting listed shipping methods
         And I am browsing shipping methods
         When I start sorting shipping methods by name
         Then I should see 3 shipping methods in the list
-        And the first shipping method on the list should have name "Pug Blimp"
+        And the first shipping method on the list should have name "Aardvark Stagecoach"

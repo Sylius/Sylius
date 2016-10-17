@@ -33,7 +33,7 @@ Feature: Sorting listed payment methods
         Given I am browsing payment methods
         When I start sorting payment methods by name
         Then I should see 3 payment methods in the list
-        And the first payment method on the list should have name "Paypal Express Checkout"
+        And the first payment method on the list should have name "Cash on Delivery"
 
     @ui
     Scenario: Changing the order of sorting payment methods by their names
@@ -41,7 +41,7 @@ Feature: Sorting listed payment methods
         And the payment methods are already sorted by name
         When I switch the way payment methods are sorted by name
         Then I should see 3 payment methods in the list
-        And the first payment method on the list should have name "Cash on Delivery"
+        And the first payment method on the list should have name "Paypal Express Checkout"
 
     @ui
     Scenario: Payment methods are always sorted in the default locale
@@ -49,4 +49,4 @@ Feature: Sorting listed payment methods
         And I am browsing payment methods
         When I start sorting payment methods by name
         Then I should see 3 payment methods in the list
-        And the first payment method on the list should have name "Paypal Express Checkout"
+        And the first payment method on the list should have name "Cash on Delivery"
