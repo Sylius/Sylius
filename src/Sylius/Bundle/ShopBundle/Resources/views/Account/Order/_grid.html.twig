@@ -12,7 +12,7 @@
         <thead>
         <tr>
             {% for field in definition.fields %}
-                {% if definition.isSortableBy(field.name) %}
+                {% if field.isSortable %}
                     {{ sorting.tableHeader(grid, field, app.request.attributes) }}
                 {% else %}
                     <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
