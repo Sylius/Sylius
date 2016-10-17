@@ -17,4 +17,5 @@ As with any Sylius bundle, you can override all the models, controllers, reposit
    configuring_taxation
    calculating_taxes
    custom_calculators
+   custom_use_of_bundle_out_side_sylius
    summary
