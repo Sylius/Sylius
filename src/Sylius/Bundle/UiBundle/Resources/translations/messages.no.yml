@@ -25,7 +25,6 @@ sylius:
         administration: Administrasjon
         administration_dashboard: Administrasjon dashboard
         all_your_addresses: Alle adressene
-        amount: Beløp
         assortment: Utvalg
         author: Forfatter
         availability: Tilgjengelighet
@@ -238,7 +237,6 @@ sylius:
         processing: Behandler
         product: Produkt
         product_details_viewing_product_product: 'Produktdetaljer <small>Ser på produkt "<strong>%product%</strong>"</small>'
-        products: Produkter
         products_categorized_as_name: 'Produkter kategorisert som "%name%"'
         products_categorized_under_taxon_taxon: 'Produkter <small>kategorisert under "%taxon%" gruppe</small>'
         products_index_of_all_products_in_your_store: 'Produkter <small>indeks over alle produkter i butikken</small>'
@@ -303,7 +301,6 @@ sylius:
         taxation_categories: Beskatningskategorier
         taxation_settings: Beskatningsinnstillinger
         taxes: Avgifter
-        taxons: Taksonomier
         there_are_no_images_for_this_product: Det er ingen bilder for dette produktet
         there_are_no_options_for_this_product: Det er ingen alternativer for dette produktet
         there_are_no_taxons_for_this_product: Det er ingen grupper for dette produktet

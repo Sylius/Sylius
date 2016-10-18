@@ -46,7 +46,6 @@ sylius:
         administration_dashboard: Nástěnka administrace
         all: Všechno
         all_your_addresses: Všechny adresy
-        amount: Částka
         an_error_occurred: Vyskytla se chyba
         api: Rozhraní API
         apply_coupon: Použít poukaz
@@ -205,7 +204,6 @@ sylius:
         exchange_rate: Směnný kurz
         exclusive: Exkluzivní
         existing_customer: Stávající zákazník
-        expires_at: Končí v
         extra_notes: Další poznámky
         failed: Neúspěšné
         first_name: Křestní Jméno
@@ -361,7 +359,6 @@ sylius:
         product_attributes: Atributy produktu
         product_details_viewing_product_product: 'Podrobnosti produktu <small>zobrazení produktu "<strong>%product%</strong>"</small>'
         product_options: Volby produktů
-        products: Produkty
         products_categorized_as_name: 'Produkty zařazené jako "%name%"'
         products_categorized_under_taxon_taxon: 'Produkty <small>kategorizovány pod taxonem "%taxon%"</small>'
         products_index_of_all_products_in_your_store: 'Produkty <small>seznam všech produktů v obchodě</small>'
@@ -442,7 +439,6 @@ sylius:
         taxation_categories: Typy zdanění
         taxation_settings: Nastavení zdanění
         taxes: DPH
-        taxons: Taxony
         theme: Vzhled
         there_are_no_images_for_this_product: Pro tento produkt nejsou žádné obrázky
         there_are_no_options_for_this_product: Pro tento produkt nejsou žádné nastavení

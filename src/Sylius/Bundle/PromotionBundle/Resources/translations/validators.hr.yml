@@ -18,9 +18,3 @@ sylius:
             not_blank: Unesite kod za popust.
         usage_limit:
             min: 'Ograničenje upotrebe koda za popust mora biti najmanje {{ limit }}.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'Broj kodova za popust koje treba generirati mora biti najmanje {{ limit }}.'
-            not_blank: Unesite količinu kodova za popust koju želite.
-        usage_limit:
-            min: 'Ograničenje kodova za popust koje želite generirati mora biti najmanje {{ limit }}.'

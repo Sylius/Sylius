@@ -10,7 +10,6 @@ sylius:
             options: 选项
             meta_keywords: Meta关键字：
             meta_description: META描述
-            taxons: 分类
         product_variant:
             available_on: 可用
             available_until: 有效期至

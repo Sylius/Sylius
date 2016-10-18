@@ -51,7 +51,6 @@ sylius:
         admin_users: Adminisztrátorok
         all: Mind
         all_your_addresses: Minden Ön által megadott cím
-        amount: Összeg
         an_error_occurred: Hiba történt
         api: API
         apply_coupon: Kupon használata
@@ -289,7 +288,6 @@ sylius:
         exclusive: Exkluzív
         existing_customer: Meglévő ügyfél
         expiration_and_usage_limits: Lejárati és a használati korlát
-        expires_at: Lejárat
         extra_information: További információk
         extra_notes: További megjegyzések
         failed: Sikertelen
@@ -539,7 +537,6 @@ sylius:
         product_review: Termék értékelések
         product_reviews: Termék értékelések
         product_variants: Termék változatok
-        products: Termékek
         products_categorized_as_name: '"%name%" szerint kategorizált termékek'
         products_categorized_under_taxon_taxon: 'Termékek <small>"%taxon%" taxon alatt kategorizálva</small>'
         products_index_of_all_products_in_your_store: 'Products <small>Az áruház összes termékének indexe</small>'
@@ -661,7 +658,6 @@ sylius:
         taxation_settings: Adózás-beállítások
         taxes: Adók
         taxonomy: Taxonómia
-        taxons: Taxonok
         terms_and_conditions: Felhasználási feltételek
         thank_you: Köszönjük!
         thank_you_for_your_order: Köszönjük a rendelését

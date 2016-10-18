@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Stückpreis
-                quantity: Stückzahl
-                variant: Variante
-            customer_group: Kundengruppe
         block:
             body: Inhalt
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Versandarten
         promotion:
             channels: Ausgabekanäle
-        coupon:
-            per_customer_usage_limit: Nutzungsbeschränkung pro Kunde
+        promotion_action:
+            add_product_configuration:
+                price: Stückpreis
+                variant: Variante
         group:
             name: Name
             roles: Rollen

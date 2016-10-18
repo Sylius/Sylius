@@ -8,8 +8,6 @@ sylius:
                 catalog:
                     attributes: Nitelikler
                     options: Ayarlar
-                    products: Ürünler
-                    taxons: Kategoriler
                 configuration:
                     channels: Kanallar
                     countries: Ülkeler

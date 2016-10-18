@@ -45,7 +45,6 @@ sylius:
         administration_panel_login: Login i panelit te administrimit
         all: Të gjitha
         all_your_addresses: Të gjitha adresat e tua
-        amount: Shuma
         an_error_occurred: Ndodhi një gabim
         are_your_sure_you_want_to_perform_this_action: Jeni i sigurte se deshironi te egzekutoni kete veprim?
         association: Lidhje
@@ -98,6 +97,7 @@ sylius:
         contain_variants: Përmban variante
         contains: Përmban
         countries: Vendet
+        country: Shteti
         country_details: Hollësi për vendin
         coupon: Kuponi
         coupon_based: Bazuar në kupon
@@ -250,7 +250,6 @@ sylius:
         exchange_rate: Norma e shkëmbimit
         exclusive: Ekskluziv
         existing_customer: Blerës ekzistues
-        expires_at: Skadon më
         extra_information: Informacione shtese
         failed: Nuk u krye
         first_name: Emri
@@ -464,7 +463,6 @@ sylius:
         product_options: Opsionet e produktit
         product_review: Recensioni i produktit
         product_reviews: Recensionet e produktit
-        products: Produktet
         products_categorized_as_name: 'Produkte të klasifikuar si "%name%"'
         products_categorized_under_taxon_taxon: 'Produkte <small>Të kategorizuar nën "%taxon%" tipologjine </small>'
         products_index_of_all_products_in_your_store: 'Produkte <small>Indeksi i të gjitha produkteve në arkivin tuaj</small>'
@@ -567,7 +565,7 @@ sylius:
         taxation_categories: Kategoritë e taksimit
         taxation_settings: Parametrat e taksimit
         taxes: Taksat
-        taxons: Kategoritë
+        taxons: Tipologjite
         thank_you_for_your_order: Falmnderit për porosinë
         theme: Tema
         there_are_no_attributes_configured: Nuk ka asnjë atribut të konfiguruar
@@ -620,7 +618,6 @@ sylius:
         total_registrations: Regjistrimet totale
         tracking_number: Numri i gjurmimit
         translations: Përkthime
-        type: Lloji
         unavailable: Nuk gjendet
         unit_price: Çmimi për njësi
         unknown: E panjohur
@@ -630,7 +627,6 @@ sylius:
         update_product_association_type: Perditeso tipologji te lidhjes se produktit
         updating_tax_rate: Duke përditësuar normën e taksimit
         usage: Perdorimi
-        usage_limit: Kufiri i përdorimit
         used: I përdorur
         user_confirmation_name: Konfirmimi i përdoruesit
         user_details: Hollësi të përdoruesit

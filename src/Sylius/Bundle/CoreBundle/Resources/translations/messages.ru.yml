@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Цена
-                quantity: Количество
-                variant: Вариант
-            customer_group: Группа клиента
         block:
             body: Содержание
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Способ доставки
         promotion:
             channels: Каналы
-        coupon:
-            per_customer_usage_limit: Лимит использования на клиента
+        promotion_action:
+            add_product_configuration:
+                price: Цена
+                variant: Вариант
         group:
             name: Название
             roles: Роли
@@ -126,8 +122,6 @@ sylius:
             contains_taxon:
                 taxon: Налог
                 count: Кол-во
-            taxon:
-                taxons: Налоги
             total_of_items_from_taxon:
                 taxon: Налог
                 amount: Сумма

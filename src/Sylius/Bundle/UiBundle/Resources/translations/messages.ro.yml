@@ -25,7 +25,7 @@ sylius:
         administration: Administrare
         administration_dashboard: Panou de administrare
         all_your_addresses: Toate adresele
-        amount: Valoare
+        amount: Sumă
         assortment: Sortiment
         attributes: Atribute
         author: Autor
@@ -240,7 +240,6 @@ sylius:
         processing: În curs de procesare
         product: Produs
         product_details_viewing_product_product: 'Detalii produs <small>Vizualizează produs "<strong>%product%</strong>"</small>'
-        products: Produse
         products_categorized_as_name: 'Produse categorizate ca "%name%"'
         products_categorized_under_taxon_taxon: 'Produse <small>din categoria "%taxon%"</small>'
         products_index_of_all_products_in_your_store: 'Produse <small>Lista tuturor produselor din magazin</small>'
@@ -305,7 +304,6 @@ sylius:
         taxation_categories: Categorii de taxe
         taxation_settings: Setări taxe
         taxes: Taxe
-        taxons: Categorii
         there_are_no_images_for_this_product: Nu există imagini pentru acest produs
         there_are_no_options_for_this_product: Nu există opțiuni pentru acest produs
         there_are_no_taxons_for_this_product: Fără categorie

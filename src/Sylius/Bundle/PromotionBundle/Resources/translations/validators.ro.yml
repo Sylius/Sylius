@@ -18,9 +18,3 @@ sylius:
             not_blank: Vă rugăm să introduceţi codul promoţional.
         usage_limit:
             min: 'Limita de utilizare a codului promoțional trebuie să fie cel puţin {{ limit }}.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'Numărul de coduri promoționale generate trebuie să fie de cel puţin {{ limit }}.'
-            not_blank: Vă rugăm să introduceţi numărul de coduri promoționale de generat.
-        usage_limit:
-            min: 'Limita de utilizare a codurilor promoționale generate trebuie să fie de cel puţin {{ limit }}.'

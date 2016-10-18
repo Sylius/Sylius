@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Enhetspris
-                quantity: Antal
-                variant: Variant
-            customer_group: Kundgrupp
         block:
             body: Brödtext
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Fraktsätt
         promotion:
             channels: Kanaler
-        coupon:
-            per_customer_usage_limit: Begränsning per kund
+        promotion_action:
+            add_product_configuration:
+                price: Enhetspris
+                variant: Variant
         group:
             name: Namn
             roles: Roller

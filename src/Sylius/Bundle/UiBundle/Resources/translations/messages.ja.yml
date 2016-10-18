@@ -178,7 +178,6 @@ sylius:
         price: 価格
         product: 商品名
         product_details_viewing_product_product: '商品詳細<small>"<strong>%product%</strong>"</small>'
-        products: 商品管理
         products_categorized_under_taxon_taxon: 'カテゴリ"%taxon%"の商品'
         products_index_of_all_products_in_your_store: 商品管理
         promotion_coupons: sylius.breadcrumb.promotion_coupon.index

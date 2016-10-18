@@ -21,7 +21,6 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Taksa fikse për dërgimin
-                amount: Shuma
             flexible_rate_configuration:
                 label: Taksa e ndryshueshme
                 additional_unit_cost: Kosto shtese per njesi
@@ -29,7 +28,6 @@ sylius:
                 first_unit_cost: Kostoja per njesine e pare
             per_unit_rate_configuration:
                 label: Tarife fikse per njesi
-                amount: Shuma
             weight_rate_configuration:
                 label: Taksa e bazuar te pesha
                 fixed: Shuma fikse
@@ -37,7 +35,6 @@ sylius:
                 division: Ndarja
             volume_rate_configuration:
                 label: Taksa e bazuar te vëllimi
-                amount: Shuma
                 division: Ndarja
         shipping_category:
             description: Përshkrimi

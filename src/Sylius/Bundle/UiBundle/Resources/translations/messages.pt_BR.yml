@@ -53,7 +53,6 @@ sylius:
         admin_users: Administradores
         all: Todos(as)
         all_your_addresses: Todos os seus endereços
-        amount: Quantidade
         an_error_occurred: Um erro ocorreu
         api: API
         apply_coupon: Aplicar cupom
@@ -295,7 +294,6 @@ sylius:
         exclusive: Exclusivo
         existing_customer: Cliente cadastrado
         expiration_and_usage_limits: Expiração e limite de uso
-        expires_at: Expira em
         extra_information: Informações extras
         extra_notes: Notas extra
         failed: Falhou
@@ -554,7 +552,6 @@ sylius:
         product_review: Revisão do produto
         product_reviews: Comentários de produtos
         product_variants: Variantes de produto
-        products: Produtos
         products_categorized_as_name: 'Produtos categorizados como "%name%"'
         products_categorized_under_taxon_taxon: 'Produtos <small>Categorizado na táxon "%taxon%"</small>'
         products_index_of_all_products_in_your_store: 'Produtos <small>Lista de todos os produtos em sua loja</small>'
@@ -679,7 +676,6 @@ sylius:
         taxation_settings: Configurações de taxas
         taxes: Taxas
         taxonomy: Taxonomia
-        taxons: Taxas
         terms_and_conditions: Termos e condições
         thank_you: Obrigado!
         thank_you_for_your_order: Obrigado pelo seu pedido

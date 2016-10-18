@@ -3,53 +3,32 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Suma
-            percentage_discount_configuration:
-                percentage: Procentas
-            type: Tipas
-        rule:
-            taxonomy_configuration:
-                taxons: Taksonai
-                exclude: Neįtraukti
-            contains_product_configuration:
-                variants: Produktai
-                exclude: Neįtraukti
-            cart_quantity_configuration:
-                count: Kiekis
-            item_total_configuration:
-                amount: Suma
-            nth_order_configuration:
-                nth: N-tasis
-            customer_loyalty_configuration:
-                time: Laikas
-                unit:
-                    days: Dienos
-                    weeks: Savaitės
-                    months: Mėnesiai
-                    years: Metai
-                    header: Vienetas
-                after: Vartotojas sukurtas pasibaigus šiam laikotarpiui
-            shipping_country_configuration:
-                country: Šalis
-            type: Tipas
-        coupon:
-            usage_limit: Naudojimo limitas
-            expires_at: Nustoja galioti
-        coupon_generate_instruction:
-            amount: Suma
-            usage_limit: Naudojimo limitas
-            expires_at: Nustoja galioti
         promotion:
             actions: Veiksmai
             add_action: Pridėti veiksmą
             add_rule: Pridėti taisyklę
             coupon_based: Pagal kuponą
-            exclusive: Išskirtinis
             description: Aprašymas
             ends_at: Baigiasi
+            exclusive: Išskirtinis
             name: Pavadinimas
             rules: Taisyklės
             starts_at: Prasideda
             usage_limit: Naudojimo limitas
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Suma
+            type: Tipas
+        promotion_coupon:
+            usage_limit: Naudojimo limitas
+        promotion_coupon_generator_instruction:
+            amount: Suma
+            usage_limit: Naudojimo limitas
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Kiekis
+            item_total_configuration:
+                amount: Suma
+            shipping_country_configuration:
+                country: Šalis
+            type: Tipas

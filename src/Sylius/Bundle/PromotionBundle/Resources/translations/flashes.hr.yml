@@ -3,7 +3,7 @@
 
 sylius:
     promotion_coupon:
-        generate: Kodovi za popust su uspješno generirani.
         eligible: Kupon za dodatne popuste je dodan u košaricu.
+        generate: Kodovi za popust su uspješno generirani.
         invalid: Kupon koji ste unijeli nije ispravan.
         not_eligible: Na vašu košaricu nije moguće dodati kupon za popust.

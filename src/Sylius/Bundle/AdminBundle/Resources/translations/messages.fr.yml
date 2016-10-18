@@ -9,8 +9,6 @@ sylius:
                     attributes: Attributs
                     header: Catalogue
                     options: Options
-                    products: Produits
-                    taxons: Famille de tags
                 configuration:
                     admin_users: Administrateurs
                     channels: Canaux

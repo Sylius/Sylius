@@ -3,7 +3,7 @@
 
 sylius:
     promotion_coupon:
-        generate: Codurile promoționale au fost generate cu succes.
         eligible: Codul promoțional a fost adăugat în coş.
+        generate: Codurile promoționale au fost generate cu succes.
         invalid: Codul promoțional nu este valid.
         not_eligible: Acest cod promoțional nu este aplicabil la coșul dumneavoastră.

@@ -3,55 +3,33 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Kwota
-            percentage_discount_configuration:
-                percentage: Procent
-            type: Typ
-        rule:
-            taxonomy_configuration:
-                taxons: Taksony
-                exclude: Wyklucz
-            contains_product_configuration:
-                variants: Produkty
-                exclude: Wyklucz
-            cart_quantity_configuration:
-                count: Ilość
-                equal: Równe
-            item_total_configuration:
-                amount: Kwota
-            nth_order_configuration:
-                nth: N-ty
-            customer_loyalty_configuration:
-                time: Czas
-                unit:
-                    days: Dni
-                    weeks: Tygodnie
-                    months: Miesiące
-                    years: Lata
-                    header: Jednostka
-                after: Użytkownik utworzony po tym okresie
-            shipping_country_configuration:
-                country: Kraj
-            type: Typ
-        coupon:
-            usage_limit: Limit użycia
-            expires_at: Wygasa dnia
-        coupon_generate_instruction:
-            amount: Ilość
-            usage_limit: Limit użycia
-            expires_at: Wygasa dnia
-            code_length: Długość kodu
         promotion:
             actions: Akcje
             add_action: Dodaj akcje
             add_rule: Dodaj regułę
             coupon_based: Z wykorzystaniem kuponów
-            exclusive: Ekskluzywny
             description: Opis
             ends_at: Data zakończenia
+            exclusive: Ekskluzywny
             name: Nazwa
             rules: Reguły
             starts_at: Data rozpoczęcia
             usage_limit: Limit użycia
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Kwota
+            type: Typ
+        promotion_coupon:
+            usage_limit: Limit użycia
+        promotion_coupon_generator_instruction:
+            amount: Kwota
+            usage_limit: Limit użycia
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Ilość
+                equal: Równe
+            item_total_configuration:
+                amount: Kwota
+            shipping_country_configuration:
+                country: Kraj
+            type: Typ

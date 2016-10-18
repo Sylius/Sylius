@@ -6,12 +6,12 @@ sylius:
         address:
             city: شهر
             company: شرکت
-            country: كشور
+            country: کشور
             first_name: نام
             last_name: نام خانوادگی
             phone_number: شماره تلفن
             postcode: کد پستی
-            street: آدرس پستی
+            street: خیابان
             province: استان
         country:
             add_province: افزودن استان
@@ -24,12 +24,12 @@ sylius:
             abbreviation: مخفف
             select: انتخاب
         zone:
-            add_member: افزودن بخش
-            members: بخش ها
+            add_member: افزودن عضو
+            members: اعضا
             name: نام
             type: نوع
             types:
-                country: كشور
+                country: کشور
                 province: استان
                 zone: منطقه
             scope: محدوده

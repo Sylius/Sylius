@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Vieneto kaina
-                quantity: Kiekis
-                variant: Variantas
-            customer_group: Pirkėjų grupė
         block:
             body: Bloko turinys
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Pristatymo būdas
         promotion:
             channels: Kanalai
-        coupon:
-            per_customer_usage_limit: Kliento naudojimosi ribos
+        promotion_action:
+            add_product_configuration:
+                price: Vieneto kaina
+                variant: Variantas
         group:
             name: Pavadinimas
             roles: Rolės
@@ -117,8 +113,6 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Kiekis
-            taxon:
-                taxons: Taksonai
             total_of_items_from_taxon:
                 amount: Suma
     installer:

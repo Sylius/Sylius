@@ -3,8 +3,11 @@
 
 sylius:
     form:
-        rule:
-            contains_product_configuration:
-                variants: Sản phẩm
         promotion:
             name: Tên
+        promotion_action:
+            type: Phân loại
+        promotion_rule:
+            shipping_country_configuration:
+                country: Quốc gia
+            type: Phân loại

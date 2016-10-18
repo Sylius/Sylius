@@ -9,7 +9,6 @@ sylius:
                     attributes: Атрибуты
                     header: Каталог
                     options: Список опций
-                    products: Товары
                     taxons: Налоги
                 configuration:
                     channels: Каналы

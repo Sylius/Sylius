@@ -19,9 +19,3 @@ sylius:
             unique: Bu kupon zaten var.
         usage_limit:
             min: 'Kupon kullanım limitinin en az {{ limit }} olması gerekir.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'Oluşturulacak kuponların miktarı en az {{ limit }} olmalıdır.'
-            not_blank: Lütfen oluşturulacak kuponların miktarını giriniz.
-        usage_limit:
-            min: 'Oluşturulan Kuponlar kullanım sınırı en az olması gerekir {{ limit }}.'

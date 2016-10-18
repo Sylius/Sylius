@@ -20,6 +20,7 @@ sylius:
         code: Codi
         company: Empresa
         completed: Completat
+        country: País
         coupon: Cupó
         create_a_new_address: Crea una nova adreça
         currency: Moneda
@@ -82,6 +83,7 @@ sylius:
         tax_category: "Categoria d'impost"
         title: Títol
         tracking_number: Número de seguiment
+        type: Tipus
         unit_price: Preu per unitat
         unknown: Desconegut
         username: "Nom d'usuari"

@@ -3,7 +3,7 @@
 
 sylius:
     promotion_coupon:
-        generate: 推广优惠券已成功生成。
         eligible: 推广优惠券已被添加到购物车。
+        generate: 推广优惠券已成功生成。
         invalid: 你的推广优惠券是无效的。
         not_eligible: 您的购物车对此推广优惠券无效。

@@ -19,9 +19,3 @@ sylius:
             unique: Tento kupón již existuje.
         usage_limit:
             min: 'Limit využití kupónu musí být alespoň {{ limit }}.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'Počet kupónů k vygenerování musí být alespoň {{ limit }}.'
-            not_blank: Prosím zadejte počet kupónů, které se mají vygenerovat.
-        usage_limit:
-            min: 'Limit využití generovaných kupónů musí být alespoň {{ limit }}.'

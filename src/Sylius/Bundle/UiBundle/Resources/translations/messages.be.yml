@@ -236,7 +236,6 @@ sylius:
         processing: Апрацоўваецца
         product: Тавар
         product_details_viewing_product_product: 'Дэталі тавара <small>Прагляд тавара "<strong>%product%</strong>"</small>'
-        products: Тавары
         products_categorized_as_name: 'Тавары, катэгарызаваныя як "%name%"'
         products_categorized_under_taxon_taxon: 'Тавары <small>з раздзелу "%taxon%" taxon</small>'
         products_index_of_all_products_in_your_store: 'Тавары <small>індэкс усіх тавараў у Вашай краме</small>'
@@ -300,7 +299,6 @@ sylius:
         taxation_categories: Катэгорыі падаткаў
         taxation_settings: Падатковыя налады
         taxes: Падаткі
-        taxons: Катэгорыі
         there_are_no_images_for_this_product: Для гэтага тавару няма выяваў
         there_are_no_options_for_this_product: Для гэтага тавару няма опцый
         there_are_no_taxons_for_this_product: Гэты тавар не абкладаецца падаткам

@@ -292,7 +292,6 @@ sylius:
         exclusive: Ekskluzywny
         existing_customer: Istniejący Klient
         expiration_and_usage_limits: Data wygaśnięcia i limit użyć
-        expires_at: Wygasa dnia
         extra_information: Dodatkowe informacje
         extra_notes: Dodatkowe uwagi
         failed: Nieudane
@@ -532,7 +531,6 @@ sylius:
         product_details_viewing_product_product: 'Szczegóły produktu <small>Oglądasz produkt "<strong>%product%</strong>"</small>'
         product_reviews: Recenzje produktu
         product_variants: Warianty produktu
-        products: Produkty
         products_categorized_as_name: 'Produkty sklasyfikowane jako "%name%"'
         products_categorized_under_taxon_taxon: 'Produkty <small>Należące do taksonomii "%taxon%"</small>'
         products_index_of_all_products_in_your_store: 'Produkty <small>Lista wszystkich produktów w Twoim sklepie</small>'
@@ -639,7 +637,6 @@ sylius:
         taxation_settings: Ustawienia podatków
         taxes: Podatki
         taxonomy: Taksonomia
-        taxons: Taksony
         terms_and_conditions: Regulamin
         thank_you: Dziękujemy!
         thank_you_for_your_order: Dziękujemy za zamówienie

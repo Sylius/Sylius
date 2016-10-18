@@ -9,8 +9,6 @@ sylius:
                     attributes: Atributi
                     header: Katalog
                     options: Možnosti
-                    products: Izdelki
-                    taxons: Taksoni
                 configuration:
                     channels: Kanali
                     countries: Države

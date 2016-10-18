@@ -8,8 +8,6 @@ sylius:
                 catalog:
                     attributes: Atributai
                     options: Parinktys
-                    products: Produktai
-                    taxons: Taksonai
                 configuration:
                     channels: Kanalai
                     countries: Šalys

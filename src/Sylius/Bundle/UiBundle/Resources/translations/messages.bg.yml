@@ -42,6 +42,7 @@ sylius:
         confirmation_title: Потвърждение
         contain_variants: Съдържа варианти
         countries: Страни
+        country: Държава
         country_details: Информация за страните
         coupons: Купони
         create: Създай
@@ -199,7 +200,6 @@ sylius:
         pricing: Ценообразуване
         product: Продукт
         product_details_viewing_product_product: 'Продукт детайли <small>Преглед на продукт "<strong>%product%</strong>"</small>'
-        products: Продукти
         products_categorized_as_name: 'Продукти, категоризирани като "%name%"'
         products_categorized_under_taxon_taxon: 'Продукти <small>категории под "%taxon%" таксон</small>'
         products_index_of_all_products_in_your_store: 'Продукти <small>индекс на всички продукти в магазина</small>'
@@ -262,6 +262,7 @@ sylius:
         total_registrations: Общо регистрации
         tracking_number: Номер за проследяване
         translations: Преводи
+        type: Тип
         unavailable: Не е налично
         updating_tax_rate: Актуализиране на данъчна ставка
         used: Използвани

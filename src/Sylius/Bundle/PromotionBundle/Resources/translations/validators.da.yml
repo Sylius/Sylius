@@ -18,9 +18,3 @@ sylius:
             not_blank: Indtast kuponkode.
         usage_limit:
             min: 'Kupon brugsgrænse skal være mindst {{ limit }}.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'Mængden af kuponer skal være mindst {{ limit }}.'
-            not_blank: Angiv mængden af kuponer til at generere.
-        usage_limit:
-            min: 'Brugsgrænse for genererede kuponer skal mindst {{ limit }}.'

@@ -7,8 +7,6 @@ sylius:
             main:
                 catalog:
                     options: Instillinger
-                    products: Produkter
-                    taxons: Taksonomier
                 configuration:
                     countries: Land
                     header: Konfigurasjon

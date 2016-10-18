@@ -185,7 +185,6 @@ sylius:
         exchange_rate: Valiutų kursas
         exclusive: Išskirtinis
         existing_customer: Esamas klientas
-        expires_at: Nustoja galioti
         failed: Nepavyko
         first_name: Vardas
         fulfill: Išpildyti
@@ -335,7 +334,6 @@ sylius:
         product_attributes: Produkto atributai
         product_details_viewing_product_product: 'Produkto detalės <small>peržiūrimas produktas "<strong>%product%</strong>"</small>'
         product_options: Produkto parinktys
-        products: Produktai
         products_categorized_as_name: 'Produktai klasifikuojami kaip "%name%"'
         products_categorized_under_taxon_taxon: 'Produktai <small>kategorizuoti pagal "%taxon%"</small>'
         products_index_of_all_products_in_your_store: 'Produktai <small>visų produktų jūsų parduotuvėje rodyklė</small>'
@@ -417,7 +415,6 @@ sylius:
         taxation_categories: Apmokestinimo kategorijos
         taxation_settings: Apmokestinimo nustatymai
         taxes: Mokesčiai
-        taxons: Taksonai
         there_are_no_images_for_this_product: Šis produktas neturi paveikslėlių
         there_are_no_options_for_this_product: Šis produktas neturi parinkčių
         there_are_no_taxons_for_this_product: Nėra jokių taksonų šiam produktui

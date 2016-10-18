@@ -7,7 +7,6 @@ sylius:
             main:
                 catalog:
                     options: sylius.breadcrumb.option.index
-                    products: 商品管理
                 configuration:
                     countries: 国の設定
                     payment_methods: 支払い方法の管理

@@ -5,3 +5,9 @@ sylius:
     form:
         promotion:
             name: Nama
+        promotion_action:
+            type: Jenis
+        promotion_rule:
+            shipping_country_configuration:
+                country: Negara
+            type: Jenis
