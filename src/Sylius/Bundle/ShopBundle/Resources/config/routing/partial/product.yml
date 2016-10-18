@@ -39,3 +39,15 @@ sylius_shop_partial_product_reviews_latest:
                 arguments:
                     - $productId
                     - $count
+
+sylius_shop_product_simple_show:
+    path: /{slug}/simple-show
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            template: SyliusShopBundle:Product:_simpleBox.html.twig
+            repository:
+                method: findOneBySlug
+                arguments:
+                    - $slug
