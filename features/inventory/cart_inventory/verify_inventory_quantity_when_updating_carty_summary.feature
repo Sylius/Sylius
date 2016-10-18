@@ -8,7 +8,7 @@ Feature: Verifying inventory quantity on cart summary
         Given the store operates on a single channel in "United States"
         And the store has a product "Iron Maiden T-Shirt" priced at "€12.54"
         And this product is tracked by the inventory
-        And there are 5 items of product "Iron Maiden T-Shirt" available in the inventory
+        And there are 5 units of product "Iron Maiden T-Shirt" available in the inventory
 
     @ui
     Scenario: Being unable to save a cart with product that is out of stock

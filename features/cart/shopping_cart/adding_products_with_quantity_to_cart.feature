@@ -10,7 +10,7 @@ Feature: Adding a simple product of given quantity to the cart
 
     @ui
     Scenario: Adding a product with stated quantity to the cart
-        Given there are 10 items of product "T-shirt banana" available in the inventory
+        Given there are 10 units of product "T-shirt banana" available in the inventory
         When I add 5 of them to my cart
         Then I should be on my cart summary page
         And I should be notified that the product has been successfully added
