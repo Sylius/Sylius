@@ -11,7 +11,7 @@ Feature: Viewing product reviews on product's details page
         And the store has customer "J.R.R Tolkien" with email "jrr.tolkien@middle-earth.com"
         And the store has customer "Terry Pratchett" with email "sir.terry@pratchett.com"
         And the store has a product "Necronomicon"
-        And this product has a review titled "Great book" and rated 5 added by customer "h.p.lovecraft@arkham.com"
+        And this product has a review titled "Great book" and rated 5 added by customer "h.p.lovecraft@arkham.com", created 3 days ago
         And this product has also a review titled "Scary and dark" and rated 4 added by customer "robert.e.howard@conan.com"
         And this product has also a review titled "Too gloomy" and rated 3 added by customer "jrr.tolkien@middle-earth.com"
         And this product has also a review titled "Classic" and rated 5 added by customer "sir.terry@pratchett.com"

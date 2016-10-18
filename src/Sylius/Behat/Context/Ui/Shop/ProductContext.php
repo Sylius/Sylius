@@ -337,7 +337,7 @@ final class ProductContext implements Context
     /**
      * @Then I should see reviews titled :firstReview, :secondReview and :thirdReview
      */
-    public function iShouldSeeReviewTitledAnd($firstReview, $secondReview, $thirdReview)
+    public function iShouldSeeReviewsTitled($firstReview, $secondReview, $thirdReview)
     {
         Assert::true(
             $this->showPage->hasReviewTitled($firstReview),

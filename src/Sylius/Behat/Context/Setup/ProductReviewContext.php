@@ -67,14 +67,19 @@ final class ProductReviewContext implements Context
 
     /**
      * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")$/
+     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+"), created (\d+) days ago$/
      */
     public function thisProductHasAReviewTitledAndRatedAddedByCustomer(
         ProductInterface $product,
         $title,
         $rating,
-        CustomerInterface $customer
+        CustomerInterface $customer,
+        $daysSinceCreation = null
     ) {
         $review = $this->createProductReview($product, $title, $rating, $title, $customer);
+        if (null !== $daysSinceCreation) {
+            $review->setCreatedAt(new \DateTime('-'.$daysSinceCreation.' days'));
+        }
 
         $this->productReviewRepository->add($review);
     }
