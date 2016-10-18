@@ -24,6 +24,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyCode($code);
 
     /**
+     * @param int|null $position
+     */
+    public function specifyPosition($position);
+
+    /**
      * @param string $name
      * @param string $language
      */
