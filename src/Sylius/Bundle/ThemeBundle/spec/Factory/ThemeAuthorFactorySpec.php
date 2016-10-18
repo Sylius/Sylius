@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 
 /**
- * @mixin ThemeAuthorFactory
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeAuthorFactorySpec extends ObjectBehavior

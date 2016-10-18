@@ -18,8 +18,6 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin ChannelFactory
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class ChannelFactorySpec extends ObjectBehavior

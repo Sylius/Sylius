@@ -21,8 +21,6 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 
 /**
- * @mixin OrderInventoryOperator
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class OrderInventoryOperatorSpec extends ObjectBehavior
@@ -165,7 +163,7 @@ final class OrderInventoryOperatorSpec extends ObjectBehavior
         $variant->getOnHand()->willReturn(5);
 
         $variant->getName()->willReturn('Red Skirt');
-        
+
         $this->shouldThrow(\InvalidArgumentException::class)->during('sell', [$order]);
     }
 

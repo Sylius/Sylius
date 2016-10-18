@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 
 /**
- * @mixin ChangePassword
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class ChangePasswordSpec extends ObjectBehavior

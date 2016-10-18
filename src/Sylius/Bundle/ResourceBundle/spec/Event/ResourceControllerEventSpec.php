@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
- * @mixin ResourceControllerEvent
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceControllerEventSpec extends ObjectBehavior

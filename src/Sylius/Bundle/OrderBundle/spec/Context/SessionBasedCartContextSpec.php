@@ -20,8 +20,6 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * @mixin SessionBasedCartContext
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SessionBasedCartContextSpec extends ObjectBehavior

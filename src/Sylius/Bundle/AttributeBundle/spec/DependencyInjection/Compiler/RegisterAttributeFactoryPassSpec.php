@@ -19,8 +19,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
 /**
- * @mixin RegisterAttributeFactoryPass
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class RegisterAttributeFactoryPassSpec extends ObjectBehavior

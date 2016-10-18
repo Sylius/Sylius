@@ -21,8 +21,6 @@ use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInte
 use Sylius\Component\Mailer\Sender\Sender;
 
 /**
- * @mixin Sender
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SenderSpec extends ObjectBehavior

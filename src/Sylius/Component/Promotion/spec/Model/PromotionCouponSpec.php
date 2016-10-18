@@ -17,8 +17,6 @@ use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
- * @mixin PromotionCoupon
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class PromotionCouponSpec extends ObjectBehavior

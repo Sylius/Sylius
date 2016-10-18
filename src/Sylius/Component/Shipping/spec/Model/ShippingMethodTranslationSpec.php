@@ -16,8 +16,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface;
 
 /**
- * @mixin ShippingMethodTranslation
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 final class ShippingMethodTranslationSpec extends ObjectBehavior

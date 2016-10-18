@@ -17,8 +17,6 @@ use Sylius\Component\Shipping\Calculator\WeightRateCalculator;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
- * @mixin WeightRateCalculator
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 final class WeightRateCalculatorSpec extends ObjectBehavior

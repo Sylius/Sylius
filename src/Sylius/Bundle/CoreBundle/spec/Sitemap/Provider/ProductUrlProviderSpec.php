@@ -23,8 +23,6 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * @mixin ProductUrlProvider
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class ProductUrlProviderSpec extends ObjectBehavior

@@ -23,8 +23,6 @@ use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
- * @mixin OrderPricesRecalculator
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderPricesRecalculatorSpec extends ObjectBehavior

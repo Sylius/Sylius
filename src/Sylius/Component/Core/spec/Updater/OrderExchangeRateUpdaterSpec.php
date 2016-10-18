@@ -19,8 +19,6 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin OrderExchangeRateUpdater
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class OrderExchangeRateUpdaterSpec extends ObjectBehavior

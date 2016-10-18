@@ -17,8 +17,6 @@ use Sylius\Component\Payment\Model\CreditCardInterface;
 use Sylius\Component\Payment\Model\PaymentSourceInterface;
 
 /**
- * @mixin CreditCard
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CreditCardSpec extends ObjectBehavior

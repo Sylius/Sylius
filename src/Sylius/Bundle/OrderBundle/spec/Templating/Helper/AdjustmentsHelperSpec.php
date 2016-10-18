@@ -18,8 +18,6 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @mixin AdjustmentsHelper
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class AdjustmentsHelperSpec extends ObjectBehavior

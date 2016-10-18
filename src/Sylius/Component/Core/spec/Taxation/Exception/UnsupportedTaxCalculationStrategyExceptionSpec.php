@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 
 /**
- * @mixin UnsupportedTaxCalculationStrategyException
- *
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
 final class UnsupportedTaxCalculationStrategyExceptionSpec extends ObjectBehavior

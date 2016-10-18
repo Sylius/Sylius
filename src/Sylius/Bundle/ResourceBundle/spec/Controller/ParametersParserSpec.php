@@ -19,8 +19,6 @@ use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin ParametersParser
- *
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Dosena Ishmael <nukboon@gmail.com>

@@ -15,8 +15,6 @@ use Sylius\Component\Core\Dashboard\DashboardStatistics;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @mixin DashboardStatistics
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DashboardStatisticsSpec extends ObjectBehavior

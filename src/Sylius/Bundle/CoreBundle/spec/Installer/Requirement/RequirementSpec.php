@@ -14,9 +14,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Installer\Requirement;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Installer\Requirement\Requirement;
 
-/**
- * @mixin Requirement
- */
 final class RequirementSpec extends ObjectBehavior
 {
     function let()

@@ -17,8 +17,6 @@ use Sylius\Bundle\PayumBundle\Action\Offline\ResolveNextRouteAction;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 
 /**
- * @mixin ResolveNextRouteAction
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class ResolveNextRouteActionSpec extends ObjectBehavior

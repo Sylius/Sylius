@@ -21,8 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @mixin RequestBasedLocaleContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class RequestBasedLocaleContextSpec extends ObjectBehavior

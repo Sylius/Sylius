@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**
- * @mixin LocaleChoiceType
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class LocaleChoiceTypeSpec extends ObjectBehavior

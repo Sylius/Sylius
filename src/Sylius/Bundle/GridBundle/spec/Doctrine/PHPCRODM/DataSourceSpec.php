@@ -25,9 +25,6 @@ use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @mixin DataSource
- */
 final class DataSourceSpec extends ObjectBehavior
 {
     function let(QueryBuilder $queryBuilder, ExpressionBuilder $expressionBuilder)

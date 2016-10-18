@@ -18,8 +18,6 @@ use Sylius\Bundle\CoreBundle\Sitemap\Model\Sitemap;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 
 /**
- * @mixin SitemapFactory
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapFactorySpec extends ObjectBehavior

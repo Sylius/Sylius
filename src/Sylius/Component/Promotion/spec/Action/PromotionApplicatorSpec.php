@@ -21,8 +21,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
- * @mixin PromotionApplicator
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class PromotionApplicatorSpec extends ObjectBehavior

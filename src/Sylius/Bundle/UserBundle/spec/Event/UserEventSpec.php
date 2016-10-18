@@ -15,9 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\User\Model\UserInterface;
 
-/**
- * @mixin UserEvent
- */
 final class UserEventSpec extends ObjectBehavior
 {
     function let(UserInterface $user)

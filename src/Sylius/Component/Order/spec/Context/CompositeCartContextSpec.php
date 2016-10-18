@@ -18,8 +18,6 @@ use Sylius\Component\Order\Context\CompositeCartContext;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
- * @mixin CompositeCartContext
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class CompositeCartContextSpec extends ObjectBehavior

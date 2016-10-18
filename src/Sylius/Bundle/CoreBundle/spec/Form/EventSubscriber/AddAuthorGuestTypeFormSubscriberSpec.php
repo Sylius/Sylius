@@ -23,8 +23,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * @mixin AddAuthorGuestTypeFormSubscriber
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class AddAuthorGuestTypeFormSubscriberSpec extends ObjectBehavior

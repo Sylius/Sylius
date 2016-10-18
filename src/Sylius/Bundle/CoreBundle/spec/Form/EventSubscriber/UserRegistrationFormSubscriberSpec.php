@@ -21,8 +21,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
- * @mixin UserRegistrationFormSubscriber
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class UserRegistrationFormSubscriberSpec extends ObjectBehavior

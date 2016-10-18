@@ -18,8 +18,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
- * @mixin AddDefaultBillingAddressOnOrderFormSubscriber
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class AddDefaultBillingAddressOnOrderFormSubscriberSpec extends ObjectBehavior

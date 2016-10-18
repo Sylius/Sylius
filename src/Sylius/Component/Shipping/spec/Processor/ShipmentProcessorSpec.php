@@ -22,8 +22,6 @@ use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\Shipping\ShipmentUnitTransitions;
 
 /**
- * @mixin ShipmentProcessor
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class ShipmentProcessorSpec extends ObjectBehavior

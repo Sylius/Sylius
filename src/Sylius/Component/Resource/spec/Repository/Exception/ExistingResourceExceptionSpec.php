@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Repository\Exception\ExistingResourceException;
 
 /**
- * @mixin ExistingResourceException
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class ExistingResourceExceptionSpec extends ObjectBehavior

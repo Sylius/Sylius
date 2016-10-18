@@ -16,8 +16,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeType;
 use Symfony\Component\Form\AbstractType;
 
 /**
- * @mixin DateAttributeType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DateAttributeTypeSpec extends ObjectBehavior

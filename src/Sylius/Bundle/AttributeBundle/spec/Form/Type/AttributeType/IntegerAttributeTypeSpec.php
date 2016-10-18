@@ -16,8 +16,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeType;
 use Symfony\Component\Form\AbstractType;
 
 /**
- * @mixin IntegerAttributeType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class IntegerAttributeTypeSpec extends ObjectBehavior

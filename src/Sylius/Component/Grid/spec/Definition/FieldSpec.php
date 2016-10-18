@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Field;
 
 /**
- * @mixin Field
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class FieldSpec extends ObjectBehavior

@@ -22,8 +22,6 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
- * @mixin ReviewerReviewsRemover
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class ReviewerReviewsRemoverSpec extends ObjectBehavior

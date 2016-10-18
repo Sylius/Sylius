@@ -18,8 +18,6 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin AdjustmentFactory
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class AdjustmentFactorySpec extends ObjectBehavior

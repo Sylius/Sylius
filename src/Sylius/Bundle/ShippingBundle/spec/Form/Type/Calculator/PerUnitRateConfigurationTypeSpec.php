@@ -19,8 +19,6 @@ use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin PerUnitRateConfigurationType
- *
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
 final class PerUnitRateConfigurationTypeSpec extends ObjectBehavior

@@ -21,8 +21,6 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin SingleResourceProvider
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SingleResourceProviderSpec extends ObjectBehavior

@@ -16,8 +16,6 @@ use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @mixin ProductVariantCombination
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProductVariantCombinationSpec extends ObjectBehavior

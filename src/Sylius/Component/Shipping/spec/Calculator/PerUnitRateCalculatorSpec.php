@@ -17,8 +17,6 @@ use Sylius\Component\Shipping\Calculator\PerUnitRateCalculator;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
- * @mixin PerUnitRateCalculator
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class PerUnitRateCalculatorSpec extends ObjectBehavior

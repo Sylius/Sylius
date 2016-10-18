@@ -23,9 +23,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormRegistryInterface;
 
-/**
- * @mixin BuildShippingMethodFormSubscriber
- */
 final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory, FormRegistryInterface $formRegistry)

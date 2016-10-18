@@ -20,8 +20,6 @@ use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @mixin TemplateLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TemplateLocatorSpec extends ObjectBehavior

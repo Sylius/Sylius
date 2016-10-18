@@ -18,8 +18,6 @@ use Sylius\Component\Channel\Context\CompositeChannelContext;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
- * @mixin CompositeChannelContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CompositeChannelContextSpec extends ObjectBehavior

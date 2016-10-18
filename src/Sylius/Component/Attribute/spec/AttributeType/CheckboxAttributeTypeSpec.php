@@ -16,8 +16,6 @@ use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
 
 /**
- * @mixin CheckboxAttributeType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class CheckboxAttributeTypeSpec extends ObjectBehavior

@@ -20,8 +20,6 @@ use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Provider\UrlProviderInterface;
 
 /**
- * @mixin SitemapBuilder
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapBuilderSpec extends ObjectBehavior

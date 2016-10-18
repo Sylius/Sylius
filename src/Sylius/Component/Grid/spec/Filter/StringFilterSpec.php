@@ -18,8 +18,6 @@ use Sylius\Component\Grid\Filter\StringFilter;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
 /**
- * @mixin StringFilter
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class StringFilterSpec extends ObjectBehavior

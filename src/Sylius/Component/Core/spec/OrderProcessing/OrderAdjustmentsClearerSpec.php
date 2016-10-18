@@ -18,8 +18,6 @@ use Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 /**
- * @mixin OrderAdjustmentsClearer
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderAdjustmentsClearerSpec extends ObjectBehavior

@@ -17,8 +17,6 @@ use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @mixin CurrencyHelper
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

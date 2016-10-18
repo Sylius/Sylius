@@ -22,8 +22,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * @mixin AddCodeFormSubscriber
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class AddCodeFormSubscriberSpec extends ObjectBehavior

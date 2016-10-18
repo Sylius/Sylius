@@ -21,8 +21,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
 
 /**
- * @mixin LoadMetadataSubscriber
- *
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
 final class LoadMetadataSubscriberSpec extends ObjectBehavior

@@ -19,8 +19,6 @@ use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @mixin LocaleHelper
- *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 final class LocaleHelperSpec extends ObjectBehavior

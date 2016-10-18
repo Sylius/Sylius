@@ -24,8 +24,6 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 
 /**
- * @mixin OrderPaymentProcessor
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class OrderPaymentProcessorSpec extends ObjectBehavior

@@ -16,8 +16,6 @@ use Sylius\Component\Currency\Converter\CurrencyNameConverter;
 use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 
 /**
- * @mixin CurrencyNameConverter
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class CurrencyNameConverterSpec extends ObjectBehavior

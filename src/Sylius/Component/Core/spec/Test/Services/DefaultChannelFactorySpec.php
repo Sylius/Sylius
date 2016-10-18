@@ -22,8 +22,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin DefaultChannelFactory
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DefaultChannelFactorySpec extends ObjectBehavior

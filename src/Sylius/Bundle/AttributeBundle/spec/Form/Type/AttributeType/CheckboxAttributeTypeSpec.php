@@ -16,8 +16,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeType;
 use Symfony\Component\Form\AbstractType;
 
 /**
- * @mixin CheckboxAttributeType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class CheckboxAttributeTypeSpec extends ObjectBehavior

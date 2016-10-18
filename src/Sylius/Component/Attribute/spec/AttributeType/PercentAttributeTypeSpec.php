@@ -16,8 +16,6 @@ use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\PercentAttributeType;
 
 /**
- * @mixin PercentAttributeType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PercentAttributeTypeSpec extends ObjectBehavior

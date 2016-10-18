@@ -16,9 +16,6 @@ use Sylius\Bundle\PricingBundle\Form\Type\CalculatorChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @mixin CalculatorChoiceType
- */
 final class CalculatorChoiceTypeSpec extends ObjectBehavior
 {
     function let()

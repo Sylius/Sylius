@@ -21,8 +21,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
- * @mixin BuildAttributeFormSubscriber
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class BuildAttributeFormSubscriberSpec extends ObjectBehavior

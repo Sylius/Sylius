@@ -17,8 +17,6 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Context\CompositeLocaleContext;
 
 /**
- * @mixin CompositeLocaleContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class CompositeLocaleContextSpec extends ObjectBehavior

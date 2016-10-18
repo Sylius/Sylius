@@ -19,8 +19,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin OrderType
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class OrderTypeSpec extends ObjectBehavior

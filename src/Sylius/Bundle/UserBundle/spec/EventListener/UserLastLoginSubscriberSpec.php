@@ -23,9 +23,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
 
-/**
- * @mixin UserLastLoginSubscriber
- */
 final class UserLastLoginSubscriberSpec extends ObjectBehavior
 {
     function let(ObjectManager $userManager)

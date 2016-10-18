@@ -18,8 +18,6 @@ use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
 use Sylius\Component\Grid\FieldTypes\StringFieldType;
 
 /**
- * @mixin StringFieldType
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class StringFieldTypeSpec extends ObjectBehavior

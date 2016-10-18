@@ -19,8 +19,6 @@ use Sylius\Bundle\FixturesBundle\Loader\FixtureLoaderInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 /**
- * @mixin FixtureLoader
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FixtureLoaderSpec extends ObjectBehavior

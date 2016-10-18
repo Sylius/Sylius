@@ -19,8 +19,6 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * @mixin ProductVariant
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class ProductVariantSpec extends ObjectBehavior

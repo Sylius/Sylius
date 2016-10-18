@@ -24,8 +24,6 @@ use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * @mixin ProvinceAddressConstraintValidator
- *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 final class ProvinceAddressConstraintValidatorSpec extends ObjectBehavior

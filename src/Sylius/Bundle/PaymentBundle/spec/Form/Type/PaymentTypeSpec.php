@@ -18,8 +18,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**
- * @mixin PaymentType
- *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 final class PaymentTypeSpec extends ObjectBehavior

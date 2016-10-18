@@ -16,8 +16,6 @@ use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin Factory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class FactorySpec extends ObjectBehavior

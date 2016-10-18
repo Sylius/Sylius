@@ -7,9 +7,6 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItem;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 
-/**
- * @mixin OrderItem
- */
 final class OrderItemSpec extends ObjectBehavior
 {
     function it_is_initializable()

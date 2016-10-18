@@ -19,8 +19,6 @@ use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
 
 /**
- * @mixin Grid
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class GridSpec extends ObjectBehavior

@@ -16,9 +16,6 @@ use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
-/**
- * @mixin Currency
- */
 final class CurrencySpec extends ObjectBehavior
 {
     function it_is_initializable()

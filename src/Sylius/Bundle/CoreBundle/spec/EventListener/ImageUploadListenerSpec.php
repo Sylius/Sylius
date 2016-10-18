@@ -19,8 +19,6 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @mixin ImageUploadListener
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class ImageUploadListenerSpec extends ObjectBehavior

@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Loader\ThemeLoadingFailedException;
 
 /**
- * @mixin ThemeLoadingFailedException
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeLoadingFailedExceptionSpec extends ObjectBehavior

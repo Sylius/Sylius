@@ -18,9 +18,6 @@ use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper;
 use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @mixin SettingsHelper
- */
 final class SettingsHelperSpec extends ObjectBehavior
 {
     function let(SettingsManagerInterface $settingsManager)

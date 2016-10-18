@@ -18,8 +18,6 @@ use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
- * @mixin AdminUser
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class AdminUserSpec extends ObjectBehavior

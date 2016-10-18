@@ -17,8 +17,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin AttributeTypeChoiceType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class AttributeTypeChoiceTypeSpec extends ObjectBehavior

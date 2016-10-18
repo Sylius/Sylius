@@ -29,8 +29,6 @@ use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
- * @mixin Order
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class OrderSpec extends ObjectBehavior

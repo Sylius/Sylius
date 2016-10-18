@@ -20,8 +20,6 @@ use Sylius\Behat\Service\Resolver\CurrentProductPageResolver;
 use Sylius\Component\Core\Model\ProductInterface;
 
 /**
- * @mixin CurrentProductPageResolver
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class CurrentProductPageResolverSpec extends ObjectBehavior

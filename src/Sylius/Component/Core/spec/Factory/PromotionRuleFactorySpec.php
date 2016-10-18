@@ -25,8 +25,6 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin PromotionRuleFactory
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PromotionRuleFactorySpec extends ObjectBehavior

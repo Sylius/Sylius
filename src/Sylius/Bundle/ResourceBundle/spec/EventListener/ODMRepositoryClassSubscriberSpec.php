@@ -22,7 +22,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
- * @mixin ODMRepositoryClassSubscriber
  * @require Doctrine\ODM\MongoDB\Events
  *
  * @author Ben Davies <ben.davies@gmail.com>

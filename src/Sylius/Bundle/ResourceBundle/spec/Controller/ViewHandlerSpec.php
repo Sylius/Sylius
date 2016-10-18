@@ -21,8 +21,6 @@ use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @mixin ViewHandler
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ViewHandlerSpec extends ObjectBehavior

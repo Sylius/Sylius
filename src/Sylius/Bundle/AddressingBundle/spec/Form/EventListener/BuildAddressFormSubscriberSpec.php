@@ -24,8 +24,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * @mixin BuildAddressFormSubscriber
- *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */

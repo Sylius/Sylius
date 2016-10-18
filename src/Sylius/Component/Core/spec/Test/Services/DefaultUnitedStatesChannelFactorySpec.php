@@ -25,8 +25,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin DefaultUnitedStatesChannelFactory
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior

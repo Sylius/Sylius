@@ -17,8 +17,6 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Currency\Context\CompositeCurrencyContext;
 
 /**
- * @mixin CompositeCurrencyContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CompositeCurrencyContextSpec extends ObjectBehavior

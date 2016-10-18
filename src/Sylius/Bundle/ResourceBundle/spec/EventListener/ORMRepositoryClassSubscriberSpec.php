@@ -22,8 +22,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
- * @mixin ORMRepositoryClassSubscriber
- *
  * @author Ben Davies <ben.davies@gmail.com>
  */
 final class ORMRepositoryClassSubscriberSpec extends ObjectBehavior

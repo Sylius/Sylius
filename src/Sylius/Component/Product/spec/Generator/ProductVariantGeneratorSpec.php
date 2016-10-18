@@ -22,8 +22,6 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
- * @mixin ProductVariantGenerator
- *
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
 final class ProductVariantGeneratorSpec extends ObjectBehavior

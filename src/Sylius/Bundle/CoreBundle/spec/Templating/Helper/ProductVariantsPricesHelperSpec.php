@@ -19,8 +19,6 @@ use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- *
- * @mixin ProductVariantsPricesHelper
  */
 final class ProductVariantsPricesHelperSpec extends ObjectBehavior
 {

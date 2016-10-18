@@ -21,8 +21,6 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
- * @mixin ChannelBasedLocaleProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ChannelBasedLocaleProviderSpec extends ObjectBehavior

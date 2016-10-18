@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Filter;
 
 /**
- * @mixin Filter
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class FilterSpec extends ObjectBehavior

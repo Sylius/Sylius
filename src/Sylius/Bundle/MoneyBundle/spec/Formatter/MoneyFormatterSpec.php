@@ -16,8 +16,6 @@ use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 
 /**
- * @mixin MoneyFormatter
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class MoneyFormatterSpec extends ObjectBehavior

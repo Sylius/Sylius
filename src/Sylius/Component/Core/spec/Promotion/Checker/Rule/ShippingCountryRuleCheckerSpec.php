@@ -20,8 +20,6 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin ShippingCountryRuleChecker
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class ShippingCountryRuleCheckerSpec extends ObjectBehavior

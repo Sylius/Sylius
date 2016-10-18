@@ -16,8 +16,6 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
 /**
- * @mixin UnresolvedDefaultPaymentMethodException
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class UnresolvedDefaultPaymentMethodExceptionSpec extends ObjectBehavior

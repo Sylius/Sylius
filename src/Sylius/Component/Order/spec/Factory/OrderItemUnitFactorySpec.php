@@ -20,8 +20,6 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
- * @mixin OrderItemUnitFactory
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderItemUnitFactorySpec extends ObjectBehavior

@@ -24,8 +24,6 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 /**
- * @mixin OrderItemUnit
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderItemUnitSpec extends ObjectBehavior

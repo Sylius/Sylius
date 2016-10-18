@@ -19,8 +19,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin PromotionCouponFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class PromotionCouponFactorySpec extends ObjectBehavior

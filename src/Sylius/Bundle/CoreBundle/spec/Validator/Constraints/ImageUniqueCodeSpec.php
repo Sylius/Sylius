@@ -17,8 +17,6 @@ use Sylius\Bundle\CoreBundle\Validator\Constraints\ImageUniqueCodeValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @mixin ImageUniqueCode
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ImageUniqueCodeSpec extends ObjectBehavior

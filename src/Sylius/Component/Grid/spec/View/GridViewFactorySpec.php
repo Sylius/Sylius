@@ -20,8 +20,6 @@ use Sylius\Component\Grid\View\GridViewFactory;
 use Sylius\Component\Grid\View\GridViewFactoryInterface;
 
 /**
- * @mixin GridViewFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class GridViewFactorySpec extends ObjectBehavior

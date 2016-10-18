@@ -20,8 +20,6 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessH
 use Symfony\Component\Security\Http\HttpUtils;
 
 /**
- * @mixin AuthenticationSuccessHandler
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class AuthenticationSuccessHandlerSpec extends ObjectBehavior

@@ -21,8 +21,6 @@ use Symfony\Component\HttpKernel\Bundle\BundleInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
- * @mixin BundleResourceLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class BundleResourceLocatorSpec extends ObjectBehavior

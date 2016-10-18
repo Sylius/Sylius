@@ -19,8 +19,6 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin ZoneFactory
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class ZoneFactorySpec extends ObjectBehavior

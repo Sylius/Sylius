@@ -18,8 +18,6 @@ use Sylius\Component\Grid\Definition\Field;
 use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 
 /**
- * @mixin PropertyAccessDataExtractor
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class PropertyAccessDataExtractorSpec extends ObjectBehavior

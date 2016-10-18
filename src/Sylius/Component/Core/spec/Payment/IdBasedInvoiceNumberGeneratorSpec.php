@@ -18,8 +18,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**
- * @mixin IdBasedInvoiceNumberGenerator
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class IdBasedInvoiceNumberGeneratorSpec extends ObjectBehavior

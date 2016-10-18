@@ -17,8 +17,6 @@ use Sylius\Bundle\ResourceBundle\Validator\DisabledValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @mixin Disabled
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class DisabledSpec extends ObjectBehavior

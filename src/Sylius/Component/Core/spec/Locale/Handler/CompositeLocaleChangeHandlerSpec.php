@@ -17,8 +17,6 @@ use Sylius\Component\Core\Locale\Handler\CompositeLocaleChangeHandler;
 use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
 
 /**
- * @mixin CompositeLocaleChangeHandler
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class CompositeLocaleChangeHandlerSpec extends ObjectBehavior

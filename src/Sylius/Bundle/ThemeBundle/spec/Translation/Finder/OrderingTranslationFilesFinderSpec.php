@@ -16,8 +16,6 @@ use Sylius\Bundle\ThemeBundle\Translation\Finder\OrderingTranslationFilesFinder;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
 
 /**
- * @mixin OrderingTranslationFilesFinder
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class OrderingTranslationFilesFinderSpec extends ObjectBehavior

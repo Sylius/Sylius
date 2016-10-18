@@ -22,8 +22,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
- * @mixin SharedSecurityService
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SharedSecurityServiceSpec extends ObjectBehavior

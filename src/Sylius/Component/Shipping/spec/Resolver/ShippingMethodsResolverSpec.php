@@ -20,8 +20,6 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolver;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
- * @mixin ShippingMethodsResolver
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ShippingMethodsResolverSpec extends ObjectBehavior

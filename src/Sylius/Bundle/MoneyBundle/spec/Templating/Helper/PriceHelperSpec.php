@@ -20,8 +20,6 @@ use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @mixin PriceHelper
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

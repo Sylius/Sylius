@@ -16,8 +16,6 @@ use Sylius\Component\Resource\Metadata\Metadata;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 /**
- * @mixin Metadata
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class MetadataSpec extends ObjectBehavior

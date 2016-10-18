@@ -22,8 +22,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin DefaultFormBuilder
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DefaultFormBuilderSpec extends ObjectBehavior

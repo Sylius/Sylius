@@ -19,8 +19,6 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 /**
- * @mixin UserPasswordEncoder
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 final class UserPasswordEncoderSpec extends ObjectBehavior

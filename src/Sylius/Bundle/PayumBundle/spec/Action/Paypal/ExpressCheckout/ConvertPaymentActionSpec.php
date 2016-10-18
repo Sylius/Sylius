@@ -26,8 +26,6 @@ use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
 /**
- * @mixin ConvertPaymentAction
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class ConvertPaymentActionSpec extends ObjectBehavior

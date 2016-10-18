@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin CircularDependencyChecker
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CircularDependencyCheckerSpec extends ObjectBehavior

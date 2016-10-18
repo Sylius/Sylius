@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 
 /**
- * @mixin Parameters
- *
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  */
 final class ParametersSpec extends ObjectBehavior

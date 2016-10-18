@@ -21,8 +21,6 @@ use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @mixin PasswordUpdaterListener
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class PasswordUpdaterListenerSpec extends ObjectBehavior

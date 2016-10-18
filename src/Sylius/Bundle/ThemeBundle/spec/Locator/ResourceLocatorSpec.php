@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin ResourceLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ResourceLocatorSpec extends ObjectBehavior

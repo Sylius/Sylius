@@ -19,8 +19,6 @@ use Sylius\Behat\Service\Setter\CookieSetterInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
- * @mixin ChannelContextSetter
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ChannelContextSetterSpec extends ObjectBehavior

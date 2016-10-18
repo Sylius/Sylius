@@ -22,8 +22,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 
 /**
- * @mixin ShopperContext
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ShopperContextSpec extends ObjectBehavior

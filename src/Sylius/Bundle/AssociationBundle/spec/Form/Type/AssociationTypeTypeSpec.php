@@ -20,8 +20,6 @@ use Sylius\Component\Association\Model\AssociationType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin AssociationTypeType
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class AssociationTypeTypeSpec extends ObjectBehavior

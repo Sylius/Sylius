@@ -26,8 +26,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @mixin CartCurrencyChangeHandler
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class CartCurrencyChangeHandlerSpec extends ObjectBehavior

@@ -25,8 +25,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * @mixin ContainsProductRuleChecker
- *
  * @author Piotr Walków <walkow.piotr@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

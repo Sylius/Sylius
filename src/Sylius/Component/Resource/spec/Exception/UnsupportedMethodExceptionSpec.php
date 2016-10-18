@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 
 /**
- * @mixin UnsupportedMethodException
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class UnsupportedMethodExceptionSpec extends ObjectBehavior

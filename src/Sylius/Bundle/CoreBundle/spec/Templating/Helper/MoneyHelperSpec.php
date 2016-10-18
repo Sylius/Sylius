@@ -18,8 +18,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\Templating\Helper\HelperInterface;
 
 /**
- * @mixin MoneyHelper
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class MoneyHelperSpec extends ObjectBehavior

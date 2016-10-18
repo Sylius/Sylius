@@ -23,8 +23,6 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
- * @mixin Product
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */

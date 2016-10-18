@@ -18,8 +18,6 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Validator\ObjectInitializerInterface;
 
 /**
- * @mixin CustomerInitializer
- *
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
 final class CustomerInitializerSpec extends ObjectBehavior

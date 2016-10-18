@@ -20,8 +20,6 @@ use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
- * @mixin AverageRatingUpdater
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class AverageRatingUpdaterSpec extends ObjectBehavior

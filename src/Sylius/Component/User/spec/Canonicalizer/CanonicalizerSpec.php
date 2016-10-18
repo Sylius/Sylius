@@ -16,8 +16,6 @@ use Sylius\Component\User\Canonicalizer\Canonicalizer;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 
 /**
- * @mixin Canonicalizer
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class CanonicalizerSpec extends ObjectBehavior

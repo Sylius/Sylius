@@ -19,8 +19,6 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
- * @mixin RecursiveFileLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class RecursiveFileLocatorSpec extends ObjectBehavior

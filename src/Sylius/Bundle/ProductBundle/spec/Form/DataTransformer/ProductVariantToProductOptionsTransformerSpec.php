@@ -20,9 +20,6 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
-/**
- * @mixin ProductVariantToProductOptionsTransformer
- */
 final class ProductVariantToProductOptionsTransformerSpec extends ObjectBehavior
 {
     function let(ProductInterface $variable)

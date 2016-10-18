@@ -18,9 +18,6 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
-/**
- * @mixin ShippingMethod
- */
 final class ShippingMethodSpec extends ObjectBehavior
 {
     function it_is_initializable()

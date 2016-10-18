@@ -19,8 +19,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin CurrencyCodeChoiceType
- *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 final class CurrencyCodeChoiceTypeSpec extends ObjectBehavior

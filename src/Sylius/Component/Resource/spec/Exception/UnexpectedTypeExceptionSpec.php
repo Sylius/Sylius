@@ -14,9 +14,6 @@ namespace spec\Sylius\Component\Resource\Exception;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
-/**
- * @mixin UnexpectedTypeException
- */
 final class UnexpectedTypeExceptionSpec extends ObjectBehavior
 {
     function let()

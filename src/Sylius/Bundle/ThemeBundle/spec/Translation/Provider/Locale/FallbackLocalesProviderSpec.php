@@ -16,8 +16,6 @@ use Sylius\Bundle\ThemeBundle\Translation\Provider\Locale\FallbackLocalesProvide
 use Sylius\Bundle\ThemeBundle\Translation\Provider\Locale\FallbackLocalesProviderInterface;
 
 /**
- * @mixin FallbackLocalesProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FallbackLocalesProviderSpec extends ObjectBehavior

@@ -16,8 +16,6 @@ use Sylius\Component\Addressing\Model\Address;
 use Sylius\Component\Addressing\Model\AddressInterface;
 
 /**
- * @mixin Address
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class AddressSpec extends ObjectBehavior

@@ -21,8 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @mixin CachedPerRequestChannelContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CachedPerRequestChannelContextSpec extends ObjectBehavior

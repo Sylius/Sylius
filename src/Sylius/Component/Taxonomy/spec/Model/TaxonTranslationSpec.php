@@ -16,8 +16,6 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 
 /**
- * @mixin TaxonTranslation
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 final class TaxonTranslationSpec extends ObjectBehavior

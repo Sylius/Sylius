@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 
 /**
- * @mixin CountryChoiceType
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class CountryChoiceTypeSpec extends ObjectBehavior

@@ -18,8 +18,6 @@ use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrl;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 
 /**
- * @mixin SitemapUrlFactory
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapUrlFactorySpec extends ObjectBehavior

@@ -16,8 +16,6 @@ use Sylius\Component\Core\Model\ProductReview;
 use Sylius\Component\Review\Model\Review;
 
 /**
- * @mixin ProductReview
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ProductReviewSpec extends ObjectBehavior

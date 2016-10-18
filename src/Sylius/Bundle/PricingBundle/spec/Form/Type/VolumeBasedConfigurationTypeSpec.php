@@ -16,9 +16,6 @@ use Sylius\Bundle\PricingBundle\Form\Type\VolumeBasedConfigurationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @mixin VolumeBasedConfigurationType
- */
 final class VolumeBasedConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()

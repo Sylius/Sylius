@@ -16,8 +16,6 @@ use Sylius\Bundle\AddressingBundle\Twig\CountryNameExtension;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
 /**
- * @mixin CountryNameExtension
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class CountryNameExtensionSpec extends ObjectBehavior

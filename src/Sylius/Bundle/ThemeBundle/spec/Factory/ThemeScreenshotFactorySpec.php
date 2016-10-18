@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 
 /**
- * @mixin ThemeScreenshotFactory
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeScreenshotFactorySpec extends ObjectBehavior

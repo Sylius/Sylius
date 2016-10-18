@@ -18,8 +18,6 @@ use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 use Sylius\Component\Core\Test\Services\RandomInvoiceNumberGenerator;
 
 /**
- * @mixin RandomInvoiceNumberGenerator
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class RandomInvoiceNumberGeneratorSpec extends ObjectBehavior

@@ -20,8 +20,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\AssociationBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
 
 /**
- * @mixin LoadMetadataSubscriber
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class LoadMetadataSubscriberSpec extends ObjectBehavior

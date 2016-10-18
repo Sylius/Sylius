@@ -21,8 +21,6 @@ use Symfony\Component\Templating\Helper\Helper;
 use Symfony\Component\Templating\Helper\HelperInterface;
 
 /**
- * @mixin GridHelper
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class GridHelperSpec extends ObjectBehavior

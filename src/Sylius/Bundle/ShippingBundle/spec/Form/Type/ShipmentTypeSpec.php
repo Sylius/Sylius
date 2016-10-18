@@ -18,8 +18,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 
 /**
- * @mixin ShipmentType
- *
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
 final class ShipmentTypeSpec extends ObjectBehavior

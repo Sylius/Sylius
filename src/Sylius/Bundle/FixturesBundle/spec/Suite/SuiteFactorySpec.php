@@ -22,8 +22,6 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteFactoryInterface;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * @mixin SuiteFactory
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SuiteFactorySpec extends ObjectBehavior

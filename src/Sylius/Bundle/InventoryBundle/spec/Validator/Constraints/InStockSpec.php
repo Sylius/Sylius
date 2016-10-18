@@ -15,9 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock;
 use Symfony\Component\Validator\Constraint;
 
-/**
- * @mixin InStock
- */
 final class InStockSpec extends ObjectBehavior
 {
     function it_is_initializable()

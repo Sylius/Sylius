@@ -14,9 +14,6 @@ namespace spec\Sylius\Component\Product\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\DateRange;
 
-/**
- * @mixin DateRange
- */
 final class DateRangeSpec extends ObjectBehavior
 {
     function let(\DateTime $start, \DateTime $end)

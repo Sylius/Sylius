@@ -20,8 +20,6 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @mixin ReviewCreateListener
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ReviewCreateListenerSpec extends ObjectBehavior

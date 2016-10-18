@@ -21,8 +21,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin AttributeValueType
- *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */

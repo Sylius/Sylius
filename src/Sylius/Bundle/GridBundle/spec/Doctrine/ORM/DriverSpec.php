@@ -21,8 +21,6 @@ use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
 /**
- * @mixin Driver
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DriverSpec extends ObjectBehavior

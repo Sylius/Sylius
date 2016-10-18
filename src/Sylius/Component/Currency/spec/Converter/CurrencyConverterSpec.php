@@ -18,9 +18,6 @@ use Sylius\Component\Currency\Converter\UnavailableCurrencyException;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
-/**
- * @mixin CurrencyConverter
- */
 final class CurrencyConverterSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $currencyRepository)

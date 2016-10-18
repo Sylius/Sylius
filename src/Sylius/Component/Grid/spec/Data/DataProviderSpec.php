@@ -22,8 +22,6 @@ use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\Sorting\SorterInterface;
 
 /**
- * @mixin DataProvider
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DataProviderSpec extends ObjectBehavior

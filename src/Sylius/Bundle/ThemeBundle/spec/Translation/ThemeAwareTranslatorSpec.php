@@ -21,8 +21,6 @@ use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * @mixin ThemeAwareTranslator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeAwareTranslatorSpec extends ObjectBehavior

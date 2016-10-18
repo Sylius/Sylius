@@ -10,8 +10,6 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * @mixin SessionBasedLocaleStorage
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SessionBasedLocaleStorageSpec extends ObjectBehavior

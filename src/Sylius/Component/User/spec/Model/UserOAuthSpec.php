@@ -16,8 +16,6 @@ use Sylius\Component\User\Model\UserOAuth;
 use Sylius\Component\User\Model\UserOAuthInterface;
 
 /**
- * @mixin UserOAuth
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 final class UserOAuthSpec extends ObjectBehavior

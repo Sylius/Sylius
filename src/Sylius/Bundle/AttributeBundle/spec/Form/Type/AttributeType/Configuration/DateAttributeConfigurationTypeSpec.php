@@ -17,8 +17,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin DateAttributeConfigurationType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DateAttributeConfigurationTypeSpec extends ObjectBehavior

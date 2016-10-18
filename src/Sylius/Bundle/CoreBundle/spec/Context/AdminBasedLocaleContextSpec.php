@@ -21,8 +21,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
- * @mixin AdminBasedLocaleContext
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class AdminBasedLocaleContextSpec extends ObjectBehavior

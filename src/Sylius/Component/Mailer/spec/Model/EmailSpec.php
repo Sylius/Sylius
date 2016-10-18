@@ -15,9 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Mailer\Model\Email;
 use Sylius\Component\Mailer\Model\EmailInterface;
 
-/**
- * @mixin Email
- */
 final class EmailSpec extends ObjectBehavior
 {
     function it_is_initializable()

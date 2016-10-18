@@ -19,8 +19,6 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
 /**
- * @mixin CurrentPageResolver
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class CurrentPageResolverSpec extends ObjectBehavior

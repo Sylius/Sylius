@@ -19,8 +19,6 @@ use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
 
 /**
- * @mixin OrderPromotionsUsageModifier
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderPromotionsUsageModifierSpec extends ObjectBehavior

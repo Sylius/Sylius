@@ -19,8 +19,6 @@ use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Model\TaxonInterface;
 
 /**
- * @mixin Taxon
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class TaxonSpec extends ObjectBehavior

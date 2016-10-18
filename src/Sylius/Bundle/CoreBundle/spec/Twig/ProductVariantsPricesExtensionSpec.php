@@ -17,8 +17,6 @@ use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
 use Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension;
 
 /**
- * @mixin ProductVariantsPricesExtension
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ProductVariantsPricesExtensionSpec extends ObjectBehavior

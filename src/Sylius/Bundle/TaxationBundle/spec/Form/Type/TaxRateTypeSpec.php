@@ -20,8 +20,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin TaxRateType
- *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 final class TaxRateTypeSpec extends ObjectBehavior

@@ -17,8 +17,6 @@ use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrl;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 
 /**
- * @mixin SitemapUrl
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapUrlSpec extends ObjectBehavior

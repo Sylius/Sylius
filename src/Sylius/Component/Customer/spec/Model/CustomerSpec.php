@@ -17,8 +17,6 @@ use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
- * @mixin Customer
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */

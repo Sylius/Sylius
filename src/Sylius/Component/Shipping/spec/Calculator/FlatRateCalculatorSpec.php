@@ -17,8 +17,6 @@ use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
- * @mixin FlatRateCalculator
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class FlatRateCalculatorSpec extends ObjectBehavior

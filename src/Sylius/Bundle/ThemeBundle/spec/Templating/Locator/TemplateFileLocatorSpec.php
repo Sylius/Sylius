@@ -23,8 +23,6 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @mixin TemplateFileLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TemplateFileLocatorSpec extends ObjectBehavior

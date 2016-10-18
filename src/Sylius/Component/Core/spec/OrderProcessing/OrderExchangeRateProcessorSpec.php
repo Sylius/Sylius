@@ -19,8 +19,6 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Core\Updater\OrderUpdaterInterface;
 
 /**
- * @mixin OrderExchangeRateProcessor
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class OrderExchangeRateProcessorSpec extends ObjectBehavior

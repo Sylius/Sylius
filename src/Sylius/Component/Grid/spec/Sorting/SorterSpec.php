@@ -21,8 +21,6 @@ use Sylius\Component\Grid\Sorting\Sorter;
 use Sylius\Component\Grid\Sorting\SorterInterface;
 
 /**
- * @mixin Sorter
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SorterSpec extends ObjectBehavior

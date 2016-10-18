@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
 use Symfony\Component\Finder\Finder;
 
 /**
- * @mixin FinderFactory
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FinderFactorySpec extends ObjectBehavior

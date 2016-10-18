@@ -22,8 +22,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin ShippingMethodChoiceType
- *
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
 final class ShippingMethodChoiceTypeSpec extends ObjectBehavior

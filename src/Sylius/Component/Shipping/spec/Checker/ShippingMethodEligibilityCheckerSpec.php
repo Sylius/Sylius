@@ -21,8 +21,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
- * @mixin ShippingMethodEligibilityChecker
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior

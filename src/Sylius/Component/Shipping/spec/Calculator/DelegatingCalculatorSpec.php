@@ -21,8 +21,6 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
- * @mixin DelegatingCalculator
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DelegatingCalculatorSpec extends ObjectBehavior

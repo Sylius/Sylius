@@ -22,9 +22,6 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-/**
- * @mixin ProductVariantCombinationValidator
- */
 final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
 {
     function let(ExecutionContextInterface $context)

@@ -20,8 +20,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin ResourcesResolver
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourcesResolverSpec extends ObjectBehavior

@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin ThemeHierarchyProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeHierarchyProviderSpec extends ObjectBehavior

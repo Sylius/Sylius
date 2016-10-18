@@ -17,8 +17,6 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
 
 /**
- * @mixin CartQuantityRuleChecker
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class CartQuantityRuleCheckerSpec extends ObjectBehavior

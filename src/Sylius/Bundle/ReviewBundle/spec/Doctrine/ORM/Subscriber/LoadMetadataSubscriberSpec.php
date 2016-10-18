@@ -21,8 +21,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\ReviewBundle\Doctrine\ORM\Subscriber\LoadMetadataSubscriber;
 
 /**
- * @mixin LoadMetadataSubscriber
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */

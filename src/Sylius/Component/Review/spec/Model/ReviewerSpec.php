@@ -16,8 +16,6 @@ use Sylius\Component\Review\Model\Reviewer;
 use Sylius\Component\Review\Model\ReviewerInterface;
 
 /**
- * @mixin Reviewer
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ReviewerSpec extends ObjectBehavior

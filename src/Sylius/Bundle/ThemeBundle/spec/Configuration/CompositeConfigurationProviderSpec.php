@@ -16,8 +16,6 @@ use Sylius\Bundle\ThemeBundle\Configuration\CompositeConfigurationProvider;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 
 /**
- * @mixin CompositeConfigurationProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CompositeConfigurationProviderSpec extends ObjectBehavior

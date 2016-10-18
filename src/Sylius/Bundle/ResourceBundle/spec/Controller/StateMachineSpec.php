@@ -20,8 +20,6 @@ use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface as ResourceSta
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
- * @mixin StateMachine
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class StateMachineSpec extends ObjectBehavior

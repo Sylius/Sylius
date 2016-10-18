@@ -22,8 +22,6 @@ use Sylius\Bundle\PayumBundle\Action\Offline\ConvertPaymentAction;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
- * @mixin ConvertPaymentAction
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class ConvertPaymentActionSpec extends ObjectBehavior

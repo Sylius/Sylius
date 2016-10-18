@@ -19,8 +19,6 @@ use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin TwigFieldType
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class TwigFieldTypeSpec extends ObjectBehavior

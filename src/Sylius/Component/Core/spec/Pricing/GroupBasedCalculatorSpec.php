@@ -18,8 +18,6 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 
 /**
- * @mixin GroupBasedCalculator
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class GroupBasedCalculatorSpec extends ObjectBehavior

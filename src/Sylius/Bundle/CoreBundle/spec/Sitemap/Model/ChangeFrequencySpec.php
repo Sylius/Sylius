@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\ChangeFrequency;
 
 /**
- * @mixin ChangeFrequency
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class ChangeFrequencySpec extends ObjectBehavior

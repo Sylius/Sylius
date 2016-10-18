@@ -16,8 +16,6 @@ use Sylius\Component\Attribute\Model\AttributeTranslation;
 use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
 
 /**
- * @mixin AttributeTranslation
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 final class AttributeTranslationSpec extends ObjectBehavior

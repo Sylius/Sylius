@@ -23,8 +23,6 @@ use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 /**
- * @mixin OrderStateResolver
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class OrderStateResolverSpec extends ObjectBehavior

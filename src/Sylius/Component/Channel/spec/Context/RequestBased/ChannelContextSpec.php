@@ -21,8 +21,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @mixin ChannelContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ChannelContextSpec extends ObjectBehavior

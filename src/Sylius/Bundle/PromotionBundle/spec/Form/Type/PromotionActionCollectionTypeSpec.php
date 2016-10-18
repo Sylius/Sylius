@@ -22,8 +22,6 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin PromotionActionCollectionType
- *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 final class PromotionActionCollectionTypeSpec extends ObjectBehavior

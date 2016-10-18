@@ -16,8 +16,6 @@ use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 
 /**
- * @mixin PromotionCouponGeneratorInstruction
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class PromotionCouponGeneratorInstructionSpec extends ObjectBehavior

@@ -16,8 +16,6 @@ use Sylius\Component\Locale\Provider\ImmutableLocaleProvider;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
- * @mixin ImmutableLocaleProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ImmutableLocaleProviderSpec extends ObjectBehavior

@@ -18,8 +18,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin ItemTotalConfigurationType
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class ItemTotalConfigurationTypeSpec extends ObjectBehavior

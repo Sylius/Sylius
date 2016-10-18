@@ -21,8 +21,6 @@ use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
 
 /**
- * @mixin ChannelBasedThemeContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ChannelBasedThemeContextSpec extends ObjectBehavior

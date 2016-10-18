@@ -18,8 +18,6 @@ use Sylius\Component\Core\Currency\Handler\CurrencyChangeHandlerInterface;
 use Sylius\Component\Core\Exception\HandleException;
 
 /**
- * @mixin CompositeCurrencyChangeHandler
- * 
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class CompositeCurrencyChangeHandlerSpec extends ObjectBehavior

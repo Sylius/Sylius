@@ -23,8 +23,6 @@ use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**
- * @mixin FakeChannelPersister
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FakeChannelPersisterSpec extends ObjectBehavior

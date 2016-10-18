@@ -21,9 +21,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-/**
- * @mixin CreateClientCommand
- */
 final class CreateClientCommandSpec extends ObjectBehavior
 {
     public function it_is_initializable()

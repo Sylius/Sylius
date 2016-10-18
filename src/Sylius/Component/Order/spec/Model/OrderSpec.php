@@ -22,8 +22,6 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
- * @mixin Order
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class OrderSpec extends ObjectBehavior

@@ -17,8 +17,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin PromotionActionChoiceType
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class PromotionActionChoiceTypeSpec extends ObjectBehavior

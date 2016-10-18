@@ -16,8 +16,6 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Context\ImmutableCurrencyContext;
 
 /**
- * @mixin ImmutableCurrencyContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ImmutableCurrencyContextSpec extends ObjectBehavior

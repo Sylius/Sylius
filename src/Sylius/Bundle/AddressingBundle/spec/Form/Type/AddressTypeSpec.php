@@ -19,8 +19,6 @@ use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**
- * @mixin AddressType
- *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 final class AddressTypeSpec extends ObjectBehavior

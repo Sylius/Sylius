@@ -18,8 +18,6 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
 /**
- * @mixin RouteFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class RouteFactorySpec extends ObjectBehavior

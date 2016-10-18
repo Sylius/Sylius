@@ -23,8 +23,6 @@ use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * @mixin EventDispatcher
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class EventDispatcherSpec extends ObjectBehavior

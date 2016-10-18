@@ -21,8 +21,6 @@ use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
- * @mixin DataSourceProvider
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DataSourceProviderSpec extends ObjectBehavior

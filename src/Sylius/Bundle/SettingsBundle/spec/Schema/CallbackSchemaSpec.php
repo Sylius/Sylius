@@ -19,8 +19,6 @@ use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin CallbackSchema
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CallbackSchemaSpec extends ObjectBehavior

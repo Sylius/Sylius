@@ -21,8 +21,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * @mixin CouponGenerationAmountValidator
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class CouponGenerationAmountValidatorSpec extends ObjectBehavior

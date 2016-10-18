@@ -16,8 +16,6 @@ use Sylius\Bundle\CoreBundle\Sitemap\Exception\SitemapUrlNotFoundException;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 
 /**
- * @mixin SitemapUrlNotFoundException
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapUrlNotFoundExceptionSpec extends ObjectBehavior

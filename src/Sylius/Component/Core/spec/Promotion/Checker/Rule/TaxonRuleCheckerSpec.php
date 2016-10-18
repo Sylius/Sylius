@@ -23,8 +23,6 @@ use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @mixin TaxonRuleChecker
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */

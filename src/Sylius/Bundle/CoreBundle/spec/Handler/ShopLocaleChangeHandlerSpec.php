@@ -25,8 +25,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @mixin ShopLocaleChangeHandler
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class ShopLocaleChangeHandlerSpec extends ObjectBehavior

@@ -25,8 +25,6 @@ use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin PromotionCouponGenerator
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class PromotionCouponGeneratorSpec extends ObjectBehavior

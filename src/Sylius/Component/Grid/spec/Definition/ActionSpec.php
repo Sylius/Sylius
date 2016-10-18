@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Definition\Action;
 
 /**
- * @mixin Action
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ActionSpec extends ObjectBehavior

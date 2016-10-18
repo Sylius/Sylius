@@ -19,8 +19,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin AttributeTranslationType
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 final class AttributeTranslationTypeSpec extends ObjectBehavior

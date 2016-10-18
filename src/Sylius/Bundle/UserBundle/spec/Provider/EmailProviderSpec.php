@@ -20,8 +20,6 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * @mixin EmailProvider
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class EmailProviderSpec extends ObjectBehavior

@@ -19,8 +19,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin ShippingMethodTranslationType
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 final class ShippingMethodTranslationTypeSpec extends ObjectBehavior

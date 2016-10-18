@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UiBundle\Twig\PercentageExtension;
 
 /**
- * @mixin PercentageExtension
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class PercentageExtensionSpec extends ObjectBehavior

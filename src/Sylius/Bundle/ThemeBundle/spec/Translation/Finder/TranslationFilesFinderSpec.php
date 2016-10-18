@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface
 use Symfony\Component\Finder\Finder;
 
 /**
- * @mixin TranslationFilesFinder
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TranslationFilesFinderSpec extends ObjectBehavior

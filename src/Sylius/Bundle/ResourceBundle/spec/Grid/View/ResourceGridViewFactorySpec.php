@@ -24,8 +24,6 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin ResourceGridViewFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceGridViewFactorySpec extends ObjectBehavior

@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourcePr
 use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResource;
 
 /**
- * @mixin TranslatorResourceProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TranslatorResourceProviderSpec extends ObjectBehavior

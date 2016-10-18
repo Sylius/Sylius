@@ -18,8 +18,6 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin NewResourceFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class NewResourceFactorySpec extends ObjectBehavior

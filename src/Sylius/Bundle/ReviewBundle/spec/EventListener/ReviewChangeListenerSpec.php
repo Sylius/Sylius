@@ -21,8 +21,6 @@ use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @mixin ReviewChangeListener
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ReviewChangeListenerSpec extends ObjectBehavior

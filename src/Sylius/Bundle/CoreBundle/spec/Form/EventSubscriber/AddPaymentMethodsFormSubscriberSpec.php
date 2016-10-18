@@ -21,8 +21,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * @mixin AddPaymentMethodsFormSubscriber
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class AddPaymentMethodsFormSubscriberSpec extends ObjectBehavior

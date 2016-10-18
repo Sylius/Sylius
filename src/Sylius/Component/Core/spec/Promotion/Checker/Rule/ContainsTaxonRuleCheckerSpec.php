@@ -23,8 +23,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
- * @mixin ContainsTaxonRuleChecker
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ContainsTaxonRuleCheckerSpec extends ObjectBehavior

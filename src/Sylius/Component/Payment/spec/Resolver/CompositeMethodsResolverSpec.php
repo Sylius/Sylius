@@ -19,8 +19,6 @@ use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
 /**
- * @mixin CompositeMethodsResolver
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class CompositeMethodsResolverSpec extends ObjectBehavior

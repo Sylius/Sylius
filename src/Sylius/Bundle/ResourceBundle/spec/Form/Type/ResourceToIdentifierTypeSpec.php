@@ -21,8 +21,6 @@ use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin ResourceToIdentifierType
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ResourceToIdentifierTypeSpec extends ObjectBehavior

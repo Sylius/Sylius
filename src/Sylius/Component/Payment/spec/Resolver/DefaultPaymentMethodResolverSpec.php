@@ -21,8 +21,6 @@ use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin DefaultPaymentMethodResolver
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class DefaultPaymentMethodResolverSpec extends ObjectBehavior

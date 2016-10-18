@@ -20,8 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**
- * @mixin DefaultResourceType
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DefaultResourceTypeSpec extends ObjectBehavior

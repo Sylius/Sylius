@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\InvalidDriverException;
 
 /**
- * @mixin InvalidDriverException
- *
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
 final class InvalidDriverExceptionSpec extends ObjectBehavior

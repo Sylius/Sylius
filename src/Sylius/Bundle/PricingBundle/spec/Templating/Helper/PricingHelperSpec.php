@@ -18,8 +18,6 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @mixin PricingHelper
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class PricingHelperSpec extends ObjectBehavior

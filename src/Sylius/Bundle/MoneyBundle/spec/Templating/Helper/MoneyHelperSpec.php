@@ -18,8 +18,6 @@ use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @mixin MoneyHelper
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

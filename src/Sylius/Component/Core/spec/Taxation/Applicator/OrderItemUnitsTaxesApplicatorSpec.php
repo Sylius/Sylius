@@ -29,8 +29,6 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
- * @mixin OrderItemUnitsTaxesApplicator
- *
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
 final class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
