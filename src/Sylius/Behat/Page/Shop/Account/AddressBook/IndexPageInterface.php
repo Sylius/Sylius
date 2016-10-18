@@ -11,10 +11,15 @@
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
+use Sylius\Behat\Page\SymfonyPageInterface;
+
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class IndexPageInterface
+interface IndexPageInterface extends SymfonyPageInterface
 {
-
+    /**
+     * @return bool
+     */
+    public function isSingleAddressOnList();
 }

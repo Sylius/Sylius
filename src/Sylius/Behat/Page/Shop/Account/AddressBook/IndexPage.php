@@ -9,10 +9,38 @@
  * file that was distributed with this source code.
  */
 
+namespace Sylius\Behat\Page\Shop\Account\AddressBook;
+
+use Sylius\Behat\Page\SymfonyPage;
+ 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class IndexPage
+class IndexPage extends SymfonyPage implements IndexPageInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getRouteName()
+    {
+        return 'sylius_shop_account_address_book_index';
+    }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function isSingleAddressOnList()
+    {
+        return 1 === count($this->getElement('addresses')->findAll('css', '.title'));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'addresses' => '.addresses',
+        ]);
+    }
 }
