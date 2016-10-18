@@ -26,3 +26,16 @@ sylius_shop_partial_product_index_by_taxon_code:
                 route:
                     parameters:
                         $code: $code
+
+sylius_shop_partial_product_reviews_latest:
+    path: /latest-reviews/{count}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatestByProduct
+                arguments:
+                    - $productId
+                    - $count
