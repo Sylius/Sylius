@@ -13,3 +13,15 @@ sylius_shop_product_show:
                 arguments:
                     - $slug
                     - 'expr:service("sylius.context.channel").getChannel()'
+
+sylius_shop_product_reviews:
+    path: /products/{slug}/reviews
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: SyliusShopBundle:Product/Reviews:index.html.twig
+            repository:
+                method: findAcceptedByProductSlug
+                arguments:
+                    - $slug

@@ -16,13 +16,13 @@ Feature: Viewing product reviews on product's reviews page
         And this product has also a review titled "Too gloomy" and rated 3 added by customer "jrr.tolkien@middle-earth.com"
         And I am a logged in customer
 
-    @ui @todo
+    @ui
     Scenario: Viewing all accepted product reviews on product's reviews page
         When I check this product's reviews
         Then I should see 3 product reviews in the list
 
-    @ui @todo
-    Scenario: Viewing only accepted produt reviews on product's reviews page
+    @ui
+    Scenario: Viewing only accepted product reviews on product's reviews page
         Given this product has also a review titled "Classic" and rated 5 added by customer "sir.terry@pratchett.com" which is not accepted yet
         When I check this product's reviews
         Then I should see 3 product reviews in the list

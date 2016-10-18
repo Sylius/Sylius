@@ -80,6 +80,20 @@ final class ProductReviewContext implements Context
     }
 
     /**
+     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+") which is not accepted yet$/
+     */
+    public function thisProductHasAReviewTitledAndRatedAddedByCustomerWhichIsNotAcceptedYet(
+        ProductInterface $product,
+        $title,
+        $rating,
+        CustomerInterface $customer
+    ) {
+        $review = $this->createProductReview($product, $title, $rating, $title, $customer, ReviewInterface::STATUS_NEW);
+
+        $this->productReviewRepository->add($review);
+    }
+
+    /**
      * @param ProductInterface $product
      * @param string $title
      * @param int $rating

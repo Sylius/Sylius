@@ -331,6 +331,7 @@
         <service id="sylius.behat.context.ui.shop.product" class="Sylius\Behat\Context\Ui\Shop\ProductContext" scope="scenario">
             <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.page.shop.taxon.show" />
+            <argument type="service" id="sylius.behat.page.shop.product_reviews.index" />
             <tag name="sylius.behat.context" />
         </service>
 
