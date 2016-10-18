@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -41,6 +42,18 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     public function createQueryBuilderForEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel)
     {
         return $this->createQueryBuilder('o')
+            ->addSelect('variant')
+                ->leftJoin(
+                    'o.variants',
+                    'variant',
+                    Expr\Join::WITH,
+                    'o = variant.product AND 
+                        variant.price = (
+                            SELECT MIN(variant2.price) 
+                                FROM Sylius\Component\Core\Model\ProductVariant as variant2 
+                                    WHERE variant2.product = o
+                        )'
+                )
             ->innerJoin('o.taxons', 'taxon')
             ->andWhere('taxon.code = :code')
             ->innerJoin('o.channels', 'channel')

@@ -305,7 +305,9 @@ sylius:
         filters: Filters
         first_name: 'First name'
         forgot_password: 'Forgot password'
+        from_the_highest_price: 'From the highest price'
         from_the_latest: 'From the latest'
+        from_the_lowest_price: 'From the lowest price'
         from_the_oldest: 'From the oldest'
         fulfill: Fulfill
         fulfilled: Fulfilled
@@ -664,6 +666,7 @@ sylius:
         slideshow: Slideshow
         slideshow_blocks: 'Slideshow blocks'
         sort_by_date: 'Sort by date'
+        sort_by_price: 'Sort by price'
         start_date: 'Start Date'
         starts_at: 'Starts at'
         starts_with: Starts with

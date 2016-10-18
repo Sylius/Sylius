@@ -88,6 +88,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $productsList = $this->getDocument()->find('css', '#products');
 
-        return $productsList->find('css', '.content > a')->getText();
+        return str_replace("\"", "", $productsList->find('css', '.content > a')->getText());
     }
 }
