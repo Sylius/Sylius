@@ -12,9 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -28,29 +26,11 @@ final class ManagingProductReviewsContext implements Context
     private $indexPage;
 
     /**
-     * @var CreatePageInterface
-     */
-    private $createPage;
-
-    /**
-     * @var UpdatePageInterface
-     */
-    private $updatePage;
-
-    /**
      * @param IndexPageInterface $indexPage
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
      */
-    public function __construct(
-        IndexPageInterface $indexPage,
-        CreatePageInterface $createPage,
-        UpdatePageInterface $updatePage
-    )
+    public function __construct(IndexPageInterface $indexPage)
     {
         $this->indexPage = $indexPage;
-        $this->createPage = $createPage;
-        $this->updatePage = $updatePage;
     }
 
     /**
