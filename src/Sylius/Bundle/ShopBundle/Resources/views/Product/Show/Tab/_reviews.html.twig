@@ -1,3 +1,4 @@
 <div class="ui bottom attached tab segment" data-tab="reviews">
     {{ render(url('sylius_shop_partial_product_reviews_latest', { 'count': 3, 'productId': product.id, 'template': '@SyliusShop/Product/Show/_reviews.html.twig' })) }}
+    <div class="ui blue labeled icon button"><i class="icon list"></i> {{ 'sylius.ui.view_more'|trans }}</div>
 </div>
