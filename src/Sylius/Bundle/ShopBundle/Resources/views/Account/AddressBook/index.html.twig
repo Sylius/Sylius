@@ -1,4 +1,5 @@
 {% extends '@SyliusShop/Account/layout.html.twig' %}
+
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
 {% block breadcrumb %}
@@ -21,8 +22,8 @@
             <div class="ten wide column">
                 {{ messages.info('sylius.ui.no_default_address'|trans) }}
             </div>
-            <div class="six wide column">
-                {% if(addresses is empty) %}
+            <div class="six wide column" id="addresses">
+                {% if addresses is empty %}
                     {{ messages.info('sylius.ui.no_addresses'|trans) }}
                 {% else %}
                     {% include '@SyliusShop/Account/AddressBook/_addresses.html.twig' with {'addresses': addresses} %}
