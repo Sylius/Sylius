@@ -46,15 +46,16 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     /**
      * {@inheritdoc}
      */
-    public function hasShippingMethod($shippingMethod)
+    public function getShippingMethods()
     {
-        try {
-            $this->getElement('shipping_method_option', ['%shipping_method%' => $shippingMethod]);
-        } catch (ElementNotFoundException $exception) {
-            return false;
+        $inputs = $this->getSession()->getPage()->findAll('css', '#shipping_methods .item .content label');
+
+        $shippingMethods = [];
+        foreach ($inputs as $input) {
+            $shippingMethods[] = trim($input->getText());
         }
 
-        return true;
+        return $shippingMethods;
     }
 
     /**
@@ -77,7 +78,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     public function hasShippingMethodFee($shippingMethodName, $fee)
     {
         $feeElement = $this->getElement('shipping_method_fee', ['%shipping_method%' => $shippingMethodName])->getText();
-        
+
         return false !== strpos($feeElement, $fee);
     }
 

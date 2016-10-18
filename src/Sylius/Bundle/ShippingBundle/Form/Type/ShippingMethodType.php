@@ -77,7 +77,6 @@ class ShippingMethodType extends AbstractResourceType
             ->add('position', IntegerType::class, [
                 'required' => false,
                 'label' => 'sylius.form.shipping_method.position',
-                'empty_data' => null,
             ])
             ->add('category', 'sylius_shipping_category_choice', [
                 'required' => false,
