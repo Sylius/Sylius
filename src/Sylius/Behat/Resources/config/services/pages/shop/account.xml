@@ -16,6 +16,7 @@
         <parameter key="sylius.behat.page.shop.account.change_password.class">Sylius\Behat\Page\Shop\Account\ChangePasswordPage</parameter>
         <parameter key="sylius.behat.page.shop.account.dashboard.class">Sylius\Behat\Page\Shop\Account\DashboardPage</parameter>
         <parameter key="sylius.behat.page.shop.account.login.class">Sylius\Behat\Page\Shop\Account\LoginPage</parameter>
+        <parameter key="sylius.behat.page.shop.account.address_book.index.class">Sylius\Behat\Page\Shop\Account\AddressBook\IndexPage</parameter>
         <parameter key="sylius.behat.page.shop.account.order.index.class">Sylius\Behat\Page\Shop\Account\Order\IndexPage</parameter>
         <parameter key="sylius.behat.page.shop.account.order.show.class">Sylius\Behat\Page\Shop\Account\Order\ShowPage</parameter>
         <parameter key="sylius.behat.page.shop.account.profile_update.class">Sylius\Behat\Page\Shop\Account\ProfileUpdatePage</parameter>
@@ -28,6 +29,7 @@
         <service id="sylius.behat.page.shop.account.change_password" class="%sylius.behat.page.shop.account.change_password.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.account.dashboard" class="%sylius.behat.page.shop.account.dashboard.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.account.login" class="%sylius.behat.page.shop.account.login.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.account.address_book.index" class="%sylius.behat.page.shop.account.address_book.index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.account.order.index" class="%sylius.behat.page.shop.account.order.index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>

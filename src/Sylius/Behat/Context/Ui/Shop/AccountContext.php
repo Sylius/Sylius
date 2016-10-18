@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\Shop\Account\AddressBook\IndexPageInterface as AddressBookIndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
@@ -55,6 +56,11 @@ final class AccountContext implements Context
     private $orderShowPage;
 
     /**
+     * @var AddressBookIndexPageInterface
+     */
+    private $addressBookIndexPage;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -65,6 +71,7 @@ final class AccountContext implements Context
      * @param ChangePasswordPageInterface $changePasswordPage
      * @param IndexPageInterface $orderIndexPage
      * @param ShowPageInterface $orderShowPage
+     * @param AddressBookIndexPageInterface $addressBookIndexPage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -73,6 +80,7 @@ final class AccountContext implements Context
         ChangePasswordPageInterface $changePasswordPage,
         IndexPageInterface $orderIndexPage,
         ShowPageInterface $orderShowPage,
+        AddressBookIndexPageInterface $addressBookIndexPage,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->dashboardPage = $dashboardPage;
@@ -80,6 +88,7 @@ final class AccountContext implements Context
         $this->changePasswordPage = $changePasswordPage;
         $this->orderIndexPage = $orderIndexPage;
         $this->orderShowPage = $orderShowPage;
+        $this->addressBookIndexPage = $addressBookIndexPage;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -448,6 +457,25 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I browse my addresses
+     */
+    public function iBrowseMyAddresses()
+    {
+        $this->addressBookIndexPage->open();
+    }
+
+    /**
+     * @Then I should see a single address in a list
+     */
+    public function iShouldSeeASingleAddressInAList()
+    {
+       Assert::true(
+           $this->addressBookIndexPage->isSingleAddressOnList(),
+           'There should be one address on the list, but it does not.'
+       );
+    }
+
+    /**
      * @param PageInterface $page
      * @param string $element
      * @param string $expectedMessage
@@ -459,4 +487,5 @@ final class AccountContext implements Context
             sprintf('There should be a message: "%s".', $expectedMessage)
         );
     }
+
 }
