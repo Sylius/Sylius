@@ -22,4 +22,16 @@ interface IndexPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function isSingleAddressOnList();
+
+    /**
+     * @param string $fullName
+     * 
+     * @return bool
+     */
+    public function hasAddressFullName($fullName);
+
+    /**
+     * @return bool
+     */
+    public function hasNoExistingAddressesMessage();
 }

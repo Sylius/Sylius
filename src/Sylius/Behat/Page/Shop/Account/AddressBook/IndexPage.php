@@ -37,10 +37,27 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasAddressFullName($fullName)
+    {
+        return null !== $this->getElement('addresses')->find('css', sprintf('.title:contains("%s")', $fullName));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasNoExistingAddressesMessage()
+    {
+        return false !== strpos($this->getElement('no_addresses_message' )->getText(), 'no addresses to display');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'addresses' => '.addresses',
+            'addresses' => '#addresses',
+            'no_addresses_message' => '#addresses > .message',
         ]);
     }
 }

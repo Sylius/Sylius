@@ -388,7 +388,7 @@ final class AccountContext implements Context
         Assert::same(
             (int) $numberOfItems,
             $this->orderShowPage->countItems(),
-            '%s items should appear on order page, but %s rows has been found'
+            '%s items should appear on order page, but %s rows has been found.'
         );
     }
 
@@ -430,7 +430,7 @@ final class AccountContext implements Context
     {
         Assert::true(
             $this->profileUpdatePage->isSubscribedToTheNewsletter(),
-            'I should be subscribed to the newsletter, but I am not'
+            'I should be subscribed to the newsletter, but I am not.'
         );
     }
 
@@ -465,14 +465,47 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then I should see a single address in a list
+     * @Then I should see a single address in the list
      */
-    public function iShouldSeeASingleAddressInAList()
+    public function iShouldSeeASingleAddressInTheList()
     {
        Assert::true(
            $this->addressBookIndexPage->isSingleAddressOnList(),
            'There should be one address on the list, but it does not.'
        );
+    }
+
+    /**
+     * @Then this address should be assigned to :fullName
+     */
+    public function thisAddressShouldHavePersonFirstNameAndLastName($fullName)
+    {
+        Assert::true(
+            $this->addressBookIndexPage->hasAddressFullName($fullName),
+            sprintf('The full name in address should be %s, but it does not.', $fullName)
+        );
+    }
+
+    /**
+     * @Then I should see information about no existing addresses
+     */
+    public function iShouldSeeInformationAboutNoExistingAddresses()
+    {
+        Assert::true(
+            $this->addressBookIndexPage->hasNoExistingAddressesMessage(),
+            'There should be information about no existing addresses, but it does not.'
+        );
+    }
+
+    /**
+     * @Then I should not see an address assigned to :fullName
+     */
+    public function iShouldNotSeeAnAddressAssignedTo($fullName)
+    {
+        Assert::false(
+            $this->addressBookIndexPage->hasAddressFullName($fullName),
+            sprintf('The full name in address should not be %s, but it does.', $fullName)
+        );
     }
 
     /**
@@ -487,5 +520,4 @@ final class AccountContext implements Context
             sprintf('There should be a message: "%s".', $expectedMessage)
         );
     }
-
 }
