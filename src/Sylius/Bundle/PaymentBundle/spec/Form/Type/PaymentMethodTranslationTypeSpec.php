@@ -77,6 +77,6 @@ final class PaymentMethodTranslationTypeSpec extends ObjectBehavior
             )
             ->shouldBeCalled();
 
-        $this->setDefaultOptions($resolver);
+        $this->configureOptions($resolver);
     }
 }

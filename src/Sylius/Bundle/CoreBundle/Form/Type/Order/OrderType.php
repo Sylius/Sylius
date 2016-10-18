@@ -15,7 +15,6 @@ use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -40,10 +39,13 @@ class OrderType extends BaseOrderType
         ;
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
     {
         /** @var OptionsResolver $resolver */
-        parent::setDefaultOptions($resolver);
+        parent::configureOptions($resolver);
 
         $resolver->setDefault('validation_groups', function (FormInterface $form) {
             $validationGroups = $this->validationGroups;
