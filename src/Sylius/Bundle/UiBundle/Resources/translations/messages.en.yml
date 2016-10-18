@@ -415,6 +415,7 @@ sylius:
         manage_products: 'Manage products'
         manage_promotions: 'Manage promotions'
         manage_reviews: 'Manage reviews'
+        manage_reviews_of_your_products: Manage reviews of your products
         manage_shipments: 'Manage shipments'
         manage_shipping_categories: 'Manage shipping categories'
         manage_shipping_destinations: Manage shipping destinations

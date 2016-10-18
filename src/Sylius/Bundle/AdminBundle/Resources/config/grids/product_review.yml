@@ -1,0 +1,35 @@
+sylius_grid:
+    grids:
+        sylius_admin_product_review:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_review.class%"
+            fields:
+                title:
+                    type: string
+                    label: sylius.ui.title
+                rating:
+                    type: string
+                    label: sylius.ui.rating
+                status:
+                    type: twig
+                    label: sylius.ui.status
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:state.html.twig
+                        vars:
+                            labels: SyliusAdminBundle:ProductReview/Label/Status
+                reviewSubject:
+                    type: twig
+                    label: sylius.ui.product
+                    options:
+                        template: SyliusAdminBundle:ProductReview/Field:reviewSubject.html.twig
+                author:
+                    type: twig
+                    label: sylius.ui.customer
+                    options:
+                        template: SyliusAdminBundle:ProductReview/Field:author.html.twig
+            filters:
+                title:
+                    type: string
+                    label: sylius.ui.title

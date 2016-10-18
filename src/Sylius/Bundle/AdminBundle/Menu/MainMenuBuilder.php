@@ -119,6 +119,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabel('sylius.menu.admin.main.marketing.promotions')
             ->setLabelAttribute('icon', 'in cart')
         ;
+
+        $marketing
+            ->addChild('product_reviews', ['route' => 'sylius_admin_product_review_index'])
+            ->setLabel('sylius.menu.admin.main.marketing.product_reviews')
+            ->setLabelAttribute('icon', 'newspaper')
+        ;
     }
 
     /**
