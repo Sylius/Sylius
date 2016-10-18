@@ -36,4 +36,23 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
             ->getResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAcceptedByProductSlug($slug, $locale)
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.reviewSubject', 'product')
+            ->leftJoin('product.translations', 'translation')
+            ->where('translation.locale = :locale')
+            ->andWhere('translation.slug = :slug')
+            ->andWhere('o.status = :status')
+            ->setParameter('locale', $locale)
+            ->setParameter('slug', $slug)
+            ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

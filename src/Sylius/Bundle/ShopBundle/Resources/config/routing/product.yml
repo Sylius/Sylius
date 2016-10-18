@@ -20,8 +20,9 @@ sylius_shop_product_reviews:
     defaults:
         _controller: sylius.controller.product_review:indexAction
         _sylius:
-            template: SyliusShopBundle:Product/Reviews:index.html.twig
+            template: SyliusShopBundle:Product/Review:index.html.twig
             repository:
                 method: findAcceptedByProductSlug
                 arguments:
                     - $slug
+                    - '%locale%'
