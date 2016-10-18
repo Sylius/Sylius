@@ -19,7 +19,7 @@ How to configure states? Let's see on the example from **Checkout** state machin
 
 .. code-block:: yaml
 
-   # CoreBundle/Resources/config/app/state_machine.yml
+   # CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml
    winzou_state_machine:
        sylius_order_checkout:
            # list of all possible states:
@@ -40,7 +40,7 @@ Having states configured we can have a transition between the ``cart`` state to 
 
 .. code-block:: yaml
 
-   # CoreBundle/Resources/config/app/state_machine.yml
+   # CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml
    winzou_state_machine:
        sylius_order_checkout:
            transitions:
@@ -58,7 +58,7 @@ Having a configured transition, you can attach a callback to it either before or
 
 .. code-block:: yaml
 
-   # CoreBundle/Resources/config/app/state_machine.yml
+   # CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml
    winzou_state_machine:
         sylius_order_checkout:
              callbacks:
@@ -83,7 +83,7 @@ would become ``shipping_selected``.
 
 .. code-block:: yaml
 
-   # CoreBundle/Resources/config/app/state_machine.yml
+   # CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml
    winzou_state_machine:
        sylius_order_checkout:
            class: "%sylius.model.order.class%" # class of the domain object - in our case Order
@@ -131,7 +131,6 @@ would become ``shipping_selected``.
                        on: ["complete"]
                        do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
                        args: ["object"]
-
 
 Learn more
 ----------

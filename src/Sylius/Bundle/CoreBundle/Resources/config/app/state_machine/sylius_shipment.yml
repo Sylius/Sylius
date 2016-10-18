@@ -1,0 +1,12 @@
+winzou_state_machine:
+    sylius_shipment:
+        callbacks:
+            after:
+                sylius_shipping_confirmation_email:
+                    to: "shipped"
+                    do: ["@sylius.email_manager.shipment", "sendConfirmationEmail"]
+                    args: ["object"]
+                update_order_shipping_state:
+                    on: ["ship"]
+                    do: ["@sylius.state_resolver.order_shipping", "resolve"]
+                    args: ["object.getOrder()"]
