@@ -505,6 +505,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I add the "Contains product" rule configured with the :productName product
+     */
+    public function iAddTheRuleConfiguredWithTheProduct($productName)
+    {
+        $this->createPage->addRule('Contains product');
+        $this->createPage->selectRuleOption('Product', $productName);
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */
