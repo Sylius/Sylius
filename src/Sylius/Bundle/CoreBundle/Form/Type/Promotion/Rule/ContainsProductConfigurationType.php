@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
-use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
+use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -19,20 +19,21 @@ use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class ContainsProductConfigurationType extends AbstractType
 {
     /**
-     * @var ProductVariantRepositoryInterface
+     * @var ProductRepositoryInterface
      */
-    protected $variantRepository;
+    protected $productRepository;
 
     /**
-     * @param ProductVariantRepositoryInterface $variantRepository
+     * @param ProductRepositoryInterface $productRepository
      */
-    public function __construct(ProductVariantRepositoryInterface $variantRepository)
+    public function __construct(ProductRepositoryInterface $productRepository)
     {
-        $this->variantRepository = $variantRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -41,32 +42,14 @@ class ContainsProductConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('variant', 'sylius_product_variant_from_identifier', [
-                'label' => 'sylius.form.promotion_action.add_product_configuration.variant',
-                'class' => $this->variantRepository->getClassName(),
+            ->add('product_code', 'sylius_product_from_identifier', [
+                'label' => 'sylius.form.promotion_action.add_product_configuration.product',
+                'class' => $this->productRepository->getClassName(),
                 'constraints' => [
                     new NotBlank(),
-                    new Type(['type' => 'numeric']),
+                    new Type(['type' => 'string']),
                 ],
-            ])
-            ->add('count', 'integer', [
-                'label' => 'sylius.form.promotion_rule.cart_quantity_configuration.count',
-                'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'numeric']),
-                ],
-            ])
-            ->add('equal', 'checkbox', [
-                'label' => 'sylius.form.promotion_rule.cart_quantity_configuration.equal',
-                'constraints' => [
-                    new Type(['type' => 'bool']),
-                ],
-            ])
-            ->add('exclude', 'checkbox', [
-                'label' => 'sylius.form.promotion_rule.contains_product_configuration.exclude',
-                'constraints' => [
-                    new Type(['type' => 'bool']),
-                ],
+                'identifier' => 'code',
             ])
         ;
     }
