@@ -1,0 +1,15 @@
+sylius_admin_product_review:
+    resource: |
+        alias: sylius.product_review
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show', 'create', 'update', 'delete']
+        redirect: index
+        grid: sylius_admin_product_review
+        permission: true
+        vars:
+          all:
+              subheader: sylius.ui.manage_reviews_of_your_products
+          index:
+              icon: newspaper
+    type: sylius.resource
