@@ -26,8 +26,8 @@ class AddressRepository extends EntityRepository implements AddressRepositoryInt
     public function findByCustomer(CustomerInterface $customer)
     {
         return $this->createQueryBuilder('o')
-            ->leftJoin('o.customers','customer')
-            ->where('customer.id = customer_id')
+            ->leftJoin('o.customer','customer')
+            ->where('customer.id = :customer_id')
             ->setParameter('customer_id', $customer->getId())
             ->getQuery()
             ->getResult()

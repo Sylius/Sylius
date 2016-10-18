@@ -186,13 +186,21 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given /^I have an (address "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)") in address book$/
+     * @Given /^I have an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") in address book$/
      */
     public function iHaveAnAddressInAddressBook(AddressInterface $address)
     {
         $user = $this->sharedStorage->get('user');
-        $user->getCustomer()->addAddress($address);
-        
+        $this->thisCustomerHasAnAddressInAddressBook($user->getCustomer(), $address);
+    }
+
+    /**
+     * @Given /^(this customer) has an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") in address book$/
+     */
+    public function thisCustomerHasAnAddressInAddressBook(CustomerInterface $customer, AddressInterface $address)
+    {
+        $customer->addAddress($address);
+
         $this->customerManager->flush();
     }
 
