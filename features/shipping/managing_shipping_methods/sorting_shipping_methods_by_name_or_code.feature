@@ -1,5 +1,5 @@
 @managing_shipping_methods
-Feature: Sorting listed shipping methods
+Feature: Sorting listed shipping methods by name or code
     In order to change the order by which shipping methods are displayed
     As an Administrator
     I want to sort shipping methods

@@ -88,7 +88,7 @@ final class ShippingContext implements Context
      */
     public function storeShipsEverythingForFree(ZoneInterface $zone = null)
     {
-        $this->createShippingMethod('Free', null, $zone);
+        $this->createShippingMethod('Free', null, null, $zone);
     }
 
     /**
@@ -97,17 +97,18 @@ final class ShippingContext implements Context
     public function theStoreShipsEverywhereForFree()
     {
         foreach ($this->zoneRepository->findAll() as $zone) {
-            $this->createShippingMethod('Free', null, $zone);
+            $this->createShippingMethod('Free', null, null, $zone);
         }
     }
 
     /**
-     * @Given the store allows shipping with :name
-     * @Given the store( also) allows shipping with :name identified by :code
+     * @Given the store (also) allows shipping with :name
+     * @Given the store (also) allows shipping with :name identified by :code
+     * @Given the store (also) allows shipping with :name with position :position
      */
-    public function theStoreAllowsShippingMethod($name, $code = null)
+    public function theStoreAllowsShippingMethod($name, $code = null, $position = null)
     {
-        $this->createShippingMethod($name, $code);
+        $this->createShippingMethod($name, $code, $position);
     }
 
     /**
@@ -141,7 +142,7 @@ final class ShippingContext implements Context
      */
     public function storeHasShippingMethodWithFee($shippingMethodName, $fee, ZoneInterface $zone = null)
     {
-        $this->createShippingMethod($shippingMethodName, null, $zone, 'en', ['amount' => $fee]);
+        $this->createShippingMethod($shippingMethodName, null, null, $zone, 'en', ['amount' => $fee]);
     }
 
     /**
@@ -149,7 +150,7 @@ final class ShippingContext implements Context
      */
     public function storeHasDisabledShippingMethodWithFee($shippingMethodName, $fee)
     {
-        $this->createShippingMethod($shippingMethodName, null, null, 'en', ['amount' => $fee], DefaultCalculators::FLAT_RATE, false);
+        $this->createShippingMethod($shippingMethodName, null, null, null, 'en', ['amount' => $fee], DefaultCalculators::FLAT_RATE, false);
     }
 
     /**
@@ -157,7 +158,7 @@ final class ShippingContext implements Context
      */
     public function theStoreHasShippingMethodWithFeePerUnit($shippingMethodName, $fee)
     {
-        $this->createShippingMethod($shippingMethodName, null, null, 'en', ['amount' => $fee], DefaultCalculators::PER_UNIT_RATE);
+        $this->createShippingMethod($shippingMethodName, null, null, null, 'en', ['amount' => $fee], DefaultCalculators::PER_UNIT_RATE);
     }
 
     /**
@@ -167,6 +168,7 @@ final class ShippingContext implements Context
     {
         $this->createShippingMethod(
             $shippingMethodName,
+            null,
             null,
             null,
             'en',
@@ -180,7 +182,7 @@ final class ShippingContext implements Context
      */
     public function storeHasShippingMethodWithFeeNotAssignedToAnyChannel($shippingMethodName, $fee)
     {
-        $this->createShippingMethod($shippingMethodName, null, null, 'en', ['amount' => $fee], DefaultCalculators::FLAT_RATE, false, false);
+        $this->createShippingMethod($shippingMethodName, null, null, null, 'en', ['amount' => $fee], DefaultCalculators::FLAT_RATE, false, false);
     }
 
     /**
@@ -213,6 +215,7 @@ final class ShippingContext implements Context
     /**
      * @param string $name
      * @param string|null $code
+     * @param int|null $position
      * @param ZoneInterface|null $zone
      * @param string $locale
      * @param array $configuration
@@ -223,6 +226,7 @@ final class ShippingContext implements Context
     private function createShippingMethod(
         $name,
         $code = null,
+        $position = null,
         ZoneInterface $zone = null,
         $locale = 'en',
         $configuration = ['amount' => 0],
@@ -242,6 +246,7 @@ final class ShippingContext implements Context
         $shippingMethod = $this->shippingMethodFactory->createNew();
         $shippingMethod->setCode($code);
         $shippingMethod->setName($name);
+        $shippingMethod->setPosition($position);
         $shippingMethod->setCurrentLocale($locale);
         $shippingMethod->setConfiguration($configuration);
         $shippingMethod->setCalculator($calculator);

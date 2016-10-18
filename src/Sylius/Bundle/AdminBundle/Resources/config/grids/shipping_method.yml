@@ -9,7 +9,7 @@ sylius_grid:
                         method: createListQueryBuilder
                         arguments: ["%locale%"]
             sorting:
-                code: asc
+                position: asc
             fields:
                 code:
                     type: string
