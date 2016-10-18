@@ -19,7 +19,7 @@ Feature: Seeing order item detailed data
         And there is a promotion "T-Shirts promotion"
         And it gives "$2.00" off on every product with minimum price at "$20.00"
         And there is a customer "tony@stark.com" that placed an order "#00000666"
-        And the customer bought 4 items of "Iron Man T-Shirt" variant of product "Marvel T-Shirt"
+        And the customer bought 4 units of "Iron Man T-Shirt" variant of product "Marvel T-Shirt"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 

@@ -280,8 +280,10 @@ final class ProductContext implements Context
      */
     public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
+        /** @var ProductVariantInterface $variant */
         $variant = $this->defaultVariantResolver->getVariant($product);
         $variant->setTaxCategory($taxCategory);
+
         $this->objectManager->flush();
     }
 
@@ -406,22 +408,29 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^there (?:is|are) (\d+) (?:item|unit)(?:|s) of (product "([^"]+)") available in the inventory$/
+     * @Given /^there (?:is|are) (\d+) unit(?:|s) of (product "([^"]+)") available in the inventory$/
      * @When product :product quantity is changed to :quantity
      */
     public function thereIsQuantityOfProducts($quantity, ProductInterface $product)
     {
-        $this->setProductsQuantity($product, $quantity);
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setOnHand($quantity);
+
+        $this->objectManager->flush();
     }
 
     /**
      * @Given /^the (product "([^"]+)") is out of stock$/
      */
-    public function theProductIsNotAvailable(ProductInterface $product)
+    public function theProductIsOutOfStock(ProductInterface $product)
     {
-        $product->getFirstVariant()->setTracked(true);
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setTracked(true);
+        $productVariant->setOnHand(0);
 
-        $this->setProductsQuantity($product, 0);
+        $this->objectManager->flush();
     }
 
     /**
@@ -431,19 +440,20 @@ final class ProductContext implements Context
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productQuantity = $productVariant->getOnHand() - $quantity;
+        $productVariant->setOnHand($productVariant->getOnHand() - $quantity);
 
-        $this->setProductsQuantity($product, $productQuantity);
+        $this->objectManager->flush();
     }
 
     /**
      * @Given /^(this product) is tracked by the inventory$/
-     * @Given /^("[^"]+" product) is(?:| also) tracked by the inventory$/
+     * @Given /^(?:|the )("[^"]+" product) is(?:| also) tracked by the inventory$/
      */
     public function thisProductIsTrackedByTheInventory(ProductInterface $product)
     {
-        $variant = $this->defaultVariantResolver->getVariant($product);
-        $variant->setTracked(true);
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setTracked(true);
 
         $this->objectManager->flush();
     }
@@ -479,23 +489,12 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^there are ([^"]+) items of ("[^"]+" variant of product "[^"]+") available in the inventory$/
+     * @Given /^there are ([^"]+) units of ("[^"]+" variant of product "[^"]+") available in the inventory$/
      */
     public function thereAreItemsOfProductInVariantAvailableInTheInventory($quantity, ProductVariantInterface $productVariant)
     {
         $productVariant->setTracked(true);
         $productVariant->setOnHand($quantity);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given /^the ("[^"]+" product) is tracked by the inventory$/
-     */
-    public function theProductIsTrackedByTheInventory(ProductInterface $product)
-    {
-        $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->setTracked(true);
 
         $this->objectManager->flush();
     }
@@ -511,11 +510,14 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product)'s price is ("[^"]+")$/
      * @Given /^the (product "[^"]+") changed its price to ("[^"]+")$/
      */
     public function theProductChangedItsPriceTo(ProductInterface $product, $price)
     {
-        $product->getFirstVariant()->setPrice($price);
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setPrice($price);
 
         $this->objectManager->flush();
     }
@@ -536,15 +538,6 @@ final class ProductContext implements Context
 
         $product->addImage($productImage);
 
-        $this->objectManager->flush($product);
-    }
-
-    /**
-     * @Given /^(this product)'s price is "([^"]+)"$/
-     */
-    public function thisProductPriceIs(ProductInterface $product, $price)
-    {
-        $product->getFirstVariant()->setPrice($this->getPriceFromString($price));
         $this->objectManager->flush($product);
     }
 
@@ -608,9 +601,10 @@ final class ProductContext implements Context
         $product->setCode($this->convertToCode($productName));
         $product->setCreatedAt(new \DateTime($date));
 
-        $variant = $this->defaultVariantResolver->getVariant($product);
-        $variant->setPrice($price);
-        $variant->setCode($product->getCode());
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setPrice($price);
+        $productVariant->setCode($product->getCode());
 
         return $product;
     }
@@ -634,17 +628,6 @@ final class ProductContext implements Context
         $option->addValue($optionValue);
 
         return $optionValue;
-    }
-
-    /**
-     * @param ProductInterface $product
-     * @param int $quantity
-     */
-    private function setProductsQuantity(ProductInterface $product, $quantity)
-    {
-        $product->getFirstVariant()->setOnHand($quantity);
-
-        $this->saveProduct($product);
     }
 
     /**

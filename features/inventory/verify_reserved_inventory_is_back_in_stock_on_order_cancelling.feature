@@ -9,11 +9,11 @@ Feature: Inventory releasing on order cancellation
         And the store has a product "T-Shirt banana"
         And the product "T-shirt banana" has "Green" variant priced at "€5.54"
         And the product "T-shirt banana" has "Red" variant priced at "€5.54"
-        And there are 5 items of "Green" variant of product "T-shirt banana" available in the inventory
-        And there are 5 items of "Red" variant of product "T-shirt banana" available in the inventory
+        And there are 5 units of "Green" variant of product "T-shirt banana" available in the inventory
+        And there are 5 units of "Red" variant of product "T-shirt banana" available in the inventory
         And the store has a product "Skirt watermelon"
         And the product "Skirt watermelon" has "Yellow" variant priced at "€500.43"
-        And there are 5 items of "Yellow" variant of product "Skirt watermelon" available in the inventory
+        And there are 5 units of "Yellow" variant of product "Skirt watermelon" available in the inventory
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And I am logged in as an administrator
@@ -21,7 +21,7 @@ Feature: Inventory releasing on order cancellation
     @ui
     Scenario: Verify the reserved inventory is back in stock after cancellation of a new order
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
-        And the customer bought 3 items of "Green" variant of product "T-shirt banana"
+        And the customer bought 3 units of "Green" variant of product "T-shirt banana"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the order "#00000022" was cancelled
         When I view all variants of the product "T-shirt banana"
@@ -31,7 +31,7 @@ Feature: Inventory releasing on order cancellation
     @ui
     Scenario: Verify the reserved inventory and quantity of product's items is back in stock after cancellation of paid order
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000022"
-        And the customer bought 3 items of "Green" variant of product "T-shirt banana"
+        And the customer bought 3 units of "Green" variant of product "T-shirt banana"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the order "#00000022" is already paid
         And the order "#00000022" was cancelled
@@ -42,8 +42,8 @@ Feature: Inventory releasing on order cancellation
     @ui
     Scenario: Verify the reserved inventory is back in stock after cancellation of a new order with two variants of product
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000023"
-        And the customer bought 3 items of "Green" variant of product "T-shirt banana"
-        And the customer bought 2 items of "Red" variant of product "T-shirt banana"
+        And the customer bought 3 units of "Green" variant of product "T-shirt banana"
+        And the customer bought 2 units of "Red" variant of product "T-shirt banana"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the order "#00000023" was cancelled
         When I view all variants of the product "T-shirt banana"
@@ -55,8 +55,8 @@ Feature: Inventory releasing on order cancellation
     @ui
     Scenario: Verify the reserved inventory and quantity of product's items is back in stock after cancellation of paid order with two variants of product
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000023"
-        And the customer bought 3 items of "Green" variant of product "T-shirt banana"
-        And the customer bought 2 items of "Red" variant of product "T-shirt banana"
+        And the customer bought 3 units of "Green" variant of product "T-shirt banana"
+        And the customer bought 2 units of "Red" variant of product "T-shirt banana"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the order "#00000023" is already paid
         And the order "#00000023" was cancelled
@@ -69,8 +69,8 @@ Feature: Inventory releasing on order cancellation
     @ui
     Scenario: Verify the reserved inventory is back in stock after cancellation of a new order with two variants of differents products
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000024"
-        And the customer bought 3 items of "Green" variant of product "T-shirt banana"
-        And the customer bought 2 items of "Yellow" variant of product "Skirt watermelon"
+        And the customer bought 3 units of "Green" variant of product "T-shirt banana"
+        And the customer bought 2 units of "Yellow" variant of product "Skirt watermelon"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the order "#00000024" was cancelled
         Then the "Green" variant of "T-shirt banana" product should have 5 items on hand
@@ -81,8 +81,8 @@ Feature: Inventory releasing on order cancellation
     @ui
     Scenario: Verify the reserved inventory and quantity of product's items is back in stock after cancellation of paid order with two variants of differents products
         Given there is a customer "john.doe@gmail.com" that placed an order "#00000024"
-        And the customer bought 3 items of "Green" variant of product "T-shirt banana"
-        And the customer bought 2 items of "Yellow" variant of product "Skirt watermelon"
+        And the customer bought 3 units of "Green" variant of product "T-shirt banana"
+        And the customer bought 2 units of "Yellow" variant of product "Skirt watermelon"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the order "#00000024" is already paid
         And the order "#00000024" was cancelled

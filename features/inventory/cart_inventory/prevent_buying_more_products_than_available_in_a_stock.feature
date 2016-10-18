@@ -8,7 +8,7 @@ Feature: Prevent buying more products than available in a stock
         Given the store operates on a single channel in "United States"
         And the store has a product "T-shirt Mononoke" priced at "$12.54"
         And "T-shirt Mononoke" product is tracked by the inventory
-        And there are 5 items of product "T-Shirt Mononoke" available in the inventory
+        And there are 5 units of product "T-Shirt Mononoke" available in the inventory
 
     @ui @javascript
     Scenario: Preventing from adding more items to the cart than it's available in stock

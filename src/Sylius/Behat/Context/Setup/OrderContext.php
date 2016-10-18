@@ -336,7 +336,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer bought ([^"]+) items of ("[^"]+" variant of product "[^"]+")$/
+     * @Given /^the customer bought ([^"]+) units of ("[^"]+" variant of product "[^"]+")$/
      */
     public function theCustomerBoughtSeveralVariantsOfProduct($quantity, ProductVariantInterface $variant)
     {
