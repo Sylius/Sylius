@@ -104,7 +104,7 @@ final class ShippingContext implements Context
     /**
      * @Given the store (also) allows shipping with :name
      * @Given the store (also) allows shipping with :name identified by :code
-     * @Given the store (also) allows shipping with :name with position :position
+     * @Given the store (also) allows shipping with :name at position :position
      */
     public function theStoreAllowsShippingMethod($name, $code = null, $position = null)
     {

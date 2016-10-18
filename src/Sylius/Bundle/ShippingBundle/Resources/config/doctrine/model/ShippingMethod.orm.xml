@@ -29,7 +29,7 @@
         <field name="enabled" column="is_enabled" type="boolean" />
 
         <field name="position" type="integer">
-            <gedmo:sortable />
+            <gedmo:sortable-position />
         </field>
 
         <field name="createdAt" column="created_at" type="datetime">

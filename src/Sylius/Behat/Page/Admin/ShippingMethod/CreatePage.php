@@ -53,7 +53,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      * {@inheritdoc}
      */
     public function chooseZone($name)
-    {        
+    {
         $this->getDocument()->selectFieldOption('Zone', $name);
     }
 
@@ -61,7 +61,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      * {@inheritdoc}
      */
     public function chooseCalculator($name)
-    {        
+    {
         $this->getDocument()->selectFieldOption('Calculator', $name);
     }
 
