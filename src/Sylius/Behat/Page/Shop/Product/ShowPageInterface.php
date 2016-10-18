@@ -95,9 +95,21 @@ interface ShowPageInterface extends PageInterface
     public function getPrice();
 
     /**
+     * @return int
+     */
+    public function countReviews();
+
+    /**
      * @return bool
      */
     public function isMainImageDisplayed();
+
+    /**
+     * @param string $title
+     *
+     * @return bool
+     */
+    public function hasReviewTitled($title);
 
     /**
      * @param string $optionName

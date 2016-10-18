@@ -25,6 +25,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getRouteName()
+    {
+        return 'sylius_shop_product_show';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addToCart()
     {
         $this->getDocument()->pressButton('Add to cart');
@@ -133,6 +141,22 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function countReviews()
+    {
+        return count($this->getElement('reviews')->findAll('css', 'tr'));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasReviewTitled($title)
+    {
+        return null !== $this->getElement('reviews')->find('css', sprintf('tr:contains("%s")', $title));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function selectOption($optionName, $optionValue)
     {
         $optionElement = $this->getElement('option_select', ['%option-name%' => strtoupper($optionName)]);
@@ -175,14 +199,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
-    {
-        return 'sylius_shop_product_show';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isMainImageDisplayed()
     {
         $imageElement = $this->getElement('main_image');
@@ -211,6 +227,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'option_select' => '#sylius_cart_item_variant_%option-name%',
             'out_of_stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
+            'reviews' => '#reviews',
             'selecting_variants' => "#sylius-product-selecting-variant",
             'validation_errors' => '.sylius-validation-error',
             'variant_radio' => '#sylius-product-variants tbody tr:contains("%variant-name%") input',

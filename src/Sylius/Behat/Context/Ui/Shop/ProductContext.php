@@ -312,4 +312,48 @@ final class ProductContext implements Context
             sprintf('Expected first product\'s name to be "%s", but it is "%s".', $name, $actualName)
         );
     }
+
+    /**
+     * @Then I should see :count product reviews
+     */
+    public function iShouldSeeProductReviews($count)
+    {
+        Assert::same(
+            $count,
+            $this->showPage->countReviews(),
+            'Product has %2$s reviews, but should have %s.'
+        );
+    }
+
+    /**
+     * @Then I should see reviews titled :firstReview, :secondReview and :thirdReview
+     */
+    public function iShouldSeeReviewTitledAnd($firstReview, $secondReview, $thirdReview)
+    {
+        Assert::true(
+            $this->showPage->hasReviewTitled($firstReview),
+            sprintf('Product should have review titled "%s" but it does not.', $firstReview)
+        );
+
+        Assert::true(
+            $this->showPage->hasReviewTitled($secondReview),
+            sprintf('Product should have review titled "%s" but it does not.', $secondReview)
+        );
+
+        Assert::true(
+            $this->showPage->hasReviewTitled($thirdReview),
+            sprintf('Product should have review titled "%s" but it does not.', $thirdReview)
+        );
+    }
+
+    /**
+     * @Given I should not see review titled :review
+     */
+    public function iShouldNotSeeReviewTitled($review)
+    {
+        Assert::false(
+            $this->showPage->hasReviewTitled($review),
+            sprintf('Product should not have review titled "%s" but it does.', $review)
+        );
+    }
 }
