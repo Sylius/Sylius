@@ -143,7 +143,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function countReviews()
     {
-        return count($this->getElement('reviews')->findAll('css', 'tr'));
+        return count($this->getElement('reviews')->findAll('css', '.comment'));
     }
 
     /**
@@ -151,7 +151,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function hasReviewTitled($title)
     {
-        return null !== $this->getElement('reviews')->find('css', sprintf('tr:contains("%s")', $title));
+        return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
     }
 
     /**
@@ -227,7 +227,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'option_select' => '#sylius_cart_item_variant_%option-name%',
             'out_of_stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
-            'reviews' => '#reviews',
+            'reviews' => '[data-tab="reviews"] .comments',
             'selecting_variants' => "#sylius-product-selecting-variant",
             'validation_errors' => '.sylius-validation-error',
             'variant_radio' => '#sylius-product-variants tbody tr:contains("%variant-name%") input',

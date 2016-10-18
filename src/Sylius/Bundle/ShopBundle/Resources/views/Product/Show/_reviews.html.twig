@@ -2,7 +2,7 @@
     {% for review in product_reviews %}
         <div class="comment">
             <div class="content">
-                <a class="author">{{ review.author.firstName }} {{ review.author.lastName }}</a>
+                <a class="author">{{ review.author.firstName }}</a>
                 <div class="metadata">
                     <div class="date">{{ review.createdAt|date('Y-m-d') }}</div>
                     <div class="rating">

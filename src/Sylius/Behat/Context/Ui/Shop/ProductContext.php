@@ -319,7 +319,7 @@ final class ProductContext implements Context
     public function iShouldSeeProductReviews($count)
     {
         Assert::same(
-            $count,
+            (int) $count,
             $this->showPage->countReviews(),
             'Product has %2$s reviews, but should have %s.'
         );

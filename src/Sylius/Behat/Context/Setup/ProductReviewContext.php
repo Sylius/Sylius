@@ -93,7 +93,8 @@ final class ProductReviewContext implements Context
         $title,
         $rating,
         $comment,
-        CustomerInterface $customer = null
+        CustomerInterface $customer = null,
+        $status = ReviewInterface::STATUS_ACCEPTED
     ) {
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
@@ -102,6 +103,7 @@ final class ProductReviewContext implements Context
         $review->setComment($comment);
         $review->setReviewSubject($product);
         $review->setAuthor($customer);
+        $review->setStatus($status);
 
         $product->addReview($review);
 
