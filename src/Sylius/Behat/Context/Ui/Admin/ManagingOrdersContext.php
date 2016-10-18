@@ -547,6 +547,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then this order should have state :state
      * @Then its state should be :state
      */
     public function itsStateShouldBe($state)
