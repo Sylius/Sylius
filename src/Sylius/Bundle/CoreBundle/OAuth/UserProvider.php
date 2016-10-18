@@ -32,7 +32,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
+class UserProvider extends BaseUserProvider implements AccountConnectorInterface, OAuthAwareUserProviderInterface
 {
     /**
      * @var FactoryInterface
