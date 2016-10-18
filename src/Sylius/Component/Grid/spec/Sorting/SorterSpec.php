@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Grid\Sorting;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
+use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\Sorting\Sorter;
@@ -38,13 +39,19 @@ final class SorterSpec extends ObjectBehavior
 
     function it_sorts_the_data_source_via_expression_builder_based_on_the_grid_definition(
         Grid $grid,
+        Field $nameField,
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ) {
         $parameters = new Parameters();
 
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
-        $grid->getSorting()->willReturn(['name' => ['path' => 'translation.name', 'direction' => 'desc']]);
+
+        $grid->getSorting()->willReturn(['name' => 'desc']);
+        $grid->hasField('name')->willReturn(true);
+        $grid->getField('name')->willReturn($nameField);
+        $nameField->isSortable()->willReturn(true);
+        $nameField->getSortable()->willReturn('translation.name');
 
         $expressionBuilder->addOrderBy('translation.name', 'desc')->shouldBeCalled();
 
@@ -53,13 +60,20 @@ final class SorterSpec extends ObjectBehavior
 
     function it_sorts_the_data_source_via_expression_builder_based_on_sorting_parameter(
         Grid $grid,
+        Field $nameField,
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ) {
-        $parameters = new Parameters(['sorting' => ['name' => ['direction' => 'asc']]]);
+        $parameters = new Parameters(['sorting' => ['name' => 'asc']]);
 
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
-        $grid->getSorting()->willReturn(['name' => ['path' => 'translation.name', 'direction' => 'desc']]);
+
+        $grid->getSorting()->willReturn(['code' => 'desc']);
+
+        $grid->hasField('name')->willReturn(true);
+        $grid->getField('name')->willReturn($nameField);
+        $nameField->isSortable()->willReturn(true);
+        $nameField->getSortable()->willReturn('translation.name');
 
         $expressionBuilder->addOrderBy('translation.name', 'asc')->shouldBeCalled();
 

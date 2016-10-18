@@ -8,11 +8,7 @@ sylius_grid:
                     repository:
                         method: createListQueryBuilder
             sorting:
-                number:
-                    path: number
-                    direction: desc
-                date:
-                    path: createdAt
+                number: desc
             fields:
                 channel:
                     type: twig
@@ -24,12 +20,14 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.number
                     path: .
+                    sortable: ~
                     options:
                         template: SyliusAdminBundle:Order/Field:number.html.twig
                 date:
                     type: datetime
                     label: sylius.ui.date
                     path: completedAt
+                    sortable: ~
                     options:
                         format: d-m-Y H:i:s
                 customer:

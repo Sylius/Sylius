@@ -9,11 +9,7 @@ sylius_grid:
                         method: createListQueryBuilder
                         arguments: ["%locale%"]
             sorting:
-                code:
-                    path: code
-                    direction: asc
-                name:
-                    path: translation.name
+                code: asc
             fields:
                 image:
                     type: twig
@@ -24,9 +20,11 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 name:
                     type: string
                     label: sylius.ui.name
+                    sortable: translation.name
                 enabled:
                     type: twig
                     label: sylius.ui.enabled

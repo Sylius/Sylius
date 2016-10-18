@@ -6,13 +6,12 @@ sylius_grid:
                 options:
                     class: "%sylius.model.currency.class%"
             sorting:
-                code:
-                    path: code
-                    direction: asc
+                code: asc
             fields:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 name:
                     type: string
                     label: sylius.ui.name

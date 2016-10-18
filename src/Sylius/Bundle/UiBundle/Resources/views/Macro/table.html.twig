@@ -3,7 +3,7 @@
 
     {% for field in definition.fields %}
         {% if field.enabled %}
-            {% if definition.isSortableBy(field.name) %}
+            {% if field.isSortable %}
                 {{ sorting.tableHeader(grid, field, requestAttributes) }}
             {% else %}
                 <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>

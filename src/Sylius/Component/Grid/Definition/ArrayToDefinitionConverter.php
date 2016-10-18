@@ -39,6 +39,9 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
             if (array_key_exists('enabled', $fieldConfiguration)) {
                 $field->setEnabled($fieldConfiguration['enabled']);
             }
+            if (array_key_exists('sortable', $fieldConfiguration)) {
+                $field->setSortable($fieldConfiguration['sortable']);
+            }
             if (array_key_exists('options', $fieldConfiguration)) {
                 $field->setOptions($fieldConfiguration['options']);
             }

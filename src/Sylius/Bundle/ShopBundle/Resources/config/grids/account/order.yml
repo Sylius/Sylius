@@ -12,8 +12,7 @@ sylius_grid:
                         method: createByCustomerQueryBuilder
                         arguments: [expr:service('sylius.context.customer').getCustomer()]
             sorting:
-                completedAt:
-                    path: completedAt
+                completedAt: desc
             fields:
                 number:
                     type: twig
@@ -23,6 +22,7 @@ sylius_grid:
                 completedAt:
                     type: datetime
                     label: sylius.ui.date
+                    sortable: ~
                     options:
                         format: m/d/Y
                 shippingAddress:

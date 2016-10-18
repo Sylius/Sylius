@@ -6,9 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.channel.class%"
             sorting:
-                nameAndDescription:
-                    path: name
-                    direction: asc
+                nameAndDescription: asc
             fields:
                 code:
                     type: twig
@@ -20,6 +18,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.name
                     path: .
+                    sortable: name
                     options:
                         template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
                 themeName:

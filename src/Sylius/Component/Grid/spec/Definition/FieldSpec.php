@@ -57,6 +57,32 @@ final class FieldSpec extends ObjectBehavior
         $this->getLabel()->shouldReturn('Is enabled?');
     }
 
+    function it_is_toggleable()
+    {
+        $this->isEnabled()->shouldReturn(true);
+
+        $this->setEnabled(false);
+        $this->isEnabled()->shouldReturn(false);
+        $this->setEnabled(true);
+        $this->isEnabled()->shouldReturn(true);
+    }
+
+    function it_knows_by_which_property_it_can_be_sorted()
+    {
+        $this->getSortable()->shouldReturn(null);
+
+        $this->setSortable('method.enabled');
+        $this->getSortable()->shouldReturn('method.enabled');
+    }
+
+    function its_sorted_by_name_when_sortable_is_not_set()
+    {
+        $this->getSortable()->shouldReturn(null);
+
+        $this->setSortable(null);
+        $this->getSortable()->shouldReturn('enabled');
+    }
+
     function it_has_no_options_by_default()
     {
         $this->getOptions()->shouldReturn([]);

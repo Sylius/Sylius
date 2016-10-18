@@ -35,8 +35,8 @@ Feature: Sorting listed products
         Given I am browsing products
         When I start sorting products by name
         Then I should see 3 products in the list
-        And I should see a product with name "Berserk Pug"
-        But the first product on the list should have name "Xtreme Pug"
+        And I should see a product with name "Xtreme Pug"
+        But the first product on the list should have name "Berserk Pug"
 
     @ui
     Scenario: Changing the names sorting order
@@ -44,8 +44,8 @@ Feature: Sorting listed products
         And the products are already sorted by name
         When I switch the way products are sorted by name
         Then I should see 3 products in the list
-        And I should see a product with name "Xtreme Pug"
-        But the first product on the list should have name "Berserk Pug"
+        And I should see a product with name "Berserk Pug"
+        But the first product on the list should have name "Xtreme Pug"
 
     @ui
     Scenario: Products are always sorted in the default locale even if another is active
@@ -53,7 +53,7 @@ Feature: Sorting listed products
         And I am browsing products
         When I switch the way products are sorted by name
         Then I should still see a product with name "Pug of Love"
-        And the first product on the list should have name "Xtreme Pug"
+        And the first product on the list should have name "Berserk Pug"
         But I should not see any product with name "Szałowy Mops"
 
     @ui
@@ -64,5 +64,5 @@ Feature: Sorting listed products
         When I switch the way products are sorted by name
         Then I should see 3 products in the list
         And I should see a product with name "Xtreme Pug"
-        And the first product on the list should have name "Berserk Pug"
+        And the first product on the list should have name "Xtreme Pug"
         But I should not see any product with name "Mops Miłości"

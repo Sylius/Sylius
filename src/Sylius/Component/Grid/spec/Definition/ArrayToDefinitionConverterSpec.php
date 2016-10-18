@@ -41,12 +41,13 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
     {
         $grid = Grid::fromCodeAndDriverConfiguration('sylius_admin_tax_category', 'doctrine/orm', ['resource' => 'sylius.tax_category']);
 
-        $grid->setSorting(['name' => 'desc']);
+        $grid->setSorting(['code' => 'desc']);
 
         $codeField = Field::fromNameAndType('code', 'string');
         $codeField->setLabel('System Code');
         $codeField->setPath('method.code');
         $codeField->setOptions(['template' => 'bar.html.twig']);
+        $codeField->setSortable('code');
 
         $grid->addField($codeField);
 
@@ -68,13 +69,14 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
                 'options' => ['resource' => 'sylius.tax_category'],
             ],
             'sorting' => [
-                'name' => 'desc',
+                'code' => 'desc',
             ],
             'fields' => [
                 'code' => [
                     'type' => 'string',
                     'label' => 'System Code',
                     'path' => 'method.code',
+                    'sortable' => 'code',
                     'options' => [
                         'template' => 'bar.html.twig'
                     ],

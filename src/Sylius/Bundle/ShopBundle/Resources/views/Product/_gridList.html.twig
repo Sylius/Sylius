@@ -1,4 +1,5 @@
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+{% from '@SyliusUi/Macro/sorting.html.twig' import link %}
 
 {% set definition = resources.definition %}
 {% set fieldName = definition.fields['createdAt'].name %}
@@ -13,15 +14,15 @@
                 <div class="grouped fields">
                     <div class="field">
                         <a href="{{ path('sylius_shop_taxon_show', {
-                            'sorting': {(fieldName): {'direction': 'asc'}},
+                            'sorting': {(fieldName): 'asc'},
                             'permalink': resources.parameters.get('permalink')})
-                        }}">{{ 'sylius.ui.form_the_oldest'|trans }}</a>
+                        }}">{{ 'sylius.ui.from_the_oldest'|trans }}</a>
                     </div>
                     <div class="field">
                         <a href="{{ path('sylius_shop_taxon_show',{
-                            'sorting': {(fieldName): {'direction': 'desc'}},
+                            'sorting': {(fieldName): 'desc'},
                             'permalink': resources.parameters.get('permalink')})
-                        }}">{{ 'sylius.ui.form_the_latest'|trans }}</a>
+                        }}">{{ 'sylius.ui.from_the_latest'|trans }}</a>
                     </div>
                 </div>
             </div>
