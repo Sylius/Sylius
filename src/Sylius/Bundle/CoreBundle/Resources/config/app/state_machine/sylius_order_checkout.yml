@@ -1,0 +1,47 @@
+winzou_state_machine:
+    sylius_order_checkout:
+        class: "%sylius.model.order.class%"
+        property_path: checkoutState
+        graph: sylius_order_checkout
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            cart: ~
+            addressed: ~
+            shipping_selected: ~
+            payment_selected: ~
+            completed: ~
+        transitions:
+            address:
+                from: [cart, addressed, shipping_selected, payment_selected]
+                to: addressed
+            select_shipping:
+                from: [addressed, shipping_selected, payment_selected]
+                to: shipping_selected
+            select_payment:
+                from: [payment_selected, shipping_selected]
+                to: payment_selected
+            complete:
+                from: [payment_selected]
+                to: completed
+        callbacks:
+            after:
+                sylius_process_cart:
+                    on: ["address", "select_shipping", "select_payment"]
+                    do: ["@sylius.order_processing.order_processor", "process"]
+                    args: ["object"]
+                sylius_create_order:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'create'", "'sylius_order'"]
+                sylius_hold_inventory:
+                    on: ["complete"]
+                    do: ["@sylius.inventory.order_inventory_operator", "hold"]
+                    args: ["object"]
+                sylius_assign_token:
+                    on: ["complete"]
+                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
+                    args: ["object"]
+                sylius_increment_promotions_usages:
+                    on: ["complete"]
+                    do: ["@sylius.promotion_usage_modifier", "increment"]
+                    args: ["object"]

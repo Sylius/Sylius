@@ -1,0 +1,34 @@
+winzou_state_machine:
+    sylius_order_payment:
+        class: "%sylius.model.order.class%"
+        property_path: paymentState
+        graph: sylius_order_payment
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            cart: ~
+            awaiting_payment: ~
+            partially_paid: ~
+            cancelled: ~
+            paid: ~
+        transitions:
+            request_payment:
+                from: [cart]
+                to: awaiting_payment
+            partially_pay:
+                to: partially_paid
+            cancel:
+                from: [awaiting_payment]
+                to: cancelled
+            pay:
+                from: [awaiting_payment, partially_paid]
+                to: paid
+        callbacks:
+            after:
+                sylius_order_paid:
+                    on: ["pay"]
+                    do: ["@sylius.inventory.order_inventory_operator", "sell"]
+                    args: ["object"]
+                sylius_fulfil_paid_order:
+                    on: ["pay"]
+                    do: ["@sylius.state_resolver.order", "resolve"]
+                    args: ["object"]

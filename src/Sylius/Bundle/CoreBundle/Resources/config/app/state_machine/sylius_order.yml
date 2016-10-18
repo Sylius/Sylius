@@ -1,0 +1,48 @@
+winzou_state_machine:
+    sylius_order:
+        callbacks:
+            after:
+                sylius_order_confirmation_email:
+                    on: ["create"]
+                    do: ["@sylius.email_manager.order", "sendConfirmationEmail"]
+                    args: ["object"]
+                sylius_request_shipping:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'request_shipping'", "'sylius_order_shipping'"]
+                sylius_request_payment:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'request_payment'", "'sylius_order_payment'"]
+                sylius_create_payment:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getPayments()", "event", "'create'", "'sylius_payment'"]
+                sylius_create_shipment:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getShipments()", "event", "'create'", "'sylius_shipment'"]
+                sylius_cancel_payment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getPayments()", "event", "'cancel'", "'sylius_payment'"]
+                sylius_cancel_shipment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getShipments()", "event", "'cancel'", "'sylius_shipment'"]
+                sylius_cancel_order_payment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'cancel'", "'sylius_order_payment'"]
+                sylius_cancel_order_shipment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'cancel'", "'sylius_order_shipping'"]
+                sylis_cancel_order:
+                    on: ["cancel"]
+                    do: ["@sylius.inventory.order_inventory_operator", "cancel"]
+                    args: ["object"]
+                sylius_decrement_promotions_usages:
+                    on: ["cancel"]
+                    do: ["@sylius.promotion_usage_modifier", "decrement"]
+                    args: ["object"]
