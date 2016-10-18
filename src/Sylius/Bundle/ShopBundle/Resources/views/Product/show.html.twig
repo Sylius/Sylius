@@ -40,3 +40,14 @@
 
 {% include '@SyliusShop/Product/Show/_associations.html.twig' %}
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var createMessage = "{{ 'sylius.resource.create'|trans({'%resource%': 'sylius.ui.product_review'|trans}, 'flashes') }}";
+        var successHeader  = "{{ 'sylius.ui.success'|trans }}";
+        $(document).ready(function() {
+            initializeAjaxForm(createMessage, successHeader);
+        });
+    </script>
+{% endblock %}

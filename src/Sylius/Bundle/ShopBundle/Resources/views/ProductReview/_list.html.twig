@@ -1,0 +1,20 @@
+{% for review in product_reviews %}
+    <div class="ui very padded segment">
+        <div class="ui top left attached label">{{ review.title }}</div>
+        <div class="ui top right attached label">{{ review.createdAt|format_date('Y-m-d H:i') }}</div>
+
+        <h4>{{ 'sylius.ui.rating'|trans }}: <div class="ui star rating" data-rating="{{ review.rating }}" data-max-rating="5"></div></h4>
+        <p>{{ review.comment }}</p>
+
+        <div class="ui bottom attached label">
+            {% set author = review.author %}
+            {% if author.firstName is not null and author.lastName is not null %}
+                - {{ 'sylius.ui.author'|trans }}: {{ author.firstName }} {{ author.lastName|first }}.
+            {% else %}
+                - {{ 'sylius.ui.author'|trans }}: {{ 'sylius.ui.guest'|trans }}
+            {% endif %}
+        </div>
+    </div>
+{% else %}
+    <p>{{ 'sylius.ui.no_results_to_display'|trans }}</p>
+{% endfor %}
