@@ -30,7 +30,9 @@ sylius_shop_account_profile_update:
             repository:
                 method: find
                 arguments: [expr:service('sylius.context.customer').getCustomer()]
-            redirect: sylius_shop_account_profile_update
+            redirect:
+                route: sylius_shop_account_profile_update
+                parameters: {}
 
 sylius_shop_account_change_password:
     path: /change-password
