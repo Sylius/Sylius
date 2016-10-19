@@ -20,15 +20,11 @@ sylius_grid:
                         vars:
                             labels: SyliusAdminBundle:ProductReview/Label/Status
                 reviewSubject:
-                    type: twig
+                    type: string
                     label: sylius.ui.product
-                    options:
-                        template: SyliusAdminBundle:ProductReview/Field:reviewSubject.html.twig
                 author:
-                    type: twig
+                    type: string
                     label: sylius.ui.customer
-                    options:
-                        template: SyliusAdminBundle:ProductReview/Field:author.html.twig
             filters:
                 title:
                     type: string

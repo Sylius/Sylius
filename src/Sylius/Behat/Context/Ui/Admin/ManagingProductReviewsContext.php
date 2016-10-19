@@ -53,15 +53,13 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) product reviews in the list$/
+     * @Then I should see :amount product reviews in the list
      */
     public function iShouldSeeProductReviewsInTheList($amount)
     {
-        $foundRows = $this->indexPage->countItems();
-
         Assert::same(
             (int) $amount,
-            $foundRows,
+            $this->indexPage->countItems(),
             '%2$s rows with product reviews should appear on page, %s rows has been found'
         );
     }

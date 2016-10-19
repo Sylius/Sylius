@@ -8,8 +8,8 @@ sylius_admin_product_review:
         grid: sylius_admin_product_review
         permission: true
         vars:
-          all:
-              subheader: sylius.ui.manage_reviews_of_your_products
-          index:
-              icon: newspaper
+            all:
+                subheader: sylius.ui.manage_reviews_of_your_products
+            index:
+                icon: newspaper
     type: sylius.resource
