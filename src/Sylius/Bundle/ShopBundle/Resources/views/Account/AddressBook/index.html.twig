@@ -32,9 +32,12 @@
         <div class="ui very relaxed divided list" id="addresses">
             {% for address in addresses %}
                 <div class="item">
-                    <div class="ui grid">
-                        <div class="sixteen wide column">
+                    <div class="ui stackable grid">
+                        <div class="eight wide column">
                             {% include '@SyliusShop/Common/_address.html.twig' with {'address': address} %}
+                        </div>
+                        <div class="eight wide column">
+                            {{ buttons.delete(path('sylius_shop_account_address_book_delete', {'id': address.id})) }}
                         </div>
                     </div>
                 </div>

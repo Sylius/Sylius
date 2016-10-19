@@ -17,6 +17,7 @@ use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class AddressRepository extends EntityRepository implements AddressRepositoryInterface
 {
@@ -26,11 +27,27 @@ class AddressRepository extends EntityRepository implements AddressRepositoryInt
     public function findByCustomer(CustomerInterface $customer)
     {
         return $this->createQueryBuilder('o')
-            ->leftJoin('o.customer','customer')
+            ->leftJoin('o.customer', 'customer')
             ->where('customer.id = :customer_id')
             ->setParameter('customer_id', $customer->getId())
             ->getQuery()
             ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByCustomerAndId(CustomerInterface $customer, $id)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.customer', 'customer')
+            ->where('customer.id = :customer_id')
+            ->andWhere('o.id = :id')
+            ->setParameter('customer_id', $customer->getId())
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
         ;
     }
 }

@@ -13,7 +13,7 @@ sylius_shop_account_address_book_index:
             repository:
                 method: findByCustomer
                 arguments:
-                     - 'expr:service("sylius.context.customer").getCustomer()'
+                    - 'expr:service("sylius.context.customer").getCustomer()'
 
 sylius_shop_account_address_book_create:
     path: /add
@@ -30,3 +30,16 @@ sylius_shop_account_address_book_create:
             redirect:
                 route: sylius_shop_account_address_book_index
             flash: sylius.ui.address_has_been_successfully_added
+
+sylius_shop_account_address_book_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.address:deleteAction
+        _sylius:
+            redirect: sylius_shop_account_address_book_index
+            repository:
+                method: findOneByCustomerAndId
+                arguments:
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+                    - $id
