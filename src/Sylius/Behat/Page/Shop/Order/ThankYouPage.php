@@ -9,46 +9,50 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\Checkout;
+namespace Sylius\Behat\Page\Shop\Order;
 
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class OrderDetailsPage extends SymfonyPage implements OrderDetailsPageInterface
+class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function hasPayAction()
+    public function hasThankYouMessage()
     {
-        return $this->hasElement('pay_link');
+        $thankYouMessage = $this->getElement('thank_you')->getText();
+
+        return false !== strpos($thankYouMessage, 'Thank you!');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function pay()
+    public function getInstructions()
     {
-        $this->getElement('pay_link')->click();
+        return $this->getElement('instructions')->getText();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function choosePaymentMethod($paymentMethodName)
+    public function waitForResponse($timeout, array $parameters = [])
     {
-        $paymentMethodElement = $this->getElement('payment_method', ['%name%' => $paymentMethodName]);
-        $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
+        $this->getDocument()->waitFor($timeout, function () use ($parameters) {
+            return $this->isOpen($parameters);
+        });
     }
-
+    
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function getRouteName()
     {
-        return 'sylius_shop_order_show_details';
+        return 'sylius_shop_thank_you';
     }
 
     /**
@@ -58,8 +62,6 @@ final class OrderDetailsPage extends SymfonyPage implements OrderDetailsPageInte
     {
         return array_merge(parent::getDefinedElements(), [
             'instructions' => '#sylius-payment-method-instructions',
-            'pay_link' => '#sylius-pay-link',
-            'payment_method' => '.item:contains("%name%") input',
             'thank_you' => '#sylius-thank-you',
         ]);
     }

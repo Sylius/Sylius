@@ -64,7 +64,7 @@ final class ManagingOrdersContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param ShowPageInterface $showPage
-     * @param UpdatePageInterface $updateShippingAddressPage
+     * @param UpdatePageInterface $updatePage
      * @param NotificationCheckerInterface $notificationChecker
      * @param SharedSecurityServiceInterface $sharedSecurityService
      */
@@ -72,14 +72,14 @@ final class ManagingOrdersContext implements Context
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
         ShowPageInterface $showPage,
-        UpdatePageInterface $updateShippingAddressPage,
+        UpdatePageInterface $updatePage,
         NotificationCheckerInterface $notificationChecker,
         SharedSecurityServiceInterface $sharedSecurityService
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
         $this->showPage = $showPage;
-        $this->updatePage = $updateShippingAddressPage;
+        $this->updatePage = $updatePage;
         $this->notificationChecker = $notificationChecker;
         $this->sharedSecurityService = $sharedSecurityService;
     }

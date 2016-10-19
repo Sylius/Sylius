@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\Checkout;
+namespace Sylius\Behat\Page\Shop\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 

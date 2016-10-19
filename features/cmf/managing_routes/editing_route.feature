@@ -8,7 +8,7 @@ Feature: Editing a route
         Given the store has static contents "Krzysztof Krawczyk" and "Ryszard Rynkowski"
         And I am logged in as an administrator
 
-    @ui
+    @ui @javascript
     Scenario: Change title of a route
         Given the store has route "krzysztof-krawczyk" with "Ryszard Rynkowski" as its content
         And I want to edit this route

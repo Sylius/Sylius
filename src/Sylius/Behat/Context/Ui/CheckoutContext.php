@@ -13,22 +13,22 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\AddressPageInterface;
-use Sylius\Behat\Page\Shop\Checkout\OrderDetailsPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
-use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
-use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
+use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
-use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -75,7 +75,7 @@ final class CheckoutContext implements Context
     private $completePage;
 
     /**
-     * @var OrderDetailsPageInterface
+     * @var ShowPageInterface
      */
     private $orderDetails;
 
@@ -102,7 +102,7 @@ final class CheckoutContext implements Context
      * @param ThankYouPageInterface $thankYouPage
      * @param SelectShippingPageInterface $selectShippingPage
      * @param CompletePageInterface $completePage
-     * @param OrderDetailsPageInterface $orderDetails
+     * @param ShowPageInterface $orderDetails
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $addressFactory
      * @param CurrentPageResolverInterface $currentPageResolver
@@ -115,7 +115,7 @@ final class CheckoutContext implements Context
         ThankYouPageInterface $thankYouPage,
         SelectShippingPageInterface $selectShippingPage,
         CompletePageInterface $completePage,
-        OrderDetailsPageInterface $orderDetails,
+        ShowPageInterface $orderDetails,
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $addressFactory,
         CurrentPageResolverInterface $currentPageResolver

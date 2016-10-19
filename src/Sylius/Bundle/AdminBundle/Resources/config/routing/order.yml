@@ -5,7 +5,6 @@ sylius_admin_order:
         templates: SyliusAdminBundle:Crud
         only: ['index']
         grid: sylius_admin_order
-        permission: true
         vars:
           all:
               subheader: sylius.ui.process_your_orders
@@ -30,7 +29,6 @@ sylius_admin_order_update:
         _sylius:
             section: admin
             template: SyliusAdminBundle:Order:update.html.twig
-            permission: true
             form:
                 type: sylius_order
                 options:
@@ -46,7 +44,6 @@ sylius_admin_order_cancel:
                 graph: sylius_order
                 transition: cancel
             redirect: referer
-            permission: true
 
 sylius_admin_order_payment_complete:
     path: /orders/{orderId}/payments/{id}/complete
@@ -63,4 +60,3 @@ sylius_admin_order_payment_complete:
                 graph: sylius_payment
                 transition: complete
             redirect: referer
-            permission: true

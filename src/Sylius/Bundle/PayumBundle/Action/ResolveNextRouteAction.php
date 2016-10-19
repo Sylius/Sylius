@@ -38,7 +38,7 @@ final class ResolveNextRouteAction implements ActionInterface
             return;
         }
 
-        $request->setRouteName('sylius_shop_order_show_details');
+        $request->setRouteName('sylius_shop_order_show');
         $request->setRouteParameters(['tokenValue' => $payment->getOrder()->getTokenValue()]);
     }
 

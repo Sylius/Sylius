@@ -14,10 +14,10 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
-use Sylius\Behat\Page\Shop\Checkout\OrderDetailsPageInterface;
+use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -36,7 +36,7 @@ final class PaypalContext implements Context
     private $paypalExpressCheckoutPage;
 
     /**
-     * @var OrderDetailsPageInterface
+     * @var ShowPageInterface
      */
     private $orderDetails;
 
@@ -58,7 +58,7 @@ final class PaypalContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param OrderDetailsPageInterface $orderDetails
+     * @param ShowPageInterface $orderDetails
      * @param CompletePageInterface $summaryPage
      * @param PaypalApiMocker $paypalApiMocker
      * @param OrderRepositoryInterface $orderRepository
@@ -66,7 +66,7 @@ final class PaypalContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
-        OrderDetailsPageInterface $orderDetails,
+        ShowPageInterface $orderDetails,
         CompletePageInterface $summaryPage,
         PaypalApiMocker $paypalApiMocker,
         OrderRepositoryInterface $orderRepository

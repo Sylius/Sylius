@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\Checkout;
+namespace Sylius\Behat\Page\Shop\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface OrderDetailsPageInterface extends SymfonyPageInterface
+interface ShowPageInterface extends SymfonyPageInterface
 {
     /**
      * @return bool
