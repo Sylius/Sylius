@@ -143,6 +143,7 @@
 
         <service id="sylius.behat.context.ui.admin.managing_product_reviews" class="Sylius\Behat\Context\Ui\Admin\ManagingProductReviewsContext" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.product_review.index" />
+            <argument type="service" id="sylius.behat.page.admin.product_review.update" />
             <tag name="sylius.behat.context" />
         </service>
 
