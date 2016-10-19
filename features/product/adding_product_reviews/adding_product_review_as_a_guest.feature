@@ -7,7 +7,6 @@ Feature: Adding product review as a guest
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Necronomicon"
-        And I am a logged in customer
 
     @ui @todo
     Scenario: Adding product reviews as a guest
