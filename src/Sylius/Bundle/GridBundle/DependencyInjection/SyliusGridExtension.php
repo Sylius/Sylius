@@ -31,19 +31,15 @@ final class SyliusGridExtension extends Extension
 
         $loader->load('services.xml');
 
-        foreach (['filter', 'action'] as $templatesCollectionName) {
-            $templates = isset($config['templates'][$templatesCollectionName]) ? $config['templates'][$templatesCollectionName] : [];
-            $container->setParameter('sylius.grid.templates.'.$templatesCollectionName, $templates);
-        }
-
+        $container->setParameter('sylius.grid.templates.action', $config['templates']['action']);
+        $container->setParameter('sylius.grid.templates.filter', $config['templates']['filter']);
         $container->setParameter('sylius.grids_definitions', $config['grids']);
 
         $container->setAlias('sylius.grid.renderer', 'sylius.grid.renderer.twig');
         $container->setAlias('sylius.grid.data_extractor', 'sylius.grid.data_extractor.property_access');
 
         foreach ($config['drivers'] as $enabledDriver) {
-            $path = sprintf('services/integrations/%s.xml', $enabledDriver);
-            $loader->load($path);
+            $loader->load(sprintf('services/integrations/%s.xml', $enabledDriver));
         }
     }
 }
