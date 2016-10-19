@@ -93,10 +93,12 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->innerJoin('o.promotionCoupon', 'coupon')
             ->andWhere('o.customer = :customer')
             ->andWhere('coupon = :coupon')
-            ->andWhere('o.state != :state')
+            ->andWhere('o.state != :cartState')
+            ->andWhere('o.state != :cancelledState')
             ->setParameter('customer', $customer)
             ->setParameter('coupon', $coupon)
-            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('cartState', OrderInterface::STATE_CART)
+            ->setParameter('cancelledState', OrderInterface::STATE_CANCELLED)
         ;
 
         $count = (int) $queryBuilder
