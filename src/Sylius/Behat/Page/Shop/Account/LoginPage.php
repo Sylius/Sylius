@@ -61,7 +61,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'validation_error' => '.message.error',
+            'validation_error' => '.message.negative',
         ]);
     }
 }

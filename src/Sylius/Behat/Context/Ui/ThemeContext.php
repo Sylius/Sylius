@@ -93,7 +93,7 @@ final class ThemeContext implements Context
     {
         $this->channelIndexPage->open();
 
-        Assert::same($this->channelIndexPage->getUsedThemeName($channel->getCode()), '');
+        Assert::same($this->channelIndexPage->getUsedThemeName($channel->getCode()), 'Default');
     }
 
     /**

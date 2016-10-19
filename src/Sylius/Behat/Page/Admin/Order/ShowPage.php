@@ -391,7 +391,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'customer' => '#customer',
             'items_total' => '#items-total',
             'order_notes' => '#sylius-order-notes',
-            'order_state' => 'div.sub.header > span.ui.label',
+            'order_state' => '#sylius-order-state',
             'payments' => '#payments',
             'promotion_discounts' => '#promotion-discounts',
             'promotion_total' => '#promotion-total',

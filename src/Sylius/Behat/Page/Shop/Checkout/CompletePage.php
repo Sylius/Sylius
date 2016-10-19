@@ -267,10 +267,10 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return array_merge(parent::getDefinedElements(), [
             'addressing_step_label' => '.steps a:contains("Address")',
             'billing_address' => '#billing-address',
-            'currency' => '#currency',
+            'currency' => '#sylius-order-currency-code',
             'extra_notes' =>'#sylius_checkout_complete_notes',
             'items_table' => '#sylius-order',
-            'locale' => '#locale',
+            'locale' => '#sylius-order-locale-name',
             'order_total' => 'td:contains("Total")',
             'payment_method' => '#payment-method',
             'payment_step_label' => '.steps a:contains("Payment")',

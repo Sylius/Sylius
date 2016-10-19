@@ -37,11 +37,6 @@ interface ShowPageInterface
     public function isProductWithPriceOnList($productName, $productPrice);
 
     /**
-     * @param string $typeOfSort
-     */
-    public function sortBy($typeOfSort);
-
-    /**
      * @return int
      */
     public function countProductsItems();

@@ -19,16 +19,14 @@ Feature: Sorting listed products
 
     @ui
     Scenario: Sorting products by their dates with descending order
-        When I browse products from taxon "Fluffy Pets"
-        And I start sorting products from the latest
+        When I view newest products from taxon "Fluffy Pets"
         Then I should see 3 products in the list
         And I should see a product with name "Xtreme Pug"
         But the first product on the list should have name "Pug of Love"
 
     @ui
     Scenario: Sorting products by their dates with ascending order
-        When I browse products from taxon "Fluffy Pets"
-        And I start sorting products from the oldest
+        When I view oldest products from taxon "Fluffy Pets"
         Then I should see 3 products in the list
         And I should see a product with name "Berserk Pug"
         But the first product on the list should have name "Xtreme Pug"
