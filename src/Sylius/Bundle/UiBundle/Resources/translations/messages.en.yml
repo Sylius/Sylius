@@ -103,7 +103,7 @@ sylius:
         checkout: Checkout
         choose_file: 'Choose file'
         choose_how_your_goods_will_be_delivered: Choose how your goods will be delivered
-        choose_how_you_will_pay: Choose how your goods will be delivered
+        choose_how_you_will_pay: Choose how you will pay
         city: City
         clear_cart: Clear cart
         clear_filters: Clear filters
@@ -692,6 +692,7 @@ sylius:
         subtotal: Subtotal
         success: Success
         summary: Summary
+        summary_of_your_order: 'Summary of your order'
         support: Support
         sylius_logo: Sylius
         tax: Tax
@@ -788,6 +789,7 @@ sylius:
         view_and_edit_cart: View and edit cart
         view_more: 'View more'
         view_product_details: 'View %product% details'
+        view_your_order_or_change_payment_method: 'View order or change payment method'
         void: Void
         volume_based_pricing: 'Volume based pricing'
         warning: Warning

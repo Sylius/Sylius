@@ -20,6 +20,7 @@
     </table>
     <div class="ui hidden divider"></div>
     <div class="ui action input">
+        {{ form_errors(form.promotionCoupon) }}
         {{ form_widget(form.promotionCoupon, {'attr': {'placeholder': 'sylius.ui.enter_your_code'|trans~'...'}}) }}
         <button type="submit" id="sylius-save" class="ui teal icon labeled button"><i class="ticket icon"></i> {{ 'sylius.ui.apply_coupon'|trans }}</button>
     </div>

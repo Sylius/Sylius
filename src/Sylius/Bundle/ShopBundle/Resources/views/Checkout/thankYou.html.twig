@@ -10,7 +10,6 @@
                     <div class="content" id="sylius-thank-you">
                         {{ 'sylius.ui.thank_you'|trans }}
                         <div class="sub header">{{ 'sylius.ui.placed_an_order'|trans }}</div>
-                        <a href="{{ path('sylius_shop_order_show_details', { 'tokenValue': order.tokenValue }) }}">{{ 'sylius.ui.show_order_details'|trans }}</a>
                     </div>
                 {% if lastPayment.method.instructions is not null %}
                     <div id="sylius-payment-method-instructions" class="sub header">
@@ -18,6 +17,8 @@
                     </div>
                 {% endif %}
             </h1>
+            <div class="ui hidden divider"></div>
+            <a href="{{ path('sylius_shop_order_show_details', { 'tokenValue': order.tokenValue }) }}" class="ui large blue button">{{ 'sylius.ui.view_your_order_or_change_payment_method'|trans }}</a>
         </div>
     </div>
 {% endblock %}
