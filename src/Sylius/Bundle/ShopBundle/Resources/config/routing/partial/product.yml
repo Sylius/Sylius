@@ -35,7 +35,7 @@ sylius_shop_partial_product_reviews_latest:
         _sylius:
             template: $template
             repository:
-                method: findLatestByProduct
+                method: findLatestByProductId
                 arguments:
                     - $productId
                     - $count

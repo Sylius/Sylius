@@ -6,10 +6,6 @@ Feature: Viewing product reviews on product's reviews page
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has customer "Howard Phillips Lovecraft" with email "h.p.lovecraft@arkham.com"
-        And the store has customer "Robert E. Howard" with email "robert.e.howard@conan.com"
-        And the store has customer "J.R.R Tolkien" with email "jrr.tolkien@middle-earth.com"
-        And the store has customer "Terry Pratchett" with email "sir.terry@pratchett.com"
         And the store has a product "Necronomicon"
         And this product has a review titled "Great book" and rated 5 added by customer "h.p.lovecraft@arkham.com"
         And this product has also a review titled "Scary and dark" and rated 4 added by customer "robert.e.howard@conan.com"
