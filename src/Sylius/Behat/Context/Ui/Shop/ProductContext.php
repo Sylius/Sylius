@@ -337,22 +337,14 @@ final class ProductContext implements Context
     /**
      * @Then I should see reviews titled :firstReview, :secondReview and :thirdReview
      */
-    public function iShouldSeeReviewsTitled($firstReview, $secondReview, $thirdReview)
+    public function iShouldSeeReviewsTitled(...$reviews)
     {
-        Assert::true(
-            $this->showPage->hasReviewTitled($firstReview),
-            sprintf('Product should have review titled "%s" but it does not.', $firstReview)
-        );
-
-        Assert::true(
-            $this->showPage->hasReviewTitled($secondReview),
-            sprintf('Product should have review titled "%s" but it does not.', $secondReview)
-        );
-
-        Assert::true(
-            $this->showPage->hasReviewTitled($thirdReview),
-            sprintf('Product should have review titled "%s" but it does not.', $thirdReview)
-        );
+        foreach ($reviews as $review) {
+            Assert::true(
+                $this->showPage->hasReviewTitled($review),
+                sprintf('Product should have review titled "%s" but it does not.', $review)
+            );
+        }
     }
 
     /**

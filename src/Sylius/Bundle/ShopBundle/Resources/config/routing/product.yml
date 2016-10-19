@@ -14,7 +14,7 @@ sylius_shop_product_show:
                     - $slug
                     - 'expr:service("sylius.context.channel").getChannel()'
 
-sylius_shop_product_reviews:
+sylius_shop_product_reviews_index:
     path: /products/{slug}/reviews
     methods: [GET]
     defaults:

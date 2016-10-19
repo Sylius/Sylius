@@ -25,7 +25,7 @@ interface ProductReviewRepositoryInterface extends RepositoryInterface
      *
      * @return ReviewInterface[]
      */
-    public function findLatestByProduct($productId, $count);
+    public function findLatestByProductId($productId, $count);
 
     /**
      * @param string $slug

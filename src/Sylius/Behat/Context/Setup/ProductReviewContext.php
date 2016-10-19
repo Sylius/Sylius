@@ -66,8 +66,7 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")$/
-     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+"), created (\d+) days ago$/
+     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
      */
     public function thisProductHasAReviewTitledAndRatedAddedByCustomer(
         ProductInterface $product,
@@ -104,6 +103,7 @@ final class ProductReviewContext implements Context
      * @param int $rating
      * @param string $comment
      * @param CustomerInterface|null $customer
+     * @param string $status
      *
      * @return ReviewInterface
      */
