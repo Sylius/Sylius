@@ -10,3 +10,4 @@ sylius_addressing:
         address:
             classes:
                 model: Sylius\Component\Core\Model\Address
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\AddressRepository

@@ -31,7 +31,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function isSingleAddressOnList()
     {
-        return 1 === count($this->getElement('addresses')->findAll('css', '.title'));
+        return 1 === count($this->getElement('addresses')->findAll('css', '.item address'));
     }
 
     /**
@@ -39,7 +39,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function hasAddressFullName($fullName)
     {
-        return null !== $this->getElement('addresses')->find('css', sprintf('.title:contains("%s")', $fullName));
+        return null !== $this->getElement('addresses')->find('css', sprintf('address:contains("%s")', $fullName));
     }
 
     /**
@@ -57,7 +57,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'addresses' => '#addresses',
-            'no_addresses_message' => '#addresses > .message',
+            'no_addresses_message' => '#addresses .message',
         ]);
     }
 }
