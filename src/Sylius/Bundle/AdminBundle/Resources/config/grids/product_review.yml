@@ -29,3 +29,7 @@ sylius_grid:
                 title:
                     type: string
                     label: sylius.ui.title
+            actions:
+                item:
+                    update:
+                        type: update

@@ -10,7 +10,7 @@ Feature: Editing product reviews
         And this product has a review titled "Awesome" and rated 4 with a comment "Nice product" added by customer "ross@teammike.com"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Changing a title of a product review
         When I want to modify the "Awesome" product review
         And I change its title to "Bewildering"
@@ -18,7 +18,7 @@ Feature: Editing product reviews
         Then I should be notified that it has been successfully edited
         And this product review title should be "Bewildering"
 
-    @ui @todo
+    @ui
     Scenario: Changing a comment of a product review
         When I want to modify the "Awesome" product review
         And I change its comment to "Really nice product!"
@@ -26,7 +26,7 @@ Feature: Editing product reviews
         Then I should be notified that it has been successfully edited
         And this product review comment should be "Really nice product!"
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Changing a rating of a product review
         When I want to modify the "Awesome" product review
         And I choose 5 as its rating
@@ -34,12 +34,12 @@ Feature: Editing product reviews
         Then I should be notified that it has been successfully edited
         And this product review rating should be 5
 
-    @ui @todo
+    @ui
     Scenario: Seeing a product's name while editing a product review
         When I want to modify the "Awesome" product review
         Then I should see the product "Lamborghini Gallardo Model"
 
-    @ui @todo
+    @ui
     Scenario: Seeing a customer's name while editing a product review
         When I want to modify the "Awesome" product review
         Then I should see the customer's name "Mike Ross"

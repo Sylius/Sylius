@@ -3,13 +3,15 @@ sylius_admin_product_review:
         alias: sylius.product_review
         section: admin
         templates: SyliusAdminBundle:Crud
-        except: ['show', 'create', 'update', 'delete']
-        redirect: index
+        except: ['show', 'create', 'delete']
+        redirect: update
         grid: sylius_admin_product_review
         permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_reviews_of_your_products
+                templates:
+                    form: SyliusAdminBundle:ProductReview:_form.html.twig
             index:
                 icon: newspaper
     type: sylius.resource
