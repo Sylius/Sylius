@@ -3,4 +3,7 @@
     <a href="{{ path('sylius_shop_product_reviews_index', { 'slug': product.slug }) }}">
         <div class="ui blue labeled icon button"><i class="icon list"></i> {{ 'sylius.ui.view_more'|trans }}</div>
     </a>
+    <a href="{{ path('sylius_shop_product_reviews_create', { 'slug': product.slug }) }}">
+        <div class="ui green labeled icon button"><i class="icon plus"></i> {{ 'sylius.ui.new_review'|trans }}</div>
+    </a>
 </div>

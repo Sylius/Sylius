@@ -12,5 +12,7 @@
                 <div class="text">{{ review.comment }}</div>
             </div>
         </div>
+    {% else %}
+        {{ 'sylius.ui.there_are_no_reviews'|trans }}
     {% endfor %}
 </div>
