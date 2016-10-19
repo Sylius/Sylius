@@ -9,19 +9,18 @@
 
 {% block content %}
 <div class="ui stackable two column grid">
-    <div class="column">
+    <div class="twelve wide column">
         {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
     </div>
-    <div class="right aligned column">
+    <div class="four wide right aligned column">
         {% include '@SyliusAdmin/Order/Update/_actions.html.twig' %}
     </div>
 </div>
-<div class="ui divider"></div>
 
-{% include 'SyliusAdminBundle:Order/Breadcrumb:_update.html.twig' %}
+{% include '@SyliusAdmin/Order/Update/_breadcrumb.html.twig' %}
 
-<div class="ui segment">
-    {{ form_start(form, {'action': path('sylius_admin_order_update', {'id': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path('sylius_admin_order_update', {'id': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    <div class="ui segment">
         <input type="hidden" name="_method" value="PATCH" />
 
         <div class="ui segment">
@@ -30,7 +29,7 @@
         </div>
 
         {{ form_row(form._token) }}
-        {% include 'SyliusUiBundle:Form:_saveChanges.html.twig' with {'cancel_path': path('sylius_admin_order_index')} %}
-    {{ form_end(form, {'render_rest': false}) }}
-</div>
+        {% include '@SyliusUi/Form/Buttons/_update.html.twig' with {'paths': {'cancel': path('sylius_admin_order_index')}} %}
+    </div>
+{{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

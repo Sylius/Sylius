@@ -70,6 +70,7 @@ sylius:
         awaiting_payment: Awaiting payment
         back: Back
         back_to_store: Back to store
+        back_to_details: 'Back to details'
         backorder: Backorder
         backordered: Backordered
         balance_due: 'Balance due'
@@ -232,6 +233,7 @@ sylius:
         edit_customer: Edit customer
         edit_locale: 'Edit locale'
         edit_my_address: 'Edit my address'
+        edit_order: 'Edit order'
         edit_payment_method: Edit payment method
         edit_product: Edit product
         edit_product_attribute: Edit product attribute

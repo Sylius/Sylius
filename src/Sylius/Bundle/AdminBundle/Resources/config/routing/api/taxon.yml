@@ -6,4 +6,3 @@ sylius_admin_api_taxon_index:
         _format: json
         _sylius:
             grid: sylius_admin_taxon
-            permission: true

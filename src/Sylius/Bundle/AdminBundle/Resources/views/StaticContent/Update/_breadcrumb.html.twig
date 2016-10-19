@@ -1,0 +1,8 @@
+{% import '@SyliusAdmin/Macro/breadcrumb.html.twig' as breadcrumb %}
+
+{{ breadcrumb.crumble([
+    { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+    { label: 'sylius.ui.static_contents'|trans, url: path('sylius_admin_customer_index') },
+    { label: resource.title },
+    { label: 'sylius.ui.edit'|trans }
+]) }}

@@ -37,7 +37,7 @@ class AttributeController extends ResourceController
             ->setTemplate($template)
             ->setTemplateVar($this->metadata->getPluralName())
             ->setData([
-                'attributeTypes' => $this->get('sylius.registry.attribute_type')->all(),
+                'types' => $this->get('sylius.registry.attribute_type')->all(),
                 'metadata' => $this->metadata,
             ])
         ;

@@ -1,0 +1,52 @@
+{% import 'SyliusUiBundle:Macro:pagination.html.twig' as pagination %}
+
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+{% import 'SyliusUiBundle:Macro:table.html.twig' as table %}
+
+{% set definition = grid.definition %}
+{% set data = grid.data %}
+
+{% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
+{% if definition.filters|length > 0 %}
+    <div class="ui segment">
+        <form method="get" action="{{ path }}" class="ui loadable form">
+            <div class="two fields">
+            {% for filter in definition.filters %}
+                {{ sylius_grid_render_filter(grid, filter) }}
+
+                {% if loop.index0 % 2 %}
+                    </div>
+                    <div class="two fields">
+                {% endif %}
+            {% endfor %}
+            </div>
+            {{ buttons.filter() }}
+            {{ buttons.resetFilters(path) }}
+        </form>
+    </div>
+{% endif %}
+
+<div class="ui segment">
+    {{ pagination.render(data) }}
+    {% if data|length > 0 %}
+        <table class="ui sortable stackable celled table">
+            <thead>
+            <tr>
+                {{ table.headers(grid, definition, app.request.attributes) }}
+            </tr>
+            </thead>
+            <tbody>
+            {% for row in data %}
+                <tr>
+                    {{ table.row(grid, definition, row) }}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
+    {% endif %}
+    {{ pagination.render(data) }}
+</div>

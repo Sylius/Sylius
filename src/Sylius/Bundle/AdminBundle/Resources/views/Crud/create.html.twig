@@ -9,26 +9,6 @@
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
 {% block content %}
-<div class="ui stackable two column grid">
-    <div class="column">
-        {{ headers.default(header|trans, configuration.vars.icon|default('plus'), configuration.vars.subheader|default(null)|trans) }}
-
-        {% include configuration.vars.templates.breadcrumb|default('SyliusAdminBundle:Crud/Breadcrumb:_create.html.twig') %}
-    </div>
-    <div class="middle aligned column">
-        {% include configuration.vars.templates.toolbar|default('SyliusAdminBundle:Crud/Toolbar:_default.html.twig') ignore missing %}
-    </div>
-</div>
-
-<div class="ui segment">
-    {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-        {% if configuration.vars.templates.form is defined %}
-            {% include configuration.vars.templates.form %}
-        {% else %}
-            {{ form_widget(form) }}
-        {% endif %}
-        {% include 'SyliusUiBundle:Form:_create.html.twig' with {'cancel_path': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))} %}
-        {{ form_row(form._token) }}
-    {{ form_end(form, {'render_rest': false}) }}
-</div>
+{% include '@SyliusAdmin/Crud/Create/_header.html.twig' %}
+{% include '@SyliusAdmin/Crud/Create/_content.html.twig' %}
 {% endblock %}

@@ -20,7 +20,7 @@ sylius_grid:
                     label: sylius.ui.type
                     sortable: ~
                     options:
-                        template: SyliusAdminBundle:Grid/Field:label.html.twig
+                        template: @SyliusAdmin/Grid/Field/label.html.twig
             filters:
                 code:
                     type: string

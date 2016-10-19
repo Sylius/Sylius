@@ -1,0 +1,3 @@
+{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
+{{ flags.fromCountryCode(data.code) }} {{ data.code|sylius_country_name }}
