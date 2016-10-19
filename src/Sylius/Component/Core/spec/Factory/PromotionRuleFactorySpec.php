@@ -16,7 +16,6 @@ use Sylius\Component\Core\Factory\PromotionRuleFactory;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
@@ -70,15 +69,6 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $rule->setConfiguration(['amount' => 1000])->shouldBeCalled();
 
         $this->createItemTotal(1000)->shouldReturn($rule);
-    }
-
-    function it_creates_a_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
-    {
-        $decoratedFactory->createNew()->willReturn($rule);
-        $rule->setType(TaxonRuleChecker::TYPE)->shouldBeCalled();
-        $rule->setConfiguration(['taxons' => [1, 6]])->shouldBeCalled();
-
-        $this->createTaxon([1, 6])->shouldReturn($rule);
     }
 
     function it_creates_a_total_of_items_from_taxon_rule(
