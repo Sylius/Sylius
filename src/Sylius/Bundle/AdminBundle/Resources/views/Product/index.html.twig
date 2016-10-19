@@ -1,0 +1,23 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
+{% set definition = resources.definition %}
+{% set data = resources.data %}
+
+{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
+
+{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
+
+{% block content %}
+    {% include '@SyliusAdmin/Crud/Index/_header.html.twig' %}
+
+    <div class="ui two column stackable grid">
+        <div class="three wide column">
+            {{ render(path('sylius_admin_partial_taxon_tree_without_buttons')) }}
+        </div>
+        <div class="thirteen wide column">
+            {% include '@SyliusAdmin/Crud/Index/_content.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

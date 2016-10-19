@@ -3,7 +3,7 @@ sylius_admin_product:
         alias: sylius.product
         section: admin
         templates: SyliusAdminBundle:Crud
-        except: ['show']
+        except: ['show', 'index']
         redirect: update
         grid: sylius_admin_product
         permission: true
@@ -15,6 +15,36 @@ sylius_admin_product:
             index:
                 icon: cube
     type: sylius.resource
+
+sylius_admin_product_index:
+    path: /products/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            section: admin
+            grid: sylius_admin_product
+            template: SyliusAdminBundle:Product:index.html.twig
+            permission: true
+            vars:
+                subheader: sylius.ui.manage_your_product_catalog
+                index:
+                    icon: cube
+
+sylius_admin_product_index_per_taxon:
+    path: /products/taxon/{taxonId}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            section: admin
+            grid: sylius_admin_product
+            template: SyliusAdminBundle:Product:index.html.twig
+            permission: true
+            vars:
+                subheader: sylius.ui.manage_your_product_catalog
+                index:
+                    icon: cube
 
 sylius_admin_product_create:
     path: /products/new

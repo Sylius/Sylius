@@ -1,7 +1,0 @@
-{% import '@SyliusAdmin/Taxon/Macro/tree.html.twig' as tree %}
-{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
-
-{{ buttons.create(path('sylius_admin_taxon_create')) }}
-<div class="ui segment">
-    {{ tree.render(taxons) }}
-</div>

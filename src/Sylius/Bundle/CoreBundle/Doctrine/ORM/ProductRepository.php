@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 
 /**
@@ -25,14 +26,26 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createListQueryBuilder($locale)
+    public function createQueryBuilderWithLocaleCodeAndTaxonId($localeCode, $taxonId = null)
     {
-        return $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->andWhere('translation.locale = :locale')
-            ->setParameter('locale', $locale)
+            ->andWhere('translation.locale = :localeCode')
+            ->setParameter('localeCode', $localeCode)
         ;
+
+        if (null !== $taxonId) {
+            $queryBuilder
+                ->innerJoin('o.taxons', 'taxon')
+                ->andWhere('taxon.id = :taxonId')
+                ->setParameter('taxonId', $taxonId)
+            ;
+        }
+
+        return $queryBuilder;
     }
 
     /**
