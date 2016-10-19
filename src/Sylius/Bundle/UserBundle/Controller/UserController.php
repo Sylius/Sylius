@@ -108,7 +108,8 @@ class UserController extends ResourceController
             throw new NotFoundHttpException('Token not found.');
         }
 
-        $lifetime = new \DateInterval($this->container->getParameter('sylius.user.resetting.token_ttl'));
+        $resetting = $this->metadata->getParameter('resetting');
+        $lifetime = new \DateInterval($resetting['token']['ttl']);
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
             return $this->handleExpiredToken($configuration, $token, $user);
         }
