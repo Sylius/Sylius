@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -40,7 +41,7 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        if (!is_array($value) && !is_null($value)) {
+        if (!is_array($value)) {
             throw new UnexpectedTypeException($value, 'array');
         }
 
@@ -48,28 +49,35 @@ final class TaxonsToCodesTransformer implements DataTransformerInterface
             return new ArrayCollection();
         }
 
-        return new ArrayCollection($this->taxonRepository->findBy(['code' => $value]));
+        return new ArrayCollection($this->taxonRepository->findBy(['code' => $value['taxons']]));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($taxons)
+    public function reverseTransform($value)
     {
-        if (!($taxons instanceof Collection)) {
-            throw new UnexpectedTypeException($taxons, Collection::class);
+        if (!$value instanceof Collection) {
+            throw new UnexpectedTypeException($value, Collection::class);
         }
+
+        $taxons = $value->get('taxons');
 
         if (null === $taxons) {
             return [];
         }
 
-        $taxonsCodes = $taxons->map(
-            function ($taxon) {
-                return $taxon->getCode();
-            }
-        )->toArray();
+        if (!(is_array($taxons) || $taxons instanceof \Traversable)) {
+            throw new \InvalidArgumentException('"taxons" element of collection should be Traversable');
+        }
 
-        return $taxonsCodes;
+        $taxonCodes = [];
+
+        /** @var TaxonInterface $taxon */
+        foreach ($taxons as $taxon) {
+            $taxonCodes[] = $taxon->getCode();
+        }
+
+        return ['taxons' => $taxonCodes];
     }
 }
