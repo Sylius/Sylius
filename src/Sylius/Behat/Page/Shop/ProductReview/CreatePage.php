@@ -31,7 +31,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function titleReview($title)
     {
-        // TODO: Implement titleReview() method.
+        $this->getDocument()->fillField('Title', $title);
     }
 
     /**
@@ -39,7 +39,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function setComment($comment)
     {
-        // TODO: Implement setComment() method.
+        $this->getDocument()->fillField('sylius_product_review_comment', $comment);
     }
 
     /**
@@ -47,12 +47,12 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function rateReview($rate)
     {
-        // TODO: Implement rateReview() method.
+        $this->getElement('rate', ['%rate%' => $rate])->click();
     }
 
     public function submitReview()
     {
-        // TODO: Implement submitReview() method.
+        $this->getDocument()->pressButton('Add');
     }
 
     /**
@@ -60,6 +60,8 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     protected function getDefinedElements()
     {
-        return array_merge(parent::getDefinedElements(), []);
+        return array_merge(parent::getDefinedElements(), [
+            'rate' => '.star.rating .icon:nth-child(%rate%)',
+        ]);
     }
 }
