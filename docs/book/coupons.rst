@@ -30,7 +30,7 @@ Let's create a promotion that will have a single coupon that activates the free 
 
 Remember to set a **channel** for your promotion and to make it **couponBased**!
 
-..code-block:: php
+.. code-block:: php
 
    $promotion->addChannel($this->container->get('sylius.repository.channel')->findOneBy(['code' => 'US_Web_Store']));
 
