@@ -15,13 +15,13 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
-use Sylius\Behat\Page\Admin\Order\UpdateShippingAddressPageInterface;
+use Sylius\Behat\Page\Admin\Order\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -46,9 +46,9 @@ final class ManagingOrdersContext implements Context
     private $showPage;
 
     /**
-     * @var UpdateShippingAddressPageInterface
+     * @var UpdatePageInterface
      */
-    private $updateShippingAddressPage;
+    private $updatePage;
 
     /**
      * @var NotificationCheckerInterface
@@ -64,7 +64,7 @@ final class ManagingOrdersContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param ShowPageInterface $showPage
-     * @param UpdateShippingAddressPageInterface $updateShippingAddressPage
+     * @param UpdatePageInterface $updateShippingAddressPage
      * @param NotificationCheckerInterface $notificationChecker
      * @param SharedSecurityServiceInterface $sharedSecurityService
      */
@@ -72,14 +72,14 @@ final class ManagingOrdersContext implements Context
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
         ShowPageInterface $showPage,
-        UpdateShippingAddressPageInterface $updateShippingAddressPage,
+        UpdatePageInterface $updateShippingAddressPage,
         NotificationCheckerInterface $notificationChecker,
         SharedSecurityServiceInterface $sharedSecurityService
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
         $this->showPage = $showPage;
-        $this->updateShippingAddressPage = $updateShippingAddressPage;
+        $this->updatePage = $updateShippingAddressPage;
         $this->notificationChecker = $notificationChecker;
         $this->sharedSecurityService = $sharedSecurityService;
     }
@@ -680,7 +680,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iWantToModifyACustomerSShippingAddress(OrderInterface $order)
     {
-        $this->updateShippingAddressPage->open(['id' => $order->getId()]);
+        $this->updatePage->open(['id' => $order->getId()]);
     }
 
     /**
@@ -689,7 +689,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyTheFirstNameAs($firstName = null)
     {
-        $this->updateShippingAddressPage->specifyFirstName($firstName);
+        $this->updatePage->specifyFirstName($firstName);
     }
 
     /**
@@ -698,7 +698,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyTheLastNameAs($lastName = null)
     {
-        $this->updateShippingAddressPage->specifyLastName($lastName);
+        $this->updatePage->specifyLastName($lastName);
     }
 
     /**
@@ -707,7 +707,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyTheStreetAs($street = null)
     {
-        $this->updateShippingAddressPage->specifyStreet($street);
+        $this->updatePage->specifyStreet($street);
     }
 
     /**
@@ -716,7 +716,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyTheCityAs($city = null)
     {
-        $this->updateShippingAddressPage->specifyCity($city);
+        $this->updatePage->specifyCity($city);
     }
 
     /**
@@ -724,7 +724,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyThePostcodeAs($postcode)
     {
-        $this->updateShippingAddressPage->specifyPostcode($postcode);
+        $this->updatePage->specifyPostcode($postcode);
     }
 
     /**
@@ -732,7 +732,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iChooseCountryAs($country)
     {
-        $this->updateShippingAddressPage->chooseCountry($country);
+        $this->updatePage->chooseCountry($country);
     }
 
     /**
@@ -741,7 +741,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSaveMyChanges()
     {
-        $this->updateShippingAddressPage->saveChanges();
+        $this->updatePage->saveChanges();
     }
 
     /**
@@ -749,7 +749,7 @@ final class ManagingOrdersContext implements Context
      */
     public function iSpecifyTheirShippingAddressAsFor($city, $street, $postcode, $country, $firstAndLastName)
     {
-        $this->updateShippingAddressPage->specifyShippingAddress($city, $street, $postcode, $country, $firstAndLastName);
+        $this->updatePage->specifyShippingAddress($city, $street, $postcode, $country, $firstAndLastName);
     }
 
     /**
@@ -758,7 +758,7 @@ final class ManagingOrdersContext implements Context
     public function iShouldBeNotifiedThatIsRequired($element)
     {
         Assert::same(
-            $this->updateShippingAddressPage->getValidationMessage($this->getNormalizedElementName($element)),
+            $this->updatePage->getValidationMessage($this->getNormalizedElementName($element)),
             sprintf('Please enter %s.', $element)
         );
     }

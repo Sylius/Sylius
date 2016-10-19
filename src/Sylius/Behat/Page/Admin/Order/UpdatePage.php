@@ -11,21 +11,13 @@
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use Sylius\Behat\Page\Admin\Crud\UpdatePage;
+use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class UpdateShippingAddressPage extends UpdatePage implements UpdateShippingAddressPageInterface
+class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getRouteName()
-    {
-        return sprintf('sylius_admin_%s_shipping_address_update', $this->getResourceName());
-    }
-
     /**
      * {@inheritdoc}
      */

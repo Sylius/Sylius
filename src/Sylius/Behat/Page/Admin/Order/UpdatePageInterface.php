@@ -11,12 +11,12 @@
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface UpdateShippingAddressPageInterface extends UpdatePageInterface
+interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     /**
      * @param string $firstName
