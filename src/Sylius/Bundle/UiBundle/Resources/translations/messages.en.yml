@@ -739,6 +739,7 @@ sylius:
         there_are_no_promotions_configured: 'There are no promotions configured'
         there_are_no_redirect_routes_to_display: 'There are no redirect routes to display'
         there_are_no_reports_created: 'There are no reports created'
+        there_are_no_reviews: 'There are no reviews'
         there_are_no_roles_defined: 'There are no roles defined'
         there_are_no_routes_to_display: 'There are no routes to display'
         there_are_no_shipments_to_display: 'There are no shipments to display'

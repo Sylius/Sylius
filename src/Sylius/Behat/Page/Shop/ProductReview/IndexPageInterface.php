@@ -29,4 +29,9 @@ interface IndexPageInterface extends PageInterface
      * @return bool
      */
     public function hasReviewTitled($title);
+
+    /**
+     * @return bool
+     */
+    public function hasNoReviewMessage();
 }

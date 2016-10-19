@@ -45,6 +45,14 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasNoReviewMessage()
+    {
+        return 'There are no reviews' === $this->getElement('reviews')->find('css', '.comments')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [

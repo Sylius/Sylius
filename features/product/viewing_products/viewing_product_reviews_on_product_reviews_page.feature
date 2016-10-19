@@ -23,3 +23,9 @@ Feature: Viewing product reviews on product's reviews page
         When I check this product's reviews
         Then I should see 3 product reviews in the list
         But I should not see review titled "Classic" in the list
+
+    @ui
+    Scenario: Viewing no review message if there are no reviews
+        Given the store has a product "Lux perpetua"
+        When I check this product's reviews
+        Then I should be notified that there are no reviews

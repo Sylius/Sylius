@@ -388,4 +388,15 @@ final class ProductContext implements Context
             sprintf('Product should not have review titled "%s" but it does.', $title)
         );
     }
+
+    /**
+     * @Then /^I should be notified that there are no reviews$/
+     */
+    public function iShouldBeNotifiedThatThereAreNoReviews()
+    {
+        Assert::true(
+            $this->productReviewsIndexPage->hasNoReviewMessage(),
+            'There should be message about no reviews but there is not.'
+        );
+    }
 }

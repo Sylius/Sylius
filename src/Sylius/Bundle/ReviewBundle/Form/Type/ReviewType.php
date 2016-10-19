@@ -50,6 +50,7 @@ class ReviewType extends AbstractResourceType
                 'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
+                'data' => 5,
             ])
             ->add('title', 'text', [
                 'label' => 'sylius.form.review.title',
