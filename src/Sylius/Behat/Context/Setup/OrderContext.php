@@ -416,6 +416,7 @@ final class OrderContext implements Context
 
         for ($i = 0; $i < $numberOfOrders; $i++) {
             $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#'.uniqid());
+            $order->setState(OrderInterface::STATE_NEW); // Temporary, we should use checkout to place these orders.
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
             $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
