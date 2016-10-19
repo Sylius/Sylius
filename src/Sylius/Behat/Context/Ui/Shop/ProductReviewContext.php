@@ -54,15 +54,20 @@ final class ProductReviewContext implements Context
 
     /**
      * @When I leave a comment :comment, titled :title
+     * @When I leave a comment :comment, titled :title as :author
      */
-    public function iLeaveACommentTitled($comment, $title)
+    public function iLeaveACommentTitled($comment, $title, $author = null)
     {
         $this->createPage->titleReview($title);
         $this->createPage->setComment($comment);
+
+        if (null !== $author) {
+            $this->createPage->setAuthor($author);
+        }
     }
 
     /**
-     * @Given I rate it with :rate points
+     * @Given I rate it with :rate point(s)
      */
     public function iRateItWithPoints($rate)
     {

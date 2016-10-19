@@ -29,6 +29,11 @@ interface CreatePageInterface extends PageInterface
     public function setComment($comment);
 
     /**
+     * @param string $author
+     */
+    public function setAuthor($author);
+
+    /**
      * @param int $rate
      */
     public function rateReview($rate);

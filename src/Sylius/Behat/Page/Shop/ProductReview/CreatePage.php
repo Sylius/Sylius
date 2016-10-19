@@ -45,6 +45,14 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function setAuthor($author)
+    {
+        $this->getDocument()->fillField('Author', $author);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rateReview($rate)
     {
         $this->getElement('rate', ['%rate%' => $rate])->click();
