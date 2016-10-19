@@ -1,4 +1,4 @@
-{{ form_start(form, {'action': path('sylius_shop_payment_method_update', {'paymentId': payment.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path('sylius_shop_partial_payment_change_method', {'id': payment.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
 <input type="hidden" name="_method" value="PUT" />
 
 <div class="ui segment">

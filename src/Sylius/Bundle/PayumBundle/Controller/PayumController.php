@@ -79,16 +79,17 @@ final class PayumController
 
     /**
      * @param Request $request
-     * @param $lastNewPaymentId
+     * @param mixed $paymentId
      *
      * @return Response
      */
-    public function prepareCaptureAction(Request $request, $lastNewPaymentId)
+    public function prepareCaptureAction(Request $request, $paymentId)
     {
         $configuration = $this->requestConfigurationFactory->create($this->paymentMetadata, $request);
 
-        $payment = $this->paymentRepository->find($lastNewPaymentId);
+        $payment = $this->paymentRepository->find($paymentId);
         Assert::notNull($payment);
+
         $request->getSession()->set('sylius_order_id', $payment->getOrder()->getId());
 
         $captureToken = $this->getTokenFactory()->createCaptureToken(

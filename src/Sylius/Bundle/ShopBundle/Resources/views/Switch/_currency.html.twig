@@ -1,0 +1,15 @@
+{% if currencies|length >= 2 %}
+    <div class="ui pointing dropdown link item" id="sylius-currency-selector">
+        <span class="text sylius-active-currency">{{ active }}</span>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+            {% for code in currencies %}
+                {% if code is not same as(active) %}
+                    <a href="{{ path('sylius_shop_switch_currency', {'code': code}) }}" class="item sylius-available-currency">
+                        {{ code }}
+                    </a>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}

@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class CurrencyController
+final class CurrencySwitchController
 {
     /**
      * @var EngineInterface
@@ -66,11 +66,11 @@ final class CurrencyController
     /**
      * @return Response
      */
-    public function renderSelectorAction()
+    public function renderAction()
     {
-        return $this->templatingEngine->renderResponse('SyliusShopBundle:Currency:selector.html.twig', [
-            'activeCurrencyCode' => $this->currencyContext->getCurrencyCode(),
-            'availableCurrenciesCodes' => $this->currencyProvider->getAvailableCurrenciesCodes(),
+        return $this->templatingEngine->renderResponse('@SyliusShop/Switch/_currency.html.twig', [
+            'active' => $this->currencyContext->getCurrencyCode(),
+            'currencies' => $this->currencyProvider->getAvailableCurrenciesCodes(),
         ]);
     }
 

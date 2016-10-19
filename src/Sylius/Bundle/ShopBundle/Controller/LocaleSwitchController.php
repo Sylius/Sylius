@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class LocaleController
+final class LocaleSwitchController
 {
     /**
      * @var EngineInterface
@@ -67,11 +67,11 @@ final class LocaleController
     /**
      * @return Response
      */
-    public function renderSelectorAction()
+    public function renderAction()
     {
-        return $this->templatingEngine->renderResponse('SyliusShopBundle:Locale:selector.html.twig', [
-            'activeLocaleCode' => $this->localeContext->getLocaleCode(),
-            'availableLocalesCodes' => $this->localeProvider->getAvailableLocalesCodes(),
+        return $this->templatingEngine->renderResponse('@SyliusShop/Switch/_locale.html.twig', [
+            'active' => $this->localeContext->getLocaleCode(),
+            'locales' => $this->localeProvider->getAvailableLocalesCodes(),
         ]);
     }
 

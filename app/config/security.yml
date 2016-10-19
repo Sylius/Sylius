@@ -77,5 +77,3 @@ security:
         - { path: "^/admin.*", role: ROLE_ADMINISTRATION_ACCESS }
 
         - { path: ^/api, role: ROLE_API_ACCESS }
-
-        - { path: "/_partial.*", ip: 127.0.0.1 }

@@ -20,8 +20,8 @@
 <body class="pushable">
 <div class="pusher">
     <div id="menu" class="ui large sticky inverted stackable menu">
-        {{ render(controller('sylius.controller.shop.currency:renderSelectorAction')) }}
-        {{ render(controller('sylius.controller.shop.locale:renderSelectorAction')) }}
+        {{ render(controller('sylius.controller.shop.currency_switch:renderAction')) }}
+        {{ render(controller('sylius.controller.shop.locale_switch:renderAction')) }}
         {% include '@SyliusShop/Homepage/Menu/_security.html.twig' %}
     </div>
 

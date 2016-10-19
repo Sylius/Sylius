@@ -1,3 +1,4 @@
+{% import '@SyliusUi/Macro/labels.html.twig' as labels %}
 {% import '@SyliusUi/Macro/flags.html.twig' as flags %}
 
 <h1 class="ui header">
@@ -10,7 +11,7 @@
                     {{ order.completedAt|format_date }}
                 </div>
                 <div class="item">
-                    {{ label.default(('sylius.ui.'~order.state)|trans) }}
+                    {{ labels.default(('sylius.ui.'~order.state)|trans) }}
                 </div>
                 <div class="item">
                     {{ order.currencyCode }}

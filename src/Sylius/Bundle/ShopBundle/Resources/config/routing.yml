@@ -15,9 +15,6 @@ sylius_shop_taxon:
 sylius_shop_product:
     resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
 
-sylius_shop_provinces:
-    resource: "@SyliusShopBundle/Resources/config/routing/provinces.yml"
-
 sylius_shop_cart:
     resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"
     prefix: /cart
@@ -37,19 +34,15 @@ sylius_shop_account:
 sylius_shop_payum:
     resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
 
-sylius_shop_payment:
-    resource: "@SyliusShopBundle/Resources/config/routing/payment.yml"
-    prefix: /payment
-
 sylius_shop_switch_currency:
     path: /switch-currency/{code}
     defaults:
-        _controller: sylius.controller.shop.currency:switchAction
+        _controller: sylius.controller.shop.currency_switch:switchAction
 
 sylius_shop_switch_locale:
     path: /switch-locale/{code}
     defaults:
-        _controller: sylius.controller.shop.locale:switchAction
+        _controller: sylius.controller.shop.locale_switch:switchAction
 
 sylius_shop_partial:
     resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
@@ -67,6 +60,9 @@ sylius_sitemap:
         _format: xml
     requirements:
         _format: xml
+
+sylius_shop_provinces:
+    resource: "@SyliusShopBundle/Resources/config/routing/provinces.yml"
 
 # Have to be the last one!
 sylius_shop_static_content:
