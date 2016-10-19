@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\Shop\Account\AddressBook\CreatePageInterface as AddressBookCreatePageInterface;
 use Sylius\Behat\Page\Shop\Account\AddressBook\IndexPageInterface as AddressBookIndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
@@ -22,6 +23,7 @@ use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
@@ -61,6 +63,11 @@ final class AccountContext implements Context
     private $addressBookIndexPage;
 
     /**
+     * @var AddressBookCreatePageInterface
+     */
+    private $addressBookCreatePage;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -72,6 +79,7 @@ final class AccountContext implements Context
      * @param IndexPageInterface $orderIndexPage
      * @param ShowPageInterface $orderShowPage
      * @param AddressBookIndexPageInterface $addressBookIndexPage
+     * @param AddressBookCreatePageInterface $addressBookCreatePage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -81,6 +89,7 @@ final class AccountContext implements Context
         IndexPageInterface $orderIndexPage,
         ShowPageInterface $orderShowPage,
         AddressBookIndexPageInterface $addressBookIndexPage,
+        AddressBookCreatePageInterface $addressBookCreatePage,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->dashboardPage = $dashboardPage;
@@ -89,6 +98,7 @@ final class AccountContext implements Context
         $this->orderIndexPage = $orderIndexPage;
         $this->orderShowPage = $orderShowPage;
         $this->addressBookIndexPage = $addressBookIndexPage;
+        $this->addressBookCreatePage = $addressBookCreatePage;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -177,7 +187,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, StringInflector::nameToCode($element), sprintf('Please enter your %s.', $element));
+        $this->assertFieldValidationMessage(
+            $this->profileUpdatePage,
+            StringInflector::nameToCode($element),
+            sprintf('Please enter your %s.', $element)
+        );
     }
 
     /**
@@ -185,7 +199,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsInvalid($element)
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, StringInflector::nameToCode($element), sprintf('This %s is invalid.', $element));
+        $this->assertFieldValidationMessage(
+            $this->profileUpdatePage,
+            StringInflector::nameToCode($element),
+            sprintf('This %s is invalid.', $element)
+        );
     }
 
     /**
@@ -251,7 +269,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'current_password', 'Provided password is different than the current one.');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'current_password',
+            'Provided password is different than the current one.'
+        );
     }
 
     /**
@@ -259,7 +281,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'new_password', 'The entered passwords don\'t match');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'new_password',
+            'The entered passwords don\'t match'
+        );
     }
 
     /**
@@ -267,7 +293,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'new_password', 'Password must be at least 4 characters long.');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'new_password',
+            'Password must be at least 4 characters long.'
+        );
     }
 
     /**
@@ -469,14 +499,15 @@ final class AccountContext implements Context
      */
     public function iShouldSeeASingleAddressInTheList()
     {
-       Assert::true(
-           $this->addressBookIndexPage->isSingleAddressOnList(),
-           'There should be one address on the list, but it does not.'
-       );
+        Assert::true(
+            $this->addressBookIndexPage->isSingleAddressOnList(),
+            'There should be one address on the list, but it does not.'
+        );
     }
 
     /**
      * @Then this address should be assigned to :fullName
+     * @Then the address assigned to :fullName should appear on the list
      */
     public function thisAddressShouldHavePersonFirstNameAndLastName($fullName)
     {
@@ -498,14 +529,35 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then I should not see an address assigned to :fullName
+     * @Given I want to add a new address to my address book
      */
-    public function iShouldNotSeeAnAddressAssignedTo($fullName)
+    public function iWantToAddANewAddressToMyAddressBook()
     {
-        Assert::false(
-            $this->addressBookIndexPage->hasAddressFullName($fullName),
-            sprintf('The full name in address should not be %s, but it does.', $fullName)
-        );
+        $this->addressBookCreatePage->open();
+    }
+
+    /**
+     * @When /^I specify its (data as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     */
+    public function iSpecifyItsDataAs(AddressInterface $address)
+    {
+        $this->addressBookCreatePage->fillAddressData($address);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully added
+     */
+    public function iShouldBeNotifiedThatAdddressHasBeenSuccessfullyAdded()
+    {
+        $this->notificationChecker->checkNotification('has been successfully added.', NotificationType::success());
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt()
+    {
+        $this->addressBookCreatePage->saveAddress();
     }
 
     /**
