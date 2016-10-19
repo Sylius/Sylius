@@ -20,9 +20,12 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class ContainsProductRuleChecker implements RuleCheckerInterface
 {
+    const TYPE = 'contains_product';
+
     /**
      * {@inheritdoc}
      */
@@ -34,14 +37,12 @@ class ContainsProductRuleChecker implements RuleCheckerInterface
 
         /* @var $item OrderItemInterface */
         foreach ($subject->getItems() as $item) {
-            if ($configuration['variant'] != $item->getVariant()->getId()) {
-                continue;
+            if ($configuration['product_code'] === $item->getProduct()->getCode()) {
+                return true;
             }
-
-            return $this->isItemEligible($item, $configuration);
         }
 
-        return (bool) $configuration['exclude'];
+        return false;
     }
 
     /**
@@ -50,35 +51,5 @@ class ContainsProductRuleChecker implements RuleCheckerInterface
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_rule_contains_product_configuration';
-    }
-
-    /**
-     * @param OrderItemInterface $item
-     * @param array $configuration
-     *
-     * @return bool
-     */
-    private function isItemEligible(OrderItemInterface $item, array $configuration)
-    {
-        if (!$configuration['exclude']) {
-            if (isset($configuration['count'])) {
-                return $this->isItemQuantityEligible($item->getQuantity(), $configuration);
-            }
-
-            return true;
-        }
-
-        return false;
-    }
-
-    /**
-     * @param int $quantity
-     * @param array $configuration
-     *
-     * @return bool
-     */
-    private function isItemQuantityEligible($quantity, array $configuration)
-    {
-        return $quantity >= $configuration['count'];
     }
 }

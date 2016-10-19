@@ -36,6 +36,9 @@
             <argument type="service" id="sylius.repository.taxon" />
             <tag name="sylius.promotion_rule_checker" type="total_of_items_from_taxon" label="Total price of items from taxon" />
         </service>
+        <service id="sylius.promotion_rule_checker.contains_product" class="Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker">
+            <tag name="sylius.promotion_rule_checker" type="contains_product" label="Contains product" />
+        </service>
 
         <service id="sylius.promotion_action.fixed_discount" class="Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand">
             <argument type="service" id="sylius.proportional_integer_distributor" />

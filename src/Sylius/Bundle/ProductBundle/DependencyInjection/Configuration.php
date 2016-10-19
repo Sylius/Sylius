@@ -99,6 +99,7 @@ final class Configuration implements ConfigurationInterface
                                                 ->scalarNode('default')->defaultValue(ProductType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('variant_generation')->defaultValue(ProductVariantGenerationType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('from_identifier')->defaultValue(ResourceFromIdentifierType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

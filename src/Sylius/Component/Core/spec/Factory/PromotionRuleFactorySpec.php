@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Factory\PromotionRuleFactory;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
+use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker;
@@ -108,5 +109,14 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $rule->setConfiguration(['nth' => 10])->shouldBeCalled();
 
         $this->createNthOrder(10)->shouldReturn($rule);
+    }
+
+    function it_creates_a_contains_product_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
+    {
+        $decoratedFactory->createNew()->willReturn($rule);
+        $rule->setType(ContainsProductRuleChecker::TYPE)->shouldBeCalled();
+        $rule->setConfiguration(['product_code' => 1])->shouldBeCalled();
+
+        $this->createContainsProduct(1)->shouldReturn($rule);
     }
 }

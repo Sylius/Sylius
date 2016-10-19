@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Factory;
 
+use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker;
@@ -120,6 +121,19 @@ class PromotionRuleFactory implements PromotionRuleFactoryInterface
         $rule = $this->createNew();
         $rule->setType(NthOrderRuleChecker::TYPE);
         $rule->setConfiguration(['nth' => $nth]);
+
+        return $rule;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createContainsProduct($productCode)
+    {
+        /** @var PromotionRuleInterface $rule */
+        $rule = $this->createNew();
+        $rule->setType(ContainsProductRuleChecker::TYPE);
+        $rule->setConfiguration(['product_code' => $productCode]);
 
         return $rule;
     }

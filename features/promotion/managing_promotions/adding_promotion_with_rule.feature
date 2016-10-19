@@ -38,3 +38,14 @@ Feature: Adding a new promotion with rule
         And I add it
         Then I should be notified that it has been successfully created
         And the "100 Mugs promotion" promotion should appear in the registry
+
+    @ui @javascript
+    Scenario: Adding a new promotion with contains product rule
+        Given the store has a product "PHP T-Shirt" priced at "$100.00"
+        And I want to create a new promotion
+        When I specify its code as "PHP_TSHIRT_PROMOTION"
+        And I name it "PHP T-Shirt promotion"
+        And I add the "Contains product" rule configured with the "PHP T-Shirt" product
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the "PHP T-Shirt promotion" promotion should appear in the registry

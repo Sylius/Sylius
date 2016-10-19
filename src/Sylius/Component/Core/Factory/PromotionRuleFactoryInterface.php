@@ -62,4 +62,11 @@ interface PromotionRuleFactoryInterface extends FactoryInterface
      * @return PromotionRuleInterface
      */
     public function createNthOrder($nth);
+
+    /**
+     * @param string $productCode
+     *
+     * @return PromotionRuleInterface
+     */
+    public function createContainsProduct($productCode);
 }

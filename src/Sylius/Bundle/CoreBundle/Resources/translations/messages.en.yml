@@ -15,9 +15,7 @@ sylius:
             channels: Channels
         promotion_action:
             add_product_configuration:
-                price: Unit price
-                quantity: Quantity
-                variant: Variant
+                product: Product
             customer_group:
                 Customer group
         promotion_coupon:

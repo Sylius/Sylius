@@ -17,6 +17,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Factory\PromotionActionFactoryInterface;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -537,6 +538,16 @@ final class PromotionContext implements Context
         $coupon->setUsed($coupon->getUsageLimit());
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off if order contains (?:a|an) ("[^"]+" product)$/
+     */
+    public function thePromotionGivesOffIfOrderContainsProducts(PromotionInterface $promotion, $discount, ProductInterface $product)
+    {
+        $rule = $this->ruleFactory->createContainsProduct($product->getCode());
+
+        $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
 
     /**
