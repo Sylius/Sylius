@@ -42,10 +42,11 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         $queryBuilder = $this->createQueryBuilder('o');
 
         $queryBuilder
-            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
             ->innerJoin('o.customer', 'customer')
             ->andWhere('customer = :customer')
+            ->andWhere('o.state != :state')
             ->setParameter('customer', $customer)
+            ->setParameter('state', OrderInterface::STATE_CART)
         ;
 
         return $queryBuilder;
@@ -89,13 +90,13 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->select('count(o.id)')
-            ->leftJoin('o.items', 'item')
             ->innerJoin('o.promotionCoupon', 'coupon')
             ->andWhere('o.customer = :customer')
-            ->andWhere('o.completedAt IS NOT NULL')
             ->andWhere('coupon = :coupon')
+            ->andWhere('o.state != :state')
             ->setParameter('customer', $customer)
             ->setParameter('coupon', $coupon)
+            ->setParameter('state', OrderInterface::STATE_CART)
         ;
 
         $count = (int) $queryBuilder

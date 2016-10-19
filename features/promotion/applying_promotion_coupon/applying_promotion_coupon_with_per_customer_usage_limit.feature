@@ -7,11 +7,12 @@ Feature: Applying promotion coupon with per customer usage limit
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$100.00"
+        And the store has a product "PHP Socks" priced at "$30.00"
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
-        And this coupon can be used once per customer
+        And this coupon can be used twice per customer
         And this promotion gives "$10.00" discount to every order
         And the store ships everywhere for free
-        And the store allows paying offline
+        And the store allows paying "Cash on Delivery"
         And I am a logged in customer
 
     @ui
@@ -22,12 +23,24 @@ Feature: Applying promotion coupon with per customer usage limit
         And my discount should be "-$10.00"
 
     @ui
-    Scenario: Receiving no discount from valid coupon that has reached its per customer usage limit
-        Given I add product "PHP T-Shirt" to the cart
+    Scenario: Receiving discount from valid coupon with a per customer usage limit as a logged in customer
+        Given I placed an order "#00000022"
+        And I bought a "PHP T-Shirt" and a "PHP Socks"
+        And I used "SANTA2016" coupon
+        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
+        When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed with "Free" shipping method and "Offline" payment
-        And I confirm my order
+        Then my cart total should be "$90.00"
+        And my discount should be "-$10.00"
+
+    @ui
+    Scenario: Receiving no discount from valid coupon that has reached its per customer usage limit
+        Given I placed an order "#00000022"
+        And I bought a single "PHP T-Shirt" using "SANTA2016" coupon
+        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
+        And I placed an order "#00000023"
+        And I bought a single "PHP Socks" using "SANTA2016" coupon
+        And I chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         When I add product "PHP T-Shirt" to the cart
         And I use coupon with code "SANTA2016"
         Then I should be notified that the coupon is invalid

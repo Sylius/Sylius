@@ -10,8 +10,10 @@ default:
                 - sylius.behat.context.transform.addressing
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
                 - sylius.behat.context.transform.taxon
                 - sylius.behat.context.transform.user
 

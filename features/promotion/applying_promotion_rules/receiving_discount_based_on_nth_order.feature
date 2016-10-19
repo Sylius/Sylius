@@ -8,21 +8,21 @@ Feature: Receiving discount based on nth order
         Given the store operates on a single channel in "United States"
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And the store ships everywhere for free
-        And the store allows paying offline
+        And the store allows paying "Cash on Delivery"
         And there is a promotion "5th order promotion"
         And it gives "$20.00" off customer's 5th order
         And I am a logged in customer
 
     @ui
     Scenario: Receiving a discount on an order if it's nth order placed
-        Given I have already placed an order 4 times
+        Given I have already placed 4 orders choosing "Free" shipping method to "United States" with "Cash on Delivery" payment
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$80.00"
         And my discount should be "-$20.00"
 
     @ui
     Scenario: Receiving no discount on an order if it's not nth order placed
-        Given I have already placed an order 3 times
+        Given I have already placed 3 orders choosing "Free" shipping method to "United States" with "Cash on Delivery" payment
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$100.00"
         And there should be no discount
