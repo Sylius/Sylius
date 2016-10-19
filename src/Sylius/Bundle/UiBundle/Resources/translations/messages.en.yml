@@ -243,6 +243,7 @@ sylius:
         edit_product_association_type: Edit product association type
         edit_product_attribute: Edit product attribute
         edit_product_option: Edit product option
+        edit_product_review: Edit product review
         edit_product_variant: Edit product variant
         edit_promotion: Edit promotion
         edit_promotion_coupon: Edit promotion coupon
