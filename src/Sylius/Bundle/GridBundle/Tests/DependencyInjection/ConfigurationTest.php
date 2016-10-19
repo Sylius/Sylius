@@ -25,12 +25,12 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_requires_only_grid_name_and_uses_doctrine_orm_as_default_driver()
+    public function it_requires_only_grid_name()
     {
         $this->assertProcessedConfigurationEquals(
             [[
                 'grids' => [
-                    'sylius_admin_tax_category' => null
+                    'sylius_admin_tax_category' => null,
                 ],
             ]],
             [
@@ -44,10 +44,39 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         'fields' => [],
                         'filters' => [],
                         'actions' => [],
-                    ]
+                    ],
                 ],
-                'drivers' => [ 'doctrine/orm' ]
-            ]
+            ],
+            'grids'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_uses_doctrine_orm_as_default_driver()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            ['drivers' => ['doctrine/orm']],
+            'drivers'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_empty_action_and_filter_templates_by_default()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[]],
+            [
+                'templates' => [
+                    'action' => [],
+                    'filter' => [],
+                ],
+            ],
+            'templates'
         );
     }
 
@@ -56,17 +85,15 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function its_driver_cannot_be_empty()
     {
-        $this->assertConfigurationIsInvalid(
-            [[
-                'grids' => [
-                    'sylius_admin_tax_category' => [
-                        'driver' => [
-                            'name' => null
-                        ]
-                    ]
-                ]
-            ]]
-        );
+        $this->assertConfigurationIsInvalid([[
+            'grids' => [
+                'sylius_admin_tax_category' => [
+                    'driver' => [
+                        'name' => null,
+                    ],
+                ],
+            ],
+        ]]);
     }
 
     /**
@@ -74,35 +101,17 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_requires_field_type_to_be_defined()
     {
-        $this->assertConfigurationIsInvalid(
-            [[
-                'grids' => [
-                    'sylius_admin_tax_category' => [
-                        'fields' => [
-                            'code' => [
-                                'label' => 'Internal code'
-                            ]
-                        ]
-                    ]
-                ]
-            ]]
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function it_requires_sorting_default_field_to_be_defined()
-    {
-        $this->assertConfigurationIsInvalid(
-            [[
-                'grids' => [
-                    'sylius_admin_tax_category' => [
-                        'sorting'
-                    ]
-                ]
-            ]]
-        );
+        $this->assertConfigurationIsInvalid([[
+            'grids' => [
+                'sylius_admin_tax_category' => [
+                    'fields' => [
+                        'code' => [
+                            'label' => 'Internal code',
+                        ],
+                    ],
+                ],
+            ],
+        ]]);
     }
 
     /**
@@ -110,71 +119,37 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function its_sorting_order_can_be_only_ascending_or_descending()
     {
-        $this->assertConfigurationIsValid(
-            [[
-                'grids' => [
-                    'sylius_admin_tax_category' => [
-                        'sorting' => [
-                            'code' => 'asc',
-                        ]
-                    ]
-                ]
-            ]]
-        );
+        $this->assertConfigurationIsValid([[
+            'grids' => [
+                'sylius_admin_tax_category' => [
+                    'sorting' => ['code' => 'asc'],
+                ],
+            ],
+        ]]);
 
-        $this->assertConfigurationIsValid(
-            [[
-                'grids' => [
-                    'sylius_admin_tax_category' => [
-                        'sorting' => [
-                            'code' => 'desc',
-                        ]
-                    ]
-                ]
-            ]]
-        );
+        $this->assertConfigurationIsValid([[
+            'grids' => [
+                'sylius_admin_tax_category' => [
+                    'sorting' => ['code' => 'desc'],
+                ],
+            ],
+        ]]);
 
-        $this->assertConfigurationIsInvalid(
-            [[
-                'grids' => [
-                    'sylius_admin_tax_category' => [
-                        'sorting' => [
-                            'code' => 'left',
-                        ]
-                    ]
-                ]
-            ]]
-        );
-    }
+        $this->assertConfigurationIsInvalid([[
+            'grids' => [
+                'sylius_admin_tax_category' => [
+                    'sorting' => ['code' => 'left'],
+                ],
+            ],
+        ]]);
 
-    /**
-     * @test
-     */
-    public function it_does_require_sorting_order_to_be_declared()
-    {
-        $this->assertConfigurationIsInvalid(
-            [[
-                'grids' => [
-                    'sylius_admin_tax_category' => [
-                        'sorting' => [
-                            'code',
-                        ]
-                    ]
-                ]
-            ]]
-        );
-
-        $this->assertConfigurationIsValid(
-            [[
-                'grids' => [
-                    'sylius_admin_tax_category' => [
-                        'sorting' => [
-                            'code' => 'asc',
-                        ]
-                    ]
-                ]
-            ]]
-        );
+        $this->assertConfigurationIsInvalid([[
+            'grids' => [
+                'sylius_admin_tax_category' => [
+                    'sorting' => ['code' => null],
+                ],
+            ],
+        ]]);
     }
 
     /**
@@ -187,6 +162,9 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
         ]]);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function getConfiguration()
     {
         return new Configuration();

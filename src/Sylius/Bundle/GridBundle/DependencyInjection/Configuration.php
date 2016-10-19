@@ -37,6 +37,9 @@ final class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addDriversSection(ArrayNodeDefinition $node)
     {
         $node
@@ -57,6 +60,7 @@ final class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('templates')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('filter')
                             ->useAttributeAsKey('name')
