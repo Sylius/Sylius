@@ -14,26 +14,27 @@
 {% endblock %}
 
 {% block subcontent %}
-        <h1 class="ui dividing header">
-            {{ 'sylius.ui.address_book'|trans }}
-            <div class="sub header">{{ 'sylius.ui.browse_your_addresses'|trans }}</div>
-        </h1>
-        <div class="ui segment">
-             {{ messages.info('sylius.ui.no_default_address'|trans) }}
-        </div>
-        <div class="ui segment">
-            <div class="ui very relaxed divided list" id="addresses">
-                {% for address in addresses %}
-                    <div class="item">
-                        <div class="ui grid">
-                            <div class="sixteen wide column">
-                                {% include '@SyliusShop/Common/_address.html.twig' with {'address': address} %}
-                            </div>
+    <h1 class="ui dividing header">
+        {{ 'sylius.ui.address_book'|trans }}
+        <div class="sub header">{{ 'sylius.ui.browse_your_addresses'|trans }}</div>
+    </h1>
+    <a href="{{ path('sylius_shop_account_address_book_create') }}" class="ui right floated blue button"><i class="mail icon"></i> {{ 'sylius.ui.add_address'|trans }}</a>
+    <div class="ui segment">
+         {{ messages.info('sylius.ui.no_default_address'|trans) }}
+    </div>
+    <div class="ui segment">
+        <div class="ui very relaxed divided list" id="addresses">
+            {% for address in addresses %}
+                <div class="item">
+                    <div class="ui grid">
+                        <div class="sixteen wide column">
+                            {% include '@SyliusShop/Common/_address.html.twig' with {'address': address} %}
                         </div>
                     </div>
-                {% else %}
-                    <div class="item">{{ messages.info('sylius.ui.no_addresses'|trans) }}</div>
-                {% endfor %}
-            </div>
+                </div>
+            {% else %}
+                <div class="item">{{ messages.info('sylius.ui.no_addresses'|trans) }}</div>
+            {% endfor %}
         </div>
+    </div>
 {% endblock %}

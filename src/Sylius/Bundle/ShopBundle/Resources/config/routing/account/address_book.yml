@@ -14,3 +14,20 @@ sylius_shop_account_address_book_index:
                 method: findByCustomer
                 arguments:
                      - 'expr:service("sylius.context.customer").getCustomer()'
+
+sylius_shop_account_address_book_create:
+    path: /add
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.address:createAction
+        _sylius:
+            template: SyliusShopBundle:Account/AddressBook:create.html.twig
+            section: shop_acount
+            factory:
+                method: createWithCustomer
+                arguments:
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+            redirect:
+                route: sylius_shop_account_address_book_index
+                parameters: {}
+            flash: sylius.ui.address_has_been_successfully_added
