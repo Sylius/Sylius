@@ -17,6 +17,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 interface AddressRepositoryInterface extends RepositoryInterface
 {
@@ -26,4 +27,12 @@ interface AddressRepositoryInterface extends RepositoryInterface
      * @return AddressInterface[]
      */
     public function findByCustomer(CustomerInterface $customer);
+
+    /**
+     * @param CustomerInterface $customer
+     * @param string $id
+     *
+     * @return AddressInterface|null
+     */
+    public function findOneByCustomerAndId(CustomerInterface $customer, $id);
 }
