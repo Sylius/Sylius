@@ -29,11 +29,18 @@ sylius_shop_product_reviews_index:
 
 sylius_shop_product_reviews_create:
     path: /products/{slug}/reviews/new
-    methods: [GET]
+    methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_review:createAction
         _sylius:
             template: SyliusShopBundle:Product/Review:create.html.twig
             factory:
-                method: createForSubject
-                arguments: [expr:service('sylius.repository.product').findOneBySlug($slug).getId()]
+                method: createForSubjectWithReviewer
+                arguments:
+                    - 'expr:service("sylius.repository.product").findOneBySlug($slug).getId()'
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+            redirect:
+                route: sylius_shop_product_show
+                parameters:
+                    slug: $slug
+            flash: sylius.review.waiting_for_the_acceptation

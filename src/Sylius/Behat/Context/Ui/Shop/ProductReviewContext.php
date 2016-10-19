@@ -75,6 +75,6 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatMyReviewIsWaitingForTheAcceptation()
     {
-        $this->notificationChecker->checkNotification('Your review is waiting for the acceptation', NotificationType::success());
+        $this->notificationChecker->checkNotification('Your review is waiting for the acceptation.', NotificationType::success());
     }
 }
