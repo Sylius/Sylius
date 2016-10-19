@@ -25,22 +25,22 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 {
-    public function let(TaxonRepositoryInterface $taxonRepository)
+    function let(TaxonRepositoryInterface $taxonRepository)
     {
         $this->beConstructedWith($taxonRepository);
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType(TaxonsToCodesTransformer::class);
     }
 
-    public function it_implements_data_transformer_interface()
+    function it_implements_data_transformer_interface()
     {
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    public function it_transforms_array_of_taxons_codes_to_taxons_collection(
+    function it_transforms_array_of_taxons_codes_to_taxons_collection(
         TaxonRepositoryInterface $taxonRepository,
         TaxonInterface $bows,
         TaxonInterface $swords
@@ -52,7 +52,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         $this->transform(['bows', 'swords'])->shouldBeCollection($taxons);
     }
 
-    public function it_transforms_only_existing_taxons(
+    function it_transforms_only_existing_taxons(
         TaxonRepositoryInterface $taxonRepository,
         TaxonInterface $bows
     ) {
@@ -63,12 +63,12 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         $this->transform(['bows', 'swords'])->shouldBeCollection($taxons);
     }
 
-    public function it_transforms_empty_array_into_empty_collection()
+    function it_transforms_empty_array_into_empty_collection()
     {
         $this->transform([])->shouldBeCollection(new ArrayCollection([]));
     }
 
-    public function it_throws_exception_if_value_to_transform_is_not_array()
+    function it_throws_exception_if_value_to_transform_is_not_array()
     {
         $this
             ->shouldThrow(new UnexpectedTypeException('badObject', 'array'))
@@ -76,7 +76,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    public function it_reverse_transforms_into_array_of_taxons_codes(
+    function it_reverse_transforms_into_array_of_taxons_codes(
         TaxonInterface $axes,
         TaxonInterface $shields
     ) {
@@ -89,7 +89,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    public function it_throws_exception_if_reverse_transformed_object_is_not_collection()
+    function it_throws_exception_if_reverse_transformed_object_is_not_collection()
     {
         $this
             ->shouldThrow(new UnexpectedTypeException('badObject', Collection::class))
@@ -97,7 +97,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
         ;
     }
 
-    public function it_returns_empty_array_if_passed_collection_is_empty()
+    function it_returns_empty_array_if_passed_collection_is_empty()
     {
         $this->reverseTransform(new ArrayCollection())->shouldReturn([]);
     }
@@ -105,7 +105,7 @@ final class TaxonsToCodesTransformerSpec extends ObjectBehavior
     /**
      * {@inheritdoc}
      */
-    public function getMatchers()
+    function getMatchers()
     {
         return [
             'beCollection' => function ($subject, $key) {

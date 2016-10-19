@@ -38,8 +38,8 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
 
     /**
      * @param FactoryInterface $adjustmentFactory
-     * @param FilterInterface  $priceRangeFilter
-     * @param FilterInterface  $taxonFilter
+     * @param FilterInterface $priceRangeFilter
+     * @param FilterInterface $taxonFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
@@ -83,7 +83,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
 
     /**
      * @param OrderItemInterface $item
-     * @param int                $amount
+     * @param int $amount
      * @param PromotionInterface $promotion
      */
     private function setUnitsAdjustments(OrderItemInterface $item, $amount, PromotionInterface $promotion)

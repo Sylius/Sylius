@@ -58,10 +58,10 @@ final class ManagingPromotionsContext implements Context
     private $notificationChecker;
 
     /**
-     * @param SharedStorageInterface       $sharedStorage
-     * @param IndexPageInterface           $indexPage
-     * @param CreatePageInterface          $createPage
-     * @param UpdatePageInterface          $updatePage
+     * @param SharedStorageInterface $sharedStorage
+     * @param IndexPageInterface $indexPage
+     * @param CreatePageInterface $createPage
+     * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
@@ -187,15 +187,10 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @Given /^I add a price filter with minimum value of ("(?:€|£|\$)[^"]+")$/
-     * @Given /^I add a price filter with minimum value of ("(?:€|£|\$)[^"]+") and maximum of ("(?:€|£|\$)[^"]+") $/
      */
-    public function iAddAPriceFilterRange($minimum, $maximum = null)
+    public function iAddAPriceFilterRange($minimum)
     {
         $this->createPage->fillActionOption('Min', $minimum);
-
-        if ($maximum) {
-            $this->createPage->fillActionOption('Max', $maximum);
-        }
     }
 
     /**
@@ -539,7 +534,7 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @param PromotionInterface $promotion
-     * @param string             $field
+     * @param string $field
      */
     private function assertIfFieldIsTrue(PromotionInterface $promotion, $field)
     {

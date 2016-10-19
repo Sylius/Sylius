@@ -31,7 +31,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
-    public function let(
+    function let(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter
@@ -39,7 +39,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->beConstructedWith($adjustmentFactory, $priceRangeFilter, $taxonFilter);
     }
 
-    public function it_is_initializable()
+    function it_is_initializable()
     {
         $this->shouldHaveType(UnitFixedDiscountPromotionActionCommand::class);
     }
@@ -232,7 +232,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         ;
     }
 
-    public function it_has_configuration_form_type()
+    function it_has_a_configuration_form_type()
     {
         $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_unit_fixed_discount_configuration');
     }
