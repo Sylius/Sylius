@@ -29,5 +29,4 @@ sylius_shop_account_address_book_create:
                     - 'expr:service("sylius.context.customer").getCustomer()'
             redirect:
                 route: sylius_shop_account_address_book_index
-                parameters: {}
             flash: sylius.ui.address_has_been_successfully_added
