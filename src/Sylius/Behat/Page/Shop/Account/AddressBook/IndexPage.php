@@ -11,10 +11,12 @@
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
  
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
@@ -39,7 +41,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function hasAddressFullName($fullName)
     {
-        return null !== $this->getElement('addresses')->find('css', sprintf('address:contains("%s")', $fullName));
+        return null !== $this->getAddressOf($fullName);
     }
 
     /**
@@ -48,6 +50,25 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function hasNoExistingAddressesMessage()
     {
         return false !== strpos($this->getElement('no_addresses_message' )->getText(), 'no addresses to display');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteAddress($fullName)
+    {
+        $addressToDelete = $this->getAddressOf($fullName);
+        $addressToDelete->pressButton('Delete');
+    }
+
+    /**
+     * @param string $fullName
+     *
+     * @return NodeElement|null
+     */
+    private function getAddressOf($fullName)
+    {
+        return $this->getElement('addresses')->find('css', sprintf('.ui.stackable.grid:contains("%s")', $fullName));
     }
 
     /**

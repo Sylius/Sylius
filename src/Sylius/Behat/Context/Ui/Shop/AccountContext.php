@@ -495,6 +495,22 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I delete the :fullName address
+     */
+    public function iDeleteTheAddress($fullname)
+    {
+        $this->addressBookIndexPage->deleteAddress($fullname);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedAboutSuccessfulDelete()
+    {
+        $this->notificationChecker->checkNotification('Address has been successfully deleted.', NotificationType::success());
+    }
+
+    /**
      * @Then I should see a single address in the list
      */
     public function iShouldSeeASingleAddressInTheList()
