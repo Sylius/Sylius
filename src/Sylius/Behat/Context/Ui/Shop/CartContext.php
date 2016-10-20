@@ -217,12 +217,12 @@ final class CartContext implements Context
         $this->summaryPage->open();
 
         $quantity = $this->summaryPage->getQuantity($product->getName());
-        $unitPrice = $this->summaryPage->getItemUnitPrice($product->getName());
+        $itemTotal = $this->summaryPage->getItemTotal($product->getName());
         $regularUnitPrice = $this->summaryPage->getItemUnitRegularPrice($product->getName());
 
         Assert::same(
-            $quantity * $unitPrice,
             ($quantity * $regularUnitPrice) - $amount,
+            $this->getPriceFromString($itemTotal),
             'Price after discount should be %s, but it is %2$s.'
         );
     }
@@ -473,5 +473,15 @@ final class CartContext implements Context
             $this->summaryPage->getCartTotal(),
             'Cart should have %s total, but it has %2$s.'
         );
+    }
+
+    /**
+     * @param string $price
+     *
+     * @return int
+     */
+    private function getPriceFromString($price)
+    {
+        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
     }
 }
