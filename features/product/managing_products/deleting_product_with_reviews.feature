@@ -1,5 +1,5 @@
 @managing_products
-Feature: Deleting a product
+Feature: Deleting a product with its reviews
     In order to remove test, obsolete or incorrect products
     As an Administrator
     I want to be able to delete products from the product catalog
@@ -11,13 +11,8 @@ Feature: Deleting a product
         And this product has one review
         And I am logged in as an administrator
 
-    @ui
-    Scenario: Deleted product disappears from the product catalog
+    @domain @ui @todo
+    Scenario: Deleted product reviews disappear from the product catalog
         When I delete the "Toyota GT86 model" product
         Then I should be notified that it has been successfully deleted
-        And this product should not exist in the product catalog
-
-    @domain
-    Scenario: Deleted product variants disappear from the product catalog
-        When I delete the "Toyota GT86 model" product
-        Then there should be no variants of this product in the product catalog
+        And there should be no reviews of this product
