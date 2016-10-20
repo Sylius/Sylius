@@ -8,5 +8,5 @@ sylius:
             not_blank: You must check review rating.
         title:
             not_blank: Review title should not be blank.
-            min_length: Review title must have at least 2 characters
-            max_length: Review title must have at most 255 characters
+            min_length: Review title must have at least 2 characters.
+            max_length: Review title must have at most 255 characters.

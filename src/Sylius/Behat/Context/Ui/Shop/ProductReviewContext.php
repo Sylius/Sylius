@@ -70,6 +70,14 @@ final class ProductReviewContext implements Context
     }
 
     /**
+     * @When I title it with very long title
+     */
+    public function iTitleItWithVeryLongTitle()
+    {
+        $this->createPage->titleReview($this->getVeryLongTitle());
+    }
+
+    /**
      * @When I rate it with :rate point(s)
      */
     public function iRateItWithPoints($rate)
@@ -119,6 +127,30 @@ final class ProductReviewContext implements Context
     }
 
     /**
+     * @Then I should be notified that title is too short
+     */
+    public function iShouldBeNotifiedThatTitleIsTooShort()
+    {
+        Assert::same(
+            $this->createPage->getTitleValidationMessage(),
+            'Review title must have at least 2 characters.',
+            'There should be title length validation error, but there is not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that title is too long
+     */
+    public function iShouldBeNotifiedThatTitleIsTooLong()
+    {
+        Assert::same(
+            $this->createPage->getTitleValidationMessage(),
+            'Review title must have at most 255 characters.',
+            'There should be title length validation error, but there is not.'
+        );
+    }
+
+    /**
      * @Then I should be notified that comment is required
      */
     public function iShouldBeNotifiedThatCommentIsRequired()
@@ -140,5 +172,25 @@ final class ProductReviewContext implements Context
             'Please enter your email.',
             'There should be author validation error, but there is not.'
         );
+    }
+
+    /**
+     * @Then I should be notified that this email is already registered
+     */
+    public function iShouldBeNotifiedThatThisEmailIsAlreadyRegistered()
+    {
+        Assert::same(
+            $this->createPage->getAuthorValidationMessage(),
+            'This email is already registered, please login or use forgotten password.',
+            'There should be author validation error, but there is not.'
+        );
+    }
+
+    /**
+     * @return string
+     */
+    private function getVeryLongTitle()
+    {
+        return 'Exegi monumentum aere perennius regalique situ pyramidum altius, quod non imber edax, non Aquilo inpotens possit diruere aut innumerabilis annorum series et fuga temporum. Non omnis moriar multaque pars mei vitabit Libitinam; usque ego postera crescam laude recens, dum Capitoliumscandet cum tacita virgine pontifex.Dicar, qua violens obstrepit Aufiduset qua pauper aquae Daunus agrestiumregnavit populorum, ex humili potensprinceps Aeolium carmen ad Italosdeduxisse modos. Sume superbiamquaesitam meritis et mihi Delphicalauro cinge volens, Melpomene, comam.';
     }
 }
