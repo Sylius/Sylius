@@ -25,13 +25,10 @@ use Symfony\Component\Validator\Constraints\Type;
 class UnitPercentageDiscountConfigurationType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('percentage', 'percent', [
                 'label' => 'sylius.form.promotion_action.percentage_discount_configuration.percentage',
@@ -46,10 +43,13 @@ class UnitPercentageDiscountConfigurationType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('filters', 'sylius_promotion_filters')
+            ->add('filters', 'sylius_promotion_filters', ['required' => false])
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_promotion_action_unit_percentage_discount_configuration';

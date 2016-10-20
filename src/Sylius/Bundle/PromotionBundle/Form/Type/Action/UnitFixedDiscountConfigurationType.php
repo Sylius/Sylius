@@ -24,8 +24,7 @@ use Symfony\Component\Validator\Constraints\Type;
 class UnitFixedDiscountConfigurationType extends AbstractType
 {
     /**
-     * @param FormBuilderInterface $builder
-     * @param array $options
+     * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -37,12 +36,12 @@ class UnitFixedDiscountConfigurationType extends AbstractType
                     new Type(['type' => 'numeric']),
                 ],
             ])
-            ->add('filters', 'sylius_promotion_filters')
+            ->add('filters', 'sylius_promotion_filters', ['required' => false])
         ;
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getName()
     {

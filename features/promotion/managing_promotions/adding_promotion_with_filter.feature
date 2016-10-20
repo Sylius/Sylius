@@ -14,7 +14,7 @@ Feature: Adding promotion with filter
         When I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for all products over $10!"
         And I add the "Item fixed discount" action configured with amount of "$10"
-        And I specify that this filter should be applied for amount greater then "$10"
+        And I specify that this action should be applied to items with price greater then "$10"
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10 discount for all products over $10!" promotion should appear in the registry
@@ -25,7 +25,7 @@ Feature: Adding promotion with filter
         When I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for (almost) all products!"
         And I add the "Item fixed discount" action configured with amount of "$10"
-        And I specify that this filter should be applied for amount greater then "$10" but lesser then "$100"
+        And I specify that this action should be applied to items with price between "$10" and "$100"
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10 discount for (almost) all products!" promotion should appear in the registry
@@ -36,7 +36,7 @@ Feature: Adding promotion with filter
         When I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for all products over $10!"
         And I add the "Item percentage discount" action configured with a percentage value of 10%
-        And I specify that this filter should be applied for amount greater then "$10"
+        And I specify that this action should be applied to items with price greater then "$10"
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10 discount for all products over $10!" promotion should appear in the registry
@@ -47,7 +47,7 @@ Feature: Adding promotion with filter
         When I specify its code as "10_for_all_products_over_10"
         And I name it "$10 discount for (almost) all products!"
         And I add the "Item percentage discount" action configured with a percentage value of 10%
-        And I specify that this filter should be applied for amount greater then "$10" but lesser then "$100"
+        And I specify that this action should be applied to items with price between "$10" and "$100"
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10 discount for (almost) all products!" promotion should appear in the registry

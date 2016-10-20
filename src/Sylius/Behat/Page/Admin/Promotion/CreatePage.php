@@ -148,6 +148,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'actions' => '#sylius_promotion_actions',
             'code' => '#sylius_promotion_code',
             'ends_at' => '#sylius_promotion_endsAt',
+            'minimum' => '#sylius_promotion_actions_0_configuration_filters_price_range_min',
+            'maximum' => '#sylius_promotion_actions_0_configuration_filters_price_range_max',
             'name' => '#sylius_promotion_name',
             'rules' => '#sylius_promotion_rules',
             'starts_at' => '#sylius_promotion_startsAt',
