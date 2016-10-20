@@ -74,6 +74,16 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function hasTitleValidationMessage()
+    {
+        return
+            'Review title should not be blank.' ===
+            $this->getElement('title')->find('css', '.sylius-validation-error')->getText()
+        ;
+    }
 
     /**
      * {@inheritdoc}
@@ -83,6 +93,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'rate' => '.star.rating .icon:nth-child(%rate%)',
             'rating' => 'form .field:first-child',
+            'title' => 'form .field:nth-child(2)',
         ]);
     }
 }
