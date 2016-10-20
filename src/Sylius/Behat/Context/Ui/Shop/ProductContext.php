@@ -399,4 +399,16 @@ final class ProductContext implements Context
             'There should be message about no reviews but there is not.'
         );
     }
+
+    /**
+     * @Then I should see :rating as its average rating
+     */
+    public function iShouldSeeAsItsAverageRating($rating)
+    {
+        Assert::same(
+            (int) $rating,
+            $this->showPage->getAverageRating(),
+            'Product should have average rating %s but has %2$s'
+        );
+    }
 }

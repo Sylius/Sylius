@@ -21,7 +21,7 @@
                 <div class="field">
                     {{ form_errors(form.rating) }}<br/>
                     <div class="ui huge star rating" data-rating="0" data-max-rating="5"></div>
-                    {{ form_widget(form.rating, { 'attr': { 'style': 'display: none' }, 'value': '5' }) }}
+                    {{ form_widget(form.rating, { 'attr': { 'style': 'display: none' } }) }}
                 </div>
                 <div class="field">
                     {{ form_errors(form.title) }}
