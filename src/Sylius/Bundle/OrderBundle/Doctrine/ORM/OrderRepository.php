@@ -62,9 +62,10 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         return $queryBuilder
             ->addSelect('item')
             ->leftJoin('o.items', 'item')
-            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->andWhere('o.state != :state')
             ->setMaxResults($count)
             ->orderBy('o.completedAt', 'desc')
+            ->setParameter('state', OrderInterface::STATE_CART)
             ->getQuery()
             ->getResult()
         ;

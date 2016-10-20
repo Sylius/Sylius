@@ -11,6 +11,7 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 name:
                     type: string
                     label: sylius.ui.name
@@ -25,7 +26,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.amount
                     options:
-                        template: SyliusAdminBundle:TaxRate/Field:amount.html.twig
+                        template: @SyliusAdmin/TaxRate/Grid/Field/amount.html.twig
             filters:
                 name:
                     type: string

@@ -1,0 +1,24 @@
+{% set definition = resources.definition %}
+
+{% set oldest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'asc'}, 'permalink': resources.parameters.get('permalink')}) %}
+{% set newest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'desc'}, 'permalink': resources.parameters.get('permalink')}) %}
+
+{% if app.request.query.get('sorting') is empty or app.request.basePath == newest_first_path %}
+    {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
+{% else %}
+    {% set current_sorting_label = 'sylius.ui.oldest_first'|trans|lower %}
+{% endif %}
+
+<div class="ui right floated small header">
+    <div class="content">
+        {{ 'sylius.ui.display'|trans }}
+        <div class="ui inline dropdown">
+            <div class="text">{{ current_sorting_label }}</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                <a class="item" href="{{ newest_first_path }}" data-text="{{ 'sylius.ui.newest_first'|trans|lower }}">{{ 'sylius.ui.newest_first'|trans }}</a>
+                <a class="item" href="{{ oldest_first_path }}" data-text="{{ 'sylius.ui.oldest_first'|trans|lower }}">{{ 'sylius.ui.oldest_first'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>

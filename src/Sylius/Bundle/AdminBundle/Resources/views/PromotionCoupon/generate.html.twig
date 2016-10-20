@@ -1,4 +1,4 @@
-{% extends 'SyliusAdminBundle::layout.html.twig' %}
+{% extends '@SyliusAdmin/layout.html.twig' %}
 
 {% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
 
@@ -11,16 +11,16 @@
 {% block content %}
 {{ headers.default(header|trans, 'random', 'sylius.ui.manage_discounts_and_promotional_campaigns'|trans) }}
 
-{% include 'SyliusAdminBundle:PromotionCoupon/Breadcrumb:_generate.html.twig' %}
+{% include '@SyliusAdmin/PromotionCoupon/Generate/_breadcrumb.html.twig' %}
 
-{{ form_start(form, {'action': path('sylius_admin_promotion_coupon_generate', {'promotionId': promotion.id}), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path('sylius_admin_promotion_coupon_generate', {'promotionId': promotion.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
 <div class="ui segment">
-    {% include '@SyliusAdmin/PromotionCoupon/_generateForm.html.twig' %}
+    {% include '@SyliusAdmin/PromotionCoupon/Generate/_form.html.twig' %}
     <div class="ui basic segment">
         <div class="ui buttons">
             <button class="ui labeled icon primary button" type="submit"><i class="random icon"></i>{{- 'sylius.ui.generate'|trans -}}</button>
             <div class="or" data-text="{{ 'sylius.ui.or'|trans }}"></div>
-            {% include '@SyliusUi/Form/_cancelButton.twig' with {'path': path(configuration.getRouteName('index'), {'promotionId': promotion.id})} %}
+            {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': path(configuration.getRouteName('index'), {'promotionId': promotion.id})} %}
         </div>
     </div>
 </div>

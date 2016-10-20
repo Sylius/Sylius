@@ -1,9 +1,24 @@
-<h1 class="ui header">
-    <i class="circular user icon"></i>
-    <div class="content">
-        {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
-        <div class="sub header">
-            {{ customer.email }}
-        </div>
+<div class="ui stackable two column grid">
+    <div class="column">
+        <h1 class="ui header">
+            <i class="circular user icon"></i>
+            <div class="content">
+                {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
+                <div class="sub header">
+                    {{ customer.email }}
+                </div>
+            </div>
+        </h1>
     </div>
-</h1>
+    {% if customer.user is not null %}
+        <div class="right aligned column" id="actions">
+            {{ buttons.delete(path('sylius_admin_shop_user_delete', {'id': customer.user.id })) }}
+        </div>
+    {% else %}
+        <div class="right aligned column" id="no-account">
+            <span class="ui huge icon label">
+                <i class="spy icon"></i> {{ 'sylius.ui.guest'|trans }}
+            </span>
+        </div>
+    {% endif %}
+</div>

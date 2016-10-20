@@ -1,6 +1,10 @@
 # This file is a part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_shop_account_order:
+    resource: "@SyliusShopBundle/Resources/config/routing/account/order.yml"
+    prefix: /orders
+
 sylius_shop_account_root:
     path: /
     defaults:
@@ -14,7 +18,7 @@ sylius_shop_account_dashboard:
     defaults:
         _controller: sylius.controller.customer:showAction
         _sylius:
-            template: SyliusShopBundle:Account:dashboard.html.twig
+            template: @SyliusShop/Account/dashboard.html.twig
             repository:
                 method: find
                 arguments: [expr:service('sylius.context.customer').getCustomer()]
@@ -25,12 +29,14 @@ sylius_shop_account_profile_update:
     defaults:
         _controller: sylius.controller.customer:updateAction
         _sylius:
-            template: SyliusShopBundle:Account:profileUpdate.html.twig
+            template: @SyliusShop/Account/profileUpdate.html.twig
             form: sylius_customer_profile
             repository:
                 method: find
                 arguments: [expr:service('sylius.context.customer').getCustomer()]
-            redirect: sylius_shop_account_profile_update
+            redirect:
+                route: sylius_shop_account_profile_update
+                parameters: {}
 
 sylius_shop_account_change_password:
     path: /change-password
@@ -38,9 +44,5 @@ sylius_shop_account_change_password:
     defaults:
         _controller: sylius.controller.shop_user:changePasswordAction
         _sylius:
-            template: SyliusShopBundle:Account:changePassword.html.twig
+            template: @SyliusShop/Account/changePassword.html.twig
             redirect: sylius_shop_account_dashboard
-
-sylius_shop_account_order:
-    resource: "@SyliusShopBundle/Resources/config/routing/account/order.yml"
-    prefix: /orders

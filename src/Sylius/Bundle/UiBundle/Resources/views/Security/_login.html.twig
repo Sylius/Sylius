@@ -4,8 +4,8 @@
 
 <div class="ui middle aligned center aligned grid">
     <div class="column">
-        {% if logo_path is defined %}
-        <img src="{{ asset(logo_path) }}" class="ui fluid image" id="logo">
+        {% if paths.logo is defined %}
+        <img src="{{ asset(paths.logo) }}" class="ui fluid image" id="logo">
         {% endif %}
 
         {% if last_error %}

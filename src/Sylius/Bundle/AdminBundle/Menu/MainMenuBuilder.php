@@ -226,9 +226,9 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
         ;
 
         $configuration
-            ->addChild('administrators', ['route' => 'sylius_admin_admin_user_index'])
+            ->addChild('admin_users', ['route' => 'sylius_admin_admin_user_index'])
             ->setLabel('sylius.menu.admin.main.configuration.admin_users')
-            ->setLabelAttribute('icon', 'users')
+            ->setLabelAttribute('icon', 'lock')
         ;
     }
 }

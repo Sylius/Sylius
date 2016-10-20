@@ -5,7 +5,6 @@ sylius_admin_order:
         templates: SyliusAdminBundle:Crud
         only: ['index']
         grid: sylius_admin_order
-        permission: true
         vars:
           all:
               subheader: sylius.ui.process_your_orders
@@ -22,6 +21,19 @@ sylius_admin_order_show:
             template: SyliusAdminBundle:Order:show.html.twig
             permission: true
 
+sylius_admin_order_update:
+    path: /orders/{id}/edit
+    methods: [GET, PATCH]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            section: admin
+            template: SyliusAdminBundle:Order:update.html.twig
+            form:
+                type: sylius_order
+                options:
+                    validation_groups: sylius_shipping_address_update
+
 sylius_admin_order_cancel:
     path: /orders/{id}/cancel
     methods: [PUT]
@@ -32,7 +44,6 @@ sylius_admin_order_cancel:
                 graph: sylius_order
                 transition: cancel
             redirect: referer
-            permission: true
 
 sylius_admin_order_payment_complete:
     path: /orders/{orderId}/payments/{id}/complete
@@ -49,18 +60,3 @@ sylius_admin_order_payment_complete:
                 graph: sylius_payment
                 transition: complete
             redirect: referer
-            permission: true
-
-sylius_admin_order_shipping_address_update:
-    path: /orders/{id}/shipping-address/edit
-    methods: [GET, PATCH]
-    defaults:
-        _controller: sylius.controller.order:updateAction
-        _sylius:
-            section: admin
-            template: SyliusAdminBundle:Order:updateShippingAddress.html.twig
-            permission: true
-            form:
-                type: sylius_order
-                options:
-                    validation_groups: sylius_shipping_address_update

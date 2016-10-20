@@ -70,6 +70,7 @@ sylius:
         awaiting_payment: Awaiting payment
         back: Back
         back_to_store: Back to store
+        back_to_details: 'Back to details'
         backorder: Backorder
         backordered: Backordered
         balance_due: 'Balance due'
@@ -81,6 +82,7 @@ sylius:
         browse_your_orders_from_the_past: 'Browse your orders from the past'
         build: Build
         calculator: Calculator
+        call_us: 'Call us'
         cancel: Cancel
         cancelled: Cancelled
         cart: Cart
@@ -101,6 +103,8 @@ sylius:
         checking_out_as: Checking out as
         checkout: Checkout
         choose_file: 'Choose file'
+        choose_how_your_goods_will_be_delivered: Choose how your goods will be delivered
+        choose_how_you_will_pay: Choose how you will pay
         city: City
         clear_cart: Clear cart
         clear_filters: Clear filters
@@ -203,6 +207,7 @@ sylius:
         dashboard: Dashboard
         data: Data
         date: Date
+        default: Default
         default_billing_address: 'Default billing address'
         default_currency: 'Default currency'
         default_locale: 'Default locale'
@@ -217,6 +222,7 @@ sylius:
         disabled: Disabled
         discount: Discount
         discounted_unit_price: 'Discounted unit price'
+        display: 'Display'
         edit: Edit
         edit_admin_user: 'Edit administrator'
         edit_association_type: 'Edit Association type'
@@ -227,6 +233,7 @@ sylius:
         edit_customer: Edit customer
         edit_locale: 'Edit locale'
         edit_my_address: 'Edit my address'
+        edit_order: 'Edit order'
         edit_payment_method: Edit payment method
         edit_product: Edit product
         edit_product_attribute: Edit product attribute
@@ -303,9 +310,10 @@ sylius:
         female: Female
         filter: Filter
         filters: Filters
+        fill_in_your_billing_and_shipping_addresses: 'Fill in your billing and shipping addresses'
         first_name: 'First name'
         forgot_password: 'Forgot password'
-        from_the_latest: 'From the latest'
+        from_the_newest: 'From the newest'
         from_the_oldest: 'From the oldest'
         fulfill: Fulfill
         fulfilled: Fulfilled
@@ -317,6 +325,7 @@ sylius:
         generate_variants: 'Generate variants'
         generating_coupons: 'Generating coupons'
         go: Go
+        go_level_up: Go level up
         go_to_dashboard: 'Go to dashboard'
         grand_total: 'Grand total'
         guest: Guest
@@ -346,6 +355,7 @@ sylius:
         inventory_tracking: 'Inventory tracking'
         invoice: Invoice
         is_enabled: 'Is enabled'
+        it_seems_you_have_an_account_already: 'It seems you have an account already'
         item: Item
         items: Items
         items_total: 'Items total'
@@ -408,6 +418,7 @@ sylius:
         manage_tax_rates: 'Manage tax rates'
         manage_taxation_of_your_products: Manage taxation of your products
         manage_users: 'Manage users'
+        manage_users_able_to_access_administration_panel: "Manage users able to access the administration panel"
         manage_variants: Manage variants
         manage_your_customers: Manage your customers
         manage_your_personal_information_and_preferences: Manage your personal information and preferences
@@ -427,6 +438,7 @@ sylius:
         my_account: My account
         n_a: N/A
         name: Name
+        need_assistance: 'Need assistance'
         new: New
         new_admin_user: 'New administrator'
         new_channel: New channel
@@ -461,6 +473,7 @@ sylius:
         new_user: 'New user'
         new_zone: 'New zone'
         newest_products: 'Newest products'
+        newest_first: 'Newest first'
         next: Next
         no_label: 'No'
         no_account: 'No account yet'
@@ -495,6 +508,7 @@ sylius:
         number: Number
         number_of_orders: 'Number of orders'
         oauth_provider: 'OAuth Provider'
+        oldest_first: 'Oldest first'
         on_hold: 'On hold'
         options: Options
         or: or
@@ -539,8 +553,10 @@ sylius:
         place_order: 'Place order'
         placed_an_order: You have successfully placed an order.
         placed_at: 'Placed at'
+        please_sign_in: 'Please sign in'
         postcode: Postcode
         powered_by: Powered by
+        preferences: Preferences
         presentation: Presentation
         previous: Previous
         price: Price
@@ -610,6 +626,7 @@ sylius:
         returned: Returned
         returns_policy: Returns Policy
         revert: Revert
+        review_and_confirm_your_order: Review and confirm your order
         review_details: 'Review details'
         reviews: Reviews
         roles: Roles
@@ -673,10 +690,11 @@ sylius:
         street: Street
         string_blocks: 'String blocks'
         subject: Subject
-        subscribed_to_newsletter: Subscribe to the newsletter
+        subscribed_to_newsletter: Subscribed to the newsletter
         subtotal: Subtotal
         success: Success
         summary: Summary
+        summary_of_your_order: 'Summary of your order'
         support: Support
         sylius_logo: Sylius
         tax: Tax
@@ -694,6 +712,7 @@ sylius:
         thank_you: Thank you!
         thank_you_for_your_order: 'Thank you for your order'
         theme: Theme
+        the_instructions_below_will_be_displayed_to_the_customer: 'The instructions below will be displayed to the customer'
         there_are_no_attributes_configured: 'There are no attributes configured'
         there_are_no_blocks_to_display: 'There are no blocks to display'
         there_are_no_channels_configured: 'There are no channels configured'
@@ -772,6 +791,7 @@ sylius:
         view_and_edit_cart: View and edit cart
         view_more: 'View more'
         view_product_details: 'View %product% details'
+        view_your_order_or_change_payment_method: 'View order or change payment method'
         void: Void
         volume_based_pricing: 'Volume based pricing'
         warning: Warning

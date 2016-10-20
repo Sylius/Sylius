@@ -1,32 +1,27 @@
-<div class="ui two column stackable grid">
-    {{ form_errors(form) }}
-    <div class="column">
-        <div class="ui segment">
-            <div class="two fields">
-                {{ form_row(form.code) }}
-                {{ form_row(form.type) }}
-            </div>
-        </div>
-        {% if form.configuration is defined %}
-        <div class="ui segment">
-            <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>
-            {% for field in form.configuration %}
-                {{ form_row(field) }}
-            {% endfor %}
-        </div>
-        {% endif %}
+{{ form_errors(form) }}
+
+<div class="ui segment">
+    <div class="two fields">
+        {{ form_row(form.code) }}
+        {{ form_row(form.type) }}
     </div>
-    <div class="column">
-        <div class="ui styled fluid accordion">
-            {% for locale, translationForm in form.translations %}
-                <div class="title{% if 0 == loop.index0 %} active{% endif %}">
-                    <i class="dropdown icon"></i>
-                    <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
-                </div>
-                <div class="content{% if 0 == loop.index0 %} active{% endif %}">
-                    {{ form_row(translationForm.name) }}
-                </div>
-            {% endfor %}
+</div>
+{% if form.configuration is defined %}
+<div class="ui segment">
+    <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>
+    {% for field in form.configuration %}
+        {{ form_row(field) }}
+    {% endfor %}
+</div>
+{% endif %}
+<div class="ui styled fluid accordion">
+    {% for locale, translationForm in form.translations %}
+        <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+            <i class="dropdown icon"></i>
+            <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
         </div>
-    </div>
+        <div class="content{% if 0 == loop.index0 %} active{% endif %}">
+            {{ form_row(translationForm.name) }}
+        </div>
+    {% endfor %}
 </div>

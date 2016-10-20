@@ -1,28 +1,28 @@
-<div class="ui two column stackable grid">
+{{ form_errors(form) }}
+
+<div class="ui segment">
     {{ form_errors(form) }}
-    <div class="column">
-        <div class="ui segment">
-            {{ form_errors(form) }}
-            <div class="two fields">
-                {{ form_row(form.code) }}
-                {{ form_row(form.gateway) }}
+    <div class="two fields">
+        {{ form_row(form.code) }}
+        {{ form_row(form.gateway) }}
+    </div>
+    {{ form_row(form.enabled) }}
+</div>
+<div class="ui styled fluid accordion">
+    {% for locale, translationForm in form.translations %}
+        <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+            <i class="dropdown icon"></i>
+            <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
+        </div>
+        <div class="content{% if 0 == loop.index0 %} active{% endif %}">
+            {{ form_row(translationForm.name) }}
+            {{ form_row(translationForm.description) }}
+            <div class="ui compact message">
+                <p>
+                    <i class="icon info circle"></i> {{ 'sylius.ui.the_instructions_below_will_be_displayed_to_the_customer'|trans }}.
+                </p>
             </div>
-            {{ form_row(form.enabled) }}
+            {{ form_row(translationForm.instructions) }}
         </div>
-    </div>
-    <div class="column">
-        <div class="ui styled fluid accordion">
-            {% for locale, translationForm in form.translations %}
-                <div class="title{% if 0 == loop.index0 %} active{% endif %}">
-                    <i class="dropdown icon"></i>
-                    <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
-                </div>
-                <div class="content{% if 0 == loop.index0 %} active{% endif %}">
-                    {{ form_row(translationForm.name) }}
-                    {{ form_row(translationForm.description) }}
-                    {{ form_row(translationForm.instructions) }}
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+    {% endfor %}
 </div>

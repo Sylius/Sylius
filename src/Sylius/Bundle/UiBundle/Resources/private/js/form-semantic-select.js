@@ -18,6 +18,7 @@
             apiSettings: {
                 action: 'get taxons',
                 dataType: 'JSON',
+                cache: false,
                 data: { 
                     criteria: { name: { type: 'contains', value: '' } }
                 },

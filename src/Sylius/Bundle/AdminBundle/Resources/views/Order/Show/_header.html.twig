@@ -1,13 +1,29 @@
+{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+
 <h1 class="ui header">
     <i class="circular cart icon"></i>
     <div class="content">
         {{ 'sylius.ui.order'|trans }} #{{ order.number }}
         <div class="sub header">
-            {{ order.completedAt|format_date }}
-            {% include [('@SyliusAdmin/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
+            <div class="ui horizontal divided list">
+                <div class="item">
+                    {{ order.completedAt|format_date }}
+                </div>
+                <div class="item" id="sylius-order-state">
+                    {% include [('@SyliusAdmin/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
+                </div>
+                <div class="item">
+                    {{ order.currencyCode }}
+                </div>
+                <div class="item">
+                    {{ flags.fromLocaleCode(order.localeCode) }}{{ order.localeCode|locale }}
+                </div>
+                <div class="item">
+                    {{ 'sylius.ui.purchased_from'|trans }}
+                    <span class="ui large empty horizontal circular label" style="background-color: {{ order.channel.color }}"></span> <strong>{{ order.channel }}</strong>
+                </div>
+            </div>
 
-            {{ 'sylius.ui.purchased_from'|trans }}
-            <strong class="ui small header" style="color: {{ order.channel.color }}">{{ order.channel.code }}</strong>
         </div>
     </div>
 </h1>

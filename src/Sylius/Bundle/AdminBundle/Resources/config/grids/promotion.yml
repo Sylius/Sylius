@@ -14,25 +14,24 @@ sylius_grid:
                     label: sylius.ui.name
                     path: .
                     options:
-                        template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
+                        template: @SyliusAdmin/Grid/Field/nameAndDescription.html.twig
                 couponBased:
                     type: twig
                     label: sylius.ui.coupons
                     options:
-                        template: SyliusAdminBundle:Grid/Field:yesNo.html.twig
+                        template: @SyliusAdmin/Grid/Field/yesNo.html.twig
                 usage:
                     type: twig
                     label: sylius.ui.usage
                     path: .
                     options:
-                        template: SyliusAdminBundle:Promotion/Field:usage.html.twig
+                        template: @SyliusAdmin/Promotion/Grid/Field/usage.html.twig
             filters:
-                code:
+                search:
                     type: string
-                    label: sylius.ui.code
-                name:
-                    type: string
-                    label: sylius.ui.name
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, name]
                 couponBased:
                     type: boolean
                     label: sylius.ui.coupons

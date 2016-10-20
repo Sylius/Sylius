@@ -12,7 +12,7 @@
             'sylius_shop_partial_product_index_by_taxon_code',
             {
                 'code': taxon.code,
-                'template': '@SyliusShop/Product/_gridList.html.twig',
+                'template': '@SyliusShop/Product/Grid/_default.html.twig',
                 'permalink': app.request.attributes.get('permalink'),
                 'sorting': app.request.query.get('sorting')
             }))

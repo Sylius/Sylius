@@ -13,16 +13,16 @@ sylius_grid:
                 channel:
                     type: twig
                     label: sylius.ui.channel
-                    path: channel
+                    sortable: ~
                     options:
-                        template: SyliusAdminBundle:Order/Field:channel.html.twig
+                        template: @SyliusAdmin/Order/Grid/Field/channel.html.twig
                 number:
                     type: twig
                     label: sylius.ui.number
                     path: .
                     sortable: ~
                     options:
-                        template: SyliusAdminBundle:Order/Field:number.html.twig
+                        template: @SyliusAdmin/Order/Grid/Field/number.html.twig
                 date:
                     type: datetime
                     label: sylius.ui.date
@@ -33,35 +33,40 @@ sylius_grid:
                 customer:
                     type: twig
                     label: sylius.ui.customer
+                    sortable: customer.lastName
                     options:
-                        template: SyliusAdminBundle:Order/Field:customer.html.twig
+                        template: @SyliusAdmin/Order/Grid/Field/customer.html.twig
                 state:
                     type: twig
                     label: sylius.ui.state
+                    sortable: ~
                     options:
-                        template: SyliusAdminBundle:Grid/Field:state.html.twig
+                        template: @SyliusAdmin/Grid/Field/state.html.twig
                         vars:
-                            labels: SyliusAdminBundle:Order/Label/State
+                            labels: @SyliusAdmin/Order/Label/State
                 paymentState:
                     type: twig
                     label: sylius.ui.payment_state
+                    sortable: ~
                     options:
-                        template: SyliusAdminBundle:Grid/Field:state.html.twig
+                        template: @SyliusAdmin/Grid/Field/state.html.twig
                         vars:
-                            labels: SyliusAdminBundle:Order/Label/PaymentState
+                            labels: @SyliusAdmin/Order/Label/PaymentState
                 shippingState:
                     type: twig
                     label: sylius.ui.shipping_state
+                    sortable: ~
                     options:
-                        template: SyliusAdminBundle:Grid/Field:state.html.twig
+                        template: @SyliusAdmin/Grid/Field/state.html.twig
                         vars:
-                            labels: SyliusAdminBundle:Order/Label/ShippingState
+                            labels: @SyliusAdmin/Order/Label/ShippingState
                 total:
                     type: twig
                     label: sylius.ui.total
                     path: .
+                    sortable: total
                     options:
-                        template: SyliusAdminBundle:Order/Field:total.html.twig
+                        template: @SyliusAdmin/Order/Grid/Field/total.html.twig
             filters:
                 number:
                     type: string

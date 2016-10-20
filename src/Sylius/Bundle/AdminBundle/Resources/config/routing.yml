@@ -1,10 +1,18 @@
+sylius_admin_partial:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial.yml"
+    prefix: /_partial
+
+sylius_admin_api:
+    resource: "@SyliusAdminBundle/Resources/config/routing/api/taxon.yml"
+    prefix: /api
+
 sylius_admin_dashboard:
     path: /
     defaults:
         _controller: sylius.controller.admin.dashboard:indexAction
 
-sylius_admin_administrator:
-    resource: "@SyliusAdminBundle/Resources/config/routing/administrator.yml"
+sylius_admin_admin_user:
+    resource: "@SyliusAdminBundle/Resources/config/routing/admin_user.yml"
 
 sylius_admin_channel:
     resource: "@SyliusAdminBundle/Resources/config/routing/channel.yml"
@@ -65,8 +73,8 @@ sylius_admin_static_content:
 sylius_admin_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/taxon.yml"
 
-sylius_admin_user:
-    resource: "@SyliusAdminBundle/Resources/config/routing/user.yml"
+sylius_admin_shop_user:
+    resource: "@SyliusAdminBundle/Resources/config/routing/shop_user.yml"
 
 sylius_admin_tax_category:
     resource: "@SyliusAdminBundle/Resources/config/routing/tax_category.yml"
@@ -76,11 +84,3 @@ sylius_admin_tax_rate:
 
 sylius_admin_zone:
     resource: "@SyliusAdminBundle/Resources/config/routing/zone.yml"
-
-sylius_admin_partial:
-    resource: "@SyliusAdminBundle/Resources/config/routing/partial.yml"
-    prefix: /_partial
-
-sylius_admin_api_taxon:
-    resource: "@SyliusAdminBundle/Resources/config/routing/api/taxon.yml"
-    prefix: /api

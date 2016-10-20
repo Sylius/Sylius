@@ -35,4 +35,17 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
             ->getResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createListQueryBuilder($locale)
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->setParameter('locale', $locale)
+        ;
+    }
 }

@@ -1,0 +1,35 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+{% block title %}{{ parent() }} {{ 'sylius.ui.edit_order'|trans ~' #'~ order.number }}{% endblock %}
+
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
+{% block content %}
+<div class="ui stackable two column grid">
+    <div class="twelve wide column">
+        {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
+    </div>
+    <div class="four wide right aligned column">
+        {% include '@SyliusAdmin/Order/Update/_actions.html.twig' %}
+    </div>
+</div>
+
+{% include '@SyliusAdmin/Order/Update/_breadcrumb.html.twig' %}
+
+{{ form_start(form, {'action': path('sylius_admin_order_update', {'id': order.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+    <div class="ui segment">
+        <input type="hidden" name="_method" value="PATCH" />
+
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h4>
+            {% include '@SyliusAdmin/Common/Form/_address.html.twig' with {'form': form.shippingAddress} %}
+        </div>
+
+        {{ form_row(form._token) }}
+        {% include '@SyliusUi/Form/Buttons/_update.html.twig' with {'paths': {'cancel': path('sylius_admin_order_index')}} %}
+    </div>
+{{ form_end(form, {'render_rest': false}) }}
+{% endblock %}

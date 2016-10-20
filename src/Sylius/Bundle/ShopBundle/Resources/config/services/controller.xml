@@ -17,14 +17,14 @@
             <argument type="service" id="templating" />
         </service>
 
-        <service id="sylius.controller.shop.currency" class="Sylius\Bundle\ShopBundle\Controller\CurrencyController">
+        <service id="sylius.controller.shop.currency_switch" class="Sylius\Bundle\ShopBundle\Controller\CurrencySwitchController">
             <argument type="service" id="templating" />
             <argument type="service" id="sylius.context.currency" />
             <argument type="service" id="sylius.currency_provider" />
             <argument type="service" id="sylius.handler.currency_change" />
         </service>
 
-        <service id="sylius.controller.shop.locale" class="Sylius\Bundle\ShopBundle\Controller\LocaleController">
+        <service id="sylius.controller.shop.locale_switch" class="Sylius\Bundle\ShopBundle\Controller\LocaleSwitchController">
             <argument type="service" id="templating" />
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.locale_provider" />

@@ -60,6 +60,8 @@ final class AdminUserExampleFactory implements ExampleFactoryInterface
                 ->setDefault('password', 'password123')
                 ->setDefault('locale_code', $localeCode)
                 ->setDefault('api', false)
+                ->setDefined('first_name')
+                ->setDefined('last_name')
         ;
     }
 
@@ -78,6 +80,13 @@ final class AdminUserExampleFactory implements ExampleFactoryInterface
         $user->setEnabled($options['enabled']);
         $user->addRole('ROLE_ADMINISTRATION_ACCESS');
         $user->setLocaleCode($options['locale_code']);
+
+        if (isset($options['first_name'])) {
+            $user->setFirstName($options['first_name']);
+        }
+        if (isset($options['last_name'])) {
+            $user->setLastName($options['last_name']);
+        }
 
         if ($options['api']) {
             $user->addRole('ROLE_API_ACCESS');

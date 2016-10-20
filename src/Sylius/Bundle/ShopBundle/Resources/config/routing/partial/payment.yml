@@ -1,0 +1,12 @@
+sylius_shop_partial_payment_change_method:
+    path: /{id}/change-method
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.payment:updateAction
+        _sylius:
+            template: @SyliusShop/Payment/Partial/_changeMethod.html.twig
+            form: sylius_checkout_payment
+            redirect:
+                route: sylius_shop_order_pay
+                parameters:
+                    paymentId: $id

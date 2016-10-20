@@ -125,7 +125,7 @@ final class ProductContext implements Context
             sprintf('Product should have attribute %s with value %s, but it does not.', $attributeName, $AttributeValue)
         );
     }
-    
+
     /**
      * @When /^I browse products from (taxon "([^"]+)")$/
      */
@@ -265,11 +265,13 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When /^I start sorting products from the (\w+)(?:| price)$/
+     * @When /^I view (oldest|newest) products from (taxon "([^"]+)")$/
      */
-    public function iSortProductsBy($typeOfSort)
+    public function iViewSortedProductsFromTaxon($sortDirection, TaxonInterface $taxon)
     {
-        $this->taxonShowPage->sortBy($typeOfSort);
+        $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
+
+        $this->taxonShowPage->open(['permalink' => $taxon->getPermalink(), 'sorting' => $sorting]);
     }
 
     /**

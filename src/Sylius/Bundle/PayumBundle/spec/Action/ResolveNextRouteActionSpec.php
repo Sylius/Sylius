@@ -57,7 +57,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         $payment->getOrder()->willReturn($order);
         $order->getTokenValue()->willReturn('qwerty');
 
-        $resolveNextRouteRequest->setRouteName('sylius_shop_order_show_details')->shouldBeCalled();
+        $resolveNextRouteRequest->setRouteName('sylius_shop_order_show')->shouldBeCalled();
         $resolveNextRouteRequest->setRouteParameters(['tokenValue' => 'qwerty'])->shouldBeCalled();
 
         $this->execute($resolveNextRouteRequest);
@@ -73,7 +73,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         $payment->getOrder()->willReturn($order);
         $order->getTokenValue()->willReturn('qwerty');
 
-        $resolveNextRouteRequest->setRouteName('sylius_shop_order_show_details')->shouldBeCalled();
+        $resolveNextRouteRequest->setRouteName('sylius_shop_order_show')->shouldBeCalled();
         $resolveNextRouteRequest->setRouteParameters(['tokenValue' => 'qwerty'])->shouldBeCalled();
 
         $this->execute($resolveNextRouteRequest);
@@ -89,7 +89,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         $payment->getOrder()->willReturn($order);
         $order->getTokenValue()->willReturn('qwerty');
 
-        $resolveNextRouteRequest->setRouteName('sylius_shop_order_show_details')->shouldBeCalled();
+        $resolveNextRouteRequest->setRouteName('sylius_shop_order_show')->shouldBeCalled();
         $resolveNextRouteRequest->setRouteParameters(['tokenValue' => 'qwerty'])->shouldBeCalled();
 
         $this->execute($resolveNextRouteRequest);
@@ -105,7 +105,7 @@ final class ResolveNextRouteActionSpec extends ObjectBehavior
         $payment->getOrder()->willReturn($order);
         $order->getTokenValue()->willReturn('qwerty');
 
-        $resolveNextRouteRequest->setRouteName('sylius_shop_order_show_details')->shouldBeCalled();
+        $resolveNextRouteRequest->setRouteName('sylius_shop_order_show')->shouldBeCalled();
         $resolveNextRouteRequest->setRouteParameters(['tokenValue' => 'qwerty'])->shouldBeCalled();
 
         $this->execute($resolveNextRouteRequest);

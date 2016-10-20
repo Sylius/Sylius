@@ -1,5 +1,5 @@
 imports:
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/administrator.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/admin_user.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/channel.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/country.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/currency.yml" }
@@ -33,25 +33,25 @@ sylius_grid:
         - doctrine/phpcr-odm
     templates:
         action:
-            manage_coupons: "SyliusAdminBundle:Promotion/Action:manageCoupons.html.twig"
-            create_coupon: "SyliusAdminBundle:PromotionCoupon/Action:create.html.twig"
-            update_coupon: "SyliusAdminBundle:PromotionCoupon/Action:update.html.twig"
-            delete_coupon: "SyliusAdminBundle:PromotionCoupon/Action:delete.html.twig"
-            generate_coupon: "SyliusAdminBundle:PromotionCoupon/Action:generate.html.twig"
-            create_zone: "SyliusAdminBundle:Zone/Action:createZone.html.twig"
-            create_product: "SyliusAdminBundle:Product/Action:createProduct.html.twig"
-            create_product_attribute: "SyliusAdminBundle:ProductAttribute/Action:createProductAttribute.html.twig"
-            create_variant: "SyliusAdminBundle:ProductVariant/Action:create.html.twig"
-            manage_variants: "SyliusAdminBundle:Product/Action:manageVariants.html.twig"
-            update_variant: "SyliusAdminBundle:ProductVariant/Action:update.html.twig"
-            delete_variant: "SyliusAdminBundle:ProductVariant/Action:delete.html.twig"
-            show: "SyliusAdminBundle:Grid/Action:show.html.twig"
-            create: "SyliusAdminBundle:Grid/Action:create.html.twig"
-            update: "SyliusAdminBundle:Grid/Action:update.html.twig"
-            delete: "SyliusAdminBundle:Grid/Action:delete.html.twig"
+            manage_coupons: "@SyliusAdmin/Promotion/Grid/Action/manageCoupons.html.twig"
+            create_coupon: "@SyliusAdmin/PromotionCoupon/Grid/Action/create.html.twig"
+            update_coupon: "@SyliusAdmin/PromotionCoupon/Grid/Action/update.html.twig"
+            delete_coupon: "@SyliusAdmin/PromotionCoupon/Grid/Action/delete.html.twig"
+            generate_coupon: "@SyliusAdmin/PromotionCoupon/Grid/Action/generate.html.twig"
+            create_zone: "@SyliusAdmin/Zone/Grid/Action/createZone.html.twig"
+            create_product: "@SyliusAdmin/Product/Grid/Action/createProduct.html.twig"
+            create_product_attribute: "@SyliusAdmin/ProductAttribute/Grid/Action/createProductAttribute.html.twig"
+            create_variant: "@SyliusAdmin/ProductVariant/Grid/Action/create.html.twig"
+            manage_variants: "@SyliusAdmin/Product/Grid/Action/manageVariants.html.twig"
+            update_variant: "@SyliusAdmin/ProductVariant/Grid/Action/update.html.twig"
+            delete_variant: "@SyliusAdmin/ProductVariant/Grid/Action/delete.html.twig"
+            show: "@SyliusAdmin/Grid/Action/show.html.twig"
+            create: "@SyliusAdmin/Grid/Action/create.html.twig"
+            update: "@SyliusAdmin/Grid/Action/update.html.twig"
+            delete: "@SyliusAdmin/Grid/Action/delete.html.twig"
         filter:
-            string: "SyliusAdminBundle:Grid/Filter:string.html.twig"
-            boolean: "SyliusAdminBundle:Grid/Filter:boolean.html.twig"
+            string: "@SyliusAdmin/Grid/Filter/string.html.twig"
+            boolean: "@SyliusAdmin/Grid/Filter/boolean.html.twig"
 
 liip_imagine:
     filter_sets:

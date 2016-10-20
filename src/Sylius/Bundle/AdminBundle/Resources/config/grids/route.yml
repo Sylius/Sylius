@@ -13,11 +13,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.content
                     options:
-                        template: SyliusAdminBundle:Route/Field:content.html.twig
-            filters:
-                name:
-                    type: string
-                    label: sylius.ui.name
+                        template: @SyliusAdmin/Route/Grid/Field/content.html.twig
             actions:
                 main:
                     create:

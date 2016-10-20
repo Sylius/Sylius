@@ -13,18 +13,23 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 usageLimit:
                     type: string
                     label: sylius.ui.usage_limit
+                    sortable: ~
                 perCustomerUsageLimit:
                     type: string
                     label: sylius.ui.per_customer_usage_limit
+                    sortable: ~
                 used:
                     type: string
                     label: sylius.ui.used
+                    sortable: ~
                 expiresAt:
                     type: datetime
                     label: sylius.ui.expires_at
+                    sortable: ~
                     options:
                         format: d-m-Y
             filters:

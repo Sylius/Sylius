@@ -37,11 +37,6 @@
                 <option name="pattern">/[A-Z]{2}-[^W\d]{2,}/</option>
                 <option name="groups">sylius</option>
             </constraint>
-            <constraint name="Length">
-                <option name="min">5</option>
-                <option name="minMessage">sylius.province.code.min_length</option>
-                <option name="groups">sylius</option>
-            </constraint>
         </property>
         <property name="name">
             <constraint name="NotBlank">

@@ -28,9 +28,12 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
         $queryBuilder = $this->createQueryBuilder('o');
 
         return $queryBuilder
+            ->addSelect('channel')
+            ->leftJoin('o.channel', 'channel')
             ->addSelect('customer')
             ->leftJoin('o.customer', 'customer')
-            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->andWhere('o.state != :state')
+            ->setParameter('state', OrderInterface::STATE_CART)
         ;
     }
 

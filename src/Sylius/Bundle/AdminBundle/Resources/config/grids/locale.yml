@@ -16,13 +16,15 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.name
                     path: .
+                    sortable: code
                     options:
-                        template: SyliusAdminBundle:Locale/Field:name.html.twig
+                        template: @SyliusAdmin/Locale/Grid/Field/name.html.twig
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
+                    sortable: ~
                     options:
-                        template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+                        template: @SyliusAdmin/Grid/Field/enabled.html.twig
             filters:
                 code:
                     type: string

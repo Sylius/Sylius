@@ -12,9 +12,15 @@
     </a>
     <div class="ui right floated simple dropdown item">
         <img class="ui avatar image" src="{{ asset('assets/admin/img/avatar.png') }}">
-        <span>{{ app.user.username }}</span>
+        <span>
+            {{ app.user.firstName|default(app.user.email) }}
+        </span>
         <i class="dropdown icon"></i>
         <div class="menu">
+            <a href="{{ path('sylius_admin_admin_user_update', {'id': app.user.id}) }}" class="item">
+                <i class="user icon"></i>
+                {{ 'sylius.ui.my_account'|trans }}
+            </a>
             <a href="{{ path('sylius_admin_logout') }}" id="sylius-logout-button" class="item">
                 <i class="sign out icon"></i>
                 {{ 'sylius.ui.logout'|trans }}

@@ -56,14 +56,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function sortBy($typeOfSort)
-    {
-        $this->getDocument()->find('css', sprintf('a:contains("%s")', $typeOfSort))->click();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function countProductsItems()
     {
         $productsList = $this->getDocument()->find('css', '#products');

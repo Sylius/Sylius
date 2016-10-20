@@ -1,0 +1,23 @@
+sylius_admin_partial_shipment_ship:
+    path: /{id}/ship
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+        _sylius:
+            repository:
+                method: findByOrderIdAndId
+                arguments:
+                    orderId: $orderId
+                    id: $id
+            state_machine:
+                graph: sylius_shipment
+                transition: ship
+            redirect: referer
+            section: admin
+            template: @SyliusAdmin/Shipment/Partial/_ship.html.twig
+            form: sylius_shipment_ship
+            vars:
+                route:
+                    parameters:
+                        orderId: $orderId
+                        id: $id
