@@ -43,6 +43,7 @@
         <service id="sylius.form.type.promotion_action.unit_percentage_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitPercentageDiscountConfigurationType">
             <tag name="form.type" alias="sylius_promotion_action_unit_percentage_discount_configuration" />
         </service>
+
         <service id="sylius.form.type.promotion_rule.item_total_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType">
             <tag name="form.type" alias="sylius_promotion_rule_item_total_configuration" />
         </service>
@@ -52,6 +53,13 @@
         <service id="sylius.form.type.promotion_coupon_to_code" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponToCodeType">
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <tag name="form.type" alias="sylius_promotion_coupon_to_code" />
+        </service>
+
+        <service id="sylius.form.type.promotion_action.filters" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionFiltersType">
+            <tag name="form.type" alias="sylius_promotion_filters" />
+        </service>
+        <service id="sylius.form.type.promotion_action.filter.price_range" class="Sylius\Bundle\PromotionBundle\Form\Type\Filter\PriceRangeFilterConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_action_filter_price_range_configuration" />
         </service>
 
         <service id="sylius.form.type.promotion_coupon_generator_instruction" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponGeneratorInstructionType">

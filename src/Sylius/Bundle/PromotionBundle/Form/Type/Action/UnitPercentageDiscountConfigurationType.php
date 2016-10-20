@@ -11,14 +11,18 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sylius\Bundle\PromotionBundle\Form\Type\Filter\ActionFiltersType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Range;
+use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * @author Viorel Craescu <viorel@craescu.com>
  * @author Gabi Udrescu <gabriel.udr@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UnitPercentageDiscountConfigurationType extends PercentageDiscountConfigurationType
+class UnitPercentageDiscountConfigurationType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -28,9 +32,22 @@ class UnitPercentageDiscountConfigurationType extends PercentageDiscountConfigur
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('filters', ActionFiltersType::class, [
-            'empty_data' => [],
-        ]);
+        $builder
+            ->add('percentage', 'percent', [
+                'label' => 'sylius.form.promotion_action.percentage_discount_configuration.percentage',
+                'constraints' => [
+                    new NotBlank(),
+                    new Type(['type' => 'numeric']),
+                    new Range([
+                        'min' => 0,
+                        'max' => 1,
+                        'minMessage' => 'sylius.promotion_action.percentage_discount_configuration.min',
+                        'maxMessage' => 'sylius.promotion_action.percentage_discount_configuration.max',
+                    ]),
+                ],
+            ])
+            ->add('filters', 'sylius_promotion_filters')
+        ;
     }
 
     public function getName()

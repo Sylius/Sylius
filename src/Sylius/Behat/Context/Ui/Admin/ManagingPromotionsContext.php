@@ -186,11 +186,21 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given /^I add a price filter with minimum value of ("(?:€|£|\$)[^"]+")$/
+     * @When /^I specify that this filter should be applied for amount greater then ("(?:€|£|\$)[^"]+")$/
      */
-    public function iAddAPriceFilterRange($minimum)
+    public function iAddAMinPriceFilterRange($minimum)
     {
         $this->createPage->fillActionOption('Min', $minimum);
+    }
+
+    /**
+     * @When /^I specify that this filter should be applied for amount greater then ("(?:€|£|\$)[^"]+") but lesser then ("(?:€|£|\$)[^"]+")$/
+     */
+    public function iAddAMinMaxPriceFilterRange($minimum, $maximum)
+    {
+        $this->iAddAMinPriceFilterRange($minimum);
+
+        $this->createPage->fillActionOption('Max', $maximum);
     }
 
     /**
