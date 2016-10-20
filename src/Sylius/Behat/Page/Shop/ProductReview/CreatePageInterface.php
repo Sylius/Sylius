@@ -41,12 +41,22 @@ interface CreatePageInterface extends PageInterface
     public function submitReview();
 
     /**
-     * @return bool
+     * @return string
      */
-    public function hasRateValidationMessage();
+    public function getRateValidationMessage();
 
     /**
-     * @return bool
+     * @return string
      */
-    public function hasTitleValidationMessage();
+    public function getTitleValidationMessage();
+
+    /**
+     * @return string
+     */
+    public function getCommentValidationMessage();
+
+    /**
+     * @return string
+     */
+    public function getAuthorValidationMessage();
 }

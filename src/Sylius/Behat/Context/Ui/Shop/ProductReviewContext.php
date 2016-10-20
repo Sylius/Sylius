@@ -54,11 +54,12 @@ final class ProductReviewContext implements Context
     }
 
     /**
+     * @When I leave a comment :comment as :author
      * @When I leave a comment :comment, titled :title
      * @When I leave a comment :comment, titled :title as :author
-     * @When I leave a comment :comment as :author
+     * @When I leave a review titled :title as :author
      */
-    public function iLeaveACommentTitled($comment, $title = null, $author = null)
+    public function iLeaveACommentTitled($comment = null, $title = null, $author = null)
     {
         $this->createPage->titleReview($title);
         $this->createPage->setComment($comment);
@@ -98,20 +99,46 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatIMustCheckReviewRating()
     {
-        Assert::true(
-            $this->createPage->hasRateValidationMessage(),
+        Assert::same(
+            $this->createPage->getRateValidationMessage(),
+            'You must check review rating.',
             'There should be rate validation error, but there is not.'
         );
     }
 
     /**
-     * @Then I should be notified that I title is required
+     * @Then I should be notified that title is required
      */
     public function iShouldBeNotifiedThatTitleIsRequired()
     {
-        Assert::true(
-            $this->createPage->hasTitleValidationMessage(),
+        Assert::same(
+            $this->createPage->getTitleValidationMessage(),
+            'Review title should not be blank.',
             'There should be title validation error, but there is not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that comment is required
+     */
+    public function iShouldBeNotifiedThatCommentIsRequired()
+    {
+        Assert::same(
+            $this->createPage->getCommentValidationMessage(),
+            'Review comment should not be blank.',
+            'There should be comment validation error, but there is not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that I must enter my email
+     */
+    public function iShouldBeNotifiedThatIMustEnterMyEmail()
+    {
+        Assert::same(
+            $this->createPage->getAuthorValidationMessage(),
+            'Please enter your email.',
+            'There should be author validation error, but there is not.'
         );
     }
 }
