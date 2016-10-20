@@ -171,7 +171,7 @@ final class CustomerContext implements Context
      */
     public function heHasBillingAddress(CustomerInterface $customer, AddressInterface $address)
     {
-        $customer->setBillingAddress($address);
+        $customer->setDefaultAddress($address);
 
         $this->customerManager->flush();
     }

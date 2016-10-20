@@ -47,36 +47,32 @@ final class CheckoutAddressingListenerSpec extends ObjectBehavior
         $this->setCustomerAddressing($event);
     }
 
-    function it_sets_customer_default_addressing_from_order(GenericEvent $event, OrderInterface $order, CustomerInterface $customer, AddressInterface $address)
+    function it_sets_customer_default_address_from_order(GenericEvent $event, OrderInterface $order, CustomerInterface $customer, AddressInterface $address)
     {
         $event->getSubject()->willReturn($order);
 
         $order->getCustomer()->willReturn($customer);
 
         $order->getShippingAddress()->willReturn($address);
-        $customer->getShippingAddress()->willReturn(null);
-        $customer->setShippingAddress($address)->shouldBeCalled();
-
         $order->getBillingAddress()->willReturn($address);
-        $customer->getBillingAddress()->willReturn(null);
-        $customer->setBillingAddress($address)->shouldBeCalled();
+
+        $customer->getDefaultAddress()->willReturn(null);
+        $customer->setDefaultAddress($address)->shouldBeCalled();
 
         $this->setCustomerAddressing($event);
     }
 
-    function it_does_not_set_customer_addressing_when_customer_already_have_default_addresses(GenericEvent $event, OrderInterface $order, CustomerInterface $customer, AddressInterface $address)
+    function it_does_not_set_customer_default_address_when_they_already_have_one(GenericEvent $event, OrderInterface $order, CustomerInterface $customer, AddressInterface $address)
     {
         $event->getSubject()->willReturn($order);
 
         $order->getCustomer()->willReturn($customer);
 
         $order->getShippingAddress()->willReturn($address);
-        $customer->getShippingAddress()->willReturn($address);
-        $customer->setShippingAddress($address)->shouldNotBeCalled();
-
         $order->getBillingAddress()->willReturn($address);
-        $customer->getBillingAddress()->willReturn($address);
-        $customer->setBillingAddress($address)->shouldNotBeCalled();
+
+        $customer->getDefaultAddress()->willReturn($address);
+        $customer->setDefaultAddress($address)->shouldNotBeCalled();
 
         $this->setCustomerAddressing($event);
     }

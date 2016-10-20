@@ -42,12 +42,8 @@ final class CheckoutAddressingListener
             return;
         }
 
-        if (null === $customer->getShippingAddress()) {
-            $customer->setShippingAddress(clone $order->getShippingAddress());
-        }
-
-        if (null === $customer->getBillingAddress()) {
-            $customer->setBillingAddress(clone $order->getBillingAddress());
+        if (null === $customer->getDefaultAddress()) {
+            $customer->setDefaultAddress(clone $order->getShippingAddress());
         }
     }
 }
