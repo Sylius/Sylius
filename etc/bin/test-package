@@ -37,7 +37,7 @@ run_phpspec() {
         return 1
     fi
 
-    retry_run_command "php -d opcache.enable_cli=0 ${phpspec} run --ansi --no-interaction --format=dot"
+    retry_run_command "${phpspec} run --ansi --no-interaction --format=dot"
 }
 
 # Argument 1: Package path

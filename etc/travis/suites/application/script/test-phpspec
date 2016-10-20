@@ -3,4 +3,4 @@
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
 
 print_header "Testing (Phpspec)" "Sylius"
-run_command "php -d opcache.enable_cli=0 bin/phpspec run --no-interaction -f dot"
+run_command "bin/phpspec run --no-interaction -f dot"
