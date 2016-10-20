@@ -33,6 +33,7 @@
                 </div>
                 {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
                 <div class="field">
+                    {{ form_errors(form.author.email) }}
                     {{ form_widget(form.author.email, { 'attr': { 'placeholder': 'sylius.ui.author'|trans } }) }}
                 </div>
                 {% endif %}

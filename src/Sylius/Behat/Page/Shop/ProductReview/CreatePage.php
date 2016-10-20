@@ -66,23 +66,33 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasRateValidationMessage()
+    public function getRateValidationMessage()
     {
-        return
-            'You must check review rating.' ===
-            $this->getElement('rating')->find('css', '.sylius-validation-error')->getText()
-        ;
+        return $this->getElement('rating')->find('css', '.sylius-validation-error')->getText();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasTitleValidationMessage()
+    public function getTitleValidationMessage()
     {
-        return
-            'Review title should not be blank.' ===
-            $this->getElement('title')->find('css', '.sylius-validation-error')->getText()
-        ;
+        return $this->getElement('title')->find('css', '.sylius-validation-error')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCommentValidationMessage()
+    {
+        return $this->getElement('comment')->find('css', '.sylius-validation-error')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAuthorValidationMessage()
+    {
+        return $this->getElement('author')->find('css', '.sylius-validation-error')->getText();
     }
 
     /**
@@ -91,6 +101,8 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'author' => 'form, .field:nth-child(4)',
+            'comment' => 'form, .field:nth-child(3)',
             'rate' => '.star.rating .icon:nth-child(%rate%)',
             'rating' => 'form .field:first-child',
             'title' => 'form .field:nth-child(2)',

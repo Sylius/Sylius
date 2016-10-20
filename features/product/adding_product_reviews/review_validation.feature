@@ -8,7 +8,7 @@ Feature: Review validation
         Given the store operates on a single channel in "United States"
         And the store has a product "Necronomicon"
 
-    @ui @javascript
+    @ui
     Scenario: Adding a product review without specifying a rate
         Given I want to review product "Necronomicon"
         When I leave a comment "This book made me sad, but plot was fine.", titled "Not good, not bad" as "bartholomew@heaven.com"
@@ -20,4 +20,18 @@ Feature: Review validation
         Given I want to review product "Necronomicon"
         When I leave a comment "This book made me sad, but plot was fine." as "bartholomew@heaven.com"
         And I rate it with 3 points
-        Then I should be notified that I title is required
+        Then I should be notified that title is required
+
+    @ui @javascript
+    Scenario: Adding a product review without specifying a comment
+        Given I want to review product "Necronomicon"
+        When I leave a review titled "Not good, not bad" as "bartholomew@heaven.com"
+        And I rate it with 3 points
+        Then I should be notified that comment is required
+
+    @ui @javascript
+    Scenario: Adding a product review without specifying an author email
+        Given I want to review product "Necronomicon"
+        When I leave a comment "Not good, not bad", titled "Not good, not bad"
+        And I rate it with 3 points
+        Then I should be notified that I must enter my email
