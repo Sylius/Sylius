@@ -1,4 +1,4 @@
-@viewing_products
+@viewing_product_reviews
 Feature: Viewing product reviews on product's details page
     In order to know other customer's opinion about product
     As a Customer

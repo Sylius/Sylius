@@ -17,7 +17,7 @@
             </div>
             <form action="{{ path('sylius_shop_product_reviews_create', { 'slug': product_review.reviewSubject.getSlug() }) }}" method="POST" class="ui reply form">
                 <div class="field">
-                    <div class="ui huge star rating" data-rating="5" data-max-rating="5"></div>
+                    <div class="ui huge star rating" data-rating="0" data-max-rating="5"></div>
                     {{ form_widget(form.rating, { 'attr': { 'style': 'display: none' }, 'value': '5' }) }}
                 </div>
                 <div class="field">
