@@ -67,33 +67,6 @@ class TaxonChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    protected function buildTreeChoices($choices, $level = 0)
-    {
-        $result = [];
-
-        /** @var TaxonInterface $choice */
-        foreach ($choices as $choice) {
-            $result[] = new ChoiceView(
-                str_repeat('-', $level).' '.$choice->getName(),
-                $choice->getId(),
-                $choice,
-                []
-            );
-
-            if (!$choice->getChildren()->isEmpty()) {
-                $result = array_merge(
-                    $result,
-                    $this->buildTreeChoices($choice->getChildren(), $level + 1)
-                );
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getParent()
     {
         return 'choice';
