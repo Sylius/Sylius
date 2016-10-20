@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ReviewBundle\Validator\Constraints;
 
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -67,6 +68,10 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
 
         $token = $this->tokenStorage->getToken();
         if ($this->checkIfUserIsAuthenticated($token)) {
+            if ($this->checkIfAdminUser($token)) {
+                return;
+            }
+
             if (null !== $customer && $token->getUser()->getCustomer()->getEmail() === $customer->getEmail()) {
                 return;
             }
@@ -93,6 +98,16 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
             null !== $token &&
             $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') &&
             $token->getUser() instanceof UserInterface
-        ;
+            ;
+    }
+
+    /**
+     * @param TokenInterface $token
+     *
+     * @return bool
+     */
+    private function checkIfAdminUser(TokenInterface $token)
+    {
+        return $token->getUser() instanceof AdminUserInterface;
     }
 }
