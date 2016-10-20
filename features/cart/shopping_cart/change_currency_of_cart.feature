@@ -18,6 +18,6 @@ Feature: All of my cart's values get updated to the currency of my choosing
         Given I have product "The Pug Mug" in the cart
         When I switch to the "GBP" currency
         Then my cart total should be "£32.00"
-        And total price of "The Pug Mug" item should be "£22.00"
+        And total price of "The Pug Mug" item should be "£20.00"
         And my cart taxes should be "£2.00"
         And my cart shipping total should be "£10.00"
