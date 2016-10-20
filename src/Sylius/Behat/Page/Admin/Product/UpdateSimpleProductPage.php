@@ -84,7 +84,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
         $this->getDriver()->executeScript(sprintf('$(\'input.search\').val(\'%s\')', $taxon->getName()));
         $this->getElement('search')->click();
-        $this->getElement('search')->waitFor(100,
+        $this->getElement('search')->waitFor(10,
             function () {
                 return $this->hasElement('search_item_selected');
             });
