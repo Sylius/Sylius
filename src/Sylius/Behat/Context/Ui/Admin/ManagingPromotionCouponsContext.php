@@ -85,6 +85,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Given /^I want to view all coupons of (this promotion)$/
      * @Given /^I want to view all coupons of ("[^"]+" promotion)$/
+     * @When /^I browse all coupons of ("[^"]+" promotion)$/
      */
     public function iWantToViewAllCouponsOfThisPromotion(PromotionInterface $promotion)
     {
@@ -286,6 +287,17 @@ final class ManagingPromotionCouponsContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['usageLimit' => $limit]),
             sprintf('There should be coupon with %s usage limit', $limit)
+        );
+    }
+
+    /**
+     * @Then /^("[^"]+" coupon) should be used (\d+) time(?:|s)$/
+     */
+    public function couponShouldHaveUsageLimit(PromotionCouponInterface $promotionCoupon, $used)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['code' => $promotionCoupon->getCode(), 'used' => $used]),
+            sprintf('Coupon %s should be used % time', $promotionCoupon->getCode(), $used)
         );
     }
 

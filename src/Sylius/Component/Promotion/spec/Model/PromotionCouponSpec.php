@@ -77,6 +77,13 @@ final class PromotionCouponSpec extends ObjectBehavior
         $this->getUsed()->shouldReturn(1);
     }
 
+    function its_used_is_decrementable()
+    {
+        $this->setUsed(5);
+        $this->decrementUsed();
+        $this->getUsed()->shouldReturn(4);
+    }
+
     function it_does_not_have_promotion_by_default()
     {
         $this->getPromotion()->shouldReturn(null);

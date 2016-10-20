@@ -42,6 +42,8 @@ interface PromotionCouponInterface extends CodeAwareInterface, TimestampableInte
 
     public function incrementUsed();
 
+    public function decrementUsed();
+
     /**
      * @return PromotionInterface
      */

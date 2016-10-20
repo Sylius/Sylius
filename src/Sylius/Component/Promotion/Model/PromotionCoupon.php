@@ -117,6 +117,14 @@ class PromotionCoupon implements PromotionCouponInterface
     /**
      * {@inheritdoc}
      */
+    public function decrementUsed()
+    {
+        --$this->used;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPromotion()
     {
         return $this->promotion;

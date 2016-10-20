@@ -26,6 +26,11 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
         foreach ($order->getPromotions() as $promotion) {
             $promotion->incrementUsed();
         }
+
+        $promotionCoupon = $order->getPromotionCoupon();
+        if (null !== $promotionCoupon) {
+            $promotionCoupon->incrementUsed();
+        }
     }
 
     /**
@@ -35,6 +40,11 @@ final class OrderPromotionsUsageModifier implements OrderPromotionsUsageModifier
     {
         foreach ($order->getPromotions() as $promotion) {
             $promotion->decrementUsed();
+        }
+
+        $promotionCoupon = $order->getPromotionCoupon();
+        if (null !== $promotionCoupon) {
+            $promotionCoupon->decrementUsed();
         }
     }
 }

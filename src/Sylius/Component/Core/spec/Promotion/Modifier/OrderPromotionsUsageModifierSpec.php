@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Core\Promotion\Modifier;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifier;
 use Sylius\Component\Core\Promotion\Modifier\OrderPromotionsUsageModifierInterface;
@@ -40,6 +41,7 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $secondPromotion
     ) {
         $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+        $order->getPromotionCoupon()->willReturn(null);
 
         $firstPromotion->incrementUsed()->shouldBeCalled();
         $secondPromotion->incrementUsed()->shouldBeCalled();
@@ -53,9 +55,44 @@ final class OrderPromotionsUsageModifierSpec extends ObjectBehavior
         PromotionInterface $secondPromotion
     ) {
         $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+        $order->getPromotionCoupon()->willReturn(null);
 
         $firstPromotion->decrementUsed()->shouldBeCalled();
         $secondPromotion->decrementUsed()->shouldBeCalled();
+
+        $this->decrement($order);
+    }
+
+    function it_increments_a_usage_of_promotions_and_promotion_coupon_applied_on_order(
+        OrderInterface $order,
+        PromotionInterface $firstPromotion,
+        PromotionInterface $secondPromotion,
+        PromotionCouponInterface $promotionCoupon
+    ) {
+        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+        $order->getPromotionCoupon()->willReturn($promotionCoupon);
+
+        $firstPromotion->incrementUsed()->shouldBeCalled();
+        $secondPromotion->incrementUsed()->shouldBeCalled();
+
+        $promotionCoupon->incrementUsed()->shouldBeCalled();
+
+        $this->increment($order);
+    }
+
+    function it_decrements_a_usage_of_promotions_and_promotion_coupon_applied_on_order(
+        OrderInterface $order,
+        PromotionInterface $firstPromotion,
+        PromotionInterface $secondPromotion,
+        PromotionCouponInterface $promotionCoupon
+    ) {
+        $order->getPromotions()->willReturn([$firstPromotion, $secondPromotion]);
+        $order->getPromotionCoupon()->willReturn($promotionCoupon);
+
+        $firstPromotion->decrementUsed()->shouldBeCalled();
+        $secondPromotion->decrementUsed()->shouldBeCalled();
+
+        $promotionCoupon->decrementUsed()->shouldBeCalled();
 
         $this->decrement($order);
     }
