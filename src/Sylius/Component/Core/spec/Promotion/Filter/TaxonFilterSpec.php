@@ -49,7 +49,7 @@ final class TaxonFilterSpec extends ObjectBehavior
         $product2->getTaxons()->willReturn([$taxon2]);
         $taxon2->getCode()->willReturn('taxon2');
 
-        $this->filter([$item1, $item2], ['filters' => ['taxons' => ['taxon1']]])->shouldReturn([$item1]);
+        $this->filter([$item1, $item2], ['filters' => ['taxons_filter' => ['taxons' => ['taxon1']]]])->shouldReturn([$item1]);
     }
 
     function it_returns_all_items_if_configuration_is_invalid(OrderItemInterface $item)

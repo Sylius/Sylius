@@ -23,13 +23,13 @@ final class TaxonFilter implements FilterInterface
      */
     public function filter(array $items, array $configuration)
     {
-        if (!isset($configuration['filters']['taxons'])) {
+        if (!isset($configuration['filters']['taxons_filter'])) {
             return $items;
         }
 
         $filteredItems = [];
         foreach ($items as $item) {
-            if ($this->hasProductValidTaxon($item->getProduct(), $configuration['filters']['taxons'])) {
+            if ($this->hasProductValidTaxon($item->getProduct(), $configuration['filters']['taxons_filter']['taxons'])) {
                 $filteredItems[] = $item;
             }
         }

@@ -570,7 +570,7 @@ final class PromotionContext implements Context
      */
     private function getTaxonFilterConfiguration(array $taxonCodes)
     {
-        return ['filters' => ['taxons' => $taxonCodes]];
+        return ['filters' => ['taxons_filter' => ['taxons' => $taxonCodes]]];
     }
 
     /**

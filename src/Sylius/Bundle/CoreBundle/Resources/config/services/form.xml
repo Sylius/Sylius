@@ -106,6 +106,13 @@
             <argument type="service" id="sylius.repository.product" />
             <tag name="form.type" alias="sylius_promotion_rule_contains_product_configuration" />
         </service>
+        <service id="sylius.form.type.promotion_action.filters" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionFiltersType">
+            <tag name="form.type" alias="sylius_promotion_filters" />
+        </service>
+        <service id="sylius.form.type.promotion_action.filter.taxon" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter\TaxonFilterConfigurationType">
+            <argument type="service" id="sylius.form.type.data_transformer.taxons_to_codes" />
+            <tag name="form.type" alias="sylius_promotion_action_filter_taxon_configuration" />
+        </service>
 
         <service id="sylius.form.type.price_calculator.channel_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelBasedConfigurationType">
             <argument type="service" id="sylius.repository.channel" />
