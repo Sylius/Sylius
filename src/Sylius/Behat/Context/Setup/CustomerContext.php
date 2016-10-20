@@ -176,6 +176,37 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @Given /^(the customer) subscribed to the newsletter$/
+     */
+    public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer)
+    {
+        $customer->setSubscribedToNewsletter(true);
+
+        $this->customerManager->flush();
+    }
+
+    /**
+     * @Given /^I have an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") in address book$/
+     */
+    public function iHaveAnAddressInAddressBook(AddressInterface $address)
+    {
+        $user = $this->sharedStorage->get('user');
+        $user->getCustomer()->addAddress($address);
+        
+        $this->customerManager->flush();
+    }
+
+    /**
+     * @Given /^(this customer) has an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") in address book$/
+     */
+    public function thisCustomerHasAnAddressInAddressBook(CustomerInterface $customer, AddressInterface $address)
+    {
+        $customer->addAddress($address);
+
+        $this->customerManager->flush();
+    }
+
+    /**
      * @param string $email
      * @param string|null $firstName
      * @param string|null $lastName
@@ -230,15 +261,5 @@ final class CustomerContext implements Context
 
         $this->sharedStorage->set('customer', $customer);
         $this->customerRepository->add($customer);
-    }
-
-    /**
-     * @Given /^(the customer) subscribed to the newsletter$/
-     */
-    public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer)
-    {
-        $customer->setSubscribedToNewsletter(true);
-
-        $this->customerManager->flush();
     }
 }

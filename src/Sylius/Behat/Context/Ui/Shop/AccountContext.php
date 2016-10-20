@@ -14,6 +14,8 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\Shop\Account\AddressBook\CreatePageInterface as AddressBookCreatePageInterface;
+use Sylius\Behat\Page\Shop\Account\AddressBook\IndexPageInterface as AddressBookIndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
@@ -21,6 +23,7 @@ use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
@@ -55,6 +58,16 @@ final class AccountContext implements Context
     private $orderShowPage;
 
     /**
+     * @var AddressBookIndexPageInterface
+     */
+    private $addressBookIndexPage;
+
+    /**
+     * @var AddressBookCreatePageInterface
+     */
+    private $addressBookCreatePage;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -65,6 +78,8 @@ final class AccountContext implements Context
      * @param ChangePasswordPageInterface $changePasswordPage
      * @param IndexPageInterface $orderIndexPage
      * @param ShowPageInterface $orderShowPage
+     * @param AddressBookIndexPageInterface $addressBookIndexPage
+     * @param AddressBookCreatePageInterface $addressBookCreatePage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -73,6 +88,8 @@ final class AccountContext implements Context
         ChangePasswordPageInterface $changePasswordPage,
         IndexPageInterface $orderIndexPage,
         ShowPageInterface $orderShowPage,
+        AddressBookIndexPageInterface $addressBookIndexPage,
+        AddressBookCreatePageInterface $addressBookCreatePage,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->dashboardPage = $dashboardPage;
@@ -80,6 +97,8 @@ final class AccountContext implements Context
         $this->changePasswordPage = $changePasswordPage;
         $this->orderIndexPage = $orderIndexPage;
         $this->orderShowPage = $orderShowPage;
+        $this->addressBookIndexPage = $addressBookIndexPage;
+        $this->addressBookCreatePage = $addressBookCreatePage;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -168,7 +187,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, StringInflector::nameToCode($element), sprintf('Please enter your %s.', $element));
+        $this->assertFieldValidationMessage(
+            $this->profileUpdatePage,
+            StringInflector::nameToCode($element),
+            sprintf('Please enter your %s.', $element)
+        );
     }
 
     /**
@@ -176,7 +199,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsInvalid($element)
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, StringInflector::nameToCode($element), sprintf('This %s is invalid.', $element));
+        $this->assertFieldValidationMessage(
+            $this->profileUpdatePage,
+            StringInflector::nameToCode($element),
+            sprintf('This %s is invalid.', $element)
+        );
     }
 
     /**
@@ -242,7 +269,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'current_password', 'Provided password is different than the current one.');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'current_password',
+            'Provided password is different than the current one.'
+        );
     }
 
     /**
@@ -250,7 +281,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'new_password', 'The entered passwords don\'t match');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'new_password',
+            'The entered passwords don\'t match'
+        );
     }
 
     /**
@@ -258,7 +293,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'new_password', 'Password must be at least 4 characters long.');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'new_password',
+            'Password must be at least 4 characters long.'
+        );
     }
 
     /**
@@ -379,7 +418,7 @@ final class AccountContext implements Context
         Assert::same(
             (int) $numberOfItems,
             $this->orderShowPage->countItems(),
-            '%s items should appear on order page, but %s rows has been found'
+            '%s items should appear on order page, but %s rows has been found.'
         );
     }
 
@@ -421,7 +460,7 @@ final class AccountContext implements Context
     {
         Assert::true(
             $this->profileUpdatePage->isSubscribedToTheNewsletter(),
-            'I should be subscribed to the newsletter, but I am not'
+            'I should be subscribed to the newsletter, but I am not.'
         );
     }
 
@@ -445,6 +484,80 @@ final class AccountContext implements Context
             $this->orderShowPage->hasBillingProvinceName($provinceName),
             sprintf('Cannot find shipping address with province %s', $provinceName)
         );
+    }
+
+    /**
+     * @When I browse my addresses
+     */
+    public function iBrowseMyAddresses()
+    {
+        $this->addressBookIndexPage->open();
+    }
+
+    /**
+     * @Then I should see a single address in the list
+     */
+    public function iShouldSeeASingleAddressInTheList()
+    {
+        Assert::true(
+            $this->addressBookIndexPage->isSingleAddressOnList(),
+            'There should be one address on the list, but it does not.'
+        );
+    }
+
+    /**
+     * @Then this address should be assigned to :fullName
+     * @Then the address assigned to :fullName should appear on the list
+     */
+    public function thisAddressShouldHavePersonFirstNameAndLastName($fullName)
+    {
+        Assert::true(
+            $this->addressBookIndexPage->hasAddressFullName($fullName),
+            sprintf('The full name in address should be %s, but it does not.', $fullName)
+        );
+    }
+
+    /**
+     * @Then I should see information about no existing addresses
+     */
+    public function iShouldSeeInformationAboutNoExistingAddresses()
+    {
+        Assert::true(
+            $this->addressBookIndexPage->hasNoExistingAddressesMessage(),
+            'There should be information about no existing addresses, but it does not.'
+        );
+    }
+
+    /**
+     * @Given I want to add a new address to my address book
+     */
+    public function iWantToAddANewAddressToMyAddressBook()
+    {
+        $this->addressBookCreatePage->open();
+    }
+
+    /**
+     * @When /^I specify its (data as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     */
+    public function iSpecifyItsDataAs(AddressInterface $address)
+    {
+        $this->addressBookCreatePage->fillAddressData($address);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully added
+     */
+    public function iShouldBeNotifiedThatAdddressHasBeenSuccessfullyAdded()
+    {
+        $this->notificationChecker->checkNotification('has been successfully added.', NotificationType::success());
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt()
+    {
+        $this->addressBookCreatePage->saveAddress();
     }
 
     /**
