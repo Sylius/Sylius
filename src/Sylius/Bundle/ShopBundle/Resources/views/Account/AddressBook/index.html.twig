@@ -14,11 +14,17 @@
 {% endblock %}
 
 {% block subcontent %}
-    <h1 class="ui dividing header">
-        {{ 'sylius.ui.address_book'|trans }}
-        <div class="sub header">{{ 'sylius.ui.browse_your_addresses'|trans }}</div>
-    </h1>
-    <a href="{{ path('sylius_shop_account_address_book_create') }}" class="ui right floated blue button"><i class="mail icon"></i> {{ 'sylius.ui.add_address'|trans }}</a>
+    <div class="ui stackable two column grid">
+        <div class="column">
+            <h1 class="ui header">
+                {{ 'sylius.ui.address_book'|trans }}
+                <div class="sub header">{{ 'sylius.ui.browse_your_addresses'|trans }}</div>
+            </h1>
+        </div>
+        <div class="middle aligned column">
+            <a href="{{ path('sylius_shop_account_address_book_create') }}" class="ui right floated blue button"><i class="mail icon"></i> {{ 'sylius.ui.add_address'|trans }}</a>
+        </div>
+    </div>
     <div class="ui segment">
          {{ messages.info('sylius.ui.no_default_address'|trans) }}
     </div>
