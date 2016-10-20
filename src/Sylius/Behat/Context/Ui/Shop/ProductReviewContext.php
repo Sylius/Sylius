@@ -16,6 +16,7 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\ProductReview\CreatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -55,8 +56,9 @@ final class ProductReviewContext implements Context
     /**
      * @When I leave a comment :comment, titled :title
      * @When I leave a comment :comment, titled :title as :author
+     * @When I leave a comment :comment as :author
      */
-    public function iLeaveACommentTitled($comment, $title, $author = null)
+    public function iLeaveACommentTitled($comment, $title = null, $author = null)
     {
         $this->createPage->titleReview($title);
         $this->createPage->setComment($comment);
@@ -67,7 +69,7 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Given I rate it with :rate point(s)
+     * @When I rate it with :rate point(s)
      */
     public function iRateItWithPoints($rate)
     {
@@ -81,5 +83,24 @@ final class ProductReviewContext implements Context
     public function iShouldBeNotifiedThatMyReviewIsWaitingForTheAcceptation()
     {
         $this->notificationChecker->checkNotification('Your review is waiting for the acceptation.', NotificationType::success());
+    }
+
+    /**
+     * @When I don not rate it
+     */
+    public function iDoNotRateIt()
+    {
+        $this->createPage->submitReview();
+    }
+
+    /**
+     * @Then I should be notified that I must check review rating
+     */
+    public function iShouldBeNotifiedThatIMustCheckReviewRating()
+    {
+        Assert::true(
+            $this->createPage->hasRateValidationMessage(),
+            'There should be rate validation error, but there is not.'
+        );
     }
 }

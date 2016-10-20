@@ -39,4 +39,9 @@ interface CreatePageInterface extends PageInterface
     public function rateReview($rate);
 
     public function submitReview();
+
+    /**
+     * @return bool
+     */
+    public function hasRateValidationMessage();
 }
