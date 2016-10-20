@@ -406,9 +406,9 @@ final class ProductContext implements Context
     public function iShouldSeeAsItsAverageRating($rating)
     {
         Assert::same(
-            (int) $rating,
-            $this->showPage->getAverageRating(),
-            'Product should have average rating %s but has %2$s'
+            (float) $rating,
+            (float) $this->showPage->getAverageRating(),
+            'Product should have average rating %2$s but has %s.'
         );
     }
 }
