@@ -10,7 +10,6 @@ sylius:
             options: Možnosti
             meta_keywords: Meta klíčová slova
             meta_description: Meta popis
-            taxons: Taxony
         product_variant:
             available_on: Dostupný od
         association_type:

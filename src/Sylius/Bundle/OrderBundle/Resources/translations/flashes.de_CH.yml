@@ -4,8 +4,5 @@
 sylius:
     cart:
         cart_save_completed: Der Warenkorb wurde erfolgreich aktualisiert.
-        cart_clear_completed: Der Warenkorb wurde geleert.
         item_add_completed: Das Produkt wurde zum Warenkorb hinzugefügt.
         item_remove_completed: Das Produkt wurde vom Warenkorb entfernt.
-        item_add_error: Beim hinzufügen des Artikels ist ein Fehler aufgetreten.
-        item_remove_error: Beim entfernen des Artikels ist ein Fehler aufgetreten.

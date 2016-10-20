@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Egységár
-                quantity: Mennyiség
-                variant: Változat
-            customer_group: Felhasználói csoport
         block:
             body: Törzs
             id: Azonosító
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Szállítási mód
         promotion:
             channels: Csatornák
-        coupon:
-            per_customer_usage_limit: Felhasználókénti felhasználási korlát
+        promotion_action:
+            add_product_configuration:
+                price: Egységár
+                variant: Változat
         group:
             name: Név
             roles: Szerepek
@@ -127,11 +123,8 @@ sylius:
             contains_taxon:
                 taxon: Taxonómia
                 count: Mennyiség
-            taxon:
-                taxons: Taxonok
             total_of_items_from_taxon:
                 taxon: Taxonómia
-                amount: Összeg
     installer:
         extensions:
             header: kiegészítők

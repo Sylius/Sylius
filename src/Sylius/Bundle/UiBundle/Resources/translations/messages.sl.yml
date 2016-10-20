@@ -42,7 +42,6 @@ sylius:
         administration: Administracija
         administration_dashboard: Administracijska nadzorna plošča
         all_your_addresses: Vsi vaši naslovi
-        amount: Znesek
         association: Povezave
         association_types: Vrste združenj
         associations: Povezave
@@ -219,7 +218,6 @@ sylius:
         exchange_rate: Menjalni tečaj
         exclusive: Izključno
         existing_customer: Obstoječa stranka
-        expires_at: Poteče dne
         failed: Ni uspelo
         forgot_password: Pozabljeno geslo
         fulfill: Izpolnitev
@@ -397,7 +395,6 @@ sylius:
         product_attributes: Lastnosti izdelkov
         product_details_viewing_product_product: 'Podrobnosti izdelka <small>Ogled izdelka "<strong>%product%</strong>"</small>'
         product_options: Možnosti izdelka
-        products: Izdelki
         products_categorized_as_name: 'Proizvodi razvrščeni kot "%name%"'
         products_categorized_under_taxon_taxon: 'Proizvodi <small>Razvrščeni v sistematsko skupino "%taxon%"</small>'
         products_index_of_all_products_in_your_store: 'Izdelki <small>Indeks vseh izdelkov vaše trgovine</small>'
@@ -491,7 +488,6 @@ sylius:
         taxation_categories: Kategorije obdavčitev
         taxation_settings: Nastavitve obdavčitve
         taxes: Davki
-        taxons: Taksoni
         thank_you_for_your_order: Hvala za vaše naročilo
         theme: Tema
         there_are_no_attributes_configured: Na voljo ni nobenega nastavljenega atributa
@@ -551,7 +547,6 @@ sylius:
         update: Posodobitev
         update_product_association_type: Posodobite vrsto povezave izdelka
         updating_tax_rate: Posodabljanje davčne stopnje
-        usage_limit: Omejitev uporabe
         used: Uporabljeno
         user_confirmation_name: Potrditev uporabnika
         user_details: Podrobnosti uporabnika

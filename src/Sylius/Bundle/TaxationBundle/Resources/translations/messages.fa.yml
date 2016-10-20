@@ -9,6 +9,6 @@ sylius:
         tax_rate:
             category: دسته
             name: نام
-            amount: مبلغ
+            amount: مقدار
             included_in_price: مالیات در قیمت نهایی لحاظ شود؟
             calculator: نوع محاسبه

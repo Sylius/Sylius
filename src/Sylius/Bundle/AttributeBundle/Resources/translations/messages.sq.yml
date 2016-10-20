@@ -10,7 +10,6 @@ sylius:
             code: Kodi
             name: Emri
             translations: Përkthime
-            type: Lloji
         attribute_type:
             checkbox: Checkbox
             configuration: Konfigurimi

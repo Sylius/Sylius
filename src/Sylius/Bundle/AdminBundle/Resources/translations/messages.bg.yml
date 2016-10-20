@@ -7,7 +7,6 @@ sylius:
             main:
                 catalog:
                     options: Опцйи
-                    products: Продукти
                 configuration:
                     countries: Страни
                     locales: Езикови променливи

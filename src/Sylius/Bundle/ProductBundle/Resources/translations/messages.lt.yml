@@ -10,7 +10,6 @@ sylius:
             options: Parinktys
             meta_keywords: Meta raktažodžiai
             meta_description: Meta aprašymas
-            taxons: Taksonai
         product_variant:
             available_on: Prieinamas nuo
         association_type:

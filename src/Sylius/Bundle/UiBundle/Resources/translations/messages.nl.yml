@@ -285,7 +285,6 @@ sylius:
         exclusive: Exclusief
         existing_customer: Bestaande klant
         expiration_and_usage_limits: Vervaldatum en gebruiksbeperkingen
-        expires_at: Verloopt op
         extra_information: Extra informatie
         extra_notes: Extra opmerkingen
         failed: Mislukt
@@ -531,7 +530,6 @@ sylius:
         product_review: Productbeoordeling
         product_reviews: Productbeoordelingen
         product_variants: Product varianten
-        products: Producten
         products_categorized_as_name: 'Producten in "%name%"'
         products_categorized_under_taxon_taxon: 'Producten<small>Gecategoriseerd onder "%taxon%" taxon</small>'
         products_index_of_all_products_in_your_store: 'Producten <small>Index van alle producten in uw winkel</small>'
@@ -653,7 +651,6 @@ sylius:
         taxation_settings: Belasting Instellingen
         taxes: Belastingen
         taxonomy: Taxonomie
-        taxons: Taxons
         terms_and_conditions: Algemene Voorwaarden
         thank_you: Bedankt!
         thank_you_for_your_order: Bedankt voor uw bestelling

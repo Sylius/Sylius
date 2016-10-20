@@ -53,7 +53,6 @@ sylius:
         admin_users: Administrátory
         all: Všetky
         all_your_addresses: Všetky vaše adresy
-        amount: Suma
         an_error_occurred: Vyskytla sa chyba
         api: API
         apply_coupon: Použiť kupón
@@ -123,7 +122,7 @@ sylius:
         contain_variants: Obsahuje produktové varianty
         contains: Obsahuje
         countries: Krajiny
-        country: Krajina
+        country: Štát
         country_details: Podrobnosti o krajine
         coupon: Kupón
         coupon_based: Používať kupóny
@@ -295,7 +294,6 @@ sylius:
         exclusive: Exkluzívne
         existing_customer: Existujúci zákazník
         expiration_and_usage_limits: Expirácia a limit použitia
-        expires_at: Platnosť do
         extra_information: Ďalšie informácie
         extra_notes: Ďalšie poznámky
         failed: Neúspešná
@@ -554,7 +552,6 @@ sylius:
         product_review: Produktová recenzia
         product_reviews: Produktové recenzie
         product_variants: Produtové varianty
-        products: Produkty
         products_categorized_as_name: 'Produkty kategorizované ako "%name%"'
         products_categorized_under_taxon_taxon: 'Produkty <small>kategorizované pod "%taxon%"</small>'
         products_index_of_all_products_in_your_store: 'Produkty <small>zoznam všetkých produktov vo Vašom obchode</small>'
@@ -679,7 +676,6 @@ sylius:
         taxation_settings: Nastavenie zdaňovania
         taxes: Dane
         taxonomy: Kategorizácia
-        taxons: Kategórie
         terms_and_conditions: Podmienky používania
         thank_you: Ďakujeme Vám!
         thank_you_for_your_order: Ďakujeme za vašu objednávku

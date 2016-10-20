@@ -246,7 +246,6 @@ sylius:
         exclusive: Exclusivo
         existing_customer: Cliente cadastrado
         expiration_and_usage_limits: Limites de uso e validade
-        expires_at: Expira em
         extra_information: Informação extra
         extra_notes: Notas extra
         failed: Falhou
@@ -371,7 +370,6 @@ sylius:
         product_association_type_index: Tipo de associação
         product_details_viewing_product_product: 'Detalhes de produto <small>Visualizando produto "<strong>%product%</strong>"</small>'
         product_reviews: Críticas do produto
-        products: Produtos
         products_categorized_under_taxon_taxon: 'Produtos <small>Categorizado na táxon "%taxon%"</small>'
         products_index_of_all_products_in_your_store: 'Produtos <small>Lista de todos os produtos em sua loja</small>'
         promotion_coupons: Cupões
@@ -431,7 +429,6 @@ sylius:
         taxation_categories: Categorias de tributação
         taxation_settings: Configurações de taxas
         taxes: Taxas
-        taxons: Táxons
         theme: Aparência
         there_are_no_images_for_this_product: Não há imagens para este produto
         there_are_no_options_for_this_product: Não há opções para este produto
@@ -446,7 +443,6 @@ sylius:
         unit_price: Preço unitário
         unknown: Desconhecido
         updating_tax_rate: Atualizar imposto
-        usage_limit: Limite de utilização
         used: Utilizado
         user_confirmation_name: Confirmação do utilizador
         user_details: Detalhes do usuários

@@ -28,7 +28,7 @@ sylius:
             weight_rate_configuration:
                 label: Viktbaserat pris
             volume_rate_configuration:
-                amount: Belopp
+                amount: Antal
         shipping_category:
             description: Beskrivning
             name: Namn

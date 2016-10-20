@@ -3,55 +3,33 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Hoeveelheid
-            percentage_discount_configuration:
-                percentage: Percentage
-            type: Type
-        rule:
-            taxonomy_configuration:
-                taxons: Taxons
-                exclude: Uitsluiten
-            contains_product_configuration:
-                variants: Producten
-                exclude: Uitsluiten
-            cart_quantity_configuration:
-                count: Aantal
-                equal: Gelijk
-            item_total_configuration:
-                amount: Hoeveelheid
-            nth_order_configuration:
-                nth: Nde
-            customer_loyalty_configuration:
-                time: Tijd
-                unit:
-                    days: Dagen
-                    weeks: Weken
-                    months: Maanden
-                    years: Jaren
-                    header: Eenheid
-                after: Gebruiker aangemaakt na deze periode
-            shipping_country_configuration:
-                country: Land
-            type: Type
-        coupon:
-            usage_limit: Gebruikslimiet
-            expires_at: Verloopt op
-        coupon_generate_instruction:
-            amount: Hoeveelheid
-            usage_limit: Gebruikslimiet
-            expires_at: Verloopt op
-            code_length: Lengte van de code
         promotion:
             actions: Acties
             add_action: Actie toevoegen
             add_rule: Regel toevoegen
             coupon_based: Coupon gebaseerd
-            exclusive: Exclusief
             description: Omschrijving
             ends_at: Eindigt op
+            exclusive: Exclusief
             name: Naam
             rules: Regels
             starts_at: Start op
             usage_limit: Gebruikslimiet
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Hoeveelheid
+            type: Type
+        promotion_coupon:
+            usage_limit: Gebruikslimiet
+        promotion_coupon_generator_instruction:
+            amount: Hoeveelheid
+            usage_limit: Gebruikslimiet
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Aantal
+                equal: Gelijk
+            item_total_configuration:
+                amount: Hoeveelheid
+            shipping_country_configuration:
+                country: Land
+            type: Type

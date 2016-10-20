@@ -9,7 +9,6 @@ sylius:
                     attributes: คุณสมบัติ
                     header: แค็ตตาล็อก
                     options: ตัวเลือกสินค้า
-                    products: สินค้า
                     taxons: การจัดหมวดหมู่
                 configuration:
                     admin_users: ผู้ดูแลระบบ

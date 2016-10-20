@@ -3,55 +3,29 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Valore
-            percentage_discount_configuration:
-                percentage: '% Percentuale'
-            type: Tipo
-        rule:
-            taxonomy_configuration:
-                taxons: Taxons
-                exclude: Escludi
-            contains_product_configuration:
-                variants: Prodotti
-                exclude: Escludi
-            cart_quantity_configuration:
-                count: Conta
-                equal: Uguale
-            item_total_configuration:
-                amount: Valore
-            nth_order_configuration:
-                nth: Ennesimo
-            customer_loyalty_configuration:
-                time: Tempo
-                unit:
-                    days: Giorni
-                    weeks: Settimane
-                    months: Mesi
-                    years: Anni
-                    header: Unità
-                after: Utente creato dopo questo periodo
-            shipping_country_configuration:
-                country: Paese
-            type: Tipo
-        coupon:
-            usage_limit: Limite di utilizzo
-            expires_at: Scadenza il
-        coupon_generate_instruction:
-            amount: Valore
-            usage_limit: Limite di utilizzo
-            expires_at: Scadenza il
-            code_length: Lunghezza del codice
         promotion:
             actions: Azioni
             add_action: Aggiungi azione
             add_rule: Aggiungi regola
             coupon_based: Basata su coupon
-            exclusive: Esclusivo
             description: Descrizione
             ends_at: Termina il
+            exclusive: Esclusivo
             name: Nome
             rules: Regole
             starts_at: Inizia il
-            usage_limit: Limite di utilizzo
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Importo
+            type: Tipo
+        promotion_coupon_generator_instruction:
+            amount: Importo
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Conta
+                equal: Uguale
+            item_total_configuration:
+                amount: Importo
+            shipping_country_configuration:
+                country: Nazione
+            type: Tipo

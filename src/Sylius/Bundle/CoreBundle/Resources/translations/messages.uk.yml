@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Ціна за одиницю
-                quantity: Кількість
-                variant: Різновид
-            customer_group: Група клієнтів
         block:
             body: Тіло
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Спосіб доставки
         promotion:
             channels: Канали
-        coupon:
-            per_customer_usage_limit: Ліміт використання на клієнта
+        promotion_action:
+            add_product_configuration:
+                price: Ціна за одиницю
+                variant: Різновид
         group:
             name: Назва
             roles: Ролі
@@ -127,8 +123,6 @@ sylius:
             contains_taxon:
                 taxon: Таксон
                 count: Підрахунок
-            taxon:
-                taxons: Таксони
             total_of_items_from_taxon:
                 taxon: Таксон
                 amount: Обсяг

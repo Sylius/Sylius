@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: ราคาต่อหน่วย
-                quantity: จำนวน
-                variant: Variant
-            customer_group: กลุ่มลูกค้า
         block:
             body: Body
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: วิธีการจัดส่ง
         promotion:
             channels: ช่องทางจำหน่าย
-        coupon:
-            per_customer_usage_limit: จำกัดการใช้งานสำหรับลูกค้าแต่ละคน
+        promotion_action:
+            add_product_configuration:
+                price: ราคาต่อหน่วย
+                variant: Variant
         group:
             name: ชื่อ
             roles: Roles
@@ -127,11 +123,9 @@ sylius:
             contains_taxon:
                 taxon: หมวดหมู่
                 count: จำนวน
-            taxon:
-                taxons: หมวดหมู่
             total_of_items_from_taxon:
                 taxon: หมวดหมู่
-                amount: ยอดรวม
+                amount: ยอดเงิน
     installer:
         extensions:
             header: ส่วนขยาย

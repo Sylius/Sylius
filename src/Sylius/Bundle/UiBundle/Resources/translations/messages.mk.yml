@@ -6,6 +6,7 @@ sylius:
         add_value: Додај вредност
         city: Град
         company: Компанија
+        country: Држава
         email: Е-пошта
         exchange_rate: Курс на конверзија
         members: Членови
@@ -18,3 +19,4 @@ sylius:
         scope: Опсег
         street: Улица
         topic: Тема
+        type: Вид

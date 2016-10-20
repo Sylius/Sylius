@@ -194,7 +194,6 @@ sylius:
         exchange_rate: Döviz Kuru
         exclusive: Özel
         existing_customer: Varolan Müşteri
-        expires_at: Süre sonu: 
         failed: Başarısız oldu
         first_name: Ad
         fulfill: Stokta
@@ -350,7 +349,6 @@ sylius:
         product_details_viewing_product_product: 'Ürün ayrıntıları <small>Gösterilen ürün "<strong>%product%</strong>"</small>'
         product_options: Ürün seçenekleri
         product_reviews: Ürün Yorumları
-        products: Ürünler
         products_categorized_as_name: 'Ürünler  "%name%" olarak kategorilendirildi'
         products_categorized_under_taxon_taxon: 'Ürünler <small>"%taxon%" sınıfının altında kategorilendirilmiş</small>'
         products_index_of_all_products_in_your_store: 'Ürünler <small>Mağazada bulunan tüm ürünlerin dizini</small>'
@@ -434,7 +432,6 @@ sylius:
         taxation_categories: Vergi kategorileri
         taxation_settings: Vergilendirme Ayarları
         taxes: Vergiler
-        taxons: Kategoriler
         there_are_no_images_for_this_product: Bu ürün için hiçbir resim yok
         there_are_no_options_for_this_product: Bu ürün için hiçbir seçenek yok
         there_are_no_taxons_for_this_product: Bu ürün için bir sınıf yok

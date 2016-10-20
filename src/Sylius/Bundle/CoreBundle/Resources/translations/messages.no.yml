@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Enhetspris
-                quantity: Antall
-                variant: Variant
         block:
             body: Kropp
             id: ID
@@ -19,6 +14,10 @@ sylius:
                 different_billing_address: Bruk annen adresse for fakturering?
             payment_method: Betalingsmetode
             shipping_method: Fraktalternativ
+        promotion_action:
+            add_product_configuration:
+                price: Enhetspris
+                variant: Variant
         group:
             name: Navn
             roles: Roller
@@ -105,10 +104,6 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Antall
-            taxon:
-                taxons: Taksonomier
-            total_of_items_from_taxon:
-                amount: Beløp
     installer:
         extensions:
             header: Utvidelser

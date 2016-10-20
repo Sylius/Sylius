@@ -10,7 +10,7 @@ sylius:
                     header: Catálogo
                     options: Opciones de producto
                     products: Productos
-                    taxons: Taxonomías
+                    taxons: Taxones
                 configuration:
                     admin_users: Administradores
                     channels: Canales
@@ -34,5 +34,6 @@ sylius:
                     header: Ventas
                     orders: Pedidos
                 content:
+                    header: Contenido
                     static_contents: Contenidos estáticos
                     routes: Rutas

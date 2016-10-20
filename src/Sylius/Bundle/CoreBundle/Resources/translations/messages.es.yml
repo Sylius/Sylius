@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Precio unitario
-                quantity: Cantidad
-                variant: Variante
-            customer_group: Grupo de clientes
         block:
             body: Cuerpo
             id: ID
@@ -22,7 +16,13 @@ sylius:
             shipping_method: Método de envío
         promotion:
             channels: Canales
-        coupon:
+        promotion_action:
+            add_product_configuration:
+                price: Precio unitario
+                quantity: Cantidad
+                variant: Variante
+            customer_group: Grupo de clientes
+        promotion_coupon:
             per_customer_usage_limit: Límite de uso por cliente
         group:
             name: Nombre
@@ -128,7 +128,7 @@ sylius:
                 taxon: Taxón
                 count: Contador
             taxon:
-                taxons: Taxonomías
+                taxons: Taxones
             total_of_items_from_taxon:
                 taxon: Taxón
                 amount: Cantidad
@@ -161,13 +161,16 @@ sylius:
             header: sistema de archivos
             cache:
                 header: caché
+                help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: Existe
             logs:
                 header: registros
+                help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: No existe
             not_writable: Sin permisos de escritura
             parameters:
                 header: parametros.yml
+                help: 'Para ajustar los permisos ejecuta: sudo chmod a+w %path%'
             vendors: Vendors
             writable: Con permisos de escritura
         settings:

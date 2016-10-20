@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Cena za enoto
-                quantity: Količina
-                variant: Različica
-            customer_group: Skupina kupcev
         block:
             body: Telo
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Način pošiljanja
         promotion:
             channels: Kanali
-        coupon:
-            per_customer_usage_limit: Omejitev uporabe na kupca
+        promotion_action:
+            add_product_configuration:
+                price: Cena za enoto
+                variant: Različica
         group:
             name: Ime
             roles: Vloge
@@ -117,11 +113,8 @@ sylius:
             contains_taxon:
                 taxon: Sistematske skupine
                 count: Število
-            taxon:
-                taxons: Taksoni
             total_of_items_from_taxon:
                 taxon: Sistematske skupine
-                amount: Znesek
     installer:
         extensions:
             header: razširitve

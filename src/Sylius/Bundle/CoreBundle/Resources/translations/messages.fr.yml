@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Prix unitaire
-                quantity: Quantité
-                variant: Variante
-            customer_group: Groupe clients
         block:
             body: Corps
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Mode de livraison
         promotion:
             channels: Canaux
-        coupon:
-            per_customer_usage_limit: "Limite d'utilisation par client"
+        promotion_action:
+            add_product_configuration:
+                price: Prix unitaire
+                variant: Variante
         group:
             name: Nom
             roles: Rôles
@@ -127,8 +123,6 @@ sylius:
             contains_taxon:
                 taxon: Taxon
                 count: Nombre
-            taxon:
-                taxons: Famille de tags
             total_of_items_from_taxon:
                 taxon: Taxon
                 amount: Montant

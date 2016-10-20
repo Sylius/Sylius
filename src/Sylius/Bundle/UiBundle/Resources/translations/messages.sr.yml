@@ -30,6 +30,7 @@ sylius:
         clear_cart: Испразни корпу
         company: Компанија
         countries: Земље
+        country: Земља
         country_details: Детаљи земље
         create: Креирај
         create_a_new_address: Унеси нову адресу
@@ -157,7 +158,6 @@ sylius:
         previous: Предходна
         product: Производ
         product_details_viewing_product_product: 'Детаљи производа <small>Преглед производа "<стронг>%product%</стронг>"</small>'
-        products: Пороизводи
         products_categorized_under_taxon_taxon: 'Производи <small>Категорисани у "%taxon%"</small>'
         products_index_of_all_products_in_your_store: 'Производи <small>Сви производи у продавници</small>'
         promotion_details: Детаљи промоције
@@ -208,6 +208,7 @@ sylius:
         total_orders: Укупно поруџбина
         total_registrations: Укупно пријављених
         tracking_number: Број за праћење поруџбине
+        type: Тип
         updating_tax_rate: Ажурирање пореске стопе
         used: Коришћено
         user_details: Детаљи корисника

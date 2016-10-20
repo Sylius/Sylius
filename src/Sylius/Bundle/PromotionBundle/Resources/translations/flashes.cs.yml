@@ -3,7 +3,7 @@
 
 sylius:
     promotion_coupon:
-        generate: Propagační kupóny byly úspěšně vytvořeny.
         eligible: Váš propagační kupón byl přidán do košíku.
+        generate: Propagační kupóny byly úspěšně vytvořeny.
         invalid: Váš propagační kupón je neplatný.
         not_eligible: Tento kupón není možné uplatnit na aktuální nákupní košík.

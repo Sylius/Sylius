@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Stukprijs
-                quantity: Hoeveelheid
-                variant: Variant
-            customer_group: Gebruikersgroep
         block:
             body: Inhoud
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Verzendmethode
         promotion:
             channels: Kanalen
-        coupon:
-            per_customer_usage_limit: Gebruikslimiet per klant
+        promotion_action:
+            add_product_configuration:
+                price: Stukprijs
+                variant: Variant
         group:
             name: Naam
             roles: Rollen
@@ -127,8 +123,6 @@ sylius:
             contains_taxon:
                 taxon: Categorie
                 count: Aantal
-            taxon:
-                taxons: Taxons
             total_of_items_from_taxon:
                 taxon: Categorie
                 amount: Hoeveelheid

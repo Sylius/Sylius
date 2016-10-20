@@ -46,7 +46,6 @@ sylius:
         administration_panel_login: 管理面板登录
         all: 全部
         all_your_addresses: 您的所有地址
-        amount: 金额
         an_error_occurred: 发生了一个错误。
         are_your_sure_you_want_to_perform_this_action: 是否确实执行此操作？
         association: 关联
@@ -267,7 +266,6 @@ sylius:
         exclusive: 独家
         existing_customer: 现有客户
         expiration_and_usage_limits: 过期时间和使用限制
-        expires_at: 截至于
         extra_information: 额外信息
         failed: 失败
         faqs: 常见问题
@@ -496,7 +494,6 @@ sylius:
         product_review: 商品评论
         product_reviews: 商品评论
         product_variants: 产品变体
-        products: 产品
         products_categorized_as_name: '产品归类为"%name%"'
         products_categorized_under_taxon_taxon: '产品 <small>在"%taxon%"分类下</small>'
         products_index_of_all_products_in_your_store: '产品 <small>在你们店里的全部产品</small>'
@@ -606,7 +603,6 @@ sylius:
         taxation_settings: 税收的设置
         taxes: 税
         taxonomy: 分类
-        taxons: 分类
         terms_and_conditions: 服务条款
         thank_you_for_your_order: 感谢您的下单。
         theme: 主题
@@ -670,7 +666,6 @@ sylius:
         update_product_association_type: 更新产品关联类型
         updating_tax_rate: 更新税率
         usage: 统计
-        usage_limit: 使用限制
         used: 已被使用
         user_confirmation_name: 用户确认
         user_details: 用户详情

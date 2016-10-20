@@ -135,6 +135,7 @@ sylius:
         phone_number: Puhelinnumero
         postcode: Postinumero
         pricing: Hinnoittelu
+        products: Tuotteet
         promotion_coupons: Kupongit
         promotions: Kampanjat
         province: Lääni
@@ -146,5 +147,6 @@ sylius:
         subscribed_to_newsletter: Tilaa uutiskirje
         topic: Aihe
         translations: Käännökset
+        type: Tyyppi
         username: Käyttäjänimi
         zones: Vyöhykkeet

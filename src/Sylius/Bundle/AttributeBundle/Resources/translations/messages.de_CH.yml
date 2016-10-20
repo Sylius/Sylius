@@ -6,3 +6,4 @@ sylius:
         attribute:
             code: Code
             name: Name
+            type: Typ

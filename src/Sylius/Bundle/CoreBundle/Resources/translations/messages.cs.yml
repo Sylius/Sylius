@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Jednotná cena
-                quantity: Počet
-                variant: Varianta
-            customer_group: Skupina zákazníků
         block:
             body: Tělo
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Způsob Dopravy
         promotion:
             channels: Kanály
-        coupon:
-            per_customer_usage_limit: Omezení použití na zákazníka
+        promotion_action:
+            add_product_configuration:
+                price: Jednotná cena
+                variant: Varianta
         group:
             name: Jméno
             roles: Role
@@ -125,10 +121,6 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Počet
-            taxon:
-                taxons: Taxony
-            total_of_items_from_taxon:
-                amount: Částka
     installer:
         extensions:
             header: rozšíření

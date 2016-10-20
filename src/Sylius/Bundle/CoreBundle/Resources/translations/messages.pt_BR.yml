@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Preço unitário
-                quantity: Quantidade
-                variant: Variante
-            customer_group: Grupos de Clientes
         block:
             body: Texto
             id: ID
@@ -22,8 +16,10 @@ sylius:
             shipping_method: Forma de envio
         promotion:
             channels: Canais
-        coupon:
-            per_customer_usage_limit: Limite de uso por cliente
+        promotion_action:
+            add_product_configuration:
+                price: Preço unitário
+                variant: Variante
         group:
             name: Nome
             roles: Papéis
@@ -127,11 +123,8 @@ sylius:
             contains_taxon:
                 taxon: Taxon
                 count: Contagem
-            taxon:
-                taxons: Taxas
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Quantidade
     installer:
         extensions:
             header: extensões

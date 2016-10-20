@@ -5,9 +5,11 @@ sylius:
     ui:
         city: 城市
         company: 公司
+        country: 國家
         members: 會員
         postcode: 郵編
         province: 省
         provinces: 省份
         scope: 範圍
         street: 街道
+        type: 類型

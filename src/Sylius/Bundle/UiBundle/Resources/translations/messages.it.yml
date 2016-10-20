@@ -49,7 +49,7 @@ sylius:
         administration_panel_login: Login del pannello di amministrazione
         all: Tutti
         all_your_addresses: Tutti i tuoi indirizzi
-        amount: Valore
+        amount: Importo
         an_error_occurred: Si è verificato un errore
         apply_coupon: Applica coupon
         are_your_sure_you_want_to_perform_this_action: Sei sicuro di voler eseguire questa azione?
@@ -116,7 +116,7 @@ sylius:
         contain_variants: Contiene varianti
         contains: Contiene
         countries: Paesi
-        country: Paese
+        country: Nazione
         country_details: Dettagli paese
         coupon: Promozione
         coupon_based: Basata su coupon
@@ -286,7 +286,6 @@ sylius:
         exclusive: Esclusivo
         existing_customer: Cliente esistente
         expiration_and_usage_limits: Scadenza e limiti di utilizzo
-        expires_at: Scadenza il
         extra_information: Informazioni aggiuntive
         extra_notes: Note extra
         failed: Fallimento
@@ -535,7 +534,6 @@ sylius:
         product_review: Recensione del prodotto
         product_reviews: Recensioni del prodotto
         product_variants: Varianti di prodotto
-        products: Prodotti
         products_categorized_as_name: 'Prodotti classificati come "%name%"'
         products_categorized_under_taxon_taxon: 'Prodotti <small>Categorizzati sotto "%taxon%" taxon</small>'
         products_index_of_all_products_in_your_store: 'Prodotti <small>Lista tutti i prodotti dello store</small>'
@@ -654,7 +652,6 @@ sylius:
         taxation_settings: Impostazioni tassazione
         taxes: Tasse
         taxonomy: Tassonomia
-        taxons: Taxons
         terms_and_conditions: Termini e condizioni
         thank_you: Grazie!
         thank_you_for_your_order: Grazie per il tuo ordine
@@ -720,7 +717,6 @@ sylius:
         update_product_association_type: Creare il tipo di associazione di prodotto
         updating_tax_rate: Aggiorna aliquota fiscale
         usage: Utilizzo
-        usage_limit: Limite di utilizzo
         used: Usata
         user_confirmation_name: "Conferma dell'utente"
         user_details: Dettagli utente

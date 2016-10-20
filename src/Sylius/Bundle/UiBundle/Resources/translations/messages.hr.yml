@@ -411,7 +411,6 @@ sylius:
         product_options: Opcije proizvoda
         product_review: Osvrt na proizvod
         product_reviews: Recenzije proizvoda
-        products: Proizvodi
         products_categorized_as_name: 'Proizvodi kategorizirani kao %name%'
         products_categorized_under_taxon_taxon: 'Artikli <small>u kategoriji "%taxon%"</small>'
         products_index_of_all_products_in_your_store: Svi artikli
@@ -506,7 +505,6 @@ sylius:
         taxation_categories: Kategorije poreza
         taxation_settings: Postavke oporezivanja
         taxes: Porezi
-        taxons: Taksoni
         thank_you_for_your_order: Zahvaljujemo na vašoj narudžbi
         there_are_no_attributes_configured: Nema postavljenih atributa
         there_are_no_blocks_to_display: Ne postoje blokovi za prikazati
@@ -565,7 +563,7 @@ sylius:
         update: Ažurirajte
         update_product_association_type: Ažurirajte tip poveznice proizvoda
         updating_tax_rate: Ažuriranje porezne stope
-        usage_limit: Ograničenje koda za popust
+        usage_limit: Ograničenje
         used: Iskorišteno
         user_confirmation_name: Potvrda korisnika
         user_details: Korisnički detalji

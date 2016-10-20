@@ -9,8 +9,6 @@ sylius:
                     attributes: Attributen
                     header: Cataloog
                     options: Opties
-                    products: Producten
-                    taxons: Taxons
                 configuration:
                     admin_users: Beheerders
                     channels: Kanalen
