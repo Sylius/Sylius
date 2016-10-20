@@ -20,6 +20,7 @@ The Books helps to understand how Sylius works.
     countries
     zones
     addresses
+    address_book
     customer_and_shopuser
     adminuser
     products
