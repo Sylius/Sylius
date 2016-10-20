@@ -177,7 +177,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given /^I add the "([^"]+)" action configured with amount of ("(?:€|£|\$)[^"]+")$/
+     * @Given /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddTheActionConfiguredWithAmount($actionType, $amount)
     {
@@ -186,7 +186,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify that this filter should be applied for amount greater then ("(?:€|£|\$)[^"]+")$/
+     * @When /^I specify that this action should be applied to items with price greater then "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddAMinPriceFilterRange($minimum)
     {
@@ -194,13 +194,20 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify that this filter should be applied for amount greater then ("(?:€|£|\$)[^"]+") but lesser then ("(?:€|£|\$)[^"]+")$/
+     * @When /^I specify that this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
+     */
+    public function iAddAMaxPriceFilterRange($maximum)
+    {
+        $this->createPage->fillActionOption('Max', $maximum);
+    }
+
+    /**
+     * @When /^I specify that this action should be applied to items with price between "(?:€|£|\$)([^"]+)" and "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddAMinMaxPriceFilterRange($minimum, $maximum)
     {
         $this->iAddAMinPriceFilterRange($minimum);
-
-        $this->createPage->fillActionOption('Max', $maximum);
+        $this->iAddAMaxPriceFilterRange($maximum);
     }
 
     /**
@@ -253,6 +260,14 @@ final class ManagingPromotionsContext implements Context
     public function iShouldBeNotifiedThatIsRequired($element)
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter promotion %s.', $element));
+    }
+
+    /**
+     * @Then I should be notified that a :element value should be a numeric value
+     */
+    public function iShouldBeNotifiedThatAMinimalValueShouldBeNumeric($element)
+    {
+        $this->assertFieldValidationMessage($element, 'This value is not valid.');
     }
 
     /**
