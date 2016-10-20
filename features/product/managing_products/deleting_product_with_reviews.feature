@@ -5,13 +5,11 @@ Feature: Deleting a product with its reviews
     I want to be able to delete products from the product catalog
 
     Background:
-        Given the store operates on a single channel in "United States"
-        And the store has a product "Toyota GT86 model"
-        And this product has "1:43" variant priced at "$15.00"
+        Given the store has a product "Toyota GT86 model"
         And this product has one review
         And I am logged in as an administrator
 
-    @domain @ui @todo
+    @domain @ui
     Scenario: Deleted product reviews disappear from the product catalog
         When I delete the "Toyota GT86 model" product
         Then I should be notified that it has been successfully deleted

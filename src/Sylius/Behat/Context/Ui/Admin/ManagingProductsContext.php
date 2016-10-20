@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Admin\Product\CreateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
+use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentProductPageResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -65,6 +66,11 @@ final class ManagingProductsContext implements Context
     private $updateConfigurableProductPage;
 
     /**
+     * @var ProductReviewIndexPageInterface
+     */
+    private $productReviewIndexPage;
+
+    /**
      * @var CurrentProductPageResolverInterface
      */
     private $currentPageResolver;
@@ -81,6 +87,7 @@ final class ManagingProductsContext implements Context
      * @param IndexPageInterface $indexPage
      * @param UpdateSimpleProductPageInterface $updateSimpleProductPage
      * @param UpdateConfigurableProductPageInterface $updateConfigurableProductPage
+     * @param ProductReviewIndexPageInterface $productReviewIndexPage
      * @param CurrentProductPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
@@ -91,6 +98,7 @@ final class ManagingProductsContext implements Context
         IndexPageInterface $indexPage,
         UpdateSimpleProductPageInterface $updateSimpleProductPage,
         UpdateConfigurableProductPageInterface $updateConfigurableProductPage,
+        ProductReviewIndexPageInterface $productReviewIndexPage,
         CurrentProductPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
@@ -100,6 +108,7 @@ final class ManagingProductsContext implements Context
         $this->indexPage = $indexPage;
         $this->updateSimpleProductPage = $updateSimpleProductPage;
         $this->updateConfigurableProductPage = $updateConfigurableProductPage;
+        $this->productReviewIndexPage = $productReviewIndexPage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
@@ -736,6 +745,19 @@ final class ManagingProductsContext implements Context
             1,
             $currentPage->countImages(),
             'This product has %2$s images, but it should have only one.'
+        );
+    }
+
+    /**
+     * @Then /^there should be no reviews of (this product)$/
+     */
+    public function thereAreNoProductReviews(ProductInterface $product)
+    {
+        $this->productReviewIndexPage->open();
+
+        Assert::false(
+            $this->productReviewIndexPage->isSingleResourceOnPage(['reviewSubject' => $product->getName()]),
+            sprintf('There should be no reviews of %s.', $product->getName())
         );
     }
 
