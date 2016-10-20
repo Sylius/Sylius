@@ -14,7 +14,7 @@ sylius_admin_partial_shipment_ship:
                 transition: ship
             redirect: referer
             section: admin
-            template: @SyliusAdmin/Shipment/Partial/_ship.html.twig
+            template: "@SyliusAdmin/Shipment/Partial/_ship.html.twig"
             form: sylius_shipment_ship
             vars:
                 route:

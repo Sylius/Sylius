@@ -1,20 +1,20 @@
 Sylius\Component\Core\Model\Order:
     order1:
-        channel: @channel
+        channel: "@channel"
         currencyCode: "EUR"
-        addItem: [@orderItem1]
+        addItem: ["@orderItem1"]
         localeCode: "en_US"
 
 Sylius\Component\Core\Model\OrderItem:
     orderItem1:
         quantity: 1
         unitPrice: 2000
-        addUnit: [@orderItemUnit1]
-        variant: @productVariant1
+        addUnit: ["@orderItemUnit1"]
+        variant: "@productVariant1"
 
 Sylius\Component\Core\Model\OrderItemUnit:
     orderItemUnit1:
-        __construct: [@orderItem1]
+        __construct: ["@orderItem1"]
 
 Sylius\Component\Core\Model\Channel:
     channel:
@@ -22,27 +22,27 @@ Sylius\Component\Core\Model\Channel:
         name: "Channel"
         hostname: "localhost"
         description: "Lorem ipsum"
-        defaultCurrency: @currency
-        defaultLocale: @locale
+        defaultCurrency: "@currency"
+        defaultLocale: "@locale"
         color: "black"
         enabled: true
         taxCalculationStrategy: "order_items_based"
-        currencies: [@currency]
-        shippingMethods: [@ups, @dhl]
-        paymentMethods: [@cash_on_delivery, @pay_by_check]
+        currencies: ["@currency"]
+        shippingMethods: ["@ups", "@dhl"]
+        paymentMethods: ["@cash_on_delivery", "@pay_by_check"]
 
 Sylius\Component\Core\Model\Product:
     product1:
         updatedAt: 2015-10-10
         currentLocale: en_US
-        currentTranslation: @productTranslation1
-        variants: [@productVariant1]
+        currentTranslation: "@productTranslation1"
+        variants: ["@productVariant1"]
         code: MUG_SW
     product2:
         updatedAt: 2015-10-04
         currentLocale: en_US
-        currentTranslation: @productTranslation2
-        variants: [@productVariant2]
+        currentTranslation: "@productTranslation2"
+        variants: ["@productVariant2"]
         code: MUG_LOTR
 
 Sylius\Component\Core\Model\ProductTranslation:
@@ -51,13 +51,13 @@ Sylius\Component\Core\Model\ProductTranslation:
         locale: en_US
         name: 'Star wars mug'
         description: <paragraph(2)>
-        translatable: @product1
+        translatable: "@product1"
     productTranslation2:
         slug: mug-lotr
         locale: en_US
         name: 'Lotr mug'
         description: <paragraph(2)>
-        translatable: @product2
+        translatable: "@product2"
 
 Sylius\Component\Core\Model\ProductVariant:
     productVariant1:
@@ -74,26 +74,26 @@ Sylius\Component\Core\Model\ShippingMethod:
         calculator: 'flat_rate'
         configuration:
             amount: 10
-        zone: @zone_eu
+        zone: "@zone_eu"
         currentLocale: en_US
-        currentTranslation: @upsTranslation1
+        currentTranslation: "@upsTranslation1"
     dhl:
         code: DHL
         enabled: true
         calculator: 'flat_rate'
         configuration:
             amount: 20
-        zone: @zone_eu
+        zone: "@zone_eu"
 
 Sylius\Component\Shipping\Model\ShippingMethodTranslation:
     upsTranslation1:
         name: 'UPS'
         locale: 'en_US'
-        translatable: @ups
+        translatable: "@ups"
     dhlTranslation1:
         name: 'DHL'
         locale: 'en_US'
-        translatable: @dhl
+        translatable: "@dhl"
 
 Sylius\Component\Payment\Model\PaymentMethod:
     cash_on_delivery:
@@ -101,7 +101,7 @@ Sylius\Component\Payment\Model\PaymentMethod:
         enabled: true
         gateway: 'offline'
         currentLocale: en_US
-        currentTranslation: @cash_on_delivery_translation1
+        currentTranslation: "@cash_on_delivery_translation1"
     pay_by_check:
         code: pbc
         enabled: true
@@ -111,11 +111,11 @@ Sylius\Component\Payment\Model\PaymentMethodTranslation:
     cash_on_delivery_translation1:
         name: 'Cach on delivery'
         locale: 'en_US'
-        translatable: @cash_on_delivery
+        translatable: "@cash_on_delivery"
     pay_by_check_translation1:
         name: 'Pay by check'
         locale: 'en_US'
-        translatable: @pay_by_check
+        translatable: "@pay_by_check"
 
 Sylius\Component\Currency\Model\Currency:
     currency:
@@ -133,7 +133,7 @@ Sylius\Component\Addressing\Model\Zone:
         code: EU
         name: European Union
         type: country
-        members: [@member_NL, @member_BE]
+        members: ["@member_NL", "@member_BE"]
 
 Sylius\Component\Addressing\Model\ZoneMember:
     member_{NL, BE}:

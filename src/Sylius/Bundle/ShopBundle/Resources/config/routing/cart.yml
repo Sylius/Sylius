@@ -7,7 +7,7 @@ sylius_shop_cart_summary:
     defaults:
         _controller: sylius.controller.order:summaryAction
         _sylius:
-            template: @SyliusShop/Cart/summary.html.twig
+            template: "@SyliusShop/Cart/summary.html.twig"
 
 sylius_shop_cart_save:
     path: /
@@ -15,7 +15,7 @@ sylius_shop_cart_save:
     defaults:
         _controller: sylius.controller.order:saveAction
         _sylius:
-            template: @SyliusShop/Cart/summary.html.twig
+            template: "@SyliusShop/Cart/summary.html.twig"
             redirect: sylius_shop_cart_summary
             flash: sylius.cart.cart_save_completed
 

@@ -9,7 +9,7 @@ sylius_admin_static_content:
         vars:
             all:
                 templates:
-                    form: @SyliusAdmin/StaticContent/_form.html.twig
+                    form: "@SyliusAdmin/StaticContent/_form.html.twig"
 
     type: sylius.resource
 
@@ -20,11 +20,11 @@ sylius_admin_static_content_update:
         _controller: sylius.controller.static_content:updateAction
         _sylius:
             section: admin
-            template: @SyliusAdmin/Crud/update.html.twig
+            template: "@SyliusAdmin/Crud/update.html.twig"
             vars:
                 templates:
-                    form: @SyliusAdmin/StaticContent/_form.html.twig
-                    breadcrumb: @SyliusAdmin/StaticContent/Update/_breadcrumb.html.twig
+                    form: "@SyliusAdmin/StaticContent/_form.html.twig"
+                    breadcrumb: "@SyliusAdmin/StaticContent/Update/_breadcrumb.html.twig"
     requirements:
         id: ".+"
 

@@ -4,7 +4,7 @@ sylius_admin_product_variant_index:
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
-            template: @SyliusAdmin/Crud/index.html.twig
+            template: "@SyliusAdmin/Crud/index.html.twig"
             grid: sylius_admin_product_variant
             section: admin
             permission: true
@@ -13,7 +13,7 @@ sylius_admin_product_variant_index:
                     parameters:
                         productId: $productId
                 templates:
-                    breadcrumb: @SyliusAdmin/ProductVariant/Index/_breadcrumb.html.twig
+                    breadcrumb: "@SyliusAdmin/ProductVariant/Index/_breadcrumb.html.twig"
                 icon: cubes
                 subheader: sylius.ui.manage_variants
 
@@ -25,9 +25,9 @@ sylius_admin_product_variant_create:
         _sylius:
             factory:
                 method: createForProduct
-                arguments: 
+                arguments:
                   - expr:service('sylius.repository.product').find($productId)
-            template: @SyliusAdmin/Crud/create.html.twig
+            template: "@SyliusAdmin/Crud/create.html.twig"
             grid: sylius_admin_product_variant
             section: admin
             redirect:
@@ -39,8 +39,8 @@ sylius_admin_product_variant_create:
                     parameters:
                         productId: $productId
                 templates:
-                    form: @SyliusAdmin/ProductVariant/_form.html.twig
-                    breadcrumb: @SyliusAdmin/ProductVariant/Create/_breadcrumb.html.twig
+                    form: "@SyliusAdmin/ProductVariant/_form.html.twig"
+                    breadcrumb: "@SyliusAdmin/ProductVariant/Create/_breadcrumb.html.twig"
 
 sylius_admin_product_variant_update:
     path: /{id}/edit
@@ -48,7 +48,7 @@ sylius_admin_product_variant_update:
     defaults:
         _controller: sylius.controller.product_variant:updateAction
         _sylius:
-            template: @SyliusAdmin/Crud/update.html.twig
+            template: "@SyliusAdmin/Crud/update.html.twig"
             grid: sylius_admin_product_variant
             section: admin
             redirect:
@@ -61,8 +61,8 @@ sylius_admin_product_variant_update:
                         id: $id
                         productId: $productId
                 templates:
-                    form: @SyliusAdmin/ProductVariant/_form.html.twig
-                    breadcrumb: @SyliusAdmin/ProductVariant/Update/_breadcrumb.html.twig
+                    form: "@SyliusAdmin/ProductVariant/_form.html.twig"
+                    breadcrumb: "@SyliusAdmin/ProductVariant/Update/_breadcrumb.html.twig"
             permission: true
 
 sylius_admin_product_variant_delete:

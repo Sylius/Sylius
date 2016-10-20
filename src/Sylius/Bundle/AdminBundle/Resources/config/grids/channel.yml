@@ -14,26 +14,26 @@ sylius_grid:
                     path: .
                     sortable: code
                     options:
-                        template: @SyliusAdmin/Channel/Grid/Field/code.html.twig
+                        template: "@SyliusAdmin/Channel/Grid/Field/code.html.twig"
                 nameAndDescription:
                     type: twig
                     label: sylius.ui.name
                     path: .
                     sortable: name
                     options:
-                        template: @SyliusAdmin/Grid/Field/nameAndDescription.html.twig
+                        template: "@SyliusAdmin/Grid/Field/nameAndDescription.html.twig"
                 themeName:
                     type: twig
                     label: sylius.ui.theme
                     sortable: ~
                     options:
-                        template: @SyliusAdmin/Channel/Grid/Field/themeName.html.twig
+                        template: "@SyliusAdmin/Channel/Grid/Field/themeName.html.twig"
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     sortable: ~
                     options:
-                        template: @SyliusAdmin/Grid/Field/enabled.html.twig
+                        template: "@SyliusAdmin/Grid/Field/enabled.html.twig"
             filters:
                 search:
                     type: string

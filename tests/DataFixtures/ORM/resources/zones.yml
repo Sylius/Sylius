@@ -7,4 +7,4 @@ Sylius\Component\Addressing\Model\Zone:
         code: EU
         name: European Union
         type: country
-        members: [@member_NL, @member_BE]
+        members: ["@member_NL", "@member_BE"]

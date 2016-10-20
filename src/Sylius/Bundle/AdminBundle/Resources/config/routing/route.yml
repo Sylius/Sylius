@@ -20,7 +20,7 @@ sylius_admin_route_update:
             template: SyliusAdminBundle:Crud:update.html.twig
             vars:
                 templates:
-                    breadcrumb: @SyliusAdmin/Route/Update/_breadcrumb.html.twig
+                    breadcrumb: "@SyliusAdmin/Route/Update/_breadcrumb.html.twig"
     requirements:
         id: ".+"
 

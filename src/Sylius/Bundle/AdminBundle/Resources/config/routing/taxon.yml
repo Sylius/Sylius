@@ -10,7 +10,7 @@ sylius_admin_taxon:
             all:
                 subheader: sylius.ui.manage_categorization_of_your_products
                 templates:
-                    form: @SyliusAdmin/Taxon/_form.html.twig
+                    form: "@SyliusAdmin/Taxon/_form.html.twig"
     type: sylius.resource
 
 sylius_admin_taxon_index:

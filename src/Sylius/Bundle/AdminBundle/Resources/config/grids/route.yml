@@ -13,7 +13,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.content
                     options:
-                        template: @SyliusAdmin/Route/Grid/Field/content.html.twig
+                        template: "@SyliusAdmin/Route/Grid/Field/content.html.twig"
             actions:
                 main:
                     create:
