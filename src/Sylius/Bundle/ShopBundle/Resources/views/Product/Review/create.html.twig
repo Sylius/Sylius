@@ -1,5 +1,7 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
 {% block content %}
     {% include '@SyliusShop/Product/Review/_breadcrumb.html.twig' %}
     <div class="ui hidden divider"></div>
@@ -15,15 +17,18 @@
                     {{ 'sylius.ui.you_are_reviewing'|trans }}: <strong>{{ product_review.reviewSubject.getName() }}</strong>
                 </div>
             </div>
-            <form action="{{ path('sylius_shop_product_reviews_create', { 'slug': product_review.reviewSubject.getSlug() }) }}" method="POST" class="ui reply form">
+            <form action="{{ path('sylius_shop_product_reviews_create', { 'slug': product_review.reviewSubject.getSlug() }) }}" method="POST" class="ui reply form" novalidate>
                 <div class="field">
+                    {{ form_errors(form.rating) }}<br/>
                     <div class="ui huge star rating" data-rating="0" data-max-rating="5"></div>
                     {{ form_widget(form.rating, { 'attr': { 'style': 'display: none' }, 'value': '5' }) }}
                 </div>
                 <div class="field">
+                    {{ form_errors(form.title) }}
                     {{ form_widget(form.title, { 'attr': { 'placeholder': 'sylius.ui.title'|trans } }) }}
                 </div>
                 <div class="field">
+                    {{ form_errors(form.comment) }}
                     {{ form_widget(form.comment) }}
                 </div>
                 {% if not is_granted("IS_AUTHENTICATED_FULLY") %}

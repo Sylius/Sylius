@@ -66,10 +66,23 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasRateValidationMessage()
+    {
+        return
+            'You must check review rating.' ===
+            $this->getElement('rating')->find('css', '.sylius-validation-error')->getText()
+        ;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'rate' => '.star.rating .icon:nth-child(%rate%)',
+            'rating' => 'form .field:first-child',
         ]);
     }
 }
