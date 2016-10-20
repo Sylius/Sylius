@@ -47,6 +47,8 @@ sylius_grid:
             manage_variants: "@SyliusAdmin/Product/Grid/Action/manageVariants.html.twig"
             update_variant: "@SyliusAdmin/ProductVariant/Grid/Action/update.html.twig"
             delete_variant: "@SyliusAdmin/ProductVariant/Grid/Action/delete.html.twig"
+            accept: "SyliusAdminBundle:ProductReview/Grid/Action:accept.html.twig"
+            reject: "SyliusAdminBundle:ProductReview/Grid/Action:reject.html.twig"
             show: "@SyliusAdmin/Grid/Action/show.html.twig"
             create: "@SyliusAdmin/Grid/Action/create.html.twig"
             update: "@SyliusAdmin/Grid/Action/update.html.twig"

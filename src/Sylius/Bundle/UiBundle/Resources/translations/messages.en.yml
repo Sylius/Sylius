@@ -12,6 +12,8 @@ sylius:
     ui:
         abandoned: Abandoned
         about: About
+        accept: Accept
+        accepted: Accepted
         access_token: 'Access Token'
         access_your_store_account_or_create_a_new_one: Access your store account or create a new one
         account_credentials: Account credentials
@@ -622,6 +624,8 @@ sylius:
         registered_customers: Registered customers
         registration_create_an_account_in_store: 'Registration <small>Create an account in store</small>'
         registration_date: 'Registration date'
+        reject: Reject
+        rejected: Rejected
         release_inventory: 'Release inventory'
         remember_me: 'Remember me'
         remove_attribute: 'Remove attribute'

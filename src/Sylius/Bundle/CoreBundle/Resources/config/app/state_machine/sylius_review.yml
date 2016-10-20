@@ -1,5 +1,5 @@
 winzou_state_machine:
-    sylius_review:
+    sylius_product_review:
         class: "%sylius.model.product_review.class%"
         property_path: status
         graph: sylius_product_review
@@ -17,7 +17,7 @@ winzou_state_machine:
                 to: rejected
         callbacks:
             after:
-                update_price:
+                update_rating:
                     on: "accept"
                     do: ["@sylius.average_rating_updater", updateFromReview]
                     args: ["object"]
