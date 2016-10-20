@@ -112,6 +112,11 @@ interface ShowPageInterface extends PageInterface
     public function hasReviewTitled($title);
 
     /**
+     * @return string
+     */
+    public function getAverageRating();
+
+    /**
      * @param string $optionName
      * @param string $optionValue
      */

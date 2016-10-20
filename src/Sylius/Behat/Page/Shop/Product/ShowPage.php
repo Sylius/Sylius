@@ -157,6 +157,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getAverageRating()
+    {
+        return $this->getElement('average_rating')->getAttribute('data-average-rating');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function selectOption($optionName, $optionValue)
     {
         $optionElement = $this->getElement('option_select', ['%option-name%' => strtoupper($optionName)]);
@@ -222,6 +230,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'attributes' => '#sylius-product-attributes',
+            'average_rating' => '#average-rating',
             'main_image' => '#main-image',
             'name' => '#sylius-product-name',
             'option_select' => '#sylius_cart_item_variant_%option-name%',

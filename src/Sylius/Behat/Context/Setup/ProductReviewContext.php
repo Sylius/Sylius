@@ -98,6 +98,18 @@ final class ProductReviewContext implements Context
     }
 
     /**
+     * @Given /^(this product) has accepted reviews rated (\d+), (\d+), (\d+), (\d+) and (\d+)$/
+     */
+    public function thisProductHasAcceptedReviewsRated(ProductInterface $product, ...$rates)
+    {
+        $customer = $this->sharedStorage->get('customer');
+        foreach ($rates as $key => $rate) {
+            $review = $this->createProductReview($product, 'Title '.$key, $rate, 'Comment '.$key, $customer);
+            $this->productReviewRepository->add($review);
+        }
+    }
+
+    /**
      * @param ProductInterface $product
      * @param string $title
      * @param int $rating
