@@ -33,3 +33,7 @@ sylius_grid:
                 item:
                     update:
                         type: update
+                    accept:
+                        type: accept
+                    reject:
+                        type: reject

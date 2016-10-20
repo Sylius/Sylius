@@ -7,12 +7,12 @@ Feature: Accepting a product review
     Background:
         Given the store has customer "Mike Ross" with email "ross@teammike.com"
         And the store has a product "Lamborghini Gallardo Model"
-        And this product has a review titled "Awesome" and rated 4 with a comment "Nice product" added by customer "ross@teammike.com"
+        And this product has a review titled "Awesome" and rated 4 with a comment "Nice product" added by customer "ross@teammike.com" which is not accepted yet
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Accepting a product review
         When I want to browse product reviews
         And I accept the "Awesome" product review
-        Then I should be notified that it has been successfully edited
+        Then I should be notified that it has been successfully accepted
         And this product review status should be "accepted"
