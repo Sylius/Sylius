@@ -1,5 +1,3 @@
-{% set promotionTotal =  cart.orderPromotionTotal %}
-
 <div class="ui segment">
     <h2 class="ui dividing header">{{ 'sylius.ui.summary'|trans }}</h2>
     <table class="ui very basic table">
@@ -12,10 +10,10 @@
             <td>{{ 'sylius.ui.shipping'|trans }}:</td>
             <td id="sylius-cart-shipping-total" class="right aligned">{{ cart.shippingTotal|sylius_price(cart.currencyCode) }}</td>
         </tr>
-        {% if promotionTotal %}
+        {% if cart.orderPromotionTotal %}
         <tr>
             <td>{{ 'sylius.ui.discount'|trans }}:</td>
-            <td id="sylius-cart-promotion-total" class="right aligned">-{{ (-1 * promotionTotal)|sylius_price(cart.currencyCode) }}</td>
+            <td id="sylius-cart-promotion-total" class="right aligned">{{ cart.orderPromotionTotal|sylius_price(cart.currencyCode) }}</td>
         </tr>
         {% endif %}
         <tr style="font-size: 2em;">
