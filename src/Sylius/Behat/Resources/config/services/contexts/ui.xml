@@ -112,6 +112,7 @@
             <argument type="service" id="sylius.behat.page.admin.product.index" />
             <argument type="service" id="sylius.behat.page.admin.product.update_simple" />
             <argument type="service" id="sylius.behat.page.admin.product.update_configurable" />
+            <argument type="service" id="sylius.behat.page.admin.product_review.index" />
             <argument type="service" id="sylius.behat.current_product_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
