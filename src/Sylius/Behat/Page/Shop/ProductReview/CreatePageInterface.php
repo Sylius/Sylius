@@ -44,4 +44,9 @@ interface CreatePageInterface extends PageInterface
      * @return bool
      */
     public function hasRateValidationMessage();
+
+    /**
+     * @return bool
+     */
+    public function hasTitleValidationMessage();
 }

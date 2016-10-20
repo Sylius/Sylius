@@ -86,7 +86,7 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @When I don not rate it
+     * @When I do not rate it
      */
     public function iDoNotRateIt()
     {
@@ -101,6 +101,17 @@ final class ProductReviewContext implements Context
         Assert::true(
             $this->createPage->hasRateValidationMessage(),
             'There should be rate validation error, but there is not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that I title is required
+     */
+    public function iShouldBeNotifiedThatTitleIsRequired()
+    {
+        Assert::true(
+            $this->createPage->hasTitleValidationMessage(),
+            'There should be title validation error, but there is not.'
         );
     }
 }
