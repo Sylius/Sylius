@@ -23,6 +23,21 @@ Feature: Review validation
         Then I should be notified that title is required
 
     @ui @javascript
+    Scenario: Adding a product review with too short title
+        Given I want to review product "Necronomicon"
+        When I leave a comment "This book made me sad, but plot was fine.", titled "X" as "bartholomew@heaven.com"
+        And I rate it with 3 points
+        Then I should be notified that title is too short
+
+    @ui @javascript
+    Scenario: Adding a product review with too long title
+        Given I want to review product "Necronomicon"
+        When I leave a comment "This book made me sad, but plot was fine." as "bartholomew@heaven.com"
+        And I title it with very long title
+        And I rate it with 3 points
+        Then I should be notified that title is too long
+
+    @ui @javascript
     Scenario: Adding a product review without specifying a comment
         Given I want to review product "Necronomicon"
         When I leave a review titled "Not good, not bad" as "bartholomew@heaven.com"
@@ -35,3 +50,11 @@ Feature: Review validation
         When I leave a comment "Not good, not bad", titled "Not good, not bad"
         And I rate it with 3 points
         Then I should be notified that I must enter my email
+
+    @ui @javascript
+    Scenario: Adding a product review with specifying already registerd author email
+        Given there is a customer account "sam@winchester.com" identified by "familybusiness"
+        And I want to review product "Necronomicon"
+        When I leave a comment "Really good book, with many important info.", titled "Usefull" as "sam@winchester.com"
+        And I rate it with 4 points
+        Then I should be notified that this email is already registered
