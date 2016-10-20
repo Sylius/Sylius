@@ -28,59 +28,103 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         }
 
         foreach ($configuration['fields'] as $name => $fieldConfiguration) {
-            $field = Field::fromNameAndType($name, $fieldConfiguration['type']);
-
-            if (array_key_exists('path', $fieldConfiguration)) {
-                $field->setPath($fieldConfiguration['path']);
-            }
-            if (array_key_exists('label', $fieldConfiguration)) {
-                $field->setLabel($fieldConfiguration['label']);
-            }
-            if (array_key_exists('enabled', $fieldConfiguration)) {
-                $field->setEnabled($fieldConfiguration['enabled']);
-            }
-            if (array_key_exists('sortable', $fieldConfiguration)) {
-                $field->setSortable($fieldConfiguration['sortable']);
-            }
-            if (array_key_exists('options', $fieldConfiguration)) {
-                $field->setOptions($fieldConfiguration['options']);
-            }
-
-            $grid->addField($field);
+            $grid->addField($this->convertField($name, $fieldConfiguration));
         }
 
         foreach ($configuration['filters'] as $name => $filterConfiguration) {
-            $filter = Filter::fromNameAndType($name, $filterConfiguration['type']);
-
-            if (array_key_exists('label', $filterConfiguration)) {
-                $filter->setLabel($filterConfiguration['label']);
-            }
-            if (array_key_exists('options', $filterConfiguration)) {
-                $filter->setOptions($filterConfiguration['options']);
-            }
-
-            $grid->addFilter($filter);
+            $grid->addFilter($this->convertFilter($name, $filterConfiguration));
         }
 
-        foreach ($configuration['actions'] as $groupName => $actions) {
-            $actionGroup = ActionGroup::named($groupName);
-
-            foreach ($actions as $name => $actionConfiguration) {
-                $action = Action::fromNameAndType($name, $actionConfiguration['type']);
-
-                if (array_key_exists('label', $actionConfiguration)) {
-                    $action->setLabel($actionConfiguration['label']);
-                }
-                if (array_key_exists('options', $actionConfiguration)) {
-                    $action->setOptions($actionConfiguration['options']);
-                }
-
-                $actionGroup->addAction($action);
-            }
-
-            $grid->addActionGroup($actionGroup);
+        foreach ($configuration['actions'] as $name => $actionGroupConfiguration) {
+            $grid->addActionGroup($this->convertActionGroup($name, $actionGroupConfiguration));
         }
 
         return $grid;
+    }
+
+    /**
+     * @param string $name
+     * @param array $configuration
+     *
+     * @return Field
+     */
+    private function convertField($name, array $configuration)
+    {
+        $field = Field::fromNameAndType($name, $configuration['type']);
+
+        if (array_key_exists('path', $configuration)) {
+            $field->setPath($configuration['path']);
+        }
+        if (array_key_exists('label', $configuration)) {
+            $field->setLabel($configuration['label']);
+        }
+        if (array_key_exists('enabled', $configuration)) {
+            $field->setEnabled($configuration['enabled']);
+        }
+        if (array_key_exists('sortable', $configuration)) {
+            $field->setSortable($configuration['sortable']);
+        }
+        if (array_key_exists('options', $configuration)) {
+            $field->setOptions($configuration['options']);
+        }
+
+        return $field;
+    }
+
+    /**
+     * @param string $name
+     * @param array $configuration
+     *
+     * @return Filter
+     */
+    private function convertFilter($name, array $configuration)
+    {
+        $filter = Filter::fromNameAndType($name, $configuration['type']);
+
+        if (array_key_exists('label', $configuration)) {
+            $filter->setLabel($configuration['label']);
+        }
+        if (array_key_exists('options', $configuration)) {
+            $filter->setOptions($configuration['options']);
+        }
+
+        return $filter;
+    }
+
+    /**
+     * @param string $name
+     * @param array $configuration
+     *
+     * @return ActionGroup
+     */
+    private function convertActionGroup($name, array $configuration)
+    {
+        $actionGroup = ActionGroup::named($name);
+
+        foreach ($configuration as $actionName => $actionConfiguration) {
+            $actionGroup->addAction($this->convertAction($actionName, $actionConfiguration));
+        }
+
+        return $actionGroup;
+    }
+
+    /**
+     * @param string $name
+     * @param array $configuration
+     *
+     * @return Action
+     */
+    private function convertAction($name, array $configuration)
+    {
+        $action = Action::fromNameAndType($name, $configuration['type']);
+
+        if (array_key_exists('label', $configuration)) {
+            $action->setLabel($configuration['label']);
+        }
+        if (array_key_exists('options', $configuration)) {
+            $action->setOptions($configuration['options']);
+        }
+
+        return $action;
     }
 }
