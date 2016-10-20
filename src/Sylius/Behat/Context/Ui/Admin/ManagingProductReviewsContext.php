@@ -211,6 +211,26 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @When I delete the :productReview product review
+     */
+    public function iDeleteTheProductReview(ReviewInterface $productReview)
+    {
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['title' => $productReview->getTitle()]);
+    }
+
+    /**
+     * @Then /^(this product review) should no longer exist in the registry$/
+     */
+    public function thisProductReviewShouldNoLongerExistInTheRegistry(ReviewInterface $productReview)
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['title' => $productReview->getTitle()]),
+            sprintf('Product review with title "%s" should no longer exist in the registry.', $productReview->getTitle())
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */
