@@ -11,14 +11,17 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
 
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Sylius\Bundle\PromotionBundle\Form\Type\Filter\ActionFiltersType;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * @author Viorel Craescu <viorel@craescu.com>
  * @author Gabi Udrescu <gabriel.udr@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UnitFixedDiscountConfigurationType extends FixedDiscountConfigurationType
+class UnitFixedDiscountConfigurationType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -26,11 +29,16 @@ class UnitFixedDiscountConfigurationType extends FixedDiscountConfigurationType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
-        $builder->add('filters', ActionFiltersType::class, [
-            'empty_data' => [],
-        ]);
+        $builder
+            ->add('amount', 'sylius_money', [
+                'label' => 'sylius.form.promotion_action.fixed_discount_configuration.amount',
+                'constraints' => [
+                    new NotBlank(),
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+            ->add('filters', 'sylius_promotion_filters')
+        ;
     }
 
     /**

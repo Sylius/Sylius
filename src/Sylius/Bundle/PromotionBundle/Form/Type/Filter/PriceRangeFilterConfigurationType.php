@@ -12,15 +12,15 @@
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Filter;
 
 use Symfony\Component\Form\AbstractType;
-use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * @author Viorel Craescu <viorel@craescu.com>
  * @author Gabi Udrescu <gabriel.udr@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PriceRangeType extends AbstractType
+class PriceRangeFilterConfigurationType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -28,15 +28,24 @@ class PriceRangeType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('min', MoneyType::class, [
-            'constraints' => [
-                new Type(['type' => 'numeric']),
-            ],
-        ]);
-        $builder->add('max', MoneyType::class, [
-            'constraints' => [
-                new Type(['type' => 'numeric']),
-            ],
-        ]);
+        $builder
+            ->add('min', 'sylius_money', [
+                'constraints' => [
+                    new Type(['type' => 'numeric']),
+                ],
+            ])->add('max', 'sylius_money', [
+                'constraints' => [
+                    new Type(['type' => 'numeric']),
+                ],
+            ])
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_promotion_action_filter_price_range_configuration';
     }
 }

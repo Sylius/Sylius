@@ -9,40 +9,45 @@ Feature: Adding promotion with filter
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Adding a promotion with item fixed discount only for products over 100
+    Scenario: Adding a promotion with item fixed discount only for products over 10
         Given I want to create a new promotion
-        When I specify its code as "10_for_all_products_over_100"
-        And I name it "$10 discount for all products over $100!"
+        When I specify its code as "10_for_all_products_over_10"
+        And I name it "$10 discount for all products over $10!"
         And I add the "Item fixed discount" action configured with amount of "$10"
-        And I add a price filter with minimum value of "$10"
+        And I specify that this filter should be applied for amount greater then "$10"
         And I add it
         Then I should be notified that it has been successfully created
-        And the "$10 discount for all products over $100!" promotion should appear in the registry
+        And the "$10 discount for all products over $10!" promotion should appear in the registry
 
-    @ui @javascript @skip
+    @ui @javascript
     Scenario: Adding a promotion with item fixed discount only for products between 10 and 100
+        Given I want to create a new promotion
+        When I specify its code as "10_for_all_products_over_10"
+        And I name it "$10 discount for (almost) all products!"
+        And I add the "Item fixed discount" action configured with amount of "$10"
+        And I specify that this filter should be applied for amount greater then "$10" but lesser then "$100"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the "$10 discount for (almost) all products!" promotion should appear in the registry
 
-    @ui @javascript @skip
-    Scenario: Adding a promotion with item fixed discount only for products from a certain taxon
+    @ui @javascript
+    Scenario: Adding a promotion with item percentage discount only for products over 10
+        Given I want to create a new promotion
+        When I specify its code as "10_for_all_products_over_10"
+        And I name it "$10 discount for all products over $10!"
+        And I add the "Item percentage discount" action configured with a percentage value of 10%
+        And I specify that this filter should be applied for amount greater then "$10"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the "$10 discount for all products over $10!" promotion should appear in the registry
 
-    @ui @javascript @skip
-    Scenario: Adding a promotion with item percentage discount only for products over 100
-
-    @ui @javascript @skip
+    @ui @javascript
     Scenario: Adding a promotion with item percentage discount only for products between 10 and 100
-
-    @ui @javascript @skip
-    Scenario: Adding a promotion with item percentage discount only for products from a certain taxon
-
-    @ui @javascript @skip
-    Scenario: Adding a promotion with item percentage discount only for products over 100 and from a certain taxon
-
-    @ui @javascript @skip
-    Scenario: Adding a promotion with item percentage discount only for products between 10 and 100 and from a certain taxon
-
-    @ui @javascript @skip
-    Scenario: Adding a promotion with fixed discount does not show filters
-
-    @ui @javascript @skip
-    Scenario: Adding a promotion with percentage discount does not show filters
-
+        Given I want to create a new promotion
+        When I specify its code as "10_for_all_products_over_10"
+        And I name it "$10 discount for (almost) all products!"
+        And I add the "Item percentage discount" action configured with a percentage value of 10%
+        And I specify that this filter should be applied for amount greater then "$10" but lesser then "$100"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the "$10 discount for (almost) all products!" promotion should appear in the registry
