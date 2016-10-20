@@ -46,6 +46,11 @@ final class AccountMenuBuilder extends AbstractMenuBuilder
             ->setLabelAttribute('icon', 'lock')
         ;
         $menu
+            ->addChild('address_book', ['route' => 'sylius_shop_account_address_book_index'])
+            ->setLabel('sylius.menu.shop.account.address_book')
+            ->setLabelAttribute('icon', 'book')
+        ;
+        $menu
             ->addChild('order_history', ['route' => 'sylius_shop_account_order_index'])
             ->setLabel('sylius.menu.shop.account.order_history')
             ->setLabelAttribute('icon', 'cart')
