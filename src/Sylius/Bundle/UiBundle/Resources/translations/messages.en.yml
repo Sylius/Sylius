@@ -36,6 +36,7 @@ sylius:
         add_rule: 'Add rule'
         add_to_cart: 'Add to cart'
         add_value: 'Add value'
+        add_your_review: 'Add your review'
         adding_new_customer_groups: 'Adding new customer groups'
         adding_new_email: 'Adding new Email'
         adding_new_locale: 'Adding new locale'
