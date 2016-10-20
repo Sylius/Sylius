@@ -80,11 +80,27 @@ final class ProductReviewContext implements Context
     }
 
     /**
+     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) with a comment "([^"]+)" added by (customer "[^"]+") which is not accepted yet$/
+     */
+    public function thisProductHasAReviewTitledAndRatedWithACommentAddedByCustomerWhichIsNotAcceptedYet(
+        ProductInterface $product,
+        $title,
+        $rating,
+        $comment,
+        CustomerInterface $customer
+    ) {
+        $review = $this->createProductReview($product, $title, $rating, $comment, $customer, ReviewInterface::STATUS_NEW);
+
+        $this->productReviewRepository->add($review);
+    }
+
+    /**
      * @param ProductInterface $product
      * @param string $title
      * @param int $rating
      * @param string|null $comment
      * @param CustomerInterface|null $customer
+     * @param string $status
      *
      * @return ReviewInterface
      */
@@ -93,7 +109,8 @@ final class ProductReviewContext implements Context
         $title,
         $rating,
         $comment = null,
-        CustomerInterface $customer = null
+        CustomerInterface $customer = null,
+        $status = ReviewInterface::STATUS_ACCEPTED
     ) {
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
@@ -102,8 +119,11 @@ final class ProductReviewContext implements Context
         $review->setComment($comment);
         $review->setReviewSubject($product);
         $review->setAuthor($customer);
+        $review->setStatus($status);
 
         $product->addReview($review);
+
+        $this->sharedStorage->set('product_review', $review);
 
         return $review;
     }

@@ -12,8 +12,10 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\UpdatePageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Webmozart\Assert\Assert;
 
@@ -33,13 +35,23 @@ final class ManagingProductReviewsContext implements Context
     private $updatePage;
 
     /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
+     * @param NotificationCheckerInterface $notificationChecker
      */
-    public function __construct(IndexPageInterface $indexPage, UpdatePageInterface $updatePage)
-    {
+    public function __construct(
+        IndexPageInterface $indexPage,
+        UpdatePageInterface $updatePage,
+        NotificationCheckerInterface $notificationChecker
+    ) {
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -154,6 +166,47 @@ final class ManagingProductReviewsContext implements Context
             $customerName,
             $this->updatePage->getCustomerName(),
             'Customer should have name %s, but they have %s'
+        );
+    }
+
+    /**
+     * @When I accept the :productReview product review
+     */
+    public function iAcceptTheProductReview(ReviewInterface $productReview)
+    {
+        $this->indexPage->accept(['title' => $productReview->getTitle()]);
+    }
+
+    /**
+     * @When I reject the :productReview product review
+     */
+    public function iRejectTheProductReview(ReviewInterface $productReview)
+    {
+        $this->indexPage->reject(['title' => $productReview->getTitle()]);
+    }
+
+    /**
+     * @Then /^(this product review) status should be "([^"]+)"$/
+     */
+    public function thisProductReviewStatusShouldBe(ReviewInterface $productReview, $status)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['title' => $productReview->getTitle(), 'status' => $status]),
+            sprintf(
+                'Product review with title "%s" and status "%s" is not in the list.',
+                $productReview->getTitle(),
+                $status
+            )
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that it has been successfully (accepted|rejected)$/
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyUpdated($action)
+    {
+        $this->notificationChecker->checkNotification(
+            sprintf('Product review has been successfully %s.', $action), NotificationType::success()
         );
     }
 
