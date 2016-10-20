@@ -11,6 +11,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_attribute.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_option.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_review.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion_coupon.yml" }
@@ -45,6 +46,8 @@ sylius_grid:
             manage_variants: "SyliusAdminBundle:Product/Action:manageVariants.html.twig"
             update_variant: "SyliusAdminBundle:ProductVariant/Action:update.html.twig"
             delete_variant: "SyliusAdminBundle:ProductVariant/Action:delete.html.twig"
+            accept: "SyliusAdminBundle:ProductReview/Action:accept.html.twig"
+            reject: "SyliusAdminBundle:ProductReview/Action:reject.html.twig"
             show: "SyliusAdminBundle:Grid/Action:show.html.twig"
             create: "SyliusAdminBundle:Grid/Action:create.html.twig"
             update: "SyliusAdminBundle:Grid/Action:update.html.twig"
