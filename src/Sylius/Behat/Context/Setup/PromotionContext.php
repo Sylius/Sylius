@@ -449,6 +449,19 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") and ("(?:€|£|\$)[^"]+") discount on every order$/
+     */
+    public function itGivesPercentageOffOnEveryProductClassifiedAsAndAmountDiscountOnOrder(
+        PromotionInterface $promotion,
+        $productDiscount,
+        TaxonInterface $discountTaxon,
+        $orderDiscount
+    ) {
+        $this->createUnitPercentagePromotion($promotion, $productDiscount, $this->getTaxonFilterConfiguration([$discountTaxon->getCode()]));
+        $this->createFixedPromotion($promotion, $orderDiscount);
+    }
+
+    /**
      * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product (classified as "[^"]+") and a free shipping to every order with items total equal at least ("[^"]+")$/
      */
     public function itGivesOffOnEveryProductClassifiedAsAndAFreeShippingToEveryOrderWithItemsTotalEqualAtLeast(

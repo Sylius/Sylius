@@ -19,6 +19,6 @@
         <a href="{{ path('sylius_shop_cart_item_remove', {'id': item.id}) }}" class="ui circular icon button sylius-cart-remove-button"><i class="remove icon"></i></a>
     </td>
     <td class="right aligned">
-        <span class="sylius-total">{{ item.total|sylius_price(cart.currencyCode) }}</span>
+        <span class="sylius-total">{{ item.subtotal|sylius_price(cart.currencyCode) }}</span>
     </td>
 </tr>

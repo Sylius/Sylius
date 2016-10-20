@@ -63,3 +63,13 @@ Feature: Receiving a discount based on a configured promotion
         Then product "Metallica dress" price should be decreased by "$5.00"
         And product "Rammstein bow tie" price should be decreased by "$1.00"
         And my cart total should be "$134.00"
+
+    @ui
+    Scenario: Receiving a discount on products from a specific taxon together with fixed discount on order
+        Given there is a promotion "Jacket-trousers pack"
+        And it gives "10%" off on every product classified as "Jackets" and "$20.00" discount on every order
+        When I add product "Iron Maiden trousers" to the cart
+        And I add product "Black Sabbath jacket" to the cart
+        Then product "Black Sabbath jacket" price should be decreased by "$10.00"
+        And my discount should be "-$20.00"
+        And my cart total should be "$150.00"
