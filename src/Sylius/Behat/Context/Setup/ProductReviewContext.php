@@ -12,10 +12,10 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Persistence\ObjectManager;
+use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -41,18 +41,26 @@ final class ProductReviewContext implements Context
     private $productReviewRepository;
 
     /**
+     * @var StateMachineFactoryInterface
+     */
+    private $stateMachineFactory;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $productReviewFactory
      * @param RepositoryInterface $productReviewRepository
+     * @param StateMachineFactoryInterface $stateMachineFactory
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $productReviewFactory,
-        RepositoryInterface $productReviewRepository
+        RepositoryInterface $productReviewRepository,
+        StateMachineFactoryInterface $stateMachineFactory
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productReviewFactory = $productReviewFactory;
         $this->productReviewRepository = $productReviewRepository;
+        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     /**
@@ -92,7 +100,7 @@ final class ProductReviewContext implements Context
         $rating,
         CustomerInterface $customer
     ) {
-        $review = $this->createProductReview($product, $title, $rating, $title, $customer, ReviewInterface::STATUS_NEW);
+        $review = $this->createProductReview($product, $title, $rating, $title, $customer, null);
 
         $this->productReviewRepository->add($review);
     }
@@ -115,7 +123,7 @@ final class ProductReviewContext implements Context
      * @param int $rating
      * @param string $comment
      * @param CustomerInterface|null $customer
-     * @param string $status
+     * @param string $transition
      *
      * @return ReviewInterface
      */
@@ -125,7 +133,7 @@ final class ProductReviewContext implements Context
         $rating,
         $comment,
         CustomerInterface $customer = null,
-        $status = ReviewInterface::STATUS_ACCEPTED
+        $transition = 'accept'
     ) {
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
@@ -134,9 +142,13 @@ final class ProductReviewContext implements Context
         $review->setComment($comment);
         $review->setReviewSubject($product);
         $review->setAuthor($customer);
-        $review->setStatus($status);
 
         $product->addReview($review);
+
+        if (null !== $transition) {
+            $stateMachine = $this->stateMachineFactory->get($review, 'sylius_product_review');
+            $stateMachine->apply($transition);
+        }
 
         return $review;
     }

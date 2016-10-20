@@ -135,6 +135,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.factory.product_review" container="symfony" />
             <argument type="service" id="sylius.repository.product_review" container="symfony" />
+            <argument type="service" id="sm.factory" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
