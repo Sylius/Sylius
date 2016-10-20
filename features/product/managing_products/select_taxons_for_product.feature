@@ -11,7 +11,7 @@ Feature: Select taxon for a product
         And the store has a product "T-Shirt Batman"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @todo
     Scenario: Specifying main taxon for configurable product
         Given I want to modify the "T-Shirt Banana" product
         When I choose main taxon "T-Shirts"
@@ -19,7 +19,7 @@ Feature: Select taxon for a product
         Then I should be notified that it has been successfully edited
         And this product main taxon should be "T-Shirts"
 
-    @ui @javascript
+    @ui @javascript @todo
     Scenario: Specifying main taxon for simple product
         Given I want to modify the "T-Shirt Batman" product
         When I choose main taxon "Sad"
