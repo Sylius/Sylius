@@ -29,7 +29,7 @@ final class PriceRangeFilter implements FilterInterface
 
         $filteredItems = [];
         foreach ($items as $item) {
-            if ($this->isItemVariantInPriceRange($item->getVariant(), $configuration['filters']['price_range'])) {
+            if ($this->isItemVariantInPriceRange($item->getVariant(), $configuration['filters']['price_range_filter'])) {
                 $filteredItems[] = $item;
             }
         }
@@ -61,6 +61,6 @@ final class PriceRangeFilter implements FilterInterface
      */
     private function isConfigured(array $configuration)
     {
-        return isset($configuration['filters']['price_range']['min']);
+        return isset($configuration['filters']['price_range_filter']['min']);
     }
 }

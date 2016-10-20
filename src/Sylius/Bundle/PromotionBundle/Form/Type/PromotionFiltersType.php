@@ -24,7 +24,7 @@ class PromotionFiltersType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('price_range', 'sylius_promotion_action_filter_price_range_configuration', ['required' => false]);
+        $builder->add('price_range_filter', 'sylius_promotion_action_filter_price_range_configuration', ['required' => false]);
     }
 
     /**
