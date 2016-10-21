@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Context\Setup;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -564,6 +565,22 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on a ("[^"]*" product)$/
+     */
+    public function itGivesFixedDiscountOffOnAProduct(PromotionInterface $promotion, $discount, ProductInterface $product)
+    {
+        $this->createUnitFixedPromotion($promotion, $discount, $this->getProductsFilterConfiguration([$product->getCode()]));
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on a ("[^"]*" product)$/
+     */
+    public function itGivesPercentageDiscountOffOnAProduct(PromotionInterface $promotion, $discount, ProductInterface $product)
+    {
+        $this->createUnitPercentagePromotion($promotion, $discount, $this->getProductsFilterConfiguration([$product->getCode()]));
+    }
+
+    /**
      * @param array $taxonCodes
      *
      * @return array
@@ -571,6 +588,16 @@ final class PromotionContext implements Context
     private function getTaxonFilterConfiguration(array $taxonCodes)
     {
         return ['filters' => ['taxons' => $taxonCodes]];
+    }
+
+    /**
+     * @param array $productCodes
+     *
+     * @return array
+     */
+    private function getProductsFilterConfiguration(array $productCodes)
+    {
+        return ['filters' => ['products_filter' => ['products' => $productCodes]]];
     }
 
     /**
