@@ -11,8 +11,8 @@ sylius:
             unique: Codice prodotto deve essere univoco.
         name:
             not_blank: Inserisci il nome del prodotto.
-            min_length: 'Il nome del prodotto deve essere lungo almeno 1 carattere. |Il nome del prodotto deve essere lungo almeno {{ limit }} caratteri.'
-            max_length: 'Il nome del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.'
+            min_length: Il nome del prodotto deve essere lungo almeno 1 carattere. |Il nome del prodotto deve essere lungo almeno {{ limit }} caratteri.
+            max_length: Il nome del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.
     variant:
         sku:
             not_blank: Inserire la variante SKU.
@@ -20,17 +20,17 @@ sylius:
         combination: La variante con questa opzione impostata esiste già.
     option:
         code:
-            not_blank: "Inserisci il codice dell'opzione."
-            unique: "L'opzione con il codice dato esiste già."
+            not_blank: Inserisci il codice dell'opzione.
+            unique: L'opzione con il codice dato esiste già.
         name:
-            not_blank: "Inserisci il nome dell'opzione."
-            min_length: "Il nome dell'opzione deve essere lungo almeno 1 carattere. |Il nome dell'opzione deve essere lungo almeno {{ limit }} caratteri."
-            max_length: "Il nome dell'opzione non deve essere più lungo di 1 carattere. |Il nome dell'opzione non deve essere più lungo di {{ limit }} caratteri."
+            not_blank: Inserisci il nome dell'opzione.
+            min_length: Il nome dell'opzione deve essere lungo almeno 1 carattere. |Il nome dell'opzione deve essere lungo almeno {{ limit }} caratteri.
+            max_length: Il nome dell'opzione non deve essere più lungo di 1 carattere. |Il nome dell'opzione non deve essere più lungo di {{ limit }} caratteri.
         values:
-            min_count: "Aggiungere almeno {{ limit }} valore d'opzione. |Aggiungere almeno {{ limit }} valori di opzione."
+            min_count: Aggiungere almeno {{ limit }} valore d'opzione. |Aggiungere almeno {{ limit }} valori di opzione.
     option_value:
         code:
-            not_blank: "Inserisci il codice del valore dell'opzione."
-            unique: "Il valore dell'opzione con il codice dato esiste già."
+            not_blank: Inserisci il codice del valore dell'opzione.
+            unique: Il valore dell'opzione con il codice dato esiste già.
         value:
-            not_blank: "Inserisci il valore dell'opzione."
+            not_blank: Inserisci il valore dell'opzione.

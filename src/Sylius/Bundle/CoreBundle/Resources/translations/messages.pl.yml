@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Cena jednostkowa
-                quantity: Ilość
-                variant: Wariant
-            customer_group: Grupa klientów
         block:
             body: Zawartość
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Metoda wysyłki
         promotion:
             channels: Kanały
-        coupon:
-            per_customer_usage_limit: Limit użycia na 1 klienta
+        promotion_action:
+            add_product_configuration:
+                product: Produkt
         group:
             name: Nazwa
             roles: Role
@@ -127,8 +122,6 @@ sylius:
             contains_taxon:
                 taxon: Takson
                 count: Ilość
-            taxon:
-                taxons: Taksony
             total_of_items_from_taxon:
                 taxon: Takson
                 amount: Kwota
@@ -141,7 +134,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Zainstaluj i włącz rozszerzenie %extension%.'
+            help: Zainstaluj i włącz rozszerzenie %extension%.
             iconv: Iconv
             exif: Exif
             fileinfo: Fileinfo
@@ -194,22 +187,22 @@ sylius:
     email:
         order_confirmation:
             name: Potwierdzenie zamówienia
-            content: 'Twoje zamówienie nr %number% zostało złożone.<br/> <br/> Dziękujemy za zakupy w naszym sklepie!'
+            content: Twoje zamówienie nr %number% zostało złożone.<br/> <br/> Dziękujemy za zakupy w naszym sklepie!
         order_comment:
             name: Uwagi dotyczące zamówienia
         shipment_confirmation:
             name: Potwierdzenie dostawy
-            content: 'Twoje zamówienie nr %number% zostało wysłane przy użyciu %method%. <br/> Możesz je namierzyć korzystając z kodu śledzenia "%tracking%". <br/> <br/> Dziękujemy za udaną transakcję.'
+            content: Twoje zamówienie nr %number% zostało wysłane przy użyciu %method%. <br/> Możesz je namierzyć korzystając z kodu śledzenia "%tracking%". <br/> <br/> Dziękujemy za udaną transakcję.
         user_confirmation:
             name: Potwierdzenia przez użytkownika
             subject: Zapraszamy do naszego sklepu
-            content: 'Zapraszamy do naszego sklepu <br/> <br/> Twoja rejestracja przebiegła pomyślnie. <br/> Dziękujemy %username%.'
+            content: Zapraszamy do naszego sklepu <br/> <br/> Twoja rejestracja przebiegła pomyślnie. <br/> Dziękujemy %username%.
         password_reset:
             name: Resetowanie hasła
-            content: '<h3>Witaj %username%</h3> Aby ustawić nowe hasło, odwiedź %url% <br/> <br/> Pozdrawiamy, zespół.'
+            content: <h3>Witaj %username%</h3> Aby ustawić nowe hasło, odwiedź %url% <br/> <br/> Pozdrawiamy, zespół.
         verification:
             name: Weryfikacja adresu e-mail
-            content: 'Aby zweryfikować swój adres e-mail - proszę odwiedzić %url%'
+            content: Aby zweryfikować swój adres e-mail - proszę odwiedzić %url%
     payum_gateway:
         cash_on_delivery: Opłata za pobraniem
         offline: Tryb offline

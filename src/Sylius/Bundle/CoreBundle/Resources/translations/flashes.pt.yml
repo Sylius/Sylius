@@ -9,7 +9,7 @@ sylius:
         item_add_error: Ocorreu um erro ao adicionar o produto ao carrinho.
         item_remove_completed: O produto foi removido do carrinho.
         item_remove_error: Ocorreu um erro ao remover o produto ao carrinho.
-        restricted_zone_removal: 'Produto %product% removido do carrinho dado que não está disponível no seu país.'
+        restricted_zone_removal: Produto %product% removido do carrinho dado que não está disponível no seu país.
     checkout:
         restricted_zone: Este produto não está disponível no seu país.
         success: Obrigado pela sua encomenda!
@@ -18,4 +18,4 @@ sylius:
         new: O seu pagamento é recente.
         failed: O seu pagamento foi recusado.
         unknown: Erro de pagamento desconhecido.
-        out_of_stock: 'Há apenas %quantity% %name% disponíveis.'
+        out_of_stock: Há apenas %quantity% %name% disponíveis.

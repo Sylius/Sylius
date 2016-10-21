@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        promotion_action:
+            type: 타입
+        promotion_rule:
+            type: 타입

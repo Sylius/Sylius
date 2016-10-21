@@ -30,7 +30,7 @@ sylius:
             unique: รหัสภาพต้องไม่ซ้ำกันภายในสินค้านี้
     product_variant:
         onHand:
-            min: 'On hand ต้องมากกว่า {{ limit }}.'
+            min: On hand ต้องมากกว่า {{ limit }}.
             not_blank: กรุณาระบุสินค้า on hand
         price:
             min: ราคาต้องไม่เป็นค่าลบ
@@ -39,7 +39,7 @@ sylius:
             min: ราคาทุนต้องไม่เป็นค่าลบ
     product_translation:
         short_description:
-            max: 'คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'
+            max: คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร
     taxon_image:
         code:
             unique: รหัสภาพต้องไม่ซ้ำกันภายในหมวดหมู่สินค้านี้

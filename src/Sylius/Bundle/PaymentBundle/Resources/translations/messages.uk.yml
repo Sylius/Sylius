@@ -4,7 +4,7 @@
 sylius:
     form:
         credit_card:
-            cardholder_name: "Ім'я власника кредитної картки"
+            cardholder_name: Ім'я власника кредитної картки
             expiry_month: Місяць закінчення строку дії
             expiry_year: Рік закінчення строку дії
             number: Номер картки

@@ -7,9 +7,11 @@ sylius:
             not_exist: No existe ningún usuario con este correo electrónico.
         password:
             reset:
-                success: ¡Tu contraseña se ha restablecido con éxito!
+                success: '¡Tu contraseña se ha restablecido con éxito!'
+                token_expired: El token para restablecer la contraseña ha caducado,
+                requested: Si el correo electrónico que has indicado existe en nuestro sistema, te mandaremos allí las instrucciones para restablecer tu contraseña.
             change:
-                success: ¡Tu contraseña ha sido cambiada correctamente!
+                success: '¡Tu contraseña ha sido cambiada correctamente!'
         verification:
             error: El token de verificación no es válido.
             notice:

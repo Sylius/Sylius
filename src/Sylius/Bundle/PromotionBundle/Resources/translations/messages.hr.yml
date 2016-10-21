@@ -3,33 +3,6 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Iznos
-            percentage_discount_configuration:
-                percentage: Postotak
-            type: Vrsta
-        rule:
-            taxonomy_configuration:
-                taxons: Taksoni
-                exclude: Ne uključuje
-            contains_product_configuration:
-                variants: Proizvodi
-                exclude: Ne uključuje
-            cart_quantity_configuration:
-                count: Brojač
-            item_total_configuration:
-                amount: Iznosu
-            nth_order_configuration:
-                nth: N-ti
-            shipping_country_configuration:
-                country: Država
-            type: Tip
-        coupon:
-            usage_limit: Ograničenje koda za popust
-        coupon_generate_instruction:
-            amount: Iznos
-            usage_limit: Ograničenje generiranih kodova
         promotion:
             actions: Akcije
             add_action: Dodajte akciju
@@ -41,3 +14,20 @@ sylius:
             rules: Pravila
             starts_at: Počinje
             usage_limit: Ograničenje
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Iznos
+            type: Vrsta
+        promotion_coupon:
+            usage_limit: Ograničenje
+        promotion_coupon_generator_instruction:
+            amount: Iznos
+            usage_limit: Ograničenje
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Brojač
+            item_total_configuration:
+                amount: Iznos
+            shipping_country_configuration:
+                country: Država
+            type: Vrsta

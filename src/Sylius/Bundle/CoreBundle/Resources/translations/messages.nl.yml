@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Stukprijs
-                quantity: Hoeveelheid
-                variant: Variant
-            customer_group: Gebruikersgroep
         block:
             body: Inhoud
             id: ID
@@ -22,17 +16,18 @@ sylius:
             shipping_method: Verzendmethode
         promotion:
             channels: Kanalen
-        coupon:
-            per_customer_usage_limit: Gebruikslimiet per klant
+        promotion_action:
+            add_product_configuration:
+                product: Product
         group:
             name: Naam
             roles: Rollen
         channel:
             taxonomies: Taxonomieën
             locale_default: Standaardlandinstelling
-            locales: "Talen/Regio's"
+            locales: Talen/Regio's
             currency_default: Standaard valuta
-            currencies: "Valuta's"
+            currencies: Valuta's
             shipping_methods: Verzendmethodes
             payment_methods: Betaalmethodes
             tax_calculation_strategy: Strategie voor berekening van de BTW
@@ -127,8 +122,6 @@ sylius:
             contains_taxon:
                 taxon: Categorie
                 count: Aantal
-            taxon:
-                taxons: Taxons
             total_of_items_from_taxon:
                 taxon: Categorie
                 amount: Hoeveelheid
@@ -141,7 +134,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Installeer en activeer de %extension% extensie.'
+            help: Installeer en activeer de %extension% extensie.
             iconv: Iconv
             exif: Exif
             fileinfo: Bestandsinfo
@@ -198,13 +191,13 @@ sylius:
         user_confirmation:
             name: Bevestiging van de gebruiker
             subject: Welkom in jouw winkel
-            content: 'Wekom bij onze winkel<br/><br/>Je bent zonet geregistreerd.<br/>Bedankt %username%.'
+            content: Wekom bij onze winkel<br/><br/>Je bent zonet geregistreerd.<br/>Bedankt %username%.
         password_reset:
             name: Wachtwoord opnieuw instellen
-            content: '<h3>Dag %username%</h3>Bezoek %url% om je wachtwoord opnieuw in te stellen.<br/><br/>Met vriendelijke groeten, het Team.'
+            content: <h3>Dag %username%</h3>Bezoek %url% om je wachtwoord opnieuw in te stellen.<br/><br/>Met vriendelijke groeten, het Team.
         verification:
             name: E-mail adres verificatie
-            content: 'Bezoek %url% om je email adres te bevestigen'
+            content: Bezoek %url% om je email adres te bevestigen
     payum_gateway:
         cash_on_delivery: Onder rembours
         offline: Offline

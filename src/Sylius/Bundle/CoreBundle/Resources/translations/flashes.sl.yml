@@ -9,7 +9,7 @@ sylius:
         item_add_error: Med dodajanjem izdelka v košarico je prišlo do napake.
         item_remove_completed: Izdelek je bil odstranjen iz košarice.
         item_remove_error: Med odstranjevanjem izdelka iz košarice je prišlo do napake.
-        restricted_zone_removal: 'Izdelek %product% je bil odstranjen iz košarice, ker ni na voljo v vaši državi.'
+        restricted_zone_removal: Izdelek %product% je bil odstranjen iz košarice, ker ni na voljo v vaši državi.
     checkout:
         restricted_zone: Ta izdelek ni na voljo v vaši državi.
         success: Hvala za vaše naročilo!
@@ -18,4 +18,4 @@ sylius:
         new: Vaše plačilo je novo.
         failed: Vaše plačilo je bilo zavrnjeno.
         unknown: Neznana napaka plačila.
-        out_of_stock: 'Na zalogi je samo %quantity% %name%.'
+        out_of_stock: Na zalogi je samo %quantity% %name%.

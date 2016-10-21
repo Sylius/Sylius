@@ -9,8 +9,6 @@ sylius:
                     attributes: Atributy
                     header: Katalog
                     options: Možnosti
-                    products: Produkty
-                    taxons: Taxony
                 configuration:
                     admin_users: Administrátoři
                     channels: Kanály

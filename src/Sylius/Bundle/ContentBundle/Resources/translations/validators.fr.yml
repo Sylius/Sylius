@@ -4,7 +4,7 @@
 sylius:
     route:
         name:
-            not_blank: "Merci d'entrer le nom de la route."
+            not_blank: Merci d'entrer le nom de la route.
         content:
             not_blank: Veuillez noter le chemin du fichier.
         start_date:
@@ -13,11 +13,11 @@ sylius:
             invalid_date: La date de fin de publication est invalide.
     static_content:
         name:
-            not_blank: "Merci d'entrer le nom de la page."
+            not_blank: Merci d'entrer le nom de la page.
         title:
-            not_blank: "Merci d'entrer le titre de la page."
+            not_blank: Merci d'entrer le titre de la page.
         body:
-            not_blank: "Merci d'entrer le texte de la page."
+            not_blank: Merci d'entrer le texte de la page.
         start_date:
             invalid_date: La date de début de publication est invalide.
         end_date:

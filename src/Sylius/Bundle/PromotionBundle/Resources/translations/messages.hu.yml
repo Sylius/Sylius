@@ -3,55 +3,28 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Összeg
-            percentage_discount_configuration:
-                percentage: Százalék
-            type: Típus
-        rule:
-            taxonomy_configuration:
-                taxons: Taxonok
-                exclude: Kivétel
-            contains_product_configuration:
-                variants: Termékek
-                exclude: Kivétel
-            cart_quantity_configuration:
-                count: Mennyiség
-                equal: Egyenlő
-            item_total_configuration:
-                amount: Összeg
-            nth_order_configuration:
-                nth: N-edik
-            customer_loyalty_configuration:
-                time: Idő
-                unit:
-                    days: Napok
-                    weeks: Hetek
-                    months: Hónapok
-                    years: Évek
-                    header: Egység
-                after: A felhasználó ezután lett létrehozva
-            shipping_country_configuration:
-                country: Ország
-            type: Típus
-        coupon:
-            usage_limit: Felhasználhatóság korlátozása
-            expires_at: Lejárat
-        coupon_generate_instruction:
-            amount: Összeg
-            usage_limit: Felhasználhatóság korlátozása
-            expires_at: Lejárat
-            code_length: A kód hossza
         promotion:
             actions: Műveletek
             add_action: Művelet hozzáadása
             add_rule: Szabály hozzáadása
             coupon_based: Kupon alapján
-            exclusive: Exkluzív
             description: Leírás
             ends_at: Végződik
+            exclusive: Exkluzív
             name: Név
             rules: Szabályok
             starts_at: Kezdődik
             usage_limit: Felhasználhatóság korlátozása
+        promotion_action:
+            type: Típus
+        promotion_coupon:
+            usage_limit: Felhasználhatóság korlátozása
+        promotion_coupon_generator_instruction:
+            usage_limit: Felhasználhatóság korlátozása
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Mennyiség
+                equal: Egyenlő
+            shipping_country_configuration:
+                country: Ország
+            type: Típus

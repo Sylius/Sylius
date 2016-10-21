@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Preț unitar
-                quantity: Cantitate
-                variant: Variantă
         block:
             body: Corp
             id: Id
@@ -19,6 +14,9 @@ sylius:
                 different_billing_address: Folosiți o adresă de facturare diferită?
             payment_method: Metoda de plată
             shipping_method: Metoda de livrare
+        promotion_action:
+            add_product_configuration:
+                product: Produs
         group:
             name: Nume
             roles: Roluri
@@ -105,10 +103,8 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Număr
-            taxon:
-                taxons: Categorii
             total_of_items_from_taxon:
-                amount: Valoare
+                amount: Sumă
     installer:
         extensions:
             header: extensii
@@ -117,7 +113,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Instalaţi şi activaţi extensia %extension%.'
+            help: Instalaţi şi activaţi extensia %extension%.
             iconv: Iconv
             icu: ICU
             intl: Intl

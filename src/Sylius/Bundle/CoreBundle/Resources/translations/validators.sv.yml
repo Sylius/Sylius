@@ -17,4 +17,4 @@ sylius:
             min: Ursprungliga priset får inte vara negativt.
     product_translation:
         short_description:
-            max: 'En kort beskrivning kan inte vara längre än {{ limit }} tecken.'
+            max: En kort beskrivning kan inte vara längre än {{ limit }} tecken.

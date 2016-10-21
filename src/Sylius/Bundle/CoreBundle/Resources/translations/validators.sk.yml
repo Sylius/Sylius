@@ -25,7 +25,7 @@ sylius:
             unique: Kód obrázku musí byť pre tento produkt unikátny.
     product_variant:
         onHand:
-            min: 'Počet položiek na sklade musí byť viac ako {{ limit }}.'
+            min: Počet položiek na sklade musí byť viac ako {{ limit }}.
             not_blank: Prosím zadajte počet položiek na sklade.
         price:
             min: Cena nemôže obsahovať záporné hodnoty.
@@ -34,7 +34,7 @@ sylius:
             min: Pôvodná cena nesmie byť záporná.
     product_translation:
         short_description:
-            max: 'Stručný popis nesmie byť dlhší ako {{ limit }} znakov.'
+            max: Stručný popis nesmie byť dlhší ako {{ limit }} znakov.
     taxon_image:
         code:
             unique: Kód obrázku musí byť pre túto kategóriu unikátny.

@@ -29,7 +29,7 @@ sylius:
                 first_unit_cost: Costo della prima unità
             per_unit_rate_configuration:
                 label: Tariffa fissa per unità
-                amount: Valore
+                amount: Importo
             weight_rate_configuration:
                 label: Tariffa basata sul peso
                 fixed: Importo fisso
@@ -37,7 +37,7 @@ sylius:
                 division: Divisione
             volume_rate_configuration:
                 label: Tariffa basata sul volume
-                amount: Valore
+                amount: Importo
                 division: Divisione
         shipping_category:
             description: Descrizione

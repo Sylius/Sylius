@@ -9,7 +9,7 @@ sylius:
         item_add_error: Gabim gjatë shtimit të artikullit në kartë.
         item_remove_completed: Artikulli u fshi nga karta.
         item_remove_error: Gabim gjatë fshirjes së artikullit nga karta.
-        restricted_zone_removal: 'Produkti %product% i fshirë nga karroca sepse nuk është i vlefshëm në vendin tuaj.'
+        restricted_zone_removal: Produkti %product% i fshirë nga karroca sepse nuk është i vlefshëm në vendin tuaj.
     checkout:
         restricted_zone: Ky produkt nuk është i vlefshëm në vendin tuaj.
         success: Falmnderit për porosinë!
@@ -18,4 +18,4 @@ sylius:
         new: Pagesa juaj është e re.
         failed: Pagesa juaj nuk u pranua.
         unknown: Gabim i panjohur gjatë pagesës.
-        out_of_stock: 'Në rezerva ka vetëm %quantity% %name%.'
+        out_of_stock: Në rezerva ka vetëm %quantity% %name%.

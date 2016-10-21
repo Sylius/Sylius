@@ -20,7 +20,7 @@ sylius:
             percent: Pourcentage
             text: Texte
             textarea: Zone de texte
-            title: "Type de l'attribut"
+            title: Type de l'attribut
             validation: Validation
         attribute_type_configuration:
             datetime:

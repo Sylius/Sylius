@@ -4,24 +4,18 @@
 sylius:
     promotion:
         description:
-            max_length: 'Promosyon açıklaması 1 karakterden uzun olmamalıdır. |Promosyon açıklamasının {{ limit }} karakterden uzun olmaması gerekir.'
-            min_length: 'Promosyon açıklaması en az 1 karakter uzunluğunda olmalıdır.|Promosyon açıklaması en az {{ limit }} karakter uzunluğunda olmalıdır.'
+            max_length: Promosyon açıklaması 1 karakterden uzun olmamalıdır. |Promosyon açıklamasının {{ limit }} karakterden uzun olmaması gerekir.
+            min_length: Promosyon açıklaması en az 1 karakter uzunluğunda olmalıdır.|Promosyon açıklaması en az {{ limit }} karakter uzunluğunda olmalıdır.
             not_blank: Lütfen promosyon açıklamasını girin.
         name:
-            max_length: 'Promosyon ismi 1 karakterden uzun olmamalıdır.|Promosyon ismi {{ limit }} karakterden uzun olmamalıdır.'
-            min_length: 'Promosyon ismi en az 1 karakter uzunluğunda olmalıdır.|Promosyon ismi en az {{ limit }} karakter uzunluğunda olmalıdır.'
+            max_length: Promosyon ismi 1 karakterden uzun olmamalıdır.|Promosyon ismi {{ limit }} karakterden uzun olmamalıdır.
+            min_length: Promosyon ismi en az 1 karakter uzunluğunda olmalıdır.|Promosyon ismi en az {{ limit }} karakter uzunluğunda olmalıdır.
             not_blank: Lütfen promosyon ismini girin.
     promotion_coupon:
         code:
-            max_length: 'Kupon kodu 1 karakterden uzun olmamalıdır. |Kupon kodunun {{ limit }} karakterden uzun olmaması gerekir.'
-            min_length: 'Kupon kodu en az 1 karakter uzunluğunda olmalıdır. |Kupon kodu en az {{ limit }} karakter uzunluğunda olmalıdır.'
+            max_length: Kupon kodu 1 karakterden uzun olmamalıdır. |Kupon kodunun {{ limit }} karakterden uzun olmaması gerekir.
+            min_length: Kupon kodu en az 1 karakter uzunluğunda olmalıdır. |Kupon kodu en az {{ limit }} karakter uzunluğunda olmalıdır.
             not_blank: Kupon kodunu giriniz.
             unique: Bu kupon zaten var.
         usage_limit:
-            min: 'Kupon kullanım limitinin en az {{ limit }} olması gerekir.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'Oluşturulacak kuponların miktarı en az {{ limit }} olmalıdır.'
-            not_blank: Lütfen oluşturulacak kuponların miktarını giriniz.
-        usage_limit:
-            min: 'Oluşturulan Kuponlar kullanım sınırı en az olması gerekir {{ limit }}.'
+            min: Kupon kullanım limitinin en az {{ limit }} olması gerekir.

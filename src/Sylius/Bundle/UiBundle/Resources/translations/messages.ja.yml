@@ -152,8 +152,8 @@ sylius:
         no_description: 説明未設定
         no_promotion: プロモーションは適用されていません。
         no_shipping_charges: 送料無料
-        no_short_description: '<i>概要未入力</i>'
-        no_sku: '<i>SKU未登録</i>'
+        no_short_description: <i>概要未入力</i>
+        no_sku: <i>SKU未登録</i>
         no_tax_category: 税区分未設定
         no_taxes: 税は加算されていません。
         number: 注文番号
@@ -177,9 +177,8 @@ sylius:
         previous: 前へ
         price: 価格
         product: 商品名
-        product_details_viewing_product_product: '商品詳細<small>"<strong>%product%</strong>"</small>'
-        products: 商品管理
-        products_categorized_under_taxon_taxon: 'カテゴリ"%taxon%"の商品'
+        product_details_viewing_product_product: 商品詳細<small>"<strong>%product%</strong>"</small>
+        products_categorized_under_taxon_taxon: カテゴリ"%taxon%"の商品
         products_index_of_all_products_in_your_store: 商品管理
         promotion_coupons: sylius.breadcrumb.promotion_coupon.index
         promotion_details: プロモーション詳細
@@ -212,7 +211,7 @@ sylius:
         shipping_total: 送料合計
         shop_by: 商品検索
         show_all: sylius.show_all
-        sign_in_to_the_store_or_create_new_account: 'ログイン<small>又は新規顧客登録</small>'
+        sign_in_to_the_store_or_create_new_account: ログイン<small>又は新規顧客登録</small>
         slideshow: スライドショー
         street: それ以降の住所
         success: 成功

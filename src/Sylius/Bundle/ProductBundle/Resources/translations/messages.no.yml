@@ -9,7 +9,6 @@ sylius:
             options: Instillinger
             meta_keywords: Meta nøkkelord
             meta_description: Metabeskrivelse
-            taxons: Taksonomier
         product_variant:
             available_on: Tilgjengelig
         association_type:

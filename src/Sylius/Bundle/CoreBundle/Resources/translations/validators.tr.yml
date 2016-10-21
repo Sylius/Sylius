@@ -8,11 +8,11 @@ sylius:
             unique: Bu bölge kodu zaten var.
     product_variant:
         onHand:
-            min: 'Stok miktarı {{ limit }} değerinden daha büyük olmalıdır.'
+            min: Stok miktarı {{ limit }} değerinden daha büyük olmalıdır.
             not_blank: Lütfen stok miktarını giriniz.
         price:
             min: Fiyat negatif olamaz.
             not_blank: Lütfen fiyatı giriniz.
     product_translation:
         short_description:
-            max: 'Kısa açıklama daha sonra {{ limit }} karakter olmalıdır.'
+            max: Kısa açıklama daha sonra {{ limit }} karakter olmalıdır.

@@ -5,3 +5,4 @@ sylius:
     form:
         attribute:
             name: Ime
+            type: Tip

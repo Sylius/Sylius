@@ -9,7 +9,6 @@ sylius:
                     attributes: 属性
                     header: 目录
                     options: 选项
-                    products: 产品
                     taxons: 分类
                 configuration:
                     channels: 频道

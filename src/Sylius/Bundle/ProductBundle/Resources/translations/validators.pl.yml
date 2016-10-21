@@ -11,8 +11,8 @@ sylius:
             unique: Kod produktu musi być unikalny.
         name:
             not_blank: Proszę podać nazwę produktu.
-            min_length: 'Nazwa produktu musi składać się z co najmniej 1 znaku. |Nazwa produktu musi składać się z co najmniej {{ limit }} znaków.'
-            max_length: 'Nazwa produktu nie może być dłuższa niż 1 znak. |Nazwa produktu nie może przekraczać {{ limit }} znaków.'
+            min_length: Nazwa produktu musi składać się z co najmniej 1 znaku. |Nazwa produktu musi składać się z co najmniej {{ limit }} znaków.
+            max_length: Nazwa produktu nie może być dłuższa niż 1 znak. |Nazwa produktu nie może przekraczać {{ limit }} znaków.
     variant:
         sku:
             not_blank: Proszę podać SKU wariantu.
@@ -24,8 +24,8 @@ sylius:
             unique: Opcja z podanym kodem już istnieje.
         name:
             not_blank: Proszę wprowadzić nazwę opcji.
-            min_length: 'Nazwa opcji powinna być dłuższa niż jeden znak.|Nazwa opcji musi zawierać co najmniej {{ limit }} znaków.'
-            max_length: 'Nazwa opcji nie może być dłuższa niż jeden znak. |Nazwa opcji nie może przekraczać {{ limit }} znaków.'
+            min_length: Nazwa opcji powinna być dłuższa niż jeden znak.|Nazwa opcji musi zawierać co najmniej {{ limit }} znaków.
+            max_length: Nazwa opcji nie może być dłuższa niż jeden znak. |Nazwa opcji nie może przekraczać {{ limit }} znaków.
         values:
             min_count: '{1} Dodaj co najmniej 1 opcję.|{2,3,4} Dodaj co najmniej {{ limit }} opcje.|[5,Inf[ Dodaj co najmniej {{ limit }} opcji.'
     option_value:

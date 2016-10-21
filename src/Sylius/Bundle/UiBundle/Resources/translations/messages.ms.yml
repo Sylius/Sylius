@@ -5,4 +5,6 @@ sylius:
     ui:
         city: Bandar
         company: Syarikat
+        country: Negara
         postcode: Poskod
+        type: Jenis

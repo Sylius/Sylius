@@ -8,8 +8,8 @@ sylius:
             unique: Jednotka vedení skladu musí být unikátní.
         name:
             not_blank: Zadejte název produktu.
-            min_length: 'Vyplňte název produktu.|Název musí obsahovat alespoň {{ limit }} znaků.'
-            max_length: 'Název produktu nesmí být delší než 1 znak. |Název produktu nesmí být delší než {{ limit }} znaků.'
+            min_length: Vyplňte název produktu.|Název musí obsahovat alespoň {{ limit }} znaků.
+            max_length: Název produktu nesmí být delší než 1 znak. |Název produktu nesmí být delší než {{ limit }} znaků.
     variant:
         sku:
             not_blank: Prosím zvolte variantu Jednotky vedení skladu.
@@ -18,10 +18,10 @@ sylius:
     option:
         name:
             not_blank: Prosím zadejte název možnosti.
-            min_length: 'Název možnosti musí být nejméně 1 znak. |Název možnosti musí být alespoň {{ limit }} znaků.'
-            max_length: 'Název možnosti nesmí být delší než 1 znak. | Název možnosti nesmí být delší než {{ limit }} znaků.'
+            min_length: Název možnosti musí být nejméně 1 znak. |Název možnosti musí být alespoň {{ limit }} znaků.
+            max_length: Název možnosti nesmí být delší než 1 znak. | Název možnosti nesmí být delší než {{ limit }} znaků.
         values:
-            min_count: 'Prosím přidejte alespoň {{ limit }} hodnotu možnosti.|Prosím vložte alespoň {{ limit }} hodnoty možností.'
+            min_count: Prosím přidejte alespoň {{ limit }} hodnotu možnosti.|Prosím vložte alespoň {{ limit }} hodnoty možností.
     option_value:
         value:
             not_blank: Vložte prosím hodnotu možnosti.

@@ -29,8 +29,8 @@ sylius:
                 country: País
                 province: Província
                 zone: Zona
-            scope: "Àmbit d'aplicació"
+            scope: Àmbit d'aplicació
             select: Tria
-            select_scope: "Seleccioneu l'àmbit"
+            select_scope: Seleccioneu l'àmbit
         zone_member:
             select: Tria

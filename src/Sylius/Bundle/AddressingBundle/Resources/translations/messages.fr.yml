@@ -32,8 +32,8 @@ sylius:
                 country: Pays
                 province: Région
                 zone: Zone
-            scope: "Champ d'application"
+            scope: Champ d'application
             select: Sélectionner
-            select_scope: "Sélectionnez le champ d'application"
+            select_scope: Sélectionnez le champ d'application
         zone_member:
             select: Sélectionner

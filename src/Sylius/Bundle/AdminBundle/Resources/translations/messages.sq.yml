@@ -9,8 +9,7 @@ sylius:
                     attributes: Atributet
                     header: Katalogu
                     options: Opsionet
-                    products: Produktet
-                    taxons: Kategoritë
+                    taxons: Tipologjite
                 configuration:
                     channels: Kanalet
                     countries: Vendet

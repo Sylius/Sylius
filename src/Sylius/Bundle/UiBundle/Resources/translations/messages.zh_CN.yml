@@ -46,7 +46,6 @@ sylius:
         administration_panel_login: 管理面板登录
         all: 全部
         all_your_addresses: 您的所有地址
-        amount: 金额
         an_error_occurred: 发生了一个错误。
         are_your_sure_you_want_to_perform_this_action: 是否确实执行此操作？
         association: 关联
@@ -71,7 +70,7 @@ sylius:
         browse_products: 浏览产品
         build: 开发
         calculator: 计算器
-        cancel: '取消 '
+        cancel: 取消 
         cancelled: 已取消.
         cart_locked: 购物车已锁定
         cart_summary: 购物车清单
@@ -174,7 +173,7 @@ sylius:
         customer_orders: 客户订单
         customer_since: 客户自
         customers: 客户
-        customers_list_of_all_customers_in_store: '客户 <small>显示一个店铺的全部客户</small>'
+        customers_list_of_all_customers_in_store: 客户 <small>显示一个店铺的全部客户</small>
         customize_default_metadata: 自定义默认元数据
         customize_metadata: 自定义元数据
         customize_products_metadata: 自定义产品元数据
@@ -267,7 +266,6 @@ sylius:
         exclusive: 独家
         existing_customer: 现有客户
         expiration_and_usage_limits: 过期时间和使用限制
-        expires_at: 截至于
         extra_information: 额外信息
         failed: 失败
         faqs: 常见问题
@@ -286,7 +284,7 @@ sylius:
         grand_total: 总计
         guest: 游客
         guest_customer: 来宾客户
-        hello_name: '您好 <b>%name%</b>！'
+        hello_name: 您好 <b>%name%</b>！
         hide_deleted: 隐藏已删除
         home: 首页
         hostname: 主机名
@@ -302,7 +300,7 @@ sylius:
         info: 信息
         information: 信息
         inventory: 库存
-        inventory_here_you_can_see_current_stock_levels: '库存，<small>在这里你可以看到当前的库存水平</small>'
+        inventory_here_you_can_see_current_stock_levels: 库存，<small>在这里你可以看到当前的库存水平</small>
         inventory_index: 库存
         inventory_state: 库存状态
         inventory_tracking: 库存跟踪
@@ -326,10 +324,10 @@ sylius:
         locales: 区域设置
         lock: 锁
         locked: 被锁定
-        logged_in_as: '以 %username% 身份登录'
+        logged_in_as: 以 %username% 身份登录
         login: 登录
         login_button: 登录
-        login_sylius_store: '登录 <small>Sylius 店铺</small>'
+        login_sylius_store: 登录 <small>Sylius 店铺</small>
         logout: 注销
         main_taxon: 主分类
         manage: 管理
@@ -427,7 +425,7 @@ sylius:
         no_results_to_display: 没有要显示的结果
         no_shipping_category: 没有配送分类
         no_shipping_charges: 无运费
-        no_short_description: '<i>没有简短的描述</i>'
+        no_short_description: <i>没有简短的描述</i>
         no_sku: 没有 SKU
         no_tax_category: 无税种分类
         no_taxes: 无税
@@ -491,15 +489,14 @@ sylius:
         product_association_types: 产品关联类型
         product_associations: 产品关联
         product_attributes: 产品属性
-        product_details_viewing_product_product: '产品详细 <small>查看产品"<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: 产品详细 <small>查看产品"<strong>%product%</strong>"</small>
         product_options: 产品选项
         product_review: 商品评论
         product_reviews: 商品评论
         product_variants: 产品变体
-        products: 产品
-        products_categorized_as_name: '产品归类为"%name%"'
-        products_categorized_under_taxon_taxon: '产品 <small>在"%taxon%"分类下</small>'
-        products_index_of_all_products_in_your_store: '产品 <small>在你们店里的全部产品</small>'
+        products_categorized_as_name: 产品归类为"%name%"
+        products_categorized_under_taxon_taxon: 产品 <small>在"%taxon%"分类下</small>
+        products_index_of_all_products_in_your_store: 产品 <small>在你们店里的全部产品</small>
         profile: 资料
         promotion_configuration: 促销配置
         promotion_coupons: 优惠券
@@ -523,7 +520,7 @@ sylius:
         refunded: 已退款
         register: 注册
         register_button: 注册
-        registration_create_an_account_in_store: '注册 <small>创建帐户</small>'
+        registration_create_an_account_in_store: 注册 <small>创建帐户</small>
         registration_date: 注册日期：
         release_inventory: 释放库存
         remember_me: 记住我
@@ -606,7 +603,6 @@ sylius:
         taxation_settings: 税收的设置
         taxes: 税
         taxonomy: 分类
-        taxons: 分类
         terms_and_conditions: 服务条款
         thank_you_for_your_order: 感谢您的下单。
         theme: 主题
@@ -670,19 +666,18 @@ sylius:
         update_product_association_type: 更新产品关联类型
         updating_tax_rate: 更新税率
         usage: 统计
-        usage_limit: 使用限制
         used: 已被使用
         user_confirmation_name: 用户确认
         user_details: 用户详情
         username: 用户名
-        users_list_of_all_users_registered_in_store: '用户 <small>在该店铺中注册的所有用户列表</small>'
+        users_list_of_all_users_registered_in_store: 用户 <small>在该店铺中注册的所有用户列表</small>
         values: 值
         variant: 变量
         variant_selection_method: 变量选择方法
         variants: 变体
         view: 查看
         view_more: 查看更多
-        view_product_details: '查看 %product% 详细信息'
+        view_product_details: 查看 %product% 详细信息
         void: 作废
         volume_based_pricing: 基于体积的定价
         warning: 警示

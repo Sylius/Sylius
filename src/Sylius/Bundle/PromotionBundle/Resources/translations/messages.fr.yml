@@ -3,55 +3,29 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Montant
-            percentage_discount_configuration:
-                percentage: Pourcentage
-            type: Type
-        rule:
-            taxonomy_configuration:
-                taxons: Famille de tags
-                exclude: Exclure
-            contains_product_configuration:
-                variants: Produits
-                exclude: Exclure
-            cart_quantity_configuration:
-                count: Nombre
-                equal: Egal
-            item_total_configuration:
-                amount: Montant
-            nth_order_configuration:
-                nth: Nième
-            customer_loyalty_configuration:
-                time: Heure
-                unit:
-                    days: Jours
-                    weeks: Semaines
-                    months: Mois
-                    years: Années
-                    header: Unité
-                after: Utilisateur inscrit après cette période
-            shipping_country_configuration:
-                country: Pays
-            type: Type
-        coupon:
-            usage_limit: "Limite d'utilisation"
-            expires_at: Expire le
-        coupon_generate_instruction:
-            amount: Montant
-            usage_limit: "Limite d'utilisation"
-            expires_at: Expire le
-            code_length: Longueur du code
         promotion:
             actions: Actions
             add_action: Ajouter une action
             add_rule: Ajouter une règle
             coupon_based: Comprend des coupons
-            exclusive: Exclusif
             description: Description
             ends_at: Se termine le
+            exclusive: Exclusif
             name: Nom
             rules: Règles
             starts_at: Commence le
-            usage_limit: "Limite d'utilisation"
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Montant
+            type: Type
+        promotion_coupon_generator_instruction:
+            amount: Montant
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Nombre
+                equal: Egal
+            item_total_configuration:
+                amount: Montant
+            shipping_country_configuration:
+                country: Pays
+            type: Type

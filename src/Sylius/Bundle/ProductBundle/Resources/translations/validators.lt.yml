@@ -8,8 +8,8 @@ sylius:
             unique: Produkto kodas turi būti unikalus.
         name:
             not_blank: Įveskite produkto pavadinimą.
-            min_length: 'Produkto pavadinimas turi būti ne mažiau kaip 1 simbolio ilgio.|Produkto pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių ilgio.'
-            max_length: 'Produkto pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Produkto pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.'
+            min_length: Produkto pavadinimas turi būti ne mažiau kaip 1 simbolio ilgio.|Produkto pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių ilgio.
+            max_length: Produkto pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Produkto pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.
     variant:
         sku:
             not_blank: Įveskite varianto kodą.
@@ -18,10 +18,10 @@ sylius:
     option:
         name:
             not_blank: Įveskite parinkties pavadinimą.
-            min_length: 'Parinkties pavadinimas turi būti ne mažiau kaip 1 simbolis.|Parinkties pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.'
-            max_length: 'Parinkties pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Parinkties pavadinimas turi būti ilgesnis nei {{ limit }} simbolių.'
+            min_length: Parinkties pavadinimas turi būti ne mažiau kaip 1 simbolis.|Parinkties pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių.
+            max_length: Parinkties pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Parinkties pavadinimas turi būti ilgesnis nei {{ limit }} simbolių.
         values:
-            min_count: 'Prašome įtraukti bent {{ limit }} parinkties reikšmę.|Prašome įtraukti bent {{ limit }} parinkties reikšmes.'
+            min_count: Prašome įtraukti bent {{ limit }} parinkties reikšmę.|Prašome įtraukti bent {{ limit }} parinkties reikšmes.
     option_value:
         value:
             not_blank: Įveskite parinkties reikšmę.

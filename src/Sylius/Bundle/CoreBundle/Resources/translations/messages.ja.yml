@@ -8,6 +8,9 @@ sylius:
                 different_billing_address: 請求先として別の住所を指定する
             payment_method: お支払い方法
             shipping_method: 発送方法
+        promotion_action:
+            add_product_configuration:
+                product: 商品名
         channel:
             taxonomies: sylius.breadcrumb.taxonomy.index
             currency_default: デフォルトの通貨

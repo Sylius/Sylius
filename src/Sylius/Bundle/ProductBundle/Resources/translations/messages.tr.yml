@@ -10,7 +10,6 @@ sylius:
             options: Ayarlar
             meta_keywords: Meta anahtar kelimeleri
             meta_description: Meta açıklama
-            taxons: Kategoriler
         product_variant:
             available_on: Mevcut üzerine
         association_type:

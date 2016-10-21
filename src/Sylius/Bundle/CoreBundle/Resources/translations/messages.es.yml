@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Precio unitario
-                quantity: Cantidad
-                variant: Variante
-            customer_group: Grupo de clientes
         block:
             body: Cuerpo
             id: ID
@@ -17,12 +11,16 @@ sylius:
             coupon: Cupón
         checkout:
             addressing:
-                different_billing_address: ¿Usar una dirección diferente para la facturación?
+                different_billing_address: '¿Usar una dirección diferente para la facturación?'
             payment_method: Método de pago
             shipping_method: Método de envío
         promotion:
             channels: Canales
-        coupon:
+        promotion_action:
+            add_product_configuration:
+                product: Producto
+            customer_group: Grupo de clientes
+        promotion_coupon:
             per_customer_usage_limit: Límite de uso por cliente
         group:
             name: Nombre
@@ -128,7 +126,7 @@ sylius:
                 taxon: Taxón
                 count: Contador
             taxon:
-                taxons: Taxonomías
+                taxons: Taxones
             total_of_items_from_taxon:
                 taxon: Taxón
                 amount: Cantidad
@@ -141,7 +139,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Instala y activa la extensión %extension%.'
+            help: Instala y activa la extensión %extension%.
             iconv: Iconv
             exif: Exif
             fileinfo: Información del archivo
@@ -161,13 +159,16 @@ sylius:
             header: sistema de archivos
             cache:
                 header: caché
+                help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: Existe
             logs:
                 header: registros
+                help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: No existe
             not_writable: Sin permisos de escritura
             parameters:
                 header: parametros.yml
+                help: 'Para ajustar los permisos ejecuta: sudo chmod a+w %path%'
             vendors: Vendors
             writable: Con permisos de escritura
         settings:
@@ -191,22 +192,22 @@ sylius:
     email:
         order_confirmation:
             name: Confirmación de pedido
-            content: 'Tu pedido número %number% se ha completado correctamente.<br/><br/>¡Gracias por comprar en nuestra tienda!'
+            content: Tu pedido número %number% se ha completado correctamente.<br/><br/>¡Gracias por comprar en nuestra tienda!
         order_comment:
             name: Comentario del pedido
         shipment_confirmation:
             name: Confirmación del envío
-            content: 'Su pedido número %number% ha sido enviado mediante %method%.<br/>Puedes comprobar dónde se encuentra con el código de seguimiento "%tracking%".<br/><br/>Gracias por tu pedido.'
+            content: Su pedido número %number% ha sido enviado mediante %method%.<br/>Puedes comprobar dónde se encuentra con el código de seguimiento "%tracking%".<br/><br/>Gracias por tu pedido.
         user_confirmation:
             name: Confirmación de usuario
             subject: Bienvenido a nuestra tienda
-            content: 'Bienvenido a nuestra tienda<br/><br/>Usted se acaba de registrar.<br/>Gracias %username%.'
+            content: Bienvenido a nuestra tienda<br/><br/>Usted se acaba de registrar.<br/>Gracias %username%.
         password_reset:
             name: Restablecer contraseña
-            content: '<h3>Hola %username%</h3>Para restablecer su contraseña - visite %url% <br/><br/>Atentamente, el equipo.'
+            content: <h3>Hola %username%</h3>Para restablecer su contraseña - visite %url% <br/><br/>Atentamente, el equipo.
         verification:
             name: Verificación de dirección de correo electrónico
-            content: 'Para verificar tu correo electrónico, por favor accede a %url%'
+            content: Para verificar tu correo electrónico, por favor accede a %url%
     payum_gateway:
         cash_on_delivery: Pago contra reembolso
         offline: Desconectado

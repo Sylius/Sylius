@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Prix unitaire
-                quantity: Quantité
-                variant: Variante
-            customer_group: Groupe clients
         block:
             body: Corps
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Mode de livraison
         promotion:
             channels: Canaux
-        coupon:
-            per_customer_usage_limit: "Limite d'utilisation par client"
+        promotion_action:
+            add_product_configuration:
+                product: Produit
         group:
             name: Nom
             roles: Rôles
@@ -38,7 +33,7 @@ sylius:
             tax_calculation_strategy: Stratégie de calcul des taxes
             tax_zone_default: Zone de taxe par défaut
             theme: Thème
-            hostname: "Nom d'hôte"
+            hostname: Nom d'hôte
         image:
             code: Code
             file: Image
@@ -108,7 +103,7 @@ sylius:
             height: Hauteur
             on_hand: Stock actuel
             price: Prix
-            original_price: "Prix d'origine"
+            original_price: Prix d'origine
             sku: Référence
             weight: Poids
             width: Largeur
@@ -120,15 +115,13 @@ sylius:
             email: E-mail
         product_association:
             product: Produits associés
-            type: "Type d'association"
+            type: Type d'association
         product_association_type:
             name: Nom
         promotion_rule:
             contains_taxon:
                 taxon: Taxon
                 count: Nombre
-            taxon:
-                taxons: Famille de tags
             total_of_items_from_taxon:
                 taxon: Taxon
                 amount: Montant
@@ -141,7 +134,7 @@ sylius:
             apc: APC
             ctype: CType
             gd: GD
-            help: "Installer et activer l'extension %extension%."
+            help: Installer et activer l'extension %extension%.
             iconv: Iconv
             exif: EXIF
             fileinfo: Information sur le fichier
@@ -164,7 +157,7 @@ sylius:
             exists: Existe
             logs:
                 header: logs
-            not_exists: "N'existe pas"
+            not_exists: N'existe pas
             not_writable: pas accessible en écriture
             parameters:
                 header: parameters.yml
@@ -172,7 +165,7 @@ sylius:
             writable: accessible en écriture
         settings:
             header: Paramètres et version de PHP
-            any: "N'importe quel"
+            any: N'importe quel
             detect_unicode: detect_unicode
             magic_quotes_gpc: magic_quotes_gpc
             non_deprecated: Non obsolète
@@ -191,22 +184,22 @@ sylius:
     email:
         order_confirmation:
             name: Confirmation de commande
-            content: 'Votre commande n° %number% a été passée avec succès. <br/> <br/> Merci pour votre commande !'
+            content: Votre commande n° %number% a été passée avec succès. <br/> <br/> Merci pour votre commande !
         order_comment:
             name: Commentaire sur la commande
         shipment_confirmation:
-            name: "Confirmation d'expédition"
-            content: 'Votre commande n° %number% a bien été envoyée par %method%.<br/>Vous pouvez suivre sa livraison grâce au numéro de tracking %tracking%.<br/><br/>Merci pour votre commande.'
+            name: Confirmation d'expédition
+            content: Votre commande n° %number% a bien été envoyée par %method%.<br/>Vous pouvez suivre sa livraison grâce au numéro de tracking %tracking%.<br/><br/>Merci pour votre commande.
         user_confirmation:
-            name: "Confirmation de l'utilisateur"
+            name: Confirmation de l'utilisateur
             subject: Bienvenue dans notre boutique
-            content: 'Bienvenue sur notre boutique<br/><br/>Votre compte a bien été enregistré.<br/>Merci %username%.'
+            content: Bienvenue sur notre boutique<br/><br/>Votre compte a bien été enregistré.<br/>Merci %username%.
         password_reset:
             name: Réinitialiser le mot de passe
-            content: "<h3>Bonjour %username%</h3>Pour réinitialiser votre mot de passe - Merci de visiter %url%<br/><br/>Cordialement, l'équipe."
+            content: <h3>Bonjour %username%</h3>Pour réinitialiser votre mot de passe - Merci de visiter %url%<br/><br/>Cordialement, l'équipe.
         verification:
-            name: "Vérification de l'adresse e-mail"
-            content: 'Pour vérifier votre adresse email, visitez %url%'
+            name: Vérification de l'adresse e-mail
+            content: Pour vérifier votre adresse email, visitez %url%
     payum_gateway:
         cash_on_delivery: Paiement à à la livraison
         offline: Hors-ligne

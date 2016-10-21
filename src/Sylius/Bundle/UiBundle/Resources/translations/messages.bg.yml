@@ -42,6 +42,7 @@ sylius:
         confirmation_title: Потвърждение
         contain_variants: Съдържа варианти
         countries: Страни
+        country: Държава
         country_details: Информация за страните
         coupons: Купони
         create: Създай
@@ -111,7 +112,7 @@ sylius:
         index_of_all_configured_locales: Индекс на всички конфигурирани локали
         information: Информация
         inventory: Инвентар
-        inventory_here_you_can_see_current_stock_levels: 'Запаси, <small>тук можете да видите текущите нива на запасите</small>'
+        inventory_here_you_can_see_current_stock_levels: Запаси, <small>тук можете да видите текущите нива на запасите</small>
         inventory_index: Инвентар
         inventory_state: Състояние на запаси
         inventory_tracking: Опис за проследяване
@@ -170,7 +171,7 @@ sylius:
         no_promotion: Нама приложена промоция
         no_shipping_category: Няма категория за доставка
         no_shipping_charges: Няма такси за доставка
-        no_short_description: '<i>Кратко описание</i>'
+        no_short_description: <i>Кратко описание</i>
         no_sku: Няма референтер номер
         no_tax_category: Няма категория такси
         no_taxes: Няма такси
@@ -198,11 +199,10 @@ sylius:
         previous: Предишна
         pricing: Ценообразуване
         product: Продукт
-        product_details_viewing_product_product: 'Продукт детайли <small>Преглед на продукт "<strong>%product%</strong>"</small>'
-        products: Продукти
-        products_categorized_as_name: 'Продукти, категоризирани като "%name%"'
-        products_categorized_under_taxon_taxon: 'Продукти <small>категории под "%taxon%" таксон</small>'
-        products_index_of_all_products_in_your_store: 'Продукти <small>индекс на всички продукти в магазина</small>'
+        product_details_viewing_product_product: Продукт детайли <small>Преглед на продукт "<strong>%product%</strong>"</small>
+        products_categorized_as_name: Продукти, категоризирани като "%name%"
+        products_categorized_under_taxon_taxon: Продукти <small>категории под "%taxon%" таксон</small>
+        products_index_of_all_products_in_your_store: Продукти <small>индекс на всички продукти в магазина</small>
         promotion_coupons: Купони
         promotion_details: Детайлите на промоцията
         promotion_total: Промоция общо
@@ -241,7 +241,7 @@ sylius:
         shop_by: Пазарувай
         show_all: Покажи всички
         show_deleted: Покажи изтритите
-        sign_in_to_the_store_or_create_new_account: 'Влезте в магазина <small>или да създайте нов акаунт</small>'
+        sign_in_to_the_store_or_create_new_account: Влезте в магазина <small>или да създайте нов акаунт</small>
         slideshow: Слайдшоу
         street: Улица
         success: Успешно
@@ -262,12 +262,13 @@ sylius:
         total_registrations: Общо регистрации
         tracking_number: Номер за проследяване
         translations: Преводи
+        type: Тип
         unavailable: Не е налично
         updating_tax_rate: Актуализиране на данъчна ставка
         used: Използвани
         user_details: Потребителски детайли
         username: Потребителско име
-        users_list_of_all_users_registered_in_store: 'Потребители, <small>списък с всички потребители, регистрирани в магазина</small>'
+        users_list_of_all_users_registered_in_store: Потребители, <small>списък с всички потребители, регистрирани в магазина</small>
         view_more: Виж повече
         warning: Внимание
         welcome_to_your_space: Добре дошли във вашето лично пространство

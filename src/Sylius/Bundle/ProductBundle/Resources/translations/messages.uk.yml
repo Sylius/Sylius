@@ -10,7 +10,6 @@ sylius:
             options: Опції
             meta_keywords: Мета ключові слова
             meta_description: Мета-опис
-            taxons: Таксони
         product_variant:
             available_on: Доступно на
             available_until: Доступно до

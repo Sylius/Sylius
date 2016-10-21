@@ -15,13 +15,13 @@ sylius:
         about: Informazioni
         access_token: Accedere al Token
         access_your_store_account_or_create_a_new_one: Accedi al tuo account o crea uno nuovo
-        account_credentials: "Credenziali dell'account"
+        account_credentials: Credenziali dell'account
         account_panel_outline: Godetevi tutte le funzionalità che sono disponibili sul tuo spazio personale per visualizzare, tenere traccia e gestire tutti i dati
         action: Azione
         actions: Azioni
         add: Aggiungi
         add_action: Aggiungi azione
-        add_association: "Aggiungere l'associazione"
+        add_association: Aggiungere l'associazione
         add_attribute: Aggiungi un attributo
         add_attributes: Aggiungi attributi
         add_channel: Aggiungi canale
@@ -49,7 +49,7 @@ sylius:
         administration_panel_login: Login del pannello di amministrazione
         all: Tutti
         all_your_addresses: Tutti i tuoi indirizzi
-        amount: Valore
+        amount: Importo
         an_error_occurred: Si è verificato un errore
         apply_coupon: Applica coupon
         are_your_sure_you_want_to_perform_this_action: Sei sicuro di voler eseguire questa azione?
@@ -108,7 +108,7 @@ sylius:
         configurable_product: Prodotto configurabile
         configuration: Configurazione
         configure_channels_available_in_your_store: Configura i canali disponibili nel tuo negozio
-        confirm_your_action: "Confermare l'azione"
+        confirm_your_action: Confermare l'azione
         confirmation: Conferma
         confirmation_title: Conferma
         confirmed: Confermato
@@ -116,7 +116,7 @@ sylius:
         contain_variants: Contiene varianti
         contains: Contiene
         countries: Paesi
-        country: Paese
+        country: Nazione
         country_details: Dettagli paese
         coupon: Promozione
         coupon_based: Basata su coupon
@@ -143,7 +143,7 @@ sylius:
         create_product: Crea prodotto
         create_product_association: Creare associazione del prodotto
         create_product_association_type: Creare il tipo di associazione di prodotto
-        create_product_attribute: "Creare l'attributo del prodotto"
+        create_product_attribute: Creare l'attributo del prodotto
         create_promotion: Crea promozione
         create_redirect_route: Creare rotta di reindirizzamento
         create_report: Creare rapporto
@@ -178,7 +178,7 @@ sylius:
         current_promotions: Promozione corrente
         current_stock: Disponibilità attuale
         customer: Cliente
-        customer_can_login_to_the_store: "Cliente può accedere all'archivio"
+        customer_can_login_to_the_store: Cliente può accedere all'archivio
         customer_care: Servizio Clienti
         customer_details: Dettagli del cliente
         customer_id: ID Cliente
@@ -188,7 +188,7 @@ sylius:
         customer_orders: Ordini dei clienti
         customer_since: Cliente dal
         customers: Clienti
-        customers_list_of_all_customers_in_store: 'I clienti di <small>elenco di tutti i clienti nel negozio</small>'
+        customers_list_of_all_customers_in_store: I clienti di <small>elenco di tutti i clienti nel negozio</small>
         customize_default_metadata: Personalizzare i metadati predefiniti
         customize_metadata: Personalizzare i metadati
         customize_products_metadata: Personalizzare i metadati prodotti
@@ -221,8 +221,8 @@ sylius:
         edit_my_address: Modifica il mio indirizzo
         edit_payment_method: Modifica il metodo di pagamento
         edit_product: Modifica prodotto
-        edit_product_attribute: "Modificare l'attributo di prodotto"
-        edit_product_option: "Modificare l'opzione del prodotto"
+        edit_product_attribute: Modificare l'attributo di prodotto
+        edit_product_option: Modificare l'opzione del prodotto
         edit_product_variant: Modifica la variante di prodotto
         edit_promotion: Modifica promozione
         edit_promotion_coupon: Modifica i coupon promozione
@@ -286,7 +286,6 @@ sylius:
         exclusive: Esclusivo
         existing_customer: Cliente esistente
         expiration_and_usage_limits: Scadenza e limiti di utilizzo
-        expires_at: Scadenza il
         extra_information: Informazioni aggiuntive
         extra_notes: Note extra
         failed: Fallimento
@@ -310,7 +309,7 @@ sylius:
         guest_customer: Cliente ospite
         have_an_account_already: Hai già un account
         hello: Ciao
-        hello_name: 'Ciao <b>%name%</b>'
+        hello_name: Ciao <b>%name%</b>
         hide_deleted: Nascondi eliminati
         home: Home
         hostname: Hostname
@@ -327,9 +326,9 @@ sylius:
         info: Info
         information: Info
         inventory: Magazzino
-        inventory_here_you_can_see_current_stock_levels: 'Inventario <small>Qua puoi controllare i livelli di magazzino</small>'
+        inventory_here_you_can_see_current_stock_levels: Inventario <small>Qua puoi controllare i livelli di magazzino</small>
         inventory_index: Magazzino
-        inventory_state: "stato dell'inventario"
+        inventory_state: stato dell'inventario
         inventory_tracking: Tracciamento inventario
         invoice: Fattura
         is_enabled: Abilitato
@@ -352,10 +351,10 @@ sylius:
         locales: Localizzazioni
         lock: Blocca
         locked: Bloccato
-        logged_in_as: 'Loggato come %username%'
+        logged_in_as: Loggato come %username%
         login: Login
         login_button: Login
-        login_sylius_store: 'Login <small>Sylius memorizzare</small>'
+        login_sylius_store: Login <small>Sylius memorizzare</small>
         logout: Logout
         main_taxon: Taxon principale
         male: Maschile
@@ -368,7 +367,7 @@ sylius:
         manage_configuration_options_of_your_products: Gestisci le opzioni di configurazione dei tuoi prodotti
         manage_countries: Amministra paesi
         manage_coupons: Gestione Coupons
-        manage_currencies_available_in_the_store: "Gestisci le valute disponibili nell'archivio"
+        manage_currencies_available_in_the_store: Gestisci le valute disponibili nell'archivio
         manage_customers: Gestire i clienti
         manage_discounts_and_promotional_campaigns: Gestisci sconti e campagne promozionali
         manage_emails: Gestisci Email
@@ -406,13 +405,13 @@ sylius:
         method: Metodo
         modified: Modificato
         move_down: Spostare verso il basso
-        move_up: "Spostarsi verso l'alto"
+        move_up: Spostarsi verso l'alto
         my_account: Il mio account
         n_a: N/A
         name: Nome
         new: Nuovo
         new_channel: Nuovo canale
-        new_comment_posted_on_order: "Nuovo commento aggiunto all'ordine"
+        new_comment_posted_on_order: Nuovo commento aggiunto all'ordine
         new_country: Nuovo paese
         new_coupon: Nuovo coupon
         new_currency: Nuova valuta
@@ -458,9 +457,9 @@ sylius:
         no_results_to_display: Non ci sono risultati da visualizzare
         no_shipping_category: Nessuna categoria di spedizione
         no_shipping_charges: Nessuna maggiorazione di spedizione applicata
-        no_shipping_methods_available: "Attualmente non ci sono metodi di spedizione disponibili per l'indirizzo di spedizione"
-        no_short_description: '<i>Nessuna descrizione breve</i>'
-        no_sku: '<i>Nessuno SKU</i>'
+        no_shipping_methods_available: Attualmente non ci sono metodi di spedizione disponibili per l'indirizzo di spedizione
+        no_short_description: <i>Nessuna descrizione breve</i>
+        no_sku: <i>Nessuno SKU</i>
         no_tax_category: Nessuna categoria di tasse
         no_taxes: Nessuna tassa applicata
         no_theme: Nessun tema
@@ -478,13 +477,13 @@ sylius:
         options: Opzioni
         or: oppure
         order: Ordine
-        order_comment_name: "Commento dell'ordine"
-        order_comments: "Commento dell'ordine"
-        order_confirmation_name: "Conferma dell'ordine"
-        order_details: "Dettagli dell'ordine"
+        order_comment_name: Commento dell'ordine
+        order_comments: Commento dell'ordine
+        order_confirmation_name: Conferma dell'ordine
+        order_details: Dettagli dell'ordine
         order_history: Cronologia ordini
         order_item_product: Articolo
-        order_state: "Stato dell'ordine"
+        order_state: Stato dell'ordine
         order_summary: Riepilogo ordine
         order_value: Valore ordine
         ordered: Ordinato
@@ -513,7 +512,7 @@ sylius:
         personal_information: Informazioni personali
         phone_number: Numero di telefono
         place_order: Ordina
-        placed_an_order: "L' ordine è stato effetuato con successo."
+        placed_an_order: L' ordine è stato effetuato con successo.
         placed_at: Ordinato il
         postcode: CAP
         powered_by: Promosso da
@@ -530,15 +529,14 @@ sylius:
         product_association_types: Tipi di associazione di prodotto
         product_associations: Associazioni di prodotti
         product_attributes: Attributi del prodotto
-        product_details_viewing_product_product: 'Dettaglio prodotto <small>Visionando il prodotto "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Dettaglio prodotto <small>Visionando il prodotto "<strong>%product%</strong>"</small>
         product_options: Opzioni prodotto
         product_review: Recensione del prodotto
         product_reviews: Recensioni del prodotto
         product_variants: Varianti di prodotto
-        products: Prodotti
-        products_categorized_as_name: 'Prodotti classificati come "%name%"'
-        products_categorized_under_taxon_taxon: 'Prodotti <small>Categorizzati sotto "%taxon%" taxon</small>'
-        products_index_of_all_products_in_your_store: 'Prodotti <small>Lista tutti i prodotti dello store</small>'
+        products_categorized_as_name: Prodotti classificati come "%name%"
+        products_categorized_under_taxon_taxon: Prodotti <small>Categorizzati sotto "%taxon%" taxon</small>
+        products_index_of_all_products_in_your_store: Prodotti <small>Lista tutti i prodotti dello store</small>
         profile: Profilo
         promotion_configuration: Configurazione della promozione
         promotion_coupons: Codici promozionali
@@ -563,11 +561,11 @@ sylius:
         register: Registrati
         register_button: Registrati
         registered_customers: Clienti registrati
-        registration_create_an_account_in_store: 'Registrazione di <small>creare un account nel negozio</small>'
+        registration_create_an_account_in_store: Registrazione di <small>creare un account nel negozio</small>
         registration_date: Data di registrazione
         release_inventory: Inventario delle uscite
         remember_me: Ricordami
-        remove_attribute: "Rimuovere l'attributo"
+        remove_attribute: Rimuovere l'attributo
         repeat_new_password: Ripetere la nuova password
         report_details: Dettagli del repporto
         reports: Rapporti
@@ -593,7 +591,7 @@ sylius:
         scope: Ambito
         search: Ricerca
         security_settings: Impostazioni di sicurezza
-        set_a_new_password_for_your_account: "Imposta una nuova password per l'account"
+        set_a_new_password_for_your_account: Imposta una nuova password per l'account
         set_as_default_billing_address: Imposta come indirizzo di fatturazione predefinito
         set_as_default_shipping_address: Imposta come indirizzo di spedizione predefinito
         ship: Nave
@@ -625,7 +623,7 @@ sylius:
         show_metadata: Visualizza metadati
         sign_in: Accedi
         sign_in_here: Accedi qui
-        sign_in_to_the_store_or_create_new_account: 'Accedi allo store <small>o crea un nuovo account</small>'
+        sign_in_to_the_store_or_create_new_account: Accedi allo store <small>o crea un nuovo account</small>
         sign_out: Esci
         simple_blocks: Blocchi semplici
         simple_product: Prodotto semplice
@@ -654,7 +652,6 @@ sylius:
         taxation_settings: Impostazioni tassazione
         taxes: Tasse
         taxonomy: Tassonomia
-        taxons: Taxons
         terms_and_conditions: Termini e condizioni
         thank_you: Grazie!
         thank_you_for_your_order: Grazie per il tuo ordine
@@ -668,8 +665,8 @@ sylius:
         there_are_no_customers_to_display: Non ci sono clienti da visualizzare
         there_are_no_emails_configured: Non ci sono email configurate
         there_are_no_images_for_this_product: Non ci sono immagini per questo prodtto
-        there_are_no_inventory_items_to_display: "Non ci sono articoli dell'inventario da mostrare"
-        there_are_no_inventory_units_to_display: "Non ci sono unità da mostrare nell'inventario"
+        there_are_no_inventory_items_to_display: Non ci sono articoli dell'inventario da mostrare
+        there_are_no_inventory_units_to_display: Non ci sono unità da mostrare nell'inventario
         there_are_no_locales_configured: Non ci sono localizzazioni configurate
         there_are_no_logged_events_to_display: Non ci sono eventi loggati da mostrare
         there_are_no_menu_nodes_to_display: Non sono presenti nodi di menu da visualizzare
@@ -697,7 +694,7 @@ sylius:
         there_are_no_users_to_display: Non ci sono utenti da visualizzare
         there_are_no_variants_to_display: Non ci sono varianti da mostrare
         there_are_no_zones_configured: Non ci sono zone configurate
-        there_is_no_main_taxon_for_this_product: "Non c'è nessun taxon principale per questo prodotto"
+        there_is_no_main_taxon_for_this_product: Non c'è nessun taxon principale per questo prodotto
         this_months_statistics: Statistiche di questo mese
         this_product_has_no_attributes_defined: Questo prodotto non dispone di attributi definiti
         title: Titolo
@@ -720,12 +717,11 @@ sylius:
         update_product_association_type: Creare il tipo di associazione di prodotto
         updating_tax_rate: Aggiorna aliquota fiscale
         usage: Utilizzo
-        usage_limit: Limite di utilizzo
         used: Usata
-        user_confirmation_name: "Conferma dell'utente"
+        user_confirmation_name: Conferma dell'utente
         user_details: Dettagli utente
         username: Nome utente
-        users_list_of_all_users_registered_in_store: 'Utenti <small>Lista degli utenti registrati al negozio</small>'
+        users_list_of_all_users_registered_in_store: Utenti <small>Lista degli utenti registrati al negozio</small>
         values: Valori
         variant: Variante
         variant_selection_method: Metodo di selezione delle varianti
@@ -733,7 +729,7 @@ sylius:
         view: Vista
         view_and_edit_cart: Visualizzare e modificare il carrello
         view_more: Dettaglio
-        view_product_details: 'Mostra dettagli %product%'
+        view_product_details: Mostra dettagli %product%
         void: Nullo
         volume_based_pricing: Prezzi basati sul volume
         warning: Attenzione

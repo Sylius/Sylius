@@ -3,13 +3,13 @@
 
 sylius:
     resource:
-        create: 'El %resource% se ha creado con éxito.'
-        update: 'El %resource% se ha actualizado con éxito.'
-        delete: 'El %resource% se ha eliminado con éxito.'
-        move: 'El %resource% se ha movido con éxito.'
-        generate: 'Los %resource%s se han generado con éxito.'
-        revert: 'El %resource% se ha revertido con éxito.'
-        restore_deleted: 'El %resource% se ha restaurado con éxito.'
-        enable: 'El %resource% se ha activado con éxito.'
-        disable: 'El %resource% se ha desactivado con éxito.'
-        delete_error: 'No se puede eliminar, el %resource% está en uso.'
+        create: El %resource% se ha creado con éxito.
+        update: El %resource% se ha actualizado con éxito.
+        delete: El %resource% se ha eliminado con éxito.
+        move: El %resource% se ha movido con éxito.
+        generate: Los %resource%s se han generado con éxito.
+        revert: El %resource% se ha revertido con éxito.
+        restore_deleted: El %resource% se ha restaurado con éxito.
+        enable: El %resource% se ha activado con éxito.
+        disable: El %resource% se ha desactivado con éxito.
+        delete_error: No se puede eliminar, el %resource% está en uso.

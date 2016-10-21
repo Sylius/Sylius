@@ -8,7 +8,7 @@ sylius:
             enabled: Activat
             password:
                 label: Contrasenya
-            shipping_address: "Adreça d'enviament"
-            username: "Nom d'usuari"
+            shipping_address: Adreça d'enviament
+            username: Nom d'usuari
         user_filter:
             query: Cerca

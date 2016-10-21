@@ -9,9 +9,13 @@ sylius:
             remember_me: مرا به خاطر بسپار
         option:
             name: نام
+        notes: یادداشت های اضافی
     ui:
         abandoned: سفارش ناتمام
+        about: درباره
         access_token: توکن دسترسی
+        access_your_store_account_or_create_a_new_one: دسترسی به حساب کاربری و یا ایجاد حساب جدید
+        account_credentials: اطلاعات کاربری حساب
         account_panel_outline: از این صفحه می توانید برای مشاهده, دنبال کردن و مدیریت اطلاعاتتان استفاده کنید.
         action: عمل
         actions: طریقه اعمال
@@ -24,7 +28,7 @@ sylius:
         add_choice: افزودن گزینه
         add_coupon: ایجاد کد تخفیف
         add_image: افزودن عکس
-        add_member: افزودن بخش
+        add_member: افزودن عضو
         add_menu_element: افزودن زیرمنو
         add_new_email: ایجاد ایمیل جدید
         add_new_permission: ایجاد سطح دسترسی جدید
@@ -37,14 +41,19 @@ sylius:
         adding_new_email: ایجاد ایمیل جدید
         adding_new_locale: ایجاد زبان جدید
         additional_information: اطلاعات بیشتر
+        address: آدرس
         addressing_step: اطلاعات کاربر
         adjustments: هزینه های جانبی
         administration: مدیریت
         administration_dashboard: داشبورد مدیریتی
         administration_panel_login: صفحه ورود به سيستم مديريت
+        admin_users: مدیران
+        all: همه
         all_your_addresses: تمامی آدرس های شما
-        amount: مبلغ
+        amount: مقدار
         an_error_occurred: یک خطا روی داده است
+        api: Api
+        apply_coupon: اعمال کوپن
         are_your_sure_you_want_to_perform_this_action: آیا از اعمال این کار اطمینان دارید؟
         association: ارتباط ها
         association_types: انواع ارتباط ها
@@ -56,23 +65,34 @@ sylius:
         available_for_channels: قابل دسترسی برای کانال ها
         available_on: تاریخ فعال شدن
         available_until: در دسترس تا
+        average_order_value: میانگین مقدار سفارش
+        awaiting_payment: انتظار پرداخت
         back: بازگشت
+        back_to_store: بازگشت به فروشگاه
         backorder: پیش خرید
+        backordered: سفارش برگشتی
         balance_due: دلیل موازنه
         bill_to: پرداخت کننده
         billing_address: مشخصات پرداخت کننده
         blocks: بلاک ها
         body: متن
         browse_products: نمایش محصولات
+        browse_your_orders_from_the_past: مرور سفارش های گذشته
         build: ایجاد
         calculator: نوع محاسبه
         cancel: لغو
         cancelled: پرداخت لغو شده
+        cart: سبد خريد
         cart_locked: سبد خرید قفل شده
         cart_summary: خلاصه سبد خرید
         categorization: دسته بندی
         category: دسته
         category_requirements: نیازمندی های شاخه
+        change_address: تغییر آدرس
+        change_file: تغییر فایل
+        change_password: تغییر رمز عبور
+        change_payment_method: تغییر روش پرداخت
+        change_shipping_method: تغییر روش حمل و نقل
         change_your_password: تغییر کلمه عبور
         channel: کانال فروش
         channels: کانال های فروش
@@ -86,23 +106,29 @@ sylius:
         color: رنگ
         comment: نظر
         company: شرکت
+        complete: تکمیل
         completed: پرداخت کامل شده
+        configurable_product: محصول قابل تنظیم
         configuration: تنظیمات
         configure_channels_available_in_your_store: کانال های در دسترس در فروشگاه های خود را پیکربندی کنید
         confirm_your_action: عملیات را تایید کنید
         confirmation: تایید
         confirmation_title: تایید
         confirmed: تایید شده
+        contact_us: تماس با ما
         contain_variants: شامل ترکیبات
         contains: محتویات
+        content: محتوا
         countries: كشور‌ها
-        country: كشور
+        country: کشور
         country_details: جزئیات کشور
         coupon: کد تخفیف
         coupon_based: مبتنی بر کوپن
         coupons: کدهای تخفیف
         create: ایجاد
         create_a_new_address: افزودن آدرس جدید
+        create_a_new_customer_account: ایجاد حساب جدید برای مشتری
+        create_an_account: ایجاد یک حساب کاربری
         create_association_type: ایجاد نوع ارتباط
         create_country: ایجاد کشور
         create_currency: ایجاد ارز
@@ -158,11 +184,12 @@ sylius:
         customer: مشتری
         customer_details: اظلاعات مشتری
         customer_id: شناسه مشتری
+        customer_login: ورود مشتری
         customer_not_notified: به مشتری اطلاع رسانی نشده
         customer_notified: به مشتری اطلاع رسانی شده
         customer_orders: سفارش مشتریان
         customers: مشتریان
-        customers_list_of_all_customers_in_store: 'مشتریان <small> لیست کل مشتری های فروشگاه <small>'
+        customers_list_of_all_customers_in_store: مشتریان <small> لیست کل مشتری های فروشگاه <small>
         customize_default_metadata: تغییر فراداده پیش فرض
         customize_metadata: تغییر فراداده
         customize_products_metadata: تعریف فراداده ی کالاها
@@ -196,6 +223,7 @@ sylius:
         edit_tax_category: ویرایش شاخه مالیات
         edit_tax_rate: ویرایش نرخ مالیات
         edit_your_personal_information: ویرایش اطلاعات شخصی
+        edit_zone: ویرایش منطقه
         editing_attribute: ویرایش قابلیت
         editing_channel: ویرایش کانال
         editing_country: ویرایش کشور
@@ -244,7 +272,7 @@ sylius:
         exchange_rate: نرخ تبدیل ارز
         exclusive: یکبار مصرف
         existing_customer: از قبل عضو هستم
-        expires_at: انقضا در تاریخ
+        extra_notes: یادداشت های اضافی
         failed: پرداخت ناموفق
         first_name: نام
         forgot_password: فراموشی کلمه عبور
@@ -260,7 +288,7 @@ sylius:
         grand_total: هزینه نهایی
         guest: می خواهم بدون ثبت نام ادامه دهم
         guest_customer: مشتری مهمان
-        hello_name: 'سلام <b>%name%</b>'
+        hello_name: سلام <b>%name%</b>
         hide_deleted: مخفی کردن آیتم های حذف شده
         home: خانه
         hostname: نام میزبان
@@ -276,7 +304,7 @@ sylius:
         info: اطلاعات
         information: اطلاع رسانی
         inventory: موجودی کالا
-        inventory_here_you_can_see_current_stock_levels: 'موجودی کالا <small>در اینجا شما می توانید میزان موجودی کالا را ببینید</small>'
+        inventory_here_you_can_see_current_stock_levels: موجودی کالا <small>در اینجا شما می توانید میزان موجودی کالا را ببینید</small>
         inventory_index: موجودی کالا
         inventory_state: وضعیت انبار
         inventory_tracking: پیگیری انبار
@@ -298,10 +326,10 @@ sylius:
         locales: زبان ها
         lock: قفل
         locked: قفل شده
-        logged_in_as: 'وارد شده به عنوان %username%'
+        logged_in_as: وارد شده به عنوان %username%
         login: ورود
         login_button: ورود
-        login_sylius_store: 'ورود <small> فروشگاه سایلیوس </small>'
+        login_sylius_store: ورود <small> فروشگاه سایلیوس </small>
         logout: خروج
         main_taxon: رده اصلی
         manage: مدیریت
@@ -329,9 +357,12 @@ sylius:
         manage_tax_rates: مدیریت نرخ های مالیات
         manage_taxation_of_your_products: مدیریت مالیات محصولات شما
         manage_users: مدیریت کاربران
+        manage_your_customers: میدیریت مشتریان
+        manage_your_product_catalog: مدیریت کاتالوگ محصول
         manage_zones: مدیریت مناطق
         marketing: بازاریابی
-        members: بخش ها
+        media: رسانه
+        members: اعضا
         menu_nodes: زیرمجموعه های منو
         menus: منوها
         message: متن پیام
@@ -344,12 +375,17 @@ sylius:
         n_a: نامشخص
         name: نام
         new: پرداخت ثبت شده
+        new_admin_user: مدیر جدید
         new_channel: کانال جدید
         new_comment_posted_on_order: یادداشت جدیدی روی سفارش ارسال شد
         new_country: کشور جدید
+        new_coupon: کوپن جدید
         new_currency: ارز جدید
+        new_customer: مشتری جدید
+        new_customers: مشتریان جدید
         new_locale: منطقه جدید
         new_order: سفارش جدید
+        new_orders: سفارشات جدید
         new_password: کلمه عبور جدید
         new_payment: پرداخت جدید
         new_payment_method: روش پرداخت جدید
@@ -370,6 +406,7 @@ sylius:
         new_zone: منطقه جدید
         newest_products: جدیدترین کالاها
         next: بعدی
+        no_label: خير
         no_account: بدون شناسه کاربری
         no_association_types_to_display: هیچ نوع ارتباط تعریف شده ای وجود ندارد
         no_comment: بدون نظر
@@ -382,7 +419,7 @@ sylius:
         no_results_to_display: هیچ نتیجه ای برای نمایش وجود ندارد
         no_shipping_category: نوع ارسالی مشخص نشده
         no_shipping_charges: هیچ هزینه ی ارسالی روی این سفارش اعمال نشده است
-        no_short_description: '<i>بدون معرفی کوتاه</i>'
+        no_short_description: <i>بدون معرفی کوتاه</i>
         no_sku: بدون کد کالا
         no_tax_category: نوع مالیات تعریف نشده
         no_taxes: هیچ مالیاتی روی این سفارش اعمال نشده است
@@ -422,6 +459,7 @@ sylius:
         payment_mode: نحوه ی پرداخت
         payment_state: وضعیت پرداخت
         payments: پرداخت‌ها
+        pay: پرداخت
         pending: پرداخت منتظر تایید
         permissions: دسترسی ها
         phone_number: شماره تلفن
@@ -446,9 +484,9 @@ sylius:
         product_review: نقد و بررسی محصول
         product_reviews: نقد و بررسی محصول
         products: محصولات
-        products_categorized_as_name: 'محصولات زیر دسته ی %name%'
-        products_categorized_under_taxon_taxon: 'محصول <small> زیر رده ی %taxon% قرار دارد <small>'
-        products_index_of_all_products_in_your_store: 'کالاها <small>فهرست تمام کالاهای فروشگاه شما</small>'
+        products_categorized_as_name: محصولات زیر دسته ی %name%
+        products_categorized_under_taxon_taxon: محصول <small> زیر رده ی %taxon% قرار دارد <small>
+        products_index_of_all_products_in_your_store: کالاها <small>فهرست تمام کالاهای فروشگاه شما</small>
         profile: پروفایل
         promotion_configuration: تنظیمات فروش ویژه
         promotion_coupons: کدهای تخفیف
@@ -471,7 +509,7 @@ sylius:
         refunded: پرداخت برگشت داده شده
         register: ثبت نام
         register_button: ثبت نام
-        registration_create_an_account_in_store: 'ثبت نام <small> یک حساب کاربری بسازید </small>'
+        registration_create_an_account_in_store: ثبت نام <small> یک حساب کاربری بسازید </small>
         registration_date: تاریخ ثبت نام
         release_inventory: بازانتشار موجودی
         remember_me: مرا به خاطر بسپار
@@ -491,8 +529,8 @@ sylius:
         roles: نقش ها
         routes: آدرس های داخلی
         rules: قوانین
-        sales: میزان فروش ماه جاری
-        sales_this_month: میزان فروش ماه جاری
+        sales: فروش‌ها
+        sales_this_month: فروش‌ها
         save: ذخیره
         save_changes: ذخیره
         scope: محدوده
@@ -523,7 +561,7 @@ sylius:
         show_in_store: نمایش در فروشگاه
         show_metadata: نمایش فراداده
         sign_in: ورود
-        sign_in_to_the_store_or_create_new_account: 'وارد حسابتان شده <small> و یا اینکه عضو شوید <small>'
+        sign_in_to_the_store_or_create_new_account: وارد حسابتان شده <small> و یا اینکه عضو شوید <small>
         sign_out: خروج
         simple_blocks: بلاک های ساده
         sku: کد محصول
@@ -534,7 +572,7 @@ sylius:
         starts_with: شروع می شود با
         state: وضعیت
         status: وضعیت
-        street: آدرس پستی
+        street: خیابان
         string_blocks: بلاک های متنی
         subject: عنوان
         success: موفق
@@ -548,7 +586,7 @@ sylius:
         taxation_categories: انواع مالیات
         taxation_settings: تنظیمات مالیات
         taxes: مالیات
-        taxons: رده ها
+        taxons: دسته بندی ها
         thank_you_for_your_order: از سفارش شما سپاسگزاریم
         theme: قالب
         there_are_no_attributes_configured: قابلیتی پیکربندی نشده
@@ -613,14 +651,14 @@ sylius:
         user_confirmation_name: تایید کاربر
         user_details: اطلاعات کاربر
         username: نام کاربری
-        users_list_of_all_users_registered_in_store: 'کاربران <small> لیست همه کاربران ثبت شده در این فروشگاه </small>'
+        users_list_of_all_users_registered_in_store: کاربران <small> لیست همه کاربران ثبت شده در این فروشگاه </small>
         values: مقادیر
         variant: ترکیب محصول
         variant_selection_method: انتخاب نوع ترکیب بندی
         variants: تنوع کالا
         view: مشاهده
         view_more: مشاهده بیشتر
-        view_product_details: 'مشاهده جزئيات %product%'
+        view_product_details: مشاهده جزئيات %product%
         void: پرداخت نامعتبر
         volume_based_pricing: قیمت گذاری بر اساس حجم سفارش
         warning: هشدار

@@ -17,14 +17,9 @@ sylius:
                 cancelled: Avbrutt
             tracking_code: Sporingskode
         shipping_calculator:
-            flat_rate_configuration:
-                amount: Beløp
-            per_unit_rate_configuration:
-                amount: Beløp
             weight_rate_configuration:
                 division: Avdeling
             volume_rate_configuration:
-                amount: Beløp
                 division: Avdeling
         shipping_category:
             description: Beskrivelse

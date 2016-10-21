@@ -155,7 +155,7 @@ sylius:
         customer_orders: Narudžbe kupca
         customer_since: Kupac od
         customers: Kupci
-        customers_list_of_all_customers_in_store: 'Kupci <small>Lista svih kupaca u trgovini</small>'
+        customers_list_of_all_customers_in_store: Kupci <small>Lista svih kupaca u trgovini</small>
         customize_default_metadata: Prilagodite zadane metapodatke
         customize_metadata: Prilagodite metapodatke
         customize_products_metadata: Prilagodite metapodatke proizvoda
@@ -241,7 +241,7 @@ sylius:
         grand_total: Sveukupno
         guest: Gost
         guest_customer: Neregistrirani kupac
-        hello_name: 'Pozdrav <b>%name%</b>'
+        hello_name: Pozdrav <b>%name%</b>
         hide_deleted: Sakrij izbrisano
         home: Početna
         id: ID
@@ -255,7 +255,7 @@ sylius:
         info: Info
         information: Obavijest
         inventory: Skladište
-        inventory_here_you_can_see_current_stock_levels: 'Skladište <small>Pregled stanja zaliha</small>'
+        inventory_here_you_can_see_current_stock_levels: Skladište <small>Pregled stanja zaliha</small>
         inventory_index: Skladište
         inventory_state: Stanje zaliha
         inventory_tracking: Stanje zaliha
@@ -276,10 +276,10 @@ sylius:
         locales: Lokaliteti
         lock: Zaključajte
         locked: Zaključano
-        logged_in_as: 'Prijavljeni kao %username%'
+        logged_in_as: Prijavljeni kao %username%
         login: Prijavi se
         login_button: Prijavi se
-        login_sylius_store: 'Prijava <small>Sylius trgovina</small>'
+        login_sylius_store: Prijava <small>Sylius trgovina</small>
         logout: Odjavi se
         manage: Upravljanje
         manage_adjustments: Upravljajte prilagodbama
@@ -355,8 +355,8 @@ sylius:
         no_results: Nema rezultata
         no_shipping_category: Nema kategoriju pošiljke
         no_shipping_charges: Nema troškova dostave
-        no_short_description: '<i>Nema kratkog opisa</i>'
-        no_sku: '<i>Nema koda</i>'
+        no_short_description: <i>Nema kratkog opisa</i>
+        no_sku: <i>Nema koda</i>
         no_tax_category: Nema kategorije poreza
         no_taxes: Bez PDV-a
         not_available_in_your_country: Nije dostupno u vašoj državi.
@@ -411,9 +411,8 @@ sylius:
         product_options: Opcije proizvoda
         product_review: Osvrt na proizvod
         product_reviews: Recenzije proizvoda
-        products: Proizvodi
-        products_categorized_as_name: 'Proizvodi kategorizirani kao %name%'
-        products_categorized_under_taxon_taxon: 'Artikli <small>u kategoriji "%taxon%"</small>'
+        products_categorized_as_name: Proizvodi kategorizirani kao %name%
+        products_categorized_under_taxon_taxon: Artikli <small>u kategoriji "%taxon%"</small>
         products_index_of_all_products_in_your_store: Svi artikli
         profile: Profil
         promotion_coupons: Kuponi
@@ -434,7 +433,7 @@ sylius:
         refunded: Refundirano
         register: Registracija
         register_button: Registracija
-        registration_create_an_account_in_store: 'Registracija <small>Kreirajte račun u trgovini</small>'
+        registration_create_an_account_in_store: Registracija <small>Kreirajte račun u trgovini</small>
         registration_date: Datum registracije
         release_inventory: Oslobodi skladište
         remember_me: Zapamti me
@@ -485,7 +484,7 @@ sylius:
         show_in_store: Prikaži u trgovini
         show_metadata: Prikaz metapodataka
         sign_in_here: Prijavite se ovdje
-        sign_in_to_the_store_or_create_new_account: 'Prijavite se <small>ili napravite novi račun</small>'
+        sign_in_to_the_store_or_create_new_account: Prijavite se <small>ili napravite novi račun</small>
         simple_blocks: Jednostavni blokovi
         sku: KOD (SKU)
         slideshow: Automatski prikaz
@@ -506,7 +505,6 @@ sylius:
         taxation_categories: Kategorije poreza
         taxation_settings: Postavke oporezivanja
         taxes: Porezi
-        taxons: Taksoni
         thank_you_for_your_order: Zahvaljujemo na vašoj narudžbi
         there_are_no_attributes_configured: Nema postavljenih atributa
         there_are_no_blocks_to_display: Ne postoje blokovi za prikazati
@@ -565,19 +563,19 @@ sylius:
         update: Ažurirajte
         update_product_association_type: Ažurirajte tip poveznice proizvoda
         updating_tax_rate: Ažuriranje porezne stope
-        usage_limit: Ograničenje koda za popust
+        usage_limit: Ograničenje
         used: Iskorišteno
         user_confirmation_name: Potvrda korisnika
         user_details: Korisnički detalji
         username: Korisničko ime
-        users_list_of_all_users_registered_in_store: 'Korisnici <small>Lista svih registriranih korisnika</small>'
+        users_list_of_all_users_registered_in_store: Korisnici <small>Lista svih registriranih korisnika</small>
         values: Vrijednosti
         variant: Varijanta
         variant_selection_method: Način odabira varijante
         variants: Varijante
         view: Pogledajte
         view_more: Više
-        view_product_details: 'Pogledajte za proizvod %product%'
+        view_product_details: Pogledajte za proizvod %product%
         void: Nevažeće
         volume_based_pricing: Izračun cijene na temelju volumena
         warning: Upozorenje

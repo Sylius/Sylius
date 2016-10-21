@@ -12,5 +12,5 @@ sylius:
             mismatch: Zadané heslá sa nezhodujú
             wrong_current: Zadané heslo sa nezhoduje zo súčasným.
         password:
-            min: 'Heslo musí obsahovať minimálne {{ limit }} znakov.'
-            max: 'Heslo nesmie byť dlhšie ako {{ limit }} znakov.'
+            min: Heslo musí obsahovať minimálne {{ limit }} znakov.
+            max: Heslo nesmie byť dlhšie ako {{ limit }} znakov.

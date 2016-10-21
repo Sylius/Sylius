@@ -3,55 +3,46 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Cantidad
-            percentage_discount_configuration:
-                percentage: Porcentaje
-            type: Tipo
-        rule:
-            taxonomy_configuration:
-                taxons: Taxonomías
-                exclude: Excluir
-            contains_product_configuration:
-                variants: Productos
-                exclude: Excluir
-            cart_quantity_configuration:
-                count: Contador
-                equal: Igual
-            item_total_configuration:
-                amount: Cantidad
-            nth_order_configuration:
-                nth: Enésimo
-            customer_loyalty_configuration:
-                time: Fecha
-                unit:
-                    days: Días
-                    weeks: Semanas
-                    months: Meses
-                    years: Años
-                    header: Unidad
-                after: Usuario creado después de este período
-            shipping_country_configuration:
-                country: País
-            type: Tipo
-        coupon:
-            usage_limit: Limite de uso
-            expires_at: Caduca en
-        coupon_generate_instruction:
-            amount: Cantidad
-            usage_limit: Límite de uso
-            expires_at: Caduca en
-            code_length: Longitud del código
         promotion:
             actions: Acciones
             add_action: Añadir acción
             add_rule: Añadir regla
             coupon_based: Basado en cupones
-            exclusive: Exclusivo
             description: Descripción
             ends_at: Termina el
+            exclusive: Exclusivo
             name: Nombre
             rules: Reglas
             starts_at: Empieza el
             usage_limit: Límite de uso
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Cantidad
+            percentage_discount_configuration:
+                percentage: Porcentaje
+            type: Tipo
+        promotion_coupon:
+            expires_at: Caduca en
+            usage_limit: Límite de uso
+        promotion_coupon_generator_instruction:
+            amount: Cantidad
+            code_length: Longitud del código
+            expires_at: Caduca en
+            usage_limit: Límite de uso
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Contador
+                equal: Igual
+            contains_product_configuration:
+                exclude: Excluir
+                variants: Productos
+            item_total_configuration:
+                amount: Cantidad
+            nth_order_configuration:
+                nth: Enésimo
+            shipping_country_configuration:
+                country: País
+            taxonomy_configuration:
+                exclude: Excluir
+                taxons: Taxones
+            type: Tipo

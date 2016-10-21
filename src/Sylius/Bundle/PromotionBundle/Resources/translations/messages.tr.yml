@@ -3,53 +3,32 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Miktar
-            percentage_discount_configuration:
-                percentage: Yüzde
-            type: Türü
-        rule:
-            taxonomy_configuration:
-                taxons: Kategoriler
-                exclude: Hariç
-            contains_product_configuration:
-                variants: Ürünler
-                exclude: Hariç
-            cart_quantity_configuration:
-                count: Sayısı
-            item_total_configuration:
-                amount: Miktar
-            nth_order_configuration:
-                nth: "n'inci"
-            customer_loyalty_configuration:
-                time: Zaman
-                unit:
-                    days: Gün
-                    weeks: Hafta
-                    months: Ay
-                    years: Yıl
-                    header: Birim
-                after: Bu sürenin sonunda oluşturulan kullanıcı
-            shipping_country_configuration:
-                country: Ülke
-            type: Tür
-        coupon:
-            usage_limit: Kullanım sınırı
-            expires_at: Süre sonu: 
-        coupon_generate_instruction:
-            amount: Miktar
-            usage_limit: Kullanım sınırı
-            expires_at: Süre sonu: 
         promotion:
             actions: Eylemler
             add_action: Eylem Ekle
             add_rule: Kural ekle
             coupon_based: Kupona dayalı
-            exclusive: Özel
             description: Açıklama
             ends_at: Sona erdi
+            exclusive: Özel
             name: Ad
             rules: Kurallar
-            starts_at: "' Dan başlar"
+            starts_at: ''' Dan başlar'
             usage_limit: Kullanım sınırı
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Miktar
+            type: Türü
+        promotion_coupon:
+            usage_limit: Kullanım sınırı
+        promotion_coupon_generator_instruction:
+            amount: Miktar
+            usage_limit: Kullanım sınırı
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Sayısı
+            item_total_configuration:
+                amount: Miktar
+            shipping_country_configuration:
+                country: Ülke
+            type: Türü

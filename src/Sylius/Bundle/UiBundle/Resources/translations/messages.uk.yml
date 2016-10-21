@@ -4,9 +4,9 @@
 sylius:
     form:
         login:
-            username: "Ім'я користувача"
+            username: Ім'я користувача
             password: Пароль
-            remember_me: "Пам'ятати мене"
+            remember_me: Пам'ятати мене
         option:
             name: Назва
         notes: Додаткові примітки
@@ -53,7 +53,6 @@ sylius:
         admin_users: Адміністратори
         all: Всі(-е)
         all_your_addresses: Усі ваші адреси
-        amount: Кількість
         an_error_occurred: Сталася помилка
         api: Прикладний програмний інтерфейс (API)
         apply_coupon: Використати купон
@@ -116,7 +115,7 @@ sylius:
         configuration: Конфігурація
         confirmation: Підтвердження
         confirmation_title: Підтвердження
-        contact_us: "Зв'язатися з нами"
+        contact_us: Зв'язатися з нами
         contain_variants: Містять варіанти
         contains: Містить
         countries: Країни
@@ -248,10 +247,9 @@ sylius:
         exchange_rate: Курс валют
         exclusive: Ексклюзивно
         existing_customer: Існуючий клієнт
-        expires_at: Дійсний до
         extra_notes: Додаткові примітки
         failed: Невдало
-        first_name: "Iм'я"
+        first_name: Iм'я
         fulfill: Виконано
         fulfilled: Виконано
         gateway: Шлюз
@@ -265,14 +263,14 @@ sylius:
         grand_total: Загальний підсумок
         hide_deleted: Приховати видалений
         home: Головна
-        hostname: "Ім'я хоста"
+        hostname: Ім'я хоста
         id: ID
         image: Зображення
         images: Зображення
         index_of_all_configured_locales: Список усіх сконфігурованих мов
         information: Інформація
         inventory: Інвентаризація
-        inventory_here_you_can_see_current_stock_levels: 'Інвентаризація <small>Тут ви можете побачити поточний рівень запасів</small>'
+        inventory_here_you_can_see_current_stock_levels: Інвентаризація <small>Тут ви можете побачити поточний рівень запасів</small>
         inventory_index: Інвентаризація
         inventory_state: Статус інвентаризації
         inventory_tracking: Відстеження інвентаризації
@@ -340,7 +338,7 @@ sylius:
         no_promotion: Промо-код не застосовано
         no_shipping_category: Без категорії доставки
         no_shipping_charges: Націнки за доставку не застосовано
-        no_short_description: '<i>Без короткого опису</i>'
+        no_short_description: <i>Без короткого опису</i>
         no_sku: Без SKU
         no_tax_category: Без категорії оподаткування
         no_taxes: Податки не застосовані
@@ -360,7 +358,7 @@ sylius:
         out_of_stock: Немає в наявності
         overview_of_your_store: Огляд вашого магазину
         pages: Сторінки
-        parent: "Батьківський об'єкт"
+        parent: Батьківський об'єкт
         password: Пароль
         payment: Оплата
         payment_method: Спосіб оплати
@@ -382,8 +380,8 @@ sylius:
         product_association_index: Асоціювання
         product_association_type_index: Тип асоціювання
         products: Продукція
-        products_categorized_as_name: 'Продукт категоризовано як "%name%"'
-        products_categorized_under_taxon_taxon: 'Товари <small> категорії "%taxon%" </small>'
+        products_categorized_as_name: Продукт категоризовано як "%name%"
+        products_categorized_under_taxon_taxon: Товари <small> категорії "%taxon%" </small>
         promotion_coupons: Купони
         promotion_details: Подробиці акції
         promotion_total: Загальна сума промо-знижки
@@ -401,7 +399,7 @@ sylius:
         register_button: Зареєструватися
         registration_date: Дата реєстрації
         release_inventory: Інвентаризація випуску
-        remember_me: "Пам'ятати мене"
+        remember_me: Пам'ятати мене
         reports: Звіти
         retail_price: Роздрібна ціна
         return: Повернення
@@ -436,7 +434,7 @@ sylius:
         shop_by: Купуйте по
         show_all: Показати все
         show_deleted: Показати видалені
-        sign_in_to_the_store_or_create_new_account: 'Ввійдіть до магазину <small>або створіть новий обліковий запис</small>'
+        sign_in_to_the_store_or_create_new_account: Ввійдіть до магазину <small>або створіть новий обліковий запис</small>
         sku: Артикул
         slideshow: Слайд-шоу
         starts_at: Початок дії
@@ -444,7 +442,6 @@ sylius:
         status: Стан
         street: Вулиця
         subject: Тема
-        subscribed_to_newsletter: Підписатись на інформаційний бюлетень
         success: Успішно
         support: Служба підтримки
         tax_category: Категорія податку
@@ -454,7 +451,6 @@ sylius:
         taxation_categories: Категорії оподаткування
         taxation_settings: Налаштування оподаткування
         taxes: Податки
-        taxons: Таксони
         theme: Тема
         there_are_no_images_for_this_product: Немає зображень для цього продукту
         there_are_no_options_for_this_product: Немає опцій для цього продукту
@@ -476,7 +472,7 @@ sylius:
         used: Використано
         user_confirmation_name: Підтвердження користувача
         user_details: Інформація про користувача
-        username: "Ім'я користувача"
+        username: Ім'я користувача
         variant: Різновид
         variant_selection_method: Метод вибору варіанту
         view_more: Детальніше

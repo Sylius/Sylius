@@ -9,7 +9,7 @@ sylius:
         item_add_error: A apărut o eroare la adăugarea produsului in coş.
         item_remove_completed: Produsul a fost scos din coș.
         item_remove_error: A apărut o eroare la ștergerea produsului din coș.
-        restricted_zone_removal: 'Produsul %product% a fost scos din coș, deoarece nu este disponibil în ţara dumneavoastră.'
+        restricted_zone_removal: Produsul %product% a fost scos din coș, deoarece nu este disponibil în ţara dumneavoastră.
     checkout:
         restricted_zone: Acest produs nu este disponibil în ţara dumneavoastră.
         success: Vă mulțumim pentru comanda dumneavoastră!
@@ -18,4 +18,4 @@ sylius:
         new: Plata dumneavoastră este nouă.
         failed: Plata dumneavoastră a fost refuzată.
         unknown: Eroare la plată.
-        out_of_stock: 'Sunt numai %quantity% %name% în stoc.'
+        out_of_stock: Sunt numai %quantity% %name% în stoc.

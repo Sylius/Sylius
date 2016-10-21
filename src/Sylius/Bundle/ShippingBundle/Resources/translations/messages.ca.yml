@@ -14,4 +14,4 @@ sylius:
             description: Descripció
             enabled: Activat
             name: Nom
-            tax_category: "Categoria d'impost"
+            tax_category: Categoria d'impost

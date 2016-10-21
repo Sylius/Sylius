@@ -9,7 +9,7 @@ sylius:
         item_add_error: Der opstod en fejl under tilføjelse af varen til indkøbskurven.
         item_remove_completed: Varen er blevet fjernet fra indkøbskurven.
         item_remove_error: Der opstod en fejl i forsøget på at fjerne en vare fra indkøbskurven.
-        restricted_zone_removal: 'Produktet %product% er fjernet fra indkøbskurven, da det ikke er tilgængeligt i dit land.'
+        restricted_zone_removal: Produktet %product% er fjernet fra indkøbskurven, da det ikke er tilgængeligt i dit land.
     checkout:
         restricted_zone: Dette produkt er ikke tilgængelig i dit land.
         success: Tak for din bestilling!
@@ -18,4 +18,4 @@ sylius:
         new: Din betaling er ny.
         failed: Din betaling blev afvist.
         unknown: Ukendt betalingsfejl.
-        out_of_stock: 'Der er kun %quantity% af %name% på lager.'
+        out_of_stock: Der er kun %quantity% af %name% på lager.

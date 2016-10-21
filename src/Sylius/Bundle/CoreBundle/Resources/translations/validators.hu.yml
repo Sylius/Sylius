@@ -17,7 +17,7 @@ sylius:
             unique: A területi beállítás már létezik.
     product_variant:
         onHand:
-            min: 'A készletnek nagyobbnak kell lenni mint {{ limit }}.'
+            min: A készletnek nagyobbnak kell lenni mint {{ limit }}.
             not_blank: Kérjük, adja meg a készletet.
         price:
             min: Az ár nem lehet negatív szám.
@@ -26,7 +26,7 @@ sylius:
             min: Az eredeti ár nem lehet negatív.
     product_translation:
         short_description:
-            max: 'Rövid leírás nem lehet hosszabb mint {{ limit }} karakterek.'
+            max: Rövid leírás nem lehet hosszabb mint {{ limit }} karakterek.
     user:
         email:
             unique: Ez az e-mail cím már használatban van.

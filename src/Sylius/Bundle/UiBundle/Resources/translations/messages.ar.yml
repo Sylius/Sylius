@@ -14,6 +14,7 @@ sylius:
         color: اللون
         company: الشركة
         countries: البلدان
+        country: البلد
         email: البريد الإلكتروني
         exchange_rate: سعر الصرف
         first_name: الاسم الأول
@@ -35,3 +36,4 @@ sylius:
         scope: نطاق
         street: الشارع
         topic: الموضوع
+        type: نوع

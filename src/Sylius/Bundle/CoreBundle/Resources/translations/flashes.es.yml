@@ -9,13 +9,13 @@ sylius:
         item_add_error: Ha ocurrido un error mientras se añadía el item al carrito.
         item_remove_completed: El item se ha borrado del carrito.
         item_remove_error: Ha ocurrido un error mientras se borraba el item del carrito.
-        restricted_zone_removal: 'El producto %product% ha sido eliminado del carrito porque no está disponible en su país.'
+        restricted_zone_removal: El producto %product% ha sido eliminado del carrito porque no está disponible en su país.
     checkout:
         restricted_zone: Este producto no está disponible en su país.
-        success: ¡Gracias por su pedido!
+        success: '¡Gracias por su pedido!'
         canceled: Tu pago ha sido cancelado.
         processing: Tu pago está siendo procesando.
         new: Tu pago es nuevo.
         failed: Tu pago ha sido rechazado.
         unknown: Error de pago desconocido.
-        out_of_stock: 'Sólo hay %quantity% %name% en stock.'
+        out_of_stock: Sólo hay %quantity% %name% en stock.

@@ -46,4 +46,4 @@ sylius:
             enabled: Активен
             name: Название
             tax_category: Категория налогов
-            translations: ﻿Переводы
+            translations: '﻿Переводы'

@@ -35,7 +35,7 @@ sylius:
             not_blank: Venligst indtast provins navn.
     zone:
         members:
-            min_count: 'Tilføj venligst mindst {{ limit }} zone medlem.'
+            min_count: Tilføj venligst mindst {{ limit }} zone medlem.
         name:
             max_length: Zone navn må ikke være længere end 255 tegn|Zone navn må ikke være længere end 255 tegn.
             not_blank: Venligst indtast zone navn.

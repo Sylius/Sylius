@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Stückpreis
-                quantity: Stückzahl
-                variant: Variante
         block:
             body: Body
             id: ID

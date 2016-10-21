@@ -9,8 +9,6 @@ sylius:
                     attributes: Attributi
                     header: Catalogo
                     options: Opzioni
-                    products: Prodotti
-                    taxons: Taxons
                 configuration:
                     channels: Canali
                     countries: Paesi

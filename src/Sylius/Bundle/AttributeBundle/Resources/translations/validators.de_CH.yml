@@ -5,8 +5,8 @@ sylius:
     attribute:
         name:
             not_blank: Bitte Attributnamen eingeben.
-            min_length: 'Attributname muss mindestens 1 Zeichen lang sein.|Attributname muss mindestens {{ limit }} Zeichen lang sein.'
-            max_length: 'Attributname darf nicht länger als 1 Zeichen sein.|Attributname darf nicht länger als {{ limit }} Zeichen sein.'
+            min_length: Attributname muss mindestens 1 Zeichen lang sein.|Attributname muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Attributname darf nicht länger als 1 Zeichen sein.|Attributname darf nicht länger als {{ limit }} Zeichen sein.
     attribute_value:
         attribute:
             not_blank: Bitte Attribut auswählen.

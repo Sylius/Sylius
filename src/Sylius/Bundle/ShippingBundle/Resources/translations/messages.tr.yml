@@ -10,7 +10,7 @@ sylius:
         shipment:
             state: Durum
             states:
-                checkout: 'Ödeme  yap'
+                checkout: Ödeme  yap
                 pending: Beklemede
                 ready: Hazır
                 shipped: Kargolandı

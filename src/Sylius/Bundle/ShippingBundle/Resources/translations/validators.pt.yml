@@ -4,8 +4,8 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'O nome da categoria não deve ter mais que {{ limit }} caracteres.'
-            min_length: 'Nome da categoria deve ser pelo menos {{ limit }} caracteres.'
+            max_length: O nome da categoria não deve ter mais que {{ limit }} caracteres.
+            min_length: Nome da categoria deve ser pelo menos {{ limit }} caracteres.
             not_blank: Introduza o nome da categoria de transporte.
         code:
             not_blank: Introduza o código da categoria de transporte.
@@ -15,8 +15,8 @@ sylius:
             max_length: Tamanho máximo
             min_length: Tamanho mínimo
         name:
-            max_length: 'O nome do método de envio não deve ter mais que {{ limit }} caracteres.'
-            min_length: 'O nome do método de envio deve ter pelo menos {{ limit }} caracteres.'
+            max_length: O nome do método de envio não deve ter mais que {{ limit }} caracteres.
+            min_length: O nome do método de envio deve ter pelo menos {{ limit }} caracteres.
             not_blank: Introduza o nome do método de envio.
         code:
             not_blank: Introduza o código do método de envio.

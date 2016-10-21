@@ -4,20 +4,20 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'Názov kategórie nesmie byť dlhší ako {{ limit }} znakov.'
-            min_length: 'Názov kategórie musí mať minimálne {{ limit }} znakov.'
+            max_length: Názov kategórie nesmie byť dlhší ako {{ limit }} znakov.
+            min_length: Názov kategórie musí mať minimálne {{ limit }} znakov.
             not_blank: Zadajte názov kategórie doručenia.
         code:
             not_blank: Zadajte kód kategórie doručenia.
             unique: Kategória doručenia s daným kódom už existuje.
     shipping_method:
         calculator:
-            max_length: 'Hodnota nemôže byť dlhšia ako { { limit } } znakov.'
-            min_length: 'Hodnota musí byť aspoň { { limit } } znakov'
+            max_length: Hodnota nemôže byť dlhšia ako { { limit } } znakov.
+            min_length: Hodnota musí byť aspoň { { limit } } znakov
             not_blank: Hodnota nemôže byť prázdna.
         name:
-            max_length: 'Názov spôsobu doručenia nesmie byť dlhší ako {{ limit }} znakov.'
-            min_length: 'Názov spôsobu doručenia musí byť aspoň {{ limit }} znakov.'
+            max_length: Názov spôsobu doručenia nesmie byť dlhší ako {{ limit }} znakov.
+            min_length: Názov spôsobu doručenia musí byť aspoň {{ limit }} znakov.
             not_blank: Zadajte názov spôsobu doručenia.
         code:
             not_blank: Zadajte kód spôsobu doručenia.

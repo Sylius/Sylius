@@ -158,7 +158,7 @@ sylius:
         create_shipping_category: Dodaj kategorię wysyłki
         create_shipping_method: Dodaj metodę wysyłki
         create_simple_block: Tworzenie zwykłego bloku
-        create_slideshow_block: 'Utwórz blok - pokaz slajdów'
+        create_slideshow_block: Utwórz blok - pokaz slajdów
         create_string_block: Utwórz blok tekstowy
         create_tax_category: Dodaj kategorię podatkową
         create_tax_rate: Dodaj stawkę podatkową
@@ -169,7 +169,7 @@ sylius:
         created_at: data utworzenia
         creating_a_new_imagine_block: Tworzenie nowego bloku zdjęciowego
         creating_a_new_simple_block: Tworzenie nowego zwykłego bloku
-        creating_a_new_slideshow_block: 'Tworzenie nowego bloku - pokaz slajdów'
+        creating_a_new_slideshow_block: Tworzenie nowego bloku - pokaz slajdów
         creating_a_new_string_block: Tworzenie bloku tekstowego
         creating_menu: Tworzenie menu
         creating_menu_node: Utwórz węzeł menu
@@ -195,7 +195,7 @@ sylius:
         customer_orders: Zamówienia klienta
         customer_since: Klient od
         customers: Klienci
-        customers_list_of_all_customers_in_store: 'Klienci <small>Lista wszystkich klientów sklepu</small>'
+        customers_list_of_all_customers_in_store: Klienci <small>Lista wszystkich klientów sklepu</small>
         customize_default_metadata: Dostosuj domyślne metadane
         customize_metadata: Dostosuj metadane
         customize_products_metadata: Dostosuj metadane produktów
@@ -268,7 +268,7 @@ sylius:
         editing_shipping_category: Edycja kategorii wysyłki
         editing_shipping_method: Edycja metody wysyłki
         editing_simple_block: Edycja zwykłego bloku
-        editing_slideshow_block: 'Edycja bloku - pokaz slajdów'
+        editing_slideshow_block: Edycja bloku - pokaz slajdów
         editing_string_block: Edycja bloku tekstowego
         editing_tax_category: Edycja kategorii podatkowej
         editing_taxon: Edycja taksonomii
@@ -292,7 +292,6 @@ sylius:
         exclusive: Ekskluzywny
         existing_customer: Istniejący Klient
         expiration_and_usage_limits: Data wygaśnięcia i limit użyć
-        expires_at: Wygasa dnia
         extra_information: Dodatkowe informacje
         extra_notes: Dodatkowe uwagi
         failed: Nieudane
@@ -317,7 +316,7 @@ sylius:
         guest_customer: Gość
         have_an_account_already: Masz już konto
         hello: Witaj
-        hello_name: 'Witaj <b>%name%</b>'
+        hello_name: Witaj <b>%name%</b>
         hide_deleted: Ukryj usunięte
         home: Panel
         hostname: Nazwa hosta
@@ -333,7 +332,7 @@ sylius:
         info: Info
         information: Informacja
         inventory: Zapasy
-        inventory_here_you_can_see_current_stock_levels: 'Magazyn <small>Tutaj możesz zobaczyć aktualne stany magazynowe</small>'
+        inventory_here_you_can_see_current_stock_levels: Magazyn <small>Tutaj możesz zobaczyć aktualne stany magazynowe</small>
         inventory_index: Zapasy
         inventory_state: Status sprzedaży
         inventory_tracking: Śledzenie sprzedaży
@@ -358,7 +357,7 @@ sylius:
         locales: Ustawienia regionalne
         lock: Blokada
         locked: Zablokowany
-        logged_in_as: 'Zalogowany jako %username%'
+        logged_in_as: Zalogowany jako %username%
         login: Zaloguj
         login_button: Zaloguj
         logout: Wyloguj
@@ -458,8 +457,8 @@ sylius:
         no_results_to_display: Brak wyników do wyświetlenia
         no_shipping_category: Brak kategorii wysyłki
         no_shipping_charges: Brak opłaty za wysyłkę
-        no_short_description: '<i>Brak krótkiego opisu</i>'
-        no_sku: '<i>Brak SKU</i>'
+        no_short_description: <i>Brak krótkiego opisu</i>
+        no_sku: <i>Brak SKU</i>
         no_tax_category: Brak kategorii podatkowej
         no_taxes: Brak podatku
         no_theme: Brak motywu
@@ -479,7 +478,7 @@ sylius:
         order_comment_name: Uwagi dotyczące zamówienia
         order_comments: Uwagi dotyczące zamówienia
         order_confirmation_name: Potwierdzenie zamówienia
-        order_details: 'Szczegóły  Twojego zamówienia'
+        order_details: Szczegóły  Twojego zamówienia
         order_history: Historia zamówienia
         order_item_product: Element
         order_state: Stan zamówienia
@@ -529,13 +528,12 @@ sylius:
         product_association_type_index: Rodzaj powiązania
         product_association_types: Rodzaje produktów towarzyszących
         product_associations: Powiązania produktów
-        product_details_viewing_product_product: 'Szczegóły produktu <small>Oglądasz produkt "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Szczegóły produktu <small>Oglądasz produkt "<strong>%product%</strong>"</small>
         product_reviews: Recenzje produktu
         product_variants: Warianty produktu
-        products: Produkty
-        products_categorized_as_name: 'Produkty sklasyfikowane jako "%name%"'
-        products_categorized_under_taxon_taxon: 'Produkty <small>Należące do taksonomii "%taxon%"</small>'
-        products_index_of_all_products_in_your_store: 'Produkty <small>Lista wszystkich produktów w Twoim sklepie</small>'
+        products_categorized_as_name: Produkty sklasyfikowane jako "%name%"
+        products_categorized_under_taxon_taxon: Produkty <small>Należące do taksonomii "%taxon%"</small>
+        products_index_of_all_products_in_your_store: Produkty <small>Lista wszystkich produktów w Twoim sklepie</small>
         promotion_configuration: Konfiguracja promocji
         promotion_coupons: Kupony
         promotion_details: Szczegóły promocji
@@ -557,7 +555,7 @@ sylius:
         refunded: Zwrócone
         register: Zarejestruj
         register_button: Zarejestruj
-        registration_create_an_account_in_store: 'Rejestracja, <small>Załóż konto w sklepie</small>'
+        registration_create_an_account_in_store: Rejestracja, <small>Załóż konto w sklepie</small>
         registration_date: Data rejestracji
         release_inventory: Inwentarz wydań
         remember_me: Zapamiętaj mnie
@@ -609,7 +607,7 @@ sylius:
         show_in_store: Pokaż w sklepie
         show_order_details: Pokaż szczegóły zamówienia
         sign_in: Zaloguj
-        sign_in_to_the_store_or_create_new_account: 'Zaloguj się do sklepu <small>lub utwórz nowe konto</small>'
+        sign_in_to_the_store_or_create_new_account: Zaloguj się do sklepu <small>lub utwórz nowe konto</small>
         sign_out: Wyloguj
         simple_blocks: Zwykłe bloki
         simple_product: Prosty produkt
@@ -624,7 +622,6 @@ sylius:
         street: Adres
         string_blocks: Bloki tekstowe
         subject: Temat
-        subscribed_to_newsletter: Zapisz się do newslettera
         subtotal: Suma cząstkowa
         success: Sukces
         summary: Podsumowanie
@@ -639,7 +636,6 @@ sylius:
         taxation_settings: Ustawienia podatków
         taxes: Podatki
         taxonomy: Taksonomia
-        taxons: Taksony
         terms_and_conditions: Regulamin
         thank_you: Dziękujemy!
         thank_you_for_your_order: Dziękujemy za zamówienie
@@ -691,7 +687,7 @@ sylius:
         user_confirmation_name: Potwierdzenia przez użytkownika
         user_details: Szczegóły użytkownika
         username: Nazwa użytkownika
-        users_list_of_all_users_registered_in_store: 'Użytkownicy <small>Lista wszystkich zarejestrowanych użytkowników w sklepie</small>'
+        users_list_of_all_users_registered_in_store: Użytkownicy <small>Lista wszystkich zarejestrowanych użytkowników w sklepie</small>
         values: Wartości
         variant: Wariant
         variant_selection_method: Metody wyboru wariantu
@@ -701,7 +697,7 @@ sylius:
         view: Widok
         view_and_edit_cart: Wyświetl i edytuj koszyk
         view_more: Zobacz więcej
-        view_product_details: 'Zobacz szczegóły %product%'
+        view_product_details: Zobacz szczegóły %product%
         void: Nieważna
         warning: Ostrzeżenie
         welcome: Witaj

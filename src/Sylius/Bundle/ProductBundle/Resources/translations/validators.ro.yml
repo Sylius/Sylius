@@ -8,8 +8,8 @@ sylius:
             unique: Codul SKU trebuie să fie unic.
         name:
             not_blank: Vă rugăm să completați numele produsului.
-            min_length: 'Numele produsului trebuie să conţină cel puţin 1 caracter.|Numele produsului trebuie să conţină cel puţin {{ limit }} caractere.'
-            max_length: 'Numele produsului nu poate depăși un caracter.|Numele produsului nu poate depăși {{ limit }} de caractere.'
+            min_length: Numele produsului trebuie să conţină cel puţin 1 caracter.|Numele produsului trebuie să conţină cel puţin {{ limit }} caractere.
+            max_length: Numele produsului nu poate depăși un caracter.|Numele produsului nu poate depăși {{ limit }} de caractere.
     variant:
         sku:
             not_blank: Vă rugăm să completați codul SKU a variantei.
@@ -18,10 +18,10 @@ sylius:
     option:
         name:
             not_blank: Vă rugăm să completați numele opţiunii.
-            min_length: 'Numele opţiunii trebuie să conţină cel puţin un caracter.|Numele opţiunii trebuie să conţină cel puţin {{ limit }} caractere.'
-            max_length: 'Numele opţiunii nu poate depăși un caracter.|Numele opţiunii nu poate depăși {{ limit }} de caractere.'
+            min_length: Numele opţiunii trebuie să conţină cel puţin un caracter.|Numele opţiunii trebuie să conţină cel puţin {{ limit }} caractere.
+            max_length: Numele opţiunii nu poate depăși un caracter.|Numele opţiunii nu poate depăși {{ limit }} de caractere.
         values:
-            min_count: 'Vă rugăm să adăugaţi cel puțin {{ limit }} valori pentru opțiune.|Vă rugăm să adăugaţi cel puțin {{ limit }} valori pentru opțiune.'
+            min_count: Vă rugăm să adăugaţi cel puțin {{ limit }} valori pentru opțiune.|Vă rugăm să adăugaţi cel puțin {{ limit }} valori pentru opțiune.
     option_value:
         value:
             not_blank: Vă rugăm să completați valoarea opţiunii.

@@ -16,3 +16,4 @@ sylius:
         presentation: 소개
         remember_me: 아이디/암호 저장
         scope: 범위
+        type: 타입

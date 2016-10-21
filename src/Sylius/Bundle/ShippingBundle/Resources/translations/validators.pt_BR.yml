@@ -4,8 +4,8 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'Nome da categoria não deve ter mais de {{limit}} caracteres.'
-            min_length: 'Nome da categoria deve ter pelo menos {{limit}} caracteres.'
+            max_length: Nome da categoria não deve ter mais de {{limit}} caracteres.
+            min_length: Nome da categoria deve ter pelo menos {{limit}} caracteres.
             not_blank: Por favor, digite o nome de categoria transporte.
         code:
             not_blank: Por favor digite o código de categoria de transporte.
@@ -16,8 +16,8 @@ sylius:
             min_length: sylius.shipping_method.calculator.min_length
             not_blank: sylius.shipping_method.calculator.not_blank
         name:
-            max_length: 'Nome do método de envio não deve ter mais de {{limit}} caracteres.'
-            min_length: 'Nome do método de envio deve ter pelo menos {{limit}} caracteres de comprimento.'
+            max_length: Nome do método de envio não deve ter mais de {{limit}} caracteres.
+            min_length: Nome do método de envio deve ter pelo menos {{limit}} caracteres de comprimento.
             not_blank: Por favor, digite o método de expedição.
         code:
             not_blank: Digite o código do método de envio.

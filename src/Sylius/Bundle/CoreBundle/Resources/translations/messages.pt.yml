@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Preço unitário
-                quantity: Quantidade
-                variant: Variante
-            customer_group: Grupo de cliente
         block:
             body: Corpo
             id: Nº
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Método de envio
         promotion:
             channels: Canais
-        coupon:
-            per_customer_usage_limit: Limite de uso por cliente
+        promotion_action:
+            add_product_configuration:
+                product: Produto
         group:
             name: Nome
             roles: Funções
@@ -154,17 +149,17 @@ sylius:
             name: Comentário de encomenda
         shipment_confirmation:
             name: Confirmação de envio
-            content: 'A encomenda nº%number% foi enviada por %method%.<br />Pode verificar a sua localização com o código %tracking%.<br /><br />Obrigado pela preferência.'
+            content: A encomenda nº%number% foi enviada por %method%.<br />Pode verificar a sua localização com o código %tracking%.<br /><br />Obrigado pela preferência.
         user_confirmation:
             name: Confirmação do utilizador
             subject: Bem-vindo à nossa loja
-            content: 'Bem-vindo à nossa loja, %username%.<br/> <br/>Acabou de se registar.'
+            content: Bem-vindo à nossa loja, %username%.<br/> <br/>Acabou de se registar.
         password_reset:
             name: Redefinir palavra-passe
-            content: '<h3>Olá %username%</h3> Para redefinir a sua palavra-passe, por favor visite %url% <br/> <br/>Obrigado.'
+            content: <h3>Olá %username%</h3> Para redefinir a sua palavra-passe, por favor visite %url% <br/> <br/>Obrigado.
         verification:
             name: Verificação de endereço de e-mail
-            content: 'Para verificar o seu endereço de e-mail, por favor visite %url%'
+            content: Para verificar o seu endereço de e-mail, por favor visite %url%
     payum_gateway:
         cash_on_delivery: Pagamento na entrega
         offline: Offline

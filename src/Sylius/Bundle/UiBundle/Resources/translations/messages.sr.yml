@@ -30,6 +30,7 @@ sylius:
         clear_cart: Испразни корпу
         company: Компанија
         countries: Земље
+        country: Земља
         country_details: Детаљи земље
         create: Креирај
         create_a_new_address: Унеси нову адресу
@@ -83,7 +84,7 @@ sylius:
         grand_total: Свеукупно
         home: Почетна страна
         information: Обавештење
-        inventory_here_you_can_see_current_stock_levels: 'Лагер <small>Преглед стања залиха</small>'
+        inventory_here_you_can_see_current_stock_levels: Лагер <small>Преглед стања залиха</small>
         inventory_state: стање залиха
         inventory_tracking: Працење залиха
         invoice: Фактура
@@ -134,8 +135,8 @@ sylius:
         no_description: Нема описа
         no_promotion: Ниједна промоција није додата
         no_shipping_charges: Нису додати трошкови поруџбине
-        no_short_description: '<и>Нема кратког описа</и>'
-        no_sku: '<и>Нема СКУ</и>'
+        no_short_description: <и>Нема кратког описа</и>
+        no_sku: <и>Нема СКУ</и>
         no_tax_category: Нема категорије пореза
         no_taxes: Нису додати порези
         number_of_orders: Број наруџбина
@@ -156,10 +157,9 @@ sylius:
         presentation: Приказ
         previous: Предходна
         product: Производ
-        product_details_viewing_product_product: 'Детаљи производа <small>Преглед производа "<стронг>%product%</стронг>"</small>'
-        products: Пороизводи
-        products_categorized_under_taxon_taxon: 'Производи <small>Категорисани у "%taxon%"</small>'
-        products_index_of_all_products_in_your_store: 'Производи <small>Сви производи у продавници</small>'
+        product_details_viewing_product_product: Детаљи производа <small>Преглед производа "<стронг>%product%</стронг>"</small>
+        products_categorized_under_taxon_taxon: Производи <small>Категорисани у "%taxon%"</small>
+        products_index_of_all_products_in_your_store: Производи <small>Сви производи у продавници</small>
         promotion_details: Детаљи промоције
         promotion_total: Укупно промоције
         promotions: Промоције
@@ -189,7 +189,7 @@ sylius:
         shipping_state: Стање пошиљке
         shipping_total: Укупно испорука
         shop_by: Купујте по
-        sign_in_to_the_store_or_create_new_account: 'Улогујете се <small>или направите нови налог</small>'
+        sign_in_to_the_store_or_create_new_account: Улогујете се <small>или направите нови налог</small>
         slideshow: Галерија
         street: Улица
         success: Успех
@@ -208,11 +208,12 @@ sylius:
         total_orders: Укупно поруџбина
         total_registrations: Укупно пријављених
         tracking_number: Број за праћење поруџбине
+        type: Тип
         updating_tax_rate: Ажурирање пореске стопе
         used: Коришћено
         user_details: Детаљи корисника
         username: Кросницко име
-        users_list_of_all_users_registered_in_store: 'Корисници <small>Листа свих регистрованих корисника</small>'
+        users_list_of_all_users_registered_in_store: Корисници <small>Листа свих регистрованих корисника</small>
         view_more: Више
         warning: Упозпрење
         welcome_to_your_space: Добро дошли на Вашу страницу

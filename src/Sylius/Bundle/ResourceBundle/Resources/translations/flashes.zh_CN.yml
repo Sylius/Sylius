@@ -12,4 +12,4 @@ sylius:
         restore_deleted: '%resource% 已经被成功地还原。'
         enable: '%resource% 已成功启用。'
         disable: '%resource% 已被成功地禁用。'
-        delete_error: '不能删除，%resource% 正在使用中。'
+        delete_error: 不能删除，%resource% 正在使用中。

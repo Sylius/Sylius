@@ -8,7 +8,7 @@ sylius:
             unique: Dette språket finnes allerede.
     product_variant:
         onHand:
-            min: 'Du må inneha mer enn {{ limit }}.'
+            min: Du må inneha mer enn {{ limit }}.
             not_blank: Vennlist angi din beholdning.
         price:
             min: Prisen kan ikke være mindre enn null.

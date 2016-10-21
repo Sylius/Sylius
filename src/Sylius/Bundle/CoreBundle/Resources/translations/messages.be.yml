@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Кошт адзінкі
-                quantity: Колькасць
-                variant: Варыянт
         block:
             body: Цела
             id: ID
@@ -19,6 +14,9 @@ sylius:
                 different_billing_address: Выкарыстоўваць іншы адрас для аплаты?
             payment_method: Метад аплаты
             shipping_method: Метад дастаўкі
+        promotion_action:
+            add_product_configuration:
+                product: Тавар
         group:
             name: Імя
             roles: Ролі
@@ -105,8 +103,6 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Колькасць
-            taxon:
-                taxons: Катэгорыі
             total_of_items_from_taxon:
                 amount: Сума
     installer:
@@ -114,7 +110,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Усталюйце і ўключыце пашырэнне %extension%.'
+            help: Усталюйце і ўключыце пашырэнне %extension%.
             iconv: Iconv
             icu: ICU
             intl: Intl

@@ -2,16 +2,35 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_currency:
+            not_blank: لطفا واحد پول پایه برای کانال را وارد کنید.
+        default_locale:
+            not_blank: لطفا زبان پایه برای کانال را وارد کنید.
     checkout:
         shipping_method:
             not_blank: لطفا شیوه ارسال را انتخاب کنید.
+    currency:
+        enabled:
+            cannot_disable_base: واحد پول پایه را نمی توانید غیر فعال کنید.
+    customer:
+        currency_code:
+            not_valid: کد واحد پول وارد شده نامعتبر است.
+    order:
+        currency_code:
+            not_valid: کد واحد پول وارد شده نامعتبر است.
     locale:
         code:
             not_blank: لطفاً کد زبان را وارد کنید.
             unique: این زبان قبلا در سیستم ثبت شده است.
+        enabled:
+            cannot_disable_base: زبان پایه را نمی توانید غیر فعال کنید.
+    product_image:
+        code:
+            unique: کد تصویر در این محصول باید منحصر به فرد باشد.
     product_variant:
         onHand:
-            min: 'میزان موجودی باید بیشتر از {{ limit }} باشد.'
+            min: میزان موجودی باید بیشتر از {{ limit }} باشد.
             not_blank: لطفا میزان موجودی را وارد کنید.
         price:
             min: قیمت نمی تواند منفی باشد.
@@ -20,4 +39,15 @@ sylius:
             min: قیمت ابتدایی نمی تواند منفی باشد.
     product_translation:
         short_description:
-            max: 'معرفی کوتاه نباید بیش از {{ limit }} حرف باشد.'
+            max: معرفی کوتاه نباید بیش از {{ limit }} حرف باشد.
+    taxon_image:
+        code:
+            unique: کد تصویر باید در این دسته منحصر به فرد باشد.
+    user:
+        email:
+            unique: این ایمیل قبلا استفاده گردیده.
+        username:
+            unique: این نام کاربری قبلا استفاده شده است.
+            not_blank: لطفاً نام خود را وارد کنید.
+        locale_code:
+            not_blank: زبانی را انتخاب کنید.

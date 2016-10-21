@@ -9,7 +9,7 @@ sylius:
         item_add_error: 商品添加到购物车时发生错误 。
         item_remove_completed: 已从购物车中移除该商品。
         item_remove_error: 从购物车中删除商品时出错。
-        restricted_zone_removal: '产品%product%从购物车中删除，因为它不在有效的国家范围。'
+        restricted_zone_removal: 产品%product%从购物车中删除，因为它不在有效的国家范围。
     checkout:
         restricted_zone: 这种产品在您的国家无效。
         success: 谢谢您的订单 ！
@@ -18,4 +18,4 @@ sylius:
         new: 待支付
         failed: 您的付款被拒绝了。
         unknown: 付款时出现未知的错误。
-        out_of_stock: '在货架上%name%数量仅有 %quantity%。'
+        out_of_stock: 在货架上%name%数量仅有 %quantity%。

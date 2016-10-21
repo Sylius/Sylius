@@ -53,7 +53,7 @@ sylius:
         admin_users: ผู้ดูแลระบบ
         all: ทั้งหมด
         all_your_addresses: รายการที่อยู่ทั้งหมดของคุณ
-        amount: ยอดรวม
+        amount: ยอดเงิน
         an_error_occurred: เกิดข้อผิดพลาด
         api: Api
         apply_coupon: ใช้คูปอง
@@ -198,7 +198,7 @@ sylius:
         customer_orders: ใบสั่งของลูกค้า
         customer_since: ลูกค้าตั้งแต่
         customers: ลูกค้า
-        customers_list_of_all_customers_in_store: 'ลูกค้า<small>รายการของลูกค้าทั้งหมดในร้าน</small>'
+        customers_list_of_all_customers_in_store: ลูกค้า<small>รายการของลูกค้าทั้งหมดในร้าน</small>
         customize_default_metadata: กำหนดค่า Default metadata
         customize_metadata: กำหนด Metadata
         customize_products_metadata: กำหนด Metadata ของผลิตภัณฑ์
@@ -298,7 +298,6 @@ sylius:
         exclusive: พิเศษ
         existing_customer: ลูกค้าที่มีอยู่
         expiration_and_usage_limits: การหมดอายุและการจำกัดการใช้
-        expires_at: หมดอายุวันที่
         extra_information: ข้อมูลเพิ่มเติม
         extra_notes: หมายเหตุเพิ่มเติม
         failed: ล้มเหลว
@@ -308,7 +307,6 @@ sylius:
         filters: กรองข้อมูล
         first_name: ชื่อ
         forgot_password: ลืมรหัสผ่าน
-        from_the_latest: จากล่าสุด
         from_the_oldest: จากเก่าที่สุด
         fulfill: Fulfill
         fulfilled: ดำเนินการเสร็จสิ้น
@@ -326,7 +324,7 @@ sylius:
         guest_customer: ลูกค้าบุคคลทั่วไป
         have_an_account_already: มีบัญชีอยู่แล้ว
         hello: สวัสดี!
-        hello_name: 'สวัสดี <b>%name%</b>'
+        hello_name: สวัสดี <b>%name%</b>
         hide_deleted: ซ่อนรายการที่ลบแล้ว
         home: หน้า​แรก​
         hostname: Hostname
@@ -343,7 +341,7 @@ sylius:
         info: ข้อมูล
         information: ข้อมูล
         inventory: คลังสินค้า
-        inventory_here_you_can_see_current_stock_levels: 'คลังสินค้า <small>คุณสามารถดูสินค้าคงคลังได้ที่นี่</small>'
+        inventory_here_you_can_see_current_stock_levels: คลังสินค้า <small>คุณสามารถดูสินค้าคงคลังได้ที่นี่</small>
         inventory_index: คลังสินค้า
         inventory_state: สถานะสินค้าคงคลัง
         inventory_tracking: ติดตามสินค้าคงคลัง
@@ -370,10 +368,10 @@ sylius:
         locales: ภาษา
         lock: ล็อค
         locked: ล็อคแล้ว
-        logged_in_as: 'ลงชื่อเข้าใช้ในนาม %username%'
+        logged_in_as: ลงชื่อเข้าใช้ในนาม %username%
         login: เข้าสู่ระบบ
         login_button: เข้าสู่ระบบ
-        login_sylius_store: 'เข้าสู่ระบบ <small>Sylius store</small>'
+        login_sylius_store: เข้าสู่ระบบ <small>Sylius store</small>
         logout: ออกจากระบบ
         main_taxon: หมวดหมู่หลัก
         male: ชาย
@@ -481,7 +479,7 @@ sylius:
         no_shipping_category: ไม่มีประเภทการจัดส่ง
         no_shipping_charges: ไม่มีค่าธรรมเนียมในการจัดส่ง
         no_shipping_methods_available: การจัดส่งไม่พร้อมใช้งานสำหรับที่อยู่ของคุณ
-        no_short_description: '<i>ไม่มีคำอธิบายสั้น ๆ</i>'
+        no_short_description: <i>ไม่มีคำอธิบายสั้น ๆ</i>
         no_sku: ไม่มี SKU
         no_tax_category: ไม่มีประเภทภาษี
         no_taxes: ไม่มีภาษี
@@ -532,7 +530,7 @@ sylius:
         payment_state: สถานะการชำระเงิน
         payments: การชำระเงิน
         pay: ชำระ
-        pay_again: 'คลิก "ชำระ (Pay)" อีกครั้ง'
+        pay_again: คลิก "ชำระ (Pay)" อีกครั้ง
         pending: อยู่ระหว่างดำเนินการ
         per_customer_usage_limit: จำกัดตามการใช้งานของลูกค้า
         permissions: สิทธิ์การเข้าถึง
@@ -542,9 +540,7 @@ sylius:
         placed_an_order: ทำรายการสั่งซื้อสำเร็จ
         placed_at: วันที่
         postcode: รหัสไปรษณีย์
-        powered_by: |
-            ขับเคลื่อน
-            โดย
+        powered_by: "ขับเคลื่อน\nโดย"
         presentation: ผู้ใช้มองเห็น
         previous: ก่อนหน้านี้
         price: ราคา
@@ -559,15 +555,14 @@ sylius:
         product_association_types: ชนิดความสัมพันธ์ของสินค้า
         product_associations: ความสัมพันธ์ของผลิตภัณฑ์
         product_attributes: คุณลักษณะสินค้า (Attribute)
-        product_details_viewing_product_product: 'รายละเอียดสินค้า <small>ดูรายละเอียด "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: รายละเอียดสินค้า <small>ดูรายละเอียด "<strong>%product%</strong>"</small>
         product_options: ตัวเลือกสินค้า
         product_review: รีวิวสินค้า
         product_reviews: รีวิวสินค้า
         product_variants: ผลิตภัณฑ์ย่อย
-        products: สินค้า
-        products_categorized_as_name: 'สินค้าในหมวด %name%'
-        products_categorized_under_taxon_taxon: 'สินค้าในหมวด %taxon%'
-        products_index_of_all_products_in_your_store: 'สินค้า <small>สินค้าทั้งหมดในร้านค้าของคุณ</small>'
+        products_categorized_as_name: สินค้าในหมวด %name%
+        products_categorized_under_taxon_taxon: สินค้าในหมวด %taxon%
+        products_index_of_all_products_in_your_store: สินค้า <small>สินค้าทั้งหมดในร้านค้าของคุณ</small>
         profile: ข้อมูลส่วนตัว
         promotion_configuration: กำหนดค่าโปรโมชั่น
         promotion_coupons: คูปอง
@@ -594,7 +589,7 @@ sylius:
         register_button: ลงทะเบียน
         register_in_the_store: ลงทะเบียนกับการร้านค้า
         registered_customers: ลูกค้าที่ลงทะเบียนแล้ว
-        registration_create_an_account_in_store: 'ลงทะเบียน<small>สร้างบัญชีเพื่อใช้ในร้านค้า</small>'
+        registration_create_an_account_in_store: ลงทะเบียน<small>สร้างบัญชีเพื่อใช้ในร้านค้า</small>
         registration_date: วันที่สมัครสมาชิก
         release_inventory: รายการสินค้าคงคลัง
         remember_me: จำการเข้าระบบของฉันไว้
@@ -658,7 +653,7 @@ sylius:
         show_order_details: แสดงรายละเอียดใบสั่ง
         sign_in: ลงชื่อเข้าใช้
         sign_in_here: ลงชื่อเข้าใช้ที่นี่
-        sign_in_to_the_store_or_create_new_account: 'เข้าสู่ระบบ <small>หรือสร้างบัญชีใหม่</small>'
+        sign_in_to_the_store_or_create_new_account: เข้าสู่ระบบ <small>หรือสร้างบัญชีใหม่</small>
         sign_out: ออกจากระบบ
         simple_blocks: บล็อกง่าย ๆ
         simple_product: สินค้าทั่วไป
@@ -675,7 +670,6 @@ sylius:
         street: ที่อยู่
         string_blocks: สายบล็อก
         subject: ชื่อเรื่อง
-        subscribed_to_newsletter: สมัครรับจดหมายข่าว
         subtotal: ยอดรวม
         success: สำเร็จ
         summary: สรุปรายการ
@@ -691,7 +685,6 @@ sylius:
         taxation_settings: การตั้งค่าภาษี
         taxes: ภาษี
         taxonomy: การจัดประเภท
-        taxons: หมวดหมู่
         terms_and_conditions: ข้อกำหนดและเงื่อนไข
         thank_you: ขอบคุณ!
         thank_you_for_your_order: ขอบคุณสำหรับการสั่งซื้อ
@@ -758,12 +751,12 @@ sylius:
         update_product_association_type: ปรับปรุงความสัมพันธ์ของประเภทสินค้า
         updating_tax_rate: ปรับปรุงอัตราภาษี
         usage: การใช้งาน
-        usage_limit: จำกัดการใช้งาน
+        usage_limit: ขีดจำกัดการใช้งาน
         used: ใช้
         user_confirmation_name: ยืนยันการสั่งซื้อ
         user_details: รายละเอียดผู้ใช้
         username: ชื่อผู้ใช้
-        users_list_of_all_users_registered_in_store: 'ผู้ใช้ <small>รายชื่อผู้ใช้ทั้งหมด</small>'
+        users_list_of_all_users_registered_in_store: ผู้ใช้ <small>รายชื่อผู้ใช้ทั้งหมด</small>
         values: ค่า
         variant: Variant
         variant_selection_method: วิธีการเลือกตัวแปร
@@ -773,7 +766,7 @@ sylius:
         view: มุมมอง
         view_and_edit_cart: ดูและแก้ไขรถเข็น
         view_more: ดูเพิ่มเติม
-        view_product_details: 'ดูรายละเอียด %product%'
+        view_product_details: ดูรายละเอียด %product%
         void: โมฆะ
         volume_based_pricing: การกำหนดราคาตามปริมาณ
         warning: คำเตือน

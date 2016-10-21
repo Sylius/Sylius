@@ -12,5 +12,5 @@ sylius:
             mismatch: Las contraseñas introducidas no concuerdan.
             wrong_current: La contraseña no coincide con la contraseña actual.
         password:
-            min: 'La contraseña debe tener al menos {{ limit }} caracteres.'
-            max: 'La contraseña no debe de tener más de {{ limit }} caracteres.'
+            min: La contraseña debe tener al menos {{ limit }} caracteres.
+            max: La contraseña no debe de tener más de {{ limit }} caracteres.

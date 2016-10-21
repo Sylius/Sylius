@@ -9,7 +9,6 @@ sylius:
             options: Опцыі
             meta_keywords: Meta keywords
             meta_description: Meta description
-            taxons: Катэгорыі
         product_variant:
             available_on: У наяўнасці з
         association_type:

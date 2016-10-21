@@ -35,7 +35,7 @@ sylius:
             unique: ISO kod (oznaka) države mora biti jedinstvena.
     province:
         code:
-            min_length: 'Kod pokrajine mora sadržavati minimalno 5 znakova|Kod pokrajine mora sadržavati minimalno 5 znakova. '
+            min_length: Kod pokrajine mora sadržavati minimalno 5 znakova|Kod pokrajine mora sadržavati minimalno 5 znakova. 
             not_blank: Unesite kod (oznaku) pokrajine.
             regex: Kod (oznaka) provincije mora biti u formatu XX-XX (npr. US_FL).
             unique: Kod (oznaka) pokrajine mora biti jedinstvena.
@@ -49,7 +49,7 @@ sylius:
             not_blank: Unesite kod područja (zone).
             unique: Kod područja (zone) mora biti jedinstven.
         members:
-            min_count: 'Dodajte barem {{ limit }} člana u područje (zonu).'
+            min_count: Dodajte barem {{ limit }} člana u područje (zonu).
         name:
             max_length: Naziv regije ne smije biti duži od 255 znakova|Naziv regije ne smije biti duži od 255 znakova.
             min_length: Naziv područja (zone) mora sadržavati minimalno 2 znaka|Naziv područja (zone) mora sadržavati minimalno 2 znaka.

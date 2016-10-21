@@ -9,7 +9,7 @@ sylius:
         item_add_error: Er is een fout opgetreden bij het toevoegen van een product aan het winkelwagentje.
         item_remove_completed: Product is verwijderd uit het winkelwagentje.
         item_remove_error: Er is een fout opgetreden bij het verwijderen van een product uit het winkelwagentje.
-        restricted_zone_removal: 'Product %product% verwijderd uit winkelwagentje aangezien deze niet beschikbaar is in uw land.'
+        restricted_zone_removal: Product %product% verwijderd uit winkelwagentje aangezien deze niet beschikbaar is in uw land.
     checkout:
         restricted_zone: Dit product is niet beschikbaar in uw land.
         success: Bedankt voor uw bestelling!
@@ -18,4 +18,4 @@ sylius:
         new: Je betaling is nieuw.
         failed: Uw betaling is afgewezen.
         unknown: Onbekende betalingsfout.
-        out_of_stock: 'Er zijn slechts %quantity% van %name% op voorraad.'
+        out_of_stock: Er zijn slechts %quantity% van %name% op voorraad.

@@ -11,8 +11,8 @@ sylius:
             unique: Kód produktu musí byť unikátny.
         name:
             not_blank: Prosím, zadajte názov produktu.
-            min_length: 'Názov produktu musí mať aspoň 1 znak. | Názov produktu musí mať aspoň {{ limit }} znakov.'
-            max_length: 'Názov produktu nesmie byť dlhší než 1 znak. | Názov produktu nesmie byť dlhší než {{ limit }} znakov.'
+            min_length: Názov produktu musí mať aspoň 1 znak. | Názov produktu musí mať aspoň {{ limit }} znakov.
+            max_length: Názov produktu nesmie byť dlhší než 1 znak. | Názov produktu nesmie byť dlhší než {{ limit }} znakov.
     variant:
         sku:
             not_blank: Prosím, zadajte skladový kód (SKU) variantu.
@@ -24,10 +24,10 @@ sylius:
             unique: Voľba zo zadaným kódom už existuje.
         name:
             not_blank: Prosím, zadajte názov voľby.
-            min_length: 'Názov voľby musí obsahovať aspoň 1 znak.|Názov voľby musí obsahovať aspoň {{ limit }} znakov.'
-            max_length: 'Názov voľby nesmie byť dlhší ako 1 znak.|Názov voľby nesmie byť dlhší ako {{ limit }} znakov.'
+            min_length: Názov voľby musí obsahovať aspoň 1 znak.|Názov voľby musí obsahovať aspoň {{ limit }} znakov.
+            max_length: Názov voľby nesmie byť dlhší ako 1 znak.|Názov voľby nesmie byť dlhší ako {{ limit }} znakov.
         values:
-            min_count: 'Prosím pridajte aspoň {{ limit }} hodnotu pre voľbu. | Prosím pridajte aspoň {{ limit }} hodnôt pre voľby.'
+            min_count: Prosím pridajte aspoň {{ limit }} hodnotu pre voľbu. | Prosím pridajte aspoň {{ limit }} hodnôt pre voľby.
     option_value:
         code:
             not_blank: Prosím zadajte kód pre hodnotu voľby.

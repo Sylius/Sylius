@@ -6,3 +6,4 @@ sylius:
         attribute:
             code: Codi
             name: Nom
+            type: Tipus

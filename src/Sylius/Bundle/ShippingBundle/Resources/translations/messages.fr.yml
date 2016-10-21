@@ -25,7 +25,7 @@ sylius:
             flexible_rate_configuration:
                 label: Taux variable
                 additional_unit_cost: Surcoût unitaire
-                additional_unit_limit: "Limite d'unités supplémentaires"
+                additional_unit_limit: Limite d'unités supplémentaires
                 first_unit_cost: Premier coût unitaire
             per_unit_rate_configuration:
                 label: Montant forfaitaire par unité

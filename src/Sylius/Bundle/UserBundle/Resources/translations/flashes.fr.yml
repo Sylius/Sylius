@@ -4,7 +4,7 @@
 sylius:
     user:
         email:
-            not_exist: "Cet email n'est associé avec aucun utilisateur."
+            not_exist: Cet email n'est associé avec aucun utilisateur.
         password:
             reset:
                 success: Votre mot de passe a été réinitialisé avec succès !

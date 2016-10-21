@@ -9,7 +9,7 @@ sylius:
             choices: Выбор
             code: Код
             name: Название
-            translations: ﻿Переводы
+            translations: '﻿Переводы'
             type: Тип
         attribute_type:
             checkbox: Флажок

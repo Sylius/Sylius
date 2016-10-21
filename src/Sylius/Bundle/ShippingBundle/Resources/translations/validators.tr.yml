@@ -4,8 +4,8 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'Kategori adı en fazla {{ limit }} karakter olabilir.'
-            min_length: 'Kategori ad en az {{ limit }} karakter uzunluğunda olmalıdır.'
+            max_length: Kategori adı en fazla {{ limit }} karakter olabilir.
+            min_length: Kategori ad en az {{ limit }} karakter uzunluğunda olmalıdır.
             not_blank: Lütfen kargo kategorisi adı giriniz.
     shipping_method:
         calculator:
@@ -13,6 +13,6 @@ sylius:
             min_length: sylius.kargo_hesaplama metodu_minumum_uzunluk
             not_blank: sylius.kargo_hesaplama.metodu.boş_değil
         name:
-            max_length: 'Kargo yönteminin adı {{ limit }} karakterden daha uzun olamaz.'
-            min_length: 'Kargo yönteminin adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
+            max_length: Kargo yönteminin adı {{ limit }} karakterden daha uzun olamaz.
+            min_length: Kargo yönteminin adı en az {{ limit }} karakter uzunluğunda olmalıdır.
             not_blank: Lütfen kargo yönteminin adını giriniz.

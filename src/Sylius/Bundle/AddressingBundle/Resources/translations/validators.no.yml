@@ -35,7 +35,7 @@ sylius:
             not_blank: Vennligst oppgi navn på fylket.
     zone:
         members:
-            min_count: 'Legg til minst {{ limit }} sone-medlemmer.'
+            min_count: Legg til minst {{ limit }} sone-medlemmer.
         name:
             max_length: Sonenavn kan ikke være lengre enn 255 tegn|Sonenavn kan ikke være lengre enn 255 tegn.
             not_blank: Vennligst oppgi sonenavn.

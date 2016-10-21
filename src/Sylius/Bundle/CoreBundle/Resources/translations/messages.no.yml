@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Enhetspris
-                quantity: Antall
-                variant: Variant
         block:
             body: Kropp
             id: ID
@@ -19,6 +14,9 @@ sylius:
                 different_billing_address: Bruk annen adresse for fakturering?
             payment_method: Betalingsmetode
             shipping_method: Fraktalternativ
+        promotion_action:
+            add_product_configuration:
+                product: Produkt
         group:
             name: Navn
             roles: Roller
@@ -105,10 +103,6 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Antall
-            taxon:
-                taxons: Taksonomier
-            total_of_items_from_taxon:
-                amount: Beløp
     installer:
         extensions:
             header: Utvidelser
@@ -117,7 +111,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Installere og aktivere %extension% utvidelsen.'
+            help: Installere og aktivere %extension% utvidelsen.
             iconv: Iconv
             icu: ICU
             intl: Intl
