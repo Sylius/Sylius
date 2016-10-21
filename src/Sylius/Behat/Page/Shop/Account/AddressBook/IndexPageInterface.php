@@ -34,7 +34,7 @@ interface IndexPageInterface extends SymfonyPageInterface
     /**
      * @return bool
      */
-    public function hasNoExistingAddressesMessage();
+    public function hasNoAddresses();
 
     /**
      * @param string $fullName

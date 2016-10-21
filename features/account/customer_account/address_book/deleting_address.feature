@@ -1,5 +1,5 @@
-@customer_account
-Feature: Deleting an address from my book
+@address_book
+Feature: Removing an address from my book
     In order to have only relevant addresses in my address book
     As a Customer
     I want to be able to remove an address
@@ -7,11 +7,11 @@ Feature: Deleting an address from my book
     Background:
         Given the store operates on a single channel in "United States"
         And I am a logged in customer
-        And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" in address book
+        And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
 
     @ui
     Scenario:
-        When I browse my addresses
+        When I browse my address book
         And I delete the "Lucifer Morningstar" address
         Then I should be notified that it has been successfully deleted
-        And I should see information about no existing addresses
+        And There should be no addresses

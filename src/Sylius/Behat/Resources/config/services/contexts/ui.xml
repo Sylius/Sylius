@@ -290,6 +290,11 @@
             <argument type="service" id="sylius.behat.page.shop.account.change_password" />
             <argument type="service" id="sylius.behat.page.shop.account.order.index" />
             <argument type="service" id="sylius.behat.page.shop.account.order.show" />
+            <argument type="service" id="sylius.behat.notification_checker" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.ui.shop.address_book" class="Sylius\Behat\Context\Ui\Shop\AddressBookContext" scope="scenario">
             <argument type="service" id="sylius.behat.page.shop.account.address_book.index" />
             <argument type="service" id="sylius.behat.page.shop.account.address_book.create" />
             <argument type="service" id="sylius.behat.notification_checker" />

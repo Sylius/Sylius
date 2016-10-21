@@ -28,8 +28,8 @@ class AddressRepository extends EntityRepository implements AddressRepositoryInt
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.customer', 'customer')
-            ->where('customer.id = :customer_id')
-            ->setParameter('customer_id', $customer->getId())
+            ->where('customer = :customer')
+            ->setParameter('customer', $customer)
             ->getQuery()
             ->getResult()
         ;
@@ -42,9 +42,9 @@ class AddressRepository extends EntityRepository implements AddressRepositoryInt
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.customer', 'customer')
-            ->where('customer.id = :customer_id')
+            ->where('customer = :customer')
             ->andWhere('o.id = :id')
-            ->setParameter('customer_id', $customer->getId())
+            ->setParameter('customer', $customer)
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()

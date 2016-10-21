@@ -13,11 +13,12 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -186,16 +187,18 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given /^I have an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") in address book$/
+     * @Given /^(I) have an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in my address book$/
      */
-    public function iHaveAnAddressInAddressBook(AddressInterface $address)
+    public function iHaveAnAddressInAddressBook(ShopUserInterface $user, AddressInterface $address)
     {
-        $user = $this->sharedStorage->get('user');
-        $this->thisCustomerHasAnAddressInAddressBook($user->getCustomer(), $address);
+        /** @var CustomerInterface $customer */
+        $customer = $user->getCustomer();
+
+        $this->thisCustomerHasAnAddressInAddressBook($customer, $address);
     }
 
     /**
-     * @Given /^(this customer) has an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") in address book$/
+     * @Given /^(this customer) has an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in their address book$/
      */
     public function thisCustomerHasAnAddressInAddressBook(CustomerInterface $customer, AddressInterface $address)
     {

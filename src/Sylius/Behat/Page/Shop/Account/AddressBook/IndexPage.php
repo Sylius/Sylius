@@ -47,7 +47,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasNoExistingAddressesMessage()
+    public function hasNoAddresses()
     {
         return false !== strpos($this->getElement('no_addresses_message' )->getText(), 'no addresses to display');
     }
