@@ -238,6 +238,7 @@ sylius:
         edit_product: Edit product
         edit_product_attribute: Edit product attribute
         edit_product_option: Edit product option
+        edit_product_review: Edit product review
         edit_product_variant: Edit product variant
         edit_promotion: Edit promotion
         edit_promotion_coupon: Edit promotion coupon
@@ -409,6 +410,7 @@ sylius:
         manage_products: 'Manage products'
         manage_promotions: 'Manage promotions'
         manage_reviews: 'Manage reviews'
+        manage_reviews_of_your_products: Manage reviews of your products
         manage_shipments: 'Manage shipments'
         manage_shipping_categories: 'Manage shipping categories'
         manage_shipping_destinations: Manage shipping destinations
