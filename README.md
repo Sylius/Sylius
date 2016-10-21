@@ -24,7 +24,7 @@ Installation
 
 ```bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project sylius/sylius-standard app
+$ php composer.phar create-project -s alpha sylius/sylius-standard app
 $ cd app
 $ npm install
 $ npm run gulp
