@@ -117,6 +117,11 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.ui.admin.managing_product_association_types" class="Sylius\Behat\Context\Ui\Admin\ManagingProductAssociationTypesContext" scope="scenario">
+            <argument type="service" id="sylius.behat.page.admin.product_association_type.index" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.managing_product_attributes" class="Sylius\Behat\Context\Ui\Admin\ManagingProductAttributesContext" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.product_attribute.create" />
             <argument type="service" id="sylius.behat.page.admin.product_attribute.index" />

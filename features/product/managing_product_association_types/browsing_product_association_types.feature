@@ -1,4 +1,4 @@
-@managing_product_association_type
+@managing_product_association_types
 Feature: Browsing product association types
     In order to see all product association types in the store
     As an Administrator
