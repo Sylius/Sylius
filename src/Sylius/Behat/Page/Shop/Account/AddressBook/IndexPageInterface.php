@@ -20,16 +20,16 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 interface IndexPageInterface extends SymfonyPageInterface
 {
     /**
-     * @return bool
+     * @return int
      */
-    public function isSingleAddressOnList();
+    public function getAddressesCount();
 
     /**
      * @param string $fullName
      * 
      * @return bool
      */
-    public function hasAddressFullName($fullName);
+    public function hasAddressOf($fullName);
 
     /**
      * @return bool

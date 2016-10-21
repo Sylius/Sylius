@@ -31,15 +31,15 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isSingleAddressOnList()
+    public function getAddressesCount()
     {
-        return 1 === count($this->getElement('addresses')->findAll('css', 'address'));
+        return count($this->getElement('addresses')->findAll('css', 'address'));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasAddressFullName($fullName)
+    public function hasAddressOf($fullName)
     {
         return null !== $this->getAddressOf($fullName);
     }

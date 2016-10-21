@@ -64,6 +64,30 @@ final class AddressBookContext implements Context
     }
 
     /**
+     * @Given I want to add a new address to my address book
+     */
+    public function iWantToAddANewAddressToMyAddressBook()
+    {
+        $this->addressBookCreatePage->open();
+    }
+
+    /**
+     * @When /^I specify the (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     */
+    public function iSpecifyItsDataAs(AddressInterface $address)
+    {
+        $this->addressBookCreatePage->fillAddressData($address);
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt()
+    {
+        $this->addressBookCreatePage->saveAddress();
+    }
+
+    /**
      * @When I delete the :fullName address
      */
     public function iDeleteTheAddress($fullname)
@@ -84,10 +108,7 @@ final class AddressBookContext implements Context
      */
     public function iShouldSeeASingleAddressInTheList()
     {
-        Assert::true(
-            $this->addressBookIndexPage->isSingleAddressOnList(),
-            'There should be one address on the list, but it does not.'
-        );
+        $this->assertAddressesCountOnPage(1);
     }
 
     /**
@@ -97,7 +118,7 @@ final class AddressBookContext implements Context
     public function thisAddressShouldHavePersonFirstNameAndLastName($fullName)
     {
         Assert::true(
-            $this->addressBookIndexPage->hasAddressFullName($fullName),
+            $this->addressBookIndexPage->hasAddressOf($fullName),
             sprintf('An address of "%s" should be on the list.', $fullName)
         );
     }
@@ -119,25 +140,19 @@ final class AddressBookContext implements Context
     public function iShouldNotSeeAddressOf($fullName)
     {
         Assert::false(
-            $this->addressBookIndexPage->hasAddressFullName($fullName),
+            $this->addressBookIndexPage->hasAddressOf($fullName),
             sprintf('The address of "%s" should not be on the list.', $fullName)
         );
     }
 
     /**
-     * @Given I want to add a new address to my address book
+     * @Then /^I should(?:| still) have (\d+) address(?:|es) in my address book$/
      */
-    public function iWantToAddANewAddressToMyAddressBook()
+    public function iShouldHaveAddresses($count)
     {
-        $this->addressBookCreatePage->open();
-    }
+        $this->addressBookIndexPage->open();
 
-    /**
-     * @When /^I specify the (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     */
-    public function iSpecifyItsDataAs(AddressInterface $address)
-    {
-        $this->addressBookCreatePage->fillAddressData($address);
+        $this->assertAddressesCountOnPage((int) $count);
     }
 
     /**
@@ -149,10 +164,22 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @When I add it
+     * @param int $expectedCount
+     *
+     * @throws \InvalidArgumentException
      */
-    public function iAddIt()
+    private function assertAddressesCountOnPage($expectedCount)
     {
-        $this->addressBookCreatePage->saveAddress();
+        $actualCount = $this->addressBookIndexPage->getAddressesCount();
+
+        Assert::same(
+            $expectedCount,
+            $actualCount,
+            sprintf(
+                'There should be %d addresses on the list, but %d addresses has been found.',
+                $expectedCount,
+                $actualCount
+            )
+        );
     }
 }
