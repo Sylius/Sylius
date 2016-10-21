@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
+use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Taxon\ShowPageInterface as TaxonShowPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -37,15 +38,23 @@ final class ProductContext implements Context
     private $taxonShowPage;
 
     /**
+     * @var IndexPageInterface
+     */
+    private $productReviewsIndexPage;
+
+    /**
      * @param ShowPageInterface $showPage
      * @param TaxonShowPageInterface $taxonShowPage
+     * @param IndexPageInterface $productReviewsIndexPage
      */
     public function __construct(
         ShowPageInterface $showPage,
-        TaxonShowPageInterface $taxonShowPage
+        TaxonShowPageInterface $taxonShowPage,
+        IndexPageInterface $productReviewsIndexPage
     ) {
         $this->showPage = $showPage;
         $this->taxonShowPage = $taxonShowPage;
+        $this->productReviewsIndexPage = $productReviewsIndexPage;
     }
 
     /**
@@ -310,6 +319,73 @@ final class ProductContext implements Context
             $actualName,
             $name,
             sprintf('Expected first product\'s name to be "%s", but it is "%s".', $name, $actualName)
+        );
+    }
+
+    /**
+     * @Then I should see :count product reviews
+     */
+    public function iShouldSeeProductReviews($count)
+    {
+        Assert::same(
+            (int) $count,
+            $this->showPage->countReviews(),
+            'Product has %2$s reviews, but should have %s.'
+        );
+    }
+
+    /**
+     * @Then I should see reviews titled :firstReview, :secondReview and :thirdReview
+     */
+    public function iShouldSeeReviewsTitled(...$reviews)
+    {
+        foreach ($reviews as $review) {
+            Assert::true(
+                $this->showPage->hasReviewTitled($review),
+                sprintf('Product should have review titled "%s" but it does not.', $review)
+            );
+        }
+    }
+
+    /**
+     * @Then I should not see review titled :title
+     */
+    public function iShouldNotSeeReviewTitled($title)
+    {
+        Assert::false(
+            $this->showPage->hasReviewTitled($title),
+            sprintf('Product should not have review titled "%s" but it does.', $title)
+        );
+    }
+
+    /**
+     * @When /^I check (this product)'s reviews$/
+     */
+    public function iCheckThisProductSReviews(ProductInterface $product)
+    {
+        $this->productReviewsIndexPage->open(['slug' => $product->getSlug()]);
+    }
+
+    /**
+     * @Then I should see :count product reviews in the list
+     */
+    public function iShouldSeeProductReviewsInTheList($count)
+    {
+        Assert::same(
+            (int) $count,
+            $this->productReviewsIndexPage->countReviews(),
+            'Product has %2$s reviews in the list, but should have %s.'
+        );
+    }
+
+    /**
+     * @Then I should not see review titled :title in the list
+     */
+    public function iShouldNotSeeReviewTitledInTheList($title)
+    {
+        Assert::false(
+            $this->productReviewsIndexPage->hasReviewTitled($title),
+            sprintf('Product should not have review titled "%s" but it does.', $title)
         );
     }
 }
