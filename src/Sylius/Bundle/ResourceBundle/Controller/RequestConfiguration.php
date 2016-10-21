@@ -90,6 +90,23 @@ class RequestConfiguration
     }
 
     /**
+     * @return integer
+     */
+    public function getResponseCode()
+    {
+        $responseCode = $this->parameters->get('response_code');
+
+        if (is_array($responseCode)) {
+            $controller = $this->request->attributes->get('_controller');
+            if (preg_match('/^.+\:(.+)Action$/i', $controller, $matches)) {
+                return $responseCode[$matches['1']];
+            }
+        }
+
+        return $responseCode;
+    }
+
+    /**
      * @param $name
      *
      * @return null|string
@@ -516,7 +533,7 @@ class RequestConfiguration
     }
 
     /**
-     * @param array  $parameters
+     * @param array $parameters
      * @param object $resource
      *
      * @return array
