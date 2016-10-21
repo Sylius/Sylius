@@ -22,3 +22,7 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
+            actions:
+                main:
+                    create:
+                        type: create

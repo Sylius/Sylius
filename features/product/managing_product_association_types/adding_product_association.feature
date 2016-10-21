@@ -7,7 +7,7 @@ Feature: Adding a new product association type
     Background:
         Given I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Adding a new product association type
         When I want to create a new product association type
         And I specify its code as "cross_sell"
