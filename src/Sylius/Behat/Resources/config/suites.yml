@@ -41,6 +41,7 @@ imports:
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/product/managing_product_attributes.yml
     - suites/ui/product/managing_product_options.yml
+    - suites/ui/product/managing_product_reviews.yml
     - suites/ui/product/managing_product_variants.yml
     - suites/ui/product/managing_products.yml
     - suites/ui/product/viewing_products.yml
