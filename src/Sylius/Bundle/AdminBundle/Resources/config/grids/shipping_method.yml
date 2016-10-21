@@ -9,11 +9,15 @@ sylius_grid:
                         method: createListQueryBuilder
                         arguments: ["%locale%"]
             sorting:
-                code: asc
+                position: asc
             fields:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
+                position:
+                    type: string # not even used
+                    enabled: false
                     sortable: ~
                 name:
                     type: string

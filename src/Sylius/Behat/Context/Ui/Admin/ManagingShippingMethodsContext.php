@@ -100,6 +100,15 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I specify its position as :position
+     * @When I do not specify its position
+     */
+    public function iSpecifyItsPositionAs($position = null)
+    {
+        $this->createPage->specifyPosition($position);
+    }
+
+    /**
      * @When I name it :name in :language
      * @When I rename it to :name in :language
      */
@@ -315,12 +324,28 @@ final class ManagingShippingMethodsContext implements Context
      */
     public function theFirstShippingMethodOnTheListShouldHave($field, $value)
     {
-        $actualValue = $this->indexPage->getColumnFields($field)[0];
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = reset($fields);
 
         Assert::same(
             $actualValue,
             $value,
             sprintf('Expected first shipping method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @Then the last shipping method on the list should have :field :value
+     */
+    public function theLastShippingMethodOnTheListShouldHave($field, $value)
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = end($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected last shipping method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
         );
     }
 

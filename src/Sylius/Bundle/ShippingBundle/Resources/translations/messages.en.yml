@@ -61,4 +61,5 @@ sylius:
             name: Name
             tax_category: Tax category
             translations: Translations
+            position: Position
 

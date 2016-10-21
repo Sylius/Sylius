@@ -1,5 +1,5 @@
 @managing_shipping_methods
-Feature: Sorting listed shipping methods
+Feature: Sorting listed shipping methods by name or code
     In order to change the order by which shipping methods are displayed
     As an Administrator
     I want to sort shipping methods
@@ -16,15 +16,17 @@ Feature: Sorting listed shipping methods
         And I am logged in as an administrator
 
     @ui
-    Scenario: Shipping methods are sorted by code in ascending order by default
-        When I am browsing shipping methods
+    Scenario: Shipping methods can be sorted by code in ascending order
+        Given I am browsing shipping methods
+        When I start sorting shipping methods by code
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have code "aerial"
 
     @ui
     Scenario: Changing the order of sorting by code
         Given I am browsing shipping methods
-        When I switch the way shipping methods are sorted by code
+        When I start sorting shipping methods by code
+        And I switch the way shipping methods are sorted by code
         Then I should see 3 shipping methods in the list
         And the first shipping method on the list should have code "marine"
 

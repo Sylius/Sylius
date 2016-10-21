@@ -26,6 +26,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function specifyPosition($position)
+    {
+        $this->getDocument()->fillField('Position', $position);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function nameIt($name, $language)
     {
         $this->getDocument()->fillField(sprintf('sylius_shipping_method_translations_%s_name', $language), $name);
@@ -53,7 +61,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      * {@inheritdoc}
      */
     public function chooseZone($name)
-    {        
+    {
         $this->getDocument()->selectFieldOption('Zone', $name);
     }
 
@@ -61,7 +69,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      * {@inheritdoc}
      */
     public function chooseCalculator($name)
-    {        
+    {
         $this->getDocument()->selectFieldOption('Calculator', $name);
     }
 

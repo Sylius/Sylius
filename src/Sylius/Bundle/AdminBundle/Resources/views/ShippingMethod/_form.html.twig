@@ -2,8 +2,9 @@
     <div class="column">
         <div class="ui segment">
             {{ form_errors(form) }}
-            <div class="two fields">
+            <div class="three fields">
                 {{ form_row(form.code) }}
+                {{ form_row(form.position) }}
                 {{ form_row(form.zone) }}
             </div>
             {{ form_row(form.enabled) }}

@@ -57,50 +57,6 @@ final class ShippingMethodTypeSpec extends ObjectBehavior
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_builds_form_with_proper_fields(FormBuilder $builder, ServiceRegistryInterface $calculatorRegistry)
-    {
-        $calculatorRegistry->all()->willReturn([]);
-
-        $builder
-            ->addEventSubscriber(Argument::type(BuildShippingMethodFormSubscriber::class))
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('translations', 'sylius_translations', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('category', 'sylius_shipping_category_choice', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('categoryRequirement', 'choice', Argument::type('array'))
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('calculator', 'sylius_shipping_calculator_choice', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('enabled', 'checkbox', Argument::any())
-            ->willReturn($builder)
-        ;
-
-        $builder->setAttribute(Argument::any(), Argument::any())->shouldBeCalled();
-
-        $this->buildForm($builder, []);
-    }
-
     function it_adds_build_shipping_method_event_subscriber(
         FormBuilder $builder,
         ServiceRegistryInterface $calculatorRegistry

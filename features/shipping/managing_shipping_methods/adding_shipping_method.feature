@@ -13,6 +13,7 @@ Feature: Adding a new shipping method
     Scenario: Adding a new shipping method with flat rate per shipment
         Given I want to create a new shipping method
         When I specify its code as "FED_EX_CARRIER"
+        And I specify its position as 0
         And I name it "FedEx Carrier" in "English (United States)"
         And I define it for the "United States" zone
         And I choose "Flat rate per shipment" calculator

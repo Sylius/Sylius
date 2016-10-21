@@ -44,6 +44,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
             ->andWhere('o.zone IN (:zones)')
             ->setParameter('channelShippingMethods', $channel->getShippingMethods()->toArray())
             ->setParameter('zones', $zones)
+            ->orderBy('o.position', 'asc')
             ->getQuery()
             ->getResult()
         ;

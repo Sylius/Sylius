@@ -302,14 +302,36 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should not be able to select :shippingMethod shipping method
+     * @Then I should not be able to select :shippingMethodName shipping method
      */
-    public function iShouldNotBeAbleToSelectShippingMethod($shippingMethod)
+    public function iShouldNotBeAbleToSelectShippingMethod($shippingMethodName)
     {
         Assert::false(
-            $this->selectShippingPage->hasShippingMethod($shippingMethod),
-            sprintf('Shipping method "%s" should not be available but it does.', $shippingMethod)
+            in_array($shippingMethodName, $this->selectShippingPage->getShippingMethods(), true),
+            sprintf('Shipping method "%s" should not be available but it does.', $shippingMethodName)
         );
+    }
+
+    /**
+     * @Then I should have :shippingMethodName shipping method available as the first choice
+     */
+    public function iShouldHaveShippingMethodAvailableAsFirstChoice($shippingMethodName)
+    {
+        $shippingMethods = $this->selectShippingPage->getShippingMethods();
+        $firstShippingMethod = reset($shippingMethods);
+
+        Assert::same($shippingMethodName, $firstShippingMethod);
+    }
+
+    /**
+     * @Then I should have :shippingMethodName shipping method available as the last choice
+     */
+    public function iShouldHaveShippingMethodAvailableAsLastChoice($shippingMethodName)
+    {
+        $shippingMethods = $this->selectShippingPage->getShippingMethods();
+        $lastShippingMethod = end($shippingMethods);
+
+        Assert::same($shippingMethodName, $lastShippingMethod);
     }
 
     /**
