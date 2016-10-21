@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\Shop\Account\AddressBook\IndexPageInterface as AddressBookIndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
@@ -55,6 +56,11 @@ final class AccountContext implements Context
     private $orderShowPage;
 
     /**
+     * @var AddressBookIndexPageInterface
+     */
+    private $addressBookIndexPage;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -65,6 +71,7 @@ final class AccountContext implements Context
      * @param ChangePasswordPageInterface $changePasswordPage
      * @param IndexPageInterface $orderIndexPage
      * @param ShowPageInterface $orderShowPage
+     * @param AddressBookIndexPageInterface $addressBookIndexPage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -73,6 +80,7 @@ final class AccountContext implements Context
         ChangePasswordPageInterface $changePasswordPage,
         IndexPageInterface $orderIndexPage,
         ShowPageInterface $orderShowPage,
+        AddressBookIndexPageInterface $addressBookIndexPage,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->dashboardPage = $dashboardPage;
@@ -80,6 +88,7 @@ final class AccountContext implements Context
         $this->changePasswordPage = $changePasswordPage;
         $this->orderIndexPage = $orderIndexPage;
         $this->orderShowPage = $orderShowPage;
+        $this->addressBookIndexPage = $addressBookIndexPage;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -379,7 +388,7 @@ final class AccountContext implements Context
         Assert::same(
             (int) $numberOfItems,
             $this->orderShowPage->countItems(),
-            '%s items should appear on order page, but %s rows has been found'
+            '%s items should appear on order page, but %s rows has been found.'
         );
     }
 
@@ -421,7 +430,7 @@ final class AccountContext implements Context
     {
         Assert::true(
             $this->profileUpdatePage->isSubscribedToTheNewsletter(),
-            'I should be subscribed to the newsletter, but I am not'
+            'I should be subscribed to the newsletter, but I am not.'
         );
     }
 
@@ -444,6 +453,74 @@ final class AccountContext implements Context
         Assert::true(
             $this->orderShowPage->hasBillingProvinceName($provinceName),
             sprintf('Cannot find shipping address with province %s', $provinceName)
+        );
+    }
+
+    /**
+     * @When I browse my addresses
+     */
+    public function iBrowseMyAddresses()
+    {
+        $this->addressBookIndexPage->open();
+    }
+
+    /**
+     * @When I delete the :fullName address
+     */
+    public function iDeleteTheAddress($fullname)
+    {
+        $this->addressBookIndexPage->deleteAddress($fullname);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedAboutSuccessfulDelete()
+    {
+        $this->notificationChecker->checkNotification('Address has been successfully deleted.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should see a single address in the list
+     */
+    public function iShouldSeeASingleAddressInTheList()
+    {
+       Assert::true(
+           $this->addressBookIndexPage->isSingleAddressOnList(),
+           'There should be one address on the list, but it does not.'
+       );
+    }
+
+    /**
+     * @Then this address should be assigned to :fullName
+     */
+    public function thisAddressShouldHavePersonFirstNameAndLastName($fullName)
+    {
+        Assert::true(
+            $this->addressBookIndexPage->hasAddressFullName($fullName),
+            sprintf('The full name in address should be %s, but it does not.', $fullName)
+        );
+    }
+
+    /**
+     * @Then I should see information about no existing addresses
+     */
+    public function iShouldSeeInformationAboutNoExistingAddresses()
+    {
+        Assert::true(
+            $this->addressBookIndexPage->hasNoExistingAddressesMessage(),
+            'There should be information about no existing addresses, but it does not.'
+        );
+    }
+
+    /**
+     * @Then I should not see an address assigned to :fullName
+     */
+    public function iShouldNotSeeAnAddressAssignedTo($fullName)
+    {
+        Assert::false(
+            $this->addressBookIndexPage->hasAddressFullName($fullName),
+            sprintf('The full name in address should not be %s, but it does.', $fullName)
         );
     }
 

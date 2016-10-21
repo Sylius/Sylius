@@ -5,8 +5,9 @@ sylius:
     menu:
         shop:
             account:
-                header: Your account
-                dashboard: Dashboard
-                personal_information: Personal information
-                change_password: Change password
-                order_history: Order history
+                address_book: 'Address book'
+                change_password: 'Change password'
+                dashboard: 'Dashboard'
+                header: 'Your account'
+                order_history: 'Order history'
+                personal_information: 'Personal information'
