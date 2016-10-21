@@ -118,6 +118,19 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
+     * @When I delete the :productAssociationType product association type
+     */
+    public function iDeleteTheProductAssociationType(AssociationTypeInterface $productAssociationType)
+    {
+        $this->iWantToBrowseProductAssociationTypes();
+
+        $this->indexPage->deleteResourceOnPage([
+            'code' => $productAssociationType->getCode(),
+            'name' => $productAssociationType->getName(),
+        ]);
+    }
+
+    /**
      * @Then I should see :amount product association types in the list
      */
     public function iShouldSeeCustomerGroupsInTheList($amount)
@@ -187,6 +200,24 @@ final class ManagingProductAssociationTypesContext implements Context
         Assert::true(
             $this->updatePage->isCodeDisabled(),
             'Code field should be disabled'
+        );
+    }
+
+    /**
+     * @Then /^(this product association type) should no longer exist in the registry$/
+     */
+    public function thisProductAssociationTypeShouldNoLongerExistInTheRegistry(
+        AssociationTypeInterface $productAssociationType
+    ) {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage([
+                'code' => $productAssociationType->getCode(),
+                'name' => $productAssociationType->getName()]
+            ),
+            sprintf(
+                'Product association type%s should no longer exist in the registry',
+                $productAssociationType->getName()
+            )
         );
     }
 }
