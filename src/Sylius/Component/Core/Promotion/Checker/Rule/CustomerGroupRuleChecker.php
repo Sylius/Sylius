@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Antonio Perić <antonio@locastic.com>
  */
-class CustomerGroupRuleChecker implements RuleCheckerInterface
+final class CustomerGroupRuleChecker implements RuleCheckerInterface
 {
     /**
      * {@inheritdoc}

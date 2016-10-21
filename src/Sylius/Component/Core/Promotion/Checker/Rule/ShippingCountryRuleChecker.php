@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingCountryRuleChecker implements RuleCheckerInterface
+final class ShippingCountryRuleChecker implements RuleCheckerInterface
 {
     const TYPE = 'shipping_country';
 

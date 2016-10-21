@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
+final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
     const TYPE = 'unit_fixed_discount';
 

@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class TaxonRuleChecker implements RuleCheckerInterface
+final class TaxonRuleChecker implements RuleCheckerInterface
 {
     const TYPE = 'taxon';
 
