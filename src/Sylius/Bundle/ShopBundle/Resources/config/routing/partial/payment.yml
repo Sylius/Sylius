@@ -4,7 +4,7 @@ sylius_shop_partial_payment_change_method:
     defaults:
         _controller: sylius.controller.payment:updateAction
         _sylius:
-            template: @SyliusShop/Payment/Partial/_changeMethod.html.twig
+            template: "@SyliusShop/Payment/Partial/_changeMethod.html.twig"
             form: sylius_checkout_payment
             redirect:
                 route: sylius_shop_order_pay

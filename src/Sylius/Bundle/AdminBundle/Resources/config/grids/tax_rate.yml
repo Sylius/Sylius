@@ -26,7 +26,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.amount
                     options:
-                        template: @SyliusAdmin/TaxRate/Grid/Field/amount.html.twig
+                        template: "@SyliusAdmin/TaxRate/Grid/Field/amount.html.twig"
             filters:
                 name:
                     type: string

@@ -7,7 +7,7 @@ sylius_shop_static_content_show:
     defaults:
         _controller: sylius.controller.static_content:showAction
         _sylius:
-            template: @SyliusShop/StaticContent/show.html.twig
+            template: "@SyliusShop/StaticContent/show.html.twig"
             repository:
                 method: findPublishedOneByName
                 arguments: [$name]

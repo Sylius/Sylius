@@ -22,7 +22,7 @@ sylius_shop_order_thank_you:
     defaults:
         _controller: sylius.controller.order:thankYouAction
         _sylius:
-            template: @SyliusShop/Order/thankYou.html.twig
+            template: "@SyliusShop/Order/thankYou.html.twig"
 
 sylius_shop_order_show:
     path: /{tokenValue}
@@ -30,7 +30,7 @@ sylius_shop_order_show:
     defaults:
         _controller: sylius.controller.order:showAction
         _sylius:
-            template: @SyliusShop/Order/show.html.twig
+            template: "@SyliusShop/Order/show.html.twig"
             repository:
                 method: findOneBy
                 arguments: [tokenValue: $tokenValue]

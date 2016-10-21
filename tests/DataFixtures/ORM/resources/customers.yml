@@ -3,7 +3,7 @@ Sylius\Component\Core\Model\ShopUser:
         plainPassword: '123pa$$word'
         roles: [ROLE_USER]
         enabled: true
-        customer: @customer_<current()>
+        customer: "@customer_<current()>"
         username: <current()>@doe.com
         usernameCanonical: <current()>@doe.com
 
