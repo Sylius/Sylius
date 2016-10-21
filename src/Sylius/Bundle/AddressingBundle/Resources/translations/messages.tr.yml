@@ -21,6 +21,7 @@ sylius:
             enabled: Etkin
         province:
             name: Ad
+            abbreviation: Kısaltma
             select: Seçiniz
         zone:
             add_member: Üye ekle

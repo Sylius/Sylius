@@ -5,15 +5,15 @@ sylius:
     attribute:
         name:
             not_blank: Įveskite atributo pavadinimą.
-            min_length: 'Atributo pavadinimas turi būti ne mažiau kaip 1 simbolio ilgio.| Atributo pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių ilgio.'
-            max_length: 'Atributo pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Atributo pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.'
+            min_length: Atributo pavadinimas turi būti ne mažiau kaip 1 simbolio ilgio.| Atributo pavadinimas turi būti ne mažiau kaip {{ limit }} simbolių ilgio.
+            max_length: Atributo pavadinimas neturi būti ilgesnis kaip 1 simbolis.|Atributo pavadinimas neturi būti ilgesnis nei {{ limit }} simbolių.
         code:
             not_blank: Įveskite atributo pavadinimą.
             unique: Šis kodas jau naudojamas.
         presentation:
             not_blank: Įveskite atributo prezentaciją.
-            min_length: 'Atributo prezentacija turi būti ne mažiau kaip 1 simbolis.|Atributo prezentacija turi būti ne mažiau kaip {{ limit }} simbolių.'
-            max_length: 'Atributo prezentacija turi būti ne ilgesnė nei 1 simbolis.|Atributo prezentacija turi būti ne ilgesnė nei {{ limit }} simbolių.'
+            min_length: Atributo prezentacija turi būti ne mažiau kaip 1 simbolis.|Atributo prezentacija turi būti ne mažiau kaip {{ limit }} simbolių.
+            max_length: Atributo prezentacija turi būti ne ilgesnė nei 1 simbolis.|Atributo prezentacija turi būti ne ilgesnė nei {{ limit }} simbolių.
     attribute_value:
         attribute:
             not_blank: Pasirinkite atributą.

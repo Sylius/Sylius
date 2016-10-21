@@ -10,7 +10,6 @@ sylius:
             options: Opties
             meta_keywords: Meta sleutelwoorden
             meta_description: Meta omschrijving
-            taxons: Taxons
         product_variant:
             available_on: Beschikbaar vanaf
             available_until: Beschikbaar tot

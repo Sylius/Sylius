@@ -10,7 +10,7 @@ sylius:
             options: آپشن ها
             meta_keywords: کلمات کلیدی
             meta_description: توضیحات سئو
-            taxons: رده ها
+            taxons: دسته بندی ها
         product_variant:
             available_on: تاریخ فعال شدن
             available_until: در دسترس تا

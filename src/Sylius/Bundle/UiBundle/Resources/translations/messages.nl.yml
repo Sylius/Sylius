@@ -170,7 +170,7 @@ sylius:
         creating_route: Route creëren
         creation_date: Aangemaakt op
         creation_time: Aanmaakdatum
-        currencies: "Valuta's"
+        currencies: Valuta's
         currency: Valuta
         current_orders: Huidige bestellingen
         current_password: Huidig wachtwoord
@@ -187,7 +187,7 @@ sylius:
         customer_orders: Klantorders
         customer_since: Klant sinds
         customers: Klanten
-        customers_list_of_all_customers_in_store: 'Klanten een <small>lijst van alle klanten in de winkel</small>'
+        customers_list_of_all_customers_in_store: Klanten een <small>lijst van alle klanten in de winkel</small>
         customize_default_metadata: Aanpassen van de standaard metadata
         customize_metadata: Aanpassen van metagegevens
         customize_products_metadata: Aanpassen van producten metagegevens
@@ -202,7 +202,7 @@ sylius:
         delete: Verwijderen
         delete_image: Verwijder Afbeelding
         deleted: Verwijderd
-        delivery_and_shipping: 'Verzending & Levering'
+        delivery_and_shipping: Verzending & Levering
         description: Omschrijving
         details: Details
         disable: Uitschakelen
@@ -285,7 +285,6 @@ sylius:
         exclusive: Exclusief
         existing_customer: Bestaande klant
         expiration_and_usage_limits: Vervaldatum en gebruiksbeperkingen
-        expires_at: Verloopt op
         extra_information: Extra informatie
         extra_notes: Extra opmerkingen
         failed: Mislukt
@@ -308,7 +307,7 @@ sylius:
         guest_customer: Gast klant
         have_an_account_already: Je hebt reeds een account
         hello: Hallo
-        hello_name: 'Hallo <b>%name%</b>'
+        hello_name: Hallo <b>%name%</b>
         hide_deleted: Verberg verwijderd
         home: Home
         hostname: Hostnaam
@@ -325,7 +324,7 @@ sylius:
         info: Info
         information: Informatie
         inventory: Locaties
-        inventory_here_you_can_see_current_stock_levels: 'Voorraad<small>Hier kunt u de huidige voorraadniveaus zien</small>'
+        inventory_here_you_can_see_current_stock_levels: Voorraad<small>Hier kunt u de huidige voorraadniveaus zien</small>
         inventory_index: Locaties
         inventory_state: Voorraadstatus
         inventory_tracking: Voorraadbeheer
@@ -347,13 +346,13 @@ sylius:
         links: Links
         list_coupons: Lijst van coupons
         list_variants: Varianten
-        locales: "Talen/Regio's"
+        locales: Talen/Regio's
         lock: Vergrendelen
         locked: Vergrendeld
-        logged_in_as: 'Ingelogd als %username%'
+        logged_in_as: Ingelogd als %username%
         login: Inloggen
         login_button: Inloggen
-        login_sylius_store: 'Login <small>Sylius store</small>'
+        login_sylius_store: Login <small>Sylius store</small>
         logout: Uitloggen
         main_taxon: Hoofdcategorie
         manage: Beheer
@@ -365,7 +364,7 @@ sylius:
         manage_configuration_options_of_your_products: Beheer configuratie-opties van uw producten
         manage_countries: Beheer landen
         manage_coupons: Beheer je coupons
-        manage_currencies_available_in_the_store: "Beheer beschikbare valuta's in de winkel"
+        manage_currencies_available_in_the_store: Beheer beschikbare valuta's in de winkel
         manage_customers: Klanten beheren
         manage_discounts_and_promotional_campaigns: Beheer kortingen en promotionele campagnes
         manage_emails: E-mails beheren
@@ -397,7 +396,7 @@ sylius:
         media: Media
         members: Leden
         menu_nodes: Menu items
-        menus: "Menu 's"
+        menus: Menu 's
         message: Bericht
         metadata_index: Metagegevens
         method: Methode
@@ -455,8 +454,8 @@ sylius:
         no_shipping_category: Geen verzendcategorie
         no_shipping_charges: Geen verzendkosten
         no_shipping_methods_available: Er zijn momenteel geen verzend methoden beschikbaar voor je verzendadres
-        no_short_description: '<i>Geen korte omschrijving</i>'
-        no_sku: '<i>Geen SKU</i>'
+        no_short_description: <i>Geen korte omschrijving</i>
+        no_sku: <i>Geen SKU</i>
         no_tax_category: Geen belasting categorie
         no_taxes: Geen belasting toegepast
         no_theme: Geen thema
@@ -489,7 +488,7 @@ sylius:
         out_of_stock: Geen voorraad
         overview_of_your_store: Overzicht van uw winkel
         page: Pagina
-        pages: "Pagina's"
+        pages: Pagina's
         parent: Ouder
         partially_shipped: Gedeeltelijk verzonden
         password: Wachtwoord
@@ -526,15 +525,14 @@ sylius:
         product_association_types: Product relatietypes
         product_associations: Product relaties
         product_attributes: Productattributen
-        product_details_viewing_product_product: 'Product details <small>"<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Product details <small>"<strong>%product%</strong>"</small>
         product_options: Productopties
         product_review: Productbeoordeling
         product_reviews: Productbeoordelingen
         product_variants: Product varianten
-        products: Producten
-        products_categorized_as_name: 'Producten in "%name%"'
-        products_categorized_under_taxon_taxon: 'Producten<small>Gecategoriseerd onder "%taxon%" taxon</small>'
-        products_index_of_all_products_in_your_store: 'Producten <small>Index van alle producten in uw winkel</small>'
+        products_categorized_as_name: Producten in "%name%"
+        products_categorized_under_taxon_taxon: Producten<small>Gecategoriseerd onder "%taxon%" taxon</small>
+        products_index_of_all_products_in_your_store: Producten <small>Index van alle producten in uw winkel</small>
         profile: Profiel
         promotion_configuration: Promotie configuratie
         promotion_coupons: Coupons
@@ -560,7 +558,7 @@ sylius:
         register_button: Registreren
         register_in_the_store: Registreren bij de winkel
         registered_customers: Geregistreerde klanten
-        registration_create_an_account_in_store: 'Registratie <small>Creëer een account in de winkel</small>'
+        registration_create_an_account_in_store: Registratie <small>Creëer een account in de winkel</small>
         registration_date: Aanmelddatum
         release_inventory: Voorraad vrijgeven
         remember_me: Onthoud mijn gegevens
@@ -605,7 +603,7 @@ sylius:
         shipped: Verzonden
         shipping: Verzending
         shipping_address: Bezorgadres
-        shipping_and_payment_methods: 'Verzend- en betaal methoden'
+        shipping_and_payment_methods: Verzend- en betaal methoden
         shipping_categories: Verzendcategorieën
         shipping_category: Verzend categorie
         shipping_charges: Verzendkosten
@@ -623,7 +621,7 @@ sylius:
         show_metadata: Toon metadata
         sign_in: Aanmelden
         sign_in_here: Hier inloggen
-        sign_in_to_the_store_or_create_new_account: 'Inloggen <small>of maak een nieuw account</small>'
+        sign_in_to_the_store_or_create_new_account: Inloggen <small>of maak een nieuw account</small>
         sign_out: Afmelden
         simple_blocks: Eenvoudige blokken
         simple_product: Eenvoudige product
@@ -653,7 +651,6 @@ sylius:
         taxation_settings: Belasting Instellingen
         taxes: Belastingen
         taxonomy: Taxonomie
-        taxons: Taxons
         terms_and_conditions: Algemene Voorwaarden
         thank_you: Bedankt!
         thank_you_for_your_order: Bedankt voor uw bestelling
@@ -663,7 +660,7 @@ sylius:
         there_are_no_channels_configured: Er zijn geen kanalen geconfigureerd
         there_are_no_countries_configured: Er zijn geen landen geconfigureerd
         there_are_no_coupon_to_display: Er zijn geen coupons om weer te geven
-        there_are_no_currencies_to_display: "Er zijn geen valuta's om weer te geven"
+        there_are_no_currencies_to_display: Er zijn geen valuta's om weer te geven
         there_are_no_customers_to_display: Zijn er geen klanten om weer te geven
         there_are_no_emails_configured: Er zijn geen e-mails geconfigureerd
         there_are_no_images_for_this_product: Er zijn geen afbeeldingen voor dit product
@@ -672,11 +669,11 @@ sylius:
         there_are_no_locales_configured: Er zijn geen taalinstellingen geconfigureerd
         there_are_no_logged_events_to_display: Er zijn geen geregistreerde events om weer te geven
         there_are_no_menu_nodes_to_display: Er zijn geen menu nodes om weer te geven
-        there_are_no_menus_to_display: "Er zijn geen menu's om weer te geven"
+        there_are_no_menus_to_display: Er zijn geen menu's om weer te geven
         there_are_no_options_configured: Er zijn geen opties geconfigureerd
         there_are_no_options_for_this_product: Er zijn geen opties voor dit product
         there_are_no_orders_for_this_customer_to_display: Er zijn geen orders voor deze klant om weer te geven
-        there_are_no_pages_to_display: "Er zijn geen pagina's om weer te geven"
+        there_are_no_pages_to_display: Er zijn geen pagina's om weer te geven
         there_are_no_payment_methods_configured: Er zijn geen betaalmethoden geconfigureerd
         there_are_no_payments_configured: Er zijn geen betaalmethoden geconfigureerd
         there_are_no_permissions_defined: Er zijn geen machtigingen gedefinieerd
@@ -725,7 +722,7 @@ sylius:
         user_confirmation_name: Bevestiging van de gebruiker
         user_details: Gebruikersdetails
         username: Gebruikersnaam
-        users_list_of_all_users_registered_in_store: 'Gebruikers <small>Lijst van alle gebruikers in de winkel</small>'
+        users_list_of_all_users_registered_in_store: Gebruikers <small>Lijst van alle gebruikers in de winkel</small>
         values: Waarden
         variant: Variant
         variant_selection_method: Variant selectie methode
@@ -735,7 +732,7 @@ sylius:
         view: Weergave
         view_and_edit_cart: Winkelwagen bekijken en aanpassen
         view_more: Bekijk details
-        view_product_details: 'Bekijk %product% details'
+        view_product_details: Bekijk %product% details
         void: Leeg
         volume_based_pricing: Volume gebaseerde prijzen
         warning: Waarschuwing

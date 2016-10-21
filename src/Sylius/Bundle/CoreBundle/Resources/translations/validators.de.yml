@@ -22,7 +22,7 @@ sylius:
             unique: Locale existiert bereits.
     product_variant:
         onHand:
-            min: 'Menge muss größer sein als {{ limit }}.'
+            min: Menge muss größer sein als {{ limit }}.
             not_blank: Bitte verfügbare Menge eingeben.
         price:
             min: Preis darf nicht negativ sein.
@@ -31,7 +31,7 @@ sylius:
             min: Ursprünglicher Preis darf nicht negativ sein.
     product_translation:
         short_description:
-            max: 'Kurzbeschreibung darf nicht länger als {{ limit }} Zeichen sein.'
+            max: Kurzbeschreibung darf nicht länger als {{ limit }} Zeichen sein.
     user:
         email:
             unique: Diese E-Mail-Adresse wird bereits verwendet.

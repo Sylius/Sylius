@@ -18,4 +18,4 @@ sylius:
         new: Ödemeniz yenidir.
         failed: Ödeme reddedildi.
         unknown: Bilinmeyen ödeme hata.
-        out_of_stock: 'Sadece %quantity% adet %name% stokta var.'
+        out_of_stock: Sadece %quantity% adet %name% stokta var.

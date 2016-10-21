@@ -49,7 +49,7 @@ sylius:
             not_blank: Gelieve een code in te geven voor deze zone.
             unique: De zone code moet uniek zijn.
         members:
-            min_count: 'Voeg minstens {{ limit }} zone leden toe.'
+            min_count: Voeg minstens {{ limit }} zone leden toe.
         name:
             max_length: Zone naam mag niet langer dan 255 tekens zijn|Zone naam mag niet langer dan 255 tekens zijn.
             min_length: Zone naam moet minstens 2 karakters bevatten.

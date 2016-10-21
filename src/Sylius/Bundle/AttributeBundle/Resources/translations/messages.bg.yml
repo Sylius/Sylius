@@ -9,6 +9,7 @@ sylius:
             code: Код
             name: Име
             translations: Преводи
+            type: Тип
         attribute_type:
             checkbox: Отметка
             configuration: Конфигурация

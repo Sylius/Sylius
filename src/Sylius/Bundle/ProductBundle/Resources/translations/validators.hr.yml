@@ -8,8 +8,8 @@ sylius:
             unique: Kod proizvoda mora biti jedinstven.
         name:
             not_blank: Unesite naziv proizvoda.
-            min_length: 'Naziv proizvoda mora imati najmanje jedan znak.|Naziv proizvoda mora imati najmanje {{ limit }} znakova.'
-            max_length: 'Naziv proizvoda ne smije biti duži od jednog znaka.|Naziv proizvoda ne smije biti duži od {{ limit }} znakova.'
+            min_length: Naziv proizvoda mora imati najmanje jedan znak.|Naziv proizvoda mora imati najmanje {{ limit }} znakova.
+            max_length: Naziv proizvoda ne smije biti duži od jednog znaka.|Naziv proizvoda ne smije biti duži od {{ limit }} znakova.
     variant:
         sku:
             not_blank: Unesite alternativni kod proizvoda.
@@ -21,10 +21,10 @@ sylius:
             unique: Opcija s unesenim kodom već postoji.
         name:
             not_blank: Unesite naziv svojstva.
-            min_length: 'Naziv svojstva mora imati najmanje jedan znak.|Naziv svojstva proizvoda mora imati najmanje {{ limit }} znakova.'
-            max_length: 'Naziv svojstva ne smije biti duži od jednog znaka.|Naziv svojstva ne smije biti duži od {{ limit }} znakova.'
+            min_length: Naziv svojstva mora imati najmanje jedan znak.|Naziv svojstva proizvoda mora imati najmanje {{ limit }} znakova.
+            max_length: Naziv svojstva ne smije biti duži od jednog znaka.|Naziv svojstva ne smije biti duži od {{ limit }} znakova.
         values:
-            min_count: 'Unesite barem {{ limit }} opciju artikla.|nesite barem {{ limit }} opciju artikla.'
+            min_count: Unesite barem {{ limit }} opciju artikla.|nesite barem {{ limit }} opciju artikla.
     option_value:
         code:
             not_blank: Unesite vrijednost opcije koda.

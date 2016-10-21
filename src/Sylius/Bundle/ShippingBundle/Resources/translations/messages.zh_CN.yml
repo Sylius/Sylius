@@ -21,7 +21,6 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: 统一费用/每次配送
-                amount: 金额
             flexible_rate_configuration:
                 label: 可变汇率
                 additional_unit_cost: 额外的单位成本
@@ -29,7 +28,6 @@ sylius:
                 first_unit_cost: 第一单位成本
             per_unit_rate_configuration:
                 label: 每个单位的费用
-                amount: 金额
             weight_rate_configuration:
                 label: 基于重量的利率
                 fixed: 固定金额
@@ -37,7 +35,6 @@ sylius:
                 division: 分割
             volume_rate_configuration:
                 label: 基于体积的利率
-                amount: 金额
                 division: 分割
         shipping_category:
             description: 描述

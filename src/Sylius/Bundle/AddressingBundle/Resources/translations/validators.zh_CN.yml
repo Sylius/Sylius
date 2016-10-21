@@ -49,7 +49,7 @@ sylius:
             not_blank: 请输入区号。
             unique: 区域编码必须唯一。
         members:
-            min_count: '请至少添加{{ limit }} 地区会员。'
+            min_count: 请至少添加{{ limit }} 地区会员。
         name:
             max_length: 区域名称不能超过 255 个字符。
             min_length: 区域名称必须是至少 2 个字符长

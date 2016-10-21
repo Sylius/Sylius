@@ -49,7 +49,7 @@ sylius:
             not_blank: Prosimo, vnesite kodo cone.
             unique: Koda cone mora biti edinstvena.
         members:
-            min_count: 'Prosimo, dodajte vsaj {{ limit }} člane cone.'
+            min_count: Prosimo, dodajte vsaj {{ limit }} člane cone.
         name:
             max_length: Ime cone ne sme biti daljše od 255 znakov|Ime cone ne sme biti daljše od 255 znakov.
             min_length: Ime pasu mora biti dolgo vsaj 2 znaka|Ime pasu mora biti dolgo vsaj 2 znaka.

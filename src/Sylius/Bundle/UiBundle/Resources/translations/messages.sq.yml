@@ -45,7 +45,6 @@ sylius:
         administration_panel_login: Login i panelit te administrimit
         all: Të gjitha
         all_your_addresses: Të gjitha adresat e tua
-        amount: Shuma
         an_error_occurred: Ndodhi një gabim
         are_your_sure_you_want_to_perform_this_action: Jeni i sigurte se deshironi te egzekutoni kete veprim?
         association: Lidhje
@@ -98,6 +97,7 @@ sylius:
         contain_variants: Përmban variante
         contains: Përmban
         countries: Vendet
+        country: Shteti
         country_details: Hollësi për vendin
         coupon: Kuponi
         coupon_based: Bazuar në kupon
@@ -164,7 +164,7 @@ sylius:
         customer_notified: Blerësi u njoftua
         customer_orders: Porositë e blerësit
         customers: Blerësit
-        customers_list_of_all_customers_in_store: 'Blerësi <small>Lista e të gjithë blerësve në arkiv </small>'
+        customers_list_of_all_customers_in_store: Blerësi <small>Lista e të gjithë blerësve në arkiv </small>
         customize_default_metadata: Personalizo metadata baze
         customize_metadata: Personalizo metadata
         customize_products_metadata: Personalizo metadata te produktit
@@ -250,7 +250,6 @@ sylius:
         exchange_rate: Norma e shkëmbimit
         exclusive: Ekskluziv
         existing_customer: Blerës ekzistues
-        expires_at: Skadon më
         extra_information: Informacione shtese
         failed: Nuk u krye
         first_name: Emri
@@ -268,7 +267,7 @@ sylius:
         grand_total: Totali
         guest: I ftuar
         guest_customer: Blerës i ftuar
-        hello_name: 'Përshëndetje <b>%name%</b>'
+        hello_name: Përshëndetje <b>%name%</b>
         hide_deleted: Fshihi elementet e fshira
         home: Faqja kryesore
         hostname: Emri i hostit
@@ -284,7 +283,7 @@ sylius:
         info: Info
         information: Informacion
         inventory: Gjendja e magazinës
-        inventory_here_you_can_see_current_stock_levels: 'Inventari <small>Këtu mund të shikosh gjendjet aktuale të magazinës</small>'
+        inventory_here_you_can_see_current_stock_levels: Inventari <small>Këtu mund të shikosh gjendjet aktuale të magazinës</small>
         inventory_index: Gjendja e magazinës
         inventory_state: Gjendja e listës
         inventory_tracking: Gjurmimi i gjendjes së magazinës
@@ -307,10 +306,10 @@ sylius:
         locales: Rajonet
         lock: Kyç
         locked: Kyçur
-        logged_in_as: 'Loguar si %username%'
+        logged_in_as: Loguar si %username%
         login: Futu
         login_button: Futu
-        login_sylius_store: 'Futu <small>Sylius arkiv </small>'
+        login_sylius_store: Futu <small>Sylius arkiv </small>
         logout: Dil
         main_taxon: Tipologjia kryesore
         manage: Kontrollo
@@ -400,7 +399,7 @@ sylius:
         no_results_to_display: Nuk ka rezultate per tu shfaqur
         no_shipping_category: Nuk ka kategori dërgimi
         no_shipping_charges: Nuk ka asnjë pagesë dërgimi
-        no_short_description: '<i>Asnjë përshkrimi i shkurtër</i>'
+        no_short_description: <i>Asnjë përshkrimi i shkurtër</i>
         no_sku: Asnjë SKU
         no_tax_category: Asnjë kategori taksimi
         no_taxes: Nuk zbatohen taksa
@@ -460,14 +459,13 @@ sylius:
         product_association_types: Tipet e lidhjes se produktit
         product_associations: Lidhje produkti
         product_attributes: Atribute të produktit
-        product_details_viewing_product_product: 'Hollësi të produktit <small>Shikim i produktit "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Hollësi të produktit <small>Shikim i produktit "<strong>%product%</strong>"</small>
         product_options: Opsionet e produktit
         product_review: Recensioni i produktit
         product_reviews: Recensionet e produktit
-        products: Produktet
-        products_categorized_as_name: 'Produkte të klasifikuar si "%name%"'
-        products_categorized_under_taxon_taxon: 'Produkte <small>Të kategorizuar nën "%taxon%" tipologjine </small>'
-        products_index_of_all_products_in_your_store: 'Produkte <small>Indeksi i të gjitha produkteve në arkivin tuaj</small>'
+        products_categorized_as_name: Produkte të klasifikuar si "%name%"
+        products_categorized_under_taxon_taxon: Produkte <small>Të kategorizuar nën "%taxon%" tipologjine </small>
+        products_index_of_all_products_in_your_store: Produkte <small>Indeksi i të gjitha produkteve në arkivin tuaj</small>
         profile: Profili
         promotion_configuration: Konfigurimi i promocionit
         promotion_coupons: Kuponat
@@ -490,7 +488,7 @@ sylius:
         refunded: Rimbursuar
         register: Regjistrohu
         register_button: Regjistrohu
-        registration_create_an_account_in_store: 'Regjistrimi <small>Krijo një llogari në arkiv</small>'
+        registration_create_an_account_in_store: Regjistrimi <small>Krijo një llogari në arkiv</small>
         registration_date: Data e regjistrimit
         release_inventory: Lista e daljeve
         remember_me: Më mbaj mend
@@ -542,7 +540,7 @@ sylius:
         show_in_store: Trego në arkiv
         show_metadata: Shfaq metadata
         sign_in: Hyr
-        sign_in_to_the_store_or_create_new_account: 'Futu në arkiv <small> ose krijo llogari të re </small>'
+        sign_in_to_the_store_or_create_new_account: Futu në arkiv <small> ose krijo llogari të re </small>
         sign_out: Dil
         simple_blocks: Blloqe të thjeshta
         sku: SKU
@@ -567,46 +565,46 @@ sylius:
         taxation_categories: Kategoritë e taksimit
         taxation_settings: Parametrat e taksimit
         taxes: Taksat
-        taxons: Kategoritë
+        taxons: Tipologjite
         thank_you_for_your_order: Falmnderit për porosinë
         theme: Tema
         there_are_no_attributes_configured: Nuk ka asnjë atribut të konfiguruar
-        there_are_no_blocks_to_display: "Nuk ka asnjë bllok për t'u shfaqur"
+        there_are_no_blocks_to_display: Nuk ka asnjë bllok për t'u shfaqur
         there_are_no_channels_configured: Nuk ka asnjë kanal të konfiguruar
         there_are_no_countries_configured: Nuk ka asnjë vend të konfiguruar
-        there_are_no_coupon_to_display: "Nuk ka asnjë kupon për t'u shfaqur"
-        there_are_no_currencies_to_display: "Nuk ka asnjë lloj monedhe për t'u shfaqur"
-        there_are_no_customers_to_display: "Nuk ka asnjë blerës për t'u shfaqur"
+        there_are_no_coupon_to_display: Nuk ka asnjë kupon për t'u shfaqur
+        there_are_no_currencies_to_display: Nuk ka asnjë lloj monedhe për t'u shfaqur
+        there_are_no_customers_to_display: Nuk ka asnjë blerës për t'u shfaqur
         there_are_no_emails_configured: Nuk ka asnjë Email të konfiguruar
         there_are_no_images_for_this_product: Nuk ka pamje për këtë produkt
-        there_are_no_inventory_items_to_display: "Nuk ka asnjë artikull inventari për t'u shfaqur"
-        there_are_no_inventory_units_to_display: "Nuk ka njësi të listës për t'u shfaqur"
+        there_are_no_inventory_items_to_display: Nuk ka asnjë artikull inventari për t'u shfaqur
+        there_are_no_inventory_units_to_display: Nuk ka njësi të listës për t'u shfaqur
         there_are_no_locales_configured: Nuk ka vende të konfiguruara
-        there_are_no_logged_events_to_display: "Nuk ka ngjarje të lidhura për t'u shfaqur"
-        there_are_no_menu_nodes_to_display: "Nuk ka asnjë element menuje për t'u shfaqur"
-        there_are_no_menus_to_display: "Nuk ka asnjë menu për t'u shfaqur"
+        there_are_no_logged_events_to_display: Nuk ka ngjarje të lidhura për t'u shfaqur
+        there_are_no_menu_nodes_to_display: Nuk ka asnjë element menuje për t'u shfaqur
+        there_are_no_menus_to_display: Nuk ka asnjë menu për t'u shfaqur
         there_are_no_options_configured: Nuk ka asnjë opsion të konfiguruar
         there_are_no_options_for_this_product: Nuk ka opsione për këtë produkt
-        there_are_no_orders_for_this_customer_to_display: "Nuk ka asnjë porosi të këtij blerësi për t'u shfaqur"
-        there_are_no_pages_to_display: "Nuk ka asnjë faqe për t'u shfaqur"
+        there_are_no_orders_for_this_customer_to_display: Nuk ka asnjë porosi të këtij blerësi për t'u shfaqur
+        there_are_no_pages_to_display: Nuk ka asnjë faqe për t'u shfaqur
         there_are_no_payment_methods_configured: Nuk ka asnjë mënyrë pagese të konfiguruar
         there_are_no_payments_configured: Nuk ka asnjë pagesë të konfiguruar
         there_are_no_permissions_defined: Nuk ka asnjë leje të përcaktuar
-        there_are_no_products_to_display: "Nuk ka asnjë produkt për t'u shfaqur"
+        there_are_no_products_to_display: Nuk ka asnjë produkt për t'u shfaqur
         there_are_no_promotions_configured: Nuk ka asnjë promocion të konfiguruar
-        there_are_no_redirect_routes_to_display: "Nuk ka asnjë rrugë tjetër për t'u shfaqur"
+        there_are_no_redirect_routes_to_display: Nuk ka asnjë rrugë tjetër për t'u shfaqur
         there_are_no_reports_created: Nuk është krijuar asnjë njoftim
         there_are_no_roles_defined: Nuk ka asnjë rol të përcaktuar
-        there_are_no_routes_to_display: "Nuk ka asnjë rrugë për t'u shfaqur"
-        there_are_no_shipments_to_display: "Nuk ka asnjë dërgesë për t'u shfaqur"
+        there_are_no_routes_to_display: Nuk ka asnjë rrugë për t'u shfaqur
+        there_are_no_shipments_to_display: Nuk ka asnjë dërgesë për t'u shfaqur
         there_are_no_shipping_categories_configured: Nuk ka asnjë kategori dërgimi të konfiguruar
         there_are_no_shipping_methods_configured: Nuk ka asnjë mënyrë dërgimi të konfiguruar
         there_are_no_tax_categories_configured: Nuk ka asnjë kategori taksimi të konfiguruar
         there_are_no_tax_rates_configured: Nuk ka asnjë normë taksimi të konfiguruar
         there_are_no_taxons_for_this_product: Nuk ka asnjë kategori për këtë produkt
-        there_are_no_taxons_to_display: "Nuk ka asnjë kategori për t'u shfaqur"
-        there_are_no_users_to_display: "Nuk ka asnjë përdorues për t'u shfaqur"
-        there_are_no_variants_to_display: "Nuk ka asnjë variant për t'u shfaqur"
+        there_are_no_taxons_to_display: Nuk ka asnjë kategori për t'u shfaqur
+        there_are_no_users_to_display: Nuk ka asnjë përdorues për t'u shfaqur
+        there_are_no_variants_to_display: Nuk ka asnjë variant për t'u shfaqur
         there_are_no_zones_configured: Nuk ka asnjë zonë të konfiguruar
         there_is_no_main_taxon_for_this_product: Nuk ka asnjë kategori kryesore mbi këtë produkt
         this_months_statistics: Statistikat e muajit në vazhdim
@@ -620,7 +618,6 @@ sylius:
         total_registrations: Regjistrimet totale
         tracking_number: Numri i gjurmimit
         translations: Përkthime
-        type: Lloji
         unavailable: Nuk gjendet
         unit_price: Çmimi për njësi
         unknown: E panjohur
@@ -630,19 +627,18 @@ sylius:
         update_product_association_type: Perditeso tipologji te lidhjes se produktit
         updating_tax_rate: Duke përditësuar normën e taksimit
         usage: Perdorimi
-        usage_limit: Kufiri i përdorimit
         used: I përdorur
         user_confirmation_name: Konfirmimi i përdoruesit
         user_details: Hollësi të përdoruesit
         username: Username
-        users_list_of_all_users_registered_in_store: 'Përdorues <small>Lista e të gjithë përdoruesve të regjistruar në arkiv</small>'
+        users_list_of_all_users_registered_in_store: Përdorues <small>Lista e të gjithë përdoruesve të regjistruar në arkiv</small>
         values: Vlerat
         variant: Varianti i llojit të monedhës
         variant_selection_method: Metoda rezervë e përzgjedhjes
         variants: Variante
         view: Pamja (View)
         view_more: Shiko më shumë
-        view_product_details: 'Shiko %product% hollësitë'
+        view_product_details: Shiko %product% hollësitë
         void: Bosh
         volume_based_pricing: Çmimi i bazuar në volum
         warning: Kujdes

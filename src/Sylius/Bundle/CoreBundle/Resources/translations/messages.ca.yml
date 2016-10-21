@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Preu per unitat
-                quantity: Quantitat
-                variant: Variant
         block:
             body: Cos
             id: ID
@@ -18,13 +13,13 @@ sylius:
             addressing:
                 different_billing_address: Utilitzar diferent adreça de facturació?
             payment_method: Mètode de pagament
-            shipping_method: "Mètode d'enviament"
+            shipping_method: Mètode d'enviament
         group:
             name: Nom
             roles: Rols
         channel:
             currency_default: Moneda predeterminada
-            tax_zone_default: "Zona d'impostos per defecte"
+            tax_zone_default: Zona d'impostos per defecte
         image:
             code: Codi
             file: Imatge
@@ -43,7 +38,7 @@ sylius:
         product:
             images: Imatges
             restricted_zone: Àrea restringida
-            shipping_category: "Categoria d'enviament"
+            shipping_category: Categoria d'enviament
             short_description: Descripció breu
             variant_selection_method: Mètode de selecció de variant
             enabled: Activat
@@ -51,7 +46,7 @@ sylius:
             name: Nom
             code: Codi
         product_variant:
-            tax_category: "Categoria d'impost"
+            tax_category: Categoria d'impost
         shipment_filter:
             created_at_from: Des de
             created_at_to: A
@@ -78,7 +73,7 @@ sylius:
             roles: Rols
             last_name: Cognoms
             password: Contrasenya
-            shipping_address: "Adreça d'enviament"
+            shipping_address: Adreça d'enviament
         user_filter:
             query: Cerca
         variant:
@@ -98,7 +93,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: "Instal·lar i permetre l'extensió %extension%."
+            help: Instal·lar i permetre l'extensió %extension%.
             iconv: Iconv
             icu: ICU
             intl: Intl

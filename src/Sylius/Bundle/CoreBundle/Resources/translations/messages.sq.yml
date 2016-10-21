@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Çmimi për njësi
-                quantity: Sasia
-                variant: Varianti i llojit të monedhës
-            customer_group: Grupi i blerësve
         block:
             body: Përmbajtja e porosisë
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Mënyra e dërgesës
         promotion:
             channels: Kanalet
-        coupon:
-            per_customer_usage_limit: Limiti i përdorimit për blerës
+        promotion_action:
+            add_product_configuration:
+                product: Produkti
         group:
             name: Emri
             roles: Funksionet
@@ -127,10 +122,9 @@ sylius:
                 taxon: Fushe
                 count: Numëro
             taxon:
-                taxons: Kategoritë
+                taxons: Tipologjite
             total_of_items_from_taxon:
                 taxon: Fushe
-                amount: Shuma
     installer:
         extensions:
             header: Shtesa
@@ -139,7 +133,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Instalo dhe aktivizo shtesën %extension%.'
+            help: Instalo dhe aktivizo shtesën %extension%.
             iconv: Iconv
             exif: Exif
             fileinfo: Fileinfo

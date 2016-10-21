@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Prezzo unitario
-                quantity: Quantità
-                variant: Variante
-            customer_group: Gruppo clienti
         block:
             body: Testo
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Metodo di spedizione
         promotion:
             channels: Canali
-        coupon:
-            per_customer_usage_limit: Limite di utilizzo al cliente
+        promotion_action:
+            add_product_configuration:
+                product: Prodotto
         group:
             name: Nome
             roles: Regole
@@ -73,23 +68,23 @@ sylius:
         shipment_filter:
             created_at_from: Da
             created_at_to: A
-            number: "Numero d'ordine"
+            number: Numero d'ordine
             shipping_address: Spedisci a
             channel: Tutti i canali
         payment_filter:
             created_at_from: Da
             created_at_to: A
-            number: "Numero d'ordine"
+            number: Numero d'ordine
             billing_address: Fattura a nome di
             channel: Tutti i canali
         shipping_method:
             zone: Zona
         taxon:
             code: Codice
-            file: "Seleziona un'immagine"
+            file: Seleziona un'immagine
             images: Immagini
         taxonomy:
-            file: "Seleziona un'immagine"
+            file: Seleziona un'immagine
         user:
             billing_address: Indirizzo di fatturazione
             different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
@@ -126,11 +121,9 @@ sylius:
             contains_taxon:
                 taxon: Tipologia
                 count: Conta
-            taxon:
-                taxons: Taxons
             total_of_items_from_taxon:
                 taxon: Tipologia
-                amount: Valore
+                amount: Importo
     installer:
         extensions:
             header: estensioni
@@ -140,7 +133,7 @@ sylius:
             apc: APC
             ctype: CType
             gd: GD
-            help: "Installa e attiva l'estensione %extension%."
+            help: Installa e attiva l'estensione %extension%.
             iconv: Iconv
             exif: Exif
             fileinfo: FileInfo
@@ -189,21 +182,21 @@ sylius:
             version_recommended: Versione PHP raccomandata
     email:
         order_confirmation:
-            name: "Conferma dell'ordine"
+            name: Conferma dell'ordine
         order_comment:
-            name: "Commento dell'ordine"
+            name: Commento dell'ordine
         shipment_confirmation:
             name: Informazioni di spedizione
         user_confirmation:
-            name: "Conferma dell'utente"
+            name: Conferma dell'utente
             subject: Benvenuto nel nostro negozio
-            content: 'Benvenuto nel nostro negozio <br/> <br/> Sei appena stato registrato. <br/> Grazie %username%.'
+            content: Benvenuto nel nostro negozio <br/> <br/> Sei appena stato registrato. <br/> Grazie %username%.
         password_reset:
             name: Reimpostazione password
-            content: '<h3>Ciao %username%</h3> Per reimpostare la password - si prega di visitare %url% <br/> <br/> Cordiali saluti, il Team.'
+            content: <h3>Ciao %username%</h3> Per reimpostare la password - si prega di visitare %url% <br/> <br/> Cordiali saluti, il Team.
         verification:
-            name: "Verifica dell'indirizzo di posta elettronica"
-            content: 'Per verificare il tuo indirizzo email - ti preghiamo di visitare %url%'
+            name: Verifica dell'indirizzo di posta elettronica
+            content: Per verificare il tuo indirizzo email - ti preghiamo di visitare %url%
     payum_gateway:
         cash_on_delivery: Contanti alla cosegna
         offline: Disconnesso

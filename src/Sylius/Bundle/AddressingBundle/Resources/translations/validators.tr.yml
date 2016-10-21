@@ -9,6 +9,7 @@ sylius:
             not_blank: Şehir yazınız.
         country:
             not_blank: Lütfen ülkeyi seçiniz.
+            disabled: Seçilen ülke devre dışıdır. Lütfen farklı bir ülke seçin.
         first_name:
             max_length: İsim 255 karakterden uzun olmamalıdır.
             min_length: İsim en az 2 karakter uzunluğunda olmalıdır.
@@ -34,6 +35,9 @@ sylius:
             unique: Ülke ISO kodu benzersiz olmalıdır.
     province:
         code:
+            min_length: Şehir kodu en az 5 karakter uzunluğunda olmalıdır | Şehir adı en az 5 karakter uzunluğunda olmalıdır.
+            not_blank: Lütfen il kodu girin.
+            regex: İl kodu XX-XX formatında (örn. US-FL) olmalıdır.
             unique: İl kodunun benzersiz olmalıdır.
         name:
             max_length: Şehir adı 255 karakterden uzun olmamalıdır | Şehir adı 255 karakterden uzun olmamalıdır.
@@ -45,7 +49,7 @@ sylius:
             not_blank: Bölge kodunu yazın.
             unique: Bölge kodu benzersiz olmalıdır.
         members:
-            min_count: 'Lütfen en az {{ limit }} bölge üyesi ekleyiniz.'
+            min_count: Lütfen en az {{ limit }} bölge üyesi ekleyiniz.
         name:
             max_length: Bölge adı 255 karakterden uzun olmamalıdır | Bölge adı 255 karakterden uzun olmamalıdır.
             not_blank: Lütfen bölge adını yazınız.

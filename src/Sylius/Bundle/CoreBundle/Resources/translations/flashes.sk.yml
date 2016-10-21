@@ -9,7 +9,7 @@ sylius:
         item_add_error: Nastala chyba pri pridávaní položky do košíka.
         item_remove_completed: Položka bola odstránená z košíka.
         item_remove_error: Nastala chyba pri odstraňovaní položky do košíka.
-        restricted_zone_removal: 'Produkt %product% bol odstránený z košíka, pretože nie je dostupný vo vašej krajine.'
+        restricted_zone_removal: Produkt %product% bol odstránený z košíka, pretože nie je dostupný vo vašej krajine.
     checkout:
         restricted_zone: Tento produkt nie je dostupný vo vašej krajine.
         success: Ďakujeme za vašu objednávku!
@@ -18,4 +18,4 @@ sylius:
         new: Vaša platba je nová.
         failed: Vaša platba bola odmietnutá.
         unknown: Neznáma platobná chyba.
-        out_of_stock: 'K dispozícii je iba %quantity% %name% na sklade.'
+        out_of_stock: K dispozícii je iba %quantity% %name% na sklade.

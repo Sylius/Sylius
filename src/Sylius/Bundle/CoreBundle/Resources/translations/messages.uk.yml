@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Ціна за одиницю
-                quantity: Кількість
-                variant: Різновид
-            customer_group: Група клієнтів
         block:
             body: Тіло
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Спосіб доставки
         promotion:
             channels: Канали
-        coupon:
-            per_customer_usage_limit: Ліміт використання на клієнта
+        promotion_action:
+            add_product_configuration:
+                product: Товар
         group:
             name: Назва
             roles: Ролі
@@ -38,7 +33,7 @@ sylius:
             tax_calculation_strategy: Стратегія податкового розрахунку
             tax_zone_default: Податкова зона за замовчуванням
             theme: Тема
-            hostname: "Ім'я хоста"
+            hostname: Ім'я хоста
         image:
             code: Код
             file: Зображення
@@ -75,13 +70,13 @@ sylius:
             created_at_from: Від
             created_at_to: До
             number: Номер замовлення
-            shipping_address: "Ім'я одержувача"
+            shipping_address: Ім'я одержувача
             channel: Усі канали
         payment_filter:
             created_at_from: Від
             created_at_to: До
             number: Номер замовлення
-            billing_address: "Ім'я платника"
+            billing_address: Ім'я платника
             channel: Усі канали
         shipping_method:
             zone: Зона
@@ -95,7 +90,7 @@ sylius:
             billing_address: Адреса для рахунків
             different_billing_address: Використати іншу адресу для рахунків?
             enabled: Увімкнено
-            first_name: "Iм'я"
+            first_name: Iм'я
             groups: Групи
             roles: Ролі
             last_name: Прізвище
@@ -127,8 +122,6 @@ sylius:
             contains_taxon:
                 taxon: Таксон
                 count: Підрахунок
-            taxon:
-                taxons: Таксони
             total_of_items_from_taxon:
                 taxon: Таксон
                 amount: Обсяг
@@ -141,7 +134,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Установити й увімкнути розширення %extension%.'
+            help: Установити й увімкнути розширення %extension%.
             iconv: Iconv
             exif: Exif
             fileinfo: Fileinfo
@@ -191,22 +184,22 @@ sylius:
     email:
         order_confirmation:
             name: Підтвердження замовлення
-            content: 'Ваше замовлення № %number% було успішно розміщено.<br/><br/>Дякуємо вам за купівлю в нашій крамниці!'
+            content: Ваше замовлення № %number% було успішно розміщено.<br/><br/>Дякуємо вам за купівлю в нашій крамниці!
         order_comment:
             name: Коментар до замовлення
         shipment_confirmation:
             name: Підтвердження відправки товару
-            content: 'Ваше замовлення № %number% було відправлено за допомогою %method%.<br/>Ви можете перевіряти його розташування за допомогою коду відстеження "%tracking%".<br/><br/>Дякуємо вам за успішну угоду.'
+            content: Ваше замовлення № %number% було відправлено за допомогою %method%.<br/>Ви можете перевіряти його розташування за допомогою коду відстеження "%tracking%".<br/><br/>Дякуємо вам за успішну угоду.
         user_confirmation:
             name: Підтвердження користувача
             subject: Ласкаво просимо до нашої крамниці
-            content: 'Ласкаво просимо до нашої крамниці<br/><br/>Ви тільки-но зареєструвались.<br/>Дякуємо вам, %username%.'
+            content: Ласкаво просимо до нашої крамниці<br/><br/>Ви тільки-но зареєструвались.<br/>Дякуємо вам, %username%.
         password_reset:
             name: Відновлення паролю
-            content: '<h3>Вітаємо, %username%</h3>Аби відновити ваш пароль - будь ласка, перейдіть за посиланням %url%<br/><br/>З повагою, команда крамниці.'
+            content: <h3>Вітаємо, %username%</h3>Аби відновити ваш пароль - будь ласка, перейдіть за посиланням %url%<br/><br/>З повагою, команда крамниці.
         verification:
             name: Перевірка адреси електронної пошти
-            content: 'Для того, щоб підтвердити вашу адресу електронної пошти - будь ласка, перейдіть за посиланням %url%'
+            content: Для того, щоб підтвердити вашу адресу електронної пошти - будь ласка, перейдіть за посиланням %url%
     payum_gateway:
         cash_on_delivery: Накладений платіж
         offline: Автономний

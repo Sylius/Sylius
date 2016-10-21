@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Enhetspris
-                quantity: Antal
-                variant: Variant
-            customer_group: Kundgrupp
         block:
             body: Brödtext
             id: ID
@@ -22,8 +16,6 @@ sylius:
             shipping_method: Fraktsätt
         promotion:
             channels: Kanaler
-        coupon:
-            per_customer_usage_limit: Begränsning per kund
         group:
             name: Namn
             roles: Roller
@@ -140,7 +132,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Installera och aktivera tillägget %extension%.'
+            help: Installera och aktivera tillägget %extension%.
             iconv: Iconv
             exif: Exif
             fileinfo: Filinfo
@@ -196,13 +188,13 @@ sylius:
         user_confirmation:
             name: Användarbekräftelse
             subject: Välkommen till vår butik
-            content: 'Välkommen till vår butik<br/><br/>du har precis registrerats.<br/>Tack %username%.'
+            content: Välkommen till vår butik<br/><br/>du har precis registrerats.<br/>Tack %username%.
         password_reset:
             name: Återställ lösenord
-            content: '<h3>Hej %username%</h3>För att återställa ditt lösenord - var god besök %url% <br/><br/>Hälsningar, the Team.'
+            content: <h3>Hej %username%</h3>För att återställa ditt lösenord - var god besök %url% <br/><br/>Hälsningar, the Team.
         verification:
             name: E-postadress verifikation
-            content: 'För att verifiera din e-postadress - var god besök %url%'
+            content: För att verifiera din e-postadress - var god besök %url%
     payum_gateway:
         cash_on_delivery: Postförskott
         offline: Offline

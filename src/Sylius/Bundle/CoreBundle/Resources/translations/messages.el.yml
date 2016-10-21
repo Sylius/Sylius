@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Τιμή μονάδας
-                quantity: Ποσότητα
-                variant: Παραλλαγή
         block:
             id: ID
             title: Τίτλος
@@ -18,6 +13,9 @@ sylius:
                 different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
             payment_method: Τρόπος Πληρωμής
             shipping_method: Τρόπος Αποστολης
+        promotion_action:
+            add_product_configuration:
+                product: Προϊόν
         group:
             name: Ονομασία
             roles: Ρόλοι
@@ -94,8 +92,6 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Πλήθος
-            total_of_items_from_taxon:
-                amount: Ποσό
     installer:
         extensions:
             apc: APC

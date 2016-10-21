@@ -7,25 +7,19 @@ sylius:
             unique: 促销编号已存在。
             not_blank: 请输入促销代码。
         description:
-            max_length: '促销描述必须不会超过 1 个字符。 |促销描述不能超过 {{ limit }} 个字符。'
-            min_length: '产品描述必须是至少 1 个字符长。 |产品描述必须至少 {{ limit }} 个字符长。'
+            max_length: 促销描述必须不会超过 1 个字符。 |促销描述不能超过 {{ limit }} 个字符。
+            min_length: 产品描述必须是至少 1 个字符长。 |产品描述必须至少 {{ limit }} 个字符长。
             not_blank: 请输入促销的描述。
-        name:
-            max_length: '选项名称的长度必须超过 1 个字符。 |选项名称的长度不能超过 {{ limit }} 字符。'
-            min_length: '促销名称必须是至少 1 个字符长。 |促销名称必须至少 {{ limit }} 个字符长。'
-            not_blank: 请输入促销名称。
         end_date_cannot_be_set_prior_start_date: 结束日期不能超过开始日期。
+        name:
+            max_length: 选项名称的长度必须超过 1 个字符。 |选项名称的长度不能超过 {{ limit }} 字符。
+            min_length: 促销名称必须是至少 1 个字符长。 |促销名称必须至少 {{ limit }} 个字符长。
+            not_blank: 请输入促销名称。
     promotion_coupon:
         code:
-            max_length: '优惠券代码必须不能超过 1 个字符。 |优惠券代码必须不能超过 {{ limit }} 个字符。'
-            min_length: '优惠券代码必须至少 1 个字符长。 |优惠券代码必须至少 {{ limit }} 个字符长。'
+            max_length: 优惠券代码必须不能超过 1 个字符。 |优惠券代码必须不能超过 {{ limit }} 个字符。
+            min_length: 优惠券代码必须至少 1 个字符长。 |优惠券代码必须至少 {{ limit }} 个字符长。
             not_blank: 请输入优惠券代码。
             unique: 此优惠券已存在。
         usage_limit:
-            min: '优惠券使用限制必须至少 {{ limit }}。'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: '优惠券的金额必须至少 {{ limit }}。'
-            not_blank: 请输入想要生成的优惠券的数量。
-        usage_limit:
-            min: '生成优惠券使用次数必须至少 {{ limit }}。'
+            min: 优惠券使用限制必须至少 {{ limit }}。

@@ -7,18 +7,19 @@ sylius:
             main:
                 catalog:
                     attributes: ویژگی‌ها
-                    header: کاتالوگ محصولات
-                    options: آپشن ها
+                    header: فهرست
+                    options: گزینه‎ها
                     products: محصولات
-                    taxons: رده ها
+                    taxons: دسته بندی ها
                 configuration:
+                    admin_users: مدیران
                     channels: کانال های فروش
                     countries: كشور‌ها
                     currencies: واحدهای پول
                     header: تنظیمات
                     locales: زبان ها
-                    payment_methods: شیوه های پرداخت
-                    shipping_methods: شیوه های ارسال
+                    payment_methods: روش‌های پرداخت
+                    shipping_methods: روش‌های ارسال
                     tax_categories: رده های مالیات
                     tax_rates: نرخ های مالیات
                     zones: منطقه‌ها
@@ -30,7 +31,9 @@ sylius:
                     groups: گروه ها
                     header: مشتری
                 sales:
-                    header: میزان فروش ماه جاری
+                    header: فروش‌ها
                     orders: سفارش‌ها
                 content:
+                    header: محتوا
+                    static_contents: محتواهای ثابت
                     routes: آدرس های داخلی

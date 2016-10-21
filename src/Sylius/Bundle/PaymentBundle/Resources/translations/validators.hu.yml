@@ -4,19 +4,19 @@
 sylius:
     credit_card:
         cardholder_name:
-            min_length: 'A kártyabirtokos neve legalább {{ limit }} karakter hosszúságú kell legyen.'
+            min_length: A kártyabirtokos neve legalább {{ limit }} karakter hosszúságú kell legyen.
             not_blank: Kérjük, adja mega kártyabirtokos nevét.
         expiry_month:
-            max_range: 'A kártya lejárati hónapja {{ min }} és {{ max }} közti érték kell legyen.'
-            min_range: 'A kártya lejárati hónapja {{ min }} és {{ max }} közti érték kell legyen.'
+            max_range: A kártya lejárati hónapja {{ min }} és {{ max }} közti érték kell legyen.
+            min_range: A kártya lejárati hónapja {{ min }} és {{ max }} közti érték kell legyen.
             not_blank: Kérjük, adjon meg lejárati hónapot.
         number:
             not_blank: Kérjük, adja meg a kártya számát.
             luhn: A megadott hitelkártya-szám érvénytelen.
         security_code:
             not_blank: Kérjük, írja be a biztonsági kódot.
-            max_length: 'A hitelkártya CVV kódja legalább {{ limit }} számjegyből kell állnia.'
-            min_length: 'A bankkártya CVV kódjának több mint {{ limit }} számjegyből kell állnia.'
+            max_length: A hitelkártya CVV kódja legalább {{ limit }} számjegyből kell állnia.
+            min_length: A bankkártya CVV kódjának több mint {{ limit }} számjegyből kell állnia.
         expiry_year:
             not_blank: Kérjük, válassza ki a lejárati évet.
     payment:
@@ -26,16 +26,16 @@ sylius:
         gateway:
             not_blank: Kérjük, válasszon fizetési módot.
         name:
-            max_length: 'A fizetési mód neve nem lehet {{ limit }} karakter hosszú.'
-            min_length: 'A fizetési mód neve legalább {{ limit }} karakter hosszú kell legyen.'
+            max_length: A fizetési mód neve nem lehet {{ limit }} karakter hosszú.
+            min_length: A fizetési mód neve legalább {{ limit }} karakter hosszú kell legyen.
             not_blank: Kérjük, írja be a fizetési mód nevét.
         fee_calculator_configuration:
             amount:
-                greater_than_or_equal: 'A díj nem lehet alacsonyabb, mint {{ compared_value }}.'
+                greater_than_or_equal: A díj nem lehet alacsonyabb, mint {{ compared_value }}.
                 not_blank: Kérjük, írja be a díj összegét.
             percent:
-                max_range: 'Százalékos díj nem lehet nagyobb, mint {{ limit }}.'
-                min_range: 'Százalékos díj nem lehet alacsonyabb, mint {{ limit }}.'
+                max_range: Százalékos díj nem lehet nagyobb, mint {{ limit }}.
+                min_range: Százalékos díj nem lehet alacsonyabb, mint {{ limit }}.
                 not_blank: Kérjük, írja be a százalék díjat.
         code:
             not_blank: Kérjük, írja be a fizetési mód kódját.

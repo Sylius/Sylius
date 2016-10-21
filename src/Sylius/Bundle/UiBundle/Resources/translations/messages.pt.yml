@@ -246,7 +246,6 @@ sylius:
         exclusive: Exclusivo
         existing_customer: Cliente cadastrado
         expiration_and_usage_limits: Limites de uso e validade
-        expires_at: Expira em
         extra_information: Informação extra
         extra_notes: Notas extra
         failed: Falhou
@@ -277,7 +276,7 @@ sylius:
         images: Imagens
         index_metadata: Metadados
         information: Info
-        inventory_here_you_can_see_current_stock_levels: 'Inventário<small>Aqui pode verificar a disponibilidade de cada produto</small>'
+        inventory_here_you_can_see_current_stock_levels: Inventário<small>Aqui pode verificar a disponibilidade de cada produto</small>
         inventory_state: Situação do estoque
         inventory_tracking: Controle de estoque
         invoice: Fatura
@@ -334,8 +333,8 @@ sylius:
         no_description: Sem descrição
         no_promotion: Sem promoções
         no_shipping_charges: Nenhuma taxa de entrega foi aplicada
-        no_short_description: '<i>Sem resumo</i>'
-        no_sku: '<i>Sem SKU</i>'
+        no_short_description: <i>Sem resumo</i>
+        no_sku: <i>Sem SKU</i>
         no_tax_category: Nenhuma categoria de imposto
         no_taxes: Nenhuma taxa foi aplicada
         number: Número
@@ -369,11 +368,10 @@ sylius:
         product: Produto
         product_association_index: Associação
         product_association_type_index: Tipo de associação
-        product_details_viewing_product_product: 'Detalhes de produto <small>Visualizando produto "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Detalhes de produto <small>Visualizando produto "<strong>%product%</strong>"</small>
         product_reviews: Críticas do produto
-        products: Produtos
-        products_categorized_under_taxon_taxon: 'Produtos <small>Categorizado na táxon "%taxon%"</small>'
-        products_index_of_all_products_in_your_store: 'Produtos <small>Lista de todos os produtos em sua loja</small>'
+        products_categorized_under_taxon_taxon: Produtos <small>Categorizado na táxon "%taxon%"</small>
+        products_index_of_all_products_in_your_store: Produtos <small>Lista de todos os produtos em sua loja</small>
         promotion_coupons: Cupões
         promotion_details: Detalhes da promoção
         promotion_total: Total de promoção
@@ -414,14 +412,13 @@ sylius:
         shipping_state: Situação do envio
         shipping_total: Valor do envio
         shop_by: Comprar por
-        sign_in_to_the_store_or_create_new_account: 'Cadastre-se na loja <small>ou crie uma nova conta</small>'
+        sign_in_to_the_store_or_create_new_account: Cadastre-se na loja <small>ou crie uma nova conta</small>
         sku: SKU
         starts_at: Começa em
         state: Estado
         status: Estado
         street: Rua
         subject: Assunto
-        subscribed_to_newsletter: Subscrever a newsletter
         success: Sucesso
         summary: Sumário
         tax_category: Categoria de imposto
@@ -431,7 +428,6 @@ sylius:
         taxation_categories: Categorias de tributação
         taxation_settings: Configurações de taxas
         taxes: Taxas
-        taxons: Táxons
         theme: Aparência
         there_are_no_images_for_this_product: Não há imagens para este produto
         there_are_no_options_for_this_product: Não há opções para este produto
@@ -446,12 +442,11 @@ sylius:
         unit_price: Preço unitário
         unknown: Desconhecido
         updating_tax_rate: Atualizar imposto
-        usage_limit: Limite de utilização
         used: Utilizado
         user_confirmation_name: Confirmação do utilizador
         user_details: Detalhes do usuários
         username: Login
-        users_list_of_all_users_registered_in_store: 'Usuários <small>Lista de todos os usuários cadastros na loja</small>'
+        users_list_of_all_users_registered_in_store: Usuários <small>Lista de todos os usuários cadastros na loja</small>
         variant: Variante
         variant_selection_method: Método de seleção de variantes
         view_more: Ver mais

@@ -8,8 +8,8 @@ sylius:
             unique: Ürün stok birimi benzersiz olmalıdır.
         name:
             not_blank: Lütfen ürün adı girin.
-            min_length: 'Ürün adı en az 1 karakter uzunluğunda olmalıdır.|Ürün adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
-            max_length: 'Ürün adı 1 karakterden uzun olmamalıdır.|Ürün adı {{ limit }} karakterden uzun olmamalıdır.'
+            min_length: Ürün adı en az 1 karakter uzunluğunda olmalıdır.|Ürün adı en az {{ limit }} karakter uzunluğunda olmalıdır.
+            max_length: Ürün adı 1 karakterden uzun olmamalıdır.|Ürün adı {{ limit }} karakterden uzun olmamalıdır.
     variant:
         sku:
             not_blank: Lütfen stok birimi varyantını girin.
@@ -18,10 +18,10 @@ sylius:
     option:
         name:
             not_blank: Seçenek adı giriniz.
-            min_length: 'Seçenek adı en az 1 karakter uzunluğunda olmalıdır.|Seçenek adı en az {{ limit }} karakter uzunluğunda olmalıdır.'
-            max_length: 'Seçenek adı 1 karakterden uzun olmamalıdır.|Seçenek adı {{ limit }} karakterden uzun olmamalıdır.'
+            min_length: Seçenek adı en az 1 karakter uzunluğunda olmalıdır.|Seçenek adı en az {{ limit }} karakter uzunluğunda olmalıdır.
+            max_length: Seçenek adı 1 karakterden uzun olmamalıdır.|Seçenek adı {{ limit }} karakterden uzun olmamalıdır.
         values:
-            min_count: 'Lütfen en az {{ limit }} seçenek ekleyin.|Lütfen en az {{ limit }} seçenek ekleyin.'
+            min_count: Lütfen en az {{ limit }} seçenek ekleyin.|Lütfen en az {{ limit }} seçenek ekleyin.
     option_value:
         value:
             not_blank: Lütfen seçenek değeri girin.

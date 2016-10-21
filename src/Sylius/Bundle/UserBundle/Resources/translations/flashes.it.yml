@@ -4,7 +4,7 @@
 sylius:
     user:
         email:
-            not_exist: "L'Utente con questa E-mail non esiste."
+            not_exist: L'Utente con questa E-mail non esiste.
         password:
             reset:
                 success: La tua password è stata reimpostata correttamente!
@@ -16,4 +16,4 @@ sylius:
                 verified: Il tuo indirizzo email è già stato verificato.
             success: Il tuo indirizzo email è stato verificato correttamente.
             request:
-                success: "Un' e-mail con il link di verifica è stato inviato al tuo indirizzo di posta elettronica."
+                success: Un' e-mail con il link di verifica è stato inviato al tuo indirizzo di posta elettronica.

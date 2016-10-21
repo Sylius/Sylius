@@ -12,4 +12,4 @@ sylius:
         restore_deleted: '%resource% sikeresen visszaállítva.'
         enable: '%resource% sikeresen engedélyezve.'
         disable: '%resource% sikeresen le lett tiltva.'
-        delete_error: 'A %resource% nem törölhető, mert használatban van.'
+        delete_error: A %resource% nem törölhető, mert használatban van.

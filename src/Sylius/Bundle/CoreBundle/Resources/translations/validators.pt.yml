@@ -22,7 +22,7 @@ sylius:
             unique: Esta localidade já existe.
     product_variant:
         onHand:
-            min: 'A disponibilidade deve ser maior que {{ limit }}.'
+            min: A disponibilidade deve ser maior que {{ limit }}.
             not_blank: Introduza a disponibilidade.
         price:
             min: O preço não deve ser negativo.
@@ -31,7 +31,7 @@ sylius:
             min: O preço original não deve ser negativo.
     product_translation:
         short_description:
-            max: 'A descrição curta não pode ter mais que {{ limit }} caracteres.'
+            max: A descrição curta não pode ter mais que {{ limit }} caracteres.
     user:
         email:
             unique: Este endereço de e-mail já está registado.

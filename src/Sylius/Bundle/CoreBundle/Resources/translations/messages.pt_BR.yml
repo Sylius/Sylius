@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Preço unitário
-                quantity: Quantidade
-                variant: Variante
-            customer_group: Grupos de Clientes
         block:
             body: Texto
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Forma de envio
         promotion:
             channels: Canais
-        coupon:
-            per_customer_usage_limit: Limite de uso por cliente
+        promotion_action:
+            add_product_configuration:
+                product: Produto
         group:
             name: Nome
             roles: Papéis
@@ -37,7 +32,7 @@ sylius:
             payment_methods: Meios de pagamentos
             tax_calculation_strategy: Estratégia de cálculo de impostos
             tax_zone_default: Zona de imposto do padrão
-            theme:  Tema
+            theme: ' Tema'
             hostname: Nome do host
         image:
             code: Código
@@ -127,11 +122,8 @@ sylius:
             contains_taxon:
                 taxon: Taxon
                 count: Contagem
-            taxon:
-                taxons: Taxas
             total_of_items_from_taxon:
                 taxon: Taxon
-                amount: Quantidade
     installer:
         extensions:
             header: extensões
@@ -141,7 +133,7 @@ sylius:
             apc: APC
             ctype: CType
             gd: GD
-            help: 'Instalar e habilitar a extensão %extension%.'
+            help: Instalar e habilitar a extensão %extension%.
             iconv: Iconv
             exif: Exif
             fileinfo: Informação do arquivo
@@ -191,22 +183,22 @@ sylius:
     email:
         order_confirmation:
             name: Confirmação de compra
-            content: 'Seu pedido no. %number% foi recebido com sucesso.<br/><br/>Obrigado por comprar em nossa loja!'
+            content: Seu pedido no. %number% foi recebido com sucesso.<br/><br/>Obrigado por comprar em nossa loja!
         order_comment:
             name: Comentários do pedido
         shipment_confirmation:
             name: Confirmação de postagem
-            content: 'Seu pedido n º %number% foi enviado usando o %method%. <br/> Você pode verificar a sua localização com o código de rastreamento "%tracking%". <br/> <br/> Obrigado poela preferência.'
+            content: Seu pedido n º %number% foi enviado usando o %method%. <br/> Você pode verificar a sua localização com o código de rastreamento "%tracking%". <br/> <br/> Obrigado poela preferência.
         user_confirmation:
             name: Confirmação do usuário
             subject: Bem-vindo à nossa loja
-            content: 'Bem-vindo à nossa loja <br/> <br/> você acaba de ser registrado. <br/> Obrigado %username%.'
+            content: Bem-vindo à nossa loja <br/> <br/> você acaba de ser registrado. <br/> Obrigado %username%.
         password_reset:
             name: Redefinir a senha
-            content: '<h3>Olá %username%</h3> Para resetar sua senha - por favor, visite %url% <br/> <br/> Atenciosamente, equipe.'
+            content: <h3>Olá %username%</h3> Para resetar sua senha - por favor, visite %url% <br/> <br/> Atenciosamente, equipe.
         verification:
             name: Verificação de endereço de e-mail
-            content: 'Para verificar o seu endereço de e-mail - por favor, visite %url%'
+            content: Para verificar o seu endereço de e-mail - por favor, visite %url%
     payum_gateway:
         cash_on_delivery: Pagamento em dinheiro na entrega
         offline: Desconectado

@@ -9,7 +9,7 @@ sylius:
         item_add_error: Сталася помилка під час додавання елемента в кошик.
         item_remove_completed: Елемент видалений з кошика.
         item_remove_error: Сталася помилка під час видалення елемента з кошику.
-        restricted_zone_removal: 'Продукт %product% видалений з кошика, тому що він недоступний у вашій країні.'
+        restricted_zone_removal: Продукт %product% видалений з кошика, тому що він недоступний у вашій країні.
     checkout:
         restricted_zone: Цей продукт недоступний у вашій країні.
         success: Дякуємо за ваше замовлення!
@@ -18,4 +18,4 @@ sylius:
         new: Ваш платіж є новим.
         failed: Ваш платіж був відхилений.
         unknown: Невідома помилка оплати.
-        out_of_stock: 'На складі є тільки %quantity% одиниць %name%.'
+        out_of_stock: На складі є тільки %quantity% одиниць %name%.

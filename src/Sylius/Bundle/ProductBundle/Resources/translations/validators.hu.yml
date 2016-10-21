@@ -11,8 +11,8 @@ sylius:
             unique: A termék kódjának egyedinek kell lennie.
         name:
             not_blank: Kérjük, írja be a termék nevét.
-            min_length: 'Termék neve legalább 1 karakter hosszúnak kell lennie. |Termék neve legalább {{ limit }} karakter hosszú.'
-            max_length: 'Termék neve nem lehet hosszabb, mint 1 karakter. |Termék neve nem lehet hosszabb, mint {{ limit }} karakter.'
+            min_length: Termék neve legalább 1 karakter hosszúnak kell lennie. |Termék neve legalább {{ limit }} karakter hosszú.
+            max_length: Termék neve nem lehet hosszabb, mint 1 karakter. |Termék neve nem lehet hosszabb, mint {{ limit }} karakter.
     variant:
         sku:
             not_blank: Kérjük, írjon be SKU változatot.
@@ -24,10 +24,10 @@ sylius:
             unique: Az opció az adott kóddal már létezik.
         name:
             not_blank: Kérjük, adja meg az opció nevét.
-            min_length: 'Az opciónév legalább 1 karakter hosszú kell legyen. | Az opciónév legalább {{ limit }} karakter hosszú kell legyen.'
-            max_length: 'Az opciónév nem lehet hosszabb, mint 1 karakter. |Az opciónév nem lehet hosszabb, mint {{ limit }} karakterek.'
+            min_length: Az opciónév legalább 1 karakter hosszú kell legyen. | Az opciónév legalább {{ limit }} karakter hosszú kell legyen.
+            max_length: Az opciónév nem lehet hosszabb, mint 1 karakter. |Az opciónév nem lehet hosszabb, mint {{ limit }} karakterek.
         values:
-            min_count: 'Kérjük, adjon meg legalább {{ limit }} opció értéket. | Kérjük adjon meg legalább {{ limit }} opció értéket.'
+            min_count: Kérjük, adjon meg legalább {{ limit }} opció értéket. | Kérjük adjon meg legalább {{ limit }} opció értéket.
     option_value:
         code:
             not_blank: Kérjük adja meg az opció értékének kódját.

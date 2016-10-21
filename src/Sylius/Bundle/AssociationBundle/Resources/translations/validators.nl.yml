@@ -5,8 +5,8 @@ sylius:
     association_type:
         name:
             not_blank: Voer de naam van de relatie in.
-            min_length: 'De naam van de relatie moet minimaal 1 teken bevatten. | Relatienaam moet ten minste {{ limit }} tekens bevatten.'
-            max_length: 'De naam van de relatie mag niet meer dan 1 teken zijn. | De naam van de relatie mag niet meer dan {{ limit }} tekens bevatten.'
+            min_length: De naam van de relatie moet minimaal 1 teken bevatten. | Relatienaam moet ten minste {{ limit }} tekens bevatten.
+            max_length: De naam van de relatie mag niet meer dan 1 teken zijn. | De naam van de relatie mag niet meer dan {{ limit }} tekens bevatten.
         code:
             unique: Relatie met gegeven code bestaat al.
             not_blank: Voer de relatie code in.

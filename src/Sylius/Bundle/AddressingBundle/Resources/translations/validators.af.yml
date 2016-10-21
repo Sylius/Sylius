@@ -27,7 +27,7 @@ sylius:
             max_length: Straat mag nie langer wees as 255 karakters nie|Straat mag nie langer wees as 255 karakters nie.
             min_length: Straat moet minstens 2 karakters lank wees|Straat moet minstens 2 karakters lank wees.
             not_blank: Voer asb. straat in.
-        not_shippable: "Hierdie adres is nie 'n geldige bestemming nie."
+        not_shippable: Hierdie adres is nie 'n geldige bestemming nie.
     province:
         name:
             max_length: Provinsie naam mag nie langer wees as 255 karakters nie|Provinsie naam mag nie langer wees as 255 karakters nie.
@@ -35,7 +35,7 @@ sylius:
             not_blank: Voer asb. provinsie naam in.
     zone:
         members:
-            min_count: 'Voeg asb. minstens {{ limit }} area lede toe.'
+            min_count: Voeg asb. minstens {{ limit }} area lede toe.
         name:
             max_length: Area naam mag nie langer wees as 255 karakters nie|Area naam mag nie langer wees as 255 karakters nie.
             not_blank: Voer asb. area naam in.

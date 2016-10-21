@@ -3,54 +3,23 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: 金额
-            percentage_discount_configuration:
-                percentage: 百分比
-            type: 类型
-        rule:
-            taxonomy_configuration:
-                taxons: 分类
-                exclude: 排除：
-            contains_product_configuration:
-                variants: 产品
-                exclude: 排除：
-            cart_quantity_configuration:
-                count: 计数
-                equal: 等于
-            item_total_configuration:
-                amount: 金额
-            nth_order_configuration:
-                nth: 第 n 个
-            customer_loyalty_configuration:
-                time: Time
-                unit:
-                    days: 天数
-                    weeks: 周
-                    months: 月
-                    years: 年
-                    header: 单位
-                after: 在这期间之后创建的用户
-            shipping_country_configuration:
-                country: 国家
-            type: 类型
-        coupon:
-            usage_limit: 使用限制
-            expires_at: 截至于
-        coupon_generate_instruction:
-            amount: 金额
-            usage_limit: 使用限制
-            expires_at: 截至于
         promotion:
             actions: 操作
             add_action: 添加操作
             add_rule: 添加规则
             coupon_based: 基于优惠券
-            exclusive: 独家
             description: 描述
             ends_at: 结束于
+            exclusive: 独家
             name: 名称
             rules: 規則
             starts_at: 开始于
-            usage_limit: 使用限制
+        promotion_action:
+            type: 类型
+        promotion_rule:
+            cart_quantity_configuration:
+                count: 计数
+                equal: 等于
+            shipping_country_configuration:
+                country: 国家
+            type: 类型

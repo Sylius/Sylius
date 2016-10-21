@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Jednotná cena
-                quantity: Počet
-                variant: Varianta
-            customer_group: Skupina zákazníků
         block:
             body: Tělo
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Způsob Dopravy
         promotion:
             channels: Kanály
-        coupon:
-            per_customer_usage_limit: Omezení použití na zákazníka
+        promotion_action:
+            add_product_configuration:
+                product: Produkt
         group:
             name: Jméno
             roles: Role
@@ -125,10 +120,6 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Počet
-            taxon:
-                taxons: Taxony
-            total_of_items_from_taxon:
-                amount: Částka
     installer:
         extensions:
             header: rozšíření
@@ -137,7 +128,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Nainstalujte a povolte %extension% rozšíření.'
+            help: Nainstalujte a povolte %extension% rozšíření.
             iconv: Iconv
             exif: EXIF
             icu: ICU
@@ -192,13 +183,13 @@ sylius:
         user_confirmation:
             name: Potvrzení uživatele
             subject: Vítejte v našem obchodě
-            content: 'Vítejte v našem obchodě <br/> <br/> jste se právě zaregistrovali. <br/> Děkujeme vám %username%.'
+            content: Vítejte v našem obchodě <br/> <br/> jste se právě zaregistrovali. <br/> Děkujeme vám %username%.
         password_reset:
             name: Obnovení hesla
-            content: '<h3>Dobrý den %username%</h3> Chcete-li obnovit vaše heslo - navštivte %url% <br/> <br/> S pozdravem, tým.'
+            content: <h3>Dobrý den %username%</h3> Chcete-li obnovit vaše heslo - navštivte %url% <br/> <br/> S pozdravem, tým.
         verification:
             name: Ověření emailové adresy
-            content: 'Chcete-li ověřit svou e-mailovou adresu - prosím navštivte %url%'
+            content: Chcete-li ověřit svou e-mailovou adresu - prosím navštivte %url%
     payum_gateway:
         cash_on_delivery: Platba na dobírku
         offline: Offline

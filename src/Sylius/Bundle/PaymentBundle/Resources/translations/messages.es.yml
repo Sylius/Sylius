@@ -28,7 +28,7 @@ sylius:
                 refunded: Reembolsado
         payment_method:
             description: Descripción
-            enabled: ¿Activado?
+            enabled: '¿Activado?'
             gateway: Puerta de enlace
             instructions: Instrucciones
             name: Nombre

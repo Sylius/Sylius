@@ -3,55 +3,33 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: ยอดรวม
-            percentage_discount_configuration:
-                percentage: เปอร์เซ็นต์
-            type: ชนิด
-        rule:
-            taxonomy_configuration:
-                taxons: หมวดหมู่
-                exclude: ไม่รวม
-            contains_product_configuration:
-                variants: สินค้า
-                exclude: ไม่รวม
-            cart_quantity_configuration:
-                count: จำนวน
-                equal: เท่ากับ
-            item_total_configuration:
-                amount: ยอดรวม
-            nth_order_configuration:
-                nth: Nth
-            customer_loyalty_configuration:
-                time: เวลา
-                unit:
-                    days: วัน
-                    weeks: สัปดาห์
-                    months: เดือน
-                    years: ปี
-                    header: หน่วย
-                after: ผู้ใช้ที่สร้างขึ้นหลังจากรอบเวลานี้
-            shipping_country_configuration:
-                country: ประเทศ
-            type: ชนิด
-        coupon:
-            usage_limit: จำกัดการใช้งาน
-            expires_at: หมดอายุวันที่
-        coupon_generate_instruction:
-            amount: ยอดรวม
-            usage_limit: จำกัดการใช้งาน
-            expires_at: หมดอายุวันที่
-            code_length: ความยาวของรหัส
         promotion:
             actions: ดำเนินการ
             add_action: เพิ่มการลดราคา
             add_rule: เพิ่มเงื่อนไข
             coupon_based: ขึ้นกับคูปอง
-            exclusive: พิเศษ
             description: คำอธิบาย
             ends_at: สิ้นสุด
+            exclusive: พิเศษ
             name: ชื่อ
             rules: เงื่อนไข
             starts_at: เริ่มต้น
             usage_limit: ขีดจำกัดการใช้งาน
+        promotion_action:
+            fixed_discount_configuration:
+                amount: ยอดเงิน
+            type: ชนิด
+        promotion_coupon:
+            usage_limit: ขีดจำกัดการใช้งาน
+        promotion_coupon_generator_instruction:
+            amount: ยอดเงิน
+            usage_limit: ขีดจำกัดการใช้งาน
+        promotion_rule:
+            cart_quantity_configuration:
+                count: จำนวน
+                equal: เท่ากับ
+            item_total_configuration:
+                amount: ยอดเงิน
+            shipping_country_configuration:
+                country: ประเทศ
+            type: ชนิด

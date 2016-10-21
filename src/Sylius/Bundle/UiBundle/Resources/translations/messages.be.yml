@@ -138,7 +138,7 @@ sylius:
         index_of_all_configured_locales: Індэкс усіх зададзеных лакацыяў
         information: Інфармацыя
         inventory: Інвентар
-        inventory_here_you_can_see_current_stock_levels: 'Склад <small>Тут Вы можаце бачыць бягучы стан складу</small>'
+        inventory_here_you_can_see_current_stock_levels: Склад <small>Тут Вы можаце бачыць бягучы стан складу</small>
         inventory_index: Інвентар
         inventory_state: На складзе
         inventory_tracking: Сачыць за складам
@@ -200,7 +200,7 @@ sylius:
         no_promotion: Прамоцыя не дададзеная
         no_shipping_category: Няма катэгорыі адпраўкі
         no_shipping_charges: Без платы за дастаўку
-        no_short_description: '<i>Без кароткага апісання</i>'
+        no_short_description: <i>Без кароткага апісання</i>
         no_sku: Без SKU
         no_tax_category: Няма падаткавай катэгорыі
         no_taxes: Без падаткаў
@@ -217,7 +217,7 @@ sylius:
         out_of_stock: Няма на складзе
         overview_of_your_store: Аглядзець сваю краму
         pages: Старонкі
-        parent: "Бацькоўскі аб'ект"
+        parent: Бацькоўскі аб'ект
         password: Пароль
         payment: Плацяжы
         payment_method: Метад аплаты
@@ -235,11 +235,10 @@ sylius:
         pricing: Цэнаўтварэнне
         processing: Апрацоўваецца
         product: Тавар
-        product_details_viewing_product_product: 'Дэталі тавара <small>Прагляд тавара "<strong>%product%</strong>"</small>'
-        products: Тавары
-        products_categorized_as_name: 'Тавары, катэгарызаваныя як "%name%"'
-        products_categorized_under_taxon_taxon: 'Тавары <small>з раздзелу "%taxon%" taxon</small>'
-        products_index_of_all_products_in_your_store: 'Тавары <small>індэкс усіх тавараў у Вашай краме</small>'
+        product_details_viewing_product_product: Дэталі тавара <small>Прагляд тавара "<strong>%product%</strong>"</small>
+        products_categorized_as_name: Тавары, катэгарызаваныя як "%name%"
+        products_categorized_under_taxon_taxon: Тавары <small>з раздзелу "%taxon%" taxon</small>
+        products_index_of_all_products_in_your_store: Тавары <small>індэкс усіх тавараў у Вашай краме</small>
         promotion_coupons: Купоны
         promotion_details: Дэталі прамоцыі
         promotion_total: Агульная зніжка
@@ -286,7 +285,7 @@ sylius:
         shop_by: Набыць у
         show_all: Паказаць усё
         show_deleted: Паказ выдалены
-        sign_in_to_the_store_or_create_new_account: 'Увайдзіце ў краму <small>альбо стварыце новы рахунак</small>'
+        sign_in_to_the_store_or_create_new_account: Увайдзіце ў краму <small>альбо стварыце новы рахунак</small>
         sku: SKU
         slideshow: Слайдшоў
         starts_at: Пачатак
@@ -300,7 +299,6 @@ sylius:
         taxation_categories: Катэгорыі падаткаў
         taxation_settings: Падатковыя налады
         taxes: Падаткі
-        taxons: Катэгорыі
         there_are_no_images_for_this_product: Для гэтага тавару няма выяваў
         there_are_no_options_for_this_product: Для гэтага тавару няма опцый
         there_are_no_taxons_for_this_product: Гэты тавар не абкладаецца падаткам
@@ -319,14 +317,14 @@ sylius:
         used: Выкарыстана
         user_details: Звесткі аб карыстальніку
         username: Юзернэйм
-        users_list_of_all_users_registered_in_store: 'Карыстальнікі<small>Спіс усіх карыстальнікаў у краме</small>'
+        users_list_of_all_users_registered_in_store: Карыстальнікі<small>Спіс усіх карыстальнікаў у краме</small>
         variant: Варыянт
         variant_selection_method: Метад выбару варыянта
         view_more: Глядзець болей
         void: Пусты
         warning: Папярэджанне
         welcome_to_your_space: Вітаем у вашай прасторы
-        you_are_customer_since: "Вы з'яўляецеся пакупніком з"
+        you_are_customer_since: Вы з'яўляецеся пакупніком з
         you_have_no_new_orders: У вас няма новых замоваў
         your_cart_is_empty: Ваш кошык пусты
         your_products: Вашыя тавары

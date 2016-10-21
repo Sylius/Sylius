@@ -5,8 +5,8 @@ sylius:
     association_type:
         name:
             not_blank: Kérjük, írja be az a asszociáció nevét.
-            min_length: 'Az asszociáció nevének legalább 1 karakter hosszúnak kell lennie.|Az asszociáció nevének legalább {{ limit }} karakter hosszúnak kell lennie.'
-            max_length: 'Az asszociáció neve nem lehet 1 karakternél hosszabb.|Az asszociáció neve nem lehet {{ limit }} karakternél hosszabb.'
+            min_length: Az asszociáció nevének legalább 1 karakter hosszúnak kell lennie.|Az asszociáció nevének legalább {{ limit }} karakter hosszúnak kell lennie.
+            max_length: Az asszociáció neve nem lehet 1 karakternél hosszabb.|Az asszociáció neve nem lehet {{ limit }} karakternél hosszabb.
         code:
             unique: Már létezik Asszociáció ezzel a kóddal.
             not_blank: Kérlek írj be egy asszociáció kódot.

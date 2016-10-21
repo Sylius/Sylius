@@ -20,11 +20,8 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Paušální sazba za zásilku
-                amount: Částka
             flexible_rate_configuration:
                 label: Flexibilní sazba
-            per_unit_rate_configuration:
-                amount: Částka
             weight_rate_configuration:
                 label: Sazba odvozena od váhy
                 fixed: Pevná částka
@@ -32,7 +29,6 @@ sylius:
                 division: Divize
             volume_rate_configuration:
                 label: Sazba odvozena od objemu
-                amount: Částka
                 division: Divize
         shipping_category:
             description: Popis

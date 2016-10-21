@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Birim fiyatı
-                quantity: Adet
-                variant: Çeşit
-            customer_group: Müşteri Grubu
         block:
             body: İçerik
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Gönderim şekli
         promotion:
             channels: Kanallar
-        coupon:
-            per_customer_usage_limit: Müşteri başına kullanım sınırı
+        promotion_action:
+            add_product_configuration:
+                product: Ürün
         group:
             name: Ad
             roles: Roller
@@ -117,8 +112,6 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Sayısı
-            taxon:
-                taxons: Kategoriler
             total_of_items_from_taxon:
                 amount: Miktar
     installer:

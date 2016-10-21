@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Jedinična cijena
-                quantity: Količina
-                variant: Varijanta
         block:
             body: Poruka
             id: ID
@@ -21,6 +16,9 @@ sylius:
             shipping_method: Vrsta dostave
         promotion:
             channels: Kanali
+        promotion_action:
+            add_product_configuration:
+                product: Artikal
         group:
             name: Naziv grupe
             roles: Role (korisnička prava)
@@ -108,8 +106,6 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Brojač
-            taxon:
-                taxons: Taksoni
             total_of_items_from_taxon:
                 amount: Iznos
     installer:
@@ -120,7 +116,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: sylius.extensions.gd
-            help: 'Instaliraj i omoguči %extension% ekstenziju.'
+            help: Instaliraj i omoguči %extension% ekstenziju.
             iconv: Iconv
             icu: ICU
             intl: Intl
@@ -135,7 +131,7 @@ sylius:
             simplexml_import_dom: SimpleXML
             token_get_all: Tokenizer
         filesystem:
-            header: 'File system '
+            header: File system 
             cache:
                 header: cache
             exists: Postoji

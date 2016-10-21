@@ -9,8 +9,6 @@ sylius:
                     attributes: Tulajdonságok
                     header: Katalógus
                     options: Beállítások
-                    products: Termékek
-                    taxons: Taxonok
                 configuration:
                     admin_users: Adminisztrátorok
                     channels: Csatornák

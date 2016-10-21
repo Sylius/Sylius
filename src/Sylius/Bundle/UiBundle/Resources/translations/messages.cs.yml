@@ -46,7 +46,6 @@ sylius:
         administration_dashboard: Nástěnka administrace
         all: Všechno
         all_your_addresses: Všechny adresy
-        amount: Částka
         an_error_occurred: Vyskytla se chyba
         api: Rozhraní API
         apply_coupon: Použít poukaz
@@ -205,7 +204,6 @@ sylius:
         exchange_rate: Směnný kurz
         exclusive: Exkluzivní
         existing_customer: Stávající zákazník
-        expires_at: Končí v
         extra_notes: Další poznámky
         failed: Neúspěšné
         first_name: Křestní Jméno
@@ -231,7 +229,7 @@ sylius:
         index_of_all_configured_locales: Seznam všech národních prostředí (locales)
         information: Informace
         inventory: Sklad
-        inventory_here_you_can_see_current_stock_levels: 'Zásoby <small>zde vidíte aktuální stav zásob</small>'
+        inventory_here_you_can_see_current_stock_levels: Zásoby <small>zde vidíte aktuální stav zásob</small>
         inventory_index: Sklad
         inventory_state: Stav zásob
         inventory_tracking: Sledování zásob
@@ -312,7 +310,7 @@ sylius:
         no_results: Žádné výsledky
         no_shipping_category: Žádná přepravní kategorie
         no_shipping_charges: Nejsou aplikovány žádné poplatky za dopravu
-        no_short_description: '<i>Žádný krátký popis</i>'
+        no_short_description: <i>Žádný krátký popis</i>
         no_sku: Žádná balení
         no_tax_category: Žádná kategorie daně
         no_taxes: Nejsou aplikovány žádné daně
@@ -359,12 +357,11 @@ sylius:
         product_association_index: Asociace
         product_association_type_index: Typy asociace
         product_attributes: Atributy produktu
-        product_details_viewing_product_product: 'Podrobnosti produktu <small>zobrazení produktu "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Podrobnosti produktu <small>zobrazení produktu "<strong>%product%</strong>"</small>
         product_options: Volby produktů
-        products: Produkty
-        products_categorized_as_name: 'Produkty zařazené jako "%name%"'
-        products_categorized_under_taxon_taxon: 'Produkty <small>kategorizovány pod taxonem "%taxon%"</small>'
-        products_index_of_all_products_in_your_store: 'Produkty <small>seznam všech produktů v obchodě</small>'
+        products_categorized_as_name: Produkty zařazené jako "%name%"
+        products_categorized_under_taxon_taxon: Produkty <small>kategorizovány pod taxonem "%taxon%"</small>
+        products_index_of_all_products_in_your_store: Produkty <small>seznam všech produktů v obchodě</small>
         promotion_coupons: Kupóny
         promotion_details: Podrobnosti akce
         promotion_total: Akce celkem
@@ -382,7 +379,7 @@ sylius:
         refunded: Platba vrácena
         register: Registrace
         register_button: Registrace
-        registration_create_an_account_in_store: 'Registrace, <small>Vytvořit účet v obchodě</small>'
+        registration_create_an_account_in_store: Registrace, <small>Vytvořit účet v obchodě</small>
         registration_date: Datum registrace
         release_inventory: Uvolnění zásob
         remember_me: Pamatuj si mě
@@ -422,7 +419,7 @@ sylius:
         shop_by: Nakupovat podle
         show_all: Zobrazit vše
         show_deleted: Zobrazit odstraněné
-        sign_in_to_the_store_or_create_new_account: 'Přihlášení do obchodu <small>nebo vytvoření nového účtu</small>'
+        sign_in_to_the_store_or_create_new_account: Přihlášení do obchodu <small>nebo vytvoření nového účtu</small>
         simple_blocks: Jednoduché bloky
         sku: SKU
         slideshow: Prezentace
@@ -442,7 +439,6 @@ sylius:
         taxation_categories: Typy zdanění
         taxation_settings: Nastavení zdanění
         taxes: DPH
-        taxons: Taxony
         theme: Vzhled
         there_are_no_images_for_this_product: Pro tento produkt nejsou žádné obrázky
         there_are_no_options_for_this_product: Pro tento produkt nejsou žádné nastavení
@@ -468,7 +464,7 @@ sylius:
         user_confirmation_name: Potvrzení uživatele
         user_details: Údaje o uživateli
         username: Uživatelské jméno
-        users_list_of_all_users_registered_in_store: 'Uživatelé <small>seznam všech uživatelů registrovaných v obchodě</small>'
+        users_list_of_all_users_registered_in_store: Uživatelé <small>seznam všech uživatelů registrovaných v obchodě</small>
         variant: Varianta
         variant_selection_method: Metoda výběru varianty
         variants: Varianty

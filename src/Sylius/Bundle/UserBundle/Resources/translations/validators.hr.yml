@@ -12,5 +12,5 @@ sylius:
             mismatch: Unesene lozinke se ne podudaraju
             wrong_current: Unesena lozinka je različita od trenutne.
         password:
-            min: 'Lozinka treba biti dugačka najmanje {{ limit }} znakova.'
-            max: 'Lozinka ne može imati više od {{ limit }} znakova.'
+            min: Lozinka treba biti dugačka najmanje {{ limit }} znakova.
+            max: Lozinka ne može imati više od {{ limit }} znakova.

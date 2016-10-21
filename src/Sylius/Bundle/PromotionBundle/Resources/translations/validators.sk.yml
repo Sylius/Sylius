@@ -7,30 +7,19 @@ sylius:
             unique: Zľava zo zadaným kódom už existuje.
             not_blank: Prosím zadajte kód pre zľavu.
         description:
-            max_length: 'Popis akcie nesmie byť dlhší ako 1 znak.|Popis akcie nesmie byť dlhší ako {{ limit }} znakov.'
-            min_length: 'Popis akcie musí obsahovať aspoň 1 znak.|Popis akcie musí obsahovať aspoň {{ limit }} znakov.'
+            max_length: Popis akcie nesmie byť dlhší ako 1 znak.|Popis akcie nesmie byť dlhší ako {{ limit }} znakov.
+            min_length: Popis akcie musí obsahovať aspoň 1 znak.|Popis akcie musí obsahovať aspoň {{ limit }} znakov.
             not_blank: Zadajte popis akcie.
-        name:
-            max_length: 'Názov akcie nesmie byť dlhší ako 1 znak.|Názov akcie nesmie byť dlhší ako {{ limit }} znakov.'
-            min_length: 'Názov akcie musí obsahovať aspoň 1 znak.|Názov akcie musí obsahovať aspoň {{ limit }} znakov.'
-            not_blank: Zadajte názov akcie.
         end_date_cannot_be_set_prior_start_date: Dátum ukončenia nemožno nastaviť skôr ako datúm začiatoku.
+        name:
+            max_length: Názov akcie nesmie byť dlhší ako 1 znak.|Názov akcie nesmie byť dlhší ako {{ limit }} znakov.
+            min_length: Názov akcie musí obsahovať aspoň 1 znak.|Názov akcie musí obsahovať aspoň {{ limit }} znakov.
+            not_blank: Zadajte názov akcie.
     promotion_coupon:
         code:
-            max_length: 'Kód kupónu nesmie byť dlhší ako 1 znak.|Kód kupónu nesmie byť dlhší ako {{ limit }} znakov.'
-            min_length: 'Kód kupónu musí obsahovať aspoň 1 znak.|Kód kupónu musí obsahovať aspoň {{ limit }} znakov.'
+            max_length: Kód kupónu nesmie byť dlhší ako 1 znak.|Kód kupónu nesmie byť dlhší ako {{ limit }} znakov.
+            min_length: Kód kupónu musí obsahovať aspoň 1 znak.|Kód kupónu musí obsahovať aspoň {{ limit }} znakov.
             not_blank: Zadajte kód kupónu.
             unique: Tento kupón už existuje.
         usage_limit:
-            min: 'Limit pre použitie kupónu musí byť najmenej {{ limit }}.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'Počet kupónov na vygenerovanie musí byť minimálne {{ limit }}.'
-            not_blank: Zadajte počet kupónov na vygenerovanie.
-        usage_limit:
-            min: 'Limit pre použitie generovaných kupónov musí byť najmenej {{ limit }}.'
-        code_length:
-            min: 'Kód kupónu musí obsahovať aspoň {{ limit }} znakov.'
-            max: 'Kód kupónu nesmie byť dlhší ako {{ limit }} znakov.'
-            not_blank: Prosím, zadajte dĺžku kupónu.
-        possible_generation_amount: 'Neplatná dĺžka kódu alebo počet kupónov. Nie je možné vygenerovať %expectedAmount% unikátnych kódov s dĺžkou %codeLength%. Je možné vygenerovať %possibleAmount% kódov.'
+            min: Limit pre použitie kupónu musí byť najmenej {{ limit }}.

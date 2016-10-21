@@ -25,7 +25,7 @@ sylius:
         administration: Administrare
         administration_dashboard: Panou de administrare
         all_your_addresses: Toate adresele
-        amount: Valoare
+        amount: Sumă
         assortment: Sortiment
         attributes: Atribute
         author: Autor
@@ -141,7 +141,7 @@ sylius:
         index_of_all_configured_locales: Indicele tuturor localizărilor configurate
         information: Informație
         inventory: Inventar
-        inventory_here_you_can_see_current_stock_levels: 'Inventar <small>Aici puteţi vedea stocul actual</small>'
+        inventory_here_you_can_see_current_stock_levels: Inventar <small>Aici puteţi vedea stocul actual</small>
         inventory_index: Inventar
         inventory_state: Stare inventar
         inventory_tracking: Urmărire inventar
@@ -204,7 +204,7 @@ sylius:
         no_promotion: Fără reduceri
         no_shipping_category: Nici o categorie de livrare
         no_shipping_charges: Nu se aplică taxe pentru livrare
-        no_short_description: '<i>Fără descriere scurtă</i>'
+        no_short_description: <i>Fără descriere scurtă</i>
         no_sku: Fără SKU
         no_tax_category: Nici o categorie de taxă
         no_taxes: Nu se aplică taxe
@@ -239,11 +239,10 @@ sylius:
         pricing: Calculator
         processing: În curs de procesare
         product: Produs
-        product_details_viewing_product_product: 'Detalii produs <small>Vizualizează produs "<strong>%product%</strong>"</small>'
-        products: Produse
-        products_categorized_as_name: 'Produse categorizate ca "%name%"'
-        products_categorized_under_taxon_taxon: 'Produse <small>din categoria "%taxon%"</small>'
-        products_index_of_all_products_in_your_store: 'Produse <small>Lista tuturor produselor din magazin</small>'
+        product_details_viewing_product_product: Detalii produs <small>Vizualizează produs "<strong>%product%</strong>"</small>
+        products_categorized_as_name: Produse categorizate ca "%name%"
+        products_categorized_under_taxon_taxon: Produse <small>din categoria "%taxon%"</small>
+        products_index_of_all_products_in_your_store: Produse <small>Lista tuturor produselor din magazin</small>
         promotion_coupons: Coduri promoționale
         promotion_details: Detalii promoție
         promotion_total: Total promoții
@@ -291,7 +290,7 @@ sylius:
         shop_by: Filtrează după
         show_all: Afişare toate
         show_deleted: Arată cele şterse
-        sign_in_to_the_store_or_create_new_account: 'Logați-vă <small>sau creați-vă cont nou</small>'
+        sign_in_to_the_store_or_create_new_account: Logați-vă <small>sau creați-vă cont nou</small>
         sku: SKU
         slideshow: Slideshow
         starts_at: Începe la
@@ -305,7 +304,6 @@ sylius:
         taxation_categories: Categorii de taxe
         taxation_settings: Setări taxe
         taxes: Taxe
-        taxons: Categorii
         there_are_no_images_for_this_product: Nu există imagini pentru acest produs
         there_are_no_options_for_this_product: Nu există opțiuni pentru acest produs
         there_are_no_taxons_for_this_product: Fără categorie
@@ -324,7 +322,7 @@ sylius:
         used: Folosită
         user_details: Detalii utilizator
         username: Nume de utilizator
-        users_list_of_all_users_registered_in_store: 'Utilizatori <small>Lista tuturor utilizatorilor înregistraţi</small>'
+        users_list_of_all_users_registered_in_store: Utilizatori <small>Lista tuturor utilizatorilor înregistraţi</small>
         variant: Variantă
         variant_selection_method: Metoda de selectare a variantei
         view_more: Detalii

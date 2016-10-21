@@ -4,35 +4,35 @@
 sylius:
     credit_card:
         cardholder_name:
-            min_length: '持卡人的姓名必须至少 {{ limit }} 个字符长。'
+            min_length: 持卡人的姓名必须至少 {{ limit }} 个字符长。
             not_blank: 请输入持卡人姓名。
         expiry_month:
-            max_range: '信用卡的到期月份必须介于 {{ min }} 和 {{ max }} 之间。'
-            min_range: '信用卡的到期月份必须介于 {{ min }} 和 {{ max }} 之间。'
+            max_range: 信用卡的到期月份必须介于 {{ min }} 和 {{ max }} 之间。
+            min_range: 信用卡的到期月份必须介于 {{ min }} 和 {{ max }} 之间。
             not_blank: 请选择到期月份。
         number:
             not_blank: 请输入卡号。
             luhn: 您输入的信用卡号码是无效的。
         security_code:
             not_blank: 请输入安全代码。
-            max_length: '该 信用卡验证值码必须至少 {{ limit }} 数字长。'
-            min_length: '该信用卡验证值码必须是最多 {{ limit }} 数字长。'
+            max_length: 该 信用卡验证值码必须至少 {{ limit }} 数字长。
+            min_length: 该信用卡验证值码必须是最多 {{ limit }} 数字长。
         expiry_year:
             not_blank: 请选择到期年份。
     payment_method:
         gateway:
             not_blank: 请选择支付方法网关。
         name:
-            max_length: '付款方法名称必须是 {{ limit }} 字符或更少。'
-            min_length: '付款方法名称必须至少 {{ limit }} 个字符长。'
+            max_length: 付款方法名称必须是 {{ limit }} 字符或更少。
+            min_length: 付款方法名称必须至少 {{ limit }} 个字符长。
             not_blank: 请输入付款方法名称。
         fee_calculator_configuration:
             amount:
-                greater_than_or_equal: '费用不能低于 {{ compared_value }}。'
+                greater_than_or_equal: 费用不能低于 {{ compared_value }}。
                 not_blank: 请输入费用金额。
             percent:
-                max_range: '百分比的费用不能大于 {{ limit }}。'
-                min_range: '百分比的费用不能低于 {{ limit }}。'
+                max_range: 百分比的费用不能大于 {{ limit }}。
+                min_range: 百分比的费用不能低于 {{ limit }}。
                 not_blank: 请输入费用百分比。
         code:
             not_blank: 请输入付款方法代码。

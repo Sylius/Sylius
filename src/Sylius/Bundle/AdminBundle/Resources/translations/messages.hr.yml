@@ -7,8 +7,6 @@ sylius:
             main:
                 catalog:
                     options: Opcije
-                    products: Proizvodi
-                    taxons: Taksoni
                 configuration:
                     channels: Kanali
                     countries: Države

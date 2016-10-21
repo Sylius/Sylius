@@ -18,4 +18,4 @@ sylius:
         new: Ihre Zahlung ist neu.
         failed: Ihre Zahlung wurde abgelehnt.
         unknown: Unbekannter Fehler während des Zahlungsvorgangs.
-        out_of_stock: 'Es sind nur noch %quantity% %name% an Lager.'
+        out_of_stock: Es sind nur noch %quantity% %name% an Lager.

@@ -15,13 +15,6 @@ sylius:
                 shipped: Afsendt
                 returned: Returneret
             tracking_code: Sporingskode
-        shipping_calculator:
-            flat_rate_configuration:
-                amount: Beløb
-            per_unit_rate_configuration:
-                amount: Beløb
-            volume_rate_configuration:
-                amount: Beløb
         shipping_category:
             description: Beskrivelse
             name: Navn

@@ -4,33 +4,33 @@
 sylius:
     credit_card:
         cardholder_name:
-            min_length: 'Jméno držitele karty musí být alespoň {{ limit }} znaků dlouhé.'
+            min_length: Jméno držitele karty musí být alespoň {{ limit }} znaků dlouhé.
             not_blank: Zadejte prosím Jméno držitele karty.
         expiry_month:
-            max_range: 'Měsíc vypršení platnosti karty musí být mezi {{ min }} max {{ max }}'
-            min_range: 'Měsíc vypršení platnosti karty musí být mezi {{ min }} a {{ max }}.'
+            max_range: Měsíc vypršení platnosti karty musí být mezi {{ min }} max {{ max }}
+            min_range: Měsíc vypršení platnosti karty musí být mezi {{ min }} a {{ max }}.
             not_blank: Vyberte prosím měsíc vypršení platnosti.
         number:
             not_blank: Zadejte prosím číslo karty.
             luhn: Číslo kreditní karty, které jste zadali je neplatné.
         security_code:
             not_blank: Zadejte prosím bezpečnostní kód.
-            max_length: 'CVV kód kreditní karty musí být mít alespoň {{ limit }} číslic.'
-            min_length: 'CVV kód kreditní karty musí být nanejvýš {{ limit }} číslic dlouhý.'
+            max_length: CVV kód kreditní karty musí být mít alespoň {{ limit }} číslic.
+            min_length: CVV kód kreditní karty musí být nanejvýš {{ limit }} číslic dlouhý.
         expiry_year:
             not_blank: Vyberte prosím rok vypršení platnosti.
     payment_method:
         gateway:
             not_blank: Prosím vyberte bránu platební metody.
         name:
-            max_length: 'Název metody platby musí obsahovat {{ limit }} znaků nebo méně.'
-            min_length: 'Název metody platby musí obsahovat alespoň {{ limit }} znaků.'
+            max_length: Název metody platby musí obsahovat {{ limit }} znaků nebo méně.
+            min_length: Název metody platby musí obsahovat alespoň {{ limit }} znaků.
             not_blank: Zadejte prosím název metody platby.
         fee_calculator_configuration:
             amount:
-                greater_than_or_equal: 'Poplatek nesmí být nižší než {{ compared_value }}.'
+                greater_than_or_equal: Poplatek nesmí být nižší než {{ compared_value }}.
                 not_blank: Prosím zadejte velikost poplatku.
             percent:
-                max_range: 'Procentuální poplatek nemůže být větší než {{ limit }}.'
-                min_range: 'Procentuální poplatek nemůže být nižší než {{ limit }}.'
+                max_range: Procentuální poplatek nemůže být větší než {{ limit }}.
+                min_range: Procentuální poplatek nemůže být nižší než {{ limit }}.
                 not_blank: Zadejte procentuální poplatek.

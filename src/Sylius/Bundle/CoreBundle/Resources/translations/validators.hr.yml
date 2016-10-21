@@ -8,7 +8,7 @@ sylius:
             unique: Ovaj lokalni kod već postoji.
     product_variant:
         onHand:
-            min: 'Stanje na skladištu mora biti veće od {{ limit }}.'
+            min: Stanje na skladištu mora biti veće od {{ limit }}.
             not_blank: Molim označite ako je moguća isporuka osobno.
         price:
             min: Cijena ne smije biti negativna.

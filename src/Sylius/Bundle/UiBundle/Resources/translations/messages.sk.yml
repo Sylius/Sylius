@@ -53,7 +53,6 @@ sylius:
         admin_users: Administrátory
         all: Všetky
         all_your_addresses: Všetky vaše adresy
-        amount: Suma
         an_error_occurred: Vyskytla sa chyba
         api: API
         apply_coupon: Použiť kupón
@@ -123,7 +122,7 @@ sylius:
         contain_variants: Obsahuje produktové varianty
         contains: Obsahuje
         countries: Krajiny
-        country: Krajina
+        country: Štát
         country_details: Podrobnosti o krajine
         coupon: Kupón
         coupon_based: Používať kupóny
@@ -195,7 +194,7 @@ sylius:
         customer_orders: Objednávky zákazníka
         customer_since: Zákazník od
         customers: Zákazníci
-        customers_list_of_all_customers_in_store: 'Zákazníci, <small>zoznam všetkých zakazníkov v obchode</small>'
+        customers_list_of_all_customers_in_store: Zákazníci, <small>zoznam všetkých zakazníkov v obchode</small>
         customize_default_metadata: Úprava predvolených metadáta
         customize_metadata: Upraviť metadáta
         customize_products_metadata: Upraviť produktové metadáta
@@ -295,7 +294,6 @@ sylius:
         exclusive: Exkluzívne
         existing_customer: Existujúci zákazník
         expiration_and_usage_limits: Expirácia a limit použitia
-        expires_at: Platnosť do
         extra_information: Ďalšie informácie
         extra_notes: Ďalšie poznámky
         failed: Neúspešná
@@ -320,7 +318,7 @@ sylius:
         guest_customer: Návšetvník
         have_an_account_already: Už máte účet
         hello: Ahoj
-        hello_name: 'Ahoj <b>%name%</b>'
+        hello_name: Ahoj <b>%name%</b>
         hide_deleted: Skryť odstránené
         home: Úvod
         hostname: Hostname
@@ -337,7 +335,7 @@ sylius:
         info: Info
         information: Informácia
         inventory: Skladové zásoby
-        inventory_here_you_can_see_current_stock_levels: 'Skladové zásoby <small> prehľad skladových položiek</small>'
+        inventory_here_you_can_see_current_stock_levels: Skladové zásoby <small> prehľad skladových položiek</small>
         inventory_index: Skladové zásoby
         inventory_state: Stav skladových zásob
         inventory_tracking: Sledovanie skladových zásob
@@ -363,10 +361,10 @@ sylius:
         locales: Jazyky
         lock: Zamknúť
         locked: Zamknuté
-        logged_in_as: 'Prihlásený ako %username%'
+        logged_in_as: Prihlásený ako %username%
         login: Prihlásenie
         login_button: Prihlásenie
-        login_sylius_store: 'Prihlásenie do <small>Sylius obchodu</small>'
+        login_sylius_store: Prihlásenie do <small>Sylius obchodu</small>
         logout: Odhlásiť
         main_taxon: Hlavná kategória
         male: Muž
@@ -388,7 +386,7 @@ sylius:
         manage_languages_available_in_the_store: Spravovať dostupné jazyky v obchode
         manage_metadata: Spravovať metadáta
         manage_options: Spravovať voľby
-        manage_orders: 'Spravovať  objednávky'
+        manage_orders: Spravovať  objednávky
         manage_payment_methods_available_to_your_customers: Spravovať platobné metódy k dispozícii pre vašich zákazníkov
         manage_payments: Spravovať platby
         manage_products: Spravovať produkty
@@ -473,7 +471,7 @@ sylius:
         no_shipping_category: Žiadna kategória doručenia
         no_shipping_charges: Nie sú uplatnené žiadne poplatky za dopravu
         no_shipping_methods_available: V súčasnosti neexistujú žiadne spôsoby dopravy dostupné pre vašu dodaciu adresu
-        no_short_description: '<i>Žiadny stručný popis</i>'
+        no_short_description: <i>Žiadny stručný popis</i>
         no_sku: Žiadny skladový kód (SKU)
         no_tax_category: Žiadna daňová kategória
         no_taxes: Nie sú uplatnené žiadne dane
@@ -549,15 +547,14 @@ sylius:
         product_association_types: Priradenie produktov
         product_associations: Produktové priradenia
         product_attributes: Vlastnosti
-        product_details_viewing_product_product: 'Detail produktu <small>pre "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Detail produktu <small>pre "<strong>%product%</strong>"</small>
         product_options: Produktové volby
         product_review: Produktová recenzia
         product_reviews: Produktové recenzie
         product_variants: Produtové varianty
-        products: Produkty
-        products_categorized_as_name: 'Produkty kategorizované ako "%name%"'
-        products_categorized_under_taxon_taxon: 'Produkty <small>kategorizované pod "%taxon%"</small>'
-        products_index_of_all_products_in_your_store: 'Produkty <small>zoznam všetkých produktov vo Vašom obchode</small>'
+        products_categorized_as_name: Produkty kategorizované ako "%name%"
+        products_categorized_under_taxon_taxon: Produkty <small>kategorizované pod "%taxon%"</small>
+        products_index_of_all_products_in_your_store: Produkty <small>zoznam všetkých produktov vo Vašom obchode</small>
         profile: Profil
         promotion_configuration: Nastavenie propagácii
         promotion_coupons: Kupóny
@@ -584,7 +581,7 @@ sylius:
         register_button: Registrovať
         register_in_the_store: Zaregistrujte sa
         registered_customers: Registrovaní používatelia
-        registration_create_an_account_in_store: 'Registráciá, <small>vytvoriť účet v obchode</small>'
+        registration_create_an_account_in_store: Registráciá, <small>vytvoriť účet v obchode</small>
         registration_date: Dátum registrácie
         release_inventory: Uvolnenie skladových položkiek
         remember_me: Zapamätať si ma
@@ -647,7 +644,7 @@ sylius:
         show_metadata: Zobraziť metadáta
         sign_in: Prihlásiť
         sign_in_here: Prihláste sa
-        sign_in_to_the_store_or_create_new_account: 'Prihlásiť sa do obchodu <small>alebo vytvoriť nový účet</small>'
+        sign_in_to_the_store_or_create_new_account: Prihlásiť sa do obchodu <small>alebo vytvoriť nový účet</small>
         sign_out: Odhlásiť
         simple_blocks: Obsahové bloky
         simple_product: Jednoduchý produkt
@@ -663,7 +660,6 @@ sylius:
         street: Ulica
         string_blocks: Textové bloky
         subject: Predmet
-        subscribed_to_newsletter: Prihlásiť sa k odberu noviniek
         subtotal: Medzisúčet
         success: Úspech
         summary: Zhrnutie
@@ -679,7 +675,6 @@ sylius:
         taxation_settings: Nastavenie zdaňovania
         taxes: Dane
         taxonomy: Kategorizácia
-        taxons: Kategórie
         terms_and_conditions: Podmienky používania
         thank_you: Ďakujeme Vám!
         thank_you_for_your_order: Ďakujeme za vašu objednávku
@@ -751,7 +746,7 @@ sylius:
         user_confirmation_name: Potvrdenie registrácie použivateľa
         user_details: Údaje o používateľovi
         username: Používateľské meno
-        users_list_of_all_users_registered_in_store: 'Používatelia <small>Zoznam všetkých používateľov zaregistrovaných v obchode</small>'
+        users_list_of_all_users_registered_in_store: Používatelia <small>Zoznam všetkých používateľov zaregistrovaných v obchode</small>
         values: Hodnoty
         variant: Variant
         variant_selection_method: Spôsob výberu produktového variantu
@@ -761,7 +756,7 @@ sylius:
         view: Zobraziť
         view_and_edit_cart: Zobraziť a upraviť košík
         view_more: Zobraziť viac
-        view_product_details: 'Zobraziť podrobnosti pre %product%'
+        view_product_details: Zobraziť podrobnosti pre %product%
         void: Neplatná
         volume_based_pricing: Cena podľa objemu
         warning: Varovanie

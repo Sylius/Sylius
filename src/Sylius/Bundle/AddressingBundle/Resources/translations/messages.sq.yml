@@ -27,7 +27,6 @@ sylius:
             add_member: Shto anëtar
             members: Anëtarët
             name: Emri
-            type: Lloji
             types:
                 country: Shteti
                 province: Rajoni

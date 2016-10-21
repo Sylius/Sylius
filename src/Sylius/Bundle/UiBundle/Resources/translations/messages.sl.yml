@@ -42,7 +42,6 @@ sylius:
         administration: Administracija
         administration_dashboard: Administracijska nadzorna plošča
         all_your_addresses: Vsi vaši naslovi
-        amount: Znesek
         association: Povezave
         association_types: Vrste združenj
         associations: Povezave
@@ -150,7 +149,7 @@ sylius:
         customer_notified: Kupec je obveščen
         customer_orders: Naročila kupca
         customers: Kupci
-        customers_list_of_all_customers_in_store: 'Kupci <small>Seznam vseh kupcev v trgovini</small>'
+        customers_list_of_all_customers_in_store: Kupci <small>Seznam vseh kupcev v trgovini</small>
         customize_default_metadata: Prilagodite privzete metapodatke
         customize_metadata: Prilagodite metapodatke
         customize_products_metadata: Prilagodite metapodatke izdelkov
@@ -219,7 +218,6 @@ sylius:
         exchange_rate: Menjalni tečaj
         exclusive: Izključno
         existing_customer: Obstoječa stranka
-        expires_at: Poteče dne
         failed: Ni uspelo
         forgot_password: Pozabljeno geslo
         fulfill: Izpolnitev
@@ -234,7 +232,7 @@ sylius:
         grand_total: Skupaj
         guest: Gost
         guest_customer: Kupec gost
-        hello_name: 'Pozdravljeni, <b>%name%</b>'
+        hello_name: Pozdravljeni, <b>%name%</b>
         hide_deleted: Skrijte izbrisane
         home: Domov
         hostname: Ime gostitelja
@@ -248,7 +246,7 @@ sylius:
         index_of_all_configured_locales: Indeks vseh konfiguriranih področnih nastavitev
         information: Informacije
         inventory: Inventar
-        inventory_here_you_can_see_current_stock_levels: 'Zaloga <small>Tukaj lahko vidite trenutne ravni zaloge</small>'
+        inventory_here_you_can_see_current_stock_levels: Zaloga <small>Tukaj lahko vidite trenutne ravni zaloge</small>
         inventory_index: Inventar
         inventory_state: Stanje zaloge
         inventory_tracking: Sledenje inventarja
@@ -267,10 +265,10 @@ sylius:
         locales: Področne nastavitve
         lock: Zaklep
         locked: Zaklenjeno
-        logged_in_as: 'Prijavljeni kot %username%'
+        logged_in_as: Prijavljeni kot %username%
         login: Prijava
         login_button: Prijava
-        login_sylius_store: 'Prijava <small>trgovina Sylius</small>'
+        login_sylius_store: Prijava <small>trgovina Sylius</small>
         logout: Odjava
         main_taxon: Glavni takson
         manage: Upravljanje
@@ -340,7 +338,7 @@ sylius:
         no_results: Ni rezultatov
         no_shipping_category: Na voljo ni nobene kategorije pošiljanja
         no_shipping_charges: Stroški pošiljanja niso uporabljeni
-        no_short_description: '<i>Brez kratkega opisa</i>'
+        no_short_description: <i>Brez kratkega opisa</i>
         no_sku: Brez SKU
         no_tax_category: Brez davčne kategorije
         no_taxes: Davki niso uporabljeni
@@ -395,12 +393,11 @@ sylius:
         product_association_types: Vrste združenj izdelkov
         product_associations: Povezave izdelka
         product_attributes: Lastnosti izdelkov
-        product_details_viewing_product_product: 'Podrobnosti izdelka <small>Ogled izdelka "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Podrobnosti izdelka <small>Ogled izdelka "<strong>%product%</strong>"</small>
         product_options: Možnosti izdelka
-        products: Izdelki
-        products_categorized_as_name: 'Proizvodi razvrščeni kot "%name%"'
-        products_categorized_under_taxon_taxon: 'Proizvodi <small>Razvrščeni v sistematsko skupino "%taxon%"</small>'
-        products_index_of_all_products_in_your_store: 'Izdelki <small>Indeks vseh izdelkov vaše trgovine</small>'
+        products_categorized_as_name: Proizvodi razvrščeni kot "%name%"
+        products_categorized_under_taxon_taxon: Proizvodi <small>Razvrščeni v sistematsko skupino "%taxon%"</small>
+        products_index_of_all_products_in_your_store: Izdelki <small>Indeks vseh izdelkov vaše trgovine</small>
         profile: Profil
         promotion_coupons: Kuponi
         promotion_details: Podrobnosti promocije
@@ -420,7 +417,7 @@ sylius:
         refunded: Povrnjena kupnina
         register: Registracija
         register_button: Registracija
-        registration_create_an_account_in_store: 'Registracija <small>Ustvarite račun v trgovini</small>'
+        registration_create_an_account_in_store: Registracija <small>Ustvarite račun v trgovini</small>
         registration_date: Datum registracije
         release_inventory: Sprostitev inventarja
         remember_me: Zapomni si me
@@ -469,7 +466,7 @@ sylius:
         show_in_store: Prikažite v trgovini
         show_metadata: Pokaži metapodatke
         sign_in: Prijava
-        sign_in_to_the_store_or_create_new_account: 'Prijavite se v trgovino <small>ali ustvarite nov račun</small>'
+        sign_in_to_the_store_or_create_new_account: Prijavite se v trgovino <small>ali ustvarite nov račun</small>
         sign_out: Odjava
         simple_blocks: Preprosti bloki
         sku: SKU
@@ -491,7 +488,6 @@ sylius:
         taxation_categories: Kategorije obdavčitev
         taxation_settings: Nastavitve obdavčitve
         taxes: Davki
-        taxons: Taksoni
         thank_you_for_your_order: Hvala za vaše naročilo
         theme: Tema
         there_are_no_attributes_configured: Na voljo ni nobenega nastavljenega atributa
@@ -551,19 +547,18 @@ sylius:
         update: Posodobitev
         update_product_association_type: Posodobite vrsto povezave izdelka
         updating_tax_rate: Posodabljanje davčne stopnje
-        usage_limit: Omejitev uporabe
         used: Uporabljeno
         user_confirmation_name: Potrditev uporabnika
         user_details: Podrobnosti uporabnika
         username: Uporabniško ime
-        users_list_of_all_users_registered_in_store: 'Uporabniki <small>Seznam vseh registriranih uporabnikov v trgovini</small>'
+        users_list_of_all_users_registered_in_store: Uporabniki <small>Seznam vseh registriranih uporabnikov v trgovini</small>
         values: Vrednosti
         variant: Različica
         variant_selection_method: Način izbora variante
         variants: Variante
         view: Pogled
         view_more: Poglejte si več
-        view_product_details: 'Ogled podrobnosti %product%'
+        view_product_details: Ogled podrobnosti %product%
         void: Nično
         volume_based_pricing: Določanje cen na osnovi količine
         warning: Opozorilo

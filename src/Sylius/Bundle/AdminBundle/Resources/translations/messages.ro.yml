@@ -8,8 +8,6 @@ sylius:
                 catalog:
                     attributes: Atribute
                     options: Opţiuni
-                    products: Produse
-                    taxons: Categorii
                 configuration:
                     countries: Țări
                     header: Configurare

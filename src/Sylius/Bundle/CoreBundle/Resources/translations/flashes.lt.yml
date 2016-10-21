@@ -9,7 +9,7 @@ sylius:
         item_add_error: Įvyko klaida bandant įdėti prekę į krepšelį.
         item_remove_completed: Prekė pašalinta iš krepšelio.
         item_remove_error: Įvyko klaida bandant pašalinti prekę iš krepšelio.
-        restricted_zone_removal: 'Produktas %product% pašalintas iš krepšelio, kadangi netinkamas jūsų šaliai.'
+        restricted_zone_removal: Produktas %product% pašalintas iš krepšelio, kadangi netinkamas jūsų šaliai.
     checkout:
         restricted_zone: Šis produktas netinkamas jūsų šaliai.
         success: Dėkojame už užsakymą!
@@ -18,4 +18,4 @@ sylius:
         new: Jūsų mokėjimas yra naujas.
         failed: Jūsų mokėjimas buvo atmestas.
         unknown: Nežinomas mokėjimo klaida.
-        out_of_stock: 'Prekės %name% yra tik %quantity% vnt.'
+        out_of_stock: Prekės %name% yra tik %quantity% vnt.

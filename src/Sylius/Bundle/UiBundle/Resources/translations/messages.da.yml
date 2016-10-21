@@ -23,7 +23,6 @@ sylius:
         addressing_step: Adressering trin
         administration: Administration
         all_your_addresses: Alle dine adresser
-        amount: Beløb
         assortment: Sortiment
         author: Forfatter
         availability: Tilgængelighed
@@ -135,7 +134,7 @@ sylius:
         index_of_all_configured_locales: Indekset for alle konfigurerede landestandarder
         information: Oplysninger
         inventory: Lager
-        inventory_here_you_can_see_current_stock_levels: 'Lager <small> Her kan du se det aktuelle lagerniveauer</small>'
+        inventory_here_you_can_see_current_stock_levels: Lager <small> Her kan du se det aktuelle lagerniveauer</small>
         inventory_index: Lager
         inventory_state: Lagerstatus
         inventory_tracking: Lagerstyring
@@ -197,7 +196,7 @@ sylius:
         no_promotion: Ingen kampagnekode
         no_shipping_category: Ingen forsendelses kategori
         no_shipping_charges: Ingen forsendelsesomkostninger
-        no_short_description: '<i>Ingen kort beskrivelse</i>'
+        no_short_description: <i>Ingen kort beskrivelse</i>
         no_sku: Ingen SKU
         no_tax_category: Ingen momskategori
         no_taxes: Ingen afgifter tilføjet
@@ -231,11 +230,10 @@ sylius:
         price: Pris
         processing: Behandler
         product: Produkt
-        product_details_viewing_product_product: 'Produkt detaljer <small>Viser produkt "<strong>%product%</strong>"</small>'
-        products: Produkter
-        products_categorized_as_name: 'Produkter kategoriseres som "%name%"'
-        products_categorized_under_taxon_taxon: 'Produkter <small>kategoriseret under "%taxon%" taxon</small>'
-        products_index_of_all_products_in_your_store: 'Produkter <small>katalog af alle produkter i din butik</small>'
+        product_details_viewing_product_product: Produkt detaljer <small>Viser produkt "<strong>%product%</strong>"</small>
+        products_categorized_as_name: Produkter kategoriseres som "%name%"
+        products_categorized_under_taxon_taxon: Produkter <small>kategoriseret under "%taxon%" taxon</small>
+        products_index_of_all_products_in_your_store: Produkter <small>katalog af alle produkter i din butik</small>
         promotion_coupons: Kuponer
         promotion_details: Kampagne detaljer
         promotion_total: Rabat total
@@ -281,7 +279,7 @@ sylius:
         shop_by: Butik af
         show_all: Vis alle
         show_deleted: Vis slettede
-        sign_in_to_the_store_or_create_new_account: 'Log ind <small>eller Opret ny konto</small>'
+        sign_in_to_the_store_or_create_new_account: Log ind <small>eller Opret ny konto</small>
         sku: SKU
         slideshow: Slideshow
         starts_at: Starter ved
@@ -295,7 +293,6 @@ sylius:
         taxation_categories: Moms kategorier
         taxation_settings: Indstillinger for beskatning
         taxes: Moms
-        taxons: Taxons
         there_are_no_images_for_this_product: Der er ingen billeder til dette produkt
         there_are_no_options_for_this_product: Der er ingen indstillinger for dette produkt
         there_are_no_taxons_for_this_product: Der er ingen taxons til dette produkt
@@ -311,11 +308,10 @@ sylius:
         unit_price: Enhedspris
         unknown: Ukendt
         updating_tax_rate: Opdatering af moms sats
-        usage_limit: Brugsgrænse
         used: Brugt
         user_details: Bruger detaljer
         username: Brugernavn
-        users_list_of_all_users_registered_in_store: 'Brugere <small>liste over alle brugere registreret i butikken</small>'
+        users_list_of_all_users_registered_in_store: Brugere <small>liste over alle brugere registreret i butikken</small>
         variant: Variant
         variant_selection_method: Variant udvælgelsesmetode
         view_more: Se mere

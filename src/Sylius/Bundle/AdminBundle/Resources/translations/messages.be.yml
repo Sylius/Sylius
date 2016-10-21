@@ -7,8 +7,6 @@ sylius:
             main:
                 catalog:
                     options: Опцыі
-                    products: Тавары
-                    taxons: Катэгорыі
                 configuration:
                     countries: Краіны
                     header: Канфігурацыя

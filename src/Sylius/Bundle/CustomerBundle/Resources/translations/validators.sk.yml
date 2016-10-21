@@ -4,19 +4,19 @@
 sylius:
     customer:
         first_name:
-            max: 'Meno nesmie byť dlhšie ako {{ limit }} znakov.'
-            min: 'Meno musí obsahovať minimálne {{ limit }} znakov.'
+            max: Meno nesmie byť dlhšie ako {{ limit }} znakov.
+            min: Meno musí obsahovať minimálne {{ limit }} znakov.
             not_blank: Zadajte Vaše krstné meno.
         last_name:
-            max: 'Priezvisko nesmie byť dlhšie ako {{ limit }} znakov.'
-            min: 'Priezvisko musí obsahovať minimálne {{ limit }} znakov.'
+            max: Priezvisko nesmie byť dlhšie ako {{ limit }} znakov.
+            min: Priezvisko musí obsahovať minimálne {{ limit }} znakov.
             not_blank: Zadajte Vaše priezvisko.
         gender:
             not_blank: Pohlavie musí byť vyplnené.
         email:
             already_used: Tento e-mail sa už používa, prosím prihláste sa alebo použite reset hesla.
-            max: 'E-mail nesmie byť dlhší ako {{ limit }} znakov.'
-            min: 'E-mail musí byť aspoň {{ limit }} znakov.'
+            max: E-mail nesmie byť dlhší ako {{ limit }} znakov.
+            min: E-mail musí byť aspoň {{ limit }} znakov.
             not_blank: Zadajte Váš e-mail.
             invalid: Tento e-mail je neplatný.
             unique: Tento e-mail sa už používa.

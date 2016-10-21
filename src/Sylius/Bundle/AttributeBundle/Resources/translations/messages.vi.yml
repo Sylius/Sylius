@@ -6,3 +6,4 @@ sylius:
         attribute:
             code: Mã
             name: Tên
+            type: Phân loại

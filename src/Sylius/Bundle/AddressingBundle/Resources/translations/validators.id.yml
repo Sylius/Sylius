@@ -49,7 +49,7 @@ sylius:
             not_blank: Silahkan masukkan kode zona.
             unique: Kode zona harus unik.
         members:
-            min_count: 'Harap tambahkan setidaknya {{ limit }} anggota zona.'
+            min_count: Harap tambahkan setidaknya {{ limit }} anggota zona.
         name:
             max_length: Nama zona tidak boleh lebih dari 255 karakter|Nama zona tidak boleh lebih dari 255 karakter.
             min_length: Nama zona harus memiliki panjang minimal 2 karakter | Nama zona harus memiliki panjang minimal 2 karakter.

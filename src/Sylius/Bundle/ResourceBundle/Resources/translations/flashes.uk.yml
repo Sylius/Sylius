@@ -12,4 +12,4 @@ sylius:
         restore_deleted: '%resource% був успішно відновлений.'
         enable: '%resource% був успішно ввімкнений.'
         disable: '%resource% був успішно вимкнений.'
-        delete_error: 'Неможливо видалити, %resource% знаходиться у використанні.'
+        delete_error: Неможливо видалити, %resource% знаходиться у використанні.

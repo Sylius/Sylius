@@ -3,33 +3,6 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Valoare
-            percentage_discount_configuration:
-                percentage: Procent
-            type: Tip
-        rule:
-            taxonomy_configuration:
-                taxons: Categorii
-                exclude: Exclude
-            contains_product_configuration:
-                variants: Produse
-                exclude: Exclude
-            cart_quantity_configuration:
-                count: Număr
-            item_total_configuration:
-                amount: Valoare
-            nth_order_configuration:
-                nth: Al n-lea
-            shipping_country_configuration:
-                country: Țară
-            type: Tip
-        coupon:
-            usage_limit: Limita de utilizare
-        coupon_generate_instruction:
-            amount: Valoare
-            usage_limit: Limita de utilizare
         promotion:
             actions: Acțiuni
             add_action: Adaugă acţiune
@@ -41,3 +14,20 @@ sylius:
             rules: Reguli
             starts_at: Începe la
             usage_limit: Limita de utilizare
+        promotion_action:
+            fixed_discount_configuration:
+                amount: Sumă
+            type: Tip
+        promotion_coupon:
+            usage_limit: Limita de utilizare
+        promotion_coupon_generator_instruction:
+            amount: Sumă
+            usage_limit: Limita de utilizare
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Număr
+            item_total_configuration:
+                amount: Sumă
+            shipping_country_configuration:
+                country: Țară
+            type: Tip

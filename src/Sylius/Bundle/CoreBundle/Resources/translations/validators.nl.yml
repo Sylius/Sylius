@@ -17,7 +17,7 @@ sylius:
             unique: Deze locatie bestaat al.
     product_variant:
         onHand:
-            min: 'Verkoopbare voorraad moet groter zijn dan {{ limit }}.'
+            min: Verkoopbare voorraad moet groter zijn dan {{ limit }}.
             not_blank: Vul de verkoopbare voorraad in.
         price:
             min: Prijs mag niet negatief zijn.
@@ -26,4 +26,4 @@ sylius:
             min: De originele prijs mag niet negatief zijn.
     product_translation:
         short_description:
-            max: 'Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.'
+            max: Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.

@@ -5,10 +5,10 @@ sylius:
     form:
         route:
             name: Назва
-            parent: "Батьківський об'єкт"
+            parent: Батьківський об'єкт
         static_content:
             body: Тіло
             menu_nodes: Елементи меню
-            parent: "Батьківський об'єкт"
+            parent: Батьківський об'єкт
             routes: Маршрути
             title: Заголовок

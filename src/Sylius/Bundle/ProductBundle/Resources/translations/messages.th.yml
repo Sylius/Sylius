@@ -10,7 +10,6 @@ sylius:
             options: ตัวเลือก
             meta_keywords: Meta Keywords
             meta_description: Meta Description
-            taxons: หมวดหมู่
         product_variant:
             available_on: พร้อมจำหน่ายเมื่อ
             available_until: สิ้นสุดการจำหน่าย

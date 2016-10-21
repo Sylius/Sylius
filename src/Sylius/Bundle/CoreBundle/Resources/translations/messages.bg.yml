@@ -3,6 +3,9 @@
 
 sylius:
     form:
+        promotion_action:
+            add_product_configuration:
+                product: Продукт
         channel:
             taxonomies: Категоризация
             locales: Езикови променливи

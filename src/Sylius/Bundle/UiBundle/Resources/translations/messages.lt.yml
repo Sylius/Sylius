@@ -185,7 +185,6 @@ sylius:
         exchange_rate: Valiutų kursas
         exclusive: Išskirtinis
         existing_customer: Esamas klientas
-        expires_at: Nustoja galioti
         failed: Nepavyko
         first_name: Vardas
         fulfill: Išpildyti
@@ -209,7 +208,7 @@ sylius:
         index_of_all_configured_locales: Visų sukonfigūruotų lokalių indeksas
         information: Informacija
         inventory: Atsargos
-        inventory_here_you_can_see_current_stock_levels: 'Atsargos <small>čia galite peržiūrėti dabartinius atsargų lygius</small>'
+        inventory_here_you_can_see_current_stock_levels: Atsargos <small>čia galite peržiūrėti dabartinius atsargų lygius</small>
         inventory_index: Atsargos
         inventory_state: Atsargų būklė
         inventory_tracking: Atsargų stebėjimas
@@ -288,7 +287,7 @@ sylius:
         no_results: Nėra rezultatų
         no_shipping_category: Nėra pristatymo kategorijos
         no_shipping_charges: Nepritaikyta jokių pristatymo mokesčių
-        no_short_description: '<i>Nėra trumpo aprašymo</i>'
+        no_short_description: <i>Nėra trumpo aprašymo</i>
         no_sku: Nėra kodo
         no_tax_category: Nėra mokesčių kategorijos
         no_taxes: Nepritaikyta jokių mokesčių
@@ -333,12 +332,11 @@ sylius:
         processing: Apdorojamas
         product: Produktas
         product_attributes: Produkto atributai
-        product_details_viewing_product_product: 'Produkto detalės <small>peržiūrimas produktas "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Produkto detalės <small>peržiūrimas produktas "<strong>%product%</strong>"</small>
         product_options: Produkto parinktys
-        products: Produktai
-        products_categorized_as_name: 'Produktai klasifikuojami kaip "%name%"'
-        products_categorized_under_taxon_taxon: 'Produktai <small>kategorizuoti pagal "%taxon%"</small>'
-        products_index_of_all_products_in_your_store: 'Produktai <small>visų produktų jūsų parduotuvėje rodyklė</small>'
+        products_categorized_as_name: Produktai klasifikuojami kaip "%name%"
+        products_categorized_under_taxon_taxon: Produktai <small>kategorizuoti pagal "%taxon%"</small>
+        products_index_of_all_products_in_your_store: Produktai <small>visų produktų jūsų parduotuvėje rodyklė</small>
         promotion_coupons: Kuponai
         promotion_details: Akcijos detalės
         promotion_total: Iš viso nuolaidų
@@ -397,7 +395,7 @@ sylius:
         show_all: Rodyti viską
         show_deleted: Rodyti pašalintus
         sign_in: Prisijungti
-        sign_in_to_the_store_or_create_new_account: 'Prisijunkite prie parduotuvės <small>arba užsiregistruokite</small>'
+        sign_in_to_the_store_or_create_new_account: Prisijunkite prie parduotuvės <small>arba užsiregistruokite</small>
         sign_out: Atsijungti
         simple_blocks: Paprasti blokai
         sku: Kodas
@@ -417,7 +415,6 @@ sylius:
         taxation_categories: Apmokestinimo kategorijos
         taxation_settings: Apmokestinimo nustatymai
         taxes: Mokesčiai
-        taxons: Taksonai
         there_are_no_images_for_this_product: Šis produktas neturi paveikslėlių
         there_are_no_options_for_this_product: Šis produktas neturi parinkčių
         there_are_no_taxons_for_this_product: Nėra jokių taksonų šiam produktui
@@ -441,7 +438,7 @@ sylius:
         user_confirmation_name: Vartotojo patvirtinimas
         user_details: Vartotojo duomenys
         username: Vartotojo vardas
-        users_list_of_all_users_registered_in_store: 'Vartotojai <small>visų registruotų vartotojų sąrašas</small>'
+        users_list_of_all_users_registered_in_store: Vartotojai <small>visų registruotų vartotojų sąrašas</small>
         variant: Variantas
         variant_selection_method: Varianto pasirinkimo būdas
         variants: Variantai

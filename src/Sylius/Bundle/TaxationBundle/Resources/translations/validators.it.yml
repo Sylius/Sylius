@@ -21,4 +21,4 @@ sylius:
             not_blank: Seleziona una zona.
         code:
             not_blank: Inserisci il codice della tassazione fiscale locale.
-            unique: "L'aliquota d'imposta con il codice dato esiste già."
+            unique: L'aliquota d'imposta con il codice dato esiste già.

@@ -9,7 +9,7 @@ sylius:
         item_add_error: هنگام افزودن کالا به سبد خرید اشکالی رخ داد.
         item_remove_completed: محصول از سبد خرید حذف شد.
         item_remove_error: هنگام حذف کالا از سبد خرید اشکالی رخ داد.
-        restricted_zone_removal: 'محصول %product% از سبد خرید شما حذف شد زیرا در کشور/شهر شما قابل ارائه نیست.'
+        restricted_zone_removal: محصول %product% از سبد خرید شما حذف شد زیرا در کشور/شهر شما قابل ارائه نیست.
     checkout:
         restricted_zone: این کالا در کشور شما عرضه نمی شود.
         success: از سفارش شما سپاسگزاریم!
@@ -18,4 +18,4 @@ sylius:
         new: پرداخت شما به تازگی ثبت شد.
         failed: پرداخت شما نامعتبر است.
         unknown: خطای غیرقابل تشخصی در روند پرداخت
-        out_of_stock: 'تنها %quantity% %name% در انبار وجود دارد.'
+        out_of_stock: تنها %quantity% %name% در انبار وجود دارد.

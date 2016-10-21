@@ -35,7 +35,7 @@ sylius:
             not_blank: Įveskite provincijos pavadinimą.
     zone:
         members:
-            min_count: 'Pridėkite bent {{ limit }} zonos valstybes.'
+            min_count: Pridėkite bent {{ limit }} zonos valstybes.
         name:
             max_length: Zonos pavadinimas neturi būti ilgesnis negu 255 simboliai|Zonos pavadinimas neturi būti ilgesnis negu 255 simboliai.
             not_blank: Įveskite zonos pavadinimą.

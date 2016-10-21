@@ -11,8 +11,8 @@ sylius:
             unique: Código de producto debe ser único.
         name:
             not_blank: Por favor introduzca el nombre del producto.
-            min_length: 'El nombre del producto debe tener al menos 1 carácter.|El nombre de producto debe tener al menos {{ limit }} caracteres.'
-            max_length: 'El nombre de producto debe tener como máximo 1 carácter.|El nombre de producto no debe tener más de {{ limit }} caracteres.'
+            min_length: El nombre del producto debe tener al menos 1 carácter.|El nombre de producto debe tener al menos {{ limit }} caracteres.
+            max_length: El nombre de producto debe tener como máximo 1 carácter.|El nombre de producto no debe tener más de {{ limit }} caracteres.
     variant:
         sku:
             not_blank: Por favor introduzca el SKU de la variante.
@@ -24,10 +24,10 @@ sylius:
             unique: Ya existe una opción con ese código.
         name:
             not_blank: Por favor introduzca el nombre de la opción.
-            min_length: 'El nombre de la opción debe tener al menos 1 carácter.|El nombre de opción debe tener al menos {{ limit }} caracteres.'
-            max_length: 'El nombre de la opción debe tener como máximo 1 carácter.|El nombre de la opción no debe tener más de {{ limit }} caracteres.'
+            min_length: El nombre de la opción debe tener al menos 1 carácter.|El nombre de opción debe tener al menos {{ limit }} caracteres.
+            max_length: El nombre de la opción debe tener como máximo 1 carácter.|El nombre de la opción no debe tener más de {{ limit }} caracteres.
         values:
-            min_count: 'Por favor añada al menos {{ limit }} valor para la opción.|Por favor añada al menos {{ limit }} valores para la opción.'
+            min_count: Por favor añada al menos {{ limit }} valor para la opción.|Por favor añada al menos {{ limit }} valores para la opción.
     option_value:
         code:
             not_blank: Introduzca un valor de opción.

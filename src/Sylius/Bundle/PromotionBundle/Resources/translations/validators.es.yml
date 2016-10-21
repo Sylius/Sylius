@@ -7,30 +7,35 @@ sylius:
             unique: La promoción con este código ya existe.
             not_blank: Por favor, ingresa el codigo promocional.
         description:
-            max_length: 'La descripción de la promoción no debe tener más de 1 carácter.|La descripción de la promoción no debe tener más de {{ limit }} caracteres.'
-            min_length: 'La descripción de la promoción debe tener al menos 1 carácter.|La descripción de la promoción debe tener al menos {{ limit }} caracteres.'
+            max_length: La descripción de la promoción no debe tener más de 1 carácter.|La descripción de la promoción no debe tener más de {{ limit }} caracteres.
+            min_length: La descripción de la promoción debe tener al menos 1 carácter.|La descripción de la promoción debe tener al menos {{ limit }} caracteres.
             not_blank: Por favor introduce la descripción de la promoción.
-        name:
-            max_length: 'El nombre de la promoción no debe tener más de 1 carácter.|El nombre de la promoción no debe tener más de {{ limit }} caracteres.'
-            min_length: 'El nombre de la promoción debe tener al menos 1 carácter.|El nombre de la promoción debe tener al menos {{ limit }} caracteres.'
-            not_blank: Por favor introduzca el nombre de la promoción.
         end_date_cannot_be_set_prior_start_date: La fecha de finalización no puede ser anterior a la fecha de inicio.
+        name:
+            max_length: El nombre de la promoción no debe tener más de 1 carácter.|El nombre de la promoción no debe tener más de {{ limit }} caracteres.
+            min_length: El nombre de la promoción debe tener al menos 1 carácter.|El nombre de la promoción debe tener al menos {{ limit }} caracteres.
+            not_blank: Por favor introduzca el nombre de la promoción.
+    promotion_action:
+        percentage_discount_configuration:
+            min: El valor del porcentaje de descuento debe ser al menos 0%.
+            max: El valor máximo para el porcentaje de descuento es 100%.
     promotion_coupon:
         code:
-            max_length: 'El código del cupón no debe tener más de 1 carácter.|El código del cupón no debe tener más de {{ limit }} caracteres.'
-            min_length: 'El código del cupón debe tener al menos 1 carácter.|El código del cupón debe tener al menos {{ limit }} caracteres.'
+            max_length: El código del cupón no debe tener más de 1 carácter.|El código del cupón no debe tener más de {{ limit }} caracteres.
+            min_length: El código del cupón debe tener al menos 1 carácter.|El código del cupón debe tener al menos {{ limit }} caracteres.
             not_blank: Por favor, introduzca el código del cupón.
             unique: Este cupón ya existe.
+        is_invalid: El código de cupón no es válido.
         usage_limit:
-            min: 'El límite de uso del cupón debe ser al menos {{ limit }}.'
-    promotion_coupon_generate_instruction:
+            min: El límite de uso del cupón debe ser al menos {{ limit }}.
+    promotion_coupon_generator_instruction:
         amount:
-            min: 'La cantidad de cupones a generar debe ser al menos {{ limit }}.'
-            not_blank: Por favor, introduzca la cantidad de cupones a generar.
-        usage_limit:
-            min: 'El límite de uso de los cupones generados debe ser de al menos {{ limit }}.'
+            min: La cantidad de cupones a generar debe ser al menos {{ limit }}.
+            not_blank: Por favor, introduce la cantidad de cupones a generar.
         code_length:
-            min: 'El código del cupón debe tener al menos {{ limit }} caracteres.'
-            max: 'El código de cupón no debe de tener más de {{ limit }} caracteres.'
-            not_blank: Por favor, introduzca el tamaño del código de cupón.
-        possible_generation_amount: 'Longitud de código de cupón o número de cupones incorrecto. No es posible generar %expectedAmount% cupones únicos con la longitud de código igual a %codeLength%. El numero posible a generar es %possibleAmount%.'
+            min: El código de cupón debe tener al menos {{ limit }} caracteres.
+            max: El código de cupón no puede tener más de {{ limit }} caracteres.
+            not_blank: Por favor, introduce la longitud del código de cupón.
+        possible_generation_amount: Longitud de código de cupón o cantidad de cupones incorrecto. No se pueden generar %expectedAmount% cupones únicos con longitud de código de %codeLength%. La cantidad posible a generar son %possibleAmount%.
+        usage_limit:
+            min: El límite de uso de los cupones generados debe ser al menos {{ limit }}.

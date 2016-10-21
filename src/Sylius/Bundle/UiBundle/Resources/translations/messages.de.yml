@@ -195,7 +195,7 @@ sylius:
         customer_orders: Kundenbestellungen
         customer_since: Kunde seit
         customers: Kunden
-        customers_list_of_all_customers_in_store: 'Kunden<small>Liste aller Kunden</small>'
+        customers_list_of_all_customers_in_store: Kunden<small>Liste aller Kunden</small>
         customize_default_metadata: Standard-Metadaten anpassen
         customize_metadata: Metadaten anpassen
         customize_products_metadata: Produkt-Metadaten anpassen
@@ -210,7 +210,7 @@ sylius:
         delete: Löschen
         delete_image: Bild löschen
         deleted: Gelöscht
-        delivery_and_shipping: 'Lieferung & Versand'
+        delivery_and_shipping: Lieferung & Versand
         description: Beschreibung
         details: Details
         disable: Deaktivieren
@@ -294,7 +294,6 @@ sylius:
         exclusive: Exklusiv
         existing_customer: Existierender Benutzer
         expiration_and_usage_limits: Ablauf und maximale Anzahl
-        expires_at: Verfällt am
         extra_information: Zusätzliche Informationen
         extra_notes: Weitere Hinweise
         failed: Fehlgeschlagen
@@ -319,7 +318,7 @@ sylius:
         guest_customer: Gast Kunde
         have_an_account_already: Du hast bereits einen Acoount
         hello: Hallo
-        hello_name: 'Hallo <b>%name%</b>'
+        hello_name: Hallo <b>%name%</b>
         hide_deleted: Gelöschte Elemente ausblenden
         home: Startseite
         hostname: Server-Name
@@ -336,7 +335,7 @@ sylius:
         info: Info
         information: Hinweis
         inventory: Lagerbestände
-        inventory_here_you_can_see_current_stock_levels: 'Lagerbestand <small>Hier können Sie den aktuellen Lagerbestand sehen </small>'
+        inventory_here_you_can_see_current_stock_levels: Lagerbestand <small>Hier können Sie den aktuellen Lagerbestand sehen </small>
         inventory_index: Lagerbestände
         inventory_state: Bestand Status
         inventory_tracking: Warenbestandsverfolgung
@@ -362,10 +361,10 @@ sylius:
         locales: Gebietsschemata
         lock: Sperren
         locked: Gesperrt
-        logged_in_as: 'Angemeldet als %username%'
+        logged_in_as: Angemeldet als %username%
         login: Anmelden
         login_button: Anmelden
-        login_sylius_store: 'Login <small>Sylius Webshop</small>'
+        login_sylius_store: Login <small>Sylius Webshop</small>
         logout: Abmelden
         main_taxon: Haupt-Taxonomie
         male: Männlich
@@ -471,7 +470,7 @@ sylius:
         no_shipping_category: Keine Versandkategorie
         no_shipping_charges: Keine Versandkosten
         no_shipping_methods_available: Es sind zurzeit keine Versandarten für Ihre Versandadresse verfügbar
-        no_short_description: '<i>Keine Kurzbeschreibung</i>'
+        no_short_description: <i>Keine Kurzbeschreibung</i>
         no_sku: Keine Artikelpositionen verfügbar
         no_tax_category: Keine Steuerkategorie
         no_taxes: Keine Steuern
@@ -547,15 +546,14 @@ sylius:
         product_association_types: Produkt-Beziehungsvorlagen
         product_associations: Produktzuordnungen
         product_attributes: Produkt Attribute
-        product_details_viewing_product_product: 'Produktdetails <small> Anzeige von Produkt "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Produktdetails <small> Anzeige von Produkt "<strong>%product%</strong>"</small>
         product_options: Produktoptionen
         product_review: Produkt-Bewertung
         product_reviews: Produkt-Bewertung
         product_variants: Produktvarianten
-        products: Produkte
-        products_categorized_as_name: 'Produkte kategorisiert als "%name%"'
-        products_categorized_under_taxon_taxon: 'Produkte <small>kategorisiert als "%taxon%</small>"'
-        products_index_of_all_products_in_your_store: 'Produkte <small> Alle Produkte in Ihrem Shop</small>'
+        products_categorized_as_name: Produkte kategorisiert als "%name%"
+        products_categorized_under_taxon_taxon: Produkte <small>kategorisiert als "%taxon%</small>"
+        products_index_of_all_products_in_your_store: Produkte <small> Alle Produkte in Ihrem Shop</small>
         profile: Profil
         promotion_configuration: Promotionsverwaltung
         promotion_coupons: Gutscheine
@@ -582,7 +580,7 @@ sylius:
         register_button: Registrieren
         register_in_the_store: Im Shop registrieren
         registered_customers: Registrierte Kunden
-        registration_create_an_account_in_store: 'Anmeldung <small>Konto für Shop erstellen</small>'
+        registration_create_an_account_in_store: Anmeldung <small>Konto für Shop erstellen</small>
         registration_date: Anmeldedatum
         release_inventory: Warenbestand freigeben
         remember_me: Eingeloggt bleiben
@@ -645,7 +643,7 @@ sylius:
         show_metadata: Metadaten anzeigen
         sign_in: Anmelden
         sign_in_here: Hier anmelden
-        sign_in_to_the_store_or_create_new_account: 'Anmelden <small> oder neuen Benutzer anlegen</small>'
+        sign_in_to_the_store_or_create_new_account: Anmelden <small> oder neuen Benutzer anlegen</small>
         sign_out: Abmelden
         simple_blocks: Einfache Elemente
         simple_product: Einfaches Produkt
@@ -661,7 +659,6 @@ sylius:
         street: Straße
         string_blocks: Zeichenketten–Elemente
         subject: Betreff
-        subscribed_to_newsletter: Newsletter abonnieren
         subtotal: Zwischensumme
         success: Erfolgreich
         summary: Zusammenfassung
@@ -677,8 +674,7 @@ sylius:
         taxation_settings: Gruppeneinstellungen
         taxes: Steuern
         taxonomy: Systematik
-        taxons: Gruppen
-        terms_and_conditions: 'Allgemeine Geschäfts- und Nutzungsbedingungen'
+        terms_and_conditions: Allgemeine Geschäfts- und Nutzungsbedingungen
         thank_you: Vielen Dank!
         thank_you_for_your_order: Danke für Ihre Bestellung
         theme: Template

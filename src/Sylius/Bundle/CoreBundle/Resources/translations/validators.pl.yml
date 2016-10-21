@@ -27,7 +27,7 @@ sylius:
             cannot_disable_base: Nie można wyłączyć podstawowych ustawień regionalnych.
     product_variant:
         onHand:
-            min: 'Dostępna ilość musi być większa niż {{ limit }}.'
+            min: Dostępna ilość musi być większa niż {{ limit }}.
             not_blank: Należy wprowadzić dostępną ilość.
         price:
             min: Cena nie może być ujemna.
@@ -36,7 +36,7 @@ sylius:
             min: Oryginalna cena nie może być ujemna.
     product_translation:
         short_description:
-            max: 'Krótki opis nie może być dłuższy niż {{ limit }} znaków.'
+            max: Krótki opis nie może być dłuższy niż {{ limit }} znaków.
     user:
         email:
             unique: Ten e-mail jest już używany.

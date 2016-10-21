@@ -8,8 +8,8 @@ sylius:
             unique: Produkt SKU skal være unik.
         name:
             not_blank: Indtast produktnavn.
-            min_length: 'Produktnavnet skal være mindst ét tegn langt. |Produktnavnet skal være mindst {{ limit }} tegn langt.'
-            max_length: 'Produktnavnet må ikke være længere end 1 tegn. |Produktnavn må ikke være længere end {{ limit }} tegn.'
+            min_length: Produktnavnet skal være mindst ét tegn langt. |Produktnavnet skal være mindst {{ limit }} tegn langt.
+            max_length: Produktnavnet må ikke være længere end 1 tegn. |Produktnavn må ikke være længere end {{ limit }} tegn.
     variant:
         sku:
             not_blank: Angiv variant SKU.
@@ -18,10 +18,10 @@ sylius:
     option:
         name:
             not_blank: Indtast egenskabens systemnavn.
-            min_length: 'Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.'
-            max_length: 'Egenskabens system navn må ikke være længere end 1 tegn.|Egenskabens system navn må ikke være længere end {{ limit }} tegn.'
+            min_length: Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.
+            max_length: Egenskabens system navn må ikke være længere end 1 tegn.|Egenskabens system navn må ikke være længere end {{ limit }} tegn.
         values:
-            min_count: 'Tilføj venligst mindst {{ limit }} egenskabsværdi. |Tilføj venligst mindst {{ limit }} egenskabsværdier.'
+            min_count: Tilføj venligst mindst {{ limit }} egenskabsværdi. |Tilføj venligst mindst {{ limit }} egenskabsværdier.
     option_value:
         value:
             not_blank: Angiv egenskabens værdi.

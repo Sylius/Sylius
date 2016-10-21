@@ -4,11 +4,17 @@
 sylius:
     form:
         route:
+            content: محتوا
             name: نام
             parent: رده پدر
         static_content:
             body: متن
+            id: شناسه
+            internal_name: نام داخلی
             menu_nodes: زیرمجموعه های منو
             parent: رده پدر
+            publish_end_date: پایان تاریخ انتشار
+            publish_start_date: تاریخ شروع انتشار
+            publishable: منتشر شده
             routes: آدرس های داخلی
             title: عنوان

@@ -18,4 +18,4 @@ sylius:
         new: A fizetésed új.
         failed: A fizetés el lett utasítva.
         unknown: Ismeretlen hiba fizetés közben.
-        out_of_stock: 'A raktáron csak %quantity% %name% van.'
+        out_of_stock: A raktáron csak %quantity% %name% van.

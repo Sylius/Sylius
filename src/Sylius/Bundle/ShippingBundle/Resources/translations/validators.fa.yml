@@ -4,8 +4,8 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'نام دسته نباید بیش از {{ limit }} حرف باشد.'
-            min_length: 'نام رده باید بیش از {{ limit }} حرف باشد.'
+            max_length: نام دسته نباید بیش از {{ limit }} حرف باشد.
+            min_length: نام رده باید بیش از {{ limit }} حرف باشد.
             not_blank: لطفا نوع ارسال را وارد کنید.
         code:
             not_blank: لطفا کد نوع ارسال کالا را وارد کنید.
@@ -16,8 +16,8 @@ sylius:
             min_length: sylius.روش_ارسال.ماشین_حساب.کوتاهترین_طول
             not_blank: sylius.روش_ارسال.ماشین_حساب.خالی_نیست
         name:
-            max_length: 'شیوه ی ارسال نباید بیش از {{ limit }} حرف باشد.'
-            min_length: 'شیوه ارسال باید حداقل {{ limit }} حرف داشته باشد.'
+            max_length: شیوه ی ارسال نباید بیش از {{ limit }} حرف باشد.
+            min_length: شیوه ارسال باید حداقل {{ limit }} حرف داشته باشد.
             not_blank: لطفا شیوه ارسال را وارد کنید.
         code:
             not_blank: لطفا کد شیوه ی ارسال را وارد کنید.

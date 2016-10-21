@@ -13,7 +13,6 @@ sylius:
         add_member: Προσθήκη μέλους
         add_province: Προσθήκη επαρχίας
         add_to_cart: Προσθήκη στο καλάθι
-        amount: Ποσό
         available_on: Διαθέσιμο την
         back: Επιστροφή
         billing_address: Διεύθυνση τιμολόγησης
@@ -101,7 +100,6 @@ sylius:
         price: Τιμή
         processing: Σε εξέλιξη
         product: Προϊόν
-        products: Προϊόντα
         promotion_total: Σύνολο προώθησης
         promotions: Προσφορές
         province: Επαρχία
@@ -124,7 +122,7 @@ sylius:
         shipping_method: Τρόπος αποστολής
         shipping_state: Κατάσταση μεταφορικών
         shipping_total: Σύνολο εξόδων αποστολής
-        sign_in_to_the_store_or_create_new_account: 'Είσοδος στο κατάστημα <small>ή να δημιουργήσετε νέο λογαριασμό</small>'
+        sign_in_to_the_store_or_create_new_account: Είσοδος στο κατάστημα <small>ή να δημιουργήσετε νέο λογαριασμό</small>
         sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
         starts_at: Αρχίζει με
         state: Νομός

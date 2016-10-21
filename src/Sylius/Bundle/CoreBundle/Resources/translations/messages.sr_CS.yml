@@ -5,6 +5,9 @@ sylius:
     form:
         block:
             id: ID
+        promotion_action:
+            add_product_configuration:
+                product: Proizvod
         group:
             name: Ime
         order_filter:

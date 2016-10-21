@@ -59,7 +59,7 @@ sylius:
         change_your_password: Parolanızı değiştirin
         channel: Kanal
         channels: Kanallar
-        checkout: 'Ödeme  yap'
+        checkout: Ödeme  yap
         choose_file: Dosya seç
         city: Şehir
         clear_cart: Sepeti boşalt
@@ -134,7 +134,7 @@ sylius:
         customer_notified: Müşteri bildirim
         customer_orders: Müşteri siparişleri
         customers: Müşteriler
-        customers_list_of_all_customers_in_store: 'Müşteriler <small>Mağazanın tüm müşterilerinin listesi</small>'
+        customers_list_of_all_customers_in_store: Müşteriler <small>Mağazanın tüm müşterilerinin listesi</small>
         dashboard: Kontrol Paneli
         data: Veri Merkezi
         default_billing_address: Varsayılan fatura adresi
@@ -194,7 +194,6 @@ sylius:
         exchange_rate: Döviz Kuru
         exclusive: Özel
         existing_customer: Varolan Müşteri
-        expires_at: Süre sonu: 
         failed: Başarısız oldu
         first_name: Ad
         fulfill: Stokta
@@ -219,7 +218,7 @@ sylius:
         index_of_all_configured_locales: Tüm yapılandırılmış diller
         information: Bilgilendirme
         inventory: Stok
-        inventory_here_you_can_see_current_stock_levels: 'Stok <small>burada güncel stok değerlerini görebilirsiniz</small>'
+        inventory_here_you_can_see_current_stock_levels: Stok <small>burada güncel stok değerlerini görebilirsiniz</small>
         inventory_index: Stok
         inventory_state: Stok durumu
         inventory_tracking: Stok takibi
@@ -240,7 +239,7 @@ sylius:
         lock: Kiliti
         login: Giriş
         login_button: Giriş
-        login_sylius_store: 'Oturum açma <small>Sylius saklamak</small>'
+        login_sylius_store: Oturum açma <small>Sylius saklamak</small>
         logout: Çıkış yap
         manage: Yönet
         manage_adjustments: Ayarları yönet
@@ -252,7 +251,7 @@ sylius:
         manage_orders: Siparişleri yönet
         manage_payments: Ödemeleri yönet
         manage_products: Ürünleri yönet
-        manage_promotions: 'Promosyonları  yönetmek'
+        manage_promotions: Promosyonları  yönetmek
         manage_shipments: Kargoları yönetme
         manage_shipping_categories: Nakliye kategorilerini Yönet
         manage_shipping_methods: Kargo yöntemlerini yönet
@@ -301,11 +300,11 @@ sylius:
         no_results: Sonuç bulunamadı
         no_shipping_category: Kargo kategorisi yok
         no_shipping_charges: Uygulanan hiçbir kargo ücreti yoktur
-        no_short_description: '<i>Kısa açıklama yok</i>'
+        no_short_description: <i>Kısa açıklama yok</i>
         no_sku: SKU yok
         no_tax_category: Vergi kategorisi yok
         no_taxes: Vergi uygulanmadı
-        not_available_in_your_country: 'sylius -> ürün_sizin bölgenizde mevcut değil'
+        not_available_in_your_country: sylius -> ürün_sizin bölgenizde mevcut değil
         number: Sayı
         number_of_orders: Toplam sipariş
         oauth_provider: OAuth sağlayıcı
@@ -347,13 +346,12 @@ sylius:
         product: Ürün
         product_association_types: Ürün ilişki türleri
         product_attributes: Ürün Öznitelikleri
-        product_details_viewing_product_product: 'Ürün ayrıntıları <small>Gösterilen ürün "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Ürün ayrıntıları <small>Gösterilen ürün "<strong>%product%</strong>"</small>
         product_options: Ürün seçenekleri
         product_reviews: Ürün Yorumları
-        products: Ürünler
-        products_categorized_as_name: 'Ürünler  "%name%" olarak kategorilendirildi'
-        products_categorized_under_taxon_taxon: 'Ürünler <small>"%taxon%" sınıfının altında kategorilendirilmiş</small>'
-        products_index_of_all_products_in_your_store: 'Ürünler <small>Mağazada bulunan tüm ürünlerin dizini</small>'
+        products_categorized_as_name: Ürünler  "%name%" olarak kategorilendirildi
+        products_categorized_under_taxon_taxon: Ürünler <small>"%taxon%" sınıfının altında kategorilendirilmiş</small>
+        products_index_of_all_products_in_your_store: Ürünler <small>Mağazada bulunan tüm ürünlerin dizini</small>
         promotion_coupons: Kuponlar
         promotion_details: Promosyon detayları
         promotion_total: Promosyon toplamı
@@ -372,7 +370,7 @@ sylius:
         refunded: İade Edildi
         register: Üye ol
         register_button: Üye ol
-        registration_create_an_account_in_store: 'Kayıt <small>Mağazada bir hesap oluştur</small>'
+        registration_create_an_account_in_store: Kayıt <small>Mağazada bir hesap oluştur</small>
         registration_date: Kayıt tarihi
         release_inventory: Stoğa girdi
         remember_me: Beni hatırla
@@ -414,13 +412,13 @@ sylius:
         shop_by: benim alışveriş
         show_all: Hepsini göster
         show_deleted: Silineni göster
-        sign_in_to_the_store_or_create_new_account: 'Mağazaya giriş yapın <small>veya kayıt olun</small>'
+        sign_in_to_the_store_or_create_new_account: Mağazaya giriş yapın <small>veya kayıt olun</small>
         simple_blocks: Basit bloklar
         sku: Stok Kodu
         slideshow: Slayt gösterisi
         slideshow_blocks: Slayt gösterisi blokları
         start_date: Başlangıç Tarihi
-        starts_at: "' Dan başlar"
+        starts_at: ''' Dan başlar'
         state: Durum
         street: Sokak
         string_blocks: Dize blokları
@@ -434,7 +432,6 @@ sylius:
         taxation_categories: Vergi kategorileri
         taxation_settings: Vergilendirme Ayarları
         taxes: Vergiler
-        taxons: Kategoriler
         there_are_no_images_for_this_product: Bu ürün için hiçbir resim yok
         there_are_no_options_for_this_product: Bu ürün için hiçbir seçenek yok
         there_are_no_taxons_for_this_product: Bu ürün için bir sınıf yok
@@ -448,7 +445,7 @@ sylius:
         total_registrations: Toplam kayıtlar
         tracking_number: Kargo takip numarası
         type: Türü
-        unavailable: 'sylius -> ürün -> kullanılamıyor'
+        unavailable: sylius -> ürün -> kullanılamıyor
         unit_price: Birim fiyatı
         unknown: Bilinmiyor
         unlock: Kilidini Aç
@@ -458,7 +455,7 @@ sylius:
         user_confirmation_name: Kullanıcı onayı
         user_details: Kullanıcı detayları
         username: Kullanıcı adı
-        users_list_of_all_users_registered_in_store: '<small>Tüm kullanıcıların listesini deposunda kayıtlı</small> kullanıcılar'
+        users_list_of_all_users_registered_in_store: <small>Tüm kullanıcıların listesini deposunda kayıtlı</small> kullanıcılar
         variant: Çeşit
         variant_selection_method: Varyant seçme yöntemi
         variants: Türevleri

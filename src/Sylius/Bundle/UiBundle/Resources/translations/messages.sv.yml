@@ -39,11 +39,11 @@ sylius:
         adjustments: Justeringar
         administration: Administration
         administration_dashboard: Administrationspanel
-        administration_panel_login: 'Administrationspanel - inloggning'
+        administration_panel_login: Administrationspanel - inloggning
         admin_users: Administratörer
         all: Alla
         all_your_addresses: Alla dina adresser
-        amount: Belopp
+        amount: Antal
         an_error_occurred: Ett fel uppstod
         api: Api
         apply_coupon: Använd kupong
@@ -126,7 +126,7 @@ sylius:
         customer_login: Kundinloggning
         customer_since: Kund sedan
         customers: Kunder
-        customers_list_of_all_customers_in_store: 'Kunder <small>Lista över alla kunder i butiken</small>'
+        customers_list_of_all_customers_in_store: Kunder <small>Lista över alla kunder i butiken</small>
         dashboard: Kontrollpanel
         data: Data
         date: Datum
@@ -136,7 +136,7 @@ sylius:
         delete: Radera
         delete_image: Ta bort bild
         deleted: Raderad
-        delivery_and_shipping: 'Leverans & frakt'
+        delivery_and_shipping: Leverans & frakt
         description: Beskrivning
         details: Detaljer
         disable: Avaktivera
@@ -174,7 +174,6 @@ sylius:
         exchange_rate: Växlingskurs
         exclusive: Exklusiv
         expiration_and_usage_limits: Förfallodag och användningsgränser
-        expires_at: Förfaller den
         extra_information: Extra information
         extra_notes: Extra anteckningar
         failed: Misslyckad
@@ -330,7 +329,7 @@ sylius:
         shipped: Skickad
         shipping: Leverans
         shipping_address: Leveransadress
-        shipping_and_payment_methods: 'Leverans- och betalningsmetoder'
+        shipping_and_payment_methods: Leverans- och betalningsmetoder
         shipping_category: Kategori
         shipping_methods: Leveransmetoder
         shop_by_brand: Handla efter märke
@@ -367,7 +366,6 @@ sylius:
         unlimited: Obegränsat
         update_cart: Uppdatera varukorgen
         usage: Användning
-        usage_limit: Användningsbegränsning
         user_confirmation_name: Användarbekräftelse
         username: Användarnanm
         values: Värden

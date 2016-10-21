@@ -8,8 +8,8 @@ sylius:
         delete: '%resource% a bien été supprimé.'
         move: '%resource% a été déplacé avec succès.'
         generate: '%resource%s ont été générés avec succès.'
-        revert: 'Les modifications de %resource% ont bien été annulées.'
+        revert: Les modifications de %resource% ont bien été annulées.
         restore_deleted: '%resource% a bien été restauré.'
         enable: '%resource% a bien été activé.'
         disable: '%resource% a bien été désactivé.'
-        delete_error: "Impossible de supprimer, %resource% est en cours d'utilisation."
+        delete_error: Impossible de supprimer, %resource% est en cours d'utilisation.

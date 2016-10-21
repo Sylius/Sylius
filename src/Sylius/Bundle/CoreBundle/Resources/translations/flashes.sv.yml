@@ -9,7 +9,7 @@ sylius:
         item_add_error: Ett fel uppstod när artikeln skulle läggas i korgen.
         item_remove_completed: Artikeln har tagits bort från korgen.
         item_remove_error: Ett fel uppstod när artikeln skulle tas bort från korgen.
-        restricted_zone_removal: 'Produkten %product% borttagen från kundvagnen eftersom den inte är tillgänglig i ditt land.'
+        restricted_zone_removal: Produkten %product% borttagen från kundvagnen eftersom den inte är tillgänglig i ditt land.
     checkout:
         restricted_zone: Den här produkten är inte tillgänglig i ditt land.
         success: Tack för din beställning!
@@ -18,4 +18,4 @@ sylius:
         new: Din betalning är ny.
         failed: Din betalning blev nekad.
         unknown: Okänt betalningsfel.
-        out_of_stock: 'Det finns endast %quantity% %name% i lager.'
+        out_of_stock: Det finns endast %quantity% %name% i lager.

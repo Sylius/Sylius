@@ -3,55 +3,28 @@
 
 sylius:
     form:
-        action:
-            fixed_discount_configuration:
-                amount: Suma
-            percentage_discount_configuration:
-                percentage: Percentuálne
-            type: Typ
-        rule:
-            taxonomy_configuration:
-                taxons: Kategórie
-                exclude: Vylúčiť
-            contains_product_configuration:
-                variants: Produkty
-                exclude: Vylúčiť
-            cart_quantity_configuration:
-                count: Počet
-                equal: Rovná sa
-            item_total_configuration:
-                amount: Suma
-            nth_order_configuration:
-                nth: N-ty
-            customer_loyalty_configuration:
-                time: Čas
-                unit:
-                    days: Dní
-                    weeks: Týždňov
-                    months: Mesiacov
-                    years: Rokov
-                    header: Jednotka
-                after: Používateľ vytvorený po období
-            shipping_country_configuration:
-                country: Krajina
-            type: Typ
-        coupon:
-            usage_limit: Limit použitia
-            expires_at: Platnosť do
-        coupon_generate_instruction:
-            amount: Suma
-            usage_limit: Limit použitia
-            expires_at: Platnosť do
-            code_length: Dĺžka kódu
         promotion:
             actions: Akcie
             add_action: Pridať podmienku
             add_rule: Pridať pravidlo
             coupon_based: Používať kupóny
-            exclusive: Exkluzívne
             description: Popis
             ends_at: Koniec
+            exclusive: Exkluzívne
             name: Názov
             rules: Pravidlá
             starts_at: Začiatok
             usage_limit: Limit použitia
+        promotion_action:
+            type: Typ
+        promotion_coupon:
+            usage_limit: Limit použitia
+        promotion_coupon_generator_instruction:
+            usage_limit: Limit použitia
+        promotion_rule:
+            cart_quantity_configuration:
+                count: Počet
+                equal: Rovná sa
+            shipping_country_configuration:
+                country: Štát
+            type: Typ

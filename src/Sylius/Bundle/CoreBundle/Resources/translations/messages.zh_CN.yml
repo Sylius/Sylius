@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: 单价
-                quantity: 数量
-                variant: 变量
-            customer_group: 客户组
         block:
             body: 正文
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: 配送方式
         promotion:
             channels: 频道
-        coupon:
-            per_customer_usage_limit: 每个客户使用限制
+        promotion_action:
+            add_product_configuration:
+                product: 产品
         group:
             name: 名称
             roles: 角色
@@ -126,11 +121,8 @@ sylius:
             contains_taxon:
                 taxon: 分类
                 count: 计数
-            taxon:
-                taxons: 分类
             total_of_items_from_taxon:
                 taxon: 分类
-                amount: 金额
     installer:
         extensions:
             header: 扩展组件
@@ -139,7 +131,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: '安装和启用 %extension%扩展。'
+            help: 安装和启用 %extension%扩展。
             iconv: Iconv
             exif: Exif
             fileinfo: Fileinfo

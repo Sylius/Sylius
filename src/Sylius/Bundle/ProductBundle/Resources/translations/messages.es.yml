@@ -10,7 +10,7 @@ sylius:
             options: Opciones de producto
             meta_keywords: Meta palabras clave
             meta_description: Meta descripción
-            taxons: Taxonomías
+            taxons: Taxones
         product_variant:
             available_on: Disponible el
             available_until: Disponible hasta

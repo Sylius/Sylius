@@ -6,7 +6,7 @@ sylius:
         email:
             enabled: Увімкнено
             subject: Тема
-            sender_name: "Ім'я відправника"
+            sender_name: Ім'я відправника
             sender_address: Адреса відправника
             content: Вміст
             template: Шаблон

@@ -4,33 +4,33 @@
 sylius:
     product:
         sku:
-            not_blank: "Veuillez saisir l'UGS (SKU) du produit."
-            unique: "L'UGS du produit doit être unique."
+            not_blank: Veuillez saisir l'UGS (SKU) du produit.
+            unique: L'UGS du produit doit être unique.
         code:
             not_blank: Veillez introduire le code du produit.
             unique: Le code du produit doit être unique.
         name:
             not_blank: Veuillez saisir le nom du produit.
-            min_length: 'Le nom du produit doit contenir au moins 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.'
-            max_length: 'Le nom du produit ne doit pas dépasser 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.'
+            min_length: Le nom du produit doit contenir au moins 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.
+            max_length: Le nom du produit ne doit pas dépasser 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.
     variant:
         sku:
-            not_blank: "Veuillez saisir l'UGS (SKU) de la variante."
-            unique: "L'UGS de la variante doit être unique."
+            not_blank: Veuillez saisir l'UGS (SKU) de la variante.
+            unique: L'UGS de la variante doit être unique.
         combination: La variante avec cette option existe déjà.
     option:
         code:
-            not_blank: "Entrez le code de l'option."
-            unique: "Le code de l'option existe déjà."
+            not_blank: Entrez le code de l'option.
+            unique: Le code de l'option existe déjà.
         name:
-            not_blank: "Veuillez saisir le nom de l'option."
-            min_length: "Le nom de l'option doit contenir au moins 1 caractère.|Le nom de l'option ne doit pas dépasser les {{ limit }} caractères."
-            max_length: "Le nom de l'option ne doit pas dépasser 1 caractère.|Le nom de l'option ne doit pas dépasser les {{ limit }} caractères."
+            not_blank: Veuillez saisir le nom de l'option.
+            min_length: Le nom de l'option doit contenir au moins 1 caractère.|Le nom de l'option ne doit pas dépasser les {{ limit }} caractères.
+            max_length: Le nom de l'option ne doit pas dépasser 1 caractère.|Le nom de l'option ne doit pas dépasser les {{ limit }} caractères.
         values:
-            min_count: "Veuillez ajouter au moins {{ limit }} valeur pour l'option.|Veuillez ajouter au moins {{ limit }} valeurs pour l'option."
+            min_count: Veuillez ajouter au moins {{ limit }} valeur pour l'option.|Veuillez ajouter au moins {{ limit }} valeurs pour l'option.
     option_value:
         code:
-            not_blank: "Entrez la valeur de l'option."
-            unique: "La valeur de l'option existe déjà."
+            not_blank: Entrez la valeur de l'option.
+            unique: La valeur de l'option existe déjà.
         value:
-            not_blank: "Veuillez saisir la valeur de l'option."
+            not_blank: Veuillez saisir la valeur de l'option.

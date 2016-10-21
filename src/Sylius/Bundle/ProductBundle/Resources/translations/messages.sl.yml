@@ -10,7 +10,6 @@ sylius:
             options: Možnosti
             meta_keywords: Meta ključne besede
             meta_description: Meta opis
-            taxons: Taksoni
         product_variant:
             available_on: Na voljo na
             available_until: Na voljo do

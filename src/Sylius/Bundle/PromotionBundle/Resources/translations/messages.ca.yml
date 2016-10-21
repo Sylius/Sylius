@@ -6,3 +6,9 @@ sylius:
         promotion:
             description: Descripció
             name: Nom
+        promotion_action:
+            type: Tipus
+        promotion_rule:
+            shipping_country_configuration:
+                country: País
+            type: Tipus

@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Egységár
-                quantity: Mennyiség
-                variant: Változat
-            customer_group: Felhasználói csoport
         block:
             body: Törzs
             id: Azonosító
@@ -22,8 +16,9 @@ sylius:
             shipping_method: Szállítási mód
         promotion:
             channels: Csatornák
-        coupon:
-            per_customer_usage_limit: Felhasználókénti felhasználási korlát
+        promotion_action:
+            add_product_configuration:
+                product: Termék
         group:
             name: Név
             roles: Szerepek
@@ -49,8 +44,8 @@ sylius:
             created_at_from: Ez után készítve
             created_at_to: Ez előtt készítve
             number: Szám
-            total_from: -tól
-            total_to: -ig
+            total_from: '-tól'
+            total_to: '-ig'
             payment_state: Fizetés állapota
             channel: Minden csatorna
         page:
@@ -72,14 +67,14 @@ sylius:
         product_variant:
             tax_category: ÁFA-kategória
         shipment_filter:
-            created_at_from: -tól
-            created_at_to: -ig
+            created_at_from: '-tól'
+            created_at_to: '-ig'
             number: Rendelés azonosítója
             shipping_address: Szállítás erre a névre
             channel: Minden csatorna
         payment_filter:
-            created_at_from: -tól
-            created_at_to: -ig
+            created_at_from: '-tól'
+            created_at_to: '-ig'
             number: Rendelés azonosítója
             billing_address: Számlázási név
             channel: Minden csatorna
@@ -127,11 +122,8 @@ sylius:
             contains_taxon:
                 taxon: Taxonómia
                 count: Mennyiség
-            taxon:
-                taxons: Taxonok
             total_of_items_from_taxon:
                 taxon: Taxonómia
-                amount: Összeg
     installer:
         extensions:
             header: kiegészítők
@@ -141,7 +133,7 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
-            help: 'Telepítsd és engedélyezd a(z) %extension% kiegészítőt.'
+            help: Telepítsd és engedélyezd a(z) %extension% kiegészítőt.
             iconv: Iconv
             exif: Exif
             fileinfo: Fájl infó
@@ -198,10 +190,10 @@ sylius:
         user_confirmation:
             name: Felhasználói megerősítés
             subject: Üdvözöljük áruházunkban
-            content: 'Üdvözlünk áruházunkban!<br/><br/>Sikeresen regisztráltál.<br/>Köszönjük %username%.'
+            content: Üdvözlünk áruházunkban!<br/><br/>Sikeresen regisztráltál.<br/>Köszönjük %username%.
         password_reset:
             name: Jelszó visszaállítás
-            content: '<h3>Szia %username%</h3>A jelszavad megváltoztatásához, kérlek látogass ide %url%<br/><br/>Üdvözlettel, a csapat.'
+            content: <h3>Szia %username%</h3>A jelszavad megváltoztatásához, kérlek látogass ide %url%<br/><br/>Üdvözlettel, a csapat.
         verification:
             name: Email cím hitelesítése
             content: 'Email címed megerősítéséhez kérlek látogass ide: %url%'

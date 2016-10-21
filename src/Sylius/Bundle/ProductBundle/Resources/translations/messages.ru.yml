@@ -10,7 +10,6 @@ sylius:
             options: Список опций
             meta_keywords: Ключевые слова метаданных
             meta_description: Описание метаданных
-            taxons: Налоги
         product_variant:
             available_on: Доступен с
             available_until: Доступно до

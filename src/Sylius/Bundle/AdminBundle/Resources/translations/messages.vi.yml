@@ -8,7 +8,6 @@ sylius:
                 catalog:
                     attributes: Thuộc tính
                     options: Tùy chọn
-                    products: Sản phẩm
                 configuration:
                     channels: Kênh
                     countries: Quốc gia

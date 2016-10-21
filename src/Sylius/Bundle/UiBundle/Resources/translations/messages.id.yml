@@ -16,6 +16,7 @@ sylius:
         code: Kode
         company: Perusahaan
         content: Konten
+        country: Negara
         coupon: Kupon
         currency: Mata Uang
         current_stock: Stok
@@ -51,6 +52,7 @@ sylius:
         tax_category: Kategori Pajak
         title: Judul
         topic: Topik
+        type: Jenis
         unit_price: Harga Satuan
         variant: Varian
         variant_selection_method: Metode Pilih Varian

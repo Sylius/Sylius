@@ -4,18 +4,18 @@
 sylius:
     attribute:
         name:
-            not_blank: "Inserisci il nome dell'attributo."
-            min_length: "Il nome dell'attributo deve essere lungo almeno 1 carattere. | Il nome dell'attributo deve essere lungo almeno {{ limit }} caratteri. "
-            max_length: "Il nome dell' attributo non deve essere più lungo di 1 carattere.|Il nome dell'attributo non deve essere più lungo di {{ limit }} caratteri."
+            not_blank: Inserisci il nome dell'attributo.
+            min_length: Il nome dell'attributo deve essere lungo almeno 1 carattere. | Il nome dell'attributo deve essere lungo almeno {{ limit }} caratteri. 
+            max_length: Il nome dell' attributo non deve essere più lungo di 1 carattere.|Il nome dell'attributo non deve essere più lungo di {{ limit }} caratteri.
         code:
             not_blank: Inserisci il codice di attributo.
             unique: Questo codice è già in uso.
         presentation:
             not_blank: Si prega di inserire un attributo di presentazione.
-            min_length: "L' Attributo di presentazione deve essere lungo almeno 1 carattere.|Attributo di presentazione deve essere lungo almeno {{ limit }} caratteri."
-            max_length: "L' Attributo di presentazione non deve essere più lungo di 1 carattere.|Attributo di presentazione non deve essere più lungo di {{ limit }} caratteri."
+            min_length: L' Attributo di presentazione deve essere lungo almeno 1 carattere.|Attributo di presentazione deve essere lungo almeno {{ limit }} caratteri.
+            max_length: L' Attributo di presentazione non deve essere più lungo di 1 carattere.|Attributo di presentazione non deve essere più lungo di {{ limit }} caratteri.
     attribute_value:
         attribute:
             not_blank: Si prega di selezionare un attributo.
         value:
-            not_blank: "Si prega di inserire un valore per l'attributo."
+            not_blank: Si prega di inserire un valore per l'attributo.

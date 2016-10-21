@@ -51,7 +51,6 @@ sylius:
         admin_users: Adminisztrátorok
         all: Mind
         all_your_addresses: Minden Ön által megadott cím
-        amount: Összeg
         an_error_occurred: Hiba történt
         api: API
         apply_coupon: Kupon használata
@@ -191,7 +190,7 @@ sylius:
         customer_orders: Vevői megrendelések
         customer_since: Ügyfél amióta
         customers: Ügyfelek
-        customers_list_of_all_customers_in_store: 'Vevők<small>A webáruház összes ügyfelének listája</small>'
+        customers_list_of_all_customers_in_store: Vevők<small>A webáruház összes ügyfelének listája</small>
         customize_default_metadata: Alapértelmezett metaadat testreszabása
         customize_metadata: Metaadatok testreszabása
         customize_products_metadata: Termék metaadatok testreszabása
@@ -206,7 +205,7 @@ sylius:
         delete: Törlés
         delete_image: Kép törlése
         deleted: Törölve
-        delivery_and_shipping: 'Szállítmányozás & szállítás'
+        delivery_and_shipping: Szállítmányozás & szállítás
         description: Leírás
         details: Részletek
         disable: Letilt
@@ -289,7 +288,6 @@ sylius:
         exclusive: Exkluzív
         existing_customer: Meglévő ügyfél
         expiration_and_usage_limits: Lejárati és a használati korlát
-        expires_at: Lejárat
         extra_information: További információk
         extra_notes: További megjegyzések
         failed: Sikertelen
@@ -313,7 +311,7 @@ sylius:
         guest_customer: Vendég ügyfél
         have_an_account_already: Már van egy fiókod
         hello: Üdvözlünk
-        hello_name: 'Üdvözöljük <b>%name%</b>'
+        hello_name: Üdvözöljük <b>%name%</b>
         hide_deleted: Törölt elem elrejtése
         home: Főoldal
         hostname: Hoszt neve
@@ -330,7 +328,7 @@ sylius:
         info: Információ
         information: Információk
         inventory: Leltár
-        inventory_here_you_can_see_current_stock_levels: 'Leltár <small>Az aktuális raktárkészlet</small>'
+        inventory_here_you_can_see_current_stock_levels: Leltár <small>Az aktuális raktárkészlet</small>
         inventory_index: Leltár
         inventory_state: Leltár állapota
         inventory_tracking: Leltár követés
@@ -355,10 +353,10 @@ sylius:
         locales: Területi beállítások
         lock: Zárol
         locked: Lezárt
-        logged_in_as: 'Bejelentkezve mint %username%'
+        logged_in_as: Bejelentkezve mint %username%
         login: Belépés
         login_button: Belépés
-        login_sylius_store: 'Bejelentkezés a <small>Sylius webáruházba</small>'
+        login_sylius_store: Bejelentkezés a <small>Sylius webáruházba</small>
         logout: Kilépés
         main_taxon: Fő taxonómia
         male: Férfi
@@ -461,7 +459,7 @@ sylius:
         no_shipping_category: Nincs szállítási kategória
         no_shipping_charges: A szállítási díj nem lett alkalmazva
         no_shipping_methods_available: Jelenleg nem tudunk az általad megadott szállítási címre szállítást vállalni
-        no_short_description: '<i>Nincs rövid leírás</i>'
+        no_short_description: <i>Nincs rövid leírás</i>
         no_sku: Nincs SKU
         no_tax_category: Nincs adókategória
         no_taxes: Az adó nem kett alkalmazva
@@ -534,15 +532,14 @@ sylius:
         product_association_types: Termék asszocciáló típusok
         product_associations: Termék kapcsolatok
         product_attributes: Termék tulajdonságok
-        product_details_viewing_product_product: 'Termék részletei <small>Termék megtekintése - "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Termék részletei <small>Termék megtekintése - "<strong>%product%</strong>"</small>
         product_options: Termék opciók
         product_review: Termék értékelések
         product_reviews: Termék értékelések
         product_variants: Termék változatok
-        products: Termékek
         products_categorized_as_name: '"%name%" szerint kategorizált termékek'
-        products_categorized_under_taxon_taxon: 'Termékek <small>"%taxon%" taxon alatt kategorizálva</small>'
-        products_index_of_all_products_in_your_store: 'Products <small>Az áruház összes termékének indexe</small>'
+        products_categorized_under_taxon_taxon: Termékek <small>"%taxon%" taxon alatt kategorizálva</small>
+        products_index_of_all_products_in_your_store: Products <small>Az áruház összes termékének indexe</small>
         profile: Profil
         promotion_configuration: Promóció beállítása
         promotion_coupons: Kuponok
@@ -568,7 +565,7 @@ sylius:
         register_button: Regisztráció
         register_in_the_store: Regisztrálja az áruházban
         registered_customers: Regisztrált felhasználók
-        registration_create_an_account_in_store: 'Regisztráció <small>Hozzon létre egy fiókot áruházunkban</small>'
+        registration_create_an_account_in_store: Regisztráció <small>Hozzon létre egy fiókot áruházunkban</small>
         registration_date: Regisztráció dátuma
         release_inventory: Kibocsáthatható készlet
         remember_me: Emlékezzen rám
@@ -631,7 +628,7 @@ sylius:
         show_metadata: Metaadatok megjelenítése
         sign_in: Bejelentkezés
         sign_in_here: Bejelentkezés itt
-        sign_in_to_the_store_or_create_new_account: 'Jelentkezzen be a webáruházba <small>, vagy hozzon létre új fiókot</small>'
+        sign_in_to_the_store_or_create_new_account: Jelentkezzen be a webáruházba <small>, vagy hozzon létre új fiókot</small>
         sign_out: Kijelentkezés
         simple_blocks: Egyszerű blokkok
         simple_product: Egyszerű termék
@@ -661,7 +658,6 @@ sylius:
         taxation_settings: Adózás-beállítások
         taxes: Adók
         taxonomy: Taxonómia
-        taxons: Taxonok
         terms_and_conditions: Felhasználási feltételek
         thank_you: Köszönjük!
         thank_you_for_your_order: Köszönjük a rendelését
@@ -733,7 +729,7 @@ sylius:
         user_confirmation_name: Felhasználói megerősítés
         user_details: Felhasználói adatok
         username: Felhasználónév
-        users_list_of_all_users_registered_in_store: 'Felhasználók <small>Az áruházban regisztált felhasználók</small>'
+        users_list_of_all_users_registered_in_store: Felhasználók <small>Az áruházban regisztált felhasználók</small>
         values: Értékek
         variant: Változat
         variant_selection_method: Változat kiválasztási módszer

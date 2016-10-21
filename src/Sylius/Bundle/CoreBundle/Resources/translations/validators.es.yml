@@ -10,6 +10,9 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Por favor seleccione el método de envío.
+    currency:
+        enabled:
+            cannot_disable_base: La moneda base no se puede desactivar.
     customer:
         currency_code:
             not_valid: El código de la moneda que introdujo no es válido.
@@ -20,12 +23,14 @@ sylius:
         code:
             not_blank: Por favor introduzca el código del idioma.
             unique: Este idioma ya existe.
+        enabled:
+            cannot_disable_base: El código de idioma base no se puede desactivar.
     product_image:
         code:
             unique: El código de imagen debe ser único en este producto.
     product_variant:
         onHand:
-            min: 'Las existencias deben ser mayores que {{ limit }}.'
+            min: Las existencias deben ser mayores que {{ limit }}.
             not_blank: Por favor introduzca las existencias.
         price:
             min: El precio no debe ser negativo.
@@ -34,7 +39,7 @@ sylius:
             min: El precio original no debe ser negativo.
     product_translation:
         short_description:
-            max: 'Breve descripción. No debe superar {{ limit }} caractéres.'
+            max: Breve descripción. No debe superar {{ limit }} caractéres.
     taxon_image:
         code:
             unique: El código de imagen debe ser único en este taxón.

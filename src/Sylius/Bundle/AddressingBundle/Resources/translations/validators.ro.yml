@@ -49,7 +49,7 @@ sylius:
             not_blank: Vă rugăm să introduceţi codul de zonă.
             unique: Codul de zonă trebuie să fie unic.
         members:
-            min_count: 'Vă rugăm să adăugaţi cel puţin {{ limit }} membri de zonă.'
+            min_count: Vă rugăm să adăugaţi cel puţin {{ limit }} membri de zonă.
         name:
             max_length: Numele zonei nu poate depăși 255 de caractere|Numele zonei nu poate depăși 255 de caractere.
             min_length: Numele trebuie să conțină cel puţin 2 caractere|Numele trebuie să conțină cel puţin 2 caractere.
