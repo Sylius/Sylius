@@ -46,8 +46,7 @@
         {{ item.subtotal|sylius_price(order.currencyCode, order.exchangeRate) }}
     </td>
     <td class="right aligned discount">
-        {% set itemDiscount = item.getAdjustmentsTotalRecursively(orderPromotionAdjustment) %}
-        {% if not itemDiscount == 0 %}-{% endif %}{{ (-1 * itemDiscount)|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ item.getAdjustmentsTotalRecursively(orderPromotionAdjustment)|sylius_price(order.currencyCode, order.exchangeRate) }}
     </td>
     <td class="right aligned tax">
         {{ item.taxTotal|sylius_price(order.currencyCode, order.exchangeRate) }}

@@ -9,7 +9,7 @@
                     <div class="content">
                         <div class="header">{{ label }}</div>
                         <div class="description">
-                            {% if not amount == 0 %}-{% endif %}{{ (-1 * amount)|sylius_price(order.currencyCode, order.exchangeRate) }}
+                            {{ amount|sylius_price(order.currencyCode, order.exchangeRate) }}
                         </div>
                     </div>
                 </div>
@@ -21,6 +21,5 @@
 </td>
 <td colspan="2" id="promotion-total" class="right aligned">
     <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
-    {% set orderDiscount = order.adjustmentsTotalRecursively(orderPromotionAdjustment) %}
-    {% if not orderDiscount == 0 %}-{% endif %}{{ (-1 * orderDiscount)|sylius_price(order.currencyCode, order.exchangeRate) }}
+    {{ order.orderPromotionTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
 </td>
