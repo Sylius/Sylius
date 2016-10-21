@@ -148,6 +148,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
                 ->setNormalizer('product_attributes', function (Options $options, array $productAttributes) use ($productAttributeRepository, $productAttributeValueFactory) {
                     $productAttributesValues = [];
                     foreach ($productAttributes as $code => $value) {
+                        /** @var ProductAttributeInterface $productAttribute */
                         $productAttribute = $productAttributeRepository->findOneBy(['code' => $code]);
 
                         Assert::notNull($productAttribute);
@@ -185,9 +186,22 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         $product->setCode($options['code']);
         $product->setEnabled($options['enabled']);
         $product->setMainTaxon($options['main_taxon']);
-
         $product->setCreatedAt($this->faker->dateTimeBetween('-1 week', 'now'));
 
+        $this->createTranslations($product, $options);
+        $this->createRelations($product, $options);
+        $this->createVariants($product, $options);
+        $this->createImages($product, $options);
+
+        return $product;
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param array $options
+     */
+    private function createTranslations(ProductInterface $product, array $options)
+    {
         foreach ($this->getLocales() as $localeCode) {
             $product->setCurrentLocale($localeCode);
             $product->setFallbackLocale($localeCode);
@@ -196,7 +210,14 @@ final class ProductExampleFactory implements ExampleFactoryInterface
             $product->setShortDescription($options['short_description']);
             $product->setDescription($options['description']);
         }
+    }
 
+    /**
+     * @param ProductInterface $product
+     * @param array $options
+     */
+    private function createRelations(ProductInterface $product, array $options)
+    {
         foreach ($options['taxons'] as $taxon) {
             $product->addTaxon($taxon);
         }
@@ -212,7 +233,14 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         foreach ($options['product_attributes'] as $attribute) {
             $product->addAttribute($attribute);
         }
+    }
 
+    /**
+     * @param ProductInterface $product
+     * @param array $options
+     */
+    private function createVariants(ProductInterface $product, array $options)
+    {
         try {
             $this->variantGenerator->generate($product);
         } catch (\InvalidArgumentException $exception) {
@@ -232,7 +260,14 @@ final class ProductExampleFactory implements ExampleFactoryInterface
 
             ++$i;
         }
+    }
 
+    /**
+     * @param ProductInterface $product
+     * @param array $options
+     */
+    private function createImages(ProductInterface $product, array $options)
+    {
         foreach ($options['images'] as $imageCode => $imagePath) {
             /** @var ImageInterface $productImage */
             $productImage = $this->productImageFactory->createNew();
@@ -243,12 +278,10 @@ final class ProductExampleFactory implements ExampleFactoryInterface
 
             $product->addImage($productImage);
         }
-
-        return $product;
     }
 
     /**
-     * @return array
+     * @return \Generator
      */
     private function getLocales()
     {
