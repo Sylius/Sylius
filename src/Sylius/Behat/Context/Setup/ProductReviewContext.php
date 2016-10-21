@@ -106,7 +106,8 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Given /^(this product) has accepted reviews rated (\d+), (\d+), (\d+), (\d+) and (\d+)$/
+     * @Given /^(this product)(?:| also) has accepted reviews rated (\d+), (\d+), (\d+), (\d+) and (\d+)$/
+     * @Given /^(this product)(?:| also) has accepted reviews rated (\d+), (\d+) and (\d+)$/
      */
     public function thisProductHasAcceptedReviewsRated(ProductInterface $product, ...$rates)
     {
@@ -115,6 +116,26 @@ final class ProductReviewContext implements Context
             $review = $this->createProductReview($product, 'Title '.$key, $rate, 'Comment '.$key, $customer);
             $this->productReviewRepository->add($review);
         }
+    }
+
+    /**
+     * @Given /^(this product)(?:| also) has review rated (\d+) which is not accepted yet$/
+     */
+    public function itAlsoHasReviewRatedWhichIsNotAcceptedYet(ProductInterface $product, $rate)
+    {
+        $customer = $this->sharedStorage->get('customer');
+        $review = $this->createProductReview($product, 'Title', $rate, 'Comment', $customer, null);
+        $this->productReviewRepository->add($review);
+    }
+
+    /**
+     * @Given /^(this product) also has review rated (\d+) which is rejected$/
+     */
+    public function itAlsoHasReviewRatedWhichIsRejected(ProductInterface $product, $rate)
+    {
+        $customer = $this->sharedStorage->get('customer');
+        $review = $this->createProductReview($product, 'Title', $rate, 'Comment', $customer, 'reject');
+        $this->productReviewRepository->add($review);
     }
 
     /**
