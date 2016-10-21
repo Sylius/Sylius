@@ -1,0 +1,15 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+
+    <div class="ui hidden divider"></div>
+
+    <div class="ui stackable grid" id="reviews">
+        <div class="four wide column">
+            {{ render(url('sylius_shop_product_simple_show', { 'slug': app.request.attributes.get('slug') })) }}
+        </div>
+        <div class="twelve wide column">
+            {% include '@SyliusShop/Product/_reviews.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

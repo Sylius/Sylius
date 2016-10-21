@@ -138,6 +138,21 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
+    public function findOneBySlug($slug)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.translations', 'translation')
+            ->andWhere('o.enabled = true')
+            ->andWhere('translation.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
         if (isset($criteria['channels'])) {

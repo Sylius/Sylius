@@ -48,7 +48,7 @@ class ReviewType extends AbstractResourceType
             ->add('rating', 'choice', [
                 'choices' => $this->createRatingList($options['rating_steps']),
                 'label' => 'sylius.form.review.rating',
-                'expanded' => true,
+                'expanded' => false,
                 'multiple' => false,
             ])
             ->add('title', 'text', [
