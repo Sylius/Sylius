@@ -8,7 +8,7 @@ Feature: Editing a product association type
         Given the store has a product association type "Cross sell"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Changing a name of an existing product association type
         When I want to modify the "Cross sell" product association type
         And I rename it to "Up sell"
@@ -16,7 +16,7 @@ Feature: Editing a product association type
         Then I should be notified that it has been successfully edited
         And this product association type name should be "Up sell"
 
-    @ui @todo
+    @ui
     Scenario: Seeing a disabled code field while editing a product association type
         When I want to modify the "Cross sell" product association type
         Then the code field should be disabled
