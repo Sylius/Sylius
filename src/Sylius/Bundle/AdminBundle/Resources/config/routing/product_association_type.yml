@@ -1,0 +1,15 @@
+sylius_admin_product_association_type:
+    resource: |
+        alias: sylius.product_association_type
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show', 'create', 'update', 'delete']
+        redirect: index
+        grid: sylius_admin_product_association_type
+        permission: true
+        vars:
+            all:
+                subheader: sylius.ui.manage_association_types_of_your_products
+            index:
+                icon: tasks
+    type: sylius.resource

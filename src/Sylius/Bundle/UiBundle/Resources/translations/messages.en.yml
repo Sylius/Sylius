@@ -392,6 +392,7 @@ sylius:
         manage_adjustments: 'Manage adjustments'
         manage_admin_users: 'Manage administrators'
         manage_attributes: 'Manage attributes'
+        manage_association_types_of_your_products: Manage association types of your products
         manage_attributes_of_your_products: Manage attributes of your products
         manage_categorization_of_your_products: Manage categorization of your products
         manage_channels: 'Manage channels'
