@@ -465,58 +465,6 @@ class ResourceController extends Controller
     }
 
     /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function moveUpAction(Request $request)
-    {
-        return $this->move($request, 1);
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function moveDownAction(Request $request)
-    {
-        return $this->move($request, -1);
-    }
-
-    /**
-     * @param Request $request
-     * @param int $movement
-     *
-     * @return RedirectResponse
-     */
-    protected function move(Request $request, $movement)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $resource = $this->findOr404($configuration);
-
-        $position = $configuration->getSortablePosition();
-        $accessor = PropertyAccess::createPropertyAccessor();
-        $accessor->setValue(
-            $resource,
-            $position,
-            $accessor->getValue($resource, $position) + $movement
-        );
-
-        $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
-        $this->manager->flush();
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-        }
-
-        $this->flashHelper->addSuccessFlash($configuration, 'move', $resource);
-
-        return $this->redirectHandler->redirectToIndex($configuration, $resource);
-    }
-
-    /**
      * @param RequestConfiguration $configuration
      * @param string $permission
      *
