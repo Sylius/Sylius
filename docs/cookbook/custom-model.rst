@@ -2,7 +2,7 @@ How to add a custom model?
 ==========================
 
 In some cases you may be needing to add new models to your application in order to cover unique business needs.
-The proccess of extending Sylius with new entities is simple and intuitive.
+The process of extending Sylius with new entities is simple and intuitive.
 
 As an example we will take a **Supplier entity**, which may be really useful for shop maintenance.
 

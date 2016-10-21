@@ -78,7 +78,7 @@ Shipping Cost Calculators
 The shipping cost calculators are services that are used to calculate the cost for a given shipment.
 
 The `CalculatorInterface <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Shipping/Calculator/CalculatorInterface.php>`_
-has a method ``calculate()`` that takes object with a configuration and returns *integer* that is the cost of shiping for that subject.
+has a method ``calculate()`` that takes object with a configuration and returns *integer* that is the cost of shipping for that subject.
 It also has a ``getType()`` method that works just like in the forms.
 
 To select a proper service we have a one that decides for us

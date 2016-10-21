@@ -36,7 +36,7 @@ If your subject implements the :ref:`component_promotion_model_promotion-subject
     $itemTotalChecker = new ItemTotalRuleChecker();
 
     // a Subject that implements the PromotionSubjectInterface
-    // Let's assume thet the subject->getSubjectItemTotal() returns 199
+    // Let's assume the subject->getSubjectItemTotal() returns 199
 
     $configuration = array('amount' => 199);
 

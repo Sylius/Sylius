@@ -57,7 +57,7 @@ this listener a lot more reusable.
 
     // ...
 
-    final class DirectoryPurgerListener extends AbstarctListener implements ListenerInterface
+    final class DirectoryPurgerListener extends AbstractListener implements ListenerInterface
     {
         // ...
 

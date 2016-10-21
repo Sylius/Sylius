@@ -38,7 +38,7 @@ This is an abstraction layer that allows you to create your own logic of sending
 
     $email = new Email();
 
-    $email->setCode('christmas_party_invitiation');
+    $email->setCode('christmas_party_invitation');
     $email->setContent('Hi, we would like to invite you to christmas party');
     $email->setSubject('Christmas party');
     $email->setSenderAddress('mike.ehrmantraut@gmail.com');
@@ -68,7 +68,7 @@ This service collects those two adapters **SenderAdapter**, **RendererAdapter** 
 
     $sender = new Sender($rendererAdapter, $senderAdapter, $emailProvider, $defaultSettingsProvider);
 
-    $sender->send('christmas_party_invitiation', array('mike.ehrmantraut@gmail.com'));
+    $sender->send('christmas_party_invitation', array('mike.ehrmantraut@gmail.com'));
 
 
 Renderer
@@ -109,7 +109,7 @@ This is an abstraction layer that allows you to create your own logic of renderi
 
     $email = new Email();
 
-    $email->setCode('christmas_party_invitiation');
+    $email->setCode('christmas_party_invitation');
     $email->setContent('Hi, we would like to invite you to christmas party');
     $email->setSubject('Christmas party');
     $email->setSenderAddress('mike.ehrmantraut@gmail.com');
@@ -162,7 +162,7 @@ The **EmailProvider** allows you to get specific email from storage.
     $inMemoryRepository = new InMemoryRepository();
 
     $configuration = array(
-        'christmas_party_invitiation' => array(
+        'christmas_party_invitation' => array(
             'subject' => 'Christmas party',
             'template' => 'email.html.twig',
             'enabled' => true,
@@ -175,8 +175,8 @@ The **EmailProvider** allows you to get specific email from storage.
 
     $emailProvider = new EmailProvider($inMemoryRepository, $configuration);
 
-    $email = $emailProvider->getEmail('christmas_party_invitiation'); // This method will search for an email in your storage or in given configuration.
+    $email = $emailProvider->getEmail('christmas_party_invitation'); // This method will search for an email in your storage or in given configuration.
 
-    $email->getCode(); // Output will be christmas_party_invitiation.
+    $email->getCode(); // Output will be christmas_party_invitation.
     $email->getSenderAddress(); // Output will be john.doe@gmail.com.
     $email->getSenderName(); // Output will be John.

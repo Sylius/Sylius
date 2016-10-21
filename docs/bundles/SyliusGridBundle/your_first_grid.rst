@@ -33,7 +33,7 @@ Now we can configure our first grid:
 .. note::
 
     Remember that a grid is **the way objects of a desired entity are displayed on its index view**. Therefore only fields that
-    are useful for identification of objects are available - only ``string`` and ``twig`` type. Then even thoug a Supplier has also
+    are useful for identification of objects are available - only ``string`` and ``twig`` type. Then even though a Supplier has also
     a description field, it is not needed on index and can't be displayed here.
 
 .. code-block:: yaml
@@ -145,7 +145,7 @@ After that your new grid should look like that when accessing the */admin/suppli
 .. image:: ../../_images/grid_new.png
     :align: center
 
-And when accesing index on the */admin/suppliers/* path it should look like that:
+And when accessing index on the */admin/suppliers/* path it should look like that:
 
 .. image:: ../../_images/grid.png
     :align: center

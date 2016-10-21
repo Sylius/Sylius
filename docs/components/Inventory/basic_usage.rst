@@ -101,7 +101,7 @@ The **InventoryOperator** provides basic operations on your inventory.
 
     $inMemoryRepository = new InMemoryRepository(); // Repository model.
     $product = new Product(); // Stockable model.
-    $eventDispatcher; // It gives a possibilty to hook before or after each operation.
+    $eventDispatcher; // It gives a possibility to hook before or after each operation.
     // If you are not familiar with events, check the symfony Event Dispatcher.
 
     $availabilityChecker = new AvailabilityChecker(false);
@@ -133,7 +133,7 @@ Decrease
 
     $inventoryUnitRepository; // Repository model.
     $product = new Product(); // Stockable model.
-    $eventDispatcher; // It gives possibilty to hook before or after each operation.
+    $eventDispatcher; // It gives possibility to hook before or after each operation.
     // If you are not familiar with events. Check symfony event dispatcher.
 
     $availabilityChecker = new AvailabilityChecker(false);
@@ -195,7 +195,7 @@ AvailabilityChecker
 -------------------
 
 The **AvailabilityChecker** checks availability of a given stockable object.
-To charactrize an object which is an **AvailabilityChecker**, it needs to implement the :ref:`component_inventory_checker_availability-checker-interface`.
+To characterize an object which is an **AvailabilityChecker**, it needs to implement the :ref:`component_inventory_checker_availability-checker-interface`.
 Second parameter of the ``->isStockSufficient()`` method gives a possibility to check for a given quantity of a stockable.
 
 .. code-block:: php
