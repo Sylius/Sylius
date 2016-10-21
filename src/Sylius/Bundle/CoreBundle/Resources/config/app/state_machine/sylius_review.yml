@@ -19,5 +19,5 @@ winzou_state_machine:
             after:
                 update_price:
                     on: "accept"
-                    do: ["@sylius.review.updater.average_rating", updateFromReview]
+                    do: ["@sylius.average_rating_updater", updateFromReview]
                     args: ["object"]

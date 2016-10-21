@@ -52,13 +52,19 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function findOneBySlugAndChannel($slug, ChannelInterface $channel);
 
     /**
+     * @param string $slug
+     *
+     * @return ProductInterface|null
+     */
+    public function findOneBySlug($slug);
+
+    /**
      * @param ChannelInterface $channel
      * @param int $count
      *
      * @return ProductInterface[]
      */
     public function findLatestByChannel(ChannelInterface $channel, $count);
-
 
     /**
      * @param string $code

@@ -1,0 +1,3 @@
+sylius:
+    review:
+        waiting_for_the_acceptation: 'Your review is waiting for the acceptation.'
