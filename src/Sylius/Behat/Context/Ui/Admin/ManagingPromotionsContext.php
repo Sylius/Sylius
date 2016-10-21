@@ -211,6 +211,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I specify that this action should be applied to items from :taxonName category
+     */
+    public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory($taxonName)
+    {
+        $this->createPage->selectFilterOption('Taxon', $taxonName);
+
+    }
+
+    /**
      * @Given I add the :actionType action configured with a percentage value of :percentage%
      * @Given I add the :actionType action configured without a percentage value
      */
