@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductAssociationType\CreatePageInterface;
+use Sylius\Behat\Page\Admin\ProductAssociationType\UpdatePageInterface;
 use Sylius\Component\Association\Model\AssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
@@ -33,13 +34,23 @@ final class ManagingProductAssociationTypesContext implements Context
     private $indexPage;
 
     /**
+     * @var UpdatePageInterface
+     */
+    private $updatePage;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
+     * @param UpdatePageInterface $updatePage
      */
-    public function __construct(CreatePageInterface $createPage, IndexPageInterface $indexPage)
-    {
+    public function __construct(
+        CreatePageInterface $createPage,
+        IndexPageInterface $indexPage,
+        UpdatePageInterface $updatePage
+    ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
+        $this->updatePage = $updatePage;
     }
 
     /**
@@ -59,11 +70,27 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
+     * @When I want to modify the :productAssociationType product association type
+     */
+    public function iWantToModifyAPaymentMethod(AssociationTypeInterface $productAssociationType)
+    {
+        $this->updatePage->open(['id' => $productAssociationType->getId()]);
+    }
+
+    /**
      * @When I specify its name as :name
      */
     public function iSpecifyItsNameAs($name)
     {
         $this->createPage->nameIt($name);
+    }
+
+    /**
+     * @When I rename it to :name
+     */
+    public function iRenameItTo($name)
+    {
+        $this->updatePage->nameIt($name);
     }
 
     /**
@@ -80,6 +107,14 @@ final class ManagingProductAssociationTypesContext implements Context
     public function iAddIt()
     {
         $this->createPage->create();
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
     }
 
     /**
@@ -121,6 +156,37 @@ final class ManagingProductAssociationTypesContext implements Context
                 'Product association type with name %s should exist but it does not.',
                 $productAssociationType->getName()
             )
+        );
+    }
+
+    /**
+     * @Then /^(this product association type) name should be "([^"]+)"$/
+     */
+    public function thisProductAssociationTypeNameShouldBe(
+        AssociationTypeInterface $productAssociationType,
+        $productAssociationTypeName
+    ) {
+        $this->iWantToBrowseProductAssociationTypes();
+
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(
+                [
+                    'code' => $productAssociationType->getCode(),
+                    'name' => $productAssociationTypeName,
+                ]
+            ),
+            sprintf('Product association type name %s has not been assigned properly.', $productAssociationTypeName)
+        );
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isCodeDisabled(),
+            'Code field should be disabled'
         );
     }
 }

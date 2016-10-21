@@ -15,6 +15,7 @@
     <parameters>
         <parameter key="sylius.behat.page.admin.product_association_type.create.class">Sylius\Behat\Page\Admin\ProductAssociationType\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.product_association_type.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.product_association_type.update.class">Sylius\Behat\Page\Admin\ProductAssociationType\UpdatePage</parameter>
     </parameters>
 
     <services>
@@ -22,6 +23,9 @@
             <argument type="string">product_association_type</argument>
         </service>
         <service id="sylius.behat.page.admin.product_association_type.index" class="%sylius.behat.page.admin.product_association_type.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">product_association_type</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_association_type.update" class="%sylius.behat.page.admin.product_association_type.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">product_association_type</argument>
         </service>
     </services>
