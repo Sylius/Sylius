@@ -168,7 +168,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, StringInflector::nameToCode($element), sprintf('Please enter your %s.', $element));
+        $this->assertFieldValidationMessage(
+            $this->profileUpdatePage,
+            StringInflector::nameToCode($element),
+            sprintf('Please enter your %s.', $element)
+        );
     }
 
     /**
@@ -176,7 +180,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsInvalid($element)
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, StringInflector::nameToCode($element), sprintf('This %s is invalid.', $element));
+        $this->assertFieldValidationMessage(
+            $this->profileUpdatePage,
+            StringInflector::nameToCode($element),
+            sprintf('This %s is invalid.', $element)
+        );
     }
 
     /**
@@ -242,7 +250,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'current_password', 'Provided password is different than the current one.');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'current_password',
+            'Provided password is different than the current one.'
+        );
     }
 
     /**
@@ -250,7 +262,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'new_password', 'The entered passwords don\'t match');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'new_password',
+            'The entered passwords don\'t match'
+        );
     }
 
     /**
@@ -258,7 +274,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'new_password', 'Password must be at least 4 characters long.');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'new_password',
+            'Password must be at least 4 characters long.'
+        );
     }
 
     /**
@@ -379,7 +399,7 @@ final class AccountContext implements Context
         Assert::same(
             (int) $numberOfItems,
             $this->orderShowPage->countItems(),
-            '%s items should appear on order page, but %s rows has been found'
+            '%s items should appear on order page, but %s rows has been found.'
         );
     }
 
@@ -421,7 +441,7 @@ final class AccountContext implements Context
     {
         Assert::true(
             $this->profileUpdatePage->isSubscribedToTheNewsletter(),
-            'I should be subscribed to the newsletter, but I am not'
+            'I should be subscribed to the newsletter, but I am not.'
         );
     }
 

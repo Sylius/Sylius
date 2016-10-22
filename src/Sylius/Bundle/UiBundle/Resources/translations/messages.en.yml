@@ -20,6 +20,7 @@ sylius:
         actions: Actions
         add: Add
         add_action: 'Add action'
+        add_address: 'Add address'
         add_association: 'Add association'
         add_attribute: 'Add attribute'
         add_attributes: 'Add attributes'
@@ -41,6 +42,7 @@ sylius:
         adding_new_locale: 'Adding new locale'
         additional_information: 'Additional information'
         address: 'Address'
+        address_book: 'Address book'
         addressing: Addressing
         addressing_step: 'Addressing step'
         adjustments: Adjustments
@@ -79,6 +81,7 @@ sylius:
         blocks: Blocks
         body: Body
         browse_products: 'Browse products'
+        browse_your_addresses: 'Browse your addresses'
         browse_your_orders_from_the_past: 'Browse your orders from the past'
         build: Build
         calculator: Calculator
@@ -478,8 +481,10 @@ sylius:
         no_label: 'No'
         no_account: 'No account yet'
         no_account: no account
+        no_addresses: 'There are no addresses to display'
         no_association_types_to_display: 'There are no association types defined'
         no_comment: 'No comment'
+        no_default_address: 'There is no selected default address'
         no_default_billing_address: 'No default billing address'
         no_default_shipping_address: 'No default shipping address'
         no_description: 'No description'

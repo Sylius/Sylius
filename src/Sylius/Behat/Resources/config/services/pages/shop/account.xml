@@ -13,6 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
+        <parameter key="sylius.behat.page.shop.account.address_book.create.class">Sylius\Behat\Page\Shop\Account\AddressBook\CreatePage</parameter>
+        <parameter key="sylius.behat.page.shop.account.address_book.index.class">Sylius\Behat\Page\Shop\Account\AddressBook\IndexPage</parameter>
         <parameter key="sylius.behat.page.shop.account.change_password.class">Sylius\Behat\Page\Shop\Account\ChangePasswordPage</parameter>
         <parameter key="sylius.behat.page.shop.account.dashboard.class">Sylius\Behat\Page\Shop\Account\DashboardPage</parameter>
         <parameter key="sylius.behat.page.shop.account.login.class">Sylius\Behat\Page\Shop\Account\LoginPage</parameter>
@@ -25,6 +27,8 @@
     </parameters>
 
     <services>
+        <service id="sylius.behat.page.shop.account.address_book.create" class="%sylius.behat.page.shop.account.address_book.create.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.account.address_book.index" class="%sylius.behat.page.shop.account.address_book.index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.account.change_password" class="%sylius.behat.page.shop.account.change_password.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.account.dashboard" class="%sylius.behat.page.shop.account.dashboard.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.account.login" class="%sylius.behat.page.shop.account.login.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />

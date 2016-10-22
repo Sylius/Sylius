@@ -1,0 +1,34 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+
+{% block breadcrumb %}
+    <div class="ui breadcrumb">
+        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+        <div class="divider"> / </div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+        <div class="divider"> / </div>
+        <div class="active section">{{ 'sylius.ui.address_book'|trans }}</div>
+    </div>
+{% endblock %}
+
+{% block subcontent %}
+    <div class="ui segment">
+        <h1 class="ui dividing header">
+            {{ 'sylius.ui.address_book'|trans }}
+            <div class="sub header">{{ 'sylius.ui.create_a_new_address'|trans }}</div>
+        </h1>
+        {{ form_start(form, {'action': path('sylius_shop_account_address_book_create'), 'attr': { 'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+
+        {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
+        <div class="ui grid">
+            <div class="right aligned column">
+                <button type="submit" class="ui right floated button">
+                    <i class="icon save"></i> {{ 'sylius.ui.save'|trans }}
+                </button>
+            </div>
+        </div>
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

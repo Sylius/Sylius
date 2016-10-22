@@ -84,6 +84,9 @@
             <argument type="service" id="sylius.product_variant_resolver.default" />
         </service>
         <service id="sylius.factory.cart_item" alias="sylius.custom_factory.order_item" />
+        <service id="sylius.custom_factory.address" class="Sylius\Component\Core\Factory\AddressFactory" decorates="sylius.factory.address">
+            <argument type="service" id="sylius.custom_factory.address.inner" />
+        </service>
 
         <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider" />
 
