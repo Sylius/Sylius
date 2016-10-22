@@ -14,4 +14,4 @@ Feature: Removing an address from my book
         When I browse my address book
         And I delete the "Lucifer Morningstar" address
         Then I should be notified that it has been successfully deleted
-        And There should be no addresses
+        And there should be no addresses

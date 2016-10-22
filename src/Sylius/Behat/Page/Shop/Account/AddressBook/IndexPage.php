@@ -33,7 +33,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function isSingleAddressOnList()
     {
-        return 1 === count($this->getElement('addresses')->findAll('css', '.item address'));
+        return 1 === count($this->getElement('addresses')->findAll('css', 'address'));
     }
 
     /**
@@ -49,7 +49,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function hasNoAddresses()
     {
-        return false !== strpos($this->getElement('no_addresses_message' )->getText(), 'no addresses to display');
+        return $this->getDocument()->hasContent('You have no addresses defined');
     }
 
     /**
@@ -68,7 +68,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     private function getAddressOf($fullName)
     {
-        return $this->getElement('addresses')->find('css', sprintf('.ui.stackable.grid:contains("%s")', $fullName));
+        return $this->getElement('addresses')->find('css', sprintf('div:contains("%s")', $fullName));
     }
 
     /**
@@ -77,8 +77,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'addresses' => '#addresses',
-            'no_addresses_message' => '#addresses .message',
+            'addresses' => '#sylius-addresses',
         ]);
     }
 }

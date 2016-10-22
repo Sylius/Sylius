@@ -27,4 +27,4 @@ Feature: Viewing my address book
     @ui
     Scenario: Viewing empty address book
         When I browse my address book
-        Then There should be no addresses
+        Then there should be no addresses
