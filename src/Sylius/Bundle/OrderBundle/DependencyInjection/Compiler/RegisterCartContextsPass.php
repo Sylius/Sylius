@@ -11,30 +11,20 @@
 
 namespace Sylius\Bundle\OrderBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedCompositeServicePass;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class RegisterCartContextsPass implements CompilerPassInterface
+final class RegisterCartContextsPass extends PrioritizedCompositeServicePass
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function process(ContainerBuilder $container)
+    public function __construct()
     {
-        if (!$container->has('sylius.context.cart')) {
-            return;
-        }
-
-        $cartContext = $container->findDefinition('sylius.context.cart');
-
-        foreach ($container->findTaggedServiceIds('sylius.cart_context') as $id => $attributes) {
-            $priority = isset($attributes[0]['priority']) ? (int) $attributes[0]['priority'] : 0;
-
-            $cartContext->addMethodCall('addContext', [new Reference($id), $priority]);
-        }
+        parent::__construct(
+            'sylius.context.cart',
+            'sylius.context.cart.composite',
+            'sylius.context.cart',
+            'addContext'
+        );
     }
 }
