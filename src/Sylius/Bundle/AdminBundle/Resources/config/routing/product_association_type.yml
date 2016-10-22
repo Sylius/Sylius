@@ -6,7 +6,6 @@ sylius_admin_product_association_type:
         except: ['show']
         redirect: update
         grid: sylius_admin_product_association_type
-        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_association_types_of_your_products

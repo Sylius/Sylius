@@ -38,9 +38,14 @@ final class ProductAssociationTypeContext implements Context
      */
     public function getProductAssociationTypeByName($productAssociationTypeName)
     {
-        $productAssociationType = $this->productAssociationTypeRepository->findOneBy(['name' => $productAssociationTypeName]);
+        $productAssociationType = $this->productAssociationTypeRepository->findOneBy([
+            'name' => $productAssociationTypeName,
+        ]);
 
-        Assert::notNull($productAssociationType, sprintf('Cannot find product association type with name %s', $productAssociationTypeName));
+        Assert::notNull(
+            $productAssociationType,
+            sprintf('Cannot find product association type with name %s', $productAssociationTypeName)
+        );
 
         return $productAssociationType;
     }

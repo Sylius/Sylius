@@ -73,7 +73,7 @@ final class ProductAssociationTypeContext implements Context
         /** @var AssociationTypeInterface $productAssociationType */
         $productAssociationType = $this->productAssociationTypeFactory->createNew();
         $productAssociationType->setCode($code);
-        $productAssociationType->setName(ucfirst($name));
+        $productAssociationType->setName($name);
 
         $this->productAssociationTypeRepository->add($productAssociationType);
         $this->sharedStorage->set('product_association_type', $productAssociationType);
