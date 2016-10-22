@@ -98,5 +98,9 @@
             <argument type="service" id="sylius.factory.route" />
             <argument type="service" id="sylius.repository.static_content" />
         </service>
+
+        <service id="sylius.fixture.example_factory.string_block" class="Sylius\Bundle\CoreBundle\Fixture\Factory\StringBlockExampleFactory">
+            <argument type="service" id="sylius.factory.string_block" />
+        </service>
     </services>
 </container>
