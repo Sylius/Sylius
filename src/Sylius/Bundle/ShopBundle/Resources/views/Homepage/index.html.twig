@@ -5,4 +5,17 @@
     {{ 'sylius.ui.latest_products'|trans }}
 </h2>
 {{ render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Product/_simpleList.html.twig'})) }}
+
+<div class="ui vertical segment">
+    <div class="ui equal width stackable internally celled grid">
+        <div class="center aligned row">
+            <div class="column">
+                <h3>{{ sonata_block_render({'name': '/cms/blocks/delivery-info'}) }}</h3>
+            </div>
+            <div class="column">
+                <h3>{{ sonata_block_render({'name': '/cms/blocks/returns-info'}) }}</h3>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

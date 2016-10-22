@@ -1,0 +1,43 @@
+sylius_admin_string_block:
+    resource: |
+        alias: sylius.string_block
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show', 'update', 'delete']
+        redirect: index
+        grid: sylius_admin_string_block
+        vars:
+            all:
+                subheader: sylius.ui.manage_static_content_blocks_on_your_page
+                templates:
+                    form: "@SyliusAdmin/StringBlock/_form.html.twig"
+            index:
+                icon: font
+
+    type: sylius.resource
+
+sylius_admin_string_block_update:
+    path: /string-blocks{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.string_block:updateAction
+        _sylius:
+            section: admin
+            template: "@SyliusAdmin/Crud/update.html.twig"
+            vars:
+                subheader: sylius.ui.manage_static_content_blocks_on_your_page
+                templates:
+                    form: "@SyliusAdmin/StringBlock/_form.html.twig"
+                    breadcrumb: "@SyliusAdmin/StringBlock/Update/_breadcrumb.html.twig"
+    requirements:
+        id: ".+"
+
+sylius_admin_string_block_delete:
+    path: /string-blocks{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.string_block:deleteAction
+        _sylius:
+            section: admin
+    requirements:
+        id: ".+"

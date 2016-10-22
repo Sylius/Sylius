@@ -126,6 +126,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
         ;
 
         $content
+            ->addChild('string_blocks', ['route' => 'sylius_admin_string_block_index'])
+            ->setLabel('sylius.menu.admin.main.content.string_blocks')
+            ->setLabelAttribute('icon', 'font')
+        ;
+
+        $content
             ->addChild('static_contents', ['route' => 'sylius_admin_static_content_index'])
             ->setLabel('sylius.menu.admin.main.content.static_contents')
             ->setLabelAttribute('icon', 'file')

@@ -1,17 +1,23 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+cmf_core:
+    publish_workflow: true
+    persistence:
+        phpcr:
+            enabled: true
+
 cmf_content:
     persistence:
         phpcr:
             content_basepath: /cms/pages
             document_class: "%sylius.model.static_content.class%"
 
-cmf_core:
-    publish_workflow: true
+cmf_block:
     persistence:
         phpcr:
-            enabled: true
+            block_basepath: /cms/blocks
+            string_document_class: "%sylius.model.string_block.class%"
 
 cmf_routing:
     chain:
@@ -24,6 +30,9 @@ cmf_routing:
                 enable_initializer: true
                 route_basepaths:
                     - /cms/routes
+
+sonata_block:
+    default_contexts: [sylius]
 
 doctrine_cache:
     providers:

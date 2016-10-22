@@ -246,6 +246,7 @@ sylius:
         edit_shipping_address: Edit shipping address
         edit_shipping_method: Edit shipping method
         edit_static_content: 'Edit static content'
+        edit_string_block: 'Edit string block'
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
         edit_taxon: Edit taxon
@@ -414,6 +415,7 @@ sylius:
         manage_shipping_destinations: Manage shipping destinations
         manage_shipping_methods: 'Manage shipping methods'
         manage_shipping_methods_for_your_store: Manage shipping methods for your store
+        manage_static_content_blocks_on_your_page: Manage static content blocks on your page
         manage_tax_categories: 'Manage tax categories'
         manage_tax_rates: 'Manage tax rates'
         manage_taxation_of_your_products: Manage taxation of your products
@@ -467,6 +469,7 @@ sylius:
         new_shipping_category: 'New shipping category'
         new_shipping_method: 'New shipping method'
         new_static_content: 'New static content'
+        new_string_block: 'New string block'
         new_tax_category: 'New tax category'
         new_tax_rate: 'New tax rate'
         new_taxon: 'New taxon'

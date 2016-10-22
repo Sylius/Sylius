@@ -70,6 +70,9 @@ sylius_admin_shipping_method:
 sylius_admin_static_content:
     resource: "@SyliusAdminBundle/Resources/config/routing/static_content.yml"
 
+sylius_admin_string_block:
+    resource: "@SyliusAdminBundle/Resources/config/routing/string_block.yml"
+
 sylius_admin_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/taxon.yml"
 

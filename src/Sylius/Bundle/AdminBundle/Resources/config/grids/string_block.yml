@@ -1,0 +1,27 @@
+sylius_grid:
+    grids:
+        sylius_admin_string_block:
+            driver:
+                name: doctrine/phpcr-odm
+                options:
+                    class: "%sylius.model.string_block.class%"
+            fields:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                body:
+                    type: string
+                    label: sylius.ui.body
+            filters:
+                body:
+                    type: string
+                    label: sylius.ui.body
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
