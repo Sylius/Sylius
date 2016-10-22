@@ -75,7 +75,7 @@ class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotion
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_percentage_discount_configuration';
+        return 'sylius_promotion_action_unit_percentage_discount_configuration';
     }
 
     /**
