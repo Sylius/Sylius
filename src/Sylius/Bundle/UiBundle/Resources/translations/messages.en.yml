@@ -426,6 +426,7 @@ sylius:
         manage_your_customers: Manage your customers
         manage_your_personal_information_and_preferences: Manage your personal information and preferences
         manage_your_product_catalog: Manage your product catalog
+        manage_your_saved_addresses: 'Manage your saved addresses'
         manage_zones: 'Manage zones'
         marketing: Marketing
         media: Media
