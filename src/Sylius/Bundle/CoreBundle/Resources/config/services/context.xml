@@ -49,8 +49,6 @@
             <argument type="service" id="session" />
         </service>
 
-        <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency" public="false" />
-
         <service id="sylius.context.currency.storage_based" class="Sylius\Component\Core\Currency\Context\StorageBasedCurrencyContext">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.storage.currency" />

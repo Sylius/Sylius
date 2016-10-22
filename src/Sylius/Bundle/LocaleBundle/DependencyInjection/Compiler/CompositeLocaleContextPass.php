@@ -9,22 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\DependencyInjection\Compiler;
+namespace Sylius\Bundle\LocaleBundle\DependencyInjection\Compiler;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedCompositeServicePass;
 
 /**
- * @author Jan Góralski <jan.goralski@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class RegisterLocaleHandlersPass extends PrioritizedCompositeServicePass
+final class CompositeLocaleContextPass extends PrioritizedCompositeServicePass
 {
     public function __construct()
     {
         parent::__construct(
-            'sylius.handler.locale_change',
-            'sylius.handler.locale_change.composite',
-            'sylius.locale.change_handler',
-            'addHandler'
+            'sylius.context.locale',
+            'sylius.context.locale.composite',
+            'sylius.context.locale',
+            'addContext'
         );
     }
 }
