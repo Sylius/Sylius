@@ -31,7 +31,7 @@ final class RegisterLocaleHandlersPassTest extends AbstractCompilerPassTestCase
     public function it_adds_method_call_to_composite_locale_change_handler_if_exists()
     {
         $compositeLocaleChangeHandler = new Definition(CompositeLocaleChangeHandler::class);
-        $this->setDefinition('sylius.handler.locale_change', $compositeLocaleChangeHandler);
+        $this->setDefinition('sylius.handler.locale_change.composite', $compositeLocaleChangeHandler);
 
         $cartLocaleChangeHandler = new Definition(CartLocaleChangeHandler::class);
         $cartLocaleChangeHandler->addTag('sylius.locale.change_handler');
@@ -42,10 +42,8 @@ final class RegisterLocaleHandlersPassTest extends AbstractCompilerPassTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.handler.locale_change',
-            'addHandler', [
-                new Reference('sylius.handler.locale_change.cart'),
-                0
-            ]
+            'addHandler',
+            [new Reference('sylius.handler.locale_change.cart')]
         );
     }
 
@@ -55,7 +53,7 @@ final class RegisterLocaleHandlersPassTest extends AbstractCompilerPassTestCase
     public function it_adds_method_call_to_composite_locale_change_handler_with_custom_priority()
     {
         $compositeLocaleChangeHandler = new Definition(CompositeLocaleChangeHandler::class);
-        $this->setDefinition('sylius.handler.locale_change', $compositeLocaleChangeHandler);
+        $this->setDefinition('sylius.handler.locale_change.composite', $compositeLocaleChangeHandler);
 
         $cartLocaleChangeHandler = new Definition(CartLocaleChangeHandler::class);
         $cartLocaleChangeHandler->addTag('sylius.locale.change_handler', ['priority' => 5]);
@@ -66,10 +64,8 @@ final class RegisterLocaleHandlersPassTest extends AbstractCompilerPassTestCase
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.handler.locale_change',
-            'addHandler', [
-                new Reference('sylius.handler.locale_change.cart'),
-                5
-            ]
+            'addHandler',
+            [new Reference('sylius.handler.locale_change.cart'), 5]
         );
     }
 

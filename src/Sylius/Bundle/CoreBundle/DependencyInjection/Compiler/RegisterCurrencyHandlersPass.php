@@ -23,7 +23,7 @@ final class RegisterCurrencyHandlersPass extends PrioritizedCompositeServicePass
         parent::__construct(
             'sylius.handler.currency_change',
             'sylius.handler.currency_change.composite',
-            'sylius.handler.currency_change',
+            'sylius.currency.change_handler',
             'addHandler'
         );
     }

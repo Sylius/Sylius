@@ -31,7 +31,7 @@
         </service>
 
         <service id="sylius.context.cart.new_shop_based" class="Sylius\Component\Core\Cart\Context\ShopBasedCartContext" decorates="sylius.context.cart.new">
-            <argument type="service" id="sylius.context.cart.shop_based.inner" />
+            <argument type="service" id="sylius.context.cart.new_shop_based.inner" />
             <argument type="service" id="sylius.context.shopper" />
         </service>
         <service id="sylius.context.cart.session_and_channel_based" class="Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext" decorates="sylius.context.cart.session_based">
@@ -53,12 +53,12 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.storage.currency" />
             <argument type="service" id="sylius.currency_provider" />
-            <tag name="sylius.context.currency" />
+            <tag name="sylius.context.currency" priority="-888" />
         </service>
 
         <service id="sylius.context.currency.provider_based" class="Sylius\Component\Currency\Context\ProviderBasedCurrencyContext">
             <argument type="service" id="sylius.currency_provider" />
-            <tag name="sylius.context.currency" />
+            <tag name="sylius.context.currency" priority="-999" />
         </service>
 
         <service id="sylius.locale_provider.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedLocaleProvider" decorates="sylius.locale_provider">
@@ -74,8 +74,6 @@
         <service id="sylius.storage.locale" class="Sylius\Component\Core\Locale\SessionBasedLocaleStorage">
             <argument type="service" id="session" />
         </service>
-
-        <service id="sylius.context.locale.composite" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale" public="false" />
 
         <service id="sylius.context.locale.admin_based" class="Sylius\Bundle\CoreBundle\Context\AdminBasedLocaleContext">
             <argument type="service" id="security.token_storage" />
