@@ -75,16 +75,17 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
+     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+)(?:| with a comment "([^"]+)") added by (customer "[^"]+")(?:|, created (\d+) days ago)$/
      */
     public function thisProductHasAReviewTitledAndRatedAddedByCustomer(
         ProductInterface $product,
         $title,
         $rating,
+        $comment = null,
         CustomerInterface $customer,
         $daysSinceCreation = null
     ) {
-        $review = $this->createProductReview($product, $title, $rating, $title, $customer);
+        $review = $this->createProductReview($product, $title, $rating, $comment, $customer);
         if (null !== $daysSinceCreation) {
             $review->setCreatedAt(new \DateTime('-'.$daysSinceCreation.' days'));
         }
@@ -93,15 +94,16 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+") which is not accepted yet$/
+     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+)(?:| with a comment "([^"]+)") added by (customer "[^"]+") which is not accepted yet$/
      */
     public function thisProductHasAReviewTitledAndRatedAddedByCustomerWhichIsNotAcceptedYet(
         ProductInterface $product,
         $title,
         $rating,
+        $comment = null,
         CustomerInterface $customer
     ) {
-        $review = $this->createProductReview($product, $title, $rating, $title, $customer, null);
+        $review = $this->createProductReview($product, $title, $rating, $comment, $customer, null);
 
         $this->productReviewRepository->add($review);
     }
@@ -171,6 +173,8 @@ final class ProductReviewContext implements Context
             $stateMachine = $this->stateMachineFactory->get($review, ProductReviewTransitions::GRAPH);
             $stateMachine->apply($transition);
         }
+
+        $this->sharedStorage->set('product_review', $review);
 
         return $review;
     }
