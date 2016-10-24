@@ -187,7 +187,7 @@ sylius:
         current_promotions: Promociones actuales
         current_stock: Existencias actuales
         customer: Cliente
-        customer_can_login_to_the_store: ¿Los clientes pueden acceder a la tienda?
+        customer_can_login_to_the_store: Los clientes pueden acceder a la tienda
         customer_care: Cliente desde
         customer_details: Detalles del cliente
         customer_groups: Grupos de clientes
@@ -307,7 +307,7 @@ sylius:
         filter: Filtrar
         filters: Filtros
         first_name: Nombre
-        forgot_password: ¿Contraseña olvidada?
+        forgot_password: Contraseña olvidada
         from_the_oldest: Desde la más antigua
         fulfill: Completo
         fulfilled: Completado
@@ -323,7 +323,7 @@ sylius:
         grand_total: Total
         guest: Invitado
         guest_customer: Cliente invitado
-        have_an_account_already: ¿Ya tiene una cuenta?
+        have_an_account_already: Ya tiene una cuenta
         hello: Hola
         hello_name: Hola <b>%name%</b>
         hide_deleted: Ocultar eliminados
