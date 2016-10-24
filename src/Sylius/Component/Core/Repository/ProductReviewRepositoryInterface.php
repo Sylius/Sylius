@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Repository;
 
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
@@ -21,17 +22,17 @@ interface ProductReviewRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param int $productId
-     * @param int $count
      *
      * @return ReviewInterface[]
      */
-    public function findLatestByProductId($productId, $count);
+    public function findLatestByProductId($productId);
 
     /**
      * @param string $slug
      * @param string $locale
+     * @param ChannelInterface $channel
      *
      * @return ReviewInterface[]
      */
-    public function findAcceptedByProductSlug($slug, $locale);
+    public function findAcceptedByProductSlugAndChannel($slug, $locale, ChannelInterface $channel);
 }

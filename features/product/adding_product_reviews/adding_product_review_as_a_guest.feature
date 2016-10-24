@@ -13,4 +13,5 @@ Feature: Adding product review as a guest
         Given I want to review product "Necronomicon"
         When I leave a comment "I'm never gonna read this terrible book again.", titled "Never again" as "castiel@heaven.com"
         And I rate it with 1 point
+        And I add it
         Then I should be notified that my review is waiting for the acceptation

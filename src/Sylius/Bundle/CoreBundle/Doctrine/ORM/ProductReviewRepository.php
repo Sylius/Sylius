@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ProductReviewRepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
@@ -23,7 +24,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
     /**
      * {@inheritdoc}
      */
-    public function findLatestByProductId($productId, $count)
+    public function findLatestByProductId($productId)
     {
         return $this->createQueryBuilder('o')
             ->where('o.reviewSubject = :productId')
@@ -31,7 +32,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
             ->setParameter('productId', $productId)
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
             ->orderBy('o.createdAt', 'desc')
-            ->setMaxResults($count)
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult()
         ;
@@ -40,16 +41,19 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
     /**
      * {@inheritdoc}
      */
-    public function findAcceptedByProductSlug($slug, $locale)
+    public function findAcceptedByProductSlugAndChannel($slug, $locale, ChannelInterface $channel)
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.reviewSubject', 'product')
             ->leftJoin('product.translations', 'translation')
+            ->leftJoin('product.channels', 'channel')
             ->where('translation.locale = :locale')
             ->andWhere('translation.slug = :slug')
+            ->andWhere('channel = :channel')
             ->andWhere('o.status = :status')
             ->setParameter('locale', $locale)
             ->setParameter('slug', $slug)
+            ->setParameter('channel', $channel)
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
             ->getQuery()
             ->getResult()

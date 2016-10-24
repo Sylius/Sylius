@@ -407,7 +407,7 @@ final class ProductContext implements Context
     {
         Assert::same(
             (float) $rating,
-            (float) $this->showPage->getAverageRating(),
+            $this->showPage->getAverageRating(),
             'Product should have average rating %2$s but has %s.'
         );
     }

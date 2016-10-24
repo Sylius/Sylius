@@ -13,6 +13,7 @@ Feature: Review validation
         Given I want to review product "Necronomicon"
         When I leave a comment "This book made me sad, but plot was fine.", titled "Not good, not bad" as "bartholomew@heaven.com"
         But I do not rate it
+        And I add it
         Then I should be notified that I must check review rating
 
     @ui @javascript
@@ -20,6 +21,7 @@ Feature: Review validation
         Given I want to review product "Necronomicon"
         When I leave a comment "This book made me sad, but plot was fine." as "bartholomew@heaven.com"
         And I rate it with 3 points
+        And I add it
         Then I should be notified that title is required
 
     @ui @javascript
@@ -27,7 +29,8 @@ Feature: Review validation
         Given I want to review product "Necronomicon"
         When I leave a comment "This book made me sad, but plot was fine.", titled "X" as "bartholomew@heaven.com"
         And I rate it with 3 points
-        Then I should be notified that title is too short
+        And I add it
+        Then I should be notified that title must have at least 2 characters
 
     @ui @javascript
     Scenario: Adding a product review with too long title
@@ -35,13 +38,15 @@ Feature: Review validation
         When I leave a comment "This book made me sad, but plot was fine." as "bartholomew@heaven.com"
         And I title it with very long title
         And I rate it with 3 points
-        Then I should be notified that title is too long
+        And I add it
+        Then I should be notified that title must have at most 255 characters
 
     @ui @javascript
     Scenario: Adding a product review without specifying a comment
         Given I want to review product "Necronomicon"
         When I leave a review titled "Not good, not bad" as "bartholomew@heaven.com"
         And I rate it with 3 points
+        And I add it
         Then I should be notified that comment is required
 
     @ui @javascript
@@ -49,6 +54,7 @@ Feature: Review validation
         Given I want to review product "Necronomicon"
         When I leave a comment "Not good, not bad", titled "Not good, not bad"
         And I rate it with 3 points
+        And I add it
         Then I should be notified that I must enter my email
 
     @ui @javascript
@@ -57,4 +63,5 @@ Feature: Review validation
         And I want to review product "Necronomicon"
         When I leave a comment "Really good book, with many important info.", titled "Usefull" as "sam@winchester.com"
         And I rate it with 4 points
+        And I add it
         Then I should be notified that this email is already registered

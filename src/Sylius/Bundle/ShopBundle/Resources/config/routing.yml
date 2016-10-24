@@ -16,7 +16,7 @@ sylius_shop_product:
     resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
 
 sylius_shop_product_reviews:
-    resource: "@SyliusShopBundle/Resources/config/routing/product_reviews.yml"
+    resource: "@SyliusShopBundle/Resources/config/routing/product_review.yml"
 
 sylius_shop_provinces:
     resource: "@SyliusShopBundle/Resources/config/routing/provinces.yml"

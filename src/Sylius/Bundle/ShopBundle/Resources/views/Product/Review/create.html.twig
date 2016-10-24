@@ -19,22 +19,23 @@
             </div>
             <form action="{{ path('sylius_shop_product_reviews_create', { 'slug': product_review.reviewSubject.getSlug() }) }}" method="POST" class="ui reply form" novalidate>
                 <div class="field">
-                    {{ form_errors(form.rating) }}<br/>
                     <div class="ui huge star rating" data-rating="0" data-max-rating="5"></div>
+                    <br/>
+                    {{ form_errors(form.rating) }}
                     {{ form_widget(form.rating, { 'attr': { 'style': 'display: none' } }) }}
                 </div>
                 <div class="field">
-                    {{ form_errors(form.title) }}
                     {{ form_widget(form.title, { 'attr': { 'placeholder': 'sylius.ui.title'|trans } }) }}
+                    {{ form_errors(form.title) }}
                 </div>
                 <div class="field">
-                    {{ form_errors(form.comment) }}
                     {{ form_widget(form.comment) }}
+                    {{ form_errors(form.comment) }}
                 </div>
                 {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
                 <div class="field">
-                    {{ form_errors(form.author.email) }}
                     {{ form_widget(form.author.email, { 'attr': { 'placeholder': 'sylius.ui.author'|trans } }) }}
+                    {{ form_errors(form.author.email) }}
                 </div>
                 {% endif %}
                 {{ form_row(form._token) }}

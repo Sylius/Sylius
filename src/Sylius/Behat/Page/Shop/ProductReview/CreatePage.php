@@ -68,7 +68,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function getRateValidationMessage()
     {
-        return $this->getElement('rating')->find('css', '.sylius-validation-error')->getText();
+        return $this->getElement('rating')->getParent()->find('css', '.sylius-validation-error')->getText();
     }
 
     /**
@@ -76,7 +76,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function getTitleValidationMessage()
     {
-        return $this->getElement('title')->find('css', '.sylius-validation-error')->getText();
+        return $this->getElement('title')->getParent()->find('css', '.sylius-validation-error')->getText();
     }
 
     /**
@@ -84,7 +84,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function getCommentValidationMessage()
     {
-        return $this->getElement('comment')->find('css', '.sylius-validation-error')->getText();
+        return $this->getElement('comment')->getParent()->find('css', '.sylius-validation-error')->getText();
     }
 
     /**
@@ -92,7 +92,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function getAuthorValidationMessage()
     {
-        return $this->getElement('author')->find('css', '.sylius-validation-error')->getText();
+        return $this->getElement('author')->getParent()->find('css', '.sylius-validation-error')->getText();
     }
 
     /**
@@ -101,11 +101,11 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'author' => 'form, .field:nth-child(4)',
-            'comment' => 'form, .field:nth-child(3)',
+            'author' => '#sylius_product_review_author_email',
+            'comment' => '#sylius_product_review_comment',
             'rate' => '.star.rating .icon:nth-child(%rate%)',
-            'rating' => 'form .field:first-child',
-            'title' => 'form .field:nth-child(2)',
+            'rating' => '#sylius_product_review_rating',
+            'title' => '#sylius_product_review_title',
         ]);
     }
 }

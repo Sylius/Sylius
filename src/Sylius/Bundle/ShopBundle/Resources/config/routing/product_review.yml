@@ -6,10 +6,11 @@ sylius_shop_product_reviews_index:
         _sylius:
             template: SyliusShopBundle:Product/Review:index.html.twig
             repository:
-                method: findAcceptedByProductSlug
+                method: findAcceptedByProductSlugAndChannel
                 arguments:
                     - $slug
                     - '%locale%'
+                    - 'expr:service("sylius.context.channel").getChannel()'
 
 sylius_shop_product_reviews_create:
     path: /products/{slug}/reviews/new

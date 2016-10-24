@@ -83,6 +83,21 @@ final class ProductReviewContext implements Context
     public function iRateItWithPoints($rate)
     {
         $this->createPage->rateReview($rate);
+    }
+
+    /**
+     * @When I do not rate it
+     */
+    public function iDoNotRateIt()
+    {
+        // intentionally left blank, as review rate is not selected by default
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt()
+    {
         $this->createPage->submitReview();
     }
 
@@ -91,15 +106,10 @@ final class ProductReviewContext implements Context
      */
     public function iShouldBeNotifiedThatMyReviewIsWaitingForTheAcceptation()
     {
-        $this->notificationChecker->checkNotification('Your review is waiting for the acceptation.', NotificationType::success());
-    }
-
-    /**
-     * @When I do not rate it
-     */
-    public function iDoNotRateIt()
-    {
-        $this->createPage->submitReview();
+        $this->notificationChecker->checkNotification(
+            'Your review is waiting for the acceptation.',
+            NotificationType::success()
+        );
     }
 
     /**
@@ -127,25 +137,25 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Then I should be notified that title is too short
+     * @Then I should be notified that title must have at least 2 characters
      */
-    public function iShouldBeNotifiedThatTitleIsTooShort()
+    public function iShouldBeNotifiedThatTitleMustHaveAtLeast2Characters()
     {
         Assert::same(
-            $this->createPage->getTitleValidationMessage(),
             'Review title must have at least 2 characters.',
+            $this->createPage->getTitleValidationMessage(),
             'There should be title length validation error, but there is not.'
         );
     }
 
     /**
-     * @Then I should be notified that title is too long
+     * @Then I should be notified that title must have at most 255 characters
      */
-    public function iShouldBeNotifiedThatTitleIsTooLong()
+    public function iShouldBeNotifiedThatTitleMustHaveAtMost255Characters()
     {
         Assert::same(
-            $this->createPage->getTitleValidationMessage(),
             'Review title must have at most 255 characters.',
+            $this->createPage->getTitleValidationMessage(),
             'There should be title length validation error, but there is not.'
         );
     }

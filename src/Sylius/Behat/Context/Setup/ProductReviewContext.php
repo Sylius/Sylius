@@ -16,6 +16,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -134,7 +135,7 @@ final class ProductReviewContext implements Context
     public function itAlsoHasReviewRatedWhichIsRejected(ProductInterface $product, $rate)
     {
         $customer = $this->sharedStorage->get('customer');
-        $review = $this->createProductReview($product, 'Title', $rate, 'Comment', $customer, 'reject');
+        $review = $this->createProductReview($product, 'Title', $rate, 'Comment', $customer, ProductReviewTransitions::TRANSITION_REJECT);
         $this->productReviewRepository->add($review);
     }
 
@@ -154,7 +155,7 @@ final class ProductReviewContext implements Context
         $rating,
         $comment,
         CustomerInterface $customer = null,
-        $transition = 'accept'
+        $transition = ProductReviewTransitions::TRANSITION_ACCEPT
     ) {
         /** @var ReviewInterface $review */
         $review = $this->productReviewFactory->createNew();
@@ -167,7 +168,7 @@ final class ProductReviewContext implements Context
         $product->addReview($review);
 
         if (null !== $transition) {
-            $stateMachine = $this->stateMachineFactory->get($review, 'sylius_product_review');
+            $stateMachine = $this->stateMachineFactory->get($review, ProductReviewTransitions::GRAPH);
             $stateMachine->apply($transition);
         }
 

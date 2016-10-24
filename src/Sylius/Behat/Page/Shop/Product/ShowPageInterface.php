@@ -112,7 +112,7 @@ interface ShowPageInterface extends PageInterface
     public function hasReviewTitled($title);
 
     /**
-     * @return string
+     * @return float
      */
     public function getAverageRating();
 

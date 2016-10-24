@@ -159,7 +159,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function getAverageRating()
     {
-        return $this->getElement('average_rating')->getAttribute('data-average-rating');
+        return (float) $this->getElement('average_rating')->getAttribute('data-average-rating');
     }
 
     /**
