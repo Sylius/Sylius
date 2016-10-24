@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductAssociationType\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductAssociationType\UpdatePageInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Association\Model\AssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
@@ -39,18 +40,26 @@ final class ManagingProductAssociationTypesContext implements Context
     private $updatePage;
 
     /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
+     * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
-        UpdatePageInterface $updatePage
+        UpdatePageInterface $updatePage,
+        CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
+        $this->currentPageResolver = $currentPageResolver;
     }
 
     /**
@@ -79,30 +88,34 @@ final class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @When I specify its name as :name
+     * @When I do not name it
      */
-    public function iSpecifyItsNameAs($name)
+    public function iSpecifyItsNameAs($name = null)
     {
         $this->createPage->nameIt($name);
     }
 
     /**
      * @When I rename it to :name
+     * @When I remove its name
      */
-    public function iRenameItTo($name)
+    public function iRenameItTo($name = null)
     {
         $this->updatePage->nameIt($name);
     }
 
     /**
      * @When I specify its code as :code
+     * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code)
+    public function iSpecifyItsCodeAs($code = null)
     {
         $this->createPage->specifyCode($code);
     }
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt()
     {
@@ -111,6 +124,7 @@ final class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
@@ -174,6 +188,7 @@ final class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @Then /^(this product association type) name should be "([^"]+)"$/
+     * @Then /^(this product association type) should still be named "([^"]+)"$/
      */
     public function thisProductAssociationTypeNameShouldBe(
         AssociationTypeInterface $productAssociationType,
@@ -219,5 +234,65 @@ final class ManagingProductAssociationTypesContext implements Context
                 $productAssociationType->getName()
             )
         );
+    }
+
+    /**
+     * @Then I should be notified that product association type with this code already exists
+     */
+    public function iShouldBeNotifiedThatProductAssociationTypeWithThisCodeAlreadyExists()
+    {
+        Assert::same(
+            $this->createPage->getValidationMessage('code'),
+            'The association type with given code already exists.'
+        );
+    }
+
+    /**
+     * @Then there should still be only one product association type with a :element :code
+     */
+    public function thereShouldStillBeOnlyOneProductAssociationTypeWith($element, $code)
+    {
+        $this->iWantToBrowseProductAssociationTypes();
+
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage([$element => $code]),
+            sprintf('Association type with %s %s cannot be found.', $element, $code)
+        );
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatIsRequired($element)
+    {
+        $this->assertFieldValidationMessage(
+            $element,
+            sprintf('Please enter association type %s.', $element)
+        );
+    }
+
+    /**
+     * @Then the product association type with :element :value should not be added
+     */
+    public function theProductAssociationTypeWithElementValueShouldNotBeAdded($element, $value)
+    {
+        $this->iWantToBrowseProductAssociationTypes();
+
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage([$element => $value]),
+            sprintf('Product association type with %s %s was created, but it should not.', $element, $value)
+        );
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
     }
 }

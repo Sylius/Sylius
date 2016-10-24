@@ -121,6 +121,7 @@
             <argument type="service" id="sylius.behat.page.admin.product_association_type.create" />
             <argument type="service" id="sylius.behat.page.admin.product_association_type.index" />
             <argument type="service" id="sylius.behat.page.admin.product_association_type.update" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
             <tag name="sylius.behat.context" />
         </service>
 

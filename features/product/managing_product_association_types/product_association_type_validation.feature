@@ -8,25 +8,25 @@ Feature: Product association type validation
         Given the store has a product association type "Cross sell"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Trying to add a new product association type without specifying its code
         When I want to create a new product association type
-        And I specify its name as "Cross sell"
+        And I specify its name as "Up sell"
         But I do not specify its code
         And I try to add it
         Then I should be notified that code is required
-        And the product association type with name "Cross sell" should not be added
+        And the product association type with name "Up sell" should not be added
 
-    @ui @todo
+    @ui
     Scenario: Trying to add a new product association type without specifying its name
         When I want to create a new product association type
-        And I specify its code as "cross_sell"
+        And I specify its code as "up_sell"
         But I do not name it
         And I try to add it
         Then I should be notified that name is required
-        And the product association type with code "cross_sell" should not be added
+        And the product association type with code "up_sell" should not be added
 
-    @ui @todo
+    @ui
     Scenario: Trying to remove name from an existing product association type
         When I want to modify the "Cross sell" product association type
         And I remove its name

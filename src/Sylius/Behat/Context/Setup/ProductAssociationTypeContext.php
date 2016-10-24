@@ -54,10 +54,11 @@ final class ProductAssociationTypeContext implements Context
 
     /**
      * @Given the store has (also) a product association type :name
+     * @Given the store has (also) a product association type :name with a code :code
      */
-    public function theStoreHasAProductAssociationType($name)
+    public function theStoreHasAProductAssociationType($name, $code = null)
     {
-        $this->createProductAssociationType($name);
+        $this->createProductAssociationType($name, $code);
     }
 
     /**
