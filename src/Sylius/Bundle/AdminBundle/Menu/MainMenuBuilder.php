@@ -73,6 +73,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabel('sylius.menu.admin.main.catalog.options')
             ->setLabelAttribute('icon', 'options')
         ;
+
+        $catalog
+            ->addChild('association_types', ['route' => 'sylius_admin_product_association_type_index'])
+            ->setLabel('sylius.menu.admin.main.catalog.association_types')
+            ->setLabelAttribute('icon', 'tasks')
+        ;
     }
 
     /**

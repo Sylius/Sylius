@@ -25,6 +25,7 @@
         <import resource="admin/order.xml" />
         <import resource="admin/payment_method.xml" />
         <import resource="admin/product.xml" />
+        <import resource="admin/product_association_type.xml" />
         <import resource="admin/product_attribute.xml" />
         <import resource="admin/product_option.xml" />
         <import resource="admin/product_variant.xml" />

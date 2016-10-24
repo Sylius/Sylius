@@ -1,0 +1,33 @@
+sylius_grid:
+    grids:
+        sylius_admin_product_association_type:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_association_type.class%"
+            sorting:
+                code: asc
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                    sortable: ~
+                name:
+                    type: string
+                    label: sylius.ui.name
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

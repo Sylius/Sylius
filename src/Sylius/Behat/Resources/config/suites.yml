@@ -41,6 +41,7 @@ imports:
     - suites/ui/order/modifying_shipping_address.yml
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/product/adding_product_review.yml
+    - suites/ui/product/managing_product_association_types.yml
     - suites/ui/product/managing_product_attributes.yml
     - suites/ui/product/managing_product_options.yml
     - suites/ui/product/managing_product_variants.yml

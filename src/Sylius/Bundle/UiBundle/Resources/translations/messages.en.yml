@@ -240,6 +240,7 @@ sylius:
         edit_order: 'Edit order'
         edit_payment_method: Edit payment method
         edit_product: Edit product
+        edit_product_association_type: Edit product association type
         edit_product_attribute: Edit product attribute
         edit_product_option: Edit product option
         edit_product_variant: Edit product variant
@@ -392,6 +393,7 @@ sylius:
         manage_adjustments: 'Manage adjustments'
         manage_admin_users: 'Manage administrators'
         manage_attributes: 'Manage attributes'
+        manage_association_types_of_your_products: Manage association types of your products
         manage_attributes_of_your_products: Manage attributes of your products
         manage_categorization_of_your_products: Manage categorization of your products
         manage_channels: 'Manage channels'
@@ -461,6 +463,7 @@ sylius:
         new_payment_method: 'New payment method'
         new_permission: 'New permission'
         new_product: 'New product'
+        new_product_association_type: New product association type
         new_product_attribute: 'New product attribute'
         new_product_option: 'New product option'
         new_product_variant: 'New product variant'
