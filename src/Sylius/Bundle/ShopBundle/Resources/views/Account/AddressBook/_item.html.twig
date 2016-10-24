@@ -1,0 +1,12 @@
+<div class="column">
+    <div class="ui segment">
+        <div class="ui stackable two column grid">
+            <div class="column">
+                {% include '@SyliusShop/Common/_address.html.twig' with {'address': address} %}
+            </div>
+            <div class="right aligned column">
+                {{ buttons.delete(path('sylius_shop_account_address_book_delete', {'id': address.id})) }}
+            </div>
+        </div>
+    </div>
+</div>

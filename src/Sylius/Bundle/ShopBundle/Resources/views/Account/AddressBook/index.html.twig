@@ -18,32 +18,27 @@
         <div class="column">
             <h1 class="ui header">
                 {{ 'sylius.ui.address_book'|trans }}
-                <div class="sub header">{{ 'sylius.ui.browse_your_addresses'|trans }}</div>
+                <div class="sub header">{{ 'sylius.ui.manage_your_saved_addresses'|trans }}</div>
             </h1>
         </div>
         <div class="middle aligned column">
-            <a href="{{ path('sylius_shop_account_address_book_create') }}" class="ui right floated blue button"><i class="mail icon"></i> {{ 'sylius.ui.add_address'|trans }}</a>
+            <a href="{{ path('sylius_shop_account_address_book_create') }}" class="ui right floated blue button"><i class="circle plus icon"></i> {{ 'sylius.ui.add_address'|trans }}</a>
         </div>
     </div>
-    <div class="ui segment">
-         {{ messages.info('sylius.ui.no_default_address'|trans) }}
-    </div>
-    <div class="ui segment">
-        <div class="ui very relaxed divided list" id="addresses">
+    {% if addresses|length > 0 %}
+    <div class="ui two column grid" id="sylius-addresses">
+        <div class="row">
             {% for address in addresses %}
-                <div class="item">
-                    <div class="ui stackable grid">
-                        <div class="eight wide column">
-                            {% include '@SyliusShop/Common/_address.html.twig' with {'address': address} %}
-                        </div>
-                        <div class="eight wide column">
-                            {{ buttons.delete(path('sylius_shop_account_address_book_delete', {'id': address.id})) }}
-                        </div>
-                    </div>
+                {% include '@SyliusShop/Account/AddressBook/_item.html.twig' %}
+
+                {% if not loop.index % 2 %}
                 </div>
-            {% else %}
-                <div class="item">{{ messages.info('sylius.ui.no_addresses'|trans) }}</div>
+                <div class="row">
+                {% endif %}
             {% endfor %}
         </div>
     </div>
+    {% else %}
+        {{ messages.info('sylius.ui.you_have_no_addresses_defined'|trans) }}
+    {% endif %}
 {% endblock %}

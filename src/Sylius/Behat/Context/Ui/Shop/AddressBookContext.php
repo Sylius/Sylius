@@ -103,7 +103,7 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then There should be no addresses
+     * @Then there should be no addresses
      */
     public function thereShouldBeNoAddresses()
     {
