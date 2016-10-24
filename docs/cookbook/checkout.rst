@@ -91,6 +91,98 @@ Make these changes in the ``config.yml``.
                 payment_selected:
                     route: sylius_shop_checkout_complete
 
+Adjust Checkout Templates
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+After you've got the resolver adjusted - modify the templates for checkout. You have to remove shipping from steps. And disable
+the hardcoded ability to go back to the shipping step. You will achieve that by overwriting first the ``SyliusShopBundle/Resources/views/Checkout/_steps.html.twig``
+and then the ``SyliusShopBundle/Resources/views/Checkout/SelectPayment/_form.html.twig``.
+
+.. code-block:: html
+
+    {# app/Resources/SyliusShopBundle/views/Checkout/_steps.html.twig #}
+    {% if active is not defined or active == 'address' %}
+        {% set steps = {'address': 'active', 'select_payment': 'disabled', 'complete': 'disabled'} %}
+    {% elseif active == 'select_payment' %}
+        {% set steps = {'address': 'completed', 'select_payment': 'active', 'complete': 'disabled'} %}
+    {% else %}
+        {% set steps = {'address': 'completed', 'select_payment': 'completed', 'complete': 'active'} %}
+    {% endif %}
+
+    <div class="ui three steps">
+        <a class="{{ steps['address'] }} step" href="{{ path('sylius_shop_checkout_address') }}">
+            <i class="map icon"></i>
+            <div class="content">
+                <div class="title">{{ 'sylius.ui.address'|trans }}</div>
+                <div class="description">{{ 'sylius.ui.fill_in_your_billing_and_shipping_addresses'|trans }}</div>
+            </div>
+        </a>
+        <a class="{{ steps['select_payment'] }} step" href="{{ path('sylius_shop_checkout_select_payment') }}">
+            <i class="payment icon"></i>
+            <div class="content">
+                <div class="title">{{ 'sylius.ui.payment'|trans }}</div>
+                <div class="description">{{ 'sylius.ui.choose_how_you_will_pay'|trans }}</div>
+            </div>
+        </a>
+        <div class="{{ steps['complete'] }} step" href="{{ path('sylius_shop_checkout_complete') }}">
+            <i class="checkered flag icon"></i>
+            <div class="content">
+                <div class="title">{{ 'sylius.ui.complete'|trans }}</div>
+                <div class="description">{{ 'sylius.ui.review_and_confirm_your_order'|trans }}</div>
+            </div>
+        </div>
+    </div>
+
+.. code-block:: html
+
+    {# app/Resources/SyliusShopBundle/views/Checkout/SelectPayment/_form.html.twig #}
+    <div class="ui unmargined segments">
+        {% set disabled = false %}
+        {% for payment in order.payments %}
+            <div class="ui segment">
+                <div class="ui dividing header">{{ 'sylius.ui.payment'|trans }} #{{ loop.index }}</div>
+                <div class="ui fluid stackable items">
+                    {% set payment_form = form.payments[loop.index0] %}
+                    {{ form_errors(payment_form.method) }}
+                    {% for payment_method_choice in payment_form.method %}
+                        <div class="item">
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    {{ form_widget(payment_method_choice) }}
+                                </div>
+                            </div>
+                            <div class="content">
+                                <a class="header">{{ form_label(payment_method_choice) }}</a>
+                                {% if payment_method_choice.parent.vars.choices[loop.index0].data.description is not null %}
+                                    <div class="description">
+                                        <p>{{ payment_method_choice.parent.vars.choices[loop.index0].data.description }}</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% else %}
+                        {% set disabled = true %}
+                        {% include '@SyliusShop/Checkout/SelectPayment/_no_payment_methods_available.twig' %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% else %}
+            {% set disabled = true %}
+            {% include '@SyliusShop/Checkout/SelectPayment/_no_payment_methods_available.twig' %}
+        {% endfor %}
+    </div>
+    <div class="ui hidden divider"></div>
+    <div class="ui two column grid">
+        <div class="column">
+            <a href="{{ path('sylius_shop_checkout_address') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.change_address'|trans }}</a>
+        </div>
+        <div class="right aligned column">
+            <button type="submit" id="next-step" class="ui large primary icon labeled {% if disabled %} disabled {% endif %} button">
+                <i class="arrow right icon"></i>
+                {{ 'sylius.ui.next'|trans }}
+            </button>
+        </div>
+    </div>
 
 Learn more
 ----------
