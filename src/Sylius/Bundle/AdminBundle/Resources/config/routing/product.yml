@@ -6,7 +6,6 @@ sylius_admin_product:
         except: ['show', 'index']
         redirect: update
         grid: sylius_admin_product
-        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_your_product_catalog
@@ -25,7 +24,6 @@ sylius_admin_product_index:
             section: admin
             grid: sylius_admin_product
             template: SyliusAdminBundle:Product:index.html.twig
-            permission: true
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 index:
@@ -40,7 +38,6 @@ sylius_admin_product_index_per_taxon:
             section: admin
             grid: sylius_admin_product
             template: SyliusAdminBundle:Product:index.html.twig
-            permission: true
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 index:
@@ -55,7 +52,6 @@ sylius_admin_product_create:
             section: admin
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_product_update
-            permission: true
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 templates:
@@ -74,7 +70,6 @@ sylius_admin_product_create_simple:
                 method: createWithVariant
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_product_update
-            permission: true
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 templates:
