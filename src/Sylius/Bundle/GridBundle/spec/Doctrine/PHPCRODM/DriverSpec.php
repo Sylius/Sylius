@@ -20,9 +20,6 @@ use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\Driver;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
-/**
- * @mixin Driver
- */
 final class DriverSpec extends ObjectBehavior
 {
     function let(DocumentManagerInterface $documentManager)

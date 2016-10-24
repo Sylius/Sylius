@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 
 /**
- * @mixin ThemeScreenshot
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeScreenshotSpec extends ObjectBehavior

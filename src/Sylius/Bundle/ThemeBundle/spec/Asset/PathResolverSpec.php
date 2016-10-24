@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin PathResolver
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class PathResolverSpec extends ObjectBehavior

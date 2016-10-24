@@ -21,8 +21,6 @@ use Sylius\Component\Registry\ServiceRegistry;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
- * @mixin ServiceRegistry
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ServiceRegistrySpec extends ObjectBehavior

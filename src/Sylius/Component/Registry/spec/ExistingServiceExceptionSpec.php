@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Registry\ExistingServiceException;
 
 /**
- * @mixin ExistingServiceException
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class ExistingServiceExceptionSpec extends ObjectBehavior

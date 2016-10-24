@@ -21,8 +21,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
 
 /**
- * @mixin RegisterChannelFactoryPass
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class RegisterChannelFactoryPassSpec extends ObjectBehavior

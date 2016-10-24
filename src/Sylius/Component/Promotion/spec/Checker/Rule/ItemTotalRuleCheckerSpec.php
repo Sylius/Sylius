@@ -17,8 +17,6 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @mixin ItemTotalRuleChecker
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class ItemTotalRuleCheckerSpec extends ObjectBehavior

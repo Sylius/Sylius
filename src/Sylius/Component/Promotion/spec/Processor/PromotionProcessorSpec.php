@@ -21,8 +21,6 @@ use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 
 /**
- * @mixin PromotionProcessor
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class PromotionProcessorSpec extends ObjectBehavior

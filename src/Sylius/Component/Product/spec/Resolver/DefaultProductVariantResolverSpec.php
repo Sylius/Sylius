@@ -19,8 +19,6 @@ use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 /**
- * @mixin DefaultProductVariantResolver
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class DefaultProductVariantResolverSpec extends ObjectBehavior

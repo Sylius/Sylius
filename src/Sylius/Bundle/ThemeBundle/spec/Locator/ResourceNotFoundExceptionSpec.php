@@ -16,8 +16,6 @@ use Sylius\Bundle\ThemeBundle\Locator\ResourceNotFoundException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin ResourceNotFoundException
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ResourceNotFoundExceptionSpec extends ObjectBehavior

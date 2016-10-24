@@ -20,8 +20,6 @@ use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
- * @mixin TranslatableFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class TranslatableFactorySpec extends ObjectBehavior

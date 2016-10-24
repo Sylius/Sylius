@@ -47,8 +47,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @mixin ResourceController
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceControllerSpec extends ObjectBehavior

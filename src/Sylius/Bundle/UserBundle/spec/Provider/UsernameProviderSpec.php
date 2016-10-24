@@ -20,8 +20,6 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 /**
- * @mixin UsernameProvider
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class UsernameProviderSpec extends ObjectBehavior

@@ -15,9 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\Channel;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
-/**
- * @mixin Channel
- */
 final class ChannelSpec extends ObjectBehavior
 {
     function it_is_initializable()

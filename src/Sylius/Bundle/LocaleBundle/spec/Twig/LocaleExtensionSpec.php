@@ -16,8 +16,6 @@ use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
 use Sylius\Bundle\LocaleBundle\Twig\LocaleExtension;
 
 /**
- * @mixin LocaleExtension
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class LocaleExtensionSpec extends ObjectBehavior

@@ -17,8 +17,6 @@ use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Model\TaxonImage;
 
 /**
- * @mixin TaxonImage
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class TaxonImageSpec extends ObjectBehavior

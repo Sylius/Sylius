@@ -18,8 +18,6 @@ use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\View\GridView;
 
 /**
- * @mixin GridView
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class GridViewSpec extends ObjectBehavior

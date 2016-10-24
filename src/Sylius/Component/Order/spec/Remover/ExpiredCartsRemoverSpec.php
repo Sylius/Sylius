@@ -19,8 +19,6 @@ use Sylius\Component\Order\Remover\ExpiredCartsRemoverInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
- * @mixin ExpiredCartsRemover
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ExpiredCartsRemoverSpec extends ObjectBehavior

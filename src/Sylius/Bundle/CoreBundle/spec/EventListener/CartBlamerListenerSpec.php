@@ -27,8 +27,6 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
- * @mixin CartBlamerListener
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */

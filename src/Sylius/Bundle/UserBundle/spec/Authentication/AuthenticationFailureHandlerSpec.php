@@ -22,8 +22,6 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureH
 use Symfony\Component\Security\Http\HttpUtils;
 
 /**
- * @mixin AuthenticationFailureHandler
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class AuthenticationFailureHandlerSpec extends ObjectBehavior

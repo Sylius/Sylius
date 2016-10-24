@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin NoopThemeHierarchyProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class NoopThemeHierarchyProviderSpec extends ObjectBehavior

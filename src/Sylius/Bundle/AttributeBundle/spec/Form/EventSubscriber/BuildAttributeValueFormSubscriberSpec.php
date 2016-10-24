@@ -24,8 +24,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
- * @mixin BuildAttributeValueFormSubscriber
- *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>

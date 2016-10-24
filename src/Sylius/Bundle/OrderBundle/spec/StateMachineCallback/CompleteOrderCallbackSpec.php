@@ -15,9 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback;
 use Sylius\Component\Order\Model\OrderInterface;
 
-/**
- * @mixin CompleteOrderCallback
- */
 final class CompleteOrderCallbackSpec extends ObjectBehavior
 {
     function it_is_initializable()

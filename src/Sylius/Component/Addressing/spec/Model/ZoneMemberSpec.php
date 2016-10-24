@@ -17,8 +17,6 @@ use Sylius\Component\Addressing\Model\ZoneMember;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
- * @mixin ZoneMember
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */

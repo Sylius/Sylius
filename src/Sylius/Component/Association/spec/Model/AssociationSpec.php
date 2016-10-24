@@ -18,8 +18,6 @@ use Sylius\Component\Association\Model\AssociationInterface;
 use Sylius\Component\Association\Model\AssociationType;
 
 /**
- * @mixin Association
- *
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */

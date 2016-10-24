@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Templating\Cache\Clearer\TemplatePathsCacheClearer
 use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 
 /**
- * @mixin TemplatePathsCacheClearer
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TemplatePathsCacheClearerSpec extends ObjectBehavior

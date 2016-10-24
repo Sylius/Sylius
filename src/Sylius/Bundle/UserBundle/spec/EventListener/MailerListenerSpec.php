@@ -19,8 +19,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @mixin MailerListener
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class MailerListenerSpec extends ObjectBehavior

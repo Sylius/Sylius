@@ -20,8 +20,6 @@ use Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 /**
- * @mixin SuiteLoader
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SuiteLoaderSpec extends ObjectBehavior

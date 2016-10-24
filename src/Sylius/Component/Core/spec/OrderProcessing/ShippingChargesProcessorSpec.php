@@ -23,8 +23,6 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
- * @mixin ShippingChargesProcessor
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ShippingChargesProcessorSpec extends ObjectBehavior

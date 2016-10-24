@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Metadata\Registry;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
- * @mixin Registry
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class RegistrySpec extends ObjectBehavior

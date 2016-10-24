@@ -10,8 +10,6 @@ use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @mixin TemplateNameParser
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TemplateNameParserSpec extends ObjectBehavior

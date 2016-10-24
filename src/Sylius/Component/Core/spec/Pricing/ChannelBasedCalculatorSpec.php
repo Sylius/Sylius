@@ -19,8 +19,6 @@ use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
- * @mixin ChannelBasedCalculator
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ChannelBasedCalculatorSpec extends ObjectBehavior

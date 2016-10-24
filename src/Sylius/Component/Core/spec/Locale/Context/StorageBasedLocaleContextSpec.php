@@ -21,8 +21,6 @@ use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
- * @mixin StorageBasedLocaleContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class StorageBasedLocaleContextSpec extends ObjectBehavior

@@ -26,8 +26,6 @@ use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
 /**
- * @mixin OrderTaxesProcessor
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */

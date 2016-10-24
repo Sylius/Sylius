@@ -16,8 +16,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\PercentAttributeType;
 use Symfony\Component\Form\AbstractType;
 
 /**
- * @mixin PercentAttributeType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PercentAttributeTypeSpec extends ObjectBehavior

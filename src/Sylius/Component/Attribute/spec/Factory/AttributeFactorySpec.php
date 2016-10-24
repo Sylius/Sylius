@@ -20,8 +20,6 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin AttributeFactory
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class AttributeFactorySpec extends ObjectBehavior

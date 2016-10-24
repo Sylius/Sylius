@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProvid
 use Symfony\Component\Translation\Loader\LoaderInterface;
 
 /**
- * @mixin TranslatorLoaderProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TranslatorLoaderProviderSpec extends ObjectBehavior

@@ -16,8 +16,6 @@ use Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntity;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @mixin HasEnabledEntity
- *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 final class HasEnabledEntitySpec extends ObjectBehavior

@@ -16,8 +16,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeType;
 use Symfony\Component\Form\AbstractType;
 
 /**
- * @mixin TextAttributeType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class TextAttributeTypeSpec extends ObjectBehavior

@@ -23,8 +23,6 @@ use Sylius\Component\Core\StateResolver\OrderShippingStateResolver;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 /**
- * @mixin OrderShippingStateResolver
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */

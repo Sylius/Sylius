@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Form\Model\PasswordReset;
 
 /**
- * @mixin PasswordReset
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class PasswordResetSpec extends ObjectBehavior

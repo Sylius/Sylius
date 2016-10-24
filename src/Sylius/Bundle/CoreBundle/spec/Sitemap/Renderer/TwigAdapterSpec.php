@@ -19,8 +19,6 @@ use Sylius\Bundle\CoreBundle\Sitemap\Renderer\TwigAdapter;
 use Symfony\Component\Templating\EngineInterface;
 
 /**
- * @mixin TwigAdapter
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class TwigAdapterSpec extends ObjectBehavior

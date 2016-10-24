@@ -19,8 +19,6 @@ use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
- * @mixin ActivePromotionsProvider
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ActivePromotionsProviderSpec extends ObjectBehavior

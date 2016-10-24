@@ -19,8 +19,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 
 /**
- * @mixin ProductFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */

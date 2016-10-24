@@ -17,8 +17,6 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
- * @mixin ArrayToStringTransformer
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ArrayToStringTransformerSpec extends ObjectBehavior

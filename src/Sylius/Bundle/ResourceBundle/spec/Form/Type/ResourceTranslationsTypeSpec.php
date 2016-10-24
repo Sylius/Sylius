@@ -19,8 +19,6 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin ResourceTranslationsType
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ResourceTranslationsTypeSpec extends ObjectBehavior

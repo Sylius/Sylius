@@ -18,8 +18,6 @@ use Sylius\Component\User\Security\Checker\TokenUniquenessChecker;
 use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
 
 /**
- * @mixin TokenUniquenessChecker
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class TokenUniquenessCheckerSpec extends ObjectBehavior

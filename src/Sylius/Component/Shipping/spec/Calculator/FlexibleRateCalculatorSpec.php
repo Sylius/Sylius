@@ -17,8 +17,6 @@ use Sylius\Component\Shipping\Calculator\FlexibleRateCalculator;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
- * @mixin FlexibleRateCalculator
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class FlexibleRateCalculatorSpec extends ObjectBehavior

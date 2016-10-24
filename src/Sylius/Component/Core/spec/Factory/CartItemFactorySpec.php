@@ -21,8 +21,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 
 /**
- * @mixin CartItemFactory
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class CartItemFactorySpec extends ObjectBehavior

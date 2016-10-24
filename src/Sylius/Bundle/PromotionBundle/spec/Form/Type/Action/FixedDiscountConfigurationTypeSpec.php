@@ -18,8 +18,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin FixedDiscountConfigurationType
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class FixedDiscountConfigurationTypeSpec extends ObjectBehavior

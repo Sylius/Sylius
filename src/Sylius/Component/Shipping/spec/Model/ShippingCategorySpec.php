@@ -16,8 +16,6 @@ use Sylius\Component\Shipping\Model\ShippingCategory;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
- * @mixin ShippingCategory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ShippingCategorySpec extends ObjectBehavior

@@ -23,8 +23,6 @@ use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @mixin TemplatePathsCacheWarmer
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TemplatePathsCacheWarmerSpec extends ObjectBehavior

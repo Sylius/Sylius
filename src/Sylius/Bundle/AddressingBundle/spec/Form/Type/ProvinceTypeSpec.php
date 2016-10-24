@@ -20,8 +20,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin ProvinceType
- *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 final class ProvinceTypeSpec extends ObjectBehavior

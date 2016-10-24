@@ -19,8 +19,6 @@ use Sylius\Component\Grid\Provider\GridProviderInterface;
 use Sylius\Component\Grid\Provider\UndefinedGridException;
 
 /**
- * @mixin ArrayGridProvider
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ArrayGridProviderSpec extends ObjectBehavior

@@ -16,8 +16,6 @@ use Sylius\Component\Promotion\Exception\FailedGenerationException;
 use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 
 /**
- * @mixin FailedGenerationException
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class FailedGenerationExceptionSpec extends ObjectBehavior

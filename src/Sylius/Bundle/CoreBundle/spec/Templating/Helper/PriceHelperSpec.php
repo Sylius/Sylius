@@ -18,8 +18,6 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Symfony\Component\Templating\Helper\HelperInterface;
 
 /**
- * @mixin PriceHelper
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class PriceHelperSpec extends ObjectBehavior

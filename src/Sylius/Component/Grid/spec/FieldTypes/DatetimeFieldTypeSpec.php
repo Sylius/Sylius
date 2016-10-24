@@ -19,8 +19,6 @@ use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin DatetimeFieldType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DatetimeFieldTypeSpec extends ObjectBehavior

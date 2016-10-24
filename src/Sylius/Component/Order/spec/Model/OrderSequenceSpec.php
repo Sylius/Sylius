@@ -16,8 +16,6 @@ use Sylius\Component\Order\Model\OrderSequence;
 use Sylius\Component\Order\Model\OrderSequenceInterface;
 
 /**
- * @mixin OrderSequence
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class OrderSequenceSpec extends ObjectBehavior

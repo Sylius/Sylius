@@ -19,8 +19,6 @@ use Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsManagerInterface;
 use Sylius\Bundle\ThemeBundle\Twig\SettingsExtension;
 
 /**
- * @mixin SettingsExtension
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SettingsExtensionSpec extends ObjectBehavior

@@ -18,8 +18,6 @@ use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin CurrencyProvider
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CurrencyProviderSpec extends ObjectBehavior

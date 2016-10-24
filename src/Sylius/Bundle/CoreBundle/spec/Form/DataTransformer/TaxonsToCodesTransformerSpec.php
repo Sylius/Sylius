@@ -21,8 +21,6 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * @mixin TaxonsToCodesTransformer
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class TaxonsToCodesTransformerSpec extends ObjectBehavior

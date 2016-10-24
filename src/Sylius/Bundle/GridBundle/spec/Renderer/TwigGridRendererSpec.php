@@ -25,8 +25,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin TwigGridRenderer
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class TwigGridRendererSpec extends ObjectBehavior

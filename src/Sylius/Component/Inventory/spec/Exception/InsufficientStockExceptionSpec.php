@@ -16,8 +16,6 @@ use Sylius\Component\Inventory\Exception\InsufficientStockException;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * @mixin InsufficientStockException
- *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 final class InsufficientStockExceptionSpec extends ObjectBehavior

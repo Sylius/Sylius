@@ -17,8 +17,6 @@ use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 
 /**
- * @mixin Settings
- *
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
 final class SettingsSpec extends ObjectBehavior

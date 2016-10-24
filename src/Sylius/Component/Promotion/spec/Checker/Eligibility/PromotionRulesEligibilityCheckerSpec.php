@@ -21,8 +21,6 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
- * @mixin PromotionRulesEligibilityChecker
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PromotionRulesEligibilityCheckerSpec extends ObjectBehavior

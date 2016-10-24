@@ -16,8 +16,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextareaAttributeType;
 use Symfony\Component\Form\AbstractType;
 
 /**
- * @mixin TextareaAttributeType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class TextareaAttributeTypeSpec extends ObjectBehavior

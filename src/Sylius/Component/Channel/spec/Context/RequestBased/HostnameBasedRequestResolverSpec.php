@@ -19,8 +19,6 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin HostnameBasedRequestResolver
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class HostnameBasedRequestResolverSpec extends ObjectBehavior

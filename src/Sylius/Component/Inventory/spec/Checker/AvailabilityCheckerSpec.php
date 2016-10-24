@@ -17,8 +17,6 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * @mixin AvailabilityChecker
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class AvailabilityCheckerSpec extends ObjectBehavior

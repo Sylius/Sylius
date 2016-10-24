@@ -20,8 +20,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 
 /**
- * @mixin Promotion
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class PromotionSpec extends ObjectBehavior

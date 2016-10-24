@@ -18,8 +18,6 @@ use Sylius\Bundle\OrderBundle\Twig\AggregateAdjustmentsExtension;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
 /**
- * @mixin AggregateAdjustmentsExtension
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class AggregateAdjustmentsExtensionSpec extends ObjectBehavior

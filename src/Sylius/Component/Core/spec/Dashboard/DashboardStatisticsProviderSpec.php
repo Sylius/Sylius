@@ -19,8 +19,6 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
 /**
- * @mixin DashboardStatisticsProvider
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DashboardStatisticsProviderSpec extends ObjectBehavior

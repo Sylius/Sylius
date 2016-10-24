@@ -20,8 +20,6 @@ use Sylius\Component\Grid\View\GridView;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 /**
- * @mixin ResourceGridView
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceGridViewSpec extends ObjectBehavior

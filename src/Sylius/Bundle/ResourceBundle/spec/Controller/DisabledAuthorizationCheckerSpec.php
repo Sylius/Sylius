@@ -17,8 +17,6 @@ use Sylius\Bundle\ResourceBundle\Controller\DisabledAuthorizationChecker;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 
 /**
- * @mixin DisabledAuthorizationChecker
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DisabledAuthorizationCheckerSpec extends ObjectBehavior

@@ -18,8 +18,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @mixin PromotionDurationEligibilityChecker
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PromotionDurationEligibilityCheckerSpec extends ObjectBehavior

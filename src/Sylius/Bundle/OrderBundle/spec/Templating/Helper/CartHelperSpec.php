@@ -23,9 +23,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @mixin CartHelper
- */
 final class CartHelperSpec extends ObjectBehavior
 {
     function let(

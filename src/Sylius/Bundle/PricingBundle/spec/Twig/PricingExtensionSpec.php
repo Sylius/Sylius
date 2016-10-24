@@ -16,8 +16,6 @@ use Sylius\Bundle\PricingBundle\Templating\Helper\PricingHelper;
 use Sylius\Bundle\PricingBundle\Twig\PricingExtension;
 
 /**
- * @mixin PricingExtension
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class PricingExtensionSpec extends ObjectBehavior

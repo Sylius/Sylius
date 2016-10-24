@@ -16,8 +16,6 @@ use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteNotFoundException;
 
 /**
- * @mixin SuiteNotFoundException
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SuiteNotFoundExceptionSpec extends ObjectBehavior

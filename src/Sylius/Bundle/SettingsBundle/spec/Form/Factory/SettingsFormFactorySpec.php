@@ -21,8 +21,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * @mixin SettingsFormFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SettingsFormFactorySpec extends ObjectBehavior

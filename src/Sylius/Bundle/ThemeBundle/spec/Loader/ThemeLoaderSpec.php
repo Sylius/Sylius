@@ -28,8 +28,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 use Zend\Hydrator\HydrationInterface;
 
 /**
- * @mixin ThemeLoader
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeLoaderSpec extends ObjectBehavior

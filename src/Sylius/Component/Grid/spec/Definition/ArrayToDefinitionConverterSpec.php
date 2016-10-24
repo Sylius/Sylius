@@ -21,8 +21,6 @@ use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
 
 /**
- * @mixin ArrayToDefinitionConverter
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ArrayToDefinitionConverterSpec extends ObjectBehavior

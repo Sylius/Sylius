@@ -24,8 +24,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * @mixin InsufficientStockExceptionListener
- *
  * @author Manuel Gonzalez <mgonyan@gmail.com>
  */
 final class InsufficientStockExceptionListenerSpec extends ObjectBehavior

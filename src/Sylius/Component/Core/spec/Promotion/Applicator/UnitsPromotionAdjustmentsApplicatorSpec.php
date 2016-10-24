@@ -25,8 +25,6 @@ use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
- * @mixin UnitsPromotionAdjustmentsApplicator
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior

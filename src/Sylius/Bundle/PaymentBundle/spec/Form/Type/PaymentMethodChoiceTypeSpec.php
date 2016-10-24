@@ -23,8 +23,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin PaymentMethodChoiceType
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class PaymentMethodChoiceTypeSpec extends ObjectBehavior

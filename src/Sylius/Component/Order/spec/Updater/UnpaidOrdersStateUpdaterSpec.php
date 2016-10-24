@@ -23,8 +23,6 @@ use Sylius\Component\Order\Updater\UnpaidOrdersStateUpdaterInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
- *
- * @mixin UnpaidOrdersStateUpdater
  */
 final class UnpaidOrdersStateUpdaterSpec extends ObjectBehavior
 {

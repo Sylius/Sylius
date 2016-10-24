@@ -20,8 +20,6 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * @mixin ImageUniqueCodeValidator
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ImageUniqueCodeValidatorSpec extends ObjectBehavior

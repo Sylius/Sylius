@@ -16,8 +16,6 @@ use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\DatetimeAttributeType;
 
 /**
- * @mixin DatetimeAttributeType
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DatetimeAttributeTypeSpec extends ObjectBehavior

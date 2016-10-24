@@ -23,8 +23,6 @@ use Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProviderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
- * @mixin ThemeSettingsManager
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeSettingsManagerSpec extends ObjectBehavior

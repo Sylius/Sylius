@@ -22,8 +22,6 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 
 /**
- * @mixin ChannelBasedCurrencyProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ChannelBasedCurrencyProviderSpec extends ObjectBehavior

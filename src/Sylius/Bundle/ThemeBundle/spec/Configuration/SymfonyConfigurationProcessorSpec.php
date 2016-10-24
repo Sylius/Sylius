@@ -18,8 +18,6 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * @mixin SymfonyConfigurationProcessor
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SymfonyConfigurationProcessorSpec extends ObjectBehavior

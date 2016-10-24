@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationPr
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
 
 /**
- * @mixin FilesystemConfigurationProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FilesystemConfigurationProviderSpec extends ObjectBehavior

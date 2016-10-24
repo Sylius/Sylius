@@ -15,9 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneTypeChoiceType;
 use Symfony\Component\Form\FormTypeInterface;
 
-/**
- * @mixin ZoneTypeChoiceType
- */
 final class ZoneTypeChoiceTypeSpec extends ObjectBehavior
 {
     function let()

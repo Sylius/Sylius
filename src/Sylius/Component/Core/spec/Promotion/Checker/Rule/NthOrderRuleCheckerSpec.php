@@ -21,8 +21,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * @mixin NthOrderRuleChecker
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */

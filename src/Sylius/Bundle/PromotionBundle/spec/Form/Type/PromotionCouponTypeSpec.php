@@ -20,8 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin PromotionCouponType
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class PromotionCouponTypeSpec extends ObjectBehavior

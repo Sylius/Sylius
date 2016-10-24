@@ -18,8 +18,6 @@ use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin SettingsBuilder
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SettingsBuilderSpec extends ObjectBehavior

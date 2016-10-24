@@ -24,8 +24,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
- * @mixin BuildPromotionActionFormSubscriber
- *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 final class BuildPromotionActionFormSubscriberSpec extends ObjectBehavior

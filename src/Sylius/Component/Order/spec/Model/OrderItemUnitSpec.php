@@ -19,8 +19,6 @@ use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
 /**
- * @mixin OrderItemUnit
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */

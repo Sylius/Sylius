@@ -10,8 +10,6 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * @mixin SessionBasedCurrencyStorage
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SessionBasedCurrencyStorageSpec extends ObjectBehavior

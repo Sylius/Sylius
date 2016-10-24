@@ -16,8 +16,6 @@ use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\ActionGroup;
 
 /**
- * @mixin ActionGroup
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ActionGroupSpec extends ObjectBehavior

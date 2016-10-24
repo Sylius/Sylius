@@ -18,8 +18,6 @@ use Sylius\Component\Pricing\Calculator\StandardCalculator;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
- * @mixin StandardCalculator
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class StandardCalculatorSpec extends ObjectBehavior

@@ -20,8 +20,6 @@ use Sylius\Component\Order\Model\OrderSequenceInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin SequentialOrderNumberGenerator
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior

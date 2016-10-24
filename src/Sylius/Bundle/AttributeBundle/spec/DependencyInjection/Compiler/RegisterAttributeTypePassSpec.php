@@ -19,8 +19,6 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * @mixin RegisterAttributeTypePass
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class RegisterAttributeTypePassSpec extends ObjectBehavior

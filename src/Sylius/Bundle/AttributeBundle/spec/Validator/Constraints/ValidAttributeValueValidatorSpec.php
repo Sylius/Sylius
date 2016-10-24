@@ -25,8 +25,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * @mixin ValidAttributeValueValidator
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ValidAttributeValueValidatorSpec extends ObjectBehavior

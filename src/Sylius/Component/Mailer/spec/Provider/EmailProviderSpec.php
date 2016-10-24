@@ -19,8 +19,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin EmailProvider
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class EmailProviderSpec extends ObjectBehavior

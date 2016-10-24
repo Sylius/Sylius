@@ -19,8 +19,6 @@ use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin ProvinceNamingProvider
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */

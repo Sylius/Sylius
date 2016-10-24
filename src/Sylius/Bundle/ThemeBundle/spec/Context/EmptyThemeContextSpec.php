@@ -16,8 +16,6 @@ use Sylius\Bundle\ThemeBundle\Context\EmptyThemeContext;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 
 /**
- * @mixin EmptyThemeContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class EmptyThemeContextSpec extends ObjectBehavior

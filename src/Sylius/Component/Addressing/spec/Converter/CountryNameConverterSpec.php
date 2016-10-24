@@ -16,8 +16,6 @@ use Sylius\Component\Addressing\Converter\CountryNameConverter;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 
 /**
- * @mixin CountryNameConverter
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class CountryNameConverterSpec extends ObjectBehavior

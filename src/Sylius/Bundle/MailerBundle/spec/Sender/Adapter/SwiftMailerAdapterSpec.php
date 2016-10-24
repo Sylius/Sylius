@@ -21,9 +21,6 @@ use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @mixin SwiftMailerAdapter
- */
 final class SwiftMailerAdapterSpec extends ObjectBehavior
 {
     function let(\Swift_Mailer $mailer)

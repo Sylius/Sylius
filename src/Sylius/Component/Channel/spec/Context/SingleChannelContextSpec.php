@@ -19,8 +19,6 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
- * @mixin SingleChannelContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SingleChannelContextSpec extends ObjectBehavior

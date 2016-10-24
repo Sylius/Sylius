@@ -18,8 +18,6 @@ use Sylius\Component\Promotion\Generator\PercentageGenerationPolicy;
 use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
 /**
- * @mixin PercentageGenerationPolicy
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class PercentageGenerationPolicySpec extends ObjectBehavior

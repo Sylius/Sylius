@@ -17,8 +17,6 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**
- * @mixin ProvinceChoiceType
- *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 final class ProvinceChoiceTypeSpec extends ObjectBehavior

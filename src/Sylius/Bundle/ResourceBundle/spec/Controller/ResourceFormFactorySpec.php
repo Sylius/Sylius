@@ -22,8 +22,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * @mixin ResourceFormFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceFormFactorySpec extends ObjectBehavior

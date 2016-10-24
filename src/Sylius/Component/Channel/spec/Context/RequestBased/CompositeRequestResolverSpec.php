@@ -18,8 +18,6 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin CompositeRequestResolver
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CompositeRequestResolverSpec extends ObjectBehavior

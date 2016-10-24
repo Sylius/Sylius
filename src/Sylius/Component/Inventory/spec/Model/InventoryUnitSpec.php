@@ -17,8 +17,6 @@ use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * @mixin InventoryUnit
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class InventoryUnitSpec extends ObjectBehavior

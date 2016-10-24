@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException;
 
 /**
- * @mixin UndefinedShippingMethodException
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class UndefinedShippingMethodExceptionSpec extends ObjectBehavior

@@ -20,8 +20,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin EmailType
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class EmailTypeSpec extends ObjectBehavior

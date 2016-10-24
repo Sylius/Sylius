@@ -26,8 +26,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin UnitPercentageDiscountPromotionActionCommand
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehavior

@@ -16,8 +16,6 @@ use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelperInterface;
 use Sylius\Bundle\SettingsBundle\Twig\SettingsExtension;
 
 /**
- * @mixin SettingsExtension
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SettingsExtensionSpec extends ObjectBehavior

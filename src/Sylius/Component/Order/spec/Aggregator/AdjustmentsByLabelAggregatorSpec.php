@@ -17,8 +17,6 @@ use Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 
 /**
- * @mixin AdjustmentsByLabelAggregator
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior

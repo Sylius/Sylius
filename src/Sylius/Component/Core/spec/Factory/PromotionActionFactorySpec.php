@@ -23,8 +23,6 @@ use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin PromotionActionFactory
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PromotionActionFactorySpec extends ObjectBehavior

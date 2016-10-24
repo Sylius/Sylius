@@ -20,8 +20,6 @@ use Symfony\Component\Validator\ConstraintValidatorInterface;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
- * @mixin EnabledValidator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class EnabledValidatorSpec extends ObjectBehavior

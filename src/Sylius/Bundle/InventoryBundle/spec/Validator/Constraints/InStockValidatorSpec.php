@@ -20,9 +20,6 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Validator\ConstraintValidator;
 
-/**
- * @mixin InStockValidator
- */
 final class InStockValidatorSpec extends ObjectBehavior
 {
     function let(AvailabilityCheckerInterface $availabilityChecker)

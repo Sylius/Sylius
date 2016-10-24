@@ -20,8 +20,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin TaxonTranslationType
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 final class TaxonTranslationTypeSpec extends ObjectBehavior

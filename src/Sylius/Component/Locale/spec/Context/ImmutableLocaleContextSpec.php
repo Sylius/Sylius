@@ -16,8 +16,6 @@ use Sylius\Component\Locale\Context\ImmutableLocaleContext;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
- * @mixin ImmutableLocaleContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ImmutableLocaleContextSpec extends ObjectBehavior

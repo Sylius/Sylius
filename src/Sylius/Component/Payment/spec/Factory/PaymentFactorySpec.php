@@ -18,8 +18,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin PaymentFactory
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class PaymentFactorySpec extends ObjectBehavior

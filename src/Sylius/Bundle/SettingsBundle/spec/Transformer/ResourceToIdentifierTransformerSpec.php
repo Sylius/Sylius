@@ -18,8 +18,6 @@ use Sylius\Bundle\SettingsBundle\Transformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin ResourceToIdentifierTransformer
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceToIdentifierTransformerSpec extends ObjectBehavior

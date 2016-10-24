@@ -16,8 +16,6 @@ use Prophecy\Argument;
 use Sylius\Component\Product\Generator\CartesianSetBuilder;
 
 /**
- * @mixin CartesianSetBuilder
- *
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
 final class CartesianSetBuilderSpec extends ObjectBehavior

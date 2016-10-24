@@ -13,8 +13,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin GeographicalFixture
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class GeographicalFixtureSpec extends ObjectBehavior

@@ -18,8 +18,6 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 
 /**
- * @mixin ProviderBasedCurrencyContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ProviderBasedCurrencyContextSpec extends ObjectBehavior

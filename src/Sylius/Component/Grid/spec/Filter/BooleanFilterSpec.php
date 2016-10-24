@@ -18,8 +18,6 @@ use Sylius\Component\Grid\Filter\BooleanFilter;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
 /**
- * @mixin BooleanFilter
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class BooleanFilterSpec extends ObjectBehavior

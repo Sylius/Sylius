@@ -19,8 +19,6 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin ProductVariantFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProductVariantFactorySpec extends ObjectBehavior

@@ -22,8 +22,6 @@ use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
- * @mixin ProductVariant
- * 
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProductVariantSpec extends ObjectBehavior

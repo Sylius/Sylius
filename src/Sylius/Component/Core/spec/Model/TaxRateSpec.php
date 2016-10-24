@@ -18,8 +18,6 @@ use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
 
 /**
- * @mixin TaxRate
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class TaxRateSpec extends ObjectBehavior

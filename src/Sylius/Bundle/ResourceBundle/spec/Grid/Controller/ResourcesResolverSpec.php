@@ -29,8 +29,6 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin ResourcesResolver
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourcesResolverSpec extends ObjectBehavior

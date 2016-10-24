@@ -18,8 +18,6 @@ use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin LocaleProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class LocaleProviderSpec extends ObjectBehavior

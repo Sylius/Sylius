@@ -16,8 +16,6 @@ use Sylius\Component\Core\Distributor\ProportionalIntegerDistributor;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 
 /**
- * @mixin ProportionalIntegerDistributor
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ProportionalIntegerDistributorSpec extends ObjectBehavior

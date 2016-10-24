@@ -16,9 +16,6 @@ use FOS\OAuthServerBundle\Model\ClientInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Model\Client;
 
-/**
- * @mixin Client
- */
 final class ClientSpec extends ObjectBehavior
 {
     function it_is_initializable()

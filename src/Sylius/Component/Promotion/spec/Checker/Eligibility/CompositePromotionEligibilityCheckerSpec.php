@@ -9,8 +9,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @mixin CompositePromotionEligibilityChecker
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CompositePromotionEligibilityCheckerSpec extends ObjectBehavior

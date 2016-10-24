@@ -18,8 +18,6 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Sylius\Component\User\Security\Generator\UniqueTokenGenerator;
 
 /**
- * @mixin UniqueTokenGenerator
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class UniqueTokenGeneratorSpec extends ObjectBehavior

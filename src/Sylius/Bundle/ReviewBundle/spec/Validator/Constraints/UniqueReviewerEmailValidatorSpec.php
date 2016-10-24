@@ -24,8 +24,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\ExecutionContext;
 
 /**
- * @mixin UniqueReviewerEmailValidator
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */

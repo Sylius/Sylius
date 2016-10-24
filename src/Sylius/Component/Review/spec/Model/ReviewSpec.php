@@ -18,8 +18,6 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
- * @mixin Review
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ReviewSpec extends ObjectBehavior

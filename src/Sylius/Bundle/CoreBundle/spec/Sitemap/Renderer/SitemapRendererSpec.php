@@ -18,8 +18,6 @@ use Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRenderer;
 use Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRendererInterface;
 
 /**
- * @mixin SitemapRenderer
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SitemapRendererSpec extends ObjectBehavior

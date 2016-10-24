@@ -18,8 +18,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin CartQuantityConfigurationType
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class CartQuantityConfigurationTypeSpec extends ObjectBehavior

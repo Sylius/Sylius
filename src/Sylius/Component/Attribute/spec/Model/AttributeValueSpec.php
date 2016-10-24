@@ -18,8 +18,6 @@ use Sylius\Component\Attribute\Model\AttributeValue;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 
 /**
- * @mixin AttributeValue
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */

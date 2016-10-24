@@ -21,8 +21,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin ChannelType
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 final class ChannelTypeSpec extends ObjectBehavior

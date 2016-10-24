@@ -20,8 +20,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin OrderItemType
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class OrderItemTypeSpec extends ObjectBehavior

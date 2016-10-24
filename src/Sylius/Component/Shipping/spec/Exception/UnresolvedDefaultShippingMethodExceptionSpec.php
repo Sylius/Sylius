@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 
 /**
- * @mixin UnresolvedDefaultShippingMethodException
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class UnresolvedDefaultShippingMethodExceptionSpec extends ObjectBehavior

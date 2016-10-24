@@ -18,8 +18,6 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Sylius\Component\User\Security\Generator\UniquePinGenerator;
 
 /**
- * @mixin UniquePinGenerator
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class UniquePinGeneratorSpec extends ObjectBehavior

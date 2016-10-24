@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin ThemeFactory
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeFactorySpec extends ObjectBehavior

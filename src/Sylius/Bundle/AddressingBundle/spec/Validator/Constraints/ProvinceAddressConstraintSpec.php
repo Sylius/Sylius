@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\AddressingBundle\Validator\Constraints\ProvinceAddressConstraint;
 
 /**
- * @mixin ProvinceAddressConstraint
- *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 final class ProvinceAddressConstraintSpec extends ObjectBehavior

@@ -16,8 +16,6 @@ use Sylius\Component\Core\Distributor\IntegerDistributor;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 
 /**
- * @mixin IntegerDistributor
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class IntegerDistributorSpec extends ObjectBehavior

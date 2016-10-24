@@ -15,9 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\PromotionCoupon;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 
-/**
- * @mixin PromotionCoupon
- */
 final class PromotionCouponSpec extends ObjectBehavior
 {
     public function it_is_initializable()

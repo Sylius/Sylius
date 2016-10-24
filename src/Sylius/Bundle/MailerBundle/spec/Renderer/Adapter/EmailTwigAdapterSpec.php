@@ -21,9 +21,6 @@ use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-/**
- * @mixin EmailTwigAdapter
- */
 final class EmailTwigAdapterSpec extends ObjectBehavior
 {
     function let(\Twig_Environment $twig)

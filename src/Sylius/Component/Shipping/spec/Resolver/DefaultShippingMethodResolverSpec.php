@@ -20,8 +20,6 @@ use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolver;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
- * @mixin DefaultShippingMethodResolver
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class DefaultShippingMethodResolverSpec extends ObjectBehavior

@@ -19,8 +19,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
- * @mixin ApplicationResourceLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ApplicationResourceLocatorSpec extends ObjectBehavior

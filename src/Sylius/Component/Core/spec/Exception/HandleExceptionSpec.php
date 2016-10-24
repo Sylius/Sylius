@@ -15,8 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Exception\HandleException;
 
 /**
- * @mixin HandleException
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class HandleExceptionSpec extends ObjectBehavior

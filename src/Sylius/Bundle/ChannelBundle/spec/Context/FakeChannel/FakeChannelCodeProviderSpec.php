@@ -18,8 +18,6 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin FakeChannelCodeProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FakeChannelCodeProviderSpec extends ObjectBehavior

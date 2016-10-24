@@ -18,8 +18,6 @@ use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
- * @mixin Shipment
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ShipmentSpec extends ObjectBehavior

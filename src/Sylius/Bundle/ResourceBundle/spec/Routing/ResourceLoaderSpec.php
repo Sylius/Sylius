@@ -22,8 +22,6 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
 /**
- * @mixin ResourceLoader
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceLoaderSpec extends ObjectBehavior

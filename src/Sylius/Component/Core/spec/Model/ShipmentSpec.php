@@ -17,9 +17,6 @@ use Sylius\Component\Core\Model\Shipment;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
 
-/**
- * @mixin Shipment
- */
 final class ShipmentSpec extends ObjectBehavior
 {
     function it_is_initializable()

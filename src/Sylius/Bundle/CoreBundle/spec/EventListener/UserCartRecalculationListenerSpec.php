@@ -21,8 +21,6 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
- * @mixin UserCartRecalculationListener
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class UserCartRecalculationListenerSpec extends ObjectBehavior

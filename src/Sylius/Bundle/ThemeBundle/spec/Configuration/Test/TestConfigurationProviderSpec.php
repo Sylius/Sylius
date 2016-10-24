@@ -17,8 +17,6 @@ use Sylius\Bundle\ThemeBundle\Configuration\Test\TestConfigurationProvider;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 
 /**
- * @mixin TestConfigurationProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TestConfigurationProviderSpec extends ObjectBehavior

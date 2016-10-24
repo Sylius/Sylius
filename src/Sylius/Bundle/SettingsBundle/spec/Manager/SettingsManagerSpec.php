@@ -20,8 +20,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
- * @mixin SettingsManager
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SettingsManagerSpec extends ObjectBehavior

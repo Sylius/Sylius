@@ -18,8 +18,6 @@ use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin CartContext
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CartContextSpec extends ObjectBehavior
@@ -33,7 +31,7 @@ final class CartContextSpec extends ObjectBehavior
     {
         $this->shouldHaveType(CartContext::class);
     }
-    
+
     function it_implements_cart_context_interface()
     {
         $this->shouldImplement(CartContextInterface::class);

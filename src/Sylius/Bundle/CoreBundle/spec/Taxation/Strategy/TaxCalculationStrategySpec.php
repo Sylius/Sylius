@@ -20,8 +20,6 @@ use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 
 /**
- * @mixin TaxCalculationStrategy
- *
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
 final class TaxCalculationStrategySpec extends ObjectBehavior

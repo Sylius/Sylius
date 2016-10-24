@@ -21,8 +21,6 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
- * @mixin ReviewFactory
- * 
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class ReviewFactorySpec extends ObjectBehavior

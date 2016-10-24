@@ -18,8 +18,6 @@ use Sylius\Component\Pricing\Calculator\VolumeBasedCalculator;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
- * @mixin VolumeBasedCalculator
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class VolumeBasedCalculatorSpec extends ObjectBehavior

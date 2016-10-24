@@ -20,8 +20,6 @@ use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin PaymentMethodsResolver
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class PaymentMethodsResolverSpec extends ObjectBehavior

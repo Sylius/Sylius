@@ -24,8 +24,6 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
- * @mixin BuildPriceableFormSubscriber
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class BuildPriceableFormSubscriberSpec extends ObjectBehavior

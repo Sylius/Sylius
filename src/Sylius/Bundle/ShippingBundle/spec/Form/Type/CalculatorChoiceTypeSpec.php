@@ -17,8 +17,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin CalculatorChoiceType
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CalculatorChoiceTypeSpec extends ObjectBehavior

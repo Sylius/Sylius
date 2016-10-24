@@ -20,8 +20,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin ZoneMemberType
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class ZoneMemberTypeSpec extends ObjectBehavior

@@ -18,8 +18,6 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
- * @mixin Locale
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class LocaleSpec extends ObjectBehavior

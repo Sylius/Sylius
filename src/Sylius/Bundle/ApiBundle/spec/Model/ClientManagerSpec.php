@@ -19,9 +19,6 @@ use FOS\OAuthServerBundle\Model\ClientManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ApiBundle\Model\ClientManager;
 
-/**
- * @mixin ClientManager
- */
 final class ClientManagerSpec extends ObjectBehavior
 {
     function let(EntityManager $em, EntityRepository $repository, $clientClass = 'Client/Class/String')

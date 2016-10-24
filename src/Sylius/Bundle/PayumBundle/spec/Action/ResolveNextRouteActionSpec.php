@@ -19,8 +19,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 /**
- * @mixin ResolveNextRouteAction
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class ResolveNextRouteActionSpec extends ObjectBehavior

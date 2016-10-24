@@ -17,8 +17,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin MoneyType
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class MoneyTypeSpec extends ObjectBehavior

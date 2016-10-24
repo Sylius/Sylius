@@ -20,8 +20,6 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifier;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 
 /**
- * @mixin OrderItemQuantityModifier
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderItemQuantityModifierSpec extends ObjectBehavior

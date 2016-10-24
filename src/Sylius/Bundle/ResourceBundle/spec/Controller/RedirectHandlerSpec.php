@@ -24,8 +24,6 @@ use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * @mixin RedirectHandler
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class RedirectHandlerSpec extends ObjectBehavior

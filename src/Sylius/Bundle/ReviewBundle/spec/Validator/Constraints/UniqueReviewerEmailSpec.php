@@ -16,8 +16,6 @@ use Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmail;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @mixin UniqueReviewerEmail
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */

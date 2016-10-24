@@ -23,8 +23,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
- * @mixin OrderShipmentProcessor
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class OrderShipmentProcessorSpec extends ObjectBehavior

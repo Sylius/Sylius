@@ -19,8 +19,6 @@ use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManager;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 
 /**
- * @mixin TestThemeConfigurationManager
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TestThemeConfigurationManagerSpec extends ObjectBehavior

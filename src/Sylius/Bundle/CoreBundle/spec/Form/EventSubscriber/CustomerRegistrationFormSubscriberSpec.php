@@ -23,8 +23,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * @mixin CustomerRegistrationFormSubscriber
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior

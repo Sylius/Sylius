@@ -23,8 +23,6 @@ use Sylius\Component\Core\StateResolver\OrderPaymentStateResolver;
 use Sylius\Component\Order\StateResolver\StateResolverInterface;
 
 /**
- * @mixin OrderPaymentStateResolver
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */

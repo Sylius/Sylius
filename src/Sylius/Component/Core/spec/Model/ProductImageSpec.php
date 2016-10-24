@@ -17,8 +17,6 @@ use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Model\ProductImage;
 
 /**
- * @mixin ProductImage
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class ProductImageSpec extends ObjectBehavior

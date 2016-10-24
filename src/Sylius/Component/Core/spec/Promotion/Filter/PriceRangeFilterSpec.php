@@ -18,8 +18,6 @@ use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Core\Promotion\Filter\PriceRangeFilter;
 
 /**
- * @mixin PriceRangeFilter
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PriceRangeFilterSpec extends ObjectBehavior

@@ -18,8 +18,6 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
- * @mixin Payment
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class PaymentSpec extends ObjectBehavior

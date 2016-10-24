@@ -18,9 +18,6 @@ use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-/**
- * @mixin PaymentMethodTranslationType
- */
 final class PaymentMethodTranslationTypeSpec extends ObjectBehavior
 {
     function let()

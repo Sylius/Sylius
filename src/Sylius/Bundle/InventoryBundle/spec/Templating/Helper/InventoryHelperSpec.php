@@ -17,9 +17,6 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-/**
- * @mixin InventoryHelper
- */
 final class InventoryHelperSpec extends ObjectBehavior
 {
     function let(AvailabilityCheckerInterface $checker)

@@ -18,8 +18,6 @@ use Sylius\Bundle\UserBundle\Reloader\UserReloaderInterface;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
- * @mixin UserReloader
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class UserReloaderSpec extends ObjectBehavior

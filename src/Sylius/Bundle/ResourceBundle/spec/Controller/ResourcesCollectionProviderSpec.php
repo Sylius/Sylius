@@ -27,8 +27,6 @@ use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @mixin ResourcesCollectionProvider
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourcesCollectionProviderSpec extends ObjectBehavior

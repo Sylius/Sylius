@@ -17,8 +17,6 @@ use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 use Sylius\Component\User\Security\UserPbkdf2PasswordEncoder;
 
 /**
- * @mixin UserPbkdf2PasswordEncoder
- *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 final class UserPbkdf2PasswordEncoderSpec extends ObjectBehavior

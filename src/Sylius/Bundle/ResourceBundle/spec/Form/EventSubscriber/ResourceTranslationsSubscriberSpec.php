@@ -23,8 +23,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * @mixin ResourceTranslationsSubscriber
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ResourceTranslationsSubscriberSpec extends ObjectBehavior

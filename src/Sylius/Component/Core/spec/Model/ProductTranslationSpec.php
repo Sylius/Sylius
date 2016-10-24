@@ -17,8 +17,6 @@ use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Product\Model\ProductTranslation as BaseProductTranslation;
 
 /**
- * @mixin ProductTranslation
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 final class ProductTranslationSpec extends ObjectBehavior

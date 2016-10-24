@@ -16,8 +16,6 @@ use Sylius\Component\Locale\Converter\LocaleConverter;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
 /**
- * @mixin LocaleConverter
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class LocaleConverterSpec extends ObjectBehavior

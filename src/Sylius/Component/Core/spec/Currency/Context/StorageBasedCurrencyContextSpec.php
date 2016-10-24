@@ -21,8 +21,6 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 
 /**
- * @mixin StorageBasedCurrencyContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class StorageBasedCurrencyContextSpec extends ObjectBehavior

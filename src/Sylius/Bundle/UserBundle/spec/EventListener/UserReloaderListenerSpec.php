@@ -20,8 +20,6 @@ use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @mixin UserReloaderListener
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class UserReloaderListenerSpec extends ObjectBehavior

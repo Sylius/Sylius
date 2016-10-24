@@ -17,9 +17,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
 use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExtraComparison;
 
-/**
- * @mixin ExpressionBuilder
- */
 final class ExpressionBuilderSpec extends ObjectBehavior
 {
     function let(CollectionsExpressionBuilder $expressionBuilder)

@@ -18,8 +18,6 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 
 /**
- * @mixin Province
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProvinceSpec extends ObjectBehavior

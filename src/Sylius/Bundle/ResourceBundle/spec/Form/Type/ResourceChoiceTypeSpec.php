@@ -21,8 +21,6 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin ResourceChoiceType
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ResourceChoiceTypeSpec extends ObjectBehavior

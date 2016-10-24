@@ -19,8 +19,6 @@ use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
- * @mixin OrderItemQuantityDataMapper
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderItemQuantityDataMapperSpec extends ObjectBehavior

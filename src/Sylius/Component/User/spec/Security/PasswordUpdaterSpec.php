@@ -19,8 +19,6 @@ use Sylius\Component\User\Security\PasswordUpdaterInterface;
 use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 
 /**
- * @mixin PasswordUpdater
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class PasswordUpdaterSpec extends ObjectBehavior

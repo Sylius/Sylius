@@ -22,8 +22,6 @@ use Sylius\Component\Promotion\Model\PromotionCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * @mixin PromotionCouponPerCustomerUsageLimitEligibilityChecker
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends ObjectBehavior

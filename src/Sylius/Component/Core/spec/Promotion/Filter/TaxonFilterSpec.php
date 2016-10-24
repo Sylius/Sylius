@@ -19,8 +19,6 @@ use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Core\Promotion\Filter\TaxonFilter;
 
 /**
- * @mixin TaxonFilter
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class TaxonFilterSpec extends ObjectBehavior

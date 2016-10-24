@@ -22,8 +22,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @mixin FakeChannelContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FakeChannelContextSpec extends ObjectBehavior

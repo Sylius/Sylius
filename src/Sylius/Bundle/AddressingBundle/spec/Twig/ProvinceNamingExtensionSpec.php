@@ -17,8 +17,6 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 
 /**
- * @mixin ProvinceNamingExtension
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class ProvinceNamingExtensionSpec extends ObjectBehavior

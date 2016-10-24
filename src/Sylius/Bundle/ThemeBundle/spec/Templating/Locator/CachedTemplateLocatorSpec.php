@@ -21,8 +21,6 @@ use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @mixin CachedTemplateLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CachedTemplateLocatorSpec extends ObjectBehavior

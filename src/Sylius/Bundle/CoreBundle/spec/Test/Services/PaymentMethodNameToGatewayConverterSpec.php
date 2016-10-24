@@ -18,8 +18,6 @@ use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter;
 use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
 
 /**
- * @mixin PaymentMethodNameToGatewayConverter
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class PaymentMethodNameToGatewayConverterSpec extends ObjectBehavior

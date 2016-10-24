@@ -27,9 +27,6 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
-/**
- * @mixin UserProvider
- */
 final class UserProviderSpec extends ObjectBehavior
 {
     function let(

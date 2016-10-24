@@ -16,8 +16,6 @@ use Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper;
 use Sylius\Bundle\InventoryBundle\Twig\InventoryExtension;
 
 /**
- * @mixin InventoryExtension
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class InventoryExtensionSpec extends ObjectBehavior

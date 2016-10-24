@@ -18,8 +18,6 @@ use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Core\Model\CustomerInterface;
 
 /**
- * @mixin Customer
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 final class CustomerSpec extends ObjectBehavior

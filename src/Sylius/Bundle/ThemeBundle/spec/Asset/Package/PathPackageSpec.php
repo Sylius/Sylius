@@ -20,8 +20,6 @@ use Symfony\Component\Asset\PackageInterface;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
- * @mixin PathPackage
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class PathPackageSpec extends ObjectBehavior

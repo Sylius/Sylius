@@ -20,8 +20,6 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteNotFoundException;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteRegistryInterface;
 
 /**
- * @mixin LazySuiteRegistry
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class LazySuiteRegistrySpec extends ObjectBehavior

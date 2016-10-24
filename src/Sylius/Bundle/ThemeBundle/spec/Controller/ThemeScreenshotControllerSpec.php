@@ -19,8 +19,6 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @mixin ThemeScreenshotController
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeScreenshotControllerSpec extends ObjectBehavior

@@ -24,8 +24,6 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 
 /**
- * @mixin ShopBasedCartContext
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class ShopBasedCartContextSpec extends ObjectBehavior

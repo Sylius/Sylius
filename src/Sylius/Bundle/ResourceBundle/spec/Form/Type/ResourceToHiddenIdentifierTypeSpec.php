@@ -21,8 +21,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @mixin ResourceToHiddenIdentifierType
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ResourceToHiddenIdentifierTypeSpec extends ObjectBehavior

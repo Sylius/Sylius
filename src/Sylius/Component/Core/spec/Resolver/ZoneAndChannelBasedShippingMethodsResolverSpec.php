@@ -26,8 +26,6 @@ use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
- * @mixin ZoneAndChannelBasedShippingMethodsResolver
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavior
