@@ -72,6 +72,26 @@ Remove the ``shipment_selected`` state, ``select_shipment`` transition. Remove t
                         do: ["@sylius.promotion_usage_modifier", "increment"]
                         args: ["object"]
 
+Adjust Checkout Resolver
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+The next step of customizing Checkout is to adjust the Checkout Resolver to match the changes you have made in the state machine.
+Make these changes in the ``config.yml``.
+
+.. code-block:: yaml
+
+    # app/config/config.yml
+    sylius_shop:
+        checkout_resolver:
+            route_map:
+                cart:
+                    route: sylius_shop_checkout_address
+                addressed:
+                    route: sylius_shop_checkout_select_payment
+                payment_selected:
+                    route: sylius_shop_checkout_complete
+
+
 Learn more
 ----------
 
