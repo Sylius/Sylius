@@ -4,6 +4,16 @@ How to customize Sylius Checkout?
 Why would you override the Checkout process?
 --------------------------------------------
 
+This is a common problem for many Sylius users. Sometimes the checkout process we have designed is not suitable for your custom business needs.
+Therefore you need to learn how to modify it, when you will need to for example:
+
+* remove shipping step - when you do not ship the products you sell,
+* change the order of checkout steps,
+* merge shipping and addressing step into one common step,
+* or even make the whole checkout a one page process.
+
+See how to do these things below:
+
 How to remove a step from checkout?
 -----------------------------------
 
@@ -14,8 +24,8 @@ To meet your needs you will need to adjust checkout process. **What do you have 
 Overwrite the state machine of Checkout
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Open the ``CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml`` and place its content in
-the ``app/config/state_machine.yml`` which has to be imported in the ``app/config/config.yml``.
+Open the `CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml>`_
+and place its content in the ``app/config/state_machine.yml`` which has to be imported in the ``app/config/config.yml``.
 Remove the ``shipment_selected`` state, ``select_shipment`` transition. Remove the ``select_shipment`` from the
 ``sylius_process_cart`` callback.
 
@@ -94,9 +104,11 @@ Make these changes in the ``config.yml``.
 Adjust Checkout Templates
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-After you've got the resolver adjusted - modify the templates for checkout. You have to remove shipping from steps. And disable
-the hardcoded ability to go back to the shipping step. You will achieve that by overwriting first the ``SyliusShopBundle/Resources/views/Checkout/_steps.html.twig``
-and then the ``SyliusShopBundle/Resources/views/Checkout/SelectPayment/_form.html.twig``.
+After you have got the resolver adjusted, modify the templates for checkout. You have to remove shipping from steps and
+disable the hardcoded ability to go back to the shipping step. You will achieve that by overriding two files:
+
+* `ShopBundle/Resources/views/Checkout/_steps.html.twig <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/views/Checkout/_steps.html.twig>`_
+* `ShopBundle/Resources/views/Checkout/SelectPayment/_form.html.twig <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/views/Checkout/SelectPayment/_form.html.twig>`_
 
 .. code-block:: html
 
@@ -188,7 +200,7 @@ Overwrite routing for Checkout
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Unfortunately there is no better way - you have to overwrite the whole routing for Checkout.
-To do that copy the content of ``ShopBundle/Resources/config/routing/checkout.yml``
+To do that copy the content of `ShopBundle/Resources/config/routing/checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/config/routing/checkout.yml>`_
 to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file. **Remove routing** of ``sylius_shop_checkout_select_shipping``
 and change the **redirect route** in ``sylius_shop_checkout_address``. The rest should remain the same.
 
