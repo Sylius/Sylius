@@ -6,7 +6,6 @@ sylius_admin_product_review:
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_product_review
-        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_reviews_of_your_products
@@ -27,7 +26,6 @@ sylius_admin_product_review_accept:
                 transition: accept
             redirect: referer
             flash: sylius.product_review.accepted
-            permission: true
 
 sylius_admin_product_review_reject:
     path: /product-review/{id}/reject
@@ -40,4 +38,3 @@ sylius_admin_product_review_reject:
                 transition: reject
             redirect: referer
             flash: sylius.product_review.rejected
-            permission: true

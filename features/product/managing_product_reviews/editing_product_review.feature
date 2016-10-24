@@ -12,7 +12,8 @@ Feature: Editing product reviews
 
     @ui
     Scenario: Changing a title of a product review
-        When I want to modify the "Awesome" product review
+        Given this product has a review titled "Bewilderig" and rated 5 with a comment "Nice product" added by customer "ross@teammike.com"
+        When I want to modify the "Bewilderig" product review
         And I change its title to "Bewildering"
         And I save my changes
         Then I should be notified that it has been successfully edited
@@ -20,11 +21,12 @@ Feature: Editing product reviews
 
     @ui
     Scenario: Changing a comment of a product review
-        When I want to modify the "Awesome" product review
-        And I change its comment to "Really nice product!"
+        Given this product has a review titled "Bewildering" and rated 5 with a comment "Nice prodct" added by customer "ross@teammike.com"
+        When I want to modify the "Bewildering" product review
+        And I change its comment to "Nice product"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product review comment should be "Really nice product!"
+        And this product review comment should be "Nice product"
 
     @ui @javascript
     Scenario: Changing a rating of a product review

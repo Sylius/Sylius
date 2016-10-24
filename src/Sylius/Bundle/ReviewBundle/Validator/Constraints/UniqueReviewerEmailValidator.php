@@ -68,10 +68,6 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
 
         $token = $this->tokenStorage->getToken();
         if ($this->checkIfUserIsAuthenticated($token)) {
-            if ($this->checkIfAdminUser($token)) {
-                return;
-            }
-
             if (null !== $customer && $token->getUser()->getCustomer()->getEmail() === $customer->getEmail()) {
                 return;
             }
@@ -99,15 +95,5 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
             $this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED') &&
             $token->getUser() instanceof UserInterface
             ;
-    }
-
-    /**
-     * @param TokenInterface $token
-     *
-     * @return bool
-     */
-    private function checkIfAdminUser(TokenInterface $token)
-    {
-        return $token->getUser() instanceof AdminUserInterface;
     }
 }
