@@ -25,19 +25,12 @@
             </div>
         </div>
         <div class="ui two column stackable grid">
-            {% if customer.shippingAddress %}
-                <div class="column" id="shippingAddress">
-                    <h4 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h4>
-                    {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': customer.shippingAddress} %}
-                </div>
-            {% endif %}
-            {% if customer.billingAddress %}
-                <div class="column" id="billingAddress">
-                    <h4 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h4>
-                    {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': customer.billingAddress} %}
+            {% if customer.defaultAddress %}
+                <div class="column" id="defaultAddress">
+                    <h4 class="ui dividing header">{{ 'sylius.ui.default'|trans }}</h4>
+                    {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': customer.defaultAddress} %}
                 </div>
             {% endif %}
         </div>
     </div>
 </div>
-

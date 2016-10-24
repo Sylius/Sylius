@@ -155,21 +155,10 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given /^(his) shipping (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
-     * @Given /^(his) shipping (address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     * @Given /^(his) default (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
+     * @Given /^(his) default (address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      */
-    public function heHasShippingAddress(CustomerInterface $customer, AddressInterface $address)
-    {
-        $customer->setShippingAddress($address);
-
-        $this->customerManager->flush();
-    }
-
-    /**
-     * @Given /^(his) billing (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
-     * @Given /^(his) billing (address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     */
-    public function heHasBillingAddress(CustomerInterface $customer, AddressInterface $address)
+    public function heHasDefaultAddress(CustomerInterface $customer, AddressInterface $address)
     {
         $customer->setDefaultAddress($address);
 
