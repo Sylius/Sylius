@@ -37,6 +37,7 @@ sylius:
         add_rule: 'Add rule'
         add_to_cart: 'Add to cart'
         add_value: 'Add value'
+        add_your_review: 'Add your review'
         adding_new_customer_groups: 'Adding new customer groups'
         adding_new_email: 'Adding new Email'
         adding_new_locale: 'Adding new locale'
@@ -744,6 +745,7 @@ sylius:
         there_are_no_promotions_configured: 'There are no promotions configured'
         there_are_no_redirect_routes_to_display: 'There are no redirect routes to display'
         there_are_no_reports_created: 'There are no reports created'
+        there_are_no_reviews: 'There are no reviews'
         there_are_no_roles_defined: 'There are no roles defined'
         there_are_no_routes_to_display: 'There are no routes to display'
         there_are_no_shipments_to_display: 'There are no shipments to display'
@@ -803,8 +805,10 @@ sylius:
         welcome: Welcome
         welcome_to_our_store: 'Welcome to our store'
         welcome_to_your_space: 'Welcome to your space'
+        write_your_own_review: 'Write your own review'
         yes_label: 'Yes'
         you_are_customer_since: 'You are customer since'
+        you_are_reviewing: 'You are reviewing'
         you_have_no_addresses_defined: 'You have no addresses defined'
         you_have_no_new_orders: 'You have no new orders'
         you_may_also_like: You may also like

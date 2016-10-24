@@ -15,6 +15,12 @@ sylius_shop_taxon:
 sylius_shop_product:
     resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
 
+sylius_shop_product_reviews:
+    resource: "@SyliusShopBundle/Resources/config/routing/product_review.yml"
+
+sylius_shop_provinces:
+    resource: "@SyliusShopBundle/Resources/config/routing/provinces.yml"
+
 sylius_shop_cart:
     resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"
     prefix: /cart
@@ -60,9 +66,6 @@ sylius_sitemap:
         _format: xml
     requirements:
         _format: xml
-
-sylius_shop_provinces:
-    resource: "@SyliusShopBundle/Resources/config/routing/provinces.yml"
 
 # Have to be the last one!
 sylius_shop_static_content:

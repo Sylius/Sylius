@@ -26,3 +26,28 @@ sylius_shop_partial_product_index_by_taxon_code:
                 route:
                     parameters:
                         $code: $code
+
+sylius_shop_partial_product_reviews_latest:
+    path: /latest-reviews/{productId}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatestByProductId
+                arguments:
+                    - $productId
+
+sylius_shop_product_simple_show:
+    path: /{slug}/simple-show
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:showAction
+        _sylius:
+            template: SyliusShopBundle:Product:_simpleBox.html.twig
+            repository:
+                method: findOneBySlugAndChannel
+                arguments:
+                    - $slug
+                    - 'expr:service("sylius.context.channel").getChannel()'

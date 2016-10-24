@@ -25,6 +25,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getRouteName()
+    {
+        return 'sylius_shop_product_show';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addToCart()
     {
         $this->getDocument()->pressButton('Add to cart');
@@ -133,6 +141,30 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function countReviews()
+    {
+        return count($this->getElement('reviews')->findAll('css', '.comment'));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasReviewTitled($title)
+    {
+        return null !== $this->getElement('reviews')->find('css', sprintf('.comment:contains("%s")', $title));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAverageRating()
+    {
+        return (float) $this->getElement('average_rating')->getAttribute('data-average-rating');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function selectOption($optionName, $optionValue)
     {
         $optionElement = $this->getElement('option_select', ['%option-name%' => strtoupper($optionName)]);
@@ -175,14 +207,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
-    {
-        return 'sylius_shop_product_show';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isMainImageDisplayed()
     {
         $imageElement = $this->getElement('main_image');
@@ -206,11 +230,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'attributes' => '#sylius-product-attributes',
+            'average_rating' => '#average-rating',
             'main_image' => '#main-image',
             'name' => '#sylius-product-name',
             'option_select' => '#sylius_cart_item_variant_%option-name%',
             'out_of_stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
+            'reviews' => '[data-tab="reviews"] .comments',
             'selecting_variants' => "#sylius-product-selecting-variant",
             'validation_errors' => '.sylius-validation-error',
             'variant_radio' => '#sylius-product-variants tbody tr:contains("%variant-name%") input',
