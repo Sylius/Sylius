@@ -11,30 +11,20 @@
 
 namespace Sylius\Bundle\OrderBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedCompositeServicePass;
 
 /**
  * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-final class RegisterProcessorsPass implements CompilerPassInterface
+final class RegisterProcessorsPass extends PrioritizedCompositeServicePass
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function process(ContainerBuilder $container)
+    public function __construct()
     {
-        if (!$container->hasDefinition('sylius.order_processing.order_processor')) {
-            return;
-        }
-
-        $orderProcessor = $container->findDefinition('sylius.order_processing.order_processor');
-
-        foreach ($container->findTaggedServiceIds('sylius.order_processor') as $id => $attributes) {
-            $priority = isset($attributes[0]['priority']) ? (int) $attributes[0]['priority'] : 0;
-
-            $orderProcessor->addMethodCall('addProcessor', [new Reference($id), $priority]);
-        }
+        parent::__construct(
+            'sylius.order_processing.order_processor',
+            'sylius.order_processing.order_processor.composite',
+            'sylius.order_processor',
+            'addProcessor'
+        );
     }
 }

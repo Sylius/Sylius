@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler;
 
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\PrioritizedCompositeServicePass;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */

@@ -31,7 +31,7 @@ final class RegisterCurrencyHandlersPassTest extends AbstractCompilerPassTestCas
     public function it_adds_method_call_to_composite_currency_change_handler_if_exists()
     {
         $compositeLocaleChangeHandler = new Definition(CompositeCurrencyChangeHandler::class);
-        $this->setDefinition('sylius.handler.currency_change', $compositeLocaleChangeHandler);
+        $this->setDefinition('sylius.handler.currency_change.composite', $compositeLocaleChangeHandler);
 
         $cartLocaleChangeHandler = new Definition(CartCurrencyChangeHandler::class);
         $cartLocaleChangeHandler->addTag('sylius.currency.change_handler');
@@ -43,8 +43,7 @@ final class RegisterCurrencyHandlersPassTest extends AbstractCompilerPassTestCas
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.handler.currency_change',
             'addHandler', [
-                new Reference('sylius.handler.currency_change.cart'),
-                0
+                new Reference('sylius.handler.currency_change.cart')
             ]
         );
     }
@@ -55,7 +54,7 @@ final class RegisterCurrencyHandlersPassTest extends AbstractCompilerPassTestCas
     public function it_adds_method_call_to_composite_currency_change_handler_with_custom_priority()
     {
         $compositeLocaleChangeHandler = new Definition(CompositeCurrencyChangeHandler::class);
-        $this->setDefinition('sylius.handler.currency_change', $compositeLocaleChangeHandler);
+        $this->setDefinition('sylius.handler.currency_change.composite', $compositeLocaleChangeHandler);
 
         $cartLocaleChangeHandler = new Definition(CartCurrencyChangeHandler::class);
         $cartLocaleChangeHandler->addTag('sylius.currency.change_handler', ['priority' => 5]);
