@@ -1,17 +1,1 @@
-<div class="ui fluid card">
-    <div class="content">
-        <div class="ui sub header">{{ 'sylius.ui.author'|trans }}</div>
-    </div>
-    <div class="content" id="author-name">
-        <a href="{{ path('sylius_admin_customer_show', {'id': resource.author.id}) }}" class="header">{{ resource.author.fullName }}</a>
-        <div class="meta">
-            <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ resource.author.createdAt|format_date }}.</span>
-        </div>
-    </div>
-    <div class="extra content">
-        <a href="mailto: {{ resource.author.email }}">
-            <i class="envelope icon"></i>
-            {{ resource.author.email }}
-        </a>
-    </div>
-</div>
+{% include '@SyliusAdmin/Common/_customer.html.twig' with {'customer': product_review.author} %}

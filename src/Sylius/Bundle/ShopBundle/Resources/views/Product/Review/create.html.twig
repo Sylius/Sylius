@@ -2,45 +2,32 @@
 
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
+{% set product = product_review.reviewSubject %}
+
 {% block content %}
-    {% include '@SyliusShop/Product/Review/_breadcrumb.html.twig' %}
     <div class="ui hidden divider"></div>
 
     <div class="ui stackable grid" id="reviews">
         <div class="four wide column">
-            {{ render(url('sylius_shop_product_simple_show', { 'slug': app.request.attributes.get('slug') })) }}
+            {{
+                render(url('sylius_shop_partial_product_show', {
+                    'slug': app.request.attributes.get('slug'),
+                    'template': '@SyliusShop/Product/_simpleBox.html.twig'
+                }))
+            }}
         </div>
         <div class="twelve wide column">
             <div class="ui dividing header">
                 {{ 'sylius.ui.write_your_own_review'|trans }}
                 <div class="sub header">
-                    {{ 'sylius.ui.you_are_reviewing'|trans }}: <strong>{{ product_review.reviewSubject.getName() }}</strong>
+                    {{ 'sylius.ui.you_are_reviewing'|trans }} <strong>{{ product.name }}</strong>.
                 </div>
             </div>
-            <form action="{{ path('sylius_shop_product_reviews_create', { 'slug': product_review.reviewSubject.getSlug() }) }}" method="POST" class="ui reply form" novalidate>
-                <div class="field">
-                    <div class="ui huge star rating" data-rating="0" data-max-rating="5"></div>
-                    <br/>
-                    {{ form_errors(form.rating) }}
-                    {{ form_widget(form.rating, { 'attr': { 'style': 'display: none' } }) }}
-                </div>
-                <div class="field">
-                    {{ form_widget(form.title, { 'attr': { 'placeholder': 'sylius.ui.title'|trans } }) }}
-                    {{ form_errors(form.title) }}
-                </div>
-                <div class="field">
-                    {{ form_widget(form.comment) }}
-                    {{ form_errors(form.comment) }}
-                </div>
-                {% if not is_granted("IS_AUTHENTICATED_FULLY") %}
-                <div class="field">
-                    {{ form_widget(form.author.email, { 'attr': { 'placeholder': 'sylius.ui.author'|trans } }) }}
-                    {{ form_errors(form.author.email) }}
-                </div>
-                {% endif %}
+            <form action="{{ path('sylius_shop_product_review_create', {'slug': product.slug}) }}" method="POST" class="ui reply form" novalidate>
+                {% include '@SyliusShop/Product/Review/_form.html.twig' %}
                 {{ form_row(form._token) }}
-                <button type="submit" class="ui blue labeled submit icon button">
-                    <i class="icon edit"></i> {{ 'sylius.ui.add'|trans }}
+                <button type="submit" class="ui blue labeled large icon submit button">
+                    <i class="icon check"></i> {{ 'sylius.ui.add'|trans }}
                 </button>
             </form>
         </div>

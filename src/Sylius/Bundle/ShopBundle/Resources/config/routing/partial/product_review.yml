@@ -1,0 +1,14 @@
+sylius_shop_partial_product_review_latest:
+    path: /latest/{count}
+    methods: [GET]
+    defaults:
+        count: 3
+
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: $template
+            repository:
+                method: findLatestByProductId
+                arguments:
+                    - $productId
+                    - $count

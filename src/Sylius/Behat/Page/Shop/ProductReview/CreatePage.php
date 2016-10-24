@@ -23,7 +23,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_shop_product_reviews_create';
+        return 'sylius_shop_product_review_create';
     }
 
     /**
