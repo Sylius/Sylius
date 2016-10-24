@@ -95,22 +95,25 @@ final class ManagingProductReviewsContext implements Context
 
     /**
      * @When I change its title to :title
+     * @When I remove its title
      */
-    public function iChangeItsTitleTo($title)
+    public function iChangeItsTitleTo($title = null)
     {
         $this->updatePage->specifyTitle($title);
     }
 
     /**
      * @When I change its comment to :comment
+     * @When I remove its comment
      */
-    public function iChangeItsCommentTo($comment)
+    public function iChangeItsCommentTo($comment = null)
     {
         $this->updatePage->specifyComment($comment);
     }
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
@@ -231,6 +234,37 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatElementIsRequired($element)
+    {
+        $this->assertFieldValidationMessage($element, sprintf('Review %s should not be blank.', $element));
+    }
+
+    /**
+     * @Then /^(this product review) should still be titled "([^"]+)"$/
+     */
+    public function thisProductReviewTitleShouldBeTitled(ReviewInterface $productReview, $productReviewTitle)
+    {
+        $this->iWantToBrowseProductReviews();
+
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['title' => $productReviewTitle]),
+            sprintf('Product review title %s has not been assigned properly.', $productReviewTitle)
+        );
+    }
+
+    /**
+     * @Then /^(this product review) should still have a comment "([^"]+)"$/
+     */
+    public function thisProductReviewShouldStillHaveAComment(ReviewInterface $productReview, $comment)
+    {
+        $this->iWantToModifyTheProductReview($productReview);
+
+        $this->assertElementValue('comment', $comment);
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */
@@ -239,6 +273,18 @@ final class ManagingProductReviewsContext implements Context
         Assert::true(
             $this->updatePage->hasResourceValues([$element => $value]),
             sprintf('Product review should have %s with %s value.', $element, $value)
+        );
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        Assert::same(
+            $this->updatePage->getValidationMessage($element),
+            $expectedMessage
         );
     }
 }
