@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ContainsProductRuleChecker implements RuleCheckerInterface
+final class ContainsProductRuleChecker implements RuleCheckerInterface
 {
     const TYPE = 'contains_product';
 

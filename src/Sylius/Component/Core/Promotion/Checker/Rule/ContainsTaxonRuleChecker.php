@@ -20,7 +20,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ContainsTaxonRuleChecker implements RuleCheckerInterface
+final class ContainsTaxonRuleChecker implements RuleCheckerInterface
 {
     const TYPE = 'contains_taxon';
 

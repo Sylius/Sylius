@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand
+final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand
 {
     const TYPE = 'order_fixed_discount';
 

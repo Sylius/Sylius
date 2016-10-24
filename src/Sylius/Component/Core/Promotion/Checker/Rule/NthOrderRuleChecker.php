@@ -21,7 +21,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class NthOrderRuleChecker implements RuleCheckerInterface
+final class NthOrderRuleChecker implements RuleCheckerInterface
 {
     const TYPE = 'nth_order';
 

@@ -16,7 +16,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PriceRangeFilter implements FilterInterface
+final class PriceRangeFilter implements FilterInterface
 {
     /**
      * {@inheritdoc}
