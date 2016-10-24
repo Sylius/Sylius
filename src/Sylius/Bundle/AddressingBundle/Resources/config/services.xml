@@ -42,6 +42,8 @@
         </service>
         <service id="sylius.converter.country_name" class="Sylius\Component\Addressing\Converter\CountryNameConverter" />
 
+        <service id="sylius.address_comparator" class="Sylius\Component\Addressing\Comparator\AddressComparator"/>
+
         <service id="sylius.twig.extension.country_name" class="Sylius\Bundle\AddressingBundle\Twig\CountryNameExtension">
             <argument type="string" id="isoCode" />
             <tag name="twig.extension"/>
