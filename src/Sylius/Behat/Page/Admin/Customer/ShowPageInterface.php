@@ -52,12 +52,7 @@ interface ShowPageInterface extends PageInterface
     /**
      * @return string
      */
-    public function getShippingAddress();
-
-    /**
-     * @return string
-     */
-    public function getBillingAddress();
+    public function getDefaultAddress();
 
     /**
      * @return bool
@@ -74,12 +69,6 @@ interface ShowPageInterface extends PageInterface
      *
      * @return bool
      */
-    public function hasShippingProvinceName($provinceName);
+    public function hasDefaultAddressProvinceName($provinceName);
 
-    /**
-     * @param string $provinceName
-     *
-     * @return bool
-     */
-    public function hasBillingProvinceName($provinceName);
 }

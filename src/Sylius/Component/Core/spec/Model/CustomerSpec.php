@@ -32,14 +32,9 @@ final class CustomerSpec extends ObjectBehavior
         $this->shouldImplement(CustomerInterface::class);
     }
 
-    function it_has_no_shipping_address_by_default()
-    {
-        $this->getShippingAddress()->shouldReturn(null);
-    }
-
     function it_has_no_billing_address_by_default()
     {
-        $this->getBillingAddress()->shouldReturn(null);
+        $this->getDefaultAddress()->shouldReturn(null);
     }
 
     function its_addresses_is_collection()
@@ -52,16 +47,10 @@ final class CustomerSpec extends ObjectBehavior
         $this->getAddresses()->count()->shouldReturn(0);
     }
 
-    function its_shipping_address_is_mutable(AddressInterface $address)
-    {
-        $this->setShippingAddress($address);
-        $this->getShippingAddress()->shouldReturn($address);
-    }
-
     function its_billing_address_is_mutable(AddressInterface $address)
     {
-        $this->setBillingAddress($address);
-        $this->getBillingAddress()->shouldReturn($address);
+        $this->setDefaultAddress($address);
+        $this->getDefaultAddress()->shouldReturn($address);
     }
 
     function its_addresses_are_mutable(AddressInterface $address)
@@ -79,13 +68,7 @@ final class CustomerSpec extends ObjectBehavior
 
     function it_adds_address_when_billing_address_is_set(AddressInterface $address)
     {
-        $this->setBillingAddress($address);
-        $this->hasAddress($address)->shouldReturn(true);
-    }
-
-    function it_adds_address_when_shipping_address_is_set(AddressInterface $address)
-    {
-        $this->setShippingAddress($address);
+        $this->setDefaultAddress($address);
         $this->hasAddress($address)->shouldReturn(true);
     }
 }
