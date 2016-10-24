@@ -6,7 +6,7 @@
                     {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
                 </a>
                 <div class="meta">
-                    <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date('F j, Y') }}</span>
+                    <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
                 </div>
                 <br />
                 <div id="subscribed-to-newsletter">
