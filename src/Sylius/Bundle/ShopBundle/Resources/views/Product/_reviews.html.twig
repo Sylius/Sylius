@@ -1,3 +1,6 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
+{% if product_reviews|length > 0 %}
 <div class="ui large comments">
     {% for review in product_reviews %}
         <div class="comment">
@@ -6,13 +9,17 @@
                 <div class="metadata">
                     <div class="date">{{ review.createdAt|date('Y-m-d') }}</div>
                     <div class="rating">
-                        <div class="ui star rating" data-rating="{{ review.rating }}" data-max-rating="5"></div>
+                        <div class="ui star rating" data-rating="{{ review.rating }}" data-max-rating="5" style="pointer-events: none;"></div>
                     </div>
                 </div>
                 <div class="text">{{ review.comment }}</div>
             </div>
         </div>
-    {% else %}
-        {{ 'sylius.ui.there_are_no_reviews'|trans }}
     {% endfor %}
 </div>
+{% else %}
+    {{ messages.info('sylius.ui.there_are_no_reviews'|trans) }}
+    <a href="{{ path('sylius_shop_product_review_create', {'slug': app.request.attributes.get('slug')}) }}">
+        <div class="ui blue labeled icon button"><i class="icon plus"></i> {{ 'sylius.ui.add_your_review'|trans }}</div>
+    </a>
+{% endif %}

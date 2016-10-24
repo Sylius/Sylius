@@ -23,7 +23,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_shop_product_reviews_index';
+        return 'sylius_shop_product_review_index';
     }
 
     /**

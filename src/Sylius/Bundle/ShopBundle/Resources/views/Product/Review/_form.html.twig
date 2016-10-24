@@ -1,0 +1,20 @@
+<div class="field">
+    <div class="ui huge star rating" data-rating="0" data-max-rating="5"></div>
+    <br/>
+    {{ form_errors(form.rating) }}
+    {{ form_widget(form.rating, {'attr': {'style': 'display: none'} }) }}
+</div>
+<div class="field">
+    {{ form_widget(form.title, {'attr': {'placeholder': 'sylius.ui.title'|trans} }) }}
+    {{ form_errors(form.title) }}
+</div>
+<div class="field">
+    {{ form_widget(form.comment, {'attr': {'placeholder': 'sylius.ui.write_your_own_review'|trans} }) }}
+    {{ form_errors(form.comment) }}
+</div>
+{% if not is_granted("IS_AUTHENTICATED_FULLY") %}
+    <div class="field">
+        {{ form_widget(form.author.email, {'attr': {'placeholder': 'sylius.ui.email'|trans}}) }}
+        {{ form_errors(form.author.email) }}
+    </div>
+{% endif %}

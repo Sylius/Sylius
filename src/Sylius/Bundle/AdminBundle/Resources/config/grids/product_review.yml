@@ -5,20 +5,32 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.product_review.class%"
+            sorting:
+                date: desc
             fields:
+                date:
+                    type: datetime
+                    label: sylius.ui.date
+                    path: createdAt
+                    sortable: createdAt
+                    options:
+                        format: d-m-Y H:i:s
                 title:
                     type: string
                     label: sylius.ui.title
+                    sortable: ~
                 rating:
                     type: string
                     label: sylius.ui.rating
+                    sortable: ~
                 status:
                     type: twig
                     label: sylius.ui.status
+                    sortable: ~
                     options:
-                        template: SyliusAdminBundle:Grid/Field:state.html.twig
+                        template: @SyliusAdmin/Grid/Field/state.html.twig
                         vars:
-                            labels: SyliusAdminBundle:ProductReview/Label/Status
+                            labels: @SyliusAdmin/ProductReview/Label/Status
                 reviewSubject:
                     type: string
                     label: sylius.ui.product

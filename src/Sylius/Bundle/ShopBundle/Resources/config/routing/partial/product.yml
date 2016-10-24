@@ -50,13 +50,13 @@ sylius_shop_partial_product_reviews_latest:
                     - 3
                     - $productId
 
-sylius_shop_product_simple_show:
-    path: /{slug}/simple-show
+sylius_shop_partial_product_show:
+    path: /{slug}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:showAction
         _sylius:
-            template: SyliusShopBundle:Product:_simpleBox.html.twig
+            template: $template
             repository:
                 method: findOneBySlugAndChannel
                 arguments:

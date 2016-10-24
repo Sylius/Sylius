@@ -1,5 +1,5 @@
-sylius_shop_product_reviews_index:
-    path: /products/{slug}/reviews
+sylius_shop_product_review_index:
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_review:indexAction
@@ -12,8 +12,8 @@ sylius_shop_product_reviews_index:
                     - '%locale%'
                     - 'expr:service("sylius.context.channel").getChannel()'
 
-sylius_shop_product_reviews_create:
-    path: /products/{slug}/reviews/new
+sylius_shop_product_review_create:
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_review:createAction

@@ -15,8 +15,9 @@ sylius_shop_taxon:
 sylius_shop_product:
     resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
 
-sylius_shop_product_reviews:
+sylius_shop_product_review:
     resource: "@SyliusShopBundle/Resources/config/routing/product_review.yml"
+    prefix: /products/{slug}/reviews
 
 sylius_shop_provinces:
     resource: "@SyliusShopBundle/Resources/config/routing/provinces.yml"
