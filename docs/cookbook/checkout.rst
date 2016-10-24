@@ -9,13 +9,15 @@ How to remove a step from checkout?
 
 Let's imagine that you are trying to create a shop that does not need shipping - it sells downloadable files only.
 
-To meet your needs you will need to adjust checkout process.
+To meet your needs you will need to adjust checkout process. **What do you have to do then?** See below:
 
-Overwrite the state machine of checkout
+Overwrite the state machine of Checkout
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Open the ``CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml`` and place its content in
-to ``app/config/state_machine.yml`` which has to be imported in the ``app/config/config.yml``.
+the ``app/config/state_machine.yml`` which has to be imported in the ``app/config/config.yml``.
+Remove the ``shipment_selected`` state, ``select_shipment`` transition. Remove the ``select_shipment`` from the
+``sylius_process_cart`` callback.
 
 .. code-block:: yaml
 
