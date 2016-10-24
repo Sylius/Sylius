@@ -184,6 +184,94 @@ and then the ``SyliusShopBundle/Resources/views/Checkout/SelectPayment/_form.htm
         </div>
     </div>
 
+Overwrite routing for Checkout
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Unfortunately there is no better way - you have to overwrite the whole routing for Checkout.
+To do that copy the content of ``ShopBundle/Resources/config/routing/checkout.yml``
+to the ``app/Resources/SyliusShopBundle/config/routing/checkout.yml`` file. **Remove routing** of ``sylius_shop_checkout_select_shipping``
+and change the **redirect route** in ``sylius_shop_checkout_address``. The rest should remain the same.
+
+.. code-block:: yaml
+
+    # app/Resources/SyliusShopBundle/config/routing/checkout.yml
+    sylius_shop_checkout_start:
+        path: /
+        defaults:
+            _controller: FrameworkBundle:Redirect:redirect
+            route: sylius_shop_checkout_address
+
+    sylius_shop_checkout_address:
+        path: /address
+        methods: [GET, PUT]
+        defaults:
+            _controller: sylius.controller.order:updateAction
+            _sylius:
+                event: address
+                flash: false
+                template: SyliusShopBundle:Checkout:address.html.twig
+                form:
+                    type: sylius_checkout_address
+                    options:
+                        customer: expr:service('sylius.context.customer').getCustomer()
+                repository:
+                    method: find
+                    arguments: [expr:service('sylius.context.cart').getCart()]
+                state_machine:
+                    graph: sylius_order_checkout
+                    transition: address
+                redirect:
+                    route: sylius_shop_checkout_select_payment
+                    parameters: []
+
+    sylius_shop_checkout_select_payment:
+        path: /select-payment
+        methods: [GET, PUT]
+        defaults:
+            _controller: sylius.controller.order:updateAction
+            _sylius:
+                event: payment
+                flash: false
+                template: SyliusShopBundle:Checkout:selectPayment.html.twig
+                form: sylius_checkout_select_payment
+                repository:
+                    method: find
+                    arguments: [expr:service('sylius.context.cart').getCart()]
+                state_machine:
+                    graph: sylius_order_checkout
+                    transition: select_payment
+                redirect:
+                    route: sylius_shop_checkout_complete
+                    parameters: []
+
+    sylius_shop_checkout_complete:
+        path: /complete
+        methods: [GET, PUT]
+        defaults:
+            _controller: sylius.controller.order:updateAction
+            _sylius:
+                event: summary
+                flash: false
+                template: SyliusShopBundle:Checkout:complete.html.twig
+                repository:
+                    method: find
+                    arguments: [expr:service('sylius.context.cart').getCart()]
+                state_machine:
+                    graph: sylius_order_checkout
+                    transition: complete
+                redirect:
+                    route: sylius_shop_order_pay
+                    parameters:
+                        paymentId: expr:service('sylius.context.cart').getCart().getLastNewPayment().getId()
+                form:
+                    type: sylius_checkout_complete
+                    options:
+                        validation_groups: 'sylius_checkout_complete'
+
+.. tip::
+
+    If you do not see any changes run ``$ php app/console cache:clear``.
+
 Learn more
 ----------
 
