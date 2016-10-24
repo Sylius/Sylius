@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Repository;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProductRepositoryInterface;
 
 /**
@@ -22,16 +23,17 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProduc
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
     /**
-     * @param string $locale
+     * @param string $localeCode
+     * @param mixed|null $taxonId
      *
      * @return QueryBuilder
      */
-    public function createListQueryBuilder($locale);
+    public function createQueryBuilderWithLocaleCodeAndTaxonId($localeCode, $taxonId = null);
 
     /**
      * @param string $code
      * @param ChannelInterface $channel
-     * 
+     *
      * @return QueryBuilder
      */
     public function createQueryBuilderForEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel);

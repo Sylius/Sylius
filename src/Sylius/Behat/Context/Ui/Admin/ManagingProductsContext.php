@@ -14,10 +14,10 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Product\CreateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\CreateSimpleProductPageInterface;
+use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -223,6 +223,14 @@ final class ManagingProductsContext implements Context
     public function iWantToBrowseProducts()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When I filter them by :taxonName taxon
+     */
+    public function iFilterThemByTaxon($taxonName)
+    {
+        $this->indexPage->filterByTaxon($taxonName);
     }
 
     /**
