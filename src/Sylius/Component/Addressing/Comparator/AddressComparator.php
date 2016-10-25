@@ -23,26 +23,29 @@ final class AddressComparator implements AddressComparatorInterface
      */
     public function same(AddressInterface $firstAddress, AddressInterface $secondAddress)
     {
-        return self::normalize($firstAddress->getCity()) === self::normalize($secondAddress->getCity())
-            && self::normalize($firstAddress->getStreet()) === self::normalize($secondAddress->getStreet())
-            && self::normalize($firstAddress->getCompany()) === self::normalize($secondAddress->getCompany())
-            && self::normalize($firstAddress->getPostcode()) === self::normalize($secondAddress->getPostcode())
-            && self::normalize($firstAddress->getLastName()) === self::normalize($secondAddress->getLastName())
-            && self::normalize($firstAddress->getFirstName()) === self::normalize($secondAddress->getFirstName())
-            && self::normalize($firstAddress->getPhoneNumber()) === self::normalize($secondAddress->getPhoneNumber())
-            && self::normalize($firstAddress->getCountryCode()) === self::normalize($secondAddress->getCountryCode())
-            && self::normalize($firstAddress->getProvinceCode()) === self::normalize($secondAddress->getProvinceCode())
-            && self::normalize($firstAddress->getProvinceName()) === self::normalize($secondAddress->getProvinceName())
-        ;
+        return $this->normalizeAddress($firstAddress) === $this->normalizeAddress($secondAddress);
     }
 
     /**
-     * @param string $value
+     * @param AddressInterface $address
      *
-     * @return string
+     * @return array
      */
-    private function normalize($value)
+    private function normalizeAddress(AddressInterface $address)
     {
-        return trim(strtolower($value));
+        return array_map(function ($value) {
+            return trim(strtolower($value));
+        }, [
+            $address->getCity(),
+            $address->getCompany(),
+            $address->getCountryCode(),
+            $address->getFirstName(),
+            $address->getLastName(),
+            $address->getPhoneNumber(),
+            $address->getPostcode(),
+            $address->getProvinceCode(),
+            $address->getProvinceName(),
+            $address->getStreet(),
+        ]);
     }
 }
