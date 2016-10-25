@@ -182,6 +182,7 @@ final class CustomerContext implements Context
     {
         /** @var CustomerInterface $customer */
         $customer = $user->getCustomer();
+        $this->sharedStorage->set('address', $address);
 
         $this->thisCustomerHasAnAddressInAddressBook($customer, $address);
     }

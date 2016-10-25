@@ -16,6 +16,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Component\Core\Factory\AddressFactoryInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\Intl\Intl;
@@ -27,6 +28,28 @@ use Webmozart\Assert\Assert;
  */
 class AddressPage extends SymfonyPage implements AddressPageInterface
 {
+    /**
+     * @var AddressFactoryInterface
+     */
+    private $addressFactory;
+
+    /**
+     * @param Session $session
+     * @param array $parameters
+     * @param RouterInterface $router
+     * @param AddressFactoryInterface $addressFactory
+     */
+    public function __construct(
+        Session $session,
+        array $parameters,
+        RouterInterface $router,
+        AddressFactoryInterface $addressFactory
+    ){
+        parent::__construct($session, $parameters, $router);
+
+        $this->addressFactory = $addressFactory;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -255,11 +278,73 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    public function selectShippingAddressFromAddressBook(AddressInterface $address)
+    {
+        $addressBookSelect = $this->getElement('shipping_address_book');
+
+        $addressBookSelect->click();
+        $addressBookSelect->waitFor(5, function () use ($address, $addressBookSelect) {
+            return $addressBookSelect->find('css', sprintf('.item[data-value="%s"]', $address->getId()));
+        })->click();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function selectBillingAddressFromAddressBook(AddressInterface $address)
+    {
+        $addressBookSelect = $this->getElement('billing_address_book');
+
+        $addressBookSelect->click();
+        $addressBookSelect->waitFor(5, function () use ($address, $addressBookSelect) {
+            return $addressBookSelect->find('css', sprintf('.item[data-value="%s"]', $address->getId()));
+        })->click();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPreFilledShippingAddress()
+    {
+        /** @var AddressInterface $address */
+        $address = $this->addressFactory->createNew();
+
+        $address->setFirstName($this->getElement('shipping_first_name')->getValue());
+        $address->setLastName($this->getElement('shipping_last_name')->getValue());
+        $address->setStreet($this->getElement('shipping_street')->getValue());
+        $address->setCountryCode($this->getElement('shipping_country')->getValue());
+        $address->setCity($this->getElement('shipping_city')->getValue());
+        $address->setPostcode($this->getElement('shipping_postcode')->getValue());
+
+        return $address;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getPreFilledBillingAddress()
+    {
+        $address = $this->addressFactory->createNew();
+
+        $address->setFirstName($this->getElement('billing_first_name')->getValue());
+        $address->setLastName($this->getElement('billing_last_name')->getValue());
+        $address->setStreet($this->getElement('billing_street')->getValue());
+        $address->setCountryCode($this->getElement('billing_country')->getValue());
+        $address->setCity($this->getElement('billing_city')->getValue());
+        $address->setPostcode($this->getElement('billing_postcode')->getValue());
+
+        return $address;
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'billing_address_book' => '#sylius-billing-address .ui.dropdown',
             'billing_first_name' => '#sylius_checkout_address_billingAddress_firstName',
             'billing_last_name' => '#sylius_checkout_address_billingAddress_lastName',
             'billing_street' => '#sylius_checkout_address_billingAddress_street',
@@ -275,6 +360,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'login_button' => '#sylius-api-login-submit',
             'login_password' => 'input[type=\'password\']',
             'next_step' => '#next-step',
+            'shipping_address_book' => '#sylius-shipping-address .ui.dropdown',
             'shipping_city' => '#sylius_checkout_address_shippingAddress_city',
             'shipping_country' => '#sylius_checkout_address_shippingAddress_countryCode',
             'shipping_country_province' => '[name="sylius_checkout_address[shippingAddress][provinceCode]"]',

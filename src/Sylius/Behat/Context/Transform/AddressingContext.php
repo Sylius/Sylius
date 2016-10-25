@@ -14,7 +14,9 @@ namespace Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -32,15 +34,23 @@ final class AddressingContext implements Context
     private $countryNameConverter;
 
     /**
+     * @var AddressRepositoryInterface
+     */
+    private $addressRepository;
+
+    /**
      * @param FactoryInterface $addressFactory
      * @param CountryNameConverterInterface $countryNameConverter
+     * @param AddressRepositoryInterface $addressRepository
      */
     public function __construct(
         FactoryInterface $addressFactory,
-        CountryNameConverterInterface $countryNameConverter
+        CountryNameConverterInterface $countryNameConverter,
+        AddressRepositoryInterface $addressRepository
     ) {
         $this->addressFactory = $addressFactory;
         $this->countryNameConverter = $countryNameConverter;
+        $this->addressRepository = $addressRepository;
     }
 
     /**
@@ -89,6 +99,17 @@ final class AddressingContext implements Context
         $names = explode(" ", $name);
 
         return $this->createAddress($countryCode, $names[0], $names[1], $city, $street, $postcode, $provinceName);
+    }
+
+    /**
+     * @Transform /^"([^"]+)" street$/
+     */
+    public function getByCity($street)
+    {
+        $address = $this->addressRepository->findOneBy(['street' => $street]);
+        Assert::notNull($address);
+
+        return $address;
     }
 
     /**

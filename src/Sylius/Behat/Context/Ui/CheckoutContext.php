@@ -210,6 +210,23 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^I choose ("[^"]+" street) for shipping address$/
+     */
+    public function iChooseForShippingAddress(AddressInterface $address)
+    {
+        $this->addressPage->selectShippingAddressFromAddressBook($address);
+    }
+
+    /**
+     * @When /^I choose ("[^"]+" street) for billing address$/
+     */
+    public function iChooseForBillingAddress(AddressInterface $address)
+    {
+        $this->addressPage->chooseDifferentBillingAddress();
+        $this->addressPage->selectBillingAddressFromAddressBook($address);
+    }
+
+    /**
      * @When /^I specify the shipping (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      * @When /^I specify the shipping (address for "[^"]+" from "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+")$/
      * @When /^I (do not specify any shipping address) information$/
@@ -1296,6 +1313,22 @@ final class CheckoutContext implements Context
             $this->selectPaymentPage->hasNoAvailablePaymentMethodsWarning(),
             'There should be warning about no available payment methods, but it does not.'
         );
+    }
+
+    /**
+     * @Then /^I should have (this address) filled as shipping address$/
+     */
+    public function iShouldHaveThisAddressFilledAsShippingAddress(AddressInterface $address)
+    {
+        Assert::eq($address, $this->addressPage->getPreFilledShippingAddress());
+    }
+
+    /**
+     * @Then /^I should have (this address) filled as billing address$/
+     */
+    public function iShouldHaveThisAddressFilledAsBillingAddress(AddressInterface $address)
+    {
+        Assert::eq($address, $this->addressPage->getPreFilledBillingAddress());
     }
 
     /**
