@@ -115,7 +115,7 @@
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.setup.product_association_type" class="Sylius\Behat\Context\Setup\ProductAssociationTypeContext" scope="scenario">
+        <service id="sylius.behat.context.setup.product_association" class="Sylius\Behat\Context\Setup\ProductAssociationContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.factory.product_association_type" container="symfony" />
             <argument type="service" id="sylius.repository.product_association_type" container="symfony" />

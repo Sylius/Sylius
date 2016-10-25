@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ProductAssociationTypeContext implements Context
+final class ProductAssociationContext implements Context
 {
     /**
      * @var SharedStorageInterface
