@@ -44,6 +44,7 @@ sylius:
         adding_new_locale: Ajout de nouveaux paramètres régionaux
         additional_information: Information supplémentaire
         address: Adresse
+        address_book: Carnets d'adresse
         addressing: Adressage
         addressing_step: Adresse de livraison
         adjustments: Ajustements
@@ -73,6 +74,7 @@ sylius:
         awaiting_payment: En attente de règlement
         back: Retour
         back_to_store: Retour à la boutique
+        back_to_details: Retour aux détails
         backorder: Rupture de stock
         backordered: Rupture de stock
         balance_due: Solde à payer
@@ -81,8 +83,10 @@ sylius:
         blocks: Blocs
         body: Corps
         browse_products: Parcourir les produits
+        browse_your_orders_from_the_past: Parcourir vos commandes passées
         build: Construire
         calculator: Calculateur
+        call_us: Appelez-nous
         cancel: Annuler
         cancelled: Annulé
         cart: Panier
@@ -103,6 +107,8 @@ sylius:
         checking_out_as: Payer en tant que
         checkout: Paiement
         choose_file: Choisir un fichier
+        choose_how_your_goods_will_be_delivered: Choisir comment vos marchandises vont être livrées
+        choose_how_you_will_pay: Choisir comment vous allez payer
         city: Ville
         clear_cart: Vider le panier
         clear_filters: Réinitialiser les filtres
@@ -122,6 +128,7 @@ sylius:
         contact_us: Nous contacter
         contain_variants: Contient des variantes
         contains: Contient
+        content: Contenu
         countries: Pays
         country: Pays
         country_details: Détails du pays
@@ -188,6 +195,7 @@ sylius:
         customer_can_login_to_the_store: Le client peut se connecter au magasin
         customer_care: Service clients
         customer_details: Informations sur le client
+        customer_groups: Groupes de client
         customer_id: ID Client
         customer_login: Connexion
         customer_not_notified: Client non informé
@@ -203,6 +211,7 @@ sylius:
         dashboard: Tableau de bord
         data: Données
         date: Date
+        default: Défaut
         default_billing_address: Adresse de facturation par défaut
         default_currency: Devise par défaut
         default_locale: Paramètres régionaux par défaut
@@ -217,6 +226,7 @@ sylius:
         disabled: Désactivés
         discount: Réduction
         discounted_unit_price: Prix unitaire réduit
+        display: Afficher
         edit: Modifier
         edit_admin_user: Modifier l'administrateur
         edit_association_type: Modifier le type d'association
@@ -227,6 +237,7 @@ sylius:
         edit_customer: Modifier le client
         edit_locale: Modifier les paramètres régionaux
         edit_my_address: Modifier mon adresse
+        edit_order: Éditer la commande
         edit_payment_method: Modifier le mode de paiement
         edit_product: Modifier un produit
         edit_product_attribute: Mettre à jour les attributs du produit
@@ -295,14 +306,19 @@ sylius:
         exclusive: Exclusif
         existing_customer: Client existant
         expiration_and_usage_limits: Expiration et limites d’utilisation
+        expires_at: Expire le
         extra_information: Informations complémentaires
         extra_notes: Notes supplémentaires
         failed: Échoué
         faqs: FAQs
         female: Féminin
+        filter: Filtrer
         filters: Filtres
+        fill_in_your_billing_and_shipping_addresses: Renseignez vos adresses de facturation et de livraison
         first_name: Prénom
         forgot_password: Mot de passe oublié
+        from_the_newest: De la plus récente
+        from_the_oldest: Du plus ancien
         fulfill: Remplir
         fulfilled: Complétée
         gateway: Passerelle
@@ -313,6 +329,7 @@ sylius:
         generate_variants: Générer des variantes
         generating_coupons: Génération de coupons
         go: Envoyer
+        go_level_up: Monter au niveau supérieur
         go_to_dashboard: Aller au tableau de bord
         grand_total: Total
         guest: Invité
@@ -342,10 +359,12 @@ sylius:
         inventory_tracking: Suivi du stock
         invoice: Facture
         is_enabled: Actif
+        it_seems_you_have_an_account_already: Il semblerai que vous avez déjà un compte
         item: Élément
         items: Produits
         items_total: Total
         jump_to_page: Aller à la page
+        label: Label
         last_login: Dernière connexion
         last_name: Nom
         last_update: Date de mise à jour
@@ -381,6 +400,7 @@ sylius:
         manage_coupons: Gérer les coupons
         manage_currencies_available_in_the_store: Gérer les devises disponibles pour la boutique
         manage_customers: Gérer des clients
+        manage_customer_groups: Gérer les groupes de vos clients
         manage_discounts_and_promotional_campaigns: Gérer les remises et les campagnes promotionnelles
         manage_emails: Gestion des emails
         manage_geographical_zones: Gérer les zones géographiques
@@ -402,6 +422,7 @@ sylius:
         manage_tax_rates: Gérer les taux
         manage_taxation_of_your_products: Gérer la fiscalité de vos produits
         manage_users: Gérer les utilisateurs
+        manage_users_able_to_access_administration_panel: Gérer les utilisateurs en mesure d’accéder à l’administration
         manage_variants: Gérer les variantes
         manage_your_customers: Gérez vos clients
         manage_your_personal_information_and_preferences: Gérer vos informations personnelles et préférences
@@ -421,6 +442,7 @@ sylius:
         my_account: Mon compte
         n_a: N/A
         name: Nom
+        need_assistance: Besoin d'assistance
         new: Nouveau
         new_admin_user: Nouvel administrateur
         new_channel: Nouveau canal
@@ -455,6 +477,7 @@ sylius:
         new_user: Nouvel utilisateur
         new_zone: Nouvelle zone
         newest_products: Nouveautés
+        newest_first: Plus récent en premier
         next: Suivant
         no_label: Non
         no_account: Aucun compte
@@ -488,6 +511,7 @@ sylius:
         number: Numéro
         number_of_orders: Nombre de commandes
         oauth_provider: Fournisseur OAuth
+        oldest_first: Plus anciens en premier
         on_hold: En attente
         options: Options
         or: ou
@@ -532,8 +556,10 @@ sylius:
         place_order: Commander
         placed_an_order: Votre commande a bien été prise en compte.
         placed_at: Effectuée le
+        please_sign_in: Veuillez vous connecter
         postcode: Code postal
         powered_by: Propulsé par
+        preferences: Préferences
         presentation: Présentation
         previous: Précédent
         price: Prix
@@ -553,6 +579,7 @@ sylius:
         product_review: Avis produit
         product_reviews: Avis produit
         product_variants: Variantes de produit
+        products: Produits
         products_categorized_as_name: Produits classés en tant que « %name% »
         products_categorized_under_taxon_taxon: Produits <small>catégorisés sous le taxon "%taxon%"</small>
         products_index_of_all_products_in_your_store: Produits <small>Liste de tous les produits de votre boutique</small>
@@ -600,6 +627,7 @@ sylius:
         returned: Retourné
         returns_policy: Modalités de retour
         revert: Revenir en arrière
+        review_and_confirm_your_order: Vérifier et confirmer votre commande
         review_details: Détails
         reviews: Avis
         roles: Rôles
@@ -643,6 +671,7 @@ sylius:
         show_deleted: Voir les supprimés
         show_in_store: Afficher dans le magasin
         show_metadata: Afficher les méta-données
+        show_order_details: Afficher les détails de votre commande
         sign_in: Connection
         sign_in_here: Connectez-vous ici
         sign_in_to_the_store_or_create_new_account: Connectez-vous <small>ou créez un compte</small>
@@ -652,6 +681,7 @@ sylius:
         sku: Référence
         slideshow: Diaporama
         slideshow_blocks: Blocs de diaporama
+        sort_by_date: Trier par date
         start_date: Date de début
         starts_at: Commence le
         starts_with: Commence par
@@ -661,9 +691,11 @@ sylius:
         street: Adresse
         string_blocks: Blocs de type chaine
         subject: Sujet
+        subscribed_to_newsletter: Abonnez-vous à la newsletter
         subtotal: Sous-total
         success: Succès
         summary: Résumé
+        summary_of_your_order: Récapitulatif de votre commande
         support: Support
         sylius_logo: Sylius
         tax: TVA
@@ -676,10 +708,12 @@ sylius:
         taxation_settings: Configuration des taxes
         taxes: Taxes
         taxonomy: Taxinomie
+        taxons: Taxons
         terms_and_conditions: Conditions générales de vente
         thank_you: Merci !
         thank_you_for_your_order: Merci pour votre commande
         theme: Thème
+        the_instructions_below_will_be_displayed_to_the_customer: Les instructions ci-dessous seront affichées au client
         there_are_no_attributes_configured: Il n'y a pas de propriétés configurées
         there_are_no_blocks_to_display: Il n'y a pas de blocs à afficher
         there_are_no_channels_configured: Il n'y a pas de canaux de distribution configurés
@@ -742,6 +776,7 @@ sylius:
         update_product_association_type: Mise à jour d'un type d'association de produit
         updating_tax_rate: Modification du taux
         usage: Utilisation
+        usage_limit: Limite d'utilisation
         used: Utilisé
         user_confirmation_name: Confirmation de l'utilisateur
         user_details: Détails d'un utilisateur
@@ -757,6 +792,7 @@ sylius:
         view_and_edit_cart: Afficher et modifier le panier
         view_more: En savoir plus
         view_product_details: Voir les détails %product%
+        view_your_order_or_change_payment_method: Afficher une commande ou changer le mode de paiement
         void: Nul
         volume_based_pricing: Volume en fonction des prix
         warning: Avertissement

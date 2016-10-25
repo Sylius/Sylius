@@ -5,8 +5,8 @@ sylius:
     menu:
         shop:
             account:
-                header: Twoje Konto
-                dashboard: Panel
-                personal_information: Dane osobowe
                 change_password: Zmień hasło
+                dashboard: Panel
+                header: Twoje Konto
                 order_history: Historia zamówień
+                personal_information: Dane osobowe

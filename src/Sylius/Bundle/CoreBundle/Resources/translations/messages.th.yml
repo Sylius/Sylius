@@ -19,6 +19,9 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: สินค้า
+            customer_group: กลุ่มลูกค้า
+        promotion_coupon:
+            per_customer_usage_limit: จำกัดการใช้งานสำหรับลูกค้าแต่ละคน
         group:
             name: ชื่อ
             roles: Roles
@@ -122,6 +125,8 @@ sylius:
             contains_taxon:
                 taxon: หมวดหมู่
                 count: จำนวน
+            taxon:
+                taxons: การจัดหมวดหมู่
             total_of_items_from_taxon:
                 taxon: หมวดหมู่
                 amount: ยอดเงิน

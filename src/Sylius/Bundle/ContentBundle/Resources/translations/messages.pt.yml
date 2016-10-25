@@ -4,11 +4,15 @@
 sylius:
     form:
         route:
+            content: Conteúdo
             name: Nome
             parent: Pai
         static_content:
             body: Corpo
+            id: Id.
+            internal_name: Nome interno
             menu_nodes: Nós do menu
             parent: Pai
+            publishable: Publicado
             routes: Rotas
             title: Título

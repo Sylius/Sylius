@@ -17,6 +17,7 @@ sylius:
             name: שם
             provinces: מחוזות
             select: בחירה
+            enabled: מופעל
         province:
             name: שם
             select: בחירה

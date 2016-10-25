@@ -19,6 +19,11 @@ sylius:
             min_length: Kredito kortelės CVV kodas turi būti ne ilgesnis nei {{ limit }} skaitmenų ilgio.
         expiry_year:
             not_blank: Pasirinkite galiojimo pabaigos metus.
+    payment:
+        currency_code:
+            not_valid: Valiutos kodas yra neteisingas.
+        method:
+            not_blank: Prašome pasirinkti mokėjimo būdą.
     payment_method:
         gateway:
             not_blank: Pasirinkite mokėjimo būdą.
@@ -34,3 +39,6 @@ sylius:
                 max_range: Procentų mokestis negali būti didesnis už {{ limit }}.
                 min_range: Procentų mokestis negali būti mažesnis už {{ limit }}.
                 not_blank: Prašome įvesti mokesčio procentą.
+        code:
+            not_blank: Prašome įvesti mokėjimo būdo kodą.
+            unique: Mokėjimo būdas su tokiu kodu jau yra.

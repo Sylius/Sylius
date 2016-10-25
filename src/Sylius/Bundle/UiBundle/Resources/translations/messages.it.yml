@@ -115,6 +115,7 @@ sylius:
         contact_us: Contattaci
         contain_variants: Contiene varianti
         contains: Contiene
+        content: Contenuto
         countries: Paesi
         country: Nazione
         country_details: Dettagli paese
@@ -534,6 +535,7 @@ sylius:
         product_review: Recensione del prodotto
         product_reviews: Recensioni del prodotto
         product_variants: Varianti di prodotto
+        products: Prodotti
         products_categorized_as_name: Prodotti classificati come "%name%"
         products_categorized_under_taxon_taxon: Prodotti <small>Categorizzati sotto "%taxon%" taxon</small>
         products_index_of_all_products_in_your_store: Prodotti <small>Lista tutti i prodotti dello store</small>

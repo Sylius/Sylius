@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Kapcsolódó típusok
                     attributes: Tulajdonságok
                     header: Katalógus
                     options: Beállítások

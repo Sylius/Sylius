@@ -27,8 +27,12 @@ sylius:
         promotion_rule:
             cart_quantity_configuration:
                 count: Kiekis
+            contains_product_configuration:
+                variants: Prekės
             item_total_configuration:
                 amount: Suma
             shipping_country_configuration:
                 country: Šalis
+            taxonomy_configuration:
+                taxons: Taksonai
             type: Tipas

@@ -6,9 +6,14 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Sąryšių tipai
                     attributes: Atributai
+                    header: Katalogas
                     options: Parinktys
+                    products: Prekės
+                    taxons: Taksonai
                 configuration:
+                    admin_users: Administratoriai
                     channels: Kanalai
                     countries: Šalys
                     currencies: Valiutos
@@ -16,9 +21,11 @@ sylius:
                     locales: Lokalės
                     payment_methods: Apmokėjimo būdai
                     shipping_methods: Pristatymo būdai
+                    tax_categories: Mokesčių kategorijos
                     tax_rates: Mokesčių tarifai
                     zones: Zonos
                 marketing:
+                    header: Marketingas
                     promotions: Akcijos
                 customers:
                     customers: Klientai
@@ -29,4 +36,5 @@ sylius:
                     orders: Užsakymai
                 content:
                     header: Turinys
+                    static_contents: Statinis turinys
                     routes: Maršrutai

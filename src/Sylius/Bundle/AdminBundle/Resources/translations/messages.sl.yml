@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Vrste združenj
                     attributes: Atributi
                     header: Katalog
                     options: Možnosti

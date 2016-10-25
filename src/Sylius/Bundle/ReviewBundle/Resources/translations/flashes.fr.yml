@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        waiting_for_the_acceptation: Votre commentaire est en attente d'approbation.

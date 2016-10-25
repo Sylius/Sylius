@@ -19,6 +19,8 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Prodotto
+        promotion_coupon:
+            per_customer_usage_limit: Limite di utilizzo per cliente
         group:
             name: Nome
             roles: Regole

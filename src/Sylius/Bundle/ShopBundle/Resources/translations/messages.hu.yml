@@ -5,8 +5,8 @@ sylius:
     menu:
         shop:
             account:
-                header: Fiókod
-                dashboard: Vezérlőpult
-                personal_information: Személyes információk
                 change_password: Jelszó változtatás
+                dashboard: Vezérlőpult
+                header: Fiókod
                 order_history: Rendelési előzmények
+                personal_information: Személyes információk

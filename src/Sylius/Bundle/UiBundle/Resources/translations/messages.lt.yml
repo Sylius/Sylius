@@ -9,12 +9,24 @@ sylius:
             remember_me: Prisiminti mane
         option:
             name: Pavadinimas
+        notes: Papildomos pastabos
+        variant:
+            tracked: Stebimi
     ui:
+        abandoned: Atsisakyta
+        about: Apie
+        access_token: Prieigos raktas
+        access_your_store_account_or_create_a_new_one: Prieiti prie parduotuvės paskyros arba sukurti naują
+        account_credentials: Paskyros prisijungimai
+        account_panel_outline: Mėgaukitės visomis savo asmeninės erdvės funkcijomis, galite peržiūrėti, stebėti ir valdyti visus savo duomenis
         action: Veiksmas
         actions: Veiksmai
         add: Pridėti
         add_action: Pridėti veiksmą
+        add_address: Pridėti adresą
+        add_association: Pridėti sąryšį
         add_attribute: Pridėti atributą
+        add_attributes: Pridėti atributą
         add_channel: Pridėti kanalą
         add_choice: Pridėti pasirinkimą
         add_coupon: Pridėti kuponą
@@ -31,33 +43,68 @@ sylius:
         adding_new_customer_groups: Pridedamos naujos klientų grupės
         adding_new_email: Naujo adreso pridėjimas
         adding_new_locale: Naujos lokalės pridėjimas
+        additional_information: Papildoma informacija
+        address: Adresas
+        address_book: Adresų knyga
+        addressing: Adresavimas
         addressing_step: Adresas
         adjustments: Koregavimai
         administration: Administravimas
         administration_dashboard: Administravimo skydelis
+        administration_panel_login: Administravimo skydelio prisijungimas
+        admin_users: Administratoriai
+        all: Visi
         all_your_addresses: Visi jūsų adresai
         amount: Suma
+        an_error_occurred: Įvyko klaida
+        api: API
+        apply_coupon: Panaudoti kuponą
+        are_your_sure_you_want_to_perform_this_action: Ar tikrai norite atlikti šį veiksmą?
+        association: Sąryšis
+        association_types: Sąryšių tipai
+        associations: Sąryšiai
         assortment: Asortimentas
         attributes: Atributai
         author: Autorius
         availability: Prieinamumas
+        available_for_channels: Prieinama kanaluose
         available_on: Prieinamas nuo
+        available_until: Prieinamas iki
+        average_order_value: Vidutinė užsakymų vertė
+        awaiting_payment: Laukiama apmokėjimo
         back: Atgal
+        back_to_store: Grįži į sandėlį
+        back_to_details: Grįžti į informacija
         backorder: Užsakyti į ateitį
+        backordered: Užlaikytas
         balance_due: Likutis
+        bill_to: Sąskaitos gavėjas
         billing_address: Mokėtojo adresas
         blocks: Blokai
         body: Bloko turinys
         browse_products: Peržiūrėti produktus
+        browse_your_addresses: Peržiūrėti adresus
+        browse_your_orders_from_the_past: Peržiūrėti Jūsų užsakymus
         build: Sukurti
         calculator: Skaičiuoklė
+        call_us: Paskambinkite
         cancel: Atšaukti
         cancelled: Atšaukta
+        cart: Krepšelis
+        cart_locked: Krepšelis užrakintas
+        cart_summary: Krepšelio suvestinė
         categorization: Skirstymas į kategorijas
         category: Kategorija
+        category_requirements: Kategorijos reikalavimai
+        change_address: Keisti adresą
+        change_file: Keisti failą
+        change_password: Keisti slaptažodį
+        change_payment_method: Keisti mokėjimo būdą
+        change_shipping_method: Sukurti pristatymo būdą
         change_your_password: Pakeisti savo slaptažodį
         channel: Kanalas
         channels: Kanalai
+        charges_and_taxes: Mokesčiai ir rinkliavos
         checkout: Apmokėjimas
         choose_file: Pasirinkite failą
         city: Miestas
@@ -131,6 +178,7 @@ sylius:
         customer_notified: Pirkėjas informuotas
         customers: Klientai
         dashboard: Skydelis
+        date: Data
         default_billing_address: Numatytasis atsiskaitymo adresas
         default_currency: Numatytoji valiuta
         default_shipping_address: Numatytasis pristatymo adresas
@@ -181,10 +229,12 @@ sylius:
         enabled: Įjungta
         end_date: Pabaigos data
         ends_at: Baigiasi
+        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Mėgaukitės visomis savo asmeninės erdvės funkcijomis, galite peržiūrėti, stebėti ir valdyti visus savo duomenis
         error: Klaida
         exchange_rate: Valiutų kursas
         exclusive: Išskirtinis
         existing_customer: Esamas klientas
+        extra_notes: Papildomos pastabos
         failed: Nepavyko
         first_name: Vardas
         fulfill: Išpildyti
@@ -246,6 +296,7 @@ sylius:
         manage_tax_categories: Tvarkyti mokesčių kategorijas
         manage_tax_rates: Tvarkyti mokesčių tarifus
         manage_zones: Valdyti zonas
+        marketing: Marketingas
         members: Nariai
         menu_nodes: Meniu elementai
         menus: Meniu
@@ -331,9 +382,11 @@ sylius:
         priority: Prioritetas
         processing: Apdorojamas
         product: Produktas
+        product_association_index: Sąryšis
         product_attributes: Produkto atributai
         product_details_viewing_product_product: Produkto detalės <small>peržiūrimas produktas "<strong>%product%</strong>"</small>
         product_options: Produkto parinktys
+        products: Prekės
         products_categorized_as_name: Produktai klasifikuojami kaip "%name%"
         products_categorized_under_taxon_taxon: Produktai <small>kategorizuoti pagal "%taxon%"</small>
         products_index_of_all_products_in_your_store: Produktai <small>visų produktų jūsų parduotuvėje rodyklė</small>
@@ -415,6 +468,7 @@ sylius:
         taxation_categories: Apmokestinimo kategorijos
         taxation_settings: Apmokestinimo nustatymai
         taxes: Mokesčiai
+        taxons: Taksonai
         there_are_no_images_for_this_product: Šis produktas neturi paveikslėlių
         there_are_no_options_for_this_product: Šis produktas neturi parinkčių
         there_are_no_taxons_for_this_product: Nėra jokių taksonų šiam produktui
@@ -427,6 +481,7 @@ sylius:
         total_qty: Bendras kiekis
         total_registrations: Viso registracijų
         tracking_number: Sekimo numeris
+        translations: Vertimai
         type: Tipas
         unavailable: Nepasiekiamas
         unit_price: Vieneto kaina

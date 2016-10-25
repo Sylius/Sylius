@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: 关联类型
                     attributes: 属性
                     header: 目录
                     options: 选项

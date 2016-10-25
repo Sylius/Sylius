@@ -38,3 +38,5 @@ sylius:
         username:
             unique: Este nome de utilizador já foi utilizado.
             not_blank: Introduza o seu nome.
+        locale_code:
+            not_blank: Por favor, escolha uma localidade.

@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Tipi i lidhjes
                     attributes: Atributet
                     header: Katalogu
                     options: Opsionet
