@@ -1,0 +1,4 @@
+sylius:
+    product_review:
+        accepted: Product review has been successfully accepted.
+        rejected: Product review has been successfully rejected.

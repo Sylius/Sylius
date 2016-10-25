@@ -12,6 +12,8 @@ sylius:
     ui:
         abandoned: Abandoned
         about: About
+        accept: Accept
+        accepted: Accepted
         access_token: 'Access Token'
         access_your_store_account_or_create_a_new_one: Access your store account or create a new one
         account_credentials: Account credentials
@@ -243,6 +245,7 @@ sylius:
         edit_product_association_type: Edit product association type
         edit_product_attribute: Edit product attribute
         edit_product_option: Edit product option
+        edit_product_review: Edit product review
         edit_product_variant: Edit product variant
         edit_promotion: Edit promotion
         edit_promotion_coupon: Edit promotion coupon
@@ -415,6 +418,7 @@ sylius:
         manage_products: 'Manage products'
         manage_promotions: 'Manage promotions'
         manage_reviews: 'Manage reviews'
+        manage_reviews_of_your_products: Manage reviews of your products
         manage_shipments: 'Manage shipments'
         manage_shipping_categories: 'Manage shipping categories'
         manage_shipping_destinations: Manage shipping destinations
@@ -620,6 +624,8 @@ sylius:
         registered_customers: Registered customers
         registration_create_an_account_in_store: 'Registration <small>Create an account in store</small>'
         registration_date: 'Registration date'
+        reject: Reject
+        rejected: Rejected
         release_inventory: 'Release inventory'
         remember_me: 'Remember me'
         remove_attribute: 'Remove attribute'
