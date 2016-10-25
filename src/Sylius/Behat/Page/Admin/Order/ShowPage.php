@@ -130,6 +130,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function refundOrderLastPayment(OrderInterface $order)
+    {
+        $this->getLastOrderPaymentElement($order)->pressButton('Refund');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function countItems()
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('table'));

@@ -17,16 +17,15 @@ Feature: Refunding order payment
         And I am logged in as an administrator
         And I am viewing the summary of this order
 
-
-    @ui @todo
+    @ui
     Scenario: Marking payment as refunded
-        When I mark this order's payment "Offline" as refunded
-        Then I should be notified that the payment has been successfully updated
-        And it should have payment "Offline" in state refunded
+        When I mark this order's payment as refunded
+        Then I should be notified that the order's payment has been successfully refunded
+        And it should have payment with state refunded
 
-    @ui @todo
+    @ui
     Scenario: Marking order as refunded after refunding all its payments
-        When I mark this order's payment "Offline" as refunded
-        Then it should have payment "Offline" in state refunded
-        And it should have payment state "Refunded"
+        When I mark this order's payment as refunded
+        Then it should have payment with state refunded
+        And it's payment state should be refunded
 

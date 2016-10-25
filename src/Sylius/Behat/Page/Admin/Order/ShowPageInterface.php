@@ -91,6 +91,11 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function completeOrderLastPayment(OrderInterface $order);
 
     /**
+     * @param OrderInterface $order
+     */
+    public function refundOrderLastPayment(OrderInterface $order);
+
+    /**
      * @return int
      */
     public function countItems();
