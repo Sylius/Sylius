@@ -27,12 +27,9 @@ use Sylius\Component\Customer\Context\CustomerContextInterface;
  */
 final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
 {
-    function let(
-        AddressComparatorInterface $addressComparator,
-        CustomerContextInterface $customerContext,
-        ObjectManager $customerManager
-    ) {
-        $this->beConstructedWith($addressComparator, $customerContext, $customerManager);
+    function let(AddressComparatorInterface $addressComparator, CustomerContextInterface $customerContext)
+    {
+        $this->beConstructedWith($addressComparator, $customerContext);
     }
 
     function it_is_initializable()
@@ -48,7 +45,6 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
     function it_does_nothing_when_there_is_no_customer(
         AddressComparatorInterface $addressComparator,
         CustomerContextInterface $customerContext,
-        ObjectManager $customerManager,
         CustomerInterface $customer,
         AddressInterface $address
     ) {
@@ -60,7 +56,6 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         )->shouldNotBeCalled();
 
         $customer->addAddress($address)->shouldNotBeCalled();
-        $customerManager->flush()->shouldNotBeCalled();
 
         $this->add($address);
     }
@@ -68,7 +63,6 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
     function it_does_nothing_when_an_address_is_already_present_on_the_customer(
         AddressComparatorInterface $addressComparator,
         CustomerContextInterface $customerContext,
-        ObjectManager $customerManager,
         CustomerInterface $customer,
         AddressInterface $address,
         Collection $addresses,
@@ -86,7 +80,6 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         $addressComparator->same($address, $address)->willReturn(true);
 
         $customer->addAddress($address)->shouldNotBeCalled();
-        $customerManager->flush()->shouldNotBeCalled();
 
         $this->add($address);
     }
@@ -94,7 +87,6 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
     function it_adds_an_address_when_no_other_is_present_on_the_customer(
         AddressComparatorInterface $addressComparator,
         CustomerContextInterface $customerContext,
-        ObjectManager $customerManager,
         CustomerInterface $customer,
         AddressInterface $address,
         Collection $addresses,
@@ -114,7 +106,6 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         )->shouldNotBeCalled();
 
         $customer->addAddress($address)->shouldBeCalled();
-        $customerManager->flush()->shouldBeCalled();
 
         $this->add($address);
     }
@@ -122,7 +113,6 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
     function it_adds_an_address_when_different_than_the_ones_present_on_the_customer(
         AddressComparatorInterface $addressComparator,
         CustomerContextInterface $customerContext,
-        ObjectManager $customerManager,
         CustomerInterface $customer,
         AddressInterface $customerAddress,
         AddressInterface $newAddress,
@@ -142,7 +132,6 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
         $addressComparator->same($customerAddress, $newAddress)->willReturn(false);
 
         $customer->addAddress($newAddress)->shouldBeCalled();
-        $customerManager->flush()->shouldBeCalled();
 
         $this->add($newAddress);
     }
