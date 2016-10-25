@@ -113,6 +113,11 @@
             <argument type="service" id="sylius.form.type.data_transformer.taxons_to_codes" />
             <tag name="form.type" alias="sylius_promotion_action_filter_taxon_configuration" />
         </service>
+        <service id="sylius.form.type.promotion_action.filter.product" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter\ProductFilterConfigurationType">
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.form.type.data_transformer.products_to_codes" />
+            <tag name="form.type" alias="sylius_promotion_action_filter_product_configuration" />
+        </service>
 
         <service id="sylius.form.type.price_calculator.channel_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelBasedConfigurationType">
             <argument type="service" id="sylius.repository.channel" />
@@ -129,6 +134,9 @@
 
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer">
             <argument type="service" id="sylius.repository.taxon" />
+        </service>
+        <service id="sylius.form.type.data_transformer.products_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductsToCodesTransformer">
+            <argument type="service" id="sylius.repository.product" />
         </service>
 
         <service id="sylius.form.type.customer_guest" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType">
