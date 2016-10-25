@@ -23,6 +23,6 @@ Feature: Searching products by name within a specific taxon
     Scenario: Clearing filters
         When I browse products from taxon "Guns"
         And I search for product with name "Magnum"
-        And I clear filters
+        And I clear filter
         Then I should see the product "44 Magnum"
         And I should see the product "Glock 17"

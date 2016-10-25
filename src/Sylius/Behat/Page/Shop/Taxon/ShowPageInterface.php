@@ -58,5 +58,5 @@ interface ShowPageInterface
      */
     public function search($name);
 
-    public function clearFilters();
+    public function clearFilter();
 }

@@ -112,6 +112,7 @@ sylius:
         choose_how_your_goods_will_be_delivered: Choose how your goods will be delivered
         choose_how_you_will_pay: Choose how you will pay
         city: City
+        clear: Clear
         clear_cart: Clear cart
         clear_filters: Clear filters
         code: Code

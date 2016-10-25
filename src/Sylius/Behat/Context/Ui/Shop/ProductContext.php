@@ -152,11 +152,11 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I clear filters
+     * @When I clear filter
      */
-    public function iClearFilters()
+    public function iClearFilter()
     {
-        $this->taxonShowPage->clearFilters();
+        $this->taxonShowPage->clearFilter();
     }
 
     /**

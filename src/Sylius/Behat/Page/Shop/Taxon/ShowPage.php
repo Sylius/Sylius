@@ -88,12 +88,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function search($name)
     {
-        $this->getDocument()->fillField('Value', $name);
+        $this->getDocument()->fillField('criteria_search_value', $name);
         $this->getDocument()->pressButton('Search');
     }
 
-    public function clearFilters()
+    public function clearFilter()
     {
-        $this->getDocument()->clickLink('Clear filters');
+        $this->getDocument()->clickLink('Clear');
     }
 }
