@@ -59,7 +59,7 @@ How to remove a state and its transitions?
 
 .. warning::
 
-    If you are willing do remove a state or a transition you have to override **the whole states/transitions section**
+    If you are willing to remove a state or a transition you have to override **the whole states/transitions section**
     of the state machine you are willing to modify.
 
 How to add a new callback?
