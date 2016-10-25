@@ -1,16 +1,6 @@
-{% extends '@SyliusShop/Account/layout.html.twig' %}
+{% extends '@SyliusShop/Account/AddressBook/layout.html.twig' %}
 
 {% form_theme form '@SyliusUi/Form/theme.html.twig' %}
-
-{% block breadcrumb %}
-    <div class="ui breadcrumb">
-        <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
-        <div class="divider"> / </div>
-        <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
-        <div class="divider"> / </div>
-        <div class="active section">{{ 'sylius.ui.address_book'|trans }}</div>
-    </div>
-{% endblock %}
 
 {% block subcontent %}
     <div class="ui segment">
