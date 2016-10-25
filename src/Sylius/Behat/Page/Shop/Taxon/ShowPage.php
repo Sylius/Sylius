@@ -94,6 +94,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function clearFilters()
     {
-        $this->getDocument()->pressButton('Clear filters');
+        $this->getDocument()->clickLink('Clear filters');
     }
 }

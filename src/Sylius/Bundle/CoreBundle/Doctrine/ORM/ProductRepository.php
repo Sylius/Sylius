@@ -51,14 +51,18 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderForEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel)
+    public function createQueryBuilderForEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel, $locale)
     {
         return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
             ->innerJoin('o.taxons', 'taxon')
-            ->andWhere('taxon.code = :code')
             ->innerJoin('o.channels', 'channel')
+            ->andWhere('translation.locale = :locale')
+            ->andWhere('taxon.code = :code')
             ->andWhere('channel = :channel')
             ->andWhere('o.enabled = true')
+            ->setParameter('locale', $locale)
             ->setParameter('code', $code)
             ->setParameter('channel', $channel)
         ;

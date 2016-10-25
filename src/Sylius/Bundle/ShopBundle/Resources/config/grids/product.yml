@@ -13,6 +13,7 @@ sylius_grid:
                         arguments:
                             code: $code
                             channel: 'expr:service("sylius.context.channel").getChannel()'
+                            locale: '%locale%'
             sorting:
                 createdAt: asc
             fields:
@@ -22,3 +23,9 @@ sylius_grid:
                     sortable: ~
                     options:
                         format: m/d/Y
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [translation.name]
