@@ -618,6 +618,7 @@ sylius:
         recent_orders: 'Recent orders'
         recent_users: 'Recent users'
         redirect_routes: 'Redirect routes'
+        refund: Refund
         refunded: Refunded
         register: Register
         register_button: Register

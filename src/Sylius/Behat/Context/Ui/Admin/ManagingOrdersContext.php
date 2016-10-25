@@ -506,7 +506,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then (it)'s payment state should be refunded
+     * @Then /^(this order)'s payment state should be refunded$/
      */
     public function itPaymentStateShouldBeRefunded(OrderInterface $order)
     {

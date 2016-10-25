@@ -27,5 +27,4 @@ Feature: Refunding order payment
     Scenario: Marking order as refunded after refunding all its payments
         When I mark this order's payment as refunded
         Then it should have payment with state refunded
-        And it's payment state should be refunded
-
+        And this order's payment state should be refunded
