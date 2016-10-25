@@ -45,3 +45,7 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sylius.promotion_usage_modifier", "increment"]
                     args: ["object"]
+                sylius_save_addresses_on_customer:
+                    on: ["complete"]
+                    do: ["@sylius.customer_order_addresses_saver", "saveAddresses"]
+                    args: ["object"]
