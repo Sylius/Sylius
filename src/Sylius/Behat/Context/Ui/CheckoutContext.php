@@ -23,6 +23,7 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -95,6 +96,11 @@ final class CheckoutContext implements Context
     private $currentPageResolver;
 
     /**
+     * @var AddressComparatorInterface
+     */
+    private $addressComparator;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param HomePageInterface $homePage
      * @param AddressPageInterface $addressPage
@@ -106,6 +112,7 @@ final class CheckoutContext implements Context
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $addressFactory
      * @param CurrentPageResolverInterface $currentPageResolver
+     * @param AddressComparatorInterface $addressComparator
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -118,7 +125,8 @@ final class CheckoutContext implements Context
         ShowPageInterface $orderDetails,
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $addressFactory,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
+        AddressComparatorInterface $addressComparator
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->homePage = $homePage;
@@ -131,6 +139,7 @@ final class CheckoutContext implements Context
         $this->orderRepository = $orderRepository;
         $this->addressFactory = $addressFactory;
         $this->currentPageResolver = $currentPageResolver;
+        $this->addressComparator = $addressComparator;
     }
 
     /**
@@ -1316,23 +1325,19 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then /^I should have (this address) filled as shipping address$/
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as shipping address$/
      */
-    public function iShouldHaveThisAddressFilledAsShippingAddress(AddressInterface $address)
+    public function addressShouldBeFilledAsShippingAddress(AddressInterface $address)
     {
-        foreach ($this->addressPage->comparePreFilledShippingAddress($address) as $key => $diff) {
-            throw new \InvalidArgumentException(sprintf('Property %s expected %s, got %s', $key, $diff['expected'], $diff['got']));
-        }
+        Assert::true($this->addressComparator->same($address, $this->addressPage->getPreFilledShippingAddress()));
     }
 
     /**
-     * @Then /^I should have (this address) filled as billing address$/
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as billing address$/
      */
-    public function iShouldHaveThisAddressFilledAsBillingAddress(AddressInterface $address)
+    public function addressShouldBeFilledAsBillingAddress(AddressInterface $address)
     {
-        foreach ($this->addressPage->comparePreFilledBillingAddress($address) as $key => $diff) {
-            throw new \InvalidArgumentException(sprintf('Property %s expected %s, got %s', $key, $diff['expected'], $diff['got']));
-        }
+        Assert::true($this->addressComparator->same($address, $this->addressPage->getPreFilledBillingAddress()));
     }
 
     /**

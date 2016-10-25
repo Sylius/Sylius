@@ -1,8 +1,8 @@
 @checkout
 Feature: Choosing an address from address book
     In order to address an order by choosing it from my address book
-    As a customer
-    I want to be able to quick fill in my address information
+    As a Customer
+    In order to quickly fill in my address information during checkout
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -16,14 +16,14 @@ Feature: Choosing an address from address book
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I choose "Seaside Fwy" street for shipping address
-        Then I should have this address filled as shipping address
+        Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be filled as shipping address
 
     @ui @javascript
     Scenario: Choosing billing address from address book
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I choose "Seaside Fwy" street for billing address
-        Then I should have this address filled as billing address
+        Then address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be filled as billing address
 
     @ui @javascript
     Scenario: Choosing shipping address from address book and proceed to the next step

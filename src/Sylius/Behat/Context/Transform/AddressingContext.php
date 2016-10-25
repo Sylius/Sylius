@@ -104,10 +104,10 @@ final class AddressingContext implements Context
     /**
      * @Transform /^"([^"]+)" street$/
      */
-    public function getByCity($street)
+    public function getByStreet($street)
     {
         $address = $this->addressRepository->findOneBy(['street' => $street]);
-        Assert::notNull($address);
+        Assert::notNull($address, sprintf('Cannot find address by %s street' , $street));
 
         return $address;
     }

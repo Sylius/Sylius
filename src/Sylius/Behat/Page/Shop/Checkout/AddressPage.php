@@ -124,17 +124,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function specifyShippingAddress(AddressInterface $shippingAddress)
     {
-        $this->getElement('shipping_first_name')->setValue($shippingAddress->getFirstName());
-        $this->getElement('shipping_last_name')->setValue($shippingAddress->getLastName());
-        $this->getElement('shipping_street')->setValue($shippingAddress->getStreet());
-        $this->getElement('shipping_country')->selectOption($shippingAddress->getCountryCode() ?: 'Select');
-        $this->getElement('shipping_city')->setValue($shippingAddress->getCity());
-        $this->getElement('shipping_postcode')->setValue($shippingAddress->getPostcode());
-
-        if (null !== $shippingAddress->getProvinceName()) {
-            $this->waitForElement(5, 'shipping_province');
-            $this->getElement('shipping_province')->setValue($shippingAddress->getProvinceName());
-        }
+        $this->specifyAddress($shippingAddress, self::TYPE_SHIPPING);
     }
 
     /**
@@ -151,17 +141,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function specifyBillingAddress(AddressInterface $billingAddress)
     {
-        $this->getElement('billing_first_name')->setValue($billingAddress->getFirstName());
-        $this->getElement('billing_last_name')->setValue($billingAddress->getLastName());
-        $this->getElement('billing_street')->setValue($billingAddress->getStreet());
-        $this->getElement('billing_country')->selectOption($billingAddress->getCountryCode() ?: 'Select');
-        $this->getElement('billing_city')->setValue($billingAddress->getCity());
-        $this->getElement('billing_postcode')->setValue($billingAddress->getPostcode());
-
-        if (null !== $billingAddress->getProvinceName()) {
-            $this->waitForElement(5, 'billing_province');
-            $this->getElement('billing_province')->setValue($billingAddress->getProvinceName());
-        }
+        $this->specifyAddress($billingAddress, self::TYPE_BILLING);
     }
 
     /**
@@ -309,18 +289,17 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * @inheritDoc
      */
-    public function comparePreFilledShippingAddress(AddressInterface $address)
+    public function getPreFilledShippingAddress()
     {
-
-        return $this->comparePreFilledAddress($address, self::TYPE_SHIPPING);
+        return $this->getPreFilledAddress(self::TYPE_SHIPPING);
     }
 
     /**
      * @inheritDoc
      */
-    public function comparePreFilledBillingAddress(AddressInterface $address)
+    public function getPreFilledBillingAddress()
     {
-        return $this->comparePreFilledAddress($address, self::TYPE_BILLING);
+        return $this->getPreFilledAddress(self::TYPE_BILLING);
     }
 
     /**
@@ -358,44 +337,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
-     * @param AddressInterface $address
-     * @param string $type
-     *
-     * @return array
-     */
-    private function comparePreFilledAddress(AddressInterface $address, $type)
-    {
-        $diff = [];
-        $preFilledAddress = $this->getPreFilledAddress($type);
-
-        if ($address->getCity() !== $preFilledAddress->getCity()) {
-            $diff['city'] = ['got' => $preFilledAddress->getCity(), 'expected' => $address->getCity()];
-        }
-
-        if ($address->getFirstName() !== $preFilledAddress->getFirstName()) {
-            $diff['first_name'] = ['got' => $preFilledAddress->getFirstName(), 'expected' => $address->getFirstName()];
-        }
-
-        if ($address->getLastName() !== $preFilledAddress->getLastName()) {
-            $diff['last_name'] = ['got' => $preFilledAddress->getLastName(), 'expected' => $address->getLastName()];
-        }
-
-        if ($address->getStreet() !== $preFilledAddress->getStreet()) {
-            $diff['street'] = ['got' => $preFilledAddress->getStreet(), 'expected' => $address->getStreet()];
-        }
-
-        if ($address->getCountryCode() !== $preFilledAddress->getCountryCode()) {
-            $diff['country_code'] = ['got' => $preFilledAddress->getCountryCode(), 'expected' => $address->getCountryCode()];
-        }
-
-        if ($address->getPostcode() !== $preFilledAddress->getPostcode()) {
-            $diff['postcode'] = ['got' => $preFilledAddress->getPostcode(), 'expected' => $address->getPostcode()];
-        }
-
-        return $diff;
-    }
-
-    /**
      * @param string $type
      *
      * @return AddressInterface
@@ -413,8 +354,30 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $address->setCountryCode($this->getElement(sprintf('%s_country', $type))->getValue());
         $address->setCity($this->getElement(sprintf('%s_city', $type))->getValue());
         $address->setPostcode($this->getElement(sprintf('%s_postcode', $type))->getValue());
+        $address->setProvinceName($this->getElement(sprintf('%s_province', $type))->getValue());
 
         return $address;
+    }
+
+    /**
+     * @param AddressInterface $address
+     * @param string $type
+     */
+    private function specifyAddress(AddressInterface $address, $type)
+    {
+        $this->assertAddressType($type);
+
+        $this->getElement(sprintf('%s_first_name', $type))->setValue($address->getFirstName());
+        $this->getElement(sprintf('%s_last_name', $type))->setValue($address->getLastName());
+        $this->getElement(sprintf('%s_street', $type))->setValue($address->getStreet());
+        $this->getElement(sprintf('%s_country', $type))->selectOption($address->getCountryCode() ?: 'Select');
+        $this->getElement(sprintf('%s_city', $type))->setValue($address->getCity());
+        $this->getElement(sprintf('%s_postcode', $type))->setValue($address->getPostcode());
+
+        if (null !== $address->getProvinceName()) {
+            $this->waitForElement(5, sprintf('%s_province', $type));
+            $this->getElement(sprintf('%s_province', $type))->setValue($address->getProvinceName());
+        }
     }
 
     /**
@@ -461,8 +424,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     {
         $availableTypes = [self::TYPE_BILLING, self::TYPE_SHIPPING];
 
-        if (!in_array($type, $availableTypes, true)) {
-            throw new \InvalidArgumentException(sprintf('There are only two available types %s, %s. %s given', self::TYPE_BILLING, self::TYPE_SHIPPING, $type));
-        }
+        Assert::oneOf($type, $availableTypes, sprintf('There are only two available types %s, %s. %s given', self::TYPE_BILLING, self::TYPE_SHIPPING, $type));
     }
 }

@@ -1,10 +1,5 @@
 <div id="sylius-shipping-address">
-    <div class="ui floating dropdown labeled search icon button">
-        <i class="home icon"></i>
-        <span class="text">{{ 'sylius.select_address' }}</span>
-        <div class="menu">
-        </div>
-    </div>
+    {% include '@SyliusShop/Checkout/_addressBookSelect.html.twig' %}
     {% if form.customer.email is defined %}
         <div class="one field" id="sylius-api-login">
             {{ form_row(form.customer.email) }}
@@ -24,12 +19,7 @@
 </div>
 
 <div id="sylius-billing-address">
-    <div class="ui floating dropdown labeled search icon button">
-        <i class="home icon"></i>
-        <span class="text">{{ 'sylius.select_address' }}</span>
-        <div class="menu">
-        </div>
-    </div>
+    {% include '@SyliusShop/Checkout/_addressBookSelect.html.twig' %}
     <div class="ui hidden divider"></div>
     <h3 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h3>
     {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order} %}

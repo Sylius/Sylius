@@ -12,13 +12,13 @@
         addressBook: function () {
             var element = $(this);
             var addresses = [];
-            var select = element.find('.ui.dropdown');
+            var select = element.find('.address-book-select');
 
             select.dropdown({
                 apiSettings: {
-                    on: 'click',
                     action: 'address book',
                     cache: false,
+
                     onResponse: function (syliusResponse) {
                         var response = {
                             success: true,
@@ -27,6 +27,7 @@
 
                         $.each(syliusResponse, function (index, address) {
                             addresses.push(address);
+                            console.log(address);
                             response.results.push({
                                 name: address.city + ' ' + address.street,
                                 value: address.id
@@ -43,7 +44,7 @@
                     })[0];
 
                     $.each(selectedAddress, function (key, property) {
-                        element.find('input[id*='+ parseKey(key) +']').val(property);
+                        element.find('input[name*='+ parseKey(key) +']').val(property);
                     });
                 }
             });
