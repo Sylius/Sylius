@@ -110,5 +110,8 @@
       method: 'POST',
       throttle: 500
     });
+
+    $('#sylius-shipping-address').addressBook();
+    $('#sylius-billing-address').addressBook();
   });
 })(jQuery);

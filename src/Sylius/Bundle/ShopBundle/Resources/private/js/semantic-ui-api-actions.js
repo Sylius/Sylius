@@ -13,6 +13,7 @@
     $.fn.api.settings.api = {
         'user check': '/user-check',
         'login check': '/login-check',
-        'cart': '/cart'
+        'cart': '/cart',
+        'address book': '/account/address-book?_format=json'
     };
 })(jQuery);
