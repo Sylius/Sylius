@@ -144,6 +144,22 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When I search for product with name :name
+     */
+    public function iSearchForProductWithName($name)
+    {
+        $this->taxonShowPage->search($name);
+    }
+
+    /**
+     * @When I clear filters
+     */
+    public function iClearFilters()
+    {
+        $this->taxonShowPage->clearFilters();
+    }
+
+    /**
      * @Then I should see the product :productName
      */
     public function iShouldSeeProduct($productName)

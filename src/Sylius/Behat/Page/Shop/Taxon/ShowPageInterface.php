@@ -52,4 +52,11 @@ interface ShowPageInterface
      * @return string
      */
     public function getFirstProductNameFromList();
+
+    /**
+     * @param string $name
+     */
+    public function search($name);
+
+    public function clearFilters();
 }

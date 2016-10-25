@@ -82,4 +82,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         return $productsList->find('css', '.content > a')->getText();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function search($name)
+    {
+        $this->getDocument()->fillField('Value', $name);
+        $this->getDocument()->pressButton('Search');
+    }
+
+    public function clearFilters()
+    {
+        $this->getDocument()->pressButton('Clear filters');
+    }
 }
