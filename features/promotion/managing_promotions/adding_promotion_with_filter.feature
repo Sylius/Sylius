@@ -43,6 +43,18 @@ Feature: Adding promotion with filter
         And the "$10 discount for all T-Shirts!" promotion should appear in the registry
 
     @ui @javascript
+    Scenario: Adding a promotion with fixed discount for PHP T-Shirt
+        Given the store has a product "PHP T-Shirt" priced at "$100.00"
+        And I want to create a new promotion
+        When I specify its code as "10_for_php_t_shirt"
+        And I name it "$10 discount for PHP T-Shirts!"
+        And I add the "Item fixed discount" action configured with amount of "$10"
+        And I specify that this action should be applied to the "PHP T-Shirt" product
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the "$10 discount for PHP T-Shirts!" promotion should appear in the registry
+
+    @ui @javascript
     Scenario: Adding a promotion with item percentage discount only for products over 10
         Given I want to create a new promotion
         When I specify its code as "10_for_all_products_over_10"
@@ -75,3 +87,15 @@ Feature: Adding promotion with filter
         And I add it
         Then I should be notified that it has been successfully created
         And the "$10 discount for all T-Shirts!" promotion should appear in the registry
+
+    @ui @javascript
+    Scenario: Adding a promotion with 10% percentage discount for PHP T-Shirt
+        Given the store has a product "PHP T-Shirt" priced at "$100.00"
+        And I want to create a new promotion
+        When I specify its code as "10_for_php_t_shirt"
+        And I name it "10% discount for PHP T-Shirts!"
+        And I add the "Item percentage discount" action configured with a percentage value of 10%
+        And I specify that this action should be applied to the "PHP T-Shirt" product
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the "10% discount for PHP T-Shirts!" promotion should appear in the registry

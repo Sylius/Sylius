@@ -555,6 +555,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I specify that this action should be applied to the :productName product
+     */
+    public function iSpecifyThatThisActionShouldBeAppliedToTheProduct($productName)
+    {
+        $this->createPage->selectFilterOption('Products', $productName);
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */
