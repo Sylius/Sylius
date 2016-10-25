@@ -1320,7 +1320,9 @@ final class CheckoutContext implements Context
      */
     public function iShouldHaveThisAddressFilledAsShippingAddress(AddressInterface $address)
     {
-        Assert::eq($address, $this->addressPage->getPreFilledShippingAddress());
+        foreach ($this->addressPage->comparePreFilledShippingAddress($address) as $key => $diff) {
+            throw new \InvalidArgumentException(sprintf('Property %s expected %s, got %s', $key, $diff['expected'], $diff['got']));
+        }
     }
 
     /**
@@ -1328,7 +1330,9 @@ final class CheckoutContext implements Context
      */
     public function iShouldHaveThisAddressFilledAsBillingAddress(AddressInterface $address)
     {
-        Assert::eq($address, $this->addressPage->getPreFilledBillingAddress());
+        foreach ($this->addressPage->comparePreFilledBillingAddress($address) as $key => $diff) {
+            throw new \InvalidArgumentException(sprintf('Property %s expected %s, got %s', $key, $diff['expected'], $diff['got']));
+        }
     }
 
     /**

@@ -121,12 +121,16 @@ interface AddressPageInterface extends SymfonyPageInterface
     public function selectBillingAddressFromAddressBook(AddressInterface $address);
 
     /**
-     * @return AddressInterface
+     * @param AddressInterface $address
+     *
+     * @return array
      */
-    public function getPreFilledShippingAddress();
+    public function comparePreFilledShippingAddress(AddressInterface $address);
 
     /**
-     * @return AddressInterface
+     * @param AddressInterface $address
+     *
+     * @return array
      */
-    public function getPreFilledBillingAddress();
+    public function comparePreFilledBillingAddress(AddressInterface $address);
 }

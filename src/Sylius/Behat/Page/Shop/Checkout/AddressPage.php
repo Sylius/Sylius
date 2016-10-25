@@ -28,6 +28,9 @@ use Webmozart\Assert\Assert;
  */
 class AddressPage extends SymfonyPage implements AddressPageInterface
 {
+    const TYPE_BILLING = 'billing';
+    const TYPE_SHIPPING = 'shipping';
+
     /**
      * @var AddressFactoryInterface
      */
@@ -306,36 +309,18 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * @inheritDoc
      */
-    public function getPreFilledShippingAddress()
+    public function comparePreFilledShippingAddress(AddressInterface $address)
     {
-        /** @var AddressInterface $address */
-        $address = $this->addressFactory->createNew();
 
-        $address->setFirstName($this->getElement('shipping_first_name')->getValue());
-        $address->setLastName($this->getElement('shipping_last_name')->getValue());
-        $address->setStreet($this->getElement('shipping_street')->getValue());
-        $address->setCountryCode($this->getElement('shipping_country')->getValue());
-        $address->setCity($this->getElement('shipping_city')->getValue());
-        $address->setPostcode($this->getElement('shipping_postcode')->getValue());
-
-        return $address;
+        return $this->comparePreFilledAddress($address, self::TYPE_SHIPPING);
     }
 
     /**
      * @inheritDoc
      */
-    public function getPreFilledBillingAddress()
+    public function comparePreFilledBillingAddress(AddressInterface $address)
     {
-        $address = $this->addressFactory->createNew();
-
-        $address->setFirstName($this->getElement('billing_first_name')->getValue());
-        $address->setLastName($this->getElement('billing_last_name')->getValue());
-        $address->setStreet($this->getElement('billing_street')->getValue());
-        $address->setCountryCode($this->getElement('billing_country')->getValue());
-        $address->setCity($this->getElement('billing_city')->getValue());
-        $address->setPostcode($this->getElement('billing_postcode')->getValue());
-
-        return $address;
+        return $this->comparePreFilledAddress($address, self::TYPE_BILLING);
     }
 
     /**
@@ -373,6 +358,66 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     }
 
     /**
+     * @param AddressInterface $address
+     * @param string $type
+     *
+     * @return array
+     */
+    private function comparePreFilledAddress(AddressInterface $address, $type)
+    {
+        $diff = [];
+        $preFilledAddress = $this->getPreFilledAddress($type);
+
+        if ($address->getCity() !== $preFilledAddress->getCity()) {
+            $diff['city'] = ['got' => $preFilledAddress->getCity(), 'expected' => $address->getCity()];
+        }
+
+        if ($address->getFirstName() !== $preFilledAddress->getFirstName()) {
+            $diff['first_name'] = ['got' => $preFilledAddress->getFirstName(), 'expected' => $address->getFirstName()];
+        }
+
+        if ($address->getLastName() !== $preFilledAddress->getLastName()) {
+            $diff['last_name'] = ['got' => $preFilledAddress->getLastName(), 'expected' => $address->getLastName()];
+        }
+
+        if ($address->getStreet() !== $preFilledAddress->getStreet()) {
+            $diff['street'] = ['got' => $preFilledAddress->getStreet(), 'expected' => $address->getStreet()];
+        }
+
+        if ($address->getCountryCode() !== $preFilledAddress->getCountryCode()) {
+            $diff['country_code'] = ['got' => $preFilledAddress->getCountryCode(), 'expected' => $address->getCountryCode()];
+        }
+
+        if ($address->getPostcode() !== $preFilledAddress->getPostcode()) {
+            $diff['postcode'] = ['got' => $preFilledAddress->getPostcode(), 'expected' => $address->getPostcode()];
+        }
+
+        return $diff;
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return AddressInterface
+     */
+    private function getPreFilledAddress($type)
+    {
+        $this->assertAddressType($type);
+
+        /** @var AddressInterface $address */
+        $address = $this->addressFactory->createNew();
+
+        $address->setFirstName($this->getElement(sprintf('%s_first_name', $type))->getValue());
+        $address->setLastName($this->getElement(sprintf('%s_last_name', $type))->getValue());
+        $address->setStreet($this->getElement(sprintf('%s_street', $type))->getValue());
+        $address->setCountryCode($this->getElement(sprintf('%s_country', $type))->getValue());
+        $address->setCity($this->getElement(sprintf('%s_city', $type))->getValue());
+        $address->setPostcode($this->getElement(sprintf('%s_postcode', $type))->getValue());
+
+        return $address;
+    }
+
+    /**
      * @param string $element
      *
      * @return NodeElement|null
@@ -407,5 +452,17 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         return $this->getDocument()->waitFor($timeout, function () use ($elementName){
             return $this->hasElement($elementName);
         });
+    }
+
+    /**
+     * @param string $type
+     */
+    private function assertAddressType($type)
+    {
+        $availableTypes = [self::TYPE_BILLING, self::TYPE_SHIPPING];
+
+        if (!in_array($type, $availableTypes, true)) {
+            throw new \InvalidArgumentException(sprintf('There are only two available types %s, %s. %s given', self::TYPE_BILLING, self::TYPE_SHIPPING, $type));
+        }
     }
 }
