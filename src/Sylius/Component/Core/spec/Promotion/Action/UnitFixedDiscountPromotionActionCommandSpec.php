@@ -34,9 +34,10 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function let(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
-        FilterInterface $taxonFilter
+        FilterInterface $taxonFilter,
+        FilterInterface $productFilter
     ) {
-        $this->beConstructedWith($adjustmentFactory, $priceRangeFilter, $taxonFilter);
+        $this->beConstructedWith($adjustmentFactory, $priceRangeFilter, $taxonFilter, $productFilter);
     }
 
     function it_is_initializable()
@@ -53,29 +54,23 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
+        FilterInterface $productFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
         Collection $units,
         OrderInterface $order,
         OrderItemInterface $orderItem1,
-        OrderItemInterface $orderItem2,
-        OrderItemInterface $orderItem3,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($originalItems);
-        $originalItems->toArray()->willReturn([$orderItem1, $orderItem2, $orderItem3]);
+        $originalItems->toArray()->willReturn([$orderItem1]);
 
-        $priceRangeFilter
-            ->filter([$orderItem1, $orderItem2, $orderItem3], ['amount' => 500, 'filters' => ['taxons' => ['testTaxon']]])
-            ->willReturn([$orderItem1, $orderItem2])
-        ;
-        $taxonFilter
-            ->filter([$orderItem1, $orderItem2], ['amount' => 500, 'filters' => ['taxons' => ['testTaxon']]])
-            ->willReturn([$orderItem1])
-        ;
+        $priceRangeFilter->filter([$orderItem1], ['amount' => 500])->willReturn([$orderItem1]);
+        $taxonFilter->filter([$orderItem1], ['amount' => 500])->willReturn([$orderItem1]);
+        $productFilter->filter([$orderItem1], ['amount' => 500])->willReturn([$orderItem1]);
 
         $orderItem1->getQuantity()->willReturn(2);
         $orderItem1->getUnits()->willReturn($units);
@@ -103,7 +98,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
 
-        $this->execute($order, ['amount' => 500, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
+        $this->execute($order, ['amount' => 500], $promotion);
     }
 
     function it_does_not_apply_promotions_with_amount_0(
@@ -118,36 +113,30 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $unit1->addAdjustment(Argument::any())->shouldNotBeCalled();
         $unit2->addAdjustment(Argument::any())->shouldNotBeCalled();
 
-        $this->execute($order, ['amount' => 0, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
+        $this->execute($order, ['amount' => 0], $promotion);
     }
 
     function it_does_not_apply_bigger_promotions_than_unit_total(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
+        FilterInterface $productFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
         Collection $units,
         OrderInterface $order,
         OrderItemInterface $orderItem1,
-        OrderItemInterface $orderItem2,
-        OrderItemInterface $orderItem3,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($originalItems);
-        $originalItems->toArray()->willReturn([$orderItem1, $orderItem2, $orderItem3]);
+        $originalItems->toArray()->willReturn([$orderItem1]);
 
-        $priceRangeFilter
-            ->filter([$orderItem1, $orderItem2, $orderItem3], ['amount' => 1000, 'filters' => ['taxons' => ['testTaxon']]])
-            ->willReturn([$orderItem1, $orderItem3])
-        ;
-        $taxonFilter
-            ->filter([$orderItem1, $orderItem3], ['amount' => 1000, 'filters' => ['taxons' => ['testTaxon']]])
-            ->willReturn([$orderItem1])
-        ;
+        $priceRangeFilter->filter([$orderItem1], ['amount' => 1000])->willReturn([$orderItem1]);
+        $taxonFilter->filter([$orderItem1], ['amount' => 1000])->willReturn([$orderItem1]);
+        $productFilter->filter([$orderItem1], ['amount' => 1000])->willReturn([$orderItem1]);
 
         $orderItem1->getQuantity()->willReturn(2);
         $orderItem1->getUnits()->willReturn($units);
@@ -175,7 +164,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
 
-        $this->execute($order, ['amount' => 1000, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
+        $this->execute($order, ['amount' => 1000], $promotion);
     }
 
     function it_throws_an_exception_if_passed_subject_to_execute_is_not_order(

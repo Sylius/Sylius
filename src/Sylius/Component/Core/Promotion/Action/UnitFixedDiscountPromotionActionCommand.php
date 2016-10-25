@@ -37,19 +37,27 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
     private $taxonFilter;
 
     /**
+     * @var FilterInterface
+     */
+    private $productFilter;
+
+    /**
      * @param FactoryInterface $adjustmentFactory
      * @param FilterInterface $priceRangeFilter
      * @param FilterInterface $taxonFilter
+     * @param FilterInterface $productFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
-        FilterInterface $taxonFilter
+        FilterInterface $taxonFilter,
+        FilterInterface $productFilter
     ) {
         parent::__construct($adjustmentFactory);
 
         $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;
+        $this->productFilter = $productFilter;
     }
 
     /**
@@ -67,6 +75,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
 
         $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration);
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
+        $filteredItems = $this->productFilter->filter($filteredItems, $configuration);
 
         foreach ($filteredItems as $item) {
             $this->setUnitsAdjustments($item, $configuration['amount'], $promotion);
