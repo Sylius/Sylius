@@ -17,19 +17,19 @@ First step is to create a new tax category.
         $repository = $this->container->get('sylius.repository.tax_category');
         $manager = $this->container->get('sylius.manager.tax_category');
 
-        $clothing = $repository
+        $cloudServerTaxCategory = $repository
             ->createNew()
-            ->setName('Clothing')
-            ->setDescription('T-Shirts and this kind of stuff.')
+            ->setName('Cloud Server')
+            ->setDescription('Cloud computing.')
         ;
-        $food = $repository
+        $sharedHostingTaxCategory = $repository
             ->createNew()
-            ->setName('Food')
-            ->setDescription('Yummy!')
+            ->setName('Shared Hosting')
+            ->setDescription('Shared hosting is not really great for you!')
         ;
 
-        $manager->persist($clothing);
-        $manager->persist($food);
+        $manager->persist($cloudServerTaxCategory);
+        $manager->persist($sharedHostingTaxCategory);
 
         $manager->flush();
     }
@@ -45,24 +45,29 @@ Second thing to do is to classify the taxables, in our example we'll get two pro
 
     public function configureAction()
     {
-        $tshirt = // ...
-        $banana = // ... Some logic behind loading entities.
-
         $repository = $this->container->get('sylius.repository.tax_category');
 
-        $clothing = $repository->findOneBy(array('name' => 'Clothing'));
-        $food = $repository->findOneBy(array('name' => 'Food'));
+        $cloudServerTaxCategory = $repository->findOneBy(array('name' => 'Cloud Server'));
+        $sharedHostingTaxCategory = $repository->findOneBy(array('name' => 'Shared Hosting'));
 
-        $tshirt->setTaxCategory($clothing);
-        $food->setTaxCategory($food);
+        $digitalOcean = new Server();
+        $taxCategory->setName('Digital Ocean');
+        $taxCategory->setTaxCategory($cloudServerTaxCategory);
 
-        // Save the product entities.
+        $goDaddy = new Server();
+        $taxCategory->setName('GoDaddy');
+        $taxCategory->setTaxCategory($sharedHostingTaxCategory);
+
+        $manager->persist($digitalOcean);
+        $manager->persist($goDaddy);
+
+        $manager->flush();
     }
 
 Configuring the tax rates
 -------------------------
 
-Finally, you have to create appropriate tax rates for each of categories.
+Finally, you have to create appropriate tax rates for each of categories and assign tax calculator, in this case ``app.server_tax`` (which we will create in one of the following chapters).
 
 .. code-block:: php
 
@@ -70,27 +75,26 @@ Finally, you have to create appropriate tax rates for each of categories.
 
     public function configureAction()
     {
-        $taxCategoryRepository = $this->container->get('sylius.repository.tax_category');
-
-        $clothing = $taxCategoryRepository->findOneBy(array('name' => 'Clothing'));
-        $food = $taxCategoryRepository->findOneBy(array('name' => 'Food'));
+        //... continue
 
         $repository = $this->container->get('sylius.repository.tax_rate');
         $manager = $this->container->get('sylius.repository.tax_rate');
 
-        $clothingTax = $repository
+        $cloudServerTax = $repository
             ->createNew()
-            ->setName('Clothing Tax')
-            ->setAmount(0,08)
+            ->setName('Cloud Server Tax')
+            ->setCalculator('app.server_tax')
+            ->setAmount(0,15);
         ;
-        $foodTax = $repository
+        $sharedHostingTax = $repository
             ->createNew()
-            ->setName('Food')
-            ->setAmount(0,12)
+            ->setName('Shared Hosting Tax')
+            ->setCalculator('app.server_tax')
+            ->setAmount(0,08);
         ;
 
-        $manager->persist($clothingTax);
-        $manager->persist($foodTax);
+        $manager->persist($cloudServerTax);
+        $manager->persist($sharedHostingTax);
 
         $manager->flush();
     }
