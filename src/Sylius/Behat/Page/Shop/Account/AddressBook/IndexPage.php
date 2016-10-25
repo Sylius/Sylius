@@ -55,6 +55,25 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
+    public function addressOfContains($fullName, $value)
+    {
+        $address = $this->getAddressOf($fullName);
+
+        return $address->has('css', sprintf('address:contains("%s")', $value));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function editAddress($fullName)
+    {
+        $addressToEdit = $this->getAddressOf($fullName);
+        $addressToEdit->findLink('Edit')->press();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function deleteAddress($fullName)
     {
         $addressToDelete = $this->getAddressOf($fullName);

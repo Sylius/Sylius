@@ -15,7 +15,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\AddressBook\CreatePageInterface;
 use Sylius\Behat\Page\Shop\Account\AddressBook\IndexPageInterface;
+use Sylius\Behat\Page\Shop\Account\AddressBook\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Webmozart\Assert\Assert;
 
@@ -25,6 +27,11 @@ use Webmozart\Assert\Assert;
  */
 final class AddressBookContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var IndexPageInterface
      */
@@ -36,23 +43,53 @@ final class AddressBookContext implements Context
     private $addressBookCreatePage;
 
     /**
+     * @var UpdatePageInterface
+     */
+    private $addressBookUpdatePage;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $addressBookIndexPage
      * @param CreatePageInterface $addressBookCreatePage
+     * @param UpdatePageInterface $addressBookUpdatePage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         IndexPageInterface $addressBookIndexPage,
         CreatePageInterface $addressBookCreatePage,
+        UpdatePageInterface $addressBookUpdatePage,
         NotificationCheckerInterface $notificationChecker
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->addressBookIndexPage = $addressBookIndexPage;
         $this->addressBookCreatePage = $addressBookCreatePage;
+        $this->addressBookUpdatePage = $addressBookUpdatePage;
         $this->notificationChecker = $notificationChecker;
+    }
+
+    /**
+     * @Given /^I am editing the address of "([^"]+)"$/
+     */
+    public function iEditAddressOf($fullName)
+    {
+        $this->sharedStorage->set('full_name', $fullName);
+
+        $this->addressBookIndexPage->open();
+        $this->addressBookIndexPage->editAddress($fullName);
+    }
+
+    /**
+     * @Given I want to add a new address to my address book
+     */
+    public function iWantToAddANewAddressToMyAddressBook()
+    {
+        $this->addressBookCreatePage->open();
     }
 
     /**
@@ -64,11 +101,35 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Given I want to add a new address to my address book
+     * @When I specify :provinceName as my province
      */
-    public function iWantToAddANewAddressToMyAddressBook()
+    public function iSpecifyAsMyProvince($provinceName)
     {
-        $this->addressBookCreatePage->open();
+        $this->addressBookUpdatePage->specifyProvince($provinceName);
+    }
+
+    /**
+     * @When I choose :provinceName as my province
+     */
+    public function iChooseAsMyProvince($provinceName)
+    {
+        $this->addressBookUpdatePage->selectProvince($provinceName);
+    }
+
+    /**
+     * @When I choose :countryName as my country
+     */
+    public function iChooseAsMyCountry($countryName)
+    {
+        $this->addressBookUpdatePage->selectCountry($countryName);
+    }
+
+    /**
+     * @When /^I change my ([^"]+) to "([^"]+)"$/
+     */
+    public function iChangeMyTo($field, $value)
+    {
+        $this->addressBookUpdatePage->fillField($field, $value);
     }
 
     /**
@@ -84,7 +145,15 @@ final class AddressBookContext implements Context
      */
     public function iAddIt()
     {
-        $this->addressBookCreatePage->saveAddress();
+        $this->addressBookCreatePage->addAddress();
+    }
+
+    /**
+     * @When I save my changed address
+     */
+    public function iSaveChangedAddress()
+    {
+        $this->addressBookUpdatePage->saveChanges();
     }
 
     /**
@@ -96,6 +165,16 @@ final class AddressBookContext implements Context
     }
 
     /**
+     * @Then /^it should contain "([^"]+)"$/
+     */
+    public function itShouldContain($value)
+    {
+        $fullName = $this->sharedStorage->get('full_name');
+
+        $this->addressBookIndexPage->addressOfContains($fullName, $value);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully deleted
      */
     public function iShouldBeNotifiedAboutSuccessfulDelete()
@@ -104,7 +183,15 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then I should see a single address in my book
+     * @Then I should be notified that it has been successfully updated
+     */
+    public function iShouldBeNotifiedAboutSuccessfulUpdate()
+    {
+        $this->notificationChecker->checkNotification('Address has been successfully updated.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should( still) see a single address in my book
      */
     public function iShouldSeeASingleAddressInTheList()
     {

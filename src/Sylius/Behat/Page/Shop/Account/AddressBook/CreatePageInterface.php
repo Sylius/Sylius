@@ -24,5 +24,5 @@ interface CreatePageInterface extends SymfonyPageInterface
      */
     public function fillAddressData(AddressInterface $address);
     
-    public function saveAddress();
+    public function addAddress();
 }

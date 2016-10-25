@@ -38,6 +38,19 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     /**
      * @param string $fullName
+     * @param string $value
+     *
+     * @return bool
+     */
+    public function addressOfContains($fullName, $value);
+
+    /**
+     * @param string $fullName
+     */
+    public function editAddress($fullName);
+
+    /**
+     * @param string $fullName
      */
     public function deleteAddress($fullName);
 }

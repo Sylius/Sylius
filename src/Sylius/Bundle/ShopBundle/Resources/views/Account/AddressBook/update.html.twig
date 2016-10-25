@@ -8,7 +8,7 @@
             {{ 'sylius.ui.address_book'|trans }}
             <div class="sub header">{{ 'sylius.ui.add_address'|trans }}</div>
         </h1>
-        {{ form_start(form, {'action': path('sylius_shop_account_address_book_create'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {'action': path('sylius_shop_account_address_book_update', {'id': address.id}), 'method': 'PUT', 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
 
         {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
 
@@ -20,7 +20,7 @@
             </div>
             <div class="right aligned column">
                 <button type="submit" class="ui large icon labeled blue button">
-                    <i class="icon plus"></i> {{ 'sylius.ui.add'|trans }}
+                    <i class="icon save"></i> {{ 'sylius.ui.save_changes'|trans }}
                 </button>
             </div>
         </div>

@@ -32,6 +32,19 @@ sylius_shop_account_address_book_create:
                 parameters: {}
             flash: sylius.ui.address_has_been_successfully_added
 
+sylius_shop_account_address_book_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.address:updateAction
+        _sylius:
+            template: SyliusShopBundle:Account/AddressBook:update.html.twig
+            section: shop_account
+            redirect:
+                route: sylius_shop_account_address_book_index
+                parameters: {}
+            form: sylius_address
+
 sylius_shop_account_address_book_delete:
     path: /{id}
     methods: [DELETE]

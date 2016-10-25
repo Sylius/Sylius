@@ -43,9 +43,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function saveAddress()
+    public function addAddress()
     {
-        $this->getElement('save_button')->press();
+        $this->getElement('add_button')->press();
     }
 
     /**
@@ -59,7 +59,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
             'first_name' => '#sylius_address_firstName',
             'last_name' => '#sylius_address_lastName',
             'postcode' => '#sylius_address_postcode',
-            'save_button' => 'button:contains("Save")',
+            'add_button' => 'button:contains("Add")',
             'street' => '#sylius_address_street',
         ]);
     }
