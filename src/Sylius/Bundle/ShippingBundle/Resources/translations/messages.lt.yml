@@ -39,3 +39,4 @@ sylius:
             enabled: Įjungta
             name: Pavadinimas
             tax_category: Mokesčių kategorija
+            translations: Vertimai

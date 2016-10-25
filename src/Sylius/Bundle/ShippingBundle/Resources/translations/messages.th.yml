@@ -52,3 +52,4 @@ sylius:
             name: ชื่อ
             tax_category: ประเภทภาษี
             translations: การแปลภาษา
+            position: ตำแหน่ง

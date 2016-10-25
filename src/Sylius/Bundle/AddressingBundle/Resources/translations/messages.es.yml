@@ -33,7 +33,7 @@ sylius:
                 province: Provincia
                 zone: Zona
             scope: Alcance
-            select: Selecciona
+            select: Seleccionar
             select_scope: Seleccione ámbito
         zone_member:
-            select: Selecciona
+            select: Seleccionar

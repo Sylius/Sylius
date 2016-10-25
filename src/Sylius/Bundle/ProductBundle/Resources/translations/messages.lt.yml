@@ -10,10 +10,15 @@ sylius:
             options: Parinktys
             meta_keywords: Meta raktažodžiai
             meta_description: Meta aprašymas
+            taxons: Taksonai
         product_variant:
             available_on: Prieinamas nuo
+            available_until: Prieinamas iki
         association_type:
             name: Pavadinimas
+        association:
+            type: Sąryšio tipas
+            product: Susijusi prekė
         variant:
             name: Pavadinimas
         option:

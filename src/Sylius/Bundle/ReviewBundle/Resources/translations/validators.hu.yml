@@ -9,5 +9,3 @@ sylius:
             not_blank: Ellenőrizned kell az értékelés értékét.
         title:
             not_blank: Az értékelés címe nem lehet üres.
-            min_length: Az értékelés címének legalább 2 karakternek kell lennie
-            max_length: Az értékelés címe maximum 255 karakter lehet

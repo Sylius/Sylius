@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Typy asociace
                     attributes: Atributy
                     header: Katalog
                     options: Možnosti

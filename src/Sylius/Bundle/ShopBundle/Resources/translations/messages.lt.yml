@@ -5,4 +5,9 @@ sylius:
     menu:
         shop:
             account:
-                dashboard: Skydelis
+                address_book: Adresų knyga
+                change_password: Keisti slaptažodį
+                dashboard: Prietaisų skydelis
+                header: Jūsų paskyra
+                order_history: Užsakymų istorija
+                personal_information: Asmeninė informacija

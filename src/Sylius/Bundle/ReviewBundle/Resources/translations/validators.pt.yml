@@ -9,5 +9,3 @@ sylius:
             not_blank: Deve verificar a classificação da avaliação.
         title:
             not_blank: O título da avaliação não deve estar vazio.
-            min_length: Revisão de título deve ter pelo menos 2 caracteres
-            max_length: O título da avaliação não deve ter mais que 255 caracteres

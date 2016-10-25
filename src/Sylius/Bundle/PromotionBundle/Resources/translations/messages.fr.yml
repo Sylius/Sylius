@@ -14,18 +14,35 @@ sylius:
             name: Nom
             rules: Règles
             starts_at: Commence le
+            usage_limit: Limite d'utilisation
         promotion_action:
             fixed_discount_configuration:
                 amount: Montant
+            percentage_discount_configuration:
+                percentage: Pourcentage
             type: Type
+        promotion_coupon:
+            expires_at: Expire le
+            usage_limit: Limite d'utilisation
         promotion_coupon_generator_instruction:
             amount: Montant
+            code_length: Longueur du code
+            expires_at: Expire le
+            usage_limit: Limite d'utilisation
         promotion_rule:
             cart_quantity_configuration:
                 count: Nombre
                 equal: Egal
+            contains_product_configuration:
+                exclude: Exclure
+                variants: Produits
             item_total_configuration:
                 amount: Montant
+            nth_order_configuration:
+                nth: Nième
             shipping_country_configuration:
                 country: Pays
+            taxonomy_configuration:
+                exclude: Exclure
+                taxons: Taxons
             type: Type

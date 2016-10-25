@@ -21,5 +21,6 @@ sylius:
             min_length: O código do cupão deve ter pelo menos 1 caracter.|O código do cupão deve ter pelo menos {{ limit }} caracteres.
             not_blank: Introduza o código do cupão promocional.
             unique: Este cupão já existe.
+        is_invalid: O código do cupão é inválido.
         usage_limit:
             min: O limite de uso do cupão deve ser de pelo menos {{ limit }}.

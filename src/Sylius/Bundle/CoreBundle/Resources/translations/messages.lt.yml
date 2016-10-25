@@ -112,6 +112,8 @@ sylius:
         promotion_rule:
             contains_taxon:
                 count: Kiekis
+            taxon:
+                taxons: Taksonai
             total_of_items_from_taxon:
                 amount: Suma
     installer:

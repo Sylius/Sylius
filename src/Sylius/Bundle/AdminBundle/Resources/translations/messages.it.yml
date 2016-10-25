@@ -6,10 +6,13 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Tipi di associazione
                     attributes: Attributi
                     header: Catalogo
                     options: Opzioni
+                    products: Prodotti
                 configuration:
+                    admin_users: Amministratori
                     channels: Canali
                     countries: Paesi
                     currencies: Monete
@@ -31,5 +34,6 @@ sylius:
                     header: Vendite
                     orders: Ordini
                 content:
+                    header: Contenuto
                     static_contents: Contenuti statici
                     routes: Rotte

@@ -5,8 +5,8 @@ sylius:
     menu:
         shop:
             account:
-                header: حساب کاربری شما
-                dashboard: داشبورد
-                personal_information: اطلاعات شخصی
                 change_password: تغییر رمز عبور
+                dashboard: داشبورد
+                header: حساب کاربری شما
                 order_history: تاریخچه سفارشات
+                personal_information: اطلاعات شخصی

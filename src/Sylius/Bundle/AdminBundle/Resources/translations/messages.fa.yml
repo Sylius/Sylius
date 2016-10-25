@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: انواع ارتباط ها
                     attributes: ویژگی‌ها
                     header: فهرست
                     options: گزینه‎ها

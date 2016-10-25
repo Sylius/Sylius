@@ -13,6 +13,8 @@ sylius:
             internal_name: Vidinis pavadinimas
             menu_nodes: Meniu elementai
             parent: Motininis elementas
+            publish_end_date: Publikavimo pabaigos data
+            publish_start_date: Publikavimo pradžios data
             publishable: Paskelbta
             routes: Maršrutai
             title: Pavadinimas

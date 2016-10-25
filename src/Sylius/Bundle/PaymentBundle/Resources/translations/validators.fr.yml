@@ -22,6 +22,8 @@ sylius:
     payment:
         currency_code:
             not_valid: Le code de devise que vous avez entré n’est pas valide.
+        method:
+            not_blank: Veuillez sélectionner un mode de paiement.
     payment_method:
         gateway:
             not_blank: Veuillez sélectionner la passerelle du moyen de paiement.

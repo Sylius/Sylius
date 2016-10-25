@@ -5,8 +5,8 @@ sylius:
     menu:
         shop:
             account:
-                header: Ditt konto
-                dashboard: Kontrollpanel
-                personal_information: Personlig information
                 change_password: Byt lösenord
+                dashboard: Kontrollpanel
+                header: Ditt konto
                 order_history: Orderhistorik
+                personal_information: Personlig information
