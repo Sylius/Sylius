@@ -9,16 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Gabi Udrescu <gabriel.udr@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class TaxonConfigurationType extends AbstractType
+class TaxonFilterConfigurationType extends AbstractType
 {
     /**
      * @var DataTransformerInterface
@@ -42,6 +43,7 @@ class TaxonConfigurationType extends AbstractType
             ->add('taxons', 'sylius_taxon_choice', [
                 'label' => 'sylius.form.promotion_rule.taxon.taxons',
                 'multiple' => true,
+                'required' => false,
             ])
         ;
 
@@ -53,6 +55,6 @@ class TaxonConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_taxon_configuration';
+        return 'sylius_promotion_action_filter_taxon_configuration';
     }
 }

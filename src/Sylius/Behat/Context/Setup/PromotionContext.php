@@ -570,7 +570,7 @@ final class PromotionContext implements Context
      */
     private function getTaxonFilterConfiguration(array $taxonCodes)
     {
-        return ['filters' => ['taxons' => $taxonCodes]];
+        return ['filters' => ['taxons_filter' => ['taxons' => $taxonCodes]]];
     }
 
     /**
@@ -581,9 +581,9 @@ final class PromotionContext implements Context
      */
     private function getPriceRangeFilterConfiguration($minAmount, $maxAmount = null)
     {
-        $configuration = ['filters' => ['price_range' => ['min' => $minAmount]]];
+        $configuration = ['filters' => ['price_range_filter' => ['min' => $minAmount]]];
         if (null !== $maxAmount) {
-            $configuration['filters']['price_range']['max'] = $maxAmount;
+            $configuration['filters']['price_range_filter']['max'] = $maxAmount;
         }
 
         return $configuration;

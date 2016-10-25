@@ -78,7 +78,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_fixed_discount_configuration';
+        return 'sylius_promotion_action_unit_fixed_discount_configuration';
     }
 
     /**

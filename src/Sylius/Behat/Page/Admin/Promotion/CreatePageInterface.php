@@ -96,4 +96,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @throws ElementNotFoundException
      */
     public function getValidationMessageForAction();
+
+    /**
+     * @param string $option
+     * @param string $value
+     * @param bool $multiple
+     */
+    public function selectFilterOption($option, $value, $multiple = false);
 }

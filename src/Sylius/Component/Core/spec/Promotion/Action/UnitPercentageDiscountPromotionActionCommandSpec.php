@@ -161,6 +161,6 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
 
     function it_has_a_configuration_form_type()
     {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_percentage_discount_configuration');
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_unit_percentage_discount_configuration');
     }
 }

@@ -234,6 +234,6 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
     function it_has_a_configuration_form_type()
     {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_fixed_discount_configuration');
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_unit_fixed_discount_configuration');
     }
 }

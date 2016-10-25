@@ -177,7 +177,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given /^I add the "([^"]+)" action configured with amount of ("(?:€|£|\$)[^"]+")$/
+     * @Given /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddTheActionConfiguredWithAmount($actionType, $amount)
     {
@@ -186,9 +186,42 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When /^I specify that this action should be applied to items with price greater then "(?:€|£|\$)([^"]+)"$/
+     */
+    public function iAddAMinPriceFilterRange($minimum)
+    {
+        $this->createPage->fillActionOption('Min', $minimum);
+    }
+
+    /**
+     * @When /^I specify that this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
+     */
+    public function iAddAMaxPriceFilterRange($maximum)
+    {
+        $this->createPage->fillActionOption('Max', $maximum);
+    }
+
+    /**
+     * @When /^I specify that this action should be applied to items with price between "(?:€|£|\$)([^"]+)" and "(?:€|£|\$)([^"]+)"$/
+     */
+    public function iAddAMinMaxPriceFilterRange($minimum, $maximum)
+    {
+        $this->iAddAMinPriceFilterRange($minimum);
+        $this->iAddAMaxPriceFilterRange($maximum);
+    }
+
+    /**
+     * @When I specify that this action should be applied to items from :taxonName category
+     */
+    public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory($taxonName)
+    {
+        $this->createPage->selectFilterOption('Taxon', $taxonName);
+
+    }
+
+    /**
      * @Given I add the :actionType action configured with a percentage value of :percentage%
      * @Given I add the :actionType action configured without a percentage value
-     *
      */
     public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
     {
@@ -236,6 +269,14 @@ final class ManagingPromotionsContext implements Context
     public function iShouldBeNotifiedThatIsRequired($element)
     {
         $this->assertFieldValidationMessage($element, sprintf('Please enter promotion %s.', $element));
+    }
+
+    /**
+     * @Then I should be notified that a :element value should be a numeric value
+     */
+    public function iShouldBeNotifiedThatAMinimalValueShouldBeNumeric($element)
+    {
+        $this->assertFieldValidationMessage($element, 'This value is not valid.');
     }
 
     /**
@@ -414,7 +455,7 @@ final class ManagingPromotionsContext implements Context
     public function iShouldBeNotifiedOfFailure()
     {
         $this->notificationChecker->checkNotification(
-            "Cannot delete, the promotion is in use.",
+            'Cannot delete, the promotion is in use.',
             NotificationType::failure()
         );
     }

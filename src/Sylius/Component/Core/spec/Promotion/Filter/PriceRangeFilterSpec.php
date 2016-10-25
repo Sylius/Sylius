@@ -49,7 +49,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         $item3Variant->getPrice()->willReturn(15000);
 
         $this
-            ->filter([$item1, $item2, $item3], ['filters' => ['price_range' => ['min' => 1000, 'max' => 10000]]])
+            ->filter([$item1, $item2, $item3], ['filters' => ['price_range_filter' => ['min' => 1000, 'max' => 10000]]])
             ->shouldReturn([$item2])
         ;
     }
@@ -67,7 +67,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         $item2Variant->getPrice()->willReturn(15000);
 
         $this
-            ->filter([$item1, $item2], ['filters' => ['price_range' => ['min' => 1000, 'max' => 10000]]])
+            ->filter([$item1, $item2], ['filters' => ['price_range_filter' => ['min' => 1000, 'max' => 10000]]])
             ->shouldReturn([$item1])
         ;
     }
@@ -85,7 +85,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         $item2Variant->getPrice()->willReturn(10000);
 
         $this
-            ->filter([$item1, $item2], ['filters' => ['price_range' => ['min' => 1000, 'max' => 10000]]])
+            ->filter([$item1, $item2], ['filters' => ['price_range_filter' => ['min' => 1000, 'max' => 10000]]])
             ->shouldReturn([$item2])
         ;
     }
@@ -107,7 +107,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         $item3Variant->getPrice()->willReturn(10000);
 
         $this
-            ->filter([$item1, $item2, $item3], ['filters' => ['price_range' => ['min' => 1000]]])
+            ->filter([$item1, $item2, $item3], ['filters' => ['price_range_filter' => ['min' => 1000]]])
             ->shouldReturn([$item2, $item3])
         ;
     }
@@ -125,7 +125,7 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         $item2Variant->getPrice()->willReturn(1000);
 
         $this
-            ->filter([$item1, $item2], ['filters' => ['price_range' => ['min' => 1000]]])
+            ->filter([$item1, $item2], ['filters' => ['price_range_filter' => ['min' => 1000]]])
             ->shouldReturn([$item2])
         ;
     }
@@ -133,6 +133,6 @@ final class PriceRangeFilterSpec extends ObjectBehavior
     function it_returns_all_items_if_configuration_is_invalid(OrderItemInterface $item1, OrderItemInterface $item2)
     {
         $this->filter([$item1, $item2], [])->shouldReturn([$item1, $item2]);
-        $this->filter([$item1, $item2], ['filters' => ['price_range' => ['max' => 10000]]])->shouldReturn([$item1, $item2]);
+        $this->filter([$item1, $item2], ['filters' => ['price_range_filter' => ['max' => 10000]]])->shouldReturn([$item1, $item2]);
     }
 }

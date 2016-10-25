@@ -142,12 +142,22 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function selectFilterOption($option, $value, $multiple = false)
+    {
+        $this->getLastAddedCollectionItem('actions')->find('named', array('select', $option))->selectOption($value, $multiple);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return [
             'actions' => '#sylius_promotion_actions',
             'code' => '#sylius_promotion_code',
             'ends_at' => '#sylius_promotion_endsAt',
+            'minimum' => '#sylius_promotion_actions_0_configuration_filters_price_range_filter_min',
+            'maximum' => '#sylius_promotion_actions_0_configuration_filters_price_range_filter_max',
             'name' => '#sylius_promotion_name',
             'rules' => '#sylius_promotion_rules',
             'starts_at' => '#sylius_promotion_startsAt',
