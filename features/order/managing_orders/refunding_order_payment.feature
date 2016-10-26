@@ -14,7 +14,6 @@ Feature: Refunding order payment
         And the customer bought a single "Green Arrow"
         And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And this order is already paid
-        And this order has already been shipped
         And I am logged in as an administrator
         And I am viewing the summary of this order
 

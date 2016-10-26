@@ -50,13 +50,16 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         PaymentInterface $firstPayment,
         PaymentInterface $secondPayment
     ) {
+        $firstPayment->getAmount()->willReturn(6000);
         $firstPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
+        $secondPayment->getAmount()->willReturn(4000);
         $secondPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
 
         $order
             ->getPayments()
             ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
         ;
+        $order->getTotal()->willReturn(10000);
 
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderPaymentTransitions::TRANSITION_REFUND)->willReturn(true);
@@ -98,9 +101,10 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $secondPayment->getAmount()->willReturn(4000);
         $secondPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
-        $payments = new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]);
-
-        $order->getPayments()->willReturn($payments);
+        $order
+            ->getPayments()
+            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
+        ;
         $order->getTotal()->willReturn(10000);
 
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
@@ -122,9 +126,10 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $secondPayment->getAmount()->willReturn(4000);
         $secondPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
-        $payments = new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]);
-
-        $order->getPayments()->willReturn($payments);
+        $order
+            ->getPayments()
+            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
+        ;
         $order->getTotal()->willReturn(10000);
 
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);

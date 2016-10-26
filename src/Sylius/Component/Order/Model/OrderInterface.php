@@ -23,11 +23,10 @@ interface OrderInterface extends
     ResourceInterface,
     TimestampableInterface
 {
-    const STATE_CANCELLED = 'cancelled';
     const STATE_CART = 'cart';
-    const STATE_FULFILLED = 'fulfilled';
     const STATE_NEW = 'new';
-    const STATE_REFUNDED = 'refunded';
+    const STATE_CANCELLED = 'cancelled';
+    const STATE_FULFILLED = 'fulfilled';
 
     /**
      * @return \DateTime

@@ -69,10 +69,14 @@ class OrderPaymentStateResolver implements StateResolverInterface
      */
     private function getTargetTransition(OrderInterface $order)
     {
-        $paymentsCount = $order->getPayments()->count();
-        $refundedPaymentsCount = $this->getPaymentsWithState($order, PaymentInterface::STATE_REFUNDED)->count();
+        $refundedPaymentTotal = 0;
+        $refundedPayments = $this->getPaymentsWithState($order, PaymentInterface::STATE_REFUNDED);
 
-        if ($refundedPaymentsCount === $paymentsCount) {
+        foreach ($refundedPayments as $payment) {
+            $refundedPaymentTotal += $payment->getAmount();
+        }
+
+        if (0 < $refundedPayments->count() && $refundedPaymentTotal >= $order->getTotal()) {
             return OrderPaymentTransitions::TRANSITION_REFUND;
         }
 

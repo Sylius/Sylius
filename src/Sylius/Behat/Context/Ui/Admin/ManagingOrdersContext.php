@@ -482,7 +482,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyCompleted()
     {
-        $this->notificationChecker->checkNotification('Payment has been successfully updated.', NotificationType::success());
+        $this
+            ->notificationChecker
+            ->checkNotification('Payment has been successfully updated.', NotificationType::success())
+        ;
     }
 
     /**
@@ -490,7 +493,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyRefunded()
     {
-        $this->notificationChecker->checkNotification('Payment has been successfully refunded.', NotificationType::success());
+        $this
+            ->notificationChecker
+            ->checkNotification('Payment has been successfully refunded.', NotificationType::success())
+        ;
     }
 
     /**
