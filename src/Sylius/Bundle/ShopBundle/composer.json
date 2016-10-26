@@ -24,7 +24,8 @@
 
         "sylius/ui-bundle": "^1.0",
         "sylius/core-bundle": "^1.0",
-        "symfony/framework-bundle": "^2.8"
+        "symfony/framework-bundle": "^2.8",
+        "sonata-project/intl-bundle": "^2.2"
     },
     "require-dev": {
         "phpspec/phpspec": "^3.1"
