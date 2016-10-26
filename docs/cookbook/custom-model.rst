@@ -185,7 +185,7 @@ should be also included in the ``app/config/routing.yml``.
 
     # app/config/routing/admin.yml
     app_admin_supplier:
-        resource: 'supplier.yml'
+        resource: 'admin/supplier.yml'
 
 .. code-block:: yaml
 
