@@ -144,9 +144,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When I search for product with name :name
+     * @When I search for products with name :name
      */
-    public function iSearchForProductWithName($name)
+    public function iSearchForProductsWithName($name)
     {
         $this->taxonShowPage->search($name);
     }
