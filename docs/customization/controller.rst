@@ -1,22 +1,23 @@
 Customizing Controllers
 =======================
 
-All **Sylius** resources are using the
+All **Sylius** resources use the
 `Sylius/Bundle/ResourceBundle/Controller/ResourceController <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ResourceBundle/Controller/ResourceController.php>`_
-as default, but some of them have been already extended in Bundles.
-If you want to override some controller action, check which controller you should be extending.
+by default, but some of them have already been extended in Bundles.
+If you want to override a controller action, check which controller you should be extending.
 
 .. note::
-    There are two types of controllers we can define in Sylius.
-    **Resource Controllers** - are basing only on one Entity, so they return only the resources they have in their name. For instance a ``ProductController`` should return only products.
+    There are two types of controllers we can define in Sylius:
+
+    **Resource Controllers** - are based only on one Entity, so they return only the resources they have in their name. For instance a ``ProductController`` should return only products.
     **Standard Controllers** - non-resource; these may use many entities at once, they are useful on more general pages. We are extending these controllers only if the actions we want cannot be done through yaml configuration - like sending emails.
 
 Why would you customize a Controller?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To add your custom actions you need to override controllers. You may bee needing to:
+To add your custom actions you need to override controllers. You may need to:
 
-* add a generic action that will render a list of recommended products with a product on its show page,
+* add a generic action that will render a list of recommended products with a product on its show page.
 * render a partial template that cannot be done via yaml resource action.
 
 How to customize a Resource Controller?
@@ -38,10 +39,10 @@ For the ``ProductController`` run:
 
     $ php app/console debug:container sylius.controller.product
 
-As a result you will get the ``Sylius\Bundle\CoreBundle\Controller\ProductController`` - this is the class that you need to be extending.
+As a result you will get the ``Sylius\Bundle\CoreBundle\Controller\ProductController`` - this is the class that you need to extend.
 
 Now you have to create the controller that will have a generic action that is basically the ``showAction`` from the ``ResourceController`` extended by
-getting a list of recommended product from your external api.
+getting a list of recommended products from your external api.
 
 .. code-block:: php
 
@@ -105,7 +106,7 @@ getting a list of recommended product from your external api.
                 classes:
                     controller: AppBundle\Controller\ProductController
 
-How to customize a Standard Controller?
+How to customize a Standard Controller:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Let's assume that you would like to send some kind of emails (which are not resources) after something has been purchased in your shop - to do this you should modify an ``afterPurchaseAction`` on the ``OrderController``.
@@ -114,7 +115,7 @@ Let's assume that you would like to send some kind of emails (which are not reso
 
 Run ``$ php app/console debug:container sylius.controller.frontend.order``.
 
-Your class needs to be extending this base class.
+Your class needs to extend this base class.
 
 .. code-block:: php
 
