@@ -219,7 +219,7 @@ final class ProductContext implements Context
         $product = $this->productFactory->createNew();
 
         $product->setName($productName);
-        $product->setCode($this->convertToCode($productName));
+        $product->setCode(StringInflector::nameToUppercaseCode($productName));
         $product->setDescription('Awesome '.$productName);
 
         if ($this->sharedStorage->has('channel')) {
@@ -251,7 +251,7 @@ final class ProductContext implements Context
         $variant = $this->productVariantFactory->createNew();
 
         $variant->setName($productVariantName);
-        $variant->setCode($this->convertToCode($productVariantName));
+        $variant->setCode(StringInflector::nameToUppercaseCode($productVariantName));
         $variant->setPrice($price);
         $variant->setProduct($product);
         $product->addVariant($variant);
@@ -297,7 +297,7 @@ final class ProductContext implements Context
             $variant = $this->productVariantFactory->createNew();
 
             $variant->setName($variantHash['name']);
-            $variant->setCode($this->convertToCode($variantHash['name']));
+            $variant->setCode(StringInflector::nameToUppercaseCode($variantHash['name']));
             $variant->setPrice($this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])));
             $variant->setProduct($product);
             $product->addVariant($variant);
@@ -382,7 +382,7 @@ final class ProductContext implements Context
         $option = $this->productOptionFactory->createNew();
 
         $option->setName($optionName);
-        $option->setCode(strtoupper($optionName));
+        $option->setCode(StringInflector::nameToUppercaseCode($optionName));
 
         $firstOptionValue = $this->addProductOption($option, $firstValue, 'POV1');
         $secondOptionValue = $this->addProductOption($option, $secondValue, 'POV2');
@@ -598,7 +598,7 @@ final class ProductContext implements Context
         $product = $this->productFactory->createWithVariant();
 
         $product->setName($productName);
-        $product->setCode($this->convertToCode($productName));
+        $product->setCode(StringInflector::nameToUppercaseCode($productName));
         $product->setCreatedAt(new \DateTime($date));
 
         /** @var ProductVariantInterface $productVariant */
@@ -637,16 +637,6 @@ final class ProductContext implements Context
     {
         $this->productRepository->add($product);
         $this->sharedStorage->set('product', $product);
-    }
-
-    /**
-     * @param string $productName
-     *
-     * @return string
-     */
-    private function convertToCode($productName)
-    {
-        return StringInflector::nameToUppercaseCode($productName);
     }
 
     /**

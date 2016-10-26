@@ -23,7 +23,7 @@ final class StringInflector
      */
     public static function nameToCode($value)
     {
-        return str_replace(' ', '_', $value);
+        return str_replace([' ', '-'], '_', $value);
     }
 
     /**

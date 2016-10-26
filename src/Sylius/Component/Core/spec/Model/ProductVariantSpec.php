@@ -178,10 +178,8 @@ final class ProductVariantSpec extends ObjectBehavior
 
     function its_code_is_mutable()
     {
-        $sku = 'dummy-sku123';
-
-        $this->setCode($sku);
-        $this->getCode()->shouldReturn($sku);
+        $this->setCode('dummy-sku123');
+        $this->getCode()->shouldReturn('dummy-sku123');
     }
 
     function it_does_not_have_tax_category_by_default()

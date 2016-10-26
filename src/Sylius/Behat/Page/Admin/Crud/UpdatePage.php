@@ -14,6 +14,7 @@ namespace Sylius\Behat\Page\Admin\Crud;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -104,7 +105,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
      */
     private function getFieldElement($element)
     {
-        $element = $this->getElement(str_replace(' ', '_', $element));
+        $element = $this->getElement(StringInflector::nameToCode($element));
         while (null !== $element && !($element->hasClass('field'))) {
             $element = $element->getParent();
         }
