@@ -19,6 +19,8 @@ sylius:
             unique: This email is already used.
             registered: This email is already registered, please login or use forgotten password.
     customer_group:
+        code:
+            unique: Customer group code has to be unique.
         name:
             max: Customer group name must not be longer than {{ limit }} characters.
             min: Customer group name must be at least {{ limit }} characters long.

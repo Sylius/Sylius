@@ -22,4 +22,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $name
      */
     public function nameIt($name);
+
+    /**
+     * @return bool
+     */
+    public function isCodeDisabled();
 }

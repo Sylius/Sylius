@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -54,22 +55,36 @@ final class CustomerGroupContext implements Context
 
     /**
      * @Given the store has a customer group :name
+     * @Given the store has a customer group :name with :code code
      */
-    public function theStoreHasACustomerGroup($name)
+    public function theStoreHasACustomerGroup($name, $code = null)
     {
-        $this->createCustomerGroup($name);
+        $this->createCustomerGroup($name, $code);
     }
 
     /**
      * @param string $name
+     * @param string $code
      */
-    private function createCustomerGroup($name)
+    private function createCustomerGroup($name, $code)
     {
         /** @var CustomerGroupInterface $customerGroup */
         $customerGroup = $this->customerGroupFactory->createNew();
+
+        $customerGroup->setCode($code ? $code : $this->generateCodeFromName($name));
         $customerGroup->setName(ucfirst($name));
 
         $this->sharedStorage->set('customer_group', $customerGroup);
         $this->customerGroupRepository->add($customerGroup);
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    private function generateCodeFromName($name)
+    {
+        return StringInflector::nameToCode($name);
     }
 }
