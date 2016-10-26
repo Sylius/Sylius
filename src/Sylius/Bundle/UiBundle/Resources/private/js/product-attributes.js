@@ -89,6 +89,12 @@
             }
         });
 
+        $(document).keypress(function(e) {
+            if(e.which == 13) {
+                $("[type=submit]").click();
+            }
+        });
+
         modifySelectorOnAttributesListElementDelete();
     });
 })( jQuery );
