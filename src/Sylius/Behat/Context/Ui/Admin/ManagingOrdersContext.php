@@ -506,12 +506,12 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^(this order)'s payment state should be refunded$/
+     * @Then it's payment state should be refunded
      */
-    public function itPaymentStateShouldBeRefunded(OrderInterface $order)
+    public function orderPaymentStateShouldBeRefunded()
     {
         Assert::same(
-            $order->getPaymentState(),
+            $this->showPage->getPaymentState(),
             OrderPaymentStates::STATE_REFUNDED,
             'Order payment state should be refunded, but it is not.'
         );

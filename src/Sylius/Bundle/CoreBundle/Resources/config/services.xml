@@ -70,6 +70,9 @@
         <service id="sylius.updater.order.exchange_rate" class="Sylius\Component\Core\Updater\OrderExchangeRateUpdater">
             <argument type="service" id="sylius.repository.currency" />
         </service>
+        <service id="sylius.updater.order.payment_state" class="Sylius\Component\Core\Updater\OrderPaymentStateUpdater">
+            <argument type="service" id="sm.factory" />
+        </service>
         <service id="sylius.context.customer" class="Sylius\Bundle\CoreBundle\Context\CustomerContext">
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.authorization_checker" />

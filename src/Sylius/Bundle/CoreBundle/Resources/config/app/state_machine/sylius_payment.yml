@@ -10,3 +10,7 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sylius.state_resolver.order_payment", "resolve"]
                     args: ["object.getOrder()"]
+                refund_order_with_all_payments_refunded:
+                    on: ["refund"]
+                    do: ["@sylius.updater.order.payment_state", "update"]
+                    args: ["object.getOrder()"]

@@ -10,6 +10,7 @@ winzou_state_machine:
             partially_paid: ~
             cancelled: ~
             paid: ~
+            refunded: ~
         transitions:
             request_payment:
                 from: [cart]
@@ -22,6 +23,9 @@ winzou_state_machine:
             pay:
                 from: [awaiting_payment, partially_paid]
                 to: paid
+            refund:
+                from: [paid]
+                to: refunded
         callbacks:
             after:
                 sylius_order_paid:

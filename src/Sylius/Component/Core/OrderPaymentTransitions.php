@@ -18,10 +18,11 @@ final class OrderPaymentTransitions
 {
     const GRAPH = 'sylius_order_payment';
 
-    const TRANSITION_REQUEST_PAYMENT = 'request_payment';
-    const TRANSITION_PARTIALLY_PAY = 'partially_pay';
     const TRANSITION_CANCEL = 'cancel';
+    const TRANSITION_PARTIALLY_PAY = 'partially_pay';
     const TRANSITION_PAY = 'pay';
+    const TRANSITION_REFUND = 'refund';
+    const TRANSITION_REQUEST_PAYMENT = 'request_payment';
 
     private function __construct()
     {

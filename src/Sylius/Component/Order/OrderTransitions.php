@@ -15,8 +15,8 @@ final class OrderTransitions
 {
     const GRAPH = 'sylius_order';
 
-    const TRANSITION_CREATE = 'create';
     const TRANSITION_CANCEL = 'cancel';
+    const TRANSITION_CREATE = 'create';
     const TRANSITION_FULFILL = 'fulfill';
 
     private function __construct()

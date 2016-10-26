@@ -36,6 +36,8 @@ final class OrderExchangeRateUpdater implements OrderUpdaterInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
     public function update(OrderInterface $order)
     {

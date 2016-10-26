@@ -1,8 +1,8 @@
 {% import '@SyliusUi/Macro/labels.html.twig' as label %}
 
 <div class="ui segment">
-    <h3 class="ui dividing header">
-        {{ 'sylius.ui.payments'|trans }}
+    <h3 class="ui dividing header" id="payment-state">
+        {{ 'sylius.ui.payments'|trans }} {% include '@SyliusAdmin/Order/Label/PaymentState/' ~ order.paymentState ~ '.html.twig' with { 'value': order.paymentState } %}
     </h3>
     <div class="ui relaxed divided list" id="payments">
         {% for payment in order.payments %}

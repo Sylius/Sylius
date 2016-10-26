@@ -229,6 +229,11 @@ interface ShowPageInterface extends SymfonyPageInterface
      */
     public function getOrderState();
 
+    /**
+     * @return string
+     */
+    public function getPaymentState();
+
     public function cancelOrder();
 
     public function deleteOrder();
