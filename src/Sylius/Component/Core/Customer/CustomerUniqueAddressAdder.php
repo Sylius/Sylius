@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Customer;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -33,23 +32,15 @@ final class CustomerUniqueAddressAdder implements AddressAdderInterface
     private $customerContext;
 
     /**
-     * @var ObjectManager
-     */
-    private $customerManager;
-
-    /**
      * @param AddressComparatorInterface $addressComparator
      * @param CustomerContextInterface $customerContext
-     * @param ObjectManager $customerManager
      */
     public function __construct(
         AddressComparatorInterface $addressComparator,
-        CustomerContextInterface $customerContext,
-        ObjectManager $customerManager
+        CustomerContextInterface $customerContext
     ) {
         $this->addressComparator = $addressComparator;
         $this->customerContext = $customerContext;
-        $this->customerManager = $customerManager;
     }
 
     /**
@@ -70,7 +61,5 @@ final class CustomerUniqueAddressAdder implements AddressAdderInterface
         }
 
         $customer->addAddress($address);
-
-        $this->customerManager->flush();
     }
 }
