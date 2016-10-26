@@ -25,6 +25,7 @@ The Books helps to understand how Sylius works.
     adminuser
     products
     product_reviews
+    product_associations
     attributes
     taxons
     inventory

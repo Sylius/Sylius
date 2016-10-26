@@ -16,6 +16,7 @@
 * :doc:`/book/adminuser`
 * :doc:`/book/products`
 * :doc:`/book/product_reviews`
+* :doc:`/book/product_associations`
 * :doc:`/book/attributes`
 * :doc:`/book/taxons`
 * :doc:`/book/inventory`
