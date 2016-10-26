@@ -40,14 +40,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function createQueryBuilderForEnabledByTaxonCodeAndChannelAndLocale($code, ChannelInterface $channel, $locale);
 
     /**
-     * @param mixed $id
-     * @param ChannelInterface $channel
-     *
-     * @return ProductInterface|null
-     */
-    public function findOneByIdAndChannel($id, ChannelInterface $channel = null);
-
-    /**
      * @param string $slug
      * @param ChannelInterface $channel
      *
