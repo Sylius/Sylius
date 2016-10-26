@@ -113,6 +113,7 @@ final class AddressBookContext implements Context
     }
 
     /**
+     * @Given I am browsing my address book
      * @When I browse my address book
      */
     public function iBrowseMyAddresses()
