@@ -122,7 +122,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
 
-        $this->client->request('GET', '/api/currencies/'.$currencies['currency_1']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/currencies/'.$currencies['currency_1']->getCode(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'currency/show_response', Response::HTTP_OK);
@@ -151,7 +151,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
 
-        $this->client->request('PUT', '/api/currencies/'.$currencies['currency_2']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', '/api/currencies/'.$currencies['currency_2']->getCode(), [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
 
@@ -172,12 +172,12 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PUT', '/api/currencies/'.$currencies['currency_2']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', '/api/currencies/'.$currencies['currency_2']->getCode(), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/currencies/'.$currencies['currency_2']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/currencies/'.$currencies['currency_2']->getCode(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'currency/update_response', Response::HTTP_OK);
@@ -206,12 +206,12 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PATCH', '/api/currencies/'.$currencies['currency_2']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', '/api/currencies/'.$currencies['currency_2']->getCode(), [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/currencies/'.$currencies['currency_2']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/currencies/'.$currencies['currency_2']->getCode(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'currency/update_response', Response::HTTP_OK);
@@ -232,12 +232,12 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $currencies = $this->loadFixturesFromFile('resources/currencies.yml');
 
-        $this->client->request('DELETE', '/api/currencies/'.$currencies['currency_1']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', '/api/currencies/'.$currencies['currency_1']->getCode(), [], [], static::$authorizedHeaderWithContentType, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/currencies/'.$currencies['currency_1']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/currencies/'.$currencies['currency_1']->getCode(), [], [], static::$authorizedHeaderWithAccept);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
