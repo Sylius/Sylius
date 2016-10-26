@@ -23,6 +23,16 @@ interface CreatePageInterface extends SymfonyPageInterface
      * @param AddressInterface $address
      */
     public function fillAddressData(AddressInterface $address);
+
+    /**
+     * @param string $name
+     */
+    public function selectCountry($name);
     
     public function addAddress();
+
+    /**
+     * @return int
+     */
+    public function countValidationMessages();
 }

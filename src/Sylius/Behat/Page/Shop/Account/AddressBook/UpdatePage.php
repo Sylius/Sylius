@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -18,6 +19,14 @@ use Sylius\Behat\Page\SymfonyPage;
  */
 final class UpdatePage extends SymfonyPage implements UpdatePageInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getRouteName()
+    {
+        return 'sylius_shop_account_address_book_update';
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -32,9 +41,9 @@ final class UpdatePage extends SymfonyPage implements UpdatePageInterface
      */
     public function specifyProvince($name)
     {
-        $this->waitForElement(5, 'province');
+        $this->waitForElement(5, 'province_name');
 
-        $province = $this->getElement('province');
+        $province = $this->getElement('province_name');
         $province->setValue($name);
     }
 
@@ -43,9 +52,9 @@ final class UpdatePage extends SymfonyPage implements UpdatePageInterface
      */
     public function selectProvince($name)
     {
-        $this->waitForElement(5, 'province');
+        $this->waitForElement(5, 'province_code');
 
-        $province = $this->getElement('province');
+        $province = $this->getElement('province_code');
         $province->selectOption($name);
     }
 
@@ -56,10 +65,6 @@ final class UpdatePage extends SymfonyPage implements UpdatePageInterface
     {
         $country = $this->getElement('country');
         $country->selectOption($name);
-
-        $this->getDocument()->waitFor(5, function () {
-            return false;
-        });
     }
 
     public function saveChanges()
@@ -70,26 +75,19 @@ final class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
-    {
-        return 'sylius_shop_account_address_book_update';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements()
     {
-        return [
+        return array_merge(parent::getDefinedElements(), [
             'city' => '#sylius_address_city',
             'country' => '#sylius_address_countryCode',
             'first_name' => '#sylius_address_firstName',
             'last_name' => '#sylius_address_lastName',
             'postcode' => '#sylius_address_postcode',
-            'province' => '#sylius_address_province',
+            'province_name' => 'input[name="sylius_address[provinceName]"]',
+            'province_code' => 'select[name="sylius_address[provinceCode]"]',
             'save_button' => 'button:contains("Save changes")',
             'street' => '#sylius_address_street',
-        ];
+        ]);
     }
 
     /**

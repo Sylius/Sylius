@@ -13,5 +13,5 @@ Feature: Adding a new address to the book
         Given I want to add a new address to my address book
         When I specify the address as "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas"
         And I add it
-        Then I should be notified that it has been successfully added
+        Then I should be notified that the address has been successfully added
         And the address assigned to "Lucifer Morningstar" should appear in my book

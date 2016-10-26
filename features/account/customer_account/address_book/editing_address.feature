@@ -12,21 +12,21 @@ Feature: Making changes in existing addresses
     @ui
     Scenario: Changing the names on my address
         Given I am editing the address of "Lucifer Morningstar"
-        When I change my first name to "Stephanie"
-        And I change my last name to "Edgley"
+        When I change the first name to "Stephanie"
+        And I change the last name to "Edgley"
         And I save my changed address
-        Then I should be notified that it has been successfully updated
+        Then I should be notified that the address has been successfully updated
         And I should still see a single address in my book
         And this address should be assigned to "Stephanie Edgley"
 
     @ui
     Scenario: Changing my location
         Given I am editing the address of "Lucifer Morningstar"
-        When I change my street to "Vildegard Av"
-        And I change my city to "Liverpool"
-        And I change my postcode to "GBA-20B"
+        When I change the street to "Vildegard Av"
+        And I change the city to "Liverpool"
+        And I change the postcode to "GBA-20B"
         And I save my changed address
-        Then I should be notified that it has been successfully updated
+        Then I should be notified that the address has been successfully updated
         And I should still see a single address in my book
         And it should contain "Vildegard Av"
         And it should contain "Liverpool"
@@ -40,7 +40,7 @@ Feature: Making changes in existing addresses
         When I choose "Australia" as my country
         And I choose "Queensland" as my province
         And I save my changed address
-        Then I should be notified that it has been successfully updated
+        Then I should be notified that the address has been successfully updated
         And I should still see a single address in my book
         And it should contain "Australia"
         And it should contain "Queensland"
@@ -50,6 +50,6 @@ Feature: Making changes in existing addresses
         Given I am editing the address of "Lucifer Morningstar"
         When I specify "New York" as my province
         And I save my changed address
-        Then I should be notified that it has been successfully updated
+        Then I should be notified that the address has been successfully updated
         And I should still see a single address in my book
         And it should contain "New York"
