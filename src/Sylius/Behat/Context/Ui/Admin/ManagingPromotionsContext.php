@@ -156,13 +156,12 @@ final class ManagingPromotionsContext implements Context
      * @Given I add the "Taxon" rule configured with :firstTaxon
      * @Given I add the "Taxon" rule configured with :firstTaxon and :secondTaxon
      */
-    public function iAddTheTaxonRuleConfiguredWith($firstTaxon, $secondTaxon = null)
+    public function iAddTheTaxonRuleConfiguredWith(...$taxons)
     {
         $this->createPage->addRule('Taxon');
-        $this->createPage->selectRuleOption('Taxons', $firstTaxon, true);
 
-        if (null !== $secondTaxon) {
-            $this->createPage->selectRuleOption('Taxons', $secondTaxon, true);
+        foreach ($taxons as $taxon) {
+            $this->createPage->selectRuleOption('Taxons', $taxon, true);
         }
     }
 

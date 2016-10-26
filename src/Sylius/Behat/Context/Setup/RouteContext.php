@@ -76,10 +76,11 @@ final class RouteContext implements Context
     /**
      * @Given the store has routes :firstName and :secondName
      */
-    public function theStoreHasRoutes($firstName, $secondName)
+    public function theStoreHasRoutes(...$routesNames)
     {
-        $this->theStoreHasRoute($firstName);
-        $this->theStoreHasRoute($secondName);
+        foreach ($routesNames as $routesName) {
+            $this->theStoreHasRoute($routesName);
+        }
     }
 
     /**
