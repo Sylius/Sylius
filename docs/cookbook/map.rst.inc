@@ -4,3 +4,4 @@
 * :doc:`/cookbook/custom-email`
 * :doc:`/cookbook/paypal`
 * :doc:`/cookbook/api`
+* :doc:`/cookbook/images`
