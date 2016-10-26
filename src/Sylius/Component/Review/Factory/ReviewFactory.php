@@ -12,7 +12,7 @@
 namespace Sylius\Component\Review\Factory;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 
 /**
@@ -26,18 +26,11 @@ final class ReviewFactory implements ReviewFactoryInterface
     private $factory;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $subjectRepository;
-
-    /**
      * @param FactoryInterface $factory
-     * @param RepositoryInterface $subjectRepository
      */
-    public function __construct(FactoryInterface $factory, RepositoryInterface $subjectRepository)
+    public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
-        $this->subjectRepository = $subjectRepository;
     }
 
     /**
@@ -51,12 +44,8 @@ final class ReviewFactory implements ReviewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForSubject($subjectId)
+    public function createForSubject(ReviewableInterface $subject)
     {
-        if (null === $subject = $this->subjectRepository->find($subjectId)) {
-            throw new \InvalidArgumentException(sprintf('Review subject with id "%s" does not exist.', $subjectId));
-        }
-
         $review = $this->factory->createNew();
         $review->setReviewSubject($subject);
 
@@ -66,9 +55,9 @@ final class ReviewFactory implements ReviewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForSubjectWithReviewer($subjectId, ReviewerInterface $reviewer = null)
+    public function createForSubjectWithReviewer(ReviewableInterface $subject, ReviewerInterface $reviewer = null)
     {
-        $review = $this->createForSubject($subjectId);
+        $review = $this->createForSubject($subject);
         $review->setAuthor($reviewer);
 
         return $review;
