@@ -27,5 +27,6 @@ class PromotionFiltersType extends BasePromotionFiltersType
         parent::buildForm($builder, $options);
 
         $builder->add('taxons_filter', 'sylius_promotion_action_filter_taxon_configuration', ['required' => false]);
+        $builder->add('products_filter', 'sylius_promotion_action_filter_product_configuration', ['required' => false]);
     }
 }
