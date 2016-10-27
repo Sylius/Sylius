@@ -50,6 +50,8 @@ default:
 
         Sylius\Behat\Extension\SymfonyExtension: ~
 
+        Sylius\Behat\Extension\SeleniumExtension: ~
+
         FriendsOfBehat\PerformanceExtension: ~
 
         FriendsOfBehat\VariadicExtension: ~
