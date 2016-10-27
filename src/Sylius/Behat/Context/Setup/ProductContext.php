@@ -371,39 +371,25 @@ final class ProductContext implements Context
      * @Given /^(this product) has option "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
      * @Given /^(this product) has option "([^"]+)" with values "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function thisProductHasOptionWithValues(
-        ProductInterface $product,
-        $optionName,
-        $firstValue,
-        $secondValue,
-        $thirdValue = null
-    ) {
+    public function thisProductHasOptionWithValues(ProductInterface $product, $optionName, ...$values)
+    {
         /** @var ProductOptionInterface $option */
         $option = $this->productOptionFactory->createNew();
 
         $option->setName($optionName);
         $option->setCode(StringInflector::nameToUppercaseCode($optionName));
 
-        $firstOptionValue = $this->addProductOption($option, $firstValue, 'POV1');
-        $secondOptionValue = $this->addProductOption($option, $secondValue, 'POV2');
+        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
 
-        if (null !== $thirdValue) {
-            $thirdOptionValue = $this->addProductOption($option, $thirdValue, 'POV3');
+        foreach ($values as $key => $value) {
+            $optionValue = $this->addProductOption($option, $value, StringInflector::nameToUppercaseCode($value));
+            $this->sharedStorage->set(sprintf('%s_option_%s_value', $value, strtolower($optionName)), $optionValue);
         }
 
         $product->addOption($option);
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
-        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
-        $this->sharedStorage->set(sprintf('%s_option_%s_value', $firstValue, strtolower($optionName)), $firstOptionValue);
-        $this->sharedStorage->set(sprintf('%s_option_%s_value', $secondValue, strtolower($optionName)), $secondOptionValue);
-        if (null !== $thirdValue) {
-            $this->sharedStorage->set(sprintf('%s_option_%s_value', $thirdValue, strtolower($optionName)), $thirdOptionValue);
-        }
-
         $this->objectManager->persist($option);
-        $this->objectManager->persist($firstOptionValue);
-        $this->objectManager->persist($secondOptionValue);
         $this->objectManager->flush();
     }
 

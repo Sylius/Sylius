@@ -88,17 +88,9 @@ final class TaxonomyContext implements Context
      * @Given the store classifies its products as :firstTaxonName, :secondTaxonName and :thirdTaxonName
      * @Given the store classifies its products as :firstTaxonName, :secondTaxonName, :thirdTaxonName and :fourthTaxonName
      */
-    public function storeClassifiesItsProductsAs(
-        $firstTaxonName,
-        $secondTaxonName = null,
-        $thirdTaxonName = null,
-        $fourthTaxonName = null
-    ) {
-        foreach ([$firstTaxonName, $secondTaxonName, $thirdTaxonName, $fourthTaxonName] as $taxonName) {
-            if (null === $taxonName) {
-                break;
-            }
-
+    public function storeClassifiesItsProductsAs(...$taxonsNames)
+    {
+        foreach ($taxonsNames as $taxonName) {
             $this->taxonRepository->add($this->createTaxon($taxonName));
         }
     }
