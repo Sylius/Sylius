@@ -14,6 +14,8 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Association\Model\AssociationTypeInterface;
+use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -33,23 +35,39 @@ final class ProductAssociationContext implements Context
     private $productAssociationTypeFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $productAssociationFactory;
+
+    /**
      * @var RepositoryInterface
      */
     private $productAssociationTypeRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $productAssociationRepository;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $productAssociationTypeFactory
+     * @param FactoryInterface $productAssociationFactory
      * @param RepositoryInterface $productAssociationTypeRepository
+     * @param RepositoryInterface $productAssociationRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $productAssociationTypeFactory,
-        RepositoryInterface $productAssociationTypeRepository
+        FactoryInterface $productAssociationFactory,
+        RepositoryInterface $productAssociationTypeRepository,
+        RepositoryInterface $productAssociationRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productAssociationTypeFactory = $productAssociationTypeFactory;
+        $this->productAssociationFactory = $productAssociationFactory;
         $this->productAssociationTypeRepository = $productAssociationTypeRepository;
+        $this->productAssociationRepository = $productAssociationRepository;
     }
 
     /**
@@ -59,6 +77,18 @@ final class ProductAssociationContext implements Context
     public function theStoreHasAProductAssociationType($name, $code = null)
     {
         $this->createProductAssociationType($name, $code);
+    }
+
+    /**
+     * @Given the product :product has( also) an association :productAssociationType with products :firstProduct and :secondProduct
+     */
+    public function theProductHasAnAssociationWithProducts(
+        ProductInterface $product,
+        AssociationTypeInterface $productAssociationType,
+        ProductInterface $firstProduct,
+        ProductInterface $secondProduct
+    ) {
+        $this->createProductAssociation($product, $productAssociationType, $firstProduct, $secondProduct);
     }
 
     /**
@@ -78,6 +108,29 @@ final class ProductAssociationContext implements Context
 
         $this->productAssociationTypeRepository->add($productAssociationType);
         $this->sharedStorage->set('product_association_type', $productAssociationType);
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param AssociationTypeInterface $productAssociationType
+     * @param ProductInterface $firstProduct
+     * @param ProductInterface|null $secondProduct
+     */
+    private function createProductAssociation(
+        ProductInterface $product,
+        AssociationTypeInterface $productAssociationType,
+        ProductInterface $firstProduct,
+        ProductInterface $secondProduct = null
+    ) {
+        /** @var ProductAssociationInterface $productAssociation */
+        $productAssociation = $this->productAssociationFactory->createNew();
+        $productAssociation->setType($productAssociationType);
+        $productAssociation->addAssociatedObject($firstProduct);
+        $productAssociation->addAssociatedObject($secondProduct);
+
+        $product->addAssociation($productAssociation);
+
+        $this->productAssociationRepository->add($productAssociation);
     }
 
     /**

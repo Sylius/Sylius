@@ -226,9 +226,29 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasAssociation($productAssociationName)
+    {
+        return null !== $this->getElement('association', ['%association-name%' => $productAssociationName]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasProductInAssociation($productName, $productAssociationName)
+    {
+        $associationHeader = $this->getElement('association', ['%association-name%' => $productAssociationName]);
+        $associations = $associationHeader->getParent()->find('css', '.four');
+
+        return null !== $associations->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'association' => 'h4:contains("%association-name%")',
             'attributes' => '#sylius-product-attributes',
             'average_rating' => '#average-rating',
             'main_image' => '#main-image',

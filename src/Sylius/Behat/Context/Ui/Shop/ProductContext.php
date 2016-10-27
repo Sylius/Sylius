@@ -12,6 +12,8 @@
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
+use Buzz\Exception\InvalidArgumentException;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Taxon\ShowPageInterface as TaxonShowPageInterface;
@@ -425,6 +427,41 @@ final class ProductContext implements Context
             (float) $rating,
             $this->showPage->getAverageRating(),
             'Product should have average rating %2$s but has %s.'
+        );
+    }
+
+    /**
+     * @Then I should( also) see the product association :productAssociationName with products :firstProductName and :secondProductName
+     */
+    public function iShouldSeeTheProductAssociationWithProducts(
+        $productAssociationName,
+        $firstProductName,
+        $secondProductName
+    ) {
+        Assert::true(
+            $this->showPage->hasAssociation($productAssociationName),
+            sprintf('There should be an association named "%s" but it does not.', $productAssociationName)
+        );
+
+        $this->assertIsProductIsInAssociation($firstProductName, $productAssociationName);
+        $this->assertIsProductIsInAssociation($secondProductName, $productAssociationName);
+    }
+
+    /**
+     * @param string $productName
+     * @param string $productAssociationName
+     *
+     * @throws /InvalidArgumentException
+     */
+    private function assertIsProductIsInAssociation($productName, $productAssociationName)
+    {
+        Assert::true(
+            $this->showPage->hasProductInAssociation($productName, $productAssociationName),
+            sprintf(
+                'There should be an associated product "%s" under association "%s" but it does not.',
+                $productName,
+                $productAssociationName
+            )
         );
     }
 }
