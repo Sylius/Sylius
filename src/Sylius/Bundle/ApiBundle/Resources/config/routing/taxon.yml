@@ -11,10 +11,13 @@ sylius_api_taxon_index:
             filterable: true
 
 sylius_api_taxon_show:
-    path: /{id}
+    path: /{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:showAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_taxon_create:
     path: /
@@ -23,13 +26,19 @@ sylius_api_taxon_create:
         _controller: sylius.controller.taxon:createAction
 
 sylius_api_taxon_update:
-    path: /{id}
+    path: /{code}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.taxon:updateAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_taxon_delete:
-    path: /{id}
+    path: /{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.taxon:deleteAction
+        _sylius:
+            criteria:
+                code: $code
