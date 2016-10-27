@@ -516,6 +516,16 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I change user :customer password to :newPassword
+     */
+    public function iChangeUserPasswordTo(CustomerInterface $customer, $newPassword)
+    {
+        $this->updatePage->open(['id' => $customer->getId()]);
+        $this->updatePage->changePassword($newPassword);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
      * @Then this customer should be subscribed to the newsletter
      */
     public function thisCustomerShouldBeSubscribedToTheNewsletter()
