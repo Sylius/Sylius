@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -136,21 +137,12 @@ final class TaxonomyContext implements Context
      */
     private function createTaxon($name)
     {
+        /** @var TaxonInterface $taxon */
         $taxon = $this->taxonFactory->createNew();
         $taxon->setName($name);
-        $taxon->setCode($this->getCodeFromName($name));
+        $taxon->setCode(StringInflector::nameToCode($name));
 
         return $taxon;
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return string
-     */
-    private function getCodeFromName($name)
-    {
-        return str_replace([' ', '-'], '_', strtolower($name));
     }
 
     /**

@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
@@ -92,7 +93,7 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given /^the store ships everywhere for free$/
+     * @Given the store ships everywhere for free
      */
     public function theStoreShipsEverywhereForFree()
     {
@@ -270,6 +271,6 @@ final class ShippingContext implements Context
      */
     private function generateCodeFromNameAndZone($shippingMethodName, $zoneCode = null)
     {
-        return str_replace([' ', '-'], '_', strtolower($shippingMethodName)).'_'.strtolower($zoneCode);
+        return StringInflector::nameToLowercaseCode($shippingMethodName).'_'.StringInflector::nameToLowercaseCode($zoneCode);
     }
 }

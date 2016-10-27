@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Attribute\Repository\AttributeRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -77,7 +78,7 @@ final class ProductAttributeContext implements Context
         $productAttribute = $this->productAttributeFactory->createTyped($type);
 
         if (null === $code) {
-            $code = str_replace(' ', '_', strtoupper($name));
+            $code = StringInflector::nameToUppercaseCode($name);
         }
 
         $productAttribute->setCode($code);

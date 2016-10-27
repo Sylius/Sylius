@@ -13,6 +13,7 @@ namespace Sylius\Behat\Page\Shop\Account;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Component\Core\Formatter\StringInflector;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -35,7 +36,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     public function checkValidationMessageFor($element, $message)
     {
         $errorLabel = $this
-            ->getElement(str_replace(' ', '_', $element))
+            ->getElement(StringInflector::nameToCode($element))
             ->getParent()
             ->find('css', '.sylius-validation-error')
         ;

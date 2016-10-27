@@ -19,6 +19,7 @@ use Sylius\Behat\Page\Admin\Order\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -758,19 +759,9 @@ final class ManagingOrdersContext implements Context
     public function iShouldBeNotifiedThatIsRequired($element)
     {
         Assert::same(
-            $this->updatePage->getValidationMessage($this->getNormalizedElementName($element)),
+            $this->updatePage->getValidationMessage(StringInflector::nameToCode($element)),
             sprintf('Please enter %s.', $element)
         );
-    }
-
-    /**
-     * @param string $elementName
-     *
-     * @return string
-     */
-    private function getNormalizedElementName($elementName)
-    {
-        return str_replace(' ', '_', $elementName);
     }
 
     /**
