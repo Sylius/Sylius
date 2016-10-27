@@ -135,9 +135,9 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @When I want to browse customer groups of the store
+     * @When I want to browse customer groups
      */
-    public function iWantToBrowseCustomerGroupsOfTheStore()
+    public function iWantToBrowseCustomerGroups()
     {
         $this->indexPage->open();
     }
@@ -163,9 +163,9 @@ final class ManagingCustomerGroupsContext implements Context
     /**
      * @Then /^(this customer group) should still be named "([^"]+)"$/
      */
-    public function thisChannelNameShouldBe(CustomerGroupInterface $customerGroup, $customerGroupName)
+    public function thisCustomerGroupShouldStillBeNamed(CustomerGroupInterface $customerGroup, $customerGroupName)
     {
-        $this->iWantToBrowseCustomerGroupsOfTheStore();
+        $this->iWantToBrowseCustomerGroups();
 
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]),

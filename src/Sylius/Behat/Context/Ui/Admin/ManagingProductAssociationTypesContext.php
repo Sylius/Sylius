@@ -230,7 +230,7 @@ final class ManagingProductAssociationTypesContext implements Context
                 'name' => $productAssociationType->getName()]
             ),
             sprintf(
-                'Product association type%s should no longer exist in the registry',
+                'Product association type %s should no longer exist in the registry',
                 $productAssociationType->getName()
             )
         );
