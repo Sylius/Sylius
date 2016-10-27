@@ -63,6 +63,14 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasProvinceValidationMessage()
+    {
+        return null !== $this->getDocument()->find('css', '.sylius-validation-error:contains("province")');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function countValidationMessages()
     {
         return count($this->getDocument()->findAll('css', '.sylius-validation-error'));

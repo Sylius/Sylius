@@ -32,6 +32,11 @@ interface CreatePageInterface extends SymfonyPageInterface
     public function addAddress();
 
     /**
+     * @return bool
+     */
+    public function hasProvinceValidationMessage();
+
+    /**
      * @return int
      */
     public function countValidationMessages();

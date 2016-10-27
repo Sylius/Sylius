@@ -1,8 +1,8 @@
 @address_book
 Feature: Seeing validation messages during address addition
-    In order to know what data needs to be set in to add a new address
+    In order to be sure that the address I'm trying to add is correct
     As a Customer
-    I want to see validation errors
+    I want to be prevented from adding invalid addresses
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -16,7 +16,7 @@ Feature: Seeing validation messages during address addition
         When I leave every field empty
         And I add it
         Then I should still be on the address addition page
-        And I should see 6 validation messages
+        And I should be notified about 6 errors
 
     @ui @javascript
     Scenario: The province needs to be selected when the chosen country has at least one stated
@@ -25,4 +25,4 @@ Feature: Seeing validation messages during address addition
         And I choose "Australia" as my country
         And I add it
         Then I should still be on the address addition page
-        And I should see 1 validation messages
+        And I should be notified that the province needs to be specified

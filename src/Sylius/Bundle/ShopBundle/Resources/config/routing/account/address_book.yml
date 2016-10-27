@@ -40,6 +40,11 @@ sylius_shop_account_address_book_update:
         _sylius:
             template: SyliusShopBundle:Account/AddressBook:update.html.twig
             section: shop_account
+            repository:
+                method: findOneByCustomerAndId
+                arguments:
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+                    - $id
             redirect:
                 route: sylius_shop_account_address_book_index
                 parameters: {}

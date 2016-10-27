@@ -17,10 +17,12 @@ use Sylius\Behat\Page\Shop\Account\AddressBook\CreatePageInterface;
 use Sylius\Behat\Page\Shop\Account\AddressBook\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\AddressBook\UpdatePageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -33,6 +35,11 @@ final class AddressBookContext implements Context
      * @var SharedStorageInterface
      */
     private $sharedStorage;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $addressRepository;
 
     /**
      * @var IndexPageInterface
@@ -61,6 +68,7 @@ final class AddressBookContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
+     * @param RepositoryInterface $addressRepository
      * @param IndexPageInterface $addressBookIndexPage
      * @param CreatePageInterface $addressBookCreatePage
      * @param UpdatePageInterface $addressBookUpdatePage
@@ -69,6 +77,7 @@ final class AddressBookContext implements Context
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
+        RepositoryInterface $addressRepository,
         IndexPageInterface $addressBookIndexPage,
         CreatePageInterface $addressBookCreatePage,
         UpdatePageInterface $addressBookUpdatePage,
@@ -76,6 +85,7 @@ final class AddressBookContext implements Context
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
+        $this->addressRepository = $addressRepository;
         $this->addressBookIndexPage = $addressBookIndexPage;
         $this->addressBookCreatePage = $addressBookCreatePage;
         $this->addressBookUpdatePage = $addressBookUpdatePage;
@@ -185,6 +195,18 @@ final class AddressBookContext implements Context
     }
 
     /**
+     * @When /^I try to edit the address of "([^"]+)"$/
+     */
+    public function iTryToEdit($fullName)
+    {
+        $this->sharedStorage->set('full_name', $fullName);
+
+        $address = $this->getAddressOf($fullName);
+
+        $this->addressBookUpdatePage->tryToOpen(['id' => $address->getId()]);
+    }
+
+    /**
      * @Then /^it should contain "([^"]+)"$/
      */
     public function itShouldContain($value)
@@ -195,7 +217,7 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then I should( still) see a single address in my book
+     * @Then there should( still) be a single address in my book
      */
     public function iShouldSeeASingleAddressInTheList()
     {
@@ -226,9 +248,20 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) validation messages$/
+     * @Then I should be notified that the province needs to be specified
      */
-    public function iShouldSeeValidationMessages($expectedCount)
+    public function iShouldBeNotifiedThatTheProvinceNeedsToBeSpecified()
+    {
+        Assert::true(
+            $this->addressBookCreatePage->hasProvinceValidationMessage(),
+            'Province validation messages should be visible.'
+        );
+    }
+
+    /**
+     * @Then /^I should be notified about (\d+) errors$/
+     */
+    public function iShouldBeNotifiedAboutErrors($expectedCount)
     {
         $actualCount = $this->addressBookCreatePage->countValidationMessages();
 
@@ -288,11 +321,44 @@ final class AddressBookContext implements Context
     }
 
     /**
+     * @Then I should be unable to edit their address
+     */
+    public function iShouldBeUnableToEditTheirAddress()
+    {
+        $address = $this->getAddressOf($this->sharedStorage->getLatestResource());
+
+        Assert::false(
+            $this->addressBookUpdatePage->isOpen(['id' => $address->getId()]),
+            sprintf(
+                'I should be unable to edit the address of "%s %s"',
+                $address->getFirstName(),
+                $address->getLastName()
+            )
+        );
+    }
+
+    /**
      * @Then I should be notified that the address has been successfully updated
      */
     public function iShouldBeNotifiedAboutSuccessfulUpdate()
     {
         $this->notificationChecker->checkNotification('Address has been successfully updated.', NotificationType::success());
+    }
+
+    /**
+     * @param string $fullName
+     *
+     * @return AddressInterface
+     */
+    private function getAddressOf($fullName)
+    {
+        list($firstName, $lastName) = explode(' ', $fullName);
+
+        /** @var AddressInterface $address */
+        $address = $this->addressRepository->findOneBy(['firstName' => $firstName, 'lastName' => $lastName]);
+        Assert::notNull($address);
+
+        return $address;
     }
 
     /**
