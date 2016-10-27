@@ -23,6 +23,7 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -95,6 +96,11 @@ final class CheckoutContext implements Context
     private $currentPageResolver;
 
     /**
+     * @var AddressComparatorInterface
+     */
+    private $addressComparator;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param HomePageInterface $homePage
      * @param AddressPageInterface $addressPage
@@ -106,6 +112,7 @@ final class CheckoutContext implements Context
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $addressFactory
      * @param CurrentPageResolverInterface $currentPageResolver
+     * @param AddressComparatorInterface $addressComparator
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -118,7 +125,8 @@ final class CheckoutContext implements Context
         ShowPageInterface $orderDetails,
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $addressFactory,
-        CurrentPageResolverInterface $currentPageResolver
+        CurrentPageResolverInterface $currentPageResolver,
+        AddressComparatorInterface $addressComparator
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->homePage = $homePage;
@@ -131,6 +139,7 @@ final class CheckoutContext implements Context
         $this->orderRepository = $orderRepository;
         $this->addressFactory = $addressFactory;
         $this->currentPageResolver = $currentPageResolver;
+        $this->addressComparator = $addressComparator;
     }
 
     /**
@@ -207,6 +216,23 @@ final class CheckoutContext implements Context
     public function iWantToBrowseOrderDetailsForThisOrder(OrderInterface $order)
     {
         $this->orderDetails->open(['tokenValue' => $order->getTokenValue()]);
+    }
+
+    /**
+     * @When /^I choose ("[^"]+" street) for shipping address$/
+     */
+    public function iChooseForShippingAddress(AddressInterface $address)
+    {
+        $this->addressPage->selectShippingAddressFromAddressBook($address);
+    }
+
+    /**
+     * @When /^I choose ("[^"]+" street) for billing address$/
+     */
+    public function iChooseForBillingAddress(AddressInterface $address)
+    {
+        $this->addressPage->chooseDifferentBillingAddress();
+        $this->addressPage->selectBillingAddressFromAddressBook($address);
     }
 
     /**
@@ -1296,6 +1322,22 @@ final class CheckoutContext implements Context
             $this->selectPaymentPage->hasNoAvailablePaymentMethodsWarning(),
             'There should be warning about no available payment methods, but it does not.'
         );
+    }
+
+    /**
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as shipping address$/
+     */
+    public function addressShouldBeFilledAsShippingAddress(AddressInterface $address)
+    {
+        Assert::true($this->addressComparator->same($address, $this->addressPage->getPreFilledShippingAddress()));
+    }
+
+    /**
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+") should be filled as billing address$/
+     */
+    public function addressShouldBeFilledAsBillingAddress(AddressInterface $address)
+    {
+        Assert::true($this->addressComparator->same($address, $this->addressPage->getPreFilledBillingAddress()));
     }
 
     /**

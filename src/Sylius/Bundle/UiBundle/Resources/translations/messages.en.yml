@@ -656,6 +656,7 @@ sylius:
         scope: Scope
         search: Search
         security_settings: 'Security Settings'
+        select_address_from_book: 'Select address from my book'
         select_taxon: Select taxon
         set_a_new_password_for_your_account: Set a new password for your account
         set_as_default_billing_address: 'Set as default billing address'
