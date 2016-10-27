@@ -15,6 +15,7 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -237,7 +238,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function hasProductInAssociation($productName, $productAssociationName)
     {
         $associationHeader = $this->getElement('association', ['%association-name%' => $productAssociationName]);
+        Assert::notNull($associationHeader);
+
         $associations = $associationHeader->getParent()->find('css', '.four');
+        Assert::notNull($associations);
 
         return null !== $associations->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
     }

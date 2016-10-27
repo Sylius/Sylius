@@ -80,15 +80,14 @@ final class ProductAssociationContext implements Context
     }
 
     /**
-     * @Given the product :product has( also) an association :productAssociationType with products :firstProduct and :secondProduct
+     * @Given /^the (product "[^"]+") has(?:| also) an (association "[^"]+") with (products "[^"]+" and "[^"]+")$/
      */
     public function theProductHasAnAssociationWithProducts(
         ProductInterface $product,
         AssociationTypeInterface $productAssociationType,
-        ProductInterface $firstProduct,
-        ProductInterface $secondProduct
+        array $products
     ) {
-        $this->createProductAssociation($product, $productAssociationType, $firstProduct, $secondProduct);
+        $this->createProductAssociation($product, $productAssociationType, $products);
     }
 
     /**
@@ -113,20 +112,20 @@ final class ProductAssociationContext implements Context
     /**
      * @param ProductInterface $product
      * @param AssociationTypeInterface $productAssociationType
-     * @param ProductInterface $firstProduct
-     * @param ProductInterface|null $secondProduct
+     * @param array $associatedProducts
      */
     private function createProductAssociation(
         ProductInterface $product,
         AssociationTypeInterface $productAssociationType,
-        ProductInterface $firstProduct,
-        ProductInterface $secondProduct = null
+        array $associatedProducts
     ) {
         /** @var ProductAssociationInterface $productAssociation */
         $productAssociation = $this->productAssociationFactory->createNew();
         $productAssociation->setType($productAssociationType);
-        $productAssociation->addAssociatedObject($firstProduct);
-        $productAssociation->addAssociatedObject($secondProduct);
+
+        foreach ($associatedProducts as $associatedProduct) {
+            $productAssociation->addAssociatedObject($associatedProduct);
+        }
 
         $product->addAssociation($productAssociation);
 

@@ -170,22 +170,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findByAssociationId($associationId)
-    {
-        return $this->createQueryBuilder('o')
-            ->innerJoin('o.associations', 'association')
-            ->leftJoin('association.associatedObjects', 'objects')
-            ->andWhere('association.id = :associationId')
-            ->addOrderBy('o.createdAt', 'desc')
-            ->setParameter('associationId', $associationId)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
         if (isset($criteria['channels'])) {

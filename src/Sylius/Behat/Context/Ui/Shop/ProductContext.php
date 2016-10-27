@@ -12,12 +12,9 @@
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
-use Buzz\Exception\InvalidArgumentException;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Taxon\ShowPageInterface as TaxonShowPageInterface;
-use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -431,27 +428,25 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should( also) see the product association :productAssociationName with products :firstProductName and :secondProductName
+     * @Then /^I should(?:| also) see the product association "([^"]+)" with (products "[^"]+" and "[^"]+")$/
      */
-    public function iShouldSeeTheProductAssociationWithProducts(
-        $productAssociationName,
-        $firstProductName,
-        $secondProductName
-    ) {
+    public function iShouldSeeTheProductAssociationWithProducts($productAssociationName, array $products)
+    {
         Assert::true(
             $this->showPage->hasAssociation($productAssociationName),
             sprintf('There should be an association named "%s" but it does not.', $productAssociationName)
         );
 
-        $this->assertIsProductIsInAssociation($firstProductName, $productAssociationName);
-        $this->assertIsProductIsInAssociation($secondProductName, $productAssociationName);
+        foreach ($products as $product) {
+            $this->assertIsProductIsInAssociation($product->getName(), $productAssociationName);
+        }
     }
 
     /**
      * @param string $productName
      * @param string $productAssociationName
      *
-     * @throws /InvalidArgumentException
+     * @throws \InvalidArgumentException
      */
     private function assertIsProductIsInAssociation($productName, $productAssociationName)
     {

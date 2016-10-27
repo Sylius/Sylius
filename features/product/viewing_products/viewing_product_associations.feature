@@ -1,8 +1,8 @@
 @viewing_products
 Feature: Viewing product's associations
-    In order to see related products
+    In order to quickly navigate to other products associated with the one I'm currently viewing
     As a Visitor
-    I want to be able to see product's associations
+    I want to see related products when viewing product details
 
     Background:
         Given the store operates on a single channel in "United States"

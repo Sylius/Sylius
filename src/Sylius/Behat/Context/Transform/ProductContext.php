@@ -38,8 +38,6 @@ final class ProductContext implements Context
      * @Transform /^"([^"]+)" product(?:|s)$/
      * @Transform /^(?:a|an) "([^"]+)"$/
      * @Transform :product
-     * @Transform :firstProduct
-     * @Transform :secondProduct
      */
     public function getProductByName($productName)
     {
