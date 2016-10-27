@@ -20,4 +20,4 @@ Sylius\Component\Addressing\Model\Country:
           href:
                 route: sylius_api_country_show
                 parameters:
-                    id: expr(object.getId())
+                    code: expr(object.getCode())
