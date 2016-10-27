@@ -32,7 +32,6 @@ final class RegisterReviewFactoryPass implements CompilerPassInterface
 
             $reviewFactory = $container->setDefinition(sprintf('sylius.factory.'.$subject.'_review'), $reviewFactoryDefinition);
             $reviewFactory->addArgument($factory);
-            $reviewFactory->addArgument($container->findDefinition('sylius.repository.'.$subject));
         }
     }
 }

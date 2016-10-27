@@ -26,7 +26,7 @@ sylius_shop_product_reviews_create:
             factory:
                 method: createForSubjectWithReviewer
                 arguments:
-                    - 'expr:service("sylius.repository.product").findOneBySlug($slug).getId()'
+                    - 'expr:service("sylius.repository.product").findOneBySlug($slug)'
                     - 'expr:service("sylius.context.customer").getCustomer()'
             redirect:
                 route: sylius_shop_product_show
