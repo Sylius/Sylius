@@ -1,0 +1,47 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "name": {
+                "errors": [
+                    "Please enter channel name."
+                ]
+            },
+            "description": {},
+            "enabled": {
+                "errors": [
+                    "Must have at least one enabled entity"
+                ]
+            },
+            "hostname": {},
+            "color": {},
+            "locales": {},
+            "defaultLocale": {
+                "errors": [
+                    "Please enter channel default locale."
+                ]
+            },
+            "currencies": {},
+            "defaultCurrency": {
+                "errors": [
+                    "Please enter channel default currency."
+                ]
+            },
+            "defaultTaxZone": {},
+            "taxCalculationStrategy": {
+                "errors": [
+                    "This value should not be blank."
+                ]
+            },
+            "themeName": {},
+            "shippingMethods": {},
+            "paymentMethods": {},
+            "code": {
+                "errors": [
+                    "Please enter channel code."
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,55 @@
+{
+    "page": 1,
+    "limit": 10,
+    "pages": 1,
+    "total": 2,
+    "_links": {
+        "self": {
+            "href": "\/api\/channels\/?page=1&limit=10"
+        },
+        "first": {
+            "href": "\/api\/channels\/?page=1&limit=10"
+        },
+        "last": {
+            "href": "\/api\/channels\/?page=1&limit=10"
+        }
+    },
+    "_embedded": {
+        "items": [
+            {
+                "id": @integer@,
+                "code": "WEB",
+                "name": "Web Channel",
+                "description": "Lorem ipsum",
+                "hostname": "localhost",
+                "color": "black",
+                "created_at": @string@,
+                "updated_at": @string@,
+                "enabled": true,
+                "tax_calculation_strategy": "order_items_based",
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    }
+                }
+            },
+            {
+                "id": @integer@,
+                "code": "MOBILE",
+                "name": "Mobile Channel",
+                "description": "Lorem ipsum",
+                "hostname": "localhost",
+                "color": "blue",
+                "created_at": @string@,
+                "updated_at": @string@,
+                "enabled": false,
+                "tax_calculation_strategy": "order_items_based",
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    }
+                }
+            }
+        ]
+    }
+}

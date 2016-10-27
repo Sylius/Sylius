@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\LocaleBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourcesToIdentifiersTransformer;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -45,7 +47,10 @@ class LocaleChoiceType extends AbstractType
         parent::buildForm($builder, $options);
 
         if (true === $options['multiple']) {
-            $builder->addViewTransformer(new CollectionToArrayTransformer(), true);
+            $builder->addModelTransformer(new ResourcesToIdentifiersTransformer($this->localeRepository, 'code'));
+            //$builder->addViewTransformer(new CollectionToArrayTransformer(), true);
+        } else {
+            $builder->addModelTransformer(new ResourceToIdentifierTransformer($this->localeRepository, 'code'));
         }
     }
 
@@ -61,7 +66,7 @@ class LocaleChoiceType extends AbstractType
                 $choices = $this->localeRepository->findBy(['enabled' => $options['enabled']]);
             }
 
-            return new ObjectChoiceList($choices, null, [], null, 'id');
+            return new ObjectChoiceList($choices);
         };
 
         $resolver

@@ -14,19 +14,28 @@ sylius_api_channel_create:
         _controller: sylius.controller.channel:createAction
 
 sylius_api_channel_update:
-    path: /{id}
+    path: /{code}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.channel:updateAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_channel_delete:
-    path: /{id}
+    path: /{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.channel:deleteAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_channel_show:
-    path: /{id}
+    path: /{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.channel:showAction
+        _sylius:
+            criteria:
+                code: $code
