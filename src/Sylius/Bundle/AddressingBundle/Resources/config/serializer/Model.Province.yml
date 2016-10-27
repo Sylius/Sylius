@@ -26,10 +26,10 @@ Sylius\Component\Addressing\Model\Province:
           href:
                 route: sylius_api_province_show
                 parameters:
-                    countryId: expr(object.getCountry().getId())
-                    id: expr(object.getId())
+                    countryCode: expr(object.getCountry().getCode())
+                    code: expr(object.getCode())
         - rel: country
           href:
                 route: sylius_api_country_show
                 parameters:
-                    id: expr(object.getCountry().getId())
+                    code: expr(object.getCountry().getCode())

@@ -92,7 +92,7 @@ sylius_api_country:
 
 sylius_api_province:
     resource: "@SyliusApiBundle/Resources/config/routing/province.yml"
-    prefix: /countries/{countryId}/provinces
+    prefix: /countries/{countryCode}/provinces
 
 sylius_api_zone:
     resource: "@SyliusApiBundle/Resources/config/routing/zone.yml"
