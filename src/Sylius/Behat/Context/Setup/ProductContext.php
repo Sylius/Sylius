@@ -379,27 +379,17 @@ final class ProductContext implements Context
         $option->setName($optionName);
         $option->setCode(strtoupper($optionName));
 
-        $firstOptionValue = $this->addProductOption($option, $values[0], 'POV1');
-        $secondOptionValue = $this->addProductOption($option, $values[1], 'POV2');
+        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
 
-        if (isset($values[2])) {
-            $thirdOptionValue = $this->addProductOption($option, $values[2], 'POV3');
+        foreach ($values as $key => $value) {
+            $optionValue = $this->addProductOption($option, $value, StringInflector::nameToUppercaseCode($value));
+            $this->sharedStorage->set(sprintf('%s_option_%s_value', $value, strtolower($optionName)), $optionValue);
         }
 
         $product->addOption($option);
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
-        $this->sharedStorage->set(sprintf('%s_option', $optionName), $option);
-        $this->sharedStorage->set(sprintf('%s_option_%s_value', $values[0], strtolower($optionName)), $firstOptionValue);
-        $this->sharedStorage->set(sprintf('%s_option_%s_value', $values[1], strtolower($optionName)), $secondOptionValue);
-
-        if (isset($values[2])) {
-            $this->sharedStorage->set(sprintf('%s_option_%s_value', $values[2], strtolower($optionName)), $thirdOptionValue);
-        }
-
         $this->objectManager->persist($option);
-        $this->objectManager->persist($firstOptionValue);
-        $this->objectManager->persist($secondOptionValue);
         $this->objectManager->flush();
     }
 
