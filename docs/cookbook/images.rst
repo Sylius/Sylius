@@ -77,4 +77,4 @@ For example you can create a filter for advertisement banners:
 Learn more
 ----------
 
-* `The LiipImagineBundle documentation <http://lakion.com/lionframe>`_
+* `The LiipImagineBundle documentation <http://symfony.com/doc/current/bundles/LiipImagineBundle/index.html>`_
