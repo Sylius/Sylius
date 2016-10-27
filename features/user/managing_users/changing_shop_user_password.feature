@@ -5,10 +5,11 @@ Feature: Changing shop user password
     I want to be able to change shop user password
 
     Background:
-        Given there is a user "kibsoon@example.com" identified by "goodGuy"
+        Given the store operates on a single channel in "United States"
+        And there is a user "kibsoon@example.com" identified by "goodGuy"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Changing password of shop user
         When I change user "kibsoon@example.com" password to "veryGoodGuy"
         Then I should be notified that it has been successfully edited

@@ -192,4 +192,17 @@ final class LoginContext implements Context
             sprintf('The %s should be required.', $elementName)
         );
     }
+
+    /**
+     * @Then I should be able to log in as :email with :password password
+     */
+    public function iShouldBeAbleToLogInAsWithPassword($email, $password)
+    {
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
+
+        $this->iShouldBeLoggedIn();
+    }
 }
