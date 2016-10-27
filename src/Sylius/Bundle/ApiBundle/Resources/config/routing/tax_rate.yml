@@ -19,19 +19,28 @@ sylius_api_tax_rate_create:
         _controller: sylius.controller.tax_rate:createAction
 
 sylius_api_tax_rate_update:
-    path: /{id}
+    path: /{code}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.tax_rate:updateAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_tax_rate_delete:
-    path: /{id}
+    path: /{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.tax_rate:deleteAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_tax_rate_show:
-    path: /{id}
+    path: /{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.tax_rate:showAction
+        _sylius:
+            criteria:
+                code: $code
