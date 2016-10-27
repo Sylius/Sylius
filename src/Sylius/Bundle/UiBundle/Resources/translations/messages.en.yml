@@ -494,7 +494,6 @@ sylius:
         no_addresses: 'There are no addresses to display'
         no_association_types_to_display: 'There are no association types defined'
         no_comment: 'No comment'
-        no_default_address: 'There is no selected default address'
         no_default_billing_address: 'No default billing address'
         no_default_shipping_address: 'No default shipping address'
         no_description: 'No description'
@@ -660,6 +659,7 @@ sylius:
         select_address_from_book: 'Select address from my book'
         select_taxon: Select taxon
         set_a_new_password_for_your_account: Set a new password for your account
+        set_as_default: 'Set as default'
         set_as_default_billing_address: 'Set as default billing address'
         set_as_default_shipping_address: 'Set as default shipping address'
         ship: Ship
@@ -826,6 +826,7 @@ sylius:
         you_have_no_new_orders: 'You have no new orders'
         you_may_also_like: You may also like
         your_cart_is_empty: Your cart is empty
+        your_default_address: 'Your default address'
         your_last_5_orders: 'Your last 5 orders'
         your_order_has_been_shipped: 'Your order has been shipped'
         your_products: 'Your products'
