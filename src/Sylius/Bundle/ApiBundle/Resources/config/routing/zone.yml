@@ -22,19 +22,28 @@ sylius_api_zone_create:
                     type: $type
 
 sylius_api_zone_update:
-    path: /{id}
+    path: /{code}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.zone:updateAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_zone_delete:
-    path: /{id}
+    path: /{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.zone:deleteAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_zone_show:
-    path: /{id}
+    path: /{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.zone:showAction
+        _sylius:
+            criteria:
+                code: $code
