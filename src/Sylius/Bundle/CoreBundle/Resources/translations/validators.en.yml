@@ -24,6 +24,7 @@ sylius:
             cannot_disable_base: The base locale cannot be disabled.
     product_image:
         code:
+            not_blank: Please enter an image code.
             unique: Image code must be unique within this product.
     product_variant:
         onHand:

@@ -90,6 +90,11 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function attachImageWithCode($code, $path);
 
     /**
+     * @param string $path
+     */
+    public function attachImageWithoutCode($path);
+
+    /**
      * @param string $code
      * @param string $path
      */

@@ -7,7 +7,7 @@ Feature: Product image validation
     Background:
         Given I am logged in as an administrator
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Trying to add a new image without specifying its code to a simple product
         Given the store has a product "Lamborghini Gallardo Model"
         When I want to modify the "Lamborghini Gallardo Model" product
@@ -16,7 +16,7 @@ Feature: Product image validation
         Then I should be notified that an image code is required
         And this product should not have images
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Trying to add a new image without specifying its code to a configurable product
         Given the store has a "Lamborghini Gallardo Model" configurable product
         When I want to modify the "Lamborghini Gallardo Model" product
