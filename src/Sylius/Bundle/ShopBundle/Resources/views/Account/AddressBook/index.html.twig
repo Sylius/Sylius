@@ -16,17 +16,14 @@
         </div>
     </div>
     {% if addresses|length > 0 %}
-    <div class="ui two column grid" id="sylius-addresses">
-        <div class="row">
-            {% for address in addresses %}
-                {% include '@SyliusShop/Account/AddressBook/_item.html.twig' %}
-
-                {% if not loop.index % 2 %}
-                </div>
-                <div class="row">
-                {% endif %}
-            {% endfor %}
-        </div>
+        {% set defaultAddress = (shopperContext.getCustomer().defaultAddress) %}
+        {% if defaultAddress is not null %}
+            {% include '@SyliusShop/Account/AddressBook/_defaultAddress.html.twig' %}
+        {% endif %}
+    <div class="ui stackable grid" id="sylius-addresses">
+        {% for address in addresses if defaultAddress is null or address.id != defaultAddress.id %}
+            {% include '@SyliusShop/Account/AddressBook/_item.html.twig' %}
+        {% endfor %}
     </div>
     {% else %}
         {{ messages.info('sylius.ui.you_have_no_addresses_defined'|trans) }}

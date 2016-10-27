@@ -81,6 +81,31 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setAsDefault($fullName)
+    {
+        $addressToSetAsDefault = $this->getAddressOf($fullName);
+        $addressToSetAsDefault->pressButton('Set as default');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasNoDefaultAddress()
+    {
+        return !$this->hasElement('default_address');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFullNameOfDefaultAddress()
+    {
+        return $this->getElement('default_address')->find('css', 'address > strong')->getText();
+    }
+
+    /**
      * @param string $fullName
      *
      * @return NodeElement|null
@@ -97,6 +122,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'addresses' => '#sylius-addresses',
+            'default_address' => '#sylius-default-address',
         ]);
     }
 }

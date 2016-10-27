@@ -37,6 +37,16 @@ interface IndexPageInterface extends SymfonyPageInterface
     public function hasNoAddresses();
 
     /**
+     * @return bool
+     */
+    public function hasNoDefaultAddress();
+
+    /**
+     * @return string
+     */
+    public function getFullNameOfDefaultAddress();
+
+    /**
      * @param string $fullName
      * @param string $value
      *
@@ -53,4 +63,9 @@ interface IndexPageInterface extends SymfonyPageInterface
      * @param string $fullName
      */
     public function deleteAddress($fullName);
+
+    /**
+     * @param string $fullName
+     */
+    public function setAsDefault($fullName);
 }

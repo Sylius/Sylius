@@ -11,15 +11,24 @@ Feature: Marking an address as default
         And I have an address "Archangelo Prime", "Mountain Av", "90640", "Isla del Muerte", "United States" in my address book
 
     @ui
+    Scenario: Having no address marked as default at first
+        Given I am browsing my address book
+        Then I should not have a default address
+        And I should have 2 addresses in my address book
+
+    @ui
     Scenario: Setting an order as default
         Given I am browsing my address book
         When I set the address of "Lucifer Morningstar" as default
-        Then the address of "Lucifer Morningstar" should be my default
-        And I should still have 2 addresses in my address book
+        Then I should be notified that the address has been set as default
+        And it should be marked as my default address
+        And I should have 1 address in my address book
 
     @ui
     Scenario: Only one address can be default
         Given I am browsing my address book
         And my default address is of "Lucifer Morningstar"
         When I set the address of "Archangelo Prime" as default
-        Then the address of "Archangelo Prime" should be my default
+        Then I should be notified that the address has been set as default
+        And the address of "Archangelo Prime" should be marked as my default
+        And the address assigned to "Lucifer Morningstar" should be in my book

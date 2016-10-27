@@ -15,7 +15,7 @@ Feature: Viewing my address book
         Then there should still be a single address in my book
 
     @ui
-    Scenario: Seeing only my addresses
+    Scenario: Inability to view the addresses of other customers
         Given there is a customer "John Doe" identified by an email "doe@example.com" and a password "banana"
         And this customer has an address "John Doe", "Banana Street", "90232", "New York", "United States", "Kansas" in their address book
         And I have an address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" in my address book
@@ -25,6 +25,6 @@ Feature: Viewing my address book
         And I should not see the address assigned to "John Doe"
 
     @ui
-    Scenario: Viewing empty address book
+    Scenario: Viewing an empty address book
         When I browse my address book
         Then there should be no addresses
