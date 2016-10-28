@@ -5,16 +5,16 @@ env:
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
         - SYLIUS_BUILD_DIR=etc/build
 
-sudo: false
-
 matrix:
     include:
         -
+            sudo: required
             php: 7.0
             env: SYLIUS_SUITE="application"
             services:
                 - memcached
         -
+            sudo: false
             php: 7.0
             env: SYLIUS_SUITE="docs packages"
             addons:
@@ -22,11 +22,13 @@ matrix:
                     packages:
                         - parallel
         -
+            sudo: required
             php: 5.6
             env: SYLIUS_SUITE="application"
             services:
                 - memcached
         -
+            sudo: false
             php: 5.6
             env: SYLIUS_SUITE="packages"
             addons:
