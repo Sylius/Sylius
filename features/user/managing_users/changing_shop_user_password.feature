@@ -1,5 +1,5 @@
 @managing_users
-Feature: Changing shop user password
+Feature: Changing shop user's password
     In order to modify shop user credentials
     As an Administrator
     I want to be able to change shop user password
@@ -10,7 +10,7 @@ Feature: Changing shop user password
         And I am logged in as an administrator
 
     @ui
-    Scenario: Changing password of shop user
-        When I change user "kibsoon@example.com" password to "veryGoodGuy"
+    Scenario: Changing a password of a shop user
+        When I change the password of user "kibsoon@example.com" to "veryGoodGuy"
         Then I should be notified that it has been successfully edited
         And I should be able to log in as "kibsoon@example.com" with "veryGoodGuy" password
