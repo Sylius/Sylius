@@ -84,10 +84,10 @@ Listeners allow you to execute code at some point of fixtures loading.
 
 They implement at least one of four interfaces:
 
-     - ``Sylius\Bundle\FixturesBundle\Listener\BeforeSuiteListenerInterface`` - receives ``Sylius\Bundle\FixturesBundle\Listener\SuiteEvent`` as an arugment
-     - ``Sylius\Bundle\FixturesBundle\Listener\BeforeFixtureListenerInterface``  - receives ``Sylius\Bundle\FixturesBundle\Listener\FixtureEvent`` as an arugment
-     - ``Sylius\Bundle\FixturesBundle\Listener\AfterFixtureListenerInterface`` - receives ``Sylius\Bundle\FixturesBundle\Listener\FixtureEvent`` as an arugment
-     - ``Sylius\Bundle\FixturesBundle\Listener\AfterSuiteListenerInterface``  - receives ``Sylius\Bundle\FixturesBundle\Listener\SuiteEvent`` as an arugment
+     - ``Sylius\Bundle\FixturesBundle\Listener\BeforeSuiteListenerInterface`` - receives ``Sylius\Bundle\FixturesBundle\Listener\SuiteEvent`` as an argument
+     - ``Sylius\Bundle\FixturesBundle\Listener\BeforeFixtureListenerInterface``  - receives ``Sylius\Bundle\FixturesBundle\Listener\FixtureEvent`` as an argument
+     - ``Sylius\Bundle\FixturesBundle\Listener\AfterFixtureListenerInterface`` - receives ``Sylius\Bundle\FixturesBundle\Listener\FixtureEvent`` as an argument
+     - ``Sylius\Bundle\FixturesBundle\Listener\AfterSuiteListenerInterface``  - receives ``Sylius\Bundle\FixturesBundle\Listener\SuiteEvent`` as an argument
 
 .. note::
 

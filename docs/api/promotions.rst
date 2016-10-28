@@ -6,7 +6,7 @@ Sylius promotion API endpoint is `/api/promotions`.
 Index of all promotions
 -----------------------
 
-You can retrieve the full list of promotionns by making the following request:
+You can retrieve the full list of promotions by making the following request:
 
 .. code-block:: text
 

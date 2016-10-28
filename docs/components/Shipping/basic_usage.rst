@@ -415,7 +415,7 @@ First you need to create a few instances of **ShippingCategory** class:
     $shippingCategory1 = new ShippingCategory();
     $shippingCategory1->setName('Light');
 
-Next you have to create a repository w which holds a few instaces of **ShippingMethod**. An InMemoryRepository,
+Next you have to create a repository w which holds a few instances of **ShippingMethod**. An InMemoryRepository,
 which holds a collection of **ShippingMethod** objects, was used. The configuration is shown below:
 
 .. code-block:: php

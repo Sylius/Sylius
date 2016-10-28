@@ -14,7 +14,7 @@ Make sure it's enabled with the default options:
 Themes location and definition
 ------------------------------
 
-Private themes should be added to ``app/themes`` directory by default. Every theme should have a default confguration
+Private themes should be added to ``app/themes`` directory by default. Every theme should have a default configuration
 located in ``composer.json`` file. The only required parameter is ``name``, but it is worth to define other ones
 (:doc:`have a look at theme configuration reference <theme_configuration_reference>`).
 

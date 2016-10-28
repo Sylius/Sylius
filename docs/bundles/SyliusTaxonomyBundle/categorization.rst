@@ -70,7 +70,7 @@ Your product entity mapping should live inside ``Resources/config/doctrine/Produ
 
     </doctrine-mapping>
 
-Product is just an example where we have many to many realationship with taxons,
+Product is just an example where we have many to many relationship with taxons,
 which will make it possible to categorize products and list them by taxon later.
 
 You can classify any other model in your application the same way.

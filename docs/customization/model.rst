@@ -127,6 +127,6 @@ What happens while overriding Models?
 * ``sylius.repository.country`` represents Doctrine repository for your new class.
 * ``sylius.manager.country`` represents Doctrine object manager for your new class.
 * ``sylius.controller.country`` represents the controller for your new class.
-* All Doctrine relations to ``Sylius\\Component\\Adressing\\Model\\Country`` are using your new class as *target-entity*, you do not need to update any mappings.
+* All Doctrine relations to ``Sylius\\Component\\Addressing\\Model\\Country`` are using your new class as *target-entity*, you do not need to update any mappings.
 * ``CountryType`` form type is using your model as ``data_class``.
 * ``Sylius\\Component\\Addressing\\Model\\Country`` is automatically turned into Doctrine Mapped Superclass.
