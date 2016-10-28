@@ -1329,7 +1329,7 @@ final class CheckoutContext implements Context
      */
     public function addressShouldBeFilledAsShippingAddress(AddressInterface $address)
     {
-        Assert::true($this->addressComparator->same($address, $this->addressPage->getPreFilledShippingAddress()));
+        Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledShippingAddress()));
     }
 
     /**
@@ -1337,7 +1337,7 @@ final class CheckoutContext implements Context
      */
     public function addressShouldBeFilledAsBillingAddress(AddressInterface $address)
     {
-        Assert::true($this->addressComparator->same($address, $this->addressPage->getPreFilledBillingAddress()));
+        Assert::true($this->addressComparator->equal($address, $this->addressPage->getPreFilledBillingAddress()));
     }
 
     /**

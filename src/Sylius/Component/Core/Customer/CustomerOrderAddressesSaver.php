@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Customer;
 
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
@@ -19,14 +20,14 @@ use Sylius\Component\Core\Model\OrderInterface;
 final class CustomerOrderAddressesSaver implements OrderAddressesSaverInterface
 {
     /**
-     * @var AddressAdderInterface
+     * @var CustomerAddressAdderInterface
      */
     private $addressAdder;
 
     /**
-     * @param AddressAdderInterface $addressAdder
+     * @param CustomerAddressAdderInterface $addressAdder
      */
-    public function __construct(AddressAdderInterface $addressAdder)
+    public function __construct(CustomerAddressAdderInterface $addressAdder)
     {
         $this->addressAdder = $addressAdder;
     }
@@ -36,10 +37,13 @@ final class CustomerOrderAddressesSaver implements OrderAddressesSaverInterface
      */
     public function saveAddresses(OrderInterface $order)
     {
+        /** @var CustomerInterface $customer */
+        $customer = $order->getCustomer();
+
         $shippingAddress = $order->getShippingAddress();
         $billingAddress = $order->getBillingAddress();
 
-        $this->addressAdder->add(clone $billingAddress);
-        $this->addressAdder->add(clone $shippingAddress);
+        $this->addressAdder->add($customer, clone $billingAddress);
+        $this->addressAdder->add($customer, clone $shippingAddress);
     }
 }

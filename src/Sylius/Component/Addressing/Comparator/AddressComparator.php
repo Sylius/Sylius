@@ -21,7 +21,7 @@ final class AddressComparator implements AddressComparatorInterface
     /**
      * {@inheritdoc}
      */
-    public function same(AddressInterface $firstAddress, AddressInterface $secondAddress)
+    public function equal(AddressInterface $firstAddress, AddressInterface $secondAddress)
     {
         return $this->normalizeAddress($firstAddress) === $this->normalizeAddress($secondAddress);
     }

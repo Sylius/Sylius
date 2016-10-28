@@ -24,5 +24,5 @@ interface AddressComparatorInterface
      *
      * @return bool
      */
-    public function same(AddressInterface $firstAddress, AddressInterface $secondAddress);
+    public function equal(AddressInterface $firstAddress, AddressInterface $secondAddress);
 }

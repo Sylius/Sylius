@@ -14,12 +14,11 @@ namespace Sylius\Component\Core\Customer;
 use Sylius\Component\Addressing\Comparator\AddressComparatorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Customer\Context\CustomerContextInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-final class CustomerUniqueAddressAdder implements AddressAdderInterface
+final class CustomerUniqueAddressAdder implements CustomerAddressAdderInterface
 {
     /**
      * @var AddressComparatorInterface
@@ -27,35 +26,20 @@ final class CustomerUniqueAddressAdder implements AddressAdderInterface
     private $addressComparator;
 
     /**
-     * @var CustomerContextInterface
-     */
-    private $customerContext;
-
-    /**
      * @param AddressComparatorInterface $addressComparator
-     * @param CustomerContextInterface $customerContext
      */
-    public function __construct(
-        AddressComparatorInterface $addressComparator,
-        CustomerContextInterface $customerContext
-    ) {
+    public function __construct(AddressComparatorInterface $addressComparator)
+    {
         $this->addressComparator = $addressComparator;
-        $this->customerContext = $customerContext;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function add(AddressInterface $address)
+    public function add(CustomerInterface $customer, AddressInterface $address)
     {
-        /** @var CustomerInterface $customer */
-        $customer = $this->customerContext->getCustomer();
-        if (null === $customer) {
-            return;
-        }
-
         foreach ($customer->getAddresses() as $customerAddress) {
-            if ($this->addressComparator->same($customerAddress, $address)) {
+            if ($this->addressComparator->equal($customerAddress, $address)) {
                 return;
             }
         }

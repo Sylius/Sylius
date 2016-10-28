@@ -99,7 +99,6 @@
 
         <service id="sylius.customer_unique_address_adder" class="Sylius\Component\Core\Customer\CustomerUniqueAddressAdder">
             <argument type="service" id="sylius.address_comparator" />
-            <argument type="service" id="sylius.context.customer" />
         </service>
         <service id="sylius.customer_order_addresses_saver" class="Sylius\Component\Core\Customer\CustomerOrderAddressesSaver">
             <argument type="service" id="sylius.customer_unique_address_adder" />

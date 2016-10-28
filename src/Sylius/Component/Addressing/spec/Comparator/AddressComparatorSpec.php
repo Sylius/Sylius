@@ -55,7 +55,7 @@ final class AddressComparatorSpec extends ObjectBehavior
         $secondAddress->getProvinceCode()->willReturn(null);
         $secondAddress->getProvinceName()->willReturn('Queensland');
 
-        $this->same($firstAddress, $secondAddress)->shouldReturn(false);
+        $this->equal($firstAddress, $secondAddress)->shouldReturn(false);
     }
 
     function it_returns_true_when_addresses_are_the_same(AddressInterface $address)
@@ -71,7 +71,7 @@ final class AddressComparatorSpec extends ObjectBehavior
         $address->getProvinceCode()->willReturn(null);
         $address->getProvinceName()->willReturn('Queensland');
 
-        $this->same($address, $address)->shouldReturn(true);
+        $this->equal($address, $address)->shouldReturn(true);
     }
 
     function it_ignores_leading_and_trailing_spaces_or_letter_cases(AddressInterface $firstAddress, AddressInterface $secondAddress)
@@ -98,6 +98,6 @@ final class AddressComparatorSpec extends ObjectBehavior
         $secondAddress->getProvinceCode()->willReturn(null);
         $secondAddress->getProvinceName()->willReturn('Queensland');
 
-        $this->same($firstAddress, $secondAddress)->shouldReturn(true);
+        $this->equal($firstAddress, $secondAddress)->shouldReturn(true);
     }
 }

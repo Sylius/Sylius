@@ -12,10 +12,11 @@
 namespace spec\Sylius\Component\Core\Customer;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Customer\AddressAdderInterface;
+use Sylius\Component\Core\Customer\CustomerAddressAdderInterface;
 use Sylius\Component\Core\Customer\CustomerOrderAddressesSaver;
 use Sylius\Component\Core\Customer\OrderAddressesSaverInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
@@ -23,7 +24,7 @@ use Sylius\Component\Core\Model\OrderInterface;
  */
 final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
 {
-    function let(AddressAdderInterface $addressAdder)
+    function let(CustomerAddressAdderInterface $addressAdder)
     {
         $this->beConstructedWith($addressAdder);
     }
@@ -39,16 +40,19 @@ final class CustomerOrderAddressesSaverSpec extends ObjectBehavior
     }
 
     function it_saves_addresses_from_given_order(
-        AddressAdderInterface $addressAdder,
+        CustomerAddressAdderInterface $addressAdder,
         OrderInterface $order,
+        CustomerInterface $customer,
         AddressInterface $shippingAddress,
         AddressInterface $billingAddress
     ) {
+        $order->getCustomer()->willReturn($customer);
+
         $order->getShippingAddress()->willReturn($shippingAddress);
         $order->getBillingAddress()->willReturn($billingAddress);
 
-        $addressAdder->add(clone $shippingAddress)->shouldBeCalled();
-        $addressAdder->add(clone $billingAddress)->shouldBeCalled();
+        $addressAdder->add($customer, clone $shippingAddress)->shouldBeCalled();
+        $addressAdder->add($customer, clone $billingAddress)->shouldBeCalled();
 
         $this->saveAddresses($order);
     }
