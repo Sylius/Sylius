@@ -43,12 +43,10 @@ class AddressChoiceType extends AbstractType
     {
         $choices = function (Options $options) {
             if (null === $options['customer']) {
-                $choices = $this->addressRepository->findAll();
-            } else {
-                $choices = $this->addressRepository->findBy(['customer' => $options['customer']]);
+                return $this->addressRepository->findAll();
             }
 
-            return $choices;
+            return $this->addressRepository->findBy(['customer' => $options['customer']]);
         };
 
         $resolver->setDefaults([
