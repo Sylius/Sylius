@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -229,7 +230,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function hasAssociation($productAssociationName)
     {
-        return null !== $this->getElement('association', ['%association-name%' => $productAssociationName]);
+        return $this->hasElement('association', ['%association-name%' => $productAssociationName]);
     }
 
     /**
@@ -238,9 +239,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function hasProductInAssociation($productName, $productAssociationName)
     {
         $associationHeader = $this->getElement('association', ['%association-name%' => $productAssociationName]);
-        Assert::notNull($associationHeader);
-
         $associations = $associationHeader->getParent()->find('css', '.four');
+
         Assert::notNull($associations);
 
         return null !== $associations->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
