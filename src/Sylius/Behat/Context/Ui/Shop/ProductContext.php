@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Taxon\ShowPageInterface as TaxonShowPageInterface;
-use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -425,6 +424,39 @@ final class ProductContext implements Context
             (float) $rating,
             $this->showPage->getAverageRating(),
             'Product should have average rating %2$s but has %s.'
+        );
+    }
+
+    /**
+     * @Then /^I should(?:| also) see the product association "([^"]+)" with (products "[^"]+" and "[^"]+")$/
+     */
+    public function iShouldSeeTheProductAssociationWithProducts($productAssociationName, array $products)
+    {
+        Assert::true(
+            $this->showPage->hasAssociation($productAssociationName),
+            sprintf('There should be an association named "%s" but it does not.', $productAssociationName)
+        );
+
+        foreach ($products as $product) {
+            $this->assertIsProductIsInAssociation($product->getName(), $productAssociationName);
+        }
+    }
+
+    /**
+     * @param string $productName
+     * @param string $productAssociationName
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertIsProductIsInAssociation($productName, $productAssociationName)
+    {
+        Assert::true(
+            $this->showPage->hasProductInAssociation($productName, $productAssociationName),
+            sprintf(
+                'There should be an associated product "%s" under association "%s" but it does not.',
+                $productName,
+                $productAssociationName
+            )
         );
     }
 }

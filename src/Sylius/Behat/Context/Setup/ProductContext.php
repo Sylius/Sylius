@@ -231,7 +231,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given the store has :firstProductName and :secondProductName products
+     * @Given the store has( also) :firstProductName and :secondProductName products
      */
     public function theStoreHasAProductAnd($firstProductName, $secondProductName)
     {

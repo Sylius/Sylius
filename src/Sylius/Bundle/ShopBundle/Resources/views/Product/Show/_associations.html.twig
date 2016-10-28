@@ -1,2 +1,9 @@
-<h4 class="ui horizontal section divider header">{{ 'sylius.ui.you_may_also_like'|trans }}</h4>
-{{ render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Product/_simpleList.html.twig'})) }}
+{% for association in product.associations %}
+    <div>
+        <h4 class="ui horizontal section divider header">{{ association.type.name }}</h4>
+        {{ render(url('sylius_shop_partial_associated_products', {'id': association.id, 'template': '@SyliusShop/Product/_associations.html.twig'})) }}
+    </div>
+{% else %}
+    <h4 class="ui horizontal section divider header">{{ 'sylius.ui.you_may_also_like'|trans }}</h4>
+    {{ render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Product/_simpleList.html.twig'})) }}
+{% endfor %}

@@ -34,6 +34,7 @@ final class ProductAssociationTypeContext implements Context
     }
 
     /**
+     * @Transform /^association "([^"]+)"$/
      * @Transform :productAssociationType
      */
     public function getProductAssociationTypeByName($productAssociationTypeName)

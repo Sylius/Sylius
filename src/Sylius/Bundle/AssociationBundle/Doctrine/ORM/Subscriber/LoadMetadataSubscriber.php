@@ -52,19 +52,23 @@ final class LoadMetadataSubscriber implements EventSubscriber
         $metadataFactory = $eventArgs->getEntityManager()->getMetadataFactory();
 
         foreach ($this->subjects as $subject => $class) {
-            if ($class['association']['classes']['model'] !== $metadata->getName()) {
-                continue;
+            if ($class['association']['classes']['model'] === $metadata->getName()) {
+                $associationEntity = $class['subject'];
+                $associationEntityMetadata = $metadataFactory->getMetadataFor($associationEntity);
+
+                $associationTypeModel = $class['association_type']['classes']['model'];
+                $associationTypeMetadata = $metadataFactory->getMetadataFor($associationTypeModel);
+
+                $metadata->mapManyToOne($this->createSubjectMapping($associationEntity, $subject, $associationEntityMetadata));
+                $metadata->mapManyToMany($this->createAssociationMapping($associationEntity, $subject, $associationEntityMetadata));
+                $metadata->mapManyToOne($this->createAssociationTypeMapping($associationTypeModel, $associationTypeMetadata));
             }
 
-            $associationEntity = $class['subject'];
-            $associationEntityMetadata = $metadataFactory->getMetadataFor($associationEntity);
+            if ($class['subject'] === $metadata->getName()) {
+                $associationEntity = $class['association']['classes']['model'];
 
-            $associationTypeModel = $class['association_type']['classes']['model'];
-            $associationTypeMetadata = $metadataFactory->getMetadataFor($associationTypeModel);
-
-            $metadata->mapManyToOne($this->createSubjectMapping($associationEntity, $subject, $associationEntityMetadata));
-            $metadata->mapManyToMany($this->createAssociationMapping($associationEntity, $subject, $associationEntityMetadata));
-            $metadata->mapManyToOne($this->createAssociationTypeMapping($associationTypeModel, $associationTypeMetadata));
+                $metadata->mapOneToMany($this->createAssociationsMapping($associationEntity));
+            }
         }
     }
 
@@ -139,6 +143,21 @@ final class LoadMetadataSubscriber implements EventSubscriber
                 'nullable' => false,
                 'onDelete' => 'CASCADE',
             ]],
+        ];
+    }
+
+    /**
+     * @param string $associationEntity
+     *
+     * @return array
+     */
+    private function createAssociationsMapping($associationEntity)
+    {
+        return [
+            'fieldName' => 'associations',
+            'targetEntity' => $associationEntity,
+            'mappedBy' => 'owner',
+            'cascade' => ['all'],
         ];
     }
 }

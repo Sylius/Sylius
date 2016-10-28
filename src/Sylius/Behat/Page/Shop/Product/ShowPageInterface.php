@@ -126,4 +126,19 @@ interface ShowPageInterface extends PageInterface
      * @param string $variantName
      */
     public function selectVariant($variantName);
+
+    /**
+     * @param string $productAssociationName
+     *
+     * @return bool
+     */
+    public function hasAssociation($productAssociationName);
+
+    /**
+     * @param string $productName
+     * @param string $productAssociationName
+     *
+     * @return bool
+     */
+    public function hasProductInAssociation($productName, $productAssociationName);
 }
