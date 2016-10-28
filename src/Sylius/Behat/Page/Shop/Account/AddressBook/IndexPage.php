@@ -117,7 +117,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     private function getAddressOf($fullName)
     {
-        return $this->getElement('addresses')->find('css', sprintf('div:contains("%s")', $fullName));
+        return $this->getElement('addresses')->find('css', sprintf('div.address:contains("%s")', $fullName));
     }
 
     /**

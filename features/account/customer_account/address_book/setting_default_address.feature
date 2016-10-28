@@ -21,14 +21,14 @@ Feature: Marking an address as default
         Given I am browsing my address book
         When I set the address of "Lucifer Morningstar" as default
         Then I should be notified that the address has been set as default
-        And it should be marked as my default address
         And I should have 1 address in my address book
+        And address "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States", "Arkansas" should be marked as my default address
 
     @ui
     Scenario: Only one address can be default
-        Given I am browsing my address book
-        And my default address is of "Lucifer Morningstar"
+        Given my default address is of "Lucifer Morningstar"
+        And I am browsing my address book
         When I set the address of "Archangelo Prime" as default
         Then I should be notified that the address has been set as default
-        And the address of "Archangelo Prime" should be marked as my default
+        And address "Archangelo Prime", "Mountain Av", "90640", "Isla del Muerte", "United States" should be marked as my default address
         And the address assigned to "Lucifer Morningstar" should be in my book
