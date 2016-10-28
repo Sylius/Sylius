@@ -385,6 +385,7 @@ sylius:
         rating: Avaliação
         ready: Preparado
         refunded: Reembolsado
+        rejected: Rejeitado
         remember_me: Lembrar-me
         reports: Relatórios
         retail_price: Preço de venda

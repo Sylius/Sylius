@@ -18,18 +18,31 @@ sylius:
         promotion_action:
             fixed_discount_configuration:
                 amount: Hoeveelheid
+            percentage_discount_configuration:
+                percentage: Percentage
             type: Type
         promotion_coupon:
+            expires_at: Verloopt op
             usage_limit: Gebruikslimiet
         promotion_coupon_generator_instruction:
             amount: Hoeveelheid
+            code_length: Lengte van de code
+            expires_at: Verloopt op
             usage_limit: Gebruikslimiet
         promotion_rule:
             cart_quantity_configuration:
                 count: Aantal
                 equal: Gelijk
+            contains_product_configuration:
+                exclude: Uitsluiten
+                variants: Producten
             item_total_configuration:
                 amount: Hoeveelheid
+            nth_order_configuration:
+                nth: Nde
             shipping_country_configuration:
                 country: Land
+            taxonomy_configuration:
+                exclude: Uitsluiten
+                taxons: Taxons
             type: Type

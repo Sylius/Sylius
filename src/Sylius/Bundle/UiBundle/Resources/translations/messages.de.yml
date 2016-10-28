@@ -582,6 +582,7 @@ sylius:
         registered_customers: Registrierte Kunden
         registration_create_an_account_in_store: Anmeldung <small>Konto für Shop erstellen</small>
         registration_date: Anmeldedatum
+        rejected: Zurückgewiesen
         release_inventory: Warenbestand freigeben
         remember_me: Eingeloggt bleiben
         remove_attribute: Attribute entfernen

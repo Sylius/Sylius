@@ -567,6 +567,7 @@ sylius:
         registered_customers: Regisztrált felhasználók
         registration_create_an_account_in_store: Regisztráció <small>Hozzon létre egy fiókot áruházunkban</small>
         registration_date: Regisztráció dátuma
+        rejected: Elutasított
         release_inventory: Kibocsáthatható készlet
         remember_me: Emlékezzen rám
         remove_attribute: Tulajdonság törlése

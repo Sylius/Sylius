@@ -557,6 +557,7 @@ sylius:
         register_button: Zarejestruj
         registration_create_an_account_in_store: Rejestracja, <small>Załóż konto w sklepie</small>
         registration_date: Data rejestracji
+        rejected: Odrzucona
         release_inventory: Inwentarz wydań
         remember_me: Zapamiętaj mnie
         remove_attribute: Usuń cechę

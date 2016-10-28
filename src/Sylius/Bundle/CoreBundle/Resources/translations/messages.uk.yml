@@ -122,6 +122,8 @@ sylius:
             contains_taxon:
                 taxon: Таксон
                 count: Підрахунок
+            product:
+                products: Продукція
             total_of_items_from_taxon:
                 taxon: Таксон
                 amount: Обсяг

@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        register: Bedankt voor het registreren, controleer je e-mail om je account te bevestigen.

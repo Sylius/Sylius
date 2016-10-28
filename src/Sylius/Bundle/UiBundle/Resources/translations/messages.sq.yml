@@ -490,6 +490,7 @@ sylius:
         register_button: Regjistrohu
         registration_create_an_account_in_store: Regjistrimi <small>Krijo një llogari në arkiv</small>
         registration_date: Data e regjistrimit
+        rejected: I refuzuar
         release_inventory: Lista e daljeve
         remember_me: Më mbaj mend
         remove_attribute: Fshi atributin

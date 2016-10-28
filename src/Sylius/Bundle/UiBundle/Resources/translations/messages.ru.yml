@@ -336,6 +336,7 @@ sylius:
         register: Регистрация
         register_button: Регистрация
         registration_date: Дата регистрации
+        rejected: Отклонено
         release_inventory: Инвентаризация выпуска
         remember_me: Запомнить меня
         reports: Отчеты

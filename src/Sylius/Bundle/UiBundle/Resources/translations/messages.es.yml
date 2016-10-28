@@ -15,6 +15,8 @@ sylius:
     ui:
         abandoned: Abandonado
         about: Sobre nosotros
+        accept: Aceptar
+        accepted: '¡Aceptado!'
         access_token: Token de acceso
         access_your_store_account_or_create_a_new_one: Acceder a su cuenta en la tienda o crear una cuenta nueva
         account_credentials: Credenciales de la cuenta
@@ -246,6 +248,7 @@ sylius:
         edit_product_association_type: Edite el tipo de asociación de producto
         edit_product_attribute: Editar atributo de producto
         edit_product_option: Editar opción de producto
+        edit_product_review: Editar reseña de producto
         edit_product_variant: Editar la variante del producto
         edit_promotion: Editar promoción
         edit_promotion_coupon: Editar el cupón de la promoción
@@ -418,6 +421,7 @@ sylius:
         manage_products: Gestionar productos
         manage_promotions: Gestionar promociones
         manage_reviews: Gestionar reseñas
+        manage_reviews_of_your_products: Administrar los comentarios de sus productos
         manage_shipments: Gestionar
         manage_shipping_categories: Gestionar
         manage_shipping_destinations: Gestionar destinos de envío
@@ -620,6 +624,8 @@ sylius:
         registered_customers: Clientes registrados
         registration_create_an_account_in_store: Registro <small>Crear una cuenta en la tienda</small>
         registration_date: Fecha de registro
+        reject: Rechazar
+        rejected: Rechazado
         release_inventory: Liberar inventario
         remember_me: Recordarme
         remove_attribute: Remover atributo

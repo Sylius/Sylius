@@ -24,6 +24,7 @@ sylius:
                     zones: Zonat
                 marketing:
                     header: Marketingu
+                    product_reviews: Recensionet e produktit
                     promotions: Reklamat
                 customers:
                     customers: Blerësit

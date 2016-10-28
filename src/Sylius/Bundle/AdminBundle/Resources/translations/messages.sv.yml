@@ -25,6 +25,7 @@ sylius:
                     zones: Zoner
                 marketing:
                     header: Marknadsföring
+                    product_reviews: Produktrecensioner
                     promotions: Kampanjer
                 customers:
                     customers: Kunder

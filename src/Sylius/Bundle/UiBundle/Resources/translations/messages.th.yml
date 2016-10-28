@@ -40,6 +40,7 @@ sylius:
         add_rule: เพิ่มเงื่อนไข
         add_to_cart: หยิบใส่รถเข็น
         add_value: เพิ่มค่า
+        add_your_review: เพิ่มรีวิวของคุณ
         adding_new_customer_groups: เพิ่มกลุ่มลูกค้าใหม่
         adding_new_email: เพิ่มอีเมลใหม่
         adding_new_locale: เพิ่มตำแหน่งที่ตั้งใหม่
@@ -242,6 +243,7 @@ sylius:
         edit_order: แก้ไขใบสั่งซื้อ
         edit_payment_method: แก้ไขวิธีการชำระเงิน
         edit_product: แก้ไขสินค้า
+        edit_product_association_type: แก้ไขประเภทความสัมพันธ์ของสินค้า
         edit_product_attribute: แก้ไขคุณสมบัติสินค้า
         edit_product_option: แก้ไขตัวเลือกสินค้า
         edit_product_variant: แก้ไขสินค้าย่อย
@@ -394,6 +396,7 @@ sylius:
         manage_adjustments: จัดการการปรับปรุง
         manage_admin_users: จัดการผู้ดูแลระบบ
         manage_attributes: การจัดการคุณลักษณะ (Attribute)
+        manage_association_types_of_your_products: จัดการชนิดความสัมพันธ์ของสินค้าของคุณ
         manage_attributes_of_your_products: จัดการคุณสมบัติของสินค้าของคุณ
         manage_categorization_of_your_products: จัดการภาษี
         manage_channels: จัดการช่องทางการจัดจำหน่าย
@@ -429,6 +432,7 @@ sylius:
         manage_your_customers: จัดการข้อมูลลูกค้า
         manage_your_personal_information_and_preferences: จัดการข้อมูลส่วนบุคคลและการตั้งค่าของคุณ
         manage_your_product_catalog: จัดแค็ตตาล็อกสินค้า
+        manage_your_saved_addresses: จัดการที่อยู่ที่บันทึกไว้
         manage_zones: จัดการโซน
         marketing: การตลาด
         media: ภาพประกอบ
@@ -462,6 +466,7 @@ sylius:
         new_payment_method: เพิ่มวิธีการชำระเงิน
         new_permission: เพิ่มสิทธิ์การเข้าถึง
         new_product: เพิ่มสินค้า
+        new_product_association_type: สร้างชนิดความสัมพันธ์ของสินค้า
         new_product_attribute: เพิ่มคุณลักษณะ (Attribute) ของสินค้า
         new_product_option: เพิ่มตัวเลือกสินค้า
         new_product_variant: เพิ่ม Product variant
@@ -615,6 +620,7 @@ sylius:
         registered_customers: ลูกค้าที่ลงทะเบียนแล้ว
         registration_create_an_account_in_store: ลงทะเบียน<small>สร้างบัญชีเพื่อใช้ในร้านค้า</small>
         registration_date: วันที่สมัครสมาชิก
+        rejected: ปฏิเสธ
         release_inventory: รายการสินค้าคงคลัง
         remember_me: จำการเข้าระบบของฉันไว้
         remove_attribute: ลบคุณลักษณะ (Attribute)
@@ -744,6 +750,7 @@ sylius:
         there_are_no_promotions_configured: ไม่มีการกำหนดค่าโปรโมชั่น
         there_are_no_redirect_routes_to_display: ไม่มีรายการ Redirect routes
         there_are_no_reports_created: ไม่มีรายงานที่สร้างขึ้น
+        there_are_no_reviews: ไม่มีรีวิว
         there_are_no_roles_defined: ไม่มีการกำหนด Roles
         there_are_no_routes_to_display: ไม่มีรายการ Route
         there_are_no_shipments_to_display: ไม่มีรายการจัดส่งสินค้า
@@ -803,8 +810,10 @@ sylius:
         welcome: ยินดีต้อนรับ
         welcome_to_our_store: ยินดีต้อนรับสู่ร้านของเรา
         welcome_to_your_space: ยินดีต้อนรับสู่พื้นที่ของคุณ
+        write_your_own_review: เขียนรีวิวของคุณ
         yes_label: ใช่
         you_are_customer_since: คุณเป็นลูกค้าตั้งแต่
+        you_are_reviewing: คุณกำลังรีวิว
         you_have_no_addresses_defined: คุณไม่มีที่อยู่กำหนดไว้
         you_have_no_new_orders: คุณมีไม่มีใบสั่งซื้อใหม่
         you_may_also_like: คุณอาจจะชอบสินค้าเหล่านี้
