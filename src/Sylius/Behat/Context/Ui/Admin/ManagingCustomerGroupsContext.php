@@ -62,6 +62,15 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
+     * @When I specify its code as :code
+     * @When I do not specify its code
+     */
+    public function iSpecifyItsCodeAs($code = null)
+    {
+        $this->createPage->specifyCode($code);
+    }
+
+    /**
      * @When I specify its name as :name
      * @When I remove its name
      */
@@ -138,10 +147,16 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldSeeCustomerGroupsInTheList($amountOfCustomerGroups)
     {
+        $this->indexPage->open();
+
         Assert::same(
             (int) $amountOfCustomerGroups,
             $this->indexPage->countItems(),
-            sprintf('Amount of customer groups should be equal %s, but is not.', $amountOfCustomerGroups)
+            sprintf(
+                'Amount of customer groups should be equal %s, but is %s.',
+                $amountOfCustomerGroups,
+                $this->indexPage->countItems()
+            )
         );
     }
 
@@ -153,8 +168,7 @@ final class ManagingCustomerGroupsContext implements Context
         $this->iWantToBrowseCustomerGroupsOfTheStore();
 
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]
-            ),
+            $this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]),
             sprintf('Customer group name %s has not been assigned properly.', $customerGroupName)
         );
     }
@@ -167,6 +181,25 @@ final class ManagingCustomerGroupsContext implements Context
         Assert::same(
             $this->updatePage->getValidationMessage('name'),
             'Please enter a customer group name.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that customer group with this code already exists
+     */
+    public function iShouldBeNotifiedThatCustomerGroupWithThisCodeAlreadyExists()
+    {
+        Assert::same($this->createPage->getValidationMessage('code'), 'Customer group code has to be unique.');
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isCodeDisabled(),
+            'Code field should be disabled but it is not.'
         );
     }
 }

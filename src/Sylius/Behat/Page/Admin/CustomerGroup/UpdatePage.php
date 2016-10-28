@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\CustomerGroup;
 
+use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 /**
@@ -18,6 +19,8 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
+    use ChecksCodeImmutability;
+
     /**
      * {@inheritdoc}
      */
@@ -27,11 +30,20 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    protected function getCodeElement()
+    {
+        return $this->getElement('code');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_customer_group_code',
             'name' => '#sylius_customer_group_name',
         ]);
     }

@@ -11,6 +11,8 @@
 
 namespace Sylius\Behat\Page\Admin\CustomerGroup;
 
+use Sylius\Behat\Behaviour\NamesIt;
+use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 /**
@@ -18,13 +20,8 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function nameIt($name)
-    {
-        $this->getElement('name')->setValue($name);
-    }
+    use SpecifiesItsCode;
+    use NamesIt;
 
     /**
      * {@inheritdoc}
@@ -32,6 +29,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_customer_group_code',
             'name' => '#sylius_customer_group_name',
         ]);
     }
