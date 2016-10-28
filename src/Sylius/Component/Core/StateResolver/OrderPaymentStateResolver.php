@@ -80,6 +80,10 @@ class OrderPaymentStateResolver implements StateResolverInterface
             return OrderPaymentTransitions::TRANSITION_REFUND;
         }
 
+        if ($refundedPaymentTotal < $order->getTotal() && 0 < $refundedPaymentTotal) {
+            return OrderPaymentTransitions::TRANSITION_PARTIALLY_REFUND;
+        }
+
         $completedPaymentTotal = 0;
         $completedPayments = $this->getPaymentsWithState($order, PaymentInterface::STATE_COMPLETED);
 

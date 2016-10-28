@@ -10,6 +10,7 @@ winzou_state_machine:
             partially_paid: ~
             cancelled: ~
             paid: ~
+            partially_refunded: ~
             refunded: ~
         transitions:
             request_payment:
@@ -23,8 +24,10 @@ winzou_state_machine:
             pay:
                 from: [awaiting_payment, partially_paid]
                 to: paid
+            partially_refund:
+                to: partially_refunded
             refund:
-                from: [paid]
+                from: [paid, partially_refunded]
                 to: refunded
         callbacks:
             after:
