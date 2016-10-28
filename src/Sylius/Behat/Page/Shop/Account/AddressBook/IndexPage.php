@@ -13,7 +13,8 @@ namespace Sylius\Behat\Page\Shop\Account\AddressBook;
 
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
- 
+use Webmozart\Assert\Assert;
+
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -102,7 +103,11 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function getFullNameOfDefaultAddress()
     {
-        return $this->getElement('default_address')->find('css', 'address > strong')->getText();
+        $fullNameElement = $this->getElement('default_address')->find('css', 'address > strong');
+
+        Assert::notNull($fullNameElement, 'There should be a default address\'s full name.');
+
+        return $fullNameElement->getText();
     }
 
     /**
