@@ -5,12 +5,13 @@ Feature: Taxon image validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given I am logged in as an administrator
+        Given the store classifies its products as "T-Shirts"
+        And I am logged in as an administrator
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Trying to add a new image without specifying its code to an existing taxon
-        Given I want to modify the "T-Shirts" taxon
-        When I attach the "t-shirts.jpg" image without a code
+        When I want to modify the "T-Shirts" taxon
+        And I attach the "t-shirts.jpg" image without a code
         And I try to save my changes
         Then I should be notified that an image code is required
         And this taxon should not have images

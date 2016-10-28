@@ -797,7 +797,7 @@ final class ManagingProductsContext implements Context
         ], $this->sharedStorage->get('product'));
 
         Assert::same(
-            $currentPage->getValidationMessageForImage('code'),
+            $currentPage->getValidationMessageForImage(),
             'Please enter an image code.'
         );
     }

@@ -40,6 +40,7 @@ sylius:
             max: Short description must not be longer then {{ limit }} characters.
     taxon_image:
         code:
+            not_blank: Please enter an image code.
             unique: Image code must be unique within this taxon.
     user:
         email:
