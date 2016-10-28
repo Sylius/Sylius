@@ -202,4 +202,28 @@ final class ManagingCustomerGroupsContext implements Context
             'Code field should be disabled but it is not.'
         );
     }
+
+    /**
+     * @When I delete the :customerGroup customer group
+     */
+    public function iDeleteTheCustomerGroup(CustomerGroupInterface $customerGroup)
+    {
+        $this->iWantToBrowseCustomerGroupsOfTheStore();
+
+        $this->indexPage->deleteResourceOnPage(['name' => $customerGroup->getName()]);
+    }
+
+    /**
+     * @Then /^(this customer group) should no longer exist in the registry$/
+     */
+    public function thisCustomerGroupShouldNoLongerExistInTheRegistry(CustomerGroupInterface $customerGroup)
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]),
+            sprintf(
+                'Customer group %s should no longer exist in the registry',
+                $customerGroup->getName()
+            )
+        );
+    }
 }
