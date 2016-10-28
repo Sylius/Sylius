@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Refunding order payment
-    In order to refund order payment
+Feature: Refunding order's payment
+    In order to refund order's payment
     As an Administrator
-    I want to be able to mark order payment as refunded
+    I want to be able to mark order's payment as refunded
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -18,13 +18,13 @@ Feature: Refunding order payment
         And I am viewing the summary of this order
 
     @ui
-    Scenario: Marking payment as refunded
+    Scenario: Marking order's payment as refunded
         When I mark this order's payment as refunded
         Then I should be notified that the order's payment has been successfully refunded
         And it should have payment with state refunded
 
     @ui
-    Scenario: Marking order as refunded after refunding all its payments
+    Scenario: Marking an order as refunded after refunding all its payments
         When I mark this order's payment as refunded
         Then it should have payment with state refunded
         And it's payment state should be refunded
