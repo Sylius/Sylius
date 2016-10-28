@@ -50,7 +50,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
     ) {
         $customerContext->getCustomer()->willReturn(null);
 
-        $addressComparator->same(
+        $addressComparator->equal(
             Argument::type(AddressInterface::class),
             Argument::type(AddressInterface::class)
         )->shouldNotBeCalled();
@@ -77,7 +77,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
 
         $customerContext->getCustomer()->willReturn($customer);
 
-        $addressComparator->same($address, $address)->willReturn(true);
+        $addressComparator->equal($address, $address)->willReturn(true);
 
         $customer->addAddress($address)->shouldNotBeCalled();
 
@@ -100,7 +100,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
 
         $customerContext->getCustomer()->willReturn($customer);
 
-        $addressComparator->same(
+        $addressComparator->equal(
             Argument::type(AddressInterface::class),
             Argument::type(AddressInterface::class)
         )->shouldNotBeCalled();
@@ -129,7 +129,7 @@ final class CustomerUniqueAddressAdderSpec extends ObjectBehavior
 
         $customerContext->getCustomer()->willReturn($customer);
 
-        $addressComparator->same($customerAddress, $newAddress)->willReturn(false);
+        $addressComparator->equal($customerAddress, $newAddress)->willReturn(false);
 
         $customer->addAddress($newAddress)->shouldBeCalled();
 

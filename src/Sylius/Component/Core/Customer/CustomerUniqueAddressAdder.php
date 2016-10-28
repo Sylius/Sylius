@@ -55,7 +55,7 @@ final class CustomerUniqueAddressAdder implements AddressAdderInterface
         }
 
         foreach ($customer->getAddresses() as $customerAddress) {
-            if ($this->addressComparator->same($customerAddress, $address)) {
+            if ($this->addressComparator->equal($customerAddress, $address)) {
                 return;
             }
         }
