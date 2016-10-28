@@ -105,6 +105,17 @@ final class AddressBookContext implements Context
     }
 
     /**
+     * @Given my default address is of :fullName
+     * @When I set the address of :fullName as default
+     */
+    public function iSetTheAddressOfAsDefault($fullName)
+    {
+        $this->sharedStorage->set('full_name', $fullName);
+
+        $this->addressBookIndexPage->setAsDefault($fullName);
+    }
+
+    /**
      * @Given I want to add a new address to my address book
      */
     public function iWantToAddANewAddressToMyAddressBook()
@@ -113,6 +124,7 @@ final class AddressBookContext implements Context
     }
 
     /**
+     * @Given I am browsing my address book
      * @When I browse my address book
      */
     public function iBrowseMyAddresses()
@@ -226,7 +238,7 @@ final class AddressBookContext implements Context
 
     /**
      * @Then this address should be assigned to :fullName
-     * @Then the address assigned to :fullName should appear in my book
+     * @Then /^the address assigned to "([^"]+)" should (appear|be) in my book$/
      */
     public function thisAddressShouldHavePersonFirstNameAndLastName($fullName)
     {
@@ -343,6 +355,40 @@ final class AddressBookContext implements Context
     public function iShouldBeNotifiedAboutSuccessfulUpdate()
     {
         $this->notificationChecker->checkNotification('Address has been successfully updated.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should be notified that the address has been set as default
+     */
+    public function iShouldBeNotifiedThatAddressHasBeenSetAsDefault()
+    {
+        $this->notificationChecker->checkNotification('Address has been set as default', NotificationType::success());
+    }
+
+    /**
+     * @Then I should not have a default address
+     */
+    public function iShouldHaveNoDefaultAddress()
+    {
+        Assert::true(
+            $this->addressBookIndexPage->hasNoDefaultAddress(),
+            'There should be no default address.'
+        );
+    }
+
+    /**
+     * @Then /^the address of "([^"]+)" should be marked as my default$/
+     * @Then /^(it) should be marked as my default address$/
+     */
+    public function itShouldBeMarkedAsMyDefaultAddress($fullName)
+    {
+        $actualFullName = $this->addressBookIndexPage->getFullNameOfDefaultAddress();
+
+        Assert::same(
+            $fullName,
+            $actualFullName,
+            sprintf('The default address should be of "%s", but is of "%s".', $fullName, $actualFullName)
+        );
     }
 
     /**

@@ -56,9 +56,31 @@ sylius_shop_account_address_book_delete:
     defaults:
         _controller: sylius.controller.address:deleteAction
         _sylius:
+            section: shop_account
             redirect: sylius_shop_account_address_book_index
             repository:
                 method: findOneByCustomerAndId
                 arguments:
                     - 'expr:service("sylius.context.customer").getCustomer()'
                     - $id
+
+sylius_shop_account_address_book_set_default:
+    path: /{id}/set-default
+    methods: [GET, PATCH]
+    defaults:
+        _controller: sylius.controller.customer:updateAction
+        _sylius:
+            template: SyliusShopBundle:Account/AddressBook:_defaultAddressForm.html.twig
+            section: shop_account
+            form:
+                type: sylius_customer_default_address
+                options:
+                    customerId: 'expr:service("sylius.context.customer").getCustomer().getId()'
+            repository:
+                method: find
+                arguments:
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+            redirect:
+                route: sylius_shop_account_address_book_index
+                parameters: {}
+            flash: sylius.ui.address_has_been_set_as_default
