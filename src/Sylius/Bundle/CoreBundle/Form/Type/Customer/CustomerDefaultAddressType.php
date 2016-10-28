@@ -28,7 +28,7 @@ class CustomerDefaultAddressType extends AbstractType
         $builder
             ->add('defaultAddress', 'sylius_address_choice', [
                 'choices_as_values' => true,
-                'customer' => $options['customerId'],
+                'customer' => $options['customer'],
                 'choice_value' => 'id',
             ])
         ;
@@ -39,8 +39,7 @@ class CustomerDefaultAddressType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setRequired('customerId');
-        $resolver->setDefault('csrf_protection', false);
+        $resolver->setRequired('customer');
     }
 
     /**
