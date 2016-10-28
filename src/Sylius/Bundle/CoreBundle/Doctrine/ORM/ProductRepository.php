@@ -88,37 +88,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findOneByIdAndChannel($id, ChannelInterface $channel = null)
-    {
-        $queryBuilder = $this->createQueryBuilder('o')
-            ->addSelect('image')
-            ->select('o, option, variant')
-            ->leftJoin('o.options', 'option')
-            ->leftJoin('o.variants', 'variant')
-            ->leftJoin('variant.images', 'image')
-            ->innerJoin('o.channels', 'channel')
-        ;
-
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
-            ->setParameter('id', $id)
-        ;
-
-        if (null !== $channel) {
-            $queryBuilder
-                ->andWhere('channel = :channel')
-                ->setParameter('channel', $channel);
-        }
-
-        return $queryBuilder
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel)
     {
         return $this->createQueryBuilder('o')
