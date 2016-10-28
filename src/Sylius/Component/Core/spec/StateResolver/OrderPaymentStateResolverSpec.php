@@ -68,7 +68,32 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $this->resolve($order);
     }
 
-    function it_marks_an_order_as_completed_if_fully_paid(
+    function it_marks_an_order_as_refunded_if_its_payments_are_refunded_or_failed_but_at_least_one_is_refunded(
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $firstPayment,
+        PaymentInterface $secondPayment
+    ) {
+        $firstPayment->getAmount()->willReturn(10000);
+        $firstPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
+        $secondPayment->getAmount()->willReturn(10000);
+        $secondPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
+
+        $order
+            ->getPayments()
+            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
+        ;
+        $order->getTotal()->willReturn(10000);
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_REFUND)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REFUND)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
+    function it_marks_an_order_as_paid_if_fully_paid(
         FactoryInterface $stateMachineFactory,
         StateMachineInterface $stateMachine,
         OrderInterface $order,
@@ -85,6 +110,55 @@ final class OrderPaymentStateResolverSpec extends ObjectBehavior
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderPaymentTransitions::TRANSITION_PAY)->willReturn(true);
         $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
+    function it_marks_an_order_as_paid_if_fully_paid_even_if_previous_payment_was_failed(
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $firstPayment,
+        PaymentInterface $secondPayment
+    ) {
+        $firstPayment->getAmount()->willReturn(10000);
+        $firstPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
+        $secondPayment->getAmount()->willReturn(10000);
+        $secondPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
+
+        $payments = new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]);
+
+        $order->getPayments()->willReturn($payments);
+        $order->getTotal()->willReturn(10000);
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PAY)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY)->shouldBeCalled();
+
+        $this->resolve($order);
+    }
+
+    function it_marks_an_order_as_partially_refunded_if_one_of_the_payment_is_completed(
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $firstPayment,
+        PaymentInterface $secondPayment
+    ) {
+        $firstPayment->getAmount()->willReturn(6000);
+        $firstPayment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
+        $secondPayment->getAmount()->willReturn(4000);
+        $secondPayment->getState()->willReturn(PaymentInterface::STATE_REFUNDED);
+
+        $order
+            ->getPayments()
+            ->willReturn(new ArrayCollection([$firstPayment->getWrappedObject(), $secondPayment->getWrappedObject()]))
+        ;
+        $order->getTotal()->willReturn(10000);
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PARTIALLY_REFUND)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PARTIALLY_REFUND)->shouldBeCalled();
 
         $this->resolve($order);
     }
