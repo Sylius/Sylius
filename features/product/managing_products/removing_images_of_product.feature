@@ -16,7 +16,7 @@ Feature: Removing images of an existing product
         And I remove an image with a code "thumbnail"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product should not have images
+        And this product should not have any images
 
     @ui @javascript
     Scenario: Removing a single image of a configurable product
@@ -26,7 +26,7 @@ Feature: Removing images of an existing product
         And I remove an image with a code "thumbnail"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product should not have images
+        And this product should not have any images
 
     @ui @javascript
     Scenario: Removing all images of a simple product
@@ -38,7 +38,7 @@ Feature: Removing images of an existing product
         And I remove also an image with a code "main"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product should not have images
+        And this product should not have any images
 
     @ui @javascript
     Scenario: Removing all images of a configurable product
@@ -50,7 +50,7 @@ Feature: Removing images of an existing product
         And I remove also an image with a code "main"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product should not have images
+        And this product should not have any images
 
     @ui @javascript
     Scenario: Removing only one image of a simple product

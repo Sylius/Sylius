@@ -35,8 +35,8 @@ interface CreateConfigurableProductPageInterface extends BaseCreatePageInterface
     public function nameItIn($name, $localeCode);
 
     /**
-     * @param string $code
      * @param string $path
+     * @param string $code
      */
-    public function attachImageWithCode($code, $path);
+    public function attachImage($path, $code = null);
 }

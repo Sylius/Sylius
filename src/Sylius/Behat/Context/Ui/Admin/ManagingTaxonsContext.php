@@ -321,7 +321,7 @@ final class ManagingTaxonsContext implements Context
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->attachImageWithCode($code, $path);
+        $currentPage->attachImage($path, $code);
     }
 
     /**
@@ -329,7 +329,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iAttachImageWithoutACode($path)
     {
-        $this->updatePage->attachImageWithoutCode($path);
+        $this->updatePage->attachImage($path);
     }
 
     /**
@@ -371,7 +371,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Then /^(this taxon) should not have images$/
+     * @Then /^(this taxon) should not have any images$/
      */
     public function thisTaxonShouldNotHaveImages(TaxonInterface $taxon)
     {

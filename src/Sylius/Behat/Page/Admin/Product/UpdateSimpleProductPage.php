@@ -136,17 +136,20 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function attachImageWithCode($code, $path)
+    public function attachImage($path, $code = null)
     {
-        $this->attachImage($path, $code);
-    }
+        $this->clickTabIfItsNotActive('media');
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attachImageWithoutCode($path)
-    {
-        $this->attachImage($path);
+        $filesPath = $this->getParameter('files_path');
+
+        $this->getDocument()->clickLink('Add');
+
+        $imageForm = $this->getLastImageElement();
+        if (null !== $code) {
+            $imageForm->fillField('Code', $code);
+        }
+
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 
     /**
@@ -330,25 +333,5 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getDocument()->waitFor(1000, function () use ($slugElement, $value) {
             return $value !== $slugElement->getValue();
         });
-    }
-
-    /**
-     * @param string $code
-     * @param string|null $path
-     */
-    private function attachImage($path, $code = null)
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $filesPath = $this->getParameter('files_path');
-
-        $this->getDocument()->clickLink('Add');
-
-        $imageForm = $this->getLastImageElement();
-        if (null !== $code) {
-            $imageForm->fillField('Code', $code);
-        }
-
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 }

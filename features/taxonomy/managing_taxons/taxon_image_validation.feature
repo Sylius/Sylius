@@ -14,4 +14,4 @@ Feature: Taxon image validation
         And I attach the "t-shirts.jpg" image without a code
         And I try to save my changes
         Then I should be notified that an image code is required
-        And this taxon should not have images
+        And this taxon should not have any images

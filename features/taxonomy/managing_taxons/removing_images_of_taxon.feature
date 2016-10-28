@@ -16,7 +16,7 @@ Feature: Removing images of an existing taxon
         When I remove an image with a code "banner"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this taxon should not have images
+        And this taxon should not have any images
 
     @ui @javascript
     Scenario: Removing all images of a taxon
@@ -27,7 +27,7 @@ Feature: Removing images of an existing taxon
         When I remove also an image with a code "thumbnail"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this taxon should not have images
+        And this taxon should not have any images
 
     @ui @javascript
     Scenario: Removing only one image of a taxon

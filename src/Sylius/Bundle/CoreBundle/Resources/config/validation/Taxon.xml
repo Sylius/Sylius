@@ -15,6 +15,9 @@
     <class name="Sylius\Component\Core\Model\Taxon">
         <property name="images">
             <constraint name="Valid" />
+            <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\ImageUniqueCode">
+                <option name="message">sylius.taxon_image.code.unique</option>
+            </constraint>
         </property>
     </class>
 </constraint-mapping>

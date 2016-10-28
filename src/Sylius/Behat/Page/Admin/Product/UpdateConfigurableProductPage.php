@@ -103,17 +103,20 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
-    public function attachImageWithCode($code, $path)
+    public function attachImage($path, $code = null)
     {
-        $this->attachImage($path, $code);
-    }
+        $this->clickTabIfItsNotActive('media');
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attachImageWithoutCode($path)
-    {
-        $this->attachImage($path);
+        $filesPath = $this->getParameter('files_path');
+
+        $this->getDocument()->clickLink('Add');
+
+        $imageForm = $this->getLastImageElement();
+        if (null !== $code) {
+            $imageForm->fillField('Code', $code);
+        }
+
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 
     /**
@@ -270,25 +273,5 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         Assert::notEmpty($imageElements);
 
         return reset($imageElements);
-    }
-
-    /**
-     * @param string $code
-     * @param string|null $path
-     */
-    private function attachImage($path, $code = null)
-    {
-        $this->clickTabIfItsNotActive('media');
-
-        $filesPath = $this->getParameter('files_path');
-
-        $this->getDocument()->clickLink('Add');
-
-        $imageForm = $this->getLastImageElement();
-        if (null !== $code) {
-            $imageForm->fillField('Code', $code);
-        }
-
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 }

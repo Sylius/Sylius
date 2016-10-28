@@ -61,15 +61,10 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
     public function isImageWithCodeDisplayed($code);
 
     /**
+     * @param string $path
      * @param string $code
-     * @param string $path
      */
-    public function attachImageWithCode($code, $path);
-
-    /**
-     * @param string $path
-     */
-    public function attachImageWithoutCode($path);
+    public function attachImage($path, $code = null);
 
     /**
      * @param string $code

@@ -644,7 +644,7 @@ final class ManagingProductsContext implements Context
             $this->updateConfigurableProductPage,
         ], $this->sharedStorage->has('product') ? $this->sharedStorage->get('product') : null);
 
-        $currentPage->attachImageWithCode($code, $path);
+        $currentPage->attachImage($path, $code);
     }
 
     /**
@@ -658,7 +658,7 @@ final class ManagingProductsContext implements Context
             $this->updateConfigurableProductPage,
         ], $this->sharedStorage->get('product'));
 
-        $currentPage->attachImageWithoutCode($path);
+        $currentPage->attachImage($path);
     }
 
     /**
@@ -741,7 +741,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^(this product) should not have images$/
+     * @Then /^(this product) should not have any images$/
      */
     public function thisProductShouldNotHaveImages(ProductInterface $product)
     {

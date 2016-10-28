@@ -60,17 +60,18 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function attachImageWithCode($code, $path)
+    public function attachImage($path, $code = null)
     {
-        $this->attachImage($path, $code);
-    }
+        $filesPath = $this->getParameter('files_path');
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attachImageWithoutCode($path)
-    {
-        $this->attachImage($path);
+        $this->getDocument()->clickLink('Add');
+
+        $imageForm = $this->getLastImageElement();
+        if (null !== $code) {
+            $imageForm->fillField('Code', $code);
+        }
+
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 
     /**
@@ -236,23 +237,5 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         }
 
         return $inputCode->getParent()->getParent()->getParent();
-    }
-
-    /**
-     * @param string $code
-     * @param string|null $path
-     */
-    private function attachImage($path, $code = null)
-    {
-        $filesPath = $this->getParameter('files_path');
-
-        $this->getDocument()->clickLink('Add');
-
-        $imageForm = $this->getLastImageElement();
-        if (null !== $code) {
-            $imageForm->fillField('Code', $code);
-        }
-
-        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 }

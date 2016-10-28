@@ -14,7 +14,7 @@ Feature: Product image validation
         And I attach the "lamborghini.jpg" image without a code
         And I try to save my changes
         Then I should be notified that an image code is required
-        And this product should not have images
+        And this product should not have any images
 
     @ui @javascript
     Scenario: Trying to add a new image without specifying its code to a configurable product
@@ -23,4 +23,4 @@ Feature: Product image validation
         And I attach the "lamborghini.jpg" image without a code
         And I try to save my changes
         Then I should be notified that an image code is required
-        And this product should not have images
+        And this product should not have any images
