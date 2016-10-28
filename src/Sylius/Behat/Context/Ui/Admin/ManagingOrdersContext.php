@@ -23,6 +23,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderPaymentStates;
 use Webmozart\Assert\Assert;
 
 /**
@@ -110,6 +111,14 @@ final class ManagingOrdersContext implements Context
     public function iMarkThisOrderAsAPaid(OrderInterface $order)
     {
         $this->showPage->completeOrderLastPayment($order);
+    }
+
+    /**
+     * @When /^I mark (this order)'s payment as refunded$/
+     */
+    public function iMarkThisOrderSPaymentAsRefunded(OrderInterface $order)
+    {
+        $this->showPage->refundOrderLastPayment($order);
     }
 
     /**
@@ -473,17 +482,44 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyCompleted()
     {
-        $this->notificationChecker->checkNotification('Payment has been successfully updated.', NotificationType::success());
+        $this
+            ->notificationChecker
+            ->checkNotification('Payment has been successfully updated.', NotificationType::success())
+        ;
+    }
+
+    /**
+     * @Then I should be notified that the order's payment has been successfully refunded
+     */
+    public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyRefunded()
+    {
+        $this
+            ->notificationChecker
+            ->checkNotification('Payment has been successfully refunded.', NotificationType::success())
+        ;
     }
 
     /**
      * @Then it should have payment state :paymentState
+     * @Then it should have payment with state :paymentState
      */
     public function itShouldHavePaymentState($paymentState)
     {
         Assert::true(
             $this->showPage->hasPayment($paymentState),
             sprintf('It should have payment with %s state', $paymentState)
+        );
+    }
+
+    /**
+     * @Then it's payment state should be refunded
+     */
+    public function orderPaymentStateShouldBeRefunded()
+    {
+        Assert::same(
+            $this->showPage->getPaymentState(),
+            OrderPaymentStates::STATE_REFUNDED,
+            'Order payment state should be refunded, but it is not.'
         );
     }
 

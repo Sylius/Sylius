@@ -7,6 +7,6 @@ winzou_state_machine:
                     do: ["@sylius.order_processing.order_payment_processor", "process"]
                     args: ["object.getOrder()"]
                 update_order_payment_state:
-                    on: ["complete"]
+                    on: ["complete", "refund"]
                     do: ["@sylius.state_resolver.order_payment", "resolve"]
                     args: ["object.getOrder()"]

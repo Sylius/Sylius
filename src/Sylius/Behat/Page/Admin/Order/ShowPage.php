@@ -130,6 +130,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function refundOrderLastPayment(OrderInterface $order)
+    {
+        $this->getLastOrderPaymentElement($order)->pressButton('Refund');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function countItems()
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('table'));
@@ -333,6 +341,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return $this->getElement('order_state')->getText();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentState()
+    {
+        return $this->getElement('order_payment_state')->getText();
+    }
+
     public function cancelOrder()
     {
         $this->getDocument()->pressButton('Cancel');
@@ -391,6 +407,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'customer' => '#customer',
             'items_total' => '#items-total',
             'order_notes' => '#sylius-order-notes',
+            'order_payment_state' => '#payment-state > span',
             'order_state' => '#sylius-order-state',
             'payments' => '#payments',
             'promotion_discounts' => '#promotion-discounts',

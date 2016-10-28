@@ -60,3 +60,20 @@ sylius_admin_order_payment_complete:
                 graph: sylius_payment
                 transition: complete
             redirect: referer
+
+sylius_admin_order_payment_refund:
+    path: /orders/{orderId}/payments/{id}/refund
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _sylius:
+            repository:
+                method: findByOrderIdAndId
+                arguments:
+                    orderId: $orderId
+                    id: $id
+            state_machine:
+                graph: sylius_payment
+                transition: refund
+            redirect: referer
+            flash: sylius.order_payment.refunded
