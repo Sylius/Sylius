@@ -208,7 +208,7 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iDeleteTheCustomerGroup(CustomerGroupInterface $customerGroup)
     {
-        $this->iWantToBrowseCustomerGroupsOfTheStore();
+        $this->iWantToBrowseCustomerGroups();
 
         $this->indexPage->deleteResourceOnPage(['name' => $customerGroup->getName()]);
     }
