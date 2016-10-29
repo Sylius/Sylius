@@ -249,6 +249,10 @@ class ResourceController extends Controller
                 return $this->redirectHandler->redirectToIndex($configuration, $newResource);
             }
 
+            if ($configuration->hasStateMachine()) {
+                $this->stateMachine->apply($configuration, $newResource);
+            }
+
             $this->repository->add($newResource);
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
