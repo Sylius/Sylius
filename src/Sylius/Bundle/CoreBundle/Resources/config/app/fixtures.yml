@@ -6,6 +6,8 @@ sylius_fixtures:
         default:
             listeners:
                 orm_purger: ~
+                phpcr_purger: ~
+                phpcr_initializer: ~
                 logger: ~
 
             fixtures:
@@ -144,3 +146,13 @@ sylius_fixtures:
                 order:
                     options:
                         amount: 20
+
+                string_block:
+                    options:
+                        custom:
+                            delivery_info:
+                                name: "delivery-info"
+                                body: "We deliver everywhere in the US. Next day."
+                            returns_info:
+                                name: "returns-info"
+                                body: "Product does not fit? Return it for free in 30 days."

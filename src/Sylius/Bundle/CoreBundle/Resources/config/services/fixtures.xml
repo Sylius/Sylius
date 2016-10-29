@@ -159,5 +159,11 @@
             <argument type="service" id="sm.factory" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.string_block" class="Sylius\Bundle\CoreBundle\Fixture\StringBlockFixture">
+            <argument type="service" id="sylius.manager.string_block" />
+            <argument type="service" id="sylius.fixture.example_factory.string_block" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

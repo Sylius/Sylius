@@ -55,6 +55,7 @@
         "swiftmailer/swiftmailer": "~5.0",
         "symfony-cmf/content-bundle": "^1.3",
         "symfony-cmf/routing-bundle": "^1.4",
+        "symfony-cmf/block-bundle": "^1.3",
         "symfony/monolog-bundle": "^2.8",
         "symfony/polyfill-iconv": "~1.0",
         "symfony/polyfill-intl-icu": "~1.0",

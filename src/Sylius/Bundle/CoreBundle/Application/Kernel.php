@@ -65,6 +65,9 @@ class Kernel extends HttpKernel
             new \Symfony\Cmf\Bundle\ContentBundle\CmfContentBundle(),
             new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
+            new \Symfony\Cmf\Bundle\BlockBundle\CmfBlockBundle(),
+            new \Sonata\BlockBundle\SonataBlockBundle(),
+            new \Sonata\CoreBundle\SonataCoreBundle(),
 
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),

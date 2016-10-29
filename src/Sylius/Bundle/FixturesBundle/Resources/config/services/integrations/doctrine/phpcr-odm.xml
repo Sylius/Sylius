@@ -17,5 +17,9 @@
             <argument type="service" id="doctrine_phpcr" />
             <tag name="sylius_fixtures.listener" />
         </service>
+        <service id="sylius_fixtures.listener.phpcr_initializer" class="Sylius\Bundle\FixturesBundle\Listener\PHPCRInitializerListener" public="false">
+            <argument type="service" id="doctrine_phpcr.initializer_manager" />
+            <tag name="sylius_fixtures.listener" />
+        </service>
     </services>
 </container>

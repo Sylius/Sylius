@@ -12,22 +12,10 @@
 namespace Sylius\Bundle\ContentBundle\DependencyInjection;
 
 use Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository;
-use Sylius\Bundle\ContentBundle\Document\ActionBlock;
-use Sylius\Bundle\ContentBundle\Document\ImagineBlock;
-use Sylius\Bundle\ContentBundle\Document\RedirectRoute;
-use Sylius\Bundle\ContentBundle\Document\ReferenceBlock;
 use Sylius\Bundle\ContentBundle\Document\Route;
-use Sylius\Bundle\ContentBundle\Document\SimpleBlock;
-use Sylius\Bundle\ContentBundle\Document\SlideshowBlock;
 use Sylius\Bundle\ContentBundle\Document\StaticContent;
 use Sylius\Bundle\ContentBundle\Document\StringBlock;
-use Sylius\Bundle\ContentBundle\Form\Type\ActionBlockType;
-use Sylius\Bundle\ContentBundle\Form\Type\ImagineBlockType;
-use Sylius\Bundle\ContentBundle\Form\Type\RedirectRouteType;
-use Sylius\Bundle\ContentBundle\Form\Type\ReferenceBlockType;
 use Sylius\Bundle\ContentBundle\Form\Type\RouteType;
-use Sylius\Bundle\ContentBundle\Form\Type\SimpleBlockType;
-use Sylius\Bundle\ContentBundle\Form\Type\SlideshowBlockType;
 use Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType;
 use Sylius\Bundle\ContentBundle\Form\Type\StaticContentType;
 use Sylius\Bundle\ContentBundle\Form\Type\StringBlockType;
@@ -116,6 +104,36 @@ final class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(StaticContentType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('choice')->defaultValue(StaticContentChoiceType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('validation_groups')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('string_block')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(StringBlock::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->arrayNode('form')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('default')->defaultValue(StringBlockType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

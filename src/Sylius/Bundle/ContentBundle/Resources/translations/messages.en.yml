@@ -16,3 +16,7 @@ sylius:
             publishable: Published
             routes: Routes
             title: Title
+
+        string_block:
+            body: Body
+            name: Name
