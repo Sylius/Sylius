@@ -37,19 +37,27 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
     private $taxonFilter;
 
     /**
+     * @var FilterInterface
+     */
+    private $productFilter;
+
+    /**
      * @param FactoryInterface $adjustmentFactory
      * @param FilterInterface $priceRangeFilter
      * @param FilterInterface $taxonFilter
+     * @param FilterInterface $productFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
-        FilterInterface $taxonFilter
+        FilterInterface $taxonFilter,
+        FilterInterface $productFilter
     ) {
         parent::__construct($adjustmentFactory);
 
         $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;
+        $this->productFilter = $productFilter;
     }
 
     /**
@@ -63,6 +71,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
 
         $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration);
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
+        $filteredItems = $this->productFilter->filter($filteredItems, $configuration);
 
         foreach ($filteredItems as $item) {
             $promotionAmount = (int) round($item->getUnitPrice() * $configuration['percentage']);
@@ -75,7 +84,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_percentage_discount_configuration';
+        return 'sylius_promotion_action_unit_percentage_discount_configuration';
     }
 
     /**

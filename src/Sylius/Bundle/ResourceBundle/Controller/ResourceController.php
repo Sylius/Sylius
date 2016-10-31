@@ -249,6 +249,10 @@ class ResourceController extends Controller
                 return $this->redirectHandler->redirectToIndex($configuration, $newResource);
             }
 
+            if ($configuration->hasStateMachine()) {
+                $this->stateMachine->apply($configuration, $newResource);
+            }
+
             $this->repository->add($newResource);
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
@@ -415,53 +419,6 @@ class ResourceController extends Controller
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
 
         return $this->redirectHandler->redirectToResource($configuration, $resource);
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    public function enableAction(Request $request)
-    {
-        return $this->toggle($request, true);
-    }
-    /**
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    public function disableAction(Request $request)
-    {
-        return $this->toggle($request, false);
-    }
-
-    /**
-     * @param Request $request
-     * @param $enabled
-     *
-     * @return RedirectResponse
-     */
-    protected function toggle(Request $request, $enabled)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
-
-        $resource = $this->findOr404($configuration);
-        $resource->setEnabled($enabled);
-
-        $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
-        $this->manager->flush();
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
-
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-        }
-
-        $this->flashHelper->addSuccessFlash($configuration, $enabled ? 'enable' : 'disable', $resource);
-
-        return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
 
     /**

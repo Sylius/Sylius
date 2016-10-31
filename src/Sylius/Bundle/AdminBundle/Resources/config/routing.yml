@@ -41,11 +41,17 @@ sylius_admin_payment_method:
 sylius_admin_product:
     resource: "@SyliusAdminBundle/Resources/config/routing/product.yml"
 
+sylius_admin_product_association_type:
+    resource: "@SyliusAdminBundle/Resources/config/routing/product_association_type.yml"
+
 sylius_admin_product_attribute:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_attribute.yml"
 
 sylius_admin_product_option:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_option.yml"
+
+sylius_admin_product_review:
+    resource: "@SyliusAdminBundle/Resources/config/routing/product_review.yml"
 
 sylius_admin_product_variant:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_variant.yml"

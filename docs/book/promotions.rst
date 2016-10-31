@@ -67,7 +67,7 @@ In the example you can see how to create a simple Cart Quantity rule. It will ch
 
    $quantityRule = $ruleFactory->createCartQuantity('5');
 
-   // add your roule to the previously created Promotion
+   // add your rule to the previously created Promotion
    $promotion->addRule($quantityRule);
 
 .. note::

@@ -1,9 +1,9 @@
 sylius:
     association_type:
         name:
-            not_blank: Please enter association name.
-            min_length: Association name must be at least 1 character long.|Association name must be at least {{ limit }} characters long.
-            max_length: Association name must not be longer than 1 character.|Association name must not be longer than {{ limit }} characters.
+            not_blank: Please enter association type name.
+            min_length: Association type name must be at least 1 character long.|Association name must be at least {{ limit }} characters long.
+            max_length: Association type name must not be longer than 1 character.|Association name must not be longer than {{ limit }} characters.
         code:
-            unique: Association with given code already exists.
-            not_blank: Please enter association code.
+            unique: The association type with given code already exists.
+            not_blank: Please enter association type code.

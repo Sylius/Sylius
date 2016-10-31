@@ -564,13 +564,39 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on a ("[^"]*" product)$/
+     */
+    public function itGivesFixedDiscountOffOnAProduct(PromotionInterface $promotion, $discount, ProductInterface $product)
+    {
+        $this->createUnitFixedPromotion($promotion, $discount, $this->getProductsFilterConfiguration([$product->getCode()]));
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on a ("[^"]*" product)$/
+     */
+    public function itGivesPercentageDiscountOffOnAProduct(PromotionInterface $promotion, $discount, ProductInterface $product)
+    {
+        $this->createUnitPercentagePromotion($promotion, $discount, $this->getProductsFilterConfiguration([$product->getCode()]));
+    }
+
+    /**
      * @param array $taxonCodes
      *
      * @return array
      */
     private function getTaxonFilterConfiguration(array $taxonCodes)
     {
-        return ['filters' => ['taxons' => $taxonCodes]];
+        return ['filters' => ['taxons_filter' => ['taxons' => $taxonCodes]]];
+    }
+
+    /**
+     * @param array $productCodes
+     *
+     * @return array
+     */
+    private function getProductsFilterConfiguration(array $productCodes)
+    {
+        return ['filters' => ['products_filter' => ['products' => $productCodes]]];
     }
 
     /**
@@ -581,9 +607,9 @@ final class PromotionContext implements Context
      */
     private function getPriceRangeFilterConfiguration($minAmount, $maxAmount = null)
     {
-        $configuration = ['filters' => ['price_range' => ['min' => $minAmount]]];
+        $configuration = ['filters' => ['price_range_filter' => ['min' => $minAmount]]];
         if (null !== $maxAmount) {
-            $configuration['filters']['price_range']['max'] = $maxAmount;
+            $configuration['filters']['price_range_filter']['max'] = $maxAmount;
         }
 
         return $configuration;

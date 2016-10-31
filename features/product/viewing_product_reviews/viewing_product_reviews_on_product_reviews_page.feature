@@ -19,7 +19,7 @@ Feature: Viewing product reviews on product's reviews page
 
     @ui
     Scenario: Viewing only accepted product reviews on product's reviews page
-        Given this product has also a review titled "Classic" and rated 5 added by customer "sir.terry@pratchett.com" which is not accepted yet
+        Given this product has also a new review titled "Classic" and rated 5 added by customer "sir.terry@pratchett.com"
         When I check this product's reviews
         Then I should see 3 product reviews in the list
         But I should not see review titled "Classic" in the list

@@ -27,7 +27,7 @@ Feature: Seeing order item detailed data
     Scenario: Seeing details of item in one row
         Given I view the summary of the order "#00000666"
         When I check "Iron Man T-Shirt" data
-        Then its code should be "IRON_MAN_T-SHIRT"
+        Then its code should be "IRON_MAN_T_SHIRT"
         And its unit price should be $49.00
         And its discounted unit price should be $47.00
         And its quantity should be 4

@@ -4,10 +4,20 @@
 sylius:
     customer:
         first_name:
+            max: Vardas turi būti ne ilgesnis nei {{ limit }} simbolių.
+            min: Vardas turi būti ne mažiau kaip {{ limit }} simbolių ilgio.
             not_blank: Įveskite savo vardą.
         last_name:
+            max: Pavardė turi būti ne ilgesnė nei {{ limit }} simbolių.
+            min: Pavardė turi būti ne trumpesnė nei {{ limit }} simboliai.
             not_blank: Įveskite savo pavardę.
+        gender:
+            not_blank: Prašome pasirinkti savo lytį.
         email:
+            already_used: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.
+            max: El. paštas turi būti ilgesnis nei {{ limit }} simbolių.
+            min: El. paštas turi būti ilgesnis nei {{ limit }} simboliai.
             not_blank: Įveskite savo elektroninio pašto adresą.
             invalid: Šis adresas yra neteisingas.
+            unique: Šis el. paštas jau naudojamas.
             registered: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.

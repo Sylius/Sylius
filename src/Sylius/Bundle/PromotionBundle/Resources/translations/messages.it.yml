@@ -24,6 +24,8 @@ sylius:
             cart_quantity_configuration:
                 count: Conta
                 equal: Uguale
+            contains_product_configuration:
+                variants: Prodotti
             item_total_configuration:
                 amount: Importo
             shipping_country_configuration:

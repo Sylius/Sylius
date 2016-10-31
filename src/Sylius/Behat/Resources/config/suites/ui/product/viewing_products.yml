@@ -12,6 +12,7 @@ default:
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_association_type
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.taxon
 
@@ -19,6 +20,7 @@ default:
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.customer
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_association
                 - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.taxonomy

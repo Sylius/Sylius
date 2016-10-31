@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Tipovi poveznica
                     options: Opcije
                 configuration:
                     channels: Kanali

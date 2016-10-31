@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
@@ -224,7 +225,7 @@ final class ManagingChannelsContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::same(
-            $currentPage->getValidationMessage($this->getNormalizedElementName($element)),
+            $currentPage->getValidationMessage(StringInflector::nameToCode($element)),
             sprintf('Please enter channel %s.', $element)
         );
     }
@@ -543,15 +544,5 @@ final class ManagingChannelsContext implements Context
                 ]
             ), sprintf('Channel with name %s and state %s has not been found.', $channel->getName(), $state)
         );
-    }
-
-    /**
-     * @param string $elementName
-     *
-     * @return string
-     */
-    private function getNormalizedElementName($elementName)
-    {
-        return str_replace(' ', '_', $elementName);
     }
 }

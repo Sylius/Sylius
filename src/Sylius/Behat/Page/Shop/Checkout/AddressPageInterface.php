@@ -109,4 +109,24 @@ interface AddressPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function hasBillingAddressInput();
+
+    /**
+     * @param AddressInterface $address
+     */
+    public function selectShippingAddressFromAddressBook(AddressInterface $address);
+
+    /**
+     * @param AddressInterface $address
+     */
+    public function selectBillingAddressFromAddressBook(AddressInterface $address);
+
+    /**
+     * @return AddressInterface
+     */
+    public function getPreFilledShippingAddress();
+
+    /**
+     * @return AddressInterface
+     */
+    public function getPreFilledBillingAddress();
 }

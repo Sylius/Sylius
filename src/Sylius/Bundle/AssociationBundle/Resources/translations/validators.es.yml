@@ -4,9 +4,9 @@
 sylius:
     association_type:
         name:
-            not_blank: Introduzca el nombre de la asociación.
-            min_length: El nombre de la asociación debe tener al menos 1 carácter.| El nombre de la asociación debe tener al menos {{ limit }} caracteres.
-            max_length: El nombre de la asociación debe tener como máximo 1 carácter.|El nombre de la asociación no debe tener más de {{ limit }} caracteres.
+            not_blank: Ingrese por favor el nombre del tipo de asociación
+            min_length: El nombre del tipo de asociación debe tener al menos un carácter.| El nombre del tipo de asociación debe tener mínimo {{ limit }} caracteres
+            max_length: El nombre del tipo de asociación no debe ser más de un caracter.| El nombre del tipo de asociación no debe tener más de {{ limit }} caracteres
         code:
-            unique: Ya existe una asociación con ese código.
-            not_blank: Introduzca el código de asociación.
+            unique: El tipo de asociación con el código dado, ya existe
+            not_blank: Ingrese por favor el código del tipo de asociación

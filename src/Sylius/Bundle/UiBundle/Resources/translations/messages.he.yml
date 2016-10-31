@@ -3,9 +3,11 @@
 
 sylius:
     ui:
+        attributes: מאפיינים
         city: עיר
         company: חברה
         country: מדינה
+        options: אפשרויות
         phone_number: מספר טלפון
         postcode: מיקוד
         province: מחוז

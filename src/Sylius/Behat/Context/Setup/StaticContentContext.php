@@ -68,10 +68,11 @@ final class StaticContentContext implements Context
     /**
      * @Given the store has static contents :firstTitle and :secondTitle
      */
-    public function theStoreHasStaticContents($firstTitle, $secondTitle)
+    public function theStoreHasStaticContents(...$titles)
     {
-        $this->theStoreHasStaticContent($firstTitle);
-        $this->theStoreHasStaticContent($secondTitle);
+        foreach ($titles as $title) {
+            $this->theStoreHasStaticContent($title);
+        }
     }
 
     /**

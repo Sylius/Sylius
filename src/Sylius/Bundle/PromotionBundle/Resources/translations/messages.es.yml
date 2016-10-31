@@ -22,12 +22,12 @@ sylius:
                 percentage: Porcentaje
             type: Tipo
         promotion_coupon:
-            expires_at: Caduca en
+            expires_at: Caduca el
             usage_limit: Límite de uso
         promotion_coupon_generator_instruction:
             amount: Cantidad
             code_length: Longitud del código
-            expires_at: Caduca en
+            expires_at: Caduca el
             usage_limit: Límite de uso
         promotion_rule:
             cart_quantity_configuration:

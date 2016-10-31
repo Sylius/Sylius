@@ -15,3 +15,8 @@ Feature: Editing a customer group
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this customer group with name "Wholesale" should appear in the store
+
+    @ui
+    Scenario: Seeing disabled code field while editing customer group
+        When I want to edit this customer group
+        Then the code field should be disabled

@@ -19,10 +19,14 @@ sylius_shop_product_reviews_create:
         _controller: sylius.controller.product_review:createAction
         _sylius:
             template: SyliusShopBundle:Product/Review:create.html.twig
+            form:
+                type: sylius_product_review
+                options:
+                    validation_groups: ['sylius', 'sylius_review']
             factory:
                 method: createForSubjectWithReviewer
                 arguments:
-                    - 'expr:service("sylius.repository.product").findOneBySlug($slug).getId()'
+                    - 'expr:service("sylius.repository.product").findOneBySlug($slug)'
                     - 'expr:service("sylius.context.customer").getCustomer()'
             redirect:
                 route: sylius_shop_product_show

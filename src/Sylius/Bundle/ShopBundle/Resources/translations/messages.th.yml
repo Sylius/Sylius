@@ -5,8 +5,9 @@ sylius:
     menu:
         shop:
             account:
-                header: บัญชีของคุณ
-                dashboard: แดชบอร์ด
-                personal_information: ข้อมูลส่วนบุคคล
+                address_book: สมุดบันทึกที่อยู่
                 change_password: เปลี่ยนรหัสผ่าน
+                dashboard: แดชบอร์ด
+                header: บัญชีของคุณ
                 order_history: ประวัติการสั่งซื้อ
+                personal_information: ข้อมูลส่วนบุคคล

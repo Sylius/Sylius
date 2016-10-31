@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,11 +25,6 @@ final class StickerProductFixture extends AbstractFixture
      * @var TaxonFixture
      */
     private $taxonFixture;
-
-    /**
-     * @var RepositoryInterface
-     */
-    private $taxonRepository;
 
     /**
      * @var ProductAttributeFixture
@@ -59,20 +53,17 @@ final class StickerProductFixture extends AbstractFixture
 
     /**
      * @param TaxonFixture $taxonFixture
-     * @param RepositoryInterface $taxonRepository
      * @param ProductAttributeFixture $productAttributeFixture
      * @param ProductOptionFixture $productOptionFixture
      * @param ProductFixture $productFixture
      */
     public function __construct(
         TaxonFixture $taxonFixture,
-        RepositoryInterface $taxonRepository,
         ProductAttributeFixture $productAttributeFixture,
         ProductOptionFixture $productOptionFixture,
         ProductFixture $productFixture
     ) {
         $this->taxonFixture = $taxonFixture;
-        $this->taxonRepository = $taxonRepository;
         $this->productAttributeFixture = $productAttributeFixture;
         $this->productOptionFixture = $productOptionFixture;
         $this->productFixture = $productFixture;

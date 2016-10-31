@@ -3,10 +3,9 @@ sylius_admin_product:
         alias: sylius.product
         section: admin
         templates: SyliusAdminBundle:Crud
-        except: ['show']
+        except: ['show', 'index']
         redirect: update
         grid: sylius_admin_product
-        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_your_product_catalog
@@ -15,6 +14,34 @@ sylius_admin_product:
             index:
                 icon: cube
     type: sylius.resource
+
+sylius_admin_product_index:
+    path: /products/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            section: admin
+            grid: sylius_admin_product
+            template: SyliusAdminBundle:Product:index.html.twig
+            vars:
+                subheader: sylius.ui.manage_your_product_catalog
+                index:
+                    icon: cube
+
+sylius_admin_product_index_per_taxon:
+    path: /products/taxon/{taxonId}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            section: admin
+            grid: sylius_admin_product
+            template: SyliusAdminBundle:Product:index.html.twig
+            vars:
+                subheader: sylius.ui.manage_your_product_catalog
+                index:
+                    icon: cube
 
 sylius_admin_product_create:
     path: /products/new
@@ -25,7 +52,6 @@ sylius_admin_product_create:
             section: admin
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_product_update
-            permission: true
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 templates:
@@ -44,7 +70,6 @@ sylius_admin_product_create_simple:
                 method: createWithVariant
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_product_update
-            permission: true
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
                 templates:

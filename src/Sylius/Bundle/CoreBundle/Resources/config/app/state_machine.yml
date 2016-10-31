@@ -8,4 +8,4 @@ imports:
     - { resource: "state_machine/sylius_order.yml" }
     - { resource: "state_machine/sylius_shipment.yml" }
     - { resource: "state_machine/sylius_payment.yml" }
-    - { resource: "state_machine/sylius_review.yml" }
+    - { resource: "state_machine/sylius_product_review.yml" }

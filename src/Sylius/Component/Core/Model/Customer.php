@@ -29,12 +29,7 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     /**
      * @var AddressInterface
      */
-    protected $billingAddress;
-
-    /**
-     * @var AddressInterface
-     */
-    protected $shippingAddress;
+    protected $defaultAddress;
 
     /**
      * @var Collection|AddressInterface[]
@@ -65,40 +60,20 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     /**
      * {@inheritdoc}
      */
-    public function getBillingAddress()
+    public function getDefaultAddress()
     {
-        return $this->billingAddress;
+        return $this->defaultAddress;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setBillingAddress(AddressInterface $billingAddress = null)
+    public function setDefaultAddress(AddressInterface $defaultAddress = null)
     {
-        $this->billingAddress = $billingAddress;
+        $this->defaultAddress = $defaultAddress;
 
-        if (null !== $billingAddress) {
-            $this->addAddress($billingAddress);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingAddress()
-    {
-        return $this->shippingAddress;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingAddress(AddressInterface $shippingAddress = null)
-    {
-        $this->shippingAddress = $shippingAddress;
-
-        if (null !== $shippingAddress) {
-            $this->addAddress($shippingAddress);
+        if (null !== $defaultAddress) {
+            $this->addAddress($defaultAddress);
         }
     }
 

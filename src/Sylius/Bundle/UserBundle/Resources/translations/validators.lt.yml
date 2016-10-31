@@ -6,6 +6,11 @@ sylius:
         email:
             not_blank: Įveskite savo elektroninio pašto adresą.
             invalid: Šis adresas yra neteisingas.
+            not_registered: El. pašto adresas nerastas. Prašome iš pradžių užsiregistruoti.
         plainPassword:
             not_blank: Įveskite savo slaptažodį.
             mismatch: Įvesti slaptažodžiai nesutampa
+            wrong_current: Įvestas slaptažodis skiriasi nuo esamo.
+        password:
+            min: Slaptažodis turi būti ilgesnis nei {{ limit }} simboliai.
+            max: Slaptažodis negali būti ilgesnis nei {{ limit }} simboliai.

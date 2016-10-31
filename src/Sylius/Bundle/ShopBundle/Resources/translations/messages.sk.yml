@@ -5,8 +5,8 @@ sylius:
     menu:
         shop:
             account:
-                header: Váš účet
-                dashboard: Administračný panel
-                personal_information: Osobné údaje
                 change_password: Zmena hesla
+                dashboard: Administračný panel
+                header: Váš účet
                 order_history: História objednávok
+                personal_information: Osobné údaje

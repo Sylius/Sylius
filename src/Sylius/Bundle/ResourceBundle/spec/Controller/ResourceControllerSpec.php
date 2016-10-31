@@ -506,6 +506,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         ResourceInterface $newResource,
         ResourceFormFactoryInterface $resourceFormFactory,
+        StateMachineInterface $stateMachine,
         Form $form,
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
@@ -520,6 +521,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
+        $configuration->hasStateMachine()->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
 
@@ -536,6 +538,8 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
         $event->isStopped()->willReturn(false);
+
+        $stateMachine->apply($configuration, $newResource)->shouldBeCalled();
 
         $repository->add($newResource)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();
@@ -560,6 +564,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         FlashHelperInterface $flashHelper,
         EventDispatcherInterface $eventDispatcher,
         ResourceControllerEvent $event,
+        StateMachineInterface $stateMachine,
         Form $form,
         Request $request,
         Response $response
@@ -570,6 +575,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
+        $configuration->hasStateMachine()->willReturn(true);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.create')->willReturn(true);
 
@@ -586,6 +592,8 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource)->willReturn($event);
         $event->isStopped()->willReturn(false);
+
+        $stateMachine->apply($configuration, $newResource)->shouldBeCalled();
 
         $repository->add($newResource)->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource)->shouldBeCalled();

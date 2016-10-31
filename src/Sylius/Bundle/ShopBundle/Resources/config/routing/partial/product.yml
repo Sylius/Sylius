@@ -27,6 +27,16 @@ sylius_shop_partial_product_index_by_taxon_code:
                     parameters:
                         $code: $code
 
+sylius_shop_partial_associated_products:
+    path: /associated-products/{$id}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_association:showAction
+        _sylius:
+            template: $template
+            criteria:
+                id: $id
+
 sylius_shop_partial_product_reviews_latest:
     path: /latest-reviews/{productId}
     methods: [GET]

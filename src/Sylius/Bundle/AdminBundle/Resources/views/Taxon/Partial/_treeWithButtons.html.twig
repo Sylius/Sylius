@@ -1,0 +1,35 @@
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+{% import _self as tree %}
+
+{% macro render(taxons) %}
+    {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+    {% import _self as tree %}
+
+    {% for taxon in taxons %}
+        <div class="item">
+            <i class="folder icon"></i>
+            <div class="content">
+                <div class="header">
+                    <a href="{{ path('sylius_admin_product_index_per_taxon', {'taxonId': taxon.id}) }}">
+                        {{ taxon.name }}
+                    </a>
+                </div>
+                <div class="ui mini buttons">
+                    {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id })) }}
+                    {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), 'sylius.ui.delete'|trans) }}
+                </div>
+                <div class="list">
+                    {{ tree.render(taxon.children) }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endmacro %}
+
+
+{{ buttons.create(path('sylius_admin_taxon_create')) }}
+<div class="ui segment">
+    <div class="ui list">
+        {{ tree.render(taxons) }}
+    </div>
+</div>

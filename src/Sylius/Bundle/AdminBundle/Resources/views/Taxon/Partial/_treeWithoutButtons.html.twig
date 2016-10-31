@@ -1,0 +1,28 @@
+{% import _self as tree %}
+
+{% macro render(taxons) %}
+    {% import _self as tree %}
+
+    {% for taxon in taxons %}
+        <div class="item">
+            <i class="folder icon"></i>
+            <div class="content">
+                <div class="header">
+                    <a href="{{ path('sylius_admin_product_index_per_taxon', {'taxonId': taxon.id}) }}">
+                        {{ taxon.name }}
+                    </a>
+                </div>
+                <div class="list">
+                    {{ tree.render(taxon.children) }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endmacro %}
+
+
+<div class="ui segment">
+    <div class="ui list">
+        {{ tree.render(taxons) }}
+    </div>
+</div>

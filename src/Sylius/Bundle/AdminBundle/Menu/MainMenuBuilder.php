@@ -73,6 +73,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabel('sylius.menu.admin.main.catalog.options')
             ->setLabelAttribute('icon', 'options')
         ;
+
+        $catalog
+            ->addChild('association_types', ['route' => 'sylius_admin_product_association_type_index'])
+            ->setLabel('sylius.menu.admin.main.catalog.association_types')
+            ->setLabelAttribute('icon', 'tasks')
+        ;
     }
 
     /**
@@ -112,6 +118,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
             ->setLabel('sylius.menu.admin.main.marketing.promotions')
             ->setLabelAttribute('icon', 'in cart')
+        ;
+
+        $marketing
+            ->addChild('product_reviews', ['route' => 'sylius_admin_product_review_index'])
+            ->setLabel('sylius.menu.admin.main.marketing.product_reviews')
+            ->setLabelAttribute('icon', 'newspaper')
         ;
     }
 

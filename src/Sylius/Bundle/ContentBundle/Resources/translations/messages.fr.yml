@@ -4,12 +4,17 @@
 sylius:
     form:
         route:
+            content: Contenu
             name: Nom
             parent: Parent
         static_content:
             body: Corps
+            id: Id
+            internal_name: Nom interne
             menu_nodes: Nœuds de menu
             parent: Parent
             publish_end_date: Date de fin de publication
+            publish_start_date: Date de début de publication
+            publishable: Publié
             routes: Chemins
             title: Titre

@@ -8,6 +8,8 @@ sylius:
         password:
             reset:
                 success: Votre mot de passe a été réinitialisé avec succès !
+                token_expired: Le jeton de réinitialisation de mot de passe a expiré,
+                requested: Si l'email que vous avez spécifié existe dans notre système, vous recevrez un message avec les instructions pour réinitialiser votre mot de passe.
             change:
                 success: Votre mot de passe a été mis à jour avec succès !
         verification:

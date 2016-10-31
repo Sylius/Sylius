@@ -122,6 +122,7 @@ sylius:
         contact_us: Contacte-nos
         contain_variants: Contém variantes
         contains: Contém
+        content: Conteúdo
         countries: Países
         country: País
         country_details: Detalhes do país
@@ -370,6 +371,7 @@ sylius:
         product_association_type_index: Tipo de associação
         product_details_viewing_product_product: Detalhes de produto <small>Visualizando produto "<strong>%product%</strong>"</small>
         product_reviews: Críticas do produto
+        products: Produtos
         products_categorized_under_taxon_taxon: Produtos <small>Categorizado na táxon "%taxon%"</small>
         products_index_of_all_products_in_your_store: Produtos <small>Lista de todos os produtos em sua loja</small>
         promotion_coupons: Cupões
@@ -442,6 +444,7 @@ sylius:
         unit_price: Preço unitário
         unknown: Desconhecido
         updating_tax_rate: Atualizar imposto
+        usage_limit: Limite de utilização
         used: Utilizado
         user_confirmation_name: Confirmação do utilizador
         user_details: Detalhes do usuários

@@ -62,6 +62,15 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
+     * @When I specify its code as :code
+     * @When I do not specify its code
+     */
+    public function iSpecifyItsCodeAs($code = null)
+    {
+        $this->createPage->specifyCode($code);
+    }
+
+    /**
      * @When I specify its name as :name
      * @When I remove its name
      */
@@ -126,9 +135,9 @@ final class ManagingCustomerGroupsContext implements Context
     }
 
     /**
-     * @When I want to browse customer groups of the store
+     * @When I want to browse customer groups
      */
-    public function iWantToBrowseCustomerGroupsOfTheStore()
+    public function iWantToBrowseCustomerGroups()
     {
         $this->indexPage->open();
     }
@@ -138,23 +147,28 @@ final class ManagingCustomerGroupsContext implements Context
      */
     public function iShouldSeeCustomerGroupsInTheList($amountOfCustomerGroups)
     {
+        $this->indexPage->open();
+
         Assert::same(
             (int) $amountOfCustomerGroups,
             $this->indexPage->countItems(),
-            sprintf('Amount of customer groups should be equal %s, but is not.', $amountOfCustomerGroups)
+            sprintf(
+                'Amount of customer groups should be equal %s, but is %s.',
+                $amountOfCustomerGroups,
+                $this->indexPage->countItems()
+            )
         );
     }
 
     /**
      * @Then /^(this customer group) should still be named "([^"]+)"$/
      */
-    public function thisChannelNameShouldBe(CustomerGroupInterface $customerGroup, $customerGroupName)
+    public function thisCustomerGroupShouldStillBeNamed(CustomerGroupInterface $customerGroup, $customerGroupName)
     {
-        $this->iWantToBrowseCustomerGroupsOfTheStore();
+        $this->iWantToBrowseCustomerGroups();
 
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]
-            ),
+            $this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]),
             sprintf('Customer group name %s has not been assigned properly.', $customerGroupName)
         );
     }
@@ -167,6 +181,49 @@ final class ManagingCustomerGroupsContext implements Context
         Assert::same(
             $this->updatePage->getValidationMessage('name'),
             'Please enter a customer group name.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that customer group with this code already exists
+     */
+    public function iShouldBeNotifiedThatCustomerGroupWithThisCodeAlreadyExists()
+    {
+        Assert::same($this->createPage->getValidationMessage('code'), 'Customer group code has to be unique.');
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isCodeDisabled(),
+            'Code field should be disabled but it is not.'
+        );
+    }
+
+    /**
+     * @When I delete the :customerGroup customer group
+     */
+    public function iDeleteTheCustomerGroup(CustomerGroupInterface $customerGroup)
+    {
+        $this->iWantToBrowseCustomerGroups();
+
+        $this->indexPage->deleteResourceOnPage(['name' => $customerGroup->getName()]);
+    }
+
+    /**
+     * @Then /^(this customer group) should no longer exist in the registry$/
+     */
+    public function thisCustomerGroupShouldNoLongerExistInTheRegistry(CustomerGroupInterface $customerGroup)
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['name' => $customerGroup->getName()]),
+            sprintf(
+                'Customer group %s should no longer exist in the registry',
+                $customerGroup->getName()
+            )
         );
     }
 }

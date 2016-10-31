@@ -65,17 +65,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingAddress()
+    public function getDefaultAddress()
     {
-        return $this->getElement('shipping_address')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBillingAddress()
-    {
-        return $this->getElement('billing_address')->getText();
+        return $this->getElement('default_address')->getText();
     }
 
     /**
@@ -102,21 +94,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShippingProvinceName($provinceName)
+    public function hasDefaultAddressProvinceName($provinceName)
     {
-        $shippingAddressText = $this->getElement('shipping_address')->getText();
+        $defaultAddressProvince = $this->getElement('default_address')->getText();
 
-        return false !== stripos($shippingAddressText, $provinceName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasBillingProvinceName($provinceName)
-    {
-        $billingAddressText = $this->getElement('billing_address')->getText();
-
-        return false !== stripos($billingAddressText, $provinceName);
+        return false !== stripos($defaultAddressProvince, $provinceName);
     }
 
     /**
@@ -133,13 +115,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_address' => '#billingAddress address',
             'customer_email' => '#info .content.extra > a',
             'customer_name' => '#info .content > a',
+            'default_address' => '#defaultAddress address',
             'delete_account_button' => '#actions',
             'no_account' => '#no-account',
             'registration_date' => '#info .content .date',
-            'shipping_address' => '#shippingAddress address',
             'subscribed_to_newsletter' => '#subscribed-to-newsletter',
         ]);
     }

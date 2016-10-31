@@ -29,22 +29,12 @@ interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface
     /**
      * @return AddressInterface
      */
-    public function getBillingAddress();
+    public function getDefaultAddress();
 
     /**
-     * @param AddressInterface $billingAddress
+     * @param AddressInterface|null $defaultAddress
      */
-    public function setBillingAddress(AddressInterface $billingAddress = null);
-
-    /**
-     * @return AddressInterface
-     */
-    public function getShippingAddress();
-
-    /**
-     * @param AddressInterface $shippingAddress
-     */
-    public function setShippingAddress(AddressInterface $shippingAddress = null);
+    public function setDefaultAddress(AddressInterface $defaultAddress = null);
 
     /**
      * @param AddressInterface $address

@@ -31,15 +31,15 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isSingleAddressOnList()
+    public function getAddressesCount()
     {
-        return 1 === count($this->getElement('addresses')->findAll('css', 'address'));
+        return count($this->getElement('addresses')->findAll('css', 'address'));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasAddressFullName($fullName)
+    public function hasAddressOf($fullName)
     {
         return null !== $this->getAddressOf($fullName);
     }
@@ -55,10 +55,54 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
+    public function addressOfContains($fullName, $value)
+    {
+        $address = $this->getAddressOf($fullName);
+
+        return $address->has('css', sprintf('address:contains("%s")', $value));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function editAddress($fullName)
+    {
+        $addressToEdit = $this->getAddressOf($fullName);
+        $addressToEdit->findLink('Edit')->press();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function deleteAddress($fullName)
     {
         $addressToDelete = $this->getAddressOf($fullName);
         $addressToDelete->pressButton('Delete');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAsDefault($fullName)
+    {
+        $addressToSetAsDefault = $this->getAddressOf($fullName);
+        $addressToSetAsDefault->pressButton('Set as default');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasNoDefaultAddress()
+    {
+        return !$this->hasElement('default_address');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFullNameOfDefaultAddress()
+    {
+        return $this->getElement('default_address')->find('css', 'address > strong')->getText();
     }
 
     /**
@@ -78,6 +122,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'addresses' => '#sylius-addresses',
+            'default_address' => '#sylius-default-address',
         ]);
     }
 }

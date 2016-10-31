@@ -6,9 +6,12 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Types d'associations
                     attributes: Attributs
                     header: Catalogue
                     options: Options
+                    products: Produits
+                    taxons: Taxons
                 configuration:
                     admin_users: Administrateurs
                     channels: Canaux
@@ -32,5 +35,6 @@ sylius:
                     header: Ventes
                     orders: Commandes
                 content:
+                    header: Contenu
                     static_contents: Contenus statiques
                     routes: Chemins

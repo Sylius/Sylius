@@ -32,7 +32,7 @@ You will need to add these few lines to the ``state_machine.yml``:
             states:
                 your_new_state: ~ # here name your state as you wish
 
-After that your new step will be available alongside other steps that already were definded in that state machine.
+After that your new step will be available alongside other steps that already were defined in that state machine.
 
 How to add a new transition?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -52,14 +52,14 @@ You will need to add these few lines to the ``state_machine.yml``:
                     from: [cancelled]
                     to: new
 
-After that your new transition will be available alongside other transitions that already were definded in that state machine.
+After that your new transition will be available alongside other transitions that already were defined in that state machine.
 
 How to remove a state and its transitions?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. warning::
 
-    If you are willing do remove a state or a transition you have to override **the whole states/transitions section**
+    If you are willing to remove a state or a transition you have to override **the whole states/transitions section**
     of the state machine you are willing to modify.
 
 How to add a new callback?
@@ -78,14 +78,14 @@ You will need to add these few lines to the ``state_machine.yml``:
             callbacks:
                 after:
                     sylius_send_email:
-                        # here you are choosing the transition on which the action should take place - we are using the one we have created abefore
+                        # here you are choosing the transition on which the action should take place - we are using the one we have created before
                         on: ["cancel"]
                         # it is just an example, use an existent service and its method here!
                         do: ["@service", "sendEmail"]
                         # this will be the object of an Order here
                         args: ["object"]
 
-After that your new callback will be available alongside other callbacks that already were definded in that state machine
+After that your new callback will be available alongside other callbacks that already were defined in that state machine
 and will be called on the desired transition
 
 How to modify a callback?

@@ -1,0 +1,6 @@
+{% if sm_can(data, 'accept', 'sylius_product_review') %}
+    <form action="{{ path('sylius_admin_product_review_accept', {'id': data.id} ) }}" method="post">
+        <input type="hidden" name="_method" value="PUT">
+        <button class="ui green labeled icon button" type="submit"><i class="checkmark icon"></i> {{ 'sylius.ui.accept'|trans }}</button>
+    </form>
+{% endif %}

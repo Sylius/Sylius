@@ -41,4 +41,10 @@ final class CustomerGroupSpec extends ObjectBehavior
         $this->setName('Retail');
         $this->getName()->shouldReturn('Retail');
     }
+
+    function its_code_is_mutable()
+    {
+        $this->setCode('#001');
+        $this->getCode()->shouldReturn('#001');
+    }
 }

@@ -13,9 +13,9 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\ProductReviewTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -93,7 +93,22 @@ final class ProductReviewContext implements Context
     }
 
     /**
-     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+") which is not accepted yet$/
+     * @Given /^(this product) has(?:| also) a review titled "([^"]+)" and rated (\d+) with a comment "([^"]+)" added by (customer "[^"]+")$/
+     */
+    public function thisProductHasAReviewTitledAndRatedWithACommentAddedByCustomer(
+        ProductInterface $product,
+        $title,
+        $rating,
+        $comment,
+        CustomerInterface $customer
+    ) {
+        $review = $this->createProductReview($product, $title, $rating, $comment, $customer);
+
+        $this->productReviewRepository->add($review);
+    }
+
+    /**
+     * @Given /^(this product) has(?:| also) a new review titled "([^"]+)" and rated (\d+) added by (customer "[^"]+")$/
      */
     public function thisProductHasAReviewTitledAndRatedAddedByCustomerWhichIsNotAcceptedYet(
         ProductInterface $product,
@@ -171,6 +186,8 @@ final class ProductReviewContext implements Context
             $stateMachine = $this->stateMachineFactory->get($review, ProductReviewTransitions::GRAPH);
             $stateMachine->apply($transition);
         }
+
+        $this->sharedStorage->set('product_review', $review);
 
         return $review;
     }

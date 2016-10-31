@@ -1,0 +1,15 @@
+{% set path = path('sylius_shop_taxon_show', app.request.query.all()) %}
+
+<div class="ui">
+    <form method="get" action="{{ path }}" class="ui loadable form">
+        <div class="two fields">
+            {% for filter in products.definition.filters %}
+                {{ sylius_grid_render_filter(products, filter) }}
+            {% endfor %}
+            <button type="submit" class="ui primary icon labeled button"><i class="search icon"></i> {{ 'sylius.ui.search'|trans }}</button>
+            <a href="{{ path('sylius_shop_taxon_show', { 'permalink': app.request.query.get('permalink') }) }}" class="ui negative icon labeled button">
+                <i class="cancel icon"></i> {{ 'sylius.ui.clear'|trans }}
+            </a>
+        </div>
+    </form>
+</div>

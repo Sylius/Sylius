@@ -1,0 +1,6 @@
+sylius:
+    order_payment:
+        refunded: Payment has been successfully refunded.
+    product_review:
+        accepted: Product review has been successfully accepted.
+        rejected: Product review has been successfully rejected.

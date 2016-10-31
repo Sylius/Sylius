@@ -11,9 +11,11 @@
 * :doc:`/book/countries`
 * :doc:`/book/zones`
 * :doc:`/book/addresses`
+* :doc:`/book/address_book`
 * :doc:`/book/customer_and_shopuser`
 * :doc:`/book/adminuser`
 * :doc:`/book/products`
+* :doc:`/book/product_reviews`
 * :doc:`/book/attributes`
 * :doc:`/book/taxons`
 * :doc:`/book/inventory`

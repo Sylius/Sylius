@@ -10,5 +10,6 @@ Cookbook
     custom-email
     paypal
     api
+    images
 
 .. include:: /cookbook/map.rst.inc

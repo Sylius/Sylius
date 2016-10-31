@@ -46,8 +46,8 @@ final class AttributeSpec extends ObjectBehavior
 
     function its_code_is_mutable()
     {
-        $this->setCode('testCode');
-        $this->getCode()->shouldReturn('testCode');
+        $this->setCode('t_shirt_collection');
+        $this->getCode()->shouldReturn('t_shirt_collection');
     }
 
     function it_has_no_name_by_default()

@@ -14,6 +14,11 @@
         {{ form_row(form.provinceName) }}
     {% endif %}
 </div>
+
+{% if form.provinceCode is defined %}
+    {{ form_errors(form) }}
+{% endif %}
+
 <div class="two fields">
     {{ form_row(form.city) }}
     {{ form_row(form.postcode) }}

@@ -33,9 +33,10 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
     function let(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
-        FilterInterface $taxonFilter
+        FilterInterface $taxonFilter,
+        FilterInterface $productFilter
     ) {
-        $this->beConstructedWith($adjustmentFactory, $priceRangeFilter, $taxonFilter);
+        $this->beConstructedWith($adjustmentFactory, $priceRangeFilter, $taxonFilter, $productFilter);
     }
 
     function it_is_initializable()
@@ -52,29 +53,23 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
+        FilterInterface $productFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $originalItems,
         Collection $units,
         OrderInterface $order,
         OrderItemInterface $orderItem1,
-        OrderItemInterface $orderItem2,
-        OrderItemInterface $orderItem3,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($originalItems);
-        $originalItems->toArray()->willReturn([$orderItem1, $orderItem2, $orderItem3]);
+        $originalItems->toArray()->willReturn([$orderItem1]);
 
-        $priceRangeFilter
-            ->filter([$orderItem1, $orderItem2, $orderItem3], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
-            ->willReturn([$orderItem1, $orderItem2])
-        ;
-        $taxonFilter
-            ->filter([$orderItem1, $orderItem2], ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]])
-            ->willReturn([$orderItem1])
-        ;
+        $priceRangeFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
+        $taxonFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
+        $productFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
 
         $orderItem1->getQuantity()->willReturn(2);
         $orderItem1->getUnits()->willReturn($units);
@@ -102,7 +97,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
 
-        $this->execute($order, ['percentage' => 0.2, 'filters' => ['taxons' => ['testTaxon']]], $promotion);
+        $this->execute($order, ['percentage' => 0.2], $promotion);
     }
 
     function it_throws_an_exception_if_passed_subject_is_not_order(
@@ -161,6 +156,6 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
 
     function it_has_a_configuration_form_type()
     {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_percentage_discount_configuration');
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_unit_percentage_discount_configuration');
     }
 }

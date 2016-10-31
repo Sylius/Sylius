@@ -58,7 +58,7 @@ In the example below we are adding a one new item to the Admin panel menu and a 
     }
 
 2. After creating your class with proper methods for all the menu customizations you need, subscribe your
-listener to proper events in the ``AppBundle\Resources\config.services.yml``.
+listener to proper events in the ``AppBundle/Resources/config/services.yml``.
 
 .. code-block:: yaml
 

@@ -9,5 +9,3 @@ sylius:
             not_blank: È necessario controllare i voti della recensioni.
         title:
             not_blank: Il titolo della recensione non deve essere vuoto.
-            min_length: Il titolo della recensione deve avere almeno 2 caratteri
-            max_length: Il titolo della recensione deve avere al massimo 255 caratteri

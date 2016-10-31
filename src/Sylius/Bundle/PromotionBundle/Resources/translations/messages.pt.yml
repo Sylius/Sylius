@@ -14,12 +14,30 @@ sylius:
             name: Nome
             rules: Regras
             starts_at: Começa em
+            usage_limit: Limite de utilização
         promotion_action:
+            fixed_discount_configuration:
+                amount: Quantia
+            percentage_discount_configuration:
+                percentage: Percentagem
             type: Tipo
+        promotion_coupon:
+            expires_at: Expira às
+            usage_limit: Limite de utilização
+        promotion_coupon_generator_instruction:
+            amount: Quantia
+            usage_limit: Limite de utilização
         promotion_rule:
             cart_quantity_configuration:
                 count: Quantidade
                 equal: Igual
+            contains_product_configuration:
+                exclude: Excluir
+                variants: Produtos
+            item_total_configuration:
+                amount: Quantia
             shipping_country_configuration:
                 country: País
+            taxonomy_configuration:
+                exclude: Excluir
             type: Tipo

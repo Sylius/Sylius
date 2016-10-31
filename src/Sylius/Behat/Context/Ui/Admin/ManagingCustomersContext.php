@@ -474,26 +474,14 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then his shipping address should be :shippingAddress
+     * @Then his default address should be :defaultAddress
      */
-    public function hisShippingAddressShouldBe($shippingAddress)
+    public function hisShippingAddressShouldBe($defaultAddress)
     {
         Assert::same(
-            str_replace(',', '', $shippingAddress),
-            $this->showPage->getShippingAddress(),
-            'Customer shipping address should be "%s", but it is not.'
-        );
-    }
-
-    /**
-     * @Then his billing address should be :billingAddress
-     */
-    public function hisBillingAddressShouldBe($billingAddress)
-    {
-        Assert::same(
-            str_replace(',', '', $billingAddress),
-            $this->showPage->getBillingAddress(),
-            'Customer billing address should be "%s", but it is not.'
+            str_replace(',', '', $defaultAddress),
+            $this->showPage->getDefaultAddress(),
+            'Customer\'s default address should be "%s", but it is not.'
         );
     }
 
@@ -528,6 +516,16 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I change the password of user :customer to :newPassword
+     */
+    public function iChangeThePasswordOfUserTo(CustomerInterface $customer, $newPassword)
+    {
+        $this->updatePage->open(['id' => $customer->getId()]);
+        $this->updatePage->changePassword($newPassword);
+        $this->updatePage->saveChanges();
+    }
+
+    /**
      * @Then this customer should be subscribed to the newsletter
      */
     public function thisCustomerShouldBeSubscribedToTheNewsletter()
@@ -539,23 +537,12 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then the province in the shipping address should be :provinceName
+     * @Then the province in the default address should be :provinceName
      */
-    public function theProvinceInTheShippingAddressShouldBe($provinceName)
+    public function theProvinceInTheDefaultAddressShouldBe($provinceName)
     {
         Assert::true(
-            $this->showPage->hasShippingProvinceName($provinceName),
-            sprintf('Cannot find shipping address with province %s', $provinceName)
-        );
-    }
-
-    /**
-     * @Then the province in the billing address should be :provinceName
-     */
-    public function theProvinceInTheShippingBillingShouldBe($provinceName)
-    {
-        Assert::true(
-            $this->showPage->hasBillingProvinceName($provinceName),
+            $this->showPage->hasDefaultAddressProvinceName($provinceName),
             sprintf('Cannot find shipping address with province %s', $provinceName)
         );
     }

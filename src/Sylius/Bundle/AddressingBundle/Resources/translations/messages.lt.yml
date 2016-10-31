@@ -21,6 +21,7 @@ sylius:
             enabled: Įjungta
         province:
             name: Pavadinimas
+            abbreviation: Santrumpa
             select: Pasirinkite
         zone:
             add_member: Pridėti narį
