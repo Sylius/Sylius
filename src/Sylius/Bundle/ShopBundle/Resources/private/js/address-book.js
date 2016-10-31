@@ -27,7 +27,7 @@
 
                         $.each(syliusResponse, function (index, address) {
                             addresses.push(address);
-                            console.log(address);
+
                             response.results.push({
                                 name: address.city + ' ' + address.street,
                                 value: address.id
@@ -43,6 +43,11 @@
                         return address.id === choice.data().value;
                     })[0];
 
+                    var inputs = element.find('input');
+
+                    $.each(inputs, function (key, input) {
+                        $(input).val('');
+                    });
                     $.each(selectedAddress, function (key, property) {
                         element.find('input[name*='+ parseKey(key) +']').val(property);
                     });
