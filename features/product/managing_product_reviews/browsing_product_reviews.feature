@@ -14,6 +14,6 @@ Feature: Browsing product reviews
     @ui
     Scenario: Browsing all product reviews in store
         When I want to browse product reviews
-        Then I should see 2 product reviews in the list
+        Then I should see 2 reviews in the list
         And I should see the product review "Awesome" in the list
         And I should also see the product review "Bad" in the list

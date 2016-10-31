@@ -74,9 +74,9 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Then I should see :amount product reviews in the list
+     * @Then I should see :amount reviews in the list
      */
-    public function iShouldSeeProductReviewsInTheList($amount)
+    public function iShouldSeeReviewsInTheList($amount)
     {
         Assert::same(
             (int) $amount,
@@ -149,9 +149,9 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Then I should see the product :productName
+     * @Then I should see the product with name :productName
      */
-    public function iShouldSeeTheProduct($productName)
+    public function iShouldSeeTheProductWithName($productName)
     {
         Assert::same(
             $productName,
