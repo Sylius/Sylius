@@ -24,6 +24,7 @@ sylius:
                     zones: Zónák
                 marketing:
                     header: Marketing
+                    product_reviews: Termék értékelések
                     promotions: Promóciók
                 customers:
                     customers: Ügyfelek

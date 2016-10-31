@@ -583,6 +583,7 @@ sylius:
         registered_customers: Registrovaní používatelia
         registration_create_an_account_in_store: Registráciá, <small>vytvoriť účet v obchode</small>
         registration_date: Dátum registrácie
+        rejected: Zamietnuté
         release_inventory: Uvolnenie skladových položkiek
         remember_me: Zapamätať si ma
         remove_attribute: Odstrániť vlastnosť

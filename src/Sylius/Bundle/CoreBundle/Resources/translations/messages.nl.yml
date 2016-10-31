@@ -19,6 +19,9 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Product
+            customer_group: Gebruikersgroep
+        promotion_coupon:
+            per_customer_usage_limit: Gebruikslimiet per klant
         group:
             name: Naam
             roles: Rollen
@@ -122,6 +125,10 @@ sylius:
             contains_taxon:
                 taxon: Categorie
                 count: Aantal
+            taxon:
+                taxons: Taxa
+            product:
+                products: Producten
             total_of_items_from_taxon:
                 taxon: Categorie
                 amount: Hoeveelheid

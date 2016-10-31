@@ -20,6 +20,7 @@ sylius:
                     zones: Bölgeler
                 marketing:
                     header: Pazarlama
+                    product_reviews: Ürün Yorumları
                     promotions: Promosyonlar
                 customers:
                     customers: Müşteriler

@@ -26,6 +26,7 @@ sylius:
                     zones: Zonas
                 marketing:
                     header: Marketing
+                    product_reviews: Críticas do produto
                     promotions: Promoções
                 customers:
                     customers: Clientes

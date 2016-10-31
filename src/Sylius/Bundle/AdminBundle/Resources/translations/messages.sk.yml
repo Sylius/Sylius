@@ -24,6 +24,7 @@ sylius:
                     zones: Zóny
                 marketing:
                     header: Marketing
+                    product_reviews: Produktové recenzie
                     promotions: Akcie
                 customers:
                     customers: Zákazníci

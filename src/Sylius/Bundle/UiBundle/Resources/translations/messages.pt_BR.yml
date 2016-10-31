@@ -583,6 +583,7 @@ sylius:
         registered_customers: Clientes cadastrados
         registration_create_an_account_in_store: Registo de <small>criar uma conta na loja</small>
         registration_date: Data de registo
+        rejected: Rejeitado
         release_inventory: Inventário de lançamento
         remember_me: Lembrar
         remove_attribute: Remover o atributo

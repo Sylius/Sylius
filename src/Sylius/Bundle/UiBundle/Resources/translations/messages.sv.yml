@@ -305,6 +305,7 @@ sylius:
         register_button: Registrera
         register_in_the_store: Registrera i butiken
         registered_customers: Registrerade kunder
+        rejected: Avslagen
         remember_me: Kom ihåg mig
         repeat_new_password: Upprepa nytt lösenord
         reports: Rapporter

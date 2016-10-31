@@ -127,6 +127,8 @@ sylius:
                 count: Contador
             taxon:
                 taxons: Taxones
+            product:
+                products: Productos
             total_of_items_from_taxon:
                 taxon: Taxón
                 amount: Cantidad

@@ -114,6 +114,8 @@ sylius:
                 count: Kiekis
             taxon:
                 taxons: Taksonai
+            product:
+                products: Prekės
             total_of_items_from_taxon:
                 amount: Suma
     installer:

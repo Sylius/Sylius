@@ -522,6 +522,7 @@ sylius:
         register_button: 注册
         registration_create_an_account_in_store: 注册 <small>创建帐户</small>
         registration_date: 注册日期：
+        rejected: 已被拒绝
         release_inventory: 释放库存
         remember_me: 记住我
         remove_attribute: 删除属性

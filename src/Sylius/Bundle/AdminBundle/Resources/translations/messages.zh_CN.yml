@@ -24,6 +24,7 @@ sylius:
                     zones: 区域
                 marketing:
                     header: 市场营销
+                    product_reviews: 商品评论
                     promotions: 促销活动
                 customers:
                     customers: 客户

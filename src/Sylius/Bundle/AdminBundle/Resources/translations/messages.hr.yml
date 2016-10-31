@@ -19,6 +19,7 @@ sylius:
                     zones: Regije
                 marketing:
                     header: Marketing
+                    product_reviews: Recenzije proizvoda
                     promotions: Promocije
                 customers:
                     customers: Kupci
