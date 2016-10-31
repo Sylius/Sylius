@@ -37,6 +37,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function specifySlug($slug)
+    {
+        $this->getDocument()->fillField('Slug', $slug);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function specifyPrice($price)
     {
         $this->getDocument()->fillField('Price', $price);

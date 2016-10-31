@@ -39,14 +39,6 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    protected function getCodeElement()
-    {
-        return $this->getElement('code');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function specifyPrice($price)
     {
         $this->getDocument()->fillField('Price', $price);
@@ -204,6 +196,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function isSlugDisabled()
+    {
+        return 'disabled' === $this->getElement('slug')->getAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getValidationMessageForImage()
     {
         $this->clickTabIfItsNotActive('media');
@@ -221,6 +221,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
+    protected function getCodeElement()
+    {
+        return $this->getElement('code');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -231,6 +239,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'price' => '#sylius_product_variant_price',
             'search' => '.ui.fluid.search.selection.dropdown',
             'search_item_selected' => 'div.menu > div.item.selected',
+            'slug' => '#sylius_product_translations_en_US_slug',
             'tab' => '.menu [data-tab="%name%"]',
             'taxonomy' => 'a[data-tab="taxonomy"]',
             'tracked' => '#sylius_product_variant_tracked',

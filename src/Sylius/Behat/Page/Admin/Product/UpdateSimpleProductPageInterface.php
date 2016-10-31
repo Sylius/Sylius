@@ -24,6 +24,11 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isCodeDisabled();
+
+    /**
+     * @return bool
+     */
+    public function isSlugDisabled();
     
     /**
      * @param int $price

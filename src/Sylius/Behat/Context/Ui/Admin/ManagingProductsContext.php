@@ -211,6 +211,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I set its slug to :slug
+     */
+    public function iSetItsSlugTo($slug)
+    {
+        $this->createSimpleProductPage->specifySlug($slug);
+    }
+
+    /**
      * @Then the product :productName should appear in the shop
      * @Then the product :productName should be in the shop
      * @Then this product should still be named :productName
@@ -380,6 +388,17 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the slug field should be disabled
+     */
+    public function theSlugFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updateSimpleProductPage->isSlugDisabled(),
+            'Slug should be immutable, but it does not.'
+        );
+    }
+
+    /**
      * @Then /^this product price should be "(?:€|£|\$)([^"]+)"$/
      */
     public function thisProductPriceShouldBeEqualTo($price)
@@ -543,6 +562,19 @@ final class ManagingProductsContext implements Context
         ], $this->sharedStorage->get('product'));
 
         $currentPage->selectMainTaxon($taxon);
+    }
+
+    /**
+     * @Given /^(product "[^"]+") slug should(?:| still) be "([^"]+)"$/
+     */
+    public function productSlugShouldBe(ProductInterface $product, $slug)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::true(
+            $this->updateSimpleProductPage->hasResourceValues(['slug' => $slug]),
+            sprintf('Product\'s slug should be %s.', $slug)
+        );
     }
 
     /**

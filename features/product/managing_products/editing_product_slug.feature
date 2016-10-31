@@ -17,9 +17,9 @@ Feature: Editing product's slug
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Mansion of Madness" should appear in the shop
-        And its slug should be "mansion-of-madness"
+        And product "Mansion of Madness" slug should be "mansion-of-madness"
 
-    @ui @todo @javascript
+    @ui
     Scenario: Creating product with custom slug
         Given I want to create a new simple product
         When I specify its code as "BOARD_MANSION_OF_MADNESS"
@@ -29,12 +29,12 @@ Feature: Editing product's slug
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Mansion of Madness" should appear in the shop
-        And its slug should be "mom-board-game"
+        And product "Mansion of Madness" slug should be "mom-board-game"
 
-    @ui @todo
+    @ui
     Scenario: Seeing disabled slug field when editing product
         Given the store has a product "Mansion of Madness"
-        When I want to modify the this product
+        When I want to modify this product
         Then the slug field should be disabled
 
     @ui @todo @javascript
@@ -45,7 +45,7 @@ Feature: Editing product's slug
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product name should be "Mansion of Madness: Second Edition"
-        And its slug should still be "mansion-of-madness"
+        And product "Mansion of Madness" slug should still be "mansion-of-madness"
 
     @ui @todo @javascript
     Scenario: Automatically changing product's slug while editing product's name
@@ -56,7 +56,7 @@ Feature: Editing product's slug
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product name should be "Small World"
-        And its slug should still be "small-world"
+        And product "Mansion of Madness" slug should still be "small-world"
 
     @ui @todo @javascript
     Scenario: Manually changing product's slug while editing product's name
@@ -68,4 +68,4 @@ Feature: Editing product's slug
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product name should be "Small World"
-        And its slug should still be "small-world-board-game"
+        And product "Mansion of Madness" slug should still be "small-world-board-game"
