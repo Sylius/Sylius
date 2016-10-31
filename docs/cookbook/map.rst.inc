@@ -5,3 +5,4 @@
 * :doc:`/cookbook/paypal`
 * :doc:`/cookbook/api`
 * :doc:`/cookbook/images`
+* :doc:`/cookbook/checkout`

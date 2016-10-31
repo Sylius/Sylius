@@ -11,5 +11,6 @@ Cookbook
     paypal
     api
     images
+    checkout
 
 .. include:: /cookbook/map.rst.inc
