@@ -15,19 +15,21 @@ sylius_fixtures:
                 geographical:
                     options:
                         countries:
-                            - US
+                            - "US"
                         zones:
                             US:
                                 name: "United States of America"
                                 countries:
-                                    - US
+                                    - "US"
 
                 payment_method:
                     options:
                         custom:
                             cash_on_delivery:
+                                code: "cash_on_delivery"
                                 name: "Cash on delivery"
                             bank_transfer:
+                                code: "bank_transfer"
                                 name: "Bank transfer"
                                 enabled: true
 
@@ -35,11 +37,14 @@ sylius_fixtures:
                     options:
                         custom:
                             ups:
+                                code: "ups"
                                 name: "UPS"
                                 enabled: true
                             dhl_express:
+                                code: "dhl_express"
                                 name: "DHL Express"
                             fedex:
+                                code: "fedex"
                                 name: "FedEx"
 
                 channel:
@@ -61,7 +66,7 @@ sylius_fixtures:
                                 enabled: true
 
                 regular_user:
-                    name: shop_user
+                    name: "shop_user"
                     options:
                         random: 20
                         custom:
@@ -72,7 +77,7 @@ sylius_fixtures:
                                 password: "sylius"
 
                 admin_user:
-                    name: admin_user
+                    name: "admin_user"
                     options:
                         custom:
                             -
@@ -97,10 +102,13 @@ sylius_fixtures:
                     options:
                         custom:
                             clothing:
+                                code: "clothing"
                                 name: "Clothing"
                             books:
+                                code: "books"
                                 name: "Books"
                             other:
+                                code: "other"
                                 name: "Other"
 
                 tax_rate:
