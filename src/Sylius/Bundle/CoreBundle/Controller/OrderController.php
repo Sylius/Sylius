@@ -229,20 +229,4 @@ class OrderController extends ResourceController
     {
         return $this->container->get('event_dispatcher');
     }
-
-    /**
-     * @return EntityManager
-     */
-    private function getOrderManager()
-    {
-        return $this->get('sylius.manager.order');
-    }
-
-    /**
-     * @return RegistryInterface
-     */
-    private function getPayum()
-    {
-        return $this->get('payum');
-    }
 }
