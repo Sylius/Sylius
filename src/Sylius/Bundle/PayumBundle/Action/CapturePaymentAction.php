@@ -67,7 +67,8 @@ final class CapturePaymentAction extends GatewayAwareAction
                 $payumPayment->setClientId($order->getCustomer()->getId());
                 $payumPayment->setDescription(sprintf(
                     'Payment contains %d items for a total of %01.2f',
-                    $order->getItems()->count(), $totalAmount
+                    $order->getItems()->count(),
+                    $totalAmount
                 ));
                 $payumPayment->setDetails($payment->getDetails());
 
@@ -101,10 +102,10 @@ final class CapturePaymentAction extends GatewayAwareAction
      * @param int $price
      * @param string $currencyCode
      *
-     * @return float
+     * @return int
      */
     private function convertPrice($price, $currencyCode)
     {
-        return round($this->currencyConverter->convertFromBase($price, $currencyCode) / 100, 2);
+        return $this->currencyConverter->convertFromBase($price, $currencyCode);
     }
 }
