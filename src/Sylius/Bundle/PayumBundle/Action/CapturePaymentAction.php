@@ -101,10 +101,10 @@ final class CapturePaymentAction extends GatewayAwareAction
      * @param int $price
      * @param string $currencyCode
      *
-     * @return float
+     * @return int
      */
     private function convertPrice($price, $currencyCode)
     {
-        return round($this->currencyConverter->convertFromBase($price, $currencyCode) / 100, 2);
+        return $this->currencyConverter->convertFromBase($price, $currencyCode);
     }
 }
