@@ -10,20 +10,23 @@ sylius:
                     attributes: Атрибуты
                     header: Каталог
                     options: Список опций
+                    products: Товары
                     taxons: Налоги
                 configuration:
+                    admin_users: Администраторы
                     channels: Каналы
                     countries: Страны
                     currencies: Валюты
                     header: Конфигурация
                     locales: Языки
-                    payment_methods: Методы оплаты
-                    shipping_methods: Методы доставки
+                    payment_methods: Способы оплаты
+                    shipping_methods: Способы доставки
                     tax_categories: Список налоговых категорий
                     tax_rates: Налоговые ставки
                     zones: Зоны
                 marketing:
                     header: Маркетинг
+                    product_reviews: Обзоры товара
                     promotions: Рекламные акции
                 customers:
                     customers: Клиенты
@@ -33,5 +36,6 @@ sylius:
                     header: Продажи
                     orders: Заказы
                 content:
+                    header: Контент
                     static_contents: Статический контент
                     routes: Маршруты

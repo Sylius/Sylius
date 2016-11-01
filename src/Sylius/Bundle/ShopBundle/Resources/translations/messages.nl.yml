@@ -5,6 +5,7 @@ sylius:
     menu:
         shop:
             account:
+                address_book: Adresboek
                 change_password: Wachtwoord wijzigen
                 dashboard: Dashboard
                 header: Je account

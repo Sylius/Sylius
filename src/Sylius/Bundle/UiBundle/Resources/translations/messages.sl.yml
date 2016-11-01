@@ -219,7 +219,6 @@ sylius:
         exclusive: Izključno
         existing_customer: Obstoječa stranka
         failed: Ni uspelo
-        forgot_password: Pozabljeno geslo
         fulfill: Izpolnitev
         gateway: Prehod
         general_info: Splošne informacije

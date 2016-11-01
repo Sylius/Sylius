@@ -11,6 +11,7 @@ sylius:
                     header: Catalogo
                     options: Opzioni
                     products: Prodotti
+                    taxons: Generi
                 configuration:
                     admin_users: Amministratori
                     channels: Canali
@@ -25,6 +26,7 @@ sylius:
                     zones: Zone
                 marketing:
                     header: Marketing
+                    product_reviews: Recensioni del prodotto
                     promotions: Promozioni
                 customers:
                     customers: Clienti

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    association_type:
+        name:
+            not_blank: Voer a.u.b. een naam in voor de associatie type.
+            min_length: De naam van het gerelateerde type moet minimaal 1 teken bevatten. | De gerelateerde type naam moet ten minste {{ limit }} tekens bevatten.

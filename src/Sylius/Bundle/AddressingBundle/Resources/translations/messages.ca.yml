@@ -14,14 +14,17 @@ sylius:
             street: Carrer
             province: Província
         country:
+            add_province: Afegeix una província
             name: Nom
             provinces: Províncies
             select: Tria
             enabled: Activat
         province:
             name: Nom
+            abbreviation: Abreviatura
             select: Tria
         zone:
+            add_member: Afegeix un membre
             members: Membres
             name: Nom
             type: Tipus

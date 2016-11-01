@@ -164,7 +164,6 @@ sylius:
         current_promotions: 当前的促销活动
         current_stock: 当前货架
         customer: 客户
-        customer_can_login_to_the_store: 客户可以登录到该店铺
         customer_care: 客户关怀
         customer_details: 客户详细信息
         customer_id: 客户ID
@@ -270,7 +269,6 @@ sylius:
         failed: 失败
         faqs: 常见问题
         first_name: 名字
-        forgot_password: 忘记密码
         fulfill: 完成
         gateway: 网关
         general_info: 常规信息
@@ -522,6 +520,7 @@ sylius:
         register_button: 注册
         registration_create_an_account_in_store: 注册 <small>创建帐户</small>
         registration_date: 注册日期：
+        rejected: 已被拒绝
         release_inventory: 释放库存
         remember_me: 记住我
         remove_attribute: 删除属性

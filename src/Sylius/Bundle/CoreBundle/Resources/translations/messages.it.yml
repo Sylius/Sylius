@@ -123,6 +123,8 @@ sylius:
             contains_taxon:
                 taxon: Tipologia
                 count: Conta
+            product:
+                products: Prodotti
             total_of_items_from_taxon:
                 taxon: Tipologia
                 amount: Importo

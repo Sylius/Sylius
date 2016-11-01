@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    product_review:
+        accepted: Productbeoordeling is geaccepteerd.
+        rejected: Productbeoordeling is afgekeurd.

@@ -27,6 +27,8 @@ sylius:
         promotion_rule:
             cart_quantity_configuration:
                 count: Кол-во
+            contains_product_configuration:
+                variants: Товары
             item_total_configuration:
                 amount: Сумма
             shipping_country_configuration:

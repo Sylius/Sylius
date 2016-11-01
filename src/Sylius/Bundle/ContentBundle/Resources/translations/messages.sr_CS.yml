@@ -4,4 +4,10 @@
 sylius:
     form:
         route:
+            content: Sadržaj
             name: Ime
+        static_content:
+            body: Telo sadržaja
+            publishable: Objavljeno
+            routes: Putanje
+            title: Naziv

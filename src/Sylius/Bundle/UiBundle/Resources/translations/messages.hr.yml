@@ -228,7 +228,6 @@ sylius:
         faqs: Česta pitanja
         filters: Filteri
         first_name: Ime
-        forgot_password: Zaboravljena lozinka
         fulfill: Ispunjeno
         gateway: Gateway
         general_info: sylius.promotion.general_info

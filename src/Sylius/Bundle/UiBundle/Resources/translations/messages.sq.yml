@@ -157,7 +157,6 @@ sylius:
         current_promotions: Promocionet aktuale
         current_stock: Fondi aktual
         customer: Blerësi
-        customer_can_login_to_the_store: Klienti mund te hyje ne dyqan
         customer_details: Hollësi të blerësit
         customer_id: ID e blerësit
         customer_not_notified: Blerësi nuk u njoftua
@@ -253,7 +252,6 @@ sylius:
         extra_information: Informacione shtese
         failed: Nuk u krye
         first_name: Emri
-        forgot_password: Harruat fjalëkalimin
         fulfill: Përmbyll
         gateway: Gateway
         general_info: Informacion i përgjithshëm
@@ -490,6 +488,7 @@ sylius:
         register_button: Regjistrohu
         registration_create_an_account_in_store: Regjistrimi <small>Krijo një llogari në arkiv</small>
         registration_date: Data e regjistrimit
+        rejected: I refuzuar
         release_inventory: Lista e daljeve
         remember_me: Më mbaj mend
         remove_attribute: Fshi atributin

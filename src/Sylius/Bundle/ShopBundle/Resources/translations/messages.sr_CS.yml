@@ -5,4 +5,9 @@ sylius:
     menu:
         shop:
             account:
+                address_book: Adresar
+                change_password: Promenite lozinku
                 dashboard: Komandna Tabla
+                header: Vaš nalog
+                order_history: Istorija narudžbina
+                personal_information: Lični podaci

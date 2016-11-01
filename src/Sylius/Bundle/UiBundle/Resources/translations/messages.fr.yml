@@ -15,6 +15,8 @@ sylius:
     ui:
         abandoned: Abandonné
         about: À propos
+        accept: Accepter
+        accepted: Accepté
         access_token: Jeton d'accès
         access_your_store_account_or_create_a_new_one: Connectez-vous ou créez un nouveau compte
         account_credentials: Informations d'intentification
@@ -23,6 +25,7 @@ sylius:
         actions: Actions
         add: Ajouter
         add_action: Ajouter une action
+        add_address: Ajouter une adresse
         add_association: Ajouter une association
         add_attribute: Ajouter un attribut
         add_attributes: Ajouter des attributs
@@ -39,6 +42,7 @@ sylius:
         add_rule: Ajouter une règle
         add_to_cart: Ajouter au panier
         add_value: Ajouter une valeur
+        add_your_review: Ajouter votre avis
         adding_new_customer_groups: Ajout de nouveaux groupes de clients
         adding_new_email: Email en cours d'ajout
         adding_new_locale: Ajout de nouveaux paramètres régionaux
@@ -83,10 +87,10 @@ sylius:
         blocks: Blocs
         body: Corps
         browse_products: Parcourir les produits
+        browse_your_addresses: Parcourir vos adresses
         browse_your_orders_from_the_past: Parcourir vos commandes passées
         build: Construire
         calculator: Calculateur
-        call_us: Appelez-nous
         cancel: Annuler
         cancelled: Annulé
         cart: Panier
@@ -192,7 +196,6 @@ sylius:
         current_promotions: Promotions courantes
         current_stock: Stock actuel
         customer: Client
-        customer_can_login_to_the_store: Le client peut se connecter au magasin
         customer_care: Service clients
         customer_details: Informations sur le client
         customer_groups: Groupes de client
@@ -242,6 +245,7 @@ sylius:
         edit_product: Modifier un produit
         edit_product_attribute: Mettre à jour les attributs du produit
         edit_product_option: Modifier l'option de produit
+        edit_product_review: Editer les avis de produits
         edit_product_variant: Éditer la déclinaison
         edit_promotion: Modifier la promotion
         edit_promotion_coupon: Modifier le coupon de promotion
@@ -316,7 +320,6 @@ sylius:
         filters: Filtres
         fill_in_your_billing_and_shipping_addresses: Renseignez vos adresses de facturation et de livraison
         first_name: Prénom
-        forgot_password: Mot de passe oublié
         from_the_newest: De la plus récente
         from_the_oldest: Du plus ancien
         fulfill: Remplir
@@ -334,7 +337,6 @@ sylius:
         grand_total: Total
         guest: Invité
         guest_customer: Client invité
-        have_an_account_already: J'ai déjà un compte
         hello: Bonjour
         hello_name: Bonjour <b>%name%</b>
         hide_deleted: Cacher les supprimés
@@ -442,7 +444,6 @@ sylius:
         my_account: Mon compte
         n_a: N/A
         name: Nom
-        need_assistance: Besoin d'assistance
         new: Nouveau
         new_admin_user: Nouvel administrateur
         new_channel: Nouveau canal
@@ -611,6 +612,8 @@ sylius:
         registered_customers: Clients enregistrés
         registration_create_an_account_in_store: Enregistrement <small>Créer un compte sur la boutique</small>
         registration_date: Date d'enregistrement
+        reject: Rejet
+        rejected: Rejeté
         release_inventory: Relâcher les unités de stock
         remember_me: Rester connecté
         remove_attribute: Supprimer l'attribut
@@ -740,6 +743,7 @@ sylius:
         there_are_no_promotions_configured: Aucune promotion configurée
         there_are_no_redirect_routes_to_display: Aucune route de redirection a afficher
         there_are_no_reports_created: Il n'y a aucun rapport créé
+        there_are_no_reviews: Il n'y a aucun d'avis
         there_are_no_roles_defined: Il n'y a pas de rôles définis
         there_are_no_routes_to_display: Il n'y a aucune route à afficher
         there_are_no_shipments_to_display: Aucune méthode expédition
@@ -799,6 +803,7 @@ sylius:
         welcome: Bienvenue
         welcome_to_our_store: Bienvenue dans notre boutique
         welcome_to_your_space: Bienvenue dans votre espace
+        write_your_own_review: Ecrire votre propre avis
         yes_label: Oui
         you_are_customer_since: Vous êtes client depuis
         you_have_no_addresses_defined: Vous n'avez défini aucune adresse

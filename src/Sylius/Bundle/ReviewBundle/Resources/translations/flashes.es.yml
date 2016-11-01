@@ -3,4 +3,4 @@
 
 sylius:
     review:
-        waiting_for_the_acceptation: Su opinión está a la espera de aceptación
+        waiting_for_the_acceptation: Su reseña está a la espera de ser revisada.

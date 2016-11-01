@@ -120,7 +120,6 @@ sylius:
         current_promotions: Aktuella kampanjer
         current_stock: I lager
         customer: Kunder
-        customer_can_login_to_the_store: Kund kan logga in i butiken
         customer_care: Kundtjänst
         customer_details: Kunduppgifter
         customer_login: Kundinloggning
@@ -180,10 +179,8 @@ sylius:
         faqs: FAQs
         filters: Filter
         first_name: Förnamn
-        forgot_password: Glömt lösenordet
         gateway: Portal
         generate_coupons: Generera kuponger
-        have_an_account_already: Har redan ett konto
         hello: Hej
         home: Hem
         hostname: Värdnamn
@@ -305,6 +302,7 @@ sylius:
         register_button: Registrera
         register_in_the_store: Registrera i butiken
         registered_customers: Registrerade kunder
+        rejected: Avslagen
         remember_me: Kom ihåg mig
         repeat_new_password: Upprepa nytt lösenord
         reports: Rapporter

@@ -2,6 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_currency:
+            not_blank: Voer a.u.b. een standaard valuta in.
+        default_locale:
+            not_blank: Voer a.u.b. een standaard taal in.
     checkout:
         shipping_method:
             not_blank: Gelieve een verzendmethode te kiezen.
@@ -27,3 +32,6 @@ sylius:
     product_translation:
         short_description:
             max: Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.
+    user:
+        email:
+            unique: Dit e-mailadres is al in gebruik.

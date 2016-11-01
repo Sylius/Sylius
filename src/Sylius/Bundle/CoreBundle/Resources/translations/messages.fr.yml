@@ -127,6 +127,8 @@ sylius:
                 count: Nombre
             taxon:
                 taxons: Taxons
+            product:
+                products: Produits
             total_of_items_from_taxon:
                 taxon: Taxon
                 amount: Montant

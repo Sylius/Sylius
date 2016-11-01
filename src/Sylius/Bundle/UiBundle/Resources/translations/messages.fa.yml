@@ -275,7 +275,6 @@ sylius:
         extra_notes: یادداشت های اضافی
         failed: پرداخت ناموفق
         first_name: نام
-        forgot_password: فراموشی کلمه عبور
         fulfill: ارسال
         gateway: درگاه پرداخت
         general_info: اطلاعات کلی
@@ -511,6 +510,7 @@ sylius:
         register_button: ثبت نام
         registration_create_an_account_in_store: ثبت نام <small> یک حساب کاربری بسازید </small>
         registration_date: تاریخ ثبت نام
+        rejected: رد شده
         release_inventory: بازانتشار موجودی
         remember_me: مرا به خاطر بسپار
         remove_attribute: حذف قابلیت

@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    order_payment:
+        refunded: El pago ha sido reembolsado con éxito.
+    product_review:
+        accepted: La reseña del producto ha sido correctamente aceptada.
+        rejected: La reseña del producto ha sido correctamente rechazada.

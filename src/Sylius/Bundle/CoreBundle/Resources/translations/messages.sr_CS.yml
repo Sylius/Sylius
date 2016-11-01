@@ -5,6 +5,8 @@ sylius:
     form:
         block:
             id: ID
+        promotion:
+            channels: Kanali
         promotion_action:
             add_product_configuration:
                 product: Proizvod
@@ -14,12 +16,17 @@ sylius:
             payment_state: Stanje plaćanja
         page:
             id: ID
+        product:
+            channels: Kanali
         product_filter:
             name: Ime
         product_variant:
             tax_category: Kategorija proizvoda
         product_association_type:
             name: Ime
+        promotion_rule:
+            product:
+                products: Proizvodi
     installer:
         extensions:
             "off": false

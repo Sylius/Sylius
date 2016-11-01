@@ -8,30 +8,36 @@ sylius:
         option:
             name: Ime
     ui:
+        add: Dodaj
         add_action: Dodajte akciju
+        add_attributes: Dodaj atribute
         add_coupon: Dodaj kupon
         add_image: Dodaj sliku
         add_member: Dodajte člana
         add_province: Dodaj provinciju
         add_rule: Dodajte pravilo
         add_to_cart: Dodaj u korpu
+        address_book: Adresar
         addressing_step: Adresa
         administration: Administracija
         administration_dashboard: Administrativna tabla
         all_your_addresses: Sve vaše adrese
         assortment: Asortiman
+        attributes: Atributi
         availability: Dostupnost
         available_on: Dostupno
         back: Nazad
         balance_due: Dugovni saldo
         cancel: Otkaži
         categorization: Kategorizacija
+        channels: Kanali
         choose_file: Fajl
         city: Grad
         clear_cart: Izpraznite korpu
         company: Kompanija
         confirmation: Potvrda
         confirmation_title: Potvrda
+        content: Sadržaj
         countries: Zemlje
         country: Zemlja
         country_details: Detalji zemlje
@@ -55,7 +61,10 @@ sylius:
         creation_time: Kreirano
         current_orders: Trenutne narudžbine
         current_promotions: Trenutne promocije
+        customer: Kupac
+        customers: Kupci
         dashboard: Komandna Tabla
+        date: Datum
         default_billing_address: Podrazumevana adresa plaćanja
         default_shipping_address: Podrazumevana adresa isporuke
         delete: Obrisati
@@ -112,6 +121,7 @@ sylius:
         manage_tax_categories: Upravljajte kategorijama poreza
         manage_tax_rates: Upravljajte poreskim stopama
         manage_zones: Upravljajte zonama
+        marketing: Marketing
         members: Članovi
         method: metod
         modified: izmenjeno
@@ -142,6 +152,7 @@ sylius:
         no_tax_category: Nema kategorije poreza
         no_taxes: Nisu dodati porezi
         number_of_orders: Broj narudžbina
+        options: Opcije
         order: narudžbina
         order_summary: Rezime narudžbine
         order_value: Vrednost narudžbine
@@ -156,6 +167,7 @@ sylius:
         previous: Predhodna
         product: Proizvod
         product_details_viewing_product_product: Detalji proizvoda <small>Pregled proizvoda "<strong>%product%</strong>"</small>
+        products: Proizvodi
         products_categorized_under_taxon_taxon: Proizvodi <small>Kategorisani u "%taxon%"</small>
         products_index_of_all_products_in_your_store: Proizvodi <small>Svi proizvodi u prodavnici</small>
         promotion_details: Detalji promocije
@@ -170,6 +182,9 @@ sylius:
         register: Registracija
         register_button: Registracija
         retail_price: Prodajna cena
+        routes: Putanje
+        sales: Akcije
+        sales_this_month: Akcije
         save: Sačuvaj
         save_changes: Sačuvaj izmene
         scope: Adresa isporuke
@@ -200,6 +215,7 @@ sylius:
         there_are_no_options_for_this_product: Nema opcija za ovaj proizvod
         there_are_no_taxons_for_this_product: sylius.product.no_taxons
         total: Ukupno
+        translations: Prevodi
         type: Tip
         updating_tax_rate: Ažuriranje poreske stope
         used: Korišćeno
