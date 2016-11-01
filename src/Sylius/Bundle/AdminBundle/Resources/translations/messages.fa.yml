@@ -26,6 +26,7 @@ sylius:
                     zones: منطقه‌ها
                 marketing:
                     header: بازاریابی
+                    product_reviews: نقد و بررسی محصول
                     promotions: فروش های ویژه
                 customers:
                     customers: مشتریان

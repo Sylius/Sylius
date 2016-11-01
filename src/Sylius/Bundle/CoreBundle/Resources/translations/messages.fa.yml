@@ -127,6 +127,8 @@ sylius:
                 count: تعداد
             taxon:
                 taxons: دسته بندی ها
+            product:
+                products: محصولات
             total_of_items_from_taxon:
                 taxon: تاکسون
                 amount: مقدار

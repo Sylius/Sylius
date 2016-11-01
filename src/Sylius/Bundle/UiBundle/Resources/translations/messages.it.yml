@@ -179,7 +179,6 @@ sylius:
         current_promotions: Promozione corrente
         current_stock: Disponibilità attuale
         customer: Cliente
-        customer_can_login_to_the_store: Cliente può accedere all'archivio
         customer_care: Servizio Clienti
         customer_details: Dettagli del cliente
         customer_id: ID Cliente
@@ -294,7 +293,6 @@ sylius:
         female: Femminile
         filters: Filtri
         first_name: Nome
-        forgot_password: Hai dimenticato la password
         fulfill: Completato
         gateway: Gateway
         general_info: Informazioni generali
@@ -308,7 +306,6 @@ sylius:
         grand_total: Totale
         guest: Ospite
         guest_customer: Cliente ospite
-        have_an_account_already: Hai già un account
         hello: Ciao
         hello_name: Ciao <b>%name%</b>
         hide_deleted: Nascondi eliminati
@@ -565,6 +562,7 @@ sylius:
         registered_customers: Clienti registrati
         registration_create_an_account_in_store: Registrazione di <small>creare un account nel negozio</small>
         registration_date: Data di registrazione
+        rejected: Respinto
         release_inventory: Inventario delle uscite
         remember_me: Ricordami
         remove_attribute: Rimuovere l'attributo

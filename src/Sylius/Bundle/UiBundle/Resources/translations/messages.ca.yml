@@ -9,6 +9,8 @@ sylius:
         option:
             name: Nom
     ui:
+        add_member: Afegeix un membre
+        add_province: Afegeix una província
         add_to_cart: Afegir a la cistella
         administration_dashboard: Quadre de comandament
         all_your_addresses: Totes les teves adreces

@@ -180,7 +180,6 @@ sylius:
         current_promotions: Aktuális promóciók
         current_stock: Aktuális készlet
         customer: Ügyfél
-        customer_can_login_to_the_store: A vevő betud jelentkezni az áruházba
         customer_care: Ügyfélszolgálat
         customer_details: A vásárló adatai
         customer_id: Vásárlói ID
@@ -295,7 +294,6 @@ sylius:
         female: Nő
         filters: Szűrők
         first_name: Keresztnév
-        forgot_password: Elfelejtett jelszó
         fulfill: Teljesítés
         gateway: Átjáró
         general_info: Általános info
@@ -309,7 +307,6 @@ sylius:
         grand_total: Végösszeg
         guest: Vendég
         guest_customer: Vendég ügyfél
-        have_an_account_already: Már van egy fiókod
         hello: Üdvözlünk
         hello_name: Üdvözöljük <b>%name%</b>
         hide_deleted: Törölt elem elrejtése
@@ -567,6 +564,7 @@ sylius:
         registered_customers: Regisztrált felhasználók
         registration_create_an_account_in_store: Regisztráció <small>Hozzon létre egy fiókot áruházunkban</small>
         registration_date: Regisztráció dátuma
+        rejected: Elutasított
         release_inventory: Kibocsáthatható készlet
         remember_me: Emlékezzen rám
         remove_attribute: Tulajdonság törlése

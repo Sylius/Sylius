@@ -185,7 +185,6 @@ sylius:
         current_promotions: Aktuelle Aktionen
         current_stock: Auf Lager
         customer: Kunde
-        customer_can_login_to_the_store: Kunde darf sich im Shop anmelden
         customer_care: Kundendienst
         customer_details: Kundendetails
         customer_id: Kunden-Nr
@@ -301,7 +300,6 @@ sylius:
         female: Weiblich
         filters: Filter
         first_name: Vorname
-        forgot_password: Passwort vergessen
         fulfill: Zu erfüllen
         fulfilled: Gegeben
         gateway: Schnittstelle
@@ -316,7 +314,6 @@ sylius:
         grand_total: Gesamtbetrag
         guest: Gastbestellung
         guest_customer: Gast Kunde
-        have_an_account_already: Du hast bereits einen Acoount
         hello: Hallo
         hello_name: Hallo <b>%name%</b>
         hide_deleted: Gelöschte Elemente ausblenden
@@ -582,6 +579,7 @@ sylius:
         registered_customers: Registrierte Kunden
         registration_create_an_account_in_store: Anmeldung <small>Konto für Shop erstellen</small>
         registration_date: Anmeldedatum
+        rejected: Zurückgewiesen
         release_inventory: Warenbestand freigeben
         remember_me: Eingeloggt bleiben
         remove_attribute: Attribute entfernen

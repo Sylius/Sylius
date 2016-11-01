@@ -127,6 +127,8 @@ sylius:
                 count: จำนวน
             taxon:
                 taxons: การจัดหมวดหมู่
+            product:
+                products: สินค้า
             total_of_items_from_taxon:
                 taxon: หมวดหมู่
                 amount: ยอดเงิน

@@ -185,7 +185,6 @@ sylius:
         current_promotions: Aktualne promocje
         current_stock: Dostępny
         customer: Klient
-        customer_can_login_to_the_store: Klient może logować się do sklepu
         customer_care: Obsługa klienta
         customer_details: Dane Klienta
         customer_groups: Grupy klientów
@@ -300,7 +299,6 @@ sylius:
         filter: Filtruj
         filters: Filtry
         first_name: Imię
-        forgot_password: Nie pamiętasz hasła
         fulfill: Uzupełnij
         gateway: Bramka
         general_info: Informacje ogólne
@@ -314,7 +312,6 @@ sylius:
         grand_total: Łącznie
         guest: Gość
         guest_customer: Gość
-        have_an_account_already: Masz już konto
         hello: Witaj
         hello_name: Witaj <b>%name%</b>
         hide_deleted: Ukryj usunięte
@@ -557,6 +554,7 @@ sylius:
         register_button: Zarejestruj
         registration_create_an_account_in_store: Rejestracja, <small>Załóż konto w sklepie</small>
         registration_date: Data rejestracji
+        rejected: Odrzucona
         release_inventory: Inwentarz wydań
         remember_me: Zapamiętaj mnie
         remove_attribute: Usuń cechę

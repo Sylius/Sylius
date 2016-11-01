@@ -26,6 +26,7 @@ sylius:
                     zones: โซน
                 marketing:
                     header: การตลาด
+                    product_reviews: รีวิวสินค้า
                     promotions: โปรโมชั่น
                 customers:
                     customers: ลูกค้า

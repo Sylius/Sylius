@@ -398,6 +398,7 @@ sylius:
         register: Зареєструватися
         register_button: Зареєструватися
         registration_date: Дата реєстрації
+        rejected: Відхилений
         release_inventory: Інвентаризація випуску
         remember_me: Пам'ятати мене
         reports: Звіти

@@ -4,11 +4,17 @@
 sylius:
     form:
         route:
+            content: Inhoud
             name: Naam
             parent: Ouder
         static_content:
             body: Inhoud
+            id: Id
+            internal_name: Interne naam
             menu_nodes: Menu items
             parent: Ouder
+            publish_end_date: Einddatum publicatie
+            publish_start_date: Begindatum publicatie
+            publishable: Gepubliceerd
             routes: Routes
             title: Titel

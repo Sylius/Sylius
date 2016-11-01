@@ -254,7 +254,6 @@ sylius:
         female: Feminino
         filters: Filtros
         first_name: Nome próprio
-        forgot_password: Esqueci a password
         fulfill: Preencher
         fulfilled: Cheio
         gateway: Gateway
@@ -269,7 +268,6 @@ sylius:
         grand_total: Total
         guest: Convidado
         guest_customer: Cliente convidado
-        have_an_account_already: Já tem uma conta
         home: Home
         hostname: Nome do servidor
         id: Nº
@@ -385,6 +383,7 @@ sylius:
         rating: Avaliação
         ready: Preparado
         refunded: Reembolsado
+        rejected: Rejeitado
         remember_me: Lembrar-me
         reports: Relatórios
         retail_price: Preço de venda

@@ -8,3 +8,4 @@ sylius:
         shipping_method:
             name: Ime
             tax_category: Kategorija proizvoda
+            translations: Prevodi

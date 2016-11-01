@@ -72,6 +72,7 @@ sylius:
         confirmation: Подтверждение
         confirmation_title: Подтверждение
         contain_variants: Содержит варианты
+        content: Контент
         countries: Страны
         country: Страна
         country_details: Информация о стране
@@ -315,6 +316,7 @@ sylius:
         product_association_type_index: Типы взаимосвязи
         product_association_types: Типы взаимосвязей продуктов
         product_details_viewing_product_product: Детали товара <small>Просмотр товара "<strong>%product%</strong>"</small>
+        products: Товары
         products_categorized_as_name: Товары категории «%name%»
         products_categorized_under_taxon_taxon: Товары <small>категории "%taxon%"</small>
         products_index_of_all_products_in_your_store: Товары <small>Список всех товаров в вашем магазине</small>
@@ -336,6 +338,7 @@ sylius:
         register: Регистрация
         register_button: Регистрация
         registration_date: Дата регистрации
+        rejected: Отклонено
         release_inventory: Инвентаризация выпуска
         remember_me: Запомнить меня
         reports: Отчеты

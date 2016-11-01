@@ -10,6 +10,8 @@ sylius:
                     attributes: Attributen
                     header: Cataloog
                     options: Opties
+                    products: Producten
+                    taxons: Taxa
                 configuration:
                     admin_users: Beheerders
                     channels: Kanalen
@@ -24,6 +26,7 @@ sylius:
                     zones: Zones
                 marketing:
                     header: Marketing
+                    product_reviews: Productbeoordelingen
                     promotions: Promoties
                 customers:
                     customers: Klanten
@@ -33,5 +36,6 @@ sylius:
                     header: Verkoop
                     orders: Bestellingen
                 content:
-                    static_contents: Statische inhoud
+                    header: Inhoud
+                    static_contents: Statische content
                     routes: Routes
