@@ -16,6 +16,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Customer\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -52,24 +53,32 @@ final class ManagingCustomersContext implements Context
     private $showPage;
 
     /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
      * @param ShowPageInterface $showPage
+     * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        ShowPageInterface $showPage
+        ShowPageInterface $showPage,
+        CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->showPage = $showPage;
+        $this->currentPageResolver = $currentPageResolver;
     }
 
     /**
@@ -508,6 +517,17 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @Then I should not see information about email verification
+     */
+    public function iShouldSeeInformationAboutEmailVerification()
+    {
+        Assert::true(
+            $this->showPage->hasEmailVerificationInformation(),
+            'There should be no information about email verification.'
+        );
+    }
+
+    /**
      * @When I make them subscribed to the newsletter
      */
     public function iMakeThemSubscribedToTheNewsletter()
@@ -548,16 +568,28 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then /^(this customer) should have "([^"]+)" as their group$/
+     * @Then this customer should have :groupName as their group
      */
-    public function thisCustomerShouldHaveAsTheirGroup(CustomerInterface $customer, $groupName)
+    public function thisCustomerShouldHaveAsTheirGroup($groupName)
     {
-        $this->updatePage->open(['id' => $customer->getId()]);
+        /** @var UpdatePageInterface|ShowPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->updatePage, $this->showPage]);
 
         Assert::same(
             $groupName,
-            $this->updatePage->getGroupName(),
-            sprintf('Customer should have %s as group, but it does not', $groupName)
+            $currentPage->getGroupName(),
+            sprintf('Customer should have %s as group, but it does not.', $groupName)
+        );
+    }
+
+    /**
+     * @Then I should see that this customer has verified the email
+     */
+    public function iShouldSeeThatThisCustomerHasVerifiedTheEmail()
+    {
+        Assert::true(
+            $this->showPage->hasVerifiedEmail(),
+            'There should be information that this customer has verified the email.'
         );
     }
 }

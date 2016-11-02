@@ -104,6 +104,41 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasVerifiedEmail()
+    {
+        $verifiedEmail = $this->getElement('verified_email');
+        if ($verifiedEmail->find('css', 'i.green')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroupName()
+    {
+        $group = $this->getElement('group');
+
+        Assert::notNull($group, 'There should be element group on page.');
+
+        list($text, $groupName) = explode(':', $group->getText());
+
+        return trim($groupName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasEmailVerificationInformation()
+    {
+        return null === $this->getDocument()->find('css', '#verified-email');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_customer_show';
@@ -119,9 +154,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'customer_name' => '#info .content > a',
             'default_address' => '#defaultAddress address',
             'delete_account_button' => '#actions',
+            'group' => '.group',
             'no_account' => '#no-account',
             'registration_date' => '#info .content .date',
             'subscribed_to_newsletter' => '#subscribed-to-newsletter',
+            'verified_email' => '#verified-email',
         ]);
     }
 }

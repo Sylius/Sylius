@@ -71,4 +71,18 @@ interface ShowPageInterface extends PageInterface
      */
     public function hasDefaultAddressProvinceName($provinceName);
 
+    /**
+     * @return bool
+     */
+    public function hasVerifiedEmail();
+
+    /**
+     * @return bool
+     */
+    public function getGroupName();
+
+    /**
+     * @return bool
+     */
+    public function hasEmailVerificationInformation();
 }

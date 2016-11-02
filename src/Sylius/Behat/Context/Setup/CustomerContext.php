@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -193,6 +194,26 @@ final class CustomerContext implements Context
     {
         $customer->addAddress($address);
 
+        $this->customerManager->flush();
+    }
+
+    /**
+     * @Given /^(this customer) verified their email$/
+     */
+    public function theCustomerVerifiedTheirEmail(CustomerInterface $customer)
+    {
+        $customer->getUser()->setVerifiedAt(new \DateTime());
+
+        $this->customerManager->flush();
+    }
+
+    /**
+     * @Given /^(the customer) belongs to (group "([^"]+)")$/
+     */
+    public function theCustomerBelongsToGroup(CustomerInterface $customer, CustomerGroupInterface $customerGroup)
+    {
+        $customer->setGroup($customerGroup);
+        
         $this->customerManager->flush();
     }
 
