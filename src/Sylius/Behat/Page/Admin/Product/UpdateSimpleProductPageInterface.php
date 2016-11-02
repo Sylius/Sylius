@@ -28,7 +28,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     /**
      * @return bool
      */
-    public function isSlugDisabled();
+    public function isSlugReadOnly();
     
     /**
      * @param int $price

@@ -196,9 +196,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function isSlugDisabled()
+    public function isSlugReadOnly()
     {
-        return 'disabled' === $this->getElement('slug')->getAttribute('disabled');
+        return 'readonly' === $this->getElement('slug')->getAttribute('readonly');
     }
 
     /**

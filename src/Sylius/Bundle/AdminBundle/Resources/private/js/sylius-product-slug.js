@@ -20,7 +20,7 @@ function updateSlug($element) {
     $form = $element.parents('form');
     $slugInput = $element.parents('.content').find('[name*="[slug]"]');
 
-    if ('disabled' == $slugInput.attr('disabled')) {
+    if ('readonly' == $slugInput.attr('readonly')) {
         return;
     }
 
@@ -44,10 +44,10 @@ function updateSlug($element) {
 }
 
 function toggleSlugModification($button, $slugInput) {
-    if ($slugInput.attr('disabled')) {
-        $slugInput.removeAttr('disabled');
+    if ($slugInput.attr('readonly')) {
+        $slugInput.removeAttr('readonly');
     } else {
-        $slugInput.attr('disabled', 'disabled');
+        $slugInput.attr('readonly', 'readonly');
     }
 
     $currentText = $button.attr('data-toggle-text');

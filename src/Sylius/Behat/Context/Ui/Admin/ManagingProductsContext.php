@@ -397,12 +397,12 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then the slug field should be disabled
+     * @Then the slug field should not be editable
      */
-    public function theSlugFieldShouldBeDisabled()
+    public function theSlugFieldShouldNotBeEditable()
     {
         Assert::true(
-            $this->updateSimpleProductPage->isSlugDisabled(),
+            $this->updateSimpleProductPage->isSlugReadOnly(),
             'Slug should be immutable, but it does not.'
         );
     }

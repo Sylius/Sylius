@@ -31,7 +31,7 @@ Feature: Editing product's slug
     Scenario: Seeing disabled slug field when editing product
         Given the store has a product "Mansion of Madness"
         When I want to modify this product
-        Then the slug field should be disabled
+        Then the slug field should not be editable
 
     @ui @javascript
     Scenario: Prevent from editing slug while changing product name

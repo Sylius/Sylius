@@ -213,6 +213,7 @@ final class ProductContext implements Context
         $translation = $this->productTranslationFactory->createNew();
         $translation->setLocale($locale);
         $translation->setName($name);
+        $translation->setSlug($this->slugGenerator->generate($name));
 
         $product->addTranslation($translation);
 
@@ -229,6 +230,7 @@ final class ProductContext implements Context
 
         $product->setName($productName);
         $product->setCode(StringInflector::nameToUppercaseCode($productName));
+        $product->setSlug($this->slugGenerator->generate($productName));
 
         $product->setDescription('Awesome '.$productName);
 

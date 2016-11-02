@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
+use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -65,6 +66,11 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     private $localeRepository;
 
     /**
+     * @var SlugGeneratorInterface
+     */
+    private $slugGenerator;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -81,6 +87,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
      * @param FactoryInterface $productAttributeValueFactory
      * @param FactoryInterface $productImageFactory
      * @param ImageUploaderInterface $imageUploader
+     * @param SlugGeneratorInterface $slugGenerator
      * @param RepositoryInterface $taxonRepository
      * @param RepositoryInterface $productAttributeRepository
      * @param RepositoryInterface $productOptionRepository
@@ -94,6 +101,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         FactoryInterface $productAttributeValueFactory,
         FactoryInterface $productImageFactory,
         ImageUploaderInterface $imageUploader,
+        SlugGeneratorInterface $slugGenerator,
         RepositoryInterface $taxonRepository,
         RepositoryInterface $productAttributeRepository,
         RepositoryInterface $productOptionRepository,
@@ -105,6 +113,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         $this->variantGenerator = $variantGenerator;
         $this->productImageFactory = $productImageFactory;
         $this->imageUploader = $imageUploader;
+        $this->slugGenerator = $slugGenerator;
         $this->localeRepository = $localeRepository;
 
         $this->faker = \Faker\Factory::create();
@@ -207,6 +216,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
             $product->setFallbackLocale($localeCode);
 
             $product->setName($options['name']);
+            $product->setSlug($this->slugGenerator->generate($options['name']));
             $product->setShortDescription($options['short_description']);
             $product->setDescription($options['description']);
         }
