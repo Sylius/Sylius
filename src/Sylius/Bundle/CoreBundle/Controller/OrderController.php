@@ -40,6 +40,11 @@ class OrderController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $cart = $this->getCurrentCart();
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($cart));
+        }
+
         $form = $this->resourceFormFactory->create($configuration, $cart);
 
         $view = View::create()
