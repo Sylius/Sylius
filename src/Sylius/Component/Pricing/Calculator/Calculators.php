@@ -17,7 +17,6 @@ namespace Sylius\Component\Pricing\Calculator;
 class Calculators
 {
     const STANDARD = 'standard';
-    const TIME_BASED = 'time_based';
     const VOLUME_BASED = 'volume_based';
 
     private function __construct()
