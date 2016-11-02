@@ -148,11 +148,13 @@ Put this configuration inside your ``app/config/config.yml``.
 
     sylius_order:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
-        classes:
+        resources:
             order:
-                model: App\AppBundle\Entity\Order # The order entity.
+                classes:
+                    model: App\AppBundle\Entity\Order # The order entity.
             order_item:
-                model: App\AppBundle\Entity\OrderItem # Your order item entity, if you need to override it
+                classes:
+                    model: App\AppBundle\Entity\OrderItem # Your order item entity, if you need to override it
 
     sylius_product:
         driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
