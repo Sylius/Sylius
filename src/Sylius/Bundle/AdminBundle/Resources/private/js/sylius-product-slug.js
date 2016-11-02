@@ -9,11 +9,20 @@ $(document).ready(function() {
             updateSlug($element);
         }, 1000);
     });
+
+    $('#toggle-slug-modification').on('click', function(e) {
+        e.preventDefault();
+        toggleSlugModification($(this), $(this).siblings('input'));
+    });
 });
 
 function updateSlug($element) {
     $form = $element.parents('form');
     $slugInput = $element.parents('.content').find('[name*="[slug]"]');
+
+    if ('disabled' == $slugInput.attr('disabled')) {
+        return;
+    }
 
     $form.addClass('loading');
 
@@ -28,4 +37,16 @@ function updateSlug($element) {
             $form.removeClass('loading');
         }
     });
+}
+
+function toggleSlugModification($button, $slugInput) {
+    if ($slugInput.attr('disabled')) {
+        $slugInput.removeAttr('disabled');
+    } else {
+        $slugInput.attr('disabled', 'disabled');
+    }
+
+    $currentText = $button.attr('data-toggle-text');
+    $button.attr('data-toggle-text', $button.text());
+    $button.text($currentText);
 }

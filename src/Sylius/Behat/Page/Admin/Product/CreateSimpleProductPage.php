@@ -27,6 +27,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function getRouteName()
+    {
+        return parent::getRouteName() . '_simple';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function nameItIn($name, $localeCode)
     {
         $this->getDocument()->fillField(
@@ -96,12 +104,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getRouteName()
+    public function enableSlugModification()
     {
-        return parent::getRouteName() . '_simple';
+        $this->getDocument()->pressButton('#enable-slug-modification');
     }
 
     /**

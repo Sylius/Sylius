@@ -33,7 +33,7 @@ Feature: Editing product's slug
         When I want to modify this product
         Then the slug field should be disabled
 
-    @ui @todo @javascript
+    @ui @javascript
     Scenario: Prevent from editing slug while changing product name
         Given the store has a product "Mansion of Madness"
         When I want to modify this product
@@ -41,7 +41,7 @@ Feature: Editing product's slug
         And I save my changes
         Then slug of product "Mansion of Madness" should still be "mansion-of-madness"
 
-    @ui @todo @javascript
+    @ui @javascript
     Scenario: Automatically changing product's slug while editing product's name
         Given the store has a product "Mansion of Madness"
         When I want to modify this product
@@ -50,7 +50,7 @@ Feature: Editing product's slug
         And I save my changes
         Then slug of product "Mansion of Madness" should still be "small-world"
 
-    @ui @todo @javascript
+    @ui @javascript
     Scenario: Manually changing product's slug while editing product's name
         Given the store has a product "Mansion of Madness"
         When I want to modify this product

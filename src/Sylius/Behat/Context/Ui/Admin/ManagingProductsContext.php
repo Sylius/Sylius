@@ -219,6 +219,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I enable slug modification
+     */
+    public function iEnableSlugModification()
+    {
+        $this->createSimpleProductPage->enableSlugModification();
+    }
+
+    /**
      * @Then the product :productName should appear in the shop
      * @Then the product :productName should be in the shop
      * @Then this product should still be named :productName

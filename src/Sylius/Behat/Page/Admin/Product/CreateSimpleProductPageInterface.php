@@ -55,4 +55,6 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      * @param string $path
      */
     public function attachImageWithCode($code, $path);
+
+    public function enableSlugModification();
 }
