@@ -420,10 +420,12 @@ final class ProductContext implements Context
      */
     public function iShouldSeeAsItsAverageRating($rating)
     {
+        $averageRating = $this->showPage->getAverageRating();
+
         Assert::same(
             (float) $rating,
-            $this->showPage->getAverageRating(),
-            'Product should have average rating %s but has %2$s.'
+            $averageRating,
+            'Product should have average rating %2$s but has %s.'
         );
     }
 
@@ -461,7 +463,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^(this product) average rating should be (\d+)$/
+     * @Then /^average rating of (product "[^"]+") should be (\d+)$/
      */
     public function thisProductAverageRatingShouldBe(ProductInterface $product, $averageRating)
     {

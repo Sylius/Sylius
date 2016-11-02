@@ -149,9 +149,9 @@ final class ManagingProductReviewsContext implements Context
     }
 
     /**
-     * @Then I should see the product with name :productName
+     * @Then I should be editing review of product :productName
      */
-    public function iShouldSeeTheProductWithName($productName)
+    public function iShouldBeEditingReviewOfProduct($productName)
     {
         Assert::same(
             $productName,

@@ -17,4 +17,4 @@ Feature: Recalculating product average rating
         And I choose 5 as its rating
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product average rating should be 4
+        And average rating of product "Lamborghini Gallardo Model" should be 4

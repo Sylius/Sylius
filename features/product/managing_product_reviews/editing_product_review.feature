@@ -39,7 +39,7 @@ Feature: Editing product reviews
     @ui
     Scenario: Seeing a product's name while editing a product review
         When I want to modify the "Awesome" product review
-        Then I should see the product with name "Lamborghini Gallardo Model"
+        Then I should be editing review of product "Lamborghini Gallardo Model"
 
     @ui
     Scenario: Seeing a customer's name while editing a product review
