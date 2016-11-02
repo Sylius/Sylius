@@ -34,6 +34,10 @@ function updateSlug($element) {
         accept: "application/json",
         success: function(data) {
             $slugInput.val(data.slug);
+            if ($slugInput.parents('.field').hasClass('error')) {
+                $slugInput.parents('.field').removeClass('error');
+                $slugInput.parents('.field').find('.sylius-validation-error').remove();
+            }
             $form.removeClass('loading');
         }
     });

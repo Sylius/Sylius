@@ -21,6 +21,6 @@ final class SlugGenerator implements SlugGeneratorInterface
      */
     public function generate($name)
     {
-        return str_replace([': ', '_', ':', ';', '-', ' '], '-', str_replace(['\'', '"'], '', strtolower($name)));
+        return preg_replace('/[^a-z0-9\-]/', '', str_replace(' ', '-', strtolower($name)));
     }
 }

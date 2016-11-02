@@ -212,8 +212,9 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I set its slug to :slug
+     * @When I remove its slug
      */
-    public function iSetItsSlugTo($slug)
+    public function iSetItsSlugTo($slug = null)
     {
         $this->createSimpleProductPage->specifySlug($slug);
     }
@@ -423,7 +424,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that (code|name) is required$/
+     * @Then /^I should be notified that (code|name|slug) is required$/
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {

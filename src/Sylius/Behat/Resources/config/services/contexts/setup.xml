@@ -111,6 +111,7 @@
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
             <argument type="service" id="sylius.product_variant_resolver.default" container="symfony" />
             <argument type="service" id="sylius.image_uploader" container="symfony" />
+            <argument type="service" id="sylius.generator.slug" container="symfony" />
             <argument>%mink.parameters%</argument>
             <tag name="sylius.behat.context" />
         </service>
