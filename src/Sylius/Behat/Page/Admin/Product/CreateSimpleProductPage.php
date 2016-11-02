@@ -32,6 +32,10 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode), $name
         );
+
+        $this->getDocument()->waitFor(10, function () {
+            return '' !== $this->getElement('slug')->getValue();
+        });
     }
 
     /**
@@ -114,6 +118,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'images' => '#sylius_product_images',
             'name' => '#sylius_product_translations_en_US_name',
             'price' => '#sylius_product_variant_price',
+            'slug' => '#sylius_product_translations_en_US_slug',
             'tab' => '.menu [data-tab="%name%"]',
         ]);
     }

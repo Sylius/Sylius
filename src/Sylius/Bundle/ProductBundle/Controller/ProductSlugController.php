@@ -27,11 +27,10 @@ class ProductSlugController extends Controller
      */
     public function generateAction(Request $request)
     {
-        $name = $request->attributes->get('name');
-        $slugGenerator = $this->get('sylius.generator.slug');
+        $name = $request->query->get('name');
 
         return new JsonResponse([
-            'slug' => $slugGenerator->generate($name),
+            'slug' => $this->get('sylius.generator.slug')->generate($name),
         ]);
     }
 }

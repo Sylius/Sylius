@@ -78,7 +78,7 @@ sylius_admin_product_create_simple:
                     name: sylius_admin_product_create_simple
 
 sylius_product_generate_slug:
-    path: /generate-slug/{name}
+    path: /generate-slug/
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_slug:generateAction

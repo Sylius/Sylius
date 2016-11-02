@@ -565,7 +565,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Given /^(product "[^"]+") slug should(?:| still) be "([^"]+)"$/
+     * @Given /^slug of (product "[^"]+") should(?:| still) be "([^"]+)"$/
      */
     public function productSlugShouldBe(ProductInterface $product, $slug)
     {
