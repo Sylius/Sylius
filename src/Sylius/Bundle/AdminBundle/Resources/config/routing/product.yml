@@ -76,3 +76,9 @@ sylius_admin_product_create_simple:
                     form: SyliusAdminBundle:Product:_form.html.twig
                 route:
                     name: sylius_admin_product_create_simple
+
+sylius_product_generate_slug:
+    path: /generate-slug/{name}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_slug:generateAction
