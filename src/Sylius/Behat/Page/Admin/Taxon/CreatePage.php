@@ -121,6 +121,30 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function moveUp(TaxonInterface $taxon)
+    {
+        $this->moveLeaf($taxon, self::MOVE_DIRECTION_UP);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function moveDown(TaxonInterface $taxon)
+    {
+        $this->moveLeaf($taxon, self::MOVE_DIRECTION_DOWN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getFirstLeafName(TaxonInterface $parentTaxon = null)
+    {
+        return $this->getLeafs($parentTaxon)[0]->getText();
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
@@ -137,16 +161,54 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
+     * @param TaxonInterface $taxon
+     * @param string $direction
+     *
+     * @throws ElementNotFoundException
+     */
+    private function moveLeaf(TaxonInterface $taxon, $direction)
+    {
+        Assert::oneOf($direction, [self::MOVE_DIRECTION_UP, self::MOVE_DIRECTION_DOWN]);
+
+        $leafs = $this->getLeafs();
+        foreach ($leafs as $leaf) {
+            if ($leaf->getText() === $taxon->getName()) {
+                $moveButton = $leaf->getParent()->find('css', sprintf('.%s', $direction));
+                $moveButton->click();
+
+                return;
+            }
+        }
+
+        throw new ElementNotFoundException(
+            $this->getDriver(),
+            sprintf('Move %s button for %s taxon', $direction, $taxon->getName())
+        );
+    }
+
+    /**
+     * @param TaxonInterface|null $parentTaxon
+     *
      * @return NodeElement[]
      *
      * @throws ElementNotFoundException
      */
-    private function getLeafs()
+    private function getLeafs(TaxonInterface $parentTaxon = null)
     {
         $tree = $this->getElement('tree');
         Assert::notNull($tree);
+        /** @var NodeElement[] $leafs */
+        $leafs = $tree->findAll('css', '.item > .content > .header');
 
-        return $tree->findAll('css', '.item > .content > .header');
+        if (null === $parentTaxon) {
+            return $leafs;
+        }
+
+        foreach ($leafs as $leaf) {
+            if ($leaf->getText() === $parentTaxon->getName()) {
+                return $leaf->findAll('css', '.item > .content > .header');
+            }
+        }
     }
 
     /**

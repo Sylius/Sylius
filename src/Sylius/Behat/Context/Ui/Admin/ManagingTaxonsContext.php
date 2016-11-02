@@ -155,6 +155,14 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When /^I want to move up ("[^"]+" taxon)$/
+     */
+    public function iWantToMoveUpTaxon(TaxonInterface $taxon)
+    {
+        $this->createPage->moveUp($taxon);
+    }
+
+    /**
      * @Given /^I choose ("[^"]+" as a parent taxon)$/
      */
     public function iChooseAsAParentTaxon(TaxonInterface $taxon)
@@ -476,6 +484,22 @@ final class ManagingTaxonsContext implements Context
         Assert::same(
             $this->updatePage->getValidationMessageForImageAtPlace(((int) $matches[0][0]) - 1),
             'Image code must be unique within this taxon.'
+        );
+    }
+
+    /**
+     * @Then the first taxon on the list should be :taxon
+     */
+    public function theFirstTaxonOnTheListShouldBe(TaxonInterface $taxon)
+    {
+        Assert::same(
+            $this->createPage->getFirstLeafName(),
+            $taxon->getName(),
+            sprintf(
+                'Expected %s as a first taxon, leaf but got %s.',
+                $taxon->getName(),
+                $this->createPage->getFirstLeafName()
+            )
         );
     }
 }
