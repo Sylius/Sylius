@@ -5,7 +5,9 @@
     {% else %}
     <div class="ui action input">
         {{ form_widget(slugField, {'attr': {'readonly': 'readonly', 'data-url': path('sylius_product_generate_slug')}}) }}
-        <span id="toggle-slug-modification" class="ui button" data-toggle-text="{{ 'sylius.ui.disable'|trans }}">{{ 'sylius.ui.enable'|trans }}</span>
+        <span id="toggle-slug-modification" class="ui icon button">
+            <i class="unlock icon"></i>
+        </span>
     </div>
     {% endif %}
     {{ form_errors(slugField) }}

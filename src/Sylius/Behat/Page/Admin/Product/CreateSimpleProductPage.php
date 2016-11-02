@@ -106,7 +106,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
 
     public function enableSlugModification()
     {
-        $this->getDocument()->pressButton('#enable-slug-modification');
+        $this->getElement('toggle_slug_modification_button')->press();
     }
 
     /**
@@ -125,6 +125,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'price' => '#sylius_product_variant_price',
             'slug' => '#sylius_product_translations_en_US_slug',
             'tab' => '.menu [data-tab="%name%"]',
+            'toggle_slug_modification_button' => '#toggle-slug-modification',
         ]);
     }
 

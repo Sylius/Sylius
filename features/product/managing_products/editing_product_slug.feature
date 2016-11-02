@@ -39,7 +39,7 @@ Feature: Editing product's slug
         When I want to modify this product
         And I rename it to "Mansion of Madness: Second Edition" in "English (United States)"
         And I save my changes
-        Then slug of product "Mansion of Madness" should still be "mansion-of-madness"
+        Then slug of product "Mansion of Madness: Second Edition" should still be "mansion-of-madness"
 
     @ui @javascript
     Scenario: Automatically changing product's slug while editing product's name
@@ -48,7 +48,7 @@ Feature: Editing product's slug
         And I enable slug modification
         And I rename it to "Small World" in "English (United States)"
         And I save my changes
-        Then slug of product "Mansion of Madness" should still be "small-world"
+        Then slug of product "Small World" should be "small-world"
 
     @ui @javascript
     Scenario: Manually changing product's slug while editing product's name
@@ -58,4 +58,4 @@ Feature: Editing product's slug
         And I rename it to "Small World" in "English (United States)"
         And I set its slug to "small-world-board-game"
         And I save my changes
-        Then slug of product "Mansion of Madness" should still be "small-world-board-game"
+        Then slug of product "Small World" should be "small-world-board-game"

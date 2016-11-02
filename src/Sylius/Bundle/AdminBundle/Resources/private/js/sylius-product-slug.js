@@ -46,11 +46,9 @@ function updateSlug($element) {
 function toggleSlugModification($button, $slugInput) {
     if ($slugInput.attr('readonly')) {
         $slugInput.removeAttr('readonly');
+        $button.html('<i class="lock icon"></i>');
     } else {
         $slugInput.attr('readonly', 'readonly');
+        $button.html('<i class="unlock icon"></i>');
     }
-
-    $currentText = $button.attr('data-toggle-text');
-    $button.attr('data-toggle-text', $button.text());
-    $button.text($currentText);
 }
