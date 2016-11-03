@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Product\Generator;
 
+use Behat\Transliterator\Transliterator;
+
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
@@ -21,6 +23,6 @@ final class SlugGenerator implements SlugGeneratorInterface
      */
     public function generate($name)
     {
-        return preg_replace('/[^a-z0-9\-]/', '', str_replace(' ', '-', strtolower($name)));
+        return Transliterator::transliterate($name);
     }
 }

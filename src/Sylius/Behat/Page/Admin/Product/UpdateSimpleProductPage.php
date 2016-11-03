@@ -34,6 +34,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode), $name
         );
+
+        $this->waitForSlugGenerationIfNecessary();
     }
 
     /**
@@ -311,5 +313,22 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         Assert::notEmpty($imageElements);
 
         return reset($imageElements);
+    }
+
+    private function waitForSlugGenerationIfNecessary()
+    {
+        if (!$this->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
+        $slugElement = $this->getElement('slug');
+        if ($slugElement->hasAttribute('readonly')) {
+            return;
+        }
+
+        $value = $slugElement->getValue();
+        $this->getDocument()->waitFor(1000, function () use ($slugElement, $value) {
+            return $value !== $slugElement->getValue();
+        });
     }
 }

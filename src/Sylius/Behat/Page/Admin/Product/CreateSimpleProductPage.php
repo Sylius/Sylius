@@ -41,9 +41,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             sprintf('sylius_product_translations_%s_name', $localeCode), $name
         );
 
-        $this->getDocument()->waitFor(10, function () {
-            return '' !== $this->getElement('slug')->getValue();
-        });
+        $this->waitForSlugGenerationIfNecessary();
     }
 
     /**
@@ -175,5 +173,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         Assert::notEmpty($items);
 
         return end($items);
+    }
+
+    private function waitForSlugGenerationIfNecessary()
+    {
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $this->getDocument()->waitFor(1000, function () {
+                return '' !== $this->getElement('slug')->getValue();
+            });
+        }
     }
 }

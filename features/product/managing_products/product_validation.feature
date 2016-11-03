@@ -10,8 +10,8 @@ Feature: Products validation
 
     @ui
     Scenario: Adding a new simple product without specifying its code
-        Given I want to create a new simple product
-        When I name it "Dice Brewing" in "English (United States)"
+        When I want to create a new simple product
+        And I name it "Dice Brewing" in "English (United States)"
         And I set its price to "$10.00"
         And I try to add it
         Then I should be notified that code is required
@@ -19,8 +19,8 @@ Feature: Products validation
 
     @ui
     Scenario: Adding a new simple product without specifying its slug
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its price to "$10.00"
         And I remove its slug
@@ -30,8 +30,8 @@ Feature: Products validation
 
     @ui
     Scenario: Adding a new simple product without specifying its name
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I set its price to "$10.00"
         And I try to add it
         Then I should be notified that name is required
@@ -39,8 +39,8 @@ Feature: Products validation
 
     @ui
     Scenario: Adding a new simple product without specifying its price
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I try to add it
         Then I should be notified that price is required
@@ -48,16 +48,16 @@ Feature: Products validation
 
     @ui
     Scenario: Adding a new configurable product without specifying its code
-        Given I want to create a new configurable product
-        When I name it "Dice Brewing" in "English (United States)"
+        When I want to create a new configurable product
+        And I name it "Dice Brewing" in "English (United States)"
         And I try to add it
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
 
     @ui
     Scenario: Adding a new configurable product without specifying its name
-        Given I want to create a new configurable product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new configurable product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I try to add it
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
