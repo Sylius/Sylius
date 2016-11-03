@@ -21,6 +21,3 @@ sylius_promotion:
                 repository: Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionCouponRepository
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionCouponType
-        promotion_action:
-            classes:
-                factory: Sylius\Component\Core\Factory\PromotionActionFactory
