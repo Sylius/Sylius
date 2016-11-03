@@ -39,8 +39,6 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
         $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
-        $this->overwriteCouponFactory($container);
-        $this->overwriteActionFactory($container);
 
         $container
             ->getDefinition('sylius.form.type.promotion_action')
@@ -50,33 +48,5 @@ final class SyliusPromotionExtension extends AbstractResourceExtension
             ->getDefinition('sylius.form.type.promotion_rule')
             ->replaceArgument(1, new Reference('sylius.registry_promotion_rule_checker'))
         ;
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    private function overwriteCouponFactory(ContainerBuilder $container)
-    {
-        $couponFactoryDefinition = $container->getDefinition('sylius.factory.promotion_coupon');
-        $couponFactoryClass = $couponFactoryDefinition->getClass();
-        $couponFactoryDefinition->setClass(Factory::class);
-
-        $decoratedCouponFactoryDefinition = new Definition($couponFactoryClass);
-        $decoratedCouponFactoryDefinition->addArgument($couponFactoryDefinition);
-
-        $container->setDefinition('sylius.factory.promotion_coupon', $decoratedCouponFactoryDefinition);
-    }
-
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    private function overwriteActionFactory(ContainerBuilder $container)
-    {
-        $baseFactoryDefinition = new Definition(Factory::class, [new Parameter('sylius.model.promotion_action.class')]);
-        $promotionActionFactoryClass = $container->getParameter('sylius.factory.promotion_action.class');
-        $decoratedPromotionActionFactoryDefinition = new Definition($promotionActionFactoryClass, [$baseFactoryDefinition]);
-
-        $container->setDefinition('sylius.factory.promotion_action', $decoratedPromotionActionFactoryDefinition);
     }
 }
