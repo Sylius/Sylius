@@ -57,7 +57,7 @@ a new ShopUser, assign the existing Customer and a password via the ``setPlainPa
 
    // Now let's find a Customer by their e-mail:
    /** @var CustomerInterface $customer */
-   $customer = $this->container->get('sylius.repository.customer`)->findOneBy(['email' => 'customer@test.com']);
+   $customer = $this->container->get('sylius.repository.customer')->findOneBy(['email' => 'customer@test.com']);
 
    // and assign it to the ShopUser
    $user->setCustomer($customer);
