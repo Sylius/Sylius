@@ -1,6 +1,6 @@
 imports:
-    - { resource: parameters.yml }
-    - { resource: resources.yml }
+    - { resource: "@SyliusResourceBundle/test/app/config/parameters.yml" }
+    - { resource: "@SyliusResourceBundle/test/app/config/resources.yml" }
 
 framework:
     translator: { fallbacks: ["%locale%"] }
