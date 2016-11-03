@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Service\Setter;
 
 use Behat\Mink\Session;
-use Behat\Symfony2Extension\Driver\KernelDriver;
+use FriendsOfBehat\SymfonyExtension\Driver\SymfonyDriver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -51,7 +51,7 @@ final class CookieSetter implements CookieSetterInterface
 
     private function prepareMinkSessionIfNeeded()
     {
-        if ($this->minkSession->getDriver() instanceof KernelDriver) {
+        if ($this->minkSession->getDriver() instanceof SymfonyDriver) {
             return;
         }
 

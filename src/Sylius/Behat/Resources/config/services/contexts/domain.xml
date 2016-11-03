@@ -13,61 +13,61 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.behat.context.domain.notification" class="Sylius\Behat\Context\Domain\NotificationContext" scope="scenario">
-            <tag name="sylius.behat.context" />
+        <service id="sylius.behat.context.domain.notification" class="Sylius\Behat\Context\Domain\NotificationContext">
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.domain.managing_orders" class="Sylius\Behat\Context\Domain\ManagingOrdersContext" scope="scenario">
+        <service id="sylius.behat.context.domain.managing_orders" class="Sylius\Behat\Context\Domain\ManagingOrdersContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.repository.order" container="symfony"/>
-            <argument type="service" id="sylius.repository.order_item" container="symfony"/>
-            <argument type="service" id="sylius.repository.address" container="symfony"/>
-            <argument type="service" id="sylius.repository.adjustment" container="symfony"/>
-            <argument type="service" id="sylius.manager.order" container="symfony"/>
-            <argument type="service" id="sylius.product_variant_resolver.default" container="symfony"/>
-            <argument type="service" id="sylius.unpaid_orders_state_updater" container="symfony" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony__.sylius.repository.order"/>
+            <argument type="service" id="__symfony__.sylius.repository.order_item"/>
+            <argument type="service" id="__symfony__.sylius.repository.address"/>
+            <argument type="service" id="__symfony__.sylius.repository.adjustment"/>
+            <argument type="service" id="__symfony__.sylius.manager.order"/>
+            <argument type="service" id="__symfony__.sylius.product_variant_resolver.default"/>
+            <argument type="service" id="__symfony__.sylius.unpaid_orders_state_updater" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.domain.managing_payments" class="Sylius\Behat\Context\Domain\ManagingPaymentsContext" scope="scenario">
-            <argument type="service" id="sylius.repository.payment" container="symfony"/>
-            <tag name="sylius.behat.context" />
+        <service id="sylius.behat.context.domain.managing_payments" class="Sylius\Behat\Context\Domain\ManagingPaymentsContext">
+            <argument type="service" id="__symfony__.sylius.repository.payment"/>
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.domain.managing_products" class="Sylius\Behat\Context\Domain\ManagingProductsContext" scope="scenario">
+        <service id="sylius.behat.context.domain.managing_products" class="Sylius\Behat\Context\Domain\ManagingProductsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.repository.product" container="symfony" />
-            <argument type="service" id="sylius.repository.product_variant" container="symfony" />
-            <argument type="service" id="sylius.repository.product_review" container="symfony" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony__.sylius.repository.product" />
+            <argument type="service" id="__symfony__.sylius.repository.product_variant" />
+            <argument type="service" id="__symfony__.sylius.repository.product_review" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.domain.managing_promotions" class="Sylius\Behat\Context\Domain\ManagingPromotionsContext" scope="scenario">
+        <service id="sylius.behat.context.domain.managing_promotions" class="Sylius\Behat\Context\Domain\ManagingPromotionsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.repository.promotion" container="symfony" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony__.sylius.repository.promotion" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.domain.managing_promotion_coupons" class="Sylius\Behat\Context\Domain\ManagingPromotionCouponsContext" scope="scenario">
+        <service id="sylius.behat.context.domain.managing_promotion_coupons" class="Sylius\Behat\Context\Domain\ManagingPromotionCouponsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.repository.promotion_coupon" container="symfony" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony__.sylius.repository.promotion_coupon" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.domain.security" class="Sylius\Behat\Context\Domain\SecurityContext" scope="scenario">
-            <tag name="sylius.behat.context" />
+        <service id="sylius.behat.context.domain.security" class="Sylius\Behat\Context\Domain\SecurityContext">
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.domain.managing_shipments" class="Sylius\Behat\Context\Domain\ManagingShipmentsContext" scope="scenario">
-            <argument type="service" id="sylius.repository.shipment" container="symfony"/>
-            <tag name="sylius.behat.context" />
+        <service id="sylius.behat.context.domain.managing_shipments" class="Sylius\Behat\Context\Domain\ManagingShipmentsContext">
+            <argument type="service" id="__symfony__.sylius.repository.shipment"/>
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.domain.cart" class="Sylius\Behat\Context\Domain\CartContext" scope="scenario">
-            <argument type="service" id="sylius.repository.order" container="symfony" />
-            <argument type="service" id="sylius.manager.order" container="symfony" />
-            <argument type="service" id="sylius.expired_carts_remover" container="symfony" />
-            <tag name="sylius.behat.context" />
+        <service id="sylius.behat.context.domain.cart" class="Sylius\Behat\Context\Domain\CartContext">
+            <argument type="service" id="__symfony__.sylius.repository.order" />
+            <argument type="service" id="__symfony__.sylius.manager.order" />
+            <argument type="service" id="__symfony__.sylius.expired_carts_remover" />
+            <tag name="fob.context_service" />
         </service>
     </services>
 </container>

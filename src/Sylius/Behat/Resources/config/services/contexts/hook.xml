@@ -14,25 +14,25 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sylius.behat.context.hook.doctrine_orm" class="Sylius\Behat\Context\Hook\DoctrineORMContext">
-            <argument type="service" id="doctrine.orm.entity_manager" container="symfony_shared" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony_shared__.doctrine.orm.entity_manager" />
+            <tag name="fob.context_service" />
         </service>
 
         <service id="sylius.behat.context.hook.phpcr" class="Sylius\Behat\Context\Hook\PHPCRContext">
-            <argument type="service" id="doctrine_phpcr.odm.document_manager" container="symfony_shared" />
-            <argument type="service" id="doctrine_phpcr.initializer_manager" container="symfony_shared" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony_shared__.doctrine_phpcr.odm.document_manager" />
+            <argument type="service" id="__symfony_shared__.doctrine_phpcr.initializer_manager" />
+            <tag name="fob.context_service" />
         </service>
 
         <service id="sylius.behat.context.hook.test_theme" class="Sylius\Behat\Context\Hook\TestThemeContext">
-            <argument type="service" id="sylius.theme.test_theme_configuration_manager" container="symfony_shared" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony_shared__.sylius.theme.test_theme_configuration_manager" />
+            <tag name="fob.context_service" />
         </service>
 
         <service id="sylius.behat.context.hook.email_spool" class="Sylius\Behat\Context\Hook\EmailSpoolContext">
-            <argument type="service" id="sylius.behat.email_checker" container="symfony"/>
-            <argument type="service" id="filesystem" container="symfony" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony__.sylius.behat.email_checker"/>
+            <argument type="service" id="__symfony__.filesystem" />
+            <tag name="fob.context_service" />
         </service>
     </services>
 </container>

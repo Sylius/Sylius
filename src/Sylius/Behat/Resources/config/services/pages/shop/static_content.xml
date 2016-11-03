@@ -17,6 +17,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.shop.static_content.show" class="%sylius.behat.page.shop.static_content.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.static_content.show" class="%sylius.behat.page.shop.static_content.show.class%" parent="sylius.behat.symfony_page" public="false" />
     </services>
 </container>

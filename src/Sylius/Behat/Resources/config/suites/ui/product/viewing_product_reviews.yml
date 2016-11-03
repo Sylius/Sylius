@@ -4,7 +4,7 @@
 default:
     suites:
         ui_viewing_product_reviews:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.customer

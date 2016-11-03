@@ -19,13 +19,13 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.admin.taxon.create" class="%sylius.behat.page.admin.taxon.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.taxon.create" class="%sylius.behat.page.admin.taxon.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">taxon</argument>
         </service>
-        <service id="sylius.behat.page.admin.taxon.create_for_parent" class="%sylius.behat.page.admin.taxon.create_for_parent.class%" parent="sylius.behat.page.admin.taxon.create" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.taxon.create_for_parent" class="%sylius.behat.page.admin.taxon.create_for_parent.class%" parent="sylius.behat.page.admin.taxon.create" public="false">
             <argument type="string">taxon</argument>
         </service>
-        <service id="sylius.behat.page.admin.taxon.update" class="%sylius.behat.page.admin.taxon.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.taxon.update" class="%sylius.behat.page.admin.taxon.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">taxon</argument>
         </service>
     </services>
