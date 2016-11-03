@@ -19,10 +19,10 @@ imports:
     - { resource: "@SyliusTaxonomyBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusUserBundle/Resources/config/app/config.yml" }
 
-    - { resource: "parameters.yml" }
-    - { resource: "sylius.yml" }
-    - { resource: "state_machine.yml" }
-    - { resource: "fixtures.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/parameters.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/sylius.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yml" }
 
 doctrine:
     orm:

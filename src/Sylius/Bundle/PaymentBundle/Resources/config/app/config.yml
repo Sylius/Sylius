@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: "state_machine.yml" }
+    - { resource: "@SyliusPaymentBundle/Resources/config/app/state_machine.yml" }
 
 jms_serializer:
     metadata:

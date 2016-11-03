@@ -2,10 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: "state_machine/sylius_order_checkout.yml" }
-    - { resource: "state_machine/sylius_order_shipping.yml" }
-    - { resource: "state_machine/sylius_order_payment.yml" }
-    - { resource: "state_machine/sylius_order.yml" }
-    - { resource: "state_machine/sylius_shipment.yml" }
-    - { resource: "state_machine/sylius_payment.yml" }
-    - { resource: "state_machine/sylius_product_review.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_order_shipping.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_order_payment.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_order.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_shipment.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_payment.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine/sylius_product_review.yml" }
