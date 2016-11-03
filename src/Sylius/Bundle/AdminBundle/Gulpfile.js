@@ -17,6 +17,8 @@ var paths = {
     admin: {
         js: [
             '../../../../node_modules/jquery/dist/jquery.min.js',
+            '../../../../node_modules/sortablejs/Sortable.js',
+            '../../../../node_modules/sortablejs/jquery.binding.js',
             '../../../../node_modules/semantic-ui-css/semantic.min.js',
             '../PromotionBundle/Resources/public/js/sylius-promotion.js',
             '../ShippingBundle/Resources/public/js/**',

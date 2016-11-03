@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "jquery": "^2.2.0",
-    "semantic-ui-css": "^2.2.0"
+    "semantic-ui-css": "^2.2.0",
+    "sortablejs": "^1.4.2"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

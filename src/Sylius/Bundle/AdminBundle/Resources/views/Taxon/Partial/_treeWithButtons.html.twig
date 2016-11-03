@@ -6,26 +6,40 @@
     {% import _self as tree %}
 
     {% for taxon in taxons if taxon.id != null %}
-        <div class="item">
+        <div class="item" data-id="{{ taxon.id }}">
             <i class="folder icon"></i>
             <div class="content">
                 <div class="header">
                     <a href="{{ path('sylius_admin_product_index_per_taxon', {'taxonId': taxon.id}) }}">
                         {{ taxon.name }}
                     </a>
-                </div>
-                <div class="ui mini buttons">
-                    {{ buttons.create(path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id }), 'sylius.ui.add'|trans) }}
-                    {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id })) }}
-                    {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), 'sylius.ui.delete'|trans) }}
-                    <div class="ui icon button yellow sylius-taxon-move-up" data-action="move taxon" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
-                        <i class="icon arrow up"></i>
+                    <div class="ui inline dropdown icon button mini">
+                        <i class="wrench icon"></i>
+                        <div class="menu">
+                            <a class="item" href="{{ path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id }) }}">
+                                <i class="plus icon"></i>
+                                {{ 'sylius.ui.add'|trans }}
+                            </a>
+                            <a class="item" href="{{ path('sylius_admin_taxon_update', { 'id': taxon.id }) }}">
+                                <i class="edit icon"></i>
+                                {{ 'sylius.ui.edit'|trans }}
+                            </a>
+                            <div class="item sylius-taxon-move-up" data-action="move taxon" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
+                                <i class="icon arrow up"></i>
+                                {{ 'sylius.ui.move_up'|trans }}
+                            </div>
+                            <div class="item sylius-taxon-move-down" data-action="move taxon" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
+                                <i class="icon arrow down"></i>
+                                {{ 'sylius.ui.move_down'|trans }}
+                            </div>
+                            <div class="item sylius-delete-resource" data-url="{{ path('sylius_admin_taxon_delete', { 'id': taxon.id }) ~ '?_format=json' }}" data-success-redirect-url="{{ path('sylius_admin_taxon_index') }}">
+                                <i class="delete icon"></i>
+                                {{ 'sylius.ui.delete'|trans }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="ui icon button yellow sylius-taxon-move-down" data-action="move taxon" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
-                        <i class="icon arrow down"></i>
-                    </div>
                 </div>
-                <div class="list">
+                <div class="list sylius-sortable-list">
                     {{ tree.render(taxon.children) }}
                 </div>
             </div>
@@ -35,7 +49,7 @@
 
 {{ buttons.create(path('sylius_admin_taxon_create')) }}
 <div class="ui segment">
-    <div id="taxons-list" class="ui list">
+    <div class="ui list sylius-sortable-list">
         {{ tree.render(taxons) }}
     </div>
 </div>

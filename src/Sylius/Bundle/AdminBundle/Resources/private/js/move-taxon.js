@@ -2,8 +2,37 @@
     'use strict';
 
     $(document).ready(function() {
+        $('.sylius-sortable-list').sortable({
+            onEnd: function (event) {
+                $(this).api({
+                    throttle: 500,
+                    method: 'PUT',
+                    action: 'move taxon',
+                    urlData: {
+                        id: $(event.item).data('id')
+                    },
+                    on: 'now',
+                    beforeSend: function (settings) {
+                        settings.data = {
+                            position: event.newIndex
+                        };
+
+                        return settings;
+                    },
+                    onSuccess: function (response) {
+                        $(event.item).find('.sylius-taxon-move-up').data('position', event.newIndex);
+                        $(event.item).find('.sylius-taxon-move-down').data('position', event.newIndex);
+                    },
+                    onFailure: function (response) {
+                        throw 'Something went wrong with api call.';
+                    }
+                });
+            }
+        });
+
         $('.sylius-taxon-move-up').api({
             method: 'PUT',
+            on: 'click',
             beforeSend: function (settings) {
                 settings.data = {
                     position: $(this).data('position') - 1
@@ -18,6 +47,7 @@
 
         $('.sylius-taxon-move-down').api({
             method: 'PUT',
+            on: 'click',
             beforeSend: function (settings) {
                 settings.data = {
                     position: $(this).data('position') + 1

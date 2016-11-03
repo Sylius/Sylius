@@ -496,7 +496,7 @@ final class ManagingTaxonsContext implements Context
             $this->createPage->getFirstLeafName(),
             $taxon->getName(),
             sprintf(
-                'Expected %s as a first taxon, leaf but got %s.',
+                'Expected %s as a first taxon, but got %s.',
                 $taxon->getName(),
                 $this->createPage->getFirstLeafName()
             )

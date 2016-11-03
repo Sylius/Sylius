@@ -141,10 +141,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function getFirstLeafName(TaxonInterface $parentTaxon = null)
     {
-        $this->getDocument()->waitFor(5, function () {
-            return;
-        });
-
         return $this->getLeafs($parentTaxon)[0]->getText();
     }
 
@@ -177,10 +173,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $leafs = $this->getLeafs();
         foreach ($leafs as $leaf) {
             if ($leaf->getText() === $taxon->getName()) {
-                $moveButton = $leaf->getParent()->find('css', sprintf('.%s', $direction));
+                $leaf = $leaf->getParent();
+                $menuButton = $leaf->find('css', '.wrench');
+                $menuButton->click();
+                $moveButton = $leaf->find('css', sprintf('.%s', $direction));
                 $moveButton->click();
-                $moveButton->waitFor(5, function () use ($moveButton) {
-                    return !$moveButton->hasClass('loading');
+                $moveButton->waitFor(5, function () use ($taxon) {
+                    return $this->getFirstLeafName() === $taxon->getName();
                 });
 
                 return;
