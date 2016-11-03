@@ -18,12 +18,12 @@
                     {{ buttons.create(path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id }), 'sylius.ui.add'|trans) }}
                     {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id })) }}
                     {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), 'sylius.ui.delete'|trans) }}
-                    <a class="ui icon button yellow" href="#">
+                    <div class="ui icon button yellow sylius-taxon-move-up" data-action="move taxon" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
                         <i class="icon arrow up"></i>
-                    </a>
-                    <a class="ui icon button yellow" href="#">
+                    </div>
+                    <div class="ui icon button yellow sylius-taxon-move-down" data-action="move taxon" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
                         <i class="icon arrow down"></i>
-                    </a>
+                    </div>
                 </div>
                 <div class="list">
                     {{ tree.render(taxon.children) }}
@@ -32,7 +32,6 @@
         </div>
     {% endfor %}
 {% endmacro %}
-
 
 {{ buttons.create(path('sylius_admin_taxon_create')) }}
 <div class="ui segment">

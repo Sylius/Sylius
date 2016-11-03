@@ -37,13 +37,9 @@
                 <cascade-all />
             </cascade>
             <order-by>
-                <order-by-field name="left" direction="ASC" />
+                <order-by-field name="position" direction="ASC" />
             </order-by>
         </one-to-many>
-
-        <order-by>
-            <order-by-field name="position" direction="ASC" />
-        </order-by>
 
         <field name="code" column="code" type="string" unique="true" />
         <field name="left" column="tree_left" type="integer">

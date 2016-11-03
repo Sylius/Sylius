@@ -53,7 +53,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->leftJoin('o.children', 'children')
             ->andWhere('o.parent = :parent')
             ->addOrderBy('o.root')
-            ->addOrderBy('o.left')
+            ->addOrderBy('o.position')
             ->setParameter('parent', $taxon)
         ;
 
@@ -100,7 +100,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->leftJoin('o.translations', 'translation')
             ->where('translation.permalink = :permalink')
             ->setParameter('permalink', $permalink)
-            ->orderBy('o.left')
+            ->orderBy('o.position')
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -131,6 +131,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->andWhere($queryBuilder->expr()->isNull($this->getPropertyName('parent')))
+            ->orderBy('o.position')
         ;
 
         return $queryBuilder->getQuery()->getResult();
@@ -144,7 +145,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->orderBy('o.root')
-            ->addOrderBy('o.left')
+            ->addOrderBy('o.position')
         ;
     
         return $queryBuilder->getQuery()->getResult();

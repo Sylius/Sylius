@@ -17,6 +17,11 @@
             <argument type="service" id="sylius.repository.taxon" />
             <tag name="form.type" alias="sylius_taxon_choice" />
         </service>
+        <service id="sylius.form.type.taxon_position" class="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType">
+            <argument>%sylius.model.taxon.class%</argument>
+            <argument>%sylius.validation_groups.taxon%</argument>
+            <tag name="form.type" alias="sylius_taxon_position" />
+        </service>
 
         <service id="sylius.factory.taxon.decorated" class="Sylius\Component\Taxonomy\Factory\TaxonFactory"
                  decorates="sylius.factory.taxon" public="false">

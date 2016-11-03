@@ -141,6 +141,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function getFirstLeafName(TaxonInterface $parentTaxon = null)
     {
+        $this->getDocument()->waitFor(5, function () {
+            return;
+        });
+
         return $this->getLeafs($parentTaxon)[0]->getText();
     }
 
@@ -175,6 +179,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             if ($leaf->getText() === $taxon->getName()) {
                 $moveButton = $leaf->getParent()->find('css', sprintf('.%s', $direction));
                 $moveButton->click();
+                $moveButton->waitFor(5, function () use ($moveButton) {
+                    return !$moveButton->hasClass('loading');
+                });
 
                 return;
             }

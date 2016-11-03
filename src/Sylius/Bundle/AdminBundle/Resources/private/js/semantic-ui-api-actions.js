@@ -11,6 +11,7 @@
     'use strict';
 
     $.fn.api.settings.api = {
-        'get taxons' : '/admin/api/taxons'
+        'get taxons': '/admin/taxons?_format=json',
+        'move taxon': '/admin/taxons/{id}/move?_format=json'
     };
 })(jQuery);
