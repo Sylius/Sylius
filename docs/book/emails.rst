@@ -49,7 +49,7 @@ You also have the following parameters available:
 Order Confirmation
 ------------------
 
-This e-mail is sent when order is paid.
+This e-mail is sent when order is placed.
 
 **Code**: ``order_confirmation``
 
