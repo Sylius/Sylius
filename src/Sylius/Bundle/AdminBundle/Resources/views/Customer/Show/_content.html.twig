@@ -8,8 +8,8 @@
                 <div class="meta">
                     <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
                     <br />
-                   {% if customer.group %}
-                       <span class="group">{{ 'sylius.ui.belonging_to_group'|trans }}: {{ customer.group }}</span>
+                   {% if customer.group is not null %}
+                       <span class="group">{{ 'sylius.ui.group_membership'|trans }}: {{ customer.group }}</span>
                    {% endif %}
                 </div>
                 <br />
@@ -17,13 +17,13 @@
                     <i class="{{ customer.subscribedToNewsletter ? 'green checkmark' : 'red remove' }} icon"></i>
                     {{ 'sylius.ui.subscribed_to_newsletter'|trans }}
                 </div>
-                {% if customer.user %}
+                {% if customer.user is not null %}
                     <div id="verified-email">
                         <i class="{{ customer.user.verified ? 'green checkmark' : 'red remove' }} icon"></i>
                         {{ 'sylius.ui.email_verified'|trans }}
                     </div>
                 {% endif %}
-                {% if customer.defaultAddress %}
+                {% if customer.defaultAddress is not null %}
                     <br />
                     <div class="ui two column stackable grid">
                         <div class="column" id="defaultAddress">
