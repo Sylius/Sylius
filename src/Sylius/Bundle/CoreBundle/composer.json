@@ -53,7 +53,7 @@
         "symfony/framework-bundle": "^2.8",
         "symfony-cmf/routing-bundle": "~1.2",
         "swiftmailer/swiftmailer": "~5.0",
-        "winzou/state-machine-bundle": "~0.2",
+        "winzou/state-machine-bundle": "~0.2|^0.3",
         "sonata-project/intl-bundle": "^2.2"
     },
     "require-dev": {
