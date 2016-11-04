@@ -15,9 +15,9 @@
                     </a>
                 </div>
                 <div class="ui mini buttons">
-                    {{ buttons.create(path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id })) }}
-                    {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id })) }}
-                    {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), 'sylius.ui.delete'|trans) }}
+                    {{ buttons.create(path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id }), 'sylius.ui.add'|trans) }}
+                    {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id }), null, null, false) }}
+                    {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), null, null, false) }}
                 </div>
                 <div class="list">
                     {{ tree.render(taxon.children) }}

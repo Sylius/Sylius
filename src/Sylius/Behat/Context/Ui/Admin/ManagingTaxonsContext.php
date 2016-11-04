@@ -248,9 +248,9 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Given it should not be belong to any other taxon
+     * @Given it should not belong to any other taxon
      */
-    public function itShouldNotBeBelongToAnyOtherTaxon()
+    public function itShouldNotBelongToAnyOtherTaxon()
     {
         $parent = $this->updatePage->getParent();
 

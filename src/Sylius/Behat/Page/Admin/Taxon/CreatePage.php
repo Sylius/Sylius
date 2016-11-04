@@ -65,7 +65,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $leafs = $this->getLeafs();
         foreach ($leafs as $leaf) {
             if ($leaf->getText() === $name) {
-                $leaf->getParent()->pressButton('Delete');
+                $leaf->getParent()->find('css', '.ui.red.button')->press();
 
                 return;
             }
@@ -113,7 +113,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $filesPath = $this->getParameter('files_path');
 
-        $this->getDocument()->clickLink('Add');
+        $this->getDocument()->find('css', '[data-form-collection="add"]')->click();
 
         $imageForm = $this->getLastImageElement();
         $imageForm->fillField('Code', $code);

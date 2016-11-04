@@ -64,7 +64,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $filesPath = $this->getParameter('files_path');
 
-        $this->getDocument()->clickLink('Add');
+        $this->getDocument()->find('css', '[data-form-collection="add"]')->click();
 
         $imageForm = $this->getLastImageElement();
         $imageForm->fillField('Code', $code);

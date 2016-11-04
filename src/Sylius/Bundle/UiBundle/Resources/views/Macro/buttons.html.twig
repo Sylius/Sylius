@@ -1,36 +1,38 @@
 {% macro default(url, message, id, icon, class) %}
-    <a class="ui labeled {% if icon is not empty %}icon {% endif %}button {% if class is not empty %} {{ class }} {% endif %}" {% if id is not empty %} id="{{ id }}"{% endif %} href="{{ url }}">
+    <a class="ui {% if message is not empty %}labeled {% endif %}{% if icon is not empty %}icon {% endif %}button {% if class is not empty %} {{ class }} {% endif %}" {% if id is not null %} id="{{ id }}"{% endif %} href="{{ url }}">
         {% if icon is not empty %}
             <i class="icon {{ icon }}"></i>
         {% endif %}
-        {{ message|trans }}
+        {% if message is not empty %}
+            {{ message|trans }}
+        {% endif %}
     </a>
 {% endmacro %}
 
-{% macro show(url, message, id, class) %}
+{% macro show(url, message, id, class, labeled = true) %}
     {% import _self as buttons %}
 
-    {% if message is empty %}
+    {% if message is empty and labeled %}
         {% set message = 'sylius.ui.show'|trans %}
     {% endif %}
 
     {{ buttons.default(url, message, id, 'search') }}
 {% endmacro %}
 
-{% macro create(url, message, id) %}
+{% macro create(url, message, id, labeled = true) %}
     {% import _self as buttons %}
 
-    {% if message is empty %}
+    {% if message is empty and labeled %}
         {% set message = 'sylius.ui.create'|trans %}
     {% endif %}
 
     {{ buttons.default(url, message, id, 'plus', 'primary') }}
 {% endmacro %}
 
-{% macro edit(url, message, id) %}
+{% macro edit(url, message, id, labeled = true) %}
     {% import _self as buttons %}
 
-    {% if message is empty %}
+    {% if message is empty and labeled %}
         {% set message = 'sylius.ui.edit'|trans %}
     {% endif %}
 
@@ -49,11 +51,11 @@
     </a>
 {% endmacro %}
 
-{% macro delete(url, message) %}
+{% macro delete(url, message, labeled = true) %}
     <form action="{{ url }}" method="post">
         <input type="hidden" name="_method" value="DELETE">
-        <button class="ui red labeled icon button" type="submit" data-requires-confirmation>
-            <i class="icon trash"></i> {{ message is empty ? 'sylius.ui.delete'|trans : message }}
+        <button class="ui red {% if labeled %}labeled {% endif %}icon button" type="submit" data-requires-confirmation>
+            <i class="icon trash"></i> {{ (message is empty and labeled) ? 'sylius.ui.delete'|trans : message }}
         </button>
     </form>
 {% endmacro %}

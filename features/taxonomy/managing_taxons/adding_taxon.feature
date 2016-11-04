@@ -27,4 +27,4 @@ Feature: Adding a new taxon
         And I add it
         Then I should be notified that it has been successfully created
         And the "Category" taxon should appear in the registry
-        And it should not be belong to any other taxon
+        And it should not belong to any other taxon
