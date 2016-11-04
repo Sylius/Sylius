@@ -18,18 +18,26 @@ sylius:
         promotion_action:
             fixed_discount_configuration:
                 amount: Anzahl
+            percentage_discount_configuration:
+                percentage: Prozent
             type: Typ
         promotion_coupon:
+            expires_at: Verfällt am
             usage_limit: Nutzungslimit
         promotion_coupon_generator_instruction:
             amount: Anzahl
+            expires_at: Verfällt am
             usage_limit: Nutzungslimit
         promotion_rule:
             cart_quantity_configuration:
                 count: Anzahl
                 equal: Gleich
+            contains_product_configuration:
+                variants: Produkte
             item_total_configuration:
                 amount: Anzahl
             shipping_country_configuration:
                 country: Land
+            taxonomy_configuration:
+                taxons: Klassifizierungen
             type: Typ

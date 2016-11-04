@@ -3,5 +3,6 @@
 
 sylius:
     ui:
+        address_has_been_set_as_default: ที่อยู่ถูกกำหนดเป็นค่าเริ่มต้นแล้ว
         address_has_been_successfully_added: เพิ่มที่อยู่เรียบร้อย
         the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required: ไม่สามารถลบช่องทางการจัดจำหน่ายได้ กรุณาเลือกอย่างน้อยหนึ่งช่องทาง

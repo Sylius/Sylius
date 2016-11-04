@@ -10,6 +10,9 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Bitte wählen Sie eine Versandart aus.
+    currency:
+        enabled:
+            cannot_disable_base: Die Basiswährung kann nicht deaktiviert werden.
     customer:
         currency_code:
             not_valid: Der eingegebene Währungscode ist ungültig.
@@ -32,6 +35,9 @@ sylius:
     product_translation:
         short_description:
             max: Kurzbeschreibung darf nicht länger als {{ limit }} Zeichen sein.
+    taxon_image:
+        code:
+            unique: Bild-Code muss innerhalb dieser Klassifizierung eindeutig sein.
     user:
         email:
             unique: Diese E-Mail-Adresse wird bereits verwendet.

@@ -8,6 +8,8 @@ sylius:
         password:
             reset:
                 success: Uw wachtwoord is succesvol hersteld!
+                token_expired: Het wachtwoord reset token is verlopen
+                requested: Als het opgegeven e-mailadres bestaat in ons systeem, dan hebben we daar instructies naar toe verstuurd hoe het wachtwoord te herstellen.
             change:
                 success: Uw wachtwoord is succesvol veranderd!
         verification:
