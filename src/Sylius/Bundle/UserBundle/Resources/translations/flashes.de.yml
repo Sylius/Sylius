@@ -8,6 +8,8 @@ sylius:
         password:
             reset:
                 success: Ihr Passwort wurde erfolgreich zurückgesetzt!
+                token_expired: Der Token, um das Kennwort zurückzusetzen, ist abgelaufen.
+                requested: Wenn die Email, die Sie angegeben haben, im System gespeichert ist, haben wir Ihnen eine Anleitung geschickt, mit der Sie Ihr Passwort zurücksetzen können.
             change:
                 success: Ihr Passwort wurde erfolgreich geändert!
         verification:

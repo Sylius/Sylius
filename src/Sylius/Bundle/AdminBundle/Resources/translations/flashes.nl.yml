@@ -2,6 +2,8 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    order_payment:
+        refunded: Betaling is succesvol gestorneerd.
     product_review:
         accepted: Productbeoordeling is geaccepteerd.
         rejected: Productbeoordeling is afgekeurd.

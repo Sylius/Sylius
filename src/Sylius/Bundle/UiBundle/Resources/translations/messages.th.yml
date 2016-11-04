@@ -15,6 +15,8 @@ sylius:
     ui:
         abandoned: ถูกละทิ้ง
         about: เกี่ยวกับเรา
+        accept: ยอมรับ
+        accepted: ยอมรับแล้ว
         access_token: Access Token
         access_your_store_account_or_create_a_new_one: เข้าถึงบัญชีผู้ใช้ของคุณ หรือสร้างใหม่
         account_credentials: ข้อมูลประจำตัวบัญชี
@@ -89,6 +91,7 @@ sylius:
         browse_your_orders_from_the_past: เรียกดูใบสั่งซื้อที่ผ่านมาของคุณ
         build: สร้าง
         calculator: การคำนวณราคา
+        call_us: โทรหาเรา
         cancel: ยกเลิก
         cancelled: ถูกยกเลิก
         cart: รถเข็น
@@ -112,6 +115,7 @@ sylius:
         choose_how_your_goods_will_be_delivered: เลือกวิธีจัดส่งสินค้าของคุณ
         choose_how_you_will_pay: เลือกวิธีการที่คุณจะจ่าย
         city: เขต/อำเภอ
+        clear: ล้างข้อความ
         clear_cart: ล้างรถเข็น
         clear_filters: ล้างการกรอง
         code: รหัส
@@ -194,6 +198,7 @@ sylius:
         current_promotions: โปรโมชั่นปัจจุบัน
         current_stock: จำนวนสินค้าปัจจุบัน
         customer: ลูกค้า
+        customer_can_login_to_the_store: ลูกค้าสามารถเข้าสู่ระบบได้หรือไม่?
         customer_care: การดูแลลูกค้า
         customer_details: รายละเอียดลูกค้า
         customer_groups: กลุ่มลูกค้า
@@ -244,6 +249,7 @@ sylius:
         edit_product_association_type: แก้ไขประเภทความสัมพันธ์ของสินค้า
         edit_product_attribute: แก้ไขคุณสมบัติสินค้า
         edit_product_option: แก้ไขตัวเลือกสินค้า
+        edit_product_review: แก้ไขการรีวิวสินค้า
         edit_product_variant: แก้ไขสินค้าย่อย
         edit_promotion: แก้ไขโปรโมชั่น
         edit_promotion_coupon: แก้ไขคูปองโปรโมชั่น
@@ -318,6 +324,7 @@ sylius:
         filters: กรองข้อมูล
         fill_in_your_billing_and_shipping_addresses: กรอกอยู่จัดส่ง และเรียกเก็บเงิน
         first_name: ชื่อ
+        forgot_password: ลืมรหัสผ่านใช่ไหม?
         from_the_newest: จากใหม่ล่าสุด
         from_the_oldest: จากเก่าที่สุด
         fulfill: Fulfill
@@ -335,6 +342,7 @@ sylius:
         grand_total: ผลรวมทั้งหมด
         guest: ผู้เยี่ยมชม
         guest_customer: ลูกค้าบุคคลทั่วไป
+        have_an_account_already: มีบัญชีอยู่แล้วใช่หรือไม่?
         hello: สวัสดี!
         hello_name: สวัสดี <b>%name%</b>
         hide_deleted: ซ่อนรายการที่ลบแล้ว
@@ -414,6 +422,7 @@ sylius:
         manage_products: จัดการสินค้า
         manage_promotions: จัดการโปรโมชั่น
         manage_reviews: จัดการความคิดเห็น
+        manage_reviews_of_your_products: จัดการการรีวิวสินค้า
         manage_shipments: จัดการการจัดส่ง
         manage_shipping_categories: จัดการประเภทการจัดส่ง
         manage_shipping_destinations: จัดการวิธีการจัดส่ง
@@ -444,6 +453,7 @@ sylius:
         my_account: บัญชีของฉัน
         n_a: N/A
         name: ชื่อ
+        need_assistance: ต้องการความช่วยเหลือใช่หรือไม่?
         new: รายการใหม่
         new_admin_user: ผู้ดูแลระบบใหม่
         new_channel: เพิ่มช่องทางจำหน่าย
@@ -607,6 +617,7 @@ sylius:
         recent_orders: ใบสั่งซื้อล่าสุด
         recent_users: ผู้ใช้ล่าสุด
         redirect_routes: Redirect routes
+        refund: คืนเงิน
         refunded: คืนเงินแล้ว
         register: ลงทะเบียน
         register_button: ลงทะเบียน
@@ -614,6 +625,7 @@ sylius:
         registered_customers: ลูกค้าที่ลงทะเบียนแล้ว
         registration_create_an_account_in_store: ลงทะเบียน<small>สร้างบัญชีเพื่อใช้ในร้านค้า</small>
         registration_date: วันที่สมัครสมาชิก
+        reject: ปฏิเสธ
         rejected: ปฏิเสธ
         release_inventory: รายการสินค้าคงคลัง
         remember_me: จำการเข้าระบบของฉันไว้
@@ -644,8 +656,10 @@ sylius:
         scope: Scope
         search: ค้นหา
         security_settings: ตั้งค่าความปลอดภัย
+        select_address_from_book: เลือกที่อยู่จากสมุดที่อยู่ของฉัน
         select_taxon: เลือกหมวดหมู่
         set_a_new_password_for_your_account: ตั้งรหัสผ่านใหม่สำหรับบัญชีของคุณ
+        set_as_default: ตั้งเป็นค่าเริ่มต้น
         set_as_default_billing_address: ตั้งเป็นค่าเริ่มต้นที่อยู่ในการเรียกเก็บเงิน
         set_as_default_shipping_address: ตั้งเป็นค่าเริ่มต้นที่อยู่ในการจัดส่งสินค้า
         ship: จัดส่ง
@@ -812,6 +826,7 @@ sylius:
         you_have_no_new_orders: คุณมีไม่มีใบสั่งซื้อใหม่
         you_may_also_like: คุณอาจจะชอบสินค้าเหล่านี้
         your_cart_is_empty: ไม่มีสินค้าในรถเข็นของคุณ
+        your_default_address: ที่อยู่เริ่มต้น
         your_last_5_orders: 5 รายการสั่งซื้อล่าสุดของคุณ
         your_order_has_been_shipped: สินค้าของคุณมีการจัดส่งแล้ว
         your_products: สินค้าของคุณ

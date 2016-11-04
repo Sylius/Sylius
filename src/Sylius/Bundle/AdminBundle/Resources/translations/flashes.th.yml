@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    order_payment:
+        refunded: ทำรายการคืนเงินเรียบร้อยแล้ว
+    product_review:
+        accepted: อนุมัติการรีวิวสินค้าแล้ว
+        rejected: การรีวิวสินค้าถูกยกเลิกแล้ว

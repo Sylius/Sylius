@@ -18,12 +18,15 @@ sylius:
         promotion_action:
             type: Тип
         promotion_coupon:
+            expires_at: Дійсний до
             usage_limit: Обмеження використання
         promotion_coupon_generator_instruction:
+            expires_at: Дійсний до
             usage_limit: Обмеження використання
         promotion_rule:
             cart_quantity_configuration:
                 count: Кількість
+                equal: Дорівнює
             contains_product_configuration:
                 variants: Продукція
             shipping_country_configuration:

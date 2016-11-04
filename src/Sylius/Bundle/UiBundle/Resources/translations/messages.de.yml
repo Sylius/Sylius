@@ -15,6 +15,8 @@ sylius:
     ui:
         abandoned: Abgebrochen
         about: Über
+        accept: Bestätigen
+        accepted: Bestätigt
         access_token: Zugangs-Schlüssel
         access_your_store_account_or_create_a_new_one: Bitte loggen Sie sich mit Ihrem Zugang ein oder erstellen Sie einen neuen
         account_credentials: Zugangsdaten
@@ -23,6 +25,7 @@ sylius:
         actions: Aktionen
         add: Hinzufügen
         add_action: Aktion hinzufügen
+        add_address: Adresse hinzufügen
         add_association: Beziehung hinzufügen
         add_attribute: Attribut hinzufügen
         add_attributes: Attribute hinzufügen
@@ -39,11 +42,13 @@ sylius:
         add_rule: Regel hinzufügen
         add_to_cart: In den Warenkorb
         add_value: Wert hinzufügen
+        add_your_review: Rezension hinzufügen
         adding_new_customer_groups: Neue Kundengruppe hinzufügen
         adding_new_email: Neue E-Mail hinzufügen
         adding_new_locale: Neue Gebietsschemata anlegen
         additional_information: Zusätzliche Informationen
         address: Anschrift
+        address_book: Adressbuch
         addressing: Adresse
         addressing_step: Lieferadresse
         adjustments: Änderungen
@@ -83,6 +88,7 @@ sylius:
         browse_products: Produkte durchsuchen
         build: Erstellen
         calculator: Rechner
+        call_us: Rufen Sie uns an!
         cancel: Abbrechen
         cancelled: Abgebrochen
         cart: Warenkorb
@@ -122,6 +128,7 @@ sylius:
         contact_us: Kontaktieren Sie uns
         contain_variants: Enthält Varianten
         contains: Enthält
+        content: Inhalt
         countries: Länder
         country: Land
         country_details: Landdetails
@@ -185,8 +192,10 @@ sylius:
         current_promotions: Aktuelle Aktionen
         current_stock: Auf Lager
         customer: Kunde
+        customer_can_login_to_the_store: Kunde darf sich im Shop anmelden?
         customer_care: Kundendienst
         customer_details: Kundendetails
+        customer_groups: Kundengruppen
         customer_id: Kunden-Nr
         customer_login: Kundenlogin
         customer_not_notified: Kunde nicht benachrichtigt
@@ -202,6 +211,7 @@ sylius:
         dashboard: Dashboard
         data: Daten
         date: Datum
+        default: Standard
         default_billing_address: Standard-Rechnungsadresse
         default_currency: Standardwährung
         default_locale: Standard Lokalisierung
@@ -230,16 +240,18 @@ sylius:
         edit_product: Produkt bearbeiten
         edit_product_attribute: Produkteingenschaft bearbeiten
         edit_product_option: Produktoption bearbeiten
+        edit_product_review: Rezension bearbeiten
         edit_product_variant: Produktvariante bearbeiten
         edit_promotion: Aktion bearbeiten
         edit_promotion_coupon: Aktionscode bearbeiten
         edit_report: Bericht editieren
         edit_route: Editiere die Strecke
+        edit_shipping_address: Versandadresse bearbeiten
         edit_shipping_method: Versandart bearbeiten
         edit_static_content: Statische Inhalte bearbeiten
         edit_tax_category: Steuerkategorien bearbeiten
         edit_tax_rate: Steuersatz bearbeiten
-        edit_taxon: Steuer bearbeiten
+        edit_taxon: Klassifizierung bearbeiten
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: Bearbeiten Sie Ihre Artikel, geben Sie Ihren Gutscheincode ein und senden Sie Ihre Bestellung ab
         edit_your_personal_information: Persönliche Informationen bearbeiten
         edit_zone: Zone bearbeiten
@@ -293,13 +305,16 @@ sylius:
         exclusive: Exklusiv
         existing_customer: Existierender Benutzer
         expiration_and_usage_limits: Ablauf und maximale Anzahl
+        expires_at: Verfällt am
         extra_information: Zusätzliche Informationen
         extra_notes: Weitere Hinweise
         failed: Fehlgeschlagen
         faqs: FAQs
         female: Weiblich
+        filter: Filter
         filters: Filter
         first_name: Vorname
+        forgot_password: Passwort vergessen?
         fulfill: Zu erfüllen
         fulfilled: Gegeben
         gateway: Schnittstelle
@@ -363,7 +378,7 @@ sylius:
         login_button: Anmelden
         login_sylius_store: Login <small>Sylius Webshop</small>
         logout: Abmelden
-        main_taxon: Haupt-Taxonomie
+        main_taxon: Haupt-Klassifizierung
         male: Männlich
         manage: Verwaltung
         manage_adjustments: Verwalten von Anpassungen
@@ -375,8 +390,9 @@ sylius:
         manage_configuration_options_of_your_products: Verwalte die Konfiguration deines Produktes
         manage_countries: Länder verwalten
         manage_coupons: Gutscheine verwalten
-        manage_currencies_available_in_the_store: Verwalte die Währung in deinem Shhop
+        manage_currencies_available_in_the_store: Verwalte die Währung in deinem Shop
         manage_customers: Kunden verwalten
+        manage_customer_groups: Kundengruppen verwalten
         manage_discounts_and_promotional_campaigns: Verwaltung der Rabatte und Promotionen
         manage_emails: E-Mails verwalten
         manage_geographical_zones: Länderverwaltung
@@ -452,7 +468,9 @@ sylius:
         new_zone: Neues Gebiet
         newest_products: Neueste Produkte
         next: Nächstes Bild
+        no_label: Nein
         no_account: Kein Konto
+        no_addresses: Keine Adressen zum anzeigen vorhanden
         no_association_types_to_display: Es sind keine Verbindungen definiert
         no_comment: Kein Kommentar
         no_default_billing_address: Keine Standard-Rechnungsadresse
@@ -548,6 +566,7 @@ sylius:
         product_review: Produkt-Bewertung
         product_reviews: Produkt-Bewertung
         product_variants: Produktvarianten
+        products: Produkte
         products_categorized_as_name: Produkte kategorisiert als "%name%"
         products_categorized_under_taxon_taxon: Produkte <small>kategorisiert als "%taxon%</small>"
         products_index_of_all_products_in_your_store: Produkte <small> Alle Produkte in Ihrem Shop</small>
@@ -608,8 +627,9 @@ sylius:
         scope: Umfang
         search: Suche
         security_settings: Sicherheitseinstellungen
-        select_taxon: Steuer wählen
+        select_taxon: Klassifizierung wählen
         set_a_new_password_for_your_account: Ein neues Passwort wählen
+        set_as_default: Als Standard setzen
         set_as_default_billing_address: Als Standardrechnungsadresse setzen
         set_as_default_shipping_address: Als Standard-Lieferadresse setzen
         ship: Lieferung
@@ -671,7 +691,8 @@ sylius:
         taxation_categories: Steuergruppen
         taxation_settings: Gruppeneinstellungen
         taxes: Steuern
-        taxonomy: Systematik
+        taxonomy: Klassifizierung
+        taxons: Klassifizierungen
         terms_and_conditions: Allgemeine Geschäfts- und Nutzungsbedingungen
         thank_you: Vielen Dank!
         thank_you_for_your_order: Danke für Ihre Bestellung
@@ -702,6 +723,7 @@ sylius:
         there_are_no_promotions_configured: Es gibt noch keine Aktionen anzuzeigen
         there_are_no_redirect_routes_to_display: Es gibt noch keine Umleitungen
         there_are_no_reports_created: Es wurden noch keine Berichte erstellt
+        there_are_no_reviews: Es sind keine Rezensionen vorhanden
         there_are_no_roles_defined: Es wurden noch keine Rollen definiert
         there_are_no_routes_to_display: Es gibt keine Routen
         there_are_no_shipments_to_display: Es gibt keine Sendungen anzuzeigen
@@ -709,12 +731,12 @@ sylius:
         there_are_no_shipping_methods_configured: Es sind keine Versandarten konfiguriert
         there_are_no_tax_categories_configured: Es sind keine Steuerkategorien konfiguriert
         there_are_no_tax_rates_configured: Es sind keine Steuerklassen konfiguriert
-        there_are_no_taxons_for_this_product: Keine Klassifizierungen
-        there_are_no_taxons_to_display: Es gibt noch keine Produktgruppen anzuzeigen
+        there_are_no_taxons_for_this_product: Keine Klassifizierungen für dieses Produkt vorhanden
+        there_are_no_taxons_to_display: Keine Klassifizierungen zur anzeige vorhanden
         there_are_no_users_to_display: Es gibt noch keine Benutzer anzuzeigen
         there_are_no_variants_to_display: Es gibt noch keine Varianten anzuzeigen
         there_are_no_zones_configured: Es sind keine Gebiete konfiguriert
-        there_is_no_main_taxon_for_this_product: Es gibt keine Gruppe für dieses Produkt
+        there_is_no_main_taxon_for_this_product: Es gibt keine Klassifizierung für dieses Produkt
         this_months_statistics: Statistiken dieses Monats
         this_product_has_no_attributes_defined: Für dieses Produkt wurden keine Attribute definiert
         title: Titel
@@ -760,11 +782,13 @@ sylius:
         welcome: Wilkommen
         welcome_to_our_store: Willkommen Sie in unserem Shop
         welcome_to_your_space: Willkommen in deinem persönlichen Bereich
+        yes_label: Ja
         you_are_customer_since: Kunde seit
         you_have_no_addresses_defined: Sie haben keine Adressen angelegt
         you_have_no_new_orders: Sie haben keine neuen Bestellungen
         you_may_also_like: Was Sie vielleicht auch interessieren könnte
         your_cart_is_empty: Ihr Warenkorb ist leer
+        your_default_address: Ihre Standardadresse
         your_last_5_orders: Ihre letzten 5 Bestellungen
         your_order_has_been_shipped: Ihre Bestellung wurde versandt
         your_products: Ihre Produkte

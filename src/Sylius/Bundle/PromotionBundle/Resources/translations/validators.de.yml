@@ -21,5 +21,13 @@ sylius:
             min_length: Der Gutscheincode muss mindestens 1 Zeichen lang sein.|Der Gutscheincode muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie einen Gutscheincode an.
             unique: Dieser Gutschein ist bereits vorhanden.
+        is_invalid: Der Rabattgutschein ist ungültig.
         usage_limit:
             min: Das Nutzungslimit eines Gutscheincodes muss mindestens {{ limit }} sein.
+    promotion_coupon_generator_instruction:
+        code_length:
+            min: Der Gutscheincode muss mindestens {{ limit }} Zeichen lang sein.
+            max: Der Gutscheincode darf nicht länger als {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie eine Gutscheincodelänge ein.
+        usage_limit:
+            min: Das Nutzungslimit der erstellen Gutscheincodes muss mindestens {{ limit }} sein.

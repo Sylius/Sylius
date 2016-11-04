@@ -19,6 +19,9 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Verkäuflich
+            customer_group: Kundengruppe
+        promotion_coupon:
+            per_customer_usage_limit: Nutzungsbeschränkung pro Kunde
         group:
             name: Name
             roles: Rollen
@@ -58,7 +61,7 @@ sylius:
             shipping_category: Versandkategorie
             short_description: Kurzbeschreibung
             variant_selection_method: Variantenauswahlmethode
-            main_taxon: Haupt-Taxonomie
+            main_taxon: Haupt-Klassifizierung
             channels: Ausgabekanäle
             enabled: Aktiviert
         product_filter:
@@ -120,10 +123,12 @@ sylius:
             name: Name
         promotion_rule:
             contains_taxon:
-                taxon: Steuern
+                taxon: Klassifizierung
                 count: Anzahl
             taxon:
-                taxons: Rang
+                taxons: Klassifizierungen
+            product:
+                products: Produkte
             total_of_items_from_taxon:
                 taxon: Steuern
                 amount: Anzahl
@@ -156,13 +161,16 @@ sylius:
             header: Dateisystem
             cache:
                 header: Cache
+                help: 'Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             exists: Existiert
             logs:
                 header: Protokoll/Logs
+                help: 'Ausführen um Zugriffsrechte zu setzen: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
             not_exists: Existiert nicht
             not_writable: Schreibgeschützt
             parameters:
                 header: parameters.yml
+                help: 'Ausführen um Zugriffsrechte zu setzen: sudo chmod a+w %path%'
             vendors: Verkäufer
             writable: Beschreibbar
         settings:

@@ -4,13 +4,17 @@
 sylius:
     form:
         route:
+            content: Inhalt
             name: Name
             parent: Übergeordnet
         static_content:
             body: Inhalt
+            id: ID
+            internal_name: Interner Name
             menu_nodes: Menüpunkte
             parent: Übergeordnet
             publish_end_date: Veröffentlichen bis
             publish_start_date: Veröffentlichen von
+            publishable: Veröffentlicht
             routes: Pfade
             title: Titel

@@ -15,14 +15,17 @@ sylius:
     ui:
         abandoned: Покинуто
         about: Про нас
+        accept: Прийняти
+        accepted: Прийнято
         access_token: Маркер доступу
-        access_your_store_account_or_create_a_new_one: Увійти до вашої крамничної обліковки або створити нову
+        access_your_store_account_or_create_a_new_one: Увійдійть до вашої крамничної обліковки або створіть нову
         account_credentials: Облікові дані
         account_panel_outline: Користуйтеся всіма функціями, що доступні в вашому особистому просторі для перегляду, відстеження та керування вашими даними
         action: Дія
         actions: Дії
         add: Додати
         add_action: Додати дію
+        add_address: Додати адресу
         add_association: Додати асоціювання
         add_attribute: Додати атрибут
         add_attributes: Додати атрибути
@@ -39,11 +42,13 @@ sylius:
         add_rule: Додати правило
         add_to_cart: У кошик
         add_value: Додати значення
+        add_your_review: Додайте ваш відгук
         adding_new_customer_groups: Додавання нових клієнтських груп
         adding_new_email: Додавання нової адреси електронної пошти
         adding_new_locale: Додавання нової мови
         additional_information: Додаткова інформація
         address: Адреса
+        address_book: Адресна книга
         addressing: Адресація
         addressing_step: Крок адресації
         adjustments: Коригування
@@ -53,6 +58,7 @@ sylius:
         admin_users: Адміністратори
         all: Всі(-е)
         all_your_addresses: Усі ваші адреси
+        amount: Обсяг
         an_error_occurred: Сталася помилка
         api: Прикладний програмний інтерфейс (API)
         apply_coupon: Використати купон
@@ -72,6 +78,7 @@ sylius:
         awaiting_payment: Очікування оплати
         back: Назад
         back_to_store: Назад до крамниці
+        back_to_details: Назад до опису
         backorder: Звільняється
         backordered: Попередньо замовлено
         balance_due: Сума до сплати
@@ -80,9 +87,12 @@ sylius:
         blocks: Блоки
         body: Тіло
         browse_products: Перегляд товарів
+        browse_your_addresses: Переглянути ваші адреси
+        browse_your_orders_from_the_past: Переглянути ваші минулі замовлення
         build: Побудувати
         calculator: Калькулятор
-        cancel: Відмінити
+        call_us: Зателефонуйте нам!
+        cancel: Скасувати
         cancelled: Скасовано
         cart: Кошик
         cart_locked: Кошик заблокований
@@ -102,7 +112,10 @@ sylius:
         checking_out_as: Перевірити як
         checkout: Підрахунок
         choose_file: Обрати файл
+        choose_how_your_goods_will_be_delivered: Виберіть, як ваші товари будуть доставлятись
+        choose_how_you_will_pay: Виберіть, як ви будете платити
         city: Місто
+        clear: Очистити
         clear_cart: Очистити кошик
         clear_filters: Очистити фільтри
         code: Код
@@ -113,11 +126,15 @@ sylius:
         completed: Завершено
         configurable_product: Товар, що має варіанти конфігурації
         configuration: Конфігурація
+        configure_channels_available_in_your_store: Налаштуйте доступні у вашій крамниці канали
+        confirm_your_action: Підтвердьте свою дію
         confirmation: Підтвердження
         confirmation_title: Підтвердження
+        confirmed: Підтверджено
         contact_us: Зв'язатися з нами
         contain_variants: Містять варіанти
         contains: Містить
+        content: Вміст
         countries: Країни
         country: Країна
         country_details: Подробиці про країну
@@ -126,24 +143,53 @@ sylius:
         coupons: Купони
         create: Створити
         create_a_new_address: Створити нову адресу
+        create_a_new_customer_account: Створіть нову обліковку клієнта
+        create_an_account: Створити обліковий запис
+        create_association_type: Створити тип асоціювання
         create_country: Створити країну
+        create_currency: Створити валюту
+        create_customer: Створити клієнта
+        create_imagine_block: Створити блок зображень
         create_locale: Створити мову
+        create_menu: Створити меню
+        create_menu_node: Створити пункт меню
         create_new_coupon: Створити новий купон
         create_new_page: Створити нову сторінку
+        create_new_report: Створити новий звіт
+        create_option: Створити опцію
         create_order: Створити замовлення
         create_payment: Створити оплату
         create_payment_method: Створити метод оплати
-        create_product: Створити продукт
+        create_product: Створити товар
+        create_product_association: Створити асоціювання товару
+        create_product_association_type: Створити тип асоціювання товару
+        create_product_attribute: Створити атрибут товару
         create_promotion: Створити акцію
+        create_redirect_route: Створити маршрут перенаправлення
         create_report: Створити звіт
+        create_route: Створити маршрут
         create_shipping_category: Створити категорію доставки
         create_shipping_method: Створити спосіб доставки
+        create_simple_block: Створити простий блок
+        create_slideshow_block: Створити блок слайд-шоу
+        create_string_block: Створити текстовий блок
         create_tax_category: Створення категорії оподаткування
         create_tax_rate: Створити ставку податку
         create_taxon: Створити таксон
+        create_user: Створити користувача
         create_variant: Створити варіант
         create_zone: Створити зону
         created_at: Створено
+        creating_a_new_imagine_block: Створення нового блоку зображень
+        creating_a_new_simple_block: Створення нового простого блоку
+        creating_a_new_slideshow_block: Створення нового блоку слайд-шоу
+        creating_a_new_string_block: Створення нового текстового блоку
+        creating_menu: Створення меню
+        creating_menu_node: Створення пункту меню
+        creating_new_page: Створення нової сторінки
+        creating_redirect_route: Створення маршруту перенаправлення
+        creating_route: Створення маршруту
+        creation_date: Дата створення
         creation_time: Час створення
         currencies: Валюти
         currency: Валюта
@@ -152,9 +198,18 @@ sylius:
         current_promotions: Діючі акції
         current_stock: Поточний запас
         customer: Клієнт
+        customer_can_login_to_the_store: Чи може клієнт входити до крамниці?
+        customer_care: Турбота про клієнтів
+        customer_details: Інформація про клієнта
+        customer_groups: Групи клієнтів
         customer_id: ID клієнта
+        customer_login: Вхід для клієнта
+        customer_not_notified: Клієнту не повідомлялось
+        customer_notified: Клієнт сповіщений
+        customer_orders: Замовлення клієнта
         customer_since: Є клієнтом з
         customers: Клієнти
+        customers_list_of_all_customers_in_store: Клієнти <small>Список всіх клієнтів крамниці</small>
         customize_default_metadata: Користувацькі налаштування типових метаданих
         customize_metadata: Користувацькі налаштування метаданих
         customize_products_metadata: Користувацькі налаштування метаданих продукції
@@ -162,6 +217,7 @@ sylius:
         dashboard: Панель керування
         data: Дані
         date: Дата
+        default: Типово
         default_billing_address: Платіжна адреса за замовчуванням
         default_currency: Типова валюта
         default_locale: Типова локаль
@@ -176,6 +232,7 @@ sylius:
         disabled: Вимкнений
         discount: Знижка
         discounted_unit_price: Ціна одиниці зі знижкою
+        display: Показувати
         edit: Редагувати
         edit_admin_user: Редагувати адміністратора
         edit_association_type: Редагувати тип асоціювання
@@ -186,10 +243,13 @@ sylius:
         edit_customer: Редагувати клієнта
         edit_locale: Редагувати мову
         edit_my_address: Редагувати мою адресу
+        edit_order: Редагувати замовлення
         edit_payment_method: Редагувати спосіб оплати
         edit_product: Редагувати товар
+        edit_product_association_type: Редагувати тип асоціювання товару
         edit_product_attribute: Редагувати атрибут товару
         edit_product_option: Редагувати опцію товару
+        edit_product_review: Редагувати відгук щодо товару
         edit_product_variant: Редагувати різновид товару
         edit_promotion: Редагувати акцію
         edit_promotion_coupon: Редагувати промо-купон
@@ -220,7 +280,7 @@ sylius:
         editing_payment: Редагування оплати
         editing_payment_method: Редагування способу оплати
         editing_permission: Редагування дозволу
-        editing_product: Редагування продукту
+        editing_product: Редагування товару
         editing_promotion: Редагування акції
         editing_redirect_route: Редагування маршруту перенаправлення
         editing_review: Редагування відгуку
@@ -230,6 +290,8 @@ sylius:
         editing_shipping_category: Редагування категорії доставки
         editing_shipping_method: Редагування методу доставки
         editing_simple_block: Редагування простого блоку
+        editing_slideshow_block: Редагування блоку слайд-шоу
+        editing_string_block: Редагування текстового блоку
         editing_tax_category: Редагування категорій оподаткування
         editing_taxon: Редагування таксону
         editing_user: Редагування користувача
@@ -241,15 +303,30 @@ sylius:
         empty: Порожній
         enable: Увімкнути
         enabled: Увімкнено
+        end_date: Дата завершення
         ends_at: Кінець дії
+        ends_with: Закінчується на
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Користуйтеся всіма функціями, що доступні в вашому особистому просторі для перегляду, відстеження та керування вашими даними
+        enter_your_code: Введіть ваш код
+        equal: Дорівнює
         error: Помилка
         exchange_rate: Курс валют
         exclusive: Ексклюзивно
         existing_customer: Існуючий клієнт
+        expiration_and_usage_limits: Обмеження щодо терміну дії та використання
+        expires_at: Дійсний до
+        extra_information: Додаткова інформація
         extra_notes: Додаткові примітки
         failed: Невдало
+        faqs: Часті питання
+        female: Жіноча
+        filter: Фільтр
+        filters: Фільтри
+        fill_in_your_billing_and_shipping_addresses: Заповніть ваші адреси для оплати й доставки
         first_name: Iм'я
+        forgot_password: Забули пароль?
+        from_the_newest: Від найновіших
+        from_the_oldest: Від найдавніших
         fulfill: Виконано
         fulfilled: Виконано
         gateway: Шлюз
@@ -260,14 +337,23 @@ sylius:
         generate_variants: Генерувати варіанти
         generating_coupons: Створення купонів
         go: Перейти
+        go_level_up: Перейти на рівень вище
+        go_to_dashboard: Перейти до панелі інструментів
         grand_total: Загальний підсумок
+        guest: Гість
+        guest_customer: Гостьовий клієнт
+        have_an_account_already: Наразі вже маєте обліковку?
+        hello: Вітаємо
+        hello_name: Вітаємо, <b>%name%</b>
         hide_deleted: Приховати видалений
         home: Головна
         hostname: Ім'я хоста
         id: ID
+        if_you_have_an_account_sign_in_with_your_email_address: Якщо у вас є обліковка, увійдіть за допомогою вашої адреси електронної пошти
         image: Зображення
         images: Зображення
         index_of_all_configured_locales: Список усіх сконфігурованих мов
+        info: Довідка
         information: Інформація
         inventory: Інвентаризація
         inventory_here_you_can_see_current_stock_levels: Інвентаризація <small>Тут ви можете побачити поточний рівень запасів</small>
@@ -275,8 +361,10 @@ sylius:
         inventory_state: Статус інвентаризації
         inventory_tracking: Відстеження інвентаризації
         invoice: Рахунок
+        it_seems_you_have_an_account_already: Схоже у вас вже є обліковка
         item: Елемент
         items_total: Загальна кількість елементів
+        jump_to_page: Перейти до сторінки
         last_login: Останній вхід
         last_name: Прізвище
         last_update: Останнє оновлення
@@ -284,106 +372,194 @@ sylius:
         last_week_revenue: Доходи за минулий тиждень
         lastname: Прізвище
         latest_orders: Останні замовлення
+        latest_products: Останні товари
         links: Посилання
         list_coupons: Список купонів
         locales: Локалі
-        login: Логін
-        login_button: Логін
+        login: Вхід
+        login_button: Вхід
+        login_sylius_store: Вхід <small>крамниця Sylius</small>
         logout: Вихід
         main_taxon: Основний таксон
         manage: Управління
+        manage_association_types_of_your_products: Керуйте типами асоціювання ваших товарів
+        manage_attributes_of_your_products: Керуйте атрибутами ваших товарів
+        manage_categorization_of_your_products: Керуйте категоризацією ваших товарів
+        manage_configuration_options_of_your_products: Керуйте налаштуванням опцій ваших товарів
         manage_countries: Управління країнами
+        manage_customer_groups: Керуйте групами ваших клієнтів
+        manage_discounts_and_promotional_campaigns: Керуйте знижками та рекламними акціями
         manage_options: Керування опціями
         manage_orders: Керувати замовленнями
         manage_payments: Керувати платежами
-        manage_products: Керування продуктами
+        manage_products: Керування товарами
         manage_promotions: Керувати акціями
+        manage_reviews_of_your_products: Керуйте відгуками про ваші товари
         manage_shipments: Керування відправками
         manage_shipping_categories: Управління категоріями доставки
         manage_shipping_methods: Керувати методами доставки
         manage_tax_categories: Управління категоріями оподаткування
         manage_tax_rates: Керувати податковими ставками
+        manage_users_able_to_access_administration_panel: Управління користувачами, в яких є можливість доступу до панелі адміністрування
+        manage_variants: Керувати варіантами
+        manage_your_personal_information_and_preferences: Керуйте вашими персональними даними та налаштуваннями
+        manage_your_product_catalog: Керуйте вашим каталогом товарів
+        manage_your_saved_addresses: Керування вашими збереженими адресами
         manage_zones: Керувати зонами
         marketing: Маркетинг
+        media: Файли зображень
         members: Учасники
         menu_nodes: Елементи меню
         menus: Меню
         message: Повідомлення
+        metadata_index: Метадані
         method: Метод
         modified: Змінено
+        move_down: Перемістити нижче
+        move_up: Перемістити вище
         my_account: Мій обліковий запис
+        n_a: Н/Д
         name: Назва
+        need_assistance: Потрібна допомога?
         new: Новий
+        new_admin_user: Новий адміністратор
+        new_channel: Новий канал
         new_comment_posted_on_order: Новий коментар, доданий до замовлення
         new_country: Нова країна
+        new_coupon: Новий купон
+        new_currency: Нова валюта
+        new_customer: Новий клієнт
+        new_customers: Нові клієнти
+        new_locale: Нова локаль
         new_order: Нове замовлення
+        new_orders: Нові замовлення
         new_password: Новий пароль
         new_payment: Нова оплата
         new_payment_method: Новий метод оплати
+        new_permission: Новий дозвіл
         new_product: Новий товар
-        new_product_variant: Новий варіант продукту
+        new_product_association_type: Новий тип асоціювання товару
+        new_product_attribute: Новий атрибут товару
+        new_product_option: Нова опція товару
+        new_product_variant: Новий варіант товару
         new_promotion: Нова акція
+        new_promotion_coupon: Новий промо-купон
+        new_review: Новий відгук
+        new_role: Нова роль
+        new_route: Новий маршрут
         new_shipping_category: Нова категорія доставки
         new_shipping_method: Новий спосіб доставки
+        new_static_content: Новий статичний вміст
         new_tax_category: Нова категорія оподаткування
         new_tax_rate: Нова ставка податку
         new_taxon: Новий таксон
         new_user: Новий користувач
         new_zone: Нова зона
-        newest_products: Найновіші продукти
+        newest_products: Найновіші товари
+        newest_first: Спочатку найновіші
         next: Наступний
+        no_label: Ні
+        no_account: нема обліковки
+        no_addresses: Немає жодної адреси для показу
+        no_association_types_to_display: Немає налаштованих типів асоціювання
+        no_comment: Без коментаря
         no_default_billing_address: Немає платіжної адреси за замовчуванням
         no_default_shipping_address: Немає адреси доставки за замовчуванням
         no_description: Немає опису
+        no_payment_methods_available: Наразі немає способів оплати, доступних для вашого замовлення
+        no_pricing_configuration: Нема налаштованого ціноутворення
         no_promotion: Промо-код не застосовано
+        no_requirement: Без вимог
+        no_results: Без результатів
+        no_results_to_display: Немає результатів для показу
         no_shipping_category: Без категорії доставки
         no_shipping_charges: Націнки за доставку не застосовано
+        no_shipping_methods_available: Наразі немає способів доставки, доступних для вашої адреси доставки
         no_short_description: <i>Без короткого опису</i>
         no_sku: Без SKU
         no_tax_category: Без категорії оподаткування
         no_taxes: Податки не застосовані
+        no_theme: Без теми
         not_available_in_your_country: Не доступно у вашій країні
+        not_contains: Не містить
+        not_empty: Непорожнє
+        not_in: Нема серед
+        not_verified: Не перевірено
+        not_tracked: Без відстеження
+        notes: Примітки
+        notify_customer: Сповістити клієнта
         number: Номер
         number_of_orders: Кількість замовлень
+        oauth_provider: OAuth-постачальник
+        oldest_first: Спочатку найстаріші
+        on_hold: Призупинено
         options: Опції
+        or: або
         order: Замовлення
         order_comment_name: Коментар до замовлення
+        order_comments: Коментарі до замовлення
         order_confirmation_name: Підтвердження замовлення
         order_details: Деталі вашого замовлення
+        order_history: Історія замовлень
         order_item_product: Елемент
+        order_state: Стан замовлення
         order_summary: Підсумок замовлення
+        order_total: Підсумок замовлення
         order_value: Вартість замовлення
+        ordered: Замовлено
         orders: Замовлення
         original_price: Початкова ціна
         out_of_stock: Немає в наявності
-        overview_of_your_store: Огляд вашого магазину
+        overview_of_your_store: Огляд вашої крамниці
+        page: Сторінка
         pages: Сторінки
+        paid: Оплачено
         parent: Батьківський об'єкт
+        partially_paid: Частково оплачено
+        partially_shipped: Частково доставлено
         password: Пароль
         payment: Оплата
+        payment_details: Деталі платежу
         payment_method: Спосіб оплати
         payment_methods: Способи оплати
+        payment_mode: Форма оплати
+        payment_ready_to_pay: Тепер ви можете здійснити вашу оплату
         payment_state: Статус платежу
         payments: Платежі
+        pay: Сплатити
+        pay_again: Клацніть сплатити, щоб спробувати знов
         pending: В очікуванні
+        per_customer_usage_limit: Ліміт використання на клієнта
         permissions: Дозволи
+        personal_information: Особисті відомості
         phone_number: Номер телефону
         place_order: Розмістити замовлення
+        placed_an_order: Ви успішно розмістили замовлення.
         placed_at: Розміщено
+        please_sign_in: Будь ласка, увійдіть
         postcode: Поштовий індекс
+        powered_by: Засновано на технології
+        preferences: Налаштування
         presentation: Презентація
         previous: Попередній
         price: Ціна
         pricing: Ціноутворення
+        priority: Пріоритет
+        privacy_policy: Політика конфіденційності
         processing: В процесі
         product: Товар
         product_association_index: Асоціювання
         product_association_type_index: Тип асоціювання
+        product_association_types: Типи асоціювання товарів
+        product_attributes: Атрибути товарів
+        product_options: Опції товарів
+        product_reviews: Відгуки про товари
         products: Продукція
-        products_categorized_as_name: Продукт категоризовано як "%name%"
-        products_categorized_under_taxon_taxon: Товари <small> категорії "%taxon%" </small>
+        products_categorized_as_name: Товар категоризовано як "%name%"
+        products_categorized_under_taxon_taxon: Товари <small>Класифіковані таксоном "%taxon%"</small>
         promotion_coupons: Купони
         promotion_details: Подробиці акції
+        promotion_information: Інформація щодо акції
         promotion_total: Загальна сума промо-знижки
         promotions: Промоції
         province: Регіон
@@ -395,8 +571,11 @@ sylius:
         recent_orders: Останні замовлення
         recent_users: Недавні користувачі
         refunded: Відшкодовано
-        register: Зареєструватися
-        register_button: Зареєструватися
+        register: Реєстрація
+        register_button: Зареєструватись
+        register_in_the_store: Реєстрація в крамниці
+        registered_customers: Зареєстровані клієнти
+        registration_create_an_account_in_store: Реєстрація <small>Створіть обліковку в крамниці</small>
         registration_date: Дата реєстрації
         rejected: Відхилений
         release_inventory: Інвентаризація випуску
@@ -405,6 +584,7 @@ sylius:
         retail_price: Роздрібна ціна
         return: Повернення
         returned: Повернене
+        returns_policy: Умови обміну та повернення
         roles: Ролі
         routes: Маршрути
         rules: Правила
@@ -415,6 +595,8 @@ sylius:
         scope: Покриття
         search: Пошук
         security_settings: Налаштування безпеки
+        select_taxon: Виберіть таксон
+        set_as_default: Встановити як типове
         set_as_default_billing_address: Встановити як платіжну адресу за замовчуванням
         set_as_default_shipping_address: Встановити, як адресу доставки за замовчуванням
         ship: Доставити
@@ -435,11 +617,15 @@ sylius:
         shop_by: Купуйте по
         show_all: Показати все
         show_deleted: Показати видалені
-        sign_in_to_the_store_or_create_new_account: Ввійдіть до магазину <small>або створіть новий обліковий запис</small>
+        sign_in: Увійти
+        sign_in_here: Увійдіть тут
+        sign_in_to_the_store_or_create_new_account: Увійдіть до крамниці <small>або створіть нову обліковку</small>
         sku: Артикул
         slideshow: Слайд-шоу
+        start_date: Дата початку
         starts_at: Початок дії
         state: Стан
+        static_contents: Статичний вміст
         status: Стан
         street: Вулиця
         subject: Тема
@@ -452,16 +638,23 @@ sylius:
         taxation_categories: Категорії оподаткування
         taxation_settings: Налаштування оподаткування
         taxes: Податки
+        taxonomy: Таксономія
+        taxons: Таксони
+        terms_and_conditions: Правила та умови
         theme: Тема
-        there_are_no_images_for_this_product: Немає зображень для цього продукту
-        there_are_no_options_for_this_product: Немає опцій для цього продукту
-        there_are_no_taxons_for_this_product: Немає таксонів для цього продукту
+        there_are_no_images_for_this_product: Немає зображень для цього товару
+        there_are_no_options_for_this_product: Немає опцій для цього товару
+        there_are_no_taxons_for_this_product: Немає таксонів для цього товару
+        there_are_no_taxons_to_display: Немає таксонів для показу
+        there_is_no_main_taxon_for_this_product: Для цього товару немає основного таксону
         title: Заголовок
         topic: Тема
         total: Усього
         total_orders: Всього замовлень
         total_qty: Загальна кількість
+        total_records: Загалом записів
         total_registrations: Всього реєстрацій
+        tracking_code: Код відстеження
         tracking_number: Трекінг-номер
         translations: Переклади
         type: Тип
@@ -481,11 +674,14 @@ sylius:
         warning: Попередження
         welcome_to_our_store: Ласкаво просимо до нашої крамниці
         welcome_to_your_space: Ласкаво просимо до вашого простору
+        yes_label: Так
         you_are_customer_since: Ви є клієнтом з
         you_have_no_new_orders: У вас немає нових замовлень
-        your_cart_is_empty: Ваш кошик пустий
+        your_cart_is_empty: Ваш кошик порожній
+        your_default_address: Ваша адреса за замовчуванням
         your_last_5_orders: 5 останніх замовлень
-        your_products: Ваші продукти
+        your_products: Ваші товари
+        your_store: Ваша крамниця
         zone: Зона
         zone_details: Подробиці про зону
         zones: Зони

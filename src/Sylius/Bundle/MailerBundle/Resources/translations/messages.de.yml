@@ -8,5 +8,6 @@ sylius:
             subject: Betreff
             sender_name: Absender Name
             sender_address: Absenderadresse
+            content: Inhalt
             template: Vorlage
             no_template: Benutzerdefinierte Vorlage verwenden

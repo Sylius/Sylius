@@ -3,4 +3,6 @@
 
 sylius:
     ui:
+        address_has_been_set_as_default: Adresse wurde als Standard gesetzt.
+        address_has_been_successfully_added: Adresse wurde erfolgreich hinzugefügt.
         the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required: Der Kanal kann nicht gelöscht werden. Mindestens ein aktivierter Kanal ist erforderlich.
