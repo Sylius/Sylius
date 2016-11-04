@@ -14,6 +14,7 @@ Feature: Adding a new product
         When I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I set its price to "$10.00"
+        And I set its slug to "dice-brewing"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the shop
@@ -27,6 +28,7 @@ Feature: Adding a new product
         When I specify its code as "WHISKEY_GENTLEMEN"
         And I name it "Gentleman Jack" in "English (United States)"
         And I add the "Bottle size" option to it
+        And I set its slug to "whiskey/gentleman-jack"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the shop
@@ -36,6 +38,7 @@ Feature: Adding a new product
         Given I want to create a new configurable product
         When I specify its code as "WHISKEY_GENTLEMEN"
         And I name it "Gentleman Jack" in "English (United States)"
+        And I set its slug to "whiskey/gentleman-jack"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the shop

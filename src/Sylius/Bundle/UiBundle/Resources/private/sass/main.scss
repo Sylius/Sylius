@@ -81,3 +81,7 @@ th {
   font-size: 0.9em;
   padding-bottom: 7px;
 }
+
+.ui.input input[readonly] {
+  color: #aaa;
+}

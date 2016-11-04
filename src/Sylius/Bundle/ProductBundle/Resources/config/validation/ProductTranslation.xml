@@ -26,5 +26,11 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="slug">
+            <constraint name="NotBlank">
+                <option name="message">sylius.product.slug.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

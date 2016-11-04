@@ -35,6 +35,7 @@
             </div>
             <div class="content{% if 0 == loop.index0 %} active{% endif %}">
                 {{ form_row(translationForm.name) }}
+                {% include '@SyliusAdmin/Product/_slugField.html.twig' with { 'slugField': translationForm.slug } %}
                 {{ form_row(translationForm.shortDescription, {'attr': {'rows': 3}}) }}
                 {{ form_row(translationForm.description) }}
             </div>

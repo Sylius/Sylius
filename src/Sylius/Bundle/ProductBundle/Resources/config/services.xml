@@ -13,6 +13,12 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.controller.product_slug" class="Sylius\Bundle\ProductBundle\Controller\ProductSlugController">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
         <service id="sylius.form.event_subscriber.product_variant_generator" class="Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber">
             <argument type="service" id="sylius.generator.product_variant" />
         </service>
@@ -24,6 +30,7 @@
         <service id="sylius.generator.product_variant" class="Sylius\Component\Product\Generator\ProductVariantGenerator">
             <argument type="service" id="sylius.factory.product_variant" />
         </service>
+        <service id="sylius.generator.slug" class="Sylius\Component\Product\Generator\SlugGenerator" />
 
         <service id="sylius.form.type.product_option_value_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueChoiceType">
             <tag name="form.type" alias="sylius_product_option_value_choice" />

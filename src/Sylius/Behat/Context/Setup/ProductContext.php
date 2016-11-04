@@ -26,6 +26,7 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Product\Factory\ProductFactoryInterface;
+use Sylius\Component\Product\Generator\SlugGeneratorInterface;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
@@ -108,6 +109,11 @@ final class ProductContext implements Context
     private $imageUploader;
 
     /**
+     * @var SlugGeneratorInterface
+     */
+    private $slugGenerator;
+
+    /**
      * @var array
      */
     private $minkParameters;
@@ -118,14 +124,15 @@ final class ProductContext implements Context
      * @param ProductFactoryInterface $productFactory
      * @param FactoryInterface $productTranslationFactory
      * @param AttributeFactoryInterface $productAttributeFactory
-     * @param FactoryInterface $productVariantFactory
      * @param FactoryInterface $attributeValueFactory
+     * @param FactoryInterface $productVariantFactory
      * @param FactoryInterface $productOptionFactory
      * @param FactoryInterface $productOptionValueFactory
      * @param FactoryInterface $productImageFactory
      * @param ObjectManager $objectManager
      * @param ProductVariantResolverInterface $defaultVariantResolver
      * @param ImageUploaderInterface $imageUploader
+     * @param SlugGeneratorInterface $slugGenerator
      * @param array $minkParameters
      */
     public function __construct(
@@ -142,6 +149,7 @@ final class ProductContext implements Context
         ObjectManager $objectManager,
         ProductVariantResolverInterface $defaultVariantResolver,
         ImageUploaderInterface $imageUploader,
+        SlugGeneratorInterface $slugGenerator,
         array $minkParameters
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -155,8 +163,9 @@ final class ProductContext implements Context
         $this->productOptionValueFactory = $productOptionValueFactory;
         $this->productImageFactory = $productImageFactory;
         $this->objectManager = $objectManager;
-        $this->imageUploader = $imageUploader;
         $this->defaultVariantResolver = $defaultVariantResolver;
+        $this->imageUploader = $imageUploader;
+        $this->slugGenerator = $slugGenerator;
         $this->minkParameters = $minkParameters;
     }
 
@@ -204,6 +213,7 @@ final class ProductContext implements Context
         $translation = $this->productTranslationFactory->createNew();
         $translation->setLocale($locale);
         $translation->setName($name);
+        $translation->setSlug($this->slugGenerator->generate($name));
 
         $product->addTranslation($translation);
 
@@ -220,6 +230,8 @@ final class ProductContext implements Context
 
         $product->setName($productName);
         $product->setCode(StringInflector::nameToUppercaseCode($productName));
+        $product->setSlug($this->slugGenerator->generate($productName));
+
         $product->setDescription('Awesome '.$productName);
 
         if ($this->sharedStorage->has('channel')) {
@@ -585,6 +597,7 @@ final class ProductContext implements Context
 
         $product->setName($productName);
         $product->setCode(StringInflector::nameToUppercaseCode($productName));
+        $product->setSlug($this->slugGenerator->generate($productName));
         $product->setCreatedAt(new \DateTime($date));
 
         /** @var ProductVariantInterface $productVariant */

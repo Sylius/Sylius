@@ -119,9 +119,10 @@ final class MugProductFixture extends AbstractFixture
         ]]);
 
         $products = [];
+        $productsNames = $this->getUniqueNames($options['amount']);
         for ($i = 0; $i < $options['amount']; ++$i) {
             $products[] = [
-                'name' => sprintf('Mug "%s"', $this->faker->word),
+                'name' => sprintf('Mug "%s"', $productsNames[$i]),
                 'code' => $this->faker->uuid,
                 'main_taxon' => 'mugs',
                 'taxons' => ['mugs'],
@@ -148,5 +149,25 @@ final class MugProductFixture extends AbstractFixture
             ->children()
                 ->integerNode('amount')->isRequired()->min(0)->end()
         ;
+    }
+
+    /**
+     * @param int $amount
+     *
+     * @return string
+     */
+    private function getUniqueNames($amount)
+    {
+        $productsNames = [];
+
+        for ($i = 0; $i < $amount; ++$i) {
+            $name = $this->faker->word;
+            while (in_array($name, $productsNames)) {
+                $name = $this->faker->word;
+            }
+            $productsNames[] = $name;
+        }
+
+        return $productsNames;
     }
 }

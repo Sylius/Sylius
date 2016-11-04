@@ -34,14 +34,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getDocument()->fillField(
             sprintf('sylius_product_translations_%s_name', $localeCode), $name
         );
-    }
 
-    /**
-     * {@inheritdoc}
-     */
-    protected function getCodeElement()
-    {
-        return $this->getElement('code');
+        $this->waitForSlugGenerationIfNecessary();
     }
 
     /**
@@ -204,6 +198,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function isSlugReadOnly()
+    {
+        return 'readonly' === $this->getElement('slug')->getAttribute('readonly');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getValidationMessageForImage()
     {
         $this->clickTabIfItsNotActive('media');
@@ -221,6 +223,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
+    protected function getCodeElement()
+    {
+        return $this->getElement('code');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -231,6 +241,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'price' => '#sylius_product_variant_price',
             'search' => '.ui.fluid.search.selection.dropdown',
             'search_item_selected' => 'div.menu > div.item.selected',
+            'slug' => '#sylius_product_translations_en_US_slug',
             'tab' => '.menu [data-tab="%name%"]',
             'taxonomy' => 'a[data-tab="taxonomy"]',
             'tracked' => '#sylius_product_variant_tracked',
@@ -302,5 +313,22 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         Assert::notEmpty($imageElements);
 
         return reset($imageElements);
+    }
+
+    private function waitForSlugGenerationIfNecessary()
+    {
+        if (!$this->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
+        $slugElement = $this->getElement('slug');
+        if ($slugElement->hasAttribute('readonly')) {
+            return;
+        }
+
+        $value = $slugElement->getValue();
+        $this->getDocument()->waitFor(1000, function () use ($slugElement, $value) {
+            return $value !== $slugElement->getValue();
+        });
     }
 }

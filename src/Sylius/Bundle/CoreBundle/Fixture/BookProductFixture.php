@@ -102,16 +102,17 @@ final class BookProductFixture extends AbstractFixture
         ]]);
 
         $products = [];
+        $productsNames = $this->getUniqueNames($options['amount']);
         for ($i = 0; $i < $options['amount']; ++$i) {
-            $name = $this->faker->name;
+            $authorName = $this->faker->name;
 
             $products[] = [
-                'name' => sprintf('Book "%s" by %s', $this->faker->word, $name),
+                'name' => sprintf('Book "%s" by %s', $productsNames[$i], $authorName),
                 'code' => $this->faker->uuid,
                 'main_taxon' => 'books',
                 'taxons' => ['books'],
                 'product_attributes' => [
-                    'book_author' => $name,
+                    'book_author' => $authorName,
                     'book_isbn' => $this->faker->isbn13,
                     'book_pages' => $this->faker->numberBetween(42, 1024),
                 ],
@@ -134,5 +135,25 @@ final class BookProductFixture extends AbstractFixture
             ->children()
                 ->integerNode('amount')->isRequired()->min(0)->end()
         ;
+    }
+
+    /**
+     * @param int $amount
+     *
+     * @return string
+     */
+    private function getUniqueNames($amount)
+    {
+        $productsNames = [];
+
+        for ($i = 0; $i < $amount; ++$i) {
+            $name = $this->faker->word;
+            while (in_array($name, $productsNames)) {
+                $name = $this->faker->word;
+            }
+            $productsNames[] = $name;
+        }
+
+        return $productsNames;
     }
 }

@@ -211,6 +211,23 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I set its slug to :slug
+     * @When I remove its slug
+     */
+    public function iSetItsSlugTo($slug = null)
+    {
+        $this->createSimpleProductPage->specifySlug($slug);
+    }
+
+    /**
+     * @When I enable slug modification
+     */
+    public function iEnableSlugModification()
+    {
+        $this->createSimpleProductPage->enableSlugModification();
+    }
+
+    /**
      * @Then the product :productName should appear in the shop
      * @Then the product :productName should be in the shop
      * @Then this product should still be named :productName
@@ -380,6 +397,17 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then the slug field should not be editable
+     */
+    public function theSlugFieldShouldNotBeEditable()
+    {
+        Assert::true(
+            $this->updateSimpleProductPage->isSlugReadOnly(),
+            'Slug should be immutable, but it does not.'
+        );
+    }
+
+    /**
      * @Then /^this product price should be "(?:€|£|\$)([^"]+)"$/
      */
     public function thisProductPriceShouldBeEqualTo($price)
@@ -396,7 +424,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that (code|name) is required$/
+     * @Then /^I should be notified that (code|name|slug) is required$/
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
@@ -543,6 +571,19 @@ final class ManagingProductsContext implements Context
         ], $this->sharedStorage->get('product'));
 
         $currentPage->selectMainTaxon($taxon);
+    }
+
+    /**
+     * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
+     */
+    public function productSlugShouldBe(ProductInterface $product, $slug)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::true(
+            $this->updateSimpleProductPage->hasResourceValues(['slug' => $slug]),
+            sprintf('Product\'s slug should be %s.', $slug)
+        );
     }
 
     /**

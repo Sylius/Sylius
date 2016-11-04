@@ -142,11 +142,12 @@ final class TshirtProductFixture extends AbstractFixture
         ]]);
 
         $products = [];
+        $productsNames = $this->getUniqueNames($options['amount']);
         for ($i = 0; $i < $options['amount']; ++$i) {
             $categoryTaxonCode = $this->faker->randomElement(['mens_t_shirts', 'womens_t_shirts']);
 
             $products[] = [
-                'name' => sprintf('T-Shirt "%s"', $this->faker->word),
+                'name' => sprintf('T-Shirt "%s"', $productsNames[$i]),
                 'code' => $this->faker->uuid,
                 'main_taxon' => $categoryTaxonCode,
                 'taxons' => [$categoryTaxonCode],
@@ -175,5 +176,25 @@ final class TshirtProductFixture extends AbstractFixture
             ->children()
                 ->integerNode('amount')->isRequired()->min(0)->end()
         ;
+    }
+
+    /**
+     * @param int $amount
+     *
+     * @return string
+     */
+    private function getUniqueNames($amount)
+    {
+        $productsNames = [];
+
+        for ($i = 0; $i < $amount; ++$i) {
+            $name = $this->faker->word;
+            while (in_array($name, $productsNames)) {
+                $name = $this->faker->word;
+            }
+            $productsNames[] = $name;
+        }
+
+        return $productsNames;
     }
 }
