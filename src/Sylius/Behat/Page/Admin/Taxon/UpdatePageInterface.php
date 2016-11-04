@@ -54,10 +54,10 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isImageCodeDisabled();
 
     /**
-     * @param string $code
      * @param string $path
+     * @param string $code
      */
-    public function attachImageWithCode($code, $path);
+    public function attachImage($path, $code = null);
 
     /**
      * @param string $code

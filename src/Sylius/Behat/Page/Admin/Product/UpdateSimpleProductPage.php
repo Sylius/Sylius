@@ -136,7 +136,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function attachImageWithCode($code, $path)
+    public function attachImage($path, $code = null)
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -145,7 +145,10 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getDocument()->clickLink('Add');
 
         $imageForm = $this->getLastImageElement();
-        $imageForm->fillField('Code', $code);
+        if (null !== $code) {
+            $imageForm->fillField('Code', $code);
+        }
+
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 

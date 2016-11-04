@@ -51,10 +51,10 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function removeAttribute($attribute);
 
     /**
-     * @param string $code
      * @param string $path
+     * @param string $code
      */
-    public function attachImageWithCode($code, $path);
+    public function attachImage($path, $code = null);
 
     public function enableSlugModification();
 }

@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -23,6 +24,11 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingTaxonsContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var CreatePageInterface
      */
@@ -39,15 +45,18 @@ final class ManagingTaxonsContext implements Context
     private $currentPageResolver;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
@@ -67,6 +76,8 @@ final class ManagingTaxonsContext implements Context
      */
     public function iWantToModifyATaxon(TaxonInterface $taxon)
     {
+        $this->sharedStorage->set('taxon', $taxon);
+
         $this->updatePage->open(['id' => $taxon->getId()]);
     }
 
@@ -310,7 +321,15 @@ final class ManagingTaxonsContext implements Context
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->attachImageWithCode($code, $path);
+        $currentPage->attachImage($path, $code);
+    }
+
+    /**
+     * @When I attach the :path image without a code
+     */
+    public function iAttachImageWithoutACode($path)
+    {
+        $this->updatePage->attachImage($path);
     }
 
     /**
@@ -352,10 +371,12 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Then this taxon should not have images
+     * @Then /^(this taxon) should not have any images$/
      */
-    public function thisTaxonShouldNotHaveImages()
+    public function thisTaxonShouldNotHaveImages(TaxonInterface $taxon)
     {
+        $this->iWantToModifyATaxon($taxon);
+
         Assert::eq(
             0,
             $this->updatePage->countImages(),
@@ -377,6 +398,17 @@ final class ManagingTaxonsContext implements Context
     public function iShouldBeNotifiedThatTheImageWithThisCodeAlreadyExists()
     {
         Assert::same($this->updatePage->getValidationMessageForImage(), 'Image code must be unique within this taxon.');
+    }
+
+    /**
+     * @Then I should be notified that an image code is required
+     */
+    public function iShouldBeNotifiedThatAnImageCodeIsRequired()
+    {
+        Assert::same(
+            $this->updatePage->getValidationMessageForImage(),
+            'Please enter an image code.'
+        );
     }
 
     /**

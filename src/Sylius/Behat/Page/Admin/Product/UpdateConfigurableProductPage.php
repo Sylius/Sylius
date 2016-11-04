@@ -13,6 +13,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
@@ -102,7 +103,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
-    public function attachImageWithCode($code, $path)
+    public function attachImage($path, $code = null)
     {
         $this->clickTabIfItsNotActive('media');
 
@@ -111,7 +112,10 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         $this->getDocument()->clickLink('Add');
 
         $imageForm = $this->getLastImageElement();
-        $imageForm->fillField('Code', $code);
+        if (null !== $code) {
+            $imageForm->fillField('Code', $code);
+        }
+
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
     }
 
@@ -159,6 +163,23 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     public function isImageCodeDisabled()
     {
         return 'disabled' === $this->getLastImageElement()->findField('Code')->getAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationMessageForImage()
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $imageForm = $this->getLastImageElement();
+
+        $foundElement = $imageForm->find('css', '.sylius-validation-error');
+        if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
+        }
+
+        return $foundElement->getText();
     }
 
     /**

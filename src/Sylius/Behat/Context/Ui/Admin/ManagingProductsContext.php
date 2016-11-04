@@ -644,7 +644,21 @@ final class ManagingProductsContext implements Context
             $this->updateConfigurableProductPage,
         ], $this->sharedStorage->has('product') ? $this->sharedStorage->get('product') : null);
 
-        $currentPage->attachImageWithCode($code, $path);
+        $currentPage->attachImage($path, $code);
+    }
+
+    /**
+     * @When I attach the :path image without a code
+     */
+    public function iAttachImageWithoutACode($path)
+    {
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $this->sharedStorage->get('product'));
+
+        $currentPage->attachImage($path);
     }
 
     /**
@@ -727,10 +741,12 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then this product should not have images
+     * @Then /^(this product) should not have any images$/
      */
-    public function thisProductShouldNotHaveImages()
+    public function thisProductShouldNotHaveImages(ProductInterface $product)
     {
+        $this->iWantToModifyAProduct($product);
+
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
             $this->updateSimpleProductPage,
@@ -767,6 +783,23 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatTheImageWithThisCodeAlreadyExists()
     {
         Assert::same($this->updateSimpleProductPage->getValidationMessageForImage('code'), 'Image code must be unique within this product.');
+    }
+
+    /**
+     * @Then I should be notified that an image code is required
+     */
+    public function iShouldBeNotifiedThatAnImageCodeIsRequired()
+    {
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $this->sharedStorage->get('product'));
+
+        Assert::same(
+            $currentPage->getValidationMessageForImage(),
+            'Please enter an image code.'
+        );
     }
 
     /**
