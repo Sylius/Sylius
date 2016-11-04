@@ -11,8 +11,10 @@
 
 namespace Sylius\Behat\Page\Admin\Taxon;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -152,6 +154,50 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function insertBefore(TaxonInterface $draggableTaxon, TaxonInterface $targetTaxon)
+    {
+        $seleniumDriver = $this->getSeleniumDriver();
+        $draggableTaxonLocator = sprintf('.item[data-id="%s"]', $draggableTaxon->getId());
+        $targetTaxonLocator = sprintf('.item[data-id="%s"]', $targetTaxon->getId());
+
+        #TODO make DragAndDropSimulator
+        $script = <<<JS
+(function ($) {
+    $('$draggableTaxonLocator').simulate('drag-n-drop',{
+        dragTarget: $('$targetTaxonLocator'),
+        interpolation: {stepWidth: 10, stepDelay: 30} 
+    });    
+})(jQuery);
+JS;
+
+        $seleniumDriver->executeScript($script);
+        sleep(3);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLeafs(TaxonInterface $parentTaxon = null)
+    {
+        $tree = $this->getElement('tree');
+        Assert::notNull($tree);
+        /** @var NodeElement[] $leafs */
+        $leafs = $tree->findAll('css', '.item > .content > .header');
+
+        if (null === $parentTaxon) {
+            return $leafs;
+        }
+
+        foreach ($leafs as $leaf) {
+            if ($leaf->getText() === $parentTaxon->getName()) {
+                return $leaf->findAll('css', '.item > .content > .header');
+            }
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
@@ -200,31 +246,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @param TaxonInterface|null $parentTaxon
-     *
-     * @return NodeElement[]
-     *
-     * @throws ElementNotFoundException
-     */
-    private function getLeafs(TaxonInterface $parentTaxon = null)
-    {
-        $tree = $this->getElement('tree');
-        Assert::notNull($tree);
-        /** @var NodeElement[] $leafs */
-        $leafs = $tree->findAll('css', '.item > .content > .header');
-
-        if (null === $parentTaxon) {
-            return $leafs;
-        }
-
-        foreach ($leafs as $leaf) {
-            if ($leaf->getText() === $parentTaxon->getName()) {
-                return $leaf->findAll('css', '.item > .content > .header');
-            }
-        }
-    }
-
-    /**
      * @return NodeElement
      */
     private function getLastImageElement()
@@ -235,5 +256,21 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         Assert::notEmpty($items);
 
         return end($items);
+    }
+
+    /**
+     * @return Selenium2Driver
+     *
+     * @throws UnsupportedDriverActionException
+     */
+    private function getSeleniumDriver()
+    {
+        /** @var Selenium2Driver $driver */
+        $driver = $this->getDriver();
+        if (!$driver instanceof Selenium2Driver) {
+            throw new UnsupportedDriverActionException('This action is not supported by %s', $driver);
+        }
+
+        return $driver;
     }
 }

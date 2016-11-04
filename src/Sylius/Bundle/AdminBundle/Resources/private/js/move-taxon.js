@@ -2,16 +2,20 @@
     'use strict';
 
     $(document).ready(function() {
+
         $('.sylius-sortable-list').sortable({
+            forceFallback: true,
             onEnd: function (event) {
+                console.log(event.item);
+                console.log(event.newIndex);
                 $(this).api({
                     throttle: 500,
                     method: 'PUT',
                     action: 'move taxon',
+                    on: 'now',
                     urlData: {
                         id: $(event.item).data('id')
                     },
-                    on: 'now',
                     beforeSend: function (settings) {
                         settings.data = {
                             position: event.newIndex

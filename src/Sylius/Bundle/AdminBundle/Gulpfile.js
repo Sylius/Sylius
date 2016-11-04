@@ -26,6 +26,11 @@ var paths = {
             '../UserBundle/Resources/public/js/sylius-user.js',
             'Resources/private/js/**'
         ],
+        jsTest: [
+            '../../../../node_modules/jquery-simulate-ext/libs/jquery.simulate.js',
+            '../../../../node_modules/jquery-simulate-ext/src/jquery.simulate.ext.js',
+            '../../../../node_modules/jquery-simulate-ext/src/jquery.simulate.drag-n-drop.js'
+        ],
         sass: [
             '../UiBundle/Resources/private/sass/**'
         ],
@@ -45,6 +50,17 @@ gulp.task('admin-js', function () {
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(adminRootPath + 'js/'))
     ;
+});
+
+gulp.task('admin-js-test', function () {
+    var jsFiles = paths.admin.js.concat(paths.admin.jsTest);
+
+    return gulp.src(jsFiles)
+        .pipe(concat('app.js'))
+        .pipe(gulpif(env === 'prod', uglify()))
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest(adminRootPath + 'js/'))
+        ;
 });
 
 gulp.task('admin-css', function() {
@@ -87,3 +103,4 @@ gulp.task('admin-watch', function() {
 
 gulp.task('default', ['admin-js', 'admin-css', 'admin-img']);
 gulp.task('watch', ['default', 'admin-watch']);
+gulp.task('test', ['admin-js-test', 'admin-css', 'admin-img']);

@@ -7,6 +7,14 @@ gulp.task('admin', function() {
     ;
 });
 
+gulp.task('admin-test', function() {
+    gulp.src('src/Sylius/Bundle/AdminBundle/Gulpfile.js', { read: false })
+        .pipe(chug({
+            tasks: ['test']
+        }))
+    ;
+});
+
 gulp.task('shop', function() {
     gulp.src('src/Sylius/Bundle/ShopBundle/Gulpfile.js', { read: false })
         .pipe(chug())
@@ -14,3 +22,4 @@ gulp.task('shop', function() {
 });
 
 gulp.task('default', ['admin', 'shop']);
+gulp.task('test', ['admin-test', 'shop']);

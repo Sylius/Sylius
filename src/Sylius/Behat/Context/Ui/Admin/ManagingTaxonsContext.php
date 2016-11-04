@@ -155,11 +155,19 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When /^I want to move up ("[^"]+" taxon)$/
+     * @When /^I move up ("[^"]+" taxon)$/
      */
     public function iWantToMoveUpTaxon(TaxonInterface $taxon)
     {
         $this->createPage->moveUp($taxon);
+    }
+
+    /**
+     * @When /^I move ("[^"]+" taxon) before ("[^"]+" taxon)$/
+     */
+    public function iMoveTaxonBeforeTaxon(TaxonInterface $taxonToMove, TaxonInterface $targetTaxon)
+    {
+        $this->createPage->insertBefore($taxonToMove, $targetTaxon);
     }
 
     /**
@@ -501,5 +509,17 @@ final class ManagingTaxonsContext implements Context
                 $this->createPage->getFirstLeafName()
             )
         );
+    }
+
+    /**
+     * @Then they should have order like :firstTaxonName, :secondTaxonName, :thirdTaxonName and :fourthTaxonName
+     */
+    public function theyShouldHaveOrderLikeAnd(...$taxonsNames)
+    {
+        $leafs = $this->createPage->getLeafs();
+
+        foreach ($leafs as $key => $leaf) {
+            Assert::contains($taxonsNames[$key], $leaf->getText());
+        }
     }
 }
