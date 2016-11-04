@@ -134,6 +134,9 @@ class Taxon implements TaxonInterface
     public function setParent(TaxonInterface $parent = null)
     {
         $this->parent = $parent;
+        if (null !== $parent) {
+            $parent->addChild($this);
+        }
     }
 
     /**
@@ -176,9 +179,11 @@ class Taxon implements TaxonInterface
     public function addChild(TaxonInterface $taxon)
     {
         if (!$this->hasChild($taxon)) {
-            $taxon->setParent($this);
-
             $this->children->add($taxon);
+        }
+
+        if ($this !== $taxon->getParent()) {
+            $taxon->setParent($this);
         }
     }
 

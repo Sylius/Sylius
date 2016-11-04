@@ -5,7 +5,7 @@
     {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
     {% import _self as tree %}
 
-    {% for taxon in taxons %}
+    {% for taxon in taxons if taxon.id != null %}
         <div class="item">
             <i class="folder icon"></i>
             <div class="content">
@@ -15,6 +15,7 @@
                     </a>
                 </div>
                 <div class="ui mini buttons">
+                    {{ buttons.create(path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id })) }}
                     {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id })) }}
                     {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), 'sylius.ui.delete'|trans) }}
                 </div>
@@ -29,7 +30,7 @@
 
 {{ buttons.create(path('sylius_admin_taxon_create')) }}
 <div class="ui segment">
-    <div class="ui list">
+    <div id="taxons-list" class="ui list">
         {{ tree.render(taxons) }}
     </div>
 </div>
