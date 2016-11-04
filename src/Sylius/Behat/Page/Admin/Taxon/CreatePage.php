@@ -41,7 +41,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $matchedLeafsCounter = 0;
         $leafs = $this->getLeafs();
         foreach ($leafs as $leaf) {
-            if ($leaf->getText() === $name) {
+            if (strpos($leaf->getText(), $name) !== false) {
                 $matchedLeafsCounter++;
             }
         }
@@ -65,7 +65,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $leafs = $this->getLeafs();
         foreach ($leafs as $leaf) {
             if ($leaf->getText() === $name) {
-                $leaf->getParent()->find('css', '.ui.red.button')->press();
+                $leaf = $leaf->getParent();
+                $menuButton = $leaf->find('css', '.wrench');
+                $menuButton->click();
+                $deleteButton = $leaf->find('css', '.sylius-delete-resource');
+                $deleteButton->click();
+                $deleteButton->waitFor(5, function () use ($name) {
+                    return $this->getFirstLeafName() !== $name;
+                });
 
                 return;
             }
