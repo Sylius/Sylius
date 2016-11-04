@@ -25,19 +25,14 @@ Overwrite the state machine of Checkout
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Open the `CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml>`_
-and place its content in the ``app/config/state_machine.yml`` which has to be imported in the ``app/config/config.yml``.
+and place its content in the ``app/Resources/SyliusCoreBundle/config/app/state_machine/sylius_order_checkout.yml``
+which is a `standard procedure of overriding configs in Symfony <http://symfony.com/doc/current/bundles/inheritance.html#overriding-resources-templates-routing-etc>`_.
 Remove the ``shipment_selected`` state, ``select_shipment`` transition. Remove the ``select_shipment`` from the
 ``sylius_process_cart`` callback.
 
 .. code-block:: yaml
 
-    # app/config/config.yml
-    imports:
-        - { resource: "state_machine.yml" }
-
-.. code-block:: yaml
-
-    # app/config/state_machine.yml
+    # app/Resources/SyliusCoreBundle/config/app/state_machine/sylius_order_checkout.yml
     winzou_state_machine:
         sylius_order_checkout:
             class: "%sylius.model.order.class%"
@@ -81,6 +76,11 @@ Remove the ``shipment_selected`` state, ``select_shipment`` transition. Remove t
                         on: ["complete"]
                         do: ["@sylius.promotion_usage_modifier", "increment"]
                         args: ["object"]
+
+.. tip::
+
+    To check if your new state machine configuration is overiding the old one run:
+    ``$ php app/console debug:config winzou_state_machine`` and check the configuration of ``sylius_order_checkout``.
 
 Adjust Checkout Resolver
 ~~~~~~~~~~~~~~~~~~~~~~~~
