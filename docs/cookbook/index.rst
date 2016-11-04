@@ -9,6 +9,7 @@ Cookbook
     custom-model
     custom-email
     paypal
+    stripe
     api
     images
     checkout
