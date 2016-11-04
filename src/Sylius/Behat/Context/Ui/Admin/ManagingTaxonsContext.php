@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -29,6 +30,11 @@ final class ManagingTaxonsContext implements Context
     private $createPage;
 
     /**
+     * @var CreateForParentPageInterface
+     */
+    private $createForParentPage;
+
+    /**
      * @var UpdatePageInterface
      */
     private $updatePage;
@@ -40,29 +46,37 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @param CreatePageInterface $createPage
+     * @param CreateForParentPageInterface $createForParentPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         CreatePageInterface $createPage,
+        CreateForParentPageInterface $createForParentPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->createPage = $createPage;
+        $this->createForParentPage = $createForParentPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
     }
 
     /**
      * @Given I want to create a new taxon
-     * @Given I want to create a new taxon for :taxon
      * @Given I want to see all taxons in store
      */
-    public function iWantToCreateANewTaxon(TaxonInterface $taxon = null)
+    public function iWantToCreateANewTaxon()
     {
-        $parameters = (null !== $taxon) ? ['id' => $taxon->getId()] : [];
+        $this->createPage->open();
+    }
 
-        $this->createPage->open($parameters);
+    /**
+     * @Given I want to create a new taxon for :taxon
+     */
+    public function iWantToCreateANewTaxonForParent(TaxonInterface $taxon)
+    {
+        $this->createForParentPage->open(['id' => $taxon->getId()]);
     }
 
     /**
