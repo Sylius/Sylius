@@ -101,6 +101,6 @@ gulp.task('admin-watch', function() {
     gulp.watch(paths.admin.img, ['admin-img']);
 });
 
-gulp.task('default', ['admin-js', 'admin-css', 'admin-img']);
+gulp.task('default', ['admin-js-test', 'admin-css', 'admin-img']);
 gulp.task('watch', ['default', 'admin-watch']);
 gulp.task('test', ['admin-js-test', 'admin-css', 'admin-img']);
