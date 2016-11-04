@@ -35,6 +35,7 @@ final class CustomerGroupContext implements Context
 
     /**
      * @Transform :customerGroup
+     * @Transform /^group "([^"]+)"$/
      */
     public function getCustomerGroupByName($customerGroupName)
     {

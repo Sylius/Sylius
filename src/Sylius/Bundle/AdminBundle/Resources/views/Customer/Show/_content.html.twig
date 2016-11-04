@@ -7,30 +7,37 @@
                 </a>
                 <div class="meta">
                     <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
+                    <br />
+                   {% if customer.group is not null %}
+                       <span class="group">{{ 'sylius.ui.group_membership'|trans }}: {{ customer.group }}</span>
+                   {% endif %}
                 </div>
                 <br />
                 <div id="subscribed-to-newsletter">
-                    {% if customer.subscribedToNewsletter %}
-                        <i class="green checkmark icon"></i>
-                    {% else %}
-                        <i class="red remove icon"></i>
-                    {% endif %}
+                    <i class="{{ customer.subscribedToNewsletter ? 'green checkmark' : 'red remove' }} icon"></i>
                     {{ 'sylius.ui.subscribed_to_newsletter'|trans }}
                 </div>
+                {% if customer.user is not null %}
+                    <div id="verified-email">
+                        <i class="{{ customer.user.verified ? 'green checkmark' : 'red remove' }} icon"></i>
+                        {{ 'sylius.ui.email_verified'|trans }}
+                    </div>
+                {% endif %}
+                {% if customer.defaultAddress is not null %}
+                    <br />
+                    <div class="ui two column stackable grid">
+                        <div class="column" id="defaultAddress">
+                            <h4 class="ui dividing header">{{ 'sylius.ui.default_address'|trans }}</h4>
+                            {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': customer.defaultAddress} %}
+                        </div>
+                    </div>
+                {% endif %}
             </div>
             <div class="extra content">
                 <a href="mailto: {{ customer.email }}">
                     <i class="envelope icon"></i> {{ customer.email }}
                 </a>
             </div>
-        </div>
-        <div class="ui two column stackable grid">
-            {% if customer.defaultAddress %}
-                <div class="column" id="defaultAddress">
-                    <h4 class="ui dividing header">{{ 'sylius.ui.default'|trans }}</h4>
-                    {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': customer.defaultAddress} %}
-                </div>
-            {% endif %}
         </div>
     </div>
 </div>

@@ -6,6 +6,7 @@ Feature: Seeing customer's details
 
     Background:
         Given I am logged in as an administrator
+        And the store has a customer group Retail
         And the store has customer "f.baggins@shire.me" with name "Frodo Baggins" since "2011-01-10 21:00"
 
     @ui
@@ -31,3 +32,21 @@ Feature: Seeing customer's details
         Given the customer subscribed to the newsletter
         When I view details of the customer "f.baggins@shire.me"
         Then I should see that this customer is subscribed to the newsletter
+
+    @ui
+    Scenario: Seeing information about customer groups
+        Given the customer belongs to group "Retail"
+        When I view details of the customer "f.baggins@shire.me"
+        Then this customer should have "Retail" as their group
+
+    @ui
+    Scenario: Not Seeing information about email verification for not registered customer
+        When I view details of the customer "f.baggins@shire.me"
+        Then I should not see information about email verification
+
+    @ui
+    Scenario: Seeing information about verified email for registered customer
+        Given there is a customer "Legolas Sindar" identified by an email "legolas@woodland.rm" and a password "takingTheHobbitsToIsengard"
+        And this customer verified their email
+        When I view details of the customer "legolas@woodland.rm"
+        Then I should see that this customer has verified the email
