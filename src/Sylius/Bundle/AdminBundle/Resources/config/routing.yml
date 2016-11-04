@@ -3,7 +3,7 @@ sylius_admin_partial:
     prefix: /_partial
 
 sylius_admin_api:
-    resource: "@SyliusAdminBundle/Resources/config/routing/api/taxon.yml"
+    resource: "@SyliusAdminBundle/Resources/config/routing/api.yml"
     prefix: /api
 
 sylius_admin_dashboard:
