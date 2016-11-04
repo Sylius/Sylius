@@ -41,6 +41,24 @@ In your ``app/config/config.yml`` add:
 
 That's it! Your "Book" entity is now registered as Sylius Resource.
 
+You can also configure several doctrine drivers:
+
+.. code-block:: yaml
+
+    sylius_resource:
+        drivers:
+            - doctrine/orm
+            - doctrine/phpcr-odm
+        resources:
+            app.book:
+                classes:
+                    model: AppBundle\Entity\Book
+            app.article:
+                classes:
+                    driver: doctrine/phpcr-odm
+                    model: AppBundle\Document\ArticleDocument
+
+
 Do you want to try it out? Add following lines to ``app/config/routing.yml``:
 
 .. code-block:: yaml
