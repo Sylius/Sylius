@@ -55,11 +55,14 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @Given I want to create a new taxon
+     * @Given I want to create a new taxon for :taxon
      * @Given I want to see all taxons in store
      */
-    public function iWantToCreateANewTaxon()
+    public function iWantToCreateANewTaxon(TaxonInterface $taxon = null)
     {
-        $this->createPage->open();
+        $parameters = (null !== $taxon) ? ['id' => $taxon->getId()] : [];
+
+        $this->createPage->open($parameters);
     }
 
     /**
