@@ -1,5 +1,5 @@
 sylius_admin_api_taxon_index:
-    path: /taxons
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:indexAction
