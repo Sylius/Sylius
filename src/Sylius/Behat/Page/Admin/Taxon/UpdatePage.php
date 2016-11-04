@@ -127,6 +127,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
+     * @inheritDoc
+     */
+    public function getParent()
+    {
+        return $this->getElement('parent')->getValue();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getValidationMessageForImage()

@@ -231,6 +231,19 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @Given it should not be belong to any other taxon
+     */
+    public function itShouldNotBeBelongToAnyOtherTaxon()
+    {
+        $parent = $this->updatePage->getParent();
+
+        Assert::isEmpty(
+            $parent,
+            sprintf('Current taxon should not belong to any other, but it does belong to "%s"', $parent)
+        );
+    }
+
+    /**
      * @Then I should be notified that taxon with this code already exists
      */
     public function iShouldBeNotifiedThatTaxonWithThisCodeAlreadyExists()

@@ -86,6 +86,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     /**
      * @return string
+     */
+    public function getParent();
+
+    /**
+     * @return string
      *
      * @throws ElementNotFoundException
      */
