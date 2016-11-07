@@ -65,6 +65,11 @@ class Taxon implements TaxonInterface
      */
     protected $level;
 
+    /**
+     * @var int
+     */
+    protected $position;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -321,5 +326,21 @@ class Taxon implements TaxonInterface
     public function setLevel($level)
     {
         $this->level = $level;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 }

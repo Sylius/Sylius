@@ -20,6 +20,14 @@ sylius_admin_taxon_index:
         route: sylius_admin_taxon_create
         permanent: true
 
+sylius_admin_taxon_move:
+    path: /taxons/{id}/move
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.taxon:updateAction
+        _sylius:
+            form: sylius_taxon_position
+
 sylius_admin_taxon_create_for_parent:
     path: /taxons/new/{id}
     defaults:

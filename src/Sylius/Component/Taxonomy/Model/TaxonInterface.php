@@ -100,4 +100,14 @@ interface TaxonInterface extends
      * @param int $level
      */
     public function setLevel($level);
+
+    /**
+     * @return int
+     */
+    public function getPosition();
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position);
 }

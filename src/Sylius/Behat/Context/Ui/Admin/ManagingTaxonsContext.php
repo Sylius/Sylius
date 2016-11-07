@@ -155,6 +155,22 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When /^I move up ("[^"]+" taxon)$/
+     */
+    public function iWantToMoveUpTaxon(TaxonInterface $taxon)
+    {
+        $this->createPage->moveUp($taxon);
+    }
+
+    /**
+     * @When /^I move ("[^"]+" taxon) before ("[^"]+" taxon)$/
+     */
+    public function iMoveTaxonBeforeTaxon(TaxonInterface $taxonToMove, TaxonInterface $targetTaxon)
+    {
+        $this->createPage->insertBefore($taxonToMove, $targetTaxon);
+    }
+
+    /**
      * @Given /^I choose ("[^"]+" as a parent taxon)$/
      */
     public function iChooseAsAParentTaxon(TaxonInterface $taxon)
@@ -477,5 +493,33 @@ final class ManagingTaxonsContext implements Context
             $this->updatePage->getValidationMessageForImageAtPlace(((int) $matches[0][0]) - 1),
             'Image code must be unique within this taxon.'
         );
+    }
+
+    /**
+     * @Then the first taxon on the list should be :taxon
+     */
+    public function theFirstTaxonOnTheListShouldBe(TaxonInterface $taxon)
+    {
+        Assert::same(
+            $this->createPage->getFirstLeafName(),
+            $taxon->getName(),
+            sprintf(
+                'Expected %s as a first taxon, but got %s.',
+                $taxon->getName(),
+                $this->createPage->getFirstLeafName()
+            )
+        );
+    }
+
+    /**
+     * @Then they should have order like :firstTaxonName, :secondTaxonName, :thirdTaxonName and :fourthTaxonName
+     */
+    public function theyShouldHaveOrderLikeAnd(...$taxonsNames)
+    {
+        $leaves = $this->createPage->getLeaves();
+
+        foreach ($leaves as $key => $leaf) {
+            Assert::contains($taxonsNames[$key], $leaf->getText());
+        }
     }
 }

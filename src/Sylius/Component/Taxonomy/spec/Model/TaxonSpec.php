@@ -187,4 +187,10 @@ final class TaxonSpec extends ObjectBehavior
 
         $this->removeChild($taxon);
     }
+
+    function it_has_position()
+    {
+        $this->setPosition(0);
+        $this->getPosition()->shouldReturn(0);
+    }
 }
