@@ -2,7 +2,11 @@
     {{ form_errors(form) }}
     <div class="two fields">
         {{ form_row(form.code) }}
-        {{ form_row(form.parent) }}
+        {% if taxon.id != null %}
+            {{ form_row(form.parent) }}
+        {% else %}
+            {{ form_widget(form.parent, {'attr': {'style': 'display: none;'}}) }}
+        {% endif %}
     </div>
 </div>
 <div class="ui styled fluid accordion">

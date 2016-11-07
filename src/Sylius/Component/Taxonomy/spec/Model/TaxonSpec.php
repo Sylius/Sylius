@@ -64,16 +64,18 @@ final class TaxonSpec extends ObjectBehavior
         TaxonInterface $categoryTaxon,
         TaxonInterface $tshirtsTaxon
     ) {
-        $categoryTaxon->getParent()->willReturn(null);
         $tshirtsTaxon->getParent()->willReturn($categoryTaxon);
+
+        $tshirtsTaxon->addChild($this)->shouldBeCalled();
         $this->setParent($tshirtsTaxon);
-        
+
         $this->getParents()->shouldReturn([$tshirtsTaxon, $categoryTaxon]);
     }
 
     function it_returns_an_array_of_with_a_single_parent_taxon(TaxonInterface $parentTaxon)
     {
         $parentTaxon->getParent()->willReturn(null);
+        $parentTaxon->addChild($this)->shouldBeCalled();
         $this->setParent($parentTaxon);
 
         $this->getParents()->shouldReturn([$parentTaxon]);
@@ -168,6 +170,7 @@ final class TaxonSpec extends ObjectBehavior
 
     function it_allows_to_add_child_taxons(TaxonInterface $taxon)
     {
+        $taxon->getParent()->willReturn(null);
         $taxon->setParent($this)->shouldBeCalled();
 
         $this->addChild($taxon);
@@ -175,6 +178,7 @@ final class TaxonSpec extends ObjectBehavior
 
     function it_allows_to_remove_child_taxons(TaxonInterface $taxon)
     {
+        $taxon->getParent()->willReturn(null);
         $taxon->setParent($this)->shouldBeCalled();
 
         $this->addChild($taxon);

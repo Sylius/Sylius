@@ -19,3 +19,19 @@ sylius_admin_taxon_index:
         _controller: FrameworkBundle:Redirect:redirect
         route: sylius_admin_taxon_create
         permanent: true
+
+sylius_admin_taxon_create_for_parent:
+    path: /taxons/new/{id}
+    defaults:
+        _controller: sylius.controller.taxon:createAction
+        _sylius:
+            section: admin
+            template: 'SyliusAdminBundle:Taxon:create.html.twig'
+            redirect: sylius_admin_taxon_update
+            factory:
+                method: createForParent
+                arguments: ['expr:service("sylius.repository.taxon").find($id)']
+            vars:
+                subheader: sylius.ui.manage_categorization_of_your_product
+                templates:
+                    form: @SyliusAdmin/Taxon/_form.html.twig

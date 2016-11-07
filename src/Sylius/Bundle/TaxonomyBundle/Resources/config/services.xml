@@ -17,5 +17,10 @@
             <argument type="service" id="sylius.repository.taxon" />
             <tag name="form.type" alias="sylius_taxon_choice" />
         </service>
+
+        <service id="sylius.factory.taxon.decorated" class="Sylius\Component\Taxonomy\Factory\TaxonFactory"
+                 decorates="sylius.factory.taxon" public="false">
+            <argument type="service" id="sylius.factory.taxon.decorated.inner" />
+        </service>
     </services>
 </container>

@@ -64,7 +64,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $filesPath = $this->getParameter('files_path');
 
-        $this->getDocument()->clickLink('Add');
+        $this->getDocument()->find('css', '[data-form-collection="add"]')->click();
 
         $imageForm = $this->getLastImageElement();
         if (null !== $code) {
@@ -127,6 +127,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
         $imageForm = $this->getImageElementByCode($code);
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getParent()
+    {
+        return $this->getElement('parent')->getValue();
     }
 
     /**

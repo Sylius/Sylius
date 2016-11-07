@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Admin\Taxon\CreateForParentPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -35,6 +36,11 @@ final class ManagingTaxonsContext implements Context
     private $createPage;
 
     /**
+     * @var CreateForParentPageInterface
+     */
+    private $createForParentPage;
+
+    /**
      * @var UpdatePageInterface
      */
     private $updatePage;
@@ -47,17 +53,20 @@ final class ManagingTaxonsContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param CreatePageInterface $createPage
+     * @param CreateForParentPageInterface $createForParentPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CreatePageInterface $createPage,
+        CreateForParentPageInterface $createForParentPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->createPage = $createPage;
+        $this->createForParentPage = $createForParentPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
     }
@@ -69,6 +78,14 @@ final class ManagingTaxonsContext implements Context
     public function iWantToCreateANewTaxon()
     {
         $this->createPage->open();
+    }
+
+    /**
+     * @Given I want to create a new taxon for :taxon
+     */
+    public function iWantToCreateANewTaxonForParent(TaxonInterface $taxon)
+    {
+        $this->createForParentPage->open(['id' => $taxon->getId()]);
     }
 
     /**
@@ -238,6 +255,19 @@ final class ManagingTaxonsContext implements Context
         Assert::true(
             $this->updatePage->hasResourceValues(['parent' => $taxon->getId()]),
             sprintf('Current taxon should have %s parent taxon.', $taxon->getName())
+        );
+    }
+
+    /**
+     * @Given it should not belong to any other taxon
+     */
+    public function itShouldNotBelongToAnyOtherTaxon()
+    {
+        $parent = $this->updatePage->getParent();
+
+        Assert::isEmpty(
+            $parent,
+            sprintf('Current taxon should not belong to any other, but it does belong to "%s"', $parent)
         );
     }
 

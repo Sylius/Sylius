@@ -27,14 +27,4 @@ Feature: Adding a new taxon
         And I add it
         Then I should be notified that it has been successfully created
         And the "Category" taxon should appear in the registry
-
-    @ui
-    Scenario: Adding a new taxon with parent taxon
-        Given the store has "Category" taxonomy
-        And I want to create a new taxon
-        When I specify its code as "stickers"
-        And I name it "Stickers" in "English (United States)"
-        And I choose "Category" as a parent taxon
-        And I add it
-        Then I should be notified that it has been successfully created
-        And the "Stickers" taxon should appear in the registry
+        And it should not belong to any other taxon
