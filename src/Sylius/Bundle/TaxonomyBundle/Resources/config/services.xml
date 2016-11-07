@@ -27,5 +27,9 @@
                  decorates="sylius.factory.taxon" public="false">
             <argument type="service" id="sylius.factory.taxon.decorated.inner" />
         </service>
+
+        <service id="sylius.generator.taxon_slug" class="Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator">
+            <argument type="service" id="sylius.repository.taxon" />
+        </service>
     </services>
 </container>
