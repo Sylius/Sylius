@@ -1,0 +1,23 @@
+<div class="ui tab" data-tab="associations">
+    <h3 class="ui dividing header">{{ 'sylius.ui.associations'|trans }}</h3>
+
+    {% for associationForm in form.associations %}
+        <div class="field">
+            {{ form_label(associationForm) }}
+            <div id="product-select" class="ui fluid multiple search selection dropdown">
+                {{ form_widget(associationForm, {'attr': {'class' : 'autocomplete'}}) }}
+                <i class="dropdown icon"></i>
+                <div class="default text">{{'sylius.ui.select_products'|trans}}</div>
+                <div class="menu">
+                    {% for association in product.associations %}
+                        {% if association.type.code == associationForm.vars.name %}
+                            {% for associatedObject in association.associatedObjects %}
+                                <div class="item" data-value="{{ associatedObject.id }}">{{ associatedObject.name }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
