@@ -90,6 +90,7 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @Given /^I want to modify the ("[^"]+" taxon)$/
+     * @Given /^I want to modify (this taxon)$/
      */
     public function iWantToModifyATaxon(TaxonInterface $taxon)
     {
