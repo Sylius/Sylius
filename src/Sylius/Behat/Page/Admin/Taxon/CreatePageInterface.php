@@ -112,5 +112,5 @@ interface CreatePageInterface extends BaseCreatePageInterface
      *
      * @throws ElementNotFoundException
      */
-    public function getLeafs(TaxonInterface $parentTaxon = null);
+    public function getLeaves(TaxonInterface $parentTaxon = null);
 }

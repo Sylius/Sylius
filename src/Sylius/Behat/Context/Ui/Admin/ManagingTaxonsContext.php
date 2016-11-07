@@ -516,9 +516,9 @@ final class ManagingTaxonsContext implements Context
      */
     public function theyShouldHaveOrderLikeAnd(...$taxonsNames)
     {
-        $leafs = $this->createPage->getLeafs();
+        $leaves = $this->createPage->getLeaves();
 
-        foreach ($leafs as $key => $leaf) {
+        foreach ($leaves as $key => $leaf) {
             Assert::contains($taxonsNames[$key], $leaf->getText());
         }
     }

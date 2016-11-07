@@ -5,7 +5,6 @@
 
         $('.sylius-delete-resource').api({
             method: 'delete',
-            debug: true,
             onSuccess: function (response) {
                 var redirectUrl = $(this).data('success-redirect-url');
 

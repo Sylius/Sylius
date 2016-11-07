@@ -6,8 +6,6 @@
         $('.sylius-sortable-list').sortable({
             forceFallback: true,
             onEnd: function (event) {
-                console.log(event.item);
-                console.log(event.newIndex);
                 $(this).api({
                     throttle: 500,
                     method: 'PUT',

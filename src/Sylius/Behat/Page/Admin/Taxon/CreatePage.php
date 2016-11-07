@@ -32,7 +32,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function countTaxons()
     {
-        return count($this->getLeafs());
+        return count($this->getLeaves());
     }
 
     /**
@@ -40,15 +40,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function countTaxonsByName($name)
     {
-        $matchedLeafsCounter = 0;
-        $leafs = $this->getLeafs();
-        foreach ($leafs as $leaf) {
+        $matchedLeavesCounter = 0;
+        $leaves = $this->getLeaves();
+        foreach ($leaves as $leaf) {
             if (strpos($leaf->getText(), $name) !== false) {
-                $matchedLeafsCounter++;
+                $matchedLeavesCounter++;
             }
         }
 
-        return $matchedLeafsCounter;
+        return $matchedLeavesCounter;
     }
 
     /**
@@ -64,16 +64,17 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function deleteTaxonOnPageByName($name)
     {
-        $leafs = $this->getLeafs();
-        foreach ($leafs as $leaf) {
+        $leaves = $this->getLeaves();
+        foreach ($leaves as $leaf) {
             if ($leaf->getText() === $name) {
                 $leaf = $leaf->getParent();
                 $menuButton = $leaf->find('css', '.wrench');
                 $menuButton->click();
                 $deleteButton = $leaf->find('css', '.sylius-delete-resource');
                 $deleteButton->click();
-                $deleteButton->waitFor(5, function () use ($name) {
-                    return $this->getFirstLeafName() !== $name;
+
+                $deleteButton->waitFor(5, function () {
+                    return false;
                 });
 
                 return;
@@ -150,7 +151,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function getFirstLeafName(TaxonInterface $parentTaxon = null)
     {
-        return $this->getLeafs($parentTaxon)[0]->getText();
+        return $this->getLeaves($parentTaxon)[0]->getText();
     }
 
     /**
@@ -162,7 +163,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $draggableTaxonLocator = sprintf('.item[data-id="%s"]', $draggableTaxon->getId());
         $targetTaxonLocator = sprintf('.item[data-id="%s"]', $targetTaxon->getId());
 
-        #TODO make DragAndDropSimulator
         $script = <<<JS
 (function ($) {
     $('$draggableTaxonLocator').simulate('drag-n-drop',{
@@ -173,24 +173,26 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 JS;
 
         $seleniumDriver->executeScript($script);
-        sleep(3);
+        $this->getDocument()->waitFor(5, function () {
+            return false;
+        });
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getLeafs(TaxonInterface $parentTaxon = null)
+    public function getLeaves(TaxonInterface $parentTaxon = null)
     {
         $tree = $this->getElement('tree');
         Assert::notNull($tree);
-        /** @var NodeElement[] $leafs */
-        $leafs = $tree->findAll('css', '.item > .content > .header');
+        /** @var NodeElement[] $leaves */
+        $leaves = $tree->findAll('css', '.item > .content > .header');
 
         if (null === $parentTaxon) {
-            return $leafs;
+            return $leaves;
         }
 
-        foreach ($leafs as $leaf) {
+        foreach ($leaves as $leaf) {
             if ($leaf->getText() === $parentTaxon->getName()) {
                 return $leaf->findAll('css', '.item > .content > .header');
             }
@@ -223,8 +225,8 @@ JS;
     {
         Assert::oneOf($direction, [self::MOVE_DIRECTION_UP, self::MOVE_DIRECTION_DOWN]);
 
-        $leafs = $this->getLeafs();
-        foreach ($leafs as $leaf) {
+        $leaves = $this->getLeaves();
+        foreach ($leaves as $leaf) {
             if ($leaf->getText() === $taxon->getName()) {
                 $leaf = $leaf->getParent();
                 $menuButton = $leaf->find('css', '.wrench');
