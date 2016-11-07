@@ -13,5 +13,6 @@ Cookbook
     api
     images
     checkout
+    embedding-products
 
 .. include:: /cookbook/map.rst.inc
