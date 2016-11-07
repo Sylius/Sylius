@@ -6,3 +6,4 @@
 * :doc:`/cookbook/api`
 * :doc:`/cookbook/images`
 * :doc:`/cookbook/checkout`
+* :doc:`/cookbook/embedding-products`
