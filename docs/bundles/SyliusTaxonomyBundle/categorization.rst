@@ -79,7 +79,7 @@ Creating your forms
 -------------------
 
 To be able to apply taxonomies on your products, or whatever you are categorizing or tagging,
-it is handy to use `sylius_taxon_selection` form type:
+it is handy to use `sylius_taxon_choice` form type:
 
 .. code-block:: php
 
@@ -96,7 +96,7 @@ it is handy to use `sylius_taxon_selection` form type:
     {
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            $builder->add('taxons', 'sylius_taxon_selection');
+            $builder->add('taxons', 'sylius_taxon_choice');
         }
 
         public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -109,4 +109,4 @@ it is handy to use `sylius_taxon_selection` form type:
         }
     }
 
-This `sylius_taxon_selection` type will add a select input field for each taxonomy, with select option for each taxon.
+This `sylius_taxon_choice` type will add a select input field for each taxonomy, with select option for each taxon.
