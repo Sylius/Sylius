@@ -3,6 +3,11 @@ UPGRADE
 
 ## From 0.19 to 1.0.0-alpha
 
+### Association and AssociationBundle
+
+* Merged Association component with Product component
+* Merged AssociationBundle into ProductBundle
+
 ### Customer
 
  * Renamed ``Group`` to ``CustomerGroup``

@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class AssociationType implements AssociationTypeInterface
+class ProductAssociationType implements ProductAssociationTypeInterface
 {
     use TimestampableTrait;
 

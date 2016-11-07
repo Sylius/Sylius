@@ -63,6 +63,12 @@
             </cascade>
         </one-to-many>
 
+        <one-to-many field="associations" target-entity="Sylius\Component\Product\Model\ProductAssociationInterface" mapped-by="owner">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <gedmo:loggable />
     </mapped-superclass>
 

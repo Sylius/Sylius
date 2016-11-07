@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface AssociationTypeInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
+interface ProductAssociationTypeInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * @return string
