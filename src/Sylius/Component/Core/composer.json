@@ -24,7 +24,6 @@
 
         "knplabs/gaufrette": "0.2.*@dev",
         "sylius/addressing": "^1.0",
-        "sylius/association": "^1.0",
         "sylius/attribute": "^1.0",
         "sylius/channel": "^1.0",
         "sylius/contact": "^1.0",

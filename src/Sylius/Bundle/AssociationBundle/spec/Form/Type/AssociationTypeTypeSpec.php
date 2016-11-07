@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\AssociationBundle\Form\Type\AssociationTypeType;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Association\Model\AssociationType;
+use Sylius\Component\Product\Model\AssociationType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**

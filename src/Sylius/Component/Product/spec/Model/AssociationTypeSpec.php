@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Association\Model;
+namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Association\Model\AssociationType;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
+use Sylius\Component\Product\Model\AssociationType;
+use Sylius\Component\Product\Model\AssociationTypeInterface;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>

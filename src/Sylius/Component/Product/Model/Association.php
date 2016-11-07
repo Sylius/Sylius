@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Association\Model;
+namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Resource\Model\TimestampableTrait;

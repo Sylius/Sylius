@@ -16,7 +16,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductAssociationType\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductAssociationType\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
+use Sylius\Component\Product\Model\AssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
 /**

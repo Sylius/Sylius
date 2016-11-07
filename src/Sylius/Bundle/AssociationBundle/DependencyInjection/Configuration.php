@@ -16,7 +16,7 @@ use Sylius\Bundle\AssociationBundle\Form\Type\AssociationTypeType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Association\Model\AssociationType as AssociationTypeModel;
+use Sylius\Component\Product\Model\AssociationType as AssociationTypeModel;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;

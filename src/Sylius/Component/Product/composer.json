@@ -24,7 +24,6 @@
 
         "behat/transliterator": "^1.1",
         "sylius/attribute": "^1.0",
-        "sylius/association": "^1.0",
         "sylius/resource": "^1.0",
         "symfony/polyfill-iconv": "~1.0",
         "webmozart/assert": "^1.0"

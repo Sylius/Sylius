@@ -36,7 +36,7 @@
         "symfony/form": "^2.8",
         "symfony/validator": "^2.8",
         "sylius/resource-bundle": "^1.0",
-        "sylius/association": "^1.0"
+        "sylius/product": "^1.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^3.1"

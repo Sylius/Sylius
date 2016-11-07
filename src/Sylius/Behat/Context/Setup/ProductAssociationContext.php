@@ -13,7 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
+use Sylius\Component\Product\Model\AssociationTypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;

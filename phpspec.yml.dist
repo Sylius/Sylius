@@ -1,5 +1,4 @@
 suites:
-    Association: { namespace: Sylius\Component\Association, psr4_prefix: Sylius\Component\Association, spec_path: src/Sylius/Component/Association, src_path: src/Sylius/Component/Association }
     Addressing: { namespace: Sylius\Component\Addressing, psr4_prefix: Sylius\Component\Addressing, spec_path: src/Sylius/Component/Addressing, src_path: src/Sylius/Component/Addressing }
     Archetype: { namespace: Sylius\Component\Archetype, psr4_prefix: Sylius\Component\Archetype, spec_path: src/Sylius/Component/Archetype, src_path: src/Sylius/Component/Archetype }
     Attribute: { namespace: Sylius\Component\Attribute, psr4_prefix: Sylius\Component\Attribute, spec_path: src/Sylius/Component/Attribute, src_path: src/Sylius/Component/Attribute }

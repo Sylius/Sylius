@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AssociationBundle\Form\Type\AssociationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Association\Model\Association;
+use Sylius\Component\Product\Model\Association;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
