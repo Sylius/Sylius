@@ -16,7 +16,7 @@ Feature: Editing taxon's slug
         And I add it
         Then this taxon slug should be "medieval-weapons"
 
-    @ui @javascript @todo
+    @ui
     Scenario: Creating a root taxon with a custom slug
         Given I want to create a new taxon
         When I specify its code as "MEDIEVAL_WEAPONS"
@@ -34,7 +34,7 @@ Feature: Editing taxon's slug
         And I add it
         Then this taxon slug should be "medieval-weapons/siege-engines"
 
-    @ui @javascript @todo
+    @ui
     Scenario: Creating a taxon with a custom slug for parent
         Given the store has "Medieval weapons" taxonomy
         And I want to create a new taxon for "Medieval weapons"

@@ -218,6 +218,7 @@
             <argument type="service" id="__symfony__.sylius.factory.taxon_image" />
             <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
             <argument type="service" id="__symfony__.sylius.image_uploader" />
+            <argument type="service" id="__symfony__.sylius.generator.taxon_slug" />
             <argument>%__behat__.mink.parameters%</argument>
             <tag name="fob.context_service" />
         </service>

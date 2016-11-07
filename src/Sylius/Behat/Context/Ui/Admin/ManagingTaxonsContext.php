@@ -124,6 +124,21 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When I set its slug to :slug
+     */
+    public function iSetItsSlugTo($slug)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->createPage,
+            $this->createForParentPage,
+            $this->updatePage,
+        ]);
+
+        $currentPage->specifySlug($slug);
+    }
+
+    /**
      * @When I change its description to :description in :language
      */
     public function iChangeItsDescriptionToIn($description, $language)

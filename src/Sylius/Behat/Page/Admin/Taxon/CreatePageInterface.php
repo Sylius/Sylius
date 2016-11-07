@@ -71,6 +71,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyCode($code);
 
     /**
+     * @param string $slug
+     */
+    public function specifySlug($slug);
+
+    /**
      * @param string $path
      * @param string $code
      */

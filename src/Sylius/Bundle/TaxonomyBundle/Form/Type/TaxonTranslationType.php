@@ -29,7 +29,6 @@ class TaxonTranslationType extends AbstractResourceType
                 'label' => 'sylius.form.taxon.name',
             ])
             ->add('slug', 'text', [
-                'required' => false,
                 'label' => 'sylius.form.taxon.slug',
             ])
             ->add('description', 'textarea', [

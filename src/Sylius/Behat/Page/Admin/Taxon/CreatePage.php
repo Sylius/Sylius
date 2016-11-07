@@ -111,6 +111,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function specifySlug($slug)
+    {
+        $this->getDocument()->fillField('Slug', $slug);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function attachImage($path, $code = null)
     {
         $filesPath = $this->getParameter('files_path');

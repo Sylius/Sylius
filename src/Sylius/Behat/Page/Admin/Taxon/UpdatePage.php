@@ -52,6 +52,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function specifySlug($slug)
+    {
+        $this->getDocument()->fillField('Slug', $slug);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function attachImage($path, $code = null)
     {
         $filesPath = $this->getParameter('files_path');

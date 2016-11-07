@@ -43,6 +43,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function nameIt($name, $languageCode);
 
     /**
+     * @param string $slug
+     */
+    public function specifySlug($slug);
+
+    /**
      * @return bool
      */
     public function isImageCodeDisabled();
