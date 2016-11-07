@@ -518,7 +518,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::same(
             $this->showPage->getPaymentState(),
-            OrderPaymentStates::STATE_REFUNDED,
+            'Refunded',
             'Order payment state should be refunded, but it is not.'
         );
     }
