@@ -43,12 +43,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function nameIt($name, $languageCode);
 
     /**
-     * @param string $permalink
-     * @param string $languageCode
-     */
-    public function specifyPermalink($permalink, $languageCode);
-
-    /**
      * @return bool
      */
     public function isImageCodeDisabled();

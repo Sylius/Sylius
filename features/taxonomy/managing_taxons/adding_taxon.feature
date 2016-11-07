@@ -18,11 +18,11 @@ Feature: Adding a new taxon
         And the "T-Shirts" taxon should appear in the registry
 
     @ui
-    Scenario: Adding a new taxon with permalink and description
+    Scenario: Adding a new taxon with slug and description
         Given I want to create a new taxon
         When I specify its code as "category"
         And I name it "Category" in "English (United States)"
-        And I specify its permalink as "category" in "English (United States)"
+        And I specify its slug as "category" in "English (United States)"
         And I describe it as "Main taxonomy for products." in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created

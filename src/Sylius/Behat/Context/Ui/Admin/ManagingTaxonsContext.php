@@ -132,22 +132,6 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I specify its permalink as :permalink in :language
-     */
-    public function iSpecifyItsPermalinkAs($permalink, $language)
-    {
-        $this->createPage->specifyPermalink($permalink, $language);
-    }
-
-    /**
-     * @When I change its permalink to :permalink in :language
-     */
-    public function iChangeItsPermalinkToIn($permalink, $language)
-    {
-        $this->updatePage->specifyPermalink($permalink, $language);
-    }
-
-    /**
      * @When I describe it as :description in :language
      */
     public function iDescribeItAs($description, $language)

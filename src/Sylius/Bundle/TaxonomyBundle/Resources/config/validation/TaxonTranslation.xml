@@ -26,10 +26,10 @@
         </property>
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">
-            <value>locale</value>
-            <value>permalink</value>
+                <value>locale</value>
+                <value>slug</value>
             </option>
-            <option name="message">sylius.permalink.unique</option>
+            <option name="message">sylius.slug.unique</option>
             <option name="groups">sylius</option>
         </constraint>
     </class>

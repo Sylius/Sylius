@@ -111,14 +111,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPermalink($permalink, $languageCode)
-    {
-        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_permalink', $languageCode), $permalink);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function attachImage($path, $code = null)
     {
         $filesPath = $this->getParameter('files_path');
@@ -210,7 +202,7 @@ JS;
             'images' => '#sylius_taxon_images',
             'name' => '#sylius_taxon_translations_en_US_name',
             'parent' => '#sylius_taxon_parent',
-            'permalink' => '#sylius_taxon_translations_en_US_permalink',
+            'slug' => '#sylius_taxon_translations_en_US_slug',
             'tree' => '.ui.list',
         ]);
     }

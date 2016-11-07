@@ -93,13 +93,13 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findOneByPermalink($permalink)
+    public function findOneBySlug($slug)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->where('translation.permalink = :permalink')
-            ->setParameter('permalink', $permalink)
+            ->where('translation.slug = :slug')
+            ->setParameter('slug', $slug)
             ->orderBy('o.position')
             ->getQuery()
             ->getOneOrNullResult()

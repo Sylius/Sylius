@@ -2,14 +2,14 @@
 # (c) Paweł Jędrzejewski
 
 sylius_shop_taxon_show:
-    path: /taxons/{permalink}
+    path: /taxons/{slug}
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:showAction
         _sylius:
             template: SyliusShopBundle:Taxon:show.html.twig
             repository:
-                method: findOneByPermalink
-                arguments: [$permalink]
+                method: findOneBySlug
+                arguments: [$slug]
     requirements:
-        permalink: .+
+        slug: .+

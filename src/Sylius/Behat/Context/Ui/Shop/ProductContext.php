@@ -139,7 +139,7 @@ final class ProductContext implements Context
      */
     public function iCheckListOfProductsForTaxon(TaxonInterface $taxon)
     {
-        $this->taxonShowPage->open(['permalink' => $taxon->getPermalink()]);
+        $this->taxonShowPage->open(['slug' => $taxon->getSlug()]);
     }
 
     /**
@@ -295,7 +295,7 @@ final class ProductContext implements Context
     {
         $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
 
-        $this->taxonShowPage->open(['permalink' => $taxon->getPermalink(), 'sorting' => $sorting]);
+        $this->taxonShowPage->open(['slug' => $taxon->getSlug(), 'sorting' => $sorting]);
     }
 
     /**
