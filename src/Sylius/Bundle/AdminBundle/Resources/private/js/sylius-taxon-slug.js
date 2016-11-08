@@ -17,14 +17,14 @@ $(document).ready(function() {
 });
 
 function updateSlug($element) {
-    $form = $element.parents('form');
     $slugInput = $element.parents('.content').find('[name*="[slug]"]');
+    $loadableParent = $slugInput.parents('.field.loadable');
 
     if ('readonly' == $slugInput.attr('readonly')) {
         return;
     }
 
-    $form.addClass('loading');
+    $loadableParent.addClass('loading');
 
     if ('' != $slugInput.attr('data-parent') && undefined != $slugInput.attr('data-parent')) {
         $data = { name: $element.val(), parentId: $slugInput.attr('data-parent') };
@@ -46,7 +46,7 @@ function updateSlug($element) {
                 $slugInput.parents('.field').removeClass('error');
                 $slugInput.parents('.field').find('.sylius-validation-error').remove();
             }
-            $form.removeClass('loading');
+            $loadableParent.removeClass('loading');
         }
     });
 }
@@ -54,9 +54,9 @@ function updateSlug($element) {
 function toggleSlugModification($button, $slugInput) {
     if ($slugInput.attr('readonly')) {
         $slugInput.removeAttr('readonly');
-        $button.html('<i class="lock icon"></i>');
+        $button.html('<i class="unlock icon"></i>');
     } else {
         $slugInput.attr('readonly', 'readonly');
-        $button.html('<i class="unlock icon"></i>');
+        $button.html('<i class="lock icon"></i>');
     }
 }

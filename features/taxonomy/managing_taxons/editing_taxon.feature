@@ -31,7 +31,7 @@ Feature: Editing a taxon
         Given I want to modify the "T-Shirts" taxon
         When I rename it to "Stickers" in "English (United States)"
         And I change its description to "Main taxonomy for stickers" in "English (United States)"
-        And I change its slug to "stickers" in "English (United States)"
+        And I set its slug to "stickers"
         And I change its parent taxon to "Accessories"
         And I save my changes
         Then I should be notified that it has been successfully edited
