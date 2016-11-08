@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    order_payment:
+        refunded: Płatność została zwrócona.
+    product_review:
+        accepted: Opinia o produkcie została zaakceptowana.
+        rejected: Opinia o produkcie została odrzucona.

@@ -28,6 +28,8 @@ sylius:
             cart_quantity_configuration:
                 count: Ilość
                 equal: Równe
+            contains_product_configuration:
+                variants: Produkty
             item_total_configuration:
                 amount: Kwota
             shipping_country_configuration:

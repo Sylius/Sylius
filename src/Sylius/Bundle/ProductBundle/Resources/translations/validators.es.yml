@@ -13,6 +13,8 @@ sylius:
             not_blank: Por favor introduzca el nombre del producto.
             min_length: El nombre del producto debe tener al menos 1 carácter.|El nombre de producto debe tener al menos {{ limit }} caracteres.
             max_length: El nombre de producto debe tener como máximo 1 carácter.|El nombre de producto no debe tener más de {{ limit }} caracteres.
+        slug:
+            not_blank: Por favor, introduzca un slug de producto.
     variant:
         sku:
             not_blank: Por favor introduzca el SKU de la variante.

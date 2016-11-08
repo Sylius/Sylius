@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    ui:
+        add_member: Lisa liige
+        add_province: Lisa provints
+        city: Linn
+        company: Ettevõtte
+        country: Riik
+        members: Liikmed
+        phone_number: Telefoni number
+        postcode: Pistiindeks
+        province: Provints
+        provinces: Provintsid
+        street: Tänav
+        type: Tüüp

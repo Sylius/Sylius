@@ -78,6 +78,7 @@ sylius:
         awaiting_payment: Erwarte Zahlungseingang
         back: Zurück
         back_to_store: Zurück zum Shop
+        back_to_details: Zurück zu den Details
         backorder: Lieferrückstand
         backordered: Wird nachgeliefert
         balance_due: Zahlung fällig
@@ -212,6 +213,7 @@ sylius:
         data: Daten
         date: Datum
         default: Standard
+        default_address: Standardadresse
         default_billing_address: Standard-Rechnungsadresse
         default_currency: Standardwährung
         default_locale: Standard Lokalisierung
@@ -226,6 +228,7 @@ sylius:
         disabled: Deaktiviert
         discount: Nachlass
         discounted_unit_price: Reduzierter Stückpreis
+        display: Darstellung
         edit: Bearbeiten
         edit_admin_user: Administrator bearbeiten
         edit_association_type: Verbindungstyp bearbeiten
@@ -236,6 +239,7 @@ sylius:
         edit_customer: Kunde bearbeiten
         edit_locale: Gebietsschema bearbeiten
         edit_my_address: Adresse bearbeiten
+        edit_order: Bestellung bearbeiten
         edit_payment_method: Zahlart bearbeiten
         edit_product: Produkt bearbeiten
         edit_product_attribute: Produkteingenschaft bearbeiten
@@ -290,6 +294,7 @@ sylius:
         editing_zone: Gebiet bearbeiten
         email: E-Mail
         email_templates: E-Mail Templates
+        email_verified: E-Mail verifiziert
         emails: E-Mails
         empty: Leeren
         enable: Aktivieren
@@ -327,6 +332,7 @@ sylius:
         go: Los
         go_to_dashboard: Zum Dashboard
         grand_total: Gesamtbetrag
+        group_membership: Gruppenmitgliedschaft
         guest: Gastbestellung
         guest_customer: Gast Kunde
         hello: Hallo
@@ -353,6 +359,7 @@ sylius:
         inventory_tracking: Warenbestandsverfolgung
         invoice: Rechnung
         is_enabled: Ist aktiviert
+        it_seems_you_have_an_account_already: Es scheint, dass Sie bereits über ein Konto verfügen
         item: Produkt
         items: Artikel
         items_total: Gesamtanzahl

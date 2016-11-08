@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            max_length: Linn ei tohi olla pikem kui 255 märki | Linn ei tohi olla pikem kui 255 märki.
+            min_length: Linn peab olema 2 tähemärki pikk | Linn peab olema 2 tähemärki pikk.
+            not_blank: Palun sisestage linn.
+        country:
+            not_blank: Palun valige riik.
