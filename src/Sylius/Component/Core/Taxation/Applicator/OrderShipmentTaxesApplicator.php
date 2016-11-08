@@ -15,9 +15,9 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
-use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
@@ -61,25 +61,17 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
      */
     public function apply(OrderInterface $order, ZoneInterface $zone)
     {
-        /** @var TaxableInterface|ShipmentInterface $lastShipment */
-        $lastShipment = $order->getLastShipment();
-        if (null === $lastShipment) {
+        $shippingTotal = $order->getShippingTotal();
+        if (0 === $shippingTotal) {
             return;
         }
 
-        $shippingAdjustments = $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
-        if ($shippingAdjustments->isEmpty()) {
-            return;
-        }
-
-        $taxRate = $this->taxRateResolver->resolve($lastShipment->getMethod(), ['zone' => $zone]);
+        $taxRate = $this->taxRateResolver->resolve($this->getShippingMethod($order), ['zone' => $zone]);
         if (null === $taxRate) {
             return;
         }
 
-        $shippingPrice = $order->getShippingTotal();
-
-        $taxAmount = $this->calculator->calculate($shippingPrice, $taxRate);
+        $taxAmount = $this->calculator->calculate($shippingTotal, $taxRate);
         if (0 === $taxAmount) {
             return;
         }
@@ -100,5 +92,21 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
             ->createWithData(AdjustmentInterface::TAX_ADJUSTMENT, $label, $taxAmount, $included)
         ;
         $order->addAdjustment($shippingTaxAdjustment);
+    }
+
+    /**
+     * @param OrderInterface $order
+     *
+     * @return ShippingMethodInterface
+     */
+    private function getShippingMethod(OrderInterface $order)
+    {
+        /** @var ShipmentInterface $shipment */
+        $shipment = $order->getShipments()->first();
+        if (false === $shipment) {
+            throw new \LogicException('Order should have at least one shipment.');
+        }
+
+        return $shipment->getMethod();
     }
 }

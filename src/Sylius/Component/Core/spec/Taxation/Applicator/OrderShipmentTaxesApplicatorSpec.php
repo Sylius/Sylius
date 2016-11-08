@@ -11,7 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Taxation\Applicator;
 
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -55,22 +55,18 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         AdjustmentFactoryInterface $adjustmentsFactory,
         TaxRateResolverInterface $taxRateResolver,
         AdjustmentInterface $shippingTaxAdjustment,
-        Collection $shippingAdjustments,
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
     ) {
-        $order->getLastShipment()->willReturn($shipment);
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
         $shipment->getMethod()->willReturn($shippingMethod);
         $taxRateResolver->resolve($shippingMethod, ['zone' => $zone])->willReturn($taxRate);
 
         $taxRate->getLabel()->willReturn('Simple tax (10%)');
         $taxRate->isIncludedInPrice()->willReturn(false);
-
-        $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
-        $shippingAdjustments->isEmpty()->willReturn(false);
 
         $order->getShippingTotal()->willReturn(1000);
 
@@ -85,23 +81,19 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_does_nothing_if_there_are_no_shipment_taxes_on_order(
+    function it_does_nothing_if_the_tax_amount_is_0(
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         TaxRateResolverInterface $taxRateResolver,
-        Collection $shippingAdjustments,
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         TaxRateInterface $taxRate,
         ZoneInterface $zone
     ) {
-        $order->getLastShipment()->willReturn($shipment);
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
         $shipment->getMethod()->willReturn($shippingMethod);
         $taxRateResolver->resolve($shippingMethod, ['zone' => $zone])->willReturn($taxRate);
-
-        $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
-        $shippingAdjustments->isEmpty()->willReturn(false);
 
         $order->getShippingTotal()->willReturn(1000);
 
@@ -113,49 +105,45 @@ final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_does_nothing_if_order_has_no_shipment(
-        TaxRateResolverInterface $taxRateResolver,
+    function it_throws_exception_if_order_has_no_shipment_but_shipment_total_is_greater_than_0(
         OrderInterface $order,
         ZoneInterface $zone
     ) {
-        $order->getLastShipment()->willReturn(null);
-        $taxRateResolver->resolve(Argument::any())->shouldNotBeCalled();
+        $order->getShippingTotal()->willReturn(10);
+        $order->getShipments()->willReturn(new ArrayCollection([]));
 
-        $this->apply($order, $zone);
+        $this->shouldThrow(\LogicException::class)->during('apply', [$order, $zone]);;
     }
 
     function it_does_nothing_if_tax_rate_cannot_be_resolved(
+        CalculatorInterface $calculator,
         TaxRateResolverInterface $taxRateResolver,
-        Collection $shippingAdjustments,
         OrderInterface $order,
         ShipmentInterface $shipment,
         ShippingMethodInterface $shippingMethod,
         ZoneInterface $zone
     ) {
-        $order->getLastShipment()->willReturn($shipment);
+        $order->getShippingTotal()->willReturn(100);
+        $order->getShipments()->willReturn(new ArrayCollection([$shipment->getWrappedObject()]));
         $shipment->getMethod()->willReturn($shippingMethod);
 
-        $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
-        $shippingAdjustments->isEmpty()->willReturn(false);
-
         $taxRateResolver->resolve($shippingMethod, ['zone' => $zone])->willReturn(null);
+
+        $calculator->calculate(Argument::any())->shouldNotBeCalled();
+        $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
         $this->apply($order, $zone);
     }
 
-    function it_does_nothing_if_order_has_no_shipping_adjustments(
+    function it_does_nothing_if_order_has_0_shipping_total(
         TaxRateResolverInterface $taxRateResolver,
-        Collection $shippingAdjustments,
         OrderInterface $order,
-        ShipmentInterface $shipment,
         ZoneInterface $zone
     ) {
-        $order->getLastShipment()->willReturn($shipment);
-
-        $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
-        $shippingAdjustments->isEmpty()->willReturn(true);
+        $order->getShippingTotal()->willReturn(0);
 
         $taxRateResolver->resolve(Argument::any())->shouldNotBeCalled();
+        $order->addAdjustment(Argument::any())->shouldNotBeCalled();
 
         $this->apply($order, $zone);
     }
