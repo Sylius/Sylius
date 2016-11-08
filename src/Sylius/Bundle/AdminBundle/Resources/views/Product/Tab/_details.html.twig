@@ -33,7 +33,7 @@
                 <i class="dropdown icon"></i>
                 <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
             </div>
-            <div class="content{% if 0 == loop.index0 %} active{% endif %}">
+            <div class="ui content{% if 0 == loop.index0 %} active{% endif %}">
                 {{ form_row(translationForm.name) }}
                 {% include '@SyliusAdmin/Product/_slugField.html.twig' with { 'slugField': translationForm.slug } %}
                 {{ form_row(translationForm.shortDescription, {'attr': {'rows': 3}}) }}
