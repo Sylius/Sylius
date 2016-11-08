@@ -68,7 +68,7 @@ final class CapturePaymentAction extends GatewayAwareAction
                 $payumPayment->setDescription(sprintf(
                     'Payment contains %d items for a total of %01.2f',
                     $order->getItems()->count(),
-                    $totalAmount
+                    round($totalAmount / 100, 2)
                 ));
                 $payumPayment->setDetails($payment->getDetails());
 
