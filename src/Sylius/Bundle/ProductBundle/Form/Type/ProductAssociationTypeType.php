@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AssociationBundle\Form\Type;
+namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -18,35 +18,18 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  */
-class AssociationTypeType extends AbstractResourceType
+class ProductAssociationTypeType extends AbstractResourceType
 {
-    /**
-     * @var string
-     */
-    private $subject;
-
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param string $subject
-     */
-    public function __construct($dataClass, array $validationGroups = [], $subject)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->subject = $subject;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('name', 'text', [
-                'label' => sprintf('sylius.form.%s_association_type.name', $this->subject),
+                'label' => 'sylius.form.product_association_type.name',
             ])
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }
 
@@ -55,6 +38,6 @@ class AssociationTypeType extends AbstractResourceType
      */
     public function getName()
     {
-        return sprintf('sylius_%s_association_type', $this->subject);
+        return 'sylius_product_association_type';
     }
 }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Association\Model;
+namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface AssociationTypeInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
+interface ProductAssociationTypeInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
 {
     /**
      * @return string

@@ -16,7 +16,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductAssociationType\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductAssociationType\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -81,7 +81,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I want to modify the :productAssociationType product association type
      */
-    public function iWantToModifyAPaymentMethod(AssociationTypeInterface $productAssociationType)
+    public function iWantToModifyAPaymentMethod(ProductAssociationTypeInterface $productAssociationType)
     {
         $this->updatePage->open(['id' => $productAssociationType->getId()]);
     }
@@ -134,7 +134,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @When I delete the :productAssociationType product association type
      */
-    public function iDeleteTheProductAssociationType(AssociationTypeInterface $productAssociationType)
+    public function iDeleteTheProductAssociationType(ProductAssociationTypeInterface $productAssociationType)
     {
         $this->iWantToBrowseProductAssociationTypes();
 
@@ -173,7 +173,7 @@ final class ManagingProductAssociationTypesContext implements Context
     /**
      * @Then the product association type :productAssociationType should appear in the store
      */
-    public function theProductAssociationTypeShouldAppearInTheStore(AssociationTypeInterface $productAssociationType)
+    public function theProductAssociationTypeShouldAppearInTheStore(ProductAssociationTypeInterface $productAssociationType)
     {
         $this->indexPage->open();
 
@@ -191,7 +191,7 @@ final class ManagingProductAssociationTypesContext implements Context
      * @Then /^(this product association type) should still be named "([^"]+)"$/
      */
     public function thisProductAssociationTypeNameShouldBe(
-        AssociationTypeInterface $productAssociationType,
+        ProductAssociationTypeInterface $productAssociationType,
         $productAssociationTypeName
     ) {
         $this->iWantToBrowseProductAssociationTypes();
@@ -222,7 +222,7 @@ final class ManagingProductAssociationTypesContext implements Context
      * @Then /^(this product association type) should no longer exist in the registry$/
      */
     public function thisProductAssociationTypeShouldNoLongerExistInTheRegistry(
-        AssociationTypeInterface $productAssociationType
+        ProductAssociationTypeInterface $productAssociationType
     ) {
         Assert::false(
             $this->indexPage->isSingleResourceOnPage([

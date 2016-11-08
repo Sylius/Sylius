@@ -1,5 +1,4 @@
 suites:
-    Association: { namespace: Sylius\Component\Association, psr4_prefix: Sylius\Component\Association, spec_path: src/Sylius/Component/Association, src_path: src/Sylius/Component/Association }
     Addressing: { namespace: Sylius\Component\Addressing, psr4_prefix: Sylius\Component\Addressing, spec_path: src/Sylius/Component/Addressing, src_path: src/Sylius/Component/Addressing }
     Archetype: { namespace: Sylius\Component\Archetype, psr4_prefix: Sylius\Component\Archetype, spec_path: src/Sylius/Component/Archetype, src_path: src/Sylius/Component/Archetype }
     Attribute: { namespace: Sylius\Component\Attribute, psr4_prefix: Sylius\Component\Attribute, spec_path: src/Sylius/Component/Attribute, src_path: src/Sylius/Component/Attribute }
@@ -27,7 +26,6 @@ suites:
     Taxonomy: { namespace: Sylius\Component\Taxonomy, psr4_prefix: Sylius\Component\Taxonomy, spec_path: src/Sylius/Component/Taxonomy, src_path: src/Sylius/Component/Taxonomy }
     User: { namespace: Sylius\Component\User, psr4_prefix: Sylius\Component\User, spec_path: src/Sylius/Component/User, src_path: src/Sylius/Component/User }
 
-    AssociationBundle: { namespace: Sylius\Bundle\AssociationBundle, psr4_prefix: Sylius\Bundle\AssociationBundle, spec_path: src/Sylius/Bundle/AssociationBundle, src_path: src/Sylius/Bundle/AssociationBundle }
     AddressingBundle: { namespace: Sylius\Bundle\AddressingBundle, psr4_prefix: Sylius\Bundle\AddressingBundle, spec_path: src/Sylius/Bundle/AddressingBundle, src_path: src/Sylius/Bundle/AddressingBundle }
     AdminBundle: { namespace: Sylius\Bundle\AdminBundle, psr4_prefix: Sylius\Bundle\AdminBundle, spec_path: src/Sylius/Bundle/AdminBundle, src_path: src/Sylius/Bundle/AdminBundle }
     ApiBundle: { namespace: Sylius\Bundle\ApiBundle, psr4_prefix: Sylius\Bundle\ApiBundle, spec_path: src/Sylius/Bundle/ApiBundle, src_path: src/Sylius/Bundle/ApiBundle }

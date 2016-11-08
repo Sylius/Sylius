@@ -22,7 +22,7 @@ Create a new Association Type using a dedicated factory. Give the association a 
 
 .. code-block:: php
 
-    /** @var AssociationTypeInterface $associationType */
+    /** @var ProductAssociationTypeInterface $associationType */
     $associationType = $this->container->get('sylius.factory.product_association_type')->createNew();
 
     $associationType->setCode('accessories');
@@ -37,7 +37,7 @@ To have the new association type in the system add it to the repository.
 How to add a new Association to a Product?
 ------------------------------------------
 
-Find in your system a product to which you would like to add an association. We wiill use a Go Pro camera as an example.
+Find in your system a product to which you would like to add an association. We will use a Go Pro camera as an example.
 
 .. code-block:: php
 
@@ -51,7 +51,7 @@ in the previous step above.
     /** @var ProductAssociationInterface $association */
     $association = $this->container->get('sylius.factory.product_association')->createNew();
 
-    /** @var AssociationTypeInterface $associationType */
+    /** @var ProductAssociationTypeInterface $associationType */
     $associationType = $this->container->get('sylius.repository.product_association_type')->findOneBy(['code' => 'accessories']);
 
     $association->setType($associationType);
@@ -71,7 +71,7 @@ Having a collection of products from the SD cards taxon iterate over them and ad
 .. code-block:: php
 
     foreach ($associatedProducts as $associatedProduct) {
-        $association->addAssociatedObject($associatedProduct);
+        $association->addAssociatedProduct($associatedProduct);
     }
 
 Finally add the created association with SD cards to our Go Pro camera product.

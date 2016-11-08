@@ -13,9 +13,9 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -84,7 +84,7 @@ final class ProductAssociationContext implements Context
      */
     public function theProductHasAnAssociationWithProducts(
         ProductInterface $product,
-        AssociationTypeInterface $productAssociationType,
+        ProductAssociationTypeInterface $productAssociationType,
         array $products
     ) {
         $this->createProductAssociation($product, $productAssociationType, $products);
@@ -100,7 +100,7 @@ final class ProductAssociationContext implements Context
             $code = $this->generateCodeFromName($name);
         }
 
-        /** @var AssociationTypeInterface $productAssociationType */
+        /** @var ProductAssociationTypeInterface $productAssociationType */
         $productAssociationType = $this->productAssociationTypeFactory->createNew();
         $productAssociationType->setCode($code);
         $productAssociationType->setName($name);
@@ -111,12 +111,12 @@ final class ProductAssociationContext implements Context
 
     /**
      * @param ProductInterface $product
-     * @param AssociationTypeInterface $productAssociationType
+     * @param ProductAssociationTypeInterface $productAssociationType
      * @param array $associatedProducts
      */
     private function createProductAssociation(
         ProductInterface $product,
-        AssociationTypeInterface $productAssociationType,
+        ProductAssociationTypeInterface $productAssociationType,
         array $associatedProducts
     ) {
         /** @var ProductAssociationInterface $productAssociation */
@@ -124,7 +124,7 @@ final class ProductAssociationContext implements Context
         $productAssociation->setType($productAssociationType);
 
         foreach ($associatedProducts as $associatedProduct) {
-            $productAssociation->addAssociatedObject($associatedProduct);
+            $productAssociation->addAssociatedProduct($associatedProduct);
         }
 
         $product->addAssociation($productAssociation);

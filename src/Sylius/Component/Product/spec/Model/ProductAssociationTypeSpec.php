@@ -9,26 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Association\Model;
+namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Association\Model\AssociationType;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
+use Sylius\Component\Product\Model\ProductAssociationType;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class AssociationTypeSpec extends ObjectBehavior
+final class ProductAssociationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(AssociationType::class);
+        $this->shouldHaveType(ProductAssociationType::class);
     }
 
     function it_implements_association_type_interface()
     {
-        $this->shouldImplement(AssociationTypeInterface::class);
+        $this->shouldImplement(ProductAssociationTypeInterface::class);
     }
 
     function it_has_name()

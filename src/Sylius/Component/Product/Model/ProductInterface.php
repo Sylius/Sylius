@@ -12,7 +12,6 @@
 namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Association\Model\AssociableInterface;
 use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -26,7 +25,6 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 interface ProductInterface extends
-    AssociableInterface,
     AttributeSubjectInterface,
     CodeAwareInterface,
     ResourceInterface,

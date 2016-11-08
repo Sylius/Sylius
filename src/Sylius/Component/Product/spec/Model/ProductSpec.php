@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Association\Model\AssociableInterface;
 use Sylius\Component\Product\Model\Product;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
@@ -47,11 +46,6 @@ final class ProductSpec extends ObjectBehavior
     function it_implements_toggleable_interface()
     {
         $this->shouldImplement(ToggleableInterface::class);
-    }
-
-    function it_is_associatable()
-    {
-        $this->shouldImplement(AssociableInterface::class);
     }
 
     function it_has_no_id_by_default()
