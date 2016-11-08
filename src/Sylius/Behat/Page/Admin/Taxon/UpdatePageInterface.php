@@ -66,11 +66,18 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isImageWithCodeDisplayed($code);
 
     /**
+     * @return bool
+     */
+    public function isSlugReadOnly();
+
+    /**
      * @param string $code
      */
     public function removeImageWithCode($code);
 
     public function removeFirstImage();
+
+    public function enableSlugModification();
 
     /**
      * @return int

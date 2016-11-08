@@ -28,7 +28,7 @@ function updateSlug($element) {
 
     if ('' != $slugInput.attr('data-parent') && undefined != $slugInput.attr('data-parent')) {
         $data = { name: $element.val(), parentId: $slugInput.attr('data-parent') };
-    } else if ($('#sylius_taxon_parent').length > 0 && $('#sylius_taxon_parent').is(':visible')) {
+    } else if ($('#sylius_taxon_parent').length > 0 && $('#sylius_taxon_parent').is(':visible') && '' != $('#sylius_taxon_parent').val()) {
         $data = { name: $element.val(), parentId: $('#sylius_taxon_parent').val() };
     } else {
         $data = { name: $element.val() };
@@ -53,11 +53,9 @@ function updateSlug($element) {
 
 function toggleSlugModification($button, $slugInput) {
     if ($slugInput.attr('readonly')) {
-        console.log('unlock');
         $slugInput.removeAttr('readonly');
         $button.html('<i class="lock icon"></i>');
     } else {
-        console.log('lock');
         $slugInput.attr('readonly', 'readonly');
         $button.html('<i class="unlock icon"></i>');
     }

@@ -106,6 +106,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function nameIt($name, $languageCode)
     {
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_name', $languageCode), $name);
+
+        $this->waitForSlugGenerationIfNecessary();
     }
 
     /**
@@ -274,5 +276,14 @@ JS;
         }
 
         return $driver;
+    }
+
+    private function waitForSlugGenerationIfNecessary()
+    {
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $this->getDocument()->waitFor(1000, function () {
+                return '' !== $this->getElement('slug')->getValue();
+            });
+        }
     }
 }

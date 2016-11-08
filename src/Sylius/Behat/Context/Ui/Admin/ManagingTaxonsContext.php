@@ -17,6 +17,7 @@ use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -90,7 +91,6 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @Given /^I want to modify the ("[^"]+" taxon)$/
-     * @Given /^I want to modify (this taxon)$/
      */
     public function iWantToModifyATaxon(TaxonInterface $taxon)
     {
@@ -136,6 +136,25 @@ final class ManagingTaxonsContext implements Context
         ]);
 
         $currentPage->specifySlug($slug);
+    }
+
+    /**
+     * @Then the slug field should not be editable
+     */
+    public function theSlugFieldShouldNotBeEditable()
+    {
+        Assert::true(
+            $this->updatePage->isSlugReadOnly(),
+            'Slug should be immutable, but it does not.'
+        );
+    }
+
+    /**
+     * @When I enable slug modification
+     */
+    public function iEnableSlugModification()
+    {
+        $this->updatePage->enableSlugModification();
     }
 
     /**
@@ -260,6 +279,19 @@ final class ManagingTaxonsContext implements Context
         Assert::true(
             $this->updatePage->isCodeDisabled(),
             'Code field should be disabled but it is not.'
+        );
+    }
+
+    /**
+     * @Then /^the slug of the ("[^"]+" taxon) should(?:| still) be "([^"]+)"$/
+     */
+    public function productSlugShouldBe(TaxonInterface $taxon, $slug)
+    {
+        $this->updatePage->open(['id' => $taxon->getId()]);
+
+        Assert::true(
+            $this->updatePage->hasResourceValues(['slug' => $slug]),
+            sprintf('Taxon\'s slug should be %s.', $slug)
         );
     }
 
