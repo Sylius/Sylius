@@ -14,8 +14,10 @@ namespace Sylius\Component\Core\Taxation\Applicator;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
+use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
@@ -59,8 +61,9 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
      */
     public function apply(OrderInterface $order, ZoneInterface $zone)
     {
+        /** @var TaxableInterface|ShipmentInterface $lastShipment */
         $lastShipment = $order->getLastShipment();
-        if (!$lastShipment) {
+        if (null === $lastShipment) {
             return;
         }
 
