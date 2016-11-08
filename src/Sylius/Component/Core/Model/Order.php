@@ -470,25 +470,6 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getLastShipment()
-    {
-        if ($this->shipments->isEmpty()) {
-            return null;
-        }
-
-        $last = $this->shipments->first();
-        foreach ($this->shipments as $shipment) {
-            if ($shipment->getUpdatedAt() > $last->getUpdatedAt()) {
-                $last = $shipment;
-            }
-        }
-
-        return $last;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function hasPromotion(BasePromotionInterface $promotion)
     {
         return $this->promotions->contains($promotion);
