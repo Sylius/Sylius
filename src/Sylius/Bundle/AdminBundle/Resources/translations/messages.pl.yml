@@ -10,6 +10,8 @@ sylius:
                     attributes: Cechy
                     header: Katalog
                     options: Warianty
+                    products: Produkty
+                    taxons: Podatki
                 configuration:
                     admin_users: Administratorzy
                     channels: Kanały

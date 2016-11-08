@@ -25,6 +25,10 @@ sylius:
             unique: Ten język jest już skonfigurowany.
         enabled:
             cannot_disable_base: Nie można wyłączyć podstawowych ustawień regionalnych.
+    product_image:
+        code:
+            not_blank: Wpisz kod obrazka.
+            unique: Kod z obrazka musi być unikalny w obrębie tego produktu.
     product_variant:
         onHand:
             min: Dostępna ilość musi być większa niż {{ limit }}.
@@ -37,6 +41,10 @@ sylius:
     product_translation:
         short_description:
             max: Krótki opis nie może być dłuższy niż {{ limit }} znaków.
+    taxon_image:
+        code:
+            not_blank: Wpisz kod obrazka.
+            unique: Kod obrazu musi być unikalny w obrębie tego taksonu.
     user:
         email:
             unique: Ten e-mail jest już używany.

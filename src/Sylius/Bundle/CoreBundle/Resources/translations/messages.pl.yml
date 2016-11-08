@@ -19,6 +19,9 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Produkt
+            customer_group: Grupa klientów
+        promotion_coupon:
+            per_customer_usage_limit: Limit użycia na 1 klienta
         group:
             name: Nazwa
             roles: Role
@@ -122,6 +125,10 @@ sylius:
             contains_taxon:
                 taxon: Takson
                 count: Ilość
+            taxon:
+                taxons: Podatki
+            product:
+                products: Produkty
             total_of_items_from_taxon:
                 taxon: Takson
                 amount: Kwota

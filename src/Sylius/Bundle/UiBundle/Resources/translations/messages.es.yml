@@ -218,6 +218,7 @@ sylius:
         data: Fecha
         date: Fecha
         default: Por defecto
+        default_address: Dirección por defecto
         default_billing_address: sylius.account.address.default.billing
         default_currency: Moneda por defecto
         default_locale: Configuración regional predeterminada
@@ -299,6 +300,7 @@ sylius:
         editing_zone: Editando la zona
         email: Dirección de correo electrónico
         email_templates: Plantillas de correo electrónico
+        email_verified: Correo electrónico verificado
         emails: Correos electrónicos
         empty: Vaciar
         enable: Activar
@@ -340,6 +342,7 @@ sylius:
         go_level_up: Nivel superior
         go_to_dashboard: Ir al panel
         grand_total: Total
+        group_membership: Pertenencia a grupo
         guest: Invitado
         guest_customer: Cliente invitado
         have_an_account_already: '¿Ya tienes una cuenta?'
@@ -528,7 +531,7 @@ sylius:
         on_hold: En espera
         options: Opciones de producto
         or: o
-        order: Orden
+        order: Pedido
         order_comment_name: Comentario del pedido
         order_comments: Comentarios del pedido
         order_confirmation_name: Confirmación de pedido
@@ -606,7 +609,7 @@ sylius:
         promotions: Promociones
         province: Provincia
         provinces: Provincias
-        purchased_from: Comprado de
+        purchased_from: Comprado en
         qty: Cant.
         qty_max: Cantidad Maxima
         qty_min: Cantidad minima
@@ -691,7 +694,7 @@ sylius:
         show_metadata: Mostrar metadatos
         show_order_details: Mostrar detalles del pedido
         sign_in: Iniciar sesión
-        sign_in_here: Inicie sesión aquí
+        sign_in_here: Inicia sesión aquí
         sign_in_to_the_store_or_create_new_account: Inicia sesión <small>o crea una nueva cuenta</small>
         sign_out: Cerrar sesión
         simple_blocks: Bloques de texto

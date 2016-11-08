@@ -1,0 +1,36 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        address:
+            city: Linn
+            company: Ettevõtte
+            country: Riik
+            first_name: Eesnimi
+            last_name: Perekonnanimi
+            phone_number: Telefoni number
+            postcode: Pistiindeks
+            street: Tänav
+            province: Provints
+        country:
+            add_province: Lisa provints
+            name: Nimi
+            provinces: Provintsid
+            select: Vali
+            enabled: Luba
+        province:
+            name: Nimi
+            select: Vali
+        zone:
+            add_member: Lisa liige
+            members: Liikmed
+            name: Nimi
+            type: Tüüp
+            types:
+                country: Riik
+                province: Provints
+                zone: Tsoon
+            select: Vali
+        zone_member:
+            select: Vali

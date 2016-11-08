@@ -27,6 +27,7 @@ sylius:
             cannot_disable_base: El código de idioma base no se puede desactivar.
     product_image:
         code:
+            not_blank: Por favor, introduzca un código de imagen.
             unique: El código de imagen debe ser único en este producto.
     product_variant:
         onHand:
@@ -42,6 +43,7 @@ sylius:
             max: Breve descripción. No debe superar {{ limit }} caractéres.
     taxon_image:
         code:
+            not_blank: Por favor, introduzca un código de imagen.
             unique: El código de imagen debe ser único en este taxón.
     user:
         email:

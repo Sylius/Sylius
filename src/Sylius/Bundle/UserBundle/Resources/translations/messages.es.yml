@@ -8,7 +8,7 @@ sylius:
             enabled: Activado
             password:
                 label: Contraseña
-                confirmation: Verificación
+                confirmation: Confirmar contraseña
             remember_me: Recordarme
             shipping_address: Dirección de envío
             username: Nombre usuario
