@@ -16,13 +16,20 @@ Feature: Switching locales on admin's panel
     Scenario: Changing my preferred locale
         Given I am editing my details
         When I set my locale to "Spanish (Mexico)"
-        Then I should be viewing the panel in "Spanish (Mexico)"
+        Then I should be viewing the administration panel in "Spanish (Mexico)"
 
     @ui
     Scenario: Admin's panel can be viewed in a disabled locale
         Given I am editing my details
         When I set my locale to "Portuguese (Brazil)"
-        Then I should be viewing the panel in "Portuguese (Brazil)"
+        Then I should be viewing the administration panel in "Portuguese (Brazil)"
+
+    @ui
+    Scenario: Changing my preferred language to a locale that does not exist in the store
+        Given the locale "French (France)" does not exist in the store
+        And I am editing my details
+        When I set my locale to "French (France)"
+        Then I should be viewing the administration panel in "French (France)"
 
     @ui
     Scenario: Changing panel's locale doesn't change shop's locale
@@ -34,7 +41,7 @@ Feature: Switching locales on admin's panel
     Scenario: Changing shop's locale has doesn't affect admin panel's locale
         Given I switched the shop's locale to "Spanish (Mexico)"
         When I open administration dashboard
-        Then I should still be viewing the panel in "English (United States)"
+        Then I should still be viewing the administration panel in "English (United States)"
 
     @ui
     Scenario: Locales are saved per each admin's preference
@@ -42,4 +49,4 @@ Feature: Switching locales on admin's panel
         And there is an administrator "admin@example.com" identified by "sylius"
         And this administrator is using "Portuguese (Brazil)" locale
         When this administrator logs in using "sylius" password
-        Then they should be viewing the panel in "Portuguese (Brazil)"
+        Then they should be viewing the administration panel in "Portuguese (Brazil)"

@@ -107,6 +107,18 @@ final class LocaleContext implements Context
     }
 
     /**
+     * @Given the locale :localeCode does not exist in the store
+     */
+    public function theStoreDoesNotHaveLocale($localeCode)
+    {
+        /** @var LocaleInterface $locale */
+        $locale = $this->localeRepository->findOneBy(['code' => $localeCode]);
+        if (null !== $locale) {
+            $this->localeRepository->remove($locale);
+        }
+    }
+
+    /**
      * @Given /^(that channel) allows to shop using the "([^"]+)" locale$/
      * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/
      * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" locales$/

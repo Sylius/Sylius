@@ -73,10 +73,6 @@
         <service id="sylius.form.type.list" class="Sylius\Bundle\CoreBundle\Form\Type\ListType">
             <tag name="form.type" alias="list" />
         </service>
-        <service id="sylius.form.type.locale_code_choice" class="Sylius\Bundle\CoreBundle\Form\Type\LocaleCodeChoiceType">
-            <argument type="service" id="sylius.repository.locale"/>
-            <tag name="form.type" alias="sylius_locale_code_choice"/>
-        </service>
 
         <service id="sylius.form.type.tax_calculation_strategy_choice" class="Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType">
             <argument>%sylius.tax_calculation_strategies%</argument>
