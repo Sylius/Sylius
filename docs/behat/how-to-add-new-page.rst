@@ -8,7 +8,7 @@ To create a new page object it is needed to add a service in Behat container in 
 
 .. code-block:: xml
 
-    <service id="sylius.behat.page.PAGE_NAME" class="%sylius.behat.page.PAGE_NAME.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+    <service id="sylius.behat.page.PAGE_NAME" class="%sylius.behat.page.PAGE_NAME.class%" parent="sylius.behat.symfony_page" public="false" />
 
 .. note::
 
