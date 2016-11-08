@@ -8,3 +8,4 @@
 * :doc:`/cookbook/images`
 * :doc:`/cookbook/checkout`
 * :doc:`/cookbook/embedding-products`
+* :doc:`/cookbook/taxons-menu`
