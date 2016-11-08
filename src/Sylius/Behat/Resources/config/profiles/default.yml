@@ -21,7 +21,7 @@ default:
             javascript_session: chrome
             sessions:
                 symfony:
-                    symfony2: ~
+                    symfony: ~
                 chrome:
                     selenium2:
                         browser: chrome
@@ -39,16 +39,16 @@ default:
                         browser: firefox
             show_auto: false
 
-        Behat\Symfony2Extension:
+        FriendsOfBehat\SymfonyExtension:
             kernel:
                 class: TestAppKernel
                 path: app/TestAppKernel.php
 
-        Sylius\Behat\Extension\MultiContainerExtension:
+        FriendsOfBehat\ContextServiceExtension:
             imports:
                 - "src/Sylius/Behat/Resources/config/services.xml"
 
-        Sylius\Behat\Extension\SymfonyExtension: ~
+        FriendsOfBehat\CrossContainerExtension: ~
 
         FriendsOfBehat\PerformanceExtension: ~
 

@@ -8,7 +8,7 @@ Behat guide
     how-to-add-new-page
     how-to-define-new-suite
     how-to-use-transformers
-    introduction-to-containers-and-scopes
+    introduction-to-containers
     basic-usage
 
 .. include:: /behat/map.rst.inc

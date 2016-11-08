@@ -13,100 +13,100 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.behat.context.ui.admin.dashboard" class="Sylius\Behat\Context\Ui\Admin\DashboardContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.dashboard" class="Sylius\Behat\Context\Ui\Admin\DashboardContext">
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.locale" class="Sylius\Behat\Context\Ui\Admin\LocaleContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.locale" class="Sylius\Behat\Context\Ui\Admin\LocaleContext">
             <argument type="service" id="sylius.behat.page.admin.administrator.update" />
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
-            <argument type="service" id="translator" container="symfony" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony__.translator" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.login" class="Sylius\Behat\Context\Ui\Admin\LoginContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.login" class="Sylius\Behat\Context\Ui\Admin\LoginContext">
             <argument type="service" id="sylius.behat.page.admin.dashboard" />
             <argument type="service" id="sylius.behat.page.admin.login" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_administrators" class="Sylius\Behat\Context\Ui\Admin\ManagingAdministratorsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_administrators" class="Sylius\Behat\Context\Ui\Admin\ManagingAdministratorsContext">
             <argument type="service" id="sylius.behat.page.admin.administrator.create" />
             <argument type="service" id="sylius.behat.page.admin.administrator.index" />
             <argument type="service" id="sylius.behat.page.admin.administrator.update" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_channels" class="Sylius\Behat\Context\Ui\Admin\ManagingChannelsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_channels" class="Sylius\Behat\Context\Ui\Admin\ManagingChannelsContext">
             <argument type="service" id="sylius.behat.page.admin.channel.index" />
             <argument type="service" id="sylius.behat.page.admin.channel.create" />
             <argument type="service" id="sylius.behat.page.admin.channel.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_countries" class="Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_countries" class="Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext">
             <argument type="service" id="sylius.behat.page.admin.country.index" />
             <argument type="service" id="sylius.behat.page.admin.country.create" />
             <argument type="service" id="sylius.behat.page.admin.country.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_currencies" class="Sylius\Behat\Context\Ui\Admin\ManagingCurrenciesContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_currencies" class="Sylius\Behat\Context\Ui\Admin\ManagingCurrenciesContext">
             <argument type="service" id="sylius.behat.page.admin.currency.index" />
             <argument type="service" id="sylius.behat.page.admin.currency.create" />
             <argument type="service" id="sylius.behat.page.admin.currency.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_customers" class="Sylius\Behat\Context\Ui\Admin\ManagingCustomersContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_customers" class="Sylius\Behat\Context\Ui\Admin\ManagingCustomersContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.customer.create" />
             <argument type="service" id="sylius.behat.page.admin.customer.index" />
             <argument type="service" id="sylius.behat.page.admin.customer.update" />
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_customer_groups" class="Sylius\Behat\Context\Ui\Admin\ManagingCustomerGroupsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_customer_groups" class="Sylius\Behat\Context\Ui\Admin\ManagingCustomerGroupsContext">
             <argument type="service" id="sylius.behat.page.admin.customer_group.create" />
             <argument type="service" id="sylius.behat.page.admin.customer_group.index" />
             <argument type="service" id="sylius.behat.page.admin.customer_group.update" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_locales" class="Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_locales" class="Sylius\Behat\Context\Ui\Admin\ManagingLocalesContext">
             <argument type="service" id="sylius.behat.page.admin.locale.create" />
             <argument type="service" id="sylius.behat.page.admin.locale.index" />
             <argument type="service" id="sylius.behat.page.admin.locale.update" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_orders" class="Sylius\Behat\Context\Ui\Admin\ManagingOrdersContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_orders" class="Sylius\Behat\Context\Ui\Admin\ManagingOrdersContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.order.index" />
             <argument type="service" id="sylius.behat.page.admin.order.show" />
             <argument type="service" id="sylius.behat.page.admin.order.update" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.shared_security" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_payment_methods" class="Sylius\Behat\Context\Ui\Admin\ManagingPaymentMethodsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_payment_methods" class="Sylius\Behat\Context\Ui\Admin\ManagingPaymentMethodsContext">
             <argument type="service" id="sylius.behat.page.admin.payment_method.create" />
             <argument type="service" id="sylius.behat.page.admin.payment_method.index" />
             <argument type="service" id="sylius.behat.page.admin.payment_method.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_products" class="Sylius\Behat\Context\Ui\Admin\ManagingProductsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_products" class="Sylius\Behat\Context\Ui\Admin\ManagingProductsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.product.create_simple" />
             <argument type="service" id="sylius.behat.page.admin.product.create_configurable" />
@@ -116,147 +116,147 @@
             <argument type="service" id="sylius.behat.page.admin.product_review.index" />
             <argument type="service" id="sylius.behat.current_product_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_product_association_types" class="Sylius\Behat\Context\Ui\Admin\ManagingProductAssociationTypesContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_product_association_types" class="Sylius\Behat\Context\Ui\Admin\ManagingProductAssociationTypesContext">
             <argument type="service" id="sylius.behat.page.admin.product_association_type.create" />
             <argument type="service" id="sylius.behat.page.admin.product_association_type.index" />
             <argument type="service" id="sylius.behat.page.admin.product_association_type.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_product_attributes" class="Sylius\Behat\Context\Ui\Admin\ManagingProductAttributesContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_product_attributes" class="Sylius\Behat\Context\Ui\Admin\ManagingProductAttributesContext">
             <argument type="service" id="sylius.behat.page.admin.product_attribute.create" />
             <argument type="service" id="sylius.behat.page.admin.product_attribute.index" />
             <argument type="service" id="sylius.behat.page.admin.product_attribute.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_product_options" class="Sylius\Behat\Context\Ui\Admin\ManagingProductOptionsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_product_options" class="Sylius\Behat\Context\Ui\Admin\ManagingProductOptionsContext">
             <argument type="service" id="sylius.behat.page.admin.product_option.index" />
             <argument type="service" id="sylius.behat.page.admin.product_option.create" />
             <argument type="service" id="sylius.behat.page.admin.product_option.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_product_reviews" class="Sylius\Behat\Context\Ui\Admin\ManagingProductReviewsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_product_reviews" class="Sylius\Behat\Context\Ui\Admin\ManagingProductReviewsContext">
             <argument type="service" id="sylius.behat.page.admin.product_review.index" />
             <argument type="service" id="sylius.behat.page.admin.product_review.update" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_product_variants" class="Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_product_variants" class="Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.create" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.index" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_promotions" class="Sylius\Behat\Context\Ui\Admin\ManagingPromotionsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_promotions" class="Sylius\Behat\Context\Ui\Admin\ManagingPromotionsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.promotion.index" />
             <argument type="service" id="sylius.behat.page.admin.promotion.create" />
             <argument type="service" id="sylius.behat.page.admin.promotion.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
-        <service id="sylius.behat.context.ui.admin.managing_promotion_coupons" class="Sylius\Behat\Context\Ui\Admin\ManagingPromotionCouponsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_promotion_coupons" class="Sylius\Behat\Context\Ui\Admin\ManagingPromotionCouponsContext">
             <argument type="service" id="sylius.behat.page.admin.promotion_coupon.create" />
             <argument type="service" id="sylius.behat.page.admin.promotion_coupon.generate" />
             <argument type="service" id="sylius.behat.page.admin.promotion_coupon.index" />
             <argument type="service" id="sylius.behat.page.admin.promotion_coupon.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_routes" class="Sylius\Behat\Context\Ui\Admin\ManagingRoutesContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_routes" class="Sylius\Behat\Context\Ui\Admin\ManagingRoutesContext">
             <argument type="service" id="sylius.behat.page.admin.route.index" />
             <argument type="service" id="sylius.behat.page.admin.route.create" />
             <argument type="service" id="sylius.behat.page.admin.route.update" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_shipping_methods" class="Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_shipping_methods" class="Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.index" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.create" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_static_contents" class="Sylius\Behat\Context\Ui\Admin\ManagingStaticContentsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_static_contents" class="Sylius\Behat\Context\Ui\Admin\ManagingStaticContentsContext">
             <argument type="service" id="sylius.behat.page.admin.static_content.index" />
             <argument type="service" id="sylius.behat.page.admin.static_content.create" />
             <argument type="service" id="sylius.behat.page.admin.static_content.update" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_tax_categories" class="Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoriesContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_tax_categories" class="Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoriesContext">
             <argument type="service" id="sylius.behat.page.admin.tax_category.index" />
             <argument type="service" id="sylius.behat.page.admin.tax_category.create" />
             <argument type="service" id="sylius.behat.page.admin.tax_category.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_translatable_entities" class="Sylius\Behat\Context\Ui\Admin\ManagingTranslatableEntitiesContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_translatable_entities" class="Sylius\Behat\Context\Ui\Admin\ManagingTranslatableEntitiesContext">
             <argument type="service" id="sylius.behat.page.admin.taxon.create" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_taxons" class="Sylius\Behat\Context\Ui\Admin\ManagingTaxonsContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_taxons" class="Sylius\Behat\Context\Ui\Admin\ManagingTaxonsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.taxon.create" />
             <argument type="service" id="sylius.behat.page.admin.taxon.create_for_parent" />
             <argument type="service" id="sylius.behat.page.admin.taxon.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_tax_rate" class="Sylius\Behat\Context\Ui\Admin\ManagingTaxRateContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_tax_rate" class="Sylius\Behat\Context\Ui\Admin\ManagingTaxRateContext">
             <argument type="service" id="sylius.behat.page.admin.tax_rate.index" />
             <argument type="service" id="sylius.behat.page.admin.tax_rate.create" />
             <argument type="service" id="sylius.behat.page.admin.tax_rate.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_zones" class="Sylius\Behat\Context\Ui\Admin\ManagingZonesContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_zones" class="Sylius\Behat\Context\Ui\Admin\ManagingZonesContext">
             <argument type="service" id="sylius.behat.page.admin.zone.create" />
             <argument type="service" id="sylius.behat.page.admin.zone.index" />
             <argument type="service" id="sylius.behat.page.admin.zone.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.notification" class="Sylius\Behat\Context\Ui\Admin\NotificationContext" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.notification" class="Sylius\Behat\Context\Ui\Admin\NotificationContext">
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.channel" class="Sylius\Behat\Context\Ui\ChannelContext" scope="scenario">
+        <service id="sylius.behat.context.ui.channel" class="Sylius\Behat\Context\Ui\ChannelContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.channel_context_setter" />
-            <argument type="service" id="sylius.repository.channel" container="symfony"/>
+            <argument type="service" id="__symfony__.sylius.repository.channel"/>
             <argument type="service" id="sylius.behat.page.admin.channel.create" />
             <argument type="service" id="sylius.behat.page.shop.home" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.checkout" class="Sylius\Behat\Context\Ui\CheckoutContext" scope="scenario">
+        <service id="sylius.behat.context.ui.checkout" class="Sylius\Behat\Context\Ui\CheckoutContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.page.shop.checkout.address" />
@@ -265,114 +265,114 @@
             <argument type="service" id="sylius.behat.page.shop.checkout.select_shipping" />
             <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
             <argument type="service" id="sylius.behat.page.shop.order.show" />
-            <argument type="service" id="sylius.repository.order" container="symfony" />
-            <argument type="service" id="sylius.factory.address" container="symfony" />
+            <argument type="service" id="__symfony__.sylius.repository.order" />
+            <argument type="service" id="__symfony__.sylius.factory.address" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <argument type="service" id="sylius.address_comparator" container="symfony" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony__.sylius.address_comparator" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.customer" class="Sylius\Behat\Context\Ui\CustomerContext" scope="scenario">
+        <service id="sylius.behat.context.ui.customer" class="Sylius\Behat\Context\Ui\CustomerContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.paypal" class="Sylius\Behat\Context\Ui\PaypalContext" scope="scenario">
+        <service id="sylius.behat.context.ui.paypal" class="Sylius\Behat\Context\Ui\PaypalContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.external.paypal_checkout_express" />
             <argument type="service" id="sylius.behat.page.shop.order.show" />
             <argument type="service" id="sylius.behat.page.shop.checkout.complete" />
             <argument type="service" id="sylius.behat.paypal_api_mocker" />
-            <argument type="service" id="sylius.repository.order" container="symfony" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony__.sylius.repository.order" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.theme" class="Sylius\Behat\Context\Ui\ThemeContext" scope="scenario">
+        <service id="sylius.behat.context.ui.theme" class="Sylius\Behat\Context\Ui\ThemeContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.channel.index" />
             <argument type="service" id="sylius.behat.page.admin.channel.update" />
             <argument type="service" id="sylius.behat.page.shop.home" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.user" class="Sylius\Behat\Context\Ui\UserContext" scope="scenario">
+        <service id="sylius.behat.context.ui.user" class="Sylius\Behat\Context\Ui\UserContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.repository.shop_user" container="symfony" />
+            <argument type="service" id="__symfony__.sylius.repository.shop_user" />
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
             <argument type="service" id="sylius.behat.page.shop.account.login" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.account" class="Sylius\Behat\Context\Ui\Shop\AccountContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.account" class="Sylius\Behat\Context\Ui\Shop\AccountContext">
             <argument type="service" id="sylius.behat.page.shop.account.dashboard" />
             <argument type="service" id="sylius.behat.page.shop.account.profile_update" />
             <argument type="service" id="sylius.behat.page.shop.account.change_password" />
             <argument type="service" id="sylius.behat.page.shop.account.order.index" />
             <argument type="service" id="sylius.behat.page.shop.account.order.show" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.address_book" class="Sylius\Behat\Context\Ui\Shop\AddressBookContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.address_book" class="Sylius\Behat\Context\Ui\Shop\AddressBookContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.repository.address" container="symfony" />
+            <argument type="service" id="__symfony__.sylius.repository.address" />
             <argument type="service" id="sylius.behat.page.shop.account.address_book.index" />
             <argument type="service" id="sylius.behat.page.shop.account.address_book.create" />
             <argument type="service" id="sylius.behat.page.shop.account.address_book.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.cart" class="Sylius\Behat\Context\Ui\Shop\CartContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.cart" class="Sylius\Behat\Context\Ui\Shop\CartContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.cart_summary" />
             <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.currency" class="Sylius\Behat\Context\Ui\Shop\CurrencyContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.currency" class="Sylius\Behat\Context\Ui\Shop\CurrencyContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
-            <argument type="service" id="sylius.storage.currency" container="symfony" />
+            <argument type="service" id="__symfony__.sylius.storage.currency" />
             <argument type="service" id="sylius.behat.shared_storage" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.current_channel" class="Sylius\Behat\Context\Ui\Shop\CurrentChannelContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.current_channel" class="Sylius\Behat\Context\Ui\Shop\CurrentChannelContext">
             <argument type="service" id="sylius.behat.channel_context_setter" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.locale" class="Sylius\Behat\Context\Ui\Shop\LocaleContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.locale" class="Sylius\Behat\Context\Ui\Shop\LocaleContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.login" class="Sylius\Behat\Context\Ui\Shop\LoginContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.login" class="Sylius\Behat\Context\Ui\Shop\LoginContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.page.shop.account.login" />
             <argument type="service" id="sylius.behat.page.shop.account.reset_password" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.product" class="Sylius\Behat\Context\Ui\Shop\ProductContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.product" class="Sylius\Behat\Context\Ui\Shop\ProductContext">
             <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.page.shop.taxon.show" />
             <argument type="service" id="sylius.behat.page.shop.product_reviews.index" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.product_review" class="Sylius\Behat\Context\Ui\Shop\ProductReviewContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.product_review" class="Sylius\Behat\Context\Ui\Shop\ProductReviewContext">
             <argument type="service" id="sylius.behat.page.shop.product_reviews.create" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.registration" class="Sylius\Behat\Context\Ui\Shop\RegistrationContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.registration" class="Sylius\Behat\Context\Ui\Shop\RegistrationContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.account.dashboard" />
             <argument type="service" id="sylius.behat.page.shop.home" />
@@ -382,18 +382,18 @@
             <argument type="service" id="sylius.behat.shop_security" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.shop.static_content" class="Sylius\Behat\Context\Ui\Shop\StaticContentContext" scope="scenario">
+        <service id="sylius.behat.context.ui.shop.static_content" class="Sylius\Behat\Context\Ui\Shop\StaticContentContext">
             <argument type="service" id="sylius.behat.page.shop.static_content.show" />
-            <tag name="sylius.behat.context" />
+            <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.email" class="Sylius\Behat\Context\Ui\EmailContext" scope="scenario">
+        <service id="sylius.behat.context.ui.email" class="Sylius\Behat\Context\Ui\EmailContext">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.behat.email_checker" container="symfony" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony__.sylius.behat.email_checker" />
+            <tag name="fob.context_service" />
         </service>
     </services>
 </container>

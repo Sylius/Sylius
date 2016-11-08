@@ -19,13 +19,13 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.admin.static_content.index" class="%sylius.behat.page.admin.static_content.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.static_content.index" class="%sylius.behat.page.admin.static_content.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">static_content</argument>
         </service>
-        <service id="sylius.behat.page.admin.static_content.create" class="%sylius.behat.page.admin.static_content.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.static_content.create" class="%sylius.behat.page.admin.static_content.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">static_content</argument>
         </service>
-        <service id="sylius.behat.page.admin.static_content.update" class="%sylius.behat.page.admin.static_content.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.static_content.update" class="%sylius.behat.page.admin.static_content.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">static_content</argument>
         </service>
     </services>

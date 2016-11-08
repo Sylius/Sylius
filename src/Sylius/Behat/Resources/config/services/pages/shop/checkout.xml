@@ -20,12 +20,12 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.shop.checkout.address" class="%sylius.behat.page.shop.checkout.address.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" >
-            <argument type="service" id="sylius.factory.address" container="symfony" />
+        <service id="sylius.behat.page.shop.checkout.address" class="%sylius.behat.page.shop.checkout.address.class%" parent="sylius.behat.symfony_page" public="false" >
+            <argument type="service" id="__symfony__.sylius.factory.address" />
         </service>
-        <service id="sylius.behat.page.shop.checkout.select_payment" class="%sylius.behat.page.shop.checkout.select_payment.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.checkout.select_shipping" class="%sylius.behat.page.shop.checkout.select_shipping.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.checkout.complete" class="%sylius.behat.page.shop.checkout.complete.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+        <service id="sylius.behat.page.shop.checkout.select_payment" class="%sylius.behat.page.shop.checkout.select_payment.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.checkout.select_shipping" class="%sylius.behat.page.shop.checkout.select_shipping.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.checkout.complete" class="%sylius.behat.page.shop.checkout.complete.class%" parent="sylius.behat.symfony_page" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>
     </services>

@@ -28,21 +28,21 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.shop.account.address_book.create" class="%sylius.behat.page.shop.account.address_book.create.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.account.address_book.index" class="%sylius.behat.page.shop.account.address_book.index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.account.address_book.update" class="%sylius.behat.page.shop.account.address_book.update.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.account.change_password" class="%sylius.behat.page.shop.account.change_password.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.account.dashboard" class="%sylius.behat.page.shop.account.dashboard.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.account.login" class="%sylius.behat.page.shop.account.login.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.account.order.index" class="%sylius.behat.page.shop.account.order.index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+        <service id="sylius.behat.page.shop.account.address_book.create" class="%sylius.behat.page.shop.account.address_book.create.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.address_book.index" class="%sylius.behat.page.shop.account.address_book.index.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.address_book.update" class="%sylius.behat.page.shop.account.address_book.update.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.change_password" class="%sylius.behat.page.shop.account.change_password.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.dashboard" class="%sylius.behat.page.shop.account.dashboard.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.login" class="%sylius.behat.page.shop.account.login.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.order.index" class="%sylius.behat.page.shop.account.order.index.class%" parent="sylius.behat.symfony_page" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>
-        <service id="sylius.behat.page.shop.account.order.show" class="%sylius.behat.page.shop.account.order.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+        <service id="sylius.behat.page.shop.account.order.show" class="%sylius.behat.page.shop.account.order.show.class%" parent="sylius.behat.symfony_page" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>
-        <service id="sylius.behat.page.shop.account.profile_update" class="%sylius.behat.page.shop.account.profile_update.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.account.register" class="%sylius.behat.page.shop.account.register.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.account.reset_password" class="%sylius.behat.page.shop.account.reset_password.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.account.verify" class="%sylius.behat.page.shop.account.verify.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.account.profile_update" class="%sylius.behat.page.shop.account.profile_update.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.register" class="%sylius.behat.page.shop.account.register.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.reset_password" class="%sylius.behat.page.shop.account.reset_password.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.account.verify" class="%sylius.behat.page.shop.account.verify.class%" parent="sylius.behat.symfony_page" public="false" />
     </services>
 </container>

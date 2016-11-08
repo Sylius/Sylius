@@ -4,7 +4,7 @@
 default:
     suites:
         ui_email_verification:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.email_spool
 

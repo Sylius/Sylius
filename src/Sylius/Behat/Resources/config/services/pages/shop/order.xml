@@ -18,7 +18,7 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.shop.order.thank_you" class="%sylius.behat.page.shop.order.thank_you.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.order.show" class="%sylius.behat.page.shop.order.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.order.thank_you" class="%sylius.behat.page.shop.order.thank_you.class%" parent="sylius.behat.symfony_page" public="false" />
+        <service id="sylius.behat.page.shop.order.show" class="%sylius.behat.page.shop.order.show.class%" parent="sylius.behat.symfony_page" public="false" />
     </services>
 </container>

@@ -18,10 +18,10 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.admin.product_review.index" class="%sylius.behat.page.admin.product_review.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.product_review.index" class="%sylius.behat.page.admin.product_review.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">product_review</argument>
         </service>
-        <service id="sylius.behat.page.admin.product_review.update" class="%sylius.behat.page.admin.product_review.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.product_review.update" class="%sylius.behat.page.admin.product_review.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">product_review</argument>
         </service>
     </services>

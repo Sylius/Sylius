@@ -4,7 +4,7 @@
 default:
     suites:
         ui_managing_product_association_types:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.product_association_type
