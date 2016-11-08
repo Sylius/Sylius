@@ -137,7 +137,8 @@ final class CurrencyContext implements Context
         }
 
         foreach ($currenciesCodes as $currencyCode) {
-            $channel->addCurrency($this->provideCurrency($currencyCode));
+            $currency = $this->provideCurrency($currencyCode);
+            $channel->addCurrency($currency);
         }
 
         $this->channelManager->flush();

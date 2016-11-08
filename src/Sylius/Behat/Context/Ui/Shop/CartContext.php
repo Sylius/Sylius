@@ -410,6 +410,18 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then /^I should see "([^"]+)" with unit price ("[^"]+") in my cart$/
+     */
+    public function iShouldSeeProductWithUnitPriceInMyCart($productName, $unitPrice)
+    {
+        Assert::same(
+            $this->summaryPage->getItemUnitPrice($productName),
+            $unitPrice,
+            'The unit price of product should be %2$s, but it is %s.'
+        );
+    }
+
+    /**
      * @Given I use coupon with code :couponCode
      */
     public function iUseCouponWithCode($couponCode)
