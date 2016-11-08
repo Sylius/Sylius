@@ -14,5 +14,6 @@ Cookbook
     images
     checkout
     embedding-products
+    taxons-menu
 
 .. include:: /cookbook/map.rst.inc
