@@ -19,7 +19,7 @@ How to customize templates?
 .. note::
 
     How do you know which template you should be overriding?
-    Go to the page that you are going to modify, at the bottom in the Symfony toolbar click on the route ,
+    Go to the page that you are going to modify, at the bottom in the Symfony toolbar click on the route,
     which will redirect you to the profiler. In the Request Attributes section
     under ``_sylius [ template => ...]`` you can check the path to the current template.
 
@@ -63,7 +63,7 @@ Copy the contents of the original template to make your work easier. And then mo
     </div>
     {% endblock %}
 
-Done! If you do not see any changes on the ``/shop/login`` url, clear your cache. ``$ php app/console cache:clear``.
+Done! If you do not see any changes on the ``/shop/login`` url, clear your cache: ``$ php app/console cache:clear``.
 
 * **Admin** templates: Customization of the Country form view.
 
@@ -88,4 +88,4 @@ Copy the contents of the original template to make your work easier. And then mo
         {{ form_row(form.provinces, {'label': false}) }}
     </div>
 
-Done! If you do not see any changes on the ``/admin/countries/new`` url, clear your cache. ``$ php app/console cache:clear``.
+Done! If you do not see any changes on the ``/admin/countries/new`` url, clear your cache: ``$ php app/console cache:clear``.
