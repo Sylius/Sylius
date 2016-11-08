@@ -17,7 +17,7 @@ default:
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.shipping_method
-                - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.address
 
                 - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.payment

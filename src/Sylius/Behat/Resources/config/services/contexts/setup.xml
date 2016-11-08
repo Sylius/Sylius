@@ -13,14 +13,14 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.behat.context.setup.address_book" class="Sylius\Behat\Context\Setup\AddressBookContext" scope="scenario">
+        <service id="sylius.behat.context.setup.address" class="Sylius\Behat\Context\Setup\AddressContext">
             <argument type="service" id="__symfony__.sylius.repository.address" />
             <argument type="service" id="__symfony__.sylius.manager.customer" />
             <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.setup.admin_user" class="Sylius\Behat\Context\Setup\AdminUserContext" scope="scenario">
-            <argument type="service" id="__symfony__.sylius.behat.shared_storage" />
+        <service id="sylius.behat.context.setup.admin_user" class="Sylius\Behat\Context\Setup\AdminUserContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.fixture.example_factory.admin_user" />
             <argument type="service" id="__symfony__.sylius.repository.admin_user" />
             <tag name="fob.context_service" />

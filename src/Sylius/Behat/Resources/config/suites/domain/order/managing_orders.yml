@@ -9,7 +9,7 @@ default:
 
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shared_storage
-                - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.order
                 - sylius.behat.context.transform.payment

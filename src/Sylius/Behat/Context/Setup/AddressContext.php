@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-final class AddressBookContext implements Context
+final class AddressContext implements Context
 {
     /**
      * @var AddressRepositoryInterface
