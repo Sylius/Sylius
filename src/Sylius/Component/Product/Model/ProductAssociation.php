@@ -125,4 +125,12 @@ class ProductAssociation implements ProductAssociationInterface
             $this->associatedProducts->removeElement($product);
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clearAssociatedObjects()
+    {
+        $this->associatedObjects->clear();
+    }
 }
