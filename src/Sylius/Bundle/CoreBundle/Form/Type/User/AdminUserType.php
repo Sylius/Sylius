@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\User;
 
 use Sylius\Bundle\UserBundle\Form\Type\UserType as BaseUserType;
+use Symfony\Component\Form\Extension\Core\Type\LocaleType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -29,8 +30,9 @@ class AdminUserType extends BaseUserType
         $builder
             ->add('firstName')
             ->add('lastName')
-            ->add('localeCode', 'sylius_locale_code_choice', [
+            ->add('localeCode', LocaleType::class, [
                 'label' => 'sylius.ui.locale',
+                'placeholder' => null,
             ])
         ;
     }
