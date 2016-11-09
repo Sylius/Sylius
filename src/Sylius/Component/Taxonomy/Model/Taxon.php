@@ -239,34 +239,6 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function getPermalink()
-    {
-        $permalink = $this->translate()->getPermalink();
-
-        if (null !== $permalink) {
-            return $permalink;
-        }
-
-        if (null === $this->parent) {
-            return $this->getSlug();
-        }
-
-        $this->setPermalink($permalink = $this->parent->getPermalink().'/'.$this->getSlug());
-
-        return $permalink;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPermalink($permalink)
-    {
-        $this->translate()->setPermalink($permalink);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDescription()
     {
         return $this->translate()->getDescription();

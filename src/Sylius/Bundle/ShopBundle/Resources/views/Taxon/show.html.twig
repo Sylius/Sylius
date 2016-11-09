@@ -13,7 +13,7 @@
             {
                 'code': taxon.code,
                 'template': '@SyliusShop/Product/Grid/_default.html.twig',
-                'permalink': app.request.attributes.get('permalink'),
+                'slug': app.request.attributes.get('slug'),
                 'sorting': app.request.query.get('sorting'),
                 'criteria': app.request.query.get('criteria')
             }))

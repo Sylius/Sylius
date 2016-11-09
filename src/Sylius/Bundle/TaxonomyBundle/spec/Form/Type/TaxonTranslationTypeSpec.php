@@ -52,7 +52,7 @@ final class TaxonTranslationTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('permalink', 'text', Argument::any())
+            ->add('slug', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

@@ -27,21 +27,11 @@ Feature: Editing a taxon
         And this taxon description should be "Main taxonomy for stickers"
 
     @ui
-    Scenario: Changing permalink
-        Given I want to modify the "T-Shirts" taxon
-        When I rename it to "Stickers" in "English (United States)"
-        And I change its description to "Main taxonomy for stickers" in "English (United States)"
-        And I change its permalink to "stickers" in "English (United States)"
-        And I save my changes
-        Then I should be notified that it has been successfully edited
-        And this taxon permalink should be "stickers"
-
-    @ui
     Scenario: Changing parent taxon
         Given I want to modify the "T-Shirts" taxon
         When I rename it to "Stickers" in "English (United States)"
         And I change its description to "Main taxonomy for stickers" in "English (United States)"
-        And I change its permalink to "stickers" in "English (United States)"
+        And I set its slug to "stickers"
         And I change its parent taxon to "Accessories"
         And I save my changes
         Then I should be notified that it has been successfully edited

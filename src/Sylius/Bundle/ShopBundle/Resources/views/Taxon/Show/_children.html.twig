@@ -1,11 +1,11 @@
 <div class="ui fluid vertical menu">
     <div class="header item">{{ taxon.name }}</div>
     {% if taxon.parent is not empty %}
-        <a href="{{ path('sylius_shop_taxon_show', {'permalink': taxon.parent.permalink}) }}" class="item">
+        <a href="{{ path('sylius_shop_taxon_show', {'slug': taxon.parent.slug}) }}" class="item">
             <i class="up arrow icon"></i> {{ 'sylius.ui.go_level_up'|trans }}
         </a>
     {% endif %}
     {% for child in taxon.children %}
-    <a href="{{ path('sylius_shop_taxon_show', {'permalink': child.permalink}) }}" class="item">{{ child.name }}</a>
+    <a href="{{ path('sylius_shop_taxon_show', {'slug': child.slug}) }}" class="item">{{ child.name }}</a>
     {% endfor %}
 </div>

@@ -17,7 +17,7 @@
         </div>
         <div class="content{% if 0 == loop.index0 %} active{% endif %}">
             {{ form_row(translationForm.name) }}
-            {{ form_row(translationForm.permalink) }}
+            {% include '@SyliusAdmin/Taxon/_slugField.html.twig' with { 'slugField': translationForm.slug } %}
             {{ form_row(translationForm.description) }}
         </div>
     {% endfor %}

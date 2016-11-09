@@ -14,6 +14,7 @@ Feature: Adding a new taxon for parent
         Given I want to create a new taxon for "Category"
         And I specify its code as "guns"
         And I name it "Guns" in "English (United States)"
+        And I set its slug to "guns"
         And I add it
         Then I should be notified that it has been successfully created
         And the "Guns" taxon should appear in the registry

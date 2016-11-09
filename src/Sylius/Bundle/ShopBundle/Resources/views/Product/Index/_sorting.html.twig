@@ -1,7 +1,7 @@
 {% set definition = resources.definition %}
 
-{% set oldest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'asc'}, 'permalink': resources.parameters.get('permalink')}) %}
-{% set newest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'desc'}, 'permalink': resources.parameters.get('permalink')}) %}
+{% set oldest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'asc'}, 'slug': resources.parameters.get('slug')}) %}
+{% set newest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'desc'}, 'slug': resources.parameters.get('slug')}) %}
 
 {% if app.request.query.get('sorting') is empty or app.request.basePath == newest_first_path %}
     {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}

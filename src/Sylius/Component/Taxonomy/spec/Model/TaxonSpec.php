@@ -147,17 +147,6 @@ final class TaxonSpec extends ObjectBehavior
         $this->getSlug()->shouldReturn('t-shirts');
     }
 
-    function it_has_no_permalink_by_default()
-    {
-        $this->getPermalink()->shouldReturn(null);
-    }
-
-    function its_permalink_is_mutable()
-    {
-        $this->setPermalink('woman-clothing');
-        $this->getPermalink()->shouldReturn('woman-clothing');
-    }
-
     function it_initializes_child_taxon_collection_by_default()
     {
         $this->getChildren()->shouldHaveType(Collection::class);

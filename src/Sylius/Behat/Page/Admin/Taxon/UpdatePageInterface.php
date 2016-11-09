@@ -43,10 +43,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function nameIt($name, $languageCode);
 
     /**
-     * @param string $permalink
-     * @param string $languageCode
+     * @param string $slug
      */
-    public function specifyPermalink($permalink, $languageCode);
+    public function specifySlug($slug);
 
     /**
      * @return bool
@@ -67,11 +66,18 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isImageWithCodeDisplayed($code);
 
     /**
+     * @return bool
+     */
+    public function isSlugReadOnly();
+
+    /**
      * @param string $code
      */
     public function removeImageWithCode($code);
 
     public function removeFirstImage();
+
+    public function enableSlugModification();
 
     /**
      * @return int

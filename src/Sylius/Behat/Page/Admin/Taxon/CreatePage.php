@@ -106,14 +106,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function nameIt($name, $languageCode)
     {
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_name', $languageCode), $name);
+
+        $this->waitForSlugGenerationIfNecessary();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function specifyPermalink($permalink, $languageCode)
+    public function specifySlug($slug)
     {
-        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_permalink', $languageCode), $permalink);
+        $this->getDocument()->fillField('Slug', $slug);
     }
 
     /**
@@ -210,7 +212,7 @@ JS;
             'images' => '#sylius_taxon_images',
             'name' => '#sylius_taxon_translations_en_US_name',
             'parent' => '#sylius_taxon_parent',
-            'permalink' => '#sylius_taxon_translations_en_US_permalink',
+            'slug' => '#sylius_taxon_translations_en_US_slug',
             'tree' => '.ui.list',
         ]);
     }
@@ -274,5 +276,14 @@ JS;
         }
 
         return $driver;
+    }
+
+    private function waitForSlugGenerationIfNecessary()
+    {
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $this->getDocument()->waitFor(1000, function () {
+                return '' !== $this->getElement('slug')->getValue();
+            });
+        }
     }
 }

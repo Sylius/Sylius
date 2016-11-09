@@ -74,6 +74,7 @@
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.manager.taxon" />
             <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.generator.taxon_slug" />
         </service>
 
         <service id="sylius.fixture.example_factory.product" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory">

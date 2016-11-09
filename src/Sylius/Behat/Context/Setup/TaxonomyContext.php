@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
@@ -53,6 +54,11 @@ final class TaxonomyContext implements Context
     private $imageUploader;
 
     /**
+     * @var TaxonSlugGeneratorInterface
+     */
+    private $taxonSlugGenerator;
+
+    /**
      * @var array
      */
     private $minkParameters;
@@ -63,6 +69,7 @@ final class TaxonomyContext implements Context
      * @param FactoryInterface $taxonImageFactory
      * @param ObjectManager $objectManager
      * @param ImageUploaderInterface $imageUploader
+     * @param TaxonSlugGeneratorInterface $taxonSlugGenerator
      * @param array $minkParameters
      */
     public function __construct(
@@ -71,6 +78,7 @@ final class TaxonomyContext implements Context
         FactoryInterface $taxonImageFactory,
         ObjectManager $objectManager,
         ImageUploaderInterface $imageUploader,
+        TaxonSlugGeneratorInterface $taxonSlugGenerator,
         array $minkParameters
     ) {
         $this->taxonRepository = $taxonRepository;
@@ -78,6 +86,7 @@ final class TaxonomyContext implements Context
         $this->taxonImageFactory = $taxonImageFactory;
         $this->objectManager = $objectManager;
         $this->imageUploader = $imageUploader;
+        $this->taxonSlugGenerator = $taxonSlugGenerator;
         $this->minkParameters = $minkParameters;
     }
 
@@ -133,6 +142,7 @@ final class TaxonomyContext implements Context
         $taxon = $this->taxonFactory->createNew();
         $taxon->setName($name);
         $taxon->setCode(StringInflector::nameToCode($name));
+        $taxon->setSlug($this->taxonSlugGenerator->generate($name));
 
         return $taxon;
     }

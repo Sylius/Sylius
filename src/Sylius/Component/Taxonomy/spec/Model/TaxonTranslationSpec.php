@@ -73,15 +73,4 @@ final class TaxonTranslationSpec extends ObjectBehavior
         $this->setSlug('t-shirts');
         $this->getSlug()->shouldReturn('t-shirts');
     }
-
-    function it_has_no_permalink_by_default()
-    {
-        $this->getPermalink()->shouldReturn(null);
-    }
-
-    function its_permalink_is_mutable()
-    {
-        $this->setPermalink('woman-clothing');
-        $this->getPermalink()->shouldReturn('woman-clothing');
-    }
 }
