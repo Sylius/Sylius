@@ -34,6 +34,8 @@ interface ShowPageInterface extends PageInterface
      */
     public function deleteAccount();
 
+    public function resetPassword();
+
     /**
      * @return string
      */

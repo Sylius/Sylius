@@ -12,6 +12,7 @@
     </div>
     {% if customer.user is not null %}
         <div class="right aligned column" id="actions">
+            {{ render(path('sylius_admin_request_customer_password_reset', { 'id': customer.id, 'email': customer.email })) }}
             {{ buttons.delete(path('sylius_admin_shop_user_delete', {'id': customer.user.id })) }}
         </div>
     {% else %}

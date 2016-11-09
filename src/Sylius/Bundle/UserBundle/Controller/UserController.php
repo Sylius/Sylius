@@ -246,9 +246,17 @@ class UserController extends ResourceController
             }
 
             $this->addFlash('success', 'sylius.user.password.reset.requested');
-            $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_user_security_login', true);
+            $redirectRoute = $request->attributes->get('_sylius[redirect]', 'sylius_user_security_login', true);
 
-            return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
+            if (is_array($redirectRoute)) {
+                return $this->redirectHandler->redirectToRoute(
+                    $configuration,
+                    $configuration->getParameters()->get('redirect')['route'],
+                    $configuration->getParameters()->get('redirect')['parameters']
+                );
+            }
+
+            return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
         }
 
         if (!$configuration->isHtmlRequest()) {
