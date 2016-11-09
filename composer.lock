@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aa73250ff88cffb1f06ae63daba588c9",
-    "content-hash": "d82e6d84b5c052b595799cd7e5529cd2",
+    "hash": "ab1aa9c8ac3581ab7ac156502f3fb28c",
+    "content-hash": "f1ee98b6f3925f7c9cab064b609be8af",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -8512,11 +8512,79 @@
                 "stripe"
             ],
             "time": "2016-10-21 18:25:10"
+        },
+        {
+            "name": "sylius/settings-bundle",
+            "version": "v1.0.0-alpha.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sylius/SyliusSettingsBundle.git",
+                "reference": "f05b86cfb7b0fa5f1f418f71e4e06f8c5b4ef231"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sylius/SyliusSettingsBundle/zipball/f05b86cfb7b0fa5f1f418f71e4e06f8c5b4ef231",
+                "reference": "f05b86cfb7b0fa5f1f418f71e4e06f8c5b4ef231",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0",
+                "sylius/registry": "^1.0",
+                "sylius/resource-bundle": "^1.0",
+                "symfony/framework-bundle": "^2.8"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^3.1",
+                "symfony/form": "^2.8",
+                "symfony/validator": "^2.8"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sylius\\Bundle\\SettingsBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sylius project",
+                    "homepage": "http://sylius.org"
+                },
+                {
+                    "name": "Community contributions",
+                    "homepage": "http://github.com/Sylius/Sylius/contributors"
+                },
+                {
+                    "name": "Paweł Jędrzejewski",
+                    "homepage": "http://pjedrzejewski.com"
+                }
+            ],
+            "description": "Settings system for Symfony2 applications, editable via web user interface.",
+            "homepage": "http://sylius.org",
+            "keywords": [
+                "Settings",
+                "config",
+                "configuration",
+                "ecommerce",
+                "shop",
+                "webshop"
+            ],
+            "time": "2016-10-17 15:23:39"
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "sylius/settings-bundle": 15
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
