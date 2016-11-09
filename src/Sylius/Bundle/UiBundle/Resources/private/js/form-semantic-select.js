@@ -11,7 +11,7 @@
     'use strict';
 
     $(document).ready(function() {
-        $('#taxon-select.ui.fluid.search.selection.dropdown').dropdown({
+        $('.taxon-select.ui.fluid.search.selection.dropdown').dropdown({
             delay: {
                 search: 250,
             },
@@ -46,7 +46,7 @@
     })
 
     $(document).ready(function() {
-        $('#product-select.ui.fluid.multiple.search.selection.dropdown').dropdown({
+        $('.product-select.ui.fluid.multiple.search.selection.dropdown').dropdown({
             delay: {
                 search: 250,
             },
@@ -78,7 +78,7 @@
                 }
             },
             onAdd: function(addedValue, addedText, $addedChoice) {
-                var inputAssociation = $addedChoice.parents('#product-select').find('input[name*="[associations]"]');
+                var inputAssociation = $addedChoice.parents('.product-select').find('input[name*="[associations]"]');
                 var associatedProductIds = 0 < inputAssociation.val().length ? inputAssociation.val().split(',') : [];
 
                 associatedProductIds.push(addedValue);
@@ -87,7 +87,7 @@
                 inputAssociation.attr('value', associatedProductIds.join());
             },
             onRemove: function(removedValue, removedText, $removedChoice) {
-                var inputAssociation = $removedChoice.parents('#product-select').find('input[name*="[associations]"]');
+                var inputAssociation = $removedChoice.parents('.product-select').find('input[name*="[associations]"]');
                 var associatedProductIds = 0 < inputAssociation.val().length ? inputAssociation.val().split(',') : [];
 
                 associatedProductIds.splice($.inArray(removedValue, associatedProductIds), 1);
@@ -97,7 +97,7 @@
         });
     });
 
-    $('#product-select.ui.fluid.multiple.search.selection.dropdown').each(function() {
+    $('.product-select.ui.fluid.multiple.search.selection.dropdown').each(function() {
         $(this).dropdown('set selected', $(this).find('input[name*="[associations]"]').val().split(','));
     });
 })( jQuery );

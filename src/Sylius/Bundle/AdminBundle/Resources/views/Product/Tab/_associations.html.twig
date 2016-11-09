@@ -4,7 +4,7 @@
     {% for associationForm in form.associations %}
         <div class="field">
             {{ form_label(associationForm) }}
-            <div id="product-select" class="ui fluid multiple search selection dropdown">
+            <div class="product-select ui fluid multiple search selection dropdown">
                 {{ form_widget(associationForm, {'attr': {'class' : 'autocomplete'}}) }}
                 <i class="dropdown icon"></i>
                 <div class="default text">{{'sylius.ui.select_products'|trans}}</div>
