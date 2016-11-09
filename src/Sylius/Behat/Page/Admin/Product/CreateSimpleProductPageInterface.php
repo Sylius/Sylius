@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Component\Association\Model\AssociationTypeInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -57,4 +58,16 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function attachImage($path, $code = null);
 
     public function enableSlugModification();
+
+    /**
+     * @param string $productName
+     * @param AssociationTypeInterface $productAssociationType
+     */
+    public function associateProduct($productName, AssociationTypeInterface $productAssociationType);
+
+    /**
+     * @param string $productName
+     * @param AssociationTypeInterface $productAssociationType
+     */
+    public function removeAssociatedProduct($productName, AssociationTypeInterface $productAssociationType);
 }

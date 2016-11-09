@@ -14,6 +14,7 @@ default:
                 - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_association_type
                 - sylius.behat.context.transform.product_option
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
@@ -27,6 +28,7 @@ default:
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.product_association
                 - sylius.behat.context.setup.product_attribute
                 - sylius.behat.context.setup.product_option
                 - sylius.behat.context.setup.product_review

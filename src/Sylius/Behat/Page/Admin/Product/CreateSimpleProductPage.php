@@ -15,6 +15,7 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Component\Association\Model\AssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -113,9 +114,53 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function associateProduct($productName, AssociationTypeInterface $productAssociationType)
+    {
+        $this->clickTab('associations');
+
+        Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
+
+        $dropdown = $this->getElement('association_dropdown', [
+            '%association%' => $productAssociationType->getName()
+        ]);
+        $dropdown->click();
+        $dropdown->waitFor(10, function () use ($productName, $productAssociationType) {
+            return $this->hasElement('association_dropdown_item', [
+                '%association%' => $productAssociationType->getName(),
+                '%item%' => $productName,
+            ]);
+        });
+
+        $item = $this->getElement('association_dropdown_item', [
+            '%association%' => $productAssociationType->getName(),
+            '%item%' => $productName,
+        ]);
+        $item->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAssociatedProduct($productName, AssociationTypeInterface $productAssociationType)
+    {
+        $this->clickTabIfItsNotActive('associations');
+
+        $item = $this->getElement('association_dropdown_item_selected', [
+            '%association%' => $productAssociationType->getName(),
+            '%item%' => $productName,
+        ]);
+        $item->find('css', 'i.delete')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
+            'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
+            'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
             'attribute_delete_button' => '.attribute .label:contains("%attribute%") ~ button',
             'attribute_value' => '.attribute .label:contains("%attribute%") ~ input',
             'attributes_choice' => 'select[name="sylius_product_attribute_choice"]',
@@ -163,6 +208,15 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         if (!$attributesTab->hasClass('active')) {
             $attributesTab->click();
         }
+    }
+
+    /**
+     * @param string $tabName
+     */
+    private function clickTab($tabName)
+    {
+        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
+        $attributesTab->click();
     }
 
     /**

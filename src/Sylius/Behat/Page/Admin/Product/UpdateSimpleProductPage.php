@@ -16,6 +16,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Component\Association\Model\AssociationTypeInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -226,6 +227,60 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function associateProduct($productName, AssociationTypeInterface $productAssociationType)
+    {
+        $this->clickTab('associations');
+
+        Assert::isInstanceOf($this->getDriver(), Selenium2Driver::class);
+
+        $dropdown = $this->getElement('association_dropdown', [
+            '%association%' => $productAssociationType->getName()
+        ]);
+        $dropdown->click();
+        $dropdown->waitFor(10, function () use ($productName, $productAssociationType) {
+            return $this->hasElement('association_dropdown_item', [
+                '%association%' => $productAssociationType->getName(),
+                '%item%' => $productName,
+            ]);
+        });
+
+        $item = $this->getElement('association_dropdown_item', [
+            '%association%' => $productAssociationType->getName(),
+            '%item%' => $productName,
+        ]);
+        $item->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAssociatedProduct($productName, AssociationTypeInterface $productAssociationType)
+    {
+        $this->clickTabIfItsNotActive('associations');
+
+        return $this->hasElement('association_dropdown_item', [
+            '%association%' => $productAssociationType->getName(),
+            '%item%' => $productName,
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAssociatedProduct($productName, AssociationTypeInterface $productAssociationType)
+    {
+        $this->clickTabIfItsNotActive('associations');
+
+        $item = $this->getElement('association_dropdown_item_selected', [
+            '%association%' => $productAssociationType->getName(),
+            '%item%' => $productName,
+        ]);
+        $item->find('css', 'i.delete')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');
@@ -237,6 +292,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'association_dropdown' => '.field > label:contains("%association%") ~ .product-select',
+            'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
+            'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
             'attribute' => '.attribute .label:contains("%attribute%") ~ input',
             'code' => '#sylius_product_code',
             'images' => '#sylius_product_images',
@@ -265,6 +323,15 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         if (!$attributesTab->hasClass('active')) {
             $attributesTab->click();
         }
+    }
+
+    /**
+     * @param string $tabName
+     */
+    private function clickTab($tabName)
+    {
+        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
+        $attributesTab->click();
     }
 
     /**
