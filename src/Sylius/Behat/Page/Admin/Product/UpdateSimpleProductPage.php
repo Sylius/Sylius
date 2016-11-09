@@ -330,7 +330,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         }
 
         $value = $slugElement->getValue();
-        $this->getDocument()->waitFor(1000, function () use ($slugElement, $value) {
+        $this->getDocument()->waitFor(10, function () use ($slugElement, $value) {
             return $value !== $slugElement->getValue();
         });
     }
