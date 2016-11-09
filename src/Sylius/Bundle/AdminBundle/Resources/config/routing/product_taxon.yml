@@ -1,0 +1,8 @@
+sylius_admin_product_taxon_move:
+    path: product-taxons/{id}/move
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.productTaxon:updateAction
+        _sylius:
+            section: admin
+            form: sylius_product_taxon_position
