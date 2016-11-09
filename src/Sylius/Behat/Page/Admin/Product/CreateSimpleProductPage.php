@@ -181,7 +181,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     private function waitForSlugGenerationIfNecessary()
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
-            $this->getDocument()->waitFor(1000, function () {
+            $this->getDocument()->waitFor(10, function () {
                 return '' !== $this->getElement('slug')->getValue();
             });
         }
