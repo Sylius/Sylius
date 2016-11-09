@@ -1022,7 +1022,7 @@ Final response contains the full order information, now you can call the purchas
         "total": 1504750,
         "state": "new",
         "number": "000000001",
-        "completed_at": "2016-06-24T10:55:28+0200",
+        "checkout_completed_at": "2016-06-24T10:55:28+0200",
         "checkout_state": "completed",
     }
 

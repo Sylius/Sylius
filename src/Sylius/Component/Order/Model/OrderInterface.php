@@ -31,19 +31,19 @@ interface OrderInterface extends
     /**
      * @return \DateTime
      */
-    public function getCompletedAt();
+    public function getCheckoutCompletedAt();
 
     /**
-     * @param null|\DateTime $completedAt
+     * @param null|\DateTime $checkoutCompletedAt
      */
-    public function setCompletedAt(\DateTime $completedAt = null);
+    public function setCheckoutCompletedAt(\DateTime $checkoutCompletedAt = null);
 
     /**
      * @return bool
      */
-    public function isCompleted();
+    public function isCheckoutCompleted();
 
-    public function complete();
+    public function completeCheckout();
 
     /**
      * @return string

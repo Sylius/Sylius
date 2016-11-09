@@ -543,7 +543,7 @@ final class OrderContext implements Context
             $order->setNumber($number);
         }
 
-        $order->complete();
+        $order->completeCheckout();
 
         return $order;
     }

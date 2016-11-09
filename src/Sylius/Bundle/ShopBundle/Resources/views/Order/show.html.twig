@@ -8,7 +8,7 @@
             <div class="sub header">
                 <div class="ui horizontal divided list">
                     <div class="item">
-                        {{ order.completedAt|date }}
+                        {{ order.checkoutCompletedAt|date }}
                     </div>
                     <div class="item">
                         {{ order.total|sylius_price(order.currencyCode, order.exchangeRate) }}

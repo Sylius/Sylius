@@ -29,7 +29,7 @@ winzou_state_machine:
                     do: ["@sylius.order_number_assigner", "assignNumber"]
                     args: ["object"]
             after:
-                sylius_complete:
+                sylius_complete_checkout:
                     on: "create"
-                    do: ["@sylius.complete_order_callback", "completeOrder"]
+                    do: ["@sylius.complete_checkout_callback", "completeCheckout"]
                     args: ["object"]

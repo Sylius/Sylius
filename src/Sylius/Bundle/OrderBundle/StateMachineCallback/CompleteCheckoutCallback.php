@@ -16,13 +16,13 @@ use Sylius\Component\Order\Model\OrderInterface;
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class CompleteOrderCallback
+class CompleteCheckoutCallback
 {
     /**
      * @param OrderInterface $order
      */
-    public function completeOrder(OrderInterface $order)
+    public function completeCheckout(OrderInterface $order)
     {
-        $order->complete();
+        $order->completeCheckout();
     }
 }

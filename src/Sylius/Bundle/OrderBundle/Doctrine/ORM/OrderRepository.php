@@ -31,7 +31,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
 
         return (int) $queryBuilder
             ->select('COUNT(o.id)')
-            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->andWhere($queryBuilder->expr()->isNotNull('o.checkoutCompletedAt'))
             ->getQuery()
             ->getSingleScalarResult()
         ;
@@ -46,7 +46,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
 
         return (int) $queryBuilder
             ->select('SUM(o.total)')
-            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->andWhere($queryBuilder->expr()->isNotNull('o.checkoutCompletedAt'))
             ->getQuery()
             ->getSingleScalarResult()
         ;
@@ -64,7 +64,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->leftJoin('o.items', 'item')
             ->andWhere('o.state != :state')
             ->setMaxResults($count)
-            ->orderBy('o.completedAt', 'desc')
+            ->orderBy('o.checkoutCompletedAt', 'desc')
             ->setParameter('state', OrderInterface::STATE_CART)
             ->getQuery()
             ->getResult()
@@ -79,7 +79,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
         $queryBuilder = $this->createQueryBuilder('o');
 
         return $queryBuilder
-            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->andWhere($queryBuilder->expr()->isNotNull('o.checkoutCompletedAt'))
             ->andWhere('o.number = :number')
             ->setParameter('number', $number)
             ->getQuery()
@@ -125,7 +125,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->where('o.checkoutState = :checkoutState')
             ->andWhere('o.paymentState != :paymentState')
             ->andWhere('o.state = :orderState')
-            ->andWhere('o.completedAt < :terminalDate')
+            ->andWhere('o.checkoutCompletedAt < :terminalDate')
             ->setParameter('checkoutState', OrderCheckoutStates::STATE_COMPLETED)
             ->setParameter('paymentState', OrderPaymentStates::STATE_PAID)
             ->setParameter('orderState', OrderInterface::STATE_NEW)

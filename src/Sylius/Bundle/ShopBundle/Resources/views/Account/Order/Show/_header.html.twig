@@ -8,7 +8,7 @@
         <div class="sub header">
             <div class="ui horizontal divided list">
                 <div class="item">
-                    {{ order.completedAt|format_date }}
+                    {{ order.checkoutCompletedAt|format_date }}
                 </div>
                 <div class="item">
                     {{ labels.default(('sylius.ui.'~order.state)|trans) }}

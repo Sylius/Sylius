@@ -12,7 +12,7 @@ sylius_grid:
                         method: createByCustomerQueryBuilder
                         arguments: [expr:service('sylius.context.customer').getCustomer()]
             sorting:
-                completedAt: desc
+                checkoutCompletedAt: desc
             fields:
                 number:
                     type: twig
@@ -20,7 +20,7 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: SyliusShopBundle:Account/Order/Grid/Field:number.html.twig
-                completedAt:
+                checkoutCompletedAt:
                     type: datetime
                     label: sylius.ui.date
                     sortable: ~
