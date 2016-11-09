@@ -38,6 +38,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $deleteButton->pressButton('Delete');
     }
 
+    public function resetPassword()
+    {
+        $this->getDocument()->pressButton('Reset password');
+    }
+
     /**
      * {@inheritdoc}
      */

@@ -12,6 +12,11 @@
     </div>
     {% if customer.user is not null %}
         <div class="right aligned column" id="actions">
+            <form action="">
+                <button class="ui yellow labeled icon button" style="float: right;">
+                    <i class="icon refresh"></i> {{ 'sylius.ui.reset_password'|trans }}
+                </button>
+            </form>
             {{ buttons.delete(path('sylius_admin_shop_user_delete', {'id': customer.user.id })) }}
         </div>
     {% else %}
