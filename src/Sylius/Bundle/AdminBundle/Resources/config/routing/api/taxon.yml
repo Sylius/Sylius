@@ -1,3 +1,12 @@
+sylius_admin_api_taxon_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _format: json
+        _sylius:
+            grid: sylius_admin_taxon
+
 sylius_admin_api_generate_taxon_slug:
     path: /generate-slug/
     methods: [GET]
