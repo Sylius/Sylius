@@ -16,8 +16,8 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -227,7 +227,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function associateProduct($productName, AssociationTypeInterface $productAssociationType)
+    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames)
     {
         $this->clickTab('associations');
 
@@ -237,24 +237,26 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             '%association%' => $productAssociationType->getName()
         ]);
         $dropdown->click();
-        $dropdown->waitFor(10, function () use ($productName, $productAssociationType) {
+        $dropdown->waitFor(10, function () use ($productsNames, $productAssociationType) {
             return $this->hasElement('association_dropdown_item', [
                 '%association%' => $productAssociationType->getName(),
-                '%item%' => $productName,
+                '%item%' => $productsNames[0],
             ]);
         });
 
-        $item = $this->getElement('association_dropdown_item', [
-            '%association%' => $productAssociationType->getName(),
-            '%item%' => $productName,
-        ]);
-        $item->click();
+        foreach ($productsNames as $productName) {
+            $item = $this->getElement('association_dropdown_item', [
+                '%association%' => $productAssociationType->getName(),
+                '%item%' => $productName,
+            ]);
+            $item->click();
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasAssociatedProduct($productName, AssociationTypeInterface $productAssociationType)
+    public function hasAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType)
     {
         $this->clickTabIfItsNotActive('associations');
 
@@ -267,7 +269,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function removeAssociatedProduct($productName, AssociationTypeInterface $productAssociationType)
+    public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType)
     {
         $this->clickTabIfItsNotActive('associations');
 

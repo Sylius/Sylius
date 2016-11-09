@@ -13,8 +13,8 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -121,22 +121,22 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function getValidationMessageForImage();
 
     /**
-     * @param string $productName
-     * @param AssociationTypeInterface $productAssociationType
+     * @param ProductAssociationTypeInterface $productAssociationType
+     * @param string[] $productsNames
      */
-    public function associateProduct($productName, AssociationTypeInterface $productAssociationType);
+    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames);
 
     /**
      * @param string $productName
-     * @param AssociationTypeInterface $productAssociationType
+     * @param ProductAssociationTypeInterface $productAssociationType
      *
      * @return bool
      */
-    public function hasAssociatedProduct($productName, AssociationTypeInterface $productAssociationType);
+    public function hasAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType);
 
     /**
      * @param string $productName
-     * @param AssociationTypeInterface $productAssociationType
+     * @param ProductAssociationTypeInterface $productAssociationType
      */
-    public function removeAssociatedProduct($productName, AssociationTypeInterface $productAssociationType);
+    public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType);
 }

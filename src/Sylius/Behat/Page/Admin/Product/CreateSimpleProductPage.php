@@ -15,7 +15,7 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -114,7 +114,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function associateProduct($productName, AssociationTypeInterface $productAssociationType)
+    public function associateProducts(ProductAssociationTypeInterface $productAssociationType, array $productsNames)
     {
         $this->clickTab('associations');
 
@@ -124,24 +124,26 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             '%association%' => $productAssociationType->getName()
         ]);
         $dropdown->click();
-        $dropdown->waitFor(10, function () use ($productName, $productAssociationType) {
+        $dropdown->waitFor(10, function () use ($productsNames, $productAssociationType) {
             return $this->hasElement('association_dropdown_item', [
                 '%association%' => $productAssociationType->getName(),
-                '%item%' => $productName,
+                '%item%' => $productsNames[0],
             ]);
         });
 
-        $item = $this->getElement('association_dropdown_item', [
-            '%association%' => $productAssociationType->getName(),
-            '%item%' => $productName,
-        ]);
-        $item->click();
+        foreach ($productsNames as $productName) {
+            $item = $this->getElement('association_dropdown_item', [
+                '%association%' => $productAssociationType->getName(),
+                '%item%' => $productName,
+            ]);
+            $item->click();
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeAssociatedProduct($productName, AssociationTypeInterface $productAssociationType)
+    public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType)
     {
         $this->clickTabIfItsNotActive('associations');
 

@@ -23,9 +23,9 @@ use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentProductPageResolverInterface;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -667,7 +667,7 @@ final class ManagingProductsContext implements Context
      * @When I associate as :productAssociationType the :firstProductName and :secondProductName products
      */
     public function iAssociateProductsAsProductAssociation(
-        AssociationTypeInterface $productAssociationType,
+        ProductAssociationTypeInterface $productAssociationType,
         ...$productsNames
     ) {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
@@ -676,9 +676,7 @@ final class ManagingProductsContext implements Context
             $this->updateSimpleProductPage,
         ], $this->sharedStorage->get('product'));
 
-        foreach ($productsNames as $productName) {
-            $currentPage->associateProduct($productName, $productAssociationType);
-        }
+        $currentPage->associateProducts($productAssociationType, $productsNames);
     }
 
     /**
@@ -686,7 +684,7 @@ final class ManagingProductsContext implements Context
      */
     public function iRemoveAnAssociatedProductFromProductAssociation(
         $productName,
-        AssociationTypeInterface $productAssociationType
+        ProductAssociationTypeInterface $productAssociationType
     ) {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
@@ -876,7 +874,7 @@ final class ManagingProductsContext implements Context
      * @Then this product should( also) have an association :productAssociationType with products :firstProductName and :secondProductName
      */
     public function theProductShouldHaveAnAssociationWithProducts(
-        AssociationTypeInterface $productAssociationType,
+        ProductAssociationTypeInterface $productAssociationType,
         ...$productsNames
     ) {
         foreach ($productsNames as $productName) {

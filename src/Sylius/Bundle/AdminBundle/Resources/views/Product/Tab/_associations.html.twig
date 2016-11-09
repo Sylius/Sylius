@@ -11,8 +11,8 @@
                 <div class="menu">
                     {% for association in product.associations %}
                         {% if association.type.code == associationForm.vars.name %}
-                            {% for associatedObject in association.associatedObjects %}
-                                <div class="item" data-value="{{ associatedObject.id }}">{{ associatedObject.name }}</div>
+                            {% for associatedProduct in association.associatedProducts %}
+                                <div class="item" data-value="{{ associatedProduct.id }}">{{ associatedProduct.name }}</div>
                             {% endfor %}
                         {% endif %}
                     {% endfor %}

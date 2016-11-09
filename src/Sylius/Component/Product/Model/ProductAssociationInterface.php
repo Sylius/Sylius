@@ -61,4 +61,6 @@ interface ProductAssociationInterface extends TimestampableInterface, ResourceIn
      * @return bool
      */
     public function hasAssociatedProduct(ProductInterface $product);
+
+    public function clearAssociatedProducts();
 }

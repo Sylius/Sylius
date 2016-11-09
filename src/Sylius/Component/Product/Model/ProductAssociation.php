@@ -129,8 +129,8 @@ class ProductAssociation implements ProductAssociationInterface
     /**
      * {@inheritdoc}
      */
-    public function clearAssociatedObjects()
+    public function clearAssociatedProducts()
     {
-        $this->associatedObjects->clear();
+        $this->associatedProducts->clear();
     }
 }

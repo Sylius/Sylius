@@ -13,8 +13,8 @@ namespace Sylius\Bundle\ProductBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Association\Model\AssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -76,7 +76,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
 
         /** @var ProductAssociationInterface $productAssociation */
         foreach ($productAssociations as $productAssociation) {
-            $productIdsAsString = $this->getIdsAsStringFromProducts($productAssociation->getAssociatedObjects());
+            $productIdsAsString = $this->getIdsAsStringFromProducts($productAssociation->getAssociatedProducts());
 
             $values[$productAssociation->getType()->getCode()] = $productIdsAsString;
         }
@@ -101,7 +101,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
 
             /** @var ProductAssociationInterface $productAssociation */
             $productAssociation = $this->getProductAssociationByTypeCode($productAssociationTypeCode);
-            $this->setAssociatedObjectsByProductIds($productAssociation, $productIds);
+            $this->setAssociatedProductsByProductIds($productAssociation, $productIds);
             $productAssociations->add($productAssociation);
         }
 
@@ -144,7 +144,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
             }
         }
 
-        /** @var AssociationTypeInterface $productAssociationType */
+        /** @var ProductAssociationTypeInterface $productAssociationType */
         $productAssociationType = $this->productAssociationTypeRepository->findOneBy([
             'code' => $productAssociationTypeCode,
         ]);
@@ -160,13 +160,13 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
      * @param ProductAssociationInterface $productAssociation
      * @param string $productIds
      */
-    private function setAssociatedObjectsByProductIds(ProductAssociationInterface $productAssociation, $productIds)
+    private function setAssociatedProductsByProductIds(ProductAssociationInterface $productAssociation, $productIds)
     {
         $products = $this->productRepository->findBy(['id' => explode(',', $productIds)]);
 
-        $productAssociation->clearAssociatedObjects();
+        $productAssociation->clearAssociatedProducts();
         foreach ($products as $product) {
-            $productAssociation->addAssociatedObject($product);
+            $productAssociation->addAssociatedProduct($product);
         }
     }
 

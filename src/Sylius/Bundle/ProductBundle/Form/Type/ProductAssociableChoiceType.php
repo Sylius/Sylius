@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
-use Sylius\Component\Association\Model\AssociationTypeInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -51,7 +51,7 @@ class ProductAssociableChoiceType extends AbstractType
     {
         $productAssociationTypes = $this->productAssociationTypeRepository->findAll();
 
-        /** @var AssociationTypeInterface $productAssociationType */
+        /** @var ProductAssociationTypeInterface $productAssociationType */
         foreach ($productAssociationTypes as $productAssociationType) {
             $builder->add($productAssociationType->getCode(), 'text', [
                 'label' => $productAssociationType->getName(),

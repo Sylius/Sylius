@@ -50,6 +50,7 @@
             delay: {
                 search: 250,
             },
+            forceSelection: false,
             apiSettings: {
                 action: 'get products',
                 dataType: 'JSON',
