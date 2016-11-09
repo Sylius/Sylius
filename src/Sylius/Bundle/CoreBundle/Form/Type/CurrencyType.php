@@ -55,10 +55,16 @@ class CurrencyType extends BaseCurrencyType
 
             $form = $event->getForm();
 
-            $form->add('enabled', 'checkbox', [
-                'label' => 'sylius.form.locale.enabled',
-                'disabled' => true,
-            ]);
+            $form
+                ->add('enabled', 'checkbox', [
+                    'label' => 'sylius.form.locale.enabled',
+                    'disabled' => true,
+                ])
+                ->add('exchangeRate', 'number', [
+                    'label' => 'sylius.form.currency.exchange_rate',
+                    'disabled' => true,
+                ])
+            ;
         });
     }
 
