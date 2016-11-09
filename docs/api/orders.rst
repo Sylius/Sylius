@@ -54,7 +54,7 @@ The response will contain the newly created order information.
             "items":[
                 {
                     "id":301,
-                    "completed_at":"2014-11-26T23:00:33+0000",
+                    "checkout_completed_at":"2014-11-26T23:00:33+0000",
                     "number":"000000048",
                     "items":[
                         {
@@ -171,7 +171,7 @@ Response
 
     {
         "id":301,
-        "completed_at":"2014-11-26T23:00:33+0000",
+        "checkout_completed_at":"2014-11-26T23:00:33+0000",
         "number":"000000048",
         "items":[
             {

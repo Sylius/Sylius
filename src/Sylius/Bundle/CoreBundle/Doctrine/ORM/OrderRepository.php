@@ -118,17 +118,17 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     public function createCheckoutsPaginator(array $criteria = null, array $sorting = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder->andWhere($queryBuilder->expr()->isNull('o.completedAt'));
+        $queryBuilder->andWhere($queryBuilder->expr()->isNull('o.checkoutCompletedAt'));
 
         if (!empty($criteria['createdAtFrom'])) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':createdAtFrom'))
+                ->andWhere($queryBuilder->expr()->gte('o.checkoutCompletedAt', ':createdAtFrom'))
                 ->setParameter('createdAtFrom', $criteria['createdAtFrom'])
             ;
         }
         if (!empty($criteria['createdAtTo'])) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':createdAtTo'))
+                ->andWhere($queryBuilder->expr()->lte('o.checkoutCompletedAt', ':createdAtTo'))
                 ->setParameter('createdAtTo', $criteria['createdAtTo'])
             ;
         }

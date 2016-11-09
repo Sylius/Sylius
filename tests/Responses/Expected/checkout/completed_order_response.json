@@ -1,6 +1,6 @@
 {
     "id": @integer@,
-    "completed_at": "@string@.isDateTime()",
+    "checkout_completed_at": "@string@.isDateTime()",
     "number": @string@,
     "items": @array@,
     "items_total": @integer@,

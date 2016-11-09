@@ -30,7 +30,7 @@ class Order implements OrderInterface
     /**
      * @var \DateTime
      */
-    protected $completedAt;
+    protected $checkoutCompletedAt;
 
     /**
      * @var string
@@ -92,33 +92,33 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCompletedAt()
+    public function getCheckoutCompletedAt()
     {
-        return $this->completedAt;
+        return $this->checkoutCompletedAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCompletedAt(\DateTime $completedAt = null)
+    public function setCheckoutCompletedAt(\DateTime $checkoutCompletedAt = null)
     {
-        $this->completedAt = $completedAt;
+        $this->checkoutCompletedAt = $checkoutCompletedAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isCompleted()
+    public function isCheckoutCompleted()
     {
-        return null !== $this->completedAt;
+        return null !== $this->checkoutCompletedAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function complete()
+    public function completeCheckout()
     {
-        $this->completedAt = new \DateTime();
+        $this->checkoutCompletedAt = new \DateTime();
     }
 
     /**

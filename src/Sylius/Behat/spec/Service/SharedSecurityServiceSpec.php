@@ -49,7 +49,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
     ) {
         $adminSecurityService->getCurrentToken()->willReturn($token);
         $adminSecurityService->logIn($adminUser)->shouldBeCalled();
-        $order->complete()->shouldBeCalled();
+        $order->completeCheckout()->shouldBeCalled();
         $adminSecurityService->restoreToken($token)->shouldBeCalled();
         $adminSecurityService->logOut()->shouldNotBeCalled();
 
@@ -57,7 +57,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
         $this->performActionAsAdminUser(
             $adminUser,
             function () use ($wrappedOrder) {
-                $wrappedOrder->complete();
+                $wrappedOrder->completeCheckout();
             }
         );
     }
@@ -69,7 +69,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
     ) {
         $adminSecurityService->getCurrentToken()->willThrow(TokenNotFoundException::class);
         $adminSecurityService->logIn($adminUser)->shouldBeCalled();
-        $order->complete()->shouldBeCalled();
+        $order->completeCheckout()->shouldBeCalled();
         $adminSecurityService->restoreToken(Argument::any())->shouldNotBeCalled();
         $adminSecurityService->logOut()->shouldBeCalled();
 
@@ -77,7 +77,7 @@ final class SharedSecurityServiceSpec extends ObjectBehavior
         $this->performActionAsAdminUser(
             $adminUser,
             function () use ($wrappedOrder) {
-                $wrappedOrder->complete();
+                $wrappedOrder->completeCheckout();
             }
         );
     }

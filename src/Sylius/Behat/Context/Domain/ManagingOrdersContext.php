@@ -167,7 +167,7 @@ final class ManagingOrdersContext implements Context
      */
     public function thisOrderHasNotBeenPaidForDays(OrderInterface $order, $amount, $time)
     {
-        $order->setCompletedAt(new \DateTime('-'.$amount.' '.$time));
+        $order->setCheckoutCompletedAt(new \DateTime('-'.$amount.' '.$time));
         $this->orderManager->flush();
 
         $this->unpaidOrdersStateUpdater->cancel();

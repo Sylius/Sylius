@@ -12,20 +12,20 @@
 namespace spec\Sylius\Bundle\OrderBundle\StateMachineCallback;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback;
+use Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteCheckoutCallback;
 use Sylius\Component\Order\Model\OrderInterface;
 
-final class CompleteOrderCallbackSpec extends ObjectBehavior
+final class CompleteCheckoutCallbackSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(CompleteOrderCallback::class);
+        $this->shouldHaveType(CompleteCheckoutCallback::class);
     }
 
     function it_completes_an_order(OrderInterface $order)
     {
-        $order->complete()->shouldBeCalled();
+        $order->completeCheckout()->shouldBeCalled();
 
-        $this->completeOrder($order);
+        $this->completeCheckout($order);
     }
 }

@@ -7,7 +7,7 @@
         <div class="sub header">
             <div class="ui horizontal divided list">
                 <div class="item">
-                    {{ order.completedAt|format_date }}
+                    {{ order.checkoutCompletedAt|format_date }}
                 </div>
                 <div class="item" id="sylius-order-state">
                     {% include [('@SyliusAdmin/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
