@@ -35,6 +35,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function canHaveExchangeRateChanged()
+    {
+        return $this->getElement('exchangeRate')->hasAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function changeExchangeRate($exchangeRate)
     {
         $this->getDocument()->fillField('Exchange rate', $exchangeRate);

@@ -27,6 +27,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function canBeDisabled();
 
     /**
+     * @return bool
+     */
+    public function canHaveExchangeRateChanged();
+
+    /**
      * @param string $exchangeRate
      */
     public function changeExchangeRate($exchangeRate);

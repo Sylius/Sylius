@@ -140,7 +140,18 @@ final class ManagingCurrenciesContext implements Context
     {
         Assert::true(
             $this->updatePage->canBeDisabled(),
-            'I should not be able to disable this currency'
+            'I should not be able to disable this currency.'
+        );
+    }
+
+    /**
+     * @Then I should not be able to change exchange rate of this currency
+     */
+    public function iCannotChangeItsExchangeRate()
+    {
+        Assert::true(
+            $this->updatePage->canHaveExchangeRateChanged(),
+            'I should not be able to change exchange rate of this currency.'
         );
     }
 
