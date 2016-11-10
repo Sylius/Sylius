@@ -23,7 +23,7 @@
         </id>
 
         <field name="position" type="integer">
-            <gedmo:sortable-position/>
+            <gedmo:sortable-position />
         </field>
 
         <many-to-one field="product" target-entity="Sylius\Component\Product\Model\ProductInterface" inversed-by="productTaxons">
