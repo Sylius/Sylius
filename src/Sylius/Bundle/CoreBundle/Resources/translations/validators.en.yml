@@ -35,6 +35,18 @@ sylius:
             not_blank: Please enter the price.
         original_price:
             min: Original price must not be negative.
+        weight:
+            min: Weight cannot be negative.
+            invalid: Weight must be a number.
+        width:
+            min: Width cannot be negative.
+            invalid: Width must be a number.
+        height:
+            min: Height cannot be negative.
+            invalid: Height must be a number.
+        depth:
+            min: Depth cannot be negative.
+            invalid: Depth must be a number.
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.

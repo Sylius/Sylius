@@ -605,6 +605,7 @@ sylius:
         promotion_information: 'Promotion information'
         promotion_total: 'Promotion total'
         promotions: 'Promotions'
+        properties: 'Properties'
         province: 'Province'
         provinces: 'Provinces'
         purchased_from: 'Purchased from'

@@ -42,5 +42,29 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="weight">
+            <constraint name="Range">
+                <option name="min">0</option>
+                <option name="minMessage">sylius.product_variant.weight.min</option>
+            </constraint>
+        </property>
+        <property name="width">
+            <constraint name="Range">
+                <option name="min">0</option>
+                <option name="minMessage">sylius.product_variant.width.min</option>
+            </constraint>
+        </property>
+        <property name="height">
+            <constraint name="Range">
+                <option name="min">0</option>
+                <option name="minMessage">sylius.product_variant.height.min</option>
+            </constraint>
+        </property>
+        <property name="depth">
+            <constraint name="Range">
+                <option name="min">0</option>
+                <option name="minMessage">sylius.product_variant.depth.min</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>
