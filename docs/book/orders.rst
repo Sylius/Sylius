@@ -67,13 +67,13 @@ Assuming that you have a **Product** with a **ProductVariant** assigned already 
 
 .. code-block:: php
 
-    /** @var ProductInterface $product */
-    $product = $this->container->get('sylius.repository.product')->findOneBy([]);
+    /** @var ProductVariantInterface $variant */
+    $variant = $this->container->get('sylius.repository.product_variant')->findOneBy([]);
 
-    $variant = $product->getFirstVariant();
-    // there are different ways of getting product variants.
-    // Instead of getting first variant from the collection you can get one from the repository by code
-    // or use the **VariantResolver** service - either default or your own implementation.
+    // Instead of getting a specific variant from the repository
+    // you can get the first variant of off a product by using $product->getVariants()->first()
+    // or use the **VariantResolver** service - either the default one or your own.
+    // The default product variant resolver is available at id - 'sylius.product_variant_resolver.default'
 
     /** @var OrderItemInterface $orderItem */
     $orderItem = $this->container->get('sylius.factory.order_item')->createNew();

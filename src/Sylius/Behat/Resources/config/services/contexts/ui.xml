@@ -152,6 +152,7 @@
 
         <service id="sylius.behat.context.ui.admin.managing_product_variants" class="Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="__symfony__.sylius.product_variant_resolver.default" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.create" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.index" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.update" />

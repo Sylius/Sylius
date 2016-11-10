@@ -565,7 +565,10 @@ final class ProductContext implements Context
      */
     public function itHasDifferentPricesForDifferentChannelsAndCurrencies(ProductInterface $product)
     {
-        $product->getFirstVariant()->setPricingCalculator(Calculators::CHANNEL_AND_CURRENCY_BASED);
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->defaultVariantResolver->getVariant($product);
+
+        $variant->setPricingCalculator(Calculators::CHANNEL_AND_CURRENCY_BASED);
     }
 
     /**
@@ -577,7 +580,8 @@ final class ProductContext implements Context
         ChannelInterface $channel,
         $currency
     ) {
-        $variant = $product->getFirstVariant();
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->defaultVariantResolver->getVariant($product);
 
         $pricingConfiguration = $variant->getPricingConfiguration();
         $pricingConfiguration[$channel->getCode()][$currency] = $price;

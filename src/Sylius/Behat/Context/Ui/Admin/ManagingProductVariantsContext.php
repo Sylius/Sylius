@@ -21,6 +21,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use Webmozart\Assert\Assert;
 
 /**
@@ -32,6 +33,11 @@ final class ManagingProductVariantsContext implements Context
      * @var SharedStorageInterface
      */
     private $sharedStorage;
+
+    /**
+     * @var DefaultProductVariantResolver
+     */
+    private $defaultProductVariantResolver;
 
     /**
      * @var CreatePageInterface
@@ -60,6 +66,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
+     * @param DefaultProductVariantResolver $defaultProductVariantResolver
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
@@ -68,6 +75,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
+        DefaultProductVariantResolver $defaultProductVariantResolver,
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
@@ -75,6 +83,7 @@ final class ManagingProductVariantsContext implements Context
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
+        $this->defaultProductVariantResolver = $defaultProductVariantResolver;
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
@@ -358,14 +367,16 @@ final class ManagingProductVariantsContext implements Context
      */
     public function unitsOfThisProductShouldBeOnHold($quantity, ProductInterface $product)
     {
+        $variant = $this->defaultProductVariantResolver->getVariant($product);
+
         Assert::same(
             (int) $quantity,
-            $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant()),
+            $this->indexPage->getOnHoldQuantityFor($variant),
             sprintf(
                 'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
-                $product->getFirstVariant()->getName(),
+                $variant->getName(),
                 $quantity,
-                $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant())
+                $this->indexPage->getOnHoldQuantityFor($variant)
             )
         );
     }
@@ -375,14 +386,16 @@ final class ManagingProductVariantsContext implements Context
      */
     public function unitsOfThisProductShouldBeOnHand($quantity, ProductInterface $product)
     {
+        $variant = $this->defaultProductVariantResolver->getVariant($product);
+
         Assert::same(
             (int) $quantity,
-            $this->indexPage->getOnHandQuantityFor($product->getFirstVariant()),
+            $this->indexPage->getOnHandQuantityFor($variant),
             sprintf(
                 'Unexpected on hand quantity for "%s" variant. It should be "%s" but is "%s"',
-                $product->getFirstVariant()->getName(),
+                $variant->getName(),
                 $quantity,
-                $this->indexPage->getOnHandQuantityFor($product->getFirstVariant())
+                $this->indexPage->getOnHandQuantityFor($variant)
             )
         );
     }
@@ -392,14 +405,16 @@ final class ManagingProductVariantsContext implements Context
      */
     public function thereShouldBeNoUnitsOfThisProductOnHold(ProductInterface $product)
     {
+        $variant = $this->defaultProductVariantResolver->getVariant($product);
+
         Assert::eq(
             0,
-            $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant()),
+            $this->indexPage->getOnHoldQuantityFor($variant),
             sprintf(
                 'Unexpected on hand quantity for "%s" variant. It should be "%s" but is "%s"',
-                $product->getFirstVariant()->getName(),
+                $variant->getName(),
                 0,
-                $this->indexPage->getOnHandQuantityFor($product->getFirstVariant())
+                $this->indexPage->getOnHandQuantityFor($variant)
             )
         );
     }

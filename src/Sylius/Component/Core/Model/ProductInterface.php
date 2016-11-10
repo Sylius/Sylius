@@ -92,11 +92,6 @@ interface ProductInterface extends
     public function setMainTaxon(TaxonInterface $mainTaxon = null);
 
     /**
-     * @return ProductVariantInterface
-     */
-    public function getFirstVariant();
-
-    /**
      * @return int
      */
     public function getPrice();
