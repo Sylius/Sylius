@@ -890,6 +890,23 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then this product should not have an association :productAssociationType with product :productName
+     */
+    public function theProductShouldNotHaveAnAssociationWithProducts(
+        ProductAssociationTypeInterface $productAssociationType,
+        $productName
+    ) {
+        Assert::false(
+            $this->updateSimpleProductPage->hasAssociatedProduct($productName, $productAssociationType),
+            sprintf(
+                'This product should not have an association %s with product %s, but it does.',
+                $productAssociationType->getName(),
+                $productName
+            )
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */

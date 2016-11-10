@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ProductAssociableChoiceType extends AbstractType
+class ProductAssociationsType extends AbstractType
 {
     /**
      * @var RepositoryInterface
@@ -66,6 +66,6 @@ class ProductAssociableChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_product_associable_choice';
+        return 'sylius_product_associations';
     }
 }

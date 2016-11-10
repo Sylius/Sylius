@@ -50,9 +50,9 @@ final class ProductsToProductAssociationsTransformerSpec extends ObjectBehavior
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_transforms_null_to_null()
+    function it_transforms_null_to_empty_string()
     {
-        $this->transform(null)->shouldReturn(null);
+        $this->transform(null)->shouldReturn('');
     }
 
     function it_transforms_product_associations_to_array(

@@ -27,3 +27,4 @@ Feature: Changing associations of an existing product
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this product should have an association "Accessories" with product "LG headphones"
+        And this product should not have an association "Accessories" with product "LG earphones"

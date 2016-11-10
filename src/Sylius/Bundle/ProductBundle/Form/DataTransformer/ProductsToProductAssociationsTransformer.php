@@ -69,7 +69,7 @@ final class ProductsToProductAssociationsTransformer implements DataTransformerI
         $this->setProductAssociations($productAssociations);
 
         if (null === $productAssociations) {
-            return null;
+            return '';
         }
 
         $values = [];

@@ -35,4 +35,5 @@ Feature: Adding a new product with associations
         And I add it
         Then I should be notified that it has been successfully created
         And this product should have an association "Accessories" with product "LG headphones"
+        And this product should not have an association "Accessories" with product "LG earphones"
         And the product "LG G3" should appear in the shop

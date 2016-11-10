@@ -277,7 +277,10 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             '%association%' => $productAssociationType->getName(),
             '%item%' => $productName,
         ]);
-        $item->find('css', 'i.delete')->click();
+
+        $deleteIcon = $item->find('css', 'i.delete');
+        Assert::notNull($deleteIcon);
+        $deleteIcon->click();
     }
 
     /**

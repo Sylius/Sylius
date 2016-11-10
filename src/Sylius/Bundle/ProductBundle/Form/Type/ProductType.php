@@ -67,7 +67,7 @@ class ProductType extends AbstractResourceType
                 'by_reference' => false,
                 'label' => false,
             ])
-            ->add('associations', 'sylius_product_associable_choice', [
+            ->add('associations', 'sylius_product_associations', [
                 'label' => false,
             ])
         ;
