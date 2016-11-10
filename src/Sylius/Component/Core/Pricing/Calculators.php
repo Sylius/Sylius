@@ -18,8 +18,5 @@ use Sylius\Component\Pricing\Calculator\Calculators as BaseCalculators;
  */
 class Calculators extends BaseCalculators
 {
-    const CHANNEL_BASED = 'channel_based';
     const CHANNEL_AND_CURRENCY_BASED = 'channel_and_currency_based';
-    const GROUP_BASED = 'group_based';
-    const ZONE_BASED = 'zone_based';
 }

@@ -7,6 +7,14 @@
             <div class="ui segment">
                 {{ form_row(form.code) }}
                 {% if product.simple %}
+                    {{ form_row(form.variant.pricingCalculator) }}
+                    {% for name, calculatorConfigurationPrototype in form.variant.vars.prototypes %}
+                        <div id="{{ form.variant.pricingCalculator.vars.id }}_{{ name }}" data-container=".configuration"
+                             data-prototype="{{ form_widget(calculatorConfigurationPrototype)|e }}">
+                        </div>
+                    {% endfor %}
+                    <div id="sylius-calculator-container">
+                    </div>
                     {{ form_row(form.variant.price) }}
                     {{ form_row(form.variant.onHand) }}
                     {{ form_row(form.variant.tracked) }}
