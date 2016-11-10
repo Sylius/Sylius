@@ -244,11 +244,14 @@ final class ProductContext implements Context
 
     /**
      * @Given the store has( also) :firstProductName and :secondProductName products
+     * @Given the store has( also) :firstProductName, :secondProductName and :thirdProductName products
+     * @Given the store has( also) :firstProductName, :secondProductName, :thirdProductName and :fourthProductName products
      */
-    public function theStoreHasAProductAnd($firstProductName, $secondProductName)
+    public function theStoreHasProducts(...$productsNames)
     {
-        $this->saveProduct($this->createProduct($firstProductName));
-        $this->saveProduct($this->createProduct($secondProductName));
+        foreach ($productsNames as $productName) {
+            $this->saveProduct($this->createProduct($productName));
+        }
     }
 
     /**

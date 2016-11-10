@@ -65,6 +65,12 @@
         </field>
         <field name="enabled" column="enabled" type="boolean" />
 
+        <one-to-many field="associations" target-entity="Sylius\Component\Product\Model\ProductAssociationInterface" mapped-by="owner" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <gedmo:loggable />
     </mapped-superclass>
 
