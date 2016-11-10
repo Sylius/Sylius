@@ -64,11 +64,28 @@ TaxRates included in price
 
 The **TaxRate** entity has a field for configuring if you would like to have taxes included in the price of a subject or not.
 
-If you have a TaxCategory with a 10% TaxRate *includedInPrice*, then the price shown on the ProductVariant in that
-TaxCategory will be increased by 10% all the time.
+If you have a TaxCategory with a 23% VAT TaxRate *includedInPrice* (``$taxRate->isIncludedInPrice()`` returns ``true``),
+then the price shown on the ProductVariant in that TaxCategory will be increased by 23% all the time. See the Behat scenario below:
 
-If the TaxRate *will not be included* then the price of ProductVariant will be shown without taxes, but when this
-ProductVariant will be added to cart taxes will be shown in the Taxes Total in the cart.
+.. code-block:: text
+
+   Given the store has included in price "VAT" tax rate of 23%
+   And the store has a product "T-Shirt" priced at "$10.00"
+   When I add product "T-Shirt" to my cart
+   Then my cart total should be "$10.00"
+   And my cart taxes should be "$1.87"
+
+If the TaxRate *will not be included* (``$taxRate->isIncludedInPrice()`` returns ``false``)
+then the price of ProductVariant will be shown without taxes, but when this ProductVariant will be added to cart taxes will be shown in the Taxes Total in the cart.
+See the Behat scenario below:
+
+.. code-block:: text
+
+   Given the store has excluded from price "VAT" tax rate of 23%
+   And the store has a product "T-Shirt" priced at "$10.00"
+   When I add product "T-Shirt" to my cart
+   Then my cart total should be "$12.30"
+   And my cart taxes should be "$2.30"
 
 How to create a TaxRate programmatically?
 '''''''''''''''''''''''''''''''''''''''''
