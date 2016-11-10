@@ -13,8 +13,11 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
@@ -157,6 +160,29 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function choosePricingCalculator($name)
+    {
+        $this->getElement('price_calculator')->selectOption($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency)
+    {
+        $calculatorElement = $this->getElement('calculator');
+        $calculatorElement
+            ->waitFor(5, function () use ($channel, $currency) {
+                return $this->getElement('calculator')->hasField(sprintf('%s %s', $channel->getName(), $currency->getCode()));
+            })
+        ;
+
+        $calculatorElement->fillField(sprintf('%s %s', $channel->getName(), $currency->getCode()), $price);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -166,11 +192,13 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'attribute_delete_button' => '.attribute .label:contains("%attribute%") ~ button',
             'attribute_value' => '.attribute .label:contains("%attribute%") ~ input',
             'attributes_choice' => 'select[name="sylius_product_attribute_choice"]',
+            'calculator' => '#sylius-calculator-container',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
             'images' => '#sylius_product_images',
             'name' => '#sylius_product_translations_en_US_name',
             'price' => '#sylius_product_variant_price',
+            'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'slug' => '#sylius_product_translations_en_US_slug',
             'tab' => '.menu [data-tab="%name%"]',
             'toggle_slug_modification_button' => '#toggle-slug-modification',

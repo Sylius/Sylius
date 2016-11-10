@@ -23,8 +23,10 @@ use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentProductPageResolverInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -209,6 +211,22 @@ final class ManagingProductsContext implements Context
     public function iSetItsPriceTo($price)
     {
         $this->createSimpleProductPage->specifyPrice($price);
+    }
+
+    /**
+     * @When I choose :calculatorName calculator
+     */
+    public function iChooseCalculator($calculatorName)
+    {
+        $this->createSimpleProductPage->choosePricingCalculator($calculatorName);
+    }
+
+    /**
+     * @When /^I set its price to "(?:€|£|\$)([^"]+)" for ("[^"]+" currency) and ("[^"]+" channel)$/
+     */
+    public function iSetItsPriceToForCurrencyAndChannel($price, CurrencyInterface $currency, ChannelInterface $channel)
+    {
+        $this->createSimpleProductPage->specifyPriceForChannelAndCurrency($price, $channel, $currency);
     }
 
     /**
