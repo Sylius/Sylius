@@ -206,7 +206,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I set its price to ("(?:€|£|\$)[^"]+")$/
+     * @When /^I set its(?:| default) price to ("(?:€|£|\$)[^"]+")$/
      */
     public function iSetItsPriceTo($price)
     {
@@ -884,6 +884,17 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this->productReviewIndexPage->isSingleResourceOnPage(['reviewSubject' => $product->getName()]),
             sprintf('There should be no reviews of %s.', $product->getName())
+        );
+    }
+
+    /**
+     * @Then /^the product for ("[^"]+" currency) and ("[^"]+" channel) should have "(?:€|£|\$)([^"]+)"$/
+     */
+    public function theProductForCurrencyAndChannelShouldHave(CurrencyInterface $currency, ChannelInterface $channel, $price)
+    {
+        Assert::same(
+            $this->updateSimpleProductPage->getPricingConfigurationForChannelAndCurrencyCalculator($channel, $currency),
+            $price
         );
     }
 

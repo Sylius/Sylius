@@ -12,6 +12,8 @@
 namespace Sylius\Behat\Page\Admin\ProductVariant;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -38,4 +40,16 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $optionValue
      */
     public function selectOption($optionName, $optionValue);
+
+    /**
+     * @param string $name
+     */
+    public function choosePricingCalculator($name);
+
+    /**
+     * @param int $price
+     * @param ChannelInterface $channel
+     * @param CurrencyInterface $currency
+     */
+    public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency);
 }

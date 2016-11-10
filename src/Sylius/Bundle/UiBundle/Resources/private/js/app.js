@@ -84,10 +84,5 @@
     $('.special.cards .image').dimmer({
       on: 'hover'
     });
-
-    $('#sylius_product_variant_pricingCalculator').handlePrototypes({
-      'prototypePrefix': 'sylius_product_variant_pricingCalculator',
-      'containerSelector': '#sylius-calculator-container'
-    });
   });
 })(jQuery);

@@ -73,7 +73,7 @@ final class ChannelAndCurrencyBasedConfigurationType extends AbstractType
         $resolver
             ->setDefaults([
                 'data_class' => null,
-                'delimiter' => '-'
+                'delimiter' => '_x_'
             ])
         ;
     }

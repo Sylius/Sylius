@@ -192,7 +192,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'attribute_delete_button' => '.attribute .label:contains("%attribute%") ~ button',
             'attribute_value' => '.attribute .label:contains("%attribute%") ~ input',
             'attributes_choice' => 'select[name="sylius_product_attribute_choice"]',
-            'calculator' => '#sylius-calculator-container',
+            'calculator' => '#sylius_calculator_container',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
             'images' => '#sylius_product_images',

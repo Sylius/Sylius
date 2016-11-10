@@ -16,7 +16,9 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Webmozart\Assert\Assert;
 
@@ -286,6 +288,16 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency)
+    {
+        $priceElement = $this->getElement('pricing_configuration')->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent();
+
+        return $priceElement->find('css', 'input')->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');
@@ -305,6 +317,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'images' => '#sylius_product_images',
             'name' => '#sylius_product_translations_en_US_name',
             'price' => '#sylius_product_variant_price',
+            'pricing_configuration' => '#sylius_calculator_container',
             'search' => '.ui.fluid.search.selection.dropdown',
             'search_item_selected' => 'div.menu > div.item.selected',
             'slug' => '#sylius_product_translations_en_US_slug',

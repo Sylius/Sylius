@@ -13,7 +13,9 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 /**
@@ -139,4 +141,12 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @param ProductAssociationTypeInterface $productAssociationType
      */
     public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType);
+
+    /**
+     * @param ChannelInterface $channel
+     * @param CurrencyInterface $currency
+     *
+     * @return string
+     */
+    public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency);
 }
