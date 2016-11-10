@@ -20,16 +20,6 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 interface TaxonInterface extends BaseTaxonInterface, ImageAwareInterface
 {
     /**
-     * @return Collection|ProductInterface[]
-     */
-    public function getProducts();
-
-    /**
-     * @param ProductInterface[] $products
-     */
-    public function setProducts($products);
-
-    /**
      * @return bool
      */
     public function hasImages();

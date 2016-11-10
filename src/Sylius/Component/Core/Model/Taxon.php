@@ -23,12 +23,7 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 class Taxon extends BaseTaxon implements TaxonInterface
 {
     use TimestampableTrait;
-
-    /**
-     * @var Collection|ProductInterface
-     */
-    protected $products;
-
+    
     /**
      * @var Collection|ImageInterface[]
      */
@@ -99,22 +94,6 @@ class Taxon extends BaseTaxon implements TaxonInterface
             $image->setOwner(null);
             $this->images->removeElement($image);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getProducts()
-    {
-        return $this->products;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setProducts($products)
-    {
-        $this->products = $products;
     }
 
     /**
