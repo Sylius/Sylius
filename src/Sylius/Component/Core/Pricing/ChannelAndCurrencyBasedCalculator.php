@@ -13,32 +13,26 @@ namespace Sylius\Component\Core\Pricing;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ChannelAndCurrencyBasedCalculator implements CalculatorInterface
+class ChannelAndCurrencyBasedCalculator implements CalculatorInterface
 {
     /**
-     * @var ChannelContextInterface
+     * @var CurrencyConverterInterface
      */
-    private $channelContext;
+    private $currencyConverter;
 
     /**
-     * @var CurrencyContextInterface
+     * @param CurrencyConverterInterface $currencyConverter
      */
-    private $currencyContext;
-
-    /**
-     * @param ChannelContextInterface $channelContext
-     * @param CurrencyContextInterface $currencyContext
-     */
-    public function __construct(ChannelContextInterface $channelContext, CurrencyContextInterface $currencyContext)
+    public function __construct(CurrencyConverterInterface $currencyConverter)
     {
-        $this->channelContext = $channelContext;
-        $this->currencyContext = $currencyContext;
+        $this->currencyConverter = $currencyConverter;
     }
 
     /**
@@ -46,16 +40,23 @@ final class ChannelAndCurrencyBasedCalculator implements CalculatorInterface
      */
     public function calculate(PriceableInterface $subject, array $configuration, array $context = [])
     {
+        if (!isset($context['channel']) || !isset($context['currency'])) {
+            throw new \InvalidArgumentException('You should configure currency and channel to determine a price.');
+        }
+
         $pricingConfiguration = $subject->getPricingConfiguration();
 
-        $channel = $this->channelContext->getChannel();
-        $currencyCode = $this->currencyContext->getCurrencyCode();
+        $channel = $context['channel'];
+        $currencyCode = $context['currency'];
 
         if (!isset($pricingConfiguration[$channel->getCode()][$currencyCode])) {
             return $subject->getPrice();
         }
 
-        return $pricingConfiguration[$channel->getCode()][$currencyCode];
+        return $this->currencyConverter->convertToBase(
+            $pricingConfiguration[$channel->getCode()][$currencyCode],
+            $currencyCode
+        );
     }
 
     /**

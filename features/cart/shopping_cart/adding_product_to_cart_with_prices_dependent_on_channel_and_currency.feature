@@ -5,7 +5,9 @@ Feature: Adding a product to cart with prices dependent on a channel and a curre
     I want to add products to my cart with prices dependent on visited channel and selected currency
     
     Background:
-        Given the store operates on a channel named "Web-EU"
+        Given the store has currency "EUR"
+        And the store has currency "GBP" with exchange rate 0.7
+        And the store operates on a channel named "Web-EU"
         And that channel allows to shop using "EUR" and "GBP" currencies
         And that channel uses the "EUR" currency by default
         And the store operates on another channel named "Web-GB"

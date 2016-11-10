@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Core\Pricing\ChannelAndCurrencyBasedCalculator;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 
@@ -25,9 +26,9 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
  */
 final class ChannelAndCurrencyBasedCalculatorSpec extends ObjectBehavior
 {
-    function let(ChannelContextInterface $channelContext, CurrencyContextInterface $currencyContext)
+    function let(CurrencyConverterInterface $currencyConverter)
     {
-        $this->beConstructedWith($channelContext, $currencyContext);
+        $this->beConstructedWith($currencyConverter);
     }
 
     function it_is_initializable()
@@ -41,9 +42,8 @@ final class ChannelAndCurrencyBasedCalculatorSpec extends ObjectBehavior
     }
 
     function it_returns_price_for_given_channel_and_currency_from_configuration(
-        ChannelContextInterface $channelContext,
         ChannelInterface $channel,
-        CurrencyContextInterface $currencyContext,
+        CurrencyConverterInterface $currencyConverter,
         PriceableInterface $subject
     ) {
         $subject->getPricingConfiguration()->willReturn([
@@ -51,18 +51,15 @@ final class ChannelAndCurrencyBasedCalculatorSpec extends ObjectBehavior
             'WEB-GB' => ['EUR' => 10000, 'GBP' => 5000],
         ]);
 
-        $channelContext->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB-EU');
 
-        $currencyContext->getCurrencyCode()->willReturn('EUR');
+        $currencyConverter->convertToBase(1000, 'EUR')->willReturn(1250);
 
-        $this->calculate($subject, [])->shouldReturn(1000);
+        $this->calculate($subject, [], ['currency' => 'EUR', 'channel' => $channel])->shouldReturn(1250);
     }
 
     function it_returns_subject_price_if_no_required_configuration_is_set(
-        ChannelContextInterface $channelContext,
         ChannelInterface $channel,
-        CurrencyContextInterface $currencyContext,
         PriceableInterface $subject
     ) {
         $subject->getPricingConfiguration()->willReturn([
@@ -70,13 +67,31 @@ final class ChannelAndCurrencyBasedCalculatorSpec extends ObjectBehavior
             'WEB-GB' => ['GBP' => 10000],
         ]);
 
-        $channelContext->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB-GB');
 
-        $currencyContext->getCurrencyCode()->willReturn('EUR');
         $subject->getPrice()->willReturn(15000);
 
-        $this->calculate($subject, [])->shouldReturn(15000);
+        $this->calculate($subject, [], ['currency' => 'EUR', 'channel' => $channel])->shouldReturn(15000);
+    }
+
+    function it_throws_exception_if_context_data_is_invalid(
+        ChannelInterface $channel,
+        PriceableInterface $subject
+    ) {
+        $this
+            ->shouldThrow(new \InvalidArgumentException('You should configure currency and channel to determine a price.'))
+            ->during('calculate', [$subject, [], ['channel' => $channel]])
+        ;
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('You should configure currency and channel to determine a price.'))
+            ->during('calculate', [$subject, [], ['currency' => 'EUR']])
+        ;
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('You should configure currency and channel to determine a price.'))
+            ->during('calculate', [$subject, [], []])
+        ;
     }
 
     function it_has_type()

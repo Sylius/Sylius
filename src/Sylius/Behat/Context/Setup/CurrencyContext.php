@@ -119,7 +119,7 @@ final class CurrencyContext implements Context
      */
     public function theStoreHasCurrencyWithExchangeRate($currencyCode, $exchangeRate)
     {
-        $currency = $this->createCurrency($currencyCode, $exchangeRate);
+        $currency = $this->createCurrency($currencyCode, (float) $exchangeRate);
         $currency->setEnabled(true);
 
         $this->saveCurrency($currency);
@@ -150,9 +150,6 @@ final class CurrencyContext implements Context
     public function itUsesTheCurrencyByDefault(ChannelInterface $channel, $currencyCode)
     {
         $currency = $this->provideCurrency($currencyCode);
-        $currency->setExchangeRate(1.0);
-
-        $this->currencyManager->flush();
 
         $channel->addCurrency($currency);
         $channel->setDefaultCurrency($currency);

@@ -53,6 +53,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $order->getCustomer()->willReturn($customer);
         $order->getChannel()->willReturn(null);
         $order->getItems()->willReturn([$item]);
+        $order->getCurrencyCode()->willReturn(null);
 
         $customer->getGroup()->willReturn($group);
 
@@ -79,13 +80,38 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $order->getCustomer()->willReturn(null);
         $order->getChannel()->willReturn($channel);
         $order->getItems()->willReturn([$item]);
+        $order->getCurrencyCode()->willReturn(null);
 
         $item->isImmutable()->willReturn(false);
         $item->getQuantity()->willReturn(5);
         $item->getVariant()->willReturn($variant);
 
         $priceCalculator
-            ->calculate($variant, ['channel' => [$channel], 'quantity' => 5])
+            ->calculate($variant, ['channel' => $channel, 'quantity' => 5])
+            ->willReturn(10)
+        ;
+        $item->setUnitPrice(10)->shouldBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_recalculates_prices_adding_currency_code_to_the_context(
+        DelegatingCalculatorInterface $priceCalculator,
+        OrderInterface $order,
+        OrderItemInterface $item,
+        PriceableInterface $variant
+    ) {
+        $order->getCustomer()->willReturn(null);
+        $order->getChannel()->willReturn(null);
+        $order->getItems()->willReturn([$item]);
+        $order->getCurrencyCode()->willReturn('EUR');
+
+        $item->isImmutable()->willReturn(false);
+        $item->getQuantity()->willReturn(5);
+        $item->getVariant()->willReturn($variant);
+
+        $priceCalculator
+            ->calculate($variant, ['currency' => 'EUR', 'quantity' => 5])
             ->willReturn(10)
         ;
         $item->setUnitPrice(10)->shouldBeCalled();
@@ -105,6 +131,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $order->getCustomer()->willReturn($customer);
         $order->getChannel()->willReturn($channel);
         $order->getItems()->willReturn([$item]);
+        $order->getCurrencyCode()->willReturn(null);
 
         $customer->getGroup()->willReturn($group);
 
@@ -118,7 +145,45 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
                 [
                     'customer' => $customer,
                     'groups' => [$group],
-                    'channel' => [$channel],
+                    'channel' => $channel,
+                    'quantity' => 5
+                ]
+            )
+            ->willReturn(10)
+        ;
+        $item->setUnitPrice(10)->shouldBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_recalculates_prices_adding_channel_customer_and_currency_code_to_the_context(
+        ChannelInterface $channel,
+        DelegatingCalculatorInterface $priceCalculator,
+        CustomerInterface $customer,
+        CustomerGroupInterface $group,
+        OrderInterface $order,
+        OrderItemInterface $item,
+        PriceableInterface $variant
+    ) {
+        $order->getCustomer()->willReturn($customer);
+        $order->getChannel()->willReturn($channel);
+        $order->getItems()->willReturn([$item]);
+        $order->getCurrencyCode()->willReturn('EUR');
+
+        $customer->getGroup()->willReturn($group);
+
+        $item->isImmutable()->willReturn(false);
+        $item->getQuantity()->willReturn(5);
+        $item->getVariant()->willReturn($variant);
+
+        $priceCalculator
+            ->calculate(
+                $variant,
+                [
+                    'customer' => $customer,
+                    'groups' => [$group],
+                    'channel' => $channel,
+                    'currency' => 'EUR',
                     'quantity' => 5
                 ]
             )
@@ -138,6 +203,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $order->getCustomer()->willReturn(null);
         $order->getChannel()->willReturn(null);
         $order->getItems()->willReturn([$item]);
+        $order->getCurrencyCode()->willReturn(null);
 
         $item->isImmutable()->willReturn(false);
         $item->getQuantity()->willReturn(5);
