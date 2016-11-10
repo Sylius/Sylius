@@ -67,7 +67,7 @@ EOT
         $output->writeln('<info>Installing Sylius...</info>');
         $output->writeln('');
 
-        $this->ensureDirectoryExistsAndIsWritable(self::APP_CACHE, $output);
+        $this->ensureDirectoryExistsAndIsWritable($this->getContainer()->getParameter('kernel.cache_dir'), $output);
 
         foreach ($this->commands as $step => $command) {
             try {
