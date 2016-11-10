@@ -27,14 +27,15 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
      */
     public function count()
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        return (int) $queryBuilder
+        $count = $this->createQueryBuilder('o')
             ->select('COUNT(o.id)')
-            ->andWhere($queryBuilder->expr()->isNotNull('o.checkoutCompletedAt'))
+            ->andWhere('o.state != :state')
+            ->setParameter('state', OrderInterface::STATE_CART)
             ->getQuery()
             ->getSingleScalarResult()
         ;
+
+        return (int) $count;
     }
 
     /**
@@ -42,14 +43,15 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
      */
     public function getTotalSales()
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        return (int) $queryBuilder
+        $total = $this->createQueryBuilder('o')
             ->select('SUM(o.total)')
-            ->andWhere($queryBuilder->expr()->isNotNull('o.checkoutCompletedAt'))
+            ->andWhere('o.state != :state')
+            ->setParameter('state', OrderInterface::STATE_CART)
             ->getQuery()
             ->getSingleScalarResult()
         ;
+
+        return (int) $total;
     }
 
     /**
@@ -57,9 +59,7 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
      */
     public function findLatest($count)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        return $queryBuilder
+        return $this->createQueryBuilder('o')
             ->addSelect('item')
             ->leftJoin('o.items', 'item')
             ->andWhere('o.state != :state')
@@ -76,11 +76,10 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
      */
     public function findOneByNumber($number)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        return $queryBuilder
-            ->andWhere($queryBuilder->expr()->isNotNull('o.checkoutCompletedAt'))
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state != :state')
             ->andWhere('o.number = :number')
+            ->setParameter('state', OrderInterface::STATE_CART)
             ->setParameter('number', $number)
             ->getQuery()
             ->getOneOrNullResult()
