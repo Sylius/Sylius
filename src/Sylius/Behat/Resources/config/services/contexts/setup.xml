@@ -33,6 +33,7 @@
             <argument type="service" id="__symfony__.sylius.factory.channel" />
             <argument type="service" id="__symfony__.sylius.repository.channel" />
             <argument type="service" id="__symfony__.sylius.manager.channel" />
+            <argument>%__behat__.mink.parameters%</argument>
             <tag name="fob.context_service" />
         </service>
 

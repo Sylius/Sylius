@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -199,6 +201,22 @@ final class ProductContext implements Context
 
         if ($this->sharedStorage->has('channel')) {
             $product->addChannel($this->sharedStorage->get('channel'));
+        }
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") available in (channel "[^"]+") and (channel "[^"]+")$/
+     */
+    public function storeHasAProductPricedAtAvailableInChannels($productName, $price = 0, ...$channels)
+    {
+        $product = $this->createProduct($productName, $price);
+
+        $product->setDescription('Awesome '.$productName);
+
+        foreach ($channels as $channel) {
+            $product->addChannel($channel);
         }
 
         $this->saveProduct($product);
@@ -540,6 +558,33 @@ final class ProductContext implements Context
         $product->addImage($productImage);
 
         $this->objectManager->flush($product);
+    }
+
+    /**
+     * @Given /^(it) has different prices for different channels and currencies$/
+     */
+    public function itHasDifferentPricesForDifferentChannelsAndCurrencies(ProductInterface $product)
+    {
+        $product->getFirstVariant()->setPricingCalculator(Calculators::CHANNEL_AND_CURRENCY_BASED);
+    }
+
+    /**
+     * @Given /^(it) has price ("[^"]+") for ("[^"]+" channel) and "([^"]+)" currency$/
+     */
+    public function itHasPriceForChannelAndCurrency(
+        ProductInterface $product,
+        $price,
+        ChannelInterface $channel,
+        $currency
+    ) {
+        $variant = $product->getFirstVariant();
+
+        $pricingConfiguration = $variant->getPricingConfiguration();
+        $pricingConfiguration[$channel->getCode()][$currency] = $price;
+
+        $variant->setPricingConfiguration($pricingConfiguration);
+
+        $this->objectManager->flush();
     }
 
     /**
