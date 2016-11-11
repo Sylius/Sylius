@@ -7,6 +7,5 @@ sylius:
             description: Описание
             name: Название
             parent: Родитель
-            permalink: Постоянная ссылка
         taxonomy:
             name: Название

@@ -11,7 +11,7 @@ sylius:
                     header: Katalog
                     options: Optionen
                     products: Produkte
-                    taxons: Klassifizierungen
+                    taxons: Produktgruppen
                 configuration:
                     admin_users: Administratoren
                     channels: Ausgabekanäle

@@ -7,6 +7,5 @@ sylius:
             description: Beskrivelse
             name: Navn
             parent: Overordnede
-            permalink: Permanent link
         taxonomy:
             name: Navn

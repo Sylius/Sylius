@@ -7,6 +7,5 @@ sylius:
             description: Omschrijving
             name: Naam
             parent: Ouder
-            permalink: Permalink
         taxonomy:
             name: Naam

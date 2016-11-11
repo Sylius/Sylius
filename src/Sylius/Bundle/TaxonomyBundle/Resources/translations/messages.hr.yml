@@ -7,6 +7,5 @@ sylius:
             description: Opis
             name: Naziv
             parent: Nadređena kategorija
-            permalink: Trajni link
         taxonomy:
             name: Naziv

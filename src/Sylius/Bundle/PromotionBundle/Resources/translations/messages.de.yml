@@ -39,5 +39,5 @@ sylius:
             shipping_country_configuration:
                 country: Land
             taxonomy_configuration:
-                taxons: Klassifizierungen
+                taxons: Produktgruppen
             type: Typ

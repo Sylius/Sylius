@@ -7,6 +7,5 @@ sylius:
             description: Opis
             name: Ime
             parent: Nadrejeni
-            permalink: Trajna povezava (permalink)
         taxonomy:
             name: Ime

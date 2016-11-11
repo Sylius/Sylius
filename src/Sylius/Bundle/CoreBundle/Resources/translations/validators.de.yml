@@ -23,6 +23,9 @@ sylius:
         code:
             not_blank: Bitte lokalen Code eingeben.
             unique: Locale existiert bereits.
+    product_image:
+        code:
+            not_blank: Bitte geben Sie einen Bild-Code an.
     product_variant:
         onHand:
             min: Menge muss größer sein als {{ limit }}.
@@ -37,7 +40,8 @@ sylius:
             max: Kurzbeschreibung darf nicht länger als {{ limit }} Zeichen sein.
     taxon_image:
         code:
-            unique: Bild-Code muss innerhalb dieser Klassifizierung eindeutig sein.
+            not_blank: Bitte geben Sie einen Bild-Code an.
+            unique: Bild-Code muss innerhalb dieser Produktgruppe eindeutig sein.
     user:
         email:
             unique: Diese E-Mail-Adresse wird bereits verwendet.
