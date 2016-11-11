@@ -43,6 +43,8 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     /**
      * @return string
+     *
+     * @throws \InvalidArgumentException
      */
     public function getFullNameOfDefaultAddress();
 

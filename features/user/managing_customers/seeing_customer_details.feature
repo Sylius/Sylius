@@ -18,7 +18,7 @@ Feature: Seeing customer's details
 
     @ui
     Scenario: Seeing customer's addresses
-        Given his default address is "Hobbiton", "Bag End", "1", "New Zealand" for "Frodo Baggins"
+        Given their default address is "Hobbiton", "Bag End", "1", "New Zealand" for "Frodo Baggins"
         When I view details of the customer "f.baggins@shire.me"
         Then his default address should be "Frodo Baggins, Bag End, Hobbiton, NEW ZEALAND 1"
 

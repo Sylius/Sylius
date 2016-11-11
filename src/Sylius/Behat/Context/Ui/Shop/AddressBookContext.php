@@ -94,7 +94,7 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Given /^I am editing the address of "([^"]+)"$/
+     * @Given I am editing the address of :fullName
      */
     public function iEditAddressOf($fullName)
     {
@@ -105,7 +105,6 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Given my default address is of :fullName
      * @When I set the address of :fullName as default
      */
     public function iSetTheAddressOfAsDefault($fullName)
@@ -209,11 +208,11 @@ final class AddressBookContext implements Context
     /**
      * @When /^I try to edit the address of "([^"]+)"$/
      */
-    public function iTryToEdit($fullName)
+    public function iTryToEditTheAddressOf($fullName)
     {
-        $this->sharedStorage->set('full_name', $fullName);
-
         $address = $this->getAddressOf($fullName);
+
+        $this->sharedStorage->set('full_name', sprintf('%s %s', $address->getFirstName(), $address->getLastName()));
 
         $this->addressBookUpdatePage->tryToOpen(['id' => $address->getId()]);
     }
@@ -377,17 +376,17 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then /^the address of "([^"]+)" should be marked as my default$/
-     * @Then /^(it) should be marked as my default address$/
+     * @Then /^(address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) should be marked as my default address$/
      */
-    public function itShouldBeMarkedAsMyDefaultAddress($fullName)
+    public function addressShouldBeMarkedAsMyDefaultAddress(AddressInterface $address)
     {
         $actualFullName = $this->addressBookIndexPage->getFullNameOfDefaultAddress();
+        $expectedFullName = sprintf('%s %s', $address->getFirstName(), $address->getLastName());
 
         Assert::same(
-            $fullName,
+            $expectedFullName,
             $actualFullName,
-            sprintf('The default address should be of "%s", but is of "%s".', $fullName, $actualFullName)
+            sprintf('The default address should be of "%s", but is of "%s".', $expectedFullName, $actualFullName)
         );
     }
 
