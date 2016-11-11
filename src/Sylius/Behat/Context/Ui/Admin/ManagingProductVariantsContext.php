@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface;
+use Sylius\Behat\Page\Admin\ProductVariant\GeneratePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -49,6 +50,11 @@ final class ManagingProductVariantsContext implements Context
     private $updatePage;
 
     /**
+     * @var GeneratePageInterface
+     */
+    private $generatePage;
+
+    /**
      * @var CurrentPageResolverInterface
      */
     private $currentPageResolver;
@@ -63,6 +69,7 @@ final class ManagingProductVariantsContext implements Context
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
+     * @param GeneratePageInterface $generatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
@@ -71,6 +78,7 @@ final class ManagingProductVariantsContext implements Context
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
+        GeneratePageInterface $generatePage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
@@ -78,6 +86,7 @@ final class ManagingProductVariantsContext implements Context
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
+        $this->generatePage = $generatePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
@@ -174,7 +183,7 @@ final class ManagingProductVariantsContext implements Context
      * @Then I should see :numberOfProductVariants variants in the list
      * @Then I should see :numberOfProductVariants variant in the list
      */
-    public function iShouldSeeProductsInTheList($numberOfProductVariants)
+    public function iShouldSeeProductVariantsInTheList($numberOfProductVariants)
     {
         $foundRows = $this->indexPage->countItems();
 
@@ -254,6 +263,22 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatPriceIsRequired()
     {
         $this->assertValidationMessage('price', 'Please enter the price.');
+    }
+
+    /**
+     * @Then /^I should be notified that price is required for the (\d)(?:st|nd|rd|th) variant$/
+     */
+    public function iShouldBeNotifiedThatPriceIsRequiredForVariant($position)
+    {
+        Assert::same($this->generatePage->getValidationMessage('price', $position), 'Please enter the price.');
+    }
+
+    /**
+     * @Then /^I should be notified that code is required for the (\d)(?:st|nd|rd|th) variant$/
+     */
+    public function iShouldBeNotifiedThatCodeIsRequiredForVariant($position)
+    {
+        Assert::same($this->generatePage->getValidationMessage('code', $position), 'Please enter variant code.');
     }
 
     /**
@@ -447,6 +472,64 @@ final class ManagingProductVariantsContext implements Context
     public function iSetItsOptionAs($optionName, $optionValue)
     {
         $this->createPage->selectOption($optionName, $optionValue);
+    }
+
+    /**
+     * @Given /^I want to generate new variants for (this product)$/
+     */
+    public function iWantToGenerateNewVariantsForThisProduct(ProductInterface $product)
+    {
+        $this->generatePage->open(['productId' => $product->getId()]);
+    }
+
+    /**
+     * @When I generate it
+     * @When I try to generate it
+     */
+    public function iClickGenerate()
+    {
+        $this->generatePage->generate();
+    }
+
+    /**
+     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by ("[^"]+") code and costs "(?:€|£|\$)([^"]+)"$/
+     */
+    public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, $price)
+    {
+        $this->generatePage->nameCode($nthVariant - 1, $code);
+        $this->generatePage->specifyPrice($nthVariant - 1, $price);
+    }
+
+    /**
+     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by ("[^"]+") code$/
+     */
+    public function iSpecifyThereAreVariantsIdentifiedByCode($nthVariant, $code)
+    {
+        $this->generatePage->nameCode($nthVariant, $code - 1);
+    }
+
+    /**
+     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant costs "(?:€|£|\$)([^"]+)"$/
+     */
+    public function iSpecifyThereAreVariantsWithCost($nthVariant, $price)
+    {
+        $this->generatePage->specifyPrice($nthVariant, $price - 1);
+    }
+
+    /**
+     * @When /^I remove (\d)(?:st|nd|rd|th) variant from the list$/
+     */
+    public function iRemoveVariantFromTheList($nthVariant)
+    {
+        $this->generatePage->removeVariant($nthVariant - 1);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully generated
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyGenerated()
+    {
+        $this->notificationChecker->checkNotification('Success Product variants have been successfully generated.', NotificationType::success());
     }
 
     /**
