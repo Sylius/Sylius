@@ -13,7 +13,7 @@ sylius_grid:
                 channel:
                     type: twig
                     label: sylius.ui.channel
-                    sortable: ~
+                    sortable: channel.code
                     options:
                         template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
                 number:
@@ -27,7 +27,7 @@ sylius_grid:
                     type: datetime
                     label: sylius.ui.date
                     path: checkoutCompletedAt
-                    sortable: ~
+                    sortable: checkoutCompletedAt
                     options:
                         format: d-m-Y H:i:s
                 customer:
