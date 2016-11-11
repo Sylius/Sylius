@@ -8,6 +8,7 @@ Cookbook
     registry
     custom-model
     custom-email
+    custom-promotion-rule
     paypal
     stripe
     api
