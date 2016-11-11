@@ -15,6 +15,7 @@
     <parameters>
         <parameter key="sylius.behat.page.admin.customer.create.class">Sylius\Behat\Page\Admin\Customer\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.customer.index.class">Sylius\Behat\Page\Admin\Customer\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.customer.order_index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.customer.update.class">Sylius\Behat\Page\Admin\Customer\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.customer.show.class">Sylius\Behat\Page\Admin\Customer\ShowPage</parameter>
     </parameters>
@@ -25,6 +26,9 @@
         </service>
         <service id="sylius.behat.page.admin.customer.index" class="%sylius.behat.page.admin.customer.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">customer</argument>
+        </service>
+        <service id="sylius.behat.page.admin.customer.order_index" class="%sylius.behat.page.admin.customer.order_index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+            <argument type="string">customer_order</argument>
         </service>
         <service id="sylius.behat.page.admin.customer.update" class="%sylius.behat.page.admin.customer.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">customer</argument>

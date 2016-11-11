@@ -9,10 +9,10 @@ Feature: Browsing orders of a customer
         And the store has a product "PHP T-Shirt"
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
-        And there is a customer "logan@wolverine.com" that placed an order "#00000007"
+        And a customer "logan@wolverine.com" placed an order "#00000007"
         And the customer bought a single "PHP T-Shirt"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
-        And there is a customer "eric@magneto.com" that placed an order "#00000008"
+        And a customer "eric@magneto.com" placed an order "#00000008"
         And the customer bought a single "PHP T-Shirt"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
@@ -21,5 +21,5 @@ Feature: Browsing orders of a customer
     Scenario: Browsing orders of a specific customer in the list
         When I browse orders of a customer "logan@wolverine.com"
         Then I should see a single order in the list
-        And I should see the order number "#00000007" in the list
-        And I should not see the order number "#00000008" in the list
+        And I should see the order with number "#00000007" in the list
+        And I should not see the order with number "#00000008" in the list
