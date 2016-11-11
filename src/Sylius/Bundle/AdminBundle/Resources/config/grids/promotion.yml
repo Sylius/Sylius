@@ -5,14 +5,18 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.promotion.class%"
+            sorting:
+                code: asc
             fields:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 name:
                     type: twig
                     label: sylius.ui.name
                     path: .
+                    sortable: ~
                     options:
                         template: "@SyliusAdmin/Grid/Field/nameAndDescription.html.twig"
                 couponBased:
@@ -24,6 +28,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.usage
                     path: .
+                    sortable: used
                     options:
                         template: "@SyliusAdmin/Promotion/Grid/Field/usage.html.twig"
             filters:
