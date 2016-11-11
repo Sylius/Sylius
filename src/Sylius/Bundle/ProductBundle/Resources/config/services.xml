@@ -32,9 +32,6 @@
             <argument type="service" id="sylius.factory.product_variant" />
             <argument type="service" id="sylius.checker.product_variants_parity" />
         </service>
-        <service id="sylius.checker.variants_parity_checker" class="Sylius\Component\Variation\Checker\VariantsParityChecker" />
-            <argument type="service" id="sylius.checker.product_variants_parity" />
-        </service>
         <service id="sylius.checker.product_variants_parity" class="Sylius\Component\Product\Checker\ProductVariantsParityChecker" />
         <service id="sylius.generator.slug" class="Sylius\Component\Product\Generator\SlugGenerator" />
 

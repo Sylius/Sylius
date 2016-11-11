@@ -73,3 +73,21 @@ sylius_admin_product_variant_delete:
         _sylius:
             redirect: referer
             permission: true
+
+sylius_admin_product_variant_generate:
+    path: /generate
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product:updateAction
+        _sylius:
+            template: "@SyliusAdmin/ProductVariant/generate.html.twig"
+            section: admin
+            redirect:
+                route: sylius_admin_product_variant_index
+                parameters: { productId: $productId }
+            form:
+                type: sylius_product_generate_variants
+            repository:
+                method: find
+                arguments: [$productId]
+            permission: true
