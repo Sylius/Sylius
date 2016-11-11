@@ -7,6 +7,5 @@ sylius:
             description: Kuvaus
             name: Nimi
             parent: Vanhempi
-            permalink: Pysyvä linkki
         taxonomy:
             name: Nimi

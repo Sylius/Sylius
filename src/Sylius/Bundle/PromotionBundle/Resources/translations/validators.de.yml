@@ -15,6 +15,9 @@ sylius:
             max_length: Der Name darf nicht länger als 1 Zeichen sein.|Der Name darf nicht länger als {{ limit }} Zeichen sein.
             min_length: Der Name muss mindestens 1 Zeichen lang sein.|Der Name muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie einen Namen an.
+    promotion_action:
+        percentage_discount_configuration:
+            max: Der maximale prozentuale Rabatt beträgt 100%.
     promotion_coupon:
         code:
             max_length: Der Gutscheincode darf nicht länger als 1 Zeichen sein.|Der Gutscheincode darf nicht länger als {{ limit }} sein.
@@ -25,9 +28,13 @@ sylius:
         usage_limit:
             min: Das Nutzungslimit eines Gutscheincodes muss mindestens {{ limit }} sein.
     promotion_coupon_generator_instruction:
+        amount:
+            min: Die Anzahl der zu erstellenden Gutscheinodes muss mindestens {{ limit }} sein.
+            not_blank: Bitte geben Sie die Anzahl der zu generierenden Gutscheincodes ein.
         code_length:
             min: Der Gutscheincode muss mindestens {{ limit }} Zeichen lang sein.
             max: Der Gutscheincode darf nicht länger als {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie eine Gutscheincodelänge ein.
+        possible_generation_amount: Ungültige Gutscheincodelänge oder ungültiger Gutscheinbetrag. Es ist nicht möglich %expectedAmount% einzigartige Gutscheincodes mit einer Länge von %codeLength% Zeichen zu generieren. Es können maximal %possibleAmount% Gutscheincodes generiert werden.
         usage_limit:
             min: Das Nutzungslimit der erstellen Gutscheincodes muss mindestens {{ limit }} sein.

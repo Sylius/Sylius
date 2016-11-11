@@ -7,6 +7,5 @@ sylius:
             description: Leírás
             name: Név
             parent: Szülő
-            permalink: Hivatkozás
         taxonomy:
             name: Név

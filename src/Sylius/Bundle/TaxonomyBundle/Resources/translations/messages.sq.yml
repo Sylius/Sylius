@@ -7,6 +7,5 @@ sylius:
             description: Përshkrimi
             name: Emri
             parent: Prind
-            permalink: Permalink
         taxonomy:
             name: Emri

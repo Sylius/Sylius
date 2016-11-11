@@ -7,6 +7,5 @@ sylius:
             description: Descrizione
             name: Nome
             parent: Genitore
-            permalink: Permalink
         taxonomy:
             name: Nome

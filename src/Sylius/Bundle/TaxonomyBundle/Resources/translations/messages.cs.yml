@@ -7,6 +7,5 @@ sylius:
             description: Popis
             name: Jméno
             parent: Rodič
-            permalink: Permalink
         taxonomy:
             name: Jméno
