@@ -42,6 +42,8 @@ EOT
         $output->writeln(sprintf('<error>Warning! This will erase your database.</error> Your current environment is <info>%s</info>.', $this->getEnvironment()));
 
         if (!$this->getHelperSet()->get('dialog')->askConfirmation($output, '<question>Load sample data? (y/N)</question> ', false)) {
+            $output->writeln('Cancelled loading sample data.');
+
             return 0;
         }
 
