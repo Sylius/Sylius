@@ -5,6 +5,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/currency.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/customer.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/customer_group.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/customer_order.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/locale.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/order.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/payment_method.yml" }
@@ -49,6 +50,7 @@ sylius_grid:
             delete_variant: "@SyliusAdmin/ProductVariant/Grid/Action/delete.html.twig"
             accept: "SyliusAdminBundle:ProductReview/Grid/Action:accept.html.twig"
             reject: "SyliusAdminBundle:ProductReview/Grid/Action:reject.html.twig"
+            show_orders: "@SyliusAdmin/Customer/Grid/Action/showOrders.html.twig"
             show: "@SyliusAdmin/Grid/Action/show.html.twig"
             create: "@SyliusAdmin/Grid/Action/create.html.twig"
             update: "@SyliusAdmin/Grid/Action/update.html.twig"

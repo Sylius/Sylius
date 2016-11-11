@@ -694,6 +694,7 @@ sylius:
         show_in_store: 'Show in store'
         show_metadata: 'Show metadata'
         show_order_details: 'Show order details'
+        show_orders: 'Show orders'
         sign_in: 'Sign in'
         sign_in_here: 'Sign in here'
         sign_in_to_the_store_or_create_new_account: 'Sign in to the store <small>or create new account</small>'

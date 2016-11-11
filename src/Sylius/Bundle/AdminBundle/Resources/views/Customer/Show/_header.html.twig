@@ -14,12 +14,20 @@
         <div class="right aligned column" id="actions">
             {{ render(path('sylius_admin_request_customer_password_reset', { 'id': customer.id, 'email': customer.email })) }}
             {{ buttons.delete(path('sylius_admin_shop_user_delete', {'id': customer.user.id })) }}
+
+            {% if customer.orders is not empty %}
+                {{ buttons.show(path('sylius_admin_customer_order_index', {'id': customer.id}), 'sylius.ui.show_orders'|trans) }}
+            {% endif %}
         </div>
     {% else %}
         <div class="right aligned column" id="no-account">
             <span class="ui huge icon label">
                 <i class="spy icon"></i> {{ 'sylius.ui.guest'|trans }}
             </span>
+
+            {% if customer.orders is not empty %}
+                {{ buttons.show(path('sylius_admin_customer_order_index', {'id': customer.id}), 'sylius.ui.show_orders'|trans) }}
+            {% endif %}
         </div>
     {% endif %}
 </div>

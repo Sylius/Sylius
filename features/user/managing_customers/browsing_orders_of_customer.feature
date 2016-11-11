@@ -17,7 +17,7 @@ Feature: Browsing orders of a customer
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Browsing orders of a specific customer in the list
         When I browse orders of a customer "logan@wolverine.com"
         Then I should see a single order in the list
