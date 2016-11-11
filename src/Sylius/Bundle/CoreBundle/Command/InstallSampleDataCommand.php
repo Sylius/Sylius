@@ -52,8 +52,9 @@ EOT
         $output->writeln('Loading sample data...');
 
         try {
-            $this->ensureDirectoryExistsAndIsWritable(self::WEB_MEDIA_DIRECTORY, $output);
-            $this->ensureDirectoryExistsAndIsWritable(self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
+            $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';
+            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_DIRECTORY, $output);
+            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
         } catch (\RuntimeException $exception) {
             $output->writeln($exception->getMessage());
 

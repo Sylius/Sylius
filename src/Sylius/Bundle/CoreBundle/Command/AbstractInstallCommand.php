@@ -37,11 +37,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         $application = $this->getApplication();
         $application->setCatchExceptions(false);
 
-        $this->commandExecutor = new CommandExecutor(
-            $input,
-            $output,
-            $application
-        );
+        $this->commandExecutor = new CommandExecutor($input, $output, $application);
     }
 
     /**
