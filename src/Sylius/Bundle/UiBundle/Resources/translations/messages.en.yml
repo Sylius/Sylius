@@ -493,7 +493,6 @@ sylius:
         next: 'Next'
         no_label: 'No'
         no_account: 'No account yet'
-        no_account: 'no account'
         no_addresses: 'There are no addresses to display'
         no_association_types_to_display: 'There are no association types defined'
         no_comment: 'No comment'
