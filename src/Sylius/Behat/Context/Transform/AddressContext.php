@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class AddressingContext implements Context
+final class AddressContext implements Context
 {
     /**
      * @var FactoryInterface

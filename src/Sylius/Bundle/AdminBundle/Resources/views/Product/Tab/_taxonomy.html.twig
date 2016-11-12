@@ -2,7 +2,7 @@
     <h3 class="ui dividing header">{{ 'sylius.ui.taxonomy'|trans }}</h3>
     <div class="field">
         {{ form_label(form.mainTaxon) }}
-        <div class="ui fluid search selection dropdown">
+        <div class="taxon-select ui fluid search selection dropdown">
             {{ form_widget(form.mainTaxon, {'attr': {'class' : 'autocomplete'}}) }}
             <i class="dropdown icon"></i>
             <div class="default text">{{'sylius.ui.select_taxon'|trans}}</div>

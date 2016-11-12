@@ -25,6 +25,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentProductPageResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -662,6 +663,39 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I associate as :productAssociationType the :productName product
+     * @When I associate as :productAssociationType the :firstProductName and :secondProductName products
+     */
+    public function iAssociateProductsAsProductAssociation(
+        ProductAssociationTypeInterface $productAssociationType,
+        ...$productsNames
+    ) {
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->createSimpleProductPage,
+            $this->updateSimpleProductPage,
+        ], $this->sharedStorage->get('product'));
+
+        $currentPage->associateProducts($productAssociationType, $productsNames);
+    }
+
+    /**
+     * @When I remove an associated product :productName from :productAssociationType
+     */
+    public function iRemoveAnAssociatedProductFromProductAssociation(
+        $productName,
+        ProductAssociationTypeInterface $productAssociationType
+    ) {
+        /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->createSimpleProductPage,
+            $this->updateSimpleProductPage,
+        ], $this->sharedStorage->get('product'));
+
+        $currentPage->removeAssociatedProduct($productName, $productAssociationType);
+    }
+
+    /**
      * @Then /^(this product) should have(?:| also) an image with a code "([^"]*)"$/
      * @Then /^the (product "[^"]+") should have(?:| also) an image with a code "([^"]*)"$/
      */
@@ -832,6 +866,43 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this->productReviewIndexPage->isSingleResourceOnPage(['reviewSubject' => $product->getName()]),
             sprintf('There should be no reviews of %s.', $product->getName())
+        );
+    }
+
+    /**
+     * @Then this product should( also) have an association :productAssociationType with product :productName
+     * @Then this product should( also) have an association :productAssociationType with products :firstProductName and :secondProductName
+     */
+    public function theProductShouldHaveAnAssociationWithProducts(
+        ProductAssociationTypeInterface $productAssociationType,
+        ...$productsNames
+    ) {
+        foreach ($productsNames as $productName) {
+            Assert::true(
+                $this->updateSimpleProductPage->hasAssociatedProduct($productName, $productAssociationType),
+                sprintf(
+                    'This product should have an association %s with product %s, but it does not.',
+                    $productAssociationType->getName(),
+                    $productName
+                )
+            );
+        }
+    }
+
+    /**
+     * @Then this product should not have an association :productAssociationType with product :productName
+     */
+    public function theProductShouldNotHaveAnAssociationWithProducts(
+        ProductAssociationTypeInterface $productAssociationType,
+        $productName
+    ) {
+        Assert::false(
+            $this->updateSimpleProductPage->hasAssociatedProduct($productName, $productAssociationType),
+            sprintf(
+                'This product should not have an association %s with product %s, but it does.',
+                $productAssociationType->getName(),
+                $productName
+            )
         );
     }
 

@@ -7,6 +7,5 @@ sylius:
             description: Açıklama
             name: Ad
             parent: Üst
-            permalink: Kalıcı Bağlantı
         taxonomy:
             name: Ad

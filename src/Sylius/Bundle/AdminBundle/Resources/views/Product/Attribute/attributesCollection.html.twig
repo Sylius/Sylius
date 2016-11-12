@@ -40,7 +40,7 @@
 {% macro collection_item(form, allow_delete, button_delete_label, index) %}
     <div class="attribute" data-id="{{ form.vars.data.attribute.id }}">
         {% set id = form.vars.id %}
-        {% if 'checkbox' in form.vars.value.type %}
+        {% if 'checkbox' in form.children.value.vars.block_prefixes %}
             <div class="ui toggle checkbox" style="margin-top: 15px; margin-bottom: 15px;">
                 {{ form_widget(form.value) }}
                 <label>{{ form.vars.value.attribute.name }}</label>

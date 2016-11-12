@@ -18,6 +18,11 @@
             <tag name="sylius.price_calculator" type="channel_based" label="Channel based" />
         </service>
 
+        <service id="sylius.price_calculator.channel_and_currency_based" class="Sylius\Component\Core\Pricing\ChannelAndCurrencyBasedCalculator" lazy="true">
+            <argument type="service" id="sylius.currency_converter" />
+            <tag name="sylius.price_calculator" type="channel_and_currency_based" label="Channel and currency based" />
+        </service>
+
         <service id="sylius.price_calculator.group_based" class="Sylius\Component\Core\Pricing\GroupBasedCalculator">
             <tag name="sylius.price_calculator" type="group_based" label="Customer group based" />
         </service>

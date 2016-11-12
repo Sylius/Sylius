@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -22,6 +23,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
@@ -205,6 +207,22 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") available in (channel "[^"]+") and (channel "[^"]+")$/
+     */
+    public function storeHasAProductPricedAtAvailableInChannels($productName, $price = 0, ...$channels)
+    {
+        $product = $this->createProduct($productName, $price);
+
+        $product->setDescription('Awesome '.$productName);
+
+        foreach ($channels as $channel) {
+            $product->addChannel($channel);
+        }
+
+        $this->saveProduct($product);
+    }
+
+    /**
      * @Given /^(this product) is named "([^"]+)" (in the "([^"]+)" locale)$/
      */
     public function thisProductIsNamedIn(ProductInterface $product, $name, $locale)
@@ -244,11 +262,14 @@ final class ProductContext implements Context
 
     /**
      * @Given the store has( also) :firstProductName and :secondProductName products
+     * @Given the store has( also) :firstProductName, :secondProductName and :thirdProductName products
+     * @Given the store has( also) :firstProductName, :secondProductName, :thirdProductName and :fourthProductName products
      */
-    public function theStoreHasAProductAnd($firstProductName, $secondProductName)
+    public function theStoreHasProducts(...$productsNames)
     {
-        $this->saveProduct($this->createProduct($firstProductName));
-        $this->saveProduct($this->createProduct($secondProductName));
+        foreach ($productsNames as $productName) {
+            $this->saveProduct($this->createProduct($productName));
+        }
     }
 
     /**
@@ -537,6 +558,37 @@ final class ProductContext implements Context
         $product->addImage($productImage);
 
         $this->objectManager->flush($product);
+    }
+
+    /**
+     * @Given /^(it) has different prices for different channels and currencies$/
+     */
+    public function itHasDifferentPricesForDifferentChannelsAndCurrencies(ProductInterface $product)
+    {
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->defaultVariantResolver->getVariant($product);
+
+        $variant->setPricingCalculator(Calculators::CHANNEL_AND_CURRENCY_BASED);
+    }
+
+    /**
+     * @Given /^(it) has price ("[^"]+") for ("[^"]+" channel) and "([^"]+)" currency$/
+     */
+    public function itHasPriceForChannelAndCurrency(
+        ProductInterface $product,
+        $price,
+        ChannelInterface $channel,
+        $currency
+    ) {
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->defaultVariantResolver->getVariant($product);
+
+        $pricingConfiguration = $variant->getPricingConfiguration();
+        $pricingConfiguration[$channel->getCode()][$currency] = $price;
+
+        $variant->setPricingConfiguration($pricingConfiguration);
+
+        $this->objectManager->flush();
     }
 
     /**

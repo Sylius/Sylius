@@ -19,7 +19,6 @@ use Symfony\Component\Validator\ConstraintViolationList;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {
-    const APP_CACHE = 'app/cache/';
     const WEB_ASSETS_DIRECTORY = 'web/assets/';
     const WEB_BUNDLES_DIRECTORY = 'web/bundles/';
     const WEB_MEDIA_DIRECTORY = 'web/media/';
@@ -38,11 +37,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         $application = $this->getApplication();
         $application->setCatchExceptions(false);
 
-        $this->commandExecutor = new CommandExecutor(
-            $input,
-            $output,
-            $application
-        );
+        $this->commandExecutor = new CommandExecutor($input, $output, $application);
     }
 
     /**

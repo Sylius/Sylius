@@ -8,7 +8,7 @@ default:
                 - sylius.behat.context.hook.doctrine_orm
                 - sylius.behat.context.hook.email_spool
 
-                - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.country
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical

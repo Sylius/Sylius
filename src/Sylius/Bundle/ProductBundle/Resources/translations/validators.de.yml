@@ -13,6 +13,8 @@ sylius:
             not_blank: Bitte gib Sie einen Produktnamen an.
             min_length: Der Produktname muss mindestens 1 Zeichen lang sein.|Der Produktname muss mindestens {{ limit }} Zeichen lang sein.
             max_length: Der Produktname darf nicht länger als 1 Zeichen sein.|Der Produktname darf nicht länger als {{ limit }} Zeichen sein.
+        slug:
+            not_blank: Bitte eine Produkt SEO-URL angeben.
     variant:
         sku:
             not_blank: Bitte geben Sie die Bestandseinheit der Variante an.
@@ -34,3 +36,7 @@ sylius:
             unique: Das Kürzel für den Wert der Option existiert bereits.
         value:
             not_blank: Bitte geben Sie einen Wert für diese Option ein.
+    association_type:
+        name:
+            min_length: Der Name der Zuordnung muss mindestens 1 Zeichen lang sein.|Der Name der Zuordnung muss mindestens {{ limit }} Zeichen lang sein.
+            max_length: Der Name der Zuordnung darf nicht länger als 1 Zeichen sein.|Der Name der Zuordnung darf nicht länger als {{ limit }} Zeichen sein.

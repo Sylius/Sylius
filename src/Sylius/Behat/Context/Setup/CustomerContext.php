@@ -14,9 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -156,43 +154,11 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given /^(his) default (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
-     * @Given /^(his) default (address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
-     */
-    public function heHasDefaultAddress(CustomerInterface $customer, AddressInterface $address)
-    {
-        $customer->setDefaultAddress($address);
-
-        $this->customerManager->flush();
-    }
-
-    /**
      * @Given /^(the customer) subscribed to the newsletter$/
      */
     public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer)
     {
         $customer->setSubscribedToNewsletter(true);
-
-        $this->customerManager->flush();
-    }
-
-    /**
-     * @Given /^(I) have an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in my address book$/
-     */
-    public function iHaveAnAddressInAddressBook(ShopUserInterface $user, AddressInterface $address)
-    {
-        /** @var CustomerInterface $customer */
-        $customer = $user->getCustomer();
-
-        $this->thisCustomerHasAnAddressInAddressBook($customer, $address);
-    }
-
-    /**
-     * @Given /^(this customer) has an (address "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+"(?:|, "[^"]+")) in their address book$/
-     */
-    public function thisCustomerHasAnAddressInAddressBook(CustomerInterface $customer, AddressInterface $address)
-    {
-        $customer->addAddress($address);
 
         $this->customerManager->flush();
     }

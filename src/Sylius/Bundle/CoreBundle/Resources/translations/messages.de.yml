@@ -61,7 +61,7 @@ sylius:
             shipping_category: Versandkategorie
             short_description: Kurzbeschreibung
             variant_selection_method: Variantenauswahlmethode
-            main_taxon: Haupt-Klassifizierung
+            main_taxon: Haupt-Produktgruppe
             channels: Ausgabekanäle
             enabled: Aktiviert
         product_filter:
@@ -123,14 +123,14 @@ sylius:
             name: Name
         promotion_rule:
             contains_taxon:
-                taxon: Klassifizierung
+                taxon: Produktgruppe
                 count: Anzahl
             taxon:
-                taxons: Klassifizierungen
+                taxons: Produktgruppen
             product:
                 products: Produkte
             total_of_items_from_taxon:
-                taxon: Steuern
+                taxon: Produktgruppe
                 amount: Anzahl
     installer:
         extensions:

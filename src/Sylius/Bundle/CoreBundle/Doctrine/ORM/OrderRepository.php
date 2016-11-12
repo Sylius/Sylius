@@ -25,9 +25,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function createListQueryBuilder()
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        return $queryBuilder
+        return $this->createQueryBuilder('o')
             ->addSelect('channel')
             ->leftJoin('o.channel', 'channel')
             ->addSelect('customer')
@@ -42,17 +40,13 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function createByCustomerQueryBuilder(CustomerInterface $customer)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        $queryBuilder
+        return $this->createQueryBuilder('o')
             ->innerJoin('o.customer', 'customer')
             ->andWhere('customer = :customer')
             ->andWhere('o.state != :state')
             ->setParameter('customer', $customer)
             ->setParameter('state', OrderInterface::STATE_CART)
         ;
-
-        return $queryBuilder;
     }
 
     /**
@@ -91,7 +85,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function countByCustomerAndCoupon(CustomerInterface $customer, PromotionCouponInterface $coupon)
     {
-        $queryBuilder = $this->createQueryBuilder('o')
+        $count = $this->createQueryBuilder('o')
             ->select('count(o.id)')
             ->innerJoin('o.promotionCoupon', 'coupon')
             ->andWhere('o.customer = :customer')
@@ -102,14 +96,11 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->setParameter('coupon', $coupon)
             ->setParameter('cartState', OrderInterface::STATE_CART)
             ->setParameter('cancelledState', OrderInterface::STATE_CANCELLED)
-        ;
-
-        $count = (int) $queryBuilder
             ->getQuery()
             ->getSingleScalarResult()
         ;
 
-        return $count;
+        return (int) $count;
     }
 
     /**
@@ -118,17 +109,20 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     public function createCheckoutsPaginator(array $criteria = null, array $sorting = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder->andWhere($queryBuilder->expr()->isNull('o.checkoutCompletedAt'));
+        $queryBuilder
+            ->andWhere('o.state = :state')
+            ->setParameter('state', OrderInterface::STATE_CART)
+        ;
 
         if (!empty($criteria['createdAtFrom'])) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->gte('o.checkoutCompletedAt', ':createdAtFrom'))
+                ->andWhere($queryBuilder->expr()->gte('o.createdAt', ':createdAtFrom'))
                 ->setParameter('createdAtFrom', $criteria['createdAtFrom'])
             ;
         }
         if (!empty($criteria['createdAtTo'])) {
             $queryBuilder
-                ->andWhere($queryBuilder->expr()->lte('o.checkoutCompletedAt', ':createdAtTo'))
+                ->andWhere($queryBuilder->expr()->lte('o.createdAt', ':createdAtTo'))
                 ->setParameter('createdAtTo', $criteria['createdAtTo'])
             ;
         }
@@ -156,11 +150,13 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function countByCustomer(CustomerInterface $customer)
     {
-       return (int) $this->createByCustomerQueryBuilder($customer)
+        $count = $this->createByCustomerQueryBuilder($customer)
             ->select('count(o.id)')
             ->getQuery()
             ->getSingleScalarResult()
         ;
+
+        return (int) $count;
     }
 
     /**

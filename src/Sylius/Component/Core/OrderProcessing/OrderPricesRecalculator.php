@@ -50,7 +50,11 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
         }
 
         if (null !== $order->getChannel()) {
-            $context['channel'] = [$order->getChannel()];
+            $context['channel'] = $order->getChannel();
+        }
+
+        if (null !== $order->getCurrencyCode()) {
+            $context['currency'] = $order->getCurrencyCode();
         }
 
         foreach ($order->getItems() as $item) {

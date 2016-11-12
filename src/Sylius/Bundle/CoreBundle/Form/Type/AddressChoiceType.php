@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
@@ -24,14 +24,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class AddressChoiceType extends AbstractType
 {
     /**
-     * @var RepositoryInterface
+     * @var AddressRepositoryInterface
      */
     private $addressRepository;
 
     /**
-     * @param RepositoryInterface $addressRepository
+     * @param AddressRepositoryInterface $addressRepository
      */
-    public function __construct(RepositoryInterface $addressRepository)
+    public function __construct(AddressRepositoryInterface $addressRepository)
     {
         $this->addressRepository = $addressRepository;
     }

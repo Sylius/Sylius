@@ -41,19 +41,18 @@ EOT
     {
         $output->writeln(sprintf('<error>Warning! This will erase your database.</error> Your current environment is <info>%s</info>.', $this->getEnvironment()));
 
-        if ($input->getOption('no-interaction')) {
-            return 0;
-        }
-
         if (!$this->getHelperSet()->get('dialog')->askConfirmation($output, '<question>Load sample data? (y/N)</question> ', false)) {
+            $output->writeln('Cancelled loading sample data.');
+
             return 0;
         }
 
         $output->writeln('Loading sample data...');
 
         try {
-            $this->ensureDirectoryExistsAndIsWritable(self::WEB_MEDIA_DIRECTORY, $output);
-            $this->ensureDirectoryExistsAndIsWritable(self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
+            $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';
+            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_DIRECTORY, $output);
+            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_MEDIA_IMAGE_DIRECTORY, $output);
         } catch (\RuntimeException $exception) {
             $output->writeln($exception->getMessage());
 
