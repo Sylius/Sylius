@@ -39,8 +39,9 @@ EOT
         $output->writeln(sprintf('Installing Sylius assets for environment <info>%s</info>.', $this->getEnvironment()));
 
         try {
-            $this->ensureDirectoryExistsAndIsWritable(self::WEB_ASSETS_DIRECTORY, $output);
-            $this->ensureDirectoryExistsAndIsWritable(self::WEB_BUNDLES_DIRECTORY, $output);
+            $rootDir = $this->getContainer()->getParameter('kernel.root_dir') . '/../';
+            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_ASSETS_DIRECTORY, $output);
+            $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_BUNDLES_DIRECTORY, $output);
         } catch (\RuntimeException $exception) {
             return 1;
         }
