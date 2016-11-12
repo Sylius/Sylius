@@ -21,6 +21,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use Webmozart\Assert\Assert;
 
 /**
@@ -32,6 +33,11 @@ final class ManagingProductVariantsContext implements Context
      * @var SharedStorageInterface
      */
     private $sharedStorage;
+
+    /**
+     * @var DefaultProductVariantResolver
+     */
+    private $defaultProductVariantResolver;
 
     /**
      * @var CreatePageInterface
@@ -60,6 +66,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
+     * @param DefaultProductVariantResolver $defaultProductVariantResolver
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
@@ -68,6 +75,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
+        DefaultProductVariantResolver $defaultProductVariantResolver,
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
@@ -75,6 +83,7 @@ final class ManagingProductVariantsContext implements Context
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
+        $this->defaultProductVariantResolver = $defaultProductVariantResolver;
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
@@ -358,16 +367,10 @@ final class ManagingProductVariantsContext implements Context
      */
     public function unitsOfThisProductShouldBeOnHold($quantity, ProductInterface $product)
     {
-        Assert::same(
-            (int) $quantity,
-            $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant()),
-            sprintf(
-                'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
-                $product->getFirstVariant()->getName(),
-                $quantity,
-                $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant())
-            )
-        );
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->defaultProductVariantResolver->getVariant($product);
+
+        $this->assertOnHoldQuantityOfVariant($quantity, $variant);
     }
 
     /**
@@ -375,14 +378,18 @@ final class ManagingProductVariantsContext implements Context
      */
     public function unitsOfThisProductShouldBeOnHand($quantity, ProductInterface $product)
     {
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->defaultProductVariantResolver->getVariant($product);
+        $actualQuantity = $this->indexPage->getOnHandQuantityFor($variant);
+
         Assert::same(
             (int) $quantity,
-            $this->indexPage->getOnHandQuantityFor($product->getFirstVariant()),
+            $actualQuantity,
             sprintf(
                 'Unexpected on hand quantity for "%s" variant. It should be "%s" but is "%s"',
-                $product->getFirstVariant()->getName(),
+                $variant->getName(),
                 $quantity,
-                $this->indexPage->getOnHandQuantityFor($product->getFirstVariant())
+                $actualQuantity
             )
         );
     }
@@ -392,16 +399,10 @@ final class ManagingProductVariantsContext implements Context
      */
     public function thereShouldBeNoUnitsOfThisProductOnHold(ProductInterface $product)
     {
-        Assert::eq(
-            0,
-            $this->indexPage->getOnHoldQuantityFor($product->getFirstVariant()),
-            sprintf(
-                'Unexpected on hand quantity for "%s" variant. It should be "%s" but is "%s"',
-                $product->getFirstVariant()->getName(),
-                0,
-                $this->indexPage->getOnHandQuantityFor($product->getFirstVariant())
-            )
-        );
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->defaultProductVariantResolver->getVariant($product);
+
+        $this->assertOnHoldQuantityOfVariant(0, $variant);
     }
 
     /**
@@ -410,16 +411,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function thisVariantShouldHaveItemsOnHold(ProductVariantInterface $variant, $amount)
     {
-        Assert::same(
-            (int) $amount,
-            $this->indexPage->getOnHoldQuantityFor($variant),
-            sprintf(
-                'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
-                $variant->getName(),
-                $amount,
-                $this->indexPage->getOnHandQuantityFor($variant)
-            )
-        );
+        $this->assertOnHoldQuantityOfVariant((int) $amount, $variant);
     }
 
     /**
@@ -429,16 +421,7 @@ final class ManagingProductVariantsContext implements Context
     {
         $this->indexPage->open(['productId' => $product->getId()]);
 
-        Assert::same(
-            (int) $amount,
-            $this->indexPage->getOnHoldQuantityFor($variant),
-            sprintf(
-                'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
-                $variant->getName(),
-                $amount,
-                $this->indexPage->getOnHandQuantityFor($variant)
-            )
-        );
+        $this->assertOnHoldQuantityOfVariant((int) $amount, $variant);
     }
 
     /**
@@ -459,5 +442,27 @@ final class ManagingProductVariantsContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::same($currentPage->getValidationMessage($element), $message);
+    }
+
+    /**
+     * @param int $expectedAmount
+     * @param ProductVariantInterface $variant
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertOnHoldQuantityOfVariant($expectedAmount, $variant)
+    {
+        $actualAmount = $this->indexPage->getOnHoldQuantityFor($variant);
+
+        Assert::same(
+            (int) $expectedAmount,
+            $actualAmount,
+            sprintf(
+                'Unexpected on hold quantity for "%s" variant. It should be "%s" but is "%s"',
+                $variant->getName(),
+                $expectedAmount,
+                $actualAmount
+            )
+        );
     }
 }
