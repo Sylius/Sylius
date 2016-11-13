@@ -20,6 +20,7 @@ var paths = {
             '../../../../node_modules/sortablejs/Sortable.js',
             '../../../../node_modules/sortablejs/jquery.binding.js',
             '../../../../node_modules/semantic-ui-css/semantic.min.js',
+            '../../../../node_modules/semantic-ui-calendar/dist/calendar.js',
             '../PromotionBundle/Resources/public/js/sylius-promotion.js',
             '../ShippingBundle/Resources/public/js/**',
             '../UiBundle/Resources/private/js/**',
@@ -33,7 +34,8 @@ var paths = {
             '../UiBundle/Resources/private/sass/**'
         ],
         css: [
-            '../../../../node_modules/semantic-ui-css/semantic.min.css'
+            '../../../../node_modules/semantic-ui-css/semantic.min.css',
+            '../../../../node_modules/semantic-ui-calendar/dist/calendar.css'
         ],
         img: [
             '../UiBundle/Resources/private/img/**'
