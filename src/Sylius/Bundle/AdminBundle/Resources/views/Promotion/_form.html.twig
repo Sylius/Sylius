@@ -23,8 +23,8 @@
         <h4 class="ui dividing header">{{ 'sylius.ui.start_date'|trans }} & {{ 'sylius.ui.end_date'|trans }}</h4>
 
         <div class="two fields">
-            {{ form_row(form.startsAt) }}
-            {{ form_row(form.endsAt) }}
+            {{ form_row(form.startsAt, { 'id': 'rangestart'}) }}
+            {{ form_row(form.endsAt, { 'id': 'rangeend'}) }}
         </div>
     </div>
 </div>

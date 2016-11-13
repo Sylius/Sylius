@@ -154,6 +154,12 @@
     </div>
 {% endblock %}
 
+{% block datetime_widget %}
+    <div class="ui input calendar" {% if id is not empty %}id="{{ id }}" {% endif %}>
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
 {% block sylius_product_option_value_widget %}
     <div class="ui segment">
         {{ form_row(form.code) }}
