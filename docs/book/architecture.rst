@@ -89,7 +89,7 @@ Core
 
 The Core is another component that integrates all the other components. This is the place where for example the ``ProductVariant`` finally learns that it has a ``TaxCategory``.
 The Core component is where the ``ProductVariant`` implements the ``TaxableInterface`` and other interfaces that are useful for its operation.
-As each e-commerce Sylius has here a fully integrated concept of everything that is needed to run a webshop.
+Sylius has here a fully integrated concept of everything that is needed to run a webshop.
 To get to know more about concepts applied in Sylius - keep on reading :doc:`The Book </book/index>`.
 
 Admin
