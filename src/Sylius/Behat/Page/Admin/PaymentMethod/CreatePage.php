@@ -48,6 +48,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function checkChannel($channel)
+    {
+        $this->getDocument()->checkField($channel);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function describeIt($description, $languageCode)
     {
         $this->getDocument()->fillField(

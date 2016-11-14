@@ -19,7 +19,7 @@ use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
+class PaymentMethod extends BasePaymentMethod implements PaymentMethodInterface
 {
     /**
      * @var Collection

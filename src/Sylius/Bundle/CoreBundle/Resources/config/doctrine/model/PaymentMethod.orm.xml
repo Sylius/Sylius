@@ -17,7 +17,7 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\PaymentMethod" table="sylius_payment_method">
-        <many-to-many field="channels" mapped-by="paymentMethods" target-entity="Sylius\Component\Core\Model\ChannelInterface"/>
+        <many-to-many field="channels" mapped-by="paymentMethods" target-entity="Sylius\Component\Channel\Model\ChannelInterface"/>
     </mapped-superclass>
 
 </doctrine-mapping>

@@ -17,7 +17,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface as BasePaymentMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMethodInterface;
 
 /**
@@ -56,7 +56,7 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $locales;
 
     /**
-     * @var PaymentMethodInterface[]|Collection
+     * @var BasePaymentMethodInterface[]|Collection
      */
     protected $paymentMethods;
 
@@ -263,7 +263,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function addPaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function addPaymentMethod(BasePaymentMethodInterface $paymentMethod)
     {
         if (!$this->hasPaymentMethod($paymentMethod)) {
             $this->paymentMethods->add($paymentMethod);
@@ -273,7 +273,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function removePaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function removePaymentMethod(BasePaymentMethodInterface $paymentMethod)
     {
         if ($this->hasPaymentMethod($paymentMethod)) {
             $this->paymentMethods->removeElement($paymentMethod);
@@ -283,7 +283,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function hasPaymentMethod(BasePaymentMethodInterface $paymentMethod)
     {
         return $this->paymentMethods->contains($paymentMethod);
     }

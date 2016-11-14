@@ -172,6 +172,14 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Given it belongs to channel :channel
+     */
+    public function itBelongsToChannel($channel)
+    {
+        $this->createPage->checkChannel($channel);
+    }
+
+    /**
      * @Given I set its instruction as :instructions in :language
      */
     public function iSetItsInstructionAsIn($instructions, $language)
