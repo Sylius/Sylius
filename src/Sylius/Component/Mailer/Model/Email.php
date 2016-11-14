@@ -19,8 +19,6 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
  */
 class Email implements EmailInterface
 {
-    use TimestampableTrait, ToggleableTrait;
-
     /**
      * @var mixed
      */
@@ -30,6 +28,11 @@ class Email implements EmailInterface
      * @var string
      */
     protected $code;
+
+    /**
+     * @var bool
+     */
+    protected $enabled = true;
 
     /**
      * @var string
@@ -83,6 +86,32 @@ class Email implements EmailInterface
     public function setCode($code)
     {
         $this->code = $code;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param bool $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = (bool) $enabled;
+    }
+
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    public function disable()
+    {
+        $this->enabled = false;
     }
 
     /**

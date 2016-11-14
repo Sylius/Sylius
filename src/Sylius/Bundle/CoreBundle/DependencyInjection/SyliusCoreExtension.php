@@ -45,7 +45,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         'sylius_promotion',
         'sylius_review',
         'sylius_shipping',
-        'sylius_mailer',
         'sylius_taxation',
         'sylius_taxonomy',
         'sylius_user',

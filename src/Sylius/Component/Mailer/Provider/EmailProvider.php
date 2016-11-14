@@ -11,9 +11,8 @@
 
 namespace Sylius\Component\Mailer\Provider;
 
+use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
 use Sylius\Component\Mailer\Model\EmailInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -23,14 +22,9 @@ use Webmozart\Assert\Assert;
 final class EmailProvider implements EmailProviderInterface
 {
     /**
-     * @var FactoryInterface
+     * @var EmailFactoryInterface
      */
     protected $emailFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    protected $emailRepository;
 
     /**
      * @var array
@@ -38,17 +32,14 @@ final class EmailProvider implements EmailProviderInterface
     protected $configuration;
 
     /**
-     * @param FactoryInterface $emailFactory
-     * @param RepositoryInterface $emailRepository
+     * @param EmailFactoryInterface $emailFactory
      * @param array $configuration
      */
     public function __construct(
-        FactoryInterface $emailFactory,
-        RepositoryInterface $emailRepository,
+        EmailFactoryInterface $emailFactory,
         array $configuration
     ) {
         $this->emailFactory = $emailFactory;
-        $this->emailRepository = $emailRepository;
         $this->configuration = $configuration;
     }
 
@@ -57,13 +48,7 @@ final class EmailProvider implements EmailProviderInterface
      */
     public function getEmail($code)
     {
-        $email = $this->emailRepository->findOneBy(['code' => $code]);
-
-        if (null === $email) {
-            $email = $this->getEmailFromConfiguration($code);
-        }
-
-        return $email;
+        return $this->getEmailFromConfiguration($code);
     }
 
     /**

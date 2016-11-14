@@ -19,8 +19,32 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface EmailInterface extends CodeAwareInterface, ResourceInterface, TimestampableInterface, ToggleableInterface
+interface EmailInterface
 {
+    /**
+     * @return string
+     */
+    public function getCode();
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code);
+
+    /**
+     * @return bool
+     */
+    public function isEnabled();
+
+    /**
+     * @param bool $enabled
+     */
+    public function setEnabled($enabled);
+
+    public function enable();
+
+    public function disable();
+
     /**
      * @return string
      */

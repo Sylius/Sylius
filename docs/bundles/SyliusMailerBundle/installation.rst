@@ -60,7 +60,6 @@ Put this configuration inside your ``app/config/config.yml``.
 .. code-block:: yaml
 
     sylius_mailer:
-        driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
         sender:
             name: My website
             address: no-reply@my-website.com
