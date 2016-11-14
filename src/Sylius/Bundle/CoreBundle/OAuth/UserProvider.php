@@ -130,7 +130,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      */
     private function createUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        /** @var \Sylius\Component\User\Model\UserInterface $user */
+        /** @var SyliusUserInterface $user */
         $user = $this->userFactory->createNew();
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
