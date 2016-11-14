@@ -13,13 +13,8 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.form.type.email_template_choice" class="Sylius\Bundle\MailerBundle\Form\Type\EmailTemplateChoiceType">
-            <argument>%sylius.mailer.templates%</argument>
-            <tag name="form.type" alias="sylius_email_template_choice" />
-        </service>
         <service id="sylius.email_provider" class="Sylius\Component\Mailer\Provider\EmailProvider">
             <argument type="service" id="sylius.factory.email" />
-            <argument type="service" id="sylius.repository.email" />
             <argument>%sylius.mailer.emails%</argument>
         </service>
         <service id="sylius.email_sender" class="Sylius\Component\Mailer\Sender\Sender">

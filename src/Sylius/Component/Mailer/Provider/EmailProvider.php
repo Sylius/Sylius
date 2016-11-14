@@ -28,27 +28,19 @@ final class EmailProvider implements EmailProviderInterface
     protected $emailFactory;
 
     /**
-     * @var RepositoryInterface
-     */
-    protected $emailRepository;
-
-    /**
      * @var array
      */
     protected $configuration;
 
     /**
      * @param FactoryInterface $emailFactory
-     * @param RepositoryInterface $emailRepository
      * @param array $configuration
      */
     public function __construct(
         FactoryInterface $emailFactory,
-        RepositoryInterface $emailRepository,
         array $configuration
     ) {
         $this->emailFactory = $emailFactory;
-        $this->emailRepository = $emailRepository;
         $this->configuration = $configuration;
     }
 
@@ -57,13 +49,7 @@ final class EmailProvider implements EmailProviderInterface
      */
     public function getEmail($code)
     {
-        $email = $this->emailRepository->findOneBy(['code' => $code]);
-
-        if (null === $email) {
-            $email = $this->getEmailFromConfiguration($code);
-        }
-
-        return $email;
+        return $this->getEmailFromConfiguration($code);
     }
 
     /**
