@@ -14,6 +14,7 @@ namespace Sylius\Behat\Page\Shop\Account\Order;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -75,6 +76,19 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         } catch (\InvalidArgumentException $exception) {
             return false;
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function payForOrder(OrderInterface $order)
+    {
+        $row = $this->tableAccessor->getRowWithFields(
+            $this->getElement('customer_orders'),
+            ['number' => $order->getNumber()]
+        );
+
+        $row->clickLink('Pay');
     }
 
     /**

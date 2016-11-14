@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Shop\Account\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -29,4 +30,9 @@ interface IndexPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function isOrderWithNumberInTheList($number);
+
+    /**
+     * @param OrderInterface $order
+     */
+    public function payForOrder(OrderInterface $order);
 }
