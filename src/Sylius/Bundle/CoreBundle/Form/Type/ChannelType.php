@@ -59,14 +59,6 @@ class ChannelType extends BaseChannelType
                 'empty_data' => null,
                 'empty_value' => 'sylius.ui.no_theme',
             ])
-            ->add('shippingMethods', 'sylius_shipping_method_choice', [
-                'label' => 'sylius.form.channel.shipping_methods',
-                'multiple' => true,
-            ])
-            ->add('paymentMethods', 'sylius_payment_method_choice', [
-                'label' => 'sylius.form.channel.payment_methods',
-                'multiple' => true,
-            ])
         ;
     }
 }

@@ -62,22 +62,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseShippingMethod($shippingMethod)
-    {
-        $this->getDocument()->selectFieldOption('Shipping Methods', $shippingMethod);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function choosePaymentMethod($paymentMethod)
-    {
-        $this->getDocument()->selectFieldOption('Payment Methods', $paymentMethod);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function chooseDefaultTaxZone($taxZone)
     {
         $this->getDocument()->selectFieldOption('Default tax zone', $taxZone);
