@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    form:
-        route:
-            parent: Vanhempi
-        static_content:
-            parent: Vanhempi

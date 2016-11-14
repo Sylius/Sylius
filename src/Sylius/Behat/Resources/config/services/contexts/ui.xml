@@ -181,13 +181,6 @@
             <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_routes" class="Sylius\Behat\Context\Ui\Admin\ManagingRoutesContext">
-            <argument type="service" id="sylius.behat.page.admin.route.index" />
-            <argument type="service" id="sylius.behat.page.admin.route.create" />
-            <argument type="service" id="sylius.behat.page.admin.route.update" />
-            <tag name="fob.context_service" />
-        </service>
-
         <service id="sylius.behat.context.ui.admin.managing_shipping_methods" class="Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.index" />
@@ -195,13 +188,6 @@
             <argument type="service" id="sylius.behat.page.admin.shipping_method.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="fob.context_service" />
-        </service>
-
-        <service id="sylius.behat.context.ui.admin.managing_static_contents" class="Sylius\Behat\Context\Ui\Admin\ManagingStaticContentsContext">
-            <argument type="service" id="sylius.behat.page.admin.static_content.index" />
-            <argument type="service" id="sylius.behat.page.admin.static_content.create" />
-            <argument type="service" id="sylius.behat.page.admin.static_content.update" />
             <tag name="fob.context_service" />
         </service>
 
@@ -384,11 +370,6 @@
             <argument type="service" id="sylius.behat.shop_security" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
-            <tag name="fob.context_service" />
-        </service>
-
-        <service id="sylius.behat.context.ui.shop.static_content" class="Sylius\Behat\Context\Ui\Shop\StaticContentContext">
-            <argument type="service" id="sylius.behat.page.shop.static_content.show" />
             <tag name="fob.context_service" />
         </service>
 

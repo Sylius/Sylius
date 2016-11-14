@@ -13,13 +13,6 @@ doctrine:
                     host: localhost
                     port: 11211
 
-doctrine_phpcr:
-    odm:
-        metadata_cache_driver:
-            type: memcached
-            host: localhost
-            port: 11211
-
 twig:
     strict_variables: true
 

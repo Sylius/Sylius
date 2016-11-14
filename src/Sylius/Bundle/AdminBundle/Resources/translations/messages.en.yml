@@ -32,7 +32,3 @@ sylius:
                 sales:
                     header: Sales
                     orders: Orders
-                content:
-                    header: Content
-                    static_contents: Static contents
-                    routes: Routes

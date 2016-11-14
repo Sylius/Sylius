@@ -20,6 +20,9 @@ use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\Driver;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
+/**
+ * @require Doctrine\ODM\PHPCR\DocumentManagerInterface
+ */
 final class DriverSpec extends ObjectBehavior
 {
     function let(DocumentManagerInterface $documentManager)

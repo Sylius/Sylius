@@ -64,17 +64,11 @@ sylius_admin_promotion_coupon:
     resource: "@SyliusAdminBundle/Resources/config/routing/promotion_coupon.yml"
     prefix: /promotions/{promotionId}/coupons/
 
-sylius_admin_route:
-    resource: "@SyliusAdminBundle/Resources/config/routing/route.yml"
-
 sylius_admin_security:
     resource: "@SyliusAdminBundle/Resources/config/routing/security.yml"
 
 sylius_admin_shipping_method:
     resource: "@SyliusAdminBundle/Resources/config/routing/shipping_method.yml"
-
-sylius_admin_static_content:
-    resource: "@SyliusAdminBundle/Resources/config/routing/static_content.yml"
 
 sylius_admin_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/taxon.yml"

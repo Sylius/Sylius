@@ -18,12 +18,6 @@
             <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.hook.phpcr" class="Sylius\Behat\Context\Hook\PHPCRContext">
-            <argument type="service" id="__symfony_shared__.doctrine_phpcr.odm.document_manager" />
-            <argument type="service" id="__symfony_shared__.doctrine_phpcr.initializer_manager" />
-            <tag name="fob.context_service" />
-        </service>
-
         <service id="sylius.behat.context.hook.test_theme" class="Sylius\Behat\Context\Hook\TestThemeContext">
             <argument type="service" id="__symfony_shared__.sylius.theme.test_theme_configuration_manager" />
             <tag name="fob.context_service" />
