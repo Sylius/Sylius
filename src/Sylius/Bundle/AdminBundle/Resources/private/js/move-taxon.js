@@ -5,7 +5,11 @@
 
         $('.sylius-sortable-list').sortable({
             forceFallback: true,
+            onStart: function (event) {
+                $(event.item).addClass('dragging-started');
+            },
             onEnd: function (event) {
+                $(event.item).removeClass('dragging-started');
                 $(this).api({
                     throttle: 500,
                     method: 'PUT',
