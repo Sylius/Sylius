@@ -81,14 +81,14 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritDoc}
      */
-    public function payForOrder(OrderInterface $order)
+    public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order)
     {
         $row = $this->tableAccessor->getRowWithFields(
             $this->getElement('customer_orders'),
             ['number' => $order->getNumber()]
         );
 
-        $row->clickLink('Pay');
+        return $row->hasLink('Change payment method');
     }
 
     /**

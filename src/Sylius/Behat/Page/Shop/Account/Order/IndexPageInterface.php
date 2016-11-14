@@ -33,6 +33,8 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     /**
      * @param OrderInterface $order
+     *
+     * @return bool
      */
-    public function payForOrder(OrderInterface $order);
+    public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order);
 }

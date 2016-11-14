@@ -18,5 +18,4 @@ Feature: Paying with paypal during checkout
     @ui
     Scenario: Retrying the payment with success
         When I browse my orders
-        And I want to pay for this order
-        Then I should see the thank you page
+        Then I should be able to change payment method for this order

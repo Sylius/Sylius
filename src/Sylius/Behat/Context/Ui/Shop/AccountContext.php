@@ -19,7 +19,6 @@ use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
-use Sylius\Behat\Page\Shop\Order\ThankYouPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -56,11 +55,6 @@ final class AccountContext implements Context
     private $orderShowPage;
 
     /**
-     * @var ThankYouPageInterface
-     */
-    private $thankYouPage;
-
-    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -71,7 +65,6 @@ final class AccountContext implements Context
      * @param ChangePasswordPageInterface $changePasswordPage
      * @param IndexPageInterface $orderIndexPage
      * @param ShowPageInterface $orderShowPage
-     * @param ThankYouPageInterface $thankYouPage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -80,7 +73,6 @@ final class AccountContext implements Context
         ChangePasswordPageInterface $changePasswordPage,
         IndexPageInterface $orderIndexPage,
         ShowPageInterface $orderShowPage,
-        ThankYouPageInterface $thankYouPage,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->dashboardPage = $dashboardPage;
@@ -88,7 +80,6 @@ final class AccountContext implements Context
         $this->changePasswordPage = $changePasswordPage;
         $this->orderIndexPage = $orderIndexPage;
         $this->orderShowPage = $orderShowPage;
-        $this->thankYouPage = $thankYouPage;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -134,14 +125,6 @@ final class AccountContext implements Context
     public function iSaveMyChanges()
     {
         $this->profileUpdatePage->saveChanges();
-    }
-
-    /**
-     * @When /^I want to pay for (this order)$/
-     */
-    public function iWantToPayForThisOrder(OrderInterface $order)
-    {
-        $this->orderIndexPage->payForOrder($order);
     }
 
     /**
@@ -485,13 +468,13 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then I should see the thank you page
+     * @Then /^I should be able to change payment method for (this order)$/
      */
-    public function iShouldSeeTheThankYouPage()
+    public function iShouldBeAbleToChangePaymentMethodForThisOrder(OrderInterface $order)
     {
         Assert::true(
-            $this->thankYouPage->hasThankYouMessage(),
-            'I should see thank you message, but I do not.'
+            $this->orderIndexPage->isItPossibleToChangePaymentMethodForOrder($order),
+            sprintf('I should be able to change payment method for %s.', $order->getNumber())
         );
     }
 
