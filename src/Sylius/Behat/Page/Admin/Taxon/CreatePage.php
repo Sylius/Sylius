@@ -73,8 +73,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
                 $deleteButton = $leaf->find('css', '.sylius-delete-resource');
                 $deleteButton->click();
 
-                $deleteButton->waitFor(5, function () {
-                    return false;
+                $deleteButton->waitFor(5, function () use ($leaf) {
+                    return null === $leaf->find('css', '.sylius-delete-resource');
                 });
 
                 return;
@@ -175,8 +175,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 JS;
 
         $seleniumDriver->executeScript($script);
-        $this->getDocument()->waitFor(5, function () {
-            return false;
+        $this->getDocument()->waitFor(5, function () use ($draggableTaxonLocator) {
+            return !$this->getDocument()->find('css', $draggableTaxonLocator)->hasClass('dragging-started');
         });
     }
 
