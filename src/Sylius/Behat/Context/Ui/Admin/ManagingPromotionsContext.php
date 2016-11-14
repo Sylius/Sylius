@@ -562,6 +562,50 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Then I should see :count promotions on the list
+     */
+    public function iShouldSeePromotionsOnTheList($count)
+    {
+        $actualCount = $this->indexPage->countItems();
+
+        Assert::same(
+            (int) $count,
+            $actualCount,
+            'There should be %s promotion, but there\'s %2$s.'
+        );
+    }
+
+    /**
+     * @Then the first promotion on the list should have :field :value
+     */
+    public function theFirstPromotionOnTheListShouldHave($field, $value)
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = reset($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected first promotion\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @Then the last promotion on the list should have :field :value
+     */
+    public function theLastPromotionOnTheListShouldHave($field, $value)
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = end($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected last promotion\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */

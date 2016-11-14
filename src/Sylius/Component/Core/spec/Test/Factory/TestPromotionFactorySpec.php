@@ -44,7 +44,6 @@ final class TestPromotionFactorySpec extends ObjectBehavior
         $promotionFactory->createNew()->willReturn($promotion);
         $promotion->setName('Super promotion')->shouldBeCalled();
         $promotion->setCode('super_promotion')->shouldBeCalled();
-        $promotion->setDescription('Promotion Super promotion')->shouldBeCalled();
         $promotion->setStartsAt(Argument::type('\DateTime'))->shouldBeCalled();
         $promotion->setEndsAt(Argument::type('\DateTime'))->shouldBeCalled();
 
@@ -59,7 +58,6 @@ final class TestPromotionFactorySpec extends ObjectBehavior
         $promotionFactory->createNew()->willReturn($promotion);
         $promotion->setName('Super promotion')->shouldBeCalled();
         $promotion->setCode('super_promotion')->shouldBeCalled();
-        $promotion->setDescription('Promotion Super promotion')->shouldBeCalled();
         $promotion->setStartsAt(Argument::type('\DateTime'))->shouldBeCalled();
         $promotion->setEndsAt(Argument::type('\DateTime'))->shouldBeCalled();
         $promotion->addChannel($channel)->shouldBeCalled();
