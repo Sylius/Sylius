@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
@@ -100,7 +101,7 @@ final class EmailContext implements Context
     public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(OrderInterface $order, $recipient)
     {
         $this->assertEmailContainsMessageTo($order->getNumber(), $recipient);
-        $this->assertEmailContainsMessageTo($order->getLastShipment()->getMethod()->getName(), $recipient);
+        $this->assertEmailContainsMessageTo($this->getShippingMethodName($order), $recipient);
 
         $tracking = $this->sharedStorage->get('tracking_code');
         $this->assertEmailContainsMessageTo($tracking, $recipient);
@@ -116,5 +117,21 @@ final class EmailContext implements Context
             $this->emailChecker->hasMessageTo($message, $recipient),
             sprintf('Message "%s" was not sent to "%s".', $message, $recipient)
         );
+    }
+
+    /**
+     * @param OrderInterface $order
+     *
+     * @return string
+     */
+    private function getShippingMethodName(OrderInterface $order)
+    {
+        /** @var ShipmentInterface $shipment */
+        $shipment = $order->getShipments()->first();
+        if (false === $shipment) {
+            throw new \LogicException('Order should have at least one shipment.');
+        }
+
+        return $shipment->getMethod()->getName();
     }
 }
