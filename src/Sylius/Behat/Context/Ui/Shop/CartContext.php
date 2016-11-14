@@ -293,7 +293,7 @@ final class CartContext implements Context
 
     /**
      * @Given /^I have(?:| added) (\d+) (products "([^"]+)") (?:to|in) the cart$/
-     * @When /^I add(?:|ed) (\d+) (products "([^"]+)") to the cart$/
+     * @When /^I(?:| again) add(?:|ed) (\d+) (products "([^"]+)") to the cart$/
      */
     public function iAddProductsToTheCart($quantity, ProductInterface $product)
     {
