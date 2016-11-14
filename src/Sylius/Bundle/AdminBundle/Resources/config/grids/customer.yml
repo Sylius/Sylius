@@ -49,6 +49,8 @@ sylius_grid:
                     create:
                         type: create
                 item:
+                    show_orders:
+                        type: show_orders
                     show:
                         type: show
                     update:

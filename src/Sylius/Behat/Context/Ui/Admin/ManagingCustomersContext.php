@@ -18,8 +18,7 @@ use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Model\Customer;
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -53,6 +52,11 @@ final class ManagingCustomersContext implements Context
     private $showPage;
 
     /**
+     * @var IndexPageInterface
+     */
+    private $ordersIndexPage;
+
+    /**
      * @var CurrentPageResolverInterface
      */
     private $currentPageResolver;
@@ -63,6 +67,7 @@ final class ManagingCustomersContext implements Context
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
      * @param ShowPageInterface $showPage
+     * @param IndexPageInterface $ordersIndexPage
      * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
@@ -71,6 +76,7 @@ final class ManagingCustomersContext implements Context
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
         ShowPageInterface $showPage,
+        IndexPageInterface $ordersIndexPage,
         CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -78,6 +84,7 @@ final class ManagingCustomersContext implements Context
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->showPage = $showPage;
+        $this->ordersIndexPage = $ordersIndexPage;
         $this->currentPageResolver = $currentPageResolver;
     }
 
@@ -427,6 +434,14 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @When I browse orders of a customer :customer
+     */
+    public function iBrowseOrdersOfACustomer(CustomerInterface $customer)
+    {
+        $this->ordersIndexPage->open(['id' => $customer->getId()]);
+    }
+
+    /**
      * @Then the customer :customer should have an account created
      * @Then /^(this customer) should have an account created$/
      */
@@ -598,6 +613,40 @@ final class ManagingCustomersContext implements Context
         Assert::true(
             $this->showPage->hasVerifiedEmail(),
             'There should be information that this customer has verified the email.'
+        );
+    }
+
+    /**
+     * @Then I should see a single order in the list
+     */
+    public function iShouldSeeASingleOrderInTheList()
+    {
+        Assert::same(
+            1,
+            $this->ordersIndexPage->countItems(),
+            'Cannot find order in the list.'
+        );
+    }
+
+    /**
+     * @Then I should see the order with number :orderNumber in the list
+     */
+    public function iShouldSeeASingleOrderFromCustomer($orderNumber)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]),
+            sprintf('Cannot find order with number "%s" in the list.', $orderNumber)
+        );
+    }
+
+    /**
+     * @Then I should not see the order with number :orderNumber in the list
+     */
+    public function iShouldNotSeeASingleOrderFromCustomer($orderNumber)
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]),
+            sprintf('Cannot find order with number "%s" in the list.', $orderNumber)
         );
     }
 }

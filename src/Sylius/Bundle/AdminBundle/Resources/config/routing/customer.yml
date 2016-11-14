@@ -35,3 +35,19 @@ sylius_admin_request_customer_password_reset:
             redirect:
                 route: sylius_admin_customer_show
                 parameters: { id: $id }
+
+sylius_admin_customer_order_index:
+    path: /customers/{id}/orders
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            section: admin
+            template: "@SyliusAdmin/Crud/index.html.twig"
+            grid: sylius_admin_customer_order
+            vars:
+                route:
+                    parameters:
+                        $customerId: $id
+                templates:
+                    breadcrumb: '@SyliusAdmin/Customer/Order/Index/_breadcrumb.html.twig'
