@@ -31,7 +31,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('alias')->isRequired()->cannotBeEmpty()->end()
                 ->scalarNode('path')->cannotBeEmpty()->end()
-                ->scalarNode('form')->cannotBeEmpty()->end()
+                ->variableNode('form')->cannotBeEmpty()->end()
                 ->scalarNode('section')->cannotBeEmpty()->end()
                 ->scalarNode('redirect')->cannotBeEmpty()->end()
                 ->scalarNode('templates')->cannotBeEmpty()->end()
