@@ -16,6 +16,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusMailerBundle extends Bundle
+final class SyliusMailerBundle extends Bundle
 {
 }

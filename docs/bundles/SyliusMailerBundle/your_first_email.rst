@@ -15,7 +15,6 @@ In your ``app/config/config.yml``, under ``sylius_mailer`` you should configure 
     # app/config/config.yml
 
     sylius_mailer:
-        driver: doctrine/orm
         sender:
             name: Movie Database Example
             address: no-reply@movie-database-example.com
