@@ -27,11 +27,6 @@ final class EmailSpec extends ObjectBehavior
         $this->shouldImplement(EmailInterface::class);
     }
 
-    function it_does_not_have_id_by_default()
-    {
-        $this->getId()->shouldReturn(null);
-    }
-
     function it_has_no_code_by_default()
     {
         $this->getCode()->shouldReturn(null);
@@ -82,15 +77,5 @@ final class EmailSpec extends ObjectBehavior
     {
         $this->setEnabled(false);
         $this->shouldNotBeEnabled();
-    }
-
-    function it_initializes_creation_date_by_default()
-    {
-        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
-    }
-
-    function it_does_not_have_last_update_date_by_default()
-    {
-        $this->getUpdatedAt()->shouldReturn(null);
     }
 }

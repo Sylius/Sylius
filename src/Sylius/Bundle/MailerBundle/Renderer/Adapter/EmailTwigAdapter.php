@@ -62,17 +62,39 @@ class EmailTwigAdapter extends AbstractAdapter
     private function getRenderedEmail(EmailInterface $email, array $data)
     {
         if (null !== $email->getTemplate()) {
-            $data = $this->twig->mergeGlobals($data);
-
-            /** @var \Twig_Template $template */
-            $template = $this->twig->loadTemplate($email->getTemplate());
-
-            $subject = $template->renderBlock('subject', $data);
-            $body = $template->renderBlock('body', $data);
-
-            return new RenderedEmail($subject, $body);
+            return $this->provideEmailWithTemplate($email, $data);
         }
 
+        return $this->provideEmailWithoutTemplate($email, $data);
+    }
+
+    /**
+     * @param EmailInterface $email
+     * @param array $data
+     *
+     * @return RenderedEmail
+     */
+    private function provideEmailWithTemplate(EmailInterface $email, array $data)
+    {
+        $data = $this->twig->mergeGlobals($data);
+
+        /** @var \Twig_Template $template */
+        $template = $this->twig->loadTemplate($email->getTemplate());
+
+        $subject = $template->renderBlock('subject', $data);
+        $body = $template->renderBlock('body', $data);
+
+        return new RenderedEmail($subject, $body);
+    }
+
+    /**
+     * @param EmailInterface $email
+     * @param array $data
+     *
+     * @return RenderedEmail
+     */
+    private function provideEmailWithoutTemplate(EmailInterface $email, array $data)
+    {
         $twig = new \Twig_Environment(new \Twig_Loader_Array([]));
 
         $subjectTemplate = $twig->createTemplate($email->getSubject());

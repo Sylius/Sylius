@@ -12,17 +12,17 @@
 namespace spec\Sylius\Component\Mailer\Provider;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
 use Sylius\Component\Mailer\Model\EmailInterface;
 use Sylius\Component\Mailer\Provider\EmailProvider;
 use Sylius\Component\Mailer\Provider\EmailProviderInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class EmailProviderSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory)
+    function let(EmailFactoryInterface $emailFactory)
     {
         $emails = [
             'user_confirmation' => [
@@ -45,7 +45,7 @@ final class EmailProviderSpec extends ObjectBehavior
             ],
         ];
 
-        $this->beConstructedWith($factory, $emails);
+        $this->beConstructedWith($emailFactory, $emails);
     }
 
     function it_is_initializable()
@@ -60,9 +60,9 @@ final class EmailProviderSpec extends ObjectBehavior
 
     function it_looks_for_an_email_in_configuration_when_it_cannot_be_found_via_repository(
         EmailInterface $email,
-        FactoryInterface $factory
+        EmailFactoryInterface $emailFactory
     ) {
-        $factory->createNew()->willReturn($email);
+        $emailFactory->createNew()->willReturn($email);
 
         $email->setCode('user_confirmation')->shouldBeCalled();
         $email->setSubject('Hello test!')->shouldBeCalled();
