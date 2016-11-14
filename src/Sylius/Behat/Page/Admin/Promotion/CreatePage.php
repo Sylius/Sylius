@@ -32,7 +32,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function addRule($ruleName)
     {
+        $count = count($this->getCollectionItems('rules'));
+
         $this->getDocument()->clickLink('Add rule');
+
+        $this->getDocument()->waitFor(5, function () use ($count) {
+            return $count + 1 === count($this->getCollectionItems('rules'));
+        });
 
         $this->selectRuleOption('Type', $ruleName);
     }
@@ -42,7 +48,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function selectRuleOption($option, $value, $multiple = false)
     {
-        $this->getLastAddedCollectionItem('rules')->find('named', array('select', $option))->selectOption($value, $multiple);
+        $this->getLastCollectionItem('rules')->find('named', array('select', $option))->selectOption($value, $multiple);
     }
 
     /**
@@ -50,7 +56,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function fillRuleOption($option, $value)
     {
-        $this->getLastAddedCollectionItem('rules')->fillField($option, $value);
+        $this->getLastCollectionItem('rules')->fillField($option, $value);
     }
 
     /**
@@ -58,7 +64,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function addAction($actionName)
     {
+        $count = count($this->getCollectionItems('actions'));
+
         $this->getDocument()->clickLink('Add action');
+
+        $this->getDocument()->waitFor(5, function () use ($count) {
+            return $count + 1 === count($this->getCollectionItems('actions'));
+        });
 
         $this->selectActionOption('Type', $actionName);
     }
@@ -68,7 +80,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function selectActionOption($option, $value, $multiple = false)
     {
-        $this->getLastAddedCollectionItem('actions')->find('named', array('select', $option))->selectOption($value, $multiple);
+        $this->getLastCollectionItem('actions')->find('named', array('select', $option))->selectOption($value, $multiple);
     }
 
     /**
@@ -76,7 +88,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function fillActionOption($option, $value)
     {
-        $this->getLastAddedCollectionItem('actions')->fillField($option, $value);
+        $this->getLastCollectionItem('actions')->fillField($option, $value);
     }
 
     /**
@@ -129,7 +141,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function getValidationMessageForAction()
     {
-        $actionForm = $this->getLastAddedCollectionItem('actions');
+        $actionForm = $this->getLastCollectionItem('actions');
 
         $foundElement = $actionForm->find('css', '.sylius-validation-error');
         if (null === $foundElement) {
@@ -144,7 +156,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function selectFilterOption($option, $value, $multiple = false)
     {
-        $this->getLastAddedCollectionItem('actions')->find('named', array('select', $option))->selectOption($value, $multiple);
+        $this->getLastCollectionItem('actions')->find('named', array('select', $option))->selectOption($value, $multiple);
     }
 
     /**
@@ -169,12 +181,26 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      *
      * @return NodeElement
      */
-    private function getLastAddedCollectionItem($collection)
+    private function getLastCollectionItem($collection)
     {
-        $items = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
+        $items = $this->getCollectionItems($collection);
 
         Assert::notEmpty($items);
 
         return end($items);
+    }
+
+    /**
+     * @param string $collection
+     *
+     * @return NodeElement[]
+     */
+    private function getCollectionItems($collection)
+    {
+        $items = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::isArray($items);
+
+        return $items;
     }
 }
