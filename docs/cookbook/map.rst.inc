@@ -10,3 +10,4 @@
 * :doc:`/cookbook/checkout`
 * :doc:`/cookbook/embedding-products`
 * :doc:`/cookbook/taxons-menu`
+* :doc:`/cookbook/facebook-login`

@@ -16,5 +16,6 @@ Cookbook
     checkout
     embedding-products
     taxons-menu
+    facebook-login
 
 .. include:: /cookbook/map.rst.inc
