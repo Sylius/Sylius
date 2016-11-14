@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Product\CreateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\CreateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Product\IndexPerTaxonPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
@@ -74,6 +75,11 @@ final class ManagingProductsContext implements Context
     private $productReviewIndexPage;
 
     /**
+     * @var IndexPerTaxonPageInterface
+     */
+    private $indexPerTaxonPage;
+
+    /**
      * @var CurrentProductPageResolverInterface
      */
     private $currentPageResolver;
@@ -91,6 +97,7 @@ final class ManagingProductsContext implements Context
      * @param UpdateSimpleProductPageInterface $updateSimpleProductPage
      * @param UpdateConfigurableProductPageInterface $updateConfigurableProductPage
      * @param ProductReviewIndexPageInterface $productReviewIndexPage
+     * @param IndexPerTaxonPageInterface $indexPerTaxonPage
      * @param CurrentProductPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
@@ -102,6 +109,7 @@ final class ManagingProductsContext implements Context
         UpdateSimpleProductPageInterface $updateSimpleProductPage,
         UpdateConfigurableProductPageInterface $updateConfigurableProductPage,
         ProductReviewIndexPageInterface $productReviewIndexPage,
+        IndexPerTaxonPageInterface $indexPerTaxonPage,
         CurrentProductPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
@@ -112,6 +120,7 @@ final class ManagingProductsContext implements Context
         $this->updateSimpleProductPage = $updateSimpleProductPage;
         $this->updateConfigurableProductPage = $updateConfigurableProductPage;
         $this->productReviewIndexPage = $productReviewIndexPage;
+        $this->indexPerTaxonPage = $indexPerTaxonPage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
@@ -271,6 +280,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When /^I am browsing products from ("([^"]+)" taxon)$/
+     */
+    public function iAmBrowsingProductsFromTaxon(TaxonInterface $taxon)
+    {
+        $this->indexPerTaxonPage->open(['taxonId' => $taxon->getId()]);
+    }
+
+    /**
      * @When I filter them by :taxonName taxon
      */
     public function iFilterThemByTaxon($taxonName)
@@ -305,12 +322,32 @@ final class ManagingProductsContext implements Context
      */
     public function theFirstProductOnTheListShouldHave($field, $value)
     {
-        $actualValue = $this->indexPage->getColumnFields($field)[0];
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->indexPage,
+            $this->indexPerTaxonPage,
+        ]);
+
+        $actualValue = $currentPage->getColumnFields($field)[0];
 
         Assert::same(
             $actualValue,
             $value,
             sprintf('Expected first product\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @Then the last product on the list should have :field :value
+     */
+    public function theLastProductOnTheListShouldHave($field, $value)
+    {
+        $columnFields = $this->indexPerTaxonPage->getColumnFields($field);
+        $actualValue = end($columnFields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected last product\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
         );
     }
 
@@ -952,6 +989,25 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then they should have order like :firstProductName, :secondProductName and :thirdProductName
+     */
+    public function theyShouldHaveOrderLikeAnd(...$productNames)
+    {
+        Assert::true(
+            $this->indexPerTaxonPage->hasProductsInOrder($productNames),
+            'The products have wrong order.'
+        );
+    }
+
+    /**
+     * @When I set the position of :productName to :position
+     */
+    public function iSetThePositionOfTo($productName, $position)
+    {
+        $this->indexPerTaxonPage->setPositionOfProduct($productName, (int) $position);
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */
@@ -990,5 +1046,13 @@ final class ManagingProductsContext implements Context
         ], $product);
 
         Assert::same($currentPage->getValidationMessage($element), $message);
+    }
+
+    /**
+     * @When /^I move (product "[^"]+") before (product "[^"]+")$/
+     */
+    public function iMoveBefore(ProductInterface $draggableProduct, ProductInterface $targetProduct)
+    {
+        $this->indexPerTaxonPage->insertBefore($draggableProduct, $targetProduct);
     }
 }

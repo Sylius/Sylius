@@ -16,6 +16,7 @@
         <parameter key="sylius.behat.page.admin.product.create_configurable.class">Sylius\Behat\Page\Admin\Product\CreateConfigurableProductPage</parameter>
         <parameter key="sylius.behat.page.admin.product.create_simple.class">Sylius\Behat\Page\Admin\Product\CreateSimpleProductPage</parameter>
         <parameter key="sylius.behat.page.admin.product.index.class">Sylius\Behat\Page\Admin\Product\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.product.index_per_taxon.class">Sylius\Behat\Page\Admin\Product\IndexPerTaxonPage</parameter>
         <parameter key="sylius.behat.page.admin.product.show.class">Sylius\Behat\Page\Admin\Product\ShowPage</parameter>
         <parameter key="sylius.behat.page.admin.product.update_simple.class">Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPage</parameter>
         <parameter key="sylius.behat.page.admin.product.update_configurable.class">Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPage</parameter>
@@ -29,6 +30,9 @@
             <argument type="string">product</argument>
         </service>
         <service id="sylius.behat.page.admin.product.index" class="%sylius.behat.page.admin.product.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
+            <argument type="string">product</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product.index_per_taxon" class="%sylius.behat.page.admin.product.index_per_taxon.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">product</argument>
         </service>
         <service id="sylius.behat.page.admin.product.update_configurable" class="%sylius.behat.page.admin.product.update_configurable.class%" parent="sylius.behat.page.admin.crud.update" public="false">
