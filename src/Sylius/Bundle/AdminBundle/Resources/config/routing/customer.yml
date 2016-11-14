@@ -51,4 +51,3 @@ sylius_admin_customer_order_index:
                         $customerId: $id
                 templates:
                     breadcrumb: '@SyliusAdmin/Customer/Order/Index/_breadcrumb.html.twig'
-            permission: true
