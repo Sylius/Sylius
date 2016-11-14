@@ -43,18 +43,22 @@ class ProductVariantType extends BaseProductVariantType
             ->add('width', 'number', [
                 'required' => false,
                 'label' => 'sylius.form.variant.width',
+                'invalid_message' => 'sylius.product_variant.width.invalid',
             ])
             ->add('height', 'number', [
                 'required' => false,
                 'label' => 'sylius.form.variant.height',
+                'invalid_message' => 'sylius.product_variant.height.invalid',
             ])
             ->add('depth', 'number', [
                 'required' => false,
                 'label' => 'sylius.form.variant.depth',
+                'invalid_message' => 'sylius.product_variant.depth.invalid',
             ])
             ->add('weight', 'number', [
                 'required' => false,
                 'label' => 'sylius.form.variant.weight',
+                'invalid_message' => 'sylius.product_variant.weight.invalid',
             ])
             ->add('taxCategory', 'sylius_tax_category_choice', [
                 'required' => false,

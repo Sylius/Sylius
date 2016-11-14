@@ -18,6 +18,13 @@
         </div>
         {% endif %}
         <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.properties'|trans }}</h4>
+            {{ form_row(form.height) }}
+            {{ form_row(form.width) }}
+            {{ form_row(form.depth) }}
+            {{ form_row(form.weight) }}
+        </div>
+        <div class="ui segment">
             <h4 class="ui dividing header">{{ 'sylius.ui.inventory'|trans }}</h4>
             {{ form_row(form.onHand) }}
             {{ form_row(form.tracked) }}

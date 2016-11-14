@@ -25,6 +25,17 @@
         <div class="column">
             {{ form_row(form.channels) }}
         </div>
+        {% if product.simple %}
+            <div class="column">
+                <div class="ui segment">
+                    <h4 class="ui dividing header">{{ 'sylius.ui.properties'|trans }}</h4>
+                    {{ form_row(form.variant.width) }}
+                    {{ form_row(form.variant.height) }}
+                    {{ form_row(form.variant.depth) }}
+                    {{ form_row(form.variant.weight) }}
+                </div>
+            </div>
+        {% endif %}
     </div>
     <div class="ui hidden divider"></div>
     <div class="ui styled fluid accordion">
