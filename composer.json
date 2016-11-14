@@ -43,8 +43,6 @@
         "knplabs/knp-menu-bundle": "^2.1",
         "liip/imagine-bundle": "~1.0",
         "ocramius/proxy-manager": "^1.0",
-        "omnipay/omnipay": "~2.3",
-        "payum/omnipay-bridge": "~1.0",
         "payum/payum": "~1.3",
         "payum/payum-bundle": "~2.1",
         "php-http/guzzle6-adapter": "~1.1",
