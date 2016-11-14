@@ -11,6 +11,7 @@ sylius:
             ends_at: Ends at
             exclusive: Exclusive
             name: Name
+            priority: Priority
             rules: Rules
             starts_at: Starts at
             usage_limit: Usage limit

@@ -31,7 +31,7 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
             ->addSelect('r')
             ->leftJoin($this->getPropertyName('actions'), 'a')
             ->addSelect('a')
-            ->orderBy($this->getPropertyName('priority'), 'DESC')
+            ->orderBy($this->getPropertyName('priority'), 'desc')
         ;
 
         $this->filterByActive($queryBuilder);

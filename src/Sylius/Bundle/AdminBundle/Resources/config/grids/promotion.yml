@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.promotion.class%"
             sorting:
-                code: asc
+                priority: desc
             fields:
                 code:
                     type: string
@@ -19,6 +19,10 @@ sylius_grid:
                     sortable: ~
                     options:
                         template: "@SyliusAdmin/Grid/Field/nameAndDescription.html.twig"
+                priority:
+                    type: string
+                    label: sylius.ui.priority
+                    sortable: ~
                 couponBased:
                     type: twig
                     label: sylius.ui.coupons
