@@ -18,7 +18,7 @@ sylius_user:
                     form:
                         default: Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType
                         registration: Sylius\Bundle\CoreBundle\Form\Type\User\UserRegistrationType
-        admin_oauth:
+        oauth:
             user:
                 classes:
                     model: Sylius\Component\User\Model\UserOAuth
