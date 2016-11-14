@@ -115,17 +115,10 @@
             <tag name="form.type" alias="sylius_promotion_action_filter_product_configuration" />
         </service>
 
-        <service id="sylius.form.type.price_calculator.channel_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelBasedConfigurationType">
+        <service id="sylius.form.type.price_calculator.channel_and_currency_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelAndCurrencyBasedConfigurationType">
             <argument type="service" id="sylius.repository.channel" />
-            <tag name="form.type" alias="sylius_price_calculator_channel_based" />
-        </service>
-        <service id="sylius.form.type.price_calculator.group_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\GroupBasedConfigurationType">
-            <argument type="service" id="sylius.repository.customer_group" />
-            <tag name="form.type" alias="sylius_price_calculator_group_based" />
-        </service>
-        <service id="sylius.form.type.price_calculator.zone_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ZoneBasedConfigurationType">
-            <argument type="service" id="sylius.repository.zone" />
-            <tag name="form.type" alias="sylius_price_calculator_zone_based" />
+            <argument type="service" id="sylius.repository.currency" />
+            <tag name="form.type" alias="sylius_price_calculator_channel_and_currency_based" />
         </service>
 
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer">
@@ -167,6 +160,14 @@
             <argument>%sylius.validation_groups.order_item%</argument>
             <argument type="service" id="sylius.form.data_mapper.order_item_quantity"/>
             <tag name="form.type" alias="sylius_cart_item" />
+        </service>
+
+        <service id="sylius.form.type.product_variant" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductVariantType">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument>%sylius.validation_groups.product_variant%</argument>
+            <argument type="service" id="sylius.registry.price_calculator" />
+            <argument type="service" id="form.registry" />
+            <tag name="form.type" alias="sylius_product_variant" />
         </service>
     </services>
 </container>

@@ -18,9 +18,11 @@ use Sylius\Behat\Page\Admin\ProductVariant\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Product\Resolver\DefaultProductVariantResolver;
 use Webmozart\Assert\Assert;
 
@@ -150,11 +152,35 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I set its price to ("(?:€|£|\$)[^"]+")$/
+     * @When /^I set its(?:| default) price to ("(?:€|£|\$)[^"]+")$/
      */
     public function iSetItsPriceTo($price)
     {
         $this->createPage->specifyPrice($price);
+    }
+
+    /**
+     * @When I choose :calculatorName calculator
+     */
+    public function iChooseCalculator($calculatorName)
+    {
+        $this->createPage->choosePricingCalculator($calculatorName);
+    }
+
+    /**
+     * @When /^I set its price to "(?:€|£|\$)([^"]+)" for ("[^"]+" currency) and ("[^"]+" channel)$/
+     */
+    public function iSetItsPriceToForCurrencyAndChannel($price, CurrencyInterface $currency, ChannelInterface $channel)
+    {
+        $this->createPage->specifyPriceForChannelAndCurrency($price, $channel, $currency);
+    }
+
+    /**
+     * @When I set its :optionName option to :optionValue
+     */
+    public function iSetItsOptionAs($optionName, $optionValue)
+    {
+        $this->createPage->selectOption($optionName, $optionValue);
     }
 
     /**
@@ -425,11 +451,20 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I set its :optionName option to :optionValue
+     * @Then /^(variant with code "[^"]+") for ("[^"]+" currency) and ("[^"]+" channel) should have "(?:€|£|\$)([^"]+)"$/
      */
-    public function iSetItsOptionAs($optionName, $optionValue)
-    {
-        $this->createPage->selectOption($optionName, $optionValue);
+    public function theProductForCurrencyAndChannelShouldHave(
+        ProductVariantInterface $productVariant,
+        CurrencyInterface $currency,
+        ChannelInterface $channel,
+        $price
+    ) {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::same(
+            $this->updatePage->getPricingConfigurationForChannelAndCurrencyCalculator($channel, $currency),
+            $price
+        );
     }
 
     /**

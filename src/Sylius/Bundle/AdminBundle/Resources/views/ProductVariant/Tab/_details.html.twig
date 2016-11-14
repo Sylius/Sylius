@@ -8,6 +8,19 @@
                 {{ form_row(form.price) }}
                 {{ form_row(form.originalPrice) }}
             </div>
+            <div class="two fields">
+                {{ form_row(form.pricingCalculator) }}
+                <div id="sylius_calculator_container">
+                    {% if form.pricingConfiguration is defined %}
+                        {{  form_row(form.pricingConfiguration) }}
+                    {% endif %}
+                </div>
+            </div>
+            {% for name, calculatorConfigurationPrototype in form.vars.prototypes %}
+                <div id="{{ form.pricingCalculator.vars.id }}_{{ name }}" data-container=".configuration"
+                     data-prototype="{{ form_widget(calculatorConfigurationPrototype)|e }}">
+                </div>
+            {% endfor %}
         </div>
         {% if form.optionValues is defined and form.optionValues|length > 0 %}
         <div class="ui segment">

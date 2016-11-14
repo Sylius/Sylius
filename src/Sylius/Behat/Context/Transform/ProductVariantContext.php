@@ -80,4 +80,16 @@ final class ProductVariantContext implements Context
 
         return $productVariants[0];
     }
+
+    /**
+     * @Transform /^variant with code "([^"]+)"$/
+     */
+    public function getProductVariantByCode($code)
+    {
+        $productVariant = $this->productVariantRepository->findOneBy(['code' => $code]);
+
+        Assert::notNull($productVariant, sprintf('Cannot find product variant with code %s', $code));
+
+        return $productVariant;
+    }
 }

@@ -12,13 +12,40 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormRegistryInterface;
+use Symfony\Component\Form\FormView;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductVariantType extends BaseProductVariantType
 {
+    /**
+     * @var ServiceRegistryInterface
+     */
+    protected $calculatorRegistry;
+
+    /**
+     * @var FormRegistryInterface
+     */
+    protected $formRegistry;
+
+    public function __construct(
+        $dataClass,
+        array $validationGroups = [],
+        ServiceRegistryInterface $calculatorRegistry,
+        FormRegistryInterface $formRegistry
+    ) {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->calculatorRegistry = $calculatorRegistry;
+        $this->formRegistry = $formRegistry;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -65,6 +92,39 @@ class ProductVariantType extends BaseProductVariantType
                 'empty_value' => '---',
                 'label' => 'sylius.form.product_variant.tax_category',
             ])
+            ->add('pricingCalculator', 'sylius_price_calculator_choice', [
+                'label' => 'sylius.form.shipping_method.calculator',
+            ])
         ;
+
+        $prototypes = [
+            'calculators' => [],
+        ];
+
+        /** @var CalculatorInterface $calculator */
+        foreach ($this->calculatorRegistry->all() as $name => $calculator) {
+            $calculatorTypeName = sprintf('sylius_price_calculator_%s', $calculator->getType());
+
+            if (!$this->formRegistry->hasType($calculatorTypeName)) {
+                continue;
+            }
+
+            $prototypes['calculators'][$name] = $builder->create('configuration', $calculatorTypeName)->getForm();
+        }
+
+        $builder->setAttribute('prototypes', $prototypes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['prototypes'] = [];
+        foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
+            foreach ($prototypes as $type => $prototype) {
+                $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
+            }
+        }
     }
 }
