@@ -42,6 +42,8 @@ class OrderItemQuantityModifier implements OrderItemQuantityModifierInterface
             return;
         }
 
+        $targetQuantity = min($targetQuantity, 9999);
+
         if ($targetQuantity < $currentQuantity) {
             $this->decreaseUnitsNumber($orderItem, $currentQuantity - $targetQuantity);
         } elseif ($targetQuantity > $currentQuantity) {

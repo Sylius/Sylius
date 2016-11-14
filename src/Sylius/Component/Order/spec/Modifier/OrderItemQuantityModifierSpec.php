@@ -50,7 +50,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         $this->modify($orderItem, 3);
     }
 
-    function it_removes_units_if_target_quantity_is_greater_than_current(
+    function it_removes_units_if_target_quantity_is_lower_than_current(
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
@@ -101,5 +101,16 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         $orderItem->removeUnit(Argument::any())->shouldNotBeCalled();
 
         $this->modify($orderItem, -10);
+    }
+
+    function it_adds_9999_units_when_target_quantity_is_greater(
+        OrderItemUnitFactoryInterface $orderItemUnitFactory,
+        OrderItemInterface $orderItem
+    ) {
+        $orderItem->getQuantity()->willReturn(0);
+
+        $orderItemUnitFactory->createForItem($orderItem)->shouldBeCalledTimes(9999);
+
+        $this->modify($orderItem, 30000);
     }
 }
