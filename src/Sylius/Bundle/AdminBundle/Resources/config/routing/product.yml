@@ -36,7 +36,7 @@ sylius_admin_product_index_per_taxon:
         _controller: sylius.controller.product:indexAction
         _sylius:
             section: admin
-            grid: sylius_admin_product
+            grid: sylius_admin_product_from_taxon
             template: SyliusAdminBundle:Product:index.html.twig
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
