@@ -31,6 +31,7 @@
         </service>
         <service id="sylius.listener.review_change" class="Sylius\Bundle\ReviewBundle\EventListener\ReviewChangeListener">
             <argument type="service" id="sylius.average_rating_updater" />
+            <tag name="kernel.event_listener" event="sylius.product_review.post_update" method="recalculateSubjectRating" />
             <tag name="kernel.event_listener" event="sylius.product_review.post_delete" method="recalculateSubjectRating" />
         </service>
 

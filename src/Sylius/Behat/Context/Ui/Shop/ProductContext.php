@@ -382,9 +382,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should see :count product reviews in the list
+     * @Then /^I should see (\d+) product reviews in the list$/
      */
-    public function iShouldSeeProductReviewsInTheList($count)
+    public function iShouldSeeNumberOfProductReviewsInTheList($count)
     {
         Assert::same(
             (int) $count,
@@ -420,9 +420,11 @@ final class ProductContext implements Context
      */
     public function iShouldSeeAsItsAverageRating($rating)
     {
+        $averageRating = $this->showPage->getAverageRating();
+
         Assert::same(
             (float) $rating,
-            $this->showPage->getAverageRating(),
+            $averageRating,
             'Product should have average rating %2$s but has %s.'
         );
     }
@@ -458,5 +460,14 @@ final class ProductContext implements Context
                 $productAssociationName
             )
         );
+    }
+
+    /**
+     * @Then /^average rating of (product "[^"]+") should be (\d+)$/
+     */
+    public function thisProductAverageRatingShouldBe(ProductInterface $product, $averageRating)
+    {
+        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
+        $this->iShouldSeeAsItsAverageRating($averageRating);
     }
 }
