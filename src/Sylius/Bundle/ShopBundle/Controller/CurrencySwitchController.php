@@ -91,6 +91,6 @@ final class CurrencySwitchController
 
         $this->currencyChangeHandler->handle($code);
 
-        return new RedirectResponse($request->headers->get('referer', $request->getBaseUrl()));
+        return new RedirectResponse($request->headers->get('referer', $request->getSchemeAndHttpHost()));
     }
 }
