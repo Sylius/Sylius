@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -50,6 +51,10 @@ class PromotionType extends AbstractResourceType
                 'label' => 'sylius.form.promotion.ends_at',
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
+                'required' => false,
+            ])
+            ->add('priority', IntegerType::class, [
+                'label' => 'sylius.form.promotion.priority',
                 'required' => false,
             ])
             ->add('couponBased', 'checkbox', [

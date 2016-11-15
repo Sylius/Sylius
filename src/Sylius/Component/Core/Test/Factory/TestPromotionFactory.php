@@ -42,7 +42,6 @@ class TestPromotionFactory implements TestPromotionFactoryInterface
 
         $promotion->setName($name);
         $promotion->setCode(StringInflector::nameToLowercaseCode($name));
-        $promotion->setDescription('Promotion '.$name);
         $promotion->setStartsAt(new \DateTime('-3 days'));
         $promotion->setEndsAt(new \DateTime('+3 days'));
 

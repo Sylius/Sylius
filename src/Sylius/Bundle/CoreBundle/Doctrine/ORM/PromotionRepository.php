@@ -27,7 +27,7 @@ class PromotionRepository extends BasePromotionRepository implements PromotionRe
     {
         $queryBuilder = $this
             ->createQueryBuilder('o')
-            ->orderBy($this->getPropertyName('priority'), 'DESC')
+            ->orderBy($this->getPropertyName('priority'), 'desc')
         ;
 
         $this->filterByActive($queryBuilder);
