@@ -368,7 +368,7 @@ class Order extends BaseOrder implements OrderInterface
     }
 
     /**
-     * @return null|BaseCouponInterface
+     * {@inheritdoc}
      */
     public function getPromotionCoupon()
     {
@@ -465,27 +465,6 @@ class Order extends BaseOrder implements OrderInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-    }
-
-    /**
-     * Gets the last updated shipment of the order
-     *
-     * @return false|ShipmentInterface
-     */
-    public function getLastShipment()
-    {
-        if ($this->shipments->isEmpty()) {
-            return false;
-        }
-
-        $last = $this->shipments->first();
-        foreach ($this->shipments as $shipment) {
-            if ($shipment->getUpdatedAt() > $last->getUpdatedAt()) {
-                $last = $shipment;
-            }
-        }
-
-        return $last;
     }
 
     /**
