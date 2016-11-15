@@ -1,14 +1,9 @@
 /.php_cs.cache
 
-/app/*.cache
-/app/cache
-/app/logs
-
-/app/check.php
-/app/SymfonyRequirements.php
-
 /app/config/parameters.yml
 /app/config/*.local.yml
+/var/*
+!/var/.gitkeep
 
 /web/assets
 /web/bundles
@@ -16,7 +11,6 @@
 /web/js
 /web/media
 
-/bin
 /vendor
 /node_modules
 

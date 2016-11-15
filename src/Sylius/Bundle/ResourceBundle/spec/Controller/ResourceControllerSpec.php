@@ -92,11 +92,6 @@ final class ResourceControllerSpec extends ObjectBehavior
         $this->shouldHaveType(ResourceController::class);
     }
 
-    function it_is_container_aware()
-    {
-        $this->shouldHaveType(ContainerAware::class);
-    }
-
     function it_extends_base_Symfony_controller()
     {
         $this->shouldHaveType(Controller::class);
