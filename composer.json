@@ -151,14 +151,16 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ]
     },
     "autoload": {
@@ -166,24 +168,26 @@
             "Sylius\\Behat\\": "src/Sylius/Behat/",
             "Sylius\\Bundle\\": "src/Sylius/Bundle/",
             "Sylius\\Component\\": "src/Sylius/Component/"
-        }
+        },
+        "classmap": ["app/AppKernel.php", "app/AppCache.php"]
     },
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Tests\\": "tests/"
         }
     },
-    "config": {
-        "bin-dir": "bin"
-    },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
+        "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
+        "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
         },
-        "symfony-app-dir": "app",
-        "symfony-web-dir": "web"
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
     }
 }

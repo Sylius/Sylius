@@ -30,8 +30,9 @@ if (!getenv("SYLIUS_APP_DEV_PERMITTED") && (
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
-require_once __DIR__.'/../app/bootstrap.php.cache';
-require_once __DIR__.'/../app/AppKernel.php';
+/** @var \Composer\Autoload\ClassLoader $loader */
+$loader = require __DIR__.'/../app/autoload.php';
+include_once __DIR__.'/../var/bootstrap.php.cache';
 
 Debug::enable();
 
