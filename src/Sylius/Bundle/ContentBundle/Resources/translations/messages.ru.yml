@@ -4,12 +4,13 @@
 sylius:
     form:
         route:
-            content: Контент
+            content: Содержимое
             name: Название
             parent: Родитель
         static_content:
             body: Содержание
             id: ID
+            internal_name: Внутреннее имя
             menu_nodes: Узлы меню
             parent: Родитель
             publish_end_date: Дата окончания публикации

@@ -4,9 +4,9 @@
 sylius:
     channel:
         default_currency:
-            not_blank: Por favor introduzca la moneda por defecto del canal.
+            not_blank: Por favor, introduzca la moneda por defecto del canal.
         default_locale:
-            not_blank: Por favor introduzca el idioma por defecto del canal.
+            not_blank: Por favor, introduzca el idioma por defecto del canal.
     checkout:
         shipping_method:
             not_blank: Por favor seleccione el método de envío.
@@ -21,7 +21,7 @@ sylius:
             not_valid: El código de la moneda que ingreso no es válido.
     locale:
         code:
-            not_blank: Por favor introduzca el código del idioma.
+            not_blank: Por favor, introduzca el código del idioma.
             unique: Este idioma ya existe.
         enabled:
             cannot_disable_base: El código de idioma base no se puede desactivar.
@@ -32,12 +32,24 @@ sylius:
     product_variant:
         onHand:
             min: Las existencias deben ser mayores que {{ limit }}.
-            not_blank: Por favor introduzca las existencias.
+            not_blank: Por favor, introduzca las existencias.
         price:
             min: El precio no debe ser negativo.
             not_blank: Por favor, introduzca el precio.
         original_price:
             min: El precio original no debe ser negativo.
+        weight:
+            min: El peso no puede ser negativo.
+            invalid: El peso debe ser un número.
+        width:
+            min: El peso no puede ser negativo.
+            invalid: El ancho debe ser un número.
+        height:
+            min: La altura no puede ser negativa.
+            invalid: La altura debe ser un número.
+        depth:
+            min: El fondo no puede ser negativo.
+            invalid: El fondo debe ser un número.
     product_translation:
         short_description:
             max: Breve descripción. No debe superar {{ limit }} caractéres.
@@ -52,4 +64,4 @@ sylius:
             unique: Este nombre de usuario ya está en uso.
             not_blank: Por favor, introduzca su nombre.
         locale_code:
-            not_blank: Por favor, selecciona un idioma.
+            not_blank: Por favor, seleccione un idioma.

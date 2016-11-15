@@ -72,7 +72,7 @@ sylius:
         confirmation: Подтверждение
         confirmation_title: Подтверждение
         contain_variants: Содержит варианты
-        content: Контент
+        content: Содержимое
         countries: Страны
         country: Страна
         country_details: Информация о стране

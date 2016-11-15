@@ -5,8 +5,8 @@ sylius:
     form:
         credit_card:
             cardholder_name: Nombre del titular de la tarjeta
-            expiry_month: Mes de vencimiento
-            expiry_year: Año de vencimiento
+            expiry_month: Mes de caducidad
+            expiry_year: Año de caducidad
             number: Numero de Tarjeta
             security_code: Código de seguridad (CVV)
             type: Tipo de tarjeta
@@ -21,7 +21,7 @@ sylius:
                 failed: Fallido
                 new: Nuevo
                 pending: Pendiente
-                processing: Procesando
+                processing: En proceso
                 unknown: Desconocido
                 void: Vacío
                 cancelled: Cancelado/a

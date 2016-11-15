@@ -461,7 +461,7 @@ sylius:
         new_coupon: Neuer Gutschein
         new_currency: Neue Währung
         new_customer: Neuer Kunde
-        new_customers: Neueste Kunden
+        new_customers: Neukunden
         new_locale: Neue Lokalisierung
         new_order: Neue Bestellung
         new_orders: Aktuelle Bestellungen

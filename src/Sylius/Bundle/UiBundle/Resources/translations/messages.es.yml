@@ -353,7 +353,7 @@ sylius:
         hostname: Nombre del host
         id: ID
         identifier: Identificador
-        if_you_have_an_account_sign_in_with_your_email_address: Si tienes una cuenta, inicia sesión con tu dirección de correo electrónico
+        if_you_have_an_account_sign_in_with_your_email_address: Si tiene una cuenta, inicie sesión con su dirección de correo electrónico
         image: Imagen
         images: Imágenes
         imagine_blocks: Bloque de imagen
@@ -535,7 +535,7 @@ sylius:
         order_comment_name: Comentario del pedido
         order_comments: Comentarios del pedido
         order_confirmation_name: Confirmación de pedido
-        order_details: Detalles de tu pedido
+        order_details: Detalles de su pedido
         order_history: Historial de pedidos
         order_item_product: Producto
         order_state: Estado del pedido
@@ -572,7 +572,7 @@ sylius:
         place_order: Realizar pedido
         placed_an_order: Ha realizado correctamente un pedido.
         placed_at: Hecho el
-        please_sign_in: Por favor, inicia sesión
+        please_sign_in: Por favor, inicie sesión
         postcode: Código postal
         powered_by: Creado con
         preferences: Preferencias
@@ -583,7 +583,7 @@ sylius:
         priority: Prioridad
         privacy_policy: Política de privacidad
         process_your_orders: Tramitar tus pedidos
-        processing: Procesando
+        processing: En proceso
         product: Producto
         product_association_index: Asociación
         product_association_type_index: Tipos de asociación
@@ -607,6 +607,7 @@ sylius:
         promotion_information: Información de la promoción
         promotion_total: Total descuentos
         promotions: Promociones
+        properties: Propiedades
         province: Provincia
         provinces: Provincias
         purchased_from: Comprado en
@@ -656,10 +657,11 @@ sylius:
         sales_this_month: Ventas
         save: Guardar
         save_changes: Guardar cambios
-        scope: Alcance
+        scope: Ámbito
         search: Búsqueda
         security_settings: Ajustes de seguridad
         select_address_from_book: Seleccionar dirección de mi libreta
+        select_products: Seleccione productos
         select_taxon: Seleccionar taxonomía
         set_a_new_password_for_your_account: Crear una nueva contraseña para su cuenta
         set_as_default: Establecer como predeterminado
@@ -693,9 +695,10 @@ sylius:
         show_in_store: Mostrar en la tienda
         show_metadata: Mostrar metadatos
         show_order_details: Mostrar detalles del pedido
+        show_orders: Mostrar pedidos
         sign_in: Iniciar sesión
-        sign_in_here: Inicia sesión aquí
-        sign_in_to_the_store_or_create_new_account: Inicia sesión <small>o crea una nueva cuenta</small>
+        sign_in_here: Inicie sesión aquí
+        sign_in_to_the_store_or_create_new_account: Inicie sesión <small>o cree una nueva cuenta</small>
         sign_out: Cerrar sesión
         simple_blocks: Bloques de texto
         simple_product: Producto simple

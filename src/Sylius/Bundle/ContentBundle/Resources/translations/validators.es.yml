@@ -4,7 +4,7 @@
 sylius:
     route:
         name:
-            not_blank: Por favor, introduce un nombre de ruta.
+            not_blank: Por favor, introduzca un nombre de ruta.
         content:
             not_blank: Por favor, introduzca un contenido para la ruta.
         start_date:
@@ -15,9 +15,9 @@ sylius:
         name:
             not_blank: Por favor introduzca nombre de contenido estático.
         title:
-            not_blank: Por favor introduce el titulo del contenido estatico.
+            not_blank: Por favor, introduzca el título del contenido estático.
         body:
-            not_blank: Por favor ingrese el contenido estatico del cuerpo.
+            not_blank: Por favor, introduzca el contenido estático del cuerpo.
         start_date:
             invalid_date: La fecha de inicio de publicación no es válida.
         end_date:
