@@ -13,10 +13,9 @@ sylius:
         slug:
             not_blank: Please enter product slug.
     variant:
-        sku:
-            not_blank: Please enter variant SKU.
-            unique: Variant SKU must be unique.
         combination: Variant with this option set already exists.
+        code:
+           not_blank: Please enter variant code.
     option:
         code:
            not_blank: Please enter option code.

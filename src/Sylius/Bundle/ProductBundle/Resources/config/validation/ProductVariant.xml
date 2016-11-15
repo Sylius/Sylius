@@ -15,7 +15,7 @@
     <class name="Sylius\Component\Product\Model\ProductVariant">
         <property name="code">
             <constraint name="NotBlank">
-                <option name="message">sylius.option.code.not_blank</option>
+                <option name="message">sylius.variant.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
