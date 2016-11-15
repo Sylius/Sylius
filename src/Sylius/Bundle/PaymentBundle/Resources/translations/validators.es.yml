@@ -5,11 +5,11 @@ sylius:
     credit_card:
         cardholder_name:
             min_length: El nombre del titular debe tener al menos {{ limit }} caracteres.
-            not_blank: Por favor introduzca el nombre del titular de la tarjeta.
+            not_blank: Por favor, introduzca el nombre del titular de la tarjeta.
         expiry_month:
             max_range: El mes de caducidad de la tarjeta de crédito debe estar comprendido entre {{ min }} y {{ max }}.
             min_range: El mes de caducidad de la tarjeta de crédito debe estar comprendido entre {{ min }} y {{ max }}.
-            not_blank: Por favor seleccione el mes de caducidad.
+            not_blank: Por favor, seleccione el mes de caducidad.
         number:
             not_blank: Por favor introduzca el número de la tarjeta de crédito.
             luhn: El número de tarjeta de crédito introducido es incorrecto.
@@ -18,12 +18,12 @@ sylius:
             max_length: Los códigos CVV de las tarjetas de crédito deben ser como máximo {{ limit }} dígitos de largo.
             min_length: El código CVV de la tarjeta de crédito debe ser como máximo {{ limit }} dígitos de largo.
         expiry_year:
-            not_blank: Por favor seleccione el año de vencimiento.
+            not_blank: Por favor, seleccione el año de caducidad.
     payment:
         currency_code:
             not_valid: El código de moneda introducido no es válido.
         method:
-            not_blank: Por favor, selecciona un método de pago.
+            not_blank: Por favor, seleccione un método de pago.
     payment_method:
         gateway:
             not_blank: Por favor, seleccione pasarela de método de pago.
@@ -34,11 +34,11 @@ sylius:
         fee_calculator_configuration:
             amount:
                 greater_than_or_equal: La cuota no puede ser inferior a {{ compared_value }}.
-                not_blank: Por favor, introduce el importe de la cuota.
+                not_blank: Por favor, introduzca el importe de la cuota.
             percent:
                 max_range: El porcentaje de la cuota no puede ser mayor que {{ limit }}.
                 min_range: El porcentaje de la cuota no puede ser inferior a {{ limit }}.
                 not_blank: Por favor, Introduzca el porcentaje de la cuota.
         code:
-            not_blank: Introduzca el código de método de pago.
+            not_blank: Por favor, introduzca el código de método de pago.
             unique: Ya existe un método de pago con el código introducido.

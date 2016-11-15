@@ -81,7 +81,7 @@ sylius:
         bill_to: Sąskaitos gavėjas
         billing_address: Mokėtojo adresas
         blocks: Blokai
-        body: Bloko turinys
+        body: Turinys
         browse_products: Peržiūrėti produktus
         browse_your_addresses: Peržiūrėti adresus
         browse_your_orders_from_the_past: Peržiūrėti Jūsų užsakymus
@@ -180,6 +180,7 @@ sylius:
         date: Data
         default_billing_address: Numatytasis atsiskaitymo adresas
         default_currency: Numatytoji valiuta
+        default_locale: Numatytoji lokalė
         default_shipping_address: Numatytasis pristatymo adresas
         delete: Šalinti
         delete_image: Pašalinti paveikslėlį
@@ -355,6 +356,7 @@ sylius:
         order_summary: Užsakymo santrauka
         order_value: Užsakymo vertė
         orders: Užsakymai
+        original_price: Pradinė kaina
         out_of_stock: Išparduota
         overview_of_your_store: Jūsų parduotuvės apžvalga
         page: Puslapis
@@ -382,6 +384,7 @@ sylius:
         processing: Apdorojamas
         product: Produktas
         product_association_index: Sąryšis
+        product_association_type_index: Sąryšio tipas
         product_attributes: Produkto atributai
         product_details_viewing_product_product: Produkto detalės <small>peržiūrimas produktas "<strong>%product%</strong>"</small>
         product_options: Produkto parinktys
@@ -399,6 +402,7 @@ sylius:
         qty_max: Kiekis max
         qty_min: Kiekis min
         quantity: Kiekis
+        rating: Įvertinimas
         ready: Paruošta
         recent_orders: Naujausi užsakymai
         recent_users: Naujausi vartotojai
@@ -407,6 +411,7 @@ sylius:
         register: Užsiregistruoti
         register_button: Užsiregistruoti
         registration_date: Registracijos data
+        rejected: Atmestas
         release_inventory: Atlaisvinti atsargas
         remember_me: Prisiminti mane
         remove_attribute: Pašalinkite atributą
@@ -456,6 +461,7 @@ sylius:
         start_date: Pradžios data
         starts_at: Prasideda
         state: Būsena
+        status: Būsena
         street: Gatvė
         string_blocks: Simbolių blokai
         subject: Tema
@@ -468,6 +474,7 @@ sylius:
         taxation_settings: Apmokestinimo nustatymai
         taxes: Mokesčiai
         taxons: Taksonai
+        theme: Tema
         there_are_no_images_for_this_product: Šis produktas neturi paveikslėlių
         there_are_no_options_for_this_product: Šis produktas neturi parinkčių
         there_are_no_taxons_for_this_product: Nėra jokių taksonų šiam produktui
@@ -501,6 +508,7 @@ sylius:
         void: Nenurodyta
         volume_based_pricing: Apimtimi pagrįsta kainodara
         warning: Dėmesio
+        welcome_to_our_store: Sveiki atvykę į mūsų parduotuvę
         welcome_to_your_space: Sveiki atvykę į savo erdvę
         you_are_customer_since: Jūs esate klientas nuo
         you_have_no_new_orders: Jūs neturite naujų užsakymų

@@ -4,7 +4,7 @@
 sylius:
     channel:
         code:
-            not_blank: Introduce el código del canal.
+            not_blank: Por favor, introduzca el código del canal.
             unique: El código de canal debe ser único.
         name:
-            not_blank: Introduce el nombre del canal.
+            not_blank: Por favor, introduzca el nombre del canal.

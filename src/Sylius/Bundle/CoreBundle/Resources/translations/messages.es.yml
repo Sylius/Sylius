@@ -34,7 +34,7 @@ sylius:
             shipping_methods: Métodos de envío
             payment_methods: Métodos de pago
             tax_calculation_strategy: Estrategia de cálculo de impuestos
-            tax_zone_default: Zona fiscal por defecto
+            tax_zone_default: Zona de impuestos por defecto
             theme: Tema
             hostname: Nombre del host
         image:
@@ -73,7 +73,7 @@ sylius:
             created_at_from: Desde
             created_at_to: Hasta
             number: Número de pedido
-            shipping_address: Enviar a
+            shipping_address: Enviar a nombre de
             channel: Todos los canales
         payment_filter:
             created_at_from: Desde
@@ -91,7 +91,7 @@ sylius:
             file: Seleccione una imagen
         user:
             billing_address: Dirección de facturación
-            different_billing_address: Usar una dirección diferente para la facturación?
+            different_billing_address: '¿Usar una dirección diferente para la facturación?'
             enabled: Activado
             first_name: Nombre
             groups: Grupos
@@ -154,7 +154,7 @@ sylius:
             pcre: PCRE
             pdo: PDO
             php_xml: PHP-XML
-            session_start: Sesión
+            session_start: Session
             simplexml_import_dom: SimpleXML
             token_get_all: Tokenizer
         filesystem:
@@ -162,7 +162,7 @@ sylius:
             cache:
                 header: caché
                 help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
-            exists: Existe
+            exists: existe
             logs:
                 header: registros
                 help: 'Para ajustar los permisos ejecuta: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
@@ -185,7 +185,7 @@ sylius:
             session:
                 auto_start: session.auto_start
             short_open_tag: short_open_tag
-            timezone: Zona horaria
+            timezone: timezone
             timezone_deprecated:
                 header: Zona horaria obsoleta
                 help: 'La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (Lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).'

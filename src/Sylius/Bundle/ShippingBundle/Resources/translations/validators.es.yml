@@ -6,9 +6,9 @@ sylius:
         name:
             max_length: El nombre de la categoría no debe tener más de {{ limit }} caracteres.
             min_length: El nombre de la categoría debe tener al menos {{ limit }} caracteres.
-            not_blank: Por favor introduce el nombre de la categoría de envío.
+            not_blank: Por favor, introduzca el nombre de la categoría de envío.
         code:
-            not_blank: Introduzca el nombre de la categoría de envío.
+            not_blank: Por favor, introduzca el nombre de la categoría de envío.
             unique: Ya existe una categoría de envío con ese código.
     shipping_method:
         calculator:
@@ -20,10 +20,10 @@ sylius:
             min_length: El nombre del método de envío debe tener al menos {{ limit }} caracteres.
             not_blank: Por favor, introduzca el nombre del método de envío.
         code:
-            not_blank: Introduzca el código de método de envío.
+            not_blank: Por favor, introduzca el código de método de envío.
             unique: Ya existe un método de envío con ese código.
         zone:
-            not_blank: Por favor introduzca la zona del método de envío.
+            not_blank: Por favor, introduzca la zona del método de envío.
     shipment:
         shipping_method:
             not_blank: Por favor, seleccione el método de envío.

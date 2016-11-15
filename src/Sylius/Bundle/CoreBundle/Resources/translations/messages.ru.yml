@@ -30,6 +30,7 @@ sylius:
             currencies: Валюты
             shipping_methods: Список способов доставки
             payment_methods: Список методов оплаты
+            tax_calculation_strategy: Способ расчета налогов
             tax_zone_default: Налоговая зона по умолчанию
             theme: Тема оформления
             hostname: Хост
@@ -121,6 +122,8 @@ sylius:
             contains_taxon:
                 taxon: Налог
                 count: Кол-во
+            taxon:
+                taxons: Налоги
             product:
                 products: Товары
             total_of_items_from_taxon:
@@ -131,6 +134,7 @@ sylius:
             header: расширения
             accelerator:
                 header: Ускоритель
+                help: Включить Zend OpCache (рекомендуется).
             apc: APC
             ctype: CType
             gd: GD
@@ -161,6 +165,7 @@ sylius:
             not_writable: не доступно для записи
             parameters:
                 header: parameters.yml
+                help: 'Чтобы задать права доступа запустите команду: sudo chmod + w %path%'
             vendors: поставщики
             writable: доступно для записи
         settings:
@@ -180,6 +185,7 @@ sylius:
                 header: Устаревший часовой пояс
                 help: 'Часовой пояс %timezone% является устаревшим. Исправьте файл php.ini (список устаревших часовых поясов http://php.net/manual/en/timezones.others.php).'
             version: Версия PHP
+            version_recommended: Рекомендуемая версия PHP
     email:
         order_confirmation:
             name: Подтверждение заказа
@@ -190,3 +196,11 @@ sylius:
         user_confirmation:
             name: Подтверждение пользователя
             subject: Добро пожаловать в наш магазин
+            content: Добро пожаловать в наш магазин<br/><br/>Вы только что были зарегистрированы. <br/>Спасибо %username%.
+        password_reset:
+            name: Сброс пароля
+        verification:
+            name: Проверка адреса электронной почты
+            content: Чтобы подтвердить ваш адрес электронной почты - пожалуйста, пройдите по ссылке %url%
+    payum_gateway:
+        cash_on_delivery: Наличными при доставке

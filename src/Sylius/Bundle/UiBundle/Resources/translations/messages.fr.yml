@@ -19,7 +19,7 @@ sylius:
         accepted: Accepté
         access_token: Jeton d'accès
         access_your_store_account_or_create_a_new_one: Connectez-vous ou créez un nouveau compte
-        account_credentials: Informations d'intentification
+        account_credentials: Informations d'indentification
         account_panel_outline: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données
         action: Action
         actions: Actions
