@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
 use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType as BaseProductTranslationType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,7 +28,7 @@ class ProductTranslationType extends BaseProductTranslationType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('shortDescription', 'textarea', [
+            ->add('shortDescription', TextareaType::class, [
                 'required' => false,
                 'label' => 'sylius.form.product.short_description',
             ])

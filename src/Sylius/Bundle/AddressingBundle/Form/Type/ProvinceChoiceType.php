@@ -15,6 +15,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -57,11 +58,10 @@ class ProvinceChoiceType extends AbstractType
                 'choice_list' => $choices,
                 'country' => null,
                 'label' => 'sylius.form.address.province',
-                'empty_value' => 'sylius.form.province.select',
+                'placeholder' => 'sylius.form.province.select',
             ])
         ;
-        $resolver->addAllowedTypes('country', 'NULL');
-        $resolver->addAllowedTypes('country', CountryInterface::class);
+        $resolver->addAllowedTypes('country', ['null', CountryInterface::class]);
     }
 
     /**
@@ -69,7 +69,7 @@ class ProvinceChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**

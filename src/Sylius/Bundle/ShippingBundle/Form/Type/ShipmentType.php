@@ -13,6 +13,8 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class ShipmentType extends AbstractResourceType
@@ -23,7 +25,7 @@ class ShipmentType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('state', 'choice', [
+            ->add('state', ChoiceType::class, [
                 'label' => 'sylius.form.shipment.state',
                 'choices' => [
                     ShipmentInterface::STATE_CART => 'sylius.form.shipment.states.cart',
@@ -32,7 +34,7 @@ class ShipmentType extends AbstractResourceType
                     ShipmentInterface::STATE_CANCELLED => 'sylius.form.shipment.states.cancelled',
                 ],
             ])
-            ->add('tracking', 'text', [
+            ->add('tracking', TextType::class, [
                 'label' => 'sylius.form.shipment.tracking_code',
                 'required' => false,
             ])

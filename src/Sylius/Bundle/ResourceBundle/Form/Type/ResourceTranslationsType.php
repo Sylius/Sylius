@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\ResourceTranslationsSubscriber;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -58,7 +59,7 @@ class ResourceTranslationsType extends AbstractType
      */
     public function getParent()
     {
-        return 'collection';
+        return CollectionType::class;
     }
 
     /**

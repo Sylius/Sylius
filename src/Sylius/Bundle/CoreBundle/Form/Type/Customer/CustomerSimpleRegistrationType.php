@@ -15,8 +15,10 @@ use Sylius\Bundle\CoreBundle\Form\EventSubscriber\CustomerRegistrationFormSubscr
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -46,7 +48,7 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('email', 'email', [
+            ->add('email', EmailType::class, [
                 'label' => 'sylius.form.customer.email',
             ])
             ->add('user', 'sylius_shop_user_registration', [
@@ -66,7 +68,7 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
         $resolver->setDefaults([
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
+            'constraints' => [new Valid()],
         ]);
     }
 

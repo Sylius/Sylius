@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 class PaymentMethodTranslationType extends AbstractResourceType
@@ -22,14 +24,14 @@ class PaymentMethodTranslationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', [
+            ->add('name', TextType::class, [
                 'label' => 'sylius.form.payment_method.name',
             ])
-            ->add('description', 'textarea', [
+            ->add('description', TextareaType::class, [
                 'required' => false,
                 'label' => 'sylius.form.payment_method.description',
             ])
-            ->add('instructions', 'textarea', [
+            ->add('instructions', TextareaType::class, [
                 'required' => false,
                 'label' => 'sylius.form.payment_method.instructions',
             ])

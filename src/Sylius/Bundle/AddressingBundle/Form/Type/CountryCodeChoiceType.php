@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -56,7 +57,7 @@ class CountryCodeChoiceType extends AbstractType
             'choices_as_values' => true,
             'enabled' => true,
             'label' => 'sylius.form.address.country',
-            'empty_value' => 'sylius.form.country.select',
+            'placeholder' => 'sylius.form.country.select',
         ]);
     }
 
@@ -65,7 +66,7 @@ class CountryCodeChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**

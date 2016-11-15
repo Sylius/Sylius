@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -25,7 +26,7 @@ class ProductOptionValueTranslationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('value', 'text', [
+            ->add('value', TextType::class, [
                 'label' => 'sylius.form.option_value.value',
             ])
         ;

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -80,7 +81,7 @@ class ResourceChoiceType extends AbstractType
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
                 return 'document';
             case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
-                return 'entity';
+                return EntityType::class;
             case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
                 return 'phpcr_document';
         }

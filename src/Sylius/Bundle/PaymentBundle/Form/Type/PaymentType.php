@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Payment\Model\PaymentInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -32,7 +33,7 @@ class PaymentType extends AbstractResourceType
             ->add('amount', 'sylius_money', [
                 'label' => 'sylius.form.payment.amount',
             ])
-            ->add('state', 'choice', [
+            ->add('state', ChoiceType::class, [
                 'label' => 'sylius.form.payment.state.header',
                 'choices' => [
                     PaymentInterface::STATE_PROCESSING => 'sylius.form.payment.state.processing',

@@ -44,9 +44,9 @@ class ZoneMemberType extends AbstractResourceType
     {
         $resolver
             ->setDefaults([
-                'empty_value' => 'sylius.form.zone_member.select',
                 'data_class' => ZoneMember::class,
                 'zone_type' => ZoneInterface::TYPE_COUNTRY,
+                'placeholder' => 'sylius.form.zone_member.select',
             ])
         ;
     }

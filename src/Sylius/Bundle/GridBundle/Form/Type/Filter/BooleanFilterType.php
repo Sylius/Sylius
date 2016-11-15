@@ -30,7 +30,7 @@ class BooleanFilterType extends AbstractType
             ->setDefaults([
                 'data_class' => null,
                 'required' => false,
-                'empty_value' => 'sylius.ui.all',
+                'placeholder' => 'sylius.ui.all',
                 'choices' => [
                     BooleanFilter::TRUE => 'sylius.ui.yes_label',
                     BooleanFilter::FALSE => 'sylius.ui.no_label',

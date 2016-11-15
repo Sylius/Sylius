@@ -64,7 +64,7 @@ final class BuildTaxonFormSubscriber implements EventSubscriberInterface
                         'filter' => $this->getFilterTaxonOption($taxon),
                         'required' => false,
                         'label' => 'sylius.form.taxon.parent',
-                        'empty_value' => '---',
+                        'placeholder' => '---',
                         'auto_initialize' => false,
                     ]
                 ))

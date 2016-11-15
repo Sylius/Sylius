@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -42,7 +43,7 @@ class FlexibleRateConfigurationType extends AbstractType
                     new Type(['type' => 'integer']),
                 ],
             ])
-            ->add('additional_unit_limit', 'integer', [
+            ->add('additional_unit_limit', IntegerType::class, [
                 'required' => false,
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_unit_limit',
                 'constraints' => [

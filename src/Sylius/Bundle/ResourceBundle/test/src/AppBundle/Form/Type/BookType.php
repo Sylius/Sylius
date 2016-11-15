@@ -12,6 +12,7 @@
 namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,10 +27,10 @@ class BookType extends AbstractResourceType
     {
         $builder
             ->add('translations', 'sylius_translations', [
+                'entry_type' => 'app_book_translation',
                 'label' => 'title',
-                'type' => 'app_book_translation',
             ])
-            ->add('author', 'text')
+            ->add('author', TextType::class)
         ;
     }
 
