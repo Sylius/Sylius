@@ -1,6 +1,6 @@
 Sylius\Component\Core\Model\OrderItem:
     exclusion_policy: ALL
-    xml_root_name: order
+    xml_root_name: order-item
     properties:
         variant:
             expose: true
