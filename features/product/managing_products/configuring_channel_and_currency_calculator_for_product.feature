@@ -1,5 +1,5 @@
 @managing_products
-Feature: Configure channel and currency calculator
+Feature: Configuring channel and currency calculator
     In order to define products price per channel and currency
     As an Administrator
     I want to add a new product to the shop with different prices
@@ -11,8 +11,8 @@ Feature: Configure channel and currency calculator
 
     @ui @javascript
     Scenario: Configure channel and currency calculator while adding new simple product
-        Given I want to create a new simple product
-        When I specify its code as "BOARD_DICE_BREWING"
+        When I want to create a new simple product
+        And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
         And I choose "Channel and currency" calculator
         And I set its default price to "$20.00"

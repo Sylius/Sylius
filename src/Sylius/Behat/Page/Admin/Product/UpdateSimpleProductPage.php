@@ -290,7 +290,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
      */
     public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency)
     {
-        $priceElement = $this->getElement('pricing_configuration')->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent();
+        $priceConfigurationElement = $this->getElement('pricing_configuration');
+        $priceElement = $priceConfigurationElement
+            ->find('css', sprintf('label:contains("%s %s")', $channel->getCode(), $currency->getCode()))->getParent();
 
         return $priceElement->find('css', 'input')->getValue();
     }
