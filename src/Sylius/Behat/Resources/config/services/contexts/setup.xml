@@ -174,14 +174,6 @@
             <tag name="fob.context_service" />
         </service>
 
-        <service id="sylius.behat.context.setup.route" class="Sylius\Behat\Context\Setup\RouteContext">
-            <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.fixture.example_factory.route" />
-            <argument type="service" id="__symfony__.sylius.manager.route" />
-            <argument type="service" id="__symfony__.sylius.repository.static_content" />
-            <tag name="fob.context_service" />
-        </service>
-
         <service id="sylius.behat.context.setup.admin_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.admin_security" />
@@ -205,13 +197,6 @@
             <argument type="service" id="__symfony__.sylius.factory.shipping_method" />
             <argument type="service" id="__symfony__.sylius.factory.shipping_method_translation" />
             <argument type="service" id="__symfony__.sylius.manager.shipping_method" />
-            <tag name="fob.context_service" />
-        </service>
-
-        <service id="sylius.behat.context.setup.static_content" class="Sylius\Behat\Context\Setup\StaticContentContext">
-            <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="__symfony__.sylius.fixture.example_factory.static_content" />
-            <argument type="service" id="__symfony__.sylius.manager.static_content" />
             <tag name="fob.context_service" />
         </service>
 

@@ -29,7 +29,6 @@
         "sylius/core": "^1.0",
         "sylius/addressing-bundle": "^1.0",
         "sylius/attribute-bundle": "^1.0",
-        "sylius/content-bundle": "^1.0",
         "sylius/currency-bundle": "^1.0",
         "sylius/customer-bundle": "^1.0",
         "sylius/fixtures-bundle": "^1.0",

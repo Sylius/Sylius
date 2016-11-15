@@ -91,14 +91,5 @@
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.locale" />
         </service>
-
-        <service id="sylius.fixture.example_factory.static_content" class="Sylius\Bundle\CoreBundle\Fixture\Factory\StaticContentExampleFactory">
-            <argument type="service" id="sylius.factory.static_content" />
-        </service>
-
-        <service id="sylius.fixture.example_factory.route" class="Sylius\Bundle\CoreBundle\Fixture\Factory\RouteExampleFactory">
-            <argument type="service" id="sylius.factory.route" />
-            <argument type="service" id="sylius.repository.static_content" />
-        </service>
     </services>
 </container>

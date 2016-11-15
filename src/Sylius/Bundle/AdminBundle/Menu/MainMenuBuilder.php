@@ -32,7 +32,6 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
         $this->addSalesSubMenu($menu);
         $this->addCustomersSubMenu($menu);
         $this->addMarketingSubMenu($menu);
-        $this->addContentSubMenu($menu);
         $this->addConfigurationSubMenu($menu);
 
         $this->eventDispatcher->dispatch(self::EVENT_NAME, new MenuBuilderEvent($this->factory, $menu));
@@ -124,29 +123,6 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->addChild('product_reviews', ['route' => 'sylius_admin_product_review_index'])
             ->setLabel('sylius.menu.admin.main.marketing.product_reviews')
             ->setLabelAttribute('icon', 'newspaper')
-        ;
-    }
-
-    /**
-     * @param ItemInterface $menu
-     */
-    private function addContentSubMenu(ItemInterface $menu)
-    {
-        $content = $menu
-            ->addChild('content')
-            ->setLabel('sylius.menu.admin.main.content.header')
-        ;
-
-        $content
-            ->addChild('static_contents', ['route' => 'sylius_admin_static_content_index'])
-            ->setLabel('sylius.menu.admin.main.content.static_contents')
-            ->setLabelAttribute('icon', 'file')
-        ;
-
-        $content
-            ->addChild('routes', ['route' => 'sylius_admin_route_index'])
-            ->setLabel('sylius.menu.admin.main.content.routes')
-            ->setLabelAttribute('icon', 'sitemap')
         ;
     }
 

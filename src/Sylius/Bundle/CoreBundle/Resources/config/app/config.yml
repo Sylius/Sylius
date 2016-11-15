@@ -5,7 +5,6 @@ imports:
     - { resource: "@SyliusAddressingBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusAttributeBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusChannelBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusContentBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusCurrencyBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusCustomerBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusInventoryBundle/Resources/config/app/config.yml" }
@@ -40,19 +39,6 @@ doctrine:
 doctrine_cache:
     providers:
         sylius_rbac: "%sylius.cache%"
-
-doctrine_phpcr:
-    session:
-        backend:
-            type: doctrinedbal
-            connection: default
-            caches:
-                meta: doctrine_cache.providers.phpcr_meta
-                nodes: doctrine_cache.providers.phpcr_nodes
-        workspace: default
-    odm:
-        auto_mapping: true
-        auto_generate_proxy_classes: "%kernel.debug%"
 
 jms_serializer:
     metadata:

@@ -50,7 +50,6 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
             new \Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
             new \Sylius\Bundle\PricingBundle\SyliusPricingBundle(),
-            new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
             new \Sylius\Bundle\UserBundle\SyliusUserBundle(),
             new \Sylius\Bundle\CustomerBundle\SyliusCustomerBundle(),
             new \Sylius\Bundle\UiBundle\SyliusUiBundle(),
@@ -60,14 +59,8 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\GridBundle\SyliusGridBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
 
-            new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
-            new \Symfony\Cmf\Bundle\ContentBundle\CmfContentBundle(),
-            new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
-            new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
-
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
-            new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\MonologBundle\MonologBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),

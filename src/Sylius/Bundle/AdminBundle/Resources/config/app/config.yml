@@ -17,9 +17,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion_coupon.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/route.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/shipping_method.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/grids/static_content.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_category.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_rate.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/taxon.yml" }
@@ -28,12 +26,10 @@ imports:
 sylius_resource:
     drivers:
         - doctrine/orm
-        - doctrine/phpcr-odm
 
 sylius_grid:
     drivers:
         - doctrine/orm
-        - doctrine/phpcr-odm
     templates:
         action:
             manage_coupons: "@SyliusAdmin/Promotion/Grid/Action/manageCoupons.html.twig"

@@ -44,7 +44,6 @@ EOT
                 'doctrine:database:create',
                 'doctrine:schema:create',
                 'cache:clear',
-                'doctrine:phpcr:repository:init',
             ];
 
             $this->runCommands($commands, $input, $output);
@@ -62,7 +61,6 @@ EOT
         }
 
         $commands[] = 'cache:clear';
-        $commands[] = 'doctrine:phpcr:repository:init';
         $commands['doctrine:migrations:version'] = [
             '--add' => true,
             '--all' => true,
