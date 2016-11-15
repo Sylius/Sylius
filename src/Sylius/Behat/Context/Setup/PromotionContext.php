@@ -128,6 +128,22 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^there is an exclusive promotion "([^"]+)"(?:| with priority ([^"]+))$/
+     */
+    public function thereIsAnExclusivePromotionWithPriority($promotionName, $priority = 0)
+    {
+        $promotion = $this->testPromotionFactory
+            ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
+        ;
+
+        $promotion->setExclusive(true);
+        $promotion->setPriority($priority);
+
+        $this->promotionRepository->add($promotion);
+        $this->sharedStorage->set('promotion', $promotion);
+    }
+
+    /**
      * @Given there is a promotion :promotionName limited to :usageLimit usages
      */
     public function thereIsPromotionLimitedToUsages($promotionName, $usageLimit)
