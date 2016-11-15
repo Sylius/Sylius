@@ -468,6 +468,17 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Then /^I should be able to change payment method for (this order)$/
+     */
+    public function iShouldBeAbleToChangePaymentMethodForThisOrder(OrderInterface $order)
+    {
+        Assert::true(
+            $this->orderIndexPage->isItPossibleToChangePaymentMethodForOrder($order),
+            sprintf('I should be able to change payment method for %s.', $order->getNumber())
+        );
+    }
+
+    /**
      * @param PageInterface $page
      * @param string $element
      * @param string $expectedMessage

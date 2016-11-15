@@ -48,3 +48,5 @@ sylius_grid:
                 item:
                     show:
                         type: show_order
+                    pay:
+                        type: pay_for_order
