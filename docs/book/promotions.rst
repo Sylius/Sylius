@@ -11,6 +11,10 @@ the period of time when it works.
 There is a possibility to define **exclusive promotions** (no other can be applied if an exclusive promotion was applied)
 and **priority** that is useful for them, because the exclusive promotion should get the top priority.
 
+.. tip::
+
+   The ``usageLimit`` of a promotion is the **total number of times this promotion can be used**.
+
 How to create a Promotion programmatically?
 -------------------------------------------
 
