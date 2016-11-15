@@ -83,7 +83,7 @@ final class PaymentMethodExampleFactory implements ExampleFactoryInterface
                 })
                 ->setDefault('channels', LazyOption::all($channelRepository))
                 ->setAllowedTypes('channels', 'array')
-                ->setNormalizer('channels', LazyOption::findBy($channelRepository, 'name'))
+                ->setNormalizer('channels', LazyOption::findBy($channelRepository, 'code'))
                 ->setAllowedTypes('enabled', 'bool')
         ;
     }

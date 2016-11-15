@@ -142,7 +142,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Given I make it available in channel :channel
+     * @When I make it available in channel :channel
      */
     public function iMakeItAvaialbelInChannel($channel)
     {
@@ -190,7 +190,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Given the shipment method :shippingMethod should be available in channel :channelName
+     * @Then the shipment method :shippingMethod should be available in channel :channelName
      */
     public function theShippingMethodShouldBeAvailableInChannel(
         ShippingMethodInterface $shippingMethod,

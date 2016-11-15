@@ -17,8 +17,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface as BasePaymentMethodInterface;
-use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMethodInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

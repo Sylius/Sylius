@@ -19,5 +19,4 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface as BasePaymentMethodIn
  */
 interface PaymentMethodInterface extends BasePaymentMethodInterface, ChannelsAwareInterface
 {
-
 }

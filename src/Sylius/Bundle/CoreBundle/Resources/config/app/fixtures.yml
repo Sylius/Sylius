@@ -27,6 +27,7 @@ sylius_fixtures:
                         custom:
                             us_web_store:
                                 name: "US Web Store"
+                                code: "US_WEB"
                                 locales:
                                     - "%locale%"
                                 currencies:
@@ -40,12 +41,12 @@ sylius_fixtures:
                                 code: "cash_on_delivery"
                                 name: "Cash on delivery"
                                 channels:
-                                    - "US Web Store"
+                                    - "US_WEB"
                             bank_transfer:
                                 code: "bank_transfer"
                                 name: "Bank transfer"
                                 channels:
-                                    - "US Web Store"
+                                    - "US_WEB"
                                 enabled: true
 
                 shipping_method:
@@ -55,16 +56,18 @@ sylius_fixtures:
                                 code: "ups"
                                 name: "UPS"
                                 enabled: true
+                                channels:
+                                    - "US_WEB"
                             dhl_express:
                                 code: "dhl_express"
                                 name: "DHL Express"
                                 channels:
-                                    - "US Web Store"
+                                    - "US_WEB"
                             fedex:
                                 code: "fedex"
                                 name: "FedEx"
                                 channels:
-                                    - "US Web Store"
+                                    - "US_WEB"
 
                 regular_user:
                     name: "shop_user"

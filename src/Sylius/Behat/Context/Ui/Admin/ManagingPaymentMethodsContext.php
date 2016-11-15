@@ -173,9 +173,9 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Given it belongs to channel :channel
+     * @When make it available in channel :channel
      */
-    public function itBelongsToChannel($channel)
+    public function iMakeItAvailableInChannel($channel)
     {
         $this->createPage->checkChannel($channel);
     }
@@ -357,7 +357,7 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Given the payment method :paymentMethod should be available in channel :channelName
+     * @Then the payment method :paymentMethod should be available in channel :channelName
      */
     public function thePaymentMethodShouldBeAvailableInChannel(
         PaymentMethodInterface $paymentMethod,

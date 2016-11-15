@@ -159,9 +159,7 @@ final class PaymentContext implements Context
         $paymentMethod->setDescription($description);
 
         if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {
-            /** @var ChannelInterface $channel */
-            $channel = $this->sharedStorage->get('channel');
-            $paymentMethod->addChannel($channel);
+            $paymentMethod->addChannel($this->sharedStorage->get('channel'));
         }
 
         $this->sharedStorage->set('payment_method', $paymentMethod);

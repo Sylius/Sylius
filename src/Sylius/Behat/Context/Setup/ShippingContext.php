@@ -256,9 +256,7 @@ final class ShippingContext implements Context
         $shippingMethod->setEnabled($enabled);
 
         if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {
-            /** @var ChannelInterface $channel */
-            $channel = $this->sharedStorage->get('channel');
-            $shippingMethod->addChannel($channel);
+            $shippingMethod->addChannel($this->sharedStorage->get('channel'));
         }
 
         $this->shippingMethodRepository->add($shippingMethod);
