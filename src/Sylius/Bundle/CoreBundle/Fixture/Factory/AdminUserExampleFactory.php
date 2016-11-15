@@ -53,9 +53,7 @@ final class AdminUserExampleFactory implements ExampleFactoryInterface
                 ->setDefault('username', function (Options $options) {
                     return $this->faker->firstName.' '.$this->faker->lastName;
                 })
-                ->setDefault('enabled', function (Options $options) {
-                    return $this->faker->boolean(90);
-                })
+                ->setDefault('enabled', true)
                 ->setAllowedTypes('enabled', 'bool')
                 ->setDefault('password', 'password123')
                 ->setDefault('locale_code', $localeCode)
