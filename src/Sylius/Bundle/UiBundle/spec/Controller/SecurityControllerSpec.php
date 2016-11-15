@@ -51,8 +51,10 @@ final class SecurityControllerSpec extends ObjectBehavior
         $authenticationUtils->getLastUsername()->willReturn('john.doe');
 
         $request->attributes = $requestAttributes;
-        $requestAttributes->get('_sylius[template]', 'SyliusUiBundle:Security:login.html.twig', true)->willReturn('CustomTemplateName');
-        $requestAttributes->get('_sylius[form]', 'sylius_security_login', true)->willReturn('custom_form_type');
+        $requestAttributes->get('_sylius')->willReturn([
+            'template' => 'CustomTemplateName',
+            'form' => 'custom_form_type',
+        ]);
 
         $formFactory->createNamed('', 'custom_form_type')->willReturn($form);
         $form->createView()->willReturn($formView);

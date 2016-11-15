@@ -51,7 +51,8 @@ class UserController extends ResourceController
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
         $changePassword = new ChangePassword();
-        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_change_password', true);
+        $syliusConfiguration = $request->attributes->get('_sylius');
+        $formType = isset($syliusConfiguration['form']) ? $syliusConfiguration['form'] : 'sylius_user_change_password';
         $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
@@ -116,7 +117,8 @@ class UserController extends ResourceController
         }
 
         $passwordReset = new PasswordReset();
-        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_reset_password', true);
+        $syliusConfiguration = $request->attributes->get('_sylius');
+        $formType = isset($syliusConfiguration['form']) ? $syliusConfiguration['form'] : 'sylius_user_reset_password';
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
@@ -145,7 +147,8 @@ class UserController extends ResourceController
     public function verifyAction(Request $request, $token)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $redirectRoute = $request->attributes->get('_sylius[redirect]', null, true);
+        $syliusConfiguration = $request->attributes->get('_sylius');
+        $redirectRoute = isset($syliusConfiguration['redirect']) ? $syliusConfiguration['redirect'] : null;
 
         $response = $this->redirectToRoute($redirectRoute);
 
@@ -175,8 +178,10 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($user));
         }
 
-        $flashMessage = $request->attributes->get('_sylius[flash]', 'sylius.user.verification.success');
-        $this->addFlash('success', $flashMessage);
+        $this->addFlash(
+            'success',
+            isset($syliusConfiguration['flash']) ? $syliusConfiguration['flash'] : 'sylius.user.verification.success'
+        );
 
         return $response;
     }
@@ -189,7 +194,8 @@ class UserController extends ResourceController
     public function requestVerificationTokenAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $redirectRoute = $request->attributes->get('_sylius[redirect]', 'referer', true);
+        $syliusConfiguration = $request->attributes->get('_sylius');
+        $redirectRoute = isset($syliusConfiguration['redirect']) ? $syliusConfiguration['redirect'] : 'referer';
 
         /** @var UserInterface $user */
         $user = $this->container->get('sylius.context.customer')->getCustomer()->getUser();
@@ -232,10 +238,10 @@ class UserController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $passwordReset = new PasswordResetRequest();
-        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_request_password_reset', true);
+        $syliusConfiguration = $request->attributes->get('_sylius');
+        $template = isset($syliusConfiguration['template']) ? $syliusConfiguration['template'] : 'SyliusUserBundle:User:requestPasswordReset.html.twig';
+        $formType = isset($syliusConfiguration['form']) ? $syliusConfiguration['form'] : 'sylius_user_request_password_reset';
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
-        $template = $request->attributes->get('_sylius[template]', null, true);
-        Assert::notNull($template, 'Template is not configured.');
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $user = $this->repository->findOneByEmail($passwordReset->getEmail());
@@ -248,8 +254,7 @@ class UserController extends ResourceController
             }
 
             $this->addFlash('success', 'sylius.user.password.reset.requested');
-            $redirectRoute = $request->attributes->get('_sylius[redirect]', null, true);
-            Assert::notNull($redirectRoute, 'Redirect is not configured.');
+            $redirectRoute = isset($syliusConfiguration['redirect']) ? $syliusConfiguration['redirect'] : 'sylius_user_security_login';
 
             if (is_array($redirectRoute)) {
                 return $this->redirectHandler->redirectToRoute(
@@ -371,10 +376,10 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $redirectRouteName = $request->attributes->get('_sylius[redirect]', null, true);
-        Assert::notNull($redirectRouteName, 'Redirect is not configured.');
+        $syliusConfiguration = $request->attributes->get('_sylius');
+        $redirectRoute = isset($syliusConfiguration['redirect']) ? $syliusConfiguration['redirect'] : 'sylius_user_security_login';
 
-        return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
+        return new RedirectResponse($this->container->get('router')->generate($redirectRoute));
     }
 
     /**
@@ -401,9 +406,9 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $redirectRouteName = $request->attributes->get('_sylius[redirect]', null, true);
-        Assert::notNull($redirectRouteName, 'Redirect is not configured.');
+        $syliusConfiguration = $request->attributes->get('_sylius');
+        $redirectRoute = isset($syliusConfiguration['redirect']) ? $syliusConfiguration['redirect'] : 'sylius_account_profile_show';
 
-        return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
+        return new RedirectResponse($this->container->get('router')->generate($redirectRoute));
     }
 }
