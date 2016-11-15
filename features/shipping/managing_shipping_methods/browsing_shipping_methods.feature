@@ -13,4 +13,4 @@ Feature: Browsing shipping methods
     Scenario: Browsing defined shipping methods
         When I want to browse shipping methods
         Then I should see 2 shipping methods in the list
-        And the shipment method "FedEx Carrier" should be in the registry
+        And the shipping method "FedEx Carrier" should be in the registry
