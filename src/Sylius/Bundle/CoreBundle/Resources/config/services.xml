@@ -103,5 +103,10 @@
         <service id="sylius.customer_order_addresses_saver" class="Sylius\Component\Core\Customer\CustomerOrderAddressesSaver">
             <argument type="service" id="sylius.customer_unique_address_adder" />
         </service>
+
+        <service id="sylius.order_item_quantity_modifier.limiting" class="Sylius\Component\Core\Cart\Modifier\LimitingOrderItemQuantityModifier" decorates="sylius.order_item_quantity_modifier">
+            <argument type="service" id="sylius.order_item_quantity_modifier.limiting.inner" />
+            <argument>9999</argument>
+        </service>
     </services>
 </container>

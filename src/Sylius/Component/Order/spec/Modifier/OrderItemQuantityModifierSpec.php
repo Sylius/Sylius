@@ -102,15 +102,4 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
 
         $this->modify($orderItem, -10);
     }
-
-    function it_adds_9999_units_when_target_quantity_is_greater(
-        OrderItemUnitFactoryInterface $orderItemUnitFactory,
-        OrderItemInterface $orderItem
-    ) {
-        $orderItem->getQuantity()->willReturn(0);
-
-        $orderItemUnitFactory->createForItem($orderItem)->shouldBeCalledTimes(9999);
-
-        $this->modify($orderItem, 30000);
-    }
 }
