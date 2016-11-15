@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ReviewBundle\Validator\Constraints;
 
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -74,12 +73,7 @@ class UniqueReviewerEmailValidator extends ConstraintValidator
         }
 
         if (null !== $customer && null !== $this->userRepository->findOneByEmail($customer->getEmail())) {
-            $this->context->addViolationAt(
-                'author',
-                $constraint->message,
-                [],
-                null
-            );
+            $this->context->buildViolation($constraint->message)->atPath('author')->addViolation();
         }
     }
 
