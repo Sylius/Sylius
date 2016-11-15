@@ -54,4 +54,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $name
      */
     public function chooseCalculator($name);
+
+    /**
+     * @return string $channel
+     */
+    public function checkChannel($channel);
 }

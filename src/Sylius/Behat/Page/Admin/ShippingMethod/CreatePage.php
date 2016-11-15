@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Behaviour\ChoosesCalculator;
 use Sylius\Behat\Behaviour\SpecifiesItsAmount;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
@@ -76,10 +77,25 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function checkChannel($channel)
+    {
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $this->getElement('channel', ['%channel%' => $channel])->click();
+
+            return;
+        }
+
+        $this->getDocument()->checkField($channel);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'amount' => '#sylius_shipping_method_configuration_amount',
+            'channel' => '#sylius_shipping_method_channels .ui.checkbox:contains("%channel%")',
             'calculator' => '#sylius_shipping_method_calculator',
             'code' => '#sylius_shipping_method_code',
             'name' => '#sylius_shipping_method_translations_en_US_name',

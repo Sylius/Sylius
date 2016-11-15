@@ -367,7 +367,7 @@ final class ManagingPaymentMethodsContext implements Context
 
         Assert::true(
             $this->updatePage->isAvailableInChannel($channelName),
-            sprintf('Payment should be available in channel "%s" but it does not.', $channelName)
+            sprintf('Payment method should be available in channel "%s" but it does not.', $channelName)
         );
     }
 

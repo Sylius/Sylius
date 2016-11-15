@@ -26,6 +26,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isAvailableInChannel($channelName)
+    {
+        return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');
@@ -45,6 +53,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'channel' => '.checkbox:contains("%channel%") input',
             'code' => '#sylius_shipping_method_code',
             'enabled' => '#sylius_shipping_method_enabled',
             'name' => '#sylius_shipping_method_translations_en_US_name',

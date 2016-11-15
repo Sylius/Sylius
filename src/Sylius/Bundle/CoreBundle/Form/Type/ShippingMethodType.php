@@ -35,6 +35,11 @@ class ShippingMethodType extends BaseShippingMethodType
                 'empty_value' => '---',
                 'label' => 'sylius.form.shipping_method.tax_category',
             ])
+            ->add('channels', 'sylius_channel_choice', [
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'sylius.form.shipping_method.channels',
+            ])
         ;
     }
 }

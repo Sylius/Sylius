@@ -142,6 +142,14 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Given I make it available in channel :channel
+     */
+    public function iMakeItAvaialbelInChannel($channel)
+    {
+        $this->createPage->checkChannel($channel);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -179,6 +187,21 @@ final class ManagingShippingMethodsContext implements Context
     public function thisShippingMethodShouldStillBeInTheRegistry(ShippingMethodInterface $shippingMethod)
     {
         $this->theShipmentMethodShouldAppearInTheRegistry($shippingMethod->getName());
+    }
+
+    /**
+     * @Given the shipment method :shippingMethod should be available in channel :channelName
+     */
+    public function theShippingMethodShouldBeAvailableInChannel(
+        ShippingMethodInterface $shippingMethod,
+        $channelName
+    ) {
+        $this->iWantToModifyAShippingMethod($shippingMethod);
+
+        Assert::true(
+            $this->updatePage->isAvailableInChannel($channelName),
+            sprintf('Shipping method should be available in channel "%s" but it does not.', $channelName)
+        );
     }
 
     /**

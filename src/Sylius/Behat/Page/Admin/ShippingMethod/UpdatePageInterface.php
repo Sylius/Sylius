@@ -23,6 +23,13 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      */
     public function isCodeDisabled();
 
+    /**
+     * @param string $channelName
+     *
+     * @return bool
+     */
+    public function isAvailableInChannel($channelName);
+
     public function enable();
 
     public function disable();
