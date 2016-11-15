@@ -39,8 +39,8 @@ final class HasTaxonRuleChecker implements RuleCheckerInterface
 
         /* @var $item OrderItemInterface */
         foreach ($subject->getItems() as $item) {
-            foreach ($item->getProduct()->getTaxons() as $taxon) {
-                if (in_array($taxon->getCode(), $configuration['taxons'], true)) {
+            foreach ($item->getProduct()->getProductTaxons() as $productTaxon) {
+                if (in_array($productTaxon->getTaxon()->getCode(), $configuration['taxons'], true)) {
                     return true;
                 }
             }

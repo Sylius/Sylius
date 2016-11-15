@@ -60,7 +60,7 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
 
         /** @var OrderItemInterface $item */
         foreach ($subject->getItems() as $item) {
-            if ($item->getProduct()->hasTaxon($targetTaxon)) {
+            if (!$item->getProduct()->filterProductTaxonsByTaxon($targetTaxon)->isEmpty()) {
                 $itemsWithTaxonTotal += $item->getTotal();
             }
         }

@@ -16,6 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -42,12 +43,14 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $bastardSword,
+        ProductTaxonInterface $bastardSwordProductTaxon,
         TaxonInterface $swords
     ) {
         $configuration = ['taxons' => ['swords']];
 
         $swords->getCode()->willReturn('swords');
-        $bastardSword->getTaxons()->willReturn([$swords]);
+        $bastardSword->getProductTaxons()->willReturn([$bastardSwordProductTaxon]);
+        $bastardSwordProductTaxon->getTaxon()->willReturn($swords);
         $item->getProduct()->willReturn($bastardSword);
         $subject->getItems()->willReturn([$item]);
 
@@ -58,12 +61,14 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $bastardSword,
+        ProductTaxonInterface $bastardSwordProductTaxon,
         TaxonInterface $swords
     ) {
         $configuration = ['taxons' => ['swords', 'axes']];
 
         $swords->getCode()->willReturn('swords');
-        $bastardSword->getTaxons()->willReturn([$swords]);
+        $bastardSword->getProductTaxons()->willReturn([$bastardSwordProductTaxon]);
+        $bastardSwordProductTaxon->getTaxon()->willReturn($swords);
         $item->getProduct()->willReturn($bastardSword);
         $subject->getItems()->willReturn([$item]);
 
@@ -74,12 +79,14 @@ final class HasTaxonRuleCheckerSpec extends ObjectBehavior
         OrderInterface $subject,
         OrderItemInterface $item,
         ProductInterface $reflexBow,
+        ProductTaxonInterface $reflexBowProductTaxon,
         TaxonInterface $bows
     ) {
         $configuration = ['taxons' => ['swords', 'axes']];
 
         $bows->getCode()->willReturn('bows');
-        $reflexBow->getTaxons()->willReturn([$bows]);
+        $reflexBow->getProductTaxons()->willReturn([$reflexBowProductTaxon]);
+        $reflexBowProductTaxon->getTaxon()->willReturn($bows);
         $item->getProduct()->willReturn($reflexBow);
         $subject->getItems()->willReturn([$item]);
 

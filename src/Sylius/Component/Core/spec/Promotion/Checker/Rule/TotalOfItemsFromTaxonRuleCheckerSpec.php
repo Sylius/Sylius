@@ -11,10 +11,12 @@
 
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -51,6 +53,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         ProductInterface $compositeBow,
         ProductInterface $longsword,
         ProductInterface $reflexBow,
+        ProductTaxonInterface $bowsProductTaxon,
         TaxonInterface $bows
     ) {
         $order->getItems()->willReturn([$compositeBowItem, $longswordItem, $reflexBowItem]);
@@ -58,15 +61,15 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
         $compositeBowItem->getProduct()->willReturn($compositeBow);
-        $compositeBow->hasTaxon($bows)->willReturn(true);
+        $compositeBow->filterProductTaxonsByTaxon($bows)->willReturn(new ArrayCollection([$bowsProductTaxon]));
         $compositeBowItem->getTotal()->willReturn(5000);
 
         $longswordItem->getProduct()->willReturn($longsword);
-        $longsword->hasTaxon($bows)->willReturn(false);
+        $longsword->filterProductTaxonsByTaxon($bows)->willReturn(new ArrayCollection([]));
         $longswordItem->getTotal()->willReturn(4000);
 
         $reflexBowItem->getProduct()->willReturn($reflexBow);
-        $reflexBow->hasTaxon($bows)->willReturn(true);
+        $reflexBow->filterProductTaxonsByTaxon($bows)->willReturn(new ArrayCollection([$bowsProductTaxon]));
         $reflexBowItem->getTotal()->willReturn(9000);
 
         $this->isEligible($order, ['taxon' => 'bows', 'amount' => 10000])->shouldReturn(true);
@@ -79,6 +82,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         OrderItemInterface $reflexBowItem,
         ProductInterface $compositeBow,
         ProductInterface $reflexBow,
+        ProductTaxonInterface $bowsProductTaxon,
         TaxonInterface $bows
     ) {
         $order->getItems()->willReturn([$compositeBowItem, $reflexBowItem]);
@@ -86,11 +90,11 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
         $compositeBowItem->getProduct()->willReturn($compositeBow);
-        $compositeBow->hasTaxon($bows)->willReturn(true);
+        $compositeBow->filterProductTaxonsByTaxon($bows)->willReturn(new ArrayCollection([$bowsProductTaxon]));
         $compositeBowItem->getTotal()->willReturn(5000);
 
         $reflexBowItem->getProduct()->willReturn($reflexBow);
-        $reflexBow->hasTaxon($bows)->willReturn(true);
+        $reflexBow->filterProductTaxonsByTaxon($bows)->willReturn(new ArrayCollection([$bowsProductTaxon]));
         $reflexBowItem->getTotal()->willReturn(5000);
 
         $this->isEligible($order, ['taxon' => 'bows', 'amount' => 10000])->shouldReturn(true);
@@ -103,6 +107,7 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         OrderItemInterface $longswordItem,
         ProductInterface $compositeBow,
         ProductInterface $longsword,
+        ProductTaxonInterface $bowsProductTaxon,
         TaxonInterface $bows
     ) {
         $order->getItems()->willReturn([$compositeBowItem, $longswordItem]);
@@ -110,11 +115,11 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
         $taxonRepository->findOneBy(['code' => 'bows'])->willReturn($bows);
 
         $compositeBowItem->getProduct()->willReturn($compositeBow);
-        $compositeBow->hasTaxon($bows)->willReturn(true);
+        $compositeBow->filterProductTaxonsByTaxon($bows)->willReturn(new ArrayCollection([$bowsProductTaxon]));
         $compositeBowItem->getTotal()->willReturn(5000);
 
         $longswordItem->getProduct()->willReturn($longsword);
-        $longsword->hasTaxon($bows)->willReturn(false);
+        $longsword->filterProductTaxonsByTaxon($bows)->willReturn(new ArrayCollection([]));
         $longswordItem->getTotal()->willReturn(4000);
 
         $this->isEligible($order, ['taxon' => 'bows', 'amount' => 10000])->shouldReturn(false);

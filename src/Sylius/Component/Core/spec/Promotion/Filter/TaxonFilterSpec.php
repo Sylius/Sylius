@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Promotion\Filter;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Core\Promotion\Filter\TaxonFilter;
@@ -39,14 +40,18 @@ final class TaxonFilterSpec extends ObjectBehavior
         ProductInterface $product1,
         ProductInterface $product2,
         TaxonInterface $taxon1,
-        TaxonInterface $taxon2
+        TaxonInterface $taxon2,
+        ProductTaxonInterface $productTaxon1,
+        ProductTaxonInterface $productTaxon2
     ) {
         $item1->getProduct()->willReturn($product1);
-        $product1->getTaxons()->willReturn([$taxon1]);
+        $product1->getProductTaxons()->willReturn([$productTaxon1]);
+        $productTaxon1->getTaxon()->willReturn($taxon1);
         $taxon1->getCode()->willReturn('taxon1');
 
         $item2->getProduct()->willReturn($product2);
-        $product2->getTaxons()->willReturn([$taxon2]);
+        $product2->getProductTaxons()->willReturn([$productTaxon2]);
+        $productTaxon2->getTaxon()->willReturn($taxon2);
         $taxon2->getCode()->willReturn('taxon2');
 
         $this->filter([$item1, $item2], ['filters' => ['taxons_filter' => ['taxons' => ['taxon1']]]])->shouldReturn([$item1]);
