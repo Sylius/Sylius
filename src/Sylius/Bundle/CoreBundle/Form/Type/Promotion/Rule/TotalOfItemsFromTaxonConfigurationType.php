@@ -56,7 +56,7 @@ class TotalOfItemsFromTaxonConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_total_of_items_from_taxon_configuration';
     }

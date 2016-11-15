@@ -65,7 +65,7 @@ final class ThemeNameChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_theme_name_choice';
     }

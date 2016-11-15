@@ -80,7 +80,7 @@ class ReviewType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return sprintf('sylius_%s_review', $this->subject);
     }

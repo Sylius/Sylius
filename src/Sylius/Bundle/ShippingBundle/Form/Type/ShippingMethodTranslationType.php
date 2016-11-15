@@ -40,7 +40,7 @@ class ShippingMethodTranslationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_shipping_method_translation';
     }

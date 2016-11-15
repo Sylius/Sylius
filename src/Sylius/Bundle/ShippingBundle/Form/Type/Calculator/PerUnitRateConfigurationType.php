@@ -53,7 +53,7 @@ class PerUnitRateConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_shipping_calculator_per_unit_rate';
     }

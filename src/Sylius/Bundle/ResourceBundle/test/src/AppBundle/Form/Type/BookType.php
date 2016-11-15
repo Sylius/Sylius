@@ -38,7 +38,7 @@ class BookType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_book';
     }

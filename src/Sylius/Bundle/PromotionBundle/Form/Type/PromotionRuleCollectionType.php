@@ -21,7 +21,7 @@ class PromotionRuleCollectionType extends AbstractConfigurationCollectionType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_collection';
     }

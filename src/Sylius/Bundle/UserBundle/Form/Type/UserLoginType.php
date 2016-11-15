@@ -39,7 +39,7 @@ class UserLoginType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_user_security_login';
     }

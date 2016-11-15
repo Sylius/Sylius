@@ -45,7 +45,7 @@ class CustomerType extends CustomerProfileType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_customer';
     }

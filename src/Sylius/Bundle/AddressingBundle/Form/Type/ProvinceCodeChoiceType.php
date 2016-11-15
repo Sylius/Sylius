@@ -43,7 +43,7 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_province_code_choice';
     }

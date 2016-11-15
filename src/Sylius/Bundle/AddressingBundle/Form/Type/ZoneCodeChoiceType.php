@@ -61,7 +61,7 @@ class ZoneCodeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_zone_code_choice';
     }

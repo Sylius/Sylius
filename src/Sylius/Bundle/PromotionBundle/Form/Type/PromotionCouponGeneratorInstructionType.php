@@ -48,7 +48,7 @@ class PromotionCouponGeneratorInstructionType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_coupon_generator_instruction';
     }

@@ -39,7 +39,7 @@ class UserRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_shop_user_registration';
     }

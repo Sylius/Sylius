@@ -39,7 +39,7 @@ class ProductAssociationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_product_association';
     }

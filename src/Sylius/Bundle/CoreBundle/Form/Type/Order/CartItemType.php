@@ -91,7 +91,7 @@ class CartItemType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_cart_item';
     }

@@ -71,7 +71,7 @@ class CurrencyType extends BaseCurrencyType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_currency';
     }

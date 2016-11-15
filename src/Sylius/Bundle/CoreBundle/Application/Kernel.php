@@ -79,6 +79,8 @@ class Kernel extends HttpKernel
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 
+            new \Isometriks\Bundle\LegacyFormBundle\IsometriksLegacyFormBundle(),
+
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new \Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),

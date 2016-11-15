@@ -41,7 +41,7 @@ class PromotionRuleChoiceType extends AbstractType
         return ChoiceType::class;
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_choice';
     }

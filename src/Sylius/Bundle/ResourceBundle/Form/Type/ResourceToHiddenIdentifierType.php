@@ -30,7 +30,7 @@ class ResourceToHiddenIdentifierType extends ResourceToIdentifierType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return sprintf('%s_%s_to_hidden_identifier', $this->metadata->getApplicationName(), $this->metadata->getName());
     }

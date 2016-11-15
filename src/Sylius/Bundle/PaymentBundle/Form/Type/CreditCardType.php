@@ -54,7 +54,7 @@ class CreditCardType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_credit_card';
     }

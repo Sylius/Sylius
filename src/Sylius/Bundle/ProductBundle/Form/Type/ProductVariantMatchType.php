@@ -55,7 +55,7 @@ class ProductVariantMatchType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_product_variant_match';
     }

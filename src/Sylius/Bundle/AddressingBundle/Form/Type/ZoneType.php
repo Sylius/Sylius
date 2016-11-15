@@ -97,7 +97,7 @@ class ZoneType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_zone';
     }

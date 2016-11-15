@@ -61,7 +61,7 @@ class CustomerGuestType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_customer_guest';
     }

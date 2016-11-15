@@ -35,7 +35,7 @@ class ClientType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_api_client';
     }

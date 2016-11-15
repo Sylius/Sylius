@@ -46,7 +46,7 @@ class PromotionActionType extends AbstractConfigurationType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_action';
     }

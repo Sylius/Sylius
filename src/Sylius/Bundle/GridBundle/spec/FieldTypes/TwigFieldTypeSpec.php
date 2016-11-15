@@ -62,9 +62,4 @@ final class TwigFieldTypeSpec extends ObjectBehavior
 
         $this->render($field, 'bar', ['template' => 'foo.html.twig'])->shouldReturn('<html>Bar</html>');
     }
-
-    function it_has_name()
-    {
-        $this->getName()->shouldReturn('twig');
-    }
 }

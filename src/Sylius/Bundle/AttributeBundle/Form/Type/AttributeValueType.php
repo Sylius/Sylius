@@ -62,7 +62,7 @@ class AttributeValueType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return sprintf('sylius_%s_attribute_value', $this->subjectName);
     }

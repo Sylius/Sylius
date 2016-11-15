@@ -52,7 +52,7 @@ class DefaultResourceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
     }

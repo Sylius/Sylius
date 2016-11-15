@@ -34,7 +34,7 @@ class TextAttributeConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_attribute_type_configuration_text';
     }
