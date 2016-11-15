@@ -24,6 +24,8 @@ sylius:
             unique: This locale already exists.
         enabled:
             cannot_disable_base: The base locale cannot be disabled.
+    product_attribute:
+        invalid: Position must be an integer.
     product_image:
         code:
             not_blank: Please enter an image code.

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Product\Model\ProductAttribute;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -77,6 +78,9 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
                         'classes' => [
                             'model' => ProductAttribute::class,
                             'interface' => ProductAttributeInterface::class,
+                            'form' => [
+                                'default' => ProductAttributeType::class,
+                            ]
                         ],
                         'translation' => [
                             'classes' => [

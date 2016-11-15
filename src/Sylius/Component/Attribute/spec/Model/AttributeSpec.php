@@ -116,4 +116,11 @@ final class AttributeSpec extends ObjectBehavior
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }
+
+    function it_has_position()
+    {
+        $this->getPosition()->shouldReturn(null);
+        $this->setPosition(0);
+        $this->getPosition()->shouldReturn(0);
+    }
 }

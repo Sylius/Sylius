@@ -12,7 +12,5 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
-
     <mapped-superclass name="Sylius\Component\Product\Model\ProductAttribute" table="sylius_product_attribute" />
-
 </doctrine-mapping>

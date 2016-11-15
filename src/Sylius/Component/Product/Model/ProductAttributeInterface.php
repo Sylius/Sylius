@@ -18,4 +18,5 @@ use Sylius\Component\Attribute\Model\AttributeInterface as BaseAttributeInterfac
  */
 interface ProductAttributeInterface extends BaseAttributeInterface
 {
+
 }

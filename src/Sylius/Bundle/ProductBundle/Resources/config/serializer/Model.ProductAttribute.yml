@@ -6,6 +6,9 @@ Sylius\Component\Product\Model\ProductAttribute:
             expose: true
             type: integer
             xml_attribute: true
+        position:
+            expose: true
+            type: integer
         name:
             expose: true
             type: string

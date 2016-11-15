@@ -133,6 +133,8 @@ sylius:
                 amount: Amount
         payment_method:
             channels: Channels
+        product_attribute:
+            position: Position
 
     installer:
         extensions:
