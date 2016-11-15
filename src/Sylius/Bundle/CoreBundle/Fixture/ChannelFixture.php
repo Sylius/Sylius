@@ -43,7 +43,6 @@ final class ChannelFixture extends AbstractResourceFixture
                 ->arrayNode('locales')->prototype('scalar')->end()->end()
                 ->scalarNode('default_currency')->cannotBeEmpty()->end()
                 ->arrayNode('currencies')->prototype('scalar')->end()->end()
-                ->arrayNode('payment_methods')->prototype('scalar')->end()->end()
                 ->arrayNode('shipping_methods')->prototype('scalar')->end()->end()
                 ->scalarNode('theme_name')->end()
         ;

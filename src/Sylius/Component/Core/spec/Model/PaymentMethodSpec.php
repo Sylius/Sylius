@@ -41,9 +41,6 @@ final class PaymentMethodSpec extends ObjectBehavior
 
     function it_has_channels_collection(ChannelInterface $firstChannel, ChannelInterface $secondChannel)
     {
-        $firstChannel->addPaymentMethod($this)->shouldBeCalled();
-        $secondChannel->addPaymentMethod($this)->shouldBeCalled();
-
         $this->addChannel($firstChannel);
         $this->addChannel($secondChannel);
 
@@ -52,9 +49,6 @@ final class PaymentMethodSpec extends ObjectBehavior
 
     function it_can_add_and_remove_channels(ChannelInterface $channel)
     {
-        $channel->addPaymentMethod($this)->shouldBeCalled();
-        $channel->removePaymentMethod($this)->shouldBeCalled();
-
         $this->addChannel($channel);
         $this->hasChannel($channel)->shouldReturn(true);
 

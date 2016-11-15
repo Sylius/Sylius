@@ -17,6 +17,7 @@ use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -69,6 +70,11 @@ final class OrderFixture extends AbstractFixture
     private $countryRepository;
 
     /**
+     * @var PaymentMethodRepositoryInterface
+     */
+    private $paymentMethodRepository;
+
+    /**
      * @var FactoryInterface
      */
     private $addressFactory;
@@ -92,6 +98,7 @@ final class OrderFixture extends AbstractFixture
      * @param RepositoryInterface $customerRepository
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $countryRepository
+     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
      * @param FactoryInterface $addressFactory
      * @param StateMachineFactoryInterface $stateMachineFactory
      */
@@ -104,6 +111,7 @@ final class OrderFixture extends AbstractFixture
         RepositoryInterface $customerRepository,
         RepositoryInterface $productRepository,
         RepositoryInterface $countryRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
         FactoryInterface $addressFactory,
         StateMachineFactoryInterface $stateMachineFactory
     ) {
@@ -115,6 +123,7 @@ final class OrderFixture extends AbstractFixture
         $this->customerRepository = $customerRepository;
         $this->productRepository = $productRepository;
         $this->countryRepository = $countryRepository;
+        $this->paymentMethodRepository = $paymentMethodRepository;
         $this->addressFactory = $addressFactory;
         $this->stateMachineFactory = $stateMachineFactory;
 
@@ -243,7 +252,10 @@ final class OrderFixture extends AbstractFixture
      */
     private function selectPayment(OrderInterface $order)
     {
-        $paymentMethod = $this->faker->randomElement($order->getChannel()->getPaymentMethods()->toArray());
+        $paymentMethod = $this
+            ->faker
+            ->randomElement($this->paymentMethodRepository->findAll())
+        ;
 
         Assert::notNull($paymentMethod);
 

@@ -22,17 +22,6 @@ sylius_fixtures:
                                 countries:
                                     - "US"
 
-                payment_method:
-                    options:
-                        custom:
-                            cash_on_delivery:
-                                code: "cash_on_delivery"
-                                name: "Cash on delivery"
-                            bank_transfer:
-                                code: "bank_transfer"
-                                name: "Bank transfer"
-                                enabled: true
-
                 shipping_method:
                     options:
                         custom:
@@ -60,9 +49,21 @@ sylius_fixtures:
                                     - "ups"
                                     - "dhl_express"
                                     - "fedex"
-                                payment_methods:
-                                    - "cash_on_delivery"
-                                    - "bank_transfer"
+                                enabled: true
+
+                payment_method:
+                    options:
+                        custom:
+                            cash_on_delivery:
+                                code: "cash_on_delivery"
+                                name: "Cash on delivery"
+                                channels:
+                                    - "US Web Store"
+                            bank_transfer:
+                                code: "bank_transfer"
+                                name: "Bank transfer"
+                                channels:
+                                    - "US Web Store"
                                 enabled: true
 
                 regular_user:

@@ -15,7 +15,8 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -158,8 +159,9 @@ final class PaymentContext implements Context
         $paymentMethod->setDescription($description);
 
         if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {
+            /** @var ChannelInterface $channel */
             $channel = $this->sharedStorage->get('channel');
-            $channel->addPaymentMethod($paymentMethod);
+            $paymentMethod->addChannel($channel);
         }
 
         $this->sharedStorage->set('payment_method', $paymentMethod);

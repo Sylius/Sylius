@@ -51,3 +51,4 @@ Feature: Adding a new payment method
         And I add it
         Then I should be notified that it has been successfully created
         And the payment method "Paypal Express Checkout" should appear in the registry
+        And the payment method "Paypal Express Checkout" should be available in channel "United States"

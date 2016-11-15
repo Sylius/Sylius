@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -35,6 +37,11 @@ final class PaymentMethodExampleFactory implements ExampleFactoryInterface
     private $localeRepository;
 
     /**
+     * @var ChannelRepositoryInterface
+     */
+    private $channelRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -47,11 +54,16 @@ final class PaymentMethodExampleFactory implements ExampleFactoryInterface
     /**
      * @param FactoryInterface $paymentMethodFactory
      * @param RepositoryInterface $localeRepository
+     * @param ChannelRepositoryInterface $channelRepository
      */
-    public function __construct(FactoryInterface $paymentMethodFactory, RepositoryInterface $localeRepository)
-    {
+    public function __construct(
+        FactoryInterface $paymentMethodFactory,
+        RepositoryInterface $localeRepository,
+        ChannelRepositoryInterface $channelRepository
+    ) {
         $this->paymentMethodFactory = $paymentMethodFactory;
         $this->localeRepository = $localeRepository;
+        $this->channelRepository = $channelRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver =
@@ -69,6 +81,9 @@ final class PaymentMethodExampleFactory implements ExampleFactoryInterface
                 ->setDefault('enabled', function (Options $options) {
                     return $this->faker->boolean(90);
                 })
+                ->setDefault('channels', LazyOption::all($channelRepository))
+                ->setAllowedTypes('channels', 'array')
+                ->setNormalizer('channels', LazyOption::findBy($channelRepository, 'name'))
                 ->setAllowedTypes('enabled', 'bool')
         ;
     }
@@ -92,6 +107,10 @@ final class PaymentMethodExampleFactory implements ExampleFactoryInterface
 
             $paymentMethod->setName($options['name']);
             $paymentMethod->setDescription($options['description']);
+        }
+
+        foreach ($options['channels'] as $channel) {
+            $paymentMethod->addChannel($channel);
         }
 
         return $paymentMethod;

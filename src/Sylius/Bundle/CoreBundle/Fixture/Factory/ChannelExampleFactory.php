@@ -94,9 +94,6 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
                 ->setDefault('currencies', LazyOption::all($currencyRepository))
                 ->setAllowedTypes('currencies', 'array')
                 ->setNormalizer('currencies', LazyOption::findBy($currencyRepository, 'code'))
-                ->setDefault('payment_methods', LazyOption::all($paymentMethodRepository))
-                ->setAllowedTypes('payment_methods', 'array')
-                ->setNormalizer('payment_methods', LazyOption::findBy($paymentMethodRepository, 'code'))
                 ->setDefault('shipping_methods', LazyOption::all($shippingMethodRepository))
                 ->setAllowedTypes('shipping_methods', 'array')
                 ->setNormalizer('shipping_methods', LazyOption::findBy($shippingMethodRepository, 'code'))
@@ -128,10 +125,6 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
         $channel->setDefaultCurrency($options['default_currency']);
         foreach ($options['currencies'] as $currency) {
             $channel->addCurrency($currency);
-        }
-
-        foreach ($options['payment_methods'] as $paymentMethod) {
-            $channel->addPaymentMethod($paymentMethod);
         }
 
         foreach ($options['shipping_methods'] as $shippingMethod) {

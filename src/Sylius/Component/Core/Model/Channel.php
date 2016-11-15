@@ -56,11 +56,6 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $locales;
 
     /**
-     * @var BasePaymentMethodInterface[]|Collection
-     */
-    protected $paymentMethods;
-
-    /**
      * @var BaseShippingMethodInterface[]|Collection
      */
     protected $shippingMethods;
@@ -250,42 +245,6 @@ class Channel extends BaseChannel implements ChannelInterface
     public function hasShippingMethod(BaseShippingMethodInterface $shippingMethod)
     {
         return $this->shippingMethods->contains($shippingMethod);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentMethods()
-    {
-        return $this->paymentMethods;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addPaymentMethod(BasePaymentMethodInterface $paymentMethod)
-    {
-        if (!$this->hasPaymentMethod($paymentMethod)) {
-            $this->paymentMethods->add($paymentMethod);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removePaymentMethod(BasePaymentMethodInterface $paymentMethod)
-    {
-        if ($this->hasPaymentMethod($paymentMethod)) {
-            $this->paymentMethods->removeElement($paymentMethod);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPaymentMethod(BasePaymentMethodInterface $paymentMethod)
-    {
-        return $this->paymentMethods->contains($paymentMethod);
     }
 
     /**
