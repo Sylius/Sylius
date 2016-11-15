@@ -46,6 +46,11 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     private $productVariantFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $productTaxonFactory;
+
+    /**
      * @var ProductVariantGeneratorInterface
      */
     private $variantGenerator;
@@ -86,6 +91,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
      * @param ProductVariantGeneratorInterface $variantGenerator
      * @param FactoryInterface $productAttributeValueFactory
      * @param FactoryInterface $productImageFactory
+     * @param FactoryInterface $productTaxonFactory
      * @param ImageUploaderInterface $imageUploader
      * @param SlugGeneratorInterface $slugGenerator
      * @param RepositoryInterface $taxonRepository
@@ -100,6 +106,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         ProductVariantGeneratorInterface $variantGenerator,
         FactoryInterface $productAttributeValueFactory,
         FactoryInterface $productImageFactory,
+        FactoryInterface $productTaxonFactory,
         ImageUploaderInterface $imageUploader,
         SlugGeneratorInterface $slugGenerator,
         RepositoryInterface $taxonRepository,
@@ -112,6 +119,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         $this->productVariantFactory = $productVariantFactory;
         $this->variantGenerator = $variantGenerator;
         $this->productImageFactory = $productImageFactory;
+        $this->productTaxonFactory = $productTaxonFactory;
         $this->imageUploader = $imageUploader;
         $this->slugGenerator = $slugGenerator;
         $this->localeRepository = $localeRepository;
@@ -201,6 +209,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         $this->createRelations($product, $options);
         $this->createVariants($product, $options);
         $this->createImages($product, $options);
+        $this->createProductTaxons($product, $options);
 
         return $product;
     }
@@ -228,10 +237,6 @@ final class ProductExampleFactory implements ExampleFactoryInterface
      */
     private function createRelations(ProductInterface $product, array $options)
     {
-        foreach ($options['taxons'] as $taxon) {
-            $product->addTaxon($taxon);
-        }
-
         foreach ($options['channels'] as $channel) {
             $product->addChannel($channel);
         }
@@ -287,6 +292,21 @@ final class ProductExampleFactory implements ExampleFactoryInterface
             $this->imageUploader->upload($productImage);
 
             $product->addImage($productImage);
+        }
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param array $options
+     */
+    private function createProductTaxons(ProductInterface $product, array $options)
+    {
+        foreach ($options['taxons'] as $taxon) {
+            $productTaxon = $this->productTaxonFactory->createNew();
+            $productTaxon->setProduct($product);
+            $productTaxon->setTaxon($taxon);
+
+            $product->addProductTaxon($productTaxon);
         }
     }
 
