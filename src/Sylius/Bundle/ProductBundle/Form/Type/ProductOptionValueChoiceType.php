@@ -47,9 +47,7 @@ class ProductOptionValueChoiceType extends AbstractType
             ->setRequired([
                 'option',
             ])
-            ->addAllowedTypes([
-                'option' => ProductOptionInterface::class,
-            ])
+            ->addAllowedTypes('option', ProductOptionInterface::class)
         ;
     }
 
