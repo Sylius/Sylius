@@ -22,20 +22,6 @@ sylius_fixtures:
                                 countries:
                                     - "US"
 
-                shipping_method:
-                    options:
-                        custom:
-                            ups:
-                                code: "ups"
-                                name: "UPS"
-                                enabled: true
-                            dhl_express:
-                                code: "dhl_express"
-                                name: "DHL Express"
-                            fedex:
-                                code: "fedex"
-                                name: "FedEx"
-
                 channel:
                     options:
                         custom:
@@ -45,10 +31,6 @@ sylius_fixtures:
                                     - "%locale%"
                                 currencies:
                                     - "%currency%"
-                                shipping_methods:
-                                    - "ups"
-                                    - "dhl_express"
-                                    - "fedex"
                                 enabled: true
 
                 payment_method:
@@ -65,6 +47,24 @@ sylius_fixtures:
                                 channels:
                                     - "US Web Store"
                                 enabled: true
+
+                shipping_method:
+                    options:
+                        custom:
+                            ups:
+                                code: "ups"
+                                name: "UPS"
+                                enabled: true
+                            dhl_express:
+                                code: "dhl_express"
+                                name: "DHL Express"
+                                channels:
+                                    - "US Web Store"
+                            fedex:
+                                code: "fedex"
+                                name: "FedEx"
+                                channels:
+                                    - "US Web Store"
 
                 regular_user:
                     name: "shop_user"

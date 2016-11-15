@@ -56,11 +56,6 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $locales;
 
     /**
-     * @var BaseShippingMethodInterface[]|Collection
-     */
-    protected $shippingMethods;
-
-    /**
      * @var string
      */
     protected $themeName;
@@ -71,8 +66,6 @@ class Channel extends BaseChannel implements ChannelInterface
 
         $this->currencies = new ArrayCollection();
         $this->locales = new ArrayCollection();
-        $this->paymentMethods = new ArrayCollection();
-        $this->shippingMethods = new ArrayCollection();
     }
 
     /**
@@ -209,42 +202,6 @@ class Channel extends BaseChannel implements ChannelInterface
     public function hasLocale(LocaleInterface $locale)
     {
         return $this->locales->contains($locale);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingMethods()
-    {
-        return $this->shippingMethods;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addShippingMethod(BaseShippingMethodInterface $shippingMethod)
-    {
-        if (!$this->hasShippingMethod($shippingMethod)) {
-            $this->shippingMethods->add($shippingMethod);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeShippingMethod(BaseShippingMethodInterface $shippingMethod)
-    {
-        if ($this->hasShippingMethod($shippingMethod)) {
-            $this->shippingMethods->removeElement($shippingMethod);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingMethod(BaseShippingMethodInterface $shippingMethod)
-    {
-        return $this->shippingMethods->contains($shippingMethod);
     }
 
     /**

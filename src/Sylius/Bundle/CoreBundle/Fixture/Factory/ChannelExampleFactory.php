@@ -45,15 +45,11 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
      * @param ChannelFactoryInterface $channelFactory
      * @param RepositoryInterface $localeRepository
      * @param RepositoryInterface $currencyRepository
-     * @param RepositoryInterface $paymentMethodRepository
-     * @param RepositoryInterface $shippingMethodRepository
      */
     public function __construct(
         ChannelFactoryInterface $channelFactory,
         RepositoryInterface $localeRepository,
-        RepositoryInterface $currencyRepository,
-        RepositoryInterface $paymentMethodRepository,
-        RepositoryInterface $shippingMethodRepository
+        RepositoryInterface $currencyRepository
     ) {
         $this->channelFactory = $channelFactory;
 
@@ -94,9 +90,6 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
                 ->setDefault('currencies', LazyOption::all($currencyRepository))
                 ->setAllowedTypes('currencies', 'array')
                 ->setNormalizer('currencies', LazyOption::findBy($currencyRepository, 'code'))
-                ->setDefault('shipping_methods', LazyOption::all($shippingMethodRepository))
-                ->setAllowedTypes('shipping_methods', 'array')
-                ->setNormalizer('shipping_methods', LazyOption::findBy($shippingMethodRepository, 'code'))
                 ->setDefault('theme_name', null)
         ;
     }
@@ -125,10 +118,6 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
         $channel->setDefaultCurrency($options['default_currency']);
         foreach ($options['currencies'] as $currency) {
             $channel->addCurrency($currency);
-        }
-
-        foreach ($options['shipping_methods'] as $shippingMethod) {
-            $channel->addShippingMethod($shippingMethod);
         }
 
         return $channel;

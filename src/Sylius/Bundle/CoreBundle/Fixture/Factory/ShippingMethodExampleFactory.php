@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -39,6 +40,11 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
     private $localeRepository;
 
     /**
+     * @var ChannelRepositoryInterface
+     */
+    private $channelRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -53,15 +59,18 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
      * @param RepositoryInterface $zoneRepository
      * @param RepositoryInterface $shippingCategoryRepository
      * @param RepositoryInterface $localeRepository
+     * @param ChannelRepositoryInterface $channelRepository
      */
     public function __construct(
         FactoryInterface $shippingMethodFactory,
         RepositoryInterface $zoneRepository,
         RepositoryInterface $shippingCategoryRepository,
-        RepositoryInterface $localeRepository
+        RepositoryInterface $localeRepository,
+        ChannelRepositoryInterface $channelRepository
     ) {
         $this->shippingMethodFactory = $shippingMethodFactory;
         $this->localeRepository = $localeRepository;
+        $this->channelRepository = $channelRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver =
@@ -88,6 +97,9 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
                 ->setDefault('calculator', function (Options $options) {
                     return ['type' => DefaultCalculators::FLAT_RATE, 'configuration' => ['amount' => $this->faker->randomNumber(4)]];
                 })
+                ->setDefault('channels', LazyOption::all($channelRepository))
+                ->setAllowedTypes('channels', 'array')
+                ->setNormalizer('channels', LazyOption::findBy($channelRepository, 'name'))
         ;
     }
 
@@ -116,6 +128,10 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
 
             $shippingMethod->setName($options['name']);
             $shippingMethod->setDescription($options['description']);
+        }
+
+        foreach ($options['channels'] as $channel) {
+            $shippingMethod->addChannel($channel);
         }
 
         return $shippingMethod;

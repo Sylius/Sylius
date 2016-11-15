@@ -28,14 +28,13 @@
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.repository.shipping_category" />
             <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.repository.channel" />
         </service>
 
         <service id="sylius.fixture.example_factory.channel" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ChannelExampleFactory">
             <argument type="service" id="sylius.factory.channel" />
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.repository.currency" />
-            <argument type="service" id="sylius.repository.payment_method" />
-            <argument type="service" id="sylius.repository.shipping_method" />
         </service>
 
         <service id="sylius.fixture.example_factory.shop_user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory">
