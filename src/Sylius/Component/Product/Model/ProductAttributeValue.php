@@ -31,6 +31,6 @@ class ProductAttributeValue extends BaseAttributeValue implements ProductAttribu
      */
     public function setProduct(ProductInterface $product = null)
     {
-        return parent::setSubject($product);
+        parent::setSubject($product);
     }
 }

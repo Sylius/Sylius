@@ -273,6 +273,36 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
+     * @Then the first product attribute on the list should have name :name
+     */
+    public function theFirstProductAttributeOnTheListShouldHave($name)
+    {
+        $fields = $this->indexPage->getColumnFields('name');
+        $actualName = reset($fields);
+
+        Assert::same(
+            $actualName,
+            $name,
+            sprintf('Expected first product attribute\'s name to be "%s", but it is "%s".', $name, $actualName)
+        );
+    }
+
+    /**
+     * @Then the last product attribute on the list should have name :name
+     */
+    public function theLastProductAttributeOnTheListShouldHave($name)
+    {
+        $fields = $this->indexPage->getColumnFields('name');
+        $actualName = end($fields);
+
+        Assert::same(
+            $actualName,
+            $name,
+            sprintf('Expected last product attribute\'s name to be "%s", but it is "%s".', $name, $actualName)
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */

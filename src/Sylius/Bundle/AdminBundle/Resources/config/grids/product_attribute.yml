@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.product_attribute.class%"
             sorting:
-                code: asc
+                position: asc
             fields:
                 code:
                     type: string
@@ -15,6 +15,10 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
+                position:
+                    type: string
+                    enabled: false
+                    sortable: ~
                 type:
                     type: twig
                     label: sylius.ui.type
