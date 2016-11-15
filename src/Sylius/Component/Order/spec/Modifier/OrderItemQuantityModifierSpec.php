@@ -50,7 +50,7 @@ final class OrderItemQuantityModifierSpec extends ObjectBehavior
         $this->modify($orderItem, 3);
     }
 
-    function it_removes_units_if_target_quantity_is_greater_than_current(
+    function it_removes_units_if_target_quantity_is_lower_than_current(
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
