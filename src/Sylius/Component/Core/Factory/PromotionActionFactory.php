@@ -48,17 +48,17 @@ class PromotionActionFactory implements PromotionActionFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createFixedDiscount($amount)
+    public function createFixedDiscount($baseAmount, $amounts = array())
     {
-        return $this->createAction(FixedDiscountPromotionActionCommand::TYPE, ['amount' => $amount]);
+        return $this->createAction(FixedDiscountPromotionActionCommand::TYPE, ['base_amount' => $baseAmount]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createUnitFixedDiscount($amount)
+    public function createUnitFixedDiscount($baseAmount, $amounts = array())
     {
-        return $this->createAction(UnitFixedDiscountPromotionActionCommand::TYPE, ['amount' => $amount]);
+        return $this->createAction(UnitFixedDiscountPromotionActionCommand::TYPE, ['base_amount' => $baseAmount]);
     }
 
     /**

@@ -13,7 +13,7 @@ Feature: Receiving fixed discount dependent on currency on cart
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And there is a promotion "Holiday promotion"
 
-    @ui @todo
+    @ui
     Scenario: Receiving fixed discount in different than base currency for my cart
         Given this promotion gives "$10.00" in base currency or "£8.00" in "GBP" discount to every order
         When I switch to the "GBP" currency
@@ -21,7 +21,7 @@ Feature: Receiving fixed discount dependent on currency on cart
         Then my cart total should be "£42.00"
         And my discount should be "-£8.00"
 
-    @ui @todo
+    @ui
     Scenario: Receiving fixed discount in different than base currency on a single item
         Given this promotion gives "$10.00" in base currency or "£8.00" in "GBP" off on every product with minimum price at "$20.00"
         When I switch to the "GBP" currency

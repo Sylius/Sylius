@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -21,6 +22,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
 {
@@ -42,22 +44,30 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
     private $productFilter;
 
     /**
+     * @var CurrencyConverterInterface
+     */
+    private $currencyConverter;
+
+    /**
      * @param FactoryInterface $adjustmentFactory
      * @param FilterInterface $priceRangeFilter
      * @param FilterInterface $taxonFilter
      * @param FilterInterface $productFilter
+     * @param CurrencyConverterInterface $currencyConverter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
-        FilterInterface $productFilter
+        FilterInterface $productFilter,
+        CurrencyConverterInterface $currencyConverter
     ) {
         parent::__construct($adjustmentFactory);
 
         $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;
         $this->productFilter = $productFilter;
+        $this->currencyConverter = $currencyConverter;
     }
 
     /**
@@ -69,7 +79,8 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        if (0 === $configuration['amount']) {
+        $amount = $this->getAmountByCurrencyCode($configuration, $subject->getCurrencyCode());
+        if (0 === $amount) {
             return;
         }
 
@@ -78,7 +89,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         $filteredItems = $this->productFilter->filter($filteredItems, $configuration);
 
         foreach ($filteredItems as $item) {
-            $this->setUnitsAdjustments($item, $configuration['amount'], $promotion);
+            $this->setUnitsAdjustments($item, $amount, $promotion);
         }
     }
 
@@ -104,5 +115,23 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
                 $promotion
             );
         }
+    }
+
+    /**
+     * @param array $configuration
+     * @param string $currencyCode
+     *
+     * @return int
+     */
+    private function getAmountByCurrencyCode(array $configuration, $currencyCode)
+    {
+        if (!isset($configuration['amounts'][$currencyCode])) {
+            return $configuration['base_amount'];
+        }
+
+        return $this->currencyConverter->convertToBase(
+            $configuration['amounts'][$currencyCode],
+            $currencyCode
+        );
     }
 }

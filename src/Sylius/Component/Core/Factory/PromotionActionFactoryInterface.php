@@ -20,18 +20,20 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 interface PromotionActionFactoryInterface extends FactoryInterface
 {
     /**
-     * @param int $amount
+     * @param int $baseAmount
+     * @param array $amounts
      *
      * @return PromotionActionInterface
      */
-    public function createFixedDiscount($amount);
+    public function createFixedDiscount($baseAmount, $amounts = array());
 
     /**
-     * @param int $amount
+     * @param int $baseAmount
+     * @param array $amounts
      *
      * @return PromotionActionInterface
      */
-    public function createUnitFixedDiscount($amount);
+    public function createUnitFixedDiscount($baseAmount, $amounts = array());
 
     /**
      * @param float $percentage

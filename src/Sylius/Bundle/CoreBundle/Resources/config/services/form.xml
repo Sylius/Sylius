@@ -110,6 +110,17 @@
             <argument type="service" id="sylius.form.type.data_transformer.products_to_codes" />
             <tag name="form.type" alias="sylius_promotion_action_filter_product_configuration" />
         </service>
+        <service id="sylius.form.type.promotion_action.fixed_discount_configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\FixedDiscountConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_action_fixed_discount_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_action.unit_fixed_discount_configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\UnitFixedDiscountConfigurationType">
+            <tag name="form.type" alias="sylius_promotion_action_unit_fixed_discount_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_action.currency_based_discount_amount" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\CurrencyBasedDiscountAmountType">
+            <argument type="service" id="sylius.repository.currency" />
+            <argument>%sylius_currency.currency%</argument>
+            <tag name="form.type" alias="sylius_currency_based_discount_amount" />
+        </service>
 
         <service id="sylius.form.type.price_calculator.channel_and_currency_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelAndCurrencyBasedConfigurationType">
             <argument type="service" id="sylius.repository.channel" />

@@ -8,7 +8,7 @@ Feature: Adding a new promotion with action
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding a new promotion with fixed discount
         When I want to create a new promotion
         And I specify its code as "10_for_all_products"

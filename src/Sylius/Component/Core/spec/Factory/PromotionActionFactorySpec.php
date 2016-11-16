@@ -51,26 +51,26 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($promotionAction);
     }
 
-    function it_creates_a_new_fixed_discount_action_with_a_given_amount(
+    function it_creates_a_new_fixed_discount_action_with_a_given_base_amount(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ) {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
         $promotionAction->setType(FixedDiscountPromotionActionCommand::TYPE)->shouldBeCalled();
-        $promotionAction->setConfiguration(['amount' => 1000])->shouldBeCalled();
+        $promotionAction->setConfiguration(['base_amount' => 1000])->shouldBeCalled();
 
         $this->createFixedDiscount(1000)->shouldReturn($promotionAction);
     }
 
-    function it_creates_an_unit_fixed_discount_action_with_a_given_amount(
+    function it_creates_an_unit_fixed_discount_action_with_a_given_base_amount(
         FactoryInterface $decoratedFactory,
         PromotionActionInterface $promotionAction
     ) {
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
         $promotionAction->setType(UnitFixedDiscountPromotionActionCommand::TYPE)->shouldBeCalled();
-        $promotionAction->setConfiguration(['amount' => 1000])->shouldBeCalled();
+        $promotionAction->setConfiguration(['base_amount' => 1000])->shouldBeCalled();
 
         $this->createUnitFixedDiscount(1000)->shouldReturn($promotionAction);
     }
