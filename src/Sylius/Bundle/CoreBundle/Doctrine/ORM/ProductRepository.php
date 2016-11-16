@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 
 /**
@@ -50,19 +51,19 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderForEnabledByTaxonCodeAndChannelAndLocale($code, ChannelInterface $channel, $locale)
+    public function createQueryBuilderForEnabledByTaxonIdAndChannelAndLocale($taxonId, ChannelInterface $channel, $locale)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->innerJoin('o.taxons', 'taxon')
+            ->innerJoin('o.productTaxons', 'productTaxons')
             ->innerJoin('o.channels', 'channel')
             ->andWhere('translation.locale = :locale')
-            ->andWhere('taxon.code = :code')
+            ->andWhere('productTaxons.taxon = :taxonId')
             ->andWhere('channel = :channel')
             ->andWhere('o.enabled = true')
             ->setParameter('locale', $locale)
-            ->setParameter('code', $code)
+            ->setParameter('taxonId', $taxonId)
             ->setParameter('channel', $channel)
         ;
     }
@@ -79,24 +80,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->andWhere('channel = :channel')
             ->setParameter('channel', $channel)
             ->setMaxResults($count)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel)
-    {
-        return $this->createQueryBuilder('o')
-            ->innerJoin('o.taxons', 'taxon')
-            ->andWhere('taxon.code = :code')
-            ->innerJoin('o.channels', 'channel')
-            ->andWhere('channel = :channel')
-            ->andWhere('o.enabled = true')
-            ->setParameter('code', $code)
-            ->setParameter('channel', $channel)
             ->getQuery()
             ->getResult()
         ;
