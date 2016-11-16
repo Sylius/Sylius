@@ -59,5 +59,5 @@ Feature: Adding a new shipping method
         And I specify its amount as 20
         And I add it
         Then I should be notified that it has been successfully created
-        And the shipment method "FedEx Carrier" should appear in the registry
-        And the shipment method "FedEx Carrier" should be available in channel "United States"
+        And the shipping method "FedEx Carrier" should appear in the registry
+        And the shipping method "FedEx Carrier" should be available in channel "United States"
