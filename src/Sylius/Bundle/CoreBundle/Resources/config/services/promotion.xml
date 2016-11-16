@@ -30,12 +30,8 @@
             <argument type="service" id="sylius.repository.country" />
             <tag name="sylius.promotion_rule_checker" type="shipping_country" label="Shipping country" />
         </service>
-        <service id="sylius.promotion_rule_checker.taxon" class="Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker">
-            <tag name="sylius.promotion_rule_checker" type="taxon" label="Taxon" />
-        </service>
-        <service id="sylius.promotion_rule_checker.contains_taxon" class="Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker">
-            <argument type="service" id="sylius.repository.taxon" />
-            <tag name="sylius.promotion_rule_checker" type="contains_taxon" label="Contains number of items from taxon" />
+        <service id="sylius.promotion_rule_checker.has_taxon" class="Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker">
+            <tag name="sylius.promotion_rule_checker" type="has_taxon" label="Has at least one from taxons" />
         </service>
         <service id="sylius.promotion_rule_checker.total_of_items_from_taxon" class="Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker">
             <argument type="service" id="sylius.repository.taxon" />

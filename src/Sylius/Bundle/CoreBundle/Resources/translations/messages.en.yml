@@ -120,9 +120,6 @@ sylius:
         product_association_type:
             name: Name
         promotion_rule:
-            contains_taxon:
-                taxon: Taxon
-                count: Count
             taxon:
                 taxons: Taxons
             product:

@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class TaxonConfigurationType extends AbstractType
+class HasTaxonConfigurationType extends AbstractType
 {
     /**
      * @var DataTransformerInterface
@@ -53,6 +53,6 @@ class TaxonConfigurationType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_promotion_rule_taxon_configuration';
+        return 'sylius_promotion_rule_has_taxon_configuration';
     }
 }

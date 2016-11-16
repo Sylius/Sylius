@@ -15,9 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Factory\PromotionRuleFactory;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
@@ -71,13 +70,13 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createItemTotal(1000)->shouldReturn($rule);
     }
 
-    function it_creates_a_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
+    function it_creates_a_has_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
-        $rule->setType(TaxonRuleChecker::TYPE)->shouldBeCalled();
+        $rule->setType(HasTaxonRuleChecker::TYPE)->shouldBeCalled();
         $rule->setConfiguration(['taxons' => [1, 6]])->shouldBeCalled();
 
-        $this->createTaxon([1, 6])->shouldReturn($rule);
+        $this->createHasTaxon([1, 6])->shouldReturn($rule);
     }
 
     function it_creates_a_total_of_items_from_taxon_rule(
@@ -89,15 +88,6 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $rule->setConfiguration(['taxon' => 'spears', 'amount' => 1000])->shouldBeCalled();
 
         $this->createItemsFromTaxonTotal('spears', 1000)->shouldReturn($rule);
-    }
-
-    function it_creates_a_contains_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
-    {
-        $decoratedFactory->createNew()->willReturn($rule);
-        $rule->setType(ContainsTaxonRuleChecker::TYPE)->shouldBeCalled();
-        $rule->setConfiguration(['taxon' => 'bows', 'count' => 10])->shouldBeCalled();
-
-        $this->createContainsTaxon('bows', 10)->shouldReturn($rule);
     }
 
     function it_creates_a_nth_order_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)

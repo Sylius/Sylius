@@ -38,7 +38,7 @@ interface PromotionRuleFactoryInterface extends FactoryInterface
      *
      * @return PromotionRuleInterface
      */
-    public function createTaxon(array $taxons);
+    public function createHasTaxon(array $taxons);
 
     /**
      * @param string $taxonCode
@@ -47,14 +47,6 @@ interface PromotionRuleFactoryInterface extends FactoryInterface
      * @return PromotionRuleInterface
      */
     public function createItemsFromTaxonTotal($taxonCode, $amount);
-
-    /**
-     * @param string $taxonCode
-     * @param int $count
-     *
-     * @return PromotionRuleInterface
-     */
-    public function createContainsTaxon($taxonCode, $count);
 
     /**
      * @param int $nth

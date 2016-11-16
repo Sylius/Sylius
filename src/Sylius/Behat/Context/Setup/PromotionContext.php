@@ -399,7 +399,7 @@ final class PromotionContext implements Context
         $discount,
         TaxonInterface $taxon
     ) {
-        $rule = $this->ruleFactory->createTaxon([$taxon->getCode()]);
+        $rule = $this->ruleFactory->createHasTaxon([$taxon->getCode()]);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
@@ -412,7 +412,7 @@ final class PromotionContext implements Context
         $discount,
         array $taxons
     ) {
-        $rule = $this->ruleFactory->createTaxon([$taxons[0]->getCode(), $taxons[1]->getCode()]);
+        $rule = $this->ruleFactory->createHasTaxon([$taxons[0]->getCode(), $taxons[1]->getCode()]);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
@@ -427,20 +427,6 @@ final class PromotionContext implements Context
         $amount
     ) {
         $rule = $this->ruleFactory->createItemsFromTaxonTotal($taxon->getCode(), $amount);
-
-        $this->createFixedPromotion($promotion, $discount, [], $rule);
-    }
-
-    /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off if order contains (\d+) products (classified as "[^"]+")$/
-     */
-    public function thePromotionGivesOffIfOrderContainsNumberOfProductsClassifiedAs(
-        PromotionInterface $promotion,
-        $discount,
-        $count,
-        TaxonInterface $taxon
-    ) {
-        $rule = $this->ruleFactory->createContainsTaxon($taxon->getCode(), $count);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
@@ -463,20 +449,6 @@ final class PromotionContext implements Context
         $rule = $this->ruleFactory->createNthOrder((int) $nth);
 
         $this->createPercentagePromotion($promotion, $discount, [], $rule);
-    }
-
-    /**
-     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") if an order contains any product (classified as "[^"]+")$/
-     */
-    public function itGivesPercentageOffOnEveryProductClassifiedAsIfAnOrderContainsAnyProductClassifiedAs(
-        PromotionInterface $promotion,
-        $discount,
-        TaxonInterface $discountTaxon,
-        TaxonInterface $targetTaxon
-    ) {
-        $rule = $this->ruleFactory->createContainsTaxon($targetTaxon->getCode(), 1);
-
-        $this->createUnitPercentagePromotion($promotion, $discount, $this->getTaxonFilterConfiguration([$discountTaxon->getCode()]), $rule);
     }
 
     /**
@@ -544,7 +516,7 @@ final class PromotionContext implements Context
         $discountTaxonsCodes = [$discountTaxons[0]->getCode(), $discountTaxons[1]->getCode()];
         $targetTaxonsCodes = [$targetTaxons[0]->getCode(), $targetTaxons[1]->getCode()];
 
-        $rule = $this->ruleFactory->createTaxon($targetTaxonsCodes);
+        $rule = $this->ruleFactory->createHasTaxon($targetTaxonsCodes);
 
         $this->createUnitPercentagePromotion(
             $promotion,
