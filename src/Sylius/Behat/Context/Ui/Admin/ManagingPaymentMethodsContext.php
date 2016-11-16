@@ -235,6 +235,22 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Then the last payment method on the list should have :field :value
+     */
+    public function theLastPaymentMethodOnTheListShouldHave($field, $value)
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = end($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected last payment method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+
+    /**
      * @When I switch the way payment methods are sorted by :field
      * @When I start sorting payment methods by :field
      * @Given the payment methods are already sorted by :field

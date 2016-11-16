@@ -83,12 +83,13 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given the store allows paying :paymentMethodName
-     * @Given the store allows paying with :paymentMethodName
+     * @Given the store (also) allows paying :paymentMethodName
+     * @Given the store (also) allows paying with :paymentMethodName
+     * @Given the store (also) allows paying with :paymentMethodName at position :position
      */
-    public function storeAllowsPaying($paymentMethodName)
+    public function storeAllowsPaying($paymentMethodName, $position = null)
     {
-        $this->createPaymentMethodFromNameAndCode($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method');
+        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', true, $position);
     }
 
     /**
@@ -96,7 +97,7 @@ final class PaymentContext implements Context
      */
     public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
     {
-        $this->createPaymentMethodFromNameAndCode($paymentMethodName, $paymentMethodCode);
+        $this->createPaymentMethod($paymentMethodName, $paymentMethodCode);
     }
 
     /**
@@ -140,7 +141,7 @@ final class PaymentContext implements Context
      */
     public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
     {
-        $this->createPaymentMethodFromNameAndCode($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', false);
+        $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', false);
     }
 
     /**
@@ -149,12 +150,13 @@ final class PaymentContext implements Context
      * @param bool $addForCurrentChannel
      * @param string $description
      */
-    private function createPaymentMethodFromNameAndCode($name, $code, $description = '', $addForCurrentChannel = true)
+    private function createPaymentMethod($name, $code, $description = '', $addForCurrentChannel = true, $position = null)
     {
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->paymentMethodFactory->createNew();
         $paymentMethod->setName(ucfirst($name));
         $paymentMethod->setCode($code);
+        $paymentMethod->setPosition($position);
         $paymentMethod->setGateway($this->paymentMethodNameToGatewayConverter->convert($name));
         $paymentMethod->setDescription($description);
 

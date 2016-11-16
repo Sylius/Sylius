@@ -1341,6 +1341,28 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should have :paymentMethodName payment method available as the first choice
+     */
+    public function iShouldHavePaymentMethodAvailableAsFirstChoice($paymentMethodName)
+    {
+        $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
+        $firstPaymentMethod = reset($paymentMethods);
+
+        Assert::same($paymentMethodName, $firstPaymentMethod);
+    }
+
+    /**
+     * @Then I should have :paymentMethodName payment method available as the last choice
+     */
+    public function iShouldHavePaymentMethodAvailableAsLastChoice($paymentMethodName)
+    {
+        $paymentMethods = $this->selectPaymentPage->getPaymentMethods();
+        $lastPaymentMethod = end($paymentMethods);
+
+        Assert::same($paymentMethodName, $lastPaymentMethod);
+    }
+
+    /**
      * @return AddressInterface
      */
     private function createDefaultAddress()

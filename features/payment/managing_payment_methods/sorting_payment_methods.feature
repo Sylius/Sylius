@@ -16,14 +16,16 @@ Feature: Sorting listed payment methods
         And I am logged in as an administrator
 
     @ui
-    Scenario: Payment methods are sorted by code in ascending order by default
-        When I browse payment methods
+    Scenario: Payment methods can be sorted by their codes
+        Given I am browsing payment methods
+        When I start sorting payment methods by code
         Then I should see 3 payment methods in the list
         And the first payment method on the list should have code "cash_on_delivery"
 
     @ui
-    Scenario: Changing the order of sorting by code
+    Scenario: Changing the order of sorting payment methods by their codes
         Given I am browsing payment methods
+        And the payment methods are already sorted by code
         When I switch the way payment methods are sorted by code
         Then I should see 3 payment methods in the list
         And the first payment method on the list should have code "offline"
