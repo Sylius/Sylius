@@ -20,6 +20,8 @@ use Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProvider;
 use Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProviderInterface;
 
 /**
+ * @require Sylius\Bundle\SettingsBundle\Schema\SchemaInterface
+ *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeSettingsSchemaProviderSpec extends ObjectBehavior
