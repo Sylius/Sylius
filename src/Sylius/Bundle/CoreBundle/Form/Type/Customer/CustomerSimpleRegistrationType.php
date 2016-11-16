@@ -53,6 +53,7 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
             ])
             ->add('user', 'sylius_shop_user_registration', [
                 'label' => false,
+                'constraints' => [new Valid()],
             ])
             ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
             ->addEventSubscriber(new UserRegistrationFormSubscriber())
@@ -68,7 +69,6 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
         $resolver->setDefaults([
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
-            'constraints' => [new Valid()],
         ]);
     }
 

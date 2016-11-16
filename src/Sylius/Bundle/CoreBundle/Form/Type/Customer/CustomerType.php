@@ -38,6 +38,7 @@ class CustomerType extends BaseCustomerType
         EventSubscriberInterface $addUserFormSubscriber
     ) {
         parent::__construct($dataClass, $validationGroups);
+
         $this->addUserFormSubscriber = $addUserFormSubscriber;
     }
 
@@ -60,7 +61,6 @@ class CustomerType extends BaseCustomerType
         $resolver->setDefaults([
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
-            'constraints' => [new Valid()],
         ]);
     }
 }

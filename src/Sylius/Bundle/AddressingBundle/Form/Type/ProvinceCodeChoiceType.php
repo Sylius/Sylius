@@ -37,7 +37,6 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
             return $this->getProvinceCodes($provinces);
         };
 
-        $resolver->setDefault('choice_list', null);
         $resolver->setDefault('choices', $choices);
     }
 

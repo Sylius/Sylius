@@ -67,15 +67,18 @@ class PaymentMethodChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = $this->createChoiceList();
-
         $resolver
             ->setDefaults([
-                'choice_list' => $choiceList,
+                'choices' => function (Options $options) {
+                    if (isset($options['subject'])) {
+                        return $this->paymentMethodsResolver->getSupportedMethods($options['subject']);
+                    }
+
+                    return $this->paymentMethodRepository->findAll();
+                },
+                'choice_value' => 'id',
             ])
-            ->setDefined([
-                'subject',
-            ])
+            ->setDefined('subject')
             ->setAllowedTypes('subject', PaymentInterface::class)
         ;
     }
@@ -94,22 +97,5 @@ class PaymentMethodChoiceType extends AbstractType
     public function getName()
     {
         return 'sylius_payment_method_choice';
-    }
-
-    /**
-     * @return \Closure
-     */
-    private function createChoiceList()
-    {
-        return function (Options $options) 
-        {
-            if (isset($options['subject'])) {
-                $resolvedMethods = $this->paymentMethodsResolver->getSupportedMethods($options['subject']);
-            } else {
-                $resolvedMethods = $this->paymentMethodRepository->findAll();
-            }
-
-            return new ObjectChoiceList($resolvedMethods, null, [], null, 'id');
-        };
     }
 }

@@ -76,8 +76,6 @@ class LocaleType extends BaseLocaleType
                 $nameOptions['choices'] = $this->getAvailableLocales();
             }
 
-            $nameOptions['choices_as_values'] = false;
-
             $form = $event->getForm();
             $form->add('code', 'locale', $nameOptions);
 

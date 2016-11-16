@@ -59,14 +59,10 @@ class CountryType extends AbstractResourceType
             $country = $event->getData();
             if ($country instanceof CountryInterface && null !== $country->getCode()) {
                 $nameOptions['disabled'] = true;
-                $nameOptions['choices'] = [
-                    $country->getCode() => $this->getCountryName($country->getCode())
-                ];
+                $nameOptions['choices'] = [$this->getCountryName($country->getCode()) => $country->getCode()];
             } else {
                 $nameOptions['choices'] = $this->getAvailableCountries();
             }
-
-            $nameOptions['choices_as_values'] = false;
 
             $form = $event->getForm();
             $form->add('code', 'country', $nameOptions);
@@ -118,6 +114,6 @@ class CountryType extends AbstractResourceType
             unset($availableCountries[$country->getCode()]);
         }
 
-        return $availableCountries;
+        return array_flip($availableCountries);
     }
 }

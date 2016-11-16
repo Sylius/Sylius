@@ -36,7 +36,7 @@
         </service>
 
         <service id="sylius.form.extension.collection" class="Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension">
-            <tag name="form.type_extension" alias="collection" extended-type="collection" />
+            <tag name="form.type_extension" alias="collection" extended-type="Symfony\Component\Form\Extension\Core\Type\CollectionType" />
         </service>
     </services>
 </container>

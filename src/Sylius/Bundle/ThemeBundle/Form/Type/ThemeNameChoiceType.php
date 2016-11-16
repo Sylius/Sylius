@@ -51,9 +51,6 @@ final class ThemeNameChoiceType extends AbstractType
 
                 return $choices;
             })
-            ->setNormalizer('choices_as_values', function () {
-                return true;
-            })
         ;
     }
 

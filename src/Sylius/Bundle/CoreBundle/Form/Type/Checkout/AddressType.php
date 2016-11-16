@@ -30,8 +30,13 @@ class AddressType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('shippingAddress', 'sylius_address', ['shippable' => true])
-            ->add('billingAddress', 'sylius_address')
+            ->add('shippingAddress', 'sylius_address', [
+                'shippable' => true,
+                'constraints' => [new Valid()],
+            ])
+            ->add('billingAddress', 'sylius_address', [
+                'constraints' => [new Valid()],
+            ])
             ->add('differentBillingAddress', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -52,7 +57,6 @@ class AddressType extends AbstractResourceType
         $resolver
             ->setDefaults([
                 'customer' => null,
-                'constraints' => [new Valid()],
             ])
         ;
     }

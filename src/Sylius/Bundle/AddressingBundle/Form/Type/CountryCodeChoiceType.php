@@ -54,7 +54,6 @@ class CountryCodeChoiceType extends AbstractType
 
         $resolver->setDefaults([
             'choices' => $choices,
-            'choices_as_values' => true,
             'enabled' => true,
             'label' => 'sylius.form.address.country',
             'placeholder' => 'sylius.form.country.select',

@@ -27,7 +27,6 @@ class CustomerDefaultAddressType extends AbstractType
     {
         $builder
             ->add('defaultAddress', 'sylius_address_choice', [
-                'choices_as_values' => true,
                 'customer' => $options['customer'],
                 'choice_value' => 'id',
             ])

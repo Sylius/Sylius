@@ -54,6 +54,7 @@ class ReviewType extends AbstractResourceType
                 'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
+                'constraints' => [new Valid()],
             ])
             ->add('title', TextType::class, [
                 'label' => 'sylius.form.review.title',
@@ -73,7 +74,6 @@ class ReviewType extends AbstractResourceType
 
         $resolver->setDefaults([
             'rating_steps' => 5,
-            'constraints' => [new Valid()],
         ]);
     }
 

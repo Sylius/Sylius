@@ -45,9 +45,6 @@ final class ThemeChoiceType extends AbstractType
             ->setNormalizer('choices', function () {
                 return $this->themeRepository->findAll();
             })
-            ->setNormalizer('choices_as_values', function () {
-                return true;
-            })
             ->setDefault('choice_label', function (ThemeInterface $theme) {
                 return (string) $theme;
             })
