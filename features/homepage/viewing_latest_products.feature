@@ -1,4 +1,4 @@
-@viewing_products
+@homepage
 Feature: Viewing a latest product list
     In order to be up-to-date with the newest products
     As a Visitor
@@ -6,7 +6,7 @@ Feature: Viewing a latest product list
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has "Belvedere Vodka", "Coconaut Liqeur", "Chopin Chocolate Liquer" and "Capitan Morgan White Rum" products
+        And this channel has "Belvedere Vodka", "Coconaut Liqeur", "Chopin Chocolate Liquer" and "Capitan Morgan White Rum" products
 
     @ui
     Scenario: Viewing latest products

@@ -105,6 +105,17 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getLatestProductsNames()
+    {;
+        return array_map(
+            function (NodeElement $element) { return $element->getText(); },
+            $this->getDocument()->findAll('css', '.sylius-product-name')
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [

@@ -333,6 +333,11 @@
             <tag name="fob.context_service" />
         </service>
 
+        <service id="sylius.behat.context.ui.shop.homepage" class="Sylius\Behat\Context\Ui\Shop\HomepageContext">
+            <argument type="service" id="sylius.behat.page.shop.home" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="sylius.behat.context.ui.shop.locale" class="Sylius\Behat\Context\Ui\Shop\LocaleContext">
             <argument type="service" id="sylius.behat.page.shop.home" />
             <tag name="fob.context_service" />

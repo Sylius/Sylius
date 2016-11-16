@@ -224,6 +224,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^(this product) is named "([^"]+)" (in the "([^"]+)" locale)$/
+     * @Given /^the (product "[^"]+") is named "([^"]+)" (in the "([^"]+)" locale)$/
      */
     public function thisProductIsNamedIn(ProductInterface $product, $name, $locale)
     {
@@ -269,6 +270,19 @@ final class ProductContext implements Context
     {
         foreach ($productsNames as $productName) {
             $this->saveProduct($this->createProduct($productName));
+        }
+    }
+
+    /**
+     * @Given /^(this channel) has "([^"]+)", "([^"]+)", "([^"]+)" and "([^"]+)" products$/
+     */
+    public function thisChannelHasProducts(ChannelInterface $channel, ...$productsNames)
+    {
+        foreach ($productsNames as $productName) {
+            $product = $this->createProduct($productName);
+            $product->addChannel($channel);
+
+            $this->saveProduct($product);
         }
     }
 
