@@ -34,7 +34,7 @@ sylius_grid:
                     type: twig 
                     label: sylius.ui.position 
                     path: .
-                    sortable: productTaxons.position
+                    sortable: productTaxon.position
                     options: 
                         template: "@SyliusAdmin/Product/Grid/Field/position.html.twig"
             filters:

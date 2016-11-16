@@ -1047,12 +1047,4 @@ final class ManagingProductsContext implements Context
 
         Assert::same($currentPage->getValidationMessage($element), $message);
     }
-
-    /**
-     * @When /^I move (product "[^"]+") before (product "[^"]+")$/
-     */
-    public function iMoveBefore(ProductInterface $draggableProduct, ProductInterface $targetProduct)
-    {
-        $this->indexPerTaxonPage->insertBefore($draggableProduct, $targetProduct);
-    }
 }

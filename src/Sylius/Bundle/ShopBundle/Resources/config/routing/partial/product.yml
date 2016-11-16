@@ -14,7 +14,7 @@ sylius_shop_partial_product_index_latest:
                     - "expr:service('sylius.context.channel').getChannel()"
                     - $count
 
-sylius_shop_partial_product_index_by_taxon_code:
+sylius_shop_partial_product_index_by_taxon:
     path: /{taxonId}
     methods: [GET]
     defaults:

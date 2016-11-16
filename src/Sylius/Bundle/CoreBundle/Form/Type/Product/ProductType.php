@@ -39,7 +39,7 @@ class ProductType extends BaseProductType
             ->add('mainTaxon', 'sylius_taxon_to_hidden_identifier')
             ->add('productTaxons', 'sylius_product_taxon_choice', [
                 'label' => 'sylius.form.product.taxons',
-                'multiple' => 'true'
+                'multiple' => true,
             ])
             ->add('variantSelectionMethod', 'choice', [
                 'label' => 'sylius.form.product.variant_selection_method',

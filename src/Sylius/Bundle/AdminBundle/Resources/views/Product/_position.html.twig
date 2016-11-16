@@ -1,8 +1,8 @@
 {% if taxonId %}
     {% for productTaxon in product.productTaxons%}
         {% if taxonId == productTaxon.taxon.id %}
-            <div class="position" data-id="{{ productTaxon.id }}">
-                <button class="ui button position" data-id="{{ productTaxon.id }}" >
+            <div class="position">
+                <button class="ui button position" >
                     {{ 'sylius.ui.change_position'|trans }}
                 </button>
                 <div class='ui input'>

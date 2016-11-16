@@ -33,7 +33,7 @@
             <argument type="string">product</argument>
         </service>
         <service id="sylius.behat.page.admin.product.index_per_taxon" class="%sylius.behat.page.admin.product.index_per_taxon.class%" parent="sylius.behat.page.admin.crud.index" public="false">
-            <argument type="string">product</argument>
+            <argument type="string">product_per_taxon</argument>
         </service>
         <service id="sylius.behat.page.admin.product.update_configurable" class="%sylius.behat.page.admin.product.update_configurable.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">product</argument>

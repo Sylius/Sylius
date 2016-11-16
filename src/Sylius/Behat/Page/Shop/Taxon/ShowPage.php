@@ -96,4 +96,22 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $this->getDocument()->clickLink('Clear');
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasProductsInOrder(array $productNames)
+    {
+        $productsList = $this->getDocument()->find('css', '#products');
+        $products = $productsList->findAll('css','.column  .content > .sylius-product-name');
+
+        foreach ($productNames as $key => $value) {
+            if($products[$key]->getText() !== $value) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

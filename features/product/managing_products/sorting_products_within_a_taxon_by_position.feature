@@ -46,10 +46,3 @@ Feature: Sorting listed products from a taxon by position
         And I start sorting products by position
         Then I should see 3 products in the list
         And they should have order like "Small pug", "Young pug" and "Old pug"
-
-    @ui @javascript
-    Scenario: Changing order of the products by dragging
-        When I am browsing products from "Soft Toys" taxon
-        And I move product "Small pug" before product "Young pug"
-        Then I should see 3 products in the list
-        And they should have order like "Old pug", "Small pug" and "Young pug"

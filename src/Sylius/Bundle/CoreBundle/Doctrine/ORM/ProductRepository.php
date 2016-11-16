@@ -39,8 +39,8 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
 
         if (null !== $taxonId) {
             $queryBuilder
-                ->innerJoin('o.productTaxons', 'productTaxons')
-                ->andWhere('productTaxons.taxon = :taxonId')
+                ->innerJoin('o.productTaxons', 'productTaxon')
+                ->andWhere('productTaxon.taxon = :taxonId')
                 ->setParameter('taxonId', $taxonId)
             ;
         }
@@ -56,10 +56,10 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->innerJoin('o.productTaxons', 'productTaxons')
+            ->innerJoin('o.productTaxons', 'productTaxon')
             ->innerJoin('o.channels', 'channel')
             ->andWhere('translation.locale = :locale')
-            ->andWhere('productTaxons.taxon = :taxonId')
+            ->andWhere('productTaxon.taxon = :taxonId')
             ->andWhere('channel = :channel')
             ->andWhere('o.enabled = true')
             ->setParameter('locale', $locale)

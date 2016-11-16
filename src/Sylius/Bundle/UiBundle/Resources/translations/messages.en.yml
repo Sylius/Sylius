@@ -562,7 +562,6 @@ sylius:
         placed_an_order: 'You have successfully placed an order.'
         placed_at: 'Placed at'
         please_sign_in: 'Please sign in'
-        position: 'Position'
         postcode: 'Postcode'
         powered_by: 'Powered by'
         preferences: 'Preferences'

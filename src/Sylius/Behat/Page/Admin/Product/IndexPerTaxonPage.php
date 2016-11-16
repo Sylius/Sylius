@@ -50,9 +50,9 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
 
         $productsRow->find('css', 'button:contains("Change position")')->press();
 
-        $productTaxonId = $productsRow->find('css', '.position')->getAttribute('data-id');
+        $productTaxonId = $this->getElement('position_input_field')->getAttribute('data-id');
 
-        $this->getElement('position_input_field', ['%product_taxon_id%' => $productTaxonId])->setValue($position);
+        $this->getElement('position_input_field')->setValue($position);
 
         $this->getDocument()->waitFor(5, function () use ($productTaxonId){
             return 'hidden' === $this->getDocument()->find('css', sprintf('input[data-id=%s]', $productTaxonId))->getAttribute('type');
@@ -86,20 +86,10 @@ JS;
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
-    {
-        return sprintf('sylius_admin_product_index_per_taxon');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'table' => '.table',
-            'change_position_button' => 'button:contains("Change position")',
-            'position_input_field' => 'input[data-id="%product_taxon_id%"]'
+            'position_input_field' => '.position  input[type="text"]',
         ]);
     }
 
