@@ -16,6 +16,8 @@ use Sylius\Component\Payment\Model\PaymentMethod;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
+ * @mixin PaymentMethod
+ * 
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class PaymentMethodSpec extends ObjectBehavior
@@ -101,6 +103,17 @@ final class PaymentMethodSpec extends ObjectBehavior
     {
         $this->setEnvironment('dev');
         $this->getEnvironment()->shouldReturn('dev');
+    }
+
+    function it_has_no_position_by_default()
+    {
+        $this->getPosition()->shouldReturn(null);
+    }
+
+    function its_position_is_mutable()
+    {
+        $this->setPosition(10);
+        $this->getPosition()->shouldReturn(10);
     }
 
     function it_is_enabled_by_default()
