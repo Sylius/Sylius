@@ -160,8 +160,8 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then the shipment method :shipmentMethod should appear in the registry
-     * @Then the shipment method :shipmentMethod should be in the registry
+     * @Then the shipping method :shipmentMethod should appear in the registry
+     * @Then the shipping method :shipmentMethod should be in the registry
      */
     public function theShipmentMethodShouldAppearInTheRegistry($shipmentMethodName)
     {
