@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Product\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
 use Sylius\Component\Product\Generator\ProductVariantGenerator;
 use Sylius\Component\Product\Generator\ProductVariantGeneratorInterface;
@@ -26,9 +27,11 @@ use Sylius\Component\Product\Model\ProductVariantInterface;
  */
 final class ProductVariantGeneratorSpec extends ObjectBehavior
 {
-    function let(ProductVariantFactoryInterface $productVariantFactory)
-    {
-        $this->beConstructedWith($productVariantFactory);
+    function let(
+        ProductVariantFactoryInterface $productVariantFactory,
+        ProductVariantsParityCheckerInterface $variantsParityChecker
+    ) {
+        $this->beConstructedWith($productVariantFactory, $variantsParityChecker);
     }
 
     function it_is_initializable()
@@ -55,7 +58,8 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         ProductOptionValueInterface $redColor,
         ProductOptionValueInterface $whiteColor,
         ProductVariantFactoryInterface $productVariantFactory,
-        ProductVariantInterface $permutationVariant
+        ProductVariantInterface $permutationVariant,
+        ProductVariantsParityCheckerInterface $variantsParityChecker
     ) {
         $productVariable->hasOptions()->willReturn(true);
 
@@ -67,10 +71,42 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         $whiteColor->getId()->willReturn('white2');
         $redColor->getId()->willReturn('red3');
 
+        $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(false);
+
         $productVariantFactory->createForProduct($productVariable)->willReturn($permutationVariant);
 
         $permutationVariant->addOptionValue(Argument::type(ProductOptionValueInterface::class))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
+
+        $this->generate($productVariable);
+    }
+
+    function it_does_not_generate_variant_if_given_variant_exists(
+        ProductInterface $productVariable,
+        ProductOptionInterface $colorOption,
+        ProductOptionValueInterface $blackColor,
+        ProductOptionValueInterface $redColor,
+        ProductOptionValueInterface $whiteColor,
+        ProductVariantFactoryInterface $productVariantFactory,
+        ProductVariantInterface $permutationVariant,
+        ProductVariantsParityCheckerInterface $variantsParityChecker
+    ) {
+        $productVariable->hasOptions()->willReturn(true);
+
+        $productVariable->getOptions()->willReturn([$colorOption]);
+
+        $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
+
+        $blackColor->getId()->willReturn('black1');
+        $whiteColor->getId()->willReturn('white2');
+        $redColor->getId()->willReturn('red3');
+
+        $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(true);
+
+        $productVariantFactory->createForProduct($productVariable)->willReturn($permutationVariant);
+
+        $permutationVariant->addOptionValue(Argument::type(ProductOptionValueInterface::class))->shouldBeCalled();
+        $productVariable->addVariant($permutationVariant)->shouldNotBeCalled();
 
         $this->generate($productVariable);
     }
@@ -86,7 +122,8 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         ProductOptionValueInterface $smallSize,
         ProductOptionValueInterface $whiteColor,
         ProductVariantFactoryInterface $productVariantFactory,
-        ProductVariantInterface $permutationVariant
+        ProductVariantInterface $permutationVariant,
+        ProductVariantsParityCheckerInterface $variantsParityChecker
     ) {
         $productVariable->hasOptions()->willReturn(true);
 
@@ -101,6 +138,8 @@ final class ProductVariantGeneratorSpec extends ObjectBehavior
         $smallSize->getId()->willReturn('small4');
         $mediumSize->getId()->willReturn('medium5');
         $largeSize->getId()->willReturn('large6');
+
+        $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(false);
 
         $productVariantFactory->createForProduct($productVariable)->willReturn($permutationVariant);
 

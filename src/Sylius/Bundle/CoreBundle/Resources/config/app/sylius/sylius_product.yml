@@ -20,6 +20,7 @@ sylius_product:
                 repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductVariantType
+                    generation: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductVariantGenerationType
         product_option:
             classes:
                 repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository

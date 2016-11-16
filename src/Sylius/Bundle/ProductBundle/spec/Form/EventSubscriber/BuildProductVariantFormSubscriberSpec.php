@@ -41,7 +41,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
         );
     }
 
-    function it_adds_options_on_pre_set_data_event(
+    function it_adds_options_on_pre_set_data_event_with_configurable_options(
         FormEvent $event,
         FormFactoryInterface $factory,
         FormInterface $form,
@@ -66,6 +66,43 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
             [
                 'options' => [$options],
                 'auto_initialize' => false,
+                'disabled' => false,
+            ]
+        )->willReturn($optionsForm);
+
+        $form->add($optionsForm)->shouldBeCalled();
+
+        $this->preSetData($event);
+    }
+
+    function it_adds_options_on_pre_set_data_event_without_configurable_options(
+        FormEvent $event,
+        FormFactoryInterface $factory,
+        FormInterface $form,
+        FormInterface $optionsForm,
+        ProductInterface $variable,
+        ProductOptionInterface $options,
+        ProductOptionValueInterface $optionValue,
+        ProductVariantInterface $variant
+    ) {
+        $this->beConstructedWith($factory, true);
+
+        $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($variant);
+
+        $variant->getProduct()->willReturn($variable);
+        $variant->getOptionValues()->willReturn([$optionValue]);
+        $variable->getOptions()->willReturn([$options]);
+        $variable->hasOptions()->willReturn(true);
+
+        $factory->createNamed(
+            'optionValues',
+            'sylius_product_option_value_collection',
+            [$optionValue],
+            [
+                'options' => [$options],
+                'auto_initialize' => false,
+                'disabled' => true,
             ]
         )->willReturn($optionsForm);
 

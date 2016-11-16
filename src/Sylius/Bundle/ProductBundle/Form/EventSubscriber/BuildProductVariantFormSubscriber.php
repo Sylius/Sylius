@@ -19,6 +19,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class BuildProductVariantFormSubscriber implements EventSubscriberInterface
 {
@@ -28,11 +29,18 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
     private $factory;
 
     /**
-     * @param FormFactoryInterface $factory
+     * @var bool
      */
-    public function __construct(FormFactoryInterface $factory)
+    private $disabled;
+
+    /**
+     * @param FormFactoryInterface $factory
+     * @param bool $disabled
+     */
+    public function __construct(FormFactoryInterface $factory, $disabled = false)
     {
         $this->factory = $factory;
+        $this->disabled = $disabled;
     }
 
     /**
@@ -65,6 +73,7 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
         }
 
         $form->add($this->factory->createNamed('optionValues', 'sylius_product_option_value_collection', $productVariant->getOptionValues(), [
+            'disabled' => $this->disabled,
             'options' => $product->getOptions(),
             'auto_initialize' => false,
         ]));

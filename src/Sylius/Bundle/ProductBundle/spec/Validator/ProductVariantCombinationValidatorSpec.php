@@ -11,11 +11,11 @@
 
 namespace spec\Sylius\Bundle\ProductBundle\Validator;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination;
 use Sylius\Bundle\ProductBundle\Validator\ProductVariantCombinationValidator;
+use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
@@ -24,8 +24,9 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
 {
-    function let(ExecutionContextInterface $context)
+    function let(ExecutionContextInterface $context, ProductVariantsParityCheckerInterface $variantsParityChecker)
     {
+        $this->beConstructedWith($variantsParityChecker);
         $this->initialize($context);
     }
 
@@ -39,10 +40,33 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
         $this->shouldImplement(ConstraintValidator::class);
     }
 
-    function it_does_not_add_violation_if_variable_does_not_have_options(
+    function it_does_not_add_violation_if_product_does_not_have_options(
         ExecutionContextInterface $context,
         ProductInterface $product,
-        ProductVariantInterface $variant
+        ProductVariantInterface $variant,
+        ProductVariantsParityCheckerInterface $variantsParityChecker
+    ) {
+        $constraint = new ProductVariantCombination([
+            'message' => 'Variant with given options already exists',
+        ]);
+
+        $variant->getProduct()->willReturn($product);
+
+        $product->hasVariants()->willReturn(true);
+        $product->hasOptions()->willReturn(false);
+
+        $variantsParityChecker->checkParity($variant, $product)->willReturn(false);
+
+        $context->addViolation(Argument::any())->shouldNotBeCalled();
+
+        $this->validate($variant, $constraint);
+    }
+
+    function it_does_not_add_violation_if_product_does_not_have_variants(
+        ExecutionContextInterface $context,
+        ProductInterface $product,
+        ProductVariantInterface $variant,
+        ProductVariantsParityCheckerInterface $variantsParityChecker
     ) {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',
@@ -55,48 +79,27 @@ final class ProductVariantCombinationValidatorSpec extends ObjectBehavior
 
         $context->addViolation(Argument::any())->shouldNotBeCalled();
 
-        $this->validate($variant, $constraint);
-    }
-
-    function it_does_not_add_violation_if_product_does_not_have_variants(
-        ExecutionContextInterface $context,
-        ProductInterface $variable,
-        ProductVariantInterface $variant
-    ) {
-        $constraint = new ProductVariantCombination([
-            'message' => 'Variant with given options already exists',
-        ]);
-
-        $variant->getProduct()->willReturn($variable);
-
-        $variable->hasVariants()->willReturn(true);
-        $variable->hasOptions()->willReturn(false);
-
-        $context->addViolation(Argument::any())->shouldNotBeCalled();
+        $variantsParityChecker->checkParity($variant, $product)->willReturn(false);
 
         $this->validate($variant, $constraint);
     }
 
     function it_adds_violation_if_variant_with_given_same_options_already_exists(
         ExecutionContextInterface $context,
-        ProductInterface $variable,
-        ProductOptionValueInterface $optionValue,
-        ProductVariantInterface $existingVariant,
-        ProductVariantInterface $variant
+        ProductInterface $product,
+        ProductVariantInterface $variant,
+        ProductVariantsParityCheckerInterface $variantsParityChecker
     ) {
         $constraint = new ProductVariantCombination([
             'message' => 'Variant with given options already exists',
         ]);
 
-        $variant->getProduct()->willReturn($variable);
+        $variant->getProduct()->willReturn($product);
 
-        $variant->getOptionValues()->willReturn(new ArrayCollection([$optionValue->getWrappedObject()]));
+        $product->hasVariants()->willReturn(true);
+        $product->hasOptions()->willReturn(true);
 
-        $existingVariant->hasOptionValue($optionValue)->willReturn(true);
-
-        $variable->hasVariants()->willReturn(true);
-        $variable->hasOptions()->willReturn(true);
-        $variable->getVariants()->willReturn([$existingVariant]);
+        $variantsParityChecker->checkParity($variant, $product)->willReturn(true);
 
         $context->addViolation('Variant with given options already exists', Argument::any())->shouldBeCalled();
 

@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Sylius\Bundle\ProductBundle\Form\EventSubscriber\BuildProductVariantFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -21,36 +22,19 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ProductVariantGenerationType extends AbstractResourceType
 {
     /**
-     * @var EventSubscriberInterface
-     */
-    private $generateProductVariantsSubscriber;
-
-    /**
-     * @param string $dataClass
-     * @param string[] $validationGroups
-     * @param EventSubscriberInterface $generateProductVariants
-     */
-    public function __construct($dataClass, $validationGroups, EventSubscriberInterface $generateProductVariants)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->generateProductVariantsSubscriber = $generateProductVariants;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('variants', 'collection', [
-                'type' => 'sylius_product_variant',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
+            ->add('name', 'text', [
+                'required' => false,
+                'label' => 'sylius.form.variant.name',
             ])
-            ->addEventSubscriber($this->generateProductVariantsSubscriber);
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
+
+        $builder->addEventSubscriber(new BuildProductVariantFormSubscriber($builder->getFormFactory(), true));
     }
 
     /**

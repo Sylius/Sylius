@@ -157,6 +157,7 @@
             <argument type="service" id="sylius.behat.page.admin.product_variant.create" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.index" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.update" />
+            <argument type="service" id="sylius.behat.page.admin.product_variant.generate" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="fob.context_service" />

@@ -19,6 +19,7 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -103,7 +104,7 @@ final class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ProductType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('variant_generation')->defaultValue(ProductVariantGenerationType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('generate_variants')->defaultValue(ProductGenerateVariantsType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('from_identifier')->defaultValue(ResourceFromIdentifierType::class)->cannotBeEmpty()->end()
                                             ->end()
@@ -118,7 +119,7 @@ final class Configuration implements ConfigurationInterface
                                             ->defaultValue(['sylius'])
                                             ->cannotBeEmpty()
                                         ->end()
-                                        ->arrayNode('variant_generation')
+                                        ->arrayNode('generate_variants')
                                             ->prototype('scalar')->end()
                                             ->defaultValue(['sylius'])
                                             ->cannotBeEmpty()
@@ -175,6 +176,7 @@ final class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ProductVariantType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('generation')->defaultValue(ProductVariantGenerationType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('from_identifier')->defaultValue(ResourceFromIdentifierType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
