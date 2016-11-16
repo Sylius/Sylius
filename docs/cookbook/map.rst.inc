@@ -3,6 +3,7 @@
 * :doc:`/cookbook/custom-model`
 * :doc:`/cookbook/custom-email`
 * :doc:`/cookbook/custom-promotion-rule`
+* :doc:`/cookbook/custom-promotion-action`
 * :doc:`/cookbook/paypal`
 * :doc:`/cookbook/stripe`
 * :doc:`/cookbook/api`
