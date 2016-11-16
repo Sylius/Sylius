@@ -124,13 +124,20 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should see the product attribute :attributeName with value :AttributeValue
+     * @Then I should see the product attribute :attributeName with value :expectedAttribute
      */
-    public function iShouldSeeTheProductAttributeWithValue($attributeName, $AttributeValue)
+    public function iShouldSeeTheProductAttributeWithValue($attributeName, $expectedAttribute)
     {
-        Assert::true(
-            $this->showPage->hasAttributeWithValue($attributeName, $AttributeValue),
-            sprintf('Product should have attribute %s with value %s, but it does not.', $attributeName, $AttributeValue)
+        $certainAttribute = $this->showPage->getAttributeByName($attributeName);
+        Assert::same(
+            $certainAttribute,
+            $expectedAttribute,
+            sprintf(
+                'Product should have attribute %s with value %s, but has %s.',
+                $attributeName,
+                $expectedAttribute,
+                $certainAttribute
+            )
         );
     }
 

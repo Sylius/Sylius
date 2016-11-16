@@ -13,6 +13,8 @@ sylius:
     customer:
         currency_code:
             not_valid: The currency code you entered is invalid.
+    cart_item:
+        not_available: 'name does not have sufficient stock.'
     order:
         currency_code:
             not_valid: The currency code you entered is invalid.

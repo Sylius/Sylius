@@ -8,7 +8,7 @@ $(document).ready(function() {
 });
 
 function handleProductOptionsChange() {
-    $('[name*="sylius_cart_item[variant]"]').on('change', function() {
+    $('[name*="sylius_add_cart_item[cartItem][variant]"]').on('change', function() {
         $selector = '';
 
         $('#sylius-product-adding-to-cart select').each(function() {
@@ -26,7 +26,7 @@ function handleProductOptionsChange() {
 }
 
 function handleProductVariantsChange() {
-    $('[name="sylius_cart_item[variant]"]').on('change', function() {
+    $('[name="sylius_add_cart_item[cartItem][variant]"]').on('change', function() {
         $price = $(this).parents('tr').find('td:nth-child(2)').text();
         $('#product-price').text($price);
     });

@@ -12,7 +12,7 @@
             {% include '@SyliusShop/Product/Show/_options.html.twig' %}
         {% endif %}
     {% endif %}
-    {{ form_row(form.quantity) }}
+    {{ form_row(form.cartItem.quantity) }}
     <button type="submit" class="ui huge primary icon labeled button"><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
     {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}

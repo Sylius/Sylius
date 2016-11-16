@@ -45,7 +45,7 @@ sylius_shop_cart_item_add:
                 method: createForProduct
                 arguments: [expr:service('sylius.repository.product').find($productId)]
             form:
-                type: sylius_cart_item
+                type: sylius_add_cart_item
                 options:
                     product: expr:service('sylius.repository.product').find($productId)
             template: $template
