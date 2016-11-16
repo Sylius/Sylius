@@ -52,7 +52,6 @@ The types of rules that are configured in **Sylius** by default are:
 * **Item Total** - checks if items in the cart cost a given amount of money,
 * **Taxon** - checks if there is at least one item from given taxons in the cart,
 * **Items From Taxon Total** - checks in the cart if items from a given taxon cost a given amount of money,
-* **Contains Taxon** - checks if there is a given amount of items from a given taxon in the cart,
 * **Nth Order** - checks if this is for example the second order made by the customer,
 * **Shipping Country** - checks if the order's shipping address is in a given country.
 

@@ -10,16 +10,6 @@ Feature: Adding a new promotion with rule
         And I am logged in as an administrator
 
     @ui @javascript
-    Scenario: Adding a new promotion with contains items from taxon rule
-        Given I want to create a new promotion
-        When I specify its code as "T_SHIRTS_PROMOTION"
-        And I name it "T-Shirts promotion"
-        And I add the "Contains number of items from taxon" rule configured with 4 "T-Shirts"
-        And I add it
-        Then I should be notified that it has been successfully created
-        And the "T-Shirts promotion" promotion should appear in the registry
-
-    @ui @javascript
     Scenario: Adding a new promotion with taxon rule
         Given I want to create a new promotion
         When I specify its code as "HOLIDAY_SALE"

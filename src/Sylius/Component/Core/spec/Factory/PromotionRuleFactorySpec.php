@@ -91,15 +91,6 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
         $this->createItemsFromTaxonTotal('spears', 1000)->shouldReturn($rule);
     }
 
-    function it_creates_a_contains_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
-    {
-        $decoratedFactory->createNew()->willReturn($rule);
-        $rule->setType(ContainsTaxonRuleChecker::TYPE)->shouldBeCalled();
-        $rule->setConfiguration(['taxon' => 'bows', 'count' => 10])->shouldBeCalled();
-
-        $this->createContainsTaxon('bows', 10)->shouldReturn($rule);
-    }
-
     function it_creates_a_nth_order_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);

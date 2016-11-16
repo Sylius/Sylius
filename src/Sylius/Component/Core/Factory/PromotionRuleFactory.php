@@ -12,7 +12,6 @@
 namespace Sylius\Component\Core\Factory;
 
 use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
@@ -95,19 +94,6 @@ class PromotionRuleFactory implements PromotionRuleFactoryInterface
         $rule = $this->createNew();
         $rule->setType(TotalOfItemsFromTaxonRuleChecker::TYPE);
         $rule->setConfiguration(['taxon' => $taxonCode, 'amount' => $amount]);
-
-        return $rule;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createContainsTaxon($taxonCode, $count)
-    {
-        /** @var PromotionRuleInterface $rule */
-        $rule = $this->createNew();
-        $rule->setType(ContainsTaxonRuleChecker::TYPE);
-        $rule->setConfiguration(['taxon' => $taxonCode, 'count' => $count]);
 
         return $rule;
     }

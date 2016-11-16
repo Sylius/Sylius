@@ -143,16 +143,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the "Contains number of items from taxon" rule configured with :count :taxonName
-     */
-    public function iAddTheContainsTaxonRuleConfiguredWith($count, $taxonName)
-    {
-        $this->createPage->addRule('Contains number of items from taxon');
-        $this->createPage->selectRuleOption('Taxon', $taxonName);
-        $this->createPage->fillRuleOption('Count', $count);
-    }
-
-    /**
      * @Given I add the "Taxon" rule configured with :firstTaxon
      * @Given I add the "Taxon" rule configured with :firstTaxon and :secondTaxon
      */

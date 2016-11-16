@@ -33,10 +33,6 @@
         <service id="sylius.promotion_rule_checker.taxon" class="Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="taxon" label="Taxon" />
         </service>
-        <service id="sylius.promotion_rule_checker.contains_taxon" class="Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker">
-            <argument type="service" id="sylius.repository.taxon" />
-            <tag name="sylius.promotion_rule_checker" type="contains_taxon" label="Contains number of items from taxon" />
-        </service>
         <service id="sylius.promotion_rule_checker.total_of_items_from_taxon" class="Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker">
             <argument type="service" id="sylius.repository.taxon" />
             <tag name="sylius.promotion_rule_checker" type="total_of_items_from_taxon" label="Total price of items from taxon" />

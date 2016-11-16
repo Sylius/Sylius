@@ -432,20 +432,6 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off if order contains (\d+) products (classified as "[^"]+")$/
-     */
-    public function thePromotionGivesOffIfOrderContainsNumberOfProductsClassifiedAs(
-        PromotionInterface $promotion,
-        $discount,
-        $count,
-        TaxonInterface $taxon
-    ) {
-        $rule = $this->ruleFactory->createContainsTaxon($taxon->getCode(), $count);
-
-        $this->createFixedPromotion($promotion, $discount, [], $rule);
-    }
-
-    /**
      * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off customer's (\d)(?:st|nd|rd|th) order$/
      */
     public function itGivesFixedOffCustomersNthOrder(PromotionInterface $promotion, $discount, $nth)
@@ -463,20 +449,6 @@ final class PromotionContext implements Context
         $rule = $this->ruleFactory->createNthOrder((int) $nth);
 
         $this->createPercentagePromotion($promotion, $discount, [], $rule);
-    }
-
-    /**
-     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") if an order contains any product (classified as "[^"]+")$/
-     */
-    public function itGivesPercentageOffOnEveryProductClassifiedAsIfAnOrderContainsAnyProductClassifiedAs(
-        PromotionInterface $promotion,
-        $discount,
-        TaxonInterface $discountTaxon,
-        TaxonInterface $targetTaxon
-    ) {
-        $rule = $this->ruleFactory->createContainsTaxon($targetTaxon->getCode(), 1);
-
-        $this->createUnitPercentagePromotion($promotion, $discount, $this->getTaxonFilterConfiguration([$discountTaxon->getCode()]), $rule);
     }
 
     /**
