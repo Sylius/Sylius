@@ -55,7 +55,7 @@ class UserController extends ResourceController
         $formType = isset($syliusConfiguration['form']) ? $syliusConfiguration['form'] : 'sylius_user_change_password';
         $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request->request->get($form->getName()), !$request->isMethod('PATCH'))->isValid()) {
             return $this->handleChangePassword($request, $configuration, $user, $changePassword->getNewPassword());
         }
 
@@ -121,7 +121,7 @@ class UserController extends ResourceController
         $formType = isset($syliusConfiguration['form']) ? $syliusConfiguration['form'] : 'sylius_user_reset_password';
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request->request->get($form->getName()), !$request->isMethod('PATCH'))->isValid()) {
             return $this->handleResetPassword($request, $configuration, $user, $passwordReset->getPassword());
         }
 
@@ -243,7 +243,7 @@ class UserController extends ResourceController
         $formType = isset($syliusConfiguration['form']) ? $syliusConfiguration['form'] : 'sylius_user_request_password_reset';
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request->request->get($form->getName()), !$request->isMethod('PATCH'))->isValid()) {
             $user = $this->repository->findOneByEmail($passwordReset->getEmail());
             if (null !== $user) {
                 $this->handleResetPasswordRequest($generator, $user, $senderEvent);

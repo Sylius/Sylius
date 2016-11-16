@@ -39,6 +39,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -377,7 +378,9 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
         $request->isMethod('POST')->willReturn(true);
-        $form->submit($request)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'])->willReturn($form);
         $form->isValid()->willReturn(false);
         $form->createView()->willReturn($formView);
 
@@ -427,7 +430,9 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
         $request->isMethod('POST')->willReturn(true);
-        $form->submit($request)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'])->willReturn($form);
         $form->isValid()->willReturn(false);
 
         $expectedView = View::create($form, 400);
@@ -472,7 +477,9 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
         $request->isMethod('POST')->willReturn(true);
-        $form->submit($request)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'])->willReturn($form);
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
@@ -527,7 +534,9 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
         $request->isMethod('POST')->willReturn(true);
-        $form->submit($request)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'])->willReturn($form);
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
@@ -581,7 +590,9 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
         $request->isMethod('POST')->willReturn(true);
-        $form->submit($request)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'])->willReturn($form);
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
@@ -634,7 +645,9 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resourceFormFactory->create($configuration, $newResource)->willReturn($form);
 
         $request->isMethod('POST')->willReturn(true);
-        $form->submit($request)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'])->willReturn($form);
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($newResource);
 
@@ -727,8 +740,9 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('GET');
-
-        $form->submit($request, true)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'], true)->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $expectedView = View::create()
@@ -779,8 +793,9 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('PUT');
-
-        $form->submit($request, true)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'], true)->willReturn($form);
 
         $form->isValid()->willReturn(false);
         $form->createView()->willReturn($formView);
@@ -830,8 +845,9 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $request->isMethod('PATCH')->willReturn(true);
         $request->getMethod()->willReturn('PATCH');
-
-        $form->submit($request, false)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'], false)->willReturn($form);
         $form->isValid()->willReturn(false);
 
         $expectedView = View::create($form, 400);
@@ -874,8 +890,9 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('PUT');
-
-        $form->submit($request, true)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'], true)->willReturn($form);
 
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
@@ -930,8 +947,9 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('PUT');
-
-        $form->submit($request, true)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'], true)->willReturn($form);
 
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
@@ -982,8 +1000,9 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('PUT');
-
-        $form->submit($request, true)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'], true)->willReturn($form);
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
@@ -1030,8 +1049,9 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('PUT');
-
-        $form->submit($request, true)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'], true)->willReturn($form);
         $form->isValid()->willReturn(true);
         $form->getData()->willReturn($resource);
 
@@ -1086,8 +1106,9 @@ final class ResourceControllerSpec extends ObjectBehavior
 
         $request->isMethod('PATCH')->willReturn(false);
         $request->getMethod()->willReturn('PUT');
-
-        $form->submit($request, true)->willReturn($form);
+        $request->request = new ParameterBag(['form' => ['key' => 'value']]);
+        $form->getName()->willReturn('form');
+        $form->submit(['key' => 'value'], true)->willReturn($form);
 
         $form->isSubmitted()->willReturn(true);
         $form->isValid()->willReturn(true);
