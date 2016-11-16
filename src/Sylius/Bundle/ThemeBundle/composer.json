@@ -27,6 +27,7 @@
     },
     "require-dev": {
         "sylius/settings-bundle": "^1.0",
+        "sylius/registry": "^1.0",
 
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",

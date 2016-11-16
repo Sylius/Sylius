@@ -89,7 +89,8 @@
         "phpspec/phpspec": "^3.1",
         "phpunit/phpunit": "^5.6",
         "se/selenium-server-standalone": "^2.52",
-        "stripe/stripe-php": "^4.0"
+        "stripe/stripe-php": "^4.0",
+        "sylius/settings-bundle": "^1.0@alpha"
     },
     "replace": {
         "sylius/addressing": "self.version",
@@ -124,7 +125,6 @@
         "sylius/registry": "self.version",
         "sylius/resource": "self.version",
         "sylius/resource-bundle": "self.version",
-        "sylius/settings-bundle": "self.version",
         "sylius/shipping": "self.version",
         "sylius/shipping-bundle": "self.version",
         "sylius/shop-bundle": "self.version",
