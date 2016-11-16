@@ -14,7 +14,7 @@ Feature: Adding a new promotion with rule
         Given I want to create a new promotion
         When I specify its code as "HOLIDAY_SALE"
         And I name it "Holiday sale"
-        And I add the "Taxon" rule configured with "T-Shirts" and "Mugs"
+        And I add the "Has at least one from taxons" rule configured with "T-Shirts" and "Mugs"
         And I add it
         Then I should be notified that it has been successfully created
         And the "Holiday sale" promotion should appear in the registry

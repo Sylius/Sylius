@@ -20,9 +20,9 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-final class TaxonRuleChecker implements RuleCheckerInterface
+final class HasTaxonRuleChecker implements RuleCheckerInterface
 {
-    const TYPE = 'taxon';
+    const TYPE = 'has_taxon';
 
     /**
      * {@inheritdoc}
@@ -54,6 +54,6 @@ final class TaxonRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_rule_taxon_configuration';
+        return 'sylius_promotion_rule_has_taxon_configuration';
     }
 }

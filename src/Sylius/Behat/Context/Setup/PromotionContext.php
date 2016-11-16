@@ -399,7 +399,7 @@ final class PromotionContext implements Context
         $discount,
         TaxonInterface $taxon
     ) {
-        $rule = $this->ruleFactory->createTaxon([$taxon->getCode()]);
+        $rule = $this->ruleFactory->createHasTaxon([$taxon->getCode()]);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
@@ -412,7 +412,7 @@ final class PromotionContext implements Context
         $discount,
         array $taxons
     ) {
-        $rule = $this->ruleFactory->createTaxon([$taxons[0]->getCode(), $taxons[1]->getCode()]);
+        $rule = $this->ruleFactory->createHasTaxon([$taxons[0]->getCode(), $taxons[1]->getCode()]);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
     }
@@ -516,7 +516,7 @@ final class PromotionContext implements Context
         $discountTaxonsCodes = [$discountTaxons[0]->getCode(), $discountTaxons[1]->getCode()];
         $targetTaxonsCodes = [$targetTaxons[0]->getCode(), $targetTaxons[1]->getCode()];
 
-        $rule = $this->ruleFactory->createTaxon($targetTaxonsCodes);
+        $rule = $this->ruleFactory->createHasTaxon($targetTaxonsCodes);
 
         $this->createUnitPercentagePromotion(
             $promotion,

@@ -143,12 +143,12 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the "Taxon" rule configured with :firstTaxon
-     * @Given I add the "Taxon" rule configured with :firstTaxon and :secondTaxon
+     * @Given I add the "Has at least one from taxons" rule configured with :firstTaxon
+     * @Given I add the "Has at least one from taxons" rule configured with :firstTaxon and :secondTaxon
      */
-    public function iAddTheTaxonRuleConfiguredWith(...$taxons)
+    public function iAddTheHasTaxonRuleConfiguredWith(...$taxons)
     {
-        $this->createPage->addRule('Taxon');
+        $this->createPage->addRule('Has at least one from taxons');
 
         foreach ($taxons as $taxon) {
             $this->createPage->selectRuleOption('Taxons', $taxon, true);

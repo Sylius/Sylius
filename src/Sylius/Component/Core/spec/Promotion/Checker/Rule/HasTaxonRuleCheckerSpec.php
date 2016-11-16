@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -26,11 +26,11 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class TaxonRuleCheckerSpec extends ObjectBehavior
+final class HasTaxonRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(TaxonRuleChecker::class);
+        $this->shouldHaveType(HasTaxonRuleChecker::class);
     }
 
     function it_is_a_rule_checker()
