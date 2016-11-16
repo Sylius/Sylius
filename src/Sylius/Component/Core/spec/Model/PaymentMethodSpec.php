@@ -14,45 +14,29 @@ namespace spec\Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ShippingMethod;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Core\Model\PaymentMethod;
+use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Model\PaymentMethod as BasePaymentMethod;
 
-final class ShippingMethodSpec extends ObjectBehavior
+/**
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ */
+final class PaymentMethodSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(ShippingMethod::class);
+        $this->shouldHaveType(PaymentMethod::class);
     }
 
-    function it_implements_a_shipping_method_interface()
+    function it_is_payment_method()
     {
-        $this->shouldImplement(ShippingMethodInterface::class);
+        $this->shouldHaveType(BasePaymentMethod::class);
     }
 
-    function it_extends_a_shipping_method()
+    function it_implements_payment_method_interface()
     {
-        $this->shouldHaveType(BaseShippingMethod::class);
-    }
-
-    function it_does_not_have_any_zone_defined_by_default()
-    {
-        $this->getZone()->shouldReturn(null);
-    }
-
-    function it_allows_defining_zone(ZoneInterface $zone)
-    {
-        $this->setZone($zone);
-        $this->getZone()->shouldReturn($zone);
-    }
-
-    function its_tax_category_is_mutable(TaxCategoryInterface $category)
-    {
-        $this->setTaxCategory($category);
-        $this->getTaxCategory()->shouldReturn($category);
+        $this->shouldImplement(PaymentMethodInterface::class);
     }
 
     function it_has_channels_collection(ChannelInterface $firstChannel, ChannelInterface $secondChannel)

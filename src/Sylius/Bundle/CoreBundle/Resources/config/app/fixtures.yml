@@ -22,15 +22,31 @@ sylius_fixtures:
                                 countries:
                                     - "US"
 
+                channel:
+                    options:
+                        custom:
+                            us_web_store:
+                                name: "US Web Store"
+                                code: "US_WEB"
+                                locales:
+                                    - "%locale%"
+                                currencies:
+                                    - "%currency%"
+                                enabled: true
+
                 payment_method:
                     options:
                         custom:
                             cash_on_delivery:
                                 code: "cash_on_delivery"
                                 name: "Cash on delivery"
+                                channels:
+                                    - "US_WEB"
                             bank_transfer:
                                 code: "bank_transfer"
                                 name: "Bank transfer"
+                                channels:
+                                    - "US_WEB"
                                 enabled: true
 
                 shipping_method:
@@ -40,30 +56,18 @@ sylius_fixtures:
                                 code: "ups"
                                 name: "UPS"
                                 enabled: true
+                                channels:
+                                    - "US_WEB"
                             dhl_express:
                                 code: "dhl_express"
                                 name: "DHL Express"
+                                channels:
+                                    - "US_WEB"
                             fedex:
                                 code: "fedex"
                                 name: "FedEx"
-
-                channel:
-                    options:
-                        custom:
-                            us_web_store:
-                                name: "US Web Store"
-                                locales:
-                                    - "%locale%"
-                                currencies:
-                                    - "%currency%"
-                                shipping_methods:
-                                    - "ups"
-                                    - "dhl_express"
-                                    - "fedex"
-                                payment_methods:
-                                    - "cash_on_delivery"
-                                    - "bank_transfer"
-                                enabled: true
+                                channels:
+                                    - "US_WEB"
 
                 regular_user:
                     name: "shop_user"

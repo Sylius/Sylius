@@ -416,39 +416,6 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I select the :shippingMethodName shipping method
-     */
-    public function iSelectTheShippingMethod($shippingMethodName)
-    {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->chooseShippingMethod($shippingMethodName);
-    }
-
-    /**
-     * @Then the :shippingMethodName shipping method should be available for the :channel channel
-     */
-    public function theShippingMethodShouldBeAvailableForTheChannel($shippingMethodName, ChannelInterface $channel)
-    {
-        $this->updatePage->open(['id' => $channel->getId()]);
-
-        Assert::true(
-            $this->updatePage->isShippingMethodChosen($shippingMethodName),
-            sprintf('Shipping method %s should be selected but it is not', $shippingMethodName)
-        );
-    }
-
-    /**
-     * @When I select the :paymentMethodName payment method
-     */
-    public function iSelectThePaymentMethod($paymentMethodName)
-    {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        $currentPage->choosePaymentMethod($paymentMethodName);
-    }
-
-    /**
      * @When I select the :taxZone as default tax zone
      */
     public function iSelectDefaultTaxZone($taxZone)
@@ -474,19 +441,6 @@ final class ManagingChannelsContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->chooseTaxCalculationStrategy($taxCalculationStrategy);
-    }
-
-    /**
-     * @Then the :paymentMethodName payment method should be available for the :channel channel
-     */
-    public function thePaymentMethodShouldBeAvailableForTheChannel($paymentMethodName, ChannelInterface $channel)
-    {
-        $this->updatePage->open(['id' => $channel->getId()]);
-
-        Assert::true(
-            $this->updatePage->isPaymentMethodChosen($paymentMethodName),
-            sprintf('Payment method %s should be selected, but it is not', $paymentMethodName)
-        );
     }
 
     /**

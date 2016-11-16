@@ -36,10 +36,18 @@ class PaymentMethodRepository extends BasePaymentMethodRepository implements Pay
      */
     public function findEnabledForChannel(ChannelInterface $channel)
     {
-        return $this->createQueryBuilder('o')
+        $queryBuilder = $this
+            ->createQueryBuilder('o')
             ->where('o.enabled = true')
-            ->andWhere('o IN (:paymentMethodsInChannel)')
-            ->setParameter('paymentMethodsInChannel', $channel->getPaymentMethods()->toArray())
+        ;
+
+        $queryBuilder
+            ->innerJoin('o.channels', 'channel')
+            ->andWhere($queryBuilder->expr()->eq('channel', ':channel'))
+            ->setParameter('channel', $channel)
+        ;
+
+        return $queryBuilder
             ->getQuery()
             ->getResult()
         ;

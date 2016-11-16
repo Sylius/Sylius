@@ -38,6 +38,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function chooseGateway($gateway);
 
     /**
+     * @param string $channelName
+     */
+    public function checkChannel($channelName);
+
+    /**
      * @param string $description
      * @param string $languageCode
      */

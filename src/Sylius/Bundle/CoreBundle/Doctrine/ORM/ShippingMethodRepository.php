@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Bundle\ShippingBundle\Doctrine\ORM\ShippingMethodRepository as BaseShippingMethodRepository;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
@@ -38,11 +39,9 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
      */
     public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel)
     {
-        return $this->createQueryBuilder('o')
-            ->where('o.enabled = true')
-            ->andWhere('o IN (:channelShippingMethods)')
+        return $this
+            ->getEnabledForChannelQueryBuilder($channel)
             ->andWhere('o.zone IN (:zones)')
-            ->setParameter('channelShippingMethods', $channel->getShippingMethods()->toArray())
             ->setParameter('zones', $zones)
             ->orderBy('o.position', 'asc')
             ->getQuery()
@@ -55,12 +54,31 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
      */
     public function findEnabledForChannel(ChannelInterface $channel)
     {
-        return $this->createQueryBuilder('o')
-            ->where('o.enabled = true')
-            ->andWhere('o IN (:channelShippingMethods)')
-            ->setParameter('channelShippingMethods', $channel->getShippingMethods()->toArray())
+        return $this
+            ->getEnabledForChannelQueryBuilder($channel)
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @param ChannelInterface $channel
+     *
+     * @return QueryBuilder
+     */
+    private function getEnabledForChannelQueryBuilder(ChannelInterface $channel)
+    {
+        $queryBuilder = $this
+            ->createQueryBuilder('o')
+            ->where('o.enabled = true')
+        ;
+
+        $queryBuilder
+            ->innerJoin($this->getPropertyName('channels'), 'channel')
+            ->andWhere($queryBuilder->expr()->eq('channel', ':channel'))
+            ->setParameter('channel', $channel)
+        ;
+
+        return $queryBuilder;
     }
 }

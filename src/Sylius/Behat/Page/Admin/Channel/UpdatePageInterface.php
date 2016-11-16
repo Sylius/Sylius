@@ -63,23 +63,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isCurrencyChosen($currencyCode);
 
     /**
-     * @param string $shippingMethod
-     */
-    public function chooseShippingMethod($shippingMethod);
-
-    /**
-     * @param string $shippingMethod
-     *
-     * @return bool
-     */
-    public function isShippingMethodChosen($shippingMethod);
-
-    /**
-     * @param string $paymentMethod
-     */
-    public function choosePaymentMethod($paymentMethod);
-
-    /**
      * @param string $taxZone
      */
     public function chooseDefaultTaxZone($taxZone);
@@ -88,13 +71,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $taxCalculationStrategy
      */
     public function chooseTaxCalculationStrategy($taxCalculationStrategy);
-
-    /**
-     * @param string $paymentMethod
-     *
-     * @return bool
-     */
-    public function isPaymentMethodChosen($paymentMethod);
 
     /**
      * @param string $taxZone

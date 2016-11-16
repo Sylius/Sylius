@@ -17,6 +17,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
@@ -255,8 +256,7 @@ final class ShippingContext implements Context
         $shippingMethod->setEnabled($enabled);
 
         if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {
-            $channel = $this->sharedStorage->get('channel');
-            $channel->addShippingMethod($shippingMethod);
+            $shippingMethod->addChannel($this->sharedStorage->get('channel'));
         }
 
         $this->shippingMethodRepository->add($shippingMethod);

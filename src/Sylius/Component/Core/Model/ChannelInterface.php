@@ -17,8 +17,6 @@ use Sylius\Component\Currency\Model\CurrenciesAwareInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Model\LocalesAwareInterface;
-use Sylius\Component\Payment\Model\PaymentMethodsAwareInterface;
-use Sylius\Component\Shipping\Model\ShippingMethodsAwareInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,9 +24,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodsAwareInterface;
 interface ChannelInterface extends
     BaseChannelInterface,
     CurrenciesAwareInterface,
-    LocalesAwareInterface,
-    PaymentMethodsAwareInterface,
-    ShippingMethodsAwareInterface
+    LocalesAwareInterface
 {
     /**
      * @return LocaleInterface

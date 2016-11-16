@@ -130,6 +130,8 @@ sylius:
             total_of_items_from_taxon:
                 taxon: Taxon
                 amount: Amount
+        payment_method:
+            channels: Channels
 
     installer:
         extensions:

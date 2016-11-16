@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <!--
 
@@ -16,19 +16,11 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\ShippingMethod" table="sylius_shipping_method">
-        <many-to-one field="zone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
-            <join-column name="zone_id" referenced-column-name="id" nullable="false" />
-        </many-to-one>
-
-        <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">
-            <join-column name="tax_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
-        </many-to-one>
-
+    <mapped-superclass name="Sylius\Component\Core\Model\PaymentMethod" table="sylius_payment_method">
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
-            <join-table name="sylius_shipping_method_channels">
+            <join-table name="sylius_payment_method_channels">
                 <join-columns>
-                    <join-column name="shipping_method_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
+                    <join-column name="payment_method_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
