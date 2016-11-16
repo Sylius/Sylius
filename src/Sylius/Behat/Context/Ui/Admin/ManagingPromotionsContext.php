@@ -20,6 +20,7 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -58,12 +59,18 @@ final class ManagingPromotionsContext implements Context
     private $notificationChecker;
 
     /**
+     * @var CurrencyProviderInterface
+     */
+    private $currencyProvider;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
+     * @param CurrencyProviderInterface $currencyProvider
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -71,7 +78,8 @@ final class ManagingPromotionsContext implements Context
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        CurrencyProviderInterface $currencyProvider
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
@@ -79,10 +87,11 @@ final class ManagingPromotionsContext implements Context
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
+        $this->currencyProvider = $currencyProvider;
     }
 
     /**
-     * @Given I want to create a new promotion
+     * @When I want to create a new promotion
      */
     public function iWantToCreateANewPromotion()
     {
@@ -166,12 +175,42 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)"$/
+     * @When /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddTheActionConfiguredWithAmount($actionType, $amount)
     {
         $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOption('Amount', $amount);
+        $this->createPage->fillActionOption('Base amount', $amount);
+    }
+
+    /**
+     * @When I add the :actionType action
+     */
+    public function iAddTheAction($actionType)
+    {
+        $this->createPage->addAction($actionType);
+    }
+
+    /**
+     * @When /^it is(?:| also) configured with base amount of "(?:€|£|\$)([^"]+)"$/
+     */
+    public function itIsConfiguredWithBaseAmount($amount)
+    {
+        $this->createPage->fillActionOption('Base amount', $amount);
+    }
+
+    /**
+     * @When /^it is(?:| also) configured with "([^"]+)" amount of "(?:€|£|\$)([^"]+)"$/
+     */
+    public function itIsConfiguredWithAmount($currencyCode, $amount)
+    {
+        if ($this->currencyProvider->getDefaultCurrencyCode() === $currencyCode) {
+            $this->itIsConfiguredWithBaseAmount($amount);
+
+            return;
+        }
+
+        $this->createPage->fillActionOption($currencyCode, $amount);
     }
 
     /**

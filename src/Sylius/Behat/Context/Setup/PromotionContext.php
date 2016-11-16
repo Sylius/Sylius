@@ -250,6 +250,22 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(this promotion) gives ("(?:€|£|\$)[^"]+") in base currency or ("(?:€|£|\$)[^"]+") in "([^"]+)" discount to every order$/
+     */
+    public function itGivesFixedDiscountInDifferentCurrencyToEveryOrder(
+        PromotionInterface $promotion,
+        $baseDiscount,
+        $currencyDiscount,
+        $currencyCode
+    ) {
+        $this->createFixedPromotion($promotion, $baseDiscount, [
+            'amounts' => [
+                $currencyCode => $currencyDiscount,
+            ],
+        ]);
+    }
+
+    /**
      * @Given /^([^"]+) gives ("[^"]+%") discount to every order$/
      */
     public function itGivesPercentageDiscountToEveryOrder(PromotionInterface $promotion, $discount)
@@ -346,6 +362,22 @@ final class PromotionContext implements Context
         $amount
     ) {
         $this->createUnitFixedPromotion($promotion, $discount, $this->getPriceRangeFilterConfiguration($amount));
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") in base currency or ("(?:€|£|\$)[^"]+") in "([^"]+)" off on every product with minimum price at ("(?:€|£|\$)[^"]+")$/
+     */
+    public function thisPromotionGivesInDifferentCurrenciesOffOnEveryProductWithMinimumPriceAt(
+        PromotionInterface $promotion,
+        $baseDiscount,
+        $currencyDiscount,
+        $currencyCode,
+        $minimumPrice
+    ) {
+        $configuration = $this->getPriceRangeFilterConfiguration($minimumPrice);
+        $configuration['amounts'] = [$currencyCode => $currencyDiscount];
+
+        $this->createUnitFixedPromotion($promotion, $baseDiscount, $configuration);
     }
 
     /**
@@ -668,7 +700,7 @@ final class PromotionContext implements Context
      */
     private function persistPromotion(PromotionInterface $promotion, PromotionActionInterface $action, array $configuration, PromotionRuleInterface $rule = null)
     {
-        $configuration = array_merge($configuration, $action->getConfiguration());
+        $configuration = array_merge($action->getConfiguration(), $configuration);
         $action->setConfiguration($configuration);
 
         $promotion->addAction($action);
