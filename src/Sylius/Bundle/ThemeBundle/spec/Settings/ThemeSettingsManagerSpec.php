@@ -23,6 +23,8 @@ use Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProviderInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
+ * @require Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface
+ *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeSettingsManagerSpec extends ObjectBehavior
