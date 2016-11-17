@@ -99,12 +99,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function getFirstLeafName(TaxonInterface $parentTaxon = null);
 
     /**
-     * @param TaxonInterface $draggableTaxon
-     * @param TaxonInterface $targetTaxon
-     */
-    public function insertBefore(TaxonInterface $draggableTaxon, TaxonInterface $targetTaxon);
-
-    /**
      * @param TaxonInterface|null $parentTaxon
      *
      * @return NodeElement[]

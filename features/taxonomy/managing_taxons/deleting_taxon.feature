@@ -7,7 +7,7 @@ Feature: Deleting a taxon
     Background:
         Given I am logged in as an administrator
 
-    @ui @javascript
+    @ui
     Scenario: Deleted taxon should disappear from the registry
         Given the store classifies its products as "T-Shirts"
         When I delete taxon named "T-Shirts"

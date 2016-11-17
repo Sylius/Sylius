@@ -67,15 +67,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $leaves = $this->getLeaves();
         foreach ($leaves as $leaf) {
             if ($leaf->getText() === $name) {
-                $leaf = $leaf->getParent();
-                $menuButton = $leaf->find('css', '.wrench');
-                $menuButton->click();
-                $deleteButton = $leaf->find('css', '.sylius-delete-resource');
-                $deleteButton->click();
-
-                $deleteButton->waitFor(5, function () use ($leaf) {
-                    return null === $leaf->find('css', '.sylius-delete-resource');
-                });
+                $leaf->getParent()->find('css', '.ui.red.button')->press();
 
                 return;
             }
@@ -157,30 +149,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * {@inheritDoc}
-     */
-    public function insertBefore(TaxonInterface $draggableTaxon, TaxonInterface $targetTaxon)
-    {
-        $seleniumDriver = $this->getSeleniumDriver();
-        $draggableTaxonLocator = sprintf('.item[data-id="%s"]', $draggableTaxon->getId());
-        $targetTaxonLocator = sprintf('.item[data-id="%s"]', $targetTaxon->getId());
-
-        $script = <<<JS
-(function ($) {
-    $('$draggableTaxonLocator').simulate('drag-n-drop',{
-        dragTarget: $('$targetTaxonLocator'),
-        interpolation: {stepWidth: 10, stepDelay: 30} 
-    });    
-})(jQuery);
-JS;
-
-        $seleniumDriver->executeScript($script);
-        $this->getDocument()->waitFor(5, function () use ($draggableTaxonLocator) {
-            return !$this->getDocument()->find('css', $draggableTaxonLocator)->hasClass('dragging-started');
-        });
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getLeaves(TaxonInterface $parentTaxon = null)
@@ -188,7 +156,7 @@ JS;
         $tree = $this->getElement('tree');
         Assert::notNull($tree);
         /** @var NodeElement[] $leaves */
-        $leaves = $tree->findAll('css', '.item > .content > .header');
+        $leaves = $tree->findAll('css', '.item > .content > .header > a');
 
         if (null === $parentTaxon) {
             return $leaves;
@@ -230,13 +198,11 @@ JS;
         $leaves = $this->getLeaves();
         foreach ($leaves as $leaf) {
             if ($leaf->getText() === $taxon->getName()) {
-                $leaf = $leaf->getParent();
-                $menuButton = $leaf->find('css', '.wrench');
-                $menuButton->click();
-                $moveButton = $leaf->find('css', sprintf('.%s', $direction));
+                $moveButton = $leaf->getParent()->find('css', sprintf('.sylius-taxon-move-%s', $direction));
                 $moveButton->click();
-                $moveButton->waitFor(5, function () use ($taxon) {
-                    return $this->getFirstLeafName() === $taxon->getName();
+
+                $moveButton->waitFor(5, function () use ($moveButton) {
+                    return !$moveButton->hasClass('loading');
                 });
 
                 return;
@@ -260,22 +226,6 @@ JS;
         Assert::notEmpty($items);
 
         return end($items);
-    }
-
-    /**
-     * @return Selenium2Driver
-     *
-     * @throws UnsupportedDriverActionException
-     */
-    private function getSeleniumDriver()
-    {
-        /** @var Selenium2Driver $driver */
-        $driver = $this->getDriver();
-        if (!$driver instanceof Selenium2Driver) {
-            throw new UnsupportedDriverActionException('This action is not supported by %s', $driver);
-        }
-
-        return $driver;
     }
 
     private function waitForSlugGenerationIfNecessary()

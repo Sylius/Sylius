@@ -265,12 +265,19 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function selectShippingAddressFromAddressBook(AddressInterface $address)
     {
+        $this->waitForElement(2, sprintf('%s_province', self::TYPE_SHIPPING));
         $addressBookSelect = $this->getElement('shipping_address_book');
 
         $addressBookSelect->click();
-        $addressBookSelect->waitFor(5, function () use ($address, $addressBookSelect) {
-            return $addressBookSelect->find('css', sprintf('.item[data-value="%s"]', $address->getId()));
-        })->click();
+        $addressOption = $addressBookSelect->waitFor(5, function () use ($address, $addressBookSelect) {
+            return $addressBookSelect->find('css', sprintf('.item[data-id="%s"]', $address->getId()));
+        });
+
+        if (null === $addressOption) {
+            throw new ElementNotFoundException($this->getDriver(), 'option', 'css', sprintf('.item[data-id="%s"]', $address->getId()));
+        }
+
+        $addressOption->click();
     }
 
     /**
@@ -278,12 +285,19 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function selectBillingAddressFromAddressBook(AddressInterface $address)
     {
+        $this->waitForElement(2, sprintf('%s_province', self::TYPE_BILLING));
         $addressBookSelect = $this->getElement('billing_address_book');
 
         $addressBookSelect->click();
-        $addressBookSelect->waitFor(5, function () use ($address, $addressBookSelect) {
-            return $addressBookSelect->find('css', sprintf('.item[data-value="%s"]', $address->getId()));
-        })->click();
+        $addressOption = $addressBookSelect->waitFor(5, function () use ($address, $addressBookSelect) {
+            return $addressBookSelect->find('css', sprintf('.item[data-id="%s"]', $address->getId()));
+        });
+
+        if (null === $addressOption) {
+            throw new ElementNotFoundException($this->getDriver(), 'option', 'css', sprintf('.item[data-id="%s"]', $address->getId()));
+        }
+
+        $addressOption->click();
     }
 
     /**
@@ -354,6 +368,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $address->setCountryCode($this->getElement(sprintf('%s_country', $type))->getValue());
         $address->setCity($this->getElement(sprintf('%s_city', $type))->getValue());
         $address->setPostcode($this->getElement(sprintf('%s_postcode', $type))->getValue());
+        $this->waitForElement(5, sprintf('%s_province', $type));
         $address->setProvinceName($this->getElement(sprintf('%s_province', $type))->getValue());
 
         return $address;

@@ -15,10 +15,3 @@ Feature: Reordering taxons
         Then I should see 4 taxons on the list
         And I should see the taxon named "T-Shirts" in the list
         But the first taxon on the list should be "Watches"
-
-    @ui @javascript
-    Scenario: Changing order of the taxons by dragging
-        When I want to see all taxons in store
-        And I move "Wallets" taxon before "T-shirts" taxon
-        Then I should see 4 taxons on the list
-        And they should have order like "Wallets", "T-Shirts", "Watches" and "Belts"

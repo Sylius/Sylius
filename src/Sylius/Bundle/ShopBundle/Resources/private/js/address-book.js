@@ -11,44 +11,17 @@
     $.fn.extend({
         addressBook: function () {
             var element = $(this);
-            var addresses = [];
             var select = element.find('.address-book-select');
 
             select.dropdown({
-                apiSettings: {
-                    action: 'address book',
-                    cache: false,
-
-                    onResponse: function (syliusResponse) {
-                        var response = {
-                            success: true,
-                            results: []
-                        };
-
-                        $.each(syliusResponse, function (index, address) {
-                            addresses.push(address);
-
-                            response.results.push({
-                                name: address.city + ' ' + address.street,
-                                value: address.id
-                            });
-                        });
-
-                        return response;
-                    }
-                },
-
                 onChange: function (name, text, choice) {
-                    var selectedAddress = addresses.filter(function (address) {
-                        return address.id === choice.data().value;
-                    })[0];
 
                     var inputs = element.find('input');
 
                     $.each(inputs, function (key, input) {
                         $(input).val('');
                     });
-                    $.each(selectedAddress, function (key, property) {
+                    $.each(choice.data(), function (key, property) {
                         element.find('input[name*='+ parseKey(key) +']').val(property);
                     });
                 }
