@@ -87,6 +87,7 @@ class ShippingMethodChoiceType extends AbstractType
                     return $this->repository->findAll();
                 },
                 'choice_value' => 'code',
+                'choice_label' => 'name',
             ])
             ->setDefined([
                 'subject',
@@ -111,7 +112,7 @@ class ShippingMethodChoiceType extends AbstractType
             $method = $choiceView->data;
 
             if (!$method instanceof ShippingMethodInterface) {
-                throw new UnexpectedTypeException($method, 'ShippingMethodInterface');
+                throw new UnexpectedTypeException($method, ShippingMethodInterface::class);
             }
 
             $calculator = $this->calculators->get($method->getCalculator());

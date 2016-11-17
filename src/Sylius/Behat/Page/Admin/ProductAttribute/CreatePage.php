@@ -26,7 +26,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function nameIt($name, $language)
     {
-        $this->getDocument()->fillField(sprintf('sylius_product_attribute_translations_%s_name', $language), $name);
+        $this->getDocument()->fillField(sprintf('sylius_attribute_translations_%s_name', $language), $name);
     }
 
     /**
@@ -43,9 +43,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'code' => '#sylius_product_attribute_code',
-            'name' => '#sylius_product_attribute_translations_en_US_name',
-            'type' => '#sylius_product_attribute_type',
+            'code' => '#sylius_attribute_code',
+            'name' => '#sylius_attribute_translations_en_US_name',
+            'type' => '#sylius_attribute_type',
         ]);
     }
 }

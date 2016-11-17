@@ -192,7 +192,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
             'attribute_delete_button' => '.attribute .label:contains("%attribute%") ~ button',
             'attribute_value' => '.attribute .label:contains("%attribute%") ~ input',
-            'attributes_choice' => 'select[name="sylius_product_attribute_choice"]',
+            'attributes_choice' => 'div[data-tab="attributes"] select[name="sylius_resource_choice"]',
             'calculator' => '#sylius_calculator_container',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
@@ -215,8 +215,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $driver = $this->getDriver();
         Assert::isInstanceOf($driver, Selenium2Driver::class);
 
-        $driver->executeScript('$(\'[name="sylius_product_attribute_choice"]\').dropdown(\'show\');');
-        $driver->executeScript(sprintf('$(\'[name="sylius_product_attribute_choice"]\').dropdown(\'set selected\', %s);', $id));
+        $driver->executeScript('$(\'div[data-tab="attributes"] select[name="sylius_resource_choice"]\').dropdown(\'show\');');
+        $driver->executeScript(sprintf('$(\'div[data-tab="attributes"] select[name="sylius_resource_choice"]\').dropdown(\'set selected\', \'%s\');', $id));
     }
 
     /**

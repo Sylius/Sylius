@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\PricingBundle\Form\Extension;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\PricingBundle\Form\Extension\PriceableTypeExtension;
+use Sylius\Bundle\PricingBundle\Form\Type\CalculatorChoiceType;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Calculator\VolumeBasedCalculator;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -44,7 +45,7 @@ final class PriceableTypeExtensionSpec extends ObjectBehavior
         FormInterface $form
     ) {
         $builder->addEventSubscriber($subscriber)->shouldBeCalled()->willreturn($builder);
-        $builder->add('pricingCalculator', 'sylius_price_calculator_choice', Argument::type('array'))->shouldBeCalled();
+        $builder->add('pricingCalculator', CalculatorChoiceType::class, Argument::type('array'))->shouldBeCalled();
 
         $calculatorRegistry->all()->shouldBeCalled()->willReturn(['type' => $calculator]);
         $calculator->getType()->shouldBeCalled()->willReturn('standard');

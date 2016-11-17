@@ -11,9 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\ReversedTransformer;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -42,15 +45,16 @@ class ContainsProductConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product_code', 'sylius_product_from_identifier', [
-                'label' => 'sylius.form.promotion_action.add_product_configuration.product',
-                'class' => $this->productRepository->getClassName(),
-                'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'string']),
-                ],
-                'identifier' => 'code',
-            ])
+            ->add(
+                $builder->create('product_code', ResourceChoiceType::class, [
+                    'resource' => 'sylius.product',
+                    'label' => 'sylius.form.promotion_action.add_product_configuration.product',
+                    'constraints' => [
+                        new NotBlank(),
+                        new Type(['type' => 'string']),
+                    ],
+                ])->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->productRepository, 'code')))
+            )
         ;
     }
 

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType as BaseShippingMethodType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -27,15 +28,18 @@ class ShippingMethodType extends BaseShippingMethodType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('zone', 'sylius_zone_choice', [
+            ->add('zone', ResourceChoiceType::class, [
+                'resource' => 'sylius.zone',
                 'label' => 'sylius.form.shipping_method.zone',
             ])
-            ->add('taxCategory', 'sylius_tax_category_choice', [
+            ->add('taxCategory', ResourceChoiceType::class, [
+                'resource' => 'sylius.tax_category',
                 'required' => false,
                 'placeholder' => '---',
                 'label' => 'sylius.form.shipping_method.tax_category',
             ])
-            ->add('channels', 'sylius_channel_choice', [
+            ->add('channels', ResourceChoiceType::class, [
+                'resource' => 'sylius.channel',
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'sylius.form.shipping_method.channels',

@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType as BaseChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -38,19 +40,21 @@ class ChannelType extends BaseChannelType
                 'required' => true,
                 'placeholder' => null,
             ])
-            ->add('currencies', 'sylius_currency_choice', [
+            ->add('currencies', ResourceChoiceType::class, [
+                'resource' => 'sylius.currency',
                 'label' => 'sylius.form.channel.currencies',
                 'required' => true,
                 'multiple' => true,
             ])
-            ->add('defaultTaxZone', 'sylius_zone_choice', [
+            ->add('defaultTaxZone', ResourceChoiceType::class, [
+                'resource' => 'sylius.zone',
                 'required' => false,
                 'label' => 'sylius.form.channel.tax_zone_default',
             ])
-            ->add('taxCalculationStrategy', 'sylius_tax_calculation_strategy_choice', [
+            ->add('taxCalculationStrategy', TaxCalculationStrategyChoiceType::class, [
                 'label' => 'sylius.form.channel.tax_calculation_strategy',
             ])
-            ->add('themeName', 'sylius_theme_name_choice', [
+            ->add('themeName', ThemeNameChoiceType::class, [
                 'label' => 'sylius.form.channel.theme',
                 'required' => false,
                 'empty_data' => null,

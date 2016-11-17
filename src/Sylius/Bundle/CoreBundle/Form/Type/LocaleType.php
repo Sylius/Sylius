@@ -14,6 +14,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType as BaseLocaleType;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\LocaleType as SymfonyLocaleType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -69,21 +71,19 @@ class LocaleType extends BaseLocaleType
 
             if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
                 $nameOptions['disabled'] = true;
-                $nameOptions['choices'] = [
-                    $locale->getCode() => $this->getLocaleName($locale->getCode())
-                ];
+                $nameOptions['choices'] = [$this->getLocaleName($locale->getCode()) => $locale->getCode()];
             } else {
                 $nameOptions['choices'] = $this->getAvailableLocales();
             }
 
             $form = $event->getForm();
-            $form->add('code', 'locale', $nameOptions);
+            $form->add('code', SymfonyLocaleType::class, $nameOptions);
 
             if ($this->baseLocale !== $locale->getCode()) {
                 return;
             }
 
-            $form->add('enabled', 'checkbox', [
+            $form->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.locale.enabled',
                 'disabled' => true,
             ]);
@@ -122,6 +122,6 @@ class LocaleType extends BaseLocaleType
             unset($availableLocales[$locale->getCode()]);
         }
 
-        return $availableLocales;
+        return array_flip($availableLocales);
     }
 }

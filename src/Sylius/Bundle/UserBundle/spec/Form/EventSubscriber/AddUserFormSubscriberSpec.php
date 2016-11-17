@@ -18,6 +18,7 @@ use Sylius\Component\User\Model\UserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -45,7 +46,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
     ) {
         $event->getForm()->willReturn($form);
 
-        $form->add('user', 'sylius_admin_user')->shouldBeCalled();
+        $form->add('user', 'sylius_admin_user', ['constraints' => [new Valid()]])->shouldBeCalled();
 
         $this->preSetData($event);
     }

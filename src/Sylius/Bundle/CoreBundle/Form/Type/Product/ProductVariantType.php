@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
+use Sylius\Bundle\PricingBundle\Form\Type\CalculatorChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -86,12 +88,13 @@ class ProductVariantType extends BaseProductVariantType
                 'label' => 'sylius.form.variant.weight',
                 'invalid_message' => 'sylius.product_variant.weight.invalid',
             ])
-            ->add('taxCategory', 'sylius_tax_category_choice', [
+            ->add('taxCategory', ResourceChoiceType::class, [
+                'resource' => 'sylius.tax_category',
                 'required' => false,
                 'placeholder' => '---',
                 'label' => 'sylius.form.product_variant.tax_category',
             ])
-            ->add('pricingCalculator', 'sylius_price_calculator_choice', [
+            ->add('pricingCalculator', CalculatorChoiceType::class, [
                 'label' => 'sylius.form.shipping_method.calculator',
             ])
         ;

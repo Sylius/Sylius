@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -51,7 +52,8 @@ class ProductFilterConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('products', 'sylius_product_choice', [
+            ->add('products', ResourceChoiceType::class, [
+                'resource' => 'sylius.product',
                 'label' => 'sylius.form.promotion_filter.product.products',
                 'multiple' => true,
                 'required' => false,

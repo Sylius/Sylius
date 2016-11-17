@@ -87,7 +87,7 @@
 
         <service id="sylius.form.type.tax_calculation_strategy_choice" class="Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType">
             <argument>%sylius.tax_calculation_strategies%</argument>
-            <tag name="form.type" alias="sylius_tax_calculation_strategy_choice" />
+            <tag name="form.type" />
         </service>
 
         <!-- promotions -->
@@ -150,7 +150,7 @@
             <argument>%sylius.model.customer.class%</argument>
             <argument>%sylius.validation_groups.customer_guest%</argument>
             <argument type="service" id="sylius.form.event_subscriber.set_customer" />
-            <tag name="form.type" alias="sylius_customer_guest" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.customer_simple_registration" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerSimpleRegistrationType">
             <argument>%sylius.model.customer.class%</argument>

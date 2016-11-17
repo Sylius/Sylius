@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter\ProductFilterConfigurationType;
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter\TaxonFilterConfigurationType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionFiltersType as BasePromotionFiltersType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -26,7 +28,7 @@ class PromotionFiltersType extends BasePromotionFiltersType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('taxons_filter', 'sylius_promotion_action_filter_taxon_configuration', ['required' => false]);
-        $builder->add('products_filter', 'sylius_promotion_action_filter_product_configuration', ['required' => false]);
+        $builder->add('taxons_filter', TaxonFilterConfigurationType::class, ['required' => false]);
+        $builder->add('products_filter', ProductFilterConfigurationType::class, ['required' => false]);
     }
 }

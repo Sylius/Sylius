@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -28,7 +29,8 @@ class ProductAssociationType extends AbstractResourceType
             ->add('type', 'sylius_product_association_type_choice', [
                 'label' => 'sylius.form.product_association.type',
             ])
-            ->add('product', 'sylius_product_choice', [
+            ->add('product', ResourceChoiceType::class, [
+                'resource' => 'sylius.product',
                 'label' => 'sylius.form.product_association.product',
                 'property_path' => 'associatedProducts',
                 'multiple' => true,

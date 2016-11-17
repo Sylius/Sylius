@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
+use Sylius\Bundle\AddressingBundle\Form\Type\CountryCodeChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -25,7 +26,7 @@ class ShippingCountryConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', 'sylius_country_code_choice', [
+            ->add('country', CountryCodeChoiceType::class, [
                 'label' => 'sylius.form.promotion_rule.shipping_country_configuration.country',
                 'placeholder' => 'sylius.form.country.select',
             ])

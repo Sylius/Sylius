@@ -98,7 +98,8 @@ class TaxonChoiceType extends AbstractType
 
                     return $taxons;
                 },
-                'choice_value' => 'id',
+                'choice_value' => 'code',
+                'choice_label' => 'name',
                 'root' => null,
                 'filter' => null,
             ])

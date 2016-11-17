@@ -49,7 +49,17 @@ class CountryCodeChoiceType extends AbstractType
                 $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
             }
 
-            return $this->getCountryCodes($countries);
+            $countryCodes = [];
+
+            /* @var CountryInterface $country */
+            foreach ($countries as $country) {
+                $countryName = Intl::getRegionBundle()->getCountryName($country->getCode());
+                $countryCodes[$countryName] = $country->getCode();
+            }
+
+            ksort($countryCodes);
+
+            return $countryCodes;
         };
 
         $resolver->setDefaults([
@@ -74,25 +84,5 @@ class CountryCodeChoiceType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sylius_country_code_choice';
-    }
-
-    /**
-     * @param CountryInterface[] $countries
-     *
-     * @return array
-     */
-    private function getCountryCodes(array $countries)
-    {
-        $countryCodes = [];
-
-        /* @var CountryInterface $country */
-        foreach ($countries as $country) {
-            $countryName = Intl::getRegionBundle()->getCountryName($country->getCode());
-            $countryCodes[$countryName] = $country->getCode();
-        }
-
-        ksort($countryCodes);
-
-        return $countryCodes;
     }
 }

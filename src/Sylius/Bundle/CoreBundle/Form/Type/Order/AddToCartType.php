@@ -50,7 +50,7 @@ final class AddToCartType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_add_to_cart';
     }

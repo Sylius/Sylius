@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CustomerBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -35,7 +36,8 @@ class CustomerType extends CustomerProfileType
                 'label' => 'sylius.form.customer.last_name',
                 'required' => false,
             ])
-            ->add('group', 'sylius_customer_group_choice', [
+            ->add('group', ResourceChoiceType::class, [
+                'resource' => 'sylius.customer_group',
                 'label' => 'sylius.form.customer.group',
                 'required' => false,
             ])

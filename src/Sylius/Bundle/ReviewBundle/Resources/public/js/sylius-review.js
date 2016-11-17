@@ -45,7 +45,7 @@ function clearErrors(form) {
 function parseFormToJson(form) {
     var formJson = {};
     $.each(form.serializeArray(), function(index, field) {
-        var name = field.name.replace('sylius_product_review[', '').replace(']', '');
+        var name = field.name.replace('sylius_review[', '').replace(']', '');
         formJson[name] = field.value || '';
     });
 

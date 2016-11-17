@@ -31,7 +31,6 @@ final class MetadataSpec extends ObjectBehavior
                     'model' => 'AppBundle\Model\Resource',
                     'form' => [
                         'default' => 'AppBundle\Form\Type\ResourceType',
-                        'choice' => 'AppBundle\Form\Type\ResourceChoiceType',
                         'autocomplete' => 'AppBundle\Type\ResourceAutocompleteType',
                     ],
                 ],

@@ -22,7 +22,7 @@
     function controlAttributesList() {
         $('#attributesContainer .attribute').each(function() {
             var value = $(this).attr('data-id');
-            $('[name="sylius_product_attribute_choice"]').dropdown('set selected', value);
+            $('div[data-tab="attributes"] select[name="sylius_resource_choice"]').dropdown('set selected', value);
         });
     }
 
@@ -35,7 +35,7 @@
             var attributeId = $(this).parents('.attribute').attr('data-id');
 
             $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
-            $(this).parent().remove();
+            modifyAttributesListOnSelectorElementDelete(attributeId);
         });
     }
 
@@ -69,7 +69,7 @@
                 var finalData = modifyAttributeForms($(data));
                 $attributesContainer.append(finalData);
 
-                $('[name="sylius_product_attribute_choice"]').val('')
+                $('div[data-tab="attributes"] select[name="sylius_resource_choice"]').val('');
 
                 addAttributesNumber($.grep($(finalData), function (a) { return $(a).hasClass('attribute'); }).length);
                 modifySelectorOnAttributesListElementDelete();

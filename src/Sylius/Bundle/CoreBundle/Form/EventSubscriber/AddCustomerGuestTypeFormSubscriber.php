@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\Valid;
 use Webmozart\Assert\Assert;
 
 /**
@@ -58,7 +60,9 @@ final class AddCustomerGuestTypeFormSubscriber implements EventSubscriberInterfa
         Assert::isInstanceOf($resource, CustomerAwareInterface::class);
 
         if (null === $customer && null === $resource->getCustomer()) {
-            $form->add($this->field, 'sylius_customer_guest');
+            $form->add($this->field, CustomerGuestType::class, [
+                'constraints' => [new Valid()],
+            ]);
         }
     }
 }

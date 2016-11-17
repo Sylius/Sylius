@@ -23,15 +23,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ZoneMemberType extends AbstractResourceType
 {
     /**
+     * @var array
+     */
+    protected static $zoneTypeToTypeClass = [
+        ZoneInterface::TYPE_COUNTRY => CountryCodeChoiceType::class,
+        ZoneInterface::TYPE_PROVINCE => ProvinceCodeChoiceType::class,
+        ZoneInterface::TYPE_ZONE => ZoneCodeChoiceType::class,
+    ];
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $type = $options['zone_type'];
+        $zoneType = $options['zone_type'];
 
         $builder
-            ->add('code', 'sylius_'.$type.'_code_choice', [
-                'label' => 'sylius.form.zone.types.'.$type,
+            ->add('code', static::$zoneTypeToTypeClass[$zoneType], [
+                'label' => 'sylius.form.zone.types.'.$zoneType,
                 'required' => true,
             ])
         ;
@@ -43,9 +52,10 @@ class ZoneMemberType extends AbstractResourceType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
+            ->setRequired('zone_type')
+            ->setAllowedValues('zone_type', array_keys(static::$zoneTypeToTypeClass))
             ->setDefaults([
                 'data_class' => ZoneMember::class,
-                'zone_type' => ZoneInterface::TYPE_COUNTRY,
                 'placeholder' => 'sylius.form.zone_member.select',
             ])
         ;

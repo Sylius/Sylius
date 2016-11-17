@@ -11,7 +11,9 @@
 
 namespace Sylius\Bundle\ApiBundle\Form\Type;
 
+use Sylius\Bundle\AddressingBundle\Form\Type\CountryCodeChoiceType;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -26,13 +28,16 @@ class OrderType extends BaseOrderType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('customer', 'sylius_customer_choice')
-            ->add('currencyCode', 'sylius_currency_code_choice', [
+            ->add('customer', ResourceChoiceType::class, [
+                'resource' => 'sylius.customer',
+            ])
+            ->add('currencyCode', CountryCodeChoiceType::class, [
                 'constraints' => [
                     new NotBlank(),
                 ],
             ])
-            ->add('channel', 'sylius_channel_choice', [
+            ->add('channel', ResourceChoiceType::class, [
+                'resource' => 'sylius.channel',
                 'constraints' => [
                     new NotBlank(),
                 ],

@@ -24,11 +24,11 @@
 
         <service id="sylius.form.type.promotion_action_choice" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionChoiceType">
             <argument>%sylius.promotion_actions%</argument>
-            <tag name="form.type" alias="sylius_promotion_action_choice" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.promotion_rule_choice" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleChoiceType">
             <argument>%sylius.promotion_rules%</argument>
-            <tag name="form.type" alias="sylius_promotion_rule_choice" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.promotion_action.fixed_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType">

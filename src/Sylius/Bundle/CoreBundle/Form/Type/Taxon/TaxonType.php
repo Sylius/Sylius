@@ -26,7 +26,7 @@ class TaxonType extends BaseTaxonType
 
         $builder
             ->add('images', CollectionType::class, [
-                'entry_type' => 'sylius_taxon_image',
+                'entry_type' => TaxonImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

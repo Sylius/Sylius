@@ -82,7 +82,7 @@ class ReviewType extends AbstractResourceType
      */
     public function getBlockPrefix()
     {
-        return sprintf('sylius_%s_review', $this->subject);
+        return 'sylius_review';
     }
 
     /**

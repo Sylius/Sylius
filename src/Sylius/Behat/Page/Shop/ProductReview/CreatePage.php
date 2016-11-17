@@ -31,7 +31,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function titleReview($title)
     {
-        $this->getDocument()->fillField('Title', $title);
+        $this->getElement('title')->setValue($title);
     }
 
     /**
@@ -39,7 +39,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function setComment($comment)
     {
-        $this->getDocument()->fillField('sylius_product_review_comment', $comment);
+        $this->getElement('comment')->setValue($comment);
     }
 
     /**
@@ -47,7 +47,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function setAuthor($author)
     {
-        $this->getDocument()->fillField('Author', $author);
+        $this->getElement('author')->setValue($author);
     }
 
     /**
@@ -101,11 +101,11 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'author' => '#sylius_product_review_author_email',
-            'comment' => '#sylius_product_review_comment',
+            'author' => '#sylius_review_author_email',
+            'comment' => '#sylius_review_comment',
             'rate' => '.star.rating .icon:nth-child(%rate%)',
-            'rating' => '#sylius_product_review_rating',
-            'title' => '#sylius_product_review_title',
+            'rating' => '#sylius_review_rating',
+            'title' => '#sylius_review_title',
         ]);
     }
 }

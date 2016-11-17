@@ -152,15 +152,6 @@ abstract class AbstractDriver implements DriverInterface
                     $definition->addArgument($this->getMetadataDefinition($metadata));
                     break;
 
-                case 'to_identifier':
-                case 'from_identifier':
-                case 'to_hidden_identifier':
-                    $definition->setArguments([
-                        new Reference($metadata->getServiceId('repository')),
-                        $this->getMetadataDefinition($metadata),
-                    ]);
-                    break;
-
                 default:
                     $validationGroupsParameterName = sprintf('%s.validation_groups.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix);
                     $validationGroups = new Parameter($validationGroupsParameterName);

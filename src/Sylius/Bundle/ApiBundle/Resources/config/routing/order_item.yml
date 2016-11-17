@@ -18,7 +18,7 @@ sylius_api_order_item_create:
     defaults:
         _controller: sylius.controller.order_item:createAction
         _sylius:
-            form: sylius_api_order_item
+            form: Sylius\Bundle\ApiBundle\Form\Type\OrderItemType
 
 sylius_api_order_item_update:
     path: /{id}

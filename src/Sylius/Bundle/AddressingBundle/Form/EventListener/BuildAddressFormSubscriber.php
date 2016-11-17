@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -134,7 +135,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         return
             $this
                 ->formFactory
-                ->createNamed('provinceCode', 'sylius_province_code_choice', $provinceCode, [
+                ->createNamed('provinceCode', ProvinceCodeChoiceType::class, $provinceCode, [
                     'country' => $country,
                     'auto_initialize' => false,
                 ])

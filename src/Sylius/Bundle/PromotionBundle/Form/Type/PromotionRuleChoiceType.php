@@ -20,27 +20,42 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class PromotionRuleChoiceType extends AbstractType
 {
+    /**
+     * @var array
+     */
     protected $rules;
 
+    /**
+     * @param array $rules
+     */
     public function __construct(array $rules)
     {
         $this->rules = $rules;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
-                'choices' => $this->rules,
+                'choices' => array_flip($this->rules),
             ])
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getParent()
     {
         return ChoiceType::class;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_choice';

@@ -31,6 +31,7 @@ class ProductVariantGenerationType extends AbstractResourceType
             ->add('name', TextType::class, [
                 'required' => false,
                 'label' => 'sylius.form.variant.name',
+            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
 

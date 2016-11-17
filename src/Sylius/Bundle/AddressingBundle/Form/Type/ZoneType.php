@@ -13,6 +13,7 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -49,20 +50,18 @@ class ZoneType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $zoneType = $builder->getData()->getType();
-
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('name', TextType::class, [
                 'label' => 'sylius.form.zone.name',
             ])
-            ->add('type', 'sylius_zone_type_choice', [
+            ->add('type', ZoneTypeChoiceType::class, [
                 'disabled' => true,
             ])
             ->add('members', CollectionType::class, [
-                'entry_type' => 'sylius_zone_member',
+                'entry_type' => ZoneMemberType::class,
                 'entry_options' => [
-                    'zone_type' => $zoneType,
+                    'zone_type' => $builder->getData()->getType(),
                 ],
                 'button_add_label' => 'sylius.form.zone.add_member',
                 'allow_add' => true,
@@ -82,16 +81,6 @@ class ZoneType extends AbstractResourceType
                 ])
             ;
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefault('zone_type', ZoneInterface::TYPE_COUNTRY);
     }
 
     /**

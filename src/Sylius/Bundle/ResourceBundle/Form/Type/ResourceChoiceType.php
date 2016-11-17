@@ -14,27 +14,29 @@ namespace Sylius\Bundle\ResourceBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Aleksey Bannov <a.s.bannov@gmail.com>
  * @author Anna Walasek <anna.walasek@gmail.com>
  */
-class ResourceChoiceType extends AbstractType
+final class ResourceChoiceType extends AbstractType
 {
     /**
-     * @var MetadataInterface
+     * @var RegistryInterface
      */
-    protected $metadata;
+    private $registryMetadataRegistry;
 
     /**
-     * @param MetadataInterface $metadata
+     * @param RegistryInterface $registryMetadataRegistry
      */
-    public function __construct(MetadataInterface $metadata)
+    public function __construct(RegistryInterface $registryMetadataRegistry)
     {
-        $this->metadata = $metadata;
+        $this->registryMetadataRegistry = $registryMetadataRegistry;
     }
 
     /**
@@ -43,11 +45,11 @@ class ResourceChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults([
-                'class' => null,
-            ])
-            ->setNormalizer('class', function () {
-                return $this->metadata->getClass('model');
+            ->setRequired('resource')
+            ->setAllowedTypes('resource', 'string')
+            ->setDefault('class', null)
+            ->setNormalizer('class', function (Options $options) {
+                return $this->registryMetadataRegistry->get($options['resource'])->getClass('model');
             })
         ;
     }
@@ -57,7 +59,7 @@ class ResourceChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return $this->getFormTypeForDriver($this->metadata->getDriver());
+        return EntityType::class;
     }
 
     /**
@@ -65,27 +67,6 @@ class ResourceChoiceType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return sprintf('%s_%s_choice', $this->metadata->getApplicationName(), $this->metadata->getName());
-    }
-
-    /**
-     * @param string $driver
-     *
-     * @return string
-     *
-     * @throws UnknownDriverException
-     */
-    protected function getFormTypeForDriver($driver)
-    {
-        switch ($driver) {
-            case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
-                return 'document';
-            case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
-                return EntityType::class;
-            case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
-                return 'phpcr_document';
-        }
-
-        throw new UnknownDriverException($driver);
+        return 'sylius_resource_choice';
     }
 }

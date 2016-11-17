@@ -33,7 +33,7 @@ class ProductTaxonPositionCollectionType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_product_taxon_position_collection';
     }

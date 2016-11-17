@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class TranslationsType extends AbstractType implements EventSubscriberInterface
+final class ResourceTranslationsType extends AbstractType implements EventSubscriberInterface
 {
     /**
      * @var string[]
@@ -92,11 +92,13 @@ final class TranslationsType extends AbstractType implements EventSubscriberInte
         $translations = $event->getData();
         $translatable = $event->getForm()->getParent()->getData();
 
-        $translations = array_filter($translations, function ($translation) {
-            return null !== $translation;
-        });
-
         foreach ($translations as $localeCode => $translation) {
+            if (null === $translation) {
+                unset($translations[$localeCode]);
+
+                continue;
+            }
+
             $translation->setLocale($localeCode);
             $translation->setTranslatable($translatable);
         }

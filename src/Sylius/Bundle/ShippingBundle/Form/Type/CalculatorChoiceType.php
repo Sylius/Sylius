@@ -18,12 +18,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CalculatorChoiceType extends AbstractType
+final class CalculatorChoiceType extends AbstractType
 {
     /**
      * @var array
      */
-    protected $calculators;
+    private $calculators;
 
     /**
      * @param array $calculators
@@ -40,7 +40,7 @@ class CalculatorChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choices' => $this->calculators,
+                'choices' => array_flip($this->calculators),
             ])
         ;
     }
