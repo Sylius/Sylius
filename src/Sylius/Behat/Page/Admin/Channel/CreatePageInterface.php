@@ -70,7 +70,7 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @param string $currency
      */
-    public function chooseDefaultCurrency($currency);
+    public function chooseBaseCurrency($currency);
 
     /**
      * @param string $taxCalculationStrategy

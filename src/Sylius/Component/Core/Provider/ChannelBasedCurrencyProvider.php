@@ -69,7 +69,7 @@ final class ChannelBasedCurrencyProvider implements CurrencyProviderInterface
             /** @var ChannelInterface $channel */
             $channel = $this->channelContext->getChannel();
 
-            return $channel->getDefaultCurrency()->getCode();
+            return $channel->getBaseCurrency()->getCode();
         } catch (ChannelNotFoundException $exception) {
             throw new CurrencyNotFoundException(null, $exception);
         }

@@ -110,7 +110,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         $channel->setTaxCalculationStrategy('order_items_based');
 
         $channel->addCurrency($currency);
-        $channel->setDefaultCurrency($currency);
+        $channel->setBaseCurrency($currency);
 
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);

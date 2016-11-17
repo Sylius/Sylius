@@ -81,11 +81,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseDefaultCurrency($currency)
+    public function chooseBaseCurrency($currency)
     {
         if (null !== $currency) {
             $this->getElement('currencies')->selectOption($currency);
-            $this->getElement('default_currency')->selectOption($currency);
+            $this->getElement('base_currency')->selectOption($currency);
         }
     }
 
@@ -113,7 +113,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_channel_code',
             'currencies' => '#sylius_channel_currencies',
-            'default_currency' => '#sylius_channel_defaultCurrency',
+            'base_currency' => '#sylius_channel_baseCurrency',
             'default_locale' => '#sylius_channel_defaultLocale',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',

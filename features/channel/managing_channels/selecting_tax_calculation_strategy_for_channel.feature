@@ -14,7 +14,7 @@ Feature: Selecting tax calculation strategy for a channel
         Given I want to create a new channel
         When I specify its code as "MOBILE"
         And I name it "Mobile store"
-        And I choose "Euro" as a default currency
+        And I choose "Euro" as the base currency
         And I choose "English (United States)" as a default locale
         And I add it
         Then I should be notified that it has been successfully created
@@ -26,7 +26,7 @@ Feature: Selecting tax calculation strategy for a channel
         When I specify its code as "MOBILE"
         And I select the "Order item units based" as tax calculation strategy
         And I name it "Mobile store"
-        And I choose "Euro" as a default currency
+        And I choose "Euro" as the base currency
         And I choose "English (United States)" as a default locale
         And I add it
         Then I should be notified that it has been successfully created

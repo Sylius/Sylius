@@ -1,7 +1,7 @@
 sylius:
     channel:
-        default_currency:
-            not_blank: Please enter channel default currency.
+        base_currency:
+            not_blank: Please enter channel base currency.
         default_locale:
             not_blank: Please enter channel default locale.
     checkout:

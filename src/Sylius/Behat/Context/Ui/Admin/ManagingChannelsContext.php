@@ -102,12 +102,12 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I choose :currency as a default currency
-     * @When I do not choose default currency
+     * @When I choose :currency as the base currency
+     * @When I do not choose base currency
      */
-    public function iChooseAsADefaultCurrency($currency = null)
+    public function iChooseAsABaseCurrency($currency = null)
     {
-        $this->createPage->chooseDefaultCurrency($currency);
+        $this->createPage->chooseBaseCurrency($currency);
     }
 
     /**

@@ -80,7 +80,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         $channel->setTaxCalculationStrategy('order_items_based')->shouldBeCalled();
 
         $channel->addCurrency($currency)->shouldBeCalled();
-        $channel->setDefaultCurrency($currency)->shouldBeCalled();
+        $channel->setBaseCurrency($currency)->shouldBeCalled();
         $channel->addLocale($locale)->shouldBeCalled();
         $channel->setDefaultLocale($locale)->shouldBeCalled();
 

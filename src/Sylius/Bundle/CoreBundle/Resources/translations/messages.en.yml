@@ -27,7 +27,7 @@ sylius:
             taxonomies: Taxonomies
             locale_default: Default locale
             locales: Locales
-            currency_default: Default currency
+            currency_base: Base currency
             currencies: Currencies
             shipping_methods: Shipping Methods
             payment_methods: Payment Methods

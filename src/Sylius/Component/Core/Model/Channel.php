@@ -26,7 +26,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * @var CurrencyInterface
      */
-    protected $defaultCurrency;
+    protected $baseCurrency;
 
     /**
      * @var LocaleInterface
@@ -69,17 +69,17 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefaultCurrency()
+    public function getBaseCurrency()
     {
-        return $this->defaultCurrency;
+        return $this->baseCurrency;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultCurrency(CurrencyInterface $defaultCurrency)
+    public function setBaseCurrency(CurrencyInterface $baseCurrency)
     {
-        $this->defaultCurrency = $defaultCurrency;
+        $this->baseCurrency = $baseCurrency;
     }
 
     /**

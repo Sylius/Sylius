@@ -160,7 +160,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
 
         $channel = $this->createChannel($code ?: self::DEFAULT_CHANNEL_CODE, $name ?: self::DEFAULT_CHANNEL_NAME);
         $channel->addCurrency($currency);
-        $channel->setDefaultCurrency($currency);
+        $channel->setBaseCurrency($currency);
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);
         $channel->setTaxCalculationStrategy('order_items_based');

@@ -152,7 +152,7 @@ final class CurrencyContext implements Context
         $currency = $this->provideCurrency($currencyCode);
 
         $channel->addCurrency($currency);
-        $channel->setDefaultCurrency($currency);
+        $channel->setBaseCurrency($currency);
 
         $this->channelManager->flush();
 

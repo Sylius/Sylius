@@ -15,7 +15,7 @@ Feature: Selecting available locales for a channel
         When I specify its code as "MOBILE"
         And I name it "Mobile channel"
         And I make it available in "English (United States)"
-        And I choose "Euro" as a default currency
+        And I choose "Euro" as the base currency
         And I choose "English (United States)" as a default locale
         And I add it
         Then I should be notified that it has been successfully created
