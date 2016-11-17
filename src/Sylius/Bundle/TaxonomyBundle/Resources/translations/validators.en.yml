@@ -9,6 +9,9 @@ sylius:
         name:
             max_length: Taxon name must not be longer than 255 characters.
             not_blank: Please enter taxon name.
+        slug:
+            not_blank: Please enter taxon slug.
+            unique: Taxon slug must be unique.
     taxonomy:
         name:
             max_length: Taxonomy name must not be longer than 255 characters.
