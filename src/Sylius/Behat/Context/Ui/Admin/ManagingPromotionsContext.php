@@ -143,8 +143,8 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the "Has at least one from taxons" rule configured with :firstTaxon
-     * @Given I add the "Has at least one from taxons" rule configured with :firstTaxon and :secondTaxon
+     * @When I add the "Has at least one from taxons" rule configured with :firstTaxon
+     * @When I add the "Has at least one from taxons" rule configured with :firstTaxon and :secondTaxon
      */
     public function iAddTheHasTaxonRuleConfiguredWith(...$taxons)
     {
@@ -156,7 +156,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the "Total price of items from taxon" rule configured with :count :taxonName
+     * @When I add the "Total price of items from taxon" rule configured with :count :taxonName
      */
     public function iAddTheRuleConfiguredWith($count, $taxonName)
     {
@@ -166,7 +166,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)"$/
+     * @When /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddTheActionConfiguredWithAmount($actionType, $amount)
     {

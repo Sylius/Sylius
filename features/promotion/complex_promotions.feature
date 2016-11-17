@@ -38,6 +38,15 @@ Feature: Receiving a discount based on a configured promotion
         And my cart shipping total should be "$0.00"
 
     @ui
+    Scenario: Receiving a discount on products from a specific taxon if an order contains products from an another taxon
+        Given there is a promotion "Jacket-trousers pack"
+        And it gives "10%" off on every product classified as "Jackets" if order contains any product classified as "Trousers"
+        When I add product "Iron Maiden trousers" to the cart
+        And I add product "Black Sabbath jacket" to the cart
+        Then product "Black Sabbath jacket" price should be decreased by "$10.00"
+        And my cart total should be "$170.00"
+
+    @ui
     Scenario: Receiving a discount on items and the whole order from one promotion based on items total
         Given there is a promotion "Greatest promotion"
         And it gives "20%" off on every product classified as "Jackets" and a "$50.00" discount to every order with items total equal at least "$500.00"
