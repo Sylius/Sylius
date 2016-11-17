@@ -21,19 +21,17 @@ interface PromotionActionFactoryInterface extends FactoryInterface
 {
     /**
      * @param int $baseAmount
-     * @param array $amounts
      *
      * @return PromotionActionInterface
      */
-    public function createFixedDiscount($baseAmount, $amounts = array());
+    public function createFixedDiscount($baseAmount);
 
     /**
      * @param int $baseAmount
-     * @param array $amounts
      *
      * @return PromotionActionInterface
      */
-    public function createUnitFixedDiscount($baseAmount, $amounts = array());
+    public function createUnitFixedDiscount($baseAmount);
 
     /**
      * @param float $percentage
