@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -292,20 +291,12 @@ final class ProductContext implements Context
      */
     public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price)
     {
-        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
-
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->productVariantFactory->createNew();
-
-        $variant->setName($productVariantName);
-        $variant->setCode(StringInflector::nameToUppercaseCode($productVariantName));
-        $variant->setPrice($price);
-        $variant->setProduct($product);
-        $product->addVariant($variant);
-
-        $this->objectManager->flush();
-
-        $this->sharedStorage->set('variant', $variant);
+        $this->createProductVariant(
+            $product,
+            $productVariantName,
+            $price,
+            StringInflector::nameToUppercaseCode($productVariantName)
+        );
     }
 
     /**
@@ -724,5 +715,29 @@ final class ProductContext implements Context
     private function getParameter($name)
     {
         return isset($this->minkParameters[$name]) ? $this->minkParameters[$name] : null;
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param $productVariantName
+     * @param int $price
+     * @param string $code
+     */
+    private function createProductVariant(ProductInterface $product, $productVariantName, $price, $code)
+    {
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
+
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->productVariantFactory->createNew();
+
+        $variant->setName($productVariantName);
+        $variant->setCode($code);
+        $variant->setPrice($price);
+        $variant->setProduct($product);
+        $product->addVariant($variant);
+
+        $this->objectManager->flush();
+
+        $this->sharedStorage->set('variant', $variant);
     }
 }

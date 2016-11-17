@@ -936,6 +936,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that simple product code has to be unique
+     */
+    public function iShouldBeNotifiedThatSimpleProductCodeHasToBeUnique()
+    {
+        $this->assertValidationMessage('code', 'Simple product code must be unique among all products and product variants.');
+    }
+
+    /**
+     * @Then I should be notified that code has to be unique
+     */
+    public function iShouldBeNotifiedThatCodeHasToBeUnique()
+    {
+        $this->assertValidationMessage('code', 'Product code must be unique.');
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */

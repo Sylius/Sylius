@@ -355,6 +355,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then I should be notified that code has to be unique
+     */
+    public function iShouldBeNotifiedThatCodeHasToBeUnique()
+    {
+        $this->assertValidationMessage('code', 'Product variant code must be unique.');
+    }
+
+    /**
      * @Then I should be notified that current stock is required
      */
     public function iShouldBeNotifiedThatOnHandIsRequired()
