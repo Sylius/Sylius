@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Webmozart\Assert\Assert;
@@ -21,6 +22,7 @@ use Webmozart\Assert\Assert;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand
 {
@@ -37,15 +39,23 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
     private $unitsPromotionAdjustmentsApplicator;
 
     /**
+     * @var CurrencyConverterInterface
+     */
+    private $currencyConverter;
+
+    /**
      * @param ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
      * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+     * @param CurrencyConverterInterface $currencyConverter
      */
     public function __construct(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
+        CurrencyConverterInterface $currencyConverter
     ) {
         $this->proportionalDistributor = $proportionalIntegerDistributor;
         $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
+        $this->currencyConverter = $currencyConverter;
     }
 
     /**
@@ -59,7 +69,10 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
 
         $this->isConfigurationValid($configuration);
 
-        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['amount']);
+        $promotionAmount = $this->calculateAdjustmentAmount(
+            $subject->getPromotionSubjectTotal(),
+            $this->getAmountByCurrencyCode($configuration, $subject->getCurrencyCode())
+        );
         if (0 === $promotionAmount) {
             return;
         }
@@ -86,8 +99,8 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
      */
     protected function isConfigurationValid(array $configuration)
     {
-        Assert::keyExists($configuration, 'amount');
-        Assert::integer($configuration['amount']);
+        Assert::keyExists($configuration, 'base_amount');
+        Assert::integer($configuration['base_amount']);
     }
 
     /**
@@ -99,5 +112,23 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
     private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
     {
         return -1 * min($promotionSubjectTotal, $targetPromotionAmount);
+    }
+
+    /**
+     * @param array $configuration
+     * @param string $currencyCode
+     *
+     * @return int
+     */
+    private function getAmountByCurrencyCode(array $configuration, $currencyCode)
+    {
+        if (!isset($configuration['amounts'][$currencyCode])) {
+            return $configuration['base_amount'];
+        }
+
+        return $this->currencyConverter->convertToBase(
+            $configuration['amounts'][$currencyCode],
+            $currencyCode
+        );
     }
 }

@@ -18,9 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Updater\OrderUpdaterInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Sylius\Component\Order\SyliusCartEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -38,9 +36,9 @@ final class CartCurrencyChangeHandler implements CurrencyChangeHandlerInterface
     private $exchangeRateUpdater;
 
     /**
-     * @var EventDispatcherInterface
+     * @var OrderProcessorInterface
      */
-    private $eventDispatcher;
+    private $orderProcessor;
 
     /**
      * @var EntityManagerInterface
@@ -50,18 +48,18 @@ final class CartCurrencyChangeHandler implements CurrencyChangeHandlerInterface
     /**
      * @param CartContextInterface $cartContext
      * @param OrderUpdaterInterface $exchangeRateUpdater
-     * @param EventDispatcherInterface $eventDispatcher
+     * @param OrderProcessorInterface $orderProcessor
      * @param EntityManagerInterface $orderManager
      */
     public function __construct(
         CartContextInterface $cartContext,
         OrderUpdaterInterface $exchangeRateUpdater,
-        EventDispatcherInterface $eventDispatcher,
+        OrderProcessorInterface $orderProcessor,
         EntityManagerInterface $orderManager
     ) {
         $this->cartContext = $cartContext;
         $this->exchangeRateUpdater = $exchangeRateUpdater;
-        $this->eventDispatcher = $eventDispatcher;
+        $this->orderProcessor = $orderProcessor;
         $this->orderManager = $orderManager;
     }
 
@@ -77,10 +75,10 @@ final class CartCurrencyChangeHandler implements CurrencyChangeHandlerInterface
 
             $this->exchangeRateUpdater->update($cart);
 
+            $this->orderProcessor->process($cart);
+
             $this->orderManager->persist($cart);
             $this->orderManager->flush();
-
-            $this->eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
         } catch (CartNotFoundException $exception) {
             throw new HandleException(self::class, 'Sylius was unable to find the cart.', $exception);
         }

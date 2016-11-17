@@ -21,9 +21,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Updater\OrderUpdaterInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Sylius\Component\Order\SyliusCartEvents;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -32,11 +30,16 @@ final class CartCurrencyChangeHandlerSpec extends ObjectBehavior
 {
     function let(
         CartContextInterface $cartContext,
-        OrderUpdaterInterface $orderUpdater,
-        EventDispatcherInterface $eventDispatcher,
+        OrderUpdaterInterface $exchangeRateUpdater,
+        OrderProcessorInterface $orderProcessor,
         EntityManagerInterface $orderManager
     ) {
-        $this->beConstructedWith($cartContext, $orderUpdater, $eventDispatcher, $orderManager);
+        $this->beConstructedWith(
+            $cartContext,
+            $exchangeRateUpdater,
+            $orderProcessor,
+            $orderManager
+        );
     }
 
     function it_is_initializable()
@@ -58,20 +61,20 @@ final class CartCurrencyChangeHandlerSpec extends ObjectBehavior
 
     function it_handles_cart_currency_code_change(
         CartContextInterface $cartContext,
-        OrderUpdaterInterface $orderUpdater,
-        EventDispatcherInterface $eventDispatcher,
+        OrderUpdaterInterface $exchangeRateUpdater,
+        OrderProcessorInterface $orderProcessor,
         EntityManagerInterface $orderManager,
         OrderInterface $cart
     ) {
         $cartContext->getCart()->willReturn($cart);
         $cart->setCurrencyCode('USD')->shouldBeCalled();
 
-        $orderUpdater->update($cart)->shouldBeCalled();
+        $exchangeRateUpdater->update($cart)->shouldBeCalled();
+
+        $orderProcessor->process($cart)->shouldBeCalled();
 
         $orderManager->persist($cart)->shouldBeCalled();
         $orderManager->flush()->shouldBeCalled();
-
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, Argument::type(GenericEvent::class))->shouldBeCalled();
 
         $this->handle('USD');
     }

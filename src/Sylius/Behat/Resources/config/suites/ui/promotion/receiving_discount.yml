@@ -14,6 +14,7 @@ default:
                 - sylius.behat.context.transform.taxon
 
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.shop_security
@@ -21,6 +22,7 @@ default:
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.ui.shop.cart
+                - sylius.behat.context.ui.shop.currency
                 - sylius.behat.context.ui.checkout
             filters:
                 tags: "@receiving_discount && @ui"
