@@ -4,12 +4,11 @@ Summary
 .. code-block:: yaml
 
     sylius_promotion:
-        # The driver used for persistence layer.
-        driver: ~
+        driver: doctrine/orm
         resources:
             promotion_subject:
                 classes:
-                    model: ~
+                    model: Sylius\Component\Core\Model\Order
             promotion:
                 classes:
                     model:      Sylius\Component\Promotion\Model\Promotion
@@ -22,15 +21,17 @@ Summary
                     default: [ sylius ]
             promotion_rule:
                 classes:
-                    model:      Sylius\Component\Promotion\Model\PromotionRule
-                    interface:  Sylius\Component\Promotion\Model\PromotionRuleInterface
+                    factory: Sylius\Component\Core\Factory\PromotionRuleFactory
+                    model: Sylius\Component\Promotion\Model\PromotionRule
+                    interface: Sylius\Component\Promotion\Model\PromotionRuleInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType
+                    form:
+                        default: Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType
                 validation_groups:
                     default: [ sylius ]
-            promotion_action:
+            promotion_coupon:
                 classes:
                     model:      Sylius\Component\Promotion\Model\PromotionAction
                     interface:  Sylius\Component\Promotion\Model\PromotionActionInterface
@@ -40,16 +41,18 @@ Summary
                     form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType
                 validation_groups:
                     default: [ sylius ]
-            promotion_coupon:
+            promotion_action:
                 classes:
                     model:      Sylius\Component\Promotion\Model\Coupon
                     interface:  Sylius\Component\Promotion\Model\CouponInterface
                     controller: Sylius\Bundle\PromotionBundle\Controller\PromotionCouponController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form: Sylius\Bundle\PromotionsBundle\Form\Type\PromotionCouponType
+                    form:
+                        default: Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType
                 validation_groups:
                     default: [ sylius ]
+
 
 
 `phpspec2 <http://phpspec.net>`_ examples

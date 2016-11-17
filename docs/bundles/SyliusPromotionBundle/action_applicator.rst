@@ -10,19 +10,17 @@ Actions can be created by implementing ``PromotionActionCommandInterface``. This
 
 Actions have to be defined as services and have to use the tag named ``sylius.promotion_action`` with the attributes ``type`` and ``label``.
 
-As ``SyliusPromotionBundle`` is totally independent, it does not provide some actions out of the box. Great examples of actions are provided by ``Sylius/Standard-Edition``.
+As ``SyliusPromotionBundle`` is totally independent, it does not provide actions out of the box.
 
 .. note::
 
-    ``Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountPromotionActionCommand`` from ``Sylius/Standard-Edition`` is an example of action for a fixed amount discount. The related service is called ``sylius.promotion_action.fixed_discount``.
+    ``Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountPromotionActionCommand`` from ``Sylius/Sylius-Standard`` is an example of action for a fixed amount discount. The related service is called ``sylius.promotion_action.fixed_discount``.
 
 .. note::
 
-    ``Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountPromotionActionCommand`` from ``Sylius/Standard-Edition`` is an example of action for a discount based on percentage. The related service is called  ``sylius.promotion_action.percentage_discount``.
+    ``Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountPromotionActionCommand`` from ``Sylius/Sylius-Standard`` is an example of action for a discount based on percentage. The related service is called  ``sylius.promotion_action.percentage_discount``.
 
-
-All actions that you have defined as services will be automatically registered thanks to ``Sylius\Bundle\PromotionBundle\Action\Registry\PromotionActionRegistry``.
-
+Learn more about actions in the :doc:`promotions concept documentation </book/promotions>` and in the :doc:`Cookbook </cookbook/index>`.
 
 Applying actions to promotions
 ------------------------------
