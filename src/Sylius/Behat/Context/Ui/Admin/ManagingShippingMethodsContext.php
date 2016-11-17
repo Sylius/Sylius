@@ -190,7 +190,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then the shipment method :shippingMethod should be available in channel :channelName
+     * @Then the shipping method :shippingMethod should be available in channel :channelName
      */
     public function theShippingMethodShouldBeAvailableInChannel(
         ShippingMethodInterface $shippingMethod,
