@@ -24,10 +24,7 @@ var paths = {
             '../ShippingBundle/Resources/public/js/**',
             '../UiBundle/Resources/private/js/**',
             '../UserBundle/Resources/public/js/sylius-user.js',
-            'Resources/private/js/**',
-            '../../../../node_modules/jquery-simulate-ext/libs/jquery.simulate.js',
-            '../../../../node_modules/jquery-simulate-ext/src/jquery.simulate.ext.js',
-            '../../../../node_modules/jquery-simulate-ext/src/jquery.simulate.drag-n-drop.js'
+            'Resources/private/js/**'
         ],
         sass: [
             '../UiBundle/Resources/private/sass/**'

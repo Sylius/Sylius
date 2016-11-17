@@ -182,14 +182,6 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When /^I move ("[^"]+" taxon) before ("[^"]+" taxon)$/
-     */
-    public function iMoveTaxonBeforeTaxon(TaxonInterface $taxonToMove, TaxonInterface $targetTaxon)
-    {
-        $this->createPage->insertBefore($taxonToMove, $targetTaxon);
-    }
-
-    /**
      * @Given /^I choose ("[^"]+" as a parent taxon)$/
      */
     public function iChooseAsAParentTaxon(TaxonInterface $taxon)
