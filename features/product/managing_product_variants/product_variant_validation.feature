@@ -47,6 +47,16 @@ Feature: Product variant validation
         And the "Wyborowa Vodka" product should have no variants
 
     @ui
+    Scenario: Adding a new product variant with duplicated code
+        Given this product has "Wyborowa Exquisite" variant priced at "$90" identified by "VODKA_WYBOROWA_PREMIUM"
+        And I want to create a new variant of this product
+        When I set its price to "$80.00"
+        And I specify its code as "VODKA_WYBOROWA_PREMIUM"
+        And I try to add it
+        Then I should be notified that code has to be unique
+        And the "Wyborowa Vodka" product should have only one 1 variant
+
+    @ui
     Scenario: Adding a new product variant with same set of options
         Given this product has option "Taste" with values "Orange" and "Melon"
         And this product is available in "Melon" taste priced at "$95.00"
