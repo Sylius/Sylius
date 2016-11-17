@@ -31,7 +31,7 @@
         </service>
 
         <service id="sylius.taxation.order_items_based_strategy" class="Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy">
-            <argument key="type">order_items_based</argument>
+            <argument>order_items_based</argument>
             <argument type="collection">
                 <argument type="service" id="sylius.taxation.order_items_taxes_applicator" />
                 <argument type="service" id="sylius.taxation.order_shipment_taxes_applicator" />
@@ -40,7 +40,7 @@
         </service>
 
         <service id="sylius.taxation.order_item_units_based_strategy" class="Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy">
-            <argument key="type">order_item_units_based</argument>
+            <argument>order_item_units_based</argument>
             <argument type="collection">
                 <argument type="service" id="sylius.taxation.order_item_units_taxes_applicator" />
                 <argument type="service" id="sylius.taxation.order_shipment_taxes_applicator" />
