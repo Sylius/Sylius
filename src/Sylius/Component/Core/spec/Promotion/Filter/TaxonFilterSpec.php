@@ -56,4 +56,9 @@ final class TaxonFilterSpec extends ObjectBehavior
     {
         $this->filter([$item], [])->shouldReturn([$item]);
     }
+
+    function it_returns_all_items_if_configuration_is_empty(OrderItemInterface $item)
+    {
+        $this->filter([$item], ['filters' => ['taxons_filter' => ['taxons' => []]]])->shouldReturn([$item]);
+    }
 }

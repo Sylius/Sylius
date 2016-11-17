@@ -21,7 +21,7 @@ final class ProductFilter implements FilterInterface
      */
     public function filter(array $items, array $configuration)
     {
-        if (!isset($configuration['filters']['products_filter'])) {
+        if (empty($configuration['filters']['products_filter']['products'])) {
             return $items;
         }
 

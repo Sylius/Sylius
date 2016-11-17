@@ -650,8 +650,9 @@ final class PromotionContext implements Context
      * @param PromotionInterface $promotion
      * @param int $discount
      * @param array $configuration
+     * @param PromotionRuleInterface|null $rule
      */
-    private function createUnitFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], $rule = null)
+    private function createUnitFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
     {
         $this->persistPromotion($promotion, $this->actionFactory->createUnitFixedDiscount($discount), $configuration, $rule);
     }
@@ -660,8 +661,9 @@ final class PromotionContext implements Context
      * @param PromotionInterface $promotion
      * @param int $discount
      * @param array $configuration
+     * @param PromotionRuleInterface|null $rule
      */
-    private function createUnitPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], $rule = null)
+    private function createUnitPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
     {
         $this->persistPromotion($promotion, $this->actionFactory->createUnitPercentageDiscount($discount), $configuration, $rule);
     }
