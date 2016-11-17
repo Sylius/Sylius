@@ -126,8 +126,9 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I set its slug to :slug
      * @When I do not specify its slug
+     * @When I set its slug to :slug in :language
      */
-    public function iSetItsSlugTo($slug = null)
+    public function iSetItsSlugToIn($slug = null, $language = 'en_US')
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
@@ -136,7 +137,7 @@ final class ManagingTaxonsContext implements Context
             $this->updatePage,
         ]);
 
-        $currentPage->specifySlug($slug);
+        $currentPage->specifySlug($slug, $language);
     }
 
     /**

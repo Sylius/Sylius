@@ -55,9 +55,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifySlug($slug)
+    public function specifySlug($slug, $languageCode)
     {
-        $this->getDocument()->fillField('Slug', $slug);
+        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_slug', $languageCode), $slug);
     }
 
     /**

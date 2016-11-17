@@ -85,3 +85,8 @@ th {
 .ui.input input[readonly] {
   color: #aaa;
 }
+
+.field.loading.transition {
+  top: auto;
+  left: auto;
+}

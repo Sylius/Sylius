@@ -13,7 +13,7 @@ Feature: Adding a new taxon
         Given I want to create a new taxon
         When I specify its code as "t-shirts"
         And I name it "T-Shirts" in "English (United States)"
-        And I set its slug to "t-shirts"
+        And I set its slug to "t-shirts" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
         And the "T-Shirts" taxon should appear in the registry
@@ -23,7 +23,7 @@ Feature: Adding a new taxon
         Given I want to create a new taxon
         When I specify its code as "category"
         And I name it "Category" in "English (United States)"
-        And I set its slug to "category"
+        And I set its slug to "category" in "English (United States)"
         And I describe it as "Main taxonomy for products." in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created

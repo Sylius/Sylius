@@ -44,8 +44,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     /**
      * @param string $slug
+     * @param string $languageCode
      */
-    public function specifySlug($slug);
+    public function specifySlug($slug, $languageCode);
 
     /**
      * @return bool
