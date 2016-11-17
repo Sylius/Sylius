@@ -33,5 +33,5 @@ interface IndexPageInterface extends PageInterface
     /**
      * @return bool
      */
-    public function hasNoReviewMessage();
+    public function hasNoReviewsMessage();
 }
