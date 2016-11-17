@@ -19,21 +19,6 @@ The number is mutable, so you can change it by calling ``->setNumber('E001')`` o
 
     $order->setNumber('E001');
 
-Confirmation status
--------------------
-
-To check whether the order is confirmed or not, you can use the ``isConfirmed()`` method, which returns a *true/false* value.
-To change that status, you can use the confirmation setter, ``setConfirmed(false)``. All orders are confirmed by default, unless you enabled the e-mail confirmation feature.
-Order also can contain a confirmation token, accessible by the appropriate getter and setter.
-
-.. code-block:: php
-
-    <?php
-
-    if ($order->isConfirmed()) {
-        echo 'This one is confirmed, great!';
-    }
-
 Order totals
 ------------
 
