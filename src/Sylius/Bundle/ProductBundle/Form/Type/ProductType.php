@@ -15,6 +15,7 @@ use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ProductOptionFieldSubscribe
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\SimpleProductSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\TranslationsType;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -56,7 +57,7 @@ class ProductType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.product.enabled',
             ])
-            ->add('translations', 'sylius_translations', [
+            ->add('translations', TranslationsType::class, [
                 'entry_type' => 'sylius_product_translation',
                 'label' => 'sylius.form.product.translations',
             ])

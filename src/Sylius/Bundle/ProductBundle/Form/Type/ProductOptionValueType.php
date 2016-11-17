@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\TranslationsType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,7 +27,7 @@ class ProductOptionValueType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', 'sylius_translations', [
+            ->add('translations', TranslationsType::class, [
                 'entry_type' => 'sylius_product_option_value_translation',
                 'label' => 'sylius.form.option.name',
             ])
