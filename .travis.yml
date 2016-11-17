@@ -9,13 +9,13 @@ matrix:
     include:
         -
             sudo: required
-            php: 7.0
+            php: 7.1
             env: SYLIUS_SUITE="application"
             services:
                 - memcached
         -
             sudo: false
-            php: 7.0
+            php: 7.1
             env: SYLIUS_SUITE="docs packages"
             addons:
                 apt:
