@@ -60,8 +60,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     public function findLatest($count)
     {
         return $this->createQueryBuilder('o')
-            ->addSelect('item')
-            ->leftJoin('o.items', 'item')
             ->andWhere('o.state != :state')
             ->setMaxResults($count)
             ->orderBy('o.checkoutCompletedAt', 'desc')
