@@ -62,7 +62,7 @@ class OrderItemController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $this->isGrantedOr403($configuration, ResourceActions::CREATE);
+        $this->isGrantedOr403($configuration, CartActions::ADD);
         $newResource = $this->newResourceFactory->create($configuration, $this->factory);
 
         $this->getItemQuantityModifier()->modify($newResource, 1);
@@ -72,7 +72,7 @@ class OrderItemController extends ResourceController
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
             $newResource = $form->getData();
 
-            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
+            $event = $this->eventDispatcher->dispatchPreEvent(CartActions::ADD, $configuration, $newResource);
 
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {
                 throw new HttpException($event->getErrorCode(), $event->getMessage());
@@ -90,12 +90,12 @@ class OrderItemController extends ResourceController
             $cartManager->persist($cart);
             $cartManager->flush();
 
-            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
+            $this->eventDispatcher->dispatchPostEvent(CartActions::ADD, $configuration, $newResource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
             }
-            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
+            $this->flashHelper->addSuccessFlash($configuration, CartActions::ADD, $newResource);
 
             return $this->redirectHandler->redirectToResource($configuration, $newResource);
         }
@@ -125,10 +125,10 @@ class OrderItemController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $this->isGrantedOr403($configuration, ResourceActions::DELETE);
+        $this->isGrantedOr403($configuration, CartActions::REMOVE);
         $resource = $this->findOr404($configuration);
 
-        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
+        $event = $this->eventDispatcher->dispatchPreEvent(CartActions::REMOVE, $configuration, $resource);
 
         if ($event->isStopped() && !$configuration->isHtmlRequest()) {
             throw new HttpException($event->getErrorCode(), $event->getMessage());
@@ -148,13 +148,13 @@ class OrderItemController extends ResourceController
         $cartManager->persist($cart);
         $cartManager->flush();
 
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
+        $this->eventDispatcher->dispatchPostEvent(CartActions::REMOVE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+        $this->flashHelper->addSuccessFlash($configuration, CartActions::REMOVE, $resource);
 
         return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
