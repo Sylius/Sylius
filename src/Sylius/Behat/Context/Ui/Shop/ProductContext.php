@@ -462,7 +462,7 @@ final class ProductContext implements Context
     public function iShouldBeNotifiedThatThereAreNoReviews()
     {
         Assert::true(
-            $this->productReviewsIndexPage->hasNoReviewMessage(),
+            $this->productReviewsIndexPage->hasNoReviewsMessage(),
             'There should be message about no reviews but there is not.'
         );
     }
