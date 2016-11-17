@@ -309,6 +309,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+") identified by "([^"]+)"$/
+     */
+    public function theProductHasVariantPricedAtIdentifiedBy(
+        ProductInterface $product,
+        $productVariantName,
+        $price,
+        $code
+    ) {
+        $this->createProductVariant($product, $productVariantName, $price, $code);
+    }
+
+    /**
      * @Given /^there is product "([^"]+)" available in ((?:this|that|"[^"]+") channel)$/
      * @Given /^the store has a product "([^"]+)" available in ("([^"]+)" channel)$/
      */
