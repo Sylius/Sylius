@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -92,10 +93,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function getAttributeByName($name)
     {
-        $tableWithAttributes = $this->getElement('attributes');
+        $attributesTable = $this->getElement('attributes');
 
         $nameTdSelector = sprintf('tr > td.sylius-product-attribute-name:contains("%s")', $name);
-        $nameTd = $tableWithAttributes->find('css', $nameTdSelector);
+        $nameTd = $attributesTable->find('css', $nameTdSelector);
 
         if (null === $nameTd) {
             return false;
@@ -104,6 +105,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $row = $nameTd->getParent();
 
         return trim($row->find('css', 'td.sylius-product-attribute-value')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAttributes()
+    {
+        $attributesTable = $this->getElement('attributes');
+
+        return $attributesTable->findAll('css', 'tr > td.sylius-product-attribute-name');
     }
 
     /**

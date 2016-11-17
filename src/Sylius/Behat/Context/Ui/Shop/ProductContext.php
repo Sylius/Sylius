@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Taxon\ShowPageInterface as TaxonShowPageInterface;
@@ -138,6 +139,50 @@ final class ProductContext implements Context
                 $expectedAttribute,
                 $certainAttribute
             )
+        );
+    }
+
+    /**
+     * @Then I should see :count attributes
+     */
+    public function iShouldSeeAttributes($count)
+    {
+        $attributes = $this->getProductAttributes();
+
+        Assert::same(
+            count($attributes),
+            (int) $count,
+            'Product should have %2$d attributes, but has %d instead.'
+        );
+    }
+
+    /**
+     * @Then the first attribute should be :name
+     */
+    public function theFirstAttributeShouldBe($name)
+    {
+        $attributes = $this->getProductAttributes();
+        $firstAttribute = reset($attributes);
+
+        Assert::same(
+            $firstAttribute->getText(),
+            $name,
+            'Expected the first attribute to be %2$s, found %s instead.'
+        );
+    }
+
+    /**
+     * @Then the last attribute should be :name
+     */
+    public function theLastAttributeShouldBe($name)
+    {
+        $attributes = $this->getProductAttributes();
+        $lastAttribute = end($attributes);
+
+        Assert::same(
+            $lastAttribute->getText(),
+            $name,
+            'Expected the first attribute to be %2$s, found %s instead.'
         );
     }
 
@@ -472,6 +517,15 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^average rating of (product "[^"]+") should be (\d+)$/
+     */
+    public function thisProductAverageRatingShouldBe(ProductInterface $product, $averageRating)
+    {
+        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
+        $this->iShouldSeeAsItsAverageRating($averageRating);
+    }
+
+    /**
      * @param string $productName
      * @param string $productAssociationName
      *
@@ -487,5 +541,18 @@ final class ProductContext implements Context
                 $productAssociationName
             )
         );
+    }
+
+    /**
+     * @return NodeElement[]
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function getProductAttributes()
+    {
+        $attributes = $this->showPage->getAttributes();
+        Assert::notNull($attributes, 'The product has no attributes.');
+
+        return $attributes;
     }
 }

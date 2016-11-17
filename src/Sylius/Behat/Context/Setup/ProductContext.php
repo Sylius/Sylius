@@ -406,6 +406,20 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) has percent attribute "([^"]+)" at position (\d+)$/
+     */
+    public function thisProductHasPercentAttributeWithValueAtPosition(ProductInterface $product, $productAttributeName, $position)
+    {
+        $attribute = $this->createProductAttribute('percent',$productAttributeName);
+        $attribute->setPosition($position);
+        $attributeValue = $this->createProductAttributeValue(rand(1,100)/100, $attribute);
+
+        $product->addAttribute($attributeValue);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this product) has ([^"]+) attribute "([^"]+)" with date "([^"]+)"$/
      */
     public function thisProductHasDateTimeAttributeWithDate(ProductInterface $product, $productAttributeType, $productAttributeName, $date)
@@ -612,13 +626,18 @@ final class ProductContext implements Context
     /**
      * @param string $type
      * @param string $name
-     * @param string $code
+     * @param string|null $code
      *
      * @return ProductAttributeInterface
      */
-    private function createProductAttribute($type, $name, $code = 'PA112')
+    private function createProductAttribute($type, $name, $code = null)
     {
         $productAttribute = $this->productAttributeFactory->createTyped($type);
+
+        if (null === $code) {
+            $code = StringInflector::nameToCode($name);
+        }
+
         $productAttribute->setCode($code);
         $productAttribute->setName($name);
 
@@ -629,6 +648,7 @@ final class ProductContext implements Context
 
     /**
      * @param string $value
+     * @param ProductAttributeInterface $attribute
      *
      * @return ProductAttributeValueInterface
      */
@@ -657,6 +677,7 @@ final class ProductContext implements Context
     /**
      * @param string $productName
      * @param int $price
+     * @param string $date
      *
      * @return ProductInterface
      */
