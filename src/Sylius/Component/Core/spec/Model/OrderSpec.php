@@ -584,5 +584,4 @@ final class OrderSpec extends ObjectBehavior
         $this->setCustomerIp('172.16.254.1');
         $this->getCustomerIp()->shouldReturn('172.16.254.1');
     }
-
 }
