@@ -245,7 +245,10 @@ final class OrderFixture extends AbstractFixture
      */
     private function selectShipping(OrderInterface $order)
     {
-        $shippingMethod = $this->faker->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()));
+        $shippingMethod = $this
+            ->faker
+            ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
+        ;
 
         Assert::notNull($shippingMethod);
 
@@ -263,7 +266,7 @@ final class OrderFixture extends AbstractFixture
     {
         $paymentMethod = $this
             ->faker
-            ->randomElement($this->paymentMethodRepository->findAll())
+            ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
         ;
 
         Assert::notNull($paymentMethod);

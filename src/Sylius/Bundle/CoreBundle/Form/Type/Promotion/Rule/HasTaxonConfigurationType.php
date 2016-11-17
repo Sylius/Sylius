@@ -40,7 +40,7 @@ class HasTaxonConfigurationType extends AbstractType
     {
         $builder
             ->add('taxons', 'sylius_taxon_choice', [
-                'label' => 'sylius.form.promotion_rule.taxon.taxons',
+                'label' => 'sylius.form.promotion_rule.has_taxon.taxons',
                 'multiple' => true,
             ])
         ;

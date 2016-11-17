@@ -119,8 +119,13 @@ sylius:
             type: Association type
         product_association_type:
             name: Name
-        promotion_rule:
+        promotion_filter:
+            product:
+                products: Products
             taxon:
+                taxons: Taxons
+        promotion_rule:
+            has_taxon:
                 taxons: Taxons
             product:
                 products: Products

@@ -527,6 +527,25 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") if order contains any product (classified as "[^"]+")$/
+     */
+    public function itGivesOffOnEveryProductClassifiedAsIfOrderContainsAnyProductClassifiedAs(
+        PromotionInterface $promotion,
+        $discount,
+        $discountTaxon,
+        $targetTaxon
+    ) {
+        $rule = $this->ruleFactory->createHasTaxon([$targetTaxon->getCode()]);
+
+        $this->createUnitPercentagePromotion(
+            $promotion,
+            $discount,
+            $this->getTaxonFilterConfiguration([$discountTaxon->getCode()]),
+            $rule
+        );
+    }
+
+    /**
      * @Given /^(it) is coupon based promotion$/
      */
     public function itIsCouponBasedPromotion(PromotionInterface $promotion)

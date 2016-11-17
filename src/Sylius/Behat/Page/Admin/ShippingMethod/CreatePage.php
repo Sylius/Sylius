@@ -77,15 +77,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function checkChannel($channel)
+    public function checkChannel($channelName)
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
-            $this->getElement('channel', ['%channel%' => $channel])->click();
+            $this->getElement('channel', ['%channel%' => $channelName])->click();
 
             return;
         }
 
-        $this->getDocument()->checkField($channel);
+        $this->getDocument()->checkField($channelName);
     }
 
     /**
