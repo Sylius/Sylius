@@ -67,15 +67,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $leaves = $this->getLeaves();
         foreach ($leaves as $leaf) {
             if ($leaf->getText() === $name) {
-                $leaf = $leaf->getParent();
-                $menuButton = $leaf->find('css', '.wrench');
-                $menuButton->click();
-                $deleteButton = $leaf->find('css', '.sylius-delete-resource');
-                $deleteButton->click();
-
-                $deleteButton->waitFor(5, function () use ($leaf) {
-                    return null === $leaf->find('css', '.sylius-delete-resource');
-                });
+                $leaf->getParent()->find('css', '.ui.red.button')->press();
 
                 return;
             }
@@ -164,7 +156,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $tree = $this->getElement('tree');
         Assert::notNull($tree);
         /** @var NodeElement[] $leaves */
-        $leaves = $tree->findAll('css', '.item > .content > .header');
+        $leaves = $tree->findAll('css', '.item > .content > .header > a');
 
         if (null === $parentTaxon) {
             return $leaves;
@@ -206,13 +198,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $leaves = $this->getLeaves();
         foreach ($leaves as $leaf) {
             if ($leaf->getText() === $taxon->getName()) {
-                $leaf = $leaf->getParent();
-                $menuButton = $leaf->find('css', '.wrench');
-                $menuButton->click();
-                $moveButton = $leaf->find('css', sprintf('.%s', $direction));
+                $moveButton = $leaf->getParent()->find('css', sprintf('.sylius-taxon-move-%s', $direction));
                 $moveButton->click();
-                $moveButton->waitFor(5, function () use ($taxon) {
-                    return $this->getFirstLeafName() === $taxon->getName();
+
+                $moveButton->waitFor(5, function () use ($moveButton) {
+                    return !$moveButton->hasClass('loading');
                 });
 
                 return;
