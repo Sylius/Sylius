@@ -14,6 +14,8 @@ namespace Sylius\Component\Resource\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
+ * @see TranslatableInterface
+ *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
 trait TranslatableTrait
@@ -46,7 +48,9 @@ trait TranslatableTrait
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $locale
+     *
+     * @return TranslationInterface
      */
     public function getTranslation($locale = null)
     {
@@ -55,28 +59,20 @@ trait TranslatableTrait
             throw new \RuntimeException('No locale has been set and current locale is undefined.');
         }
 
-        if ($this->currentTranslation && $locale === $this->currentTranslation->getLocale()) {
-            return $this->currentTranslation;
-        }
-
         $translation = $this->translations->get($locale);
-        if (null === $translation) {
-            if (null === $this->fallbackLocale) {
-                throw new \RuntimeException('No fallback locale has been set.');
-            }
-
-            $fallbackTranslation = $this->translations->get($this->fallbackLocale);
-            if (null === $fallbackTranslation) {
-                $translation = $this->createTranslation();
-                $translation->setLocale($locale);
-
-                $this->addTranslation($translation);
-            } else {
-                $translation = clone $fallbackTranslation;
-            }
+        if (null !== $translation) {
+            return $translation;
         }
 
-        $this->currentTranslation = $translation;
+        $fallbackTranslation = $this->translations->get($this->fallbackLocale);
+        if (null !== $fallbackTranslation) {
+            return $fallbackTranslation;
+        }
+
+        $translation = $this->createTranslation();
+        $translation->setLocale($locale);
+
+        $this->addTranslation($translation);
 
         return $translation;
     }

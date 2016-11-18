@@ -25,8 +25,6 @@ interface TranslatableInterface
      * @param string $locale
      *
      * @return TranslationInterface
-     *
-     * @throws \RuntimeException
      */
     public function getTranslation($locale = null);
 
