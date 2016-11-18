@@ -10,7 +10,9 @@ sylius_fixtures:
 
             fixtures:
                 locale: ~
-                currency: ~
+                currency:
+                    options:
+                        USD: true
 
                 geographical:
                     options:
@@ -31,7 +33,7 @@ sylius_fixtures:
                                 locales:
                                     - "%locale%"
                                 currencies:
-                                    - "%currency%"
+                                    - "USD"
                                 enabled: true
 
                 payment_method:

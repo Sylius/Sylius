@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Collector;
 
 use Sylius\Bundle\CoreBundle\Application\Kernel;
 use Sylius\Component\Core\Context\ShopperContextInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Symfony\Component\HttpFoundation\Request;
@@ -32,22 +33,20 @@ final class SyliusCollector extends DataCollector
     /**
      * @param ShopperContextInterface $shopperContext
      * @param array $bundles
-     * @param string $defaultCurrencyCode
      * @param string $defaultLocaleCode
      */
     public function __construct(
         ShopperContextInterface $shopperContext,
         array $bundles,
-        $defaultCurrencyCode,
         $defaultLocaleCode
     ) {
         $this->shopperContext = $shopperContext;
 
         $this->data = [
             'version' => Kernel::VERSION,
-            'default_currency_code' => $defaultCurrencyCode,
+            'default_currency_code' => null,
             'currency_code' => null,
-            'default_locale_code' => $defaultLocaleCode,
+            'base_currency_code' => $defaultLocaleCode,
             'locale_code' => null,
             'extensions' => [
                 'SyliusApiBundle' => ['name' => 'API', 'enabled' => false],
@@ -117,6 +116,10 @@ final class SyliusCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         try {
+            /** @var ChannelInterface $channel */
+            $channel = $this->shopperContext->getChannel();
+
+            $this->data['default_currency_code'] = $channel->getDefaultCurrency();
             $this->data['currency_code'] = $this->shopperContext->getCurrencyCode();
         } catch (CurrencyNotFoundException $exception) {}
 
