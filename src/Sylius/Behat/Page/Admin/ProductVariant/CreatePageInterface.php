@@ -26,11 +26,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyPrice($price);
 
     /**
-     * @param int $price
-     */
-    public function specifyOriginalPrice($price);
-
-    /**
      * @param int $height
      * @param int $width
      * @param int $depth
@@ -42,6 +37,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $code
      */
     public function specifyCode($code);
+
+    /**
+     * @param int $currentStock
+     */
+    public function specifyCurrentStock($currentStock);
 
     /**
      * @param string $name

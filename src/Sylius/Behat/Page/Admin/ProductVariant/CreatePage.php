@@ -35,14 +35,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyOriginalPrice($price)
-    {
-        $this->getDocument()->fillField('Original price', $price);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function specifyCurrentStock($currentStock)
     {
         $this->getDocument()->fillField('Current stock', $currentStock);
@@ -130,7 +122,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'height' => '#sylius_product_variant_height',
             'on_hand' => '#sylius_product_variant_onHand',
             'option_select' => '#sylius_product_variant_optionValues_%option-name%',
-            'original_price' => '#sylius_product_variant_originalPrice',
             'price' => '#sylius_product_variant_price',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'weight' => '#sylius_product_variant_weight',

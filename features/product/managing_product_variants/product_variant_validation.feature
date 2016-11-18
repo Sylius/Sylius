@@ -28,16 +28,6 @@ Feature: Product variant validation
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the shop
 
     @ui
-    Scenario: Adding a new product variant with original price lower then 0
-        Given I want to create a new variant of this product
-        When I specify its code as "VODKA_WYBOROWA_PREMIUM"
-        And I set its price to "$80.00"
-        And I set its original price to "$-80.00"
-        And I try to add it
-        Then I should be notified that original price cannot be lower than 0
-        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the shop
-
-    @ui
     Scenario: Adding a new product variant without specifying its code
         Given I want to create a new variant of this product
         When I set its price to "$80.00"

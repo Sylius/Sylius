@@ -170,14 +170,6 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I set its original price to ("(?:€|£|\$)[^"]+")$/
-     */
-    public function iSetItsOriginalPriceTo($originalPrice)
-    {
-        $this->createPage->specifyOriginalPrice($originalPrice);
-    }
-
-    /**
      * @When I set its height, width, depth and weight to :number
      */
     public function iSetItsDimensionsTo($value)
@@ -387,14 +379,6 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatCannotBeLowerThen($element)
     {
         $this->assertValidationMessage($element, sprintf('%s must not be negative.', ucfirst($element)));
-    }
-
-    /**
-     * @Then I should be notified that original price cannot be lower than 0
-     */
-    public function iShouldBeNotifiedThatOriginalPriceCannotBeLowerThen()
-    {
-        $this->assertValidationMessage('original_price', 'Original price must not be negative.');
     }
 
     /**
