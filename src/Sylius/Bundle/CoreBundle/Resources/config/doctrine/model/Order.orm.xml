@@ -8,7 +8,6 @@
     <mapped-superclass name="Sylius\Component\Core\Model\Order" table="sylius_order">
         <field name="currencyCode" column="currency_code" length="3" />
 
-        <field name="exchangeRate" column="exchange_rate" type="decimal" precision="10" scale="5" />
         <field type="string" name="localeCode" column="locale_code" />
         <field type="string" name="checkoutState" column="checkout_state" />
         <field type="string" name="paymentState" column="payment_state" />
