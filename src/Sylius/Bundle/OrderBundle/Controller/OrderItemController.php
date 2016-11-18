@@ -54,8 +54,8 @@ class OrderItemController extends ResourceController
         );
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            /** @var AddCartItemCommandInterface $addCartItemCommand */
-            $addCartItemCommand = $form->getData();
+            /** @var AddToCartCommandInterface $addCartItemCommand */
+            $addToCartCommand = $form->getData();
 
             $event = $this->eventDispatcher->dispatchPreEvent(CartActions::ADD, $configuration, $orderItem);
 
@@ -68,7 +68,7 @@ class OrderItemController extends ResourceController
                 return $this->redirectHandler->redirectToIndex($configuration, $orderItem);
             }
 
-            $this->getOrderModifier()->addToOrder($addCartItemCommand->getCart(), $addCartItemCommand->getCartItem());
+            $this->getOrderModifier()->addToOrder($addToCartCommand->getCart(), $addToCartCommand->getCartItem());
 
             $cartManager = $this->getCartManager();
             $cartManager->persist($cart);
@@ -201,11 +201,11 @@ class OrderItemController extends ResourceController
      * @param OrderInterface $cart
      * @param OrderItemInterface $cartItem
      *
-     * @return AddCartItemCommandInterface
+     * @return AddToCartCommand
      */
     protected function createAddCartItemCommand(OrderInterface $cart, OrderItemInterface $cartItem)
     {
-        return AddCartItemCommand::createForCartAndCartItem($cart, $cartItem);
+        return AddToCartCommand::createForCartAndCartItem($cart, $cartItem);
     }
 
     /**

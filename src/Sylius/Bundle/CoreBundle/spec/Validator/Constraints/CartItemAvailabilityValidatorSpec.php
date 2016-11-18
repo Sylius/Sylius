@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailability;
 use Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailabilityValidator;
 use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock;
-use Sylius\Bundle\OrderBundle\Controller\AddCartItemCommandInterface;
+use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -53,7 +53,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('validate', [$order, $cartItemAvailabilityConstraint]);
     }
 
-    function it_is_cart_item_availability_validator(AddCartItemCommandInterface $addCartItemCommand)
+    function it_is_cart_item_availability_validator(AddToCartCommandInterface $addCartItemCommand)
     {
         $inStockConstraint = new InStock();
 
@@ -63,7 +63,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_requested_cart_item_is_available(
         ExecutionContextInterface $executionContext,
         AvailabilityCheckerInterface $availabilityChecker,
-        AddCartItemCommandInterface $addCartItemCommand,
+        AddToCartCommandInterface $addCartItemCommand,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant
@@ -86,7 +86,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_requested_cart_item_is_not_available(
         ExecutionContextInterface $executionContext,
         AvailabilityCheckerInterface $availabilityChecker,
-        AddCartItemCommandInterface $addCartItemCommand,
+        AddToCartCommandInterface $addCartItemCommand,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ProductVariantInterface $productVariant
@@ -111,7 +111,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
     function it_adds_violation_if_total_quantity_of_cart_items_exceed_available_quantity(
         ExecutionContextInterface $executionContext,
         AvailabilityCheckerInterface $availabilityChecker,
-        AddCartItemCommandInterface $addCartItemCommand,
+        AddToCartCommandInterface $addCartItemCommand,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemInterface $existingOrderItem,
@@ -140,7 +140,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
     function it_does_not_add_violation_if_total_quantity_of_cart_items_do_not_exceed_available_quantity(
         ExecutionContextInterface $executionContext,
         AvailabilityCheckerInterface $availabilityChecker,
-        AddCartItemCommandInterface $addCartItemCommand,
+        AddToCartCommandInterface $addCartItemCommand,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemInterface $existingOrderItem,

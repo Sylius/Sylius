@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
-use Sylius\Bundle\OrderBundle\Controller\AddCartItemCommandInterface;
+use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -38,13 +38,13 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
     }
 
     /**
-     * @param AddCartItemCommandInterface $addCartItemCommand
+     * @param AddToCartCommandInterface $addCartItemCommand
      *
      * {@inheritDoc}
      */
     public function validate($addCartItemCommand, Constraint $constraint)
     {
-        Assert::isInstanceOf($addCartItemCommand, AddCartItemCommandInterface::class);
+        Assert::isInstanceOf($addCartItemCommand, AddToCartCommandInterface::class);
         Assert::isInstanceOf($constraint, CartItemAvailability::class);
 
         /** @var OrderItemInterface $cartItem */

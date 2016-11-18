@@ -17,7 +17,7 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface AddCartItemCommandInterface
+interface AddToCartCommandInterface
 {
     /**
      * @return OrderInterface

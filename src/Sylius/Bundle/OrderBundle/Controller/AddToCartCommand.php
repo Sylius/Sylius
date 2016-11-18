@@ -17,7 +17,7 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class AddCartItemCommand implements AddCartItemCommandInterface
+final class AddToCartCommand implements AddToCartCommandInterface
 {
     /**
      * @var OrderInterface
@@ -33,7 +33,7 @@ final class AddCartItemCommand implements AddCartItemCommandInterface
      * @param OrderInterface $cart
      * @param OrderItemInterface $cartItem
      *
-     * @return AddCartItemCommand
+     * @return AddToCartCommand
      */
     public static function createForCartAndCartItem(OrderInterface $cart, OrderItemInterface $cartItem)
     {

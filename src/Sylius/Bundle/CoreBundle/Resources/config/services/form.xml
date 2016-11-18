@@ -177,10 +177,10 @@
             <tag name="form.type" alias="sylius_product_variant" />
         </service>
 
-        <service id="sylius.form.type.add_cart_item" class="Sylius\Bundle\CoreBundle\Form\Type\Order\AddCartItemType">
-            <argument>Sylius\Bundle\OrderBundle\Controller\AddCartItemCommand</argument>
+        <service id="sylius.form.type.add_to_cart" class="Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType">
+            <argument>Sylius\Bundle\OrderBundle\Controller\AddToCartCommand</argument>
             <argument>%sylius.validation_groups.order_item%</argument>
-            <tag name="form.type" alias="sylius_add_cart_item" />
+            <tag name="form.type" alias="sylius_add_to_cart" />
         </service>
     </services>
 </container>

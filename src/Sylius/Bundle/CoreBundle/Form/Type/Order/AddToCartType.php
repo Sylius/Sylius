@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class AddCartItemType extends AbstractResourceType
+final class AddToCartType extends AbstractResourceType
 {
     /**
      * {@inheritDoc}
@@ -52,6 +52,6 @@ final class AddCartItemType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_add_cart_item';
+        return 'sylius_add_to_cart';
     }
 }

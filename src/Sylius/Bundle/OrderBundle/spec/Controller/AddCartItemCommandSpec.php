@@ -12,15 +12,15 @@
 namespace spec\Sylius\Bundle\OrderBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\OrderBundle\Controller\AddCartItemCommand;
-use Sylius\Bundle\OrderBundle\Controller\AddCartItemCommandInterface;
+use Sylius\Bundle\OrderBundle\Controller\AddToCartCommand;
+use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class AddCartItemCommandSpec extends ObjectBehavior
+final class AddToCartCommandSpec extends ObjectBehavior
 {
     function let(OrderInterface $order, OrderItemInterface $orderItem)
     {
@@ -29,12 +29,12 @@ final class AddCartItemCommandSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(AddCartItemCommand::class);
+        $this->shouldHaveType(AddToCartCommand::class);
     }
 
     function it_is_add_cart_item_command()
     {
-        $this->shouldImplement(AddCartItemCommandInterface::class);
+        $this->shouldImplement(AddToCartCommandInterface::class);
     }
 
     function it_has_order(OrderInterface $order)
