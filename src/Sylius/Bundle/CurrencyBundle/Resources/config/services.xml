@@ -43,5 +43,9 @@
             <argument type="service" id="sylius.templating.helper.currency" />
             <tag name="twig.extension" />
         </service>
+
+        <service id="sylius.validator.different_counter_currency" class="Sylius\Bundle\CurrencyBundle\Validator\Constraints\DifferentBaseCounterCurrencyValidator">
+            <tag name="validator.constraint_validator" />
+        </service>
     </services>
 </container>

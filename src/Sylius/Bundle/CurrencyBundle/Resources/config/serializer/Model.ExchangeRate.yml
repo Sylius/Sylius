@@ -1,0 +1,16 @@
+Sylius\Component\Currency\Model\ExchangeRate:
+    exclusion_policy: ALL
+    xml_root_name: exchange_rate
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        ratio:
+            expose: true
+            type: float
+        virtual_properties:
+            getFromCurrency:
+                serialized_name: base_currency
+            getToCurrency:
+                serialized_name: counter_currency
