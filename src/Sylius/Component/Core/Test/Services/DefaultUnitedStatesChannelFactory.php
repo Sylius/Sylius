@@ -29,9 +29,9 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     const DEFAULT_CHANNEL_CODE = 'WEB-US';
     const DEFAULT_COUNTRY_CODE = 'US';
     const DEFAULT_ZONE_CODE = 'US';
+    const DEFAULT_CURRENCY_CODE = 'USD';
     const DEFAULT_ZONE_NAME = 'United States';
     const DEFAULT_CHANNEL_NAME = 'United States';
-    const DEFAULT_CURRENCY_CODE = 'USD';
 
     /**
      * @var RepositoryInterface

@@ -25,6 +25,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
 {
     const DEFAULT_CHANNEL_NAME = 'Default';
     const DEFAULT_CHANNEL_CODE = 'DEFAULT';
+    const DEFAULT_CHANNEL_CURRENCY = 'USD';
 
     /**
      * @var ChannelFactoryInterface
@@ -59,11 +60,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     /**
      * @var string
      */
-    private $defaultCurrencyCode;
-
-    /**
-     * @var string
-     */
     private $defaultLocaleCode;
 
     /**
@@ -73,7 +69,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
      * @param RepositoryInterface $channelRepository
      * @param RepositoryInterface $currencyRepository
      * @param RepositoryInterface $localeRepository
-     * @param string $defaultCurrencyCode
      * @param string $defaultLocaleCode
      */
     public function __construct(
@@ -83,7 +78,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         RepositoryInterface $channelRepository,
         RepositoryInterface $currencyRepository,
         RepositoryInterface $localeRepository,
-        $defaultCurrencyCode,
         $defaultLocaleCode
     ) {
         $this->channelFactory = $channelFactory;
@@ -92,7 +86,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         $this->channelRepository = $channelRepository;
         $this->currencyRepository = $currencyRepository;
         $this->localeRepository = $localeRepository;
-        $this->defaultCurrencyCode = $defaultCurrencyCode;
         $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
@@ -129,7 +122,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
      */
     private function provideCurrency($currencyCode = null)
     {
-        $currencyCode = $currencyCode ?: $this->defaultCurrencyCode;
+        $currencyCode = $currencyCode ?: self::DEFAULT_CHANNEL_CURRENCY;
 
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);

@@ -32,10 +32,6 @@
         <service id="sylius.form.extension.type.payment_method" class="Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType" />
         </service>
-        <service id="sylius.form.extension.type.currency" class="Sylius\Bundle\CoreBundle\Form\Extension\CurrencyTypeExtension">
-            <argument>%currency%</argument>
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType" />
-        </service>
         <service id="sylius.form.extension.type.tax_rate" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxRateTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType" />
         </service>

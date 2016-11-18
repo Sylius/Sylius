@@ -19,12 +19,6 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
-                price:
-                    type: twig
-                    path: price
-                    label: sylius.ui.price
-                    options:
-                        template: "@SyliusAdmin/Grid/Field/money.html.twig"
                 inventory:
                     type: twig
                     path: .
