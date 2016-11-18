@@ -11,20 +11,12 @@
 
 -->
 
-<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
-                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
-                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
-
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sylius\Component\Core\Model\ProductVariant" table="sylius_product_variant">
         <field name="onHold" column="on_hold" type="integer" />
         <field name="onHand" column="on_hand" type="integer" />
         <field name="tracked" type="boolean" />
         <field name="price" column="price" type="integer">
-            <gedmo:versioned />
-        </field>
-        <field name="originalPrice" column="original_price" type="integer" nullable="true">
             <gedmo:versioned />
         </field>
         <field name="pricingCalculator" column="pricing_calculator" type="string">
@@ -52,5 +44,4 @@
 
         <gedmo:loggable />
     </mapped-superclass>
-
 </doctrine-mapping>

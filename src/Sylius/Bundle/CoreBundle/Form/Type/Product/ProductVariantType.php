@@ -57,10 +57,6 @@ class ProductVariantType extends BaseProductVariantType
             ->add('price', 'sylius_money', [
                 'label' => 'sylius.form.variant.price',
             ])
-            ->add('originalPrice', 'sylius_money', [
-                'required' => false,
-                'label' => 'sylius.form.variant.original_price',
-            ])
             ->add('tracked', 'checkbox', [
                 'label' => 'sylius.form.variant.tracked',
             ])

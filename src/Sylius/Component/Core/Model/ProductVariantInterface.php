@@ -69,23 +69,6 @@ interface ProductVariantInterface extends
     public function setDepth($depth);
 
     /**
-     * @return int
-     */
-    public function getOriginalPrice();
-
-    /**
-     * @param int|null $originalPrice
-     *
-     * @throws \InvalidArgumentException
-     */
-    public function setOriginalPrice($originalPrice);
-
-    /**
-     * @return bool
-     */
-    public function isPriceReduced();
-
-    /**
      * @param TaxCategoryInterface $category
      */
     public function setTaxCategory(TaxCategoryInterface $category = null);

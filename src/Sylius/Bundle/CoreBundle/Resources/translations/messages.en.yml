@@ -104,7 +104,6 @@ sylius:
             height: Height
             on_hand: Current stock
             price: Price
-            original_price: Original price
             sku: SKU
             weight: Weight
             width: Width
