@@ -92,11 +92,12 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function moveDown(TaxonInterface $taxon);
 
     /**
+     * @param int $position
      * @param TaxonInterface|null $parentTaxon
      *
      * @return string
      */
-    public function getFirstLeafName(TaxonInterface $parentTaxon = null);
+    public function getLeafNameFromPosition($position, TaxonInterface $parentTaxon = null);
 
     /**
      * @param TaxonInterface|null $parentTaxon
@@ -106,4 +107,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @throws ElementNotFoundException
      */
     public function getLeaves(TaxonInterface $parentTaxon = null);
+
+    /**
+     * @param TaxonInterface $taxon
+     * @param int $expectedPosition
+     */
+    public function waitForTaxonRelocation(TaxonInterface $taxon, $expectedPosition);
 }

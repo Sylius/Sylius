@@ -143,9 +143,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritDoc}
      */
-    public function getFirstLeafName(TaxonInterface $parentTaxon = null)
+    public function getLeafNameFromPosition($position, TaxonInterface $parentTaxon = null)
     {
-        return $this->getLeaves($parentTaxon)[0]->getText();
+        $firstTaxonElement = $this->getLeaves($parentTaxon)[0];
+
+        return $firstTaxonElement->getText();
     }
 
     /**
@@ -167,6 +169,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
                 return $leaf->findAll('css', '.item > .content > .header');
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function waitForTaxonRelocation(TaxonInterface $taxon, $expectedPosition)
+    {
+        $this->getDocument()->waitFor(5, function () use ($taxon, $expectedPosition) {
+            return $this->getLeafNameFromPosition($expectedPosition) === $taxon->getName();
+        });
     }
 
     /**
@@ -200,10 +212,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             if ($leaf->getText() === $taxon->getName()) {
                 $moveButton = $leaf->getParent()->find('css', sprintf('.sylius-taxon-move-%s', $direction));
                 $moveButton->click();
-
-                $moveButton->waitFor(5, function () use ($moveButton) {
-                    return !$moveButton->hasClass('loading');
-                });
 
                 return;
             }
