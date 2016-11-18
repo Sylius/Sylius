@@ -142,21 +142,24 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @Then the slug field should not be editable
+     * @Then the slug field should (also )not be editable in :language
      */
-    public function theSlugFieldShouldNotBeEditable()
+    public function theSlugFieldShouldNotBeEditable($language = 'en_US')
     {
         Assert::true(
-            $this->updatePage->isSlugReadOnly(),
-            'Slug should be immutable, but it does not.'
+            $this->updatePage->isSlugReadOnly($language),
+            sprintf('Slug in "%s" should be immutable, but it does not.', $language)
         );
     }
 
     /**
      * @When I enable slug modification
+     * @When I enable slug modification in :language
      */
-    public function iEnableSlugModification()
+    public function iEnableSlugModification($language = 'en_US')
     {
-        $this->updatePage->enableSlugModification();
+        $this->updatePage->activateLanguageTab($language);
+        $this->updatePage->enableSlugModification($language);
     }
 
     /**

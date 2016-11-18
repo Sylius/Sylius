@@ -214,6 +214,7 @@
         <service id="sylius.behat.context.setup.taxonomy" class="Sylius\Behat\Context\Setup\TaxonomyContext">
             <argument type="service" id="__symfony__.sylius.repository.taxon" />
             <argument type="service" id="__symfony__.sylius.factory.taxon" />
+            <argument type="service" id="__symfony__.sylius.factory.taxon_translation" />
             <argument type="service" id="__symfony__.sylius.factory.taxon_image" />
             <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
             <argument type="service" id="__symfony__.sylius.image_uploader" />

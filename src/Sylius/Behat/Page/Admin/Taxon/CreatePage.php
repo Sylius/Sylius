@@ -187,6 +187,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function activateLanguageTab($locale)
     {
+        if (!$this->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
         $languageTabTitle = $this->getElement('language_tab', ['%locale%' => $locale]);
         if (!$languageTabTitle->hasClass('active')) {
             $languageTabTitle->click();

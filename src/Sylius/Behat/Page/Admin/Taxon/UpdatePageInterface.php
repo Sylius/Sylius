@@ -67,9 +67,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isImageWithCodeDisplayed($code);
 
     /**
+     * @param string $languageCode
+     *
      * @return bool
      */
-    public function isSlugReadOnly();
+    public function isSlugReadOnly($languageCode = 'en_US');
 
     /**
      * @param string $code
@@ -78,7 +80,10 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function removeFirstImage();
 
-    public function enableSlugModification();
+    /**
+     * @param string $languageCode
+     */
+    public function enableSlugModification($languageCode = 'en_US');
 
     /**
      * @return int

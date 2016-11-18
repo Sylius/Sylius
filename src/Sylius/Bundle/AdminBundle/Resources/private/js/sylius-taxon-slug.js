@@ -10,7 +10,7 @@ $(document).ready(function() {
         }, 1000);
     });
 
-    $('#toggle-taxon-slug-modification').on('click', function(e) {
+    $('.toggle-taxon-slug-modification').on('click', function(e) {
         e.preventDefault();
         toggleSlugModification($(this), $(this).siblings('input'));
     });
