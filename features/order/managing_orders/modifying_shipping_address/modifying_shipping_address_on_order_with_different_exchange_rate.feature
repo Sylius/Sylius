@@ -21,7 +21,7 @@ Feature: Modifying a customer's shipping address of an order with a different cu
         And the customer chose "DHL" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @ui @todo
     Scenario: Modifying a customer's shipping address when the exchange rate has been changed
         Given the exchange rate for currency "GBP" was changed to 2.00
         When I view the summary of the order "#00000001"

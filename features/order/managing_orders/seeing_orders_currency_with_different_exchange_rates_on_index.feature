@@ -38,7 +38,7 @@ Feature: Seeing orders' total in their currency and respective exchange rate
         When I browse orders
         Then I should see the order "#00000666" with total "£120.00"
 
-    @ui
+    @ui @todo
     Scenario: Seeing an order with total based on exchange rate at the time of placing the order
         Given there is a customer "satin@teamlucifer.com" that placed an order "#00666000"
         And the customer has chosen to order in the "GBP" currency

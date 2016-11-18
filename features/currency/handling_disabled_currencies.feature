@@ -14,7 +14,7 @@ Feature: Handling disabled currencies
         When I browse that channel
         Then I should not be able to shop using the "GBP" currency
 
-    @ui
+    @ui @todo
     Scenario: Failing to browse channel with disabled default currency
         Given the currency "EUR" is disabled as well
         When I try to browse that channel
