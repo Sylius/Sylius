@@ -524,13 +524,16 @@ final class ManagingTaxonsContext implements Context
      */
     public function theFirstTaxonOnTheListShouldBe(TaxonInterface $taxon)
     {
+        $this->createPage->open();
+        $this->createPage->waitForTaxonRelocation($taxon, 0);
+
         Assert::same(
-            $this->createPage->getFirstLeafName(),
+            $this->createPage->getLeafNameFromPosition(0),
             $taxon->getName(),
             sprintf(
                 'Expected %s as a first taxon, but got %s.',
                 $taxon->getName(),
-                $this->createPage->getFirstLeafName()
+                $this->createPage->getLeafNameFromPosition(0)
             )
         );
     }
