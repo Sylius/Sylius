@@ -266,6 +266,22 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @Then this taxon should have slug :value in :language
+     */
+    public function thisTaxonElementShouldHaveSlugIn($value, $language = null)
+    {
+        if (null !== $language) {
+            $this->updatePage->activateLanguageTab($language);
+        }
+
+        Assert::same(
+            $this->updatePage->getSlug($language),
+            $value,
+            sprintf('Taxon should have slug "%s" but it has not.', $value)
+        );
+    }
+
+    /**
      * @Then the code field should be disabled
      */
     public function theCodeFieldShouldBeDisabled()

@@ -97,6 +97,13 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function getParent();
 
     /**
+     * @param string $languageCode
+     *
+     * @return string
+     */
+    public function getSlug($languageCode = 'en_US');
+
+    /**
      * @return string
      *
      * @throws ElementNotFoundException
@@ -111,4 +118,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @throws ElementNotFoundException
      */
     public function getValidationMessageForImageAtPlace($place);
+
+    /**
+     * @param string $locale
+     */
+    public function activateLanguageTab($locale);
 }

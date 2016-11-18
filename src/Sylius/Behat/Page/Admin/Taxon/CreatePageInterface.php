@@ -114,4 +114,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param int $expectedPosition
      */
     public function waitForTaxonRelocation(TaxonInterface $taxon, $expectedPosition);
+
+    /**
+     * @param string $locale
+     */
+    public function activateLanguageTab($locale);
 }
