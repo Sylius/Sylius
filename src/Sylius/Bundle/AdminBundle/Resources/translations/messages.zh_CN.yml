@@ -33,5 +33,3 @@ sylius:
                 sales:
                     header: 销售额
                     orders: 订单
-                content:
-                    routes: 路由

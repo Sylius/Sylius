@@ -30,4 +30,5 @@ sylius:
             description: Описание
             enabled: Включен?
             gateway: Терминал
+            instructions: Инструкции
             name: Название

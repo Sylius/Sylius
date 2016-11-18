@@ -46,6 +46,7 @@ sylius:
             calculator: نوع محاسبه
             category: دسته
             category_requirement: نیازمندی های دسته
+            channels: کانال های فروش
             configuration: تنظیمات
             description: شرح
             enabled: فعال

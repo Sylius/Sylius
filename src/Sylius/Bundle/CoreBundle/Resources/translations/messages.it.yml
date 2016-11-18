@@ -119,15 +119,17 @@ sylius:
             type: Tipi di associazione
         product_association_type:
             name: Nome
+        promotion_filter:
+            product:
+                products: Prodotti
         promotion_rule:
-            contains_taxon:
-                taxon: Tipologia
-                count: Conta
             product:
                 products: Prodotti
             total_of_items_from_taxon:
                 taxon: Tipologia
                 amount: Importo
+        payment_method:
+            channels: Canali
     installer:
         extensions:
             header: estensioni

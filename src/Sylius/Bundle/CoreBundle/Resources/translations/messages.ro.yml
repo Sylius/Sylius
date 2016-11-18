@@ -101,8 +101,6 @@ sylius:
         product_association_type:
             name: Nume
         promotion_rule:
-            contains_taxon:
-                count: Număr
             total_of_items_from_taxon:
                 amount: Sumă
     installer:

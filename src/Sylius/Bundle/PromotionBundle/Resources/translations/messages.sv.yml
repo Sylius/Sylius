@@ -15,8 +15,6 @@ sylius:
             rules: Regler
             starts_at: Startar vid
         promotion_action:
-            fixed_discount_configuration:
-                amount: Antal
             type: Typ
         promotion_coupon_generator_instruction:
             amount: Antal

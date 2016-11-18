@@ -11,12 +11,11 @@ sylius:
             description: Opis
             ends_at: Završava
             name: Naziv promocije
+            priority: Prioritet
             rules: Pravila
             starts_at: Počinje
             usage_limit: Ograničenje
         promotion_action:
-            fixed_discount_configuration:
-                amount: Iznos
             type: Vrsta
         promotion_coupon:
             usage_limit: Ograničenje

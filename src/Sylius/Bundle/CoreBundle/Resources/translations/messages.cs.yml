@@ -117,9 +117,8 @@ sylius:
             type: Typy asociace
         product_association_type:
             name: Jméno
-        promotion_rule:
-            contains_taxon:
-                count: Počet
+        payment_method:
+            channels: Kanály
     installer:
         extensions:
             header: rozšíření

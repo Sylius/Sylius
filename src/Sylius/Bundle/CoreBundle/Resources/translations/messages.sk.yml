@@ -119,11 +119,10 @@ sylius:
         product_association_type:
             name: Názov
         promotion_rule:
-            contains_taxon:
-                taxon: Kategória
-                count: Počet
             total_of_items_from_taxon:
                 taxon: Kategória
+        payment_method:
+            channels: Kanály
     installer:
         extensions:
             header: Rozšírenia

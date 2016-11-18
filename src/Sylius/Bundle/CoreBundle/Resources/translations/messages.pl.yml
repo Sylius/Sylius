@@ -121,17 +121,17 @@ sylius:
             type: Rodzaj powiązania
         product_association_type:
             name: Nazwa
+        promotion_filter:
+            product:
+                products: Produkty
         promotion_rule:
-            contains_taxon:
-                taxon: Takson
-                count: Ilość
-            taxon:
-                taxons: Podatki
             product:
                 products: Produkty
             total_of_items_from_taxon:
                 taxon: Takson
                 amount: Kwota
+        payment_method:
+            channels: Kanały
     installer:
         extensions:
             header: rozszerzenia

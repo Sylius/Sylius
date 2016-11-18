@@ -121,17 +121,21 @@ sylius:
             type: Tipos de asociación
         product_association_type:
             name: Nombre
-        promotion_rule:
-            contains_taxon:
-                taxon: Taxón
-                count: Contador
+        promotion_filter:
+            product:
+                products: Productos
             taxon:
+                taxons: Taxones
+        promotion_rule:
+            has_taxon:
                 taxons: Taxones
             product:
                 products: Productos
             total_of_items_from_taxon:
                 taxon: Taxón
                 amount: Cantidad
+        payment_method:
+            channels: Canales
     installer:
         extensions:
             header: extensiones

@@ -7,6 +7,3 @@ sylius:
             main:
                 customers:
                     groups: Kelompok
-                content:
-                    header: Konten
-                    routes: Rute

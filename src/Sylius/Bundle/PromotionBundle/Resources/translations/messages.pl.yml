@@ -12,12 +12,11 @@ sylius:
             ends_at: Data zakończenia
             exclusive: Ekskluzywny
             name: Nazwa
+            priority: Priorytet
             rules: Reguły
             starts_at: Data rozpoczęcia
             usage_limit: Limit użycia
         promotion_action:
-            fixed_discount_configuration:
-                amount: Kwota
             type: Typ
         promotion_coupon:
             usage_limit: Limit użycia

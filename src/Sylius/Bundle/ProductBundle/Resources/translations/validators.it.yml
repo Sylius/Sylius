@@ -14,9 +14,6 @@ sylius:
             min_length: Il nome del prodotto deve essere lungo almeno 1 carattere. |Il nome del prodotto deve essere lungo almeno {{ limit }} caratteri.
             max_length: Il nome del prodotto non deve essere più lungo di 1 carattere. |Il nome del prodotto non deve essere più lungo di {{ limit }} caratteri.
     variant:
-        sku:
-            not_blank: Inserire la variante SKU.
-            unique: La variante SKU deve essere univoca.
         combination: La variante con questa opzione impostata esiste già.
     option:
         code:

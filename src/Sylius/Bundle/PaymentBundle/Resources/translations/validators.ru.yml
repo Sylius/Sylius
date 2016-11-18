@@ -19,6 +19,11 @@ sylius:
             min_length: CVV код кредитной карты должен быть длиннее чем {{ limit }} цифр.
         expiry_year:
             not_blank: Пожалуйста, выберите год окончания.
+    payment:
+        currency_code:
+            not_valid: Код валюты, что вы ввели, неверный.
+        method:
+            not_blank: Пожалуйста, выберите способ оплаты.
     payment_method:
         gateway:
             not_blank: Пожалуйста, выберите способ оплаты.

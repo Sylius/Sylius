@@ -119,15 +119,20 @@ sylius:
             type: Sąryšio tipas
         product_association_type:
             name: Pavadinimas
-        promotion_rule:
-            contains_taxon:
-                count: Kiekis
+        promotion_filter:
+            product:
+                products: Prekės
             taxon:
+                taxons: Taksonai
+        promotion_rule:
+            has_taxon:
                 taxons: Taksonai
             product:
                 products: Prekės
             total_of_items_from_taxon:
                 amount: Suma
+        payment_method:
+            channels: Kanalai
     installer:
         extensions:
             header: plėtiniai

@@ -119,11 +119,10 @@ sylius:
         product_association_type:
             name: Név
         promotion_rule:
-            contains_taxon:
-                taxon: Taxonómia
-                count: Mennyiség
             total_of_items_from_taxon:
                 taxon: Taxonómia
+        payment_method:
+            channels: Csatornák
     installer:
         extensions:
             header: kiegészítők

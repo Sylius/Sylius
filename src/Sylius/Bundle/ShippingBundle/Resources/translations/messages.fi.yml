@@ -4,4 +4,5 @@
 sylius:
     form:
         shipping_method:
+            channels: Kanavat
             translations: Käännökset

@@ -15,8 +15,6 @@ sylius:
             starts_at: Пачатак
             usage_limit: Ліміт карыстання
         promotion_action:
-            fixed_discount_configuration:
-                amount: Сума
             type: Тып
         promotion_coupon:
             usage_limit: Ліміт карыстання

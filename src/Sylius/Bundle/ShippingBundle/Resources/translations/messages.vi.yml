@@ -6,4 +6,5 @@ sylius:
         shipping_category:
             name: Tên
         shipping_method:
+            channels: Kênh
             name: Tên

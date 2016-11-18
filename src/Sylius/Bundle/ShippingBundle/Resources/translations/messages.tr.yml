@@ -41,6 +41,7 @@ sylius:
             calculator: Hesaplayıcı
             category: Kategori
             category_requirement: Kategori gereksinimi
+            channels: Kanallar
             configuration: Ayarlar
             description: Açıklama
             enabled: Etkin

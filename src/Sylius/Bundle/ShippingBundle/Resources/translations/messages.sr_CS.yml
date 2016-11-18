@@ -6,6 +6,7 @@ sylius:
         shipping_category:
             name: Ime
         shipping_method:
+            channels: Kanali
             name: Ime
             tax_category: Kategorija proizvoda
             translations: Prevodi

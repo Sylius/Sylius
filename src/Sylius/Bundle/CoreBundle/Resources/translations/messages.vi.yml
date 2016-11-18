@@ -49,6 +49,8 @@ sylius:
             width: Chiều rộng
         product_association_type:
             name: Tên
+        payment_method:
+            channels: Kênh
     installer:
         extensions:
             "off": false

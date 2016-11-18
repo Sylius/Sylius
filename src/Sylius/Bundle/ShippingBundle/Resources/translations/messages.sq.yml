@@ -43,6 +43,7 @@ sylius:
             calculator: Llogaritësi
             category: Kategorija
             category_requirement: Kërkesa e kategorisë
+            channels: Kanalet
             configuration: Konfigurimi
             description: Përshkrimi
             enabled: E aktivizuar

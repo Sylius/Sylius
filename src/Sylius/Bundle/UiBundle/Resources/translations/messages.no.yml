@@ -260,7 +260,6 @@ sylius:
         return: Retur
         returned: Returnert
         roles: Roller
-        routes: Ruter
         rules: Regler
         sales: Salg
         sales_this_month: Salg

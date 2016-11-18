@@ -109,11 +109,10 @@ sylius:
         product_association_type:
             name: Ime
         promotion_rule:
-            contains_taxon:
-                taxon: Sistematske skupine
-                count: Število
             total_of_items_from_taxon:
                 taxon: Sistematske skupine
+        payment_method:
+            channels: Kanali
     installer:
         extensions:
             header: razširitve

@@ -263,7 +263,6 @@ sylius:
         return: Returnare
         returned: Returnată
         roles: Roluri
-        routes: Rute
         rules: Reguli
         sales: Vânzări
         sales_this_month: Vânzări

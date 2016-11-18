@@ -23,6 +23,3 @@ sylius:
                 sales:
                     header: Vânzări
                     orders: Comenzi
-                content:
-                    header: Conţinut
-                    routes: Rute

@@ -7,5 +7,6 @@ sylius:
             description: คำอธิบาย
             name: ชื่อ
             parent: หมวดแม่
+            slug: Slug
         taxonomy:
             name: ชื่อ

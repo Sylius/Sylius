@@ -118,15 +118,17 @@ sylius:
             type: Тип асоціювання
         product_association_type:
             name: Назва
+        promotion_filter:
+            product:
+                products: Продукція
         promotion_rule:
-            contains_taxon:
-                taxon: Таксон
-                count: Підрахунок
             product:
                 products: Продукція
             total_of_items_from_taxon:
                 taxon: Таксон
                 amount: Обсяг
+        payment_method:
+            channels: Канали
     installer:
         extensions:
             header: розширення

@@ -311,7 +311,6 @@ sylius:
         returns_policy: Returpolicy
         reviews: Recensioner
         roles: Roller
-        routes: Rutter
         rules: Regler
         sales: Försäljning
         sales_this_month: Försäljning

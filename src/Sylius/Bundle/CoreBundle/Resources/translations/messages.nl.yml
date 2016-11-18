@@ -121,17 +121,17 @@ sylius:
             type: Associatietype
         product_association_type:
             name: Naam
+        promotion_filter:
+            product:
+                products: Producten
         promotion_rule:
-            contains_taxon:
-                taxon: Categorie
-                count: Aantal
-            taxon:
-                taxons: Taxa
             product:
                 products: Producten
             total_of_items_from_taxon:
                 taxon: Categorie
                 amount: Hoeveelheid
+        payment_method:
+            channels: Kanalen
     installer:
         extensions:
             header: extensies
