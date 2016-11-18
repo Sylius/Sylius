@@ -573,7 +573,6 @@ final class OrderContext implements Context
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
 
         $order->setCurrencyCode($currency->getCode());
-        $order->setExchangeRate($currency->getExchangeRate());
 
         return $order;
     }
