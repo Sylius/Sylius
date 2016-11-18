@@ -65,7 +65,7 @@ Now the following class will be actually capable of translating the **title**:
         */
        public function getTitle()
        {
-           return $this->translate()->getTitle();
+           return $this->getTranslation()->getTitle();
        }
 
        /**
@@ -73,12 +73,12 @@ Now the following class will be actually capable of translating the **title**:
         */
        public function setTitle($title)
        {
-           $this->translate()->setTitle($title);
+           $this->getTranslation()->setTitle($title);
        }
    }
 
 .. note::
-   As you could notice, inside both methods we use the ``translate`` method.
+   As you could notice, inside both methods we use the ``getTranslation`` method.
    More specified explanation on what it does is described further on.
 
 .. _component_resource_translations_usage:
@@ -135,21 +135,21 @@ When we already have our translations, we can work with the **Book**:
                              // as the translation for chosen locale is unavailable,
                              // instead the translation for fallback locale is used
 
-You can always use the ``translate`` method by itself, but the same principal is in play:
+You can always use the ``getTranslation`` method by itself, but the same principal is in play:
 
 .. code-block:: php
 
    <?php
 
-   $harryPotter->translate('de');  // returns $germanBook
+   $harryPotter->getTranslation('de');  // returns $germanBook
    // but
-   $harryPotter->translate();
+   $harryPotter->getTranslation();
    // and
-   $harryPotter->translate('hi');
+   $harryPotter->getTranslation('hi');
    // both return $englishBook
 
 .. caution::
-   The ``translate`` method throws `\\RuntimeException`_ in two cases:
+   The ``getTranslation`` method throws `\\RuntimeException`_ in two cases:
 
    * No locale has been specified in the parameter and the current locale is undefined
    * No fallback locale has been set

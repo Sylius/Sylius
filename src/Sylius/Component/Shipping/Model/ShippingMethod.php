@@ -11,10 +11,10 @@
 
 namespace Sylius\Component\Shipping\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -74,7 +74,7 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function __toString()
     {
-        return $this->translate()->__toString();
+        return $this->getTranslation()->__toString();
     }
 
     /**
@@ -162,7 +162,7 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function getName()
     {
-        return $this->translate()->getName();
+        return $this->getTranslation()->getName();
     }
 
     /**
@@ -170,7 +170,7 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function setName($name)
     {
-        $this->translate()->setName($name);
+        $this->getTranslation()->setName($name);
     }
 
     /**
@@ -178,7 +178,7 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function getDescription()
     {
-        return $this->translate()->getDescription();
+        return $this->getTranslation()->getDescription();
     }
 
     /**
@@ -186,7 +186,7 @@ class ShippingMethod implements ShippingMethodInterface
      */
     public function setDescription($description)
     {
-        $this->translate()->setDescription($description);
+        $this->getTranslation()->setDescription($description);
     }
 
     /**
@@ -232,4 +232,13 @@ class ShippingMethod implements ShippingMethodInterface
             ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL => 'All units has to match the method category',
         ];
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new ShippingMethodTranslation();
+    }
+
 }

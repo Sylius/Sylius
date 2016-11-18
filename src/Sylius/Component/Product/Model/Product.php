@@ -17,6 +17,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -118,7 +119,7 @@ class Product implements ProductInterface
      */
     public function getName()
     {
-        return $this->translate()->getName();
+        return $this->getTranslation()->getName();
     }
 
     /**
@@ -126,7 +127,7 @@ class Product implements ProductInterface
      */
     public function setName($name)
     {
-        $this->translate()->setName($name);
+        $this->getTranslation()->setName($name);
     }
 
     /**
@@ -134,7 +135,7 @@ class Product implements ProductInterface
      */
     public function getSlug()
     {
-        return $this->translate()->getSlug();
+        return $this->getTranslation()->getSlug();
     }
 
     /**
@@ -142,7 +143,7 @@ class Product implements ProductInterface
      */
     public function setSlug($slug = null)
     {
-        $this->translate()->setSlug($slug);
+        $this->getTranslation()->setSlug($slug);
     }
 
     /**
@@ -150,7 +151,7 @@ class Product implements ProductInterface
      */
     public function getDescription()
     {
-        return $this->translate()->getDescription();
+        return $this->getTranslation()->getDescription();
     }
 
     /**
@@ -158,7 +159,7 @@ class Product implements ProductInterface
      */
     public function setDescription($description)
     {
-        $this->translate()->setDescription($description);
+        $this->getTranslation()->setDescription($description);
     }
 
     /**
@@ -166,7 +167,7 @@ class Product implements ProductInterface
      */
     public function getMetaKeywords()
     {
-        return $this->translate()->getMetaKeywords();
+        return $this->getTranslation()->getMetaKeywords();
     }
 
     /**
@@ -174,7 +175,7 @@ class Product implements ProductInterface
      */
     public function setMetaKeywords($metaKeywords)
     {
-        $this->translate()->setMetaKeywords($metaKeywords);
+        $this->getTranslation()->setMetaKeywords($metaKeywords);
     }
 
     /**
@@ -182,7 +183,7 @@ class Product implements ProductInterface
      */
     public function getMetaDescription()
     {
-        return $this->translate()->getMetaDescription();
+        return $this->getTranslation()->getMetaDescription();
     }
 
     /**
@@ -190,7 +191,7 @@ class Product implements ProductInterface
      */
     public function setMetaDescription($metaDescription)
     {
-        $this->translate()->setMetaDescription($metaDescription);
+        $this->getTranslation()->setMetaDescription($metaDescription);
     }
 
     /**
@@ -451,5 +452,13 @@ class Product implements ProductInterface
     public function isConfigurable()
     {
         return !$this->isSimple();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new ProductTranslation();
     }
 }

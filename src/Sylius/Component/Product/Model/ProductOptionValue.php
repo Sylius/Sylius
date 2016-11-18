@@ -12,6 +12,7 @@
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -95,7 +96,7 @@ class ProductOptionValue implements ProductOptionValueInterface
      */
     public function getValue()
     {
-        return $this->translate()->getValue();
+        return $this->getTranslation()->getValue();
     }
 
     /**
@@ -103,7 +104,7 @@ class ProductOptionValue implements ProductOptionValueInterface
      */
     public function setValue($value)
     {
-        $this->translate()->setValue($value);
+        $this->getTranslation()->setValue($value);
     }
 
     /**
@@ -128,5 +129,13 @@ class ProductOptionValue implements ProductOptionValueInterface
         }
 
         return $this->option->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new ProductOptionValueTranslation();
     }
 }

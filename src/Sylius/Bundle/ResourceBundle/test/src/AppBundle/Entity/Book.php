@@ -47,7 +47,7 @@ class Book implements ResourceInterface, TranslatableInterface
      */
     public function getTitle()
     {
-        return $this->translate()->getTitle();
+        return $this->getTranslation()->getTitle();
     }
 
     /**
@@ -55,7 +55,7 @@ class Book implements ResourceInterface, TranslatableInterface
      */
     public function setTitle($title)
     {
-        $this->translate()->setTitle($title);
+        $this->getTranslation()->setTitle($title);
     }
 
     /**
@@ -72,5 +72,13 @@ class Book implements ResourceInterface, TranslatableInterface
     public function setAuthor($author)
     {
         $this->author = $author;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new BookTranslation();
     }
 }
