@@ -57,6 +57,8 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $shopperContext->getLocaleCode()->willReturn('pl');
         $shopperContext->getCustomer()->willReturn($customer);
 
+        $channel->getBaseCurrency()->willReturn('PLN');
+
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('PLN')->shouldBeCalled();
         $cart->setLocaleCode('pl')->shouldBeCalled();
