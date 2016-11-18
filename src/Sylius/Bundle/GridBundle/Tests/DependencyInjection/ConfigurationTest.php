@@ -117,6 +117,33 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function its_base_sorting_can_be_overwritten()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['grids' => [
+                    'sylius_admin_tax_category' => [
+                        'sorting' => ['code' => 'asc'],
+                    ],
+                ]],
+                ['grids' => [
+                    'sylius_admin_tax_category' => [
+                        'sorting' => ['name' => 'desc'],
+                    ],
+                ]],
+            ],
+            ['grids' => [
+                'sylius_admin_tax_category' => [
+                    'sorting' => ['name' => 'desc'],
+                ],
+            ]],
+            'grids.*.sorting'
+        );
+    }
+
+    /**
+     * @test
+     */
     public function its_sorting_order_can_be_only_ascending_or_descending()
     {
         $this->assertConfigurationIsValid([[

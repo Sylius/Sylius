@@ -98,6 +98,7 @@ final class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                             ->arrayNode('sorting')
+                                ->performNoDeepMerging()
                                 ->useAttributeAsKey('name')
                                 ->prototype('enum')->values(['asc', 'desc'])->cannotBeEmpty()->end()
                             ->end()
