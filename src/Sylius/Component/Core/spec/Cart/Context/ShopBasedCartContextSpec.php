@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\Cart\Context;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
@@ -48,6 +49,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         ShopperContextInterface $shopperContext,
         OrderInterface $cart,
         ChannelInterface $channel,
+        CurrencyInterface $currency,
         CustomerInterface $customer
     ) {
         $cartContext->getCart()->willReturn($cart);
@@ -56,6 +58,9 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $shopperContext->getCurrencyCode()->willReturn('PLN');
         $shopperContext->getLocaleCode()->willReturn('pl');
         $shopperContext->getCustomer()->willReturn($customer);
+
+        $channel->getBaseCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('PLN');
 
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('PLN')->shouldBeCalled();
@@ -99,11 +104,13 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         ChannelInterface $channel,
+        CurrencyInterface $currency,
         OrderInterface $cart
     ) {
         $cartContext->getCart()->willReturn($cart);
         $shopperContext->getChannel()->willReturn($channel);
-        $shopperContext->getCurrencyCode()->willReturn('PLN');
+        $channel->getBaseCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('PLN');
         $shopperContext->getLocaleCode()->willThrow(LocaleNotFoundException::class);
 
         $this
