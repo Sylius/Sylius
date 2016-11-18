@@ -5,3 +5,7 @@ sylius:
             code: Name
             enabled: Enabled
             exchange_rate: Exchange rate
+        exchange_rate:
+            base_currency: Base currency
+            counter_currency: Counter currency
+            ratio: Ratio
