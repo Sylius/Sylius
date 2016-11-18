@@ -200,6 +200,18 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    protected function getElement($name, array $parameters = [])
+    {
+        if (!isset($parameters['%language%'])) {
+            $parameters['%language%'] = 'en_US';
+        }
+
+        return parent::getElement($name, $parameters);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [

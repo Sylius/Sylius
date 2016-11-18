@@ -223,6 +223,18 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function getElement($name, array $parameters = [])
+    {
+        if (!isset($parameters['%language%'])) {
+            $parameters['%language%'] = 'en_US';
+        }
+
+        return parent::getElement($name, $parameters);
+    }
+
+    /**
      * @return NodeElement
      */
     protected function getCodeElement()
