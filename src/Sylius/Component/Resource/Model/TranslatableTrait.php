@@ -48,78 +48,7 @@ trait TranslatableTrait
     /**
      * {@inheritdoc}
      */
-    public function getTranslations()
-    {
-        return $this->translations;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addTranslation(TranslationInterface $translation)
-    {
-        if (!$this->translations->containsKey($translation->getLocale())) {
-            $this->translations->set($translation->getLocale(), $translation);
-            $translation->setTranslatable($this);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeTranslation(TranslationInterface $translation)
-    {
-        if ($this->translations->removeElement($translation)) {
-            $translation->setTranslatable(null);
-        }
-    }
-
-    /**
-     * @param TranslationInterface $translation
-     *
-     * @return bool
-     */
-    public function hasTranslation(TranslationInterface $translation)
-    {
-        return $this->translations->containsKey($translation->getLocale());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrentLocale($currentLocale)
-    {
-        $this->currentLocale = $currentLocale;
-    }
-
-    /**
-     * @return string
-     */
-    public function getCurrentLocale()
-    {
-        return $this->currentLocale;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setFallbackLocale($fallbackLocale)
-    {
-        $this->fallbackLocale = $fallbackLocale;
-    }
-
-    /**
-     * @return string
-     */
-    public function getFallbackLocale()
-    {
-        return $this->fallbackLocale;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function translate($locale = null)
+    public function getTranslation($locale = null)
     {
         $locale = $locale ?: $this->currentLocale;
         if (null === $locale) {
@@ -130,16 +59,15 @@ trait TranslatableTrait
             return $this->currentTranslation;
         }
 
-        if (!$translation = $this->translations->get($locale)) {
+        $translation = $this->translations->get($locale);
+        if (null === $translation) {
             if (null === $this->fallbackLocale) {
                 throw new \RuntimeException('No fallback locale has been set.');
             }
 
-            if (!$fallbackTranslation = $this->translations->get($this->getFallbackLocale())) {
-                $className = $this->getTranslationClass();
-
-                /** @var TranslationInterface $translation */
-                $translation = new $className();
+            $fallbackTranslation = $this->translations->get($this->fallbackLocale);
+            if (null === $fallbackTranslation) {
+                $translation = $this->createTranslation();
                 $translation->setLocale($locale);
 
                 $this->addTranslation($translation);
@@ -154,12 +82,64 @@ trait TranslatableTrait
     }
 
     /**
-     * Return translation model class.
-     *
-     * @return string
+     * @return TranslationInterface[]
      */
-    public static function getTranslationClass()
+    public function getTranslations()
     {
-        return get_called_class().'Translation';
+        return $this->translations;
     }
+
+    /**
+     * @param TranslationInterface $translation
+     *
+     * @return bool
+     */
+    public function hasTranslation(TranslationInterface $translation)
+    {
+        return $this->translations->containsKey($translation->getLocale());
+    }
+
+    /**
+     * @param TranslationInterface $translation
+     */
+    public function addTranslation(TranslationInterface $translation)
+    {
+        if (!$this->translations->containsKey($translation->getLocale())) {
+            $this->translations->set($translation->getLocale(), $translation);
+            $translation->setTranslatable($this);
+        }
+    }
+
+    /**
+     * @param TranslationInterface $translation
+     */
+    public function removeTranslation(TranslationInterface $translation)
+    {
+        if ($this->translations->removeElement($translation)) {
+            $translation->setTranslatable(null);
+        }
+    }
+
+    /**
+     * @param string $currentLocale
+     */
+    public function setCurrentLocale($currentLocale)
+    {
+        $this->currentLocale = $currentLocale;
+    }
+
+    /**
+     * @param string $fallbackLocale
+     */
+    public function setFallbackLocale($fallbackLocale)
+    {
+        $this->fallbackLocale = $fallbackLocale;
+    }
+
+    /**
+     * Create resource translation model.
+     *
+     * @return TranslationInterface
+     */
+    abstract protected function createTranslation();
 }

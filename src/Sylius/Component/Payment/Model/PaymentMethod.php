@@ -72,7 +72,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function __toString()
     {
-        return $this->translate()->__toString();
+        return $this->getTranslation()->__toString();
     }
 
     /**
@@ -104,7 +104,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function getName()
     {
-        return $this->translate()->getName();
+        return $this->getTranslation()->getName();
     }
 
     /**
@@ -112,7 +112,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function setName($name)
     {
-        $this->translate()->setName($name);
+        $this->getTranslation()->setName($name);
     }
 
     /**
@@ -120,7 +120,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function getDescription()
     {
-        return $this->translate()->getDescription();
+        return $this->getTranslation()->getDescription();
     }
 
     /**
@@ -128,7 +128,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function setDescription($description)
     {
-        $this->translate()->setDescription($description);
+        $this->getTranslation()->setDescription($description);
     }
 
     /**
@@ -136,7 +136,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function getInstructions()
     {
-        return $this->translate()->getInstructions();
+        return $this->getTranslation()->getInstructions();
     }
 
     /**
@@ -144,7 +144,7 @@ class PaymentMethod implements PaymentMethodInterface
      */
     public function setInstructions($instructions)
     {
-        $this->translate()->setInstructions($instructions);
+        $this->getTranslation()->setInstructions($instructions);
     }
 
     /**
@@ -177,5 +177,13 @@ class PaymentMethod implements PaymentMethodInterface
     public function setEnvironment($environment)
     {
         $this->environment = $environment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new PaymentMethodTranslation();
     }
 }

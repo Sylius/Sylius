@@ -226,7 +226,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function getShortDescription()
     {
-        return $this->translate()->getShortDescription();
+        return $this->getTranslation()->getShortDescription();
     }
 
     /**
@@ -234,7 +234,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function setShortDescription($shortDescription)
     {
-        $this->translate()->setShortDescription($shortDescription);
+        $this->getTranslation()->setShortDescription($shortDescription);
     }
 
     /**
@@ -361,5 +361,13 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
             $image->setOwner(null);
             $this->images->removeElement($image);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new ProductTranslation();
     }
 }
