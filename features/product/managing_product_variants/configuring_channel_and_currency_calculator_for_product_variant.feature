@@ -11,7 +11,7 @@ Feature: Configuring channel and currency calculator
         And this product has option "Taste" with values "Orange" and "Melon"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @todo
     Scenario: Configure channel and currency calculator while adding new variant
         When I want to create a new variant of this product
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
