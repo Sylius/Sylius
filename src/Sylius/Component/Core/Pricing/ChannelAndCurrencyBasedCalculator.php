@@ -49,14 +49,7 @@ class ChannelAndCurrencyBasedCalculator implements CalculatorInterface
         $channel = $context['channel'];
         $currencyCode = $context['currency'];
 
-        if (!isset($pricingConfiguration[$channel->getCode()][$currencyCode])) {
-            return $subject->getPrice();
-        }
-
-        return $this->currencyConverter->convertToBase(
-            $pricingConfiguration[$channel->getCode()][$currencyCode],
-            $currencyCode
-        );
+        return $subject->getPrice();
     }
 
     /**

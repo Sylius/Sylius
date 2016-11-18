@@ -20,23 +20,9 @@ use Payum\Core\Request\Convert;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface as SyliusPaymentInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
 final class CapturePaymentAction extends GatewayAwareAction
 {
-    /**
-     * @var CurrencyConverterInterface
-     */
-    private $currencyConverter;
-
-    /**
-     * @param CurrencyConverterInterface $currencyConverter
-     */
-    public function __construct(CurrencyConverterInterface $currencyConverter)
-    {
-        $this->currencyConverter = $currencyConverter;
-    }
-
     /**
      * {@inheritdoc}
      *
@@ -58,7 +44,7 @@ final class CapturePaymentAction extends GatewayAwareAction
                 $this->gateway->execute($convert = new Convert($payment, 'array', $request->getToken()));
                 $payment->setDetails($convert->getResult());
             } catch (RequestNotSupportedException $e) {
-                $totalAmount = $this->convertPrice($order->getTotal(), $order->getCurrencyCode());
+                $totalAmount = $order->getTotal();
                 $payumPayment = new PayumPayment();
                 $payumPayment->setNumber($order->getNumber());
                 $payumPayment->setTotalAmount($totalAmount);
@@ -96,16 +82,5 @@ final class CapturePaymentAction extends GatewayAwareAction
             $request instanceof Capture &&
             $request->getModel() instanceof SyliusPaymentInterface
             ;
-    }
-
-    /**
-     * @param int $price
-     * @param string $currencyCode
-     *
-     * @return int
-     */
-    private function convertPrice($price, $currencyCode)
-    {
-        return $this->currencyConverter->convertFromBase($price, $currencyCode);
     }
 }

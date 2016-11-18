@@ -14,7 +14,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sylius.templating.helper.price" class="Sylius\Bundle\MoneyBundle\Templating\Helper\PriceHelper" lazy="true">
-            <argument type="service" id="sylius.currency_converter" />
+            <argument type="service" id="sylius.repository.currency" />
             <argument type="service" id="sylius.templating.helper.money" />
             <tag name="templating.helper" alias="sylius_price" />
         </service>
