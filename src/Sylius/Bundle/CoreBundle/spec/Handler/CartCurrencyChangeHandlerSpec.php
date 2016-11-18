@@ -30,13 +30,13 @@ final class CartCurrencyChangeHandlerSpec extends ObjectBehavior
 {
     function let(
         CartContextInterface $cartContext,
-        OrderUpdaterInterface $exchangeRateUpdater,
+        OrderUpdaterInterface $orderExchangeRateUpdater,
         OrderProcessorInterface $orderProcessor,
         EntityManagerInterface $orderManager
     ) {
         $this->beConstructedWith(
             $cartContext,
-            $exchangeRateUpdater,
+            $orderExchangeRateUpdater,
             $orderProcessor,
             $orderManager
         );
@@ -61,7 +61,7 @@ final class CartCurrencyChangeHandlerSpec extends ObjectBehavior
 
     function it_handles_cart_currency_code_change(
         CartContextInterface $cartContext,
-        OrderUpdaterInterface $exchangeRateUpdater,
+        OrderUpdaterInterface $orderExchangeRateUpdater,
         OrderProcessorInterface $orderProcessor,
         EntityManagerInterface $orderManager,
         OrderInterface $cart
@@ -69,7 +69,7 @@ final class CartCurrencyChangeHandlerSpec extends ObjectBehavior
         $cartContext->getCart()->willReturn($cart);
         $cart->setCurrencyCode('USD')->shouldBeCalled();
 
-        $exchangeRateUpdater->update($cart)->shouldBeCalled();
+        $orderExchangeRateUpdater->update($cart)->shouldBeCalled();
 
         $orderProcessor->process($cart)->shouldBeCalled();
 

@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -66,26 +67,22 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FilterInterface $productFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
-        Collection $originalItems,
-        Collection $units,
         OrderInterface $order,
-        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
         $order->getCurrencyCode()->willReturn('USD');
 
-        $order->getItems()->willReturn($originalItems);
-        $originalItems->toArray()->willReturn([$orderItem1]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
 
-        $priceRangeFilter->filter([$orderItem1], ['base_amount' => 500])->willReturn([$orderItem1]);
-        $taxonFilter->filter([$orderItem1], ['base_amount' => 500])->willReturn([$orderItem1]);
-        $productFilter->filter([$orderItem1], ['base_amount' => 500])->willReturn([$orderItem1]);
+        $priceRangeFilter->filter([$orderItem], ['base_amount' => 500])->willReturn([$orderItem]);
+        $taxonFilter->filter([$orderItem], ['base_amount' => 500])->willReturn([$orderItem]);
+        $productFilter->filter([$orderItem], ['base_amount' => 500])->willReturn([$orderItem]);
 
-        $orderItem1->getQuantity()->willReturn(2);
-        $orderItem1->getUnits()->willReturn($units);
-        $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+        $orderItem->getQuantity()->willReturn(2);
+        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $promotion->getName()->willReturn('Test promotion');
         $promotion->getCode()->willReturn('TEST_PROMOTION');
@@ -117,31 +114,27 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter,
+        CurrencyConverterInterface $currencyConverter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
-        Collection $originalItems,
-        Collection $units,
         OrderInterface $order,
-        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
-        PromotionInterface $promotion,
-        CurrencyConverterInterface $currencyConverter
+        PromotionInterface $promotion
     ) {
         $order->getCurrencyCode()->willReturn('PLN');
 
         $currencyConverter->convertToBase(1000, 'PLN')->willReturn(250);
 
-        $order->getItems()->willReturn($originalItems);
-        $originalItems->toArray()->willReturn([$orderItem1]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
 
-        $priceRangeFilter->filter([$orderItem1], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem1]);
-        $taxonFilter->filter([$orderItem1], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem1]);
-        $productFilter->filter([$orderItem1], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem1]);
+        $priceRangeFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem]);
+        $taxonFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem]);
+        $productFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem]);
 
-        $orderItem1->getQuantity()->willReturn(2);
-        $orderItem1->getUnits()->willReturn($units);
-        $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+        $orderItem->getQuantity()->willReturn(2);
+        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $promotion->getName()->willReturn('Test promotion');
         $promotion->getCode()->willReturn('TEST_PROMOTION');
@@ -190,26 +183,22 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FilterInterface $productFilter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
-        Collection $originalItems,
-        Collection $units,
         OrderInterface $order,
-        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit1,
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
         $order->getCurrencyCode()->willReturn('USD');
 
-        $order->getItems()->willReturn($originalItems);
-        $originalItems->toArray()->willReturn([$orderItem1]);
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
 
-        $priceRangeFilter->filter([$orderItem1], ['base_amount' => 1000])->willReturn([$orderItem1]);
-        $taxonFilter->filter([$orderItem1], ['base_amount' => 1000])->willReturn([$orderItem1]);
-        $productFilter->filter([$orderItem1], ['base_amount' => 1000])->willReturn([$orderItem1]);
+        $priceRangeFilter->filter([$orderItem], ['base_amount' => 1000])->willReturn([$orderItem]);
+        $taxonFilter->filter([$orderItem], ['base_amount' => 1000])->willReturn([$orderItem]);
+        $productFilter->filter([$orderItem], ['base_amount' => 1000])->willReturn([$orderItem]);
 
-        $orderItem1->getQuantity()->willReturn(2);
-        $orderItem1->getUnits()->willReturn($units);
-        $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
+        $orderItem->getQuantity()->willReturn(2);
+        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $promotion->getName()->willReturn('Test promotion');
         $promotion->getCode()->willReturn('TEST_PROMOTION');
@@ -249,24 +238,20 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     function it_reverts_a_proper_promotion_adjustment_from_all_units(
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
-        Collection $items,
-        Collection $units,
-        Collection $adjustments,
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit,
         PromotionInterface $promotion
     ) {
-        $order->getItems()->willReturn($items);
-        $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem->getWrappedObject()]));
 
-        $orderItem->getUnits()->willReturn($units);
-        $units->getIterator()->willReturn(new \ArrayIterator([$unit->getWrappedObject()]));
+        $orderItem->getUnits()->willReturn(new ArrayCollection([$unit->getWrappedObject()]));
 
-        $unit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn($adjustments);
-        $adjustments
-            ->getIterator()
-            ->willReturn(new \ArrayIterator([$promotionAdjustment1->getWrappedObject(), $promotionAdjustment2->getWrappedObject()]))
+        $unit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(
+            new ArrayCollection([
+                $promotionAdjustment1->getWrappedObject(),
+                $promotionAdjustment2->getWrappedObject(),
+            ]))
         ;
 
         $promotion->getCode()->willReturn('PROMOTION');

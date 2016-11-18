@@ -33,7 +33,7 @@ final class CartCurrencyChangeHandler implements CurrencyChangeHandlerInterface
     /**
      * @var OrderUpdaterInterface
      */
-    private $exchangeRateUpdater;
+    private $orderExchangeRateUpdater;
 
     /**
      * @var OrderProcessorInterface
@@ -47,18 +47,18 @@ final class CartCurrencyChangeHandler implements CurrencyChangeHandlerInterface
 
     /**
      * @param CartContextInterface $cartContext
-     * @param OrderUpdaterInterface $exchangeRateUpdater
+     * @param OrderUpdaterInterface $orderExchangeRateUpdater
      * @param OrderProcessorInterface $orderProcessor
      * @param EntityManagerInterface $orderManager
      */
     public function __construct(
         CartContextInterface $cartContext,
-        OrderUpdaterInterface $exchangeRateUpdater,
+        OrderUpdaterInterface $orderExchangeRateUpdater,
         OrderProcessorInterface $orderProcessor,
         EntityManagerInterface $orderManager
     ) {
         $this->cartContext = $cartContext;
-        $this->exchangeRateUpdater = $exchangeRateUpdater;
+        $this->orderExchangeRateUpdater = $orderExchangeRateUpdater;
         $this->orderProcessor = $orderProcessor;
         $this->orderManager = $orderManager;
     }
@@ -73,7 +73,7 @@ final class CartCurrencyChangeHandler implements CurrencyChangeHandlerInterface
             $cart = $this->cartContext->getCart();
             $cart->setCurrencyCode($code);
 
-            $this->exchangeRateUpdater->update($cart);
+            $this->orderExchangeRateUpdater->update($cart);
 
             $this->orderProcessor->process($cart);
 
