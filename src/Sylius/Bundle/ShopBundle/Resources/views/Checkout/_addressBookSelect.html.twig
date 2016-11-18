@@ -1,5 +1,5 @@
-{% if app.user %}
-    <div class="ui floating dropdown labeled search icon button address-book-select" >
+{% if order.customer is not empty and order.customer.addresses|length > 0 %}
+    <div class="ui fluid floating dropdown labeled search icon button address-book-select">
         <i class="book icon"></i>
         <span class="text">{{ 'sylius.ui.select_address_from_book'|trans }}</span>
         <div class="menu">
@@ -17,7 +17,7 @@
                      data-postcode="{{ address.postcode }}"
                      data-phone-number="{{ address.phoneNumber }}"
                 >
-                    {{ address.city ~' '~ address.street }}
+                    <strong>{{ address.firstName }} {{ address.lastName }}</strong>, {{ address.street }}, {{ address.city }} {{ address.postcode }}
                 </div>
             {% endfor %}
         </div>

@@ -68,7 +68,7 @@ final class CurrencySwitchController
      */
     public function renderAction()
     {
-        return $this->templatingEngine->renderResponse('@SyliusShop/Switch/_currency.html.twig', [
+        return $this->templatingEngine->renderResponse('@SyliusShop/_currencySwitch.html.twig', [
             'active' => $this->currencyContext->getCurrencyCode(),
             'currencies' => $this->currencyProvider->getAvailableCurrenciesCodes(),
         ]);

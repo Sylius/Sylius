@@ -16,7 +16,7 @@
         </div>
     </div>
     {% if addresses|length > 0 %}
-        {% set defaultAddress = (shopperContext.getCustomer().defaultAddress) %}
+        {% set defaultAddress = (sylius.customer.defaultAddress) %}
         {% if defaultAddress is not null %}
             {% include '@SyliusShop/Account/AddressBook/_defaultAddress.html.twig' %}
         {% endif %}

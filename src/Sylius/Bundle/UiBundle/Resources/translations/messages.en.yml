@@ -88,6 +88,7 @@ sylius:
         browse_your_addresses: 'Browse your addresses'
         browse_your_orders_from_the_past: 'Browse your orders from the past'
         build: 'Build'
+        by_position: 'By position'
         calculator: 'Calculator'
         call_us: 'Call us!'
         cancel: 'Cancel'

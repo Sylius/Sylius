@@ -5,11 +5,6 @@ imports:
     - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
 
-sylius_grid:
-    templates:
-        action:
-            pay_for_order: "SyliusShopBundle:Grid/Action:pay_for_order.html.twig"
-
 sylius_shop:
     checkout_resolver:
         pattern: /checkout/.+

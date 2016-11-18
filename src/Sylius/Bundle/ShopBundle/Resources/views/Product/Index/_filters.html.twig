@@ -1,15 +1,21 @@
 {% set path = path('sylius_shop_taxon_show', app.request.query.all()) %}
 
-<div class="ui">
+<div class="ui segment">
     <form method="get" action="{{ path }}" class="ui loadable form">
-        <div class="two fields">
-            {% for filter in products.definition.filters %}
-                {{ sylius_grid_render_filter(products, filter) }}
-            {% endfor %}
-            <button type="submit" class="ui primary icon labeled button"><i class="search icon"></i> {{ 'sylius.ui.search'|trans }}</button>
-            <a href="{{ path('sylius_shop_taxon_show', { 'slug': app.request.query.get('slug') }) }}" class="ui negative icon labeled button">
-                <i class="cancel icon"></i> {{ 'sylius.ui.clear'|trans }}
-            </a>
+        <div class="ui stackable grid">
+            <div class="eleven wide column">
+                {% for filter in products.definition.filters %}
+                    {{ sylius_grid_render_filter(products, filter) }}
+                {% endfor %}
+            </div>
+            <div class="three wide column">
+                <div class="ui buttons">
+                    <button type="submit" class="ui primary icon labeled button"><i class="search icon"></i> {{ 'sylius.ui.search'|trans }}</button>
+                    <a href="{{ path('sylius_shop_taxon_show', { 'slug': app.request.query.get('slug') }) }}" class="ui negative icon labeled button">
+                        <i class="cancel icon"></i> {{ 'sylius.ui.clear'|trans }}
+                    </a>
+                </div>
+            </div>
         </div>
     </form>
 </div>

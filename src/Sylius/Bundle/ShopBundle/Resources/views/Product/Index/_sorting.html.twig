@@ -1,9 +1,12 @@
 {% set definition = resources.definition %}
 
-{% set oldest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'asc'}, 'slug': resources.parameters.get('slug')}) %}
-{% set newest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'desc'}, 'slug': resources.parameters.get('slug')}) %}
+{% set default_path = path('sylius_shop_taxon_show', {'slug': resources.parameters.get('slug'), 'criteria': app.request.query.get('criteria')}) %}
+{% set oldest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'asc'}, 'slug': resources.parameters.get('slug'), 'criteria': app.request.query.get('criteria')}) %}
+{% set newest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'desc'}, 'slug': resources.parameters.get('slug'), 'criteria': app.request.query.get('criteria')}) %}
 
-{% if app.request.query.get('sorting') is empty or app.request.basePath == newest_first_path %}
+{% if app.request.query.get('sorting') is empty %}
+    {% set current_sorting_label = 'sylius.ui.by_position'|trans|lower %}
+{% elseif  app.request.get('sorting').createdAt == 'desc' %}
     {% set current_sorting_label = 'sylius.ui.newest_first'|trans|lower %}
 {% else %}
     {% set current_sorting_label = 'sylius.ui.oldest_first'|trans|lower %}
@@ -16,6 +19,7 @@
             <div class="text">{{ current_sorting_label }}</div>
             <i class="dropdown icon"></i>
             <div class="menu">
+                <a class="item" href="{{ default_path }}" data-text="{{ 'sylius.ui.by_position'|trans|lower }}">{{ 'sylius.ui.by_position'|trans }}</a>
                 <a class="item" href="{{ newest_first_path }}" data-text="{{ 'sylius.ui.newest_first'|trans|lower }}">{{ 'sylius.ui.newest_first'|trans }}</a>
                 <a class="item" href="{{ oldest_first_path }}" data-text="{{ 'sylius.ui.oldest_first'|trans|lower }}">{{ 'sylius.ui.oldest_first'|trans }}</a>
             </div>

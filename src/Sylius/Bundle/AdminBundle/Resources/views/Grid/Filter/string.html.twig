@@ -1,4 +1,6 @@
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
+{% if form.type is defined %}
 {{ form_row(form.type, {'label': filter.label|trans}) }}
-{{ form_row(form.value) }}
+{% endif %}
+{{ form_row(form.value, {'label': form.type is defined ? '' : false}) }}

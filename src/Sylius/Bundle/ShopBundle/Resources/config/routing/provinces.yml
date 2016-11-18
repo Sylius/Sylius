@@ -1,9 +1,2 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
-
-sylius_shop_province_choice:
-    path: /province-choice
-    defaults:
-        _controller: sylius.controller.province:choiceOrTextFieldFormAction
-        _sylius:
-            template: SyliusShopBundle:Checkout:_provinces.html.twig

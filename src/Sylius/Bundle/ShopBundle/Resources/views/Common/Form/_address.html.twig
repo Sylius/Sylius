@@ -7,7 +7,7 @@
 
 {% include '@SyliusShop/Common/Form/_countryCode.html.twig' with { 'countryCode': form.countryCode } %}
 
-<div class="province-container field" data-url="{{ path('sylius_shop_province_choice') }}">
+<div class="province-container field" data-url="{{ path('sylius_shop_ajax_province_form') }}">
     {% if form.provinceCode is defined %}
         {{ form_row(form.provinceCode, {'attr': {'class': 'ui dropdown'}}) }}
     {% elseif form.provinceName is defined %}

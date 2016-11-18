@@ -29,6 +29,7 @@ sylius_grid:
             filters:
                 search:
                     type: string
-                    template: "@SyliusShop/Grid/Filter/string.html.twig"
+                    label: false
                     options:
+                        type: contains
                         fields: [translation.name]

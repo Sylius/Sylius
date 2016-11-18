@@ -1,6 +1,16 @@
 # This file is a part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_shop_ajax:
+    resource: "@SyliusShopBundle/Resources/config/routing/ajax.yml"
+    prefix: /ajax
+    defaults:
+        _format: json
+
+sylius_shop_partial:
+    resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
+    prefix: /_partial
+
 sylius_shop_homepage:
     path: /
     defaults:
@@ -8,6 +18,9 @@ sylius_shop_homepage:
 
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
+
+sylius_shop_user:
+    resource: "@SyliusShopBundle/Resources/config/routing/shop_user.yml"
 
 sylius_shop_taxon:
     resource: "@SyliusShopBundle/Resources/config/routing/taxon.yml"
@@ -18,9 +31,6 @@ sylius_shop_product:
 sylius_shop_product_review:
     resource: "@SyliusShopBundle/Resources/config/routing/product_review.yml"
     prefix: /products/{slug}/reviews
-
-sylius_shop_provinces:
-    resource: "@SyliusShopBundle/Resources/config/routing/provinces.yml"
 
 sylius_shop_cart:
     resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"
@@ -50,20 +60,6 @@ sylius_shop_switch_locale:
     path: /switch-locale/{code}
     defaults:
         _controller: sylius.controller.shop.locale_switch:switchAction
-
-sylius_shop_partial:
-    resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
-    prefix: /_partial
-
-sylius_shop_verification:
-    prefix: /verify
-    resource: "@SyliusShopBundle/Resources/config/routing/verification.yml"
-
-sylius_shop_ajax:
-    resource: "@SyliusShopBundle/Resources/config/routing/ajax.yml"
-    prefix: /ajax
-    defaults:
-        _format: json
 
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"

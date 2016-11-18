@@ -12,3 +12,10 @@ sylius_shop_ajax_account_address_book:
 sylius_shop_ajax_cart:
     resource: "@SyliusShopBundle/Resources/config/routing/ajax/cart.yml"
     prefix: /cart
+
+sylius_shop_ajax_province_form:
+    path: /province-form
+    defaults:
+        _controller: sylius.controller.province:choiceOrTextFieldFormAction
+        _sylius:
+            template: @SyliusShop/Common/Form/_province.html.twig

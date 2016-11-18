@@ -19,7 +19,7 @@ sylius_grid:
                     label: sylius.ui.number
                     sortable: ~
                     options:
-                        template: SyliusShopBundle:Account/Order/Grid/Field:number.html.twig
+                        template: "@SyliusShop/Account/Order/Grid/Field/number.html.twig"
                 checkoutCompletedAt:
                     type: datetime
                     label: sylius.ui.date
@@ -30,27 +30,36 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.ship_to
                     options:
-                        template: SyliusShopBundle:Account/Order/Grid/Field:shippingAddress.html.twig
+                        template: "@SyliusShop/Account/Order/Grid/Field/address.html.twig"
                 total:
                     type: twig
                     label: sylius.ui.total
                     path: .
                     sortable: total
                     options:
-                        template: SyliusShopBundle:Account/Order/Grid/Field:total.html.twig
+                        template: "@SyliusShop/Account/Order/Grid/Field/total.html.twig"
                 state:
                     type: twig
                     label: sylius.ui.state
                     sortable: ~
                     options:
-                        template: SyliusShopBundle:Account/Order/Grid/Field:state.html.twig
+                        template: "@SyliusUi/Grid/Field/label.html.twig"
+                        vars:
+                            labels: "@SyliusShop/Account/Order/Label/State"
             actions:
                 item:
                     show:
                         type: show
+                        label: sylius.ui.show
                         options:
-                            link:
-                                parameters:
-                                    number: resource.number
+                            route:
+                                name: sylius_shop_account_order_show
                     pay:
-                        type: pay_for_order
+                        type: show
+                        label: sylius.ui.pay
+                        options:
+                            icon: 'credit card alternative'
+                            route:
+                                name: sylius_shop_order_show
+                                parameters:
+                                    tokenValue: resource.tokenValue

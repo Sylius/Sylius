@@ -1,18 +1,15 @@
-<div class="ui one column segment" id="sylius-default-address">
-    <div class="ui header">{{ 'sylius.ui.your_default_address'|trans }}</div>
-    <div class="column">
-        <div class="ui segment">
-            <div class="ui stackable two column grid">
-                <div class="column">
-                    {% include '@SyliusShop/Common/_address.html.twig' with {'address': defaultAddress} %}
-                </div>
-                <div class="right aligned column">
-                    <div class="ui vertical icon labeled buttons">
-                        {{ buttons.edit(path('sylius_shop_account_address_book_update', {'id': defaultAddress.id})) }}
-                        {{ buttons.delete(path('sylius_shop_account_address_book_delete', {'id': defaultAddress.id}), null, true, defaultAddress.id) }}
-                    </div>
-                </div>
+<div class="ui top attached styled header">{{ 'sylius.ui.your_default_address'|trans }}</div>
+<div class="ui attached segment" id="sylius-default-address">
+    <div class="ui stackable two column grid">
+        <div class="column">
+            {% include '@SyliusShop/Common/_address.html.twig' with {'address': defaultAddress} %}
+        </div>
+        <div class="right aligned column">
+            <div class="ui vertical icon labeled buttons">
+                {{ buttons.edit(path('sylius_shop_account_address_book_update', {'id': defaultAddress.id})) }}
+                {{ buttons.delete(path('sylius_shop_account_address_book_delete', {'id': defaultAddress.id}), null, true, defaultAddress.id) }}
             </div>
         </div>
     </div>
 </div>
+<div class="ui divider"></div>

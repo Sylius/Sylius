@@ -11,7 +11,7 @@
                     {{ order.checkoutCompletedAt|format_date }}
                 </div>
                 <div class="item">
-                    {{ labels.default(('sylius.ui.'~order.state)|trans) }}
+                    {% include [('@SyliusShop/Account/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
                 </div>
                 <div class="item">
                     {{ order.currencyCode }}

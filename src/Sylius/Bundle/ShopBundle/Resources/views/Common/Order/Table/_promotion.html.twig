@@ -1,4 +1,5 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 {% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 
 <td colspan="2" id="promotion-discounts">
@@ -16,11 +17,9 @@
                 </div>
             {% endfor %}
         </div>
-    {% else %}
-        <p>{{ 'sylius.ui.no_promotion'|trans }}.</p>
     {% endif %}
 </td>
 <td colspan="2" id="promotion-total" class="right aligned">
-    <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
+    {{ 'sylius.ui.promotion_total'|trans }}:
     {{ money.format(order.orderPromotionTotal, order.currencyCode) }}
 </td>
