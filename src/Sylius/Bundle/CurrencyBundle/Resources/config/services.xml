@@ -17,10 +17,6 @@
     </imports>
 
     <services>
-        <service id="sylius.context.currency" class="Sylius\Component\Currency\Context\ImmutableCurrencyContext">
-            <argument>%sylius_currency.currency%</argument>
-        </service>
-
         <service id="sylius.context.currency.composite" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency" public="false" />
 
         <service id="sylius.currency_converter" class="Sylius\Component\Currency\Converter\CurrencyConverter">
