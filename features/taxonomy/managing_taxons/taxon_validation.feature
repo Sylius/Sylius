@@ -24,3 +24,22 @@ Feature: Taxon validation
         And I do not specify its name
         And I try to add it
         Then I should be notified that name is required
+
+    @ui
+    Scenario: Trying to add a taxon without specifying its slug
+        Given I want to create a new taxon
+        When I specify its code as "t-shirts"
+        And I name it "T-Shirts" in "English (United States)"
+        And I do not specify its slug
+        And I try to add it
+        Then I should be notified that slug is required
+
+    @ui
+    Scenario: Trying to add a taxon with non unique slug
+        Given the store classifies its products as "T-Shirts"
+        When I want to create a new taxon
+        And I specify its code as "t-shirts-2"
+        And I name it "T-Shirts" in "English (United States)"
+        And I set its slug to "t-shirts"
+        And I try to add it
+        Then I should be notified that taxon slug must be unique

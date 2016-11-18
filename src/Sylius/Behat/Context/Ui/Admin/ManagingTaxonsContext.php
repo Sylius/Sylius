@@ -125,8 +125,9 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @When I set its slug to :slug
+     * @When I do not specify its slug
      */
-    public function iSetItsSlugTo($slug)
+    public function iSetItsSlugTo($slug = null)
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
@@ -320,6 +321,17 @@ final class ManagingTaxonsContext implements Context
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::same($currentPage->getValidationMessage('code'), 'Taxon with given code already exists.');
+    }
+
+    /**
+     * @Then I should be notified that taxon slug must be unique
+     */
+    public function iShouldBeNotifiedThatTaxonSlugMustBeUnique()
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same($currentPage->getValidationMessage('slug'), 'Taxon slug must be unique.');
     }
 
     /**
