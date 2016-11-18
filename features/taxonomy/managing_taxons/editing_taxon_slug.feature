@@ -1,6 +1,6 @@
 @managing_taxons
 Feature: Editing taxon's slug
-    In order to In order to manage access path to taxon page
+    In order to manage access path to taxon page
     As an Administrator
     I want to be able to edit taxon's slug
     
