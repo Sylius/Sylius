@@ -16,6 +16,11 @@
         <parameter key="sylius.form.type.product_image.class">Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType</parameter>
         <parameter key="sylius.form.type.product_taxon_choice.class">Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType</parameter>
         <parameter key="sylius.form.type.taxon_image.class">Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonImageType</parameter>
+<<<<<<< HEAD
+=======
+        <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
+        <parameter key="sylius.form.type.locale.class">Sylius\Bundle\CoreBundle\Form\Type\LocaleType</parameter>
+>>>>>>> [Core] Remove currency dependency
 
         <parameter key="sylius.validation_groups.customer" type="collection">
             <parameter>sylius</parameter>
@@ -53,10 +58,6 @@
         </service>
         <service id="sylius.form.extension.type.payment_method" class="Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType" />
-        </service>
-        <service id="sylius.form.extension.type.currency" class="Sylius\Bundle\CoreBundle\Form\Extension\CurrencyTypeExtension">
-            <argument>%currency%</argument>
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType" />
         </service>
         <service id="sylius.form.extension.type.tax_rate" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxRateTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType" />

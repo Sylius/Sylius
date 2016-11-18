@@ -49,7 +49,6 @@
         <service id="sylius.collector.core" class="Sylius\Bundle\CoreBundle\Collector\SyliusCollector" public="false">
             <argument type="service" id="sylius.context.shopper" />
             <argument>%kernel.bundles%</argument>
-            <argument>%currency%</argument>
             <argument>%locale%</argument>
             <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius.html.twig" id="sylius_core" priority="-512" />
         </service>
