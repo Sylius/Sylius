@@ -15,4 +15,3 @@ parameters:
 
     secret: EDITME
     locale: en_US
-    currency: USD
