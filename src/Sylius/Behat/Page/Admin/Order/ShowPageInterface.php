@@ -260,7 +260,7 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function hasBillingProvinceName($provinceName);
 
     /**
-     * @return bool
+     * @return string
      */
-    public function hasIpAddressAssigner();
+    public function getIpAddressAssigned();
 }

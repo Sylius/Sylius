@@ -392,9 +392,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasIpAddressAssigner()
+    public function getIpAddressAssigned()
     {
-        return '' !== $this->getElement('ip_address')->getText();
+        return $this->getElement('ip_address')->getText();
     }
 
     /**

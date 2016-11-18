@@ -829,9 +829,10 @@ final class ManagingOrdersContext implements Context
         $this->sharedSecurityService->performActionAsAdminUser($user, function () use ($order) {
             $this->showPage->open(['id' => $order->getId()]);
 
-            Assert::true(
-                $this->showPage->hasIpAddressAssigner(),
-                'I should see IP address assigned to order, but I do not.'
+            Assert::notSame(
+                $this->showPage->getIpAddressAssigned(),
+                '',
+                'There should be IP address assigned to order, but there is not.'
             );
         });
     }

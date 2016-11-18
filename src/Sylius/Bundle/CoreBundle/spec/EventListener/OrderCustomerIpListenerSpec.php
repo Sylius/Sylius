@@ -42,7 +42,7 @@ final class OrderCustomerIpListenerSpec extends ObjectBehavior
         RequestStack $requestStack
     ) {
         $event->getSubject()->willReturn($order);
-        $requestStack->getCurrentRequest()->willReturn($request);
+        $requestStack->getMasterRequest()->willReturn($request);
 
         $ipAssigner->assign($order, $request)->shouldBeCalled();
 
