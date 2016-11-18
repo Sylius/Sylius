@@ -48,9 +48,9 @@ final class MoneyHelperSpec extends ObjectBehavior
     ) {
         $localeContext->getLocaleCode()->shouldNotBeCalled();
 
-        $decoratedHelper->formatAmount(42, null, 'en_US')->willReturn('Formatted 42 in en_US');
+        $decoratedHelper->formatAmount(42, 'USD', 'en_US')->willReturn('Formatted 42 in en_US');
 
-        $this->formatAmount(42, null, 'en_US')->shouldReturn('Formatted 42 in en_US');
+        $this->formatAmount(42, 'USD', 'en_US')->shouldReturn('Formatted 42 in en_US');
     }
 
     function it_decorates_the_helper_with_current_locale_if_it_is_not_passed(
@@ -59,8 +59,8 @@ final class MoneyHelperSpec extends ObjectBehavior
     ) {
         $localeContext->getLocaleCode()->willReturn('fr_FR');
 
-        $decoratedHelper->formatAmount(42, null, 'fr_FR')->willReturn('Formatted 42 in fr_FR');
+        $decoratedHelper->formatAmount(42, 'USD', 'fr_FR')->willReturn('Formatted 42 in fr_FR');
 
-        $this->formatAmount(42)->shouldReturn('Formatted 42 in fr_FR');
+        $this->formatAmount(42, 'USD')->shouldReturn('Formatted 42 in fr_FR');
     }
 }

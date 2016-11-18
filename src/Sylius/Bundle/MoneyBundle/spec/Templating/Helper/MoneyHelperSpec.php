@@ -25,7 +25,7 @@ final class MoneyHelperSpec extends ObjectBehavior
 {
     function let(MoneyFormatterInterface $moneyFormatter)
     {
-        $this->beConstructedWith($moneyFormatter, 'USD', 'en_US');
+        $this->beConstructedWith($moneyFormatter, 'en_US');
     }
 
     function it_is_initializable()
@@ -41,14 +41,6 @@ final class MoneyHelperSpec extends ObjectBehavior
     function it_implements_money_helper_interface()
     {
         $this->shouldImplement(MoneyHelperInterface::class);
-    }
-
-    function it_formats_money_using_default_currency_and_locale_if_only_amount_is_given(
-        MoneyFormatterInterface $moneyFormatter
-    ) {
-        $moneyFormatter->format(500, 'USD', 'en_US')->willReturn('$5.00');
-
-        $this->formatAmount(500)->shouldReturn('$5.00');
     }
 
     function it_formats_money_using_default_locale_if_not_given(MoneyFormatterInterface $moneyFormatter)

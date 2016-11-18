@@ -16,6 +16,7 @@
         <service id="sylius.templating.helper.money.core" class="Sylius\Bundle\CoreBundle\Templating\Helper\MoneyHelper" decorates="sylius.templating.helper.money" lazy="true">
             <argument type="service" id="sylius.templating.helper.money.core.inner" />
             <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.context.channel" />
             <tag name="templating.helper" alias="sylius_money" />
         </service>
 
