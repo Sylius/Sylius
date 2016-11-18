@@ -23,7 +23,7 @@ final class TaxonFilter implements FilterInterface
      */
     public function filter(array $items, array $configuration)
     {
-        if (!isset($configuration['filters']['taxons_filter']) || empty($configuration['filters']['taxons_filter']['taxons'])) {
+        if (empty($configuration['filters']['taxons_filter']['taxons'])) {
             return $items;
         }
 
