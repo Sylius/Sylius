@@ -7,7 +7,6 @@
     <services>
         <!-- Generic -->
         <service id="sylius.payum_action.capture_payment" class="Sylius\Bundle\PayumBundle\Action\CapturePaymentAction">
-            <argument type="service" id="sylius.currency_converter" />
             <tag name="payum.action" all="true" alias="sylius.capture_payment" />
         </service>
         <service id="sylius.payum_action.execute_same_request_with_payment_details" class="Sylius\Bundle\PayumBundle\Action\ExecuteSameRequestWithPaymentDetailsAction">
@@ -20,7 +19,6 @@
         <!-- PayPal -->
         <service id="sylius.payum_action.paypal_express_checkout.convert_payment" class="Sylius\Bundle\PayumBundle\Action\Paypal\ExpressCheckout\ConvertPaymentAction">
             <argument type="service" id="sylius.invoice_number_generator" />
-            <argument type="service" id="sylius.currency_converter" />
             <tag name="payum.action" factory="paypal_express_checkout" alias="sylius.paypal_express_checkout.convert_payment" />
         </service>
 
