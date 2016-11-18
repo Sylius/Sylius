@@ -239,14 +239,15 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             '%association%' => $productAssociationType->getName()
         ]);
         $dropdown->click();
-        $dropdown->waitFor(10, function () use ($productsNames, $productAssociationType) {
-            return $this->hasElement('association_dropdown_item', [
-                '%association%' => $productAssociationType->getName(),
-                '%item%' => $productsNames[0],
-            ]);
-        });
 
         foreach ($productsNames as $productName) {
+            $dropdown->waitFor(5, function () use ($productName, $productAssociationType) {
+                return $this->hasElement('association_dropdown_item', [
+                    '%association%' => $productAssociationType->getName(),
+                    '%item%' => $productName,
+                ]);
+            });
+
             $item = $this->getElement('association_dropdown_item', [
                 '%association%' => $productAssociationType->getName(),
                 '%item%' => $productName,
