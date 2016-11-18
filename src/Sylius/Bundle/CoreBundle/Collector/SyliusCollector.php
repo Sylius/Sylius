@@ -32,20 +32,18 @@ final class SyliusCollector extends DataCollector
     /**
      * @param ShopperContextInterface $shopperContext
      * @param array $bundles
-     * @param string $defaultCurrencyCode
      * @param string $defaultLocaleCode
      */
     public function __construct(
         ShopperContextInterface $shopperContext,
         array $bundles,
-        $defaultCurrencyCode,
         $defaultLocaleCode
     ) {
         $this->shopperContext = $shopperContext;
 
         $this->data = [
             'version' => Kernel::VERSION,
-            'default_currency_code' => $defaultCurrencyCode,
+            'base_currency_code' => null,
             'currency_code' => null,
             'default_locale_code' => $defaultLocaleCode,
             'locale_code' => null,
@@ -100,7 +98,7 @@ final class SyliusCollector extends DataCollector
      */
     public function getDefaultCurrencyCode()
     {
-        return $this->data['default_currency_code'];
+        return $this->data['base_currency_code'];
     }
 
     /**
@@ -117,6 +115,10 @@ final class SyliusCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         try {
+            /** @var ChannelInterface $channel */
+            $channel = $this->shopperContext->getChannel();
+
+            $this->data['base_currency_code'] = $channel->getBaseCurrency()->getCode();
             $this->data['currency_code'] = $this->shopperContext->getCurrencyCode();
         } catch (CurrencyNotFoundException $exception) {}
 

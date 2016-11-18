@@ -29,6 +29,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     const DEFAULT_CHANNEL_CODE = 'WEB-US';
     const DEFAULT_COUNTRY_CODE = 'US';
     const DEFAULT_ZONE_CODE = 'US';
+    const DEFAULT_CURRENCY_CODE = 'USD';
     const DEFAULT_ZONE_NAME = 'United States';
     const DEFAULT_CHANNEL_NAME = 'United States';
 
@@ -95,11 +96,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     /**
      * @var string
      */
-    private $defaultCurrencyCode;
-
-    /**
-     * @var string
-     */
     private $defaultLocaleCode;
 
     /**
@@ -115,7 +111,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
      * @param FactoryInterface $localeFactory
      * @param FactoryInterface $zoneFactory
      * @param FactoryInterface $zoneMemberFactory
-     * @param string $defaultCurrencyCode
      * @param string $defaultLocaleCode
      */
     public function __construct(
@@ -131,7 +126,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         FactoryInterface $localeFactory,
         FactoryInterface $zoneFactory,
         FactoryInterface $zoneMemberFactory,
-        $defaultCurrencyCode,
         $defaultLocaleCode
     ) {
         $this->channelRepository = $channelRepository;
@@ -146,7 +140,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         $this->localeFactory = $localeFactory;
         $this->zoneMemberFactory = $zoneMemberFactory;
         $this->zoneFactory = $zoneFactory;
-        $this->defaultCurrencyCode = $defaultCurrencyCode;
         $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
@@ -209,11 +202,11 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     private function provideCurrency()
     {
         /** @var CurrencyInterface $currency */
-        $currency = $this->currencyRepository->findOneBy(['code' => $this->defaultCurrencyCode]);
+        $currency = $this->currencyRepository->findOneBy(['code' => self::DEFAULT_CURRENCY_CODE]);
 
         if (null === $currency) {
             $currency = $this->currencyFactory->createNew();
-            $currency->setCode($this->defaultCurrencyCode);
+            $currency->setCode(self::DEFAULT_CURRENCY_CODE);
             $currency->setExchangeRate(1.00);
 
             $this->currencyRepository->add($currency);
