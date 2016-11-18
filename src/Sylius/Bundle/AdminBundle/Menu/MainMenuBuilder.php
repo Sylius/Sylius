@@ -178,6 +178,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
         ;
 
         $configuration
+            ->addChild('exchange_rates', ['route' => 'sylius_admin_exchange_rate_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.exchange_rates')
+            ->setLabelAttribute('icon', 'sliders')
+        ;
+
+        $configuration
             ->addChild('locales', ['route' => 'sylius_admin_locale_index'])
             ->setLabel('sylius.menu.admin.main.configuration.locales')
             ->setLabelAttribute('icon', 'translate')

@@ -14,6 +14,7 @@ sylius:
                     channels: Channels
                     countries: Countries
                     currencies: Currencies
+                    exchange_rates: Exchange rates
                     header: Configuration
                     locales: Locales
                     payment_methods: Payment methods
