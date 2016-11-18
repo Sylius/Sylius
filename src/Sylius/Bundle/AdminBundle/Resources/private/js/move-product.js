@@ -1,50 +1,37 @@
 (function ($) {
     'use strict';
-
     $(document).ready(function() {
+        var productTaxonIds = [];
 
-        $('.sylius-product-index .ui.sortable.stackable.celled.table > tbody').sortable({
-            forceFallback: true,
-            onEnd: function (event) {
-                $(this).api({
-                    throttle: 500,
-                    method: 'PUT',
-                    action: 'move product taxon',
-                    on: 'now',
-                    urlData: {
-                        id: $(event.item).find('input').data('id')
-                    },
-                    beforeSend: function (settings) {
-                        settings.data = {
-                            position: event.newIndex
-                        };
-
-                        return settings;
-                    },
-                    onFailure: function (response) {
-                        throw 'Something went wrong with api call.';
-                    }
-                });
-            }
-        });
-
-        $('.sylius-product-taxon-position').api({
-            throttle: 500,
+        $('.sylius-update-product-taxons').api({
             method: 'PUT',
             beforeSend: function (settings) {
                 settings.data = {
-                    position: $(this).val()
+                    productTaxons: productTaxonIds
                 };
+
                 return settings;
             },
             onSuccess: function (response) {
                 location.reload();
-            },
-            onFailure: function (response) {
-                throw 'Something went wrong with api call.';
             }
         });
-        
+
+        $('.sylius-product-taxon-position').on('input', function () {
+            var id = $(this).data('id');
+            var rowToEdit = productTaxonIds.filter(function (productTaxon){
+                return productTaxon.id == id;
+            });
+
+            if(rowToEdit.length == 0) {
+                productTaxonIds.push({
+                    id: $(this).data('id'),
+                    position: $(this).val()
+                });
+            } else {
+                rowToEdit[0].position = $(this).val();
+            }
+        });
     });
 
 })( jQuery );

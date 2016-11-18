@@ -1,0 +1,6 @@
+<form class="sylius-update-product-taxons" action="{{ path('sylius_admin_product_taxons_update', {'taxonId': app.request.attributes.get('taxonId')}) }}" method="PUT">
+    <button class="ui labeled loadable icon button sylius-save-position" type="submit">
+        <i class="icon checkmark"></i>
+        {{ 'sylius.ui.save_positions'|trans }}
+    </button>
+</form>

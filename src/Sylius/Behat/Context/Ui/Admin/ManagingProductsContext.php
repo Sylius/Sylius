@@ -1047,4 +1047,12 @@ final class ManagingProductsContext implements Context
 
         Assert::same($currentPage->getValidationMessage($element), $message);
     }
+
+    /**
+     * @When I save my new configuration
+     */
+    public function iSaveMyNewConfiguration()
+    {
+        $this->indexPerTaxonPage->saveConfiguration();
+    }
 }

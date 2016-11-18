@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Core\Model\ProductImage;
 use Sylius\Component\Core\Model\ProductImageInterface;
@@ -94,7 +94,7 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(ProductTaxon::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ProductTaxonInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ProductTaxonController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()

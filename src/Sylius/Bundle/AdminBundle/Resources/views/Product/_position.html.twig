@@ -1,13 +1,8 @@
 {% if taxonId %}
     {% for productTaxon in product.productTaxons%}
         {% if taxonId == productTaxon.taxon.id %}
-            <div class="position">
-                <button class="ui button position" >
-                    {{ 'sylius.ui.change_position'|trans }}
-                </button>
-                <div class='ui input'>
-                    <input type='hidden' data-action="move product taxon"  data-id="{{ productTaxon.id }}" data-position="{{ productTaxon.position }}" class='sylius-product-taxon-position'/>
-                </div>
+            <div class='ui input position'>
+                <input type='text' value="{{ productTaxon.position }}" data-id="{{ productTaxon.id }}" class='sylius-product-taxon-position'/>
             </div>
         {% endif %}
     {% endfor %}

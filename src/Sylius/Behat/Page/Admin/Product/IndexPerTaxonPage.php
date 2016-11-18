@@ -48,39 +48,16 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         $productsRow = $this->getElement('table')->find('css', sprintf('tbody > tr:contains("%s")', $productName));
         Assert::notNull($productsRow, 'There are no row with given product\'s name!');
 
-        $productsRow->find('css', 'button:contains("Change position")')->press();
-
-        $productTaxonId = $this->getElement('position_input_field')->getAttribute('data-id');
-
-        $this->getElement('position_input_field')->setValue($position);
-
-        $this->getDocument()->waitFor(5, function () use ($productTaxonId){
-            return 'hidden' === $this->getDocument()->find('css', sprintf('input[data-id=%s]', $productTaxonId))->getAttribute('type');
-        });
+        $productsRow->find('css', '.sylius-product-taxon-position')->setValue($position);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function insertBefore(ProductInterface $draggableProduct, ProductInterface $targetProduct)
+    public function saveConfiguration()
     {
-        $seleniumDriver = $this->getSeleniumDriver();
-        $draggableProductLocator = sprintf('.item:contains("%s")', $draggableProduct->getName());
-        $targetProductLocator = sprintf('.item:contains("%s")', $targetProduct->getName());
+        $this->getElement('save_configuration_button')->press();
 
-        $script = <<<JS
-(function ($) {
-    $('$draggableProductLocator').simulate('drag-n-drop',{
-        dragTarget: $('$targetProductLocator'),
-        interpolation: {stepWidth: 10, stepDelay: 30} 
-    });    
-})(jQuery);
-JS;
-
-        $seleniumDriver->executeScript($script);
-        $this->getDocument()->waitFor(5, function () {
-            return false;
-        });
+        $this->getDocument()->waitFor(5, function (){
+            return false === $this->getElement('save_configuration_button')->hasClass('loading');
+        } );
     }
 
     /**
@@ -89,23 +66,9 @@ JS;
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'position_input_field' => '.position  input[type="text"]',
+            'save_configuration_button' => '.sylius-save-position',
         ]);
     }
 
-    /**
-     * @return Selenium2Driver
-     *
-     * @throws UnsupportedDriverActionException
-     */
-    private function getSeleniumDriver()
-    {
-        /** @var Selenium2Driver $driver */
-        $driver = $this->getDriver();
-        if (!$driver instanceof Selenium2Driver) {
-            throw new UnsupportedDriverActionException('This action is not supported by %s', $driver);
-        }
 
-        return $driver;
-    }
 }

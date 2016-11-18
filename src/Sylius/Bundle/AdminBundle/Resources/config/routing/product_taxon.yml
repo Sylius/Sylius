@@ -1,8 +1,9 @@
-sylius_admin_product_taxon_move:
-    path: product-taxons/{id}/move
-    methods: [PUT]
+sylius_admin_product_taxons_update:
+    path: product-taxons/update
+    methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.productTaxon:updateAction
+        _controller: sylius.controller.productTaxon:updatePositionsAction
         _sylius:
-            section: admin
-            form: sylius_product_taxon_position
+            redirect:
+                route: sylius_admin_product_per_taxon_index
+                parameters: [$taxonId]

@@ -33,9 +33,5 @@ interface IndexPerTaxonPageInterface extends CrudIndexPageInterface
      */
     public function setPositionOfProduct($productName, $position);
 
-    /**
-     * @param ProductInterface $draggableProduct
-     * @param ProductInterface $targetProduct
-     */
-    public function insertBefore(ProductInterface $draggableProduct, ProductInterface $targetProduct);
+    public function saveConfiguration();
 }

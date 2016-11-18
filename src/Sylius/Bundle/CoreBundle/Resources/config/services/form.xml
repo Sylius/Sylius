@@ -45,6 +45,9 @@
         <service id="sylius.form.type.product_taxon_position" class="Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonPositionType">
             <tag name="form.type" alias="sylius_product_taxon_position" />
         </service>
+        <service id="sylius.form.type.product_taxon_position_collection" class="Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonPositionCollectionType">
+            <tag name="form.type" alias="sylius_product_taxon_position_collection" />
+        </service>
         <service id="sylius.form.type.product_taxon_choice" class="%sylius.form.type.product_taxon_choice.class%">
             <argument type="service" id="sylius.factory.product_taxon" />
             <tag name="form.type" alias="sylius_product_taxon_choice" />

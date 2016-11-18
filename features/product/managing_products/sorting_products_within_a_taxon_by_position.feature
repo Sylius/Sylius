@@ -32,12 +32,14 @@ Feature: Sorting listed products from a taxon by position
     Scenario: Product with position 0 is set as the first one
         When I am browsing products from "Soft Toys" taxon
         And I set the position of "Young pug" to 0
+        And I save my new configuration
         Then the first product on the list should have name "Young pug"
 
     @ui @javascript
     Scenario: Product with the highest position is set as the last one
         When I am browsing products from "Soft Toys" taxon
         And I set the position of "Young pug" to 12
+        And I save my new configuration
         Then the last product on the list should have name "Young pug"
 
     @ui

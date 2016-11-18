@@ -12,23 +12,22 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class ProductTaxonPositionType extends AbstractType
+class ProductTaxonPositionCollectionType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('id', IntegerType::class)
-            ->add('position', IntegerType::class)
-        ;
+        $builder->add('productTaxons', CollectionType::class, [
+            'entry_type' => ProductTaxonPositionType::class
+        ]);
     }
 
     /**
@@ -36,6 +35,6 @@ final class ProductTaxonPositionType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_product_taxon_position';
+        return 'sylius_product_taxon_position_collection';
     }
 }
