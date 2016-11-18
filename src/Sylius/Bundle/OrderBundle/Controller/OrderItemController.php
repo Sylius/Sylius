@@ -49,7 +49,7 @@ class OrderItemController extends ResourceController
 
         $form = $this->getFormFactory()->create(
             $configuration->getFormType(),
-            $this->createAddCartItemCommand($cart, $orderItem),
+            $this->createAddToCartCommand($cart, $orderItem),
             $configuration->getFormOptions()
         );
 
@@ -201,11 +201,11 @@ class OrderItemController extends ResourceController
      * @param OrderInterface $cart
      * @param OrderItemInterface $cartItem
      *
-     * @return AddToCartCommand
+     * @return AddToCartCommandInterface
      */
-    protected function createAddCartItemCommand(OrderInterface $cart, OrderItemInterface $cartItem)
+    protected function createAddToCartCommand(OrderInterface $cart, OrderItemInterface $cartItem)
     {
-        return AddToCartCommand::createForCartAndCartItem($cart, $cartItem);
+        return $this->get('sylius.factory.add_to_cart_command')->createForCartAndCartItem($cart, $cartItem);
     }
 
     /**

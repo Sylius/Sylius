@@ -76,5 +76,7 @@
         </service>
 
         <service id="sylius.complete_checkout_callback" class="Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteCheckoutCallback" />
+
+        <service id="sylius.factory.add_to_cart_command" class="Sylius\Component\Order\Factory\AddToCartCommandFactory" />
     </services>
 </container>

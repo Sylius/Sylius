@@ -32,19 +32,8 @@ final class AddToCartCommand implements AddToCartCommandInterface
     /**
      * @param OrderInterface $cart
      * @param OrderItemInterface $cartItem
-     *
-     * @return AddToCartCommand
      */
-    public static function createForCartAndCartItem(OrderInterface $cart, OrderItemInterface $cartItem)
-    {
-        return new self($cart, $cartItem);
-    }
-
-    /**
-     * @param OrderInterface $cart
-     * @param OrderItemInterface $cartItem
-     */
-    private function __construct(OrderInterface $cart, OrderItemInterface $cartItem)
+    public function __construct(OrderInterface $cart, OrderItemInterface $cartItem)
     {
         $this->cart = $cart;
         $this->cartItem = $cartItem;
