@@ -43,7 +43,7 @@ Feature: Seeing all prices calculated accordingly to it's currency's exchange ra
         And the order's promotion total should be "-$5.00"
         And the order's total should be "$25.50"
 
-    @ui
+    @ui @todo
     Scenario: All of a placed order prices don't change when the base currency's exchange rate changes
         Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Angel T-Shirt"
@@ -87,7 +87,7 @@ Feature: Seeing all prices calculated accordingly to it's currency's exchange ra
         And the order's promotion total should be "-£10.00"
         And the order's total should be "£51.00"
 
-    @ui
+    @ui @todo
     Scenario: All of a placed order's prices are in the currency's chosen by the customer and it's exchange rate at the time of placing
         Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
         And the customer has chosen to order in the "GBP" currency
