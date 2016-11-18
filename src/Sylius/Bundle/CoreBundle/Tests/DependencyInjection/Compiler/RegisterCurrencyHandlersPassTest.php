@@ -14,64 +14,15 @@ namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection\Compiler;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterCurrencyHandlersPass;
-use Sylius\Bundle\CoreBundle\Handler\CartCurrencyChangeHandler;
 use Sylius\Component\Core\Currency\Handler\CompositeCurrencyChangeHandler;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class RegisterCurrencyHandlersPassTest extends AbstractCompilerPassTestCase
 {
-    /**
-     * @test
-     */
-    public function it_adds_method_call_to_composite_currency_change_handler_if_exists()
-    {
-        $compositeLocaleChangeHandler = new Definition(CompositeCurrencyChangeHandler::class);
-        $this->setDefinition('sylius.handler.currency_change.composite', $compositeLocaleChangeHandler);
-
-        $cartLocaleChangeHandler = new Definition(CartCurrencyChangeHandler::class);
-        $cartLocaleChangeHandler->addTag('sylius.currency.change_handler');
-
-        $this->setDefinition('sylius.handler.currency_change.cart', $cartLocaleChangeHandler);
-
-        $this->compile();
-
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.handler.currency_change',
-            'addHandler', [
-                new Reference('sylius.handler.currency_change.cart')
-            ]
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function it_adds_method_call_to_composite_currency_change_handler_with_custom_priority()
-    {
-        $compositeLocaleChangeHandler = new Definition(CompositeCurrencyChangeHandler::class);
-        $this->setDefinition('sylius.handler.currency_change.composite', $compositeLocaleChangeHandler);
-
-        $cartLocaleChangeHandler = new Definition(CartCurrencyChangeHandler::class);
-        $cartLocaleChangeHandler->addTag('sylius.currency.change_handler', ['priority' => 5]);
-
-        $this->setDefinition('sylius.handler.currency_change.cart', $cartLocaleChangeHandler);
-
-        $this->compile();
-
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.handler.currency_change',
-            'addHandler', [
-                new Reference('sylius.handler.currency_change.cart'),
-                5
-            ]
-        );
-    }
-
     /**
      * @test
      */
