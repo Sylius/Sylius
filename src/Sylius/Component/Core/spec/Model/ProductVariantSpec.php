@@ -51,21 +51,10 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->getPrice()->shouldReturn(null);
     }
 
-    function it_does_not_have_original_price_by_default()
-    {
-        $this->getOriginalPrice()->shouldReturn(null);
-    }
-
     function its_price_should_be_mutable()
     {
         $this->setPrice(499);
         $this->getPrice()->shouldReturn(499);
-    }
-
-    function its_original_price_should_be_mutable()
-    {
-        $this->setOriginalPrice(399);
-        $this->getOriginalPrice()->shouldReturn(399);
     }
 
     function its_price_should_accept_only_integer()
@@ -78,15 +67,6 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(round(4.1 * 100));
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice([410]);
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(new \stdClass());
-    }
-
-    function its_original_price_should_accept_only_integer()
-    {
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(3.1 * 100);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice('310');
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(round(3.1 * 100));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice([310]);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(new \stdClass());
     }
 
     function it_implements_a_shippable_interface()

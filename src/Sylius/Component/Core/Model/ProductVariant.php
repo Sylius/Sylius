@@ -27,11 +27,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $price;
 
     /**
-     * @var int
-     */
-    protected $originalPrice;
-
-    /**
      * @var string
      */
     protected $pricingCalculator = Calculators::STANDARD;
@@ -119,26 +114,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         }
 
         $this->price = $price;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOriginalPrice()
-    {
-        return $this->originalPrice;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOriginalPrice($originalPrice)
-    {
-        if (null !== $originalPrice && !is_int($originalPrice)) {
-            throw new \InvalidArgumentException('Original price must be an integer.');
-        }
-
-        $this->originalPrice = $originalPrice;
     }
 
     /**
@@ -349,14 +324,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getShippingVolume()
     {
         return $this->depth * $this->height * $this->width;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isPriceReduced()
-    {
-        return $this->originalPrice > $this->price;
     }
 
     /**
