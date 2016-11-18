@@ -21,5 +21,6 @@ Symfony Bundles
     SyliusTaxationBundle/index
     SyliusTaxonomyBundle/index
     SyliusThemeBundle/index
+    SyliusUserBundle/index
 
 .. include:: /bundles/map.rst.inc

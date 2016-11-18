@@ -15,3 +15,4 @@
 * :doc:`/bundles/SyliusTaxationBundle/index`
 * :doc:`/bundles/SyliusTaxonomyBundle/index`
 * :doc:`/bundles/SyliusThemeBundle/index`
+* :doc:`/bundles/SyliusUserBundle/index`
