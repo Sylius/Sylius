@@ -66,11 +66,6 @@ class Order extends BaseOrder implements OrderInterface
     protected $currencyCode;
 
     /**
-     * @var float
-     */
-    protected $exchangeRate = 1.0;
-
-    /**
      * @var string
      */
     protected $localeCode;
@@ -420,22 +415,6 @@ class Order extends BaseOrder implements OrderInterface
         Assert::string($currencyCode);
 
         $this->currencyCode = $currencyCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getExchangeRate()
-    {
-        return $this->exchangeRate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setExchangeRate($exchangeRate)
-    {
-        $this->exchangeRate = (float) $exchangeRate;
     }
 
     /**
