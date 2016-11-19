@@ -64,6 +64,13 @@
             <tag name="fob.context_service" />
         </service>
 
+        <service id="sylius.behat.context.setup.exchange_rate" class="Sylius\Behat\Context\Setup\ExchangeRateContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="__symfony__.sylius.factory.exchange_rate" />
+            <argument type="service" id="__symfony__.sylius.repository.exchange_rate" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="sylius.behat.context.setup.geographical" class="Sylius\Behat\Context\Setup\GeographicalContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.factory.country" />
