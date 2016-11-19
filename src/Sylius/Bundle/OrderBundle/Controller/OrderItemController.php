@@ -216,7 +216,7 @@ class OrderItemController extends ResourceController
     /**
      * @return OrderItemQuantityModifierInterface
      */
-    private function getItemQuantityModifier()
+    protected function getItemQuantityModifier()
     {
         return $this->get('sylius.order_item_quantity_modifier');
     }
@@ -224,7 +224,7 @@ class OrderItemController extends ResourceController
     /**
      * @return OrderModifierInterface
      */
-    private function getOrderModifier()
+    protected function getOrderModifier()
     {
         return $this->get('sylius.order_modifier');
     }
@@ -232,7 +232,7 @@ class OrderItemController extends ResourceController
     /**
      * @return EntityManagerInterface
      */
-    private function getCartManager()
+    protected function getCartManager()
     {
         return $this->get('sylius.manager.order');
     }
