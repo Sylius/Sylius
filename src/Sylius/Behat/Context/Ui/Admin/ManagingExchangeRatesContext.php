@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\ExchangeRate\CreatePageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -21,16 +22,31 @@ use Webmozart\Assert\Assert;
 final class ManagingExchangeRatesContext implements Context
 {
     /**
+     * @var CreatePageInterface
+     */
+    private $createPage;
+
+    /**
      * @var IndexPageInterface
      */
     private $indexPage;
 
     /**
+     * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      */
-    public function __construct(IndexPageInterface $indexPage)
+    public function __construct(CreatePageInterface $createPage, IndexPageInterface $indexPage)
     {
+        $this->createPage = $createPage;
         $this->indexPage = $indexPage;
+    }
+
+    /**
+     * @Given I want to add a new exchange rate
+     */
+    public function iWantToAddNewExchangeRate()
+    {
+        $this->createPage->open();
     }
 
     /**
@@ -39,6 +55,38 @@ final class ManagingExchangeRatesContext implements Context
     public function iWantToBrowseExchangeRatesOfTheStore()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When I specify its ratio as :ratio
+     */
+    public function iSpecifyItsRatioAs($ratio)
+    {
+        $this->createPage->specifyRatio($ratio);
+    }
+
+    /**
+     * @When I choose :currencyCode as the base currency
+     */
+    public function iChooseAsBaseCurrency($currencyCode)
+    {
+        $this->createPage->chooseBaseCurrency($currencyCode);
+    }
+
+    /**
+     * @When I choose :currencyCode as the counter currency
+     */
+    public function iChooseAsCounterCurrency($currencyCode)
+    {
+        $this->createPage->chooseCounterCurrency($currencyCode);
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt()
+    {
+        $this->createPage->create();
     }
 
     /**
@@ -56,9 +104,30 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @Then the exchange rate between :baseCurrency and :counterCurrency should appear in the store
+     */
+    public function theExchangeRateBetweenAndShouldAppearInTheStore($baseCurrency, $counterCurrency)
+    {
+        $this->indexPage->open();
+
+        $this->assertExchangeRateIsOnList($baseCurrency, $counterCurrency);
+    }
+
+    /**
      * @Then I should see an exchange rate between :baseCurrencyName and :counterCurrencyName on the list
      */
     public function iShouldSeeAnExchangeRateBetweenAndOnTheList($baseCurrencyName, $counterCurrencyName)
+    {
+        $this->assertExchangeRateIsOnList($baseCurrencyName, $counterCurrencyName);
+    }
+
+    /**
+     * @param string $baseCurrencyName
+     * @param string $counterCurrencyName
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertExchangeRateIsOnList($baseCurrencyName, $counterCurrencyName)
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([

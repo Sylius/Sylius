@@ -83,6 +83,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_exchange_rates" class="Sylius\Behat\Context\Ui\Admin\ManagingExchangeRatesContext">
+            <argument type="service" id="sylius.behat.page.admin.exchange_rate.create" />
             <argument type="service" id="sylius.behat.page.admin.exchange_rate.index" />
             <tag name="fob.context_service" />
         </service>
