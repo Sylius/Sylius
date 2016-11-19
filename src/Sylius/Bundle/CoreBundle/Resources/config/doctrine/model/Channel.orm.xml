@@ -23,8 +23,8 @@
         <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface">
             <join-column name="default_locale_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-        <many-to-one field="defaultCurrency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
-            <join-column name="default_currency_id" referenced-column-name="id" nullable="false" />
+        <many-to-one field="baseCurrency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
+            <join-column name="base_currency_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
         <many-to-one field="defaultTaxZone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
             <join-column name="default_tax_zone_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />

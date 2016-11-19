@@ -14,7 +14,7 @@ Feature: Selecting default tax zone for a channel
         When I specify its code as "MOBILE"
         And I name it "Mobile store"
         And I select the "United States" as default tax zone
-        And I choose "USD" as a default currency
+        And I choose "USD" as the base currency
         And I choose "English (United States)" as a default locale
         And I add it
         Then I should be notified that it has been successfully created

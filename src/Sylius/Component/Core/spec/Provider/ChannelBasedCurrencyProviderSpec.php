@@ -62,14 +62,14 @@ final class ChannelBasedCurrencyProviderSpec extends ObjectBehavior
         $this->getAvailableCurrenciesCodes()->shouldReturn(['BTC']);
     }
 
-    function it_returns_channels_default_currency(
+    function it_returns_channels_base_currency(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         CurrencyInterface $currency
     ) {
         $channelContext->getChannel()->willReturn($channel);
 
-        $channel->getDefaultCurrency()->willReturn($currency);
+        $channel->getBaseCurrency()->willReturn($currency);
 
         $currency->getCode()->willReturn('BTC');
 

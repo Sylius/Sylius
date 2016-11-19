@@ -39,12 +39,12 @@ interface ChannelInterface extends
     /**
      * @return CurrencyInterface
      */
-    public function getDefaultCurrency();
+    public function getBaseCurrency();
 
     /**
      * @param CurrencyInterface $currency
      */
-    public function setDefaultCurrency(CurrencyInterface $currency);
+    public function setBaseCurrency(CurrencyInterface $currency);
 
     /**
      * @return ZoneInterface

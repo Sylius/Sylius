@@ -71,7 +71,7 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         $this->shouldImplement(DefaultChannelFactoryInterface::class);
     }
 
-    function it_creates_a_default_united_states_channel_with_country_zone_and_usd_as_default_currency(
+    function it_creates_a_default_united_states_channel_with_country_zone_and_usd_as_base_currency(
         RepositoryInterface $channelRepository,
         RepositoryInterface $countryRepository,
         RepositoryInterface $currencyRepository,
@@ -116,7 +116,7 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         $currency->setCode('USD')->shouldBeCalled();
         $currency->setExchangeRate(1.00)->shouldBeCalled();
 
-        $channel->setDefaultCurrency($currency)->shouldBeCalled();
+        $channel->setBaseCurrency($currency)->shouldBeCalled();
         $channel->addCurrency($currency)->shouldBeCalled();
         $channel->setDefaultLocale($locale)->shouldBeCalled();
         $channel->addLocale($locale)->shouldBeCalled();

@@ -189,7 +189,7 @@ EOT
 
         $channel->addCurrency($this->currency);
         $channel->addLocale($this->locale);
-        $channel->setDefaultCurrency($this->currency);
+        $channel->setBaseCurrency($this->currency);
         $channel->setDefaultLocale($this->locale);
 
         $channelManager->flush();
