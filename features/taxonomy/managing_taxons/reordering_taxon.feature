@@ -8,7 +8,7 @@ Feature: Reordering taxons
         Given the store classifies its products as "T-Shirts", "Watches", "Belts" and "Wallets"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @todo
     Scenario: Changing order of the taxon
         When I want to see all taxons in store
         And I move up "Watches" taxon
