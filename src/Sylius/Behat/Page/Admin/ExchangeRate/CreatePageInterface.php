@@ -32,4 +32,11 @@ interface CreatePageInterface extends BaseCreatePage
      * @param string $currency
      */
     public function chooseCounterCurrency($currency);
+
+    /**
+     * @param string $expectedMessage
+     *
+     * @return bool
+     */
+    public function hasFormValidationError($expectedMessage);
 }

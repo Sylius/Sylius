@@ -166,6 +166,14 @@ final class CurrencyContext implements Context
     }
 
     /**
+     * @When /^the (currency "[^"]+") gets deleted$/
+     */
+    public function theCurrencyGetsDeleted(CurrencyInterface $currency)
+    {
+        $this->currencyRepository->remove($currency);
+    }
+
+    /**
      * @param CurrencyInterface $currency
      */
     private function saveCurrency(CurrencyInterface $currency)

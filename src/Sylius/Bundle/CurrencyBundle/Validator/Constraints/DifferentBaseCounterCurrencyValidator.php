@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CurrencyBundle\Validator\Constraints;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
-use Webmozart\Assert\Assert;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -26,10 +26,12 @@ class DifferentBaseCounterCurrencyValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        Assert::isInstanceOf($value, ExchangeRateInterface::class);
+        if (!$value instanceof ExchangeRateInterface) {
+            throw new UnexpectedTypeException($value, ExchangeRateInterface::class);
+        }
 
         if ($value->getBaseCurrency() === $value->getCounterCurrency()) {
-            $this->context->addViolation($constraint->message);
+            $this->context->buildViolation($constraint->message)->addViolation();
         }
     }
 }

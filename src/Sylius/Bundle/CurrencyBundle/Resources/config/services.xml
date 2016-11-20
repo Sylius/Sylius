@@ -47,5 +47,9 @@
         <service id="sylius.validator.different_counter_currency" class="Sylius\Bundle\CurrencyBundle\Validator\Constraints\DifferentBaseCounterCurrencyValidator">
             <tag name="validator.constraint_validator" />
         </service>
+        <service id="sylius.validator.unique_currency_pair" class="Sylius\Bundle\CurrencyBundle\Validator\Constraints\UniqueCurrencyPairValidator">
+            <argument type="service" id="sylius.repository.exchange_rate" />
+            <tag name="validator.constraint_validator" />
+        </service>
     </services>
 </container>

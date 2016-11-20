@@ -41,4 +41,29 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->selectFieldOption('Counter currency', $currency);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasFormValidationError($expectedMessage)
+    {
+        $formValidationErrors = $this->getDocument()->find('css', 'form > div.ui.red.label.sylius-validation-error');
+        if (null === $formValidationErrors) {
+            return false;
+        }
+
+        return $expectedMessage === $formValidationErrors->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'base currency' => '#sylius_exchange_rate_baseCurrency',
+            'counter currency' => '#sylius_exchange_rate_counterCurrency',
+            'ratio' => '#sylius_exchange_rate_ratio',
+        ]);
+    }
 }

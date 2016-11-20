@@ -12,9 +12,12 @@
 namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Currency\Model\ExchangeRateInterface;
 use Symfony\Component\Form\Extension\Core\DataTransformer\NumberToLocalizedStringTransformer;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -35,17 +38,32 @@ class ExchangeRateType extends AbstractResourceType
                 'scale' => 5,
                 'rounding_mode' => $options['rounding_mode'],
             ])
-            ->add('baseCurrency', 'sylius_currency_choice', [
-                'label' => 'sylius.form.exchange_rate.base_currency',
-                'required' => true,
-                'empty_data' => false,
-            ])
-            ->add('counterCurrency', 'sylius_currency_choice', [
-                'label' => 'sylius.form.exchange_rate.counter_currency',
-                'required' => true,
-                'empty_data' => false,
-            ])
         ;
+
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            /** @var ExchangeRateInterface $exchangeRate */
+            $exchangeRate = $event->getData();
+            $form = $event->getForm();
+
+            $disabled = null !== $exchangeRate->getBaseCurrency() &&
+                        null !== $exchangeRate->getCounterCurrency()
+            ;
+
+            $form
+                ->add('baseCurrency', 'sylius_currency_choice', [
+                    'label' => 'sylius.form.exchange_rate.base_currency',
+                    'required' => true,
+                    'empty_data' => false,
+                    'disabled' => $disabled,
+                ])
+                ->add('counterCurrency', 'sylius_currency_choice', [
+                    'label' => 'sylius.form.exchange_rate.counter_currency',
+                    'required' => true,
+                    'empty_data' => false,
+                    'disabled' => $disabled,
+                ])
+            ;
+        });
     }
 
     /**

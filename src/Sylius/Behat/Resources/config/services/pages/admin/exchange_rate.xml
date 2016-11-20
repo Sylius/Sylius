@@ -19,5 +19,8 @@
         <service id="sylius.behat.page.admin.exchange_rate.index" class="Sylius\Behat\Page\Admin\Crud\IndexPage" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">exchange_rate</argument>
         </service>
+        <service id="sylius.behat.page.admin.exchange_rate.update" class="Sylius\Behat\Page\Admin\ExchangeRate\UpdatePage" parent="sylius.behat.page.admin.crud.update" public="false">
+            <argument type="string">exchange_rate</argument>
+        </service>
     </services>
 </container>
