@@ -2,6 +2,7 @@
   "dependencies": {
     "jquery": "^2.2.0",
     "semantic-ui-css": "^2.2.0",
+    "semantic-ui-calendar": "^0.0.3",
     "sortablejs": "^1.4.2"
   },
   "devDependencies": {

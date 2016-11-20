@@ -43,14 +43,12 @@ class PromotionType extends AbstractResourceType
             ])
             ->add('startsAt', 'datetime', [
                 'label' => 'sylius.form.promotion.starts_at',
-                'date_widget' => 'single_text',
-                'time_widget' => 'single_text',
+                'widget' => 'single_text',
                 'required' => false,
             ])
             ->add('endsAt', 'datetime', [
                 'label' => 'sylius.form.promotion.ends_at',
-                'date_widget' => 'single_text',
-                'time_widget' => 'single_text',
+                'widget' => 'single_text',
                 'required' => false,
             ])
             ->add('priority', IntegerType::class, [
