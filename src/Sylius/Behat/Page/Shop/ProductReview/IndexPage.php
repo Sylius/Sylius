@@ -23,7 +23,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_shop_product_reviews_index';
+        return 'sylius_shop_product_review_index';
     }
 
     /**
@@ -45,9 +45,9 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasNoReviewMessage()
+    public function hasNoReviewsMessage()
     {
-        return 'There are no reviews' === $this->getElement('reviews')->find('css', '.comments')->getText();
+        return 'There are no reviews' === $this->getElement('reviews')->find('css', '.message')->getText();
     }
 
     /**

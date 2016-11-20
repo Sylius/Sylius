@@ -5,6 +5,10 @@ sylius_shop_partial_product:
     resource: "@SyliusShopBundle/Resources/config/routing/partial/product.yml"
     prefix: /products
 
+sylius_shop_partial_product_review:
+    resource: "@SyliusShopBundle/Resources/config/routing/partial/product_review.yml"
+    prefix: /products/{productId}/reviews
+
 sylius_shop_partial_taxon:
     resource: "@SyliusShopBundle/Resources/config/routing/partial/taxon.yml"
     prefix: /taxons

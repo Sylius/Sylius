@@ -57,7 +57,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function getProductName()
     {
-        return $this->getElement('review_subject')->getHtml();
+        return $this->getElement('product_name')->getHtml();
     }
 
     /**
@@ -65,7 +65,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function getCustomerName()
     {
-        return $this->getElement('author')->getHtml();
+        return $this->getElement('customer_name')->getHtml();
     }
 
     /**
@@ -74,11 +74,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'author' => '#author-name > .header',
             'checked_rating' => 'input[checked="checked"]',
             'comment' => '#sylius_product_review_comment',
             'rating' => '#sylius_product_review_rating_%position%',
-            'review_subject' => '#review-subject-name > .header',
+            'customer_name' => '.sylius-customer-name',
+            'product_name' => '.sylius-product-name',
             'title' => '#sylius_product_review_title',
         ]);
     }

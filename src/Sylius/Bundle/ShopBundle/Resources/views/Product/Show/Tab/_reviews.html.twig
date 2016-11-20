@@ -1,9 +1,10 @@
 <div class="ui bottom attached tab segment" data-tab="reviews">
-    {{ render(url('sylius_shop_partial_product_reviews_latest', { 'productId': product.id, 'template': '@SyliusShop/Product/_reviews.html.twig' })) }}
-    <a href="{{ path('sylius_shop_product_reviews_index', { 'slug': product.slug }) }}">
-        <div class="ui blue labeled icon button"><i class="icon list"></i> {{ 'sylius.ui.view_more'|trans }}</div>
+    {{ render(url('sylius_shop_partial_product_review_latest', {'productId': product.id, 'template': '@SyliusShop/Product/_reviews.html.twig'})) }}
+
+    <a href="{{ path('sylius_shop_product_review_index', {'slug': product.slug}) }}">
+        <div class="ui labeled icon button"><i class="icon list"></i> {{ 'sylius.ui.view_more'|trans }}</div>
     </a>
-    <a href="{{ path('sylius_shop_product_reviews_create', { 'slug': product.slug }) }}">
-        <div class="ui green labeled icon button"><i class="icon plus"></i> {{ 'sylius.ui.new_review'|trans }}</div>
+    <a href="{{ path('sylius_shop_product_review_create', {'slug': product.slug}) }}">
+        <div class="ui blue labeled icon button"><i class="icon plus"></i> {{ 'sylius.ui.add_your_review'|trans }}</div>
     </a>
 </div>
