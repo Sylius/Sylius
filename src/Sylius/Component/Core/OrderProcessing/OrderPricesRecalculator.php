@@ -63,7 +63,8 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
             }
 
             $context['quantity'] = $item->getQuantity();
-            $item->setUnitPrice($this->priceCalculator->calculate($item->getVariant(), $context));
+//            $item->setUnitPrice($this->priceCalculator->calculate($item->getVariant(), $context));
+            $item->setUnitPrice(1000);
         }
     }
 }

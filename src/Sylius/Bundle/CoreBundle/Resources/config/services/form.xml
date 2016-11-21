@@ -123,12 +123,6 @@
             <tag name="form.type" alias="sylius_currency_based_discount_amount" />
         </service>
 
-        <service id="sylius.form.type.price_calculator.channel_and_currency_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelAndCurrencyBasedConfigurationType">
-            <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="sylius.repository.currency" />
-            <tag name="form.type" alias="sylius_price_calculator_channel_and_currency_based" />
-        </service>
-
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer">
             <argument type="service" id="sylius.repository.taxon" />
         </service>
@@ -173,8 +167,6 @@
         <service id="sylius.form.type.product_variant" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductVariantType">
             <argument>%sylius.model.product_variant.class%</argument>
             <argument>%sylius.validation_groups.product_variant%</argument>
-            <argument type="service" id="sylius.registry.price_calculator" />
-            <argument type="service" id="form.registry" />
             <tag name="form.type" alias="sylius_product_variant" />
         </service>
 
