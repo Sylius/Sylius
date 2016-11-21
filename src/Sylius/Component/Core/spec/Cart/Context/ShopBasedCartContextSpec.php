@@ -53,9 +53,10 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $cartContext->getCart()->willReturn($cart);
 
         $shopperContext->getChannel()->willReturn($channel);
-        $shopperContext->getCurrencyCode()->willReturn('PLN');
         $shopperContext->getLocaleCode()->willReturn('pl');
         $shopperContext->getCustomer()->willReturn($customer);
+
+        $channel->getBaseCurrency()->willReturn('PLN');
 
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('PLN')->shouldBeCalled();
@@ -79,22 +80,6 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_a_cart_not_found_exception_if_currency_code_is_undefined(
-        CartContextInterface $cartContext,
-        ShopperContextInterface $shopperContext,
-        ChannelInterface $channel,
-        OrderInterface $cart
-    ) {
-        $cartContext->getCart()->willReturn($cart);
-        $shopperContext->getChannel()->willReturn($channel);
-        $shopperContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
-
-        $this
-            ->shouldThrow(CartNotFoundException::class)
-            ->during('getCart')
-        ;
-    }
-
     function it_throws_a_cart_not_found_exception_if_locale_code_is_undefined(
         CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
@@ -103,7 +88,6 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     ) {
         $cartContext->getCart()->willReturn($cart);
         $shopperContext->getChannel()->willReturn($channel);
-        $shopperContext->getCurrencyCode()->willReturn('PLN');
         $shopperContext->getLocaleCode()->willThrow(LocaleNotFoundException::class);
 
         $this
