@@ -13,7 +13,7 @@ namespace Sylius\Bundle\UserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -29,11 +29,12 @@ class SecurityController extends Controller
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $template = $request->attributes->get('_sylius[template]', 'SyliusUserBundle:Security:login.html.twig', true);
+        $template = $request->attributes->get('_sylius[template]', null, true);
+        Assert::notNull($template, 'Template is not configured.');
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_security_login', true);
         $form = $this->get('form.factory')->createNamed('', $formType);
 
-        return $this->renderLogin($template, [
+        return $this->render($template, [
             'form' => $form->createView(),
             'last_username' => $lastUsername,
             'error' => $error,
@@ -54,16 +55,5 @@ class SecurityController extends Controller
     public function logoutAction(Request $request)
     {
         throw new \RuntimeException('You must configure the logout path to be handled by the firewall.');
-    }
-
-    /**
-     * @param string $template
-     * @param array $data
-     *
-     * @return Response
-     */
-    private function renderLogin($template, array $data)
-    {
-        return $this->render($template, $data);
     }
 }
