@@ -249,7 +249,6 @@ final class ManagingPaymentMethodsContext implements Context
         );
     }
 
-
     /**
      * @When I switch the way payment methods are sorted by :field
      * @When I start sorting payment methods by :field

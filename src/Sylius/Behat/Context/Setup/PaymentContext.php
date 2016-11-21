@@ -83,9 +83,8 @@ final class PaymentContext implements Context
     }
 
     /**
-     * @Given the store (also) allows paying :paymentMethodName
-     * @Given the store (also) allows paying with :paymentMethodName
-     * @Given the store (also) allows paying with :paymentMethodName at position :position
+     * @Given the store (also )allows paying (with ):paymentMethodName
+     * @Given the store (also )allows paying with :paymentMethodName at position :position
      */
     public function storeAllowsPaying($paymentMethodName, $position = null)
     {
