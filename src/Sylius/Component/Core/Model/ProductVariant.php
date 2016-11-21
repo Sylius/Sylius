@@ -23,16 +23,6 @@ use Webmozart\Assert\Assert;
 class ProductVariant extends BaseVariant implements ProductVariantInterface
 {
     /**
-     * @var string
-     */
-    protected $pricingCalculator = Calculators::STANDARD;
-
-    /**
-     * @var array
-     */
-    protected $pricingConfiguration = [];
-
-    /**
      * @var int
      */
     protected $onHold = 0;
@@ -95,38 +85,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         }
 
         return $string;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPricingCalculator()
-    {
-        return $this->pricingCalculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPricingCalculator($calculator)
-    {
-        $this->pricingCalculator = $calculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPricingConfiguration()
-    {
-        return $this->pricingConfiguration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPricingConfiguration(array $configuration)
-    {
-        $this->pricingConfiguration = $configuration;
     }
 
     /**

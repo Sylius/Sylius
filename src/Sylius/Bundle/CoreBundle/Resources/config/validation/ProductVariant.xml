@@ -13,17 +13,6 @@
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sylius\Component\Core\Model\ProductVariant">
-        <property name="price">
-            <constraint name="NotBlank">
-                <option name="message">sylius.product_variant.price.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Range">
-                <option name="min">0.00</option>
-                <option name="minMessage">sylius.product_variant.price.min</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
         <property name="onHand">
             <constraint name="NotBlank">
                 <option name="message">sylius.product_variant.onHand.not_blank</option>

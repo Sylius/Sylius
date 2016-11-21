@@ -14,39 +14,17 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormRegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductVariantTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * @var ServiceRegistryInterface
-     */
-    protected $calculatorRegistry;
-
-    /**
-     * @var FormRegistryInterface
-     */
-    protected $formRegistry;
-
-    /**
-     * @param ServiceRegistryInterface $calculatorRegistry
-     * @param FormRegistryInterface $formRegistry
-     */
-    public function __construct(ServiceRegistryInterface $calculatorRegistry, FormRegistryInterface $formRegistry)
-    {
-        $this->calculatorRegistry = $calculatorRegistry;
-        $this->formRegistry = $formRegistry;
-    }
-
     /**
      * {@inheritdoc}
      */

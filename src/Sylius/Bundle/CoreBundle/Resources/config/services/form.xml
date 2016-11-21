@@ -141,12 +141,6 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.price_calculator.channel_and_currency_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelAndCurrencyBasedConfigurationType">
-            <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="sylius.repository.currency" />
-            <tag name="form.type" />
-        </service>
-
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer">
             <argument type="service" id="sylius.repository.taxon" />
         </service>
