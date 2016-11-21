@@ -9,8 +9,8 @@ Sylius\Component\Currency\Model\ExchangeRate:
         ratio:
             expose: true
             type: float
-        virtual_properties:
-            getFromCurrency:
-                serialized_name: base_currency
-            getToCurrency:
-                serialized_name: counter_currency
+        baseCurrency:
+            expose: true
+        counterCurrency:
+            expose: true
+

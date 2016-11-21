@@ -6,11 +6,11 @@ sylius_grid:
                 options:
                     class: "%sylius.model.exchange_rate.class%"
             sorting:
-                ratio: desc
+                id: desc
             fields:
-                ratio:
+                id:
                     type: string
-                    label: sylius.ui.ratio
+                    enabled: false
                     sortable: ~
                 baseCurrency:
                     type: twig
@@ -24,10 +24,10 @@ sylius_grid:
                     path: .
                     options:
                         template: "@SyliusAdmin/ExchangeRate/Grid/Field/counterCurrencyName.html.twig"
-            filters:
                 ratio:
                     type: string
                     label: sylius.ui.ratio
+                    sortable: ~
             actions:
                 main:
                     create:

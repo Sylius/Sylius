@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CurrencyBundle\Validator\Constraints;
 
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -24,14 +24,14 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 class UniqueCurrencyPairValidator extends ConstraintValidator
 {
     /**
-     * @var RepositoryInterface
+     * @var ExchangeRateRepositoryInterface
      */
     private $exchangeRateRepository;
 
     /**
-     * @param RepositoryInterface $exchangeRateRepository
+     * @param ExchangeRateRepositoryInterface $exchangeRateRepository
      */
-    public function __construct(RepositoryInterface $exchangeRateRepository)
+    public function __construct(ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
         $this->exchangeRateRepository = $exchangeRateRepository;
     }
@@ -62,11 +62,8 @@ class UniqueCurrencyPairValidator extends ConstraintValidator
      */
     private function isCurrencyPairUnique(CurrencyInterface $baseCurrency, CurrencyInterface $counterCurrency)
     {
-        $exchangeRate = $this->exchangeRateRepository->findBy([
-            'baseCurrency' => $baseCurrency,
-            'counterCurrency' => $counterCurrency,
-        ]);
+        $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($baseCurrency, $counterCurrency);
 
-        return [] === $exchangeRate;
+        return null === $exchangeRate;
     }
 }

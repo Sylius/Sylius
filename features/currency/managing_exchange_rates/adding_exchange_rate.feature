@@ -1,12 +1,12 @@
 @managing_exchange_rates
 Feature: Adding a new exchange rate
-    In order for the customer to view my goods in different prices according to currency
+    In order to specify exchange rates between different currencies in my store
     As an Administrator
     I want to add a new exchange rate to the store
 
     Background:
-        Given I am logged in as an administrator
-        And the store has currency "US Dollar", "British Pound"
+        Given the store has currency "US Dollar" and "British Pound"
+        And I am logged in as an administrator
 
     @ui
     Scenario: Adding a new exchange rate
@@ -16,4 +16,4 @@ Feature: Adding a new exchange rate
         And I choose "British Pound" as the counter currency
         And I add it
         Then I should be notified that it has been successfully created
-        And the exchange rate between "US Dollar" and "British Pound" should appear in the store
+        And the exchange rate with ratio 1.20 between "US Dollar" and "British Pound" should appear in the store

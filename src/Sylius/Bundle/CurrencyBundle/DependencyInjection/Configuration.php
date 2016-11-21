@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CurrencyBundle\DependencyInjection;
 
+use Sylius\Bundle\CurrencyBundle\Doctrine\ORM\ExchangeRateRepository;
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType;
 use Sylius\Bundle\CurrencyBundle\Form\Type\ExchangeRateType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
@@ -40,7 +41,7 @@ final class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
+                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->cannotBeEmpty()->end()
                 ->scalarNode('currency')->defaultValue('USD')->cannotBeEmpty()->end()
             ->end()
         ;
@@ -71,7 +72,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(CurrencyInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
@@ -102,8 +103,8 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('model')->defaultValue(ExchangeRate::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ExchangeRateInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('repository')->defaultValue(ExchangeRateRepository::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()

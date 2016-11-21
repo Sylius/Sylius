@@ -31,7 +31,7 @@ final class ExchangeRateSpec extends ObjectBehavior
         $this->shouldImplement(ExchangeRateInterface::class);
     }
 
-    function it_throws_invalid_argument_exception_when_adding_non_float_ratio()
+    function it_throws_an_invalid_argument_exception_when_adding_non_float_ratio()
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('setRatio', ['1.01']);
         $this->shouldThrow(\InvalidArgumentException::class)->during('setRatio', ['asd']);

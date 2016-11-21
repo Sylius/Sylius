@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Currency\Model;
 
+use Webmozart\Assert\Assert;
+
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
@@ -59,13 +61,9 @@ class ExchangeRate implements ExchangeRateInterface
      */
     public function setRatio($ratio)
     {
-        if (is_float($ratio)) {
-            $this->ratio = $ratio;
+        Assert::float($ratio);
 
-            return;
-        }
-
-        throw new \InvalidArgumentException('The ratio must be a float.');
+        $this->ratio = $ratio;
     }
 
     /**

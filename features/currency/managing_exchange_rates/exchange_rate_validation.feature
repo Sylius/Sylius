@@ -5,7 +5,7 @@ Feature: Exchange rate validation
     I want to be prevented from adding exchange rates without specifying required fields
 
     Background:
-        Given the store has currency "US Dollar", "British Pound"
+        Given the store has currency "US Dollar" and "British Pound"
         And I am logged in as an administrator
 
     @ui

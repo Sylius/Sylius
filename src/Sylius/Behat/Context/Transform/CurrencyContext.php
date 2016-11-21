@@ -61,8 +61,8 @@ final class CurrencyContext implements Context
 
     /**
      * @Transform :currencyCode
-     * @Transform :firstCurrencyCode
      * @Transform :secondCurrencyCode
+     * @Transform :thirdCurrencyCode
      */
     public function getCurrencyCodeByName($currencyName)
     {

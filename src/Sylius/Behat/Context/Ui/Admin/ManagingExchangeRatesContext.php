@@ -71,7 +71,7 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I want to browse exchange rates of the store
+     * @When I am browsing exchange rates of the store
      */
     public function iWantToBrowseExchangeRatesOfTheStore()
     {
@@ -84,9 +84,7 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iSpecifyItsRatioAs($ratio = null)
     {
-        if (null !== $ratio) {
-            $this->createPage->specifyRatio($ratio);
-        }
+        $this->createPage->specifyRatio($ratio);
     }
 
     /**
@@ -162,13 +160,13 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @Then the exchange rate between :baseCurrency and :counterCurrency should appear in the store
+     * @Then the exchange rate with ratio :ratio between :baseCurrency and :counterCurrency should appear in the store
      */
-    public function theExchangeRateBetweenAndShouldAppearInTheStore($baseCurrency, $counterCurrency)
+    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, $baseCurrency, $counterCurrency)
     {
         $this->indexPage->open();
 
-        $this->assertExchangeRateIsOnList($baseCurrency, $counterCurrency);
+        $this->assertExchangeRateWithRatioIsOnTheList($ratio, $baseCurrency, $counterCurrency);
     }
 
     /**
@@ -222,19 +220,7 @@ final class ManagingExchangeRatesContext implements Context
         $baseCurrencyName = $exchangeRate->getBaseCurrency()->getName();
         $counterCurrencyName = $exchangeRate->getCounterCurrency()->getName();
 
-        Assert::true(
-            $this->indexPage->isSingleResourceOnPage([
-                'ratio' => $ratio,
-                'baseCurrency' => $baseCurrencyName,
-                'counterCurrency' => $counterCurrencyName,
-            ]),
-            sprintf(
-                'An exchange rate between %s and %s with a ratio of %s has not been found on the list.',
-                $baseCurrencyName,
-                $counterCurrencyName,
-                $ratio
-            )
-        );
+        $this->assertExchangeRateWithRatioIsOnTheList($ratio, $baseCurrencyName, $counterCurrencyName);
     }
 
     /**
@@ -264,7 +250,10 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
-        Assert::same($this->createPage->getValidationMessage($element), sprintf('Please enter exchange rate %s.', $element));
+        Assert::same(
+            $this->createPage->getValidationMessage($element),
+            sprintf('Please enter exchange rate %s.', $element)
+        );
     }
 
     /**
@@ -306,12 +295,36 @@ final class ManagingExchangeRatesContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([
                 'baseCurrency' => $baseCurrencyName,
-                'counterCurrency' => $counterCurrencyName
+                'counterCurrency' => $counterCurrencyName,
             ]),
             sprintf(
                 'An exchange rate with base currency %s and counter currency %s was not found on the list.',
                 $baseCurrencyName,
                 $counterCurrencyName
+            )
+        );
+    }
+
+    /**
+     * @param float $ratio
+     * @param string $baseCurrencyName
+     * @param string $counterCurrencyName
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertExchangeRateWithRatioIsOnTheList($ratio, $baseCurrencyName, $counterCurrencyName)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage([
+                'ratio' => $ratio,
+                'baseCurrency' => $baseCurrencyName,
+                'counterCurrency' => $counterCurrencyName,
+            ]),
+            sprintf(
+                'An exchange rate between %s and %s with a ratio of %s has not been found on the list.',
+                $baseCurrencyName,
+                $counterCurrencyName,
+                $ratio
             )
         );
     }

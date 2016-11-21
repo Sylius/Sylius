@@ -93,11 +93,17 @@ final class CurrencyContext implements Context
 
     /**
      * @Given the store has currency :currencyCode, :secondCurrencyCode
+     * @Given the store has currency :currencyCode and :secondCurrencyCode
+     * @Given the store has currency :currencyCode, :secondCurrencyCode and :thirdCurrencyCode
      */
-    public function theStoreHasCurrencyAnd($currencyCode, $secondCurrencyCode)
+    public function theStoreHasCurrencyAnd($currencyCode, $secondCurrencyCode, $thirdCurrencyCode = null)
     {
         $this->saveCurrency($this->createCurrency($currencyCode));
         $this->saveCurrency($this->createCurrency($secondCurrencyCode));
+
+        if (null !== $thirdCurrencyCode) {
+            $this->saveCurrency($this->createCurrency($thirdCurrencyCode));
+        }
     }
 
     /**
@@ -163,14 +169,6 @@ final class CurrencyContext implements Context
     {
         $currency->setExchangeRate($exchangeRate);
         $this->saveCurrency($currency);
-    }
-
-    /**
-     * @When /^the (currency "[^"]+") gets deleted$/
-     */
-    public function theCurrencyGetsDeleted(CurrencyInterface $currency)
-    {
-        $this->currencyRepository->remove($currency);
     }
 
     /**
