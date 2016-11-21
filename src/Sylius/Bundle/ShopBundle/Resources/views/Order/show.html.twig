@@ -11,7 +11,7 @@
                         {{ order.checkoutCompletedAt|date }}
                     </div>
                     <div class="item">
-                        {{ order.total|sylius_price(order.currencyCode, order.exchangeRate) }}
+                        {{ order.total|sylius_price(order.currencyCode) }}
                     </div>
                     <div class="item">
                         {{ order.items|length }} {{ 'sylius.ui.items'|trans|lower }}
