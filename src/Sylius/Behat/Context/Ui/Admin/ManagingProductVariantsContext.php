@@ -476,9 +476,9 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then /^(variant with code "[^"]+") for ("[^"]+" currency) and ("[^"]+" channel) should have "(?:€|£|\$)([^"]+)"$/
+     * @Then /^(variant with code "[^"]+") for ("[^"]+" currency) and ("[^"]+" channel) should be priced at "(?:€|£|\$)([^"]+)"$/
      */
-    public function theProductForCurrencyAndChannelShouldHave(
+    public function theProductForCurrencyAndChannelShouldBePricedAt(
         ProductVariantInterface $productVariant,
         CurrencyInterface $currency,
         ChannelInterface $channel,
