@@ -22,11 +22,6 @@ use Webmozart\Assert\Assert;
 class ProductVariant extends BaseVariant implements ProductVariantInterface
 {
     /**
-     * @var int
-     */
-    protected $price;
-
-    /**
      * @var string
      */
     protected $pricingCalculator = Calculators::STANDARD;
@@ -94,26 +89,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         }
 
         return $string;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPrice($price)
-    {
-        if (!is_int($price)) {
-            throw new \InvalidArgumentException('Price must be an integer.');
-        }
-
-        $this->price = $price;
     }
 
     /**
