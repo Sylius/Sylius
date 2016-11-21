@@ -9,7 +9,7 @@
                     <div class="content">
                         <div class="header">{{ label }}</div>
                         <div class="description">
-                            {{ amount|sylius_price(order.currencyCode, order.exchangeRate) }}
+                            {{ amount|sylius_price(order.currencyCode) }}
                         </div>
                     </div>
                 </div>
@@ -21,5 +21,5 @@
 </td>
 <td colspan="2" id="promotion-total" class="right aligned">
     <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
-    {{ order.orderPromotionTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+    {{ order.orderPromotionTotal|sylius_price(order.currencyCode) }}
 </td>
