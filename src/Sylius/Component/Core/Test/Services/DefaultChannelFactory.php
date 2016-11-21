@@ -118,11 +118,13 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     }
 
     /**
+     * @param string|null $currencyCode
+     *
      * @return CurrencyInterface
      */
     private function provideCurrency($currencyCode = null)
     {
-        $currencyCode = $currencyCode ?: self::DEFAULT_CHANNEL_CURRENCY;
+        $currencyCode = (null === $currencyCode) ? self::DEFAULT_CHANNEL_CURRENCY : $currencyCode;
 
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
