@@ -114,7 +114,11 @@ final class ChannelContext implements Context
 
     /**
      * @Given the store operates on a single channel
+<<<<<<< HEAD
      * @Given the store operates on a single channel in :currencyCode currency
+=======
+     * @Given the store operates on a single channel in currency :currencyCode
+>>>>>>> [Behat] Merge base currency step with channel creation step
      */
     public function storeOperatesOnASingleChannel($currencyCode = null)
     {
