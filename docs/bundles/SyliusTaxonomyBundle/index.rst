@@ -7,6 +7,6 @@ Flexible categorization system for Symfony applications.
    :numbered:
 
    installation
-   taxonomy_and_taxon
+   taxon
    categorization
    summary
