@@ -12,10 +12,14 @@ sylius:
             max_length: Product name must not be longer than 1 character.|Product name must not be longer than {{ limit }} characters.
         slug:
             not_blank: Please enter product slug.
-    variant:
+    product_variant:
         combination: Variant with this option set already exists.
         code:
-           not_blank: Please enter variant code.
+            not_blank: Please enter the code.
+            unique: Product variant code must be unique.
+    simple_product:
+        code:
+            unique: Simple product code must be unique among all products and product variants.
     option:
         code:
            not_blank: Please enter option code.

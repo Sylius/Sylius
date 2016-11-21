@@ -27,6 +27,10 @@
             <argument type="service" id="sylius.checker.product_variants_parity" />
             <tag name="validator.constraint_validator" alias="sylius.validator.product_variant_combination" />
         </service>
+        <service id="sylius.validator.product_code_uniqueness" class="Sylius\Bundle\ProductBundle\Validator\UniqueSimpleProductCodeValidator">
+            <argument type="service" id="sylius.repository.product_variant" />
+            <tag name="validator.constraint_validator" alias="sylius.validator.unique_simple_product_code" />
+        </service>
 
         <service id="sylius.generator.product_variant" class="Sylius\Component\Product\Generator\ProductVariantGenerator">
             <argument type="service" id="sylius.factory.product_variant" />

@@ -161,11 +161,28 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I set its(?:| default) price to ("(?:€|£|\$)[^"]+")$/
+     * @When /^I set its(?:| default) price to ("(?:-)?(?:€|£|\$)[^"]+")$/
+     * @When I do not set its price
      */
-    public function iSetItsPriceTo($price)
+    public function iSetItsPriceTo($price = null)
     {
         $this->createPage->specifyPrice($price);
+    }
+
+    /**
+     * @When I set its height, width, depth and weight to :number
+     */
+    public function iSetItsDimensionsTo($value)
+    {
+        $this->createPage->specifyHeightWidthDepthAndWeight($value, $value, $value, $value);
+    }
+
+    /**
+     * @When I do not specify its current stock
+     */
+    public function iDoNetSetItsCurrentStockTo()
+    {
+        $this->createPage->specifyCurrentStock('');
     }
 
     /**
@@ -203,6 +220,35 @@ final class ManagingProductVariantsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['code' => $productVariantCode]),
             sprintf('The product variant with code %s has not been found.', $productVariantCode)
         );
+    }
+
+    /**
+     * @Then the :productVariantCode variant of the :product product should not appear in the shop
+     */
+    public function theProductVariantShouldNotAppearInTheShop($productVariantCode, ProductInterface $product)
+    {
+        $this->iWantToViewAllVariantsOfThisProduct($product);
+
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['code' => $productVariantCode]),
+            sprintf('The product variant with code %s has not been found.', $productVariantCode)
+        );
+    }
+
+    /**
+     * @Then the :product product should have no variants
+     */
+    public function theProductShouldHaveNoVariants(ProductInterface $product)
+    {
+        $this->assertNumberOfVariantsOnProductPage($product, 0);
+    }
+
+    /**
+     * @Then the :product product should have only one 1 variant
+     */
+    public function theProductShouldHaveOnlyOneVariant(ProductInterface $product)
+    {
+        $this->assertNumberOfVariantsOnProductPage($product, 1);
     }
 
     /**
@@ -293,27 +339,65 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then I should be notified that price is required
+     * @Then I should be notified that :element is required
      */
-    public function iShouldBeNotifiedThatPriceIsRequired()
+    public function iShouldBeNotifiedThatIsRequired($element)
     {
-        $this->assertValidationMessage('price', 'Please enter the price.');
+        $this->assertValidationMessage($element, sprintf('Please enter the %s.', $element));
     }
 
     /**
-     * @Then /^I should be notified that price is required for the (\d)(?:st|nd|rd|th) variant$/
+     * @Then I should be notified that code has to be unique
      */
-    public function iShouldBeNotifiedThatPriceIsRequiredForVariant($position)
+    public function iShouldBeNotifiedThatCodeHasToBeUnique()
     {
-        Assert::same($this->generatePage->getValidationMessage('price', $position), 'Please enter the price.');
+        $this->assertValidationMessage('code', 'Product variant code must be unique.');
     }
 
     /**
-     * @Then /^I should be notified that code is required for the (\d)(?:st|nd|rd|th) variant$/
+     * @Then I should be notified that current stock is required
      */
-    public function iShouldBeNotifiedThatCodeIsRequiredForVariant($position)
+    public function iShouldBeNotifiedThatOnHandIsRequired()
     {
-        Assert::same($this->generatePage->getValidationMessage('code', $position), 'Please enter variant code.');
+        $this->assertValidationMessage('on_hand', 'Please enter on hand.');
+    }
+
+    /**
+     * @Then I should be notified that height, width, depth and weight cannot be lower than 0
+     */
+    public function iShouldBeNotifiedThatIsHeightWidthDepthWeightCannotBeLowerThan()
+    {
+        $this->assertValidationMessage('height', 'Height cannot be negative.');
+        $this->assertValidationMessage('width', 'Width cannot be negative.');
+        $this->assertValidationMessage('depth', 'Depth cannot be negative.');
+        $this->assertValidationMessage('weight', 'Weight cannot be negative.');
+    }
+
+    /**
+     * @Then I should be notified that :element cannot be lower than 0
+     */
+    public function iShouldBeNotifiedThatCannotBeLowerThen($element)
+    {
+        $this->assertValidationMessage($element, sprintf('%s must not be negative.', ucfirst($element)));
+    }
+
+    /**
+     * @Then I should be notified that this variant already exists
+     */
+    public function iShouldBeNotifiedThatThisVariantAlreadyExists()
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same($currentPage->getValidationMessageForForm(), 'Variant with this option set already exists.');
+    }
+
+    /**
+     * @Then /^I should be notified that (\w+) is required for the (\d)(?:st|nd|rd|th) variant$/
+     */
+    public function iShouldBeNotifiedThatIsRequiredForVariant($element, $position)
+    {
+        Assert::same($this->generatePage->getValidationMessage($element, $position), sprintf('Please enter the %s.', $element));
     }
 
     /**
@@ -582,5 +666,16 @@ final class ManagingProductVariantsContext implements Context
                 $actualAmount
             )
         );
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param int $amount
+     */
+    private function assertNumberOfVariantsOnProductPage(ProductInterface $product, $amount)
+    {
+        $this->iWantToViewAllVariantsOfThisProduct($product);
+
+        Assert::same((int) $this->indexPage->countItems(), $amount, 'Product has %d variants, but should have %d');
     }
 }

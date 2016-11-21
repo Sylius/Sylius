@@ -13,9 +13,14 @@
 
 <constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
     <class name="Sylius\Component\Product\Model\ProductVariant">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">sylius.product_variant.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="code">
             <constraint name="NotBlank">
-                <option name="message">sylius.variant.code.not_blank</option>
+                <option name="message">sylius.product_variant.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

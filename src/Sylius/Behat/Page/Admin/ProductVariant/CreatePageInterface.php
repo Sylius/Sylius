@@ -24,11 +24,24 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param int $price
      */
     public function specifyPrice($price);
+
+    /**
+     * @param int $height
+     * @param int $width
+     * @param int $depth
+     * @param int $weight
+     */
+    public function specifyHeightWidthDepthAndWeight($height, $width, $depth, $weight);
     
     /**
      * @param string $code
      */
     public function specifyCode($code);
+
+    /**
+     * @param int $currentStock
+     */
+    public function specifyCurrentStock($currentStock);
 
     /**
      * @param string $name
@@ -52,4 +65,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param CurrencyInterface $currency
      */
     public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency);
+
+    /**
+     * @return string
+     */
+    public function getValidationMessageForForm();
 }
