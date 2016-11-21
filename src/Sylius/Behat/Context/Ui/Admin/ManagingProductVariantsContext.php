@@ -648,7 +648,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSpecifyThereAreVariantsIdentifiedByCode($nthVariant, $code)
     {
-        $this->generatePage->nameCode($nthVariant, $code - 1);
+        $this->generatePage->nameCode($nthVariant - 1, $code);
     }
 
     /**
@@ -656,7 +656,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSpecifyThereAreVariantsWithCost($nthVariant, $price, $channelName)
     {
-        $this->generatePage->specifyPrice($nthVariant, $price - 1, $channelName);
+        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channelName);
     }
 
     /**
