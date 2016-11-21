@@ -5,19 +5,29 @@ Feature: Adding a new product
     I want to add a new product to the shop
 
     Background:
-        Given the store is available in "English (United States)"
+        Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
     @ui
-    Scenario: Adding a new simple product
+    Scenario: Adding a new simple product without price
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00"
         And I set its slug to "dice-brewing"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the store
+
+    @ui @todo
+    Scenario: Adding a new simple product with price
+        Given I want to create a new simple product
+        When I specify its code as "BOARD_DICE_BREWING"
+        And I name it "Dice Brewing" in "English (United States)"
+        And I set its slug to "dice-brewing"
+        And I set its price to "$10.00" for channel "United States"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the product "Dice Brewing" should appear in the shop
 
     @ui
     Scenario: Adding a new configurable product
