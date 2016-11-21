@@ -138,6 +138,7 @@ final class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->scalarNode('type')->isRequired()->end()
                                             ->scalarNode('label')->end()
+                                            ->scalarNode('icon')->end()
                                             ->arrayNode('options')
                                                 ->prototype('variable')->end()
                                             ->end()
