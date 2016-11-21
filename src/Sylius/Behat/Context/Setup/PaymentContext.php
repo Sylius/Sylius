@@ -92,6 +92,18 @@ final class PaymentContext implements Context
     }
 
     /**
+     * @Given /^the store allows paying (\w+) for (all channels)$/
+     */
+    public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels)
+    {
+        $paymentMethod = $this->createPaymentMethodFromNameAndCode($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method');
+
+        foreach ($channels as $channel) {
+            $paymentMethod->addChannel($channel);
+        }
+    }
+
+    /**
      * @Given the store has a payment method :paymentMethodName with a code :paymentMethodCode
      */
     public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
@@ -148,6 +160,8 @@ final class PaymentContext implements Context
      * @param string $code
      * @param bool $addForCurrentChannel
      * @param string $description
+     *
+     * @return PaymentMethodInterface
      */
     private function createPaymentMethod($name, $code, $description = '', $addForCurrentChannel = true, $position = null)
     {
@@ -165,5 +179,7 @@ final class PaymentContext implements Context
 
         $this->sharedStorage->set('payment_method', $paymentMethod);
         $this->paymentMethodRepository->add($paymentMethod);
+
+        return $paymentMethod;
     }
 }
