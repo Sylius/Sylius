@@ -1,13 +1,13 @@
 (function ($) {
     'use strict';
     $(document).ready(function() {
-        var productTaxonIds = [];
+        var productIds = [];
 
         $('.sylius-update-product-taxons').api({
             method: 'PUT',
             beforeSend: function (settings) {
                 settings.data = {
-                    productTaxons: productTaxonIds
+                    productTaxons: productIds
                 };
 
                 return settings;
@@ -19,12 +19,12 @@
 
         $('.sylius-product-taxon-position').on('input', function () {
             var id = $(this).data('id');
-            var rowToEdit = productTaxonIds.filter(function (productTaxon){
+            var rowToEdit = productIds.filter(function (productTaxon){
                 return productTaxon.id == id;
             });
 
             if(rowToEdit.length == 0) {
-                productTaxonIds.push({
+                productIds.push({
                     id: $(this).data('id'),
                     position: $(this).val()
                 });

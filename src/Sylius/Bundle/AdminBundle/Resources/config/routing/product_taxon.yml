@@ -1,8 +1,8 @@
 sylius_admin_product_taxons_update:
-    path: product-taxons/update
+    path: /product-taxons/update
     methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.productTaxon:updatePositionsAction
+        _controller: sylius.controller.product_taxon:updatePositionsAction
         _sylius:
             redirect:
                 route: sylius_admin_product_per_taxon_index

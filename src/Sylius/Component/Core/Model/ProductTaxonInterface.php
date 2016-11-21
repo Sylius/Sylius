@@ -19,11 +19,6 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 interface ProductTaxonInterface extends ResourceInterface
 {
     /**
-     * @return mixed
-     */
-    public function getId();
-    
-    /**
      * @return ProductInterface
      */
     public function getProduct();

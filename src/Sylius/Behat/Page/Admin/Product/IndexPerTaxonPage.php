@@ -51,7 +51,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         $productsRow->find('css', '.sylius-product-taxon-position')->setValue($position);
     }
 
-    public function saveConfiguration()
+    public function savePositions()
     {
         $this->getElement('save_configuration_button')->press();
 

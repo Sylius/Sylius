@@ -1053,6 +1053,6 @@ final class ManagingProductsContext implements Context
      */
     public function iSaveMyNewConfiguration()
     {
-        $this->indexPerTaxonPage->saveConfiguration();
+        $this->indexPerTaxonPage->savePositions();
     }
 }

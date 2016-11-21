@@ -33,5 +33,5 @@ interface IndexPerTaxonPageInterface extends CrudIndexPageInterface
      */
     public function setPositionOfProduct($productName, $position);
 
-    public function saveConfiguration();
+    public function savePositions();
 }
