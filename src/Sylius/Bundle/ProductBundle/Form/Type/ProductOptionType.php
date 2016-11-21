@@ -34,7 +34,6 @@ class ProductOptionType extends AbstractResourceType
             ->add('values', 'collection', [
                 'type' => 'sylius_product_option_value',
                 'allow_add' => true,
-                'allow_delete' => true,
                 'by_reference' => false,
                 'label' => false,
                 'button_add_label' => 'sylius.form.option_value.add_value',
