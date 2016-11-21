@@ -39,11 +39,32 @@ sylius_grid:
             actions:
                 main:
                     generate:
-                        type: generate_coupon
+                        type: default
+                        label: sylius.ui.generate
+                        icon: random
+                        options:
+                            link:
+                                route: sylius_admin_promotion_coupon_generate
+                                parameters:
+                                    promotionId: $promotionId
                     create:
-                        type: create_coupon
+                        type: create
+                        options:
+                            link:
+                                parameters:
+                                    promotionId: $promotionId
                 item:
                     update:
-                        type: update_coupon
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    promotionId: $promotionId
                     delete:
-                        type: delete_coupon
+                        type: delete
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    promotionId: $promotionId

@@ -1,3 +1,0 @@
-{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
-
-{{ buttons.delete(path(grid.requestConfiguration.getRouteName('delete'), {'id': data.id}|merge(grid.requestConfiguration.vars.route.parameters))) }}
