@@ -7,7 +7,7 @@ Feature: Switching the current currency
     Background:
         Given the store operates on a channel named "Web"
         And that channel allows to shop using "EUR" and "USD" currencies
-        And it uses the "EUR" currency by default
+        And it uses the "EUR" currency as base
 
     @ui
     Scenario: Showing the current currency

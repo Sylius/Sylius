@@ -9,7 +9,7 @@ Feature: Receiving fixed discount dependent on currency on cart
         And the store has currency "GBP" with exchange rate 0.5
         And the store operates on a channel named "Web-US"
         And that channel allows to shop using "USD" and "GBP" currencies
-        And that channel uses the "USD" currency by default
+        And that channel uses the "USD" currency as base
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And there is a promotion "Holiday promotion"
 

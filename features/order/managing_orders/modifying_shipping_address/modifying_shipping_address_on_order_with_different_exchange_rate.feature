@@ -11,7 +11,7 @@ Feature: Modifying a customer's shipping address of an order with a different cu
         And this zone has the "United States" country member
         And that channel allows to shop using the "USD" currency
         And that channel allows to shop using the "GBP" currency with exchange rate 3.0
-        And that channel uses the "USD" currency by default
+        And that channel uses the "USD" currency as base
         And the store allows paying with "Cash on Delivery"
         And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
         And the store has a product "Suit" priced at "$400.00"
