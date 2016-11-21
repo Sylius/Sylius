@@ -5,7 +5,7 @@ Feature: Handling disabled currencies
     I want to browse channels with a valid currency only
 
     Background:
-        Given the store operates on a channel named "Web" in currency "EUR"
+        Given the store operates on a channel named "Web" in "EUR" currency
         And that channel allows to shop using "EUR", "USD" and "GBP" currencies
 
     @ui

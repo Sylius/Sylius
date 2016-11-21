@@ -94,7 +94,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
      */
     public function create($code = null, $name = null, $currencyCode = null)
     {
-        $currency = $this->provideCurrency();
+        $currency = $this->provideCurrency($currencyCode);
         $locale = $this->provideLocale();
 
         /** @var ChannelInterface $channel */
@@ -118,16 +118,20 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     }
 
     /**
+     * @param string|null $currencyCode
+     *
      * @return CurrencyInterface
      */
-    private function provideCurrency()
+    private function provideCurrency($currencyCode = null)
     {
+        $currencyCode = (null === $currencyCode) ? self::DEFAULT_CHANNEL_CURRENCY : $currencyCode;
+
         /** @var CurrencyInterface $currency */
-        $currency = $this->currencyRepository->findOneBy(['code' => self::DEFAULT_CHANNEL_CURRENCY]);
+        $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
 
         if (null === $currency) {
             $currency = $this->currencyFactory->createNew();
-            $currency->setCode(self::DEFAULT_CHANNEL_CURRENCY);
+            $currency->setCode($currencyCode);
             $currency->setExchangeRate(1.00);
 
             $this->currencyRepository->add($currency);

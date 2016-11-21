@@ -7,9 +7,9 @@ Feature: Adding a product to cart with prices dependent on a channel and a curre
     Background:
         Given the store has currency "EUR"
         And the store has currency "GBP" with exchange rate 0.7
-        And the store operates on a channel named "Web-EU" in currency "EUR"
+        And the store operates on a channel named "Web-EU" in "EUR" currency
         And that channel allows to shop using "EUR" and "GBP" currencies
-        And the store operates on another channel named "Web-GB"
+        And the store operates on another channel named "Web-GB" in "GBP" currency
         And that channel allows to shop using "EUR" and "GBP" currencies
         And the store has a product "Leprechaun's Gold" priced at "€12.54" available in channel "Web-EU" and channel "Web-GB"
         And it has different prices for different channels and currencies
