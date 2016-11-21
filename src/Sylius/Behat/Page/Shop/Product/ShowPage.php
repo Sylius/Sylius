@@ -64,7 +64,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function addToCartWithOption(ProductOptionInterface $option, $optionValue)
     {
-        $select = $this->getDocument()->find('css', sprintf('select#sylius_add_cart_item_cartItem_variant_%s', $option->getCode()));
+        $select = $this->getDocument()->find('css', sprintf('select#sylius_add_to_cart_cartItem_variant_%s', $option->getCode()));
 
         $this->getDocument()->selectFieldOption($select->getAttribute('name'), $optionValue);
         $this->getDocument()->pressButton('Add to cart');
@@ -257,7 +257,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'average_rating' => '#average-rating',
             'main_image' => '#main-image',
             'name' => '#sylius-product-name',
-            'option_select' => '#sylius_add_cart_item_cartItem_variant_%option-name%',
+            'option_select' => '#sylius_add_to_cart_cartItem_variant_%option-name%',
             'out_of_stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
             'reviews' => '[data-tab="reviews"] .comments',

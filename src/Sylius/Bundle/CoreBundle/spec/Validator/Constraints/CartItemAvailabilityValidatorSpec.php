@@ -100,7 +100,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
 
         $availabilityChecker->isStockSufficient($productVariant, 10)->willReturn(false);
 
-        $executionContext->addViolation('Insufficient stock', ['name' => 'Mug'])->shouldBeCalled();
+        $executionContext->addViolation('Insufficient stock', ['%itemName%' => 'Mug'])->shouldBeCalled();
 
         $cartItemAvailabilityConstraint = new CartItemAvailability();
         $cartItemAvailabilityConstraint->message = 'Insufficient stock';
@@ -129,7 +129,7 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
 
         $availabilityChecker->isStockSufficient($productVariant, 20)->willReturn(false);
 
-        $executionContext->addViolation('Insufficient stock', ['name' => 'Mug'])->shouldBeCalled();
+        $executionContext->addViolation('Insufficient stock', ['%itemName%' => 'Mug'])->shouldBeCalled();
 
         $cartItemAvailabilityConstraint = new CartItemAvailability();
         $cartItemAvailabilityConstraint->message = 'Insufficient stock';
