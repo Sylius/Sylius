@@ -144,10 +144,10 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given /^(that channel) uses the "([^"]+)" currency by default$/
-     * @Given /^(it) uses the "([^"]+)" currency by default$/
+     * @Given /^(that channel) uses the "([^"]+)" currency as base$/
+     * @Given /^(it) uses the "([^"]+)" currency as base$/
      */
-    public function itUsesTheCurrencyByDefault(ChannelInterface $channel, $currencyCode)
+    public function itUsesTheCurrencyAsBase(ChannelInterface $channel, $currencyCode)
     {
         $currency = $this->provideCurrency($currencyCode);
 

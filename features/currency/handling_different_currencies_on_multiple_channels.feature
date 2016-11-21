@@ -7,10 +7,10 @@ Feature: Handling different currencies on multiple channels
     Background:
         Given the store operates on a channel named "Web"
         And that channel allows to shop using "EUR", "USD" and "GBP" currencies
-        And it uses the "EUR" currency by default
+        And it uses the "EUR" currency as base
         And the store operates on another channel named "Mobile"
         And that channel allows to shop using "USD" and "GBP" currencies
-        And it uses the "USD" currency by default
+        And it uses the "USD" currency as base
 
     @ui
     Scenario: Showing currencies only from the current channel

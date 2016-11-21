@@ -9,10 +9,10 @@ Feature: Adding a product to cart with prices dependent on a channel and a curre
         And the store has currency "GBP" with exchange rate 0.7
         And the store operates on a channel named "Web-EU"
         And that channel allows to shop using "EUR" and "GBP" currencies
-        And that channel uses the "EUR" currency by default
+        And that channel uses the "EUR" currency as base
         And the store operates on another channel named "Web-GB"
         And that channel allows to shop using "EUR" and "GBP" currencies
-        And that channel uses the "GBP" currency by default
+        And that channel uses the "GBP" currency as base
         And the store has a product "Leprechaun's Gold" priced at "€12.54" available in channel "Web-EU" and channel "Web-GB"
         And it has different prices for different channels and currencies
         And it has price "€10.00" for "Web-EU" channel and "EUR" currency

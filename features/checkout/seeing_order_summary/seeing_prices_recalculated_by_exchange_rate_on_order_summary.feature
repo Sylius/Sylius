@@ -11,7 +11,7 @@ Feature: Seeing prices recalculated by exchange rate on order summary
         And the store operates on a channel named "Web"
         And that channel allows to shop using the "USD" currency
         And that channel allows to shop using the "GBP" currency with exchange rate 3.0
-        And that channel uses the "USD" currency by default
+        And that channel uses the "USD" currency as base
         And the store has a product "Lannister Coat" priced at "$100.00"
         And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
         And the store allows paying offline

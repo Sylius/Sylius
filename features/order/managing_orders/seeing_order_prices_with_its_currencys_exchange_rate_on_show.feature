@@ -11,7 +11,7 @@ Feature: Seeing all prices calculated accordingly to it's currency's exchange ra
         And the store operates on a channel named "Web"
         And that channel allows to shop using the "USD" currency
         And that channel allows to shop using the "GBP" currency with exchange rate 2.00
-        And that channel uses the "USD" currency by default
+        And that channel uses the "USD" currency as base
         And the store has "Low VAT" tax rate of 10% for "Lowered EN services" within the "EN" zone
         And the store allows paying with "Cash on Delivery"
         And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone

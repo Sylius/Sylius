@@ -10,7 +10,7 @@ Feature: Seeing the currency in which all orders have been placed
         And this zone has the "British Virgin Islands" country member
         And the store operates on a channel named "Web"
         And that channel allows to shop using "USD" and "GBP" currencies
-        And that channel uses the "USD" currency by default
+        And that channel uses the "USD" currency as base
         And the store allows paying with "Cash on Delivery"
         And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
         And the store has a product "Angel T-Shirt" priced at "$20.00"

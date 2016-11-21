@@ -7,7 +7,7 @@ Feature: Handling disabled currencies
     Background:
         Given the store operates on a channel named "Web"
         And that channel allows to shop using "EUR", "USD" and "GBP" currencies
-        And it uses the "EUR" currency by default
+        And it uses the "EUR" currency as base
 
     @ui
     Scenario: Not showing the disabled currency
