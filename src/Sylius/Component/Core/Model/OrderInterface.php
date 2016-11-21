@@ -196,4 +196,14 @@ interface OrderInterface extends
      * @return string
      */
     public function getTokenValue();
+
+    /**
+     * @return string
+     */
+    public function getCustomerIp();
+
+    /**
+     * @param string $customerIp
+     */
+    public function setCustomerIp($customerIp);
 }

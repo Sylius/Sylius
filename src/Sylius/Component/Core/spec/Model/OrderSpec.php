@@ -578,4 +578,10 @@ final class OrderSpec extends ObjectBehavior
 
         $this->getTokenValue()->shouldReturn('xyzasdxqwe');
     }
+
+    function it_has_customer_ip()
+    {
+        $this->setCustomerIp('172.16.254.1');
+        $this->getCustomerIp()->shouldReturn('172.16.254.1');
+    }
 }

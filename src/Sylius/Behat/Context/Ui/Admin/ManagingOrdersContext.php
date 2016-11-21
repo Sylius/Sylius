@@ -23,7 +23,6 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderPaymentStates;
 use Webmozart\Assert\Assert;
 
 /**
@@ -820,5 +819,21 @@ final class ManagingOrdersContext implements Context
             $this->showPage->hasBillingProvinceName($provinceName),
             sprintf('Cannot find shipping address with province %s', $provinceName)
         );
+    }
+
+    /**
+     * @Then /^(the administrator) should know about IP address of (this order made by "[^"]+")$/
+     */
+    public function theAdministratorShouldKnowAboutIPAddressOfThisOrderMadeBy(AdminUserInterface $user, OrderInterface $order)
+    {
+        $this->sharedSecurityService->performActionAsAdminUser($user, function () use ($order) {
+            $this->showPage->open(['id' => $order->getId()]);
+
+            Assert::notSame(
+                $this->showPage->getIpAddressAssigned(),
+                '',
+                'There should be IP address assigned to order, but there is not.'
+            );
+        });
     }
 }

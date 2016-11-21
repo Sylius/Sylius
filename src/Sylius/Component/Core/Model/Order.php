@@ -105,6 +105,11 @@ class Order extends BaseOrder implements OrderInterface
      */
     protected $tokenValue;
 
+    /**
+     * @var string
+     */
+    protected $customerIp;
+
     public function __construct()
     {
         parent::__construct();
@@ -566,5 +571,21 @@ class Order extends BaseOrder implements OrderInterface
     public function getTokenValue()
     {
         return $this->tokenValue;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomerIp()
+    {
+        return $this->customerIp;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCustomerIp($customerIp)
+    {
+        $this->customerIp = $customerIp;
     }
 }

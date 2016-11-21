@@ -392,6 +392,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getIpAddressAssigned()
+    {
+        return $this->getElement('ip_address')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_order_show';
@@ -405,6 +413,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#billing-address',
             'customer' => '#customer',
+            'ip_address' => '#ipAddress',
             'items_total' => '#items-total',
             'order_notes' => '#sylius-order-notes',
             'order_payment_state' => '#payment-state > span',

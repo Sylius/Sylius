@@ -108,5 +108,7 @@
             <argument type="service" id="sylius.order_item_quantity_modifier.limiting.inner" />
             <argument>9999</argument>
         </service>
+
+        <service id="sylius.customer_ip_assigner" class="Sylius\Bundle\CoreBundle\Assigner\CustomerIpAssigner" />
     </services>
 </container>
