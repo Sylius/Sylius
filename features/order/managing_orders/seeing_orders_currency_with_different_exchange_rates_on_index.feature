@@ -8,8 +8,7 @@ Feature: Seeing orders' total in their currency and respective exchange rate
         Given the store ships to "British Virgin Islands"
         And the store has a zone "English" with code "EN"
         And this zone has the "British Virgin Islands" country member
-        And the store operates on a channel named "Web" in currency "USD"
-        And that channel allows to shop using the "USD" currency
+        And the store operates on a channel named "Web" in "USD" currency
         And that channel allows to shop using the "GBP" currency with exchange rate 3.0
         And the store allows paying with "Cash on Delivery"
         And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone

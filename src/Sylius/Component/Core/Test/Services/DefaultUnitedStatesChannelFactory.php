@@ -201,9 +201,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
      */
     private function provideCurrency($currencyCode = null)
     {
-        if (null === $currencyCode) {
-            $currencyCode = self::DEFAULT_CURRENCY_CODE;
-        }
+        $currencyCode = $currencyCode ?: self::DEFAULT_CURRENCY_CODE;
 
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);

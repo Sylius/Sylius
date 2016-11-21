@@ -567,10 +567,9 @@ final class OrderContext implements Context
 
         $order->setCustomer($customer);
         $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
-        $order->setCurrencyCode((null !== $currencyCode) ? $currencyCode : $this->sharedStorage->get('currency')->getCode());
         $order->setLocaleCode((null !== $localeCode) ? $localeCode : $this->sharedStorage->get('locale')->getCode());
 
-        $currencyCode = $currencyCode ? $currencyCode : $this->sharedStorage->get('currency')->getCode();
+        $currencyCode = $currencyCode ? $currencyCode : $order->getChannel()->getBaseCurrency()->getCode();
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
 
         $order->setCurrencyCode($currency->getCode());
