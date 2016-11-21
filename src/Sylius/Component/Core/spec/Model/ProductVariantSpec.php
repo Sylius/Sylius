@@ -45,29 +45,6 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->shouldHaveType(BaseProductVariant::class);
     }
 
-    function it_does_not_have_price_by_default()
-    {
-        $this->getPrice()->shouldReturn(null);
-    }
-
-    function its_price_should_be_mutable()
-    {
-        $this->setPrice(499);
-        $this->getPrice()->shouldReturn(499);
-    }
-
-    function its_price_should_accept_only_integer()
-    {
-        $this->setPrice(410);
-        $this->getPrice()->shouldBeInteger();
-
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(4.1 * 100);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice('410');
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(round(4.1 * 100));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice([410]);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(new \stdClass());
-    }
-
     function it_implements_a_shippable_interface()
     {
         $this->shouldImplement(ShippableInterface::class);

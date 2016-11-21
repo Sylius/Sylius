@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
@@ -54,9 +53,6 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('price', MoneyType::class, [
-                'label' => 'sylius.form.variant.price',
-            ])
             ->add('tracked', CheckboxType::class, [
                 'label' => 'sylius.form.variant.tracked',
             ])

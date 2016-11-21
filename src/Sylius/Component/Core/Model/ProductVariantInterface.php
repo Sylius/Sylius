@@ -26,7 +26,6 @@ interface ProductVariantInterface extends
     BaseVariantInterface,
     ShippableInterface,
     StockableInterface,
-    PriceableInterface,
     TaxableInterface
 {
     /**
