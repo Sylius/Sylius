@@ -51,4 +51,12 @@ final class ChannelContext implements Context
 
         return $channels[0];
     }
+
+    /**
+     * @Transform all channels
+     */
+    public function getAllChannels()
+    {
+        return $this->channelRepository->findAll();
+    }
 }
