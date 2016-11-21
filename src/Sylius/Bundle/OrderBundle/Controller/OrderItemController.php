@@ -19,15 +19,14 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Order\CartActions;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
-use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
-use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -35,44 +34,30 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class OrderItemController extends ResourceController
 {
     /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        if (null === $orderId = $this->getRequest()->get('orderId')) {
-            throw new NotFoundHttpException('No order id given.');
-        }
-
-        if (!$order = $this->getOrderRepository()->find($orderId)) {
-            throw new NotFoundHttpException('Requested order does not exist.');
-        }
-
-        $orderItem = parent::createNew();
-        $orderItem->setOrder($order);
-
-        return $orderItem;
-    }
-
-    /**
      * @param Request $request
      *
      * @return Response
      */
     public function addAction(Request $request)
     {
+        $cart = $this->getCurrentCart();
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, CartActions::ADD);
-        $newResource = $this->newResourceFactory->create($configuration, $this->factory);
+        /** @var OrderItemInterface $orderItem */
+        $orderItem = $this->newResourceFactory->create($configuration, $this->factory);
 
-        $this->getItemQuantityModifier()->modify($newResource, 1);
-
-        $form = $this->resourceFormFactory->create($configuration, $newResource);
+        $form = $this->getFormFactory()->create(
+            $configuration->getFormType(),
+            $this->createAddToCartCommand($cart, $orderItem),
+            $configuration->getFormOptions()
+        );
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
-            $newResource = $form->getData();
+            /** @var AddToCartCommandInterface $addCartItemCommand */
+            $addToCartCommand = $form->getData();
 
-            $event = $this->eventDispatcher->dispatchPreEvent(CartActions::ADD, $configuration, $newResource);
+            $event = $this->eventDispatcher->dispatchPreEvent(CartActions::ADD, $configuration, $orderItem);
 
             if ($event->isStopped() && !$configuration->isHtmlRequest()) {
                 throw new HttpException($event->getErrorCode(), $event->getMessage());
@@ -80,24 +65,23 @@ class OrderItemController extends ResourceController
             if ($event->isStopped()) {
                 $this->flashHelper->addFlashFromEvent($configuration, $event);
 
-                return $this->redirectHandler->redirectToIndex($configuration, $newResource);
+                return $this->redirectHandler->redirectToIndex($configuration, $orderItem);
             }
 
-            $cart = $this->getCurrentCart();
-            $this->getOrderModifier()->addToOrder($cart, $newResource);
+            $this->getOrderModifier()->addToOrder($addToCartCommand->getCart(), $addToCartCommand->getCartItem());
 
             $cartManager = $this->getCartManager();
             $cartManager->persist($cart);
             $cartManager->flush();
 
-            $this->eventDispatcher->dispatchPostEvent(CartActions::ADD, $configuration, $newResource);
+            $this->eventDispatcher->dispatchPostEvent(CartActions::ADD, $configuration, $orderItem);
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
+                return $this->viewHandler->handle($configuration, View::create($orderItem, Response::HTTP_CREATED));
             }
-            $this->flashHelper->addSuccessFlash($configuration, CartActions::ADD, $newResource);
+            $this->flashHelper->addSuccessFlash($configuration, CartActions::ADD, $orderItem);
 
-            return $this->redirectHandler->redirectToResource($configuration, $newResource);
+            return $this->redirectHandler->redirectToResource($configuration, $orderItem);
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -107,7 +91,7 @@ class OrderItemController extends ResourceController
         $view = View::create()
             ->setData([
                 'configuration' => $configuration,
-                $this->metadata->getName() => $newResource,
+                $this->metadata->getName() => $orderItem,
                 'form' => $form->createView(),
             ])
             ->setTemplate($configuration->getTemplate(CartActions::ADD . '.html'))
@@ -126,9 +110,9 @@ class OrderItemController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, CartActions::REMOVE);
-        $resource = $this->findOr404($configuration);
+        $orderItem = $this->findOr404($configuration);
 
-        $event = $this->eventDispatcher->dispatchPreEvent(CartActions::REMOVE, $configuration, $resource);
+        $event = $this->eventDispatcher->dispatchPreEvent(CartActions::REMOVE, $configuration, $orderItem);
 
         if ($event->isStopped() && !$configuration->isHtmlRequest()) {
             throw new HttpException($event->getErrorCode(), $event->getMessage());
@@ -136,27 +120,27 @@ class OrderItemController extends ResourceController
         if ($event->isStopped()) {
             $this->flashHelper->addFlashFromEvent($configuration, $event);
 
-            return $this->redirectHandler->redirectToIndex($configuration, $resource);
+            return $this->redirectHandler->redirectToIndex($configuration, $orderItem);
         }
 
         $cart = $this->getCurrentCart();
-        $this->getOrderModifier()->removeFromOrder($cart, $resource);
+        $this->getOrderModifier()->removeFromOrder($cart, $orderItem);
 
-        $this->repository->remove($resource);
+        $this->repository->remove($orderItem);
 
         $cartManager = $this->getCartManager();
         $cartManager->persist($cart);
         $cartManager->flush();
 
-        $this->eventDispatcher->dispatchPostEvent(CartActions::REMOVE, $configuration, $resource);
+        $this->eventDispatcher->dispatchPostEvent(CartActions::REMOVE, $configuration, $orderItem);
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $this->flashHelper->addSuccessFlash($configuration, CartActions::REMOVE, $resource);
+        $this->flashHelper->addSuccessFlash($configuration, CartActions::REMOVE, $orderItem);
 
-        return $this->redirectHandler->redirectToIndex($configuration, $resource);
+        return $this->redirectHandler->redirectToIndex($configuration, $orderItem);
     }
 
     /**
@@ -214,11 +198,22 @@ class OrderItemController extends ResourceController
     }
 
     /**
-     * @return OrderItemQuantityModifierInterface
+     * @param OrderInterface $cart
+     * @param OrderItemInterface $cartItem
+     *
+     * @return AddToCartCommandInterface
      */
-    private function getItemQuantityModifier()
+    protected function createAddToCartCommand(OrderInterface $cart, OrderItemInterface $cartItem)
     {
-        return $this->get('sylius.order_item_quantity_modifier');
+        return $this->get('sylius.factory.add_to_cart_command')->createForCartAndCartItem($cart, $cartItem);
+    }
+
+    /**
+     * @return FormFactoryInterface
+     */
+    private function getFormFactory()
+    {
+        return $this->get('form.factory');
     }
 
     /**

@@ -61,11 +61,10 @@ interface ShowPageInterface extends PageInterface
 
     /**
      * @param string $attributeName
-     * @param string $AttributeValue
      *
-     * @return bool
+     * @return string
      */
-    public function hasAttributeWithValue($attributeName, $AttributeValue);
+    public function getAttributeByName($attributeName);
 
     /**
      * @param ProductInterface $product
