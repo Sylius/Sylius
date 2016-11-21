@@ -38,5 +38,18 @@
         <service id="sylius.form.extension.collection" class="Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension">
             <tag name="form.type_extension" alias="collection" />
         </service>
+
+        <service id="sylius.custom_grid_renderer.twig" class="Sylius\Bundle\ResourceBundle\Grid\Renderer\TwigGridRenderer" decorates="sylius.grid.renderer.twig">
+            <argument type="service" id="sylius.custom_grid_renderer.twig.inner" />
+            <argument type="service" id="twig" />
+            <argument type="service" id="sylius.grid_options_parser" />
+            <argument>%sylius.grid.templates.action%</argument>
+        </service>
+
+        <service id="sylius.grid_options_parser" class="Sylius\Bundle\ResourceBundle\Grid\Parser\OptionsParser" public="false">
+            <argument type="service" id="service_container" />
+            <argument type="service" id="sylius.expression_language" />
+            <argument type="service" id="property_accessor" />
+        </service>
     </services>
 </container>
