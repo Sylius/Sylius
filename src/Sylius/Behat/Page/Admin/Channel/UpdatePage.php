@@ -119,6 +119,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isBaseCurrencyDisabled()
+    {
+        return $this->getElement('base_currency')->hasAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');
@@ -138,6 +146,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'base_currency' => '#sylius_channel_baseCurrency',
             'code' => '#sylius_channel_code',
             'currencies' => '#sylius_channel_currencies',
             'default_tax_zone' => '#sylius_channel_defaultTaxZone',
