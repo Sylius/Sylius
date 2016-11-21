@@ -16,12 +16,6 @@
         <field name="onHold" column="on_hold" type="integer" />
         <field name="onHand" column="on_hand" type="integer" />
         <field name="tracked" type="boolean" />
-        <field name="pricingCalculator" column="pricing_calculator" type="string">
-            <gedmo:versioned/>
-        </field>
-        <field name="pricingConfiguration" column="pricing_configuration" type="array">
-            <gedmo:versioned/>
-        </field>
         <field name="width" column="width" type="float" nullable="true">
             <gedmo:versioned/>
         </field>

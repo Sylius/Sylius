@@ -269,7 +269,6 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         /** @var ProductVariantInterface $productVariant */
         foreach ($product->getVariants() as $productVariant) {
             $productVariant->setAvailableOn($this->faker->dateTimeThisYear);
-            $productVariant->setPrice($this->faker->randomNumber(4));
             $productVariant->setCode(sprintf('%s-variant#%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
 
