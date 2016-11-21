@@ -47,6 +47,17 @@ final class FilterSpec extends ObjectBehavior
         $this->getLabel()->shouldReturn('Search by keyword');
     }
 
+    function it_has_no_template_by_default()
+    {
+        $this->getTemplate()->shouldReturn(null);
+    }
+
+    function its_template_is_mutable()
+    {
+        $this->setTemplate('SyliusGridBundle:Filter:template.html.twig');
+        $this->getTemplate()->shouldReturn('SyliusGridBundle:Filter:template.html.twig');
+    }
+
     function it_has_no_options_by_default()
     {
         $this->getOptions()->shouldReturn([]);

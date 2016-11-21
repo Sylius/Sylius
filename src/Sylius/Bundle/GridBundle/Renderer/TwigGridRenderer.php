@@ -124,10 +124,7 @@ final class TwigGridRenderer implements GridRendererInterface
      */
     public function renderFilter(GridView $gridView, Filter $filter)
     {
-        $type = $type = $filter->getType();
-        if (!isset($this->filterTemplates[$type])) {
-            throw new \InvalidArgumentException(sprintf('Missing template for filter type "%s".', $type));
-        }
+        $template = $this->getFilterTemplate($filter);
 
         $form = $this->formFactory->createNamed('criteria', 'form', [], ['csrf_protection' => false, 'required' => false]);
         $form->add($filter->getName(), sprintf('sylius_grid_filter_%s', $filter->getType()), $filter->getOptions());
@@ -135,10 +132,32 @@ final class TwigGridRenderer implements GridRendererInterface
         $criteria = $gridView->getParameters()->get('criteria', []);
         $form->submit($criteria);
 
-        return $this->twig->render($this->filterTemplates[$type], [
+        return $this->twig->render($template, [
             'grid' => $gridView,
             'filter' => $filter,
             'form' => $form->get($filter->getName())->createView(),
         ]);
+    }
+
+    /**
+     * @param Filter $filter
+     *
+     * @return string
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function getFilterTemplate(Filter $filter)
+    {
+        $template = $filter->getTemplate();
+        if (null !== $template) {
+            return $template;
+        }
+
+        $type = $filter->getType();
+        if (!isset($this->filterTemplates[$type])) {
+            throw new \InvalidArgumentException(sprintf('Missing template for filter type "%s".', $type));
+        }
+
+        return $this->filterTemplates[$type];
     }
 }

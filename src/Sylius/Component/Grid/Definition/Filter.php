@@ -32,6 +32,11 @@ class Filter
     private $label;
 
     /**
+     * @var string
+     */
+    private $template;
+
+    /**
      * @var array
      */
     private $options = [];
@@ -89,6 +94,22 @@ class Filter
     public function setLabel($label)
     {
         $this->label = $label;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * @param string $template
+     */
+    public function setTemplate($template)
+    {
+        $this->template = $template;
     }
 
     /**
