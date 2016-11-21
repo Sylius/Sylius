@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\GridBundle\Doctrine\ORM;
 
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
@@ -23,16 +23,16 @@ final class Driver implements DriverInterface
     const NAME = 'doctrine/orm';
 
     /**
-     * @var EntityManagerInterface
+     * @var ManagerRegistry
      */
-    private $entityManager;
+    private $managerRegistry;
 
     /**
-     * @param EntityManagerInterface $entityManager
+     * @param ManagerRegistry $managerRegistry
      */
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $managerRegistry)
     {
-        $this->entityManager = $entityManager;
+        $this->managerRegistry = $managerRegistry;
     }
 
     /**
@@ -44,7 +44,9 @@ final class Driver implements DriverInterface
             throw new \InvalidArgumentException('"class" must be configured.');
         }
 
-        $repository = $this->entityManager->getRepository($configuration['class']);
+        $repository = $this->managerRegistry
+            ->getManagerForClass($configuration['class'])
+            ->getRepository($configuration['class']);
 
         if (isset($configuration['repository']['method'])) {
             $method = $configuration['repository']['method'];

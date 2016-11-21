@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\GridBundle\Doctrine\ORM;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
@@ -25,9 +26,9 @@ use Sylius\Component\Grid\Parameters;
  */
 final class DriverSpec extends ObjectBehavior
 {
-    function let(EntityManagerInterface $entityManager)
+    function let(ManagerRegistry $managerRegistry)
     {
-        $this->beConstructedWith($entityManager);
+        $this->beConstructedWith($managerRegistry);
     }
 
     function it_is_initializable()
@@ -44,15 +45,16 @@ final class DriverSpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getDataSource', [[], new Parameters()])
-        ;
+            ->during('getDataSource', [[], new Parameters()]);
     }
 
     function it_creates_data_source_via_doctrine_orm_query_builder(
+        ManagerRegistry $managerRegistry,
         EntityManagerInterface $entityManager,
         EntityRepository $entityRepository,
         QueryBuilder $queryBuilder
     ) {
+        $managerRegistry->getManagerForClass('App:Book')->willReturn($entityManager);
         $entityManager->getRepository('App:Book')->willReturn($entityRepository);
         $entityRepository->createQueryBuilder('o')->willReturn($queryBuilder);
 
