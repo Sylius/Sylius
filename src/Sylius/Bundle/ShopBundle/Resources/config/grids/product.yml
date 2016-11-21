@@ -26,6 +26,6 @@ sylius_grid:
             filters:
                 search:
                     type: string
-                    label: sylius.ui.search
+                    template: "@SyliusShop/Grid/Filter/string.html.twig"
                     options:
                         fields: [translation.name]
