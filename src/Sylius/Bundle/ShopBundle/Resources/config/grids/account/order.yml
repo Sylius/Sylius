@@ -47,6 +47,10 @@ sylius_grid:
             actions:
                 item:
                     show:
-                        type: show_order
+                        type: show
+                        options:
+                            link:
+                                parameters:
+                                    number: resource.number
                     pay:
                         type: pay_for_order

@@ -8,7 +8,6 @@ imports:
 sylius_grid:
     templates:
         action:
-            show_order: "SyliusShopBundle:Grid/Action:show_order.html.twig"
             pay_for_order: "SyliusShopBundle:Grid/Action:pay_for_order.html.twig"
 
 sylius_shop:
