@@ -9,14 +9,12 @@ Feature: Inability of modifying the base currency
 
     @ui
     Scenario: Being prevented from disabling base currency
-        Given the store operates on a single channel
-        And it uses the "USD" currency as base
+        Given the store operates on a single channel in currency "USD"
         When I want to edit this currency
         Then I should not be able to disable this currency
 
     @ui
     Scenario: Being prevented from changing base currency exchange rate
-        Given the store operates on a single channel
-        And it uses the "USD" currency as base
+        Given the store operates on a single channel in currency "USD"
         When I want to edit this currency
         Then I should not be able to change exchange rate of this currency

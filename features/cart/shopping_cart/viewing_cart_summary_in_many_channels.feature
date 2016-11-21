@@ -7,7 +7,7 @@ Feature: Viewing a cart summary in many channels
     Background:
         Given the store operates on another channel named "France"
         And there is product "Banana" available in this channel
-        And the store operates on a channel named "Poland"
+        And the store operates on a channel named "Poland" in currency "PLN"
         And there is product "Onion" available in this channel
 
     @ui

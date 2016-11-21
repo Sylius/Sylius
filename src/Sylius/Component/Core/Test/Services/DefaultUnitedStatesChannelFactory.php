@@ -31,6 +31,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     const DEFAULT_ZONE_CODE = 'US';
     const DEFAULT_ZONE_NAME = 'United States';
     const DEFAULT_CHANNEL_NAME = 'United States';
+    const DEFAULT_CURRENCY_CODE = 'USD';
 
     /**
      * @var RepositoryInterface
@@ -95,11 +96,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     /**
      * @var string
      */
-    private $defaultCurrencyCode;
-
-    /**
-     * @var string
-     */
     private $defaultLocaleCode;
 
     /**
@@ -115,7 +111,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
      * @param FactoryInterface $localeFactory
      * @param FactoryInterface $zoneFactory
      * @param FactoryInterface $zoneMemberFactory
-     * @param string $defaultCurrencyCode
      * @param string $defaultLocaleCode
      */
     public function __construct(
@@ -131,7 +126,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         FactoryInterface $localeFactory,
         FactoryInterface $zoneFactory,
         FactoryInterface $zoneMemberFactory,
-        $defaultCurrencyCode,
         $defaultLocaleCode
     ) {
         $this->channelRepository = $channelRepository;
@@ -146,16 +140,15 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         $this->localeFactory = $localeFactory;
         $this->zoneMemberFactory = $zoneMemberFactory;
         $this->zoneFactory = $zoneFactory;
-        $this->defaultCurrencyCode = $defaultCurrencyCode;
         $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function create($code = null, $name = null)
+    public function create($code = null, $name = null, $currencyCode = null)
     {
-        $currency = $this->provideCurrency();
+        $currency = $this->provideCurrency($currencyCode);
         $locale = $this->provideLocale();
 
         $channel = $this->createChannel($code ?: self::DEFAULT_CHANNEL_CODE, $name ?: self::DEFAULT_CHANNEL_NAME);
@@ -206,14 +199,18 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     /**
      * @return CurrencyInterface
      */
-    private function provideCurrency()
+    private function provideCurrency($currencyCode = null)
     {
+        if (null === $currencyCode) {
+            $currencyCode = self::DEFAULT_CURRENCY_CODE;
+        }
+
         /** @var CurrencyInterface $currency */
-        $currency = $this->currencyRepository->findOneBy(['code' => $this->defaultCurrencyCode]);
+        $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
 
         if (null === $currency) {
             $currency = $this->currencyFactory->createNew();
-            $currency->setCode($this->defaultCurrencyCode);
+            $currency->setCode($currencyCode);
             $currency->setExchangeRate(1.00);
 
             $this->currencyRepository->add($currency);

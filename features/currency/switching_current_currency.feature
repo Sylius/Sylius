@@ -5,9 +5,8 @@ Feature: Switching the current currency
     I want to be able to switch currencies
 
     Background:
-        Given the store operates on a channel named "Web"
+        Given the store operates on a channel named "Web" in currency "EUR"
         And that channel allows to shop using "EUR" and "USD" currencies
-        And it uses the "EUR" currency as base
 
     @ui
     Scenario: Showing the current currency

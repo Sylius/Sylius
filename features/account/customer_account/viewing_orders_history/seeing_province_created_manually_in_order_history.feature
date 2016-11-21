@@ -5,7 +5,7 @@ Feature: Seeing province created manually in order history
     I want to be able to see province in the order history
 
     Background:
-        Given the store operates on a channel named "Web"
+        Given the store operates on a channel named "Web" in currency "USD"
         And the store operates in "United Kingdom"
         And the store has a zone "English" with code "EN"
         And this zone has the "United Kingdom" country member
