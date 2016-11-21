@@ -10,12 +10,12 @@ Feature: Adding a new product with associations
         And the store has "LG headphones", "LG earphones", "LG G4" and "LG G5" products
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @todo
     Scenario: Adding a new product with associations
         When I want to create a new simple product
         And I specify its code as "lg_g3"
         And I name it "LG G3" in "English (United States)"
-        And I set its price to "$400.00"
+        And I set its price to "$400.00" for channel "United States"
         And I associate as "Accessories" the "LG headphones" and "LG earphones" products
         And I associate as "Alternatives" the "LG G4" and "LG G5" products
         And I add it
@@ -24,12 +24,12 @@ Feature: Adding a new product with associations
         And this product should also have an association "Alternatives" with products "LG G4" and "LG G5"
         And the product "LG G3" should appear in the store
 
-    @ui @javascript
+    @ui @javascript @todo
     Scenario: Adding a new product with associations after changing associated items
         When I want to create a new simple product
         And I specify its code as "lg_g3"
         And I name it "LG G3" in "English (United States)"
-        And I set its price to "$400.00"
+        And I set its price to "$400.00" for channel "United States"
         And I associate as "Accessories" the "LG headphones" and "LG earphones" products
         And I remove an associated product "LG earphones" from "Accessories"
         And I add it

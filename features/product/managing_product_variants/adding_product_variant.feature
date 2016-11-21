@@ -11,20 +11,20 @@ Feature: Adding a new product variant
         And the store has "Fragile" shipping category
         And I am logged in as an administrator
 
-    @ui
+    @ui @todo
     Scenario: Adding a new product variant
         Given I want to create a new variant of this product
         When I specify its code as "VODKA_WYBOROWA_PREMIUM"
-        And I set its price to "$100.00"
+        And I set its price to "$100.00" for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
 
-    @ui
+    @ui @todo
     Scenario: Adding a new product variant with specific option's value
         Given I want to create a new variant of this product
         When I specify its code as "VODKA_WYBOROWA_MELON"
-        And I set its price to "$80.00"
+        And I set its price to "$80.00" for "United States" channel
         And I set its "Taste" option to "Melon"
         And I add it
         Then I should be notified that it has been successfully created
