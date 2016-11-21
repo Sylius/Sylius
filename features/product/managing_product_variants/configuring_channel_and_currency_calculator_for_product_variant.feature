@@ -20,4 +20,4 @@ Feature: Configuring channel and currency calculator
         And I set its price to "$10.00" for "USD" currency and "Web" channel
         And I add it
         Then I should be notified that it has been successfully created
-        And variant with code "VODKA_WYBOROWA_PREMIUM" for "USD" currency and "Web" channel should have "$10.00"
+        And variant with code "VODKA_WYBOROWA_PREMIUM" for "USD" currency and "Web" channel should be priced at "$10.00"

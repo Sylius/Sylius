@@ -888,9 +888,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^the product for ("[^"]+" currency) and ("[^"]+" channel) should have "(?:€|£|\$)([^"]+)"$/
+     * @Then /^the product for ("[^"]+" currency) and ("[^"]+" channel) should be priced at "(?:€|£|\$)([^"]+)"$/
      */
-    public function theProductForCurrencyAndChannelShouldHave(CurrencyInterface $currency, ChannelInterface $channel, $price)
+    public function theProductForCurrencyAndChannelShouldBePricedAt(CurrencyInterface $currency, ChannelInterface $channel, $price)
     {
         Assert::same(
             $this->updateSimpleProductPage->getPricingConfigurationForChannelAndCurrencyCalculator($channel, $currency),
