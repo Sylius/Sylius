@@ -52,43 +52,6 @@ Don't worry, everything was automatically installed via Composer.
 
     Please register the bundle before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
 
-Container configuration
------------------------
-
-Put this configuration inside your ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    sylius_addressing:
-        driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
-
-You should also configure *SyliusTranslationBundle*, as *SyliusAddressingBundle* is dependant on it:
-
-.. code-block:: yaml
-
-    sylius_translation:
-        driver: doctrine/orm
-        default_locale: en
-
-As well as doctrine extensions which are used in assortment bundle:
-
-.. code-block:: yaml
-
-    stof_doctrine_extensions:
-        orm:
-            default:
-                timestampable: true
-
-Routing configuration
----------------------
-
-Import the routing configuration by adding the following to your ``app/config/routing.yml``.
-
-.. code-block:: yaml
-
-    sylius_addressing:
-        resource: "@SyliusAddressingBundle/Resources/config/routing.yml"
-
 Updating database schema
 ------------------------
 
@@ -101,12 +64,3 @@ Run the following command.
 .. warning::
 
     This should be done only in **dev** environment! We recommend using Doctrine migrations, to safely update your schema.
-
-Templates
----------
-
-This bundle provides some default `bootstrap <http://getbootstrap.com/>`_ templates.
-
-.. note::
-
-    You can check `Sylius application <http://github.com/Sylius/Sylius>`_ to see how to integrate it in your application.
