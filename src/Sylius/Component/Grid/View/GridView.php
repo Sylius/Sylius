@@ -18,7 +18,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GridView
+class GridView implements GridViewInterface
 {
     /**
      * @var mixed
@@ -48,7 +48,7 @@ class GridView
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getData()
     {
@@ -56,7 +56,7 @@ class GridView
     }
 
     /**
-     * @return Grid
+     * {@inheritdoc}
      */
     public function getDefinition()
     {
@@ -64,7 +64,7 @@ class GridView
     }
 
     /**
-     * @return Parameters
+     * {@inheritdoc}
      */
     public function getParameters()
     {
@@ -72,9 +72,7 @@ class GridView
     }
 
     /**
-     * @param string $fieldName
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getSortingOrder($fieldName)
     {
@@ -92,9 +90,7 @@ class GridView
     }
 
     /**
-     * @param string $fieldName
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function isSortedBy($fieldName)
     {

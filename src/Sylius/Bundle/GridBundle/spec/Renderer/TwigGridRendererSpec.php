@@ -20,6 +20,7 @@ use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
 use Sylius\Component\Grid\Filter\StringFilter;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridView;
+use Sylius\Component\Grid\View\GridViewInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,8 +30,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class TwigGridRendererSpec extends ObjectBehavior
 {
-    function let(\Twig_Environment $twig, ServiceRegistryInterface $fieldsRegistry, FormFactoryInterface $formFactory)
-    {
+    function let(
+        \Twig_Environment $twig,
+        ServiceRegistryInterface $fieldsRegistry,
+        FormFactoryInterface $formFactory
+    ) {
         $actionTemplates = [
             'link' => 'SyliusGridBundle:Action:_link.html.twig',
             'form' => 'SyliusGridBundle:Action:_form.html.twig',
@@ -39,7 +43,14 @@ final class TwigGridRendererSpec extends ObjectBehavior
             StringFilter::NAME => 'SyliusGridBundle:Filter:_string.html.twig',
         ];
 
-        $this->beConstructedWith($twig, $fieldsRegistry, $formFactory, 'SyliusGridBundle:default.html.twig', $actionTemplates, $filterTemplates);
+        $this->beConstructedWith(
+            $twig,
+            $fieldsRegistry,
+            $formFactory,
+            'SyliusGridBundle:default.html.twig',
+            $actionTemplates,
+            $filterTemplates
+        );
     }
 
     function it_is_initializable()
@@ -52,7 +63,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $this->shouldImplement(GridRendererInterface::class);
     }
 
-    function it_uses_Twig_to_render_the_grid_view(\Twig_Environment $twig, GridView $gridView)
+    function it_uses_twig_to_render_the_grid_view(\Twig_Environment $twig, GridViewInterface $gridView)
     {
         $twig->render('SyliusGridBundle:default.html.twig', ['grid' => $gridView])->willReturn('<html>Grid!</html>');
         $this->render($gridView)->shouldReturn('<html>Grid!</html>');
@@ -64,16 +75,25 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $this->render($gridView, 'SyliusGridBundle:custom.html.twig')->shouldReturn('<html>Grid!</html>');
     }
 
-    function it_uses_Twig_to_render_the_action(\Twig_Environment $twig, GridView $gridView, Action $action)
+    function it_uses_twig_to_render_the_action(\Twig_Environment $twig, GridViewInterface $gridView, Action $action)
     {
         $action->getType()->willReturn('link');
-        $twig->render('SyliusGridBundle:Action:_link.html.twig', ['grid' => $gridView, 'action' => $action, 'data' => null])->willReturn('<a href="#">Action!</a>');
+        $action->getOptions()->willReturn([]);
+
+        $twig
+            ->render('SyliusGridBundle:Action:_link.html.twig', [
+                'grid' => $gridView,
+                'action' => $action,
+                'data' => null
+            ])
+            ->willReturn('<a href="#">Action!</a>')
+        ;
 
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Action!</a>');
     }
 
-    function it_renders_field_with_data_via_appropriate_field_type(
-        GridView $gridView,
+    function it_renders_a_field_with_data_via_appropriate_field_type(
+        GridViewInterface $gridView,
         Field $field,
         ServiceRegistryInterface $fieldsRegistry,
         FieldTypeInterface $fieldType
@@ -95,8 +115,10 @@ final class TwigGridRendererSpec extends ObjectBehavior
         $this->renderField($gridView, $field, 'Value')->shouldReturn('<strong>Value</strong>');
     }
 
-    function it_throws_an_exception_if_template_is_not_configured_for_given_action_type(GridView $gridView, Action $action)
-    {
+    function it_throws_an_exception_if_template_is_not_configured_for_given_action_type(
+        GridViewInterface $gridView,
+        Action $action
+    ) {
         $action->getType()->willReturn('foo');
 
         $this
