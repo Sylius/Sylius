@@ -71,7 +71,7 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Given I changed my current channel to :channel
+     * @Given /^I changed (?:|back )my current (channel to "([^"]+)")$/
      * @When /^I change (?:|back )my current (channel to "([^"]+)")$/
      */
     public function iChangeMyCurrentChannelTo(ChannelInterface $channel)

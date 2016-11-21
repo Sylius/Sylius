@@ -104,6 +104,20 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given /^the store ships everywhere for free for (all channels)$/
+     */
+    public function theStoreShipsEverywhereForFreeForAllChannels(array $channels)
+    {
+        foreach ($this->zoneRepository->findAll() as $zone) {
+            $shipment = $this->createShippingMethod('Free', null, null, $zone, 'en', ['amount' => 0], DefaultCalculators::FLAT_RATE, true, false);
+
+            foreach ($channels as $channel) {
+                $shipment->addChannel($channel);
+            }
+        }
+    }
+
+    /**
      * @Given the store (also) allows shipping with :name
      * @Given the store (also) allows shipping with :name identified by :code
      * @Given the store (also) allows shipping with :name at position :position
@@ -260,6 +274,8 @@ final class ShippingContext implements Context
      * @param string $calculator
      * @param bool $enabled
      * @param bool $addForCurrentChannel
+     *
+     * @return ShippingMethodInterface
      */
     private function createShippingMethod(
         $name,
@@ -297,6 +313,8 @@ final class ShippingContext implements Context
 
         $this->shippingMethodRepository->add($shippingMethod);
         $this->sharedStorage->set('shipping_method', $shippingMethod);
+
+        return $shippingMethod;
     }
 
     /**
