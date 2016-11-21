@@ -89,7 +89,7 @@ final class OptionsParserSpec extends ObjectBehavior
         Request $request,
         ResourceInterface $data
     ) {
-        $propertyAccessor->getValue($data, 'getId')->willReturn(21);
+        $propertyAccessor->getValue($data, 'id')->willReturn(21);
 
         $this
             ->parseOptions(['id' => 'resource.id'], $request, $data)

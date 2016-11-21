@@ -83,7 +83,7 @@ final class OptionsParser implements OptionsParserInterface
         }
 
         if (0 === strpos($parameter, 'resource.')) {
-            return $this->parseOptionResourceField(substr($parameter, 9), $request, $data);
+            return $this->parseOptionResourceField(substr($parameter, 9), $data);
         }
 
         return $parameter;
@@ -97,8 +97,8 @@ final class OptionsParser implements OptionsParserInterface
      */
     private function parseOptionExpression($expression, Request $request)
     {
-        $expression = preg_replace_callback('/(\$\w+)/', function ($matches) use ($request) {
-            $variable = $request->get(substr($matches[1], 1));
+        $expression = preg_replace_callback('/\$(\w+)/', function ($matches) use ($request) {
+            $variable = $request->get($matches[1]);
 
             return is_string($variable) ? sprintf('"%s"', $variable) : $variable;
         }, $expression);
@@ -108,21 +108,12 @@ final class OptionsParser implements OptionsParserInterface
 
     /**
      * @param string $value
-     * @param Request $request
      * @param mixed $data
      *
      * @return string
      */
-    private function parseOptionResourceField($value, Request $request, $data)
+    private function parseOptionResourceField($value, $data)
     {
-        $value = preg_replace_callback('/(\$\w+)/', function ($matches) use ($request) {
-            $variable = $request->get(substr($matches[1], 1));
-
-            return is_string($variable) ? sprintf('"%s"', $variable) : $variable;
-        }, $value);
-
-        $value = 'get'.ucfirst($value);
-
         return $this->propertyAccessor->getValue($data, $value);
     }
 }
