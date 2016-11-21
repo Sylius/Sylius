@@ -105,10 +105,11 @@ final class ChannelContext implements Context
 
     /**
      * @Given the store operates on a single channel
+     * @Given the store operates on a single channel in currency :currencyCode
      */
-    public function storeOperatesOnASingleChannel()
+    public function storeOperatesOnASingleChannel($currencyCode = null)
     {
-        $defaultData = $this->defaultChannelFactory->create();
+        $defaultData = $this->defaultChannelFactory->create(null, null, $currencyCode);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
@@ -116,11 +117,12 @@ final class ChannelContext implements Context
 
     /**
      * @Given /^the store operates on (?:a|another) channel named "([^"]+)"$/
+     * @Given /^the store operates on (?:a|another) channel named "([^"]+)" in currency "([^"]+)"$/
      * @Given the store operates on a channel identified by :code code
      */
-    public function theStoreOperatesOnAChannelNamed($channelIdentifier)
+    public function theStoreOperatesOnAChannelNamed($channelIdentifier, $currencyCode = null)
     {
-        $defaultData = $this->defaultChannelFactory->create($channelIdentifier, $channelIdentifier);
+        $defaultData = $this->defaultChannelFactory->create($channelIdentifier, $channelIdentifier, $currencyCode);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);

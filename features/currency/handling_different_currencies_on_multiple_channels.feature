@@ -5,12 +5,10 @@ Feature: Handling different currencies on multiple channels
     I want to browse channels with a valid currency only
 
     Background:
-        Given the store operates on a channel named "Web"
+        Given the store operates on a channel named "Web" in currency "EUR"
         And that channel allows to shop using "EUR", "USD" and "GBP" currencies
-        And it uses the "EUR" currency as base
-        And the store operates on another channel named "Mobile"
+        And the store operates on another channel named "Mobile" in currency "USD"
         And that channel allows to shop using "USD" and "GBP" currencies
-        And it uses the "USD" currency as base
 
     @ui
     Scenario: Showing currencies only from the current channel

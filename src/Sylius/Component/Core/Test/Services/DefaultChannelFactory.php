@@ -92,7 +92,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create($code = null, $name = null)
+    public function create($code = null, $name = null, $currencyCode = null)
     {
         $currency = $this->provideCurrency();
         $locale = $this->provideLocale();
