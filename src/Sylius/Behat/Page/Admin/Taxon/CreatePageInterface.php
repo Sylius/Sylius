@@ -72,8 +72,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     /**
      * @param string $slug
+     * @param string $languageCode
      */
-    public function specifySlug($slug);
+    public function specifySlug($slug, $languageCode);
 
     /**
      * @param string $path
@@ -113,4 +114,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param int $expectedPosition
      */
     public function waitForTaxonRelocation(TaxonInterface $taxon, $expectedPosition);
+
+    /**
+     * @param string $locale
+     */
+    public function activateLanguageTab($locale);
 }

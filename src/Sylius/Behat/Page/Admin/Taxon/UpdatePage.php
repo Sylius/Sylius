@@ -47,6 +47,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function nameIt($name, $languageCode)
     {
+        $this->activateLanguageTab($languageCode);
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_name', $languageCode), $name);
 
         $this->waitForSlugGenerationIfNecessary();
@@ -55,9 +56,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifySlug($slug)
+    public function specifySlug($slug, $languageCode)
     {
-        $this->getDocument()->fillField('Slug', $slug);
+        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_slug', $languageCode), $slug);
     }
 
     /**
@@ -99,9 +100,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isSlugReadOnly()
+    public function isSlugReadOnly($languageCode = 'en_US')
     {
-        return 'readonly' === $this->getElement('slug')->getAttribute('readonly');
+        return 'readonly' === $this->getElement('slug', ['%language%' => $languageCode])->getAttribute('readonly');
     }
 
     /**
@@ -119,9 +120,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $imageElement->clickLink('Delete');
     }
 
-    public function enableSlugModification()
+    /**
+     * {@inheritdoc}
+     */
+    public function enableSlugModification($languageCode = 'en_US')
     {
-        $this->getElement('toggle_taxon_slug_modification_button')->press();
+        $this->getElement('toggle_taxon_slug_modification_button', ['%locale%' => $languageCode])->press();
     }
 
     /**
@@ -151,6 +155,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function getParent()
     {
         return $this->getElement('parent')->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSlug($languageCode = 'en_US')
+    {
+        return $this->getElement('slug', ['%language%' => $languageCode])->getValue();
     }
 
     /**
@@ -192,6 +204,37 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function activateLanguageTab($locale)
+    {
+        if (!$this->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
+        $languageTabTitle = $this->getElement('language_tab', ['%locale%' => $locale]);
+        if (!$languageTabTitle->hasClass('active')) {
+            $languageTabTitle->click();
+        }
+
+        $this->getDocument()->waitFor(10, function () use ($languageTabTitle) {
+            return $languageTabTitle->hasClass('active');
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getElement($name, array $parameters = [])
+    {
+        if (!isset($parameters['%language%'])) {
+            $parameters['%language%'] = 'en_US';
+        }
+
+        return parent::getElement($name, $parameters);
+    }
+
+    /**
      * @return NodeElement
      */
     protected function getCodeElement()
@@ -208,10 +251,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_taxon_code',
             'description' => '#sylius_taxon_translations_en_US_description',
             'images' => '#sylius_taxon_images',
+            'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_taxon_translations_en_US_name',
             'parent' => '#sylius_taxon_parent',
-            'slug' => '#sylius_taxon_translations_en_US_slug',
-            'toggle_taxon_slug_modification_button' => '#toggle-taxon-slug-modification',
+            'slug' => '#sylius_taxon_translations_%language%_slug',
+            'toggle_taxon_slug_modification_button' => '[data-locale="%locale%"] .toggle-taxon-slug-modification',
         ]);
     }
 
@@ -264,13 +308,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $inputCode->getParent()->getParent()->getParent();
     }
 
-    private function waitForSlugGenerationIfNecessary()
+    /**
+     * @param string $languageCode
+     */
+    private function waitForSlugGenerationIfNecessary($languageCode = 'en_US')
     {
         if (!$this->getDriver() instanceof Selenium2Driver) {
             return;
         }
 
-        $slugElement = $this->getElement('slug');
+        $slugElement = $this->getElement('slug', ['%language%' => $languageCode]);
         if ($slugElement->hasAttribute('readonly')) {
             return;
         }

@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Generator\TaxonSlugGeneratorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -37,6 +38,11 @@ final class TaxonomyContext implements Context
      * @var FactoryInterface
      */
     private $taxonFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $taxonTranslationFactory;
 
     /**
      * @var FactoryInterface
@@ -66,6 +72,7 @@ final class TaxonomyContext implements Context
     /**
      * @param RepositoryInterface $taxonRepository
      * @param FactoryInterface $taxonFactory
+     * @param FactoryInterface $taxonTranslationFactory
      * @param FactoryInterface $taxonImageFactory
      * @param ObjectManager $objectManager
      * @param ImageUploaderInterface $imageUploader
@@ -75,6 +82,7 @@ final class TaxonomyContext implements Context
     public function __construct(
         RepositoryInterface $taxonRepository,
         FactoryInterface $taxonFactory,
+        FactoryInterface $taxonTranslationFactory,
         FactoryInterface $taxonImageFactory,
         ObjectManager $objectManager,
         ImageUploaderInterface $imageUploader,
@@ -83,6 +91,7 @@ final class TaxonomyContext implements Context
     ) {
         $this->taxonRepository = $taxonRepository;
         $this->taxonFactory = $taxonFactory;
+        $this->taxonTranslationFactory = $taxonTranslationFactory;
         $this->taxonImageFactory = $taxonImageFactory;
         $this->objectManager = $objectManager;
         $this->imageUploader = $imageUploader;
@@ -102,6 +111,19 @@ final class TaxonomyContext implements Context
         foreach ($taxonsNames as $taxonName) {
             $this->taxonRepository->add($this->createTaxon($taxonName));
         }
+    }
+
+    /**
+     * @Given /^the store has taxonomy named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
+     */
+    public function theStoreHasTaxonomyNamedInAndIn($firstName, $firstLocale, $secondName, $secondLocale)
+    {
+        $translationMap = [
+            $firstLocale => $firstName,
+            $secondLocale => $secondName,
+        ];
+
+        $this->taxonRepository->add($this->createTaxonInManyLanguages($translationMap));
     }
 
     /**
@@ -143,6 +165,29 @@ final class TaxonomyContext implements Context
         $taxon->setName($name);
         $taxon->setCode(StringInflector::nameToCode($name));
         $taxon->setSlug($this->taxonSlugGenerator->generate($name));
+
+        return $taxon;
+    }
+
+    /**
+     * @param array $names
+     *
+     * @return TaxonInterface
+     */
+    private function createTaxonInManyLanguages(array $names)
+    {
+        /** @var TaxonInterface $taxon */
+        $taxon = $this->taxonFactory->createNew();
+        $taxon->setCode(StringInflector::nameToCode($names['en_US']));
+        foreach ($names as $locale => $name) {
+            /** @var TranslationInterface $taxonTranslation */
+            $taxonTranslation = $this->taxonTranslationFactory->createNew();
+            $taxonTranslation->setLocale($locale);
+            $taxonTranslation->setName($name);
+            $taxonTranslation->setSlug($this->taxonSlugGenerator->generate($name));
+
+            $taxon->addTranslation($taxonTranslation);
+        }
 
         return $taxon;
     }

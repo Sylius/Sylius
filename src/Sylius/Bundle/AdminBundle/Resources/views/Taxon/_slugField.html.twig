@@ -5,7 +5,7 @@
     {% else %}
     <div class="ui action input">
         {{ form_widget(slugField, {'attr': {'readonly': 'readonly', 'data-url': path('sylius_admin_api_generate_taxon_slug')}}) }}
-        <span id="toggle-taxon-slug-modification" class="ui icon button">
+        <span class="ui icon button toggle-taxon-slug-modification">
             <i class="lock icon"></i>
         </span>
     </div>

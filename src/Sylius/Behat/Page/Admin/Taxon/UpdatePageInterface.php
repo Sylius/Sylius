@@ -44,8 +44,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     /**
      * @param string $slug
+     * @param string $languageCode
      */
-    public function specifySlug($slug);
+    public function specifySlug($slug, $languageCode);
 
     /**
      * @return bool
@@ -66,9 +67,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isImageWithCodeDisplayed($code);
 
     /**
+     * @param string $languageCode
+     *
      * @return bool
      */
-    public function isSlugReadOnly();
+    public function isSlugReadOnly($languageCode = 'en_US');
 
     /**
      * @param string $code
@@ -77,7 +80,10 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function removeFirstImage();
 
-    public function enableSlugModification();
+    /**
+     * @param string $languageCode
+     */
+    public function enableSlugModification($languageCode = 'en_US');
 
     /**
      * @return int
@@ -96,6 +102,13 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function getParent();
 
     /**
+     * @param string $languageCode
+     *
+     * @return string
+     */
+    public function getSlug($languageCode = 'en_US');
+
+    /**
      * @return string
      *
      * @throws ElementNotFoundException
@@ -110,4 +123,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @throws ElementNotFoundException
      */
     public function getValidationMessageForImageAtPlace($place);
+
+    /**
+     * @param string $locale
+     */
+    public function activateLanguageTab($locale);
 }

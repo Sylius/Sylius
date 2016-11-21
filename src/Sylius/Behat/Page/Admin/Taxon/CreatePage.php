@@ -97,17 +97,18 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function nameIt($name, $languageCode)
     {
-        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_name', $languageCode), $name);
+        $this->activateLanguageTab($languageCode);
+        $this->getElement('name', ['%language%' => $languageCode])->setValue($name);
 
-        $this->waitForSlugGenerationIfNecessary();
+        $this->waitForSlugGenerationIfNecessary($languageCode);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function specifySlug($slug)
+    public function specifySlug($slug, $languageCode)
     {
-        $this->getDocument()->fillField('Slug', $slug);
+        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_slug', $languageCode), $slug);
     }
 
     /**
@@ -184,15 +185,43 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function activateLanguageTab($locale)
+    {
+        if (!$this->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
+        $languageTabTitle = $this->getElement('language_tab', ['%locale%' => $locale]);
+        if (!$languageTabTitle->hasClass('active')) {
+            $languageTabTitle->click();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getElement($name, array $parameters = [])
+    {
+        if (!isset($parameters['%language%'])) {
+            $parameters['%language%'] = 'en_US';
+        }
+
+        return parent::getElement($name, $parameters);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_taxon_code',
             'description' => '#sylius_taxon_translations_en_US_description',
             'images' => '#sylius_taxon_images',
-            'name' => '#sylius_taxon_translations_en_US_name',
+            'language_tab' => '[data-locale="%locale%"] .title',
+            'name' => '#sylius_taxon_translations_%language%_name',
             'parent' => '#sylius_taxon_parent',
-            'slug' => '#sylius_taxon_translations_en_US_slug',
+            'slug' => '#sylius_taxon_translations_%language%_slug',
             'tree' => '.ui.list',
         ]);
     }
@@ -236,11 +265,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         return end($items);
     }
 
-    private function waitForSlugGenerationIfNecessary()
+    /**
+     * @param string $languageCode
+     */
+    private function waitForSlugGenerationIfNecessary($languageCode)
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
-            $this->getDocument()->waitFor(10, function () {
-                return '' !== $this->getElement('slug')->getValue();
+            $this->getDocument()->waitFor(10, function () use ($languageCode) {
+                return '' !== $this->getElement('slug', ['%language%' => $languageCode])->getValue();
             });
         }
     }

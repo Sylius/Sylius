@@ -126,8 +126,9 @@ final class ManagingTaxonsContext implements Context
     /**
      * @When I set its slug to :slug
      * @When I do not specify its slug
+     * @When I set its slug to :slug in :language
      */
-    public function iSetItsSlugTo($slug = null)
+    public function iSetItsSlugToIn($slug = null, $language = 'en_US')
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
@@ -136,26 +137,29 @@ final class ManagingTaxonsContext implements Context
             $this->updatePage,
         ]);
 
-        $currentPage->specifySlug($slug);
+        $currentPage->specifySlug($slug, $language);
     }
 
     /**
      * @Then the slug field should not be editable
+     * @Then the slug field should (also )not be editable in :language
      */
-    public function theSlugFieldShouldNotBeEditable()
+    public function theSlugFieldShouldNotBeEditable($language = 'en_US')
     {
         Assert::true(
-            $this->updatePage->isSlugReadOnly(),
-            'Slug should be immutable, but it does not.'
+            $this->updatePage->isSlugReadOnly($language),
+            sprintf('Slug in "%s" should be immutable, but it does not.', $language)
         );
     }
 
     /**
      * @When I enable slug modification
+     * @When I enable slug modification in :language
      */
-    public function iEnableSlugModification()
+    public function iEnableSlugModification($language = 'en_US')
     {
-        $this->updatePage->enableSlugModification();
+        $this->updatePage->activateLanguageTab($language);
+        $this->updatePage->enableSlugModification($language);
     }
 
     /**
@@ -261,6 +265,22 @@ final class ManagingTaxonsContext implements Context
         Assert::true(
             $this->updatePage->hasResourceValues([$element => $value]),
             sprintf('Taxon with %s should have %s value.', $element, $value)
+        );
+    }
+
+    /**
+     * @Then this taxon should have slug :value in :language
+     */
+    public function thisTaxonElementShouldHaveSlugIn($value, $language = null)
+    {
+        if (null !== $language) {
+            $this->updatePage->activateLanguageTab($language);
+        }
+
+        Assert::same(
+            $this->updatePage->getSlug($language),
+            $value,
+            sprintf('Taxon should have slug "%s" but it has not.', $value)
         );
     }
 

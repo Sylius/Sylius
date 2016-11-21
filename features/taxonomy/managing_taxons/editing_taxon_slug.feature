@@ -21,7 +21,7 @@ Feature: Editing taxon's slug
         Given I want to create a new taxon
         When I specify its code as "MEDIEVAL_WEAPONS"
         And I name it "Medieval weapons" in "English (United States)"
-        And I set its slug to "mw"
+        And I set its slug to "mw" in "English (United States)"
         And I add it
         Then this taxon slug should be "mw"
 
@@ -40,7 +40,7 @@ Feature: Editing taxon's slug
         And I want to create a new taxon for "Medieval weapons"
         When I specify its code as "SIEGE_ENGINES"
         And I name it "Siege engines" in "English (United States)"
-        And I set its slug to "medieval-weapons/siege"
+        And I set its slug to "medieval-weapons/siege" in "English (United States)"
         And I add it
         Then this taxon slug should be "medieval-weapons/siege"
 
@@ -73,7 +73,7 @@ Feature: Editing taxon's slug
         When I want to modify the "Medieval weapons" taxon
         And I enable slug modification
         And I rename it to "Renaissance weapons" in "English (United States)"
-        And I set its slug to "renaissance"
+        And I set its slug to "renaissance" in "English (United States)"
         And I save my changes
         Then the slug of the "Renaissance weapons" taxon should be "renaissance"
 
