@@ -1,3 +1,12 @@
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 (function($) {
   $(document).ready(function() {
     $('#sidebar')
@@ -15,12 +24,6 @@
     $('.menu .item').tab();
     $('.card .image').dimmer({on: 'hover'});
     $('.ui.rating').rating('disable');
-    $('.cart.button')
-        .popup({
-            popup: $('.cart.popup'),
-            on: 'click',
-        })
-    ;
 
     $('form.loadable button').on('click', function() {
       return $(this).closest('form').addClass('loading');
@@ -38,5 +41,8 @@
     $('.special.cards .image').dimmer({
       on: 'hover'
     });
+
+    $('[data-form-type="collection"]').CollectionForm();
+
   });
 })(jQuery);

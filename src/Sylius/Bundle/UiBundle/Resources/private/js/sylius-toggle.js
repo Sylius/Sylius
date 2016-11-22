@@ -8,6 +8,8 @@
  */
 
 (function ( $ ) {
+    'use strict';
+
     $.fn.extend({
         toggleElement: function() {
             return this.each(function() {

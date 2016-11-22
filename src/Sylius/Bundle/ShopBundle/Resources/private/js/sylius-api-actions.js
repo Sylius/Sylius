@@ -10,7 +10,10 @@
 (function ($) {
     'use strict';
 
-    $('#sylius_customer_create_user').change(function(){
-        $('#user-form').toggle();
-    });
+    $.fn.api.settings.api = {
+        'user check': '/user-check',
+        'login check': '/login-check',
+        'cart': '/cart',
+        'address book': '/account/address-book?_format=json'
+    };
 })( jQuery );

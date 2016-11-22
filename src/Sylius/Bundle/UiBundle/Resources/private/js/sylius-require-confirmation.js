@@ -8,6 +8,8 @@
  */
 
 (function ( $ ) {
+    'use strict';
+
     $.fn.extend({
         requireConfirmation: function() {
             return this.each(function() {

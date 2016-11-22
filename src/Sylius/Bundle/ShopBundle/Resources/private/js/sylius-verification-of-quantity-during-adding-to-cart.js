@@ -10,6 +10,14 @@
 (function ( $ ) {
     'use strict';
 
+    $.fn.extend({
+        addToCart: function () {
+            $(this).on('submit', function(event) {
+                refresh(this, event);
+            });
+        }
+    });
+
     function refresh(element, event) {
         event.preventDefault();
 
@@ -38,11 +46,5 @@
             }
         })
     }
-
-    $(document).ready(function() {
-        $('#sylius-product-adding-to-cart').on('submit', function(event) {
-            refresh(this, event);
-        });
-    });
 
 })( jQuery );

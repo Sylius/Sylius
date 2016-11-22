@@ -8,6 +8,8 @@
  */
 
 (function ( $ ) {
+    'use strict';
+
     $.fn.extend({
         apiLogin: function (apiSettings) {
             var element = $(this);

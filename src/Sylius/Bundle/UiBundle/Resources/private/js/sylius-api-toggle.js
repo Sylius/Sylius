@@ -8,6 +8,8 @@
  */
 
 (function ( $ ) {
+    'use strict';
+
     $.fn.extend({
         apiToggle: function (apiSettings, toggleableElement, isHidden) {
             var element = $(this);
