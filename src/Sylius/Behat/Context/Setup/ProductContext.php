@@ -34,6 +34,7 @@ use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -229,15 +230,24 @@ final class ProductContext implements Context
      */
     public function thisProductIsNamedIn(ProductInterface $product, $name, $locale)
     {
-        /** @var ProductTranslationInterface $translation */
-        $translation = $this->productTranslationFactory->createNew();
-        $translation->setLocale($locale);
-        $translation->setName($name);
-        $translation->setSlug($this->slugGenerator->generate($name));
-
-        $product->addTranslation($translation);
+        $this->addProductTranslation($product, $name, $locale);
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the store has a product named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
+     */
+    public function theStoreHasProductNamedInAndIn($firstName, $firstLocale, $secondName, $secondLocale)
+    {
+        $product = $this->createProduct($firstName);
+
+        $names = [$firstName => $firstLocale, $secondName => $secondLocale];
+        foreach ($names as $name => $locale) {
+            $this->addProductTranslation($product, $name, $locale);
+        }
+
+        $this->saveProduct($product);
     }
 
     /**
@@ -771,5 +781,21 @@ final class ProductContext implements Context
         $this->objectManager->flush();
 
         $this->sharedStorage->set('variant', $variant);
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param string $name
+     * @param string $locale
+     */
+    private function addProductTranslation(ProductInterface $product, $name, $locale)
+    {
+        /** @var ProductTranslationInterface|TranslationInterface $translation */
+        $translation = $this->productTranslationFactory->createNew();
+        $translation->setLocale($locale);
+        $translation->setName($name);
+        $translation->setSlug($this->slugGenerator->generate($name));
+
+        $product->addTranslation($translation);
     }
 }

@@ -41,19 +41,20 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
      */
     public function nameItIn($name, $localeCode)
     {
-        $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_name', $localeCode), $name
-        );
+        $this->activateLanguageTab($localeCode);
+        $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
 
-        $this->waitForSlugGenerationIfNecessary();
+        $this->waitForSlugGenerationIfNecessary($localeCode);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function specifySlug($slug)
+    public function specifySlugIn($slug, $locale)
     {
-        $this->getDocument()->fillField('Slug', $slug);
+        $this->activateLanguageTab($locale);
+
+        $this->getElement('slug', ['%locale%' => $locale])->setValue($slug);
     }
 
     /**
@@ -107,11 +108,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         }
 
         $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
-    }
-
-    public function enableSlugModification()
-    {
-        $this->getElement('toggle_slug_modification_button')->press();
     }
 
     /**
@@ -184,6 +180,33 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function activateLanguageTab($locale)
+    {
+        if (!$this->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
+        $languageTabTitle = $this->getElement('language_tab', ['%locale%' => $locale]);
+        if (!$languageTabTitle->hasClass('active')) {
+            $languageTabTitle->click();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getElement($name, array $parameters = [])
+    {
+        if (!isset($parameters['%locale%'])) {
+            $parameters['%locale%'] = 'en_US';
+        }
+
+        return parent::getElement($name, $parameters);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -197,12 +220,13 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
             'images' => '#sylius_product_images',
-            'name' => '#sylius_product_translations_en_US_name',
+            'language_tab' => '[data-locale="%locale%"] .title',
+            'name' => '#sylius_product_translations_%locale%_name',
             'price' => '#sylius_product_variant_price',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
-            'slug' => '#sylius_product_translations_en_US_slug',
+            'slug' => '#sylius_product_translations_%locale%_slug',
             'tab' => '.menu [data-tab="%name%"]',
-            'toggle_slug_modification_button' => '#toggle-slug-modification',
+            'toggle_slug_modification_button' => '.toggle-product-slug-modification',
         ]);
     }
 
@@ -263,11 +287,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return end($items);
     }
 
-    private function waitForSlugGenerationIfNecessary()
+    /**
+     * @param string $locale
+     */
+    private function waitForSlugGenerationIfNecessary($locale)
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
-            $this->getDocument()->waitFor(10, function () {
-                return '' !== $this->getElement('slug')->getValue();
+            $this->getDocument()->waitFor(10, function () use ($locale) {
+                return '' !== $this->getElement('slug', ['%locale%' => $locale])->getValue();
             });
         }
     }
