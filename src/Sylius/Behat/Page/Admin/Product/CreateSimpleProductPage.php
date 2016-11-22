@@ -59,9 +59,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($price)
+    public function specifyPrice($channelName, $price)
     {
-        $this->getDocument()->fillField('Price', $price);
+        $this->getElement('price', ['%channel%' => $channelName])->setValue($price);
     }
 
     /**
@@ -198,7 +198,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'form' => 'form[name="sylius_product"]',
             'images' => '#sylius_product_images',
             'name' => '#sylius_product_translations_en_US_name',
-            'price' => '#sylius_product_variant_price',
+            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'slug' => '#sylius_product_translations_en_US_slug',
             'tab' => '.menu [data-tab="%name%"]',

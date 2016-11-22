@@ -18,6 +18,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductTranslationInterface;
@@ -77,6 +78,11 @@ final class ProductContext implements Context
     /**
      * @var FactoryInterface
      */
+    private $channelPricingFactory;
+
+    /**
+     * @var FactoryInterface
+     */
     private $attributeValueFactory;
 
     /**
@@ -127,6 +133,7 @@ final class ProductContext implements Context
      * @param AttributeFactoryInterface $productAttributeFactory
      * @param FactoryInterface $attributeValueFactory
      * @param FactoryInterface $productVariantFactory
+     * @param FactoryInterface $channelPricingFactory
      * @param FactoryInterface $productOptionFactory
      * @param FactoryInterface $productOptionValueFactory
      * @param FactoryInterface $productImageFactory
@@ -144,6 +151,7 @@ final class ProductContext implements Context
         AttributeFactoryInterface $productAttributeFactory,
         FactoryInterface $attributeValueFactory,
         FactoryInterface $productVariantFactory,
+        FactoryInterface $channelPricingFactory,
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
         FactoryInterface $productImageFactory,
@@ -160,6 +168,7 @@ final class ProductContext implements Context
         $this->productAttributeFactory = $productAttributeFactory;
         $this->attributeValueFactory = $attributeValueFactory;
         $this->productVariantFactory = $productVariantFactory;
+        $this->channelPricingFactory = $channelPricingFactory;
         $this->productOptionFactory = $productOptionFactory;
         $this->productOptionValueFactory = $productOptionValueFactory;
         $this->productImageFactory = $productImageFactory;
@@ -693,7 +702,13 @@ final class ProductContext implements Context
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->setPrice($price);
+
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $this->channelPricingFactory->createNew();
+        $channelPricing->setPrice($price);
+        $channelPricing->setChannel($this->sharedStorage->get('channel'));
+
+        $productVariant->addChannelPricing($channelPricing);
         $productVariant->setCode($product->getCode());
 
         return $product;
@@ -754,8 +769,15 @@ final class ProductContext implements Context
 
         $variant->setName($productVariantName);
         $variant->setCode($code);
-        $variant->setPrice($price);
         $variant->setProduct($product);
+
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $this->channelPricingFactory->createNew();
+        $channelPricing->setPrice($price);
+        $channelPricing->setChannel($this->sharedStorage->get('channel'));
+
+        $variant->addChannelPricing($channelPricing);
+
         $product->addVariant($variant);
 
         $this->objectManager->flush();

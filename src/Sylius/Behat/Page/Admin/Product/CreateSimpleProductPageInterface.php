@@ -22,9 +22,10 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 {
     /**
+     * @param string $channelName
      * @param int $price
      */
-    public function specifyPrice($price);
+    public function specifyPrice($channelName, $price);
 
     /**
      * @param string $name

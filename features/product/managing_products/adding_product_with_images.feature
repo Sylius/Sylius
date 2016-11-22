@@ -5,26 +5,26 @@ Feature: Adding a new product with images
     I want to add a new product to the shop
 
     Background:
-        Given the store is available in "English (United States)"
+        Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding a new simple product with a single image
         Given I want to create a new simple product
         When I specify its code as "LAMBORGHINI_GALLARDO"
         And I name it "Lamborghini Gallardo Model" in "English (United States)"
-        And I set its price to "$100.00" for channel "United States"
+        And I set its price to $100.00 for "United States" channel
         And I attach the "lamborghini.jpg" image with a code "banner"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Lamborghini Gallardo Model" should have an image with a code "banner"
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding a new simple product with multiple images
         Given I want to create a new simple product
         When I specify its code as "LAMBORGHINI_GALLARDO"
         And I name it "Lamborghini Gallardo Model" in "English (United States)"
-        And I set its price to "$100.00" for channel "United States"
+        And I set its price to $100.00 for "United States" channel
         And I attach the "lamborghini.jpg" image with a code "banner"
         And I attach the "lamborghini.jpg" image with a code "thumbnail"
         And I add it
