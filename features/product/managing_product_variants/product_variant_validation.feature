@@ -16,7 +16,7 @@ Feature: Product variant validation
         But I do not set its price
         And I try to add it
         Then I should be notified that price is required
-        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the shop
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
     @ui
     Scenario: Adding a new product variant with price lower then 0
@@ -25,7 +25,7 @@ Feature: Product variant validation
         And I set its price to "-$80.00"
         And I try to add it
         Then I should be notified that price cannot be lower than 0
-        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the shop
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
     @ui
     Scenario: Adding a new product variant without specifying its code
@@ -44,7 +44,7 @@ Feature: Product variant validation
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I try to add it
         Then I should be notified that code has to be unique
-        And the "Wyborowa Vodka" product should have only one 1 variant
+        And the "Wyborowa Vodka" product should have only one variant
 
     @ui
     Scenario: Adding a new product variant with same set of options
@@ -56,7 +56,7 @@ Feature: Product variant validation
         And I set its price to "$100.00"
         And I try to add it
         Then I should be notified that this variant already exists
-        And the "Wyborowa Vodka" product should have only one 1 variant
+        And the "Wyborowa Vodka" product should have only one variant
 
     @ui
     Scenario: Adding a new product variant with negative properties
@@ -66,7 +66,7 @@ Feature: Product variant validation
         And I set its height, width, depth and weight to "-1"
         And I try to add it
         Then I should be notified that height, width, depth and weight cannot be lower than 0
-        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the shop
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
     @ui
     Scenario: Adding a new product variant without current stock
@@ -76,4 +76,4 @@ Feature: Product variant validation
         But I do not specify its current stock
         And I try to add it
         Then I should be notified that current stock is required
-        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the shop
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store

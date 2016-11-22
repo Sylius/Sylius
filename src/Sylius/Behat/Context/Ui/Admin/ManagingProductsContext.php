@@ -247,7 +247,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then the product :productName should appear in the shop
+     * @Then the product :productName should appear in the store
      * @Then the product :productName should be in the shop
      * @Then this product should still be named :productName
      */

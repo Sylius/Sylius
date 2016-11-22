@@ -22,7 +22,7 @@ Feature: Adding a new product with associations
         Then I should be notified that it has been successfully created
         And this product should have an association "Accessories" with products "LG headphones" and "LG earphones"
         And this product should also have an association "Alternatives" with products "LG G4" and "LG G5"
-        And the product "LG G3" should appear in the shop
+        And the product "LG G3" should appear in the store
 
     @ui @javascript
     Scenario: Adding a new product with associations after changing associated items
@@ -36,4 +36,4 @@ Feature: Adding a new product with associations
         Then I should be notified that it has been successfully created
         And this product should have an association "Accessories" with product "LG headphones"
         And this product should not have an association "Accessories" with product "LG earphones"
-        And the product "LG G3" should appear in the shop
+        And the product "LG G3" should appear in the store
