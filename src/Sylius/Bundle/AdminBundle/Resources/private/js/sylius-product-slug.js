@@ -23,7 +23,7 @@
                 }, 1000);
             });
 
-            $('#toggle-slug-modification').on('click', function(e) {
+            $('toggle-product-slug-modification').on('click', function(e) {
                 e.preventDefault();
                 toggleSlugModification($(this), $(this).siblings('input'));
             });

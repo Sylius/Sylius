@@ -50,7 +50,8 @@
     </div>
     <div class="ui hidden divider"></div>
     <div class="ui styled fluid accordion">
-        {% for locale, translationForm in form.translations %}
+    {% for locale, translationForm in form.translations %}
+        <div data-locale="{{ locale }}">
             <div class="title{% if 0 == loop.index0 %} active{% endif %}">
                 <i class="dropdown icon"></i>
                 <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
@@ -61,6 +62,7 @@
                 {{ form_row(translationForm.shortDescription, {'attr': {'rows': 3}}) }}
                 {{ form_row(translationForm.description) }}
             </div>
-        {% endfor %}
+        </div>
+    {% endfor %}
     </div>
 </div>

@@ -5,7 +5,7 @@
     {% else %}
     <div class="ui action input">
         {{ form_widget(slugField, {'attr': {'readonly': 'readonly', 'data-url': path('sylius_admin_ajax_generate_product_slug')}}) }}
-        <span id="toggle-slug-modification" class="ui icon button">
+        <span class="ui icon button toggle-product-slug-modification">
             <i class="unlock icon"></i>
         </span>
     </div>
