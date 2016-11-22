@@ -1,16 +1,16 @@
 <tr>
     <th colspan="4" class="right aligned" id="subtotal">
-        {{ 'sylius.ui.subtotal'|trans }}: {{ order.itemsTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ 'sylius.ui.subtotal'|trans }}: {{ order.itemsTotal|sylius_price(order.currencyCode) }}
     </th>
 </tr>
 <tr>
     <td colspan="4" class="right aligned" id="shipping-total">
-        {{ 'sylius.ui.shipping_total'|trans }}: {{ order.shippingTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ 'sylius.ui.shipping_total'|trans }}: {{ order.shippingTotal|sylius_price(order.currencyCode) }}
     </td>
 </tr>
 <tr>
     <td colspan="4" class="right aligned" id="tax-total">
-        {{ 'sylius.ui.tax_total'|trans }}: {{ order.taxTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ 'sylius.ui.tax_total'|trans }}: {{ order.taxTotal|sylius_price(order.currencyCode) }}
     </td>
 </tr>
 <tr>
@@ -18,6 +18,6 @@
 </tr>
 <tr>
     <td colspan="4" class="right aligned" style="font-size: 1.5em;" id="total">
-        {{ 'sylius.ui.total'|trans }}: {{ order.total|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ 'sylius.ui.total'|trans }}: {{ order.total|sylius_price(order.currencyCode) }}
     </td>
 </tr>

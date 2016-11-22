@@ -31,7 +31,6 @@ final class SyliusMoneyExtension extends Extension implements PrependExtensionIn
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $container->setParameter('sylius_money.locale', $config['locale']);
-        $container->setParameter('sylius_money.currency', $config['currency']);
 
         $loader->load('services.xml');
     }

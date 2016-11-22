@@ -29,13 +29,6 @@
 
         <service id="sylius.handler.currency_change.composite" class="Sylius\Component\Core\Currency\Handler\CompositeCurrencyChangeHandler" public="false" />
 
-        <service  id="sylius.handler.currency_change.cart" class="Sylius\Bundle\CoreBundle\Handler\CartCurrencyChangeHandler">
-            <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.updater.order.exchange_rate" />
-            <argument type="service" id="sylius.order_processing.order_processor" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <tag name="sylius.currency.change_handler" />
-        </service>
         <service id="sylius.handler.currency_change.shop" class="Sylius\Bundle\CoreBundle\Handler\ShopCurrencyChangeHandler">
             <argument type="service" id="sylius.storage.currency" />
             <argument type="service" id="sylius.context.channel.composite" />

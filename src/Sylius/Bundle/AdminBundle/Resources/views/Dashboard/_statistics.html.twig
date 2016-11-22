@@ -3,7 +3,7 @@
         <div class="column">
             <div class="ui statistic">
                 <div id="total-sales" class="value">
-                    {{ statistics.totalSales|sylius_money }}
+                    {{ statistics.totalSales }}
                 </div>
                 <div class="label">
                     {{ 'sylius.ui.sales'|trans }}
@@ -33,7 +33,7 @@
         <div class="column">
             <div class="ui statistic">
                 <div id="average-order-value" class="value">
-                    {{ statistics.averageOrderValue|sylius_money }}
+                    {{ statistics.averageOrderValue }}
                 </div>
                 <div class="label">
                     {{ 'sylius.ui.average_order_value'|trans }}
