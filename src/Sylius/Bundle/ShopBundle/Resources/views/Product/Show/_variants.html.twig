@@ -1,3 +1,5 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 <table class="ui single line small table" id="sylius-product-variants">
     <thead>
     <tr>
@@ -21,7 +23,7 @@
                     </div>
                 {% endif %}
             </td>
-            <td>{{ variant|sylius_channel_variant_price }}</td>
+            <td>{{ money.convertAndFormat(variant|sylius_channel_variant_price) }}</td>
             <td class="right aligned">
                 {{ form_widget(form.cartItem.variant[loop.index0], {'label': false}) }}
             </td>

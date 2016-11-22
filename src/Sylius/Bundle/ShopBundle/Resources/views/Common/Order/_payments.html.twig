@@ -1,3 +1,5 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 {% for payment in order.payments %}
 <div class="ui large icon message">
     <i class="payment icon"></i>
@@ -6,7 +8,7 @@
             {{ payment.method }}
             ({{ payment.state }})
         </div>
-        <p>{{ payment.amount|sylius_price(payment.currencyCode) }}</p>
+        <p>{{ money.format(payment.amount, payment.currencyCode) }}</p>
     </div>
 </div>
 {% endfor %}
