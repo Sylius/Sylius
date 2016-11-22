@@ -1,8 +1,8 @@
 @shopping_cart
-Feature: All of my cart's values get updated to the currency of my choosing
-    In order to know how much I have to pay in my currency
+Feature: Changing display currency of the cart
+    In order to know estimated price for foreign currencies
     As a Visitor
-    I want to see every cash amount in my chosen currency
+    I want to see every cash amount rounded to my chosen currency
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -13,7 +13,7 @@ Feature: All of my cart's values get updated to the currency of my choosing
         And the store has a product "The Pug Mug" priced at "$10.00"
         And it belongs to "Mugs" tax category
 
-    @ui @todo
+    @ui
     Scenario: Changing the currency of my cart
         Given I have product "The Pug Mug" in the cart
         When I switch to the "GBP" currency
