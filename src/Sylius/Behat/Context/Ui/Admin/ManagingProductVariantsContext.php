@@ -210,7 +210,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then the :productVariantCode variant of the :product product should appear in the shop
+     * @Then the :productVariantCode variant of the :product product should appear in the store
      */
     public function theProductVariantShouldAppearInTheShop($productVariantCode, ProductInterface $product)
     {
@@ -223,7 +223,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then the :productVariantCode variant of the :product product should not appear in the shop
+     * @Then the :productVariantCode variant of the :product product should not appear in the store
      */
     public function theProductVariantShouldNotAppearInTheShop($productVariantCode, ProductInterface $product)
     {
@@ -244,7 +244,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then the :product product should have only one 1 variant
+     * @Then the :product product should have only one variant
      */
     public function theProductShouldHaveOnlyOneVariant(ProductInterface $product)
     {

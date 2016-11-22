@@ -17,7 +17,7 @@ Feature: Adding a new product
         And I set its slug to "dice-brewing"
         And I add it
         Then I should be notified that it has been successfully created
-        And the product "Dice Brewing" should appear in the shop
+        And the product "Dice Brewing" should appear in the store
 
     @ui
     Scenario: Adding a new configurable product
@@ -31,7 +31,7 @@ Feature: Adding a new product
         And I set its slug to "whiskey/gentleman-jack"
         And I add it
         Then I should be notified that it has been successfully created
-        And the product "Gentleman Jack" should appear in the shop
+        And the product "Gentleman Jack" should appear in the store
 
     @ui
     Scenario: Adding a new configurable product without options
@@ -41,4 +41,4 @@ Feature: Adding a new product
         And I set its slug to "whiskey/gentleman-jack"
         And I add it
         Then I should be notified that it has been successfully created
-        And the product "Gentleman Jack" should appear in the shop
+        And the product "Gentleman Jack" should appear in the store
