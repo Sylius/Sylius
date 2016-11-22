@@ -193,11 +193,11 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I set its(?:| default) price to ("(?:€|£|\$)[^"]+")$/
+     * @When /^I set its(?:| default) price to (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
      */
-    public function iSetItsPriceTo($price)
+    public function iSetItsPriceTo($price, $channelName)
     {
-        $this->createSimpleProductPage->specifyPrice($price);
+        $this->createSimpleProductPage->specifyPrice($channelName, $price);
     }
 
     /**
@@ -483,11 +483,11 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I change its price to "(?:€|£|\$)([^"]+)"$/
+     * @When /^I change its price to (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
      */
-    public function iChangeItsPriceTo($price)
+    public function iChangeItsPriceTo($price, $channelName)
     {
-        $this->updateSimpleProductPage->specifyPrice($price);
+        $this->updateSimpleProductPage->specifyPrice($channelName, $price);
     }
 
     /**
@@ -955,6 +955,20 @@ final class ManagingProductsContext implements Context
     public function iSetItsShippingCategoryAs($shippingCategoryName)
     {
         $this->createSimpleProductPage->selectShippingCategory($shippingCategoryName);
+    }
+
+    /**
+     * @Given /^(it|this product) should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     * @Given /^(product "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     */
+    public function itShouldBePricedAtForChannel(ProductInterface $product, $price, $channelName)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::same(
+            $this->updateSimpleProductPage->getPriceForChannel($channelName),
+            $price
+        );
     }
 
     /**

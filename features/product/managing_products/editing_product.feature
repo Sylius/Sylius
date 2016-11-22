@@ -22,13 +22,13 @@ Feature: Editing a product
         Then I should be notified that it has been successfully edited
         And this product name should be "7 Wonders"
 
-    @ui @todo
+    @ui
     Scenario: Changing a simple product price
         Given I want to modify the "Dice Brewing" product
-        When I change its price to "$15.00" for "USD" currency and "WEB-US" channel
+        When I change its price to $15.00 for "United States" channel
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the product for "USD" currency and "Web-US" channel should have "$15.00"
+        And it should be priced at $15.00 for channel "United States"
 
     @ui
     Scenario: Renaming a configurable product
