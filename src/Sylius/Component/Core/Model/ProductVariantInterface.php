@@ -86,6 +86,13 @@ interface ProductVariantInterface extends
     /**
      * @param ChannelInterface $channel
      *
+     * @return ChannelPricingInterface|null
+     */
+    public function getChannelPricingForChannel(ChannelInterface $channel);
+
+    /**
+     * @param ChannelInterface $channel
+     *
      * @return bool
      */
     public function hasChannelPricingForChannel(ChannelInterface $channel);

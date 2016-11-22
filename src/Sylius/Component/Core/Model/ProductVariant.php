@@ -313,15 +313,23 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function hasChannelPricingForChannel(ChannelInterface $channel)
+    public function getChannelPricingForChannel(ChannelInterface $channel)
     {
         foreach ($this->channelPricings as $channelPricing) {
             if ($channel === $channelPricing->getChannel()) {
-                return true;
+                return $channelPricing;
             }
         }
 
-        return false;
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasChannelPricingForChannel(ChannelInterface $channel)
+    {
+        return null !== $this->getChannelPricingForChannel($channel);
     }
 
     /**

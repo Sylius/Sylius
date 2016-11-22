@@ -279,18 +279,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getPrice()
-    {
-        if ($this->variants->isEmpty()) {
-            return null;
-        }
-
-        return $this->variants->first()->getPrice();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getImages()
     {
         return $this->images;
