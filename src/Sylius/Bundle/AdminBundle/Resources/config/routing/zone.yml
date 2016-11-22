@@ -2,6 +2,7 @@ sylius_admin_zone:
     resource: |
         alias: sylius.zone
         section: admin
+        form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneType
         templates: SyliusAdminBundle:Crud
         except: ['show', 'create']
         redirect: update
@@ -22,6 +23,7 @@ sylius_admin_zone_create:
     defaults:
         _controller: sylius.controller.zone:createAction
         _sylius:
+            form: Sylius\Bundle\AddressingBundle\Form\Type\ZoneType
             section: admin
             factory:
                 method: createTyped

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
+use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddDefaultBillingAddressOnOrderFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -30,11 +31,11 @@ class AddressType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('shippingAddress', 'sylius_address', [
+            ->add('shippingAddress', SyliusAddressType::class, [
                 'shippable' => true,
                 'constraints' => [new Valid()],
             ])
-            ->add('billingAddress', 'sylius_address', [
+            ->add('billingAddress', SyliusAddressType::class, [
                 'constraints' => [new Valid()],
             ])
             ->add('differentBillingAddress', CheckboxType::class, [

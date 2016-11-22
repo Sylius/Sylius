@@ -31,7 +31,7 @@ class CountryType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber('country'))
             ->add('provinces', CollectionType::class, [
-                'entry_type' => 'sylius_province',
+                'entry_type' => ProvinceType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
