@@ -105,5 +105,7 @@
             <argument type="service" id="session" />
             <argument type="string">shop</argument>
         </service>
+
+        <service id="sylius.calculator.product_variant_price" class="Sylius\Component\Core\Calculator\ProductVariantPriceCalculator" />
     </services>
 </container>

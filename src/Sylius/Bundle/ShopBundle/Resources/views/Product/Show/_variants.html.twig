@@ -21,7 +21,7 @@
                     </div>
                 {% endif %}
             </td>
-            <td>{{ variant.price|sylius_price }}</td>
+            <td>{{ variant|sylius_channel_variant_price }}</td>
             <td class="right aligned">
                 {{ form_widget(form.cartItem.variant[loop.index0], {'label': false}) }}
             </td>
