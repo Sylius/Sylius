@@ -9,11 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType as SymfonyCountryType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -24,7 +29,7 @@ use Symfony\Component\Intl\Intl;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class CountryType extends AbstractResourceType
+final class CountryTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var RepositoryInterface
@@ -33,14 +38,10 @@ class CountryType extends AbstractResourceType
 
     /**
      * {@inheritdoc}
-     *
-     * @param RepositoryInterface $countryRepository
      */
-    public function __construct($dataClass, array $validationGroups = [], RepositoryInterface $countryRepository)
+    public function __construct(RepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;
-
-        parent::__construct($dataClass, $validationGroups);
     }
 
     /**
@@ -57,28 +58,24 @@ class CountryType extends AbstractResourceType
             $country = $event->getData();
             if ($country instanceof CountryInterface && null !== $country->getCode()) {
                 $nameOptions['disabled'] = true;
-                $nameOptions['choices'] = [
-                    $country->getCode() => $this->getCountryName($country->getCode())
-                ];
+                $nameOptions['choices'] = [$this->getCountryName($country->getCode()) => $country->getCode()];
             } else {
                 $nameOptions['choices'] = $this->getAvailableCountries();
             }
 
-            $nameOptions['choices_as_values'] = false;
-
             $form = $event->getForm();
-            $form->add('code', 'country', $nameOptions);
+            $form->add('code', SymfonyCountryType::class, $nameOptions);
         });
 
         $builder
-            ->add('provinces', 'collection', [
-                'type' => 'sylius_province',
+            ->add('provinces', CollectionType::class, [
+                'entry_type' => ProvinceType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'button_add_label' => 'sylius.form.country.add_province',
             ])
-            ->add('enabled', 'checkbox', [
+            ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.country.enabled',
             ])
         ;
@@ -87,9 +84,9 @@ class CountryType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getExtendedType()
     {
-        return 'sylius_country';
+        return CountryType::class;
     }
 
     /**
@@ -116,6 +113,6 @@ class CountryType extends AbstractResourceType
             unset($availableCountries[$country->getCode()]);
         }
 
-        return $availableCountries;
+        return array_flip($availableCountries);
     }
 }

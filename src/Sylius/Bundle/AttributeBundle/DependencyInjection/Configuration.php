@@ -16,7 +16,6 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -81,7 +80,6 @@ final class Configuration implements ConfigurationInterface
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
                                                     ->scalarNode('default')->defaultValue(AttributeType::class)->cannotBeEmpty()->end()
-                                                    ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                                 ->end()
                                             ->end()
                                         ->end()

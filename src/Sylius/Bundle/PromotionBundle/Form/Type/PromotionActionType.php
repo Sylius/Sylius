@@ -27,7 +27,7 @@ class PromotionActionType extends AbstractConfigurationType
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('type', 'sylius_promotion_action_choice', [
+            ->add('type', PromotionActionChoiceType::class, [
                 'label' => 'sylius.form.promotion_action.type',
                 'attr' => [
                     'data-form-collection' => 'update',
@@ -46,7 +46,7 @@ class PromotionActionType extends AbstractConfigurationType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_action';
     }

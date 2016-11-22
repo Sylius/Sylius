@@ -15,6 +15,7 @@ use Sylius\Component\User\Model\UserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\Valid;
 use Webmozart\Assert\Assert;
 
 /**
@@ -52,7 +53,7 @@ class AddUserFormSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();
-        $form->add('user', sprintf('sylius_%s_user', $this->userType));
+        $form->add('user', sprintf('sylius_%s_user', $this->userType), ['constraints' => [new Valid()]]);
     }
 
     /**

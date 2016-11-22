@@ -51,7 +51,7 @@ abstract class AbstractConfigurationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_action';
     }

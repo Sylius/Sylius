@@ -83,6 +83,4 @@ There are a few more form types, which can become useful when integrating the bu
 
 ``sylius_property_choice`` is a ready-to-use select field, with a list of all Properties from database.
 
-``sylius_product_to_identifier`` can be used to render a text field, which will transform the value into a product.
-
 **If you need to customize existing fields or add your own, please read the** :doc:`overriding forms chapter </customization/form>`.

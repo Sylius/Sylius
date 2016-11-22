@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -24,7 +25,7 @@ class DateAttributeType extends AbstractType
      */
     public function getParent()
     {
-        return 'date';
+        return DateType::class;
     }
 
     /**
@@ -40,7 +41,7 @@ class DateAttributeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_attribute_type_date';
     }

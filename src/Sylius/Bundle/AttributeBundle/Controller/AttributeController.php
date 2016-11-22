@@ -13,6 +13,7 @@ namespace Sylius\Bundle\AttributeBundle\Controller;
 
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
@@ -53,9 +54,12 @@ class AttributeController extends ResourceController
         $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeChoice.html.twig');
 
         $form = $this->get('form.factory')->create(
-            sprintf('sylius_%s_choice', $this->metadata->getName()),
+            ResourceChoiceType::class,
             null,
             [
+                'resource' => $this->metadata->getAlias(),
+                'choice_value' => 'code',
+                'choice_label' => 'name',
                 'expanded' => true,
                 'multiple' => true,
             ]
@@ -78,7 +82,7 @@ class AttributeController extends ResourceController
 
         $choices = $request->query->get(sprintf('sylius_%s_choice', $this->metadata->getName()), []);
 
-        $attributes = $attributeRepository->findBy(['id' => $choices]);
+        $attributes = $attributeRepository->findBy(['code' => $choices]);
         foreach ($attributes as $attribute) {
             $forms[$attribute->getId()] = $this->getAttributeForm($attribute);
         }

@@ -62,8 +62,9 @@ final class SecurityController
         $lastError = $this->authenticationUtils->getLastAuthenticationError();
         $lastUsername = $this->authenticationUtils->getLastUsername();
 
-        $template = $request->attributes->get('_sylius[template]', 'SyliusUiBundle:Security:login.html.twig', true);
-        $formType = $request->attributes->get('_sylius[form]', 'sylius_security_login', true);
+        $syliusConfiguration = $request->attributes->get('_sylius');
+        $template = isset($syliusConfiguration['template']) ? $syliusConfiguration['template'] : 'SyliusUiBundle:Security:login.html.twig';
+        $formType = isset($syliusConfiguration['form']) ? $syliusConfiguration['form'] : 'sylius_security_login';
         $form = $this->formFactory->createNamed('', $formType);
 
         return $this->templatingEngine->renderResponse($template, [

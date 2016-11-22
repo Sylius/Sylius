@@ -2,6 +2,7 @@ sylius_admin_currency:
     resource: |
         alias: sylius.currency
         section: admin
+        form: Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType
         templates: SyliusAdminBundle:Crud
         except: ['show', 'delete']
         redirect: update

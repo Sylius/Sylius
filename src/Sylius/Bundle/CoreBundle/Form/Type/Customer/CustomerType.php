@@ -15,6 +15,7 @@ use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType as BaseCustomerType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -37,6 +38,7 @@ class CustomerType extends BaseCustomerType
         EventSubscriberInterface $addUserFormSubscriber
     ) {
         parent::__construct($dataClass, $validationGroups);
+
         $this->addUserFormSubscriber = $addUserFormSubscriber;
     }
 
@@ -59,7 +61,6 @@ class CustomerType extends BaseCustomerType
         $resolver->setDefaults([
             'data_class' => $this->dataClass,
             'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
         ]);
     }
 }

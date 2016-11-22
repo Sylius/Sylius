@@ -15,6 +15,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -54,23 +55,21 @@ class LocaleChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = function (Options $options) {
-            if (null === $options['enabled']) {
-                $choices = $this->localeRepository->findAll();
-            } else {
-                $choices = $this->localeRepository->findBy(['enabled' => $options['enabled']]);
-            }
-
-            return new ObjectChoiceList($choices, null, [], null, 'id');
-        };
-
         $resolver
             ->setDefaults([
                 'choice_translation_domain' => false,
-                'choice_list' => $choiceList,
+                'choices' => function (Options $options) {
+                    if (null === $options['enabled']) {
+                        return $this->localeRepository->findAll();
+                    }
+
+                    return $this->localeRepository->findBy(['enabled' => $options['enabled']]);
+                },
+                'choice_label' => 'name',
+                'choice_value' => 'code',
                 'enabled' => null,
                 'label' => 'sylius.form.locale.locale',
-                'empty_value' => 'sylius.form.locale.select',
+                'placeholder' => 'sylius.form.locale.select',
             ])
         ;
     }
@@ -80,13 +79,13 @@ class LocaleChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_locale_choice';
     }

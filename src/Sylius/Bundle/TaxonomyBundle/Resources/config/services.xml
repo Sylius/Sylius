@@ -21,12 +21,12 @@
 
         <service id="sylius.form.type.taxon_choice" class="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType">
             <argument type="service" id="sylius.repository.taxon" />
-            <tag name="form.type" alias="sylius_taxon_choice" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.taxon_position" class="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType">
             <argument>%sylius.model.taxon.class%</argument>
             <argument>%sylius.validation_groups.taxon%</argument>
-            <tag name="form.type" alias="sylius_taxon_position" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.factory.taxon.decorated" class="Sylius\Component\Taxonomy\Factory\TaxonFactory"

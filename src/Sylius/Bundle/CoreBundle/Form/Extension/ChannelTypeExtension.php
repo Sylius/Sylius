@@ -9,16 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType as BaseChannelType;
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
+use Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ChannelType extends BaseChannelType
+class ChannelTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
@@ -28,35 +32,47 @@ class ChannelType extends BaseChannelType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('locales', 'sylius_locale_choice', [
+            ->add('locales', ResourceChoiceType::class, [
+                'resource' => 'sylius.locale',
                 'label' => 'sylius.form.channel.locales',
                 'required' => true,
                 'multiple' => true,
             ])
-            ->add('defaultLocale', 'sylius_locale_choice', [
+            ->add('defaultLocale', ResourceChoiceType::class, [
+                'resource' => 'sylius.locale',
                 'label' => 'sylius.form.channel.locale_default',
                 'required' => true,
-                'empty_value' => null,
+                'placeholder' => null,
             ])
-            ->add('currencies', 'sylius_currency_choice', [
+            ->add('currencies', ResourceChoiceType::class, [
+                'resource' => 'sylius.currency',
                 'label' => 'sylius.form.channel.currencies',
                 'required' => true,
                 'multiple' => true,
             ])
-            ->add('defaultTaxZone', 'sylius_zone_choice', [
+            ->add('defaultTaxZone', ResourceChoiceType::class, [
+                'resource' => 'sylius.zone',
                 'required' => false,
                 'label' => 'sylius.form.channel.tax_zone_default',
             ])
-            ->add('taxCalculationStrategy', 'sylius_tax_calculation_strategy_choice', [
+            ->add('taxCalculationStrategy', TaxCalculationStrategyChoiceType::class, [
                 'label' => 'sylius.form.channel.tax_calculation_strategy',
             ])
-            ->add('themeName', 'sylius_theme_name_choice', [
+            ->add('themeName', ThemeNameChoiceType::class, [
                 'label' => 'sylius.form.channel.theme',
                 'required' => false,
                 'empty_data' => null,
-                'empty_value' => 'sylius.ui.no_theme',
+                'placeholder' => 'sylius.ui.no_theme',
             ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return ChannelType::class;
     }
 }

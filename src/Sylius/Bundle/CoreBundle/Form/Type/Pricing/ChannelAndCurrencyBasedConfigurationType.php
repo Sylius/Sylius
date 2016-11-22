@@ -81,7 +81,7 @@ final class ChannelAndCurrencyBasedConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_price_calculator_channel_and_currency_based';
     }

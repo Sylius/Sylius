@@ -48,7 +48,7 @@ class UserRequestPasswordResetType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_user_request_password_reset';
     }

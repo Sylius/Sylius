@@ -13,9 +13,15 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.form.type.currency" class="Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType">
+            <argument>%sylius.model.currency.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.type.currency_code_choice" class="Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyCodeChoiceType">
             <argument type="service" id="sylius.repository.currency" />
-            <tag name="form.type" alias="sylius_currency_code_choice" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.context.currency" class="Sylius\Component\Currency\Context\ImmutableCurrencyContext">

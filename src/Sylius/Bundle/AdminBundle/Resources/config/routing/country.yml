@@ -2,6 +2,7 @@ sylius_admin_country:
     resource: |
         alias: sylius.country
         section: admin
+        form: Sylius\Bundle\AddressingBundle\Form\Type\CountryType
         templates: SyliusAdminBundle:Crud
         except: ['show', 'delete']
         redirect: update

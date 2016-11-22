@@ -23,8 +23,6 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Product\Factory\ProductFactory;
 use Sylius\Component\Product\Factory\ProductVariantFactory;
@@ -105,8 +103,6 @@ final class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ProductType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('generate_variants')->defaultValue(ProductGenerateVariantsType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('from_identifier')->defaultValue(ResourceFromIdentifierType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -177,7 +173,6 @@ final class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ProductVariantType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('generation')->defaultValue(ProductVariantGenerationType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('from_identifier')->defaultValue(ResourceFromIdentifierType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -186,16 +181,6 @@ final class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                            ->cannotBeEmpty()
-                                        ->end()
-                                        ->arrayNode('from_identifier')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                            ->cannotBeEmpty()
-                                        ->end()
-                                        ->arrayNode('generation')
                                             ->prototype('scalar')->end()
                                             ->defaultValue(['sylius'])
                                             ->cannotBeEmpty()
@@ -220,7 +205,6 @@ final class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ProductOptionType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -378,7 +362,6 @@ final class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ProductAssociationTypeType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

@@ -77,7 +77,6 @@ final class SyliusAttributeExtension extends AbstractResourceExtension
                 }
 
                 $formDefinition = $container->getDefinition(sprintf('sylius.form.type.%s_%s', $subjectName, $resourceName));
-                $formDefinition->addArgument($subjectName);
 
                 if (isset($resourceConfig['translation'])) {
                     $formTranslationDefinition = $container

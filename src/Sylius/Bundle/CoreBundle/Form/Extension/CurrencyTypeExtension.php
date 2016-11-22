@@ -9,10 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType as BaseCurrencyType;
+use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType;
 use Sylius\Component\Currency\Model\CurrencyInterface;
+use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -20,7 +24,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CurrencyType extends BaseCurrencyType
+class CurrencyTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var string
@@ -28,14 +32,10 @@ class CurrencyType extends BaseCurrencyType
     private $baseCurrency;
 
     /**
-     * {@inheritdoc}
-     *
      * @param string $baseCurrency
      */
-    public function __construct($dataClass, array $validationGroups = [], $baseCurrency)
+    public function __construct($baseCurrency)
     {
-        parent::__construct($dataClass, $validationGroups);
-
         $this->baseCurrency = $baseCurrency;
     }
 
@@ -44,8 +44,6 @@ class CurrencyType extends BaseCurrencyType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             /** @var CurrencyInterface $currency */
             $currency = $event->getData();
@@ -56,11 +54,11 @@ class CurrencyType extends BaseCurrencyType
             $form = $event->getForm();
 
             $form
-                ->add('enabled', 'checkbox', [
+                ->add('enabled', CheckboxType::class, [
                     'label' => 'sylius.form.locale.enabled',
                     'disabled' => true,
                 ])
-                ->add('exchangeRate', 'number', [
+                ->add('exchangeRate', NumberType::class, [
                     'label' => 'sylius.form.currency.exchange_rate',
                     'disabled' => true,
                 ])
@@ -71,8 +69,9 @@ class CurrencyType extends BaseCurrencyType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getExtendedType()
     {
-        return 'sylius_currency';
+        return CurrencyType::class;
     }
+
 }

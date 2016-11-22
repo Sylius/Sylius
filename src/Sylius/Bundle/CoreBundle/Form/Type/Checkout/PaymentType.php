@@ -33,7 +33,7 @@ class PaymentType extends AbstractType
     {
         $this->dataClass = $dataClass;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -53,7 +53,7 @@ class PaymentType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_checkout_payment';
     }

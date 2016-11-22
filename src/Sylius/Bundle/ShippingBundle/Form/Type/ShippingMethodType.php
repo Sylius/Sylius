@@ -13,11 +13,15 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -70,21 +74,22 @@ class ShippingMethodType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new BuildShippingMethodFormSubscriber($this->calculatorRegistry, $builder->getFormFactory(), $this->formRegistry))
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('translations', 'sylius_translations', [
-                'type' => 'sylius_shipping_method_translation',
+            ->add('translations', ResourceTranslationsType::class, [
+                'entry_type' => 'sylius_shipping_method_translation',
                 'label' => 'sylius.form.shipping_method.translations',
             ])
             ->add('position', IntegerType::class, [
                 'required' => false,
                 'label' => 'sylius.form.shipping_method.position',
             ])
-            ->add('category', 'sylius_shipping_category_choice', [
+            ->add('category', ResourceChoiceType::class, [
+                'resource' => 'sylius.shipping_category',
                 'required' => false,
-                'empty_value' => 'sylius.ui.no_requirement',
+                'placeholder' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.shipping_method.category',
             ])
-            ->add('categoryRequirement', 'choice', [
-                'choices' => ShippingMethod::getCategoryRequirementLabels(),
+            ->add('categoryRequirement', ChoiceType::class, [
+                'choices' => array_flip(ShippingMethod::getCategoryRequirementLabels()),
                 'multiple' => false,
                 'expanded' => true,
                 'label' => 'sylius.form.shipping_method.category_requirement',
@@ -92,7 +97,7 @@ class ShippingMethodType extends AbstractResourceType
             ->add('calculator', 'sylius_shipping_calculator_choice', [
                 'label' => 'sylius.form.shipping_method.calculator',
             ])
-            ->add('enabled', 'checkbox', [
+            ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.locale.enabled',
             ])
         ;
@@ -137,7 +142,7 @@ class ShippingMethodType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_shipping_method';
     }

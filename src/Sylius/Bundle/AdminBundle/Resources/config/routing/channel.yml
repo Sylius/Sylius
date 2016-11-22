@@ -2,6 +2,7 @@ sylius_admin_channel:
     resource: |
         alias: sylius.channel
         section: admin
+        form: Sylius\Bundle\ChannelBundle\Form\Type\ChannelType
         templates: SyliusAdminBundle:Crud
         except: ['show']
         redirect: update

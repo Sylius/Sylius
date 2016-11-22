@@ -13,6 +13,7 @@ namespace Sylius\Bundle\MoneyBundle\Form\Type;
 
 use Sylius\Bundle\MoneyBundle\Form\DataTransformer\SyliusMoneyTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType as SymfonyMoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -45,7 +46,7 @@ class MoneyType extends AbstractType
         $builder
             ->resetViewTransformers()
             ->addViewTransformer(new SyliusMoneyTransformer(
-                $options['precision'],
+                $options['scale'],
                 $options['grouping'],
                 null,
                 $options['divisor']
@@ -66,7 +67,7 @@ class MoneyType extends AbstractType
      */
     public function getParent()
     {
-        return 'money';
+        return SymfonyMoneyType::class;
     }
 
     /**
@@ -85,7 +86,7 @@ class MoneyType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_money';
     }

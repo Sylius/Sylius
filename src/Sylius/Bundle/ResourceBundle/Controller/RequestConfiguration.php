@@ -126,7 +126,7 @@ class RequestConfiguration
      */
     public function getFormType()
     {
-        $form = $this->parameters->get('form', sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName()));
+        $form = $this->parameters->get('form');
 
         if (is_array($form) && array_key_exists('type', $form)) {
             return $form['type'];
@@ -140,7 +140,7 @@ class RequestConfiguration
      */
     public function getFormOptions()
     {
-        $form = $this->parameters->get('form', sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName()));
+        $form = $this->parameters->get('form');
 
         if (is_array($form) && array_key_exists('options', $form)) {
             return $form['options'];
@@ -577,7 +577,9 @@ class RequestConfiguration
      */
     public function getStateMachineGraph()
     {
-        return $this->parameters->get('state_machine[graph]', null, true);
+        $stateMachineConfiguration = $this->parameters->get('state_machine');
+
+        return isset($stateMachineConfiguration['graph']) ? $stateMachineConfiguration['graph'] : null;
     }
 
     /**
@@ -585,7 +587,9 @@ class RequestConfiguration
      */
     public function getStateMachineTransition()
     {
-        return $this->parameters->get('state_machine[transition]', null, true);
+        $stateMachineConfiguration = $this->parameters->get('state_machine');
+
+        return isset($stateMachineConfiguration['transition']) ? $stateMachineConfiguration['transition'] : null;
     }
 
     /**

@@ -46,9 +46,9 @@ class ShipmentType extends AbstractType
                 $shipment = $event->getData();
 
                 $form->add('method', 'sylius_shipping_method_choice', [
-                    'required' => true,
-                    'label' => 'sylius.form.checkout.shipping_method',
                     'subject' => $shipment,
+                    'label' => 'sylius.form.checkout.shipping_method',
+                    'required' => true,
                     'expanded' => true,
                 ]);
             });
@@ -69,7 +69,7 @@ class ShipmentType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_checkout_shipment';
     }

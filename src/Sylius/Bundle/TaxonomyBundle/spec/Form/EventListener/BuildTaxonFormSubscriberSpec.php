@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\TaxonomyBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -65,12 +66,12 @@ final class BuildTaxonFormSubscriberSpec extends ObjectBehavior
         $taxon->getParent()->willReturn($parent);
 
         $factory
-            ->createNamed('parent', 'sylius_taxon_choice', $parent,
+            ->createNamed('parent', TaxonChoiceType::class, $parent,
                 [
                     'filter' => null,
                     'required' => false,
                     'label' => 'sylius.form.taxon.parent',
-                    'empty_value' => '---',
+                    'placeholder' => '---',
                     'auto_initialize' => false,
                 ]
             )

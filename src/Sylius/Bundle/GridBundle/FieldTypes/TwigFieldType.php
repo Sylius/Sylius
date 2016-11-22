@@ -59,21 +59,8 @@ final class TwigFieldType implements FieldTypeInterface
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefined('vars');
-
-        $resolver->setRequired([
-            'template'
-        ]);
-        $resolver->setAllowedTypes([
-            'template' => ['string'],
-            'vars' => ['array'],
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'twig';
+        $resolver->setRequired('template');
+        $resolver->setAllowedTypes('template', ['string']);
+        $resolver->setAllowedTypes('vars', ['array']);
     }
 }

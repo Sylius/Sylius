@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Payment;
 
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType as BasePaymentMethodType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,7 +28,8 @@ class PaymentMethodType extends BasePaymentMethodType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('channels', 'sylius_channel_choice', [
+            ->add('channels', ResourceChoiceType::class, [
+                'resource' => 'sylius.channel',
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'sylius.form.payment_method.channels',

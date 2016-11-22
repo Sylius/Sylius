@@ -12,8 +12,14 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddProductOnProductTaxonFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
 use Sylius\Component\Core\Model\Product;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -31,22 +37,25 @@ class ProductType extends BaseProductType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('channels', 'sylius_channel_choice', [
+            ->add('channels', ResourceChoiceType::class, [
+                'resource' => 'sylius.channel',
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'sylius.form.product.channels',
             ])
-            ->add('mainTaxon', 'sylius_taxon_to_hidden_identifier')
-            ->add('productTaxons', 'sylius_product_taxon_choice', [
+            ->add('mainTaxon', ResourceChoiceType::class, [
+                'resource' => 'sylius.taxon',
+            ])
+            ->add('productTaxons', ProductTaxonChoiceType::class, [
                 'label' => 'sylius.form.product.taxons',
                 'multiple' => true,
             ])
-            ->add('variantSelectionMethod', 'choice', [
+            ->add('variantSelectionMethod', ChoiceType::class, [
                 'label' => 'sylius.form.product.variant_selection_method',
-                'choices' => Product::getVariantSelectionMethodLabels(),
+                'choices' => array_flip(Product::getVariantSelectionMethodLabels()),
             ])
-            ->add('images', 'collection', [
-                'type' => 'sylius_product_image',
+            ->add('images', CollectionType::class, [
+                'entry_type' => ProductImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

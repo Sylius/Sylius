@@ -11,9 +11,14 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
+use Sylius\Bundle\PricingBundle\Form\Type\CalculatorChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormRegistryInterface;
@@ -57,38 +62,39 @@ class ProductVariantType extends BaseProductVariantType
             ->add('price', 'sylius_money', [
                 'label' => 'sylius.form.variant.price',
             ])
-            ->add('tracked', 'checkbox', [
+            ->add('tracked', CheckboxType::class, [
                 'label' => 'sylius.form.variant.tracked',
             ])
-            ->add('onHand', 'integer', [
+            ->add('onHand', IntegerType::class, [
                 'label' => 'sylius.form.variant.on_hand',
             ])
-            ->add('width', 'number', [
+            ->add('width', NumberType::class, [
                 'required' => false,
                 'label' => 'sylius.form.variant.width',
                 'invalid_message' => 'sylius.product_variant.width.invalid',
             ])
-            ->add('height', 'number', [
+            ->add('height', NumberType::class, [
                 'required' => false,
                 'label' => 'sylius.form.variant.height',
                 'invalid_message' => 'sylius.product_variant.height.invalid',
             ])
-            ->add('depth', 'number', [
+            ->add('depth', NumberType::class, [
                 'required' => false,
                 'label' => 'sylius.form.variant.depth',
                 'invalid_message' => 'sylius.product_variant.depth.invalid',
             ])
-            ->add('weight', 'number', [
+            ->add('weight', NumberType::class, [
                 'required' => false,
                 'label' => 'sylius.form.variant.weight',
                 'invalid_message' => 'sylius.product_variant.weight.invalid',
             ])
-            ->add('taxCategory', 'sylius_tax_category_choice', [
+            ->add('taxCategory', ResourceChoiceType::class, [
+                'resource' => 'sylius.tax_category',
                 'required' => false,
-                'empty_value' => '---',
+                'placeholder' => '---',
                 'label' => 'sylius.form.product_variant.tax_category',
             ])
-            ->add('pricingCalculator', 'sylius_price_calculator_choice', [
+            ->add('pricingCalculator', CalculatorChoiceType::class, [
                 'label' => 'sylius.form.shipping_method.calculator',
             ])
         ;

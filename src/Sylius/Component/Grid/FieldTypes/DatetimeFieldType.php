@@ -54,19 +54,7 @@ final class DatetimeFieldType implements FieldTypeInterface
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'format' => 'Y:m:d H:i:s'
-        ]);
-        $resolver->setAllowedTypes([
-            'format' => 'string'
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'datetime';
+        $resolver->setDefault('format', 'Y:m:d H:i:s');
+        $resolver->setAllowedTypes('format', 'string');
     }
 }

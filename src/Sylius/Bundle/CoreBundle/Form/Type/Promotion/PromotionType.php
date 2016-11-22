@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion;
 
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType as BasePromotionType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,7 +28,8 @@ class PromotionType extends BasePromotionType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('channels', 'sylius_channel_choice', [
+            ->add('channels', ResourceChoiceType::class, [
+                'resource' => 'sylius.channel',
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'sylius.form.promotion.channels',

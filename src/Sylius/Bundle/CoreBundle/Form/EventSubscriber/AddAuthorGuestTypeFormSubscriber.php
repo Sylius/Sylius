@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Validator\Constraints\Valid;
 use Webmozart\Assert\Assert;
 
 /**
@@ -45,7 +47,9 @@ final class AddAuthorGuestTypeFormSubscriber implements EventSubscriberInterface
         Assert::isInstanceOf($review, ReviewInterface::class);
 
         if (null === $author && null === $review->getAuthor()) {
-            $form->add('author', 'sylius_customer_guest');
+            $form->add('author', CustomerGuestType::class, [
+                'constraints' => [new Valid()],
+            ]);
         }
     }
 }

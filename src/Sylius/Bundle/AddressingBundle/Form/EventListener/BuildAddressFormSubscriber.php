@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -22,6 +23,8 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
+ * @internal
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jan Góralski <jan.goralski@lakion.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -134,7 +137,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
         return
             $this
                 ->formFactory
-                ->createNamed('provinceCode', 'sylius_province_code_choice', $provinceCode, [
+                ->createNamed('provinceCode', ProvinceCodeChoiceType::class, $provinceCode, [
                     'country' => $country,
                     'auto_initialize' => false,
                 ])

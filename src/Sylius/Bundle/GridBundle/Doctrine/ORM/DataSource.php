@@ -71,7 +71,7 @@ final class DataSource implements DataSourceInterface
     public function getData(Parameters $parameters)
     {
         // Use output walkers option in DoctrineORMAdapter should be false as it affects performance greatly. (see #3775)
-        $paginator = new Pagerfanta(new DoctrineORMAdapter($this->queryBuilder, true, false));
+        $paginator = new Pagerfanta(new DoctrineORMAdapter($this->queryBuilder, false, false));
         $paginator->setNormalizeOutOfRangePages(true);
         $paginator->setCurrentPage($parameters->get('page', 1));
 

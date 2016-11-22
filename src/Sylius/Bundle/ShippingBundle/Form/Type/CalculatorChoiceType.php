@@ -12,17 +12,18 @@
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CalculatorChoiceType extends AbstractType
+final class CalculatorChoiceType extends AbstractType
 {
     /**
      * @var array
      */
-    protected $calculators;
+    private $calculators;
 
     /**
      * @param array $calculators
@@ -39,7 +40,7 @@ class CalculatorChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choices' => $this->calculators,
+                'choices' => array_flip($this->calculators),
             ])
         ;
     }
@@ -49,13 +50,13 @@ class CalculatorChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_shipping_calculator_choice';
     }

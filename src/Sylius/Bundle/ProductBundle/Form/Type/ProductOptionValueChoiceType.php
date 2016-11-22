@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ProductBundle\Form\Type;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -28,28 +29,17 @@ class ProductOptionValueChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = function (Options $options) {
-            return new ObjectChoiceList(
-                $options['option']->getValues(),
-                'value',
-                [],
-                null,
-                'id',
-                PropertyAccess::createPropertyAccessor()
-            );
-        };
-
         $resolver
             ->setDefaults([
                 'choice_translation_domain' => false,
-                'choice_list' => $choiceList,
+                'choices' => function (Options $options) {
+                    return $options['option']->getValues();
+                },
+                'choice_label' => 'value',
+                'choice_value' => 'id',
             ])
-            ->setRequired([
-                'option',
-            ])
-            ->addAllowedTypes([
-                'option' => ProductOptionInterface::class,
-            ])
+            ->setRequired('option')
+            ->addAllowedTypes('option', ProductOptionInterface::class)
         ;
     }
 
@@ -58,13 +48,13 @@ class ProductOptionValueChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_product_option_value_choice';
     }

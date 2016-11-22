@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -43,8 +44,9 @@ class AddBaseCurrencySubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $form->add(
             'baseCurrency',
-            'sylius_currency_choice',
+            ResourceChoiceType::class,
             [
+                'resource' => 'sylius.currency',
                 'label' => 'sylius.form.channel.currency_base',
                 'required' => true,
                 'disabled' => $disabled,

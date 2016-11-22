@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Form\EventSubscriber;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
@@ -36,7 +37,7 @@ final class AddCodeFormSubscriber implements EventSubscriberInterface
      * @param string $type
      * @param string $label
      */
-    public function __construct($type = 'text', $label = 'sylius.ui.code')
+    public function __construct($type = TextType::class, $label = 'sylius.ui.code')
     {
         $this->type = $type;
         $this->label = $label;

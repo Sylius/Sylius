@@ -27,7 +27,6 @@ class CustomerDefaultAddressType extends AbstractType
     {
         $builder
             ->add('defaultAddress', 'sylius_address_choice', [
-                'choices_as_values' => true,
                 'customer' => $options['customer'],
                 'choice_value' => 'id',
             ])
@@ -45,7 +44,7 @@ class CustomerDefaultAddressType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_customer_default_address';
     }

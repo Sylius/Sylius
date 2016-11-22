@@ -37,7 +37,7 @@ class OrderItemType extends BaseOrderItemType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_api_order_item';
     }
