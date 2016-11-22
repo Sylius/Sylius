@@ -5,7 +5,8 @@ Feature: Adding a new promotion with rule
     I want to add a new promotion with rule to the registry
 
     Background:
-        Given the store operates on a single channel in "United States"
+        Given the store operates on a single channel in the "United States" named "Web Channel"
+        And the store operates on another channel named "Mobile Channel"
         And the store classifies its products as "T-Shirts" and "Mugs"
         And I am logged in as an administrator
 
@@ -39,3 +40,13 @@ Feature: Adding a new promotion with rule
         And I add it
         Then I should be notified that it has been successfully created
         And the "PHP T-Shirt promotion" promotion should appear in the registry
+
+    @todo @javascript
+    Scenario: Adding a new promotion with taxon rule
+        Given I want to create a new promotion
+        When I specify its code as "HOLIDAY_SALE"
+        And I name it "Holiday sale"
+        And I add the "Item total" rule configured with "$80.00" for "Web Channel" and "€100.00" for "Mobile Channel"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the "Holiday sale" promotion should appear in the registry
