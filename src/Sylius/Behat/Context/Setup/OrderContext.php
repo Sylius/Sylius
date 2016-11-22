@@ -253,21 +253,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given the customer has chosen to order in the :currencyCode currency
-     * @Given I have chosen to order in the :currencyCode currency
-     */
-    public function theCustomerChoseTheCurrency($currencyCode)
-    {
-        $this->currencyStorage->set($this->sharedStorage->get('channel'), $currencyCode);
-
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-        $order->setCurrencyCode($currencyCode);
-
-        $this->objectManager->flush();
-    }
-
-    /**
      * @Given /^the customer chose ("[^"]+" shipping method) with ("[^"]+" payment)$/
      * @Given /^I chose ("[^"]+" shipping method) with ("[^"]+" payment)$/
      */
