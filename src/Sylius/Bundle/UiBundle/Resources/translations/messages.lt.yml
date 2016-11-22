@@ -142,9 +142,7 @@ sylius:
         create_product: Sukurti produktą
         create_product_attribute: Sukurti produkto atributą
         create_promotion: Sukurti akciją
-        create_redirect_route: Sukurti nukreipimą
         create_report: Sukurti ataskaitą
-        create_route: Sukurti maršrutą
         create_shipping_category: Sukurti pristatymo kategoriją
         create_shipping_method: Sukurti pristatymo būdą
         create_simple_block: Sukurti paprastą bloką
@@ -163,8 +161,6 @@ sylius:
         creating_menu: Meniu kūrimas
         creating_menu_node: Meniu punkto kūrimas
         creating_new_page: Puslaio kūrimas
-        creating_redirect_route: Nukreipimo kūrimas
-        creating_route: Maršruto kūrimas
         creation_time: Sukūrimo laikas
         currencies: Valiutos
         currency: Valiuta
@@ -179,7 +175,6 @@ sylius:
         dashboard: Skydelis
         date: Data
         default_billing_address: Numatytasis atsiskaitymo adresas
-        default_currency: Numatytoji valiuta
         default_locale: Numatytoji lokalė
         default_shipping_address: Numatytasis pristatymo adresas
         delete: Šalinti
@@ -208,9 +203,7 @@ sylius:
         editing_permission: Teisių redagavimas
         editing_product: Produkto redagavimas
         editing_promotion: Akcijos redagavimas
-        editing_redirect_route: Nukreipimo redagavimas
         editing_role: Rolės redagavimas
-        editing_route: Maršruto redagavimas
         editing_shipment: Pristatymo redagavimas
         editing_shipping_category: Pristatymo kategorijos redagavimas
         editing_shipping_method: Pristatymo būdo redagavimas
@@ -406,7 +399,6 @@ sylius:
         ready: Paruošta
         recent_orders: Naujausi užsakymai
         recent_users: Naujausi vartotojai
-        redirect_routes: Nukreipimo maršrutai
         refunded: Grąžinta
         register: Užsiregistruoti
         register_button: Užsiregistruoti
@@ -422,7 +414,6 @@ sylius:
         returned: Grąžintas
         revert: Atstatyti
         roles: Rolės
-        routes: Maršrutai
         rules: Taisyklės
         sales: Pardavimai
         sales_this_month: Pardavimai

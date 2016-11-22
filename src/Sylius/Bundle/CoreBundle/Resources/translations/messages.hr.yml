@@ -25,7 +25,6 @@ sylius:
         channel:
             taxonomies: Glavne kategorije
             locales: Lokaliteti
-            currency_default: Zadana valuta
             shipping_methods: Načini slanja
             payment_methods: Načini plaćanja
             tax_zone_default: Zadana porezna zona
@@ -104,10 +103,10 @@ sylius:
         product_association_type:
             name: Naziv grupe
         promotion_rule:
-            contains_taxon:
-                count: Brojač
             total_of_items_from_taxon:
                 amount: Iznos
+        payment_method:
+            channels: Kanali
     installer:
         extensions:
             header: Ekstenzije

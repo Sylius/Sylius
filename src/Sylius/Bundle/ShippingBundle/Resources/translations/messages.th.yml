@@ -46,6 +46,7 @@ sylius:
             calculator: การคำนวณราคา
             category: หมวดหมู่
             category_requirement: ความต้องการสำหรับหมวดหมู่
+            channels: ช่องทางจำหน่าย
             configuration: การกำหนดค่า (Configuration)
             description: คำอธิบาย
             enabled: เปิดใช้งานแล้ว

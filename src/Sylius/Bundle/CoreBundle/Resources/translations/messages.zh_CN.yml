@@ -26,7 +26,7 @@ sylius:
             taxonomies: 分类
             locale_default: 默认区域
             locales: 区域设置
-            currency_default: 默认货币：
+            currency_base: 基础货币
             currencies: 货币
             shipping_methods: 发货方式
             payment_methods: 支付方式
@@ -102,7 +102,6 @@ sylius:
             height: 高度
             on_hand: 当前货架
             price: 价格
-            original_price: 原价
             sku: SKU
             weight: 重量
             width: 宽度
@@ -118,11 +117,10 @@ sylius:
         product_association_type:
             name: 名称
         promotion_rule:
-            contains_taxon:
-                taxon: 分类
-                count: 计数
             total_of_items_from_taxon:
                 taxon: 分类
+        payment_method:
+            channels: 频道
     installer:
         extensions:
             header: 扩展组件

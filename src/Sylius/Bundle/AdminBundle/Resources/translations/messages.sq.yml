@@ -33,5 +33,3 @@ sylius:
                 sales:
                     header: Shitjet
                     orders: Porositë
-                content:
-                    routes: Rrugët

@@ -19,3 +19,5 @@ sylius:
         failed: การชำระเงินถูกปฏิเสธ
         unknown: ไม่ทราบข้อผิดพลาดในการชำระเงิน
         out_of_stock: มี %quantity% %name% เท่านั้น
+    product_variant:
+        generation_completed: สินค้าย่อยถูกสร้างเรียบร้อยแล้ว

@@ -23,7 +23,6 @@ sylius:
         channel:
             taxonomies: Taksonomier
             locales: Landekoder
-            currency_default: Standard valuta
             shipping_methods: Fragtmetoder
             payment_methods: Betalingsmetoder
             tax_zone_default: Standard moms zone
@@ -97,9 +96,6 @@ sylius:
             email: Email
         product_association_type:
             name: Navn
-        promotion_rule:
-            contains_taxon:
-                count: Antal
     installer:
         extensions:
             apc: APC

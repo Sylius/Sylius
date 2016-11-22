@@ -37,6 +37,7 @@ sylius:
             calculator: Kalkulačka
             category: Kategorie
             category_requirement: Požadavek kategorie
+            channels: Kanály
             configuration: Konfigurace
             description: Popis
             enabled: Povoleno

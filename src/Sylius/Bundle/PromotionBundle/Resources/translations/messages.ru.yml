@@ -12,25 +12,33 @@ sylius:
             ends_at: Конец
             exclusive: Эксклюзив
             name: Название
+            priority: Приоритет
             rules: Правила
             starts_at: Старт
             usage_limit: Предел использования
         promotion_action:
-            fixed_discount_configuration:
-                amount: Сумма
+            percentage_discount_configuration:
+                percentage: Процент
             type: Тип
         promotion_coupon:
+            expires_at: Истекает
             usage_limit: Предел использования
         promotion_coupon_generator_instruction:
             amount: Сумма
+            code_length: Длина кода
+            expires_at: Истекает
             usage_limit: Предел использования
         promotion_rule:
             cart_quantity_configuration:
                 count: Кол-во
+                equal: Равно
             contains_product_configuration:
+                exclude: Исключить
                 variants: Товары
             item_total_configuration:
                 amount: Сумма
             shipping_country_configuration:
                 country: Страна
+            taxonomy_configuration:
+                exclude: Исключить
             type: Тип

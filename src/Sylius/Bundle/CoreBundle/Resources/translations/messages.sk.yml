@@ -26,7 +26,7 @@ sylius:
             taxonomies: Triedenia
             locale_default: Predvolený jazyk
             locales: Jazyky
-            currency_default: Predvolená mena
+            currency_base: Základná mena
             currencies: Meny
             shipping_methods: Spôsoby doručenia
             payment_methods: Spôsoby platby
@@ -103,7 +103,6 @@ sylius:
             height: Výška
             on_hand: Položiek na sklade
             price: Cena
-            original_price: Pôvodná cena
             sku: Skladový kód (SKU)
             weight: Hmotnosť
             width: Šírka
@@ -119,11 +118,10 @@ sylius:
         product_association_type:
             name: Názov
         promotion_rule:
-            contains_taxon:
-                taxon: Kategória
-                count: Počet
             total_of_items_from_taxon:
                 taxon: Kategória
+        payment_method:
+            channels: Kanály
     installer:
         extensions:
             header: Rozšírenia

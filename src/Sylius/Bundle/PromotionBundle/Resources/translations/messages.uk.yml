@@ -12,6 +12,7 @@ sylius:
             ends_at: Кінець дії
             exclusive: Ексклюзивно
             name: Назва
+            priority: Пріоритет
             rules: Правила
             starts_at: Початок дії
             usage_limit: Обмеження використання

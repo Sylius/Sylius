@@ -59,7 +59,6 @@ sylius:
         current_stock: 在庫
         dashboard: ダッシュボード
         default_billing_address: sylius.account.address.default.billing
-        default_currency: デフォルトの通貨
         default_shipping_address: sylius.account.address.default.shipping
         delete: sylius.account.address.action.delete
         delete_image: 画像を削除

@@ -29,7 +29,7 @@ sylius:
             taxonomies: رده بندی
             locale_default: زبان پیش فرض
             locales: زبان ها
-            currency_default: واحد پولی پیش‌فرض
+            currency_base: ارز پایه
             currencies: واحدهای پول
             shipping_methods: شیوه های ارسال
             payment_methods: روش‌های پرداخت
@@ -106,7 +106,6 @@ sylius:
             height: طول
             on_hand: موجودی
             price: قیمت
-            original_price: قيمت ابتدایی
             sku: کد محصول
             weight: وزن
             width: عرض
@@ -121,17 +120,21 @@ sylius:
             type: نوع ارتباط
         product_association_type:
             name: نام
-        promotion_rule:
-            contains_taxon:
-                taxon: تاکسون
-                count: تعداد
+        promotion_filter:
+            product:
+                products: محصولات
             taxon:
+                taxons: دسته بندی ها
+        promotion_rule:
+            has_taxon:
                 taxons: دسته بندی ها
             product:
                 products: محصولات
             total_of_items_from_taxon:
                 taxon: تاکسون
                 amount: مقدار
+        payment_method:
+            channels: کانال های فروش
     installer:
         extensions:
             header: افزونه ها

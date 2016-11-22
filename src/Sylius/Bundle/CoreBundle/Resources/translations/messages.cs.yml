@@ -26,7 +26,6 @@ sylius:
             taxonomies: Taxonomie
             locale_default: Výchozí Jazyk
             locales: Lokalizace
-            currency_default: Výchozí měna
             currencies: Měny
             shipping_methods: Způsoby dopravy
             payment_methods: Způsoby platby
@@ -102,7 +101,6 @@ sylius:
             height: Výška
             on_hand: Aktuálně skladem
             price: Cena
-            original_price: Původní cena
             sku: SKU
             weight: Hmotnost
             width: Šířka
@@ -117,9 +115,8 @@ sylius:
             type: Typy asociace
         product_association_type:
             name: Jméno
-        promotion_rule:
-            contains_taxon:
-                count: Počet
+        payment_method:
+            channels: Kanály
     installer:
         extensions:
             header: rozšíření

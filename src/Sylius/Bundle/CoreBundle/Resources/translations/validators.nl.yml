@@ -3,8 +3,6 @@
 
 sylius:
     channel:
-        default_currency:
-            not_blank: Voer a.u.b. een standaard valuta in.
         default_locale:
             not_blank: Voer a.u.b. een standaard taal in.
     checkout:

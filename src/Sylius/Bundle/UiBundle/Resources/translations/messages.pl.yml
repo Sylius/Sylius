@@ -152,9 +152,7 @@ sylius:
         create_product_association_type: Utwórz typ powiązania produktu
         create_product_attribute: Utwórz atrybut produktu
         create_promotion: Dodaj promocję
-        create_redirect_route: Utwórz przekierowanie
         create_report: Utwórz raport
-        create_route: Utwórz trasę
         create_shipping_category: Dodaj kategorię wysyłki
         create_shipping_method: Dodaj metodę wysyłki
         create_simple_block: Tworzenie zwykłego bloku
@@ -174,8 +172,6 @@ sylius:
         creating_menu: Tworzenie menu
         creating_menu_node: Utwórz węzeł menu
         creating_new_page: Tworzenie nowej strony
-        creating_redirect_route: Tworzenie przekierowania
-        creating_route: Tworzenie trasy
         creation_date: Data utworzenia
         creation_time: Data zamówienia
         currencies: Waluty
@@ -203,7 +199,6 @@ sylius:
         data: Dane
         date: Data
         default_billing_address: Domyślny adres rozliczeniowy
-        default_currency: Domyślna waluta
         default_locale: Domyślne ustawienia regionalne
         default_shipping_address: Domyślny adres wysyłkowy
         delete: Usuń
@@ -232,10 +227,8 @@ sylius:
         edit_promotion: Edytuj promocję
         edit_promotion_coupon: Edytuj kupon promocyjny
         edit_report: Edytuj raport
-        edit_route: Edytuj trasę
         edit_shipping_address: Edytuj adres wysyłki
         edit_shipping_method: Edytuj metodę wysyłki
-        edit_static_content: Edytuj zawartość statyczną
         edit_tax_category: Edytuj kategorię podatkową
         edit_tax_rate: Edytuj stawkę podatkową
         edit_taxon: Edytuj takson
@@ -260,9 +253,7 @@ sylius:
         editing_permission: Edycja uprawnienia
         editing_product: Edycja produktu
         editing_promotion: Edycja promocji
-        editing_redirect_route: Edycja przekierowania
         editing_role: Edycja roli
-        editing_route: Edycja trasy
         editing_shipment: Edytuj wysyłkę
         editing_shipping_category: Edycja kategorii wysyłki
         editing_shipping_method: Edycja metody wysyłki
@@ -431,10 +422,8 @@ sylius:
         new_promotion: Nowa promocja
         new_promotion_coupon: Nowy kupon promocyjny
         new_role: Nowa rola
-        new_route: Nowa trasa
         new_shipping_category: Nowa kategoria wysyłki
         new_shipping_method: Nowa metoda wysyłki
-        new_static_content: Nowa zawartość statyczna
         new_tax_category: Nowa kategoria podatkowa
         new_tax_rate: Nowa stawka podatkowa
         new_taxon: Nowa taksonomia
@@ -571,7 +560,6 @@ sylius:
         returns_policy: Polityka Zwrotów
         revert: Przywróć
         roles: Role
-        routes: Ścieżki
         rules: Reguły
         sales: Sprzedaż
         sales_this_month: Sprzedaż

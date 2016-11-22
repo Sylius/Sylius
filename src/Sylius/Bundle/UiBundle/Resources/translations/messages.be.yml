@@ -88,7 +88,6 @@ sylius:
         dashboard: Прыборная панэль
         data: Звесткі
         default_billing_address: Галоўны адрас для аплаты
-        default_currency: Галоўная валюта
         default_shipping_address: Галоўны адрас для дастаўкі
         delete: Выдаліць
         delete_image: Выдаліць выяву

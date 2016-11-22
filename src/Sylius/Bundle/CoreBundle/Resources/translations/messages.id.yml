@@ -18,7 +18,6 @@ sylius:
             name: Nama
             roles: Peran
         channel:
-            currency_default: Mata uang default
             tax_zone_default: Standar Zona Pajak
         image:
             code: Kode

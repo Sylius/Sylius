@@ -12,12 +12,11 @@ sylius:
             ends_at: Sona erdi
             exclusive: Özel
             name: Ad
+            priority: Öncelik
             rules: Kurallar
             starts_at: ''' Dan başlar'
             usage_limit: Kullanım sınırı
         promotion_action:
-            fixed_discount_configuration:
-                amount: Miktar
             type: Türü
         promotion_coupon:
             usage_limit: Kullanım sınırı

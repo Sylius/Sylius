@@ -87,7 +87,6 @@ sylius:
         create_payment_method: Luo maksutapa
         create_product: Luo tuote
         create_promotion: Luo kampanja
-        create_redirect_route: Luo uudelleenohjaus
         currency: Valuutta
         current_password: Nykyinen salasana
         customer: Asiakas
@@ -119,7 +118,6 @@ sylius:
         edit_promotion: Muokkaa kampanjaa
         edit_promotion_coupon: Muokkaa kampanjakuponkia
         edit_report: Muokkaa raporttia
-        edit_route: Muokkaa reittiä
         edit_shipping_address: Muokkaa toimitusosoitetta
         edit_shipping_method: Muokkaa toimitustapaa
         email: Sähköpostiosoite

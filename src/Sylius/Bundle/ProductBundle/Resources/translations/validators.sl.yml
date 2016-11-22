@@ -10,11 +10,6 @@ sylius:
             not_blank: Prosimo, vnesite ime izdelka.
             min_length: Ime izdelka mora biti dolgo vsaj 1 znak.|Ime izdelka mora biti dolgo vsaj {{ limit }} znakov.
             max_length: Ime izdelka ne sme biti daljše od 1 znaka.|Ime izdelka ne sme biti daljše od {{ limit }} znakov.
-    variant:
-        sku:
-            not_blank: Prosimo, vnesite SKU varianto.
-            unique: SKU variante mora biti edinstven.
-        combination: Varianta s tem naborom možnosti že obstaja.
     option:
         code:
             not_blank: Prosimo, vnesite kodo možnosti.

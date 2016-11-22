@@ -12,12 +12,14 @@ sylius:
             ends_at: สิ้นสุด
             exclusive: พิเศษ
             name: ชื่อ
+            priority: ระดับความสำคัญ
             rules: เงื่อนไข
             starts_at: เริ่มต้น
             usage_limit: ขีดจำกัดการใช้งาน
         promotion_action:
             fixed_discount_configuration:
-                amount: ยอดเงิน
+                amounts: ยอดเงิน
+                base_amount: จำนวนเงินต้น
             percentage_discount_configuration:
                 percentage: เปอร์เซ็นต์
             type: ชนิด

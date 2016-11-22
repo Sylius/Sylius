@@ -20,7 +20,6 @@ sylius:
             name: Ονομασία
             roles: Ρόλοι
         channel:
-            currency_default: Προεπιλεγμένο νόμισμα
             tax_zone_default: Προεπιλεγμένη φορολογική ζώνη
         image:
             code: Κώδικος
@@ -89,9 +88,6 @@ sylius:
             email: Ηλεκτρονικό ταχυδρομείο
         product_association_type:
             name: Ονομασία
-        promotion_rule:
-            contains_taxon:
-                count: Πλήθος
     installer:
         extensions:
             apc: APC

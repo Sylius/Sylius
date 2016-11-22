@@ -12,6 +12,7 @@ sylius:
             ends_at: Végződik
             exclusive: Exkluzív
             name: Név
+            priority: Fontosság
             rules: Szabályok
             starts_at: Kezdődik
             usage_limit: Felhasználhatóság korlátozása

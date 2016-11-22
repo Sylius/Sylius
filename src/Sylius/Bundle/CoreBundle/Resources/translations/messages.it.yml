@@ -28,7 +28,7 @@ sylius:
             taxonomies: Tassonomie
             locale_default: Locale predefinita
             locales: Localizzazioni
-            currency_default: Valuta predefinita
+            currency_base: Valuta base
             currencies: Monete
             shipping_methods: Metodi di spedizione
             payment_methods: Metodi di pagamento
@@ -104,7 +104,6 @@ sylius:
             height: Altezza
             on_hand: Disponibilità attuale
             price: Prezzo
-            original_price: Prezzo originale
             sku: SKU
             weight: Peso
             width: Larghezza
@@ -119,15 +118,17 @@ sylius:
             type: Tipi di associazione
         product_association_type:
             name: Nome
+        promotion_filter:
+            product:
+                products: Prodotti
         promotion_rule:
-            contains_taxon:
-                taxon: Tipologia
-                count: Conta
             product:
                 products: Prodotti
             total_of_items_from_taxon:
                 taxon: Tipologia
                 amount: Importo
+        payment_method:
+            channels: Canali
     installer:
         extensions:
             header: estensioni

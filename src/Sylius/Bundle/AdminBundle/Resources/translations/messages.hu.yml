@@ -33,6 +33,3 @@ sylius:
                 sales:
                     header: Értékesítés
                     orders: Rendelések
-                content:
-                    static_contents: Állandó tartalom
-                    routes: Útvonalak

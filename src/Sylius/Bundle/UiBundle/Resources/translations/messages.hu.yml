@@ -147,9 +147,7 @@ sylius:
         create_product_association_type: Termék kapcsolat típus létrehozása
         create_product_attribute: Termék attribútum létrehozása
         create_promotion: Promóció létrehozása
-        create_redirect_route: Átirányítási útvonal létrehozása
         create_report: Jelentés létrehozása
-        create_route: Útvonal létrehozása
         create_shipping_category: Szállítási kategória létrehozása
         create_shipping_method: Szállítási mód létrehozása
         create_simple_block: Egyszerű blokk létrehozása
@@ -169,8 +167,6 @@ sylius:
         creating_menu: Menü létrehozása
         creating_menu_node: Menü csomópont létrehozása
         creating_new_page: Új oldal létrehozása
-        creating_redirect_route: Átirányítási útvonal létrehozása
-        creating_route: Útvonal létrehozása
         creation_date: Létrehozás ideje
         creation_time: Létrehozás időpontja
         currencies: Pénznemek
@@ -198,7 +194,6 @@ sylius:
         data: Adatok
         date: Dátum
         default_billing_address: Alapértelmezett számlázási cím
-        default_currency: Alapértelmezett pénznem
         default_locale: Alapértelmezett nyelv
         default_shipping_address: Alapértelmezett szállítási cím
         delete: Törlés
@@ -228,9 +223,7 @@ sylius:
         edit_promotion: Promóció módosítása
         edit_promotion_coupon: Promóciós kupon módosítása
         edit_report: Jelentés módosítása
-        edit_route: Útvonal módosítása
         edit_shipping_method: Szállítási módszer módosítása
-        edit_static_content: Állandó tartalom szerkesztése
         edit_tax_category: Adó-kategória módosítása
         edit_tax_rate: Adókulcs módosítása
         edit_taxon: Taxon módosítása
@@ -255,10 +248,8 @@ sylius:
         editing_permission: Jogosultság módosítása
         editing_product: Termék szerkesztése
         editing_promotion: Promóció szerkesztése
-        editing_redirect_route: Átirányítás módosíŧása
         editing_review: Értékelés módosítása
         editing_role: Szerepkör módosítása
-        editing_route: Útvonal módosítása
         editing_shipment: Szállítás szerkesztése
         editing_shipping_category: Szállítási kategória szerkesztése
         editing_shipping_method: Szállítási mód szerkesztése
@@ -431,10 +422,8 @@ sylius:
         new_promotion_coupon: Új promóciós kupon
         new_review: Új értékelés
         new_role: Új szerepkör
-        new_route: Új útvonal
         new_shipping_category: Új szállítási kategória
         new_shipping_method: Új szállítási mód
-        new_static_content: Új állandó tartalom
         new_tax_category: Új adókategória
         new_tax_rate: Új adókulcs
         new_taxon: Új taxon
@@ -556,7 +545,6 @@ sylius:
         recent_customers: Legfrissebb vásárlók
         recent_orders: Legutóbbi rendelések
         recent_users: Legutóbbi felhasználók
-        redirect_routes: Átirányítás útvonalak
         refunded: Visszatérítve
         register: Regisztráció
         register_button: Regisztráció
@@ -584,7 +572,6 @@ sylius:
         review_details: Értékelés részletei
         reviews: Értékelések
         roles: Szerepek
-        routes: Útvonalak
         rules: Szabályok
         sales: Értékesítés
         sales_this_month: Értékesítés
@@ -637,7 +624,6 @@ sylius:
         starts_at: Kezdődik
         starts_with: Ezzel kezdődik
         state: Állapot
-        static_contents: Állandó tartalom
         status: Állapot
         street: Utca
         string_blocks: Szöveges blokkok
@@ -684,10 +670,8 @@ sylius:
         there_are_no_permissions_defined: Nincsenek jogosultságok meghatározva
         there_are_no_products_to_display: Nincsenek megjeleníthető termékek
         there_are_no_promotions_configured: Nincsenek beállított promóciók
-        there_are_no_redirect_routes_to_display: Nincs megjeleníthető átirányítási utvonal
         there_are_no_reports_created: Nincsenek létrehozott jelentések
         there_are_no_roles_defined: Nincsenek szerepkörök meghatározva
-        there_are_no_routes_to_display: Nincsenek megjeleníthető útvonalak
         there_are_no_shipments_to_display: Nincsenek megjeleníthető kiszállítások
         there_are_no_shipping_categories_configured: Nincsenek konfigurált szállítási kategóriák
         there_are_no_shipping_methods_configured: Nincsenek konfigurált szállítási módok

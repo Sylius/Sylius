@@ -5,6 +5,7 @@ sylius:
     menu:
         shop:
             account:
+                address_book: Livros de endereços
                 change_password: Alterar palavra-passe
                 dashboard: Painel de controle
                 header: A sua conta

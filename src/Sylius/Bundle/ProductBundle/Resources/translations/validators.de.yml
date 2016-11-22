@@ -15,11 +15,6 @@ sylius:
             max_length: Der Produktname darf nicht länger als 1 Zeichen sein.|Der Produktname darf nicht länger als {{ limit }} Zeichen sein.
         slug:
             not_blank: Bitte eine Produkt SEO-URL angeben.
-    variant:
-        sku:
-            not_blank: Bitte geben Sie die Bestandseinheit der Variante an.
-            unique: Die Bestandseinheit der Variante muss einzigartig sein.
-        combination: Die Variante mit den gewählten Einstellungen existiert schon.
     option:
         code:
             not_blank: Bitte geben Sie ein Kürzel für die Option an.

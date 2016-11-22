@@ -146,9 +146,7 @@ sylius:
         create_product_association_type: Creare il tipo di associazione di prodotto
         create_product_attribute: Creare l'attributo del prodotto
         create_promotion: Crea promozione
-        create_redirect_route: Creare rotta di reindirizzamento
         create_report: Creare rapporto
-        create_route: Crea una Rotta
         create_shipping_category: Crea una categoria di spedizione
         create_shipping_method: Crea un metodo di spedizione
         create_simple_block: Crea blocco semplice
@@ -168,8 +166,6 @@ sylius:
         creating_menu: Crea menu
         creating_menu_node: Crea node nel menu
         creating_new_page: Creazione di una nuova pagina
-        creating_redirect_route: Creazione rotta di reindirizzamento
-        creating_route: Creando una rotta
         creation_date: Data di creazione
         creation_time: Data di creazione
         currencies: Monete
@@ -197,7 +193,6 @@ sylius:
         data: Data
         date: Data
         default_billing_address: Indirizzo di fatturazione predefinito
-        default_currency: Valuta predefinita
         default_locale: Locale predefinita
         default_shipping_address: Indirizzo di spedizione predefinito
         delete: Cancella
@@ -227,9 +222,7 @@ sylius:
         edit_promotion: Modifica promozione
         edit_promotion_coupon: Modifica i coupon promozione
         edit_report: Modifica rapporto
-        edit_route: Modifica itinerario
         edit_shipping_method: Modifica metodo di spedizione
-        edit_static_content: Modifica contenuto statico
         edit_tax_category: Modificare la categoria fiscale
         edit_tax_rate: Modifica aliquota fiscale
         edit_taxon: Modificare la tipologia
@@ -254,10 +247,8 @@ sylius:
         editing_permission: Modifica permesso
         editing_product: Modifica prodotto
         editing_promotion: Modifica promozione
-        editing_redirect_route: Modifica rotte di reindirizzamento
         editing_review: Modificare recensione
         editing_role: Modifica ruolo
-        editing_route: Modifica di percorso
         editing_shipment: Modifica della spedizione
         editing_shipping_category: Editando categorie di spedizione
         editing_shipping_method: Modifica metodo di spedizione
@@ -430,10 +421,8 @@ sylius:
         new_promotion_coupon: Nuovo coupon promozione
         new_review: Nuova recensione
         new_role: Nuovo ruolo
-        new_route: Nuovo percorso
         new_shipping_category: Nuova categoria di spedizione
         new_shipping_method: Nuovo metodo di spedizione
-        new_static_content: Nuovo contenuto statico
         new_tax_category: Nuova categoria fiscale
         new_tax_rate: Nuova categoria fiscale
         new_taxon: Nuova categoria
@@ -555,7 +544,6 @@ sylius:
         recent_customers: Clienti recenti
         recent_orders: Ordini recenti
         recent_users: Utenti recenti
-        redirect_routes: Percorsi di reindizzamento
         refunded: Rimborsato
         register: Registrati
         register_button: Registrati
@@ -582,7 +570,6 @@ sylius:
         review_details: Esaminare i dettagli
         reviews: Recensioni
         roles: Regole
-        routes: Rotte
         rules: Regole
         sales: Vendite
         sales_this_month: Vendite
@@ -634,7 +621,6 @@ sylius:
         starts_at: Inizia il
         starts_with: Inizia con
         state: Stato
-        static_contents: Contenuti statici
         status: Stato
         street: Indirizzo
         string_blocks: Blocchi stringhe
@@ -680,10 +666,8 @@ sylius:
         there_are_no_permissions_defined: Non ci sono permessi definiti
         there_are_no_products_to_display: Non ci sono prodotti da mostrare
         there_are_no_promotions_configured: Non ci sono promozioni configurate
-        there_are_no_redirect_routes_to_display: Non sono disponibili rotte di reindirizzamento da visualizzare
         there_are_no_reports_created: Non ci sono rapporti creati
         there_are_no_roles_defined: Non ci sono ruoli definiti
-        there_are_no_routes_to_display: Non ci sono rotte da visualizzare
         there_are_no_shipments_to_display: Non ci sono spedizioni da mostrare
         there_are_no_shipping_categories_configured: Non ci sono categorie di spedizione predefinite
         there_are_no_shipping_methods_configured: Non ci sono metodi di spedizione configurati

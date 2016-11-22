@@ -112,8 +112,6 @@ sylius:
         create_product: Vytvořit produkt
         create_product_attribute: Vytvoření produktového atributu
         create_promotion: Vytvořit akci
-        create_redirect_route: Vytvořit přesměrování
-        create_route: Vytvořit URL směrování
         create_shipping_category: Vytvořit přepravní kategorie
         create_shipping_method: Vytvořit způsob dopravy
         create_simple_block: Vytvořit jednoduchý blok
@@ -132,8 +130,6 @@ sylius:
         creating_menu: Vytvoření menu
         creating_menu_node: Vytvoření položky menu
         creating_new_page: Vytvoření nové stránky
-        creating_redirect_route: Vytvoření přesměrování
-        creating_route: Vytvoření URL směrování
         creation_time: Čas vytvoření
         currencies: Měny
         currency: Měna
@@ -149,7 +145,6 @@ sylius:
         data: Údaje
         date: Datum
         default_billing_address: Výchozí fakturační adresa
-        default_currency: Výchozí měna
         default_locale: Výchozí Jazyk
         default_shipping_address: Výchozí dodací adresa
         delete: Odstranit
@@ -178,9 +173,7 @@ sylius:
         editing_permission: Úpravy oprávnění
         editing_product: Úprava produktu
         editing_promotion: Konec akce
-        editing_redirect_route: Editace přesměrování
         editing_role: Editace role
-        editing_route: Úprava směrování
         editing_shipment: Editace dodávky
         editing_shipping_category: Úprava přepravní kategorie
         editing_shipping_method: Editace přepravní metody
@@ -375,7 +368,6 @@ sylius:
         ready: Připraven
         recent_orders: Poslední objednávky
         recent_users: Poslední uživatelé
-        redirect_routes: Přesměrovávací pravidla
         refunded: Platba vrácena
         register: Registrace
         register_button: Registrace
@@ -390,7 +382,6 @@ sylius:
         returned: Vráceno
         revert: Vrátit
         roles: Role
-        routes: Cesty
         rules: Pravidla
         sales: Prodeje
         sales_this_month: Prodeje

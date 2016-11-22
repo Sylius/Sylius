@@ -130,7 +130,6 @@ sylius:
         data: Data
         date: Datum
         default_billing_address: Standard faktureringsadress
-        default_currency: Standardvaluta
         default_locale: Standardspråk
         delete: Radera
         delete_image: Ta bort bild
@@ -311,7 +310,6 @@ sylius:
         returns_policy: Returpolicy
         reviews: Recensioner
         roles: Roller
-        routes: Rutter
         rules: Regler
         sales: Försäljning
         sales_this_month: Försäljning

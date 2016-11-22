@@ -131,9 +131,7 @@ sylius:
         create_product_association_type: 创建产品关联类型
         create_product_attribute: 创建产品属性
         create_promotion: 创建促销
-        create_redirect_route: 创建重定向路由
         create_report: 创建报告
-        create_route: 创建路由
         create_shipping_category: 创建配送类别
         create_shipping_method: 创建送货方式
         create_simple_block: 创建简单的块
@@ -153,8 +151,6 @@ sylius:
         creating_menu: 创建菜单
         creating_menu_node: 创建菜单节点
         creating_new_page: 创建页面
-        creating_redirect_route: 创建重定向路由
-        creating_route: 创建路由
         creation_date: 创建日期
         creation_time: 创建时间
         currencies: 货币
@@ -181,7 +177,6 @@ sylius:
         data: 数据
         date: 日期
         default_billing_address: 默认帐单地址
-        default_currency: 默认货币：
         default_locale: 默认区域
         default_shipping_address: 默认的送货地址
         delete: 删除
@@ -234,10 +229,8 @@ sylius:
         editing_permission: 编辑权限
         editing_product: 编辑产品
         editing_promotion: 编辑推广
-        editing_redirect_route: 编辑重定向路由
         editing_review: 编辑评论
         editing_role: 编辑角色
-        editing_route: 编辑路由
         editing_shipment: 编辑配送
         editing_shipping_category: 编辑配送类别
         editing_shipping_method: 编辑配送方式
@@ -514,7 +507,6 @@ sylius:
         recent_customers: 最近的客户
         recent_orders: 最近的订单
         recent_users: 最近用户
-        redirect_routes: 重定向路由
         refunded: 已退款
         register: 注册
         register_button: 注册
@@ -539,7 +531,6 @@ sylius:
         review_details: 评论详情
         reviews: 评论
         roles: 角色
-        routes: 路由
         rules: 規則
         sales: 销售额
         sales_this_month: 销售额
@@ -629,10 +620,8 @@ sylius:
         there_are_no_permissions_defined: 还没有定义任何权限
         there_are_no_products_to_display: 没有要显示的产品
         there_are_no_promotions_configured: 没有配置促销活动
-        there_are_no_redirect_routes_to_display: 没有可显示得重定向路由
         there_are_no_reports_created: 没有创建任何报表
         there_are_no_roles_defined: 没有定义任何角色
-        there_are_no_routes_to_display: 没有任何路由
         there_are_no_shipments_to_display: 没有任何配送
         there_are_no_shipping_categories_configured: 没有配置任何配送分类
         there_are_no_shipping_methods_configured: 没有配置配送方法

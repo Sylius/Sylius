@@ -182,7 +182,6 @@ sylius:
         register: Registracija
         register_button: Registracija
         retail_price: Prodajna cena
-        routes: Putanje
         sales: Akcije
         sales_this_month: Akcije
         save: Sačuvaj

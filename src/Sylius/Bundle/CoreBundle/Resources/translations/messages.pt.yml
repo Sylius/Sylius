@@ -19,6 +19,7 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Produto
+            customer_group: Grupo de clientes
         group:
             name: Nome
             roles: Funções
@@ -26,7 +27,7 @@ sylius:
             taxonomies: Taxonomias
             locale_default: Localidade padrão
             locales: Linguagens
-            currency_default: Moeda padrão
+            currency_base: Moeda base
             currencies: Moedas
             shipping_methods: Métodos de envio
             payment_methods: Métodos de pagamento
@@ -103,7 +104,6 @@ sylius:
             height: Altura
             on_hand: Disponibilidade
             price: Preço
-            original_price: Preço original
             sku: SKU
             weight: Peso
             width: Largura
@@ -118,17 +118,17 @@ sylius:
             type: Tipo de associação
         product_association_type:
             name: Nome
+        promotion_filter:
+            product:
+                products: Produtos
         promotion_rule:
-            contains_taxon:
-                taxon: Táxon
-                count: Quantidade
-            taxon:
-                taxons: Táxons
             product:
                 products: Produtos
             total_of_items_from_taxon:
                 taxon: Táxon
                 amount: Quantia
+        payment_method:
+            channels: Canais
     installer:
         extensions:
             header: extensões
@@ -138,12 +138,41 @@ sylius:
             apc: APC
             ctype: Ctype
             gd: GD
+            exif: Exif
             icu: ICU
+            json_encode: JSON
             "off": false
             "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Sessão
+            simplexml_import_dom: SimpleXML
+        filesystem:
+            header: sistema de ficheiros
+            cache:
+                header: cache
+            exists: existe
+            logs:
+                header: registos
+            not_exists: não existe
+            not_writable: não gravável
+            parameters:
+                header: parameters.yml
+            vendors: fornecedores
+            writable: gravável
         settings:
+            any: qualquer
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
             "off": false
             "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: fuso horário
+            version: Versão de PHP
     email:
         order_confirmation:
             name: Confirmação de encomenda

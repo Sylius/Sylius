@@ -26,7 +26,6 @@ sylius:
             taxonomies: Taksonomije
             locale_default: Privzeto območje
             locales: Področne nastavitve
-            currency_default: Privzeta valuta
             currencies: Valute
             shipping_methods: Načini dostave
             payment_methods: Načini plačil
@@ -93,7 +92,6 @@ sylius:
             height: Višina
             on_hand: Trenutna zaloga
             price: Cena
-            original_price: Prvotna cena
             sku: SKU
             weight: Teža
             width: Širina
@@ -109,11 +107,10 @@ sylius:
         product_association_type:
             name: Ime
         promotion_rule:
-            contains_taxon:
-                taxon: Sistematske skupine
-                count: Število
             total_of_items_from_taxon:
                 taxon: Sistematske skupine
+        payment_method:
+            channels: Kanali
     installer:
         extensions:
             header: razširitve

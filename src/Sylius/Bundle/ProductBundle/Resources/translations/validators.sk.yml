@@ -13,11 +13,6 @@ sylius:
             not_blank: Prosím, zadajte názov produktu.
             min_length: Názov produktu musí mať aspoň 1 znak. | Názov produktu musí mať aspoň {{ limit }} znakov.
             max_length: Názov produktu nesmie byť dlhší než 1 znak. | Názov produktu nesmie byť dlhší než {{ limit }} znakov.
-    variant:
-        sku:
-            not_blank: Prosím, zadajte skladový kód (SKU) variantu.
-            unique: Skladový kód (SKU) variantu musí byť unikátny.
-        combination: Variant s touto sadou produktových voľieb už existuje.
     option:
         code:
             not_blank: Zadajte kód volby.

@@ -12,3 +12,4 @@ sylius:
         restore_deleted: '%resource% успешно восстановлен.'
         enable: '%resource% успешно включен.'
         disable: '%resource% успешно отключен.'
+        delete_error: Не удается удалить %resource%, т. к. он используется.

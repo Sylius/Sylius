@@ -12,6 +12,7 @@ sylius:
             ends_at: Koniec
             exclusive: Exkluzívne
             name: Názov
+            priority: Priorita
             rules: Pravidlá
             starts_at: Začiatok
             usage_limit: Limit použitia

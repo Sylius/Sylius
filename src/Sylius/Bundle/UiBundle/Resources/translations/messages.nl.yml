@@ -163,9 +163,7 @@ sylius:
         create_product_association_type: Nieuw productrelatie type
         create_product_attribute: Productattribuut aanmaken
         create_promotion: Nieuwe promotie
-        create_redirect_route: Redirect route aanmaken
         create_report: Nieuw rapport
-        create_route: Route aanmaken
         create_shipping_category: Nieuwe verzendcategorie
         create_shipping_method: Nieuwe verzendmethode
         create_simple_block: Aanmaken eenvoudige blok
@@ -185,8 +183,6 @@ sylius:
         creating_menu: Menu maken
         creating_menu_node: Nieuw menu node
         creating_new_page: Nieuwe pagina aanmaken
-        creating_redirect_route: Redirect-route creëren
-        creating_route: Route creëren
         creation_date: Aangemaakt op
         creation_time: Aanmaakdatum
         currencies: Valuta's
@@ -216,7 +212,6 @@ sylius:
         date: Datum
         default: Standaardinstelling
         default_billing_address: Standaard factuuradres
-        default_currency: Standaard valuta
         default_locale: Standaardlandinstelling
         default_shipping_address: Standaard verzendadres
         delete: Verwijderen
@@ -250,10 +245,8 @@ sylius:
         edit_promotion: Bewerk promotie
         edit_promotion_coupon: Promotie coupon bewerken
         edit_report: Rapport bewerken
-        edit_route: Route bewerken
         edit_shipping_address: Verzendadres bewerken
         edit_shipping_method: Verzendmethode bewerken
-        edit_static_content: Statische inhoud bewerken
         edit_tax_category: Bewerk belasting categorie
         edit_tax_rate: Bewerk belastingtarief
         edit_taxon: Taxon bewerken
@@ -278,10 +271,8 @@ sylius:
         editing_permission: Machtiging bewerken
         editing_product: Product bewerken
         editing_promotion: Promotie bewerken
-        editing_redirect_route: Redirect route bewerken
         editing_review: Bewerk beoordeling
         editing_role: Rol bewerken
-        editing_route: Route bewerken
         editing_shipment: Verzending bewerken
         editing_shipping_category: Bewerk verzendcategorie
         editing_shipping_method: Bewerk verzendmethode
@@ -456,10 +447,8 @@ sylius:
         new_promotion_coupon: Nieuwe promotie coupon
         new_review: Nieuwe recensie
         new_role: Nieuwe rol
-        new_route: Nieuwe route
         new_shipping_category: Nieuwe verzendcategorie toevoegen
         new_shipping_method: Nieuwe verzendmethode toevoegen
-        new_static_content: Nieuwe statische inhoud
         new_tax_category: Nieuwe belastingcategorie toevoegen
         new_tax_rate: Nieuw belastingtarief aanmaken
         new_taxon: Taxon toevoegen
@@ -580,7 +569,6 @@ sylius:
         recent_customers: Recente klanten
         recent_orders: Recente bestellingen
         recent_users: Recente gebruikers
-        redirect_routes: Redirect routes
         refunded: Terugbetaald
         register: Registreren
         register_button: Registreren
@@ -608,7 +596,6 @@ sylius:
         review_details: Beoordelingsdetails
         reviews: Beoordelingen
         roles: Rollen
-        routes: Routes
         rules: Regels
         sales: Verkoop
         sales_this_month: Verkoop
@@ -661,7 +648,6 @@ sylius:
         starts_at: Start op
         starts_with: Begint met
         state: Status
-        static_contents: Statische inhoud
         status: Status
         street: Straat
         string_blocks: Tekstblokken
@@ -708,10 +694,8 @@ sylius:
         there_are_no_permissions_defined: Er zijn geen machtigingen gedefinieerd
         there_are_no_products_to_display: Er zijn geen producten om weer te geven
         there_are_no_promotions_configured: Er zijn geen promoties geconfigureerd
-        there_are_no_redirect_routes_to_display: Er zijn geen routes om weer te geven
         there_are_no_reports_created: Er zijn geen rapporten gemaakt
         there_are_no_roles_defined: Er zijn geen rollen gedefinieerd
-        there_are_no_routes_to_display: Er zijn geen routes om weer te geven
         there_are_no_shipments_to_display: Er zijn geen verzendingen om weer te geven
         there_are_no_shipping_categories_configured: Er zijn geen verzendcategorieën geconfigureerd
         there_are_no_shipping_methods_configured: Er zijn geen verzendmethodes geconfigureerd

@@ -28,7 +28,6 @@ sylius:
         currency: Moneda
         current_stock: Stock actual
         default_billing_address: Adreça de facturació per defecte
-        default_currency: Moneda predeterminada
         default_shipping_address: Adreça d'enviament per defecte
         delete: Suprimir
         description: Descripció

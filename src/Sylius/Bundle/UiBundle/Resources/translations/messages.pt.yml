@@ -15,6 +15,8 @@ sylius:
     ui:
         abandoned: Abandonado
         about: Sobre
+        accept: Aceitar
+        accepted: Aceite
         access_token: Código de acesso
         access_your_store_account_or_create_a_new_one: Acessar a conta da loja ou criar uma nova
         account_credentials: Credenciais da conta
@@ -23,6 +25,7 @@ sylius:
         actions: Ações
         add: Adicionar
         add_action: Adicionar ação
+        add_address: Adicionar endereço
         add_association: Adicionar associação
         add_attribute: Adicionar atributo
         add_attributes: Adicionar atributos
@@ -39,11 +42,13 @@ sylius:
         add_rule: Adicionar regra
         add_to_cart: Adicionar ao carrinho
         add_value: Adicionar valor
+        add_your_review: Adicione o seu comentário
         adding_new_customer_groups: Adicionar novos grupos de clientes
         adding_new_email: Adicionar novo endereço de e-mail
         adding_new_locale: Adicionar novo idioma
         additional_information: Informação adicional
         address: Endereço
+        address_book: Livros de endereços
         addressing: Endereçamento
         addressing_step: Endereço
         adjustments: Ajustes
@@ -73,6 +78,7 @@ sylius:
         awaiting_payment: A aguardar pagamento
         back: Voltar
         back_to_store: Voltar à loja
+        back_to_details: Voltar aos detalhes
         backorder: Backorder
         backordered: Backordered
         balance_due: Saldo devedor
@@ -81,8 +87,11 @@ sylius:
         blocks: Blocos
         body: Corpo
         browse_products: Visualizar produtos
+        browse_your_addresses: Explore os seus endereços
+        browse_your_orders_from_the_past: Explore as suas ordens do passado
         build: Versão
         calculator: Calculadora
+        call_us: Ligue-nos!
         cancel: Cancelar
         cancelled: Cancelado
         cart: Carrinho
@@ -153,9 +162,7 @@ sylius:
         create_product_association_type: Criar o tipo de associação de produto
         create_product_attribute: Criar atributo de produto
         create_promotion: Criar promoção
-        create_redirect_route: Criar a rota de redirecionamento
         create_report: Criar relatório
-        create_route: Criar Rota
         create_shipping_category: Criar categoria de envio
         create_shipping_method: Criar método de envio
         create_simple_block: Criar bloco simples
@@ -187,7 +194,6 @@ sylius:
         data: Dados
         date: Data
         default_billing_address: Endereço de cobrança padrão
-        default_currency: Moeda padrão
         default_locale: Localidade padrão
         default_shipping_address: Endereço de envio padrão
         delete: Apagar
@@ -201,6 +207,17 @@ sylius:
         discount: Desconto
         discounted_unit_price: Preço unitário com desconto
         edit: Editar
+        edit_product_attribute: Editar o atributo de produto
+        edit_product_option: Editar a opção de produto
+        edit_product_variant: Editar a variante de produto
+        edit_promotion: Editar promoção
+        edit_promotion_coupon: Editar o cupão de promoção
+        edit_report: Editar relatório
+        edit_shipping_address: Editar o endereço de entrega
+        edit_shipping_method: Editar o método de expedição
+        edit_tax_category: Editar a categoria do imposto
+        edit_your_personal_information: Editar a sua informação pessoal
+        edit_zone: Editar a zona
         editing_country: Editando país
         editing_coupon: Editando cupom
         editing_email: Edição de E-mail
@@ -215,10 +232,8 @@ sylius:
         editing_permission: Editar permissão
         editing_product: Editando produto
         editing_promotion: Editando promoção
-        editing_redirect_route: Edição de rota de redirecionamento
         editing_review: Editar revisão
         editing_role: Editar papel
-        editing_route: Edição de rota
         editing_shipment: Edição da expedição
         editing_shipping_category: Editando categoria de envio
         editing_shipping_method: Editando método de envio
@@ -247,6 +262,7 @@ sylius:
         exclusive: Exclusivo
         existing_customer: Cliente cadastrado
         expiration_and_usage_limits: Limites de uso e validade
+        expires_at: Expira às
         extra_information: Informação extra
         extra_notes: Notas extra
         failed: Falhou
@@ -254,6 +270,7 @@ sylius:
         female: Feminino
         filters: Filtros
         first_name: Nome próprio
+        forgot_password: Esqueceu-se da palavra-passe?
         fulfill: Preencher
         fulfilled: Cheio
         gateway: Gateway
@@ -264,21 +281,34 @@ sylius:
         generate_variants: Gerar variações
         generating_coupons: Gerando cupons
         go: Avançar
+        go_level_up: Subir um nível
         go_to_dashboard: Ir para o painel de controlo
         grand_total: Total
         guest: Convidado
         guest_customer: Cliente convidado
+        have_an_account_already: Já tem uma conta?
+        hello: Olá
+        hello_name: Olá <b>%name%</b>
+        hide_deleted: Ocultar eliminado
         home: Home
         hostname: Nome do servidor
         id: Nº
+        identifier: Identificador
         image: Imagem
         images: Imagens
+        included_in_price: Incluído no preço
         index_metadata: Metadados
+        info: Informação
         information: Info
+        inventory: Inventário
         inventory_here_you_can_see_current_stock_levels: Inventário<small>Aqui pode verificar a disponibilidade de cada produto</small>
+        inventory_index: Inventário
         inventory_state: Situação do estoque
         inventory_tracking: Controle de estoque
         invoice: Fatura
+        is_enabled: Está ativado
+        it_seems_you_have_an_account_already: Parece que já tem uma conta
+        item: Item
         items_total: Total de itens
         last_login: Último login
         last_name: Apelido
@@ -293,17 +323,27 @@ sylius:
         main_taxon: Táxon principal
         manage: Gerenciar
         manage_countries: Gerenciar países
+        manage_emails: Gerir Mensagens
+        manage_metadata: Gerir metadados
         manage_options: Gerir opções
         manage_orders: Gerenciar pedidos
+        manage_payments: Gerir pagamentos
         manage_products: Gerenciar produtos
         manage_promotions: Gerenciar promoções
+        manage_reviews: Gerir comentários
         manage_shipments: Gerenciar envios
         manage_shipping_categories: Gerenciar categorias de envio
         manage_shipping_methods: Gerenciar métodos de envio
         manage_tax_categories: Gerenciar categorias de impostos
         manage_tax_rates: Gerenciar impostos
+        manage_users: Gerir utilizadores
+        manage_variants: Gerir variantes
+        manage_your_customers: Gerir os seus clientes
+        manage_your_product_catalog: Gerir o seu catálogo de produtos
+        manage_your_saved_addresses: Gerir os seus endereços guardados
         manage_zones: Gerenciar zonas
         marketing: Marketing
+        media: Média
         members: Membros
         menu_nodes: Nós do menu
         menus: Menus
@@ -311,24 +351,43 @@ sylius:
         metadata_index: Metadados
         method: meio
         modified: Data de modificação
+        move_down: Mover para baixo
+        move_up: Mover para cima
         my_account: A Minha Conta
+        n_a: N/D
         name: Nome
+        need_assistance: Precisa de assistência?
         new: Novo
+        new_admin_user: Novo administrador
+        new_channel: Novo canal
         new_country: Novo país
+        new_coupon: Novo cupão
+        new_currency: Nova moeda
+        new_customer: Novo cliente
+        new_customers: Novos clientes
         new_order: Novo pedido
         new_password: Nova Palavra-Passe
         new_payment: Novo pagamento
         new_payment_method: Novo meio de pagamento
+        new_permission: Nova permissão
         new_product: Novo produto
         new_product_variant: Nova variação de produto
         new_promotion: Nova promoção
+        new_review: Novo comentário
+        new_role: Nova função
         new_shipping_category: Nova categoria de envio
         new_shipping_method: Novo método de envio
         new_tax_category: Nova categoria de imposto
         new_tax_rate: Novo imposto
         new_taxon: Novo táxon
+        new_user: Novo utilizador
         new_zone: Nova zona
         newest_products: Novos produtos
+        newest_first: Primeiro, mais recentes
+        next: Seguinte
+        no_label: Não
+        no_account: sem conta
+        no_comment: Sem comentários
         no_description: Sem descrição
         no_promotion: Sem promoções
         no_shipping_charges: Nenhuma taxa de entrega foi aplicada
@@ -343,6 +402,7 @@ sylius:
         order_comment_name: Comentário de encomenda
         order_confirmation_name: Confirmação de encomenda
         order_details: Detalhes da sua encomenda
+        order_item_product: Item
         order_summary: Dados da compra
         order_value: Valor da encomenda
         orders: Encomendas
@@ -351,37 +411,57 @@ sylius:
         pages: Páginas
         parent: Pai
         password: Palavra-passe
+        payment: Pagamento
+        payment_details: Detalhes de pagamento
         payment_method: Método de pagamento
         payment_methods: Métodos de pagamento
+        payment_mode: Modo de pagamento
         payment_state: Situação do pagamento
         payments: Pagamentos
+        pay: Pagar
+        pay_again: Clique em pagar para tentar novamente
         pending: Pendente
         permissions: Permissões
         phone_number: Número de Telefone
         place_order: Fazer pedido
+        please_sign_in: Por favor, inicie a sessão
         postcode: Código postal
+        powered_by: Criado por
+        preferences: Preferências
         presentation: Apresentação
+        previous: Anterior
         price: Preço
         pricing: Preços
+        priority: Prioridade
+        privacy_policy: Política de Privacidade
         processing: A processar
         product: Produto
         product_association_index: Associação
         product_association_type_index: Tipo de associação
+        product_association_types: Tipos de associação de produtos
+        product_associations: Associações de produto
+        product_attributes: Atributos de produto
         product_details_viewing_product_product: Detalhes de produto <small>Visualizando produto "<strong>%product%</strong>"</small>
+        product_options: Opções de produto
         product_reviews: Críticas do produto
+        product_variants: Variantes de produto
         products: Produtos
         products_categorized_under_taxon_taxon: Produtos <small>Categorizado na táxon "%taxon%"</small>
         products_index_of_all_products_in_your_store: Produtos <small>Lista de todos os produtos em sua loja</small>
+        profile: Perfil
         promotion_coupons: Cupões
         promotion_details: Detalhes da promoção
         promotion_total: Total de promoção
         promotions: Promoções
+        properties: Propriedades
         province: Distrito
         provinces: Distritos
         qty: Quantidade
         quantity: Quantidade
         rating: Avaliação
         ready: Preparado
+        recent_customers: Clientes recentes
+        recent_orders: Encomendas recentes
         refunded: Reembolsado
         rejected: Rejeitado
         remember_me: Lembrar-me
@@ -390,7 +470,6 @@ sylius:
         returned: Devolvido
         reviews: Críticas
         roles: Funções
-        routes: Rotas
         rules: Regras
         sales: Vendas
         sales_this_month: Vendas

@@ -29,7 +29,6 @@ sylius:
             taxonomies: Taksonomijos
             locale_default: Numatytoji lokalė
             locales: Lokalės
-            currency_default: Numatytoji valiuta
             currencies: Valiutos
             shipping_methods: Pristatymo būdai
             payment_methods: Mokėjimo būdai
@@ -104,7 +103,6 @@ sylius:
             height: Aukštis
             on_hand: Dabartinės atsargos
             price: Kaina
-            original_price: Pradinė kaina
             sku: Kodas
             weight: Svoris
             width: Plotis
@@ -119,15 +117,20 @@ sylius:
             type: Sąryšio tipas
         product_association_type:
             name: Pavadinimas
-        promotion_rule:
-            contains_taxon:
-                count: Kiekis
+        promotion_filter:
+            product:
+                products: Prekės
             taxon:
+                taxons: Taksonai
+        promotion_rule:
+            has_taxon:
                 taxons: Taksonai
             product:
                 products: Prekės
             total_of_items_from_taxon:
                 amount: Suma
+        payment_method:
+            channels: Kanalai
     installer:
         extensions:
             header: plėtiniai

@@ -43,6 +43,7 @@ sylius:
             calculator: Számológép
             category: Kategória
             category_requirement: Kategória követelmény
+            channels: Csatornák
             configuration: Konfiguráció
             description: Leírás
             enabled: Engedélyezve

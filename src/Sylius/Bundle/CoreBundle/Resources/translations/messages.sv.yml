@@ -23,7 +23,7 @@ sylius:
             taxonomies: Taxonomier
             locale_default: Standardspråk
             locales: Språk
-            currency_default: Standardvaluta
+            currency_base: Basvaluta
             currencies: Valutor
             shipping_methods: Leveransmetoder
             payment_methods: Betalningsmetoder
@@ -99,7 +99,6 @@ sylius:
             height: Höjd
             on_hand: I lager
             price: Pris
-            original_price: Ursprungligt pris
             sku: SKU
             weight: Vikt
             width: Bredd
@@ -114,17 +113,21 @@ sylius:
             type: Associationstyp
         product_association_type:
             name: Namn
-        promotion_rule:
-            contains_taxon:
-                taxon: Taxon
-                count: Antal
+        promotion_filter:
+            product:
+                products: Produkter
             taxon:
+                taxons: Taxa
+        promotion_rule:
+            has_taxon:
                 taxons: Taxa
             product:
                 products: Produkter
             total_of_items_from_taxon:
                 taxon: Taxon
                 amount: Antal
+        payment_method:
+            channels: Kanaler
     installer:
         extensions:
             header: tillägg

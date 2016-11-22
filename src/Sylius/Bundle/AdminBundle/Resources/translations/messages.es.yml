@@ -35,7 +35,3 @@ sylius:
                 sales:
                     header: Ventas
                     orders: Pedidos
-                content:
-                    header: Contenido
-                    static_contents: Contenidos estáticos
-                    routes: Rutas
