@@ -17,7 +17,6 @@ Feature: Configuring channel and currency calculator
         And I choose "Channel and currency" calculator
         And I set its default price to "$20.00"
         And I set its price to "$10.00" for "USD" currency and "Web" channel
-        And I set its slug to "dice-brewing"
         And I add it
         Then I should be notified that it has been successfully created
         And the product for "USD" currency and "Web" channel should be priced at "$10.00"
