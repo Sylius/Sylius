@@ -11,7 +11,11 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
@@ -149,5 +153,45 @@ final class ProductVariantSpec extends ObjectBehavior
     {
         $this->setShippingCategory($shippingCategory);
         $this->getShippingCategory()->shouldReturn($shippingCategory);
+    }
+
+    function it_adds_and_removes_channel_pricings(ChannelPricingInterface $channelPricing)
+    {
+        $channelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($channelPricing);
+        $this->hasChannelPricing($channelPricing)->shouldReturn(true);
+
+        $channelPricing->setProductVariant(null)->shouldBeCalled();
+        $this->removeChannelPricing($channelPricing);
+        $this->hasChannelPricing($channelPricing)->shouldReturn(false);
+    }
+
+    function it_has_channel_pricings_collection(
+        ChannelPricingInterface $firstChannelPricing,
+        ChannelPricingInterface $secondChannelPricing
+    ) {
+        $firstChannelPricing->setProductVariant($this)->shouldBeCalled();
+        $secondChannelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($firstChannelPricing);
+        $this->addChannelPricing($secondChannelPricing);
+
+        $this->getChannelPricings()->shouldBeSameAs(new ArrayCollection([$firstChannelPricing, $secondChannelPricing]));
+    }
+
+    public function getMatchers()
+    {
+        return [
+            'beSameAs' => function ($subject, $key) {
+                if (!$subject instanceof Collection || !$key instanceof Collection) {
+                    return false;
+                }
+                for ($i = 0; $i < $subject->count(); $i++) {
+                    if ($subject->get($i) !== $key->get($i)->getWrappedObject()) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+        ];
     }
 }
