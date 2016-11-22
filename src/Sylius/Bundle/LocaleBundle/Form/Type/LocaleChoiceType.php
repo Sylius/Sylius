@@ -68,7 +68,7 @@ class LocaleChoiceType extends AbstractType
             'choice_translation_domain' => false,
             'enabled' => null,
             'label' => 'sylius.form.locale.locale',
-            'empty_value' => 'sylius.form.locale.select',
+            'placeholder' => 'sylius.form.locale.select',
             'choices_as_values' => true,
         ]);
     }

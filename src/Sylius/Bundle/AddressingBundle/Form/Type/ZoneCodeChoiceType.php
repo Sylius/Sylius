@@ -15,6 +15,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -42,10 +43,20 @@ class ZoneCodeChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choices' => $this->getZoneCodes(),
+                'choices' => function (Options $options) {
+                    /* @var ZoneInterface[] $zones */
+                    $zones = $this->zoneRepository->findAll();
+                    $zonesCodes = [];
+
+                    foreach ($zones as $zone) {
+                        $zonesCodes[$zone->getName()] = $zone->getCode();
+                    }
+
+                    return $zonesCodes;
+                },
                 'choice_translation_domain' => false,
                 'label' => 'sylius.form.zone.types.zone',
-                'empty_value' => 'sylius.form.zone.select',
+                'placeholder' => 'sylius.form.zone.select',
                 'choices_as_values' => true,
             ])
         ;

@@ -39,7 +39,7 @@ class PromotionActionChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'choices' => $this->actions,
+            'choices' => array_flip($this->actions),
             'choices_as_values' => true,
         ]);
     }

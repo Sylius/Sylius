@@ -31,15 +31,15 @@ class StringFilterType extends AbstractType
         $builder
             ->add('type', ChoiceType::class, [
                 'choices' => [
-                    StringFilter::TYPE_CONTAINS => 'sylius.ui.contains',
-                    StringFilter::TYPE_NOT_CONTAINS => 'sylius.ui.not_contains',
-                    StringFilter::TYPE_EQUAL => 'sylius.ui.equal',
-                    StringFilter::TYPE_EMPTY => 'sylius.ui.empty',
-                    StringFilter::TYPE_NOT_EMPTY => 'sylius.ui.not_empty',
-                    StringFilter::TYPE_STARTS_WITH => 'sylius.ui.starts_with',
-                    StringFilter::TYPE_ENDS_WITH => 'sylius.ui.ends_with',
-                    StringFilter::TYPE_IN => 'sylius.ui.in',
-                    StringFilter::TYPE_NOT_IN => 'sylius.ui.not_in'
+                    'sylius.ui.contains' => StringFilter::TYPE_CONTAINS,
+                    'sylius.ui.not_contains' => StringFilter::TYPE_NOT_CONTAINS,
+                    'sylius.ui.equal' => StringFilter::TYPE_EQUAL,
+                    'sylius.ui.empty' => StringFilter::TYPE_EMPTY,
+                    'sylius.ui.not_empty' => StringFilter::TYPE_NOT_EMPTY,
+                    'sylius.ui.starts_with' => StringFilter::TYPE_STARTS_WITH,
+                    'sylius.ui.ends_with' => StringFilter::TYPE_ENDS_WITH,
+                    'sylius.ui.in' => StringFilter::TYPE_IN,
+                    'sylius.ui.not_in' => StringFilter::TYPE_NOT_IN,
                 ],
                 'choices_as_values' => true,
             ])

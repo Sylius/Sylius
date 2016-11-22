@@ -36,6 +36,7 @@ class CountryType extends AbstractResourceType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'button_add_label' => 'sylius.form.country.add_province',
+                'choices_as_values' => true,
             ])
         ;
     }

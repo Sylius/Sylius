@@ -44,6 +44,8 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
 
                 return $provincesCodes;
             },
+            'choice_value' => null,
+            'choice_label' => null,
         ]);
     }
 

@@ -55,7 +55,7 @@ class CountryChoiceType extends AbstractType
                 'choice_translation_domain' => false,
                 'enabled' => true,
                 'label' => 'sylius.form.address.country',
-                'empty_value' => 'sylius.form.country.select',
+                'placeholder' => 'sylius.form.country.select',
                 'choices_as_values' => true,
             ])
         ;

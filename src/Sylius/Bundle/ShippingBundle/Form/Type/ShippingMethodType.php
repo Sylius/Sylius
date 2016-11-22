@@ -74,7 +74,7 @@ class ShippingMethodType extends AbstractResourceType
             ->addEventSubscriber(new BuildShippingMethodFormSubscriber($this->calculatorRegistry, $builder->getFormFactory(), $this->formRegistry))
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->add('translations', ResourceTranslationsType::class, [
-                'type' => 'sylius_shipping_method_translation',
+                'entry_type' => 'sylius_shipping_method_translation',
                 'label' => 'sylius.form.shipping_method.translations',
             ])
             ->add('position', IntegerType::class, [
@@ -83,11 +83,11 @@ class ShippingMethodType extends AbstractResourceType
             ])
             ->add('category', 'sylius_shipping_category_choice', [
                 'required' => false,
-                'empty_value' => 'sylius.ui.no_requirement',
+                'placeholder' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.shipping_method.category',
             ])
             ->add('categoryRequirement', ChoiceType::class, [
-                'choices' => ShippingMethod::getCategoryRequirementLabels(),
+                'choices' => array_flip(ShippingMethod::getCategoryRequirementLabels()),
                 'multiple' => false,
                 'expanded' => true,
                 'label' => 'sylius.form.shipping_method.category_requirement',

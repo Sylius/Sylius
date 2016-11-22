@@ -47,9 +47,9 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
         foreach (array_keys($this->registry->all()) as $type) {
             $prototypeOptions = array_replace(
                 ['configuration_type' => $type],
-                $options['options']
+                $options['entry_options']
             );
-            $form = $builder->create($options['prototype_name'], $options['type'], $prototypeOptions);
+            $form = $builder->create($options['prototype_name'], $options['entry_type'], $prototypeOptions);
 
             $prototypes[$type] = $form->getForm();
         }
@@ -76,7 +76,7 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'type' => $this->getFormTypeOption(),
+            'entry_type' => $this->getFormTypeOption(),
             'allow_add' => true,
             'allow_delete' => true,
             'by_reference' => false,

@@ -42,21 +42,20 @@ class CountryCodeChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = function (Options $options) {
-            if (null === $options['enabled']) {
-                $countries = $this->countryRepository->findAll();
-            } else {
-                $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
-            }
-
-            return $this->getCountryCodes($countries);
-        };
-
         $resolver->setDefaults([
-            'choices' => $choices,
+            'choices' => function (Options $options) {
+                if (null === $options['enabled']) {
+                    $countries = $this->countryRepository->findAll();
+                } else {
+                    $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
+                }
+
+                return $this->getCountryCodes($countries);
+            },
+
             'enabled' => true,
             'label' => 'sylius.form.address.country',
-            'empty_value' => 'sylius.form.country.select',
+            'placeholder' => 'sylius.form.country.select',
             'choices_as_values' => true,
         ]);
     }

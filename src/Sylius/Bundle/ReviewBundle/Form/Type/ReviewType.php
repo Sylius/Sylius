@@ -17,6 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Daniel Richter <nexyz9@gmail.com>
@@ -53,6 +54,7 @@ class ReviewType extends AbstractResourceType
                 'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
+                'constraints' => [new Valid()],
                 'choices_as_values' => true,
             ])
             ->add('title', TextType::class, [
@@ -73,7 +75,6 @@ class ReviewType extends AbstractResourceType
 
         $resolver->setDefaults([
             'rating_steps' => 5,
-            'cascade_validation' => true,
         ]);
     }
 

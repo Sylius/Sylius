@@ -40,7 +40,7 @@ class PaymentGatewayChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choices' => $this->gateways,
+                'choices' => array_flip($this->gateways),
                 'choices_as_values' => true,
             ])
         ;

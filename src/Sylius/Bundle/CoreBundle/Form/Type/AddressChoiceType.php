@@ -41,17 +41,16 @@ class AddressChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = function (Options $options) {
-            if (null === $options['customer']) {
-                return $this->addressRepository->findAll();
-            }
-
-            return $this->addressRepository->findBy(['customer' => $options['customer']]);
-        };
-
         $resolver->setDefaults([
-            'class' => AddressInterface::class,
-            'choices' => $choices,
+            'choices' => function (Options $options) {
+                if (null === $options['customer']) {
+                    return $this->addressRepository->findAll();
+                }
+
+                return $this->addressRepository->findBy(['customer' => $options['customer']]);
+            },
+            'choice_value' => 'id',
+            'choice_translation_domain' => false,
             'customer' => null,
             'label' => false,
             'placeholder' => false,

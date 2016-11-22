@@ -88,7 +88,7 @@ class ProductVariantType extends BaseProductVariantType
             ])
             ->add('taxCategory', 'sylius_tax_category_choice', [
                 'required' => false,
-                'empty_value' => '---',
+                'placeholder' => '---',
                 'label' => 'sylius.form.product_variant.tax_category',
             ])
             ->add('pricingCalculator', 'sylius_price_calculator_choice', [

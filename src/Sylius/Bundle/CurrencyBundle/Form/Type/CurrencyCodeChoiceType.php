@@ -40,17 +40,19 @@ final class CurrencyCodeChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = [];
-
-        /** @var CurrencyInterface[] $currencies */
-        $currencies = $this->currencyRepository->findBy(['enabled' => true]);
-        foreach ($currencies as $currency) {
-            $choices[$currency->getCode()] = sprintf('%s - %s', $currency->getCode(), $currency->getName());
-        }
-
         $resolver->setDefaults([
+            'choices' => function (Options $options) {
+                $choices = [];
+
+                /** @var CurrencyInterface[] $currencies */
+                $currencies = $this->currencyRepository->findBy(['enabled' => true]);
+                foreach ($currencies as $currency) {
+                    $choices[sprintf('%s - %s', $currency->getCode(), $currency->getName())] = $currency->getCode();
+                }
+
+                return $choices;
+            },
             'choice_translation_domain' => false,
-            'choices' => $choices,
             'choices_as_values' => true,
         ]);
     }

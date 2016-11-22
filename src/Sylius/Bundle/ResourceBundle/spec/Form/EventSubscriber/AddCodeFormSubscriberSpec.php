@@ -152,7 +152,7 @@ final class AddCodeFormSubscriberSpec extends ObjectBehavior
         FormInterface $form,
         CodeAwareInterface $resource
     ) {
-        $this->beConstructedWith(FormType::class, 'sylius.ui.name');
+        $this->beConstructedWith(FormType::class, ['label' => 'sylius.ui.name']);
 
         $event->getData()->willReturn($resource);
         $event->getForm()->willReturn($form);

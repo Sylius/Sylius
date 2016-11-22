@@ -69,9 +69,9 @@ class LocaleType extends BaseLocaleType
             $locale = $event->getData();
             if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
                 $options['disabled'] = true;
-                $options['choices'] = [$locale->getCode() => $this->getLocaleName($locale->getCode())];
+                $options['choices'] = [$this->getLocaleName($locale->getCode()) => $locale->getCode()];
             } else {
-                $options['choices'] = $this->getAvailableLocales();
+                $options['choices'] = array_flip($this->getAvailableLocales());
             }
 
             $form = $event->getForm();

@@ -29,12 +29,10 @@ class PromotionRuleChoiceType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setDefaults([
-                'choices' => $this->rules,
-                'choices_as_values' => true,
-            ])
-        ;
+        $resolver->setDefaults([
+            'choices' => array_flip($this->rules),
+            'choices_as_values' => true,
+        ]);
     }
 
     public function getParent()

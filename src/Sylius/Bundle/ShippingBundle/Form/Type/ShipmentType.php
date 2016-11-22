@@ -26,13 +26,13 @@ class ShipmentType extends AbstractResourceType
     {
         $builder
             ->add('state', ChoiceType::class, [
-                'label' => 'sylius.form.shipment.state',
                 'choices' => [
-                    ShipmentInterface::STATE_CART => 'sylius.form.shipment.states.cart',
-                    ShipmentInterface::STATE_READY => 'sylius.form.shipment.states.ready',
-                    ShipmentInterface::STATE_SHIPPED => 'sylius.form.shipment.states.shipped',
-                    ShipmentInterface::STATE_CANCELLED => 'sylius.form.shipment.states.cancelled',
+                    'sylius.form.shipment.states.cart' => ShipmentInterface::STATE_CART,
+                    'sylius.form.shipment.states.ready' => ShipmentInterface::STATE_READY,
+                    'sylius.form.shipment.states.shipped' => ShipmentInterface::STATE_SHIPPED,
+                    'sylius.form.shipment.states.cancelled' => ShipmentInterface::STATE_CANCELLED,
                 ],
+                'label' => 'sylius.form.shipment.state',
                 'choices_as_values' => true,
             ])
             ->add('tracking', TextType::class, [

@@ -53,15 +53,14 @@ class CountryType extends AbstractResourceType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $options = [
                 'label' => 'sylius.form.country.name',
-                'choices_as_values' => true,
             ];
 
             $country = $event->getData();
             if ($country instanceof CountryInterface && null !== $country->getCode()) {
                 $options['disabled'] = true;
-                $options['choices'] = [$country->getCode() => $this->getCountryName($country->getCode())];
+                $options['choices'] = [$this->getCountryName($country->getCode()) => $country->getCode()];
             } else {
-                $options['choices'] = $this->getAvailableCountries();
+                $options['choices'] = array_flip($this->getAvailableCountries());
             }
 
             $form = $event->getForm();

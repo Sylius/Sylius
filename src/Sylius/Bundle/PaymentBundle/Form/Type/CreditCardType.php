@@ -42,13 +42,15 @@ class CreditCardType extends AbstractResourceType
                   'label' => 'sylius.form.credit_card.security_code',
               ])
               ->add('expiryMonth', ChoiceType::class, [
-                  'label' => 'sylius.form.credit_card.expiry_month',
                   'choices' => $this->getMonthChoices(),
+                  'choice_translation_domain' => false,
+                  'label' => 'sylius.form.credit_card.expiry_month',
                   'choices_as_values' => true,
               ])
               ->add('expiryYear', ChoiceType::class, [
-                  'label' => 'sylius.form.credit_card.expiry_year',
                   'choices' => $this->getViableYears(),
+                  'choice_translation_domain' => false,
+                  'label' => 'sylius.form.credit_card.expiry_year',
                   'choices_as_values' => true,
               ])
         ;
@@ -95,7 +97,7 @@ class CreditCardType extends AbstractResourceType
         $monthChoices = [];
 
         foreach (range(1, 12) as $month) {
-            $monthChoices[$month] = str_pad($month, 2, 0, STR_PAD_LEFT);
+            $monthChoices[str_pad($month, 2, 0, STR_PAD_LEFT)] = $month;
         }
 
         return $monthChoices;

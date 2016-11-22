@@ -28,13 +28,13 @@ class BooleanFilterType extends AbstractType
     {
         $resolver
             ->setDefaults([
+                'choices' => [
+                    'sylius.ui.yes_label' => BooleanFilter::TRUE,
+                    'sylius.ui.no_label' => BooleanFilter::FALSE,
+                ],
                 'data_class' => null,
                 'required' => false,
-                'empty_value' => 'sylius.ui.all',
-                'choices' => [
-                    BooleanFilter::TRUE => 'sylius.ui.yes_label',
-                    BooleanFilter::FALSE => 'sylius.ui.no_label',
-                ],
+                'placeholder' => 'sylius.ui.all',
                 'choices_as_values' => true,
             ])
             ->setDefined('field')

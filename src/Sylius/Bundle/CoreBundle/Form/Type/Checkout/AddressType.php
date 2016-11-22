@@ -17,6 +17,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -29,8 +30,13 @@ class AddressType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('shippingAddress', 'sylius_address', ['shippable' => true])
-            ->add('billingAddress', 'sylius_address')
+            ->add('shippingAddress', 'sylius_address', [
+                'shippable' => true,
+                'constraints' => [new Valid()],
+            ])
+            ->add('billingAddress', 'sylius_address', [
+                'constraints' => [new Valid()],
+            ])
             ->add('differentBillingAddress', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,
@@ -51,7 +57,6 @@ class AddressType extends AbstractResourceType
         $resolver
             ->setDefaults([
                 'customer' => null,
-                'cascade_validation' => true,
             ])
         ;
     }
