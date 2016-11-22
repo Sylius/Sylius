@@ -69,9 +69,6 @@ Configuration Reference
         validation_groups:
             shipping_calculator_flat_rate_configuration: [sylius]
             shipping_calculator_per_item_rate_configuration: [sylius]
-            shipping_calculator_flexible_rate_configuration: [sylius]
-            shipping_calculator_weight_rate_configuration: [sylius]
-            shipping_calculator_volume_rate_configuration: [sylius]
 
 Tests
 -----
