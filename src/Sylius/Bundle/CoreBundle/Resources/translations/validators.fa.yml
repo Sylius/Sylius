@@ -3,8 +3,6 @@
 
 sylius:
     channel:
-        default_currency:
-            not_blank: لطفا واحد پول پایه برای کانال را وارد کنید.
         default_locale:
             not_blank: لطفا زبان پایه برای کانال را وارد کنید.
     checkout:

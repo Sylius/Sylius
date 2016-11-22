@@ -36,6 +36,7 @@ sylius:
             calculator: Kalkylator
             category: Kategori
             category_requirement: Kategorikrav
+            channels: Kanaler
             configuration: Konfiguration
             description: Beskrivning
             enabled: Aktiverad

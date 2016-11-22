@@ -3,8 +3,6 @@
 
 sylius:
     channel:
-        default_currency:
-            not_blank: Proszę podać domyślną walutę kanału.
         default_locale:
             not_blank: Proszę podać domyślny język kanału dystrybucji.
     checkout:

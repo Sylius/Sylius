@@ -12,6 +12,7 @@ sylius:
             ends_at: Përfundon më
             exclusive: Ekskluziv
             name: Emri
+            priority: Përparësia
             rules: Rregullat
             starts_at: Fillon më
         promotion_rule:

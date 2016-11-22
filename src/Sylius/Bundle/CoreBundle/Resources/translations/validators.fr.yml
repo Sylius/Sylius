@@ -3,8 +3,6 @@
 
 sylius:
     channel:
-        default_currency:
-            not_blank: Veuillez sélectionner un canal par défaut pour la devise.
         default_locale:
             not_blank: Veuillez renseigner la locale par défaut du canal.
     checkout:

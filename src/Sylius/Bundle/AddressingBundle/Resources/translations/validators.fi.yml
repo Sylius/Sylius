@@ -43,3 +43,13 @@ sylius:
             min_length: Maakunnan nimen on oltava vähintään 2 merkkiä pitkä|Maakunnan nimen on oltava vähintään 2 merkkiä pitkä.
             not_blank: Lisää maakunta.
             unique: Maankunnan nimi on oltava yksilöllinen.
+    zone:
+        code:
+            not_blank: Lisää aluekoodi.
+            unique: Aluekoodin tulee olla yksilöllinen.
+        name:
+            not_blank: Lisää alueen nimi.
+    zone_member:
+        code:
+            not_blank: Valitise alueen osa.
+        unique: Valittu alueen osa kuuluu jo alueeseen.

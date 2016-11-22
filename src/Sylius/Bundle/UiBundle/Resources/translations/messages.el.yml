@@ -41,7 +41,6 @@ sylius:
         currency: Νόμισμα
         current_orders: Τρέχουσες παραγγελίες
         current_stock: Τρέχων απόθεμα
-        default_currency: Προεπιλεγμένο νόμισμα
         description: Περιγραφή
         editing_country: Επεξεργασία χώρας
         editing_zone: Επεξεργασία ζώνης

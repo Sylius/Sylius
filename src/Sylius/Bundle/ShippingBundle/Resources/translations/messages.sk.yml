@@ -43,6 +43,7 @@ sylius:
             calculator: Spôsob vypočtu
             category: Kategória
             category_requirement: Podmienka pre kategóriu doručenia
+            channels: Kanály
             configuration: Konfigurácia
             description: Popis
             enabled: Zapnuté

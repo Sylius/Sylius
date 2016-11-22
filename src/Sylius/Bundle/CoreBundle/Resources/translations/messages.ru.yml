@@ -19,6 +19,9 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Товар
+            customer_group: Группа клиента
+        promotion_coupon:
+            per_customer_usage_limit: Лимит использования на клиента
         group:
             name: Название
             roles: Роли
@@ -26,7 +29,7 @@ sylius:
             taxonomies: Список каталогов
             locale_default: Локаль по умолчанию
             locales: Языки
-            currency_default: Валюта по умолчанию
+            currency_base: Базовая валюта
             currencies: Валюты
             shipping_methods: Список способов доставки
             payment_methods: Список методов оплаты
@@ -103,7 +106,6 @@ sylius:
             height: Высота
             on_hand: Количество на складе
             price: Цена
-            original_price: Исходная цена
             sku: Идентификатор товарной позиции
             weight: Вес
             width: Ширина
@@ -118,17 +120,17 @@ sylius:
             type: Типы взаимосвязи
         product_association_type:
             name: Название
+        promotion_filter:
+            product:
+                products: Товары
         promotion_rule:
-            contains_taxon:
-                taxon: Налог
-                count: Кол-во
-            taxon:
-                taxons: Налоги
             product:
                 products: Товары
             total_of_items_from_taxon:
                 taxon: Налог
                 amount: Сумма
+        payment_method:
+            channels: Каналы
     installer:
         extensions:
             header: расширения
@@ -189,18 +191,25 @@ sylius:
     email:
         order_confirmation:
             name: Подтверждение заказа
+            content: Ваш заказ № %number% был успешно оформлен. <br/> <br/> Благодарим вас за покупку в нашем магазине!
         order_comment:
             name: Комментарий к заказу
         shipment_confirmation:
             name: Подтверждение посылки
+            content: Ваш заказ № %number% был отправлен с использованием %method%. <br/> Вы можете проверить эго местонахождение с помощью кода отслеживания «%tracking%». <br/> <br/> Благодарим вас за успешно выполненную транзакцию.
         user_confirmation:
             name: Подтверждение пользователя
             subject: Добро пожаловать в наш магазин
             content: Добро пожаловать в наш магазин<br/><br/>Вы только что были зарегистрированы. <br/>Спасибо %username%.
         password_reset:
             name: Сброс пароля
+            content: <h3>Здравствуйте, %username%</h3> Чтобы сбросить пароль - пожалуйста, пройдите по ссылке %url% <br/> <br/> с уважением, команда.
         verification:
             name: Проверка адреса электронной почты
             content: Чтобы подтвердить ваш адрес электронной почты - пожалуйста, пройдите по ссылке %url%
     payum_gateway:
         cash_on_delivery: Наличными при доставке
+        offline: Офлайн
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: По зонам и каналам

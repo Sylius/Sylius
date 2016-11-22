@@ -124,9 +124,7 @@ sylius:
         create_product_association_type: Krijo tipologji te lidhjes se produktit
         create_product_attribute: Krijo atribut produkti
         create_promotion: Krijo promocion
-        create_redirect_route: Krijo rrugë tjetër
         create_report: Krijo raportin
-        create_route: Krijo rrugën
         create_shipping_category: Krijo kategorinë e dërgimit
         create_shipping_method: Krijo mënyrën e dërgimit
         create_simple_block: Krijo bllok të thjeshtë
@@ -146,8 +144,6 @@ sylius:
         creating_menu: Duke krijuar menu
         creating_menu_node: Duke krijuar një element të menusë
         creating_new_page: Duke krijuar faqe të re
-        creating_redirect_route: Duke krijuar rrugë tjetër
-        creating_route: Duke krijuar rrugën
         creation_date: Data e krijimit
         creation_time: Koha e krijimit
         currencies: Monedhat
@@ -172,7 +168,6 @@ sylius:
         data: Të dhëna
         date: Data
         default_billing_address: Adresa kryesore e faturimit
-        default_currency: Monedha e paracaktuar
         default_locale: Lokalizimi i parazgjedhur
         default_shipping_address: Adresa kryesore e dërgimit
         delete: Fshi
@@ -219,10 +214,8 @@ sylius:
         editing_permission: Duke afishuar lejen
         editing_product: Duke afishuar produktin
         editing_promotion: Duke afishuar promocionin
-        editing_redirect_route: Duke afishuar rrugën tjetër
         editing_review: Modifikim i recensionit
         editing_role: Duke afishuar rolin
-        editing_route: Duke afishuar rrugën
         editing_shipment: Afishimi i dërgesës
         editing_shipping_category: Duke afishuar kategorinë e dërgimit
         editing_shipping_method: Duke afishuar mënyrën e dërgimit
@@ -482,7 +475,6 @@ sylius:
         recent_customers: Blerësit e fundit
         recent_orders: Porositë e fundit
         recent_users: Përdoruesit e fundit
-        redirect_routes: Rishkruaj drejtimet
         refunded: Rimbursuar
         register: Regjistrohu
         register_button: Regjistrohu
@@ -505,7 +497,6 @@ sylius:
         review_details: Detajet e recensionit
         reviews: Recensionet
         roles: Funksionet
-        routes: Rrugët
         rules: Rregullat
         sales: Shitjet
         sales_this_month: Shitjet
@@ -591,10 +582,8 @@ sylius:
         there_are_no_permissions_defined: Nuk ka asnjë leje të përcaktuar
         there_are_no_products_to_display: Nuk ka asnjë produkt për t'u shfaqur
         there_are_no_promotions_configured: Nuk ka asnjë promocion të konfiguruar
-        there_are_no_redirect_routes_to_display: Nuk ka asnjë rrugë tjetër për t'u shfaqur
         there_are_no_reports_created: Nuk është krijuar asnjë njoftim
         there_are_no_roles_defined: Nuk ka asnjë rol të përcaktuar
-        there_are_no_routes_to_display: Nuk ka asnjë rrugë për t'u shfaqur
         there_are_no_shipments_to_display: Nuk ka asnjë dërgesë për t'u shfaqur
         there_are_no_shipping_categories_configured: Nuk ka asnjë kategori dërgimi të konfiguruar
         there_are_no_shipping_methods_configured: Nuk ka asnjë mënyrë dërgimi të konfiguruar

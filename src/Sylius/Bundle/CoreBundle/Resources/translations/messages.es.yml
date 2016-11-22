@@ -29,7 +29,7 @@ sylius:
             taxonomies: Taxonomías
             locale_default: Configuración regional predeterminada
             locales: Idiomas
-            currency_default: Moneda por defecto
+            currency_base: Moneda base
             currencies: Monedas
             shipping_methods: Métodos de envío
             payment_methods: Métodos de pago
@@ -106,7 +106,6 @@ sylius:
             height: Alto
             on_hand: Existencias actuales
             price: Precio
-            original_price: Precio original
             sku: SKU
             weight: Peso
             width: Ancho
@@ -121,17 +120,21 @@ sylius:
             type: Tipos de asociación
         product_association_type:
             name: Nombre
-        promotion_rule:
-            contains_taxon:
-                taxon: Taxón
-                count: Contador
+        promotion_filter:
+            product:
+                products: Productos
             taxon:
+                taxons: Taxones
+        promotion_rule:
+            has_taxon:
                 taxons: Taxones
             product:
                 products: Productos
             total_of_items_from_taxon:
                 taxon: Taxón
                 amount: Cantidad
+        payment_method:
+            channels: Canales
     installer:
         extensions:
             header: extensiones

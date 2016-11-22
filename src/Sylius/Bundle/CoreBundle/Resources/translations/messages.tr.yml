@@ -25,7 +25,6 @@ sylius:
         channel:
             taxonomies: Kategoriler
             locales: Diller
-            currency_default: Varsayılan para birimi
             currencies: Para birimi
             shipping_methods: Kargolama Yöntemleri
             payment_methods: Ödeme Yöntemleri
@@ -110,10 +109,10 @@ sylius:
         product_association_type:
             name: Ad
         promotion_rule:
-            contains_taxon:
-                count: Sayısı
             total_of_items_from_taxon:
                 amount: Miktar
+        payment_method:
+            channels: Kanallar
     installer:
         extensions:
             header: Eklentiler

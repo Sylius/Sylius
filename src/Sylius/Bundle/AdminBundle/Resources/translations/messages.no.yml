@@ -22,5 +22,3 @@ sylius:
                 sales:
                     header: Salg
                     orders: Bestillinger
-                content:
-                    routes: Ruter

@@ -34,7 +34,3 @@ sylius:
                 sales:
                     header: Försäljning
                     orders: Order
-                content:
-                    header: Innehåll
-                    static_contents: Statiskt innehåll
-                    routes: Rutter

@@ -87,7 +87,6 @@ sylius:
         current_stock: På lager
         dashboard: Panel
         default_billing_address: Standard faktureringsadresse
-        default_currency: Standard valuta
         default_shipping_address: Standard leveringsadresse
         delete: Slett
         delete_image: Slett bilde
@@ -260,7 +259,6 @@ sylius:
         return: Retur
         returned: Returnert
         roles: Roller
-        routes: Ruter
         rules: Regler
         sales: Salg
         sales_this_month: Salg

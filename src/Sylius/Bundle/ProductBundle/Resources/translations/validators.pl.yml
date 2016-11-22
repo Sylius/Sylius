@@ -13,11 +13,6 @@ sylius:
             not_blank: Proszę podać nazwę produktu.
             min_length: Nazwa produktu musi składać się z co najmniej 1 znaku. |Nazwa produktu musi składać się z co najmniej {{ limit }} znaków.
             max_length: Nazwa produktu nie może być dłuższa niż 1 znak. |Nazwa produktu nie może przekraczać {{ limit }} znaków.
-    variant:
-        sku:
-            not_blank: Proszę podać SKU wariantu.
-            unique: Wartość SKU wariantu musi być unikatowa.
-        combination: Wariant z tą opcją już istnieje.
     option:
         code:
             not_blank: Proszę wprowadzić kod opcji.

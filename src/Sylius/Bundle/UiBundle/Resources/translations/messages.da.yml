@@ -84,7 +84,6 @@ sylius:
         current_stock: Nuværende lager antal
         dashboard: Kontrolpanel
         default_billing_address: Standard betalingsadresse
-        default_currency: Standard valuta
         default_shipping_address: Standard leveringsadresse
         delete: Slet
         delete_image: Slet billede

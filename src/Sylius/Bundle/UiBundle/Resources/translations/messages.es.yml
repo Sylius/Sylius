@@ -165,9 +165,7 @@ sylius:
         create_product_association_type: Crear tipo de asociación de producto
         create_product_attribute: Crear atributo de producto
         create_promotion: Crear promoción
-        create_redirect_route: Crear ruta de redirección
         create_report: Crear reporte
-        create_route: Crear Ruta
         create_shipping_category: Crear categoría de envio
         create_shipping_method: Crear método de envio
         create_simple_block: Crear bloque simple
@@ -187,8 +185,6 @@ sylius:
         creating_menu: Creando menu
         creating_menu_node: Crear nodo de menú
         creating_new_page: Crear nueva página
-        creating_redirect_route: Creando ruta de redirección
-        creating_route: Creando ruta
         creation_date: Fecha de creación
         creation_time: Fecha de creación
         currencies: Monedas
@@ -220,7 +216,6 @@ sylius:
         default: Por defecto
         default_address: Dirección por defecto
         default_billing_address: sylius.account.address.default.billing
-        default_currency: Moneda por defecto
         default_locale: Configuración regional predeterminada
         default_shipping_address: sylius.account.address.default.shipping
         delete: Eliminar
@@ -255,10 +250,8 @@ sylius:
         edit_promotion: Editar promoción
         edit_promotion_coupon: Editar el cupón de la promoción
         edit_report: Editar reporte
-        edit_route: Editar ruta
         edit_shipping_address: Editar dirección de envío
         edit_shipping_method: Editar método de envío
-        edit_static_content: Editar contenido estático
         edit_tax_category: Editar categoría de impuesto
         edit_tax_rate: Editar tasa impositiva
         edit_taxon: Editar taxonomía
@@ -283,10 +276,8 @@ sylius:
         editing_permission: Editando el permiso
         editing_product: Editar producto
         editing_promotion: Editar promoción
-        editing_redirect_route: Editar rutas de redireccion
         editing_review: Editando reseña
         editing_role: Editando rol
-        editing_route: Editando ruta
         editing_shipment: Editando envío
         editing_shipping_category: Actualizar
         editing_shipping_method: Actualizar
@@ -482,10 +473,8 @@ sylius:
         new_promotion_coupon: Nuevo cupón de promoción
         new_review: Nueva reseña
         new_role: Nuevo rol
-        new_route: Nueva ruta
         new_shipping_category: Nueva categoría de envio
         new_shipping_method: Nuevo método de envio
-        new_static_content: Nuevo contenido estático
         new_tax_category: Nueva categoría de impuesto
         new_tax_rate: Nueva tasa de impuesto
         new_taxon: Nuevo taxón
@@ -620,7 +609,6 @@ sylius:
         recent_customers: Clientes recientes
         recent_orders: Pedidos recientes
         recent_users: Usuario recientes
-        redirect_routes: Reglas de redireccion
         refund: Reembolsar
         refunded: Reembolsado
         register: Registrarse
@@ -651,7 +639,6 @@ sylius:
         review_details: Detalles de reseña
         reviews: Reseñas
         roles: Roles
-        routes: Rutas
         rules: Reglas
         sales: Ventas
         sales_this_month: Ventas
@@ -710,7 +697,6 @@ sylius:
         starts_at: Empieza el
         starts_with: Comienza con
         state: Estado
-        static_contents: Contenidos estáticos
         status: Estado
         street: Calle
         string_blocks: Bloques de texto
@@ -762,11 +748,9 @@ sylius:
         there_are_no_permissions_defined: No hay permisos definidos
         there_are_no_products_to_display: No hay productos para mostrar
         there_are_no_promotions_configured: No hay promociones configuradas
-        there_are_no_redirect_routes_to_display: No hay rutas de redirección para mostrar
         there_are_no_reports_created: No hay informes creados
         there_are_no_reviews: No hay reseñas
         there_are_no_roles_defined: No hay roles definidos
-        there_are_no_routes_to_display: No hay rutas para mostrar
         there_are_no_shipments_to_display: Hay no hay envíos para mostrar
         there_are_no_shipping_categories_configured: No hay categorías de envio configuradas
         there_are_no_shipping_methods_configured: No hay métodos envío configurados

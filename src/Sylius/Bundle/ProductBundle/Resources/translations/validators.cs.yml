@@ -10,11 +10,6 @@ sylius:
             not_blank: Zadejte název produktu.
             min_length: Vyplňte název produktu.|Název musí obsahovat alespoň {{ limit }} znaků.
             max_length: Název produktu nesmí být delší než 1 znak. |Název produktu nesmí být delší než {{ limit }} znaků.
-    variant:
-        sku:
-            not_blank: Prosím zvolte variantu Jednotky vedení skladu.
-            unique: Varianta Jednotky vedení skladu musí být unikátní.
-        combination: Varianta s touto sadou možností již existuje.
     option:
         name:
             not_blank: Prosím zadejte název možnosti.

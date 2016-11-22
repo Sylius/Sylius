@@ -29,7 +29,7 @@ sylius:
             taxonomies: การจัดประเภท
             locale_default: ตำแหน่งที่ตั้งเริ่มต้น
             locales: ภาษาที่ใช้
-            currency_default: สกุลเงินหลัก
+            currency_base: ฐานสกุลเงิน
             currencies: สกุลเงิน
             shipping_methods: วิธีการจัดส่ง
             payment_methods: วิธีการชำระเงิน
@@ -106,7 +106,6 @@ sylius:
             height: ความสูง
             on_hand: จำนวนสินค้าปัจจุบัน
             price: ราคา
-            original_price: ราคาทุน
             sku: SKU
             weight: น้ำหนัก
             width: ความกว้าง
@@ -121,17 +120,21 @@ sylius:
             type: ชนิดสินค้าที่เกี่ยวข้อง
         product_association_type:
             name: ชื่อ
-        promotion_rule:
-            contains_taxon:
-                taxon: หมวดหมู่
-                count: จำนวน
+        promotion_filter:
+            product:
+                products: สินค้า
             taxon:
+                taxons: การจัดหมวดหมู่
+        promotion_rule:
+            has_taxon:
                 taxons: การจัดหมวดหมู่
             product:
                 products: สินค้า
             total_of_items_from_taxon:
                 taxon: หมวดหมู่
                 amount: ยอดเงิน
+        payment_method:
+            channels: ช่องทางจำหน่าย
     installer:
         extensions:
             header: ส่วนขยาย

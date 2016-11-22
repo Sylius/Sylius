@@ -10,11 +10,6 @@ sylius:
             not_blank: Lütfen ürün adı girin.
             min_length: Ürün adı en az 1 karakter uzunluğunda olmalıdır.|Ürün adı en az {{ limit }} karakter uzunluğunda olmalıdır.
             max_length: Ürün adı 1 karakterden uzun olmamalıdır.|Ürün adı {{ limit }} karakterden uzun olmamalıdır.
-    variant:
-        sku:
-            not_blank: Lütfen stok birimi varyantını girin.
-            unique: Stok birimi varyantı benzersiz olmalıdır.
-        combination: Bu seçenekli varyant zaten bulunmaktadır.
     option:
         name:
             not_blank: Seçenek adı giriniz.

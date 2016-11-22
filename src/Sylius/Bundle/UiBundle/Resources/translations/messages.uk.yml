@@ -165,9 +165,7 @@ sylius:
         create_product_association_type: Створити тип асоціювання товару
         create_product_attribute: Створити атрибут товару
         create_promotion: Створити акцію
-        create_redirect_route: Створити маршрут перенаправлення
         create_report: Створити звіт
-        create_route: Створити маршрут
         create_shipping_category: Створити категорію доставки
         create_shipping_method: Створити спосіб доставки
         create_simple_block: Створити простий блок
@@ -187,8 +185,6 @@ sylius:
         creating_menu: Створення меню
         creating_menu_node: Створення пункту меню
         creating_new_page: Створення нової сторінки
-        creating_redirect_route: Створення маршруту перенаправлення
-        creating_route: Створення маршруту
         creation_date: Дата створення
         creation_time: Час створення
         currencies: Валюти
@@ -219,7 +215,6 @@ sylius:
         date: Дата
         default: Типово
         default_billing_address: Платіжна адреса за замовчуванням
-        default_currency: Типова валюта
         default_locale: Типова локаль
         default_shipping_address: Адреса доставки за замовчуванням
         delete: Видалити
@@ -254,10 +249,8 @@ sylius:
         edit_promotion: Редагувати акцію
         edit_promotion_coupon: Редагувати промо-купон
         edit_report: Редагувати звіт
-        edit_route: Редагувати маршрут
         edit_shipping_address: Редагувати адресу доставки
         edit_shipping_method: Редагувати спосіб доставки
-        edit_static_content: Редагувати статичний вміст
         edit_tax_category: Редагувати категорію оподаткування
         edit_tax_rate: Редагувати податкову ставку
         edit_taxon: Редагувати таксон
@@ -282,10 +275,8 @@ sylius:
         editing_permission: Редагування дозволу
         editing_product: Редагування товару
         editing_promotion: Редагування акції
-        editing_redirect_route: Редагування маршруту перенаправлення
         editing_review: Редагування відгуку
         editing_role: Редагування ролі
-        editing_route: Редагування маршруту
         editing_shipment: Редагування відправки
         editing_shipping_category: Редагування категорії доставки
         editing_shipping_method: Редагування методу доставки
@@ -446,10 +437,8 @@ sylius:
         new_promotion_coupon: Новий промо-купон
         new_review: Новий відгук
         new_role: Нова роль
-        new_route: Новий маршрут
         new_shipping_category: Нова категорія доставки
         new_shipping_method: Новий спосіб доставки
-        new_static_content: Новий статичний вміст
         new_tax_category: Нова категорія оподаткування
         new_tax_rate: Нова ставка податку
         new_taxon: Новий таксон
@@ -586,7 +575,6 @@ sylius:
         returned: Повернене
         returns_policy: Умови обміну та повернення
         roles: Ролі
-        routes: Маршрути
         rules: Правила
         sales: Продажі
         sales_this_month: Продажі
@@ -625,7 +613,6 @@ sylius:
         start_date: Дата початку
         starts_at: Початок дії
         state: Стан
-        static_contents: Статичний вміст
         status: Стан
         street: Вулиця
         subject: Тема

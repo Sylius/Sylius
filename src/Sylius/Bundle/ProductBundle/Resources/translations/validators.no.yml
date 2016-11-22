@@ -10,11 +10,6 @@ sylius:
             not_blank: Vennligst skriv inn produktnavnet.
             min_length: Produktnavn må være minst ett tegn. |Produktnavn må være minst {{ limit }} tegn.
             max_length: Navn må ikke være lengre enn ett tegn. |Navn må ikke være lengre enn {{ limit }} tegn.
-    variant:
-        sku:
-            not_blank: Skriv inn variantens strekkode (SKU).
-            unique: Variantens strekkode (SKU) må være unike.
-        combination: Variant med dette valget finnes allerede.
     option:
         name:
             not_blank: Skriv inn navnet på alternativet.

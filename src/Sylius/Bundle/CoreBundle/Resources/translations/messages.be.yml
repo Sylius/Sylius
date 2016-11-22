@@ -23,7 +23,6 @@ sylius:
         channel:
             taxonomies: Катэгорыі
             locales: Месцы размяшчэння
-            currency_default: Галоўная валюта
             shipping_methods: Метады дастаўкі
             payment_methods: Метады аплаты
             tax_zone_default: Галоўная падатковая зона
@@ -101,8 +100,6 @@ sylius:
         product_association_type:
             name: Імя
         promotion_rule:
-            contains_taxon:
-                count: Колькасць
             total_of_items_from_taxon:
                 amount: Сума
     installer:

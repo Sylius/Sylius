@@ -115,9 +115,7 @@ sylius:
         create_product_association_type: Izradite tip poveznice proizvoda
         create_product_attribute: Izradite atribut proizvoda
         create_promotion: Kreirajte akciju
-        create_redirect_route: Kreirajte rutu za preusmjeravanje
         create_report: Izradite izvješće
-        create_route: Izradite rutu
         create_shipping_category: Kreirajte tip dostave
         create_shipping_method: Novi način dostave
         create_simple_block: Kreirajte jednostavni blok
@@ -137,8 +135,6 @@ sylius:
         creating_menu: Izrada izbornika
         creating_menu_node: Izrada elementa izbornika
         creating_new_page: Izrada nove stranice
-        creating_redirect_route: Izrada rute za preusmjeravanje
-        creating_route: Izrada rute
         creation_date: Datum kreiranja
         creation_time: Kreirano
         currencies: Valute
@@ -164,7 +160,6 @@ sylius:
         data: Podaci
         date: Datum
         default_billing_address: sylius.account.address.default.billing
-        default_currency: Zadana valuta
         default_shipping_address: sylius.account.address.default.shipping
         delete: sylius.account.address.action.delete
         delete_image: Obriši sliku
@@ -198,10 +193,8 @@ sylius:
         editing_permission: Uređivanje dozvole
         editing_product: Ažuriranje artikla
         editing_promotion: Ažuriranje akcije
-        editing_redirect_route: Uređivanje rute za preusmjeravanje
         editing_review: Uređivanje osvrta
         editing_role: Uređivanje uloge
-        editing_route: Uređivanje rute
         editing_shipment: Uredi pošiljku
         editing_shipping_category: Uređivanje kategorije dostave
         editing_shipping_method: Ažuriranje načina dostave
@@ -428,7 +421,6 @@ sylius:
         recent_customers: Posljednji kupci
         recent_orders: Posljednje narudžbe
         recent_users: Posljednji korisnici
-        redirect_routes: Rute za preusmjeravanje
         refunded: Refundirano
         register: Registracija
         register_button: Registracija
@@ -450,7 +442,6 @@ sylius:
         review_details: Detalji osvrta
         reviews: Recenzije
         roles: Role (korisnička prava)
-        routes: Rute
         rules: Pravila
         sales: Prodaja
         sales_this_month: Prodaja
@@ -529,10 +520,8 @@ sylius:
         there_are_no_permissions_defined: Ne postoje definirane dozvole
         there_are_no_products_to_display: Nema proizvoda za prikazati
         there_are_no_promotions_configured: Nema postavljenih promocija
-        there_are_no_redirect_routes_to_display: Ne postoje rute za preusmjeravanje za prikazati
         there_are_no_reports_created: Izvješća ne postoje
         there_are_no_roles_defined: Ne postoje definirane uloge
-        there_are_no_routes_to_display: Ne postoje rute za prikazati
         there_are_no_shipments_to_display: Ne postoje pošiljke za prikazati
         there_are_no_shipping_categories_configured: Nema postavljenih kategorija dostave
         there_are_no_shipping_methods_configured: Nema postavljenih metoda dostave

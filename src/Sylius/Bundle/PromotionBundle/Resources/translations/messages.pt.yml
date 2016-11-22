@@ -12,12 +12,14 @@ sylius:
             ends_at: Termina em
             exclusive: Exclusivo
             name: Nome
+            priority: Prioridade
             rules: Regras
             starts_at: Começa em
             usage_limit: Limite de utilização
         promotion_action:
             fixed_discount_configuration:
-                amount: Quantia
+                amounts: Valores
+                base_amount: Valor base
             percentage_discount_configuration:
                 percentage: Percentagem
             type: Tipo
@@ -26,6 +28,8 @@ sylius:
             usage_limit: Limite de utilização
         promotion_coupon_generator_instruction:
             amount: Quantia
+            code_length: Comprimento do código
+            expires_at: Expira às
             usage_limit: Limite de utilização
         promotion_rule:
             cart_quantity_configuration:

@@ -2,13 +2,31 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_locale:
+            not_blank: Пожалуйста, введите язык по умолчанию для канала.
     checkout:
         shipping_method:
             not_blank: Пожалуйста, выберите метод доставки.
+    currency:
+        enabled:
+            cannot_disable_base: Базовая валюта не может быть отключена.
+    customer:
+        currency_code:
+            not_valid: Код валюты, что вы ввели, неверный.
+    order:
+        currency_code:
+            not_valid: Код валюты, что вы ввели, неверный.
     locale:
         code:
             not_blank: Пожалуйста, введите код языка.
             unique: Этот язык уже существует.
+        enabled:
+            cannot_disable_base: Базовый язык не может быть отключен.
+    product_image:
+        code:
+            not_blank: Пожалуйста, введите код изображения.
+            unique: Код изображения должен быть уникальным в пределах данного товара.
     product_variant:
         onHand:
             min: Количество товара на складе должно быть больше {{ limit }}.
@@ -18,6 +36,29 @@ sylius:
             not_blank: Пожалуйста введите стоимость.
         original_price:
             min: Первоначальная стоимость не может быть отрицательной.
+        weight:
+            min: Вес не может быть отрицательным.
+            invalid: Вес должен быть числом.
+        width:
+            min: Ширина не может быть отрицательной.
+            invalid: Ширина должна быть числом.
+        height:
+            min: Высота не может быть отрицательной.
+            invalid: Высота должна быть числом.
+        depth:
+            min: Глубина не может быть отрицательной.
+            invalid: Глубина должна быть числом.
     product_translation:
         short_description:
             max: Краткое описание не должно быть длинее {{ limit }} символов.
+    taxon_image:
+        code:
+            not_blank: Пожалуйста, введите код изображения.
+    user:
+        email:
+            unique: Этот e-mail уже используется.
+        username:
+            unique: Это имя пользователя уже используется.
+            not_blank: Пожалуйста, введите свое имя.
+        locale_code:
+            not_blank: Пожалуйста, выберите язык.

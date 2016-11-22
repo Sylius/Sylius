@@ -151,9 +151,7 @@ sylius:
         create_product_association_type: Vytvoriť typ produktového priradenia
         create_product_attribute: Vytvoriť vlastnosť
         create_promotion: Vytvorenie propagácie
-        create_redirect_route: Vytvoriť presmerovanie
         create_report: Vytvoriť report
-        create_route: Vytvoriť URL cestu
         create_shipping_category: Vytvoriť kategóriu doručenia
         create_shipping_method: Vytvoriť spôsob dopravy
         create_simple_block: Vytvoriť obsahový blok
@@ -173,8 +171,6 @@ sylius:
         creating_menu: Vytvárenie menu
         creating_menu_node: Vytvaranie prvku menu
         creating_new_page: Vytvárenie novej stránky
-        creating_redirect_route: Vytváranie presmerovania
-        creating_route: Vytvorenie URL cesty
         creation_date: Dátum vytvorenia
         creation_time: Čas vytvorenia
         currencies: Meny
@@ -202,7 +198,6 @@ sylius:
         data: Údaje
         date: Dátum
         default_billing_address: Predvolená fakturačná adresa
-        default_currency: Predvolená mena
         default_locale: Predvolený jazyk
         default_shipping_address: Predvolaná doručovacia adresa
         delete: Odstrániť
@@ -233,10 +228,8 @@ sylius:
         edit_promotion: Upraviť propagáciu
         edit_promotion_coupon: Upraviť zľavový kupón
         edit_report: Úprava reportu
-        edit_route: Úpraviť URL cestu
         edit_shipping_address: Upraviť dodaciu adresu
         edit_shipping_method: Úpraviť spôsob doručenia
-        edit_static_content: Upraviť statický obsah
         edit_tax_category: Úprava daňovej kategórie
         edit_tax_rate: Upraviť sadzbu dane
         edit_taxon: Úpraviť kategóriu
@@ -261,10 +254,8 @@ sylius:
         editing_permission: Úprava oprávnenia
         editing_product: Úprava produktu
         editing_promotion: Upraviť propagáciu
-        editing_redirect_route: Úprava presmerovania
         editing_review: Úprava recenzie
         editing_role: Úprava role
-        editing_route: Úprava URL cesty
         editing_shipment: Úprava zásielky
         editing_shipping_category: Úprava kategórie doručenia
         editing_shipping_method: Úprava spôsobu dopravy
@@ -441,10 +432,8 @@ sylius:
         new_promotion_coupon: Nový zľavový kupón
         new_review: Nová recenzia
         new_role: Nová rola
-        new_route: Nová URL cesta
         new_shipping_category: Nová kategória doručenia
         new_shipping_method: Nový spôsob doručenia
-        new_static_content: Nový statický obsah
         new_tax_category: Nová daňová kategoria
         new_tax_rate: Nová sadzba dane
         new_taxon: Nová kategória
@@ -572,7 +561,6 @@ sylius:
         recent_customers: Najnovši zákaznici
         recent_orders: Posledné objednávky
         recent_users: Poslední používatelia
-        redirect_routes: Presmerovania
         refunded: Vrátené peniaze
         register: Registrovať
         register_button: Registrovať
@@ -600,7 +588,6 @@ sylius:
         review_details: Detail recenzie
         reviews: Recenzie
         roles: Role
-        routes: URL cesty
         rules: Pravidlá
         sales: Predaj
         sales_this_month: Predaj
@@ -653,7 +640,6 @@ sylius:
         starts_at: Začiatok
         starts_with: Začína na
         state: Stav
-        static_contents: Statický obsah
         status: Stav
         street: Ulica
         string_blocks: Textové bloky
@@ -701,10 +687,8 @@ sylius:
         there_are_no_permissions_defined: Nie sú definované žiadne oprávnenia
         there_are_no_products_to_display: Neexistujú žiadne produkty na zobrazenie
         there_are_no_promotions_configured: Nie sú nakonfigurované žiadne zľavy
-        there_are_no_redirect_routes_to_display: Nie sú žiadne presmerovania na zobrazenie
         there_are_no_reports_created: Nie sú vytvorené žiadne reporty
         there_are_no_roles_defined: Nie sú definované žiadne role
-        there_are_no_routes_to_display: Nie sú žiadne URL cesty na zobrazenie
         there_are_no_shipments_to_display: Neexistujú žiadne zásielky na zobrazenie
         there_are_no_shipping_categories_configured: Nie sú nakonfigurované žiadne kategórie doručenia
         there_are_no_shipping_methods_configured: Nie sú nakonfigurované žiadne spôsoby dopravy

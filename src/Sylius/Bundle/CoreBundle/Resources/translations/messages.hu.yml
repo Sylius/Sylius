@@ -26,7 +26,7 @@ sylius:
             taxonomies: Taxonómiák
             locale_default: Alapértelmezett nyelv
             locales: Területi beállítások
-            currency_default: Alapértelmezett pénznem
+            currency_base: Alapértelmezett pénznem
             currencies: Pénznemek
             shipping_methods: Szállítási módok
             payment_methods: Fizetési módok
@@ -103,7 +103,6 @@ sylius:
             height: Magasság
             on_hand: Aktuális készlet
             price: Ár
-            original_price: Eredeti ár
             sku: SKU
             weight: Súly
             width: Szélesség
@@ -119,11 +118,10 @@ sylius:
         product_association_type:
             name: Név
         promotion_rule:
-            contains_taxon:
-                taxon: Taxonómia
-                count: Mennyiség
             total_of_items_from_taxon:
                 taxon: Taxonómia
+        payment_method:
+            channels: Csatornák
     installer:
         extensions:
             header: kiegészítők

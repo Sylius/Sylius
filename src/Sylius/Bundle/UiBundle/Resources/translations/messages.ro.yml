@@ -91,7 +91,6 @@ sylius:
         dashboard: Panou de administrare
         data: Date
         default_billing_address: Adresă de facturare implicită
-        default_currency: Moneda implicită
         default_shipping_address: Adresă de livrare implicită
         delete: Șterge
         delete_image: Șterge imagine
@@ -263,7 +262,6 @@ sylius:
         return: Returnare
         returned: Returnată
         roles: Roluri
-        routes: Rute
         rules: Reguli
         sales: Vânzări
         sales_this_month: Vânzări

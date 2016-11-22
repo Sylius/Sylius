@@ -219,7 +219,6 @@ sylius:
         release_inventory: Освобождаване запаси
         retail_price: Цена на дребно
         return: Връщане
-        routes: Маршрути
         sales: Продажби
         sales_this_month: Продажби
         save: Запамети

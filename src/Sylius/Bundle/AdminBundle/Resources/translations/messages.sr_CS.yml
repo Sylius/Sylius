@@ -33,6 +33,3 @@ sylius:
                 sales:
                     header: Akcije
                     orders: Narudžbine
-                content:
-                    header: Sadržaj
-                    routes: Putanje

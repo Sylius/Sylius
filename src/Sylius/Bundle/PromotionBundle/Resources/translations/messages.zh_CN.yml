@@ -12,6 +12,7 @@ sylius:
             ends_at: 结束于
             exclusive: 独家
             name: 名称
+            priority: 优先级
             rules: 規則
             starts_at: 开始于
         promotion_action:

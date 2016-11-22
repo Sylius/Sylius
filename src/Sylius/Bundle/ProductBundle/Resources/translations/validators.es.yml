@@ -15,11 +15,6 @@ sylius:
             max_length: El nombre de producto debe tener como máximo 1 carácter.|El nombre de producto no debe tener más de {{ limit }} caracteres.
         slug:
             not_blank: Por favor, introduzca un slug de producto.
-    variant:
-        sku:
-            not_blank: Por favor, introduzca el SKU de la variante.
-            unique: El SKU de la variante debe ser único.
-        combination: Ya existe una variante con este conjunto de opciones.
     option:
         code:
             not_blank: Por favor, introduzca el código de opción.

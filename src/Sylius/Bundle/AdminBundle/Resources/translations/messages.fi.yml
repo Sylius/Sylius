@@ -32,6 +32,3 @@ sylius:
                 sales:
                     header: Myynnit
                     orders: Tilaukset
-                content:
-                    static_contents: Vakiosisältö
-                    routes: Reitit

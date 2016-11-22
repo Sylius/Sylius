@@ -16,7 +16,6 @@ sylius:
         content: Inhalt
         country: Land
         coupon: Gutschein
-        default_currency: Standardwährung
         email: E-Mail
         enabled: Aktiviert
         first_name: Vorname

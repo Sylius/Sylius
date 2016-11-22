@@ -29,7 +29,7 @@ sylius:
             taxonomies: Taxonomieën
             locale_default: Standaardlandinstelling
             locales: Talen/Regio's
-            currency_default: Standaard valuta
+            currency_base: Standaardvaluta
             currencies: Valuta's
             shipping_methods: Verzendmethodes
             payment_methods: Betaalmethodes
@@ -106,7 +106,6 @@ sylius:
             height: Hoogte
             on_hand: Huidige voorraad
             price: Prijs
-            original_price: Oorspronkelijke prijs
             sku: SKU
             weight: Gewicht
             width: Breedte
@@ -121,17 +120,17 @@ sylius:
             type: Associatietype
         product_association_type:
             name: Naam
+        promotion_filter:
+            product:
+                products: Producten
         promotion_rule:
-            contains_taxon:
-                taxon: Categorie
-                count: Aantal
-            taxon:
-                taxons: Taxa
             product:
                 products: Producten
             total_of_items_from_taxon:
                 taxon: Categorie
                 amount: Hoeveelheid
+        payment_method:
+            channels: Kanalen
     installer:
         extensions:
             header: extensies

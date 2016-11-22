@@ -149,9 +149,7 @@ sylius:
         create_product_association_type: ایجاد نوع ارتباط کالا
         create_product_attribute: ایجاد قابلیت محصول
         create_promotion: ایجاد فروش ویژه
-        create_redirect_route: ایجاد آدرس داخلی
         create_report: ایجاد گزارش
-        create_route: ایجاد آدرس داخلی
         create_shipping_category: تعریف نوع ارسال
         create_shipping_method: ایجاد شیوه ارسال
         create_simple_block: ایجاد بلاک ساده
@@ -171,8 +169,6 @@ sylius:
         creating_menu: ایجاد منو
         creating_menu_node: ایجاد منو
         creating_new_page: ایجاد صفحه جدید
-        creating_redirect_route: ایجاد آدرس داخلی
-        creating_route: ایجاد آدرس داخلی
         creation_date: تاریخ ایجاد
         creation_time: زمان ایجاد
         currencies: واحدهای پول
@@ -198,7 +194,6 @@ sylius:
         data: اطلاعات
         date: تاریخ
         default_billing_address: آدرس پیش فرض صورت حساب
-        default_currency: واحد پولی پیش‌فرض
         default_locale: زبان پیش فرض
         default_shipping_address: آدرس پیش فرض تحویل
         delete: حذف
@@ -242,10 +237,8 @@ sylius:
         editing_permission: ویرایش سطح دسترسی
         editing_product: ویرایش محصول
         editing_promotion: ویرایش فروش ویژه
-        editing_redirect_route: ویرایش آدرس داخلی
         editing_review: ویرایش نقد و بررسی
         editing_role: ویرایش نقش
-        editing_route: ویرایش آدرس داخلی
         editing_shipment: ویرایش ارسال محصول
         editing_shipping_category: ویرایش نوع ارسال
         editing_shipping_method: ویرایش شیوه ارسال
@@ -504,7 +497,6 @@ sylius:
         recent_customers: مشتریان اخیر
         recent_orders: سفارش های اخیر
         recent_users: کاربران اخیر
-        redirect_routes: آدرس داخلی
         refunded: پرداخت برگشت داده شده
         register: ثبت نام
         register_button: ثبت نام
@@ -527,7 +519,6 @@ sylius:
         review_details: جزئیات نقد و بررسی
         reviews: نقد و بررسی
         roles: نقش ها
-        routes: آدرس های داخلی
         rules: قوانین
         sales: فروش‌ها
         sales_this_month: فروش‌ها
@@ -613,10 +604,8 @@ sylius:
         there_are_no_permissions_defined: هیچ سطح دسترسی تعیین نشده است
         there_are_no_products_to_display: کالایی برای نمایش وجود ندارد
         there_are_no_promotions_configured: هیچ فروش ویژه ای پیکربندی نشده
-        there_are_no_redirect_routes_to_display: هیچ آدرس داخلی برای نمایش وجود ندارد
         there_are_no_reports_created: هنوز هیچ گزارشی ایجاد نشده
         there_are_no_roles_defined: هیچ نقشی تعریف نشده است
-        there_are_no_routes_to_display: هیچ آدرس داخلی برای نمایش وجود ندارد
         there_are_no_shipments_to_display: هیچ ارسالی برای نمایش وجود ندارد
         there_are_no_shipping_categories_configured: هیچ نوع ارسالی پیکربندی نشده
         there_are_no_shipping_methods_configured: هیچ روش ارسالی پیکربندی نشده

@@ -28,5 +28,3 @@ sylius:
                 sales:
                     header: Prodaja
                     orders: Narudžbe
-                content:
-                    routes: Rute

@@ -9,6 +9,7 @@ sylius:
         channel:
             taxonomies: Категоризация
             locales: Езикови променливи
+            currency_base: Основна валута
             shipping_methods: Начин на доставка
             payment_methods: Методи на плащане
         order_filter:

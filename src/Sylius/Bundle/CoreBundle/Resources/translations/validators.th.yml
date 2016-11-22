@@ -3,8 +3,6 @@
 
 sylius:
     channel:
-        default_currency:
-            not_blank: กรุณาระบุสกุลเงินเริ่มต้น
         default_locale:
             not_blank: กรุณาระบุภาษาเริ่มต้น
     checkout:
@@ -27,6 +25,7 @@ sylius:
             cannot_disable_base: ไม่สามารถปิดใช้งานภาษาที่เป็นค่าเริ่มต้นได้
     product_image:
         code:
+            not_blank: กรุณาป้อนรหัสรูปภาพ
             unique: รหัสภาพต้องไม่ซ้ำกันภายในสินค้านี้
     product_variant:
         onHand:
@@ -37,11 +36,24 @@ sylius:
             not_blank: กรุณาระบุราคา
         original_price:
             min: ราคาทุนต้องไม่เป็นค่าลบ
+        weight:
+            min: น้ำหนักต้องไม่เป็นค่าลบ
+            invalid: น้ำหนักต้องเป็นตัวเลข
+        width:
+            min: ความกว้างไม่เป็นค่าลบ
+            invalid: ความกว้างต้องเป็นตัวเลข
+        height:
+            min: ความสูงไม่เป็นค่าลบ
+            invalid: ความสูงต้องเป็นตัวเลข
+        depth:
+            min: ความลึกไม่สามารถเป็นค่าลบ
+            invalid: ความลึกต้องเป็นตัวเลข
     product_translation:
         short_description:
             max: คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร
     taxon_image:
         code:
+            not_blank: กรุณาป้อนรหัสรูปภาพ
             unique: รหัสภาพต้องไม่ซ้ำกันภายในหมวดหมู่สินค้านี้
     user:
         email:

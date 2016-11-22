@@ -19,7 +19,7 @@ sylius:
         accepted: Accepté
         access_token: Jeton d'accès
         access_your_store_account_or_create_a_new_one: Connectez-vous ou créez un nouveau compte
-        account_credentials: Informations d'indentification
+        account_credentials: Informations d'identification
         account_panel_outline: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données
         action: Action
         actions: Actions
@@ -163,9 +163,7 @@ sylius:
         create_product_association_type: Créer un type d'association de produit
         create_product_attribute: Créer un attribut de produit
         create_promotion: Créer une promotion
-        create_redirect_route: Créer une route de redirection
         create_report: Créer un rapport
-        create_route: Créer une route
         create_shipping_category: Créer une catégorie d'expédition
         create_shipping_method: Créer un mode de livraison
         create_simple_block: Création d'un bloc de type simple
@@ -185,8 +183,6 @@ sylius:
         creating_menu: Menu <small>Créer un menu </small>
         creating_menu_node: Elément de menu <small>Créer un élément de menu </small>
         creating_new_page: Création d'une nouvelle page
-        creating_redirect_route: En cours de création d'une route de redirection
-        creating_route: En cours de création d'une route
         creation_date: Date de création
         creation_time: Date de création
         currencies: Devises
@@ -216,7 +212,6 @@ sylius:
         date: Date
         default: Défaut
         default_billing_address: Adresse de facturation par défaut
-        default_currency: Devise par défaut
         default_locale: Paramètres régionaux par défaut
         default_shipping_address: Adresse de livraison par défaut
         delete: Supprimer
@@ -250,10 +245,8 @@ sylius:
         edit_promotion: Modifier la promotion
         edit_promotion_coupon: Modifier le coupon de promotion
         edit_report: Modifier le rapport
-        edit_route: Éditer la route
         edit_shipping_address: Modifier l'adresse de livraison
         edit_shipping_method: Mettre à jour la méthode de livraison
-        edit_static_content: Éditer le contenu statique
         edit_tax_category: Éditer la catégorie de taxe
         edit_tax_rate: Modifier le taux de taxe
         edit_taxon: Modification d’un taxon
@@ -278,10 +271,8 @@ sylius:
         editing_permission: Mise à jour de la permission
         editing_product: Modification du produit
         editing_promotion: Edition d'une promotion
-        editing_redirect_route: Modifier la redirection
         editing_review: Modifier l'avis
         editing_role: Modifier rôle
-        editing_route: Mise à jour d'une route
         editing_shipment: Modifier la livraison
         editing_shipping_category: Modification de la catégorie d'expédition
         editing_shipping_method: Modification du mode de livraison
@@ -468,10 +459,8 @@ sylius:
         new_promotion_coupon: Nouveau coupon de promotion
         new_review: Nouvel avis
         new_role: Nouveau rôle
-        new_route: Nouvelle route
         new_shipping_category: Nouvelle catégorie d'expédition
         new_shipping_method: Nouveau mode de livraison
-        new_static_content: Nouveau contenu statique
         new_tax_category: Nouvelle catégorie de taxe
         new_tax_rate: Nouveau taux
         new_taxon: Nouveau taxon
@@ -604,7 +593,6 @@ sylius:
         recent_customers: Clients récents
         recent_orders: Commandes récentes
         recent_users: Utilisateurs récents
-        redirect_routes: Redirections
         refunded: Remboursé
         register: Créer un compte
         register_button: Créer un compte
@@ -634,7 +622,6 @@ sylius:
         review_details: Détails
         reviews: Avis
         roles: Rôles
-        routes: Chemins
         rules: Règles
         sales: Ventes
         sales_this_month: Ventes
@@ -689,7 +676,6 @@ sylius:
         starts_at: Commence le
         starts_with: Commence par
         state: État
-        static_contents: Contenus statiques
         status: Statut
         street: Adresse
         string_blocks: Blocs de type chaine
@@ -741,11 +727,9 @@ sylius:
         there_are_no_permissions_defined: Il n'y a aucune permission définie
         there_are_no_products_to_display: Aucun produit
         there_are_no_promotions_configured: Aucune promotion configurée
-        there_are_no_redirect_routes_to_display: Aucune route de redirection a afficher
         there_are_no_reports_created: Il n'y a aucun rapport créé
         there_are_no_reviews: Il n'y a aucun d'avis
         there_are_no_roles_defined: Il n'y a pas de rôles définis
-        there_are_no_routes_to_display: Il n'y a aucune route à afficher
         there_are_no_shipments_to_display: Aucune méthode expédition
         there_are_no_shipping_categories_configured: Aucune catégorie d'expédition définie
         there_are_no_shipping_methods_configured: Aucun mode de livraison défini

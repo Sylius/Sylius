@@ -151,9 +151,7 @@ sylius:
         create_product_association_type: Criar o tipo de associação de produto
         create_product_attribute: Criar atributo do produto
         create_promotion: Criar promoção
-        create_redirect_route: Criar a rota de redirecionamento
         create_report: Criar Relatório
-        create_route: Criar rota
         create_shipping_category: Criar categoria de envio
         create_shipping_method: Criar método de envio
         create_simple_block: Criar bloco simples
@@ -173,8 +171,6 @@ sylius:
         creating_menu: Criar menu
         creating_menu_node: Criar menu nó
         creating_new_page: Criar nova página
-        creating_redirect_route: Criação de rota de redirecionamento
-        creating_route: Criação de rota
         creation_date: Data Início
         creation_time: Data de criação
         currencies: Moedas
@@ -202,7 +198,6 @@ sylius:
         data: Dados
         date: Data
         default_billing_address: Endereço de cobrança padrão
-        default_currency: Moeda padrão
         default_locale: Localidade padrão
         default_shipping_address: Endereço de envio padrão
         delete: Excluir
@@ -233,10 +228,8 @@ sylius:
         edit_promotion: Editar promoção
         edit_promotion_coupon: Editar o cupom de promoção
         edit_report: Editar relatório
-        edit_route: Editar a rota
         edit_shipping_address: Editar endereço de entrega
         edit_shipping_method: Editar método de envio
-        edit_static_content: Editar conteúdo estático
         edit_tax_category: Editar categoria de imposto
         edit_tax_rate: Editar a taxa de imposto
         edit_taxon: Editar taxação
@@ -261,10 +254,8 @@ sylius:
         editing_permission: Editando permissão
         editing_product: Editando produto
         editing_promotion: Editando promoção
-        editing_redirect_route: Editando redirecionamento de rota
         editing_review: Editando revisão
         editing_role: Editando papel
-        editing_route: Editando rota
         editing_shipment: Editar expedição
         editing_shipping_category: Editando categoria de envio
         editing_shipping_method: Editando método de envio
@@ -441,10 +432,8 @@ sylius:
         new_promotion_coupon: Novo cupom de promoção
         new_review: Nova Revisão
         new_role: Novo papel
-        new_route: Nova rota
         new_shipping_category: Nova categoria de envio
         new_shipping_method: Novo método de envio
-        new_static_content: Novo conteúdo estático
         new_tax_category: Nova categoria de imposto
         new_tax_rate: Novo imposto
         new_taxon: Novo táxon
@@ -572,7 +561,6 @@ sylius:
         recent_customers: Clientes recentes
         recent_orders: Pedidos Recentes
         recent_users: Usuários recentes
-        redirect_routes: Rotas de redirecionamento
         refunded: Reembolsado
         register: Registre-se
         register_button: Registre-se
@@ -600,7 +588,6 @@ sylius:
         review_details: Detalhes de revisão
         reviews: Revisões
         roles: Papéis
-        routes: Rotas
         rules: Regras
         sales: Vendas
         sales_this_month: Vendas
@@ -653,7 +640,6 @@ sylius:
         starts_at: Começa em
         starts_with: Começa com
         state: Estado
-        static_contents: Conteúdo estático
         status: Estado
         street: Rua
         string_blocks: Blocos de texto
@@ -701,10 +687,8 @@ sylius:
         there_are_no_permissions_defined: Não há permissões definidas
         there_are_no_products_to_display: Não há produtos para exibir
         there_are_no_promotions_configured: Não há promoções configuradas
-        there_are_no_redirect_routes_to_display: Não há nenhum redirecionamento de rotas para exibir
         there_are_no_reports_created: Não há relatórios criados
         there_are_no_roles_defined: Não há nenhum papel definido
-        there_are_no_routes_to_display: Não há rotas para exibir
         there_are_no_shipments_to_display: Não há métodos de envio para exibir
         there_are_no_shipping_categories_configured: Não há categories de envio configuradas
         there_are_no_shipping_methods_configured: Não há metódos de envio configurado

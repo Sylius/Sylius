@@ -20,7 +20,6 @@ sylius:
         coupon: Kupon
         currency: Mata Uang
         current_stock: Stok
-        default_currency: Mata uang default
         email: Email
         enabled: Diaktifkan
         first_name: Nama Depan
@@ -42,7 +41,6 @@ sylius:
         province: Provinsi
         provinces: Provinsi
         roles: Peran
-        routes: Rute
         scope: Lingkup
         search: Cari
         shipping_address: Alamat pengiriman

@@ -10,11 +10,6 @@ sylius:
             not_blank: 请输入产品名称。
             min_length: 产品名称必须是至少 1 个字符长。 |产品名称必须至少 {{ limit }} 个字符长。
             max_length: 产品名称必须不能超过 1 个字符。 |产品名称不能超过 {{ limit }} 字符。
-    variant:
-        sku:
-            not_blank: 请输入变量的 SKU。
-            unique: SKU variant 类型的值必须是唯一的。
-        combination: 变量与此选项设置已存在。
     option:
         code:
             not_blank: 请输入选项编号。

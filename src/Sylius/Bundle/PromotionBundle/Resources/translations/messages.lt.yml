@@ -12,12 +12,11 @@ sylius:
             ends_at: Baigiasi
             exclusive: Išskirtinis
             name: Pavadinimas
+            priority: Prioritetas
             rules: Taisyklės
             starts_at: Prasideda
             usage_limit: Naudojimo limitas
         promotion_action:
-            fixed_discount_configuration:
-                amount: Suma
             type: Tipas
         promotion_coupon:
             usage_limit: Naudojimo limitas

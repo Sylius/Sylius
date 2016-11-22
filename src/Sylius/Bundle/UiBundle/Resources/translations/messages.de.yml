@@ -112,6 +112,7 @@ sylius:
         checking_out_as: Bezahlen als
         checkout: Zur Kasse
         choose_file: Datei wählen
+        choose_how_your_goods_will_be_delivered: Wie soll die Ware versendet werden
         choose_how_you_will_pay: Zahlungsart auswählen
         city: Stadt
         clear: Leeren
@@ -164,9 +165,7 @@ sylius:
         create_product_association_type: Produktverbindungstyp erstellen
         create_product_attribute: Produkt Attribute hinzufügen
         create_promotion: Aktion erstellen
-        create_redirect_route: Umleitung anlegen
         create_report: Bericht erstellen
-        create_route: Route erstellen
         create_shipping_category: Versandkategorie erstellen
         create_shipping_method: Versandmethode erstellen
         create_simple_block: Einfaches Element erstellen
@@ -186,8 +185,6 @@ sylius:
         creating_menu: Menü hinzufügen
         creating_menu_node: Erstelle einen Menüpunkt
         creating_new_page: Neue Seite erstellen
-        creating_redirect_route: Umleitung anlegen
-        creating_route: Route erstellen
         creation_date: Erstellt am
         creation_time: Erstellungszeit
         currencies: Währungen
@@ -219,7 +216,6 @@ sylius:
         default: Standard
         default_address: Standardadresse
         default_billing_address: Standard-Rechnungsadresse
-        default_currency: Standardwährung
         default_locale: Standard Lokalisierung
         default_shipping_address: Standard-Lieferadresse
         delete: Löschen
@@ -253,10 +249,8 @@ sylius:
         edit_promotion: Aktion bearbeiten
         edit_promotion_coupon: Aktionscode bearbeiten
         edit_report: Bericht editieren
-        edit_route: Editiere die Strecke
         edit_shipping_address: Versandadresse bearbeiten
         edit_shipping_method: Versandart bearbeiten
-        edit_static_content: Statische Inhalte bearbeiten
         edit_tax_category: Steuerkategorien bearbeiten
         edit_tax_rate: Steuersatz bearbeiten
         edit_taxon: Klassifizierung bearbeiten
@@ -281,10 +275,8 @@ sylius:
         editing_permission: Berechtigung editieren
         editing_product: Produkt editieren
         editing_promotion: Aktion editieren
-        editing_redirect_route: Umleitung bearbeiten
         editing_review: Rezension bearbeiten
         editing_role: Rolle editieren
-        editing_route: Route bearbeiten
         editing_shipment: Lieferung bearbeiten
         editing_shipping_category: Versandkategorien bearbeiten
         editing_shipping_method: Versandart editieren
@@ -322,6 +314,7 @@ sylius:
         female: Weiblich
         filter: Filter
         filters: Filter
+        fill_in_your_billing_and_shipping_addresses: Rechungs.- und Lieferanschrift
         first_name: Vorname
         forgot_password: Passwort vergessen?
         from_the_newest: Von dem neuesten
@@ -477,10 +470,8 @@ sylius:
         new_promotion_coupon: Neuer Promotionscode
         new_review: Neue Rezension
         new_role: Neue Rolle
-        new_route: Neue Route
         new_shipping_category: Neue Versandkategorie
         new_shipping_method: Neue Versandart
-        new_static_content: Neue statische Inhalte
         new_tax_category: Neue Steuerkategorie
         new_tax_rate: Steuersatz erstellen
         new_taxon: Klassifizierung hinzufügen
@@ -488,7 +479,7 @@ sylius:
         new_zone: Neues Gebiet
         newest_products: Neueste Produkte
         newest_first: Neueste zuerst
-        next: Nächstes Bild
+        next: Weiter
         no_label: Nein
         no_account: Kein Konto
         no_addresses: Keine Adressen zum anzeigen vorhanden
@@ -534,8 +525,8 @@ sylius:
         order_history: Bestellungsverlauf
         order_item_product: Produkt
         order_state: Bestellstatus
-        order_summary: Bestellungsübersicht
-        order_total: Gesamtbestellung
+        order_summary: Bestellübersicht
+        order_total: Summe
         order_value: Bestellwert
         ordered: Bestellt
         orders: Aufträge
@@ -602,6 +593,7 @@ sylius:
         promotion_information: Aktionsinformationen
         promotion_total: Reklame gesamt
         promotions: Aktionen
+        properties: Eigenschaften
         province: Bundesland
         provinces: Bundesländer
         purchased_from: Gekauft von
@@ -614,7 +606,6 @@ sylius:
         recent_customers: Neuste Kunden
         recent_orders: Letzte Bestellungen
         recent_users: Neueste Benutzer
-        redirect_routes: Umleitungen (Redirects)
         refund: Rückerstattung
         refunded: Rückerstattet
         register: Registrieren
@@ -641,11 +632,10 @@ sylius:
         returned: Zurückgesandt
         returns_policy: Rückgabebedingungen
         revert: Wiederherstellen
-        review_and_confirm_your_order: Überprüfen Sie und bestätigen Sie Ihre Bestellung
+        review_and_confirm_your_order: Überprüfen und bestätigen Sie Ihre Bestellung
         review_details: Bewertungsdetails
         reviews: Rezensionen
         roles: Rollen
-        routes: Pfade
         rules: Regeln
         sales: Verkäufe
         sales_this_month: Verkäufe
@@ -688,6 +678,7 @@ sylius:
         show_in_store: Im Shop anzeigen
         show_metadata: Metadaten anzeigen
         show_order_details: Bestelldetails anzeigen
+        show_orders: Bestellungen anzeigen
         sign_in: Anmelden
         sign_in_here: Hier anmelden
         sign_in_to_the_store_or_create_new_account: Anmelden <small> oder neuen Benutzer anlegen</small>
@@ -702,7 +693,6 @@ sylius:
         starts_at: Beginnt am
         starts_with: Beginnt mit
         state: Versandstatus
-        static_contents: Statische Inhalte
         status: Status
         street: Straße
         string_blocks: Zeichenketten–Elemente
@@ -754,11 +744,9 @@ sylius:
         there_are_no_permissions_defined: Es wurden noch keine Berechtigungen erstellt
         there_are_no_products_to_display: Es gibt noch keine Produkte anzuzeigen
         there_are_no_promotions_configured: Es gibt noch keine Aktionen anzuzeigen
-        there_are_no_redirect_routes_to_display: Es gibt noch keine Umleitungen
         there_are_no_reports_created: Es wurden noch keine Berichte erstellt
         there_are_no_reviews: Es sind keine Rezensionen vorhanden
         there_are_no_roles_defined: Es wurden noch keine Rollen definiert
-        there_are_no_routes_to_display: Es gibt keine Routen
         there_are_no_shipments_to_display: Es gibt keine Sendungen anzuzeigen
         there_are_no_shipping_categories_configured: Es sind keine Versandkategorieren konfiguriert
         there_are_no_shipping_methods_configured: Es sind keine Versandarten konfiguriert
@@ -819,6 +807,7 @@ sylius:
         write_your_own_review: Schreiben Sie Ihre eigene Rezension
         yes_label: Ja
         you_are_customer_since: Kunde seit
+        you_are_reviewing: Bewertung für
         you_have_no_addresses_defined: Sie haben keine Adressen angelegt
         you_have_no_new_orders: Sie haben keine neuen Bestellungen
         you_may_also_like: Was Sie vielleicht auch interessieren könnte

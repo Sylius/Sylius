@@ -97,9 +97,7 @@ sylius:
         create_product: Ürün oluştur
         create_product_attribute: Ürün özniteliğini oluştur
         create_promotion: Promosyon oluşturmak
-        create_redirect_route: Yeniden yönlendirme yol oluşturma
         create_report: Rapor Oluştur
-        create_route: Rota Oluştur
         create_shipping_category: Nakliye Kategori oluşturma
         create_shipping_method: Kargo yöntemi oluştur
         create_simple_block: Basit blok oluştur
@@ -118,8 +116,6 @@ sylius:
         creating_menu: Menü oluşturuluyor
         creating_menu_node: Menü düğümü oluşturma
         creating_new_page: Yeni sayfa oluşturma
-        creating_redirect_route: Yeniden yönlendirme yol oluşturma
-        creating_route: Rota oluşturma
         creation_date: Oluşturma tarihi
         creation_time: Oluşturma zamanı
         currencies: Para birimi
@@ -138,7 +134,6 @@ sylius:
         dashboard: Kontrol Paneli
         data: Veri Merkezi
         default_billing_address: Varsayılan fatura adresi
-        default_currency: Varsayılan para birimi
         default_shipping_address: Varsayılan teslim adresi
         delete: Sil
         delete_image: Resim silmek
@@ -168,9 +163,7 @@ sylius:
         editing_permission: İzne düzenleme
         editing_product: Ürün Düzenleme
         editing_promotion: Promosyon düzenleme
-        editing_redirect_route: Yönlendirilen rotayı düzenleme
         editing_role: Rol düzenleme
-        editing_route: Rotayı düzenleme
         editing_shipment: Kargo düzenle
         editing_shipping_category: Nakliye Kategori düzenleme
         editing_shipping_method: Kargo yöntemi düzenle
@@ -366,7 +359,6 @@ sylius:
         recent_customers: Son müşteriler
         recent_orders: Son siparişler
         recent_users: Son kullanıcılar
-        redirect_routes: Yönlendirme yolları
         refunded: İade Edildi
         register: Üye ol
         register_button: Üye ol
@@ -383,7 +375,6 @@ sylius:
         revert: Döndür
         reviews: Yorumlar
         roles: Roller
-        routes: Rotalar
         rules: Kurallar
         sales: Satışlar
         sales_this_month: Satışlar

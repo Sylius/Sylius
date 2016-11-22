@@ -12,12 +12,11 @@ sylius:
             ends_at: پایان در
             exclusive: یکبار مصرف
             name: نام
+            priority: درجه ی اهمیت
             rules: قوانین
             starts_at: شروع از
             usage_limit: محدودیت استفاده
         promotion_action:
-            fixed_discount_configuration:
-                amount: مقدار
             percentage_discount_configuration:
                 percentage: درصد
             type: نوع

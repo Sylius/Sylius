@@ -34,7 +34,3 @@ sylius:
                 sales:
                     header: Pardavimai
                     orders: Užsakymai
-                content:
-                    header: Turinys
-                    static_contents: Statinis turinys
-                    routes: Maršrutai
