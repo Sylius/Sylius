@@ -47,7 +47,7 @@ class AddBaseCurrencySubscriber implements EventSubscriberInterface
             [
                 'label' => 'sylius.form.channel.currency_base',
                 'required' => true,
-                'disabled' => $disabled
+                'disabled' => $disabled,
             ]
         );
     }
@@ -56,6 +56,8 @@ class AddBaseCurrencySubscriber implements EventSubscriberInterface
      * @param mixed $resource
      *
      * @return bool
+     * 
+     * @throws UnexpectedTypeException
      */
     private function getDisabledOption($resource)
     {
