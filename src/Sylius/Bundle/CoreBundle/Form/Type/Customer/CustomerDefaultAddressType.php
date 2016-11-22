@@ -57,4 +57,12 @@ class CustomerDefaultAddressType extends AbstractType
     {
         return 'sylius_customer_default_address';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_customer_default_address';
+    }
 }

@@ -97,11 +97,19 @@ class PaymentMethodChoiceType extends AbstractType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_payment_method_choice';
+    }
+
+    /**
      * @return \Closure
      */
     private function createChoiceList()
     {
-        return function (Options $options) 
+        return function (Options $options)
         {
             if (isset($options['subject'])) {
                 $resolvedMethods = $this->paymentMethodsResolver->getSupportedMethods($options['subject']);

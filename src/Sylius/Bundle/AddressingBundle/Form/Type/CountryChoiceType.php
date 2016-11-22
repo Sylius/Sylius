@@ -77,4 +77,12 @@ class CountryChoiceType extends AbstractType
     {
         return 'sylius_country_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_country_choice';
+    }
 }

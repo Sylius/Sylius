@@ -67,4 +67,12 @@ class AttributeType extends AbstractResourceType
     {
         return sprintf('sylius_%s_attribute', $this->subjectName);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return sprintf('sylius_%s_attribute', $this->subjectName);
+    }
 }

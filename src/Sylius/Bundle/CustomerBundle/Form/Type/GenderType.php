@@ -50,4 +50,12 @@ class GenderType extends AbstractType
     {
         return 'sylius_gender';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_gender';
+    }
 }

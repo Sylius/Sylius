@@ -65,4 +65,12 @@ class VolumeRateConfigurationType extends AbstractType
     {
         return 'sylius_shipping_calculator_volume_rate';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_shipping_calculator_volume_rate';
+    }
 }

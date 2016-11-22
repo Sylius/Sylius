@@ -47,4 +47,12 @@ class CountryType extends AbstractResourceType
     {
         return 'sylius_country';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_country';
+    }
 }

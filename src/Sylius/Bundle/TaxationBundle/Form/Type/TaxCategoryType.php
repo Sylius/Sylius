@@ -46,4 +46,12 @@ class TaxCategoryType extends AbstractResourceType
     {
         return 'sylius_tax_category';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_tax_category';
+    }
 }

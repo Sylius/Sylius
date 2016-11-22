@@ -38,4 +38,12 @@ class CompleteType extends AbstractResourceType
     {
         return 'sylius_checkout_complete';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_checkout_complete';
+    }
 }

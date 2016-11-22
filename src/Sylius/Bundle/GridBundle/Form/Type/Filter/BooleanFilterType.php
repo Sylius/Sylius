@@ -56,4 +56,12 @@ class BooleanFilterType extends AbstractType
     {
         return 'sylius_grid_filter_boolean';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_grid_filter_boolean';
+    }
 }

@@ -38,4 +38,12 @@ class SelectPaymentType extends AbstractResourceType
     {
         return 'sylius_checkout_select_payment';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_checkout_select_payment';
+    }
 }

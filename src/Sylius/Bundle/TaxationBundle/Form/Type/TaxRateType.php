@@ -56,4 +56,12 @@ class TaxRateType extends AbstractResourceType
     {
         return 'sylius_tax_rate';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_tax_rate';
+    }
 }

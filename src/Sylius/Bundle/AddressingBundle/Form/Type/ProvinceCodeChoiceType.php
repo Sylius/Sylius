@@ -52,6 +52,14 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_province_code_choice';
+    }
+
+    /**
      * @param ProvinceInterface[] $provinces
      *
      * @return array

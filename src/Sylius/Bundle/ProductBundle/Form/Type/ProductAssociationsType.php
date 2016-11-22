@@ -69,4 +69,12 @@ class ProductAssociationsType extends AbstractType
     {
         return 'sylius_product_associations';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_product_associations';
+    }
 }

@@ -60,4 +60,12 @@ class PaymentGatewayChoiceType extends AbstractType
     {
         return 'sylius_payment_gateway_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_payment_gateway_choice';
+    }
 }

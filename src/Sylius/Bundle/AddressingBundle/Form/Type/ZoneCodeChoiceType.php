@@ -67,6 +67,14 @@ class ZoneCodeChoiceType extends AbstractType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_zone_code_choice';
+    }
+
+    /**
      * @return array
      */
     private function getZoneCodes()

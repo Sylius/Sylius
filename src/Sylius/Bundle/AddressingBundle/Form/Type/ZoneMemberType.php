@@ -58,4 +58,12 @@ class ZoneMemberType extends AbstractResourceType
     {
         return 'sylius_zone_member';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_zone_member';
+    }
 }

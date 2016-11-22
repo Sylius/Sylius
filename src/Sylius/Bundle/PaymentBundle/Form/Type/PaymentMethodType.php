@@ -55,4 +55,12 @@ class PaymentMethodType extends AbstractResourceType
     {
         return 'sylius_payment_method';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_payment_method';
+    }
 }

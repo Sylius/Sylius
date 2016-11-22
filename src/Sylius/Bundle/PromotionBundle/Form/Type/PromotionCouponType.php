@@ -49,4 +49,12 @@ class PromotionCouponType extends AbstractResourceType
     {
         return 'sylius_promotion_coupon';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_promotion_coupon';
+    }
 }

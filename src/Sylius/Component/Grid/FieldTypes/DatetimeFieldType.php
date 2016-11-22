@@ -65,4 +65,12 @@ final class DatetimeFieldType implements FieldTypeInterface
     {
         return 'datetime';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'datetime';
+    }
 }

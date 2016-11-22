@@ -39,4 +39,12 @@ class ShippingCountryConfigurationType extends AbstractType
     {
         return 'sylius_promotion_rule_shipping_country_configuration';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_promotion_rule_shipping_country_configuration';
+    }
 }

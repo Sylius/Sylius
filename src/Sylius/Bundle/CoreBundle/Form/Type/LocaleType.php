@@ -102,6 +102,14 @@ class LocaleType extends BaseLocaleType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_locale';
+    }
+
+    /**
      * @param $code
      *
      * @return null|string

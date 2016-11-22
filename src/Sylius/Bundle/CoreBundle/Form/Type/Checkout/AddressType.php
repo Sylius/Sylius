@@ -63,4 +63,12 @@ class AddressType extends AbstractResourceType
     {
         return 'sylius_checkout_address';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_checkout_address';
+    }
 }

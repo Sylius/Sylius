@@ -53,4 +53,12 @@ abstract class AbstractConfigurationType extends AbstractResourceType
     {
         return 'sylius_promotion_action';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_promotion_action';
+    }
 }

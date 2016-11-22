@@ -69,4 +69,12 @@ final class CurrencyCodeChoiceType extends AbstractType
     {
         return 'sylius_currency_code_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_currency_code_choice';
+    }
 }

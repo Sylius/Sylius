@@ -69,4 +69,12 @@ class ResourceTranslationsType extends AbstractType
     {
         return 'sylius_translations';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_translations';
+    }
 }

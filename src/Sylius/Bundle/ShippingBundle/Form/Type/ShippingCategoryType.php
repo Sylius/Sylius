@@ -46,4 +46,12 @@ class ShippingCategoryType extends AbstractResourceType
     {
         return 'sylius_shipping_category';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_shipping_category';
+    }
 }

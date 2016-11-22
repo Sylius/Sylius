@@ -37,4 +37,12 @@ class ProductTaxonPositionCollectionType extends AbstractType
     {
         return 'sylius_product_taxon_position_collection';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_product_taxon_position_collection';
+    }
 }

@@ -85,6 +85,14 @@ class ReviewType extends AbstractResourceType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return sprintf('sylius_%s_review', $this->subject);
+    }
+
+    /**
      * @param int $maxRate
      *
      * @return array

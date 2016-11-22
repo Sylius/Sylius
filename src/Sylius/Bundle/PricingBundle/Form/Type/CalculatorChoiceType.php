@@ -58,4 +58,12 @@ class CalculatorChoiceType extends AbstractType
     {
         return 'sylius_price_calculator_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_price_calculator_choice';
+    }
 }

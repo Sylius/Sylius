@@ -72,4 +72,12 @@ class WeightRateConfigurationType extends AbstractType
     {
         return 'sylius_shipping_calculator_weight_rate';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_shipping_calculator_weight_rate';
+    }
 }

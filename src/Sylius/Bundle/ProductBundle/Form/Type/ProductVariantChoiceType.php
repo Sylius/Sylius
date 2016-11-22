@@ -73,4 +73,12 @@ class ProductVariantChoiceType extends AbstractType
     {
         return 'sylius_product_variant_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_product_variant_choice';
+    }
 }

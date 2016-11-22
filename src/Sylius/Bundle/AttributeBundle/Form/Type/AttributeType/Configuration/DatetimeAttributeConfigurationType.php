@@ -39,4 +39,12 @@ class DatetimeAttributeConfigurationType extends AbstractType
     {
         return 'sylius_attribute_type_configuration_datetime';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_attribute_type_configuration_datetime';
+    }
 }

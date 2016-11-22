@@ -83,4 +83,12 @@ class ResourceToIdentifierType extends AbstractType
     {
         return sprintf('%s_%s_to_identifier', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return sprintf('%s_%s_to_identifier', $this->metadata->getApplicationName(), $this->metadata->getName());
+    }
 }

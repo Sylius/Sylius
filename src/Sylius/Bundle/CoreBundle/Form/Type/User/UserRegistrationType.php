@@ -43,4 +43,12 @@ class UserRegistrationType extends AbstractResourceType
     {
         return 'sylius_shop_user_registration';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_shop_user_registration';
+    }
 }

@@ -46,4 +46,12 @@ class CurrencyType extends AbstractResourceType
     {
         return 'sylius_currency';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_currency';
+    }
 }

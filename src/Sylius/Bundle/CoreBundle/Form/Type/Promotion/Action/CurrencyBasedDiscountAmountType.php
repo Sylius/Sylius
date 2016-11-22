@@ -73,4 +73,12 @@ class CurrencyBasedDiscountAmountType extends AbstractType
     {
         return 'sylius_currency_based_discount_amount';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_currency_based_discount_amount';
+    }
 }

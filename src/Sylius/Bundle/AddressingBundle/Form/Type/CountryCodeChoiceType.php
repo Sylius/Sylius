@@ -78,6 +78,14 @@ class CountryCodeChoiceType extends AbstractType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_country_code_choice';
+    }
+
+    /**
      * @param CountryInterface[] $countries
      *
      * @return array

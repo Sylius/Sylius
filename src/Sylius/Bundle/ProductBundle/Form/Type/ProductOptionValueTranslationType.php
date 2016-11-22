@@ -39,4 +39,12 @@ class ProductOptionValueTranslationType extends AbstractResourceType
     {
         return 'sylius_product_option_value_translation';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_product_option_value_translation';
+    }
 }

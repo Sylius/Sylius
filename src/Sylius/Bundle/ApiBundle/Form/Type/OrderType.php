@@ -47,4 +47,12 @@ class OrderType extends BaseOrderType
     {
         return 'sylius_api_order';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_api_order';
+    }
 }

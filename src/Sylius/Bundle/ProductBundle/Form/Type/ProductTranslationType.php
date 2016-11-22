@@ -55,4 +55,12 @@ class ProductTranslationType extends AbstractResourceType
     {
         return 'sylius_product_translation';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_product_translation';
+    }
 }

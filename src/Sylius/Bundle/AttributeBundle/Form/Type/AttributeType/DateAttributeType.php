@@ -45,4 +45,12 @@ class DateAttributeType extends AbstractType
     {
         return 'sylius_attribute_type_date';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_attribute_type_date';
+    }
 }

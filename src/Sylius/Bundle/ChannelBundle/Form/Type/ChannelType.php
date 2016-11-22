@@ -59,4 +59,12 @@ class ChannelType extends AbstractResourceType
     {
         return 'sylius_channel';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_channel';
+    }
 }

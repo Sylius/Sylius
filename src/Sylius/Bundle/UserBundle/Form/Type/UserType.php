@@ -91,4 +91,12 @@ class UserType extends AbstractResourceType
     {
         return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
+    }
 }

@@ -51,4 +51,12 @@ abstract class UserChoiceType extends AbstractType
     {
         return 'sylius_user_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_user_choice';
+    }
 }

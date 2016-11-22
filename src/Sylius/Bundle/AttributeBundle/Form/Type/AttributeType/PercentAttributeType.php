@@ -45,4 +45,12 @@ class PercentAttributeType extends AbstractType
     {
         return 'sylius_attribute_type_percent';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_attribute_type_percent';
+    }
 }

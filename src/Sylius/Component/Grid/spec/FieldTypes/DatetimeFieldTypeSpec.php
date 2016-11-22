@@ -72,9 +72,4 @@ final class DatetimeFieldTypeSpec extends ObjectBehavior
             ]])
         ;
     }
-
-    function it_has_name()
-    {
-        $this->getName()->shouldReturn('datetime');
-    }
 }

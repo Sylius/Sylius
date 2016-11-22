@@ -95,6 +95,14 @@ class CountryType extends AbstractResourceType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_country';
+    }
+
+    /**
      * @param $code
      *
      * @return null|string

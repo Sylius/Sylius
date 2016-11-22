@@ -144,4 +144,12 @@ class ShippingMethodType extends AbstractResourceType
     {
         return 'sylius_shipping_method';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_shipping_method';
+    }
 }

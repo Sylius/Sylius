@@ -64,4 +64,12 @@ class CustomerProfileType extends AbstractResourceType
     {
         return 'sylius_customer_profile';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_customer_profile';
+    }
 }

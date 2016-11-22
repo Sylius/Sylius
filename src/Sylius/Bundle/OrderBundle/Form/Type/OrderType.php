@@ -47,4 +47,12 @@ class OrderType extends AbstractResourceType
     {
         return 'sylius_order';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_order';
+    }
 }

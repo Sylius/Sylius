@@ -45,4 +45,12 @@ class IntegerAttributeType extends AbstractType
     {
         return 'sylius_attribute_type_integer';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_attribute_type_integer';
+    }
 }

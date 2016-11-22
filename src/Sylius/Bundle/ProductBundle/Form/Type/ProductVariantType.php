@@ -58,4 +58,12 @@ class ProductVariantType extends AbstractResourceType
     {
         return 'sylius_product_variant';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_product_variant';
+    }
 }

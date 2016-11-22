@@ -47,4 +47,12 @@ class TaxonTranslationType extends AbstractResourceType
     {
         return 'sylius_taxon_translation';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_taxon_translation';
+    }
 }

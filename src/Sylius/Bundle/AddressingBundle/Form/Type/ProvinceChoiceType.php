@@ -77,4 +77,12 @@ class ProvinceChoiceType extends AbstractType
     {
         return 'sylius_province_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_province_choice';
+    }
 }

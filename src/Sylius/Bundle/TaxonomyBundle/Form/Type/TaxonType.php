@@ -45,4 +45,12 @@ class TaxonType extends AbstractResourceType
     {
         return 'sylius_taxon';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_taxon';
+    }
 }

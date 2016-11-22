@@ -45,4 +45,12 @@ class CheckboxAttributeType extends AbstractType
     {
         return 'sylius_attribute_type_checkbox';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_attribute_type_checkbox';
+    }
 }

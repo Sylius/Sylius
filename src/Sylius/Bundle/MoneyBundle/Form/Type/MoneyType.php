@@ -89,4 +89,12 @@ class MoneyType extends AbstractType
     {
         return 'sylius_money';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_money';
+    }
 }

@@ -73,4 +73,12 @@ class AddressChoiceType extends AbstractType
     {
         return 'sylius_address_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_address_choice';
+    }
 }

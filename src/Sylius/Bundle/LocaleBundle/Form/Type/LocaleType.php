@@ -42,4 +42,12 @@ class LocaleType extends AbstractResourceType
     {
         return 'sylius_locale';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_locale';
+    }
 }

@@ -35,4 +35,12 @@ class BookTranslationType extends AbstractResourceType
     {
         return 'app_book_translation';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'app_book_translation';
+    }
 }

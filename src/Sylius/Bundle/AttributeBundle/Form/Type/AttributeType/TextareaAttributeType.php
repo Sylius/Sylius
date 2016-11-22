@@ -45,4 +45,12 @@ class TextareaAttributeType extends AbstractType
     {
         return 'sylius_attribute_type_textarea';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_attribute_type_textarea';
+    }
 }

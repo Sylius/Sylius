@@ -69,5 +69,13 @@ final class ThemeChoiceType extends AbstractType
     {
         return 'sylius_theme_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_theme_choice';
+    }
 }
 

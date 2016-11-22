@@ -106,4 +106,12 @@ class AddressType extends AbstractResourceType
     {
         return 'sylius_address';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_address';
+    }
 }

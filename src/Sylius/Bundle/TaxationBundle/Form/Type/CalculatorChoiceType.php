@@ -60,4 +60,12 @@ class CalculatorChoiceType extends AbstractType
     {
         return 'sylius_tax_calculator_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_tax_calculator_choice';
+    }
 }

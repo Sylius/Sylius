@@ -91,4 +91,12 @@ class LocaleChoiceType extends AbstractType
     {
         return 'sylius_locale_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_locale_choice';
+    }
 }

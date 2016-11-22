@@ -59,4 +59,12 @@ class PaymentType extends AbstractType
     {
         return 'sylius_checkout_payment';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_checkout_payment';
+    }
 }
