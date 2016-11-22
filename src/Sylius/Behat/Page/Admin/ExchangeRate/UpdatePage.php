@@ -37,17 +37,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isBaseCurrencyDisabled()
+    public function isSourceCurrencyDisabled()
     {
-        return null !== $this->getElement('baseCurrency')->getAttribute('disabled');
+        return null !== $this->getElement('sourceCurrency')->getAttribute('disabled');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isCounterCurrencyDisabled()
+    public function isTargetCurrencyDisabled()
     {
-        return null !== $this->getElement('counterCurrency')->getAttribute('disabled');
+        return null !== $this->getElement('targetCurrency')->getAttribute('disabled');
     }
 
     /**
@@ -57,8 +57,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'ratio' => '#sylius_exchange_rate_ratio',
-            'baseCurrency' => '#sylius_exchange_rate_baseCurrency',
-            'counterCurrency' => '#sylius_exchange_rate_counterCurrency',
+            'sourceCurrency' => '#sylius_exchange_rate_sourceCurrency',
+            'targetCurrency' => '#sylius_exchange_rate_targetCurrency',
         ]);
     }
 }

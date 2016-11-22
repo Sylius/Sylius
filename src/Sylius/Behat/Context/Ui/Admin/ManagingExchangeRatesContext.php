@@ -88,19 +88,19 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I choose :currencyCode as the base currency
+     * @When I choose :currencyCode as the source currency
      */
-    public function iChooseAsBaseCurrency($currencyCode)
+    public function iChooseAsSourceCurrency($currencyCode)
     {
-        $this->createPage->chooseBaseCurrency($currencyCode);
+        $this->createPage->chooseSourceCurrency($currencyCode);
     }
 
     /**
-     * @When I choose :currencyCode as the counter currency
+     * @When I choose :currencyCode as the target currency
      */
-    public function iChooseAsCounterCurrency($currencyCode)
+    public function iChooseAsTargetCurrency($currencyCode)
     {
-        $this->createPage->chooseCounterCurrency($currencyCode);
+        $this->createPage->chooseTargetCurrency($currencyCode);
     }
 
     /**
@@ -128,15 +128,15 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @When I delete the exchange rate between :baseCurrencyName and :counterCurrencyName
+     * @When I delete the exchange rate between :sourceCurrencyName and :targetCurrencyName
      */
-    public function iDeleteTheExchangeRateBetweenAnd($baseCurrencyName, $counterCurrencyName)
+    public function iDeleteTheExchangeRateBetweenAnd($sourceCurrencyName, $targetCurrencyName)
     {
         $this->indexPage->open();
 
         $this->indexPage->deleteResourceOnPage([
-            'baseCurrency' => $baseCurrencyName,
-            'counterCurrency' => $counterCurrencyName,
+            'sourceCurrency' => $sourceCurrencyName,
+            'targetCurrency' => $targetCurrencyName,
         ]);
     }
 
@@ -160,21 +160,21 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @Then the exchange rate with ratio :ratio between :baseCurrency and :counterCurrency should appear in the store
+     * @Then the exchange rate with ratio :ratio between :sourceCurrency and :targetCurrency should appear in the store
      */
-    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, $baseCurrency, $counterCurrency)
+    public function theExchangeRateBetweenAndShouldAppearInTheStore($ratio, $sourceCurrency, $targetCurrency)
     {
         $this->indexPage->open();
 
-        $this->assertExchangeRateWithRatioIsOnTheList($ratio, $baseCurrency, $counterCurrency);
+        $this->assertExchangeRateWithRatioIsOnTheList($ratio, $sourceCurrency, $targetCurrency);
     }
 
     /**
-     * @Then I should see an exchange rate between :baseCurrencyName and :counterCurrencyName on the list
+     * @Then I should see an exchange rate between :sourceCurrencyName and :targetCurrencyName on the list
      */
-    public function iShouldSeeAnExchangeRateBetweenAndOnTheList($baseCurrencyName, $counterCurrencyName)
+    public function iShouldSeeAnExchangeRateBetweenAndOnTheList($sourceCurrencyName, $targetCurrencyName)
     {
-        $this->assertExchangeRateIsOnList($baseCurrencyName, $counterCurrencyName);
+        $this->assertExchangeRateIsOnList($sourceCurrencyName, $targetCurrencyName);
     }
 
     /**
@@ -195,21 +195,21 @@ final class ManagingExchangeRatesContext implements Context
     public function thisExchangeRateShouldNoLongerBeOnTheList(ExchangeRateInterface $exchangeRate)
     {
         $this->assertExchangeRateIsNotOnTheList(
-            $exchangeRate->getBaseCurrency()->getName(),
-            $exchangeRate->getCounterCurrency()->getName()
+            $exchangeRate->getSourceCurrency()->getName(),
+            $exchangeRate->getTargetCurrency()->getName()
         );
     }
 
     /**
-     * @Then the exchange rate between :baseCurrencyName and :counterCurrencyName should not be added
-     * @Then the exchange rate with base currency :baseCurrencyName should not be added
-     * @Then the exchange rate with counter currency :counterCurrencyName should not be added
+     * @Then the exchange rate between :sourceCurrencyName and :targetCurrencyName should not be added
+     * @Then the exchange rate with source currency :sourceCurrencyName should not be added
+     * @Then the exchange rate with target currency :targetCurrencyName should not be added
      */
-    public function theExchangeRateBetweenAndShouldNotBeAdded($baseCurrencyName = null, $counterCurrencyName = null)
+    public function theExchangeRateBetweenAndShouldNotBeAdded($sourceCurrencyName, $targetCurrencyName)
     {
         $this->indexPage->open();
 
-        $this->assertExchangeRateIsNotOnTheList($baseCurrencyName, $counterCurrencyName);
+        $this->assertExchangeRateIsNotOnTheList($sourceCurrencyName, $targetCurrencyName);
     }
 
     /**
@@ -217,31 +217,31 @@ final class ManagingExchangeRatesContext implements Context
      */
     public function thisExchangeRateShouldHaveARatioOf(ExchangeRateInterface $exchangeRate, $ratio)
     {
-        $baseCurrencyName = $exchangeRate->getBaseCurrency()->getName();
-        $counterCurrencyName = $exchangeRate->getCounterCurrency()->getName();
+        $sourceCurrencyName = $exchangeRate->getSourceCurrency()->getName();
+        $targetCurrencyName = $exchangeRate->getTargetCurrency()->getName();
 
-        $this->assertExchangeRateWithRatioIsOnTheList($ratio, $baseCurrencyName, $counterCurrencyName);
+        $this->assertExchangeRateWithRatioIsOnTheList($ratio, $sourceCurrencyName, $targetCurrencyName);
     }
 
     /**
-     * @Then I should see that the base currency is disabled
+     * @Then I should see that the source currency is disabled
      */
-    public function iShouldSeeThatTheBaseCurrencyIsDisabled()
+    public function iShouldSeeThatTheSourceCurrencyIsDisabled()
     {
         Assert::true(
-            $this->updatePage->isBaseCurrencyDisabled(),
-            'The base currency is not disabled.'
+            $this->updatePage->isSourceCurrencyDisabled(),
+            'The source currency is not disabled.'
         );
     }
 
     /**
-     * @Then I should see that the counter currency is disabled
+     * @Then I should see that the target currency is disabled
      */
-    public function iShouldSeeThatTheCounterCurrencyIsDisabled()
+    public function iShouldSeeThatTheTargetCurrencyIsDisabled()
     {
         Assert::true(
-            $this->updatePage->isCounterCurrencyDisabled(),
-            'The counter currency is not disabled.'
+            $this->updatePage->isTargetCurrencyDisabled(),
+            'The target currency is not disabled.'
         );
     }
 
@@ -265,11 +265,11 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @Then I should be notified that base and counter currencies must differ
+     * @Then I should be notified that source and target currencies must differ
      */
-    public function iShouldBeNotifiedThatBaseAndCounterCurrenciesMustDiffer()
+    public function iShouldBeNotifiedThatSourceAndTargetCurrenciesMustDiffer()
     {
-        $expectedMessage = 'The base and counter currencies must differ.';
+        $expectedMessage = 'The source and target currencies must differ.';
 
         $this->assertFormHasValidationMessage($expectedMessage);
     }
@@ -285,67 +285,67 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @param string $baseCurrencyName
-     * @param string $counterCurrencyName
+     * @param string $sourceCurrencyName
+     * @param string $targetCurrencyName
      *
      * @throws \InvalidArgumentException
      */
-    private function assertExchangeRateIsOnList($baseCurrencyName, $counterCurrencyName)
+    private function assertExchangeRateIsOnList($sourceCurrencyName, $targetCurrencyName)
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([
-                'baseCurrency' => $baseCurrencyName,
-                'counterCurrency' => $counterCurrencyName,
+                'sourceCurrency' => $sourceCurrencyName,
+                'targetCurrency' => $targetCurrencyName,
             ]),
             sprintf(
-                'An exchange rate with base currency %s and counter currency %s was not found on the list.',
-                $baseCurrencyName,
-                $counterCurrencyName
+                'An exchange rate with source currency %s and target currency %s was not found on the list.',
+                $sourceCurrencyName,
+                $targetCurrencyName
             )
         );
     }
 
     /**
      * @param float $ratio
-     * @param string $baseCurrencyName
-     * @param string $counterCurrencyName
+     * @param string $sourceCurrencyName
+     * @param string $targetCurrencyName
      *
      * @throws \InvalidArgumentException
      */
-    private function assertExchangeRateWithRatioIsOnTheList($ratio, $baseCurrencyName, $counterCurrencyName)
+    private function assertExchangeRateWithRatioIsOnTheList($ratio, $sourceCurrencyName, $targetCurrencyName)
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([
                 'ratio' => $ratio,
-                'baseCurrency' => $baseCurrencyName,
-                'counterCurrency' => $counterCurrencyName,
+                'sourceCurrency' => $sourceCurrencyName,
+                'targetCurrency' => $targetCurrencyName,
             ]),
             sprintf(
                 'An exchange rate between %s and %s with a ratio of %s has not been found on the list.',
-                $baseCurrencyName,
-                $counterCurrencyName,
+                $sourceCurrencyName,
+                $targetCurrencyName,
                 $ratio
             )
         );
     }
 
     /**
-     * @param string $baseCurrencyName
-     * @param string $counterCurrencyName
+     * @param string $sourceCurrencyName
+     * @param string $targetCurrencyName
      *
      * @throws \InvalidArgumentException
      */
-    private function assertExchangeRateIsNotOnTheList($baseCurrencyName, $counterCurrencyName)
+    private function assertExchangeRateIsNotOnTheList($sourceCurrencyName, $targetCurrencyName)
     {
         Assert::false(
             $this->indexPage->isSingleResourceOnPage([
-                'baseCurrency' => $baseCurrencyName,
-                'counterCurrency' => $counterCurrencyName,
+                'sourceCurrency' => $sourceCurrencyName,
+                'targetCurrency' => $targetCurrencyName,
             ]),
             sprintf(
-                'An exchange rate with base currency %s and counter currency %s has been found on the list.',
-                $baseCurrencyName,
-                $counterCurrencyName
+                'An exchange rate with source currency %s and target currency %s has been found on the list.',
+                $sourceCurrencyName,
+                $targetCurrencyName
             )
         );
     }

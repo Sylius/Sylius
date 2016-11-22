@@ -26,12 +26,12 @@ interface CreatePageInterface extends BaseCreatePage
     /**
      * @param string $currency
      */
-    public function chooseBaseCurrency($currency);
+    public function chooseSourceCurrency($currency);
 
     /**
      * @param string $currency
      */
-    public function chooseCounterCurrency($currency);
+    public function chooseTargetCurrency($currency);
 
     /**
      * @param string $expectedMessage

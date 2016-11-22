@@ -31,12 +31,12 @@ class ExchangeRate implements ExchangeRateInterface
     /**
      * @var CurrencyInterface
      */
-    protected $baseCurrency;
+    protected $sourceCurrency;
 
     /**
      * @var CurrencyInterface
      */
-    protected $counterCurrency;
+    protected $targetCurrency;
 
     /**
      * {@inheritdoc}
@@ -69,32 +69,32 @@ class ExchangeRate implements ExchangeRateInterface
     /**
      * {@inheritdoc}
      */
-    public function getBaseCurrency()
+    public function getSourceCurrency()
     {
-        return $this->baseCurrency;
+        return $this->sourceCurrency;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setBaseCurrency(CurrencyInterface $currency)
+    public function setSourceCurrency(CurrencyInterface $currency)
     {
-        $this->baseCurrency = $currency;
+        $this->sourceCurrency = $currency;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCounterCurrency()
+    public function getTargetCurrency()
     {
-        return $this->counterCurrency;
+        return $this->targetCurrency;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCounterCurrency(CurrencyInterface $currency)
+    public function setTargetCurrency(CurrencyInterface $currency)
     {
-        $this->counterCurrency = $currency;
+        $this->targetCurrency = $currency;
     }
 }

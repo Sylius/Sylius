@@ -16,12 +16,12 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class DifferentBaseCounterCurrency extends Constraint
+class DifferentSourceTargetCurrency extends Constraint
 {
     /**
      * @var string
      */
-    public $message = 'sylius.exchange_rate.different_base_counter_currency';
+    public $message = 'sylius.exchange_rate.different_source_target_currency';
 
     /**
      * {@inheritdoc}

@@ -31,10 +31,10 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     /**
      * @return bool
      */
-    public function isBaseCurrencyDisabled();
+    public function isSourceCurrencyDisabled();
 
     /**
      * @return bool
      */
-    public function isCounterCurrencyDisabled();
+    public function isTargetCurrencyDisabled();
 }

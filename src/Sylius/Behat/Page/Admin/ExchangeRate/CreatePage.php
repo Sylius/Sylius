@@ -29,17 +29,17 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseBaseCurrency($currency)
+    public function chooseSourceCurrency($currency)
     {
-        $this->getDocument()->selectFieldOption('Base currency', $currency);
+        $this->getDocument()->selectFieldOption('Source currency', $currency);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function chooseCounterCurrency($currency)
+    public function chooseTargetCurrency($currency)
     {
-        $this->getDocument()->selectFieldOption('Counter currency', $currency);
+        $this->getDocument()->selectFieldOption('Target currency', $currency);
     }
 
     /**
@@ -61,8 +61,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'base currency' => '#sylius_exchange_rate_baseCurrency',
-            'counter currency' => '#sylius_exchange_rate_counterCurrency',
+            'source currency' => '#sylius_exchange_rate_sourceCurrency',
+            'target currency' => '#sylius_exchange_rate_targetCurrency',
             'ratio' => '#sylius_exchange_rate_ratio',
         ]);
     }

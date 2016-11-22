@@ -54,31 +54,31 @@ final class ExchangeRateContext implements Context
     }
 
     /**
-     * @Given /^the store (?:|also )has an exchange rate ([0-9\.]+) with base (currency "[^"]+") and counter (currency "[^"]+")$/
+     * @Given /^the store (?:|also )has an exchange rate ([0-9\.]+) with source (currency "[^"]+") and target (currency "[^"]+")$/
      */
-    public function thereIsAnExchangeRateWithBaseCurrencyAndCounterCurrency(
+    public function thereIsAnExchangeRateWithSourceCurrencyAndTargetCurrency(
         $ratio,
-        CurrencyInterface $baseCurrency,
-        CurrencyInterface $counterCurrency
+        CurrencyInterface $sourceCurrency,
+        CurrencyInterface $targetCurrency
     ) {
-        $exchangeRate = $this->createExchangeRate($baseCurrency, $counterCurrency, $ratio);
+        $exchangeRate = $this->createExchangeRate($sourceCurrency, $targetCurrency, $ratio);
 
         $this->saveExchangeRate($exchangeRate);
     }
 
     /**
-     * @param CurrencyInterface $baseCurrency
-     * @param CurrencyInterface $counterCurrency
+     * @param CurrencyInterface $sourceCurrency
+     * @param CurrencyInterface $targetCurrency
      * @param float $ratio
      *
      * @return ExchangeRateInterface
      */
-    private function createExchangeRate(CurrencyInterface $baseCurrency, CurrencyInterface $counterCurrency, $ratio = 1.00)
+    private function createExchangeRate(CurrencyInterface $sourceCurrency, CurrencyInterface $targetCurrency, $ratio = 1.00)
     {
         /** @var ExchangeRateInterface $exchangeRate */
         $exchangeRate = $this->exchangeRateFactory->createNew();
-        $exchangeRate->setBaseCurrency($baseCurrency);
-        $exchangeRate->setCounterCurrency($counterCurrency);
+        $exchangeRate->setSourceCurrency($sourceCurrency);
+        $exchangeRate->setTargetCurrency($targetCurrency);
         $exchangeRate->setRatio((float) $ratio);
 
         return $exchangeRate;

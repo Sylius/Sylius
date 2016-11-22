@@ -52,15 +52,15 @@ final class ExchangeRateSpec extends ObjectBehavior
 
     function it_has_base_currency(CurrencyInterface $currency)
     {
-        $this->getBaseCurrency()->shouldReturn(null);
-        $this->setBaseCurrency($currency);
-        $this->getBaseCurrency()->shouldReturn($currency);
+        $this->getSourceCurrency()->shouldReturn(null);
+        $this->setSourceCurrency($currency);
+        $this->getSourceCurrency()->shouldReturn($currency);
     }
 
-    function it_has_counter_currency(CurrencyInterface $currency)
+    function it_has_target_currency(CurrencyInterface $currency)
     {
-        $this->getCounterCurrency()->shouldReturn(null);
-        $this->setCounterCurrency($currency);
-        $this->getCounterCurrency()->shouldReturn($currency);
+        $this->getTargetCurrency()->shouldReturn(null);
+        $this->setTargetCurrency($currency);
+        $this->getTargetCurrency()->shouldReturn($currency);
     }
 }

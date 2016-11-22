@@ -6,6 +6,6 @@ sylius:
             enabled: Enabled
             exchange_rate: Exchange rate
         exchange_rate:
-            base_currency: Base currency
-            counter_currency: Counter currency
+            source_currency: Source currency
+            target_currency: Target currency
             ratio: Ratio

@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class DifferentBaseCounterCurrencyValidator extends ConstraintValidator
+class DifferentSourceTargetCurrencyValidator extends ConstraintValidator
 {
     /**
      * {@inheritdoc}
@@ -30,7 +30,7 @@ class DifferentBaseCounterCurrencyValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, ExchangeRateInterface::class);
         }
 
-        if ($value->getBaseCurrency() === $value->getCounterCurrency()) {
+        if ($value->getSourceCurrency() === $value->getTargetCurrency()) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }

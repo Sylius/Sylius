@@ -6,8 +6,8 @@ Feature: Browsing exchange rates
 
     Background:
         Given the store has currency "Euro", "British Pound" and "Bhutanese Ngultrum"
-        And the store has an exchange rate 1.2 with base currency "Euro" and counter currency "British Pound"
-        And the store also has an exchange rate 2.37 with base currency "British Pound" and counter currency "Bhutanese Ngultrum"
+        And the store has an exchange rate 1.2 with source currency "Euro" and target currency "British Pound"
+        And the store also has an exchange rate 2.37 with source currency "British Pound" and target currency "Bhutanese Ngultrum"
         And I am logged in as an administrator
 
     @ui

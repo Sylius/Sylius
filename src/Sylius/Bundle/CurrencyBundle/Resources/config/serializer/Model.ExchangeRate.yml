@@ -9,8 +9,8 @@ Sylius\Component\Currency\Model\ExchangeRate:
         ratio:
             expose: true
             type: float
-        baseCurrency:
+        sourceCurrency:
             expose: true
-        counterCurrency:
+        targetCurrency:
             expose: true
 

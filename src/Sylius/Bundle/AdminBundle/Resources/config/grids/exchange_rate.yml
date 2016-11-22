@@ -12,18 +12,18 @@ sylius_grid:
                     type: string
                     enabled: false
                     sortable: ~
-                baseCurrency:
+                sourceCurrency:
                     type: twig
                     label: sylius.ui.base_currency
                     path: .
                     options:
-                        template: "@SyliusAdmin/ExchangeRate/Grid/Field/baseCurrencyName.html.twig"
-                counterCurrency:
+                        template: "@SyliusAdmin/ExchangeRate/Grid/Field/sourceCurrencyName.html.twig"
+                targetCurrency:
                     type: twig
-                    label: sylius.ui.counter_currency
+                    label: sylius.ui.target_currency
                     path: .
                     options:
-                        template: "@SyliusAdmin/ExchangeRate/Grid/Field/counterCurrencyName.html.twig"
+                        template: "@SyliusAdmin/ExchangeRate/Grid/Field/targetCurrencyName.html.twig"
                 ratio:
                     type: string
                     label: sylius.ui.ratio

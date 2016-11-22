@@ -49,20 +49,20 @@ class UniqueCurrencyPairValidator extends ConstraintValidator
             return;
         }
 
-        if (!$this->isCurrencyPairUnique($value->getBaseCurrency(), $value->getCounterCurrency())) {
+        if (!$this->isCurrencyPairUnique($value->getSourceCurrency(), $value->getTargetCurrency())) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }
 
     /**
      * @param CurrencyInterface $baseCurrency
-     * @param CurrencyInterface $counterCurrency
+     * @param CurrencyInterface $targetCurrency
      *
      * @return bool
      */
-    private function isCurrencyPairUnique(CurrencyInterface $baseCurrency, CurrencyInterface $counterCurrency)
+    private function isCurrencyPairUnique(CurrencyInterface $baseCurrency, CurrencyInterface $targetCurrency)
     {
-        $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($baseCurrency, $counterCurrency);
+        $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($baseCurrency, $targetCurrency);
 
         return null === $exchangeRate;
     }

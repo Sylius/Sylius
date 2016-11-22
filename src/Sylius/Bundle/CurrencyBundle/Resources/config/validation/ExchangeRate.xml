@@ -16,7 +16,7 @@
         <constraint name="Sylius\Bundle\CurrencyBundle\Validator\Constraints\UniqueCurrencyPair">
             <option name="groups">sylius</option>
         </constraint>
-        <constraint name="Sylius\Bundle\CurrencyBundle\Validator\Constraints\DifferentBaseCounterCurrency">
+        <constraint name="Sylius\Bundle\CurrencyBundle\Validator\Constraints\DifferentSourceTargetCurrency">
             <option name="groups">sylius</option>
         </constraint>
         <property name="ratio">
@@ -30,15 +30,15 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="baseCurrency">
+        <property name="sourceCurrency">
             <constraint name="NotBlank">
-                <option name="message">sylius.exchange_rate.base_currency.not_blank</option>
+                <option name="message">sylius.exchange_rate.source_currency.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="counterCurrency">
+        <property name="targetCurrency">
             <constraint name="NotBlank">
-                <option name="message">sylius.exchange_rate.counter_currency.not_blank</option>
+                <option name="message">sylius.exchange_rate.target_currency.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

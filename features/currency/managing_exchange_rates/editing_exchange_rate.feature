@@ -10,7 +10,7 @@ Feature: Editing exchange rate
 
     @ui
     Scenario: Change exchange rate's ratio
-        Given the store has an exchange rate 1.30 with base currency "US Dollar" and counter currency "British Pound"
+        Given the store has an exchange rate 1.30 with source currency "US Dollar" and target currency "British Pound"
         And I am editing this exchange rate
         When I change ratio to 3.21
         And I save my changes
@@ -19,7 +19,7 @@ Feature: Editing exchange rate
 
     @ui
     Scenario: Being unable to change currencies
-        Given the store has an exchange rate 1.30 with base currency "US Dollar" and counter currency "British Pound"
+        Given the store has an exchange rate 1.30 with source currency "US Dollar" and target currency "British Pound"
         When I want to edit this exchange rate
-        Then I should see that the base currency is disabled
-        And I should see that the counter currency is disabled
+        Then I should see that the source currency is disabled
+        And I should see that the target currency is disabled

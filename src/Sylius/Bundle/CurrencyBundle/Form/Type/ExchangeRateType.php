@@ -45,17 +45,17 @@ class ExchangeRateType extends AbstractResourceType
             $exchangeRate = $event->getData();
             $form = $event->getForm();
 
-            $disabled = null !== $exchangeRate->getBaseCurrency() && null !== $exchangeRate->getCounterCurrency();
+            $disabled = null !== $exchangeRate->getSourceCurrency() && null !== $exchangeRate->getTargetCurrency();
 
             $form
-                ->add('baseCurrency', 'sylius_currency_choice', [
-                    'label' => 'sylius.form.exchange_rate.base_currency',
+                ->add('sourceCurrency', 'sylius_currency_choice', [
+                    'label' => 'sylius.form.exchange_rate.source_currency',
                     'required' => true,
                     'empty_data' => false,
                     'disabled' => $disabled,
                 ])
-                ->add('counterCurrency', 'sylius_currency_choice', [
-                    'label' => 'sylius.form.exchange_rate.counter_currency',
+                ->add('targetCurrency', 'sylius_currency_choice', [
+                    'label' => 'sylius.form.exchange_rate.target_currency',
                     'required' => true,
                     'empty_data' => false,
                     'disabled' => $disabled,

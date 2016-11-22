@@ -31,20 +31,20 @@ interface ExchangeRateInterface extends ResourceInterface
     /**
      * @return CurrencyInterface
      */
-    public function getBaseCurrency();
+    public function getSourceCurrency();
 
     /**
      * @param CurrencyInterface $currency
      */
-    public function setBaseCurrency(CurrencyInterface $currency);
+    public function setSourceCurrency(CurrencyInterface $currency);
 
     /**
      * @return CurrencyInterface
      */
-    public function getCounterCurrency();
+    public function getTargetCurrency();
 
     /**
      * @param CurrencyInterface $currency
      */
-    public function setCounterCurrency(CurrencyInterface $currency);
+    public function setTargetCurrency(CurrencyInterface $currency);
 }

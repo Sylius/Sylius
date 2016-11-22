@@ -37,14 +37,16 @@ class ExchangeRateRepository extends EntityRepository implements ExchangeRateRep
         return $queryBuilder
             ->where(
                 $queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->eq('o.baseCurrency', $firstCurrency->getId()),
-                    $queryBuilder->expr()->eq('o.counterCurrency', $secondCurrency->getId())
+                    $queryBuilder->expr()->eq('o.sourceCurrency', ':firstCurrency'),
+                    $queryBuilder->expr()->eq('o.targetCurrency', ':secondCurrency')
                 ))
             ->orWhere(
                 $queryBuilder->expr()->andX(
-                    $queryBuilder->expr()->eq('o.baseCurrency', $secondCurrency->getId()),
-                    $queryBuilder->expr()->eq('o.counterCurrency', $firstCurrency->getId())
+                    $queryBuilder->expr()->eq('o.sourceCurrency', ':secondCurrency'),
+                    $queryBuilder->expr()->eq('o.targetCurrency', ':firstCurrency')
                 ))
+            ->setParameter('firstCurrency', $firstCurrency)
+            ->setParameter('secondCurrency', $secondCurrency)
             ->getQuery()
             ->getOneOrNullResult()
         ;
