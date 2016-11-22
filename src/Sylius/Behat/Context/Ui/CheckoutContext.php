@@ -919,6 +919,18 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then /^my order total in base currency should be ("(?:\£|\$)\d+")$/
+     */
+    public function myOrderTotalInBaseCurrencyShouldBe($total)
+    {
+        Assert::same(
+            $total,
+            $this->completePage->getBaseCurrencyOrderTotal(),
+            'Order total should have %s total, but it has %s.'
+        );
+    }
+
+    /**
      * @Then my order promotion total should be :promotionTotal
      */
     public function myOrderPromotionTotalShouldBe($promotionTotal)
