@@ -11,22 +11,22 @@
 
 namespace Sylius\Bundle\MoneyBundle\Twig;
 
-use Sylius\Bundle\MoneyBundle\Templating\Helper\PriceHelperInterface;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelperInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class PriceExtension extends \Twig_Extension
+final class ConvertMoneyExtension extends \Twig_Extension
 {
     /**
-     * @var PriceHelperInterface
+     * @var ConvertMoneyHelperInterface
      */
     private $helper;
 
     /**
-     * @param PriceHelperInterface $helper
+     * @param ConvertMoneyHelperInterface $helper
      */
-    public function __construct(PriceHelperInterface $helper)
+    public function __construct(ConvertMoneyHelperInterface $helper)
     {
         $this->helper = $helper;
     }
@@ -37,7 +37,7 @@ final class PriceExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_price', [$this->helper, 'convertAndFormatAmount']),
+            new \Twig_SimpleFilter('sylius_convert_money', [$this->helper, 'convertAmount']),
         ];
     }
 
@@ -46,6 +46,6 @@ final class PriceExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'sylius_price';
+        return 'sylius_convert_money';
     }
 }
