@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -56,8 +57,8 @@ class ZoneType extends AbstractResourceType
             ->add('type', 'sylius_zone_type_choice', [
                 'disabled' => true,
             ])
-            ->add('members', 'collection', [
-                'type' => 'sylius_zone_member',
+            ->add('members', CollectionType::class, [
+                'entry_type' => 'sylius_zone_member',
                 'button_add_label' => 'sylius.form.zone.add_member',
                 'allow_add' => true,
                 'allow_delete' => true,

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -31,8 +32,8 @@ class ProductOptionType extends AbstractResourceType
                 'type' => 'sylius_product_option_translation',
                 'label' => 'sylius.form.option.name',
             ])
-            ->add('values', 'collection', [
-                'type' => 'sylius_product_option_value',
+            ->add('values', CollectionType::class, [
+                'entry_type' => 'sylius_product_option_value',
                 'allow_add' => true,
                 'by_reference' => false,
                 'label' => false,

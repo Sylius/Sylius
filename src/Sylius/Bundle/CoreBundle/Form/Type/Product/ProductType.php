@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddProductOnProductTaxonFormSubscriber;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
 use Sylius\Component\Core\Model\Product;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -45,8 +46,8 @@ class ProductType extends BaseProductType
                 'label' => 'sylius.form.product.variant_selection_method',
                 'choices' => Product::getVariantSelectionMethodLabels(),
             ])
-            ->add('images', 'collection', [
-                'type' => 'sylius_product_image',
+            ->add('images', CollectionType::class, [
+                'entry_type' => 'sylius_product_image',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

@@ -39,8 +39,8 @@
             <tag name="kernel.event_subscriber" event="kernel.exception" />
         </service>
 
-        <service id="sylius.form.extension.collection" class="Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension">
-            <tag name="form.type_extension" alias="collection" extended-type="collection" />
+        <service id="sylius.form.extension.type.collection" class="Sylius\Bundle\ResourceBundle\Form\Extension\CollectionTypeExtension">
+            <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\CollectionType" />
         </service>
     </services>
 </container>
