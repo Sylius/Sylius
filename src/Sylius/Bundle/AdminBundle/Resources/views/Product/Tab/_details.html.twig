@@ -8,6 +8,7 @@
                 {{ form_row(form.code) }}
                 {% if product.simple %}
                     {{ form_row(form.variant.shippingCategory) }}
+                    {{ form_row(form.variant.channelPricings) }}
                     {{ form_row(form.variant.onHand) }}
                     {{ form_row(form.variant.tracked) }}
                 {% else %}

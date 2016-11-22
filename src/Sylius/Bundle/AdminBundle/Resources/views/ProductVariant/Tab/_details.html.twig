@@ -10,6 +10,7 @@
             <div class="two fields">
                 {{ form_row(form.shippingCategory) }}
             </div>
+            {{ form_row(form.channelPricings) }}
         </div>
         {% if form.optionValues is defined and form.optionValues|length > 0 %}
         <div class="ui segment">
