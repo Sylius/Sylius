@@ -193,6 +193,18 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->hasChannelPricingForChannel($secondChannel)->shouldReturn(false);
     }
 
+    function it_returns_channel_pricing_for_given_channel(
+        ChannelInterface $channel,
+        ChannelPricingInterface $channelPricing
+    ) {
+        $channelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($channelPricing);
+
+        $channelPricing->getChannel()->willReturn($channel);
+
+        $this->getChannelPricingForChannel($channel)->shouldReturn($channelPricing);
+    }
+
     public function getMatchers()
     {
         return [
