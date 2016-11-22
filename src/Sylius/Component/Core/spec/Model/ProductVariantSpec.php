@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
@@ -176,6 +177,20 @@ final class ProductVariantSpec extends ObjectBehavior
         $this->addChannelPricing($secondChannelPricing);
 
         $this->getChannelPricings()->shouldBeSameAs(new ArrayCollection([$firstChannelPricing, $secondChannelPricing]));
+    }
+
+    function it_checks_if_contains_channel_pricing_for_given_channel(
+        ChannelInterface $firstChannel,
+        ChannelInterface $secondChannel,
+        ChannelPricingInterface $firstChannelPricing
+    ) {
+        $firstChannelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($firstChannelPricing);
+
+        $firstChannelPricing->getChannel()->willReturn($firstChannel);
+
+        $this->hasChannelPricingForChannel($firstChannel)->shouldReturn(true);
+        $this->hasChannelPricingForChannel($secondChannel)->shouldReturn(false);
     }
 
     public function getMatchers()

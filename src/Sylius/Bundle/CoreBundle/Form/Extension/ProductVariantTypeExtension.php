@@ -18,6 +18,8 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -25,6 +27,23 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ProductVariantTypeExtension extends AbstractTypeExtension
 {
+    /**
+     * @var EventSubscriberInterface
+     */
+    private $channelPricingFormSubscriber;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param EventSubscriberInterface $channelPricingFormSubscriber
+     */
+    public function __construct($dataClass, array $validationGroups = [], EventSubscriberInterface $channelPricingFormSubscriber)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->channelPricingFormSubscriber = $channelPricingFormSubscriber;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -67,6 +86,13 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
                 'placeholder' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.product_variant.shipping_category',
             ])
+            ->add('channelPricings', CollectionType::class, [
+                'entry_type' => ChannelPricingType::class,
+                'label' => 'sylius.form.variant.price',
+                'allow_add' => false,
+                'allow_delete' => false,
+            ])
+            ->addEventSubscriber($this->channelPricingFormSubscriber)
         ;
     }
 
