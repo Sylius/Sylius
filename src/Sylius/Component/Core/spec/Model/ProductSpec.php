@@ -11,18 +11,22 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
+ * @mixin Product
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -55,9 +59,23 @@ final class ProductSpec extends ObjectBehavior
         $this->shouldHaveType(BaseProduct::class);
     }
 
-    function it_initializes_a_taxon_collection_by_default()
+    function it_initializes_a_product_taxon_collection_by_default()
     {
-        $this->getTaxons()->shouldHaveType(Collection::class);
+        $this->getProductTaxons()->shouldHaveType(Collection::class);
+    }
+    
+    function it_adds_a_product_taxons(ProductTaxonInterface $productTaxon)
+    {
+        $this->addProductTaxon($productTaxon);
+        $this->hasProductTaxon($productTaxon)->shouldReturn(true);
+    }
+
+    function it_removes_a_product_taxons(ProductTaxonInterface $productTaxon)
+    {
+        $this->addProductTaxon($productTaxon);
+        $this->removeProductTaxon($productTaxon);
+        
+        $this->hasProductTaxon($productTaxon)->shouldReturn(false);
     }
 
     function its_variant_selection_method_is_choice_by_default()
@@ -143,5 +161,62 @@ final class ProductSpec extends ObjectBehavior
         $this->addImage($image);
 
         $this->getImageByCode('thumbnail')->shouldReturn($image);
+    }
+    
+    function it_filters_product_taxons_by_taxon(
+        ProductTaxonInterface $firstProductTaxon, 
+        ProductTaxonInterface $secondProductTaxon, 
+        TaxonInterface $firstTaxon,
+        TaxonInterface $secondTaxon
+    ) {
+        $this->addProductTaxon($firstProductTaxon);
+        $this->addProductTaxon($secondProductTaxon);
+
+        $firstProductTaxon->getTaxon()->willReturn($firstTaxon);
+        $secondProductTaxon->getTaxon()->willReturn($secondTaxon);
+        
+        $this->filterProductTaxonsByTaxon($firstTaxon)->shouldBeCollection(new ArrayCollection([$firstProductTaxon->getWrappedObject()]));
+    }
+
+    function it_returns_null_if_no_product_taxon_has_taxon_durign_filtering(
+        ProductTaxonInterface $firstProductTaxon,
+        ProductTaxonInterface $secondProductTaxon,
+        TaxonInterface $firstTaxon,
+        TaxonInterface $secondTaxon,
+        TaxonInterface $thirdTaxon
+    ) {
+        $this->addProductTaxon($firstProductTaxon);
+        $this->addProductTaxon($secondProductTaxon);
+
+        $firstProductTaxon->getTaxon()->willReturn($firstTaxon);
+        $secondProductTaxon->getTaxon()->willReturn($secondTaxon);
+
+        $this->filterProductTaxonsByTaxon($thirdTaxon)->shouldBeCollection(new ArrayCollection());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMatchers()
+    {
+        return [
+            'beCollection' => function ($subject, $key) {
+                if (!$subject instanceof Collection || !$key instanceof Collection) {
+                    return false;
+                }
+
+                if ($subject->count() !== $key->count()) {
+                    return false;
+                }
+
+                foreach ($subject as $subjectElement) {
+                    if (!$key->contains($subjectElement)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            },
+        ];
     }
 }

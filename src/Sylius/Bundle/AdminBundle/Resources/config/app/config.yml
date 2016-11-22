@@ -12,6 +12,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_association_type.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_attribute.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_from_taxon.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_option.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_review.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant.yml" }
@@ -47,6 +48,7 @@ sylius_grid:
             accept: "SyliusAdminBundle:ProductReview/Grid/Action:accept.html.twig"
             reject: "SyliusAdminBundle:ProductReview/Grid/Action:reject.html.twig"
             show_orders: "@SyliusAdmin/Customer/Grid/Action/showOrders.html.twig"
+            update_product_taxons: "@SyliusAdmin/ProductTaxon/Grid/Action/update.html.twig"
             show: "@SyliusAdmin/Grid/Action/show.html.twig"
             create: "@SyliusAdmin/Grid/Action/create.html.twig"
             update: "@SyliusAdmin/Grid/Action/update.html.twig"

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddProductOnProductTaxonFormSubscriber;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
 use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,7 +37,7 @@ class ProductType extends BaseProductType
                 'label' => 'sylius.form.product.channels',
             ])
             ->add('mainTaxon', 'sylius_taxon_to_hidden_identifier')
-            ->add('taxons', 'sylius_taxon_choice', [
+            ->add('productTaxons', 'sylius_product_taxon_choice', [
                 'label' => 'sylius.form.product.taxons',
                 'multiple' => true,
             ])
@@ -51,6 +52,7 @@ class ProductType extends BaseProductType
                 'by_reference' => false,
                 'label' => 'sylius.form.product.images',
             ])
+            ->addEventSubscriber(new AddProductOnProductTaxonFormSubscriber())
         ;
     }
 }

@@ -1,0 +1,61 @@
+sylius_grid:
+    grids:
+        sylius_admin_product_from_taxon:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product.class%"
+                    repository:
+                        method: createQueryBuilderWithLocaleCodeAndTaxonId
+                        arguments: ["%locale%", $taxonId]
+            sorting:
+                position: asc
+            fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    path: .
+                    options:
+                        template: "@SyliusAdmin/Product/Grid/Field/image.html.twig"
+                code:
+                    type: string
+                    label: sylius.ui.code
+                    sortable: ~
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    sortable: translation.name
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: "@SyliusAdmin/Grid/Field/enabled.html.twig"
+                position: 
+                    type: twig 
+                    label: sylius.ui.position 
+                    path: .
+                    sortable: productTaxon.position
+                    options: 
+                        template: "@SyliusAdmin/Product/Grid/Field/position.html.twig"
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, translation.name]
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
+            actions:
+                main:
+                    create:
+                        type: create_product
+                    update_product_taxons:
+                        type: update_product_taxons
+                item:
+                    manage_variants:
+                        type: manage_variants
+                    update:
+                        type: update
+                    delete:
+                        type: delete

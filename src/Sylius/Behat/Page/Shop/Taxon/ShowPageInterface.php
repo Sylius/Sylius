@@ -59,4 +59,11 @@ interface ShowPageInterface
     public function search($name);
 
     public function clearFilter();
+
+    /**
+     * @param array $productNames
+     * 
+     * @return bool
+     */
+    public function hasProductsInOrder(array $productNames);
 }

@@ -14,8 +14,8 @@ sylius_shop_partial_product_index_latest:
                     - "expr:service('sylius.context.channel').getChannel()"
                     - $count
 
-sylius_shop_partial_product_index_by_taxon_code:
-    path: /{code}
+sylius_shop_partial_product_index_by_taxon:
+    path: /{taxonId}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:indexAction
@@ -25,7 +25,7 @@ sylius_shop_partial_product_index_by_taxon_code:
             vars:
                 route:
                     parameters:
-                        $code: $code
+                        $taxonId: $taxonId
 
 sylius_shop_partial_associated_products:
     path: /associated-products/{$id}

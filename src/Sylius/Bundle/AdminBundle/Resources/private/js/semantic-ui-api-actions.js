@@ -13,6 +13,7 @@
     $.fn.api.settings.api = {
         'get products' : '/admin/products?_format=json',
         'get taxons': '/admin/api/taxons',
-        'move taxon': '/admin/taxons/{id}/move?_format=json'
+        'move taxon': '/admin/taxons/{id}/move?_format=json',
+        'move product taxon': '/admin/product-taxons/{id}/move?_format=json'
     };
 })(jQuery);

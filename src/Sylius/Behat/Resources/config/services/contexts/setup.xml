@@ -163,6 +163,12 @@
             <tag name="fob.context_service" />
         </service>
 
+        <service id="sylius.behat.context.setup.product_taxon" class="Sylius\Behat\Context\Setup\ProductTaxonContext">
+            <argument type="service" id="__symfony__.sylius.factory.product_taxon" />
+            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="sylius.behat.context.setup.promotion" class="Sylius\Behat\Context\Setup\PromotionContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.factory.promotion_action" />

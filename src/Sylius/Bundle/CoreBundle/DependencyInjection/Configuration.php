@@ -11,9 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Core\Model\ProductImage;
 use Sylius\Component\Core\Model\ProductImageInterface;
+use Sylius\Component\Core\Model\ProductTaxon;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonImage;
 use Sylius\Component\Core\Model\TaxonImageInterface;
 use Sylius\Component\Resource\Factory\Factory;
@@ -81,6 +84,21 @@ final class Configuration implements ConfigurationInterface
                                     ->end()
                                 ->end()
                             ->end()
+                        ->end()
+                        ->arrayNode('product_taxon')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(ProductTaxon::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(ProductTaxonInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ProductTaxonController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->end()
+                                ->end()
+                             ->end()
                         ->end()
                     ->end()
                 ->end()

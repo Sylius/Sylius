@@ -173,6 +173,7 @@ final class ProductContext implements Context
     /**
      * @Given the store has a product :productName
      * @Given the store has a :productName product
+     * @Given I added a product :productName
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
      */
     public function storeHasAProductPricedAt($productName, $price = 0)

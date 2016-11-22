@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -124,16 +123,6 @@ final class TaxonomyContext implements Context
         ];
 
         $this->taxonRepository->add($this->createTaxonInManyLanguages($translationMap));
-    }
-
-    /**
-     * @Given /^(it|this product) (belongs to "[^"]+")$/
-     */
-    public function itBelongsTo(ProductInterface $product, TaxonInterface $taxon)
-    {
-        $product->addTaxon($taxon);
-
-        $this->objectManager->flush($product);
     }
 
     /**

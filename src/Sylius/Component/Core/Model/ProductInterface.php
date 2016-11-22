@@ -15,7 +15,6 @@ use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
-use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -23,7 +22,7 @@ use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
  */
 interface ProductInterface extends
     BaseProductInterface,
-    TaxonsAwareInterface,
+    ProductTaxonsAwareInterface,
     ChannelsAwareInterface,
     ReviewableInterface,
     ImageAwareInterface

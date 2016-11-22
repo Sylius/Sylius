@@ -32,9 +32,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     protected $variantSelectionMethod;
 
     /**
-     * @var Collection|BaseTaxonInterface[]
+     * @var Collection|ProductTaxonInterface[]
      */
-    protected $taxons;
+    protected $productTaxons;
 
     /**
      * @var ShippingCategoryInterface
@@ -70,7 +70,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     {
         parent::__construct();
 
-        $this->taxons = new ArrayCollection();
+        $this->productTaxons = new ArrayCollection();
         $this->channels = new ArrayCollection();
         $this->reviews = new ArrayCollection();
         $this->images = new ArrayCollection();
@@ -119,43 +119,47 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getTaxons($rootTaxonCode = null)
+    public function getProductTaxons()
     {
-        if (null !== $rootTaxonCode) {
-            return $this->taxons->filter(function (BaseTaxonInterface $taxon) use ($rootTaxonCode) {
-                return $rootTaxonCode === strtolower($taxon->getRoot()->getCode());
-            });
-        }
-
-        return $this->taxons;
+        return $this->productTaxons;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addTaxon(BaseTaxonInterface $taxon)
+    public function addProductTaxon(ProductTaxonInterface $productTaxon)
     {
-        if (!$this->hasTaxon($taxon)) {
-            $this->taxons->add($taxon);
+        if (!$this->hasProductTaxon($productTaxon)) {
+            $this->productTaxons->add($productTaxon);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeTaxon(BaseTaxonInterface $taxon)
+    public function removeProductTaxon(ProductTaxonInterface $productTaxon)
     {
-        if ($this->hasTaxon($taxon)) {
-            $this->taxons->removeElement($taxon);
+        if ($this->hasProductTaxon($productTaxon)) {
+            $this->productTaxons->removeElement($productTaxon);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasTaxon(BaseTaxonInterface $taxon)
+    public function hasProductTaxon(ProductTaxonInterface $productTaxon)
     {
-        return $this->taxons->contains($taxon);
+        return $this->productTaxons->contains($productTaxon);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function filterProductTaxonsByTaxon(TaxonInterface $taxon)
+    {
+        return $this->productTaxons->filter(function ($productTaxon) use ($taxon) {
+             return $taxon === $productTaxon->getTaxon();
+        });
     }
 
     /**

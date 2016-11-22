@@ -9,9 +9,9 @@
     </div>
     <div class="twelve wide column">
         {{ render(url(
-            'sylius_shop_partial_product_index_by_taxon_code',
+            'sylius_shop_partial_product_index_by_taxon',
             {
-                'code': taxon.code,
+                'taxonId': taxon.id,
                 'template': '@SyliusShop/Product/Grid/_default.html.twig',
                 'slug': app.request.attributes.get('slug'),
                 'sorting': app.request.query.get('sorting'),

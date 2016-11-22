@@ -31,13 +31,13 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function createQueryBuilderWithLocaleCodeAndTaxonId($localeCode, $taxonId = null);
 
     /**
-     * @param string $code
+     * @param string $taxonId
      * @param ChannelInterface $channel
      * @param string $locale
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilderForEnabledByTaxonCodeAndChannelAndLocale($code, ChannelInterface $channel, $locale);
+    public function createQueryBuilderForEnabledByTaxonIdAndChannelAndLocale($taxonId, ChannelInterface $channel, $locale);
 
     /**
      * @param string $slug
@@ -61,12 +61,4 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * @return ProductInterface[]
      */
     public function findLatestByChannel(ChannelInterface $channel, $count);
-
-    /**
-     * @param string $code
-     * @param ChannelInterface $channel
-     *
-     * @return ProductInterface[]|null
-     */
-    public function findEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel);
 }

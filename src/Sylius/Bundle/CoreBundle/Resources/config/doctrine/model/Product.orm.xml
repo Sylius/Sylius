@@ -31,16 +31,11 @@
             <gedmo:versioned />
         </many-to-one>
 
-        <many-to-many field="taxons" inversed-by="products" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
-            <join-table name="sylius_product_taxon">
-                <join-columns>
-                    <join-column name="product_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="taxon_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
+        <one-to-many field="productTaxons" target-entity="Sylius\Component\Core\Model\ProductTaxonInterface" mapped-by="product" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
 
         <many-to-many field="channels" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
             <join-table name="sylius_product_channels">

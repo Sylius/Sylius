@@ -452,6 +452,26 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then /^average rating of (product "[^"]+") should be (\d+)$/
+     */
+    public function thisProductAverageRatingShouldBe(ProductInterface $product, $averageRating)
+    {
+        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
+        $this->iShouldSeeAsItsAverageRating($averageRating);
+    }
+
+    /**
+     * @Then they should have order like :firstProductName, :secondProductName and :thirdProductName
+     */
+    public function theyShouldHaveOrderLikeAnd(...$productNames)
+    {
+        Assert::true(
+            $this->taxonShowPage->hasProductsInOrder($productNames),
+            'The products have wrong order.'
+        );
+    }
+
+    /**
      * @param string $productName
      * @param string $productAssociationName
      *
@@ -467,14 +487,5 @@ final class ProductContext implements Context
                 $productAssociationName
             )
         );
-    }
-
-    /**
-     * @Then /^average rating of (product "[^"]+") should be (\d+)$/
-     */
-    public function thisProductAverageRatingShouldBe(ProductInterface $product, $averageRating)
-    {
-        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
-        $this->iShouldSeeAsItsAverageRating($averageRating);
     }
 }
