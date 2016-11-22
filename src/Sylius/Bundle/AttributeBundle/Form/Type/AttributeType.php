@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AttributeBundle\Form\Type;
 use Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -48,8 +49,8 @@ class AttributeType extends AbstractResourceType
         $builder
             ->addEventSubscriber(new BuildAttributeFormSubscriber($builder->getFormFactory()))
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('translations', 'sylius_translations', [
-                'type' => sprintf('sylius_%s_attribute_translation', $this->subjectName),
+            ->add('translations', ResourceTranslationsType::class, [
+                'entry_type' => sprintf('sylius_%s_attribute_translation', $this->subjectName),
                 'label' => 'sylius.form.attribute.translations',
             ])
             ->add('type', 'sylius_attribute_type_choice', [
