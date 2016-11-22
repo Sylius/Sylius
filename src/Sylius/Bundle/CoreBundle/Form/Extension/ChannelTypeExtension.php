@@ -9,18 +9,20 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType as BaseChannelType;
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
+use Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ChannelType extends BaseChannelType
+class ChannelTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
@@ -30,12 +32,14 @@ class ChannelType extends BaseChannelType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('locales', 'sylius_locale_choice', [
+            ->add('locales', ResourceChoiceType::class, [
+                'resource' => 'sylius.locale',
                 'label' => 'sylius.form.channel.locales',
                 'required' => true,
                 'multiple' => true,
             ])
-            ->add('defaultLocale', 'sylius_locale_choice', [
+            ->add('defaultLocale', ResourceChoiceType::class, [
+                'resource' => 'sylius.locale',
                 'label' => 'sylius.form.channel.locale_default',
                 'required' => true,
                 'placeholder' => null,
@@ -62,5 +66,13 @@ class ChannelType extends BaseChannelType
             ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return ChannelType::class;
     }
 }
