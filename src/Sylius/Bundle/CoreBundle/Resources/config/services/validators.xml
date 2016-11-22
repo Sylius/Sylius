@@ -29,10 +29,6 @@
             <argument>%locale%</argument>
             <tag name="validator.constraint_validator" alias="sylius_cannot_disable_locale" />
         </service>
-        <service id="sylius.validator.cannot_disable.base_currency" class="Sylius\Bundle\CoreBundle\Validator\Constraints\CannotDisableCurrencyValidator">
-            <argument>%currency%</argument>
-            <tag name="validator.constraint_validator" alias="sylius_cannot_disable_currency" />
-        </service>
         <service id="sylius.validator.cart_item_availability" class="Sylius\Bundle\CoreBundle\Validator\Constraints\CartItemAvailabilityValidator">
             <argument type="service" id="sylius.availability_checker" />
             <tag name="validator.constraint_validator" alias="sylius_cart_item_availability" />

@@ -3,8 +3,8 @@
         {% include '@SyliusShop/Common/Product/_variant.html.twig' with {'variant': item.variant} %}
     </td>
     <td>
-        <span class="sylius-unit-price">{{ item.unitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}</span>
+        <span class="sylius-unit-price">{{ item.unitPrice|sylius_price(order.currencyCode) }}</span>
     </td>
     <td class="center aligned">{{ item.quantity }}</td>
-    <td class="right aligned">{{ item.subtotal|sylius_price(order.currencyCode, order.exchangeRate) }}</td>
+    <td class="right aligned">{{ item.subtotal|sylius_price(order.currencyCode) }}</td>
 </tr>

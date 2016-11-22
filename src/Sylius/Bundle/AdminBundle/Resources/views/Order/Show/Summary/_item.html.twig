@@ -34,24 +34,24 @@
         {% endif %}
     </td>
     <td class="right aligned unit-price">
-        {{ item.unitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ item.unitPrice|sylius_price(order.currencyCode) }}
     </td>
     <td class="right aligned discounted-unit-price">
-        {{ item.discountedUnitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ item.discountedUnitPrice|sylius_price(order.currencyCode) }}
     </td>
     <td class="right aligned quantity">
         {{ item.quantity }}
     </td>
     <td class="right aligned subtotal">
-        {{ item.subtotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ item.subtotal|sylius_price(order.currencyCode) }}
     </td>
     <td class="right aligned discount">
-        {{ item.getAdjustmentsTotalRecursively(orderPromotionAdjustment)|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ item.getAdjustmentsTotalRecursively(orderPromotionAdjustment)|sylius_price(order.currencyCode) }}
     </td>
     <td class="right aligned tax">
-        {{ item.taxTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ item.taxTotal|sylius_price(order.currencyCode) }}
     </td>
     <td class="right aligned total">
-        {{ item.total|sylius_price(order.currencyCode, order.exchangeRate) }}
+        {{ item.total|sylius_price(order.currencyCode) }}
     </td>
 </tr>

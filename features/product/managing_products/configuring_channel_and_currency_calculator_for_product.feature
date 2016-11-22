@@ -9,7 +9,7 @@ Feature: Configuring channel and currency calculator
         And the store operates on a channel named "Web"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui @javascript @todo
     Scenario: Configure channel and currency calculator while adding new simple product
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
