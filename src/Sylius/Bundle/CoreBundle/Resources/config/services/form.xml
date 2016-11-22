@@ -81,9 +81,6 @@
             <argument type="service" id="sylius.form.event_subscriber.add_shop_user_type" />
             <tag name="form.type" alias="sylius_customer" />
         </service>
-        <service id="sylius.form.type.list" class="Sylius\Bundle\CoreBundle\Form\Type\ListType">
-            <tag name="form.type" alias="list" />
-        </service>
 
         <service id="sylius.form.type.tax_calculation_strategy_choice" class="Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType">
             <argument>%sylius.tax_calculation_strategies%</argument>
