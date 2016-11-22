@@ -29,5 +29,16 @@
         $('.sylius-update-product-taxons').moveProduct($('.sylius-product-taxon-position'));
         $('.sylius-taxon-move-up').taxonMoveUp();
         $('.sylius-taxon-move-down').taxonMoveDown();
+
+        $('#sylius_shipping_method_calculator').handlePrototypes({
+            'prototypePrefix': 'sylius_shipping_method_calculator_calculators',
+            'containerSelector': '.configuration'
+        });
+
+        $('#actions a[data-form-collection="add"]').on('click', function(){
+            setTimeout(function(){
+                $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
+            }, 50);
+        });
     });
 })(jQuery);
