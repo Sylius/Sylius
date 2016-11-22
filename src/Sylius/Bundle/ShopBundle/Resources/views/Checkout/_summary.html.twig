@@ -1,3 +1,5 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 <div class="ui segment">
     <table class="ui very basic table" id="checkout-subtotal">
         <thead>
@@ -14,7 +16,7 @@
                 <td class="center aligned">
                     {{ item.quantity }}
                 </td>
-                <td id="item-{{ item.getVariant.product.slug }}-subtotal">{{ item.subtotal|sylius_price(order.currencyCode) }}</td>
+                <td id="item-{{ item.getVariant.product.slug }}-subtotal">{{ money.convertAndFormat(item.subtotal) }}</td>
             </tr>
         {% endfor %}
         </tbody>

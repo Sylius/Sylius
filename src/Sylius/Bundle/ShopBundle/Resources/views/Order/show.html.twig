@@ -1,3 +1,4 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
@@ -11,7 +12,7 @@
                         {{ order.checkoutCompletedAt|date }}
                     </div>
                     <div class="item">
-                        {{ order.total|sylius_price(order.currencyCode) }}
+                        {{ money.convertAndFormat(order.total) }}
                     </div>
                     <div class="item">
                         {{ order.items|length }} {{ 'sylius.ui.items'|trans|lower }}
