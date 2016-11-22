@@ -51,17 +51,14 @@ class ProvinceChoiceType extends AbstractType
             return new ArrayChoiceList($choices);
         };
 
-        $resolver
-            ->setDefaults([
-                'choice_translation_domain' => false,
-                'choice_list' => $choices,
-                'country' => null,
-                'label' => 'sylius.form.address.province',
-                'empty_value' => 'sylius.form.province.select',
-            ])
-        ;
-        $resolver->addAllowedTypes('country', 'NULL');
-        $resolver->addAllowedTypes('country', CountryInterface::class);
+        $resolver->setDefaults([
+            'choice_translation_domain' => false,
+            'choice_list' => $choices,
+            'country' => null,
+            'label' => 'sylius.form.address.province',
+            'empty_value' => 'sylius.form.province.select',
+        ]);
+        $resolver->addAllowedTypes('country', ['null', CountryInterface::class]);
     }
 
     /**

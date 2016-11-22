@@ -90,7 +90,7 @@ it is handy to use `sylius_taxon_choice` form type:
 
     use Symfony\Component\Form\AbstractType;
     use Symfony\Component\Form\FormBuilderInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class ProductType extends AbstractType
     {
@@ -99,7 +99,7 @@ it is handy to use `sylius_taxon_choice` form type:
             $builder->add('taxons', 'sylius_taxon_choice');
         }
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver
                 ->setDefaults(array(
