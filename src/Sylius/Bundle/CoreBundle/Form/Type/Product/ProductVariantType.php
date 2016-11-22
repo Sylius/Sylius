@@ -12,18 +12,32 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
-use Sylius\Component\Pricing\Calculator\CalculatorInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormRegistryInterface;
-use Symfony\Component\Form\FormView;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductVariantType extends BaseProductVariantType
 {
+    /**
+     * @var EventSubscriberInterface
+     */
+    private $channelPricingFormSubscriber;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param EventSubscriberInterface $channelPricingFormSubscriber
+     */
+    public function __construct($dataClass, array $validationGroups = [], EventSubscriberInterface $channelPricingFormSubscriber)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->channelPricingFormSubscriber = $channelPricingFormSubscriber;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -63,6 +77,13 @@ class ProductVariantType extends BaseProductVariantType
                 'empty_value' => '---',
                 'label' => 'sylius.form.product_variant.tax_category',
             ])
+            ->add('channelPricings', CollectionType::class, [
+                'entry_type' => ChannelPricingType::class,
+                'label' => 'sylius.form.variant.price',
+                'allow_add' => false,
+                'allow_delete' => false,
+            ])
+            ->addEventSubscriber($this->channelPricingFormSubscriber)
         ;
     }
 }
