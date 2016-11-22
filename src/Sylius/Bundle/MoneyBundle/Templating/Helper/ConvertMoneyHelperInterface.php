@@ -14,17 +14,15 @@ namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 /**
  * @author Axel Vankrunkelsven <axel@digilabs.be>
  */
-interface PriceHelperInterface
+interface ConvertMoneyHelperInterface
 {
     /**
      * @param int $amount
-     * @param string|null $currencyCode
-     * @param float|null $exchangeRate
-     * @param string|null $localeCode
+     * @param string|null $sourceCurrencyCode
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function convertAndFormatAmount($amount, $currencyCode = null, $exchangeRate = null, $localeCode = null);
+    public function convertAmount($amount, $sourceCurrencyCode);
 }

@@ -13,14 +13,13 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.templating.helper.price" class="Sylius\Bundle\MoneyBundle\Templating\Helper\PriceHelper" lazy="true">
+        <service id="sylius.templating.helper.convert_money" class="Sylius\Bundle\MoneyBundle\Templating\Helper\ConvertMoneyHelper" lazy="true">
             <argument type="service" id="sylius.currency_converter" />
-            <argument type="service" id="sylius.templating.helper.money" />
-            <tag name="templating.helper" alias="sylius_price" />
+            <tag name="templating.helper" alias="sylius_convert_money" />
         </service>
 
-        <service id="sylius.twig.extension.price" class="Sylius\Bundle\MoneyBundle\Twig\PriceExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.price" />
+        <service id="sylius.twig.extension.price" class="Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension" public="false">
+            <argument type="service" id="sylius.templating.helper.convert_money" />
             <tag name="twig.extension" />
         </service>
     </services>
