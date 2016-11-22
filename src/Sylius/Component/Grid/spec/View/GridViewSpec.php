@@ -16,6 +16,7 @@ use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\View\GridView;
+use Sylius\Component\Grid\View\GridViewInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,6 +31,11 @@ final class GridViewSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType(GridView::class);
+    }
+
+    function it_implements_a_grid_view_interface()
+    {
+        $this->shouldHaveType(GridViewInterface::class);
     }
 
     function it_has_data()

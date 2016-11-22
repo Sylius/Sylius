@@ -1,3 +1,5 @@
 {% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
 
-{{ buttons.delete(path(grid.requestConfiguration.getRouteName('delete'), {'id': data.id})) }}
+{% set path = options.link.url|default(path(options.link.route|default(grid.requestConfiguration.getRouteName('delete')), options.link.parameters|default({'id': data.id}))) %}
+
+{{ buttons.delete(path, action.label) }}

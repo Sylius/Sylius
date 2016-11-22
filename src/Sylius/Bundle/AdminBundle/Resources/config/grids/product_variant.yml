@@ -43,9 +43,23 @@ sylius_grid:
             actions:
                 main:
                     create:
-                        type: create_variant
+                        type: create
+                        options:
+                            link:
+                                parameters:
+                                    productId: $productId
                 item:
                     update:
-                        type: update_variant
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId
                     delete:
-                        type: delete_variant
+                        type: delete
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId

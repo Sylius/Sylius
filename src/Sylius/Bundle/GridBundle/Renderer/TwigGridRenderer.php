@@ -16,7 +16,7 @@ use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
-use Sylius\Component\Grid\View\GridView;
+use Sylius\Component\Grid\View\GridViewInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,24 +32,24 @@ final class TwigGridRenderer implements GridRendererInterface
     private $twig;
 
     /**
-     * @var string
-     */
-    private $defaultTemplate;
-
-    /**
      * @var ServiceRegistryInterface
      */
     private $fieldsRegistry;
 
     /**
-     * @var array
-     */
-    private $actionTemplates;
-
-    /**
      * @var FormFactoryInterface
      */
     private $formFactory;
+
+    /**
+     * @var string
+     */
+    private $defaultTemplate;
+
+    /**
+     * @var array
+     */
+    private $actionTemplates;
 
     /**
      * @var array
@@ -73,17 +73,17 @@ final class TwigGridRenderer implements GridRendererInterface
         array $filterTemplates = []
     ) {
         $this->twig = $twig;
-        $this->defaultTemplate = $defaultTemplate;
         $this->fieldsRegistry = $fieldsRegistry;
-        $this->actionTemplates = $actionTemplates;
         $this->formFactory = $formFactory;
+        $this->defaultTemplate = $defaultTemplate;
+        $this->actionTemplates = $actionTemplates;
         $this->filterTemplates = $filterTemplates;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function render(GridView $gridView, $template = null)
+    public function render(GridViewInterface $gridView, $template = null)
     {
         return $this->twig->render($template ?: $this->defaultTemplate, ['grid' => $gridView]);
     }
@@ -91,7 +91,7 @@ final class TwigGridRenderer implements GridRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function renderField(GridView $gridView, Field $field, $data)
+    public function renderField(GridViewInterface $gridView, Field $field, $data)
     {
         /** @var FieldTypeInterface $fieldType */
         $fieldType = $this->fieldsRegistry->get($field->getType());
@@ -105,7 +105,7 @@ final class TwigGridRenderer implements GridRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function renderAction(GridView $gridView, Action $action, $data = null)
+    public function renderAction(GridViewInterface $gridView, Action $action, $data = null)
     {
         $type = $action->getType();
         if (!isset($this->actionTemplates[$type])) {
@@ -122,7 +122,7 @@ final class TwigGridRenderer implements GridRendererInterface
     /**
      * {@inheritdoc}
      */
-    public function renderFilter(GridView $gridView, Filter $filter)
+    public function renderFilter(GridViewInterface $gridView, Filter $filter)
     {
         $template = $this->getFilterTemplate($filter);
 

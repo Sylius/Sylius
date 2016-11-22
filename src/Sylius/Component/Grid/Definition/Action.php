@@ -32,6 +32,11 @@ class Action
     private $label;
 
     /**
+     * @var string
+     */
+    private $icon;
+
+    /**
      * @var array
      */
     private $options = [];
@@ -44,7 +49,6 @@ class Action
     {
         $this->name = $name;
         $this->type = $type;
-        $this->label = $name;
     }
 
     /**
@@ -88,6 +92,22 @@ class Action
     public function setLabel($label)
     {
         $this->label = $label;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param string $icon
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
     }
 
     /**
