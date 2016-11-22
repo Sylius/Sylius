@@ -41,6 +41,10 @@
             <argument type="service" id="sylius.repository.country" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" />
         </service>
+        <service id="sylius.form.extension.type.channel" class="Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" />
+        </service>
 
         <service id="sylius.form.type.product_image" class="%sylius.form.type.product_image.class%">
             <argument>%sylius.model.product_image.class%</argument>

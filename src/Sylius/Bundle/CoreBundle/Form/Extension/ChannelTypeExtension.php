@@ -9,17 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
-use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType as BaseChannelType;
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ChannelType extends BaseChannelType
+class ChannelTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
@@ -59,5 +60,13 @@ class ChannelType extends BaseChannelType
             ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return ChannelType::class;
     }
 }
