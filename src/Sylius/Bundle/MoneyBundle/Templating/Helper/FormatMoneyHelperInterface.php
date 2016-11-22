@@ -14,16 +14,16 @@ namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 /**
  * @author Axel Vankrunkelsven <axel@digilabs.be>
  */
-interface MoneyHelperInterface
+interface FormatMoneyHelperInterface
 {
     /**
      * @param int $amount
      * @param string $currencyCode
-     * @param string|null $localeCode
+     * @param string $localeCode
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function formatAmount($amount, $currencyCode, $localeCode = null);
+    public function formatAmount($amount, $currencyCode, $localeCode);
 }
