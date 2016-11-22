@@ -39,9 +39,8 @@ final class ThemeNameChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        // Normalizer instead of default as it should not be overwritten
-        $resolver
-            ->setNormalizer('choices', function () {
+        $resolver->setDefaults([
+            'choices' => function () {
                 $themes = $this->themeRepository->findAll();
 
                 $choices = [];
@@ -50,11 +49,9 @@ final class ThemeNameChoiceType extends AbstractType
                 }
 
                 return $choices;
-            })
-            ->setNormalizer('choices_as_values', function () {
-                return true;
-            })
-        ;
+            },
+            'choices_as_values' => true,
+        ]);
     }
 
     /**

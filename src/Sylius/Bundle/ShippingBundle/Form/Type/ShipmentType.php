@@ -33,6 +33,7 @@ class ShipmentType extends AbstractResourceType
                     ShipmentInterface::STATE_SHIPPED => 'sylius.form.shipment.states.shipped',
                     ShipmentInterface::STATE_CANCELLED => 'sylius.form.shipment.states.cancelled',
                 ],
+                'choices_as_values' => true,
             ])
             ->add('tracking', TextType::class, [
                 'label' => 'sylius.form.shipment.tracking_code',

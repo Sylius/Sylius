@@ -72,6 +72,7 @@ class PaymentMethodChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choice_list' => $choiceList,
+                'choices_as_values' => true,
             ])
             ->setDefined([
                 'subject',

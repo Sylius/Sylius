@@ -46,6 +46,7 @@ class ProductType extends BaseProductType
             ->add('variantSelectionMethod', ChoiceType::class, [
                 'label' => 'sylius.form.product.variant_selection_method',
                 'choices' => Product::getVariantSelectionMethodLabels(),
+                'choices_as_values' => true,
             ])
             ->add('images', CollectionType::class, [
                 'entry_type' => 'sylius_product_image',

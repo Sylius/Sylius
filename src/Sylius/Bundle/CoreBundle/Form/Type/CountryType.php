@@ -51,25 +51,21 @@ class CountryType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            // Adding dynamically created isoName field
-            $nameOptions = [
+            $options = [
                 'label' => 'sylius.form.country.name',
+                'choices_as_values' => true,
             ];
 
             $country = $event->getData();
             if ($country instanceof CountryInterface && null !== $country->getCode()) {
-                $nameOptions['disabled'] = true;
-                $nameOptions['choices'] = [
-                    $country->getCode() => $this->getCountryName($country->getCode())
-                ];
+                $options['disabled'] = true;
+                $options['choices'] = [$country->getCode() => $this->getCountryName($country->getCode())];
             } else {
-                $nameOptions['choices'] = $this->getAvailableCountries();
+                $options['choices'] = $this->getAvailableCountries();
             }
 
-            $nameOptions['choices_as_values'] = false;
-
             $form = $event->getForm();
-            $form->add('code', \Symfony\Component\Form\Extension\Core\Type\CountryType::class, $nameOptions);
+            $form->add('code', \Symfony\Component\Form\Extension\Core\Type\CountryType::class, $options);
         });
 
         $builder

@@ -46,6 +46,7 @@ class PaymentType extends AbstractResourceType
                     PaymentInterface::STATE_REFUNDED => 'sylius.form.payment.state.refunded',
                     PaymentInterface::STATE_UNKNOWN => 'sylius.form.payment.state.unknown',
                 ],
+                'choices_as_values' => true,
             ])
         ;
     }

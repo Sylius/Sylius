@@ -32,6 +32,7 @@ class GenderType extends AbstractType
                 CustomerInterface::MALE_GENDER => 'sylius.gender.male',
                 CustomerInterface::FEMALE_GENDER => 'sylius.gender.female',
             ],
+            'choices_as_values' => true,
         ]);
     }
 

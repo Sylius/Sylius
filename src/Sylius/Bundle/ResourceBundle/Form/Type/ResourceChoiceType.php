@@ -47,6 +47,7 @@ class ResourceChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'class' => null,
+                'choices_as_values' => true,
             ])
             ->setNormalizer('class', function () {
                 return $this->metadata->getClass('model');

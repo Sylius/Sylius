@@ -39,6 +39,7 @@ class ZoneTypeChoiceType extends AbstractType
             ->setDefaults([
                 'label' => 'sylius.form.zone.type',
                 'choices' => $this->choices,
+                'choices_as_values' => true,
             ])
         ;
     }

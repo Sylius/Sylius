@@ -41,6 +41,7 @@ class CalculatorChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => $this->calculators,
+                'choices_as_values' => true,
             ])
         ;
     }

@@ -35,6 +35,7 @@ class BooleanFilterType extends AbstractType
                     BooleanFilter::TRUE => 'sylius.ui.yes_label',
                     BooleanFilter::FALSE => 'sylius.ui.no_label',
                 ],
+                'choices_as_values' => true,
             ])
             ->setDefined('field')
             ->setAllowedTypes('field', 'string')

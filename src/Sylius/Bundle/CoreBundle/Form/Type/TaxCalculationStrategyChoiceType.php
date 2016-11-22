@@ -41,6 +41,7 @@ class TaxCalculationStrategyChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => $this->strategies,
+                'choices_as_values' => true,
             ])
         ;
     }

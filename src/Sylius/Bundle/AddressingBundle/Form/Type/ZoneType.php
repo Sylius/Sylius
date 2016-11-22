@@ -79,6 +79,7 @@ class ZoneType extends AbstractResourceType
                     'empty_value' => 'sylius.form.zone.select_scope',
                     'required' => false,
                     'choices' => $this->scopeChoices,
+                    'choices_as_values' => true,
                 ])
             ;
         }

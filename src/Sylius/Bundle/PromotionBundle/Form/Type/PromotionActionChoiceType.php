@@ -40,6 +40,7 @@ class PromotionActionChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => $this->actions,
+            'choices_as_values' => true,
         ]);
     }
 

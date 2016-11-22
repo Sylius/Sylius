@@ -58,6 +58,7 @@ class ProvinceChoiceType extends AbstractType
             'country' => null,
             'label' => 'sylius.form.address.province',
             'empty_value' => 'sylius.form.province.select',
+            'choices_as_values' => true,
         ]);
         $resolver->addAllowedTypes('country', ['null', CountryInterface::class]);
     }

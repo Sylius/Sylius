@@ -104,6 +104,7 @@ class TaxonChoiceType extends AbstractType
                 'choice_list' => $choiceList,
                 'root' => null,
                 'filter' => null,
+                'choices_as_values' => true,
             ])
             ->setAllowedTypes('root', [TaxonInterface::class, 'string', 'null'])
             ->setAllowedTypes('filter', ['callable', 'null'])

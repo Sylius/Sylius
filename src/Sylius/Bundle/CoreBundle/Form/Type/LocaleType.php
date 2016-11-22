@@ -61,26 +61,21 @@ class LocaleType extends BaseLocaleType
         parent::buildForm($builder, $options);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            // Adding dynamically created code field
-            $nameOptions = [
+            $options = [
                 'label' => 'sylius.form.locale.name',
+                'choices_as_values' => true,
             ];
 
             $locale = $event->getData();
-
             if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
-                $nameOptions['disabled'] = true;
-                $nameOptions['choices'] = [
-                    $locale->getCode() => $this->getLocaleName($locale->getCode())
-                ];
+                $options['disabled'] = true;
+                $options['choices'] = [$locale->getCode() => $this->getLocaleName($locale->getCode())];
             } else {
-                $nameOptions['choices'] = $this->getAvailableLocales();
+                $options['choices'] = $this->getAvailableLocales();
             }
 
-            $nameOptions['choices_as_values'] = false;
-
             $form = $event->getForm();
-            $form->add('code', \Symfony\Component\Form\Extension\Core\Type\LocaleType::class, $nameOptions);
+            $form->add('code', \Symfony\Component\Form\Extension\Core\Type\LocaleType::class, $options);
 
             if ($this->baseLocale !== $locale->getCode()) {
                 return;

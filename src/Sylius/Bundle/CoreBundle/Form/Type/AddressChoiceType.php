@@ -55,6 +55,7 @@ class AddressChoiceType extends AbstractType
             'customer' => null,
             'label' => false,
             'placeholder' => false,
+            'choices_as_values' => true,
         ]);
     }
 

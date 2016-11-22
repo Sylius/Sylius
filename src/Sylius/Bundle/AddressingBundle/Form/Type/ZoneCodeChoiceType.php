@@ -46,6 +46,7 @@ class ZoneCodeChoiceType extends AbstractType
                 'choice_translation_domain' => false,
                 'label' => 'sylius.form.zone.types.zone',
                 'empty_value' => 'sylius.form.zone.select',
+                'choices_as_values' => true,
             ])
         ;
     }

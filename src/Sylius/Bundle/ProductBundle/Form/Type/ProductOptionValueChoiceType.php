@@ -44,6 +44,7 @@ class ProductOptionValueChoiceType extends AbstractType
             ->setDefaults([
                 'choice_translation_domain' => false,
                 'choice_list' => $choiceList,
+                'choices_as_values' => true,
             ])
             ->setRequired([
                 'option',

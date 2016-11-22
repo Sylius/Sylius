@@ -51,6 +51,7 @@ final class CurrencyCodeChoiceType extends AbstractType
         $resolver->setDefaults([
             'choice_translation_domain' => false,
             'choices' => $choices,
+            'choices_as_values' => true,
         ]);
     }
 

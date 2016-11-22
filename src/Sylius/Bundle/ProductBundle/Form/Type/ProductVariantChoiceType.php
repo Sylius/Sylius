@@ -50,6 +50,7 @@ class ProductVariantChoiceType extends AbstractType
                 'multiple' => false,
                 'expanded' => true,
                 'choice_list' => $choiceList,
+                'choices_as_values' => true,
             ])
             ->setRequired([
                 'product',

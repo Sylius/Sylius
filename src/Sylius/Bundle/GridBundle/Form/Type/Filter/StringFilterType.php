@@ -40,7 +40,8 @@ class StringFilterType extends AbstractType
                     StringFilter::TYPE_ENDS_WITH => 'sylius.ui.ends_with',
                     StringFilter::TYPE_IN => 'sylius.ui.in',
                     StringFilter::TYPE_NOT_IN => 'sylius.ui.not_in'
-                ]
+                ],
+                'choices_as_values' => true,
             ])
             ->add('value', TextType::class, ['required' => false])
         ;

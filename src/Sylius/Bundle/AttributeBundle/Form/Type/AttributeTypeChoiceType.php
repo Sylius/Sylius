@@ -42,6 +42,7 @@ class AttributeTypeChoiceType extends AbstractType
             ->setDefaults([
                 'choice_translation_domain' => false,
                 'choices' => $this->attributeTypes,
+                'choices_as_values' => true,
             ])
         ;
     }
