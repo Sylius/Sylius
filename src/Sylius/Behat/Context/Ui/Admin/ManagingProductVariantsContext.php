@@ -161,12 +161,12 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I set its(?:| default) price to ("(?:-)?(?:€|£|\$)[^"]+")$/
+     * @When /^I set its(?:| default) price to (?:|-)(?:€|£|\$)([^"]+) for "([^"]+)" channel$/
      * @When I do not set its price
      */
-    public function iSetItsPriceTo($price = null)
+    public function iSetItsPriceTo($price = null, $channel = null)
     {
-        $this->createPage->specifyPrice($price);
+        $this->createPage->specifyPrice($channel, $price);
     }
 
     /**
@@ -252,6 +252,19 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then /^the (variant with code "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     */
+    public function theVariantWithCodeShouldBePricedAtForChannel(ProductVariantInterface $productVariant, $price, $channelName)
+    {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::same(
+            $this->updatePage->getPriceForChannel($channelName),
+            $price
+        );
+    }
+
+    /**
      * @When /^I (?:|want to )view all variants of (this product)$/
      * @When /^I view(?:| all) variants of the (product "[^"]+")$/
      */
@@ -276,7 +289,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I delete the ("[^"]+" variant of product "[^"]+")$/
+     * @When /^I delete the (źź variant of product "[^"]+")$/
      * @When /^I try to delete the ("[^"]+" variant of product "[^"]+")$/
      */
     public function iDeleteTheVariantOfProduct(ProductVariantInterface $productVariant)

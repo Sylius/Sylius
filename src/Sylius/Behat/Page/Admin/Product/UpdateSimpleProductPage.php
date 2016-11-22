@@ -43,9 +43,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($price)
+    public function specifyPrice($channelName, $price)
     {
-        $this->getDocument()->fillField('Price', $price);
+        $this->getElement('price', ['%channel%' => $channelName])->setValue($price);
     }
 
     /**
@@ -352,6 +352,11 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return parent::getElement($name, $parameters);
     }
 
+    public function getPriceForChannel($channelName)
+    {
+        return $this->getElement('price', ['%channel%' => $channelName])->getValue();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -374,7 +379,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'images' => '#sylius_product_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_product_translations_%locale%_name',
-            'price' => '#sylius_product_variant_price',
+            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input',
             'pricing_configuration' => '#sylius_calculator_container',
             'search' => '.ui.fluid.search.selection.dropdown',
             'search_item_selected' => 'div.menu > div.item.selected',

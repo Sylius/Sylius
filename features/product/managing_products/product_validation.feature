@@ -8,54 +8,54 @@ Feature: Products validation
         Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Adding a new simple product without specifying its code
         When I want to create a new simple product
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for channel "United States"
+        And I set its price to $10.00 for "United States" channel
         And I try to add it
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
 
-    @ui @todo
+    @ui
     Scenario: Adding a new simple product with duplicated code among products
         Given the store has a product "7 Wonders" with code "AWESOME_GAME"
         And I want to create a new simple product
         When I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for channel "United States"
+        And I set its price to $10.00 for "United States" channel
         And I try to add it
         Then I should be notified that code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @ui @todo
+    @ui
     Scenario: Adding a new simple product with duplicated code among product variants
         Given the store has a product "7 Wonders"
         And this product has "7 Wonders: Cities" variant priced at "$30" identified by "AWESOME_GAME"
         And I want to create a new simple product
         When I specify its code as "AWESOME_GAME"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for channel "United States"
+        And I set its price to $10.00 for "United States" channel
         And I try to add it
         Then I should be notified that simple product code has to be unique
         And product with name "Dice Brewing" should not be added
 
-    @ui @todo
+    @ui
     Scenario: Adding a new simple product without specifying its slug
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00" for channel "United States"
+        And I set its price to $10.00 for "United States" channel
         And I remove its slug
         And I try to add it
         Then I should be notified that slug is required
         And product with name "Dice Brewing" should not be added
 
-    @ui @todo
+    @ui
     Scenario: Adding a new simple product without specifying its name
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
-        And I set its price to "$10.00" for channel "United States"
+        And I set its price to $10.00 for "United States" channel
         And I try to add it
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
@@ -65,7 +65,7 @@ Feature: Products validation
         Given the store operates on another channel named "Web-GB"
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
-        And I set its price to "$10.00" for channel "United States"
+        And I set its price to $10.00 for "United States" channel
         And I name it "Dice Brewing" in "English (United States)"
         And I try to add it
         Then I should be notified that price must be set for every channel

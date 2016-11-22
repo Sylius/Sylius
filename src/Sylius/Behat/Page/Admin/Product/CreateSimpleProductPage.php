@@ -60,9 +60,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($price)
+    public function specifyPrice($channelName, $price)
     {
-        $this->getDocument()->fillField('Price', $price);
+        $this->getElement('price', ['%channel%' => $channelName])->setValue($price);
     }
 
     /**
