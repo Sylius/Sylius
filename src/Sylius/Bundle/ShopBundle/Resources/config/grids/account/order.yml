@@ -52,14 +52,15 @@ sylius_grid:
                         type: show
                         label: sylius.ui.show
                         options:
-                            route:
-                                name: sylius_shop_account_order_show
+                            link:
+                                route: sylius_shop_account_order_show
+                                parameters:
+                                    number: resource.number
                     pay:
-                        type: show
+                        type: pay
                         label: sylius.ui.pay
                         options:
-                            icon: 'credit card alternative'
-                            route:
-                                name: sylius_shop_order_show
+                            link:
+                                route: sylius_shop_order_show
                                 parameters:
                                     tokenValue: resource.tokenValue

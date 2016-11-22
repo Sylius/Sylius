@@ -5,6 +5,14 @@ imports:
     - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
 
+sylius_grid:
+    templates:
+        action:
+            show: "@SyliusUi/Grid/Action/show.html.twig"
+            pay: "@SyliusShop/Account/Order/Grid/Action/pay.html.twig"
+        filter:
+            string: "@SyliusUi/Grid/Filter/string.html.twig"
+
 sylius_shop:
     checkout_resolver:
         pattern: /checkout/.+
