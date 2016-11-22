@@ -178,22 +178,6 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee on fist unit and ("[^"]+") on next (\d+)$/
-     */
-    public function theStoreHasShippingMethodWithFeeOnFistUnitAndOnNext($shippingMethodName, $fee, $perUnitFee, $limit)
-    {
-        $this->createShippingMethod(
-            $shippingMethodName,
-            null,
-            null,
-            null,
-            'en',
-            ['first_unit_cost' => $fee, 'additional_unit_cost' => $perUnitFee, 'additional_unit_limit' => $limit],
-            DefaultCalculators::FLEXIBLE_RATE
-        );
-    }
-
-    /**
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee not assigned to any channel$/
      */
     public function storeHasShippingMethodWithFeeNotAssignedToAnyChannel($shippingMethodName, $fee)

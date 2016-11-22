@@ -66,22 +66,9 @@
                  label="sylius.form.shipping_calculator.per_unit_rate_configuration.label" />
         </service>
 
-        <service id="sylius.shipping_calculator.flexible_rate" class="Sylius\Component\Shipping\Calculator\FlexibleRateCalculator">
-            <tag name="sylius.shipping_calculator" calculator="flexible_rate"
-                 form-type="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\FlexibleRateConfigurationType"
-                 label="sylius.form.shipping_calculator.flexible_rate_configuration.label" />
-        </service>
-
-        <service id="sylius.shipping_calculator.weight_rate" class="Sylius\Component\Shipping\Calculator\WeightRateCalculator">
-            <tag name="sylius.shipping_calculator" calculator="weight_rate"
-                 form-type="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\WeightRateConfigurationType"
-                 label="sylius.form.shipping_calculator.weight_rate_configuration.label" />
-        </service>
-
-        <service id="sylius.shipping_calculator.volume_rate" class="Sylius\Component\Shipping\Calculator\VolumeRateCalculator">
-            <tag name="sylius.shipping_calculator" calculator="volume_rate"
-                 form-type="Sylius\Bundle\ShippingBundle\Form\Type\Calculator\VolumeRateConfigurationType"
-                 label="sylius.form.shipping_calculator.volume_rate_configuration.label" />
+        <service id="sylius.form.type.shipment_ship" class="Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType">
+            <argument>%sylius.model.shipment.class%</argument>
+            <tag name="form.type" alias="sylius_shipment_ship" />
         </service>
 
         <service id="sylius.processor.shipment_processor" class="Sylius\Component\Shipping\Processor\ShipmentProcessor">
