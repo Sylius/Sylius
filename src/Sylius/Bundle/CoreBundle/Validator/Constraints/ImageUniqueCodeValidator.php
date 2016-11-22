@@ -34,9 +34,9 @@ final class ImageUniqueCodeValidator extends ConstraintValidator
                 continue;
             }
 
-            $this->context->addViolationAt(sprintf('[%d].code', $key), $constraint->message);
+            $this->context->buildViolation($constraint->message)->atPath(sprintf('[%d].code', $key))->addViolation();
             if (false !== $imagesCodes[$image->getCode()]) {
-                $this->context->addViolationAt(sprintf('[%d].code', $imagesCodes[$image->getCode()]), $constraint->message);
+                $this->context->buildViolation($constraint->message)->atPath(sprintf('[%d].code', $imagesCodes[$image->getCode()]))->addViolation();
                 $imagesCodes[$image->getCode()] = false;
             }
         }

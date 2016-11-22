@@ -86,7 +86,7 @@ final class HasEnabledEntityValidator extends ConstraintValidator
         if ($this->isLastEnabledEntity($results, $entity)) {
             $errorPath = null !== $constraint->errorPath ? $constraint->errorPath : $constraint->enabledPath;
 
-            $this->context->addViolationAt($errorPath, $constraint->message);
+            $this->context->buildViolation($constraint->message)->atPath($errorPath)->addViolation();
         }
     }
 
