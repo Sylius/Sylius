@@ -15,7 +15,7 @@ Feature: Seeing prices recalculated by exchange rate on order summary
         And the store allows paying offline
         And I am a logged in customer
 
-    @ui @todo
+    @ui
     Scenario: Seeing prices recalculated by an exchange rate from given currency
         When I change my currency to "British Pound"
         And I add product "Lannister Coat" to the cart
@@ -26,7 +26,7 @@ Feature: Seeing prices recalculated by exchange rate on order summary
         And my order shipping should be "£60"
         And my order total should be "£360"
 
-    @ui @todo
+    @ui
     Scenario: Seeing prices recalculated by an exchange rate equal to existed in time when order was placed
         When I change my currency to "British Pound"
         And I add product "Lannister Coat" to the cart
@@ -37,3 +37,13 @@ Feature: Seeing prices recalculated by exchange rate on order summary
         And the "Lannister Coat" product should have unit price "£300.00"
         And my order shipping should be "£60"
         And my order total should be "£360"
+
+    @ui
+    Scenario: Seeing real price not recalculated by an exchange rate
+        When I change my currency to "British Pound"
+        And I add product "Lannister Coat" to the cart
+        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "British Virgin Islands" for "Jon Snow"
+        And I proceed with "DHL" shipping method and "Offline" payment
+        Then I should be on the checkout summary step
+        And the "Lannister Coat" product should have unit price "£300.00"
+        But my order total in base currency should be "$120"
