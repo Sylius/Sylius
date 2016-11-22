@@ -40,5 +40,8 @@
                 $('select[name^="sylius_promotion[actions]"][name$="[type]"]').last().change();
             }, 50);
         });
+
+        $(document).productSlugGenerator();
+        $(document).taxonSlugGenerator();
     });
 })(jQuery);
