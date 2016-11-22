@@ -123,6 +123,7 @@ final class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('type')->isRequired()->cannotBeEmpty()->end()
                                         ->scalarNode('label')->cannotBeEmpty()->end()
+                                        ->scalarNode('template')->end()
                                         ->arrayNode('options')
                                             ->prototype('variable')->end()
                                         ->end()

@@ -84,6 +84,9 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         if (array_key_exists('label', $configuration)) {
             $filter->setLabel($configuration['label']);
         }
+        if (array_key_exists('template', $configuration)) {
+            $filter->setTemplate($configuration['template']);
+        }
         if (array_key_exists('options', $configuration)) {
             $filter->setOptions($configuration['options']);
         }
