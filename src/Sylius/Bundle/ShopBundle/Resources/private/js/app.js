@@ -33,14 +33,14 @@
 
             beforeSend: function (settings) {
                 settings.data = {
-                    email: email.val()
+                    email: $('#sylius_checkout_address_customer_email').val()
                 };
 
                 return settings;
             },
 
             successTest: function (response) {
-                return email.val() === response.username;
+                return $('#sylius_checkout_address_customer_email').val() === response.username;
             }
         }, $('#sylius-api-login-form'));
 
