@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -48,6 +50,11 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     /**
      * @var FactoryInterface
      */
+    private $channelPricingFactory;
+
+    /**
+     * @var FactoryInterface
+     */
     private $productTaxonFactory;
 
     /**
@@ -71,6 +78,11 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     private $localeRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $channelRepository;
+
+    /**
      * @var SlugGeneratorInterface
      */
     private $slugGenerator;
@@ -88,6 +100,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     /**
      * @param FactoryInterface $productFactory
      * @param FactoryInterface $productVariantFactory
+     * @param FactoryInterface $channelPricing
      * @param ProductVariantGeneratorInterface $variantGenerator
      * @param FactoryInterface $productAttributeValueFactory
      * @param FactoryInterface $productImageFactory
@@ -103,6 +116,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     public function __construct(
         FactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
+        FactoryInterface $channelPricing,
         ProductVariantGeneratorInterface $variantGenerator,
         FactoryInterface $productAttributeValueFactory,
         FactoryInterface $productImageFactory,
@@ -117,11 +131,13 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     ) {
         $this->productFactory = $productFactory;
         $this->productVariantFactory = $productVariantFactory;
+        $this->channelPricingFactory = $channelPricing;
         $this->variantGenerator = $variantGenerator;
         $this->productImageFactory = $productImageFactory;
         $this->productTaxonFactory = $productTaxonFactory;
         $this->imageUploader = $imageUploader;
         $this->slugGenerator = $slugGenerator;
+        $this->channelRepository = $channelRepository;
         $this->localeRepository = $localeRepository;
 
         $this->faker = \Faker\Factory::create();
@@ -272,8 +288,26 @@ final class ProductExampleFactory implements ExampleFactoryInterface
             $productVariant->setCode(sprintf('%s-variant#%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
 
+            foreach ($this->channelRepository->findAll() as $channel) {
+                $this->createChannelPricings($productVariant, $channel);
+            }
+
             ++$i;
         }
+    }
+
+    /**
+     * @param ProductVariantInterface $productVariant
+     * @param ChannelInterface $channel
+     */
+    private function createChannelPricings(ProductVariantInterface $productVariant, ChannelInterface $channel)
+    {
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $this->channelPricingFactory->createNew();
+        $channelPricing->setChannel($channel);
+        $channelPricing->setPrice($this->faker->randomNumber(3));
+
+        $productVariant->addChannelPricing($channelPricing);
     }
 
     /**
