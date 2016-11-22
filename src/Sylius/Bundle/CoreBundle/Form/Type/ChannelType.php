@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType as BaseChannelType;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -42,10 +43,6 @@ class ChannelType extends BaseChannelType
                 'required' => true,
                 'multiple' => true,
             ])
-            ->add('baseCurrency', 'sylius_currency_choice', [
-                'label' => 'sylius.form.channel.currency_base',
-                'required' => true,
-            ])
             ->add('defaultTaxZone', 'sylius_zone_choice', [
                 'required' => false,
                 'label' => 'sylius.form.channel.tax_zone_default',
@@ -59,6 +56,7 @@ class ChannelType extends BaseChannelType
                 'empty_data' => null,
                 'empty_value' => 'sylius.ui.no_theme',
             ])
+            ->addEventSubscriber(new AddBaseCurrencySubscriber())
         ;
     }
 }

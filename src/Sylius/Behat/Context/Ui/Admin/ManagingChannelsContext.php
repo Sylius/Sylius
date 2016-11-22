@@ -483,6 +483,17 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @Then the base currency field should be disabled
+     */
+    public function theBaseCurrencyFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isBaseCurrencyDisabled(),
+            'Base currency should be immutable, but it is not.'
+        );
+    }
+
+    /**
      * @param ChannelInterface $channel
      * @param bool $state
      */

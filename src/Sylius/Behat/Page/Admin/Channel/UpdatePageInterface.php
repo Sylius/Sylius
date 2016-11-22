@@ -90,4 +90,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isTaxCalculationStrategyChosen($taxCalculationStrategy);
+
+    /**
+     * @return bool
+     */
+    public function isBaseCurrencyDisabled();
 }
