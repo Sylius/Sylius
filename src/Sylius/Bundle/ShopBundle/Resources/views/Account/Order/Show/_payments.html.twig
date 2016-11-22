@@ -1,3 +1,4 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 {% import '@SyliusUi/Macro/labels.html.twig' as label %}
 
 <div class="column">
@@ -9,7 +10,7 @@
                     {{ payment.method }}
                 </div>
                 <p>
-                    {{ payment.amount|sylius_price(payment.order.currencyCode) }}
+                    {{ money.format(payment.amount, payment.order.currency) }}
                 </p>
             {% endfor %}
         </div>

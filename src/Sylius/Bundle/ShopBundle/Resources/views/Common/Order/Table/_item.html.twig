@@ -1,10 +1,12 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 <tr>
     <td>
         {% include '@SyliusShop/Common/Product/_variant.html.twig' with {'variant': item.variant} %}
     </td>
     <td>
-        <span class="sylius-unit-price">{{ item.unitPrice|sylius_price(order.currencyCode) }}</span>
+        <span class="sylius-unit-price">{{ money.convertAndFormat(item.unitPrice) }}</span>
     </td>
     <td class="center aligned">{{ item.quantity }}</td>
-    <td class="right aligned">{{ item.subtotal|sylius_price(order.currencyCode) }}</td>
+    <td class="right aligned">{{ money.convertAndFormat(item.subtotal) }}</td>
 </tr>
