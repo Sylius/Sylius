@@ -56,7 +56,6 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
             $localeFactory,
             $zoneFactory,
             $zoneMemberFactory,
-            'USD',
             'en_US'
         );
     }

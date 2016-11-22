@@ -99,9 +99,9 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function create($code = null, $name = null)
+    public function create($code = null, $name = null, $currencyCode = null)
     {
-        $currency = $this->provideCurrency();
+        $currency = $this->provideCurrency($currencyCode);
         $locale = $this->provideLocale();
 
         /** @var ChannelInterface $channel */
@@ -127,14 +127,16 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     /**
      * @return CurrencyInterface
      */
-    private function provideCurrency()
+    private function provideCurrency($currencyCode = null)
     {
+        $currencyCode = $currencyCode ?: $this->defaultCurrencyCode;
+
         /** @var CurrencyInterface $currency */
-        $currency = $this->currencyRepository->findOneBy(['code' => $this->defaultCurrencyCode]);
+        $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
 
         if (null === $currency) {
             $currency = $this->currencyFactory->createNew();
-            $currency->setCode($this->defaultCurrencyCode);
+            $currency->setCode($currencyCode);
             $currency->setExchangeRate(1.00);
 
             $this->currencyRepository->add($currency);

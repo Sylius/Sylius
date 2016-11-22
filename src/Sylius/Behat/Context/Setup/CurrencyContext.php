@@ -144,23 +144,6 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given /^(that channel) uses the "([^"]+)" currency by default$/
-     * @Given /^(it) uses the "([^"]+)" currency by default$/
-     */
-    public function itUsesTheCurrencyByDefault(ChannelInterface $channel, $currencyCode)
-    {
-        $currency = $this->provideCurrency($currencyCode);
-
-        $channel->addCurrency($currency);
-        $channel->setBaseCurrency($currency);
-
-        $this->channelManager->flush();
-
-        $this->sharedStorage->set('currency', $currency);
-        $this->currencyStorage->set($channel, $currency->getCode());
-    }
-
-    /**
      * @Given /^(that channel)(?: also|) allows to shop using the "([^"]+)" currency with exchange rate ([0-9\.]+)$/
      */
     public function thatChannelAllowsToShopUsingCurrency(ChannelInterface $channel, $currencyCode, $exchangeRate = 1.0)

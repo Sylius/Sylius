@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -58,12 +59,18 @@ final class ChannelContext implements Context
     private $channelManager;
 
     /**
+     * @var CurrencyStorageInterface
+     */
+    private $currencyStorage;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param DefaultChannelFactoryInterface $unitedStatesChannelFactory
      * @param DefaultChannelFactoryInterface $defaultChannelFactory
      * @param ChannelFactoryInterface $channelFactory
      * @param ChannelRepositoryInterface $channelRepository
      * @param ObjectManager $channelManager
+     * @param CurrencyStorageInterface $currencyStorage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -71,7 +78,8 @@ final class ChannelContext implements Context
         DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelFactoryInterface $channelFactory,
         ChannelRepositoryInterface $channelRepository,
-        ObjectManager $channelManager
+        ObjectManager $channelManager,
+        CurrencyStorageInterface $currencyStorage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->unitedStatesChannelFactory = $unitedStatesChannelFactory;
@@ -79,6 +87,7 @@ final class ChannelContext implements Context
         $this->channelFactory = $channelFactory;
         $this->channelRepository = $channelRepository;
         $this->channelManager = $channelManager;
+        $this->currencyStorage = $currencyStorage;
     }
 
     /**
@@ -105,10 +114,11 @@ final class ChannelContext implements Context
 
     /**
      * @Given the store operates on a single channel
+     * @Given the store operates on a single channel in :currencyCode currency
      */
-    public function storeOperatesOnASingleChannel()
+    public function storeOperatesOnASingleChannel($currencyCode = null)
     {
-        $defaultData = $this->defaultChannelFactory->create();
+        $defaultData = $this->defaultChannelFactory->create(null, null, $currencyCode);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
@@ -116,14 +126,16 @@ final class ChannelContext implements Context
 
     /**
      * @Given /^the store operates on (?:a|another) channel named "([^"]+)"$/
+     * @Given /^the store operates on (?:a|another) channel named "([^"]+)" in "([^"]+)" currency$/
      * @Given the store operates on a channel identified by :code code
      */
-    public function theStoreOperatesOnAChannelNamed($channelIdentifier)
+    public function theStoreOperatesOnAChannelNamed($channelIdentifier, $currencyCode = null)
     {
-        $defaultData = $this->defaultChannelFactory->create($channelIdentifier, $channelIdentifier);
+        $defaultData = $this->defaultChannelFactory->create($channelIdentifier, $channelIdentifier, $currencyCode);
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);
+        $this->currencyStorage->set($defaultData['channel'], $defaultData['currency']->getCode());
     }
 
     /**

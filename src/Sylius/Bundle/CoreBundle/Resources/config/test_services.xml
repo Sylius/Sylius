@@ -40,7 +40,6 @@
             <argument type="service" id="sylius.factory.locale" />
             <argument type="service" id="sylius.factory.zone" />
             <argument type="service" id="sylius.factory.zone_member" />
-            <argument>%currency%</argument>
             <argument>%locale%</argument>
         </service>
         <service id="sylius.behat.factory.default_channel" class="Sylius\Component\Core\Test\Services\DefaultChannelFactory">

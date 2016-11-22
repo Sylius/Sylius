@@ -7,9 +7,8 @@ Feature: Adding a new promotion with action configured in different currencies
     Background:
         Given the store has currency "USD"
         And the store has currency "GBP" with exchange rate 0.5
-        And the store operates on a channel named "Web-US"
+        And the store operates on a channel named "Web-US" in "USD" currency
         And that channel allows to shop using "USD" and "GBP" currencies
-        And that channel uses the "USD" currency by default
         And I am logged in as an administrator
 
     @ui @javascript

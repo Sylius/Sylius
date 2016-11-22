@@ -5,13 +5,11 @@ Feature: Modifying a customer's shipping address of an order with a different cu
     I want to be able to modify a customer's shipping address without changing an order's total
 
     Background:
-        Given the store operates on a channel named "Web"
+        Given the store operates on a channel named "Web" in "USD" currency
         And the store ships to "United States"
         And the store has a zone "English" with code "EN"
         And this zone has the "United States" country member
-        And that channel allows to shop using the "USD" currency
         And that channel allows to shop using the "GBP" currency with exchange rate 3.0
-        And that channel uses the "USD" currency by default
         And the store allows paying with "Cash on Delivery"
         And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
         And the store has a product "Suit" priced at "$400.00"

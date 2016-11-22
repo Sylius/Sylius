@@ -6,7 +6,6 @@ Feature: Modifying a customer's shipping address validation
 
     Background:
         Given the store operates on a single channel in the "United States" named "Web"
-        And that channel uses the "USD" currency by default
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And the store has a product "Suit" priced at "$400.00"
