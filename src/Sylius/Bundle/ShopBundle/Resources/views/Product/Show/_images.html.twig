@@ -1,12 +1,17 @@
-<a href="#" class="ui fluid image">
-    {% if product.imageByCode('main') is not null %}
-        {% set path = product.imageByCode('main').path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
-    {% elseif product.images.first %}
-        {% set path = product.images.first.path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
-    {% else %}
-        {% set path = 'http://placehold.it/400x300' %}
-    {% endif %}
+{% if product.imageByCode('main') is not null %}
+    {% set source_path = product.imageByCode('main').path %}
+    {% set original_path = source_path|imagine_filter('sylius_shop_product_original') %}
+    {% set path = source_path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
+{% elseif product.images.first %}
+    {% set source_path = product.images.first.path %}
+    {% set original_path = source_path|imagine_filter('sylius_shop_product_original') %}
+    {% set path = source_path|imagine_filter(filter|default('sylius_shop_product_large_thumbnail')) %}
+{% else %}
+    {% set original_path = 'http://placehold.it/400x300' %}
+    {% set path = original_path %}
+{% endif %}
 
+<a href="{{ original_path }}" class="ui fluid image" data-lightbox="sylius-product-image">
     <img src="{{ path }}" id="main-image" alt="" />
 </a>
 {% if product.images|length > 1 %}
@@ -14,7 +19,7 @@
 <div class="ui small images">
     {% for image in product.images %}
     {% set path = image.path is not null ? image.path|imagine_filter('sylius_shop_product_small_thumbnail') : 'http://placehold.it/200x200' %}
-    <a href="#" class="ui image">
+    <a href="{{ image.path|imagine_filter('sylius_shop_product_original') }}" class="ui image" data-lightbox="sylius-product-image">
         <img src="{{ path }}" />
     </a>
     {% endfor %}

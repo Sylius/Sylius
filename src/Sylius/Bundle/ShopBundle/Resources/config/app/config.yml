@@ -20,6 +20,7 @@ sylius_shop:
 
 liip_imagine:
     filter_sets:
+        sylius_shop_product_original: ~
         sylius_shop_product_tiny_thumbnail:
             filters:
                 thumbnail: { size: [64, 64], mode: outbound }

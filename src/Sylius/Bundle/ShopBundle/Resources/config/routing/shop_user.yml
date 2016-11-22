@@ -2,13 +2,13 @@
 # (c) Paweł Jędrzejewski
 
 sylius_shop_user_request_verification_token:
-    path: /
+    path: /verify
     methods: [POST]
     defaults:
         _controller: sylius.controller.shop_user:requestVerificationTokenAction
 
 sylius_shop_user_verification:
-    path: /{token}
+    path: /verify/{token}
     methods: [GET]
     defaults:
         _controller: sylius.controller.shop_user:verifyAction
