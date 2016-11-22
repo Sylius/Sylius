@@ -25,19 +25,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class MoneyType extends AbstractType
 {
     /**
-     * @var string
-     */
-    private $currencyCode;
-
-    /**
-     * @param string $currencyCode
-     */
-    public function __construct($currencyCode)
-    {
-        $this->currencyCode = $currencyCode;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -76,7 +63,6 @@ class MoneyType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'currency' => $this->currencyCode,
                 'divisor' => 100,
             ])
         ;

@@ -18,7 +18,6 @@
         <parameter key="sylius.form.type.taxon_image.class">Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonImageType</parameter>
         <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
         <parameter key="sylius.form.type.locale.class">Sylius\Bundle\CoreBundle\Form\Type\LocaleType</parameter>
-        <parameter key="sylius.form.type.currency.class">Sylius\Bundle\CoreBundle\Form\Type\CurrencyType</parameter>
 
         <parameter key="sylius.validation_groups.customer" type="collection">
             <parameter>sylius</parameter>
@@ -68,12 +67,6 @@
             <argument>%locale%</argument>
             <argument type="service" id="sylius.repository.locale" />
             <tag name="form.type" alias="sylius_locale" />
-        </service>
-        <service id="sylius.form.type.currency" class="%sylius.form.type.currency.class%">
-            <argument>%sylius.model.currency.class%</argument>
-            <argument>%sylius.validation_groups.currency%</argument>
-            <argument>%currency%</argument>
-            <tag name="form.type" alias="sylius_currency" />
         </service>
         <service id="sylius.form.type.customer" class="%sylius.form.type.customer.class%">
             <argument>%sylius.model.customer.class%</argument>
