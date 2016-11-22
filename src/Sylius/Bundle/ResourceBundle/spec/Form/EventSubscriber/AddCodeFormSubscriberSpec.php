@@ -17,6 +17,8 @@ use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
@@ -88,7 +90,7 @@ final class AddCodeFormSubscriberSpec extends ObjectBehavior
         $event->getForm()->willReturn($form);
 
         $form
-            ->add('code', 'text', Argument::withEntry('disabled', false))
+            ->add('code', TextType::class, Argument::withEntry('disabled', false))
             ->shouldBeCalled()
         ;
 
@@ -97,7 +99,7 @@ final class AddCodeFormSubscriberSpec extends ObjectBehavior
 
     function it_adds_code_with_specified_type(FormEvent $event, FormInterface $form, CodeAwareInterface $resource)
     {
-        $this->beConstructedWith('currency');
+        $this->beConstructedWith(FormType::class);
 
         $event->getData()->willReturn($resource);
         $event->getForm()->willReturn($form);
@@ -105,7 +107,7 @@ final class AddCodeFormSubscriberSpec extends ObjectBehavior
         $resource->getCode()->willReturn('Code12');
 
         $form
-            ->add('code', 'currency', Argument::withEntry('disabled', true))
+            ->add('code', FormType::class, Argument::withEntry('disabled', true))
             ->shouldBeCalled()
         ;
 
@@ -120,7 +122,7 @@ final class AddCodeFormSubscriberSpec extends ObjectBehavior
         $resource->getCode()->willReturn('Code12');
 
         $form
-            ->add('code', 'text', Argument::withEntry('disabled', true))
+            ->add('code', TextType::class, Argument::withEntry('disabled', true))
             ->shouldBeCalled()
         ;
 
@@ -138,7 +140,7 @@ final class AddCodeFormSubscriberSpec extends ObjectBehavior
         $resource->getCode()->willReturn('banana_resource');
 
         $form
-            ->add('code', 'text', Argument::withEntry('label', 'sylius.ui.code'))
+            ->add('code', TextType::class, Argument::withEntry('label', 'sylius.ui.code'))
             ->shouldBeCalled()
         ;
 
@@ -150,7 +152,7 @@ final class AddCodeFormSubscriberSpec extends ObjectBehavior
         FormInterface $form,
         CodeAwareInterface $resource
     ) {
-        $this->beConstructedWith('currency', 'sylius.ui.name');
+        $this->beConstructedWith(FormType::class, 'sylius.ui.name');
 
         $event->getData()->willReturn($resource);
         $event->getForm()->willReturn($form);
@@ -158,7 +160,7 @@ final class AddCodeFormSubscriberSpec extends ObjectBehavior
         $resource->getCode()->willReturn('Code12');
 
         $form
-            ->add('code', 'currency', Argument::withEntry('label', 'sylius.ui.name'))
+            ->add('code', FormType::class, Argument::withEntry('label', 'sylius.ui.name'))
             ->shouldBeCalled()
         ;
 

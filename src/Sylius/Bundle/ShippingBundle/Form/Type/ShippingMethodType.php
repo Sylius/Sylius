@@ -18,6 +18,8 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -83,7 +85,7 @@ class ShippingMethodType extends AbstractResourceType
                 'empty_value' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.shipping_method.category',
             ])
-            ->add('categoryRequirement', 'choice', [
+            ->add('categoryRequirement', ChoiceType::class, [
                 'choices' => ShippingMethod::getCategoryRequirementLabels(),
                 'multiple' => false,
                 'expanded' => true,
@@ -92,7 +94,7 @@ class ShippingMethodType extends AbstractResourceType
             ->add('calculator', 'sylius_shipping_calculator_choice', [
                 'label' => 'sylius.form.shipping_method.calculator',
             ])
-            ->add('enabled', 'checkbox', [
+            ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.locale.enabled',
             ])
         ;

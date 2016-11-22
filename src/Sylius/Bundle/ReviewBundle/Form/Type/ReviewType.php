@@ -12,6 +12,9 @@
 namespace Sylius\Bundle\ReviewBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -45,16 +48,16 @@ class ReviewType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('rating', 'choice', [
+            ->add('rating', ChoiceType::class, [
                 'choices' => $this->createRatingList($options['rating_steps']),
                 'label' => 'sylius.form.review.rating',
                 'expanded' => true,
                 'multiple' => false,
             ])
-            ->add('title', 'text', [
+            ->add('title', TextType::class, [
                 'label' => 'sylius.form.review.title',
             ])
-            ->add('comment', 'textarea', [
+            ->add('comment', TextareaType::class, [
                 'label' => 'sylius.form.review.comment',
             ])
         ;

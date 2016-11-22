@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -68,7 +69,7 @@ class CountryType extends AbstractResourceType
             $nameOptions['choices_as_values'] = false;
 
             $form = $event->getForm();
-            $form->add('code', 'country', $nameOptions);
+            $form->add('code', \Symfony\Component\Form\Extension\Core\Type\CountryType::class, $nameOptions);
         });
 
         $builder
@@ -79,7 +80,7 @@ class CountryType extends AbstractResourceType
                 'by_reference' => false,
                 'button_add_label' => 'sylius.form.country.add_province',
             ])
-            ->add('enabled', 'checkbox', [
+            ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.country.enabled',
             ])
         ;

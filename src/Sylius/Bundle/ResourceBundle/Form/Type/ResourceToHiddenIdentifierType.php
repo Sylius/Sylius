@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -22,7 +24,7 @@ class ResourceToHiddenIdentifierType extends ResourceToIdentifierType
      */
     public function getParent()
     {
-        return 'hidden';
+        return HiddenType::class;
     }
 
     /**

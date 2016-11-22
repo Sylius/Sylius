@@ -66,7 +66,7 @@ class MoneyType extends AbstractType
      */
     public function getParent()
     {
-        return 'money';
+        return \Symfony\Component\Form\Extension\Core\Type\MoneyType::class;
     }
 
     /**

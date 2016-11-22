@@ -14,7 +14,9 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -51,7 +53,7 @@ class ZoneType extends AbstractResourceType
 
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('name', 'text', [
+            ->add('name', TextType::class, [
                 'label' => 'sylius.form.zone.name',
             ])
             ->add('type', 'sylius_zone_type_choice', [
@@ -72,7 +74,7 @@ class ZoneType extends AbstractResourceType
 
         if (!empty($this->scopeChoices)) {
             $builder
-                ->add('scope', 'choice', [
+                ->add('scope', ChoiceType::class, [
                     'label' => 'sylius.form.zone.scope',
                     'empty_value' => 'sylius.form.zone.select_scope',
                     'required' => false,

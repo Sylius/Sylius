@@ -18,6 +18,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -98,7 +99,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $country->hasProvinces()->willReturn(false);
 
         $formFactory
-            ->createNamed('provinceName', 'text', 'Utah', Argument::any())
+            ->createNamed('provinceName', TextType::class, 'Utah', Argument::any())
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();
@@ -148,7 +149,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $country->hasProvinces()->willReturn(false);
 
         $formFactory
-            ->createNamed('provinceName', 'text', null, Argument::any())
+            ->createNamed('provinceName', TextType::class, null, Argument::any())
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();

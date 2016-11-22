@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -25,8 +26,12 @@ class TextAttributeConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('min', 'number', ['label' => 'sylius.form.attribute_type_configuration.text.min'])
-            ->add('max', 'number', ['label' => 'sylius.form.attribute_type_configuration.text.max'])
+            ->add('min', NumberType::class, [
+                'label' => 'sylius.form.attribute_type_configuration.text.min'
+            ])
+            ->add('max', NumberType::class, [
+                'label' => 'sylius.form.attribute_type_configuration.text.max'
+            ])
         ;
     }
 

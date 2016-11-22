@@ -29,7 +29,7 @@ class CountryType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new AddCodeFormSubscriber('country'))
+            ->addEventSubscriber(new AddCodeFormSubscriber(\Symfony\Component\Form\Extension\Core\Type\CountryType::class))
             ->add('provinces', CollectionType::class, [
                 'entry_type' => 'sylius_province',
                 'allow_add' => true,

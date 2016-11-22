@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddProductOnProductTaxonFormSubscriber;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
 use Sylius\Component\Core\Model\Product;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -42,7 +43,7 @@ class ProductType extends BaseProductType
                 'label' => 'sylius.form.product.taxons',
                 'multiple' => true,
             ])
-            ->add('variantSelectionMethod', 'choice', [
+            ->add('variantSelectionMethod', ChoiceType::class, [
                 'label' => 'sylius.form.product.variant_selection_method',
                 'choices' => Product::getVariantSelectionMethodLabels(),
             ])

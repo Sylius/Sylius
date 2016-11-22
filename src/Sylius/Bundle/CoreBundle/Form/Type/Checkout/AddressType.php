@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddDefaultBillingAddressOnOrderFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,7 +31,7 @@ class AddressType extends AbstractResourceType
         $builder
             ->add('shippingAddress', 'sylius_address', ['shippable' => true])
             ->add('billingAddress', 'sylius_address')
-            ->add('differentBillingAddress', 'checkbox', [
+            ->add('differentBillingAddress', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,
                 'label' => 'sylius.form.checkout.addressing.different_billing_address',

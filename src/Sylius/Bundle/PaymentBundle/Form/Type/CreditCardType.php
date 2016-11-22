@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -25,24 +27,24 @@ class CreditCardType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'choice', [
+            ->add('type', ChoiceType::class, [
                 'label' => 'sylius.form.credit_card.type',
                 'expanded' => true,
               ])
-              ->add('cardholderName', 'text', [
+              ->add('cardholderName', TextType::class, [
                 'label' => 'sylius.form.credit_card.cardholder_name',
               ])
-              ->add('number', 'text', [
+              ->add('number', TextType::class, [
                   'label' => 'sylius.form.credit_card.number',
               ])
-              ->add('securityCode', 'text', [
+              ->add('securityCode', TextType::class, [
                   'label' => 'sylius.form.credit_card.security_code',
               ])
-              ->add('expiryMonth', 'choice', [
+              ->add('expiryMonth', ChoiceType::class, [
                   'label' => 'sylius.form.credit_card.expiry_month',
                   'choices' => $this->getMonthChoices(),
               ])
-              ->add('expiryYear', 'choice', [
+              ->add('expiryYear', ChoiceType::class, [
                   'label' => 'sylius.form.credit_card.expiry_year',
                   'choices' => $this->getViableYears(),
               ])

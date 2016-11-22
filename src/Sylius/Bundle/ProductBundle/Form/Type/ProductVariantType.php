@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Sylius\Bundle\ProductBundle\Form\EventSubscriber\BuildProductVariantFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\ProductBundle\Form\EventSubscriber\BuildProductVariantFormSubscriber;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,17 +29,17 @@ class ProductVariantType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', [
+            ->add('name', TextType::class, [
                 'required' => false,
                 'label' => 'sylius.form.variant.name',
             ])
-            ->add('availableOn', 'datetime', [
+            ->add('availableOn', DateTimeType::class, [
                 'required' => false,
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
                 'label' => 'sylius.form.product_variant.available_on',
             ])
-            ->add('availableUntil', 'datetime', [
+            ->add('availableUntil', DateTimeType::class, [
                 'required' => false,
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
