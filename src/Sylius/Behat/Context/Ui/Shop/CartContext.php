@@ -117,7 +117,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then grand total value should be :total
+     * @Then the grand total value should be :total
      * @Then my cart total should be :total
      */
     public function myCartTotalShouldBe($total)
@@ -127,6 +127,20 @@ final class CartContext implements Context
             $this->summaryPage->getGrandTotal(),
             $total,
             'Grand total should be %2$s, but it is %s.'
+        );
+    }
+
+    /**
+     * @Then the grand total value in base currency should be :total
+     */
+    public function myBaseCartTotalShouldBe($total)
+    {
+        $this->summaryPage->open();
+
+        Assert::same(
+            $this->summaryPage->getBaseGrandTotal(),
+            $total,
+            'Base grand total should be %2$s, but it is %s.'
         );
     }
 

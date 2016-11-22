@@ -95,7 +95,7 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Then I should not be able to shop without default currency
+     * @Then I should not be able to shop without base currency
      */
     public function iShouldNotBeAbleToShop()
     {
