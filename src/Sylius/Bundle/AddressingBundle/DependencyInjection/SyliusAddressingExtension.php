@@ -39,50 +39,5 @@ final class SyliusAddressingExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $container->setParameter('sylius.scope.zone', $config['scopes']);
-
-        $container
-            ->getDefinition('sylius.form.type.province_choice')
-            ->setArguments([
-                new Reference('sylius.repository.province'),
-            ])
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.province_code_choice')
-            ->setArguments([
-                new Reference('sylius.repository.province'),
-            ])
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.country_choice')
-            ->setArguments([
-                new Reference('sylius.repository.country'),
-            ])
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.country_code_choice')
-            ->setArguments([
-                new Reference('sylius.repository.country'),
-            ])
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.zone_code_choice')
-            ->setArguments([
-                new Reference('sylius.repository.zone'),
-            ])
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.address')
-            ->addArgument(new Reference('sylius.form.listener.address'))
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.zone')
-            ->addArgument(new Parameter('sylius.scope.zone'))
-        ;
     }
 }

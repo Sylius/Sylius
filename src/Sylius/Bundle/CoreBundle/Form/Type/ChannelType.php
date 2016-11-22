@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType as BaseChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -43,7 +44,7 @@ class ChannelType extends BaseChannelType
                 'required' => true,
                 'multiple' => true,
             ])
-            ->add('defaultTaxZone', 'sylius_zone_choice', [
+            ->add('defaultTaxZone', ZoneChoiceType::class, [
                 'required' => false,
                 'label' => 'sylius.form.channel.tax_zone_default',
             ])

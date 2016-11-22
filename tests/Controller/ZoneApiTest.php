@@ -182,6 +182,7 @@ EOT;
     public function it_does_not_allow_to_update_zone_fully_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
         $zones = $this->loadFixturesFromFile('resources/zones.yml');
 
         $this->client->request('PUT', '/api/zones/'.$zones['zone_eu']->getCode(), [], [], static::$authorizedHeaderWithContentType);

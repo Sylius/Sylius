@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -21,19 +20,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProvinceChoiceType extends AbstractType
+class ZoneChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface
      */
-    protected $provinceRepository;
+    protected $zoneRepository;
 
     /**
-     * @param RepositoryInterface $provinceRepository
+     * @param RepositoryInterface $zoneRepository
      */
-    public function __construct(RepositoryInterface $provinceRepository)
+    public function __construct(RepositoryInterface $zoneRepository)
     {
-        $this->provinceRepository = $provinceRepository;
+        $this->zoneRepository = $zoneRepository;
     }
 
     /**
@@ -43,21 +42,15 @@ class ProvinceChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => function (Options $options) {
-                if (null === $options['country']) {
-                    return $this->provinceRepository->findAll();
-                }
-
-                return $options['country']->getProvinces();
+                return $this->zoneRepository->findAll();
             },
             'choice_value' => 'code',
             'choice_label' => 'name',
             'choice_translation_domain' => false,
-            'country' => null,
-            'label' => 'sylius.form.address.province',
-            'placeholder' => 'sylius.form.province.select',
+            'label' => 'sylius.form.address.zone',
+            'placeholder' => 'sylius.form.zone.select',
             'choices_as_values' => true,
         ]);
-        $resolver->addAllowedTypes('country', ['null', CountryInterface::class]);
     }
 
     /**
@@ -73,7 +66,7 @@ class ProvinceChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_province_choice';
+        return 'sylius_zone_choice';
     }
 
     /**
@@ -81,6 +74,6 @@ class ProvinceChoiceType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'sylius_province_choice';
+        return 'sylius_zone_choice';
     }
 }

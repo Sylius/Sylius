@@ -9,11 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +28,7 @@ use Symfony\Component\Intl\Intl;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class CountryType extends AbstractResourceType
+final class CountryTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var RepositoryInterface
@@ -35,14 +37,10 @@ class CountryType extends AbstractResourceType
 
     /**
      * {@inheritdoc}
-     *
-     * @param RepositoryInterface $countryRepository
      */
-    public function __construct($dataClass, array $validationGroups = [], RepositoryInterface $countryRepository)
+    public function __construct(RepositoryInterface $countryRepository)
     {
         $this->countryRepository = $countryRepository;
-
-        parent::__construct($dataClass, $validationGroups);
     }
 
     /**
@@ -69,7 +67,7 @@ class CountryType extends AbstractResourceType
 
         $builder
             ->add('provinces', CollectionType::class, [
-                'entry_type' => 'sylius_province',
+                'entry_type' => ProvinceType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
@@ -84,17 +82,9 @@ class CountryType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getExtendedType()
     {
-        return 'sylius_country';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'sylius_country';
+        return CountryType::class;
     }
 
     /**

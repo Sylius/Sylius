@@ -10,6 +10,7 @@ sylius:
             postcode: Postcode
             street: Street
             province: Province
+            zone: Zone
         country:
             add_province: Add province
             name: Name

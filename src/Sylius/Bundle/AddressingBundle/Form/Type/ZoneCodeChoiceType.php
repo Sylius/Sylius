@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\ReversedTransformer;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -39,21 +41,23 @@ class ZoneCodeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        $builder->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->zoneRepository, 'code')));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
                 'choices' => function (Options $options) {
-                    /* @var ZoneInterface[] $zones */
-                    $zones = $this->zoneRepository->findAll();
-                    $zonesCodes = [];
-
-                    foreach ($zones as $zone) {
-                        $zonesCodes[$zone->getName()] = $zone->getCode();
-                    }
-
-                    return $zonesCodes;
+                    return $this->zoneRepository->findAll();
                 },
+                'choice_value' => 'code',
+                'choice_label' => 'name',
                 'choice_translation_domain' => false,
                 'label' => 'sylius.form.zone.types.zone',
                 'placeholder' => 'sylius.form.zone.select',
@@ -84,21 +88,5 @@ class ZoneCodeChoiceType extends AbstractType
     public function getBlockPrefix()
     {
         return 'sylius_zone_code_choice';
-    }
-
-    /**
-     * @return array
-     */
-    private function getZoneCodes()
-    {
-        $zoneObjects = $this->zoneRepository->findAll();
-        $zones = [];
-
-        /* @var ZoneInterface $zone */
-        foreach ($zoneObjects as $zone) {
-            $zones[$zone->getCode()] = $zone->getName();
-        }
-
-        return $zones;
     }
 }

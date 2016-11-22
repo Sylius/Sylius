@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType as BaseTaxRateType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -26,6 +27,6 @@ class TaxRateType extends BaseTaxRateType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('zone', 'sylius_zone_choice');
+        $builder->add('zone', ZoneChoiceType::class);
     }
 }
