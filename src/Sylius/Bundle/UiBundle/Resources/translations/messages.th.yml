@@ -165,9 +165,7 @@ sylius:
         create_product_association_type: สร้างชนิดความสัมพันธ์ของผลิตภัณฑ์
         create_product_attribute: สร้างคุณลักษณะ (Attribute) ของสินค้า
         create_promotion: สร้างโปรโมชั่น
-        create_redirect_route: สร้าง Redirect route
         create_report: สร้างรายงาน
-        create_route: สร้าง Route
         create_shipping_category: สร้างประเภทการจัดส่ง
         create_shipping_method: สร้างวิธีการจัดส่ง
         create_simple_block: สร้างบล็อกแบบง่าย
@@ -187,8 +185,6 @@ sylius:
         creating_menu: สร้างเมนู
         creating_menu_node: สร้างเมนูต่างๆ
         creating_new_page: สร้างหน้าใหม่
-        creating_redirect_route: สร้าง Redirect route
-        creating_route: สร้าง Route
         creation_date: วันที่สร้าง
         creation_time: เวลาที่สร้าง
         currencies: สกุลเงิน
@@ -218,6 +214,7 @@ sylius:
         data: ข้อมูล
         date: วันที่
         default: ค่าเริ่มต้น
+        default_address: ที่อยู่เริ่มต้น
         default_billing_address: ค่าเริ่มต้นที่อยู่เรียกเก็บเงิน
         default_currency: สกุลเงินเริ่มต้น
         default_locale: ภาษาเริ่มต้น
@@ -254,10 +251,8 @@ sylius:
         edit_promotion: แก้ไขโปรโมชั่น
         edit_promotion_coupon: แก้ไขคูปองโปรโมชั่น
         edit_report: แก้ไขรายงาน
-        edit_route: แก้ไข route
         edit_shipping_address: แก้ไข ที่อยู่ในการจัดส่ง
         edit_shipping_method: แก้ไขวิธีการจัดส่ง
-        edit_static_content: แก้ไข Static content
         edit_tax_category: แก้ไขประเภทภาษี
         edit_tax_rate: แก้ไขอัตราภาษี
         edit_taxon: แก้ไขการจัดหมวดหมู่
@@ -282,10 +277,8 @@ sylius:
         editing_permission: แก้ไขสิทธิ์การเข้าถึง
         editing_product: แก้ไขสินค้า
         editing_promotion: แก้ไขโปรโมชั่น
-        editing_redirect_route: แก้ไข Redirect route
         editing_review: แก้ไขรีวิว
         editing_role: แก้ไข Role
-        editing_route: แก้ไข Route
         editing_shipment: แก้ไขการจัดส่ง
         editing_shipping_category: แก้ไขประเภทการจัดส่ง
         editing_shipping_method: แก้ไขวิธีการจัดส่ง
@@ -299,6 +292,7 @@ sylius:
         editing_zone: แก้ไขโซน
         email: อีเมล
         email_templates: เท็มเพลตอีเมล
+        email_verified: ตรวจสอบอีเมล์นี้ตรวจสอบแล้ว
         emails: อีเมล
         empty: ว่างเปล่า
         enable: เปิดใช้งาน
@@ -340,6 +334,7 @@ sylius:
         go_level_up: ระดับขึ้นไป
         go_to_dashboard: ไปที่แดชบอร์ด
         grand_total: ผลรวมทั้งหมด
+        group_membership: สมาชิกของกลุ่ม
         guest: ผู้เยี่ยมชม
         guest_customer: ลูกค้าบุคคลทั่วไป
         have_an_account_already: มีบัญชีอยู่แล้วใช่หรือไม่?
@@ -479,10 +474,8 @@ sylius:
         new_promotion_coupon: คูปองโปรโมชั่นใหม่
         new_review: เพิ่มรีวิว
         new_role: เพิ่ม Role
-        new_route: เพิ่ม route
         new_shipping_category: เพิ่มประเภทการจัดส่ง
         new_shipping_method: เพิ่มวิธีการจัดส่ง
-        new_static_content: เพิ่ม static content
         new_tax_category: ประเภทภาษีใหม่
         new_tax_rate: เพิ่มอัตราภาษี
         new_taxon: เพิ่มประเภท
@@ -604,6 +597,7 @@ sylius:
         promotion_information: ข้อมูลโปรโมชั่น
         promotion_total: รวมโปรโมชั่น
         promotions: โปรโมชั่น
+        properties: คุณสมบัติ
         province: จังหวัด
         provinces: จังหวัด
         purchased_from: ซื้อจาก
@@ -616,7 +610,6 @@ sylius:
         recent_customers: ลูกค้าล่าสุด
         recent_orders: ใบสั่งซื้อล่าสุด
         recent_users: ผู้ใช้ล่าสุด
-        redirect_routes: Redirect routes
         refund: คืนเงิน
         refunded: คืนเงินแล้ว
         register: ลงทะเบียน
@@ -647,7 +640,6 @@ sylius:
         review_details: รายละเอียดของรายงาน
         reviews: รีวิว
         roles: Roles
-        routes: เส้นทาง
         rules: เงื่อนไข
         sales: ยอดขาย
         sales_this_month: ยอดขาย
@@ -657,6 +649,7 @@ sylius:
         search: ค้นหา
         security_settings: ตั้งค่าความปลอดภัย
         select_address_from_book: เลือกที่อยู่จากสมุดที่อยู่ของฉัน
+        select_products: เลือกผลิตภัณฑ์
         select_taxon: เลือกหมวดหมู่
         set_a_new_password_for_your_account: ตั้งรหัสผ่านใหม่สำหรับบัญชีของคุณ
         set_as_default: ตั้งเป็นค่าเริ่มต้น
@@ -690,6 +683,7 @@ sylius:
         show_in_store: แสดงในร้าน
         show_metadata: แสดง Metadata
         show_order_details: แสดงรายละเอียดใบสั่ง
+        show_orders: แสดงคำสั่งซื้อทั้่งหมด
         sign_in: ลงชื่อเข้าใช้
         sign_in_here: ลงชื่อเข้าใช้ที่นี่
         sign_in_to_the_store_or_create_new_account: เข้าสู่ระบบ <small>หรือสร้างบัญชีใหม่</small>
@@ -704,7 +698,6 @@ sylius:
         starts_at: เริ่มต้น
         starts_with: เริ่มต้นด้วย
         state: สถานะ
-        static_contents: Static contents
         status: สถานะ
         street: ที่อยู่
         string_blocks: สายบล็อก
@@ -756,11 +749,9 @@ sylius:
         there_are_no_permissions_defined: ไม่มีการกำหนดสิทธิ์การเข้าถึง
         there_are_no_products_to_display: ไม่มีรายการสินค้า
         there_are_no_promotions_configured: ไม่มีการกำหนดค่าโปรโมชั่น
-        there_are_no_redirect_routes_to_display: ไม่มีรายการ Redirect routes
         there_are_no_reports_created: ไม่มีรายงานที่สร้างขึ้น
         there_are_no_reviews: ไม่มีรีวิว
         there_are_no_roles_defined: ไม่มีการกำหนด Roles
-        there_are_no_routes_to_display: ไม่มีรายการ Route
         there_are_no_shipments_to_display: ไม่มีรายการจัดส่งสินค้า
         there_are_no_shipping_categories_configured: ไม่มีการกำหนดค่าหมวดหมู่ที่จัดส่ง
         there_are_no_shipping_methods_configured: ไม่มีการกำหนดค่าวิธีการจัดส่ง

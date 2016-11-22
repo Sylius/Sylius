@@ -43,6 +43,7 @@ sylius:
             calculator: 计算器
             category: 分类
             category_requirement: 类别要求
+            channels: 频道
             configuration: 配置：
             description: 描述
             enabled: 已启用

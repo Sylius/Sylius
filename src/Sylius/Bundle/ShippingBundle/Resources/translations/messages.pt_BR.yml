@@ -43,6 +43,7 @@ sylius:
             calculator: Calculadora
             category: Categoria
             category_requirement: Requerimentos da categoria
+            channels: Canais
             configuration: Configuração
             description: Descrição
             enabled: Ativado

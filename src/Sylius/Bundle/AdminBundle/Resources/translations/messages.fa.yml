@@ -35,7 +35,3 @@ sylius:
                 sales:
                     header: فروش‌ها
                     orders: سفارش‌ها
-                content:
-                    header: محتوا
-                    static_contents: محتواهای ثابت
-                    routes: آدرس های داخلی

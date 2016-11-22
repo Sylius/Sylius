@@ -15,8 +15,6 @@ sylius:
             starts_at: Începe la
             usage_limit: Limita de utilizare
         promotion_action:
-            fixed_discount_configuration:
-                amount: Sumă
             type: Tip
         promotion_coupon:
             usage_limit: Limita de utilizare

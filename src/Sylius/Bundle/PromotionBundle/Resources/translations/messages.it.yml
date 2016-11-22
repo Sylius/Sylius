@@ -12,11 +12,10 @@ sylius:
             ends_at: Termina il
             exclusive: Esclusivo
             name: Nome
+            priority: Priorità
             rules: Regole
             starts_at: Inizia il
         promotion_action:
-            fixed_discount_configuration:
-                amount: Importo
             type: Tipo
         promotion_coupon_generator_instruction:
             amount: Importo

@@ -32,7 +32,6 @@ sylius:
         presentation: تقديم
         province: مقاطعة
         provinces: المقاطعات
-        routes: طرق
         scope: نطاق
         street: الشارع
         topic: الموضوع

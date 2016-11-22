@@ -46,6 +46,7 @@ sylius:
             calculator: Calculator
             category: Categorie
             category_requirement: Categorie vereisten
+            channels: Kanalen
             configuration: Configuratie
             description: Omschrijving
             enabled: Toegestaan

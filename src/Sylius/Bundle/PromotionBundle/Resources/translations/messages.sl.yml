@@ -12,6 +12,7 @@ sylius:
             ends_at: Konča se na
             exclusive: Izključno
             name: Ime
+            priority: Prednost
             rules: Pravila
             starts_at: Se začne pri
         promotion_action:

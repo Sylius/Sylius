@@ -153,9 +153,7 @@ sylius:
         create_product_association_type: Criar o tipo de associação de produto
         create_product_attribute: Criar atributo de produto
         create_promotion: Criar promoção
-        create_redirect_route: Criar a rota de redirecionamento
         create_report: Criar relatório
-        create_route: Criar Rota
         create_shipping_category: Criar categoria de envio
         create_shipping_method: Criar método de envio
         create_simple_block: Criar bloco simples
@@ -215,10 +213,8 @@ sylius:
         editing_permission: Editar permissão
         editing_product: Editando produto
         editing_promotion: Editando promoção
-        editing_redirect_route: Edição de rota de redirecionamento
         editing_review: Editar revisão
         editing_role: Editar papel
-        editing_route: Edição de rota
         editing_shipment: Edição da expedição
         editing_shipping_category: Editando categoria de envio
         editing_shipping_method: Editando método de envio
@@ -390,7 +386,6 @@ sylius:
         returned: Devolvido
         reviews: Críticas
         roles: Funções
-        routes: Rotas
         rules: Regras
         sales: Vendas
         sales_this_month: Vendas

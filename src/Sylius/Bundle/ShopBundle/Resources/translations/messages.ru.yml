@@ -5,6 +5,7 @@ sylius:
     menu:
         shop:
             account:
+                address_book: Aдресная книга
                 change_password: Сменить пароль
                 dashboard: Приборная панель
                 header: Ваша учетная запись

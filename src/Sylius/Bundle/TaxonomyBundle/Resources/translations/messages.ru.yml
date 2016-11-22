@@ -7,5 +7,6 @@ sylius:
             description: Описание
             name: Название
             parent: Родитель
+            slug: Псевдоним
         taxonomy:
             name: Название

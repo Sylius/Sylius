@@ -35,7 +35,3 @@ sylius:
                 sales:
                     header: Продажі
                     orders: Замовлення
-                content:
-                    header: Вміст
-                    static_contents: Статичний вміст
-                    routes: Маршрути

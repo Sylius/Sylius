@@ -12,12 +12,11 @@ sylius:
             ends_at: Endet am
             exclusive: Exklusiv
             name: Name
+            priority: Priorität
             rules: Regeln
             starts_at: Beginnt am
             usage_limit: Nutzungslimit
         promotion_action:
-            fixed_discount_configuration:
-                amount: Anzahl
             percentage_discount_configuration:
                 percentage: Prozent
             type: Typ

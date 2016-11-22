@@ -97,9 +97,6 @@ sylius:
             email: Email
         product_association_type:
             name: Navn
-        promotion_rule:
-            contains_taxon:
-                count: Antal
     installer:
         extensions:
             apc: APC

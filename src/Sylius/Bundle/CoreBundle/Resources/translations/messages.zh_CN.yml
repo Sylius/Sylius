@@ -118,11 +118,10 @@ sylius:
         product_association_type:
             name: 名称
         promotion_rule:
-            contains_taxon:
-                taxon: 分类
-                count: 计数
             total_of_items_from_taxon:
                 taxon: 分类
+        payment_method:
+            channels: 频道
     installer:
         extensions:
             header: 扩展组件

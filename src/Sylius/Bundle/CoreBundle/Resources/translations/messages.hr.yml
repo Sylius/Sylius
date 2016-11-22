@@ -104,10 +104,10 @@ sylius:
         product_association_type:
             name: Naziv grupe
         promotion_rule:
-            contains_taxon:
-                count: Brojač
             total_of_items_from_taxon:
                 amount: Iznos
+        payment_method:
+            channels: Kanali
     installer:
         extensions:
             header: Ekstenzije

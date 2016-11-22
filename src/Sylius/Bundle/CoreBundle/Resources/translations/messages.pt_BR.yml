@@ -119,11 +119,10 @@ sylius:
         product_association_type:
             name: Nome
         promotion_rule:
-            contains_taxon:
-                taxon: Taxon
-                count: Contagem
             total_of_items_from_taxon:
                 taxon: Taxon
+        payment_method:
+            channels: Canais
     installer:
         extensions:
             header: extensões

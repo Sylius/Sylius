@@ -5,6 +5,7 @@ sylius:
     form:
         email:
             enabled: Активен
+            subject: Тема
             sender_name: Имя отправителя
             sender_address: Адрес отправителя
             content: Содержимое

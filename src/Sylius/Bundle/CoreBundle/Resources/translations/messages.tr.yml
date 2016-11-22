@@ -110,10 +110,10 @@ sylius:
         product_association_type:
             name: Ad
         promotion_rule:
-            contains_taxon:
-                count: Sayısı
             total_of_items_from_taxon:
                 amount: Miktar
+        payment_method:
+            channels: Kanallar
     installer:
         extensions:
             header: Eklentiler
