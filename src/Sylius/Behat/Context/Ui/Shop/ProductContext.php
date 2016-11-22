@@ -517,15 +517,6 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^average rating of (product "[^"]+") should be (\d+)$/
-     */
-    public function thisProductAverageRatingShouldBe(ProductInterface $product, $averageRating)
-    {
-        $this->showPage->tryToOpen(['slug' => $product->getSlug()]);
-        $this->iShouldSeeAsItsAverageRating($averageRating);
-    }
-
-    /**
      * @param string $productName
      * @param string $productAssociationName
      *
