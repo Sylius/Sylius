@@ -247,17 +247,6 @@ final class OrderSpec extends ObjectBehavior
         $this->getCurrencyCode()->shouldReturn('PLN');
     }
 
-    function it_has_a_default_exchange_rate_equal_to_1()
-    {
-        $this->getExchangeRate()->shouldReturn(1.0);
-    }
-
-    function its_exchange_rate_is_mutable()
-    {
-        $this->setExchangeRate(1.25);
-        $this->getExchangeRate()->shouldReturn(1.25);
-    }
-
     function it_has_no_default_locale_code()
     {
         $this->getLocaleCode()->shouldReturn(null);

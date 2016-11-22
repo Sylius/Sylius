@@ -45,7 +45,7 @@ class MoneyHelper extends Helper implements MoneyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function formatAmount($amount, $currencyCode = null, $locale = null)
+    public function formatAmount($amount, $currencyCode, $locale = null)
     {
         $locale = $locale ?: $this->localeContext->getLocaleCode();
 
