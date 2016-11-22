@@ -29,9 +29,12 @@ class SecurityController extends Controller
         $error = $authenticationUtils->getLastAuthenticationError();
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        $template = $request->attributes->get('_sylius[template]', null, true);
+        $options = $request->attributes->get('_sylius');
+
+        $template = isset($options['template']) ? $options['template'] : null;
         Assert::notNull($template, 'Template is not configured.');
-        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_security_login', true);
+
+        $formType = isset($options['form']) ? $options['form'] : 'sylius_user_security_login';
         $form = $this->get('form.factory')->createNamed('', $formType);
 
         return $this->render($template, [

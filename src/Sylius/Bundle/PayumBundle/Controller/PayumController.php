@@ -92,11 +92,13 @@ final class PayumController
 
         $request->getSession()->set('sylius_order_id', $payment->getOrder()->getId());
 
+        $options = $configuration->getParameters()->get('redirect');
+
         $captureToken = $this->getTokenFactory()->createCaptureToken(
             $payment->getMethod()->getGateway(),
             $payment,
-            $configuration->getParameters()->get('redirect[route]', null, true),
-            $configuration->getParameters()->get('redirect[parameters]', [], true)
+            isset($options['route']) ? $options['route'] : null,
+            isset($options['parameters']) ? $options['parameters'] : []
         );
 
         $view = View::createRedirect($captureToken->getTargetUrl());

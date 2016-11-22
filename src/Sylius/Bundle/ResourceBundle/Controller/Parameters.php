@@ -23,9 +23,9 @@ class Parameters extends ParameterBag
      */
     public function get($path, $default = null, $deep = false)
     {
-        $result = parent::get($path, $default, $deep);
+        $result = parent::get($path, $default);
 
-        if ($this->has($path) && null === $result && $default !== null) {
+        if (null === $result && $default !== null && $this->has($path)) {
             $result = $default;
         }
 

@@ -577,7 +577,9 @@ class RequestConfiguration
      */
     public function getStateMachineGraph()
     {
-        return $this->parameters->get('state_machine[graph]', null, true);
+        $options = $this->parameters->get('state_machine');
+
+        return isset($options['graph']) ? $options['graph'] : null;
     }
 
     /**
@@ -585,7 +587,9 @@ class RequestConfiguration
      */
     public function getStateMachineTransition()
     {
-        return $this->parameters->get('state_machine[transition]', null, true);
+        $options = $this->parameters->get('state_machine');
+
+        return isset($options['transition']) ? $options['transition'] : null;
     }
 
     /**
