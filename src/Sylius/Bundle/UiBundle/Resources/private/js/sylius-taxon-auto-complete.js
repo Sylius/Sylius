@@ -11,13 +11,12 @@
     'use strict';
 
     $.fn.extend({
-        taxonAutoComplete: function (apiAction) {
+        taxonAutoComplete: function () {
             $(this).dropdown({
                 delay: {
                     search: 250,
                 },
                 apiSettings: {
-                    action: apiAction,
                     dataType: 'JSON',
                     cache: false,
                     data: {

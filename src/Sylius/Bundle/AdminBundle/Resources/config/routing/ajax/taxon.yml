@@ -1,14 +1,21 @@
-sylius_admin_api_taxon_index:
+sylius_admin_ajax_taxon_index:
     path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:indexAction
-        _format: json
         _sylius:
             grid: sylius_admin_taxon
 
-sylius_admin_api_generate_taxon_slug:
+sylius_admin_ajax_generate_taxon_slug:
     path: /generate-slug/
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon_slug:generateAction
+
+sylius_admin_ajax_taxon_move:
+    path: /{id}/move
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.taxon:updateAction
+        _sylius:
+            form: sylius_taxon_position

@@ -19,7 +19,7 @@
         });
 
         $('.taxon-select.ui.fluid.search.selection.dropdown').taxonAutoComplete('get taxons');
-        $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete('get products');
+        $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete();
         $('div#attributeChoice > .ui.dropdown.search').productAttributes();
 
         $('table thead th.sortable').on('click', function () {

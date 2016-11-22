@@ -1,0 +1,11 @@
+sylius_admin_ajax_taxon:
+    resource: "@SyliusAdminBundle/Resources/config/routing/ajax/taxon.yml"
+    prefix: /taxons
+
+sylius_admin_ajax_product:
+    resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product.yml"
+    prefix: /products
+
+sylius_admin_ajax_product_taxon:
+    resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product_taxon.yml"
+    prefix: /product-taxons

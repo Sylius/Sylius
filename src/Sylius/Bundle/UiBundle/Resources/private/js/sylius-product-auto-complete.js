@@ -11,7 +11,7 @@
     'use strict';
 
     $.fn.extend({
-        productAutoComplete: function (apiAction) {
+        productAutoComplete: function () {
             $(this).each(function() {
                 $(this).dropdown('set selected', $(this).find('input[name*="[associations]"]').val().split(','));
             });
@@ -22,7 +22,6 @@
                 },
                 forceSelection: false,
                 apiSettings: {
-                    action: apiAction,
                     dataType: 'JSON',
                     cache: false,
                     data: {
