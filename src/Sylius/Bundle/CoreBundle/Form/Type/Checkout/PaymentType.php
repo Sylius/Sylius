@@ -33,7 +33,7 @@ class PaymentType extends AbstractType
     {
         $this->dataClass = $dataClass;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -47,7 +47,9 @@ class PaymentType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('data_class', $this->dataClass);
+        $resolver->setDefaults([
+            'data_class' => $this->dataClass,
+        ]);
     }
 
     /**
