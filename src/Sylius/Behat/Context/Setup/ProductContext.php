@@ -358,7 +358,9 @@ final class ProductContext implements Context
 
             $variant->setName($variantHash['name']);
             $variant->setCode(StringInflector::nameToUppercaseCode($variantHash['name']));
-            $variant->setPrice($this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])));
+            $variant->addChannelPricing($this->createChannelPricingForCurrentChannel(
+                $this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price']))
+            ));
             $variant->setProduct($product);
             $product->addVariant($variant);
         }
@@ -529,7 +531,7 @@ final class ProductContext implements Context
         $optionValue = $this->sharedStorage->get(sprintf('%s_option_%s_value', $optionValueName, $optionName));
 
         $variant->addOptionValue($optionValue);
-        $variant->setPrice($price);
+        $variant->addChannelPricing($this->createChannelPricingForCurrentChannel($price));
         $variant->setCode(sprintf("%s_%s", $product->getCode(), $optionValueName));
 
         $product->addVariant($variant);
@@ -577,7 +579,8 @@ final class ProductContext implements Context
     {
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->setPrice($price);
+        $channelPricing = $productVariant->getChannelPricingForChannel($this->sharedStorage->get('channel'));
+        $channelPricing->setPrice($price);
 
         $this->objectManager->flush();
     }
@@ -770,18 +773,27 @@ final class ProductContext implements Context
         $variant->setName($productVariantName);
         $variant->setCode($code);
         $variant->setProduct($product);
-
-        /** @var ChannelPricingInterface $channelPricing */
-        $channelPricing = $this->channelPricingFactory->createNew();
-        $channelPricing->setPrice($price);
-        $channelPricing->setChannel($this->sharedStorage->get('channel'));
-
-        $variant->addChannelPricing($channelPricing);
+        $variant->addChannelPricing($this->createChannelPricingForCurrentChannel($price));
 
         $product->addVariant($variant);
 
         $this->objectManager->flush();
 
         $this->sharedStorage->set('variant', $variant);
+    }
+
+    /**
+     * @param int $price
+     *
+     * @return ChannelPricingInterface
+     */
+    private function createChannelPricingForCurrentChannel($price)
+    {
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $this->channelPricingFactory->createNew();
+        $channelPricing->setPrice($price);
+        $channelPricing->setChannel($this->sharedStorage->get('channel'));
+
+        return $channelPricing;
     }
 }
