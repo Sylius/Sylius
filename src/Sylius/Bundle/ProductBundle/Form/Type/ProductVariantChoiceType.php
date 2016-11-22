@@ -40,16 +40,16 @@ class ProductVariantChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = function (Options $options) {
-            return new ObjectChoiceList($options['product']->getVariants(), 'name', [], null, 'id');
-        };
-
         $resolver
             ->setDefaults([
+                'choices' => function (Options $options) {
+                    return $options['product']->getVariants();
+                },
+                'choice_value' => 'code',
+                'choice_label' => 'name',
                 'choice_translation_domain' => false,
                 'multiple' => false,
                 'expanded' => true,
-                'choice_list' => $choiceList,
                 'choices_as_values' => true,
             ])
             ->setRequired([

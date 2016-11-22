@@ -27,19 +27,23 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
     {
         parent::configureOptions($resolver);
 
-        $choices = function (Options $options) {
-            if (null === $options['country']) {
-                $provinces = $this->provinceRepository->findAll();
-            } else {
-                $provinces = $options['country']->getProvinces();
-            }
-
-            return $this->getProvinceCodes($provinces);
-        };
-
         $resolver->setDefaults([
-            'choice_list' => null,
-            'choices' => $choices,
+            'choices' => function (Options $options) {
+                if (null === $options['country']) {
+                    $provinces = $this->provinceRepository->findAll();
+                } else {
+                    $provinces = $options['country']->getProvinces();
+                }
+
+                $provincesCodes = [];
+
+                /* @var ProvinceInterface $province */
+                foreach ($provinces as $province) {
+                    $provincesCodes[$province->getName()] = $province->getCode();
+                }
+
+                return $provincesCodes;
+            },
         ]);
     }
 
@@ -57,22 +61,5 @@ class ProvinceCodeChoiceType extends ProvinceChoiceType
     public function getBlockPrefix()
     {
         return 'sylius_province_code_choice';
-    }
-
-    /**
-     * @param ProvinceInterface[] $provinces
-     *
-     * @return array
-     */
-    private function getProvinceCodes($provinces)
-    {
-        $provincesCodes = [];
-
-        /* @var ProvinceInterface $province */
-        foreach ($provinces as $province) {
-            $provincesCodes[$province->getCode()] = $province->getName();
-        }
-
-        return $provincesCodes;
     }
 }

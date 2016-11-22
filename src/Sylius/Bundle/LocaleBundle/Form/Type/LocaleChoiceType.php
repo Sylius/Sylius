@@ -55,26 +55,22 @@ class LocaleChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = function (Options $options) {
-            if (null === $options['enabled']) {
-                $choices = $this->localeRepository->findAll();
-            } else {
-                $choices = $this->localeRepository->findBy(['enabled' => $options['enabled']]);
-            }
+        $resolver->setDefaults([
+            'choices' => function (Options $options) {
+                if (null === $options['enabled']) {
+                    return $this->localeRepository->findAll();
+                }
 
-            return new ObjectChoiceList($choices, null, [], null, 'id');
-        };
-
-        $resolver
-            ->setDefaults([
-                'choice_translation_domain' => false,
-                'choice_list' => $choiceList,
-                'enabled' => null,
-                'label' => 'sylius.form.locale.locale',
-                'empty_value' => 'sylius.form.locale.select',
-                'choices_as_values' => true,
-            ])
-        ;
+                return $this->localeRepository->findBy(['enabled' => $options['enabled']]);
+            },
+            'choice_value' => 'code',
+            'choice_label' => 'name',
+            'choice_translation_domain' => false,
+            'enabled' => null,
+            'label' => 'sylius.form.locale.locale',
+            'empty_value' => 'sylius.form.locale.select',
+            'choices_as_values' => true,
+        ]);
     }
 
     /**

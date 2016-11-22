@@ -78,30 +78,28 @@ class TaxonChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $repository = $this->taxonRepository;
-        $choiceList = function (Options $options) use ($repository) {
-            /* @var TaxonRepositoryInterface $repository */
-            if (null !== $options['root']) {
-                if (is_string($options['root'])) {
-                    $taxons = $repository->findChildrenByRootCode($options['root']);
-                } else {
-                    $taxons = $repository->findChildren($options['root']);
-                }
-            } else {
-                $taxons = $repository->findNodesTreeSorted();
-            }
-
-            if (null !== $options['filter']) {
-                $taxons = array_filter($taxons, $options['filter']);
-            }
-
-            return new ObjectChoiceList($taxons, null, [], null, 'id');
-        };
-
         $resolver
             ->setDefaults([
+                'choices' => function (Options $options) {
+                    if (null !== $options['root']) {
+                        if (is_string($options['root'])) {
+                            $taxons = $this->taxonRepository->findChildrenByRootCode($options['root']);
+                        } else {
+                            $taxons = $this->taxonRepository->findChildren($options['root']);
+                        }
+                    } else {
+                        $taxons = $this->taxonRepository->findNodesTreeSorted();
+                    }
+
+                    if (null !== $options['filter']) {
+                        $taxons = array_filter($taxons, $options['filter']);
+                    }
+
+                    return $taxons;
+                },
+                'choice_value' => 'code',
+                'choice_label' => 'name',
                 'choice_translation_domain' => false,
-                'choice_list' => $choiceList,
                 'root' => null,
                 'filter' => null,
                 'choices_as_values' => true,

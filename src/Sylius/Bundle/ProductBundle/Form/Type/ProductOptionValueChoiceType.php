@@ -29,21 +29,14 @@ class ProductOptionValueChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = function (Options $options) {
-            return new ObjectChoiceList(
-                $options['option']->getValues(),
-                'value',
-                [],
-                null,
-                'id',
-                PropertyAccess::createPropertyAccessor()
-            );
-        };
-
         $resolver
             ->setDefaults([
+                'choices' => function (Options $options) {
+                    return $options['option']->getValues();
+                },
+                'choice_value' => 'code',
+                'choice_label' => 'value',
                 'choice_translation_domain' => false,
-                'choice_list' => $choiceList,
                 'choices_as_values' => true,
             ])
             ->setRequired([
