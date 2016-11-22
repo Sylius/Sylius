@@ -33,6 +33,12 @@
             <join-column name="tax_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
+        <one-to-many field="channelPricings" target-entity="Sylius\Component\Core\Model\ChannelPricingInterface" mapped-by="productVariant" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
         <gedmo:loggable />
     </mapped-superclass>
 </doctrine-mapping>
