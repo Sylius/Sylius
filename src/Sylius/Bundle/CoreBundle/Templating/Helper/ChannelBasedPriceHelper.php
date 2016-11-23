@@ -21,7 +21,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ChannelBasedPriceHelper extends Helper implements ChannelBasedPriceHelperInterface
+class ChannelBasedPriceHelper extends Helper implements ChannelBasedPriceHelperInterface
 {
     /**
      * @var CartContextInterface

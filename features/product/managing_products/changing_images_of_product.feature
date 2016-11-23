@@ -5,7 +5,7 @@ Feature: Changing images of an existing product
     I want to be able to changing images of an existing product
 
     Background:
-        Given the store is available in "English (United States)"
+        Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
     @ui @javascript

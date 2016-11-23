@@ -5,7 +5,7 @@ Feature: Sorting listed products from a taxon by position
     I want to sort products from a taxon by their positions
 
     Background:
-        Given the store is available in "English (United States)"
+        Given the store operates on a single channel in "United States"
         And the store classifies its products as "Soft Toys"
         And the store has a product "Old pug"
         And this product is in "Soft Toys" taxon at 1st position
