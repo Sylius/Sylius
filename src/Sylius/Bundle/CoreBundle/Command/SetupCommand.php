@@ -180,7 +180,6 @@ EOT
         }
 
         $currency = $currencyFactory->createNew();
-        $currency->setExchangeRate(1.00);
         $currency->setCode($code);
 
         $currencyManager->persist($currency);

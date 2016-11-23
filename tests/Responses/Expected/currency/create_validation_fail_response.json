@@ -7,11 +7,6 @@
                 "errors": [
                     "Please choose currency code."
                 ]
-            },
-            "exchangeRate": {
-                "errors": [
-                    "Please enter exchange rate."
-                ]
             }
         }
     }
