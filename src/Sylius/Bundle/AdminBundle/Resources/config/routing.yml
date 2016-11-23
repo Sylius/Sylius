@@ -31,6 +31,9 @@ sylius_admin_customer:
 sylius_admin_customer_group:
     resource: "@SyliusAdminBundle/Resources/config/routing/customer_group.yml"
 
+sylius_admin_exchange_rate:
+    resource: "@SyliusAdminBundle/Resources/config/routing/exchange_rate.yml"
+
 sylius_admin_locale:
     resource: "@SyliusAdminBundle/Resources/config/routing/locale.yml"
 

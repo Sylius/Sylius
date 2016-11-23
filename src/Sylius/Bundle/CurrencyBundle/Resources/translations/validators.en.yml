@@ -6,3 +6,14 @@ sylius:
             unique: Currency code must be unique.
         exchange_rate:
             not_blank: Please enter exchange rate.
+    exchange_rate:
+        ratio:
+            greater_than: The ratio must be greater than 0.
+            invalid: The ratio must be a number.
+            not_blank: Please enter exchange rate ratio.
+        source_currency:
+            not_blank: Please enter from which currency the exchange rate should be derived.
+        target_currency:
+            not_blank: Please enter to which currency the exchange rate should be set.
+        unique_currency_pair: The currency pair must be unique.
+        different_source_target_currency: The source and target currencies must differ.
