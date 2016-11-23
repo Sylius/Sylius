@@ -155,15 +155,6 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I name it :name in :language
-     */
-    public function iNameItIn($name, $language)
-    {
-        $currentPage = $this->resolveCurrentPage();
-
-        $currentPage->nameItIn($name, $language);
-    }
-
-    /**
      * @When I rename it to :name in :language
      */
     public function iRenameItToIn($name, $language)
@@ -181,8 +172,6 @@ final class ManagingProductsContext implements Context
     {
         /** @var CreatePageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
-
-        Assert::isInstanceOf($currentPage, CreatePageInterface::class);
 
         $currentPage->create();
     }
@@ -485,8 +474,6 @@ final class ManagingProductsContext implements Context
     {
         /** @var UpdatePageInterface $currentPage */
         $currentPage = $this->resolveCurrentPage();
-
-        Assert::isInstanceOf($currentPage, UpdatePageInterface::class);
 
         $currentPage->saveChanges();
     }
