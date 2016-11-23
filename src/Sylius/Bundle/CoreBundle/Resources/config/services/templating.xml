@@ -26,6 +26,11 @@
             <tag name="templating.helper" alias="sylius_price" />
         </service>
 
+        <service id="sylius.templating.helper.product_variants_prices" class="Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper">
+            <argument type="service" id="sylius.provider.product_variants_prices" />
+            <tag name="templating.helper" alias="sylius_product_variants_prices" />
+        </service>
+
         <service id="sylius.templating.helper.channel_based_price" class="Sylius\Bundle\CoreBundle\Templating\Helper\ChannelBasedPriceHelper" lazy="true">
             <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.templating.helper.price.core" />
