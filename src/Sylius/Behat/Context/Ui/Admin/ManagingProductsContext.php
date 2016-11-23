@@ -22,6 +22,7 @@ use Sylius\Behat\Page\Admin\Product\IndexPerTaxonPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentProductPageResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -147,10 +148,7 @@ final class ManagingProductsContext implements Context
      */
     public function iSpecifyItsCodeAs($code = null)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->createSimpleProductPage,
-            $this->createConfigurableProductPage,
-        ]);
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->specifyCode($code);
     }
@@ -160,10 +158,7 @@ final class ManagingProductsContext implements Context
      */
     public function iNameItIn($name, $language)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->createSimpleProductPage,
-            $this->createConfigurableProductPage,
-        ]);
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->nameItIn($name, $language);
     }
@@ -173,10 +168,7 @@ final class ManagingProductsContext implements Context
      */
     public function iRenameItToIn($name, $language)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->nameItIn($name, $language);
     }
@@ -188,10 +180,7 @@ final class ManagingProductsContext implements Context
     public function iAddIt()
     {
         /** @var CreatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->createSimpleProductPage,
-            $this->createConfigurableProductPage,
-        ]);
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::isInstanceOf($currentPage, CreatePageInterface::class);
 
@@ -322,10 +311,7 @@ final class ManagingProductsContext implements Context
      */
     public function theFirstProductOnTheListShouldHave($field, $value)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->indexPage,
-            $this->indexPerTaxonPage,
-        ]);
+        $currentPage = $this->resolveCurrentPage();
 
         $actualValue = $currentPage->getColumnFields($field)[0];
 
@@ -440,11 +426,7 @@ final class ManagingProductsContext implements Context
      */
     public function theCodeFieldShouldBeDisabled()
     {
-        /** @var UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::true(
             $currentPage->isCodeDisabled(),
@@ -502,10 +484,7 @@ final class ManagingProductsContext implements Context
     public function iSaveMyChanges()
     {
         /** @var UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::isInstanceOf($currentPage, UpdatePageInterface::class);
 
@@ -589,10 +568,7 @@ final class ManagingProductsContext implements Context
      */
     public function iRemoveItsNameFromTranslation($language)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->nameItIn('', $language);
     }
@@ -621,10 +597,7 @@ final class ManagingProductsContext implements Context
      */
     public function iChooseMainTaxon(TaxonInterface $taxon)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->selectMainTaxon($taxon);
     }
@@ -648,10 +621,7 @@ final class ManagingProductsContext implements Context
     public function thisProductMainTaxonShouldBe(ProductInterface $product, $taxonName)
     {
         /** @var UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->open(['id' => $product->getId()]);
 
@@ -693,12 +663,7 @@ final class ManagingProductsContext implements Context
     public function iAttachImageWithACode($path, $code)
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->createSimpleProductPage,
-            $this->createConfigurableProductPage,
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->has('product') ? $this->sharedStorage->get('product') : null);
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->attachImage($path, $code);
     }
@@ -709,10 +674,7 @@ final class ManagingProductsContext implements Context
     public function iAttachImageWithoutACode($path)
     {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->attachImage($path);
     }
@@ -726,10 +688,7 @@ final class ManagingProductsContext implements Context
         ...$productsNames
     ) {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->createSimpleProductPage,
-            $this->updateSimpleProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->associateProducts($productAssociationType, $productsNames);
     }
@@ -742,10 +701,7 @@ final class ManagingProductsContext implements Context
         ProductAssociationTypeInterface $productAssociationType
     ) {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->createSimpleProductPage,
-            $this->updateSimpleProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->removeAssociatedProduct($productName, $productAssociationType);
     }
@@ -759,10 +715,7 @@ final class ManagingProductsContext implements Context
         $this->sharedStorage->set('product', $product);
 
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $product);
+        $currentPage = $this->resolveCurrentPage($product);
 
         Assert::true(
             $currentPage->isImageWithCodeDisplayed($code),
@@ -776,10 +729,7 @@ final class ManagingProductsContext implements Context
     public function thisProductShouldNotHaveAnImageWithCode(ProductInterface $product, $code)
     {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $product);
+        $currentPage = $this->resolveCurrentPage($product);
 
         Assert::false(
             $currentPage->isImageWithCodeDisplayed($code),
@@ -793,10 +743,7 @@ final class ManagingProductsContext implements Context
     public function iChangeItsImageToPathForTheCode($path, $code)
     {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->changeImageWithCode($code, $path);
     }
@@ -807,10 +754,7 @@ final class ManagingProductsContext implements Context
     public function iRemoveAnImageWithACode($code)
     {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->removeImageWithCode($code);
     }
@@ -821,10 +765,7 @@ final class ManagingProductsContext implements Context
     public function iRemoveTheFirstImage()
     {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         $currentPage->removeFirstImage();
     }
@@ -837,10 +778,7 @@ final class ManagingProductsContext implements Context
         $this->iWantToModifyAProduct($product);
 
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::same(
             0,
@@ -855,10 +793,7 @@ final class ManagingProductsContext implements Context
     public function theImageCodeFieldShouldBeDisabled()
     {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::true(
             $currentPage->isImageCodeDisabled(),
@@ -880,10 +815,7 @@ final class ManagingProductsContext implements Context
     public function iShouldBeNotifiedThatAnImageCodeIsRequired()
     {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::same(
             $currentPage->getValidationMessageForImage(),
@@ -899,10 +831,7 @@ final class ManagingProductsContext implements Context
         $this->iWantToModifyAProduct($product);
 
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $product);
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::same(
             1,
@@ -1000,6 +929,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I save my new configuration
+     */
+    public function iSaveMyNewConfiguration()
+    {
+        $this->indexPerTaxonPage->savePositions();
+    }
+
+    /**
      * @When I set the position of :productName to :position
      */
     public function iSetThePositionOfTo($productName, $position)
@@ -1014,10 +951,7 @@ final class ManagingProductsContext implements Context
     private function assertElementValue($element, $value)
     {
         /** @var UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $this->sharedStorage->get('product'));
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::isInstanceOf($currentPage, UpdatePageInterface::class);
 
@@ -1035,24 +969,28 @@ final class ManagingProductsContext implements Context
      */
     private function assertValidationMessage($element, $message)
     {
-        $product = $this->sharedStorage->has('product') ? $this->sharedStorage->get('product') : null;
-
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->createSimpleProductPage,
-            $this->createConfigurableProductPage,
-            $this->updateSimpleProductPage,
-            $this->updateConfigurableProductPage,
-        ], $product);
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::same($currentPage->getValidationMessage($element), $message);
     }
 
     /**
-     * @When I save my new configuration
+     * @param ProductInterface|null $product
+     *
+     * @return SymfonyPageInterface
      */
-    public function iSaveMyNewConfiguration()
+    private function resolveCurrentPage(ProductInterface $product = null)
     {
-        $this->indexPerTaxonPage->savePositions();
+        $product = $product ?: $this->sharedStorage->has('product') ? $this->sharedStorage->get('product') : null;
+
+        return $this->currentPageResolver->getCurrentPageWithForm([
+            $this->indexPage,
+            $this->indexPerTaxonPage,
+            $this->createSimpleProductPage,
+            $this->createConfigurableProductPage,
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $product);
     }
 }
