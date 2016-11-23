@@ -51,8 +51,9 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 
     /**
      * @param string $slug
+     * @param string $locale
      */
-    public function specifySlug($slug);
+    public function specifySlugIn($slug, $locale);
 
     /**
      * @param string $attribute
@@ -71,8 +72,6 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      */
     public function attachImage($path, $code = null);
 
-    public function enableSlugModification();
-
     /**
      * @param ProductAssociationTypeInterface $productAssociationType
      * @param string[] $productsNames
@@ -84,4 +83,9 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      * @param ProductAssociationTypeInterface $productAssociationType
      */
     public function removeAssociatedProduct($productName, ProductAssociationTypeInterface $productAssociationType);
+
+    /**
+     * @param string $locale
+     */
+    public function activateLanguageTab($locale);
 }

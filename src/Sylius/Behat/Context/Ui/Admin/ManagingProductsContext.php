@@ -218,19 +218,22 @@ final class ManagingProductsContext implements Context
 
     /**
      * @When I set its slug to :slug
+     * @When I set its slug to :slug in :language
      * @When I remove its slug
      */
-    public function iSetItsSlugTo($slug = null)
+    public function iSetItsSlugToIn($slug = null, $language = 'en_US')
     {
-        $this->createSimpleProductPage->specifySlug($slug);
+        $this->createSimpleProductPage->specifySlugIn($slug, $language);
     }
 
     /**
      * @When I enable slug modification
+     * @When I enable slug modification in :localeCode
      */
-    public function iEnableSlugModification()
+    public function iEnableSlugModification($localeCode = 'en_US')
     {
-        $this->createSimpleProductPage->enableSlugModification();
+        $this->updateSimpleProductPage->activateLanguageTab($localeCode);
+        $this->updateSimpleProductPage->enableSlugModification($localeCode);
     }
 
     /**
@@ -425,11 +428,12 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then the slug field should not be editable
+     * @Then the slug field in :localeCode (also )should not be editable
      */
-    public function theSlugFieldShouldNotBeEditable()
+    public function theSlugFieldShouldNotBeEditable($localeCode = 'en_US')
     {
         Assert::true(
-            $this->updateSimpleProductPage->isSlugReadOnly(),
+            $this->updateSimpleProductPage->isSlugReadOnlyIn($localeCode),
             'Slug should be immutable, but it does not.'
         );
     }
@@ -591,14 +595,16 @@ final class ManagingProductsContext implements Context
 
     /**
      * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)"$/
+     * @Then /^the slug of the ("[^"]+" product) should(?:| still) be "([^"]+)" (in the "[^"]+" locale)$/
      */
-    public function productSlugShouldBe(ProductInterface $product, $slug)
+    public function productSlugShouldBe(ProductInterface $product, $slug, $locale = "en_US")
     {
         $this->updateSimpleProductPage->open(['id' => $product->getId()]);
 
-        Assert::true(
-            $this->updateSimpleProductPage->hasResourceValues(['slug' => $slug]),
-            sprintf('Product\'s slug should be %s.', $slug)
+        Assert::same(
+            $this->updateSimpleProductPage->getSlug($locale),
+            $slug,
+            'Expected slug %2$s, but found %s.'
         );
     }
 
@@ -929,6 +935,18 @@ final class ManagingProductsContext implements Context
     public function iSetThePositionOfTo($productName, $position)
     {
         $this->indexPerTaxonPage->setPositionOfProduct($productName, (int) $position);
+    }
+
+    /**
+     * @Then this product should( still) have slug :value in :language
+     */
+    public function thisProductElementShouldHaveSlugIn($slug, $language)
+    {
+        Assert::same(
+            $this->updateSimpleProductPage->getSlug($language),
+            $slug,
+            'Expected slug %2$s, but found %s.'
+        );
     }
 
     /**

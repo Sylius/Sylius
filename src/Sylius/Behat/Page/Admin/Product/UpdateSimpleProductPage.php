@@ -34,11 +34,10 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
      */
     public function nameItIn($name, $localeCode)
     {
-        $this->getDocument()->fillField(
-            sprintf('sylius_product_translations_%s_name', $localeCode), $name
-        );
+        $this->activateLanguageTab($localeCode);
+        $this->getElement('name', ['%locale%' => $localeCode])->setValue($name);
 
-        $this->waitForSlugGenerationIfNecessary();
+        $this->waitForSlugGenerationIfNecessary($localeCode);
     }
 
     /**
@@ -115,6 +114,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     public function isTracked()
     {
         return $this->getElement('tracked')->isChecked();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function enableSlugModification($locale)
+    {
+        $this->getElement('toggle_slug_modification_button', ['%locale%' => $locale])->press();
     }
 
     /**
@@ -204,9 +211,9 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function isSlugReadOnly()
+    public function isSlugReadOnlyIn($locale)
     {
-        return 'readonly' === $this->getElement('slug')->getAttribute('readonly');
+        return 'readonly' === $this->getElement('slug', ['%locale%' => $locale])->getAttribute('readonly');
     }
 
     /**
@@ -301,6 +308,53 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function getSlug($locale)
+    {
+        $this->activateLanguageTab($locale);
+
+        return $this->getElement('slug', ['%locale%' => $locale])->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifySlugIn($slug, $locale)
+    {
+        $this->activateLanguageTab($locale);
+
+        $this->getElement('slug', ['%locale%' => $locale])->setValue($slug);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function activateLanguageTab($locale)
+    {
+        if (!$this->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
+        $languageTabTitle = $this->getElement('language_tab', ['%locale%' => $locale]);
+        if (!$languageTabTitle->hasClass('active')) {
+            $languageTabTitle->click();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getElement($name, array $parameters = [])
+    {
+        if (!isset($parameters['%locale%'])) {
+            $parameters['%locale%'] = 'en_US';
+        }
+
+        return parent::getElement($name, $parameters);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');
@@ -318,15 +372,17 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'attribute' => '.attribute .label:contains("%attribute%") ~ input',
             'code' => '#sylius_product_code',
             'images' => '#sylius_product_images',
-            'name' => '#sylius_product_translations_en_US_name',
+            'language_tab' => '[data-locale="%locale%"] .title',
+            'name' => '#sylius_product_translations_%locale%_name',
             'price' => '#sylius_product_variant_price',
             'pricing_configuration' => '#sylius_calculator_container',
             'search' => '.ui.fluid.search.selection.dropdown',
             'search_item_selected' => 'div.menu > div.item.selected',
-            'slug' => '#sylius_product_translations_en_US_slug',
+            'slug' => '#sylius_product_translations_%locale%_slug',
             'tab' => '.menu [data-tab="%name%"]',
             'taxonomy' => 'a[data-tab="taxonomy"]',
             'tracked' => '#sylius_product_variant_tracked',
+            'toggle_slug_modification_button' => '[data-locale="%locale%"] .toggle-product-slug-modification',
         ]);
     }
 
@@ -406,13 +462,16 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         return reset($imageElements);
     }
 
-    private function waitForSlugGenerationIfNecessary()
+    /**
+     * @param string $locale
+     */
+    private function waitForSlugGenerationIfNecessary($locale)
     {
         if (!$this->getDriver() instanceof Selenium2Driver) {
             return;
         }
 
-        $slugElement = $this->getElement('slug');
+        $slugElement = $this->getElement('slug', ['%locale%' => $locale]);
         if ($slugElement->hasAttribute('readonly')) {
             return;
         }

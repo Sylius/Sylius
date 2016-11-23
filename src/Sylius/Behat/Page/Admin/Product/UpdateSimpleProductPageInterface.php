@@ -31,7 +31,7 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     /**
      * @return bool
      */
-    public function isSlugReadOnly();
+    public function isSlugReadOnlyIn($locale);
     
     /**
      * @param int $price
@@ -78,6 +78,11 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isTracked();
+
+    /**
+     * @param string $locale
+     */
+    public function enableSlugModification($locale);
 
     /**
      * @param string $code
@@ -149,4 +154,22 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @return string
      */
     public function getPricingConfigurationForChannelAndCurrencyCalculator(ChannelInterface $channel, CurrencyInterface $currency);
+
+    /**
+     * @param string $locale
+     */
+    public function activateLanguageTab($locale);
+
+    /**
+     * @param string $locale
+     *
+     * @return string
+     */
+    public function getSlug($locale);
+
+    /**
+     * @param string $slug
+     * @param string $locale
+     */
+    public function specifySlugIn($slug, $locale);
 }
