@@ -75,4 +75,14 @@ interface PaymentMethodInterface extends
      * @param string $environment
      */
     public function setEnvironment($environment);
+
+    /**
+     * @return int
+     */
+    public function getPosition();
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position);
 }

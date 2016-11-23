@@ -7,7 +7,7 @@
     {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'select_payment'} %}
     <div class="ui stackable grid">
         <div class="eleven wide column">
-            <div class="ui padded segment" id="shipping_methods">
+            <div class="ui padded segment" id="payment_methods">
                 {{ form_start(form, {'action': path('sylius_shop_checkout_select_payment'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
                 <input type="hidden" name="_method" value="PUT" />
                 {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}

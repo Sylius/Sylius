@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -32,6 +33,10 @@ class PaymentMethodType extends AbstractResourceType
             ])
             ->add('gateway', 'sylius_payment_gateway_choice', [
                 'label' => 'sylius.form.payment_method.gateway',
+            ])
+            ->add('position', IntegerType::class, [
+                'required' => false,
+                'label' => 'sylius.form.shipping_method.position',
             ])
             ->add('enabled', 'checkbox', [
                 'required' => false,
