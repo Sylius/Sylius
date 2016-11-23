@@ -9,12 +9,6 @@ config = [
     argv.nodeModulesPath || '../../../../node_modules/'
 ];
 
-gulp.task('ui', function() {
-    gulp.src('src/Sylius/Bundle/UiBundle/Gulpfile.js', { read: false })
-        .pipe(chug({ args: config }))
-    ;
-});
-
 gulp.task('admin', function() {
     gulp.src('src/Sylius/Bundle/AdminBundle/Gulpfile.js', { read: false })
         .pipe(chug({ args: config }))
@@ -27,4 +21,4 @@ gulp.task('shop', function() {
     ;
 });
 
-gulp.task('default', ['ui', 'admin', 'shop']);
+gulp.task('default', ['admin', 'shop']);

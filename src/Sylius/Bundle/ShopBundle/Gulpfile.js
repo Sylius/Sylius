@@ -13,21 +13,32 @@ var argv = require('yargs').argv;
 
 var rootPath = argv.rootPath;
 var shopRootPath = rootPath + 'shop/';
-var resourcePath = argv.resourcePath || '';
+var vendorPath = argv.vendorPath || '';
+var vendorShopPath = '' === vendorPath ? '' : vendorPath + 'ShopBundle/';
+var vendorUiPath = '' === vendorPath ? '../UiBundle/' : vendorPath + 'UiBundle/';
+var nodeModulesPath = argv.nodeModulesPath;
 
 var paths = {
     shop: {
         js: [
-            resourcePath + 'Resources/private/js/**'
+            nodeModulesPath + 'jquery/dist/jquery.min.js',
+            nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            vendorUiPath + 'Resources/private/js/**',
+            vendorShopPath + 'Resources/private/js/**'
         ],
         sass: [
-            resourcePath + 'Resources/private/sass/**'
+            vendorUiPath + 'Resources/private/sass/**',
+            vendorShopPath + 'Resources/private/sass/**'
         ],
         css: [
-            resourcePath + 'Resources/private/css/**'
+            nodeModulesPath + 'semantic-ui-css/semantic.min.css',
+            vendorUiPath + 'Resources/private/css/**',
+            vendorShopPath + 'Resources/private/css/**',
+            vendorShopPath + 'Resources/private/scss/**'
         ],
         img: [
-            resourcePath + 'Resources/private/img/**'
+            vendorUiPath + 'Resources/private/img/**',
+            vendorShopPath + 'Resources/private/img/**'
         ]
     }
 };
@@ -42,6 +53,8 @@ gulp.task('shop-js', function () {
 });
 
 gulp.task('shop-css', function() {
+    gulp.src([nodeModulesPath+'semantic-ui-css/themes/**/*']).pipe(gulp.dest(shopRootPath + 'css/themes/'));
+
     var cssStream = gulp.src(paths.shop.css)
             .pipe(concat('css-files.css'))
         ;

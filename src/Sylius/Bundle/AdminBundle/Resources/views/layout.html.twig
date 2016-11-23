@@ -3,7 +3,6 @@
 {% block title %}Sylius | {% endblock %}
 
 {% block stylesheets %}
-    {{ parent() }}
     {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
 {% endblock %}
 
@@ -40,6 +39,5 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
     {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
 {% endblock %}

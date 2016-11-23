@@ -13,21 +13,31 @@ var argv = require('yargs').argv;
 
 var rootPath = argv.rootPath;
 var adminRootPath = rootPath + 'admin/';
-var resourcePath = argv.resourcePath || '';
+var vendorPath = argv.vendorPath || '';
+var vendorAdminPath = '' === vendorPath ? '' : vendorPath + 'AdminBundle/';
+var vendorUiPath = '' === vendorPath ? '../UiBundle/' : vendorPath + 'UiBundle/';
+var nodeModulesPath = argv.nodeModulesPath;
 
 var paths = {
     admin: {
         js: [
-            resourcePath + 'Resources/private/js/**'
+            nodeModulesPath + 'jquery/dist/jquery.min.js',
+            nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            vendorUiPath + 'Resources/private/js/**',
+            vendorAdminPath + 'Resources/private/js/**'
         ],
         sass: [
-            resourcePath + 'Resources/private/sass/**'
+            vendorUiPath + 'Resources/private/sass/**',
+            vendorAdminPath + 'Resources/private/sass/**'
         ],
         css: [
-            resourcePath + 'Resources/private/css/**'
+            nodeModulesPath + 'semantic-ui-css/semantic.min.css',
+            vendorUiPath + 'Resources/private/css/**',
+            vendorAdminPath + 'Resources/private/css/**'
         ],
         img: [
-            resourcePath + 'Resources/private/img/**'
+            vendorUiPath + 'Resources/private/img/**',
+            vendorAdminPath + 'Resources/private/img/**'
         ]
     }
 };
@@ -42,6 +52,8 @@ gulp.task('admin-js', function () {
 });
 
 gulp.task('admin-css', function() {
+    gulp.src([nodeModulesPath+'semantic-ui-css/themes/**/*']).pipe(gulp.dest(adminRootPath + 'css/themes/'));
+
     var cssStream = gulp.src(paths.admin.css)
         .pipe(concat('css-files.css'))
     ;
