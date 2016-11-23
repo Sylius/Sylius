@@ -21,8 +21,9 @@
         </div>
     </h1>
 
-    {% set lastNewPayment = order.getLastNewPayment() %}
+    {% include '@SyliusShop/Common/Order/_summary.html.twig' %}
 
+    {% set lastNewPayment = order.getLastNewPayment() %}
     {% if order.paymentState not in ['paid', 'cancelled'] %}
         {{ render(url('sylius_shop_partial_payment_change_method', {'id': lastNewPayment.id} )) }}
     {% endif %}
