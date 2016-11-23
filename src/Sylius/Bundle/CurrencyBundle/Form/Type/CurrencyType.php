@@ -30,9 +30,6 @@ class CurrencyType extends AbstractResourceType
             ->add('exchangeRate', 'number', [
                 'label' => 'sylius.form.currency.exchange_rate',
             ])
-            ->add('enabled', 'checkbox', [
-                'label' => 'sylius.form.currency.enabled',
-            ])
             ->addEventSubscriber(new AddCodeFormSubscriber('currency', 'sylius.form.currency.code'))
         ;
     }

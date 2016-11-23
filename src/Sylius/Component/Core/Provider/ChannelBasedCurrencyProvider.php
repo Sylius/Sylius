@@ -47,9 +47,6 @@ final class ChannelBasedCurrencyProvider implements CurrencyProviderInterface
 
             return $channel
                 ->getCurrencies()
-                ->filter(function (CurrencyInterface $currency) {
-                    return $currency->isEnabled();
-                })
                 ->map(function (CurrencyInterface $currency) {
                     return $currency->getCode();
                 })

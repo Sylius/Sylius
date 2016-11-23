@@ -68,8 +68,7 @@ class CurrencyApiTest extends JsonApiTestCase
 <<<EOT
         {
             "code": "USD",
-            "exchangeRate": 1,
-            "enabled": true
+            "exchangeRate": 1
         }
 EOT;
 
@@ -167,8 +166,7 @@ EOT;
 <<<EOT
         {
             "code": "EUR",
-            "exchangeRate": 1.0000,
-            "enabled": false
+            "exchangeRate": 1.0000
         }
 EOT;
 
@@ -201,8 +199,7 @@ EOT;
         $data =
 <<<EOT
         {
-            "exchangeRate": 1,
-            "enabled": false
+            "exchangeRate": 1
         }
 EOT;
 

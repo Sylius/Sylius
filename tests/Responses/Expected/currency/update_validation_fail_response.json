@@ -8,8 +8,7 @@
                 "errors": [
                     "Please enter exchange rate."
                 ]
-            },
-            "enabled": []
+            }
         }
     }
 }

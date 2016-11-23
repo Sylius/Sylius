@@ -36,7 +36,7 @@ final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
      */
     public function currencies_can_be_set()
     {
-       $this->assertConfigurationIsValid([['currencies' => ['EUR' => true, 'USD' => false, 'PLN' => true]]], 'currencies');
+       $this->assertConfigurationIsValid([['currencies' => ['EUR', 'USD', 'PLN']]], 'currencies');
     }
 
     /**
