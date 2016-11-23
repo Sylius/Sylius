@@ -202,6 +202,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
         ;
 
         $configuration
+            ->addChild('shipping_categories', ['route' => 'sylius_admin_shipping_category_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.shipping_categories')
+            ->setLabelAttribute('icon', 'list layout')
+        ;
+
+        $configuration
             ->addChild('tax_categories', ['route' => 'sylius_admin_tax_category_index'])
             ->setLabel('sylius.menu.admin.main.configuration.tax_categories')
             ->setLabelAttribute('icon', 'tags')

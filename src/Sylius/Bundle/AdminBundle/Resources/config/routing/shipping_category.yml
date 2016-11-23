@@ -1,0 +1,17 @@
+sylius_admin_shipping_category:
+    resource: |
+        alias: sylius.shipping_category
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show']
+        redirect: update
+        grid: sylius_admin_shipping_category
+        permission: true
+        vars:
+          all:
+              subheader: sylius.ui.manage_shipping_categories_for_your_store
+              templates:
+                  form: SyliusAdminBundle:ShippingCategory:_form.html.twig
+          index:
+              icon: list layout
+    type: sylius.resource

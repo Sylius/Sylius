@@ -1,0 +1,41 @@
+sylius_grid:
+    grids:
+        sylius_admin_shipping_category:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.shipping_category.class%"
+                    repository:
+                        method: createListQueryBuilder
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                createdAt:
+                    type: datetime
+                    label: sylius.ui.creation_date
+                    options:
+                        format: d-m-Y H:i
+                updatedAt:
+                    type: datetime
+                    label: sylius.ui.updating_date
+                    options:
+                        format: d-m-Y H:i
+            filters:
+                search:
+                    type: string
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, name]
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
