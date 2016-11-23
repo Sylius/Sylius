@@ -85,6 +85,15 @@
             <argument type="service" id="sylius.custom_factory.address.inner" />
         </service>
 
+        <service id="sylius.provider.product_variants_prices" class="Sylius\Component\Core\Provider\ProductVariantsPricesProvider">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+        </service>
+
+        <service id="sylius.twig.extension.product_variants_prices" class="Sylius\Bundle\CoreBundle\Twig\ProductVariantsPricesExtension" public="false">
+            <argument type="service" id="sylius.templating.helper.product_variants_prices" />
+            <tag name="twig.extension" />
+        </service>
+
         <service id="sylius.unique_id_based_order_token_assigner" class="Sylius\Component\Core\TokenAssigner\UniqueIdBasedOrderTokenAssigner" />
 
         <service id="sylius.customer_unique_address_adder" class="Sylius\Component\Core\Customer\CustomerUniqueAddressAdder">

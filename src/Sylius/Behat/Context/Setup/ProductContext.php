@@ -187,18 +187,41 @@ final class ProductContext implements Context
      * @Given the store has a :productName product
      * @Given I added a product :productName
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
+     * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/
      */
-    public function storeHasAProductPricedAt($productName, $price = 0)
+    public function storeHasAProductPricedAt($productName, $price = 0, ChannelInterface $channel = null)
     {
-        $product = $this->createProduct($productName, $price);
+        $product = $this->createProduct($productName, $price, null, $channel);
 
         $product->setDescription('Awesome '.$productName);
 
-        if ($this->sharedStorage->has('channel')) {
+        if (null !== $channel) {
+            $product->addChannel($channel);
+        } else if ($this->sharedStorage->has('channel')) {
             $product->addChannel($this->sharedStorage->get('channel'));
         }
 
         $this->saveProduct($product);
+    }
+
+    /**
+     * @Given /^(this product) is also priced at ("[^"]+") in ("[^"]+" channel)$/
+     */
+    public function thisProductIsAlsoPricedAtInChannel(ProductInterface $product, $price, ChannelInterface $channel)
+    {
+        $product->addChannel($channel);
+
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $this->channelPricingFactory->createNew();
+        $channelPricing->setPrice($price);
+        $channelPricing->setChannel($channel);
+
+        $productVariant->addChannelPricing($channelPricing);
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -728,11 +751,12 @@ final class ProductContext implements Context
     /**
      * @param string $productName
      * @param int $price
-     * @param string $date
+     * @param string|null $date
+     * @param ChannelInterface|null $channel
      *
      * @return ProductInterface
      */
-    private function createProduct($productName, $price = 0, $date = null)
+    private function createProduct($productName, $price = 0, $date = null, ChannelInterface $channel = null)
     {
         /** @var ProductInterface $product */
         $product = $this->productFactory->createWithVariant();
@@ -748,7 +772,7 @@ final class ProductContext implements Context
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
         $channelPricing->setPrice($price);
-        $channelPricing->setChannel($this->sharedStorage->get('channel'));
+        $channelPricing->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
 
         $productVariant->addChannelPricing($channelPricing);
         $productVariant->setCode($product->getCode());
