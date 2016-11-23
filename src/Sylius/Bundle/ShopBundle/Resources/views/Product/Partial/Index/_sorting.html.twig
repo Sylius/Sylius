@@ -1,8 +1,13 @@
 {% set definition = resources.definition %}
 
-{% set default_path = path('sylius_shop_taxon_show', {'slug': resources.parameters.get('slug'), 'criteria': app.request.query.get('criteria')}) %}
-{% set oldest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'asc'}, 'slug': resources.parameters.get('slug'), 'criteria': app.request.query.get('criteria')}) %}
-{% set newest_first_path = path('sylius_shop_taxon_show', {'sorting': {'createdAt': 'desc'}, 'slug': resources.parameters.get('slug'), 'criteria': app.request.query.get('criteria')}) %}
+{% set route = app.request.query.get('route') %}
+{% set route_parameters = app.request.query.get('route_parameters') %}
+
+{% set criteria = app.request.query.get('criteria', {}) %}
+
+{% set default_path = path(route, {'criteria': criteria}|merge(route_parameters)) %}
+{% set oldest_first_path = path(route, {'sorting': {'createdAt': 'asc'}, 'criteria': criteria}|merge(route_parameters)) %}
+{% set newest_first_path = path(route, {'sorting': {'createdAt': 'desc'}, 'criteria': criteria}|merge(route_parameters)) %}
 
 {% if app.request.query.get('sorting') is empty %}
     {% set current_sorting_label = 'sylius.ui.by_position'|trans|lower %}

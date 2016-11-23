@@ -1,0 +1,23 @@
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+{% import '@SyliusUi/Macro/pagination.html.twig' as pagination %}
+
+{% include '@SyliusShop/Product/Partial/Index/_search.html.twig' %}
+{% include '@SyliusShop/Product/Partial/Index/_sorting.html.twig' %}
+
+{% if resources.data|length > 0 %}
+    <div class="ui three column stackable grid" id="products">
+        {% for product in resources.data %}
+            <div class="column">
+                {% include '@SyliusShop/Product/_simpleBox.html.twig' %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="ui hidden divider"></div>
+    {{ pagination.simple(
+        resources.data,
+        app.request.query.get('route', app.request.attributes.get('_route')),
+        app.request.query.get('route_parameters', app.request.attributes.get('_route_params'))
+    ) }}
+{% else %}
+    {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
+{% endif %}

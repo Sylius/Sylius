@@ -1,8 +1,8 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_shop_partial_cart_summary:
-    path: /
+sylius_shop_partial_cart_widget:
+    path: /widget
     methods: [GET]
     defaults:
         _controller: sylius.controller.order:summaryAction

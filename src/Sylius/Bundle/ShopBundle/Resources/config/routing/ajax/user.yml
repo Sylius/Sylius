@@ -6,6 +6,7 @@ sylius_shop_ajax_user_check_action:
     methods: [GET]
     defaults:
         _controller: sylius.controller.shop_user:showAction
+        _format: json
         _sylius:
             repository:
                 method: findOneByEmail

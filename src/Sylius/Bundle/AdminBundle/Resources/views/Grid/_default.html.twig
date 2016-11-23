@@ -1,5 +1,4 @@
 {% import 'SyliusUiBundle:Macro:pagination.html.twig' as pagination %}
-
 {% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
 {% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
 {% import 'SyliusUiBundle:Macro:table.html.twig' as table %}
@@ -29,7 +28,7 @@
 {% endif %}
 
 <div class="ui segment">
-    {{ pagination.render(data) }}
+    {{ pagination.simple(data) }}
     {% if data|length > 0 %}
         <table class="ui sortable stackable celled table">
             <thead>
@@ -48,5 +47,5 @@
     {% else %}
         {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
     {% endif %}
-    {{ pagination.render(data) }}
+    {{ pagination.simple(data) }}
 </div>

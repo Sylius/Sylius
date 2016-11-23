@@ -7,10 +7,10 @@
         {{ address.phoneNumber }}<br/>
     {% endif %}
     {{ address.street }}<br/>
-    {{ address.city }}<br/>
+    {{ address.city }}, {{ address.postcode }}<br/>
     {% if address|sylius_province_name is not empty %}
         {{ address|sylius_province_name }}<br/>
     {% endif %}
     <i class="{{ address.countryCode|lower }} flag"></i>
-    {{ address.countryCode|sylius_country_name|upper }} {{ address.postcode }}
+    {{ address.countryCode|sylius_country_name|upper }}
 </address>

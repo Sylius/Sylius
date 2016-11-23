@@ -12,9 +12,6 @@
                 <h4 class="ui dividing header">{{ 'sylius.ui.registered_customers'|trans }}</h4>
                 <p>{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
                 {{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-                    {% if last_error %}
-                        {{ messages.error(last_error.messageKey|trans(last_error.messageData, 'security')) }}
-                    {% endif %}
                     {% include '@SyliusShop/Login/_form.html.twig' %}
                     <button type="submit" class="ui blue submit button">{{ 'sylius.ui.login'|trans }}</button>
                     <a href="{{ path('sylius_shop_request_password_reset_token') }}" class="ui right floated button">{{ 'sylius.ui.forgot_password'|trans }}</a>
@@ -23,11 +20,7 @@
             <div class="ui hidden vertical divider">
             </div>
             <div class="column">
-                <h4 class="ui dividing header">{{ 'sylius.ui.new_customers'|trans }}</h4>
-                <a href="{{ path('sylius_shop_register') }}" class="ui big green labeled icon fluid button">
-                    <i class="signup icon"></i>
-                    {{ 'sylius.ui.create_an_account'|trans }}
-                </a>
+                {% include '@SyliusShop/Login/_register.html.twig' %}
             </div>
         </div>
     </div>

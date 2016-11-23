@@ -4,8 +4,6 @@
 sylius_shop_ajax:
     resource: "@SyliusShopBundle/Resources/config/routing/ajax.yml"
     prefix: /ajax
-    defaults:
-        _format: json
 
 sylius_shop_partial:
     resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"

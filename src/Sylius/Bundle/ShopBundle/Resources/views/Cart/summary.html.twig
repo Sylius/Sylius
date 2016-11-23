@@ -14,7 +14,6 @@
         {{ messages.info('sylius.ui.your_cart_is_empty'|trans) }}
     {% else %}
         {% include '@SyliusShop/Cart/Summary/_header.html.twig' %}
-        <div class="ui hidden divider"></div>
         <div class="ui stackable grid">
             <div class="eleven wide column">
                 {% include '@SyliusShop/Cart/Summary/_items.html.twig' %}

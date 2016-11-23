@@ -6,6 +6,7 @@ sylius_shop_ajax_cart_item_add:
     methods: [POST]
     defaults:
         _controller: sylius.controller.order_item:addAction
+        _format: json
         _sylius:
             factory:
                 method: createForProduct

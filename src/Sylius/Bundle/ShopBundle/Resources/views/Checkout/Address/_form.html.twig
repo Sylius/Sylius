@@ -1,5 +1,5 @@
 <div id="sylius-shipping-address">
-    {% include '@SyliusShop/Checkout/_addressBookSelect.html.twig' %}
+    {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
     <h3 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h3>
     {% if form.customer.email is defined %}
         <div class="one field" id="sylius-api-login">
@@ -21,7 +21,7 @@
 
 <div id="sylius-billing-address">
     <div class="ui hidden divider"></div>
-    {% include '@SyliusShop/Checkout/_addressBookSelect.html.twig' %}
+    {% include '@SyliusShop/Checkout/Address/_addressBookSelect.html.twig' %}
     <h3 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h3>
     {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form.billingAddress, 'order': order} %}
 </div>

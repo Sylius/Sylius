@@ -5,7 +5,7 @@
 {{ form_row(form.company) }}
 {{ form_row(form.street) }}
 
-{% include '@SyliusShop/Common/Form/_countryCode.html.twig' with { 'countryCode': form.countryCode } %}
+{% include '@SyliusShop/Common/Form/_countryCode.html.twig' with {'form': form.countryCode} %}
 
 <div class="province-container field" data-url="{{ path('sylius_shop_ajax_render_province_form') }}">
     {% if form.provinceCode is defined %}

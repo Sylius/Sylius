@@ -38,6 +38,7 @@ class ProvinceController extends ResourceController
     public function choiceOrTextFieldFormAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
         if (!$configuration->isHtmlRequest() || null === $countryCode = $request->query->get('countryCode')) {
             throw new AccessDeniedException();
         }

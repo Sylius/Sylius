@@ -8,12 +8,14 @@
 
     <div class="ui stackable grid">
         <div class="eleven wide column">
-            <div class="ui padded segment" id="payment_methods">
+            <div class="ui padded segment" id="sylius-payment-methods">
                 {{ form_start(form, {'action': path('sylius_shop_checkout_select_payment'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
                     <input type="hidden" name="_method" value="PUT" />
+
                     {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
                     <div class="ui hidden divider"></div>
                     {% include '@SyliusShop/Checkout/SelectPayment/_navigation.html.twig' %}
+
                     {{ form_row(form._token) }}
                 {{ form_end(form, {'render_rest': false}) }}
             </div>

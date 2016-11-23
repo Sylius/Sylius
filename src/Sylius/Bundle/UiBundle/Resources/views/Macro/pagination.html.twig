@@ -1,20 +1,7 @@
-{% macro render(paginator, options)  %}
+{% macro simple(paginator, options)  %}
+    {% import _self as pagination %}
+
     {% if paginator.haveToPaginate() %}
-        <div class="ui stackable fluid pagination menu">
-            <div class="item">
-                <form method="get" action="{{ path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')|merge(app.request.query.all)) }}">
-                    <div class="ui action input">
-                        <input type="text" name="page" placeholder="{{ 'sylius.ui.jump_to_page'|trans }}..." required="required">
-                        <button type="submit" class="ui button">{{ 'sylius.ui.go'|trans }}</button>
-                    </div>
-                </form>
-            </div>
-            <div class="item">
-                {{ 'sylius.ui.total_records'|trans }}: {{ paginator.nbResults }}.
-            </div>
-            <div class="item">
-                {{ pagerfanta(paginator, 'semantic_ui_translated', options|default({})) }}
-            </div>
-        </div>
+        {{ pagerfanta(paginator, 'semantic_ui_translated', options|default({})) }}
     {% endif %}
 {% endmacro %}

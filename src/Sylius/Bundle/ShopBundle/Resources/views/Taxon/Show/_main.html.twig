@@ -1,0 +1,11 @@
+{{ render(url('sylius_shop_partial_product_index_by_taxon', {
+    'taxonId': taxon.id,
+    'template': '@SyliusShop/Product/Partial/_index.html.twig',
+
+    'route': 'sylius_shop_taxon_show',
+    'route_parameters': {'slug': taxon.slug},
+
+    'page': app.request.query.get('page', 1),
+    'sorting': app.request.query.get('sorting'),
+    'criteria': app.request.query.get('criteria')
+})) }}

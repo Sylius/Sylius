@@ -5,15 +5,18 @@
 {% block content %}
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'select_shipping'} %}
+
     <div class="ui stackable grid">
         <div class="eleven wide column">
-            <div class="ui padded segment" id="shipping_methods">
+            <div class="ui padded segment" id="sylius-shipping-methods">
                 {{ form_start(form, {'action': path('sylius_shop_checkout_select_shipping'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-                <input type="hidden" name="_method" value="PUT" />
+                    <input type="hidden" name="_method" value="PUT" />
 
-                {% include '@SyliusShop/Checkout/SelectShipping/_form.html.twig' %}
+                    {% include '@SyliusShop/Checkout/SelectShipping/_form.html.twig' %}
+                    <div class="ui hidden divider"></div>
+                    {% include '@SyliusShop/Checkout/SelectShipping/_navigation.html.twig' %}
 
-                {{ form_row(form._token) }}
+                    {{ form_row(form._token) }}
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>

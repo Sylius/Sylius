@@ -624,6 +624,7 @@ sylius:
         recent_customers: 'Recent customers'
         recent_orders: 'Recent orders'
         recent_users: 'Recent users'
+        records: 'Records'
         refund: 'Refund'
         refunded: 'Refunded'
         register: 'Register'
