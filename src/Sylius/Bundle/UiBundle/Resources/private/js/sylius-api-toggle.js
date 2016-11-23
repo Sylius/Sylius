@@ -22,7 +22,6 @@
             }
 
             element.api({
-                action: apiSettings.action,
                 method: apiSettings.method,
                 dataType: apiSettings.dataType || 'json',
                 throttle: apiSettings.throttle || 0,

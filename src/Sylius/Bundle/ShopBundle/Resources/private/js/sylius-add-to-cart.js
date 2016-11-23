@@ -23,6 +23,7 @@
 
         var data = $(element).serialize();
         var href = $(element).attr('action');
+        var redirectUrl = $(element).data('redirect');
 
         $.ajax({
             type: "POST",
@@ -41,7 +42,7 @@
                         refresh(this, event);
                     });
                 } else {
-                    window.location.replace($.fn.api.settings.api.cart);
+                    window.location.replace(redirectUrl);
                 }
             }
         })

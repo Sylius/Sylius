@@ -26,7 +26,6 @@
         });
 
         $('#sylius_checkout_address_customer_email').apiToggle({
-            action: 'user check',
             dataType: 'json',
             method: 'GET',
             throttle: 1500,
@@ -45,7 +44,6 @@
         }, $('#sylius-api-login-form'));
 
         $('#sylius-api-login').apiLogin({
-            action: 'login check',
             method: 'POST',
             throttle: 500
         });
