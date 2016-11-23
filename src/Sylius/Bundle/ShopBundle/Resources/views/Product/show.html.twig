@@ -10,6 +10,7 @@
     </div>
     <div class="column">
         {% include '@SyliusShop/Product/Show/_header.html.twig' %}
+        {% include '@SyliusShop/Product/Show/_reviews.html.twig' %}
         <div class="ui stackable grid">
             <div class="four wide column">
                 {% if not product.variants.empty() %}
@@ -24,19 +25,12 @@
             <p>{{ product.shortDescription }}</p>
         </div>
         {% if product.isConfigurable() and product.getVariantSelectionMethod() == 'match' and not product.variants.empty() %}
-            {% include '@SyliusShop/Product/Show/_variantsPrices.html.twig' with { 'variantsPrices': sylius_product_variant_prices(product, shopperContext.channel) } %}
+            {% include '@SyliusShop/Product/Show/_variantsPricing.html.twig' with {'pricing': sylius_product_variant_prices(product, sylius.channel)} %}
         {% endif %}
         {% include '@SyliusShop/Product/Show/_inventory.html.twig' %}
         <div class="ui hidden divider"></div>
     </div>
 </div>
-
-<div class="ui hidden divider"></div>
-
-<div class="ui top attached large tabular menu">
-    {% include '@SyliusShop/Product/Show/_menu.html.twig' %}
-</div>
 {% include '@SyliusShop/Product/Show/_tabs.html.twig' %}
-
 {% include '@SyliusShop/Product/Show/_associations.html.twig' %}
 {% endblock %}

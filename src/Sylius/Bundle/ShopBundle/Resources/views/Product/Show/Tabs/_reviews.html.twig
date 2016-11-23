@@ -1,5 +1,5 @@
 <div class="ui bottom attached tab segment" data-tab="reviews">
-    {{ render(url('sylius_shop_partial_product_review_latest', {'productId': product.id, 'template': '@SyliusShop/Product/_reviews.html.twig'})) }}
+    {{ render(url('sylius_shop_partial_product_review_latest', {'productId': product.id, 'template': '@SyliusShop/ProductReview/Partial/_index.html.twig'})) }}
 
     <a href="{{ path('sylius_shop_product_review_index', {'slug': product.slug}) }}">
         <div class="ui labeled icon button"><i class="icon list"></i> {{ 'sylius.ui.view_more'|trans }}</div>

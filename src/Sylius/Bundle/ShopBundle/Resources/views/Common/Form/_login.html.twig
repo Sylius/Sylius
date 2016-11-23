@@ -1,0 +1,13 @@
+<div class="one field" id="sylius-api-login">
+    {{ form_errors(form.email) }}
+    {{ form_row(form.email, {'attr': {'data-url': path('sylius_shop_ajax_user_check_action')}}) }}
+
+    <div class="ui action input" id="sylius-api-login-form">
+        <input type="password" placeholder="{{ 'sylius.ui.password'|trans }}">
+        <a class="ui blue button" href="#" id="sylius-api-login-submit" data-url="{{ path('sylius_shop_login_check') }}">
+            {{ 'sylius.ui.sign_in'|trans }}
+        </a>
+    </div>
+    <div class="ui red fluid top pointing basic label sylius-validation-error" id="sylius-api-validation-error">
+    </div>
+</div>

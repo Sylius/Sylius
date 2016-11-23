@@ -12,7 +12,7 @@
 
     $.fn.extend({
         variantPrices: function () {
-            if ($('#variantsPrices').length > 0) {
+            if ($('#sylius-variants-pricing').length > 0) {
                 handleProductOptionsChange();
             } else if ($("#sylius-product-variants").length > 0) {
                 handleProductVariantsChange();
@@ -34,7 +34,7 @@ function handleProductOptionsChange() {
         if ($price !== undefined) {
             $('#product-price').text($price);
         } else {
-            $('#product-price').text($('#variantsPrices').attr('data-unavailable-text'));
+            $('#product-price').text($('sylius-variants-pricing').attr('data-unavailable-text'));
         }
     });
 }

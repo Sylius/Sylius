@@ -15,7 +15,7 @@ sylius_shop_partial_product_index_latest:
                     - $count
 
 sylius_shop_partial_product_index_by_taxon:
-    path: /{taxonId}
+    path: /by-taxon/{taxonId}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:indexAction

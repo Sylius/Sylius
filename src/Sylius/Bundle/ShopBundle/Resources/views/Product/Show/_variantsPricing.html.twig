@@ -1,0 +1,5 @@
+<div id="sylius-variants-pricing" data-unavailable-text="{{ 'sylius.ui.unavailable'|trans }}">
+    {% for price in pricing %}
+        <div {% for option, value in price %}data-{{ option }}="{% if option == 'value' %}{{ value|sylius_price }}{% else %}{{ value }}{% endif %}" {% endfor %}></div>
+    {% endfor %}
+</div>

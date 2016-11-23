@@ -1,7 +1,7 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 <div class="ui segment">
-    <table class="ui very basic table" id="checkout-subtotal">
+    <table class="ui very basic table" id="sylius-checkout-subtotal">
         <thead>
         <tr>
             <th class="sylius-table-column-item">{{ 'sylius.ui.item'|trans }}</th>
@@ -16,7 +16,7 @@
                 <td class="center aligned">
                     {{ item.quantity }}
                 </td>
-                <td id="item-{{ item.getVariant.product.slug }}-subtotal">{{ money.convertAndFormat(item.subtotal) }}</td>
+                <td id="sylius-item-{{ item.getVariant.product.slug }}-subtotal">{{ money.convertAndFormat(item.subtotal) }}</td>
             </tr>
         {% endfor %}
         </tbody>

@@ -2,18 +2,20 @@
 
 {% block content %}
     <div class="ui hidden divider"></div>
-
     <div class="ui stackable grid" id="reviews">
         <div class="four wide column">
             {{
                 render(url('sylius_shop_partial_product_show', {
                     'slug': app.request.attributes.get('slug'),
-                    'template': '@SyliusShop/Product/_simpleBox.html.twig'
+                    'template': '@SyliusShop/Product/Partial/_show.html.twig'
                 }))
             }}
         </div>
         <div class="twelve wide column">
-            {% include '@SyliusShop/Product/_reviews.html.twig' %}
+            {% include '@SyliusShop/ProductReview/Partial/_index.html.twig' %}
+            <a href="{{ path('sylius_shop_product_review_create', {'slug': app.request.get('slug')}) }}">
+                <div class="ui blue labeled icon button"><i class="icon plus"></i> {{ 'sylius.ui.add_your_review'|trans }}</div>
+            </a>
         </div>
     </div>
 {% endblock %}

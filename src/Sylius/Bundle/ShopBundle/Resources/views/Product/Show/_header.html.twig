@@ -1,8 +1,1 @@
 <h1 id="sylius-product-name" class="ui monster dividing header">{{ product.name }}</h1>
-<div class="ui text menu">
-    <div class="item">
-        <div id="average-rating" class="ui star large rating" data-rating="{{ product.averageRating|round }}" data-max-rating="5" data-average-rating="{{ product.averageRating|round(2) }}" style="pointer-events: none;"></div>
-    </div>
-    <a href="{{ path('sylius_shop_product_review_index', {'slug': product.slug}) }}" class="item">{{ product.acceptedReviews|length }} {{ 'sylius.ui.reviews'|trans }}</a>
-    <a href="{{ path('sylius_shop_product_review_create', {'slug': product.slug}) }}" class="item">{{ 'sylius.ui.add_your_review'|trans }}</a>
-</div>

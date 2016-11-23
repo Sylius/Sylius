@@ -43,6 +43,8 @@ sylius_grid:
                     label: sylius.ui.title
             actions:
                 item:
+                    update:
+                        type: update
                     accept:
                         type: apply_transition
                         label: sylius.ui.accept
@@ -67,7 +69,5 @@ sylius_grid:
                             class: yellow
                             transition: reject
                             graph: sylius_product_review
-                    update:
-                        type: update
                     delete:
                         type: delete

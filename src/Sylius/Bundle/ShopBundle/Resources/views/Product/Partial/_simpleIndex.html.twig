@@ -2,7 +2,7 @@
     <div class="row">
         {% for product in products %}
             <div class="column">
-                {% include '@SyliusShop/Product/_simpleBox.html.twig' %}
+                {% include '@SyliusShop/Product/Partial/_show.html.twig' %}
             </div>
     {% if 0 == loop.index % 4 %}
     </div>

@@ -1,0 +1,31 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+
+{% set product = product_review.reviewSubject %}
+
+{% block content %}
+    <div class="ui hidden divider"></div>
+    <div class="ui stackable grid" id="reviews">
+        <div class="four wide column">
+            {% include '@SyliusShop/Product/Partial/_show.html.twig' %}
+        </div>
+        <div class="twelve wide column">
+            <div class="ui segment">
+                <div class="ui dividing header">
+                    {{ 'sylius.ui.write_your_own_review'|trans }}
+                    <div class="sub header">
+                        {{ 'sylius.ui.you_are_reviewing'|trans }} <strong>{{ product.name }}</strong>.
+                    </div>
+                </div>
+                {{ form_start(form, {'action': path('sylius_shop_product_review_create', {'slug': product.slug}), 'attr': {'class': 'ui loadable reply form', 'novalidate': 'novalidate'}}) }}
+                    {% include '@SyliusShop/ProductReview/_form.html.twig' %}
+                    {{ form_row(form._token) }}
+                    <button type="submit" class="ui blue labeled large icon submit button">
+                        <i class="icon check"></i> {{ 'sylius.ui.add'|trans }}
+                    </button>
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}
