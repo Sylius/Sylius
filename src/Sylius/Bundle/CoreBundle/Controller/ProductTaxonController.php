@@ -37,7 +37,7 @@ class ProductTaxonController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
         $productTaxons = $request->get('productTaxons');
 
-        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && null !== $productTaxons) {
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productTaxons) {
             foreach($productTaxons as $productTaxon) {
 
                 if(!is_numeric($productTaxon['position'])) {
