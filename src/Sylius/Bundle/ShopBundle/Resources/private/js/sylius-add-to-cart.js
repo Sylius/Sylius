@@ -10,11 +10,20 @@
 (function ( $ ) {
     'use strict';
 
+    $.fn.extend({
+        addToCart: function () {
+            $(this).on('submit', function(event) {
+                refresh(this, event);
+            });
+        }
+    });
+
     function refresh(element, event) {
         event.preventDefault();
 
         var data = $(element).serialize();
         var href = $(element).attr('action');
+        var redirectUrl = $(element).data('redirect');
 
         $.ajax({
             type: "POST",
@@ -33,16 +42,10 @@
                         refresh(this, event);
                     });
                 } else {
-                    window.location.replace($.fn.api.settings.api.cart);
+                    window.location.replace(redirectUrl);
                 }
             }
         })
     }
-
-    $(document).ready(function() {
-        $('#sylius-product-adding-to-cart').on('submit', function(event) {
-            refresh(this, event);
-        });
-    });
 
 })( jQuery );

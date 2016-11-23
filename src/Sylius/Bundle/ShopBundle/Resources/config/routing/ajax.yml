@@ -1,0 +1,14 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_ajax_user:
+    resource: "@SyliusShopBundle/Resources/config/routing/ajax/user.yml"
+    prefix: /users
+
+sylius_shop_ajax_account_address_book:
+    resource: "@SyliusShopBundle/Resources/config/routing/ajax/address_book.yml"
+    prefix: /address-book
+
+sylius_shop_ajax_cart:
+    resource: "@SyliusShopBundle/Resources/config/routing/ajax/cart.yml"
+    prefix: /cart

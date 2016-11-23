@@ -2,11 +2,11 @@
     {% include '@SyliusShop/Checkout/_addressBookSelect.html.twig' %}
     {% if form.customer.email is defined %}
         <div class="one field" id="sylius-api-login">
-            {{ form_row(form.customer.email) }}
+            {{ form_row(form.customer.email, { 'attr': {'data-url': path('sylius_shop_ajax_user_check_action')} }) }}
 
             <div class="ui action input" id="sylius-api-login-form">
                 <input type="password" placeholder="{{ 'sylius.ui.password'|trans }}">
-                <a class="ui blue button" href="#" id="sylius-api-login-submit">
+                <a class="ui blue button" href="#" id="sylius-api-login-submit" data-url="{{ path('sylius_shop_login_check') }}">
                     {{ 'sylius.ui.sign_in'|trans }}
                 </a>
             </div>

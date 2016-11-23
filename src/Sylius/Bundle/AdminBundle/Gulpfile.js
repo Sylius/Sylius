@@ -19,10 +19,7 @@ var paths = {
             '../../../../node_modules/jquery/dist/jquery.min.js',
             '../../../../node_modules/sortablejs/jquery.binding.js',
             '../../../../node_modules/semantic-ui-css/semantic.min.js',
-            '../PromotionBundle/Resources/public/js/sylius-promotion.js',
-            '../ShippingBundle/Resources/public/js/**',
             '../UiBundle/Resources/private/js/**',
-            '../UserBundle/Resources/public/js/sylius-user.js',
             'Resources/private/js/**'
         ],
         sass: [

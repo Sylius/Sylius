@@ -8,6 +8,8 @@
  */
 
 (function ( $ ) {
+    'use strict';
+
     $.fn.extend({
         addressBook: function () {
             var element = $(this);

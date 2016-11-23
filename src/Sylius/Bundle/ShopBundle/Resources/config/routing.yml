@@ -58,6 +58,12 @@ sylius_shop_verification:
     prefix: /verify
     resource: "@SyliusShopBundle/Resources/config/routing/verification.yml"
 
+sylius_shop_ajax:
+    resource: "@SyliusShopBundle/Resources/config/routing/ajax.yml"
+    prefix: /ajax
+    defaults:
+        _format: json
+
 sylius_sitemap:
     path: /sitemap.{_format}
     methods: [GET]

@@ -10,6 +10,21 @@
 (function ($) {
     'use strict';
 
+    $.fn.extend({
+        productAttributes: function () {
+            setAttributeChoiceListener();
+            controlAttributesList();
+
+            $(this).dropdown({
+                onRemove: function(removedValue, removedText, $removedChoice) {
+                    modifyAttributesListOnSelectorElementDelete(removedValue);
+                }
+            });
+
+            modifySelectorOnAttributesListElementDelete();
+        }
+    });
+
     function addAttributesNumber(number) {
         var currentIndex = parseInt(getNextIndex());
         $('#attributesContainer').attr('data-count', currentIndex+number);
@@ -78,17 +93,4 @@
             });
         });
     }
-
-    $(document).ready(function() {
-        setAttributeChoiceListener();
-        controlAttributesList();
-
-        $('div#attributeChoice > .ui.dropdown.search').dropdown({
-            onRemove: function(removedValue, removedText, $removedChoice) {
-                modifyAttributesListOnSelectorElementDelete(removedValue);
-            }
-        });
-
-        modifySelectorOnAttributesListElementDelete();
-    });
 })( jQuery );

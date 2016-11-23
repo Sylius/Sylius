@@ -2,9 +2,11 @@ sylius_admin_partial:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial.yml"
     prefix: /_partial
 
-sylius_admin_api:
-    resource: "@SyliusAdminBundle/Resources/config/routing/api.yml"
-    prefix: /api
+sylius_admin_ajax:
+    resource: "@SyliusAdminBundle/Resources/config/routing/ajax.yml"
+    prefix: /ajax
+    defaults:
+        _format: json
 
 sylius_admin_dashboard:
     path: /
@@ -52,9 +54,6 @@ sylius_admin_product_option:
 
 sylius_admin_product_review:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_review.yml"
-
-sylius_admin_product_taxon:
-    resource: "@SyliusAdminBundle/Resources/config/routing/product_taxon.yml"
 
 sylius_admin_product_variant:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_variant.yml"

@@ -8,6 +8,8 @@
  */
 
 (function ( $ ) {
+    'use strict';
+
     $.fn.extend({
         apiToggle: function (apiSettings, toggleableElement, isHidden) {
             var element = $(this);
@@ -20,7 +22,6 @@
             }
 
             element.api({
-                action: apiSettings.action,
                 method: apiSettings.method,
                 dataType: apiSettings.dataType || 'json',
                 throttle: apiSettings.throttle || 0,

@@ -8,6 +8,8 @@
  */
 
 (function ( $ ) {
+    'use strict';
+
     $.fn.extend({
         apiLogin: function (apiSettings) {
             var element = $(this);
@@ -19,7 +21,6 @@
             validationField.hide();
 
             signInButton.api({
-                action: apiSettings.action,
                 method: apiSettings.method,
                 dataType: apiSettings.dataType || 'json',
                 throttle: apiSettings.throttle || 0,
