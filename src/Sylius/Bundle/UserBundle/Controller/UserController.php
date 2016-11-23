@@ -51,7 +51,7 @@ class UserController extends ResourceController
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
         $changePassword = new ChangePassword();
-        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_change_password', true);
+        $formType = $this->getSyliusAttribute($request, 'form', 'sylius_user_change_password');
         $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
@@ -116,7 +116,7 @@ class UserController extends ResourceController
         }
 
         $passwordReset = new PasswordReset();
-        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_reset_password', true);
+        $formType = $this->getSyliusAttribute($request, 'form', 'sylius_user_reset_password');
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
@@ -145,7 +145,7 @@ class UserController extends ResourceController
     public function verifyAction(Request $request, $token)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $redirectRoute = $request->attributes->get('_sylius[redirect]', null, true);
+        $redirectRoute = $this->getSyliusAttribute($request, 'redirect', null);
 
         $response = $this->redirectToRoute($redirectRoute);
 
@@ -175,7 +175,7 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($user));
         }
 
-        $flashMessage = $request->attributes->get('_sylius[flash]', 'sylius.user.verification.success');
+        $flashMessage = $this->getSyliusAttribute($request, 'flash', 'sylius.user.verification.success');
         $this->addFlash('success', $flashMessage);
 
         return $response;
@@ -189,7 +189,7 @@ class UserController extends ResourceController
     public function requestVerificationTokenAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $redirectRoute = $request->attributes->get('_sylius[redirect]', 'referer', true);
+        $redirectRoute = $this->getSyliusAttribute($request, 'redirect', 'referer');
 
         /** @var UserInterface $user */
         $user = $this->container->get('sylius.context.customer')->getCustomer()->getUser();
@@ -232,9 +232,9 @@ class UserController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $passwordReset = new PasswordResetRequest();
-        $formType = $request->attributes->get('_sylius[form]', 'sylius_user_request_password_reset', true);
+        $formType = $this->getSyliusAttribute($request, 'form', 'sylius_user_request_password_reset');
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
-        $template = $request->attributes->get('_sylius[template]', null, true);
+        $template = $this->getSyliusAttribute($request, 'template', null);
         Assert::notNull($template, 'Template is not configured.');
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
@@ -248,7 +248,7 @@ class UserController extends ResourceController
             }
 
             $this->addFlash('success', 'sylius.user.password.reset.requested');
-            $redirectRoute = $request->attributes->get('_sylius[redirect]', null, true);
+            $redirectRoute = $this->getSyliusAttribute($request, 'redirect', null);
             Assert::notNull($redirectRoute, 'Redirect is not configured.');
 
             if (is_array($redirectRoute)) {
@@ -320,7 +320,7 @@ class UserController extends ResourceController
 
         $this->addFlash('error', 'sylius.user.password.reset.token_expired');
 
-        $redirectRouteName = $request->attributes->get('_sylius[redirect]', null, true);
+        $redirectRouteName = $this->getSyliusAttribute($request, 'redirect', null);
         Assert::notNull($redirectRouteName, 'Redirect is not configured.');
 
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
@@ -371,7 +371,7 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $redirectRouteName = $request->attributes->get('_sylius[redirect]', null, true);
+        $redirectRouteName = $this->getSyliusAttribute($request, 'redirect', null);
         Assert::notNull($redirectRouteName, 'Redirect is not configured.');
 
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
@@ -401,9 +401,23 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $redirectRouteName = $request->attributes->get('_sylius[redirect]', null, true);
+        $redirectRouteName = $this->getSyliusAttribute($request, 'redirect', null);
         Assert::notNull($redirectRouteName, 'Redirect is not configured.');
 
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
+    }
+
+    /**
+     * @param Request $request
+     * @param string $attribute
+     * @param mixed $default
+     *
+     * @return mixed
+     */
+    private function getSyliusAttribute(Request $request, $attribute, $default = null)
+    {
+        $attributes = $request->attributes->get('_sylius');
+
+        return isset($attributes[$attribute]) ? $attributes[$attribute] : $default;
     }
 }

@@ -133,10 +133,12 @@ class OrderController extends ResourceController
         $orderId = $request->getSession()->get('sylius_order_id', null);
 
         if (null === $orderId) {
+            $options = $configuration->getParameters()->get('after_failure');
+
             return $this->redirectHandler->redirectToRoute(
                 $configuration,
-                $configuration->getParameters()->get('after_failure[route]', 'sylius_shop_homepage', true),
-                $configuration->getParameters()->get('after_failure[parameters]', [], true)
+                isset($options['route']) ? $options['route'] : 'sylius_shop_homepage',
+                isset($options['parameters']) ? $options['parameters'] : []
             );
         }
 

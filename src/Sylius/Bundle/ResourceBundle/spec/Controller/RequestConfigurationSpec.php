@@ -518,8 +518,10 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->hasStateMachine()->shouldReturn(false);
 
         $parameters->has('state_machine')->willReturn(true);
-        $parameters->get('state_machine[graph]', null, true)->willReturn('sylius_product_review_state');
-        $parameters->get('state_machine[transition]', null, true)->willReturn('approve');
+        $parameters->get('state_machine')->willReturn([
+            'graph' => 'sylius_product_review_state',
+            'transition' => 'approve',
+        ]);
 
         $this->hasStateMachine()->shouldReturn(true);
         $this->getStateMachineGraph()->shouldReturn('sylius_product_review_state');
