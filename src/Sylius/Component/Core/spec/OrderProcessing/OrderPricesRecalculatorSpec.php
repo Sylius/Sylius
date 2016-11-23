@@ -12,24 +12,25 @@
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator;
 use Sylius\Component\Customer\Model\CustomerGroupInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
-use Sylius\Component\Pricing\Model\PriceableInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderPricesRecalculatorSpec extends ObjectBehavior
 {
-    function let(DelegatingCalculatorInterface $priceCalculator)
+    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
-        $this->beConstructedWith($priceCalculator);
+        $this->beConstructedWith($productVariantPriceCalculator);
     }
 
     function it_is_initializable()
@@ -43,12 +44,13 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
     }
 
     function it_recalculates_prices_adding_customer_to_the_context(
-        DelegatingCalculatorInterface $priceCalculator,
-        CustomerInterface $customer,
+        ChannelInterface $channel,
         CustomerGroupInterface $group,
+        CustomerInterface $customer,
         OrderInterface $order,
         OrderItemInterface $item,
-        PriceableInterface $variant
+        ProductVariantInterface $variant,
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
     ) {
         $order->getCustomer()->willReturn($customer);
         $order->getChannel()->willReturn(null);
@@ -61,33 +63,10 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $item->getQuantity()->willReturn(5);
         $item->getVariant()->willReturn($variant);
 
-        $priceCalculator
-            ->calculate($variant, ['customer' => $customer, 'groups' => [$group], 'quantity' => 5])
-            ->willReturn(10)
-        ;
-        $item->setUnitPrice(10)->shouldBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_recalculates_prices_adding_channel_to_the_context(
-        ChannelInterface $channel,
-        DelegatingCalculatorInterface $priceCalculator,
-        OrderInterface $order,
-        OrderItemInterface $item,
-        PriceableInterface $variant
-    ) {
-        $order->getCustomer()->willReturn(null);
         $order->getChannel()->willReturn($channel);
-        $order->getItems()->willReturn([$item]);
-        $order->getCurrencyCode()->willReturn(null);
 
-        $item->isImmutable()->willReturn(false);
-        $item->getQuantity()->willReturn(5);
-        $item->getVariant()->willReturn($variant);
-
-        $priceCalculator
-            ->calculate($variant, ['channel' => $channel, 'quantity' => 5])
+        $productVariantPriceCalculator
+            ->calculate($variant, $channel)
             ->willReturn(10)
         ;
         $item->setUnitPrice(10)->shouldBeCalled();
@@ -95,123 +74,11 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_recalculates_prices_adding_currency_code_to_the_context(
-        DelegatingCalculatorInterface $priceCalculator,
-        OrderInterface $order,
-        OrderItemInterface $item,
-        PriceableInterface $variant
-    ) {
-        $order->getCustomer()->willReturn(null);
-        $order->getChannel()->willReturn(null);
-        $order->getItems()->willReturn([$item]);
-        $order->getCurrencyCode()->willReturn('EUR');
-
-        $item->isImmutable()->willReturn(false);
-        $item->getQuantity()->willReturn(5);
-        $item->getVariant()->willReturn($variant);
-
-        $priceCalculator
-            ->calculate($variant, ['currency' => 'EUR', 'quantity' => 5])
-            ->willReturn(10)
+    function it_throws_exception_if_passed_order_is_not_a_core_order(BaseOrderInterface $order)
+    {
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('process', [$order])
         ;
-        $item->setUnitPrice(10)->shouldBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_recalculates_prices_adding_channel_and_customer_to_the_context(
-        ChannelInterface $channel,
-        DelegatingCalculatorInterface $priceCalculator,
-        CustomerInterface $customer,
-        CustomerGroupInterface $group,
-        OrderInterface $order,
-        OrderItemInterface $item,
-        PriceableInterface $variant
-    ) {
-        $order->getCustomer()->willReturn($customer);
-        $order->getChannel()->willReturn($channel);
-        $order->getItems()->willReturn([$item]);
-        $order->getCurrencyCode()->willReturn(null);
-
-        $customer->getGroup()->willReturn($group);
-
-        $item->isImmutable()->willReturn(false);
-        $item->getQuantity()->willReturn(5);
-        $item->getVariant()->willReturn($variant);
-
-        $priceCalculator
-            ->calculate(
-                $variant,
-                [
-                    'customer' => $customer,
-                    'groups' => [$group],
-                    'channel' => $channel,
-                    'quantity' => 5
-                ]
-            )
-            ->willReturn(10)
-        ;
-        $item->setUnitPrice(10)->shouldBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_recalculates_prices_adding_channel_customer_and_currency_code_to_the_context(
-        ChannelInterface $channel,
-        DelegatingCalculatorInterface $priceCalculator,
-        CustomerInterface $customer,
-        CustomerGroupInterface $group,
-        OrderInterface $order,
-        OrderItemInterface $item,
-        PriceableInterface $variant
-    ) {
-        $order->getCustomer()->willReturn($customer);
-        $order->getChannel()->willReturn($channel);
-        $order->getItems()->willReturn([$item]);
-        $order->getCurrencyCode()->willReturn('EUR');
-
-        $customer->getGroup()->willReturn($group);
-
-        $item->isImmutable()->willReturn(false);
-        $item->getQuantity()->willReturn(5);
-        $item->getVariant()->willReturn($variant);
-
-        $priceCalculator
-            ->calculate(
-                $variant,
-                [
-                    'customer' => $customer,
-                    'groups' => [$group],
-                    'channel' => $channel,
-                    'currency' => 'EUR',
-                    'quantity' => 5
-                ]
-            )
-            ->willReturn(10)
-        ;
-        $item->setUnitPrice(10)->shouldBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_recalculates_prices_without_adding_anything_to_the_context_if_its_not_needed(
-        DelegatingCalculatorInterface $priceCalculator,
-        OrderInterface $order,
-        OrderItemInterface $item,
-        PriceableInterface $variant
-    ) {
-        $order->getCustomer()->willReturn(null);
-        $order->getChannel()->willReturn(null);
-        $order->getItems()->willReturn([$item]);
-        $order->getCurrencyCode()->willReturn(null);
-
-        $item->isImmutable()->willReturn(false);
-        $item->getQuantity()->willReturn(5);
-        $item->getVariant()->willReturn($variant);
-
-        $priceCalculator->calculate($variant, ['quantity' => 5])->willReturn(10);
-        $item->setUnitPrice(10)->shouldBeCalled();
-
-        $this->process($order);
     }
 }
