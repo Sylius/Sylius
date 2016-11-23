@@ -96,7 +96,7 @@ final class PaymentContext implements Context
      */
     public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels)
     {
-        $paymentMethod = $this->createPaymentMethodFromNameAndCode($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method');
+        $paymentMethod = $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', false);
 
         foreach ($channels as $channel) {
             $paymentMethod->addChannel($channel);
