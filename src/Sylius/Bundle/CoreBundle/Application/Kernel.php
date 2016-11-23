@@ -86,9 +86,10 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(), // must be added after FrameworkBundle
         ];
 
-        if (in_array($this->environment, ['dev', 'test', 'test_cached'], true)) {
+        if (in_array($this->getEnvironment(), ['dev', 'test', 'test_cached'], true)) {
             $bundles[] = new \Symfony\Bundle\DebugBundle\DebugBundle();
             $bundles[] = new \Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
+            $bundles[] = new \Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
         }
 
         return $bundles;
@@ -99,7 +100,7 @@ class Kernel extends HttpKernel
      */
     protected function getContainerBaseClass()
     {
-        if ('test' === $this->environment || 'test_cached' === $this->environment) {
+        if (in_array($this->getEnvironment(), ['test', 'test_cached'], true)) {
             return MockerContainer::class;
         }
 
@@ -111,11 +112,10 @@ class Kernel extends HttpKernel
      */
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $rootDir = $this->getRootDir();
+        $loader->load($this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.yml');
 
-        $loader->load($rootDir.'/config/config_'.$this->environment.'.yml');
-
-        if (is_file($file = $rootDir.'/config/config_'.$this->environment.'.local.yml')) {
+        $file = $this->getRootDir() . '/config/config_' . $this->getEnvironment() . '.local.yml';
+        if (is_file($file)) {
             $loader->load($file);
         }
     }
@@ -126,10 +126,10 @@ class Kernel extends HttpKernel
     public function getCacheDir()
     {
         if ($this->isVagrantEnvironment()) {
-            return '/dev/shm/sylius/cache/'.$this->environment;
+            return '/dev/shm/sylius/cache/' . $this->getEnvironment();
         }
 
-        return parent::getCacheDir();
+        return dirname($this->getRootDir()) . '/var/cache/' . $this->getEnvironment();
     }
 
     /**
@@ -141,7 +141,7 @@ class Kernel extends HttpKernel
             return '/dev/shm/sylius/logs';
         }
 
-        return parent::getLogDir();
+        return dirname($this->getRootDir()) . '/var/logs';
     }
 
     /**

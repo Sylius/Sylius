@@ -42,4 +42,4 @@ sylius_admin_taxon_create_for_parent:
             vars:
                 subheader: sylius.ui.manage_categorization_of_your_product
                 templates:
-                    form: @SyliusAdmin/Taxon/_form.html.twig
+                    form: "@SyliusAdmin/Taxon/_form.html.twig"

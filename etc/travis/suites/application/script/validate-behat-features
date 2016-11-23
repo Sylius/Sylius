@@ -3,4 +3,4 @@
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.lib.sh"
 
 print_header "Validating (Behat features)" "Sylius"
-run_command "bin/kawaii gherkin:check --align=left features/"
+run_command "vendor/bin/kawaii gherkin:check --align=left features/"
