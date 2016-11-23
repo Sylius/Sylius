@@ -7,6 +7,7 @@
         <div class="menu">
             <a class="item" href="{{ path('sylius_admin_product_variant_index', { productId: data.id }) }}"><i class="list icon"></i> {{ 'sylius.ui.list_variants'|trans }}</a>
             <a class="item" href="{{ path('sylius_admin_product_variant_create', { productId: data.id }) }}"><i class="plus icon"></i> {{ 'sylius.ui.add'|trans }}</a>
+            <a class="item" href="{{ path('sylius_admin_product_variant_generate', { productId: data.id }) }}"><i class="random icon"></i> {{ 'sylius.ui.generate'|trans }}</a>
         </div>
     </div>
 {% endif %}
