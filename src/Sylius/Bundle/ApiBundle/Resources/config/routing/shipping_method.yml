@@ -19,19 +19,28 @@ sylius_api_shipping_method_create:
         _controller: sylius.controller.shipping_method:createAction
 
 sylius_api_shipping_method_update:
-    path: /{id}
+    path: /{code}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.shipping_method:updateAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_shipping_method_delete:
-    path: /{id}
+    path: /{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.shipping_method:deleteAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_shipping_method_show:
-    path: /{id}
+    path: /{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.shipping_method:showAction
+        _sylius:
+            criteria:
+                code: $code

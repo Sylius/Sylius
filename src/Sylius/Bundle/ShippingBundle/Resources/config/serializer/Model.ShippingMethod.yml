@@ -36,7 +36,7 @@ Sylius\Component\Shipping\Model\ShippingMethod:
           href:
                 route: sylius_api_shipping_method_show
                 parameters:
-                    id: expr(object.getId())
+                    code: expr(object.getCode())
         #- rel: category
         #  href:
         #        route: sylius_api_shipping_category_show

@@ -6,4 +6,4 @@ Sylius\Component\Core\Model\ShippingMethod:
           href:
                 route: sylius_api_zone_show
                 parameters:
-                    id: expr(object.getZone().getId())
+                    code: expr(object.getZone().getCode())

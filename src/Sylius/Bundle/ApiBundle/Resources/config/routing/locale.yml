@@ -21,15 +21,20 @@ sylius_api_locale_create:
         _controller: sylius.controller.locale:createAction
 
 sylius_api_locale_delete:
-    path: /{id}
+    path: /{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.locale:deleteAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_locale_show:
-    path: /{id}
+    path: /{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.locale:showAction
         _sylius:
             serialization_groups: [Detailed]
+            criteria:
+                code: $code

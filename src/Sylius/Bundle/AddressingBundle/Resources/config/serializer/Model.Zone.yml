@@ -26,4 +26,4 @@ Sylius\Component\Addressing\Model\Zone:
           href:
                 route: sylius_api_zone_show
                 parameters:
-                    id: expr(object.getId())
+                    code: expr(object.getCode())

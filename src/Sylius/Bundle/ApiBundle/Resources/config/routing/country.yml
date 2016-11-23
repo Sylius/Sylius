@@ -17,19 +17,28 @@ sylius_api_country_create:
         _controller: sylius.controller.country:createAction
 
 sylius_api_country_update:
-    path: /{id}
+    path: /{code}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.country:updateAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_country_delete:
-    path: /{id}
+    path: /{code}
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.country:deleteAction
+        _sylius:
+            criteria:
+                code: $code
 
 sylius_api_country_show:
-    path: /{id}
+    path: /{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.country:showAction
+        _sylius:
+            criteria:
+                code: $code
