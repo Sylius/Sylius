@@ -28,11 +28,6 @@ final class CurrencySpec extends ObjectBehavior
         $this->shouldImplement(CurrencyInterface::class);
     }
 
-    function it_implements_a_toggleable_interface()
-    {
-        $this->shouldImplement(ToggleableInterface::class);
-    }
-
     function it_has_no_id_by_default()
     {
         $this->getId()->shouldReturn(null);
@@ -58,38 +53,6 @@ final class CurrencySpec extends ObjectBehavior
     {
         $this->setExchangeRate(1.1275);
         $this->getExchangeRate()->shouldReturn(1.1275);
-    }
-
-    function it_is_enabled_by_default()
-    {
-        $this->shouldBeEnabled();
-    }
-
-    function it_can_be_disabled()
-    {
-        $this->disable();
-        $this->shouldNotBeEnabled();
-    }
-
-    function it_can_be_enabled()
-    {
-        $this->disable();
-        $this->shouldNotBeEnabled();
-
-        $this->enable();
-        $this->shouldBeEnabled();
-    }
-
-    function it_can_set_enabled_value()
-    {
-        $this->setEnabled(false);
-        $this->shouldNotBeEnabled();
-
-        $this->setEnabled(true);
-        $this->shouldBeEnabled();
-
-        $this->setEnabled(false);
-        $this->shouldNotBeEnabled();
     }
 
     function it_initializes_creation_date_by_default()

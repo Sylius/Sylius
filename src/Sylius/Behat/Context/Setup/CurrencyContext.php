@@ -86,7 +86,6 @@ final class CurrencyContext implements Context
     public function theStoreHasCurrency($currencyCode)
     {
         $currency = $this->createCurrency($currencyCode);
-        $currency->setEnabled(true);
 
         $this->saveCurrency($currency);
     }
@@ -115,7 +114,6 @@ final class CurrencyContext implements Context
     public function theStoreHasDisabledCurrency($currencyCode)
     {
         $currency = $this->provideCurrency($currencyCode);
-        $currency->setEnabled(false);
 
         $this->saveCurrency($currency);
     }
@@ -126,7 +124,6 @@ final class CurrencyContext implements Context
     public function theStoreHasCurrencyWithExchangeRate($currencyCode, $exchangeRate)
     {
         $currency = $this->createCurrency($currencyCode, (float) $exchangeRate);
-        $currency->setEnabled(true);
 
         $this->saveCurrency($currency);
     }

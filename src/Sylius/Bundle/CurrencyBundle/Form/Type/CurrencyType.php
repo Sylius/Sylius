@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -32,10 +32,7 @@ class CurrencyType extends AbstractResourceType
             ->add('exchangeRate', NumberType::class, [
                 'label' => 'sylius.form.currency.exchange_rate',
             ])
-            ->add('enabled', CheckboxType::class, [
-                'label' => 'sylius.form.currency.enabled',
-            ])
-            ->addEventSubscriber(new AddCodeFormSubscriber(\Symfony\Component\Form\Extension\Core\Type\CurrencyType::class, [
+            ->addEventSubscriber(new AddCodeFormSubscriber(CurrencyType::class, [
                 'label' => 'sylius.form.currency.code',
             ]))
         ;
