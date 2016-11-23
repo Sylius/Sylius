@@ -28,25 +28,28 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
     /**
      * @var ServiceRegistryInterface
      */
-    private $calculatorRegistry;
+    protected $calculatorRegistry;
 
     /**
      * @var FormFactoryInterface
      */
-    private $factory;
+    protected $factory;
 
     /**
      * @var FormRegistryInterface
      */
-    private $formRegistry;
+    protected $formRegistry;
 
     /**
      * @param ServiceRegistryInterface $calculatorRegistry
-     * @param FormFactoryInterface     $factory
-     * @param FormRegistryInterface    $formRegistry
+     * @param FormFactoryInterface $factory
+     * @param FormRegistryInterface $formRegistry
      */
-    public function __construct(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory, FormRegistryInterface $formRegistry)
-    {
+    public function __construct(
+        ServiceRegistryInterface $calculatorRegistry,
+        FormFactoryInterface $factory,
+        FormRegistryInterface $formRegistry
+    ) {
         $this->calculatorRegistry = $calculatorRegistry;
         $this->factory = $factory;
         $this->formRegistry = $formRegistry;

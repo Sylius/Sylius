@@ -44,7 +44,7 @@ class ShippingMethodType extends AbstractResourceType
     /**
      * @var FormRegistryInterface
      */
-    private $formRegistry;
+    protected $formRegistry;
 
     /**
      * @param string $dataClass
@@ -53,8 +53,13 @@ class ShippingMethodType extends AbstractResourceType
      * @param ServiceRegistryInterface $checkerRegistry
      * @param FormRegistryInterface $formRegistry
      */
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $calculatorRegistry, ServiceRegistryInterface $checkerRegistry, FormRegistryInterface $formRegistry)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        ServiceRegistryInterface $calculatorRegistry,
+        ServiceRegistryInterface $checkerRegistry,
+        FormRegistryInterface $formRegistry
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->calculatorRegistry = $calculatorRegistry;
