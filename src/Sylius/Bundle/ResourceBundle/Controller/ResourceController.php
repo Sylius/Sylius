@@ -228,6 +228,14 @@ class ResourceController extends Controller
      */
     public function createAction(Request $request)
     {
+        $syliusConfiguration = $request->attributes->get('_sylius', []);
+        $syliusConfiguration = array_merge(
+            [ 'actionName' => ResourceActions::CREATE ],
+            $syliusConfiguration
+        );
+
+        $request->attributes->set('_sylius', $syliusConfiguration);
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::CREATE);
@@ -290,6 +298,14 @@ class ResourceController extends Controller
      */
     public function updateAction(Request $request)
     {
+        $syliusConfiguration = $request->attributes->get('_sylius', []);
+        $syliusConfiguration = array_merge(
+            [ 'actionName' => ResourceActions::UPDATE ],
+            $syliusConfiguration
+        );
+
+        $request->attributes->set('_sylius', $syliusConfiguration);
+
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
