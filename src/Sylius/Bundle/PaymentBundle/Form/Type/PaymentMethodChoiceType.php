@@ -108,7 +108,7 @@ class PaymentMethodChoiceType extends AbstractType
                 $resolvedMethods = $this->paymentMethodRepository->findAll();
             }
 
-            return new ObjectChoiceList($resolvedMethods, null, [], null, 'id');
+            return new ObjectChoiceList($resolvedMethods, null, [], null, 'code');
         };
     }
 }
