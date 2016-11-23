@@ -85,7 +85,10 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
             return;
         }
 
-        $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration);
+        $filteredItems = $this->priceRangeFilter->filter(
+            $subject->getItems()->toArray(),
+            array_merge($configuration, ['channel' => $subject->getChannel()])
+        );
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
         $filteredItems = $this->productFilter->filter($filteredItems, $configuration);
 
