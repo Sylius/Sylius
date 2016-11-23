@@ -22,6 +22,7 @@
     "require": {
         "php": "^5.6|^7.0",
 
+        "doctrine/collections": "~1.2",
         "knplabs/knp-menu-bundle": "^2.1",
         "symfony/framework-bundle": "^2.8",
         "symfony/security": "^2.8"
