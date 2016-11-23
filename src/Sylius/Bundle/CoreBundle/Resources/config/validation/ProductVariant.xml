@@ -52,5 +52,8 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllPricesDefined">
+            <option name="groups">sylius</option>
+        </constraint>
     </class>
 </constraint-mapping>

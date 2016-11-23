@@ -33,5 +33,9 @@
             <argument type="service" id="sylius.availability_checker" />
             <tag name="validator.constraint_validator" alias="sylius_cart_item_availability" />
         </service>
+        <service id="sylius.validator.has_all_prices_defined" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllPricesDefinedValidator">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="validator.constraint_validator" alias="sylius_has_all_prices_defined" />
+        </service>
     </services>
 </container>
