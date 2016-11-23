@@ -176,6 +176,9 @@
             "Sylius\\Tests\\": "tests/"
         }
     },
+    "config": {
+        "bin-dir": "bin"
+    },
     "extra": {
         "symfony-app-dir": "app",
         "symfony-bin-dir": "bin",

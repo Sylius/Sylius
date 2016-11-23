@@ -11,6 +11,9 @@
 /web/js
 /web/media
 
+/bin/*
+!/bin/console
+!/bin/symfony_requirements
 /vendor
 /node_modules
 
