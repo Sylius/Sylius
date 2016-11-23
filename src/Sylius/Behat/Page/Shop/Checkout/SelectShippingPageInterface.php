@@ -68,4 +68,11 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function isNextStepButtonUnavailable();
+
+    /**
+     * @param string $shippingMethodName
+     * 
+     * @return bool
+     */
+    public function hasShippingMethod($shippingMethodName);
 }

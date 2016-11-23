@@ -214,6 +214,14 @@
             <tag name="fob.context_service" />
         </service>
 
+        <service id="sylius.behat.context.setup.shipping_category" class="Sylius\Behat\Context\Setup\ShippingCategoryContext">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="__symfony__.sylius.factory.shipping_category" />
+            <argument type="service" id="__symfony__.sylius.repository.shipping_category" />
+            <argument type="service" id="__symfony__.sylius.manager.shipping_category" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="sylius.behat.context.setup.taxation" class="Sylius\Behat\Context\Setup\TaxationContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.factory.tax_rate" />

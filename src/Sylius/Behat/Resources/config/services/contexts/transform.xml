@@ -119,6 +119,11 @@
             <tag name="fob.context_service" />
         </service>
 
+        <service id="sylius.behat.context.transform.shipping_category" class="Sylius\Behat\Context\Transform\ShippingCategoryContext">
+            <argument type="service" id="__symfony__.sylius.repository.shipping_category" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="sylius.behat.context.transform.shipping_method" class="Sylius\Behat\Context\Transform\ShippingMethodContext">
             <argument type="service" id="__symfony__.sylius.repository.shipping_method" />
             <tag name="fob.context_service" />

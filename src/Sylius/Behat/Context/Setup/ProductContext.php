@@ -33,6 +33,7 @@ use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -620,6 +621,15 @@ final class ProductContext implements Context
 
         $variant->setPricingConfiguration($pricingConfiguration);
 
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this product) belongs to ("([^"]+)" shipping category)$/
+     */
+    public function thisProductBelongsToShippingCategory(ProductInterface $product, ShippingCategoryInterface $shippingCategory)
+    {
+        $product->setShippingCategory($shippingCategory);
         $this->objectManager->flush();
     }
 
