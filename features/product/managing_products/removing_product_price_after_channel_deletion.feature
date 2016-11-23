@@ -17,7 +17,4 @@ Feature: Removing a product's price after channel deletion
     Scenario: Removing a product's price after corresponding channel deletion
         When channel "Web-GB" has been deleted
         Then product "Dice Brewing" should be priced at $10.00 for channel "Web-US"
-        And this product should no longer have price for channel "Web=GB"
-
-
-
+        And this product should no longer have price for channel "Web-GB"

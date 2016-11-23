@@ -41,7 +41,7 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
         $productVariant->getChannelPricingForChannel($channel)->willReturn($channelPricing);
         $channelPricing->getPrice()->willReturn(1000);
 
-        $this->calculate($productVariant, $channel)->shouldReturn(1000);
+        $this->calculate($productVariant, ['channel' => $channel])->shouldReturn(1000);
     }
 
     function it_throws_exception_if_there_is_no_variant_price_for_given_channel(
@@ -52,7 +52,15 @@ final class ProductVariantPriceCalculatorSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('calculate', [$productVariant, $channel])
+            ->during('calculate', [$productVariant, ['chanel' => $channel]])
+        ;
+    }
+
+    function it_throws_exception_if_no_channel_is_defined_in_configuration(ProductVariantInterface $productVariant)
+    {
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('calculate', [$productVariant, []])
         ;
     }
 }

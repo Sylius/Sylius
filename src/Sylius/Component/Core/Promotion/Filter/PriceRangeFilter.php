@@ -62,7 +62,7 @@ final class PriceRangeFilter implements FilterInterface
      */
     private function isItemVariantInPriceRange(ProductVariantInterface $variant, array $configuration)
     {
-        $price = $this->productVariantPriceCalculator->calculate($variant, $configuration['channel']);
+        $price = $this->productVariantPriceCalculator->calculate($variant, ['channel' => $configuration['channel']]);
 
         $priceRange = $configuration['filters']['price_range_filter'];
         if (isset($priceRange['min']) && isset($priceRange['max'])) {

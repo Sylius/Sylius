@@ -5,8 +5,7 @@ Feature: Removing images of an existing product
     I want to be able to remove images from an existing product
 
     Background:
-        Given the store operates on a single channel in "United States"
-        And I am logged in as an administrator
+        Given I am logged in as an administrator
 
     @ui @javascript
     Scenario: Removing a single image of a simple product

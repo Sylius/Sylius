@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\CoreBundle\Controller\ProductTaxonController;
+use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Core\Model\ChannelPricing;
@@ -113,7 +114,12 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ChannelPricingInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('repository')->defaultValue(EntityRepository::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
+                                        ->arrayNode('form')
+                                        ->addDefaultsIfNotSet()
+                                            ->children()
+                                            ->scalarNode('default')->defaultValue(ChannelPricingType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()

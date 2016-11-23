@@ -166,7 +166,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSetItsPriceTo($price = null, $channel = null)
     {
-        $this->createPage->specifyPrice((null === $channel) ? $this->sharedStorage->get('channel') :$channel, $price);
+        $this->createPage->specifyPrice($price, (null === $channel) ? $this->sharedStorage->get('channel') :$channel);
     }
 
     /**
@@ -289,7 +289,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I delete the (źź variant of product "[^"]+")$/
+     * @When /^I delete the ("[^"]+" variant of product "[^"]+")$/
      * @When /^I try to delete the ("[^"]+" variant of product "[^"]+")$/
      */
     public function iDeleteTheVariantOfProduct(ProductVariantInterface $productVariant)

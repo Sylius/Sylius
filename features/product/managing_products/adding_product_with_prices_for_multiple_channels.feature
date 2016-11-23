@@ -5,8 +5,7 @@ Feature: Adding product with prices for multiple channels
     I want to add a new product to the shop with different prices for each channel
 
     Background:
-        Given the store has currency "USD"
-        And the store has currency "GBP" with exchange rate 0.7
+        Given the store has currency "USD", "GBP"
         And the store operates on a channel named "Web-US" in "USD" currency
         And the store operates on another channel named "Web-GB" in "GBP" currency
         And I am logged in as an administrator
