@@ -5,7 +5,7 @@ Feature: Generating product variant generation
     I want to be prevented from generating it without specifying required fields
 
     Background:
-        Given the store is available in "English (United States)"
+        Given the store operates on a single channel in "United States"
         And the store has a "Wyborowa Vodka" configurable product
         And this product has option "Taste" with values "Orange" and "Melon"
         And I am logged in as an administrator

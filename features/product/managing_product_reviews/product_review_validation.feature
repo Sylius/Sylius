@@ -5,7 +5,8 @@ Feature: Product review validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given the store has customer "Mike Ross" with email "ross@teammike.com"
+        Given the store operates on a single channel in "United States"
+        And the store has customer "Mike Ross" with email "ross@teammike.com"
         And the store has a product "Lamborghini Gallardo Model"
         And this product has a review titled "Awesome" and rated 4 with a comment "Nice product" added by customer "ross@teammike.com"
         And I am logged in as an administrator

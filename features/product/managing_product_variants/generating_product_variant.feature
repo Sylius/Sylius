@@ -5,7 +5,7 @@ Feature: Generating product variants
     I want to generate all possible product variants
 
     Background:
-        Given the store is available in "English (United States)"
+        Given the store operates on a single channel in "United States"
         And the store has a "Wyborowa Vodka" configurable product
         And this product has option "Taste" with values "Orange" and "Melon"
         And I am logged in as an administrator
