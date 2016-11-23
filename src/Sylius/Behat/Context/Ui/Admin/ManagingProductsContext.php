@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
@@ -911,6 +912,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that price must be defined for every channel
+     */
+    public function iShouldBeNotifiedThatPriceMustBeDefinedForEveryChannel()
+    {
+        $this->assertValidationMessage('channel_pricings', 'You must define price for every channel.');
+    }
+
+    /**
      * @Then they should have order like :firstProductName, :secondProductName and :thirdProductName
      */
     public function theyShouldHaveOrderLikeAnd(...$productNames)
@@ -958,8 +967,8 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Given /^(it|this product) should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
-     * @Given /^(product "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     * @Then /^(it|this product) should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     * @Then /^(product "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
      */
     public function itShouldBePricedAtForChannel(ProductInterface $product, $price, $channelName)
     {
@@ -968,6 +977,24 @@ final class ManagingProductsContext implements Context
         Assert::same(
             $this->updateSimpleProductPage->getPriceForChannel($channelName),
             $price
+        );
+    }
+
+    /**
+     * @Then /^(this product) should no longer have price for channel "([^"]+)"$/
+     */
+    public function thisProductShouldNoLongerHavePriceForChannel(ProductInterface $product, $channelName)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        try {
+            $this->updateSimpleProductPage->getPriceForChannel($channelName);
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new \Exception(
+            sprintf('Product "%s" should not have price defined for channel "%s".', $product->getName(), $channelName)
         );
     }
 

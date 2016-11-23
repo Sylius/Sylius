@@ -24,10 +24,10 @@
         <field name="price" column="price" type="integer"/>
 
         <many-to-one field="productVariant" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" inversed-by="channelPricings">
-            <join-column name="product_variant_id" referenced-column-name="id" nullable="false" />
+            <join-column name="product_variant_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
         <many-to-one field="channel" target-entity="Sylius\Component\Channel\Model\ChannelInterface">
-            <join-column name="channel_id" referenced-column-name="id" nullable="false" />
+            <join-column name="channel_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
         </many-to-one>
     </mapped-superclass>
 

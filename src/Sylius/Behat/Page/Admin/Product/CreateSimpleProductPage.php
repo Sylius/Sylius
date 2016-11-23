@@ -226,6 +226,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'attribute_value' => '.attribute .label:contains("%attribute%") ~ input',
             'attributes_choice' => '#sylius_product_attribute_choice',
             'calculator' => '#sylius_calculator_container',
+            'channel_pricings' => '#sylius_product_variant_channelPricings',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
             'images' => '#sylius_product_images',
