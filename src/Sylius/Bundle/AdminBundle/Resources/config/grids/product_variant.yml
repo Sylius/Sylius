@@ -42,6 +42,15 @@ sylius_grid:
                         fields: [name]
             actions:
                 main:
+                    generate:
+                        type: default
+                        label: sylius.ui.generate
+                        icon: random
+                        options:
+                            link:
+                                route: sylius_admin_product_variant_generate
+                                parameters:
+                                    productId: $productId
                     create:
                         type: create
                         options:
