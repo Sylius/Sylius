@@ -11,13 +11,28 @@
 
 namespace Sylius\Component\Core\Promotion\Filter;
 
+use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PriceRangeFilter implements FilterInterface
 {
+    /**
+     * @var ProductVariantPriceCalculatorInterface
+     */
+    private $productVariantPriceCalculator;
+
+    /**
+     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+     */
+    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    {
+        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -27,9 +42,11 @@ final class PriceRangeFilter implements FilterInterface
             return $items;
         }
 
+        Assert::keyExists($configuration, 'channel');
+
         $filteredItems = [];
         foreach ($items as $item) {
-            if ($this->isItemVariantInPriceRange($item->getVariant(), $configuration['filters']['price_range_filter'])) {
+            if ($this->isItemVariantInPriceRange($item->getVariant(), $configuration)) {
                 $filteredItems[] = $item;
             }
         }
@@ -39,14 +56,15 @@ final class PriceRangeFilter implements FilterInterface
 
     /**
      * @param ProductVariantInterface $variant
-     * @param array $priceRange
+     * @param array $configuration
      *
      * @return bool
      */
-    private function isItemVariantInPriceRange(ProductVariantInterface $variant, array $priceRange)
+    private function isItemVariantInPriceRange(ProductVariantInterface $variant, array $configuration)
     {
-        $price = $variant->getPrice();
+        $price = $this->productVariantPriceCalculator->calculate($variant, $configuration['channel']);
 
+        $priceRange = $configuration['filters']['price_range_filter'];
         if (isset($priceRange['min']) && isset($priceRange['max'])) {
             return $priceRange['min'] <= $price && $priceRange['max'] >= $price;
         }

@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -50,6 +51,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
     }
 
     function it_applies_percentage_discount_on_every_unit_in_order(
+        ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
@@ -65,9 +67,10 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($originalItems);
+        $order->getChannel()->willReturn($channel);
         $originalItems->toArray()->willReturn([$orderItem1]);
 
-        $priceRangeFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
+        $priceRangeFilter->filter([$orderItem1], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem1]);
         $taxonFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
         $productFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
 
