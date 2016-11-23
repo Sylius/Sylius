@@ -45,6 +45,14 @@ class CustomerDefaultAddressType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function getParent()
+    {
+        return 'text';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_customer_default_address';

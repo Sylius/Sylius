@@ -61,18 +61,6 @@ final class DatetimeFieldTypeSpec extends ObjectBehavior
         ])->shouldReturn(null);
     }
 
-    function is_configures_options(
-        OptionsResolver $resolver
-    ) {
-        $resolver->setDefaults([
-            'format' => 'Y:m:d H:i:s'
-        ])->shouldBeCalled();
-        $resolver->setAllowedTypes([
-            'format' => ['string']
-        ])->shouldBeCalled();
-        $this->configureOptions($resolver);
-    }
-
     function it_throws_exception_if_returned_value_is_not_datetime(DataExtractorInterface $dataExtractor, Field $field)
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn('badObject');

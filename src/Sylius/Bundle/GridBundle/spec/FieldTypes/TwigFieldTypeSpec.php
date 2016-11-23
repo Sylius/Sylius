@@ -63,19 +63,6 @@ final class TwigFieldTypeSpec extends ObjectBehavior
         $this->render($field, 'bar', ['template' => 'foo.html.twig'])->shouldReturn('<html>Bar</html>');
     }
 
-    function it_should_configure_options(
-        OptionsResolver $resolver
-    ) {
-        $resolver->setDefined('vars')->shouldBeCalled();
-        $resolver->setRequired(['template'])->shouldBeCalled();
-        $resolver->setAllowedTypes([
-            'template' => ['string'],
-            'vars' => ['array'],
-        ])->shouldBeCalled();
-
-        $this->configureOptions($resolver);
-    }
-
     function it_has_name()
     {
         $this->getName()->shouldReturn('twig');

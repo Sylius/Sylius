@@ -88,7 +88,9 @@ class ZoneType extends AbstractResourceType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefault('zone_type', ZoneInterface::TYPE_COUNTRY);
+        $resolver->setDefaults([
+            'zone_type', ZoneInterface::TYPE_COUNTRY,
+        ]);
     }
 
     /**
