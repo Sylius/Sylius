@@ -48,5 +48,8 @@
                 <option name="minMessage">sylius.product_variant.depth.min</option>
             </constraint>
         </property>
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasAllPricesDefined">
+            <option name="groups">sylius</option>
+        </constraint>
     </class>
 </constraint-mapping>

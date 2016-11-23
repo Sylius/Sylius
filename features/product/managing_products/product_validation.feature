@@ -60,7 +60,7 @@ Feature: Products validation
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @ui @todo
+    @ui
     Scenario: Adding a new simple product without specifying its price for every channel
         Given the store operates on another channel named "Web-GB"
         When I want to create a new simple product
@@ -68,7 +68,7 @@ Feature: Products validation
         And I set its price to $10.00 for "United States" channel
         And I name it "Dice Brewing" in "English (United States)"
         And I try to add it
-        Then I should be notified that price must be set for every channel
+        Then I should be notified that price must be defined for every channel
         And product with code "BOARD_DICE_BREWING" should not be added
 
     @ui

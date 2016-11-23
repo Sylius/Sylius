@@ -82,6 +82,7 @@ class ProductVariantType extends BaseProductVariantType
                 'label' => 'sylius.form.variant.price',
                 'allow_add' => false,
                 'allow_delete' => false,
+                'error_bubbling' => false,
             ])
             ->addEventSubscriber($this->channelPricingFormSubscriber)
         ;
