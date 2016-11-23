@@ -9,27 +9,25 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
+var argv = require('yargs').argv;
 
-var rootPath = '../../../../web/assets/';
+var rootPath = argv.rootPath;
 var adminRootPath = rootPath + 'admin/';
+var resourcePath = argv.resourcePath || '';
 
 var paths = {
     admin: {
         js: [
-            '../../../../node_modules/jquery/dist/jquery.min.js',
-            '../../../../node_modules/sortablejs/jquery.binding.js',
-            '../../../../node_modules/semantic-ui-css/semantic.min.js',
-            '../UiBundle/Resources/private/js/**',
-            'Resources/private/js/**'
+            resourcePath + 'Resources/private/js/**'
         ],
         sass: [
-            '../UiBundle/Resources/private/sass/**'
+            resourcePath + 'Resources/private/sass/**'
         ],
         css: [
-            '../../../../node_modules/semantic-ui-css/semantic.min.css'
+            resourcePath + 'Resources/private/css/**'
         ],
         img: [
-            '../UiBundle/Resources/private/img/**'
+            resourcePath + 'Resources/private/img/**'
         ]
     }
 };
@@ -44,8 +42,6 @@ gulp.task('admin-js', function () {
 });
 
 gulp.task('admin-css', function() {
-    gulp.src(['../../../../node_modules/semantic-ui-css/themes/**/*']).pipe(gulp.dest(adminRootPath + 'css/themes/'));
-
     var cssStream = gulp.src(paths.admin.css)
         .pipe(concat('css-files.css'))
     ;

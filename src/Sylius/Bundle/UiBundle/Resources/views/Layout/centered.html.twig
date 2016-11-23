@@ -13,6 +13,7 @@
     {% endblock %}
 
     {% block stylesheets %}
+        {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/ui/css/style.css'} %}
     {% endblock %}
 </head>
 <body class="centered">
@@ -20,6 +21,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/ui/js/app.js'} %}
 {% endblock %}
 </body>
 </html>
