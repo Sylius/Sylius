@@ -73,14 +73,27 @@ final class ShippingCategoryContext implements Context
     }
 
     /**
-     * @param string $shippingCategoryName
+     * @Given the store has :shippingCategoryName shipping category identified by :shippingCategoryCode
      */
-    private function createShippingCategory($shippingCategoryName)
+    public function theStoreHasShippingCategoryIdentifiedBy($shippingCategoryName, $shippingCategoryCode)
+    {
+        $this->createShippingCategory($shippingCategoryName, $shippingCategoryCode);
+    }
+
+    /**
+     * @param string $shippingCategoryName
+     * @param string $shippingCategoryCode
+     */
+    private function createShippingCategory($shippingCategoryName, $shippingCategoryCode = null)
     {
         /** @var ShippingCategoryInterface $shippingCategory */
         $shippingCategory =  $this->shippingCategoryFactory->createNew();
         $shippingCategory->setName($shippingCategoryName);
-        $shippingCategory->setCode(StringInflector::nameToCode($shippingCategoryName));
+        $shippingCategory->setCode($shippingCategoryCode);
+
+        if(null === $shippingCategoryCode) {
+            $shippingCategory->setCode(StringInflector::nameToCode($shippingCategoryName));
+        }
 
         $this->shippingCategoryRepository->add($shippingCategory);
         $this->sharedStorage->set('shipping_category', $shippingCategory);
