@@ -61,14 +61,14 @@ final class DatetimeFieldTypeSpec extends ObjectBehavior
         ])->shouldReturn(null);
     }
 
-    function is_configures_options(
+    function it_configures_options(
         OptionsResolver $resolver
     ) {
         $resolver->setDefaults([
             'format' => 'Y:m:d H:i:s'
         ])->shouldBeCalled();
         $resolver->setAllowedTypes([
-            'format' => ['string']
+            'format' => 'string'
         ])->shouldBeCalled();
         $this->configureOptions($resolver);
     }
