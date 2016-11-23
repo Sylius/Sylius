@@ -28,14 +28,4 @@ interface CurrencyInterface extends
      * @return string
      */
     public function getName();
-
-    /**
-     * @return float
-     */
-    public function getExchangeRate();
-
-    /**
-     * @param float $rate
-     */
-    public function setExchangeRate($rate);
 }

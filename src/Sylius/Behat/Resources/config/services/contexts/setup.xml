@@ -68,6 +68,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.factory.exchange_rate" />
             <argument type="service" id="__symfony__.sylius.repository.exchange_rate" />
+            <argument type="service" id="__symfony__.doctrine.orm.default_entity_manager" />
             <tag name="fob.context_service" />
         </service>
 

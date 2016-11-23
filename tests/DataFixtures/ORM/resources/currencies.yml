@@ -1,12 +1,9 @@
 Sylius\Component\Currency\Model\Currency:
     currency_1:
         code: USD
-        exchangeRate: 1.00000
 
     currency_2:
         code: EUR
-        exchangeRate: 0.89688
 
     currency_3:
         code: GBP
-        exchangeRate: 0.69514

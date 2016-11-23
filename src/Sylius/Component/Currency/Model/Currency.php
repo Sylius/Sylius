@@ -32,11 +32,6 @@ class Currency implements CurrencyInterface
      */
     protected $code;
 
-    /**
-     * @var float
-     */
-    protected $exchangeRate;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -80,21 +75,5 @@ class Currency implements CurrencyInterface
     public function setCode($code)
     {
         $this->code = $code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getExchangeRate()
-    {
-        return $this->exchangeRate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setExchangeRate($rate)
-    {
-        $this->exchangeRate = $rate;
     }
 }

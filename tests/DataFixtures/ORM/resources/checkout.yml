@@ -130,7 +130,6 @@ Sylius\Component\Payment\Model\PaymentMethodTranslation:
 Sylius\Component\Currency\Model\Currency:
     currency:
         code: "EUR"
-        exchangeRate: 1
 
 Sylius\Component\Locale\Model\Locale:
     locale:
