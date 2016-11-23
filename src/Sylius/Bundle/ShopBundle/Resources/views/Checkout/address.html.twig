@@ -9,20 +9,13 @@
         <div class="eleven wide column">
             <div class="ui segment">
                 {{ form_start(form, {'action': path('sylius_shop_checkout_address'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-                <input type="hidden" name="_method" value="PUT" />
+                    <input type="hidden" name="_method" value="PUT" />
 
-                {% include '@SyliusShop/Checkout/Address/_form.html.twig' %}
+                    {% include '@SyliusShop/Checkout/Address/_form.html.twig' %}
+                    <div class="ui hidden divider"></div>
+                    {% include '@SyliusShop/Checkout/Address/_navigation.html.twig' %}
 
-                <div class="ui hidden divider"></div>
-                <div class="ui two column grid">
-                    <div class="column">
-                        <a href="{{ path('sylius_shop_homepage') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.back_to_store'|trans }}</a>
-                    </div>
-                    <div class="right aligned column">
-                        <button type="submit" id="next-step" class="ui large primary icon labeled button"><i class="arrow right icon"></i> {{ 'sylius.ui.next'|trans }}</button>
-                    </div>
-                </div>
-                {{ form_row(form._token) }}
+                    {{ form_row(form._token) }}
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>

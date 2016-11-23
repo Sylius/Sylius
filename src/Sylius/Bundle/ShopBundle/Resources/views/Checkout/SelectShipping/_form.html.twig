@@ -1,52 +1,7 @@
-{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
-
 <div class="ui unmargined segments">
-    {% set disabled = false %}
     {% for shipment in order.shipments %}
-        <div class="ui segment">
-            <div class="ui dividing header">{{ 'sylius.ui.shipment'|trans }} #{{ loop.index }}</div>
-            <div class="ui fluid divided stackable items">
-                {% set shipment_form = form.shipments[loop.index0] %}
-                {{ form_errors(shipment_form.method) }}
-                {% for shipping_method_choice in shipment_form.method %}
-                    <div class="item">
-                        <div class="field">
-                            <div class="ui radio checkbox">
-                                {{ form_widget(shipping_method_choice) }}
-                            </div>
-                        </div>
-                        <div class="content">
-                            <a class="header">{{ form_label(shipping_method_choice) }}</a>
-                            <div class="description">
-                                <p>{{ shipping_method_choice.parent.vars.choices[loop.index0].data.description|default('') }}</p>
-                            </div>
-                        </div>
-                        <div class="extra">
-                            <div class="ui large right floated fee label">
-                                {{ money.convertAndFormat(shipment_form.method.vars.shipping_costs[shipping_method_choice.vars.value]) }}
-                            </div>
-                        </div>
-                    </div>
-                {% else %}
-                    {% set disabled = true %}
-                    {% include '@SyliusShop/Checkout/SelectShipping/_no_shipping_methods_available.twig' %}
-                {% endfor %}
-            </div>
-        </div>
+        {% include '@SyliusShop/Checkout/SelectShipping/_shipment.html.twig' with {'form': form.shipments[loop.index0]} %}
     {% else %}
-        {% set disabled = true %}
-        {% include '@SyliusShop/Checkout/SelectShipping/_no_shipping_methods_available.twig' %}
+        {% include '@SyliusShop/Checkout/SelectShipping/_unavailable.html.twig' %}
     {% endfor %}
-</div>
-<div class="ui hidden divider"></div>
-<div class="ui two column grid">
-    <div class="column">
-        <a href="{{ path('sylius_shop_checkout_address') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.change_address'|trans }}</a>
-    </div>
-    <div class="right aligned column">
-        <button type="submit" id="next-step" class="ui large primary icon labeled {% if disabled %} disabled {% endif %} button">
-            <i class="arrow right icon"></i>
-            {{ 'sylius.ui.next'|trans }}
-        </button>
-    </div>
 </div>

@@ -1,47 +1,7 @@
 <div class="ui unmargined segments">
-    {% set disabled = false %}
     {% for payment in order.payments %}
-        <div class="ui segment">
-            <div class="ui dividing header">{{ 'sylius.ui.payment'|trans }} #{{ loop.index }}</div>
-            <div class="ui fluid stackable items">
-                {% set payment_form = form.payments[loop.index0] %}
-                {{ form_errors(payment_form.method) }}
-                {% for payment_method_choice in payment_form.method %}
-                    <div class="item">
-                        <div class="field">
-                            <div class="ui radio checkbox">
-                                {{ form_widget(payment_method_choice) }}
-                            </div>
-                        </div>
-                        <div class="content">
-                            <a class="header">{{ form_label(payment_method_choice) }}</a>
-                            {% if payment_method_choice.parent.vars.choices[loop.index0].data.description is not null %}
-                                <div class="description">
-                                    <p>{{ payment_method_choice.parent.vars.choices[loop.index0].data.description }}</p>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% else %}
-                    {% set disabled = true %}
-                    {% include '@SyliusShop/Checkout/SelectPayment/_no_payment_methods_available.twig' %}
-                {% endfor %}
-            </div>
-        </div>
+        {% include '@SyliusShop/Checkout/SelectPayment/_payment.html.twig' with {'form': form.payments[loop.index0]} %}
     {% else %}
-        {% set disabled = true %}
-        {% include '@SyliusShop/Checkout/SelectPayment/_no_payment_methods_available.twig' %}
+        {% include '@SyliusShop/Checkout/SelectPayment/_unavailable.html.twig' %}
     {% endfor %}
-</div>
-<div class="ui hidden divider"></div>
-<div class="ui two column grid">
-    <div class="column">
-        <a href="{{ path('sylius_shop_checkout_select_shipping') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.change_shipping_method'|trans }}</a>
-    </div>
-    <div class="right aligned column">
-        <button type="submit" id="next-step" class="ui large primary icon labeled {% if disabled %} disabled {% endif %} button">
-            <i class="arrow right icon"></i>
-            {{ 'sylius.ui.next'|trans }}
-        </button>
-    </div>
 </div>

@@ -17,14 +17,11 @@ sylius_grid:
             sorting:
                 position: asc
             fields:
-                createdAt:
+                createdAt: # Must be configured
                     type: datetime
-                    label: sylius.ui.date
                     sortable: ~
-                    options:
-                        format: m/d/Y
-                position: 
-                    type: string  #not use but expected
+                position:  # Must be configured
+                    type: string 
                     sortable: productTaxon.position
             filters:
                 search:

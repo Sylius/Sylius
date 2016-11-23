@@ -1,3 +1,6 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_shop_partial_payment_change_method:
     path: /{id}/change-method
     methods: [GET, PUT]

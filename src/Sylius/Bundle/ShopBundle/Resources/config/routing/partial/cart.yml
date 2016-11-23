@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_partial_cart_summary:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:summaryAction
+        _sylius:
+            template: $template

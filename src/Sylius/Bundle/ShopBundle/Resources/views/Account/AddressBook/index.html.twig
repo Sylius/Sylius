@@ -15,13 +15,14 @@
             <a href="{{ path('sylius_shop_account_address_book_create') }}" class="ui right floated blue button"><i class="circle plus icon"></i> {{ 'sylius.ui.add_address'|trans }}</a>
         </div>
     </div>
+
     {% if addresses|length > 0 %}
-        {% set defaultAddress = (sylius.customer.defaultAddress) %}
-        {% if defaultAddress is not null %}
-            {% include '@SyliusShop/Account/AddressBook/_defaultAddress.html.twig' %}
+        {% set default_address = (sylius.customer.defaultAddress) %}
+        {% if default_address is not null %}
+            {% include '@SyliusShop/Account/AddressBook/_defaultAddress.html.twig' with {'address': default_address} %}
         {% endif %}
     <div class="ui stackable grid" id="sylius-addresses">
-        {% for address in addresses if defaultAddress is null or address.id != defaultAddress.id %}
+        {% for address in addresses if default_address is null or address.id != default_address.id %}
             {% include '@SyliusShop/Account/AddressBook/_item.html.twig' %}
         {% endfor %}
     </div>

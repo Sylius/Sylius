@@ -17,12 +17,5 @@
             <argument type="service" id="sylius.adjustments_aggregator" />
             <tag name="templating.helper" alias="sylius_adjustments" />
         </service>
-        <service id="sylius.templating.helper.cart" class="Sylius\Bundle\OrderBundle\Templating\Helper\CartHelper" lazy="true">
-            <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.factory.order_item" />
-            <argument type="service" id="form.factory" />
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
-            <tag name="templating.helper" alias="sylius_cart" />
-        </service>
     </services>
 </container>

@@ -63,8 +63,8 @@ sylius_shop_account_address_book_delete:
                     - $id
                     - 'expr:service("sylius.context.customer").getCustomer()'
 
-sylius_shop_account_address_book_set_default:
-    path: /{id}/set-default
+sylius_shop_account_address_book_set_as_default:
+    path: /{id}/set-as-default
     methods: [GET, PATCH]
     defaults:
         _controller: sylius.controller.customer:updateAction

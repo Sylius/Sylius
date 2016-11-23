@@ -6,7 +6,7 @@
         <div class="column">
         </div>
         <div class="right aligned column">
-            {% include '@SyliusShop/Cart/_widget.html.twig' %}
+            {{ render(url('sylius_shop_partial_cart_summary', {'template': '@SyliusShop/Cart/_widget.html.twig'})) }}
         </div>
     </div>
 </div>
