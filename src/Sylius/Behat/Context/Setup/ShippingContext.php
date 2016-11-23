@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -211,6 +212,42 @@ final class ShippingContext implements Context
     public function theShippingMethodIsDisabled(ShippingMethodInterface $shippingMethod)
     {
         $shippingMethod->disable();
+        $this->shippingMethodManager->flush();
+    }
+
+    /**
+     * @Given /^(this shipping method) requires at least one unit matches to ("([^"]+)" shipping category)$/
+     */
+    public function thisShippingMethodRequiresAtLeastOneUnitMatchToShippingCategory(
+        ShippingMethodInterface $shippingMethod, 
+        ShippingCategoryInterface $shippingCategory
+    ) {
+        $shippingMethod->setCategory($shippingCategory);
+        $shippingMethod->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ANY);
+        $this->shippingMethodManager->flush();
+    }
+
+    /**
+     * @Given /^(this shipping method) requires that all units match to ("([^"]+)" shipping category)$/
+     */
+    public function thisShippingMethodRequiresThatAllUnitsMatchToShippingCategory(
+        ShippingMethodInterface $shippingMethod,
+        ShippingCategoryInterface $shippingCategory
+    ) {
+        $shippingMethod->setCategory($shippingCategory);
+        $shippingMethod->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_ALL);
+        $this->shippingMethodManager->flush();
+    }
+
+    /**
+     * @Given /^(this shipping method) requires that no units match to ("([^"]+)" shipping category)$/
+     */
+    public function thisShippingMethodRequiresThatNoUnitsMatchToShippingCategory(
+        ShippingMethodInterface $shippingMethod,
+        ShippingCategoryInterface $shippingCategory
+    ) {
+        $shippingMethod->setCategory($shippingCategory);
+        $shippingMethod->setCategoryRequirement(ShippingMethodInterface::CATEGORY_REQUIREMENT_MATCH_NONE);
         $this->shippingMethodManager->flush();
     }
 

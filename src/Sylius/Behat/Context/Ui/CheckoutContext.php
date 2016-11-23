@@ -1273,6 +1273,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then there should be information about no available shipping methods
      * @Then there should be information about no shipping methods available for my shipping address
      */
     public function thereShouldBeInformationAboutNoShippingMethodsAvailableForMyShippingAddress()
@@ -1360,6 +1361,28 @@ final class CheckoutContext implements Context
         $lastPaymentMethod = end($paymentMethods);
 
         Assert::same($paymentMethodName, $lastPaymentMethod);
+    }
+
+    /**
+     * @Then I should see :shippingMethodName shipping method
+     */
+    public function iShouldSeeShippingMethod($shippingMethodName)
+    {
+        Assert::true(
+            $this->selectShippingPage->hasShippingMethod($shippingMethodName),
+            sprintf('There should be %s shipping method, but it is not.', $shippingMethodName)
+        );
+    }
+
+    /**
+     * @Then I should not see :shippingMethodName shipping method
+     */
+    public function iShouldNotSeeShippingMethod($shippingMethodName)
+    {
+        Assert::false(
+            $this->selectShippingPage->hasShippingMethod($shippingMethodName),
+            sprintf('There should not be %s shipping method, but it is.', $shippingMethodName)
+        );
     }
 
     /**

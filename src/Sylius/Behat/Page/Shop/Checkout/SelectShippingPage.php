@@ -146,6 +146,21 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     /**
      * {@inheritdoc}
      */
+    public function hasShippingMethod($shippingMethodName)
+    {
+        $inputs = $this->getSession()->getPage()->findAll('css', '#shipping_methods .item .content label');
+
+        $shippingMethods = [];
+        foreach ($inputs as $input) {
+            $shippingMethods[] = trim($input->getText());
+        }
+
+        return in_array($shippingMethodName, $shippingMethods);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
