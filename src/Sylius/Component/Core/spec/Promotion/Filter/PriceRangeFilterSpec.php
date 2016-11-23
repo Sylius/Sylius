@@ -53,9 +53,9 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         $item2->getVariant()->willReturn($item2Variant);
         $item3->getVariant()->willReturn($item3Variant);
 
-        $productVariantPriceCalculator->calculate($item1Variant, $channel)->willReturn(500);
-        $productVariantPriceCalculator->calculate($item2Variant, $channel)->willReturn(5000);
-        $productVariantPriceCalculator->calculate($item3Variant, $channel)->willReturn(15000);
+        $productVariantPriceCalculator->calculate($item1Variant, ['channel' => $channel])->willReturn(500);
+        $productVariantPriceCalculator->calculate($item2Variant, ['channel' => $channel])->willReturn(5000);
+        $productVariantPriceCalculator->calculate($item3Variant, ['channel' => $channel])->willReturn(15000);
 
         $this
             ->filter([$item1, $item2, $item3], [
@@ -77,8 +77,8 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
 
-        $productVariantPriceCalculator->calculate($item1Variant, $channel)->willReturn(1000);
-        $productVariantPriceCalculator->calculate($item2Variant, $channel)->willReturn(15000);
+        $productVariantPriceCalculator->calculate($item1Variant, ['channel' => $channel])->willReturn(1000);
+        $productVariantPriceCalculator->calculate($item2Variant, ['channel' => $channel])->willReturn(15000);
 
         $this
             ->filter([$item1, $item2], [
@@ -100,8 +100,8 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
 
-        $productVariantPriceCalculator->calculate($item1Variant, $channel)->willReturn(500);
-        $productVariantPriceCalculator->calculate($item2Variant, $channel)->willReturn(10000);
+        $productVariantPriceCalculator->calculate($item1Variant, ['channel' => $channel])->willReturn(500);
+        $productVariantPriceCalculator->calculate($item2Variant, ['channel' => $channel])->willReturn(10000);
 
         $this
             ->filter([$item1, $item2], [
@@ -126,9 +126,9 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         $item2->getVariant()->willReturn($item2Variant);
         $item3->getVariant()->willReturn($item3Variant);
 
-        $productVariantPriceCalculator->calculate($item1Variant, $channel)->willReturn(500);
-        $productVariantPriceCalculator->calculate($item2Variant, $channel)->willReturn(5000);
-        $productVariantPriceCalculator->calculate($item3Variant, $channel)->willReturn(10000);
+        $productVariantPriceCalculator->calculate($item1Variant, ['channel' => $channel])->willReturn(500);
+        $productVariantPriceCalculator->calculate($item2Variant, ['channel' => $channel])->willReturn(5000);
+        $productVariantPriceCalculator->calculate($item3Variant, ['channel' => $channel])->willReturn(10000);
 
         $this
             ->filter([$item1, $item2, $item3], [
@@ -150,8 +150,8 @@ final class PriceRangeFilterSpec extends ObjectBehavior
         $item1->getVariant()->willReturn($item1Variant);
         $item2->getVariant()->willReturn($item2Variant);
 
-        $productVariantPriceCalculator->calculate($item1Variant, $channel)->willReturn(500);
-        $productVariantPriceCalculator->calculate($item2Variant, $channel)->willReturn(1000);
+        $productVariantPriceCalculator->calculate($item1Variant, ['channel' => $channel])->willReturn(500);
+        $productVariantPriceCalculator->calculate($item2Variant, ['channel' => $channel])->willReturn(1000);
 
         $this
             ->filter([$item1, $item2], [

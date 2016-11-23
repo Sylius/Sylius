@@ -27,7 +27,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($channel, $price)
+    public function specifyPrice($price, $channel)
     {
         $this->getDocument()->fillField($channel, $price);
     }

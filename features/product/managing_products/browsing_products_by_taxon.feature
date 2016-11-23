@@ -5,8 +5,7 @@ Feature: Browsing products
     I want to be able to browse products
 
     Background:
-        Given the store operates on a single channel in "United States"
-        And the store classifies its products as "Mugs" and "Pugs"
+        Given the store classifies its products as "Mugs" and "Pugs"
         And the store has a product "Young pug"
         And this product belongs to "Pugs"
         And I am logged in as an administrator

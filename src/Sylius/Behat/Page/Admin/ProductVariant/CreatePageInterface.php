@@ -21,10 +21,10 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**
-     * @param string $channel
      * @param int $price
+     * @param string $channel
      */
-    public function specifyPrice($channel, $price);
+    public function specifyPrice($price, $channel);
 
     /**
      * @param int $height

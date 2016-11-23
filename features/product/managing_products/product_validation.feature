@@ -10,8 +10,8 @@ Feature: Products validation
 
     @ui
     Scenario: Adding a new simple product without specifying its code
-        When I want to create a new simple product
-        And I name it "Dice Brewing" in "English (United States)"
+        Given I want to create a new simple product
+        When I name it "Dice Brewing" in "English (United States)"
         And I set its price to $10.00 for "United States" channel
         And I try to add it
         Then I should be notified that code is required
@@ -53,8 +53,8 @@ Feature: Products validation
 
     @ui
     Scenario: Adding a new simple product without specifying its name
-        When I want to create a new simple product
-        And I specify its code as "BOARD_DICE_BREWING"
+        Given I want to create a new simple product
+        When I specify its code as "BOARD_DICE_BREWING"
         And I set its price to $10.00 for "United States" channel
         And I try to add it
         Then I should be notified that name is required

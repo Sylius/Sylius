@@ -5,8 +5,7 @@ Feature: Deleting a product with its reviews
     I want to be able to delete products from the product catalog
 
     Background:
-        Given the store operates on a single channel in "United States"
-        And the store has a product "Toyota GT86 model"
+        Given the store has a product "Toyota GT86 model"
         And this product has one review
         And I am logged in as an administrator
 
