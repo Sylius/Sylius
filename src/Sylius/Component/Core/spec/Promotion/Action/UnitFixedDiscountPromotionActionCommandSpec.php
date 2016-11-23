@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -60,6 +61,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_applies_a_fixed_discount_on_every_unit_in_order(
+        ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
@@ -75,8 +77,9 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getCurrencyCode()->willReturn('USD');
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
+        $order->getChannel()->willReturn($channel);
 
-        $priceRangeFilter->filter([$orderItem], ['base_amount' => 500])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem], ['base_amount' => 500, 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['base_amount' => 500])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['base_amount' => 500])->willReturn([$orderItem]);
 
@@ -109,6 +112,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_applies_a_fixed_discount_in_defined_currency_on_every_unit_in_order(
+        ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
@@ -127,8 +131,9 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $currencyConverter->convertToBase(1000, 'PLN')->willReturn(250);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
+        $order->getChannel()->willReturn($channel);
 
-        $priceRangeFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000], 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem]);
 
@@ -176,6 +181,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_does_not_apply_bigger_promotions_than_unit_total(
+        ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
@@ -191,8 +197,9 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getCurrencyCode()->willReturn('USD');
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
+        $order->getChannel()->willReturn($channel);
 
-        $priceRangeFilter->filter([$orderItem], ['base_amount' => 1000])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem], ['base_amount' => 1000, 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['base_amount' => 1000])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['base_amount' => 1000])->willReturn([$orderItem]);
 
