@@ -66,7 +66,7 @@ final class AdminSecurityContext implements Context
      */
     public function iAmLoggedInAsAnAdministrator()
     {
-        $user = $this->userFactory->create();
+        $user = $this->userFactory->create(['email' => 'sylius@example.com', 'password' => 'sylius']);
         $this->userRepository->add($user);
 
         $this->securityService->logIn($user);

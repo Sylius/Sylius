@@ -435,6 +435,36 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given :numberOfCustomers customers have placed :numberOfOrders orders for total of :total mostly :product product
+     * @Given then :numberOfCustomers more customers have placed :numberOfOrders orders for total of :total mostly :product product
+     */
+    public function customersHavePlacedOrdersForTotalOfMostlyProduct($numberOfCustomers, $numberOfOrders, $total, ProductInterface $product)
+    {
+        $customers = $this->generateCustomers($numberOfCustomers);
+        $sampleProductVariant = $product->getVariants()->first();
+        $total = $this->getPriceFromString($total);
+
+        for ($i = 0; $i < $numberOfOrders; $i++) {
+            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#'.uniqid());
+            $order->setState(OrderInterface::STATE_NEW); // Temporary, we should use checkout to place these orders.
+            $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
+
+            $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
+            $total -= $price;
+
+            $item = $this->orderItemFactory->createNew();
+            $item->setVariant($sampleProductVariant);
+            $item->setUnitPrice($price);
+
+            $this->itemQuantityModifier->modify($item, 1);
+
+            $order->addItem($item);
+
+            $this->orderRepository->add($order);
+        }
+    }
+
+    /**
      * @Given /^(this order) is already paid$/
      * @Given the order :order is already paid
      */
