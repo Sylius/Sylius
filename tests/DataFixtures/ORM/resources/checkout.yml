@@ -123,7 +123,6 @@ Sylius\Component\Currency\Model\Currency:
     currency:
         code: "EUR"
         exchangeRate: 1
-        enabled: true
 
 Sylius\Component\Locale\Model\Locale:
     locale:

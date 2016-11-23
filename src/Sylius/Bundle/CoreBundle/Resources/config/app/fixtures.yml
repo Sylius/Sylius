@@ -12,8 +12,7 @@ sylius_fixtures:
                 locale: ~
                 currency:
                     options:
-                        currencies:
-                            USD: true
+                        currencies: ['USD']
                 geographical:
                     options:
                         countries:
