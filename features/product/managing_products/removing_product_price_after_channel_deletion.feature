@@ -6,7 +6,6 @@ Feature: Removing a product's price after channel deletion
     
     Background:
         Given the store has currency "USD"
-        And the store has currency "GBP" with exchange rate 0.7
         And the store operates on a channel named "Web-US" in "USD" currency
         And the store operates on another channel named "Web-GB" in "GBP" currency
         And the store has a product "Dice Brewing" priced at "$10.00" in "Web-US" channel

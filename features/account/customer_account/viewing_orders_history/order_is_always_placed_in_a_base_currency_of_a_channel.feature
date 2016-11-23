@@ -6,7 +6,7 @@ Feature: Order is always placed in a base currency of a channel
 
     Background:
         Given the store operates on a channel named "United States" in "USD" currency
-        And that channel allows to shop using the "CAD" currency with exchange rate 3.0
+        And that channel allows to shop using the "CAD" currency
         And the store ships to "United States"
         And the store has a zone "United States" with code "US"
         And this zone has the "United States" country member
