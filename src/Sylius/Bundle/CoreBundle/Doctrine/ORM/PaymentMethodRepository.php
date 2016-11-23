@@ -48,7 +48,7 @@ class PaymentMethodRepository extends BasePaymentMethodRepository implements Pay
         ;
 
         return $queryBuilder
-            ->groupBy('o.position')
+            ->orderBy('o.position')
             ->getQuery()
             ->getResult()
         ;
