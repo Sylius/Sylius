@@ -126,13 +126,7 @@ class RequestConfiguration
      */
     public function getFormType()
     {
-        $form = $this->getFormConfiguration();
-
-        if (is_array($form) && array_key_exists('type', $form)) {
-            return $form['type'];
-        }
-
-        return $form;
+        return $this->getFormConfiguration('type');
     }
 
     /**
@@ -140,13 +134,7 @@ class RequestConfiguration
      */
     public function getFormOptions()
     {
-        $form = $this->getFormConfiguration();
-
-        if (is_array($form) && array_key_exists('options', $form)) {
-            return $form['options'];
-        }
-
-        return [];
+        return $this->getFormConfiguration('options');
     }
 
     /**
@@ -603,20 +591,34 @@ class RequestConfiguration
     }
 
     /**
-     * @return array|string|null
+     * @param string $option
+     *
+     * @return array|null|string
      */
-    private function getFormConfiguration()
+    private function getFormConfiguration($option)
     {
         $form = $this->parameters->get('form');
         if (null !== $form) {
-            return $form;
+            if (is_array($form) && isset($form[$option])) {
+                return $form[$option];
+            }
+
+            if (is_string($form) && 'type' === $option) {
+                return $form;
+            }
         }
 
-        $form = $this->metadata->getClass('form');
-        if (is_string($form)) {
-            return $form;
+        if ('type' === $option) {
+            $form = $this->metadata->getClass('form');
+            if (is_string($form)) {
+                return $form;
+            }
+
+            return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
+        } elseif ('options' === $option) {
+            return [];
         }
 
-        return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
+        return null;
     }
 }

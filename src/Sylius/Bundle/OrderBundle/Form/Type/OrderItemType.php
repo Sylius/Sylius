@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\OrderBundle\Form\Type;
 
-use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -25,21 +24,21 @@ class OrderItemType extends AbstractResourceType
     /**
      * @var DataMapperInterface
      */
-    protected $orderItemQuantityDataMapper;
+    protected $dataMapper;
 
     /**
      * @param string $dataClass
      * @param array $validationGroups
-     * @param DataMapperInterface $orderItemQuantityDataMapper
+     * @param DataMapperInterface $dataMapper
      */
     public function __construct(
         $dataClass,
         array $validationGroups = [],
-        DataMapperInterface $orderItemQuantityDataMapper
+        DataMapperInterface $dataMapper
     ) {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->orderItemQuantityDataMapper = $orderItemQuantityDataMapper;
+        $this->dataMapper = $dataMapper;
     }
 
     /**
@@ -52,10 +51,7 @@ class OrderItemType extends AbstractResourceType
                 'attr' => ['min' => 1],
                 'label' => 'sylius.ui.quantity',
             ])
-            ->add('unitPrice', MoneyType::class, [
-                'label' => 'sylius.ui.unit_price',
-            ])
-            ->setDataMapper($this->orderItemQuantityDataMapper)
+            ->setDataMapper($this->dataMapper)
         ;
     }
 

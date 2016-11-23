@@ -50,6 +50,9 @@
             <argument>%locale%</argument>
             <tag name="form.type_extension" extended-type="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType" />
         </service>
+        <service id="sylius.form.extension.type.order" class="Sylius\Bundle\CoreBundle\Form\Extension\OrderTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\OrderType" />
+        </service>
 
         <service id="sylius.form.type.product_image" class="%sylius.form.type.product_image.class%">
             <argument>%sylius.model.product_image.class%</argument>
@@ -170,11 +173,13 @@
             <tag name="form.type" alias="sylius_address_choice" />
         </service>
 
+        <service id="sylius.form.type.add_to_cart" class="Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType">
+            <argument>Sylius\Bundle\OrderBundle\Controller\AddToCartCommand</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
         <service id="sylius.form.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Type\Order\CartItemType">
-            <argument>%sylius.model.order_item.class%</argument>
-            <argument>%sylius.validation_groups.order_item%</argument>
-            <argument type="service" id="sylius.form.data_mapper.order_item_quantity"/>
-            <tag name="form.type" alias="sylius_cart_item" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.product_variant" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductVariantType">
@@ -183,12 +188,6 @@
             <argument type="service" id="sylius.registry.price_calculator" />
             <argument type="service" id="form.registry" />
             <tag name="form.type" alias="sylius_product_variant" />
-        </service>
-
-        <service id="sylius.form.type.add_to_cart" class="Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType">
-            <argument>Sylius\Bundle\OrderBundle\Controller\AddToCartCommand</argument>
-            <argument>%sylius.validation_groups.order_item%</argument>
-            <tag name="form.type" alias="sylius_add_to_cart" />
         </service>
     </services>
 </container>

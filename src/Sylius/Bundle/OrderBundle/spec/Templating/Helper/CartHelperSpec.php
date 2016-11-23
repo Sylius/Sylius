@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\OrderBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Form\Type\Order\CartItemType;
 use Sylius\Bundle\OrderBundle\Templating\Helper\CartHelper;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -64,7 +65,7 @@ final class CartHelperSpec extends ObjectBehavior
         $itemFactory->createNew()->willReturn($item);
         $orderItemQuantityModifier->modify($item, 1)->shouldBeCalled();
 
-        $formFactory->create('sylius_cart_item', $item, [])->willReturn($form);
+        $formFactory->create(CartItemType::class, $item, [])->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $this->getItemFormView()->shouldReturn($formView);
@@ -81,7 +82,7 @@ final class CartHelperSpec extends ObjectBehavior
         $itemFactory->createNew()->willReturn($item);
         $orderItemQuantityModifier->modify($item, 1)->shouldBeCalled();
 
-        $formFactory->create('sylius_cart_item', $item, ['foo' => 'bar'])->willReturn($form);
+        $formFactory->create(CartItemType::class, $item, ['foo' => 'bar'])->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $this->getItemFormView(['foo' => 'bar'])->shouldReturn($formView);

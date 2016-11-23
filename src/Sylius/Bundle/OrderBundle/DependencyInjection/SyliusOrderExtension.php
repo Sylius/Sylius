@@ -35,9 +35,6 @@ final class SyliusOrderExtension extends AbstractResourceExtension
         $loader->load('services.xml');
         $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
-        $orderItemType = $container->getDefinition('sylius.form.type.order_item');
-        $orderItemType->addArgument(new Reference('sylius.form.data_mapper.order_item_quantity'));
-
         $container->setParameter('sylius_order.cart_expiration_period', $config['expiration']['cart']);
         $container->setParameter('sylius_order.order_expiration_period', $config['expiration']['order']);
     }

@@ -15,6 +15,8 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Symfony\Component\Form\DataMapperInterface;
 
 /**
+ * @internal
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class OrderItemQuantityDataMapper implements DataMapperInterface

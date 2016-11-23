@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Order;
 
-use Sylius\Bundle\OrderBundle\Controller\AddCartItemCommand;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -27,9 +26,7 @@ final class AddToCartType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('cartItem', CartItemType::class, ['product' => $options['product']])
-        ;
+        $builder->add('cartItem', CartItemType::class, ['product' => $options['product']]);
     }
 
     /**
