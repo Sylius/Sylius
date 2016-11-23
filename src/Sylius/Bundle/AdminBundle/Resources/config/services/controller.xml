@@ -15,7 +15,9 @@
     <services>
         <service id="sylius.controller.admin.dashboard" class="Sylius\Bundle\AdminBundle\Controller\DashboardController">
             <argument type="service" id="sylius.dashboard.statistics_provider" />
+            <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="templating" />
+            <argument type="service" id="router" />
         </service>
     </services>
 </container>

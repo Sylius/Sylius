@@ -25,11 +25,6 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function count();
 
     /**
-     * @return int
-     */
-    public function getTotalSales();
-
-    /**
      * @param int $count
      *
      * @return OrderInterface[]

@@ -41,22 +41,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function getTotalSales()
-    {
-        $total = $this->createQueryBuilder('o')
-            ->select('SUM(o.total)')
-            ->andWhere('o.state != :state')
-            ->setParameter('state', OrderInterface::STATE_CART)
-            ->getQuery()
-            ->getSingleScalarResult()
-        ;
-
-        return (int) $total;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findLatest($count)
     {
         return $this->createQueryBuilder('o')

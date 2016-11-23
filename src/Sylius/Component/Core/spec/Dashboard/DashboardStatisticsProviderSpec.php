@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Dashboard\DashboardStatistics;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProvider;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
@@ -38,16 +39,17 @@ final class DashboardStatisticsProviderSpec extends ObjectBehavior
         $this->shouldImplement(DashboardStatisticsProviderInterface::class);
     }
 
-    function it_obtains_order_and_customer_statistics_from_the_repositories(
+    function it_obtains_order_and_customer_statistics_by_given_channel(
         OrderRepositoryInterface $orderRepository,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
+        ChannelInterface $channel
     ) {
         $expectedStats = new DashboardStatistics(450, 2, 6);
 
-        $orderRepository->getTotalSales()->willReturn(450);
-        $orderRepository->count()->willReturn(2);
+        $orderRepository->getTotalSalesForChannel($channel)->willReturn(450);
+        $orderRepository->countByChannel($channel)->willReturn(2);
         $customerRepository->count()->willReturn(6);
 
-        $this->getStatistics()->shouldBeLike($expectedStats);
+        $this->getStatisticsForChannel($channel)->shouldBeLike($expectedStats);
     }
 }
