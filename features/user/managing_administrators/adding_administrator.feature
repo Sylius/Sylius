@@ -6,6 +6,7 @@ Feature: Adding a new administrator
 
     Background:
         Given the store has locale "English (United States)"
+        And the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
     @ui
