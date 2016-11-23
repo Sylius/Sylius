@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
+use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -30,12 +31,12 @@ class ChannelTypeExtension extends AbstractTypeExtension
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('locales', 'sylius_locale_choice', [
+            ->add('locales', LocaleChoiceType::class, [
                 'label' => 'sylius.form.channel.locales',
                 'required' => true,
                 'multiple' => true,
             ])
-            ->add('defaultLocale', 'sylius_locale_choice', [
+            ->add('defaultLocale', LocaleChoiceType::class, [
                 'label' => 'sylius.form.channel.locale_default',
                 'required' => true,
                 'placeholder' => null,

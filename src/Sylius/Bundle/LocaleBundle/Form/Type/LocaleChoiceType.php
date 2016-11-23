@@ -55,6 +55,8 @@ class LocaleChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
             'choices' => function (Options $options) {
                 if (null === $options['enabled']) {

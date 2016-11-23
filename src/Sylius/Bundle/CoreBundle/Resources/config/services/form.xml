@@ -45,6 +45,11 @@
             <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" />
         </service>
+        <service id="sylius.form.extension.type.locale" class="Sylius\Bundle\CoreBundle\Form\Extension\LocaleTypeExtension">
+            <argument type="service" id="sylius.repository.locale" />
+            <argument>%locale%</argument>
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType" />
+        </service>
 
         <service id="sylius.form.type.product_image" class="%sylius.form.type.product_image.class%">
             <argument>%sylius.model.product_image.class%</argument>
@@ -63,13 +68,6 @@
         <service id="sylius.form.type.taxon_image" class="%sylius.form.type.taxon_image.class%">
             <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="form.type" alias="sylius_taxon_image" />
-        </service>
-        <service id="sylius.form.type.locale" class="%sylius.form.type.locale.class%">
-            <argument>%sylius.model.locale.class%</argument>
-            <argument>%sylius.validation_groups.locale%</argument>
-            <argument>%locale%</argument>
-            <argument type="service" id="sylius.repository.locale" />
-            <tag name="form.type" alias="sylius_locale" />
         </service>
         <service id="sylius.form.type.currency" class="%sylius.form.type.currency.class%">
             <argument>%sylius.model.currency.class%</argument>
