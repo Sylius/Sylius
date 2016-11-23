@@ -11,10 +11,10 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -23,16 +23,16 @@ use Webmozart\Assert\Assert;
 final class OrderPricesRecalculator implements OrderProcessorInterface
 {
     /**
-     * @var DelegatingCalculatorInterface
+     * @var ProductVariantPriceCalculatorInterface
      */
-    private $priceCalculator;
+    private $productVariantPriceCalculator;
 
     /**
-     * @param DelegatingCalculatorInterface $priceCalculator
+     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
      */
-    public function __construct(DelegatingCalculatorInterface $priceCalculator)
+    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
-        $this->priceCalculator = $priceCalculator;
+        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
     /**
@@ -42,29 +42,14 @@ final class OrderPricesRecalculator implements OrderProcessorInterface
     {
         /** @var OrderInterface $order */
         Assert::isInstanceOf($order, OrderInterface::class);
-
-        $context = [];
-        if (null !== $customer = $order->getCustomer()) {
-            $context['customer'] = $customer;
-            $context['groups'] = [$customer->getGroup()];
-        }
-
-        if (null !== $order->getChannel()) {
-            $context['channel'] = $order->getChannel();
-        }
-
-        if (null !== $order->getCurrencyCode()) {
-            $context['currency'] = $order->getCurrencyCode();
-        }
+        $channel = $order->getChannel();
 
         foreach ($order->getItems() as $item) {
             if ($item->isImmutable()) {
                 continue;
             }
 
-            $context['quantity'] = $item->getQuantity();
-//            $item->setUnitPrice($this->priceCalculator->calculate($item->getVariant(), $context));
-            $item->setUnitPrice(1000);
+            $item->setUnitPrice($this->productVariantPriceCalculator->calculate($item->getVariant(), $channel));
         }
     }
 }
