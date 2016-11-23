@@ -30,12 +30,12 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
     /**
      * @var ServiceRegistryInterface
      */
-    private $calculatorRegistry;
+    protected $calculatorRegistry;
 
     /**
      * @var FormFactoryInterface
      */
-    private $factory;
+    protected $factory;
 
     /**
      * @var FormTypeRegistryInterface
