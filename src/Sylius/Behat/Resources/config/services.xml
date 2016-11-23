@@ -68,9 +68,6 @@
             <argument type="service" id="mink.default_session" />
             <argument type="service" id="__symfony__.router" />
         </service>
-        <service id="sylius.behat.current_product_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentProductPageResolver" public="false">
-            <argument type="service" id="sylius.behat.current_page_resolver" />
-        </service>
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>
     </services>

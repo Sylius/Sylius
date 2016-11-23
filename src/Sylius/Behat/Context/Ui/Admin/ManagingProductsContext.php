@@ -24,7 +24,7 @@ use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\Resolver\CurrentProductPageResolverInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -81,7 +81,7 @@ final class ManagingProductsContext implements Context
     private $indexPerTaxonPage;
 
     /**
-     * @var CurrentProductPageResolverInterface
+     * @var CurrentPageResolverInterface
      */
     private $currentPageResolver;
 
@@ -99,7 +99,7 @@ final class ManagingProductsContext implements Context
      * @param UpdateConfigurableProductPageInterface $updateConfigurableProductPage
      * @param ProductReviewIndexPageInterface $productReviewIndexPage
      * @param IndexPerTaxonPageInterface $indexPerTaxonPage
-     * @param CurrentProductPageResolverInterface $currentPageResolver
+     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -111,7 +111,7 @@ final class ManagingProductsContext implements Context
         UpdateConfigurableProductPageInterface $updateConfigurableProductPage,
         ProductReviewIndexPageInterface $productReviewIndexPage,
         IndexPerTaxonPageInterface $indexPerTaxonPage,
-        CurrentProductPageResolverInterface $currentPageResolver,
+        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -715,7 +715,7 @@ final class ManagingProductsContext implements Context
         $this->sharedStorage->set('product', $product);
 
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->resolveCurrentPage($product);
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::true(
             $currentPage->isImageWithCodeDisplayed($code),
@@ -729,7 +729,7 @@ final class ManagingProductsContext implements Context
     public function thisProductShouldNotHaveAnImageWithCode(ProductInterface $product, $code)
     {
         /** @var UpdateSimpleProductPageInterface|UpdateConfigurableProductPageInterface $currentPage */
-        $currentPage = $this->resolveCurrentPage($product);
+        $currentPage = $this->resolveCurrentPage();
 
         Assert::false(
             $currentPage->isImageWithCodeDisplayed($code),
@@ -976,14 +976,10 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @param ProductInterface|null $product
-     *
      * @return SymfonyPageInterface
      */
-    private function resolveCurrentPage(ProductInterface $product = null)
+    private function resolveCurrentPage()
     {
-        $product = $product ?: $this->sharedStorage->has('product') ? $this->sharedStorage->get('product') : null;
-
         return $this->currentPageResolver->getCurrentPageWithForm([
             $this->indexPage,
             $this->indexPerTaxonPage,
@@ -991,6 +987,6 @@ final class ManagingProductsContext implements Context
             $this->createConfigurableProductPage,
             $this->updateSimpleProductPage,
             $this->updateConfigurableProductPage,
-        ], $product);
+        ]);
     }
 }
