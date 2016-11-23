@@ -63,7 +63,7 @@ final class ChannelBasedPriceHelperSpec extends ObjectBehavior
         $currentCart->getChannel()->willReturn($currentChannel);
 
         $productVariantPriceCalculator
-            ->calculate($productVariant, $currentChannel)
+            ->calculate($productVariant, ['channel' => $currentChannel])
             ->willThrow(\InvalidArgumentException::class)
         ;
 
@@ -82,7 +82,7 @@ final class ChannelBasedPriceHelperSpec extends ObjectBehavior
         $currentCart->getChannel()->willReturn($currentChannel);
         $currentCart->getCurrencyCode()->willReturn('USD');
 
-        $productVariantPriceCalculator->calculate($productVariant, $currentChannel)->willReturn(1000);
+        $productVariantPriceCalculator->calculate($productVariant, ['channel' => $currentChannel])->willReturn(1000);
         $priceHelper->convertAndFormatAmount(1000, 'USD')->willReturn(1300);
 
         $this->getPriceForCurrentChannel($productVariant)->shouldReturn(1300);

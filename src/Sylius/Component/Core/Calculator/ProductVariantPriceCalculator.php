@@ -23,9 +23,11 @@ final class ProductVariantPriceCalculator implements ProductVariantPriceCalculat
     /**
      * {@inheritdoc}
      */
-    public function calculate(ProductVariantInterface $productVariant, ChannelInterface $channel)
+    public function calculate(ProductVariantInterface $productVariant, array $context)
     {
-        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
+        Assert::keyExists($context, 'channel');
+
+        $channelPricing = $productVariant->getChannelPricingForChannel($context['channel']);
         Assert::notNull($channelPricing);
 
         return $channelPricing->getPrice();

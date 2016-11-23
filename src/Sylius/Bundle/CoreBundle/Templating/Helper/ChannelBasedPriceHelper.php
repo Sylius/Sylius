@@ -62,7 +62,10 @@ class ChannelBasedPriceHelper extends Helper implements ChannelBasedPriceHelperI
         $currentCart = $this->cartContext->getCart();
 
         try {
-            $price = $this->productVariantPriceCalculator->calculate($productVariant, $currentCart->getChannel());
+            $price = $this
+                ->productVariantPriceCalculator
+                ->calculate($productVariant, ['channel' => $currentCart->getChannel()])
+            ;
         } catch (\InvalidArgumentException $exception) {
             return null;
         }

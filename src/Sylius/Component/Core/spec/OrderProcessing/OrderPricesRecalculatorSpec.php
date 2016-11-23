@@ -66,7 +66,7 @@ final class OrderPricesRecalculatorSpec extends ObjectBehavior
         $order->getChannel()->willReturn($channel);
 
         $productVariantPriceCalculator
-            ->calculate($variant, $channel)
+            ->calculate($variant, ['channel' => $channel])
             ->willReturn(10)
         ;
         $item->setUnitPrice(10)->shouldBeCalled();

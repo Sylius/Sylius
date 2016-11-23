@@ -5,8 +5,7 @@ Feature: Adding images to an existing product
     I want to be able to add new images to a taxon
 
     Background:
-        Given the store operates on a single channel in "United States"
-        And I am logged in as an administrator
+        Given I am logged in as an administrator
 
     @ui @javascript
     Scenario: Adding a single image to an existing simple product

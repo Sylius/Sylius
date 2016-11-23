@@ -773,7 +773,9 @@ final class ProductContext implements Context
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        if (null !== $channel) {
+            $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
+        }
         $productVariant->setCode($product->getCode());
 
         return $product;
@@ -871,7 +873,7 @@ final class ProductContext implements Context
         /** @var ChannelPricingInterface $channelPricing */
         $channelPricing = $this->channelPricingFactory->createNew();
         $channelPricing->setPrice($price);
-        $channelPricing->setChannel((null === $channel) ? $this->sharedStorage->get('channel') : $channel);
+        $channelPricing->setChannel($channel);
 
         return $channelPricing;
     }

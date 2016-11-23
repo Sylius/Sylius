@@ -21,11 +21,11 @@ interface ProductVariantPriceCalculatorInterface
 {
     /**
      * @param ProductVariantInterface $productVariant
-     * @param ChannelInterface $channel
+     * @param array $context
      *
      * @return int
      *
-     * @throws \InvalidArgumentException
+     * @throws \InvalidArgumentException when price for given channel does not exist
      */
-    public function calculate(ProductVariantInterface $productVariant, ChannelInterface $channel);
+    public function calculate(ProductVariantInterface $productVariant, array $context);
 }
