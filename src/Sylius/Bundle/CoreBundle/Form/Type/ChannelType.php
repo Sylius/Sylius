@@ -36,7 +36,7 @@ class ChannelType extends BaseChannelType
             ->add('defaultLocale', 'sylius_locale_choice', [
                 'label' => 'sylius.form.channel.locale_default',
                 'required' => true,
-                'empty_value' => null,
+                'placeholder' => null,
             ])
             ->add('currencies', 'sylius_currency_choice', [
                 'label' => 'sylius.form.channel.currencies',
@@ -54,7 +54,7 @@ class ChannelType extends BaseChannelType
                 'label' => 'sylius.form.channel.theme',
                 'required' => false,
                 'empty_data' => null,
-                'empty_value' => 'sylius.ui.no_theme',
+                'placeholder' => 'sylius.ui.no_theme',
             ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())
         ;

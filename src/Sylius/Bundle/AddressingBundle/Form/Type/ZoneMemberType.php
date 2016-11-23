@@ -44,7 +44,7 @@ class ZoneMemberType extends AbstractResourceType
     {
         $resolver
             ->setDefaults([
-                'empty_value' => 'sylius.form.zone_member.select',
+                'placeholder' => 'sylius.form.zone_member.select',
                 'data_class' => ZoneMember::class,
                 'zone_type' => ZoneInterface::TYPE_COUNTRY,
             ])
@@ -55,6 +55,14 @@ class ZoneMemberType extends AbstractResourceType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_zone_member';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_zone_member';
     }

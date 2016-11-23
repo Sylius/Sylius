@@ -14,6 +14,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -49,36 +51,31 @@ class CountryType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            // Adding dynamically created isoName field
-            $nameOptions = [
+            $options = [
                 'label' => 'sylius.form.country.name',
             ];
 
             $country = $event->getData();
             if ($country instanceof CountryInterface && null !== $country->getCode()) {
-                $nameOptions['disabled'] = true;
-                $nameOptions['choices'] = [
-                    $country->getCode() => $this->getCountryName($country->getCode())
-                ];
+                $options['disabled'] = true;
+                $options['choices'] = [$this->getCountryName($country->getCode()) => $country->getCode()];
             } else {
-                $nameOptions['choices'] = $this->getAvailableCountries();
+                $options['choices'] = array_flip($this->getAvailableCountries());
             }
 
-            $nameOptions['choices_as_values'] = false;
-
             $form = $event->getForm();
-            $form->add('code', 'country', $nameOptions);
+            $form->add('code', \Symfony\Component\Form\Extension\Core\Type\CountryType::class, $options);
         });
 
         $builder
-            ->add('provinces', 'collection', [
-                'type' => 'sylius_province',
+            ->add('provinces', CollectionType::class, [
+                'entry_type' => 'sylius_province',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'button_add_label' => 'sylius.form.country.add_province',
             ])
-            ->add('enabled', 'checkbox', [
+            ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.country.enabled',
             ])
         ;
@@ -88,6 +85,14 @@ class CountryType extends AbstractResourceType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_country';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_country';
     }

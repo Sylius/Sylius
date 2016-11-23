@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\User;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -21,6 +23,6 @@ class UserEntityType extends UserChoiceType
      */
     public function getParent()
     {
-        return 'entity';
+        return EntityType::class;
     }
 }

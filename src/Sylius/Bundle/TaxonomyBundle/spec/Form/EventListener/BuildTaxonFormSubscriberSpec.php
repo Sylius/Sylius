@@ -70,7 +70,7 @@ final class BuildTaxonFormSubscriberSpec extends ObjectBehavior
                     'filter' => null,
                     'required' => false,
                     'label' => 'sylius.form.taxon.parent',
-                    'empty_value' => '---',
+                    'placeholder' => '---',
                     'auto_initialize' => false,
                 ]
             )

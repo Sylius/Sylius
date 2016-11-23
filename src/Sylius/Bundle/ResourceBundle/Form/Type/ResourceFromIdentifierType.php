@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\Form\DataTransformer\IdentifierToResourceTransf
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\ReversedTransformer;
@@ -73,13 +74,21 @@ class ResourceFromIdentifierType extends AbstractType
      */
     public function getParent()
     {
-        return 'entity';
+        return EntityType::class;
     }
 
     /**
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return sprintf('%s_%s_from_identifier', $this->metadata->getApplicationName(), $this->metadata->getName());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return sprintf('%s_%s_from_identifier', $this->metadata->getApplicationName(), $this->metadata->getName());
     }

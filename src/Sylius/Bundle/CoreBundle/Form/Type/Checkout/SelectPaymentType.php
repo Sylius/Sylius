@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -24,8 +25,8 @@ class SelectPaymentType extends AbstractResourceType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('payments', 'collection', [
-            'type' => 'sylius_checkout_payment',
+        $builder->add('payments', CollectionType::class, [
+            'entry_type' => 'sylius_checkout_payment',
             'label' => false,
         ]);
     }
@@ -34,6 +35,14 @@ class SelectPaymentType extends AbstractResourceType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_checkout_select_payment';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_checkout_select_payment';
     }

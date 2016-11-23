@@ -57,4 +57,12 @@ class TaxonFilterConfigurationType extends AbstractType
     {
         return 'sylius_promotion_action_filter_taxon_configuration';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_promotion_action_filter_taxon_configuration';
+    }
 }

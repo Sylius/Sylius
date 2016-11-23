@@ -14,6 +14,7 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -41,22 +42,21 @@ class CountryCodeChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = function (Options $options) {
-            if (null === $options['enabled']) {
-                $countries = $this->countryRepository->findAll();
-            } else {
-                $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
-            }
-
-            return $this->getCountryCodes($countries);
-        };
-
         $resolver->setDefaults([
-            'choices' => $choices,
-            'choices_as_values' => true,
+            'choices' => function (Options $options) {
+                if (null === $options['enabled']) {
+                    $countries = $this->countryRepository->findAll();
+                } else {
+                    $countries = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
+                }
+
+                return $this->getCountryCodes($countries);
+            },
+
             'enabled' => true,
             'label' => 'sylius.form.address.country',
-            'empty_value' => 'sylius.form.country.select',
+            'placeholder' => 'sylius.form.country.select',
+            'choices_as_values' => true,
         ]);
     }
 
@@ -65,13 +65,21 @@ class CountryCodeChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_country_code_choice';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_country_code_choice';
     }

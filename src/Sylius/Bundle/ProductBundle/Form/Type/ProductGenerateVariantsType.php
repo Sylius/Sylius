@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -43,8 +44,8 @@ class ProductGenerateVariantsType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('variants', 'collection', [
-                'type' => 'sylius_product_variant_generation',
+            ->add('variants', CollectionType::class, [
+                'entry_type' => 'sylius_product_variant_generation',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
@@ -57,6 +58,14 @@ class ProductGenerateVariantsType extends AbstractResourceType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_product_generate_variants';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_product_generate_variants';
     }

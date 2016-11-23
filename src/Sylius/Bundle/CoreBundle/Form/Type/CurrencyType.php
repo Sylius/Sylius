@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType as BaseCurrencyType;
 use Sylius\Component\Currency\Model\CurrencyInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -53,14 +55,13 @@ class CurrencyType extends BaseCurrencyType
                 return;
             }
 
-            $form = $event->getForm();
-
-            $form
-                ->add('enabled', 'checkbox', [
+            $event
+                ->getForm()
+                ->add('enabled', CheckboxType::class, [
                     'label' => 'sylius.form.locale.enabled',
                     'disabled' => true,
                 ])
-                ->add('exchangeRate', 'number', [
+                ->add('exchangeRate', NumberType::class, [
                     'label' => 'sylius.form.currency.exchange_rate',
                     'disabled' => true,
                 ])
@@ -72,6 +73,14 @@ class CurrencyType extends BaseCurrencyType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_currency';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_currency';
     }

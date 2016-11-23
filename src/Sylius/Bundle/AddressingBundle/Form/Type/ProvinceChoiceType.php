@@ -15,6 +15,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -41,27 +42,23 @@ class ProvinceChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = function (Options $options) {
-            if (null === $options['country']) {
-                $choices = $this->provinceRepository->findAll();
-            } else {
-                $choices = $options['country']->getProvinces();
-            }
+        $resolver->setDefaults([
+            'choices' => function (Options $options) {
+                if (null === $options['country']) {
+                    return $this->provinceRepository->findAll();
+                }
 
-            return new ArrayChoiceList($choices);
-        };
-
-        $resolver
-            ->setDefaults([
-                'choice_translation_domain' => false,
-                'choice_list' => $choices,
-                'country' => null,
-                'label' => 'sylius.form.address.province',
-                'empty_value' => 'sylius.form.province.select',
-            ])
-        ;
-        $resolver->addAllowedTypes('country', 'NULL');
-        $resolver->addAllowedTypes('country', CountryInterface::class);
+                return $options['country']->getProvinces();
+            },
+            'choice_value' => 'code',
+            'choice_label' => 'name',
+            'choice_translation_domain' => false,
+            'country' => null,
+            'label' => 'sylius.form.address.province',
+            'placeholder' => 'sylius.form.province.select',
+            'choices_as_values' => true,
+        ]);
+        $resolver->addAllowedTypes('country', ['null', CountryInterface::class]);
     }
 
     /**
@@ -69,13 +66,21 @@ class ProvinceChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_province_choice';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_province_choice';
     }

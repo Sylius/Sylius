@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PricingBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -38,7 +39,8 @@ class CalculatorChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'choices' => $this->calculators,
+            'choices' => array_flip($this->calculators),
+            'choices_as_values' => true,
         ]);
     }
 
@@ -47,13 +49,21 @@ class CalculatorChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_price_calculator_choice';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_price_calculator_choice';
     }

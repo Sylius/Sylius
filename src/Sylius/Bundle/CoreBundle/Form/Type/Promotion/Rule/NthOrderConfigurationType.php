@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
@@ -27,7 +28,7 @@ class NthOrderConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nth', 'integer', [
+            ->add('nth', IntegerType::class, [
                 'label' => 'sylius.form.promotion_rule.nth_order_configuration.nth',
                 'constraints' => [
                     new NotBlank(),
@@ -41,6 +42,14 @@ class NthOrderConfigurationType extends AbstractType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_promotion_rule_nth_order_configuration';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_nth_order_configuration';
     }

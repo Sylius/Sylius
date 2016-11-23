@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -42,7 +43,7 @@ class WeightRateConfigurationType extends AbstractType
                     new Type(['type' => 'integer']),
                 ],
             ])
-            ->add('division', 'number', [
+            ->add('division', NumberType::class, [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.division',
                 'constraints' => [
                     new NotBlank(),
@@ -68,6 +69,14 @@ class WeightRateConfigurationType extends AbstractType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_shipping_calculator_weight_rate';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_shipping_calculator_weight_rate';
     }

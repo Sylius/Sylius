@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -87,7 +87,7 @@ class ProvinceController extends ResourceController
         return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_code_choice', null, [
             'country' => $country,
             'label' => 'sylius.form.address.province',
-            'empty_value' => 'sylius.form.province.select',
+            'placeholder' => 'sylius.form.province.select',
         ]);
     }
 
@@ -96,7 +96,7 @@ class ProvinceController extends ResourceController
      */
     protected function createProvinceTextForm()
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', 'text', null, [
+        return $this->get('form.factory')->createNamed('sylius_address_province', TextType::class, null, [
             'required' => false,
             'label' => 'sylius.form.address.province',
         ]);

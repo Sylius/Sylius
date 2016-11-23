@@ -29,6 +29,14 @@ class PromotionActionCollectionType extends AbstractConfigurationCollectionType
     /**
      * {@inheritdoc}
      */
+    public function getBlockPrefix()
+    {
+        return 'sylius_promotion_action_collection';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getFormTypeOption()
     {
         return 'sylius_promotion_action';

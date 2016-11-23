@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Customer;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -49,7 +50,7 @@ class CustomerGuestType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('email', 'email', [
+            ->add('email', EmailType::class, [
                 'label' => 'sylius.form.customer.email',
             ])
             ->addEventSubscriber($this->setCustomerFormSubscriber)
@@ -61,6 +62,14 @@ class CustomerGuestType extends AbstractResourceType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_customer_guest';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_customer_guest';
     }

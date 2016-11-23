@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -24,7 +25,7 @@ class PercentAttributeType extends AbstractType
      */
     public function getParent()
     {
-        return 'percent';
+        return PercentType::class;
     }
 
     /**
@@ -41,6 +42,14 @@ class PercentAttributeType extends AbstractType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_attribute_type_percent';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_attribute_type_percent';
     }

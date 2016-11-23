@@ -14,8 +14,10 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddDefaultBillingAddressOnOrderFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Valid;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -28,9 +30,14 @@ class AddressType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('shippingAddress', 'sylius_address', ['shippable' => true])
-            ->add('billingAddress', 'sylius_address')
-            ->add('differentBillingAddress', 'checkbox', [
+            ->add('shippingAddress', 'sylius_address', [
+                'shippable' => true,
+                'constraints' => [new Valid()],
+            ])
+            ->add('billingAddress', 'sylius_address', [
+                'constraints' => [new Valid()],
+            ])
+            ->add('differentBillingAddress', CheckboxType::class, [
                 'mapped' => false,
                 'required' => false,
                 'label' => 'sylius.form.checkout.addressing.different_billing_address',
@@ -50,7 +57,6 @@ class AddressType extends AbstractResourceType
         $resolver
             ->setDefaults([
                 'customer' => null,
-                'cascade_validation' => true,
             ])
         ;
     }
@@ -59,6 +65,14 @@ class AddressType extends AbstractResourceType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_checkout_address';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_checkout_address';
     }

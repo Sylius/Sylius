@@ -25,4 +25,12 @@ class ProductImageType extends ImageType
     {
         return 'sylius_product_image';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_product_image';
+    }
 }

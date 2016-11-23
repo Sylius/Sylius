@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Form\Extension;
 
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class CollectionExtension extends AbstractTypeExtension
+final class CollectionTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
@@ -46,6 +47,6 @@ final class CollectionExtension extends AbstractTypeExtension
      */
     public function getExtendedType()
     {
-        return 'collection';
+        return CollectionType::class;
     }
 }

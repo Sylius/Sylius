@@ -47,4 +47,12 @@ class UnitFixedDiscountConfigurationType extends AbstractType
     {
         return 'sylius_promotion_action_unit_fixed_discount_configuration';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_promotion_action_unit_fixed_discount_configuration';
+    }
 }

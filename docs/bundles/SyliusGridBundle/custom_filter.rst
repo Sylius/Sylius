@@ -13,7 +13,7 @@ To add a new filter, we need to create an appropriate class and form type.
 
     use Sylius\Component\Grid\Data\DataSourceInterface;
     use Sylius\Component\Grid\Filtering\FilterInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class SuppliersStatisticsFilter implements FilterInterface
     {
@@ -23,7 +23,7 @@ To add a new filter, we need to create an appropriate class and form type.
             // $data['stats'] contains the submitted value!
         }
 
-        public function setOptions(OptionsResolverInterface $resolver)
+        public function setOptions(OptionsResolver $resolver)
         {
             $resolver
                 ->setDefaults(array(
@@ -51,7 +51,7 @@ And the form type:
 
     use Sylius\Component\Grid\Data\DataSourceInterface;
     use Sylius\Component\Grid\Filter\FilterInterface;
-    use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+    use Symfony\Component\OptionsResolver\OptionsResolver;
 
     class TournamentStatisticsFilterType extends AbstractType
     {
@@ -60,7 +60,7 @@ And the form type:
             $builder->add('stats', 'choice', array('choices' => range($options['range'][0], $options['range'][1])));
         }
 
-        public function setDefaultOptions(OptionsResolverInterface $resolver)
+        public function configureOptions(OptionsResolver $resolver)
         {
             $resolver
                 ->setDefaults(array(

@@ -64,4 +64,12 @@ class PromotionRuleType extends AbstractConfigurationType
     {
         return 'sylius_promotion_rule';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_promotion_rule';
+    }
 }

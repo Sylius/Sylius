@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Order;
 
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType as BaseOrderItemType;
 use Sylius\Component\Core\Model\ProductVariant;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -41,7 +42,7 @@ class OrderItemType extends BaseOrderItemType
                         ->add('variant', 'entity_hidden', [
                             'data_class' => $options['variant_data_class'],
                         ])
-                        ->add('unitPrice', 'integer', [
+                        ->add('unitPrice', IntegerType::class, [
                             'data' => $data['variant']->getPrice()
                         ])
                     ;

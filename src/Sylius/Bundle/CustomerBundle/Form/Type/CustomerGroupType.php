@@ -42,4 +42,12 @@ class CustomerGroupType extends AbstractResourceType
     {
         return 'sylius_customer_group';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_customer_group';
+    }
 }

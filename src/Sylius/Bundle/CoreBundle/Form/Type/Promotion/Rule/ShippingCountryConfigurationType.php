@@ -27,7 +27,7 @@ class ShippingCountryConfigurationType extends AbstractType
         $builder
             ->add('country', 'sylius_country_code_choice', [
                 'label' => 'sylius.form.promotion_rule.shipping_country_configuration.country',
-                'empty_value' => 'sylius.form.country.select',
+                'placeholder' => 'sylius.form.country.select',
             ])
         ;
     }
@@ -36,6 +36,14 @@ class ShippingCountryConfigurationType extends AbstractType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_promotion_rule_shipping_country_configuration';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_rule_shipping_country_configuration';
     }

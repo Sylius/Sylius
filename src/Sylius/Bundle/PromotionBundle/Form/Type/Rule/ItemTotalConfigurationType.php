@@ -44,4 +44,12 @@ class ItemTotalConfigurationType extends AbstractType
     {
         return 'sylius_promotion_rule_item_total_configuration';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_promotion_rule_item_total_configuration';
+    }
 }

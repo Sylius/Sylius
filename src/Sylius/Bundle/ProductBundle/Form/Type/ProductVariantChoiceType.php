@@ -15,6 +15,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -39,16 +40,17 @@ class ProductVariantChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choiceList = function (Options $options) {
-            return new ObjectChoiceList($options['product']->getVariants(), 'name', [], null, 'id');
-        };
-
         $resolver
             ->setDefaults([
+                'choices' => function (Options $options) {
+                    return $options['product']->getVariants();
+                },
+                'choice_value' => 'code',
+                'choice_label' => 'name',
                 'choice_translation_domain' => false,
                 'multiple' => false,
                 'expanded' => true,
-                'choice_list' => $choiceList,
+                'choices_as_values' => true,
             ])
             ->setRequired([
                 'product',
@@ -62,13 +64,21 @@ class ProductVariantChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_product_variant_choice';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_product_variant_choice';
     }

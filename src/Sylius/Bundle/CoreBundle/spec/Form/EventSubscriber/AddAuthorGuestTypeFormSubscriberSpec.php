@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddAuthorGuestTypeFormSubscriber;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
@@ -53,7 +54,7 @@ final class AddAuthorGuestTypeFormSubscriberSpec extends ObjectBehavior
         $review->getAuthor()->willReturn(null);
         $form->getConfig()->willReturn($formConfig);
         $formConfig->getOption('author')->willReturn(null);
-        $form->add('author', 'sylius_customer_guest')->shouldBeCalled();
+        $form->add('author', 'sylius_customer_guest', Argument::type('array'))->shouldBeCalled();
 
         $this->preSetData($event);
     }
@@ -70,7 +71,7 @@ final class AddAuthorGuestTypeFormSubscriberSpec extends ObjectBehavior
         $review->getAuthor()->willReturn(null);
         $form->getConfig()->willReturn($formConfig);
         $formConfig->getOption('author')->willReturn($author);
-        $form->add('author', 'sylius_customer_guest')->shouldNotBeCalled();
+        $form->add('author', 'sylius_customer_guest', Argument::type('array'))->shouldNotBeCalled();
 
         $this->preSetData($event);
     }
@@ -87,7 +88,7 @@ final class AddAuthorGuestTypeFormSubscriberSpec extends ObjectBehavior
         $review->getAuthor()->willReturn($author);
         $form->getConfig()->willReturn($formConfig);
         $formConfig->getOption('author')->willReturn(null);
-        $form->add('author', 'sylius_customer_guest')->shouldNotBeCalled();
+        $form->add('author', 'sylius_customer_guest', Argument::type('array'))->shouldNotBeCalled();
 
         $this->preSetData($event);
     }

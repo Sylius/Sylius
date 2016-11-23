@@ -56,9 +56,4 @@ final class StringFieldTypeSpec extends ObjectBehavior
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn($data);
         $this->render($field, ['foo' => 'bar'], [])->shouldReturn($data);
     }
-
-    function it_has_name()
-    {
-        $this->getName()->shouldReturn('string');
-    }
 }

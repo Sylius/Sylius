@@ -55,4 +55,12 @@ class HasTaxonConfigurationType extends AbstractType
     {
         return 'sylius_promotion_rule_has_taxon_configuration';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_promotion_rule_has_taxon_configuration';
+    }
 }

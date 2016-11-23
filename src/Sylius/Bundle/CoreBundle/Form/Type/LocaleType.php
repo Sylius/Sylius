@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType as BaseLocaleType;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -60,32 +61,27 @@ class LocaleType extends BaseLocaleType
         parent::buildForm($builder, $options);
 
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-            // Adding dynamically created code field
-            $nameOptions = [
+            $options = [
                 'label' => 'sylius.form.locale.name',
+                'choices_as_values' => true,
             ];
 
             $locale = $event->getData();
-
             if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
-                $nameOptions['disabled'] = true;
-                $nameOptions['choices'] = [
-                    $locale->getCode() => $this->getLocaleName($locale->getCode())
-                ];
+                $options['disabled'] = true;
+                $options['choices'] = [$this->getLocaleName($locale->getCode()) => $locale->getCode()];
             } else {
-                $nameOptions['choices'] = $this->getAvailableLocales();
+                $options['choices'] = array_flip($this->getAvailableLocales());
             }
 
-            $nameOptions['choices_as_values'] = false;
-
             $form = $event->getForm();
-            $form->add('code', 'locale', $nameOptions);
+            $form->add('code', \Symfony\Component\Form\Extension\Core\Type\LocaleType::class, $options);
 
             if ($this->baseLocale !== $locale->getCode()) {
                 return;
             }
 
-            $form->add('enabled', 'checkbox', [
+            $form->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.locale.enabled',
                 'disabled' => true,
             ]);
@@ -96,6 +92,14 @@ class LocaleType extends BaseLocaleType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_locale';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_locale';
     }

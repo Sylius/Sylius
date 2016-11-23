@@ -49,4 +49,12 @@ class CustomerType extends CustomerProfileType
     {
         return 'sylius_customer';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_customer';
+    }
 }

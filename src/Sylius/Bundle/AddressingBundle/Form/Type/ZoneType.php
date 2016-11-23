@@ -14,6 +14,9 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -50,32 +53,33 @@ class ZoneType extends AbstractResourceType
 
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('name', 'text', [
+            ->add('name', TextType::class, [
                 'label' => 'sylius.form.zone.name',
             ])
             ->add('type', 'sylius_zone_type_choice', [
                 'disabled' => true,
             ])
-            ->add('members', 'collection', [
-                'type' => 'sylius_zone_member',
+            ->add('members', CollectionType::class, [
+                'entry_type' => 'sylius_zone_member',
+                'entry_options' => [
+                    'zone_type' => $zoneType,
+                ],
                 'button_add_label' => 'sylius.form.zone.add_member',
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'delete_empty' => true,
-                'options' => [
-                    'zone_type' => $zoneType,
-                ],
             ])
         ;
 
         if (!empty($this->scopeChoices)) {
             $builder
-                ->add('scope', 'choice', [
+                ->add('scope', ChoiceType::class, [
+                    'choices' => array_flip($this->scopeChoices),
                     'label' => 'sylius.form.zone.scope',
-                    'empty_value' => 'sylius.form.zone.select_scope',
+                    'placeholder' => 'sylius.form.zone.select_scope',
                     'required' => false,
-                    'choices' => $this->scopeChoices,
+                    'choices_as_values' => true,
                 ])
             ;
         }
@@ -88,13 +92,23 @@ class ZoneType extends AbstractResourceType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefault('zone_type', ZoneInterface::TYPE_COUNTRY);
+        $resolver->setDefaults([
+            'zone_type', ZoneInterface::TYPE_COUNTRY,
+        ]);
     }
 
     /**
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_zone';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_zone';
     }

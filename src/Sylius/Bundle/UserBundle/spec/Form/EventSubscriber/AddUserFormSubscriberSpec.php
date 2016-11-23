@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\UserBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserAwareInterface;
@@ -45,7 +46,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
     ) {
         $event->getForm()->willReturn($form);
 
-        $form->add('user', 'sylius_admin_user')->shouldBeCalled();
+        $form->add('user', 'sylius_admin_user', Argument::type('array'))->shouldBeCalled();
 
         $this->preSetData($event);
     }

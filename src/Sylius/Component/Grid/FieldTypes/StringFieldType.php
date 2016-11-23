@@ -57,4 +57,12 @@ final class StringFieldType implements FieldTypeInterface
     {
         return 'string';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'string';
+    }
 }

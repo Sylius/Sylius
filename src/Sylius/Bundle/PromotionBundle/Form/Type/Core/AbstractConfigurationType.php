@@ -43,15 +43,21 @@ abstract class AbstractConfigurationType extends AbstractResourceType
     {
         parent::configureOptions($resolver);
 
-        $resolver->setDefined([
-            'configuration_type',
-        ]);
+        $resolver->setDefined('configuration_type');
     }
 
     /**
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_promotion_action';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_action';
     }

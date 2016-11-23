@@ -28,13 +28,14 @@ class BooleanFilterType extends AbstractType
     {
         $resolver
             ->setDefaults([
+                'choices' => [
+                    'sylius.ui.yes_label' => BooleanFilter::TRUE,
+                    'sylius.ui.no_label' => BooleanFilter::FALSE,
+                ],
                 'data_class' => null,
                 'required' => false,
-                'empty_value' => 'sylius.ui.all',
-                'choices' => [
-                    BooleanFilter::TRUE => 'sylius.ui.yes_label',
-                    BooleanFilter::FALSE => 'sylius.ui.no_label',
-                ],
+                'placeholder' => 'sylius.ui.all',
+                'choices_as_values' => true,
             ])
             ->setDefined('field')
             ->setAllowedTypes('field', 'string')
@@ -53,6 +54,14 @@ class BooleanFilterType extends AbstractType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_grid_filter_boolean';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_grid_filter_boolean';
     }

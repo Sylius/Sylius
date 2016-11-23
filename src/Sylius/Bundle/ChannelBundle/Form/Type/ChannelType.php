@@ -13,6 +13,9 @@ namespace Sylius\Bundle\ChannelBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,22 +30,22 @@ class ChannelType extends AbstractResourceType
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->add('name', 'text', [
+            ->add('name', TextType::class, [
                 'label' => 'sylius.form.channel.name',
             ])
-            ->add('description', 'textarea', [
+            ->add('description', TextareaType::class, [
                 'label' => 'sylius.form.channel.description',
                 'required' => false,
             ])
-            ->add('enabled', 'checkbox', [
+            ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.channel.enabled',
                 'required' => false,
             ])
-            ->add('hostname', 'text', [
+            ->add('hostname', TextType::class, [
                 'label' => 'sylius.form.channel.hostname',
                 'required' => false,
             ])
-            ->add('color', 'text', [
+            ->add('color', TextType::class, [
                 'label' => 'sylius.form.channel.color',
                 'required' => false,
             ])
@@ -53,6 +56,14 @@ class ChannelType extends AbstractResourceType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_channel';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_channel';
     }

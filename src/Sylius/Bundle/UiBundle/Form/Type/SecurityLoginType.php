@@ -48,4 +48,12 @@ class SecurityLoginType extends AbstractType
     {
         return 'sylius_security_login';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_security_login';
+    }
 }

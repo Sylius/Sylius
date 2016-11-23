@@ -13,6 +13,8 @@ namespace Sylius\Bundle\ProductBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,12 +29,12 @@ class ProductOptionType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('translations', 'sylius_translations', [
-                'type' => 'sylius_product_option_translation',
+            ->add('translations', ResourceTranslationsType::class, [
+                'entry_type' => 'sylius_product_option_translation',
                 'label' => 'sylius.form.option.name',
             ])
-            ->add('values', 'collection', [
-                'type' => 'sylius_product_option_value',
+            ->add('values', CollectionType::class, [
+                'entry_type' => 'sylius_product_option_value',
                 'allow_add' => true,
                 'by_reference' => false,
                 'label' => false,
@@ -46,6 +48,14 @@ class ProductOptionType extends AbstractResourceType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_product_option';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_product_option';
     }

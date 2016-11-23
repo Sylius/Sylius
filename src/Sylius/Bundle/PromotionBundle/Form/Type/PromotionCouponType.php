@@ -13,6 +13,8 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,14 +28,14 @@ class PromotionCouponType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('usageLimit', 'integer', [
+            ->add('usageLimit', IntegerType::class, [
                 'label' => 'sylius.form.promotion_coupon.usage_limit',
                 'required' => false,
             ])
-            ->add('expiresAt', 'date', [
+            ->add('expiresAt', DateType::class, [
                 'label' => 'sylius.form.promotion_coupon.expires_at',
                 'widget' => 'single_text',
-                'empty_value' => ['year' => '-', 'month' => '-', 'day' => '-'],
+                'placeholder' => ['year' => '-', 'month' => '-', 'day' => '-'],
                 'required' => false,
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
@@ -44,6 +46,14 @@ class PromotionCouponType extends AbstractResourceType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_promotion_coupon';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_coupon';
     }

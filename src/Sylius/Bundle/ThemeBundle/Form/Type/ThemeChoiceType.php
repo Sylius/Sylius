@@ -14,6 +14,8 @@ namespace Sylius\Bundle\ThemeBundle\Form\Type;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -39,18 +41,15 @@ final class ThemeChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        // Normalizer instead of default as it should not be overwritten
-        $resolver
-            ->setNormalizer('choices', function () {
+        $resolver->setDefaults([
+            'choices' => function (Options $options) {
                 return $this->themeRepository->findAll();
-            })
-            ->setNormalizer('choices_as_values', function () {
-                return true;
-            })
-            ->setDefault('choice_label', function (ThemeInterface $theme) {
+            },
+            'choice_label' => function (ThemeInterface $theme) {
                 return (string) $theme;
-            })
-        ;
+            },
+            'choices_as_values' => true,
+        ]);
     }
 
     /**
@@ -58,13 +57,21 @@ final class ThemeChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_theme_choice';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_theme_choice';
     }

@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -27,13 +29,16 @@ class CurrencyType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('exchangeRate', 'number', [
+            ->add('exchangeRate', NumberType::class, [
                 'label' => 'sylius.form.currency.exchange_rate',
             ])
-            ->add('enabled', 'checkbox', [
+            ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.currency.enabled',
             ])
-            ->addEventSubscriber(new AddCodeFormSubscriber('currency', 'sylius.form.currency.code'))
+            ->addEventSubscriber(new AddCodeFormSubscriber(\Symfony\Component\Form\Extension\Core\Type\CurrencyType::class, [
+                'label' => 'sylius.form.currency.code',
+                'choices_as_values' => true,
+            ]))
         ;
     }
 
@@ -41,6 +46,14 @@ class CurrencyType extends AbstractResourceType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_currency';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_currency';
     }

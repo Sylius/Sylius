@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
@@ -58,7 +59,7 @@ final class AddCustomerGuestTypeFormSubscriberSpec extends ObjectBehavior
         $resource->getCustomer()->willReturn(null);
         $form->getConfig()->willReturn($formConfig);
         $formConfig->getOption('customer')->willReturn(null);
-        $form->add('customer', 'sylius_customer_guest')->shouldBeCalled();
+        $form->add('customer', 'sylius_customer_guest', Argument::type('array'))->shouldBeCalled();
 
         $this->preSetData($event);
     }
@@ -75,7 +76,7 @@ final class AddCustomerGuestTypeFormSubscriberSpec extends ObjectBehavior
         $resource->getCustomer()->willReturn(null);
         $form->getConfig()->willReturn($formConfig);
         $formConfig->getOption('customer')->willReturn($customer);
-        $form->add('customer', 'sylius_customer_guest')->shouldNotBeCalled();
+        $form->add('customer', 'sylius_customer_guest', Argument::type('array'))->shouldNotBeCalled();
 
         $this->preSetData($event);
     }
@@ -92,7 +93,7 @@ final class AddCustomerGuestTypeFormSubscriberSpec extends ObjectBehavior
         $resource->getCustomer()->willReturn($customer);
         $form->getConfig()->willReturn($formConfig);
         $formConfig->getOption('customer')->willReturn(null);
-        $form->add('customer', 'sylius_customer_guest')->shouldNotBeCalled();
+        $form->add('customer', 'sylius_customer_guest', Argument::type('array'))->shouldNotBeCalled();
 
         $this->preSetData($event);
     }

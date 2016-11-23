@@ -11,9 +11,12 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
+use Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType as MongodbDocumentType;
+use Doctrine\Bundle\PHPCRBundle\Form\Type\DocumentType as PhpcrDocumentType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -44,6 +47,7 @@ class ResourceChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'class' => null,
+                'choices_as_values' => true,
             ])
             ->setNormalizer('class', function () {
                 return $this->metadata->getClass('model');
@@ -68,6 +72,14 @@ class ResourceChoiceType extends AbstractType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return sprintf('%s_%s_choice', $this->metadata->getApplicationName(), $this->metadata->getName());
+    }
+
+    /**
      * @param string $driver
      *
      * @return string
@@ -78,11 +90,11 @@ class ResourceChoiceType extends AbstractType
     {
         switch ($driver) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
-                return 'document';
+                return MongodbDocumentType::class;
             case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
-                return 'entity';
+                return EntityType::class;
             case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
-                return 'phpcr_document';
+                return PhpcrDocumentType::class;
         }
 
         throw new UnknownDriverException($driver);

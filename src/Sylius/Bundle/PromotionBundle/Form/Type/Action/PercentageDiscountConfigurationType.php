@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PercentType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
@@ -29,7 +30,7 @@ class PercentageDiscountConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('percentage', 'percent', [
+            ->add('percentage', PercentType::class, [
                 'label' => 'sylius.form.promotion_action.percentage_discount_configuration.percentage',
                 'constraints' => [
                     new NotBlank(),
@@ -49,6 +50,14 @@ class PercentageDiscountConfigurationType extends AbstractType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_promotion_action_percentage_discount_configuration';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_promotion_action_percentage_discount_configuration';
     }

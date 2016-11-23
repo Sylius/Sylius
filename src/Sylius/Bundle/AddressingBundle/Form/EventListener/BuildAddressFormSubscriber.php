@@ -14,8 +14,8 @@ namespace Sylius\Bundle\AddressingBundle\Form\EventListener;
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -148,13 +148,9 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
      */
     private function createProvinceNameTextForm($provinceName = null)
     {
-        return
-            $this
-                ->formFactory
-                    ->createNamed('provinceName', 'text', $provinceName, [
-                    'required' => false,
-                    'auto_initialize' => false,
-                ])
-        ;
+        return $this->formFactory->createNamed('provinceName', TextType::class, $provinceName, [
+            'required' => false,
+            'auto_initialize' => false,
+        ]);
     }
 }

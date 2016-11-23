@@ -15,6 +15,7 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -53,7 +54,7 @@ class ProductAssociationsType extends AbstractType
 
         /** @var ProductAssociationTypeInterface $productAssociationType */
         foreach ($productAssociationTypes as $productAssociationType) {
-            $builder->add($productAssociationType->getCode(), 'text', [
+            $builder->add($productAssociationType->getCode(), TextType::class, [
                 'label' => $productAssociationType->getName(),
             ]);
         }
@@ -65,6 +66,14 @@ class ProductAssociationsType extends AbstractType
      * {@inheritdoc}
      */
     public function getName()
+    {
+        return 'sylius_product_associations';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
     {
         return 'sylius_product_associations';
     }

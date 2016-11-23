@@ -51,4 +51,12 @@ abstract class TaxCategoryChoiceType extends AbstractType
     {
         return 'sylius_tax_category_choice';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_tax_category_choice';
+    }
 }
