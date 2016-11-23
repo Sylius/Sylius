@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Pricing;
 
 use Sylius\Bundle\CoreBundle\Form\DataTransformer\ChannelAndCurrencyPricingConfigurationTransformer;
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -56,7 +57,7 @@ final class ChannelAndCurrencyBasedConfigurationType extends AbstractType
          */
         foreach ($this->channelRepository->findAll() as $channel) {
             foreach ($this->currencyRepository->findAll() as $currency) {
-                $builder->add($channel->getCode().$options['delimiter'].$currency->getCode(), 'sylius_money', [
+                $builder->add($channel->getCode().$options['delimiter'].$currency->getCode(), MoneyType::class, [
                     'label' => sprintf('%s %s', $channel->getName(), $currency->getCode())
                 ]);
             }

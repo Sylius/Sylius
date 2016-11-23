@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType as BaseUnitFixedDiscountConfigurationType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -30,7 +31,7 @@ class UnitFixedDiscountConfigurationType extends BaseUnitFixedDiscountConfigurat
 
         $builder
             ->remove('amount')
-            ->add('base_amount', 'sylius_money', [
+            ->add('base_amount', MoneyType::class, [
                 'label' => 'sylius.form.promotion_action.fixed_discount_configuration.base_amount',
                 'constraints' => [
                     new NotBlank(),

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -28,7 +29,7 @@ class PerUnitRateConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', [
+            ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.per_unit_rate_configuration.amount',
                 'constraints' => [
                     new NotBlank(),

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Filter;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\Type;
@@ -28,8 +29,8 @@ class PriceRangeFilterConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('min', 'sylius_money', ['required' => false, 'constraints' => [new Type(['type' => 'numeric'])]])
-            ->add('max', 'sylius_money', ['required' => false, 'constraints' => [new Type(['type' => 'numeric'])]])
+            ->add('min', MoneyType::class, ['required' => false, 'constraints' => [new Type(['type' => 'numeric'])]])
+            ->add('max', MoneyType::class, ['required' => false, 'constraints' => [new Type(['type' => 'numeric'])]])
         ;
     }
 

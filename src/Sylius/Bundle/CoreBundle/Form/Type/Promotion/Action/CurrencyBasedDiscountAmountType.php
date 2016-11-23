@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
@@ -56,7 +57,7 @@ class CurrencyBasedDiscountAmountType extends AbstractType
                 continue;
             }
 
-            $builder->add($currency->getCode(), 'sylius_money', [
+            $builder->add($currency->getCode(), MoneyType::class, [
                 'label' => $currency->getCode(),
                 'constraints' => [
                     new Type(['type' => 'numeric']),

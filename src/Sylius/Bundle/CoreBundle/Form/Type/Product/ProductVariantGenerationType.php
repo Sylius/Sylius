@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType as BaseProductVariantGenerationType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -27,7 +28,7 @@ class ProductVariantGenerationType extends BaseProductVariantGenerationType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('price', 'sylius_money', [
+            ->add('price', MoneyType::class, [
                 'label' => 'sylius.form.variant.price',
             ])
         ;

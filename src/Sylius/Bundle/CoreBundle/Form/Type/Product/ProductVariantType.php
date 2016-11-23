@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -57,7 +58,7 @@ class ProductVariantType extends BaseProductVariantType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('price', 'sylius_money', [
+            ->add('price', MoneyType::class, [
                 'label' => 'sylius.form.variant.price',
             ])
             ->add('tracked', CheckboxType::class, [

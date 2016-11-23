@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,14 +30,14 @@ class WeightRateConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('fixed', 'sylius_money', [
+            ->add('fixed', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.fixed',
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'integer']),
                 ],
             ])
-            ->add('variable', 'sylius_money', [
+            ->add('variable', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.variable',
                 'constraints' => [
                     new NotBlank(),
