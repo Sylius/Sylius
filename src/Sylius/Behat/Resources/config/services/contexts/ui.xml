@@ -201,6 +201,13 @@
             <tag name="fob.context_service" />
         </service>
 
+        <service id="sylius.behat.context.ui.admin.managing_shipping_categories" class="Sylius\Behat\Context\Ui\Admin\ManagingShippingCategoriesContext">
+            <argument type="service" id="sylius.behat.page.admin.shipping_category.index" />
+            <argument type="service" id="sylius.behat.page.admin.shipping_category.create" />
+            <argument type="service" id="sylius.behat.page.admin.shipping_category.update" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.managing_tax_categories" class="Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoriesContext">
             <argument type="service" id="sylius.behat.page.admin.tax_category.index" />
             <argument type="service" id="sylius.behat.page.admin.tax_category.create" />

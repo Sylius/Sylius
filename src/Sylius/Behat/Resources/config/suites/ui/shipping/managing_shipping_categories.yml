@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_managing_shipping_categories:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.shipping_category
+
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_category
+
+                - sylius.behat.context.ui.admin.managing_shipping_categories
+                - sylius.behat.context.ui.admin.notification
+            filters:
+                tags: "@managing_shipping_categories && @ui"

@@ -16,3 +16,6 @@ sylius_shipping:
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShippingMethodRepository
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
+        shipping_category:
+            classes:
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShippingCategoryRepository
