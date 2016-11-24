@@ -162,6 +162,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @When /^I set its(?:| default) price to (?:|-)(?:€|£|\$)([^"]+) for "([^"]+)" channel$/
+     * @When /^I set its(?:| default) price to ("(?:-)?(?:€|£|\$)[^"]+") for "([^"]+)" channel$/
      * @When I do not set its price
      */
     public function iSetItsPriceTo($price = null, $channel = null)
@@ -406,11 +407,36 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that (\w+) is required for the (\d)(?:st|nd|rd|th) variant$/
+     * @Then /^I should be notified that code is required for the (\d)(?:st|nd|rd|th) variant$/
      */
-    public function iShouldBeNotifiedThatIsRequiredForVariant($element, $position)
+    public function iShouldBeNotifiedThatCodeIsRequiredForVariant($position)
     {
-        Assert::same($this->generatePage->getValidationMessage($element, $position), sprintf('Please enter the %s.', $element));
+        Assert::same(
+            $this->generatePage->getValidationMessage('code', $position),
+            'Please enter the code.'
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that prices in all channels must be defined for the (\d)(?:st|nd|rd|th) variant$/
+     */
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position)
+    {
+        Assert::same(
+            $this->generatePage->getPricesValidationMessage($position-1),
+            'You must define price for every channel.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that prices in all channels must be defined
+     */
+    public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefined()
+    {
+        Assert::same(
+            $this->createPage->getPricesValidationMessage(),
+            'You must define price for every channel.'
+        );
     }
 
     /**
@@ -607,12 +633,12 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by ("[^"]+") code and costs "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by ("[^"]+") code and costs "(?:€|£|\$)([^"]+)" in ("[^"]+") channel$/
      */
-    public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, $price)
+    public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, $price, $channelName)
     {
         $this->generatePage->nameCode($nthVariant - 1, $code);
-        $this->generatePage->specifyPrice($nthVariant - 1, $price);
+        $this->generatePage->specifyPrice($nthVariant - 1, $price, $channelName);
     }
 
     /**
@@ -624,11 +650,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant costs "(?:€|£|\$)([^"]+)"$/
+     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant costs "(?:€|£|\$)([^"]+)" in ("[^"]+") channel$/
      */
-    public function iSpecifyThereAreVariantsWithCost($nthVariant, $price)
+    public function iSpecifyThereAreVariantsWithCost($nthVariant, $price, $channelName)
     {
-        $this->generatePage->specifyPrice($nthVariant, $price - 1);
+        $this->generatePage->specifyPrice($nthVariant, $price - 1, $channelName);
     }
 
     /**

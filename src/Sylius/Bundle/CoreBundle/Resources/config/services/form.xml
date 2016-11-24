@@ -171,6 +171,13 @@
             <tag name="form.type" alias="sylius_product_variant" />
         </service>
 
+        <service id="sylius.form.type.product_variant_generation" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductVariantGenerationType">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument>%sylius.validation_groups.product_variant%</argument>
+            <argument type="service" id="sylius.form.event_subscriber.channel_pricing" />
+            <tag name="form.type" alias="sylius_product_variant_generation" />
+        </service>
+
         <service id="sylius.form.type.add_to_cart" class="Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType">
             <argument>Sylius\Bundle\OrderBundle\Controller\AddToCartCommand</argument>
             <argument>%sylius.validation_groups.order_item%</argument>

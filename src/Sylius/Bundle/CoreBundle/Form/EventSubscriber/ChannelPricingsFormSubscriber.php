@@ -63,6 +63,10 @@ final class ChannelPricingsFormSubscriber implements EventSubscriberInterface
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $event->getData();
 
+        if (null === $productVariant) {
+            return;
+        }
+
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {
             if ($productVariant->hasChannelPricingForChannel($channel)) {

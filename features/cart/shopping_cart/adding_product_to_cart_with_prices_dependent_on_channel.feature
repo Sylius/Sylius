@@ -21,7 +21,7 @@ Feature: Adding a product to cart with prices dependent on a channel
         When I add product "Leprechaun's Gold" to the cart
         Then I should see "Leprechaun's Gold" with unit price "€10.00" in my cart
 
-    @ui
+    @ui @todo
     Scenario: Buying a product with proper price after currency change
         Given I change my current channel to "Web-EU"
         When I switch to the "GBP" currency
