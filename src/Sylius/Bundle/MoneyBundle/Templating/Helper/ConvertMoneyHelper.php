@@ -32,9 +32,9 @@ class ConvertMoneyHelper extends Helper implements ConvertMoneyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function convertAmount($amount, $sourceCurrencyCode)
+    public function convertAmount($amount, $sourceCurrencyCode, $targetCurrencyCode)
     {
-        return $this->currencyConverter->convertFromBase($amount, $sourceCurrencyCode);
+        return $this->currencyConverter->convert($amount, $sourceCurrencyCode, $targetCurrencyCode);
     }
 
     /**

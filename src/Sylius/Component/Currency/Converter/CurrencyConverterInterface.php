@@ -18,21 +18,10 @@ interface CurrencyConverterInterface
 {
     /**
      * @param int $value
+     * @param string $sourceCurrencyCode
      * @param string $targetCurrencyCode
      *
      * @return int
-     *
-     * @throws UnavailableCurrencyException
      */
-    public function convertFromBase($value, $targetCurrencyCode);
-
-    /**
-     * @param int $value
-     * @param string $sourceCurrencyCode
-     *
-     * @return int
-     *
-     * @throws UnavailableCurrencyException
-     */
-    public function convertToBase($value, $sourceCurrencyCode);
+    public function convert($value, $sourceCurrencyCode, $targetCurrencyCode);
 }

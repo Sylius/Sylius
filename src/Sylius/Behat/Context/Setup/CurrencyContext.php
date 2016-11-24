@@ -119,16 +119,6 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given the store has currency :currencyCode with exchange rate :exchangeRate
-     */
-    public function theStoreHasCurrencyWithExchangeRate($currencyCode, $exchangeRate)
-    {
-        $currency = $this->createCurrency($currencyCode, (float) $exchangeRate);
-
-        $this->saveCurrency($currency);
-    }
-
-    /**
      * @Given /^(that channel)(?: also|) allows to shop using the "([^"]+)" currency$/
      * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
      * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
@@ -143,28 +133,6 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given /^(that channel)(?: also|) allows to shop using the "([^"]+)" currency with exchange rate ([0-9\.]+)$/
-     */
-    public function thatChannelAllowsToShopUsingCurrency(ChannelInterface $channel, $currencyCode, $exchangeRate = 1.0)
-    {
-        $currency = $this->createCurrency($currencyCode, $exchangeRate);
-        $channel->addCurrency($currency);
-        $this->saveCurrency($currency);
-
-        $this->channelManager->flush();
-    }
-
-    /**
-     * @Given /^the exchange rate for (currency "[^"]+") was changed to ([0-9\.]+)$/
-     * @Given /^the ("[^"]+" currency) has an exchange rate of ([0-9\.]+)$/
-     */
-    public function theExchangeRateForWasChangedTo(CurrencyInterface $currency, $exchangeRate)
-    {
-        $currency->setExchangeRate($exchangeRate);
-        $this->saveCurrency($currency);
-    }
-
-    /**
      * @param CurrencyInterface $currency
      */
     private function saveCurrency(CurrencyInterface $currency)
@@ -175,16 +143,14 @@ final class CurrencyContext implements Context
 
     /**
      * @param $currencyCode
-     * @param float $exchangeRate
      *
      * @return CurrencyInterface
      */
-    private function createCurrency($currencyCode, $exchangeRate = 1.0)
+    private function createCurrency($currencyCode)
     {
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyFactory->createNew();
         $currency->setCode($currencyCode);
-        $currency->setExchangeRate($exchangeRate);
 
         return $currency;
     }
