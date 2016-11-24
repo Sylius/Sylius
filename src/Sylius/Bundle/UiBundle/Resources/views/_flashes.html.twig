@@ -4,6 +4,10 @@
             {% set result = 'negative' %}
             {% set icon = 'remove' %}
         {% endif %}
+        {% if 'info' == type %}
+            {% set result = 'info' %}
+            {% set icon = 'info' %}
+        {% endif %}
         <div class="ui icon {{ result|default('positive') }} message">
             <i class="close icon"></i>
             <i class="{{ icon|default('checkmark') }} icon"></i>

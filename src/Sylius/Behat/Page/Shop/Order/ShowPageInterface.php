@@ -29,4 +29,9 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @param string $paymentMethodName
      */
     public function choosePaymentMethod($paymentMethodName);
+
+    /**
+     * @return string[]
+     */
+    public function getNotifications();
 }

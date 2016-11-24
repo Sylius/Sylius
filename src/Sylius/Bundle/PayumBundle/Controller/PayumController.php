@@ -18,6 +18,7 @@ use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\PayumBundle\Request\AfterCapture;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
+use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
@@ -123,6 +124,8 @@ final class PayumController
         $this->payum->getGateway($token->getGatewayName())->execute($resolveNextRoute);
 
         $this->getHttpRequestVerifier()->invalidate($token);
+
+        $request->getSession()->getBag('flashes')->add('info', sprintf('sylius.ui.payment_%s', $status->getValue()));
 
         return $this->viewHandler->handle(
             $configuration,

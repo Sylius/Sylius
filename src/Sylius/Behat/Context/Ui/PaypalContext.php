@@ -127,4 +127,39 @@ final class PaypalContext implements Context
             $this->orderDetails->pay();
         });
     }
+
+    /**
+     * @Then I should be notified that my payment has been cancelled
+     */
+    public function iShouldBeNotifiedThatMyPaymentHasBeenCancelled()
+    {
+        $this->assertNotification('Your payment has been cancelled.');
+
+    }
+
+    /**
+     * @Then I should be notified that my payment has been completed
+     */
+    public function iShouldBeNotifiedThatMyPaymentHasBeenCompleted()
+    {
+        $this->assertNotification('Your payment has been completed.');
+    }
+
+    /**
+     * @param string $expectedNotification
+     */
+    private function assertNotification($expectedNotification)
+    {
+        $notifications = $this->orderDetails->getNotifications();
+        $hasNotifications = '';
+
+        foreach ($notifications as $notification) {
+            $hasNotifications .= $notification;
+            if ($notification === $expectedNotification) {
+                return;
+            }
+        }
+
+        throw new \RuntimeException(sprintf('There is no notificaiton with "%s". Got "%s"', $expectedNotification, $hasNotifications));
+    }
 }

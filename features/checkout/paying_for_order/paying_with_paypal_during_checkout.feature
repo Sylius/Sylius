@@ -18,7 +18,8 @@ Feature: Paying with paypal during checkout
         And I have proceeded selecting "PayPal Express Checkout" payment method
         When I confirm my order with paypal payment
         And I sign in to PayPal and pay successfully
-        Then I should see the thank you page
+        Then I should be notified that my payment has been completed
+        And I should see the thank you page
 
     @ui
     Scenario: Cancelling the payment
@@ -26,7 +27,8 @@ Feature: Paying with paypal during checkout
         And I have proceeded selecting "PayPal Express Checkout" payment method
         When I confirm my order with paypal payment
         And I cancel my PayPal payment
-        Then I should be able to pay again
+        Then I should be notified that my payment has been cancelled
+        And I should be able to pay again
 
     @ui
     Scenario: Retrying the payment with success
@@ -36,7 +38,8 @@ Feature: Paying with paypal during checkout
         But I have cancelled PayPal payment
         When I try to pay again
         And I sign in to PayPal and pay successfully
-        Then I should see the thank you page
+        Then I should be notified that my payment has been completed
+        And I should see the thank you page
 
     @ui
     Scenario: Retrying the payment and failing
@@ -46,4 +49,5 @@ Feature: Paying with paypal during checkout
         But I have cancelled PayPal payment
         When I try to pay again
         And I cancel my PayPal payment
+        Then I should be notified that my payment has been cancelled
         And I should be able to pay again

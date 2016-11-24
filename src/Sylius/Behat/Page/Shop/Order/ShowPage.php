@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Order;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -32,6 +33,22 @@ final class ShowPage extends SymfonyPage implements ShowPageInterface
     public function pay()
     {
         $this->getElement('pay_link')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNotifications()
+    {
+        /** @var NodeElement[] $notificationElements */
+        $notificationElements = $this->getDocument()->findAll('css', '.message > .content > p');
+        $notifications = [];
+
+        foreach ($notificationElements as $notificationElement) {
+            $notifications[] = $notificationElement->getText();
+        }
+
+        return $notifications;
     }
 
     /**
