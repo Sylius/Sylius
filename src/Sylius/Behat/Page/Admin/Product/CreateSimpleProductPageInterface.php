@@ -33,6 +33,11 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
     public function choosePricingCalculator($name);
 
     /**
+     * @param string $channelName
+     */
+    public function checkChannel($channelName);
+
+    /**
      * @param int $price
      * @param ChannelInterface $channel
      * @param CurrencyInterface $currency
