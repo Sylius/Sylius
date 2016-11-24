@@ -38,6 +38,7 @@ use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -535,6 +536,24 @@ final class ProductContext implements Context
         $variant->setCode(sprintf("%s_%s", $product->getCode(), $optionValueName));
 
         $product->addVariant($variant);
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the :product product's :optionValueName size belongs to :shippingCategory shipping category
+     * @Given /^(this product) "([^"]+)" size belongs to ("([^"]+)" shipping category)$/
+     */
+    public function thisProductSizeBelongsToShippingCategory(ProductInterface $product, $optionValueName, ShippingCategoryInterface $shippingCategory)
+    {
+        $code = sprintf("%s_%s", $product->getCode(), $optionValueName);
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $product->getVariants()->filter(function ($variant) use ($code) {
+            return $code === $variant->getCode();
+        })->first();
+        
+        Assert::notNull($productVariant, sprintf('Product variant with given code %s not exists!', $code));
+        
+        $productVariant->setShippingCategory($shippingCategory);
         $this->objectManager->flush();
     }
 

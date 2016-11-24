@@ -37,6 +37,7 @@ class ShippingCategoryContext implements Context
      * @Transform /^"([^"]+)" shipping category/
      * @Transform /^shipping category "([^"]+)"/
      * @Transform /^shipping category with name "([^"]+)"$/
+     * @Transform :shippingCategory
      */
     public function getShippingCategoryByName($shippingCategoryName)
     {
