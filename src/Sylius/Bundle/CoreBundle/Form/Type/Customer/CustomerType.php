@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Customer;
 
+use Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType as BaseCustomerType;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -22,44 +22,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CustomerType extends BaseCustomerType
 {
     /**
-     * @var EventSubscriberInterface
-     */
-    private $addUserFormSubscriber;
-
-    /**
-     * @param string $dataClass
-     * @param string[] $validationGroups
-     * @param EventSubscriberInterface $addUserFormSubscriber
-     */
-    public function __construct(
-        $dataClass,
-        array $validationGroups = [],
-        EventSubscriberInterface $addUserFormSubscriber
-    ) {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->addUserFormSubscriber = $addUserFormSubscriber;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         parent::buildForm($builder, $options);
 
-        $builder
-            ->addEventSubscriber($this->addUserFormSubscriber);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
-        ]);
+        $builder->addEventSubscriber(new AddUserFormSubscriber(ShopUserType::class));
     }
 }

@@ -70,6 +70,21 @@
             <argument type="collection"><argument>sylius</argument></argument>
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.admin_user" class="Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType">
+            <argument>%sylius.model.admin_user.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.shop_user" class="Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType">
+            <argument>%sylius.model.shop_user.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.shop_user_registration" class="Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserRegistrationType">
+            <argument>%sylius.model.shop_user.class%</argument>
+            <argument type="collection"><argument>sylius</argument><argument>sylius_user_registration</argument></argument>
+            <tag name="form.type" />
+        </service>
 
         <service id="sylius.form.type.product_image" class="%sylius.form.type.product_image.class%">
             <argument>%sylius.model.product_image.class%</argument>
@@ -92,7 +107,6 @@
         <service id="sylius.form.type.customer" class="%sylius.form.type.customer.class%">
             <argument>%sylius.model.customer.class%</argument>
             <argument>%sylius.validation_groups.customer%</argument>
-            <argument type="service" id="sylius.form.event_subscriber.add_shop_user_type" />
             <tag name="form.type" alias="sylius_customer" />
         </service>
 

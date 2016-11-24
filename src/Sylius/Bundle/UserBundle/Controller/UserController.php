@@ -17,6 +17,9 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 use Sylius\Bundle\UserBundle\Form\Model\PasswordReset;
 use Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest;
+use Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType;
+use Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType;
+use Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
@@ -51,7 +54,7 @@ class UserController extends ResourceController
         $user = $this->container->get('security.token_storage')->getToken()->getUser();
 
         $changePassword = new ChangePassword();
-        $formType = $this->getSyliusAttribute($request, 'form', 'sylius_user_change_password');
+        $formType = $this->getSyliusAttribute($request, 'form', UserChangePasswordType::class);
         $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
@@ -116,7 +119,7 @@ class UserController extends ResourceController
         }
 
         $passwordReset = new PasswordReset();
-        $formType = $this->getSyliusAttribute($request, 'form', 'sylius_user_reset_password');
+        $formType = $this->getSyliusAttribute($request, 'form', UserResetPasswordType::class);
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
@@ -232,7 +235,7 @@ class UserController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $passwordReset = new PasswordResetRequest();
-        $formType = $this->getSyliusAttribute($request, 'form', 'sylius_user_request_password_reset');
+        $formType = $this->getSyliusAttribute($request, 'form', UserRequestPasswordResetType::class);
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
         $template = $this->getSyliusAttribute($request, 'template', null);
         Assert::notNull($template, 'Template is not configured.');

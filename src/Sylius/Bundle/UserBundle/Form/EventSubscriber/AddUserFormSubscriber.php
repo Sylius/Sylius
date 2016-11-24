@@ -26,14 +26,14 @@ class AddUserFormSubscriber implements EventSubscriberInterface
     /**
      * @var string
      */
-    private $userType;
+    private $entryType;
 
     /**
-     * @param string $userType
+     * @param string $entryType
      */
-    public function __construct($userType)
+    public function __construct($entryType)
     {
-        $this->userType = $userType;
+        $this->entryType = $entryType;
     }
 
     /**
@@ -53,7 +53,7 @@ class AddUserFormSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();
-        $form->add('user', sprintf('sylius_%s_user', $this->userType), ['constraints' => [new Valid()]]);
+        $form->add('user', $this->entryType, ['constraints' => [new Valid()]]);
     }
 
     /**

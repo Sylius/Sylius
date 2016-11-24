@@ -27,7 +27,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('admin');
+        $this->beConstructedWith('\Fully\Qualified\ClassName');
     }
 
     function it_is_initializable()
@@ -46,7 +46,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
     ) {
         $event->getForm()->willReturn($form);
 
-        $form->add('user', 'sylius_admin_user', Argument::type('array'))->shouldBeCalled();
+        $form->add('user', '\Fully\Qualified\ClassName', Argument::type('array'))->shouldBeCalled();
 
         $this->preSetData($event);
     }

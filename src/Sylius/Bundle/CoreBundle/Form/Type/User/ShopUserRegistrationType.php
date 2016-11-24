@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserRegistrationType extends AbstractResourceType
+class ShopUserRegistrationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
