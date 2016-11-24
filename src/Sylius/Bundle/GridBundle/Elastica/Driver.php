@@ -19,7 +19,7 @@ use Sylius\Component\Grid\Parameters;
 /**
  * @author Nicolas Adler <nicolas.adler@openizi.com>
  */
-class Driver implements DriverInterface
+final class Driver implements DriverInterface
 {
     const NAME = 'elastica';
 

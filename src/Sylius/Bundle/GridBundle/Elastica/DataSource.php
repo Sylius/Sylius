@@ -23,7 +23,7 @@ use Sylius\Component\Grid\Parameters;
 /**
  * @author Nicolas Adler <nicolas.adler@openizi.com>
  */
-class DataSource implements DataSourceInterface
+final class DataSource implements DataSourceInterface
 {
     /**
      * @var Type
