@@ -639,7 +639,7 @@ final class ProductContext implements Context
      */
     public function thisProductBelongsToShippingCategory(ProductInterface $product, ShippingCategoryInterface $shippingCategory)
     {
-        $product->setShippingCategory($shippingCategory);
+        $product->getVariants()->first()->setShippingCategory($shippingCategory);
         $this->objectManager->flush();
     }
 

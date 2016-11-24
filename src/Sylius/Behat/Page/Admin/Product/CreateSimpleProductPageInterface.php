@@ -88,4 +88,9 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      * @param string $locale
      */
     public function activateLanguageTab($locale);
+
+    /**
+     * @param string $shippingCategoryName
+     */
+    public function selectShippingCategory($shippingCategoryName);
 }

@@ -950,6 +950,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I set its shipping category as :shippingCategoryName
+     */
+    public function iSetItsShippingCategoryAs($shippingCategoryName)
+    {
+        $this->createSimpleProductPage->selectShippingCategory($shippingCategoryName);
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */

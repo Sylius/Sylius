@@ -112,6 +112,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function selectShippingCategory($shippingCategoryName)
+    {
+        $this->getElement('shipping_category')->selectOption($shippingCategoryName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -124,6 +132,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'option_select' => '#sylius_product_variant_optionValues_%option-name%',
             'price' => '#sylius_product_variant_price',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
+            'shipping_category' => '#sylius_product_variant_shippingCategory',
             'weight' => '#sylius_product_variant_weight',
             'width' => '#sylius_product_variant_width',
         ]);
