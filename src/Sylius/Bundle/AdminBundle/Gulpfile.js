@@ -9,27 +9,35 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
+var argv = require('yargs').argv;
 
-var rootPath = '../../../../web/assets/';
+var rootPath = argv.rootPath;
 var adminRootPath = rootPath + 'admin/';
+var vendorPath = argv.vendorPath || '';
+var vendorAdminPath = '' === vendorPath ? '' : vendorPath + 'AdminBundle/';
+var vendorUiPath = '' === vendorPath ? '../UiBundle/' : vendorPath + 'UiBundle/';
+var nodeModulesPath = argv.nodeModulesPath;
 
 var paths = {
     admin: {
         js: [
-            '../../../../node_modules/jquery/dist/jquery.min.js',
-            '../../../../node_modules/sortablejs/jquery.binding.js',
-            '../../../../node_modules/semantic-ui-css/semantic.min.js',
-            '../UiBundle/Resources/private/js/**',
-            'Resources/private/js/**'
+            nodeModulesPath + 'jquery/dist/jquery.min.js',
+            nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            vendorUiPath + 'Resources/private/js/**',
+            vendorAdminPath + 'Resources/private/js/**'
         ],
         sass: [
-            '../UiBundle/Resources/private/sass/**'
+            vendorUiPath + 'Resources/private/sass/**',
+            vendorAdminPath + 'Resources/private/sass/**'
         ],
         css: [
-            '../../../../node_modules/semantic-ui-css/semantic.min.css'
+            nodeModulesPath + 'semantic-ui-css/semantic.min.css',
+            vendorUiPath + 'Resources/private/css/**',
+            vendorAdminPath + 'Resources/private/css/**'
         ],
         img: [
-            '../UiBundle/Resources/private/img/**'
+            vendorUiPath + 'Resources/private/img/**',
+            vendorAdminPath + 'Resources/private/img/**'
         ]
     }
 };
@@ -44,7 +52,7 @@ gulp.task('admin-js', function () {
 });
 
 gulp.task('admin-css', function() {
-    gulp.src(['../../../../node_modules/semantic-ui-css/themes/**/*']).pipe(gulp.dest(adminRootPath + 'css/themes/'));
+    gulp.src([nodeModulesPath+'semantic-ui-css/themes/**/*']).pipe(gulp.dest(adminRootPath + 'css/themes/'));
 
     var cssStream = gulp.src(paths.admin.css)
         .pipe(concat('css-files.css'))

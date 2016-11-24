@@ -15,7 +15,8 @@
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.1",
     "gulp-uglifycss": "^1.0.5",
-    "merge-stream": "^1.0.0"
+    "merge-stream": "^1.0.0",
+    "yargs": "^6.4.0"
   },
   "scripts": {
     "gulp": "gulp"

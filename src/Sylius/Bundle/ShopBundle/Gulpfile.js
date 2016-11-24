@@ -9,27 +9,36 @@ var sass = require('gulp-sass');
 var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var uglifycss = require('gulp-uglifycss');
+var argv = require('yargs').argv;
 
-var rootPath = '../../../../web/assets/';
+var rootPath = argv.rootPath;
 var shopRootPath = rootPath + 'shop/';
+var vendorPath = argv.vendorPath || '';
+var vendorShopPath = '' === vendorPath ? '' : vendorPath + 'ShopBundle/';
+var vendorUiPath = '' === vendorPath ? '../UiBundle/' : vendorPath + 'UiBundle/';
+var nodeModulesPath = argv.nodeModulesPath;
 
 var paths = {
     shop: {
         js: [
-            '../../../../node_modules/jquery/dist/jquery.min.js',
-            '../../../../node_modules/semantic-ui-css/semantic.min.js',
-            '../UiBundle/Resources/private/js/**',
-            'Resources/private/js/**'
+            nodeModulesPath + 'jquery/dist/jquery.min.js',
+            nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            vendorUiPath + 'Resources/private/js/**',
+            vendorShopPath + 'Resources/private/js/**'
         ],
         sass: [
-            '../UiBundle/Resources/private/sass/**',
-            'Resources/private/scss/**'
+            vendorUiPath + 'Resources/private/sass/**',
+            vendorShopPath + 'Resources/private/sass/**'
         ],
         css: [
-            '../../../../node_modules/semantic-ui-css/semantic.min.css'
+            nodeModulesPath + 'semantic-ui-css/semantic.min.css',
+            vendorUiPath + 'Resources/private/css/**',
+            vendorShopPath + 'Resources/private/css/**',
+            vendorShopPath + 'Resources/private/scss/**'
         ],
         img: [
-            '../UiBundle/Resources/private/img/**'
+            vendorUiPath + 'Resources/private/img/**',
+            vendorShopPath + 'Resources/private/img/**'
         ]
     }
 };
@@ -44,7 +53,7 @@ gulp.task('shop-js', function () {
 });
 
 gulp.task('shop-css', function() {
-    gulp.src(['../../../../node_modules/semantic-ui-css/themes/**/*']).pipe(gulp.dest(shopRootPath + 'css/themes/'));
+    gulp.src([nodeModulesPath+'semantic-ui-css/themes/**/*']).pipe(gulp.dest(shopRootPath + 'css/themes/'));
 
     var cssStream = gulp.src(paths.shop.css)
             .pipe(concat('css-files.css'))
