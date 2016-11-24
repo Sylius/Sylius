@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\CoreBundle\Collector;
 
 use Sylius\Bundle\CoreBundle\Application\Kernel;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
@@ -120,6 +122,7 @@ final class SyliusCollector extends DataCollector
 
             $this->data['base_currency_code'] = $channel->getBaseCurrency()->getCode();
             $this->data['currency_code'] = $this->shopperContext->getCurrencyCode();
+        } catch (ChannelNotFoundException $exception) {
         } catch (CurrencyNotFoundException $exception) {}
 
         try {
