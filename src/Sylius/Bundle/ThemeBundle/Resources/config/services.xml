@@ -53,12 +53,12 @@
 
         <service id="sylius.theme.form.type.theme_choice" class="Sylius\Bundle\ThemeBundle\Form\Type\ThemeChoiceType">
             <argument type="service" id="sylius.repository.theme" />
-            <tag name="form.type" alias="sylius_theme_choice" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.theme.form.type.theme_name_choice" class="Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType">
             <argument type="service" id="sylius.repository.theme" />
-            <tag name="form.type" alias="sylius_theme_name_choice" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.theme.configuration" class="Sylius\Bundle\ThemeBundle\Configuration\ThemeConfiguration" public="false" />
