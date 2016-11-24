@@ -142,11 +142,11 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I make it available in channel :channel
+     * @When I make it available in channel :channelName
      */
-    public function iMakeItAvaialbelInChannel($channel)
+    public function iMakeItAvailableInChannel($channelName)
     {
-        $this->createPage->checkChannel($channel);
+        $this->createPage->checkChannel($channelName);
     }
 
     /**
