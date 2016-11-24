@@ -14,14 +14,11 @@ namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Templating\Helper\ChannelBasedPriceHelper;
 use Sylius\Bundle\CoreBundle\Templating\Helper\ChannelBasedPriceHelperInterface;
-use Sylius\Bundle\MoneyBundle\Templating\Helper\PriceHelperInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
-use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
@@ -31,10 +28,9 @@ final class ChannelBasedPriceHelperSpec extends ObjectBehavior
 {
     function let(
         CartContextInterface $cartContext,
-        PriceHelperInterface $priceHelper,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
     ) {
-        $this->beConstructedWith($cartContext, $priceHelper, $productVariantPriceCalculator);
+        $this->beConstructedWith($cartContext, $productVariantPriceCalculator);
     }
 
     function it_is_initializable()
@@ -56,18 +52,15 @@ final class ChannelBasedPriceHelperSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         ChannelInterface $currentChannel,
         OrderInterface $currentCart,
-        PriceHelperInterface $priceHelper,
         ProductVariantInterface $productVariant,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
     ) {
         $cartContext->getCart()->willReturn($currentCart);
         $currentCart->getChannel()->willReturn($currentChannel);
-        $currentCart->getCurrencyCode()->willReturn('USD');
 
         $productVariantPriceCalculator->calculate($productVariant, ['channel' => $currentChannel])->willReturn(1000);
-        $priceHelper->convertAndFormatAmount(1000, 'USD')->willReturn(1300);
 
-        $this->getPriceForCurrentChannel($productVariant)->shouldReturn(1300);
+        $this->getPriceForCurrentChannel($productVariant)->shouldReturn(1000);
     }
 
     function it_has_name()

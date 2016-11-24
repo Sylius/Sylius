@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
-use Sylius\Bundle\MoneyBundle\Templating\Helper\PriceHelperInterface;
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -29,27 +28,19 @@ class ChannelBasedPriceHelper extends Helper implements ChannelBasedPriceHelperI
     private $cartContext;
 
     /**
-     * @var PriceHelperInterface
-     */
-    private $priceHelper;
-
-    /**
      * @var ProductVariantPriceCalculatorInterface
      */
     private $productVariantPriceCalculator;
 
     /**
      * @param CartContextInterface $cartContext
-     * @param PriceHelperInterface $priceHelper
      * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
      */
     public function __construct(
         CartContextInterface $cartContext,
-        PriceHelperInterface $priceHelper,
         ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
     ) {
         $this->cartContext = $cartContext;
-        $this->priceHelper = $priceHelper;
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
@@ -61,12 +52,10 @@ class ChannelBasedPriceHelper extends Helper implements ChannelBasedPriceHelperI
         /** @var OrderInterface $currentCart */
         $currentCart = $this->cartContext->getCart();
 
-        $price = $this
+        return $this
             ->productVariantPriceCalculator
             ->calculate($productVariant, ['channel' => $currentCart->getChannel()])
         ;
-
-        return $this->priceHelper->convertAndFormatAmount($price, $currentCart->getCurrencyCode());
     }
 
     /**
