@@ -157,6 +157,13 @@
             <tag name="form.type" alias="sylius_address_choice" />
         </service>
 
+        <service id="sylius.form.type.promotion_action" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionActionType">
+            <argument>%sylius.model.promotion_action.class%</argument>
+            <argument type="service" id="sylius.registry_promotion_action" />
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="form.type" alias="sylius_promotion_action" />
+        </service>
+
         <service id="sylius.form.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Type\Order\CartItemType">
             <argument>%sylius.model.order_item.class%</argument>
             <argument>%sylius.validation_groups.order_item%</argument>
