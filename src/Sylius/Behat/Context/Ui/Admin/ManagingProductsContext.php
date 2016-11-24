@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
@@ -215,11 +216,19 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I set its(?:| default) price to ("(?:€|£|\$)[^"]+")$/
+     * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iSetItsPriceTo($price)
+    public function iSetItsPriceTo($price, $channelName)
     {
-        $this->createSimpleProductPage->specifyPrice($price);
+        $this->createSimpleProductPage->specifyPrice($channelName, $price);
+    }
+
+    /**
+     * @When I make it available in channel :channel
+     */
+    public function iMakeItAvailableInChannel($channel)
+    {
+        $this->createSimpleProductPage->checkChannel($channel);
     }
 
     /**
@@ -228,14 +237,6 @@ final class ManagingProductsContext implements Context
     public function iChooseCalculator($calculatorName)
     {
         $this->createSimpleProductPage->choosePricingCalculator($calculatorName);
-    }
-
-    /**
-     * @When /^I set its price to "(?:€|£|\$)([^"]+)" for ("[^"]+" currency) and ("[^"]+" channel)$/
-     */
-    public function iSetItsPriceToForCurrencyAndChannel($price, CurrencyInterface $currency, ChannelInterface $channel)
-    {
-        $this->createSimpleProductPage->specifyPriceForChannelAndCurrency($price, $channel, $currency);
     }
 
     /**
@@ -513,11 +514,11 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I change its price to "(?:€|£|\$)([^"]+)"$/
+     * @When /^I change its price to (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
      */
-    public function iChangeItsPriceTo($price)
+    public function iChangeItsPriceTo($price, $channelName)
     {
-        $this->updateSimpleProductPage->specifyPrice($price);
+        $this->updateSimpleProductPage->specifyPrice($channelName, $price);
     }
 
     /**
@@ -989,6 +990,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that price must be defined for every channel
+     */
+    public function iShouldBeNotifiedThatPriceMustBeDefinedForEveryChannel()
+    {
+        $this->assertValidationMessage('channel_pricings', 'You must define price for every channel.');
+    }
+
+    /**
      * @Then they should have order like :firstProductName, :secondProductName and :thirdProductName
      */
     public function theyShouldHaveOrderLikeAnd(...$productNames)
@@ -1005,6 +1014,46 @@ final class ManagingProductsContext implements Context
     public function iSetThePositionOfTo($productName, $position)
     {
         $this->indexPerTaxonPage->setPositionOfProduct($productName, (int) $position);
+    }
+
+    /**
+     * @When I save my new configuration
+     */
+    public function iSaveMyNewConfiguration()
+    {
+        $this->indexPerTaxonPage->savePositions();
+    }
+
+    /**
+     * @Then /^(it|this product) should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     * @Then /^(product "[^"]+") should be priced at (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     */
+    public function itShouldBePricedAtForChannel(ProductInterface $product, $price, $channelName)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::same(
+            $this->updateSimpleProductPage->getPriceForChannel($channelName),
+            $price
+        );
+    }
+
+    /**
+     * @Then /^(this product) should no longer have price for channel "([^"]+)"$/
+     */
+    public function thisProductShouldNoLongerHavePriceForChannel(ProductInterface $product, $channelName)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        try {
+            $this->updateSimpleProductPage->getPriceForChannel($channelName);
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new \Exception(
+            sprintf('Product "%s" should not have price defined for channel "%s".', $product->getName(), $channelName)
+        );
     }
 
     /**
@@ -1046,13 +1095,5 @@ final class ManagingProductsContext implements Context
         ], $product);
 
         Assert::same($currentPage->getValidationMessage($element), $message);
-    }
-
-    /**
-     * @When I save my new configuration
-     */
-    public function iSaveMyNewConfiguration()
-    {
-        $this->indexPerTaxonPage->savePositions();
     }
 }

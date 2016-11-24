@@ -12,12 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
-use Sylius\Component\Pricing\Calculator\CalculatorInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormRegistryInterface;
-use Symfony\Component\Form\FormView;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,25 +22,20 @@ use Symfony\Component\Form\FormView;
 class ProductVariantType extends BaseProductVariantType
 {
     /**
-     * @var ServiceRegistryInterface
+     * @var EventSubscriberInterface
      */
-    protected $calculatorRegistry;
+    private $channelPricingFormSubscriber;
 
     /**
-     * @var FormRegistryInterface
+     * {@inheritdoc}
+     *
+     * @param EventSubscriberInterface $channelPricingFormSubscriber
      */
-    protected $formRegistry;
-
-    public function __construct(
-        $dataClass,
-        array $validationGroups = [],
-        ServiceRegistryInterface $calculatorRegistry,
-        FormRegistryInterface $formRegistry
-    ) {
+    public function __construct($dataClass, array $validationGroups = [], EventSubscriberInterface $channelPricingFormSubscriber)
+    {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->calculatorRegistry = $calculatorRegistry;
-        $this->formRegistry = $formRegistry;
+        $this->channelPricingFormSubscriber = $channelPricingFormSubscriber;
     }
 
     /**
@@ -54,9 +46,6 @@ class ProductVariantType extends BaseProductVariantType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('price', 'sylius_money', [
-                'label' => 'sylius.form.variant.price',
-            ])
             ->add('tracked', 'checkbox', [
                 'label' => 'sylius.form.variant.tracked',
             ])
@@ -88,39 +77,14 @@ class ProductVariantType extends BaseProductVariantType
                 'empty_value' => '---',
                 'label' => 'sylius.form.product_variant.tax_category',
             ])
-            ->add('pricingCalculator', 'sylius_price_calculator_choice', [
-                'label' => 'sylius.form.shipping_method.calculator',
+            ->add('channelPricings', CollectionType::class, [
+                'entry_type' => ChannelPricingType::class,
+                'label' => 'sylius.form.variant.price',
+                'allow_add' => false,
+                'allow_delete' => false,
+                'error_bubbling' => false,
             ])
+            ->addEventSubscriber($this->channelPricingFormSubscriber)
         ;
-
-        $prototypes = [
-            'calculators' => [],
-        ];
-
-        /** @var CalculatorInterface $calculator */
-        foreach ($this->calculatorRegistry->all() as $name => $calculator) {
-            $calculatorTypeName = sprintf('sylius_price_calculator_%s', $calculator->getType());
-
-            if (!$this->formRegistry->hasType($calculatorTypeName)) {
-                continue;
-            }
-
-            $prototypes['calculators'][$name] = $builder->create('configuration', $calculatorTypeName)->getForm();
-        }
-
-        $builder->setAttribute('prototypes', $prototypes);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        $view->vars['prototypes'] = [];
-        foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
-            foreach ($prototypes as $type => $prototype) {
-                $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
-            }
-        }
     }
 }

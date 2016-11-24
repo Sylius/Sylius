@@ -11,12 +11,9 @@
 
 namespace Sylius\Bundle\PricingBundle\DependencyInjection;
 
-use Sylius\Bundle\PricingBundle\Form\Extension\PriceableTypeExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
@@ -33,20 +30,6 @@ final class SyliusPricingExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('services.xml');
-
-        foreach ($config['forms'] as $formType) {
-            $definition = new Definition(PriceableTypeExtension::class);
-            $definition
-                ->setArguments([
-                    $formType,
-                    new Reference('sylius.registry.price_calculator'),
-                    new Reference('sylius.form.subscriber.priceable'),
-                ])
-                ->addTag('form.type_extension', ['alias' => $formType, 'extended_type' => $formType])
-            ;
-
-            $container->setDefinition(sprintf('sylius.form.extension.priceable.%s', $formType), $definition);
-        }
     }
 
     /**

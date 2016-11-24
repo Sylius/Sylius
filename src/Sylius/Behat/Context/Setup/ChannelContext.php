@@ -13,14 +13,13 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
-use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -153,6 +152,14 @@ final class ChannelContext implements Context
     public function theChannelIsDisabled(ChannelInterface $channel)
     {
         $this->changeChannelState($channel, false);
+    }
+
+    /**
+     * @Given channel :channel has been deleted
+     */
+    public function iChannelHasBeenDeleted(ChannelInterface $channel)
+    {
+        $this->channelRepository->remove($channel);
     }
 
     /**

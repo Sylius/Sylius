@@ -22,8 +22,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**
      * @param int $price
+     * @param string $channel
      */
-    public function specifyPrice($price);
+    public function specifyPrice($price, $channel);
 
     /**
      * @param int $height
@@ -70,4 +71,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @return string
      */
     public function getValidationMessageForForm();
+
+    /**
+     * @return string
+     */
+    public function getPricesValidationMessage();
 }

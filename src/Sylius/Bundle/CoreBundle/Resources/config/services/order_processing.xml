@@ -36,7 +36,7 @@
         </service>
 
         <service id="sylius.order_processing.order_prices_recalculator" class="Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator">
-            <argument type="service" id="sylius.price_calculator" />
+            <argument type="service" id="sylius.calculator.product_variant_price" />
             <tag name="sylius.order_processor" />
         </service>
 

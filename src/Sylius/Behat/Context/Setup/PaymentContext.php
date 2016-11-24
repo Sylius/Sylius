@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Model\PaymentMethodTranslationInterface;
@@ -96,7 +97,7 @@ final class PaymentContext implements Context
      */
     public function storeAllowsPayingForAllChannels($paymentMethodName, array $channels)
     {
-        $paymentMethod = $this->createPaymentMethod($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', false);
+        $paymentMethod = $this->createPaymentMethod($paymentMethodName, StringInflector::nameToUppercaseCode($paymentMethodName), 'Payment method', false);
 
         foreach ($channels as $channel) {
             $paymentMethod->addChannel($channel);

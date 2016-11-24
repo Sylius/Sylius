@@ -60,10 +60,18 @@ Sylius\Component\Core\Model\ProductTranslation:
 Sylius\Component\Core\Model\ProductVariant:
     productVariant1:
         code: MUG_1
-        setPrice: [20]
+        channelPricings: ["@channelPricing1"]
     productVariant2:
         code: MUG_2
-        setPrice: [20]
+        channelPricings: ["@channelPricing2"]
+
+Sylius\Component\Core\Model\ChannelPricing:
+    channelPricing1:
+        channel: "@channel"
+        price: 20
+    channelPricing2:
+        channel: "@channel"
+        price: 20
 
 Sylius\Component\Core\Model\ShippingMethod:
     ups:

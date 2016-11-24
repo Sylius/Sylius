@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Core\Provider;
 
+use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
@@ -21,15 +23,28 @@ use Sylius\Component\Product\Model\ProductOptionValueInterface;
 final class ProductVariantsPricesProvider implements ProductVariantsPricesProviderInterface
 {
     /**
+     * @var ProductVariantPriceCalculatorInterface
+     */
+    private $productVariantPriceCalculator;
+
+    /**
+     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+     */
+    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    {
+        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
+    }
+
+    /**
      * {@inheritdoc}
      */
-    public function provideVariantsPrices(ProductInterface $product)
+    public function provideVariantsPrices(ProductInterface $product, ChannelInterface $channel)
     {
         $variantsPrices = [];
 
         /** @var ProductVariantInterface $variant */
         foreach ($product->getVariants() as $variant) {
-            $variantsPrices[] = $this->constructOptionsMap($variant);
+            $variantsPrices[] = $this->constructOptionsMap($variant, $channel);
         }
 
         return $variantsPrices;
@@ -37,10 +52,11 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
 
     /**
      * @param ProductVariantInterface $variant
+     * @param ChannelInterface $channel
      *
      * @return array
      */
-    private function constructOptionsMap(ProductVariantInterface $variant)
+    private function constructOptionsMap(ProductVariantInterface $variant, ChannelInterface $channel)
     {
         $optionMap = [];
 
@@ -49,7 +65,7 @@ final class ProductVariantsPricesProvider implements ProductVariantsPricesProvid
             $optionMap[$option->getOptionCode()] = $option->getValue();
         }
 
-        $optionMap['value'] = $variant->getPrice();
+        $optionMap['value'] = $this->productVariantPriceCalculator->calculate($variant, ['channel' => $channel]);
 
         return $optionMap;
     }
