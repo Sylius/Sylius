@@ -30,7 +30,7 @@ class TaxonType extends AbstractResourceType
     {
         $builder
             ->add('translations', ResourceTranslationsType::class, [
-                'entry_type' => 'sylius_taxon_translation',
+                'entry_type' => TaxonTranslationType::class,
                 'label' => 'sylius.form.taxon.name',
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber())

@@ -18,4 +18,4 @@ sylius_admin_ajax_taxon_move:
     defaults:
         _controller: sylius.controller.taxon:updateAction
         _sylius:
-            form: sylius_taxon_position
+            form: Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonPositionType

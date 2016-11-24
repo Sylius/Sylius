@@ -61,6 +61,9 @@
         <service id="sylius.form.extension.type.tax_rate" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxRateTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType" />
         </service>
+        <service id="sylius.form.extension.type.taxon" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxonTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType" />
+        </service>
 
         <service id="sylius.form.type.product_image" class="%sylius.form.type.product_image.class%">
             <argument>%sylius.model.product_image.class%</argument>

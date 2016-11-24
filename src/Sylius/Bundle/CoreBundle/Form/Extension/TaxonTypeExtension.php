@@ -9,21 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Taxon;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType as BaseTaxonType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class TaxonType extends BaseTaxonType
+/**
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
+ */
+final class TaxonTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('images', CollectionType::class, [
                 'entry_type' => 'sylius_taxon_image',
@@ -33,5 +36,13 @@ class TaxonType extends BaseTaxonType
                 'label' => 'sylius.form.taxon.images',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return TaxonType::class;
     }
 }

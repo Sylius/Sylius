@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter;
 
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,7 +41,7 @@ class TaxonFilterConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxons', 'sylius_taxon_choice', [
+            ->add('taxons', TaxonChoiceType::class, [
                 'label' => 'sylius.form.promotion_filter.taxon.taxons',
                 'multiple' => true,
                 'required' => false,

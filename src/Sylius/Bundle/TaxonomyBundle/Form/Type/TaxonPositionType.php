@@ -29,7 +29,6 @@ final class TaxonPositionType extends AbstractResourceType
         $builder
             ->add('position', IntegerType::class, [
                 'label' => 'sylius.form.taxon.position',
-
             ])
         ;
     }
@@ -41,13 +40,9 @@ final class TaxonPositionType extends AbstractResourceType
     {
         parent::configureOptions($resolver);
 
-        $resolver
-            ->setDefaults([
-                'csrf_protection' => false,
-            ])
-            ->setDefined(['position'])
-            ->setAllowedTypes('position', 'int')
-        ;
+        $resolver->setDefaults([
+            'csrf_protection' => false,
+        ]);
     }
 
     /**
