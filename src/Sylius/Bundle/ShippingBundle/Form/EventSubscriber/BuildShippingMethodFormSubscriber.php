@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
+namespace Sylius\Bundle\ShippingBundle\Form\EventSubscriber;
 
 use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;

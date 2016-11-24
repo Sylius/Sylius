@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -35,5 +36,11 @@ final class SyliusShippingExtension extends AbstractResourceExtension
         $this->mapFormValidationGroupsParameters($config, $container);
 
         $loader->load('services.xml');
+
+        $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method');
+        $shippingMethod->addArgument(new Reference(g'sylius.registry.shipping_calculator'));
+        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_rule_checker'));
+        $shippingMethod->addArgument(new Reference('form.registry'));
+        $shippingMethod->addArgument(new Reference('sylius.form.event_subscriber.build_shipping_method'));
     }
 }

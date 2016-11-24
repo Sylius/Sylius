@@ -9,29 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
+namespace spec\Sylius\Bundle\ShippingBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildShippingMethodFormSubscriber as BaseBuildShippingMethodFormSubscriber;
 use Sylius\Bundle\ShippingBundle\Form\EventSubscriber\BuildShippingMethodFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormRegistryInterface;
 
-/**
- * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
- */
 final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
 {
-    function let(
-        ServiceRegistryInterface $calculatorRegistry,
-        FormFactoryInterface $factory,
-        FormRegistryInterface $formRegistry
-    ) {
+    function let(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory, FormRegistryInterface $formRegistry)
+    {
         $this->beConstructedWith($calculatorRegistry, $factory, $formRegistry);
     }
 
@@ -40,9 +35,17 @@ final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType(BuildShippingMethodFormSubscriber::class);
     }
 
-    function it_is_a_build_shipping_method_form_subscriber()
+    function it_is_a_subscriber()
     {
-        $this->shouldImplement(BaseBuildShippingMethodFormSubscriber::class);
+        $this->shouldImplement(EventSubscriberInterface::class);
+    }
+
+    function it_subscribes_to_event()
+    {
+        $this::getSubscribedEvents()->shouldReturn([
+            FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+        ]);
     }
 
     function it_adds_configuration_field_on_pre_set_data(
@@ -65,11 +68,11 @@ final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willReturn($calculator);
         $calculator->getType()->shouldBeCalled()->willReturn('calculator_type');
 
-        $formRegistry->hasType('sylius_channel_based_shipping_calculator_calculator_type')->shouldBeCalled()->willReturn(true);
+        $formRegistry->hasType('sylius_shipping_calculator_calculator_type')->shouldBeCalled()->willReturn(true);
 
         $factory->createNamed(
             'configuration',
-            'sylius_channel_based_shipping_calculator_calculator_type',
+            'sylius_shipping_calculator_calculator_type',
             [],
             ['auto_initialize' => false]
         )->shouldBeCalled()->willReturn($formConfiguration);
@@ -94,11 +97,11 @@ final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willReturn($calculator);
         $calculator->getType()->shouldBeCalled()->willReturn('calculator_type');
 
-        $formRegistry->hasType('sylius_channel_based_shipping_calculator_calculator_type')->shouldBeCalled()->willReturn(true);
+        $formRegistry->hasType('sylius_shipping_calculator_calculator_type')->shouldBeCalled()->willReturn(true);
 
         $factory->createNamed(
             'configuration',
-            'sylius_channel_based_shipping_calculator_calculator_type',
+            'sylius_shipping_calculator_calculator_type',
             [],
             ['auto_initialize' => false]
         )->shouldBeCalled()->willReturn($formConfiguration);
