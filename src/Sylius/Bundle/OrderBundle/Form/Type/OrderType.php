@@ -28,7 +28,7 @@ class OrderType extends AbstractResourceType
     {
         $builder
             ->add('items', CollectionType::class, [
-                'entry_type' => 'sylius_order_item',
+                'entry_type' => OrderItemType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

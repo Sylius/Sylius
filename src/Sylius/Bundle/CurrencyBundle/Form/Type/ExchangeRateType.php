@@ -48,13 +48,13 @@ class ExchangeRateType extends AbstractResourceType
             $disabled = null !== $exchangeRate->getSourceCurrency() && null !== $exchangeRate->getTargetCurrency();
 
             $form
-                ->add('sourceCurrency', 'sylius_currency_choice', [
+                ->add('sourceCurrency', CurrencyChoiceType::class, [
                     'label' => 'sylius.form.exchange_rate.source_currency',
                     'required' => true,
                     'empty_data' => false,
                     'disabled' => $disabled,
                 ])
-                ->add('targetCurrency', 'sylius_currency_choice', [
+                ->add('targetCurrency', CurrencyChoiceType::class, [
                     'label' => 'sylius.form.exchange_rate.target_currency',
                     'required' => true,
                     'empty_data' => false,

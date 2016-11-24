@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Templating\Helper;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Order\CartItemType;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -79,7 +80,7 @@ class CartHelper extends Helper
         $cartItem = $this->orderItemFactory->createNew();
         $this->orderItemQuantityModifier->modify($cartItem, 1);
 
-        $form = $this->formFactory->create('sylius_cart_item', $cartItem, $options);
+        $form = $this->formFactory->create(CartItemType::class, $cartItem, $options);
 
         return $form->createView();
     }

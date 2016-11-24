@@ -11,11 +11,14 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 /**
+ * @internal
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class AddPaymentMethodsFormSubscriber implements EventSubscriberInterface
@@ -38,7 +41,7 @@ final class AddPaymentMethodsFormSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $payment = $event->getData();
 
-        $form->add('method', 'sylius_payment_method_choice', [
+        $form->add('method', PaymentMethodChoiceType::class, [
             'label' => 'sylius.form.checkout.payment_method',
             'subject' => $payment,
             'expanded' => true,

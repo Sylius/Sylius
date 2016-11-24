@@ -11,16 +11,18 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Liverbool <nukboon@gmail.com>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class CurrencyCodeChoiceType extends AbstractType
+final class CurrencyChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface
@@ -38,20 +40,24 @@ final class CurrencyCodeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        if ($options['multiple']) {
+            $builder->addModelTransformer(new CollectionToArrayTransformer());
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'choices' => function (Options $options) {
-                $choices = [];
-
-                /** @var CurrencyInterface[] $currencies */
-                $currencies = $this->currencyRepository->findBy(['enabled' => true]);
-                foreach ($currencies as $currency) {
-                    $choices[sprintf('%s - %s', $currency->getCode(), $currency->getName())] = $currency->getCode();
-                }
-
-                return $choices;
+                return $this->currencyRepository->findAll();
             },
+            'choice_value' => 'code',
+            'choice_label' => 'name',
             'choice_translation_domain' => false,
             'choices_as_values' => true,
         ]);
@@ -70,7 +76,7 @@ final class CurrencyCodeChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_currency_code_choice';
+        return 'sylius_currency_choice';
     }
 
     /**
@@ -78,6 +84,6 @@ final class CurrencyCodeChoiceType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'sylius_currency_code_choice';
+        return 'sylius_currency_choice';
     }
 }

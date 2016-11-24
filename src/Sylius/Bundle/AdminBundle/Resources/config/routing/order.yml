@@ -30,9 +30,9 @@ sylius_admin_order_update:
             section: admin
             template: SyliusAdminBundle:Order:update.html.twig
             form:
-                type: sylius_order
                 options:
-                    validation_groups: sylius_shipping_address_update
+                    validation_groups:
+                        - sylius_shipping_address_update
 
 sylius_admin_order_cancel:
     path: /orders/{id}/cancel

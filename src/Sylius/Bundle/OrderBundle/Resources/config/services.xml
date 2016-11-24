@@ -13,6 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
+        <import resource="services/form.xml"/>
         <import resource="services/templating.xml"/>
         <import resource="services/twig.xml"/>
     </imports>
@@ -51,14 +52,6 @@
         </service>
 
         <service id="sylius.adjustments_aggregator" class="Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator" />
-
-        <service id="sylius.form.data_mapper.property_path" class="Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper">
-            <argument type="service" id="property_accessor" />
-        </service>
-        <service id="sylius.form.data_mapper.order_item_quantity" class="Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper">
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
-            <argument type="service" id="sylius.form.data_mapper.property_path" />
-        </service>
 
         <service id="sylius.custom_factory.adjustment" class="Sylius\Component\Order\Factory\AdjustmentFactory" decorates="sylius.factory.adjustment" public="false">
             <argument type="service" id="sylius.custom_factory.adjustment.inner" />

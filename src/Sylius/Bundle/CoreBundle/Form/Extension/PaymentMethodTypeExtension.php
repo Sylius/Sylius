@@ -9,24 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Payment;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
-use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType as BasePaymentMethodType;
+use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PaymentMethodType extends BasePaymentMethodType
+class PaymentMethodTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('channels', ChannelChoiceType::class, [
                 'multiple' => true,
@@ -34,5 +33,13 @@ class PaymentMethodType extends BasePaymentMethodType
                 'label' => 'sylius.form.payment_method.channels',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return PaymentMethodType::class;
     }
 }

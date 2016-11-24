@@ -30,10 +30,10 @@ class PaymentMethodType extends AbstractResourceType
     {
         $builder
             ->add('translations', ResourceTranslationsType::class, [
-                'entry_type' => 'sylius_payment_method_translation',
+                'entry_type' => PaymentMethodTranslationType::class,
                 'label' => 'sylius.form.payment_method.name',
             ])
-            ->add('gateway', 'sylius_payment_gateway_choice', [
+            ->add('gateway', PaymentGatewayChoiceType::class, [
                 'label' => 'sylius.form.payment_method.gateway',
             ])
             ->add('position', IntegerType::class, [

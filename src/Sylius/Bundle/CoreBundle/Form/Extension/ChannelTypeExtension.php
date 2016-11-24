@@ -14,7 +14,9 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
+use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
+use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -41,7 +43,7 @@ class ChannelTypeExtension extends AbstractTypeExtension
                 'required' => true,
                 'placeholder' => null,
             ])
-            ->add('currencies', 'sylius_currency_choice', [
+            ->add('currencies', CurrencyChoiceType::class, [
                 'label' => 'sylius.form.channel.currencies',
                 'required' => true,
                 'multiple' => true,
@@ -53,7 +55,7 @@ class ChannelTypeExtension extends AbstractTypeExtension
             ->add('taxCalculationStrategy', 'sylius_tax_calculation_strategy_choice', [
                 'label' => 'sylius.form.channel.tax_calculation_strategy',
             ])
-            ->add('themeName', 'sylius_theme_name_choice', [
+            ->add('themeName', ThemeNameChoiceType::class, [
                 'label' => 'sylius.form.channel.theme',
                 'required' => false,
                 'empty_data' => null,
