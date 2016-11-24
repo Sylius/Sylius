@@ -122,11 +122,11 @@ class RequestConfiguration
     }
 
     /**
-     * @return mixed|null
+     * @return string
      */
     public function getFormType()
     {
-        $form = $this->parameters->get('form', sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName()));
+        $form = $this->getFormConfiguration();
 
         if (is_array($form) && array_key_exists('type', $form)) {
             return $form['type'];
@@ -136,11 +136,11 @@ class RequestConfiguration
     }
 
     /**
-     * @return mixed|null
+     * @return array
      */
     public function getFormOptions()
     {
-        $form = $this->parameters->get('form', sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName()));
+        $form = $this->getFormConfiguration();
 
         if (is_array($form) && array_key_exists('options', $form)) {
             return $form['options'];
@@ -600,5 +600,23 @@ class RequestConfiguration
     private function areParametersIntentionallyEmptyArray($redirect)
     {
         return isset($redirect['parameters']) && is_array($redirect['parameters']) && empty($redirect['parameters']);
+    }
+
+    /**
+     * @return array|string|null
+     */
+    private function getFormConfiguration()
+    {
+        $form = $this->parameters->get('form');
+        if (null !== $form) {
+            return $form;
+        }
+
+        $form = $this->metadata->getClass('form');
+        if (is_string($form)) {
+            return $form;
+        }
+
+        return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
 }

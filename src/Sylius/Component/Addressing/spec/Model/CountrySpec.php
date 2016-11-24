@@ -51,13 +51,10 @@ final class CountrySpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_returns_code_when_converted_to_string()
+    function it_returns_name_when_converted_to_string()
     {
         $this->setCode('VE');
-        $this->__toString()->shouldReturn('VE');
-
-        $this->setCode('CO');
-        $this->__toString()->shouldReturn('CO');
+        $this->__toString()->shouldReturn('Venezuela');
     }
 
     function it_has_no_code_by_default()

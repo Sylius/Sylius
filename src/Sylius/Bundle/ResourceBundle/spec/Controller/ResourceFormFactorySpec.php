@@ -68,18 +68,4 @@ final class ResourceFormFactorySpec extends ObjectBehavior
 
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
     }
-
-    function it_creates_the_object_if_form_is_a_class_name(
-        RequestConfiguration $requestConfiguration,
-        ResourceInterface $resource,
-        FormFactoryInterface $formFactory,
-        FormInterface $form
-    ) {
-        $requestConfiguration->isHtmlRequest()->willReturn(true);
-        $requestConfiguration->getFormType()->willReturn(TextType::class);
-        $requestConfiguration->getFormOptions()->willReturn([]);
-        $formFactory->create(Argument::type(TextType::class), $resource, Argument::type('array'))->willReturn($form);
-
-        $this->create($requestConfiguration, $resource)->shouldReturn($form);
-    }
 }

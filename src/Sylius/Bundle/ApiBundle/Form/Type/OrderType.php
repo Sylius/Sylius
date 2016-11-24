@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ApiBundle\Form\Type;
 
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -32,7 +33,7 @@ class OrderType extends BaseOrderType
                     new NotBlank(),
                 ],
             ])
-            ->add('channel', 'sylius_channel_choice', [
+            ->add('channel', ChannelChoiceType::class, [
                 'constraints' => [
                     new NotBlank(),
                 ],

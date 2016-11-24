@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Order;
 
+use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -29,8 +30,8 @@ class OrderType extends BaseOrderType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('shippingAddress', 'sylius_address')
-            ->add('billingAddress', 'sylius_address')
+            ->add('shippingAddress', AddressType::class)
+            ->add('billingAddress', AddressType::class)
             ->add('promotionCoupon', 'sylius_promotion_coupon_to_code', [
                 'by_reference' => false,
                 'label' => 'sylius.form.cart.coupon',

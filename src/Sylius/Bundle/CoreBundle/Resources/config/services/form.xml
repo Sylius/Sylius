@@ -16,7 +16,6 @@
         <parameter key="sylius.form.type.product_image.class">Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType</parameter>
         <parameter key="sylius.form.type.product_taxon_choice.class">Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType</parameter>
         <parameter key="sylius.form.type.taxon_image.class">Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonImageType</parameter>
-        <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
         <parameter key="sylius.form.type.locale.class">Sylius\Bundle\CoreBundle\Form\Type\LocaleType</parameter>
         <parameter key="sylius.form.type.currency.class">Sylius\Bundle\CoreBundle\Form\Type\CurrencyType</parameter>
 
@@ -38,6 +37,20 @@
     </parameters>
 
     <services>
+        <service id="sylius.form.extension.type.country" class="Sylius\Bundle\CoreBundle\Form\Extension\CountryTypeExtension">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\AddressingBundle\Form\Type\CountryType" />
+        </service>
+        <service id="sylius.form.extension.type.channel" class="Sylius\Bundle\CoreBundle\Form\Extension\ChannelTypeExtension">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType" />
+        </service>
+        <service id="sylius.form.extension.type.locale" class="Sylius\Bundle\CoreBundle\Form\Extension\LocaleTypeExtension">
+            <argument type="service" id="sylius.repository.locale" />
+            <argument>%locale%</argument>
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType" />
+        </service>
+
         <service id="sylius.form.type.product_image" class="%sylius.form.type.product_image.class%">
             <argument>%sylius.model.product_image.class%</argument>
             <tag name="form.type" alias="sylius_product_image" />
@@ -55,19 +68,6 @@
         <service id="sylius.form.type.taxon_image" class="%sylius.form.type.taxon_image.class%">
             <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="form.type" alias="sylius_taxon_image" />
-        </service>
-        <service id="sylius.form.type.country" class="%sylius.form.type.country.class%">
-            <argument>%sylius.model.country.class%</argument>
-            <argument>%sylius.validation_groups.country%</argument>
-            <argument type="service" id="sylius.repository.country" />
-            <tag name="form.type" alias="sylius_country" />
-        </service>
-        <service id="sylius.form.type.locale" class="%sylius.form.type.locale.class%">
-            <argument>%sylius.model.locale.class%</argument>
-            <argument>%sylius.validation_groups.locale%</argument>
-            <argument>%locale%</argument>
-            <argument type="service" id="sylius.repository.locale" />
-            <tag name="form.type" alias="sylius_locale" />
         </service>
         <service id="sylius.form.type.currency" class="%sylius.form.type.currency.class%">
             <argument>%sylius.model.currency.class%</argument>

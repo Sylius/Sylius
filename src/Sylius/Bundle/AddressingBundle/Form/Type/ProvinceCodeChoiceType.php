@@ -11,42 +11,44 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
-use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Symfony\Component\OptionsResolver\Options;
-use Symfony\Component\OptionsResolver\OptionsResolver;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\ReversedTransformer;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProvinceCodeChoiceType extends ProvinceChoiceType
+class ProvinceCodeChoiceType extends AbstractType
 {
+    /**
+     * @var RepositoryInterface
+     */
+    protected $provinceRepository;
+
+    /**
+     * @param RepositoryInterface $provinceRepository
+     */
+    public function __construct(RepositoryInterface $provinceRepository)
+    {
+        $this->provinceRepository = $provinceRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::configureOptions($resolver);
+        $builder->addModelTransformer(new ReversedTransformer(new ResourceToIdentifierTransformer($this->provinceRepository, 'code')));
+    }
 
-        $resolver->setDefaults([
-            'choices' => function (Options $options) {
-                if (null === $options['country']) {
-                    $provinces = $this->provinceRepository->findAll();
-                } else {
-                    $provinces = $options['country']->getProvinces();
-                }
-
-                $provincesCodes = [];
-
-                /* @var ProvinceInterface $province */
-                foreach ($provinces as $province) {
-                    $provincesCodes[$province->getName()] = $province->getCode();
-                }
-
-                return $provincesCodes;
-            },
-            'choice_value' => null,
-            'choice_label' => null,
-        ]);
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return ProvinceChoiceType::class;
     }
 
     /**

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type\Calculator;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,14 +30,14 @@ class FlexibleRateConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('first_unit_cost', 'sylius_money', [
+            ->add('first_unit_cost', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.first_unit_cost',
                 'constraints' => [
                     new NotBlank(),
                     new Type(['type' => 'integer']),
                 ],
             ])
-            ->add('additional_unit_cost', 'sylius_money', [
+            ->add('additional_unit_cost', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_unit_cost',
                 'constraints' => [
                     new NotBlank(),

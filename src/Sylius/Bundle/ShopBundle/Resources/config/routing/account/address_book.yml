@@ -48,7 +48,6 @@ sylius_shop_account_address_book_update:
             redirect:
                 route: sylius_shop_account_address_book_index
                 parameters: {}
-            form: sylius_address
 
 sylius_shop_account_address_book_delete:
     path: /{id}

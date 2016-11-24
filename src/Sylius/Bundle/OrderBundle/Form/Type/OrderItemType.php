@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\Form\Type;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -51,7 +52,7 @@ class OrderItemType extends AbstractResourceType
                 'attr' => ['min' => 1],
                 'label' => 'sylius.ui.quantity',
             ])
-            ->add('unitPrice', 'sylius_money', [
+            ->add('unitPrice', MoneyType::class, [
                 'label' => 'sylius.ui.unit_price',
             ])
             ->setDataMapper($this->orderItemQuantityDataMapper)

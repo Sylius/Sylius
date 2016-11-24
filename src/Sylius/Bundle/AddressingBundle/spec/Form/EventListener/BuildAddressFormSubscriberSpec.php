@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -72,7 +73,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $country->hasProvinces()->willReturn(true);
 
         $formFactory
-            ->createNamed('provinceCode', 'sylius_province_code_choice', 'province', Argument::withKey('country'))
+            ->createNamed('provinceCode', ProvinceCodeChoiceType::class, 'province', Argument::withKey('country'))
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();
@@ -124,7 +125,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $country->hasProvinces()->willReturn(true);
 
         $formFactory
-            ->createNamed('provinceCode', 'sylius_province_code_choice', null, Argument::withKey('country'))
+            ->createNamed('provinceCode', ProvinceCodeChoiceType::class, null, Argument::withKey('country'))
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();

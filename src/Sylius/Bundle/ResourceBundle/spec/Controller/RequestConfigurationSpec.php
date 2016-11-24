@@ -94,12 +94,8 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
-        $parameters->get('form', 'sylius_product')->willReturn('sylius_product');
+        $parameters->get('form')->willReturn('sylius_product');
         $this->getFormType()->shouldReturn('sylius_product');
-        $this->getFormOptions()->shouldReturn([]);
-
-        $parameters->get('form', 'sylius_product')->willReturn('sylius_product_pricing');
-        $this->getFormType()->shouldReturn('sylius_product_pricing');
         $this->getFormOptions()->shouldReturn([]);
     }
 
@@ -108,13 +104,9 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
-        $parameters->get('form', 'sylius_product')->willReturn(['type'=> 'sylius_product', 'options' => ['validation_groups' => ['sylius']]]);
+        $parameters->get('form')->willReturn(['type'=> 'sylius_product', 'options' => ['validation_groups' => ['sylius']]]);
         $this->getFormType()->shouldReturn('sylius_product');
         $this->getFormOptions()->shouldReturn(['validation_groups' => ['sylius']]);
-
-        $parameters->get('form', 'sylius_product')->willReturn(['type'=> 'sylius_product_pricing', 'options' => ['validation_groups' => ['sylius', 'custom_group']]]);
-        $this->getFormType()->shouldReturn('sylius_product_pricing');
-        $this->getFormOptions()->shouldReturn(['validation_groups' => ['sylius', 'custom_group']]);
     }
 
     function it_generates_route_names(MetadataInterface $metadata, Parameters $parameters)

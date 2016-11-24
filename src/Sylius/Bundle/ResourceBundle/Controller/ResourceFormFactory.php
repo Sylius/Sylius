@@ -38,11 +38,6 @@ final class ResourceFormFactory implements ResourceFormFactoryInterface
     public function create(RequestConfiguration $requestConfiguration, ResourceInterface $resource)
     {
         $formType = $requestConfiguration->getFormType();
-
-        if (false !== strpos($formType, '\\')) {
-            $formType = new $formType();
-        }
-
         $formOptions = $requestConfiguration->getFormOptions();
 
         if ($requestConfiguration->isHtmlRequest()) {

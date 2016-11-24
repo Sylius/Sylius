@@ -141,7 +141,13 @@ abstract class AbstractDriver implements DriverInterface
      */
     protected function addForms(ContainerBuilder $container, MetadataInterface $metadata)
     {
-        foreach ($metadata->getClass('form') as $formName => $formClass) {
+        $forms = $metadata->getClass('form');
+
+        if (!is_array($forms)) {
+            return;
+        }
+
+        foreach ($forms as $formName => $formClass) {
             $suffix = 'default' === $formName ? '' : sprintf('_%s', $formName);
             $alias = sprintf('%s_%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix);
 

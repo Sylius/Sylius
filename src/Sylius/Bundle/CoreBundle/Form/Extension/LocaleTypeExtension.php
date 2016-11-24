@@ -9,11 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType as BaseLocaleType;
+use Sylius\Bundle\LocaleBundle\Form\Type\LocaleType;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
@@ -23,34 +24,26 @@ use Symfony\Component\Intl\Intl;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class LocaleType extends BaseLocaleType
+class LocaleTypeExtension extends AbstractTypeExtension
 {
-    /**
-     * @var string
-     */
-    private $baseLocale;
-
     /**
      * @var RepositoryInterface
      */
     private $localeRepository;
 
     /**
-     * {@inheritdoc}
-     *
+     * @var string
+     */
+    private $baseLocale;
+
+    /**
      * @param string $baseLocale
      * @param RepositoryInterface $localeRepository
      */
-    public function __construct(
-        $dataClass,
-        array $validationGroups = [],
-        $baseLocale,
-        RepositoryInterface $localeRepository
-    ) {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->baseLocale = $baseLocale;
+    public function __construct(RepositoryInterface $localeRepository, $baseLocale)
+    {
         $this->localeRepository = $localeRepository;
+        $this->baseLocale = $baseLocale;
     }
 
     /**
@@ -58,8 +51,6 @@ class LocaleType extends BaseLocaleType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $options = [
                 'label' => 'sylius.form.locale.name',
@@ -91,17 +82,9 @@ class LocaleType extends BaseLocaleType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getExtendedType()
     {
-        return 'sylius_locale';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'sylius_locale';
+        return LocaleType::class;
     }
 
     /**

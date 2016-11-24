@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddProductOnProductTaxonFormSubscriber;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
 use Sylius\Component\Core\Model\Product;
@@ -33,7 +34,7 @@ class ProductType extends BaseProductType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('channels', 'sylius_channel_choice', [
+            ->add('channels', ChannelChoiceType::class, [
                 'multiple' => true,
                 'expanded' => true,
                 'label' => 'sylius.form.product.channels',

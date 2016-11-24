@@ -9,16 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType as BaseChannelType;
+use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
+use Sylius\Bundle\ChannelBundle\Form\Type\ChannelType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddBaseCurrencySubscriber;
+use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ChannelType extends BaseChannelType
+class ChannelTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
@@ -28,12 +31,12 @@ class ChannelType extends BaseChannelType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('locales', 'sylius_locale_choice', [
+            ->add('locales', LocaleChoiceType::class, [
                 'label' => 'sylius.form.channel.locales',
                 'required' => true,
                 'multiple' => true,
             ])
-            ->add('defaultLocale', 'sylius_locale_choice', [
+            ->add('defaultLocale', LocaleChoiceType::class, [
                 'label' => 'sylius.form.channel.locale_default',
                 'required' => true,
                 'placeholder' => null,
@@ -43,7 +46,7 @@ class ChannelType extends BaseChannelType
                 'required' => true,
                 'multiple' => true,
             ])
-            ->add('defaultTaxZone', 'sylius_zone_choice', [
+            ->add('defaultTaxZone', ZoneChoiceType::class, [
                 'required' => false,
                 'label' => 'sylius.form.channel.tax_zone_default',
             ])
@@ -58,5 +61,13 @@ class ChannelType extends BaseChannelType
             ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return ChannelType::class;
     }
 }

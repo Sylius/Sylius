@@ -9,31 +9,42 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AddressingBundle\Form\Type;
+namespace Sylius\Bundle\ChannelBundle\Form\Type;
 
-use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ProvinceChoiceType extends AbstractType
+class ChannelChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface
      */
-    protected $provinceRepository;
+    protected $channelRepository;
 
     /**
-     * @param RepositoryInterface $provinceRepository
+     * @param RepositoryInterface $channelRepository
      */
-    public function __construct(RepositoryInterface $provinceRepository)
+    public function __construct(RepositoryInterface $channelRepository)
     {
-        $this->provinceRepository = $provinceRepository;
+        $this->channelRepository = $channelRepository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        if ($options['multiple']) {
+            $builder->addModelTransformer(new CollectionToArrayTransformer());
+        }
     }
 
     /**
@@ -43,21 +54,13 @@ class ProvinceChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => function (Options $options) {
-                if (null === $options['country']) {
-                    return $this->provinceRepository->findAll();
-                }
-
-                return $options['country']->getProvinces();
+                return $this->channelRepository->findAll();
             },
             'choice_value' => 'code',
             'choice_label' => 'name',
             'choice_translation_domain' => false,
-            'country' => null,
-            'label' => 'sylius.form.address.province',
-            'placeholder' => 'sylius.form.province.select',
             'choices_as_values' => true,
         ]);
-        $resolver->addAllowedTypes('country', ['null', CountryInterface::class]);
     }
 
     /**
@@ -73,7 +76,7 @@ class ProvinceChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_province_choice';
+        return 'sylius_channel_choice';
     }
 
     /**
@@ -81,6 +84,6 @@ class ProvinceChoiceType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'sylius_province_choice';
+        return 'sylius_channel_choice';
     }
 }
