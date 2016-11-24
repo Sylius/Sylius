@@ -11,17 +11,15 @@
 
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
-use Sylius\Bundle\UserBundle\Form\Model\PasswordReset;
-use Symfony\Component\Form\AbstractType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserResetPasswordType extends AbstractType
+class UserResetPasswordType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -36,17 +34,6 @@ class UserResetPasswordType extends AbstractType
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
             ])
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => PasswordReset::class,
-            'validation_groups' => ['sylius'],
-        ]);
     }
 
     /**

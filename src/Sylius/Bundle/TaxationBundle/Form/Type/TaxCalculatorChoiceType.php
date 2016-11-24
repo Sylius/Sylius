@@ -9,27 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\User;
+namespace Sylius\Bundle\TaxationBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-abstract class UserChoiceType extends AbstractType
+class TaxCalculatorChoiceType extends AbstractType
 {
     /**
-     * @var string
+     * @var array
      */
-    protected $className;
+    protected $calculators;
 
     /**
-     * @param string $className
+     * @param array $calculators
      */
-    public function __construct($className)
+    public function __construct($calculators)
     {
-        $this->className = $className;
+        $this->calculators = $calculators;
     }
 
     /**
@@ -39,7 +40,8 @@ abstract class UserChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'class' => $this->className,
+                'choices' => array_flip($this->calculators),
+                'choices_as_values' => true,
             ])
         ;
     }
@@ -47,9 +49,17 @@ abstract class UserChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function getParent()
+    {
+        return ChoiceType::class;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
-        return 'sylius_user_choice';
+        return 'sylius_tax_calculator_choice';
     }
 
     /**
@@ -57,6 +67,6 @@ abstract class UserChoiceType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'sylius_user_choice';
+        return 'sylius_tax_calculator_choice';
     }
 }

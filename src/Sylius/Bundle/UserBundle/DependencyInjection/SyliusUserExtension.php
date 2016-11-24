@@ -15,13 +15,11 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Sylius\Bundle\UserBundle\EventListener\UserDeleteListener;
 use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
 use Sylius\Bundle\UserBundle\EventListener\UserReloaderListener;
-use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber;
 use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
 use Sylius\Bundle\UserBundle\Provider\EmailProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameProvider;
 use Sylius\Bundle\UserBundle\Reloader\UserReloader;
-use Sylius\Component\Resource\Metadata\Metadata;
 use Sylius\Component\User\Security\Checker\TokenUniquenessChecker;
 use Sylius\Component\User\Security\Generator\UniquePinGenerator;
 use Sylius\Component\User\Security\Generator\UniqueTokenGenerator;
@@ -30,7 +28,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\DefinitionDecorator;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
@@ -88,8 +85,6 @@ final class SyliusUserExtension extends AbstractResourceExtension
             $this->createReloaders($userType, $container);
             $this->createLastLoginListeners($userType, $container);
             $this->createProviders($userType, $config['user']['classes']['model'], $container);
-            $this->createFormTypes($userType, $config['user'], $container);
-            $this->createAddUserFormTypeSubscribers($userType, $container);
             $this->createUserDeleteListeners($userType, $container);
         }
     }
@@ -269,59 +264,5 @@ final class SyliusUserExtension extends AbstractResourceExtension
         $emailOrNameBasedProviderDefinition = new DefinitionDecorator($abstractProviderServiceId);
         $emailOrNameBasedProviderDefinition->setClass(UsernameOrEmailProvider::class);
         $container->setDefinition($providerEmailOrNameBasedServiceId, $emailOrNameBasedProviderDefinition);
-    }
-
-    /**
-     * @param string $userType
-     * @param array $config
-     * @param ContainerBuilder $container
-     */
-    private function createFormTypes($userType, array $config, ContainerBuilder $container)
-    {
-        $userFormTypeId = sprintf('sylius.form.type.%s_user', $userType);
-        $alias = sprintf('sylius.%s_user', $userType);
-        $validationGroupsParameterName = sprintf('sylius.validation_groups.%s', $userType);
-        $validationGroups = new Parameter($validationGroupsParameterName);
-        $userFormTypeDefinition = new Definition($config['classes']['form']['default']);
-
-        if (!$container->hasParameter($validationGroupsParameterName)) {
-            $validationGroups = $config['validation_groups']['default'];
-        }
-
-        $userFormTypeDefinition->addArgument($config['classes']['model']);
-        $userFormTypeDefinition->addArgument($validationGroups);
-        $userFormTypeDefinition->addArgument($this->getMetadataDefinitionFromAlias($alias));
-        $userFormTypeDefinition->addTag('form.type', ['alias' => sprintf('sylius_%s_user', $userType)]);
-
-        $container->setDefinition($userFormTypeId, $userFormTypeDefinition);
-    }
-
-    /**
-     * @param string $userType
-     * @param ContainerBuilder $container
-     */
-    private function createAddUserFormTypeSubscribers($userType, ContainerBuilder $container)
-    {
-        $userFormTypeSubscriberId = sprintf('sylius.form.event_subscriber.add_%s_user_type', $userType);
-        $userFormTypeSubscriberDefinition = new Definition(AddUserFormSubscriber::class);
-        $userFormTypeSubscriberDefinition->addArgument($userType);
-
-        $container->setDefinition($userFormTypeSubscriberId, $userFormTypeSubscriberDefinition);
-    }
-
-    /**
-     * @param string $alias
-     *
-     * @return Definition
-     */
-    private function getMetadataDefinitionFromAlias($alias)
-    {
-        $definition = new Definition(Metadata::class);
-        $definition
-            ->setFactory([new Reference('sylius.resource_registry'), 'get'])
-            ->setArguments([$alias])
-        ;
-
-        return $definition;
     }
 }

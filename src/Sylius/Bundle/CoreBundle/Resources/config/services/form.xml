@@ -58,6 +58,33 @@
             <argument>%currency%</argument>
             <tag name="form.type_extension" extended-type="Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType" />
         </service>
+        <service id="sylius.form.extension.type.tax_rate" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxRateTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType" />
+        </service>
+        <service id="sylius.form.extension.type.taxon" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxonTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType" />
+        </service>
+
+        <service id="sylius.form.type.product_review" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType">
+            <argument>%sylius.model.product_review.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.admin_user" class="Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType">
+            <argument>%sylius.model.admin_user.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.shop_user" class="Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType">
+            <argument>%sylius.model.shop_user.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+        <service id="sylius.form.type.shop_user_registration" class="Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserRegistrationType">
+            <argument>%sylius.model.shop_user.class%</argument>
+            <argument type="collection"><argument>sylius</argument><argument>sylius_user_registration</argument></argument>
+            <tag name="form.type" />
+        </service>
 
         <service id="sylius.form.type.product_image" class="%sylius.form.type.product_image.class%">
             <argument>%sylius.model.product_image.class%</argument>
@@ -80,7 +107,6 @@
         <service id="sylius.form.type.customer" class="%sylius.form.type.customer.class%">
             <argument>%sylius.model.customer.class%</argument>
             <argument>%sylius.validation_groups.customer%</argument>
-            <argument type="service" id="sylius.form.event_subscriber.add_shop_user_type" />
             <tag name="form.type" alias="sylius_customer" />
         </service>
 

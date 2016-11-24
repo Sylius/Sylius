@@ -12,6 +12,10 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/form.xml" />
+    </imports>
+
     <parameters>
         <parameter key="sylius.tax_calculation_strategy.interface">Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface</parameter>
 
@@ -19,11 +23,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.form.type.tax_calculator_choice" class="Sylius\Bundle\TaxationBundle\Form\Type\CalculatorChoiceType">
-            <argument>%sylius.tax_calculators%</argument>
-            <tag name="form.type" alias="sylius_tax_calculator_choice" />
-        </service>
-
         <service id="sylius.registry.tax_calculation_strategy" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
             <argument>%sylius.tax_calculation_strategy.interface%</argument>
             <argument>Tax calculation strategy</argument>

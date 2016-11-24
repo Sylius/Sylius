@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddProductOnProductTaxonFormSubscriber;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
 use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -39,7 +40,7 @@ class ProductType extends BaseProductType
                 'expanded' => true,
                 'label' => 'sylius.form.product.channels',
             ])
-            ->add('mainTaxon', 'sylius_taxon_to_hidden_identifier')
+            ->add('mainTaxon', TaxonChoiceType::class)
             ->add('productTaxons', 'sylius_product_taxon_choice', [
                 'label' => 'sylius.form.product.taxons',
                 'multiple' => true,

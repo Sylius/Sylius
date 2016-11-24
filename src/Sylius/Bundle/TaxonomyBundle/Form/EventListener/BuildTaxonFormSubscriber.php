@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Form\EventListener;
 
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -18,6 +19,8 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 
 /**
+ * @internal
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class BuildTaxonFormSubscriber implements EventSubscriberInterface
@@ -56,19 +59,13 @@ final class BuildTaxonFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $event
-            ->getForm()
-            ->add(
-                $this->factory->createNamed('parent', 'sylius_taxon_choice', $taxon->getParent(),
-                    [
-                        'filter' => $this->getFilterTaxonOption($taxon),
-                        'required' => false,
-                        'label' => 'sylius.form.taxon.parent',
-                        'placeholder' => '---',
-                        'auto_initialize' => false,
-                    ]
-                ))
-        ;
+        $event->getForm()->add($this->factory->createNamed('parent', TaxonChoiceType::class, $taxon->getParent(), [
+            'filter' => $this->getFilterTaxonOption($taxon),
+            'required' => false,
+            'label' => 'sylius.form.taxon.parent',
+            'placeholder' => '---',
+            'auto_initialize' => false,
+        ]));
     }
 
     /**
@@ -78,14 +75,12 @@ final class BuildTaxonFormSubscriber implements EventSubscriberInterface
      */
     private function getFilterTaxonOption(TaxonInterface $taxon)
     {
-        $closure = null;
-
-        if (null !== $taxon->getId()) {
-            $closure = function ($entry) use ($taxon) {
-                return $entry->getId() != $taxon->getId();
-            };
+        if (null === $taxon->getId()) {
+            return null;
         }
 
-        return $closure;
+        return function (TaxonInterface $entry) use ($taxon) {
+            return $entry->getId() !== $taxon->getId();
+        };
     }
 }

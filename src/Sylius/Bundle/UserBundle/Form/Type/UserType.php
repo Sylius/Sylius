@@ -24,25 +24,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserType extends AbstractResourceType
+abstract class UserType extends AbstractResourceType
 {
-    /**
-     * @var MetadataInterface
-     */
-    private $metadata;
-
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param MetadataInterface $metadata
-     */
-    public function __construct($dataClass, array $validationGroups = [], MetadataInterface $metadata)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->metadata = $metadata;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -82,21 +65,5 @@ class UserType extends AbstractResourceType
                 },
             ])
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
 }

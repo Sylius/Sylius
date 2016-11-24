@@ -24,25 +24,8 @@ use Symfony\Component\Validator\Constraints\Valid;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ReviewType extends AbstractResourceType
+abstract class ReviewType extends AbstractResourceType
 {
-    /**
-     * @var string
-     */
-    protected $subject;
-
-    /**
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param string $subject
-     */
-    public function __construct($dataClass, array $validationGroups = [], $subject)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->subject = $subject;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -76,22 +59,6 @@ class ReviewType extends AbstractResourceType
         $resolver->setDefaults([
             'rating_steps' => 5,
         ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return sprintf('sylius_%s_review', $this->subject);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return sprintf('sylius_%s_review', $this->subject);
     }
 
     /**

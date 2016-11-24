@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Controller;
 
+use Sylius\Bundle\UserBundle\Form\Type\UserLoginType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Webmozart\Assert\Assert;
@@ -34,7 +35,7 @@ class SecurityController extends Controller
         $template = isset($options['template']) ? $options['template'] : null;
         Assert::notNull($template, 'Template is not configured.');
 
-        $formType = isset($options['form']) ? $options['form'] : 'sylius_user_security_login';
+        $formType = isset($options['form']) ? $options['form'] : UserLoginType::class;
         $form = $this->get('form.factory')->createNamed('', $formType);
 
         return $this->render($template, [

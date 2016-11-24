@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\User;
 
-use Sylius\Bundle\UserBundle\Form\Type\UserType as BaseUserType;
+use Sylius\Bundle\UserBundle\Form\Type\UserType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ShopUserType extends BaseUserType
+final class ShopUserType extends UserType
 {
     /**
      * {@inheritdoc}
@@ -30,5 +30,21 @@ class ShopUserType extends BaseUserType
             ->remove('username')
             ->remove('email')
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_shop_user';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_shop_user';
     }
 }

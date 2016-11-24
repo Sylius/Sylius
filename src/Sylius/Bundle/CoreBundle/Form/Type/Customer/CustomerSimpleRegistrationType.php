@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Customer;
 
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserRegistrationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -51,7 +52,7 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
             ->add('email', EmailType::class, [
                 'label' => 'sylius.form.customer.email',
             ])
-            ->add('user', 'sylius_shop_user_registration', [
+            ->add('user', ShopUserRegistrationType::class, [
                 'label' => false,
                 'constraints' => [new Valid()],
             ])
