@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
-use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber as BaseBuildShippingMethodFormSubscriber;
+use Sylius\Bundle\ShippingBundle\Form\EventSubscriber\BuildShippingMethodFormSubscriber as BaseBuildShippingMethodFormSubscriber;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Symfony\Component\Form\FormInterface;
 
