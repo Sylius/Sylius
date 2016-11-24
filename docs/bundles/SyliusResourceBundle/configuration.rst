@@ -54,8 +54,8 @@ You can also configure several doctrine drivers:
                 classes:
                     model: AppBundle\Entity\Book
             app.article:
+                driver: doctrine/phpcr-odm
                 classes:
-                    driver: doctrine/phpcr-odm
                     model: AppBundle\Document\ArticleDocument
 
 
