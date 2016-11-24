@@ -23,11 +23,6 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 final class SyliusReviewExtension extends AbstractResourceExtension
 {
     /**
-     * @var array
-     */
-    private $reviewSubjects = [];
-
-    /**
      * {@inheritdoc}
      */
     public function load(array $config, ContainerBuilder $container)
@@ -39,10 +34,6 @@ final class SyliusReviewExtension extends AbstractResourceExtension
 
         $loader->load('services.xml');
 
-        foreach ($config['resources'] as $name => $parameters) {
-            $this->addRequiredArgumentsToForms($name, $parameters, $container);
-        }
-
         $this->addProperTagToReviewDeleteListener($container);
     }
 
@@ -51,17 +42,9 @@ final class SyliusReviewExtension extends AbstractResourceExtension
      */
     private function resolveResources(array $resources, ContainerBuilder $container)
     {
-        $subjects = [];
-
-        foreach ($resources as $subject => $parameters) {
-            $this->reviewSubjects[] = $subject;
-            $subjects[$subject] = $parameters;
-        }
-
-        $container->setParameter('sylius.review.subjects', $subjects);
+        $container->setParameter('sylius.review.subjects', $resources);
 
         $resolvedResources = [];
-
         foreach ($resources as $subjectName => $subjectConfig) {
             foreach ($subjectConfig as $resourceName => $resourceConfig) {
                 if (is_array($resourceConfig)) {
@@ -71,24 +54,6 @@ final class SyliusReviewExtension extends AbstractResourceExtension
         }
 
         return $resolvedResources;
-    }
-
-    /**
-     * @param string $name
-     * @param array $parameters
-     * @param ContainerBuilder $container
-     */
-    private function addRequiredArgumentsToForms($name, array $parameters, ContainerBuilder $container)
-    {
-        if (!$container->hasDefinition('sylius.form.type.'.$name.'_review')) {
-            return;
-        }
-
-        foreach ($parameters['review']['classes']['form'] as $formName => $form) {
-            $formKey = ('default' === $formName) ? $name.'_review' : $name.'_review_'.$formName;
-            $formDefinition = $container->getDefinition('sylius.form.type.'.$formKey);
-            $formDefinition->addArgument($name);
-        }
     }
 
     /**
