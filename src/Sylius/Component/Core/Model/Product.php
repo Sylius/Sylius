@@ -37,11 +37,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     protected $productTaxons;
 
     /**
-     * @var ShippingCategoryInterface
-     */
-    protected $shippingCategory;
-
-    /**
      * @var ChannelInterface[]|Collection
      */
     protected $channels;
@@ -160,22 +155,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
         return $this->productTaxons->filter(function ($productTaxon) use ($taxon) {
              return $taxon === $productTaxon->getTaxon();
         });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingCategory()
-    {
-        return $this->shippingCategory;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingCategory(ShippingCategoryInterface $category = null)
-    {
-        $this->shippingCategory = $category;
     }
 
     /**

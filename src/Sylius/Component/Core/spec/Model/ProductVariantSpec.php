@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
@@ -72,24 +71,6 @@ final class ProductVariantSpec extends ObjectBehavior
     function it_implements_a_shippable_interface()
     {
         $this->shouldImplement(ShippableInterface::class);
-    }
-
-    function it_returns_null_if_product_has_no_shipping_category(ProductInterface $product)
-    {
-        $this->setProduct($product);
-
-        $product->getShippingCategory()->willReturn(null)->shouldBeCalled();
-        $this->getShippingCategory()->shouldReturn(null);
-    }
-
-    function it_returns_the_product_shipping_category(
-        ProductInterface $product,
-        ShippingCategoryInterface $shippingCategory
-    ) {
-        $this->setProduct($product);
-
-        $product->getShippingCategory()->willReturn($shippingCategory)->shouldBeCalled();
-        $this->getShippingCategory()->shouldReturn($shippingCategory);
     }
 
     function it_has_no_weight_by_default()
@@ -180,5 +161,16 @@ final class ProductVariantSpec extends ObjectBehavior
 
         $this->setTaxCategory(null);
         $this->getTaxCategory()->shouldReturn(null);
+    }
+
+    function it_has_no_shipping_category_by_default()
+    {
+        $this->getShippingCategory()->shouldReturn(null);
+    }
+
+    function its_shipping_category_is_mutable(ShippingCategoryInterface $shippingCategory)
+    {
+        $this->setShippingCategory($shippingCategory);
+        $this->getShippingCategory()->shouldReturn($shippingCategory);
     }
 }

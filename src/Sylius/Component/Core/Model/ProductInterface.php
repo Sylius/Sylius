@@ -71,16 +71,6 @@ interface ProductInterface extends
     public function setShortDescription($shortDescription);
 
     /**
-     * @return ShippingCategoryInterface
-     */
-    public function getShippingCategory();
-
-    /**
-     * @param ShippingCategoryInterface $category
-     */
-    public function setShippingCategory(ShippingCategoryInterface $category = null);
-
-    /**
      * @return TaxonInterface
      */
     public function getMainTaxon();

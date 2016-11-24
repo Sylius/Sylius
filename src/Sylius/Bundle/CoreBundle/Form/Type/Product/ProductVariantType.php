@@ -96,6 +96,11 @@ class ProductVariantType extends BaseProductVariantType
             ->add('pricingCalculator', 'sylius_price_calculator_choice', [
                 'label' => 'sylius.form.shipping_method.calculator',
             ])
+            ->add('shippingCategory', 'sylius_shipping_category_choice', [
+                'required' => false,
+                'placeholder' => 'sylius.ui.no_requirement',
+                'label' => 'sylius.form.product_variant.shipping_category',
+            ])
         ;
 
         $prototypes = [

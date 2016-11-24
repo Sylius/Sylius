@@ -26,11 +26,6 @@
             </options>
         </field>
 
-        <many-to-one field="shippingCategory" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
-            <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
-            <gedmo:versioned />
-        </many-to-one>
-
         <one-to-many field="productTaxons" target-entity="Sylius\Component\Core\Model\ProductTaxonInterface" mapped-by="product" orphan-removal="true">
             <cascade>
                 <cascade-all/>
