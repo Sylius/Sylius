@@ -107,4 +107,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return int
      */
     public function countByChannel(ChannelInterface $channel);
+
+    /**
+     * @param int $count
+     * @param ChannelInterface $channel
+     *
+     * @return OrderInterface[]
+     */
+    public function findLatestInChannel($count, ChannelInterface $channel);
 }

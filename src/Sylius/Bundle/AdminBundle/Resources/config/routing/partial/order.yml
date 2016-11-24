@@ -7,3 +7,15 @@ sylius_admin_partial_order_latest:
                 method: findLatest
                 arguments: [$count]
             template: $template
+
+sylius_admin_partial_order_latest_in_channel:
+    path: /latest/{channelCode}/{count}
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            repository:
+                method: findLatestInChannel
+                arguments:
+                    count: $count
+                    channel: expr:service('sylius.repository.channel').findOneByCode($channelCode)
+            template: $template

@@ -1,5 +1,5 @@
 @admin_dashboard
-Feature: Statistics dashboard in single channel
+Feature: Statistics dashboard in a single channel
     In order to have an overview of my sales
     As an Administrator
     I want to see overall statistics on my admin dashboard

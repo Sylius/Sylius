@@ -241,4 +241,21 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
 
         return (int) $count;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findLatestInChannel($count, ChannelInterface $channel)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.state != :state')
+            ->setMaxResults($count)
+            ->orderBy('o.checkoutCompletedAt', 'desc')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }
