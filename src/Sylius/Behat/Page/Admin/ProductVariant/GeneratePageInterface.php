@@ -23,8 +23,9 @@ interface GeneratePageInterface extends SymfonyPageInterface
     /**
      * @param int $nth
      * @param int $price
+     * @param string $channelName
      */
-    public function specifyPrice($nth, $price);
+    public function specifyPrice($nth, $price, $channelName);
 
     /**
      * @param int $nth
@@ -44,4 +45,11 @@ interface GeneratePageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getValidationMessage($element, $position);
+
+    /**
+     * @param string $position
+     *
+     * @return string
+     */
+    public function getPricesValidationMessage($position);
 }
