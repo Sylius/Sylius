@@ -45,30 +45,22 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
     private $productFilter;
 
     /**
-     * @var CurrencyConverterInterface
-     */
-    private $currencyConverter;
-
-    /**
      * @param FactoryInterface $adjustmentFactory
      * @param FilterInterface $priceRangeFilter
      * @param FilterInterface $taxonFilter
      * @param FilterInterface $productFilter
-     * @param CurrencyConverterInterface $currencyConverter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
-        FilterInterface $productFilter,
-        CurrencyConverterInterface $currencyConverter
+        FilterInterface $productFilter
     ) {
         parent::__construct($adjustmentFactory);
 
         $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;
         $this->productFilter = $productFilter;
-        $this->currencyConverter = $currencyConverter;
     }
 
     /**
@@ -133,9 +125,6 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
             return $configuration['base_amount'];
         }
 
-        return $this->currencyConverter->convertToBase(
-            $configuration['amounts'][$currencyCode],
-            $currencyCode
-        );
+        return $configuration['amounts'][$currencyCode];
     }
 }
