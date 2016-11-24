@@ -15,13 +15,13 @@ Feature: Generating product variant generation
         Given I want to generate new variants for this product
         When I specify that the 1st variant is identified by "WYBOROWA_ORANGE" code
         And I try to generate it
-        Then I should be notified that price is required for the 1st variant
+        Then I should be notified that prices in all channels must be defined for the 1st variant
         And I should see 0 variants in the list
 
     @ui
     Scenario: Generating a product variant without code
         Given I want to generate new variants for this product
-        When I specify that the 1st variant costs "$90"
+        When I specify that the 1st variant costs "$90" in "United States" channel
         And I try to generate it
         Then I should be notified that code is required for the 1st variant
         And I should see 0 variants in the list

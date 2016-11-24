@@ -338,14 +338,20 @@ final class ProductContext implements Context
     /**
      * @Given /^the (product "[^"]+") has(?:| a) "([^"]+)" variant priced at ("[^"]+")$/
      * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+")$/
+     * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+") in ("[^"]+" channel)$/
      */
-    public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price)
-    {
+    public function theProductHasVariantPricedAt(
+        ProductInterface $product,
+        $productVariantName,
+        $price,
+        ChannelInterface $channel = null
+    ) {
         $this->createProductVariant(
             $product,
             $productVariantName,
             $price,
-            StringInflector::nameToUppercaseCode($productVariantName)
+            StringInflector::nameToUppercaseCode($productVariantName),
+            (null !== $channel) ? $channel : $this->sharedStorage->get('channel')
         );
     }
 
@@ -358,7 +364,7 @@ final class ProductContext implements Context
         $price,
         $code
     ) {
-        $this->createProductVariant($product, $productVariantName, $price, $code);
+        $this->createProductVariant($product, $productVariantName, $price, $code, $this->sharedStorage->get('channel'));
     }
 
     /**
@@ -367,7 +373,7 @@ final class ProductContext implements Context
      */
     public function thereIsProductAvailableInGivenChannel($productName, ChannelInterface $channel)
     {
-        $product = $this->createProduct($productName);
+        $product = $this->createProduct($productName, 0, null, $channel);
 
         $product->setDescription('Awesome ' . $productName);
         $product->addChannel($channel);
@@ -399,7 +405,8 @@ final class ProductContext implements Context
             $variant->setName($variantHash['name']);
             $variant->setCode(StringInflector::nameToUppercaseCode($variantHash['name']));
             $variant->addChannelPricing($this->createChannelPricingForChannel(
-                $this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price']))
+                $this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])),
+                $this->sharedStorage->get('channel')
             ));
             $variant->setProduct($product);
             $product->addVariant($variant);
@@ -571,7 +578,7 @@ final class ProductContext implements Context
         $optionValue = $this->sharedStorage->get(sprintf('%s_option_%s_value', $optionValueName, $optionName));
 
         $variant->addOptionValue($optionValue);
-        $variant->addChannelPricing($this->createChannelPricingForChannel($price));
+        $variant->addChannelPricing($this->createChannelPricingForChannel($price, $this->sharedStorage->get('channel')));
         $variant->setCode(sprintf("%s_%s", $product->getCode(), $optionValueName));
 
         $product->addVariant($variant);
@@ -773,6 +780,11 @@ final class ProductContext implements Context
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
+
+        if (null === $channel && $this->sharedStorage->has('channel')) {
+            $channel = $this->sharedStorage->get('channel');
+        }
+
         if (null !== $channel) {
             $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
         }
@@ -826,9 +838,15 @@ final class ProductContext implements Context
      * @param $productVariantName
      * @param int $price
      * @param string $code
+     * @param ChannelInterface $channel
      */
-    private function createProductVariant(ProductInterface $product, $productVariantName, $price, $code)
-    {
+    private function createProductVariant(
+        ProductInterface $product,
+        $productVariantName,
+        $price,
+        $code,
+        ChannelInterface $channel = null
+    ) {
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_CHOICE);
 
         /** @var ProductVariantInterface $variant */
@@ -837,7 +855,7 @@ final class ProductContext implements Context
         $variant->setName($productVariantName);
         $variant->setCode($code);
         $variant->setProduct($product);
-        $variant->addChannelPricing($this->createChannelPricingForChannel($price));
+        $variant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
 
         $product->addVariant($variant);
 
