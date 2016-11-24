@@ -54,4 +54,9 @@ interface DashboardPageInterface extends SymfonyPageInterface
     public function getSubHeader();
 
     public function logOut();
+
+    /**
+     * @param string $channelName
+     */
+    public function chooseChannel($channelName);
 }

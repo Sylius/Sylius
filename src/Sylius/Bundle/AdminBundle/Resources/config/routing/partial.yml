@@ -13,3 +13,7 @@ sylius_admin_partial_shipment:
 sylius_admin_partial_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial/taxon.yml"
     prefix: /taxons
+
+sylius_admin_partial_channel:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial/channel.yml"
+    prefix: /channels

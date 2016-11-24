@@ -205,4 +205,57 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getOneOrNullResult()
         ;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getTotalSalesForChannel(ChannelInterface $channel)
+    {
+        $total = $this->createQueryBuilder('o')
+            ->select('SUM(o.total)')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.state != :state')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+
+        return (int) $total;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function countByChannel(ChannelInterface $channel)
+    {
+        $count = $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.state != :state')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+
+        return (int) $count;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findLatestInChannel($count, ChannelInterface $channel)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.state != :state')
+            ->setMaxResults($count)
+            ->orderBy('o.checkoutCompletedAt', 'desc')
+            ->setParameter('channel', $channel)
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

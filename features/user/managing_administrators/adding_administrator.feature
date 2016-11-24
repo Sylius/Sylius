@@ -5,7 +5,7 @@ Feature: Adding a new administrator
     I want to add a administrator to the store
 
     Background:
-        Given the store has locale "English (United States)"
+        Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
     @ui

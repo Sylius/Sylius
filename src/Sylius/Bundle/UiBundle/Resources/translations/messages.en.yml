@@ -110,6 +110,7 @@ sylius:
         charges_and_taxes: 'Charges and taxes'
         checking_out_as: 'Checking out as'
         checkout: 'Checkout'
+        choose_channel: 'Choose channel'
         choose_file: 'Choose file'
         choose_how_your_goods_will_be_delivered: 'Choose how your goods will be delivered'
         choose_how_you_will_pay: 'Choose how you will pay'

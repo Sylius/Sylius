@@ -42,6 +42,22 @@ final class DashboardContext implements Context
     }
 
     /**
+     * @When I open administration dashboard for :code channel
+     */
+    public function iOpenAdministrationDashboardForChannel($code)
+    {
+        $this->dashboardPage->open(['channelCode' => $code]);
+    }
+
+    /**
+     * @When I choose :channelName channel
+     */
+    public function iChooseChannel($channelName)
+    {
+        $this->dashboardPage->chooseChannel($channelName);
+    }
+
+    /**
      * @Then I should be on the administration dashboard
      */
     public function iShouldBeOnAdministrationDashboard()

@@ -11,8 +11,9 @@
 
 namespace Sylius\Component\Core\Dashboard;
 
-use Sylius\Component\Order\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -44,11 +45,11 @@ class DashboardStatisticsProvider implements DashboardStatisticsProviderInterfac
     /**
      * {@inheritdoc}
      */
-    public function getStatistics()
+    public function getStatisticsForChannel(ChannelInterface $channel)
     {
         return new DashboardStatistics(
-            $this->orderRepository->getTotalSales(),
-            $this->orderRepository->count(),
+            $this->orderRepository->getTotalSalesForChannel($channel),
+            $this->orderRepository->countByChannel($channel),
             $this->customerRepository->count()
         );
     }

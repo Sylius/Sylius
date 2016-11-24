@@ -93,4 +93,26 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return OrderInterface|null
      */
     public function findCartByIdAndChannel($id, ChannelInterface $channel);
+
+    /**
+     * @param ChannelInterface $channel
+     *
+     * @return int
+     */
+    public function getTotalSalesForChannel(ChannelInterface $channel);
+
+    /**
+     * @param ChannelInterface $channel
+     *
+     * @return int
+     */
+    public function countByChannel(ChannelInterface $channel);
+
+    /**
+     * @param int $count
+     * @param ChannelInterface $channel
+     *
+     * @return OrderInterface[]
+     */
+    public function findLatestInChannel($count, ChannelInterface $channel);
 }
