@@ -110,7 +110,8 @@ final class ShippingContext implements Context
     public function theStoreShipsEverywhereForFreeForAllChannels(array $channels)
     {
         foreach ($this->zoneRepository->findAll() as $zone) {
-            $shipment = $this->createShippingMethod('Free', null, null, $zone, 'en', ['amount' => 0], DefaultCalculators::FLAT_RATE, true, false);
+            $configuration = $this->getConfigurationByChannels($channels);
+            $shipment = $this->createShippingMethod('Free', null, null, $zone, 'en', $configuration, DefaultCalculators::FLAT_RATE, true, false);
 
             foreach ($channels as $channel) {
                 $shipment->addChannel($channel);
@@ -159,7 +160,10 @@ final class ShippingContext implements Context
      */
     public function storeHasShippingMethodWithFee($shippingMethodName, $fee, ZoneInterface $zone = null)
     {
-        $this->createShippingMethod($shippingMethodName, null, null, $zone, 'en', ['amount' => $fee]);
+        $channel = $this->sharedStorage->get('channel');
+        $configuration = $this->getConfigurationByChannels([$channel], $fee);
+
+        $this->createShippingMethod($shippingMethodName, null, null, $zone, 'en', $configuration);
     }
 
     /**
@@ -167,7 +171,10 @@ final class ShippingContext implements Context
      */
     public function storeHasDisabledShippingMethodWithFee($shippingMethodName, $fee)
     {
-        $this->createShippingMethod($shippingMethodName, null, null, null, 'en', ['amount' => $fee], DefaultCalculators::FLAT_RATE, false);
+        $channel = $this->sharedStorage->get('channel');
+        $configuration = $this->getConfigurationByChannels([$channel], $fee);
+
+        $this->createShippingMethod($shippingMethodName, null, null, null, 'en', $configuration, DefaultCalculators::FLAT_RATE, false);
     }
 
     /**
@@ -175,7 +182,10 @@ final class ShippingContext implements Context
      */
     public function theStoreHasShippingMethodWithFeePerUnit($shippingMethodName, $fee)
     {
-        $this->createShippingMethod($shippingMethodName, null, null, null, 'en', ['amount' => $fee], DefaultCalculators::PER_UNIT_RATE);
+        $channel = $this->sharedStorage->get('channel');
+        $configuration = $this->getConfigurationByChannels([$channel], $fee);
+
+        $this->createShippingMethod($shippingMethodName, null, null, null, 'en', $configuration, DefaultCalculators::PER_UNIT_RATE);
     }
 
     /**
@@ -183,7 +193,10 @@ final class ShippingContext implements Context
      */
     public function storeHasShippingMethodWithFeeNotAssignedToAnyChannel($shippingMethodName, $fee)
     {
-        $this->createShippingMethod($shippingMethodName, null, null, null, 'en', ['amount' => $fee], DefaultCalculators::FLAT_RATE, false, false);
+        $channel = $this->sharedStorage->get('channel');
+        $configuration = $this->getConfigurationByChannels([$channel], $fee);
+
+        $this->createShippingMethod($shippingMethodName, null, null, null, 'en', $configuration, DefaultCalculators::FLAT_RATE, false, false);
     }
 
     /**
@@ -268,17 +281,23 @@ final class ShippingContext implements Context
         $position = null,
         ZoneInterface $zone = null,
         $locale = 'en',
-        $configuration = ['amount' => 0],
+        $configuration = null,
         $calculator = DefaultCalculators::FLAT_RATE,
         $enabled = true,
         $addForCurrentChannel = true
     ) {
+        $channel = $this->sharedStorage->get('channel');
+
         if (null === $zone) {
             $zone = $this->sharedStorage->get('zone');
         }
 
         if (null === $code) {
             $code = $this->generateCodeFromNameAndZone($name, $zone->getCode());
+        }
+
+        if (null === $configuration) {
+            $configuration = $this->getConfigurationByChannels([$channel]);
         }
 
         /** @var ShippingMethodInterface $shippingMethod */
@@ -293,7 +312,7 @@ final class ShippingContext implements Context
         $shippingMethod->setEnabled($enabled);
 
         if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {
-            $shippingMethod->addChannel($this->sharedStorage->get('channel'));
+            $shippingMethod->addChannel($channel);
         }
 
         $this->shippingMethodRepository->add($shippingMethod);
@@ -311,5 +330,23 @@ final class ShippingContext implements Context
     private function generateCodeFromNameAndZone($shippingMethodName, $zoneCode = null)
     {
         return StringInflector::nameToLowercaseCode($shippingMethodName).'_'.StringInflector::nameToLowercaseCode($zoneCode);
+    }
+
+    /**
+     * @param array $channels
+     * @param int $amount
+     *
+     * @return array
+     */
+    private function getConfigurationByChannels(array $channels, $amount = 0)
+    {
+        $configuration = [];
+
+        /** @var ChannelInterface $channel */
+        foreach ($channels as $channel) {
+            $configuration[$channel->getCode()] = ['amount' => $amount];
+        }
+
+        return $configuration;
     }
 }

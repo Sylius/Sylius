@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
@@ -29,6 +30,24 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function isAvailableInChannel($channelName)
     {
         return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationMessageForAmount($channelCode)
+    {
+        $foundElement = $this->getElement('amount', ['%channelCode%' => $channelCode]);
+        if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Field element');
+        }
+
+        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+        }
+
+        return $validationMessage->getText();
     }
 
     /**
@@ -53,6 +72,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
             'channel' => '.checkbox:contains("%channel%") input',
             'code' => '#sylius_shipping_method_code',
             'enabled' => '#sylius_shipping_method_enabled',

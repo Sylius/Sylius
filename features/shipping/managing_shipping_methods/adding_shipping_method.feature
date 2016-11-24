@@ -6,11 +6,11 @@ Feature: Adding a new shipping method
 
     Background:
         Given the store operates on a channel named "Web-US" in "USD" currency
-        And the store operates on another channel named "Web-GB" in "GBP" currency
         And the store is available in "English (United States)"
+        And the store has a zone "United States" with code "US"
         And I am logged in as an administrator
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding a new shipping method with flat rate per shipment
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -23,7 +23,7 @@ Feature: Adding a new shipping method
         Then I should be notified that it has been successfully created
         And the shipping method "FedEx Carrier" should appear in the registry
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding a new shipping method with description and flat rate per shipment
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -36,7 +36,7 @@ Feature: Adding a new shipping method
         Then I should be notified that it has been successfully created
         And the shipping method "FedEx Carrier" should appear in the registry
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding a new shipping method with flat rate per unit
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -48,7 +48,7 @@ Feature: Adding a new shipping method
         Then I should be notified that it has been successfully created
         And the shipping method "FedEx Carrier" should appear in the registry
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding a new shipping method for channel
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
@@ -63,8 +63,9 @@ Feature: Adding a new shipping method
         And the shipping method "FedEx Carrier" should appear in the registry
         And the shipping method "FedEx Carrier" should be available in channel "Web-US"
 
-    @ui @javascript @todo
+    @ui @javascript
     Scenario: Adding a new shipping method with flat rate per shipment specified for different channels
+        Given the store operates on another channel named "Web-GB" in "GBP" currency
         When I want to create a new shipping method
         And I specify its code as "FED_EX_CARRIER"
         And I name it "FedEx Carrier" in "English (United States)"

@@ -7,6 +7,7 @@ Feature: Shipping method unique code validation
     Background:
         Given the store operates on a channel named "Web" in "USD" currency
         And the store is available in "English (United States)"
+        And the store has a zone "United States" with code "US"
         And the store allows shipping with "UPS Ground" identified by "UPS"
         And I am logged in as an administrator
 
