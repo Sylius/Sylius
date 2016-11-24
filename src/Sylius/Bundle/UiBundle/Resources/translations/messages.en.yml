@@ -832,6 +832,7 @@ sylius:
         yes_label: 'Yes'
         you_are_customer_since: 'You are customer since'
         you_are_reviewing: 'You are reviewing'
+        you_can_no_longer_change_payment_method_of_this_order: 'You can no longer change payment method of this order'
         you_have_no_addresses_defined: 'You have no addresses defined'
         you_have_no_new_orders: 'You have no new orders'
         you_may_also_like: 'You may also like'

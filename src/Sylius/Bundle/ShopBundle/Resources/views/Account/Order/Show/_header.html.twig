@@ -26,5 +26,5 @@
 </h1>
 
 {% if order.paymentState in ['awaiting_payment'] %}
-    {{ buttons.default(path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'sylius.ui.pay', null, 'credit card alternative', 'fluid blue') }}
+    {{ buttons.default(path('sylius_shop_order_change_payment_method', {'tokenValue': order.tokenValue}), 'sylius.ui.pay', null, 'credit card alternative', 'fluid blue') }}
 {% endif %}

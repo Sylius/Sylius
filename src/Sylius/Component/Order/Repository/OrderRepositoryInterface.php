@@ -39,6 +39,13 @@ interface OrderRepositoryInterface extends RepositoryInterface
     public function findOneByNumber($number);
 
     /**
+     * @param string $tokenValue
+     *
+     * @return OrderInterface|null
+     */
+    public function findOneByTokenValue($tokenValue);
+
+    /**
      * @param mixed $id
      *
      * @return OrderInterface|null

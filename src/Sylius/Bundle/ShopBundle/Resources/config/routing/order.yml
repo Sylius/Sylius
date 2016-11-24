@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_shop_order_pay:
-    path: /{paymentId}/pay
+    path: /{tokenValue}/pay
     methods: [GET]
     defaults:
         _controller: sylius.controller.payum:prepareCaptureAction
@@ -24,13 +24,19 @@ sylius_shop_order_thank_you:
         _sylius:
             template: "@SyliusShop/Order/thankYou.html.twig"
 
-sylius_shop_order_show:
-    path: /{tokenValue}
-    methods: [GET]
+sylius_shop_order_change_payment_method:
+    path: /{tokenValue}/change-payment-method
+    methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.order:showAction
+        _controller: sylius.controller.order:updateAction
         _sylius:
-            template: "@SyliusShop/Order/show.html.twig"
+            template: "@SyliusShop/Order/changePaymentMethod.html.twig"
             repository:
                 method: findOneBy
                 arguments: [tokenValue: $tokenValue]
+            form: sylius_checkout_select_payment
+            redirect:
+                route: sylius_shop_order_pay
+                parameters:
+                    tokenValue: $tokenValue
+            flash: false

@@ -88,7 +88,7 @@ sylius_shop_checkout_complete:
             redirect:
                 route: sylius_shop_order_pay
                 parameters:
-                    paymentId: expr:service('sylius.context.cart').getCart().getLastNewPayment().getId()
+                    tokenValue: resource.tokenValue
             form:
                 type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType
                 options:
