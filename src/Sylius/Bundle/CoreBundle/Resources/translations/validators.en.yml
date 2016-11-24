@@ -30,6 +30,9 @@ sylius:
         code:
             not_blank: Please enter an image code.
             unique: Image code must be unique within this product.
+        file:
+            max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
+            upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: On hand must be greater than {{ limit }}.
@@ -58,6 +61,9 @@ sylius:
         code:
             not_blank: Please enter an image code.
             unique: Image code must be unique within this taxon.
+        file:
+            max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
+            upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
     user:
         email:
             unique: This email is already used.
