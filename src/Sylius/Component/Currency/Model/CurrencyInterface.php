@@ -22,7 +22,6 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 interface CurrencyInterface extends
     CodeAwareInterface,
     TimestampableInterface,
-    ToggleableInterface,
     ResourceInterface
 {
     /**

@@ -20,7 +20,7 @@ use Symfony\Component\Intl\Intl;
  */
 class Currency implements CurrencyInterface
 {
-    use TimestampableTrait, ToggleableTrait;
+    use TimestampableTrait;
 
     /**
      * @var mixed

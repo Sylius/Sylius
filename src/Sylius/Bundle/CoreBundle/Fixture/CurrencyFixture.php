@@ -47,12 +47,11 @@ final class CurrencyFixture extends AbstractFixture
      */
     public function load(array $options)
     {
-        foreach ($options['currencies'] as $currencyCode => $enabled) {
+        foreach ($options['currencies'] as $currencyCode) {
             /** @var CurrencyInterface $currency */
             $currency = $this->currencyFactory->createNew();
 
             $currency->setCode($currencyCode);
-            $currency->setEnabled($enabled);
 
             $currency->setExchangeRate(mt_rand(0, 200) / 100);
 
@@ -78,9 +77,7 @@ final class CurrencyFixture extends AbstractFixture
         $optionsNode
             ->children()
                 ->arrayNode('currencies')
-                    ->useAttributeAsKey('code')
-                    ->prototype('boolean')
-                        ->defaultTrue()
+                    ->prototype('scalar')
         ;
     }
 }
