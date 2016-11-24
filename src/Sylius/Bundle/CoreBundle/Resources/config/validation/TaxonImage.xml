@@ -28,5 +28,13 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="file">
+            <constraint name="Image">
+                <option name="maxSize">2M</option>
+                <option name="maxSizeMessage">sylius.taxon_image.file.max_size</option>
+                <option name="uploadIniSizeErrorMessage">sylius.taxon_image.file.upload_ini_size</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

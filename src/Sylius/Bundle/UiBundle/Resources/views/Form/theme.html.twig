@@ -181,6 +181,9 @@
         <div class="ui hidden element">
             {{ form_widget(form.file) }}
         </div>
+        <div class="ui element">
+            {{- form_errors(form.file) -}}
+        </div>
     </div>
 {% endblock %}
 
@@ -195,6 +198,9 @@
         {% endif %}
         <div class="ui hidden element">
             {{ form_widget(form.file) }}
+        </div>
+        <div class="ui element">
+            {{- form_errors(form.file) -}}
         </div>
     </div>
 {% endblock %}
