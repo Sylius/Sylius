@@ -24,8 +24,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
- * @mixin ProductTaxonCollectionToTaxonCollectionTransformer
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ProductTaxonCollectionToTaxonCollectionTransformerSpec extends ObjectBehavior
