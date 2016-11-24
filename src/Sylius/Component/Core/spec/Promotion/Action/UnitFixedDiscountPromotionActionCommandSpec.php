@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -38,15 +37,13 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
-        FilterInterface $productFilter,
-        CurrencyConverterInterface $currencyConverter
+        FilterInterface $productFilter
     ) {
         $this->beConstructedWith(
             $adjustmentFactory,
             $priceRangeFilter,
             $taxonFilter,
-            $productFilter,
-            $currencyConverter
+            $productFilter
         );
     }
 
@@ -117,7 +114,6 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter,
-        CurrencyConverterInterface $currencyConverter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         OrderInterface $order,
@@ -127,8 +123,6 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $order->getCurrencyCode()->willReturn('PLN');
-
-        $currencyConverter->convertToBase(1000, 'PLN')->willReturn(250);
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
         $order->getChannel()->willReturn($channel);
@@ -148,14 +142,14 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $unit1->getTotal()->willReturn(1000);
         $promotionAdjustment1->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
-        $promotionAdjustment1->setAmount(-250)->shouldBeCalled();
+        $promotionAdjustment1->setAmount(-1000)->shouldBeCalled();
 
         $promotionAdjustment1->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 
         $unit2->getTotal()->willReturn(1000);
         $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
-        $promotionAdjustment2->setAmount(-250)->shouldBeCalled();
+        $promotionAdjustment2->setAmount(-1000)->shouldBeCalled();
 
         $promotionAdjustment2->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 
