@@ -16,8 +16,6 @@
         <parameter key="sylius.form.type.product_image.class">Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType</parameter>
         <parameter key="sylius.form.type.product_taxon_choice.class">Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType</parameter>
         <parameter key="sylius.form.type.taxon_image.class">Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonImageType</parameter>
-        <parameter key="sylius.form.type.locale.class">Sylius\Bundle\CoreBundle\Form\Type\LocaleType</parameter>
-        <parameter key="sylius.form.type.currency.class">Sylius\Bundle\CoreBundle\Form\Type\CurrencyType</parameter>
 
         <parameter key="sylius.validation_groups.customer" type="collection">
             <parameter>sylius</parameter>
@@ -56,6 +54,10 @@
         <service id="sylius.form.extension.type.payment_method" class="Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType" />
         </service>
+        <service id="sylius.form.extension.type.currency" class="Sylius\Bundle\CoreBundle\Form\Extension\CurrencyTypeExtension">
+            <argument>%currency%</argument>
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType" />
+        </service>
 
         <service id="sylius.form.type.product_image" class="%sylius.form.type.product_image.class%">
             <argument>%sylius.model.product_image.class%</argument>
@@ -74,12 +76,6 @@
         <service id="sylius.form.type.taxon_image" class="%sylius.form.type.taxon_image.class%">
             <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="form.type" alias="sylius_taxon_image" />
-        </service>
-        <service id="sylius.form.type.currency" class="%sylius.form.type.currency.class%">
-            <argument>%sylius.model.currency.class%</argument>
-            <argument>%sylius.validation_groups.currency%</argument>
-            <argument>%currency%</argument>
-            <tag name="form.type" alias="sylius_currency" />
         </service>
         <service id="sylius.form.type.customer" class="%sylius.form.type.customer.class%">
             <argument>%sylius.model.customer.class%</argument>
