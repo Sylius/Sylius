@@ -43,7 +43,7 @@ class CustomerProfileType extends AbstractResourceType
                 'widget' => 'single_text',
                 'required' => false,
             ])
-            ->add('gender', 'sylius_gender', [
+            ->add('gender', GenderType::class, [
                 'label' => 'sylius.form.customer.gender',
             ])
             ->add('phoneNumber', TextType::class, [

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
+use Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupCodeChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -41,7 +42,7 @@ class CustomerGroupType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('group', 'sylius_customer_group_from_identifier', [
+            ->add('group', CustomerGroupCodeChoiceType::class, [
                 'label' => 'sylius.form.promotion_action.customer_group',
                 'property' => 'name',
                 'class' => $this->groupRepository->getClassName(),
