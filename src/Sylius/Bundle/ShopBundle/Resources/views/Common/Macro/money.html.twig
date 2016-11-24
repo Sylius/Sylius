@@ -3,7 +3,7 @@
 {% endmacro %}
 
 {% macro convertAndFormat(amount) %}
-    {% import _self as macro %}
+    {% from _self import format %}
 
-    {{ macro.format(amount|sylius_convert_money(shopperContext.currencyCode), shopperContext.currencyCode) }}
+    {{ format(amount|sylius_convert_money(shopperContext.channel.baseCurrency.code, shopperContext.currencyCode), shopperContext.currencyCode) }}
 {% endmacro %}

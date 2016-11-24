@@ -14,15 +14,18 @@ namespace spec\Sylius\Component\Currency\Converter;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Converter\CurrencyConverter;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
-use Sylius\Component\Currency\Converter\UnavailableCurrencyException;
 use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Currency\Model\ExchangeRateInterface;
+use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 
+/**
+ * @author Łukasz Chruściel <lchrusciel@gmail.com>
+ */
 final class CurrencyConverterSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $currencyRepository)
+    function let(ExchangeRateRepositoryInterface $exchangeRateRepository)
     {
-        $this->beConstructedWith($currencyRepository);
+        $this->beConstructedWith($exchangeRateRepository);
     }
 
     function it_is_initializable()
@@ -35,33 +38,39 @@ final class CurrencyConverterSpec extends ObjectBehavior
         $this->shouldImplement(CurrencyConverterInterface::class);
     }
 
-    function it_converts_to_any_currency(
-        RepositoryInterface $currencyRepository,
-        CurrencyInterface $currency
+    function it_converts_multipling_ratio_based_on_currency_pair_exchange_rate(
+        ExchangeRateRepositoryInterface $exchangeRateRepository,
+        CurrencyInterface $sourceCurrency,
+        ExchangeRateInterface $exchangeRate
     ) {
-        $currencyRepository->findOneBy(['code' => 'USD'])->willReturn($currency);
-        $currency->getExchangeRate()->willReturn(1.30);
+        $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'USD')->willReturn($exchangeRate);
+        $exchangeRate->getRatio()->willReturn(1.30);
+        $exchangeRate->getSourceCurrency()->willReturn($sourceCurrency);
 
-        $this->convertFromBase(6555, 'USD')->shouldReturn(8522);
+        $sourceCurrency->getCode()->willReturn('GBP');
+
+        $this->convert(666, 'GBP', 'USD')->shouldReturn(866);
     }
 
-    function it_throws_exception_if_currency_is_not_found($currencyRepository)
-    {
-        $currencyRepository->findOneBy(['code' => 'EUR'])->willReturn(null);
+    function it_converts_dividing_ratio_based_on_reversed_currency_pair_exchange_rate(
+        ExchangeRateRepositoryInterface $exchangeRateRepository,
+        CurrencyInterface $sourceCurrency,
+        ExchangeRateInterface $exchangeRate
+    ) {
+        $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'USD')->willReturn($exchangeRate);
+        $exchangeRate->getRatio()->willReturn(1.30);
+        $exchangeRate->getSourceCurrency()->willReturn($sourceCurrency);
 
-        $this
-            ->shouldThrow(new UnavailableCurrencyException('EUR'))
-            ->duringConvertFromBase(6555, 'EUR')
-        ;
+        $sourceCurrency->getCode()->willReturn('USD');
+
+        $this->convert(666, 'GBP', 'USD')->shouldReturn(512);
     }
 
-    function it_converts_to_base_currency(
-        RepositoryInterface $currencyRepository,
-        CurrencyInterface $currency
+    function it_return_given_value_if_exchange_rate_for_given_currency_pair_has_not_been_found(
+        ExchangeRateRepositoryInterface $exchangeRateRepository
     ) {
-        $currencyRepository->findOneBy(['code' => 'PLN'])->willReturn($currency);
-        $currency->getExchangeRate()->willReturn(0.25);
+        $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'USD')->willReturn(null);
 
-        $this->convertToBase(10000, 'PLN')->shouldReturn(40000);
+        $this->convert(666, 'GBP', 'USD')->shouldReturn(666);
     }
 }
