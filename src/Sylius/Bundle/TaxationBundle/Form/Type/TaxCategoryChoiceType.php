@@ -11,25 +11,40 @@
 
 namespace Sylius\Bundle\TaxationBundle\Form\Type;
 
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-abstract class TaxCategoryChoiceType extends AbstractType
+final class TaxCategoryChoiceType extends AbstractType
 {
     /**
-     * @var string
+     * @var RepositoryInterface
      */
-    protected $className;
+    private $taxCategoryRepository;
 
     /**
-     * @param string $className
+     * @param RepositoryInterface $taxCategoryRepository
      */
-    public function __construct($className)
+    public function __construct(RepositoryInterface $taxCategoryRepository)
     {
-        $this->className = $className;
+        $this->taxCategoryRepository = $taxCategoryRepository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        if ($options['multiple']) {
+            $builder->addModelTransformer(new CollectionToArrayTransformer());
+        }
     }
 
     /**
@@ -37,11 +52,23 @@ abstract class TaxCategoryChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver
-            ->setDefaults([
-                'class' => $this->className,
-            ])
-        ;
+        $resolver->setDefaults([
+            'choices' => function (Options $options) {
+                return $this->taxCategoryRepository->findAll();
+            },
+            'choice_value' => 'code',
+            'choice_label' => 'name',
+            'choice_translation_domain' => false,
+            'choices_as_values' => true,
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return ChoiceType::class;
     }
 
     /**

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType as BaseShippingMethodType;
+use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -32,7 +33,7 @@ class ShippingMethodType extends BaseShippingMethodType
             ->add('zone', ZoneChoiceType::class, [
                 'label' => 'sylius.form.shipping_method.zone',
             ])
-            ->add('taxCategory', 'sylius_tax_category_choice', [
+            ->add('taxCategory', TaxCategoryChoiceType::class, [
                 'required' => false,
                 'placeholder' => '---',
                 'label' => 'sylius.form.shipping_method.tax_category',
