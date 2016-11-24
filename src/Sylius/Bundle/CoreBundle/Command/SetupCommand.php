@@ -165,7 +165,11 @@ EOT
         $currencyManager = $this->get('sylius.manager.currency');
         $currencyFactory = $this->get('sylius.factory.currency');
 
-        $code = trim($this->getContainer()->getParameter('currency'));
+        $code = 'USD';
+        if (!$input->getOption('no-interaction')) {
+            $code = trim($this->ask($output, 'Currency (press enter to use USD):', [new NotBlank()], 'USD'));
+        }
+
         $name = Intl::getCurrencyBundle()->getCurrencyName($code);
         $output->writeln(sprintf('Adding <info>%s</info> currency.', $name));
 
