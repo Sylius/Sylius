@@ -19,6 +19,7 @@ use Sylius\Behat\Page\Admin\Order\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -169,11 +170,16 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Then it should be shipped to :customerName, :street, :postcode, :city, :countryName
-     * @Then this order should be shipped to :customerName, :street, :postcode, :city, :countryName
-     * @Then /^(this order) should still be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
+     * @Then /^(this order) should (?:|still )be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
-    public function itShouldBeShippedTo(OrderInterface $order = null, $customerName, $street, $postcode, $city, $countryName)
-    {
+    public function itShouldBeShippedTo(
+        OrderInterface $order = null,
+        $customerName,
+        $street,
+        $postcode,
+        $city,
+        $countryName
+    ) {
         if (null !== $order) {
             $this->iSeeTheOrder($order);
         }
@@ -186,9 +192,20 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Then it should be billed to :customerName, :street, :postcode, :city, :countryName
+     * @Then /^(this order) bill should (?:|still )be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
-    public function itShouldBeBilledTo($customerName, $street, $postcode, $city, $countryName)
-    {
+    public function itShouldBeBilledTo(
+        OrderInterface $order = null,
+        $customerName,
+        $street,
+        $postcode,
+        $city,
+        $countryName
+    ) {
+        if (null !== $order) {
+            $this->iSeeTheOrder($order);
+        }
+
         Assert::true(
             $this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName),
             sprintf('Cannot find shipping address "%s, %s %s, %s".', $street, $postcode, $city, $countryName)
@@ -225,7 +242,7 @@ final class ManagingOrdersContext implements Context
         $itemsCount = $this->showPage->countItems();
 
         Assert::same(
-            (int) $amount,
+            (int)$amount,
             $itemsCount,
             sprintf('There should be %d items, but get %d.', $amount, $itemsCount)
         );
@@ -483,8 +500,7 @@ final class ManagingOrdersContext implements Context
     {
         $this
             ->notificationChecker
-            ->checkNotification('Payment has been successfully updated.', NotificationType::success())
-        ;
+            ->checkNotification('Payment has been successfully updated.', NotificationType::success());
     }
 
     /**
@@ -494,8 +510,7 @@ final class ManagingOrdersContext implements Context
     {
         $this
             ->notificationChecker
-            ->checkNotification('Payment has been successfully refunded.', NotificationType::success())
-        ;
+            ->checkNotification('Payment has been successfully refunded.', NotificationType::success());
     }
 
     /**
@@ -538,7 +553,10 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldBeNotifiedThatTheOrderHasBeenSuccessfullyShipped()
     {
-        $this->notificationChecker->checkNotification('Shipment has been successfully updated.', NotificationType::success());
+        $this->notificationChecker->checkNotification(
+            'Shipment has been successfully updated.',
+            NotificationType::success()
+        );
     }
 
     /**
@@ -609,12 +627,18 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then /^(the administrator) should know about (this additional note) for (this order made by "[^"]+")$/
      */
-    public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(AdminUserInterface $user, $note, OrderInterface $order)
-    {
-        $this->sharedSecurityService->performActionAsAdminUser($user, function () use ($note, $order) {
-            $this->showPage->open(['id' => $order->getId()]);
-            Assert::true($this->showPage->hasNote($note), sprintf('I should see %s note, but I do not see', $note));
-        });
+    public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(
+        AdminUserInterface $user,
+        $note,
+        OrderInterface $order
+    ) {
+        $this->sharedSecurityService->performActionAsAdminUser(
+            $user,
+            function () use ($note, $order) {
+                $this->showPage->open(['id' => $order->getId()]);
+                Assert::true($this->showPage->hasNote($note), sprintf('I should see %s note, but I do not see', $note));
+            }
+        );
     }
 
     /**
@@ -697,7 +721,7 @@ final class ManagingOrdersContext implements Context
     {
         $actualNumberOfPayments = $this->showPage->getPaymentsCount();
 
-        Assert::same((int) $number, $actualNumberOfPayments);
+        Assert::same((int)$number, $actualNumberOfPayments);
     }
 
     /**
@@ -712,63 +736,11 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When /^I want to modify a customer's shipping address of (this order)$/
+     * @When /^I want to modify a customer's (?:billing|shipping) address of (this order)$/
      */
     public function iWantToModifyACustomerSShippingAddress(OrderInterface $order)
     {
         $this->updatePage->open(['id' => $order->getId()]);
-    }
-
-    /**
-     * @When I specify the first name as :firstName
-     * @When I do not specify the first name
-     */
-    public function iSpecifyTheFirstNameAs($firstName = null)
-    {
-        $this->updatePage->specifyFirstName($firstName);
-    }
-
-    /**
-     * @When I specify the last name as :lastName
-     * @When I do not specify the last name
-     */
-    public function iSpecifyTheLastNameAs($lastName = null)
-    {
-        $this->updatePage->specifyLastName($lastName);
-    }
-
-    /**
-     * @When I specify the street as :street
-     * @When I do not specify the street
-     */
-    public function iSpecifyTheStreetAs($street = null)
-    {
-        $this->updatePage->specifyStreet($street);
-    }
-
-    /**
-     * @When I specify the city as :city
-     * @When I do not specify the city
-     */
-    public function iSpecifyTheCityAs($city = null)
-    {
-        $this->updatePage->specifyCity($city);
-    }
-
-    /**
-     * @When I specify the postcode as :postcode
-     */
-    public function iSpecifyThePostcodeAs($postcode)
-    {
-        $this->updatePage->specifyPostcode($postcode);
-    }
-
-    /**
-     * @When I choose :country as the country
-     */
-    public function iChooseCountryAs($country)
-    {
-        $this->updatePage->chooseCountry($country);
     }
 
     /**
@@ -781,22 +753,31 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I specify their shipping address as :city, :street, :postcode, :country for :firstAndLastName
+     * @When /^I specify their (?:|new )shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
-    public function iSpecifyTheirShippingAddressAsFor($city, $street, $postcode, $country, $firstAndLastName)
+    public function iSpecifyTheirShippingAddressAsFor(AddressInterface $address)
     {
-        $this->updatePage->specifyShippingAddress($city, $street, $postcode, $country, $firstAndLastName);
+        $this->updatePage->specifyShippingAddress($address);
     }
 
     /**
-     * @Then /^I should be notified that the (last name|first name|city|street) is required$/
+     * @When /^I specify their (?:|new )billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
-    public function iShouldBeNotifiedThatIsRequired($element)
+    public function iSpecifyTheirBillingAddressAsFor(AddressInterface $address)
     {
-        Assert::same(
-            $this->updatePage->getValidationMessage(StringInflector::nameToCode($element)),
-            sprintf('Please enter %s.', $element)
-        );
+        $this->updatePage->specifyBillingAddress($address);
+    }
+
+    /**
+     * @Then /^I should be notified that the "([^"]+)", the "([^"]+)", the "([^"]+)" and the "([^"]+)" in (shipping|billing) details are required$/
+     */
+    public function iShouldBeNotifiedThatTheAndTheInShippingDetailsAreRequired($firstElement, $secondElement, $thirdElement, $fourthElement, $type)
+    {
+        $this->assertElementValidationMessage($type, $firstElement, sprintf('Please enter %s.', $firstElement));
+        $this->assertElementValidationMessage($type, $secondElement, sprintf('Please enter %s.', $secondElement));
+        $this->assertElementValidationMessage($type, $thirdElement, sprintf('Please enter %s.', $thirdElement));
+        $this->assertElementValidationMessage($type, $fourthElement, sprintf('Please enter %s.', $fourthElement));
+
     }
 
     /**
@@ -824,16 +805,61 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then /^(the administrator) should know about IP address of (this order made by "[^"]+")$/
      */
-    public function theAdministratorShouldKnowAboutIPAddressOfThisOrderMadeBy(AdminUserInterface $user, OrderInterface $order)
-    {
-        $this->sharedSecurityService->performActionAsAdminUser($user, function () use ($order) {
-            $this->showPage->open(['id' => $order->getId()]);
+    public function theAdministratorShouldKnowAboutIPAddressOfThisOrderMadeBy(
+        AdminUserInterface $user,
+        OrderInterface $order
+    ) {
+        $this->sharedSecurityService->performActionAsAdminUser(
+            $user,
+            function () use ($order) {
+                $this->showPage->open(['id' => $order->getId()]);
 
-            Assert::notSame(
-                $this->showPage->getIpAddressAssigned(),
-                '',
-                'There should be IP address assigned to order, but there is not.'
-            );
-        });
+                Assert::notSame(
+                    $this->showPage->getIpAddressAssigned(),
+                    '',
+                    'There should be IP address assigned to order, but there is not.'
+                );
+            }
+        );
+    }
+
+    /**
+     * @When /^I (clear old billing address) information$/
+     */
+    public function iSpecifyTheBillingAddressAs(AddressInterface $address)
+    {
+        $this->updatePage->specifyBillingAddress($address);
+    }
+
+    /**
+     * @When /^I (clear old shipping address) information$/
+     */
+    public function iSpecifyTheShippingAddressAs(AddressInterface $address)
+    {
+        $this->updatePage->specifyShippingAddress($address);
+    }
+
+    /**
+     * @When /^I do not specify new information$/
+     */
+    public function iDoNotSpecifyNewInformation()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @param string $type
+     * @param string $element
+     * @param string $expectedMessage
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertElementValidationMessage($type, $element, $expectedMessage)
+    {
+        $element = sprintf('%s_%s', $type, implode('_', explode(' ', $element)));
+        Assert::true(
+            $this->updatePage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('The %s should be required.', $element)
+        );
     }
 }

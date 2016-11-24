@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -19,41 +20,12 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     /**
-     * @param string $firstName
+     * @param AddressInterface $address
      */
-    public function specifyFirstName($firstName);
+    public function specifyShippingAddress(AddressInterface $address);
 
     /**
-     * @param string $lastName
+     * @param AddressInterface $address
      */
-    public function specifyLastName($lastName);
-
-    /**
-     * @param string $street
-     */
-    public function specifyStreet($street);
-
-    /**
-     * @param string $city
-     */
-    public function specifyCity($city);
-
-    /**
-     * @param string $postcode
-     */
-    public function specifyPostcode($postcode);
-
-    /**
-     * @param string $country
-     */
-    public function chooseCountry($country);
-
-    /**
-     * @param string $city
-     * @param string $street
-     * @param string $postcode
-     * @param string $country
-     * @param string $firstAndLastName
-     */
-    public function specifyShippingAddress($city, $street, $postcode, $country, $firstAndLastName);
+    public function specifyBillingAddress(AddressInterface $address);
 }
