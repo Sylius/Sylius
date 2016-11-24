@@ -19,8 +19,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @mixin AddressFactory
- *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class AddressFactorySpec extends ObjectBehavior

@@ -19,8 +19,6 @@ use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 
 /**
- * @mixin ProductTaxon
- * 
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class ProductTaxonSpec extends ObjectBehavior

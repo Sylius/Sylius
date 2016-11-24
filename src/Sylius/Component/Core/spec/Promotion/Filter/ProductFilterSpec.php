@@ -18,8 +18,6 @@ use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Core\Promotion\Filter\ProductFilter;
 
 /**
- * @mixin ProductFilter
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class ProductFilterSpec extends ObjectBehavior

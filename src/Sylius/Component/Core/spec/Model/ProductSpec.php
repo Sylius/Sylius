@@ -25,8 +25,6 @@ use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
- * @mixin Product
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
