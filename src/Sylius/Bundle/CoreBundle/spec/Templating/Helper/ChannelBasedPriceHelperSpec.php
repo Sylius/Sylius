@@ -52,24 +52,6 @@ final class ChannelBasedPriceHelperSpec extends ObjectBehavior
         $this->shouldImplement(ChannelBasedPriceHelperInterface::class);
     }
 
-    function it_returns_null_if_price_for_resolved_variant_is_not_configured(
-        CartContextInterface $cartContext,
-        ChannelInterface $currentChannel,
-        OrderInterface $currentCart,
-        ProductVariantInterface $productVariant,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-    ) {
-        $cartContext->getCart()->willReturn($currentCart);
-        $currentCart->getChannel()->willReturn($currentChannel);
-
-        $productVariantPriceCalculator
-            ->calculate($productVariant, ['channel' => $currentChannel])
-            ->willThrow(\InvalidArgumentException::class)
-        ;
-
-        $this->getPriceForCurrentChannel($productVariant)->shouldReturn(null);
-    }
-
     function it_returns_variant_price_for_current_channel(
         CartContextInterface $cartContext,
         ChannelInterface $currentChannel,

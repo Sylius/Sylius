@@ -156,7 +156,7 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @When channel :channel has been deleted
+     * @Given channel :channel has been deleted
      */
     public function iChannelHasBeenDeleted(ChannelInterface $channel)
     {

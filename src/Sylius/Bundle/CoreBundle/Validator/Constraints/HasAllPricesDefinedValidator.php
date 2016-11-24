@@ -42,9 +42,9 @@ final class HasAllPricesDefinedValidator extends ConstraintValidator
     {
         Assert::isInstanceOf($constraint, HasAllPricesDefined::class);
 
-        $enabledChannels = $this->channelRepository->findBy(['enabled' => true]);
+        $channels = $productVariant->getProduct()->getChannels();
 
-        foreach ($enabledChannels as $channel) {
+        foreach ($channels as $channel) {
             /** @var ChannelPricingInterface $channelPricing */
             $channelPricing = $productVariant->getChannelPricingForChannel($channel);
             if (null === $channelPricing || null === $channelPricing->getPrice()) {

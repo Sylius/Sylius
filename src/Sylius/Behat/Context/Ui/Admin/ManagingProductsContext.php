@@ -194,11 +194,19 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I set its(?:| default) price to (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
+     * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
     public function iSetItsPriceTo($price, $channelName)
     {
         $this->createSimpleProductPage->specifyPrice($channelName, $price);
+    }
+
+    /**
+     * @When I make it available in channel :channel
+     */
+    public function iMakeItAvailableInChannel($channel)
+    {
+        $this->createSimpleProductPage->checkChannel($channel);
     }
 
     /**
@@ -207,14 +215,6 @@ final class ManagingProductsContext implements Context
     public function iChooseCalculator($calculatorName)
     {
         $this->createSimpleProductPage->choosePricingCalculator($calculatorName);
-    }
-
-    /**
-     * @When /^I set its price to "(?:€|£|\$)([^"]+)" for ("[^"]+" currency) and ("[^"]+" channel)$/
-     */
-    public function iSetItsPriceToForCurrencyAndChannel($price, CurrencyInterface $currency, ChannelInterface $channel)
-    {
-        $this->createSimpleProductPage->specifyPriceForChannelAndCurrency($price, $channel, $currency);
     }
 
     /**

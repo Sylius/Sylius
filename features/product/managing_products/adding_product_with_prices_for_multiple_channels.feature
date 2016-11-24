@@ -15,8 +15,8 @@ Feature: Adding product with prices for multiple channels
         When I want to create a new simple product
         And I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to $10.00 for "Web-US" channel
-        And I set its price to £5.00 for "Web-GB" channel
+        And I set its price to "$10.00" for "Web-US" channel
+        And I set its price to "£5.00" for "Web-GB" channel
         And I set its slug to "dice-brewing"
         And I add it
         Then I should be notified that it has been successfully created
