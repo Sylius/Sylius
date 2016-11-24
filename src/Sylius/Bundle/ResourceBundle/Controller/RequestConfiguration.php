@@ -122,11 +122,25 @@ class RequestConfiguration
     }
 
     /**
-     * @return string
+     * @return string|null
      */
     public function getFormType()
     {
-        return $this->getFormConfiguration('type');
+        $form = $this->parameters->get('form');
+        if (isset($form['type'])) {
+            return $form['type'];
+        }
+
+        if (is_string($form)) {
+            return $form;
+        }
+
+        $form = $this->metadata->getClass('form');
+        if (is_string($form)) {
+            return $form;
+        }
+
+        return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
 
     /**
@@ -134,7 +148,12 @@ class RequestConfiguration
      */
     public function getFormOptions()
     {
-        return $this->getFormConfiguration('options');
+        $form = $this->parameters->get('form');
+        if (isset($form['options'])) {
+            return $form['options'];
+        }
+
+        return [];
     }
 
     /**
@@ -588,37 +607,5 @@ class RequestConfiguration
     private function areParametersIntentionallyEmptyArray($redirect)
     {
         return isset($redirect['parameters']) && is_array($redirect['parameters']) && empty($redirect['parameters']);
-    }
-
-    /**
-     * @param string $option
-     *
-     * @return array|null|string
-     */
-    private function getFormConfiguration($option)
-    {
-        $form = $this->parameters->get('form');
-        if (null !== $form) {
-            if (is_array($form) && isset($form[$option])) {
-                return $form[$option];
-            }
-
-            if (is_string($form) && 'type' === $option) {
-                return $form;
-            }
-        }
-
-        if ('type' === $option) {
-            $form = $this->metadata->getClass('form');
-            if (is_string($form)) {
-                return $form;
-            }
-
-            return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
-        } elseif ('options' === $option) {
-            return [];
-        }
-
-        return null;
     }
 }
