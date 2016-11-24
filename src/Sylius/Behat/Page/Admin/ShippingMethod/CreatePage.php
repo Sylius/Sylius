@@ -12,10 +12,12 @@
 namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChoosesCalculator;
 use Sylius\Behat\Behaviour\SpecifiesItsAmount;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Sylius\Component\Core\Formatter\StringInflector;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -53,9 +55,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyAmount($amount)
+    public function specifyAmountForChannel($channelCode, $amount)
     {
-        $this->getDocument()->fillField('Amount', $amount);
+        $this->getElement('amount', ['%channelCode%' => $channelCode])->setValue($amount);
     }
 
     /**
@@ -91,15 +93,56 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getValidationMessageForAmount($channelCode)
+    {
+        $foundElement = $this->getFieldElement('amount', ['%channelCode%' => $channelCode]);
+        if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Field element');
+        }
+
+        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException(
+                $this->getSession(),
+                'Validation message',
+                'css',
+                '.sylius-validation-error'
+            );
+        }
+
+        return $validationMessage->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'amount' => '#sylius_shipping_method_configuration_amount',
+            'amount' => '#sylius_shipping_method_configuration_%channelCode%_amount',
             'channel' => '#sylius_shipping_method_channels .ui.checkbox:contains("%channel%")',
             'calculator' => '#sylius_shipping_method_calculator',
             'code' => '#sylius_shipping_method_code',
             'name' => '#sylius_shipping_method_translations_en_US_name',
             'zone' => '#sylius_shipping_method_zone',
         ]);
+    }
+
+    /**
+     * @param string $element
+     * @param array $parameters
+     *
+     * @return \Behat\Mink\Element\NodeElement|null
+     *
+     * @throws ElementNotFoundException
+     */
+    private function getFieldElement($element, array $parameters = [])
+    {
+        $element = $this->getElement(StringInflector::nameToCode($element), $parameters);
+        while (null !== $element && !($element->hasClass('field'))) {
+            $element = $element->getParent();
+        }
+
+        return $element;
     }
 }
