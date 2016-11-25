@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Shipping\Calculator;
 
+use Sylius\Bundle\ShippingBundle\Form\Type\Calculator\PerUnitRateConfigurationType;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\AbstractType;
@@ -44,7 +45,7 @@ class ChannelBasedPerUnitRateConfigurationType extends AbstractType
          */
         foreach ($this->channelRepository->findAll() as $channel) {
             $builder
-                ->add($channel->getCode(), 'sylius_shipping_calculator_per_unit_rate', [
+                ->add($channel->getCode(), PerUnitRateConfigurationType::class, [
                     'label' => $channel->getName(),
                 ])
             ;
