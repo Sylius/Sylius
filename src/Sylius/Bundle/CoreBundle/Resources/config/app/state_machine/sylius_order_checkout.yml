@@ -33,19 +33,3 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'create'", "'sylius_order'"]
-                sylius_hold_inventory:
-                    on: ["complete"]
-                    do: ["@sylius.inventory.order_inventory_operator", "hold"]
-                    args: ["object"]
-                sylius_assign_token:
-                    on: ["complete"]
-                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
-                    args: ["object"]
-                sylius_increment_promotions_usages:
-                    on: ["complete"]
-                    do: ["@sylius.promotion_usage_modifier", "increment"]
-                    args: ["object"]
-                sylius_save_addresses_on_customer:
-                    on: ["complete"]
-                    do: ["@sylius.customer_order_addresses_saver", "saveAddresses"]
-                    args: ["object"]

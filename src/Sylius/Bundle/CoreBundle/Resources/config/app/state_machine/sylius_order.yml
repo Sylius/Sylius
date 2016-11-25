@@ -1,8 +1,36 @@
 winzou_state_machine:
     sylius_order:
+        class: "%sylius.model.order.class%"
+        property_path: state
+        graph: sylius_order
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            cart: ~
+            new: ~
+            cancelled: ~
+            fulfilled: ~
+        transitions:
+            create:
+                from: [cart]
+                to: new
+            cancel:
+                from: [new]
+                to: cancelled
+            fulfill:
+                from: [new]
+                to: fulfilled
         callbacks:
+            before:
+                sylius_assign_number:
+                    on: "create"
+                    do: ["@sylius.order_number_assigner", "assignNumber"]
+                    args: ["object"]
             after:
-                sylius_order_confirmation_email:
+                sylius_complete_checkout:
+                    on: "create"
+                    do: ["@sylius.complete_checkout_callback", "completeCheckout"]
+                    args: ["object"]
+                sylius_send_order_confirmation_email:
                     on: ["create"]
                     do: ["@sylius.email_manager.order", "sendConfirmationEmail"]
                     args: ["object"]
@@ -22,6 +50,22 @@ winzou_state_machine:
                     on: ["create"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object.getShipments()", "event", "'create'", "'sylius_shipment'"]
+                sylius_hold_inventory:
+                    on: ["create"]
+                    do: ["@sylius.inventory.order_inventory_operator", "hold"]
+                    args: ["object"]
+                sylius_assign_token:
+                    on: ["create"]
+                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
+                    args: ["object"]
+                sylius_increment_promotions_usages:
+                    on: ["create"]
+                    do: ["@sylius.promotion_usage_modifier", "increment"]
+                    args: ["object"]
+                sylius_save_addresses_on_customer:
+                    on: ["create"]
+                    do: ["@sylius.customer_order_addresses_saver", "saveAddresses"]
+                    args: ["object"]
                 sylius_cancel_payment:
                     on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]

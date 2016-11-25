@@ -17,7 +17,7 @@ winzou_state_machine:
                 to: rejected
         callbacks:
             after:
-                update_rating:
-                    on: "accept"
-                    do: ["@sylius.average_rating_updater", updateFromReview]
+                sylius_update_rating:
+                    on: ["accept"]
+                    do: ["@sylius.average_rating_updater", "updateFromReview"]
                     args: ["object"]
