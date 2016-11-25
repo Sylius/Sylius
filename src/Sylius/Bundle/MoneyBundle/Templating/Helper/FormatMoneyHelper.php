@@ -14,7 +14,7 @@ namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-class MoneyHelper extends Helper implements MoneyHelperInterface
+class FormatMoneyHelper extends Helper implements FormatMoneyHelperInterface
 {
     /**
      * @var MoneyFormatterInterface
@@ -22,27 +22,18 @@ class MoneyHelper extends Helper implements MoneyHelperInterface
     private $moneyFormatter;
 
     /**
-     * @var string
-     */
-    private $defaultLocaleCode;
-
-    /**
      * @param MoneyFormatterInterface $moneyFormatter
-     * @param string $defaultLocaleCode
      */
-    public function __construct(MoneyFormatterInterface $moneyFormatter, $defaultLocaleCode)
+    public function __construct(MoneyFormatterInterface $moneyFormatter)
     {
         $this->moneyFormatter = $moneyFormatter;
-        $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function formatAmount($amount, $currencyCode, $localeCode = null)
+    public function formatAmount($amount, $currencyCode, $localeCode)
     {
-        $localeCode = $localeCode ?: $this->defaultLocaleCode;
-
         return $this->moneyFormatter->format($amount, $currencyCode, $localeCode);
     }
 
@@ -51,6 +42,6 @@ class MoneyHelper extends Helper implements MoneyHelperInterface
      */
     public function getName()
     {
-        return 'sylius_money';
+        return 'sylius_format_money';
     }
 }

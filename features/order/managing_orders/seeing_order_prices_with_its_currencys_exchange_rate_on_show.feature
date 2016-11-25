@@ -43,7 +43,7 @@ Feature: Seeing all prices calculated accordingly to it's currency's exchange ra
         And the order's promotion total should be "-$5.00"
         And the order's total should be "$25.50"
 
-    @ui @todo
+    @ui
     Scenario: All of a placed order prices don't change when the base currency's exchange rate changes
         Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Angel T-Shirt"
@@ -64,48 +64,3 @@ Feature: Seeing all prices calculated accordingly to it's currency's exchange ra
         And the order's tax total should be "$0.50"
         And the order's promotion total should be "-$5.00"
         And the order's total should be "$25.50"
-
-    @ui
-    Scenario: All of a placed order's prices are in the currency's chosen by the customer and it's exchange rate
-        Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
-        And the customer has chosen to order in the "GBP" currency
-        And the customer bought a single "Angel T-Shirt"
-        And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "British Virgin Islands"
-        And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "British Virgin Islands"
-        And the customer chose "DHL" shipping method with "Cash on Delivery" payment
-        When I view the summary of the order "#00000666"
-        And I check "Angel T-Shirt" data
-        Then its discounted unit price should be £20.00
-        And its unit price should be £40.00
-        And its subtotal should be £20.00
-        And its discount should be -£10.00
-        And its tax should be £1.00
-        And its total should be £11.00
-        And the order's items total should be "£11.00"
-        And the order's shipping total should be "£40.00"
-        And the order's tax total should be "£1.00"
-        And the order's promotion total should be "-£10.00"
-        And the order's total should be "£51.00"
-
-    @ui @todo
-    Scenario: All of a placed order's prices are in the currency's chosen by the customer and it's exchange rate at the time of placing
-        Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
-        And the customer has chosen to order in the "GBP" currency
-        And the customer bought a single "Angel T-Shirt"
-        And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "British Virgin Islands"
-        And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "British Virgin Islands"
-        And the customer chose "DHL" shipping method with "Cash on Delivery" payment
-        But the exchange rate for currency "GBP" was changed to 3.00
-        When I view the summary of the order "#00000666"
-        And I check "Angel T-Shirt" data
-        Then its discounted unit price should be £20.00
-        And its unit price should be £40.00
-        And its subtotal should be £20.00
-        And its discount should be -£10.00
-        And its tax should be £1.00
-        And its total should be £11.00
-        And the order's items total should be "£11.00"
-        And the order's shipping total should be "£40.00"
-        And the order's tax total should be "£1.00"
-        And the order's promotion total should be "-£10.00"
-        And the order's total should be "£51.00"

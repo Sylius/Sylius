@@ -13,24 +13,24 @@ namespace spec\Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class MoneyHelperSpec extends ObjectBehavior
+final class FormatMoneyHelperSpec extends ObjectBehavior
 {
     function let(MoneyFormatterInterface $moneyFormatter)
     {
-        $this->beConstructedWith($moneyFormatter, 'en_US');
+        $this->beConstructedWith($moneyFormatter);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(MoneyHelper::class);
+        $this->shouldHaveType(FormatMoneyHelper::class);
     }
 
     function it_is_a_templating_helper()
@@ -38,16 +38,9 @@ final class MoneyHelperSpec extends ObjectBehavior
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_implements_money_helper_interface()
+    function it_implements_format_money_helper_interface()
     {
-        $this->shouldImplement(MoneyHelperInterface::class);
-    }
-
-    function it_formats_money_using_default_locale_if_not_given(MoneyFormatterInterface $moneyFormatter)
-    {
-        $moneyFormatter->format(312, 'USD', 'en_US')->willReturn('$3.12');
-
-        $this->formatAmount(312, 'USD')->shouldReturn('$3.12');
+        $this->shouldImplement(FormatMoneyHelperInterface::class);
     }
 
     function it_formats_money_using_given_currency_and_locale(MoneyFormatterInterface $moneyFormatter)

@@ -67,6 +67,10 @@ sylius_grid:
                     sortable: total
                     options:
                         template: "@SyliusAdmin/Order/Grid/Field/total.html.twig"
+                currencyCode:
+                    type: string
+                    label: sylius.ui.currency
+                    sortable: ~
             filters:
                 number:
                     type: string

@@ -146,6 +146,14 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getBaseCurrencyOrderTotal()
+    {
+        return $this->getBaseTotalFromString($this->getElement('base_order_total')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addNotes($notes)
     {
         $this->getElement('extra_notes')->setValue($notes);
@@ -272,6 +280,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'items_table' => '#sylius-order',
             'locale' => '#sylius-order-locale-name',
             'order_total' => 'td:contains("Total")',
+            'base_order_total' => '#base-total',
             'payment_method' => '#payment-method',
             'payment_step_label' => '.steps a:contains("Payment")',
             'product_row' => 'tbody tr:contains("%name%")',
@@ -360,6 +369,18 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     private function getTotalFromString($total)
     {
         $total = str_replace('Total:', '', $total);
+
+        return $this->getPriceFromString($total);
+    }
+
+    /**
+     * @param string $total
+     *
+     * @return int
+     */
+    private function getBaseTotalFromString($total)
+    {
+        $total = str_replace('Total in base currency:', '', $total);
 
         return $this->getPriceFromString($total);
     }

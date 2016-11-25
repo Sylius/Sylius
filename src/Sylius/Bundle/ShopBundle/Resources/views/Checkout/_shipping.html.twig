@@ -1,3 +1,5 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 {% for shipment in order.shipments %}
     <div class="ui large icon message">
         <i class="truck icon"></i>
@@ -9,4 +11,4 @@
         </div>
     </div>
 {% endfor %}
-<p id="shipping-total" style="font-size: 1.5em;">{{ 'sylius.ui.total'|trans}} : {{ order.getShippingTotal|sylius_price(order.currencyCode) }}</p>
+<p id="shipping-total" style="font-size: 1.5em;">{{ 'sylius.ui.total'|trans}} : {{ money.convertAndFormat(order.getShippingTotal) }}</p>

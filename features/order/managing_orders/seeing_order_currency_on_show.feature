@@ -42,25 +42,3 @@ Feature: Seeing the currency an order has been placed in on it's details page
         And the order's tax total should be "$0.50"
         And the order's promotion total should be "-$5.00"
         And the order's total should be "$25.50"
-
-    @ui
-    Scenario: All prices are in the currency of customer's chosing at the time of placing the order
-        Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
-        And the customer has chosen to order in the "GBP" currency
-        And the customer bought a single "Angel T-Shirt"
-        And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "British Virgin Islands"
-        And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "British Virgin Islands"
-        And the customer chose "DHL" shipping method with "Cash on Delivery" payment
-        When I view the summary of the order "#00000666"
-        And I check "Angel T-Shirt" data
-        Then its discounted unit price should be £10.00
-        And its unit price should be £20.00
-        And its subtotal should be £10.00
-        And its discount should be -£5.00
-        And its tax should be £0.50
-        And its total should be £5.50
-        And the order's items total should be "£5.50"
-        And the order's shipping total should be "£20.00"
-        And the order's tax total should be "£0.50"
-        And the order's promotion total should be "-£5.00"
-        And the order's total should be "£25.50"

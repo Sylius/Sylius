@@ -1,1 +1,3 @@
-{{ data.total|sylius_price(data.currencyCode) }}
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
+{{ money.format(data.total, data.currencyCode) }}
