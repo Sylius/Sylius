@@ -175,15 +175,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)"$/
-     */
-    public function iAddTheActionConfiguredWithAmount($actionType, $amount)
-    {
-        $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOption('Base amount', $amount);
-    }
-
-    /**
      * @When /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
     public function iAddTheActionConfiguredWithAmountForChannel($actionType, $amount, $channelName)
@@ -201,41 +192,11 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^it is(?:| also) configured with base amount of "(?:€|£|\$)([^"]+)"$/
-     */
-    public function itIsConfiguredWithBaseAmount($amount)
-    {
-        $this->createPage->fillActionOption('Base amount', $amount);
-    }
-
-    /**
      * @When /^it is(?:| also) configured with amount of "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
     public function itIsConfiguredWithAmountForChannel($amount, $channelName)
     {
         $this->createPage->fillActionOptionForChannel($channelName, 'Amount', $amount);
-    }
-
-    /**
-     * @When /^it is(?:| also) configured with "([^"]+)" amount of "(?:€|£|\$)([^"]+)"$/
-     */
-    public function itIsConfiguredWithAmount($currencyCode, $amount)
-    {
-        if ($this->currencyProvider->getDefaultCurrencyCode() === $currencyCode) {
-            $this->itIsConfiguredWithBaseAmount($amount);
-
-            return;
-        }
-
-        $this->createPage->fillActionOption($currencyCode, $amount);
-    }
-
-    /**
-     * @When /^I specify that this action should be applied to items with price greater then "(?:€|£|\$)([^"]+)"$/
-     */
-    public function iAddAMinPriceFilterRange($minimum)
-    {
-        $this->createPage->fillActionOption('Min', $minimum);
     }
 
     /**
@@ -247,28 +208,11 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When /^I specify that this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
-     */
-    public function iAddAMaxPriceFilterRange($maximum)
-    {
-        $this->createPage->fillActionOption('Max', $maximum);
-    }
-
-    /**
      * @When /^I specify that on "([^"]+)" channel this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddAMaxPriceFilterRangeForChannel($channelName, $maximum)
     {
         $this->createPage->fillActionOptionForChannel($channelName, 'Max', $maximum);
-    }
-
-    /**
-     * @When /^I specify that this action should be applied to items with price between "(?:€|£|\$)([^"]+)" and "(?:€|£|\$)([^"]+)"$/
-     */
-    public function iAddAMinMaxPriceFilterRange($minimum, $maximum)
-    {
-        $this->iAddAMinPriceFilterRange($minimum);
-        $this->iAddAMaxPriceFilterRange($maximum);
     }
 
     /**
@@ -290,17 +234,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the :actionType action configured with a percentage value of :percentage%
-     * @Given I add the :actionType action configured without a percentage value
-     */
-    public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
-    {
-        $this->createPage->addAction($actionType);
-        $this->createPage->fillActionOption('Percentage', $percentage);
-    }
-
-    /**
-     * @Given I add the :actionType action configured with a percentage value of :percentage% for :channelName channel
+     * @Given /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+" channel)$/
      * @Given I add the :actionType action configured without a percentage value for :channelName channel
      */
     public function iAddTheActionConfiguredWithAPercentageValueForChannel($actionType, $percentage = null, $channelName)

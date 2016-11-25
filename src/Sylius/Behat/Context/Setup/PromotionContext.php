@@ -250,19 +250,24 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^(this promotion) gives ("(?:€|£|\$)[^"]+") in base currency or ("(?:€|£|\$)[^"]+") in "([^"]+)" discount to every order$/
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") discount to every order in the ("[^"]+" channel) and ("(?:€|£|\$)[^"]+") discount to every order in the ("[^"]+" channel)$/
      */
-    public function itGivesFixedDiscountInDifferentCurrencyToEveryOrder(
+    public function thisPromotionGivesDiscountToEveryOrderInTheChannelAndDiscountToEveryOrderInTheChannel(
         PromotionInterface $promotion,
-        $baseDiscount,
-        $currencyDiscount,
-        $currencyCode
+        $firstChannelDiscount,
+        ChannelInterface $firstChannel,
+        $secondChannelDiscount,
+        ChannelInterface $secondChannel
     ) {
-        $this->createFixedPromotion($promotion, $baseDiscount, [
-            'amounts' => [
-                $currencyCode => $currencyDiscount,
-            ],
-        ]);
+        /** @var PromotionActionInterface $action */
+        $action = $this->actionFactory->createFixedDiscount($firstChannelDiscount, $firstChannel->getCode());
+        $action->setConfiguration(array_merge($action->getConfiguration(), [$secondChannel->getCode() => ['amount' => $secondChannelDiscount]]));
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -507,7 +512,9 @@ final class PromotionContext implements Context
         TaxonInterface $taxon,
         $targetAmount
     ) {
-        $freeShippingAction = $this->actionFactory->createShippingPercentageDiscount(1);
+        $channelCode = $this->sharedStorage->get('channel')->getCode();
+
+        $freeShippingAction = $this->actionFactory->createShippingPercentageDiscount(1, $channelCode);
         $promotion->addAction($freeShippingAction);
 
         $rule = $this->ruleFactory->createItemTotal($targetAmount);
@@ -711,11 +718,19 @@ final class PromotionContext implements Context
      * @param PromotionInterface $promotion
      * @param int $discount
      * @param array $configuration
-     * @param PromotionRuleInterface $rule
+     * @param PromotionRuleInterface|null $rule
+     * @param ChannelInterface|null $channel
      */
-    private function createFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
-    {
-        $this->persistPromotion($promotion, $this->actionFactory->createFixedDiscount($discount, $this->sharedStorage->get('channel')->getCode()), $configuration, $rule);
+    private function createFixedPromotion(
+        PromotionInterface $promotion,
+        $discount,
+        array $configuration = [],
+        PromotionRuleInterface $rule = null,
+        ChannelInterface $channel = null
+    ) {
+        $channelCode = (null !== $channel) ? $channel->getCode() : $this->sharedStorage->get('channel')->getCode();
+
+        $this->persistPromotion($promotion, $this->actionFactory->createFixedDiscount($discount, $channelCode), $configuration, $rule);
     }
 
     /**

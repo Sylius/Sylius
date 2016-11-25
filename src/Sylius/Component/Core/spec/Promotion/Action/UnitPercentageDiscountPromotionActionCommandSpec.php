@@ -72,7 +72,7 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $order->getItems()->willReturn($originalItems);
         $originalItems->toArray()->willReturn([$orderItem1]);
 
-        $priceRangeFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
+        $priceRangeFilter->filter([$orderItem1], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem1]);
         $taxonFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
         $productFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
 
