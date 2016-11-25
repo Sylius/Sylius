@@ -60,6 +60,7 @@ security:
             logout:
                 path: sylius_shop_logout
                 target: sylius_shop_login
+                invalidate_session: false
             anonymous: true
 
         dev:

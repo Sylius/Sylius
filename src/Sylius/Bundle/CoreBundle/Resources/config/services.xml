@@ -109,5 +109,10 @@
         </service>
 
         <service id="sylius.customer_ip_assigner" class="Sylius\Bundle\CoreBundle\Assigner\CustomerIpAssigner" />
+
+        <service id="sylius.security.user_impersonator" class="Sylius\Bundle\CoreBundle\Security\UserImpersonator" public="false">
+            <argument type="service" id="session" />
+            <argument type="string">shop</argument>
+        </service>
     </services>
 </container>

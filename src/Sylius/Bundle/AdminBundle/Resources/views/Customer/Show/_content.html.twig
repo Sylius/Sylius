@@ -18,10 +18,13 @@
                     {{ 'sylius.ui.subscribed_to_newsletter'|trans }}
                 </div>
                 {% if customer.user is not null %}
+                    {% set user = customer.user %}
                     <div id="verified-email">
-                        <i class="{{ customer.user.verified ? 'green checkmark' : 'red remove' }} icon"></i>
+                        <i class="{{ user.verified ? 'green checkmark' : 'red remove' }} icon"></i>
                         {{ 'sylius.ui.email_verified'|trans }}
                     </div>
+                    <br />
+                    {{ buttons.default(path('sylius_admin_impersonate_user', {'username': user.emailCanonical}), 'sylius.ui.impersonate', 'impersonate', 'unhide', 'blue') }}
                 {% endif %}
                 {% if customer.defaultAddress is not null %}
                     <br />
