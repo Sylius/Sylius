@@ -110,12 +110,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function getLeaves(TaxonInterface $parentTaxon = null);
 
     /**
-     * @param TaxonInterface $taxon
-     * @param int $expectedPosition
-     */
-    public function waitForTaxonRelocation(TaxonInterface $taxon, $expectedPosition);
-
-    /**
      * @param string $locale
      */
     public function activateLanguageTab($locale);

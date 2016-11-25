@@ -20,7 +20,7 @@
                         <a class="ui icon button sylius-taxon-move-up" data-url="{{ path('sylius_admin_ajax_taxon_move', { id: taxon.id }) }}" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
                             <i class="icon arrow up"></i>
                         </a>
-                        <a class="ui icon button sylius-taxon-move-down" data-url="move taxon" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
+                        <a class="ui icon button sylius-taxon-move-down" data-url="{{ path('sylius_admin_ajax_taxon_move', { id: taxon.id }) }}" data-id="{{ taxon.id }}" data-position="{{ taxon.position }}">
                             <i class="icon arrow down"></i>
                         </a>
                     </div>

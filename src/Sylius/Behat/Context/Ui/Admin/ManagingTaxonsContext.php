@@ -187,6 +187,14 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @Given /^I move down ("[^"]+" taxon)$/
+     */
+    public function iMoveDownTaxon(TaxonInterface $taxon)
+    {
+        $this->createPage->moveDown($taxon);
+    }
+
+    /**
      * @Given /^I choose ("[^"]+" as a parent taxon)$/
      */
     public function iChooseAsAParentTaxon(TaxonInterface $taxon)
@@ -557,7 +565,6 @@ final class ManagingTaxonsContext implements Context
     public function theFirstTaxonOnTheListShouldBe(TaxonInterface $taxon)
     {
         $this->createPage->open();
-        $this->createPage->waitForTaxonRelocation($taxon, 0);
 
         Assert::same(
             $this->createPage->getLeafNameFromPosition(0),
