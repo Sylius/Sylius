@@ -768,6 +768,7 @@ EOT;
             '_controller' => 'sylius.controller.product:deleteAction',
             '_sylius'     => [
                 'permission' => false,
+                'csrf_protection' => false
             ],
         ];
         $routeFactory->createRoute('/products/{id}', $deleteDefaults, [], [], '', [], ['DELETE'])->willReturn($deleteRoute);
