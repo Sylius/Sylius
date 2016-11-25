@@ -11,9 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter;
 
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonCodeChoiceType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -23,32 +22,17 @@ use Symfony\Component\Form\FormBuilderInterface;
 class TaxonFilterConfigurationType extends AbstractType
 {
     /**
-     * @var DataTransformerInterface
-     */
-    private $taxonsToCodesTransformer;
-
-    /**
-     * @param DataTransformerInterface $taxonsToCodesTransformer
-     */
-    public function __construct(DataTransformerInterface $taxonsToCodesTransformer)
-    {
-        $this->taxonsToCodesTransformer = $taxonsToCodesTransformer;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxons', TaxonChoiceType::class, [
+            ->add('taxons', TaxonCodeChoiceType::class, [
                 'label' => 'sylius.form.promotion_filter.taxon.taxons',
                 'multiple' => true,
                 'required' => false,
             ])
         ;
-
-        $builder->get('taxons')->addModelTransformer($this->taxonsToCodesTransformer);
     }
 
     /**
