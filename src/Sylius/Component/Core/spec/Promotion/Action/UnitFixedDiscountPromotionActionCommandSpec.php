@@ -71,16 +71,15 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
-        $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
         $order->getChannel()->willReturn($channel);
 
-        $priceRangeFilter->filter([$orderItem], ['WEB_US' => ['amount' => 500]])->willReturn([$orderItem]);
-        $taxonFilter->filter([$orderItem], ['WEB_US' => ['amount' => 500]])->willReturn([$orderItem]);
-        $productFilter->filter([$orderItem], ['WEB_US' => ['amount' => 500]])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
+        $taxonFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
+        $productFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
 
         $orderItem->getQuantity()->willReturn(2);
         $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
@@ -143,16 +142,15 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
-        $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB_US');
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
         $order->getChannel()->willReturn($channel);
 
-        $priceRangeFilter->filter([$orderItem], ['WEB_US' => ['amount' => 1000]])->willReturn([$orderItem]);
-        $taxonFilter->filter([$orderItem], ['WEB_US' => ['amount' => 1000]])->willReturn([$orderItem]);
-        $productFilter->filter([$orderItem], ['WEB_US' => ['amount' => 1000]])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem], ['amount' => 1000])->willReturn([$orderItem]);
+        $taxonFilter->filter([$orderItem], ['amount' => 1000])->willReturn([$orderItem]);
+        $productFilter->filter([$orderItem], ['amount' => 1000])->willReturn([$orderItem]);
 
         $orderItem->getQuantity()->willReturn(2);
         $orderItem->getUnits()->willReturn(new ArrayCollection([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));

@@ -13,8 +13,8 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -66,11 +66,13 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         OrderItemUnitInterface $unit2,
         PromotionInterface $promotion
     ) {
-        $order->getItems()->willReturn($originalItems);
         $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $order->getItems()->willReturn($originalItems);
         $originalItems->toArray()->willReturn([$orderItem1]);
 
-        $priceRangeFilter->filter([$orderItem1], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem1]);
+        $priceRangeFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
         $taxonFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
         $productFilter->filter([$orderItem1], ['percentage' => 0.2])->willReturn([$orderItem1]);
 
@@ -100,7 +102,20 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
 
-        $this->execute($order, ['percentage' => 0.2], $promotion);
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion);
+    }
+
+    function it_does_nothing_if_percentage_or_order_channel_is_not_configured(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        PromotionInterface $promotion
+    ) {
+        $order->getCurrencyCode()->willReturn('USD');
+        $order->getChannel()->willReturn($channel);
+
+        $order->getItems()->shouldNotBeCalled();
+
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion);
     }
 
     function it_throws_an_exception_if_passed_subject_is_not_order(

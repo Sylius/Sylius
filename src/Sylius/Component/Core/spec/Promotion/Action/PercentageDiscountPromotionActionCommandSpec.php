@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -49,6 +50,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_uses_distributor_and_applicator_to_execute_promotion_action(
+        ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
@@ -59,6 +61,9 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->countItems()->willReturn(2);
         $order->getItems()->willReturn([$firstItem, $secondItem]);
 
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
         $firstItem->getTotal()->willReturn(200);
         $secondItem->getTotal()->willReturn(800);
 
@@ -67,7 +72,7 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $distributor->distribute([200, 800], -1000)->willReturn([-200, -800]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
 
-        $this->execute($order, ['percentage' => 0.1], $promotion);
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.1]], $promotion);
     }
 
     function it_does_nothing_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)
@@ -75,31 +80,59 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->shouldNotBeCalled();
 
-        $this->execute($order, ['percentage' => 0.1], $promotion);
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.1]], $promotion);
     }
 
     function it_does_nothing_if_adjustment_amount_would_be_0(
-        ProportionalIntegerDistributorInterface $distributor,
+        ChannelInterface $channel,
         OrderInterface $order,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        ProportionalIntegerDistributorInterface $distributor
     ) {
         $order->countItems()->willReturn(0);
+
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
         $order->getPromotionSubjectTotal()->willReturn(0);
         $distributor->distribute(Argument::any())->shouldNotBeCalled();
 
-        $this->execute($order, ['percentage' => 0.1], $promotion);
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.1]], $promotion);
     }
 
-    function it_throws_an_exception_if_configuration_is_invalid(OrderInterface $order, PromotionInterface $promotion)
-    {
+    function it_does_nothing_if_percentage_is_not_configured_for_order_channel(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        PromotionInterface $promotion
+    ) {
+        $order->countItems()->willReturn(1);
+
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $order->getPromotionSubjectTotal()->shouldNotBeCalled();
+
+        $this->execute($order, ['WEB_PL' => ['percentage' => 0.1]], $promotion);
+    }
+
+    function it_throws_an_exception_if_configuration_is_invalid(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        PromotionInterface $promotion
+    ) {
+        $order->countItems()->willReturn(1);
+
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('execute', [$order, [], $promotion])
+            ->during('execute', [$order, ['WEB_US' => []], $promotion])
         ;
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('execute', [$order, ['percentage' => 'string'], $promotion])
+            ->during('execute', [$order, ['WEB_US' => ['percentage' => 'string']], $promotion])
         ;
     }
 

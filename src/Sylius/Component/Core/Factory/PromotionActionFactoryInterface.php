@@ -37,22 +37,25 @@ interface PromotionActionFactoryInterface extends FactoryInterface
 
     /**
      * @param float $percentage
+     * @param string $channelCode
      *
      * @return PromotionActionInterface
      */
-    public function createPercentageDiscount($percentage);
+    public function createPercentageDiscount($percentage, $channelCode);
 
     /**
      * @param float $percentage
+     * @param string $channelCode
      *
      * @return PromotionActionInterface
      */
-    public function createUnitPercentageDiscount($percentage);
+    public function createUnitPercentageDiscount($percentage, $channelCode);
 
     /**
      * @param float $percentage
+     * @param string $channelCode
      *
      * @return PromotionActionInterface
      */
-    public function createShippingPercentageDiscount($percentage);
+    public function createShippingPercentageDiscount($percentage, $channelCode);
 }

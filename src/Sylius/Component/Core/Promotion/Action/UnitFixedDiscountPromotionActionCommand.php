@@ -83,12 +83,9 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
             return;
         }
 
-        $filteredItems = $this->priceRangeFilter->filter(
-            $subject->getItems()->toArray(),
-            array_merge($configuration, ['channel' => $subject->getChannel()])
-        );
-        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
-        $filteredItems = $this->productFilter->filter($filteredItems, $configuration);
+        $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration[$channelCode]);
+        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
+        $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
 
         foreach ($filteredItems as $item) {
             $this->setUnitsAdjustments($item, $amount, $promotion);

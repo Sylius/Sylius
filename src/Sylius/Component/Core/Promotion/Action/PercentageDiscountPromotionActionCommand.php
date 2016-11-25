@@ -59,9 +59,14 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
             return;
         }
 
-        $this->isConfigurationValid($configuration);
+        $channelCode = $subject->getChannel()->getCode();
+        if (!isset($configuration[$channelCode])) {
+            return;
+        }
 
-        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['percentage']);
+        $this->isConfigurationValid($configuration[$channelCode]);
+
+        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration[$channelCode]['percentage']);
         if (0 === $promotionAmount) {
             return;
         }

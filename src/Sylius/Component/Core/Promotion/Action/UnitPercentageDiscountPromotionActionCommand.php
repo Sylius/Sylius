@@ -70,15 +70,17 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        $filteredItems = $this->priceRangeFilter->filter(
-            $subject->getItems()->toArray(),
-            array_merge($configuration, ['channel' => $subject->getChannel()])
-        );
-        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
-        $filteredItems = $this->productFilter->filter($filteredItems, $configuration);
+        $channelCode = $subject->getChannel()->getCode();
+        if (!isset($configuration[$channelCode])) {
+            return;
+        }
+
+        $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration[$channelCode]);
+        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
+        $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
 
         foreach ($filteredItems as $item) {
-            $promotionAmount = (int) round($item->getUnitPrice() * $configuration['percentage']);
+            $promotionAmount = (int) round($item->getUnitPrice() * $configuration[$channelCode]['percentage']);
             $this->setUnitsAdjustments($item, $promotionAmount, $promotion);
         }
     }
