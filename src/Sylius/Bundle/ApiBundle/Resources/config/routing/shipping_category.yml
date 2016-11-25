@@ -30,6 +30,8 @@ sylius_api_shipping_category_delete:
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.shipping_category:deleteAction
+        _sylius:
+            csrf_protection: false
 
 sylius_api_shipping_category_show:
     path: /{id}

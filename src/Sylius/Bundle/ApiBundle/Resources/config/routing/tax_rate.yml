@@ -35,6 +35,7 @@ sylius_api_tax_rate_delete:
         _sylius:
             criteria:
                 code: $code
+            csrf_protection: false
 
 sylius_api_tax_rate_show:
     path: /{code}

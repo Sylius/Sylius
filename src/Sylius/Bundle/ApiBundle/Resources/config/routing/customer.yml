@@ -39,6 +39,8 @@ sylius_api_customer_delete:
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.customer:deleteAction
+        _sylius:
+            csrf_protection: false
 
 sylius_api_customer_order_index:
     path: /{id}/orders/
@@ -51,3 +53,4 @@ sylius_api_customer_order_index:
             criteria: { customer: $id }
             sortable: true
             sorting: { updatedAt: desc }
+            csrf_protection: false

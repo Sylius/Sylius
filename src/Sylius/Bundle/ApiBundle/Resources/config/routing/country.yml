@@ -33,6 +33,7 @@ sylius_api_country_delete:
         _sylius:
             criteria:
                 code: $code
+            csrf_protection: false
 
 sylius_api_country_show:
     path: /{code}

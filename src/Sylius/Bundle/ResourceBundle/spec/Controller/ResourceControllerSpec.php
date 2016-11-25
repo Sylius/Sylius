@@ -1186,6 +1186,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resource->getId()->willReturn(1);
 
         $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
@@ -1233,6 +1234,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resource->getId()->willReturn(1);
 
         $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
@@ -1280,6 +1282,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resource->getId()->willReturn(1);
 
         $configuration->isHtmlRequest()->willReturn(false);
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
@@ -1326,6 +1329,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resource->getId()->willReturn(1);
 
         $configuration->isHtmlRequest()->willReturn(false);
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(true);
@@ -1376,6 +1380,7 @@ final class ResourceControllerSpec extends ObjectBehavior
         $resource->getId()->willReturn(1);
 
         $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->isCsrfProtectionEnabled()->willReturn(true);
 
         $eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->shouldNotBeCalled();

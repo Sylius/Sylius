@@ -24,6 +24,8 @@ sylius_api_channel_delete:
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.channel:deleteAction
+        _sylius:
+            csrf_protection: false
 
 sylius_api_channel_show:
     path: /{id}

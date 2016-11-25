@@ -38,6 +38,7 @@ sylius_api_zone_delete:
         _sylius:
             criteria:
                 code: $code
+            csrf_protection: false
 
 sylius_api_zone_show:
     path: /{code}

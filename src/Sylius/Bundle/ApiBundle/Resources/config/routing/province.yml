@@ -9,6 +9,7 @@ sylius_api_province_delete:
         _sylius:
             criteria:
                 code: $code
+            csrf_protection: false
 
 sylius_api_province_show:
     path: /{code}

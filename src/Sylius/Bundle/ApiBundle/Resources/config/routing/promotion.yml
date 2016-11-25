@@ -27,6 +27,8 @@ sylius_api_promotion_delete:
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.promotion:deleteAction
+        _sylius:
+            csrf_protection: false
 
 sylius_api_promotion_show:
     path: /{id}

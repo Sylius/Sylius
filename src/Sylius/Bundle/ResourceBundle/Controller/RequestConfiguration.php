@@ -600,6 +600,14 @@ class RequestConfiguration
     }
 
     /**
+     * @return bool
+     */
+    public function isCsrfProtectionEnabled()
+    {
+        return $this->parameters->get('csrf_protection', true);
+    }
+
+    /**
      * @param mixed $redirect
      *
      * @return bool
