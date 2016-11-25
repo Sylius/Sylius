@@ -300,6 +300,16 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Given I add the :actionType action configured with a percentage value of :percentage% for :channelName channel
+     * @Given I add the :actionType action configured without a percentage value for :channelName channel
+     */
+    public function iAddTheActionConfiguredWithAPercentageValueForChannel($actionType, $percentage = null, $channelName)
+    {
+        $this->createPage->addAction($actionType);
+        $this->createPage->fillActionOptionForChannel($channelName, 'Percentage', $percentage);
+    }
+
+    /**
      * @Then /^there should be (\d+) promotion(?:|s)$/
      */
     public function thereShouldBePromotion($number)

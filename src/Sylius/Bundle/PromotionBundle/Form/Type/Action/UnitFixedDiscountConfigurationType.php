@@ -15,6 +15,7 @@ use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionFilterCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -37,9 +38,18 @@ class UnitFixedDiscountConfigurationType extends AbstractType
                     new NotBlank(['groups' => ['sylius']]),
                     new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                 ],
+                'currency' => $options['currency'],
             ])
             ->add('filters', PromotionFilterCollectionType::class, ['required' => false])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_promotion_action_unit_fixed_discount_configuration';
     }
 
     /**

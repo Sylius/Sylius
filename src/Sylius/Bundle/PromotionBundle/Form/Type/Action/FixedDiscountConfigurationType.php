@@ -14,6 +14,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -34,8 +35,17 @@ class FixedDiscountConfigurationType extends AbstractType
                     new NotBlank(['groups' => ['sylius']]),
                     new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                 ],
+                'currency' => $options['currency'],
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_promotion_action_fixed_discount_configuration';
     }
 
     /**
