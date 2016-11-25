@@ -13,6 +13,7 @@ sylius:
             postcode: Поштовий індекс
             street: Вулиця
             province: Регіон
+            zone: Зона
         country:
             add_province: Додати регіон
             name: Назва країни

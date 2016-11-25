@@ -13,12 +13,13 @@ sylius:
             postcode: Kod pocztowy
             street: Adres
             province: Województwo
+            zone: Strefa
         country:
             add_province: Dodaj województwo
             name: Nazwa
             provinces: Województwa
             select: Wybierz
-            enabled: Dostępny
+            enabled: Aktywne
         province:
             name: Nazwa
             abbreviation: Skrót

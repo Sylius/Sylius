@@ -13,6 +13,7 @@ sylius:
             postcode: Codi postal
             street: Carrer
             province: Província
+            zone: Zona
         country:
             add_province: Afegeix una província
             name: Nom

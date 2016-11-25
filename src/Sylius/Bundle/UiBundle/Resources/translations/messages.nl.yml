@@ -82,6 +82,7 @@ sylius:
         backorder: Backorder
         backordered: Nabesteld
         balance_due: Nog te betalen
+        base_currency: Standaardvaluta
         bill_to: Factureer naar
         billing_address: Factuuradres
         blocks: Blokken

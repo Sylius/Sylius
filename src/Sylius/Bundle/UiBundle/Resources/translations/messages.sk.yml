@@ -75,6 +75,7 @@ sylius:
         backorder: Predobjednať
         backordered: Predobjednané
         balance_due: Nedoplatok
+        base_currency: Základná mena
         bill_to: Faktúrovať na
         billing_address: Fakturačná adresa
         blocks: Bloky

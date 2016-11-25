@@ -13,6 +13,7 @@ sylius:
             postcode: Kodi postar
             street: Rruga
             province: Rajoni
+            zone: Zona
         country:
             add_province: Shto rajonin
             name: Emri

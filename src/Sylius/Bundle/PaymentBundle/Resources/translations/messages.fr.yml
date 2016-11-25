@@ -32,3 +32,4 @@ sylius:
             gateway: Passerelle
             instructions: Instructions
             name: Nom
+            position: Emplacement

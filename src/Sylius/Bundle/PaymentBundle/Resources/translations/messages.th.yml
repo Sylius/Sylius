@@ -32,3 +32,4 @@ sylius:
             gateway: ช่องทางการชำระเงิน
             instructions: คำแนะนำ
             name: ชื่อ
+            position: ตำแหน่ง

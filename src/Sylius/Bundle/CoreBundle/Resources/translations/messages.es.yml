@@ -135,6 +135,8 @@ sylius:
                 amount: Cantidad
         payment_method:
             channels: Canales
+        product_attribute:
+            position: Posición
     installer:
         extensions:
             header: extensiones

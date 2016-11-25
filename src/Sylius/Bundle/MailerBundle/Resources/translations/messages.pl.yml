@@ -4,7 +4,7 @@
 sylius:
     form:
         email:
-            enabled: Włączone
+            enabled: Aktywne
             subject: Temat
             sender_name: Nazwa nadawcy
             sender_address: Adres nadawcy

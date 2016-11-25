@@ -11,6 +11,7 @@ sylius:
             postcode: 郵便番号
             street: それ以降の住所
             province: 都道府県
+            zone: 対象の地域
         country:
             add_province: 都道府県を設定する
             provinces: 都道府県

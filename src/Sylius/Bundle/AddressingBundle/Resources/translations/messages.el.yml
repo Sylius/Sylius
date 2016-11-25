@@ -12,6 +12,7 @@ sylius:
             postcode: Ταχ. Κώδικας
             street: Οδός
             province: Επαρχία
+            zone: Ζώνη
         country:
             add_province: Προσθήκη επαρχίας
             name: Ονομασία

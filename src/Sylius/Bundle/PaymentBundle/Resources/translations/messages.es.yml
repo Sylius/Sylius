@@ -32,3 +32,4 @@ sylius:
             gateway: Puerta de enlace
             instructions: Instrucciones
             name: Nombre
+            position: Posición

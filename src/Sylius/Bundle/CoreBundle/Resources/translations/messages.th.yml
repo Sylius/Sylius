@@ -135,6 +135,8 @@ sylius:
                 amount: ยอดเงิน
         payment_method:
             channels: ช่องทางจำหน่าย
+        product_attribute:
+            position: ตำแหน่ง
     installer:
         extensions:
             header: ส่วนขยาย

@@ -82,6 +82,7 @@ sylius:
         backorder: สั่งซื้อเมื่อมีของ
         backordered: ค้างส่ง
         balance_due: ยอดคงเหลือ
+        base_currency: ฐานสกุลเงิน
         bill_to: การเรียกเก็บเงิน
         billing_address: ที่อยู่สำหรับออกใบเสร็จ
         blocks: บล็อก
@@ -564,6 +565,7 @@ sylius:
         placed_at: วันที่
         please_sign_in: โปรดเข้าสู่ระบบ
         postcode: รหัสไปรษณีย์
+        position: ตำแหน่ง
         powered_by: "ขับเคลื่อน\nโดย"
         preferences: การตั้งค่า
         presentation: ผู้ใช้มองเห็น

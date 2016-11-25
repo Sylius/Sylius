@@ -13,6 +13,7 @@ sylius:
             postcode: CAP
             street: Indirizzo
             province: Provincia
+            zone: Zona
         country:
             add_province: Aggiungi provincia
             name: Nome

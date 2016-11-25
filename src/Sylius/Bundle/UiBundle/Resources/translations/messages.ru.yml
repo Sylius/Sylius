@@ -75,6 +75,7 @@ sylius:
         back_to_details: Вернуться к деталям
         backorder: Не выполнен
         balance_due: Сумма к оплате
+        base_currency: Базовая валюта
         bill_to: Адрес для оформления счета
         billing_address: Адрес для выставления счета
         blocks: Блоки

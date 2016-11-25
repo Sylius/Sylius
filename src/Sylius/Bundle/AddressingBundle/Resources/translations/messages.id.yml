@@ -13,6 +13,7 @@ sylius:
             postcode: Kode pos
             street: Alamat
             province: Provinsi
+            zone: Zona
         country:
             add_province: Tambah Provinsi
             name: Nama

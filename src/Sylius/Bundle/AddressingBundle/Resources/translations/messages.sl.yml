@@ -13,6 +13,7 @@ sylius:
             postcode: Poštna številka
             street: Ulica
             province: Regija
+            zone: Cona
         country:
             add_province: Dodaj provinco
             name: Ime

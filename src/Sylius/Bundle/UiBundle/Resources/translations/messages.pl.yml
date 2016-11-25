@@ -75,6 +75,7 @@ sylius:
         back_to_store: Powrót do sklepu
         backorder: Zamówiony
         balance_due: Saldo do zapłaty
+        base_currency: Waluta podstawowa
         bill_to: Rachunek dla
         billing_address: Adres do rachunku
         blocks: Bloki
@@ -270,7 +271,7 @@ sylius:
         emails: Adresy email
         empty: Brak
         enable: Włącz
-        enabled: Włączone
+        enabled: Aktywne
         end_date: Data zakończenia
         ends_at: Data zakończenia
         ends_with: Kończy się na

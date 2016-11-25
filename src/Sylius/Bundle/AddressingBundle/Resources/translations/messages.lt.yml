@@ -13,6 +13,7 @@ sylius:
             postcode: Pašto kodas
             street: Gatvė
             province: Provincija
+            zone: Zona
         country:
             add_province: Pridėti provinciją
             name: Pavadinimas

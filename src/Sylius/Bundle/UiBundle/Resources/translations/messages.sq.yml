@@ -60,6 +60,7 @@ sylius:
         back: Ktheu prapa
         backorder: Prenotim porosie
         balance_due: Pagesa e pritur
+        base_currency: Valuta baze
         bill_to: Faturoje për
         billing_address: Adresa e faturimit
         blocks: Blloqet
