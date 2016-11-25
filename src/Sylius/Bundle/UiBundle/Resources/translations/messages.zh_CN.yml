@@ -63,6 +63,7 @@ sylius:
         backorder: 延期交货
         backordered: 未出货订单
         balance_due: 差额
+        base_currency: 基础货币
         bill_to: 收票人
         billing_address: 账单地址
         blocks: 块

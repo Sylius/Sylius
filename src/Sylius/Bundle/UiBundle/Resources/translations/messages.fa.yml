@@ -72,6 +72,7 @@ sylius:
         backorder: پیش خرید
         backordered: سفارش برگشتی
         balance_due: دلیل موازنه
+        base_currency: ارز پایه
         bill_to: پرداخت کننده
         billing_address: مشخصات پرداخت کننده
         blocks: بلاک ها

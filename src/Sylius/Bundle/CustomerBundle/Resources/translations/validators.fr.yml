@@ -22,6 +22,8 @@ sylius:
             unique: Cet e-mail est déjà utilisé.
             registered: Cet e-mail est déjà utilisé, veuillez vous connecter ou procéder à la réinitialisation du mot de passe oublié.
     customer_group:
+        code:
+            unique: Le code de groupe client doit être unique.
         name:
             max: Nom de groupe de client ne doit pas être avoir plus de {{ limit }} caractère(s).
             min: Nom de groupe de client doit avoir au moins {{ limit }} caractères.

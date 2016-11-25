@@ -82,6 +82,7 @@ sylius:
         backorder: Backorder
         backordered: Backordered
         balance_due: Saldo devedor
+        base_currency: Moeda base
         bill_to: Faturar a
         billing_address: Endereço de faturação
         blocks: Blocos
@@ -426,6 +427,7 @@ sylius:
         place_order: Fazer pedido
         please_sign_in: Por favor, inicie a sessão
         postcode: Código postal
+        position: Posição
         powered_by: Criado por
         preferences: Preferências
         presentation: Apresentação

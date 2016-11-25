@@ -82,6 +82,7 @@ sylius:
         backorder: Rupture de stock
         backordered: Rupture de stock
         balance_due: Solde à payer
+        base_currency: Devise de référence
         bill_to: Adresse de facturation
         billing_address: Adresse de facturation
         blocks: Blocs
@@ -548,6 +549,7 @@ sylius:
         placed_at: Effectuée le
         please_sign_in: Veuillez vous connecter
         postcode: Code postal
+        position: Emplacement
         powered_by: Propulsé par
         preferences: Préferences
         presentation: Présentation

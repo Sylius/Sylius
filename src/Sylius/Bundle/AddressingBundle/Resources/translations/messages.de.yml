@@ -13,6 +13,7 @@ sylius:
             postcode: PLZ
             street: Straße
             province: Bundesland
+            zone: Versandgebiet
         country:
             add_province: Bundesland hinzufügen
             name: Name

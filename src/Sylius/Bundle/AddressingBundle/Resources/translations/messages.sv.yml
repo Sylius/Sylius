@@ -13,6 +13,7 @@ sylius:
             postcode: Postnummer
             street: Gatuadress
             province: Län
+            zone: Zon
         country:
             add_province: Lägg till provins
             name: Namn

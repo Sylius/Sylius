@@ -13,6 +13,7 @@ sylius:
             postcode: Code postal
             street: Adresse
             province: Région
+            zone: Zone
         country:
             add_province: Ajouter une région
             name: Nom

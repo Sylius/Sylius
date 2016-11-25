@@ -70,6 +70,7 @@ sylius:
         backorder: Preordine
         backordered: Ordine arretrato
         balance_due: Saldo dovuto
+        base_currency: Valuta base
         bill_to: Fatturare a
         billing_address: Indirizzo di fatturazione
         blocks: Blocchi

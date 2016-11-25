@@ -82,6 +82,7 @@ sylius:
         backorder: Lieferrückstand
         backordered: Wird nachgeliefert
         balance_due: Zahlung fällig
+        base_currency: Basis-Währung
         bill_to: Rechnung an
         billing_address: Rechnungsadresse
         blocks: Blöcke
@@ -560,6 +561,7 @@ sylius:
         placed_at: Bestellt am
         please_sign_in: Bitte anmelden
         postcode: PLZ
+        position: Position
         powered_by: Powered by
         preferences: Einstellungen
         presentation: Präsentation

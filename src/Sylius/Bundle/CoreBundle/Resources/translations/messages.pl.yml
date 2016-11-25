@@ -42,7 +42,7 @@ sylius:
             file: Zdjęcie
         locale:
             code: Kod
-            enabled: Włączone
+            enabled: Aktywne
         order_filter:
             created_at_from: Stworzony po
             created_at_to: Stworzony przed
@@ -63,7 +63,7 @@ sylius:
             variant_selection_method: Metody wyboru wariantu
             main_taxon: Główne grupy
             channels: Kanały
-            enabled: Włączone
+            enabled: Aktywne
         product_filter:
             name: Nazwa
             code: Kod

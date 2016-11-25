@@ -27,6 +27,7 @@ sylius:
         available_on: На разположение на
         back: Обратно
         balance_due: Неизплатените суми
+        base_currency: Основна валута
         blocks: Блокове
         browse_products: Преглед на продуктите
         build: Изгради

@@ -13,6 +13,7 @@ sylius:
             postcode: Postcode
             street: Straat
             province: Provincie
+            zone: Zone
         country:
             add_province: Provincie toevoegen
             name: Naam

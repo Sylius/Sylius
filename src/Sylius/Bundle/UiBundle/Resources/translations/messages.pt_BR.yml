@@ -75,6 +75,7 @@ sylius:
         backorder: Devolução
         backordered: Devolução
         balance_due: Saldo devedor
+        base_currency: Moeda base
         bill_to: Conta para
         billing_address: Endereço de cobrança
         blocks: Blocos

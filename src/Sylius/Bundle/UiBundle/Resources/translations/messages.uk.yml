@@ -82,6 +82,7 @@ sylius:
         backorder: Звільняється
         backordered: Попередньо замовлено
         balance_due: Сума до сплати
+        base_currency: Основна валюта
         bill_to: Для надсилання рахунків
         billing_address: Адреса для рахунків
         blocks: Блоки

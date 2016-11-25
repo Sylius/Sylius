@@ -13,6 +13,7 @@ sylius:
             postcode: PSČ
             street: Ulica
             province: Provincia
+            zone: Zóna
         country:
             add_province: Pridať provinciu
             name: Názov

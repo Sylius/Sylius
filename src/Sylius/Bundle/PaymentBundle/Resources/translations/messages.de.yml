@@ -32,3 +32,4 @@ sylius:
             gateway: Schnittstelle
             instructions: Anweisungen
             name: Name
+            position: Position

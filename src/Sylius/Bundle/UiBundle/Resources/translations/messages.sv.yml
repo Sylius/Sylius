@@ -62,6 +62,7 @@ sylius:
         back_to_store: Tillbaka till butik
         backordered: Restnoterad
         balance_due: Betalning förfaller
+        base_currency: Basvaluta
         bill_to: Fakturera till
         billing_address: Faktureringsadress
         blocks: Block

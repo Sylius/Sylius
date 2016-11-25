@@ -13,6 +13,7 @@ sylius:
             postcode: کد پستی
             street: خیابان
             province: استان
+            zone: منطقه
         country:
             add_province: افزودن استان
             name: نام

@@ -13,6 +13,7 @@ sylius:
             postcode: รหัสไปรษณีย์
             street: ที่อยู่
             province: จังหวัด
+            zone: โซน
         country:
             add_province: เพิ่มจังหวัด
             name: ชื่อ

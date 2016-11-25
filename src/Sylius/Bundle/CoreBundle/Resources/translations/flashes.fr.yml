@@ -19,3 +19,5 @@ sylius:
         failed: Votre paiement a été refusé.
         unknown: Erreur de paiement inconnue.
         out_of_stock: Il ne reste que %quantity% %name% en stock.
+    product_variant:
+        generation_completed: Les variantes de produit ont été générées avec succès.

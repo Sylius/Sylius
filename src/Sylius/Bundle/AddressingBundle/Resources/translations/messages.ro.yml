@@ -13,6 +13,7 @@ sylius:
             postcode: Cod poștal
             street: Adresă
             province: Județ
+            zone: Zonă
         country:
             add_province: Adăugare județ
             name: Nume

@@ -13,6 +13,7 @@ sylius:
             postcode: Posta kodu
             street: Sokak
             province: Eyalet
+            zone: Bölge
         country:
             add_province: Bölge ekleme
             name: Ülke adı
