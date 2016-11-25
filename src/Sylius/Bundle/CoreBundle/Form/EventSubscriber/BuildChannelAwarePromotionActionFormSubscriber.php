@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotionActionFormSubscriber
+final class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotionActionFormSubscriber
 {
     /**
      * @var ChannelRepositoryInterface
@@ -50,26 +50,43 @@ class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotionActio
     {
         $model = $this->registry->get($registryIdentifier);
 
+        $configuration = $model->getConfigurationFormType();
+        if (null === $configuration) {
+            return;
+        }
+
         $configurationCollection = $this->factory->createNamed('configuration', FormType::class, [], [
             'compound' => true,
             'auto_initialize' => false,
         ]);
 
-        if (null === $configuration = $model->getConfigurationFormType()) {
-            return;
-        }
-
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {
-            $config = ['auto_initialize' => false, 'label' => $channel->getName()];
-            if (false === strpos($configuration, 'percentage')) {
-                $config['currency'] = $channel->getBaseCurrency()->getCode();
-            }
-
-            $configurationField = $this->factory->createNamed($channel->getCode(), $configuration, $data, $config);
-            $configurationCollection->add($configurationField);
+            $configurationCollection->add($this->createConfigurationFieldForChannel($channel, $configuration, $data));
         }
 
         $form->add($configurationCollection);
+    }
+
+    /**
+     * @param ChannelInterface $channel
+     * @param string $configuration
+     * @param array $data
+     *
+     * @return FormInterface
+     */
+    private function createConfigurationFieldForChannel(
+        ChannelInterface $channel,
+        $configuration,
+        array $data
+    ) {
+        $config = ['auto_initialize' => false, 'label' => $channel->getName()];
+
+        // this is really temporary solution (because of generic subscriber)
+        if (false === strpos($configuration, 'percentage')) {
+            $config['currency'] = $channel->getBaseCurrency()->getCode();
+        }
+
+        return $this->factory->createNamed($channel->getCode(), $configuration, $data, $config);
     }
 }

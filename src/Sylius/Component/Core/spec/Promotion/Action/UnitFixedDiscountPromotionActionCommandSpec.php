@@ -77,7 +77,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
         $order->getChannel()->willReturn($channel);
 
-        $priceRangeFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem], ['amount' => 500, 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
 
@@ -148,7 +148,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
         $order->getChannel()->willReturn($channel);
 
-        $priceRangeFilter->filter([$orderItem], ['amount' => 1000])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem], ['amount' => 1000, 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['amount' => 1000])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['amount' => 1000])->willReturn([$orderItem]);
 
