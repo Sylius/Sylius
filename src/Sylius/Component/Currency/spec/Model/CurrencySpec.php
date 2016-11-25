@@ -44,17 +44,6 @@ final class CurrencySpec extends ObjectBehavior
         $this->getCode()->shouldReturn('RSD');
     }
 
-    function it_has_no_exchange_rate_by_default()
-    {
-        $this->getExchangeRate()->shouldReturn(null);
-    }
-
-    function its_exchange_rate_is_mutable()
-    {
-        $this->setExchangeRate(1.1275);
-        $this->getExchangeRate()->shouldReturn(1.1275);
-    }
-
     function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType(\DateTime::class);

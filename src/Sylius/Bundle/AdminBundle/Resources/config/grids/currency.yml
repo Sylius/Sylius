@@ -15,9 +15,6 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
-                exchangeRate:
-                    type: string
-                    label: sylius.ui.exchange_rate
             filters:
                 code:
                     type: string

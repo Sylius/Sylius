@@ -62,7 +62,7 @@ class UniqueCurrencyPairValidator extends ConstraintValidator
      */
     private function isCurrencyPairUnique(CurrencyInterface $baseCurrency, CurrencyInterface $targetCurrency)
     {
-        $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($baseCurrency, $targetCurrency);
+        $exchangeRate = $this->exchangeRateRepository->findOneWithCurrencyPair($baseCurrency->getCode(), $targetCurrency->getCode());
 
         return null === $exchangeRate;
     }

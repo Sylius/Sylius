@@ -1,7 +1,6 @@
 {
     "id": @integer@,
     "code": "USD",
-    "exchange_rate": 1,
     "created_at": "@string@.isDateTime()",
     "updated_at": "@string@.isDateTime()"
 }

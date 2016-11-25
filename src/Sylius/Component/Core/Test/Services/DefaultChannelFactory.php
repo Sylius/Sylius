@@ -132,7 +132,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         if (null === $currency) {
             $currency = $this->currencyFactory->createNew();
             $currency->setCode($currencyCode);
-            $currency->setExchangeRate(1.00);
 
             $this->currencyRepository->add($currency);
         }

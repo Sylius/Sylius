@@ -11,7 +11,6 @@ Feature: Adding a new currency
     Scenario: Adding a new currency
         Given I want to add a new currency
         When I choose "Euro"
-        And I specify its exchange rate as 0.5
         And I add it
         Then I should be notified that it has been successfully created
         And the currency "Euro" should appear in the store

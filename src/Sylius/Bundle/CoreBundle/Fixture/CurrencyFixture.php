@@ -53,8 +53,6 @@ final class CurrencyFixture extends AbstractFixture
 
             $currency->setCode($currencyCode);
 
-            $currency->setExchangeRate(mt_rand(0, 200) / 100);
-
             $this->currencyManager->persist($currency);
         }
 
