@@ -3,3 +3,8 @@ sylius:
         address_has_been_set_as_default: 'Address has been set as default.'
         address_has_been_successfully_added: 'Address has been successfully added.'
         the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required: 'The channel cannot be deleted. At least one enabled channel is required.'
+        payment_cancelled: 'Your payment has been cancelled.'
+        payment_completed: 'Your payment has been completed.'
+        payment_failed: 'Your payment has been faild.'
+        payment_processing: 'Your payment is processing.'
+        payment_refunded: 'Your payment has been refunded.'
