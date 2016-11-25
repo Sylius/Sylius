@@ -79,7 +79,8 @@ Sylius\Component\Core\Model\ShippingMethod:
         enabled: true
         calculator: 'flat_rate'
         configuration:
-            amount: 10
+            CHANNEL:
+                amount: 10
         zone: "@zone_eu"
         currentLocale: en_US
         currentTranslation: "@upsTranslation1"
@@ -89,7 +90,8 @@ Sylius\Component\Core\Model\ShippingMethod:
         enabled: true
         calculator: 'flat_rate'
         configuration:
-            amount: 20
+            CHANNEL:
+                amount: 20
         zone: "@zone_eu"
         channel: ['@channel']
 
