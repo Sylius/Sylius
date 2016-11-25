@@ -94,6 +94,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function fillActionOptionForChannel($channelName, $option, $value)
+    {
+        $lastAction = $this->getChannelConfigurationOfLastAction($channelName);
+        $lastAction->fillField($option, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function fillUsageLimit($limit)
     {
         $this->getDocument()->fillField('Usage limit', $limit);
@@ -174,6 +183,19 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'rules' => '#sylius_promotion_rules',
             'starts_at' => '#sylius_promotion_startsAt',
         ];
+    }
+
+    /**
+     * @param string $channelName
+     *
+     * @return NodeElement
+     */
+    private function getChannelConfigurationOfLastAction($channelName)
+    {
+        return $this
+            ->getLastCollectionItem('actions')
+            ->find('css', sprintf('[id*=\'configuration\'] .field:contains("%s")', $channelName))
+        ;
     }
 
     /**
