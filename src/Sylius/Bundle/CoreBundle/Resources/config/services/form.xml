@@ -64,6 +64,9 @@
         <service id="sylius.form.extension.type.taxon" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxonTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType" />
         </service>
+        <service id="sylius.form.extension.type.customer" class="Sylius\Bundle\CoreBundle\Form\Extension\CustomerTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\CustomerBundle\Form\Type\CustomerType" />
+        </service>
 
         <service id="sylius.form.type.product_review" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType">
             <argument>%sylius.model.product_review.class%</argument>
@@ -103,11 +106,6 @@
         <service id="sylius.form.type.taxon_image" class="%sylius.form.type.taxon_image.class%">
             <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="form.type" alias="sylius_taxon_image" />
-        </service>
-        <service id="sylius.form.type.customer" class="%sylius.form.type.customer.class%">
-            <argument>%sylius.model.customer.class%</argument>
-            <argument>%sylius.validation_groups.customer%</argument>
-            <tag name="form.type" alias="sylius_customer" />
         </service>
 
         <service id="sylius.form.type.tax_calculation_strategy_choice" class="Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType">

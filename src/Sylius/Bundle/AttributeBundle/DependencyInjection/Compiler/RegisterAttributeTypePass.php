@@ -25,21 +25,28 @@ final class RegisterAttributeTypePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.registry.attribute_type')) {
+        if (!$container->hasDefinition('sylius.registry.attribute_type') || !$container->hasDefinition('sylius.form_registry.attribute_type')) {
             return;
         }
 
         $registry = $container->getDefinition('sylius.registry.attribute_type');
-        $attributeTypes = [];
+        $formRegistry = $container->getDefinition('sylius.form_registry.attribute_type');
 
-        foreach ($container->findTaggedServiceIds('sylius.attribute.type') as $id => $attributes) {
-            if (!isset($attributes[0]['attribute-type']) || !isset($attributes[0]['label'])) {
-                throw new \InvalidArgumentException('Tagged attribute type needs to have `attribute-type` and `label` attributes.');
+        $attributeTypes = [];
+        foreach ($container->findTaggedServiceIds('sylius.attribute.type') as $id => $attributesTypes) {
+            $attributeType = $attributesTypes[0];
+            if (!isset($attributeType['attribute-type'], $attributeType['label'], $attributeType['form-type'])) {
+                throw new \InvalidArgumentException('Tagged attribute type needs to have `attribute-type`, `label` and `form-type` attributes.');
             }
 
-            $name = $attributes[0]['attribute-type'];
-            $attributeTypes[$name] = $attributes[0]['label'];
-            $registry->addMethodCall('register', [$name, new Reference($id)]);
+            $registry->addMethodCall('register', [$attributeType['attribute-type'], new Reference($id)]);
+            $formRegistry->addMethodCall('add', [$attributeType['attribute-type'], 'default', $attributeType['form-type']]);
+
+            if (isset($attributeType['configuration-form-type'])) {
+                $formRegistry->addMethodCall('add', [$attributeType['attribute-type'], 'configuration', $attributeType['configuration-form-type']]);
+            }
+
+            $attributeTypes[$attributeType['attribute-type']] = $attributeType['label'];
         }
 
         $container->setParameter('sylius.attribute.attribute_types', $attributeTypes);

@@ -13,8 +13,37 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.form.type.gender" class="Sylius\Bundle\CustomerBundle\Form\Type\GenderType">
-            <tag name="form.type" alias="sylius_gender" />
+        <service id="sylius.form.type.customer" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerType">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.customer_profile" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument type="collection"><argument>sylius</argument><argument>sylius_customer_profile</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.customer_choice" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerChoiceType">
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.customer_group" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupType">
+            <argument>%sylius.model.customer_group.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.customer_group_choice" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupChoiceType">
+            <argument type="service" id="sylius.repository.customer_group" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.customer_group_code_choice" class="Sylius\Bundle\CustomerBundle\Form\Type\CustomerGroupCodeChoiceType">
+            <argument type="service" id="sylius.repository.customer_group" />
+            <tag name="form.type" />
         </service>
     </services>
 </container>

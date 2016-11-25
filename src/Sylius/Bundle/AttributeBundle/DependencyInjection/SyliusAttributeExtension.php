@@ -32,7 +32,6 @@ final class SyliusAttributeExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
-        $this->resolveSubjectsConfigutaion($config['resources'], $container);
     }
 
     /**
@@ -43,16 +42,9 @@ final class SyliusAttributeExtension extends AbstractResourceExtension
      */
     private function resolveResources(array $resources, ContainerBuilder $container)
     {
-        $subjects = [];
-
-        foreach ($resources as $subject => $parameters) {
-            $subjects[$subject] = $parameters;
-        }
-
-        $container->setParameter('sylius.attribute.subjects', $subjects);
+        $container->setParameter('sylius.attribute.subjects', $resources);
 
         $resolvedResources = [];
-
         foreach ($resources as $subjectName => $subjectConfig) {
             foreach ($subjectConfig as $resourceName => $resourceConfig) {
                 if (is_array($resourceConfig)) {
@@ -62,34 +54,5 @@ final class SyliusAttributeExtension extends AbstractResourceExtension
         }
 
         return $resolvedResources;
-    }
-
-    /**
-     * @param array $resources
-     * @param ContainerBuilder $container
-     */
-    private function resolveSubjectsConfigutaion(array $resources, ContainerBuilder $container)
-    {
-        foreach ($resources as $subjectName => $subjectConfig) {
-            foreach ($subjectConfig as $resourceName => $resourceConfig) {
-                if (!is_array($resourceConfig)) {
-                    continue;
-                }
-
-                $formDefinition = $container->getDefinition(sprintf('sylius.form.type.%s_%s', $subjectName, $resourceName));
-                $formDefinition->addArgument($subjectName);
-
-                if (isset($resourceConfig['translation'])) {
-                    $formTranslationDefinition = $container
-                        ->getDefinition(sprintf('sylius.form.type.%s_%s_translation', $subjectName, $resourceName))
-                    ;
-                    $formTranslationDefinition->addArgument($subjectName);
-                }
-
-                if (false !== strpos($resourceName, 'value')) {
-                    $formDefinition->addArgument($container->getDefinition(sprintf('sylius.repository.%s_attribute', $subjectName)));
-                }
-            }
-        }
     }
 }

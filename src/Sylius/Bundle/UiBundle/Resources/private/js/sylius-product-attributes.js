@@ -18,7 +18,8 @@
             $(this).dropdown({
                 onRemove: function(removedValue, removedText, $removedChoice) {
                     modifyAttributesListOnSelectorElementDelete(removedValue);
-                }
+                },
+                forceSelection: false
             });
 
             modifySelectorOnAttributesListElementDelete();
@@ -37,7 +38,7 @@
     function controlAttributesList() {
         $('#attributesContainer .attribute').each(function() {
             var value = $(this).attr('data-id');
-            $('[name="sylius_product_attribute_choice"]').dropdown('set selected', value);
+            $('#sylius_product_attribute_choice').dropdown('set selected', value);
         });
     }
 
@@ -50,7 +51,7 @@
             var attributeId = $(this).parents('.attribute').attr('data-id');
 
             $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
-            $(this).parent().remove();
+            modifyAttributesListOnSelectorElementDelete(attributeId)
         });
     }
 
@@ -70,10 +71,12 @@
             event.preventDefault();
 
             var data = '';
-            $(this).parent().find('select').val().forEach(function(item) {
+            $('#sylius_product_attribute_choice').val().forEach(function(item) {
                 data += 'sylius_product_attribute_choice[]=' + item + "&";
             });
             data += "count=" + getNextIndex();
+
+            console.log(data);
 
             $.ajax({
                 type: 'GET',
@@ -84,7 +87,7 @@
                 var finalData = modifyAttributeForms($(data));
                 $attributesContainer.append(finalData);
 
-                $('[name="sylius_product_attribute_choice"]').val('')
+                $('#sylius_product_attribute_choice').val('');
 
                 addAttributesNumber($.grep($(finalData), function (a) { return $(a).hasClass('attribute'); }).length);
                 modifySelectorOnAttributesListElementDelete();
