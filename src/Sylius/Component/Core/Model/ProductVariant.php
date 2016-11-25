@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Product\Model\ProductVariant as BaseVariant;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -75,6 +76,11 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      * @var TaxCategoryInterface
      */
     protected $taxCategory;
+
+    /**
+     * @var ShippingCategoryInterface
+     */
+    protected $shippingCategory;
 
     /**
      * @return string
@@ -213,13 +219,21 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->getProduct()->getName();
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function getShippingCategory()
     {
-        return $this->getProduct()->getShippingCategory();
+        return $this->shippingCategory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setShippingCategory(ShippingCategoryInterface $category = null)
+    {
+        $this->shippingCategory = $category;
     }
 
     /**

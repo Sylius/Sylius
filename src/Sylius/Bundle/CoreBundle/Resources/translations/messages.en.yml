@@ -56,7 +56,6 @@ sylius:
         product:
             images: Images
             restricted_zone: Restricted zone
-            shipping_category: Shipping category
             short_description: Short description
             variant_selection_method: Variant selection method
             main_taxon: Main taxon
@@ -67,6 +66,7 @@ sylius:
             code: Code
         product_variant:
             tax_category: Tax category
+            shipping_category: Shipping category
         shipment_filter:
             created_at_from: From
             created_at_to: To

@@ -11,6 +11,10 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
         And this product belongs to "Over-sized" shipping category
         And the store has a product "Picasso T-Shirt" priced at "$19.99"
         And this product belongs to "Standard" shipping category
+        And the store has a product "T-shirt banana"
+        And this product has option "Size" with values "S" and "M"
+        And this product is available in "S" size priced at "$12.54"
+        And this product is available in "M" size priced at "$12.30"
         And the store has "Raven Post" shipping method with "$10.00" fee
         And this shipping method requires at least one unit matches to "Standard" shipping category
         And the store has "Invisible Post" shipping method with "$30.00" fee
@@ -46,3 +50,25 @@ Feature: Seeing shipping methods compatible with categories of units in my cart
         And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
         Then there should be information about no available shipping methods
+
+    @ui
+    Scenario: Seeing no shipping methods if any of my unit has variant with shipping category matching to the shipping category of shipping method
+        Given I have "T-shirt banana" with Size "S" in the cart
+        And I have "T-shirt banana" with Size "M" in the cart
+        When I am at the checkout addressing step
+        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
+        Then there should be information about no available shipping methods
+
+    @ui
+    Scenario: Seeing shipping methods if some of my unit has variant with shipping category matching to the shipping category of shipping method
+        Given the "T-shirt banana" product's "M" size belongs to "Standard" shipping category
+        And the "T-shirt banana" product's "S" size belongs to "Over-sized" shipping category
+        And I have "T-shirt banana" with Size "S" in the cart
+        And I have "T-shirt banana" with Size "M" in the cart
+        When I am at the checkout addressing step
+        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I complete the addressing step
+        Then I should be on the checkout shipping step
+        And I should see "Raven Post" shipping method
+        And I should see "Invisible Post" shipping method

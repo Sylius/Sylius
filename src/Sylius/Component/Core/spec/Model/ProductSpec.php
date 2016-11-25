@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -92,17 +91,6 @@ final class ProductSpec extends ObjectBehavior
             ->shouldThrow(\InvalidArgumentException::class)
             ->duringSetVariantSelectionMethod('foo')
         ;
-    }
-
-    function it_has_no_shipping_category_by_default()
-    {
-        $this->getShippingCategory()->shouldReturn(null);
-    }
-
-    function its_shipping_category_is_mutable(ShippingCategoryInterface $shippingCategory)
-    {
-        $this->setShippingCategory($shippingCategory);
-        $this->getShippingCategory()->shouldReturn($shippingCategory);
     }
 
     function it_has_no_main_taxon_by_default()

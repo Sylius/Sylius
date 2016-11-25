@@ -70,4 +70,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @return string
      */
     public function getValidationMessageForForm();
+
+    /**
+     * @param string $shippingCategoryName
+     */
+    public function selectShippingCategory($shippingCategoryName);
 }

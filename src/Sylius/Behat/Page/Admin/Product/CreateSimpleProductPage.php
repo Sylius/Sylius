@@ -195,6 +195,15 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function selectShippingCategory($shippingCategoryName)
+    {
+        $this->getElement('shipping_category')->selectOption($shippingCategoryName);
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getElement($name, array $parameters = [])
     {
         if (!isset($parameters['%locale%'])) {
@@ -224,6 +233,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'name' => '#sylius_product_translations_%locale%_name',
             'price' => '#sylius_product_variant_price',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
+            'shipping_category' => '#sylius_product_variant_shippingCategory',
             'slug' => '#sylius_product_translations_%locale%_slug',
             'tab' => '.menu [data-tab="%name%"]',
             'toggle_slug_modification_button' => '.toggle-product-slug-modification',

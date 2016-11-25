@@ -36,6 +36,7 @@ default:
                 - sylius.behat.context.setup.product_taxon
                 - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.shipping_category
                 - sylius.behat.context.setup.taxonomy
                 - sylius.behat.context.setup.zone
 

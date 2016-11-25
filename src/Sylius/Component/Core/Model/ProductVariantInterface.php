@@ -15,6 +15,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface as BaseVariantInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
@@ -72,4 +73,9 @@ interface ProductVariantInterface extends
      * @param TaxCategoryInterface $category
      */
     public function setTaxCategory(TaxCategoryInterface $category = null);
+
+    /**
+     * @param ShippingCategoryInterface $shippingCategory
+     */
+    public function setShippingCategory(ShippingCategoryInterface $shippingCategory);
 }

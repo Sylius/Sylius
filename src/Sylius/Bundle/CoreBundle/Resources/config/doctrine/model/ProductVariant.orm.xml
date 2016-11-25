@@ -42,6 +42,11 @@
             <join-column name="tax_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
+        <many-to-one field="shippingCategory" target-entity="Sylius\Component\Shipping\Model\ShippingCategoryInterface">
+            <join-column name="shipping_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
+            <gedmo:versioned />
+        </many-to-one>
+
         <gedmo:loggable />
     </mapped-superclass>
 </doctrine-mapping>
