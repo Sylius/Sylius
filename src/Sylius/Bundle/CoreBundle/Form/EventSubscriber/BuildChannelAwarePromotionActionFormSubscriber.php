@@ -61,16 +61,12 @@ class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotionActio
 
         /** @var ChannelInterface $channel */
         foreach ($this->channelRepository->findAll() as $channel) {
-            $configurationField = $this->factory->createNamed(
-                $channel->getCode(),
-                $configuration,
-                $data,
-                [
-                    'auto_initialize' => false,
-                    'label' => $channel->getName(),
-                ]
-            );
+            $config = ['auto_initialize' => false, 'label' => $channel->getName()];
+            if (false === strpos($configuration, 'percentage')) {
+                $config['currency'] = $channel->getBaseCurrency()->getCode();
+            }
 
+            $configurationField = $this->factory->createNamed($channel->getCode(), $configuration, $data, $config);
             $configurationCollection->add($configurationField);
         }
 
