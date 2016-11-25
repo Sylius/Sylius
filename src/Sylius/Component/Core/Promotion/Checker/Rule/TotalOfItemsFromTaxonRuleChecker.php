@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\TotalOfItemsFromTaxonConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -73,6 +74,6 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_rule_total_of_items_from_taxon_configuration';
+        return TotalOfItemsFromTaxonConfigurationType::class;
     }
 }

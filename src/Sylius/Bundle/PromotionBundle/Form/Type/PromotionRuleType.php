@@ -29,7 +29,7 @@ class PromotionRuleType extends AbstractConfigurationType
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('type', 'sylius_promotion_rule_choice', [
+            ->add('type', PromotionRuleChoiceType::class, [
                 'label' => 'sylius.form.promotion_rule.type',
                 'attr' => [
                     'data-form-collection' => 'update',

@@ -47,8 +47,8 @@ class CustomerGroupType extends AbstractType
                 'property' => 'name',
                 'class' => $this->groupRepository->getClassName(),
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'numeric']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                 ],
             ])
         ;

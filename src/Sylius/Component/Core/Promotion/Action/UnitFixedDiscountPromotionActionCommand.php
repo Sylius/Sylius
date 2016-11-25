@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
@@ -98,7 +99,7 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_unit_fixed_discount_configuration';
+        return UnitFixedDiscountConfigurationType::class;
     }
 
     /**

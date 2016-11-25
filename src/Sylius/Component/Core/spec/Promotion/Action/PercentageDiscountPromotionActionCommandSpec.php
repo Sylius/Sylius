@@ -159,9 +159,4 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
             ->during('revert', [$subject, [], $promotion])
         ;
     }
-
-    function it_has_a_configuration_form_type()
-    {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_percentage_discount_configuration');
-    }
 }

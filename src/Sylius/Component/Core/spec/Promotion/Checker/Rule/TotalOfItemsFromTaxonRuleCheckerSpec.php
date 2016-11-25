@@ -148,9 +148,4 @@ final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 
         $this->isEligible($order, ['taxon' => 'sniper_rifles', 'amount' => 1000])->shouldReturn(false);
     }
-
-    function it_has_a_configuration_form_type()
-    {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_total_of_items_from_taxon_configuration');
-    }
 }

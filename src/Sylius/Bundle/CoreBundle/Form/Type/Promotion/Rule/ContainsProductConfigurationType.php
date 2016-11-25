@@ -46,8 +46,8 @@ class ContainsProductConfigurationType extends AbstractType
                 'label' => 'sylius.form.promotion_action.add_product_configuration.product',
                 'class' => $this->productRepository->getClassName(),
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'string']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'string', 'groups' => ['sylius']]),
                 ],
                 'identifier' => 'code',
             ])

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\NthOrderConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -69,6 +70,6 @@ final class NthOrderRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_rule_nth_order_configuration';
+        return NthOrderConfigurationType::class;
     }
 }

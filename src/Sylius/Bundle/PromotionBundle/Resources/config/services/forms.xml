@@ -13,58 +13,58 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.form.type.promotion" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionType">
+            <argument>%sylius.model.promotion.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.promotion_action" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType">
+            <argument>%sylius.model.promotion_action.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <argument type="service" id="sylius.registry_promotion_action" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.promotion_rule" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType">
+            <argument>%sylius.model.promotion_rule.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <argument type="service" id="sylius.registry_promotion_rule_checker" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.promotion_coupon" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponType">
+            <argument>%sylius.model.promotion_coupon.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.type.promotion_action.collection" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionCollectionType">
             <argument type="service" id="sylius.registry_promotion_action" />
-            <tag name="form.type" alias="sylius_promotion_action_collection" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.promotion_rule.collection" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleCollectionType">
             <argument type="service" id="sylius.registry_promotion_rule_checker" />
-            <tag name="form.type" alias="sylius_promotion_rule_collection" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.promotion_action_choice" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionChoiceType">
             <argument>%sylius.promotion_actions%</argument>
-            <tag name="form.type" alias="sylius_promotion_action_choice" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.promotion_rule_choice" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleChoiceType">
             <argument>%sylius.promotion_rules%</argument>
-            <tag name="form.type" alias="sylius_promotion_rule_choice" />
+            <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.promotion_action.fixed_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType">
-            <tag name="form.type" alias="sylius_promotion_action_fixed_discount_configuration" />
-        </service>
-        <service id="sylius.form.type.promotion_action.unit_fixed_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType">
-            <tag name="form.type" alias="sylius_promotion_action_unit_fixed_discount_configuration" />
-        </service>
-        <service id="sylius.form.type.promotion_action.percentage_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType">
-            <tag name="form.type" alias="sylius_promotion_action_percentage_discount_configuration" />
-        </service>
-        <service id="sylius.form.type.promotion_action.unit_percentage_discount_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitPercentageDiscountConfigurationType">
-            <tag name="form.type" alias="sylius_promotion_action_unit_percentage_discount_configuration" />
-        </service>
-
-        <service id="sylius.form.type.promotion_rule.item_total_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType">
-            <tag name="form.type" alias="sylius_promotion_rule_item_total_configuration" />
-        </service>
-        <service id="sylius.form.type.promotion_rule.cart_quantity_configuration" class="Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType">
-            <tag name="form.type" alias="sylius_promotion_rule_cart_quantity_configuration" />
-        </service>
         <service id="sylius.form.type.promotion_coupon_to_code" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponToCodeType">
             <argument type="service" id="sylius.repository.promotion_coupon" />
-            <tag name="form.type" alias="sylius_promotion_coupon_to_code" />
-        </service>
-
-        <service id="sylius.form.type.promotion_action.filters" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionFiltersType">
-            <tag name="form.type" alias="sylius_promotion_filters" />
-        </service>
-        <service id="sylius.form.type.promotion_action.filter.price_range" class="Sylius\Bundle\PromotionBundle\Form\Type\Filter\PriceRangeFilterConfigurationType">
-            <tag name="form.type" alias="sylius_promotion_action_filter_price_range_configuration" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.promotion_coupon_generator_instruction" class="Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponGeneratorInstructionType">
             <argument>Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstruction</argument>
-            <tag name="form.type" alias="sylius_promotion_coupon_generator_instruction" />
+            <tag name="form.type" />
         </service>
     </services>
 </container>

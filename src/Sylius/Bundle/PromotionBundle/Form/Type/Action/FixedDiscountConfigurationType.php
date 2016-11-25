@@ -31,8 +31,8 @@ class FixedDiscountConfigurationType extends AbstractType
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.promotion_action.fixed_discount_configuration.amount',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'numeric']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                 ],
             ])
         ;

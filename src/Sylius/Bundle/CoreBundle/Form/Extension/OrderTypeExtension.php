@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponToCodeType;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -32,7 +33,7 @@ class OrderTypeExtension extends AbstractTypeExtension
         $builder
             ->add('shippingAddress', AddressType::class)
             ->add('billingAddress', AddressType::class)
-            ->add('promotionCoupon', 'sylius_promotion_coupon_to_code', [
+            ->add('promotionCoupon', PromotionCouponToCodeType::class, [
                 'by_reference' => false,
                 'label' => 'sylius.form.cart.coupon',
                 'required' => false,

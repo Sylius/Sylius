@@ -50,19 +50,6 @@ final class PromotionCouponToCodeType extends AbstractType implements DataTransf
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults([
-                'data_class' => null,
-                'label' => 'sylius.ui.code',
-            ])
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function transform($coupon)
     {
         if (null === $coupon) {
@@ -86,6 +73,19 @@ final class PromotionCouponToCodeType extends AbstractType implements DataTransf
         }
 
         return $this->promotionCouponRepository->findOneBy(['code' => $code]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefaults([
+                'data_class' => null,
+                'label' => 'sylius.ui.code',
+            ])
+        ;
     }
 
     /**

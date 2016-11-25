@@ -37,8 +37,8 @@ class PromotionRuleCollectionType extends AbstractConfigurationCollectionType
     /**
      * {@inheritdoc}
      */
-    public function getFormTypeOption()
+    public function getEntryType()
     {
-        return 'sylius_promotion_rule';
+        return PromotionRuleType::class;
     }
 }

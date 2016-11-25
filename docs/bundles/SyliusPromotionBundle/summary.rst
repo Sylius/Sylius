@@ -17,9 +17,7 @@ Summary
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\PromotionBundle\Form\Type\PromotionType
-                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                    form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionType
                 validation_groups:
                     default: [ sylius ]
             promotion_rule:
@@ -29,8 +27,7 @@ Summary
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType
+                    form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType
                 validation_groups:
                     default: [ sylius ]
             promotion_action:
@@ -40,8 +37,7 @@ Summary
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType
+                    form: Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType
                 validation_groups:
                     default: [ sylius ]
             promotion_coupon:
@@ -51,8 +47,7 @@ Summary
                     controller: Sylius\Bundle\PromotionBundle\Controller\PromotionCouponController
                     repository: ~
                     factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\PromotionsBundle\Form\Type\PromotionCouponType
+                    form: Sylius\Bundle\PromotionsBundle\Form\Type\PromotionCouponType
                 validation_groups:
                     default: [ sylius ]
 

@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -273,10 +272,5 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
             ->shouldThrow(UnexpectedTypeException::class)
             ->during('revert', [$subject, ['base_amount' => 1000], $promotion])
         ;
-    }
-
-    function it_has_a_configuration_form_type()
-    {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_unit_fixed_discount_configuration');
     }
 }

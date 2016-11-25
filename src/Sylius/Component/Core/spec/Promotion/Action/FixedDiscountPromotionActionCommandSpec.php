@@ -240,9 +240,4 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
             ->during('revert', [$subject, [], $promotion])
         ;
     }
-
-    function it_has_a_configuration_form_type()
-    {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_fixed_discount_configuration');
-    }
 }

@@ -76,7 +76,7 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'entry_type' => $this->getFormTypeOption(),
+            'entry_type' => $this->getEntryType(),
             'allow_add' => true,
             'allow_delete' => true,
             'by_reference' => false,
@@ -94,5 +94,5 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
     /**
      * @return string
      */
-    abstract public function getFormTypeOption();
+    abstract public function getEntryType();
 }
