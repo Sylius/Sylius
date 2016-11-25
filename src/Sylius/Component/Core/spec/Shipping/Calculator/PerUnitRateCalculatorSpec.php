@@ -14,9 +14,10 @@ namespace spec\Sylius\Component\Core\Shipping\Calculator;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Shipping\Calculator\PerUnitRateCalculator;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
-use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -46,26 +47,18 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
     }
 
     function it_calculates_the_total_with_the_per_unit_amount_configured_on_the_method(
-        ChannelContextInterface $channelContext,
+        CalculatorInterface $calculator,
         ShipmentInterface $shipment,
+        OrderInterface $order,
         ChannelInterface $channel
     ) {
-        $channelContext->getChannel()->willReturn($channel);
+        $shipment->getOrder()->willReturn($order);
+        $order->getChannel()->willReturn($channel);
         $channel->getCode()->willReturn('WEB');
         $shipment->getShippingUnitCount()->willReturn(10);
 
-        $this->calculate($shipment, ['WEB' => ['amount' => 200]])->shouldReturn(2000);
-    }
+        $calculator->calculate($shipment, ['amount' => 200])->shouldBeCalled();
 
-    function its_calculated_value_is_an_integer(
-        ChannelContextInterface $channelContext,
-        ShipmentInterface $shipment,
-        ChannelInterface $channel
-    ) {
-        $channelContext->getChannel()->willReturn($channel);
-        $channel->getCode()->willReturn('WEB');
-        $shipment->getShippingUnitCount()->willReturn(10);
-
-        $this->calculate($shipment, ['WEB' => ['amount' => 700]])->shouldBeInteger();
+        $this->calculate($shipment, ['WEB' => ['amount' => 200]]);
     }
 }
