@@ -175,16 +175,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function waitForTaxonRelocation(TaxonInterface $taxon, $expectedPosition)
-    {
-        $this->getDocument()->waitFor(5, function () use ($taxon, $expectedPosition) {
-            return $this->getLeafNameFromPosition($expectedPosition) === $taxon->getName();
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function activateLanguageTab($locale)
     {
         if (!$this->getDriver() instanceof Selenium2Driver) {
@@ -241,6 +231,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             if ($leaf->getText() === $taxon->getName()) {
                 $moveButton = $leaf->getParent()->find('css', sprintf('.sylius-taxon-move-%s', $direction));
                 $moveButton->click();
+
+                $moveButton->waitFor(5, function () use ($moveButton) {
+                    return $this->isOpen() && !$moveButton->hasClass('loading');
+                });
 
                 return;
             }
