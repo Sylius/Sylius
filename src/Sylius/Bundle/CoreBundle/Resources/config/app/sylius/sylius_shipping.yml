@@ -15,4 +15,4 @@ sylius_shipping:
                 model: Sylius\Component\Core\Model\ShippingMethod
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShippingMethodRepository
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
+                    default: Sylius\Bundle\CoreBundle\Form\Type\Shipping\ShippingMethodType

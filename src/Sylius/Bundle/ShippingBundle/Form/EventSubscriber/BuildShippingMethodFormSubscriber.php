@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
+namespace Sylius\Bundle\ShippingBundle\Form\EventSubscriber;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
@@ -28,25 +28,28 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
     /**
      * @var ServiceRegistryInterface
      */
-    private $calculatorRegistry;
+    protected $calculatorRegistry;
 
     /**
      * @var FormFactoryInterface
      */
-    private $factory;
+    protected $factory;
 
     /**
      * @var FormRegistryInterface
      */
-    private $formRegistry;
+    protected $formRegistry;
 
     /**
      * @param ServiceRegistryInterface $calculatorRegistry
-     * @param FormFactoryInterface     $factory
-     * @param FormRegistryInterface    $formRegistry
+     * @param FormFactoryInterface $factory
+     * @param FormRegistryInterface $formRegistry
      */
-    public function __construct(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory, FormRegistryInterface $formRegistry)
-    {
+    public function __construct(
+        ServiceRegistryInterface $calculatorRegistry,
+        FormFactoryInterface $factory,
+        FormRegistryInterface $formRegistry
+    ) {
         $this->calculatorRegistry = $calculatorRegistry;
         $this->factory = $factory;
         $this->formRegistry = $formRegistry;

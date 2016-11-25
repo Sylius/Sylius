@@ -9,9 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Shipping;
 
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType as BaseShippingMethodType;
+use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -41,5 +43,28 @@ class ShippingMethodType extends BaseShippingMethodType
                 'label' => 'sylius.form.shipping_method.channels',
             ])
         ;
+
+        $prototypes = [
+            'rules' => [],
+            'calculators' => [],
+        ];
+
+        /** @var RuleCheckerInterface $checker */
+        foreach ($this->checkerRegistry->all() as $type => $checker) {
+            $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
+        }
+
+        /** @var CalculatorInterface $calculator */
+        foreach ($this->calculatorRegistry->all() as $name => $calculator) {
+            $calculatorTypeName = sprintf('sylius_channel_based_shipping_calculator_%s', $calculator->getType());
+
+            if (!$this->formRegistry->hasType($calculatorTypeName)) {
+                continue;
+            }
+
+            $prototypes['calculators'][$name] = $builder->create('configuration', $calculatorTypeName)->getForm();
+        }
+
+        $builder->setAttribute('prototypes', $prototypes);
     }
 }
