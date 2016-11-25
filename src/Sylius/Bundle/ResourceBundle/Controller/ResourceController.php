@@ -356,7 +356,7 @@ class ResourceController extends Controller
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->findOr404($configuration);
 
-        if (!$this->isCsrfTokenValid($resource->getId(), $request->request->get('_csrf_token'))) {
+        if ($configuration->isHtmlRequest() && !$this->isCsrfTokenValid($resource->getId(), $request->get('_csrf_token'))) {
             throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
         }
 

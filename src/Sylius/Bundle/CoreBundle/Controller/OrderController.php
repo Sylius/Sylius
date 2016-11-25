@@ -168,6 +168,10 @@ class OrderController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::DELETE);
         $resource = $this->getCurrentCart();
 
+        if (!$this->isCsrfTokenValid($resource->getId(), $request->request->get('_csrf_token'))) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+        }
+
         $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
 
         if ($event->isStopped() && !$configuration->isHtmlRequest()) {
