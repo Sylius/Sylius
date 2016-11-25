@@ -371,11 +371,11 @@ final class ShippingContext implements Context
         $position = null,
         ZoneInterface $zone = null,
         $locale = 'en',
-        array $configuration = null,
+        array $configuration = [],
         $calculator = DefaultCalculators::FLAT_RATE,
         $enabled = true,
         $addForCurrentChannel = true,
-        array $channels = null
+        array $channels = []
     ) {
         $channel = $this->sharedStorage->get('channel');
 
@@ -387,7 +387,7 @@ final class ShippingContext implements Context
             $code = $this->generateCodeFromNameAndZone($name, $zone->getCode());
         }
 
-        if (null === $configuration) {
+        if (empty($configuration)) {
             $configuration = $this->getConfigurationByChannels([$channel]);
         }
 
@@ -402,7 +402,7 @@ final class ShippingContext implements Context
         $shippingMethod->setZone($zone);
         $shippingMethod->setEnabled($enabled);
 
-        if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {
+        if ($addForCurrentChannel && $channel) {
             $shippingMethod->addChannel($channel);
         }
 

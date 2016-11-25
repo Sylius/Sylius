@@ -1,5 +1,5 @@
 @checkout
-Feature: Seeing detailed shipping fee on multiple channels with different currency
+Feature: Seeing detailed shipping fee on multiple channels with different base currency
     In order to be aware of shipping fee applied for my shipment
     As a Customer
     I want to be able to see shipping fee in channel’s base currency
@@ -17,7 +17,7 @@ Feature: Seeing detailed shipping fee on multiple channels with different curren
         And I am a logged in customer
 
     @ui
-    Scenario: Seeing the shipping fee per shipment on selecting method in a channels base currency
+    Scenario: Seeing the shipping fee per shipment on selecting method in a channel's base currency
         Given I changed my current channel to "Web-US"
         And I have product "PHP T-Shirt" in the cart
         When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"

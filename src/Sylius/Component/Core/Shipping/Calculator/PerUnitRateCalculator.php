@@ -11,9 +11,10 @@
 
 namespace Sylius\Component\Core\Shipping\Calculator;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
-use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -26,28 +27,23 @@ final class PerUnitRateCalculator implements CalculatorInterface
     private $calculator;
 
     /**
-     * @var ChannelContextInterface
-     */
-    private $channelContext;
-
-    /**
      * @param CalculatorInterface $calculator
-     * @param ChannelContextInterface $channelContext
      */
-    public function __construct(CalculatorInterface $calculator, ChannelContextInterface $channelContext)
+    public function __construct(CalculatorInterface $calculator)
     {
         $this->calculator = $calculator;
-        $this->channelContext = $channelContext;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function calculate(ShipmentInterface $subject, array $configuration)
+    public function calculate(BaseShipmentInterface $subject, array $configuration)
     {
-        $channel = $this->channelContext->getChannel();
+        Assert::isInstanceOf($subject, ShipmentInterface::class);
 
-        return (int) ($configuration[$channel->getCode()]['amount'] * $subject->getShippingUnitCount());
+        $channelCode = $subject->getOrder()->getChannel()->getCode();
+
+        return $this->calculator->calculate($subject, $configuration[$channelCode]);
     }
 
     /**
