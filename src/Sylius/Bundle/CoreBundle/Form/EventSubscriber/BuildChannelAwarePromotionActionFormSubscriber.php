@@ -55,7 +55,6 @@ class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotionActio
             'auto_initialize' => false,
         ]);
 
-        // temporary solution to prevent errors while rendering unexisting rule configuration type
         if (null === $configuration = $model->getConfigurationFormType()) {
             return;
         }
