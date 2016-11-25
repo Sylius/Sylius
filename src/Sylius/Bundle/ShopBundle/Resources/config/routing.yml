@@ -64,14 +64,5 @@ sylius_shop_ajax:
     defaults:
         _format: json
 
-sylius_sitemap:
-    path: /sitemap.{_format}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.sitemap:showAction
-        _format: xml
-    requirements:
-        _format: xml
-
 _liip_imagine:
     resource: "@LiipImagineBundle/Resources/config/routing.xml"
