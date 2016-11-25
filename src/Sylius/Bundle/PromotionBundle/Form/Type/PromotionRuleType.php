@@ -13,7 +13,9 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,8 +23,25 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PromotionRuleType extends AbstractConfigurationType
+class PromotionRuleType extends AbstractResourceType
 {
+    /**
+     * @var ServiceRegistryInterface
+     */
+    private $registry;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param ServiceRegistryInterface $registry
+     */
+    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $registry)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->registry = $registry;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -35,13 +54,11 @@ class PromotionRuleType extends AbstractConfigurationType
                     'data-form-collection' => 'update',
                 ],
             ])
-            ->addEventSubscriber(
-                new BuildPromotionRuleFormSubscriber(
-                    $this->registry,
-                    $builder->getFormFactory(),
-                    $options['configuration_type']
-                )
-            )
+            ->addEventSubscriber(new BuildPromotionRuleFormSubscriber(
+                $this->registry,
+                $builder->getFormFactory(),
+                $options['configuration_type']
+            ))
         ;
     }
 
