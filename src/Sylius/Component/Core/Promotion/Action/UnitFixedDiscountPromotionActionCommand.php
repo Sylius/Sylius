@@ -72,7 +72,13 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        $amount = $this->getAmountByCurrencyCode($configuration, $subject->getCurrencyCode());
+        $channelCode = $subject->getChannel()->getCode();
+        if (!isset($configuration[$channelCode])) {
+            return;
+        }
+
+        $amount = $configuration[$channelCode]['amount'];
+
         if (0 === $amount) {
             return;
         }
@@ -111,20 +117,5 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
                 $promotion
             );
         }
-    }
-
-    /**
-     * @param array $configuration
-     * @param string $currencyCode
-     *
-     * @return int
-     */
-    private function getAmountByCurrencyCode(array $configuration, $currencyCode)
-    {
-        if (!isset($configuration['amounts'][$currencyCode])) {
-            return $configuration['base_amount'];
-        }
-
-        return $configuration['amounts'][$currencyCode];
     }
 }
