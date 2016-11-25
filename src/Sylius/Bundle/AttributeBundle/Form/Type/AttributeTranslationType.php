@@ -18,25 +18,8 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class AttributeTranslationType extends AbstractResourceType
+abstract class AttributeTranslationType extends AbstractResourceType
 {
-    /**
-     * @var string
-     */
-    protected $subjectName;
-
-    /**
-     * @param string $dataClass
-     * @param array  $validationGroups
-     * @param string $subjectName
-     */
-    public function __construct($dataClass, array $validationGroups, $subjectName)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->subjectName = $subjectName;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -47,21 +30,5 @@ class AttributeTranslationType extends AbstractResourceType
                 'label' => 'sylius.form.attribute.name',
             ])
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return sprintf('sylius_%s_attribute_translation', $this->subjectName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return sprintf('sylius_%s_attribute_translation', $this->subjectName);
     }
 }

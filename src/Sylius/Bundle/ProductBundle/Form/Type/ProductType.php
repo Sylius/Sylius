@@ -62,7 +62,7 @@ class ProductType extends AbstractResourceType
                 'label' => 'sylius.form.product.translations',
             ])
             ->add('attributes', CollectionType::class, [
-                'entry_type' => 'sylius_product_attribute_value',
+                'entry_type' => ProductAttributeValueType::class,
                 'required' => false,
                 'prototype' => false,
                 'allow_add' => true,

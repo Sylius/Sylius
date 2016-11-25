@@ -14,61 +14,41 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sylius.attribute_type.text" class="Sylius\Component\Attribute\AttributeType\TextAttributeType">
-            <tag name="sylius.attribute.type" attribute-type="text" label="Text" />
-        </service>
-        <service id="sylius.form.type.attribute_type.text" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeType">
-            <tag name="form.type" alias="sylius_attribute_type_text" />
-        </service>
-        <service id="sylius.form.type.attribute_type.configuration.text" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\TextAttributeConfigurationType">
-            <tag name="form.type" alias="sylius_attribute_type_configuration_text" />
+            <tag name="sylius.attribute.type" attribute-type="text" label="Text"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextAttributeType"
+                 configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\TextAttributeConfigurationType" />
         </service>
 
         <service id="sylius.attribute_type.textarea" class="Sylius\Component\Attribute\AttributeType\TextareaAttributeType">
-            <tag name="sylius.attribute.type" attribute-type="textarea" label="Textarea" />
-        </service>
-        <service id="sylius.form.type.attribute_type.textarea" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextareaAttributeType">
-            <tag name="form.type" alias="sylius_attribute_type_textarea" />
+            <tag name="sylius.attribute.type" attribute-type="textarea" label="Textarea"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\TextareaAttributeType" />
         </service>
 
         <service id="sylius.attribute_type.checkbox" class="Sylius\Component\Attribute\AttributeType\CheckboxAttributeType">
-            <tag name="sylius.attribute.type" attribute-type="checkbox" label="Checkbox" />
-        </service>
-        <service id="sylius.form.type.attribute_type.checkbox" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeType">
-            <tag name="form.type" alias="sylius_attribute_type_checkbox" />
+            <tag name="sylius.attribute.type" attribute-type="checkbox" label="Checkbox"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\CheckboxAttributeType" />
         </service>
 
         <service id="sylius.attribute_type.integer" class="Sylius\Component\Attribute\AttributeType\IntegerAttributeType">
-            <tag name="sylius.attribute.type" attribute-type="integer" label="Integer" />
-        </service>
-        <service id="sylius.form.type.attribute_type.integer" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeType">
-            <tag name="form.type" alias="sylius_attribute_type_integer" />
+            <tag name="sylius.attribute.type" attribute-type="integer" label="Integer"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\IntegerAttributeType" />
         </service>
 
         <service id="sylius.attribute_type.percent" class="Sylius\Component\Attribute\AttributeType\PercentAttributeType">
-            <tag name="sylius.attribute.type" attribute-type="percent" label="Percent" />
-        </service>
-        <service id="sylius.form.type.attribute_type.percent" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\PercentAttributeType">
-            <tag name="form.type" alias="sylius_attribute_type_percent" />
+            <tag name="sylius.attribute.type" attribute-type="percent" label="Percent"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\PercentAttributeType" />
         </service>
 
         <service id="sylius.attribute_type.datetime" class="Sylius\Component\Attribute\AttributeType\DatetimeAttributeType">
-            <tag name="sylius.attribute.type" attribute-type="datetime" label="Datetime" />
-        </service>
-        <service id="sylius.form.type.attribute_type.datetime" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeType">
-            <tag name="form.type" alias="sylius_attribute_type_datetime" />
-        </service>
-        <service id="sylius.form.type.attribute_type.configuration.datetime" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\DatetimeAttributeConfigurationType">
-            <tag name="form.type" alias="sylius_attribute_type_configuration_datetime" />
+            <tag name="sylius.attribute.type" attribute-type="datetime" label="Datetime"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeType"
+                 configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Cofngiuration\DatetimeAttributeConfigurationType" />
         </service>
 
         <service id="sylius.attribute_type.date" class="Sylius\Component\Attribute\AttributeType\DateAttributeType">
-            <tag name="sylius.attribute.type" attribute-type="date" label="Date" />
-        </service>
-        <service id="sylius.form.type.attribute_type.date" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeType">
-            <tag name="form.type" alias="sylius_attribute_type_date" />
-        </service>
-        <service id="sylius.form.type.attribute_type.configuration.date" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\DateAttributeConfigurationType">
-            <tag name="form.type" alias="sylius_attribute_type_configuration_date" />
+            <tag name="sylius.attribute.type" attribute-type="date" label="Date"
+                 form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeType"
+                 configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Cofngiuration\DateAttributeConfigurationType" />
         </service>
     </services>
 </container>

@@ -11,7 +11,11 @@
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
+use Sylius\Bundle\ProductBundle\Controller\ProductAttributeController;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Product\Model\ProductAttribute;
 use Sylius\Component\Product\Model\ProductAttributeInterface;
@@ -78,14 +82,14 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
                         'classes' => [
                             'model' => ProductAttribute::class,
                             'interface' => ProductAttributeInterface::class,
-                            'form' => [
-                                'default' => ProductAttributeType::class,
-                            ]
+                            'controller' => ProductAttributeController::class,
+                            'form' => ProductAttributeType::class,
                         ],
                         'translation' => [
                             'classes' => [
                                 'model' => ProductAttributeTranslation::class,
                                 'interface' => ProductAttributeTranslationInterface::class,
+                                'form' => ProductAttributeTranslationType::class,
                             ],
                         ],
                     ],
@@ -93,6 +97,7 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
                         'classes' => [
                             'model' => ProductAttributeValue::class,
                             'interface' => ProductAttributeValueInterface::class,
+                            'form' => ProductAttributeValueType::class,
                         ],
                     ],
                 ],

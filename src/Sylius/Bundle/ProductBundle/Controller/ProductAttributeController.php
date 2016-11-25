@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AttributeBundle\Controller;
+namespace Sylius\Bundle\ProductBundle\Controller;
 
 use FOS\RestBundle\View\View;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Symfony\Component\Form\FormView;
@@ -21,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeController extends ResourceController
+class ProductAttributeController extends ResourceController
 {
     /**
      * @param Request $request
@@ -52,14 +53,9 @@ class AttributeController extends ResourceController
     {
         $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeChoice.html.twig');
 
-        $form = $this->get('form.factory')->create(
-            sprintf('sylius_%s_choice', $this->metadata->getName()),
-            null,
-            [
-                'expanded' => true,
-                'multiple' => true,
-            ]
-        );
+        $form = $this->get('form.factory')->create(ProductAttributeChoiceType::class, null, [
+            'multiple' => true,
+        ]);
 
         return $this->render($template, ['form' => $form->createView()]);
     }
@@ -73,12 +69,12 @@ class AttributeController extends ResourceController
     {
         $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeValueForms.html.twig');
 
-        $attributeRepository = $this->get($this->metadata->getServiceId('repository'));
-        $forms = [];
+        $form = $this->get('form.factory')->create(ProductAttributeChoiceType::class, null, [
+            'multiple' => true,
+        ]);
+        $form->handleRequest($request);
 
-        $choices = $request->query->get(sprintf('sylius_%s_choice', $this->metadata->getName()), []);
-
-        $attributes = $attributeRepository->findBy(['id' => $choices]);
+        $attributes = $form->getData();
         foreach ($attributes as $attribute) {
             $forms[$attribute->getId()] = $this->getAttributeForm($attribute);
         }
@@ -97,7 +93,7 @@ class AttributeController extends ResourceController
      */
     private function getAttributeForm(AttributeInterface $attribute)
     {
-        $attributeForm = 'sylius_attribute_type_'.$attribute->getType();
+        $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
 
         $form = $this
             ->get('form.factory')
