@@ -114,9 +114,6 @@
         <service id="sylius.form.type.promotion_action.fixed_discount_configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\FixedDiscountConfigurationType">
             <tag name="form.type" alias="sylius_promotion_action_fixed_discount_configuration" />
         </service>
-        <service id="sylius.form.type.promotion_action.unit_fixed_discount_configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\UnitFixedDiscountConfigurationType">
-            <tag name="form.type" alias="sylius_promotion_action_unit_fixed_discount_configuration" />
-        </service>
         <service id="sylius.form.type.promotion_action.currency_based_discount_amount" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\CurrencyBasedDiscountAmountType">
             <argument type="service" id="sylius.repository.currency" />
             <argument>%sylius_currency.currency%</argument>

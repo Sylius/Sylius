@@ -184,6 +184,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When /^I add the "([^"]+)" action configured with amount of "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     */
+    public function iAddTheActionConfiguredWithAmountForChannel($actionType, $amount, $channelName)
+    {
+        $this->createPage->addAction($actionType);
+        $this->createPage->fillActionOptionForChannel($channelName, 'Amount', $amount);
+    }
+
+    /**
      * @When I add the :actionType action
      */
     public function iAddTheAction($actionType)
@@ -197,6 +206,14 @@ final class ManagingPromotionsContext implements Context
     public function itIsConfiguredWithBaseAmount($amount)
     {
         $this->createPage->fillActionOption('Base amount', $amount);
+    }
+
+    /**
+     * @When /^it is(?:| also) configured with amount of "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     */
+    public function itIsConfiguredWithAmountForChannel($amount, $channelName)
+    {
+        $this->createPage->fillActionOptionForChannel($channelName, 'Amount', $amount);
     }
 
     /**
@@ -222,11 +239,27 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When /^I specify that on "([^"]+)" channel this action should be applied to items with price greater then "(?:€|£|\$)([^"]+)"$/
+     */
+    public function iAddAMinPriceFilterRangeForChannel($channelName, $minimum)
+    {
+        $this->createPage->fillActionOptionForChannel($channelName, 'Min', $minimum);
+    }
+
+    /**
      * @When /^I specify that this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
      */
     public function iAddAMaxPriceFilterRange($maximum)
     {
         $this->createPage->fillActionOption('Max', $maximum);
+    }
+
+    /**
+     * @When /^I specify that on "([^"]+)" channel this action should be applied to items with price lesser then "(?:€|£|\$)([^"]+)"$/
+     */
+    public function iAddAMaxPriceFilterRangeForChannel($channelName, $maximum)
+    {
+        $this->createPage->fillActionOptionForChannel($channelName, 'Max', $maximum);
     }
 
     /**
@@ -236,6 +269,15 @@ final class ManagingPromotionsContext implements Context
     {
         $this->iAddAMinPriceFilterRange($minimum);
         $this->iAddAMaxPriceFilterRange($maximum);
+    }
+
+    /**
+     * @When /^I specify that on "([^"]+)" channel this action should be applied to items with price between "(?:€|£|\$)([^"]+)" and "(?:€|£|\$)([^"]+)"$/
+     */
+    public function iAddAMinMaxPriceFilterRangeForChannel($channelName, $minimum, $maximum)
+    {
+        $this->iAddAMinPriceFilterRangeForChannel($channelName, $minimum);
+        $this->iAddAMaxPriceFilterRangeForChannel($channelName, $maximum);
     }
 
     /**
