@@ -25,13 +25,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return QueryBuilder
      */
     public function createListQueryBuilder();
-    
-    /**
-     * @param CustomerInterface $customer
-     *
-     * @return QueryBuilder
-     */
-    public function createByCustomerQueryBuilder(CustomerInterface $customer);
 
     /**
      * @param int $customerId
@@ -57,11 +50,10 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * @param CustomerInterface $customer
-     * @param array $sorting
      *
      * @return OrderInterface[]
      */
-    public function findByCustomer(CustomerInterface $customer, array $sorting = []);
+    public function findByCustomer(CustomerInterface $customer);
     
     /**
      * @param int $id
@@ -69,14 +61,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return OrderInterface|null
      */
     public function findOneForPayment($id);
-
-    /**
-     * @param array $criteria
-     * @param array $sorting
-     *
-     * @return PagerfantaInterface
-     */
-    public function createCheckoutsPaginator(array $criteria = null, array $sorting = null);
 
     /**
      * @param string $number
@@ -92,7 +76,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      *
      * @return OrderInterface|null
      */
-    public function findCartByIdAndChannel($id, ChannelInterface $channel);
+    public function findCartByChannel($id, ChannelInterface $channel);
 
     /**
      * @param ChannelInterface $channel

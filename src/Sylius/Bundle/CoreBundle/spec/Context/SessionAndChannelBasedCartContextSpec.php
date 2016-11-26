@@ -55,7 +55,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
         $session->has('session_key_name.Poland')->willReturn(true);
         $session->get('session_key_name.Poland')->willReturn(12345);
 
-        $orderRepository->findCartByIdAndChannel(12345, $channel)->willReturn($cart);
+        $orderRepository->findCartByChannel(12345, $channel)->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
     }
@@ -83,7 +83,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
         $session->has('session_key_name.Poland')->willReturn(true);
         $session->get('session_key_name.Poland')->willReturn(12345);
 
-        $orderRepository->findCartByIdAndChannel(12345, $channel)->willReturn(null);
+        $orderRepository->findCartByChannel(12345, $channel)->willReturn(null);
 
         $session->remove('session_key_name.Poland')->shouldBeCalled();
 

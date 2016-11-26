@@ -76,7 +76,7 @@ final class SessionAndChannelBasedCartContext implements CartContextInterface
             throw new CartNotFoundException('Sylius was not able to find the cart in session');
         }
 
-        $cart = $this->orderRepository->findCartByIdAndChannel(
+        $cart = $this->orderRepository->findCartByChannel(
             $this->session->get(sprintf('%s.%s', $this->sessionKeyName, $channel->getCode())),
             $channel
         );
