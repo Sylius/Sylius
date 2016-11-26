@@ -481,10 +481,20 @@ final class OrderContext implements Context
      * @Given /^(this order) was cancelled$/
      * @Given the order :order was cancelled
      * @Given /^I cancelled (this order)$/
-     * @Given /^I cancelled my (last order)$/
      */
     public function theCustomerCancelledThisOrder(OrderInterface $order)
     {
+        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CANCEL);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^I cancelled my last order$/
+     */
+    public function theCustomerCancelledMyLastOrder()
+    {
+        $order = $this->sharedStorage->get('order');
         $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CANCEL);
 
         $this->objectManager->flush();
