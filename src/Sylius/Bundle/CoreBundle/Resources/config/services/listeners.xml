@@ -89,7 +89,7 @@
         <service id="sylius.listener.order_customer_ip" class="Sylius\Bundle\CoreBundle\EventListener\OrderCustomerIpListener">
             <argument type="service" id="sylius.customer_ip_assigner" />
             <argument type="service" id="request_stack" />
-            <tag name="kernel.event_listener" event="sylius.order.pre_summary" method="assignCustomerIpToOrder" />
+            <tag name="kernel.event_listener" event="sylius.order.pre_complete" method="assignCustomerIpToOrder" />
         </service>
     </services>
 </container>
