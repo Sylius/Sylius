@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -33,7 +34,7 @@ final class ChannelPricingType extends AbstractResourceType
                 $channel = $event->getData()->getChannel();
                 $form = $event->getForm();
 
-                $form->add('price', 'sylius_money', [
+                $form->add('price', MoneyType::class, [
                     'label' => $channel->getName(),
                     'currency' => $channel->getBaseCurrency()->getCode(),
                 ]);

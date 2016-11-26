@@ -21,15 +21,7 @@ final class HasAllPricesDefined extends Constraint
     /**
      * @var string
      */
-    private $message = 'You must define price for every channel.';
-
-    /**
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
+    public $message = 'You must define price for every channel.';
 
     /**
      * {@inheritdoc}
