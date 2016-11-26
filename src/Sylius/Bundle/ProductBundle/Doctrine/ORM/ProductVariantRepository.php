@@ -30,20 +30,4 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
             ->setParameter('productId', $productId)
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findByName($name, $locale)
-    {
-        return $this->createQueryBuilder('o')
-            ->leftJoin('o.translations', 'translation')
-            ->andWhere('translation.name = :name')
-            ->andWhere('translation.locale = :locale')
-            ->setParameter('name', $name)
-            ->setParameter('locale', $locale)
-            ->getQuery()
-            ->getResult()
-            ;
-    }
 }

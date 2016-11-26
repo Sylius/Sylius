@@ -18,10 +18,10 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\Intl\Intl;
 
@@ -36,7 +36,7 @@ final class ZoneContext implements Context
     private $sharedStorage;
 
     /**
-     * @var ZoneRepositoryInterface
+     * @var RepositoryInterface
      */
     private $zoneRepository;
 
@@ -57,14 +57,14 @@ final class ZoneContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param ZoneRepositoryInterface $zoneRepository
+     * @param RepositoryInterface $zoneRepository
      * @param ObjectManager $objectManager
      * @param ZoneFactoryInterface $zoneFactory
      * @param FactoryInterface $zoneMemberFactory
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        ZoneRepositoryInterface $zoneRepository,
+        RepositoryInterface $zoneRepository,
         ObjectManager $objectManager,
         ZoneFactoryInterface $zoneFactory,
         FactoryInterface $zoneMemberFactory

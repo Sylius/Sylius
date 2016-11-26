@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.promotion_coupon.class%"
                     repository:
-                        method: createQueryBuilderByPromotion
+                        method: createQueryBuilderByPromotionId
                         arguments:
                             promotionId: $promotionId
             fields:

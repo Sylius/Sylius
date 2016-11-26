@@ -26,12 +26,4 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      * @return QueryBuilder
      */
     public function createQueryBuilderByProductId($productId);
-
-    /**
-     * @param string $name
-     * @param string $locale
-     *
-     * @return ProductVariantInterface[]
-     */
-    public function findByName($name, $locale);
 }
