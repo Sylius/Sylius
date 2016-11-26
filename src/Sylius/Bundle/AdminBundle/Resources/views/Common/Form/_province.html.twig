@@ -1,0 +1,6 @@
+{{ form_label(form) }}
+{% if form.vars.choices is defined %}
+    {{ form_widget(form, {'attr': {'class': 'ui dropdown'}}) }}
+{% else %}
+    {{ form_widget(form) }}
+{% endif %}

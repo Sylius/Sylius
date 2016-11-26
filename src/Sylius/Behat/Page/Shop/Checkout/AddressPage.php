@@ -205,7 +205,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
         $subtotalTable = $this->getElement('checkout_subtotal');
 
-        return $subtotalTable->find('css', sprintf('#item-%s-subtotal', $itemSlug))->getText();
+        return $subtotalTable->find('css', sprintf('#sylius-item-%s-subtotal', $itemSlug))->getText();
     }
 
     /**
@@ -331,7 +331,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'billing_country_province' => '[name="sylius_checkout_address[billingAddress][provinceCode]"]',
             'billing_postcode' => '#sylius_checkout_address_billingAddress_postcode',
             'billing_province' => '[name="sylius_checkout_address[billingAddress][provinceName]"]',
-            'checkout_subtotal' => '#checkout-subtotal',
+            'checkout_subtotal' => '#sylius-checkout-subtotal',
             'customer_email' => '#sylius_checkout_address_customer_email',
             'different_billing_address' => '#sylius_checkout_address_differentBillingAddress',
             'different_billing_address_label' => '#sylius_checkout_address_differentBillingAddress ~ label',

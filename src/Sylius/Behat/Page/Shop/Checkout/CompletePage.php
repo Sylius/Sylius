@@ -274,7 +274,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'addressing_step_label' => '.steps a:contains("Address")',
-            'billing_address' => '#billing-address',
+            'billing_address' => '#sylius-billing-address',
             'currency' => '#sylius-order-currency-code',
             'extra_notes' =>'#sylius_checkout_complete_notes',
             'items_table' => '#sylius-order',
@@ -286,7 +286,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'product_row' => 'tbody tr:contains("%name%")',
             'promotion_discounts' => '#promotion-discounts',
             'promotion_total' => '#promotion-total',
-            'shipping_address' => '#shipping-address',
+            'shipping_address' => '#sylius-shipping-address',
             'shipping_method' => '#shipping-method',
             'shipping_step_label' => '.steps a:contains("Shipping")',
             'shipping_total' => '#shipping-total',

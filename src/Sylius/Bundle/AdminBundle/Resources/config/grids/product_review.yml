@@ -28,9 +28,9 @@ sylius_grid:
                     label: sylius.ui.status
                     sortable: ~
                     options:
-                        template: @SyliusAdmin/Grid/Field/state.html.twig
+                        template: "@SyliusAdmin/Grid/Field/state.html.twig"
                         vars:
-                            labels: @SyliusAdmin/ProductReview/Label/Status
+                            labels: "@SyliusAdmin/ProductReview/Label/Status"
                 reviewSubject:
                     type: string
                     label: sylius.ui.product

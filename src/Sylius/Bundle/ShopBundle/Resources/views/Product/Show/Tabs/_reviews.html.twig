@@ -1,4 +1,4 @@
-<div class="ui bottom attached tab segment" data-tab="reviews">
+<div class="ui bottom attached tab segment" data-tab="reviews" id="sylius-product-reviews">
     {{ render(url('sylius_shop_partial_product_review_latest', {'productId': product.id, 'template': '@SyliusShop/ProductReview/Partial/_index.html.twig'})) }}
 
     <a href="{{ path('sylius_shop_product_review_index', {'slug': product.slug}) }}">

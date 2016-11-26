@@ -12,6 +12,8 @@
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\Exception;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\PageInterface;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;

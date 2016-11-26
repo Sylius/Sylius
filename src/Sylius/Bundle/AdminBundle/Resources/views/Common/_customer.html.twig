@@ -19,7 +19,7 @@
         </span>
         </div>
     {% endif %}
-    {% if order.customerIp is not empty %}
+    {% if order.customerIp is defined and order.customerIp is not empty %}
         <div class="extra content" id="ipAddress">
         <span>
             <i class="desktop icon"></i>

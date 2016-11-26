@@ -11,7 +11,7 @@
                 }))
             }}
         </div>
-        <div class="twelve wide column">
+        <div class="twelve wide column" id="sylius-product-reviews">
             {% include '@SyliusShop/ProductReview/Partial/_index.html.twig' %}
             <a href="{{ path('sylius_shop_product_review_create', {'slug': app.request.get('slug')}) }}">
                 <div class="ui blue labeled icon button"><i class="icon plus"></i> {{ 'sylius.ui.add_your_review'|trans }}</div>

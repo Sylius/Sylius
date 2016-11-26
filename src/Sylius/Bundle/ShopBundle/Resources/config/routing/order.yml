@@ -24,13 +24,13 @@ sylius_shop_order_thank_you:
         _sylius:
             template: "@SyliusShop/Order/thankYou.html.twig"
 
-sylius_shop_order_change_payment_method:
-    path: /{tokenValue}/change-payment-method
+sylius_shop_order_show:
+    path: /{tokenValue}
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
-            template: "@SyliusShop/Order/changePaymentMethod.html.twig"
+            template: "@SyliusShop/Order/show.html.twig"
             repository:
                 method: findOneBy
                 arguments: [tokenValue: $tokenValue]

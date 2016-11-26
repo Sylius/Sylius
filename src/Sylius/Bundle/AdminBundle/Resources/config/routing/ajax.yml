@@ -9,3 +9,10 @@ sylius_admin_ajax_product:
 sylius_admin_ajax_product_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/ajax/product_taxon.yml"
     prefix: /product-taxons
+
+sylius_admin_ajax_render_province_form:
+    path: /render-province-form
+    defaults:
+        _controller: sylius.controller.province:choiceOrTextFieldFormAction
+        _sylius:
+            template: @SyliusAdmin/Common/Form/_province.html.twig

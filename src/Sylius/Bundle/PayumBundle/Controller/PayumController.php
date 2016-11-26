@@ -21,6 +21,7 @@ use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -132,7 +133,9 @@ final class PayumController
 
         $this->getHttpRequestVerifier()->invalidate($token);
 
-        $request->getSession()->getBag('flashes')->add('info', sprintf('sylius.payment.%s', $status->getValue()));
+        if (PaymentInterface::STATE_NEW !== $status->getValue()) {
+            $request->getSession()->getBag('flashes')->add('info', sprintf('sylius.payment.%s', $status->getValue()));
+        }
 
         return $this->viewHandler->handle(
             $configuration,

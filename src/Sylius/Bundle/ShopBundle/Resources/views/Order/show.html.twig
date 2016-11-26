@@ -6,7 +6,7 @@
     {% include '@SyliusShop/Order/_summary.html.twig' %}
 
     {% if order.paymentState in ['awaiting_payment'] %}
-        {{ form_start(form, {'action': path('sylius_shop_order_change_payment_method', {'tokenValue': order.tokenValue}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             <input type="hidden" name="_method" value="PUT" />
 
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}

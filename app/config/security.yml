@@ -70,7 +70,6 @@ security:
 
     access_control:
         - { path: "^/_partial.*", ip: 127.0.0.1 }
-        - { path: "^/admin/_partial.*", ip: 127.0.0.1 }
 
         - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }

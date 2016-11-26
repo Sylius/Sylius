@@ -172,12 +172,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_address' => '#billing-address',
+            'billing_address' => '#sylius-billing-address',
+            'shipping_address' => '#sylius-shipping-address',
             'number' => '#number',
             'order_items' => '#sylius-order',
             'payments' => '#payments',
             'product_price' => '#sylius-order td:nth-child(2)',
-            'shipping_address' => '#shipping-address',
             'subtotal' => '#subtotal',
             'total' => '#total',
         ]);
@@ -198,8 +198,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return
             (stripos($elementText, $customerName) !== false) &&
             (stripos($elementText, $street) !== false) &&
-            (stripos($elementText, $city) !== false) &&
-            (stripos($elementText, $countryName.' '.$postcode) !== false)
+            (stripos($elementText, $city.', '.$postcode) !== false) &&
+            (stripos($elementText, $countryName) !== false)
         ;
     }
 }

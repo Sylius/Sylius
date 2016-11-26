@@ -61,6 +61,6 @@ sylius_grid:
                         label: sylius.ui.pay
                         options:
                             link:
-                                route: sylius_shop_order_change_payment_method
+                                route: sylius_shop_order_show
                                 parameters:
                                     tokenValue: resource.tokenValue

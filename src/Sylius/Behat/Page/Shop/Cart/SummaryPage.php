@@ -290,7 +290,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
             'product_unit_price' => '#sylius-cart-items tr:contains("%name%") .sylius-unit-price',
             'product_unit_regular_price' => '#sylius-cart-items tr:contains("%name%") .sylius-regular-unit-price',
-            'promotion_coupon_validation_message' => '.coupon.action.input .sylius-validation-error',
+            'promotion_coupon_validation_message' => '#sylius-coupon .sylius-validation-error',
             'promotion_total' => '#sylius-cart-promotion-total',
             'save_button' => '#sylius-save',
             'shipping_total' => '#sylius-cart-shipping-total',

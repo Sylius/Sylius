@@ -47,7 +47,9 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function hasNoReviewsMessage()
     {
-        return 'There are no reviews' === $this->getElement('reviews')->find('css', '.message')->getText();
+        $reviewsContainerText = $this->getElement('reviews')->getText();
+
+        return false !== strpos($reviewsContainerText, 'There are no reviews');
     }
 
     /**
@@ -56,7 +58,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'reviews' => '#reviews',
+            'reviews' => '#sylius-product-reviews',
         ]);
     }
 }

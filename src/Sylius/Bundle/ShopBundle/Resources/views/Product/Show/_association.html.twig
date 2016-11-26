@@ -1,1 +1,3 @@
-{% include '@SyliusShop/Product/Partial/_simpleIndex.html.twig' with {'products': product_association.associatedProducts} %}
+<div id="sylius-product-association-{{ product_association.type.name }}">
+    {% include '@SyliusShop/Product/Partial/_simpleIndex.html.twig' with {'products': product_association.associatedProducts} %}
+</div>

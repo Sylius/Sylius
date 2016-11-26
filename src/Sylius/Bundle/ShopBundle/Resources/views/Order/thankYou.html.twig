@@ -18,7 +18,7 @@
                 {% endif %}
             </h1>
             <div class="ui hidden divider"></div>
-            <a href="{{ path('sylius_shop_order_change_payment_method', {'tokenValue': order.tokenValue}) }}" class="ui large blue button">{{ 'sylius.ui.view_your_order_or_change_payment_method'|trans }}</a>
+            <a href="{{ path('sylius_shop_order_show', {'tokenValue': order.tokenValue}) }}" class="ui large blue button">{{ 'sylius.ui.view_your_order_or_change_payment_method'|trans }}</a>
         </div>
     </div>
 {% endblock %}
