@@ -26,3 +26,11 @@ Feature: Receiving discount based on nth order
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "$100.00"
         And there should be no discount
+
+    @ui
+    Scenario: Receiving a discount on 6th order when 5th one was cancelled
+        Given I have already placed 5 orders choosing "Free" shipping method to "United States" with "Cash on Delivery" payment
+        But I cancelled my last order
+        When I add product "PHP T-Shirt" to the cart
+        Then my cart total should be "$80.00"
+        And my discount should be "-$20.00"

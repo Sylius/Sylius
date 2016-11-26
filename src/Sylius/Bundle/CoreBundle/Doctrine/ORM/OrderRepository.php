@@ -164,8 +164,14 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
      */
     public function countByCustomer(CustomerInterface $customer)
     {
-        $count = $this->createByCustomerQueryBuilder($customer)
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $count = $queryBuilder
             ->select('count(o.id)')
+            ->andWhere('o.customer = :customer')
+            ->andWhere($queryBuilder->expr()->notIn('o.state', ':states'))
+            ->setParameter('customer', $customer)
+            ->setParameter('states', [OrderInterface::STATE_CART, OrderInterface::STATE_CANCELLED])
             ->getQuery()
             ->getSingleScalarResult()
         ;

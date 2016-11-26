@@ -373,6 +373,7 @@ final class OrderContext implements Context
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
             $this->orderRepository->add($order);
+            $this->sharedStorage->set('order', $order);
         }
     }
 
@@ -480,6 +481,7 @@ final class OrderContext implements Context
      * @Given /^(this order) was cancelled$/
      * @Given the order :order was cancelled
      * @Given /^I cancelled (this order)$/
+     * @Given /^I cancelled my (last order)$/
      */
     public function theCustomerCancelledThisOrder(OrderInterface $order)
     {

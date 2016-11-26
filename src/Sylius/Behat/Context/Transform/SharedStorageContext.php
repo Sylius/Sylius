@@ -42,7 +42,7 @@ final class SharedStorageContext implements Context
     }
 
     /**
-     * @Transform /^(?:this|that|the) ([^"]+)$/
+     * @Transform /^(?:this|that|the|last) ([^"]+)$/
      */
     public function getResource($resource)
     {
