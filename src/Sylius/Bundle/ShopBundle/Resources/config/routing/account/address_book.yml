@@ -41,10 +41,10 @@ sylius_shop_account_address_book_update:
             template: SyliusShopBundle:Account/AddressBook:update.html.twig
             section: shop_account
             repository:
-                method: findOneByCustomerAndId
+                method: findOneByCustomer
                 arguments:
-                    - 'expr:service("sylius.context.customer").getCustomer()'
                     - $id
+                    - 'expr:service("sylius.context.customer").getCustomer()'
             redirect:
                 route: sylius_shop_account_address_book_index
                 parameters: {}
@@ -58,10 +58,10 @@ sylius_shop_account_address_book_delete:
             section: shop_account
             redirect: sylius_shop_account_address_book_index
             repository:
-                method: findOneByCustomerAndId
+                method: findOneByCustomer
                 arguments:
-                    - 'expr:service("sylius.context.customer").getCustomer()'
                     - $id
+                    - 'expr:service("sylius.context.customer").getCustomer()'
 
 sylius_shop_account_address_book_set_default:
     path: /{id}/set-default

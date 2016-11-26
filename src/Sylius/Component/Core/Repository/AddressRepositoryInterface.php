@@ -29,10 +29,10 @@ interface AddressRepositoryInterface extends RepositoryInterface
     public function findByCustomer(CustomerInterface $customer);
 
     /**
-     * @param CustomerInterface $customer
      * @param string $id
+     * @param CustomerInterface $customer
      *
      * @return AddressInterface|null
      */
-    public function findOneByCustomerAndId(CustomerInterface $customer, $id);
+    public function findOneByCustomer($id, CustomerInterface $customer);
 }

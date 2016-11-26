@@ -27,11 +27,7 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
     {
         $queryBuilder = $this
             ->createQueryBuilder('o')
-            ->leftJoin($this->getPropertyName('rules'), 'r')
-            ->addSelect('r')
-            ->leftJoin($this->getPropertyName('actions'), 'a')
-            ->addSelect('a')
-            ->orderBy($this->getPropertyName('priority'), 'desc')
+            ->orderBy('o.priority', 'desc')
         ;
 
         $this->filterByActive($queryBuilder);
@@ -52,11 +48,11 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param \Datetime|null $date
+     * @param \DateTime|null $date
      *
      * @return QueryBuilder
      */
-    protected function filterByActive(QueryBuilder $queryBuilder, \Datetime $date = null)
+    protected function filterByActive(QueryBuilder $queryBuilder, \DateTime $date = null)
     {
         if (null === $date) {
             $date = new \Datetime();

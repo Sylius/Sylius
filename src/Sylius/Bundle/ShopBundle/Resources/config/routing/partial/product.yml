@@ -47,6 +47,7 @@ sylius_shop_partial_product_reviews_latest:
             repository:
                 method: findLatestByProductId
                 arguments:
+                    - 3
                     - $productId
 
 sylius_shop_product_simple_show:

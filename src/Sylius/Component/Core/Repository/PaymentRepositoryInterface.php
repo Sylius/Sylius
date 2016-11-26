@@ -20,10 +20,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface PaymentRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param mixed $orderId
      * @param mixed $id
+     * @param mixed $orderId
      *
      * @return PaymentInterface|null
      */
-    public function findByOrderIdAndId($orderId, $id);
+    public function findOneByOrderId($id, $orderId);
 }

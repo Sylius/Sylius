@@ -5,10 +5,10 @@ sylius_admin_partial_shipment_ship:
         _controller: sylius.controller.shipment:updateAction
         _sylius:
             repository:
-                method: findByOrderIdAndId
+                method: findOneByOrderId
                 arguments:
-                    orderId: $orderId
                     id: $id
+                    orderId: $orderId
             state_machine:
                 graph: sylius_shipment
                 transition: ship

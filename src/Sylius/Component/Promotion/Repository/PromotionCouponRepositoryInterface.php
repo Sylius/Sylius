@@ -20,16 +20,16 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface PromotionCouponRepositoryInterface extends RepositoryInterface
 {
     /**
+     * @param mixed $promotionId
+     *
+     * @return QueryBuilder
+     */
+    public function createQueryBuilderByPromotionId($promotionId);
+
+    /**
      * @param int $codeLength
      *
      * @return int
      */
     public function countByCodeLength($codeLength);
-
-    /**
-     * @param int $promotionId
-     *
-     * @return QueryBuilder
-     */
-    public function createQueryBuilderWithPromotion($promotionId);
 }

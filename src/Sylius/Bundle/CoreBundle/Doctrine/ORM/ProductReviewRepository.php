@@ -24,7 +24,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
     /**
      * {@inheritdoc}
      */
-    public function findLatestByProductId($productId)
+    public function findLatestByProductId($count, $productId)
     {
         return $this->createQueryBuilder('o')
             ->where('o.reviewSubject = :productId')
@@ -32,7 +32,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
             ->setParameter('productId', $productId)
             ->setParameter('status', ReviewInterface::STATUS_ACCEPTED)
             ->orderBy('o.createdAt', 'desc')
-            ->setMaxResults(3)
+            ->setMaxResults($count)
             ->getQuery()
             ->getResult()
         ;
@@ -45,9 +45,9 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.reviewSubject', 'product')
-            ->leftJoin('product.translations', 'translation')
-            ->leftJoin('product.channels', 'channel')
-            ->where('translation.locale = :locale')
+            ->innerJoin('product.translations', 'translation')
+            ->innerJoin('product.channels', 'channel')
+            ->andWhere('translation.locale = :locale')
             ->andWhere('translation.slug = :slug')
             ->andWhere('channel = :channel')
             ->andWhere('o.status = :status')

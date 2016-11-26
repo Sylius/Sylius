@@ -22,6 +22,17 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
     /**
      * {@inheritdoc}
      */
+    public function createQueryBuilderByPromotionId($promotionId)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.promotion = :promotionId')
+            ->setParameter('promotionId', $promotionId)
+            ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function countByCodeLength($codeLength)
     {
         $queryBuilder = $this->createQueryBuilder('o');
@@ -30,17 +41,6 @@ class PromotionCouponRepository extends EntityRepository implements PromotionCou
             ->where($queryBuilder->expr()->eq($queryBuilder->expr()->length('o.code'), $codeLength))
             ->getQuery()
             ->getSingleScalarResult()
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createQueryBuilderWithPromotion($promotionId)
-    {
-        return $this->createQueryBuilder('o')
-            ->where('o.promotion = :promotionId')
-            ->setParameter('promotionId', $promotionId)
         ;
     }
 }

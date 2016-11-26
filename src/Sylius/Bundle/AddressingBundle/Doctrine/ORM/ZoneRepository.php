@@ -25,9 +25,8 @@ class ZoneRepository extends EntityRepository implements ZoneRepositoryInterface
     public function findByName($name)
     {
         return $this->createQueryBuilder('o')
-            ->addSelect('members')
             ->leftJoin('o.members', 'members')
-            ->where('o.name = :name')
+            ->andWhere('o.name = :name')
             ->setParameter('name', $name)
             ->getQuery()
             ->getResult()

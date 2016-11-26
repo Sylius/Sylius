@@ -20,17 +20,17 @@ use Sylius\Component\Product\Model\ProductOptionInterface;
 interface ProductOptionRepositoryInterface extends RepositoryInterface
 {
     /**
+     * @param string $locale
+     *
+     * @return QueryBuilder
+     */
+    public function createListQueryBuilder($locale);
+
+    /**
      * @param string $name
      * @param string $locale
      *
      * @return ProductOptionInterface[]
      */
     public function findByName($name, $locale);
-
-    /**
-     * @param string $locale
-     *
-     * @return QueryBuilder
-     */
-    public function createListQueryBuilder($locale);
 }

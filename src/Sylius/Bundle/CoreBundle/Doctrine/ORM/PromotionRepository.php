@@ -27,13 +27,13 @@ class PromotionRepository extends BasePromotionRepository implements PromotionRe
     {
         $queryBuilder = $this
             ->createQueryBuilder('o')
-            ->orderBy($this->getPropertyName('priority'), 'desc')
+            ->orderBy('o.priority', 'desc')
         ;
 
         $this->filterByActive($queryBuilder);
 
         $queryBuilder
-            ->innerJoin($this->getPropertyName('channels'), 'channel')
+            ->innerJoin('o.channels', 'channel')
             ->andWhere($queryBuilder->expr()->eq('channel', ':channel'))
             ->setParameter('channel', $channel)
         ;

@@ -38,14 +38,14 @@ class AddressRepository extends EntityRepository implements AddressRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findOneByCustomerAndId(CustomerInterface $customer, $id)
+    public function findOneByCustomer($id, CustomerInterface $customer)
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.customer', 'customer')
-            ->where('customer = :customer')
             ->andWhere('o.id = :id')
-            ->setParameter('customer', $customer)
+            ->andWhere('customer = :customer')
             ->setParameter('id', $id)
+            ->setParameter('customer', $customer)
             ->getQuery()
             ->getOneOrNullResult()
         ;
