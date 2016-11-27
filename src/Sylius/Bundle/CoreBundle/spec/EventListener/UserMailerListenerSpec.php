@@ -13,8 +13,11 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\EventListener\MailerListener;
+use Sylius\Bundle\CoreBundle\EventListener\UserMailerListener;
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\UserBundle\EventListener\MailerListener;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -23,98 +26,112 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Manuel Gonzalez <mgonyan@gmail.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class MailerListenerSpec extends ObjectBehavior
+final class UserMailerListenerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $emailSender)
+    function let(SenderInterface $emailSender, ChannelContextInterface $channelContext)
     {
-        $this->beConstructedWith($emailSender);
+        $this->beConstructedWith($emailSender, $channelContext);
     }
 
-    function it_is_initializable()
+    function it_is_instializable()
+    {
+        $this->shouldHaveType(UserMailerListener::class);
+    }
+
+    function it_is_a_user_mailer_listener()
     {
         $this->shouldHaveType(MailerListener::class);
     }
 
     function it_throws_an_exception_if_event_subject_is_not_a_customer_instance_sending_confirmation(
-        GenericEvent $event
+        GenericEvent $event,
+        \stdClass $customer
     ) {
-        $customerClass = new \stdClass();
+        $event->getSubject()->willReturn($customer);
 
-        $event->getSubject()->shouldBeCalled()->willReturn($customerClass);
-
-        $exception = new UnexpectedTypeException(
-            $customerClass,
-            CustomerInterface::class
-        );
-
-        $this->shouldThrow($exception)->duringSendUserConfirmationEmail($event);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('sendUserConfirmationEmail', [$event]);
     }
 
-    function it_should_not_send_the_email_confirmation_if_the_customer_user_is_null(
-        GenericEvent $event,
+    function it_does_not_send_the_email_confirmation_if_the_customer_user_is_null(
         SenderInterface $emailSender,
+        GenericEvent $event,
         CustomerInterface $customer
     ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($customer);
+        $event->getSubject()->willReturn($customer);
 
-        $customer->getUser()->shouldBeCalled()->willReturn(null);
-
-        $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
-
-        $this->sendUserConfirmationEmail($event)->shouldReturn(null);
-    }
-
-    function it_should_not_send_the_email_confirmation_if_the_customer_user_is_not_enabled(
-        GenericEvent $event,
-        SenderInterface $emailSender,
-        CustomerInterface $customer,
-        UserInterface $user
-    ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($customer);
-
-        $customer->getUser()->shouldBeCalled()->willReturn($user);
-
-        $user->isEnabled()->shouldBeCalled()->willReturn(false);
+        $customer->getUser()->willReturn(null);
 
         $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
 
         $this->sendUserConfirmationEmail($event)->shouldReturn(null);
     }
 
-    function it_should_not_send_the_email_confirmation_if_the_customer_user_does_not_have_email(
-        GenericEvent $event,
+    function it_does_not_send_the_email_confirmation_if_the_customer_user_is_not_enabled(
         SenderInterface $emailSender,
+        GenericEvent $event,
         CustomerInterface $customer,
         UserInterface $user
     ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($customer);
+        $event->getSubject()->willReturn($customer);
 
-        $customer->getUser()->shouldBeCalled()->willReturn($user);
-        $customer->getEmail()->shouldBeCalled()->willReturn(null);
+        $customer->getUser()->willReturn($user);
 
-        $user->isEnabled()->shouldBeCalled()->willReturn(true);
+        $user->isEnabled()->willReturn(false);
 
         $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
 
         $this->sendUserConfirmationEmail($event)->shouldReturn(null);
     }
 
-    function it_sends_email_confirmation_successfully(
-        GenericEvent $event,
+    function it_does_not_send_the_email_confirmation_if_the_customer_user_does_not_have_email(
         SenderInterface $emailSender,
+        GenericEvent $event,
         CustomerInterface $customer,
         UserInterface $user
     ) {
-        $event->getSubject()->shouldBeCalled()->willReturn($customer);
+        $event->getSubject()->willReturn($customer);
 
-        $customer->getUser()->shouldBeCalled()->willReturn($user);
-        $customer->getEmail()->shouldBeCalled()->willReturn('fulanito@sylius.com');
+        $customer->getUser()->willReturn($user);
+        $customer->getEmail()->willReturn(null);
 
-        $user->isEnabled()->shouldBeCalled()->willReturn(true);
+        $user->isEnabled()->willReturn(true);
+
+        $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
+
+        $this->sendUserConfirmationEmail($event)->shouldReturn(null);
+    }
+
+    function it_sends_an_email_confirmation_successfully(
+        SenderInterface $emailSender,
+        ChannelContextInterface $channelContext,
+        GenericEvent $event,
+        CustomerInterface $customer,
+        UserInterface $user,
+        ChannelInterface $channel
+    ) {
+        $event->getSubject()->willReturn($customer);
+
+        $customer->getUser()->willReturn($user);
+        $customer->getEmail()->willReturn('fulanito@sylius.com');
+
+        $user->isEnabled()->willReturn(true);
+        $user->getEmail()->willReturn('fulanito@sylius.com');
+
+        $channelContext->getChannel()->willReturn($channel);
 
         $emailSender
-            ->send(Emails::USER_CONFIRMATION, ['fulanito@sylius.com'], ['user' => $user])
+            ->send(
+                Emails::USER_CONFIRMATION,
+                [
+                    'fulanito@sylius.com',
+                ],
+                [
+                    'user' => $user,
+                    'channel' => $channel,
+                ]
+            )
             ->shouldBeCalled()
         ;
 

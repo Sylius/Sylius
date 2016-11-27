@@ -12,27 +12,35 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
+use Sylius\Bundle\UserBundle\EventListener\MailerListener;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class MailerListener
+final class UserMailerListener extends MailerListener
 {
     /**
-     * @var SenderInterface
+     * @var ChannelContextInterface
      */
-    private $emailSender;
+    private $channelContext;
 
     /**
      * @param SenderInterface $emailSender
+     * @param ChannelContextInterface $channelContext
      */
-    public function __construct(SenderInterface $emailSender)
+    public function __construct(SenderInterface $emailSender, ChannelContextInterface $channelContext)
     {
-        $this->emailSender = $emailSender;
+        parent::__construct($emailSender);
+
+        $this->channelContext = $channelContext;
     }
 
     /**
@@ -44,12 +52,7 @@ final class MailerListener
     {
         $customer = $event->getSubject();
 
-        if (!$customer instanceof CustomerInterface) {
-            throw new UnexpectedTypeException(
-                $customer,
-                CustomerInterface::class
-            );
-        }
+        Assert::isInstanceOf($customer, CustomerInterface::class);
 
         if (null === ($user = $customer->getUser())) {
             return;
@@ -63,6 +66,25 @@ final class MailerListener
             return;
         }
 
-        $this->emailSender->send(Emails::USER_CONFIRMATION, [$email], ['user' => $user]);
+        $this->sendEmail($user, Emails::USER_CONFIRMATION);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function sendEmail($user, $emailCode)
+    {
+        Assert::isInstanceOf($user, UserInterface::class);
+
+        $this->emailSender->send(
+            $emailCode,
+            [
+                $user->getEmail(),
+            ],
+            [
+                'user' => $user,
+                'channel' => $this->channelContext->getChannel(),
+            ]
+        );
     }
 }
