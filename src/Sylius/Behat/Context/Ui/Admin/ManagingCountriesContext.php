@@ -64,8 +64,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Given I want to add a new country
-     * @Given I want to add a new country with a province
+     * @When I want to add a new country
      */
     public function iWantToAddNewCountry()
     {
@@ -73,7 +72,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Given /^I want to edit (this country)$/
+     * @When /^I want to edit (this country)$/
      */
     public function iWantToEditThisCountry(CountryInterface $country)
     {
@@ -271,7 +270,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Given /^I want to create a new province in (country "([^"]*)")$/
+     * @When /^I want to create a new province in (country "([^"]*)")$/
      */
     public function iWantToCreateANewProvinceInCountry(CountryInterface $country)
     {

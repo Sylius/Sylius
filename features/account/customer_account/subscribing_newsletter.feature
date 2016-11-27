@@ -11,8 +11,8 @@ Feature: Subscribing to the newsletter
 
     @ui
     Scenario: Subscribing to the newsletter
-        Given I want to modify my profile
-        When I subscribe to the newsletter
+        When I want to modify my profile
+        And I subscribe to the newsletter
         And I save my changes
         Then I should be notified that it has been successfully edited
         And I should be subscribed to the newsletter

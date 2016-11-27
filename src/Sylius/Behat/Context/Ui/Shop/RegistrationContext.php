@@ -109,7 +109,7 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Given /^I want to(?:| again) register a new account$/
+     * @When /^I want to(?:| again) register a new account$/
      */
     public function iWantToRegisterANewAccount()
     {

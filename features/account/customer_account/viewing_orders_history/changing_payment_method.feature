@@ -1,8 +1,8 @@
 @customer_account
-Feature: Paying with paypal during checkout
+Feature: Changing a payment method of a placed order
     In order to buy products
     As a Customer
-    I want to be able to pay with PayPal Express Checkout
+    I want to be able to change a payment method of an order
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -16,6 +16,6 @@ Feature: Paying with paypal during checkout
         And I chose "Free" shipping method with "Cash on Delivery" payment
 
     @ui
-    Scenario: Retrying the payment with success
+    Scenario: Changing a payment method of an order
         When I browse my orders
         Then I should be able to change payment method for this order

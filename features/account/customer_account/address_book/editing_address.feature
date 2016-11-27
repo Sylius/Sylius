@@ -23,7 +23,7 @@ Feature: Making changes in existing addresses
         And I change the last name to "Edgley"
         And I save my changed address
         Then I should be notified that the address has been successfully updated
-        And there should still be a single address in my book
+        And I should still have a single address in my address book
         And this address should be assigned to "Stephanie Edgley"
 
     @ui
@@ -34,7 +34,7 @@ Feature: Making changes in existing addresses
         And I change the postcode to "GBA-20B"
         And I save my changed address
         Then I should be notified that the address has been successfully updated
-        And there should still be a single address in my book
+        And I should still have a single address in my address book
         And it should contain "Vildegard Av"
         And it should contain "Liverpool"
         And it should contain "GBA-20B"
@@ -48,7 +48,7 @@ Feature: Making changes in existing addresses
         And I choose "Queensland" as my province
         And I save my changed address
         Then I should be notified that the address has been successfully updated
-        And there should still be a single address in my book
+        And I should still have a single address in my address book
         And it should contain "Australia"
         And it should contain "Queensland"
 
@@ -58,5 +58,5 @@ Feature: Making changes in existing addresses
         When I specify "New York" as my province
         And I save my changed address
         Then I should be notified that the address has been successfully updated
-        And there should still be a single address in my book
+        And I should still have a single address in my address book
         And it should contain "New York"

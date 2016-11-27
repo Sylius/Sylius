@@ -84,7 +84,7 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Given I want to modify my profile
+     * @When I want to modify my profile
      */
     public function iWantToModifyMyProfile()
     {

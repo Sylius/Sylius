@@ -9,8 +9,8 @@ Feature: Adding countries with provinces
 
     @ui @javascript
     Scenario: Adding a country with a province
-        Given I want to add a new country with a province
-        When I choose "United Kingdom"
+        When I want to add a new country
+        And I choose "United Kingdom"
         And I add the "Scotland" province with "GB-SCT" code
         And I add it
         Then I should be notified that it has been successfully created
@@ -19,8 +19,8 @@ Feature: Adding countries with provinces
 
     @ui @javascript
     Scenario: Adding a country with two provinces
-        Given I want to add a new country with a province
-        When I choose "United Kingdom"
+        When I want to add a new country
+        And I choose "United Kingdom"
         And I add the "Scotland" province with "GB-SCT" code
         And I add the "Northern Ireland" province with "GB-NIR" code and "N.Ireland" abbreviation
         And I add it

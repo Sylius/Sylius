@@ -17,7 +17,6 @@ use Sylius\Behat\Page\Shop\Account\AddressBook\CreatePageInterface;
 use Sylius\Behat\Page\Shop\Account\AddressBook\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\AddressBook\UpdatePageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
-use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -115,7 +114,7 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Given I want to add a new address to my address book
+     * @When I want to add a new address to my address book
      */
     public function iWantToAddANewAddressToMyAddressBook()
     {
@@ -228,14 +227,6 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then there should( still) be a single address in my book
-     */
-    public function iShouldSeeASingleAddressInTheList()
-    {
-        $this->assertAddressesCountOnPage(1);
-    }
-
-    /**
      * @Then this address should be assigned to :fullName
      * @Then /^the address assigned to "([^"]+)" should (appear|be) in my book$/
      */
@@ -306,9 +297,10 @@ final class AddressBookContext implements Context
     }
 
     /**
-     * @Then /^I should(?:| still) have (\d+) address(?:|es) in my address book$/
+     * @Then /^I should(?:| still) have a single address in my address book$/
+     * @Then /^I should(?:| still) have (\d+) addresses in my address book$/
      */
-    public function iShouldHaveAddresses($count)
+    public function iShouldHaveAddresses($count = 1)
     {
         $this->addressBookIndexPage->open();
 

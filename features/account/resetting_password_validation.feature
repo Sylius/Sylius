@@ -9,7 +9,7 @@ Feature: Resetting a password validation
 
     @ui
     Scenario: Trying to reset password without specifying email
-        Given I want to reset password
-        When I do not specify the email
-        And I reset it
+        When I want to reset password
+        And I do not specify the email
+        And I try to reset it
         Then I should be notified that the email is required

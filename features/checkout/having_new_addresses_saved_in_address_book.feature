@@ -19,7 +19,7 @@ Feature: Having new addresses saved in the address book after checkout
         And I complete the addressing step
         And I proceed with "Free" shipping method and "Cash on Delivery" payment
         And I confirm my order
-        Then I should have 1 address in my address book
+        Then I should have a single address in my address book
 
     @ui
     Scenario: Having the shipping and billing addresses saved in my address book
