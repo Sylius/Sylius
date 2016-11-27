@@ -5,12 +5,6 @@ sylius_mailer:
     sender:
         name: Example.com
         address: no-reply@example.com
-    templates:
-        sylius.email.order_confirmation.name: "SyliusCoreBundle:Email:orderConfirmation.html.twig"
-        sylius.email.shipment_confirmation.name: "SyliusCoreBundle:Email:shipmentConfirmation.html.twig"
-        sylius.email.user_confirmation.name: "SyliusCoreBundle:Email:userConfirmation.html.twig"
-        sylius.email.password_reset.name: "SyliusCoreBundle:Email:passwordReset.html.twig"
-        sylius.email.verification_token.name: "SyliusCoreBundle:Email:verification.html.twig"
     emails:
         order_confirmation:
             subject: sylius.emails.order_confirmation.subject

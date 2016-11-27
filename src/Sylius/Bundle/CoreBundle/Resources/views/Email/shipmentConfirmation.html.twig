@@ -1,9 +1,13 @@
 {% block subject %}
-    {{ 'sylius.email.shipment_confirmation.name'|trans }}
+    Shipment confirmation
 {% endblock %}
 
 {% block body %}
     {% autoescape %}
-        {{ 'sylius.email.shipment_confirmation.content'|trans({'%number%': order.number, '%tracking%': shipment.tracking, '%method%': shipment.method }) }}
+        Your order with number {{ order.number }} has been sent using {{ shipment.method }}.
+        <br/>
+        You can check it's location with the "{{ shipment.tracking }}" tracking code.
+        <br/><br/>
+        Thank you for a successful transaction.
     {% endautoescape %}
 {% endblock %}

@@ -1,7 +1,13 @@
 {% block subject %}
-    {{ 'sylius.email.user_confirmation.subject'|trans }}
+    User confirmation
 {% endblock %}
 
 {% block body %}
-    {{ 'sylius.email.user_confirmation.content'|trans({'%username%': user.username}) }}
+    {% autoescape %}
+        Welcome to our store!
+        <br/><br/>
+        You have just been registered.
+        <br/>
+        Thank you {{ user.username }}.
+    {% endautoescape %}
 {% endblock %}
