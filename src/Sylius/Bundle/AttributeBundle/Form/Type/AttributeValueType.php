@@ -47,20 +47,20 @@ abstract class AttributeValueType extends AbstractResourceType
      * @param array $validationGroups
      * @param string $attributeChoiceType
      * @param RepositoryInterface $attributeRepository
-     * @param FormTypeRegistryInterface $formTypeRegistry
+     * @param FormTypeRegistryInterface $formTypeTypeRegistry
      */
     public function __construct(
         $dataClass,
         array $validationGroups,
         $attributeChoiceType,
         RepositoryInterface $attributeRepository,
-        FormTypeRegistryInterface $formTypeRegistry
+        FormTypeRegistryInterface $formTypeTypeRegistry
     ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->attributeChoiceType = $attributeChoiceType;
         $this->attributeRepository = $attributeRepository;
-        $this->formTypeRegistry = $formTypeRegistry;
+        $this->formTypeRegistry = $formTypeTypeRegistry;
     }
 
     /**

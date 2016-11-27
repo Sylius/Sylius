@@ -9,26 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
-use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType as BaseShippingMethodType;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShippingMethodType extends BaseShippingMethodType
+class ShippingMethodTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('zone', ZoneChoiceType::class, [
                 'label' => 'sylius.form.shipping_method.zone',
@@ -44,5 +43,13 @@ class ShippingMethodType extends BaseShippingMethodType
                 'label' => 'sylius.form.shipping_method.channels',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return ShippingMethodType::class;
     }
 }

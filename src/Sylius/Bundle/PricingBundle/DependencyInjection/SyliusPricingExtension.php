@@ -40,12 +40,13 @@ final class SyliusPricingExtension extends Extension
                 ->setArguments([
                     $formType,
                     new Reference('sylius.registry.price_calculator'),
-                    new Reference('sylius.form.subscriber.priceable'),
+                    new Reference('form.factory'),
+                    new Reference('sylius.form_registry.price_calculator'),
                 ])
-                ->addTag('form.type_extension', ['alias' => $formType, 'extended_type' => $formType])
+                ->addTag('form.type_extension', ['extended_type' => $formType])
             ;
 
-            $container->setDefinition(sprintf('sylius.form.extension.priceable.%s', $formType), $definition);
+            $container->setDefinition(sprintf('sylius.form.extension.priceable.%s', md5($formType)), $definition);
         }
     }
 

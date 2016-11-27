@@ -7,20 +7,13 @@ sylius_product:
             classes:
                 model: Sylius\Component\Core\Model\Product
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
-                form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductType
             translation:
                 classes:
                     model: Sylius\Component\Core\Model\ProductTranslation
-                    form:
-                        default: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductTranslationType
         product_variant:
             classes:
                 model: Sylius\Component\Core\Model\ProductVariant
                 repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository
-                form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductVariantType
-                    generation: Sylius\Bundle\CoreBundle\Form\Type\Product\ProductVariantGenerationType
         product_option:
             classes:
                 repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository

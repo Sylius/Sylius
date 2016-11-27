@@ -32,8 +32,8 @@ class FlatRateConfigurationType extends AbstractType
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.flat_rate_configuration.amount',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'integer']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'integer', 'groups' => ['sylius']]),
                 ],
             ])
         ;

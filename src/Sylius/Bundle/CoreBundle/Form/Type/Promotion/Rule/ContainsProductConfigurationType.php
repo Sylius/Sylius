@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
+use Sylius\Bundle\ProductBundle\Form\Type\ProductCodeChoiceType;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -42,14 +43,12 @@ class ContainsProductConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product_code', 'sylius_product_from_identifier', [
+            ->add('product_code', ProductCodeChoiceType::class, [
                 'label' => 'sylius.form.promotion_action.add_product_configuration.product',
-                'class' => $this->productRepository->getClassName(),
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'string']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'string', 'groups' => ['sylius']]),
                 ],
-                'identifier' => 'code',
             ])
         ;
     }

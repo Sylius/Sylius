@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
 use Sylius\Bundle\ProductBundle\Controller\ProductAttributeController;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeValueType;
@@ -27,7 +26,6 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -47,11 +45,6 @@ final class SyliusProductExtension extends AbstractResourceExtension implements 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $loader->load('services.xml');
-
-        $formDefinition = $container->getDefinition('sylius.form.type.product_generate_variants');
-        $formDefinition->addArgument($container->getDefinition('sylius.form.event_subscriber.product_variant_generator'));
-
-        $container->getDefinition('sylius.form.type.product')->addArgument(new Reference('sylius.product_variant_resolver.default'));
     }
 
     /**

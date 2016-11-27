@@ -28,7 +28,7 @@ class ProductOptionValueType extends AbstractResourceType
     {
         $builder
             ->add('translations', ResourceTranslationsType::class, [
-                'entry_type' => 'sylius_product_option_value_translation',
+                'entry_type' => ProductOptionValueTranslationType::class,
                 'label' => 'sylius.form.option.name',
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber())

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Promotion\Checker\Rule;
 
+use Sylius\Bundle\PromotionBundle\Form\Type\Rule\CartQuantityConfigurationType;
 use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -38,6 +39,6 @@ final class CartQuantityRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_rule_cart_quantity_configuration';
+        return CartQuantityConfigurationType::class;
     }
 }

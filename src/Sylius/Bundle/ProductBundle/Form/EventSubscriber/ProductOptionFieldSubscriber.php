@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Resolver\ProductVariantResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -61,7 +62,7 @@ final class ProductOptionFieldSubscriber implements EventSubscriberInterface
         /** Options should be disabled for configurable product if it has at least one defined variant */
         $disableOptions = (null !== $this->variantResolver->getVariant($product)) && $product->hasVariants();
 
-        $form->add('options', 'sylius_product_option_choice', [
+        $form->add('options', ProductOptionChoiceType::class, [
             'required' => false,
             'disabled' => $disableOptions,
             'multiple' => true,

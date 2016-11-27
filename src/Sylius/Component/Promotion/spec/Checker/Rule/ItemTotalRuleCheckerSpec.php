@@ -61,9 +61,4 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
 
         $this->isEligible($subject, ['amount' => 500])->shouldReturn(true);
     }
-
-    function it_returns_a_subject_total_configuration_form_type()
-    {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_item_total_configuration');
-    }
 }

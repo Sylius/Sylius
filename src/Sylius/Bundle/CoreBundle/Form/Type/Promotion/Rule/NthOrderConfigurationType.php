@@ -31,8 +31,8 @@ class NthOrderConfigurationType extends AbstractType
             ->add('nth', IntegerType::class, [
                 'label' => 'sylius.form.promotion_rule.nth_order_configuration.nth',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'numeric']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                 ],
             ])
         ;

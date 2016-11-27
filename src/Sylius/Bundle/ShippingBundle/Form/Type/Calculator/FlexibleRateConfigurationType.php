@@ -33,22 +33,22 @@ class FlexibleRateConfigurationType extends AbstractType
             ->add('first_unit_cost', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.first_unit_cost',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'integer']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'integer', 'groups' => ['sylius']]),
                 ],
             ])
             ->add('additional_unit_cost', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_unit_cost',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'integer']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'integer', 'groups' => ['sylius']]),
                 ],
             ])
             ->add('additional_unit_limit', IntegerType::class, [
                 'required' => false,
                 'label' => 'sylius.form.shipping_calculator.flexible_rate_configuration.additional_unit_limit',
                 'constraints' => [
-                    new Type(['type' => 'integer']),
+                    new Type(['type' => 'integer', 'groups' => ['sylius']]),
                 ],
             ])
         ;

@@ -33,22 +33,22 @@ class WeightRateConfigurationType extends AbstractType
             ->add('fixed', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.fixed',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'integer']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'integer', 'groups' => ['sylius']]),
                 ],
             ])
             ->add('variable', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.variable',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'integer']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'integer', 'groups' => ['sylius']]),
                 ],
             ])
             ->add('division', NumberType::class, [
                 'label' => 'sylius.form.shipping_calculator.weight_rate_configuration.division',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'numeric']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                 ],
             ])
         ;

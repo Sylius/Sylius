@@ -29,8 +29,18 @@ class PriceRangeFilterConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('min', MoneyType::class, ['required' => false, 'constraints' => [new Type(['type' => 'numeric'])]])
-            ->add('max', MoneyType::class, ['required' => false, 'constraints' => [new Type(['type' => 'numeric'])]])
+            ->add('min', MoneyType::class, [
+                'required' => false,
+                'constraints' => [
+                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
+                ],
+            ])
+            ->add('max', MoneyType::class, [
+                'required' => false,
+                'constraints' => [
+                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
+                ],
+            ])
         ;
     }
 

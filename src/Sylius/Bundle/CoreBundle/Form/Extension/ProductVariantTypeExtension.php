@@ -9,25 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
-use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormRegistryInterface;
-use Symfony\Component\Form\FormView;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductVariantType extends BaseProductVariantType
+class ProductVariantTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var ServiceRegistryInterface
@@ -39,14 +38,12 @@ class ProductVariantType extends BaseProductVariantType
      */
     protected $formRegistry;
 
-    public function __construct(
-        $dataClass,
-        array $validationGroups = [],
-        ServiceRegistryInterface $calculatorRegistry,
-        FormRegistryInterface $formRegistry
-    ) {
-        parent::__construct($dataClass, $validationGroups);
-
+    /**
+     * @param ServiceRegistryInterface $calculatorRegistry
+     * @param FormRegistryInterface $formRegistry
+     */
+    public function __construct(ServiceRegistryInterface $calculatorRegistry, FormRegistryInterface $formRegistry)
+    {
         $this->calculatorRegistry = $calculatorRegistry;
         $this->formRegistry = $formRegistry;
     }
@@ -56,8 +53,6 @@ class ProductVariantType extends BaseProductVariantType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('price', MoneyType::class, [
                 'label' => 'sylius.form.variant.price',
@@ -93,44 +88,19 @@ class ProductVariantType extends BaseProductVariantType
                 'placeholder' => '---',
                 'label' => 'sylius.form.product_variant.tax_category',
             ])
-            ->add('pricingCalculator', 'sylius_price_calculator_choice', [
-                'label' => 'sylius.form.shipping_method.calculator',
-            ])
-            ->add('shippingCategory', 'sylius_shipping_category_choice', [
+            ->add('shippingCategory', ShippingCategoryChoiceType::class, [
                 'required' => false,
                 'placeholder' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.product_variant.shipping_category',
             ])
         ;
-
-        $prototypes = [
-            'calculators' => [],
-        ];
-
-        /** @var CalculatorInterface $calculator */
-        foreach ($this->calculatorRegistry->all() as $name => $calculator) {
-            $calculatorTypeName = sprintf('sylius_price_calculator_%s', $calculator->getType());
-
-            if (!$this->formRegistry->hasType($calculatorTypeName)) {
-                continue;
-            }
-
-            $prototypes['calculators'][$name] = $builder->create('configuration', $calculatorTypeName)->getForm();
-        }
-
-        $builder->setAttribute('prototypes', $prototypes);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function buildView(FormView $view, FormInterface $form, array $options)
+    public function getExtendedType()
     {
-        $view->vars['prototypes'] = [];
-        foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
-            foreach ($prototypes as $type => $prototype) {
-                $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
-            }
-        }
+        return ProductVariantType::class;
     }
 }

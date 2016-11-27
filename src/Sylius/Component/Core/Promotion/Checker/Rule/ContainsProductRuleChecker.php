@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule\ContainsProductConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -50,6 +51,6 @@ final class ContainsProductRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_rule_contains_product_configuration';
+        return ContainsProductConfigurationType::class;
     }
 }

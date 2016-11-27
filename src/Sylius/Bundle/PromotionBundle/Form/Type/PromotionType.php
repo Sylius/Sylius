@@ -65,11 +65,11 @@ class PromotionType extends AbstractResourceType
                 'label' => 'sylius.form.promotion.coupon_based',
                 'required' => false,
             ])
-            ->add('rules', 'sylius_promotion_rule_collection', [
+            ->add('rules', PromotionRuleCollectionType::class, [
                 'label' => 'sylius.form.promotion.rules',
                 'button_add_label' => 'sylius.form.promotion.add_rule',
             ])
-            ->add('actions', 'sylius_promotion_action_collection', [
+            ->add('actions', PromotionActionCollectionType::class, [
                 'label' => 'sylius.form.promotion.actions',
                 'button_add_label' => 'sylius.form.promotion.add_action',
             ])

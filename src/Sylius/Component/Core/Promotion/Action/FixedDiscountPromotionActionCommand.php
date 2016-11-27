@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
@@ -91,7 +92,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_fixed_discount_configuration';
+        return FixedDiscountConfigurationType::class;
     }
 
     /**

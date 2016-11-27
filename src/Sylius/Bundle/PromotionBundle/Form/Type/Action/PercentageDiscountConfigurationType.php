@@ -33,13 +33,14 @@ class PercentageDiscountConfigurationType extends AbstractType
             ->add('percentage', PercentType::class, [
                 'label' => 'sylius.form.promotion_action.percentage_discount_configuration.percentage',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'numeric']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                     new Range([
                         'min' => 0,
                         'max' => 1,
                         'minMessage' => 'sylius.promotion_action.percentage_discount_configuration.min',
                         'maxMessage' => 'sylius.promotion_action.percentage_discount_configuration.max',
+                        'groups' => ['sylius'],
                     ]),
                 ],
             ])

@@ -25,10 +25,10 @@ class ProductAssociationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'sylius_product_association_type_choice', [
+            ->add('type', ProductAssociationTypeChoiceType::class, [
                 'label' => 'sylius.form.product_association.type',
             ])
-            ->add('product', 'sylius_product_choice', [
+            ->add('product', ProductChoiceType::class, [
                 'label' => 'sylius.form.product_association.product',
                 'property_path' => 'associatedProducts',
                 'multiple' => true,

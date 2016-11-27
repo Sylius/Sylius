@@ -33,15 +33,15 @@ class VolumeRateConfigurationType extends AbstractType
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.shipping_calculator.volume_rate_configuration.amount',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'integer']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'integer', 'groups' => ['sylius']]),
                 ],
             ])
             ->add('division', NumberType::class, [
                 'label' => 'sylius.form.shipping_calculator.volume_rate_configuration.division',
                 'constraints' => [
-                    new NotBlank(),
-                    new Type(['type' => 'numeric']),
+                    new NotBlank(['groups' => ['sylius']]),
+                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                 ],
             ])
         ;

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitPercentageDiscountConfigurationType;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
@@ -84,7 +85,7 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_unit_percentage_discount_configuration';
+        return UnitPercentageDiscountConfigurationType::class;
     }
 
     /**

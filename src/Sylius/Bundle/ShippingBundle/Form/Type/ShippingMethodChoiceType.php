@@ -19,7 +19,6 @@ use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
-use Symfony\Component\Form\Extension\Core\ChoiceList\ObjectChoiceList;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -114,7 +113,7 @@ class ShippingMethodChoiceType extends AbstractType
             $method = $choiceView->data;
 
             if (!$method instanceof ShippingMethodInterface) {
-                throw new UnexpectedTypeException($method, 'ShippingMethodInterface');
+                throw new UnexpectedTypeException($method, ShippingMethodInterface::class);
             }
 
             $calculator = $this->calculators->get($method->getCalculator());

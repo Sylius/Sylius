@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurationType;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -80,7 +81,7 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_percentage_discount_configuration';
+        return PercentageDiscountConfigurationType::class;
     }
 
     /**

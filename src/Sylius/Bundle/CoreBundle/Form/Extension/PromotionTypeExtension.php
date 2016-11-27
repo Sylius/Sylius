@@ -9,24 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
-use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType as BasePromotionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Kristian Loevstroem <kristian@loevstroem.dk>
  */
-class PromotionType extends BasePromotionType
+class PromotionTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('channels', ChannelChoiceType::class, [
                 'multiple' => true,
@@ -34,5 +33,13 @@ class PromotionType extends BasePromotionType
                 'label' => 'sylius.form.promotion.channels',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return PromotionType::class;
     }
 }

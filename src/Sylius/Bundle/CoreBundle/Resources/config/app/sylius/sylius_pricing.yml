@@ -3,4 +3,4 @@
 
 sylius_pricing:
     forms:
-        - sylius_product_variant
+        - Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType

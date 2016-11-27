@@ -15,7 +15,7 @@ sylius_admin_partial_shipment_ship:
             redirect: referer
             section: admin
             template: "@SyliusAdmin/Shipment/Partial/_ship.html.twig"
-            form: sylius_shipment_ship
+            form: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType
             vars:
                 route:
                     parameters:

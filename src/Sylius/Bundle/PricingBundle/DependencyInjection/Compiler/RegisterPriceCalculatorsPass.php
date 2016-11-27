@@ -25,21 +25,26 @@ final class RegisterPriceCalculatorsPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.registry.price_calculator')) {
+        if (!$container->hasDefinition('sylius.registry.price_calculator') || !$container->hasDefinition('sylius.form_registry.price_calculator')) {
             return;
         }
 
         $registry = $container->getDefinition('sylius.registry.price_calculator');
+        $formTypeRegistry = $container->getDefinition('sylius.form_registry.price_calculator');
         $calculators = [];
 
         foreach ($container->findTaggedServiceIds('sylius.price_calculator') as $id => $attributes) {
-            if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
+            if (!isset($attributes[0]['type'], $attributes[0]['label'])) {
                 throw new \InvalidArgumentException('Tagged price calculator needs to have `type` and `label` attributes.');
             }
 
             $calculators[$attributes[0]['type']] = $attributes[0]['label'];
 
             $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
+
+            if (isset($attributes[0]['form-type'])) {
+                $formTypeRegistry->addMethodCall('add', [$attributes[0]['type'], 'default', $attributes[0]['form-type']]);
+            }
         }
 
         $container->setParameter('sylius.price_calculators', $calculators);

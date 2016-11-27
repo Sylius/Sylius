@@ -9,28 +9,35 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType as BaseProductVariantGenerationType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ProductVariantGenerationType extends BaseProductVariantGenerationType
+class ProductVariantGenerationTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('price', MoneyType::class, [
                 'label' => 'sylius.form.variant.price',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return ProductVariantGenerationType::class;
     }
 }

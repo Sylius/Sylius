@@ -30,11 +30,11 @@ class ProductOptionType extends AbstractResourceType
     {
         $builder
             ->add('translations', ResourceTranslationsType::class, [
-                'entry_type' => 'sylius_product_option_translation',
+                'entry_type' => ProductOptionTranslationType::class,
                 'label' => 'sylius.form.option.name',
             ])
             ->add('values', CollectionType::class, [
-                'entry_type' => 'sylius_product_option_value',
+                'entry_type' => ProductOptionValueType::class,
                 'allow_add' => true,
                 'by_reference' => false,
                 'label' => false,

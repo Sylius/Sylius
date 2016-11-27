@@ -61,9 +61,4 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
 
         $this->isEligible($subject, ['count' => 10])->shouldReturn(true);
     }
-
-    function it_returns_a_cart_quantity_configuration_form_type()
-    {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_cart_quantity_configuration');
-    }
 }
