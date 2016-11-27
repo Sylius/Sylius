@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -96,7 +97,7 @@ class ProductVariantType extends BaseProductVariantType
             ->add('pricingCalculator', 'sylius_price_calculator_choice', [
                 'label' => 'sylius.form.shipping_method.calculator',
             ])
-            ->add('shippingCategory', 'sylius_shipping_category_choice', [
+            ->add('shippingCategory', ShippingCategoryChoiceType::class, [
                 'required' => false,
                 'placeholder' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.product_variant.shipping_category',

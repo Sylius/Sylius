@@ -82,6 +82,9 @@
         <service id="sylius.form.extension.type.promotion_unit_fixed_discount_configuration" class="Sylius\Bundle\CoreBundle\Form\Extension\UnitFixedDiscountConfigurationTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType" />
         </service>
+        <service id="sylius.form.extension.type.shipping_method" class="Sylius\Bundle\CoreBundle\Form\Extension\ShippingMethodTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType" />
+        </service>
 
         <service id="sylius.form.type.product_review" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType">
             <argument>%sylius.model.product_review.class%</argument>
