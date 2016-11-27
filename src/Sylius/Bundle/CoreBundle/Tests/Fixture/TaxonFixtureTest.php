@@ -51,6 +51,14 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function taxon_slug_is_optional()
+    {
+        $this->assertConfigurationIsValid([['custom' => [['slug' => 'custom']]]], 'custom.*.slug');
+    }
+
+    /**
+     * @test
+     */
     public function taxon_children_are_optional()
     {
         $this->assertConfigurationIsValid([['custom' => [['children' => [['name' => 'foo']]]]]], 'custom.*.children');

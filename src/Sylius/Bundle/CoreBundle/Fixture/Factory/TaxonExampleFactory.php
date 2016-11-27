@@ -85,6 +85,9 @@ final class TaxonExampleFactory implements ExampleFactoryInterface
                 ->setDefault('code', function (Options $options) {
                     return StringInflector::nameToCode($options['name']);
                 })
+                ->setDefault('slug', function (Options $options) {
+                    return $this->taxonSlugGenerator->generate($options['name']);
+                })
                 ->setDefault('description', function (Options $options) {
                     return $this->faker->paragraph;
                 })
@@ -115,7 +118,7 @@ final class TaxonExampleFactory implements ExampleFactoryInterface
 
             $taxon->setName($options['name']);
             $taxon->setDescription($options['description']);
-            $taxon->setSlug($this->taxonSlugGenerator->generate($options['name']));
+            $taxon->setSlug($options['slug']);
         }
 
         foreach ($options['children'] as $childOptions) {

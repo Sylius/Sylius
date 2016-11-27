@@ -98,14 +98,17 @@ final class TshirtProductFixture extends AbstractFixture
                 [
                     'code' => 't_shirts',
                     'name' => 'T-Shirts',
+                    'slug' => 't-shirts',
                     'children' => [
                         [
                             'code' => 'mens_t_shirts',
                             'name' => 'Men',
+                            'slug' => 't-shirts/men',
                         ],
                         [
                             'code' => 'womens_t_shirts',
                             'name' => 'Women',
+                            'slug' => 't-shirts/women',
                         ],
                     ],
                 ],
