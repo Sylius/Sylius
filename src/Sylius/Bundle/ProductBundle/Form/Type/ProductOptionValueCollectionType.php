@@ -45,7 +45,7 @@ class ProductOptionValueCollectionType extends AbstractType
                 );
             }
 
-            $builder->add((string) $option->getCode(), 'sylius_product_option_value_choice', [
+            $builder->add((string) $option->getCode(), ProductOptionValueChoiceType::class, [
                 'label' => $option->getName() ?: $option->getCode(),
                 'option' => $option,
                 'property_path' => '['.$i.']',

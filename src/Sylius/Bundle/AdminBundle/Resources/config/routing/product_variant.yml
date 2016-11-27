@@ -86,7 +86,7 @@ sylius_admin_product_variant_generate:
                 route: sylius_admin_product_variant_index
                 parameters: { productId: $productId }
             form:
-                type: sylius_product_generate_variants
+                type: Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType
             repository:
                 method: find
                 arguments: [$productId]

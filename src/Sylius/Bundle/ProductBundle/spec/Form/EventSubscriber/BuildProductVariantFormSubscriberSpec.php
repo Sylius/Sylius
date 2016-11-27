@@ -13,9 +13,10 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\BuildProductVariantFormSubscriber;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueCollectionType;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -61,7 +62,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
 
         $factory->createNamed(
             'optionValues',
-            'sylius_product_option_value_collection',
+            ProductOptionValueCollectionType::class,
             [$optionValue],
             [
                 'options' => [$options],
@@ -97,7 +98,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
 
         $factory->createNamed(
             'optionValues',
-            'sylius_product_option_value_collection',
+            ProductOptionValueCollectionType::class,
             [$optionValue],
             [
                 'options' => [$options],

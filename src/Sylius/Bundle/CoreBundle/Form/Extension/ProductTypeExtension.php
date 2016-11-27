@@ -9,13 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddProductOnProductTaxonFormSubscriber;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
 use Sylius\Component\Core\Model\Product;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,15 +26,13 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ProductType extends BaseProductType
+class ProductTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        parent::buildForm($builder, $options);
-
         $builder
             ->add('channels', ChannelChoiceType::class, [
                 'multiple' => true,
@@ -59,5 +58,13 @@ class ProductType extends BaseProductType
             ])
             ->addEventSubscriber(new AddProductOnProductTaxonFormSubscriber())
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getExtendedType()
+    {
+        return ProductType::class;
     }
 }

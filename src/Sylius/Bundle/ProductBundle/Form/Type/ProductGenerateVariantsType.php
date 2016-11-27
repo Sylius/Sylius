@@ -45,7 +45,7 @@ class ProductGenerateVariantsType extends AbstractResourceType
     {
         $builder
             ->add('variants', CollectionType::class, [
-                'entry_type' => 'sylius_product_variant_generation',
+                'entry_type' => ProductVariantGenerationType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

@@ -13,8 +13,27 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.form.event_subscriber.product_variant_generator" class="Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber">
-            <argument type="service" id="sylius.generator.product_variant" />
+        <service id="sylius.form.type.product_association" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationType">
+            <argument>%sylius.model.product_association.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_association_type" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationTypeType">
+            <argument>%sylius.model.product_association_type.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_association_type_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationTypeChoiceType">
+            <argument type="service" id="sylius.repository.product_association_type" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.sylius_product_associations" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationsType">
+            <argument type="service" id="sylius.repository.product_association_type" />
+            <argument type="service" id="sylius.form.type.data_transformer.products_to_product_associations" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.product_attribute" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeType">
@@ -45,22 +64,79 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.sylius_product_associations" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationsType">
-            <argument type="service" id="sylius.repository.product_association_type" />
-            <argument type="service" id="sylius.form.type.data_transformer.products_to_product_associations" />
-            <tag name="form.type" alias="sylius_product_associations" />
+        <service id="sylius.form.type.product" class="Sylius\Bundle\ProductBundle\Form\Type\ProductType">
+            <argument>%sylius.model.product.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <argument type="service" id="sylius.product_variant_resolver.default" />
+            <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.product_option_value_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueChoiceType">
-            <tag name="form.type" alias="sylius_product_option_value_choice" />
+
+        <service id="sylius.form.type.product_translation" class="Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType">
+            <argument>%sylius.model.product_translation.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.product_option_value_collection" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueCollectionType">
-            <tag name="form.type" alias="sylius_product_option_value_collection" />
+
+        <service id="sylius.form.type.product_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductChoiceType">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.product_variant_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantChoiceType">
-            <tag name="form.type" alias="sylius_product_variant_choice" />
+
+        <service id="sylius.form.type.product_code_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductCodeChoiceType">
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.product_variant_match" class="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantMatchType">
-            <tag name="form.type" alias="sylius_product_variant_match" />
+
+        <service id="sylius.form.type.product_generate_variants" class="Sylius\Bundle\ProductBundle\Form\Type\ProductGenerateVariantsType">
+            <argument>%sylius.model.product.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <argument type="service" id="sylius.form.event_subscriber.product_variant_generator" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_option" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionType">
+            <argument>%sylius.model.product_option.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_option_translation" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionTranslationType">
+            <argument>%sylius.model.product_option_translation.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_option_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionChoiceType">
+            <argument type="service" id="sylius.repository.product_option" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_option_value" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueType">
+            <argument>%sylius.model.product_option_value.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_option_value_translation" class="Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueTranslationType">
+            <argument>%sylius.model.product_option_value_translation.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_variant" class="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.product_variant_generation" class="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType">
+            <argument>%sylius.model.product_variant.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.event_subscriber.product_variant_generator" class="Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber">
+            <argument type="service" id="sylius.generator.product_variant" />
         </service>
 
         <service id="sylius.form.type.data_transformer.products_to_product_associations" class="Sylius\Bundle\ProductBundle\Form\DataTransformer\ProductsToProductAssociationsTransformer">

@@ -85,6 +85,20 @@
         <service id="sylius.form.extension.type.shipping_method" class="Sylius\Bundle\CoreBundle\Form\Extension\ShippingMethodTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType" />
         </service>
+        <service id="sylius.form.extension.type.product" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductType" />
+        </service>
+        <service id="sylius.form.extension.type.product_translation" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductTranslationTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType" />
+        </service>
+        <service id="sylius.form.extension.type.product_variant" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantTypeExtension">
+            <argument type="service" id="sylius.registry.price_calculator" />
+            <argument type="service" id="form.registry" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType" />
+        </service>
+        <service id="sylius.form.extension.type.product_variant_generation" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantGenerationTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType" />
+        </service>
 
         <service id="sylius.form.type.product_review" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductReviewType">
             <argument>%sylius.model.product_review.class%</argument>
@@ -206,14 +220,6 @@
         </service>
         <service id="sylius.form.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Type\Order\CartItemType">
             <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.product_variant" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductVariantType">
-            <argument>%sylius.model.product_variant.class%</argument>
-            <argument>%sylius.validation_groups.product_variant%</argument>
-            <argument type="service" id="sylius.registry.price_calculator" />
-            <argument type="service" id="form.registry" />
-            <tag name="form.type" alias="sylius_product_variant" />
         </service>
     </services>
 </container>

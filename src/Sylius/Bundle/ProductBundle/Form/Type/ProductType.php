@@ -58,7 +58,7 @@ class ProductType extends AbstractResourceType
                 'label' => 'sylius.form.product.enabled',
             ])
             ->add('translations', ResourceTranslationsType::class, [
-                'entry_type' => 'sylius_product_translation',
+                'entry_type' => ProductTranslationType::class,
                 'label' => 'sylius.form.product.translations',
             ])
             ->add('attributes', CollectionType::class, [
@@ -70,7 +70,7 @@ class ProductType extends AbstractResourceType
                 'by_reference' => false,
                 'label' => false,
             ])
-            ->add('associations', 'sylius_product_associations', [
+            ->add('associations', ProductAssociationsType::class, [
                 'label' => false,
             ])
         ;

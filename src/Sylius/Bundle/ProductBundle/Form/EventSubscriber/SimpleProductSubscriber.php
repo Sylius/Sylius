@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -46,7 +47,7 @@ final class SimpleProductSubscriber implements EventSubscriberInterface
         if ($product->isSimple()) {
             $form = $event->getForm();
 
-            $form->add('variant', 'sylius_product_variant', ['property_path' => 'variants[0]']);
+            $form->add('variant', ProductVariantType::class, ['property_path' => 'variants[0]']);
             $form->remove('options');
         }
     }

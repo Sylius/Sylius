@@ -31,7 +31,7 @@ class ProductVariantMatchType extends AbstractType
         $product = $options['product'];
 
         foreach ($product->getOptions() as $i => $option) {
-            $builder->add($option->getCode(), 'sylius_product_option_value_choice', [
+            $builder->add($option->getCode(), ProductOptionValueChoiceType::class, [
                 'label' => $option->getName(),
                 'option' => $option,
                 'property_path' => '['.$i.']',

@@ -12,11 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Order;
 
 use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType;
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantChoiceType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantMatchType;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -43,7 +43,11 @@ class CartItemType extends AbstractType
         ]);
 
         if (isset($options['product']) && $options['product']->hasVariants() && !$options['product']->isSimple()) {
-            $type = Product::VARIANT_SELECTION_CHOICE === $options['product']->getVariantSelectionMethod() ? 'sylius_product_variant_choice' : 'sylius_product_variant_match';
+            $type =
+                Product::VARIANT_SELECTION_CHOICE === $options['product']->getVariantSelectionMethod()
+                ? ProductVariantChoiceType::class
+                : ProductVariantMatchType::class
+            ;
 
             $builder->add('variant', $type, [
                 'product' => $options['product'],
