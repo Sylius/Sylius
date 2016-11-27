@@ -136,7 +136,7 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given his account was deleted
+     * @Given its account was deleted
      */
     public function hisAccountWasDeleted()
     {

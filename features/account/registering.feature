@@ -9,8 +9,8 @@ Feature: Account registration
 
     @ui
     Scenario: Registering a new account with minimum information
-        Given I want to register a new account
-        When I specify the first name as "Saul"
+        When I want to register a new account
+        And I specify the first name as "Saul"
         And I specify the last name as "Goodman"
         And I specify the email as "goodman@gmail.com"
         And I specify the password as "heisenberg"
@@ -22,8 +22,8 @@ Feature: Account registration
 
     @ui
     Scenario: Registering a new account with all details
-        Given I want to register a new account
-        When I specify the first name as "Saul"
+        When I want to register a new account
+        And I specify the first name as "Saul"
         And I specify the last name as "Goodman"
         And I specify the email as "goodman@gmail.com"
         And I specify the password as "heisenberg"
@@ -37,8 +37,8 @@ Feature: Account registration
     @ui
     Scenario: Registering a guest account
         Given there is a customer "goodman@gmail.com" that placed an order "#001"
-        And I want to register a new account
-        When I specify the first name as "Saul"
+        When I want to register a new account
+        And I specify the first name as "Saul"
         And I specify the last name as "Goodman"
         And I specify the email as "goodman@gmail.com"
         And I specify the password as "heisenberg"

@@ -73,7 +73,7 @@ final class LoginContext implements Context
     }
 
     /**
-     * @Given I want to log in
+     * @When I want to log in
      */
     public function iWantToLogIn()
     {
@@ -81,7 +81,7 @@ final class LoginContext implements Context
     }
 
     /**
-     * @Given I want to reset password
+     * @When I want to reset password
      */
     public function iWantToResetPassword()
     {
@@ -117,6 +117,7 @@ final class LoginContext implements Context
 
     /**
      * @When I log in
+     * @When I try to log in
      */
     public function iLogIn()
     {
@@ -125,6 +126,7 @@ final class LoginContext implements Context
 
     /**
      * @When I reset it
+     * @When I try to reset it
      */
     public function iResetIt()
     {

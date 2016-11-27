@@ -9,8 +9,8 @@ Feature: Subscribing to the newsletter during registration
 
     @ui
     Scenario: Subscribing to the newsletter during registration
-        Given I want to register a new account
-        When I specify the first name as "Saul"
+        When I want to register a new account
+        And I specify the first name as "Saul"
         And I specify the last name as "Goodman"
         And I specify the email as "goodman@gmail.com"
         And I specify the password as "heisenberg"

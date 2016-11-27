@@ -10,16 +10,16 @@ Feature: Account registration
     @ui
     Scenario: Trying to register a new account with email that has been already used
         Given there is a user "goodman@gmail.com" identified by "heisenberg"
-        And I want to register a new account
-        When I specify the email as "goodman@gmail.com"
+        When I want to register a new account
+        And I specify the email as "goodman@gmail.com"
         And I try to register this account
         Then I should be notified that the email is already used
         And I should not be logged in
 
     @ui
     Scenario: Trying to register a new account without specifying first name
-        Given I want to register a new account
-        When I do not specify the first name
+        When I want to register a new account
+        And I do not specify the first name
         And I specify the last name as "Goodman"
         And I specify the email as "goodman@gmail.com"
         And I specify the password as "heisenberg"
@@ -29,8 +29,8 @@ Feature: Account registration
 
     @ui
     Scenario: Trying to register a new account without specifying last name
-        Given I want to register a new account
-        When I do not specify the last name
+        When I want to register a new account
+        And I do not specify the last name
         And I specify the first name as "Saul"
         And I specify the email as "goodman@gmail.com"
         And I specify the password as "heisenberg"
@@ -41,8 +41,8 @@ Feature: Account registration
 
     @ui
     Scenario: Trying to register a new account without specifying password
-        Given I want to register a new account
-        When I do not specify the password
+        When I want to register a new account
+        And I do not specify the password
         And I specify the first name as "Saul"
         And I specify the last name as "Goodman"
         And I specify the email as "goodman@gmail.com"
@@ -52,8 +52,8 @@ Feature: Account registration
 
     @ui
     Scenario: Trying to register a new account without confirming password
-        Given I want to register a new account
-        When I specify the first name as "Saul"
+        When I want to register a new account
+        And I specify the first name as "Saul"
         Then I specify the last name as "Goodman"
         And I specify the email as "goodman@gmail.com"
         And I specify the password as "heisenberg"
@@ -64,8 +64,8 @@ Feature: Account registration
 
     @ui
     Scenario: Trying to register a new account without specifying email
-        Given I want to register a new account
-        When I do not specify the email
+        When I want to register a new account
+        And I do not specify the email
         And I specify the first name as "Saul"
         And I specify the last name as "Goodman"
         And I try to register this account
