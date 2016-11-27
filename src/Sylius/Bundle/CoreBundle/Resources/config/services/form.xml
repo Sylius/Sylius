@@ -129,6 +129,7 @@
             <argument type="service" id="sylius.repository.product" />
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.promotion_action.configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionActionConfiguration" />
         <service id="sylius.form.type.promotion_action.filter.taxon" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter\TaxonFilterConfigurationType">
             <argument type="service" id="sylius.form.type.data_transformer.taxons_to_codes" />
             <tag name="form.type" />

@@ -154,6 +154,14 @@
     </div>
 {% endblock %}
 
+{% block sylius_promotion_action_configuration_widget %}
+    <div class="configuration">
+        {% for child in form %}
+            <hr/>{{ form_row(child) }}<hr/>
+        {% endfor %}
+    </div>
+{% endblock %}
+
 {% block sylius_product_option_value_widget %}
     <div class="ui segment">
         {{ form_row(form.code) }}

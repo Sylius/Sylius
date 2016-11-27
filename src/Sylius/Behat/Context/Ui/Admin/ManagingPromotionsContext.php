@@ -229,7 +229,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory($taxonName)
     {
-        $this->createPage->selectFilterOption('Taxon', $taxonName);
+        $this->createPage->selectFilterOption('Taxons filter', $taxonName);
 
     }
 
@@ -573,7 +573,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSpecifyThatThisActionShouldBeAppliedToTheProduct($productName)
     {
-        $this->createPage->selectFilterOption('Products', $productName);
+        $this->createPage->selectFilterOption('Products filter', $productName);
     }
 
     /**

@@ -40,7 +40,11 @@ class UnitFixedDiscountConfigurationType extends AbstractType
                 ],
                 'currency' => $options['currency'],
             ])
-            ->add('filters', PromotionFilterCollectionType::class, ['required' => false])
+            ->add('filters', PromotionFilterCollectionType::class, [
+                'label' => false,
+                'required' => false,
+                'currency' => $options['currency'],
+            ])
         ;
     }
 

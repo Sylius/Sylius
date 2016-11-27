@@ -18,7 +18,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * {@inheritdoc}
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class PromotionActionType extends AbstractConfigurationType
 {
@@ -28,8 +28,8 @@ class PromotionActionType extends AbstractConfigurationType
     private $channelRepository;
 
     /**
-     * {@inheritdoc}
-     *
+     * @param string $dataClass
+     * @param ServiceRegistryInterface $registry
      * @param ChannelRepositoryInterface $channelRepository
      */
     public function __construct($dataClass, ServiceRegistryInterface $registry, ChannelRepositoryInterface $channelRepository)
