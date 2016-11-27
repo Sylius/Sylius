@@ -41,14 +41,11 @@ sylius_grid:
             show: "@SyliusUi/Grid/Action/show.html.twig"
             update: "@SyliusUi/Grid/Action/update.html.twig"
             apply_transition: "@SyliusUi/Grid/Action/applyTransition.html.twig"
+            links: "@SyliusUi/Grid/Action/links.html.twig"
 
-            create_product: "@SyliusAdmin/Product/Grid/Action/createProduct.html.twig"
-            create_product_attribute: "@SyliusAdmin/ProductAttribute/Grid/Action/createProductAttribute.html.twig"
-            create_zone: "@SyliusAdmin/Zone/Grid/Action/createZone.html.twig"
+            create_product_attribute: "@SyliusAdmin/ProductAttribute/Grid/Action/create.html.twig"
+            update_product_positions: "@SyliusAdmin/Product/Grid/Action/updatePositions.html.twig"
             generate_variants: "@SyliusAdmin/Product/Grid/Action/generateVariants.html.twig"
-            manage_coupons: "@SyliusAdmin/Promotion/Grid/Action/manageCoupons.html.twig"
-            manage_variants: "@SyliusAdmin/Product/Grid/Action/manageVariants.html.twig"
-            update_product_taxons: "@SyliusAdmin/ProductTaxon/Grid/Action/update.html.twig"
         filter:
             string: "@SyliusUi/Grid/Filter/string.html.twig"
             boolean: "@SyliusUi/Grid/Filter/boolean.html.twig"

@@ -1,73 +1,14 @@
 sylius_grid:
     grids:
         sylius_admin_customer_order:
+            extends: sylius_admin_order
             driver:
-                name: doctrine/orm
                 options:
-                    class: "%sylius.model.order.class%"
                     repository:
                         method: createByCustomerIdQueryBuilder
                         arguments:
                             customerId: $id
-            sorting:
-                number: desc
-            fields:
-                channel:
-                    type: twig
-                    label: sylius.ui.channel
-                    sortable: ~
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/channel.html.twig"
-                number:
-                    type: twig
-                    label: sylius.ui.number
-                    path: .
-                    sortable: ~
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/number.html.twig"
-                date:
-                    type: datetime
-                    label: sylius.ui.date
-                    path: checkoutCompletedAt
-                    sortable: ~
-                    options:
-                        format: d-m-Y H:i:s
-                state:
-                    type: twig
-                    label: sylius.ui.state
-                    sortable: ~
-                    options:
-                        template: "@SyliusAdmin/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/Order/Label/State"
-                paymentState:
-                    type: twig
-                    label: sylius.ui.payment_state
-                    sortable: ~
-                    options:
-                        template: "@SyliusAdmin/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/Order/Label/PaymentState"
-                shippingState:
-                    type: twig
-                    label: sylius.ui.shipping_state
-                    sortable: ~
-                    options:
-                        template: "@SyliusAdmin/Grid/Field/state.html.twig"
-                        vars:
-                            labels: "@SyliusAdmin/Order/Label/ShippingState"
-                total:
-                    type: twig
-                    label: sylius.ui.total
-                    path: .
-                    sortable: total
-                    options:
-                        template: "@SyliusAdmin/Order/Grid/Field/total.html.twig"
             filters:
-                number:
+                customer:
                     type: string
-                    label: sylius.ui.number
-            actions:
-                item:
-                    show:
-                        type: show
+                    enabled: false

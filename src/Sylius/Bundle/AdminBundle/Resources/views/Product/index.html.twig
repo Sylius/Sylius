@@ -14,7 +14,7 @@
 
     <div class="ui two column stackable grid">
         <div class="three wide column">
-            {{ render(path('sylius_admin_partial_taxon_tree_without_buttons')) }}
+            {{ render(path('sylius_admin_partial_taxon_tree', {'template': '@SyliusAdmin/Taxon/_treeWithoutButtons.html.twig'})) }}
         </div>
         <div class="thirteen wide column sylius-product-index">
             {% include '@SyliusAdmin/Crud/Index/_content.html.twig' %}

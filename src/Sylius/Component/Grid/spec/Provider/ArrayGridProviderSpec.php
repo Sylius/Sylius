@@ -23,16 +23,18 @@ use Sylius\Component\Grid\Provider\UndefinedGridException;
  */
 final class ArrayGridProviderSpec extends ObjectBehavior
 {
-    function let(ArrayToDefinitionConverterInterface $converter, Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid)
+    function let(ArrayToDefinitionConverterInterface $converter, Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid, Grid $fourthGrid)
     {
         $converter->convert('sylius_admin_tax_category', ['configuration1'])->willReturn($firstGrid);
-        $converter->convert('sylius_admin_product', ['configuration2'])->willReturn($secondGrid);
+        $converter->convert('sylius_admin_product', ['configuration2' => 'foo'])->willReturn($secondGrid);
         $converter->convert('sylius_admin_order', ['configuration3'])->willReturn($thirdGrid);
+        $converter->convert('sylius_admin_product_from_taxon', ['configuration4' => 'bar', 'configuration2' => 'foo'])->willReturn($fourthGrid);
 
         $this->beConstructedWith($converter, [
             'sylius_admin_tax_category' => ['configuration1'],
-            'sylius_admin_product' => ['configuration2'],
+            'sylius_admin_product' => ['configuration2' => 'foo'],
             'sylius_admin_order' => ['configuration3'],
+            'sylius_admin_product_from_taxon' => ['extends' => 'sylius_admin_product', 'configuration4' => 'bar'],
         ]);
     }
 
@@ -51,6 +53,11 @@ final class ArrayGridProviderSpec extends ObjectBehavior
         $this->get('sylius_admin_tax_category')->shouldReturn($firstGrid);
         $this->get('sylius_admin_product')->shouldReturn($secondGrid);
         $this->get('sylius_admin_order')->shouldReturn($thirdGrid);
+    }
+
+    function it_supports_grid_inheritance(Grid $fourthGrid)
+    {
+        $this->get('sylius_admin_product_from_taxon')->shouldReturn($fourthGrid);
     }
 
     function it_throws_an_exception_if_grid_does_not_exist()

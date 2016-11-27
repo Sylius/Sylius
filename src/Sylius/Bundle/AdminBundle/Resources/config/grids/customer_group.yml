@@ -17,9 +17,11 @@ sylius_grid:
                     label: sylius.ui.name
                     sortable: ~
             filters:
-                name:
+                search:
                     type: string
-                    label: sylius.ui.name
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, name]
             actions:
                 main:
                     create:

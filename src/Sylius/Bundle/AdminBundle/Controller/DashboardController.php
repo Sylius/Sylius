@@ -71,7 +71,7 @@ class DashboardController
      */
     public function indexAction(Request $request)
     {
-        $channelCode = $request->query->get('channelCode');
+        $channelCode = $request->query->get('channel');
 
         /** @var ChannelInterface $channel */
         $channel = $this->findChannelByCodeOrFindFirst($channelCode);

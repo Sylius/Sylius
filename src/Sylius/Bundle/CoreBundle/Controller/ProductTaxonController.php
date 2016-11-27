@@ -50,8 +50,8 @@ class ProductTaxonController extends ResourceController
                 /** @var ProductTaxonInterface $productTaxon */
                 $productTaxonFromBase = $this->repository->findOneBy(['id' => $productTaxon['id']]);
                 $productTaxonFromBase->setPosition($productTaxon['position']);
+                $this->manager->flush();
             }
-            $this->manager->flush();
         }
         return new JsonResponse();
     }

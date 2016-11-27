@@ -26,8 +26,7 @@ sylius_admin_product_index:
             template: SyliusAdminBundle:Product:index.html.twig
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
-                index:
-                    icon: cube
+                icon: cube
 
 sylius_admin_product_per_taxon_index:
     path: /products/taxon/{taxonId}
@@ -40,8 +39,7 @@ sylius_admin_product_per_taxon_index:
             template: SyliusAdminBundle:Product:index.html.twig
             vars:
                 subheader: sylius.ui.manage_your_product_catalog
-                index:
-                    icon: cube
+                icon: cube
 
 sylius_admin_product_create:
     path: /products/new

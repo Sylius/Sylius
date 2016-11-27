@@ -25,15 +25,15 @@ sylius_grid:
                 amount:
                     type: twig
                     label: sylius.ui.amount
+                    sortable: ~
                     options:
-                        template: "@SyliusAdmin/TaxRate/Grid/Field/amount.html.twig"
+                        template: "@SyliusUi/Grid/Field/percent.html.twig"
             filters:
-                name:
+                search:
                     type: string
-                    label: sylius.ui.name
-                code:
-                    type: string
-                    label: sylius.ui.code
+                    label: sylius.ui.search
+                    options:
+                        fields: [code, name]
             actions:
                 main:
                     create:

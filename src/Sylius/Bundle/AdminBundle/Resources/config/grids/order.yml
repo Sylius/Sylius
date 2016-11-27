@@ -41,7 +41,7 @@ sylius_grid:
                     label: sylius.ui.state
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/Grid/Field/state.html.twig"
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
                         vars:
                             labels: "@SyliusAdmin/Order/Label/State"
                 paymentState:
@@ -49,7 +49,7 @@ sylius_grid:
                     label: sylius.ui.payment_state
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/Grid/Field/state.html.twig"
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
                         vars:
                             labels: "@SyliusAdmin/Order/Label/PaymentState"
                 shippingState:
@@ -57,7 +57,7 @@ sylius_grid:
                     label: sylius.ui.shipping_state
                     sortable: ~
                     options:
-                        template: "@SyliusAdmin/Grid/Field/state.html.twig"
+                        template: "@SyliusUi/Grid/Field/state.html.twig"
                         vars:
                             labels: "@SyliusAdmin/Order/Label/ShippingState"
                 total:

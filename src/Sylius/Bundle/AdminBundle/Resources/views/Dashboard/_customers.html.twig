@@ -1,5 +1,6 @@
 {% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
 {% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+{% import 'SyliusUiBundle:Macro:labels.html.twig' as labels %}
 
 <div class="ui segment">
     <h3 class="ui dividing header">{{ 'sylius.ui.new_customers'|trans }}</h3>
@@ -8,6 +9,7 @@
         <table class="ui stackable table" id="customers">
             <thead>
                 <th>{{ 'sylius.ui.name'|trans }}</th>
+                <th></th>
                 <th></th>
             </thead>
             <tbody>
@@ -18,8 +20,15 @@
                         {{ customer.email }}
                     </td>
                     <td>
+                        {% if customer.user is null %}
+                            <span class="ui icon label">
+                                <i class="spy icon"></i> {{ 'sylius.ui.guest'|trans }}
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td>
                         <div class="ui right floated buttons">
-                            {{ buttons.edit(path('sylius_admin_customer_update', {'id': customer.id})) }}
+                            {{ buttons.show(path('sylius_admin_customer_show', {'id': customer.id})) }}
                         </div>
                     </td>
                 </tr>
