@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Filter;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
@@ -28,8 +29,30 @@ class PriceRangeFilterConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('min', 'sylius_money', ['required' => false, 'constraints' => [new Type(['type' => 'numeric'])]])
-            ->add('max', 'sylius_money', ['required' => false, 'constraints' => [new Type(['type' => 'numeric'])]])
+            ->add('min', 'sylius_money', [
+                'required' => false,
+                'constraints' => [new Type(['type' => 'numeric'])],
+                'currency' => $options['currency'],
+            ])
+            ->add('max', 'sylius_money', [
+                'required' => false,
+                'constraints' => [new Type(['type' => 'numeric'])],
+                'currency' => $options['currency'],
+            ])
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver
+            ->setDefined(['currency'])
+            ->setAllowedTypes('currency', 'string')
+            ->setDefault('currency', 'USD')
         ;
     }
 

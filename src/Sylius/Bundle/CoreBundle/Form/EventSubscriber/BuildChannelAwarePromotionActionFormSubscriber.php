@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionActionConfiguration;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSubscriber;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
@@ -29,8 +29,12 @@ final class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotio
      */
     private $channelRepository;
 
+
     /**
-     * @inheritDoc
+     * @param ServiceRegistryInterface $actionRegistry
+     * @param FormFactoryInterface $factory
+     * @param string $registryIdentifier
+     * @param ChannelRepositoryInterface $channelRepository
      */
     public function __construct(
         ServiceRegistryInterface $actionRegistry,
@@ -55,7 +59,7 @@ final class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotio
             return;
         }
 
-        $configurationCollection = $this->factory->createNamed('configuration', FormType::class, [], [
+        $configurationCollection = $this->factory->createNamed('configuration', PromotionActionConfiguration::class, [], [
             'compound' => true,
             'auto_initialize' => false,
         ]);
@@ -80,12 +84,11 @@ final class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotio
         $configuration,
         array $data
     ) {
-        $config = ['auto_initialize' => false, 'label' => $channel->getName()];
-
-        // this is really temporary solution (because of generic subscriber)
-        if (false === strpos($configuration, 'percentage')) {
-            $config['currency'] = $channel->getBaseCurrency()->getCode();
-        }
+        $config = [
+            'auto_initialize' => false,
+            'label' => $channel->getName(),
+            'currency' => $channel->getBaseCurrency()->getCode(),
+        ];
 
         return $this->factory->createNamed($channel->getCode(), $configuration, $data, $config);
     }

@@ -99,6 +99,7 @@
             <argument type="service" id="sylius.repository.product" />
             <tag name="form.type" alias="sylius_promotion_rule_contains_product_configuration" />
         </service>
+        <service id="sylius.form.type.promotion_action.configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionActionConfiguration" />
         <service id="sylius.form.type.promotion_action.filters" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionFiltersType">
             <tag name="form.type" alias="sylius_promotion_filters" />
         </service>

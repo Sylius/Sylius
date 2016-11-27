@@ -38,7 +38,11 @@ class UnitFixedDiscountConfigurationType extends AbstractType
                 ],
                 'currency' => $options['currency'],
             ])
-            ->add('filters', 'sylius_promotion_filters', ['required' => false])
+            ->add('filters', 'sylius_promotion_filters', [
+                'label' => false,
+                'required' => false,
+                'currency' => $options['currency'],
+            ])
         ;
     }
 
