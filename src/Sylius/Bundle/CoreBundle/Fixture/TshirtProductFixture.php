@@ -150,7 +150,7 @@ final class TshirtProductFixture extends AbstractFixture
                 'name' => sprintf('T-Shirt "%s"', $productsNames[$i]),
                 'code' => $this->faker->uuid,
                 'main_taxon' => $categoryTaxonCode,
-                'taxons' => [$categoryTaxonCode],
+                'taxons' => ['t_shirts', $categoryTaxonCode],
                 'product_attributes' => [
                     't_shirt_brand' => $this->faker->randomElement(['Nike', 'Adidas', 'JKM-476 Streetwear', 'Potato', 'Centipede Wear']),
                     't_shirt_collection' => sprintf('Sylius %s %s', $this->faker->randomElement(['Summer', 'Winter', 'Spring', 'Autumn']), mt_rand(1995, 2012)),

@@ -69,7 +69,7 @@ sylius_fixtures:
                                 channels:
                                     - "US_WEB"
 
-                regular_user:
+                shop_user:
                     name: "shop_user"
                     options:
                         random: 20
