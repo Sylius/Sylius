@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
+use Sylius\Bundle\PricingBundle\Form\Type\CalculatorChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType as BaseProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
@@ -94,44 +95,11 @@ class ProductVariantType extends BaseProductVariantType
                 'placeholder' => '---',
                 'label' => 'sylius.form.product_variant.tax_category',
             ])
-            ->add('pricingCalculator', 'sylius_price_calculator_choice', [
-                'label' => 'sylius.form.shipping_method.calculator',
-            ])
             ->add('shippingCategory', ShippingCategoryChoiceType::class, [
                 'required' => false,
                 'placeholder' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.product_variant.shipping_category',
             ])
         ;
-
-        $prototypes = [
-            'calculators' => [],
-        ];
-
-        /** @var CalculatorInterface $calculator */
-        foreach ($this->calculatorRegistry->all() as $name => $calculator) {
-            $calculatorTypeName = sprintf('sylius_price_calculator_%s', $calculator->getType());
-
-            if (!$this->formRegistry->hasType($calculatorTypeName)) {
-                continue;
-            }
-
-            $prototypes['calculators'][$name] = $builder->create('configuration', $calculatorTypeName)->getForm();
-        }
-
-        $builder->setAttribute('prototypes', $prototypes);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-        $view->vars['prototypes'] = [];
-        foreach ($form->getConfig()->getAttribute('prototypes') as $group => $prototypes) {
-            foreach ($prototypes as $type => $prototype) {
-                $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
-            }
-        }
     }
 }

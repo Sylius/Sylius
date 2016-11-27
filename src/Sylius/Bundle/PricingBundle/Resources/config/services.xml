@@ -13,19 +13,16 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.form_registry.price_calculator" class="Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistry" />
+
         <service id="sylius.registry.price_calculator" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>Sylius\Component\Pricing\Calculator\CalculatorInterface</argument>
             <argument>price calculator</argument>
         </service>
 
-        <service id="sylius.form.subscriber.priceable" class="Sylius\Bundle\PricingBundle\Form\EventListener\BuildPriceableFormSubscriber">
-            <argument type="service" id="sylius.registry.price_calculator" />
-            <argument type="service" id="form.factory" />
-        </service>
-
         <service id="sylius.form.type.price_calculator_choice" class="Sylius\Bundle\PricingBundle\Form\Type\CalculatorChoiceType">
             <argument>%sylius.price_calculators%</argument>
-            <tag name="form.type" alias="sylius_price_calculator_choice" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.price_calculator" class="Sylius\Component\Pricing\Calculator\DelegatingCalculator">

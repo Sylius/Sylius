@@ -15,7 +15,8 @@
     <services>
         <service id="sylius.price_calculator.channel_and_currency_based" class="Sylius\Component\Core\Pricing\ChannelAndCurrencyBasedCalculator" lazy="true">
             <argument type="service" id="sylius.currency_converter" />
-            <tag name="sylius.price_calculator" type="channel_and_currency_based" label="Channel and currency based" />
+            <tag name="sylius.price_calculator" type="channel_and_currency_based" label="Channel and currency based"
+                 form-type="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelAndCurrencyBasedConfigurationType" />
         </service>
     </services>
 </container>
