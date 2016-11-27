@@ -1,0 +1,21 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_impersonating_customers:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.admin_user
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+
+                - sylius.behat.context.ui.admin.managing_customers
+                - sylius.behat.context.ui.admin.impersonating_customers
+            filters:
+                tags: "@impersonating_customers && @ui"

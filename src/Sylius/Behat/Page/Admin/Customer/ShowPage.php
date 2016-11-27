@@ -144,6 +144,30 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasImpersonateButton()
+    {
+        return $this->hasElement('impersonate_button');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function impersonate()
+    {
+        $this->getElement('impersonate_button')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSuccessFlashMessage()
+    {
+        return trim($this->getElement('flash_message')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_customer_show';
@@ -159,7 +183,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'customer_name' => '#info .content > a',
             'default_address' => '#defaultAddress address',
             'delete_account_button' => '#actions',
+            'flash_message' => '.ui.icon.positive.message .content p',
             'group' => '.group',
+            'impersonate_button' => '#impersonate',
             'no_account' => '#no-account',
             'registration_date' => '#info .content .date',
             'subscribed_to_newsletter' => '#subscribed-to-newsletter',

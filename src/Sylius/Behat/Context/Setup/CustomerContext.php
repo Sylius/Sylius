@@ -179,7 +179,7 @@ final class CustomerContext implements Context
     public function theCustomerBelongsToGroup(CustomerInterface $customer, CustomerGroupInterface $customerGroup)
     {
         $customer->setGroup($customerGroup);
-        
+
         $this->customerManager->flush();
     }
 

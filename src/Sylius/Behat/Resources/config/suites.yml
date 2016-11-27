@@ -19,6 +19,7 @@ imports:
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
     - suites/ui/admin/dashboard.yml
+    - suites/ui/admin/impersonating_customers.yml
     - suites/ui/admin/locale.yml
     - suites/ui/admin/login.yml
     - suites/ui/cart/shopping_cart.yml

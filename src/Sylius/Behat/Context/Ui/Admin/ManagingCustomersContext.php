@@ -455,6 +455,7 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @When I view details of the customer :customer
+     * @When /^I view (their) details$/
      */
     public function iViewDetailsOfTheCustomer(CustomerInterface $customer)
     {

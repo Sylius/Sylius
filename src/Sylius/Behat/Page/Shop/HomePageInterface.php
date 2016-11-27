@@ -28,6 +28,13 @@ interface HomePageInterface extends SymfonyPageInterface
      */
     public function hasLogoutButton();
 
+    public function logOut();
+
+    /**
+     * @return string
+     */
+    public function getFullName();
+
     /**
      * @return string
      */

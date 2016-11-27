@@ -252,6 +252,13 @@
             <tag name="fob.context_service" />
         </service>
 
+        <service id="sylius.behat.context.ui.admin.impersonating_customers" class="Sylius\Behat\Context\Ui\Admin\ImpersonatingCustomersContext">
+            <argument type="service" id="sylius.behat.page.admin.customer.show" />
+            <argument type="service" id="sylius.behat.page.admin.dashboard" />
+            <argument type="service" id="sylius.behat.page.shop.home" />
+            <tag name="fob.context_service" />
+        </service>
+
         <service id="sylius.behat.context.ui.channel" class="Sylius\Behat\Context\Ui\ChannelContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.channel_context_setter" />
