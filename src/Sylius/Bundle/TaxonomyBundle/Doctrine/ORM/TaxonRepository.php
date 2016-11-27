@@ -100,7 +100,6 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->leftJoin('o.translations', 'translation')
             ->where('translation.slug = :slug')
             ->setParameter('slug', $slug)
-            ->orderBy('o.position')
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -114,7 +113,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->where('translation.name = :name')
+            ->andWhere('translation.name = :name')
             ->andWhere('translation.locale = :locale')
             ->setParameter('name', $name)
             ->setParameter('locale', $locale)
@@ -157,13 +156,5 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     public function createListQueryBuilder()
     {
         return $this->createQueryBuilder('o')->leftJoin('o.translations', 'translation');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFormQueryBuilder()
-    {
-        return $this->createQueryBuilder('o');
     }
 }

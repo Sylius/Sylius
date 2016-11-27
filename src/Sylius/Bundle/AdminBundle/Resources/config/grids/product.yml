@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.product.class%"
                     repository:
-                        method: createQueryBuilderWithLocaleCodeAndTaxonId
+                        method: createListQueryBuilder
                         arguments: ["%locale%", $taxonId]
             sorting:
                 code: asc
