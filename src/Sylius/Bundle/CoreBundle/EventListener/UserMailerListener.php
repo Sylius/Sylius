@@ -15,6 +15,7 @@ use Sylius\Bundle\CoreBundle\Mailer\Emails;
 use Sylius\Bundle\UserBundle\EventListener\MailerListener;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
@@ -48,7 +49,7 @@ final class UserMailerListener extends MailerListener
      *
      * @throws UnexpectedTypeException
      */
-    public function sendUserConfirmationEmail(GenericEvent $event)
+    public function sendUserRegistrationEmail(GenericEvent $event)
     {
         $customer = $event->getSubject();
 
@@ -62,7 +63,18 @@ final class UserMailerListener extends MailerListener
             return;
         }
 
-        $this->sendEmail($user, Emails::USER_CONFIRMATION);
+        /** @var ShopUserInterface $user */
+        Assert::isInstanceOf($user, ShopUserInterface::class);
+
+        $this->emailSender->send(
+            Emails::USER_REGISTRATION,
+            [
+                $user->getEmail(),
+            ],
+            [
+                'user' => $user,
+            ]
+        );
     }
 
     /**

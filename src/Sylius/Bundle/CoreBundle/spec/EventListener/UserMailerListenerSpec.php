@@ -19,6 +19,7 @@ use Sylius\Bundle\UserBundle\EventListener\MailerListener;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\UserInterface;
@@ -51,7 +52,7 @@ final class UserMailerListenerSpec extends ObjectBehavior
     ) {
         $event->getSubject()->willReturn($customer);
 
-        $this->shouldThrow(\InvalidArgumentException::class)->during('sendUserConfirmationEmail', [$event]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('sendUserRegistrationEmail', [$event]);
     }
 
     function it_does_not_send_the_email_confirmation_if_the_customer_user_is_null(
@@ -64,14 +65,14 @@ final class UserMailerListenerSpec extends ObjectBehavior
 
         $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
 
-        $this->sendUserConfirmationEmail($event);
+        $this->sendUserRegistrationEmail($event);
     }
 
-    function it_does_not_send_the_email_confirmation_if_the_customer_user_does_not_have_email(
+    function it_does_not_send_the_email_registration_if_the_customer_user_does_not_have_email(
         SenderInterface $emailSender,
         GenericEvent $event,
         CustomerInterface $customer,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $event->getSubject()->willReturn($customer);
         $customer->getUser()->willReturn($user);
@@ -79,15 +80,15 @@ final class UserMailerListenerSpec extends ObjectBehavior
 
         $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
 
-        $this->sendUserConfirmationEmail($event);
+        $this->sendUserRegistrationEmail($event);
     }
 
-    function it_sends_an_email_confirmation_successfully(
+    function it_sends_an_email_registration_successfully(
         SenderInterface $emailSender,
         ChannelContextInterface $channelContext,
         GenericEvent $event,
         CustomerInterface $customer,
-        UserInterface $user,
+        ShopUserInterface $user,
         ChannelInterface $channel
     ) {
         $event->getSubject()->willReturn($customer);
@@ -100,18 +101,17 @@ final class UserMailerListenerSpec extends ObjectBehavior
 
         $emailSender
             ->send(
-                Emails::USER_CONFIRMATION,
+                Emails::USER_REGISTRATION,
                 [
                     'fulanito@sylius.com',
                 ],
                 [
                     'user' => $user,
-                    'channel' => $channel,
                 ]
             )
             ->shouldBeCalled()
         ;
 
-        $this->sendUserConfirmationEmail($event);
+        $this->sendUserRegistrationEmail($event);
     }
 }

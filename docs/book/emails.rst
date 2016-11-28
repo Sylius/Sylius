@@ -10,11 +10,11 @@ To understand how e-mail sending works internally, please refer to :doc:`SyliusM
 User Confirmation
 -----------------
 
-Every time a customer registers via the registration form, a user confirmation e-mail is sent to them.
+Every time a customer registers via the registration form, a user registration e-mail is sent to them.
 
-**Code**: ``user_confirmation``
+**Code**: ``user_registration``
 
-**The default template**: ``SyliusCoreBundle:Email:userConfirmation.html.twig``
+**The default template**: ``SyliusCoreBundle:Email:userRegistration.html.twig``
 
 You also have the following parameters available:
 
