@@ -50,13 +50,8 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        $channelCode = $subject->getChannel()->getCode();
-        if (!isset($configuration[$channelCode])) {
-            return;
-        }
-
         $adjustment = $this->createAdjustment($promotion);
-        $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration[$channelCode]['percentage']);
+        $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
         $adjustment->setAmount(-$adjustmentAmount);
 
         $subject->addAdjustment($adjustment);

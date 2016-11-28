@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion;
 
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelAwarePromotionActionFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionActionFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -52,7 +52,7 @@ class PromotionActionType extends AbstractConfigurationType
                 ],
             ])
             ->addEventSubscriber(
-                new BuildChannelAwarePromotionActionFormSubscriber(
+                new BuildChannelBasedPromotionActionFormSubscriber(
                     $this->registry,
                     $builder->getFormFactory(),
                     (isset($options['configuration_type'])) ? $options['configuration_type'] : null,

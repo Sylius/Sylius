@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
+final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand implements ChannelBasedPromotionActionCommandInterface
 {
     const TYPE = 'unit_fixed_discount';
 

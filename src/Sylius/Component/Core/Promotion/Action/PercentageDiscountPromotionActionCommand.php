@@ -15,6 +15,7 @@ use Sylius\Bundle\PromotionBundle\Form\Type\Action\PercentageDiscountConfigurati
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -23,7 +24,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class PercentageDiscountPromotionActionCommand extends DiscountPromotionActionCommand
+final class PercentageDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements PromotionActionCommandInterface
 {
     const TYPE = 'order_percentage_discount';
 
@@ -59,14 +60,9 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
             return;
         }
 
-        $channelCode = $subject->getChannel()->getCode();
-        if (!isset($configuration[$channelCode])) {
-            return;
-        }
+        $this->isConfigurationValid($configuration);
 
-        $this->isConfigurationValid($configuration[$channelCode]);
-
-        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration[$channelCode]['percentage']);
+        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['percentage']);
         if (0 === $promotionAmount) {
             return;
         }

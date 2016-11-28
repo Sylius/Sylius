@@ -230,17 +230,26 @@ final class ManagingPromotionsContext implements Context
     public function iSpecifyThatThisActionShouldBeAppliedToItemsFromCategory($taxonName)
     {
         $this->createPage->selectFilterOption('Taxons filter', $taxonName);
-
     }
 
     /**
-     * @Given /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+" channel)$/
-     * @Given I add the :actionType action configured without a percentage value for :channelName channel
+     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)% for ("[^"]+" channel)$/
+     * @When I add the :actionType action configured without a percentage value for :channelName channel
      */
     public function iAddTheActionConfiguredWithAPercentageValueForChannel($actionType, $percentage = null, $channelName)
     {
         $this->createPage->addAction($actionType);
         $this->createPage->fillActionOptionForChannel($channelName, 'Percentage', $percentage);
+    }
+
+    /**
+     * @When /^I add the "([^"]+)" action configured with a percentage value of (?:|-)([^"]+)%$/
+     * @When I add the :actionType action configured without a percentage value
+     */
+    public function iAddTheActionConfiguredWithAPercentageValue($actionType, $percentage = null)
+    {
+        $this->createPage->addAction($actionType);
+        $this->createPage->fillActionOption('Percentage', $percentage);
     }
 
     /**

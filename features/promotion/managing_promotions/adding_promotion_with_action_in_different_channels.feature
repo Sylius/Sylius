@@ -6,7 +6,7 @@ Feature: Adding a new promotion with action configured in different channels
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store operates on a channel named "Web-GB" in "GBP" currency
+        And the store also operates on another channel named "Web-GB" in "GBP" currency
         And I am logged in as an administrator
 
     @ui @javascript

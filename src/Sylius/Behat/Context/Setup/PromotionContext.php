@@ -322,9 +322,7 @@ final class PromotionContext implements Context
      */
     public function itGivesPercentageDiscountOnShippingToEveryOrder(PromotionInterface $promotion, $discount)
     {
-        $channelCode = $this->sharedStorage->get('channel')->getCode();
-
-        $action = $this->actionFactory->createShippingPercentageDiscount($discount, $channelCode);
+        $action = $this->actionFactory->createShippingPercentageDiscount($discount);
         $promotion->addAction($action);
 
         $this->objectManager->flush();
@@ -512,9 +510,7 @@ final class PromotionContext implements Context
         TaxonInterface $taxon,
         $targetAmount
     ) {
-        $channelCode = $this->sharedStorage->get('channel')->getCode();
-
-        $freeShippingAction = $this->actionFactory->createShippingPercentageDiscount(1, $channelCode);
+        $freeShippingAction = $this->actionFactory->createShippingPercentageDiscount(1);
         $promotion->addAction($freeShippingAction);
 
         $rule = $this->ruleFactory->createItemTotal($targetAmount);
@@ -741,7 +737,7 @@ final class PromotionContext implements Context
      */
     private function createPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
     {
-        $this->persistPromotion($promotion, $this->actionFactory->createPercentageDiscount($discount, $this->sharedStorage->get('channel')->getCode()), $configuration, $rule);
+        $this->persistPromotion($promotion, $this->actionFactory->createPercentageDiscount($discount), $configuration, $rule);
     }
 
     /**

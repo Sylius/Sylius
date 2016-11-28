@@ -82,9 +82,9 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
         $promotionAction->setType(PercentageDiscountPromotionActionCommand::TYPE)->shouldBeCalled();
-        $promotionAction->setConfiguration(['WEB_US' => ['percentage' => 0.1]])->shouldBeCalled();
+        $promotionAction->setConfiguration(['percentage' => 0.1])->shouldBeCalled();
 
-        $this->createPercentageDiscount(0.1, 'WEB_US')->shouldReturn($promotionAction);
+        $this->createPercentageDiscount(0.1)->shouldReturn($promotionAction);
     }
 
     function it_creates_an_unit_percentage_discount_action_with_given_a_discount_rate(
@@ -106,8 +106,8 @@ final class PromotionActionFactorySpec extends ObjectBehavior
         $decoratedFactory->createNew()->willReturn($promotionAction);
 
         $promotionAction->setType(ShippingPercentageDiscountPromotionActionCommand::TYPE)->shouldBeCalled();
-        $promotionAction->setConfiguration(['WEB_US' => ['percentage' => 0.1]])->shouldBeCalled();
+        $promotionAction->setConfiguration(['percentage' => 0.1])->shouldBeCalled();
 
-        $this->createShippingPercentageDiscount(0.1, 'WEB_US')->shouldReturn($promotionAction);
+        $this->createShippingPercentageDiscount(0.1)->shouldReturn($promotionAction);
     }
 }
