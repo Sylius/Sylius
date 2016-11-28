@@ -23,36 +23,22 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProduc
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
     /**
-     * @param string $localeCode
+     * @param string $locale
      * @param mixed|null $taxonId
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilderWithLocaleCodeAndTaxonId($localeCode, $taxonId = null);
+    public function createListQueryBuilder($locale, $taxonId = null);
 
     /**
-     * @param string $taxonId
      * @param ChannelInterface $channel
+     * @param string $taxonId
      * @param string $locale
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilderForEnabledByTaxonIdAndChannelAndLocale($taxonId, ChannelInterface $channel, $locale);
+    public function createQueryBuilderByChannelAndTaxonId(ChannelInterface $channel, $taxonId, $locale);
 
-    /**
-     * @param string $slug
-     * @param ChannelInterface $channel
-     *
-     * @return ProductInterface|null
-     */
-    public function findOneBySlugAndChannel($slug, ChannelInterface $channel);
-
-    /**
-     * @param string $slug
-     *
-     * @return ProductInterface|null
-     */
-    public function findOneBySlug($slug);
 
     /**
      * @param ChannelInterface $channel
@@ -61,4 +47,18 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * @return ProductInterface[]
      */
     public function findLatestByChannel(ChannelInterface $channel, $count);
+
+    /**
+     * @param string $slug
+     * @param ChannelInterface $channel
+     *
+     * @return ProductInterface|null
+     */
+    public function findOneBySlugAndChannel($slug, ChannelInterface $channel);
+    /**
+     * @param string $slug
+     *
+     * @return ProductInterface|null
+     */
+    public function findOneBySlug($slug);
 }

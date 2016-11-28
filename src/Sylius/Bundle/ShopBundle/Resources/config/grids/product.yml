@@ -9,10 +9,10 @@ sylius_grid:
                 options:
                     class: "%sylius.model.product.class%"
                     repository:
-                        method: createQueryBuilderForEnabledByTaxonIdAndChannelAndLocale
+                        method: createQueryBuilderByChannelAndTaxonId
                         arguments:
-                            taxonId: $taxonId
                             channel: 'expr:service("sylius.context.channel").getChannel()'
+                            taxonId: $taxonId
                             locale: '%locale%'
             sorting:
                 position: asc

@@ -26,15 +26,15 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderWithLocaleCodeAndTaxonId($localeCode, $taxonId = null)
+    public function createListQueryBuilder($locale, $taxonId = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
         $queryBuilder
             ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->andWhere('translation.locale = :localeCode')
-            ->setParameter('localeCode', $localeCode)
+            ->andWhere('translation.locale = :locale')
+            ->setParameter('locale', $locale)
         ;
 
         if (null !== $taxonId) {
@@ -51,7 +51,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderForEnabledByTaxonIdAndChannelAndLocale($taxonId, ChannelInterface $channel, $locale)
+    public function createQueryBuilderByChannelAndTaxonId(ChannelInterface $channel, $taxonId, $locale)
     {
         return $this->createQueryBuilder('o')
             ->addSelect('translation')
@@ -93,9 +93,9 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         return $this->createQueryBuilder('o')
             ->leftJoin('o.translations', 'translation')
             ->innerJoin('o.channels', 'channel')
+            ->andWhere('translation.slug = :slug')
             ->andWhere('channel = :channel')
             ->andWhere('o.enabled = true')
-            ->andWhere('translation.slug = :slug')
             ->setParameter('slug', $slug)
             ->setParameter('channel', $channel)
             ->getQuery()
@@ -110,28 +110,11 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     {
         return $this->createQueryBuilder('o')
             ->leftJoin('o.translations', 'translation')
-            ->andWhere('o.enabled = true')
             ->andWhere('translation.slug = :slug')
+            ->andWhere('o.enabled = true')
             ->setParameter('slug', $slug)
             ->getQuery()
             ->getOneOrNullResult()
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
-    {
-        if (isset($criteria['channels'])) {
-            $queryBuilder
-                ->innerJoin('o.channels', 'channel')
-                ->andWhere('channel = :channel')
-                ->setParameter('channel', $criteria['channels'])
-            ;
-            unset($criteria['channels']);
-        }
-
-        parent::applyCriteria($queryBuilder, $criteria);
     }
 }
