@@ -99,18 +99,11 @@ final class ORMTranslatableListener implements EventSubscriber
         if (!$entity instanceof TranslatableInterface) {
             return;
         }
-
-        /** @var LocaleContextInterface $localeContext */
-        $localeContext = $this->container->get('sylius_resource.translation.locale_context');
-
+        
         /** @var LocaleProviderInterface $localeProvider */
         $localeProvider = $this->container->get('sylius_resource.translation.locale_provider');
 
-        try {
-            $entity->setCurrentLocale($localeContext->getLocaleCode());
-        } catch (LocaleNotFoundException $exception) {
-            $entity->setCurrentLocale($localeProvider->getDefaultLocaleCode());
-        }
+        $entity->setCurrentLocale($localeProvider->getDefaultLocaleCode());
         $entity->setFallbackLocale($localeProvider->getDefaultLocaleCode());
     }
 
