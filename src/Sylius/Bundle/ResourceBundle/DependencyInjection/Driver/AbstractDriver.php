@@ -43,10 +43,6 @@ abstract class AbstractDriver implements DriverInterface
         if ($metadata->hasClass('factory')) {
             $this->addFactory($container, $metadata);
         }
-
-        if ($metadata->hasClass('form')) {
-            $this->addForms($container, $metadata);
-        }
     }
 
     /**
@@ -66,17 +62,6 @@ abstract class AbstractDriver implements DriverInterface
         }
         if ($metadata->hasClass('repository')) {
             $container->setParameter(sprintf('%s.repository.%s.class', $metadata->getApplicationName(), $metadata->getName()), $metadata->getClass('repository'));
-        }
-
-        if (!$metadata->hasParameter('validation_groups')) {
-            return;
-        }
-
-        $validationGroups = $metadata->getParameter('validation_groups');
-
-        foreach ($validationGroups as $formName => $groups) {
-            $suffix = 'default' === $formName ? '' : sprintf('_%s', $formName);
-            $container->setParameter(sprintf('%s.validation_groups.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix), array_merge(['Default'], $groups));
         }
     }
 
@@ -136,67 +121,6 @@ abstract class AbstractDriver implements DriverInterface
     }
 
     /**
-     * @param ContainerBuilder $container
-     * @param MetadataInterface $metadata
-     */
-    protected function addForms(ContainerBuilder $container, MetadataInterface $metadata)
-    {
-        $forms = $metadata->getClass('form');
-
-        if (!is_array($forms)) {
-            return;
-        }
-
-        foreach ($forms as $formName => $formClass) {
-            $suffix = 'default' === $formName ? '' : sprintf('_%s', $formName);
-            $alias = sprintf('%s_%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix);
-
-            $definition = new Definition($formClass);
-
-            switch ($formName) {
-                case 'choice':
-                    $definition->addArgument($this->getMetadataDefinition($metadata));
-                    break;
-
-                case 'to_identifier':
-                case 'from_identifier':
-                case 'to_hidden_identifier':
-                    $definition->setArguments([
-                        new Reference($metadata->getServiceId('repository')),
-                        $this->getMetadataDefinition($metadata),
-                    ]);
-                    break;
-
-                default:
-                    $validationGroupsParameterName = sprintf('%s.validation_groups.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix);
-                    $validationGroups = new Parameter($validationGroupsParameterName);
-
-                    if (!$container->hasParameter($validationGroupsParameterName)) {
-                        $validationGroups = ['Default'];
-                    }
-
-                    $definition->setArguments([
-                        $metadata->getClass('model'),
-                        $validationGroups,
-                    ]);
-                    break;
-            }
-
-            $definition->addTag('form.type', ['alias' => $alias]);
-
-            $container->setParameter(sprintf('%s.form.type.%s%s.class', $metadata->getApplicationName(), $metadata->getName(), $suffix), $formClass);
-            $container->setDefinition(
-                sprintf('%s.form.type.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix),
-                $definition
-            );
-        }
-
-        if (!$container->hasDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()))) {
-            $this->addDefaultForm($container, $metadata);
-        }
-    }
-
-    /**
      * @param MetadataInterface $metadata
      *
      * @return Definition
@@ -211,12 +135,6 @@ abstract class AbstractDriver implements DriverInterface
 
         return $definition;
     }
-
-    /**
-     * @param ContainerBuilder $container
-     * @param MetadataInterface $metadata
-     */
-    abstract protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata);
 
     /**
      * @param ContainerBuilder $container

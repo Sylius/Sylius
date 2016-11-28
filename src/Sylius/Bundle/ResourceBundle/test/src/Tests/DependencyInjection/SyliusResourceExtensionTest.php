@@ -37,17 +37,10 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
                 'app.book' => [
                     'classes' => [
                         'model' => Book::class,
-                        'form' => [
-                            'default' => BookType::class,
-                            'choice' => ResourceChoiceType::class,
-                        ],
                     ],
                     'translation' => [
                         'classes' => [
                             'model' => BookTranslation::class,
-                            'form' => [
-                                'default' => BookTranslationType::class,
-                            ],
                          ],
                     ],
                 ],
@@ -55,12 +48,9 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
         ]);
 
         $this->assertContainerBuilderHasService('app.factory.book');
-        $this->assertContainerBuilderHasService('app.form.type.book');
-        $this->assertContainerBuilderHasService('app.form.type.book_choice');
         $this->assertContainerBuilderHasService('app.repository.book');
         $this->assertContainerBuilderHasService('app.controller.book');
         $this->assertContainerBuilderHasService('app.manager.book');
-        $this->assertContainerBuilderHasService('app.form.type.book_translation');
 
         $this->assertContainerBuilderHasParameter('app.model.book.class', Book::class);
         $this->assertContainerBuilderHasParameter('app.model.book_translation.class', BookTranslation::class);

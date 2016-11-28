@@ -63,26 +63,6 @@ final class DoctrineORMDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
-    {
-        $defaultFormBuilderDefinition = new Definition(DefaultFormBuilder::class);
-        $defaultFormBuilderDefinition->setArguments([new Reference($metadata->getServiceId('manager'))]);
-
-        $definition = new Definition(DefaultResourceType::class);
-        $definition
-            ->setArguments([
-                $this->getMetadataDefinition($metadata),
-                $defaultFormBuilderDefinition,
-            ])
-            ->addTag('form.type', ['alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())])
-        ;
-
-        $container->setDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()), $definition);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getManagerServiceId(MetadataInterface $metadata)
     {
         if ($objectManagerName = $this->getObjectManagerName($metadata)) {

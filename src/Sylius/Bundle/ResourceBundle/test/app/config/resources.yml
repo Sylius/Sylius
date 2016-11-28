@@ -7,11 +7,8 @@ sylius_resource:
             classes:
                 model: AppBundle\Entity\Book
                 factory: Sylius\Component\Resource\Factory\TranslatableFactory
-                form:
-                    default: AppBundle\Form\Type\BookType
-                    choice: Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                form: AppBundle\Form\Type\BookType
             translation:
                 classes:
                     model: AppBundle\Entity\BookTranslation
-                    form:
-                        default: AppBundle\Form\Type\BookTranslationType
+                    form: AppBundle\Form\Type\BookTranslationType

@@ -193,34 +193,6 @@ final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
-    {
-        $builderDefinition = new Definition(DefaultFormBuilder::class);
-        $builderDefinition->setArguments([
-            new Reference($metadata->getServiceId('manager'))
-        ]);
-
-        $definition = new Definition(DefaultResourceType::class);
-        $definition
-            ->setArguments([
-                $this->getMetadataDefinition($metadata),
-                $builderDefinition,
-            ])
-            ->addTag('form.type', [
-                'alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())
-            ])
-        ;
-
-        $container->setDefinition(sprintf(
-            '%s.form.type.%s',
-            $metadata->getApplicationName(),
-            $metadata->getName()
-        ), $definition);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getManagerServiceId(MetadataInterface $metadata)
     {
         if ($objectManagerName = $this->getObjectManagerName($metadata)) {

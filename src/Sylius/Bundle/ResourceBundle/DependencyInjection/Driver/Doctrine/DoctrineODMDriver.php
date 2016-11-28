@@ -69,13 +69,6 @@ final class DoctrineODMDriver extends AbstractDoctrineDriver
     /**
      * {@inheritdoc}
      */
-    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getManagerServiceId(MetadataInterface $metadata)
     {
         if ($objectManagerName = $this->getObjectManagerName($metadata)) {

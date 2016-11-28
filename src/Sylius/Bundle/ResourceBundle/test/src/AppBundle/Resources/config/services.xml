@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="app.form.type.book" class="AppBundle\Form\Type\BookType">
+            <argument>%app.model.book.class%</argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="app.form.type.book_translation" class="AppBundle\Form\Type\BookTranslationType">
+            <argument>%app.model.book_translation.class%</argument>
+            <tag name="form.type" />
+        </service>
+    </services>
+</container>
