@@ -33,10 +33,8 @@ class ProductVariantGenerationTypeExtension extends AbstractTypeExtension
      *
      * @param EventSubscriberInterface $channelPricingFormSubscriber
      */
-    public function __construct($dataClass, array $validationGroups = [], EventSubscriberInterface $channelPricingFormSubscriber)
+    public function __construct(EventSubscriberInterface $channelPricingFormSubscriber)
     {
-        parent::__construct($dataClass, $validationGroups);
-
         $this->channelPricingFormSubscriber = $channelPricingFormSubscriber;
     }
 

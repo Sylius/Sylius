@@ -17,12 +17,12 @@ use Sylius\Component\Currency\Repository\ExchangeRateRepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CurrencyConverter implements CurrencyConverterInterface
+final class CurrencyConverter implements CurrencyConverterInterface
 {
     /**
      * @var ExchangeRateRepositoryInterface
      */
-    protected $exchangeRateRepository;
+    private $exchangeRateRepository;
 
     /**
      * @var array
@@ -42,6 +42,10 @@ class CurrencyConverter implements CurrencyConverterInterface
      */
     public function convert($amount, $sourceCurrencyCode, $targetCurrencyCode)
     {
+        if ($sourceCurrencyCode === $targetCurrencyCode) {
+            return $amount;
+        }
+
         $exchangeRate = $this->getExchangeRate($sourceCurrencyCode, $targetCurrencyCode);
 
         if (null === $exchangeRate) {

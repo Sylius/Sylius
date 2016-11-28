@@ -36,11 +36,5 @@ final class SyliusShippingExtension extends AbstractResourceExtension
         $this->mapFormValidationGroupsParameters($config, $container);
 
         $loader->load('services.xml');
-
-        $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method');
-        $shippingMethod->addArgument(new Reference(g'sylius.registry.shipping_calculator'));
-        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_rule_checker'));
-        $shippingMethod->addArgument(new Reference('form.registry'));
-        $shippingMethod->addArgument(new Reference('sylius.form.event_subscriber.build_shipping_method'));
     }
 }

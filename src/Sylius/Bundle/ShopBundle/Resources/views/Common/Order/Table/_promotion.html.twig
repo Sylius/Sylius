@@ -22,5 +22,5 @@
 </td>
 <td colspan="2" id="promotion-total" class="right aligned">
     <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
-    {{ money.convertAndFormat(order.orderPromotionTotal) }}
+    {{ money.format(order.orderPromotionTotal, order.currencyCode) }}
 </td>

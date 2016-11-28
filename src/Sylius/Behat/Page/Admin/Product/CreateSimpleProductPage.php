@@ -241,7 +241,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'images' => '#sylius_product_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_product_translations_%locale%_name',
-            'price' => '#sylius_product_variant_price',
+            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'slug' => '#sylius_product_translations_%locale%_slug',

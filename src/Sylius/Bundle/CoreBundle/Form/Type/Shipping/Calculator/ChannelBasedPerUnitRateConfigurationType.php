@@ -59,4 +59,12 @@ class ChannelBasedPerUnitRateConfigurationType extends AbstractType
     {
         return 'sylius_channel_based_shipping_calculator_per_unit_rate';
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBlockPrefix()
+    {
+        return 'sylius_channel_based_shipping_calculator_per_unit_rate';
+    }
 }

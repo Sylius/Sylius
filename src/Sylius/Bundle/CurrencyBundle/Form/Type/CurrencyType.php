@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\CurrencyType as SymfonyCurrencyType;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -27,7 +28,7 @@ class CurrencyType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->addEventSubscriber(new AddCodeFormSubscriber(CurrencyType::class, [
+            ->addEventSubscriber(new AddCodeFormSubscriber(SymfonyCurrencyType::class, [
                 'label' => 'sylius.form.currency.code',
             ]))
         ;

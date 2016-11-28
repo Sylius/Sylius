@@ -73,4 +73,12 @@ final class CurrencyConverterSpec extends ObjectBehavior
 
         $this->convert(666, 'GBP', 'USD')->shouldReturn(666);
     }
+
+    function it_return_given_value_if_both_currencie_in_currency_pair_are_the_same(
+        ExchangeRateRepositoryInterface $exchangeRateRepository
+    ) {
+        $exchangeRateRepository->findOneWithCurrencyPair('GBP', 'GBP')->willReturn(null);
+
+        $this->convert(666, 'GBP', 'GBP')->shouldReturn(666);
+    }
 }
