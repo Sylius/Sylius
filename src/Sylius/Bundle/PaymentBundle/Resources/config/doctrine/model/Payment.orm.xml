@@ -23,18 +23,10 @@
             <join-column name="method_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 
-        <field name="currencyCode" column="currency_code" length="3" type="string">
-            <gedmo:versioned />
-        </field>
-        <field name="amount" column="amount" type="integer">
-            <gedmo:versioned />
-        </field>
-        <field name="state" column="state" type="string">
-            <gedmo:versioned />
-        </field>
-        <field name="details" column="details" type="json_array">
-            <gedmo:versioned />
-        </field>
+        <field name="currencyCode" column="currency_code" length="3" type="string" />
+        <field name="amount" column="amount" type="integer" />
+        <field name="state" column="state" type="string" />
+        <field name="details" column="details" type="json_array" />
 
         <many-to-one field="creditCard" target-entity="Sylius\Component\Payment\Model\CreditCardInterface">
             <cascade>
@@ -49,8 +41,6 @@
         <field name="updatedAt" column="updated_at" type="datetime" nullable="true">
             <gedmo:timestampable on="update"/>
         </field>
-
-        <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>

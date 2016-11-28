@@ -3,13 +3,10 @@
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
-                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
-                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\Order" table="sylius_order">
-        <field name="currencyCode" column="currency_code" length="3">
-            <gedmo:versioned />
-        </field>
+        <field name="currencyCode" column="currency_code" length="3" />
 
         <field name="exchangeRate" column="exchange_rate" type="decimal" precision="10" scale="5" />
         <field type="string" name="localeCode" column="locale_code" />
@@ -75,13 +72,10 @@
             <cascade>
                 <cascade-persist />
             </cascade>
-            <gedmo:versioned />
         </many-to-many>
 
         <field type="string" name="tokenValue" column="token_value" nullable="true" />
         <field type="string" name="customerIp" column="customer_ip" nullable="true" />
-
-        <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>
