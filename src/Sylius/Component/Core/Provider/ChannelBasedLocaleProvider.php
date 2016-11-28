@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ChannelBasedLocaleProvider implements LocaleProviderInterface, AvailableLocalesProviderInterface
+final class ChannelBasedLocaleProvider implements LocaleProviderInterface
 {
     /**
      * @var ChannelContextInterface
