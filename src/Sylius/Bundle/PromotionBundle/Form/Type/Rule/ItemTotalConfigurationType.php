@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Rule;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
@@ -33,7 +34,22 @@ class ItemTotalConfigurationType extends AbstractType
                     new NotBlank(),
                     new Type(['type' => 'numeric']),
                 ],
+                'currency' => $options['currency'],
             ])
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver
+            ->setDefined(['currency'])
+            ->setAllowedTypes('currency', 'string')
+            ->setDefault('currency', 'USD')
         ;
     }
 

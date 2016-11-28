@@ -41,7 +41,7 @@ class TaxonFilterConfigurationType extends AbstractType
     {
         $builder
             ->add('taxons', 'sylius_taxon_choice', [
-                'label' => 'sylius.form.promotion_filter.taxon.taxons',
+                'label' => 'sylius.form.promotion_filter.taxons',
                 'multiple' => true,
                 'required' => false,
             ])

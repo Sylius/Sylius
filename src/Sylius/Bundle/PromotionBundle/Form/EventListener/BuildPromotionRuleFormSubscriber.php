@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class BuildPromotionRuleFormSubscriber extends AbstractConfigurationSubscriber
+class BuildPromotionRuleFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
      * @param PromotionRuleInterface $rule

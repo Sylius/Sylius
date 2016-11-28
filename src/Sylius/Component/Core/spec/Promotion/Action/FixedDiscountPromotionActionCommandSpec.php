@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -53,6 +54,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_uses_a_distributor_and_applicator_to_execute_promotion_action(
+        ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
@@ -61,6 +63,8 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
         $order->getCurrencyCode()->willReturn('USD');
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
 
         $order->countItems()->willReturn(2);
 
@@ -76,10 +80,11 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-600, -400]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-600, -400])->shouldBeCalled();
 
-        $this->execute($order, ['base_amount' => 1000, 'amounts' => []], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion);
     }
 
     function it_does_not_apply_bigger_promotion_than_promotion_subject_total(
+        ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
@@ -88,6 +93,8 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
         $order->getCurrencyCode()->willReturn('USD');
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
 
         $order->countItems()->willReturn(2);
 
@@ -103,78 +110,86 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $proportionalIntegerDistributor->distribute([6000, 4000], -10000)->willReturn([-6000, -4000]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-6000, -4000])->shouldBeCalled();
 
-        $this->execute($order, ['base_amount' => 15000, 'amounts' => []], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 15000]], $promotion);
     }
 
-    function it_applies_a_promotion_with_value_in_defined_currency(
+    function it_does_nothing_if_order_has_no_items(
+        ChannelInterface $channel,
         OrderInterface $order,
-        OrderItemInterface $firstItem,
-        OrderItemInterface $secondItem,
-        PromotionInterface $promotion,
-        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+        PromotionInterface $promotion
     ) {
-        $order->getCurrencyCode()->willReturn('PLN');
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
 
-        $order->countItems()->willReturn(2);
-
-        $order
-            ->getItems()
-            ->willReturn(new \ArrayIterator([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
-        ;
-
-        $order->getPromotionSubjectTotal()->willReturn(10000);
-        $firstItem->getTotal()->willReturn(6000);
-        $secondItem->getTotal()->willReturn(4000);
-
-        $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-600, -400]);
-        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-600, -400])->shouldBeCalled();
-
-        $this->execute($order, ['base_amount' => 100, 'amounts' => ['PLN' => 1000]], $promotion);
-    }
-
-    function it_does_nothing_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)
-    {
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->shouldNotBeCalled();
 
-        $this->execute($order, ['base_amount' => 1000, 'amounts' => []], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion);
     }
 
     function it_does_nothing_if_subject_total_is_0(
+        ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
     ) {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->willReturn(0);
         $proportionalIntegerDistributor->distribute(Argument::any())->shouldNotBeCalled();
 
-        $this->execute($order, ['base_amount' => 1000, 'amounts' => []], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion);
     }
 
     function it_does_nothing_if_promotion_amount_is_0(
+        ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
     ) {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->willReturn(1000);
         $proportionalIntegerDistributor->distribute(Argument::any())->shouldNotBeCalled();
 
-        $this->execute($order, ['base_amount' => 0, 'amounts' => []], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 0]], $promotion);
     }
 
-    function it_throws_an_exception_if_configuration_is_invalid(OrderInterface $order, PromotionInterface $promotion)
-    {
+    function it_does_nothing_if_amount_for_order_channel_is_not_configured(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        PromotionInterface $promotion
+    ) {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $order->countItems()->willReturn(1);
+        $order->getPromotionSubjectTotal()->shouldNotBeCalled();
+
+        $this->execute($order, ['WEB_PL' => ['amount' => 1000]], $promotion);
+    }
+
+    function it_throws_an_exception_if_configuration_is_invalid(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        PromotionInterface $promotion
+    ) {
+        $order->getChannel()->willReturn($channel, $channel);
+        $channel->getCode()->willReturn('WEB_US', 'WEB_US');
+        $order->countItems()->willReturn(1, 1);
+
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('execute', [$order, [], $promotion])
+            ->during('execute', [$order, ['WEB_US' => []], $promotion])
         ;
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('execute', [$order, ['base_amount' => 'string', 'amounts' => []], $promotion])
+            ->during('execute', [$order, ['WEB_US' => ['amount' => 'string']], $promotion])
         ;
     }
 

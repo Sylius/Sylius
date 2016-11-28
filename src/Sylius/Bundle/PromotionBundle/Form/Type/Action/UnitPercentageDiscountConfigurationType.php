@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Type;
@@ -43,7 +44,24 @@ class UnitPercentageDiscountConfigurationType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('filters', 'sylius_promotion_filters', ['required' => false])
+            ->add('filters', 'sylius_promotion_filters', [
+                'required' => false,
+                'currency' => $options['currency'],
+            ])
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver
+            ->setDefined(['currency'])
+            ->setAllowedTypes('currency', 'string')
+            ->setDefault('currency', 'USD')
         ;
     }
 
