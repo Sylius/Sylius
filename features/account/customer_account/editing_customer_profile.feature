@@ -21,7 +21,7 @@ Feature: Editing a customer profile
     @ui
     Scenario: Changing my email
         When I want to modify my profile
-        And I specify the email as "frank@underwood.com"
+        And I specify the customer email as "frank@underwood.com"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And my email should be "frank@underwood.com"
