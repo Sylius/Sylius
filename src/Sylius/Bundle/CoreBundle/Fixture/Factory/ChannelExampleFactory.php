@@ -24,12 +24,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ChannelExampleFactory implements ExampleFactoryInterface
+class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var ChannelFactoryInterface
      */
     private $channelFactory;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $localeRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $currencyRepository;
 
     /**
      * @var \Faker\Generator
@@ -52,46 +62,13 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
         RepositoryInterface $currencyRepository
     ) {
         $this->channelFactory = $channelFactory;
+        $this->localeRepository = $localeRepository;
+        $this->currencyRepository= $currencyRepository;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setDefault('name', function (Options $options) {
-                    return $this->faker->words(3, true);
-                })
-                ->setDefault('code', function (Options $options) {
-                    return StringInflector::nameToCode($options['name']);
-                })
-                ->setDefault('hostname', function (Options $options) {
-                    return $options['code'] . '.localhost';
-                })
-                ->setDefault('color', function (Options $options) {
-                    return $this->faker->colorName;
-                })
-                ->setDefault('enabled', function (Options $options) {
-                    return $this->faker->boolean(90);
-                })
-                ->setAllowedTypes('enabled', 'bool')
-                ->setDefault('tax_calculation_strategy', 'order_items_based')
-                ->setAllowedTypes('tax_calculation_strategy', 'string')
-                ->setDefault('default_locale', function (Options $options) {
-                    return $this->faker->randomElement($options['locales']);
-                })
-                ->setAllowedTypes('default_locale', ['string', LocaleInterface::class])
-                ->setNormalizer('default_locale', LazyOption::findOneBy($localeRepository, 'code'))
-                ->setDefault('locales', LazyOption::all($localeRepository))
-                ->setAllowedTypes('locales', 'array')
-                ->setNormalizer('locales', LazyOption::findBy($localeRepository, 'code'))
-                ->setDefault('base_currency', function (Options $options) {
-                    return $this->faker->randomElement($options['currencies']);
-                })
-                ->setAllowedTypes('base_currency', ['string', CurrencyInterface::class])
-                ->setNormalizer('base_currency', LazyOption::findOneBy($currencyRepository, 'code'))
-                ->setDefault('currencies', LazyOption::all($currencyRepository))
-                ->setAllowedTypes('currencies', 'array')
-                ->setNormalizer('currencies', LazyOption::findBy($currencyRepository, 'code'))
-                ->setDefault('theme_name', null)
-        ;
+        $this->optionsResolver = new OptionsResolver();
+
+        $this->configureOptions($this->optionsResolver);
     }
 
     /**
@@ -121,5 +98,49 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
         }
 
         return $channel;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefault('name', function (Options $options) {
+                return $this->faker->words(3, true);
+            })
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
+            })
+            ->setDefault('hostname', function (Options $options) {
+                return $options['code'] . '.localhost';
+            })
+            ->setDefault('color', function (Options $options) {
+                return $this->faker->colorName;
+            })
+            ->setDefault('enabled', function (Options $options) {
+                return $this->faker->boolean(90);
+            })
+            ->setAllowedTypes('enabled', 'bool')
+            ->setDefault('tax_calculation_strategy', 'order_items_based')
+            ->setAllowedTypes('tax_calculation_strategy', 'string')
+            ->setDefault('default_locale', function (Options $options) {
+                return $this->faker->randomElement($options['locales']);
+            })
+            ->setAllowedTypes('default_locale', ['string', LocaleInterface::class])
+            ->setNormalizer('default_locale', LazyOption::findOneBy($this->localeRepository, 'code'))
+            ->setDefault('locales', LazyOption::all($this->localeRepository))
+            ->setAllowedTypes('locales', 'array')
+            ->setNormalizer('locales', LazyOption::findBy($this->localeRepository, 'code'))
+            ->setDefault('base_currency', function (Options $options) {
+                return $this->faker->randomElement($options['currencies']);
+            })
+            ->setAllowedTypes('base_currency', ['string', CurrencyInterface::class])
+            ->setNormalizer('base_currency', LazyOption::findOneBy($this->currencyRepository, 'code'))
+            ->setDefault('currencies', LazyOption::all($this->currencyRepository))
+            ->setAllowedTypes('currencies', 'array')
+            ->setNormalizer('currencies', LazyOption::findBy($this->currencyRepository, 'code'))
+            ->setDefault('theme_name', null)
+        ;
     }
 }

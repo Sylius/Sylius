@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class TaxCategoryExampleFactory implements ExampleFactoryInterface
+class TaxCategoryExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -45,18 +45,9 @@ final class TaxCategoryExampleFactory implements ExampleFactoryInterface
         $this->taxCategoryFactory = $taxCategoryFactory;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setDefault('name', function (Options $options) {
-                    return $this->faker->words(3, true);
-                })
-                ->setDefault('code', function (Options $options) {
-                    return StringInflector::nameToCode($options['name']);
-                })
-                ->setDefault('description', function (Options $options) {
-                    return $this->faker->paragraph;
-                })
-        ;
+        $this->optionsResolver = new OptionsResolver();
+
+        $this->configureOptions($this->optionsResolver);
     }
 
     /**
@@ -65,7 +56,7 @@ final class TaxCategoryExampleFactory implements ExampleFactoryInterface
     public function create(array $options = [])
     {
         $options = $this->optionsResolver->resolve($options);
-        
+
         /** @var TaxCategoryInterface $taxCategory */
         $taxCategory = $this->taxCategoryFactory->createNew();
 
@@ -74,5 +65,23 @@ final class TaxCategoryExampleFactory implements ExampleFactoryInterface
         $taxCategory->setDescription($options['description']);
 
         return $taxCategory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefault('name', function (Options $options) {
+                return $this->faker->words(3, true);
+            })
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
+            })
+            ->setDefault('description', function (Options $options) {
+                return $this->faker->paragraph;
+            })
+        ;
     }
 }
