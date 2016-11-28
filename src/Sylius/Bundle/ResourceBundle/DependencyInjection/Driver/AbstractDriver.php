@@ -47,6 +47,8 @@ abstract class AbstractDriver implements DriverInterface
         if ($metadata->hasClass('form')) {
             $this->addForms($container, $metadata);
         }
+
+        $this->addAuthorizationChecker($container, $metadata);
     }
 
     /**
@@ -101,7 +103,7 @@ abstract class AbstractDriver implements DriverInterface
                 new Reference('sylius.resource_controller.form_factory'),
                 new Reference('sylius.resource_controller.redirect_handler'),
                 new Reference('sylius.resource_controller.flash_helper'),
-                new Reference('sylius.resource_controller.authorization_checker'),
+                new Reference($metadata->getServiceId('authorization_checker')),
                 new Reference('sylius.resource_controller.event_dispatcher'),
                 new Reference('sylius.resource_controller.state_machine'),
             ])
@@ -193,6 +195,18 @@ abstract class AbstractDriver implements DriverInterface
 
         if (!$container->hasDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()))) {
             $this->addDefaultForm($container, $metadata);
+        }
+    }
+
+    protected function addAuthorizationChecker(ContainerBuilder $container, MetadataInterface $metadata)
+    {
+        $authorizationCheckerServiceId = $metadata->getServiceId('authorization_checker');
+
+        if ($metadata->hasClass('authorization_checker')) {
+            $definition = new Definition($metadata->getClass('authorization_checker'));
+            $container->setDefinition($authorizationCheckerServiceId, $definition);
+        } else {
+            $container->setAlias($authorizationCheckerServiceId, 'sylius.resource_controller.authorization_checker');
         }
     }
 
