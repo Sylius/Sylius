@@ -165,13 +165,27 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I add the "Total price of items from taxon" rule configured with :count :taxonName
+     * @When /^I add the "Total price of items from taxon" rule configured with "([^"]+)" taxon and (?:€|£|\$)([^"]+) amount for "([^"]+)" channel$/
      */
-    public function iAddTheRuleConfiguredWith($count, $taxonName)
+    public function iAddTheRuleConfiguredWith($taxonName, $amount, $channelName)
     {
         $this->createPage->addRule('Total price of items from taxon');
         $this->createPage->selectRuleOption('Taxon', $taxonName);
-        $this->createPage->fillRuleOption('Amount', $count);
+        $this->createPage->fillRuleOptionForChannel($channelName, 'Amount', $amount);
+    }
+
+    /**
+     * @When /^I add the "Item total" rule configured with (?:€|£|\$)([^"]+) amount for "([^"]+)" channel and (?:€|£|\$)([^"]+) amount for "([^"]+)" channel$/
+     */
+    public function iAddTheItemTotalRuleConfiguredWithTwoChannel(
+        $firstAmount,
+        $firstChannelName,
+        $secondAmount,
+        $secondChannelName
+    ) {
+        $this->createPage->addRule('Item total');
+        $this->createPage->fillRuleOptionForChannel($firstChannelName, 'Amount', $firstAmount);
+        $this->createPage->fillRuleOptionForChannel($secondChannelName, 'Amount', $secondAmount);
     }
 
     /**
