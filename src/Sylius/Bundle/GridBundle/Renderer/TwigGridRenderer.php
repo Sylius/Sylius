@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\GridBundle\Renderer;
 
+use Sylius\Bundle\GridBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\Definition\Filter;
@@ -42,6 +43,11 @@ final class TwigGridRenderer implements GridRendererInterface
     private $formFactory;
 
     /**
+     * @var FormTypeRegistryInterface
+     */
+    private $formTypeRegistry;
+
+    /**
      * @var string
      */
     private $defaultTemplate;
@@ -60,6 +66,7 @@ final class TwigGridRenderer implements GridRendererInterface
      * @param \Twig_Environment $twig
      * @param ServiceRegistryInterface $fieldsRegistry
      * @param FormFactoryInterface $formFactory
+     * @param FormTypeRegistryInterface $formTypeRegistry
      * @param string $defaultTemplate
      * @param array $actionTemplates
      * @param array $filterTemplates
@@ -68,6 +75,7 @@ final class TwigGridRenderer implements GridRendererInterface
         \Twig_Environment $twig,
         ServiceRegistryInterface $fieldsRegistry,
         FormFactoryInterface $formFactory,
+        FormTypeRegistryInterface $formTypeRegistry,
         $defaultTemplate,
         array $actionTemplates = [],
         array $filterTemplates = []
@@ -75,6 +83,7 @@ final class TwigGridRenderer implements GridRendererInterface
         $this->twig = $twig;
         $this->fieldsRegistry = $fieldsRegistry;
         $this->formFactory = $formFactory;
+        $this->formTypeRegistry = $formTypeRegistry;
         $this->defaultTemplate = $defaultTemplate;
         $this->actionTemplates = $actionTemplates;
         $this->filterTemplates = $filterTemplates;
@@ -127,7 +136,7 @@ final class TwigGridRenderer implements GridRendererInterface
         $template = $this->getFilterTemplate($filter);
 
         $form = $this->formFactory->createNamed('criteria', 'form', [], ['csrf_protection' => false, 'required' => false]);
-        $form->add($filter->getName(), sprintf('sylius_grid_filter_%s', $filter->getType()), $filter->getOptions());
+        $form->add($filter->getName(), $this->formTypeRegistry->get($filter->getType(), 'default'), $filter->getOptions());
 
         $criteria = $gridView->getParameters()->get('criteria', []);
         $form->submit($criteria);

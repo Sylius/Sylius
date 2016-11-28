@@ -25,18 +25,20 @@ final class RegisterFiltersPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.registry.grid_filter')) {
+        if (!$container->hasDefinition('sylius.registry.grid_filter') || !$container->hasDefinition('sylius.form_registry.grid_filter')) {
             return;
         }
 
         $registry = $container->getDefinition('sylius.registry.grid_filter');
+        $formTypeRegistry = $container->getDefinition('sylius.form_registry.grid_filter');
 
         foreach ($container->findTaggedServiceIds('sylius.grid_filter') as $id => $attributes) {
-            if (!isset($attributes[0]['type']))  {
-                throw new \InvalidArgumentException('Tagged grid filters needs to have `type` attribute.');
+            if (!isset($attributes[0]['type'], $attributes[0]['form-type']))  {
+                throw new \InvalidArgumentException('Tagged grid filters needs to have `type` and `form-type` attribute.');
             }
 
             $registry->addMethodCall('register', [$attributes[0]['type'], new Reference($id)]);
+            $formTypeRegistry->addMethodCall('add', [$attributes[0]['type'], 'default', $attributes[0]['form-type']]);
         }
     }
 }
