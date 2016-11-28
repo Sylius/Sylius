@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class PaymentMethodFixture extends AbstractResourceFixture
+class PaymentMethodFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}

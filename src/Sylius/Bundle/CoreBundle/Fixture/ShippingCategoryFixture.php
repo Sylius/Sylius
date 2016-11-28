@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ShippingCategoryFixture extends AbstractResourceFixture
+class ShippingCategoryFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
