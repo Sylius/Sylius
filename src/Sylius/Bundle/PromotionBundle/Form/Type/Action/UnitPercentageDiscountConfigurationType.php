@@ -53,14 +53,6 @@ class UnitPercentageDiscountConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_promotion_action_unit_percentage_discount_configuration';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_promotion_action_unit_percentage_discount_configuration';

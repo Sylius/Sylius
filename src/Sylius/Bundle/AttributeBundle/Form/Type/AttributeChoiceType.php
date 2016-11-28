@@ -60,7 +60,6 @@ abstract class AttributeChoiceType extends AbstractType
                 'choice_value' => 'id',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
-                'choices_as_values' => true,
             ])
         ;
     }
@@ -71,14 +70,6 @@ abstract class AttributeChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_attribute_choice';
     }
 
     /**

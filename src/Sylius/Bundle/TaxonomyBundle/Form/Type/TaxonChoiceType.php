@@ -102,19 +102,10 @@ class TaxonChoiceType extends AbstractType
                 'choice_translation_domain' => false,
                 'root' => null,
                 'filter' => null,
-                'choices_as_values' => true,
             ])
             ->setAllowedTypes('root', [TaxonInterface::class, 'string', 'null'])
             ->setAllowedTypes('filter', ['callable', 'null'])
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_taxon_choice';
     }
 
     /**

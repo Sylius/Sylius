@@ -60,7 +60,6 @@ final class CustomerGroupChoiceType extends AbstractType
             'choice_label' => 'name',
             'choice_translation_domain' => false,
             'label' => 'sylius.form.customer.group',
-            'choices_as_values' => true,
         ]);
     }
 
@@ -70,14 +69,6 @@ final class CustomerGroupChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_customer_group_choice';
     }
 
     /**

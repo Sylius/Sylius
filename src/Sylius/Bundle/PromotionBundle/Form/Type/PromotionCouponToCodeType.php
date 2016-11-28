@@ -99,14 +99,6 @@ final class PromotionCouponToCodeType extends AbstractType implements DataTransf
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_promotion_coupon_to_code';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_promotion_coupon_to_code';

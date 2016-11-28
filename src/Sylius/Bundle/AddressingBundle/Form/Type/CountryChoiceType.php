@@ -55,7 +55,6 @@ class CountryChoiceType extends AbstractType
                 'enabled' => true,
                 'label' => 'sylius.form.address.country',
                 'placeholder' => 'sylius.form.country.select',
-                'choices_as_values' => true,
             ])
         ;
     }
@@ -66,14 +65,6 @@ class CountryChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_country_choice';
     }
 
     /**

@@ -32,7 +32,6 @@ class GenderType extends AbstractType
                 'sylius.gender.male' => CustomerInterface::MALE_GENDER,
                 'sylius.gender.female' => CustomerInterface::FEMALE_GENDER,
             ],
-            'choices_as_values' => true,
         ]);
     }
 
@@ -42,14 +41,6 @@ class GenderType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_gender';
     }
 
     /**

@@ -49,20 +49,4 @@ final class StringFieldType implements FieldTypeInterface
     public function configureOptions(OptionsResolver $resolver)
     {
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'string';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'string';
-    }
 }

@@ -48,14 +48,6 @@ class CustomerRegistrationType extends CustomerSimpleRegistrationType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_customer_registration';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_customer_registration';

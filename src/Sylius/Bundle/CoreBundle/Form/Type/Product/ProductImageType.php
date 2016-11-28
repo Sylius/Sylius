@@ -21,14 +21,6 @@ class ProductImageType extends ImageType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_product_image';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_product_image';

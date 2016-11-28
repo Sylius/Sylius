@@ -21,14 +21,6 @@ class TaxonImageType extends ImageType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_taxon_image';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_taxon_image';

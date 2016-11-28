@@ -40,7 +40,6 @@ class PromotionActionChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => array_flip($this->actions),
-            'choices_as_values' => true,
         ]);
     }
 
@@ -50,14 +49,6 @@ class PromotionActionChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_promotion_action_choice';
     }
 
     /**

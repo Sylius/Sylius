@@ -104,7 +104,6 @@ class ShippingMethodType extends AbstractResourceType
                 'multiple' => false,
                 'expanded' => true,
                 'label' => 'sylius.form.shipping_method.category_requirement',
-                'choices_as_values' => true,
             ])
             ->add('calculator', CalculatorChoiceType::class, [
                 'label' => 'sylius.form.shipping_method.calculator',
@@ -151,14 +150,6 @@ class ShippingMethodType extends AbstractResourceType
                 $view->vars['prototypes'][$group.'_'.$type] = $prototype->createView($view);
             }
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_shipping_method';
     }
 
     /**

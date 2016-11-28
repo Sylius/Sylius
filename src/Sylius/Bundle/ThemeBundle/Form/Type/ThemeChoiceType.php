@@ -48,7 +48,6 @@ final class ThemeChoiceType extends AbstractType
             'choice_label' => function (ThemeInterface $theme) {
                 return (string) $theme;
             },
-            'choices_as_values' => true,
         ]);
     }
 
@@ -58,14 +57,6 @@ final class ThemeChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_theme_choice';
     }
 
     /**

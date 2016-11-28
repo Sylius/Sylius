@@ -71,7 +71,6 @@ class LocaleChoiceType extends AbstractType
             'enabled' => null,
             'label' => 'sylius.form.locale.locale',
             'placeholder' => 'sylius.form.locale.select',
-            'choices_as_values' => true,
         ]);
     }
 
@@ -81,14 +80,6 @@ class LocaleChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_locale_choice';
     }
 
     /**

@@ -41,7 +41,6 @@ class AttributeTypeChoiceType extends AbstractType
         $resolver->setDefaults([
             'choices' => array_flip($this->attributeTypes),
             'choice_translation_domain' => false,
-            'choices_as_values' => true,
         ]);
     }
 
@@ -51,14 +50,6 @@ class AttributeTypeChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_attribute_type_choice';
     }
 
     /**

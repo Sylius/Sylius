@@ -69,14 +69,6 @@ class FlexibleRateConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_shipping_calculator_flexible_rate';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_shipping_calculator_flexible_rate';

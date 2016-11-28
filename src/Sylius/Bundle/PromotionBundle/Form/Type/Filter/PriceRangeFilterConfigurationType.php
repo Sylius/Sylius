@@ -47,14 +47,6 @@ class PriceRangeFilterConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_promotion_action_filter_price_range_configuration';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_promotion_action_filter_price_range_configuration';

@@ -41,7 +41,6 @@ class TaxCalculationStrategyChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => array_flip($this->strategies),
-                'choices_as_values' => true,
             ])
         ;
     }
@@ -52,14 +51,6 @@ class TaxCalculationStrategyChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_tax_calculation_strategy_choice';
     }
 
     /**

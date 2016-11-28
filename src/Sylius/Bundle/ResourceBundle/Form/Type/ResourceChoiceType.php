@@ -47,7 +47,6 @@ class ResourceChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'class' => null,
-                'choices_as_values' => true,
             ])
             ->setNormalizer('class', function () {
                 return $this->metadata->getClass('model');
@@ -61,14 +60,6 @@ class ResourceChoiceType extends AbstractType
     public function getParent()
     {
         return $this->getFormTypeForDriver($this->metadata->getDriver());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return sprintf('%s_%s_choice', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
 
     /**

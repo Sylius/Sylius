@@ -59,7 +59,6 @@ class ProductOptionChoiceType extends AbstractType
             'choice_value' => 'code',
             'choice_label' => 'name',
             'choice_translation_domain' => false,
-            'choices_as_values' => true,
         ]);
     }
 
@@ -69,14 +68,6 @@ class ProductOptionChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_product_option_choice';
     }
 
     /**
