@@ -35,7 +35,7 @@ Feature: Adding a new product variant
     Scenario: Adding a new product variant with specific shipping category
         Given I want to create a new variant of this product
         When I specify its code as "VODKA_WYBOROWA_PREMIUM"
-        And I set its price to "$100.00"
+        And I set its price to "$100.00" for "United States" channel
         And I set its shipping category as "Fragile"
         And I add it
         Then I should be notified that it has been successfully created

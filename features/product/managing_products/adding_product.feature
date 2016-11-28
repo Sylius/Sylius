@@ -25,7 +25,7 @@ Feature: Adding a new product
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I set its price to "$10.00"
+        And I set its price to "$10.00" for "United States" channel
         And I set its slug to "dice-brewing" in "English (United States)"
         And I set its shipping category as "Standard"
         And I add it
