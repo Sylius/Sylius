@@ -22,30 +22,28 @@ class ProductOptionRepository extends EntityRepository implements ProductOptionR
     /**
      * {@inheritdoc}
      */
-    public function findByName($name, $locale)
+    public function createListQueryBuilder($locale)
     {
         return $this->createQueryBuilder('o')
-            ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->where('translation.name = :name')
             ->andWhere('translation.locale = :locale')
-            ->setParameter('name', $name)
             ->setParameter('locale', $locale)
-            ->getQuery()
-            ->getResult()
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createListQueryBuilder($locale)
+    public function findByName($name, $locale)
     {
         return $this->createQueryBuilder('o')
-            ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
+            ->andWhere('translation.name = :name')
             ->andWhere('translation.locale = :locale')
+            ->setParameter('name', $name)
             ->setParameter('locale', $locale)
+            ->getQuery()
+            ->getResult()
         ;
     }
 }

@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.product_variant.class%"
                     repository:
-                        method: createQueryBuilderWithProduct
+                        method: createQueryBuilderByProductId
                         arguments:
                             productId: $productId
             fields:

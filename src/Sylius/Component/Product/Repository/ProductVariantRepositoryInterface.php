@@ -21,16 +21,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ProductVariantRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param string $name
-     *
-     * @return ProductVariantInterface[]
-     */
-    public function findByName($name);
-
-    /**
      * @param mixed $productId
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilderWithProduct($productId);
+    public function createQueryBuilderByProductId($productId);
 }

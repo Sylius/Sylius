@@ -19,15 +19,15 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function findByOrderIdAndId($orderId, $id)
+    public function findOneByOrderId($id, $orderId)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
         return $queryBuilder
-            ->where('o.order = :orderId')
             ->andWhere('o.id = :id')
-            ->setParameter('orderId', $orderId)
+            ->andWhere('o.order = :orderId')
             ->setParameter('id', $id)
+            ->setParameter('orderId', $orderId)
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -36,15 +36,14 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
     /**
      * {@inheritdoc}
      */
-    public function findByName($name, $localeCode)
+    public function findByName($name, $locale)
     {
         return $this->createQueryBuilder('o')
-            ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->where('translation.name = :name')
-            ->andWhere('translation.locale = :localeCode')
+            ->andWhere('translation.name = :name')
+            ->andWhere('translation.locale = :locale')
             ->setParameter('name', $name)
-            ->setParameter('localeCode', $localeCode)
+            ->setParameter('localeCode', $locale)
             ->getQuery()
             ->getResult()
         ;

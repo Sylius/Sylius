@@ -28,17 +28,17 @@ interface ShippingMethodRepositoryInterface extends BaseShippingMethodRepository
     public function createListQueryBuilder($locale);
 
     /**
+     * @param ChannelInterface $channel
+     *
+     * @return array
+     */
+    public function findEnabledForChannel(ChannelInterface $channel);
+
+    /**
      * @param array $zones
      * @param ChannelInterface $channel
      *
      * @return array
      */
     public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel);
-
-    /**
-     * @param ChannelInterface $channel
-     *
-     * @return array
-     */
-    public function findEnabledForChannel(ChannelInterface $channel);
 }

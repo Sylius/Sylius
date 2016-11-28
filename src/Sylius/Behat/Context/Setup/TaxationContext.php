@@ -14,7 +14,6 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
@@ -55,7 +54,7 @@ final class TaxationContext implements Context
     private $taxCategoryRepository;
 
     /**
-     * @var ZoneRepositoryInterface
+     * @var RepositoryInterface
      */
     private $zoneRepository;
 
@@ -70,7 +69,7 @@ final class TaxationContext implements Context
      * @param FactoryInterface $taxCategoryFactory
      * @param RepositoryInterface $taxRateRepository
      * @param TaxCategoryRepositoryInterface $taxCategoryRepository
-     * @param ZoneRepositoryInterface $zoneRepository
+     * @param RepositoryInterface $zoneRepository
      * @param ObjectManager $objectManager
      */
     public function __construct(
@@ -79,7 +78,7 @@ final class TaxationContext implements Context
         FactoryInterface $taxCategoryFactory,
         RepositoryInterface $taxRateRepository,
         TaxCategoryRepositoryInterface $taxCategoryRepository,
-        ZoneRepositoryInterface $zoneRepository,
+        RepositoryInterface $zoneRepository,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;

@@ -13,8 +13,7 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -28,16 +27,18 @@ final class ProductVariantContext implements Context
     private $productRepository;
 
     /**
-     * @var RepositoryInterface
+     * @var ProductVariantRepositoryInterface
      */
     private $productVariantRepository;
 
     /**
      * @param ProductRepositoryInterface $productRepository
-     * @param RepositoryInterface $productVariantRepository
+     * @param ProductVariantRepositoryInterface $productVariantRepository
      */
-    public function __construct(ProductRepositoryInterface $productRepository, RepositoryInterface $productVariantRepository)
-    {
+    public function __construct(
+        ProductRepositoryInterface $productRepository,
+        ProductVariantRepositoryInterface $productVariantRepository
+    ) {
         $this->productRepository = $productRepository;
         $this->productVariantRepository = $productVariantRepository;
     }
@@ -70,7 +71,7 @@ final class ProductVariantContext implements Context
      */
     public function getProductVariantByName($name)
     {
-        $productVariants = $this->productVariantRepository->findByName($name);
+        $productVariants = $this->productVariantRepository->findBy(['name' => $name]);
 
         Assert::eq(
             1,

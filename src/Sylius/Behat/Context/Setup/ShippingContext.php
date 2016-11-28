@@ -15,11 +15,10 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface;
@@ -42,7 +41,7 @@ final class ShippingContext implements Context
     private $shippingMethodRepository;
 
     /**
-     * @var ZoneRepositoryInterface
+     * @var RepositoryInterface
      */
     private $zoneRepository;
 
@@ -64,7 +63,7 @@ final class ShippingContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     * @param ZoneRepositoryInterface $zoneRepository
+     * @param RepositoryInterface $zoneRepository
      * @param FactoryInterface $shippingMethodFactory
      * @param FactoryInterface $shippingMethodTranslationFactory
      * @param ObjectManager $shippingMethodManager
@@ -72,7 +71,7 @@ final class ShippingContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneRepositoryInterface $zoneRepository,
+        RepositoryInterface $zoneRepository,
         FactoryInterface $shippingMethodFactory,
         FactoryInterface $shippingMethodTranslationFactory,
         ObjectManager $shippingMethodManager

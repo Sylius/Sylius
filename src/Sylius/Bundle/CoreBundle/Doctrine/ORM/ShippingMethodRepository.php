@@ -27,7 +27,6 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     public function createListQueryBuilder($locale)
     {
         return $this->createQueryBuilder('o')
-            ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
             ->andWhere('translation.locale = :locale')
             ->setParameter('locale', $locale)
@@ -37,13 +36,10 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     /**
      * {@inheritdoc}
      */
-    public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel)
+    public function findEnabledForChannel(ChannelInterface $channel)
     {
         return $this
-            ->getEnabledForChannelQueryBuilder($channel)
-            ->andWhere('o.zone IN (:zones)')
-            ->setParameter('zones', $zones)
-            ->orderBy('o.position', 'asc')
+            ->createEnabledForChannelQueryBuilder($channel)
             ->getQuery()
             ->getResult()
         ;
@@ -52,10 +48,13 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
     /**
      * {@inheritdoc}
      */
-    public function findEnabledForChannel(ChannelInterface $channel)
+    public function findEnabledForZonesAndChannel(array $zones, ChannelInterface $channel)
     {
         return $this
-            ->getEnabledForChannelQueryBuilder($channel)
+            ->createEnabledForChannelQueryBuilder($channel)
+            ->andWhere('o.zone IN (:zones)')
+            ->setParameter('zones', $zones)
+            ->orderBy('o.position', 'asc')
             ->getQuery()
             ->getResult()
         ;
@@ -66,7 +65,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
      *
      * @return QueryBuilder
      */
-    private function getEnabledForChannelQueryBuilder(ChannelInterface $channel)
+    protected function createEnabledForChannelQueryBuilder(ChannelInterface $channel)
     {
         $queryBuilder = $this
             ->createQueryBuilder('o')
@@ -74,7 +73,7 @@ class ShippingMethodRepository extends BaseShippingMethodRepository implements S
         ;
 
         $queryBuilder
-            ->innerJoin($this->getPropertyName('channels'), 'channel')
+            ->innerJoin('o.channels', 'channel')
             ->andWhere($queryBuilder->expr()->eq('channel', ':channel'))
             ->setParameter('channel', $channel)
         ;

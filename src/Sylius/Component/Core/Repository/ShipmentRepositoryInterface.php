@@ -20,18 +20,18 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ShipmentRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param mixed $orderId
      * @param mixed $id
+     * @param mixed $orderId
      *
      * @return ShipmentInterface|null
      */
-    public function findByOrderIdAndId($orderId, $id);
+    public function findOneByOrderId($id, $orderId);
 
     /**
      * @param string $name
-     * @param string $localeCode
+     * @param string $locale
      *
      * @return ShipmentInterface[]
      */
-    public function findByName($name, $localeCode);
+    public function findByName($name, $locale);
 }

@@ -22,15 +22,7 @@ class ProductVariantRepository extends EntityRepository implements ProductVarian
     /**
      * {@inheritdoc}
      */
-    public function findByName($name)
-    {
-        return $this->findBy(['name' => $name]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createQueryBuilderWithProduct($productId)
+    public function createQueryBuilderByProductId($productId)
     {
         return $this
             ->createQueryBuilder('o')

@@ -52,10 +52,10 @@ sylius_admin_order_payment_complete:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
         _sylius:
             repository:
-                method: findByOrderIdAndId
+                method: findOneByOrderId
                 arguments:
-                    orderId: $orderId
                     id: $id
+                    orderId: $orderId
             state_machine:
                 graph: sylius_payment
                 transition: complete
@@ -68,10 +68,10 @@ sylius_admin_order_payment_refund:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
         _sylius:
             repository:
-                method: findByOrderIdAndId
+                method: findOneByOrderId
                 arguments:
-                    orderId: $orderId
                     id: $id
+                    orderId: $orderId
             state_machine:
                 graph: sylius_payment
                 transition: refund
