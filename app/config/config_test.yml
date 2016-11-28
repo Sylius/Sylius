@@ -8,8 +8,6 @@ parameters:
     currency: USD
     locale: en_US
 
-    sylius.order.allow_guest_order: true
-
 framework:
     test: ~
     session:
