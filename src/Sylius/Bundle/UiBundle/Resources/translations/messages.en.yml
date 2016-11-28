@@ -352,6 +352,7 @@ sylius:
         image: 'Image'
         images: 'Images'
         imagine_blocks: 'Imagine blocks'
+        impersonate: 'Impersonate'
         in: 'In'
         included_in_price: 'Included in price'
         index_metadata: 'Metadata'

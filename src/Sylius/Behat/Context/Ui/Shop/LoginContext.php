@@ -18,7 +18,6 @@ use Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -149,8 +148,12 @@ final class LoginContext implements Context
     public function iShouldBeLoggedIn()
     {
         Assert::true(
+            $this->homePage->isOpen(),
+            'I should be on the homepage.'
+        );
+        Assert::true(
             $this->homePage->hasLogoutButton(),
-            'I should be on home page and, also i should be able to sign out.'
+            'I should be able to sign out.'
         );
     }
 

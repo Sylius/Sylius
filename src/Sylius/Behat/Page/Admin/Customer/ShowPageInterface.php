@@ -77,7 +77,7 @@ interface ShowPageInterface extends PageInterface
     public function hasVerifiedEmail();
 
     /**
-     * @return bool
+     * @return string
      */
     public function getGroupName();
 
@@ -85,4 +85,16 @@ interface ShowPageInterface extends PageInterface
      * @return bool
      */
     public function hasEmailVerificationInformation();
+
+    /**
+     * @return bool
+     */
+    public function hasImpersonateButton();
+
+    public function impersonate();
+
+    /**
+     * @return string
+     */
+    public function getSuccessFlashMessage();
 }

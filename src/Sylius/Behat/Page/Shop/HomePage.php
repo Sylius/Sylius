@@ -39,9 +39,25 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
+    public function logOut()
+    {
+        $this->getElement('logout_button')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasLogoutButton()
     {
         return $this->hasElement('logout_button');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFullName()
+    {
+        return $this->getElement('full_name')->getText();
     }
 
     /**
@@ -122,6 +138,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
             'currency_selector' => '#sylius-currency-selector',
             'locale_selector' => '#sylius-locale-selector',
             'logout_button' => '.sylius-logout-button',
+            'full_name' => '.right.menu .item',
         ]);
     }
 }
