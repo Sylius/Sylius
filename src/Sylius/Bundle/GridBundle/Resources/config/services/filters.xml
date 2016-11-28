@@ -13,17 +13,19 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.form_registry.grid_filter" class="Sylius\Bundle\GridBundle\Form\Registry\FormTypeRegistry" public="false" />
+
         <service id="sylius.grid_filter.string" class="Sylius\Component\Grid\Filter\StringFilter">
-            <tag name="sylius.grid_filter" type="string" />
+            <tag name="sylius.grid_filter" type="string" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType" />
         </service>
         <service id="sylius.form.type.grid_filter.string" class="Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType">
-            <tag name="form.type" alias="sylius_grid_filter_string" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.grid_filter.boolean" class="Sylius\Component\Grid\Filter\BooleanFilter">
-            <tag name="sylius.grid_filter" type="boolean" />
+            <tag name="sylius.grid_filter" type="boolean" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType" />
         </service>
         <service id="sylius.form.type.grid_filter.boolean" class="Sylius\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType">
-            <tag name="form.type" alias="sylius_grid_filter_boolean" />
+            <tag name="form.type" />
         </service>
     </services>
 </container>

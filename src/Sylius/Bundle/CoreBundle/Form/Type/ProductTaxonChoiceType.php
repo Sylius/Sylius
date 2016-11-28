@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductTaxonCollectionToTaxonCollectionTransformer;
+use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -47,9 +48,12 @@ class ProductTaxonChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'sylius_taxon_choice';
+        return TaxonChoiceType::class;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getName()
     {
         return 'sylius_product_taxon_choice';

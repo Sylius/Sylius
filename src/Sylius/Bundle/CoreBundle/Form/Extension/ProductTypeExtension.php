@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddProductOnProductTaxonFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
+use Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
 use Sylius\Component\Core\Model\Product;
@@ -40,7 +42,7 @@ class ProductTypeExtension extends AbstractTypeExtension
                 'label' => 'sylius.form.product.channels',
             ])
             ->add('mainTaxon', TaxonChoiceType::class)
-            ->add('productTaxons', 'sylius_product_taxon_choice', [
+            ->add('productTaxons', ProductTaxonChoiceType::class, [
                 'label' => 'sylius.form.product.taxons',
                 'multiple' => true,
             ])
@@ -50,7 +52,7 @@ class ProductTypeExtension extends AbstractTypeExtension
                 'choices_as_values' => true,
             ])
             ->add('images', CollectionType::class, [
-                'entry_type' => 'sylius_product_image',
+                'entry_type' => ProductImageType::class,
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

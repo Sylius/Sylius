@@ -26,7 +26,7 @@ class SelectShippingType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('shipments', CollectionType::class, [
-            'entry_type' => 'sylius_checkout_shipment',
+            'entry_type' => ShipmentType::class,
             'label' => false,
         ]);
     }

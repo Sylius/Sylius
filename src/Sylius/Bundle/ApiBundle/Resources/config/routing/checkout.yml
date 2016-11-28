@@ -13,7 +13,7 @@ sylius_api_checkout_addressing:
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
-            form: sylius_checkout_address
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType
             repository:
                 method: find
                 arguments: [$orderId]
@@ -27,7 +27,7 @@ sylius_api_checkout_select_shipping:
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
-            form: sylius_checkout_select_shipping
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType
             repository:
                 method: find
                 arguments: [$orderId]
@@ -41,7 +41,7 @@ sylius_api_checkout_select_payment:
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
-            form: sylius_checkout_select_payment
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType
             repository:
                 method: find
                 arguments: [$orderId]
@@ -55,7 +55,7 @@ sylius_api_checkout_complete:
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
-            form: sylius_checkout_complete
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType
             repository:
                 method: find
                 arguments: [$orderId]

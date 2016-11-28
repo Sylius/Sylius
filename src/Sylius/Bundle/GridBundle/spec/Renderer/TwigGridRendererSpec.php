@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\GridBundle\Renderer;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\GridBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\GridBundle\Renderer\TwigGridRenderer;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Field;
@@ -33,7 +34,8 @@ final class TwigGridRendererSpec extends ObjectBehavior
     function let(
         \Twig_Environment $twig,
         ServiceRegistryInterface $fieldsRegistry,
-        FormFactoryInterface $formFactory
+        FormFactoryInterface $formFactory,
+        FormTypeRegistryInterface $formTypeRegistry
     ) {
         $actionTemplates = [
             'link' => 'SyliusGridBundle:Action:_link.html.twig',
@@ -47,6 +49,7 @@ final class TwigGridRendererSpec extends ObjectBehavior
             $twig,
             $fieldsRegistry,
             $formFactory,
+            $formTypeRegistry,
             'SyliusGridBundle:default.html.twig',
             $actionTemplates,
             $filterTemplates
