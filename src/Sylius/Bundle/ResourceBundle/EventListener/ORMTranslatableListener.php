@@ -19,11 +19,11 @@ use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -99,18 +99,11 @@ final class ORMTranslatableListener implements EventSubscriber
         if (!$entity instanceof TranslatableInterface) {
             return;
         }
-
-        /** @var LocaleContextInterface $localeContext */
-        $localeContext = $this->container->get('sylius_resource.translation.locale_context');
-
+        
         /** @var LocaleProviderInterface $localeProvider */
         $localeProvider = $this->container->get('sylius_resource.translation.locale_provider');
 
-        try {
-            $entity->setCurrentLocale($localeContext->getLocaleCode());
-        } catch (LocaleNotFoundException $exception) {
-            $entity->setCurrentLocale($localeProvider->getDefaultLocaleCode());
-        }
+        $entity->setCurrentLocale($localeProvider->getDefaultLocaleCode());
         $entity->setFallbackLocale($localeProvider->getDefaultLocaleCode());
     }
 

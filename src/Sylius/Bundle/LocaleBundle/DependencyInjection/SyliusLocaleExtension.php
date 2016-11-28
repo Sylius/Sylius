@@ -48,7 +48,6 @@ final class SyliusLocaleExtension extends AbstractResourceExtension implements P
         $container->prependExtensionConfig('sylius_resource', [
             'translation' => [
                 'locale_provider' => 'sylius.locale_provider',
-                'locale_context' => 'sylius.context.locale',
             ],
         ]);
     }

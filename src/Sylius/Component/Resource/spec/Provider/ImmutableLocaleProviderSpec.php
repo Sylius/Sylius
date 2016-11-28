@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Locale\Provider;
+namespace spec\Sylius\Component\Resource\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Locale\Provider\ImmutableLocaleProvider;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\ImmutableLocaleProvider;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -38,11 +38,6 @@ final class ImmutableLocaleProviderSpec extends ObjectBehavior
     function it_is_a_locale_provider_interface()
     {
         $this->shouldImplement(LocaleProviderInterface::class);
-    }
-
-    function it_returns_available_locales_codes()
-    {
-        $this->getAvailableLocalesCodes()->shouldReturn(['pl_PL']);
     }
 
     function it_returns_defined_locales_codes()

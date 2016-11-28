@@ -70,6 +70,26 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
     }
 
     /**
+     * @test
+     */
+    public function it_registers_default_translation_parameters()
+     {
+         // TODO: Move ResourceGrid integration to a dedicated compiler pass
+         $this->setParameter('kernel.bundles', []);
+
+         $this->load([
+             'translation' => [
+                 'locales' => ["pl_PL" => false, "en_US" => true, "de_DE" => false],
+                 'default_locale' => "en_US"
+             ]
+         ]);
+
+         $this->assertContainerBuilderHasParameter('sylius.translation.locales');
+         $this->assertContainerBuilderHasParameter('sylius.translation.default_locale');
+         $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius_resource.translation.locale_provider', 'sylius.translation.locales');
+     }
+
+    /**
      * {@inheritdoc}
      */
     protected function getContainerExtensions()

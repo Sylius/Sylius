@@ -4,3 +4,4 @@
 sylius_resource:
     translation:
         locale_provider: sylius.locale_provider.admin
+        default_locale: %locale%
