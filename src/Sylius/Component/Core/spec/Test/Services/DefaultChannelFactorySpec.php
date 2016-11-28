@@ -41,7 +41,6 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
             $channelRepository,
             $currencyRepository,
             $localeRepository,
-            'EUR',
             'en_US'
         );
     }
@@ -71,8 +70,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         $locale->setCode('en_US')->shouldBeCalled();
 
         $currencyFactory->createNew()->willReturn($currency);
-        $currency->setCode('EUR')->shouldBeCalled();
-        $currency->setExchangeRate(1.00)->shouldBeCalled();
+        $currency->setCode('USD')->shouldBeCalled();
 
         $channelFactory->createNamed('Default')->willReturn($channel);
 
@@ -84,7 +82,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         $channel->addLocale($locale)->shouldBeCalled();
         $channel->setDefaultLocale($locale)->shouldBeCalled();
 
-        $currencyRepository->findOneBy(['code' => 'EUR'])->willReturn(null);
+        $currencyRepository->findOneBy(['code' => 'USD'])->willReturn(null);
         $localeRepository->findOneBy(['code' => 'en_US'])->willReturn(null);
 
         $currencyRepository->add($currency)->shouldBeCalled();

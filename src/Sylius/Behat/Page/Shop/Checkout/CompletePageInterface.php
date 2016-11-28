@@ -156,4 +156,9 @@ interface CompletePageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function hasBillingProvinceName($provinceName);
+
+    /**
+     * @return string
+     */
+    public function getBaseCurrencyOrderTotal();
 }

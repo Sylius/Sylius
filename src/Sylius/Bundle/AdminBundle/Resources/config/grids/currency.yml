@@ -15,21 +15,10 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
-                exchangeRate:
-                    type: string
-                    label: sylius.ui.exchange_rate
-                enabled:
-                    type: twig
-                    label: sylius.ui.enabled
-                    options:
-                        template: SyliusAdminBundle:Grid/Field:enabled.html.twig
             filters:
                 code:
                     type: string
                     label: sylius.ui.code
-                enabled:
-                    type: boolean
-                    label: sylius.ui.enabled
             actions:
                 main:
                     create:

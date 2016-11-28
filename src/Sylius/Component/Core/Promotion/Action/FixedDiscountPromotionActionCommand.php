@@ -40,23 +40,15 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
     private $unitsPromotionAdjustmentsApplicator;
 
     /**
-     * @var CurrencyConverterInterface
-     */
-    private $currencyConverter;
-
-    /**
      * @param ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
      * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
-     * @param CurrencyConverterInterface $currencyConverter
      */
     public function __construct(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
-        CurrencyConverterInterface $currencyConverter
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
         $this->proportionalDistributor = $proportionalIntegerDistributor;
         $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
-        $this->currencyConverter = $currencyConverter;
     }
 
     /**
@@ -127,9 +119,6 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
             return $configuration['base_amount'];
         }
 
-        return $this->currencyConverter->convertToBase(
-            $configuration['amounts'][$currencyCode],
-            $currencyCode
-        );
+        return $configuration['amounts'][$currencyCode];
     }
 }

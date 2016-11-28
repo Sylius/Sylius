@@ -156,6 +156,14 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given channel :channel has been deleted
+     */
+    public function iChannelHasBeenDeleted(ChannelInterface $channel)
+    {
+        $this->channelRepository->remove($channel);
+    }
+
+    /**
      * @Given /^(its) default tax zone is (zone "([^"]+)")$/
      */
     public function itsDefaultTaxRateIs(ChannelInterface $channel, ZoneInterface $defaultTaxZone)

@@ -263,4 +263,9 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getIpAddressAssigned();
+
+    /**
+     * @return string
+     */
+    public function getOrderCurrency();
 }

@@ -5,7 +5,7 @@ Feature: Toggle the inventory tracking
     I want to toggle the inventory tracking
 
     Background:
-        Given the store is available in "English (United States)"
+        Given the store operates on a single channel in "United States"
         And the store has a "Wyborowa Vodka" configurable product
         And the product "Wyborowa Vodka" has a "Wyborowa Vodka Exquisite" variant priced at "$40.00"
         And I am logged in as an administrator

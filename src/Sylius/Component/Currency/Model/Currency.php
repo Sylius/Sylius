@@ -20,7 +20,7 @@ use Symfony\Component\Intl\Intl;
  */
 class Currency implements CurrencyInterface
 {
-    use TimestampableTrait, ToggleableTrait;
+    use TimestampableTrait;
 
     /**
      * @var mixed
@@ -31,11 +31,6 @@ class Currency implements CurrencyInterface
      * @var string
      */
     protected $code;
-
-    /**
-     * @var float
-     */
-    protected $exchangeRate;
 
     public function __construct()
     {
@@ -80,21 +75,5 @@ class Currency implements CurrencyInterface
     public function setCode($code)
     {
         $this->code = $code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getExchangeRate()
-    {
-        return $this->exchangeRate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setExchangeRate($rate)
-    {
-        $this->exchangeRate = $rate;
     }
 }

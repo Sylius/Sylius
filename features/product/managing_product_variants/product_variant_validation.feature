@@ -5,7 +5,7 @@ Feature: Product variant validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given the store is available in "English (United States)"
+        Given the store operates on a single channel in "United States"
         And the store has a "Wyborowa Vodka" configurable product
         And I am logged in as an administrator
 
@@ -15,14 +15,14 @@ Feature: Product variant validation
         When I specify its code as "VODKA_WYBOROWA_PREMIUM"
         But I do not set its price
         And I try to add it
-        Then I should be notified that price is required
+        Then I should be notified that prices in all channels must be defined
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
 
-    @ui
+    @ui @todo
     Scenario: Adding a new product variant with price lower then 0
         Given I want to create a new variant of this product
         When I specify its code as "VODKA_WYBOROWA_PREMIUM"
-        And I set its price to "-$80.00"
+        And I set its price to "-$80.00" for "United States" channel
         And I try to add it
         Then I should be notified that price cannot be lower than 0
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should not appear in the store
@@ -30,7 +30,7 @@ Feature: Product variant validation
     @ui
     Scenario: Adding a new product variant without specifying its code
         Given I want to create a new variant of this product
-        When I set its price to "$80.00"
+        When I set its price to "$80.00" for "United States" channel
         But I do not specify its code
         And I try to add it
         Then I should be notified that code is required
@@ -40,7 +40,7 @@ Feature: Product variant validation
     Scenario: Adding a new product variant with duplicated code
         Given this product has "Wyborowa Exquisite" variant priced at "$90" identified by "VODKA_WYBOROWA_PREMIUM"
         And I want to create a new variant of this product
-        When I set its price to "$80.00"
+        When I set its price to "$80.00" for "United States" channel
         And I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I try to add it
         Then I should be notified that code has to be unique
@@ -53,7 +53,7 @@ Feature: Product variant validation
         And I want to create a new variant of this product
         When I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I set its "Taste" option to "Melon"
-        And I set its price to "$100.00"
+        And I set its price to "$100.00" for "United States" channel
         And I try to add it
         Then I should be notified that this variant already exists
         And the "Wyborowa Vodka" product should have only one variant
@@ -62,7 +62,7 @@ Feature: Product variant validation
     Scenario: Adding a new product variant with negative properties
         Given I want to create a new variant of this product
         When I specify its code as "VODKA_WYBOROWA_PREMIUM"
-        And I set its price to "$100.00"
+        And I set its price to "$100.00" for "United States" channel
         And I set its height, width, depth and weight to "-1"
         And I try to add it
         Then I should be notified that height, width, depth and weight cannot be lower than 0
@@ -72,7 +72,7 @@ Feature: Product variant validation
     Scenario: Adding a new product variant without current stock
         Given I want to create a new variant of this product
         When I specify its code as "VODKA_WYBOROWA_PREMIUM"
-        And I set its price to "$100.00"
+        And I set its price to "$100.00" for "United States" channel
         But I do not specify its current stock
         And I try to add it
         Then I should be notified that current stock is required

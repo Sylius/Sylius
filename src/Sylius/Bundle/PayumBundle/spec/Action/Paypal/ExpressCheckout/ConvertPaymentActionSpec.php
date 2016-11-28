@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -31,10 +30,9 @@ use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 final class ConvertPaymentActionSpec extends ObjectBehavior
 {
     function let(
-        InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
-        CurrencyConverterInterface $currencyConverter
+        InvoiceNumberGeneratorInterface $invoiceNumberGenerator
     ) {
-        $this->beConstructedWith($invoiceNumberGenerator, $currencyConverter);
+        $this->beConstructedWith($invoiceNumberGenerator);
     }
 
     function it_is_initializable()
@@ -49,7 +47,6 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
 
     function it_executes_request(
         InvoiceNumberGeneratorInterface $invoiceNumberGenerator,
-        CurrencyConverterInterface $currencyConverter,
         Convert $request,
         PaymentInterface $payment,
         OrderInterface $order,
@@ -64,14 +61,14 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $order->getId()->willReturn(92);
         $order->getId()->willReturn(92);
         $order->getCurrencyCode()->willReturn('PLN');
-        $order->getTotal()->willReturn(22000);
+        $order->getTotal()->willReturn(88000);
         $order->getItems()->willReturn([$orderItem]);
         $order->getAdjustmentsTotalRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->willReturn(0);
         $order->getOrderPromotionTotal()->willReturn(0);
-        $order->getShippingTotal()->willReturn(2000);
+        $order->getShippingTotal()->willReturn(8000);
 
         $orderItem->getVariant()->willReturn($productVariant);
-        $orderItem->getDiscountedUnitPrice()->willReturn(20000);
+        $orderItem->getDiscountedUnitPrice()->willReturn(80000);
         $orderItem->getQuantity()->willReturn(1);
 
         $productVariant->getProduct()->willReturn($product);
@@ -82,10 +79,6 @@ final class ConvertPaymentActionSpec extends ObjectBehavior
         $payment->getOrder()->willReturn($order);
 
         $invoiceNumberGenerator->generate($order, $payment)->willReturn('19-92');
-        $currencyConverter->convertFromBase(22000, 'PLN')->willReturn(88000);
-        $currencyConverter->convertFromBase(20000, 'PLN')->willReturn(80000);
-        $currencyConverter->convertFromBase(2000, 'PLN')->willReturn(8000);
-
         $details = [
             'PAYMENTREQUEST_0_INVNUM' => '19-92',
             'PAYMENTREQUEST_0_CURRENCYCODE' => 'PLN',

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Cart\Context;
 
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
@@ -62,8 +63,11 @@ final class ShopBasedCartContext implements CartContextInterface
         $cart = $this->cartContext->getCart();
 
         try {
-            $cart->setChannel($this->shopperContext->getChannel());
-            $cart->setCurrencyCode($this->shopperContext->getCurrencyCode());
+            /** @var ChannelInterface $channel */
+            $channel = $this->shopperContext->getChannel();
+
+            $cart->setChannel($channel);
+            $cart->setCurrencyCode($channel->getBaseCurrency()->getCode());
             $cart->setLocaleCode($this->shopperContext->getLocaleCode());
         } catch (ChannelNotFoundException $exception) {
             throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);

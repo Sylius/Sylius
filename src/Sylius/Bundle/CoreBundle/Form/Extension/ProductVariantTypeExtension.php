@@ -11,17 +11,17 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
+use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormRegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -29,23 +29,18 @@ use Symfony\Component\Form\FormRegistryInterface;
 class ProductVariantTypeExtension extends AbstractTypeExtension
 {
     /**
-     * @var ServiceRegistryInterface
+     * @var EventSubscriberInterface
      */
-    protected $calculatorRegistry;
+    private $channelPricingFormSubscriber;
 
     /**
-     * @var FormRegistryInterface
+     * {@inheritdoc}
+     *
+     * @param EventSubscriberInterface $channelPricingFormSubscriber
      */
-    protected $formRegistry;
-
-    /**
-     * @param ServiceRegistryInterface $calculatorRegistry
-     * @param FormRegistryInterface $formRegistry
-     */
-    public function __construct(ServiceRegistryInterface $calculatorRegistry, FormRegistryInterface $formRegistry)
+    public function __construct(EventSubscriberInterface $channelPricingFormSubscriber)
     {
-        $this->calculatorRegistry = $calculatorRegistry;
-        $this->formRegistry = $formRegistry;
+        $this->channelPricingFormSubscriber = $channelPricingFormSubscriber;
     }
 
     /**
@@ -54,9 +49,6 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('price', MoneyType::class, [
-                'label' => 'sylius.form.variant.price',
-            ])
             ->add('tracked', CheckboxType::class, [
                 'label' => 'sylius.form.variant.tracked',
             ])
@@ -93,6 +85,14 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
                 'placeholder' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.product_variant.shipping_category',
             ])
+            ->add('channelPricings', CollectionType::class, [
+                'entry_type' => ChannelPricingType::class,
+                'label' => 'sylius.form.variant.price',
+                'allow_add' => false,
+                'allow_delete' => false,
+                'error_bubbling' => false,
+            ])
+            ->addEventSubscriber($this->channelPricingFormSubscriber)
         ;
     }
 

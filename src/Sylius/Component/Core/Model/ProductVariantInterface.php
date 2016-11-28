@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface as BaseVariantInterface;
 use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
@@ -26,7 +26,6 @@ interface ProductVariantInterface extends
     BaseVariantInterface,
     ShippableInterface,
     StockableInterface,
-    PriceableInterface,
     TaxableInterface
 {
     /**
@@ -78,4 +77,40 @@ interface ProductVariantInterface extends
      * @param ShippingCategoryInterface $shippingCategory
      */
     public function setShippingCategory(ShippingCategoryInterface $shippingCategory);
+
+    /**
+     * @return Collection|ChannelPricingInterface[]
+     */
+    public function getChannelPricings();
+
+    /**
+     * @param ChannelInterface $channel
+     *
+     * @return ChannelPricingInterface|null
+     */
+    public function getChannelPricingForChannel(ChannelInterface $channel);
+
+    /**
+     * @param ChannelInterface $channel
+     *
+     * @return bool
+     */
+    public function hasChannelPricingForChannel(ChannelInterface $channel);
+
+    /**
+     * @param ChannelPricingInterface $channelPricing
+     *
+     * @return bool
+     */
+    public function hasChannelPricing(ChannelPricingInterface $channelPricing);
+
+    /**
+     * @param ChannelPricingInterface $channelPricing
+     */
+    public function addChannelPricing(ChannelPricingInterface $channelPricing);
+
+    /**
+     * @param ChannelPricingInterface $channelPricing
+     */
+    public function removeChannelPricing(ChannelPricingInterface $channelPricing);
 }

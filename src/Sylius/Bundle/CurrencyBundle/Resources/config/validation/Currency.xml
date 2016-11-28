@@ -30,11 +30,5 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="exchangeRate">
-            <constraint name="NotBlank">
-                <option name="message">sylius.currency.exchange_rate.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
     </class>
 </constraint-mapping>

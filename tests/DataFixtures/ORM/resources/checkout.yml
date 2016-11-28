@@ -60,10 +60,18 @@ Sylius\Component\Core\Model\ProductTranslation:
 Sylius\Component\Core\Model\ProductVariant:
     productVariant1:
         code: MUG_1
-        setPrice: [20]
+        channelPricings: ["@channelPricing1"]
     productVariant2:
         code: MUG_2
-        setPrice: [20]
+        channelPricings: ["@channelPricing2"]
+
+Sylius\Component\Core\Model\ChannelPricing:
+    channelPricing1:
+        channel: "@channel"
+        price: 20
+    channelPricing2:
+        channel: "@channel"
+        price: 20
 
 Sylius\Component\Core\Model\ShippingMethod:
     ups:
@@ -71,7 +79,8 @@ Sylius\Component\Core\Model\ShippingMethod:
         enabled: true
         calculator: 'flat_rate'
         configuration:
-            amount: 10
+            CHANNEL:
+                amount: 10
         zone: "@zone_eu"
         currentLocale: en_US
         currentTranslation: "@upsTranslation1"
@@ -81,7 +90,8 @@ Sylius\Component\Core\Model\ShippingMethod:
         enabled: true
         calculator: 'flat_rate'
         configuration:
-            amount: 20
+            CHANNEL:
+                amount: 20
         zone: "@zone_eu"
         channel: ['@channel']
 
@@ -122,8 +132,6 @@ Sylius\Component\Payment\Model\PaymentMethodTranslation:
 Sylius\Component\Currency\Model\Currency:
     currency:
         code: "EUR"
-        exchangeRate: 1
-        enabled: true
 
 Sylius\Component\Locale\Model\Locale:
     locale:

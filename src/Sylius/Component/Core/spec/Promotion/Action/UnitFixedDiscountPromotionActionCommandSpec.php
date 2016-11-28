@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -22,7 +23,6 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Action\UnitFixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -37,15 +37,13 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
-        FilterInterface $productFilter,
-        CurrencyConverterInterface $currencyConverter
+        FilterInterface $productFilter
     ) {
         $this->beConstructedWith(
             $adjustmentFactory,
             $priceRangeFilter,
             $taxonFilter,
-            $productFilter,
-            $currencyConverter
+            $productFilter
         );
     }
 
@@ -60,6 +58,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_applies_a_fixed_discount_on_every_unit_in_order(
+        ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
@@ -75,8 +74,9 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getCurrencyCode()->willReturn('USD');
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
+        $order->getChannel()->willReturn($channel);
 
-        $priceRangeFilter->filter([$orderItem], ['base_amount' => 500])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem], ['base_amount' => 500, 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['base_amount' => 500])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['base_amount' => 500])->willReturn([$orderItem]);
 
@@ -109,11 +109,11 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_applies_a_fixed_discount_in_defined_currency_on_every_unit_in_order(
+        ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
         FilterInterface $productFilter,
-        CurrencyConverterInterface $currencyConverter,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         OrderInterface $order,
@@ -124,11 +124,10 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     ) {
         $order->getCurrencyCode()->willReturn('PLN');
 
-        $currencyConverter->convertToBase(1000, 'PLN')->willReturn(250);
-
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
+        $order->getChannel()->willReturn($channel);
 
-        $priceRangeFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000], 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['base_amount' => 500, 'amounts' => ['PLN' => 1000]])->willReturn([$orderItem]);
 
@@ -143,14 +142,14 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $unit1->getTotal()->willReturn(1000);
         $promotionAdjustment1->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
-        $promotionAdjustment1->setAmount(-250)->shouldBeCalled();
+        $promotionAdjustment1->setAmount(-1000)->shouldBeCalled();
 
         $promotionAdjustment1->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 
         $unit2->getTotal()->willReturn(1000);
         $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
-        $promotionAdjustment2->setAmount(-250)->shouldBeCalled();
+        $promotionAdjustment2->setAmount(-1000)->shouldBeCalled();
 
         $promotionAdjustment2->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 
@@ -176,6 +175,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_does_not_apply_bigger_promotions_than_unit_total(
+        ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter,
@@ -191,8 +191,9 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getCurrencyCode()->willReturn('USD');
 
         $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
+        $order->getChannel()->willReturn($channel);
 
-        $priceRangeFilter->filter([$orderItem], ['base_amount' => 1000])->willReturn([$orderItem]);
+        $priceRangeFilter->filter([$orderItem], ['base_amount' => 1000, 'channel' => $channel])->willReturn([$orderItem]);
         $taxonFilter->filter([$orderItem], ['base_amount' => 1000])->willReturn([$orderItem]);
         $productFilter->filter([$orderItem], ['base_amount' => 1000])->willReturn([$orderItem]);
 

@@ -13,11 +13,6 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.order_processing.order_exchange_rate_processor" class="Sylius\Component\Core\OrderProcessing\OrderExchangeRateProcessor">
-            <argument type="service" id="sylius.updater.order.exchange_rate" />
-            <tag name="sylius.order_processor" />
-        </service>
-
         <service id="sylius.order_processing.order_shipment_processor" class="Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor">
             <argument type="service" id="sylius.resolver.default_shipping_method" />
             <argument type="service" id="sylius.factory.shipment" />
@@ -41,7 +36,7 @@
         </service>
 
         <service id="sylius.order_processing.order_prices_recalculator" class="Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator">
-            <argument type="service" id="sylius.price_calculator" />
+            <argument type="service" id="sylius.calculator.product_variant_price" />
             <tag name="sylius.order_processor" />
         </service>
 

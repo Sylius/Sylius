@@ -70,7 +70,10 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration);
+        $filteredItems = $this->priceRangeFilter->filter(
+            $subject->getItems()->toArray(),
+            array_merge($configuration, ['channel' => $subject->getChannel()])
+        );
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
         $filteredItems = $this->productFilter->filter($filteredItems, $configuration);
 

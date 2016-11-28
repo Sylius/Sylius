@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
 use Symfony\Component\Templating\Helper\Helper;
@@ -35,12 +36,13 @@ class ProductVariantsPricesHelper extends Helper
 
     /**
      * @param ProductInterface $product
+     * @param ChannelInterface $channel
      *
      * @return array
      */
-    public function getPrices(ProductInterface $product)
+    public function getPrices(ProductInterface $product, ChannelInterface $channel)
     {
-        return $this->productVariantsPricesProvider->provideVariantsPrices($product);
+        return $this->productVariantsPricesProvider->provideVariantsPrices($product, $channel);
     }
 
     /**

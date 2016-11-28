@@ -14,21 +14,18 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sylius.form.type.money" class="Sylius\Bundle\MoneyBundle\Form\Type\MoneyType">
-            <argument>%sylius_money.currency%</argument>
             <tag name="form.type" />
         </service>
 
         <service id="sylius.money_formatter" class="Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter" />
 
-        <service id="sylius.templating.helper.money" class="Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper" lazy="true">
+        <service id="sylius.templating.helper.format_money" class="Sylius\Bundle\MoneyBundle\Templating\Helper\FormatMoneyHelper" lazy="true">
             <argument type="service" id="sylius.money_formatter" />
-            <argument>%sylius_money.currency%</argument>
-            <argument>%sylius_money.locale%</argument>
-            <tag name="templating.helper" alias="sylius_money" />
+            <tag name="templating.helper" alias="sylius_format_money" />
         </service>
 
-        <service id="sylius.twig.extension.money" class="Sylius\Bundle\MoneyBundle\Twig\MoneyExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.money" />
+        <service id="sylius.twig.extension.money" class="Sylius\Bundle\MoneyBundle\Twig\FormatMoneyExtension" public="false">
+            <argument type="service" id="sylius.templating.helper.format_money" />
             <tag name="twig.extension" />
         </service>
     </services>

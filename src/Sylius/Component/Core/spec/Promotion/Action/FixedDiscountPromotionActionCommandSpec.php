@@ -20,7 +20,6 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -35,13 +34,11 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 {
     function let(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
-        CurrencyConverterInterface $currencyConverter
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
         $this->beConstructedWith(
             $proportionalIntegerDistributor,
-            $unitsPromotionAdjustmentsApplicator,
-            $currencyConverter
+            $unitsPromotionAdjustmentsApplicator
         );
     }
 
@@ -115,12 +112,9 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
-        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator,
-        CurrencyConverterInterface $currencyConverter
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
         $order->getCurrencyCode()->willReturn('PLN');
-
-        $currencyConverter->convertToBase(4000, 'PLN')->willReturn(1000);
 
         $order->countItems()->willReturn(2);
 
@@ -136,7 +130,7 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-600, -400]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-600, -400])->shouldBeCalled();
 
-        $this->execute($order, ['base_amount' => 1000, 'amounts' => ['PLN' => 4000]], $promotion);
+        $this->execute($order, ['base_amount' => 100, 'amounts' => ['PLN' => 1000]], $promotion);
     }
 
     function it_does_nothing_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)

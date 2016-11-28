@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Templating\Helper\ProductVariantsPricesHelper;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Provider\ProductVariantsPricesProviderInterface;
 use Symfony\Component\Templating\Helper\Helper;
@@ -38,14 +39,15 @@ final class ProductVariantsPricesHelperSpec extends ObjectBehavior
     }
 
     function it_uses_provider_to_get_variants_prices(
+        ChannelInterface $channel,
         ProductInterface $product,
         ProductVariantsPricesProviderInterface $productVariantsPricesProvider
     ) {
-        $productVariantsPricesProvider->provideVariantsPrices($product)->willReturn([
+        $productVariantsPricesProvider->provideVariantsPrices($product, $channel)->willReturn([
             ['color' => 'black', 'value' => 1000]
         ]);
 
-        $this->getPrices($product)->shouldReturn([['color' => 'black', 'value' => 1000]]);
+        $this->getPrices($product, $channel)->shouldReturn([['color' => 'black', 'value' => 1000]]);
     }
 
     function it_has_name()

@@ -400,6 +400,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getOrderCurrency()
+    {
+        return $this->getElement('currency')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_order_show';
@@ -412,6 +420,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#billing-address',
+            'currency' => '#sylius-order-currency',
             'customer' => '#customer',
             'ip_address' => '#ipAddress',
             'items_total' => '#items-total',

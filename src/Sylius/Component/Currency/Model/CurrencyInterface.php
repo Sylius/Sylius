@@ -22,21 +22,10 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 interface CurrencyInterface extends
     CodeAwareInterface,
     TimestampableInterface,
-    ToggleableInterface,
     ResourceInterface
 {
     /**
      * @return string
      */
     public function getName();
-
-    /**
-     * @return float
-     */
-    public function getExchangeRate();
-
-    /**
-     * @param float $rate
-     */
-    public function setExchangeRate($rate);
 }

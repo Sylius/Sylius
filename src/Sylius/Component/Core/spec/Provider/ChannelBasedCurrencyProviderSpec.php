@@ -44,20 +44,15 @@ final class ChannelBasedCurrencyProviderSpec extends ObjectBehavior
     function it_returns_only_channels_enabled_currencies_as_available_ones(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
-        CurrencyInterface $enabledCurrency,
-        CurrencyInterface $disabledCurrency
+        CurrencyInterface $currency
     ) {
         $channelContext->getChannel()->willReturn($channel);
 
         $channel->getCurrencies()->willReturn(new ArrayCollection([
-            $enabledCurrency->getWrappedObject(),
-            $disabledCurrency->getWrappedObject(),
+            $currency->getWrappedObject(),
         ]));
 
-        $enabledCurrency->isEnabled()->willReturn(true);
-        $disabledCurrency->isEnabled()->willReturn(false);
-
-        $enabledCurrency->getCode()->willReturn('BTC');
+        $currency->getCode()->willReturn('BTC');
 
         $this->getAvailableCurrenciesCodes()->shouldReturn(['BTC']);
     }
