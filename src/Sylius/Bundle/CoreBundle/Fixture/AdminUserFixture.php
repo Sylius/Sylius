@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class AdminUserFixture extends AbstractResourceFixture
+class AdminUserFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}

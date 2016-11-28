@@ -28,7 +28,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class OrderFixture extends AbstractFixture
+class OrderFixture extends AbstractFixture
 {
     /**
      * @var FactoryInterface

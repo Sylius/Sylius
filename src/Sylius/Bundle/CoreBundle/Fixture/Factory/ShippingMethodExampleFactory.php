@@ -28,12 +28,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ShippingMethodExampleFactory implements ExampleFactoryInterface
+class ShippingMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
      */
     private $shippingMethodFactory;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $zoneRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $shippingCategoryRepository;
 
     /**
      * @var RepositoryInterface
@@ -70,47 +80,15 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
         ChannelRepositoryInterface $channelRepository
     ) {
         $this->shippingMethodFactory = $shippingMethodFactory;
+        $this->zoneRepository = $zoneRepository;
+        $this->shippingCategoryRepository = $shippingCategoryRepository;
         $this->localeRepository = $localeRepository;
         $this->channelRepository = $channelRepository;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setDefault('code', function (Options $options) {
-                    return StringInflector::nameToCode($options['name']);
-                })
-                ->setDefault('name', function (Options $options) {
-                    return $this->faker->words(3, true);
-                })
-                ->setDefault('description', function (Options $options) {
-                    return $this->faker->sentence();
-                })
-                ->setDefault('enabled', function (Options $options) {
-                    return $this->faker->boolean(90);
-                })
-                ->setAllowedTypes('enabled', 'bool')
-                ->setDefault('zone', LazyOption::randomOne($zoneRepository))
-                ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
-                ->setNormalizer('zone', LazyOption::findOneBy($zoneRepository, 'code'))
-                ->setDefined('shipping_category')
-                ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
-                ->setNormalizer('shipping_category', LazyOption::findOneBy($shippingCategoryRepository, 'code'))
-                ->setDefault('calculator', function (Options $options) {
-                    $configuration = [];
-                    /** @var ChannelInterface $channel */
-                    foreach ($options['channels'] as $channel) {
-                        $configuration[$channel->getCode()] = ['amount' => $this->faker->randomNumber(4)];
-                    }
+        $this->optionsResolver = new OptionsResolver();
 
-                    return [
-                        'type' => DefaultCalculators::FLAT_RATE,
-                        'configuration' => $configuration,
-                    ];
-                })
-                ->setDefault('channels', LazyOption::all($channelRepository))
-                ->setAllowedTypes('channels', 'array')
-                ->setNormalizer('channels', LazyOption::findBy($channelRepository, 'code'))
-        ;
+        $this->configureOptions($this->optionsResolver);
     }
 
     /**
@@ -145,6 +123,49 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
         }
 
         return $shippingMethod;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
+            })
+            ->setDefault('name', function (Options $options) {
+                return $this->faker->words(3, true);
+            })
+            ->setDefault('description', function (Options $options) {
+                return $this->faker->sentence();
+            })
+            ->setDefault('enabled', function (Options $options) {
+                return $this->faker->boolean(90);
+            })
+            ->setAllowedTypes('enabled', 'bool')
+            ->setDefault('zone', LazyOption::randomOne($this->zoneRepository))
+            ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
+            ->setNormalizer('zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
+            ->setDefined('shipping_category')
+            ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
+            ->setNormalizer('shipping_category', LazyOption::findOneBy($this->shippingCategoryRepository, 'code'))
+            ->setDefault('calculator', function (Options $options) {
+                $configuration = [];
+                /** @var ChannelInterface $channel */
+                foreach ($options['channels'] as $channel) {
+                    $configuration[$channel->getCode()] = ['amount' => $this->faker->randomNumber(4)];
+                }
+
+                return [
+                    'type' => DefaultCalculators::FLAT_RATE,
+                    'configuration' => $configuration,
+                ];
+            })
+            ->setDefault('channels', LazyOption::all($this->channelRepository))
+            ->setAllowedTypes('channels', 'array')
+            ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
+        ;
     }
 
     /**

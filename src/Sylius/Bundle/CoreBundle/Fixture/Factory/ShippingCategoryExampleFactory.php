@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ShippingCategoryExampleFactory implements ExampleFactoryInterface
+class ShippingCategoryExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -45,18 +45,9 @@ final class ShippingCategoryExampleFactory implements ExampleFactoryInterface
         $this->shippingCategoryFactory = $shippingCategoryFactory;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setDefault('name', function (Options $options) {
-                    return $this->faker->words(3, true);
-                })
-                ->setDefault('code', function (Options $options) {
-                    return StringInflector::nameToCode($options['name']);
-                })
-                ->setDefault('description', function (Options $options) {
-                    return $this->faker->paragraph;
-                })
-        ;
+        $this->optionsResolver = new OptionsResolver();
+
+        $this->configureOptions($this->optionsResolver);
     }
 
     /**
@@ -65,7 +56,7 @@ final class ShippingCategoryExampleFactory implements ExampleFactoryInterface
     public function create(array $options = [])
     {
         $options = $this->optionsResolver->resolve($options);
-        
+
         /** @var ShippingCategoryInterface $shippingCategory */
         $shippingCategory = $this->shippingCategoryFactory->createNew();
 
@@ -74,5 +65,23 @@ final class ShippingCategoryExampleFactory implements ExampleFactoryInterface
         $shippingCategory->setDescription($options['description']);
 
         return $shippingCategory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefault('name', function (Options $options) {
+                return $this->faker->words(3, true);
+            })
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
+            })
+            ->setDefault('description', function (Options $options) {
+                return $this->faker->paragraph;
+            })
+        ;
     }
 }

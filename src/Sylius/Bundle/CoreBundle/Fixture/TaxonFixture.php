@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class TaxonFixture extends AbstractResourceFixture
+class TaxonFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}

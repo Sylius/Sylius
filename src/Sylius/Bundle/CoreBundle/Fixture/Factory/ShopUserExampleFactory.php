@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ShopUserExampleFactory implements ExampleFactoryInterface
+class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -54,23 +54,9 @@ final class ShopUserExampleFactory implements ExampleFactoryInterface
         $this->customerFactory = $customerFactory;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setDefault('email', function (Options $options) {
-                    return $this->faker->email;
-                })
-                ->setDefault('first_name', function (Options $options) {
-                    return $this->faker->firstName;
-                })
-                ->setDefault('last_name', function (Options $options) {
-                    return $this->faker->lastName;
-                })
-                ->setDefault('enabled', function (Options $options) {
-                    return $this->faker->boolean(90);
-                })
-                ->setAllowedTypes('enabled', 'bool')
-                ->setDefault('password', 'password123')
-        ;
+        $this->optionsResolver = new OptionsResolver();
+
+        $this->configureOptions($this->optionsResolver);
     }
 
     /**
@@ -94,5 +80,28 @@ final class ShopUserExampleFactory implements ExampleFactoryInterface
         $user->setCustomer($customer);
 
         return $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefault('email', function (Options $options) {
+                return $this->faker->email;
+            })
+            ->setDefault('first_name', function (Options $options) {
+                return $this->faker->firstName;
+            })
+            ->setDefault('last_name', function (Options $options) {
+                return $this->faker->lastName;
+            })
+            ->setDefault('enabled', function (Options $options) {
+                return $this->faker->boolean(90);
+            })
+            ->setAllowedTypes('enabled', 'bool')
+            ->setDefault('password', 'password123')
+        ;
     }
 }

@@ -24,7 +24,7 @@ use Symfony\Component\Intl\Intl;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class GeographicalFixture extends AbstractFixture
+class GeographicalFixture extends AbstractFixture
 {
     /**
      * @var FactoryInterface

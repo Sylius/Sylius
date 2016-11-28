@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class PaymentMethodExampleFactory implements ExampleFactoryInterface
+class PaymentMethodExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -66,26 +66,9 @@ final class PaymentMethodExampleFactory implements ExampleFactoryInterface
         $this->channelRepository = $channelRepository;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setDefault('name', function (Options $options) {
-                    return $this->faker->words(3, true);
-                })
-                ->setDefault('code', function (Options $options) {
-                    return StringInflector::nameToCode($options['name']);
-                })
-                ->setDefault('description', function (Options $options) {
-                    return $this->faker->sentence();
-                })
-                ->setDefault('gateway', 'offline')
-                ->setDefault('enabled', function (Options $options) {
-                    return $this->faker->boolean(90);
-                })
-                ->setDefault('channels', LazyOption::all($channelRepository))
-                ->setAllowedTypes('channels', 'array')
-                ->setNormalizer('channels', LazyOption::findBy($channelRepository, 'code'))
-                ->setAllowedTypes('enabled', 'bool')
-        ;
+        $this->optionsResolver = new OptionsResolver();
+
+        $this->configureOptions($this->optionsResolver);
     }
     /**
      * {@inheritdoc}
@@ -93,7 +76,7 @@ final class PaymentMethodExampleFactory implements ExampleFactoryInterface
     public function create(array $options = [])
     {
         $options = $this->optionsResolver->resolve($options);
-        
+
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->paymentMethodFactory->createNew();
 
@@ -114,6 +97,32 @@ final class PaymentMethodExampleFactory implements ExampleFactoryInterface
         }
 
         return $paymentMethod;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefault('name', function (Options $options) {
+                return $this->faker->words(3, true);
+            })
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
+            })
+            ->setDefault('description', function (Options $options) {
+                return $this->faker->sentence();
+            })
+            ->setDefault('gateway', 'offline')
+            ->setDefault('enabled', function (Options $options) {
+                return $this->faker->boolean(90);
+            })
+            ->setDefault('channels', LazyOption::all($this->channelRepository))
+            ->setAllowedTypes('channels', 'array')
+            ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
+            ->setAllowedTypes('enabled', 'bool')
+        ;
     }
 
     /**

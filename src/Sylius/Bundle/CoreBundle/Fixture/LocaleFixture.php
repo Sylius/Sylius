@@ -20,7 +20,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class LocaleFixture extends AbstractFixture
+class LocaleFixture extends AbstractFixture
 {
     /**
      * @var FactoryInterface

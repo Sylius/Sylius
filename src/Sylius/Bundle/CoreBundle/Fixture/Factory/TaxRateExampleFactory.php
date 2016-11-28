@@ -24,12 +24,22 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class TaxRateExampleFactory implements ExampleFactoryInterface
+class TaxRateExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
      */
     private $taxRateFactory;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $zoneRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $taxCategoryRepository;
 
     /**
      * @var \Faker\Generator
@@ -52,32 +62,13 @@ final class TaxRateExampleFactory implements ExampleFactoryInterface
         RepositoryInterface $taxCategoryRepository
     ) {
         $this->taxRateFactory = $taxRateFactory;
+        $this->zoneRepository = $zoneRepository;
+        $this->taxCategoryRepository = $taxCategoryRepository;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setDefault('code', function (Options $options) {
-                    return StringInflector::nameToCode($options['name']);
-                })
-                ->setDefault('name', function (Options $options) {
-                    return $this->faker->words(3, true);
-                })
-                ->setDefault('amount', function (Options $options) {
-                    return $this->faker->randomFloat(2, 0, 0.4);
-                })
-                ->setAllowedTypes('amount', 'float')
-                ->setDefault('included_in_price', function (Options $options) {
-                    return $this->faker->boolean();
-                })
-                ->setAllowedTypes('included_in_price', 'bool')
-                ->setDefault('calculator', 'default')
-                ->setDefault('zone', LazyOption::randomOne($zoneRepository))
-                ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
-                ->setNormalizer('zone', LazyOption::findOneBy($zoneRepository, 'code'))
-                ->setDefault('category', LazyOption::randomOne($taxCategoryRepository))
-                ->setAllowedTypes('category', ['null', 'string', TaxCategoryInterface::class])
-                ->setNormalizer('category', LazyOption::findOneBy($taxCategoryRepository, 'code'))
-        ;
+        $this->optionsResolver = new OptionsResolver();
+
+        $this->configureOptions($this->optionsResolver);
     }
 
     /**
@@ -99,5 +90,35 @@ final class TaxRateExampleFactory implements ExampleFactoryInterface
         $taxRate->setCategory($options['category']);
 
         return $taxRate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
+            })
+            ->setDefault('name', function (Options $options) {
+                return $this->faker->words(3, true);
+            })
+            ->setDefault('amount', function (Options $options) {
+                return $this->faker->randomFloat(2, 0, 0.4);
+            })
+            ->setAllowedTypes('amount', 'float')
+            ->setDefault('included_in_price', function (Options $options) {
+                return $this->faker->boolean();
+            })
+            ->setAllowedTypes('included_in_price', 'bool')
+            ->setDefault('calculator', 'default')
+            ->setDefault('zone', LazyOption::randomOne($this->zoneRepository))
+            ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
+            ->setNormalizer('zone', LazyOption::findOneBy($this->zoneRepository, 'code'))
+            ->setDefault('category', LazyOption::randomOne($this->taxCategoryRepository))
+            ->setAllowedTypes('category', ['null', 'string', TaxCategoryInterface::class])
+            ->setNormalizer('category', LazyOption::findOneBy($this->taxCategoryRepository, 'code'))
+        ;
     }
 }

@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class AdminUserExampleFactory implements ExampleFactoryInterface
+class AdminUserExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
@@ -37,30 +37,23 @@ final class AdminUserExampleFactory implements ExampleFactoryInterface
     private $optionsResolver;
 
     /**
+     * @var string
+     */
+    private $localeCode;
+
+    /**
      * @param FactoryInterface $userFactory
      * @param string $localeCode
      */
     public function __construct(FactoryInterface $userFactory, $localeCode)
     {
         $this->userFactory = $userFactory;
+        $this->localeCode = $localeCode;
 
         $this->faker = \Faker\Factory::create();
-        $this->optionsResolver =
-            (new OptionsResolver())
-                ->setDefault('email', function (Options $options) {
-                    return $this->faker->email;
-                })
-                ->setDefault('username', function (Options $options) {
-                    return $this->faker->firstName.' '.$this->faker->lastName;
-                })
-                ->setDefault('enabled', true)
-                ->setAllowedTypes('enabled', 'bool')
-                ->setDefault('password', 'password123')
-                ->setDefault('locale_code', $localeCode)
-                ->setDefault('api', false)
-                ->setDefined('first_name')
-                ->setDefined('last_name')
-        ;
+        $this->optionsResolver = new OptionsResolver();
+
+        $this->configureOptions($this->optionsResolver);
     }
 
     /**
@@ -91,5 +84,27 @@ final class AdminUserExampleFactory implements ExampleFactoryInterface
         }
 
         return $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefault('email', function (Options $options) {
+                return $this->faker->email;
+            })
+            ->setDefault('username', function (Options $options) {
+                return $this->faker->firstName.' '.$this->faker->lastName;
+            })
+            ->setDefault('enabled', true)
+            ->setAllowedTypes('enabled', 'bool')
+            ->setDefault('password', 'password123')
+            ->setDefault('locale_code', $this->localeCode)
+            ->setDefault('api', false)
+            ->setDefined('first_name')
+            ->setDefined('last_name')
+        ;
     }
 }

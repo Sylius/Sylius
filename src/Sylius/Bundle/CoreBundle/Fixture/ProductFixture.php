@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ProductFixture extends AbstractResourceFixture
+class ProductFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
