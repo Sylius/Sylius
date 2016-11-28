@@ -25,7 +25,7 @@
     <services>
         <service id="sylius.locale_provider.immutable" class="Sylius\Component\Resource\Provider\ImmutableLocaleProvider">
             <argument>%sylius.translation.locales%</argument>
-            <argument>%sylius_locale.locale%</argument>
+            <argument>%sylius.translation.default_locale%</argument>
         </service>
 
         <service id="sylius.form.type_extension.form.request_handler"
