@@ -432,6 +432,7 @@ final class OrderContext implements Context
             $order->addItem($item);
 
             $this->orderRepository->add($order);
+            $this->sharedStorage->set('order', $order);
         }
     }
 
