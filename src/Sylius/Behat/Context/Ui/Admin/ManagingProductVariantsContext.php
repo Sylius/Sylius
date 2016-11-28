@@ -161,7 +161,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     * @When /^I set its(?:| default) price to ("(?:-)?(?:€|£|\$)[^"]+") for "([^"]+)" channel$/
      * @When I do not set its price
      */
     public function iSetItsPriceTo($price = null, $channel = null)
@@ -387,11 +387,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then I should be notified that :element cannot be lower than 0
+     * @Then I should be notified that price cannot be lower than 0
      */
-    public function iShouldBeNotifiedThatCannotBeLowerThen($element)
+    public function iShouldBeNotifiedThatPriceCannotBeLowerThen()
     {
-        $this->assertValidationMessage($element, sprintf('%s must not be negative.', ucfirst($element)));
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same($currentPage->getPricesValidationMessage(), 'Price must not be negative.');
     }
 
     /**

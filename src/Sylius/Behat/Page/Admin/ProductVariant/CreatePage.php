@@ -138,7 +138,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'height' => '#sylius_product_variant_height',
             'on_hand' => '#sylius_product_variant_onHand',
             'option_select' => '#sylius_product_variant_optionValues_%option-name%',
-            'price' => '#sylius_product_variant_price',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error',
