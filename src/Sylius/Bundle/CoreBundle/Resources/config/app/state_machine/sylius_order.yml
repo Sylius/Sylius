@@ -25,6 +25,10 @@ winzou_state_machine:
                     on: ["create"]
                     do: ["@sylius.order_number_assigner", "assignNumber"]
                     args: ["object"]
+                sylius_assign_token:
+                    on: ["create"]
+                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
+                    args: ["object"]
             after:
                 sylius_send_order_confirmation_email:
                     on: ["create"]
@@ -49,10 +53,6 @@ winzou_state_machine:
                 sylius_hold_inventory:
                     on: ["create"]
                     do: ["@sylius.inventory.order_inventory_operator", "hold"]
-                    args: ["object"]
-                sylius_assign_token:
-                    on: ["create"]
-                    do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
                     args: ["object"]
                 sylius_increment_promotions_usages:
                     on: ["create"]

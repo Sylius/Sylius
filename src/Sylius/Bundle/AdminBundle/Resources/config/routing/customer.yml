@@ -25,17 +25,6 @@ sylius_admin_customer_show:
             template: SyliusAdminBundle:Customer:show.html.twig
             permission: true
 
-sylius_admin_request_customer_password_reset:
-    path: /customers/{id}/reset-password/{email}
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.shop_user:requestPasswordResetTokenAction
-        _sylius:
-            template: SyliusAdminBundle:Customer/Show:requestResetPassword.html.twig
-            redirect:
-                route: sylius_admin_customer_show
-                parameters: { id: $id }
-
 sylius_admin_customer_order_index:
     path: /customers/{id}/orders
     methods: [GET]

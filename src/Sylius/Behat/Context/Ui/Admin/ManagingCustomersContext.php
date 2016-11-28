@@ -561,14 +561,6 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given I reset their password
-     */
-    public function iResetTheirPassword()
-    {
-        $this->showPage->resetPassword();
-    }
-
-    /**
      * @Then this customer should be subscribed to the newsletter
      */
     public function thisCustomerShouldBeSubscribedToTheNewsletter()

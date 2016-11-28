@@ -196,26 +196,6 @@ sylius:
             version: PHP version
             version_recommended: Recommended PHP version
 
-    email:
-        order_confirmation:
-            name: Order confirmation
-            content: Your order no. %number% has been successfully placed.<br/><br/>Thank you for shopping at our store!
-        order_comment:
-            name: Order comment
-        shipment_confirmation:
-            name: Shipment confirmation
-            content: Your order no. %number% has been sent using %method%.<br/>You can check it's location with the "%tracking%" tracking code.<br/><br/>Thank you for a successful transaction.
-        user_confirmation:
-            name: User confirmation
-            subject: Welcome to our store
-            content: Welcome to our store<br/><br/>You have just been registered.<br/>Thank you %username%.
-        password_reset:
-            name: Password reset
-            content: <h3>Hello %username%</h3>To reset your password - please visit %url% <br/><br/>Regards, the Team.
-        verification:
-            name: Email address verification
-            content: To verify your email address - please visit %url%
-
     payum_gateway:
         cash_on_delivery: Cash on delivery
         offline: Offline

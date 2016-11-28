@@ -1,9 +1,14 @@
 {% block subject %}
-    {{ 'sylius.email.order_confirmation.name'|trans }}
+    Order confirmation
 {% endblock %}
 
 {% block body %}
+    {% set url = order.channel.hostname is not null ? 'http://' ~ order.channel.hostname ~ path('sylius_shop_order_show', { 'tokenValue': order.tokenValue}) : url('sylius_shop_order_show', { 'tokenValue': order.tokenValue}) %}
     {% autoescape %}
-        {{ 'sylius.email.order_confirmation.content'|trans({'%number%': order.number }) }}
+        Your order no. {{ order.number }} has been successfully placed.
+        <br/>
+        To view order or change payment method - please visit {{ url|raw }}
+        <br/><br/>
+        Thank you for shopping at our store!
     {% endautoescape %}
 {% endblock %}
