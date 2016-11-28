@@ -12,13 +12,17 @@
 namespace Sylius\Bundle\ThemeBundle\Tests\Functional\Bundle\TestBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TemplatingController extends ContainerAware
+class TemplatingController implements ContainerAwareInterface
 {
+    use ContainerAwareTrait;
+
     /**
      * @param string $templateName
      *

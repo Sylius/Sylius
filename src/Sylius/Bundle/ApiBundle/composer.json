@@ -22,15 +22,15 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "friendsofsymfony/oauth-server-bundle": "~1.4",
+        "friendsofsymfony/oauth-server-bundle": "^1.5",
         "sylius/core-bundle": "^1.0",
-        "symfony/framework-bundle": "^2.8",
-        "symfony/form": "^2.8",
-        "symfony/validator": "^2.8"
+        "symfony/form": "^3.2@rc",
+        "symfony/framework-bundle": "^3.2@rc",
+        "symfony/validator": "^3.2@rc"
     },
     "require-dev": {
-        "doctrine/orm": "^2.4",
-        "phpspec/phpspec": "^3.1",
+        "doctrine/orm": "^2.5",
+        "phpspec/phpspec": "^3.2",
         "phpunit/phpunit": "^5.6",
         "twig/twig": "^1.0"
     },

@@ -24,10 +24,10 @@
 
         "sylius/resource": "^1.0",
         "sylius/registry": "^1.0",
-        "symfony/options-resolver": "^2.8"
+        "symfony/options-resolver": "^3.2@rc"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.1"
+        "phpspec/phpspec": "^3.2"
     },
     "config": {
         "bin-dir": "bin"

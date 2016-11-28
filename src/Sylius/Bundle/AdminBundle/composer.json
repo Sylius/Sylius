@@ -22,13 +22,13 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "sylius/ui-bundle": "^1.0",
+        "sonata-project/intl-bundle": "^2.2",
         "sylius/core-bundle": "^1.0",
-        "symfony/framework-bundle": "^2.8",
-        "sonata-project/intl-bundle": "^2.2"
+        "sylius/ui-bundle": "^1.0",
+        "symfony/framework-bundle": "^3.2@rc"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.1"
+        "phpspec/phpspec": "^3.2"
     },
     "config": {
         "bin-dir": "bin"

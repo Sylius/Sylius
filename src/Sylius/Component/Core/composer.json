@@ -22,11 +22,10 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "knplabs/gaufrette": "0.2.*@dev",
+        "knplabs/gaufrette": "^0.2",
         "sylius/addressing": "^1.0",
         "sylius/attribute": "^1.0",
         "sylius/channel": "^1.0",
-        "sylius/contact": "^1.0",
         "sylius/currency": "^1.0",
         "sylius/customer": "^1.0",
         "sylius/inventory": "^1.0",
@@ -44,11 +43,11 @@
         "sylius/taxonomy": "^1.0",
         "sylius/user": "^1.0",
         "webmozart/assert": "^1.0",
-        "zendframework/zend-stdlib": "^2.0|^3.0"
+        "zendframework/zend-stdlib": "^3.1"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.1",
-        "symfony/property-access": "^2.8"
+        "phpspec/phpspec": "^3.2",
+        "symfony/property-access": "^3.2@rc"
     },
     "config": {
         "bin-dir": "bin"
