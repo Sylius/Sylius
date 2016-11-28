@@ -1,9 +1,11 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+
 <div class="ui segment">
     <div class="ui center aligned four column stackable divided grid">
         <div class="column">
             <div class="ui statistic">
                 <div id="total-sales" class="value">
-                    {{ statistics.totalSales }}
+                    {{ money.format(statistics.totalSales, channel.baseCurrency.code) }}
                 </div>
                 <div class="label">
                     {{ 'sylius.ui.sales'|trans }}
@@ -33,7 +35,7 @@
         <div class="column">
             <div class="ui statistic">
                 <div id="average-order-value" class="value">
-                    {{ statistics.averageOrderValue }}
+                    {{ money.format(statistics.averageOrderValue, channel.baseCurrency.code) }}
                 </div>
                 <div class="label">
                     {{ 'sylius.ui.average_order_value'|trans }}
