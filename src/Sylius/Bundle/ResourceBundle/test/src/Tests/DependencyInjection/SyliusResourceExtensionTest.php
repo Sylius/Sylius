@@ -79,12 +79,13 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
 
          $this->load([
              'translation' => [
-                 'locales' => ['en_US' => true, 'pl_PL' => false, 'de_DE' => false]
+                 'locales' => ["pl_PL" => false, "en_US" => true, "de_DE" => false],
+                 'default_locale' => "en_US"
              ]
          ]);
 
-         $this->assertContainerBuilderHasAlias('sylius.translation.locale_provider');
          $this->assertContainerBuilderHasParameter('sylius.translation.locales');
+         $this->assertContainerBuilderHasParameter('sylius.translation.default_locale');
          $this->assertContainerBuilderHasServiceDefinitionWithArgument('sylius_resource.translation.locale_provider', 'sylius.translation.locales');
      }
 
