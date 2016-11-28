@@ -21,10 +21,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ExchangeRateRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param CurrencyInterface $firstCurrency
-     * @param CurrencyInterface $secondCurrency
+     * @param string $firstCurrencyCode
+     * @param string $secondCurrencyCode
      *
      * @return ExchangeRateInterface|null
      */
-    public function findOneWithCurrencyPair(CurrencyInterface $firstCurrency, CurrencyInterface $secondCurrency);
+    public function findOneWithCurrencyPair($firstCurrencyCode, $secondCurrencyCode);
 }

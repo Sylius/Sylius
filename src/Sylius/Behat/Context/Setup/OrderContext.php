@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -247,21 +248,6 @@ final class OrderContext implements Context
         $order = $this->sharedStorage->get('order');
 
         $this->checkoutUsing($order, $shippingMethod, $address, $paymentMethod);
-
-        $this->objectManager->flush();
-    }
-
-    /**
-     * @Given the customer has chosen to order in the :currencyCode currency
-     * @Given I have chosen to order in the :currencyCode currency
-     */
-    public function theCustomerChoseTheCurrency($currencyCode)
-    {
-        $this->currencyStorage->set($this->sharedStorage->get('channel'), $currencyCode);
-
-        /** @var OrderInterface $order */
-        $order = $this->sharedStorage->get('order');
-        $order->setCurrencyCode($currencyCode);
 
         $this->objectManager->flush();
     }
@@ -556,7 +542,10 @@ final class OrderContext implements Context
         /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();
         $item->setVariant($productVariant);
-        $item->setUnitPrice($productVariant->getPrice());
+
+        /** @var ChannelPricingInterface $channelPricing */
+        $channelPricing = $productVariant->getChannelPricingForChannel($this->sharedStorage->get('channel'));
+        $item->setUnitPrice($channelPricing->getPrice());
 
         $this->itemQuantityModifier->modify($item, $quantity);
 
@@ -617,7 +606,6 @@ final class OrderContext implements Context
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
 
         $order->setCurrencyCode($currency->getCode());
-        $order->setExchangeRate($currency->getExchangeRate());
 
         return $order;
     }

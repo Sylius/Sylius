@@ -1,32 +1,18 @@
-Sylius\Component\Core\Model\ProductVariant:
-    productVariant1:
-        code: MUG_1
-        setPrice: [20]
-    productVariant2:
-        code: MUG_2
-        setPrice: [20]
-    productVariant3:
-        code: MUG_3
-        setPrice: [20]
-
 Sylius\Component\Core\Model\Product:
     product1:
         updatedAt: 2015-10-10
         currentLocale: en_US
         currentTranslation: "@productTranslation1"
-        variants: ["@productVariant1"]
         code: MUG_SW
     product2:
         updatedAt: 2015-10-04
         currentLocale: en_US
         currentTranslation: "@productTranslation2"
-        variants: ["@productVariant2"]
         code: MUG_LOTR
     product3:
         updatedAt: 2015-10-05
         currentLocale: en_US
         currentTranslation: "@productTranslation3"
-        variants: ["@productVariant3"]
         code: MUG_BB
 
 Sylius\Component\Core\Model\ProductTranslation:

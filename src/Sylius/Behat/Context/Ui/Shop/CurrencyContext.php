@@ -50,6 +50,7 @@ final class CurrencyContext implements Context
     /**
      * @When I switch to the :currencyCode currency
      * @When I change my currency to :currencyCode
+     * @Given I changed my currency to :currencyCode
      */
     public function iSwitchTheCurrencyToTheCurrency($currencyCode)
     {
@@ -94,7 +95,7 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Then I should not be able to shop without default currency
+     * @Then I should not be able to shop without base currency
      */
     public function iShouldNotBeAbleToShop()
     {

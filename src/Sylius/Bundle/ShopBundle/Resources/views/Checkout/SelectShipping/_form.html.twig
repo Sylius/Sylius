@@ -1,3 +1,5 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+
 <div class="ui unmargined segments">
     {% set disabled = false %}
     {% for shipment in order.shipments %}
@@ -21,7 +23,7 @@
                         </div>
                         <div class="extra">
                             <div class="ui large right floated fee label">
-                                {{ shipment_form.method.vars.shipping_costs[shipping_method_choice.vars.value]|sylius_price }}
+                                {{ money.convertAndFormat(shipment_form.method.vars.shipping_costs[shipping_method_choice.vars.value]) }}
                             </div>
                         </div>
                     </div>

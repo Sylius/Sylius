@@ -110,10 +110,10 @@ final class AccountContext implements Context
     }
 
     /**
-     * @When I specify the email as :email
-     * @When I remove the email
+     * @When I specify the customer email as :email
+     * @When I remove the customer email
      */
-    public function iSpecifyTheEmail($email = null)
+    public function iSpecifyCustomerTheEmail($email = null)
     {
         $this->profileUpdatePage->specifyEmail($email);
     }
@@ -314,10 +314,20 @@ final class AccountContext implements Context
 
     /**
      * @When I view the summary of the order :order
+     * @When /^I am viewing the summary of (this order)$/
      */
     public function iViewTheSummaryOfTheOrder(OrderInterface $order)
     {
         $this->orderShowPage->open(['number' => $order->getNumber()]);
+    }
+
+    /**
+     * @When I am viewing the summary of my last order
+     */
+    public function iViewingTheSummaryOfMyLastOrder()
+    {
+        $this->orderIndexPage->open();
+        $this->orderIndexPage->openLastOrderPage();
     }
 
     /**

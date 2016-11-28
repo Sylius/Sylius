@@ -1,3 +1,5 @@
+{% import "@SyliusAdmin/Common/Macro/money.html.twig" as money %}
+
 <div class="item">
     <div class="right floated content">
         {{ label.default(('sylius.ui.'~payment.state)|trans) }}
@@ -8,7 +10,7 @@
             {{ payment.method }}
         </div>
         <div class="description">
-            {{ payment.amount|sylius_price(payment.order.currencyCode, payment.order.exchangeRate) }}
+            {{ money.format(payment.amount, payment.order.currencyCode) }}
         </div>
     </div>
     {% if sm_can(payment, 'complete', 'sylius_payment') %}

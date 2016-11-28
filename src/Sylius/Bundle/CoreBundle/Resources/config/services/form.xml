@@ -32,10 +32,6 @@
         <service id="sylius.form.extension.type.payment_method" class="Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType" />
         </service>
-        <service id="sylius.form.extension.type.currency" class="Sylius\Bundle\CoreBundle\Form\Extension\CurrencyTypeExtension">
-            <argument>%currency%</argument>
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType" />
-        </service>
         <service id="sylius.form.extension.type.tax_rate" class="Sylius\Bundle\CoreBundle\Form\Extension\TaxRateTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType" />
         </service>
@@ -61,6 +57,9 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType" />
         </service>
         <service id="sylius.form.extension.type.shipping_method" class="Sylius\Bundle\CoreBundle\Form\Extension\ShippingMethodTypeExtension">
+            <argument type="service" id="sylius.registry.shipping_rule_checker" />
+            <argument type="service" id="sylius.registry.shipping_calculator" />
+            <argument type="service" id="sylius.form_registry.shipping_calculator" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType" />
         </service>
         <service id="sylius.form.extension.type.product" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductTypeExtension">
@@ -70,11 +69,11 @@
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType" />
         </service>
         <service id="sylius.form.extension.type.product_variant" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantTypeExtension">
-            <argument type="service" id="sylius.registry.price_calculator" />
-            <argument type="service" id="form.registry" />
+            <argument type="service" id="sylius.form.event_subscriber.channel_pricing" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType" />
         </service>
         <service id="sylius.form.extension.type.product_variant_generation" class="Sylius\Bundle\CoreBundle\Form\Extension\ProductVariantGenerationTypeExtension">
+            <argument type="service" id="sylius.form.event_subscriber.channel_pricing" />
             <tag name="form.type_extension" extended-type="Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType" />
         </service>
 
@@ -145,12 +144,6 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.price_calculator.channel_and_currency_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelAndCurrencyBasedConfigurationType">
-            <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="sylius.repository.currency" />
-            <tag name="form.type" />
-        </service>
-
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer">
             <argument type="service" id="sylius.repository.taxon" />
         </service>
@@ -189,6 +182,27 @@
         <service id="sylius.form.type.add_to_cart" class="Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType">
             <argument>Sylius\Bundle\OrderBundle\Controller\AddToCartCommand</argument>
             <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.channel_pricing" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType">
+            <argument>%sylius.model.channel_pricing.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.event_subscriber.channel_pricing" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\ChannelPricingsFormSubscriber">
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.factory.channel_pricing" />
+        </service>
+
+        <service id="sylius.form.type.channel_based_shipping_calculator.flat_rate" class="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Calculator\ChannelBasedFlatRateConfigurationType">
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.channel_based_shipping_calculator.per_unit_rate" class="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Calculator\ChannelBasedPerUnitRateConfigurationType">
+            <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" />
         </service>
     </services>

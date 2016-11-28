@@ -33,6 +33,8 @@ default:
                 - sylius.behat.context.setup.zone
 
                 - sylius.behat.context.ui.shop.account
+                - sylius.behat.context.ui.checkout
+                - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.shop.currency
             filters:
                 tags: "@customer_account && @ui"

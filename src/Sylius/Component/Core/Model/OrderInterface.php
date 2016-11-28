@@ -131,16 +131,6 @@ interface OrderInterface extends
     public function setCurrencyCode($currencyCode);
 
     /**
-     * @return float
-     */
-    public function getExchangeRate();
-
-    /**
-     * @param float $exchangeRate
-     */
-    public function setExchangeRate($exchangeRate);
-
-    /**
      * @return string
      *
      * @throws \InvalidArgumentException

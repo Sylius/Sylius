@@ -27,9 +27,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($price)
+    public function specifyPrice($price, $channel)
     {
-        $this->getDocument()->fillField('Price', $price);
+        $this->getDocument()->fillField($channel, $price);
     }
 
     /**
@@ -120,6 +120,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getPricesValidationMessage()
+    {
+        return $this->getElement('prices_validation_message')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -130,9 +138,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'height' => '#sylius_product_variant_height',
             'on_hand' => '#sylius_product_variant_onHand',
             'option_select' => '#sylius_product_variant_optionValues_%option-name%',
-            'price' => '#sylius_product_variant_price',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
+            'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error',
             'weight' => '#sylius_product_variant_weight',
             'width' => '#sylius_product_variant_width',
         ]);

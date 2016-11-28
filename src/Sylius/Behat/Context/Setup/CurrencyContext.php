@@ -86,7 +86,6 @@ final class CurrencyContext implements Context
     public function theStoreHasCurrency($currencyCode)
     {
         $currency = $this->createCurrency($currencyCode);
-        $currency->setEnabled(true);
 
         $this->saveCurrency($currency);
     }
@@ -115,60 +114,22 @@ final class CurrencyContext implements Context
     public function theStoreHasDisabledCurrency($currencyCode)
     {
         $currency = $this->provideCurrency($currencyCode);
-        $currency->setEnabled(false);
 
         $this->saveCurrency($currency);
     }
 
     /**
-     * @Given the store has currency :currencyCode with exchange rate :exchangeRate
-     */
-    public function theStoreHasCurrencyWithExchangeRate($currencyCode, $exchangeRate)
-    {
-        $currency = $this->createCurrency($currencyCode, (float) $exchangeRate);
-        $currency->setEnabled(true);
-
-        $this->saveCurrency($currency);
-    }
-
-    /**
-     * @Given /^(that channel) allows to shop using the "([^"]+)" currency$/
-     * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
-     * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
+     * @Given /^(that channel)(?: also|) allows to shop using the "([^"]+)" currency$/
+     * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
+     * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
      */
     public function thatChannelAllowsToShopUsingAndCurrencies(ChannelInterface $channel, ...$currenciesCodes)
     {
-        foreach ($channel->getCurrencies() as $currency) {
-            $channel->removeCurrency($currency);
-        }
-
         foreach ($currenciesCodes as $currencyCode) {
             $channel->addCurrency($this->provideCurrency($currencyCode));
         }
 
         $this->channelManager->flush();
-    }
-
-    /**
-     * @Given /^(that channel)(?: also|) allows to shop using the "([^"]+)" currency with exchange rate ([0-9\.]+)$/
-     */
-    public function thatChannelAllowsToShopUsingCurrency(ChannelInterface $channel, $currencyCode, $exchangeRate = 1.0)
-    {
-        $currency = $this->createCurrency($currencyCode, $exchangeRate);
-        $channel->addCurrency($currency);
-        $this->saveCurrency($currency);
-
-        $this->channelManager->flush();
-    }
-
-    /**
-     * @Given /^the exchange rate for (currency "[^"]+") was changed to ([0-9\.]+)$/
-     * @Given /^the ("[^"]+" currency) has an exchange rate of ([0-9\.]+)$/
-     */
-    public function theExchangeRateForWasChangedTo(CurrencyInterface $currency, $exchangeRate)
-    {
-        $currency->setExchangeRate($exchangeRate);
-        $this->saveCurrency($currency);
     }
 
     /**
@@ -182,16 +143,14 @@ final class CurrencyContext implements Context
 
     /**
      * @param $currencyCode
-     * @param float $exchangeRate
      *
      * @return CurrencyInterface
      */
-    private function createCurrency($currencyCode, $exchangeRate = 1.0)
+    private function createCurrency($currencyCode)
     {
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyFactory->createNew();
         $currency->setCode($currencyCode);
-        $currency->setExchangeRate($exchangeRate);
 
         return $currency;
     }

@@ -161,11 +161,16 @@ EOT
      */
     protected function setupCurrency(InputInterface $input, OutputInterface $output)
     {
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
+        $question = new Question('Currency (press enter to use USD): ', 'USD');
+
         $currencyRepository = $this->get('sylius.repository.currency');
         $currencyManager = $this->get('sylius.manager.currency');
         $currencyFactory = $this->get('sylius.factory.currency');
 
-        $code = trim($this->getContainer()->getParameter('currency'));
+        $code = trim($questionHelper->ask($input, $output, $question));
+
         $name = Intl::getCurrencyBundle()->getCurrencyName($code);
         $output->writeln(sprintf('Adding <info>%s</info> currency.', $name));
 
@@ -176,7 +181,6 @@ EOT
         }
 
         $currency = $currencyFactory->createNew();
-        $currency->setExchangeRate(1.00);
         $currency->setCode($code);
 
         $currencyManager->persist($currency);

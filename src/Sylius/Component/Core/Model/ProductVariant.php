@@ -11,7 +11,8 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Core\Pricing\Calculators;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Product\Model\ProductVariant as BaseVariant;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -22,21 +23,6 @@ use Webmozart\Assert\Assert;
  */
 class ProductVariant extends BaseVariant implements ProductVariantInterface
 {
-    /**
-     * @var int
-     */
-    protected $price;
-
-    /**
-     * @var string
-     */
-    protected $pricingCalculator = Calculators::STANDARD;
-
-    /**
-     * @var array
-     */
-    protected $pricingConfiguration = [];
-
     /**
      * @var int
      */
@@ -83,6 +69,18 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $shippingCategory;
 
     /**
+     * @var Collection
+     */
+    protected $channelPricings;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->channelPricings = new ArrayCollection();
+    }
+
+    /**
      * @return string
      */
     public function __toString()
@@ -100,58 +98,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         }
 
         return $string;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPrice($price)
-    {
-        if (!is_int($price)) {
-            throw new \InvalidArgumentException('Price must be an integer.');
-        }
-
-        $this->price = $price;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPricingCalculator()
-    {
-        return $this->pricingCalculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPricingCalculator($calculator)
-    {
-        $this->pricingCalculator = $calculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPricingConfiguration()
-    {
-        return $this->pricingConfiguration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPricingConfiguration(array $configuration)
-    {
-        $this->pricingConfiguration = $configuration;
     }
 
     /**
@@ -354,5 +300,65 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setTaxCategory(TaxCategoryInterface $category = null)
     {
         $this->taxCategory = $category;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannelPricings()
+    {
+        return $this->channelPricings;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannelPricingForChannel(ChannelInterface $channel)
+    {
+        foreach ($this->channelPricings as $channelPricing) {
+            if ($channel === $channelPricing->getChannel()) {
+                return $channelPricing;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasChannelPricingForChannel(ChannelInterface $channel)
+    {
+        return null !== $this->getChannelPricingForChannel($channel);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasChannelPricing(ChannelPricingInterface $channelPricing)
+    {
+        return $this->channelPricings->contains($channelPricing);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addChannelPricing(ChannelPricingInterface $channelPricing)
+    {
+        if (!$this->hasChannelPricing($channelPricing)) {
+            $channelPricing->setProductVariant($this);
+            $this->channelPricings->add($channelPricing);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeChannelPricing(ChannelPricingInterface $channelPricing)
+    {
+        if ($this->hasChannelPricing($channelPricing)) {
+            $channelPricing->setProductVariant(null);
+            $this->channelPricings->removeElement($channelPricing);
+        }
     }
 }

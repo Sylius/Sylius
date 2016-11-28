@@ -33,20 +33,13 @@ final class CurrencyFixture extends AbstractFixture
     private $currencyManager;
 
     /**
-     * @var string
-     */
-    private $baseCurrencyCode;
-
-    /**
      * @param FactoryInterface $currencyFactory
      * @param ObjectManager $currencyManager
-     * @param string $baseCurrencyCode
      */
-    public function __construct(FactoryInterface $currencyFactory, ObjectManager $currencyManager, $baseCurrencyCode)
+    public function __construct(FactoryInterface $currencyFactory, ObjectManager $currencyManager)
     {
         $this->currencyFactory = $currencyFactory;
         $this->currencyManager = $currencyManager;
-        $this->baseCurrencyCode = $baseCurrencyCode;
     }
 
     /**
@@ -54,20 +47,11 @@ final class CurrencyFixture extends AbstractFixture
      */
     public function load(array $options)
     {
-        $currenciesCodes = array_merge([$this->baseCurrencyCode => true], $options['currencies']);
-
-        foreach ($currenciesCodes as $currencyCode => $enabled) {
+        foreach ($options['currencies'] as $currencyCode) {
             /** @var CurrencyInterface $currency */
             $currency = $this->currencyFactory->createNew();
 
             $currency->setCode($currencyCode);
-            $currency->setEnabled($enabled);
-
-            if ($currencyCode === $this->baseCurrencyCode) {
-                $currency->setExchangeRate(1.00);
-            } else {
-                $currency->setExchangeRate(mt_rand(0, 200) / 100);
-            }
 
             $this->currencyManager->persist($currency);
         }
@@ -91,9 +75,7 @@ final class CurrencyFixture extends AbstractFixture
         $optionsNode
             ->children()
                 ->arrayNode('currencies')
-                    ->useAttributeAsKey('code')
-                    ->prototype('boolean')
-                        ->defaultTrue()
+                    ->prototype('scalar')
         ;
     }
 }

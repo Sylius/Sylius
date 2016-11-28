@@ -15,6 +15,7 @@ use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -95,7 +96,16 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
                 ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
                 ->setNormalizer('shipping_category', LazyOption::findOneBy($shippingCategoryRepository, 'code'))
                 ->setDefault('calculator', function (Options $options) {
-                    return ['type' => DefaultCalculators::FLAT_RATE, 'configuration' => ['amount' => $this->faker->randomNumber(4)]];
+                    $configuration = [];
+                    /** @var ChannelInterface $channel */
+                    foreach ($options['channels'] as $channel) {
+                        $configuration[$channel->getCode()] = ['amount' => $this->faker->randomNumber(4)];
+                    }
+
+                    return [
+                        'type' => DefaultCalculators::FLAT_RATE,
+                        'configuration' => $configuration,
+                    ];
                 })
                 ->setDefault('channels', LazyOption::all($channelRepository))
                 ->setAllowedTypes('channels', 'array')

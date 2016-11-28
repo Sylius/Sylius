@@ -60,6 +60,11 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $this->tableAccessor->countTableBodyRows($this->getElement('customer_orders'));
     }
 
+    public function openLastOrderPage()
+    {
+        $this->getElement('last_order')->click();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -98,6 +103,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'customer_orders' => '#sylius-customer-orders',
+            'last_order' => '#sylius-customer-orders tbody tr:last-child a:contains("Show")',
         ]);
     }
 }

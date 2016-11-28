@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\NotificationType;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
@@ -83,7 +84,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Given I want to create a new shipping method
+     * @When I want to create a new shipping method
      */
     public function iWantToCreateANewShippingMethod()
     {
@@ -134,11 +135,11 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I specify its amount as :amount
+     * @When I specify its amount as :amount for :channel channel
      */
-    public function iSpecifyItsAmountAs($amount)
+    public function iSpecifyItsAmountForChannel($amount, ChannelInterface $channel)
     {
-        $this->createPage->specifyAmount($amount);
+        $this->createPage->specifyAmountForChannel($channel->getCode(), $amount);
     }
 
     /**
@@ -327,13 +328,6 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that :field should not be blank
-     */
-    public function iShouldBeNotifiedThatAmountShouldNotBeBlank($field)
-    {
-        $this->assertFieldValidationMessage($field, 'This value should not be blank.');
-    }
-    /**
      * @Given I am browsing shipping methods
      * @When I want to browse shipping methods
      */
@@ -454,6 +448,20 @@ final class ManagingShippingMethodsContext implements Context
     public function iShouldBeNotifiedThatItIsInUse()
     {
         $this->notificationChecker->checkNotification('Cannot delete, the shipping method is in use.', NotificationType::failure());
+    }
+
+    /**
+     * @Then I should be notified that amount for :channel channel should not be blank
+     */
+    public function iShouldBeNotifiedThatAmountForChannelShouldNotBeBlank(ChannelInterface $channel)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same(
+            $currentPage->getValidationMessageForAmount($channel->getCode()),
+            'This value should not be blank.'
+        );
     }
 
     /**

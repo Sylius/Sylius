@@ -848,6 +848,36 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then /^(the administrator) should see that (order placed by "[^"]+") has "([^"]+)" currency$/
+     */
+    public function theAdministratorShouldSeeThatThisOrderHasBeenPlacedIn(AdminUserInterface $user, OrderInterface $order, $currency)
+    {
+        $this->sharedSecurityService->performActionAsAdminUser($user, function () use ($order, $currency) {
+            $this->showPage->open(['id' => $order->getId()]);
+            Assert::same(
+                $this->showPage->getOrderCurrency(),
+                $currency,
+                'The order has been placed in %s, but it was expected to be placed in %s'
+            );
+        });
+    }
+
+    /**
+     * @Then /^(the administrator) should see the order with total "([^"]+)" in order list$/
+     */
+    public function theAdministratorShouldSeeTheOrderWithTotalInOrderList(AdminUserInterface $user, $total)
+    {
+        $this->sharedSecurityService->performActionAsAdminUser($user, function () use ($total) {
+            $this->indexPage->open();
+
+            Assert::true(
+                $this->indexPage->isSingleResourceOnPage(['total' => $total]),
+                sprintf('The order with total "%s" has not been found.', $total)
+            );
+        });
+    }
+
+    /**
      * @param string $type
      * @param string $element
      * @param string $expectedMessage

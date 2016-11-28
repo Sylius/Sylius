@@ -34,9 +34,10 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function isSlugReadOnlyIn($locale);
     
     /**
+     * @param string $channelName
      * @param int $price
      */
-    public function specifyPrice($price);
+    public function specifyPrice($channelName, $price);
 
     /**
      * @param string $name
@@ -172,4 +173,11 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @param string $locale
      */
     public function specifySlugIn($slug, $locale);
+
+    /**
+     * @param string $channelName
+     *
+     * @return string
+     */
+    public function getPriceForChannel($channelName);
 }

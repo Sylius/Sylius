@@ -60,9 +60,9 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function specifyPrice($price)
+    public function specifyPrice($channelName, $price)
     {
-        $this->getDocument()->fillField('Price', $price);
+        $this->getElement('price', ['%channel%' => $channelName])->setValue($price);
     }
 
     /**
@@ -165,6 +165,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function checkChannel($channelName)
+    {
+        $this->getElement('channel_checkbox', ['%channel%' => $channelName])->check();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function specifyPriceForChannelAndCurrency($price, ChannelInterface $channel, CurrencyInterface $currency)
     {
         $calculatorElement = $this->getElement('calculator');
@@ -226,12 +234,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'attribute_value' => '.attribute .label:contains("%attribute%") ~ input',
             'attributes_choice' => '#sylius_product_attribute_choice',
             'calculator' => '#sylius_calculator_container',
+            'channel_checkbox' => '.checkbox:contains("%channel%") input',
+            'channel_pricings' => '#sylius_product_variant_channelPricings',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
             'images' => '#sylius_product_images',
             'language_tab' => '[data-locale="%locale%"] .title',
             'name' => '#sylius_product_translations_%locale%_name',
-            'price' => '#sylius_product_variant_price',
+            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input',
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'slug' => '#sylius_product_translations_%locale%_slug',

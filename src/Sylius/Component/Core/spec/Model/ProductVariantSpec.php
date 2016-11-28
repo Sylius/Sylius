@@ -11,7 +11,12 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
@@ -43,29 +48,6 @@ final class ProductVariantSpec extends ObjectBehavior
     function it_extends_a_product_variant_model()
     {
         $this->shouldHaveType(BaseProductVariant::class);
-    }
-
-    function it_does_not_have_price_by_default()
-    {
-        $this->getPrice()->shouldReturn(null);
-    }
-
-    function its_price_should_be_mutable()
-    {
-        $this->setPrice(499);
-        $this->getPrice()->shouldReturn(499);
-    }
-
-    function its_price_should_accept_only_integer()
-    {
-        $this->setPrice(410);
-        $this->getPrice()->shouldBeInteger();
-
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(4.1 * 100);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice('410');
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(round(4.1 * 100));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice([410]);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetPrice(new \stdClass());
     }
 
     function it_implements_a_shippable_interface()
@@ -172,5 +154,71 @@ final class ProductVariantSpec extends ObjectBehavior
     {
         $this->setShippingCategory($shippingCategory);
         $this->getShippingCategory()->shouldReturn($shippingCategory);
+    }
+
+    function it_adds_and_removes_channel_pricings(ChannelPricingInterface $channelPricing)
+    {
+        $channelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($channelPricing);
+        $this->hasChannelPricing($channelPricing)->shouldReturn(true);
+
+        $channelPricing->setProductVariant(null)->shouldBeCalled();
+        $this->removeChannelPricing($channelPricing);
+        $this->hasChannelPricing($channelPricing)->shouldReturn(false);
+    }
+
+    function it_has_channel_pricings_collection(
+        ChannelPricingInterface $firstChannelPricing,
+        ChannelPricingInterface $secondChannelPricing
+    ) {
+        $firstChannelPricing->setProductVariant($this)->shouldBeCalled();
+        $secondChannelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($firstChannelPricing);
+        $this->addChannelPricing($secondChannelPricing);
+
+        $this->getChannelPricings()->shouldBeSameAs(new ArrayCollection([$firstChannelPricing, $secondChannelPricing]));
+    }
+
+    function it_checks_if_contains_channel_pricing_for_given_channel(
+        ChannelInterface $firstChannel,
+        ChannelInterface $secondChannel,
+        ChannelPricingInterface $firstChannelPricing
+    ) {
+        $firstChannelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($firstChannelPricing);
+
+        $firstChannelPricing->getChannel()->willReturn($firstChannel);
+
+        $this->hasChannelPricingForChannel($firstChannel)->shouldReturn(true);
+        $this->hasChannelPricingForChannel($secondChannel)->shouldReturn(false);
+    }
+
+    function it_returns_channel_pricing_for_given_channel(
+        ChannelInterface $channel,
+        ChannelPricingInterface $channelPricing
+    ) {
+        $channelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($channelPricing);
+
+        $channelPricing->getChannel()->willReturn($channel);
+
+        $this->getChannelPricingForChannel($channel)->shouldReturn($channelPricing);
+    }
+
+    public function getMatchers()
+    {
+        return [
+            'beSameAs' => function ($subject, $key) {
+                if (!$subject instanceof Collection || !$key instanceof Collection) {
+                    return false;
+                }
+                for ($i = 0; $i < $subject->count(); $i++) {
+                    if ($subject->get($i) !== $key->get($i)->getWrappedObject()) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+        ];
     }
 }

@@ -113,7 +113,6 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
 
         $currencyFactory->createNew()->willReturn($currency);
         $currency->setCode('USD')->shouldBeCalled();
-        $currency->setExchangeRate(1.00)->shouldBeCalled();
 
         $channel->setBaseCurrency($currency)->shouldBeCalled();
         $channel->addCurrency($currency)->shouldBeCalled();

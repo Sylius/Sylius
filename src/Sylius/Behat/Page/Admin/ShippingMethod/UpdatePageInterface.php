@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 /**
@@ -33,4 +34,13 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function enable();
 
     public function disable();
+
+    /**
+     * @param string $channelCode
+     *
+     * @return string
+     *
+     * @throws ElementNotFoundException
+     */
+    public function getValidationMessageForAmount($channelCode);
 }

@@ -5,8 +5,7 @@ Feature: Product image unique code validation within a product
     I want to be prevented from adding two images with the same code to the same product
 
     Background:
-        Given the store is available in "English (United States)"
-        And the store has "Lamborghini Gallardo Model" and "Ford Capri Model" products
+        Given the store has "Lamborghini Gallardo Model" and "Ford Capri Model" products
         And the "Lamborghini Gallardo Model" product has an image "lamborghini.jpg" with a code "thumbnail"
         And I am logged in as an administrator
 

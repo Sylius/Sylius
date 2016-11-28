@@ -81,7 +81,9 @@
 
         <service id="sylius.promotion_filter.taxon" class="Sylius\Component\Core\Promotion\Filter\TaxonFilter" />
         <service id="sylius.promotion_filter.product" class="Sylius\Component\Core\Promotion\Filter\ProductFilter" />
-        <service id="sylius.promotion_filter.price_range" class="Sylius\Component\Core\Promotion\Filter\PriceRangeFilter" />
+        <service id="sylius.promotion_filter.price_range" class="Sylius\Component\Core\Promotion\Filter\PriceRangeFilter">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+        </service>
 
         <service id="sylius.promotion.units_promotion_adjustments_applicator" class="Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicator">
             <argument type="service" id="sylius.factory.adjustment" />

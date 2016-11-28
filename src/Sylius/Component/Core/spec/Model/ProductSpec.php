@@ -104,22 +104,6 @@ final class ProductSpec extends ObjectBehavior
         $this->getMainTaxon()->shouldReturn($taxon);
     }
 
-    function it_returns_a_first_variants_price_as_product_price(VariantInterface $variant)
-    {
-        $variant->getPrice()->willReturn(1000);
-        $this->addVariant($variant);
-
-        $this->getPrice()->shouldReturn(1000);
-    }
-
-    function it_returns_a_null_as_product_price_if_a_product_has_no_variants(VariantInterface $variant)
-    {
-        $variant->setProduct(null)->shouldBeCalled();
-        $this->removeVariant($variant);
-
-        $this->getPrice()->shouldReturn(null);
-    }
-
     function it_initializes_image_collection_by_default()
     {
         $this->getImages()->shouldHaveType(Collection::class);

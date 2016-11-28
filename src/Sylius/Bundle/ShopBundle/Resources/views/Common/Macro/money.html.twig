@@ -1,0 +1,9 @@
+{% macro format(amount, currency) %}
+    {{ amount|sylius_format_money(currency, shopperContext.localeCode) }}
+{% endmacro %}
+
+{% macro convertAndFormat(amount) %}
+    {% from _self import format %}
+
+    {{ format(amount|sylius_convert_money(shopperContext.channel.baseCurrency.code, shopperContext.currencyCode), shopperContext.currencyCode) }}
+{% endmacro %}

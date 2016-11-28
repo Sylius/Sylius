@@ -45,6 +45,8 @@ final class CurrencyContext implements Context
 
     /**
      * @Transform :currency
+     * @Transform :sourceCurrency
+     * @Transform :targetCurrency
      * @Transform /^currency "([^"]+)"$/
      * @Transform /^"([^"]+)" currency$/
      */
