@@ -4,7 +4,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../bash/common.lib.s
 
 code=0
 
-etc/bin/validate-packages || code=$?
-etc/bin/test-packages || code=$?
+bin/validate-packages || code=$?
+bin/test-packages || code=$?
 
 exit ${code}

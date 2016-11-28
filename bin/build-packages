@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/common.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../etc/bash/common.lib.sh"
 
 build_package="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/build-package"
 

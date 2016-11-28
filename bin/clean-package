@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../bash/common.lib.sh"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../etc/bash/common.lib.sh"
 
 clean_package() {
     [[ "$(echo "$2" | grep -c "no-bin")" = "1" ]] && local remove_bin=false
