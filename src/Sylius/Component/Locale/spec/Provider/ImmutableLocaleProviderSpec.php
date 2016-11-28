@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Locale\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Provider\ImmutableLocaleProvider;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

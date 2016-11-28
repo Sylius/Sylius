@@ -11,6 +11,8 @@
 
 namespace Sylius\Component\Locale\Provider;
 
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */

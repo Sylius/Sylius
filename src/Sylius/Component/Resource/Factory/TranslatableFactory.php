@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Resource\Factory;
 
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\TranslatableInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

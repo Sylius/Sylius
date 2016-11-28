@@ -12,6 +12,7 @@
 namespace Sylius\Component\Locale\Provider;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
