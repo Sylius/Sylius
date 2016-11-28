@@ -9,34 +9,40 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionActionFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelAwarePromotionRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleChoiceType;
+use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PromotionActionType extends AbstractConfigurationType
+class PromotionRuleTypeExtension extends AbstractTypeExtension
 {
+    /**
+     * @var ServiceRegistryInterface
+     */
+    private $registry;
+
     /**
      * @var ChannelRepositoryInterface
      */
     private $channelRepository;
 
     /**
-     * @param string $dataClass
      * @param ServiceRegistryInterface $registry
      * @param ChannelRepositoryInterface $channelRepository
      */
-    public function __construct($dataClass, ServiceRegistryInterface $registry, ChannelRepositoryInterface $channelRepository)
+    public function __construct(ServiceRegistryInterface $registry, ChannelRepositoryInterface $channelRepository)
     {
-        parent::__construct($dataClass, $registry);
-
         $this->channelRepository = $channelRepository;
+        $this->registry = $registry;
     }
 
     /**
@@ -45,14 +51,14 @@ class PromotionActionType extends AbstractConfigurationType
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('type', 'sylius_promotion_action_choice', [
-                'label' => 'sylius.form.promotion_action.type',
+            ->add('type', PromotionRuleChoiceType::class, [
+                'label' => 'sylius.form.promotion_rule.type',
                 'attr' => [
                     'data-form-collection' => 'update',
                 ],
             ])
             ->addEventSubscriber(
-                new BuildChannelBasedPromotionActionFormSubscriber(
+                new BuildChannelAwarePromotionRuleFormSubscriber(
                     $this->registry,
                     $builder->getFormFactory(),
                     (isset($options['configuration_type'])) ? $options['configuration_type'] : null,
@@ -65,8 +71,8 @@ class PromotionActionType extends AbstractConfigurationType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getExtendedType()
     {
-        return 'sylius_promotion_action';
+        return PromotionRuleType::class;
     }
 }

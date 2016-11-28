@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\CurrencyBasedDiscountAmountType;
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType;
 use Symfony\Component\Form\AbstractTypeExtension;
@@ -37,9 +36,6 @@ class UnitFixedDiscountConfigurationTypeExtension extends AbstractTypeExtension
                     new NotBlank(['groups' => ['sylius']]),
                     new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                 ],
-            ])
-            ->add('amounts', CurrencyBasedDiscountAmountType::class, [
-                'required' => false,
             ])
         ;
     }

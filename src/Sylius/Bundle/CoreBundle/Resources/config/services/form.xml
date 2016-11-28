@@ -138,7 +138,6 @@
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.form.type.data_transformer.products_to_codes" />
             <tag name="form.type" />
-            <tag name="form.type" alias="sylius_promotion_action_filter_product_configuration" />
         </service>
 
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer">
@@ -176,17 +175,15 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.promotion_action" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionActionType">
-            <argument>%sylius.model.promotion_action.class%</argument>
+        <service id="sylius.form.extension.type.promotion_action" class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionActionTypeExtension">
             <argument type="service" id="sylius.registry_promotion_action" />
             <argument type="service" id="sylius.repository.channel" />
-            <tag name="form.type" alias="sylius_promotion_action" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType" />
         </service>
-        <service id="sylius.form.type.promotion_rule" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionRuleType">
-            <argument>%sylius.model.promotion_rule.class%</argument>
+        <service id="sylius.form.extension.type.promotion_rule" class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionRuleTypeExtension">
             <argument type="service" id="sylius.registry_promotion_rule_checker" />
             <argument type="service" id="sylius.repository.channel" />
-            <tag name="form.type" alias="sylius_promotion_rule" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType" />
         </service>
 
         <service id="sylius.form.type.add_to_cart" class="Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType">
