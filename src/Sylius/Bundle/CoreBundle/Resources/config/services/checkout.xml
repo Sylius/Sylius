@@ -15,33 +15,29 @@
     <services>
         <service id="sylius.form.type.checkout_address" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType">
             <argument>%sylius.model.order.class%</argument>
-            <tag name="form.type" alias="sylius_checkout_address" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.checkout_select_shipping" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType">
             <argument>%sylius.model.order.class%</argument>
-            <argument type="collection">
-                <argument>sylius</argument>
-            </argument>
-            <tag name="form.type" alias="sylius_checkout_select_shipping" />
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.checkout_shipment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType">
             <argument>%sylius.model.shipment.class%</argument>
-            <tag name="form.type" alias="sylius_checkout_shipment" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.checkout_select_payment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType">
             <argument>%sylius.model.order.class%</argument>
-            <argument type="collection">
-                <argument>sylius</argument>
-            </argument>
-            <tag name="form.type" alias="sylius_checkout_select_payment" />
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.checkout_payment" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType">
             <argument>%sylius.model.payment.class%</argument>
-            <tag name="form.type" alias="sylius_checkout_payment" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.checkout_complete" class="Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType">
             <argument>%sylius.model.order.class%</argument>
-            <tag name="form.type" alias="sylius_checkout_complete" />
+            <tag name="form.type" />
         </service>
     </services>
 </container>
