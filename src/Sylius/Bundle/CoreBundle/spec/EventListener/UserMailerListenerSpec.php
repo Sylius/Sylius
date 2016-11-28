@@ -60,29 +60,11 @@ final class UserMailerListenerSpec extends ObjectBehavior
         CustomerInterface $customer
     ) {
         $event->getSubject()->willReturn($customer);
-
         $customer->getUser()->willReturn(null);
 
         $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
 
-        $this->sendUserConfirmationEmail($event)->shouldReturn(null);
-    }
-
-    function it_does_not_send_the_email_confirmation_if_the_customer_user_is_not_enabled(
-        SenderInterface $emailSender,
-        GenericEvent $event,
-        CustomerInterface $customer,
-        UserInterface $user
-    ) {
-        $event->getSubject()->willReturn($customer);
-
-        $customer->getUser()->willReturn($user);
-
-        $user->isEnabled()->willReturn(false);
-
-        $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
-
-        $this->sendUserConfirmationEmail($event)->shouldReturn(null);
+        $this->sendUserConfirmationEmail($event);
     }
 
     function it_does_not_send_the_email_confirmation_if_the_customer_user_does_not_have_email(
@@ -92,15 +74,12 @@ final class UserMailerListenerSpec extends ObjectBehavior
         UserInterface $user
     ) {
         $event->getSubject()->willReturn($customer);
-
         $customer->getUser()->willReturn($user);
         $customer->getEmail()->willReturn(null);
 
-        $user->isEnabled()->willReturn(true);
-
         $emailSender->send(Argument::any(), Argument::any(), Argument::any())->shouldNotBeCalled();
 
-        $this->sendUserConfirmationEmail($event)->shouldReturn(null);
+        $this->sendUserConfirmationEmail($event);
     }
 
     function it_sends_an_email_confirmation_successfully(
@@ -112,11 +91,9 @@ final class UserMailerListenerSpec extends ObjectBehavior
         ChannelInterface $channel
     ) {
         $event->getSubject()->willReturn($customer);
-
         $customer->getUser()->willReturn($user);
         $customer->getEmail()->willReturn('fulanito@sylius.com');
 
-        $user->isEnabled()->willReturn(true);
         $user->getEmail()->willReturn('fulanito@sylius.com');
 
         $channelContext->getChannel()->willReturn($channel);
@@ -135,6 +112,6 @@ final class UserMailerListenerSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $this->sendUserConfirmationEmail($event)->shouldReturn(null);
+        $this->sendUserConfirmationEmail($event);
     }
 }

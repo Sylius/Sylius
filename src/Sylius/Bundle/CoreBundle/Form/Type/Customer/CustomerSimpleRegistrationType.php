@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Customer;
 
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserRegistrationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -57,7 +56,6 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
                 'constraints' => [new Valid()],
             ])
             ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
-            ->addEventSubscriber(new UserRegistrationFormSubscriber())
             ->setDataLocked(false)
         ;
     }

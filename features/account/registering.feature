@@ -17,8 +17,7 @@ Feature: Account registration
         And I confirm this password
         And I register this account
         Then I should be notified that new account has been successfully created
-        And I should be logged in
-        And my email should be "goodman@gmail.com"
+        But I should not be logged in
 
     @ui
     Scenario: Registering a new account with all details
@@ -31,8 +30,7 @@ Feature: Account registration
         And I specify the phone number as "123456789"
         And I register this account
         Then I should be notified that new account has been successfully created
-        And I should be logged in
-        And my email should be "goodman@gmail.com"
+        But I should not be logged in
 
     @ui
     Scenario: Registering a guest account
@@ -45,8 +43,7 @@ Feature: Account registration
         And I confirm this password
         And I register this account
         Then I should be notified that new account has been successfully created
-        And I should be logged in
-        And my email should be "goodman@gmail.com"
+        But I should not be logged in
 
     @ui @email
     Scenario: Receiving a welcoming email after registration

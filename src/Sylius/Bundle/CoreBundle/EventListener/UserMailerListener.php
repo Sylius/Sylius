@@ -58,10 +58,6 @@ final class UserMailerListener extends MailerListener
             return;
         }
 
-        if (!$user->isEnabled()) {
-            return;
-        }
-
         if (null === ($email = $customer->getEmail()) || empty($email)) {
             return;
         }

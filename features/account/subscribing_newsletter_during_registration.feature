@@ -17,5 +17,6 @@ Feature: Subscribing to the newsletter during registration
         And I confirm this password
         And I subscribe to the newsletter
         And I register this account
-        Then I should be notified that new account has been successfully created
-        And I should be subscribed to the newsletter
+        And I verify my account using link sent to "goodman@gmail.com"
+        And I log in as "goodman@gmail.com" with "heisenberg" password
+        Then I should be subscribed to the newsletter

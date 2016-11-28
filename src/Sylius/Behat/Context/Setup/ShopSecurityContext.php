@@ -77,7 +77,7 @@ final class ShopSecurityContext implements Context
      */
     public function iAmLoggedInCustomer()
     {
-        $user = $this->userFactory->create(['email' => 'sylius@example.com', 'password' => 'sylius']);
+        $user = $this->userFactory->create(['email' => 'sylius@example.com', 'password' => 'sylius', 'enabled' => true]);
         $this->userRepository->add($user);
 
         $this->securityService->logIn($user);
