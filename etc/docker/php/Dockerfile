@@ -1,33 +1,43 @@
-FROM php:7.0.2-fpm
+FROM alpine:latest
 
-RUN \
-  apt-get update && \
-  apt-get install -y \
-  curl \
-  wget \
-  git
+RUN addgroup www-data && adduser -S -D -G www-data www-data
 
+RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+ && apk --update add \
+        curl \
+        php7 \
+        php7-dom \
+        php7-ctype \
+        php7-curl \
+        php7-exif \
+        php7-fpm \
+        php7-gd \
+        php7-intl \
+        php7-json \
+        php7-mbstring \
+        php7-mcrypt \
+        php7-mysqlnd \
+        php7-opcache \
+        php7-pdo \
+        php7-pdo_mysql \
+        php7-posix \
+        php7-session \
+        php7-xml \
+        php7-iconv \
+        php7-phar \
+        php7-openssl \
+ && rm -rf /var/cache/apk/*
+
+COPY ./etc/docker/php/php.ini /etc/php7/conf.d/50-setting.ini
+COPY ./etc/docker/php/php-fpm.conf /etc/php7/php-fpm.conf
+
+ONBUILD COPY . /var/www
+
+RUN ln -s /usr/bin/php7 /usr/bin/php
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN apt-get update && apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libmcrypt-dev \
-        libpng12-dev \
-        libicu-dev \
-        libicu52  \
-    && docker-php-ext-install iconv \
-    && docker-php-ext-install exif \
-    && docker-php-ext-install mbstring \
-    && docker-php-ext-install pdo_mysql \
-    && docker-php-ext-install pdo \
-    && docker-php-ext-install intl \
-    && docker-php-ext-install opcache \
-    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
-    && docker-php-ext-install gd \
-    && docker-php-ext-install zip
-
-COPY php.ini        /usr/local/etc/php/conf.d/
-COPY default.conf    /usr/local/etc/php-fpm.d/www.conf
-
 EXPOSE 9000
+
+WORKDIR /var/www
+
+ENTRYPOINT [ "php7-fpm", "-F" ]
