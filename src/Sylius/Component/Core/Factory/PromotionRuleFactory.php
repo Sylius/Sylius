@@ -62,12 +62,12 @@ class PromotionRuleFactory implements PromotionRuleFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createItemTotal($amount)
+    public function createItemTotal($channelCode, $amount)
     {
         /** @var PromotionRuleInterface $rule */
         $rule = $this->createNew();
         $rule->setType(ItemTotalRuleChecker::TYPE);
-        $rule->setConfiguration(['amount' => $amount]);
+        $rule->setConfiguration([$channelCode => ['amount' => $amount]]);
 
         return $rule;
     }
@@ -88,12 +88,12 @@ class PromotionRuleFactory implements PromotionRuleFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createItemsFromTaxonTotal($taxonCode, $amount)
+    public function createItemsFromTaxonTotal($channelCode, $taxonCode, $amount)
     {
         /** @var PromotionRuleInterface $rule */
         $rule = $this->createNew();
         $rule->setType(TotalOfItemsFromTaxonRuleChecker::TYPE);
-        $rule->setConfiguration(['taxon' => $taxonCode, 'amount' => $amount]);
+        $rule->setConfiguration([$channelCode => ['taxon' => $taxonCode, 'amount' => $amount]]);
 
         return $rule;
     }
