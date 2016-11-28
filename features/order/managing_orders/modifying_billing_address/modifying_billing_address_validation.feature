@@ -1,8 +1,8 @@
 @modifying_address
-Feature: Modifying a customer's shipping address validation
-    In order to avoid making mistakes when modifying a customer's shipping address
+Feature: Modifying a customer's billing address validation
+    In order to avoid making mistakes when modifying a customer's billing address
     As an Administrator
-    I want to be prevented from removing required fields from customer's shipping address
+    I want to be prevented from removing required fields from customer's billing address
 
     Background:
         Given the store operates on a single channel in the "United States" named "Web"
@@ -19,9 +19,9 @@ Feature: Modifying a customer's shipping address validation
     @ui
     Scenario: Address an order without name, city and street
         When I view the summary of the order "#00000001"
-        And I want to modify a customer's shipping address of this order
-        And I clear old shipping address information
+        And I want to modify a customer's billing address of this order
+        And I clear old billing address information
         But I do not specify new information
         And I try to save my changes
-        Then I should be notified that the "first name", the "last name", the "city" and the "street" in shipping details are required
-        And this order should still be shipped to "Mike Ross", "350 5th Ave", "10118", "New York", "United States"
+        Then I should be notified that the "first name", the "last name", the "city" and the "street" in billing details are required
+        And this order bill should still be shipped to "Mike Ross", "350 5th Ave", "10118", "New York", "United States"

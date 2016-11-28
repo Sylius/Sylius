@@ -1,4 +1,4 @@
-@modifying_shipping_address
+@modifying_address
 Feature: Modifying a customer shipping address after an order has been placed
     In order to ship an order to a correct place
     As an Administrator
@@ -11,7 +11,8 @@ Feature: Modifying a customer shipping address after an order has been placed
         And the store has a product "Suit" priced at "$400.00"
         And there is a customer "mike@ross.com" that placed an order "#00000001"
         And the customer bought a single "Suit"
-        And the customer "Mike Ross" addressed it to "350 5th Ave", "10118" "New York" in the "United States" with identical billing address
+        And the customer "Mike Ross" addressed it to "350 5th Ave", "10118" "New York" in the "United States"
+        And the customer set the billing address as "Mike Ross", "350 5th Ave", "10118", "New York", "United States"
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
@@ -19,12 +20,7 @@ Feature: Modifying a customer shipping address after an order has been placed
     Scenario: Modifying a customer's shipping address
         When I view the summary of the order "#00000001"
         And I want to modify a customer's shipping address of this order
-        And I specify the first name as "Lucifer"
-        And I specify the last name as "Morningstar"
-        And I specify the street as "Seaside Fwy"
-        And I choose "United States" as the country
-        And I specify the city as "Los Angeles"
-        And I specify the postcode as "90802"
+        And I specify their shipping address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this order should be shipped to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
