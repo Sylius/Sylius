@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB;
 
 use Doctrine\MongoDB\Query\Builder as QueryBuilder;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Repository\TranslatableRepositoryInterface;
 
 /**

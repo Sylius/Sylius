@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;

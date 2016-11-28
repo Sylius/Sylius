@@ -13,7 +13,7 @@ namespace Sylius\Bundle\LocaleBundle\Context;
 
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
