@@ -51,7 +51,6 @@ final class ThemeNameChoiceType extends AbstractType
 
                 return $choices;
             },
-            'choices_as_values' => true,
         ]);
     }
 
@@ -61,14 +60,6 @@ final class ThemeNameChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_theme_name_choice';
     }
 
     /**

@@ -88,7 +88,6 @@ class ShippingMethodChoiceType extends AbstractType
                 'choice_value' => 'code',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
-                'choices_as_values' => true,
             ])
             ->setDefined([
                 'subject',
@@ -129,14 +128,6 @@ class ShippingMethodChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_shipping_method_choice';
     }
 
     /**

@@ -51,6 +51,7 @@ final class CountryTypeExtension extends AbstractTypeExtension
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $options = [
                 'label' => 'sylius.form.country.name',
+                'choice_loader' => null,
             ];
 
             $country = $event->getData();

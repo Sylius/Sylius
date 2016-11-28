@@ -51,14 +51,6 @@ class ProductTranslationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_product_translation';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_product_translation';

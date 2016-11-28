@@ -57,14 +57,6 @@ class ProductGenerateVariantsType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_product_generate_variants';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_product_generate_variants';

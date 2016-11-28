@@ -35,7 +35,6 @@ class BooleanFilterType extends AbstractType
                 'data_class' => null,
                 'required' => false,
                 'placeholder' => 'sylius.ui.all',
-                'choices_as_values' => true,
             ])
             ->setDefined('field')
             ->setAllowedTypes('field', 'string')
@@ -48,14 +47,6 @@ class BooleanFilterType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_grid_filter_boolean';
     }
 
     /**

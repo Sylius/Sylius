@@ -38,14 +38,6 @@ class ProductOptionValueType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_product_option_value';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_product_option_value';

@@ -35,14 +35,6 @@ final class ShopUserType extends UserType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_shop_user';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_shop_user';

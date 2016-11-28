@@ -12,8 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Doctrine\DBAL\Schema\AbstractSchemaManager;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
+use Symfony\Component\Console\Question\Question;
 
 final class InstallDatabaseCommand extends AbstractInstallCommand
 {
@@ -57,7 +60,7 @@ EOT
         if ($input->getOption('no-interaction')) {
             $commands['doctrine:schema:update'] = ['--force' => true];
         } else {
-            $commands = array_merge($commands, $this->setupDatabase($output));
+            $commands = array_merge($commands, $this->setupDatabase($input, $output));
         }
 
         $commands[] = 'cache:clear';
@@ -127,34 +130,39 @@ EOT
     }
 
     /**
+     * @param InputInterface $input
      * @param OutputInterface $output
      *
      * @return array
      */
-    protected function setupDatabase(OutputInterface $output)
+    protected function setupDatabase(InputInterface $input, OutputInterface $output)
     {
-        $commands = [];
-        $dialog = $this->getHelper('dialog');
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
 
-        if ($dialog->askConfirmation($output, '<question>It appears that your database already exists. Would you like to reset it? (y/N)</question> ', false)) {
-            $commands['doctrine:database:drop'] = ['--force' => true];
-            $commands[] = 'doctrine:database:create';
-            $commands[] = 'doctrine:schema:create';
-
-            return $commands;
+        $question = new ConfirmationQuestion('It appears that your database already exists. Would you like to reset it? (y/N)', false);
+        if ($questionHelper->ask($input, $output, $question)) {
+            return [
+                'doctrine:database:drop' => ['--force' => true],
+                'doctrine:database:create' => [],
+                'doctrine:schema:create' => [],
+            ];
         }
 
         if (!$this->isSchemaPresent()) {
-            $commands[] = 'doctrine:schema:create';
-
-            return $commands;
+            return [
+                'doctrine:schema:create' => [],
+            ];
         }
 
-        if ($dialog->askConfirmation($output, '<question>Seems like your database contains schema. Do you want to reset it? (y/N)</question> ', false)) {
-            $commands['doctrine:schema:drop'] = ['--force' => true];
-            $commands[] = 'doctrine:schema:create';
+        $question = new ConfirmationQuestion('Seems like your database contains schema. Do you want to reset it? (y/N)', false);
+        if ($questionHelper->ask($input, $output, $question)) {
+            return [
+                'doctrine:schema:drop' => ['--force' => true],
+                'doctrine:schema:create' => [],
+            ];
         }
 
-        return $commands;
+        return [];
     }
 }

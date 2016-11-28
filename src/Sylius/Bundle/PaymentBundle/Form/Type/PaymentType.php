@@ -47,17 +47,8 @@ class PaymentType extends AbstractResourceType
                     'sylius.form.payment.state.unknown' => PaymentInterface::STATE_UNKNOWN,
                 ],
                 'label' => 'sylius.form.payment.state.header',
-                'choices_as_values' => true,
             ])
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_payment';
     }
 
     /**

@@ -47,14 +47,6 @@ final class ProductReviewType extends ReviewType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_product_review';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_product_review';

@@ -49,7 +49,6 @@ class ProductTypeExtension extends AbstractTypeExtension
             ->add('variantSelectionMethod', ChoiceType::class, [
                 'choices' => array_flip(Product::getVariantSelectionMethodLabels()),
                 'label' => 'sylius.form.product.variant_selection_method',
-                'choices_as_values' => true,
             ])
             ->add('images', CollectionType::class, [
                 'entry_type' => ProductImageType::class,

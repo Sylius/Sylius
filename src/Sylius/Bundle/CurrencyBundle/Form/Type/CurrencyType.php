@@ -37,17 +37,8 @@ class CurrencyType extends AbstractResourceType
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber(\Symfony\Component\Form\Extension\Core\Type\CurrencyType::class, [
                 'label' => 'sylius.form.currency.code',
-                'choices_as_values' => true,
             ]))
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_currency';
     }
 
     /**

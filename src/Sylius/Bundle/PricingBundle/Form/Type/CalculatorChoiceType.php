@@ -40,7 +40,6 @@ class CalculatorChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => array_flip($this->calculators),
-            'choices_as_values' => true,
         ]);
     }
 
@@ -50,14 +49,6 @@ class CalculatorChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_price_calculator_choice';
     }
 
     /**

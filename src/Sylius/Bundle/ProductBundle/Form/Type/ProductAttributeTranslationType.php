@@ -21,14 +21,6 @@ class ProductAttributeTranslationType extends AttributeTranslationType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_product_attribute_translation';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_product_attribute_translation';

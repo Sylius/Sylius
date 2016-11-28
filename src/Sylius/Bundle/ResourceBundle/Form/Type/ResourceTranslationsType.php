@@ -61,7 +61,6 @@ final class ResourceTranslationsType extends AbstractType implements EventSubscr
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'choices_as_values' => true,
         ]);
     }
 
@@ -125,14 +124,6 @@ final class ResourceTranslationsType extends AbstractType implements EventSubscr
     public function getParent()
     {
         return CollectionType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_translations';
     }
 
     /**

@@ -45,7 +45,7 @@ class MoneyType extends AbstractType
         $builder
             ->resetViewTransformers()
             ->addViewTransformer(new SyliusMoneyTransformer(
-                $options['precision'],
+                $options['scale'],
                 $options['grouping'],
                 null,
                 $options['divisor']
@@ -80,14 +80,6 @@ class MoneyType extends AbstractType
                 'divisor' => 100,
             ])
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_money';
     }
 
     /**

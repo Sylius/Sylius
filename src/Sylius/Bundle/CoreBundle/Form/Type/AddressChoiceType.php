@@ -54,7 +54,6 @@ class AddressChoiceType extends AbstractType
             'customer' => null,
             'label' => false,
             'placeholder' => false,
-            'choices_as_values' => true,
         ]);
     }
 
@@ -64,14 +63,6 @@ class AddressChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_address_choice';
     }
 
     /**

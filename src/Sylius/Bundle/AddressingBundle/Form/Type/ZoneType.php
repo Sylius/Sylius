@@ -67,7 +67,6 @@ class ZoneType extends AbstractResourceType
                     'label' => 'sylius.form.zone.scope',
                     'placeholder' => 'sylius.form.zone.select_scope',
                     'required' => false,
-                    'choices_as_values' => true,
                 ])
             ;
         }
@@ -89,14 +88,6 @@ class ZoneType extends AbstractResourceType
                 'delete_empty' => true,
             ]);
         });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_zone';
     }
 
     /**

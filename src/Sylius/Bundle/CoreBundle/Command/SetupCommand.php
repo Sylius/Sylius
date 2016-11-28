@@ -15,11 +15,14 @@ use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\ConstraintViolationListInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -70,6 +73,9 @@ EOT
      */
     protected function setupAdministratorUser(InputInterface $input, OutputInterface $output)
     {
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
+
         $output->writeln('Create your administrator account.');
 
         $userManager = $this->get('sylius.manager.admin_user');
@@ -90,7 +96,17 @@ EOT
             $user->setPlainPassword('sylius');
         } else {
             do {
-                $email = $this->ask($output, 'E-Mail:', [new NotBlank(), new Email()]);
+                $question = new Question('E-mail: ');
+                $question->setValidator(function ($value) use ($output) {
+                    /** @var ConstraintViolationListInterface $errors */
+                    $errors = $this->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
+                    foreach ($errors as $error) {
+                        $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
+                    }
+
+                    return count($errors) === 0;
+                });
+                $email = $questionHelper->ask($input, $output, $question);
                 $exists = null !== $userRepository->findOneByEmail($email);
 
                 if ($exists) {
@@ -99,7 +115,7 @@ EOT
             } while ($exists);
 
             $user->setEmail($email);
-            $user->setPlainPassword($this->getAdministratorPassword($output));
+            $user->setPlainPassword($this->getAdministratorPassword($input, $output));
         }
 
         $user->setEnabled(true);
@@ -196,15 +212,40 @@ EOT
     }
 
     /**
+     * @param InputInterface $input
      * @param OutputInterface $output
      *
      * @return mixed
      */
-    private function getAdministratorPassword(OutputInterface $output)
+    private function getAdministratorPassword(InputInterface $input, OutputInterface $output)
     {
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
+
+        $validator = function ($value) use ($output) {
+            /** @var ConstraintViolationListInterface $errors */
+            $errors = $this->get('validator')->validate($value, [new NotBlank()]);
+            foreach ($errors as $error) {
+                $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
+            }
+
+            return count($errors) === 0;
+        };
+
         do {
-            $password = $this->askHidden($output, 'Choose password:', [new NotBlank()]);
-            $repeatedPassword = $this->askHidden($output, 'Confirm password:', [new NotBlank()]);
+            $passwordQuestion = (new Question('Choose password: '))
+                ->setValidator($validator)
+                ->setHidden(true)
+                ->setHiddenFallback(false)
+            ;
+            $confirmPasswordQuestion = (new Question('Confirm password: '))
+                ->setValidator($validator)
+                ->setHidden(true)
+                ->setHiddenFallback(false)
+            ;
+
+            $password = $questionHelper->ask($input, $output, $passwordQuestion);
+            $repeatedPassword = $questionHelper->ask($input, $output, $confirmPasswordQuestion);
 
             if ($repeatedPassword !== $password) {
                 $output->writeln('<error>Passwords do not match!</error>');

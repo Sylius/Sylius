@@ -21,14 +21,6 @@ class ProductAttributeChoiceType extends AttributeChoiceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_product_attribute_choice';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_product_attribute_choice';

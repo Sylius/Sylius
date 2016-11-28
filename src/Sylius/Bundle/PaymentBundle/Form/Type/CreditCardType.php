@@ -30,7 +30,6 @@ class CreditCardType extends AbstractResourceType
             ->add('type', ChoiceType::class, [
                 'label' => 'sylius.form.credit_card.type',
                 'expanded' => true,
-                'choices_as_values' => true,
               ])
               ->add('cardholderName', TextType::class, [
                 'label' => 'sylius.form.credit_card.cardholder_name',
@@ -45,23 +44,13 @@ class CreditCardType extends AbstractResourceType
                   'choices' => $this->getMonthChoices(),
                   'choice_translation_domain' => false,
                   'label' => 'sylius.form.credit_card.expiry_month',
-                  'choices_as_values' => true,
               ])
               ->add('expiryYear', ChoiceType::class, [
                   'choices' => $this->getViableYears(),
                   'choice_translation_domain' => false,
                   'label' => 'sylius.form.credit_card.expiry_year',
-                  'choices_as_values' => true,
               ])
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_credit_card';
     }
 
     /**

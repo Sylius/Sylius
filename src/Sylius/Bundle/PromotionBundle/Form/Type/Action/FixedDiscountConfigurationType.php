@@ -41,14 +41,6 @@ class FixedDiscountConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_promotion_action_fixed_discount_configuration';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_promotion_action_fixed_discount_configuration';

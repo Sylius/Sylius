@@ -31,7 +31,6 @@ class PromotionRuleChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => array_flip($this->rules),
-            'choices_as_values' => true,
         ]);
     }
 

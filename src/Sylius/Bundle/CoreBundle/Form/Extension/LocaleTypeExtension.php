@@ -54,7 +54,7 @@ class LocaleTypeExtension extends AbstractTypeExtension
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             $options = [
                 'label' => 'sylius.form.locale.name',
-                'choices_as_values' => true,
+                'choice_loader' => null,
             ];
 
             $locale = $event->getData();

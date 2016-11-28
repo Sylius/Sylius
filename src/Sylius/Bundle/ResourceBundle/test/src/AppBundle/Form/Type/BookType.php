@@ -28,19 +28,11 @@ class BookType extends AbstractResourceType
     {
         $builder
             ->add('translations', ResourceTranslationsType::class, [
-                'entry_type' => 'app_book_translation',
+                'entry_type' => BookTranslationType::class,
                 'label' => 'title',
             ])
             ->add('author', TextType::class)
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'app_book';
     }
 
     /**

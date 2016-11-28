@@ -40,14 +40,6 @@ final class AdminUserType extends UserType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_admin_user';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_admin_user';

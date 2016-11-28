@@ -21,14 +21,6 @@ class ProductAttributeValueType extends AttributeValueType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_product_attribute_value';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_product_attribute_value';

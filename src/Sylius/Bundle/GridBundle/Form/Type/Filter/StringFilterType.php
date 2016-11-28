@@ -41,7 +41,6 @@ class StringFilterType extends AbstractType
                     'sylius.ui.in' => StringFilter::TYPE_IN,
                     'sylius.ui.not_in' => StringFilter::TYPE_NOT_IN,
                 ],
-                'choices_as_values' => true,
             ])
             ->add('value', TextType::class, ['required' => false])
         ;
@@ -59,14 +58,6 @@ class StringFilterType extends AbstractType
             ->setDefined('fields')
             ->setAllowedTypes('fields', 'array')
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_grid_filter_string';
     }
 
     /**

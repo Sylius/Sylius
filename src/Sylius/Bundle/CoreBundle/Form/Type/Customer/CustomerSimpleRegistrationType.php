@@ -76,14 +76,6 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
-    {
-        return 'sylius_customer_simple_registration';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getBlockPrefix()
     {
         return 'sylius_customer_simple_registration';

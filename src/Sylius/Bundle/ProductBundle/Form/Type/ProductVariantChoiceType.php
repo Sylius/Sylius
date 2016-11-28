@@ -50,7 +50,6 @@ class ProductVariantChoiceType extends AbstractType
                 'choice_translation_domain' => false,
                 'multiple' => false,
                 'expanded' => true,
-                'choices_as_values' => true,
             ])
             ->setRequired([
                 'product',
@@ -65,14 +64,6 @@ class ProductVariantChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_product_variant_choice';
     }
 
     /**

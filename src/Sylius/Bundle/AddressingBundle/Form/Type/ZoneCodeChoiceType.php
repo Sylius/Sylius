@@ -61,7 +61,6 @@ class ZoneCodeChoiceType extends AbstractType
                 'choice_translation_domain' => false,
                 'label' => 'sylius.form.zone.types.zone',
                 'placeholder' => 'sylius.form.zone.select',
-                'choices_as_values' => true,
             ])
         ;
     }
@@ -72,14 +71,6 @@ class ZoneCodeChoiceType extends AbstractType
     public function getParent()
     {
         return ChoiceType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return 'sylius_zone_code_choice';
     }
 
     /**
