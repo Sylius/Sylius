@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-abstract class DiscountPromotionActionCommand implements PromotionActionCommandInterface
+abstract class DiscountPromotionActionCommand
 {
     /**
      * @param array $configuration

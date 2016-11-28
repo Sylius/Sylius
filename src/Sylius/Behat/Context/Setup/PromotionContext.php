@@ -250,19 +250,24 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^(this promotion) gives ("(?:€|£|\$)[^"]+") in base currency or ("(?:€|£|\$)[^"]+") in "([^"]+)" discount to every order$/
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") discount to every order in the ("[^"]+" channel) and ("(?:€|£|\$)[^"]+") discount to every order in the ("[^"]+" channel)$/
      */
-    public function itGivesFixedDiscountInDifferentCurrencyToEveryOrder(
+    public function thisPromotionGivesDiscountToEveryOrderInTheChannelAndDiscountToEveryOrderInTheChannel(
         PromotionInterface $promotion,
-        $baseDiscount,
-        $currencyDiscount,
-        $currencyCode
+        $firstChannelDiscount,
+        ChannelInterface $firstChannel,
+        $secondChannelDiscount,
+        ChannelInterface $secondChannel
     ) {
-        $this->createFixedPromotion($promotion, $baseDiscount, [
-            'amounts' => [
-                $currencyCode => $currencyDiscount,
-            ],
-        ]);
+        /** @var PromotionActionInterface $action */
+        $action = $this->actionFactory->createFixedDiscount($firstChannelDiscount, $firstChannel->getCode());
+        $action->setConfiguration(array_merge($action->getConfiguration(), [$secondChannel->getCode() => ['amount' => $secondChannelDiscount]]));
+
+        $promotion->addChannel($firstChannel);
+        $promotion->addChannel($secondChannel);
+        $promotion->addAction($action);
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -523,7 +528,7 @@ final class PromotionContext implements Context
         $orderDiscount,
         $targetAmount
     ) {
-        $orderDiscountAction = $this->actionFactory->createFixedDiscount($orderDiscount);
+        $orderDiscountAction = $this->actionFactory->createFixedDiscount($orderDiscount, $this->sharedStorage->get('channel')->getCode());
         $promotion->addAction($orderDiscountAction);
 
         $rule = $this->ruleFactory->createItemTotal($targetAmount);
@@ -677,7 +682,14 @@ final class PromotionContext implements Context
      */
     private function createUnitFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
     {
-        $this->persistPromotion($promotion, $this->actionFactory->createUnitFixedDiscount($discount), $configuration, $rule);
+        $channelCode = $this->sharedStorage->get('channel')->getCode();
+
+        $this->persistPromotion(
+            $promotion,
+            $this->actionFactory->createUnitFixedDiscount($discount, $channelCode),
+            [$channelCode => $configuration],
+            $rule
+        );
     }
 
     /**
@@ -688,18 +700,33 @@ final class PromotionContext implements Context
      */
     private function createUnitPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
     {
-        $this->persistPromotion($promotion, $this->actionFactory->createUnitPercentageDiscount($discount), $configuration, $rule);
+        $channelCode = $this->sharedStorage->get('channel')->getCode();
+
+        $this->persistPromotion(
+            $promotion,
+            $this->actionFactory->createUnitPercentageDiscount($discount, $channelCode),
+            [$channelCode => $configuration],
+            $rule
+        );
     }
 
     /**
      * @param PromotionInterface $promotion
      * @param int $discount
      * @param array $configuration
-     * @param PromotionRuleInterface $rule
+     * @param PromotionRuleInterface|null $rule
+     * @param ChannelInterface|null $channel
      */
-    private function createFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
-    {
-        $this->persistPromotion($promotion, $this->actionFactory->createFixedDiscount($discount), $configuration, $rule);
+    private function createFixedPromotion(
+        PromotionInterface $promotion,
+        $discount,
+        array $configuration = [],
+        PromotionRuleInterface $rule = null,
+        ChannelInterface $channel = null
+    ) {
+        $channelCode = (null !== $channel) ? $channel->getCode() : $this->sharedStorage->get('channel')->getCode();
+
+        $this->persistPromotion($promotion, $this->actionFactory->createFixedDiscount($discount, $channelCode), $configuration, $rule);
     }
 
     /**
@@ -721,7 +748,7 @@ final class PromotionContext implements Context
      */
     private function persistPromotion(PromotionInterface $promotion, PromotionActionInterface $action, array $configuration, PromotionRuleInterface $rule = null)
     {
-        $configuration = array_merge($action->getConfiguration(), $configuration);
+        $configuration = array_merge_recursive($action->getConfiguration(), $configuration);
         $action->setConfiguration($configuration);
 
         $promotion->addAction($action);

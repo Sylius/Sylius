@@ -48,17 +48,17 @@ class PromotionActionFactory implements PromotionActionFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createFixedDiscount($baseAmount)
+    public function createFixedDiscount($amount, $channelCode)
     {
-        return $this->createAction(FixedDiscountPromotionActionCommand::TYPE, ['base_amount' => $baseAmount]);
+        return $this->createAction(FixedDiscountPromotionActionCommand::TYPE, [$channelCode => ['amount' => $amount]]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createUnitFixedDiscount($baseAmount)
+    public function createUnitFixedDiscount($amount, $channelCode)
     {
-        return $this->createAction(UnitFixedDiscountPromotionActionCommand::TYPE, ['base_amount' => $baseAmount]);
+        return $this->createAction(UnitFixedDiscountPromotionActionCommand::TYPE, [$channelCode => ['amount' => $amount]]);
     }
 
     /**
@@ -72,9 +72,9 @@ class PromotionActionFactory implements PromotionActionFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createUnitPercentageDiscount($percentage)
+    public function createUnitPercentageDiscount($percentage, $channelCode)
     {
-        return $this->createAction(UnitPercentageDiscountPromotionActionCommand::TYPE, ['percentage' => $percentage]);
+        return $this->createAction(UnitPercentageDiscountPromotionActionCommand::TYPE, [$channelCode => ['percentage' => $percentage]]);
     }
 
     /**

@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionActionInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class BuildPromotionActionFormSubscriber extends AbstractConfigurationSubscriber
+class BuildPromotionActionFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
      * @param PromotionActionInterface $action

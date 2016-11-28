@@ -52,7 +52,7 @@ class ProductFilterConfigurationType extends AbstractType
     {
         $builder
             ->add('products', 'sylius_product_choice', [
-                'label' => 'sylius.form.promotion_filter.product.products',
+                'label' => 'sylius.form.promotion_filter.products',
                 'multiple' => true,
                 'required' => false,
             ])
