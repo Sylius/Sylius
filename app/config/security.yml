@@ -61,6 +61,7 @@ security:
                 path: sylius_shop_logout
                 target: sylius_shop_login
                 invalidate_session: false
+                success_handler: sylius.handler.shop_user_logout
             anonymous: true
 
         dev:
