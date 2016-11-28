@@ -30,10 +30,10 @@
         </service>
 
         <service id="sylius.behat.context.hook.elasticsearch" class="Sylius\Behat\Context\Hook\ElasticsearchContext">
-            <argument type="service" id="fos_elastica.index_manager" container="symfony_shared" />
-            <argument type="service" id="fos_elastica.provider_registry" container="symfony_shared" />
-            <argument type="service" id="fos_elastica.resetter" container="symfony_shared" />
-            <tag name="sylius.behat.context" />
+            <argument type="service" id="__symfony_shared__.fos_elastica.index_manager" />
+            <argument type="service" id="__symfony_shared__.fos_elastica.provider_registry" />
+            <argument type="service" id="__symfony_shared__.fos_elastica.resetter" />
+            <tag name="fob.context_service" />
         </service>
     </services>
 </container>

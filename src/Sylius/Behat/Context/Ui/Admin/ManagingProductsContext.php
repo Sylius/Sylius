@@ -120,7 +120,7 @@ final class ManagingProductsContext implements Context
         ProductReviewIndexPageInterface $productReviewIndexPage,
         IndexPerTaxonPageInterface $indexPerTaxonPage,
         CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
         ElasticsearchCheckerInterface $elasticsearchChecker
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -277,6 +277,8 @@ final class ManagingProductsContext implements Context
      */
     public function iAmBrowsingProductsFromTaxon(TaxonInterface $taxon)
     {
+        $this->elasticsearchChecker->refreshIndex();
+
         $this->indexPerTaxonPage->open(['taxonId' => $taxon->getId()]);
     }
 

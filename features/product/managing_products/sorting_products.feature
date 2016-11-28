@@ -15,14 +15,14 @@ Feature: Sorting listed products
         And this product is named "Ekstremalny Mops" in the "Polish (Poland)" locale
         And I am logged in as an administrator
 
-    @ui
+    @ui @elasticsearch
     Scenario: Products are sorted by ascending codes by default
         Given I am browsing products
         Then I should see 3 products in the list
         And I should see a product with code "L_PUG"
         But the first product on the list should have code "B_PUG"
 
-    @ui
+    @ui @elasticsearch
     Scenario: Changing the codes sorting order
         Given I am browsing products
         When I switch the way products are sorted by code
@@ -30,7 +30,7 @@ Feature: Sorting listed products
         And I should see a product with code "B_PUG"
         But the first product on the list should have code "X_PUG"
 
-    @ui
+    @ui @elasticsearch
     Scenario: Products can be sorted by their names
         Given I am browsing products
         When I start sorting products by name
@@ -38,7 +38,7 @@ Feature: Sorting listed products
         And I should see a product with name "Xtreme Pug"
         But the first product on the list should have name "Berserk Pug"
 
-    @ui
+    @ui @elasticsearch
     Scenario: Changing the names sorting order
         Given I am browsing products
         And the products are already sorted by name
@@ -47,7 +47,7 @@ Feature: Sorting listed products
         And I should see a product with name "Berserk Pug"
         But the first product on the list should have name "Xtreme Pug"
 
-    @ui
+    @ui @elasticsearch
     Scenario: Products are always sorted in the default locale even if another is active
         Given I change my locale to "Polish (Poland)"
         And I am browsing products
@@ -56,7 +56,7 @@ Feature: Sorting listed products
         And the first product on the list should have name "Berserk Pug"
         But I should not see any product with name "Szałowy Mops"
 
-    @ui
+    @ui @elasticsearch
     Scenario: Changing the names sorting order with active locale different than default
         Given I change my locale to "Polish (Poland)"
         And I am browsing products

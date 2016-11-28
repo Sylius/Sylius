@@ -68,8 +68,8 @@
             <argument type="service" id="mink.default_session" />
             <argument type="service" id="__symfony__.router" />
         </service>
-        <service id="sylius.behat.elasticsearch_checker" class="Sylius\Behat\Service\ElasticsearchChecker" scope="scenario" public="false">
-            <argument type="service" id="fos_elastica.client" />
+        <service id="sylius.behat.elasticsearch_checker" class="Sylius\Behat\Service\ElasticsearchChecker" public="false">
+            <argument type="service" id="__symfony__.fos_elastica.client" />
         </service>
 
         <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" public="false"/>

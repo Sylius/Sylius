@@ -35,6 +35,18 @@ sylius_grid:
                                     bool:
                                         must:
                                             term: { 'channels.code': "expr:service('sylius.context.channel').getChannel().getCode()" }
+            sorting:
+                position: asc
+            fields:
+                createdAt:
+                    type: datetime
+                    label: sylius.ui.date
+                    sortable: ~
+                    options:
+                        format: m/d/Y
+                position:
+                    type: string # not use but expected
+                    sortable: productTaxon.position
             filters:
                 _all:
                     type: elastica
