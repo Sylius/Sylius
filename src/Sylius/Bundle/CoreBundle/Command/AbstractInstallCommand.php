@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Command;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Helper\QuestionHelper;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
@@ -75,12 +76,12 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
      */
     protected function renderTable(array $headers, array $rows, OutputInterface $output)
     {
-        $table = $this->getHelper('table');
+        $table = new Table($output);
 
         $table
             ->setHeaders($headers)
             ->setRows($rows)
-            ->render($output);
+            ->render();
     }
 
     /**

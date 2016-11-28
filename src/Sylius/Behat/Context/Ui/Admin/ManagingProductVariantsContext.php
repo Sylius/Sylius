@@ -161,7 +161,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I set its(?:| default) price to ("(?:-)?(?:€|£|\$)[^"]+") for "([^"]+)" channel$/
+     * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      * @When I do not set its price
      */
     public function iSetItsPriceTo($price = null, $channel = null)

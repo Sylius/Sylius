@@ -66,11 +66,6 @@
                  label="sylius.form.shipping_calculator.per_unit_rate_configuration.label" />
         </service>
 
-        <service id="sylius.form.type.shipment_ship" class="Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType">
-            <argument>%sylius.model.shipment.class%</argument>
-            <tag name="form.type" alias="sylius_shipment_ship" />
-        </service>
-
         <service id="sylius.processor.shipment_processor" class="Sylius\Component\Shipping\Processor\ShipmentProcessor">
             <argument type="service" id="sm.factory" />
         </service>

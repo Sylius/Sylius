@@ -98,7 +98,7 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
                 ->setDefault('calculator', function (Options $options) {
                     $configuration = [];
                     /** @var ChannelInterface $channel */
-                    foreach ($options->get('channels') as $channel) {
+                    foreach ($options['channels'] as $channel) {
                         $configuration[$channel->getCode()] = ['amount' => $this->faker->randomNumber(4)];
                     }
 
