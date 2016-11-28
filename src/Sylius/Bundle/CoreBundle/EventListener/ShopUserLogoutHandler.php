@@ -11,14 +11,16 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
+use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
+use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Component\Security\Http\Logout\DefaultLogoutSuccessHandler;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ShopUserLogoutHandler implements LogoutSuccessHandlerInterface
+final class ShopUserLogoutHandler extends DefaultLogoutSuccessHandler
 {
     /**
      * @var SessionInterface
@@ -26,11 +28,26 @@ final class ShopUserLogoutHandler implements LogoutSuccessHandlerInterface
     private $session;
 
     /**
-     * @param SessionInterface $session
+     * @var ChannelContextInterface
      */
-    public function __construct(SessionInterface $session)
-    {
+    private $channelContext;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param SessionInterface $session
+     * @param ChannelContextInterface $channelContext
+     */
+    public function __construct(
+        HttpUtils $httpUtils,
+        $targetUrl,
+        SessionInterface $session,
+        ChannelContextInterface $channelContext
+    ) {
+        parent::__construct($httpUtils, $targetUrl);
+
         $this->session = $session;
+        $this->channelContext = $channelContext;
     }
 
     /**
@@ -38,6 +55,9 @@ final class ShopUserLogoutHandler implements LogoutSuccessHandlerInterface
      */
     public function onLogoutSuccess(Request $request)
     {
-        $this->session->clear();
+        $channel = $this->channelContext->getChannel();
+        $this->session->remove('_sylius.cart.'.$channel->getCode());
+
+        return parent::onLogoutSuccess($request);
     }
 }

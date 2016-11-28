@@ -12,11 +12,10 @@
 namespace Sylius\Component\Core\Repository;
 
 use Doctrine\ORM\QueryBuilder;
-use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepositoryInterface;
 
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
@@ -77,6 +76,14 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return OrderInterface|null
      */
     public function findCartByChannel($id, ChannelInterface $channel);
+
+    /**
+     * @param ChannelInterface $channel
+     * @param CustomerInterface $customer
+     *
+     * @return OrderInterface|null
+     */
+    public function findCartByChannelAndCustomer(ChannelInterface $channel, CustomerInterface $customer);
 
     /**
      * @param ChannelInterface $channel

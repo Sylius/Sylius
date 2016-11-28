@@ -10,8 +10,8 @@ Feature: Maintaining previous cart after authorization
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
         And I log in as "robb@stark.com" with "KingInTheNorth" password
 
-    @ui @todo
-    Scenario: Having cart maintained after logging out and next in
+    @ui
+    Scenario: Having cart maintained after logging out and then logging in
         Given I have product "Stark T-Shirt" in the cart
         When I log out
         And I log in as "robb@stark.com" with "KingInTheNorth" password
