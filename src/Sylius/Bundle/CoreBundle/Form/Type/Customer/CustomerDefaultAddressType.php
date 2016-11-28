@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Customer;
 
+use Sylius\Bundle\CoreBundle\Form\Type\AddressChoiceType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -27,7 +27,7 @@ class CustomerDefaultAddressType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('defaultAddress', 'sylius_address_choice', [
+            ->add('defaultAddress', AddressChoiceType::class, [
                 'customer' => $options['customer'],
             ])
         ;

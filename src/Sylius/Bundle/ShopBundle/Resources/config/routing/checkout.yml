@@ -17,7 +17,7 @@ sylius_shop_checkout_address:
             flash: false
             template: SyliusShopBundle:Checkout:address.html.twig
             form:
-                type: sylius_checkout_address
+                type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType
                 options:
                     customer: expr:service('sylius.context.customer').getCustomer()
             repository:
@@ -39,7 +39,7 @@ sylius_shop_checkout_select_shipping:
             event: select_shipping
             flash: false
             template: SyliusShopBundle:Checkout:selectShipping.html.twig
-            form: sylius_checkout_select_shipping
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType
             repository:
                 method: find
                 arguments: [expr:service('sylius.context.cart').getCart()]
@@ -59,7 +59,7 @@ sylius_shop_checkout_select_payment:
             event: payment
             flash: false
             template: SyliusShopBundle:Checkout:selectPayment.html.twig
-            form: sylius_checkout_select_payment
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType
             repository:
                 method: find
                 arguments: [expr:service('sylius.context.cart').getCart()]
@@ -90,6 +90,6 @@ sylius_shop_checkout_complete:
                 parameters:
                     paymentId: expr:service('sylius.context.cart').getCart().getLastNewPayment().getId()
             form:
-                type: sylius_checkout_complete
+                type: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType
                 options:
                     validation_groups: 'sylius_checkout_complete'

@@ -72,7 +72,7 @@ sylius_shop_account_address_book_set_default:
             template: SyliusShopBundle:Account/AddressBook:_defaultAddressForm.html.twig
             section: shop_account
             form:
-                type: sylius_customer_default_address
+                type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerDefaultAddressType
                 options:
                     customer: 'expr:service("sylius.context.customer").getCustomer()'
             repository:

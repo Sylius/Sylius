@@ -60,7 +60,7 @@ class CurrencyBasedDiscountAmountType extends AbstractType
             $builder->add($currency->getCode(), MoneyType::class, [
                 'label' => $currency->getCode(),
                 'constraints' => [
-                    new Type(['type' => 'numeric']),
+                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
                 ],
                 'required' => false,
             ]);

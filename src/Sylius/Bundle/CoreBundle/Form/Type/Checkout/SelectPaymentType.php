@@ -26,7 +26,7 @@ class SelectPaymentType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('payments', CollectionType::class, [
-            'entry_type' => 'sylius_checkout_payment',
+            'entry_type' => PaymentType::class,
             'label' => false,
         ]);
     }

@@ -14,11 +14,16 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddDefaultBillingAddressOnOrderFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -43,8 +48,26 @@ class AddressType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.checkout.addressing.different_billing_address',
             ])
-            ->addEventSubscriber(new AddDefaultBillingAddressOnOrderFormSubscriber())
-            ->addEventSubscriber(new AddCustomerGuestTypeFormSubscriber('customer'))
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
+                $form = $event->getForm();
+                $resource = $event->getData();
+                $customer = $options['customer'];
+
+                Assert::isInstanceOf($resource, CustomerAwareInterface::class);
+
+                if (null === $customer && null === $resource->getCustomer()) {
+                    $form->add('customer', CustomerGuestType::class, ['constraints' => [new Valid()]]);
+                }
+            })
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
+                $orderData = $event->getData();
+
+                if (isset($orderData['shippingAddress']) && (!isset($orderData['differentBillingAddress']) || false === $orderData['differentBillingAddress'])) {
+                    $orderData['billingAddress'] = $orderData['shippingAddress'];
+
+                    $event->setData($orderData);
+                }
+            })
         ;
     }
 

@@ -12,28 +12,6 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <parameters>
-        <parameter key="sylius.form.type.product_image.class">Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType</parameter>
-        <parameter key="sylius.form.type.product_taxon_choice.class">Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType</parameter>
-        <parameter key="sylius.form.type.taxon_image.class">Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonImageType</parameter>
-
-        <parameter key="sylius.validation_groups.customer" type="collection">
-            <parameter>sylius</parameter>
-        </parameter>
-        <parameter key="sylius.validation_groups.customer_guest" type="collection">
-            <parameter>sylius_customer_guest</parameter>
-        </parameter>
-        <parameter key="sylius.validation_groups.customer_simple_registration" type="collection">
-            <parameter>sylius</parameter>
-            <parameter>sylius_user_registration</parameter>
-        </parameter>
-        <parameter key="sylius.validation_groups.customer_registration" type="collection">
-            <parameter>sylius</parameter>
-            <parameter>sylius_customer_profile</parameter>
-            <parameter>sylius_user_registration</parameter>
-        </parameter>
-    </parameters>
-
     <services>
         <service id="sylius.form.extension.type.country" class="Sylius\Bundle\CoreBundle\Form\Extension\CountryTypeExtension">
             <argument type="service" id="sylius.repository.country" />
@@ -121,28 +99,22 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.product_image" class="%sylius.form.type.product_image.class%">
+        <service id="sylius.form.type.product_image" class="Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType">
             <argument>%sylius.model.product_image.class%</argument>
-            <tag name="form.type" alias="sylius_product_image" />
+            <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.product_taxon_position" class="Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonPositionType">
-            <tag name="form.type" alias="sylius_product_taxon_position" />
-        </service>
-        <service id="sylius.form.type.product_taxon_position_collection" class="Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonPositionCollectionType">
-            <tag name="form.type" alias="sylius_product_taxon_position_collection" />
-        </service>
-        <service id="sylius.form.type.product_taxon_choice" class="%sylius.form.type.product_taxon_choice.class%">
+        <service id="sylius.form.type.product_taxon_choice" class="Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType">
             <argument type="service" id="sylius.factory.product_taxon" />
-            <tag name="form.type" alias="sylius_product_taxon_choice" />
+            <tag name="form.type" />
         </service>
-        <service id="sylius.form.type.taxon_image" class="%sylius.form.type.taxon_image.class%">
+        <service id="sylius.form.type.taxon_image" class="Sylius\Bundle\CoreBundle\Form\Type\Taxon\TaxonImageType">
             <argument>%sylius.model.taxon_image.class%</argument>
-            <tag name="form.type" alias="sylius_taxon_image" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.tax_calculation_strategy_choice" class="Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType">
             <argument>%sylius.tax_calculation_strategies%</argument>
-            <tag name="form.type" alias="sylius_tax_calculation_strategy_choice" />
+            <tag name="form.type" />
         </service>
 
         <!-- promotions -->
@@ -176,7 +148,7 @@
         <service id="sylius.form.type.price_calculator.channel_and_currency_based" class="Sylius\Bundle\CoreBundle\Form\Type\Pricing\ChannelAndCurrencyBasedConfigurationType">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.currency" />
-            <tag name="form.type" alias="sylius_price_calculator_channel_and_currency_based" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer">
@@ -188,37 +160,35 @@
 
         <service id="sylius.form.type.customer_guest" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType">
             <argument>%sylius.model.customer.class%</argument>
-            <argument>%sylius.validation_groups.customer_guest%</argument>
-            <argument type="service" id="sylius.form.event_subscriber.set_customer" />
-            <tag name="form.type" alias="sylius_customer_guest" />
+            <argument type="collection"><argument>sylius_customer_guest</argument></argument>
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.customer_simple_registration" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerSimpleRegistrationType">
             <argument>%sylius.model.customer.class%</argument>
-            <argument>%sylius.validation_groups.customer_simple_registration%</argument>
+            <argument type="collection"><argument>sylius</argument><argument>sylius_user_registration</argument></argument>
             <argument type="service" id="sylius.repository.customer" />
-            <tag name="form.type" alias="sylius_customer_simple_registration" />
+            <tag name="form.type" />
         </service>
         <service id="sylius.form.type.customer_registration" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType">
             <argument>%sylius.model.customer.class%</argument>
-            <argument>%sylius.validation_groups.customer_registration%</argument>
+            <argument type="collection">
+                <argument>sylius</argument>
+                <argument>sylius_user_registration</argument>
+                <argument>sylius_customer_profile</argument>
+            </argument>
             <argument type="service" id="sylius.repository.customer" />
-            <tag name="form.type" alias="sylius_customer_registration" />
-        </service>
-        <service id="sylius.form.type.customer_default_address" class="Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerDefaultAddressType">
-            <tag name="form.type" alias="sylius_customer_default_address" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.address_choice" class="Sylius\Bundle\CoreBundle\Form\Type\AddressChoiceType">
             <argument type="service" id="sylius.repository.address" />
-            <tag name="form.type" alias="sylius_address_choice" />
+            <tag name="form.type" />
         </service>
 
         <service id="sylius.form.type.add_to_cart" class="Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType">
             <argument>Sylius\Bundle\OrderBundle\Controller\AddToCartCommand</argument>
             <argument type="collection"><argument>sylius</argument></argument>
-            <tag name="form.type" />
-        </service>
-        <service id="sylius.form.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Type\Order\CartItemType">
             <tag name="form.type" />
         </service>
     </services>

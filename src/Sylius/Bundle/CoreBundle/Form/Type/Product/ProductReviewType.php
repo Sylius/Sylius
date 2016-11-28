@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Product;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType;
 use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,7 +39,7 @@ final class ProductReviewType extends ReviewType
             Assert::isInstanceOf($review, ReviewInterface::class);
 
             if (null === $review->getAuthor()) {
-                $form->add('author', 'sylius_customer_guest', ['constraints' => [new Valid()]]);
+                $form->add('author', CustomerGuestType::class, ['constraints' => [new Valid()]]);
             }
         });
     }
