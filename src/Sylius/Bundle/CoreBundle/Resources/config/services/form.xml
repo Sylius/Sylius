@@ -99,7 +99,7 @@
             <argument type="service" id="sylius.repository.product" />
             <tag name="form.type" alias="sylius_promotion_rule_contains_product_configuration" />
         </service>
-        <service id="sylius.form.type.promotion_action.configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionActionConfiguration" />
+        <service id="sylius.form.type.promotion.configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionConfigurationType" />
         <service id="sylius.form.type.promotion_action.filters" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionFiltersType">
             <tag name="form.type" alias="sylius_promotion_filters" />
         </service>
@@ -152,6 +152,12 @@
             <argument type="service" id="sylius.registry_promotion_action" />
             <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" alias="sylius_promotion_action" />
+        </service>
+        <service id="sylius.form.type.promotion_rule" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionRuleType">
+            <argument>%sylius.model.promotion_action.class%</argument>
+            <argument type="service" id="sylius.registry_promotion_rule_checker" />
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="form.type" alias="sylius_promotion_rule" />
         </service>
 
         <service id="sylius.form.type.cart_item" class="Sylius\Bundle\CoreBundle\Form\Type\Order\CartItemType">

@@ -40,6 +40,9 @@
         <service id="sylius.promotion_rule_checker.contains_product" class="Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="contains_product" label="Contains product" />
         </service>
+        <service id="sylius.promotion_rule_checker.item_total" class="Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker">
+            <tag name="sylius.promotion_rule_checker" type="item_total" label="Item total" />
+        </service>
 
         <service id="sylius.promotion_action.fixed_discount" class="Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand">
             <argument type="service" id="sylius.proportional_integer_distributor" />

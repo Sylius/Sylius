@@ -39,16 +39,16 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     protected $registryIdentifier;
 
     /**
-     * @param ServiceRegistryInterface $actionRegistry
+     * @param ServiceRegistryInterface $ruleRegistry
      * @param FormFactoryInterface $factory
      * @param string|null $registryIdentifier
      */
     public function __construct(
-        ServiceRegistryInterface $actionRegistry,
+        ServiceRegistryInterface $ruleRegistry,
         FormFactoryInterface $factory,
         $registryIdentifier = null
     ) {
-        $this->registry = $actionRegistry;
+        $this->registry = $ruleRegistry;
         $this->factory = $factory;
         $this->registryIdentifier = $registryIdentifier;
     }

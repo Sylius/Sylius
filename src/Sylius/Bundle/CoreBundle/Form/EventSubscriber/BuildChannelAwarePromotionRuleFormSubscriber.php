@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionConfigurationType;
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionRuleFormSubscriber;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Promotion\Action\ChannelBasedPromotionActionCommandInterface;
+use Sylius\Component\Core\Promotion\Checker\Rule\ChannelAwareRuleCheckerInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class BuildChannelBasedPromotionActionFormSubscriber extends BuildPromotionActionFormSubscriber
+final class BuildChannelAwarePromotionRuleFormSubscriber extends BuildPromotionRuleFormSubscriber
 {
     /**
      * @var ChannelRepositoryInterface
@@ -31,18 +31,18 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends BuildPromotio
     private $channelRepository;
 
     /**
-     * @param ServiceRegistryInterface $actionRegistry
+     * @param ServiceRegistryInterface $ruleCheckerRegistry
      * @param FormFactoryInterface $factory
      * @param string $registryIdentifier
      * @param ChannelRepositoryInterface $channelRepository
      */
     public function __construct(
-        ServiceRegistryInterface $actionRegistry,
+        ServiceRegistryInterface $ruleCheckerRegistry,
         FormFactoryInterface $factory,
         $registryIdentifier,
         ChannelRepositoryInterface $channelRepository
     ) {
-        parent::__construct($actionRegistry, $factory, $registryIdentifier);
+        parent::__construct($ruleCheckerRegistry, $factory, $registryIdentifier);
 
         $this->channelRepository = $channelRepository;
     }
@@ -59,7 +59,7 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends BuildPromotio
             return;
         }
 
-        if (!$model instanceof ChannelBasedPromotionActionCommandInterface) {
+        if (!$model instanceof ChannelAwareRuleCheckerInterface) {
             $form->add($this->createConfigurationField($configuration, $data));
 
             return;
@@ -93,7 +93,7 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends BuildPromotio
         $config = [
             'auto_initialize' => false,
             'label' => $channel->getName(),
-            'currency' => $channel->getBaseCurrency()->getCode(),
+//            'currency' => $channel->getBaseCurrency()->getCode(),
         ];
 
         return $this->factory->createNamed($channel->getCode(), $configuration, $data, $config);

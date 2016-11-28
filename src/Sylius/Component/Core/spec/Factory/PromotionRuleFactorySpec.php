@@ -65,9 +65,9 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(ItemTotalRuleChecker::TYPE)->shouldBeCalled();
-        $rule->setConfiguration(['amount' => 1000])->shouldBeCalled();
+        $rule->setConfiguration(['WEB_US' => ['amount' => 1000]])->shouldBeCalled();
 
-        $this->createItemTotal(1000)->shouldReturn($rule);
+        $this->createItemTotal('WEB_US', 1000)->shouldReturn($rule);
     }
 
     function it_creates_a_has_taxon_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
@@ -85,9 +85,9 @@ final class PromotionRuleFactorySpec extends ObjectBehavior
     ) {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(TotalOfItemsFromTaxonRuleChecker::TYPE)->shouldBeCalled();
-        $rule->setConfiguration(['taxon' => 'spears', 'amount' => 1000])->shouldBeCalled();
+        $rule->setConfiguration(['WEB_US' => ['taxon' => 'spears', 'amount' => 1000]])->shouldBeCalled();
 
-        $this->createItemsFromTaxonTotal('spears', 1000)->shouldReturn($rule);
+        $this->createItemsFromTaxonTotal('WEB_US', 'spears', 1000)->shouldReturn($rule);
     }
 
     function it_creates_a_nth_order_rule(FactoryInterface $decoratedFactory, PromotionRuleInterface $rule)
