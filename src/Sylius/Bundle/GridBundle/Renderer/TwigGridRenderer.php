@@ -19,6 +19,7 @@ use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridViewInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -135,7 +136,7 @@ final class TwigGridRenderer implements GridRendererInterface
     {
         $template = $this->getFilterTemplate($filter);
 
-        $form = $this->formFactory->createNamed('criteria', 'form', [], ['csrf_protection' => false, 'required' => false]);
+        $form = $this->formFactory->createNamed('criteria', FormType::class, [], ['csrf_protection' => false, 'required' => false]);
         $form->add($filter->getName(), $this->formTypeRegistry->get($filter->getType(), 'default'), $filter->getOptions());
 
         $criteria = $gridView->getParameters()->get('criteria', []);

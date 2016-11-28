@@ -45,7 +45,7 @@ class MoneyType extends AbstractType
         $builder
             ->resetViewTransformers()
             ->addViewTransformer(new SyliusMoneyTransformer(
-                $options['precision'],
+                $options['scale'],
                 $options['grouping'],
                 null,
                 $options['divisor']

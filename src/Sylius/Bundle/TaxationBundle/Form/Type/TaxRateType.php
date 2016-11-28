@@ -41,7 +41,7 @@ class TaxRateType extends AbstractResourceType
             ])
             ->add('amount', PercentType::class, [
                 'label' => 'sylius.form.tax_rate.amount',
-                'precision' => 3,
+                'scale' => 3,
             ])
             ->add('includedInPrice', CheckboxType::class, [
                 'label' => 'sylius.form.tax_rate.included_in_price',
