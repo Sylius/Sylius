@@ -2,17 +2,17 @@
 
 <tr>
     <th colspan="4" class="right aligned" id="subtotal">
-        {{ 'sylius.ui.subtotal'|trans }}: {{ money.convertAndFormat(order.itemsTotal) }}
+        {{ 'sylius.ui.subtotal'|trans }}: {{ money.format(order.itemsTotal, order.currencyCode) }}
     </th>
 </tr>
 <tr>
     <td colspan="4" class="right aligned" id="shipping-total">
-        {{ 'sylius.ui.shipping_total'|trans }}: {{ money.convertAndFormat(order.shippingTotal) }}
+        {{ 'sylius.ui.shipping_total'|trans }}: {{ money.format(order.shippingTotal, order.currencyCode) }}
     </td>
 </tr>
 <tr>
     <td colspan="4" class="right aligned" id="tax-total">
-        {{ 'sylius.ui.tax_total'|trans }}: {{ money.convertAndFormat(order.taxTotal) }}
+        {{ 'sylius.ui.tax_total'|trans }}: {{ money.format(order.taxTotal, order.currencyCode) }}
     </td>
 </tr>
 <tr>
@@ -20,7 +20,7 @@
 </tr>
 <tr>
     <td colspan="4" class="right aligned" style="font-size: 1.5em;" id="total">
-        {{ 'sylius.ui.total'|trans }}: {{ money.convertAndFormat(order.total) }}
+        {{ 'sylius.ui.total'|trans }}: {{ money.format(order.total, order.currencyCode) }}
     </td>
 <\tr>
 <tr>

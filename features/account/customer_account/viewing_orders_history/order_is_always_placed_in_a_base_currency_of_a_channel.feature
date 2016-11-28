@@ -15,15 +15,14 @@ Feature: Order is always placed in a base currency of a channel
         And the store has a product "Angel T-Shirt" priced at "$20.00"
         And I am a logged in customer
 
-#   This test should pass, but refactoring of context would be needed to fulfill requirements. Because refactoring is postponed this test will be turned on later
-    @ui @todo
+    @ui
     Scenario: Placing an order with other than base display currency
         Given I changed my currency to "CAD"
         And I had product "Angel T-Shirt" in the cart
         And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed with "Free" shipping method and "Offline" payment
+        And I proceed with "DHL" shipping method and "Cash on Delivery" payment
         When I confirm my order
-        And I am viewing the summary of this order
+        And I am viewing the summary of my last order
         Then I should see "$40.00" as order's total
         And I should see "$20.00" as order's subtotal
         And I should see "$20.00" as item price
