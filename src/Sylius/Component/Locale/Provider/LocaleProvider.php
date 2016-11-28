@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class LocaleProvider implements LocaleProviderInterface, AvailableLocalesProviderInterface
+final class LocaleProvider implements AvailableLocalesProviderInterface
 {
     /**
      * @var RepositoryInterface

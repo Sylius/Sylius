@@ -15,14 +15,14 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Context\ProviderBasedLocaleContext;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Provider\AvailableLocalesProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ProviderBasedLocaleContextSpec extends ObjectBehavior
 {
-    function let(LocaleProviderInterface $localeProvider)
+    function let(AvailableLocalesProviderInterface $localeProvider)
     {
         $this->beConstructedWith($localeProvider);
     }
@@ -37,7 +37,7 @@ final class ProviderBasedLocaleContextSpec extends ObjectBehavior
         $this->shouldImplement(LocaleContextInterface::class);
     }
 
-    function it_returns_the_channels_default_locale(LocaleProviderInterface $localeProvider)
+    function it_returns_the_channels_default_locale(AvailableLocalesProviderInterface $localeProvider)
     {
         $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'en_US']);
         $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
@@ -46,7 +46,7 @@ final class ProviderBasedLocaleContextSpec extends ObjectBehavior
     }
 
     function it_throws_a_locale_not_found_exception_if_default_locale_is_not_available(
-        LocaleProviderInterface $localeProvider
+        AvailableLocalesProviderInterface $localeProvider
     ) {
         $localeProvider->getAvailableLocalesCodes()->willReturn(['es_ES', 'en_US']);
         $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
