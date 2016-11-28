@@ -31,4 +31,4 @@ sylius_shop_product_reviews_create:
                 route: sylius_shop_product_show
                 parameters:
                     slug: $slug
-            flash: sylius.review.waiting_for_the_acceptation
+            flash: sylius.review.wait_for_the_acceptation

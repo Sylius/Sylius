@@ -30,7 +30,7 @@ sylius_shop_account_address_book_create:
             redirect:
                 route: sylius_shop_account_address_book_index
                 parameters: {}
-            flash: sylius.ui.address_has_been_successfully_added
+            flash: sylius.customer.add_address
 
 sylius_shop_account_address_book_update:
     path: /{id}/edit
@@ -82,4 +82,4 @@ sylius_shop_account_address_book_set_default:
             redirect:
                 route: sylius_shop_account_address_book_index
                 parameters: {}
-            flash: sylius.ui.address_has_been_set_as_default
+            flash: sylius.customer.set_address_as_default

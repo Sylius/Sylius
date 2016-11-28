@@ -25,7 +25,7 @@ sylius_admin_product_review_accept:
                 graph: sylius_product_review
                 transition: accept
             redirect: referer
-            flash: sylius.product_review.accepted
+            flash: sylius.review.accept
 
 sylius_admin_product_review_reject:
     path: /product-review/{id}/reject
@@ -37,4 +37,4 @@ sylius_admin_product_review_reject:
                 graph: sylius_product_review
                 transition: reject
             redirect: referer
-            flash: sylius.product_review.rejected
+            flash: sylius.review.reject

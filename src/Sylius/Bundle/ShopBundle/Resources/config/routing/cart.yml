@@ -17,7 +17,7 @@ sylius_shop_cart_save:
         _sylius:
             template: "@SyliusShop/Cart/summary.html.twig"
             redirect: sylius_shop_cart_summary
-            flash: sylius.cart.cart_save_completed
+            flash: sylius.cart.save
 
 sylius_shop_cart_clear:
     path: /
@@ -33,7 +33,7 @@ sylius_shop_cart_item_remove:
         _controller: sylius.controller.order_item:removeAction
         _sylius:
             redirect: sylius_shop_cart_summary
-            flash: sylius.cart.item_remove_completed
+            flash: sylius.cart.remove_item
 
 sylius_shop_cart_item_add:
     path: /add
@@ -52,4 +52,4 @@ sylius_shop_cart_item_add:
             redirect:
                 route: sylius_shop_cart_summary
                 parameters: {}
-            flash: sylius.cart.item_add_completed
+            flash: sylius.cart.add_item

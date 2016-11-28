@@ -3,6 +3,6 @@
 
 sylius:
     cart:
-        cart_save_completed: The cart has been successfully updated.
-        item_add_completed: Item has been added to cart.
-        item_remove_completed: Item has been removed from cart.
+        add_item: 'Item has been added to cart.'
+        remove_item: 'Item has been removed from cart.'
+        save: 'The cart has been successfully updated.'

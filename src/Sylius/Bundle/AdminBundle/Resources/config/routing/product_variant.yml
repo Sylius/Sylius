@@ -90,4 +90,4 @@ sylius_admin_product_variant_generate:
             repository:
                 method: find
                 arguments: [$productId]
-            flash: sylius.product_variant.generation_completed
+            flash: sylius.product_variant.generate
