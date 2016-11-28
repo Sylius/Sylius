@@ -22,7 +22,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
+final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface, ChannelAwareRuleCheckerInterface
 {
     const TYPE = 'total_of_items_from_taxon';
 

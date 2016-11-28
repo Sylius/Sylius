@@ -16,13 +16,13 @@ use Symfony\Component\Form\AbstractType;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class PromotionActionConfiguration extends AbstractType
+final class PromotionConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'sylius_promotion_action_configuration';
+        return 'sylius_promotion_configuration';
     }
 }
