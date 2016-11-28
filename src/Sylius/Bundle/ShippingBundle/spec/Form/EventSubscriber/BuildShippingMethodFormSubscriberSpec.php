@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ShippingBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Form\Registry\FormTypeRegistryInterface;
 use Sylius\Bundle\ShippingBundle\Form\EventSubscriber\BuildShippingMethodFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
@@ -21,11 +22,10 @@ use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormRegistryInterface;
 
 final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
 {
-    function let(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory, FormRegistryInterface $formRegistry)
+    function let(ServiceRegistryInterface $calculatorRegistry, FormFactoryInterface $factory, FormTypeRegistryInterface $formRegistry)
     {
         $this->beConstructedWith($calculatorRegistry, $factory, $formRegistry);
     }
@@ -68,7 +68,8 @@ final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willReturn($calculator);
         $calculator->getType()->shouldBeCalled()->willReturn('calculator_type');
 
-        $formRegistry->hasType('sylius_shipping_calculator_calculator_type')->shouldBeCalled()->willReturn(true);
+        $formRegistry->has('calculator_type', 'default')->shouldBeCalled()->willReturn(true);
+        $formRegistry->get('calculator_type', 'default')->shouldBeCalled()->willReturn('sylius_shipping_calculator_calculator_type');
 
         $factory->createNamed(
             'configuration',
@@ -97,7 +98,8 @@ final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $calculatorRegistry->get('calculator_type')->shouldBeCalled()->willReturn($calculator);
         $calculator->getType()->shouldBeCalled()->willReturn('calculator_type');
 
-        $formRegistry->hasType('sylius_shipping_calculator_calculator_type')->shouldBeCalled()->willReturn(true);
+        $formRegistry->has('calculator_type', 'default')->shouldBeCalled()->willReturn(true);
+        $formRegistry->get('calculator_type', 'default')->shouldBeCalled()->willReturn('sylius_shipping_calculator_calculator_type');
 
         $factory->createNamed(
             'configuration',
