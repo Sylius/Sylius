@@ -125,7 +125,7 @@ final class PayumController
 
         $this->getHttpRequestVerifier()->invalidate($token);
 
-        $request->getSession()->getBag('flashes')->add('info', sprintf('sylius.ui.payment_%s', $status->getValue()));
+        $request->getSession()->getBag('flashes')->add('info', sprintf('sylius.payment.%s', $status->getValue()));
 
         return $this->viewHandler->handle(
             $configuration,

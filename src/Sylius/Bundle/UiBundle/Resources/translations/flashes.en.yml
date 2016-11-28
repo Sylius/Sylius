@@ -1,10 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius:
-    ui:
-        address_has_been_set_as_default: 'Address has been set as default.'
-        address_has_been_successfully_added: 'Address has been successfully added.'
-        the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required: 'The channel cannot be deleted. At least one enabled channel is required.'
-        payment_cancelled: 'Your payment has been cancelled.'
-        payment_completed: 'Your payment has been completed.'
-        payment_failed: 'Your payment has failed.'
-        payment_processing: 'Your payment is being processed.'
-        payment_refunded: 'Your payment has been refunded.'
+    channel:
+        delete_error: 'The channel cannot be deleted. At least one enabled channel is required.'
+    customer:
+        add_address: 'Address has been successfully added.'
+        impersonate: 'Successfully impersonated customer %name%.'
+        set_address_as_default: 'Address has been set as default.'
+    product:
+        out_of_stock: 'There is only %quantity% %name% in the stock.'

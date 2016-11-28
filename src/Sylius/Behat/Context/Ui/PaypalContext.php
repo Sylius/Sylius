@@ -133,7 +133,7 @@ final class PaypalContext implements Context
      */
     public function iShouldBeNotifiedThatMyPaymentHasBeenCancelled()
     {
-        $this->assertNotification('Your payment has been cancelled.');
+        $this->assertNotification('Payment has been cancelled.');
 
     }
 
@@ -142,7 +142,7 @@ final class PaypalContext implements Context
      */
     public function iShouldBeNotifiedThatMyPaymentHasBeenCompleted()
     {
-        $this->assertNotification('Your payment has been completed.');
+        $this->assertNotification('Payment has been completed.');
     }
 
     /**

@@ -76,4 +76,4 @@ sylius_admin_order_payment_refund:
                 graph: sylius_payment
                 transition: refund
             redirect: referer
-            flash: sylius.order_payment.refunded
+            flash: sylius.payment.refunded

@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    order_payment:
-        refunded: Le paiement a été remboursé avec succès.
-    product_review:
-        accepted: L'avis sur le produit a été accepté avec succès.
-        rejected: L'avis sur le produit a été rejetée avec succès.

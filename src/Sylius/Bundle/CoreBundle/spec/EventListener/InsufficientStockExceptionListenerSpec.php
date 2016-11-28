@@ -64,7 +64,7 @@ final class InsufficientStockExceptionListenerSpec extends ObjectBehavior
         $event->setResponse(Argument::type(RedirectResponse::class))->shouldBeCalled();
 
         $translator->trans(
-            'sylius.checkout.out_of_stock',
+            'sylius.product.out_of_stock',
             [
                 '%quantity%' => '30',
                 '%name%' => 'Inventory Name',

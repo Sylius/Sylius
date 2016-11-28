@@ -209,7 +209,7 @@ final class ManagingProductReviewsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyUpdated($action)
     {
         $this->notificationChecker->checkNotification(
-            sprintf('Product review has been successfully %s.', $action), NotificationType::success()
+            sprintf('Review has been successfully %s.', $action), NotificationType::success()
         );
     }
 

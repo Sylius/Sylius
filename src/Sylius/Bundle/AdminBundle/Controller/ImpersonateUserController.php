@@ -113,6 +113,6 @@ class ImpersonateUserController
     {
         /** @var Session $session */
         $session = $request->getSession();
-        $session->getFlashBag()->add('success', $this->translator->trans('sylius.impersonation.success', ['%name%' => $username], 'flashes'));
+        $session->getFlashBag()->add('success', $this->translator->trans('sylius.customer.impersonate', ['%name%' => $username], 'flashes'));
     }
 }

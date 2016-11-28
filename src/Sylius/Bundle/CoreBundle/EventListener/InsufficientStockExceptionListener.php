@@ -75,7 +75,7 @@ final class InsufficientStockExceptionListener
         $this->session->getBag('flashes')->add(
             'notice',
             $this->translator->trans(
-                'sylius.checkout.out_of_stock',
+                'sylius.product.out_of_stock',
                 [
                     '%quantity%' => $exception->getStockable()->getOnHand(),
                     '%name%' => $exception->getStockable()->getInventoryName(),
