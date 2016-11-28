@@ -19,10 +19,10 @@ prepare_for_behat_with_js() {
     fi
 
     # Run Selenium with ChromeDriver
-    run_command "bin/selenium-server-standalone -Dwebdriver.chrome.driver=$SYLIUS_CACHE_DIR/chromedriver > $SYLIUS_BUILD_DIR/selenium.log 2>&1 &"
+    run_command "bin/selenium-server-standalone -Dwebdriver.chrome.driver=$SYLIUS_CACHE_DIR/chromedriver > /dev/null 2>&1 &"
 
     # Run webserver
-    run_command "bin/console server:run 127.0.0.1:8080 --env=test_cached --router=app/config/router_test_cached.php --no-debug > $SYLIUS_BUILD_DIR/webserver.log 2>&1 &"
+    run_command "bin/console server:run 127.0.0.1:8080 --env=test_cached --router=app/config/router_test_cached.php --no-debug --quiet > /dev/null 2>&1 &"
 }
 
 run_behat() {
