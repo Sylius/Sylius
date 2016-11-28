@@ -64,9 +64,9 @@ class PromotionActionFactory implements PromotionActionFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createPercentageDiscount($percentage, $channelCode)
+    public function createPercentageDiscount($percentage)
     {
-        return $this->createAction(PercentageDiscountPromotionActionCommand::TYPE, [$channelCode => ['percentage' => $percentage]]);
+        return $this->createAction(PercentageDiscountPromotionActionCommand::TYPE, ['percentage' => $percentage]);
     }
 
     /**
@@ -80,9 +80,9 @@ class PromotionActionFactory implements PromotionActionFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createShippingPercentageDiscount($percentage, $channelCode)
+    public function createShippingPercentageDiscount($percentage)
     {
-        return $this->createAction(ShippingPercentageDiscountPromotionActionCommand::TYPE, [$channelCode => ['percentage' => $percentage]]);
+        return $this->createAction(ShippingPercentageDiscountPromotionActionCommand::TYPE, ['percentage' => $percentage]);
     }
 
     /**

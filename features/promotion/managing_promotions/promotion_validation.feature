@@ -57,7 +57,7 @@ Feature: Promotion validation
         Given I want to create a new promotion
         When I specify its code as "christmas_sale"
         And I name it "Christmas sale"
-        And I add the "Order percentage discount" action configured without a percentage value for "United States" channel
+        And I add the "Order percentage discount" action configured without a percentage value
         And I try to add it
         Then I should be notified that this value should not be blank
         And promotion with name "Christmas sale" should not be added
@@ -67,7 +67,7 @@ Feature: Promotion validation
         Given I want to create a new promotion
         When I specify its code as "christmas_sale"
         And I name it "Christmas sale"
-        And I add the "Order percentage discount" action configured with a percentage value of 120% for "United States" channel
+        And I add the "Order percentage discount" action configured with a percentage value of 120%
         And I try to add it
         Then I should be notified that the maximum value of a percentage discount is 100%
         And promotion with name "Christmas sale" should not be added
@@ -77,7 +77,7 @@ Feature: Promotion validation
         Given I want to create a new promotion
         When I specify its code as "christmas_sale"
         And I name it "Christmas sale"
-        And I add the "Order percentage discount" action configured with a percentage value of -20% for "United States" channel
+        And I add the "Order percentage discount" action configured with a percentage value of -20%
         And I try to add it
         Then I should be notified that a percentage discount value must be at least 0%
         And promotion with name "Christmas sale" should not be added

@@ -5,7 +5,7 @@ Feature: Receiving fixed discount dependent on channel on cart
     I want to have promotions applied to my cart
 
     Background:
-        And the store operates on a channel named "Web-US" in "USD" currency
+        Given the store operates on a channel named "Web-US" in "USD" currency
         And the store operates on another channel named "Web-GB" in "GBP" currency
         And the store has a product "PHP T-Shirt" priced at "$100.00" in "Web-US" channel
         And this product is also priced at "£80.00" in "Web-GB" channel

@@ -15,6 +15,7 @@ use Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionActionConfiguration;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSubscriber;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Promotion\Action\ChannelBasedPromotionActionCommandInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -22,13 +23,12 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotionActionFormSubscriber
+final class BuildChannelBasedPromotionActionFormSubscriber extends BuildPromotionActionFormSubscriber
 {
     /**
      * @var ChannelRepositoryInterface
      */
     private $channelRepository;
-
 
     /**
      * @param ServiceRegistryInterface $actionRegistry
@@ -56,6 +56,12 @@ final class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotio
 
         $configuration = $model->getConfigurationFormType();
         if (null === $configuration) {
+            return;
+        }
+
+        if (!$model instanceof ChannelBasedPromotionActionCommandInterface) {
+            $form->add($this->createConfigurationField($configuration, $data));
+
             return;
         }
 
@@ -91,5 +97,19 @@ final class BuildChannelAwarePromotionActionFormSubscriber extends BuildPromotio
         ];
 
         return $this->factory->createNamed($channel->getCode(), $configuration, $data, $config);
+    }
+
+    /**
+     * @param string $configuration
+     * @param array $data
+     *
+     * @return FormInterface
+     */
+    private function createConfigurationField($configuration, array $data)
+    {
+        return $this->factory->createNamed('configuration', $configuration, $data, [
+            'auto_initialize' => false,
+            'label' => false,
+        ]);
     }
 }
