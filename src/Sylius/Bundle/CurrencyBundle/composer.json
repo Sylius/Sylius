@@ -24,13 +24,13 @@
 
         "sylius/currency": "^1.0",
         "sylius/resource-bundle": "^1.0",
-        "symfony/framework-bundle": "^2.8"
+        "symfony/framework-bundle": "^3.2@rc"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.1",
-        "symfony/form": "^2.8",
-        "twig/twig": "^1.0",
-        "doctrine/orm": "^2.4.8"
+        "doctrine/orm": "^2.5",
+        "phpspec/phpspec": "^3.2",
+        "symfony/form": "^3.2@rc",
+        "twig/twig": "^1.0"
     },
     "config": {
         "bin-dir": "bin"

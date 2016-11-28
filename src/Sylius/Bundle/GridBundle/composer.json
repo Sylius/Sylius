@@ -23,20 +23,17 @@
         "php": "^5.6|^7.0",
 
         "sylius/grid": "^1.0",
-
-        "symfony/form": "^2.8",
-        "symfony/framework-bundle": "^2.8"
+        "symfony/form": "^3.2@rc",
+        "symfony/framework-bundle": "^3.2@rc"
     },
     "require-dev": {
-        "doctrine/orm": "^2.4.8",
-        "jackalope/jackalope-doctrine-dbal": "^1.2",
-        "doctrine/phpcr-odm": "^1.3.0",
+        "doctrine/orm": "^2.5",
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-        "phpspec/phpspec": "^3.1",
+        "pagerfanta/pagerfanta": "^1.0",
+        "phpspec/phpspec": "^3.2",
         "phpunit/phpunit": "^5.6",
-        "twig/twig": "~1.11",
-        "pagerfanta/pagerfanta": "^1.0"
+        "twig/twig": "^1.11"
     },
     "config": {
         "bin-dir": "bin"

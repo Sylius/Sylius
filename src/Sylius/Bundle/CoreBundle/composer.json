@@ -23,12 +23,13 @@
         "php": "^5.6|^7.0",
 
         "fzaninotto/faker": "^1.0",
-        "jms/serializer-bundle": "^0.13|^1.0",
-        "knplabs/knp-gaufrette-bundle": "~0.1",
-        "mathiasverraes/money": "~1.2",
-        "sylius/core": "^1.0",
+        "jms/serializer-bundle": "^1.1",
+        "knplabs/knp-gaufrette-bundle": "^0.3",
+        "sonata-project/intl-bundle": "^2.2",
+        "swiftmailer/swiftmailer": "^5.4",
         "sylius/addressing-bundle": "^1.0",
         "sylius/attribute-bundle": "^1.0",
+        "sylius/core": "^1.0",
         "sylius/currency-bundle": "^1.0",
         "sylius/customer-bundle": "^1.0",
         "sylius/fixtures-bundle": "^1.0",
@@ -42,29 +43,21 @@
         "sylius/product-bundle": "^1.0",
         "sylius/promotion-bundle": "^1.0",
         "sylius/resource-bundle": "^1.0",
+        "sylius/review-bundle": "^1.0",
         "sylius/shipping-bundle": "^1.0",
         "sylius/taxation-bundle": "^1.0",
         "sylius/taxonomy-bundle": "^1.0",
         "sylius/theme-bundle": "^1.0",
         "sylius/user-bundle": "^1.0",
-        "sylius/association-bundle": "^1.0",
-        "sylius/review-bundle": "^1.0",
-        "symfony/framework-bundle": "^2.8",
-        "symfony-cmf/routing-bundle": "~1.2",
-        "swiftmailer/swiftmailer": "~5.0",
-        "winzou/state-machine-bundle": "~0.2|^0.3",
-        "sonata-project/intl-bundle": "^2.2"
+        "symfony/framework-bundle": "^3.2@rc",
+        "winzou/state-machine-bundle": "^0.3"
     },
     "require-dev": {
-        "hwi/oauth-bundle": "~0.3",
+        "hwi/oauth-bundle": "^0.5",
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-        "phpspec/phpspec": "^3.1",
+        "phpspec/phpspec": "^3.2",
         "phpunit/phpunit": "^5.6"
-    },
-    "suggest": {
-        "sylius/web-bundle": "Provides default web interface",
-        "sylius/fixtures-bundle": "Provides default Sylius fixtures"
     },
     "config": {
         "bin-dir": "bin"
