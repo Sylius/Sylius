@@ -68,8 +68,6 @@
             <argument>%sylius_order.order_expiration_period%</argument>
         </service>
 
-        <service id="sylius.complete_checkout_callback" class="Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteCheckoutCallback" />
-
         <service id="sylius.factory.add_to_cart_command" class="Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory" />
     </services>
 </container>

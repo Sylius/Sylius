@@ -1,12 +1,47 @@
 winzou_state_machine:
     sylius_payment:
+        class: "%sylius.model.payment.class%"
+        property_path: state
+        graph: sylius_payment
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            cart: ~
+            new: ~
+            processing: ~
+            completed: ~
+            failed: ~
+            cancelled: ~
+            void: ~
+            refunded: ~
+        transitions:
+            create:
+                from: [cart]
+                to: new
+            process:
+                from: [new]
+                to: processing
+            complete:
+                from: [new, processing]
+                to: completed
+            fail:
+                from: [new, processing]
+                to: failed
+            cancel:
+                from: [new, processing]
+                to: cancelled
+            refund:
+                from: [completed]
+                to: refunded
+            void:
+                from: [new, processing]
+                to: void
         callbacks:
             after:
-                process_order:
+                sylius_process_order:
                     on: ["fail", "cancel"]
                     do: ["@sylius.order_processing.order_payment_processor", "process"]
                     args: ["object.getOrder()"]
-                update_order_payment_state:
+                sylius_resolve_state:
                     on: ["complete", "refund"]
                     do: ["@sylius.state_resolver.order_payment", "resolve"]
                     args: ["object.getOrder()"]
