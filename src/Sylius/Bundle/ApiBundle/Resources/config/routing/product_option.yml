@@ -27,3 +27,5 @@ sylius_api_product_option_delete:
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product_option:deleteAction
+        _sylius:
+            csrf_protection: false

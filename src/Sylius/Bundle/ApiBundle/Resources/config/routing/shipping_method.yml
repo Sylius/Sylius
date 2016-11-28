@@ -35,6 +35,7 @@ sylius_api_shipping_method_delete:
         _sylius:
             criteria:
                 code: $code
+            csrf_protection: false
 
 sylius_api_shipping_method_show:
     path: /{code}

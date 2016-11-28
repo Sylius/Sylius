@@ -150,6 +150,9 @@ final class ResourceLoader implements LoaderInterface
         if ($isApi && in_array($actionName, ['show', 'create', 'update'], true)) {
             $defaults['_sylius']['serialization_groups'] = ['Default', 'Detailed'];
         }
+        if ($isApi && 'delete' === $actionName) {
+            $defaults['_sylius']['csrf_protection'] = false;
+        }
         if (isset($configuration['grid']) && 'index' === $actionName) {
             $defaults['_sylius']['grid'] = $configuration['grid'];
         }

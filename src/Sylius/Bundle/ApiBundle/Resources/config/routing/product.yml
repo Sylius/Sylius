@@ -33,6 +33,8 @@ sylius_api_product_delete:
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.product:deleteAction
+        _sylius:
+            csrf_protection: false
 
 sylius_api_product_show:
     path: /{id}

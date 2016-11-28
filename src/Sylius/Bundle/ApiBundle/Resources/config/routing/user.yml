@@ -30,6 +30,8 @@ sylius_api_user_delete:
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.shop_user:deleteAction
+        _sylius:
+            csrf_protection: false
 
 sylius_api_user_show:
     path: /{id}

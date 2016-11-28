@@ -42,3 +42,4 @@ sylius_api_taxon_delete:
         _sylius:
             criteria:
                 code: $code
+            csrf_protection: false

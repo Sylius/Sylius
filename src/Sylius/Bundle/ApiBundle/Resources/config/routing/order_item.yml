@@ -37,3 +37,4 @@ sylius_api_order_item_delete:
         _sylius:
             criteria:
                 order: $orderId
+            csrf_protection: false
