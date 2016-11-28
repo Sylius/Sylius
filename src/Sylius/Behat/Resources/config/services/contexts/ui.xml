@@ -312,6 +312,8 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.repository.shop_user" />
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
+            <argument type="service" id="sylius.behat.page.shop.account.login" />
+            <argument type="service" id="sylius.behat.page.shop.home" />
             <tag name="fob.context_service" />
         </service>
 

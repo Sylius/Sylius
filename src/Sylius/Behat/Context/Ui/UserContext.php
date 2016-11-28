@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
+use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\User\RegisterPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -42,18 +43,53 @@ final class UserContext implements Context
     private $customerShowPage;
 
     /**
+     * @var LoginPageInterface
+     */
+    private $loginPage;
+
+    /**
+     * @var HomePageInterface
+     */
+    private $homePage;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param UserRepositoryInterface $userRepository
      * @param ShowPageInterface $customerShowPage
+     * @param LoginPageInterface $loginPage
+     * @param HomePageInterface $homePage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
-        ShowPageInterface $customerShowPage
+        ShowPageInterface $customerShowPage,
+        LoginPageInterface $loginPage,
+        HomePageInterface $homePage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->customerShowPage = $customerShowPage;
+        $this->loginPage = $loginPage;
+        $this->homePage = $homePage;
+    }
+
+    /**
+     * @Given I log in as :email with :password password
+     */
+    public function iLogInAsWithPassword($email, $password)
+    {
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
+    }
+
+    /**
+     * @When I log out
+     */
+    public function iLogOut()
+    {
+        $this->homePage->logOut();
     }
 
     /**
