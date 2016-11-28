@@ -22,11 +22,5 @@
             <argument type="service" id="sylius.custom_shipping_calculator.per_unit_rate.inner" />
             <argument type="service" id="sylius.context.channel" />
         </service>
-
-        <service id="sylius.form.event_subscriber.build_shipping_method" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildShippingMethodFormSubscriber">
-            <argument type="service" id="sylius.registry.shipping_calculator"/>
-            <argument type="service" id="form.factory"/>
-            <argument type="service" id="form.registry"/>
-        </service>
     </services>
 </container>

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Product\ChannelPricingType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryChoiceType;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryChoiceType;
@@ -37,10 +38,8 @@ class ProductVariantTypeExtension extends AbstractTypeExtension
      *
      * @param EventSubscriberInterface $channelPricingFormSubscriber
      */
-    public function __construct($dataClass, array $validationGroups = [], EventSubscriberInterface $channelPricingFormSubscriber)
+    public function __construct(EventSubscriberInterface $channelPricingFormSubscriber)
     {
-        parent::__construct($dataClass, $validationGroups);
-
         $this->channelPricingFormSubscriber = $channelPricingFormSubscriber;
     }
 

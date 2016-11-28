@@ -74,11 +74,5 @@
         <service id="sylius.processor.shipment_processor" class="Sylius\Component\Shipping\Processor\ShipmentProcessor">
             <argument type="service" id="sm.factory" />
         </service>
-
-        <service id="sylius.form.event_subscriber.build_shipping_method" class="Sylius\Bundle\ShippingBundle\Form\EventSubscriber\BuildShippingMethodFormSubscriber">
-            <argument type="service" id="sylius.registry.shipping_calculator"/>
-            <argument type="service" id="form.factory"/>
-            <argument type="service" id="form.registry"/>
-        </service>
     </services>
 </container>
