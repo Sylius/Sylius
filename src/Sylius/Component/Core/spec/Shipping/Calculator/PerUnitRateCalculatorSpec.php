@@ -24,11 +24,6 @@ use Sylius\Component\Shipping\Calculator\CalculatorInterface;
  */
 final class PerUnitRateCalculatorSpec extends ObjectBehavior
 {
-    function let(CalculatorInterface $calculator, ChannelContextInterface $channelContext)
-    {
-        $this->beConstructedWith($calculator, $channelContext);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType(PerUnitRateCalculator::class);
@@ -47,7 +42,6 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
     }
 
     function it_calculates_the_total_with_the_per_unit_amount_configured_on_the_method(
-        CalculatorInterface $calculator,
         ShipmentInterface $shipment,
         OrderInterface $order,
         ChannelInterface $channel
@@ -57,8 +51,6 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
         $channel->getCode()->willReturn('WEB');
         $shipment->getShippingUnitCount()->willReturn(10);
 
-        $calculator->calculate($shipment, ['amount' => 200])->shouldBeCalled();
-
-        $this->calculate($shipment, ['WEB' => ['amount' => 200]]);
+        $this->calculate($shipment, ['WEB' => ['amount' => 200]])->shouldReturn(2000);
     }
 }

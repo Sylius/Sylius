@@ -22,19 +22,6 @@ use Webmozart\Assert\Assert;
 final class FlatRateCalculator implements CalculatorInterface
 {
     /**
-     * @var CalculatorInterface
-     */
-    private $calculator;
-
-    /**
-     * @param CalculatorInterface $calculator
-     */
-    public function __construct(CalculatorInterface $calculator)
-    {
-        $this->calculator = $calculator;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function calculate(BaseShipmentInterface $subject, array $configuration)
@@ -43,7 +30,7 @@ final class FlatRateCalculator implements CalculatorInterface
 
         $channelCode = $subject->getOrder()->getChannel()->getCode();
 
-        return $this->calculator->calculate($subject, $configuration[$channelCode]);
+        return (int) $configuration[$channelCode]['amount'];
     }
 
     /**
@@ -51,6 +38,6 @@ final class FlatRateCalculator implements CalculatorInterface
      */
     public function getType()
     {
-        return $this->calculator->getType();
+        return 'flat_rate';
     }
 }

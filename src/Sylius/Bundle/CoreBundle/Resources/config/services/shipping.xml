@@ -13,14 +13,16 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.custom_shipping_calculator.flat_rate" class="Sylius\Component\Core\Shipping\Calculator\FlatRateCalculator" decorates="sylius.shipping_calculator.flat_rate">
-            <argument type="service" id="sylius.custom_shipping_calculator.flat_rate.inner" />
-            <argument type="service" id="sylius.context.channel" />
+        <service id="sylius.shipping_calculator.flat_rate" class="Sylius\Component\Core\Shipping\Calculator\FlatRateCalculator">
+            <tag name="sylius.shipping_calculator" calculator="flat_rate"
+                 form-type="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Calculator\ChannelBasedFlatRateConfigurationType"
+                 label="sylius.form.shipping_calculator.flat_rate_configuration.label" />
         </service>
 
-        <service id="sylius.custom_shipping_calculator.per_unit_rate" class="Sylius\Component\Core\Shipping\Calculator\PerUnitRateCalculator" decorates="sylius.shipping_calculator.per_unit_rate">
-            <argument type="service" id="sylius.custom_shipping_calculator.per_unit_rate.inner" />
-            <argument type="service" id="sylius.context.channel" />
+        <service id="sylius.shipping_calculator.per_unit_rate" class="Sylius\Component\Core\Shipping\Calculator\PerUnitRateCalculator">
+            <tag name="sylius.shipping_calculator" calculator="per_unit_rate"
+                 form-type="Sylius\Bundle\CoreBundle\Form\Type\Shipping\Calculator\ChannelBasedPerUnitRateConfigurationType"
+                 label="sylius.form.shipping_calculator.per_unit_rate_configuration.label" />
         </service>
     </services>
 </container>
