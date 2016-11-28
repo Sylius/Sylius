@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReviewBundle\Validator\Constraints;
+namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmail;
-use Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmailValidator;
+use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmail;
+use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmailValidator;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;

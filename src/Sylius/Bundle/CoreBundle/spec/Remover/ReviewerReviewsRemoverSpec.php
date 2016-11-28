@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReviewBundle\Remover;
+namespace spec\Sylius\Bundle\CoreBundle\Remover;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Bundle\ReviewBundle\Remover\ReviewerReviewsRemover;
-use Sylius\Bundle\ReviewBundle\Remover\ReviewerReviewsRemoverInterface;
+use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover;
+use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemoverInterface;
 use Sylius\Bundle\ReviewBundle\Updater\ReviewableRatingUpdaterInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;

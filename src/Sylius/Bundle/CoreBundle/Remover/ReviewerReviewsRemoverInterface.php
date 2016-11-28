@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ReviewBundle\Remover;
+namespace Sylius\Bundle\CoreBundle\Remover;
 
 use Sylius\Component\Review\Model\ReviewerInterface;
 

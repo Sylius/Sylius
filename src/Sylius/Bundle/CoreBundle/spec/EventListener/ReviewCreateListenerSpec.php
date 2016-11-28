@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReviewBundle\EventListener;
+namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ReviewBundle\EventListener\ReviewCreateListener;
+use Sylius\Bundle\CoreBundle\EventListener\ReviewCreateListener;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;

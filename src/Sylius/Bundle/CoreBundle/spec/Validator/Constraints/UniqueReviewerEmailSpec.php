@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ReviewBundle\Validator\Constraints;
+namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmail;
+use Sylius\Bundle\CoreBundle\Validator\Constraints\UniqueReviewerEmail;
 use Symfony\Component\Validator\Constraint;
 
 /**
