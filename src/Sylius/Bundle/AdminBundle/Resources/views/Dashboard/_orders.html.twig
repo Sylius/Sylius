@@ -21,7 +21,7 @@
                         {{ order.customer.email }}
                     </td>
                     <td>
-                        {{ money.format(order.totalQuantity, order.currencyCode) }}
+                        {{ order.totalQuantity }}
                     </td>
                     <td>
                         {{ money.format(order.total, order.currencyCode) }}

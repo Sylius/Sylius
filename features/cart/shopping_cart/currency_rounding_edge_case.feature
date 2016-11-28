@@ -7,7 +7,7 @@ Feature: Currency rounding edge case
     Background:
         Given the store operates on a single channel in "United States"
         And that channel allows to shop using the "EUR" currency
-        When the store has an exchange rate 0.9737 with source currency "US Dollar" and target currency "Euro"
+        When the exchange rate of "US Dollar" to "Euro" is 0.9737
         And the store has a product "The Pug Mug" priced at "$7.00"
 
     @ui

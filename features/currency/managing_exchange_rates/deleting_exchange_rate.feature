@@ -10,7 +10,7 @@ Feature: Deleting exchange rates
 
     @ui
     Scenario: Deleted exchange rate should disappear from the list
-        Given the store has an exchange rate 1.2 with source currency "US Dollar" and target currency "British Pound"
+        Given the exchange rate of "US Dollar" to "British Pound" is 1.2
         When I delete the exchange rate between "US Dollar" and "British Pound"
         Then I should be notified that it has been successfully deleted
         And this exchange rate should no longer be on the list

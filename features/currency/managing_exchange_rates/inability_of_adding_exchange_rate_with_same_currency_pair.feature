@@ -6,7 +6,7 @@ Feature: Inability of adding exchange rates with the same currency pair
 
     Background:
         Given the store has currency "Euro" and "British Pound"
-        And the store has an exchange rate 1.2 with source currency "Euro" and target currency "British Pound"
+        And the exchange rate of "Euro" to "British Pound" is 1.2
         And I am logged in as an administrator
 
     @ui

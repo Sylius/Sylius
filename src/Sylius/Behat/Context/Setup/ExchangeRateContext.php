@@ -63,12 +63,12 @@ final class ExchangeRateContext implements Context
     }
 
     /**
-     * @Given /^the store (?:|also )has an exchange rate ([0-9\.]+) with source (currency "[^"]+") and target (currency "[^"]+")$/
+     * @Given the exchange rate of :sourceCurrency to :targetCurrency is :ratio
      */
     public function thereIsAnExchangeRateWithSourceCurrencyAndTargetCurrency(
-        $ratio,
         CurrencyInterface $sourceCurrency,
-        CurrencyInterface $targetCurrency
+        CurrencyInterface $targetCurrency,
+        $ratio
     ) {
         $exchangeRate = $this->createExchangeRate($sourceCurrency, $targetCurrency, $ratio);
 
