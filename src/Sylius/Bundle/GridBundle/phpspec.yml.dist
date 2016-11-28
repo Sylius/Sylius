@@ -3,3 +3,6 @@ suites:
         namespace: Sylius\Bundle\GridBundle
         psr4_prefix: Sylius\Bundle\GridBundle
         src_path: .
+
+extensions:
+    Akeneo\SkipExampleExtension: ~

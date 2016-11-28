@@ -25,6 +25,7 @@
         "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^3.2@rc",
         "symfony/intl": "^3.2@rc",
+        "symfony/templating": "^3.2@rc",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {

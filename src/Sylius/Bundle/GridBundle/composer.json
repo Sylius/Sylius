@@ -24,9 +24,11 @@
 
         "sylius/grid": "^1.0",
         "symfony/form": "^3.2@rc",
-        "symfony/framework-bundle": "^3.2@rc"
+        "symfony/framework-bundle": "^3.2@rc",
+        "symfony/templating": "^3.2@rc"
     },
     "require-dev": {
+        "akeneo/phpspec-skip-example-extension": "^2.0",
         "doctrine/orm": "^2.5",
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",

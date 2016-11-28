@@ -3,6 +3,7 @@ imports:
     - { resource: "@SyliusResourceBundle/test/app/config/resources.yml" }
 
 framework:
+    assets: false
     translator: { fallbacks: ["%locale%"] }
     secret: "%secret%"
     router:
