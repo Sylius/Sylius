@@ -33,6 +33,8 @@ $ php app/console server:start
 $ open http://localhost:8000/
 ```
 
+To use Vagrant, see [this repository](http://github.com/Sylius/Vagrant).
+
 Troubleshooting
 ---------------
 
@@ -43,7 +45,7 @@ $ tail -f app/logs/prod.log
 $ tail -f app/logs/dev.log
 ```
 
-If you are using the supplied Vagrant development environment, please see the related [Troubleshooting guide](etc/vagrant/README.md#Troubleshooting) for more information.
+If you are using the supplied Vagrant development environment, please see the related [Troubleshooting guide](http://github.com/Sylius/Vagrant/README.md#Troubleshooting) for more information.
 
 Contributing
 ------------
