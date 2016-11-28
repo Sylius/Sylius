@@ -95,6 +95,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function fillActionOption($option, $value)
+    {
+        $this->getLastCollectionItem('actions')->fillField($option, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function fillActionOptionForChannel($channelName, $option, $value)
     {
         $lastAction = $this->getChannelConfigurationOfLastAction($channelName);

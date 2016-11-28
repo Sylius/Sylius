@@ -68,6 +68,12 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function selectActionOption($option, $value, $multiple = false);
 
     /**
+     * @param string $option
+     * @param string $value
+     */
+    public function fillActionOption($option, $value);
+
+    /**
      * @param string $channelName
      * @param string $option
      * @param string $value

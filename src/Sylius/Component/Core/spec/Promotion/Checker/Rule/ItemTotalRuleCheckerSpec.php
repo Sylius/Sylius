@@ -12,6 +12,9 @@
 namespace spec\Sylius\Component\Core\Promotion\Checker\Rule;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ChannelAwareRuleCheckerInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
@@ -22,6 +25,11 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class ItemTotalRuleCheckerSpec extends ObjectBehavior
 {
+    function let(RuleCheckerInterface $itemTotalRuleChecker)
+    {
+        $this->beConstructedWith($itemTotalRuleChecker);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(ItemTotalRuleChecker::class);
@@ -37,39 +45,39 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
         $this->shouldImplement(ChannelAwareRuleCheckerInterface::class);
     }
 
-    function it_recognizes_an_empty_subject_as_not_eligible(PromotionSubjectInterface $subject)
+    function it_uses_decorated_checker_to_check_eligibility_for_order_channel(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        RuleCheckerInterface $itemTotalRuleChecker
+    ) {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $itemTotalRuleChecker->isEligible($order, ['amount' => 1000])->willReturn(true);
+
+        $this->isEligible($order, ['WEB_US' => ['amount' => 1000]])->shouldReturn(true);
+    }
+
+    function it_returns_false_if_there_is_no_configuration_for_order_channel(
+        ChannelInterface $channel,
+        OrderInterface $order
+    ) {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $this->isEligible($order, [])->shouldReturn(false);
+    }
+
+    function it_throws_exception_if_passed_subject_is_not_order(PromotionSubjectInterface $promotionSubject)
     {
-        $subject->getPromotionSubjectTotal()->willReturn(0);
-
-        $this->isEligible($subject, ['amount' => 500])->shouldReturn(false);
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('isEligible', [$promotionSubject, []])
+        ;
     }
 
-    function it_recognizes_a_subject_as_not_eligible_if_a_subject_total_is_less_then_configured(
-        PromotionSubjectInterface $subject
-    ) {
-        $subject->getPromotionSubjectTotal()->willReturn(400);
-
-        $this->isEligible($subject, ['amount' => 500])->shouldReturn(false);
-    }
-
-    function it_recognizes_a_subject_as_eligible_if_a_subject_total_is_greater_then_configured(
-        PromotionSubjectInterface $subject
-    ) {
-        $subject->getPromotionSubjectTotal()->willReturn(600);
-
-        $this->isEligible($subject, ['amount' => 500])->shouldReturn(true);
-    }
-
-    function it_recognizes_a_subject_as_eligible_if_a_subject_total_is_equal_with_configured(
-        PromotionSubjectInterface $subject
-    ) {
-        $subject->getPromotionSubjectTotal()->willReturn(500);
-
-        $this->isEligible($subject, ['amount' => 500])->shouldReturn(true);
-    }
-
-    function it_returns_a_subject_total_configuration_form_type()
+    function it_returns_a_total_configuration_form_type()
     {
-        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_item_total_configuration');
+        $this->getConfigurationFormType()->shouldReturn(ItemTotalConfigurationType::class);
     }
 }

@@ -359,7 +359,7 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function addRule($rule)
+    public function addRule(PromotionRuleInterface $rule)
     {
         if (!$this->hasRule($rule)) {
             $rule->setPromotion($this);

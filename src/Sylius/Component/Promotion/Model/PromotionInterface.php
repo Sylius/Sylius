@@ -162,7 +162,7 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     /**
      * @param PromotionRuleInterface $rule
      */
-    public function addRule($rule);
+    public function addRule(PromotionRuleInterface $rule);
 
     /**
      * @param PromotionRuleInterface $rule
