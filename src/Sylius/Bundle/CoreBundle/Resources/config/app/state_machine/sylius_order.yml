@@ -22,14 +22,10 @@ winzou_state_machine:
         callbacks:
             before:
                 sylius_assign_number:
-                    on: "create"
+                    on: ["create"]
                     do: ["@sylius.order_number_assigner", "assignNumber"]
                     args: ["object"]
             after:
-                sylius_complete_checkout:
-                    on: "create"
-                    do: ["@sylius.complete_checkout_callback", "completeCheckout"]
-                    args: ["object"]
                 sylius_send_order_confirmation_email:
                     on: ["create"]
                     do: ["@sylius.email_manager.order", "sendConfirmationEmail"]

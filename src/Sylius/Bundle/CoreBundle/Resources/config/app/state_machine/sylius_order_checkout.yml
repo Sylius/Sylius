@@ -33,3 +33,7 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'create'", "'sylius_order'"]
+                sylius_save_checkout_completion_date:
+                    on: ["complete"]
+                    do: ["object", "completeCheckout"]
+                    args: ["object"]
