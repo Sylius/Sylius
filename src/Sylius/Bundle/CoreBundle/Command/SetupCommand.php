@@ -96,16 +96,17 @@ EOT
             $user->setPlainPassword('sylius');
         } else {
             do {
-                $question = new Question('E-mail: ');
+                $question = new Question('E-mail:');
                 $question->setValidator(function ($value) use ($output) {
                     /** @var ConstraintViolationListInterface $errors */
                     $errors = $this->get('validator')->validate((string) $value, [new Email(), new NotBlank()]);
                     foreach ($errors as $error) {
-                        $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
+                        throw new \DomainException($error->getMessage());
                     }
 
-                    return count($errors) === 0;
+                    return $value;
                 });
+                $question->setMaxAttempts(3);
                 $email = $questionHelper->ask($input, $output, $question);
                 $exists = null !== $userRepository->findOneByEmail($email);
 
@@ -226,20 +227,22 @@ EOT
             /** @var ConstraintViolationListInterface $errors */
             $errors = $this->get('validator')->validate($value, [new NotBlank()]);
             foreach ($errors as $error) {
-                $output->writeln(sprintf('<error>%s</error>', $error->getMessage()));
+                throw new \DomainException($error->getMessage());
             }
 
-            return count($errors) === 0;
+            return $value;
         };
 
         do {
-            $passwordQuestion = (new Question('Choose password: '))
+            $passwordQuestion = (new Question('Choose password:'))
                 ->setValidator($validator)
+                ->setMaxAttempts(3)
                 ->setHidden(true)
                 ->setHiddenFallback(false)
             ;
-            $confirmPasswordQuestion = (new Question('Confirm password: '))
+            $confirmPasswordQuestion = (new Question('Confirm password:'))
                 ->setValidator($validator)
+                ->setMaxAttempts(3)
                 ->setHidden(true)
                 ->setHiddenFallback(false)
             ;
