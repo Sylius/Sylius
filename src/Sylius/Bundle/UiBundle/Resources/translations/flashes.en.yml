@@ -5,7 +5,8 @@ sylius:
     channel:
         delete_error: 'The channel cannot be deleted. At least one enabled channel is required.'
     customer:
-        set_address_as_default: 'Address has been set as default.'
         add_address: 'Address has been successfully added.'
+        impersonate: 'Successfully impersonated customer %name%.'
+        set_address_as_default: 'Address has been set as default.'
     product:
         out_of_stock: 'There is only %quantity% %name% in the stock.'
