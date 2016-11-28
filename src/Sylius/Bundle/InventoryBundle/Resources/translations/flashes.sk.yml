@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    inventory_unit:
-        backorder: Skladová položka predobjednaná.
-        sell: Skladová položka predaná.
-        return: Skladová položka navrátená.
-        transition_fail: Akcia sa nemohla vykonať vzhľadom na aktuálny stav jednotky
