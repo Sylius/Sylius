@@ -138,12 +138,9 @@ final class InstallerContext implements Context
      */
     public function iProvideFullAdministratorData()
     {
-        $this->inputChoices['name'] = 'AdminName';
-        $this->inputChoices['surname'] = 'AdminSurname';
         $this->inputChoices['e-mail'] = 'test@admin.com';
         $this->inputChoices['password'] = 'pswd1$';
         $this->inputChoices['confirmation'] = $this->inputChoices['password'];
-        $this->inputChoices['localeCode'] = 'en_US';
     }
 
     /**
@@ -169,7 +166,9 @@ final class InstallerContext implements Context
         $inputString = implode(PHP_EOL, $this->inputChoices);
         $this->questionHelper->setInputStream($this->getInputStream($inputString.PHP_EOL));
 
-        $this->tester->execute(['command' => $name]);
+        try {
+            $this->tester->execute(['command' => $name]);
+        } catch (\Exception $e) {}
     }
 
     /**
@@ -181,6 +180,8 @@ final class InstallerContext implements Context
         $inputString = 'y'.PHP_EOL;
         $this->questionHelper->setInputStream($this->getInputStream($inputString));
 
-        $this->tester->execute(['command' => $name]);
+        try {
+            $this->tester->execute(['command' => $name]);
+        } catch (\Exception $e) {}
     }
 }
