@@ -9,9 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Locale\Provider;
-
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+namespace Sylius\Component\Resource\Provider;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -36,20 +34,6 @@ final class ImmutableLocaleProvider implements LocaleProviderInterface
     {
         $this->definedLocalesCodes = $definedLocalesCodes;
         $this->defaultLocaleCode = $defaultLocaleCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAvailableLocalesCodes()
-    {
-        return array_keys(
-            array_filter(
-                $this->definedLocalesCodes,
-                function ($locale) {
-                    return $locale;
-                })
-        );
     }
 
     /**
