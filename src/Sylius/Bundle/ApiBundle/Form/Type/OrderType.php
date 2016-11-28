@@ -14,14 +14,15 @@ namespace Sylius\Bundle\ApiBundle\Form\Type;
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerChoiceType;
-use Sylius\Bundle\OrderBundle\Form\Type\OrderType as BaseOrderType;
+use Sylius\Bundle\OrderBundle\Form\Type\OrderType as CoreOrderType;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderType extends BaseOrderType
+class OrderType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -32,15 +33,23 @@ class OrderType extends BaseOrderType
             ->add('customer', CustomerChoiceType::class)
             ->add('currencyCode', CurrencyChoiceType::class, [
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['groups' => ['sylius']]),
                 ],
             ])
             ->add('channel', ChannelChoiceType::class, [
                 'constraints' => [
-                    new NotBlank(),
+                    new NotBlank(['groups' => ['sylius']]),
                 ],
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return CoreOrderType::class;
     }
 
     /**
