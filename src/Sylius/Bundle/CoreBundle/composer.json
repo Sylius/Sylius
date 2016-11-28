@@ -39,7 +39,6 @@
         "sylius/order-bundle": "^1.0",
         "sylius/payment-bundle": "^1.0",
         "sylius/payum-bundle": "^1.0",
-        "sylius/pricing-bundle": "^1.0",
         "sylius/product-bundle": "^1.0",
         "sylius/promotion-bundle": "^1.0",
         "sylius/resource-bundle": "^1.0",
