@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Locale\Provider;
+namespace spec\Sylius\Component\Resource\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Locale\Provider\ImmutableLocaleProvider;
