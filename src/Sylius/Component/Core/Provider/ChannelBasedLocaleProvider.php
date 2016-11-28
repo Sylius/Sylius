@@ -15,12 +15,13 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Locale\Provider\AvailableLocalesProviderInterface;
 use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ChannelBasedLocaleProvider implements LocaleProviderInterface
+final class ChannelBasedLocaleProvider implements LocaleProviderInterface, AvailableLocalesProviderInterface
 {
     /**
      * @var ChannelContextInterface

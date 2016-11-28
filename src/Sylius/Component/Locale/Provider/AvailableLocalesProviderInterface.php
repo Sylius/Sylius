@@ -9,20 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Resource\Provider;
+namespace Sylius\Component\Locale\Provider;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
-interface LocaleProviderInterface
+interface AvailableLocalesProviderInterface
 {
     /**
      * @return string[]
      */
-    public function getDefinedLocalesCodes();
-
-    /**
-     * @return string
-     */
-    public function getDefaultLocaleCode();
+    public function getAvailableLocalesCodes();
 }
