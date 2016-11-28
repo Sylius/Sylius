@@ -11,22 +11,43 @@
 
 namespace Sylius\Component\Core\Promotion\Checker\Rule;
 
+use Sylius\Bundle\PromotionBundle\Form\Type\Rule\ItemTotalConfigurationType;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class ItemTotalRuleChecker implements RuleCheckerInterface, ChannelAwareRuleCheckerInterface
 {
-    const TYPE = 'item_total';
+    /**
+     * @var RuleCheckerInterface
+     */
+    private $itemTotalRuleChecker;
+
+    /**
+     * @param RuleCheckerInterface $itemTotalRuleChecker
+     */
+    public function __construct(RuleCheckerInterface $itemTotalRuleChecker)
+    {
+        $this->itemTotalRuleChecker = $itemTotalRuleChecker;
+    }
 
     /**
      * {@inheritdoc}
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
-        return $subject->getPromotionSubjectTotal() >= $configuration['amount'];
+        Assert::isInstanceOf($subject, OrderInterface::class);
+
+        $channelCode = $subject->getChannel()->getCode();
+        if (!isset($configuration[$channelCode])) {
+            return false;
+        }
+
+        return $this->itemTotalRuleChecker->isEligible($subject, $configuration[$channelCode]);
     }
 
     /**
@@ -34,6 +55,6 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface, ChannelAwareRu
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_rule_item_total_configuration';
+        return ItemTotalConfigurationType::class;
     }
 }

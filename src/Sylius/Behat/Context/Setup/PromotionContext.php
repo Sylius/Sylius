@@ -299,7 +299,7 @@ final class PromotionContext implements Context
         $discount,
         $targetAmount
     ) {
-        $channelCode = $this->sharedStorage->get('channel');
+        $channelCode = $this->sharedStorage->get('channel')->getCode();
         $rule = $this->ruleFactory->createItemTotal($channelCode, $targetAmount);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
@@ -313,7 +313,7 @@ final class PromotionContext implements Context
         $discount,
         $targetAmount
     ) {
-        $channelCode = $this->sharedStorage->get('channel');
+        $channelCode = $this->sharedStorage->get('channel')->getCode();
         $rule = $this->ruleFactory->createItemTotal($channelCode, $targetAmount);
 
         $this->createUnitPercentagePromotion($promotion, $discount, [], $rule);
@@ -516,7 +516,7 @@ final class PromotionContext implements Context
         $freeShippingAction = $this->actionFactory->createShippingPercentageDiscount(1);
         $promotion->addAction($freeShippingAction);
 
-        $channelCode = $this->sharedStorage->get('channel');
+        $channelCode = $this->sharedStorage->get('channel')->getCode();
         $rule = $this->ruleFactory->createItemTotal($channelCode, $targetAmount);
 
         $this->createUnitFixedPromotion($promotion, $discount, [], $rule);
@@ -535,7 +535,7 @@ final class PromotionContext implements Context
         $orderDiscountAction = $this->actionFactory->createFixedDiscount($orderDiscount, $this->sharedStorage->get('channel')->getCode());
         $promotion->addAction($orderDiscountAction);
 
-        $channelCode = $this->sharedStorage->get('channel');
+        $channelCode = $this->sharedStorage->get('channel')->getCode();
         $rule = $this->ruleFactory->createItemTotal($channelCode, $targetAmount);
 
         $this->createUnitPercentagePromotion(
