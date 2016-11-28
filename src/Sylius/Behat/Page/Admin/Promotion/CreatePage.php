@@ -62,6 +62,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function fillRuleOptionForChannel($channelName, $option, $value)
+    {
+        $lastAction = $this->getChannelConfigurationOfLastRule($channelName);
+        $lastAction->fillField($option, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addAction($actionName)
     {
         $count = count($this->getCollectionItems('actions'));
@@ -81,14 +90,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function selectActionOption($option, $value, $multiple = false)
     {
         $this->getLastCollectionItem('actions')->find('named', array('select', $option))->selectOption($value, $multiple);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function fillActionOption($option, $value)
-    {
-        $this->getLastCollectionItem('actions')->fillField($option, $value);
     }
 
     /**
@@ -196,6 +197,19 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             ->getLastCollectionItem('actions')
             ->find('css', sprintf('[id*="sylius_promotion_actions"] .configuration .field:contains("%s")', $channelName))
         ;
+    }
+
+    /**
+     * @param string $channelName
+     *
+     * @return NodeElement
+     */
+    private function getChannelConfigurationOfLastRule($channelName)
+    {
+        return $this
+            ->getLastCollectionItem('rules')
+            ->find('css', sprintf('[id*="sylius_promotion_rules"] .configuration .field:contains("%s")', $channelName))
+            ;
     }
 
     /**

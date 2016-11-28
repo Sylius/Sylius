@@ -16,6 +16,7 @@ use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonCodeChoiceType;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -46,7 +47,22 @@ class TotalOfItemsFromTaxonConfigurationType extends AbstractType
             ])
             ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.amount',
+                'currency' => $options['currency'],
             ])
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver
+            ->setDefined(['currency'])
+            ->setAllowedTypes('currency', 'string')
+            ->setDefault('currency', 'USD')
         ;
     }
 

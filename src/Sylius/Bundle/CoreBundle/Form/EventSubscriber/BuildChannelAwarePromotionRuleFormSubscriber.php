@@ -93,7 +93,7 @@ final class BuildChannelAwarePromotionRuleFormSubscriber extends BuildPromotionR
         $config = [
             'auto_initialize' => false,
             'label' => $channel->getName(),
-//            'currency' => $channel->getBaseCurrency()->getCode(),
+            'currency' => $channel->getBaseCurrency()->getCode(),
         ];
 
         return $this->factory->createNamed($channel->getCode(), $configuration, $data, $config);

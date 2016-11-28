@@ -183,7 +183,7 @@
             <tag name="form.type" alias="sylius_promotion_action" />
         </service>
         <service id="sylius.form.type.promotion_rule" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionRuleType">
-            <argument>%sylius.model.promotion_action.class%</argument>
+            <argument>%sylius.model.promotion_rule.class%</argument>
             <argument type="service" id="sylius.registry_promotion_rule_checker" />
             <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" alias="sylius_promotion_rule" />
