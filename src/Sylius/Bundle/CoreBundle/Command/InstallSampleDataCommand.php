@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\Question;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -39,9 +41,12 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        /** @var QuestionHelper $questionHelper */
+        $questionHelper = $this->getHelper('question');
+
         $output->writeln(sprintf('<error>Warning! This will erase your database.</error> Your current environment is <info>%s</info>.', $this->getEnvironment()));
 
-        if (!$this->getHelperSet()->get('dialog')->askConfirmation($output, '<question>Load sample data? (y/N)</question> ', false)) {
+        if (!$questionHelper->ask($input, $output, new Question('Load sample data? (y/N)', false))) {
             $output->writeln('Cancelled loading sample data.');
 
             return 0;
