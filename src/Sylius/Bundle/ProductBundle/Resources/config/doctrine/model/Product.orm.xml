@@ -20,26 +20,20 @@
         </id>
         <field name="code" column="code" type="string" unique="true" nullable="false"/>
 
-        <field name="availableOn" column="available_on" type="datetime" nullable="true">
-            <gedmo:versioned />
-        </field>
+        <field name="availableOn" column="available_on" type="datetime" nullable="true" />
 
-        <field name="availableUntil" column="available_until" type="datetime" nullable="true">
-            <gedmo:versioned />
-        </field>
+        <field name="availableUntil" column="available_until" type="datetime" nullable="true" />
 
         <one-to-many field="attributes" target-entity="Sylius\Component\Product\Model\ProductAttributeValueInterface" mapped-by="subject" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
-            <gedmo:versioned />
         </one-to-many>
 
         <one-to-many field="variants" target-entity="Sylius\Component\Product\Model\ProductVariantInterface" mapped-by="product" orphan-removal="true">
             <cascade>
                 <cascade-all />
             </cascade>
-            <gedmo:versioned />
         </one-to-many>
 
         <many-to-many field="options" target-entity="Sylius\Component\Product\Model\ProductOptionInterface">
@@ -70,8 +64,6 @@
                 <cascade-all/>
             </cascade>
         </one-to-many>
-
-        <gedmo:loggable />
     </mapped-superclass>
 
 </doctrine-mapping>
