@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Locale\Provider;
 
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-interface AvailableLocalesProviderInterface
+interface AvailableLocalesProviderInterface extends LocaleProviderInterface
 {
     /**
      * @return string[]

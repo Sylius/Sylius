@@ -13,7 +13,7 @@ namespace Sylius\Bundle\LocaleBundle\Context;
 
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Provider\AvailableLocalesProviderInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
@@ -27,15 +27,15 @@ final class RequestBasedLocaleContext implements LocaleContextInterface
     private $requestStack;
 
     /**
-     * @var LocaleProviderInterface
+     * @var AvailableLocalesProviderInterface
      */
     private $localeProvider;
 
     /**
      * @param RequestStack $requestStack
-     * @param LocaleProviderInterface $localeProvider
+     * @param AvailableLocalesProviderInterface $localeProvider
      */
-    public function __construct(RequestStack $requestStack, LocaleProviderInterface $localeProvider)
+    public function __construct(RequestStack $requestStack, AvailableLocalesProviderInterface $localeProvider)
     {
         $this->requestStack = $requestStack;
         $this->localeProvider = $localeProvider;
