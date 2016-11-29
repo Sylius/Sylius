@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionActionInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class BuildPromotionActionFormSubscriber extends AbstractConfigurationSubscriber
+final class BuildPromotionActionFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
      * @param PromotionActionInterface $action
@@ -34,23 +34,5 @@ class BuildPromotionActionFormSubscriber extends AbstractConfigurationSubscriber
         }
 
         return [];
-    }
-
-    /**
-     * @param PromotionActionInterface $action
-     *
-     * @return null|string
-     */
-    protected function getRegistryIdentifier($action)
-    {
-        if ($action instanceof PromotionActionInterface && null !== $action->getType()) {
-            return $action->getType();
-        }
-
-        if (null !== $this->registryIdentifier) {
-            return $this->registryIdentifier;
-        }
-
-        return null;
     }
 }

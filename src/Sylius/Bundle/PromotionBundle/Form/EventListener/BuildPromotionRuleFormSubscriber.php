@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Model\PromotionRuleInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class BuildPromotionRuleFormSubscriber extends AbstractConfigurationSubscriber
+final class BuildPromotionRuleFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
      * @param PromotionRuleInterface $rule
@@ -34,23 +34,5 @@ class BuildPromotionRuleFormSubscriber extends AbstractConfigurationSubscriber
         }
 
         return [];
-    }
-
-    /**
-     * @param PromotionRuleInterface $rule
-     *
-     * @return null|string
-     */
-    protected function getRegistryIdentifier($rule)
-    {
-        if ($rule instanceof PromotionRuleInterface && null !== $rule->getType()) {
-            return $rule->getType();
-        }
-
-        if (null !== $this->registryIdentifier) {
-            return $this->registryIdentifier;
-        }
-
-        return null;
     }
 }

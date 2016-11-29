@@ -12,18 +12,20 @@
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionConfigurationType;
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionRuleFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface;
+use Sylius\Component\Promotion\Model\PromotionRuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\FormFactoryIntegrface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class BuildChannelBasedPromotionRuleFormSubscriber extends BuildPromotionRuleFormSubscriber
+final class BuildChannelBasedPromotionRuleFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
      * @var ChannelRepositoryInterface
@@ -33,16 +35,14 @@ final class BuildChannelBasedPromotionRuleFormSubscriber extends BuildPromotionR
     /**
      * @param ServiceRegistryInterface $ruleCheckerRegistry
      * @param FormFactoryInterface $factory
-     * @param string $registryIdentifier
      * @param ChannelRepositoryInterface $channelRepository
      */
     public function __construct(
         ServiceRegistryInterface $ruleCheckerRegistry,
         FormFactoryInterface $factory,
-        $registryIdentifier,
         ChannelRepositoryInterface $channelRepository
     ) {
-        parent::__construct($ruleCheckerRegistry, $factory, $registryIdentifier);
+        parent::__construct($ruleCheckerRegistry, $factory);
 
         $this->channelRepository = $channelRepository;
     }
@@ -76,6 +76,20 @@ final class BuildChannelBasedPromotionRuleFormSubscriber extends BuildPromotionR
         }
 
         $form->add($configurationCollection);
+    }
+
+    /**
+     * @param PromotionRuleInterface $rule
+     *
+     * @return array
+     */
+    protected function getConfiguration($rule)
+    {
+        if ($rule instanceof PromotionRuleInterface && null !== $rule->getConfiguration()) {
+            return $rule->getConfiguration();
+        }
+
+        return [];
     }
 
     /**

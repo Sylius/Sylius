@@ -15,6 +15,7 @@ use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSub
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,20 +26,23 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PromotionActionType extends AbstractResourceType
 {
     /**
-     * @var ServiceRegistryInterface
+     * @var EventSubscriberInterface
      */
-    private $registry;
+    private $buildActionSubscriber;
 
     /**
      * {@inheritdoc}
      *
-     * @param ServiceRegistryInterface $registry
+     * @param EventSubscriberInterface $buildActionSubscriber
      */
-    public function __construct($dataClass, array $validationGroups, ServiceRegistryInterface $registry)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        EventSubscriberInterface $buildActionSubscriber
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->registry = $registry;
+        $this->buildActionSubscriber = $buildActionSubscriber;
     }
 
     /**
@@ -53,11 +57,7 @@ class PromotionActionType extends AbstractResourceType
                     'data-form-collection' => 'update',
                 ],
             ])
-            ->addEventSubscriber(new BuildPromotionActionFormSubscriber(
-                $this->registry,
-                $builder->getFormFactory(),
-                $options['configuration_type']
-            ))
+            ->addEventSubscriber($this->buildActionSubscriber)
         ;
     }
 
