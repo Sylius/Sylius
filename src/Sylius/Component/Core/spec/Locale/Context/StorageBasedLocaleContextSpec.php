@@ -18,7 +18,7 @@ use Sylius\Component\Core\Locale\Context\StorageBasedLocaleContext;
 use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
