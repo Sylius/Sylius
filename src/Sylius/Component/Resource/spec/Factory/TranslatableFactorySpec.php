@@ -17,14 +17,14 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\TranslationLocaleProviderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class TranslatableFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory, LocaleProviderInterface $localeProvider)
+    function let(FactoryInterface $factory, TranslationLocaleProviderInterface $localeProvider)
     {
         $this->beConstructedWith($factory, $localeProvider);
     }
@@ -49,8 +49,11 @@ final class TranslatableFactorySpec extends ObjectBehavior
         ;
     }
 
-    function it_creates_translatable_and_sets_locales(FactoryInterface $factory, LocaleProviderInterface $localeProvider, TranslatableInterface $resource)
-    {
+    function it_creates_translatable_and_sets_locales(
+        FactoryInterface $factory,
+        TranslationLocaleProviderInterface $localeProvider,
+        TranslatableInterface $resource
+    ) {
         $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
 
         $factory->createNew()->willReturn($resource);

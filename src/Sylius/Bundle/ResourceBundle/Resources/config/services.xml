@@ -23,11 +23,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.locale_provider.immutable" class="Sylius\Component\Resource\Provider\ImmutableLocaleProvider">
-            <argument>%sylius.translation.locales%</argument>
-            <argument>%sylius.translation.default_locale%</argument>
-        </service>
-
         <service id="sylius.form.type_extension.form.request_handler"
                  class="Sylius\Bundle\ResourceBundle\Form\Extension\HttpFoundation\HttpFoundationRequestHandler"
                  decorates="form.type_extension.form.request_handler" public="false" />

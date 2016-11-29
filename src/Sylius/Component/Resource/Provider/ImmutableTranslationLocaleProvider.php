@@ -14,7 +14,7 @@ namespace Sylius\Component\Resource\Provider;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ImmutableLocaleProvider implements LocaleProviderInterface
+final class ImmutableTranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
     /**
      * @var array
@@ -41,7 +41,7 @@ final class ImmutableLocaleProvider implements LocaleProviderInterface
      */
     public function getDefinedLocalesCodes()
     {
-        return array_keys($this->definedLocalesCodes);
+        return $this->definedLocalesCodes;
     }
 
     /**

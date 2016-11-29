@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Resource\Provider;
+namespace Sylius\Component\Locale\Provider;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -19,7 +19,7 @@ interface LocaleProviderInterface
     /**
      * @return string[]
      */
-    public function getDefinedLocalesCodes();
+    public function getAvailableLocalesCodes();
 
     /**
      * @return string

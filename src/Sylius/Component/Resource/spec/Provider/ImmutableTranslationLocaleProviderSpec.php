@@ -12,32 +12,27 @@
 namespace spec\Sylius\Component\Resource\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Provider\ImmutableLocaleProvider;
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\ImmutableTranslationLocaleProvider;
+use Sylius\Component\Resource\Provider\TranslationLocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ImmutableLocaleProviderSpec extends ObjectBehavior
+final class ImmutableTranslationLocaleProviderSpec extends ObjectBehavior
 {
     function let()
     {
-        $locales = [
-            'pl_PL' => true,
-            'en_US' => false,
-        ];
-
-        $this->beConstructedWith($locales, 'pl_PL');
+        $this->beConstructedWith(['pl_PL', 'en_US'], 'pl_PL');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ImmutableLocaleProvider::class);
+        $this->shouldHaveType(ImmutableTranslationLocaleProvider::class);
     }
 
-    function it_is_a_locale_provider_interface()
+    function it_implements_translation_locale_provider_interface()
     {
-        $this->shouldImplement(LocaleProviderInterface::class);
+        $this->shouldImplement(TranslationLocaleProviderInterface::class);
     }
 
     function it_returns_defined_locales_codes()

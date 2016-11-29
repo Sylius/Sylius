@@ -9,17 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Locale\Provider;
+namespace Sylius\Component\Core\Provider;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Provider\TranslationLocaleProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-final class LocaleProvider implements LocaleProviderInterface
+final class TranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
     /**
      * @var RepositoryInterface
@@ -44,9 +43,9 @@ final class LocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAvailableLocalesCodes()
+    public function getDefinedLocalesCodes()
     {
-        $locales = $this->localeRepository->findBy(['enabled' => true]);
+        $locales = $this->localeRepository->findAll();
 
         return array_map(
             function (LocaleInterface $locale) { return $locale->getCode(); },

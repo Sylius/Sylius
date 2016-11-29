@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Locale\Context;
 
-use Sylius\Component\Locale\Provider\AvailableLocalesProviderInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -19,14 +19,14 @@ use Sylius\Component\Locale\Provider\AvailableLocalesProviderInterface;
 final class ProviderBasedLocaleContext implements LocaleContextInterface
 {
     /**
-     * @var AvailableLocalesProviderInterface
+     * @var LocaleProviderInterface
      */
     private $localeProvider;
 
     /**
-     * @param AvailableLocalesProviderInterface $localeProvider
+     * @param LocaleProviderInterface $localeProvider
      */
-    public function __construct(AvailableLocalesProviderInterface $localeProvider)
+    public function __construct(LocaleProviderInterface $localeProvider)
     {
         $this->localeProvider = $localeProvider;
     }

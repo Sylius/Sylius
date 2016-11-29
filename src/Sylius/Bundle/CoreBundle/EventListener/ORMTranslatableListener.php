@@ -13,17 +13,11 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 use Doctrine\ORM\Events;
-use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -69,8 +63,8 @@ class ORMTranslatableListener implements EventSubscriber
         /** @var LocaleContextInterface $localeContext */
         $localeContext = $this->container->get('sylius.context.locale');
 
-        /** @var LocaleProviderInterface $localeProvider */
-        $localeProvider = $this->container->get('sylius_resource.translation.locale_provider');
+        /** @var TranslationLocaleProviderInterface $localeProvider */
+        $localeProvider = $this->container->get('sylius.translation_locale_provider');
 
         try {
             $entity->setCurrentLocale($localeContext->getLocaleCode());

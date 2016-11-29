@@ -15,12 +15,12 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Locale\Provider\AvailableLocalesProviderInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ChannelBasedLocaleProvider implements AvailableLocalesProviderInterface
+final class ChannelBasedLocaleProvider implements LocaleProviderInterface
 {
     /**
      * @var ChannelContextInterface
@@ -61,27 +61,6 @@ final class ChannelBasedLocaleProvider implements AvailableLocalesProviderInterf
                 })
                 ->toArray()
             ;
-        } catch (ChannelNotFoundException $exception) {
-            return [$this->defaultLocaleCode];
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefinedLocalesCodes()
-    {
-        try {
-            /** @var ChannelInterface $channel */
-            $channel = $this->channelContext->getChannel();
-
-            return $channel
-                ->getLocales()
-                ->map(function (LocaleInterface $locale) {
-                    return $locale->getCode();
-                })
-                ->toArray()
-                ;
         } catch (ChannelNotFoundException $exception) {
             return [$this->defaultLocaleCode];
         }

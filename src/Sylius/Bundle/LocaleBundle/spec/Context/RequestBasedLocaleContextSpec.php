@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\LocaleBundle\Context\RequestBasedLocaleContext;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
-use Sylius\Component\Locale\Provider\AvailableLocalesProviderInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class RequestBasedLocaleContextSpec extends ObjectBehavior
 {
-    function let(RequestStack $requestStack, AvailableLocalesProviderInterface $localeProvider)
+    function let(RequestStack $requestStack, LocaleProviderInterface $localeProvider)
     {
         $this->beConstructedWith($requestStack, $localeProvider);
     }
@@ -60,7 +60,7 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
 
     function it_throws_locale_not_found_exception_if_master_request_locale_code_is_not_among_available_ones(
         RequestStack $requestStack,
-        AvailableLocalesProviderInterface $localeProvider,
+        LocaleProviderInterface $localeProvider,
         Request $request
     ) {
         $requestStack->getMasterRequest()->willReturn($request);
@@ -74,7 +74,7 @@ final class RequestBasedLocaleContextSpec extends ObjectBehavior
 
     function it_returns_master_request_locale_code(
         RequestStack $requestStack,
-        AvailableLocalesProviderInterface $localeProvider,
+        LocaleProviderInterface $localeProvider,
         Request $request
     ) {
         $requestStack->getMasterRequest()->willReturn($request);

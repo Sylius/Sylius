@@ -1,10 +1,7 @@
 sylius_resource:
     translation:
-        default_locale: en_US
-        locales:
-            "pl_PL": false
-            "en_US": true
-            "de_DE": false
+        locale_provider: test.translation_locale_provider
+
     resources:
         app.book:
             classes:

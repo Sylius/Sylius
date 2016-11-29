@@ -20,7 +20,7 @@
         </service>
 
         <service id="sylius.form.type.resource_translations" class="Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType">
-            <argument type="service" id="sylius_resource.translation.locale_provider" />
+            <argument type="service" id="sylius.translation_locale_provider" />
             <tag name="form.type" />
         </service>
     </services>

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
 use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
@@ -37,9 +37,9 @@ final class ResourceTranslationsType extends AbstractType implements EventSubscr
     private $defaultLocaleCode;
 
     /**
-     * @param LocaleProviderInterface $localeProvider
+     * @param TranslationLocaleProviderInterface $localeProvider
      */
-    public function __construct(LocaleProviderInterface $localeProvider)
+    public function __construct(TranslationLocaleProviderInterface $localeProvider)
     {
         $this->definedLocalesCodes = $localeProvider->getDefinedLocalesCodes();
         $this->defaultLocaleCode = $localeProvider->getDefaultLocaleCode();
