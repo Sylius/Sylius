@@ -9,12 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\Taxon;
+namespace Sylius\Behat\Page\Shop\Product;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShowPageInterface
+interface IndexPageInterface
 {
     /**
      * @param string $productName

@@ -24,7 +24,7 @@ class ProductReviewRepository extends EntityRepository implements ProductReviewR
     /**
      * {@inheritdoc}
      */
-    public function findLatestByProductId($productId, $count = 3)
+    public function findLatestByProductId($productId, $count)
     {
         return $this->createQueryBuilder('o')
             ->where('o.reviewSubject = :productId')

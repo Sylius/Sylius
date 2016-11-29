@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_shop_partial_product_review_latest:
-    path: /reviews/latest/{count}
+    path: /latest/{count}
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_review:indexAction
@@ -11,6 +11,6 @@ sylius_shop_partial_product_review_latest:
             repository:
                 method: findLatestByProductId
                 arguments:
-                    - $count
                     - $productId
+                    - $count
         count: 3

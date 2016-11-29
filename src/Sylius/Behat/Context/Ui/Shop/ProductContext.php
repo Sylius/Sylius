@@ -13,9 +13,9 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
+use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
-use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface;
-use Sylius\Behat\Page\Shop\Taxon\ShowPageInterface as TaxonShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -33,27 +33,27 @@ final class ProductContext implements Context
     private $showPage;
 
     /**
-     * @var TaxonShowPageInterface
+     * @var IndexPageInterface
      */
-    private $taxonShowPage;
+    private $indexPage;
 
     /**
-     * @var IndexPageInterface
+     * @var ProductReviewIndexPageInterface
      */
     private $productReviewsIndexPage;
 
     /**
      * @param ShowPageInterface $showPage
-     * @param TaxonShowPageInterface $taxonShowPage
+     * @param IndexPageInterface $indexPage
      * @param IndexPageInterface $productReviewsIndexPage
      */
     public function __construct(
         ShowPageInterface $showPage,
-        TaxonShowPageInterface $taxonShowPage,
-        IndexPageInterface $productReviewsIndexPage
+        IndexPageInterface $indexPage,
+        ProductReviewIndexPageInterface $productReviewsIndexPage
     ) {
         $this->showPage = $showPage;
-        $this->taxonShowPage = $taxonShowPage;
+        $this->indexPage = $indexPage;
         $this->productReviewsIndexPage = $productReviewsIndexPage;
     }
 
@@ -191,7 +191,7 @@ final class ProductContext implements Context
      */
     public function iCheckListOfProductsForTaxon(TaxonInterface $taxon)
     {
-        $this->taxonShowPage->open(['slug' => $taxon->getSlug()]);
+        $this->indexPage->open(['slug' => $taxon->getSlug()]);
     }
 
     /**
@@ -199,7 +199,7 @@ final class ProductContext implements Context
      */
     public function iSearchForProductsWithName($name)
     {
-        $this->taxonShowPage->search($name);
+        $this->indexPage->search($name);
     }
 
     /**
@@ -207,7 +207,7 @@ final class ProductContext implements Context
      */
     public function iClearFilter()
     {
-        $this->taxonShowPage->clearFilter();
+        $this->indexPage->clearFilter();
     }
 
     /**
@@ -216,7 +216,7 @@ final class ProductContext implements Context
     public function iShouldSeeProduct($productName)
     {
         Assert::true(
-            $this->taxonShowPage->isProductOnList($productName),
+            $this->indexPage->isProductOnList($productName),
             sprintf("The product %s should appear on page, but it does not.", $productName)
         );
     }
@@ -227,7 +227,7 @@ final class ProductContext implements Context
     public function iShouldNotSeeProduct($productName)
     {
         Assert::false(
-            $this->taxonShowPage->isProductOnList($productName),
+            $this->indexPage->isProductOnList($productName),
             sprintf("The product %s should not appear on page, but it does.", $productName)
         );
     }
@@ -238,7 +238,7 @@ final class ProductContext implements Context
     public function iShouldSeeEmptyListOfProducts()
     {
         Assert::true(
-            $this->taxonShowPage->isEmpty(),
+            $this->indexPage->isEmpty(),
             'There should appear information about empty list of products, but it does not.'
         );
     }
@@ -300,7 +300,7 @@ final class ProductContext implements Context
     public function iShouldSeeTheProductWithPrice($productName, $productPrice)
     {
         Assert::true(
-            $this->taxonShowPage->isProductWithPriceOnList($productName, $productPrice),
+            $this->indexPage->isProductWithPriceOnList($productName, $productPrice),
             sprintf("The product %s with price %s should appear on page, but it does not.", $productName, $productPrice)
         );
     }
@@ -347,7 +347,7 @@ final class ProductContext implements Context
     {
         $sorting = ['createdAt' => 'oldest' === $sortDirection ? 'asc' : 'desc'];
 
-        $this->taxonShowPage->open(['slug' => $taxon->getSlug(), 'sorting' => $sorting]);
+        $this->indexPage->open(['slug' => $taxon->getSlug(), 'sorting' => $sorting]);
     }
 
     /**
@@ -355,7 +355,7 @@ final class ProductContext implements Context
      */
     public function iShouldSeeProductsInTheList($numberOfProducts)
     {
-        $foundRows = $this->taxonShowPage->countProductsItems();
+        $foundRows = $this->indexPage->countProductsItems();
 
         Assert::same(
             (int) $numberOfProducts,
@@ -370,7 +370,7 @@ final class ProductContext implements Context
     public function iShouldSeeProductWithName($name)
     {
         Assert::true(
-            $this->taxonShowPage->isProductOnPageWithName($name),
+            $this->indexPage->isProductOnPageWithName($name),
             sprintf('The product with name "%s" has not been found.', $name)
         );
     }
@@ -380,7 +380,7 @@ final class ProductContext implements Context
      */
     public function theFirstProductOnTheListShouldHaveName($name)
     {
-        $actualName = $this->taxonShowPage->getFirstProductNameFromList();
+        $actualName = $this->indexPage->getFirstProductNameFromList();
 
         Assert::same(
             $actualName,
@@ -511,7 +511,7 @@ final class ProductContext implements Context
     public function theyShouldHaveOrderLikeAnd(...$productNames)
     {
         Assert::true(
-            $this->taxonShowPage->hasProductsInOrder($productNames),
+            $this->indexPage->hasProductsInOrder($productNames),
             'The products have wrong order.'
         );
     }

@@ -9,22 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\Taxon;
+namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShowPage extends SymfonyPage implements ShowPageInterface
+class IndexPage extends SymfonyPage implements IndexPageInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getRouteName()
     {
-        return 'sylius_shop_taxon_show';
+        return 'sylius_shop_product_index';
     }
 
     /**
