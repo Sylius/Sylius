@@ -26,7 +26,7 @@ use Symfony\Component\Form\FormEvents;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneType extends AbstractResourceType
+final class ZoneType extends AbstractResourceType
 {
     /**
      * @var array

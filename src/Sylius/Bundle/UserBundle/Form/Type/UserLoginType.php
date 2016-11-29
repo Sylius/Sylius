@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserLoginType extends AbstractType
+final class UserLoginType extends AbstractType
 {
     /**
      * {@inheritdoc}

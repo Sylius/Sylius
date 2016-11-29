@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxCategoryType extends AbstractResourceType
+final class TaxCategoryType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

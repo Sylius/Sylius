@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionRuleChoiceType extends AbstractType
+final class PromotionRuleChoiceType extends AbstractType
 {
     protected $rules;
 

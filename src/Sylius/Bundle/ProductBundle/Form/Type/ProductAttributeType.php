@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProductAttributeType extends AttributeType
+final class ProductAttributeType extends AttributeType
 {
     /**
      * {@inheritdoc}

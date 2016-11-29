@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class AddressType extends AbstractResourceType
+final class AddressType extends AbstractResourceType
 {
     /**
      * @var EventSubscriberInterface

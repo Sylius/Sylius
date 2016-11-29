@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class CustomerGroupType extends AbstractResourceType
+final class CustomerGroupType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Kristian Loevstroem <kristian@loevstroem.dk>
  */
-class PromotionTypeExtension extends AbstractTypeExtension
+final class PromotionTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}

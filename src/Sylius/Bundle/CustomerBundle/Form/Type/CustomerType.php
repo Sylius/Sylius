@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerType extends AbstractResourceType
+final class CustomerType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

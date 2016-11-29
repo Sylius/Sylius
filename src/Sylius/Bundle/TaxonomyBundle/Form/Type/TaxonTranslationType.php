@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TaxonTranslationType extends AbstractResourceType
+final class TaxonTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

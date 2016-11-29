@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class AddUserFormSubscriber implements EventSubscriberInterface
+final class AddUserFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var string

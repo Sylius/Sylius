@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BooleanFilterType extends AbstractType
+final class BooleanFilterType extends AbstractType
 {
     /**
      * {@inheritdoc}

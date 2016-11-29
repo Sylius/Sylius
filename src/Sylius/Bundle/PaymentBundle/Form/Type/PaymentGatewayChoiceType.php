@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PaymentGatewayChoiceType extends AbstractType
+final class PaymentGatewayChoiceType extends AbstractType
 {
     /**
      * @var array

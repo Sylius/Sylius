@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductTranslationTypeExtension extends AbstractTypeExtension
+final class ProductTranslationTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}

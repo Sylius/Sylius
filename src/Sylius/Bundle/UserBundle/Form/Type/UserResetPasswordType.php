@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserResetPasswordType extends AbstractResourceType
+final class UserResetPasswordType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

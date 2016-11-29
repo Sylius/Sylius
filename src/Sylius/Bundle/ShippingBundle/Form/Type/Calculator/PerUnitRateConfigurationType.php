@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\Type;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PerUnitRateConfigurationType extends AbstractType
+final class PerUnitRateConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

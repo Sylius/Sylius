@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CountryChoiceType extends AbstractType
+final class CountryChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface

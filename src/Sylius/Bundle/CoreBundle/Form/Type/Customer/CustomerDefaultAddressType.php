@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CustomerDefaultAddressType extends AbstractType
+final class CustomerDefaultAddressType extends AbstractType
 {
     /**
      * {@inheritdoc}

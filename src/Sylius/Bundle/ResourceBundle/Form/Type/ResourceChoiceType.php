@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Aleksey Bannov <a.s.bannov@gmail.com>
  * @author Anna Walasek <anna.walasek@gmail.com>
  */
-class ResourceChoiceType extends AbstractType
+final class ResourceChoiceType extends AbstractType
 {
     /**
      * @var MetadataInterface

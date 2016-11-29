@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShipmentType extends AbstractType
+final class ShipmentType extends AbstractType
 {
     /**
      * @var string

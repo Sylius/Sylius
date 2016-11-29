@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductVariantChoiceType extends AbstractType
+final class ProductVariantChoiceType extends AbstractType
 {
     /**
      * {@inheritdoc}

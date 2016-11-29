@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ImageType extends AbstractResourceType
+abstract class ImageType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

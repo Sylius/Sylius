@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints\Valid;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerSimpleRegistrationType extends AbstractResourceType
+final class CustomerSimpleRegistrationType extends AbstractResourceType
 {
     /**
      * @var RepositoryInterface

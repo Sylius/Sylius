@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TaxonType extends AbstractResourceType
+final class TaxonType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

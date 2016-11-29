@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShippingMethodTypeExtension extends AbstractTypeExtension
+final class ShippingMethodTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var ServiceRegistryInterface

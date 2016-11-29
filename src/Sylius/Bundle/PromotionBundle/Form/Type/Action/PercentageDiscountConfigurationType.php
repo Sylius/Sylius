@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints\Type;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class PercentageDiscountConfigurationType extends AbstractType
+final class PercentageDiscountConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

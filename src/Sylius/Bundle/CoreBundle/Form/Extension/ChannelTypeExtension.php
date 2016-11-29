@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ChannelTypeExtension extends AbstractTypeExtension
+final class ChannelTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}

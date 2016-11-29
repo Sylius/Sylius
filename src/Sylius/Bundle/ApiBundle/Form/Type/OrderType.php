@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderType extends AbstractType
+final class OrderType extends AbstractType
 {
     /**
      * {@inheritdoc}
