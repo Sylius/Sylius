@@ -42,6 +42,7 @@ sylius_grid:
             create_zone: "@SyliusAdmin/Zone/Grid/Action/createZone.html.twig"
             default: "@SyliusAdmin/Grid/Action/default.html.twig"
             delete: "@SyliusAdmin/Grid/Action/delete.html.twig"
+            generate_variants: "@SyliusAdmin/Product/Grid/Action/generateVariants.html.twig"
             manage_coupons: "@SyliusAdmin/Promotion/Grid/Action/manageCoupons.html.twig"
             manage_variants: "@SyliusAdmin/Product/Grid/Action/manageVariants.html.twig"
             show: "@SyliusAdmin/Grid/Action/show.html.twig"

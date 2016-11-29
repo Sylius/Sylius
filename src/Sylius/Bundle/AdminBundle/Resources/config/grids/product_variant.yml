@@ -37,14 +37,9 @@ sylius_grid:
             actions:
                 main:
                     generate:
-                        type: default
-                        label: sylius.ui.generate
-                        icon: random
+                        type: generate_variants
                         options:
-                            link:
-                                route: sylius_admin_product_variant_generate
-                                parameters:
-                                    productId: $productId
+                            product: expr:service('sylius.repository.product').find($productId)
                     create:
                         type: create
                         options:
