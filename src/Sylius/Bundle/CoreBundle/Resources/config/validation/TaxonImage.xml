@@ -27,6 +27,11 @@
                 <option name="message">sylius.taxon_image.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Regex">
+                <option name="message">sylius.taxon_image.code.regex</option>
+                <option name="pattern">/^[\w-]*$/</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="file">
             <constraint name="Image">

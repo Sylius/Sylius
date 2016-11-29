@@ -24,6 +24,11 @@
                 <option name="message">sylius.customer_group.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Regex">
+                <option name="message">sylius.customer_group.code.regex</option>
+                <option name="pattern">/^[\w-]*$/</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="name">
             <constraint name="NotBlank">

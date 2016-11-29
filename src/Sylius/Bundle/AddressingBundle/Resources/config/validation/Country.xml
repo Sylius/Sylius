@@ -29,6 +29,11 @@
                 <option name="exactMessage">sylius.country.code.exact_length</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Regex">
+                <option name="message">sylius.country.code.regex</option>
+                <option name="pattern">/^[\w-]*$/</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="provinces">
             <constraint name="Valid" />

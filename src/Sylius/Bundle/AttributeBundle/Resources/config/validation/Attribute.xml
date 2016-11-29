@@ -30,6 +30,11 @@
                 <option name="maxMessage">sylius.attribute.code.max_length</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Regex">
+                <option name="message">sylius.attribute.code.regex</option>
+                <option name="pattern">/^[\w-]*$/</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="translations">
             <constraint name="Valid" />

@@ -23,6 +23,11 @@
                 <option name="message">sylius.shipping_category.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Regex">
+                <option name="message">sylius.shipping_category.code.regex</option>
+                <option name="pattern">/^[\w-]*$/</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="name">
             <constraint name="NotBlank">
