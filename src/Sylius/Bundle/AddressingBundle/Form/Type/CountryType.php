@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class CountryType extends AbstractResourceType
+final class CountryType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

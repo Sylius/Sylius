@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class LocaleChoiceType extends AbstractType
+final class LocaleChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface

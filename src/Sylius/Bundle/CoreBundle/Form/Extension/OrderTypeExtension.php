@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderTypeExtension extends AbstractTypeExtension
+final class OrderTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}

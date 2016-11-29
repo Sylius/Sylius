@@ -24,7 +24,7 @@ use Symfony\Component\Intl\Intl;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class LocaleTypeExtension extends AbstractTypeExtension
+final class LocaleTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var RepositoryInterface

@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProvinceChoiceType extends AbstractType
+final class ProvinceChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface

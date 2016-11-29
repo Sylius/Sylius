@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PromotionActionTypeExtension extends AbstractTypeExtension
+final class PromotionActionTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var ServiceRegistryInterface

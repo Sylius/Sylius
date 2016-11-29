@@ -28,7 +28,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddressType extends AbstractResourceType
+final class AddressType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

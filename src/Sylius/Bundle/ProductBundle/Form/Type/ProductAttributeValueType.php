@@ -16,7 +16,7 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ProductAttributeValueType extends AttributeValueType
+final class ProductAttributeValueType extends AttributeValueType
 {
     /**
      * {@inheritdoc}

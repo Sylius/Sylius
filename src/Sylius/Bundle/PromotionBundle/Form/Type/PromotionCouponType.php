@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionCouponType extends AbstractResourceType
+final class PromotionCouponType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

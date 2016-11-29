@@ -25,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductOptionValueCollectionType extends AbstractType
+final class ProductOptionValueCollectionType extends AbstractType
 {
     /**
      * {@inheritdoc}

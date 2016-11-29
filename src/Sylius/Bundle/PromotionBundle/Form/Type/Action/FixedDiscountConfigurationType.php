@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\Type;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class FixedDiscountConfigurationType extends AbstractType
+final class FixedDiscountConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductType extends AbstractResourceType
+final class ProductType extends AbstractResourceType
 {
     /**
      * @var ProductVariantResolverInterface

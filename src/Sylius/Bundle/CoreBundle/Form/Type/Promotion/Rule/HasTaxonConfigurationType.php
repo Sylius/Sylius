@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class HasTaxonConfigurationType extends AbstractType
+final class HasTaxonConfigurationType extends AbstractType
 {
     /**
      * @var DataTransformerInterface

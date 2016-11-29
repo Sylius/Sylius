@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderType extends AbstractResourceType
+final class OrderType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

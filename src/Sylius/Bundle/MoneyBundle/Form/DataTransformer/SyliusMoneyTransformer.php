@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedString
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class SyliusMoneyTransformer extends MoneyToLocalizedStringTransformer
+final class SyliusMoneyTransformer extends MoneyToLocalizedStringTransformer
 {
     /**
      * {@inheritdoc}

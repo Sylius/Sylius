@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\Type;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemTotalConfigurationType extends AbstractType
+final class ItemTotalConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

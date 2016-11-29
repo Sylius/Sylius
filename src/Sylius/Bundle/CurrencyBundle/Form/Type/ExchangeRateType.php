@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ExchangeRateType extends AbstractResourceType
+final class ExchangeRateType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

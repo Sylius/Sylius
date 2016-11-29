@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ZoneChoiceType extends AbstractType
+final class ZoneChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface

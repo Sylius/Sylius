@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CompleteType extends AbstractResourceType
+final class CompleteType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

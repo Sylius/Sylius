@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductVariantMatchType extends AbstractType
+final class ProductVariantMatchType extends AbstractType
 {
     /**
      * {@inheritdoc}

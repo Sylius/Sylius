@@ -16,7 +16,7 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeChoiceType;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ProductAttributeChoiceType extends AttributeChoiceType
+final class ProductAttributeChoiceType extends AttributeChoiceType
 {
     /**
      * {@inheritdoc}

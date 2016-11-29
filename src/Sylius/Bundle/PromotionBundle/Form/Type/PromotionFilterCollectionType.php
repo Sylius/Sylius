@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PromotionFilterCollectionType extends AbstractType
+final class PromotionFilterCollectionType extends AbstractType
 {
     /**
      * {@inheritdoc}

@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\Type;
 /**
  * @author Antonio Perić <antonio@locastic.com>
  */
-class CustomerGroupType extends AbstractType
+final class CustomerGroupType extends AbstractType
 {
     /**
      * @var RepositoryInterface

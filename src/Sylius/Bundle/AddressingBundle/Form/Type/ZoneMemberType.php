@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneMemberType extends AbstractResourceType
+final class ZoneMemberType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

@@ -16,7 +16,7 @@ use Sylius\Bundle\AttributeBundle\Form\Type\AttributeTranslationType;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ProductAttributeTranslationType extends AttributeTranslationType
+final class ProductAttributeTranslationType extends AttributeTranslationType
 {
     /**
      * {@inheritdoc}

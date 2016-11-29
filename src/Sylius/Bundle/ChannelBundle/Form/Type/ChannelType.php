@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ChannelType extends AbstractResourceType
+final class ChannelType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
