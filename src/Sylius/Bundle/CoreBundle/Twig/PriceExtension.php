@@ -11,22 +11,22 @@
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Sylius\Bundle\CoreBundle\Templating\Helper\ChannelBasedPriceHelperInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ChannelBasedPriceExtension extends \Twig_Extension
+final class PriceExtension extends \Twig_Extension
 {
     /**
-     * @var ChannelBasedPriceHelperInterface
+     * @var Helper
      */
     private $helper;
 
     /**
-     * @param ChannelBasedPriceHelperInterface $helper
+     * @param Helper $helper
      */
-    public function __construct(ChannelBasedPriceHelperInterface $helper)
+    public function __construct(Helper $helper)
     {
         $this->helper = $helper;
     }
@@ -37,7 +37,7 @@ final class ChannelBasedPriceExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_channel_variant_price', [$this->helper, 'getPriceForCurrentChannel']),
+            new \Twig_SimpleFilter('sylius_calculate_price', [$this->helper, 'getPrice']),
         ];
     }
 
@@ -46,6 +46,6 @@ final class ChannelBasedPriceExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'sylius_channel_variant_price';
+        return 'sylius_calculate_price';
     }
 }

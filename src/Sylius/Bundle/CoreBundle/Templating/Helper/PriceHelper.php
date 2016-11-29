@@ -12,49 +12,38 @@
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Order\Context\CartContextInterface;
 use Symfony\Component\Templating\Helper\Helper;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ChannelBasedPriceHelper extends Helper implements ChannelBasedPriceHelperInterface
+class PriceHelper extends Helper
 {
-    /**
-     * @var CartContextInterface
-     */
-    private $cartContext;
-
     /**
      * @var ProductVariantPriceCalculatorInterface
      */
     private $productVariantPriceCalculator;
 
     /**
-     * @param CartContextInterface $cartContext
      * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
      */
-    public function __construct(
-        CartContextInterface $cartContext,
-        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
-    ) {
-        $this->cartContext = $cartContext;
+    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    {
         $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPriceForCurrentChannel(ProductVariantInterface $productVariant)
+    public function getPrice(ProductVariantInterface $productVariant, array $context)
     {
-        /** @var OrderInterface $currentCart */
-        $currentCart = $this->cartContext->getCart();
+        Assert::keyExists($context, 'channel');
 
         return $this
             ->productVariantPriceCalculator
-            ->calculate($productVariant, ['channel' => $currentCart->getChannel()])
+            ->calculate($productVariant, $context)
         ;
     }
 
@@ -63,6 +52,6 @@ class ChannelBasedPriceHelper extends Helper implements ChannelBasedPriceHelperI
      */
     public function getName()
     {
-        return 'sylius_channel_variant_price';
+        return 'sylius_calculate_price';
     }
 }

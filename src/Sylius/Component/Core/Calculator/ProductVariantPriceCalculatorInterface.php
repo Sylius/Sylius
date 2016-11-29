@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Calculator;
 
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
 /**
