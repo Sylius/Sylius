@@ -55,15 +55,4 @@ class PercentageDiscountConfigurationType extends AbstractType
     {
         return 'sylius_promotion_action_percentage_discount_configuration';
     }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver
-            ->setDefined(['currency'])
-            ->setAllowedTypes('currency', 'string')
-            ->setDefault('currency', 'USD')
-        ;
-    }
 }

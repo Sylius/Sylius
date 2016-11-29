@@ -50,7 +50,7 @@ class ItemTotalConfigurationType extends AbstractType
         $resolver
             ->setDefined(['currency'])
             ->setAllowedTypes('currency', 'string')
-            ->setDefault('currency', 'USD')
+            ->setRequired(['currency'])
         ;
     }
 
