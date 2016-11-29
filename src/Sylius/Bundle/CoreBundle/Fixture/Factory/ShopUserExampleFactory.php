@@ -97,9 +97,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
             ->setDefault('last_name', function (Options $options) {
                 return $this->faker->lastName;
             })
-            ->setDefault('enabled', function (Options $options) {
-                return $this->faker->boolean(90);
-            })
+            ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('password', 'password123')
         ;
