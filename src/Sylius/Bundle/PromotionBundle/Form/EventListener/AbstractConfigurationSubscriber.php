@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\EventListener;
 
+use Sylius\Component\Promotion\Model\PromotionDynamicTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -34,23 +35,15 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     protected $factory;
 
     /**
-     * @var string|null
-     */
-    protected $registryIdentifier;
-
-    /**
      * @param ServiceRegistryInterface $registry
      * @param FormFactoryInterface $factory
-     * @param string|null $registryIdentifier
      */
     public function __construct(
         ServiceRegistryInterface $registry,
-        FormFactoryInterface $factory,
-        $registryIdentifier = null
+        FormFactoryInterface $factory
     ) {
         $this->registry = $registry;
         $this->factory = $factory;
-        $this->registryIdentifier = $registryIdentifier;
     }
 
     /**
@@ -72,7 +65,7 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     {
         $action = $event->getData();
 
-        if (null === $type = $this->getRegistryIdentifier($action)) {
+        if (null === $type = $this->getRegistryIdentifier($action, $event->getForm())) {
             return;
         }
 
@@ -86,7 +79,7 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     {
         $action = $event->getData();
 
-        if (null === $type = $this->getRegistryIdentifier($action)) {
+        if (null === $type = $this->getRegistryIdentifier($action, $event->getForm())) {
             return;
         }
 
@@ -136,9 +129,23 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     }
 
     /**
-     * @return string
+     * @param PromotionDynamicTypeInterface|null $rule
+     * @param FormInterface $form
+     *
+     * @return null|string
      */
-    abstract protected function getRegistryIdentifier($model);
+    protected function getRegistryIdentifier(PromotionDynamicTypeInterface $rule = null, FormInterface $form)
+    {
+        if ($rule instanceof PromotionDynamicTypeInterface && null !== $rule->getType()) {
+            return $rule->getType();
+        }
+
+        if (null !== $form->getConfig()->hasOption('configuration_type')) {
+            return $form->getConfig()->getOption('configuration_type');
+        }
+
+        return null;
+    }
 
     /**
      * @return array

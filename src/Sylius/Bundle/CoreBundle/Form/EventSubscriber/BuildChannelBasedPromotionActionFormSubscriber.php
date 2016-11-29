@@ -12,10 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionConfigurationType;
-use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSubscriber;
+use Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Promotion\Action\ChannelBasedPromotionActionCommandInterface;
+use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -23,7 +24,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class BuildChannelBasedPromotionActionFormSubscriber extends BuildPromotionActionFormSubscriber
+final class BuildChannelBasedPromotionActionFormSubscriber extends AbstractConfigurationSubscriber
 {
     /**
      * @var ChannelRepositoryInterface
@@ -33,16 +34,14 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends BuildPromotio
     /**
      * @param ServiceRegistryInterface $actionRegistry
      * @param FormFactoryInterface $factory
-     * @param string $registryIdentifier
      * @param ChannelRepositoryInterface $channelRepository
      */
     public function __construct(
         ServiceRegistryInterface $actionRegistry,
         FormFactoryInterface $factory,
-        $registryIdentifier,
         ChannelRepositoryInterface $channelRepository
     ) {
-        parent::__construct($actionRegistry, $factory, $registryIdentifier);
+        parent::__construct($actionRegistry, $factory);
 
         $this->channelRepository = $channelRepository;
     }
@@ -76,6 +75,20 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends BuildPromotio
         }
 
         $form->add($configurationCollection);
+    }
+
+    /**
+     * @param $action
+     *
+     * @return array
+     */
+    protected function getConfiguration($action)
+    {
+        if ($action instanceof PromotionActionInterface && null !== $action->getConfiguration()) {
+            return $action->getConfiguration();
+        }
+
+        return [];
     }
 
     /**
