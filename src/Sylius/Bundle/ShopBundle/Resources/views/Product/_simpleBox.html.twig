@@ -13,6 +13,8 @@
     </a>
     <div class="content">
         <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}" class="header sylius-product-name">{{ product.name }}</a>
+        {% if not product.variants.empty() %}
         <div class="sylius-product-price">{{ money.convertAndFormat(product.variants.first()|sylius_channel_variant_price) }}</div>
+        {% endif %}
     </div>
 </div>
