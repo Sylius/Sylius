@@ -44,7 +44,13 @@
     "require-dev": {
         "hwi/oauth-bundle": "^0.5",
         "phpspec/phpspec": "^3.2",
-        "symfony/form": "^3.2@rc"
+        "phpunit/phpunit": "^5.6",
+        "symfony/form": "^3.2@rc",
+        "symfony/browser-kit": "^3.2@rc",
+        "symfony/security-bundle": "^3.2@rc",
+        "symfony/swiftmailer-bundle": "^2.4",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "suggest": {
         "hwi/oauth-bundle": "For OAuth integration"
@@ -56,7 +62,10 @@
         "psr-4": { "Sylius\\Bundle\\UserBundle\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Bundle\\UserBundle\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Bundle\\UserBundle\\spec\\": "spec/",
+            "AppBundle\\": "test/src/AppBundle/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -69,6 +78,9 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
+        },
+        "incenteev-parameters": {
+            "file": "test/app/config/parameters.yml"
         }
     }
 }

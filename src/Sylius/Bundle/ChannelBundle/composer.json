@@ -30,8 +30,12 @@
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "phpspec/phpspec": "^3.2",
         "phpunit/phpunit": "^5.6",
+        "twig/twig": "^1.0",
+        "doctrine/orm": "^2.5",
         "symfony/form": "^3.2@rc",
-        "twig/twig": "^1.0"
+        "symfony/browser-kit": "^3.2@rc",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -40,7 +44,10 @@
         "psr-4": { "Sylius\\Bundle\\ChannelBundle\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Bundle\\ChannelBundle\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Bundle\\ChannelBundle\\spec\\": "spec/",
+            "AppBundle\\": "test/src/AppBundle/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -53,6 +60,9 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
+        },
+        "incenteev-parameters": {
+            "file": "test/app/config/parameters.yml"
         }
     }
 }

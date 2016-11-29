@@ -18,17 +18,6 @@
             <tag name="doctrine.event_subscriber" />
         </service>
 
-        <service id="sylius.validator.unique_reviewer_email" class="Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmailValidator">
-            <argument type="service" id="sylius.repository.shop_user" />
-            <argument type="service" id="security.token_storage" />
-            <argument type="service" id="security.authorization_checker" />
-            <tag name="validator.constraint_validator" alias="sylius_unique_reviewer_email_validator" />
-        </service>
-
-        <service id="sylius.listener.review_create" class="Sylius\Bundle\ReviewBundle\EventListener\ReviewCreateListener">
-            <argument type="service" id="sylius.context.customer" />
-            <tag name="kernel.event_listener" event="sylius.product_review.pre_create" method="ensureReviewHasAuthor" />
-        </service>
         <service id="sylius.listener.review_change" class="Sylius\Bundle\ReviewBundle\EventListener\ReviewChangeListener">
             <argument type="service" id="sylius.average_rating_updater" />
             <tag name="kernel.event_listener" event="sylius.product_review.post_update" method="recalculateSubjectRating" />
@@ -39,11 +28,6 @@
         <service id="sylius.average_rating_updater" class="Sylius\Bundle\ReviewBundle\Updater\AverageRatingUpdater">
             <argument type="service" id="sylius.average_rating_calculator" />
             <argument type="service" id="doctrine.orm.default_entity_manager" />
-        </service>
-        <service id="sylius.reviewer_reviews_remover" class="Sylius\Bundle\ReviewBundle\Remover\ReviewerReviewsRemover">
-            <argument type="service" id="sylius.repository.product_review" />
-            <argument type="service" id="sylius.manager.product_review" />
-            <argument type="service" id="sylius.average_rating_updater" />
         </service>
     </services>
 </container>

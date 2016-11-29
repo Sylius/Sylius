@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\EventListener\CustomerReviewsDeleteListener;
-use Sylius\Bundle\ReviewBundle\Remover\ReviewerReviewsRemover;
+use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;

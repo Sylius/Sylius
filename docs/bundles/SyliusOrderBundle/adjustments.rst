@@ -9,4 +9,4 @@ Adjustment model
 
 .. note::
 
-    To be written.
+    To be written. Learn more in :doc:`the Book </book/adjustments>`.

@@ -57,14 +57,7 @@ Don't worry, everything was automatically installed via Composer.
 Container configuration
 -----------------------
 
-Put this configuration inside your ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    sylius_taxonomy:
-        driver: doctrine/orm # Configure the doctrine orm driver used in documentation.
-
-And configure doctrine extensions which are used in the taxonomy bundle:
+Configure doctrine extensions which are used in the taxonomy bundle:
 
 .. code-block:: yaml
 
@@ -73,17 +66,6 @@ And configure doctrine extensions which are used in the taxonomy bundle:
             default:
                 tree: true
                 sluggable: true
-
-Routing configuration
----------------------
-
-Add the following lines to your ``app/config/routing.yml``.
-
-.. code-block:: yaml
-
-    sylius_taxonomy:
-        resource: "@SyliusTaxonomyBundle/Resources/config/routing.yml"
-        prefix: /taxonomy
 
 Updating database schema
 ------------------------

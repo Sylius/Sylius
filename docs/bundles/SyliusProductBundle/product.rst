@@ -132,4 +132,4 @@ To remove a product, you also use the manager.
 Properties
 ----------
 
-A product can also have a set of defined Properties (think Attributes), you'll learn about them in next chapter of this documentation.
+A product can also have a set of defined Properties (:doc:`Attributes </book/attributes>`), you'll learn about them in next chapter of this documentation.

@@ -6,22 +6,10 @@ Coupon based promotions require special needs that are covered by this documenta
 Coupon generator
 ----------------
 
-``SyliusPromotionBundle`` provides a way of generating coupons for a promotion : the coupon generator. Provided as a service ``sylius.promotion_coupon_generator`` via the class ``Sylius\Bundle\PromotionBundle\Generator\PromotionCouponGenerator``, its goal is to generate unique coupon codes.
-
-
-Coupon to code transformer
---------------------------
-
-``SyliusPromotionBundle`` provides a way to transform a simple string code to a real ``PromotionCoupon`` object (and vice versa). This is done via the ``Sylius\Bundle\PromotionBundle\Form\DataTransformer\CouponToCodeTransformer`` class.
-
-This data transformer is used by default with the ``Sylius\Bundle\PromotionBundle\Form\Type\PromotionCouponToCodeType`` form, provided as the service ``sylius.form.type.promotion_coupon_to_code``.
-
-.. note::
-
-    An example of integration of this form can be found in the ``Sylius\Bundle\CoreBundle\Form\Type\CartType`` class of ``Sylius/Standard-Edition``.
-
+``SyliusPromotionBundle`` provides a way of generating coupons for a promotion : the coupon generator.
+Provided as a service ``sylius.promotion_coupon_generator`` via the class ``Sylius\Bundle\PromotionBundle\Generator\PromotionCouponGenerator``, its goal is to generate unique coupon codes.
 
 PromotionCoupon controller
 --------------------------
 
-The ``Sylius\Bundle\PromotionBundle\Controller\PromotionCouponController`` provides an interface for easily generating new coupons.
+The ``Sylius\Bundle\PromotionBundle\Controller\PromotionCouponController`` provides a method for generating new coupons.

@@ -10,42 +10,23 @@ Configuration Reference
         # The driver used for persistence layer.
         driver: ~
         resources:
-            taxonomy:
-                classes:
-                    model:      Sylius\Component\Taxonomy\Model\Taxonomy
-                    interface:  Sylius\Component\Taxonomy\Model\TaxonomyInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                    repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyType
-                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
-                validation_groups:
-                    default: [ sylius ]
-                translation:
-                    classes:
-                        model:      Sylius\Component\Taxonomy\Model\TaxonomyTranslation
-                        interface:  Sylius\Component\Taxonomy\Model\TaxonomyTranslationInterface
-                        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                        repository: ~
-                        factory:    Sylius\Component\Resource\Factory\Factory
-                        form:
-                            default: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyTranslationType
-                    validation_groups:
-                        default: [ sylius ]
-                    fields:
-                        default: [ name ]
             taxon:
                 classes:
                     model:      Sylius\Component\Taxonomy\Model\Taxon
                     interface:  Sylius\Component\Taxonomy\Model\TaxonInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Component\Resource\Factory\TranslatableFactory
                     form:
                         default: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonType
+                        from_identifier: Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType
+                        to_identifier: Sylius\Bundle\ResourceBundle\Form\Type\ResourceToHiddenIdentifierType
+                        to_hidden_identifier: Sylius\Bundle\ResourceBundle\Form\Type\ResourceToIdentifierType
                 validation_groups:
                     default: [ sylius ]
+                    from_identifier: [ sylius ]
+                    to_identifier: [ sylius ]
+                    to_hidden_identifier: [ sylius ]
                 translation:
                     classes:
                         model:      Sylius\Component\Taxonomy\Model\TaxonTranslation

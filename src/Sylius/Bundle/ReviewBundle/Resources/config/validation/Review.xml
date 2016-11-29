@@ -46,8 +46,5 @@
                 </option>
             </constraint>
         </property>
-        <constraint name="Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmail" >
-            <option name="groups">sylius_review</option>
-        </constraint>
     </class>
 </constraint-mapping>

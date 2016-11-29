@@ -1,5 +1,6 @@
 * :doc:`/bundles/SyliusAddressingBundle/index`
 * :doc:`/bundles/SyliusAttributeBundle/index`
+* :doc:`/bundles/SyliusCustomerBundle/index`
 * :doc:`/bundles/SyliusFixturesBundle/index`
 * :doc:`/bundles/SyliusGridBundle/index`
 * :doc:`/bundles/SyliusInventoryBundle/index`
@@ -14,3 +15,4 @@
 * :doc:`/bundles/SyliusTaxationBundle/index`
 * :doc:`/bundles/SyliusTaxonomyBundle/index`
 * :doc:`/bundles/SyliusThemeBundle/index`
+* :doc:`/bundles/SyliusUserBundle/index`

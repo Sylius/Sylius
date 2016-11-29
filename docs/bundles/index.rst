@@ -6,6 +6,7 @@ Symfony Bundles
 
     SyliusAddressingBundle/index
     SyliusAttributeBundle/index
+    SyliusCustomerBundle/index
     SyliusFixturesBundle/index
     SyliusGridBundle/index
     SyliusInventoryBundle/index
@@ -20,5 +21,6 @@ Symfony Bundles
     SyliusTaxationBundle/index
     SyliusTaxonomyBundle/index
     SyliusThemeBundle/index
+    SyliusUserBundle/index
 
 .. include:: /bundles/map.rst.inc
