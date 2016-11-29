@@ -34,10 +34,6 @@ Don't worry, everything was automatically installed via Composer.
     public function registerBundles()
     {
         $bundles = array(
-            new FOS\RestBundle\FOSRestBundle(),
-            new JMS\SerializerBundle\JMSSerializerBundle($this),
-            new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\GridBundle\SyliusGridBundle(),
         );
     }

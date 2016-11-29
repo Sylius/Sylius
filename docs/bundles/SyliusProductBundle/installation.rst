@@ -38,9 +38,11 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
+            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new Sylius\Bundle\ProductBundle\SyliusProductBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
+            new Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -55,13 +57,6 @@ Container configuration
 -----------------------
 
 Put this configuration inside your ``app/config/config.yml``.
-
-.. code-block:: yaml
-
-    sylius_product:
-        driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
-
-And configure doctrine extensions which are used by the bundle.
 
 .. code-block:: yaml
 

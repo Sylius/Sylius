@@ -11,49 +11,51 @@ Configuration reference
 .. code-block:: yaml
 
     sylius_order:
-        # The driver used for persistence layer.
-        driver: ~
+        driver: doctrine/orm
         resources:
             order:
                 classes:
-                    model:      Sylius\Component\Order\Model\Order
-                    interface:  Sylius\Component\Order\Model\OrderInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                    repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    model: Sylius\Component\Core\Model\Order
+                    controller: Sylius\Bundle\CoreBundle\Controller\OrderController
+                    repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
                     form:
-                        default: Sylius\Bundle\OrderBundle\Form\Type\OrderType
+                        default: Sylius\Bundle\CoreBundle\Form\Type\Order\OrderType
+                    interface: Sylius\Component\Order\Model\OrderInterface
+                    factory: Sylius\Component\Resource\Factory\Factory
                 validation_groups:
-                     default: [ sylius ]
+                    default: [ sylius ]
             order_item:
                 classes:
-                    model:      Sylius\Component\Order\Model\OrderItem
-                    interface:  Sylius\Component\Order\Model\OrderItemInterface
-                    controller: Sylius\Bundle\OrderBundle\Controller\OrderItemController
-                    repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    model: Sylius\Component\Core\Model\OrderItem
                     form:
-                        default: Sylius\Bundle\OrderBundle\Form\Type\OrderItemType
+                        default: Sylius\Bundle\CoreBundle\Form\Type\Order\OrderItemType
+                    interface: Sylius\Component\Order\Model\OrderItemInterface
+                    controller: Sylius\Bundle\OrderBundle\Controller\OrderItemController
+                    factory: Sylius\Component\Resource\Factory\Factory
                 validation_groups:
-                     default: [ sylius ]
+                    default: [ sylius ]
             order_item_unit:
                 classes:
-                    model:      Sylius\Component\Order\Model\OrderItemUnit
-                    interface:  Sylius\Component\Order\Model\OrderItemUnit\Interface
-                    repository: ~
-                    factory:    Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactory
-            order_identity:
-                classes:
-                    model:     Sylius\Component\Order\Model\Identity
-                    interface: Sylius\Component\Order\Model\IdentityInterface
-                    factory:   Sylius\Component\Resource\Factory\Factory
+                    model: Sylius\Component\Core\Model\OrderItemUnit
+                    interface: Sylius\Component\Order\Model\OrderItemUnitInterface
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    factory: Sylius\Component\Order\Factory\OrderItemUnitFactory
             adjustment:
                 classes:
-                    model:      Sylius\Component\Order\Model\Adjustment
-                    interface:  Sylius\Component\Order\Model\AdjustmentInterface
+                    model: Sylius\Component\Order\Model\Adjustment
+                    interface: Sylius\Component\Order\Model\AdjustmentInterface
                     controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                    repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Component\Resource\Factory\Factory
+                validation_groups:
+                    default: [ sylius ]
+            order_sequence:
+                classes:
+                    model: Sylius\Component\Order\Model\OrderSequence
+                    interface: Sylius\Component\Order\Model\OrderSequenceInterface
+                    factory: Sylius\Component\Resource\Factory\Factory
+        expiration:
+            cart: '2 days'
+            order: '5 days'
 
 
 `phpspec2 <http://phpspec.net>`_ examples
