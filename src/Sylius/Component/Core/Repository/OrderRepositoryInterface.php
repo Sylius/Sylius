@@ -83,7 +83,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      *
      * @return OrderInterface|null
      */
-    public function findCartByChannelAndCustomer(ChannelInterface $channel, CustomerInterface $customer);
+    public function findLatestCartByChannelAndCustomer(ChannelInterface $channel, CustomerInterface $customer);
 
     /**
      * @param ChannelInterface $channel

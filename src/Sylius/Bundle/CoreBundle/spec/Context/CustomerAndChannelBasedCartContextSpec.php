@@ -57,7 +57,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $customerContext->getCustomer()->willReturn($customer);
 
-        $orderRepository->findCartByChannelAndCustomer($channel, $customer)->willReturn($order);
+        $orderRepository->findLatestCartByChannelAndCustomer($channel, $customer)->willReturn($order);
 
         $this->getCart()->shouldReturn($order);
     }
@@ -72,7 +72,7 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         $channelContext->getChannel()->willReturn($channel);
         $customerContext->getCustomer()->willReturn($customer);
 
-        $orderRepository->findCartByChannelAndCustomer($channel, $customer)->willReturn(null);
+        $orderRepository->findLatestCartByChannelAndCustomer($channel, $customer)->willReturn(null);
 
         $this
             ->shouldThrow(new CartNotFoundException('Sylius was not able to find the cart for currently logged in user.'))
@@ -90,12 +90,13 @@ final class CustomerAndChannelBasedCartContextSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_nothing_if_channel_could_not_be_found(
-        ChannelContextInterface $channelContext,
-        CustomerContextInterface $customerContext
-    ) {
+    function it_does_nothing_if_channel_could_not_be_found(ChannelContextInterface $channelContext)
+    {
         $channelContext->getChannel()->willThrow(new ChannelNotFoundException());
 
-        $customerContext->getCustomer()->shouldNotBeCalled();
+        $this
+            ->shouldThrow(new CartNotFoundException('Sylius was not able to find the cart, as there is no current channel.'))
+            ->during('getCart', [])
+        ;
     }
 }
