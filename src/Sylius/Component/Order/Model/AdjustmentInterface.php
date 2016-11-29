@@ -56,8 +56,6 @@ interface AdjustmentInterface extends ResourceInterface, TimestampableInterface
 
     /**
      * @param int $amount
-     *
-     * @throws \InvalidArgumentException
      */
     public function setAmount($amount);
 

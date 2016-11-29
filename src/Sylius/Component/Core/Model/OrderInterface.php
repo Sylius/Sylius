@@ -178,14 +178,14 @@ interface OrderInterface extends
     public function getOrderPromotionTotal();
 
     /**
-     * @param string $tokenValue
-     */
-    public function setTokenValue($tokenValue);
-
-    /**
      * @return string
      */
     public function getTokenValue();
+
+    /**
+     * @param string $tokenValue
+     */
+    public function setTokenValue($tokenValue);
 
     /**
      * @return string

@@ -54,11 +54,11 @@ class Shipment implements ShipmentInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
-        return (string) $this->id;
+        return (string) $this->getId();
     }
 
     /**
@@ -142,23 +142,6 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippables()
-    {
-        $shippables = new ArrayCollection();
-
-        foreach ($this->units as $unit) {
-            $shippable = $unit->getShippable();
-            if (!$shippables->contains($shippable)) {
-                $shippables->add($shippable);
-            }
-        }
-
-        return $shippables;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTracking()
     {
         return $this->tracking;
@@ -178,6 +161,23 @@ class Shipment implements ShipmentInterface
     public function isTracked()
     {
         return null !== $this->tracking;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippables()
+    {
+        $shippables = new ArrayCollection();
+
+        foreach ($this->units as $unit) {
+            $shippable = $unit->getShippable();
+            if (!$shippables->contains($shippable)) {
+                $shippables->add($shippable);
+            }
+        }
+
+        return $shippables;
     }
 
     /**

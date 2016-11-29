@@ -42,6 +42,11 @@ interface AddressInterface extends TimestampableInterface, ResourceInterface
     /**
      * @return string
      */
+    public function getFullName();
+
+    /**
+     * @return string
+     */
     public function getPhoneNumber();
 
     /**

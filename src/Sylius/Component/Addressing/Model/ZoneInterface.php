@@ -26,6 +26,11 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
     const TYPE_ZONE = 'zone';
 
     /**
+     * @return string[]
+     */
+    public static function getTypes();
+
+    /**
      * @return string
      */
     public function getName();

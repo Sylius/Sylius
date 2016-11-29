@@ -148,16 +148,16 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function getRules();
 
     /**
+     * @return bool
+     */
+    public function hasRules();
+
+    /**
      * @param PromotionRuleInterface $rule
      *
      * @return bool
      */
     public function hasRule(PromotionRuleInterface $rule);
-
-    /**
-     * @return bool
-     */
-    public function hasRules();
 
     /**
      * @param PromotionRuleInterface $rule
@@ -175,16 +175,16 @@ interface PromotionInterface extends CodeAwareInterface, TimestampableInterface,
     public function getActions();
 
     /**
+     * @return bool
+     */
+    public function hasActions();
+
+    /**
      * @param PromotionActionInterface $action
      *
      * @return bool
      */
     public function hasAction(PromotionActionInterface $action);
-
-    /**
-     * @return bool
-     */
-    public function hasActions();
 
     /**
      * @param PromotionActionInterface $action

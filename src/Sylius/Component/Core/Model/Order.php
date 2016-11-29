@@ -539,17 +539,17 @@ class Order extends BaseOrder implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function setTokenValue($tokenValue)
+    public function getTokenValue()
     {
-        $this->tokenValue = $tokenValue;
+        return $this->tokenValue;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getTokenValue()
+    public function setTokenValue($tokenValue)
     {
-        return $this->tokenValue;
+        $this->tokenValue = $tokenValue;
     }
 
     /**

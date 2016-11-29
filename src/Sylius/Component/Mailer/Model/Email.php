@@ -11,9 +11,6 @@
 
 namespace Sylius\Component\Mailer\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Resource\Model\ToggleableTrait;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -89,7 +86,7 @@ class Email implements EmailInterface
     }
 
     /**
-     * @return bool
+     * {@inheritdoc}
      */
     public function isEnabled()
     {

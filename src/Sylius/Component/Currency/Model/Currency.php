@@ -12,7 +12,6 @@
 namespace Sylius\Component\Currency\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Resource\Model\ToggleableTrait;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -42,7 +41,7 @@ class Currency implements CurrencyInterface
      */
     public function __toString()
     {
-        return $this->code;
+        return $this->getCode();
     }
 
     /**
@@ -58,7 +57,7 @@ class Currency implements CurrencyInterface
      */
     public function getName()
     {
-        return Intl::getCurrencyBundle()->getCurrencyName($this->code);
+        return Intl::getCurrencyBundle()->getCurrencyName($this->getCode());
     }
 
     /**

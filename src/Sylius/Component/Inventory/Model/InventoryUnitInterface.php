@@ -25,6 +25,11 @@ interface InventoryUnitInterface extends ResourceInterface
     public function getStockable();
 
     /**
+     * @param StockableInterface $stockable
+     */
+    public function setStockable(StockableInterface $stockable);
+
+    /**
      * @return string
      */
     public function getInventoryName();

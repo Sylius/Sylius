@@ -41,11 +41,11 @@ class ShipmentUnit implements ShipmentUnitInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
-        return (string) $this->id;
+        return (string) $this->getId();
     }
 
     /**

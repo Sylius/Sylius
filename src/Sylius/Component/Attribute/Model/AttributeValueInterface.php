@@ -56,15 +56,11 @@ interface AttributeValueInterface extends ResourceInterface
     public function setValue($value);
 
     /**
-     * Proxy method to access the code from real attribute.
-     *
      * @return string
      */
     public function getCode();
 
     /**
-     * Proxy method to access the name from real attribute.
-     *
      * @return string
      */
     public function getName();

@@ -47,12 +47,12 @@ interface StockableInterface
     public function setOnHand($onHand);
 
     /**
-     * @param bool $tracked
-     */
-    public function setTracked($tracked);
-
-    /**
      * @return bool
      */
     public function isTracked();
+
+    /**
+     * @param bool $tracked
+     */
+    public function setTracked($tracked);
 }

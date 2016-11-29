@@ -44,7 +44,7 @@ class InventoryUnit implements InventoryUnitInterface
     }
 
     /**
-     * @param StockableInterface $stockable
+     * {@inheritdoc}
      */
     public function setStockable(StockableInterface $stockable)
     {

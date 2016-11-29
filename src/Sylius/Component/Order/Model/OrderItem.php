@@ -138,6 +138,8 @@ class OrderItem implements OrderItemInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
     public function setUnitPrice($unitPrice)
     {

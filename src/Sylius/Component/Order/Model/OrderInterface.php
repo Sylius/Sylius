@@ -18,10 +18,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderInterface extends
-    AdjustableInterface,
-    ResourceInterface,
-    TimestampableInterface
+interface OrderInterface extends AdjustableInterface, ResourceInterface, TimestampableInterface
 {
     const STATE_CART = 'cart';
     const STATE_NEW = 'new';
@@ -70,6 +67,8 @@ interface OrderInterface extends
      */
     public function getItems();
 
+    public function clearItems();
+
     /**
      * @return int
      */
@@ -110,13 +109,6 @@ interface OrderInterface extends
     public function getTotalQuantity();
 
     /**
-     * @return bool
-     */
-    public function isEmpty();
-
-    public function clearItems();
-
-    /**
      * @return string
      */
     public function getState();
@@ -125,6 +117,11 @@ interface OrderInterface extends
      * @param string $state
      */
     public function setState($state);
+
+    /**
+     * @return bool
+     */
+    public function isEmpty();
 
     /**
      * @param string|null $type

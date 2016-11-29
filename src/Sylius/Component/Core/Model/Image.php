@@ -73,14 +73,6 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasFile()
-    {
-        return null !== $this->file;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getFile()
     {
         return $this->file;
@@ -97,9 +89,9 @@ abstract class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPath()
+    public function hasFile()
     {
-        return null !== $this->path;
+        return null !== $this->file;
     }
 
     /**
@@ -116,6 +108,14 @@ abstract class Image implements ImageInterface
     public function setPath($path)
     {
         $this->path = $path;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPath()
+    {
+        return null !== $this->path;
     }
 
     /**

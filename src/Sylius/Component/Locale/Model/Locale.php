@@ -74,6 +74,6 @@ class Locale implements LocaleInterface
      */
     public function getName($locale = null)
     {
-        return Intl::getLocaleBundle()->getLocaleName($this->code, $locale);
+        return Intl::getLocaleBundle()->getLocaleName($this->getCode(), $locale);
     }
 }

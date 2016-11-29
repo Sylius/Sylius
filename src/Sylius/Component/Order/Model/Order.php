@@ -161,9 +161,6 @@ class Order implements OrderInterface
         return $this->items;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function clearItems()
     {
         $this->items->clear();
@@ -224,9 +221,6 @@ class Order implements OrderInterface
         return $this->itemsTotal;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function recalculateItemsTotal()
     {
         $this->itemsTotal = 0;
@@ -248,6 +242,20 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getTotalQuantity()
+    {
+        $quantity = 0;
+
+        foreach ($this->items as $item) {
+            $quantity += $item->getQuantity();
+        }
+
+        return $quantity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getState()
     {
         return $this->state;
@@ -259,20 +267,6 @@ class Order implements OrderInterface
     public function setState($state)
     {
         $this->state = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTotalQuantity()
-    {
-        $quantity = 0;
-
-        foreach ($this->items as $item) {
-            $quantity += $item->getQuantity();
-        }
-
-        return $quantity;
     }
 
     /**
@@ -418,7 +412,6 @@ class Order implements OrderInterface
     }
 
     /**
-     * Calculate total.
      * Items total + Adjustments total.
      */
     protected function recalculateTotal()

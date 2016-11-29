@@ -36,11 +36,11 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     protected $instructions;
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**

@@ -73,7 +73,7 @@ class PaymentMethod implements PaymentMethodInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
@@ -187,14 +187,6 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * {@inheritdoc}
      */
-    protected function createTranslation()
-    {
-        return new PaymentMethodTranslation();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getPosition()
     {
         return $this->position;
@@ -206,5 +198,13 @@ class PaymentMethod implements PaymentMethodInterface
     public function setPosition($position)
     {
         $this->position = $position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new PaymentMethodTranslation();
     }
 }

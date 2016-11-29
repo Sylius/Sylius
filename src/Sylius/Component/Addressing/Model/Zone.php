@@ -60,7 +60,15 @@ class Zone implements ZoneInterface
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getTypes()
+    {
+        return [self::TYPE_COUNTRY, self::TYPE_PROVINCE, self::TYPE_ZONE];
     }
 
     /**
@@ -113,6 +121,8 @@ class Zone implements ZoneInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
     public function setType($type)
     {
@@ -121,14 +131,6 @@ class Zone implements ZoneInterface
         }
 
         $this->type = $type;
-    }
-
-    /**
-     * @return array of self::TYPE_*
-     */
-    public static function getTypes()
-    {
-        return [self::TYPE_COUNTRY, self::TYPE_PROVINCE, self::TYPE_ZONE];
     }
 
     /**

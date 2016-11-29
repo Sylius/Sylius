@@ -45,9 +45,10 @@ class OrderItemUnit implements OrderItemUnitInterface
      */
     public function __construct(OrderItemInterface $orderItem)
     {
-        $this->adjustments = new ArrayCollection();
         $this->orderItem = $orderItem;
         $this->orderItem->addUnit($this);
+
+        $this->adjustments = new ArrayCollection();
     }
 
     /**

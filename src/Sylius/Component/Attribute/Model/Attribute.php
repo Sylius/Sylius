@@ -73,7 +73,7 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
@@ -161,19 +161,19 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     * @param string $storageType
-     */
-    public function setStorageType($storageType)
-    {
-        $this->storageType = $storageType;
-    }
-
-    /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getStorageType()
     {
         return $this->storageType;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setStorageType($storageType)
+    {
+        $this->storageType = $storageType;
     }
 
     /**

@@ -106,17 +106,11 @@ class PromotionCoupon implements PromotionCouponInterface
         $this->used = $used;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function incrementUsed()
     {
         ++$this->used;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function decrementUsed()
     {
         --$this->used;

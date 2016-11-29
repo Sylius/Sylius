@@ -42,9 +42,6 @@ class OrderSequence implements OrderSequenceInterface
         return $this->index;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function incrementIndex()
     {
         ++$this->index;
