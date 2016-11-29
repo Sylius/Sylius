@@ -50,12 +50,6 @@
         <service id="sylius.form.extension.type.promotion_filter_collection" class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionFilterCollectionTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionFilterCollectionType" />
         </service>
-        <service id="sylius.form.extension.type.promotion_fixed_discount_configuration" class="Sylius\Bundle\CoreBundle\Form\Extension\FixedDiscountConfigurationTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType" />
-        </service>
-        <service id="sylius.form.extension.type.promotion_unit_fixed_discount_configuration" class="Sylius\Bundle\CoreBundle\Form\Extension\UnitFixedDiscountConfigurationTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType" />
-        </service>
         <service id="sylius.form.extension.type.shipping_method" class="Sylius\Bundle\CoreBundle\Form\Extension\ShippingMethodTypeExtension">
             <argument type="service" id="sylius.registry.shipping_rule_checker" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
