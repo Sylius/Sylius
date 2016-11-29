@@ -5,6 +5,7 @@ sylius:
     promotion:
         code:
             unique: The promotion with given code already exists.
+            regex: Promotion code can only be comprised of letters, numbers, dashes and underscores.
             not_blank: Please enter promotion code.
         description:
             max_length: Promotion description must not be longer than 1 character.|Promotion description must not be longer than {{ limit }} characters.
@@ -24,6 +25,7 @@ sylius:
             max_length: Coupon code must not be longer than 1 character.|Coupon code must not be longer than {{ limit }} characters.
             min_length: Coupon code must be at least 1 character long.|Coupon code must be at least {{ limit }} characters long.
             not_blank: Please enter coupon code.
+            regex: Coupon code can only be comprised of letters, numbers, dashes and underscores.
             unique: This coupon already exists.
         is_invalid: Coupon code is invalid.
         usage_limit:

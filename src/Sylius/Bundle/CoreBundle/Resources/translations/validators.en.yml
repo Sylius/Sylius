@@ -29,6 +29,7 @@ sylius:
     product_image:
         code:
             not_blank: Please enter an image code.
+            regex: Image code can only be comprised of letters, numbers, dashes and underscores.
             unique: Image code must be unique within this product.
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
@@ -60,6 +61,7 @@ sylius:
     taxon_image:
         code:
             not_blank: Please enter an image code.
+            regex: Image code can only be comprised of letters, numbers, dashes and underscores.
             unique: Image code must be unique within this taxon.
         file:
             max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.

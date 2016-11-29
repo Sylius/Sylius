@@ -3,6 +3,7 @@ sylius:
         code:
             exact_length: Currency code must be exactly 3 characters long.
             not_blank: Please choose currency code.
+            regex: Currency code can only be comprised of letters, numbers, dashes and underscores.
             unique: Currency code must be unique.
         exchange_rate:
             not_blank: Please enter exchange rate.
