@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -48,11 +47,6 @@ class ImpersonateUserController
     protected $router;
 
     /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
      * @var string
      */
     protected $authorizationRole;
@@ -62,7 +56,6 @@ class ImpersonateUserController
      * @param AuthorizationCheckerInterface $authorizationChecker
      * @param UserProviderInterface $userProvider
      * @param RouterInterface $router
-     * @param TranslatorInterface $translator
      * @param string $authorizationRole
      */
     public function __construct(
@@ -70,14 +63,12 @@ class ImpersonateUserController
         AuthorizationCheckerInterface $authorizationChecker,
         UserProviderInterface $userProvider,
         RouterInterface $router,
-        TranslatorInterface $translator,
         $authorizationRole
     ) {
         $this->impersonator = $impersonator;
         $this->authorizationChecker = $authorizationChecker;
         $this->userProvider = $userProvider;
         $this->router = $router;
-        $this->translator = $translator;
         $this->authorizationRole = $authorizationRole;
     }
 
@@ -113,6 +104,9 @@ class ImpersonateUserController
     {
         /** @var Session $session */
         $session = $request->getSession();
-        $session->getFlashBag()->add('success', $this->translator->trans('sylius.customer.impersonate', ['%name%' => $username], 'flashes'));
+        $session->getFlashBag()->add('success', [
+            'message' => 'sylius.customer.impersonate',
+            'parameters' => ['%name%' => $username]
+        ]);
     }
 }
