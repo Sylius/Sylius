@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddProductOnProductTaxonFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
 use Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
@@ -57,7 +56,6 @@ class ProductTypeExtension extends AbstractTypeExtension
                 'by_reference' => false,
                 'label' => 'sylius.form.product.images',
             ])
-            ->addEventSubscriber(new AddProductOnProductTaxonFormSubscriber())
         ;
     }
 
