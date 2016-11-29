@@ -89,6 +89,10 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
         $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
 
+        if (empty($filteredItems)) {
+            return false;
+        }
+
         foreach ($filteredItems as $item) {
             $this->setUnitsAdjustments($item, $amount, $promotion);
         }

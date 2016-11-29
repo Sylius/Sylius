@@ -109,6 +109,28 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $this->execute($order, ['WEB_US' => ['amount' => 500]], $promotion)->shouldReturn(true);
     }
 
+    function it_does_not_apply_a_discount_if_all_items_have_been_filtered_out(
+        ChannelInterface $channel,
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter,
+        FilterInterface $productFilter,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        PromotionInterface $promotion
+    ) {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
+        $order->getChannel()->willReturn($channel);
+
+        $priceRangeFilter->filter([$orderItem], ['amount' => 500, 'channel' => $channel])->willReturn([$orderItem]);
+        $taxonFilter->filter([$orderItem], ['amount' => 500])->willReturn([$orderItem]);
+        $productFilter->filter([$orderItem], ['amount' => 500])->willReturn([]);
+
+        $this->execute($order, ['WEB_US' => ['amount' => 500]], $promotion)->shouldReturn(false);
+    }
+
     function it_does_not_apply_discount_with_amount_0(
         ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,

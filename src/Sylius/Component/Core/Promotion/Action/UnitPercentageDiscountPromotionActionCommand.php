@@ -82,6 +82,10 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
         $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
 
+        if (empty($filteredItems)) {
+            return false;
+        }
+
         foreach ($filteredItems as $item) {
             $promotionAmount = (int) round($item->getUnitPrice() * $configuration[$channelCode]['percentage']);
             $this->setUnitsAdjustments($item, $promotionAmount, $promotion);
