@@ -33,7 +33,7 @@
             <tag name="templating.helper" alias="sylius_resolve_variant" />
         </service>
 
-        <service id="sylius.twig.extension.variant_resolver" class="Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension">
+        <service id="sylius.twig.extension.variant_resolver" class="Sylius\Bundle\CoreBundle\Twig\VariantResolverExtension" public="false">
             <argument type="service" id="sylius.templating.helper.variant_resolver" />
             <tag name="twig.extension" />
         </service>
