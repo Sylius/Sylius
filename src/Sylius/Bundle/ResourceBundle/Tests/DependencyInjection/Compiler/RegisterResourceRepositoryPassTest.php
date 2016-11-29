@@ -28,7 +28,7 @@ final class RegisterResourceRepositoryPassTest extends AbstractCompilerPassTestC
      */
     public function it_adds_resource_repository_to_resource_repository_registry()
     {
-        $this->setDefinition('sylius.resource_repository_registry', new Definition());
+        $this->setDefinition('sylius.registry.resource_repository', new Definition());
         $this->setDefinition('sylius.repository.product', new Definition());
 
         $this->setParameter(
@@ -39,7 +39,7 @@ final class RegisterResourceRepositoryPassTest extends AbstractCompilerPassTestC
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.resource_repository_registry',
+            'sylius.registry.resource_repository',
             'register',
             ['sylius.product', new Reference('sylius.repository.product')]
         );
@@ -65,13 +65,13 @@ final class RegisterResourceRepositoryPassTest extends AbstractCompilerPassTestC
      */
     public function it_does_not_add_resource_repository_to_resource_repository_registry_if_resources_do_not_exist()
     {
-        $this->setDefinition('sylius.resource_repository_registry', new Definition());
+        $this->setDefinition('sylius.registry.resource_repository', new Definition());
         $this->setDefinition('sylius.repository.product', new Definition());
 
         $this->compile();
 
         $this->assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
-            'sylius.resource_repository_registry',
+            'sylius.registry.resource_repository',
             'register',
             ['sylius.product', new Reference('sylius.repository.product')]
         );
@@ -82,7 +82,7 @@ final class RegisterResourceRepositoryPassTest extends AbstractCompilerPassTestC
      */
     public function it_does_not_add_resource_repository_to_resource_repository_registry_if_resource_repository_does_not_exist()
     {
-        $this->setDefinition('sylius.resource_repository_registry', new Definition());
+        $this->setDefinition('sylius.registry.resource_repository', new Definition());
 
         $this->setParameter(
             'sylius.resources',
@@ -92,7 +92,7 @@ final class RegisterResourceRepositoryPassTest extends AbstractCompilerPassTestC
         $this->compile();
 
         $this->assertContainerBuilderNotHasServiceDefinitionWithMethodCall(
-            'sylius.resource_repository_registry',
+            'sylius.registry.resource_repository',
             'register',
             ['sylius.product', new Reference('sylius.repository.product')]
         );
