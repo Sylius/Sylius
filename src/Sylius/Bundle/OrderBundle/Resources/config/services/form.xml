@@ -13,6 +13,15 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.form.data_mapper.order_item_quantity" class="Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper">
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service">
+                <service class="Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper">
+                    <argument type="service" id="property_accessor" />
+                </service>
+            </argument>
+        </service>
+
         <service id="sylius.form.type.order" class="Sylius\Bundle\OrderBundle\Form\Type\OrderType">
             <argument>%sylius.model.order.class%</argument>
             <argument type="collection"><argument>sylius</argument></argument>
@@ -24,15 +33,6 @@
             <argument type="collection"><argument>sylius</argument></argument>
             <argument type="service" id="sylius.form.data_mapper.order_item_quantity" />
             <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.data_mapper.order_item_quantity" class="Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper">
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
-            <argument type="service">
-                <service class="Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper">
-                    <argument type="service" id="property_accessor" />
-                </service>
-            </argument>
         </service>
 
         <service id="sylius.form.type.cart" class="Sylius\Bundle\OrderBundle\Form\Type\CartType">

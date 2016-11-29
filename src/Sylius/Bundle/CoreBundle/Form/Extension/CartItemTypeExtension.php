@@ -39,7 +39,6 @@ class CartItemTypeExtension extends AbstractTypeExtension
         $builder->add('quantity', IntegerType::class, [
             'attr' => ['min' => 1],
             'label' => 'sylius.ui.quantity',
-            'data' => 1,
         ]);
 
         if (isset($options['product']) && $options['product']->hasVariants() && !$options['product']->isSimple()) {
