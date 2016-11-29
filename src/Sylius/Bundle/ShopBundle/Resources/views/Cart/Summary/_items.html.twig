@@ -18,8 +18,10 @@
                 {% endfor %}
             </tbody>
         </table>
+        {% if form.promotionCoupon is defined %}
         <div class="ui hidden divider"></div>
         {% include '@SyliusShop/Cart/Summary/_coupon.html.twig' with {'form': form.promotionCoupon} %}
+        {% endif %}
         <div class="ui hidden divider"></div>
         {% include '@SyliusShop/Cart/Summary/_update.html.twig' %}
         {{ form_row(form._token) }}

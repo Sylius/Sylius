@@ -36,7 +36,7 @@ sylius_shop_request_password_reset_token:
     defaults:
         _controller: sylius.controller.shop_user:requestPasswordResetTokenAction
         _sylius:
-            template: "SyliusShop/Account/requestPasswordReset.html.twig"
+            template: "@SyliusShop/Account/requestPasswordReset.html.twig"
             redirect: sylius_shop_login
 
 sylius_shop_password_reset:
@@ -45,5 +45,5 @@ sylius_shop_password_reset:
     defaults:
         _controller: sylius.controller.shop_user:resetPasswordAction
         _sylius:
-            template: "SyliusShop/Account/resetPassword.html.twig"
+            template: "@SyliusShop/Account/resetPassword.html.twig"
             redirect: sylius_shop_login
