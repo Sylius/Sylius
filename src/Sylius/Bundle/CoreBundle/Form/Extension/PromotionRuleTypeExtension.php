@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelAwarePromotionRuleFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleChoiceType;
 use Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType;
@@ -58,7 +58,7 @@ class PromotionRuleTypeExtension extends AbstractTypeExtension
                 ],
             ])
             ->addEventSubscriber(
-                new BuildChannelAwarePromotionRuleFormSubscriber(
+                new BuildChannelBasedPromotionRuleFormSubscriber(
                     $this->registry,
                     $builder->getFormFactory(),
                     (isset($options['configuration_type'])) ? $options['configuration_type'] : null,

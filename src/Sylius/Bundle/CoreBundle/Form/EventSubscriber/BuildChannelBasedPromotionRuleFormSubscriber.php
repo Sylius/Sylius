@@ -15,7 +15,7 @@ use Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionConfigurationType;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionRuleFormSubscriber;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Promotion\Checker\Rule\ChannelAwareRuleCheckerInterface;
+use Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class BuildChannelAwarePromotionRuleFormSubscriber extends BuildPromotionRuleFormSubscriber
+final class BuildChannelBasedPromotionRuleFormSubscriber extends BuildPromotionRuleFormSubscriber
 {
     /**
      * @var ChannelRepositoryInterface
@@ -59,7 +59,7 @@ final class BuildChannelAwarePromotionRuleFormSubscriber extends BuildPromotionR
             return;
         }
 
-        if (!$model instanceof ChannelAwareRuleCheckerInterface) {
+        if (!$model instanceof ChannelBasedRuleCheckerInterface) {
             $form->add($this->createConfigurationField($configuration, $data));
 
             return;

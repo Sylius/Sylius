@@ -14,6 +14,6 @@ namespace Sylius\Component\Core\Promotion\Checker\Rule;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface ChannelAwareRuleCheckerInterface
+interface ChannelBasedRuleCheckerInterface
 {
 }
