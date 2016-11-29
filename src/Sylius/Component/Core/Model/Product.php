@@ -126,6 +126,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     {
         if (!$this->hasProductTaxon($productTaxon)) {
             $this->productTaxons->add($productTaxon);
+            $productTaxon->setProduct($this);
         }
     }
 
