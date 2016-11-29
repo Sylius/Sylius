@@ -139,8 +139,7 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('translation')
                     ->canBeEnabled()
                     ->children()
-                        ->scalarNode('locale_provider')->isRequired()->end()
-                        ->scalarNode('locale_context')->isRequired()->end()
+                        ->scalarNode('locale_provider')->cannotBeEmpty()->end()
                 ->end()
             ->end()
         ;

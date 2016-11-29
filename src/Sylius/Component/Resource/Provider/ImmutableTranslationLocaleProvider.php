@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Locale\Provider;
+namespace Sylius\Component\Resource\Provider;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ImmutableLocaleProvider implements LocaleProviderInterface
+final class ImmutableTranslationLocaleProvider implements TranslationLocaleProviderInterface
 {
     /**
      * @var array
@@ -39,23 +39,9 @@ final class ImmutableLocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAvailableLocalesCodes()
-    {
-        return array_keys(
-            array_filter(
-                $this->definedLocalesCodes,
-                function ($locale) {
-                    return $locale;
-                })
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDefinedLocalesCodes()
     {
-        return array_keys($this->definedLocalesCodes);
+        return $this->definedLocalesCodes;
     }
 
     /**

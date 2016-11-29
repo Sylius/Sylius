@@ -112,7 +112,7 @@ abstract class AbstractDriver implements DriverInterface
             $decoratedDefinition = new Definition(Factory::class);
             $decoratedDefinition->setArguments($definitionArgs);
 
-            $definitionArgs = [$decoratedDefinition, new Reference('sylius_resource.translation.locale_provider')];
+            $definitionArgs = [$decoratedDefinition, new Reference('sylius.translation_locale_provider')];
         }
 
         $definition->setArguments($definitionArgs);

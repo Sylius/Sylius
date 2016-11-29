@@ -44,13 +44,8 @@ fos_rest:
             - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: true }
 
 services:
-    test.locale_provider:
-        class: Sylius\Component\Locale\Provider\ImmutableLocaleProvider
+    test.translation_locale_provider:
+        class: Sylius\Component\Resource\Provider\ImmutableTranslationLocaleProvider
         arguments:
-            - {"pl_PL": true, "en_US": true, "de_DE": true}
-            - "en_US"
-
-    test.locale_context:
-        class: Sylius\Component\Locale\Context\ImmutableLocaleContext
-        arguments:
+            - ["pl_PL", "en_US", "de_DE"]
             - "en_US"
