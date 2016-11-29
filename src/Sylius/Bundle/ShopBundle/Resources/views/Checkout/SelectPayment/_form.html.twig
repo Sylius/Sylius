@@ -1,5 +1,5 @@
 <div class="ui unmargined segments">
-    {% for payment in order.payments %}
+    {% for payment in order.payments if payment.state in ['cart', 'new'] %}
         {% include '@SyliusShop/Checkout/SelectPayment/_payment.html.twig' with {'form': form.payments[loop.index0]} %}
     {% else %}
         {% include '@SyliusShop/Checkout/SelectPayment/_unavailable.html.twig' %}

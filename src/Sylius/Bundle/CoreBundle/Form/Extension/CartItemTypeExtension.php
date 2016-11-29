@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Order;
+namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
-use Sylius\Bundle\OrderBundle\Form\Type\OrderItemType;
+use Sylius\Bundle\OrderBundle\Form\Type\CartItemType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantMatchType;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
-use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class CartItemType extends AbstractType
+class CartItemTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}
@@ -75,16 +75,8 @@ final class CartItemType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getExtendedType()
     {
-        return OrderItemType::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBlockPrefix()
-    {
-        return 'sylius_cart_item';
+        return CartItemType::class;
     }
 }
