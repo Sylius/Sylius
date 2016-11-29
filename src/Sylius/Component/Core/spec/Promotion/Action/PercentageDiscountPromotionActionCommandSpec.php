@@ -68,18 +68,18 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $distributor->distribute([200, 800], -1000)->willReturn([-200, -800]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
 
-        $this->execute($order, ['percentage' => 0.1], $promotion);
+        $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(true);
     }
 
-    function it_does_nothing_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)
+    function it_does_not_apply_discount_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)
     {
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->shouldNotBeCalled();
 
-        $this->execute($order, ['percentage' => 0.1], $promotion);
+        $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(false);
     }
 
-    function it_does_nothing_if_adjustment_amount_would_be_0(
+    function it_does_not_apply_discount_if_adjustment_amount_would_be_0(
         OrderInterface $order,
         PromotionInterface $promotion,
         ProportionalIntegerDistributorInterface $distributor
@@ -89,24 +89,17 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getPromotionSubjectTotal()->willReturn(0);
         $distributor->distribute(Argument::any())->shouldNotBeCalled();
 
-        $this->execute($order, ['percentage' => 0.1], $promotion);
+        $this->execute($order, ['percentage' => 0.1], $promotion)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_configuration_is_invalid(
+    function it_does_not_apply_discount_if_configuration_is_invalid(
         OrderInterface $order,
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(1);
 
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('execute', [$order, [], $promotion])
-        ;
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('execute', [$order, ['percentage' => 'string'], $promotion])
-        ;
+        $this->execute($order, [], $promotion)->shouldReturn(false);
+        $this->execute($order, ['percentage' => 'string'], $promotion)->shouldReturn(false);
     }
 
     function it_throws_exception_if_subject_is_not_an_order(

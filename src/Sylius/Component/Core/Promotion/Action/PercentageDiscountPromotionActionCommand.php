@@ -57,14 +57,18 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
     {
         /** @var OrderInterface $subject */
         if (!$this->isSubjectValid($subject)) {
-            return;
+            return false;
         }
 
-        $this->isConfigurationValid($configuration);
+        try {
+            $this->isConfigurationValid($configuration);
+        } catch (\InvalidArgumentException $exception) {
+            return false;
+        }
 
         $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['percentage']);
         if (0 === $promotionAmount) {
-            return;
+            return false;
         }
 
         $itemsTotal = [];
@@ -74,6 +78,8 @@ final class PercentageDiscountPromotionActionCommand extends DiscountPromotionAc
 
         $splitPromotion = $this->distributor->distribute($itemsTotal, $promotionAmount);
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
+
+        return true;
     }
 
     /**

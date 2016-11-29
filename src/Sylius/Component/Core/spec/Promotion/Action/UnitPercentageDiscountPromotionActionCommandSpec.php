@@ -102,20 +102,33 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion);
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_nothing_if_percentage_or_order_channel_is_not_configured(
+    function it_does_not_apply_discount_if_configuration_for_order_channel_is_not_defined(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
     ) {
-        $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_PL');
 
         $order->getItems()->shouldNotBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion);
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(false);
+    }
+
+    function it_does_not_apply_discount_if_percentage_configuration_not_defined(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        PromotionInterface $promotion
+    ) {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_PL');
+
+        $order->getItems()->shouldNotBeCalled();
+
+        $this->execute($order, ['WEB_PL' => []], $promotion)->shouldReturn(false);
     }
 
     function it_throws_an_exception_if_passed_subject_is_not_order(

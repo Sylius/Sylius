@@ -106,10 +106,10 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['amount' => 500]], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 500]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_promotions_with_amount_0(
+    function it_does_not_apply_discount_with_amount_0(
         ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         OrderInterface $order,
@@ -125,10 +125,10 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $unit1->addAdjustment(Argument::any())->shouldNotBeCalled();
         $unit2->addAdjustment(Argument::any())->shouldNotBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['amount' => 0]], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 0]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_not_apply_bigger_promotions_than_unit_total(
+    function it_does_not_apply_bigger_discount_than_unit_total(
         ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         FilterInterface $priceRangeFilter,
@@ -177,10 +177,10 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_promotion_if_no_amount_is_defined_for_order_channel(
+    function it_does_not_apply_discount_if_no_amount_is_defined_for_order_channel(
         ChannelInterface $channel,
         FactoryInterface $adjustmentFactory,
         OrderInterface $order,
@@ -191,7 +191,7 @@ final class UnitFixedDiscountPromotionActionCommandSpec extends ObjectBehavior
 
         $adjustmentFactory->createNew()->shouldNotBeCalled();
 
-        $this->execute($order, ['WEB_PL' => ['amount' => 0]], $promotion);
+        $this->execute($order, ['WEB_PL' => ['amount' => 0]], $promotion)->shouldReturn(false);
     }
 
     function it_throws_an_exception_if_passed_subject_to_execute_is_not_order(
