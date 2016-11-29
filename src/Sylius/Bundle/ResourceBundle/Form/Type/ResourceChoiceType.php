@@ -11,13 +11,11 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
-use Doctrine\Bundle\MongoDBBundle\Form\Type\DocumentType as MongodbDocumentType;
-use Doctrine\Bundle\PHPCRBundle\Form\Type\DocumentType as PhpcrDocumentType;
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -27,16 +25,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class ResourceChoiceType extends AbstractType
 {
     /**
-     * @var MetadataInterface
+     * @var ServiceRegistryInterface
      */
-    protected $metadata;
+    protected $resourceRepositoryRegistry;
 
     /**
-     * @param MetadataInterface $metadata
+     * @param ServiceRegistryInterface $resourceRepositoryRegistry
      */
-    public function __construct(MetadataInterface $metadata)
+    public function __construct(ServiceRegistryInterface $resourceRepositoryRegistry)
     {
-        $this->metadata = $metadata;
+        $this->resourceRepositoryRegistry = $resourceRepositoryRegistry;
     }
 
     /**
@@ -46,11 +44,15 @@ final class ResourceChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'class' => null,
+                'resource' => null,
+                'choices' => function (Options $options) {
+                    return $options['function']($this->resourceRepositoryRegistry->get($options['resource']), $options);
+                },
+                'function' => function (RepositoryInterface $repository, Options $options) {
+                    return $repository->findAll();
+                }
             ])
-            ->setNormalizer('class', function () {
-                return $this->metadata->getClass('model');
-            })
+            ->setRequired(['resource'])
         ;
     }
 
@@ -59,7 +61,7 @@ final class ResourceChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return $this->getFormTypeForDriver($this->metadata->getDriver());
+        return ChoiceType::class;
     }
 
     /**
@@ -67,27 +69,6 @@ final class ResourceChoiceType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return sprintf('%s_%s_choice', $this->metadata->getApplicationName(), $this->metadata->getName());
-    }
-
-    /**
-     * @param string $driver
-     *
-     * @return string
-     *
-     * @throws UnknownDriverException
-     */
-    protected function getFormTypeForDriver($driver)
-    {
-        switch ($driver) {
-            case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
-                return MongodbDocumentType::class;
-            case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
-                return EntityType::class;
-            case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
-                return PhpcrDocumentType::class;
-        }
-
-        throw new UnknownDriverException($driver);
+        return 'sylius_resource_choice';
     }
 }
