@@ -19,4 +19,4 @@ sylius_shop_partial_product_review:
 
 sylius_shop_partial_product_association:
     resource: "@SyliusShopBundle/Resources/config/routing/partial/product_association.yml"
-    prefix: /products/{productId}/reviews
+    prefix: /products/{productId}/associations
