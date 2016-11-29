@@ -153,7 +153,7 @@ class OrderFixture extends AbstractFixture
             $customer = $this->faker->randomElement($customers);
             $countryCode = $this->faker->randomElement($countries)->getCode();
 
-            $currencyCode = $this->faker->randomElement($channel->getCurrencies()->toArray())->getCode();
+            $currencyCode = $channel->getBaseCurrency()->getCode();
             $localeCode = $this->faker->randomElement($channel->getLocales()->toArray())->getCode();
 
             $order = $this->orderFactory->createNew();
@@ -235,7 +235,7 @@ class OrderFixture extends AbstractFixture
         $address->setPostcode($this->faker->postcode);
 
         $order->setShippingAddress($address);
-        $order->setBillingAddress($address);
+        $order->setBillingAddress(clone $address);
 
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
     }
@@ -249,8 +249,7 @@ class OrderFixture extends AbstractFixture
             ->faker
             ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
         ;
-
-        Assert::notNull($shippingMethod);
+        Assert::notNull($shippingMethod, 'Shipping method should not be null.');
 
         foreach ($order->getShipments() as $shipment) {
             $shipment->setMethod($shippingMethod);
@@ -268,8 +267,7 @@ class OrderFixture extends AbstractFixture
             ->faker
             ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
         ;
-
-        Assert::notNull($paymentMethod);
+        Assert::notNull($paymentMethod, 'Payment method should not be null.');
 
         foreach ($order->getPayments() as $payment) {
             $payment->setMethod($paymentMethod);
