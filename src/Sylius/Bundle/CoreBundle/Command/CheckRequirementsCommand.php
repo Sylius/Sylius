@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use RuntimeException;
+use Sylius\Bundle\CoreBundle\Installer\Requirement\Requirement;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -45,30 +46,29 @@ EOT
         foreach ($requirements as $collection) {
             $rows = [];
 
+            /** @var Requirement $requirement */
             foreach ($collection as $requirement) {
                 $label = $requirement->getLabel();
 
                 if ($requirement->isFulfilled()) {
-                    $status = '<info>OK!</info>';
-                } else {
-                    $comment = sprintf('<comment>%s</comment>', $requirement->getHelp());
+                    $rows[] = [$label, '<info>OK!</info>'];
 
-                    if ($requirement->isRequired()) {
-                        $fulfilled = false;
-                        $status = ' <error>ERROR!</error>';
-                    } else {
-                        $status = '<comment>WARNING!</comment>';
-                    }
-
-                    $help[] = [$label, $comment];
+                    continue;
                 }
 
+                if ($requirement->isRequired()) {
+                    $fulfilled = false;
+                    $status = 'Z<error>ERROR!</error>';
+                } else {
+                    $status = '<comment>WARNING!</comment>';
+                }
+
+                $help[] = [$label, sprintf('<comment>%s</comment>', $requirement->getHelp())];
                 $rows[] = [$label, $status];
             }
 
             if ($input->getOption('verbose') || !$fulfilled) {
-                $output->writeln(sprintf('<comment>%s</comment>', $collection->getLabel()));
-                $this->renderTable($headers, $rows, $output);
+                $this->renderNotFulfilledTable($output, $collection->getLabel(), $headers, $rows);
             }
         }
 
@@ -79,8 +79,20 @@ EOT
 
         if (!$fulfilled) {
             throw new RuntimeException('Some system requirements are not fulfilled. Please check output messages and fix them.');
-        } else {
-            $output->writeln('<info>Success! Your system can run Sylius properly.</info>');
         }
+
+        $output->writeln('<info>Success! Your system can run Sylius properly.</info>');
+    }
+
+    /**
+     * @param OutputInterface $output
+     * @param string $label
+     * @param array $headers
+     * @param array $rows
+     */
+    private function renderNotFulfilledTable(OutputInterface $output, $label, array $headers, array $rows)
+    {
+        $output->writeln(sprintf('<comment>%s</comment>', $label));
+        $this->renderTable($headers, $rows, $output);
     }
 }

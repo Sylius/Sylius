@@ -44,7 +44,7 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param $id
+     * @param string $id
      *
      * @return object
      */
@@ -81,7 +81,8 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
         $table
             ->setHeaders($headers)
             ->setRows($rows)
-            ->render();
+            ->render()
+        ;
     }
 
     /**
@@ -104,11 +105,10 @@ abstract class AbstractInstallCommand extends ContainerAwareCommand
 
     /**
      * @param array $commands
-     * @param InputInterface $input
      * @param OutputInterface $output
      * @param bool $displayProgress
      */
-    protected function runCommands(array $commands, InputInterface $input, OutputInterface $output, $displayProgress = true)
+    protected function runCommands(array $commands, OutputInterface $output, $displayProgress = true)
     {
         if ($displayProgress) {
             $progress = $this->createProgressBar($output, count($commands));

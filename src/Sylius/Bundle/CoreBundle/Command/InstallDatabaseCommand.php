@@ -43,16 +43,7 @@ EOT
         $output->writeln(sprintf('Creating Sylius database for environment <info>%s</info>.', $this->getEnvironment()));
 
         if (!$this->isDatabasePresent()) {
-            $commands = [
-                'doctrine:database:create',
-                'doctrine:schema:create',
-                'cache:clear',
-            ];
-
-            $this->runCommands($commands, $input, $output);
-            $output->writeln('');
-
-            return $this->commandExecutor->runCommand('sylius:install:sample-data', [], $output);
+            return $this->createAndFillDatabase($output);
         }
 
         $commands = [];
@@ -63,14 +54,16 @@ EOT
             $commands = array_merge($commands, $this->setupDatabase($input, $output));
         }
 
-        $commands[] = 'cache:clear';
-        $commands['doctrine:migrations:version'] = [
-            '--add' => true,
-            '--all' => true,
-            '--no-interaction' => true,
-        ];
+        $commands = array_merge($commands, [
+            'cache:clear',
+            'doctrine:migrations:version' => [
+                '--add' => true,
+                '--all' => true,
+                '--no-interaction' => true,
+            ],
+        ]);
 
-        $this->runCommands($commands, $input, $output);
+        $this->runCommands($commands, $output);
         $output->writeln('');
 
         $this->commandExecutor->runCommand('sylius:install:sample-data', [], $output);
@@ -108,9 +101,7 @@ EOT
      */
     protected function isSchemaPresent()
     {
-        $schemaManager = $this->getSchemaManager();
-
-        return 0 !== count($schemaManager->listTableNames());
+        return 0 !== count($this->getSchemaManager()->listTableNames());
     }
 
     /**
@@ -144,14 +135,14 @@ EOT
         if ($questionHelper->ask($input, $output, $question)) {
             return [
                 'doctrine:database:drop' => ['--force' => true],
-                'doctrine:database:create' => [],
-                'doctrine:schema:create' => [],
+                'doctrine:database:create',
+                'doctrine:schema:create',
             ];
         }
 
         if (!$this->isSchemaPresent()) {
             return [
-                'doctrine:schema:create' => [],
+                'doctrine:schema:create',
             ];
         }
 
@@ -159,10 +150,29 @@ EOT
         if ($questionHelper->ask($input, $output, $question)) {
             return [
                 'doctrine:schema:drop' => ['--force' => true],
-                'doctrine:schema:create' => [],
+                'doctrine:schema:create',
             ];
         }
 
         return [];
+    }
+
+    /**
+     * @param OutputInterface $output
+     *
+     * @return CommandExecutor
+     */
+    private function createAndFillDatabase(OutputInterface $output)
+    {
+        $commands = [
+            'doctrine:database:create',
+            'doctrine:schema:create',
+            'cache:clear',
+        ];
+
+        $this->runCommands($commands, $output);
+        $output->writeln('');
+
+        return $this->commandExecutor->runCommand('sylius:install:sample-data', [], $output);
     }
 }

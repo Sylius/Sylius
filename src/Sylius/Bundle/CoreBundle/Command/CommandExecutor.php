@@ -40,9 +40,9 @@ final class CommandExecutor
     protected $application;
 
     /**
-     * @param InputInterface  $input
+     * @param InputInterface $input
      * @param OutputInterface $output
-     * @param Application     $application
+     * @param Application $application
      */
     public function __construct(InputInterface $input, OutputInterface $output, Application $application)
     {
@@ -52,7 +52,7 @@ final class CommandExecutor
     }
 
     /**
-     * @param $command
+     * @param string $command
      * @param array $parameters
      * @param OutputInterface $output
      *
@@ -80,17 +80,14 @@ final class CommandExecutor
 
             $errorMessage = sprintf('The command terminated with an error code: %u.', $exitCode);
             $this->output->writeln("<error>$errorMessage</error>");
-            $exception = new \Exception($errorMessage, $exitCode);
 
-            throw $exception;
+            throw new \Exception($errorMessage, $exitCode);
         }
 
         return $this;
     }
 
     /**
-     * Get default parameters.
-     *
      * @return array
      */
     protected function getDefaultParameters()

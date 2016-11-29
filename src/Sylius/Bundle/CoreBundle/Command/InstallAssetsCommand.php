@@ -50,6 +50,6 @@ EOT
             'assets:install',
         ];
 
-        $this->runCommands($commands, $input, $output);
+        $this->runCommands($commands, $output);
     }
 }

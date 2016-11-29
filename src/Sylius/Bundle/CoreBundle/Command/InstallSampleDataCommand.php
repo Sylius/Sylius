@@ -44,7 +44,10 @@ EOT
         /** @var QuestionHelper $questionHelper */
         $questionHelper = $this->getHelper('question');
 
-        $output->writeln(sprintf('<error>Warning! This will erase your database.</error> Your current environment is <info>%s</info>.', $this->getEnvironment()));
+        $output->writeln(sprintf(
+            '<error>Warning! This will erase your database.</error> Your current environment is <info>%s</info>.',
+            $this->getEnvironment()
+        ));
 
         if (!$questionHelper->ask($input, $output, new Question('Load sample data? (y/N)', false))) {
             $output->writeln('Cancelled loading sample data.');
@@ -68,6 +71,6 @@ EOT
             'sylius:fixtures:load' => ['--no-interaction' => true],
         ];
 
-        $this->runCommands($commands, $input, $output);
+        $this->runCommands($commands, $output);
     }
 }
