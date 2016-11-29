@@ -139,7 +139,7 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('translation')
                     ->canBeEnabled()
                     ->children()
-                        ->scalarNode('locale_provider')->cannotBeEmpty()->end()
+                        ->scalarNode('locale_provider')->defaultValue('sylius.translation_locale_provider.immutable')->cannotBeEmpty()->end()
                 ->end()
             ->end()
         ;

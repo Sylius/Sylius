@@ -13,6 +13,13 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.translation_locale_provider.immutable" class="Sylius\Component\Resource\Provider\ImmutableTranslationLocaleProvider">
+            <argument type="collection">
+                <argument>%locale%</argument>
+            </argument>
+            <argument>%locale%</argument>
+        </service>
+
         <service id="sylius.translation.translatable_listener.doctrine.orm" class="Sylius\Bundle\ResourceBundle\EventListener\ORMTranslatableListener">
             <argument type="service" id="sylius.resource_registry" />
             <argument type="service" id="service_container" />
