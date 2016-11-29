@@ -23,6 +23,11 @@
                 <option name="message">sylius.product_variant.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Regex">
+                <option name="message">sylius.product_variant.code.regex</option>
+                <option name="pattern">/^[\w-]*$/</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <constraint name="Sylius\Bundle\ProductBundle\Validator\Constraint\ProductVariantCombination">
             <option name="groups">sylius</option>

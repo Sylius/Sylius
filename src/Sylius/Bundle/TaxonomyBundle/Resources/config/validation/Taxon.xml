@@ -23,8 +23,13 @@
         </constraint>
         <property name="code">
             <constraint name="NotBlank">
-            <option name="message">sylius.taxon.code.not_blank</option>
-            <option name="groups">sylius</option>
+                <option name="message">sylius.taxon.code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="message">sylius.taxon.code.regex</option>
+                <option name="pattern">/^[\w-]*$/</option>
+                <option name="groups">sylius</option>
             </constraint>
         </property>
     </class>

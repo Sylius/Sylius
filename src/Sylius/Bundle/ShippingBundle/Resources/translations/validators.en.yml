@@ -9,6 +9,7 @@ sylius:
             not_blank: 'Please enter shipping category name.'
         code:
             not_blank: 'Please enter shipping category code.'
+            regex: 'Shipping category code can only be comprised of letters, numbers, dashes and underscores.'
             unique: 'The shipping category with given code already exists.'
 
     shipping_method:
@@ -22,6 +23,7 @@ sylius:
             not_blank: 'Please enter shipping method name.'
         code:
             not_blank: 'Please enter shipping method code.'
+            regex: 'Shipping method code can only be comprised of letters, numbers, dashes and underscores.'
             unique: 'The shipping method with given code already exists.'
         zone:
             not_blank: 'Please select shipping method zone.'

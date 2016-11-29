@@ -6,6 +6,7 @@ sylius:
             max_length: Attribute name must not be longer than 1 character.|Attribute name must not be longer than {{ limit }} characters.
         code:
             not_blank: Please enter attribute code.
+            regex: Attribute code can only be comprised of letters, numbers, dashes and underscores.
             unique: This code is already in use.
         presentation:
             not_blank: Please enter attribute presentation.
