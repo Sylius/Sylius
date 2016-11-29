@@ -90,16 +90,14 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         AddToCartCommandInterface $addCartItemCommand,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ProductVariantInterface $productVariant,
-        ProductInterface $product
+        ProductVariantInterface $productVariant
     ) {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getQuantity()->willReturn(10);
         $order->getItems()->willReturn([]);
-        $productVariant->getProduct()->willReturn($product);
-        $product->getName()->willReturn('Mug');
+        $productVariant->getInventoryName()->willReturn('Mug');
 
         $availabilityChecker->isStockSufficient($productVariant, 10)->willReturn(false);
 
@@ -118,15 +116,13 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemInterface $existingOrderItem,
-        ProductVariantInterface $productVariant,
-        ProductInterface $product
+        ProductVariantInterface $productVariant
     ) {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getQuantity()->willReturn(10);
-        $productVariant->getProduct()->willReturn($product);
-        $product->getName()->willReturn('Mug');
+        $productVariant->getInventoryName()->willReturn('Mug');
 
         $order->getItems()->willReturn([$existingOrderItem]);
         $existingOrderItem->getQuantity()->willReturn(10);

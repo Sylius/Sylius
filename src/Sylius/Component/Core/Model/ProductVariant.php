@@ -161,6 +161,14 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
+    public function getInventoryName()
+    {
+        return $this->getProduct()->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getShippingCategory()
     {
         return $this->shippingCategory;
