@@ -3,7 +3,7 @@
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
 <div class="ui segment" id="sylius-product-selecting-variant">
-    {{ form_start(form, {'action': path('sylius_shop_ajax_cart_add_item', {'template': '@SyliusShop/Product/Show/_addToCart.html.twig', 'productId': product.id}), 'attr': {'id': 'sylius-product-adding-to-cart', 'class': 'ui loadable form', 'novalidate': 'novalidate', 'data-redirect': path('sylius_shop_cart_summary')}}) }}
+    {{ form_start(form, {'action': path('sylius_shop_ajax_cart_add_item', {'productId': product.id}), 'attr': {'id': 'sylius-product-adding-to-cart', 'class': 'ui loadable form', 'novalidate': 'novalidate', 'data-redirect': path('sylius_shop_cart_summary')}}) }}
     {{ form_errors(form) }}
     {% if not product.simple %}
         {% if product.variantSelectionMethodChoice %}

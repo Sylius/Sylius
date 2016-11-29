@@ -8,4 +8,3 @@ sylius_shop_partial_product_association_show:
         _controller: sylius.controller.product_association:showAction
         _sylius:
             template: $template
-

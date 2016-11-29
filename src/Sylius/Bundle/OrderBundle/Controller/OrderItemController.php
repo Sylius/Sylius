@@ -80,6 +80,7 @@ class OrderItemController extends ResourceController
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create($cart, Response::HTTP_CREATED));
             }
+
             $this->flashHelper->addSuccessFlash($configuration, CartActions::ADD, $orderItem);
 
             return $this->redirectHandler->redirectToResource($configuration, $orderItem);

@@ -42,7 +42,6 @@
         </service>
         <service id="sylius.channel_aware_promotion_rule_checker.item_total" class="Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker" decorates="sylius.promotion_rule_checker.item_total">
             <argument type="service" id="sylius.channel_aware_promotion_rule_checker.item_total.inner" />
-            <argument type="service" id="sylius.context.channel" />
         </service>
 
         <service id="sylius.promotion_action.fixed_discount" class="Sylius\Component\Core\Promotion\Action\FixedDiscountPromotionActionCommand">

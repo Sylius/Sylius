@@ -8,6 +8,7 @@ sylius_shop_cart_summary:
         _controller: sylius.controller.order:summaryAction
         _sylius:
             template: "@SyliusShop/Cart/summary.html.twig"
+            form: Sylius\Bundle\OrderBundle\Form\Type\CartType
 
 sylius_shop_cart_save:
     path: /

@@ -8,6 +8,7 @@ sylius_shop_partial_cart_summary:
         _controller: sylius.controller.order:summaryAction
         _sylius:
             template: $template
+            form: Sylius\Bundle\OrderBundle\Form\Type\CartType
 
 sylius_shop_partial_cart_add_item:
     path: /add-item

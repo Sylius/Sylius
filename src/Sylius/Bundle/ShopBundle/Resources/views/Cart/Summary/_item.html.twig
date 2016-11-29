@@ -1,12 +1,11 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
-{% set item_form = form.items[loop.index0] %}
 {% set product = item.product %}
-{% set variant = item.variant %}
+{% set product_variant = item.variant %}
 
 <tr>
     <td class="single line">
-        {% include '@SyliusShop/Product/_info.html.twig' with {'variant': item.variant} %}
+        {% include '@SyliusShop/Product/_info.html.twig' with {'variant': product_variant} %}
     </td>
     <td class="right aligned">
         {% if item.unitPrice != item.discountedUnitPrice %}
@@ -15,7 +14,7 @@
         <span class="sylius-unit-price">{{ money.convertAndFormat(item.discountedUnitPrice) }}</span>
     </td>
     <td class="center aligned">
-        <span class="sylius-quantity">{{ form_widget(item_form.quantity) }}</span>
+        <span class="sylius-quantity">{{ form_widget(form.quantity) }}</span>
     </td>
     <td class="center aligned">
         <a href="{{ path('sylius_shop_cart_item_remove', {'id': item.id}) }}" class="ui circular icon button sylius-cart-remove-button"><i class="remove icon"></i></a>

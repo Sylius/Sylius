@@ -34,5 +34,18 @@
                 </service>
             </argument>
         </service>
+
+        <service id="sylius.form.type.cart" class="Sylius\Bundle\OrderBundle\Form\Type\CartType">
+            <argument>%sylius.model.order.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.cart_item" class="Sylius\Bundle\OrderBundle\Form\Type\CartItemType">
+            <argument>%sylius.model.order_item.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <argument type="service" id="sylius.form.data_mapper.order_item_quantity" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

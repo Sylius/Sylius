@@ -29,6 +29,9 @@
         <service id="sylius.form.extension.type.order" class="Sylius\Bundle\CoreBundle\Form\Extension\OrderTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\OrderType" />
         </service>
+        <service id="sylius.form.extension.type.cart" class="Sylius\Bundle\CoreBundle\Form\Extension\CartTypeExtension">
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\OrderBundle\Form\Type\CartType" />
+        </service>
         <service id="sylius.form.extension.type.payment_method" class="Sylius\Bundle\CoreBundle\Form\Extension\PaymentMethodTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType" />
         </service>
