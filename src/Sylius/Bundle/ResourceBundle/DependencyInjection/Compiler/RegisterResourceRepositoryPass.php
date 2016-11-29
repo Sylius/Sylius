@@ -31,13 +31,13 @@ final class RegisterResourceRepositoryPass implements CompilerPassInterface
 
         $resources = $container->getParameter('sylius.resources');
 
-        if ($container->hasDefinition('sylius.resource_repository_registry')) {
-            $repositoryRegistry = $container->findDefinition('sylius.resource_repository_registry');
+        if ($container->has('sylius.registry.resource_repository')) {
+            $repositoryRegistry = $container->findDefinition('sylius.registry.resource_repository');
 
             foreach ($resources as $alias => $configuration) {
                 $repositoryId = sprintf('sylius.repository.%s', str_replace('sylius.', '', $alias));
 
-                if ($container->hasDefinition($repositoryId)) {
+                if ($container->has($repositoryId)) {
                     $repositoryRegistry->addMethodCall('register', [$alias, new Reference($repositoryId)]);
                 }
             }
