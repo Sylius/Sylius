@@ -39,7 +39,7 @@ class ChannelFactory implements ChannelFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createWithName($name)
+    public function createNamed($name)
     {
         $channel = $this->defaultFactory->createNew();
         $channel->setName($name);

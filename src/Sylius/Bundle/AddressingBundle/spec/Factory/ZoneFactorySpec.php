@@ -48,7 +48,7 @@ final class ZoneFactorySpec extends ObjectBehavior
         $factory->createNew()->willReturn($zone);
         $zone->setType('country')->shouldBeCalled();
 
-        $this->createWithType('country')->shouldReturn($zone);
+        $this->createTyped('country')->shouldReturn($zone);
     }
 
     function it_creates_zone_with_members(

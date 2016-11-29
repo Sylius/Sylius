@@ -134,7 +134,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
      */
     private function createProvinceCodeChoiceForm(CountryInterface $country, $provinceCode = null)
     {
-        return $this->formFactory->createWithName('provinceCode', ProvinceCodeChoiceType::class, $provinceCode, [
+        return $this->formFactory->createNamed('provinceCode', ProvinceCodeChoiceType::class, $provinceCode, [
             'country' => $country,
             'auto_initialize' => false,
         ]);
@@ -147,7 +147,7 @@ final class BuildAddressFormSubscriber implements EventSubscriberInterface
      */
     private function createProvinceNameTextForm($provinceName = null)
     {
-        return $this->formFactory->createWithName('provinceName', TextType::class, $provinceName, [
+        return $this->formFactory->createNamed('provinceName', TextType::class, $provinceName, [
             'required' => false,
             'auto_initialize' => false,
         ]);

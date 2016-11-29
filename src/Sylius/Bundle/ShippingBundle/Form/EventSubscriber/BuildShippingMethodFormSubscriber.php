@@ -111,7 +111,7 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $configurationField = $this->factory->createWithName(
+        $configurationField = $this->factory->createNamed(
             'configuration',
             $this->formTypeRegistry->get($calculatorType, 'default'),
             $data,

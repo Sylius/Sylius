@@ -48,14 +48,14 @@ class AttributeFactory implements AttributeFactoryInterface
     public function createNew()
     {
         throw new \BadMethodCallException(
-            'Method "createNew()" is not supported for attribute factory. Use "createWithType($type)" instead.'
+            'Method "createNew()" is not supported for attribute factory. Use "createTyped($type)" instead.'
         );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createWithType($type)
+    public function createTyped($type)
     {
         /** @var AttributeTypeInterface $attributeType */
         $attributeType = $this->attributeTypesRegistry->get($type);

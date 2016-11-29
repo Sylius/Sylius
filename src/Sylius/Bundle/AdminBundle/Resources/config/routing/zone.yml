@@ -24,7 +24,7 @@ sylius_admin_zone_create:
         _sylius:
             section: admin
             factory:
-                method: createWithType
+                method: createTyped
                 arguments:
                     type: $type
             template: SyliusAdminBundle:Crud:create.html.twig

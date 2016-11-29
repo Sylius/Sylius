@@ -17,7 +17,7 @@ sylius_api_zone_create:
         _controller: sylius.controller.zone:createAction
         _sylius:
             factory:
-                method: createWithType
+                method: createTyped
                 arguments:
                     type: $type
 

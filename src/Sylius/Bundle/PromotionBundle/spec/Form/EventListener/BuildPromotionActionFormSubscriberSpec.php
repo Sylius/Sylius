@@ -71,7 +71,7 @@ final class BuildPromotionActionFormSubscriberSpec extends ObjectBehavior
         $action->getConfiguration()->willReturn([]);
 
         $factory
-            ->createWithName('configuration', 'sylius_promotion_action_fixed_discount_configuration', Argument::cetera())
+            ->createNamed('configuration', 'sylius_promotion_action_fixed_discount_configuration', Argument::cetera())
             ->willReturn($field)
         ;
 
@@ -90,7 +90,7 @@ final class BuildPromotionActionFormSubscriberSpec extends ObjectBehavior
         $event->getData()->willReturn(['type' => 'test_action']);
 
         $factory
-            ->createWithName('configuration', 'sylius_promotion_action_fixed_discount_configuration', Argument::cetera())
+            ->createNamed('configuration', 'sylius_promotion_action_fixed_discount_configuration', Argument::cetera())
             ->willReturn($field)
         ;
 

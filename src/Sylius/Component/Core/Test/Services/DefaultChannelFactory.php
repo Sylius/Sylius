@@ -98,7 +98,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         $locale = $this->provideLocale();
 
         /** @var ChannelInterface $channel */
-        $channel = $this->channelFactory->createWithName($name ?: self::DEFAULT_CHANNEL_NAME);
+        $channel = $this->channelFactory->createNamed($name ?: self::DEFAULT_CHANNEL_NAME);
         $channel->setCode($code ?: self::DEFAULT_CHANNEL_CODE);
         $channel->setTaxCalculationStrategy('order_items_based');
 

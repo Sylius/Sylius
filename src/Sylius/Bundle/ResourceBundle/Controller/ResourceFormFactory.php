@@ -44,6 +44,6 @@ final class ResourceFormFactory implements ResourceFormFactoryInterface
             return $this->formFactory->create($formType, $resource, $formOptions);
         }
 
-        return $this->formFactory->createWithName('', $formType, $resource, array_merge($formOptions, ['csrf_protection' => false]));
+        return $this->formFactory->createNamed('', $formType, $resource, array_merge($formOptions, ['csrf_protection' => false]));
     }
 }

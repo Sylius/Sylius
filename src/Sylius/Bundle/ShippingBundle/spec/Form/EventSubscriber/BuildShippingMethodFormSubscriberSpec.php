@@ -71,7 +71,7 @@ final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $formRegistry->has('calculator_type', 'default')->shouldBeCalled()->willReturn(true);
         $formRegistry->get('calculator_type', 'default')->shouldBeCalled()->willReturn('sylius_shipping_calculator_calculator_type');
 
-        $factory->createWithName(
+        $factory->createNamed(
             'configuration',
             'sylius_shipping_calculator_calculator_type',
             [],
@@ -101,7 +101,7 @@ final class BuildShippingMethodFormSubscriberSpec extends ObjectBehavior
         $formRegistry->has('calculator_type', 'default')->shouldBeCalled()->willReturn(true);
         $formRegistry->get('calculator_type', 'default')->shouldBeCalled()->willReturn('sylius_shipping_calculator_calculator_type');
 
-        $factory->createWithName(
+        $factory->createNamed(
             'configuration',
             'sylius_shipping_calculator_calculator_type',
             [],

@@ -36,7 +36,7 @@ class SecurityController extends Controller
         Assert::notNull($template, 'Template is not configured.');
 
         $formType = isset($options['form']) ? $options['form'] : UserLoginType::class;
-        $form = $this->get('form.factory')->createWithName('', $formType);
+        $form = $this->get('form.factory')->createNamed('', $formType);
 
         return $this->render($template, [
             'form' => $form->createView(),

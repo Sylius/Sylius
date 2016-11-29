@@ -72,7 +72,7 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         $currencyFactory->createNew()->willReturn($currency);
         $currency->setCode('USD')->shouldBeCalled();
 
-        $channelFactory->createWithName('Default')->willReturn($channel);
+        $channelFactory->createNamed('Default')->willReturn($channel);
 
         $channel->setCode('DEFAULT')->shouldBeCalled();
         $channel->setTaxCalculationStrategy('order_items_based')->shouldBeCalled();

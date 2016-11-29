@@ -64,7 +64,7 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends AbstractConfi
             return;
         }
 
-        $configurationCollection = $this->factory->createWithName('configuration', PromotionConfigurationType::class, [], [
+        $configurationCollection = $this->factory->createNamed('configuration', PromotionConfigurationType::class, [], [
             'compound' => true,
             'auto_initialize' => false,
         ]);
@@ -109,7 +109,7 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends AbstractConfi
             'currency' => $channel->getBaseCurrency()->getCode(),
         ];
 
-        return $this->factory->createWithName($channel->getCode(), $configuration, $data, $config);
+        return $this->factory->createNamed($channel->getCode(), $configuration, $data, $config);
     }
 
     /**
@@ -120,7 +120,7 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends AbstractConfi
      */
     private function createConfigurationField($configuration, array $data)
     {
-        return $this->factory->createWithName('configuration', $configuration, $data, [
+        return $this->factory->createNamed('configuration', $configuration, $data, [
             'auto_initialize' => false,
             'label' => false,
         ]);

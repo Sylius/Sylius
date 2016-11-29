@@ -59,7 +59,7 @@ final class BuildTaxonFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $event->getForm()->add($this->factory->createWithName('parent', TaxonChoiceType::class, $taxon->getParent(), [
+        $event->getForm()->add($this->factory->createNamed('parent', TaxonChoiceType::class, $taxon->getParent(), [
             'filter' => $this->getFilterTaxonOption($taxon),
             'required' => false,
             'label' => 'sylius.form.taxon.parent',

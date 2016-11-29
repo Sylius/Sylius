@@ -24,5 +24,5 @@ interface ChannelFactoryInterface extends FactoryInterface
      *
      * @return ChannelInterface
      */
-    public function createWithName($name);
+    public function createNamed($name);
 }

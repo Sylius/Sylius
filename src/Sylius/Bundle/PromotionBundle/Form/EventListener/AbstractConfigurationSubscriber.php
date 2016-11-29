@@ -115,7 +115,7 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
             return;
         }
 
-        $configurationField = $this->factory->createWithName(
+        $configurationField = $this->factory->createNamed(
             'configuration',
             $configuration,
             $data,

@@ -122,7 +122,7 @@ final class ZoneContext implements Context
      */
     public function theStoreHasAZoneWithCode($zoneName, $code)
     {
-        $zone = $this->zoneFactory->createWithType(ZoneInterface::TYPE_ZONE);
+        $zone = $this->zoneFactory->createTyped(ZoneInterface::TYPE_ZONE);
         $zone->setCode($code);
         $zone->setName($zoneName);
 

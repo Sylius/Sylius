@@ -67,7 +67,7 @@ final class SecurityController
 
         $template = isset($options['template']) ? $options['template'] : 'SyliusUiBundle:Security:login.html.twig';
         $formType = isset($options['form']) ? $options['form'] : SecurityLoginType::class;
-        $form = $this->formFactory->createWithName('', $formType);
+        $form = $this->formFactory->createNamed('', $formType);
 
         return $this->templatingEngine->renderResponse($template, [
             'form' => $form->createView(),

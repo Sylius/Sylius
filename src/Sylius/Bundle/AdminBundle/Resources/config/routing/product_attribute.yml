@@ -24,7 +24,7 @@ sylius_admin_product_attribute_create:
         _sylius:
             section: admin
             factory:
-                method: createWithType
+                method: createTyped
                 arguments:
                     type: $type
             template: SyliusAdminBundle:Crud:create.html.twig

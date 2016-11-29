@@ -43,7 +43,7 @@ final class ChannelFactorySpec extends ObjectBehavior
 
         $channel->setName('United States Webstore')->shouldBeCalled();
 
-        $this->createWithName('United States Webstore')->shouldReturn($channel);
+        $this->createNamed('United States Webstore')->shouldReturn($channel);
     }
 
     function it_creates_empty_channel($defaultFactory, ChannelInterface $channel)

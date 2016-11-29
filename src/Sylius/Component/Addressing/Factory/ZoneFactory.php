@@ -50,7 +50,7 @@ final class ZoneFactory implements ZoneFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createWithType($type)
+    public function createTyped($type)
     {
         /* @var ZoneInterface $zone */
         $zone = $this->createNew();

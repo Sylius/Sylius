@@ -718,7 +718,7 @@ final class ProductContext implements Context
      */
     private function createProductAttribute($type, $name, $code = null)
     {
-        $productAttribute = $this->productAttributeFactory->createWithType($type);
+        $productAttribute = $this->productAttributeFactory->createTyped($type);
 
         if (null === $code) {
             $code = StringInflector::nameToCode($name);

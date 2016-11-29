@@ -74,7 +74,7 @@ final class BuildPromotionRuleFormSubscriberSpec extends ObjectBehavior
         $rule->getConfiguration()->willReturn([]);
 
         $factory
-            ->createWithName('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())
+            ->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())
             ->willReturn($field)
         ;
         $form->add($field)->shouldBeCalled();
@@ -92,7 +92,7 @@ final class BuildPromotionRuleFormSubscriberSpec extends ObjectBehavior
         $event->getData()->willReturn(['type' => ItemTotalRuleChecker::TYPE]);
 
         $factory
-            ->createWithName('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())
+            ->createNamed('configuration', 'sylius_promotion_rule_item_total_configuration', Argument::cetera())
             ->willReturn($field)
         ;
         $form->add($field)->shouldBeCalled();

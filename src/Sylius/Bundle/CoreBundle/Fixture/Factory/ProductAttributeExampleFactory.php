@@ -77,7 +77,7 @@ class ProductAttributeExampleFactory extends AbstractExampleFactory implements E
         $options = $this->optionsResolver->resolve($options);
 
         /** @var ProductOptionInterface $productAttribute */
-        $productAttribute = $this->productAttributeFactory->createWithType($options['type']);
+        $productAttribute = $this->productAttributeFactory->createTyped($options['type']);
         $productAttribute->setCode($options['code']);
 
         foreach ($this->getLocales() as $localeCode) {
