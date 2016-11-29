@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,32 +23,20 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CountryChoiceType extends AbstractType
 {
     /**
-     * @var RepositoryInterface
-     */
-    protected $countryRepository;
-
-    /**
-     * @param RepositoryInterface $countryRepository
-     */
-    public function __construct(RepositoryInterface $countryRepository)
-    {
-        $this->countryRepository = $countryRepository;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
-                'choices' => function (Options $options) {
+                'function' => function (RepositoryInterface $repository, Options $options) {
                     if (null === $options['enabled']) {
-                        return $this->countryRepository->findAll();
+                        return $repository->findAll();
                     }
 
-                    return $this->countryRepository->findBy(['enabled' => $options['enabled']]);
+                    return $repository->findBy(['enabled' => $options['enabled']]);
                 },
+                'resource' => 'sylius.country',
                 'choice_value' => 'code',
                 'choice_label' => 'name',
                 'choice_translation_domain' => false,
@@ -64,7 +52,7 @@ class CountryChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return ChoiceType::class;
+        return ResourceChoiceType::class;
     }
 
     /**

@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,31 +24,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ProvinceChoiceType extends AbstractType
 {
     /**
-     * @var RepositoryInterface
-     */
-    protected $provinceRepository;
-
-    /**
-     * @param RepositoryInterface $provinceRepository
-     */
-    public function __construct(RepositoryInterface $provinceRepository)
-    {
-        $this->provinceRepository = $provinceRepository;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'choices' => function (Options $options) {
+            'function' => function (RepositoryInterface $repository, Options $options) {
                 if (null === $options['country']) {
-                    return $this->provinceRepository->findAll();
+                    return $repository->findAll();
                 }
 
                 return $options['country']->getProvinces();
             },
+            'resource' => 'sylius.province',
             'choice_value' => 'code',
             'choice_label' => 'name',
             'choice_translation_domain' => false,
@@ -64,7 +52,7 @@ class ProvinceChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return ChoiceType::class;
+        return ResourceChoiceType::class;
     }
 
     /**
