@@ -1,6 +1,6 @@
 <div class="ui fluid vertical menu">
     <div class="header item">{{ taxon.name }}</div>
-    {% if taxon.parent is not empty %}
+    {% if taxon.parent is not empty and not taxon.parent.isRoot %}
         <a href="{{ path('sylius_shop_taxon_show', {'slug': taxon.parent.slug}) }}" class="item">
             <i class="up arrow icon"></i> {{ 'sylius.ui.go_level_up'|trans }}
         </a>
