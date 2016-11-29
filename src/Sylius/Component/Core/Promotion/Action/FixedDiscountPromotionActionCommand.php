@@ -57,15 +57,19 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
         if (!$this->isSubjectValid($subject)) {
-            return;
+            return false;
         }
 
         $channelCode = $subject->getChannel()->getCode();
         if (!isset($configuration[$channelCode])) {
-            return;
+            return false;
         }
 
-        $this->isConfigurationValid($configuration[$channelCode]);
+        try {
+            $this->isConfigurationValid($configuration[$channelCode]);
+        } catch (\InvalidArgumentException $exception) {
+            return false;
+        }
 
         $promotionAmount = $this->calculateAdjustmentAmount(
             $subject->getPromotionSubjectTotal(),
@@ -73,7 +77,7 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
         );
 
         if (0 === $promotionAmount) {
-            return;
+            return false;
         }
 
         $itemsTotals = [];
@@ -83,6 +87,8 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
 
         $splitPromotion = $this->proportionalDistributor->distribute($itemsTotals, $promotionAmount);
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
+
+        return true;
     }
 
     /**

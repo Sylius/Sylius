@@ -80,10 +80,10 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-600, -400]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-600, -400])->shouldBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_not_apply_bigger_promotion_than_promotion_subject_total(
+    function it_does_not_apply_bigger_discount_than_promotion_subject_total(
         ChannelInterface $channel,
         OrderInterface $order,
         OrderItemInterface $firstItem,
@@ -110,10 +110,10 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $proportionalIntegerDistributor->distribute([6000, 4000], -10000)->willReturn([-6000, -4000]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-6000, -4000])->shouldBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['amount' => 15000]], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 15000]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_nothing_if_order_has_no_items(
+    function it_does_not_apply_discount_if_order_has_no_items(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
@@ -124,10 +124,10 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->shouldNotBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_nothing_if_subject_total_is_0(
+    function it_does_not_apply_discount_if_subject_total_is_0(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion,
@@ -140,10 +140,10 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getPromotionSubjectTotal()->willReturn(0);
         $proportionalIntegerDistributor->distribute(Argument::any())->shouldNotBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 1000]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_nothing_if_promotion_amount_is_0(
+    function it_does_not_apply_discount_if_promotion_amount_is_0(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion,
@@ -156,10 +156,10 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->getPromotionSubjectTotal()->willReturn(1000);
         $proportionalIntegerDistributor->distribute(Argument::any())->shouldNotBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['amount' => 0]], $promotion);
+        $this->execute($order, ['WEB_US' => ['amount' => 0]], $promotion)->shouldReturn(false);
     }
 
-    function it_does_nothing_if_amount_for_order_channel_is_not_configured(
+    function it_does_not_apply_discount_if_amount_for_order_channel_is_not_configured(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
@@ -170,10 +170,10 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $order->countItems()->willReturn(1);
         $order->getPromotionSubjectTotal()->shouldNotBeCalled();
 
-        $this->execute($order, ['WEB_PL' => ['amount' => 1000]], $promotion);
+        $this->execute($order, ['WEB_PL' => ['amount' => 1000]], $promotion)->shouldReturn(false);
     }
 
-    function it_throws_an_exception_if_configuration_is_invalid(
+    function it_does_not_apply_discount_if_configuration_is_invalid(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
@@ -182,15 +182,8 @@ final class FixedDiscountPromotionActionCommandSpec extends ObjectBehavior
         $channel->getCode()->willReturn('WEB_US', 'WEB_US');
         $order->countItems()->willReturn(1, 1);
 
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('execute', [$order, ['WEB_US' => []], $promotion])
-        ;
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('execute', [$order, ['WEB_US' => ['amount' => 'string']], $promotion])
-        ;
+        $this->execute($order, ['WEB_US' => []], $promotion)->shouldReturn(false);
+        $this->execute($order, ['WEB_US' => ['amount' => 'string']], $promotion)->shouldReturn(false);
     }
 
     function it_throws_an_exception_if_subject_is_not_an_order(

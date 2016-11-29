@@ -71,8 +71,8 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
         }
 
         $channelCode = $subject->getChannel()->getCode();
-        if (!isset($configuration[$channelCode])) {
-            return;
+        if (!isset($configuration[$channelCode]) || !isset($configuration[$channelCode]['percentage'])) {
+            return false;
         }
 
         $filteredItems = $this->priceRangeFilter->filter(
@@ -82,10 +82,16 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
         $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
 
+        if (empty($filteredItems)) {
+            return false;
+        }
+
         foreach ($filteredItems as $item) {
             $promotionAmount = (int) round($item->getUnitPrice() * $configuration[$channelCode]['percentage']);
             $this->setUnitsAdjustments($item, $promotionAmount, $promotion);
         }
+
+        return true;
     }
 
     /**

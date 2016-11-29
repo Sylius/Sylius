@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -102,20 +103,55 @@ final class UnitPercentageDiscountPromotionActionCommandSpec extends ObjectBehav
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion);
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(true);
     }
 
-    function it_does_nothing_if_percentage_or_order_channel_is_not_configured(
+    function it_does_not_apply_a_discount_if_all_items_have_been_filtered_out(
+        ChannelInterface $channel,
+        FilterInterface $priceRangeFilter,
+        FilterInterface $taxonFilter,
+        FilterInterface $productFilter,
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
+        PromotionInterface $promotion
+    ) {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $order->getItems()->willReturn(new ArrayCollection([$orderItem]));
+        $order->getChannel()->willReturn($channel);
+
+        $priceRangeFilter->filter([$orderItem], ['percentage' => 0.2, 'channel' => $channel])->willReturn([$orderItem]);
+        $taxonFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([$orderItem]);
+        $productFilter->filter([$orderItem], ['percentage' => 0.2])->willReturn([]);
+
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(false);
+    }
+
+    function it_does_not_apply_discount_if_configuration_for_order_channel_is_not_defined(
         ChannelInterface $channel,
         OrderInterface $order,
         PromotionInterface $promotion
     ) {
-        $order->getCurrencyCode()->willReturn('USD');
         $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_PL');
 
         $order->getItems()->shouldNotBeCalled();
 
-        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion);
+        $this->execute($order, ['WEB_US' => ['percentage' => 0.2]], $promotion)->shouldReturn(false);
+    }
+
+    function it_does_not_apply_discount_if_percentage_configuration_not_defined(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        PromotionInterface $promotion
+    ) {
+        $order->getChannel()->willReturn($channel);
+        $channel->getCode()->willReturn('WEB_PL');
+
+        $order->getItems()->shouldNotBeCalled();
+
+        $this->execute($order, ['WEB_PL' => []], $promotion)->shouldReturn(false);
     }
 
     function it_throws_an_exception_if_passed_subject_is_not_order(

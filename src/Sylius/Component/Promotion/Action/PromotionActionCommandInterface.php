@@ -21,17 +21,17 @@ interface PromotionActionCommandInterface
 {
     /**
      * @param PromotionSubjectInterface $subject
-     * @param array                     $configuration
-     * @param PromotionInterface        $promotion
+     * @param array $configuration
+     * @param PromotionInterface $promotion
      *
-     * @return mixed
+     * @return bool
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion);
 
     /**
      * @param PromotionSubjectInterface $subject
-     * @param array                     $configuration
-     * @param PromotionInterface        $promotion
+     * @param array $configuration
+     * @param PromotionInterface $promotion
      *
      * @return mixed
      */

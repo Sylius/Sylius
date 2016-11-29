@@ -74,13 +74,12 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
 
         $channelCode = $subject->getChannel()->getCode();
         if (!isset($configuration[$channelCode])) {
-            return;
+            return false;
         }
 
         $amount = $configuration[$channelCode]['amount'];
-
         if (0 === $amount) {
-            return;
+            return false;
         }
 
         $filteredItems = $this->priceRangeFilter->filter(
@@ -90,9 +89,15 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
         $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
 
+        if (empty($filteredItems)) {
+            return false;
+        }
+
         foreach ($filteredItems as $item) {
             $this->setUnitsAdjustments($item, $amount, $promotion);
         }
+
+        return true;
     }
 
     /**

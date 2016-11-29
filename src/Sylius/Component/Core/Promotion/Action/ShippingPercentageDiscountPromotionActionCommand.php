@@ -50,11 +50,17 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
+        if (!isset($configuration['percentage'])) {
+            return false;
+        }
+
         $adjustment = $this->createAdjustment($promotion);
         $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
         $adjustment->setAmount(-$adjustmentAmount);
 
         $subject->addAdjustment($adjustment);
+
+        return true;
     }
 
     /**

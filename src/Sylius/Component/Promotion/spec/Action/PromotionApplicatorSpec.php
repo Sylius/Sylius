@@ -42,40 +42,68 @@ final class PromotionApplicatorSpec extends ObjectBehavior
 
     function it_executes_all_actions_registered(
         ServiceRegistryInterface $registry,
-        PromotionActionCommandInterface $action,
+        PromotionActionCommandInterface $actionCommand,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
-        PromotionActionInterface $actionModel
+        PromotionActionInterface $action
     ) {
         $configuration = [];
 
-        $registry->get('test_action')->willReturn($action);
-        $promotion->getActions()->willReturn([$actionModel]);
-        $actionModel->getType()->willReturn('test_action');
-        $actionModel->getConfiguration()->willReturn($configuration);
+        $registry->get('test_action')->willReturn($actionCommand);
+        $promotion->getActions()->willReturn([$action]);
+        $action->getType()->willReturn('test_action');
+        $action->getConfiguration()->willReturn($configuration);
 
-        $action->execute($subject, $configuration, $promotion)->shouldBeCalled();
+        $actionCommand->execute($subject, $configuration, $promotion)->willReturn(true);
 
         $subject->addPromotion($promotion)->shouldBeCalled();
 
         $this->apply($subject, $promotion);
     }
 
-    function it_reverts_all_actions_registered(
+    function it_does_not_add_promotion_if_no_action_has_been_applied(
         ServiceRegistryInterface $registry,
-        PromotionActionCommandInterface $action,
+        PromotionActionCommandInterface $firstActionCommand,
+        PromotionActionCommandInterface $secondActionCommand,
         PromotionSubjectInterface $subject,
         PromotionInterface $promotion,
-        PromotionActionInterface $actionModel
+        PromotionActionInterface $firstAction,
+        PromotionActionInterface $secondAction
+    ) {
+        $promotion->getActions()->willReturn([$firstAction, $secondAction]);
+
+        $firstAction->getType()->willReturn('first_action');
+        $firstAction->getConfiguration()->willReturn([]);
+
+        $secondAction->getType()->willReturn('second_action');
+        $secondAction->getConfiguration()->willReturn([]);
+
+        $registry->get('first_action')->willReturn($firstActionCommand);
+        $registry->get('second_action')->willReturn($secondActionCommand);
+
+        $firstActionCommand->execute($subject, [], $promotion)->willReturn(false);
+        $secondActionCommand->execute($subject, [], $promotion)->willReturn(false);
+
+        $subject->addPromotion($promotion)->shouldNotBeCalled();
+
+        $this->apply($subject, $promotion);
+    }
+
+    function it_reverts_all_actions_registered(
+        ServiceRegistryInterface $registry,
+        PromotionActionCommandInterface $actionCommand,
+        PromotionSubjectInterface $subject,
+        PromotionInterface $promotion,
+        PromotionActionInterface $action
     ) {
         $configuration = [];
 
-        $registry->get('test_action')->willReturn($action);
-        $promotion->getActions()->willReturn([$actionModel]);
-        $actionModel->getType()->willReturn('test_action');
-        $actionModel->getConfiguration()->willReturn($configuration);
+        $registry->get('test_action')->willReturn($actionCommand);
+        $promotion->getActions()->willReturn([$action]);
+        $action->getType()->willReturn('test_action');
+        $action->getConfiguration()->willReturn($configuration);
 
-        $action->revert($subject, $configuration, $promotion)->shouldBeCalled();
+        $actionCommand->revert($subject, $configuration, $promotion)->shouldBeCalled();
 
         $subject->removePromotion($promotion)->shouldBeCalled();
 
