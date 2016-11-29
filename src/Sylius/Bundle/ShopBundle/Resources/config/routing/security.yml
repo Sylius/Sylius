@@ -7,7 +7,7 @@ sylius_shop_login:
     defaults:
         _controller: sylius.controller.security:loginAction
         _sylius:
-            template: SyliusShopBundle::login.html.twig
+            template: "@SyliusShop/login.html.twig"
 
 sylius_shop_login_check:
     path: /login-check
@@ -23,9 +23,9 @@ sylius_shop_register:
     defaults:
         _controller: sylius.controller.customer:createAction
         _sylius:
+            template: "@SyliusShop/register.html.twig"
             form: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerRegistrationType
             event: register
-            template: SyliusShopBundle::register.html.twig
             redirect:
                 route: sylius_shop_account_dashboard
             flash: sylius.customer.register
@@ -36,7 +36,7 @@ sylius_shop_request_password_reset_token:
     defaults:
         _controller: sylius.controller.shop_user:requestPasswordResetTokenAction
         _sylius:
-            template: SyliusShopBundle:Account:requestPasswordReset.html.twig
+            template: "SyliusShop/Account/requestPasswordReset.html.twig"
             redirect: sylius_shop_login
 
 sylius_shop_password_reset:
@@ -45,5 +45,5 @@ sylius_shop_password_reset:
     defaults:
         _controller: sylius.controller.shop_user:resetPasswordAction
         _sylius:
-            template: SyliusShopBundle:Account:resetPassword.html.twig
+            template: "SyliusShop/Account/resetPassword.html.twig"
             redirect: sylius_shop_login

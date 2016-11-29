@@ -5,10 +5,6 @@ sylius_shop_ajax_user:
     resource: "@SyliusShopBundle/Resources/config/routing/ajax/user.yml"
     prefix: /users
 
-sylius_shop_ajax_account_address_book:
-    resource: "@SyliusShopBundle/Resources/config/routing/ajax/address_book.yml"
-    prefix: /address-book
-
 sylius_shop_ajax_cart:
     resource: "@SyliusShopBundle/Resources/config/routing/ajax/cart.yml"
     prefix: /cart
@@ -18,4 +14,4 @@ sylius_shop_ajax_render_province_form:
     defaults:
         _controller: sylius.controller.province:choiceOrTextFieldFormAction
         _sylius:
-            template: @SyliusShop/Common/Form/_province.html.twig
+            template: "@SyliusShop/Common/Form/_province.html.twig"

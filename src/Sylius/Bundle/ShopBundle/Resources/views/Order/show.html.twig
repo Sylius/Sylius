@@ -3,10 +3,11 @@
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
 {% block content %}
-    {% include '@SyliusShop/Order/_summary.html.twig' %}
+    <div class="ui segment">
+        {% include '@SyliusShop/Order/_summary.html.twig' %}
 
-    {% if order.paymentState in ['awaiting_payment'] %}
-        {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        {% if order.paymentState in ['awaiting_payment'] %}
+            {{ form_start(form, {'action': path('sylius_shop_order_show', {'tokenValue': order.tokenValue}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             <input type="hidden" name="_method" value="PUT" />
 
             {% include '@SyliusShop/Checkout/SelectPayment/_form.html.twig' %}
@@ -16,8 +17,9 @@
             </button>
 
             {{ form_row(form._token) }}
-        {{ form_end(form, {'render_rest': false}) }}
-    {% else %}
-        {{ messages.info('sylius.ui.you_can_no_longer_change_payment_method_of_this_order'|trans) }}
-    {% endif %}
+            {{ form_end(form, {'render_rest': false}) }}
+        {% else %}
+            {{ messages.info('sylius.ui.you_can_no_longer_change_payment_method_of_this_order'|trans) }}
+        {% endif %}
+    </div>
 {% endblock %}

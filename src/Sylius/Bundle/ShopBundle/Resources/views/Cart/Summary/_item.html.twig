@@ -6,7 +6,7 @@
 
 <tr>
     <td class="single line">
-        {% include '@SyliusShop/Common/Product/_variant.html.twig' with {'variant': item.variant} %}
+        {% include '@SyliusShop/Product/_info.html.twig' with {'variant': item.variant} %}
     </td>
     <td class="right aligned">
         {% if item.unitPrice != item.discountedUnitPrice %}

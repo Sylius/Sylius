@@ -29,7 +29,7 @@
         <header>
             {% include '@SyliusShop/Homepage/_header.html.twig' %}
 
-            {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/Partial/_horizontalMenu.html.twig'})) }}
+            {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
         </header>
         {% include '@SyliusUi/_flashes.html.twig' %}
 

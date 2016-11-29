@@ -7,13 +7,13 @@ sylius_shop_account_address_book_index:
     defaults:
         _controller: sylius.controller.address:indexAction
         _sylius:
-            template: SyliusShopBundle:Account/AddressBook:index.html.twig
             section: shop_account
+            template: "@SyliusShop/Account/AddressBook/index.html.twig"
             paginate: false
             repository:
                 method: findByCustomer
                 arguments:
-                    - 'expr:service("sylius.context.customer").getCustomer()'
+                    - "expr:service('sylius.context.customer').getCustomer()"
 
 sylius_shop_account_address_book_create:
     path: /add
@@ -21,12 +21,12 @@ sylius_shop_account_address_book_create:
     defaults:
         _controller: sylius.controller.address:createAction
         _sylius:
-            template: SyliusShopBundle:Account/AddressBook:create.html.twig
-            section: shop_acount
+            section: shop_account
+            template: "@SyliusShop/Account/AddressBook/create.html.twig"
             factory:
                 method: createForCustomer
                 arguments:
-                    - 'expr:service("sylius.context.customer").getCustomer()'
+                    - "expr:service('sylius.context.customer').getCustomer()"
             redirect:
                 route: sylius_shop_account_address_book_index
                 parameters: {}
@@ -38,13 +38,13 @@ sylius_shop_account_address_book_update:
     defaults:
         _controller: sylius.controller.address:updateAction
         _sylius:
-            template: SyliusShopBundle:Account/AddressBook:update.html.twig
             section: shop_account
+            template: "@SyliusShop/Account/AddressBook/update.html.twig"
             repository:
                 method: findOneByCustomer
                 arguments:
                     - $id
-                    - 'expr:service("sylius.context.customer").getCustomer()'
+                    - "expr:service('sylius.context.customer').getCustomer()"
             redirect:
                 route: sylius_shop_account_address_book_index
                 parameters: {}
@@ -56,12 +56,12 @@ sylius_shop_account_address_book_delete:
         _controller: sylius.controller.address:deleteAction
         _sylius:
             section: shop_account
-            redirect: sylius_shop_account_address_book_index
             repository:
                 method: findOneByCustomer
                 arguments:
                     - $id
-                    - 'expr:service("sylius.context.customer").getCustomer()'
+                    - "expr:service('sylius.context.customer').getCustomer()"
+            redirect: sylius_shop_account_address_book_index
 
 sylius_shop_account_address_book_set_as_default:
     path: /{id}/set-as-default
@@ -69,16 +69,16 @@ sylius_shop_account_address_book_set_as_default:
     defaults:
         _controller: sylius.controller.customer:updateAction
         _sylius:
-            template: SyliusShopBundle:Account/AddressBook:_defaultAddressForm.html.twig
             section: shop_account
+            template: "@SyliusShop/Account/AddressBook/_defaultAddressForm.html.twig"
             form:
                 type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerDefaultAddressType
                 options:
-                    customer: 'expr:service("sylius.context.customer").getCustomer()'
+                    customer: "expr:service('sylius.context.customer').getCustomer()"
             repository:
                 method: find
                 arguments:
-                    - 'expr:service("sylius.context.customer").getCustomer()'
+                    - "expr:service('sylius.context.customer').getCustomer()"
             redirect:
                 route: sylius_shop_account_address_book_index
                 parameters: {}

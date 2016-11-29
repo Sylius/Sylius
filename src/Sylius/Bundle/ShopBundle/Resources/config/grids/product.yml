@@ -9,18 +9,18 @@ sylius_grid:
                 options:
                     class: "%sylius.model.product.class%"
                     repository:
-                        method: createQueryBuilderByChannelAndTaxonId
+                        method: createQueryBuilderByChannelAndTaxonSlug
                         arguments:
-                            channel: 'expr:service("sylius.context.channel").getChannel()'
-                            taxonId: $taxonId
+                            channel: "expr:service('sylius.context.channel').getChannel()"
+                            taxonId: $slug
                             locale: '%locale%'
             sorting:
                 position: asc
             fields:
-                createdAt: # Must be configured
+                createdAt:
                     type: datetime
                     sortable: ~
-                position:  # Must be configured
+                position:
                     type: string 
                     sortable: productTaxon.position
             filters:

@@ -10,9 +10,7 @@
 {% block title %}{{ parent() }} | {{ header|trans }}{% endblock %}
 
 {% block content %}
-    {% if cart.empty %}
-        {{ messages.info('sylius.ui.your_cart_is_empty'|trans) }}
-    {% else %}
+    {% if not cart.empty %}
         {% include '@SyliusShop/Cart/Summary/_header.html.twig' %}
         <div class="ui stackable grid">
             <div class="eleven wide column">
@@ -25,5 +23,7 @@
         </div>
 
         {% include '@SyliusShop/Cart/Summary/_suggestions.html.twig' %}
+    {% else %}
+        {{ messages.info('sylius.ui.your_cart_is_empty'|trans) }}
     {% endif %}
 {% endblock %}

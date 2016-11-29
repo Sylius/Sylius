@@ -6,8 +6,8 @@
         </div>
         <div class="right aligned column">
             <div class="ui vertical icon labeled buttons">
-                {{ buttons.edit(path('sylius_shop_account_address_book_update', {'id': defaultAddress.id})) }}
-                {{ buttons.delete(path('sylius_shop_account_address_book_delete', {'id': defaultAddress.id}), null, true, defaultAddress.id) }}
+                {{ buttons.edit(path('sylius_shop_account_address_book_update', {'id': address.id})) }}
+                {{ buttons.delete(path('sylius_shop_account_address_book_delete', {'id': address.id}), null, true, address.id) }}
             </div>
         </div>
     </div>

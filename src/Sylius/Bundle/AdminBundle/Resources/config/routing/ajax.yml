@@ -15,4 +15,4 @@ sylius_admin_ajax_render_province_form:
     defaults:
         _controller: sylius.controller.province:choiceOrTextFieldFormAction
         _sylius:
-            template: @SyliusAdmin/Common/Form/_province.html.twig
+            template: "@SyliusAdmin/Common/Form/_province.html.twig"

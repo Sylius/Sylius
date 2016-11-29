@@ -4,12 +4,12 @@
     <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
     <div class="divider"> / </div>
     {% for parent in parents %}
-        {% if  parent.isRoot %}
-            {{ parent.name }}
+        {% if parent.isRoot() %}
+            <div class="section">{{ parent.name }}</div>
         {% else %}
-            <a href="{{ path('sylius_shop_taxon_show', {'slug': parent.slug}) }}" class="section">{{ parent.name }}</a>
+            <a href="{{ path('sylius_shop_product_index', {'slug': parent.slug}) }}" class="section">{{ parent.name }}</a>
         {% endif %}
-        <div class="divider"> / </div>
+    <div class="divider"> / </div>
     {% endfor %}
     <div class="active section">{{ taxon.name }}</div>
 </div>

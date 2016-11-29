@@ -1,8 +1,22 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_shop_partial_taxon_show_by_slug:
+    path: /by-slug/{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:showAction
+        _sylius:
+            template: $template
+            repository:
+                method: findOneBySlug
+                arguments:
+                    - $slug
+    requirements:
+        slug: .+
+
 sylius_shop_partial_taxon_index_by_code:
-    path: /{code}
+    path: /by-code/{code}
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:indexAction
@@ -10,4 +24,5 @@ sylius_shop_partial_taxon_index_by_code:
             template: $template
             repository:
                 method: findChildrenAsTreeByRootCode
-                arguments: [$code]
+                arguments:
+                    - $code

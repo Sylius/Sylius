@@ -22,7 +22,8 @@ sylius_shop_checkout_address:
                     customer: expr:service('sylius.context.customer').getCustomer()
             repository:
                 method: find
-                arguments: [expr:service('sylius.context.cart').getCart()]
+                arguments:
+                    - "expr:service('sylius.context.cart').getCart()"
             state_machine:
                 graph: sylius_order_checkout
                 transition: address
@@ -42,7 +43,8 @@ sylius_shop_checkout_select_shipping:
             form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType
             repository:
                 method: find
-                arguments: [expr:service('sylius.context.cart').getCart()]
+                arguments:
+                    - "expr:service('sylius.context.cart').getCart()"
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_shipping
@@ -62,7 +64,8 @@ sylius_shop_checkout_select_payment:
             form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType
             repository:
                 method: find
-                arguments: [expr:service('sylius.context.cart').getCart()]
+                arguments:
+                    - "expr:service('sylius.context.cart').getCart()"
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_payment
@@ -81,7 +84,8 @@ sylius_shop_checkout_complete:
             template: SyliusShopBundle:Checkout:complete.html.twig
             repository:
                 method: find
-                arguments: [expr:service('sylius.context.cart').getCart()]
+                arguments:
+                    - "expr:service('sylius.context.cart').getCart()"
             state_machine:
                 graph: sylius_order_checkout
                 transition: complete

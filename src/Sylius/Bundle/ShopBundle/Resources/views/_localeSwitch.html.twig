@@ -1,4 +1,4 @@
-{% if locales|length >= 2 %}
+{% if locales|length > 1 %}
     <div class="ui pointing dropdown link item" id="sylius-locale-selector">
         <span class="text sylius-active-locale">{{ active|sylius_locale_name }}</span>
         <i class="dropdown icon"></i>

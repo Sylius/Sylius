@@ -20,9 +20,6 @@ sylius_shop_security:
 sylius_shop_user:
     resource: "@SyliusShopBundle/Resources/config/routing/shop_user.yml"
 
-sylius_shop_taxon:
-    resource: "@SyliusShopBundle/Resources/config/routing/taxon.yml"
-
 sylius_shop_product:
     resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
 

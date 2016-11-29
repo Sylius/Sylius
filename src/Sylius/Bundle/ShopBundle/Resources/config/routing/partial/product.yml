@@ -14,42 +14,6 @@ sylius_shop_partial_product_index_latest:
                     - "expr:service('sylius.context.channel').getChannel()"
                     - $count
 
-sylius_shop_partial_product_index_by_taxon:
-    path: /by-taxon/{taxonId}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product:indexAction
-        _sylius:
-            template: $template
-            grid: sylius_shop_product
-            vars:
-                route:
-                    parameters:
-                        $taxonId: $taxonId
-
-sylius_shop_partial_associated_products:
-    path: /associated-products/{$id}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product_association:showAction
-        _sylius:
-            template: $template
-            criteria:
-                id: $id
-
-sylius_shop_partial_product_reviews_latest:
-    path: /latest-reviews/{productId}
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.product_review:indexAction
-        _sylius:
-            template: $template
-            repository:
-                method: findLatestByProductId
-                arguments:
-                    - 3
-                    - $productId
-
 sylius_shop_partial_product_show:
     path: /{slug}
     methods: [GET]

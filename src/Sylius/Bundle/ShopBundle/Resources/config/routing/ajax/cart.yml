@@ -1,7 +1,7 @@
 # This file is a part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_shop_ajax_cart_item_add:
+sylius_shop_ajax_cart_add_item:
     path: /add
     methods: [POST]
     defaults:
@@ -18,4 +18,4 @@ sylius_shop_ajax_cart_item_add:
             redirect:
                 route: sylius_shop_cart_summary
                 parameters: {}
-            flash: sylius.cart.item_add_completed
+            flash: sylius.cart.add_item

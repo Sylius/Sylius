@@ -2,11 +2,11 @@
 
 <tr>
     <td>
-        {% include '@SyliusShop/Common/Product/_variant.html.twig' with {'variant': item.variant} %}
+        {% include '@SyliusShop/Product/_info.html.twig' with {'variant': item.variant} %}
     </td>
     <td>
-        <span class="sylius-unit-price">{{ money.format(item.unitPrice, item.order.currencyCode) }}</span>
+        <span class="sylius-unit-price">{{ money.format(item.unitPrice, order.currencyCode) }}</span>
     </td>
     <td class="center aligned">{{ item.quantity }}</td>
-    <td class="right aligned">{{ money.format(item.subtotal, item.order.currencyCode) }}</td>
+    <td class="right aligned">{{ money.format(item.subtotal, order.currencyCode) }}</td>
 </tr>

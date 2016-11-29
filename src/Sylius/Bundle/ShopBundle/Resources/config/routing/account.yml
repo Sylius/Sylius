@@ -25,7 +25,8 @@ sylius_shop_account_dashboard:
             template: "@SyliusShop/Account/dashboard.html.twig"
             repository:
                 method: find
-                arguments: [expr:service('sylius.context.customer').getCustomer()]
+                arguments:
+                    - "expr:service('sylius.context.customer').getCustomer()"
 
 sylius_shop_account_profile_update:
     path: /profile/edit
@@ -37,7 +38,8 @@ sylius_shop_account_profile_update:
             form: Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType
             repository:
                 method: find
-                arguments: [expr:service('sylius.context.customer').getCustomer()]
+                arguments:
+                    - "expr:service('sylius.context.customer').getCustomer()"
             redirect:
                 route: sylius_shop_account_profile_update
                 parameters: {}

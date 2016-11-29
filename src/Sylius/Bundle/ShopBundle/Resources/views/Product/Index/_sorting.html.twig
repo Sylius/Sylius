@@ -1,7 +1,9 @@
+{% if resources.data.nbResults > 0 %}
+
 {% set definition = resources.definition %}
 
-{% set route = app.request.query.get('route') %}
-{% set route_parameters = app.request.query.get('route_parameters') %}
+{% set route = app.request.attributes.get('_route') %}
+{% set route_parameters = app.request.attributes.get('_route_params') %}
 
 {% set criteria = app.request.query.get('criteria', {}) %}
 
@@ -31,3 +33,4 @@
         </div>
     </div>
 </div>
+{% endif %}

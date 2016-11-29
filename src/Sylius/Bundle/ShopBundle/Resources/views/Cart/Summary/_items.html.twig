@@ -14,7 +14,7 @@
             </thead>
             <tbody>
                 {% for item in cart.items %}
-                    {% include '@SyliusShop/Cart/Summary/_item.html.twig' %}
+                    {% include '@SyliusShop/Cart/Summary/_item.html.twig' with {'item': item, 'form': form.items[loop.index0]} %}
                 {% endfor %}
             </tbody>
         </table>

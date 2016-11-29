@@ -176,7 +176,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'shipping_address' => '#sylius-shipping-address',
             'number' => '#number',
             'order_items' => '#sylius-order',
-            'payments' => '#payments',
+            'payments' => '#sylius-payments',
             'product_price' => '#sylius-order td:nth-child(2)',
             'subtotal' => '#subtotal',
             'total' => '#total',

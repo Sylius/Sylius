@@ -6,11 +6,15 @@
         {% set parents = taxon.parents|reverse %}
 
         {% for parent in parents %}
-            <a href="{{ path('sylius_shop_taxon_show', {'slug': parent.slug}) }}" class="section">{{ parent.name }}</a>
+            {% if parent.isRoot() %}
+                <div class="section">{{ parent.name }}</div>
+            {% else %}
+                <a href="{{ path('sylius_shop_product_index', {'slug': parent.slug}) }}" class="section">{{ parent.name }}</a>
+            {% endif %}
             <div class="divider"> / </div>
         {% endfor %}
 
-        <a href="{{ path('sylius_shop_taxon_show', {'slug': taxon.slug}) }}" class="section">{{ taxon.name }}</a>
+        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug}) }}" class="section">{{ taxon.name }}</a>
         <div class="divider"> / </div>
     {% endif %}
     <div class="active section">{{ product.name }}</div>

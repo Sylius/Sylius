@@ -427,7 +427,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'order_notes' => '#sylius-order-notes',
             'order_payment_state' => '#payment-state > span',
             'order_state' => '#sylius-order-state',
-            'payments' => '#payments',
+            'payments' => '#sylius-payments',
             'promotion_discounts' => '#promotion-discounts',
             'promotion_total' => '#promotion-total',
             'shipments' => '#shipments',

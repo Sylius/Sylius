@@ -10,7 +10,7 @@ sylius_grid:
                     class: "%sylius.model.order.class%"
                     repository:
                         method: createByCustomerIdQueryBuilder
-                        arguments: [expr:service('sylius.context.customer').getCustomer().getId()]
+                        arguments: ["expr:service('sylius.context.customer').getCustomer().getId()"]
             sorting:
                 checkoutCompletedAt: desc
             fields:

@@ -9,7 +9,7 @@
                 </div>
             </div>
         </div>
-        {% include '@SyliusShop/Product/Partial/Show/_mainImage.html.twig' with {'product': product} %}
+        {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product} %}
     </a>
     <div class="content">
         <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}" class="header sylius-product-name">{{ product.name }}</a>
