@@ -310,8 +310,6 @@ final class ProductContext implements Context
      */
     public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
-       $this->showPage->waitForValidationErrors(3);
-
         Assert::true(
             $this->showPage->hasProductOutOfStockValidationMessage($product),
             sprintf('I should see validation message for %s product', $product->getName())

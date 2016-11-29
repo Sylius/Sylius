@@ -77,11 +77,11 @@ class OrderItemController extends ResourceController
 
             $this->eventDispatcher->dispatchPostEvent(CartActions::ADD, $configuration, $orderItem);
 
-            if (!$configuration->isHtmlRequest()) {
+            $this->flashHelper->addSuccessFlash($configuration, CartActions::ADD, $orderItem);
+
+            if ($request->isXmlHttpRequest()) {
                 return $this->viewHandler->handle($configuration, View::create([], Response::HTTP_CREATED));
             }
-
-            $this->flashHelper->addSuccessFlash($configuration, CartActions::ADD, $orderItem);
 
             return $this->redirectHandler->redirectToResource($configuration, $orderItem);
         }

@@ -39,6 +39,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function addToCart()
     {
         $this->getDocument()->pressButton('Add to cart');
+
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            sleep(3); #TODO Kopytko
+        }
     }
 
     /**
@@ -48,6 +52,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $this->getDocument()->fillField('Quantity', $quantity);
         $this->getDocument()->pressButton('Add to cart');
+
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            sleep(3); #TODO Kopytko
+        }
     }
 
     /**

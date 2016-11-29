@@ -18,6 +18,7 @@ sylius_shop_cart_save:
         _sylius:
             template: "@SyliusShop/Cart/summary.html.twig"
             redirect: sylius_shop_cart_summary
+            form: Sylius\Bundle\OrderBundle\Form\Type\CartType
             flash: sylius.cart.save
 
 sylius_shop_cart_clear:

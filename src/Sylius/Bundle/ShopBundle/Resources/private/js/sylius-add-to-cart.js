@@ -12,15 +12,17 @@
 
     $.fn.extend({
         addToCart: function () {
+            var validationElement = $('#sylius-cart-validation-error');
+            validationElement.hide();
+
             $(this).on('submit', function(event) {
-                refresh(this, event);
+                refresh(this, event, validationElement);
             });
         }
     });
 
-    function refresh(element, event) {
+    function refresh(element, event, validationElement) {
         event.preventDefault();
-
         var data = $(element).serialize();
         var href = $(element).attr('action');
         var redirectUrl = $(element).data('redirect');
@@ -30,20 +32,14 @@
             url: href,
             data: data,
             cache: false,
-            success: function (data) {
-                if ($(data).find(".sylius-validation-error").length) {
-                    $(document).find('#sylius-product-selecting-variant').html($(data).find('#sylius-product-adding-to-cart'));
-
-                    $(document).find('#sylius-product-adding-to-cart > button').on('click', function() {
-                        return $(this).closest('form').addClass('loading');
-                    });
-
-                    $('#sylius-product-adding-to-cart').on('submit', function(event) {
-                        refresh(this, event);
-                    });
-                } else {
-                    window.location.replace(redirectUrl);
-                }
+            success: function (response) {
+                validationElement.hide();
+                window.location.replace(redirectUrl);
+            },
+            error: function (response) {
+                validationElement.show();
+                validationElement.html(response.responseJSON.errors.errors[0]);
+                $(element).removeClass('loading');
             }
         })
     }
