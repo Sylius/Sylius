@@ -152,6 +152,25 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function findLatestCartByChannelAndCustomer(ChannelInterface $channel, CustomerInterface $customer)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.state = :state')
+            ->andWhere('o.channel = :channel')
+            ->andWhere('o.customer = :customer')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('channel', $channel)
+            ->setParameter('customer', $customer)
+            ->orderBy('o.createdAt', 'desc')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function getTotalSalesForChannel(ChannelInterface $channel)

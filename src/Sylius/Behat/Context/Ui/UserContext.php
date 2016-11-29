@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
+use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\User\RegisterPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -42,18 +43,34 @@ final class UserContext implements Context
     private $customerShowPage;
 
     /**
+     * @var HomePageInterface
+     */
+    private $homePage;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param UserRepositoryInterface $userRepository
      * @param ShowPageInterface $customerShowPage
+     * @param HomePageInterface $homePage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
-        ShowPageInterface $customerShowPage
+        ShowPageInterface $customerShowPage,
+        HomePageInterface $homePage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->customerShowPage = $customerShowPage;
+        $this->homePage = $homePage;
+    }
+
+    /**
+     * @When I log out
+     */
+    public function iLogOut()
+    {
+        $this->homePage->logOut();
     }
 
     /**
