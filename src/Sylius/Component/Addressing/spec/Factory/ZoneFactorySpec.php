@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AddressingBundle\Factory;
+namespace spec\Sylius\Component\Addressing\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Factory\ZoneFactory;
