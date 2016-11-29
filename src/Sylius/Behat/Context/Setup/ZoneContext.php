@@ -13,7 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
+use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -122,7 +122,7 @@ final class ZoneContext implements Context
      */
     public function theStoreHasAZoneWithCode($zoneName, $code)
     {
-        $zone = $this->zoneFactory->createTyped(ZoneInterface::TYPE_ZONE);
+        $zone = $this->zoneFactory->createWithType(ZoneInterface::TYPE_ZONE);
         $zone->setCode($code);
         $zone->setName($zoneName);
 

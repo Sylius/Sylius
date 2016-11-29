@@ -73,7 +73,7 @@ final class BuildProductVariantFormSubscriber implements EventSubscriberInterfac
             return;
         }
 
-        $form->add($this->factory->createNamed(
+        $form->add($this->factory->createWithName(
             'optionValues',
             ProductOptionValueCollectionType::class,
             $productVariant->getOptionValues(),

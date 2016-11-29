@@ -12,8 +12,8 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\AddressingBundle\Factory\ZoneFactory;
-use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
+use Sylius\Component\Addressing\Factory\ZoneFactory;
+use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -48,7 +48,7 @@ final class ZoneFactorySpec extends ObjectBehavior
         $factory->createNew()->willReturn($zone);
         $zone->setType('country')->shouldBeCalled();
 
-        $this->createTyped('country')->shouldReturn($zone);
+        $this->createWithType('country')->shouldReturn($zone);
     }
 
     function it_creates_zone_with_members(

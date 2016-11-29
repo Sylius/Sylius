@@ -24,7 +24,7 @@ final class AddToCartCommandFactory implements AddToCartCommandFactoryInterface
     /**
      * {@inheritDoc}
      */
-    public function createForCartAndCartItem(OrderInterface $cart, OrderItemInterface $cartItem)
+    public function createWithCartAndCartItem(OrderInterface $cart, OrderItemInterface $cartItem)
     {
         return new AddToCartCommand($cart, $cartItem);
     }

@@ -178,7 +178,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
      */
     private function createChannel($code, $name)
     {
-        $channel = $this->channelFactory->createNamed($name);
+        $channel = $this->channelFactory->createWithName($name);
         $channel->setCode($code);
 
         return $channel;

@@ -298,7 +298,7 @@ class UserController extends ResourceController
     protected function createResourceForm(RequestConfiguration $configuration, $type, $resource)
     {
         if (!$configuration->isHtmlRequest()) {
-            return $this->container->get('form.factory')->createNamed('', $type, $resource, ['csrf_protection' => false]);
+            return $this->container->get('form.factory')->createWithName('', $type, $resource, ['csrf_protection' => false]);
         }
 
         return $this->container->get('form.factory')->create($type, $resource);

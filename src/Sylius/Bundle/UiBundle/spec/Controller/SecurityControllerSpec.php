@@ -56,7 +56,7 @@ final class SecurityControllerSpec extends ObjectBehavior
             'form' => 'custom_form_type',
         ]);
 
-        $formFactory->createNamed('', 'custom_form_type')->willReturn($form);
+        $formFactory->createWithName('', 'custom_form_type')->willReturn($form);
         $form->createView()->willReturn($formView);
 
         $templatingEngine

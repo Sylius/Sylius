@@ -60,7 +60,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
         $variable->getOptions()->willReturn([$options]);
         $variable->hasOptions()->willReturn(true);
 
-        $factory->createNamed(
+        $factory->createWithName(
             'optionValues',
             ProductOptionValueCollectionType::class,
             [$optionValue],
@@ -96,7 +96,7 @@ final class BuildProductVariantFormSubscriberSpec extends ObjectBehavior
         $variable->getOptions()->willReturn([$options]);
         $variable->hasOptions()->willReturn(true);
 
-        $factory->createNamed(
+        $factory->createWithName(
             'optionValues',
             ProductOptionValueCollectionType::class,
             [$optionValue],

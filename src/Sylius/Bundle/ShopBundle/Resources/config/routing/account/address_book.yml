@@ -24,7 +24,7 @@ sylius_shop_account_address_book_create:
             template: SyliusShopBundle:Account/AddressBook:create.html.twig
             section: shop_acount
             factory:
-                method: createWithCustomer
+                method: createForCustomer
                 arguments:
                     - 'expr:service("sylius.context.customer").getCustomer()'
             redirect:

@@ -43,7 +43,7 @@ final class AttributeFactorySpec extends ObjectBehavior
     {
         $this
             ->shouldThrow(new \BadMethodCallException(
-                'Method "createNew()" is not supported for attribute factory. Use "createTyped($type)" instead.'
+                'Method "createNew()" is not supported for attribute factory. Use "createWithType($type)" instead.'
             ))
             ->during('createNew')
         ;
@@ -64,6 +64,6 @@ final class AttributeFactorySpec extends ObjectBehavior
         $typedAttribute->getType()->willReturn('datetime');
         $typedAttribute->setStorageType('datetime')->shouldBeCalled();
 
-        $this->createTyped('datetime')->shouldReturn($typedAttribute);
+        $this->createWithType('datetime')->shouldReturn($typedAttribute);
     }
 }

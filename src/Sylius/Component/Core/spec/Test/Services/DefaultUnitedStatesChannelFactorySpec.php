@@ -91,7 +91,7 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         LocaleInterface $locale
     ) {
         $channel->getName()->willReturn('United States');
-        $channelFactory->createNamed('United States')->willReturn($channel);
+        $channelFactory->createWithName('United States')->willReturn($channel);
 
         $localeFactory->createNew()->willReturn($locale);
         $locale->setCode('en_US')->shouldBeCalled();

@@ -206,7 +206,7 @@ class OrderItemController extends ResourceController
      */
     protected function createAddToCartCommand(OrderInterface $cart, OrderItemInterface $cartItem)
     {
-        return $this->get('sylius.factory.add_to_cart_command')->createForCartAndCartItem($cart, $cartItem);
+        return $this->get('sylius.factory.add_to_cart_command')->createWithCartAndCartItem($cart, $cartItem);
     }
 
     /**

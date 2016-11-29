@@ -85,7 +85,7 @@ class ProvinceController extends ResourceController
      */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', ProvinceCodeChoiceType::class, null, [
+        return $this->get('form.factory')->createWithName('sylius_address_province', ProvinceCodeChoiceType::class, null, [
             'country' => $country,
             'label' => 'sylius.form.address.province',
             'placeholder' => 'sylius.form.province.select',
@@ -97,7 +97,7 @@ class ProvinceController extends ResourceController
      */
     protected function createProvinceTextForm()
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', TextType::class, null, [
+        return $this->get('form.factory')->createWithName('sylius_address_province', TextType::class, null, [
             'required' => false,
             'label' => 'sylius.form.address.province',
         ]);

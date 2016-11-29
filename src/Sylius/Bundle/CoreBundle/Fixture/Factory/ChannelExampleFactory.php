@@ -79,7 +79,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $options = $this->optionsResolver->resolve($options);
 
         /** @var ChannelInterface $channel */
-        $channel = $this->channelFactory->createNamed($options['name']);
+        $channel = $this->channelFactory->createWithName($options['name']);
         $channel->setCode($options['code']);
         $channel->setHostname($options['hostname']);
         $channel->setEnabled($options['enabled']);

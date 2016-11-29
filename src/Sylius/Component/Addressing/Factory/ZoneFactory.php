@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AddressingBundle\Factory;
+namespace Sylius\Component\Addressing\Factory;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -50,7 +50,7 @@ final class ZoneFactory implements ZoneFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createTyped($type)
+    public function createWithType($type)
     {
         /* @var ZoneInterface $zone */
         $zone = $this->createNew();

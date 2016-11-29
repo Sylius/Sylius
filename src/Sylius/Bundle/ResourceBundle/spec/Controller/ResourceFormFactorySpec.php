@@ -64,7 +64,7 @@ final class ResourceFormFactorySpec extends ObjectBehavior
         $requestConfiguration->isHtmlRequest()->willReturn(false);
         $requestConfiguration->getFormType()->willReturn('sylius_product_api');
         $requestConfiguration->getFormOptions()->willReturn([]);
-        $formFactory->createNamed('', 'sylius_product_api', $resource, ['csrf_protection' => false])->willReturn($form);
+        $formFactory->createWithName('', 'sylius_product_api', $resource, ['csrf_protection' => false])->willReturn($form);
 
         $this->create($requestConfiguration, $resource)->shouldReturn($form);
     }

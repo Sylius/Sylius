@@ -73,7 +73,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $country->hasProvinces()->willReturn(true);
 
         $formFactory
-            ->createNamed('provinceCode', ProvinceCodeChoiceType::class, 'province', Argument::withKey('country'))
+            ->createWithName('provinceCode', ProvinceCodeChoiceType::class, 'province', Argument::withKey('country'))
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();
@@ -100,7 +100,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $country->hasProvinces()->willReturn(false);
 
         $formFactory
-            ->createNamed('provinceName', TextType::class, 'Utah', Argument::any())
+            ->createWithName('provinceName', TextType::class, 'Utah', Argument::any())
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();
@@ -125,7 +125,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $country->hasProvinces()->willReturn(true);
 
         $formFactory
-            ->createNamed('provinceCode', ProvinceCodeChoiceType::class, null, Argument::withKey('country'))
+            ->createWithName('provinceCode', ProvinceCodeChoiceType::class, null, Argument::withKey('country'))
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();
@@ -150,7 +150,7 @@ final class BuildAddressFormSubscriberSpec extends ObjectBehavior
         $country->hasProvinces()->willReturn(false);
 
         $formFactory
-            ->createNamed('provinceName', TextType::class, null, Argument::any())
+            ->createWithName('provinceName', TextType::class, null, Argument::any())
             ->willReturn($provinceForm);
 
         $form->add($provinceForm)->shouldBeCalled();

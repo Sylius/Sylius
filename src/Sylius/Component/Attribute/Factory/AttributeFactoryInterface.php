@@ -24,5 +24,5 @@ interface AttributeFactoryInterface extends FactoryInterface
      *
      * @return ProductAttributeInterface
      */
-    public function createTyped($type);
+    public function createWithType($type);
 }

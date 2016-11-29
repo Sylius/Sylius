@@ -97,7 +97,7 @@ class ProductAttributeController extends ResourceController
 
         $form = $this
             ->get('form.factory')
-            ->createNamed('value', $attributeForm, null, ['label' => $attribute->getName()])
+            ->createWithName('value', $attributeForm, null, ['label' => $attribute->getName()])
         ;
 
         return $form->createView();
