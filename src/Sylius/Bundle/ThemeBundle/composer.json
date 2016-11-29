@@ -31,7 +31,14 @@
         "mikey179/vfsStream": "^1.6",
         "phpspec/phpspec": "^3.2",
         "phpunit/phpunit": "^5.6",
-        "sylius/registry": "^1.0"
+        "sylius/registry": "^1.0",
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-bundle": "~1.3",
+        "twig/twig": "~1.11",
+        "symfony/browser-kit": "^3.2@rc",
+        "symfony/twig-bundle": "^3.2@rc",
+        "incenteev/composer-parameter-handler": "~2.0",
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
     "config": {
         "bin-dir": "bin"
@@ -40,7 +47,10 @@
         "psr-4": { "Sylius\\Bundle\\ThemeBundle\\": "" }
     },
     "autoload-dev": {
-        "psr-4": { "Sylius\\Bundle\\ThemeBundle\\spec\\": "spec/" }
+        "psr-4": {
+            "Sylius\\Bundle\\ThemeBundle\\spec\\": "spec/",
+            "AppBundle\\": "test/src/AppBundle/"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -53,6 +63,9 @@
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
+        },
+        "incenteev-parameters": {
+            "file": "test/app/config/parameters.yml"
         }
     }
 }
