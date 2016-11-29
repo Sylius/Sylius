@@ -68,14 +68,16 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.event_subscriber.build_promotion_action" class="Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionActionFormSubscriber">
+        <service id="sylius.form.event_subscriber.build_promotion_action" class="Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionFormSubscriber">
             <argument type="service" id="sylius.registry_promotion_rule_checker" />
             <argument type="service" id="form.factory" />
+            <argument type="string" id="Sylius\Component\Promotion\Model\PromotionActionInterface" />
         </service>
 
-        <service id="sylius.form.event_subscriber.build_promotion_rule" class="Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionRuleFormSubscriber">
+        <service id="sylius.form.event_subscriber.build_promotion_rule" class="Sylius\Bundle\PromotionBundle\Form\EventListener\BuildPromotionFormSubscriber">
             <argument type="service" id="sylius.registry_promotion_action" />
             <argument type="service" id="form.factory" />
+            <argument type="string" id="Sylius\Component\Promotion\Model\PromotionRuleCheckerInterface" />
         </service>
     </services>
 </container>

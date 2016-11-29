@@ -12,44 +12,149 @@
 namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionConfigurationType;
-use Sylius\Bundle\PromotionBundle\Form\EventListener\AbstractConfigurationSubscriber;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Promotion\Action\ChannelBasedPromotionActionCommandInterface;
-use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class BuildChannelBasedPromotionActionFormSubscriber extends AbstractConfigurationSubscriber
+final class BuildChannelBasedPromotionFormSubscriber
 {
+    /**
+     * @var ServiceRegistryInterface
+     */
+    private $registry;
+
+    /**
+     * @var FormFactoryInterface
+     */
+    private $factory;
+
     /**
      * @var ChannelRepositoryInterface
      */
     private $channelRepository;
 
     /**
-     * @param ServiceRegistryInterface $actionRegistry
+     * @var string
+     */
+    private $subject;
+
+    /**
+     * @param ServiceRegistryInterface $registry
      * @param FormFactoryInterface $factory
      * @param ChannelRepositoryInterface $channelRepository
+     * @param string $subject
      */
     public function __construct(
-        ServiceRegistryInterface $actionRegistry,
+        ServiceRegistryInterface $registry,
         FormFactoryInterface $factory,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        $subject
     ) {
-        parent::__construct($actionRegistry, $factory);
-
+        $this->registry = $registry;
+        $this->factory = $factory;
         $this->channelRepository = $channelRepository;
+        $this->subject = $subject;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function addConfigurationFields(FormInterface $form, $registryIdentifier, array $data = [])
+    public static function getSubscribedEvents()
+    {
+        return [
+            FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::POST_SET_DATA => 'postSetData',
+            FormEvents::PRE_SUBMIT => 'preSubmit',
+        ];
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function preSetData(FormEvent $event)
+    {
+        $action = $event->getData();
+
+        if (null === $type = $this->getRegistryIdentifier($action, $event->getForm())) {
+            return;
+        }
+
+        $this->addConfigurationFields($event->getForm(), $type, $this->getConfiguration($action));
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function postSetData(FormEvent $event)
+    {
+        $action = $event->getData();
+
+        if (null === $type = $this->getRegistryIdentifier($action, $event->getForm())) {
+            return;
+        }
+
+        $event->getForm()->get('type')->setData($type);
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function preSubmit(FormEvent $event)
+    {
+        $data = $event->getData();
+
+        if (empty($data) || !array_key_exists('type', $data)) {
+            return;
+        }
+
+        $this->addConfigurationFields($event->getForm(), $data['type']);
+    }
+
+    /**
+     * @param mixed $dynamicType
+     * @param FormInterface $form
+     *
+     * @return null|string
+     */
+    private function getRegistryIdentifier($dynamicType, FormInterface $form)
+    {
+        if ($dynamicType instanceof $this->subject && null !== $dynamicType->getType()) {
+            return $dynamicType->getType();
+        }
+
+        if (null !== $form->getConfig()->hasOption('configuration_type')) {
+            return $form->getConfig()->getOption('configuration_type');
+        }
+
+        return null;
+    }
+
+    /**
+     * @param mixed $dynamicType
+     *
+     * @return array
+     */
+    private function getConfiguration($dynamicType)
+    {
+        if ($dynamicType instanceof $this->subject && null !== $dynamicType->getConfiguration()) {
+            return $dynamicType->getConfiguration();
+        }
+
+        return [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    private function addConfigurationFields(FormInterface $form, $registryIdentifier, array $data = [])
     {
         $model = $this->registry->get($registryIdentifier);
 
@@ -75,20 +180,6 @@ final class BuildChannelBasedPromotionActionFormSubscriber extends AbstractConfi
         }
 
         $form->add($configurationCollection);
-    }
-
-    /**
-     * @param $action
-     *
-     * @return array
-     */
-    protected function getConfiguration($action)
-    {
-        if ($action instanceof PromotionActionInterface && null !== $action->getConfiguration()) {
-            return $action->getConfiguration();
-        }
-
-        return [];
     }
 
     /**
