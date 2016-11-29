@@ -635,7 +635,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by ("[^"]+") code and costs "(?:€|£|\$)([^"]+)" in ("[^"]+") channel$/
+     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by "([^"]+)" code and costs "(?:€|£|\$)([^"]+)" in ("[^"]+") channel$/
      */
     public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, $price, $channelName)
     {
@@ -644,7 +644,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by ("[^"]+") code$/
+     * @When /^I specify that the (\d)(?:st|nd|rd|th) variant is identified by "([^"]+)" code$/
      */
     public function iSpecifyThereAreVariantsIdentifiedByCode($nthVariant, $code)
     {
