@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bbdd77740308132c5daefdc92f713124",
-    "content-hash": "615c38d1a2a7b742dc97a6ca4595b41d",
+    "hash": "e1df179d596074647f92f748b109cb22",
+    "content-hash": "ac3ccf0c247792b84ed1c3b46cbf02af",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2352,7 +2352,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2411,7 +2411,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -5088,7 +5088,7 @@
                     "email": "adrien.brault@gmail.com"
                 },
                 {
-                    "name": "William DURAND",
+                    "name": "William Durand",
                     "email": "william.durand1@gmail.com"
                 }
             ],

@@ -1,6 +1,12 @@
 UPGRADE
 =======
 
+## From 1.0.0-alpha to 1.0.0-alpha.2
+
+## Pricing and PricingBundle
+
+ * Removed ``Pricing`` component and ``PricingBundle``
+
 ## From 0.19 to 1.0.0-alpha
 
 ### Association and AssociationBundle
