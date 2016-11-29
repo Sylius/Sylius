@@ -13,6 +13,12 @@ sylius_admin_dashboard:
     defaults:
         _controller: sylius.controller.admin.dashboard:indexAction
 
+sylius_admin_impersonate_user:
+    path: /impersonate/{username}
+    defaults:
+        _controller: 'sylius.controller.impersonate_user:impersonateAction'
+        username: $username
+
 sylius_admin_admin_user:
     resource: "@SyliusAdminBundle/Resources/config/routing/admin_user.yml"
 
