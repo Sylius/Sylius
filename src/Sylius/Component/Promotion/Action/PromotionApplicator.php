@@ -38,11 +38,15 @@ final class PromotionApplicator implements PromotionApplicatorInterface
      */
     public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
+        $applyPromotion = false;
         foreach ($promotion->getActions() as $action) {
-            $this->getActionCommandByType($action->getType())->execute($subject, $action->getConfiguration(), $promotion);
+            $result = $this->getActionCommandByType($action->getType())->execute($subject, $action->getConfiguration(), $promotion);
+            $applyPromotion = $result ? true : false;
         }
 
-        $subject->addPromotion($promotion);
+        if ($applyPromotion) {
+            $subject->addPromotion($promotion);
+        }
     }
 
     /**
