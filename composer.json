@@ -116,8 +116,6 @@
         "sylius/payment": "self.version",
         "sylius/payment-bundle": "self.version",
         "sylius/payum-bundle": "self.version",
-        "sylius/pricing": "self.version",
-        "sylius/pricing-bundle": "self.version",
         "sylius/product": "self.version",
         "sylius/product-bundle": "self.version",
         "sylius/promotion": "self.version",

@@ -32,7 +32,6 @@
         "sylius/locale": "^1.0",
         "sylius/order": "^1.0",
         "sylius/payment": "^1.0",
-        "sylius/pricing": "^1.0",
         "sylius/product": "^1.0",
         "sylius/promotion": "^1.0",
         "sylius/registry": "^1.0",
