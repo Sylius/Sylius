@@ -98,10 +98,11 @@ class Promotion implements PromotionInterface
 
     public function __construct()
     {
+        $this->createdAt = new \DateTime();
+
         $this->coupons = new ArrayCollection();
         $this->rules = new ArrayCollection();
         $this->actions = new ArrayCollection();
-        $this->createdAt = new \DateTime();
     }
 
     /**
@@ -224,17 +225,11 @@ class Promotion implements PromotionInterface
         $this->used = $used;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function incrementUsed()
     {
         ++$this->used;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function decrementUsed()
     {
         --$this->used;
@@ -335,17 +330,17 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function hasRules()
+    public function getRules()
     {
-        return !$this->rules->isEmpty();
+        return $this->rules;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRules()
+    public function hasRules()
     {
-        return $this->rules;
+        return !$this->rules->isEmpty();
     }
 
     /**
@@ -379,17 +374,17 @@ class Promotion implements PromotionInterface
     /**
      * {@inheritdoc}
      */
-    public function hasActions()
+    public function getActions()
     {
-        return !$this->actions->isEmpty();
+        return $this->actions;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getActions()
+    public function hasActions()
     {
-        return $this->actions;
+        return !$this->actions->isEmpty();
     }
 
     /**

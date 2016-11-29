@@ -40,22 +40,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getStockable()
-    {
-        return $this->orderItem->getVariant();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInventoryName()
-    {
-        return $this->orderItem->getVariant()->getInventoryName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getShipment()
     {
         return $this->shipment;
@@ -67,6 +51,14 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     public function setShipment(BaseShipmentInterface $shipment = null)
     {
         $this->shipment = $shipment;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStockable()
+    {
+        return $this->orderItem->getVariant();
     }
 
     /**

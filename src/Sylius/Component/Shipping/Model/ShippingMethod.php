@@ -14,7 +14,6 @@ namespace Sylius\Component\Shipping\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -70,7 +69,7 @@ class ShippingMethod implements ShippingMethodInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
@@ -240,5 +239,4 @@ class ShippingMethod implements ShippingMethodInterface
     {
         return new ShippingMethodTranslation();
     }
-
 }

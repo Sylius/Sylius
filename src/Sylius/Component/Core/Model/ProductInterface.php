@@ -14,7 +14,6 @@ namespace Sylius\Component\Core\Model;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

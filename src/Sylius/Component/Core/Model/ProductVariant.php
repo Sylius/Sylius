@@ -165,7 +165,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         return $this->getProduct()->getName();
     }
-    
+
     /**
      * {@inheritdoc}
      */

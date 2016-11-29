@@ -109,11 +109,15 @@ class ProductOptionValue implements ProductOptionValueInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \BadMethodCallException
      */
     public function getOptionCode()
     {
         if (null === $this->option) {
-            throw new \BadMethodCallException('The option have not been created yet so you cannot access proxy methods.');
+            throw new \BadMethodCallException(
+                'The option have not been created yet so you cannot access proxy methods.'
+            );
         }
 
         return $this->option->getCode();
@@ -121,11 +125,15 @@ class ProductOptionValue implements ProductOptionValueInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \BadMethodCallException
      */
     public function getName()
     {
         if (null === $this->option) {
-            throw new \BadMethodCallException('The option have not been created yet so you cannot access proxy methods.');
+            throw new \BadMethodCallException(
+                'The option have not been created yet so you cannot access proxy methods.'
+            );
         }
 
         return $this->option->getName();

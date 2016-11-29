@@ -41,16 +41,12 @@ interface ProductOptionValueInterface extends ResourceInterface, CodeAwareInterf
     public function setValue($value);
 
     /**
-     * Proxy method to access the presentation of real option object.
-     *
-     * @return string The code of object
+     * @return string
      */
     public function getOptionCode();
 
     /**
-     * Proxy method to access the name of real option object.
-     *
-     * @return string The name of object
+     * @return string
      */
     public function getName();
 }

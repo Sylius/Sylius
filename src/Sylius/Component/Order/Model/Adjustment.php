@@ -171,6 +171,8 @@ class Adjustment implements AdjustmentInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws \InvalidArgumentException
      */
     public function setAmount($amount)
     {

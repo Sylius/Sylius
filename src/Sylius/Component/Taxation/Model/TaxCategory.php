@@ -53,11 +53,11 @@ class TaxCategory implements TaxCategoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**

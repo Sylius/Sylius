@@ -121,11 +121,11 @@ class Address implements AddressInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getFullName()
     {
-        return $this->firstName.' '.$this->lastName;
+        return trim(sprintf('%s %s', $this->firstName, $this->lastName));
     }
 
     /**

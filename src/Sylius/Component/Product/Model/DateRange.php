@@ -37,16 +37,11 @@ final class DateRange
     }
 
     /**
-     * @return bool
+     * @return \DateTime
      */
-    public function isInRange()
+    public function getStart()
     {
-        $now = new \DateTime();
-
-        return !(
-            (null !== $this->start && $now < $this->start) ||
-            (null !== $this->end && $now > $this->end)
-        );
+        return $this->start;
     }
 
     /**
@@ -58,6 +53,14 @@ final class DateRange
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getEnd()
+    {
+        return $this->end;
+    }
+
+    /**
      * @param \DateTime $end
      */
     public function setEnd(\DateTime $end = null)
@@ -66,18 +69,15 @@ final class DateRange
     }
 
     /**
-     * @return \DateTime
+     * @return bool
      */
-    public function getStart()
+    public function isInRange()
     {
-        return $this->start;
-    }
+        $now = new \DateTime();
 
-    /**
-     * @return \DateTime
-     */
-    public function getEnd()
-    {
-        return $this->end;
+        return !(
+            (null !== $this->start && $now < $this->start) ||
+            (null !== $this->end && $now > $this->end)
+        );
     }
 }

@@ -27,16 +27,6 @@ interface ChannelInterface extends
     LocalesAwareInterface
 {
     /**
-     * @return LocaleInterface
-     */
-    public function getDefaultLocale();
-
-    /**
-     * @param LocaleInterface $locale
-     */
-    public function setDefaultLocale(LocaleInterface $locale);
-
-    /**
      * @return CurrencyInterface
      */
     public function getBaseCurrency();
@@ -45,6 +35,16 @@ interface ChannelInterface extends
      * @param CurrencyInterface $currency
      */
     public function setBaseCurrency(CurrencyInterface $currency);
+
+    /**
+     * @return LocaleInterface
+     */
+    public function getDefaultLocale();
+
+    /**
+     * @param LocaleInterface $locale
+     */
+    public function setDefaultLocale(LocaleInterface $locale);
 
     /**
      * @return ZoneInterface

@@ -74,7 +74,7 @@ class ProductVariant implements ProductVariantInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getCode()
     {
@@ -82,7 +82,7 @@ class ProductVariant implements ProductVariantInterface
     }
 
     /**
-     * @param string $code
+     * {@inheritdoc}
      */
     public function setCode($code)
     {

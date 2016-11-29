@@ -33,6 +33,14 @@ class CustomerGroup implements CustomerGroupInterface
     protected $name;
 
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getId()
@@ -43,17 +51,17 @@ class CustomerGroup implements CustomerGroupInterface
     /**
      * {@inheritdoc}
      */
-    public function setCode($code)
+    public function getCode()
     {
-        $this->code = $code;
+        return $this->code;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCode()
+    public function setCode($code)
     {
-        return $this->code;
+        $this->code = $code;
     }
 
     /**
@@ -70,10 +78,5 @@ class CustomerGroup implements CustomerGroupInterface
     public function setName($name)
     {
         $this->name = $name;
-    }
-
-    public function __toString()
-    {
-        return $this->name;
     }
 }

@@ -22,14 +22,14 @@ interface TimestampableInterface
     public function getCreatedAt();
 
     /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt();
-
-    /**
      * @param \DateTime $createdAt
      */
     public function setCreatedAt(\DateTime $createdAt);
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt();
 
     /**
      * @param \DateTime $updatedAt
