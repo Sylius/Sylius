@@ -18,7 +18,7 @@ final class Emails
 {
     const ORDER_CONFIRMATION = 'order_confirmation';
     const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
-    const USER_CONFIRMATION = 'user_confirmation';
+    const USER_REGISTRATION = 'user_registration';
 
     private function __construct()
     {

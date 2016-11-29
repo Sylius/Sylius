@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
+use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -36,6 +37,11 @@ final class LoginContext implements Context
     private $loginPage;
 
     /**
+     * @var RegisterPageInterface
+     */
+    private $registerPage;
+
+    /**
      * @var ResetPasswordPageInterface
      */
     private $resetPasswordPage;
@@ -53,6 +59,7 @@ final class LoginContext implements Context
     /**
      * @param HomePageInterface $homePage
      * @param LoginPageInterface $loginPage
+     * @param RegisterPageInterface $registerPage
      * @param ResetPasswordPageInterface $resetPasswordPage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
@@ -60,12 +67,14 @@ final class LoginContext implements Context
     public function __construct(
         HomePageInterface $homePage,
         LoginPageInterface $loginPage,
+        RegisterPageInterface $registerPage,
         ResetPasswordPageInterface $resetPasswordPage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
+        $this->registerPage = $registerPage;
         $this->resetPasswordPage = $resetPasswordPage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
@@ -143,6 +152,20 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When I register with email :email and password :password
+     */
+    public function iRegisterWithEmailAndPassword($email, $password)
+    {
+        $this->registerPage->open();
+        $this->registerPage->specifyEmail($email);
+        $this->registerPage->specifyPassword($password);
+        $this->registerPage->verifyPassword($password);
+        $this->registerPage->specifyFirstName('Carrot');
+        $this->registerPage->specifyLastName('Ironfoundersson');
+        $this->registerPage->register();
+    }
+
+    /**
      * @Then I should be logged in
      */
     public function iShouldBeLoggedIn()
@@ -175,6 +198,17 @@ final class LoginContext implements Context
     {
         Assert::true(
             $this->loginPage->hasValidationErrorWith('Error Invalid credentials.'),
+            'I should see validation error.'
+        );
+    }
+
+    /**
+     * @Then I should be notified about disabled account
+     */
+    public function iShouldBeNotifiedAboutDisabledAccount()
+    {
+        Assert::true(
+            $this->loginPage->hasValidationErrorWith('Error Account is disabled.'),
             'I should see validation error.'
         );
     }

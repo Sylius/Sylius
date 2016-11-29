@@ -42,37 +42,18 @@ final class UserContext implements Context
     private $customerShowPage;
 
     /**
-     * @var LoginPageInterface
-     */
-    private $loginPage;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param UserRepositoryInterface $userRepository
      * @param ShowPageInterface $customerShowPage
-     * @param LoginPageInterface $loginPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
-        ShowPageInterface $customerShowPage,
-        LoginPageInterface $loginPage
+        ShowPageInterface $customerShowPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->customerShowPage = $customerShowPage;
-        $this->loginPage = $loginPage;
-    }
-
-    /**
-     * @Given I log in as :email with :password password
-     */
-    public function iLogInAsWithPassword($email, $password)
-    {
-        $this->loginPage->open();
-        $this->loginPage->specifyUsername($email);
-        $this->loginPage->specifyPassword($password);
-        $this->loginPage->logIn();
     }
 
     /**

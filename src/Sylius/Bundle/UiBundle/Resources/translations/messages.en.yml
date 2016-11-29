@@ -806,7 +806,6 @@ sylius:
         usage: 'Usage'
         usage_limit: 'Usage limit'
         used: 'Used'
-        user_confirmation_name: 'User confirmation'
         user_details: 'User details'
         username: 'Username'
         users_list_of_all_users_registered_in_store: 'Users <small>List of all users registered in store</small>'

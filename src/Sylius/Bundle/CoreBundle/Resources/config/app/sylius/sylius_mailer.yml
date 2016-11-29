@@ -12,9 +12,9 @@ sylius_mailer:
         shipment_confirmation:
             subject: sylius.emails.shipment_confirmation.subject
             template: "SyliusCoreBundle:Email:shipmentConfirmation.html.twig"
-        user_confirmation:
-            subject: sylius.emails.user_confirmation.subject
-            template: "SyliusCoreBundle:Email:userConfirmation.html.twig"
+        user_registration:
+            subject: sylius.emails.user_registration.subject
+            template: "SyliusCoreBundle:Email:userRegistration.html.twig"
         password_reset:
             subject: sylius.emails.user.password_reset.subject
             template: "SyliusCoreBundle:Email:passwordReset.html.twig"

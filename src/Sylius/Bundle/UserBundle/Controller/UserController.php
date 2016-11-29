@@ -169,6 +169,7 @@ class UserController extends ResourceController
 
         $user->setVerifiedAt(new \DateTime());
         $user->setEmailVerificationToken(null);
+        $user->enable();
 
         $this->manager->flush();
 

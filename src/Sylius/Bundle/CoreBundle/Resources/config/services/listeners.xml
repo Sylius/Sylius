@@ -53,10 +53,6 @@
         <service id="sylius.listener.default_username" class="Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener">
             <tag name="doctrine.event_listener" event="onFlush" />
         </service>
-        <service id="sylius.listener.user_auto_login" class="Sylius\Bundle\CoreBundle\EventListener\UserAutoLoginListener">
-            <argument type="service" id="sylius.security.user_login" />
-            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="login" />
-        </service>
         <service id="sylius.listener.canonicalizer" class="Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener">
             <argument type="service" id="sylius.canonicalizer" />
             <tag name="doctrine.event_listener" event="prePersist" />

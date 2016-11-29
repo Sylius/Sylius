@@ -6,7 +6,7 @@ Feature: Verifying account's email address
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is a "valkyrie@cain.com" user
+        And there is a user "valkyrie@cain.com" identified by "sylius"
         And this user is not verified
 
     @ui
@@ -14,6 +14,7 @@ Feature: Verifying account's email address
         Given a verification email has already been sent to "valkyrie@cain.com"
         When I try to verify my account using the link from this email
         Then I should be notified that the verification was successful
+        And I should be able to log in as "valkyrie@cain.com" with "sylius" password
         And my account should be verified
 
     @ui
@@ -42,12 +43,11 @@ Feature: Verifying account's email address
     Scenario: Being unable to resend verification token when verified
         Given I am logged in as "valkyrie@cain.com"
         And I have already verified my account
-        Then I should be unable to resend the verification email
+        Then I should not be able to resend the verification email
 
     @ui @email
     Scenario: Receiving account verification email after registration
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"
-        Then I should be logged in
-        And I should be notified that my account has been created and the verification email has been sent
+        Then I should be notified that my account has been created and the verification email has been sent
         And 2 emails should be sent to "ghastly@bespoke.com"
-        But my account should not be verified
+        But I should not be able to log in as "ghastly@bespoke.com" with "suitsarelife" password

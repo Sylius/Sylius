@@ -19,5 +19,3 @@ Feature: Registering an account again after it has been deleted
         And I confirm this password
         And I register this account
         Then I should be notified that new account has been successfully created
-        And I should be logged in
-        And my email should be "ted@example.com"
