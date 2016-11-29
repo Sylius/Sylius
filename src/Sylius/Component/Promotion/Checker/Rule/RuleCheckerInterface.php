@@ -14,8 +14,6 @@ namespace Sylius\Component\Promotion\Checker\Rule;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Promotion rule checker interface.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface RuleCheckerInterface

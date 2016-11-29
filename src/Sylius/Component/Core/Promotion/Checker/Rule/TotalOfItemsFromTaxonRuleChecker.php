@@ -18,11 +18,12 @@ use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
+final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface, ChannelBasedRuleCheckerInterface
 {
     const TYPE = 'total_of_items_from_taxon';
 
@@ -44,9 +45,14 @@ final class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
+        Assert::isInstanceOf($subject, OrderInterface::class);
+
+        $channelCode = $subject->getChannel()->getCode();
+        if (!isset($configuration[$channelCode])) {
+            return false;
         }
+
+        $configuration = $configuration[$channelCode];
 
         if (!isset($configuration['taxon']) || !isset($configuration['amount'])) {
             return false;

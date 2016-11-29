@@ -14,6 +14,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 use Sylius\Bundle\PromotionBundle\Form\Type\Filter\PriceRangeFilterConfigurationType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -25,7 +26,25 @@ class PromotionFilterCollectionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('price_range_filter', PriceRangeFilterConfigurationType::class, ['required' => false]);
+        $builder->add('price_range_filter', PriceRangeFilterConfigurationType::class, [
+            'label' => 'sylius.form.promotion_filter.price_range',
+            'required' => false,
+            'currency' => $options['currency'],
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver
+            ->setDefined(['currency'])
+            ->setAllowedTypes('currency', 'string')
+            ->setDefault('currency', 'USD')
+        ;
     }
 
     /**

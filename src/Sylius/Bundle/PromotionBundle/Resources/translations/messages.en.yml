@@ -17,8 +17,7 @@ sylius:
             usage_limit: Usage limit
         promotion_action:
             fixed_discount_configuration:
-                amounts: Amounts
-                base_amount: Base amount
+                amount: Amount
             percentage_discount_configuration:
                 percentage: Percentage
             type: Type
@@ -30,6 +29,8 @@ sylius:
             code_length: Code length
             expires_at: Expires at
             usage_limit: Usage limit
+        promotion_filter:
+            price_range: Price range filter
         promotion_rule:
             cart_quantity_configuration:
                 count: Count

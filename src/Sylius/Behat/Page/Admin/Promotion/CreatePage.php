@@ -62,6 +62,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function fillRuleOptionForChannel($channelName, $option, $value)
+    {
+        $lastAction = $this->getChannelConfigurationOfLastRule($channelName);
+        $lastAction->fillField($option, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addAction($actionName)
     {
         $count = count($this->getCollectionItems('actions'));
@@ -89,6 +98,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function fillActionOption($option, $value)
     {
         $this->getLastCollectionItem('actions')->fillField($option, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fillActionOptionForChannel($channelName, $option, $value)
+    {
+        $lastAction = $this->getChannelConfigurationOfLastAction($channelName);
+        $lastAction->fillField($option, $value);
     }
 
     /**
@@ -168,12 +186,38 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'actions' => '#sylius_promotion_actions',
             'code' => '#sylius_promotion_code',
             'ends_at' => '#sylius_promotion_endsAt',
-            'minimum' => '#sylius_promotion_actions_0_configuration_filters_price_range_filter_min',
-            'maximum' => '#sylius_promotion_actions_0_configuration_filters_price_range_filter_max',
+            'minimum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_min',
+            'maximum' => '#sylius_promotion_actions_0_configuration_WEB-US_filters_price_range_filter_max',
             'name' => '#sylius_promotion_name',
             'rules' => '#sylius_promotion_rules',
             'starts_at' => '#sylius_promotion_startsAt',
         ];
+    }
+
+    /**
+     * @param string $channelName
+     *
+     * @return NodeElement
+     */
+    private function getChannelConfigurationOfLastAction($channelName)
+    {
+        return $this
+            ->getLastCollectionItem('actions')
+            ->find('css', sprintf('[id*="sylius_promotion_actions"] .configuration .field:contains("%s")', $channelName))
+        ;
+    }
+
+    /**
+     * @param string $channelName
+     *
+     * @return NodeElement
+     */
+    private function getChannelConfigurationOfLastRule($channelName)
+    {
+        return $this
+            ->getLastCollectionItem('rules')
+            ->find('css', sprintf('[id*="sylius_promotion_rules"] .configuration .field:contains("%s")', $channelName))
+            ;
     }
 
     /**

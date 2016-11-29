@@ -50,12 +50,6 @@
         <service id="sylius.form.extension.type.promotion_filter_collection" class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionFilterCollectionTypeExtension">
             <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionFilterCollectionType" />
         </service>
-        <service id="sylius.form.extension.type.promotion_fixed_discount_configuration" class="Sylius\Bundle\CoreBundle\Form\Extension\FixedDiscountConfigurationTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\Action\FixedDiscountConfigurationType" />
-        </service>
-        <service id="sylius.form.extension.type.promotion_unit_fixed_discount_configuration" class="Sylius\Bundle\CoreBundle\Form\Extension\UnitFixedDiscountConfigurationTypeExtension">
-            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\Action\UnitFixedDiscountConfigurationType" />
-        </service>
         <service id="sylius.form.extension.type.shipping_method" class="Sylius\Bundle\CoreBundle\Form\Extension\ShippingMethodTypeExtension">
             <argument type="service" id="sylius.registry.shipping_rule_checker" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
@@ -129,6 +123,7 @@
             <argument type="service" id="sylius.repository.product" />
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.promotion.configuration" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\PromotionConfigurationType" />
         <service id="sylius.form.type.promotion_action.filter.taxon" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter\TaxonFilterConfigurationType">
             <argument type="service" id="sylius.form.type.data_transformer.taxons_to_codes" />
             <tag name="form.type" />
@@ -136,11 +131,6 @@
         <service id="sylius.form.type.promotion_action.filter.product" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Filter\ProductFilterConfigurationType">
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.form.type.data_transformer.products_to_codes" />
-            <tag name="form.type" />
-        </service>
-        <service id="sylius.form.type.promotion_action.currency_based_discount_amount" class="Sylius\Bundle\CoreBundle\Form\Type\Promotion\Action\CurrencyBasedDiscountAmountType">
-            <argument type="service" id="sylius.repository.currency" />
-            <argument>%sylius_currency.currency%</argument>
             <tag name="form.type" />
         </service>
 
@@ -177,6 +167,17 @@
         <service id="sylius.form.type.address_choice" class="Sylius\Bundle\CoreBundle\Form\Type\AddressChoiceType">
             <argument type="service" id="sylius.repository.address" />
             <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.extension.type.promotion_action" class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionActionTypeExtension">
+            <argument type="service" id="sylius.registry_promotion_action" />
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionActionType" />
+        </service>
+        <service id="sylius.form.extension.type.promotion_rule" class="Sylius\Bundle\CoreBundle\Form\Extension\PromotionRuleTypeExtension">
+            <argument type="service" id="sylius.registry_promotion_rule_checker" />
+            <argument type="service" id="sylius.repository.channel" />
+            <tag name="form.type_extension" extended-type="Sylius\Bundle\PromotionBundle\Form\Type\PromotionRuleType" />
         </service>
 
         <service id="sylius.form.type.add_to_cart" class="Sylius\Bundle\CoreBundle\Form\Type\Order\AddToCartType">

@@ -20,18 +20,20 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 interface PromotionActionFactoryInterface extends FactoryInterface
 {
     /**
-     * @param int $baseAmount
+     * @param int $amount
+     * @param string $channelCode
      *
      * @return PromotionActionInterface
      */
-    public function createFixedDiscount($baseAmount);
+    public function createFixedDiscount($amount, $channelCode);
 
     /**
-     * @param int $baseAmount
+     * @param int $amount
+     * @param string $channelCode
      *
      * @return PromotionActionInterface
      */
-    public function createUnitFixedDiscount($baseAmount);
+    public function createUnitFixedDiscount($amount, $channelCode);
 
     /**
      * @param float $percentage
@@ -42,10 +44,11 @@ interface PromotionActionFactoryInterface extends FactoryInterface
 
     /**
      * @param float $percentage
+     * @param string $channelCode
      *
      * @return PromotionActionInterface
      */
-    public function createUnitPercentageDiscount($percentage);
+    public function createUnitPercentageDiscount($percentage, $channelCode);
 
     /**
      * @param float $percentage

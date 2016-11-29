@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
@@ -79,19 +80,24 @@ final class PercentageDiscountPromotionActionCommandSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_adjustment_amount_would_be_0(
-        ProportionalIntegerDistributorInterface $distributor,
         OrderInterface $order,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        ProportionalIntegerDistributorInterface $distributor
     ) {
         $order->countItems()->willReturn(0);
+
         $order->getPromotionSubjectTotal()->willReturn(0);
         $distributor->distribute(Argument::any())->shouldNotBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion);
     }
 
-    function it_throws_an_exception_if_configuration_is_invalid(OrderInterface $order, PromotionInterface $promotion)
-    {
+    function it_throws_an_exception_if_configuration_is_invalid(
+        OrderInterface $order,
+        PromotionInterface $promotion
+    ) {
+        $order->countItems()->willReturn(1);
+
         $this
             ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$order, [], $promotion])

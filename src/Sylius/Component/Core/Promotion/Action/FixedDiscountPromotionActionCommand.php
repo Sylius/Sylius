@@ -25,7 +25,7 @@ use Webmozart\Assert\Assert;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand
+final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionCommand implements ChannelBasedPromotionActionCommandInterface
 {
     const TYPE = 'order_fixed_discount';
 
@@ -60,12 +60,18 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
             return;
         }
 
-        $this->isConfigurationValid($configuration);
+        $channelCode = $subject->getChannel()->getCode();
+        if (!isset($configuration[$channelCode])) {
+            return;
+        }
+
+        $this->isConfigurationValid($configuration[$channelCode]);
 
         $promotionAmount = $this->calculateAdjustmentAmount(
             $subject->getPromotionSubjectTotal(),
-            $this->getAmountByCurrencyCode($configuration, $subject->getCurrencyCode())
+            $configuration[$channelCode]['amount']
         );
+
         if (0 === $promotionAmount) {
             return;
         }
@@ -92,8 +98,8 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
      */
     protected function isConfigurationValid(array $configuration)
     {
-        Assert::keyExists($configuration, 'base_amount');
-        Assert::integer($configuration['base_amount']);
+        Assert::keyExists($configuration, 'amount');
+        Assert::integer($configuration['amount']);
     }
 
     /**
@@ -105,20 +111,5 @@ final class FixedDiscountPromotionActionCommand extends DiscountPromotionActionC
     private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
     {
         return -1 * min($promotionSubjectTotal, $targetPromotionAmount);
-    }
-
-    /**
-     * @param array $configuration
-     * @param string $currencyCode
-     *
-     * @return int
-     */
-    private function getAmountByCurrencyCode(array $configuration, $currencyCode)
-    {
-        if (!isset($configuration['amounts'][$currencyCode])) {
-            return $configuration['base_amount'];
-        }
-
-        return $configuration['amounts'][$currencyCode];
     }
 }

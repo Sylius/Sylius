@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
+final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand implements ChannelBasedPromotionActionCommandInterface
 {
     const TYPE = 'unit_percentage_discount';
 
@@ -70,15 +70,20 @@ final class UnitPercentageDiscountPromotionActionCommand extends UnitDiscountPro
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
+        $channelCode = $subject->getChannel()->getCode();
+        if (!isset($configuration[$channelCode])) {
+            return;
+        }
+
         $filteredItems = $this->priceRangeFilter->filter(
             $subject->getItems()->toArray(),
-            array_merge($configuration, ['channel' => $subject->getChannel()])
+            array_merge(['channel' => $subject->getChannel()], $configuration[$channelCode])
         );
-        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
-        $filteredItems = $this->productFilter->filter($filteredItems, $configuration);
+        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
+        $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
 
         foreach ($filteredItems as $item) {
-            $promotionAmount = (int) round($item->getUnitPrice() * $configuration['percentage']);
+            $promotionAmount = (int) round($item->getUnitPrice() * $configuration[$channelCode]['percentage']);
             $this->setUnitsAdjustments($item, $promotionAmount, $promotion);
         }
     }

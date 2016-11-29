@@ -41,6 +41,12 @@
             }, 50);
         });
 
+        $('#rules a[data-form-collection="add"]').on('click', function(){
+            setTimeout(function(){
+                $('select[name^="sylius_promotion[rules]"][name$="[type]"]').last().change();
+            }, 50);
+        });
+
         $(document).productSlugGenerator();
         $(document).taxonSlugGenerator();
     });

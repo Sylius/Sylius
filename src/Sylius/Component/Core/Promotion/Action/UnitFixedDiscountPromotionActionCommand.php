@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand
+final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotionActionCommand implements ChannelBasedPromotionActionCommandInterface
 {
     const TYPE = 'unit_fixed_discount';
 
@@ -72,17 +72,23 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        $amount = $this->getAmountByCurrencyCode($configuration, $subject->getCurrencyCode());
+        $channelCode = $subject->getChannel()->getCode();
+        if (!isset($configuration[$channelCode])) {
+            return;
+        }
+
+        $amount = $configuration[$channelCode]['amount'];
+
         if (0 === $amount) {
             return;
         }
 
         $filteredItems = $this->priceRangeFilter->filter(
             $subject->getItems()->toArray(),
-            array_merge($configuration, ['channel' => $subject->getChannel()])
+            array_merge(['channel' => $subject->getChannel()], $configuration[$channelCode])
         );
-        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
-        $filteredItems = $this->productFilter->filter($filteredItems, $configuration);
+        $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration[$channelCode]);
+        $filteredItems = $this->productFilter->filter($filteredItems, $configuration[$channelCode]);
 
         foreach ($filteredItems as $item) {
             $this->setUnitsAdjustments($item, $amount, $promotion);
@@ -111,20 +117,5 @@ final class UnitFixedDiscountPromotionActionCommand extends UnitDiscountPromotio
                 $promotion
             );
         }
-    }
-
-    /**
-     * @param array $configuration
-     * @param string $currencyCode
-     *
-     * @return int
-     */
-    private function getAmountByCurrencyCode(array $configuration, $currencyCode)
-    {
-        if (!isset($configuration['amounts'][$currencyCode])) {
-            return $configuration['base_amount'];
-        }
-
-        return $configuration['amounts'][$currencyCode];
     }
 }
