@@ -24,7 +24,7 @@ final class AddToCartCommandSpec extends ObjectBehavior
 {
     function let(OrderInterface $order, OrderItemInterface $orderItem)
     {
-        $this->beConstructedThrough('createForCartAndCartItem', [$order, $orderItem]);
+        $this->beConstructedThrough('createWithCartAndCartItem', [$order, $orderItem]);
     }
 
     function it_is_initializable()

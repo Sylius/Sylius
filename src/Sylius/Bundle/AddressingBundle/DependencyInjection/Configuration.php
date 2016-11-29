@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
 use Sylius\Bundle\AddressingBundle\Controller\ProvinceController;
-use Sylius\Bundle\AddressingBundle\Factory\ZoneFactory;
+use Sylius\Component\Addressing\Factory\ZoneFactory;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;

@@ -44,7 +44,7 @@ class AddressFactory implements AddressFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createWithCustomer(CustomerInterface $customer)
+    public function createForCustomer(CustomerInterface $customer)
     {
         /** @var  AddressInterface $address*/
         $address = $this->decoratedFactory->createNew();

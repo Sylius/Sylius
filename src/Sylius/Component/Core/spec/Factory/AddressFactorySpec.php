@@ -59,6 +59,6 @@ final class AddressFactorySpec extends ObjectBehavior
         
         $address->setCustomer($customer)->shouldBeCalled();
 
-        $this->createWithCustomer($customer)->shouldReturn($address);
+        $this->createForCustomer($customer)->shouldReturn($address);
     }
 }

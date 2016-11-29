@@ -25,5 +25,5 @@ interface AddressFactoryInterface extends FactoryInterface
      * 
      * @return AddressInterface 
      */
-    public function createWithCustomer(CustomerInterface $customer);
+    public function createForCustomer(CustomerInterface $customer);
 }
