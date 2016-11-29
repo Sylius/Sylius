@@ -15,6 +15,7 @@
     <imports>
         <import resource="services/console.xml" />
         <import resource="services/controller.xml" />
+        <import resource="services/form.xml" />
         <import resource="services/routing.xml" />
     </imports>
 
