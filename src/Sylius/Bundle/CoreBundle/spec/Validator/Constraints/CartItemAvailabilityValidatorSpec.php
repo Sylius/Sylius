@@ -19,6 +19,7 @@ use Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock;
 use Sylius\Bundle\OrderBundle\Controller\AddToCartCommandInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -89,14 +90,16 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         AddToCartCommandInterface $addCartItemCommand,
         OrderInterface $order,
         OrderItemInterface $orderItem,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
+        ProductInterface $product
     ) {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getQuantity()->willReturn(10);
         $order->getItems()->willReturn([]);
-        $productVariant->getInventoryName()->willReturn('Mug');
+        $productVariant->getProduct()->willReturn($product);
+        $product->getName()->willReturn('Mug');
 
         $availabilityChecker->isStockSufficient($productVariant, 10)->willReturn(false);
 
@@ -115,13 +118,15 @@ final class CartItemAvailabilityValidatorSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemInterface $existingOrderItem,
-        ProductVariantInterface $productVariant
+        ProductVariantInterface $productVariant,
+        ProductInterface $product
     ) {
         $addCartItemCommand->getCart()->willReturn($order);
         $addCartItemCommand->getCartItem()->willReturn($orderItem);
         $orderItem->getVariant()->willReturn($productVariant);
         $orderItem->getQuantity()->willReturn(10);
-        $productVariant->getInventoryName()->willReturn('Mug');
+        $productVariant->getProduct()->willReturn($product);
+        $product->getName()->willReturn('Mug');
 
         $order->getItems()->willReturn([$existingOrderItem]);
         $existingOrderItem->getQuantity()->willReturn(10);

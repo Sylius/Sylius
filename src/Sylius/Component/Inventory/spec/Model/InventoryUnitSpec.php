@@ -46,12 +46,4 @@ final class InventoryUnitSpec extends ObjectBehavior
         $this->setStockable($stockable);
         $this->getStockable()->shouldReturn($stockable);
     }
-
-    function it_returns_its_stockable_name(StockableInterface $stockable)
-    {
-        $stockable->getInventoryName()->willReturn('[IPHONE5] iPhone 5');
-        $this->setStockable($stockable);
-
-        $this->getInventoryName()->shouldReturn('[IPHONE5] iPhone 5');
-    }
 }

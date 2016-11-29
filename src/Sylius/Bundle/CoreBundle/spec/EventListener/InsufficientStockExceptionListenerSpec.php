@@ -58,7 +58,6 @@ final class InsufficientStockExceptionListenerSpec extends ObjectBehavior
         StockableInterface $stockable
     ) {
         $stockable->getOnHand()->willReturn('30');
-        $stockable->getInventoryName()->willReturn('Inventory Name');
 
         $event->getException()->willReturn(new InsufficientStockException($stockable->getWrappedObject(), 42));
         $event->setResponse(Argument::type(RedirectResponse::class))->shouldBeCalled();
@@ -67,7 +66,6 @@ final class InsufficientStockExceptionListenerSpec extends ObjectBehavior
             'sylius.product.out_of_stock',
             [
                 '%quantity%' => '30',
-                '%name%' => 'Inventory Name',
             ],
             'flashes'
         )->willReturn('message translated');

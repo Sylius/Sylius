@@ -61,10 +61,7 @@ final class InStockValidator extends ConstraintValidator
         }
 
         if (!$this->availabilityChecker->isStockSufficient($stockable, $quantity)) {
-            $this->context->addViolation(
-                $constraint->message,
-                ['%stockable%' => $stockable->getInventoryName()]
-            );
+            $this->context->addViolation($constraint->message);
         }
     }
 }

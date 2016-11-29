@@ -33,9 +33,8 @@ final class InsufficientStockException extends \UnderflowException
         $this->stockable = $stockable;
 
         parent::__construct(sprintf(
-            'Only %d %s(s) on hand, %d requested.',
+            'Only %d on hand, %d requested.',
             $stockable->getOnHand(),
-            $stockable->getInventoryName(),
             $quantity
         ), 0, $previousException);
     }

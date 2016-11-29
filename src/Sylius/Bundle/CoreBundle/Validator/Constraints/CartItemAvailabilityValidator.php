@@ -58,7 +58,7 @@ final class CartItemAvailabilityValidator extends ConstraintValidator
         if (!$isStockSufficient) {
             $this->context->addViolation(
                 $constraint->message,
-                ['%itemName%' => $cartItem->getVariant()->getInventoryName()]
+                ['%itemName%' => $cartItem->getVariant()->getProduct()->getName()]
             );
         }
     }

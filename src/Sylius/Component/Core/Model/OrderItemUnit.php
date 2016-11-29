@@ -64,14 +64,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getInventoryName()
-    {
-        return $this->orderItem->getVariant()->getInventoryName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getShippable()
     {
         return $this->orderItem->getVariant();

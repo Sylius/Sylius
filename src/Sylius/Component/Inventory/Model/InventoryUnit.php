@@ -44,18 +44,10 @@ class InventoryUnit implements InventoryUnitInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param StockableInterface $stockable
      */
     public function setStockable(StockableInterface $stockable)
     {
         $this->stockable = $stockable;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInventoryName()
-    {
-        return $this->stockable->getInventoryName();
     }
 }

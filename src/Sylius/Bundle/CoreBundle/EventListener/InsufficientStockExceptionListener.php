@@ -78,7 +78,6 @@ final class InsufficientStockExceptionListener
                 'sylius.product.out_of_stock',
                 [
                     '%quantity%' => $exception->getStockable()->getOnHand(),
-                    '%name%' => $exception->getStockable()->getInventoryName(),
                 ],
                 'flashes'
             )

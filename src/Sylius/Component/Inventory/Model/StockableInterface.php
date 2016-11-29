@@ -17,11 +17,6 @@ namespace Sylius\Component\Inventory\Model;
 interface StockableInterface
 {
     /**
-     * @return string
-     */
-    public function getInventoryName();
-
-    /**
      * @return bool
      */
     public function isInStock();
