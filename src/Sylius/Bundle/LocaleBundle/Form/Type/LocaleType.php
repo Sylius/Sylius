@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class LocaleType extends AbstractResourceType
+final class LocaleType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

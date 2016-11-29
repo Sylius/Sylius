@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints\Type;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class NthOrderConfigurationType extends AbstractType
+final class NthOrderConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

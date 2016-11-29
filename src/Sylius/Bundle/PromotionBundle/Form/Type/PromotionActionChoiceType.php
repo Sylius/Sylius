@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionActionChoiceType extends AbstractType
+final class PromotionActionChoiceType extends AbstractType
 {
     /**
      * @var array

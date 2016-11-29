@@ -22,7 +22,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductOptionValueChoiceType extends AbstractType
+final class ProductOptionValueChoiceType extends AbstractType
 {
     /**
      * {@inheritdoc}

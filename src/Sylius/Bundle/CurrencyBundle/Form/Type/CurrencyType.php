@@ -20,7 +20,7 @@ use Symfony\Component\Form\Extension\Core\Type\CurrencyType as SymfonyCurrencyTy
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CurrencyType extends AbstractResourceType
+final class CurrencyType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

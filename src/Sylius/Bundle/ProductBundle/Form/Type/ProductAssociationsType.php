@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ProductAssociationsType extends AbstractType
+final class ProductAssociationsType extends AbstractType
 {
     /**
      * @var RepositoryInterface

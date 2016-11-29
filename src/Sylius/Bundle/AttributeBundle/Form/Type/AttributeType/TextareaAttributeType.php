@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextareaAttributeType extends AbstractType
+final class TextareaAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}

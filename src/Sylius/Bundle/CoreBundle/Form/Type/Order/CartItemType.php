@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartItemType extends AbstractType
+final class CartItemType extends AbstractType
 {
     /**
      * {@inheritdoc}

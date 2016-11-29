@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserChangePasswordType extends AbstractResourceType
+final class UserChangePasswordType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ShippingMethodTranslationType extends AbstractResourceType
+final class ShippingMethodTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

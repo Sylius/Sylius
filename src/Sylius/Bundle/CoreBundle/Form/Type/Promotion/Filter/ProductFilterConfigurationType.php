@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ProductFilterConfigurationType extends AbstractType
+final class ProductFilterConfigurationType extends AbstractType
 {
     /**
      * @var ProductRepositoryInterface

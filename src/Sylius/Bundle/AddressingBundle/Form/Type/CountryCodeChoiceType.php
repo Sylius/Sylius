@@ -20,7 +20,7 @@ use Symfony\Component\Form\ReversedTransformer;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CountryCodeChoiceType extends AbstractType
+final class CountryCodeChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface

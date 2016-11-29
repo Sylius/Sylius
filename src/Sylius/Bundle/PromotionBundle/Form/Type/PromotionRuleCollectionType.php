@@ -16,7 +16,7 @@ use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationCollection
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PromotionRuleCollectionType extends AbstractConfigurationCollectionType
+final class PromotionRuleCollectionType extends AbstractConfigurationCollectionType
 {
     /**
      * {@inheritdoc}

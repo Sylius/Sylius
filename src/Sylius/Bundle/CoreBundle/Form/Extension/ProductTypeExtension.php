@@ -27,7 +27,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ProductTypeExtension extends AbstractTypeExtension
+final class ProductTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}

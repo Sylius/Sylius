@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductOptionType extends AbstractResourceType
+final class ProductOptionType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

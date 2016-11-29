@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PaymentType extends AbstractType
+final class PaymentType extends AbstractType
 {
     /**
      * @var string

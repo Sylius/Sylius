@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ProductChoiceType extends AbstractType
+final class ProductChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface

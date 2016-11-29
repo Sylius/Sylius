@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class GenderType extends AbstractType
+final class GenderType extends AbstractType
 {
     /**
      * {@inheritdoc}

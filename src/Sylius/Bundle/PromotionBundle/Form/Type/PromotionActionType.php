@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PromotionActionType extends AbstractResourceType
+final class PromotionActionType extends AbstractResourceType
 {
     /**
      * @var EventSubscriberInterface

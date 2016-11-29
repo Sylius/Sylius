@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PercentAttributeType extends AbstractType
+final class PercentAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}

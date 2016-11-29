@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class BookType extends AbstractResourceType
+final class BookType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

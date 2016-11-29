@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionType extends AbstractResourceType
+final class PromotionType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
+final class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ServiceRegistryInterface

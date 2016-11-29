@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Customer;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerRegistrationType extends CustomerSimpleRegistrationType
+final class CustomerRegistrationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -43,6 +44,14 @@ class CustomerRegistrationType extends CustomerSimpleRegistrationType
                 'label' => 'sylius.form.customer.subscribed_to_newsletter',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return CustomerSimpleRegistrationType::class;
     }
 
     /**

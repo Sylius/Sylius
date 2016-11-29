@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Type;
  * @author Gabi Udrescu <gabriel.udr@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PriceRangeFilterConfigurationType extends AbstractType
+final class PriceRangeFilterConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

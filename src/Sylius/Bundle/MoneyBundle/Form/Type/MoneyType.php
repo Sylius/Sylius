@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class MoneyType extends AbstractType
+final class MoneyType extends AbstractType
 {
     /**
      * {@inheritdoc}

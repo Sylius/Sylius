@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints\Type;
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ContainsProductConfigurationType extends AbstractType
+final class ContainsProductConfigurationType extends AbstractType
 {
     /**
      * @var ProductRepositoryInterface

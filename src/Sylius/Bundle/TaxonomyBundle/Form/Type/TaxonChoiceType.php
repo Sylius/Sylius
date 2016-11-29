@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class TaxonChoiceType extends AbstractType
+final class TaxonChoiceType extends AbstractType
 {
     /**
      * @var TaxonRepositoryInterface

@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ChannelBasedPerUnitRateConfigurationType extends AbstractType
+final class ChannelBasedPerUnitRateConfigurationType extends AbstractType
 {
     /**
      * @var ChannelRepositoryInterface

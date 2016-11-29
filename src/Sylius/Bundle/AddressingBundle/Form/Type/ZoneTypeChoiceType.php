@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class ZoneTypeChoiceType extends AbstractType
+final class ZoneTypeChoiceType extends AbstractType
 {
     /**
      * {@inheritdoc}

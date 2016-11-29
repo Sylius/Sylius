@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class AddBaseCurrencySubscriber implements EventSubscriberInterface
+final class AddBaseCurrencySubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}

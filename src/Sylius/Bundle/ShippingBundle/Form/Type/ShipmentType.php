@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ShipmentType extends AbstractResourceType
+final class ShipmentType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

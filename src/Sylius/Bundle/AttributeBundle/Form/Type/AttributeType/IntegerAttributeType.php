@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class IntegerAttributeType extends AbstractType
+final class IntegerAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}
