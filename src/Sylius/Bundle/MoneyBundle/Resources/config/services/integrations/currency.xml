@@ -18,7 +18,7 @@
             <tag name="templating.helper" alias="sylius_convert_money" />
         </service>
 
-        <service id="sylius.twig.extension.price" class="Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension" public="false">
+        <service id="sylius.twig.extension.convert_amount" class="Sylius\Bundle\MoneyBundle\Twig\ConvertMoneyExtension" public="false">
             <argument type="service" id="sylius.templating.helper.convert_money" />
             <tag name="twig.extension" />
         </service>

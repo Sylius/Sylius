@@ -7,3 +7,9 @@
 
     {{ format(amount|sylius_convert_money(shopperContext.channel.baseCurrency.code, shopperContext.currencyCode), shopperContext.currencyCode) }}
 {% endmacro %}
+
+{% macro calculatePrice(variant) %}
+    {% from _self import convertAndFormat %}
+
+    {{ convertAndFormat(variant|sylius_calculate_price({'channel': shopperContext.channel})) }}
+{% endmacro %}
