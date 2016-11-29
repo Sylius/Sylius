@@ -283,6 +283,17 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Then I should be notified that code needs to contain only specific symbols
+     */
+    public function iShouldBeNotifiedThatCodeShouldContain()
+    {
+        $this->assertFieldValidationMessage(
+            'code',
+            'Shipping method code can only be comprised of letters, numbers, dashes and underscores.'
+        );
+    }
+
+    /**
      * @Then shipping method with :element :name should not be added
      */
     public function shippingMethodWithElementValueShouldNotBeAdded($element, $name)
