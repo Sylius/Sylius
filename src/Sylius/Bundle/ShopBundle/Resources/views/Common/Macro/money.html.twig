@@ -11,5 +11,5 @@
 {% macro calculatePrice(variant) %}
     {% from _self import convertAndFormat %}
 
-    {{ convertAndFormat(variant|sylius_calculate_price({'channel': shopperContext.channel})) }}
+    {{ convertAndFormat(variant|sylius_calculate_price({'channel': sylius.channel})) }}
 {% endmacro %}

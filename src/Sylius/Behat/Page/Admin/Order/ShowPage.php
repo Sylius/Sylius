@@ -430,7 +430,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'payments' => '#sylius-payments',
             'promotion_discounts' => '#promotion-discounts',
             'promotion_total' => '#promotion-total',
-            'shipments' => '#shipments',
+            'shipments' => '#sylius-shipments',
             'shipping_address' => '#shipping-address',
             'shipping_charges' => '#shipping-charges',
             'shipping_total' => '#shipping-total',
