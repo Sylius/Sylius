@@ -12,7 +12,9 @@
         {% include '@SyliusShop/Product/Show/_header.html.twig' %}
         <div class="ui stackable grid">
             <div class="four wide column">
+                {% if not product.variants.empty() %}
                 {% include '@SyliusShop/Product/Show/_price.html.twig' %}
+                {% endif %}
             </div>
             <div class="twelve wide right aligned column">
                 <span class="ui sub header">{{ product.code }}</span>
@@ -21,7 +23,7 @@
         <div class="ui basic segment">
             <p>{{ product.shortDescription }}</p>
         </div>
-        {% if product.isConfigurable() and product.getVariantSelectionMethod() == 'match' %}
+        {% if product.isConfigurable() and product.getVariantSelectionMethod() == 'match' and not product.variants.empty() %}
             {% include '@SyliusShop/Product/Show/_variantsPrices.html.twig' with { 'variantsPrices': sylius_product_variant_prices(product, shopperContext.channel) } %}
         {% endif %}
         {% include '@SyliusShop/Product/Show/_inventory.html.twig' %}
