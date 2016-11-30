@@ -61,8 +61,8 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->setupCurrency($input, $output);
-        $this->setupLocale($output);
+        $this->currency = $this->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
+        $this->locale = $this->get('sylius.setup.locale')->setup($input, $output);
         $this->setupChannel();
         $this->setupAdministratorUser($input, $output);
     }
@@ -93,65 +93,6 @@ EOT
         $userManager->flush();
 
         $output->writeln('Administrator account successfully registered.');
-    }
-
-    /**
-     * @param OutputInterface $output
-     */
-    protected function setupLocale(OutputInterface $output)
-    {
-        $localeRepository = $this->get('sylius.repository.locale');
-        $localeFactory = $this->get('sylius.factory.locale');
-
-        $code = trim($this->getContainer()->getParameter('locale'));
-        $name = Intl::getLanguageBundle()->getLanguageName($code);
-        $output->writeln(sprintf('Adding <info>%s</info> locale.', $name));
-
-        $existingLocale = $localeRepository->findOneBy(['code' => $code]);
-        if (null !== $existingLocale) {
-            $this->locale = $existingLocale;
-
-            return;
-        }
-
-        $locale = $localeFactory->createNew();
-        $locale->setCode($code);
-
-        $localeRepository->add($locale);
-
-        $this->locale = $locale;
-    }
-
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     */
-    protected function setupCurrency(InputInterface $input, OutputInterface $output)
-    {
-        /** @var QuestionHelper $questionHelper */
-        $questionHelper = $this->getHelper('question');
-        $question = new Question('Currency (press enter to use USD): ', 'USD');
-
-        $currencyRepository = $this->get('sylius.repository.currency');
-        $currencyFactory = $this->get('sylius.factory.currency');
-
-        $code = trim($questionHelper->ask($input, $output, $question));
-
-        $name = Intl::getCurrencyBundle()->getCurrencyName($code);
-        $output->writeln(sprintf('Adding <info>%s</info> currency.', $name));
-
-        $existingCurrency = $currencyRepository->findOneBy(['code' => $code]);
-        if (null !== $existingCurrency) {
-            $this->currency = $existingCurrency;
-
-            return;
-        }
-
-        $currency = $currencyFactory->createNew();
-        $currency->setCode($code);
-        $currencyRepository->add($currency);
-
-        $this->currency = $currency;
     }
 
     protected function setupChannel()
