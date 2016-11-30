@@ -27,14 +27,14 @@ matrix:
             env: SYLIUS_SUITE="application"
             services:
                 - memcached
-        -
-            sudo: false
-            php: 5.6
-            env: SYLIUS_SUITE="packages"
-            addons:
-                apt:
-                    packages:
-                        - parallel
+#        -
+#            sudo: false
+#            php: 5.6
+#            env: SYLIUS_SUITE="packages"
+#            addons:
+#                apt:
+#                    packages:
+#                        - parallel
 
 cache:
     directories:
