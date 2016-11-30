@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Command;
+namespace spec\Sylius\Bundle\CoreBundle\Installer\Executor;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Command\CommandExecutor;
+use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;

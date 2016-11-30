@@ -16,5 +16,27 @@
         <service id="sylius.installer.checker.command_directory" class="Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker">
             <argument type="service" id="filesystem" />
         </service>
+        <service id="sylius.installer.checker.sylius_requirements" class="Sylius\Bundle\CoreBundle\Installer\Checker\SyliusRequirementsChecker">
+            <argument type="service" id="sylius.requirements" />
+        </service>
+
+        <service id="sylius.commands_provider.database_setup" class="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider">
+            <argument type="service" id="doctrine" />
+        </service>
+
+        <service id="sylius.setup.currency" class="Sylius\Bundle\CoreBundle\Installer\Setup\CurrencySetup">
+            <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="sylius.factory.currency" />
+        </service>
+        <service id="sylius.setup.locale" class="Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup">
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.factory.locale" />
+            <argument>%locale%%</argument>
+        </service>
+        <service id="sylius.setup.channel" class="Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetup">
+            <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.factory.channel" />
+            <argument type="service" id="sylius.manager.channel" />
+        </service>
     </services>
 </container>

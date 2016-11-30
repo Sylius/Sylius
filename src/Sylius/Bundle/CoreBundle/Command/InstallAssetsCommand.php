@@ -43,6 +43,8 @@ EOT
             $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_ASSETS_DIRECTORY, $output);
             $this->ensureDirectoryExistsAndIsWritable($rootDir . self::WEB_BUNDLES_DIRECTORY, $output);
         } catch (\RuntimeException $exception) {
+            $output->writeln($exception->getMessage());
+
             return 1;
         }
 
@@ -50,6 +52,6 @@ EOT
             'assets:install',
         ];
 
-        $this->runCommands($commands, $input, $output);
+        $this->runCommands($commands, $output);
     }
 }

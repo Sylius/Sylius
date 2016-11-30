@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Command;
+namespace Sylius\Bundle\CoreBundle\Installer\Executor;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -40,9 +40,9 @@ final class CommandExecutor
     protected $application;
 
     /**
-     * @param InputInterface  $input
+     * @param InputInterface $input
      * @param OutputInterface $output
-     * @param Application     $application
+     * @param Application $application
      */
     public function __construct(InputInterface $input, OutputInterface $output, Application $application)
     {
@@ -52,7 +52,7 @@ final class CommandExecutor
     }
 
     /**
-     * @param $command
+     * @param string $command
      * @param array $parameters
      * @param OutputInterface $output
      *
@@ -72,7 +72,7 @@ final class CommandExecutor
         $exitCode = $this->application->run(new ArrayInput($parameters), $output ?: new NullOutput());
 
         if (1 === $exitCode) {
-            throw new RuntimeException('This command terminated with a permission error');
+            throw new RuntimeException('This command terminated with a permission error.');
         }
 
         if (0 !== $exitCode) {
@@ -80,17 +80,14 @@ final class CommandExecutor
 
             $errorMessage = sprintf('The command terminated with an error code: %u.', $exitCode);
             $this->output->writeln("<error>$errorMessage</error>");
-            $exception = new \Exception($errorMessage, $exitCode);
 
-            throw $exception;
+            throw new \Exception($errorMessage, $exitCode);
         }
 
         return $this;
     }
 
     /**
-     * Get default parameters.
-     *
      * @return array
      */
     protected function getDefaultParameters()
