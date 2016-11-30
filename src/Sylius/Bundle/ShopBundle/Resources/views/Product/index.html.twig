@@ -1,0 +1,5 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    {{ sylius_grid_render(resources, 'SyliusShopBundle:Product:_grid.html.twig') }}
+{% endblock %}

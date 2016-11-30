@@ -2,12 +2,9 @@ sylius_grid:
     grids:
         sylius_admin_product:
             driver:
-                name: doctrine/orm
+                name: elastica
                 options:
-                    class: "%sylius.model.product.class%"
-                    repository:
-                        method: createListQueryBuilder
-                        arguments: ["%locale%", $taxonId]
+                    type: product
             sorting:
                 code: asc
             fields:

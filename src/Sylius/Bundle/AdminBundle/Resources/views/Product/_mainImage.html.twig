@@ -1,7 +1,9 @@
-{% if product.imageByCode('thumbnail') is not null %}
+{% if product.imageByCode is defined and product.imageByCode('thumbnail') is not null %}
     {% set path = product.imageByCode('thumbnail').path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
-{% elseif product.images.first %}
+{% elseif product.images is defined and product.images.first is defined and product.images.first %}
     {% set path = product.images.first.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
+{% elseif product.images is defined and product.images.0 is defined %}
+    {% set path = product.images.0.path|imagine_filter(filter|default('sylius_admin_product_thumbnail')) %}
 {% else %}
     {% set path = 'http://placehold.it/50x50' %}
 {% endif %}

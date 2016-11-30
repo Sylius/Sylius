@@ -13,13 +13,14 @@ namespace Sylius\Bundle\GridBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class SyliusGridExtension extends Extension
+final class SyliusGridExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -39,7 +40,21 @@ final class SyliusGridExtension extends Extension
         $container->setAlias('sylius.grid.data_extractor', 'sylius.grid.data_extractor.property_access');
 
         foreach ($config['drivers'] as $enabledDriver) {
+            if ('elastica' === $enabledDriver && !$config['use_fos_elastica']) {
+                continue;
+            }
+
             $loader->load(sprintf('services/integrations/%s.xml', $enabledDriver));
+        }
+    }
+
+    public function prepend(ContainerBuilder $container)
+    {
+        $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
+
+        if ($container->hasExtension('fos_elastica')) {
+            $config = array('use_fos_elastica' => true);
+            $container->prependExtensionConfig($this->getAlias(), $config);
         }
     }
 }

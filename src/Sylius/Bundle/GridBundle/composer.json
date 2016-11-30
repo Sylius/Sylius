@@ -44,7 +44,8 @@
         "symfony/validator": "^3.2",
         "symfony/security-csrf": "^3.2",
         "incenteev/composer-parameter-handler": "~2.0",
-        "polishsymfonycommunity/symfony-mocker-container": "^1.0"
+        "polishsymfonycommunity/symfony-mocker-container": "^1.0",
+        "friendsofsymfony/elastica-bundle": "^3.0.2"
     },
     "config": {
         "bin-dir": "bin"

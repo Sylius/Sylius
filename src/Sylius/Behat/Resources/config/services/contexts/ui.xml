@@ -125,6 +125,7 @@
             <argument type="service" id="sylius.behat.page.admin.product.index_per_taxon" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="sylius.behat.elasticsearch_checker" />
             <tag name="fob.context_service" />
         </service>
 
@@ -381,6 +382,7 @@
             <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.page.shop.taxon.show" />
             <argument type="service" id="sylius.behat.page.shop.product_reviews.index" />
+            <argument type="service" id="sylius.behat.elasticsearch_checker" />
             <tag name="fob.context_service" />
         </service>
 

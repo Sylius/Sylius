@@ -6,6 +6,7 @@ default:
         ui_managing_products:
             contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.elasticsearch
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.channel

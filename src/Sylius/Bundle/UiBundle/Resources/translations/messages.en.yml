@@ -516,6 +516,7 @@ sylius:
         no_theme: 'No theme'
         not_available_in_your_country: 'Not available in your country'
         not_contains: 'Not contains'
+        not_equal: Not equal
         not_empty: 'Not empty'
         not_in: 'Not in'
         not_verified: 'Not verified'

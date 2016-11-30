@@ -24,6 +24,7 @@ use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\ProductReview\IndexPageInterface as ProductReviewIndexPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Behat\Service\ElasticsearchCheckerInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -92,6 +93,11 @@ final class ManagingProductsContext implements Context
     private $notificationChecker;
 
     /**
+     * @var ElasticsearchCheckerInterface
+     */
+    private $elasticsearchChecker;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param CreateSimpleProductPageInterface $createSimpleProductPage
      * @param CreateConfigurableProductPageInterface $createConfigurableProductPage
@@ -102,6 +108,7 @@ final class ManagingProductsContext implements Context
      * @param IndexPerTaxonPageInterface $indexPerTaxonPage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
+     * @param ElasticsearchCheckerInterface $elasticsearchChecker
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -114,6 +121,7 @@ final class ManagingProductsContext implements Context
         IndexPerTaxonPageInterface $indexPerTaxonPage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
+        ElasticsearchCheckerInterface $elasticsearchChecker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->createSimpleProductPage = $createSimpleProductPage;
@@ -125,6 +133,7 @@ final class ManagingProductsContext implements Context
         $this->indexPerTaxonPage = $indexPerTaxonPage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
+        $this->elasticsearchChecker = $elasticsearchChecker;
     }
 
     /**
@@ -258,6 +267,8 @@ final class ManagingProductsContext implements Context
      */
     public function iWantToBrowseProducts()
     {
+        $this->elasticsearchChecker->refreshIndex();
+
         $this->indexPage->open();
     }
 

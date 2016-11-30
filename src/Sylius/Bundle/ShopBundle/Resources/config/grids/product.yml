@@ -5,15 +5,41 @@ sylius_grid:
     grids:
         sylius_shop_product:
             driver:
-                name: doctrine/orm
+                name: elastica
                 options:
-                    class: "%sylius.model.product.class%"
-                    repository:
-                        method: createQueryBuilderByChannelAndTaxonId
-                        arguments:
-                            channel: 'expr:service("sylius.context.channel").getChannel()'
-                            taxonId: $taxonId
-                            locale: '%locale%'
+                    type: product
+                    query:
+                        and:
+                            - term:
+                                enabled: true
+                            - nested:
+                                path: variants
+                                query:
+                                    bool:
+                                        minimum_number_should_match: 1
+                                        should:
+                                            range:
+                                                variants.onHand: { gt: 0 }
+                                        must:
+                                            filtered:
+                                                filter:
+                                                    or:
+                                                        - missing: { field: variants.availableOn }
+                                                        - range: { variants.availableOn: { lte: now } }
+                                                    or:
+                                                        - missing: { field: variants.availableUntil }
+                                                        - range: { variants.availableUntil: { gte: now } }
+                            - nested:
+                                path: channels
+                                filter:
+                                    bool:
+                                        must:
+                                            term: { 'channels.code': "expr:service('sylius.context.channel').getChannel().getCode()" }
+            filters:
+                _all:
+                    type: elastica
+                taxons.code:
+                    type: elastica
             sorting:
                 position: asc
             fields:

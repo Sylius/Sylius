@@ -16,6 +16,7 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\ProductReview\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Taxon\ShowPageInterface as TaxonShowPageInterface;
+use Sylius\Behat\Service\ElasticsearchCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -38,6 +39,11 @@ final class ProductContext implements Context
     private $taxonShowPage;
 
     /**
+     * @var ElasticsearchCheckerInterface
+     */
+    private $elasticsearchChecker;
+
+    /**
      * @var IndexPageInterface
      */
     private $productReviewsIndexPage;
@@ -46,15 +52,18 @@ final class ProductContext implements Context
      * @param ShowPageInterface $showPage
      * @param TaxonShowPageInterface $taxonShowPage
      * @param IndexPageInterface $productReviewsIndexPage
+     * @param ElasticsearchCheckerInterface $elasticsearchChecker
      */
     public function __construct(
         ShowPageInterface $showPage,
         TaxonShowPageInterface $taxonShowPage,
         IndexPageInterface $productReviewsIndexPage
+        ElasticsearchCheckerInterface $elasticsearchChecker
     ) {
         $this->showPage = $showPage;
         $this->taxonShowPage = $taxonShowPage;
         $this->productReviewsIndexPage = $productReviewsIndexPage;
+        $this->elasticsearchChecker = $elasticsearchChecker;
     }
 
     /**
@@ -191,6 +200,8 @@ final class ProductContext implements Context
      */
     public function iCheckListOfProductsForTaxon(TaxonInterface $taxon)
     {
+        $this->elasticsearchChecker->refreshIndex();
+
         $this->taxonShowPage->open(['slug' => $taxon->getSlug()]);
     }
 

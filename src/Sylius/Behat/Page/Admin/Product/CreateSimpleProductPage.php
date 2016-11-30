@@ -68,6 +68,14 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function specifyCurrentStock($currentStock)
+    {
+        $this->getDocument()->fillField('Current stock', $currentStock);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addAttribute($attribute, $value)
     {
         $this->clickTabIfItsNotActive('attributes');

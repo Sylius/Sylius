@@ -30,11 +30,22 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_grid');
 
+        $this->addFosElastica($rootNode);
         $this->addDriversSection($rootNode);
         $this->addTemplatesSection($rootNode);
         $this->addGridsSection($rootNode);
 
         return $treeBuilder;
+    }
+
+    private function addFosElastica(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->booleanNode('use_fos_elastica')
+                ->defaultFalse()
+            ->end()
+        ;
     }
 
     /**
@@ -92,6 +103,7 @@ final class Configuration implements ConfigurationInterface
                                 ->children()
                                     ->scalarNode('name')->cannotBeEmpty()->defaultValue(DoctrineORMDriver::NAME)->end()
                                     ->arrayNode('options')
+                                        ->useAttributeAsKey('name')
                                         ->prototype('variable')->end()
                                         ->defaultValue([])
                                     ->end()

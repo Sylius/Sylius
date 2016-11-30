@@ -99,7 +99,7 @@ Feature: Products validation
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @ui
+    @ui @elasticsearch
     Scenario: Trying to remove name from existing simple product
         Given the store has a "Dice Brewing" product
         And I want to modify this product

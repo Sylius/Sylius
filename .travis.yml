@@ -11,8 +11,15 @@ matrix:
             sudo: required
             php: 7.0
             env: SYLIUS_SUITE="application"
+            addons:
+                apt:
+                    sources:
+                      - elasticsearch-1.7
+                    packages:
+                      - elasticsearch
             services:
                 - memcached
+                - elasticsearch
         -
             sudo: false
             php: 7.0
@@ -25,8 +32,15 @@ matrix:
             sudo: required
             php: 5.6
             env: SYLIUS_SUITE="application"
+            addons:
+                apt:
+                    sources:
+                      - elasticsearch-1.7
+                    packages:
+                      - elasticsearch
             services:
                 - memcached
+                - elasticsearch
         -
             sudo: false
             php: 5.6
