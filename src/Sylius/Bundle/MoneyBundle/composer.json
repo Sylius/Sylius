@@ -23,9 +23,9 @@
         "php": "^5.6|^7.0",
 
         "sylius/resource-bundle": "^1.0",
-        "symfony/framework-bundle": "^3.2@rc",
-        "symfony/intl": "^3.2@rc",
-        "symfony/templating": "^3.2@rc",
+        "symfony/framework-bundle": "^3.2",
+        "symfony/intl": "^3.2",
+        "symfony/templating": "^3.2",
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
@@ -34,8 +34,8 @@
         "phpunit/phpunit": "^5.6",
         "twig/twig": "^1.0",
         "sylius/currency-bundle": "^1.0",
-        "symfony/form": "^3.2@rc",
-        "symfony/browser-kit": "^3.2@rc",
+        "symfony/form": "^3.2",
+        "symfony/browser-kit": "^3.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },

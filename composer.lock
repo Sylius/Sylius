@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "27909448697caa571f9ba6aacfb489b7",
-    "content-hash": "ad6f70d6406147b870a8318194f1a77b",
+    "hash": "a5525f00ad501ac0d842ee46eaf4f941",
+    "content-hash": "af835214d229ed3a288cd7dcde952214",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2313,7 +2313,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "KnpLabs",
+                    "name": "Knplabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -2372,7 +2372,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -4454,16 +4454,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v3.2.0-RC2",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "1a29cec155956afc37670b23ae652b9bb201e08d"
+                "reference": "b96a144bc875684f3338f697687147a2696d73eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/1a29cec155956afc37670b23ae652b9bb201e08d",
-                "reference": "1a29cec155956afc37670b23ae652b9bb201e08d",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/b96a144bc875684f3338f697687147a2696d73eb",
+                "reference": "b96a144bc875684f3338f697687147a2696d73eb",
                 "shasum": ""
             },
             "require": {
@@ -4592,7 +4592,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2016-11-27 04:46:36"
+            "time": "2016-11-30 08:46:24"
         },
         {
             "name": "twig/extensions",
@@ -4916,7 +4916,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com"
                 }
             ],
@@ -8297,9 +8297,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "symfony/symfony": 5
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

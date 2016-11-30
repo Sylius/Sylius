@@ -40,15 +40,15 @@
         "sylius/resource-bundle": "^1.0",
         "sylius/review": "^1.0",
         "sylius/user-bundle": "^1.0",
-        "symfony/framework-bundle": "^3.2@rc"
+        "symfony/framework-bundle": "^3.2"
     },
     "require-dev": {
         "phpspec/phpspec": "^3.2",
         "phpunit/phpunit": "^5.6",
-        "symfony/form": "^3.2@rc",
-        "symfony/validator": "^3.2@rc",
-        "symfony/browser-kit": "^3.2@rc",
-        "symfony/security-bundle": "^3.2@rc",
+        "symfony/form": "^3.2",
+        "symfony/validator": "^3.2",
+        "symfony/browser-kit": "^3.2",
+        "symfony/security-bundle": "^3.2",
         "symfony/swiftmailer-bundle": "^2.4",
         "incenteev/composer-parameter-handler": "~2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"

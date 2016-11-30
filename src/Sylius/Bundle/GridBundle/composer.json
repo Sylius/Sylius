@@ -23,9 +23,9 @@
         "php": "^5.6|^7.0",
 
         "sylius/grid": "^1.0",
-        "symfony/form": "^3.2@rc",
-        "symfony/framework-bundle": "^3.2@rc",
-        "symfony/templating": "^3.2@rc"
+        "symfony/form": "^3.2",
+        "symfony/framework-bundle": "^3.2",
+        "symfony/templating": "^3.2"
     },
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^2.0",
@@ -39,11 +39,10 @@
         "phpspec/phpspec": "^3.2",
         "phpunit/phpunit": "^5.6",
         "twig/twig": "^1.11",
-        "symfony/browser-kit": "^3.2@rc",
-        "symfony/config": "^3.2@rc",
-        "symfony/twig-bundle": "^3.2@rc",
-        "symfony/validator": "^3.2@rc",
-        "symfony/security-csrf": "^3.2@rc",
+        "symfony/browser-kit": "^3.2",
+        "symfony/twig-bundle": "^3.2",
+        "symfony/validator": "^3.2",
+        "symfony/security-csrf": "^3.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "polishsymfonycommunity/symfony-mocker-container": "^1.0"
     },
