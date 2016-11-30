@@ -45,7 +45,7 @@ fos_rest:
 
 services:
     test.translation_locale_provider:
-        class: Sylius\Component\Resource\Provider\ImmutableTranslationLocaleProvider
+        class: Sylius\Component\Resource\Translation\Provider\ImmutableTranslationLocaleProvider
         arguments:
             - ["pl_PL", "en_US", "de_DE"]
             - "en_US"

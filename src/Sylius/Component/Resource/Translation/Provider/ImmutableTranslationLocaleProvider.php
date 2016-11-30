@@ -9,7 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Resource\Provider;
+namespace Sylius\Component\Resource\Translation\Provider;
+
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

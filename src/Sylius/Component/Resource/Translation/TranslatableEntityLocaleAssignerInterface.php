@@ -1,0 +1,25 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Component\Resource\Translation;
+
+use Sylius\Component\Resource\Model\TranslatableInterface;
+
+/**
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ */
+interface TranslatableEntityLocaleAssignerInterface
+{
+    /**
+     * @param TranslatableInterface $translatableEntity
+     */
+    public function assignLocale(TranslatableInterface $translatableEntity);
+}

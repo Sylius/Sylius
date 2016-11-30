@@ -21,7 +21,8 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Resource\Provider\TranslationLocaleProviderInterface;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
+use Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssignerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -37,9 +38,9 @@ final class ORMTranslatableListener implements EventSubscriber
     private $resourceMetadataRegistry;
 
     /**
-     * @var ContainerInterface
+     * @var TranslatableEntityLocaleAssignerInterface
      */
-    private $container;
+    private $translatableEntityLocaleAssigner;
 
     /**
      * @param RegistryInterface $resourceMetadataRegistry
@@ -50,7 +51,7 @@ final class ORMTranslatableListener implements EventSubscriber
         ContainerInterface $container
     ) {
         $this->resourceMetadataRegistry = $resourceMetadataRegistry;
-        $this->container = $container;
+        $this->translatableEntityLocaleAssigner = $container->get('sylius.translatable_entity_locale_assigner');
     }
 
     /**
@@ -97,12 +98,8 @@ final class ORMTranslatableListener implements EventSubscriber
         if (!$entity instanceof TranslatableInterface) {
             return;
         }
-        
-        /** @var TranslationLocaleProviderInterface $translationLocaleProvider */
-        $translationLocaleProvider = $this->container->get('sylius.translation_locale_provider');
 
-        $entity->setCurrentLocale($translationLocaleProvider->getDefaultLocaleCode());
-        $entity->setFallbackLocale($translationLocaleProvider->getDefaultLocaleCode());
+        $this->translatableEntityLocaleAssigner->assignLocale($entity);
     }
 
     /**

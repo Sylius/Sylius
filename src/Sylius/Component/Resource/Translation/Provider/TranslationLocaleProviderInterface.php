@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Resource\Provider;
+namespace Sylius\Component\Resource\Translation\Provider;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
