@@ -13,7 +13,6 @@
     $.fn.extend({
         productAttributes: function () {
             setAttributeChoiceListener();
-            controlAttributesList();
 
             $(this).dropdown({
                 onRemove: function(removedValue, removedText, $removedChoice) {
@@ -22,6 +21,7 @@
                 forceSelection: false
             });
 
+            controlAttributesList();
             modifySelectorOnAttributesListElementDelete();
         }
     });
@@ -72,11 +72,11 @@
 
             var data = '';
             $('#sylius_product_attribute_choice').val().forEach(function(item) {
-                data += 'sylius_product_attribute_choice[]=' + item + "&";
+                if (!isInTheAttributesContainer(item)) {
+                    data += 'sylius_product_attribute_choice[]=' + item + "&";
+                }
             });
             data += "count=" + getNextIndex();
-
-            console.log(data);
 
             $.ajax({
                 type: 'GET',
@@ -95,5 +95,17 @@
                 $('form').removeClass('loading');
             });
         });
+    }
+
+    function isInTheAttributesContainer(attributeId) {
+        var result = false;
+        $('#attributesContainer .attribute').each(function() {
+            var dataId = $(this).attr('data-id');
+            if (dataId === attributeId) {
+                result = true;
+            }
+        });
+
+        return result;
     }
 })( jQuery );
