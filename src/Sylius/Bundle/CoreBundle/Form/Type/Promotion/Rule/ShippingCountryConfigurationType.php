@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingCountryConfigurationType extends AbstractType
+final class ShippingCountryConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

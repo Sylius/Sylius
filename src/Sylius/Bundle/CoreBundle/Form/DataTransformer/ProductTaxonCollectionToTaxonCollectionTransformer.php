@@ -20,7 +20,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ProductTaxonCollectionToTaxonCollectionTransformer implements DataTransformerInterface
+final class ProductTaxonCollectionToTaxonCollectionTransformer implements DataTransformerInterface
 {
     /**
      * @var FactoryInterface

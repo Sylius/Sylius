@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PaymentMethodTypeExtension extends AbstractTypeExtension
+final class PaymentMethodTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}

@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextAttributeConfigurationType extends AbstractType
+final class TextAttributeConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

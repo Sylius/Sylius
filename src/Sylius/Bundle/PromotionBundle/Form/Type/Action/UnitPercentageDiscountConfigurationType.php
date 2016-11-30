@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints\Type;
  * @author Gabi Udrescu <gabriel.udr@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UnitPercentageDiscountConfigurationType extends AbstractType
+final class UnitPercentageDiscountConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

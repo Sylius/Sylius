@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeTypeChoiceType extends AbstractType
+final class AttributeTypeChoiceType extends AbstractType
 {
     /**
      * @var array

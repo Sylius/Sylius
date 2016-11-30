@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelChoiceType extends AbstractType
+final class ChannelChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface

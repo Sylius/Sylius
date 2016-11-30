@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ProductGenerateVariantsType extends AbstractResourceType
+final class ProductGenerateVariantsType extends AbstractResourceType
 {
     /**
      * @var EventSubscriberInterface

@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderItemType extends AbstractResourceType
+final class OrderItemType extends AbstractResourceType
 {
     /**
      * @var DataMapperInterface

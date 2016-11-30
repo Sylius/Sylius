@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ResourceToIdentifierType extends AbstractType
+final class ResourceToIdentifierType extends AbstractType
 {
     /**
      * @var RepositoryInterface

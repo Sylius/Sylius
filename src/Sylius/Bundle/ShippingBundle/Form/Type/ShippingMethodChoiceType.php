@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShippingMethodChoiceType extends AbstractType
+final class ShippingMethodChoiceType extends AbstractType
 {
     /**
      * @var ShippingMethodsResolverInterface

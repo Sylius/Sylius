@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShippingCategoryType extends AbstractResourceType
+final class ShippingCategoryType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

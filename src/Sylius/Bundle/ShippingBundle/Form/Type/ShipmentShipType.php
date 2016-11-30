@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ShipmentShipType extends AbstractResourceType
+final class ShipmentShipType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

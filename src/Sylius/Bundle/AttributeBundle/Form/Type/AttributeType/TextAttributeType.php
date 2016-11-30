@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextAttributeType extends AbstractType
+final class TextAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}

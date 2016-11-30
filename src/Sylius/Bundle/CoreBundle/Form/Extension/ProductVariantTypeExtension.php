@@ -26,7 +26,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductVariantTypeExtension extends AbstractTypeExtension
+final class ProductVariantTypeExtension extends AbstractTypeExtension
 {
     /**
      * @var EventSubscriberInterface

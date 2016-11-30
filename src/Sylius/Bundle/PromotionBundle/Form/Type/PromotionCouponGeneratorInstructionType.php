@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PromotionCouponGeneratorInstructionType extends AbstractResourceType
+final class PromotionCouponGeneratorInstructionType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

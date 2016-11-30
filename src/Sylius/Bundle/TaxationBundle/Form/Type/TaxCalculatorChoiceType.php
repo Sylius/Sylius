@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxCalculatorChoiceType extends AbstractType
+final class TaxCalculatorChoiceType extends AbstractType
 {
     /**
      * @var array

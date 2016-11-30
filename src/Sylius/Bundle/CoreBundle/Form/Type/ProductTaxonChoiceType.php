@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ProductTaxonChoiceType extends AbstractType
+final class ProductTaxonChoiceType extends AbstractType
 {
     /**
      * @var FactoryInterface

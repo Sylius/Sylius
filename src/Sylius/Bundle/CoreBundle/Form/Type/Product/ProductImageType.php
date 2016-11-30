@@ -16,7 +16,7 @@ use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ProductImageType extends ImageType
+final class ProductImageType extends ImageType
 {
     /**
      * {@inheritdoc}

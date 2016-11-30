@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints\Type;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FlatRateConfigurationType extends AbstractType
+final class FlatRateConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

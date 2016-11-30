@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class AddressChoiceType extends AbstractType
+final class AddressChoiceType extends AbstractType
 {
     /**
      * @var AddressRepositoryInterface

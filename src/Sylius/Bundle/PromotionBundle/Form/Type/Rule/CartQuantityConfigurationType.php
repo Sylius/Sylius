@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints\Type;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class CartQuantityConfigurationType extends AbstractType
+final class CartQuantityConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

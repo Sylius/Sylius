@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PromotionRuleType extends AbstractResourceType
+final class PromotionRuleType extends AbstractResourceType
 {
     /**
      * @var EventSubscriberInterface

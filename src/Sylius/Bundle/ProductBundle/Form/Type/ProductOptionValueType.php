@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductOptionValueType extends AbstractResourceType
+final class ProductOptionValueType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

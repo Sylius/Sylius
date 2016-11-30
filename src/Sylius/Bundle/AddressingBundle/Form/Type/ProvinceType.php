@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProvinceType extends AbstractResourceType
+final class ProvinceType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class SelectPaymentType extends AbstractResourceType
+final class SelectPaymentType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

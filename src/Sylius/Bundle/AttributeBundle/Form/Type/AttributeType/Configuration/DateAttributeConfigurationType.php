@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DateAttributeConfigurationType extends AbstractType
+final class DateAttributeConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}

@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Gabi Udrescu <gabriel.udr@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class TaxonFilterConfigurationType extends AbstractType
+final class TaxonFilterConfigurationType extends AbstractType
 {
     /**
      * @var DataTransformerInterface

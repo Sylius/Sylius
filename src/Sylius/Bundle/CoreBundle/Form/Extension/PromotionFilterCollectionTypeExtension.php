@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PromotionFilterCollectionTypeExtension extends AbstractTypeExtension
+final class PromotionFilterCollectionTypeExtension extends AbstractTypeExtension
 {
     /**
      * {@inheritdoc}

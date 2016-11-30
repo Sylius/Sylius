@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class SelectShippingType extends AbstractResourceType
+final class SelectShippingType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

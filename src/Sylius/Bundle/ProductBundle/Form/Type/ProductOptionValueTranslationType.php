@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Vincenzo Provenza <vincenzo.provenza89@gmail.com>
  */
-class ProductOptionValueTranslationType extends AbstractResourceType
+final class ProductOptionValueTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

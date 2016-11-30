@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TotalOfItemsFromTaxonConfigurationType extends AbstractType
+final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
 {
     /**
      * @var TaxonRepositoryInterface

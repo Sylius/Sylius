@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
-class CreditCardType extends AbstractResourceType
+final class CreditCardType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

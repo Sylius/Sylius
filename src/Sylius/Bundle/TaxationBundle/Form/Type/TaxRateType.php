@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxRateType extends AbstractResourceType
+final class TaxRateType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

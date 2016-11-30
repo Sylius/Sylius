@@ -32,7 +32,7 @@ use Symfony\Component\Form\FormView;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ShippingMethodType extends AbstractResourceType
+final class ShippingMethodType extends AbstractResourceType
 {
     /**
      * @var string

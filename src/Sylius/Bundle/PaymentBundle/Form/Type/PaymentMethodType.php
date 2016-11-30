@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PaymentMethodType extends AbstractResourceType
+final class PaymentMethodType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}

@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StringFilterType extends AbstractType
+final class StringFilterType extends AbstractType
 {
     /**
      * {@inheritdoc}
