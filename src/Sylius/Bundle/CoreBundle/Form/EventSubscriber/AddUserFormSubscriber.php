@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\Form\EventSubscriber;
+namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Sylius\Component\User\Model\UserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Constraints\Valid;
@@ -20,6 +21,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class AddUserFormSubscriber implements EventSubscriberInterface
 {
@@ -43,7 +45,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
-            FormEvents::PRE_SUBMIT => 'preSubmit',
+            FormEvents::SUBMIT => 'submit',
         ];
     }
 
@@ -54,53 +56,30 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     {
         $form = $event->getForm();
         $form->add('user', $this->entryType, ['constraints' => [new Valid()]]);
+        $form->add('createUser', CheckboxType::class, [
+            'label' => 'sylius.ui.customer_can_login_to_the_store',
+            'required' => false,
+            'mapped' => false,
+        ]);
     }
 
     /**
      * @param FormEvent $event
      */
-    public function preSubmit(FormEvent $event)
+    public function submit(FormEvent $event)
     {
         $data = $event->getData();
-        $normData = $event->getForm()->getNormData();
-
-        if (!isset($data['user'])) {
-            $this->removeUserField($event);
-
-            return;
-        }
-
-        Assert::isInstanceOf($normData, UserAwareInterface::class);
-
-        if ($this->isUserDataEmpty($data) && null === $normData->getUser()) {
-            unset($data['user']);
-            $event->setData($data);
-            $this->removeUserField($event);
-        }
-    }
-
-    /**
-     * @param array $data
-     *
-     * @return bool
-     */
-    private function isUserDataEmpty(array $data)
-    {
-        foreach ($data['user'] as $field) {
-            if (!empty($field)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * @param FormEvent $event
-     */
-    private function removeUserField(FormEvent $event)
-    {
         $form = $event->getForm();
-        $form->remove('user');
+
+        if(null === $form->get('createUser')->getViewData()) {
+
+            Assert::isInstanceOf($data, UserAwareInterface::class);
+
+            $data->setUser(null);
+            $event->setData($data);
+
+            $form->remove('user');
+            $form->add('user', $this->entryType, ['constraints' => [new Valid()]]);
+        }
     }
 }

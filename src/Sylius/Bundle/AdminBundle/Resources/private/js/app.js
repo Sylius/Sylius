@@ -14,7 +14,7 @@
             'containerSelector': '#sylius_calculator_container'
         });
 
-        $('#sylius_customer_create_user').change(function(){
+        $('#sylius_customer_createUser').change(function(){
             $('#user-form').toggle();
         });
 

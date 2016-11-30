@@ -23,9 +23,8 @@
             <h4 class="ui dividing header">{{ 'sylius.ui.account_credentials'|trans }}</h4>
             {% if customer.user is empty or customer.user.id is null %}
             <div class="field">
-                <div class="ui toggle checkbox {% if customer.user is not null and customer.user.id is null %} checked {% endif %}">
-                    <input type="checkbox" id="sylius_customer_create_user" {% if customer.user is not null and customer.user.id is null %} checked {% endif %}>
-                    <label for="sylius_customer_create_user">{{ 'sylius.ui.customer_can_login_to_the_store'|trans }}</label>
+                <div class="ui toggle checkbox">
+                   {{ form_row(form.createUser) }}
                 </div>
             </div>
             {% endif %}
