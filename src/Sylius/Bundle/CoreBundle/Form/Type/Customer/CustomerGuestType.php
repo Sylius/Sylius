@@ -55,7 +55,7 @@ final class CustomerGuestType extends AbstractResourceType
             ->add('email', EmailType::class, [
                 'label' => 'sylius.form.customer.email',
             ])
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) {
                 $data = $event->getData();
 
                 if (!isset($data['email'])) {
