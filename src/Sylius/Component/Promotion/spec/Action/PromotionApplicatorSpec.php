@@ -61,6 +61,62 @@ final class PromotionApplicatorSpec extends ObjectBehavior
         $this->apply($subject, $promotion);
     }
 
+    function it_applies_promotion_if_at_least_one_action_was_executed_even_if_the_last_one_was_not(
+        ServiceRegistryInterface $registry,
+        PromotionActionCommandInterface $firstActionCommand,
+        PromotionActionCommandInterface $secondActionCommand,
+        PromotionSubjectInterface $subject,
+        PromotionInterface $promotion,
+        PromotionActionInterface $firstAction,
+        PromotionActionInterface $secondAction
+    ) {
+        $promotion->getActions()->willReturn([$firstAction, $secondAction]);
+
+        $firstAction->getType()->willReturn('first_action');
+        $firstAction->getConfiguration()->willReturn([]);
+
+        $secondAction->getType()->willReturn('second_action');
+        $secondAction->getConfiguration()->willReturn([]);
+
+        $registry->get('first_action')->willReturn($firstActionCommand);
+        $registry->get('second_action')->willReturn($secondActionCommand);
+
+        $firstActionCommand->execute($subject, [], $promotion)->willReturn(true);
+        $secondActionCommand->execute($subject, [], $promotion)->willReturn(false);
+
+        $subject->addPromotion($promotion)->shouldBeCalled();
+
+        $this->apply($subject, $promotion);
+    }
+
+    function it_applies_promotion_if_at_least_one_action_was_executed(
+        ServiceRegistryInterface $registry,
+        PromotionActionCommandInterface $firstActionCommand,
+        PromotionActionCommandInterface $secondActionCommand,
+        PromotionSubjectInterface $subject,
+        PromotionInterface $promotion,
+        PromotionActionInterface $firstAction,
+        PromotionActionInterface $secondAction
+    ) {
+        $promotion->getActions()->willReturn([$firstAction, $secondAction]);
+
+        $firstAction->getType()->willReturn('first_action');
+        $firstAction->getConfiguration()->willReturn([]);
+
+        $secondAction->getType()->willReturn('second_action');
+        $secondAction->getConfiguration()->willReturn([]);
+
+        $registry->get('first_action')->willReturn($firstActionCommand);
+        $registry->get('second_action')->willReturn($secondActionCommand);
+
+        $firstActionCommand->execute($subject, [], $promotion)->willReturn(false);
+        $secondActionCommand->execute($subject, [], $promotion)->willReturn(true);
+
+        $subject->addPromotion($promotion)->shouldBeCalled();
+
+        $this->apply($subject, $promotion);
+    }
+
     function it_does_not_add_promotion_if_no_action_has_been_applied(
         ServiceRegistryInterface $registry,
         PromotionActionCommandInterface $firstActionCommand,
