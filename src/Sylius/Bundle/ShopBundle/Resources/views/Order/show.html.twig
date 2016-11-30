@@ -1,0 +1,30 @@
+{% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <h1 class="ui header">
+        <i class="circular cart icon"></i>
+        <div class="content">
+            {{ 'sylius.ui.summary_of_your_order'|trans }} #{{ order.number }}
+            <div class="sub header">
+                <div class="ui horizontal divided list">
+                    <div class="item">
+                        {{ order.checkoutCompletedAt|date }}
+                    </div>
+                    <div class="item">
+                        {{ money.convertAndFormat(order.total) }}
+                    </div>
+                    <div class="item">
+                        {{ order.items|length }} {{ 'sylius.ui.items'|trans|lower }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </h1>
+
+    {% set lastNewPayment = order.getLastNewPayment() %}
+
+    {% if order.paymentState not in ['paid', 'cancelled'] %}
+        {{ render(url('sylius_shop_partial_payment_change_method', {'id': lastNewPayment.id} )) }}
+    {% endif %}
+{% endblock %}

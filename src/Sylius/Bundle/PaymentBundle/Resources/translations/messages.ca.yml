@@ -17,7 +17,7 @@ sylius:
                 header: Estat de pagament
                 checkout: Realitza la compra
                 completed: Completat
-                failed: "S'ha produït un error"
+                failed: S'ha produït un error
                 new: Nou
                 pending: Pendent
                 processing: Processant

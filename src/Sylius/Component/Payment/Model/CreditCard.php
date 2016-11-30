@@ -66,7 +66,7 @@ class CreditCard implements CreditCardInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {

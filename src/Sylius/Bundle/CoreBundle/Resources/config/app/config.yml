@@ -5,7 +5,6 @@ imports:
     - { resource: "@SyliusAddressingBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusAttributeBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusChannelBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusContentBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusCurrencyBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusCustomerBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusInventoryBundle/Resources/config/app/config.yml" }
@@ -18,12 +17,11 @@ imports:
     - { resource: "@SyliusTaxationBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusTaxonomyBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusUserBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusVariationBundle/Resources/config/app/config.yml" }
 
-    - { resource: "parameters.yml" }
-    - { resource: "sylius.yml" }
-    - { resource: "state_machine.yml" }
-    - { resource: "fixtures.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/parameters.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/sylius.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/state_machine.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/fixtures.yml" }
 
 doctrine:
     orm:
@@ -31,30 +29,10 @@ doctrine:
         entity_managers:
             default:
                 auto_mapping: true
-                mappings:
-                    gedmo_loggable:
-                        type: annotation
-                        prefix: Gedmo\Loggable\Entity
-                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-                        is_bundle: false
 
 doctrine_cache:
     providers:
-        sylius_settings: "%sylius.cache%"
         sylius_rbac: "%sylius.cache%"
-
-doctrine_phpcr:
-    session:
-        backend:
-            type: doctrinedbal
-            connection: default
-            caches:
-                meta: doctrine_cache.providers.phpcr_meta
-                nodes: doctrine_cache.providers.phpcr_nodes
-        workspace: default
-    odm:
-        auto_mapping: true
-        auto_generate_proxy_classes: "%kernel.debug%"
 
 jms_serializer:
     metadata:
@@ -72,16 +50,6 @@ knp_gaufrette:
     filesystems:
         sylius_image:
             adapter: "%sylius.uploader.filesystem%"
-
-knp_snappy:
-    pdf:
-        enabled: true
-        binary: "%wkhtmltopdf.bin_path%"
-        options: []
-    image:
-        enabled: true
-        binary: "%wkhtmltoimage.bin_path%"
-        options: []
 
 liip_imagine:
     loaders:
@@ -118,11 +86,6 @@ payum:
         cash_on_delivery:
             factory: offline
 
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        sonata.block.service.text: ~
-
 stof_doctrine_extensions:
     default_locale: "%locale%"
     orm:
@@ -130,7 +93,7 @@ stof_doctrine_extensions:
             tree: true
             sluggable: true
             timestampable: true
-            loggable: true
+            loggable: false
             sortable: true
 
 twig:

@@ -37,9 +37,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'name' => '#sylius_tax_category_name',
             'code' => '#sylius_tax_category_code',
             'description' => '#sylius_tax_category_description',
+            'name' => '#sylius_tax_category_name',
         ]);
     }
 }

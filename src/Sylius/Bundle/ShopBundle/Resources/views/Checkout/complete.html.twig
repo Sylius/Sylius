@@ -6,6 +6,8 @@
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete'} %}
     <div class="ui padded segment">
+        {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
+
         {{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             {{ form_errors(form) }}
             <input type="hidden" name="_method" value="PUT" />

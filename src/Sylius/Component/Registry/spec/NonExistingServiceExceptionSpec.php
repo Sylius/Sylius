@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Registry;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Registry\NonExistingServiceException;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -25,7 +26,7 @@ final class NonExistingServiceExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Registry\NonExistingServiceException');
+        $this->shouldHaveType(NonExistingServiceException::class);
     }
 
     function it_is_an_exception()
@@ -35,7 +36,7 @@ final class NonExistingServiceExceptionSpec extends ObjectBehavior
 
     function it_is_an_invalid_argument_exception()
     {
-        $this->shouldHaveType('InvalidArgumentException');
+        $this->shouldHaveType(\InvalidArgumentException::class);
     }
 
     function it_should_show_the_context_and_available_services_in_the_message()

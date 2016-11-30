@@ -14,10 +14,10 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Product\Model\OptionInterface;
-use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Variation\Repository\OptionRepositoryInterface;
+use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -30,7 +30,7 @@ final class ProductOptionContext implements Context
     private $sharedStorage;
 
     /**
-     * @var OptionRepositoryInterface
+     * @var ProductOptionRepositoryInterface
      */
     private $productOptionRepository;
 
@@ -51,14 +51,14 @@ final class ProductOptionContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param OptionRepositoryInterface $productOptionRepository
+     * @param ProductOptionRepositoryInterface $productOptionRepository
      * @param FactoryInterface $productOptionFactory
      * @param FactoryInterface $productOptionValueFactory
      * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        OptionRepositoryInterface $productOptionRepository,
+        ProductOptionRepositoryInterface $productOptionRepository,
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
         ObjectManager $objectManager
@@ -87,7 +87,7 @@ final class ProductOptionContext implements Context
      * @Given /^(this product option) has(?:| also) the "([^"]+)" option value with code "([^"]+)"$/
      */
     public function thisProductOptionHasTheOptionValueWithCode(
-        OptionInterface $productOption,
+        ProductOptionInterface $productOption,
         $productOptionValueName,
         $productOptionValueCode
     ) {
@@ -101,7 +101,7 @@ final class ProductOptionContext implements Context
      * @param string $value
      * @param string $code
      *
-     * @return OptionValueInterface
+     * @return ProductOptionValueInterface
      */
     private function createProductOptionValue($value, $code)
     {

@@ -23,15 +23,10 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This class contains the configuration information for the bundle.
- *
- * This information is solely responsible for how the different configuration
- * sections are normalized, and merged.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -43,64 +38,14 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->scalarNode('sender_adapter')->defaultValue('sylius.email_sender.adapter.swiftmailer')->end()
                 ->scalarNode('renderer_adapter')->defaultValue('sylius.email_renderer.adapter.twig')->end()
             ->end()
         ;
 
-        $this->addResourcesSection($rootNode);
         $this->addEmailsSection($rootNode);
 
         return $treeBuilder;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $node
-     */
-    private function addResourcesSection(ArrayNodeDefinition $node)
-    {
-        $node
-            ->children()
-                ->arrayNode('resources')
-                    ->addDefaultsIfNotSet()
-                    ->children()
-                        ->arrayNode('email')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->variableNode('options')->end()
-                                ->arrayNode('classes')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('model')->defaultValue(Email::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(EmailInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                        ->arrayNode('form')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->scalarNode('default')->defaultValue(EmailType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('validation_groups')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                        ->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-            ->end()
-        ;
     }
 
     /**

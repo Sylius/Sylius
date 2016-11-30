@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Taxation\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Registry\ServiceRegistry;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
 
@@ -21,7 +22,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
  */
 final class DelegatingCalculatorSpec extends ObjectBehavior
 {
-    function let(ServiceRegistry $calculators, CalculatorInterface $calculator)
+    function let(ServiceRegistryInterface $calculators, CalculatorInterface $calculator)
     {
         $calculators->get('default')->willReturn($calculator);
 

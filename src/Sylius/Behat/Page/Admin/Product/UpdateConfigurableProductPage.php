@@ -12,11 +12,11 @@
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
-use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Templating\Tests\Storage\FileStorageTest;
 use Webmozart\Assert\Assert;
 
 /**
@@ -84,6 +84,107 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     /**
      * {@inheritdoc}
      */
+    public function isImageWithCodeDisplayed($code)
+    {
+        $imageElement = $this->getImageElementByCode($code);
+
+        if (null === $imageElement) {
+            return false;
+        }
+
+        $imageUrl = $imageElement->find('css', 'img')->getAttribute('src');
+        $this->getDriver()->visit($imageUrl);
+        $pageText = $this->getDocument()->getText();
+        $this->getDriver()->back();
+
+        return false === stripos($pageText, '404 Not Found');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attachImage($path, $code = null)
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $filesPath = $this->getParameter('files_path');
+
+        $this->getDocument()->clickLink('Add');
+
+        $imageForm = $this->getLastImageElement();
+        if (null !== $code) {
+            $imageForm->fillField('Code', $code);
+        }
+
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changeImageWithCode($code, $path)
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        $imageForm = $this->getImageElementByCode($code);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeImageWithCode($code)
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $imageElement = $this->getImageElementByCode($code);
+        $imageElement->clickLink('Delete');
+    }
+
+    public function removeFirstImage()
+    {
+        $imageElement = $this->getFirstImageElement();
+        $imageElement->clickLink('Delete');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countImages()
+    {
+        $imageElements = $this->getImageElements();
+
+        return count($imageElements);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isImageCodeDisabled()
+    {
+        return 'disabled' === $this->getLastImageElement()->findField('Code')->getAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getValidationMessageForImage()
+    {
+        $this->clickTabIfItsNotActive('media');
+
+        $imageForm = $this->getLastImageElement();
+
+        $foundElement = $imageForm->find('css', '.sylius-validation-error');
+        if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
+        }
+
+        return $foundElement->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');
@@ -96,11 +197,13 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_code',
+            'images' => '#sylius_product_images',
+            'name' => '#sylius_product_translations_en_US_name',
             'options' => '#sylius_product_options',
             'price' => '#sylius_product_variant_price',
-            'name' => '#sylius_product_translations_en_US_name',
             'search' => '.ui.fluid.search.selection.dropdown',
-            'search_item_selected' => 'div.menu > div.item.selected',            
+            'search_item_selected' => 'div.menu > div.item.selected',
+            'tab' => '.menu [data-tab="%name%"]',
             'taxonomy' => 'a[data-tab="taxonomy"]',
         ]);
     }
@@ -108,5 +211,67 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     private function openTaxonBookmarks()
     {
         $this->getElement('taxonomy')->click();
+    }
+
+    /**
+     * @param string $tabName
+     */
+    private function clickTabIfItsNotActive($tabName)
+    {
+        $attributesTab = $this->getElement('tab', ['%name%' => $tabName]);
+        if (!$attributesTab->hasClass('active')) {
+            $attributesTab->click();
+        }
+    }
+
+    /**
+     * @param string $code
+     *
+     * @return NodeElement
+     */
+    private function getImageElementByCode($code)
+    {
+        $images = $this->getElement('images');
+        $inputCode = $images->find('css', 'input[value="'.$code.'"]');
+
+        if (null === $inputCode) {
+            return null;
+        }
+
+        return $inputCode->getParent()->getParent()->getParent();
+    }
+
+    /**
+     * @return NodeElement[]
+     */
+    private function getImageElements()
+    {
+        $images = $this->getElement('images');
+
+        return $images->findAll('css', 'div[data-form-collection="item"]');
+    }
+
+    /**
+     * @return NodeElement
+     */
+    private function getLastImageElement()
+    {
+        $imageElements = $this->getImageElements();
+
+        Assert::notEmpty($imageElements);
+
+        return end($imageElements);
+    }
+
+    /**
+     * @return NodeElement
+     */
+    private function getFirstImageElement()
+    {
+        $imageElements = $this->getImageElements();
+
+        Assert::notEmpty($imageElements);
+
+        return reset($imageElements);
     }
 }

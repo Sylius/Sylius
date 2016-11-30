@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Order\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\AdjustableInterface;
+use Sylius\Component\Order\Model\Adjustment;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
@@ -26,10 +27,10 @@ final class AdjustmentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Order\Model\Adjustment');
+        $this->shouldHaveType(Adjustment::class);
     }
 
-    function it_implements_Sylius_adjustment_interface()
+    function it_implements_an_adjustment_interface()
     {
         $this->shouldImplement(AdjustmentInterface::class);
     }
@@ -86,12 +87,12 @@ final class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn(null);
     }
 
-    function it_throws_exception_during_not_supported_adjustable_class_set(AdjustableInterface $adjustable)
+    function it_throws_an_exception_during_not_supported_adjustable_class_set(AdjustableInterface $adjustable)
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('setAdjustable', [$adjustable]);
     }
 
-    function it_throws_exception_during_adjustable_change_on_locked_adjustment(
+    function it_throws_an_exception_during_adjustable_change_on_locked_adjustment(
         OrderItemInterface $orderItem,
         OrderItemInterface $otherOrderItem
     ) {
@@ -233,7 +234,7 @@ final class AdjustmentSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function it_has_no_last_update_date_by_default()

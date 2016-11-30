@@ -17,7 +17,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PropertyAccessDataExtractor implements DataExtractorInterface
+final class PropertyAccessDataExtractor implements DataExtractorInterface
 {
     /**
      * @var PropertyAccessorInterface

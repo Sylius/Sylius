@@ -49,7 +49,7 @@ sylius:
             not_blank: Prosím zadajte kód zóny.
             unique: Kód zóny musí byť jedinečný.
         members:
-            min_count: 'Prosím pridajte zóne aspoň {{ limit }} členov.'
+            min_count: Prosím pridajte zóne aspoň {{ limit }} členov.
         name:
             max_length: Názov zóny nesmie byť dlhší ako 255 znakov|Názov zóny nesmie byť dlhší ako 255 znakov.
             min_length: Názov zóny musí mať minimálne 2 znaky|Názov zóny musí mať minimálne 2 znaky.

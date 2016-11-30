@@ -53,7 +53,6 @@ final class CustomerContext implements Context
 
         $this->customerShowPage->open(['id' => $customer->getId()]);
 
-
         try {
             $this->customerShowPage->deleteAccount();
         } catch (ElementNotFoundException $exception) {

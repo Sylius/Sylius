@@ -3,9 +3,10 @@ Models
 
 All the models of this bundle are defined in ``Sylius\Component\Promotion\Model``.
 
-Rule
-----
-A ``Rule`` is used to check if your order is eligible to the promotion. A promotion can have none, one or several rules. ``SyliusPromotionBundle`` comes with 2 types of rules :
+PromotionRule
+-------------
+
+A ``PromotionRule`` is used to check if your order is eligible to the promotion. A promotion can have none, one or several rules. ``SyliusPromotionBundle`` comes with 2 types of rules :
 
  - cart quantity rule : quantity of the order is checked
  - item total rule : the amount of the order is checked
@@ -13,10 +14,10 @@ A ``Rule`` is used to check if your order is eligible to the promotion. A promot
 A rule is configured via the ``configuration`` attribute which is an array serialized into database. For cart quantity rules, you have to configure the ``count`` key, whereas the ``amount`` key is used for item total rules.
 Configuration is always strict, which means, that if you set ``count`` to **4** for cart quantity rule, orders with equal or more than **4** quantity will be eligible.
 
-Action
-------
+PromotionAction
+---------------
 
-An ``Action`` defines the the nature of the discount. Common actions are :
+An ``PromotionAction`` defines the the nature of the discount. Common actions are :
 
 - percentage discount
 - fixed amount discount

@@ -11,17 +11,14 @@
 
 namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Test;
 
-use org\bovigo\vfs\vfsStreamWrapper as VfsStreamWrapper;
 use org\bovigo\vfs\vfsStreamDirectory as VfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper as VfsStreamWrapper;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManager;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 
 /**
- * @mixin TestThemeConfigurationManager
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TestThemeConfigurationManagerSpec extends ObjectBehavior
@@ -41,7 +38,7 @@ final class TestThemeConfigurationManagerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManager');
+        $this->shouldHaveType(TestThemeConfigurationManager::class);
     }
 
     function it_implements_test_configuration_manager_interface()

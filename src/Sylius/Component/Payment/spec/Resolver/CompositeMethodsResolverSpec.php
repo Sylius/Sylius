@@ -12,12 +12,11 @@
 namespace spec\Sylius\Component\Payment\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\Resolver\CompositeMethodsResolver;
 use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -31,7 +30,7 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Payment\Resolver\CompositeMethodsResolver');
+        $this->shouldHaveType(CompositeMethodsResolver::class);
     }
 
     function it_implements_Sylius_payment_methods_resolver_interface()

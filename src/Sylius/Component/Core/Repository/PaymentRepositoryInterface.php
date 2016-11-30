@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Repository;
 
-use Pagerfanta\Pagerfanta;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -21,18 +20,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface PaymentRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param array|null $criteria
-     * @param array|null $sorting
-     *
-     * @return Pagerfanta
-     */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null);
-
-    /**
-     * @param mixed $orderId
      * @param mixed $id
+     * @param mixed $orderId
      *
      * @return PaymentInterface|null
      */
-    public function findByOrderIdAndId($orderId, $id);
+    public function findOneByOrderId($id, $orderId);
 }

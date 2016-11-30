@@ -12,27 +12,24 @@
 namespace spec\Sylius\Component\Customer\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Customer\Model\Customer;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\Customer\Model\GroupableInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class CustomerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Customer\Model\Customer');
+        $this->shouldHaveType(Customer::class);
     }
 
     function it_implements_customer_interface()
     {
         $this->shouldImplement(CustomerInterface::class);
-    }
-
-    function it_implements_groupable_interface()
-    {
-        $this->shouldImplement(GroupableInterface::class);
     }
 
     function it_sets_email()
@@ -96,5 +93,16 @@ final class CustomerSpec extends ObjectBehavior
         $this->setGender(CustomerInterface::MALE_GENDER);
         $this->isFemale()->shouldReturn(false);
         $this->isMale()->shouldReturn(true);
+    }
+
+    function it_has_no_group_by_default()
+    {
+        $this->getGroup()->shouldReturn(null);
+    }
+
+    function its_group_is_mutable(CustomerGroupInterface $group)
+    {
+        $this->setGroup($group);
+        $this->getGroup()->shouldReturn($group);
     }
 }

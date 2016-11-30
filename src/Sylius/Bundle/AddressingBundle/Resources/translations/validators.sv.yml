@@ -49,7 +49,7 @@ sylius:
             not_blank: Var god skriv in en zonkod.
             unique: Zonkoden måste vara unik.
         members:
-            min_count: 'Lägg till minst {{ limit }} zonmedlem.'
+            min_count: Lägg till minst {{ limit }} zonmedlem.
         name:
             max_length: Zonnamn får inte vara längre än 255 tecken|Zonnamn får inte vara längre än 255 tecken.
             min_length: Zonnamnet måste innehålla minst 2 tecken|Zonnamnet måste innehålla minst 2 tecken.

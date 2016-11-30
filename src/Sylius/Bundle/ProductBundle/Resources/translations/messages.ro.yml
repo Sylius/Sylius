@@ -10,8 +10,15 @@ sylius:
             options: Opţiuni
             meta_keywords: Meta cuvinte cheie
             meta_description: Meta descriere
-            taxons: Categorii
         product_variant:
             available_on: Disponibil din
         association_type:
             name: Nume
+        variant:
+            name: Nume
+        option:
+            name: Nume
+            values: Valori posibile
+        option_value:
+            add_value: Adaugă valoare
+            value: Valoare

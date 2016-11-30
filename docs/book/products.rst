@@ -145,7 +145,7 @@ After you have an Option created and you keep it as ``$option`` variable let's a
 
      // Having option of a product you can generate variants. Sylius has a service for that operation.
      /** @var VariantGeneratorInterface $variantGenerator */
-     $variantGenerator = $this->get('sylius.generator.variant');
+     $variantGenerator = $this->get('sylius.generator.product_variant');
 
      $variantGenerator->generate($product);
 
@@ -160,5 +160,3 @@ Learn more:
 
 * :doc:`Product - Bundle Documentation </bundles/SyliusProductBundle/index>`
 * :doc:`Product - Component Documentation </components/Product/index>`
-* :doc:`Variation- Bundle Documentation </bundles/SyliusVariationBundle/index>`
-* :doc:`Variation - Component Documentation </components/Variation/index>`

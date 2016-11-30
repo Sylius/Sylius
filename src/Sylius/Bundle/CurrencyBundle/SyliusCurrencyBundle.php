@@ -11,16 +11,26 @@
 
 namespace Sylius\Bundle\CurrencyBundle;
 
+use Sylius\Bundle\CurrencyBundle\DependencyInjection\Compiler\CompositeCurrencyContextPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Currency bundle.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusCurrencyBundle extends AbstractResourceBundle
+final class SyliusCurrencyBundle extends AbstractResourceBundle
 {
+    /**
+     * @inheritDoc
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new CompositeCurrencyContextPass());
+    }
+
     /**
      * {@inheritdoc}
      */

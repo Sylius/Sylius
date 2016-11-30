@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Inventory\Operator\InsufficientStockException;
+use Sylius\Component\Inventory\Exception\InsufficientStockException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
@@ -26,22 +26,22 @@ final class InsufficientStockExceptionListener
     /**
      * @var UrlGeneratorInterface
      */
-    protected $router;
+    private $router;
 
     /**
      * @var SessionInterface
      */
-    protected $session;
+    private $session;
 
     /**
      * @var TranslatorInterface
      */
-    protected $translator;
+    private $translator;
 
     /**
      * @var string
      */
-    protected $redirectTo;
+    private $redirectTo;
 
     /**
      * @param UrlGeneratorInterface $router
@@ -75,7 +75,7 @@ final class InsufficientStockExceptionListener
         $this->session->getBag('flashes')->add(
             'notice',
             $this->translator->trans(
-                'sylius.checkout.out_of_stock',
+                'sylius.product.out_of_stock',
                 [
                     '%quantity%' => $exception->getStockable()->getOnHand(),
                     '%name%' => $exception->getStockable()->getInventoryName(),

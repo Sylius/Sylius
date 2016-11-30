@@ -16,7 +16,7 @@ use Doctrine\Common\Inflector\Inflector;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Metadata implements MetadataInterface
+final class Metadata implements MetadataInterface
 {
     /**
      * @var string

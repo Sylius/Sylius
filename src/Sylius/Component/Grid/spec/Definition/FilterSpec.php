@@ -11,13 +11,10 @@
 
 namespace spec\Sylius\Component\Grid\Definition;
 
-use Sylius\Component\Grid\Definition\Filter;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Component\Grid\Definition\Filter;
 
 /**
- * @mixin Filter
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class FilterSpec extends ObjectBehavior
@@ -29,7 +26,7 @@ final class FilterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Definition\Filter');
+        $this->shouldHaveType(Filter::class);
     }
 
     function it_has_name()
@@ -48,6 +45,17 @@ final class FilterSpec extends ObjectBehavior
 
         $this->setLabel('Search by keyword');
         $this->getLabel()->shouldReturn('Search by keyword');
+    }
+
+    function it_has_no_template_by_default()
+    {
+        $this->getTemplate()->shouldReturn(null);
+    }
+
+    function its_template_is_mutable()
+    {
+        $this->setTemplate('SyliusGridBundle:Filter:template.html.twig');
+        $this->getTemplate()->shouldReturn('SyliusGridBundle:Filter:template.html.twig');
     }
 
     function it_has_no_options_by_default()

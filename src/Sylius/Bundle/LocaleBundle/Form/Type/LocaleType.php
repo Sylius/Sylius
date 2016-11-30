@@ -12,12 +12,13 @@
 namespace Sylius\Bundle\LocaleBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class LocaleType extends AbstractResourceType
+final class LocaleType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -25,10 +26,10 @@ class LocaleType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('code', 'locale', [
+            ->add('code', \Symfony\Component\Form\Extension\Core\Type\LocaleType::class, [
                 'label' => 'sylius.form.locale.name',
             ])
-            ->add('enabled', 'checkbox', [
+            ->add('enabled', CheckboxType::class, [
                 'label' => 'sylius.form.locale.enabled',
             ])
         ;
@@ -37,7 +38,7 @@ class LocaleType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_locale';
     }

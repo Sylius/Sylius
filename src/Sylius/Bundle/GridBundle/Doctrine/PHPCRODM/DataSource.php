@@ -11,15 +11,13 @@
 
 namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
-use Pagerfanta\Adapter\DoctrineORMAdapter;
-use Pagerfanta\Pagerfanta;
-use Sylius\Component\Grid\Data\DataSourceInterface;
-use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
-use Sylius\Component\Grid\Parameters;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
 use Pagerfanta\Adapter\DoctrineODMPhpcrAdapter;
+use Pagerfanta\Pagerfanta;
+use Sylius\Component\Grid\Data\DataSourceInterface;
+use Sylius\Component\Grid\Parameters;
 
-class DataSource implements DataSourceInterface
+final class DataSource implements DataSourceInterface
 {
     /**
      * @var QueryBuilder
@@ -79,7 +77,7 @@ class DataSource implements DataSourceInterface
     {
         $orderBy = $this->queryBuilder->orderBy();
         foreach ($this->expressionBuilder->getOrderBys() as $field => $direction) {
-            if (is_integer($field)) {
+            if (is_int($field)) {
                 $field = $direction;
                 $direction = 'asc';
             }

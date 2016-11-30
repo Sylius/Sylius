@@ -1,0 +1,49 @@
+{% import 'SyliusUiBundle:Macro:pagination.html.twig' as pagination %}
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+{% import 'SyliusUiBundle:Macro:sorting.html.twig' as sorting %}
+
+{% set definition = grid.definition %}
+{% set data = grid.data %}
+
+{% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
+{% if data|length > 0 %}
+    <table class="ui sortable table" id="sylius-customer-orders">
+        <thead>
+        <tr>
+            {% for field in definition.fields %}
+                {% if field.isSortable %}
+                    {{ sorting.tableHeader(grid, field, app.request.attributes) }}
+                {% else %}
+                    <th class="sylius-table-column-{{ field.name }}">{{ field.label|trans }}</th>
+                {% endif %}
+            {% endfor %}
+            {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+                <th></th>
+            {% endif %}
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in data %}
+            <tr>
+                {% for field in definition.fields %}
+                    <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
+                {% endfor %}
+                {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+                    <td>
+                        <div class="ui buttons">
+                            {% for action in definition.getActions('item') %}
+                                {{ sylius_grid_render_action(grid, action, row) }}
+                            {% endfor %}
+                        </div>
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
+{% endif %}
+
+{{ pagination.render(data) }}

@@ -6,3 +6,6 @@
 
 /phpspec.yml
 /phpunit.xml
+
+/test/app/cache/
+/test/app/logs/

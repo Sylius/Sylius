@@ -3,7 +3,7 @@
 
 sylius:
     form:
-        group:
-            name: Ime
         customer:
             phone_number: Broj telefona
+        customer_group:
+            name: Ime

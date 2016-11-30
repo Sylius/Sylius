@@ -13,35 +13,31 @@ namespace Sylius\Bundle\GridBundle\Form\Type\Filter;
 
 use Sylius\Component\Grid\Filter\BooleanFilter;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BooleanFilterType extends AbstractType
+final class BooleanFilterType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
+                'choices' => [
+                    'sylius.ui.yes_label' => BooleanFilter::TRUE,
+                    'sylius.ui.no_label' => BooleanFilter::FALSE,
+                ],
                 'data_class' => null,
                 'required' => false,
-                'empty_value' => 'sylius.ui.all',
-                'choices' => [
-                    BooleanFilter::TRUE => 'sylius.ui.yes',
-                    BooleanFilter::FALSE => 'sylius.ui.no',
-                ],
+                'placeholder' => 'sylius.ui.all',
             ])
-            ->setOptional([
-                'field'
-            ])
-            ->setAllowedTypes([
-                'field' => ['string']
-            ])
+            ->setDefined('field')
+            ->setAllowedTypes('field', 'string')
         ;
     }
 
@@ -50,13 +46,13 @@ class BooleanFilterType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_grid_filter_boolean';
     }

@@ -25,6 +25,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
 {
     const DEFAULT_CHANNEL_NAME = 'Default';
     const DEFAULT_CHANNEL_CODE = 'DEFAULT';
+    const DEFAULT_CHANNEL_CURRENCY = 'USD';
 
     /**
      * @var ChannelFactoryInterface
@@ -59,11 +60,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     /**
      * @var string
      */
-    private $defaultCurrencyCode;
-
-    /**
-     * @var string
-     */
     private $defaultLocaleCode;
 
     /**
@@ -73,7 +69,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
      * @param RepositoryInterface $channelRepository
      * @param RepositoryInterface $currencyRepository
      * @param RepositoryInterface $localeRepository
-     * @param string $defaultCurrencyCode
      * @param string $defaultLocaleCode
      */
     public function __construct(
@@ -83,7 +78,6 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         RepositoryInterface $channelRepository,
         RepositoryInterface $currencyRepository,
         RepositoryInterface $localeRepository,
-        $defaultCurrencyCode,
         $defaultLocaleCode
     ) {
         $this->channelFactory = $channelFactory;
@@ -92,16 +86,15 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         $this->channelRepository = $channelRepository;
         $this->currencyRepository = $currencyRepository;
         $this->localeRepository = $localeRepository;
-        $this->defaultCurrencyCode = $defaultCurrencyCode;
         $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function create($code = null, $name = null)
+    public function create($code = null, $name = null, $currencyCode = null)
     {
-        $currency = $this->provideCurrency();
+        $currency = $this->provideCurrency($currencyCode);
         $locale = $this->provideLocale();
 
         /** @var ChannelInterface $channel */
@@ -110,7 +103,7 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
         $channel->setTaxCalculationStrategy('order_items_based');
 
         $channel->addCurrency($currency);
-        $channel->setDefaultCurrency($currency);
+        $channel->setBaseCurrency($currency);
 
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);
@@ -125,17 +118,20 @@ final class DefaultChannelFactory implements DefaultChannelFactoryInterface
     }
 
     /**
+     * @param string|null $currencyCode
+     *
      * @return CurrencyInterface
      */
-    private function provideCurrency()
+    private function provideCurrency($currencyCode = null)
     {
+        $currencyCode = (null === $currencyCode) ? self::DEFAULT_CHANNEL_CURRENCY : $currencyCode;
+
         /** @var CurrencyInterface $currency */
-        $currency = $this->currencyRepository->findOneBy(['code' => $this->defaultCurrencyCode]);
+        $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
 
         if (null === $currency) {
             $currency = $this->currencyFactory->createNew();
-            $currency->setCode($this->defaultCurrencyCode);
-            $currency->setExchangeRate(1.00);
+            $currency->setCode($currencyCode);
 
             $this->currencyRepository->add($currency);
         }

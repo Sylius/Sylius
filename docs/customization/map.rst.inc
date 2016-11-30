@@ -5,3 +5,6 @@
 * :doc:`/customization/validation`
 * :doc:`/customization/menu`
 * :doc:`/customization/template`
+* :doc:`/customization/translation`
+* :doc:`/customization/flash`
+* :doc:`/customization/state_machine`

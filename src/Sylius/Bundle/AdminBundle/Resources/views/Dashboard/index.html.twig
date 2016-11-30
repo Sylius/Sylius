@@ -6,7 +6,7 @@
 
 {% block content %}
 {{ headers.default('sylius.ui.dashboard'|trans, 'home', 'sylius.ui.overview_of_your_store'|trans) }}
-
+    {{ render(url('sylius_admin_partial_channel_index', {'template': '@SyliusAdmin/Dashboard/Partial/_chooseChannel.html.twig'})) }}
 {% include '@SyliusAdmin/Dashboard/_menu.html.twig' %}
 {% include '@SyliusAdmin/Dashboard/_statistics.html.twig' %}
 
@@ -15,7 +15,7 @@
         {{ render(url('sylius_admin_partial_customer_latest', {'count': 5, 'template': '@SyliusAdmin/Dashboard/_customers.html.twig'})) }}
     </div>
     <div class="column">
-        {{ render(url('sylius_admin_partial_order_latest', {'count': 5, 'template': '@SyliusAdmin/Dashboard/_orders.html.twig'})) }}
+        {{ render(path('sylius_admin_partial_order_latest_in_channel', {'channelCode': channel.code, 'count': 5, 'template': '@SyliusAdmin/Dashboard/_orders.html.twig'})) }}
     </div>
 </div>
 

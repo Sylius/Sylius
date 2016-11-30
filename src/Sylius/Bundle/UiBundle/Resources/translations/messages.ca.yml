@@ -4,11 +4,13 @@
 sylius:
     form:
         login:
-            username: "Nom d'usuari"
+            username: Nom d'usuari
             password: Contrasenya
         option:
             name: Nom
     ui:
+        add_member: Afegeix un membre
+        add_province: Afegeix una província
         add_to_cart: Afegir a la cistella
         administration_dashboard: Quadre de comandament
         all_your_addresses: Totes les teves adreces
@@ -20,23 +22,22 @@ sylius:
         code: Codi
         company: Empresa
         completed: Completat
+        country: País
         coupon: Cupó
         create_a_new_address: Crea una nova adreça
         currency: Moneda
         current_stock: Stock actual
         default_billing_address: Adreça de facturació per defecte
-        default_currency: Moneda predeterminada
-        default_shipping_address: "Adreça d'enviament per defecte"
+        default_shipping_address: Adreça d'enviament per defecte
         delete: Suprimir
         description: Descripció
         edit: Editar
         edit_my_address: Editar la meva adreça
         email: Correu electrònic
         enabled: Activat
-        failed: "S'ha produït un error"
+        failed: S'ha produït un error
         first_name: Nom
         gateway: Pasarel·la
-        groups: Grups
         id: ID
         image: Imatge
         images: Imatges
@@ -52,9 +53,8 @@ sylius:
         name: Nom
         new: Nou
         next: Següent
-        "no": false
         no_default_billing_address: Cap adreça de facturació per defecte
-        no_default_shipping_address: "Cap adreça d'enviament per defecte"
+        no_default_shipping_address: Cap adreça d'enviament per defecte
         number: Nombre
         number_of_orders: Número de comandes
         order_details: Detalls de la teva comanda
@@ -72,26 +72,26 @@ sylius:
         province: Província
         provinces: Províncies
         roles: Rols
-        scope: "Àmbit d'aplicació"
+        scope: Àmbit d'aplicació
         search: Cerca
         set_as_default_billing_address: Estableix com adreça de facturació per defecte
-        set_as_default_shipping_address: "Estableix com adreça d'enviament per defecte"
-        shipping_address: "Adreça d'enviament"
-        shipping_category: "Categoria d'enviament"
+        set_as_default_shipping_address: Estableix com adreça d'enviament per defecte
+        shipping_address: Adreça d'enviament
+        shipping_category: Categoria d'enviament
         sku: SKU
         street: Carrer
         success: Realitzat amb èxit
-        tax_category: "Categoria d'impost"
+        tax_category: Categoria d'impost
         title: Títol
         tracking_number: Número de seguiment
+        type: Tipus
         unit_price: Preu per unitat
         unknown: Desconegut
-        username: "Nom d'usuari"
+        username: Nom d'usuari
         variant: Variant
         variant_selection_method: Mètode de selecció de variant
         void: Buit
         warning: Avís
         welcome_to_your_space: Benvingut al teu espai
-        "yes": true
         you_are_customer_since: Ets client des de
         zone: Zona

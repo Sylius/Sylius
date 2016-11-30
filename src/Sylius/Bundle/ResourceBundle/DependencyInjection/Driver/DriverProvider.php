@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class DriverProvider
+final class DriverProvider
 {
     /**
      * @var DriverInterface[]

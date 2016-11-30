@@ -13,6 +13,7 @@ sylius:
             postcode: Posta kodu
             street: Sokak
             province: Eyalet
+            zone: Bölge
         country:
             add_province: Bölge ekleme
             name: Ülke adı
@@ -21,6 +22,7 @@ sylius:
             enabled: Etkin
         province:
             name: Ad
+            abbreviation: Kısaltma
             select: Seçiniz
         zone:
             add_member: Üye ekle

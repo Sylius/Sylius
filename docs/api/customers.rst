@@ -237,10 +237,6 @@ Definition
 +---------------+----------------+-------------------------------------------------------------------+
 | id            | url attribute  | Id of requested resource                                          |
 +---------------+----------------+-------------------------------------------------------------------+
-| page          | query          | *(optional)* Number of the page, by default = 1                   |
-+---------------+----------------+-------------------------------------------------------------------+
-| limit         | query          | *(optional)* Number of items to display per page, by default = 10 |
-+---------------+----------------+-------------------------------------------------------------------+
 
 Example
 .......
@@ -276,7 +272,7 @@ Example Response
         "first_name":"Levi",
         "last_name":"Friesen",
         "gender":"u",
-        "groups":[
+        "group":[
 
         ]
     }
@@ -360,7 +356,7 @@ Example Response
         "first_name":"John",
         "last_name":"Diggle",
         "gender":"m",
-        "groups":[
+        "group":[
 
         ]
     }
@@ -414,7 +410,7 @@ Example Response
                         "Please choose your gender."
                     ]
                 },
-                "groups":{
+                "group":{
 
                 }
             }
@@ -533,7 +529,7 @@ Example Response
                         "Please choose your gender."
                     ]
                 },
-                "groups":{
+                "group":{
 
                 }
             }

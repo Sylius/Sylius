@@ -30,4 +30,5 @@ sylius:
             description: Aprašymas
             enabled: Įjungtas?
             gateway: Apmokėjimo kanalas
+            instructions: Instrukcijos
             name: Pavadinimas

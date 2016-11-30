@@ -18,12 +18,12 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\OAuth\UserProvider;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUser;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 

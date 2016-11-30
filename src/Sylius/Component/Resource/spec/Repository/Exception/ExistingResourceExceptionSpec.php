@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Resource\Repository\Exception;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Resource\Repository\Exception\ExistingResourceException;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -20,7 +21,7 @@ final class ExistingResourceExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Repository\Exception\ExistingResourceException');
+        $this->shouldHaveType(ExistingResourceException::class);
     }
 
     function it_extends_exception()

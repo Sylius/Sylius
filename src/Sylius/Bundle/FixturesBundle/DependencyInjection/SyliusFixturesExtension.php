@@ -40,20 +40,20 @@ final class SyliusFixturesExtension extends Extension implements PrependExtensio
      */
     public function prepend(ContainerBuilder $container)
     {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/driver'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $extensionsNamesToConfigurationFiles = [
             'doctrine' => 'doctrine/orm.xml',
-            'doctrine_mongodb' => 'doctrine/mongodb.xml',
-            'doctrine_phpcr' => 'doctrine/phpcr.xml',
+            'doctrine_mongodb' => 'doctrine/mongodb-odm.xml',
+            'doctrine_phpcr' => 'doctrine/phpcr-odm.xml',
         ];
-        
+
         foreach ($extensionsNamesToConfigurationFiles as $extensionName => $configurationFile) {
             if (!$container->hasExtension($extensionName)) {
                 continue;
             }
-            
-            $loader->load($configurationFile);
+
+            $loader->load('services/integrations/' . $configurationFile);
         }
     }
 

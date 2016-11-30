@@ -11,45 +11,40 @@
 
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
-use Sylius\Bundle\MoneyBundle\Templating\Helper\PriceHelperInterface;
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Templating\Helper\Helper;
+use Webmozart\Assert\Assert;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PriceHelper extends Helper implements PriceHelperInterface
+class PriceHelper extends Helper
 {
     /**
-     * @var PriceHelperInterface
+     * @var ProductVariantPriceCalculatorInterface
      */
-    private $decoratedHelper;
+    private $productVariantPriceCalculator;
 
     /**
-     * @var CurrencyContextInterface
+     * @param ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
      */
-    private $currencyContext;
-
-    /**
-     * @param PriceHelperInterface $decoratedHelper
-     * @param CurrencyContextInterface $currencyContext
-     */
-    public function __construct(
-        PriceHelperInterface $decoratedHelper,
-        CurrencyContextInterface $currencyContext
-    ) {
-        $this->decoratedHelper = $decoratedHelper;
-        $this->currencyContext = $currencyContext;
+    public function __construct(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
+    {
+        $this->productVariantPriceCalculator = $productVariantPriceCalculator;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function convertAndFormatAmount($amount, $currencyCode = null, $exchangeRate = null, $locale = null)
+    public function getPrice(ProductVariantInterface $productVariant, array $context)
     {
-        $currencyCode = $currencyCode ?: $this->currencyContext->getCurrencyCode();
+        Assert::keyExists($context, 'channel');
 
-        return $this->decoratedHelper->convertAndFormatAmount($amount, $currencyCode, $exchangeRate, $locale);
+        return $this
+            ->productVariantPriceCalculator
+            ->calculate($productVariant, $context)
+        ;
     }
 
     /**
@@ -57,6 +52,6 @@ class PriceHelper extends Helper implements PriceHelperInterface
      */
     public function getName()
     {
-        return 'sylius_price';
+        return 'sylius_calculate_price';
     }
 }

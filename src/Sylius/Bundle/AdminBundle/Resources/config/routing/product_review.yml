@@ -1,0 +1,40 @@
+sylius_admin_product_review:
+    resource: |
+        alias: sylius.product_review
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show', 'create']
+        redirect: update
+        grid: sylius_admin_product_review
+        vars:
+            all:
+                subheader: sylius.ui.manage_reviews_of_your_products
+                templates:
+                    form: SyliusAdminBundle:ProductReview:_form.html.twig
+            index:
+                icon: newspaper
+    type: sylius.resource
+
+sylius_admin_product_review_accept:
+    path: /product-review/{id}/accept
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product_review
+                transition: accept
+            redirect: referer
+            flash: sylius.review.accept
+
+sylius_admin_product_review_reject:
+    path: /product-review/{id}/reject
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.product_review:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_product_review
+                transition: reject
+            redirect: referer
+            flash: sylius.review.reject

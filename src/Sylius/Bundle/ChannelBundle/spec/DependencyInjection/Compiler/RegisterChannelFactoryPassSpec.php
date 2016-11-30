@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\RegisterChannelFactoryPass;
 use Sylius\Component\Channel\Factory\ChannelFactory;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -26,7 +27,7 @@ final class RegisterChannelFactoryPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\RegisterChannelFactoryPass');
+        $this->shouldHaveType(RegisterChannelFactoryPass::class);
     }
 
     function it_implements_compiler_pass_interface()
@@ -34,9 +35,8 @@ final class RegisterChannelFactoryPassSpec extends ObjectBehavior
         $this->shouldImplement(CompilerPassInterface::class);
     }
 
-    function it_creates_default_definition_of_channel_factory(
-        ContainerBuilder $container
-    ) {
+    function it_creates_default_definition_of_channel_factory(ContainerBuilder $container)
+    {
         $container->hasDefinition('sylius.factory.channel')->willReturn(true);
 
         $baseChannelFactoryDefinition = new Definition(

@@ -46,9 +46,11 @@ sylius:
             calculator: Rechner
             category: Kategorie
             category_requirement: Kategorievoraussetzungen
+            channels: Ausgabekanäle
             configuration: Einstellung
             description: Beschreibung
             enabled: Aktiviert
             name: Name
             tax_category: Steuerkategorie
             translations: Übersetzungen
+            position: Position

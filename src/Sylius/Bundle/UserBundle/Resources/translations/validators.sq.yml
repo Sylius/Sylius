@@ -12,5 +12,5 @@ sylius:
             mismatch: Fjalëkalimi i futur nuk përputhet
             wrong_current: Fjalëkalimi i shtuar është ndryshe nga ai egzistues.
         password:
-            min: 'Fjalekalimi duhet të përmbajë të paktën {{ limit }} karaktere.'
-            max: 'Fjalekalimi nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
+            min: Fjalekalimi duhet të përmbajë të paktën {{ limit }} karaktere.
+            max: Fjalekalimi nuk duhet të përmbajë më shumë se {{ limit }} karaktere.

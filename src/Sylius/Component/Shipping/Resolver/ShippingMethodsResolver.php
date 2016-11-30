@@ -18,17 +18,17 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShippingMethodsResolver implements ShippingMethodsResolverInterface
+final class ShippingMethodsResolver implements ShippingMethodsResolverInterface
 {
     /**
      * @var ObjectRepository
      */
-    protected $shippingMethodRepository;
+    private $shippingMethodRepository;
 
     /**
      * @var ShippingMethodEligibilityCheckerInterface
      */
-    protected $eligibilityChecker;
+    private $eligibilityChecker;
 
     /**
      * @param ObjectRepository $shippingMethodRepository

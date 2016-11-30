@@ -37,13 +37,16 @@ class Locale implements LocaleInterface
         $this->createdAt = new \DateTime();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->getName();
     }
 
     /**
-     * @return int
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -71,6 +74,6 @@ class Locale implements LocaleInterface
      */
     public function getName($locale = null)
     {
-        return Intl::getLocaleBundle()->getLocaleName($this->code, $locale);
+        return Intl::getLocaleBundle()->getLocaleName($this->getCode(), $locale);
     }
 }

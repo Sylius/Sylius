@@ -25,10 +25,10 @@ sylius:
         province:
             valid: Veuillez sélectionner la province appropriée.
         street:
-            max_length: "L'adresse ne doit pas contenir plus de 255 caractères."
-            min_length: "L'adresse doit comporter au moins 2 caractères."
+            max_length: L'adresse ne doit pas contenir plus de 255 caractères.
+            min_length: L'adresse doit comporter au moins 2 caractères.
             not_blank: Veuillez entrer une adresse.
-        not_shippable: "Cette adresse n'est pas une destination d'envoi valide."
+        not_shippable: Cette adresse n'est pas une destination d'envoi valide.
     country:
         code:
             not_blank: Veuillez entrer le code ISO du pays.
@@ -49,7 +49,7 @@ sylius:
             not_blank: Merci de saisir le code de la zone.
             unique: Le code de la zone doit être unique.
         members:
-            min_count: 'Veuillez ajouter au moins {{limit}} zone(s) membre(s).'
+            min_count: Veuillez ajouter au moins {{limit}} zone(s) membre(s).
         name:
             max_length: Le nom de la zone ne doit pas dépasser les 255 caractères.
             min_length: Le nom doit comporter au moins 2 caractères|Le nom doit comporter au moins 2 caractères.

@@ -18,8 +18,6 @@ use Sylius\Behat\Service\SharedStorage;
 use Sylius\Behat\Service\SharedStorageInterface;
 
 /**
- * @mixin SharedStorage
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class SharedStorageSpec extends ObjectBehavior

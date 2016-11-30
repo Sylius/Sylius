@@ -12,13 +12,9 @@
 namespace Sylius\Bundle\ShippingBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ShippingBundle\Controller\ShipmentController;
-use Sylius\Bundle\ShippingBundle\Form\Type\RuleType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType;
-use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
 use Sylius\Component\Resource\Factory\Factory;
@@ -40,7 +36,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -81,24 +77,10 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Shipment::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ShipmentInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ShipmentController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                        ->arrayNode('form')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->scalarNode('default')->defaultValue(ShipmentType::class)->cannotBeEmpty()->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('validation_groups')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                        ->end()
+                                        ->scalarNode('form')->defaultValue(ShipmentType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()
@@ -131,22 +113,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
-                                        ->arrayNode('form')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->scalarNode('default')->defaultValue(ShippingMethodType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ShippingMethodChoiceType::class)->cannotBeEmpty()->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('validation_groups')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                        ->end()
+                                        ->scalarNode('form')->defaultValue(ShippingMethodType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('translation')
@@ -161,21 +128,7 @@ class Configuration implements ConfigurationInterface
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                                ->arrayNode('form')
-                                                    ->addDefaultsIfNotSet()
-                                                    ->children()
-                                                        ->scalarNode('default')->defaultValue(ShippingMethodTranslationType::class)->cannotBeEmpty()->end()
-                                                    ->end()
-                                                ->end()
-                                            ->end()
-                                        ->end()
-                                        ->arrayNode('validation_groups')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->arrayNode('default')
-                                                    ->prototype('scalar')->end()
-                                                    ->defaultValue(['sylius'])
-                                                ->end()
+                                                ->scalarNode('default')->defaultValue(ShippingMethodTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -194,22 +147,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                        ->arrayNode('form')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                 ->scalarNode('default')->defaultValue(ShippingCategoryType::class)->cannotBeEmpty()->end()
-                                                 ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('validation_groups')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                        ->end()
+                                        ->scalarNode('form')->defaultValue(ShippingCategoryType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                             ->end()

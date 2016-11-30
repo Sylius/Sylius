@@ -8,7 +8,6 @@ sylius:
                 catalog:
                     attributes: Thuộc tính
                     options: Tùy chọn
-                    products: Sản phẩm
                 configuration:
                     channels: Kênh
                     countries: Quốc gia
@@ -20,6 +19,7 @@ sylius:
                     promotions: Chương trình khuyến mãi
                 customers:
                     customers: Khách hàng
+                    groups: Nhóm
                     header: Khách hàng
                 sales:
                     orders: Đơn đặt hàng

@@ -13,24 +13,14 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class ZoneTypeChoiceType extends AbstractType
+final class ZoneTypeChoiceType extends AbstractType
 {
-    /**
-     * Default zone type choices.
-     *
-     * @var string[]
-     */
-    protected $choices = [
-        ZoneInterface::TYPE_COUNTRY => 'sylius.form.zone.types.country',
-        ZoneInterface::TYPE_PROVINCE => 'sylius.form.zone.types.province',
-        ZoneInterface::TYPE_ZONE => 'sylius.form.zone.types.zone',
-    ];
-
     /**
      * {@inheritdoc}
      */
@@ -38,8 +28,12 @@ class ZoneTypeChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
+                'choices' => [
+                    'sylius.form.zone.types.country' => ZoneInterface::TYPE_COUNTRY,
+                    'sylius.form.zone.types.province' => ZoneInterface::TYPE_PROVINCE,
+                    'sylius.form.zone.types.zone' => ZoneInterface::TYPE_ZONE,
+                ],
                 'label' => 'sylius.form.zone.type',
-                'choices' => $this->choices,
             ])
         ;
     }
@@ -49,13 +43,13 @@ class ZoneTypeChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_zone_type_choice';
     }

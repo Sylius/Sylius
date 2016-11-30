@@ -41,31 +41,25 @@ final class ProductContext implements Context
      */
     public function getProductByName($productName)
     {
-        $product = $this->productRepository->findOneByName($productName);
+        $products = $this->productRepository->findByName($productName, 'en_US');
 
-        Assert::notNull(
-            $product,
-            sprintf('Product with name "%s" does not exist', $productName)
+        Assert::eq(
+            1,
+            count($products),
+            sprintf('%d products has been found with name "%s".', count($products), $productName)
         );
 
-        return $product;
+        return $products[0];
     }
 
     /**
      * @Transform /^products "([^"]+)" and "([^"]+)"$/
      * @Transform /^products "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function getProductsByNames($firstProductName, $secondProductName, $thirdProductName = null)
+    public function getProductsByNames(...$productsNames)
     {
-        $products = [
-            $this->getProductByName($firstProductName),
-            $this->getProductByName($secondProductName),
-        ];
-
-        if (null !== $thirdProductName) {
-            $products[] = $this->getProductByName($thirdProductName);
-        }
-
-        return $products;
+        return array_map(function ($productName) {
+            return $this->getProductByName($productName);
+        }, $productsNames);
     }
 }

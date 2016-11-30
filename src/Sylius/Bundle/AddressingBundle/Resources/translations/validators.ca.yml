@@ -27,15 +27,20 @@ sylius:
             max_length: El carrer no pot tenir més de 255 caràcters|El carrer no pot tenir més de 255 caràcters.
             min_length: El carrer ha de tenir almenys 2 caràcters|El carrer ha de tenir almenys 2 caràcters.
             not_blank: Introdueix un carrer.
-        not_shippable: "Aquesta adreça no és una destinació d'enviament vàlida."
+        not_shippable: Aquesta adreça no és una destinació d'enviament vàlida.
+    country:
+        code:
+            not_blank: Introdueix el codi ISO de país.
     province:
+        code:
+            min_length: El codi de província ha de tenir almenys 2 caràcters| El codi de província ha de tenir almenys 2 caràcters.
         name:
             max_length: La província no pot tenir més de 255 caràcters|La província no pot tenir més de 255 caràcters.
             min_length: La província ha de tenir almenys 2 caràcters|La província ha de tenir almenys 2 caràcters.
             not_blank: Introdueix una província.
     zone:
         members:
-            min_count: 'Introdueix almenys {{ limit }} membres de zona.'
+            min_count: Introdueix almenys {{ limit }} membres de zona.
         name:
             max_length: La zona no pot tenir més de 255 caràcters|La zona no pot tenir més de 255 caràcters.
             not_blank: Introdueix una zona.

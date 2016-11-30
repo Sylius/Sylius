@@ -7,4 +7,3 @@ sylius_admin_partial_customer_latest:
                 method: findLatest
                 arguments: [$count]
             template: $template
-            permission: true

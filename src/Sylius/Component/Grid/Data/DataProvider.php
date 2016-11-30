@@ -19,7 +19,7 @@ use Sylius\Component\Grid\Sorting\SorterInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DataProvider implements DataProviderInterface
+final class DataProvider implements DataProviderInterface
 {
     /**
      * @var DataSourceProviderInterface

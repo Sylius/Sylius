@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
+final class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
 {
     const API_VERSION_HEADER = 'Accept';
     const API_GROUPS_HEADER = 'Accept';
@@ -26,7 +26,7 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
     const API_GROUPS_REGEXP = '/(g|groups)=(?P<groups>[a-z,_\s]+)/i';
 
     /**
-     * @var ParametersParser
+     * @var ParametersParserInterface
      */
     private $parametersParser;
 
@@ -41,11 +41,11 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
     private $defaultParameters;
 
     /**
-     * @param ParametersParser $parametersParser
+     * @param ParametersParserInterface $parametersParser
      * @param string $configurationClass
      * @param array $defaultParameters
      */
-    public function __construct(ParametersParser $parametersParser, $configurationClass, array $defaultParameters = [])
+    public function __construct(ParametersParserInterface $parametersParser, $configurationClass, array $defaultParameters = [])
     {
         $this->parametersParser = $parametersParser;
         $this->configurationClass = $configurationClass;
@@ -74,16 +74,12 @@ class RequestConfigurationFactory implements RequestConfigurationFactoryInterfac
     {
         $parameters = [];
 
-        if ($request->headers->has(self::API_VERSION_HEADER)) {
-            if (preg_match(self::API_VERSION_REGEXP, $request->headers->get(self::API_VERSION_HEADER), $matches)) {
-                $parameters['serialization_version'] = $matches['version'];
-            }
+        if (preg_match(self::API_VERSION_REGEXP, $request->headers->get(self::API_VERSION_HEADER), $matches)) {
+            $parameters['serialization_version'] = $matches['version'];
         }
 
-        if ($request->headers->has(self::API_GROUPS_HEADER)) {
-            if (preg_match(self::API_GROUPS_REGEXP, $request->headers->get(self::API_GROUPS_HEADER), $matches)) {
-                $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
-            }
+        if (preg_match(self::API_GROUPS_REGEXP, $request->headers->get(self::API_GROUPS_HEADER), $matches)) {
+            $parameters['serialization_groups'] = array_map('trim', explode(',', $matches['groups']));
         }
 
         return array_merge($request->attributes->get('_sylius', []), $parameters);

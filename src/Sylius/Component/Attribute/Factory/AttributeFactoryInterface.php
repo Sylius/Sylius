@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Attribute\Factory;
 
-use Sylius\Component\Product\Model\AttributeInterface;
+use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -22,7 +22,7 @@ interface AttributeFactoryInterface extends FactoryInterface
     /**
      * @param string $type
      *
-     * @return AttributeInterface
+     * @return ProductAttributeInterface
      */
     public function createTyped($type);
 }

@@ -1,0 +1,85 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_account_address_book_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.address:indexAction
+        _sylius:
+            template: SyliusShopBundle:Account/AddressBook:index.html.twig
+            section: shop_account
+            paginate: false
+            repository:
+                method: findByCustomer
+                arguments:
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+
+sylius_shop_account_address_book_create:
+    path: /add
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.address:createAction
+        _sylius:
+            template: SyliusShopBundle:Account/AddressBook:create.html.twig
+            section: shop_acount
+            factory:
+                method: createForCustomer
+                arguments:
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+            redirect:
+                route: sylius_shop_account_address_book_index
+                parameters: {}
+            flash: sylius.customer.add_address
+
+sylius_shop_account_address_book_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.address:updateAction
+        _sylius:
+            template: SyliusShopBundle:Account/AddressBook:update.html.twig
+            section: shop_account
+            repository:
+                method: findOneByCustomer
+                arguments:
+                    - $id
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+            redirect:
+                route: sylius_shop_account_address_book_index
+                parameters: {}
+
+sylius_shop_account_address_book_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.address:deleteAction
+        _sylius:
+            section: shop_account
+            redirect: sylius_shop_account_address_book_index
+            repository:
+                method: findOneByCustomer
+                arguments:
+                    - $id
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+
+sylius_shop_account_address_book_set_default:
+    path: /{id}/set-default
+    methods: [GET, PATCH]
+    defaults:
+        _controller: sylius.controller.customer:updateAction
+        _sylius:
+            template: SyliusShopBundle:Account/AddressBook:_defaultAddressForm.html.twig
+            section: shop_account
+            form:
+                type: Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerDefaultAddressType
+                options:
+                    customer: 'expr:service("sylius.context.customer").getCustomer()'
+            repository:
+                method: find
+                arguments:
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+            redirect:
+                route: sylius_shop_account_address_book_index
+                parameters: {}
+            flash: sylius.customer.set_address_as_default

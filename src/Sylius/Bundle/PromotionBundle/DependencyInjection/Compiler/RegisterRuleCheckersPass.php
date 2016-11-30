@@ -16,19 +16,20 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all rule checkers in registry service.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class RegisterRuleCheckersPass implements CompilerPassInterface
+final class RegisterRuleCheckersPass implements CompilerPassInterface
 {
+    /**
+     * {@inheritdoc}
+     */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('sylius.registry.promotion_rule_checker')) {
+        if (!$container->hasDefinition('sylius.registry_promotion_rule_checker')) {
             return;
         }
 
-        $registry = $container->getDefinition('sylius.registry.promotion_rule_checker');
+        $registry = $container->getDefinition('sylius.registry_promotion_rule_checker');
         $checkers = [];
 
         $checkersServices = $container->findTaggedServiceIds('sylius.promotion_rule_checker');

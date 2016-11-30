@@ -14,8 +14,6 @@ namespace Sylius\Component\Locale\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface implemented by objects related to multiple locales
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface LocalesAwareInterface
@@ -24,11 +22,6 @@ interface LocalesAwareInterface
      * @return Collection|LocaleInterface[]
      */
     public function getLocales();
-
-    /**
-     * @param Collection $collection
-     */
-    public function setLocales(Collection $collection);
 
     /**
      * @param LocaleInterface $locale

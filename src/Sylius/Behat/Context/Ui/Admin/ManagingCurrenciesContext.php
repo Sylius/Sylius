@@ -134,6 +134,28 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
+     * @Then I should not be able to disable this currency
+     */
+    public function iCannotDisableIt()
+    {
+        Assert::true(
+            $this->updatePage->canBeDisabled(),
+            'I should not be able to disable this currency.'
+        );
+    }
+
+    /**
+     * @Then I should not be able to change exchange rate of this currency
+     */
+    public function iCannotChangeItsExchangeRate()
+    {
+        Assert::true(
+            $this->updatePage->canHaveExchangeRateChanged(),
+            'I should not be able to change exchange rate of this currency.'
+        );
+    }
+
+    /**
      * @When I save my changes
      * @When I try to save my changes
      */
@@ -258,7 +280,7 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Then /^(this currency) should still have exchange rate equal to ((\d+)\.(\d+))$/
+     * @Then /^(this currency) should still have exchange rate equal to ([0-9\.]+)$/
      */
     public function theCurrencyShouldStillHaveExchangeRateEquals(CurrencyInterface $currency, $exchangeRate)
     {
@@ -288,8 +310,8 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldSeeCurrenciesInTheList($amountOfCurrencies)
     {
-        Assert::eq(
-            $amountOfCurrencies,
+        Assert::same(
+            (int) $amountOfCurrencies,
             $this->indexPage->countItems(),
             sprintf(
                 'Amount of currencies should be equal %d, but was %d.',

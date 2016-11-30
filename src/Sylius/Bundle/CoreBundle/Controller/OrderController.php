@@ -13,18 +13,19 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use FOS\RestBundle\View\View;
-use Gedmo\Loggable\Entity\LogEntry;
 use Payum\Core\Registry\RegistryInterface;
-use Payum\Core\Security\GenericTokenFactoryInterface;
-use Payum\Core\Security\HttpRequestVerifierInterface;
-use Sylius\Bundle\PayumBundle\Request\GetStatus;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\SyliusCartEvents;
+use Sylius\Component\Resource\ResourceActions;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Webmozart\Assert\Assert;
 
 class OrderController extends ResourceController
@@ -33,32 +34,24 @@ class OrderController extends ResourceController
      * @param Request $request
      *
      * @return Response
-     *
-     * @throws NotFoundHttpException
      */
-    public function historyAction(Request $request)
+    public function summaryAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        /** @var $order OrderInterface */
-        $order = $this->findOr404($configuration);
 
-        $repository = $this->get('doctrine')->getManager()->getRepository(LogEntry::class);
+        $cart = $this->getCurrentCart();
 
-        $items = [];
-        foreach ($order->getItems() as $item) {
-            $items[] = $repository->getLogEntries($item);
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($cart));
         }
 
+        $form = $this->resourceFormFactory->create($configuration, $cart);
+
         $view = View::create()
-            ->setTemplate($configuration->getTemplate('history.html'))
+            ->setTemplate($configuration->getTemplate('summary.html'))
             ->setData([
-                'order' => $order,
-                'logs' => [
-                    'order' => $repository->getLogEntries($order),
-                    'order_items' => $items,
-                    'billing_address' => $repository->getLogEntries($order->getBillingAddress()),
-                    'shipping_address' => $repository->getLogEntries($order->getShippingAddress()),
-                ],
+                'cart' => $cart,
+                'form' => $form->createView(),
             ])
         ;
 
@@ -67,55 +60,65 @@ class OrderController extends ResourceController
 
     /**
      * @param Request $request
-     * @param int $orderId
      *
      * @return Response
      */
-    public function payAction(Request $request, $orderId)
+    public function saveAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $order = $this->repository->findOneForPayment($orderId);
-        Assert::notNull($order);
+        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+        $resource = $this->getCurrentCart();
 
-        $payment = $order->getLastPayment();
-        $captureToken = $this->getTokenFactory()->createCaptureToken(
-            $payment->getMethod()->getGateway(),
-            $payment,
-            $configuration->getParameters()->get('after_pay[route]', null, true),
-            $configuration->getParameters()->get('after_pay[parameters]', [], true)
-        );
+        $form = $this->resourceFormFactory->create($configuration, $resource);
 
-        return $this->redirect($captureToken->getTargetUrl());
-    }
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && $form->handleRequest($request)->isValid()) {
+            $resource = $form->getData();
 
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function afterPayAction(Request $request)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
 
-        $token = $this->getHttpRequestVerifier()->verify($request);
-        $this->getHttpRequestVerifier()->invalidate($token);
+            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+                throw new HttpException($event->getErrorCode(), $event->getMessage());
+            }
+            if ($event->isStopped()) {
+                $this->flashHelper->addFlashFromEvent($configuration, $event);
 
-        $status = new GetStatus($token);
-        $this->getPayum()->getGateway($token->getGatewayName())->execute($status);
-        $payment = $status->getFirstModel();
-        $order = $payment->getOrder();
+                return $this->redirectHandler->redirectToResource($configuration, $resource);
+            }
 
-        $orderStateResolver = $this->getOrderStateResolver();
-        $orderStateResolver->resolvePaymentState($order);
-        $orderStateResolver->resolveShippingState($order);
+            if ($configuration->hasStateMachine()) {
+                $this->stateMachine->apply($configuration, $resource);
+            }
 
-        $this->getOrderManager()->flush();
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
-        return $this->redirectToRoute(
-            $configuration->getParameters()->get('redirect[route]', null, true),
-            $configuration->getParameters()->get('redirect[parameters]', [], true)
-        );
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+            }
+
+            $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($resource));
+            $this->manager->flush();
+
+            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+
+            return $this->redirectHandler->redirectToResource($configuration, $resource);
+        }
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
+        }
+
+        $view = View::create()
+            ->setData([
+                'configuration' => $configuration,
+                $this->metadata->getName() => $resource,
+                'form' => $form->createView(),
+                'cart' => $resource,
+            ])
+            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
+        ;
+
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -127,64 +130,114 @@ class OrderController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $orderId = $this->getSession()->get('sylius_order_id');
-        Assert::notNull($orderId);
-        $order = $this->repository->findOneForPayment($orderId);
-        Assert::notNull($order);
+        $orderId = $request->getSession()->get('sylius_order_id', null);
 
-        $payment = $order->getLastPayment();
-        if (null !== $payment && $payment->getMethod()->getGateway() === 'offline') {
-            return $this->redirectToRoute('sylius_shop_order_pay', ['orderId' => $orderId]);
+        if (null === $orderId) {
+            $options = $configuration->getParameters()->get('after_failure');
+
+            return $this->redirectHandler->redirectToRoute(
+                $configuration,
+                isset($options['route']) ? $options['route'] : 'sylius_shop_homepage',
+                isset($options['parameters']) ? $options['parameters'] : []
+            );
         }
 
-        return $this->render($configuration->getParameters()->get('template'), ['order' => $order]);
+        $request->getSession()->remove('sylius_order_id');
+        $order = $this->repository->find($orderId);
+        Assert::notNull($order);
+
+        $view = View::create()
+            ->setData([
+                'order' => $order
+            ])
+            ->setTemplate($configuration->getParameters()->get('template'))
+        ;
+
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
-     * @return StateResolverInterface
+     * @param Request $request
+     *
+     * @return Response
      */
-    private function getOrderStateResolver()
+    public function clearAction(Request $request)
     {
-        return $this->get('sylius.order_processing.state_resolver');
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $this->isGrantedOr403($configuration, ResourceActions::DELETE);
+        $resource = $this->getCurrentCart();
+
+        if ($configuration->isCsrfProtectionEnabled() && !$this->isCsrfTokenValid($resource->getId(), $request->get('_csrf_token'))) {
+            throw new HttpException(Response::HTTP_FORBIDDEN, 'Invalid csrf token.');
+        }
+
+        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
+
+        if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+            throw new HttpException($event->getErrorCode(), $event->getMessage());
+        }
+        if ($event->isStopped()) {
+            $this->flashHelper->addFlashFromEvent($configuration, $event);
+
+            return $this->redirectHandler->redirectToIndex($configuration, $resource);
+        }
+
+        $this->repository->remove($resource);
+        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+
+        return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
 
     /**
-     * @return SessionInterface
+     * @param RequestConfiguration $configuration
+     *
+     * @return RedirectResponse
      */
-    private function getSession()
+    protected function redirectToCartSummary(RequestConfiguration $configuration)
     {
-        return $this->get('session');
+        if (null === $configuration->getParameters()->get('redirect')) {
+            return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
+        }
+
+        return $this->redirectHandler->redirectToRoute($configuration, $configuration->getParameters()->get('redirect'));
     }
 
     /**
-     * @return EntityManager
+     * @return string
      */
-    private function getOrderManager()
+    protected function getCartSummaryRoute()
     {
-        return $this->get('sylius.manager.order');
+        return 'sylius_cart_summary';
     }
 
     /**
-     * @return RegistryInterface
+     * @return OrderInterface
      */
-    private function getPayum()
+    protected function getCurrentCart()
     {
-        return $this->get('payum');
+        return $this->getContext()->getCart();
     }
 
     /**
-     * @return GenericTokenFactoryInterface
+     * @return CartContextInterface
      */
-    private function getTokenFactory()
+    protected function getContext()
     {
-        return $this->getPayum()->getTokenFactory();
+        return $this->get('sylius.context.cart');
     }
 
     /**
-     * @return HttpRequestVerifierInterface
+     * @return EventDispatcherInterface
      */
-    private function getHttpRequestVerifier()
+    protected function getEventDispatcher()
     {
-        return $this->getPayum()->getHttpRequestVerifier();
+        return $this->container->get('event_dispatcher');
     }
 }

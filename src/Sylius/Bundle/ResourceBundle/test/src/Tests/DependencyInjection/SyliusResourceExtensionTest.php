@@ -37,17 +37,10 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
                 'app.book' => [
                     'classes' => [
                         'model' => Book::class,
-                        'form' => [
-                            'default' => BookType::class,
-                            'choice' => ResourceChoiceType::class,
-                        ],
                     ],
                     'translation' => [
                         'classes' => [
                             'model' => BookTranslation::class,
-                            'form' => [
-                                'default' => BookTranslationType::class,
-                            ],
                          ],
                     ],
                 ],
@@ -55,12 +48,9 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
         ]);
 
         $this->assertContainerBuilderHasService('app.factory.book');
-        $this->assertContainerBuilderHasService('app.form.type.book');
-        $this->assertContainerBuilderHasService('app.form.type.book_choice');
         $this->assertContainerBuilderHasService('app.repository.book');
         $this->assertContainerBuilderHasService('app.controller.book');
         $this->assertContainerBuilderHasService('app.manager.book');
-        $this->assertContainerBuilderHasService('app.form.type.book_translation');
 
         $this->assertContainerBuilderHasParameter('app.model.book.class', Book::class);
         $this->assertContainerBuilderHasParameter('app.model.book_translation.class', BookTranslation::class);
@@ -78,6 +68,23 @@ class SyliusResourceExtensionTest extends AbstractExtensionTestCase
 
         $this->assertContainerBuilderHasAlias('sylius.resource_controller.authorization_checker', 'custom_service');
     }
+
+    /**
+     * @test
+     */
+    public function it_registers_default_translation_parameters()
+     {
+         // TODO: Move ResourceGrid integration to a dedicated compiler pass
+         $this->setParameter('kernel.bundles', []);
+
+         $this->load([
+             'translation' => [
+                 'locale_provider' => 'test.custom_locale_provider'
+             ]
+         ]);
+
+         $this->assertContainerBuilderHasAlias('sylius.translation_locale_provider', 'test.custom_locale_provider');
+     }
 
     /**
      * {@inheritdoc}

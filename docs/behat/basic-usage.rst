@@ -41,7 +41,7 @@ After we are done with a feature file, we have to create a new suite for it. At 
     default:
         suites:
             ui_managing_countries:
-                contexts_as_services:
+                contexts_services:
                     - sylius.behat.context.hook.doctrine_orm
                     # This service is responsible for clearing database before each scenario,
                     # so that only data from the current and its background is available.
@@ -64,7 +64,7 @@ After we are done with a feature file, we have to create a new suite for it. At 
                     tags: "@managing_countries && @ui"
 
 A very important thing that is done here is the configuration of tags, from now on Behat will be searching for all your features tagged with ``@managing_countries`` and your scenarios tagged with ``@ui``.
-Second thing is ``contexts_as_services:`` in this section we will be placing all our services with step implementation.
+Second thing is ``contexts_services:`` in this section we will be placing all our services with step implementation.
 
 We have mentioned with the generic steps we can easily switch our testing context to @domain. Have a look how it looks:
 
@@ -73,7 +73,7 @@ We have mentioned with the generic steps we can easily switch our testing contex
     default:
         suites:
             domain_managing_countries:
-                contexts_as_services:
+                contexts_services:
                     - sylius.behat.context.hook.doctrine_orm
 
                     - sylius.behat.context.transform.country

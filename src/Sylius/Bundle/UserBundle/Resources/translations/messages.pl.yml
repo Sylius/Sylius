@@ -5,7 +5,7 @@ sylius:
     form:
         user:
             email: Email
-            enabled: Włączone
+            enabled: Aktywne
             password:
                 label: Hasło
                 confirmation: Weryfikacja

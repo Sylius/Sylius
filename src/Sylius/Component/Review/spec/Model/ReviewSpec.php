@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Review\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Review\Model\Review;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -23,7 +24,7 @@ final class ReviewSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Review\Model\Review');
+        $this->shouldHaveType(Review::class);
     }
 
     function it_implements_review_interface()
@@ -31,48 +32,48 @@ final class ReviewSpec extends ObjectBehavior
         $this->shouldImplement(ReviewInterface::class);
     }
 
-    function it_has_title()
+    function it_has_a_title()
     {
         $this->setTitle('review title');
         $this->getTitle()->shouldReturn('review title');
     }
 
-    function it_has_rating()
+    function it_has_a_rating()
     {
         $this->setRating(5);
         $this->getRating()->shouldReturn(5);
     }
 
-    function it_has_comment()
+    function it_has_a_comment()
     {
         $this->setComment('Lorem ipsum dolor');
         $this->getComment()->shouldReturn('Lorem ipsum dolor');
     }
 
-    function it_has_author(ReviewerInterface $author)
+    function it_has_an_author(ReviewerInterface $author)
     {
         $this->setAuthor($author);
         $this->getAuthor()->shouldReturn($author);
     }
 
-    function it_has_status()
+    function it_has_a_status()
     {
         $this->getStatus()->shouldReturn(ReviewInterface::STATUS_NEW);
     }
 
-    function it_has_review_subject(ReviewableInterface $reviewSubject)
+    function it_has_a_review_subject(ReviewableInterface $reviewSubject)
     {
         $this->setReviewSubject($reviewSubject);
         $this->getReviewSubject()->shouldReturn($reviewSubject);
     }
 
-    function it_has_created_at(\DateTime $createdAt)
+    function it_has_a_created_at(\DateTime $createdAt)
     {
         $this->setCreatedAt($createdAt);
         $this->getCreatedAt()->shouldReturn($createdAt);
     }
 
-    function it_has_updated_at(\DateTime $updatedAt)
+    function it_has_an_updated_at(\DateTime $updatedAt)
     {
         $this->setUpdatedAt($updatedAt);
         $this->getUpdatedAt()->shouldReturn($updatedAt);

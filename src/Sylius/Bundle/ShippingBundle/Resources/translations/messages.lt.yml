@@ -34,8 +34,10 @@ sylius:
             calculator: Skaičiuoklė
             category: Kategorija
             category_requirement: Kategorijos reikalavimas
+            channels: Kanalai
             configuration: Konfigūracija
             description: Aprašymas
             enabled: Įjungta
             name: Pavadinimas
             tax_category: Mokesčių kategorija
+            translations: Vertimai

@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_channel:
+    resources:
+        channel:
+            classes:
+                model: Sylius\Component\Core\Model\Channel

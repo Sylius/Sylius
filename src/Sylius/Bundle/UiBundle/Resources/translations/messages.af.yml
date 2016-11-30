@@ -5,12 +5,12 @@ sylius:
     ui:
         city: Stad
         company: Maatskappy
+        country: Land
         members: Lede
-        "no": false
         postcode: Poskode
         presentation: Weergawe
         province: Provinsie
         provinces: Provinsies
         scope: Gebied
         street: Straat
-        "yes": true
+        type: Tipe

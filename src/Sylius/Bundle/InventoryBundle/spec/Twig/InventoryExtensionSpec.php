@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\InventoryBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper;
+use Sylius\Bundle\InventoryBundle\Twig\InventoryExtension;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,11 +27,11 @@ final class InventoryExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Twig\InventoryExtension');
+        $this->shouldHaveType(InventoryExtension::class);
     }
 
     function it_is_a_twig_extension()
     {
-        $this->shouldHaveType('Twig_Extension');
+        $this->shouldHaveType(\Twig_Extension::class);
     }
 }

@@ -16,7 +16,7 @@ use Symfony\Component\Filesystem\Filesystem as BaseFilesystem;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class Filesystem extends BaseFilesystem implements FilesystemInterface
+final class Filesystem extends BaseFilesystem implements FilesystemInterface
 {
     /**
      * {@inheritdoc}

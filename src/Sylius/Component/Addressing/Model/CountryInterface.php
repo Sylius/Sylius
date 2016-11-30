@@ -24,14 +24,16 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
 interface CountryInterface extends ToggleableInterface, ResourceInterface, CodeAwareInterface
 {
     /**
+     * @param string|null $locale
+     *
+     * @return string|null
+     */
+    public function getName($locale = null);
+
+    /**
      * @return Collection|ProvinceInterface[]
      */
     public function getProvinces();
-
-    /**
-     * @param Collection $provinces
-     */
-    public function setProvinces(Collection $provinces);
 
     /**
      * @return bool

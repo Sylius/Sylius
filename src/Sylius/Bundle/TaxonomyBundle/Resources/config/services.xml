@@ -11,20 +11,25 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.form.type.taxon_choice.class">Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType</parameter>
-    </parameters>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="services/form.xml" />
+    </imports>
 
     <services>
-        <service id="sylius.form.type.taxon_choice" class="%sylius.form.type.taxon_choice.class%">
+        <service id="sylius.controller.taxon_slug" class="Sylius\Bundle\TaxonomyBundle\Controller\TaxonSlugController">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="sylius.factory.taxon.decorated" class="Sylius\Component\Taxonomy\Factory\TaxonFactory"
+                 decorates="sylius.factory.taxon" public="false">
+            <argument type="service" id="sylius.factory.taxon.decorated.inner" />
+        </service>
+
+        <service id="sylius.generator.taxon_slug" class="Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator">
             <argument type="service" id="sylius.repository.taxon" />
-            <tag name="form.type" alias="sylius_taxon_choice" />
         </service>
     </services>
-
 </container>

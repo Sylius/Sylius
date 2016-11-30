@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../etc/bash/common.lib.sh"
+
+build_package() {
+    [[ "$(echo "$2" | grep -c "no-install")" = "1" ]] && local install=false
+    [[ "$(echo "$2" | grep -c "no-validate")" = "1" ]] && local validate=false
+    [[ "$(echo "$2" | grep -c "no-test")" = "1" ]] && local test=false
+    [[ "$(echo "$2" | grep -c "no-clean")" = "1" ]] && local clean=false
+
+    if ${install}; then
+        eval "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/install-package $1"
+    fi
+
+    if ${validate}; then
+        eval "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/validate-package $1"
+    fi
+
+    if ${test}; then
+        eval "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/test-package $1"
+    fi
+
+    if ${clean}; then
+        eval "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/clean-package $1"
+    fi
+}
+
+display_help_message() {
+    print_error "Usage: $0 [--no-install] [--no-validate] [--no-test] [--no-clean] <package paths or names>"
+}
+
+main() {
+    local packages=() options=() package_path
+
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --no-install)
+                options+=("no-install")
+            ;;
+            --no-validate)
+                options+=("no-validate")
+            ;;
+            --no-test)
+                options+=("no-test")
+            ;;
+            --no-clean)
+                options+=("no-clean")
+            ;;
+            --help)
+                display_help_message
+                exit 0
+            ;;
+            -*)
+                print_error "Unknown option \"$1\""
+                exit 1
+            ;;
+            *)
+               packages+=("$1")
+            ;;
+        esac
+
+        shift
+    done
+
+    if [[ "${packages[@]}" = "" ]]; then
+        display_help_message
+        exit 1
+    fi
+
+    for package in "${packages[@]}"; do
+        package_path="$(cast_package_argument_to_package_path "${package}")"
+        exit_on_error "Package \"${package}\" is not found"
+
+        build_package "${package_path}" "${options[*]}"
+    done
+}
+
+main "$@"

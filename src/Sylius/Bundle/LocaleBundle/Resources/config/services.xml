@@ -13,25 +13,38 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.form.type.locale" class="Sylius\Bundle\LocaleBundle\Form\Type\LocaleType">
+            <argument>%sylius.model.locale.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
+        <service id="sylius.form.type.locale_choice" class="Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType">
+            <argument type="service" id="sylius.repository.locale" />
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.context.locale" class="Sylius\Component\Locale\Context\ImmutableLocaleContext">
             <argument>%sylius_locale.locale%</argument>
         </service>
+
+        <service id="sylius.context.locale.composite" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale" public="false" />
 
         <service id="sylius.locale_provider" class="Sylius\Component\Locale\Provider\LocaleProvider">
             <argument type="service" id="sylius.repository.locale" />
             <argument>%sylius_locale.locale%</argument>
         </service>
 
-        <service id="sylius.converter.locale" class="Sylius\Component\Locale\Converter\LocaleConverter" />
+        <service id="sylius.locale_converter" class="Sylius\Component\Locale\Converter\LocaleConverter" />
 
         <service id="sylius.listener.request_locale_setter" class="Sylius\Bundle\LocaleBundle\Listener\RequestLocaleSetter">
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.locale_provider" />
-            <tag name="kernel.event_listener" event="kernel.request" priority="64" />
+            <tag name="kernel.event_listener" event="kernel.request" priority="4" />
         </service>
 
         <service id="sylius.templating.helper.locale" class="Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper">
-            <argument type="service" id="sylius.converter.locale" />
+            <argument type="service" id="sylius.locale_converter" />
             <tag name="templating.helper" alias="sylius_locale" />
         </service>
 

@@ -11,12 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Form\FormEvent;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
-use PHPCR\Util\NodeHelper;
-use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
@@ -46,8 +41,7 @@ class NameFilterListener
     public function __construct(
         DocumentManagerInterface $documentManager,
         $replacementCharacter = ' '
-    )
-    {
+    ) {
         $this->documentManager = $documentManager;
         $this->replacementCharacter = $replacementCharacter;
     }

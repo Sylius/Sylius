@@ -18,8 +18,6 @@ use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
- * @mixin ProviderBasedLocaleContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ProviderBasedLocaleContextSpec extends ObjectBehavior

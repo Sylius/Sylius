@@ -18,7 +18,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ThemeFilesystemLoader implements \Twig_LoaderInterface
+final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_ExistsLoaderInterface
 {
     /**
      * @var \Twig_LoaderInterface
@@ -88,6 +88,18 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface
             return filemtime($this->findTemplate($name)) <= $time;
         } catch (\Exception $exception) {
             return $this->decoratedLoader->isFresh($name, $time);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function exists($name)
+    {
+        try {
+            return stat($this->findTemplate($name)) !== false;
+        } catch (\Exception $exception) {
+            return false;
         }
     }
 

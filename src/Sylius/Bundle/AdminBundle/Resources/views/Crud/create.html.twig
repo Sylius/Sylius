@@ -9,19 +9,6 @@
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
 {% block content %}
-{{ headers.default(header|trans, configuration.vars.icon|default('plus'), configuration.vars.subheader|default(null)|trans) }}
-
-{% include configuration.vars.templates.breadcrumb|default('SyliusAdminBundle:Crud/Breadcrumb:_create.html.twig') %}
-
-{{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-    <div class="ui segment">
-        {% if configuration.vars.templates.form is defined %}
-            {% include configuration.vars.templates.form %}
-        {% else %}
-            {{ form_widget(form) }}
-        {% endif %}
-        {% include 'SyliusUiBundle:Form:_create.html.twig' with {'cancel_path': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))} %}
-    </div>
-{{ form_row(form._token) }}
-{{ form_end(form, {'render_rest': false}) }}
+{% include '@SyliusAdmin/Crud/Create/_header.html.twig' %}
+{% include '@SyliusAdmin/Crud/Create/_content.html.twig' %}
 {% endblock %}

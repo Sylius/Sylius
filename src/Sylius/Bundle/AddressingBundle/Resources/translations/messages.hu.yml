@@ -13,6 +13,7 @@ sylius:
             postcode: Irányítószám
             street: Utca
             province: Tartomány/állam
+            zone: Zóna
         country:
             add_province: Tartomány/megye hozzáadása
             name: Név

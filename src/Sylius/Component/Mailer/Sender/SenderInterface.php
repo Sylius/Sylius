@@ -18,8 +18,8 @@ interface SenderInterface
 {
     /**
      * @param string $code
-     * @param array  $recipients
-     * @param array  $data
+     * @param array $recipients
+     * @param array $data
      */
     public function send($code, array $recipients, array $data = []);
 }

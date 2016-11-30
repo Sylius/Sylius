@@ -4,7 +4,7 @@
 sylius:
     form:
         currency:
-            exchange_rate: Wechselkurs
-            enabled: Aktiviert
             base: Basis-Währung
             code: Name
+            enabled: Aktiviert
+            exchange_rate: Wechselkurs

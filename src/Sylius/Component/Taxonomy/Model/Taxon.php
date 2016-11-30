@@ -65,6 +65,11 @@ class Taxon implements TaxonInterface
      */
     protected $level;
 
+    /**
+     * @var int
+     */
+    protected $position;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -73,11 +78,11 @@ class Taxon implements TaxonInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
-        return (string) $this->translate()->__toString();
+        return (string) $this->getTranslation()->__toString();
     }
 
     /**
@@ -134,6 +139,9 @@ class Taxon implements TaxonInterface
     public function setParent(TaxonInterface $parent = null)
     {
         $this->parent = $parent;
+        if (null !== $parent) {
+            $parent->addChild($this);
+        }
     }
 
     /**
@@ -176,9 +184,11 @@ class Taxon implements TaxonInterface
     public function addChild(TaxonInterface $taxon)
     {
         if (!$this->hasChild($taxon)) {
-            $taxon->setParent($this);
-
             $this->children->add($taxon);
+        }
+
+        if ($this !== $taxon->getParent()) {
+            $taxon->setParent($this);
         }
     }
 
@@ -199,7 +209,7 @@ class Taxon implements TaxonInterface
      */
     public function getName()
     {
-        return $this->translate()->getName();
+        return $this->getTranslation()->getName();
     }
 
     /**
@@ -207,7 +217,7 @@ class Taxon implements TaxonInterface
      */
     public function setName($name)
     {
-        $this->translate()->setName($name);
+        $this->getTranslation()->setName($name);
     }
 
     /**
@@ -215,7 +225,7 @@ class Taxon implements TaxonInterface
      */
     public function getSlug()
     {
-        return $this->translate()->getSlug();
+        return $this->getTranslation()->getSlug();
     }
 
     /**
@@ -223,35 +233,7 @@ class Taxon implements TaxonInterface
      */
     public function setSlug($slug = null)
     {
-        $this->translate()->setSlug($slug);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPermalink()
-    {
-        $permalink = $this->translate()->getPermalink();
-
-        if (null !== $permalink) {
-            return $permalink;
-        }
-
-        if (null === $this->parent) {
-            return $this->getSlug();
-        }
-
-        $this->setPermalink($permalink = $this->parent->getPermalink().'/'.$this->getSlug());
-
-        return $permalink;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPermalink($permalink)
-    {
-        $this->translate()->setPermalink($permalink);
+        $this->getTranslation()->setSlug($slug);
     }
 
     /**
@@ -259,7 +241,7 @@ class Taxon implements TaxonInterface
      */
     public function getDescription()
     {
-        return $this->translate()->getDescription();
+        return $this->getTranslation()->getDescription();
     }
 
     /**
@@ -267,7 +249,7 @@ class Taxon implements TaxonInterface
      */
     public function setDescription($description)
     {
-        $this->translate()->setDescription($description);
+        $this->getTranslation()->setDescription($description);
     }
 
     /**
@@ -316,5 +298,29 @@ class Taxon implements TaxonInterface
     public function setLevel($level)
     {
         $this->level = $level;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new TaxonTranslation();
     }
 }

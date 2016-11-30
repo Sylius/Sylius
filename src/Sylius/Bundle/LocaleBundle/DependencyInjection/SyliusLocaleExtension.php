@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class SyliusLocaleExtension extends AbstractResourceExtension implements PrependExtensionInterface
+final class SyliusLocaleExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -37,24 +37,6 @@ final class SyliusLocaleExtension extends AbstractResourceExtension implements P
 
         $container->setParameter('sylius_locale.locale', $config['locale']);
 
-        $container
-            ->getDefinition('sylius.form.type.locale_choice')
-            ->setArguments([new Reference('sylius.repository.locale')])
-        ;
-
         $container->findDefinition('sylius.repository.locale')->setLazy(true);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function prepend(ContainerBuilder $container)
-    {
-        $container->prependExtensionConfig('sylius_resource', [
-            'translation' => [
-                'locale_provider' => 'sylius.locale_provider',
-                'locale_context' => 'sylius.context.locale',
-            ],
-        ]);
     }
 }

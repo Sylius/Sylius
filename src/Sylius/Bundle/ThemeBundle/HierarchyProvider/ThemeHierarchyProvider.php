@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ThemeBundle\HierarchyProvider;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

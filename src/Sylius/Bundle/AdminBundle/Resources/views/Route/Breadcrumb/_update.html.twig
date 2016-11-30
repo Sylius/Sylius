@@ -1,8 +1,0 @@
-{% import 'SyliusAdminBundle:Crud/Macro:breadcrumb.html.twig' as breadcrumb %}
-
-{{ breadcrumb.crumble([
-    { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
-    { label: 'sylius.ui.routes'|trans, url: path('sylius_admin_customer_index') },
-    { label: resource.name },
-    { label: 'sylius.ui.edit'|trans }
-]) }}

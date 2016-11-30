@@ -6,22 +6,22 @@ sylius:
         attribute:
             add: Додати
             add_attributes: Додати атрибути
-            choices: Вибір
+            choices: Варіанти вибору
             code: Код
-            name: Ім’я
+            name: Назва
             translations: Переклади
             type: Тип
         attribute_type:
-            checkbox: Прапорець
+            checkbox: Позначка
             configuration: Конфігурація
             date: Дата
-            datetime: Дата та час
+            datetime: Дата й час
             integer: Ціле число
-            percent: Відсотоки
+            percent: Відсоток
             text: Текст
             textarea: Текстове поле
-            title: Тип атрибуту
-            validation: Перевірено
+            title: Типи атрибутів
+            validation: Перевірка
         attribute_type_configuration:
             datetime:
                 format: Формат

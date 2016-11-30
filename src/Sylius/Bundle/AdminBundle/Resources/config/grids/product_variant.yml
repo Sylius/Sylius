@@ -6,37 +6,25 @@ sylius_grid:
                 options:
                     class: "%sylius.model.product_variant.class%"
                     repository:
-                        method: createQueryBuilderWithProduct
+                        method: createQueryBuilderByProductId
                         arguments:
                             productId: $productId
             fields:
-                image:
-                    type: twig
-                    label: sylius.ui.image
-                    path: .
-                    options:
-                        template: SyliusAdminBundle:ProductVariant/Field:image.html.twig
                 name:
                     type: twig
                     path: .
                     label: sylius.ui.name
                     options:
-                        template: SyliusAdminBundle:ProductVariant/Field:name.html.twig
+                        template: "@SyliusAdmin/ProductVariant/Grid/Field/name.html.twig"
                 code:
                     type: string
                     label: sylius.ui.code
-                price:
-                    type: twig
-                    path: price
-                    label: sylius.ui.price
-                    options:
-                        template: SyliusAdminBundle:Grid/Field:money.html.twig
                 inventory:
                     type: twig
                     path: .
                     label: sylius.ui.inventory
                     options:
-                        template: SyliusAdminBundle:ProductVariant/Field:inventory.html.twig
+                        template: "@SyliusAdmin/ProductVariant/Grid/Field/inventory.html.twig"
             filters:
                 code:
                     type: string
@@ -48,10 +36,28 @@ sylius_grid:
                         fields: [name]
             actions:
                 main:
+                    generate:
+                        type: generate_variants
+                        options:
+                            product: expr:service('sylius.repository.product').find($productId)
                     create:
-                        type: create_variant
+                        type: create
+                        options:
+                            link:
+                                parameters:
+                                    productId: $productId
                 item:
                     update:
-                        type: update_variant
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId
                     delete:
-                        type: delete_variant
+                        type: delete
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: $productId

@@ -9,6 +9,5 @@ sylius:
         tax_rate:
             category: Kategorija
             name: Ime
-            amount: Znesek
             included_in_price: Vključeno v ceno?
             calculator: Kalkulator

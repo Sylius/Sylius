@@ -11,7 +11,11 @@ sylius_admin_promotion:
             all:
                 subheader: sylius.ui.manage_discounts_and_promotional_campaigns
                 templates:
-                    form: SyliusAdminBundle:Promotion:_form.html.twig
+                    form: "@SyliusAdmin/Promotion/_form.html.twig"
             index:
                 icon: in cart
+            update:
+                templates:
+                    form: "@SyliusAdmin/Promotion/_form.html.twig"
+                    toolbar: "@SyliusAdmin/Promotion/Update/_toolbar.html.twig"
     type: sylius.resource

@@ -13,14 +13,14 @@ namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\ChoiceList\ArrayChoiceList;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CountryChoiceType extends AbstractType
+final class CountryChoiceType extends AbstractType
 {
     /**
      * @var RepositoryInterface
@@ -40,23 +40,21 @@ class CountryChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = function (Options $options) {
-            if (null === $options['enabled']) {
-                $choices = $this->countryRepository->findAll();
-            } else {
-                $choices = $this->countryRepository->findBy(['enabled' => $options['enabled']]);
-            }
-
-            return new ArrayChoiceList($choices);
-        };
-
         $resolver
             ->setDefaults([
+                'choices' => function (Options $options) {
+                    if (null === $options['enabled']) {
+                        return $this->countryRepository->findAll();
+                    }
+
+                    return $this->countryRepository->findBy(['enabled' => $options['enabled']]);
+                },
+                'choice_value' => 'code',
+                'choice_label' => 'name',
                 'choice_translation_domain' => false,
-                'choice_list' => $choices,
                 'enabled' => true,
                 'label' => 'sylius.form.address.country',
-                'empty_value' => 'sylius.form.country.select',
+                'placeholder' => 'sylius.form.country.select',
             ])
         ;
     }
@@ -66,13 +64,13 @@ class CountryChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_country_choice';
     }

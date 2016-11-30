@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMethodInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -19,7 +20,7 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShippingMethodInterface extends BaseShippingMethodInterface, TaxableInterface
+interface ShippingMethodInterface extends BaseShippingMethodInterface, TaxableInterface, ChannelsAwareInterface
 {
     /**
      * @return ZoneInterface

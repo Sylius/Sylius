@@ -4,8 +4,8 @@
 sylius:
     shipping_category:
         name:
-            max_length: 'Le nom de la catégorie ne peut dépasser les {{ limit }} caractères.'
-            min_length: 'Le nom de la catégorie doit contenir au moins {{ limit }} caractères.'
+            max_length: Le nom de la catégorie ne peut dépasser les {{ limit }} caractères.
+            min_length: Le nom de la catégorie doit contenir au moins {{ limit }} caractères.
             not_blank: Veuillez entrer le nom de la catégorie de livraison.
         code:
             not_blank: Veuillez entrer le code de la catégorie de livraison.
@@ -16,14 +16,14 @@ sylius:
             min_length: Longueur minimale
             not_blank: Non vide
         name:
-            max_length: 'Le nom de la méthode de livraison ne peut dépasser les {{ limit }} caractères.'
-            min_length: 'Le nom de la méthode de livraison doit contenir au moins {{ limit }} caractères.'
+            max_length: Le nom de la méthode de livraison ne peut dépasser les {{ limit }} caractères.
+            min_length: Le nom de la méthode de livraison doit contenir au moins {{ limit }} caractères.
             not_blank: Veuillez entrer le nom de la méthode de livraison.
         code:
             not_blank: Veuillez entrer le code du mode de livraison.
             unique: Ce code de mode de livraison existe déjà.
         zone:
-            not_blank: "S'il vous plaît sélectionnez zone de méthode de livraison."
+            not_blank: S'il vous plaît sélectionnez zone de méthode de livraison.
     shipment:
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.

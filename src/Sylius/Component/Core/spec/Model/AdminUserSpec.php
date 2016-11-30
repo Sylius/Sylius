@@ -14,13 +14,10 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
 /**
- * @mixin AdminUser
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class AdminUserSpec extends ObjectBehavior
@@ -30,17 +27,17 @@ class AdminUserSpec extends ObjectBehavior
         $this->shouldHaveType(AdminUser::class);
     }
 
-    function it_extends_base_user_model()
+    function it_extends_a_base_user_model()
     {
         $this->shouldHaveType(User::class);
     }
 
-    function it_implements_admin_user_interface()
+    function it_implements_an_admin_user_interface()
     {
         $this->shouldImplement(AdminUserInterface::class);
     }
 
-    function it_implements_user_interface()
+    function it_implements_a_user_interface()
     {
         $this->shouldImplement(UserInterface::class);
     }
@@ -52,5 +49,12 @@ class AdminUserSpec extends ObjectBehavior
 
         $this->setLastName('Doe');
         $this->getLastName()->shouldReturn('Doe');
+    }
+
+    function it_has_mutable_locale_code()
+    {
+        $this->getLocaleCode()->shouldReturn(null);
+        $this->setLocaleCode('en_US');
+        $this->getLocaleCode()->shouldReturn('en_US');
     }
 }

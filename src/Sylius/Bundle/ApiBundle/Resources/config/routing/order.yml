@@ -7,9 +7,6 @@ sylius_api_order_index:
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:
-            repository:
-                method: createFilterPaginator
-                arguments: [$criteria, $sorting]
             paginate: $limit
             sortable: true
             sorting:
@@ -21,7 +18,7 @@ sylius_api_order_create:
     defaults:
         _controller: sylius.controller.order:createAction
         _sylius:
-            form: sylius_api_order
+            form: Sylius\Bundle\ApiBundle\Form\Type\OrderType
 
 sylius_api_order_delete:
     path: /{id}
@@ -29,6 +26,8 @@ sylius_api_order_delete:
     defaults:
         _controller: sylius.controller.order:deleteAction
         _format: json
+        _sylius:
+            csrf_protection: false
 
 sylius_api_order_show:
     path: /{id}

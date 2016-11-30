@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ResourceToIdentifierType extends AbstractType
+final class ResourceToIdentifierType extends AbstractType
 {
     /**
      * @var RepositoryInterface
@@ -72,13 +73,13 @@ class ResourceToIdentifierType extends AbstractType
      */
     public function getParent()
     {
-        return 'entity';
+        return EntityType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return sprintf('%s_%s_to_identifier', $this->metadata->getApplicationName(), $this->metadata->getName());
     }

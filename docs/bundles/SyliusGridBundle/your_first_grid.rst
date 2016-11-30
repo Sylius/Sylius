@@ -1,48 +1,74 @@
 Your First Grid
 ===============
 
-In order to use grids, we need to register your entity as a Sylius resource. Let us assume you have Tournament model in your application, which represents a sport tournament and has several fields, including name, date, status and category.
+In order to use grids, we need to register your entity as a Sylius resource. Let us assume you have a Supplier model in your application,
+which represents a supplier of goods in your shop and has several fields, including name, description and enabled field.
 
-In order to make it a Sylius resource, you need to configure it under ``sylius_resource`` node:
+In order to make it a Sylius resource, you need to configure it under ``sylius_resource`` node.
+If you don’t have it yet create a file ``app/config/resources.yml``, import it in the ``app/config/config.yml``.
+
+.. code-block:: yaml
+
+    # app/config/resources.yml
+    sylius_resource:
+        resources:
+            app.supplier:
+                driver: doctrine/orm
+                classes:
+                    model: AppBundle\Entity\Supplier
 
 .. code-block:: yaml
 
     # app/config/config.yml
+    imports:
+        - { resource: "resources.yml" }
 
-    sylius_resource:
-        resources:
-            app.tournament:
-                driver: doctrine/orm # Use appropriate driver.
-                classes:
-                    model: AppBundle\Entity\Tournament
+That's it! Your class is now a resource. In order to learn what does it mean, please refer to the :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>` documentation.
 
-That's it! Your class is now a resource. In order to learn what does it mean, please refer to :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>` documentation.
-
-Columns Definition
-------------------
+Grid Definition
+---------------
 
 Now we can configure our first grid:
 
+.. note::
+
+    Remember that a grid is **the way objects of a desired entity are displayed on its index view**. Therefore only fields that
+    are useful for identification of objects are available - only ``string`` and ``twig`` type. Then even though a Supplier has also
+    a description field, it is not needed on index and can't be displayed here.
+
+.. code-block:: yaml
+
+    # app/config/grids/admin/supplier.yml
+    sylius_grid:
+        grids:
+            app_admin_supplier:
+                driver:
+                    name: doctrine/orm
+                    options:
+                        class: AppBundle\Entity\Supplier
+                fields:
+                    name:
+                        type: string
+                        label: sylius.ui.name
+                    enabled:
+                        type: twig
+                        label: sylius.ui.enabled
+                        options:
+                            template: SyliusAdminBundle:Grid/Field:enabled.html.twig # This will be a checkbox field
+
+Remember to import your grid in the ``app/config/grids/grids.yml`` file which has to be imported in the ``app/config/config.yml``.
+
+.. code-block:: yaml
+
+    # app/config/grids/grids.yml
+    imports:
+        - { resource: 'admin/supplier.yml' }
+
 .. code-block:: yaml
 
     # app/config/config.yml
-
-    sylius_grid:
-        grids:
-            app_tournament:
-                driver: doctrine/orm # Use appropriate driver.
-                resource: app.tournament
-                columns:
-                    name:
-                        type: string
-                    date:
-                        type: datetime
-                    status:
-                        type: boolean
-                    category:
-                        type: string
-                        options:
-                            path: category.name
+    imports:
+        - { resource: "grids/grids.yml" }
 
 Generating The CRUD Routing
 ---------------------------
@@ -51,144 +77,147 @@ That's it. SyliusResourceBundle allows to generate a default CRUD interface incl
 
 .. code-block:: yaml
 
-    # app/config/routing.yml
-
-    app_tournament:
-        resource: app.tournament
+    # app/config/routing/admin/supplier.yml
+    app_admin_supplier:
+        resource: |
+            alias: app.supplier
+            section: admin
+            templates: SyliusAdminBundle:Crud
+            except: ['show']
+            redirect: update
+            grid: app_admin_supplier
+            vars:
+                all:
+                    subheader: app.ui.supplier # define a translation key for your entity subheader
+                index:
+                    icon: 'file image outline' # choose an icon that will be displayed next to the subheader
         type: sylius.resource
+
+.. code-block:: yaml
+
+    # app/config/routing/admin.yml
+    app_admin_supplier:
+        resource: 'supplier.yml'
+
+.. code-block:: yaml
+
+    # app/config/routing.yml
+    app_admin:
+        resource: 'routing/admin.yml'
+        prefix: /admin
 
 This will generate the following paths:
 
- * GET */tournaments/* - Your grid.
- * GET/POST */tournaments/new* - Creating new tournament.
- * GET/PUT */tournaments/{id}/edit* - Editing an existing tournament.
- * DELETE */tournaments/{id}* - Deleting specific tournament.
- * GET */tournaments/{id}* - Displaying specific tournament.
+ * */admin/suppliers/* - [``GET``] - Your grid.
+ * */admin/suppliers/new* - [``GET/POST``] - Creating new tournament.
+ * */admin/suppliers/{id}/edit* - [``GET/PUT``] - Editing an existing tournament.
+ * */admin/suppliers/{id}* - [``DELETE``] - Deleting specific tournament.
+ * */admin/suppliers/{id}* - [``GET``] - Displaying specific tournament.
+
+.. tip::
+
+    `In the Semantic UI documentation <http://semantic-ui.com/elements/icon.html>`_ you can find all possible icons you can choose for your grid.
+
+.. tip::
+
+    See :doc:`how to add links to your new entity administration in the administration menu </customization/menu>`.
+
+.. tip::
+
+    Adding translations to the grid (read more :doc:`here </customization/translation>`):
+
+    .. code-block:: yaml
+
+        # AppBundle/Resources/translations/messages.en.yml
+        app:
+            ui:
+                supplier: Supplier
+                suppliers: Suppliers
+            menu:
+                admin:
+                    main:
+                        additional:
+                            header: Additional
+                            suppliers: Suppliers
+
+After that your new grid should look like that when accessing the */admin/suppliers/new* path in order to create new object:
+
+.. image:: ../../_images/grid_new.png
+    :align: center
+
+And when accessing index on the */admin/suppliers/* path it should look like that:
+
+.. image:: ../../_images/grid.png
+    :align: center
 
 Defining Filters
 ----------------
 
-Okay, but we need some filters, right?
+In order to make searching for certain things in your grid you can use filters.
 
 .. code-block:: yaml
 
-    # app/config/config.yml
-
     sylius_grid:
         grids:
-            app_tournament:
-                driver: doctrine/orm # Use appropriate driver.
-                resource: app.tournament
-                columns:
-                    name:
-                        type: string
-                    date:
-                        type: datetime
-                    status:
-                        type: boolean
-                    category:
-                        type: string
-                        options:
-                            path: category.name
+            app_admin_supplier:
+                    ...
                 filters:
                     name:
                         type: string
-                    date:
-                        type: datetime
-                    status:
+                    enabled:
                         type: boolean
-                    category:
-                        type: entity
-                        options:
-                            entity: AppBundle:TournamentCategory
+
+How will it look like in the admin panel?
+
+.. image:: ../../_images/grid_filters.png
+    :align: center
 
 Default Sorting
 ---------------
 
-We want to have our tournaments sorted by name, by default, right? That is easy!
+You can define by which field you want the grid to be sorted and how.
 
 .. code-block:: yaml
 
-    # app/config/config.yml
-
+    # app/config/grids/admin/supplier.yml
     sylius_grid:
         grids:
-            app_tournament:
-                driver: doctrine/orm # Use appropriate driver.
-                resource: app.tournament
+            app_admin_supplier:
+                    ...
                 sorting:
                     name: asc
-                columns:
-                    name:
-                        type: string
-                    date:
-                        type: datetime
-                    status:
-                        type: boolean
-                    category:
-                        type: string
-                        options:
-                            path: category.name
-                filters:
-                    name:
-                        type: string
-                    date:
-                        type: datetime
-                    status:
-                        type: boolean
-                    category:
-                        type: entity
-                        options:
-                            entity: AppBundle:TournamentCategory
+                    ...
 
 Actions Configuration
 ---------------------
 
-Next step is adding some actions to the grid. We start with the basic ones, edit and delete. We can also add a simple custom action with external link.
+Next step is adding some actions to the grid: create, update and delete.
 
+.. note::
+
+    There are two types of actions that can be added to a grid: ``main`` which "influence" the whole grid (like adding new objects)
+    and ``item`` which influence one row of the grid (one object) like editing or deleting.
 
 .. code-block:: yaml
 
-    # app/config/config.yml
-
+    # app/config/grids/admin/supplier.yml
     sylius_grid:
         grids:
-            app_tournament:
-                driver: doctrine/orm # Use appropriate driver.
-                resource: app.tournament
-                sorting:
-                    name: asc
-                columns:
-                    name:
-                        type: string
-                    date:
-                        type: datetime
-                    status:
-                        type: boolean
-                    category:
-                        type: string
-                        options:
-                            path: category.name
-                filters:
-                    name:
-                        type: string
-                    date:
-                        type: datetime
-                    status:
-                        type: boolean
-                    category:
-                        type: entity
-                        options:
-                            entity: AppBundle:TournamentCategory
+            app_admin_supplier:
+                    ...
                 actions:
-                    edit:
-                        type: link
-                        options:
-                            route: app_tournament_update
-                    delete:
-                        type: submit
-                        options:
-                            route: app_tournament_delete
-                            method: DELETE
+                    main:
+                        create:
+                            type: create
+                    item:
+                        update:
+                            type: update
+                        delete:
+                            type: delete
+
+This activates such a view on the */admin/suppliers/* path:
+
+.. image:: ../../_images/grid_full.png
+    :align: center
 
 Your grid is ready to use!

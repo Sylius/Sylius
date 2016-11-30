@@ -3,10 +3,10 @@
 
 sylius:
     resource:
-        create: 'تم بنجاح إنشاء %resource%.'
-        update: 'تم بنجاح تحديث %resource%.'
-        delete: 'تم بنجاح حذف %resource%.'
-        move: 'وقد تم بنجاح نقل %resource%.'
-        restore_deleted: 'تم إسترجاع %resource% بنجاح.'
-        enable: 'تم تمكين %resource% بنجاح.'
-        disable: 'تم تعطيل %resource% بنجاح.'
+        create: تم بنجاح إنشاء %resource%.
+        update: تم بنجاح تحديث %resource%.
+        delete: تم بنجاح حذف %resource%.
+        move: وقد تم بنجاح نقل %resource%.
+        restore_deleted: تم إسترجاع %resource% بنجاح.
+        enable: تم تمكين %resource% بنجاح.
+        disable: تم تعطيل %resource% بنجاح.

@@ -35,6 +35,8 @@ class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @throws UnsupportedMethodException
      */
     public function createNew()
     {

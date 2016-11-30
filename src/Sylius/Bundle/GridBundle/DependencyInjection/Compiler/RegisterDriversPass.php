@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RegisterDriversPass implements CompilerPassInterface
+final class RegisterDriversPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

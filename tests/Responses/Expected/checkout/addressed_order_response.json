@@ -1,0 +1,53 @@
+{
+    "id": @integer@,
+    "items": @array@,
+    "items_total": @integer@,
+    "adjustments": @array@,
+    "adjustments_total": @integer@,
+    "total": @integer@,
+    "state": "cart",
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "channel": {
+        "id": @integer@,
+        "code": "CHANNEL",
+        "name": "Channel",
+        "description": "Lorem ipsum",
+        "hostname": "localhost",
+        "color": "black",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "enabled": true,
+        "tax_calculation_strategy": "order_items_based",
+        "_links": {
+            "self": {
+                "href": @string@
+            }
+        }
+    },
+    "shipping_address": {
+        "id": @integer@,
+        "first_name": "Hieronim",
+        "last_name": "Bosch",
+        "country_code": "NL",
+        "street": "Surrealism St.",
+        "city": "’s-Hertogenbosch",
+        "postcode": "99-999",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()"
+    },
+    "billing_address": {
+        "id": @integer@,
+        "first_name": "Vincent",
+        "last_name": "van Gogh",
+        "country_code": "NL",
+        "street": "Post-Impressionism St.",
+        "city": "Groot Zundert",
+        "postcode": "88-888",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()"
+    },
+    "payments": @array@,
+    "shipments": @array@,
+    "checkout_state": "addressed"
+}

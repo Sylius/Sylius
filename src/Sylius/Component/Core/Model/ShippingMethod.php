@@ -11,7 +11,10 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod as BaseShippingMethod;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -33,6 +36,18 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     protected $taxCategory;
 
     /**
+     * @var Collection
+     */
+    private $channels;
+
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->channels = new ArrayCollection();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getZone()
@@ -51,14 +66,6 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /**
      * {@inheritdoc}
      */
-    public static function getTranslationClass()
-    {
-        return ShippingMethodTranslation::class;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTaxCategory()
     {
         return $this->taxCategory;
@@ -70,5 +77,49 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     public function setTaxCategory(TaxCategoryInterface $category = null)
     {
         $this->taxCategory = $category;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannels()
+    {
+        return $this->channels;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasChannel(BaseChannelInterface $channel)
+    {
+        return $this->channels->contains($channel);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addChannel(BaseChannelInterface $channel)
+    {
+        if (!$this->hasChannel($channel)) {
+            $this->channels->add($channel);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeChannel(BaseChannelInterface $channel)
+    {
+        if ($this->hasChannel($channel)) {
+            $this->channels->removeElement($channel);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getTranslationClass()
+    {
+        return ShippingMethodTranslation::class;
     }
 }

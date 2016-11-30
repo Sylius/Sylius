@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class TaxRateFixture extends AbstractResourceFixture
+class TaxRateFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
@@ -37,7 +37,7 @@ final class TaxRateFixture extends AbstractResourceFixture
                 ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('zone')->cannotBeEmpty()->end()
                 ->scalarNode('category')->cannotBeEmpty()->end()
-                ->floatNode('amount')->cannotBeEmpty()->end()
+                ->floatNode('amount')->end()
                 ->booleanNode('included_in_price')->end()
                 ->scalarNode('calculator')->cannotBeEmpty()->end()
         ;

@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsProviderInterface
+final class ActivePromotionsByChannelProvider implements PreQualifiedPromotionsProviderInterface
 {
     /**
      * @var PromotionRepositoryInterface

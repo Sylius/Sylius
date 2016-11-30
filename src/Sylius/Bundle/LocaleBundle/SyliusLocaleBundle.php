@@ -11,14 +11,26 @@
 
 namespace Sylius\Bundle\LocaleBundle;
 
+use Sylius\Bundle\LocaleBundle\DependencyInjection\Compiler\CompositeLocaleContextPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusLocaleBundle extends AbstractResourceBundle
+final class SyliusLocaleBundle extends AbstractResourceBundle
 {
+    /**
+     * @inheritDoc
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new CompositeLocaleContextPass());
+    }
+
     /**
      * {@inheritdoc}
      */

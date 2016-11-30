@@ -15,8 +15,8 @@ use Behat\Behat\Context\Context;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
-use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
+use Sylius\Component\Promotion\Model\PromotionCouponInterface;
+use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -30,15 +30,15 @@ final class ManagingPromotionCouponsContext implements Context
     private $sharedStorage;
 
     /**
-     * @var CouponRepositoryInterface
+     * @var PromotionCouponRepositoryInterface
      */
     private $couponRepository;
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param CouponRepositoryInterface $couponRepository
+     * @param PromotionCouponRepositoryInterface $couponRepository
      */
-    public function __construct(SharedStorageInterface $sharedStorage, CouponRepositoryInterface $couponRepository)
+    public function __construct(SharedStorageInterface $sharedStorage, PromotionCouponRepositoryInterface $couponRepository)
     {
         $this->sharedStorage = $sharedStorage;
         $this->couponRepository = $couponRepository;
@@ -46,9 +46,17 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @When /^I delete ("[^"]+" coupon) related to (this promotion)$/
+     */
+    public function iDeleteCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion)
+    {
+        $promotion->removeCoupon($coupon);
+        $this->couponRepository->remove($coupon);
+    }
+
+    /**
      * @When /^I try to delete ("[^"]+" coupon) related to (this promotion)$/
      */
-    public function iTryToDeleteCoupon(CouponInterface $coupon, PromotionInterface $promotion)
+    public function iTryToDeleteCoupon(PromotionCouponInterface $coupon, PromotionInterface $promotion)
     {
         try {
             $promotion->removeCoupon($coupon);
@@ -61,7 +69,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then /^(this coupon) should no longer exist in the coupon registry$/
      */
-    public function couponShouldNotExistInTheRegistry(CouponInterface $coupon)
+    public function couponShouldNotExistInTheRegistry(PromotionCouponInterface $coupon)
     {
         Assert::null(
             $this->couponRepository->findOneBy(['code' => $coupon->getCode()]),
@@ -80,7 +88,7 @@ final class ManagingPromotionCouponsContext implements Context
     /**
      * @Then /^([^"]+) should still exist in the registry$/
      */
-    public function couponShouldStillExistInTheRegistry(CouponInterface $coupon)
+    public function couponShouldStillExistInTheRegistry(PromotionCouponInterface $coupon)
     {
         Assert::notNull(
             $this->couponRepository->find($coupon->getId()),

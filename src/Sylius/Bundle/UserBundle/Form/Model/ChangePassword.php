@@ -20,15 +20,14 @@ class ChangePassword
      * @var string
      */
     private $currentPassword;
+
     /**
      * @var string
      */
     private $newPassword;
 
     /**
-     * Gets the value of currentPassword.
-     *
-     * @return mixed
+     * @return string
      */
     public function getCurrentPassword()
     {
@@ -36,23 +35,15 @@ class ChangePassword
     }
 
     /**
-     * Sets the value of currentPassword.
-     *
-     * @param mixed $currentPassword the current password
-     *
-     * @return self
+     * @param string $password
      */
-    public function setCurrentPassword($currentPassword)
+    public function setCurrentPassword($password)
     {
-        $this->currentPassword = $currentPassword;
-
-        return $this;
+        $this->currentPassword = $password;
     }
 
     /**
-     * Gets the value of newPassword.
-     *
-     * @return mixed
+     * @return string
      */
     public function getNewPassword()
     {
@@ -60,16 +51,10 @@ class ChangePassword
     }
 
     /**
-     * Sets the value of newPassword.
-     *
-     * @param mixed $newPassword the new password
-     *
-     * @return self
+     * @param string $password
      */
-    public function setNewPassword($newPassword)
+    public function setNewPassword($password)
     {
-        $this->newPassword = $newPassword;
-
-        return $this;
+        $this->newPassword = $password;
     }
 }

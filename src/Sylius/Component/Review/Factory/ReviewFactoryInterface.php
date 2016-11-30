@@ -22,17 +22,17 @@ use Sylius\Component\Review\Model\ReviewInterface;
 interface ReviewFactoryInterface extends FactoryInterface
 {
     /**
-     * @param ReviewableInterface $subjectId
+     * @param ReviewableInterface $subject
      *
      * @return ReviewInterface
      */
-    public function createForSubject($subjectId);
+    public function createForSubject(ReviewableInterface $subject);
 
     /**
-     * @param mixed $subjectId
+     * @param ReviewableInterface $subject
      * @param ReviewerInterface|null $reviewer
      * 
      * @return ReviewInterface
      */
-    public function createForSubjectWithReviewer($subjectId, ReviewerInterface $reviewer = null);
+    public function createForSubjectWithReviewer(ReviewableInterface $subject, ReviewerInterface $reviewer = null);
 }

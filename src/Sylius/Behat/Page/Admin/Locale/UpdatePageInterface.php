@@ -20,4 +20,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     public function enable();
     public function disable();
+
+    /**
+     * @return bool
+     */
+    public function canBeDisabled();
 }

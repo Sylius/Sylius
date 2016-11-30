@@ -19,13 +19,13 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.admin.zone.create" class="%sylius.behat.page.admin.zone.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.zone.create" class="%sylius.behat.page.admin.zone.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">zone</argument>
         </service>
-        <service id="sylius.behat.page.admin.zone.index" class="%sylius.behat.page.admin.zone.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.zone.index" class="%sylius.behat.page.admin.zone.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">zone</argument>
         </service>
-        <service id="sylius.behat.page.admin.zone.update" class="%sylius.behat.page.admin.zone.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.zone.update" class="%sylius.behat.page.admin.zone.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">zone</argument>
         </service>
     </services>

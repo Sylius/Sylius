@@ -16,7 +16,6 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
     general/index
     Addressing/index
     Attribute/index
-    Cart/index
     Channel/index
     Currency/index
     Grid/index
@@ -24,19 +23,15 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
     Locale/index
     Mailer/index
     Order/index
-    Originator/index
     Payment/index
     Pricing/index
     Product/index
     Promotion/index
-    Rbac/index
     Registry/index
     Resource/index
     Shipping/index
-    Storage/index
     Taxation/index
     Taxonomy/index
     User/index
-    Variation/index
 
 .. include:: /components/map.rst.inc

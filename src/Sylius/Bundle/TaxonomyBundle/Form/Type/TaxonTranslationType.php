@@ -12,14 +12,14 @@
 namespace Sylius\Bundle\TaxonomyBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Taxon translation form type.
- *
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TaxonTranslationType extends AbstractResourceType
+final class TaxonTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -27,14 +27,13 @@ class TaxonTranslationType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', [
+            ->add('name', TextType::class, [
                 'label' => 'sylius.form.taxon.name',
             ])
-            ->add('permalink', 'text', [
-                'required' => false,
-                'label' => 'sylius.form.taxon.permalink',
+            ->add('slug', TextType::class, [
+                'label' => 'sylius.form.taxon.slug',
             ])
-            ->add('description', 'textarea', [
+            ->add('description', TextareaType::class, [
                 'required' => false,
                 'label' => 'sylius.form.taxon.description',
             ])
@@ -44,7 +43,7 @@ class TaxonTranslationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_taxon_translation';
     }

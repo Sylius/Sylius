@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\ThemeAwareTranslator;
@@ -22,8 +21,6 @@ use Symfony\Component\Translation\TranslatorBagInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * @mixin ThemeAwareTranslator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeAwareTranslatorSpec extends ObjectBehavior

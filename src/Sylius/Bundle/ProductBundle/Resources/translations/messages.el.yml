@@ -13,3 +13,7 @@ sylius:
             available_on: Διαθέσιμο την
         association_type:
             name: Ονομασία
+        variant:
+            name: Ονομασία
+        option:
+            name: Ονομασία

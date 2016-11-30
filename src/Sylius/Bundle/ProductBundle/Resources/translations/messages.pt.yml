@@ -10,7 +10,6 @@ sylius:
             options: Opções
             meta_keywords: Palavras-chave meta
             meta_description: Descrição meta
-            taxons: Táxons
         product_variant:
             available_on: Disponível em
             available_until: Disponível até
@@ -19,3 +18,11 @@ sylius:
         association:
             type: Tipo de associação
             product: Produto associado
+        variant:
+            name: Nome
+        option:
+            name: Nome
+            values: Valores possíveis
+        option_value:
+            add_value: Adicionar valor
+            value: Valor

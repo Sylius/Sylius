@@ -12,8 +12,8 @@ Feature: Zone unique code validation
 
     @ui
     Scenario: Trying to add zone with taken code
-        Given I want to create a new zone consisting of country
-        When I specify its code as "US"
+        When I want to create a new zone consisting of country
+        And I specify its code as "US"
         And I name it "United States"
         And I try to add it
         Then I should be notified that zone with this code already exists

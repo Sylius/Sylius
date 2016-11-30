@@ -30,6 +30,8 @@ sylius_api_promotion_coupon_delete:
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.promotion_coupon:deleteAction
+        _sylius:
+            csrf_protection: false
 
 sylius_api_promotion_coupon_show:
     path: /{id}

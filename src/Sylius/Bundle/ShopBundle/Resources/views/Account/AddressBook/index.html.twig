@@ -1,0 +1,31 @@
+{% extends '@SyliusShop/Account/AddressBook/layout.html.twig' %}
+
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+
+{% block subcontent %}
+    <div class="ui stackable two column grid">
+        <div class="column">
+            <h1 class="ui header">
+                {{ 'sylius.ui.address_book'|trans }}
+                <div class="sub header">{{ 'sylius.ui.manage_your_saved_addresses'|trans }}</div>
+            </h1>
+        </div>
+        <div class="middle aligned column">
+            <a href="{{ path('sylius_shop_account_address_book_create') }}" class="ui right floated blue button"><i class="circle plus icon"></i> {{ 'sylius.ui.add_address'|trans }}</a>
+        </div>
+    </div>
+    {% if addresses|length > 0 %}
+        {% set defaultAddress = (shopperContext.getCustomer().defaultAddress) %}
+        {% if defaultAddress is not null %}
+            {% include '@SyliusShop/Account/AddressBook/_defaultAddress.html.twig' %}
+        {% endif %}
+    <div class="ui stackable grid" id="sylius-addresses">
+        {% for address in addresses if defaultAddress is null or address.id != defaultAddress.id %}
+            {% include '@SyliusShop/Account/AddressBook/_item.html.twig' %}
+        {% endfor %}
+    </div>
+    {% else %}
+        {{ messages.info('sylius.ui.you_have_no_addresses_defined'|trans) }}
+    {% endif %}
+{% endblock %}

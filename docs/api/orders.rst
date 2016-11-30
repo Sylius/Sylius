@@ -54,7 +54,7 @@ The response will contain the newly created order information.
             "items":[
                 {
                     "id":301,
-                    "completed_at":"2014-11-26T23:00:33+0000",
+                    "checkout_completed_at":"2014-11-26T23:00:33+0000",
                     "number":"000000048",
                     "items":[
                         {
@@ -116,7 +116,7 @@ The response will contain the newly created order information.
                         "email":"ygrant@example.com",
                         "email_canonical":"ygrant@example.com",
                         "enabled":false,
-                        "groups":[
+                        "group":[
 
                         ],
                         "locked":false,
@@ -171,7 +171,7 @@ Response
 
     {
         "id":301,
-        "completed_at":"2014-11-26T23:00:33+0000",
+        "checkout_completed_at":"2014-11-26T23:00:33+0000",
         "number":"000000048",
         "items":[
             {
@@ -306,7 +306,7 @@ Response
             "email":"ygrant@example.com",
             "email_canonical":"ygrant@example.com",
             "enabled":false,
-            "groups":[
+            "group":[
 
             ],
             "locked":false,
@@ -391,7 +391,7 @@ Response
             "email":"chelsie.witting@example.com",
             "email_canonical":"chelsie.witting@example.com",
             "enabled":true,
-            "groups":[
+            "group":[
 
             ],
             "locked":false,

@@ -97,18 +97,19 @@ interface UserInterface extends
     public function setPasswordResetToken($passwordResetToken);
 
     /**
-     * Sets the timestamp that the user requested a password reset.
-     *
-     * @param null|\DateTime $date
+     * @return \DateTime|null
+     */
+    public function getPasswordRequestedAt();
+
+    /**
+     * @param \DateTime|null $date
      */
     public function setPasswordRequestedAt(\DateTime $date = null);
 
     /**
-     * Checks whether the password reset request has expired.
+     * @param \DateInterval $ttl
      *
-     * @param \DateInterval $ttl Requests older than this time interval will be considered expired
-     *
-     * @return bool true if the user's password request is non expired, false otherwise
+     * @return bool
      */
     public function isPasswordRequestNonExpired(\DateInterval $ttl);
 
@@ -128,17 +129,17 @@ interface UserInterface extends
     public function setVerifiedAt(\DateTime $verifiedAt = null);
 
     /**
-     * @param \DateTime $date
+     * @param \DateTime|null $date
      */
     public function setCredentialsExpireAt(\DateTime $date = null);
 
     /**
-     * @return \DateTime
+     * @return \DateTime|null
      */
     public function getLastLogin();
 
     /**
-     * @param \DateTime $time
+     * @param \DateTime|null $time
      */
     public function setLastLogin(\DateTime $time = null);
 
@@ -157,13 +158,6 @@ interface UserInterface extends
     public function hasRole($role);
 
     /**
-     * This overwrites any previous roles.
-     *
-     * @param array $roles
-     */
-    public function setRoles(array $roles);
-
-    /**
      * @param string $role
      */
     public function addRole($role);
@@ -174,24 +168,18 @@ interface UserInterface extends
     public function removeRole($role);
 
     /**
-     * Gets connected OAuth accounts.
-     *
      * @return Collection|UserOAuthInterface[]
      */
     public function getOAuthAccounts();
 
     /**
-     * Gets connected OAuth account.
-     *
      * @param string $provider
      *
-     * @return null|UserOAuthInterface
+     * @return UserOAuthInterface|null
      */
     public function getOAuthAccount($provider);
 
     /**
-     * Connects OAuth account.
-     *
      * @param UserOAuthInterface $oauth
      */
     public function addOAuthAccount(UserOAuthInterface $oauth);

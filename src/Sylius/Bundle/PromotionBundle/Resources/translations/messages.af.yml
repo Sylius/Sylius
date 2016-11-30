@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        promotion_action:
+            type: Tipe
+        promotion_rule:
+            shipping_country_configuration:
+                country: Land
+            type: Tipe

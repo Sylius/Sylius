@@ -21,17 +21,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface PaymentMethodRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param array $names
+     * @param string $name
+     * @param string $locale
      *
      * @return PaymentMethodInterface[]
      */
-    public function findByName(array $names);
-
-    /**
-     * @param string $name
-     *
-     * @return PaymentMethodInterface|null
-     */
-    public function findOneByName($name);
+    public function findByName($name, $locale);
 }
 

@@ -17,15 +17,13 @@ use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
 use Symfony\Component\Finder\Finder;
 
 /**
- * @mixin FinderFactory
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FinderFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Factory\FinderFactory');
+        $this->shouldHaveType(FinderFactory::class);
     }
 
     function it_implements_finder_factory_interface()

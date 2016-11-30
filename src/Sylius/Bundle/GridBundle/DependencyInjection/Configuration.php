@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\GridBundle\DependencyInjection;
 
 use Sylius\Bundle\GridBundle\Doctrine\ORM\Driver as DoctrineORMDriver;
+use Sylius\Bundle\GridBundle\SyliusGridBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -19,7 +20,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -47,35 +48,19 @@ class Configuration implements ConfigurationInterface
         ;
     }
 
+    /**
+     * @param ArrayNodeDefinition $node
+     */
     private function addDriversSection(ArrayNodeDefinition $node)
     {
-        // determine which drivers are distributed with this bundle
-        $driverDir = __DIR__ . '/../Resources/config/driver';
-        $iterator = new \RecursiveDirectoryIterator($driverDir);
-        foreach (new \RecursiveIteratorIterator($iterator) as $file) {
-            if ($file->getExtension() !== 'xml') {
-                continue;
-            }
-
-            // we use the parent directory name in addition to the filename to
-            // determine the name of the driver (e.g. doctrine/orm)
-            $validDrivers[] = str_replace('\\','/',substr($file->getPathname(), 1 + strlen($driverDir), -4));
-        }
-
         $node
             ->children()
                 ->arrayNode('drivers')
-                    ->info('Enable drivers which are distributed with this bundle')
-                    ->validate()
-                    ->ifTrue(function ($value) use ($validDrivers) {
-                        return 0 !== count(array_diff($value, $validDrivers));
-                    })
-                        ->thenInvalid(sprintf('Invalid driver specified in %%s, valid drivers: ["%s"]', implode('", "', $validDrivers)))
-                    ->end()
-                    ->defaultValue(['doctrine/orm'])
-                    ->prototype('scalar')->end()
+                    ->defaultValue([SyliusGridBundle::DRIVER_DOCTRINE_ORM])
+                    ->prototype('enum')->values(SyliusGridBundle::getAvailableDrivers())->end()
                 ->end()
-            ->end();
+            ->end()
+        ;
     }
 
     /**
@@ -86,6 +71,7 @@ class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('templates')
+                    ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('filter')
                             ->useAttributeAsKey('name')
@@ -115,7 +101,7 @@ class Configuration implements ConfigurationInterface
                             ->arrayNode('driver')
                                 ->addDefaultsIfNotSet()
                                 ->children()
-                                    ->scalarNode('name')->defaultValue(DoctrineORMDriver::NAME)->end()
+                                    ->scalarNode('name')->cannotBeEmpty()->defaultValue(DoctrineORMDriver::NAME)->end()
                                     ->arrayNode('options')
                                         ->useAttributeAsKey('name')
                                         ->prototype('variable')->end()
@@ -124,7 +110,9 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                             ->arrayNode('sorting')
-                                ->prototype('scalar')->end()
+                                ->performNoDeepMerging()
+                                ->useAttributeAsKey('name')
+                                ->prototype('enum')->values(['asc', 'desc'])->cannotBeEmpty()->end()
                             ->end()
                             ->arrayNode('fields')
                                 ->useAttributeAsKey('name')
@@ -133,6 +121,8 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('type')->isRequired()->cannotBeEmpty()->end()
                                         ->scalarNode('label')->cannotBeEmpty()->end()
                                         ->scalarNode('path')->cannotBeEmpty()->end()
+                                        ->scalarNode('sortable')->end()
+                                        ->scalarNode('enabled')->defaultTrue()->end()
                                         ->arrayNode('options')
                                             ->prototype('variable')->end()
                                         ->end()
@@ -145,6 +135,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('type')->isRequired()->cannotBeEmpty()->end()
                                         ->scalarNode('label')->cannotBeEmpty()->end()
+                                        ->scalarNode('template')->end()
                                         ->arrayNode('options')
                                             ->prototype('variable')->end()
                                         ->end()
@@ -159,6 +150,7 @@ class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->scalarNode('type')->isRequired()->end()
                                             ->scalarNode('label')->end()
+                                            ->scalarNode('icon')->end()
                                             ->arrayNode('options')
                                                 ->prototype('variable')->end()
                                             ->end()

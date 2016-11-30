@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Shipping\Model;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
@@ -28,10 +27,19 @@ interface ShippingMethodInterface extends
     ToggleableInterface,
     TranslatableInterface
 {
-    // Shippables requirement to match given method.
     const CATEGORY_REQUIREMENT_MATCH_NONE = 0;
     const CATEGORY_REQUIREMENT_MATCH_ANY = 1;
     const CATEGORY_REQUIREMENT_MATCH_ALL = 2;
+
+    /**
+     * @return int
+     */
+    public function getPosition();
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position);
 
     /**
      * @return null|ShippingCategoryInterface
@@ -66,29 +74,21 @@ interface ShippingMethodInterface extends
     public function getCategoryRequirementLabel();
 
     /**
-     * Get calculator name assigned for this shipping method.
-     *
      * @return string
      */
     public function getCalculator();
 
     /**
-     * Set calculator name assigned for this shipping method.
-     *
      * @param string $calculator
      */
     public function setCalculator($calculator);
 
     /**
-     * Get any extra configuration for calculator.
-     *
      * @return array
      */
     public function getConfiguration();
 
     /**
-     * Set extra configuration for calculator.
-     *
      * @param array $configuration
      */
     public function setConfiguration(array $configuration);

@@ -27,19 +27,11 @@ final class SharedSecurityService implements SharedSecurityServiceInterface
     private $adminSecurityService;
 
     /**
-     * @var SecurityServiceInterface
-     */
-    private $shopSecurityService;
-
-    /**
      * {@inheritdoc}
      */
-    public function __construct(
-        SecurityServiceInterface $adminSecurityService,
-        SecurityServiceInterface $shopSecurityService
-    ) {
+    public function __construct(SecurityServiceInterface $adminSecurityService)
+    {
         $this->adminSecurityService = $adminSecurityService;
-        $this->shopSecurityService = $shopSecurityService;
     }
 
     /**
@@ -48,14 +40,6 @@ final class SharedSecurityService implements SharedSecurityServiceInterface
     public function performActionAsAdminUser(AdminUserInterface $adminUser, callable $action)
     {
         $this->performActionAs($this->adminSecurityService, $adminUser, $action);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function performActionAsShopUser(ShopUserInterface $shopUser, callable $action)
-    {
-        $this->performActionAs($this->shopSecurityService, $shopUser, $action);
     }
 
     /**

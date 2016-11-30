@@ -1,22 +1,64 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 #
-sylius_api_checkout_index:
-    path: /
+sylius_api_checkout_show:
+    path: /{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:indexAction
-        _sylius:
-            repository:
-                method:    createCheckoutsPaginator
-                arguments: [$criteria, $sorting]
-            paginate:  $limit
-            sortable:  true
-            sorting:
-                updatedAt: desc
+        _controller: sylius.controller.order:showAction
 
-sylius_api_checkout_proceed:
-    path: /{orderId}
-    methods: [GET, PUT, PATCH]
+sylius_api_checkout_addressing:
+    path: /addressing/{orderId}
+    methods: [PUT]
     defaults:
-        _controller: sylius.controller.checkout:proceedAction
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressType
+            repository:
+                method: find
+                arguments: [$orderId]
+            state_machine:
+                graph: sylius_order_checkout
+                transition: address
+
+sylius_api_checkout_select_shipping:
+    path: /select-shipping/{orderId}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType
+            repository:
+                method: find
+                arguments: [$orderId]
+            state_machine:
+                graph: sylius_order_checkout
+                transition: select_shipping
+
+sylius_api_checkout_select_payment:
+    path: /select-payment/{orderId}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType
+            repository:
+                method: find
+                arguments: [$orderId]
+            state_machine:
+                graph: sylius_order_checkout
+                transition: select_payment
+
+sylius_api_checkout_complete:
+    path: /complete/{orderId}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType
+            repository:
+                method: find
+                arguments: [$orderId]
+            state_machine:
+                graph: sylius_order_checkout
+                transition: complete

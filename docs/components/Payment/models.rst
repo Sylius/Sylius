@@ -101,6 +101,8 @@ Every method of payment is represented by a **PaymentMethod** instance and has t
 +----------------------------+-----------------------------------------------------------------+
 | gateway                    | Payment method's gateway to use                                 |
 +----------------------------+-----------------------------------------------------------------+
+| position                   | Payment method's position among other methods                   |
++----------------------------+-----------------------------------------------------------------+
 | environment                | Required app environment                                        |
 +----------------------------+-----------------------------------------------------------------+
 | feeCalculator              | Calculator for additional fee costs (by default set to 'fixed') |

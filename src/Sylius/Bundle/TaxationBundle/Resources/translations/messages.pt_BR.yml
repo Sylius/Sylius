@@ -9,6 +9,5 @@ sylius:
         tax_rate:
             category: Categoria
             name: Nome
-            amount: Quantidade
             included_in_price: Incluído no preço?
             calculator: Calculadora

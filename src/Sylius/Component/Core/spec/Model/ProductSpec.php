@@ -11,15 +11,17 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ImageAwareInterface;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface as VariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Product\Model\Product as SyliusProduct;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+use Sylius\Component\Product\Model\Product as BaseProduct;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -36,33 +38,41 @@ final class ProductSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\Product');
+        $this->shouldHaveType(Product::class);
     }
 
-    function it_implements_Sylius_core_product_interface()
+    function it_implements_a_product_interface()
     {
         $this->shouldImplement(ProductInterface::class);
     }
 
-    function it_extends_Sylius_product_model()
+    function it_implements_an_image_aware_interface()
     {
-        $this->shouldHaveType(SyliusProduct::class);
+        $this->shouldImplement(ImageAwareInterface::class);
     }
 
-    function it_has_metadata_class_identifier()
+    function it_extends_a_product_model()
     {
-        $this->getMetadataClassIdentifier()->shouldReturn('Product');
+        $this->shouldHaveType(BaseProduct::class);
     }
 
-    function it_initializes_taxon_collection_by_default()
+    function it_initializes_a_product_taxon_collection_by_default()
     {
-        $this->getTaxons()->shouldHaveType(Collection::class);
+        $this->getProductTaxons()->shouldHaveType(Collection::class);
+    }
+    
+    function it_adds_a_product_taxons(ProductTaxonInterface $productTaxon)
+    {
+        $this->addProductTaxon($productTaxon);
+        $this->hasProductTaxon($productTaxon)->shouldReturn(true);
     }
 
-    function its_taxons_are_mutable(Collection $taxons)
+    function it_removes_a_product_taxons(ProductTaxonInterface $productTaxon)
     {
-        $this->setTaxons($taxons);
-        $this->getTaxons()->shouldReturn($taxons);
+        $this->addProductTaxon($productTaxon);
+        $this->removeProductTaxon($productTaxon);
+        
+        $this->hasProductTaxon($productTaxon)->shouldReturn(false);
     }
 
     function its_variant_selection_method_is_choice_by_default()
@@ -78,20 +88,9 @@ final class ProductSpec extends ObjectBehavior
     function it_throws_exception_if_any_other_value_is_given_as_variant_selection_method()
     {
         $this
-            ->shouldThrow('InvalidArgumentException')
+            ->shouldThrow(\InvalidArgumentException::class)
             ->duringSetVariantSelectionMethod('foo')
         ;
-    }
-
-    function it_has_no_shipping_category_by_default()
-    {
-        $this->getShippingCategory()->shouldReturn(null);
-    }
-
-    function its_shipping_category_is_mutable(ShippingCategoryInterface $shippingCategory)
-    {
-        $this->setShippingCategory($shippingCategory);
-        $this->getShippingCategory()->shouldReturn($shippingCategory);
     }
 
     function it_has_no_main_taxon_by_default()
@@ -105,52 +104,89 @@ final class ProductSpec extends ObjectBehavior
         $this->getMainTaxon()->shouldReturn($taxon);
     }
 
-    function it_returns_first_variant(VariantInterface $variant)
+    function it_initializes_image_collection_by_default()
     {
-        $this->addVariant($variant);
-
-        $this->getFirstVariant()->shouldReturn($variant);
+        $this->getImages()->shouldHaveType(Collection::class);
     }
 
-    function it_returns_null_as_first_variant_if_product_has_no_variants(VariantInterface $variant)
+    function it_adds_an_image(ImageInterface $image)
     {
-        $variant->setProduct(null)->shouldBeCalled();
-        $this->removeVariant($variant);
-
-        $this->getFirstVariant()->shouldReturn(null);
+        $this->addImage($image);
+        $this->hasImages()->shouldReturn(true);
+        $this->hasImage($image)->shouldReturn(true);
     }
 
-    function it_returns_first_variants_price_as_product_price(VariantInterface $variant)
+    function it_removes_an_image(ImageInterface $image)
     {
-        $variant->getPrice()->willReturn(1000);
-        $this->addVariant($variant);
-
-        $this->getPrice()->shouldReturn(1000);
+        $this->addImage($image);
+        $this->removeImage($image);
+        $this->hasImage($image)->shouldReturn(false);
     }
 
-    function it_returns_null_as_product_price_if_product_has_no_variants(VariantInterface $variant)
+    function it_returns_an_image_by_code(ImageInterface $image)
     {
-        $variant->setProduct(null)->shouldBeCalled();
-        $this->removeVariant($variant);
+        $image->getCode()->willReturn('thumbnail');
+        $image->setOwner($this)->shouldBeCalled();
 
-        $this->getPrice()->shouldReturn(null);
+        $this->addImage($image);
+
+        $this->getImageByCode('thumbnail')->shouldReturn($image);
     }
-
-    function it_returns_first_variants_image_as_product_image(
-        ImageInterface $image,
-        VariantInterface $variant
+    
+    function it_filters_product_taxons_by_taxon(
+        ProductTaxonInterface $firstProductTaxon, 
+        ProductTaxonInterface $secondProductTaxon, 
+        TaxonInterface $firstTaxon,
+        TaxonInterface $secondTaxon
     ) {
-        $variant->getImage()->willReturn($image);
-        $this->addVariant($variant);
+        $this->addProductTaxon($firstProductTaxon);
+        $this->addProductTaxon($secondProductTaxon);
 
-        $this->getImage()->shouldReturn($image);
+        $firstProductTaxon->getTaxon()->willReturn($firstTaxon);
+        $secondProductTaxon->getTaxon()->willReturn($secondTaxon);
+        
+        $this->filterProductTaxonsByTaxon($firstTaxon)->shouldBeCollection(new ArrayCollection([$firstProductTaxon->getWrappedObject()]));
     }
 
-    function it_returns_null_as_product_image_if_product_has_no_variants(VariantInterface $variant)
-    {
-        $variant->setProduct(null)->shouldBeCalled();
-        $this->removeVariant($variant);
+    function it_returns_null_if_no_product_taxon_has_taxon_durign_filtering(
+        ProductTaxonInterface $firstProductTaxon,
+        ProductTaxonInterface $secondProductTaxon,
+        TaxonInterface $firstTaxon,
+        TaxonInterface $secondTaxon,
+        TaxonInterface $thirdTaxon
+    ) {
+        $this->addProductTaxon($firstProductTaxon);
+        $this->addProductTaxon($secondProductTaxon);
 
-        $this->getImage()->shouldReturn(null);
+        $firstProductTaxon->getTaxon()->willReturn($firstTaxon);
+        $secondProductTaxon->getTaxon()->willReturn($secondTaxon);
+
+        $this->filterProductTaxonsByTaxon($thirdTaxon)->shouldBeCollection(new ArrayCollection());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getMatchers()
+    {
+        return [
+            'beCollection' => function ($subject, $key) {
+                if (!$subject instanceof Collection || !$key instanceof Collection) {
+                    return false;
+                }
+
+                if ($subject->count() !== $key->count()) {
+                    return false;
+                }
+
+                foreach ($subject as $subjectElement) {
+                    if (!$key->contains($subjectElement)) {
+                        return false;
+                    }
+                }
+
+                return true;
+            },
+        ];
     }
 }

@@ -6,25 +6,30 @@ sylius_grid:
                 options:
                     class: "%sylius.model.promotion_coupon.class%"
                     repository:
-                        method: createQueryBuilderWithPromotion
+                        method: createQueryBuilderByPromotionId
                         arguments:
                             promotionId: $promotionId
             fields:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 usageLimit:
                     type: string
                     label: sylius.ui.usage_limit
+                    sortable: ~
                 perCustomerUsageLimit:
                     type: string
                     label: sylius.ui.per_customer_usage_limit
+                    sortable: ~
                 used:
                     type: string
                     label: sylius.ui.used
+                    sortable: ~
                 expiresAt:
                     type: datetime
                     label: sylius.ui.expires_at
+                    sortable: ~
                     options:
                         format: d-m-Y
             filters:
@@ -34,11 +39,32 @@ sylius_grid:
             actions:
                 main:
                     generate:
-                        type: generate_coupon
+                        type: default
+                        label: sylius.ui.generate
+                        icon: random
+                        options:
+                            link:
+                                route: sylius_admin_promotion_coupon_generate
+                                parameters:
+                                    promotionId: $promotionId
                     create:
-                        type: create_coupon
+                        type: create
+                        options:
+                            link:
+                                parameters:
+                                    promotionId: $promotionId
                 item:
                     update:
-                        type: update_coupon
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    promotionId: $promotionId
                     delete:
-                        type: delete_coupon
+                        type: delete
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    promotionId: $promotionId

@@ -10,7 +10,7 @@ sylius:
         shipment:
             state: Durum
             states:
-                checkout: 'Ödeme  yap'
+                checkout: Ödeme  yap
                 pending: Beklemede
                 ready: Hazır
                 shipped: Kargolandı
@@ -41,6 +41,7 @@ sylius:
             calculator: Hesaplayıcı
             category: Kategori
             category_requirement: Kategori gereksinimi
+            channels: Kanallar
             configuration: Ayarlar
             description: Açıklama
             enabled: Etkin

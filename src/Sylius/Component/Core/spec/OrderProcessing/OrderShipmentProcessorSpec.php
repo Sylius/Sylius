@@ -16,15 +16,13 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
- * @mixin OrderShipmentProcessor
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class OrderShipmentProcessorSpec extends ObjectBehavior

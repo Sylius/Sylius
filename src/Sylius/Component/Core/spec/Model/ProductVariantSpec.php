@@ -11,9 +11,16 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariant;
 use Sylius\Component\Core\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductVariant as BaseProductVariant;
+use Sylius\Component\Shipping\Model\ShippableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
@@ -25,98 +32,27 @@ final class ProductVariantSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\ProductVariant');
+        $this->shouldHaveType(ProductVariant::class);
     }
 
-    function it_implements_Sylius_product_variant_interface()
+    function it_implements_a_product_variant_interface()
     {
         $this->shouldImplement(ProductVariantInterface::class);
     }
 
-    function it_implements_Sylius_taxable_interface()
+    function it_implements_a_taxable_interface()
     {
         $this->shouldImplement(TaxableInterface::class);
     }
 
-    function it_extends_Sylius_product_variant_model()
+    function it_extends_a_product_variant_model()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\Variant');
+        $this->shouldHaveType(BaseProductVariant::class);
     }
 
-    function it_has_metadata_class_identifier()
+    function it_implements_a_shippable_interface()
     {
-        $this->getMetadataClassIdentifier()->shouldReturn('ProductVariant');
-    }
-
-    function it_should_not_have_price_by_default()
-    {
-        $this->getPrice()->shouldReturn(null);
-    }
-
-    function it_should_not_have_original_price_by_default()
-    {
-        $this->getOriginalPrice()->shouldReturn(null);
-    }
-
-    function it_initializes_image_collection_by_default()
-    {
-        $this->getImages()->shouldHaveType('Doctrine\Common\Collections\Collection');
-    }
-
-    function its_price_should_be_mutable()
-    {
-        $this->setPrice(499);
-        $this->getPrice()->shouldReturn(499);
-    }
-
-    function its_original_price_should_be_mutable()
-    {
-        $this->setOriginalPrice(399);
-        $this->getOriginalPrice()->shouldReturn(399);
-    }
-
-    function its_price_should_accept_only_integer()
-    {
-        $this->setPrice(410);
-        $this->getPrice()->shouldBeInteger();
-
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(4.1 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice('410');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(round(4.1 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice([410]);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(new \stdClass());
-    }
-
-    function its_original_price_should_accept_only_integer()
-    {
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(3.1 * 100);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice('310');
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(round(3.1 * 100));
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice([310]);
-        $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(new \stdClass());
-    }
-
-    function it_implements_Sylius_shippable_interface()
-    {
-        $this->shouldImplement('Sylius\Component\Shipping\Model\ShippableInterface');
-    }
-
-    function it_returns_null_if_product_has_no_shipping_category(ProductInterface $product)
-    {
-        $this->setProduct($product);
-
-        $product->getShippingCategory()->willReturn(null)->shouldBeCalled();
-        $this->getShippingCategory()->shouldReturn(null);
-    }
-
-    function it_returns_the_product_shipping_category(
-        ProductInterface $product,
-        ShippingCategoryInterface $shippingCategory
-    ) {
-        $this->setProduct($product);
-
-        $product->getShippingCategory()->willReturn($shippingCategory)->shouldBeCalled();
-        $this->getShippingCategory()->shouldReturn($shippingCategory);
+        $this->shouldImplement(ShippableInterface::class);
     }
 
     function it_has_no_weight_by_default()
@@ -185,10 +121,8 @@ final class ProductVariantSpec extends ObjectBehavior
 
     function its_code_is_mutable()
     {
-        $sku = 'dummy-sku123';
-
-        $this->setCode($sku);
-        $this->getCode()->shouldReturn($sku);
+        $this->setCode('dummy-sku123');
+        $this->getCode()->shouldReturn('dummy-sku123');
     }
 
     function it_does_not_have_tax_category_by_default()
@@ -209,5 +143,82 @@ final class ProductVariantSpec extends ObjectBehavior
 
         $this->setTaxCategory(null);
         $this->getTaxCategory()->shouldReturn(null);
+    }
+
+    function it_has_no_shipping_category_by_default()
+    {
+        $this->getShippingCategory()->shouldReturn(null);
+    }
+
+    function its_shipping_category_is_mutable(ShippingCategoryInterface $shippingCategory)
+    {
+        $this->setShippingCategory($shippingCategory);
+        $this->getShippingCategory()->shouldReturn($shippingCategory);
+    }
+
+    function it_adds_and_removes_channel_pricings(ChannelPricingInterface $channelPricing)
+    {
+        $channelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($channelPricing);
+        $this->hasChannelPricing($channelPricing)->shouldReturn(true);
+
+        $channelPricing->setProductVariant(null)->shouldBeCalled();
+        $this->removeChannelPricing($channelPricing);
+        $this->hasChannelPricing($channelPricing)->shouldReturn(false);
+    }
+
+    function it_has_channel_pricings_collection(
+        ChannelPricingInterface $firstChannelPricing,
+        ChannelPricingInterface $secondChannelPricing
+    ) {
+        $firstChannelPricing->setProductVariant($this)->shouldBeCalled();
+        $secondChannelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($firstChannelPricing);
+        $this->addChannelPricing($secondChannelPricing);
+
+        $this->getChannelPricings()->shouldBeSameAs(new ArrayCollection([$firstChannelPricing, $secondChannelPricing]));
+    }
+
+    function it_checks_if_contains_channel_pricing_for_given_channel(
+        ChannelInterface $firstChannel,
+        ChannelInterface $secondChannel,
+        ChannelPricingInterface $firstChannelPricing
+    ) {
+        $firstChannelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($firstChannelPricing);
+
+        $firstChannelPricing->getChannel()->willReturn($firstChannel);
+
+        $this->hasChannelPricingForChannel($firstChannel)->shouldReturn(true);
+        $this->hasChannelPricingForChannel($secondChannel)->shouldReturn(false);
+    }
+
+    function it_returns_channel_pricing_for_given_channel(
+        ChannelInterface $channel,
+        ChannelPricingInterface $channelPricing
+    ) {
+        $channelPricing->setProductVariant($this)->shouldBeCalled();
+        $this->addChannelPricing($channelPricing);
+
+        $channelPricing->getChannel()->willReturn($channel);
+
+        $this->getChannelPricingForChannel($channel)->shouldReturn($channelPricing);
+    }
+
+    public function getMatchers()
+    {
+        return [
+            'beSameAs' => function ($subject, $key) {
+                if (!$subject instanceof Collection || !$key instanceof Collection) {
+                    return false;
+                }
+                for ($i = 0; $i < $subject->count(); $i++) {
+                    if ($subject->get($i) !== $key->get($i)->getWrappedObject()) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+        ];
     }
 }

@@ -25,7 +25,6 @@ sylius:
         administration: Administrasjon
         administration_dashboard: Administrasjon dashboard
         all_your_addresses: Alle adressene
-        amount: Beløp
         assortment: Utvalg
         author: Forfatter
         availability: Tilgjengelighet
@@ -55,7 +54,6 @@ sylius:
         confirmation: Bekreft
         confirmation_title: Bekreft
         contain_variants: Inneholder varianter
-        content: Innhold
         countries: Land
         country: Land
         country_details: Detaljer for land
@@ -65,7 +63,6 @@ sylius:
         create: Opprett
         create_a_new_address: Lag en ny adresse
         create_country: Opprett land
-        create_group: Opprett gruppe
         create_locale: Definer språk/land
         create_new_coupon: Lag ny rabattkupong
         create_new_page: Opprett ny side
@@ -90,14 +87,12 @@ sylius:
         current_stock: På lager
         dashboard: Panel
         default_billing_address: Standard faktureringsadresse
-        default_currency: Standard valuta
         default_shipping_address: Standard leveringsadresse
         delete: Slett
         delete_image: Slett bilde
         deleted: Slettet
         description: Beskrivelse
         edit: Rediger
-        edit_group: Rediger gruppe
         edit_locale: Redigere språk/land
         edit_my_address: Rediger min adresse
         edit_your_personal_information: Endre din personlige informasjon
@@ -123,7 +118,6 @@ sylius:
         exchange_rate: Valutakurs
         existing_customer: Eksisterende kunde
         failed: Mislyktes
-        filter: Filtrer
         first_name: Fornavn
         fulfill: Oppfylle
         gateway: Rute
@@ -134,7 +128,6 @@ sylius:
         generate_variants: Generer varianter
         generating_coupons: Genererer kuponger
         grand_total: Total
-        groups: Grupper
         hide_deleted: Skjul slettet
         home: Hjem
         id: ID
@@ -143,14 +136,13 @@ sylius:
         index_of_all_configured_locales: Liste av alle konfigurerte nasjonale innstillinger
         information: Informasjon
         inventory: Lager
-        inventory_here_you_can_see_current_stock_levels: 'Lagerbeholdning <small>Her kan du se gjeldende lagernivå</small>'
+        inventory_here_you_can_see_current_stock_levels: Lagerbeholdning <small>Her kan du se gjeldende lagernivå</small>
         inventory_index: Lager
         inventory_state: Lagertilstand
         inventory_tracking: Sporing av Inventar
         invoice: Faktura
         item: Produkt
         items_total: Antall varer
-        label: Etikett
         last_login: Siste pålogging
         last_name: Etternavn
         last_update: Sist oppdatert
@@ -202,14 +194,13 @@ sylius:
         new_zone: Ny sone
         newest_products: Nyeste produkter
         next: Neste
-        "no": false
         no_default_billing_address: Ingen standard faktureringsadresse
         no_default_shipping_address: Ingen standard leveringsadresse
         no_description: Ingen beskrivelse
         no_promotion: Ingen tilbudskode
         no_shipping_category: Ingen fraktkategori
         no_shipping_charges: Ingen fraktkostnader lagt til
-        no_short_description: '<i>Ingen kort beskrivelse</i>'
+        no_short_description: <i>Ingen kort beskrivelse</i>
         no_sku: Ingen vareenhet
         no_tax_category: Ingen skattekategori
         no_taxes: Ingen mva lagt til
@@ -244,11 +235,10 @@ sylius:
         pricing: Prising
         processing: Behandler
         product: Produkt
-        product_details_viewing_product_product: 'Produktdetaljer <small>Ser på produkt "<strong>%product%</strong>"</small>'
-        products: Produkter
-        products_categorized_as_name: 'Produkter kategorisert som "%name%"'
-        products_categorized_under_taxon_taxon: 'Produkter <small>kategorisert under "%taxon%" gruppe</small>'
-        products_index_of_all_products_in_your_store: 'Produkter <small>indeks over alle produkter i butikken</small>'
+        product_details_viewing_product_product: Produktdetaljer <small>Ser på produkt "<strong>%product%</strong>"</small>
+        products_categorized_as_name: Produkter kategorisert som "%name%"
+        products_categorized_under_taxon_taxon: Produkter <small>kategorisert under "%taxon%" gruppe</small>
+        products_index_of_all_products_in_your_store: Produkter <small>indeks over alle produkter i butikken</small>
         promotion_coupons: Kuponger
         promotion_details: Kampanjedetaljer
         promotion_total: Total kampanje
@@ -269,7 +259,6 @@ sylius:
         return: Retur
         returned: Returnert
         roles: Roller
-        routes: Ruter
         rules: Regler
         sales: Salg
         sales_this_month: Salg
@@ -296,7 +285,7 @@ sylius:
         shop_by: Butikk av
         show_all: Vis alle
         show_deleted: Vis slettede
-        sign_in_to_the_store_or_create_new_account: 'Logg på butikken <small>eller opprett ny konto</small>'
+        sign_in_to_the_store_or_create_new_account: Logg på butikken <small>eller opprett ny konto</small>
         sku: Strekkode
         slideshow: Lysbildevisning
         starts_at: Starter på
@@ -310,7 +299,6 @@ sylius:
         taxation_categories: Beskatningskategorier
         taxation_settings: Beskatningsinnstillinger
         taxes: Avgifter
-        taxons: Taksonomier
         there_are_no_images_for_this_product: Det er ingen bilder for dette produktet
         there_are_no_options_for_this_product: Det er ingen alternativer for dette produktet
         there_are_no_taxons_for_this_product: Det er ingen grupper for dette produktet
@@ -330,14 +318,13 @@ sylius:
         used: Brukt
         user_details: Brukerdetaljer
         username: Brukernavn
-        users_list_of_all_users_registered_in_store: 'Brukere <small>Liste over alle brukere registrert i butikken</small>'
+        users_list_of_all_users_registered_in_store: Brukere <small>Liste over alle brukere registrert i butikken</small>
         variant: Variant
         variant_selection_method: Metode for valg av variant
         view_more: Vis mer
         void: Ugyldig
         warning: Advarsel
         welcome_to_your_space: Velkommen til ditt område
-        "yes": true
         you_are_customer_since: Du har vært kunde siden
         you_have_no_new_orders: Du har ingen nye ordrer
         your_cart_is_empty: Handlevognen er tom

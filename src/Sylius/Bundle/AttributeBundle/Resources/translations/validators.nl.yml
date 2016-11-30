@@ -5,15 +5,15 @@ sylius:
     attribute:
         name:
             not_blank: Vul naam van het attribuut in.
-            min_length: 'Attribuutnaam moet minimaal 1 teken bevatten. |Attribuutnaam moet minstens {{ limit }} tekens bevatten.'
-            max_length: 'Attribuutnaam mag niet langer zijn dan 1 teken. | Attribuutnaam mag niet meer dan {{ limit }} tekens bevatten.'
+            min_length: Attribuutnaam moet minimaal 1 teken bevatten. |Attribuutnaam moet minstens {{ limit }} tekens bevatten.
+            max_length: Attribuutnaam mag niet langer zijn dan 1 teken. | Attribuutnaam mag niet meer dan {{ limit }} tekens bevatten.
         code:
             not_blank: Vul de attribuutcode in.
             unique: Deze code is al in gebruik.
         presentation:
             not_blank: Vul de attribuutweergave in.
-            min_length: 'Attribuutweergave moet minimaal 1 teken bevatten. |Attribuutweergave moet minstens {{ limit }} teken bevatten.'
-            max_length: 'Attribuutweergave mag niet langer zijn dan 1 teken. | Attribuutweergave mag niet meer dan {{ limit }} tekens bevatten.'
+            min_length: Attribuutweergave moet minimaal 1 teken bevatten. |Attribuutweergave moet minstens {{ limit }} teken bevatten.
+            max_length: Attribuutweergave mag niet langer zijn dan 1 teken. | Attribuutweergave mag niet meer dan {{ limit }} tekens bevatten.
     attribute_value:
         attribute:
             not_blank: Kies een attribuut.

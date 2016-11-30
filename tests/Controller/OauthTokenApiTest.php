@@ -39,10 +39,10 @@ EOT;
 
         $this->client->request('POST', '/api/oauth/v2/token', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
 
-
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/new_access_token', Response::HTTP_OK);
     }
+
     /**
      * @test
      */
@@ -61,7 +61,6 @@ EOT;
 EOT;
 
         $this->client->request('POST', '/api/oauth/v2/token', [], [], ['CONTENT_TYPE' => 'application/json'], $data);
-
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/new_access_token', Response::HTTP_OK);

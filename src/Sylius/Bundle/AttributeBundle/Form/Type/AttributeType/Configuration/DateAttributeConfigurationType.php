@@ -12,12 +12,13 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DateAttributeConfigurationType extends AbstractType
+final class DateAttributeConfigurationType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -25,14 +26,16 @@ class DateAttributeConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('format', 'text', ['label' => 'sylius.form.attribute_type_configuration.date.format'])
+            ->add('format', TextType::class, [
+                'label' => 'sylius.form.attribute_type_configuration.date.format',
+            ])
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_attribute_type_configuration_date';
     }

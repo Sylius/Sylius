@@ -11,7 +11,9 @@
 
 namespace spec\Sylius\Component\Taxonomy\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Taxonomy\Model\Taxon;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
@@ -28,10 +30,10 @@ final class TaxonSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Taxonomy\Model\Taxon');
+        $this->shouldHaveType(Taxon::class);
     }
 
-    function it_implements_Sylius_taxon_interface()
+    function it_implements_taxon_interface()
     {
         $this->shouldImplement(TaxonInterface::class);
     }
@@ -41,7 +43,7 @@ final class TaxonSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_has_mutable_code()
+    function its_code_is_mutable()
     {
         $this->setCode('TX2');
         $this->getCode()->shouldReturn('TX2');
@@ -62,16 +64,18 @@ final class TaxonSpec extends ObjectBehavior
         TaxonInterface $categoryTaxon,
         TaxonInterface $tshirtsTaxon
     ) {
-        $categoryTaxon->getParent()->willReturn(null);
         $tshirtsTaxon->getParent()->willReturn($categoryTaxon);
+
+        $tshirtsTaxon->addChild($this)->shouldBeCalled();
         $this->setParent($tshirtsTaxon);
-        
+
         $this->getParents()->shouldReturn([$tshirtsTaxon, $categoryTaxon]);
     }
 
     function it_returns_an_array_of_with_a_single_parent_taxon(TaxonInterface $parentTaxon)
     {
         $parentTaxon->getParent()->willReturn(null);
+        $parentTaxon->addChild($this)->shouldBeCalled();
         $this->setParent($parentTaxon);
 
         $this->getParents()->shouldReturn([$parentTaxon]);
@@ -143,20 +147,9 @@ final class TaxonSpec extends ObjectBehavior
         $this->getSlug()->shouldReturn('t-shirts');
     }
 
-    function it_has_no_permalink_by_default()
-    {
-        $this->getPermalink()->shouldReturn(null);
-    }
-
-    function its_permalink_is_mutable()
-    {
-        $this->setPermalink('woman-clothing');
-        $this->getPermalink()->shouldReturn('woman-clothing');
-    }
-
     function it_initializes_child_taxon_collection_by_default()
     {
-        $this->getChildren()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getChildren()->shouldHaveType(Collection::class);
     }
 
     function it_allows_to_check_if_given_taxon_is_its_child(TaxonInterface $taxon)
@@ -166,6 +159,7 @@ final class TaxonSpec extends ObjectBehavior
 
     function it_allows_to_add_child_taxons(TaxonInterface $taxon)
     {
+        $taxon->getParent()->willReturn(null);
         $taxon->setParent($this)->shouldBeCalled();
 
         $this->addChild($taxon);
@@ -173,6 +167,7 @@ final class TaxonSpec extends ObjectBehavior
 
     function it_allows_to_remove_child_taxons(TaxonInterface $taxon)
     {
+        $taxon->getParent()->willReturn(null);
         $taxon->setParent($this)->shouldBeCalled();
 
         $this->addChild($taxon);
@@ -180,5 +175,11 @@ final class TaxonSpec extends ObjectBehavior
         $taxon->setParent(null)->shouldBeCalled();
 
         $this->removeChild($taxon);
+    }
+
+    function it_has_position()
+    {
+        $this->setPosition(0);
+        $this->getPosition()->shouldReturn(0);
     }
 }

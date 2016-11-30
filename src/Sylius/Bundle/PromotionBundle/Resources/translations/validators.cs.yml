@@ -4,24 +4,18 @@
 sylius:
     promotion:
         description:
-            max_length: 'Popis propagace nesmí být delší než 1 znak. |Popis propagace nesmí být delší než {{ limit }} znaků.'
-            min_length: 'Popis propagace musí mít nejméně 1 znak. |Popis propagace musí být alespoň {{ limit }} znaků dlouhý.'
+            max_length: Popis propagace nesmí být delší než 1 znak. |Popis propagace nesmí být delší než {{ limit }} znaků.
+            min_length: Popis propagace musí mít nejméně 1 znak. |Popis propagace musí být alespoň {{ limit }} znaků dlouhý.
             not_blank: Zadejte popis propagace.
         name:
-            max_length: 'Název akce nesmí být delší než 1 znak. |Název akce nesmí být delší než {{ limit }} znaků.'
-            min_length: 'Název akce musí mít nejméně 1 znak. |Název akce musí mít alespoň {{ limit }} znaků.'
+            max_length: Název akce nesmí být delší než 1 znak. |Název akce nesmí být delší než {{ limit }} znaků.
+            min_length: Název akce musí mít nejméně 1 znak. |Název akce musí mít alespoň {{ limit }} znaků.
             not_blank: Vyplňte prosím název akce.
     promotion_coupon:
         code:
-            max_length: 'Kód kupónu nesmí být delší než 1 znak. |Kód kupónu nesmí být delší než {{ limit }} znaků.'
-            min_length: 'Kód kupónu musí mít alespoň 1 znak. |Kód kupónu musí mít alespoň {{ limit }} znaků.'
+            max_length: Kód kupónu nesmí být delší než 1 znak. |Kód kupónu nesmí být delší než {{ limit }} znaků.
+            min_length: Kód kupónu musí mít alespoň 1 znak. |Kód kupónu musí mít alespoň {{ limit }} znaků.
             not_blank: Zadejte kód kupónu.
             unique: Tento kupón již existuje.
         usage_limit:
-            min: 'Limit využití kupónu musí být alespoň {{ limit }}.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'Počet kupónů k vygenerování musí být alespoň {{ limit }}.'
-            not_blank: Prosím zadejte počet kupónů, které se mají vygenerovat.
-        usage_limit:
-            min: 'Limit využití generovaných kupónů musí být alespoň {{ limit }}.'
+            min: Limit využití kupónu musí být alespoň {{ limit }}.

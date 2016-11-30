@@ -11,25 +11,25 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Doctrine;
 
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameFilterListener;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder\DefaultFormBuilder;
+use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\TranslatableRepositoryInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
-use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder\DefaultFormBuilder;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameFilterListener;
-use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class DoctrinePHPCRDriver extends AbstractDoctrineDriver
+final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
 {
     /**
      * {@inheritdoc}
@@ -188,34 +188,6 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
         }
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
-    {
-        $builderDefinition = new Definition(DefaultFormBuilder::class);
-        $builderDefinition->setArguments([
-            new Reference($metadata->getServiceId('manager'))
-        ]);
-
-        $definition = new Definition(DefaultResourceType::class);
-        $definition
-            ->setArguments([
-                $this->getMetadataDefinition($metadata),
-                $builderDefinition,
-            ])
-            ->addTag('form.type', [
-                'alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())
-            ])
-        ;
-
-        $container->setDefinition(sprintf(
-            '%s.form.type.%s',
-            $metadata->getApplicationName(),
-            $metadata->getName()
-        ), $definition);
     }
 
     /**

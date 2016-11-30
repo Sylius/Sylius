@@ -6,15 +6,17 @@ sylius_grid:
                 options:
                     class: "%sylius.model.tax_category.class%"
             sorting:
-                name: asc
+                nameAndDescription: asc
             fields:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 nameAndDescription:
                     type: twig
                     label: sylius.ui.name
                     path: .
+                    sortable: name
                     options:
                         template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
             filters:

@@ -117,15 +117,15 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return [
             'code' => '#sylius_promotion_code',
             'coupon_based' => '#sylius_promotion_couponBased',
-            'exclusive' => '#sylius_promotion_exclusive',
-            'name' => '#sylius_promotion_name',
-            'usage_limit' => '#sylius_promotion_usageLimit',
-            'starts_at' => '#sylius_promotion_startsAt',
-            'starts_at_date' => '#sylius_promotion_startsAt_date',
-            'starts_at_time' => '#sylius_promotion_startsAt_time',
             'ends_at' => '#sylius_promotion_endsAt',
             'ends_at_date' => '#sylius_promotion_endsAt_date',
             'ends_at_time' => '#sylius_promotion_endsAt_time',
+            'exclusive' => '#sylius_promotion_exclusive',
+            'name' => '#sylius_promotion_name',
+            'starts_at' => '#sylius_promotion_startsAt',
+            'starts_at_date' => '#sylius_promotion_startsAt_date',
+            'starts_at_time' => '#sylius_promotion_startsAt_time',
+            'usage_limit' => '#sylius_promotion_usageLimit',
         ];
     }
 }

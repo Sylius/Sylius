@@ -7,30 +7,19 @@ sylius:
             unique: O método de pagamento com determinado código já existe.
             not_blank: Por favor, digite o código de promoção.
         description:
-            max_length: 'Descrição da promoção não deve ser superior a 1 caracter. |Descrição da promoção não deve ter mais de {{limit}} caracteres.'
-            min_length: 'Descrição do produto deve ter pelo menos 1 caracter. |Descrição do produto deve ter pelo menos {{limit}} caracteres.'
+            max_length: Descrição da promoção não deve ser superior a 1 caracter. |Descrição da promoção não deve ter mais de {{limit}} caracteres.
+            min_length: Descrição do produto deve ter pelo menos 1 caracter. |Descrição do produto deve ter pelo menos {{limit}} caracteres.
             not_blank: Por favor insira a descrição da promoção.
-        name:
-            max_length: 'Nome do produto não deve ser superior a 1 caractere. |Nome do produto não deve ter mais de {{limit}} caracteres.'
-            min_length: 'Nome do produto deve ter pelo menos 1 caracter. |Nome do produto deve ter pelo menos {{limit}} caracteres.'
-            not_blank: Por favor, digite o nome da promoção.
         end_date_cannot_be_set_prior_start_date: Data final não pode ser definida antes da data de início anterior.
+        name:
+            max_length: Nome do produto não deve ser superior a 1 caractere. |Nome do produto não deve ter mais de {{limit}} caracteres.
+            min_length: Nome do produto deve ter pelo menos 1 caracter. |Nome do produto deve ter pelo menos {{limit}} caracteres.
+            not_blank: Por favor, digite o nome da promoção.
     promotion_coupon:
         code:
-            max_length: 'Código de cupom não deve ter mais de 1 caractere. |Código de cupom não deve ter mais de {{limit}} caracteres.'
-            min_length: 'Código do cupom deve ter pelo menos 1 caracter. |Código do cupom deve ter pelo menos {{limit}} caracteres.'
+            max_length: Código de cupom não deve ter mais de 1 caractere. |Código de cupom não deve ter mais de {{limit}} caracteres.
+            min_length: Código do cupom deve ter pelo menos 1 caracter. |Código do cupom deve ter pelo menos {{limit}} caracteres.
             not_blank: Por favor digite o código do cupom.
             unique: Este cupom já existe.
         usage_limit:
-            min: 'Limite de uso de cupom deve ser pelo menos {{limit}}.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'Quantidade de cupons para gerar deve ser pelo menos {{limit}}.'
-            not_blank: Por favor, digite a quantidade de cupons para gerar.
-        usage_limit:
-            min: 'Limite de uso de cupons gerados deve ser pelo menos {{limit}}.'
-        code_length:
-            min: 'Código do cupom deve ter pelo menos {{ limit }} caracteres.'
-            max: 'Código de cupom não deve ter mais de {{ limit }} caracteres.'
-            not_blank: Por favor digite o comprimento do código de cupom.
-        possible_generation_amount: 'Cupons inválidos código quantidade comprimento ou cupons. Não é possível gerar %expectedAmount% exclusivo cupons com código comprimento igual a %codeLength%. Possível gerar valor é %possibleAmount%.'
+            min: Limite de uso de cupom deve ser pelo menos {{limit}}.

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\UserBundle\EventListener\UserDeleteListener;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -21,8 +22,6 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 /**
- * User delete listener spec.
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -37,11 +36,17 @@ final class UserDeleteListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserDeleteListener');
+        $this->shouldHaveType(UserDeleteListener::class);
     }
 
-    function it_deletes_user_if_it_is_different_than_currently_loggged_one(GenericEvent $event, UserInterface $userToBeDeleted, UserInterface $currentlyLoggedUser, $flashBag, $tokenStorage, TokenInterface $tokenInterface)
-    {
+    function it_deletes_user_if_it_is_different_than_currently_logged_one(
+        TokenStorageInterface $tokenStorage,
+        FlashBagInterface $flashBag,
+        GenericEvent $event,
+        UserInterface $userToBeDeleted,
+        UserInterface $currentlyLoggedUser,
+        TokenInterface $tokenInterface
+    ) {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
@@ -51,11 +56,17 @@ final class UserDeleteListenerSpec extends ObjectBehavior
 
         $event->stopPropagation()->shouldNotBeCalled();
         $flashBag->add('error', Argument::any())->shouldNotBeCalled();
+
         $this->deleteUser($event);
     }
 
-    function it_deletes_user_if_no_user_is_logged_in(GenericEvent $event, UserInterface $userToBeDeleted, $flashBag, $tokenStorage, TokenInterface $tokenInterface)
-    {
+    function it_deletes_user_if_no_user_is_logged_in(
+        TokenStorageInterface $tokenStorage,
+        FlashBagInterface $flashBag,
+        GenericEvent $event,
+        UserInterface $userToBeDeleted,
+        TokenInterface $tokenInterface
+    ) {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
@@ -64,11 +75,16 @@ final class UserDeleteListenerSpec extends ObjectBehavior
 
         $event->stopPropagation()->shouldNotBeCalled();
         $flashBag->add('error', Argument::any())->shouldNotBeCalled();
+
         $this->deleteUser($event);
     }
 
-    function it_deletes_user_if_there_is_no_token(GenericEvent $event, UserInterface $userToBeDeleted, $flashBag, $tokenStorage)
-    {
+    function it_deletes_user_if_there_is_no_token(
+        TokenStorageInterface $tokenStorage,
+        FlashBagInterface $flashBag,
+        GenericEvent $event,
+        UserInterface $userToBeDeleted
+    ) {
         $event->getSubject()->willReturn($userToBeDeleted);
         $userToBeDeleted->getId()->willReturn(11);
 
@@ -76,6 +92,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
 
         $event->stopPropagation()->shouldNotBeCalled();
         $flashBag->add('error', Argument::any())->shouldNotBeCalled();
+
         $this->deleteUser($event);
     }
 
@@ -89,6 +106,7 @@ final class UserDeleteListenerSpec extends ObjectBehavior
 
         $event->stopPropagation()->shouldBeCalled();
         $flashBag->add('error', 'Cannot remove currently logged in user.')->shouldBeCalled();
+
         $this->deleteUser($event);
     }
 }

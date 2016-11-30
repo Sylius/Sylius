@@ -7,7 +7,15 @@
          bootstrap="vendor/autoload.php"
          colors="true"
 >
+    <php>
+        <server name="KERNEL_DIR" value="test/app/" />
+        <server name="IS_DOCTRINE_ORM_SUPPORTED" value="true" />
+    </php>
     <testsuites>
+        <testsuite name="SyliusAddressingBundle Test Suite">
+            <directory>./test/</directory>
+        </testsuite>
+
         <testsuite name="Sylius Test Suite">
             <directory>./Tests</directory>
         </testsuite>

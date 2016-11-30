@@ -11,10 +11,11 @@
 
 namespace Sylius\Bundle\AddressingBundle\Controller;
 
-use Doctrine\Common\Persistence\ObjectRepository;
 use FOS\RestBundle\View\View;
+use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +35,7 @@ class ProvinceController extends ResourceController
      * @throws AccessDeniedException
      * @throws NotFoundHttpException
      */
-    public function choiceFormAction(Request $request)
+    public function choiceOrTextFieldFormAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
         if (!$configuration->isHtmlRequest() || null === $countryCode = $request->query->get('countryCode')) {
@@ -47,7 +48,19 @@ class ProvinceController extends ResourceController
         }
 
         if (!$country->hasProvinces()) {
-            return new JsonResponse(['content' => false]);
+            $form = $this->createProvinceTextForm();
+
+            $view = View::create()
+                ->setData([
+                    'metadata' => $this->metadata,
+                    'form' => $form->createView(),
+                ])
+                ->setTemplate($configuration->getTemplate('_provinceText.html'))
+            ;
+
+            return new JsonResponse([
+                'content' => $this->viewHandler->handle($configuration, $view)->getContent(),
+            ]);
         }
 
         $form = $this->createProvinceChoiceForm($country);
@@ -57,7 +70,7 @@ class ProvinceController extends ResourceController
                 'metadata' => $this->metadata,
                 'form' => $form->createView(),
             ])
-            ->setTemplate($configuration->getTemplate('_provinceChoiceForm.html'))
+            ->setTemplate($configuration->getTemplate('_provinceChoice.html'))
         ;
 
         return new JsonResponse([
@@ -72,10 +85,21 @@ class ProvinceController extends ResourceController
      */
     protected function createProvinceChoiceForm(CountryInterface $country)
     {
-        return $this->get('form.factory')->createNamed('sylius_address_province', 'sylius_province_code_choice', null, [
+        return $this->get('form.factory')->createNamed('sylius_address_province', ProvinceCodeChoiceType::class, null, [
             'country' => $country,
             'label' => 'sylius.form.address.province',
-            'empty_value' => 'sylius.form.province.select',
+            'placeholder' => 'sylius.form.province.select',
+        ]);
+    }
+
+    /**
+     * @return FormInterface
+     */
+    protected function createProvinceTextForm()
+    {
+        return $this->get('form.factory')->createNamed('sylius_address_province', TextType::class, null, [
+            'required' => false,
+            'label' => 'sylius.form.address.province',
         ]);
     }
 }

@@ -19,40 +19,20 @@ use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Sylius money type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class MoneyType extends AbstractType
+final class MoneyType extends AbstractType
 {
-    /**
-     * Default currency.
-     *
-     * @var string
-     */
-    private $currencyCode;
-
-    /**
-     * Constructor.
-     *
-     * @param string $currencyCode
-     */
-    public function __construct($currencyCode)
-    {
-        $this->currencyCode = $currencyCode;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        // replace the default money view transformer
         $builder
             ->resetViewTransformers()
             ->addViewTransformer(new SyliusMoneyTransformer(
-                $options['precision'],
+                $options['scale'],
                 $options['grouping'],
                 null,
                 $options['divisor']
@@ -73,7 +53,7 @@ class MoneyType extends AbstractType
      */
     public function getParent()
     {
-        return 'money';
+        return \Symfony\Component\Form\Extension\Core\Type\MoneyType::class;
     }
 
     /**
@@ -83,7 +63,6 @@ class MoneyType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'currency' => $this->currencyCode,
                 'divisor' => 100,
             ])
         ;
@@ -92,7 +71,7 @@ class MoneyType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_money';
     }

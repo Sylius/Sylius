@@ -60,4 +60,14 @@ interface AttributeInterface extends
      * @param string $storageType
      */
     public function setStorageType($storageType);
+
+    /**
+     * @return int
+     */
+    public function getPosition();
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position);
 }

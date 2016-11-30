@@ -17,9 +17,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Shipping\Model\ShippingMethodInterface as BaseShippingMethodInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -29,7 +26,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * @var CurrencyInterface
      */
-    protected $defaultCurrency;
+    protected $baseCurrency;
 
     /**
      * @var LocaleInterface
@@ -57,21 +54,6 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $locales;
 
     /**
-     * @var PaymentMethodInterface[]|Collection
-     */
-    protected $paymentMethods;
-
-    /**
-     * @var BaseShippingMethodInterface[]|Collection
-     */
-    protected $shippingMethods;
-
-    /**
-     * @var BaseTaxonInterface[]|Collection
-     */
-    protected $taxons;
-
-    /**
      * @var string
      */
     protected $themeName;
@@ -82,41 +64,22 @@ class Channel extends BaseChannel implements ChannelInterface
 
         $this->currencies = new ArrayCollection();
         $this->locales = new ArrayCollection();
-        $this->paymentMethods = new ArrayCollection();
-        $this->shippingMethods = new ArrayCollection();
-        $this->taxons = new ArrayCollection();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getThemeName()
+    public function getBaseCurrency()
     {
-        return $this->themeName;
+        return $this->baseCurrency;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setThemeName($themeName)
+    public function setBaseCurrency(CurrencyInterface $baseCurrency)
     {
-        $this->themeName = $themeName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefaultCurrency()
-    {
-        return $this->defaultCurrency;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultCurrency(CurrencyInterface $defaultCurrency)
-    {
-        $this->defaultCurrency = $defaultCurrency;
+        $this->baseCurrency = $baseCurrency;
     }
 
     /**
@@ -178,14 +141,6 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setCurrencies(Collection $currencies)
-    {
-        $this->currencies = $currencies;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function addCurrency(CurrencyInterface $currency)
     {
         if (!$this->hasCurrency($currency)) {
@@ -222,14 +177,6 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setLocales(Collection $locales)
-    {
-        $this->locales = $locales;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function addLocale(LocaleInterface $locale)
     {
         if (!$this->hasLocale($locale)) {
@@ -258,116 +205,16 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingMethods()
+    public function getThemeName()
     {
-        return $this->shippingMethods;
+        return $this->themeName;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addShippingMethod(BaseShippingMethodInterface $shippingMethod)
+    public function setThemeName($themeName)
     {
-        if (!$this->hasShippingMethod($shippingMethod)) {
-            $this->shippingMethods->add($shippingMethod);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeShippingMethod(BaseShippingMethodInterface $shippingMethod)
-    {
-        if ($this->hasShippingMethod($shippingMethod)) {
-            $this->shippingMethods->removeElement($shippingMethod);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasShippingMethod(BaseShippingMethodInterface $shippingMethod)
-    {
-        return $this->shippingMethods->contains($shippingMethod);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentMethods()
-    {
-        return $this->paymentMethods;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addPaymentMethod(PaymentMethodInterface $paymentMethod)
-    {
-        if (!$this->hasPaymentMethod($paymentMethod)) {
-            $this->paymentMethods->add($paymentMethod);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removePaymentMethod(PaymentMethodInterface $paymentMethod)
-    {
-        if ($this->hasPaymentMethod($paymentMethod)) {
-            $this->paymentMethods->removeElement($paymentMethod);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPaymentMethod(PaymentMethodInterface $paymentMethod)
-    {
-        return $this->paymentMethods->contains($paymentMethod);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTaxons()
-    {
-        return $this->taxons;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setTaxons(Collection $taxons)
-    {
-        $this->taxons = $taxons;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addTaxon(BaseTaxonInterface $taxon)
-    {
-        if (!$this->hasTaxon($taxon)) {
-            $this->taxons->add($taxon);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeTaxon(BaseTaxonInterface $taxon)
-    {
-        if ($this->hasTaxon($taxon)) {
-            $this->taxons->removeElement($taxon);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasTaxon(BaseTaxonInterface $taxon)
-    {
-        return $this->taxons->contains($taxon);
+        $this->themeName = $themeName;
     }
 }

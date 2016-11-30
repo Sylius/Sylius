@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        currency:
+            base: Основна валута
+            code: Име
+            enabled: Включено
+            exchange_rate: Обменен курс

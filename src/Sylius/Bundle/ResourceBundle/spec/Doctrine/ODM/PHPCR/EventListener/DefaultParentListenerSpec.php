@@ -11,30 +11,25 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
+use Doctrine\ODM\PHPCR\DocumentManagerInterface;
+use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
+use PHPCR\NodeInterface;
+use PHPCR\SessionInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener;
-use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
-use Sylius\Component\Resource\Metadata\Registry;
-use Sylius\Component\Resource\Metadata\Metadata;
-use Doctrine\ODM\PHPCR\DocumentManagerInterface;
-use PHPCR\NodeInterface;
-use PHPCR\SessionInterface;
 
 /**
+ * @require Doctrine\ODM\PHPCR\DocumentManagerInterface
+ *
  * @author Daniel Leech <daniel@dantleech.com>
  */
 final class DefaultParentListenerSpec extends ObjectBehavior
 {
-    function let(
-        DocumentManagerInterface $documentManager
-    )
+    function let(DocumentManagerInterface $documentManager)
     {
-        $this->beConstructedWith(
-            $documentManager,
-            '/path/to'
-        );
+        $this->beConstructedWith($documentManager, '/path/to');
     }
 
     function it_is_initializable()
@@ -46,8 +41,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $event->getSubject()->willReturn(new \stdClass());
         $documentManager->getClassMetadata(\stdClass::class)->willReturn(
             $documentMetadata
@@ -66,8 +60,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -92,8 +85,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $subjectDocument = new \stdClass();
         $parentDocument = new \stdClass();
 
@@ -115,8 +107,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         DocumentManagerInterface $documentManager,
         SessionInterface $session,
         NodeInterface $node
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -151,8 +142,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $this->beConstructedWith(
             $documentManager,
             '/path/to',
@@ -181,8 +171,7 @@ final class DefaultParentListenerSpec extends ObjectBehavior
         ResourceControllerEvent $event,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
-    )
-    {
+    ) {
         $subjectDocument = new \stdClass();
 
         $event->getSubject()->willReturn($subjectDocument);

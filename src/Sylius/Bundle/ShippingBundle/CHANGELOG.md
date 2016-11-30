@@ -47,7 +47,7 @@ CHANGELOG
 * Change service id for shipping rule checker registry to sylius.registry.shipping_rule_checker in RegisterRuleCheckersPass,
   RegisterRuleCheckersPassSpec
 * Change id of service to sylius.registry.shipping_calculator in RegisterCalculatorsPassSpec, RegisterCalculatorsPass
-* Replace custom RuleCheckerRegistry with ServiceRegistry in BuildRuleFormSubscriber, RuleType, ShippingMethodType,
+* Replace custom RuleCheckerRegistry with ServiceRegistry in BuildPromotionRuleFormSubscriber, RuleType, ShippingMethodType,
   BuildRuleFormSubscriberSpec, RuleTypeSpec, ShippingMethodTypeSpec
 * Replace custom CalculatorRegistry with ServiceRegistry in BuildShippingMethodFormSubscriber, ShippingMethodChoiceType, ShippingMethodType,
   BuildShippingMethodFormSubscriberSpec, ShippingMethodChoiceTypeSpec

@@ -14,7 +14,7 @@ namespace Sylius\Component\Resource\Exception;
 class UnexpectedTypeException extends \InvalidArgumentException
 {
     /**
-     * @param mixed  $value
+     * @param mixed $value
      * @param string $expectedType
      */
     public function __construct($value, $expectedType)

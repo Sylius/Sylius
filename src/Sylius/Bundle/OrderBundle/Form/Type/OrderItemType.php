@@ -13,28 +13,32 @@ namespace Sylius\Bundle\OrderBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\DataMapperInterface;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderItemType extends AbstractResourceType
+final class OrderItemType extends AbstractResourceType
 {
     /**
      * @var DataMapperInterface
      */
-    protected $orderItemQuantityDataMapper;
+    protected $dataMapper;
 
     /**
      * @param string $dataClass
      * @param array $validationGroups
-     * @param DataMapperInterface $orderItemQuantityDataMapper
+     * @param DataMapperInterface $dataMapper
      */
-    public function __construct($dataClass, array $validationGroups = [], DataMapperInterface $orderItemQuantityDataMapper)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups = [],
+        DataMapperInterface $dataMapper
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->orderItemQuantityDataMapper = $orderItemQuantityDataMapper;
+        $this->dataMapper = $dataMapper;
     }
 
     /**
@@ -43,20 +47,18 @@ class OrderItemType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('quantity', 'integer', [
-                'label' => 'sylius.form.order_item.quantity',
+            ->add('quantity', IntegerType::class, [
+                'attr' => ['min' => 1],
+                'label' => 'sylius.ui.quantity',
             ])
-            ->add('unitPrice', 'sylius_money', [
-                'label' => 'sylius.form.order_item.unit_price',
-            ])
-            ->setDataMapper($this->orderItemQuantityDataMapper)
+            ->setDataMapper($this->dataMapper)
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_order_item';
     }

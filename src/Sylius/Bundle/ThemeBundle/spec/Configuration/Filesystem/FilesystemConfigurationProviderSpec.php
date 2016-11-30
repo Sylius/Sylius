@@ -14,12 +14,10 @@ namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationProvider;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
-use Symfony\Component\Config\Resource\ResourceInterface;
 
 /**
- * @mixin FilesystemConfigurationProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FilesystemConfigurationProviderSpec extends ObjectBehavior
@@ -31,7 +29,7 @@ final class FilesystemConfigurationProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationProvider');
+        $this->shouldHaveType(FilesystemConfigurationProvider::class);
     }
 
     function it_implements_configuration_provider_interface()

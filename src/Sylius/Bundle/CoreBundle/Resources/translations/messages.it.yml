@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Prezzo unitario
-                quantity: Quantità
-                variant: Variante
-            customer_group: Gruppo clienti
         block:
             body: Testo
             id: ID
@@ -22,8 +16,11 @@ sylius:
             shipping_method: Metodo di spedizione
         promotion:
             channels: Canali
-        coupon:
-            per_customer_usage_limit: Limite di utilizzo al cliente
+        promotion_action:
+            add_product_configuration:
+                product: Prodotto
+        promotion_coupon:
+            per_customer_usage_limit: Limite di utilizzo per cliente
         group:
             name: Nome
             roles: Regole
@@ -31,7 +28,7 @@ sylius:
             taxonomies: Tassonomie
             locale_default: Locale predefinita
             locales: Localizzazioni
-            currency_default: Valuta predefinita
+            currency_base: Valuta base
             currencies: Monete
             shipping_methods: Metodi di spedizione
             payment_methods: Metodi di pagamento
@@ -39,6 +36,7 @@ sylius:
             theme: Tema
             hostname: Hostname
         image:
+            code: Codice
             file: Immagine
         locale:
             code: Codice
@@ -56,6 +54,7 @@ sylius:
             id: ID
             title: Titolo
         product:
+            images: Immagini
             restricted_zone: Zona soggetta a restrizioni
             shipping_category: Categoria di spedizione
             short_description: Descrizione breve
@@ -68,38 +67,26 @@ sylius:
             code: Codice
         product_variant:
             tax_category: Categoria fiscale
-        settings:
-            general:
-                currency: Valuta predefinita
-                locale: Lingua
-                meta_description: Meta descrizione
-                meta_keywords: Meta keywords
-                title: Titolo della pagina
-                tracking_code:
-                    Tracking code (for example: Codice Google Analytics)
-            taxation:
-                default_tax_zone: Aliquota predefinita
-                default_tax_calculation_strategy: Strategia di calcolo imposta predefinito
-            security:
-                enabled: Abilitare?
         shipment_filter:
             created_at_from: Da
             created_at_to: A
-            number: "Numero d'ordine"
+            number: Numero d'ordine
             shipping_address: Spedisci a
             channel: Tutti i canali
         payment_filter:
             created_at_from: Da
             created_at_to: A
-            number: "Numero d'ordine"
+            number: Numero d'ordine
             billing_address: Fattura a nome di
             channel: Tutti i canali
         shipping_method:
             zone: Zona
         taxon:
-            file: "Seleziona un'immagine"
+            code: Codice
+            file: Seleziona un'immagine
+            images: Immagini
         taxonomy:
-            file: "Seleziona un'immagine"
+            file: Seleziona un'immagine
         user:
             billing_address: Indirizzo di fatturazione
             different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
@@ -115,10 +102,8 @@ sylius:
         variant:
             depth: Profondità
             height: Altezza
-            images: Immagini
             on_hand: Disponibilità attuale
             price: Prezzo
-            original_price: Prezzo originale
             sku: SKU
             weight: Peso
             width: Larghezza
@@ -133,32 +118,90 @@ sylius:
             type: Tipi di associazione
         product_association_type:
             name: Nome
+        promotion_filter:
+            product:
+                products: Prodotti
         promotion_rule:
-            contains_taxon:
-                taxon: Tipologia
-                count: Conta
-            taxon:
-                taxons: Taxons
+            product:
+                products: Prodotti
             total_of_items_from_taxon:
                 taxon: Tipologia
-                amount: Valore
+                amount: Importo
+        payment_method:
+            channels: Canali
+    installer:
+        extensions:
+            header: estensioni
+            accelerator:
+                header: Accelerator
+                help: Attivare Zend OpCache (altamente consigliato).
+            apc: APC
+            ctype: CType
+            gd: GD
+            help: Installa e attiva l'estensione %extension%.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: FileInfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Stringa multibyte
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Sessione
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: file system
+            cache:
+                header: cache
+            exists: esiste
+            logs:
+                header: logs
+            not_exists: non esiste
+            not_writable: non scrivibile
+            parameters:
+                header: parameters.yml
+            vendors: fornitori
+            writable: scrivibile
+        settings:
+            header: Impostazioni e versione PHP
+            any: qualsiasi
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: non deprecato
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: timezone
+            timezone_deprecated:
+                header: Timezone deprecato
+                help: 'Il timezone %timezone% è deprecato. Correggi il tuo file php.ini (lista di timezone deprecati http://php.net/manual/en/timezones.others.php).'
+            version: Versione PHP
+            version_recommended: Versione PHP raccomandata
     email:
         order_confirmation:
-            name: "Conferma dell'ordine"
+            name: Conferma dell'ordine
         order_comment:
-            name: "Commento dell'ordine"
+            name: Commento dell'ordine
         shipment_confirmation:
             name: Informazioni di spedizione
         user_confirmation:
-            name: "Conferma dell'utente"
+            name: Conferma dell'utente
             subject: Benvenuto nel nostro negozio
-            content: 'Benvenuto nel nostro negozio <br/> <br/> Sei appena stato registrato. <br/> Grazie %username%.'
+            content: Benvenuto nel nostro negozio <br/> <br/> Sei appena stato registrato. <br/> Grazie %username%.
         password_reset:
             name: Reimpostazione password
-            content: '<h3>Ciao %username%</h3> Per reimpostare la password - si prega di visitare %url% <br/> <br/> Cordiali saluti, il Team.'
+            content: <h3>Ciao %username%</h3> Per reimpostare la password - si prega di visitare %url% <br/> <br/> Cordiali saluti, il Team.
         verification:
-            name: "Verifica dell'indirizzo di posta elettronica"
-            content: 'Per verificare il tuo indirizzo email - ti preghiamo di visitare %url%'
+            name: Verifica dell'indirizzo di posta elettronica
+            content: Per verificare il tuo indirizzo email - ti preghiamo di visitare %url%
     payum_gateway:
         cash_on_delivery: Contanti alla cosegna
         offline: Disconnesso

@@ -7,9 +7,9 @@ sylius:
         update: '%resource% wurde erfolgreich aktualisiert.'
         delete: '%resource% wurde erfolgreich gelöscht.'
         move: '%resource% wurde erfolgreich verschoben.'
-        generate: 'Mehrere Elemente (%resource%) wurden erfolgreich generiert.'
+        generate: Mehrere Elemente (%resource%) wurden erfolgreich generiert.
         revert: '%resource% wurden erfolgreich zurückgesetzt.'
         restore_deleted: '%resource% wurde erfolgreich wiederhergestellt.'
         enable: '%resource% wurde erfolgreich aktiviert.'
         disable: '%resource% wurde erfolgreich deaktiviert.'
-        delete_error: 'Löschen fehlgeschlagen, %resource% wird benutzt.'
+        delete_error: Löschen fehlgeschlagen, %resource% wird benutzt.

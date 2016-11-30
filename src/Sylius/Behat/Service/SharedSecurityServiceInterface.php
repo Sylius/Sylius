@@ -24,10 +24,4 @@ interface SharedSecurityServiceInterface
      * @param callable $action
      */
     public function performActionAsAdminUser(AdminUserInterface $adminUser, callable $action);
-
-    /**
-     * @param ShopUserInterface $shopUser
-     * @param callable $action
-     */
-    public function performActionAsShopUser(ShopUserInterface $shopUser, callable $action);
 }

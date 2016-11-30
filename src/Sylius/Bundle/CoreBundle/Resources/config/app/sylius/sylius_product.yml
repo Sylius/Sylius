@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_product:
+    resources:
+        product:
+            classes:
+                model: Sylius\Component\Core\Model\Product
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository
+            translation:
+                classes:
+                    model: Sylius\Component\Core\Model\ProductTranslation
+        product_variant:
+            classes:
+                model: Sylius\Component\Core\Model\ProductVariant
+                repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository
+        product_option:
+            classes:
+                repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository

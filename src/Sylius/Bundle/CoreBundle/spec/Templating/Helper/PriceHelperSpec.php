@@ -13,67 +13,56 @@ namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper;
-use Sylius\Bundle\MoneyBundle\Templating\Helper\PriceHelperInterface;
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Symfony\Component\Templating\Helper\HelperInterface;
+use Sylius\Component\Core\Calculator\ProductVariantPriceCalculatorInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @mixin PriceHelper
- *
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class PriceHelperSpec extends ObjectBehavior
 {
-    function let(PriceHelperInterface $decoratedHelper, CurrencyContextInterface $currencyContext)
+    function let(ProductVariantPriceCalculatorInterface $productVariantPriceCalculator)
     {
-        $this->beConstructedWith($decoratedHelper, $currencyContext);
+        $this->beConstructedWith($productVariantPriceCalculator);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper');
+        $this->shouldHaveType(PriceHelper::class);
     }
 
-    function it_is_a_templating_helper()
+    function it_is_helper()
     {
-        $this->shouldImplement(HelperInterface::class);
+        $this->shouldHaveType(Helper::class);
     }
 
-    function it_is_a_money_helper()
+    function it_returns_variant_price_for_channel_given_in_context(
+        ChannelInterface $channel,
+        ProductVariantInterface $productVariant,
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+    ) {
+        $context = ['channel' => $channel];
+
+        $productVariantPriceCalculator->calculate($productVariant, $context)->willReturn(1000);
+
+        $this->getPrice($productVariant, $context)->shouldReturn(1000);
+    }
+
+    function it_throws_invalid_argument_exception_when_channel_key_is_not_present_in_context(
+        ProductVariantInterface $productVariant,
+        ProductVariantPriceCalculatorInterface $productVariantPriceCalculator
+    ) {
+        $context = ['lennahc' => ''];
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('getPrice', [$productVariant, $context]);
+
+        $productVariantPriceCalculator->calculate($productVariant, $context)->shouldNotBeCalled();
+    }
+
+    function it_has_name()
     {
-        $this->shouldImplement(PriceHelperInterface::class);
-    }
-
-    function it_does_nothing_if_currency_is_passed(
-        PriceHelperInterface $decoratedHelper,
-        CurrencyContextInterface $currencyContext
-    ) {
-        $currencyContext->getCurrencyCode()->shouldNotBeCalled();
-
-        $decoratedHelper->convertAndFormatAmount(42, 'USD', 1.0, null)->willReturn('$0.42');
-
-        $this->convertAndFormatAmount(42, 'USD', 1.0)->shouldReturn('$0.42');
-    }
-
-    function it_does_nothing_if_currency_is_not_passed_and_there_is_no_current_one(
-        PriceHelperInterface $decoratedHelper,
-        CurrencyContextInterface $currencyContext
-    ) {
-        $currencyContext->getCurrencyCode()->willReturn(null);
-
-        $decoratedHelper->convertAndFormatAmount(42, 'USD', 1.0, null)->willReturn('$0.42');
-
-        $this->convertAndFormatAmount(42, 'USD', 1.0)->shouldReturn('$0.42');
-    }
-
-    function it_decorates_the_helper_with_current_currency_if_it_is_not_passed(
-        PriceHelperInterface $decoratedHelper,
-        CurrencyContextInterface $currencyContext
-    ) {
-        $currencyContext->getCurrencyCode()->willReturn('EUR');
-
-        $decoratedHelper->convertAndFormatAmount(42, 'EUR', null, null)->willReturn('€0.42');
-
-        $this->convertAndFormatAmount(42)->shouldReturn('€0.42');
+        $this->getName()->shouldReturn('sylius_calculate_price');
     }
 }

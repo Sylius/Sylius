@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Jednotná cena
-                quantity: Počet
-                variant: Varianta
-            customer_group: Skupina zákazníků
         block:
             body: Tělo
             id: ID
@@ -22,20 +16,25 @@ sylius:
             shipping_method: Způsob Dopravy
         promotion:
             channels: Kanály
-        coupon:
-            per_customer_usage_limit: Omezení použití na zákazníka
+        promotion_action:
+            add_product_configuration:
+                product: Produkt
         group:
             name: Jméno
             roles: Role
         channel:
             taxonomies: Taxonomie
+            locale_default: Výchozí Jazyk
             locales: Lokalizace
-            currency_default: Výchozí měna
             currencies: Měny
             shipping_methods: Způsoby dopravy
             payment_methods: Způsoby platby
+            tax_calculation_strategy: Strategie výpočtu daně
             tax_zone_default: Výchozí sazba DPH
+            theme: Vzhled
+            hostname: Hostname
         image:
+            code: Kód
             file: Obrázek
         locale:
             code: Kód
@@ -53,6 +52,7 @@ sylius:
             id: ID
             title: Název
         product:
+            images: Obrázky
             restricted_zone: Zóna s omezeným přístupem
             shipping_category: Typ dopravy
             short_description: Stručný popis
@@ -64,19 +64,6 @@ sylius:
             code: Kód
         product_variant:
             tax_category: Typ daně
-        settings:
-            general:
-                currency: Výchozí měna
-                locale: Jazyk
-                meta_description: Meta popis
-                meta_keywords: Meta klíčová slova
-                title: Název stránky
-                tracking_code:
-                    Tracking code (for example: Kód Google Analytics)
-            taxation:
-                default_tax_zone: Výchozí sazba DPH
-            security:
-                enabled: Povolit?
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
@@ -92,7 +79,9 @@ sylius:
         shipping_method:
             zone: Oblast
         taxon:
+            code: Kód
             file: Vybrat obrázek
+            images: Obrázky
         taxonomy:
             file: Vybrat obrázek
         user:
@@ -110,7 +99,6 @@ sylius:
         variant:
             depth: Hloubka
             height: Výška
-            images: Obrázky
             on_hand: Aktuálně skladem
             price: Cena
             sku: SKU
@@ -122,15 +110,66 @@ sylius:
                 value: Hodnota
         guest:
             email: Email
+        product_association:
+            product: Související produkt
+            type: Typy asociace
         product_association_type:
             name: Jméno
-        promotion_rule:
-            contains_taxon:
-                count: Počet
-            taxon:
-                taxons: Taxony
-            total_of_items_from_taxon:
-                amount: Částka
+        payment_method:
+            channels: Kanály
+    installer:
+        extensions:
+            header: rozšíření
+            accelerator:
+                header: Akcelerátor
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Nainstalujte a povolte %extension% rozšíření.
+            iconv: Iconv
+            exif: EXIF
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: souborový systém
+            cache:
+                header: mezipaměť
+            exists: Existuje
+            logs:
+                header: logy
+            not_exists: neexistuje
+            not_writable: nelze zapisovat
+            parameters:
+                header: parameters.yml
+            vendors: vendors
+            writable: zapisovatelný
+        settings:
+            header: Verze PHP a nastavení
+            any: jakýkoliv
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: nejsou zastaralé
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: Časové pásmo
+            timezone_deprecated:
+                header: Zastaralé časové pásmo
+                help: 'Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).'
+            version: Verze PHP
     email:
         order_confirmation:
             name: Potvrzení objednávky
@@ -140,3 +179,17 @@ sylius:
             name: Potvrzení odeslání
         user_confirmation:
             name: Potvrzení uživatele
+            subject: Vítejte v našem obchodě
+            content: Vítejte v našem obchodě <br/> <br/> jste se právě zaregistrovali. <br/> Děkujeme vám %username%.
+        password_reset:
+            name: Obnovení hesla
+            content: <h3>Dobrý den %username%</h3> Chcete-li obnovit vaše heslo - navštivte %url% <br/> <br/> S pozdravem, tým.
+        verification:
+            name: Ověření emailové adresy
+            content: Chcete-li ověřit svou e-mailovou adresu - prosím navštivte %url%
+    payum_gateway:
+        cash_on_delivery: Platba na dobírku
+        offline: Offline
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: Podle zóny a kanálu

@@ -16,31 +16,52 @@ use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 
 /**
- * @mixin MoneyFormatter
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class MoneyFormatterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter');
+        $this->shouldHaveType(MoneyFormatter::class);
     }
 
-    function it_implements_amount_formatter_interface()
+    function it_implements_money_formatter_interface()
     {
         $this->shouldImplement(MoneyFormatterInterface::class);
     }
 
-    function it_formats_money_using_given_currency_and_locale()
+    function it_formats_positive_money_using_given_currency_and_locale()
     {
         $this->format(15, 'USD', 'en')->shouldReturn('$0.15');
         $this->format(2500, 'USD', 'en')->shouldReturn('$25.00');
         $this->format(312, 'EUR', 'en')->shouldReturn('€3.12');
     }
 
-    function it_formats_money_using_default_locale_if_not_given()
+    function it_formats_positive_money_using_default_locale_if_not_given()
     {
-        $this->format(500, 'EUR')->shouldReturn('€5.00');
+        $this->format(500, 'USD')->shouldReturn('$5.00');
+    }
+
+    function it_formats_negative_money_using_given_currency_and_locale()
+    {
+        $this->format(-15, 'USD', 'en')->shouldReturn('-$0.15');
+        $this->format(-2500, 'USD', 'en')->shouldReturn('-$25.00');
+        $this->format(-312, 'EUR', 'en')->shouldReturn('-€3.12');
+    }
+
+    function it_formats_negative_money_using_default_locale_if_not_given()
+    {
+        $this->format(-500, 'USD')->shouldReturn('-$5.00');
+    }
+
+    function it_formats_zero_money_using_given_currency_and_locale()
+    {
+        $this->format(0, 'USD', 'en')->shouldReturn('$0.00');
+        $this->format(0, 'EUR', 'en')->shouldReturn('€0.00');
+    }
+
+    function it_formats_zero_money_using_default_locale_if_not_given()
+    {
+        $this->format(0, 'USD')->shouldReturn('$0.00');
     }
 }

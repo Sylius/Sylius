@@ -3,11 +3,9 @@
 
 sylius:
     review:
-        title:
-            not_blank: Título de revisão não deve ser em branco.
-            min_length: Revisão de título deve ter pelo menos 2 caracteres
-            max_length: Revisão de título deve ter no máximo 255 caracteres
-        rating:
-            not_blank: Você deve verificar a revisão de classificação.
         author:
             already_exists: Este email já está registrado, por favor realize o Login ou esqueceu sua senha.
+        rating:
+            not_blank: Você deve verificar a revisão de classificação.
+        title:
+            not_blank: Título de revisão não deve ser em branco.

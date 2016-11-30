@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Event;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Event\ResourceEvent;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,13 +26,13 @@ final class ResourceControllerEventSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent');
+        $this->shouldHaveType(ResourceControllerEvent::class);
     }
 
     function it_stops_event_propagation()
     {
-        $this->stop('message', ResourceEvent::TYPE_SUCCESS, ['parameter']);
-        $this->getMessageType()->shouldReturn(ResourceEvent::TYPE_SUCCESS);
+        $this->stop('message', ResourceControllerEvent::TYPE_SUCCESS, ['parameter']);
+        $this->getMessageType()->shouldReturn(ResourceControllerEvent::TYPE_SUCCESS);
         $this->getMessageParameters()->shouldReturn(['parameter']);
         $this->getMessage()->shouldReturn('message');
         $this->isPropagationStopped()->shouldReturn(true);
@@ -52,8 +52,8 @@ final class ResourceControllerEventSpec extends ObjectBehavior
 
     function its_message_type_is_mutable()
     {
-        $this->setMessageType(ResourceEvent::TYPE_SUCCESS);
-        $this->getMessageType()->shouldReturn(ResourceEvent::TYPE_SUCCESS);
+        $this->setMessageType(ResourceControllerEvent::TYPE_SUCCESS);
+        $this->getMessageType()->shouldReturn(ResourceControllerEvent::TYPE_SUCCESS);
     }
 
     function it_has_not_message_by_default()

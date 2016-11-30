@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesResolver;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesResolverInterface;
@@ -21,15 +20,13 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin ResourcesResolver
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourcesResolverSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Controller\ResourcesResolver');
+        $this->shouldHaveType(ResourcesResolver::class);
     }
 
     function it_implements_resources_resolver_interface()

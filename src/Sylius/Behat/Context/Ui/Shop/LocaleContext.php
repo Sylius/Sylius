@@ -34,7 +34,9 @@ final class LocaleContext implements Context
     }
 
     /**
+     * @Given I switched the shop's locale to :localName
      * @When I switch to the :localeName locale
+     * @When I change my locale to :localeName
      */
     public function iSwitchTheLocaleToTheLocale($localeName)
     {
@@ -43,7 +45,8 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @Then I should (still) shop using the :localeName locale
+     * @Then I should shop using the :localeName locale
+     * @Then I should still shop using the :localeName locale
      */
     public function iShouldShopUsingTheLocale($localeName)
     {
@@ -54,6 +57,7 @@ final class LocaleContext implements Context
 
     /**
      * @Then I should be able to shop using the :localeName locale
+     * @Then the store should be available in the :localName locale
      */
     public function iShouldBeAbleToShopUsingTheLocale($localeName)
     {
@@ -64,6 +68,7 @@ final class LocaleContext implements Context
 
     /**
      * @Then I should not be able to shop using the :localeName locale
+     * @Then the store should not be available in the :localName locale
      */
     public function iShouldNotBeAbleToShopUsingTheLocale($localeName)
     {
@@ -79,7 +84,7 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @Then I should not be able to shop
+     * @Then I should not be able to shop without default locale
      */
     public function iShouldNotBeAbleToShop()
     {

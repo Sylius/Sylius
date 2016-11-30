@@ -10,8 +10,8 @@ Feature: Province validation
 
     @ui @javascript
     Scenario: Trying to add a new province without specifying its code
-        Given I want to create a new province in country "United Kingdom"
-        When I name the province "Scotland"
+        When I want to create a new province in country "United Kingdom"
+        And I name the province "Scotland"
         But I do not specify the province code
         And I try to save changes
         Then I should be notified that code is required
@@ -19,8 +19,8 @@ Feature: Province validation
 
     @ui @javascript
     Scenario: Trying to add a new province without specifying its name
-        Given I want to create a new province in country "United Kingdom"
-        When I specify the province code as "GB-SCT"
+        When I want to create a new province in country "United Kingdom"
+        And I specify the province code as "GB-SCT"
         But I do not name the province
         And I try to save changes
         Then I should be notified that name is required
@@ -29,8 +29,8 @@ Feature: Province validation
     @ui @javascript
     Scenario: Trying to remove name from an existing province
         Given this country has the "Northern Ireland" province with "GB-NIR" code
-        And I want to edit this country
-        When I remove "Northern Ireland" province name
+        When I want to edit this country
+        And I remove "Northern Ireland" province name
         And I try to save changes
         Then I should be notified that name is required
         And the province should still be named "Northern Ireland" in this country

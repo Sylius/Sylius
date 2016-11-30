@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Currency\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Currency\Model\Currency;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
@@ -19,17 +20,12 @@ final class CurrencySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Currency\Model\Currency');
+        $this->shouldHaveType(Currency::class);
     }
 
-    function it_implements_Sylius_currency_interface()
+    function it_implements_a_currency_interface()
     {
         $this->shouldImplement(CurrencyInterface::class);
-    }
-
-    function it_implements_Sylius_toggleable_interface()
-    {
-        $this->shouldImplement(ToggleableInterface::class);
     }
 
     function it_has_no_id_by_default()
@@ -48,58 +44,13 @@ final class CurrencySpec extends ObjectBehavior
         $this->getCode()->shouldReturn('RSD');
     }
 
-    function it_has_no_exchange_rate_by_default()
-    {
-        $this->getExchangeRate()->shouldReturn(null);
-    }
-
-    function its_exchange_rate_is_mutable()
-    {
-        $this->setExchangeRate(1.1275);
-        $this->getExchangeRate()->shouldReturn(1.1275);
-    }
-
-    function it_is_enabled_by_default()
-    {
-        $this->shouldBeEnabled();
-    }
-
-    function it_can_be_disabled()
-    {
-        $this->disable();
-        $this->shouldNotBeEnabled();
-    }
-
-    function it_can_be_enabled()
-    {
-        $this->disable();
-        $this->shouldNotBeEnabled();
-
-        $this->enable();
-        $this->shouldBeEnabled();
-    }
-
-    function it_can_set_enabled_value()
-    {
-        $this->setEnabled(false);
-        $this->shouldNotBeEnabled();
-
-        $this->setEnabled(true);
-        $this->shouldBeEnabled();
-
-        $this->setEnabled(false);
-        $this->shouldNotBeEnabled();
-    }
-
     function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
-    function its_creation_date_is_mutable()
+    function its_creation_date_is_mutable(\DateTime $date)
     {
-        $date = new \DateTime();
-
         $this->setCreatedAt($date);
         $this->getCreatedAt()->shouldReturn($date);
     }
@@ -109,10 +60,8 @@ final class CurrencySpec extends ObjectBehavior
         $this->getUpdatedAt()->shouldReturn(null);
     }
 
-    function its_last_update_date_is_mutable()
+    function its_last_update_date_is_mutable(\DateTime $date)
     {
-        $date = new \DateTime();
-
         $this->setUpdatedAt($date);
         $this->getUpdatedAt()->shouldReturn($date);
     }

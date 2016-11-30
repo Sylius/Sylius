@@ -14,9 +14,6 @@ namespace Sylius\Component\Attribute\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Interface implemented by object which can be characterized
- * using the attributes.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface AttributeSubjectInterface
@@ -25,11 +22,6 @@ interface AttributeSubjectInterface
      * @return Collection|AttributeValueInterface[]
      */
     public function getAttributes();
-
-    /**
-     * @param Collection $attributes
-     */
-    public function setAttributes(Collection $attributes);
 
     /**
      * @param AttributeValueInterface $attribute

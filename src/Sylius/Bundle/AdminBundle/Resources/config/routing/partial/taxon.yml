@@ -1,9 +1,19 @@
-sylius_admin_partial_taxon_tree:
-    path: /tree
+sylius_admin_partial_taxon_tree_with_buttons:
+    path: /tree-buttons
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:indexAction
         _sylius:
-            template: SyliusAdminBundle:Taxon:index.html.twig
+            template: "@SyliusAdmin/Taxon/Partial/_treeWithButtons.html.twig"
+            repository:
+                method: findRootNodes
+
+sylius_admin_partial_taxon_tree_without_buttons:
+    path: /tree-no-buttons
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _sylius:
+            template: "@SyliusAdmin/Taxon/Partial/_treeWithoutButtons.html.twig"
             repository:
                 method: findRootNodes

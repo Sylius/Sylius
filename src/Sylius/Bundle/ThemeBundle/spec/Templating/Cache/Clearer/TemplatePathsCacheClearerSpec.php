@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Templating\Cache\Clearer\TemplatePathsCacheClearer
 use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
 
 /**
- * @mixin TemplatePathsCacheClearer
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TemplatePathsCacheClearerSpec extends ObjectBehavior
@@ -31,7 +29,7 @@ final class TemplatePathsCacheClearerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Templating\Cache\Clearer\TemplatePathsCacheClearer');
+        $this->shouldHaveType(TemplatePathsCacheClearer::class);
     }
 
     function it_implements_cache_clearer_interface()

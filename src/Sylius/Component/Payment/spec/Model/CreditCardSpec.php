@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Payment\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Payment\Model\CreditCard;
 use Sylius\Component\Payment\Model\CreditCardInterface;
 use Sylius\Component\Payment\Model\PaymentSourceInterface;
 
@@ -22,7 +23,7 @@ final class CreditCardSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Payment\Model\CreditCard');
+        $this->shouldHaveType(CreditCard::class);
     }
 
     function it_implements_Sylius_credit_card_interface()

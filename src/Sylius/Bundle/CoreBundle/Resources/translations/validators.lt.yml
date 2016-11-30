@@ -5,13 +5,19 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Pasirinkite pristatymo būdą.
+    customer:
+        currency_code:
+            not_valid: Valiutos kodas yra neteisingas.
+    order:
+        currency_code:
+            not_valid: Valiutos kodas yra neteisingas.
     locale:
         code:
             not_blank: Įveskite lokalės kodą.
             unique: Šią lokalė jau egzistuoja.
     product_variant:
         onHand:
-            min: 'Atsargos turi būti didesnės nei {{ limit }}.'
+            min: Atsargos turi būti didesnės nei {{ limit }}.
             not_blank: Įveskite atsargas.
         price:
             min: Kaina negali būti neigiama.
@@ -20,4 +26,7 @@ sylius:
             min: Pradinė kaina negali būti neigiama.
     product_translation:
         short_description:
-            max: 'Trumpas aprašymas negali būti ilgesnis nei {{ limit }} simbolių.'
+            max: Trumpas aprašymas negali būti ilgesnis nei {{ limit }} simbolių.
+    user:
+        email:
+            unique: Šis el. paštas jau naudojamas.

@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Definition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class DoctrineTargetEntitiesResolverPassTest extends AbstractCompilerPassTestCase
+final class DoctrineTargetEntitiesResolverPassTest extends AbstractCompilerPassTestCase
 {
     /**
      * @test

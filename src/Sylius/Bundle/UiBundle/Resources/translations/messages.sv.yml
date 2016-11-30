@@ -39,11 +39,11 @@ sylius:
         adjustments: Justeringar
         administration: Administration
         administration_dashboard: Administrationspanel
-        administration_panel_login: 'Administrationspanel - inloggning'
+        administration_panel_login: Administrationspanel - inloggning
         admin_users: Administratörer
         all: Alla
         all_your_addresses: Alla dina adresser
-        amount: Belopp
+        amount: Antal
         an_error_occurred: Ett fel uppstod
         api: Api
         apply_coupon: Använd kupong
@@ -62,6 +62,7 @@ sylius:
         back_to_store: Tillbaka till butik
         backordered: Restnoterad
         balance_due: Betalning förfaller
+        base_currency: Basvaluta
         bill_to: Fakturera till
         billing_address: Faktureringsadress
         blocks: Block
@@ -120,23 +121,21 @@ sylius:
         current_promotions: Aktuella kampanjer
         current_stock: I lager
         customer: Kunder
-        customer_can_login_to_the_store: Kund kan logga in i butiken
         customer_care: Kundtjänst
         customer_details: Kunduppgifter
         customer_login: Kundinloggning
         customer_since: Kund sedan
         customers: Kunder
-        customers_list_of_all_customers_in_store: 'Kunder <small>Lista över alla kunder i butiken</small>'
+        customers_list_of_all_customers_in_store: Kunder <small>Lista över alla kunder i butiken</small>
         dashboard: Kontrollpanel
         data: Data
         date: Datum
         default_billing_address: Standard faktureringsadress
-        default_currency: Standardvaluta
         default_locale: Standardspråk
         delete: Radera
         delete_image: Ta bort bild
         deleted: Raderad
-        delivery_and_shipping: 'Leverans & frakt'
+        delivery_and_shipping: Leverans & frakt
         description: Beskrivning
         details: Detaljer
         disable: Avaktivera
@@ -174,19 +173,14 @@ sylius:
         exchange_rate: Växlingskurs
         exclusive: Exklusiv
         expiration_and_usage_limits: Förfallodag och användningsgränser
-        expires_at: Förfaller den
         extra_information: Extra information
         extra_notes: Extra anteckningar
         failed: Misslyckad
         faqs: FAQs
-        filter: Filter
         filters: Filter
         first_name: Förnamn
-        forgot_password: Glömt lösenordet
         gateway: Portal
         generate_coupons: Generera kuponger
-        groups: Grupper
-        have_an_account_already: Har redan ett konto
         hello: Hej
         home: Hem
         hostname: Värdnamn
@@ -200,7 +194,6 @@ sylius:
         inventory_index: Lager
         item: Artikel
         jump_to_page: Hoppa till sida
-        label: Etikett
         last_name: Efternamn
         last_updated: Senast uppdaterad
         lastname: Efternamn
@@ -250,7 +243,6 @@ sylius:
         new_password: Nytt lösenord
         new_promotion_coupon: Ny kampanjkupong
         new_tax_category: Ny skattekategori
-        "no": false
         no_account: inget konto
         no_promotion: Ingen kampanj applicerad
         no_requirement: Inget krav
@@ -310,6 +302,7 @@ sylius:
         register_button: Registrera
         register_in_the_store: Registrera i butiken
         registered_customers: Registrerade kunder
+        rejected: Avslagen
         remember_me: Kom ihåg mig
         repeat_new_password: Upprepa nytt lösenord
         reports: Rapporter
@@ -318,7 +311,6 @@ sylius:
         returns_policy: Returpolicy
         reviews: Recensioner
         roles: Roller
-        routes: Rutter
         rules: Regler
         sales: Försäljning
         sales_this_month: Försäljning
@@ -334,7 +326,7 @@ sylius:
         shipped: Skickad
         shipping: Leverans
         shipping_address: Leveransadress
-        shipping_and_payment_methods: 'Leverans- och betalningsmetoder'
+        shipping_and_payment_methods: Leverans- och betalningsmetoder
         shipping_category: Kategori
         shipping_methods: Leveransmetoder
         shop_by_brand: Handla efter märke
@@ -371,7 +363,6 @@ sylius:
         unlimited: Obegränsat
         update_cart: Uppdatera varukorgen
         usage: Användning
-        usage_limit: Användningsbegränsning
         user_confirmation_name: Användarbekräftelse
         username: Användarnanm
         values: Värden
@@ -380,7 +371,6 @@ sylius:
         view_and_edit_cart: Visa och redigera varukorg
         void: Tom
         welcome_to_our_store: Välkommen till vår butik
-        "yes": true
         you_may_also_like: Du kanske även gillar
         your_cart_is_empty: Din varukorg är tom
         your_profile: Din profil

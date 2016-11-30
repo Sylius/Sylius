@@ -18,8 +18,6 @@ use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Sylius\Component\User\Security\Generator\UniquePinGenerator;
 
 /**
- * @mixin UniquePinGenerator
- *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
 final class UniquePinGeneratorSpec extends ObjectBehavior
@@ -31,7 +29,7 @@ final class UniquePinGeneratorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\User\Security\Generator\UniquePinGenerator');
+        $this->shouldHaveType(UniquePinGenerator::class);
     }
 
     function it_implements_generator_interface()

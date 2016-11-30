@@ -10,47 +10,44 @@ Feature: Paying with paypal during checkout
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free
         And the store allows paying "PayPal Express Checkout"
+        And I am logged in as "john@example.com"
 
     @ui
     Scenario: Successful payment
-        Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I have proceeded selecting "PayPal Express Checkout" payment method
-        When I confirm my order
-        And I try to pay
+        When I confirm my order with paypal payment
         And I sign in to PayPal and pay successfully
-        Then I should be redirected back to the thank you page
+        Then I should be notified that my payment has been completed
+        And I should see the thank you page
 
     @ui
     Scenario: Cancelling the payment
-        Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I have proceeded selecting "PayPal Express Checkout" payment method
-        When I confirm my order
-        And I try to pay
+        When I confirm my order with paypal payment
         And I cancel my PayPal payment
-        Then I should be able to pay again
+        Then I should be notified that my payment has been cancelled
+        And I should be able to pay again
 
     @ui
     Scenario: Retrying the payment with success
-        Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I have proceeded selecting "PayPal Express Checkout" payment method
-        And I have confirmed my order
-        And I tried to pay
+        And I have confirmed my order with paypal payment
         But I have cancelled PayPal payment
         When I try to pay again
         And I sign in to PayPal and pay successfully
-        Then I should be redirected back to the thank you page
+        Then I should be notified that my payment has been completed
+        And I should see the thank you page
 
     @ui
     Scenario: Retrying the payment and failing
-        Given I am logged in as "john@example.com"
-        And I added product "PHP T-Shirt" to the cart
+        Given I added product "PHP T-Shirt" to the cart
         And I have proceeded selecting "PayPal Express Checkout" payment method
-        And I have confirmed my order
-        And I tried to pay
+        And I have confirmed my order with paypal payment
         But I have cancelled PayPal payment
         When I try to pay again
         And I cancel my PayPal payment
+        Then I should be notified that my payment has been cancelled
         And I should be able to pay again

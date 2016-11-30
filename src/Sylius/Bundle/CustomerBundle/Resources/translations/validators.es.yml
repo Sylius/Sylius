@@ -2,27 +2,29 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    group:
-        name:
-            max: 'El nombre del grupo no debe tener más de {{ limit }} caracteres.'
-            min: 'El nombre del grupo debe tener al menos {{ limit }} caracteres.'
-            not_blank: Por favor, introduzca el nombre de grupo.
     customer:
         first_name:
-            max: 'El nombre no debe tener más de {{ limit }} caracteres.'
-            min: 'El nombre debe tener al menos {{ limit }} caracteres.'
+            max: El nombre no debe tener más de {{ limit }} caracteres.
+            min: El nombre debe tener al menos {{ limit }} caracteres.
             not_blank: Por favor introduzca su nombre.
         last_name:
-            max: 'El apellido no debe tener más de {{ limit }} caracteres.'
-            min: 'El apellido debe tener al menos {{ limit }} caracteres.'
-            not_blank: Por favor introduzca sus apellidos.
+            max: El apellido no debe tener más de {{ limit }} caracteres.
+            min: El apellido debe tener al menos {{ limit }} caracteres.
+            not_blank: Por favor, introduzca sus apellidos.
         gender:
             not_blank: Por favor, seleccione su sexo.
         email:
-            already_used: Este email ya está registrado, por favor inicia sesión o utiliza la opción de recuperación de contraseña.
-            max: 'El correo electrónico no debe tener más de {{ limit }} caracteres.'
-            min: 'El correo electrónico debe tener al menos {{ limit }} caracteres.'
+            already_used: Este email ya está registrado, por favor inicie sesión o utilice la opción de recuperación de contraseña.
+            max: El correo electrónico no debe tener más de {{ limit }} caracteres.
+            min: El correo electrónico debe tener al menos {{ limit }} caracteres.
             not_blank: Por favor, introduzca su dirección de correo electrónico.
             invalid: Este email no es válido.
             unique: Este correo electrónico ya está en uso.
             registered: Este email ya está registrado, por favor ingresa o utiliza la opción de recuperación de contraseña.
+    customer_group:
+        code:
+            unique: El código de grupo de clientes debe ser único.
+        name:
+            max: El nombre del grupo de clientes no puede tener más de {{ limit }} caracteres.
+            min: El nombre del grupo de clientes debe tener al menos {{ limit }} caracteres.
+            not_blank: Por favor, introduzca un nombre de grupo de clientes.

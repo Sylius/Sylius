@@ -8,7 +8,7 @@ sylius:
             unique: Acest cod de localizare există deja.
     product_variant:
         onHand:
-            min: 'Stocul curent trebuie să fie mai mare decât {{ limit }}.'
+            min: Stocul curent trebuie să fie mai mare decât {{ limit }}.
             not_blank: Vă rugăm să introduceţi stocul curent.
         price:
             min: Preţul nu poate fi negativ.

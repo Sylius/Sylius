@@ -12,5 +12,5 @@ sylius:
             mismatch: A megadott jelszavak nem egyeznek
             wrong_current: A megadott jelszó különbözik a jelenlegitől.
         password:
-            min: 'Jelszó legyen legalább {{ limit }} karakter hosszú.'
-            max: 'Jelszó nem lehet {{ limit }} karakternél hosszabb.'
+            min: Jelszó legyen legalább {{ limit }} karakter hosszú.
+            max: Jelszó nem lehet {{ limit }} karakternél hosszabb.

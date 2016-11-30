@@ -4,7 +4,7 @@
 default:
     suites:
         ui_currencies:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.channel

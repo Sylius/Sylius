@@ -11,7 +11,7 @@ sylius:
             unique: 此区域设置已存在。
     product_variant:
         onHand:
-            min: '库存量必须大于 {{limit}}。'
+            min: 库存量必须大于 {{limit}}。
             not_blank: 请输入库存量
         price:
             min: 价格不能为负。
@@ -20,4 +20,4 @@ sylius:
             min: 原价不能为负。
     product_translation:
         short_description:
-            max: '简短描述不能超过 {{ limit }} 个字符。'
+            max: 简短描述不能超过 {{ limit }} 个字符。

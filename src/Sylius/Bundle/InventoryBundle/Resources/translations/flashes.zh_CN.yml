@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    inventory_unit:
-        backorder: 库存数量
-        sell: 可用库存量
-        return: 退回的库存数目。
-        transition_fail: 无法执行该操作

@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class RoutingRepositoryPass implements CompilerPassInterface
+final class RoutingRepositoryPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

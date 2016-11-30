@@ -19,7 +19,7 @@ use Symfony\Component\Validator\ConstraintValidator;
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class RegisteredUserValidator extends ConstraintValidator
+final class RegisteredUserValidator extends ConstraintValidator
 {
     /**
      * @var RepositoryInterface
@@ -41,12 +41,7 @@ class RegisteredUserValidator extends ConstraintValidator
     {
         $existingCustomer = $this->customerRepository->findOneBy(['email' => $customer->getEmail()]);
         if (null !== $existingCustomer && null !== $existingCustomer->getUser()) {
-            $this->context->addViolationAt(
-                'email',
-                $constraint->message,
-                [],
-                null
-            );
+            $this->context->buildViolation($constraint->message)->atPath('email')->addViolation();
         }
     }
 }

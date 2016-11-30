@@ -17,7 +17,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -43,6 +42,11 @@ final class CurrencyContext implements Context
     private $currencyFactory;
 
     /**
+     * @var CurrencyStorageInterface
+     */
+    private $currencyStorage;
+
+    /**
      * @var ObjectManager
      */
     private $currencyManager;
@@ -56,6 +60,7 @@ final class CurrencyContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $currencyRepository
      * @param FactoryInterface $currencyFactory
+     * @param CurrencyStorageInterface $currencyStorage
      * @param ObjectManager $currencyManager
      * @param ObjectManager $channelManager
      */
@@ -63,12 +68,14 @@ final class CurrencyContext implements Context
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $currencyRepository,
         FactoryInterface $currencyFactory,
+        CurrencyStorageInterface $currencyStorage,
         ObjectManager $currencyManager,
         ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currencyRepository = $currencyRepository;
         $this->currencyFactory = $currencyFactory;
+        $this->currencyStorage = $currencyStorage;
         $this->currencyManager = $currencyManager;
         $this->channelManager = $channelManager;
     }
@@ -79,106 +86,50 @@ final class CurrencyContext implements Context
     public function theStoreHasCurrency($currencyCode)
     {
         $currency = $this->createCurrency($currencyCode);
-        $currency->setEnabled(true);
 
         $this->saveCurrency($currency);
     }
 
     /**
      * @Given the store has currency :currencyCode, :secondCurrencyCode
+     * @Given the store has currency :currencyCode and :secondCurrencyCode
+     * @Given the store has currency :currencyCode, :secondCurrencyCode and :thirdCurrencyCode
      */
-    public function theStoreHasCurrencyAnd($currencyCode, $secondCurrencyCode)
+    public function theStoreHasCurrencyAnd($currencyCode, $secondCurrencyCode, $thirdCurrencyCode = null)
     {
         $this->saveCurrency($this->createCurrency($currencyCode));
         $this->saveCurrency($this->createCurrency($secondCurrencyCode));
+
+        if (null !== $thirdCurrencyCode) {
+            $this->saveCurrency($this->createCurrency($thirdCurrencyCode));
+        }
     }
 
     /**
      * @Given the store has disabled currency :currencyCode
      * @Given the currency :currencyCode is disabled (as well)
      * @Given the currency :currencyCode gets disabled
+     * @Given the currency :currencyCode has been disabled
      */
     public function theStoreHasDisabledCurrency($currencyCode)
     {
         $currency = $this->provideCurrency($currencyCode);
-        $currency->setEnabled(false);
 
         $this->saveCurrency($currency);
     }
 
     /**
-     * @Given the store has currency :currencyCode with exchange rate :exchangeRate
+     * @Given /^(that channel)(?: also|) allows to shop using the "([^"]+)" currency$/
+     * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
+     * @Given /^(that channel)(?: also|) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
      */
-    public function theStoreHasCurrencyWithExchangeRate($currencyCode, $exchangeRate)
+    public function thatChannelAllowsToShopUsingAndCurrencies(ChannelInterface $channel, ...$currenciesCodes)
     {
-        $currency = $this->createCurrency($currencyCode, $exchangeRate);
-        $currency->setEnabled(true);
-
-        $this->saveCurrency($currency);
-    }
-
-    /**
-     * @Given /^(that channel) allows to shop using the "([^"]+)" currency$/
-     * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
-     * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
-     */
-    public function thatChannelAllowsToShopUsingAndCurrencies(
-        ChannelInterface $channel,
-        $firstCurrencyCode,
-        $secondCurrencyCode = null,
-        $thirdCurrencyCode = null
-    ) {
-        $currencies = new ArrayCollection();
-
-        foreach ([$firstCurrencyCode, $secondCurrencyCode, $thirdCurrencyCode] as $currencyCode) {
-            if (null === $currencyCode) {
-                break;
-            }
-
-            $currencies[] = $this->provideCurrency($currencyCode);
+        foreach ($currenciesCodes as $currencyCode) {
+            $channel->addCurrency($this->provideCurrency($currencyCode));
         }
 
-        $channel->setCurrencies($currencies);
-
         $this->channelManager->flush();
-    }
-
-    /**
-     * @Given /^(that channel) uses the "([^"]+)" currency by default$/
-     * @Given /^(it) uses the "([^"]+)" currency by default$/
-     */
-    public function itUsesTheCurrencyByDefault(ChannelInterface $channel, $currencyCode)
-    {
-        $currency = $this->provideCurrency($currencyCode);
-        $currency->setExchangeRate(1.0);
-
-        $this->currencyManager->flush();
-
-        $channel->addCurrency($currency);
-        $channel->setDefaultCurrency($currency);
-
-        $this->channelManager->flush();
-    }
-
-    /**
-     * @Given /^(that channel) allows to shop using the "([^"]+)" currency with exchange rate (\d+)\.(\d+)$/
-     */
-    public function thatChannelAllowsToShopUsingCurrency(ChannelInterface $channel, $currencyCode, $exchangeRate = 1.0)
-    {
-        $currency = $this->createCurrency($currencyCode, $exchangeRate);
-        $channel->addCurrency($currency);
-        $this->saveCurrency($currency);
-
-        $this->channelManager->flush();
-    }
-
-    /**
-     * @Given /^the exchange rate for (currency "[^"]+") was changed to ((\d+)\.(\d+))$/
-     */
-    public function theExchangeRateForWasChangedTo(CurrencyInterface $currency, $exchangeRate)
-    {
-        $currency->setExchangeRate($exchangeRate);
-        $this->saveCurrency($currency);
     }
 
     /**
@@ -192,16 +143,14 @@ final class CurrencyContext implements Context
 
     /**
      * @param $currencyCode
-     * @param float $exchangeRate
      *
      * @return CurrencyInterface
      */
-    private function createCurrency($currencyCode, $exchangeRate = 1.0)
+    private function createCurrency($currencyCode)
     {
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyFactory->createNew();
         $currency->setCode($currencyCode);
-        $currency->setExchangeRate($exchangeRate);
 
         return $currency;
     }
@@ -216,7 +165,7 @@ final class CurrencyContext implements Context
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
         if (null === $currency) {
             /** @var CurrencyInterface $currency */
-            $currency = $this->createCurrency($currencyCode, mt_rand(0, 200) / 100);
+            $currency = $this->createCurrency($currencyCode);
 
             $this->currencyRepository->add($currency);
         }

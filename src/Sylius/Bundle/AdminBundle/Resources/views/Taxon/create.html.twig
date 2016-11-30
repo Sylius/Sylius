@@ -1,9 +1,9 @@
-{% extends 'SyliusAdminBundle:Crud:create.html.twig' %}
+{% extends '@SyliusAdmin/Crud/create.html.twig' %}
 
 {% block content %}
     <div class="ui two column stackable grid">
         <div class="four wide column">
-            {{ render(path('sylius_admin_partial_taxon_tree')) }}
+            {{ render(path('sylius_admin_partial_taxon_tree_with_buttons')) }}
         </div>
         <div class="twelve wide column">
             {{ parent() }}

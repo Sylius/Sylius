@@ -5,5 +5,5 @@ sylius:
     menu:
         shop:
             account:
-                dashboard: 仪表板
                 change_password: 更改密码
+                dashboard: 仪表板

@@ -10,5 +10,4 @@ Managing different currencies, exchange rates and converting cash amounts for PH
    basic_usage
    models
    interfaces
-   importers
    unavailable_currency_exception

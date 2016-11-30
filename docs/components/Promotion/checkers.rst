@@ -13,7 +13,7 @@ You can use it when your subject implements the :ref:`component_promotion_model_
     <?php
 
     $itemCountChecker = new ItemCountRuleChecker();
-    // a Subject that implements the PromotionCountableSubjectInterface
+    // a Subject that implements the CountablePromotionSubjectInterface
     $subject->setQuantity(3);
 
     $configuration = array('count' => 2);
@@ -36,7 +36,7 @@ If your subject implements the :ref:`component_promotion_model_promotion-subject
     $itemTotalChecker = new ItemTotalRuleChecker();
 
     // a Subject that implements the PromotionSubjectInterface
-    // Let's assume thet the subject->getSubjectItemTotal() returns 199
+    // Let's assume the subject->getSubjectItemTotal() returns 199
 
     $configuration = array('amount' => 199);
 

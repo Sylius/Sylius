@@ -7,3 +7,8 @@ sylius:
             options: Опцйи
         product_variant:
             available_on: На разположение на
+        option:
+            values: Възможни стойности
+        option_value:
+            add_value: Добавяне на стойност
+            value: Стойност

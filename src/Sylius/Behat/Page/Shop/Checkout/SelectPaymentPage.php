@@ -33,15 +33,14 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
      */
     public function selectPaymentMethod($paymentMethod)
     {
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver) {
-            $this->getDriver()->executeScript(sprintf('$(\'.item:contains("%s") .ui.radio.checkbox\').checkbox(\'check\')', $paymentMethod));
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $this->getElement('payment_method_select', ['%payment_method%' => $paymentMethod])->click();
 
             return;
         }
 
-        $paymentMethodElement = $this->getElement('payment_method');
-        $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
+        $paymentMethodOptionElement = $this->getElement('payment_method_option', ['%payment_method%' => $paymentMethod]);
+        $paymentMethodOptionElement->selectOption($paymentMethodOptionElement->getAttribute('value'));
     }
 
     /**
@@ -72,12 +71,12 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
 
     public function nextStep()
     {
-        $this->getDocument()->pressButton('Next');
+        $this->getElement('next_step')->press();
     }
 
     public function changeShippingMethod()
     {
-        $this->getDocument()->pressButton('Change shipping method');
+        $this->getDocument()->clickLink('Change shipping method');
     }
 
     public function changeShippingMethodByStepLabel()
@@ -93,15 +92,48 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     /**
      * {@inheritdoc}
      */
+    public function hasNoAvailablePaymentMethodsWarning()
+    {
+        return $this->hasElement('warning_no_payment_methods');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+     public function isNextStepButtonUnavailable()
+     {
+         return $this->getElement('next_step')->hasClass('disabled');
+     }
+
+    /**
+     * {@inheritdoc}
+     */
+     public function getPaymentMethods()
+     {
+         $inputs = $this->getSession()->getPage()->findAll('css', '#payment_methods .item .content label');
+
+         $paymentMethods = [];
+         foreach ($inputs as $input) {
+             $paymentMethods[] = trim($input->getText());
+         }
+
+         return $paymentMethods;
+     }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'address_step_label' => '.steps a:contains("Address")',
             'checkout_subtotal' => '#checkout-subtotal',
-            'shipping_step_label' => '.steps a:contains("Shipping")',
+            'next_step' => '#next-step',
             'order_cannot_be_paid_message' => '#sylius-order-cannot-be-paid',
-            'payment_method' => '[name="sylius_checkout_select_payment[payments][0][method]"]',
             'payment_method_option' => '.item:contains("%payment_method%") input',
+            'payment_method_select' => '.item:contains("%payment_method%") > .field > .ui.radio.checkbox',
+            'shipping_step_label' => '.steps a:contains("Shipping")',
+            'warning_no_payment_methods' => '#sylius-order-cannot-be-paid',
         ]);
     }
 }

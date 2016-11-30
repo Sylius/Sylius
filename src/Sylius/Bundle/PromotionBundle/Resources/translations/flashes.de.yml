@@ -3,7 +3,7 @@
 
 sylius:
     promotion_coupon:
-        generate: Die Gutscheine wurden erfolgreich erstellt.
         eligible: Ihr Gutschein wurde zum Warenkorb hinzugefügt.
+        generate: Die Gutscheine wurden erfolgreich erstellt.
         invalid: Ihr Gutschein ist ungültig.
         not_eligible: Ihr Warenkorb ist nicht berechtigt für diesen Gutschein.

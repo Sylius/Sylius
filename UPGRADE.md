@@ -1,7 +1,50 @@
 UPGRADE
 =======
 
+## From 1.0.0-alpha to 1.0.0-alpha.2
+
+## Pricing and PricingBundle
+
+ * Removed ``Pricing`` component and ``PricingBundle``
+
 ## From 0.19 to 1.0.0-alpha
+
+### Association and AssociationBundle
+
+* Merged Association component with Product component
+* Merged AssociationBundle into ProductBundle
+
+### Customer
+
+ * Renamed ``Group`` to ``CustomerGroup``
+ * Changed relation between ``CustomerGroup`` and ``Customer`` to one-to-many
+
+### Product and ProductBundle
+
+ * Renamed ``options`` property to ``optionValues`` in ``ProductVariant``
+
+### Currency and CurrencyBundle
+
+ * Removed ``EuropeanCentralBankImporter`` and ``OpenExchangeRatesImporter``
+
+### Variation and VariationBundle
+
+ * Merge ``Variation`` component and ``VariationBundle`` into ``Product`` component and ``ProductBundle``.
+
+### CartBundle
+
+ * Merge ``Cart`` component and ``CartBundle`` into ``Order\Core`` component and ``Order\CoreBundle``.
+
+### WebBundle
+ 
+ * Removed ``WebBundle``. See ``ShopBundle`` for the website and ``AdminBundle`` for administration-related.
+ 
+  See https://github.com/Sylius/Sylius/pull/5535 and https://github.com/Sylius/Sylius/pull/5655
+
+### Removed Assetic
+
+ * Sylius is no longer using Assetic for assets management - see https://github.com/Sylius/Sylius/pull/5593
+ * Gulp and NPM are now responsible to compile the new UI
 
 ### Archetype and ArchetypeBundle
 

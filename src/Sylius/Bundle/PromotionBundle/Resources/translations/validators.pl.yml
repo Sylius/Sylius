@@ -10,27 +10,17 @@ sylius:
             max_length: '{1} Opis promocji nie może być dłuższy niż 1 znak.|{2,3,4} Opis promocji nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji nie może być dłuższy niż {{ limit}} znaków.'
             min_length: '{1} Opis promocji musi być dłuższy niż 1 znak.|{2,3,4} Opis promocji musi być dłuższy niż {{ limit }} znaki.|[5,Inf[ Opis promocji musi być dłuższy niż {{ limit }} znaków.'
             not_blank: Proszę podać opis promocji.
+        end_date_cannot_be_set_prior_start_date: Data zakończenia nie może być wcześniejsza niż data startu.
         name:
             max_length: '{1} Nazwa promocji nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji nie może być dłuższa niż {{ limit}} znaków.'
             min_length: '{1} Nazwa promocji musi być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji musi być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji musi być dłuższa niż {{ limit }} znaków.'
             not_blank: Proszę podać nazwę promocji.
-        end_date_cannot_be_set_prior_start_date: Data zakończenia nie może być wcześniejsza niż data startu.
     promotion_coupon:
         code:
             max_length: '{1} Kod kuponu promocyjnego nie może być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego nie może być dłuższy niż {{ limit}} znaków.'
             min_length: '{1} Kod kuponu promocyjnego musi być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego musi być dłuższy niż {{ limit }} znaków.'
             not_blank: Proszę podać kod kuponu.
             unique: Ten kupon już istnieje.
+        is_invalid: Kod rabatowy jest nieprawidłowy.
         usage_limit:
-            min: 'Ograniczenie użycia musi wynosić co najmniej {{ limit }}.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'Liczba kuponów do wygenerowania musi wynosić co najmniej {{ limit }}.'
-            not_blank: Proszę podać liczbę kuponów do wygenerowania.
-        usage_limit:
-            min: 'Ograniczenie użycia wygenerowanych kuponów musi wynosić co najmniej {{ limit }}.'
-        code_length:
-            min: 'Kod promocyjny musi mieć co najmniej {{ limit }} znaków.'
-            max: 'Kod promocyjny nie może być dłuższy niż {{ limit }} znaków.'
-            not_blank: Proszę podać długość kodu kuponu.
-        possible_generation_amount: 'Nieprawidłowa długość kodu lub ilość kuponów. Nie można wygenerować %expectedAmount% unikalnych kuponów z długością kodu równą %codeLength%. Możliwa do wygenerowania liczba kuponów to %possibleAmount%.'
+            min: Ograniczenie użycia musi wynosić co najmniej {{ limit }}.

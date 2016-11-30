@@ -12,8 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 /**
- * @mixin RequestLocaleSetter
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class RequestLocaleSetterSpec extends ObjectBehavior

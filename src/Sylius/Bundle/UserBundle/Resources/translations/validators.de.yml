@@ -12,5 +12,5 @@ sylius:
             mismatch: Die eingegebenen Passwörter stimmen nicht überein
             wrong_current: Das angegebene Passwort unterscheidet sich vom aktuellen Passwort.
         password:
-            min: 'Das Passwort muss mindestens {{ limit }} Zeichen lang sein.'
-            max: 'Passwort darf nicht länger als {{ limit }} sein.'
+            min: Das Passwort muss mindestens {{ limit }} Zeichen lang sein.
+            max: Passwort darf nicht länger als {{ limit }} sein.

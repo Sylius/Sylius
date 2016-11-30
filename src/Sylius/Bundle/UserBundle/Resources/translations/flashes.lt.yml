@@ -6,8 +6,16 @@ sylius:
         email:
             not_exist: Nėra vartotojo su tokiu el. pašto adresu.
         password:
-            invalid: Klaidingas dabartinis slaptažodis.
             reset:
                 success: Jūsų slaptažodis atstatytas sėkmingai!
+                token_expired: Slaptažodžio atstatymo laikas baigėsi,
+                requested: Jei nurodytas el. pašto adresas yra užregistruotas, tada mes išsiųsime instrukciją apie tai, kaip iš naujo nustatyti naują slaptažodį.
             change:
                 success: Jūsų slaptažodis buvo pakeistas sėkmingai!
+        verification:
+            error: Patvirtinimo raktas yra neteisingas.
+            notice:
+                verified: Jūsų elektroninio pašto adresas jau yra patikrintas.
+            success: Elektroninio pašto adresas sėkmingai patikrintas.
+            request:
+                success: Jūsų el. pašto adresu buvo išsiųstas el. laiškas su patvirtinimo nuoroda.

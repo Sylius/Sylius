@@ -37,6 +37,16 @@ class Field
     private $label;
 
     /**
+     * @var boolean
+     */
+    private $enabled = true;
+
+    /**
+     * @var string|null
+     */
+    private $sortable;
+
+    /**
      * @var array
      */
     private $options = [];
@@ -58,11 +68,11 @@ class Field
      * @param string $name
      * @param string $type
      *
-     * @return Field
+     * @return self
      */
     public static function fromNameAndType($name, $type)
     {
-        return new Field($name, $type);
+        return new self($name, $type);
     }
 
     /**
@@ -111,6 +121,46 @@ class Field
     public function setLabel($label)
     {
         $this->label = $label;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * @param string|null $sortable
+     */
+    public function setSortable($sortable)
+    {
+        $this->sortable = $sortable ?: $this->name;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSortable()
+    {
+        return $this->sortable;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSortable()
+    {
+        return null !== $this->sortable;
     }
 
     /**

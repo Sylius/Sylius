@@ -1,12 +1,5 @@
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Unit price
-                quantity: Quantity
-                variant: Variant
-            customer_group:
-                Customer group
         block:
             body: Body
             id: ID
@@ -20,7 +13,12 @@ sylius:
             shipping_method: Shipping Method
         promotion:
             channels: Channels
-        coupon:
+        promotion_action:
+            add_product_configuration:
+                product: Product
+            customer_group:
+                Customer group
+        promotion_coupon:
             per_customer_usage_limit: Per-Customer Usage Limit
         group:
             name: Name
@@ -29,7 +27,7 @@ sylius:
             taxonomies: Taxonomies
             locale_default: Default locale
             locales: Locales
-            currency_default: Default currency
+            currency_base: Base currency
             currencies: Currencies
             shipping_methods: Shipping Methods
             payment_methods: Payment Methods
@@ -38,6 +36,7 @@ sylius:
             theme: Theme
             hostname: Hostname
         image:
+            code: Code
             file: Image
         locale:
             code: Code
@@ -55,8 +54,8 @@ sylius:
             id: ID
             title: Title
         product:
+            images: Images
             restricted_zone: Restricted zone
-            shipping_category: Shipping category
             short_description: Short description
             variant_selection_method: Variant selection method
             main_taxon: Main taxon
@@ -67,19 +66,7 @@ sylius:
             code: Code
         product_variant:
             tax_category: Tax category
-        settings:
-            general:
-                currency: Default currency
-                locale: Language
-                meta_description: Meta description
-                meta_keywords: Meta keywords
-                title: Page title
-                tracking_code: Tracking code (for example: Google Analytics code)
-            taxation:
-                default_tax_zone: Default tax zone
-                default_tax_calculation_strategy: Default tax calculation strategy
-            security:
-                enabled: Enable?
+            shipping_category: Shipping category
         shipment_filter:
             created_at_from: From
             created_at_to: To
@@ -95,7 +82,9 @@ sylius:
         shipping_method:
             zone: Zone
         taxon:
+            code: Code
             file: Select image
+            images: Images
         taxonomy:
             file: Select image
         user:
@@ -113,10 +102,8 @@ sylius:
         variant:
             depth: Depth
             height: Height
-            images: Images
             on_hand: Current stock
             price: Price
-            original_price: Original price
             sku: SKU
             weight: Weight
             width: Width
@@ -131,34 +118,81 @@ sylius:
             type: Association type
         product_association_type:
             name: Name
+        promotion_filter:
+            products: Products filter
+            taxons: Taxons filter
         promotion_rule:
-            contains_taxon:
-                taxon: Taxon
-                count: Count
-            taxon:
+            has_taxon:
                 taxons: Taxons
+            product:
+                products: Products
             total_of_items_from_taxon:
                 taxon: Taxon
                 amount: Amount
+        payment_method:
+            channels: Channels
+        product_attribute:
+            position: Position
 
-    email:
-        order_confirmation:
-            name: Order confirmation
-        order_comment:
-            name: Order comment
-        shipment_confirmation:
-            name: Shipment confirmation
-            content: Your order no. %number% has been sent using %method%.<br/>You can check it's location with the "%tracking%" tracking code.<br/><br/>Thank you for a successful transaction.
-        user_confirmation:
-            name: User confirmation
-            subject: Welcome to our store
-            content: Welcome to our store<br/><br/>You have just been registered.<br/>Thank you %username%.
-        password_reset:
-            name: Password reset
-            content: <h3>Hello %username%</h3>To reset your password - please visit %url% <br/><br/>Regards, the Team.
-        verification:
-            name: Email address verification
-            content: To verify your email address - please visit %url%
+    installer:
+        extensions:
+            header: extensions
+            accelerator:
+                header: Accelerator
+                help: Enable Zend OpCache (highly recommended).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Install and enable the %extension% extension.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            off: off
+            on: on
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: file system
+            cache:
+                header: cache
+                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            exists: exists
+            logs:
+                header: logs
+                help: "To set permissions run: sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            not_exists: not exists
+            not_writable: not writable
+            parameters:
+                header: parameters.yml
+                help: "To set permissions run: sudo chmod a+w %path%"
+            vendors: vendors
+            writable: writable
+        settings:
+            header: PHP version and settings
+            any: any
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: non deprecated
+            off: off
+            on: on
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: timezone
+            timezone_deprecated:
+                header: Deprecated timezone
+                help: Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).
+            version: PHP version
+            version_recommended: Recommended PHP version
 
     payum_gateway:
         cash_on_delivery: Cash on delivery

@@ -27,7 +27,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ResourceDeleteSubscriber implements EventSubscriberInterface
+final class ResourceDeleteSubscriber implements EventSubscriberInterface
 {
     /**
      * @var UrlGeneratorInterface

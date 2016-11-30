@@ -12,13 +12,12 @@
 namespace spec\Sylius\Component\Locale\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Locale\Model\Locale;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
- * @mixin \Sylius\Component\Locale\Model\Locale
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class LocaleSpec extends ObjectBehavior
@@ -30,10 +29,10 @@ final class LocaleSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Locale\Model\Locale');
+        $this->shouldHaveType(Locale::class);
     }
 
-    function it_implements_Sylius_locale_interface()
+    function it_implements_a_locale_interface()
     {
         $this->shouldImplement(LocaleInterface::class);
     }

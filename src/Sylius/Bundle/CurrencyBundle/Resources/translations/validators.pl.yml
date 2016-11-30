@@ -4,8 +4,8 @@
 sylius:
     currency:
         code:
+            exact_length: Kod waluty musi mieć dokładnie 3 znaki.
             not_blank: Wybierz kod waluty.
             unique: Kod waluty musi być unikalny.
-            exact_length: Kod waluty musi mieć dokładnie 3 znaki.
         exchange_rate:
             not_blank: Wprowadź kurs wymiany.

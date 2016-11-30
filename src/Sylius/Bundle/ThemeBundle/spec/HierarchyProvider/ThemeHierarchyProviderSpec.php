@@ -17,15 +17,13 @@ use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin ThemeHierarchyProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeHierarchyProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProvider');
+        $this->shouldHaveType(ThemeHierarchyProvider::class);
     }
 
     function it_implements_theme_hierarchy_provider_interface()

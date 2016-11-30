@@ -3,11 +3,9 @@
 
 sylius:
     review:
-        title:
-            not_blank: Titulli i recensionit nuk duhet te jete bosh.
-            min_length: Titulli i recensionit duhet te kete te pakten 2 karaktere
-            max_length: Titulli i recensionit duhet te kete me te shumten 255 karaktere
-        rating:
-            not_blank: Duhet te kontrolloni vleresimin e recensionit.
         author:
             already_exists: Ky email është i regjistruar, login ose përdor rikujtimin e fjalëkalimit.
+        rating:
+            not_blank: Duhet te kontrolloni vleresimin e recensionit.
+        title:
+            not_blank: Titulli i recensionit nuk duhet te jete bosh.

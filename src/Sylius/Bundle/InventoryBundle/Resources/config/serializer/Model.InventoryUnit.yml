@@ -6,6 +6,3 @@ Sylius\Component\Inventory\Model\InventoryUnit:
             expose: true
             type: integer
             xml_attribute: true
-        inventoryState:
-            expose: true
-            type: string

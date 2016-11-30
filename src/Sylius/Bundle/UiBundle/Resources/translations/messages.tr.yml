@@ -59,7 +59,7 @@ sylius:
         change_your_password: Parolanızı değiştirin
         channel: Kanal
         channels: Kanallar
-        checkout: 'Ödeme  yap'
+        checkout: Ödeme  yap
         choose_file: Dosya seç
         city: Şehir
         clear_cart: Sepeti boşalt
@@ -83,7 +83,6 @@ sylius:
         create_a_new_address: Yeni bir adres oluşturun
         create_country: Ülke ekle
         create_currency: Para birimi oluştur
-        create_group: Grup oluştur
         create_imagine_block: Oluşturma bloğu hayal
         create_locale: Dil oluştur
         create_menu: Menü Oluştur
@@ -98,9 +97,7 @@ sylius:
         create_product: Ürün oluştur
         create_product_attribute: Ürün özniteliğini oluştur
         create_promotion: Promosyon oluşturmak
-        create_redirect_route: Yeniden yönlendirme yol oluşturma
         create_report: Rapor Oluştur
-        create_route: Rota Oluştur
         create_shipping_category: Nakliye Kategori oluşturma
         create_shipping_method: Kargo yöntemi oluştur
         create_simple_block: Basit blok oluştur
@@ -119,8 +116,6 @@ sylius:
         creating_menu: Menü oluşturuluyor
         creating_menu_node: Menü düğümü oluşturma
         creating_new_page: Yeni sayfa oluşturma
-        creating_redirect_route: Yeniden yönlendirme yol oluşturma
-        creating_route: Rota oluşturma
         creation_date: Oluşturma tarihi
         creation_time: Oluşturma zamanı
         currencies: Para birimi
@@ -135,11 +130,10 @@ sylius:
         customer_notified: Müşteri bildirim
         customer_orders: Müşteri siparişleri
         customers: Müşteriler
-        customers_list_of_all_customers_in_store: 'Müşteriler <small>Mağazanın tüm müşterilerinin listesi</small>'
+        customers_list_of_all_customers_in_store: Müşteriler <small>Mağazanın tüm müşterilerinin listesi</small>
         dashboard: Kontrol Paneli
         data: Veri Merkezi
         default_billing_address: Varsayılan fatura adresi
-        default_currency: Varsayılan para birimi
         default_shipping_address: Varsayılan teslim adresi
         delete: Sil
         delete_image: Resim silmek
@@ -147,7 +141,6 @@ sylius:
         description: Açıklama
         disable: Devre dışı
         edit: Düzenle
-        edit_group: Grubu düzenle
         edit_locale: Dil düzenle
         edit_my_address: Adresi düzenle
         edit_report: Raporu Düzenle
@@ -170,9 +163,7 @@ sylius:
         editing_permission: İzne düzenleme
         editing_product: Ürün Düzenleme
         editing_promotion: Promosyon düzenleme
-        editing_redirect_route: Yönlendirilen rotayı düzenleme
         editing_role: Rol düzenleme
-        editing_route: Rotayı düzenleme
         editing_shipment: Kargo düzenle
         editing_shipping_category: Nakliye Kategori düzenleme
         editing_shipping_method: Kargo yöntemi düzenle
@@ -196,9 +187,7 @@ sylius:
         exchange_rate: Döviz Kuru
         exclusive: Özel
         existing_customer: Varolan Müşteri
-        expires_at: Süre sonu: 
         failed: Başarısız oldu
-        filter: Filtrele
         first_name: Ad
         fulfill: Stokta
         gateway: Ağ Geçidi
@@ -210,7 +199,6 @@ sylius:
         generating_coupons: Kuponlar oluşturmak
         go_to_dashboard: Arayüze git
         grand_total: Toplam
-        groups: Gruplar
         guest: Konuk
         guest_customer: Konuk müşteri
         hide_deleted: Silineni gizle
@@ -223,7 +211,7 @@ sylius:
         index_of_all_configured_locales: Tüm yapılandırılmış diller
         information: Bilgilendirme
         inventory: Stok
-        inventory_here_you_can_see_current_stock_levels: 'Stok <small>burada güncel stok değerlerini görebilirsiniz</small>'
+        inventory_here_you_can_see_current_stock_levels: Stok <small>burada güncel stok değerlerini görebilirsiniz</small>
         inventory_index: Stok
         inventory_state: Stok durumu
         inventory_tracking: Stok takibi
@@ -231,7 +219,6 @@ sylius:
         item: Öğe
         items: Öğeler
         items_total: Toplam tutar
-        label: Etiket
         last_login: Son oturum açma tarihi
         last_name: Soyad
         last_update: Son gücelleme
@@ -245,7 +232,7 @@ sylius:
         lock: Kiliti
         login: Giriş
         login_button: Giriş
-        login_sylius_store: 'Oturum açma <small>Sylius saklamak</small>'
+        login_sylius_store: Oturum açma <small>Sylius saklamak</small>
         logout: Çıkış yap
         manage: Yönet
         manage_adjustments: Ayarları yönet
@@ -257,7 +244,7 @@ sylius:
         manage_orders: Siparişleri yönet
         manage_payments: Ödemeleri yönet
         manage_products: Ürünleri yönet
-        manage_promotions: 'Promosyonları  yönetmek'
+        manage_promotions: Promosyonları  yönetmek
         manage_shipments: Kargoları yönetme
         manage_shipping_categories: Nakliye kategorilerini Yönet
         manage_shipping_methods: Kargo yöntemlerini yönet
@@ -298,7 +285,6 @@ sylius:
         new_zone: Yeni bölge
         newest_products: Yeni Ürünler
         next: Sonraki
-        "no": false
         no_comment: Yorum yok
         no_default_billing_address: Hiçbir varsayılan fatura adresi ayarlanmadı
         no_default_shipping_address: Hiçbir varsayılan teslim adresi ayarlanmadı
@@ -307,11 +293,11 @@ sylius:
         no_results: Sonuç bulunamadı
         no_shipping_category: Kargo kategorisi yok
         no_shipping_charges: Uygulanan hiçbir kargo ücreti yoktur
-        no_short_description: '<i>Kısa açıklama yok</i>'
+        no_short_description: <i>Kısa açıklama yok</i>
         no_sku: SKU yok
         no_tax_category: Vergi kategorisi yok
         no_taxes: Vergi uygulanmadı
-        not_available_in_your_country: 'sylius -> ürün_sizin bölgenizde mevcut değil'
+        not_available_in_your_country: sylius -> ürün_sizin bölgenizde mevcut değil
         number: Sayı
         number_of_orders: Toplam sipariş
         oauth_provider: OAuth sağlayıcı
@@ -353,13 +339,12 @@ sylius:
         product: Ürün
         product_association_types: Ürün ilişki türleri
         product_attributes: Ürün Öznitelikleri
-        product_details_viewing_product_product: 'Ürün ayrıntıları <small>Gösterilen ürün "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Ürün ayrıntıları <small>Gösterilen ürün "<strong>%product%</strong>"</small>
         product_options: Ürün seçenekleri
         product_reviews: Ürün Yorumları
-        products: Ürünler
-        products_categorized_as_name: 'Ürünler  "%name%" olarak kategorilendirildi'
-        products_categorized_under_taxon_taxon: 'Ürünler <small>"%taxon%" sınıfının altında kategorilendirilmiş</small>'
-        products_index_of_all_products_in_your_store: 'Ürünler <small>Mağazada bulunan tüm ürünlerin dizini</small>'
+        products_categorized_as_name: Ürünler  "%name%" olarak kategorilendirildi
+        products_categorized_under_taxon_taxon: Ürünler <small>"%taxon%" sınıfının altında kategorilendirilmiş</small>
+        products_index_of_all_products_in_your_store: Ürünler <small>Mağazada bulunan tüm ürünlerin dizini</small>
         promotion_coupons: Kuponlar
         promotion_details: Promosyon detayları
         promotion_total: Promosyon toplamı
@@ -374,11 +359,10 @@ sylius:
         recent_customers: Son müşteriler
         recent_orders: Son siparişler
         recent_users: Son kullanıcılar
-        redirect_routes: Yönlendirme yolları
         refunded: İade Edildi
         register: Üye ol
         register_button: Üye ol
-        registration_create_an_account_in_store: 'Kayıt <small>Mağazada bir hesap oluştur</small>'
+        registration_create_an_account_in_store: Kayıt <small>Mağazada bir hesap oluştur</small>
         registration_date: Kayıt tarihi
         release_inventory: Stoğa girdi
         remember_me: Beni hatırla
@@ -391,7 +375,6 @@ sylius:
         revert: Döndür
         reviews: Yorumlar
         roles: Roller
-        routes: Rotalar
         rules: Kurallar
         sales: Satışlar
         sales_this_month: Satışlar
@@ -420,13 +403,13 @@ sylius:
         shop_by: benim alışveriş
         show_all: Hepsini göster
         show_deleted: Silineni göster
-        sign_in_to_the_store_or_create_new_account: 'Mağazaya giriş yapın <small>veya kayıt olun</small>'
+        sign_in_to_the_store_or_create_new_account: Mağazaya giriş yapın <small>veya kayıt olun</small>
         simple_blocks: Basit bloklar
         sku: Stok Kodu
         slideshow: Slayt gösterisi
         slideshow_blocks: Slayt gösterisi blokları
         start_date: Başlangıç Tarihi
-        starts_at: "' Dan başlar"
+        starts_at: ''' Dan başlar'
         state: Durum
         street: Sokak
         string_blocks: Dize blokları
@@ -440,7 +423,6 @@ sylius:
         taxation_categories: Vergi kategorileri
         taxation_settings: Vergilendirme Ayarları
         taxes: Vergiler
-        taxons: Kategoriler
         there_are_no_images_for_this_product: Bu ürün için hiçbir resim yok
         there_are_no_options_for_this_product: Bu ürün için hiçbir seçenek yok
         there_are_no_taxons_for_this_product: Bu ürün için bir sınıf yok
@@ -454,7 +436,7 @@ sylius:
         total_registrations: Toplam kayıtlar
         tracking_number: Kargo takip numarası
         type: Türü
-        unavailable: 'sylius -> ürün -> kullanılamıyor'
+        unavailable: sylius -> ürün -> kullanılamıyor
         unit_price: Birim fiyatı
         unknown: Bilinmiyor
         unlock: Kilidini Aç
@@ -464,7 +446,7 @@ sylius:
         user_confirmation_name: Kullanıcı onayı
         user_details: Kullanıcı detayları
         username: Kullanıcı adı
-        users_list_of_all_users_registered_in_store: '<small>Tüm kullanıcıların listesini deposunda kayıtlı</small> kullanıcılar'
+        users_list_of_all_users_registered_in_store: <small>Tüm kullanıcıların listesini deposunda kayıtlı</small> kullanıcılar
         variant: Çeşit
         variant_selection_method: Varyant seçme yöntemi
         variants: Türevleri
@@ -474,7 +456,6 @@ sylius:
         volume_based_pricing: Temel birim fiyat
         warning: Dikkat
         welcome_to_your_space: Alanınıza hoş geldiniz
-        "yes": true
         you_are_customer_since: den beri müşterisiniz
         you_have_no_new_orders: Yeni bir spiariş yoktur
         your_cart_is_empty: Sepetiniz boş

@@ -65,17 +65,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getShippingAddress()
+    public function getDefaultAddress()
     {
-        return $this->getElement('shipping_address')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getBillingAddress()
-    {
-        return $this->getElement('billing_address')->getText();
+        return $this->getElement('default_address')->getText();
     }
 
     /**
@@ -102,6 +94,75 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasDefaultAddressProvinceName($provinceName)
+    {
+        $defaultAddressProvince = $this->getElement('default_address')->getText();
+
+        return false !== stripos($defaultAddressProvince, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasVerifiedEmail()
+    {
+        $verifiedEmail = $this->getElement('verified_email');
+        if ($verifiedEmail->find('css', 'i.green')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getGroupName()
+    {
+        $group = $this->getElement('group');
+
+        Assert::notNull($group, 'There should be element group on page.');
+
+        list($text, $groupName) = explode(':', $group->getText());
+
+        return trim($groupName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasEmailVerificationInformation()
+    {
+        return null === $this->getDocument()->find('css', '#verified-email');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasImpersonateButton()
+    {
+        return $this->hasElement('impersonate_button');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function impersonate()
+    {
+        $this->getElement('impersonate_button')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSuccessFlashMessage()
+    {
+        return trim($this->getElement('flash_message')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_customer_show';
@@ -113,14 +174,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'billing_address' => '#billingAddress address',
             'customer_email' => '#info .content.extra > a',
             'customer_name' => '#info .content > a',
+            'default_address' => '#defaultAddress address',
             'delete_account_button' => '#actions',
+            'flash_message' => '.ui.icon.positive.message .content p',
+            'group' => '.group',
+            'impersonate_button' => '#impersonate',
             'no_account' => '#no-account',
             'registration_date' => '#info .content .date',
-            'shipping_address' => '#shippingAddress address',
             'subscribed_to_newsletter' => '#subscribed-to-newsletter',
+            'verified_email' => '#verified-email',
         ]);
     }
 }

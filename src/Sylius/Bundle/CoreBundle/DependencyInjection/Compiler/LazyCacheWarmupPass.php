@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class LazyCacheWarmupPass implements CompilerPassInterface
+final class LazyCacheWarmupPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
@@ -27,7 +27,10 @@ class LazyCacheWarmupPass implements CompilerPassInterface
     {
         $this->markServiceAsLazy($container, 'cmf_core.templating.helper');
         $this->markServiceAsLazy($container, 'cmf_create.rdf_type_factory');
-        $this->markServiceAsLazy($container, 'fos_oauth_server.server');
+
+        if ($container->has('fos_oauth_server.server')) {
+            $this->markServiceAsLazy($container, 'fos_oauth_server.server');
+        }
     }
 
     /**

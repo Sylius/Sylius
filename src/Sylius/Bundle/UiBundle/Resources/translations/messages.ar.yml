@@ -14,10 +14,10 @@ sylius:
         color: اللون
         company: الشركة
         countries: البلدان
+        country: البلد
         email: البريد الإلكتروني
         exchange_rate: سعر الصرف
         first_name: الاسم الأول
-        label: ملصق
         last_name: اسم العائلة
         lastname: اسم العائلة
         members: الأعضاء
@@ -25,7 +25,6 @@ sylius:
         message: الرسالة
         name: الاسم
         new: جديد
-        "no": false
         pages: الصفحات
         password: كلمة السر
         phone_number: رقم الهاتف
@@ -33,8 +32,7 @@ sylius:
         presentation: تقديم
         province: مقاطعة
         provinces: المقاطعات
-        routes: طرق
         scope: نطاق
         street: الشارع
         topic: الموضوع
-        "yes": true
+        type: نوع

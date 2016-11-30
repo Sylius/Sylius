@@ -22,7 +22,7 @@ abstract class AbstractResourceType extends AbstractType
     /**
      * @var string
      */
-    protected $dataClass = null;
+    protected $dataClass;
 
     /**
      * @var string[]
@@ -30,7 +30,7 @@ abstract class AbstractResourceType extends AbstractType
     protected $validationGroups = [];
 
     /**
-     * @param string   $dataClass        FQCN
+     * @param string $dataClass FQCN
      * @param string[] $validationGroups
      */
     public function __construct($dataClass, array $validationGroups = [])

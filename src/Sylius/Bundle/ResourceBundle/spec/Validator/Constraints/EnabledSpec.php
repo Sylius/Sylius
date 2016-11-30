@@ -12,18 +12,18 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ResourceBundle\Validator\Constraints\Enabled;
+use Sylius\Bundle\ResourceBundle\Validator\EnabledValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @mixin \Sylius\Bundle\ResourceBundle\Validator\Constraints\Enabled
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class EnabledSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Validator\Constraints\Enabled');
+        $this->shouldHaveType(Enabled::class);
     }
 
     function it_is_constraint()
@@ -43,6 +43,6 @@ final class EnabledSpec extends ObjectBehavior
 
     function it_is_validated_by_service()
     {
-        $this->validatedBy()->shouldReturn('sylius_resource_enabled_validator');
+        $this->validatedBy()->shouldReturn(EnabledValidator::class);
     }
 }

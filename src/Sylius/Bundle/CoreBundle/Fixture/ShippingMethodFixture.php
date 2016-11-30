@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ShippingMethodFixture extends AbstractResourceFixture
+class ShippingMethodFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
@@ -39,6 +39,7 @@ final class ShippingMethodFixture extends AbstractResourceFixture
                 ->scalarNode('zone')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
                 ->scalarNode('category')->end()
+                ->arrayNode('channels')->prototype('scalar')->end()->end()
                 ->arrayNode('calculator')
                     ->children()
                         ->scalarNode('type')->isRequired()->cannotBeEmpty()->end()

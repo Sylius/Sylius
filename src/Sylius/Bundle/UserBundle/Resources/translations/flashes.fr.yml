@@ -4,17 +4,14 @@
 sylius:
     user:
         email:
-            not_exist: "Cet email n'est associé avec aucun utilisateur."
+            not_exist: Cet email n'est associé avec aucun utilisateur.
         password:
-            invalid: Le mot de passe actuel est invalide.
-            request:
-                success: Nous vous avons envoyé un e-mail avec les instructions pour réinitialiser votre mot de passe!
             reset:
                 success: Votre mot de passe a été réinitialisé avec succès !
+                token_expired: Le jeton de réinitialisation de mot de passe a expiré,
+                requested: Si l'email que vous avez spécifié existe dans notre système, vous recevrez un message avec les instructions pour réinitialiser votre mot de passe.
             change:
                 success: Votre mot de passe a été mis à jour avec succès !
-        reset_password:
-            requested: "Si l'email que vous avez spécifié existe dans notre système, vous recevrez un message avec les instructions pour réinitialiser votre mot de passe."
         verification:
             error: Le jeton de vérification est invalide.
             notice:
@@ -22,5 +19,3 @@ sylius:
             success: Votre adresse email a été vérifiée avec succès.
             request:
                 success: Un email contenant le lien de vérification a été envoyé à votre adresse email.
-    customer:
-        register: Merci de votre inscription, vous allez recevoir un mail pour vérifier votre compte.

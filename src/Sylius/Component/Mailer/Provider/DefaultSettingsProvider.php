@@ -12,8 +12,6 @@
 namespace Sylius\Component\Mailer\Provider;
 
 /**
- * Gets the default settings.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DefaultSettingsProvider implements DefaultSettingsProviderInterface

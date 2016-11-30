@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\LocaleBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
+use Sylius\Bundle\LocaleBundle\Twig\LocaleExtension;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,10 +27,10 @@ final class LocaleExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\LocaleBundle\Twig\LocaleExtension');
+        $this->shouldHaveType(LocaleExtension::class);
     }
 
-    function it_is_a_Twig_extension()
+    function it_is_a_twig_extension()
     {
         $this->shouldHaveType('Twig_Extension');
     }

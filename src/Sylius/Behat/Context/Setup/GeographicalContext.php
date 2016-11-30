@@ -85,13 +85,9 @@ final class GeographicalContext implements Context
      * @Given /^the store ships to "([^"]+)" and "([^"]+)"$/
      * @Given /^the store ships to "([^"]+)", "([^"]+)" and "([^"]+)"$/
      */
-    public function storeShipsTo($country1, $country2 = null, $country3 = null)
+    public function storeShipsTo(...$countriesNames)
     {
-        foreach ([$country1, $country2, $country3] as $countryName) {
-            if (null === $countryName) {
-                continue;
-            }
-
+        foreach ($countriesNames as $countryName) {
             $this->countryRepository->add($this->createCountryNamed(trim($countryName)));
         }
     }
@@ -101,13 +97,9 @@ final class GeographicalContext implements Context
      * @Given /^the store operates in "([^"]*)" and "([^"]*)"$/
      * @Given /^the store(?:| also) has country "([^"]*)"$/
      */
-    public function theStoreOperatesIn($firstCountryName, $secondCountryName = null)
+    public function theStoreOperatesIn(...$countriesNames)
     {
-        foreach ([$firstCountryName, $secondCountryName] as $countryName) {
-            if (null === $countryName) {
-                break;
-            }
-
+        foreach ($countriesNames as $countryName) {
             $country = $this->createCountryNamed(trim($countryName));
             $this->sharedStorage->set('country', $country);
 
@@ -129,7 +121,7 @@ final class GeographicalContext implements Context
 
     /**
      * @Given /^(this country) has the "([^"]+)" province with "([^"]+)" code$/
-     * @Given /^(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/
+     * @Given /^(?:|the )(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/
      */
     public function theCountryHasProvinceWithCode(CountryInterface $country, $name, $code)
     {

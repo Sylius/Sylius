@@ -13,9 +13,9 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.behat.context.cli.installer" class="Sylius\Behat\Context\Cli\InstallerContext" scope="scenario">
-            <argument type="service" id="kernel" container="symfony" />
-            <tag name="sylius.behat.context" />
+        <service id="sylius.behat.context.cli.installer" class="Sylius\Behat\Context\Cli\InstallerContext">
+            <argument type="service" id="__symfony__.kernel" />
+            <tag name="fob.context_service" />
         </service>
     </services>
 </container>

@@ -4,10 +4,25 @@
 sylius:
     customer:
         first_name:
+            max: Voornaam mag niet meer dan {{ limit }} karakters bevatten.
+            min: Voornaam moet ten minste {{ limit }} karakters lang zijn.
             not_blank: Vul uw voornaam in.
         last_name:
+            max: Achternaam mag niet langer zijn dan {{ limit }} tekens.
+            min: Achternaam moet ten minste {{ limit }} karakters lang zijn.
             not_blank: Vul uw achternaam in.
+        gender:
+            not_blank: Kies a.u.b. je geslacht.
         email:
+            already_used: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.
+            max: E-mail mag niet meer dan {{ limit }} karakters zijn.
+            min: E-mail moet ten minste {{ limit }} karakters lang zijn.
             not_blank: Vul uw e-mailadres in.
             invalid: Deze e-mail is ongeldig.
+            unique: Dit e-mailadres is al in gebruik.
             registered: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.
+    customer_group:
+        name:
+            max: De naam van de klantgroep mag niet langer zijn dan {{ limit }} tekens.
+            min: De naam van de klantgroep moet minimaal {{ limit }} karakters lang zijn.
+            not_blank: Voer a.u.b. een naam voor de klantgroep in.

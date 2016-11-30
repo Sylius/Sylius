@@ -13,6 +13,7 @@ sylius:
             postcode: CEP
             street: Rua
             province: Estado
+            zone: Zona
         country:
             add_province: Adicionar estado
             name: Nome

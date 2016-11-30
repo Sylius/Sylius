@@ -5,7 +5,7 @@ Feature: Editing a product
     I want to be able to edit a product
 
     Background:
-        Given the store is available in "English (United States)"
+        Given the store operates on a single channel in "United States"
         And the store has a product "Dice Brewing"
         And I am logged in as an administrator
 
@@ -25,10 +25,10 @@ Feature: Editing a product
     @ui
     Scenario: Changing a simple product price
         Given I want to modify the "Dice Brewing" product
-        When I change its price to "$15.00"
+        When I change its price to $15.00 for "United States" channel
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product price should be "$15.00"
+        And it should be priced at $15.00 for channel "United States"
 
     @ui
     Scenario: Renaming a configurable product
@@ -68,5 +68,5 @@ Feature: Editing a product
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
         And this product has this product option
         And the product "Marvel's T-Shirt" has "Iron Man T-Shirt" variant priced at "$40.00"
-        When I want to modify the "Dice Brewing" product
+        When I want to modify the "Marvel's T-Shirt" product
         Then the option field should be disabled

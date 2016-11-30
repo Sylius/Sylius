@@ -6,15 +6,12 @@ sylius:
         email:
             not_exist: No existe ningún usuario con este correo electrónico.
         password:
-            invalid: La contraseña actual es incorrecta.
-            request:
-                success: ¡Te hemos enviado un correo con las instrucciones para reestablecer tu contraseña!
             reset:
-                success: ¡Tu contraseña se ha restablecido con éxito!
+                success: '¡Tu contraseña se ha restablecido con éxito!'
+                token_expired: El token para restablecer la contraseña ha caducado,
+                requested: Si el correo electrónico que has indicado existe en nuestro sistema, te mandaremos allí las instrucciones para restablecer tu contraseña.
             change:
-                success: ¡Tu contraseña ha sido cambiada correctamente!
-        reset_password:
-            requested: Si el correo electrónico que ha especificado existe en nuestro sistema, le hemos enviado las instrucciones para restablecer su contraseña.
+                success: '¡Tu contraseña ha sido cambiada correctamente!'
         verification:
             error: El token de verificación no es válido.
             notice:
@@ -22,5 +19,3 @@ sylius:
             success: Tu correo electrónico ha sido correctamente verificado.
             request:
                 success: Se ha enviado un correo electrónico con el enlace de verificación a tu dirección de correo electrónico.
-    customer:
-        register: Gracias por registrarse, consulta tu correo electrónico para verificar tu cuenta.

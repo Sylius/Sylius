@@ -3,11 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Τιμή μονάδας
-                quantity: Ποσότητα
-                variant: Παραλλαγή
         block:
             id: ID
             title: Τίτλος
@@ -18,13 +13,16 @@ sylius:
                 different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
             payment_method: Τρόπος Πληρωμής
             shipping_method: Τρόπος Αποστολης
+        promotion_action:
+            add_product_configuration:
+                product: Προϊόν
         group:
             name: Ονομασία
             roles: Ρόλοι
         channel:
-            currency_default: Προεπιλεγμένο νόμισμα
             tax_zone_default: Προεπιλεγμένη φορολογική ζώνη
         image:
+            code: Κώδικος
             file: Εικόνα
         locale:
             code: Κώδικος
@@ -38,6 +36,7 @@ sylius:
             id: ID
             title: Τίτλος
         product:
+            images: Εικόνες
             restricted_zone: Απαγορευμένη ζώνη
             shipping_category: Κατηγορία αποστολής
             short_description: Σύντομη περιγραφή
@@ -48,15 +47,6 @@ sylius:
             code: Κώδικος
         product_variant:
             tax_category: Φορολογική κατηγορία
-        settings:
-            general:
-                currency: Προεπιλεγμένο νόμισμα
-                locale: Γλώσσα
-                meta_description: Μετα-περιγραφή
-                meta_keywords: Μετα-λέξεις-κλειδιά
-                title: Τίτλος σελίδας
-            taxation:
-                default_tax_zone: Προεπιλεγμένη φορολογική ζώνη
         shipment_filter:
             created_at_from: Από
             created_at_to: Προς
@@ -69,7 +59,9 @@ sylius:
         shipping_method:
             zone: Ζώνη
         taxon:
+            code: Κώδικος
             file: Επιλέξτε εικόνα
+            images: Εικόνες
         taxonomy:
             file: Επιλέξτε εικόνα
         user:
@@ -87,7 +79,6 @@ sylius:
         variant:
             depth: Βάθος
             height: Ύψος
-            images: Εικόνες
             on_hand: Τρέχων απόθεμα
             price: Τιμή
             sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
@@ -97,8 +88,35 @@ sylius:
             email: Ηλεκτρονικό ταχυδρομείο
         product_association_type:
             name: Ονομασία
-        promotion_rule:
-            contains_taxon:
-                count: Πλήθος
-            total_of_items_from_taxon:
-                amount: Ποσό
+    installer:
+        extensions:
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            json_encode: JSON
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Συνεδρία
+            simplexml_import_dom: SimpleXML
+        filesystem:
+            exists: υπάρχει
+            not_exists: δεν υπάρχει
+            not_writable: χωρίς δυνατότητα εγγραφής
+            writable: εγγράψιμο
+        settings:
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: μη παρωχημένο
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: ζώνη ώρας
+            timezone_deprecated:
+                help: 'Η Ζώνη ώρας %timezone% δεν χρησιμοποιείται. Διορθώσετε το αρχείο php.ini σας (λίστα με μη χρησιμοποιούμενες ζώνες ώρας εδώ http://php.net/manual/en/timezones.others.php).'
+            version: Έκδοση PHP

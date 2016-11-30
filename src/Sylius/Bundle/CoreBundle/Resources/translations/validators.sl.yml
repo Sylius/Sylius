@@ -11,7 +11,7 @@ sylius:
             unique: Ta nastavitev območja že obstaja.
     product_variant:
         onHand:
-            min: 'Na voljo mora biti večje od {{ limit }}.'
+            min: Na voljo mora biti večje od {{ limit }}.
             not_blank: Prosimo, vnesite na voljo.
         price:
             min: Cena ne sme biti negativna.
@@ -20,4 +20,4 @@ sylius:
             min: Prvotna cena ne sme biti negativna.
     product_translation:
         short_description:
-            max: 'Kratek opis ne sme biti daljši kot {{ limit }} znakov.'
+            max: Kratek opis ne sme biti daljši kot {{ limit }} znakov.

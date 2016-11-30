@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
-use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
+use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Intl\Intl;

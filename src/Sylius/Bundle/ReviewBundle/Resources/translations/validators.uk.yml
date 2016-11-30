@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        author:
+            already_exists: Ця адреса електронної пошти вже зареєстрована, будь ласка, увійдіть або скористайтеся відновленням забутого паролю.
+        rating:
+            not_blank: Ви маєте перевірити рейтинг відгуку.
+        title:
+            not_blank: Заголовок відгуку не повинний бути порожнім.

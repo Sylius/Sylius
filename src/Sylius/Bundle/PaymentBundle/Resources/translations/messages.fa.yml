@@ -30,4 +30,5 @@ sylius:
             description: شرح
             enabled: فعال?
             gateway: درگاه پرداخت
+            instructions: دستورعمل ها
             name: نام

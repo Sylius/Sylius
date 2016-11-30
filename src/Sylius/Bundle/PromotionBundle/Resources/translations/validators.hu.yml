@@ -7,30 +7,19 @@ sylius:
             unique: A promóció a megadott kóddal már létezik.
             not_blank: Kérjük, írja be a promóció kódját.
         description:
-            max_length: 'A promóció leírása nem lehet hosszabb, mint 1 karakter. |A promóció leírása nem lehet hosszabb, mint {{ limit }} karakterek.'
-            min_length: 'A promóció leírása legalább 1 karakter hosszú kell legyen. |A promóció leírása legalább {{ limit }} karakter hosszú kell legyen.'
+            max_length: A promóció leírása nem lehet hosszabb, mint 1 karakter. |A promóció leírása nem lehet hosszabb, mint {{ limit }} karakterek.
+            min_length: A promóció leírása legalább 1 karakter hosszú kell legyen. |A promóció leírása legalább {{ limit }} karakter hosszú kell legyen.
             not_blank: Kérjük, adja meg a promóció leírását.
-        name:
-            max_length: 'A promóció neve nem lehet hosszabb, mint 1 karakter. |A promóció neve nem lehet hosszabb, mint {{ limit }} karakter.'
-            min_length: 'A promóció neve legalább 1 karakter hosszú kell legyen. |A promóció neve legalább {{ limit }} karakter hosszú kell legyen.'
-            not_blank: Kérjük, adja meg a promóció nevét.
         end_date_cannot_be_set_prior_start_date: A lejárati dátum nem lehet hamarabb mint a kezdő dátum.
+        name:
+            max_length: A promóció neve nem lehet hosszabb, mint 1 karakter. |A promóció neve nem lehet hosszabb, mint {{ limit }} karakter.
+            min_length: A promóció neve legalább 1 karakter hosszú kell legyen. |A promóció neve legalább {{ limit }} karakter hosszú kell legyen.
+            not_blank: Kérjük, adja meg a promóció nevét.
     promotion_coupon:
         code:
-            max_length: 'A kupon kód nem lehet hosszabb, mint 1 karakter. |A kupon kód nem lehet hosszabb, mint {{ limit }} karakterek.'
-            min_length: 'A kupon kódnak legalább 1 karakter hosszúnak kell lennie. |A kupon kódmak  legalább {{ limit }} karakter hosszú kell legyen.'
+            max_length: A kupon kód nem lehet hosszabb, mint 1 karakter. |A kupon kód nem lehet hosszabb, mint {{ limit }} karakterek.
+            min_length: A kupon kódnak legalább 1 karakter hosszúnak kell lennie. |A kupon kódmak  legalább {{ limit }} karakter hosszú kell legyen.
             not_blank: Kérjük, írja be a kupon kódot.
             unique: Ez a kupon már létezik.
         usage_limit:
-            min: 'A kupon használati korlátozás legalább {{ limit }} kell legyen.'
-    promotion_coupon_generate_instruction:
-        amount:
-            min: 'A létrehozandó kuponok mennyisége legalább {{ limit }} kell legyen.'
-            not_blank: Kérjük, adja meg a létrehozandó kuponok mennyiségét.
-        usage_limit:
-            min: 'A létrehozott kuponok használati korlátozása legalább {{ limit }} kell legyen.'
-        code_length:
-            min: 'A kupon kódjának legalább {{ limit }} karakter hosszúnak kell lennie.'
-            max: 'A kupon kódja nem lehet {{ limit }} karakternél hosszabb.'
-            not_blank: Kérjük, adja meg a kupon kód hosszát.
-        possible_generation_amount: 'Érvénytelen kuponkód hossz vagy kupon mennyiség. Nem lehet %expectedAmount% egyedi kupont generálni ezzel a kód hosszúsággal ( %codeLength%). A maximális mennyiség ami generálható: %possibleAmount%.'
+            min: A kupon használati korlátozás legalább {{ limit }} kell legyen.

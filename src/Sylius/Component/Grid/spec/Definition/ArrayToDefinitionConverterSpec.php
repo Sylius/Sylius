@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Grid\Definition;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\ActionGroup;
 use Sylius\Component\Grid\Definition\ArrayToDefinitionConverter;
@@ -22,15 +21,13 @@ use Sylius\Component\Grid\Definition\Filter;
 use Sylius\Component\Grid\Definition\Grid;
 
 /**
- * @mixin ArrayToDefinitionConverter
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ArrayToDefinitionConverterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Definition\ArrayToDefinitionConverter');
+        $this->shouldHaveType(ArrayToDefinitionConverter::class);
     }
 
     function it_implements_array_to_definition_converter()
@@ -42,12 +39,13 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
     {
         $grid = Grid::fromCodeAndDriverConfiguration('sylius_admin_tax_category', 'doctrine/orm', ['resource' => 'sylius.tax_category']);
 
-        $grid->setSorting(['name' => 'desc']);
+        $grid->setSorting(['code' => 'desc']);
 
         $codeField = Field::fromNameAndType('code', 'string');
         $codeField->setLabel('System Code');
         $codeField->setPath('method.code');
         $codeField->setOptions(['template' => 'bar.html.twig']);
+        $codeField->setSortable('code');
 
         $grid->addField($codeField);
 
@@ -69,13 +67,14 @@ final class ArrayToDefinitionConverterSpec extends ObjectBehavior
                 'options' => ['resource' => 'sylius.tax_category'],
             ],
             'sorting' => [
-                'name' => 'desc',
+                'code' => 'desc',
             ],
             'fields' => [
                 'code' => [
                     'type' => 'string',
                     'label' => 'System Code',
                     'path' => 'method.code',
+                    'sortable' => 'code',
                     'options' => [
                         'template' => 'bar.html.twig'
                     ],

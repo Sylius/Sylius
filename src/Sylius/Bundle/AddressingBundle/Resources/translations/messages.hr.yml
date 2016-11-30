@@ -13,6 +13,7 @@ sylius:
             postcode: Poštanski broj
             street: Ulica
             province: Pokrajina
+            zone: Regija
         country:
             add_province: Dodaj pokrajinu
             name: Naziv Države

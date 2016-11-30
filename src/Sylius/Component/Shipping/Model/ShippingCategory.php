@@ -46,11 +46,11 @@ class ShippingCategory implements ShippingCategoryInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**

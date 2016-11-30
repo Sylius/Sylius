@@ -27,6 +27,7 @@ sylius:
         available_on: На разположение на
         back: Обратно
         balance_due: Неизплатените суми
+        base_currency: Основна валута
         blocks: Блокове
         browse_products: Преглед на продуктите
         build: Изгради
@@ -36,18 +37,18 @@ sylius:
         choose_file: Избор на файл
         city: Град
         clear_cart: Изчисти кошницата
+        color: Цвят
         company: Фирма
         confirmation: Потвърждение
         confirmation_title: Потвърждение
         contain_variants: Съдържа варианти
-        content: Съдържание
         countries: Страни
+        country: Държава
         country_details: Информация за страните
         coupons: Купони
         create: Създай
         create_a_new_address: Добави нов адрес
         create_country: Създаване страна
-        create_group: Създаване на група
         create_locale: Създаване на езикова променлива
         create_new_coupon: Създаване на нов купон
         create_new_page: Създаване на нова страница
@@ -70,13 +71,13 @@ sylius:
         current_promotions: Текущи промоции
         dashboard: Табло
         data: Данни
+        date: Дата
         default_billing_address: По подразбиране адрес за фактуриране
         default_shipping_address: Адрес за доставка по подразбиране
         delete: Изтрий
         delete_image: Изтриване на изображение
         deleted: Изтрито
         edit: Редактирай
-        edit_group: Редактиране на група
         edit_locale: Редактиране на езикова променлива
         edit_my_address: Редактиране на моя адрес
         edit_your_personal_information: Редактиране на личните данни
@@ -97,8 +98,8 @@ sylius:
         editing_zone: Редактиране на зона
         email: Имейл
         error: Грешка
+        exchange_rate: Обменен курс
         existing_customer: Съществуващ клиент
-        filter: Филтър
         fulfill: Изпълни
         general_info: Обща информация
         general_settings: Общи Настройки
@@ -112,14 +113,13 @@ sylius:
         index_of_all_configured_locales: Индекс на всички конфигурирани локали
         information: Информация
         inventory: Инвентар
-        inventory_here_you_can_see_current_stock_levels: 'Запаси, <small>тук можете да видите текущите нива на запасите</small>'
+        inventory_here_you_can_see_current_stock_levels: Запаси, <small>тук можете да видите текущите нива на запасите</small>
         inventory_index: Инвентар
         inventory_state: Състояние на запаси
         inventory_tracking: Опис за проследяване
         invoice: Фактура
         item: артикул
         items_total: Общо елементи
-        label: Етикет
         last_login: Последно влизане
         last_update: Последно обновяване
         last_week_orders: Пръчки за седмицата
@@ -166,14 +166,13 @@ sylius:
         new_zone: Нова зона
         newest_products: Най-новите продукти
         next: Нататък
-        "no": false
         no_default_billing_address: Адрес за фактуриране НЕ по подразбиране
         no_default_shipping_address: Адрес за доставка НЕ по подразбиране
         no_description: Няма описание
         no_promotion: Нама приложена промоция
         no_shipping_category: Няма категория за доставка
         no_shipping_charges: Няма такси за доставка
-        no_short_description: '<i>Кратко описание</i>'
+        no_short_description: <i>Кратко описание</i>
         no_sku: Няма референтер номер
         no_tax_category: Няма категория такси
         no_taxes: Няма такси
@@ -199,12 +198,12 @@ sylius:
         postcode: Пощенски код
         presentation: Презентация
         previous: Предишна
+        pricing: Ценообразуване
         product: Продукт
-        product_details_viewing_product_product: 'Продукт детайли <small>Преглед на продукт "<strong>%product%</strong>"</small>'
-        products: Продукти
-        products_categorized_as_name: 'Продукти, категоризирани като "%name%"'
-        products_categorized_under_taxon_taxon: 'Продукти <small>категории под "%taxon%" таксон</small>'
-        products_index_of_all_products_in_your_store: 'Продукти <small>индекс на всички продукти в магазина</small>'
+        product_details_viewing_product_product: Продукт детайли <small>Преглед на продукт "<strong>%product%</strong>"</small>
+        products_categorized_as_name: Продукти, категоризирани като "%name%"
+        products_categorized_under_taxon_taxon: Продукти <small>категории под "%taxon%" таксон</small>
+        products_index_of_all_products_in_your_store: Продукти <small>индекс на всички продукти в магазина</small>
         promotion_coupons: Купони
         promotion_details: Детайлите на промоцията
         promotion_total: Промоция общо
@@ -221,7 +220,6 @@ sylius:
         release_inventory: Освобождаване запаси
         retail_price: Цена на дребно
         return: Връщане
-        routes: Маршрути
         sales: Продажби
         sales_this_month: Продажби
         save: Запамети
@@ -243,7 +241,7 @@ sylius:
         shop_by: Пазарувай
         show_all: Покажи всички
         show_deleted: Покажи изтритите
-        sign_in_to_the_store_or_create_new_account: 'Влезте в магазина <small>или да създайте нов акаунт</small>'
+        sign_in_to_the_store_or_create_new_account: Влезте в магазина <small>или да създайте нов акаунт</small>
         slideshow: Слайдшоу
         street: Улица
         success: Успешно
@@ -263,16 +261,17 @@ sylius:
         total_qty: Общо количество
         total_registrations: Общо регистрации
         tracking_number: Номер за проследяване
+        translations: Преводи
+        type: Тип
         unavailable: Не е налично
         updating_tax_rate: Актуализиране на данъчна ставка
         used: Използвани
         user_details: Потребителски детайли
         username: Потребителско име
-        users_list_of_all_users_registered_in_store: 'Потребители, <small>списък с всички потребители, регистрирани в магазина</small>'
+        users_list_of_all_users_registered_in_store: Потребители, <small>списък с всички потребители, регистрирани в магазина</small>
         view_more: Виж повече
         warning: Внимание
         welcome_to_your_space: Добре дошли във вашето лично пространство
-        "yes": true
         you_are_customer_since: Вие сте клиент от
         you_have_no_new_orders: Няма нови поръчки
         your_cart_is_empty: Вашата кошница е празна

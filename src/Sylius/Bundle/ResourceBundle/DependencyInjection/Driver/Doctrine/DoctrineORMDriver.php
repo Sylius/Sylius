@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class DoctrineORMDriver extends AbstractDoctrineDriver
+final class DoctrineORMDriver extends AbstractDoctrineDriver
 {
     /**
      * {@inheritdoc}
@@ -58,26 +58,6 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
         ]);
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
-    {
-        $defaultFormBuilderDefinition = new Definition(DefaultFormBuilder::class);
-        $defaultFormBuilderDefinition->setArguments([new Reference($metadata->getServiceId('manager'))]);
-
-        $definition = new Definition(DefaultResourceType::class);
-        $definition
-            ->setArguments([
-                $this->getMetadataDefinition($metadata),
-                $defaultFormBuilderDefinition,
-            ])
-            ->addTag('form.type', ['alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())])
-        ;
-
-        $container->setDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()), $definition);
     }
 
     /**

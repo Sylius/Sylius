@@ -20,11 +20,11 @@ sylius:
             flat_rate_configuration:
                 amount: Sumă
             per_unit_rate_configuration:
-                amount: Valoare
+                amount: Sumă
             weight_rate_configuration:
                 division: Divizie
             volume_rate_configuration:
-                amount: Valoare
+                amount: Sumă
                 division: Divizie
         shipping_category:
             description: Descriere

@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class AdminUserFixture extends AbstractResourceFixture
+class AdminUserFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
@@ -38,6 +38,9 @@ final class AdminUserFixture extends AbstractResourceFixture
                 ->booleanNode('enabled')->end()
                 ->booleanNode('api')->end()
                 ->scalarNode('password')->cannotBeEmpty()->end()
+                ->scalarNode('locale_code')->cannotBeEmpty()->end()
+                ->scalarNode('first_name')->cannotBeEmpty()->end()
+                ->scalarNode('last_name')->cannotBeEmpty()->end()
         ;
     }
 }

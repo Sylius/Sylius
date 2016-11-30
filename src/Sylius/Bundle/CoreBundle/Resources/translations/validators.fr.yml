@@ -3,11 +3,14 @@
 
 sylius:
     channel:
-        default_currency:
-            not_blank: Veuillez sélectionner un canal par défaut pour la devise.
+        default_locale:
+            not_blank: Veuillez renseigner la locale par défaut du canal.
     checkout:
         shipping_method:
             not_blank: Veuillez sélectionner un mode de livraison.
+    currency:
+        enabled:
+            cannot_disable_base: La devise de base ne peut pas être désactivée.
     customer:
         currency_code:
             not_valid: Le code de devise que vous avez entré n’est pas valide.
@@ -18,9 +21,14 @@ sylius:
         code:
             not_blank: Veuillez saisir le code de la locale.
             unique: Ce paramètre régional existe déjà.
+        enabled:
+            cannot_disable_base: La base locale ne peut pas être désactivée.
+    product_image:
+        code:
+            unique: Code de l’image doit être unique au sein de ce produit.
     product_variant:
         onHand:
-            min: 'Le stock disponible doit être plus grand que {{ limit }}.'
+            min: Le stock disponible doit être plus grand que {{ limit }}.
             not_blank: Veuillez saisir le stock disponible.
         price:
             min: Le tarif ne peut pas être négatif.
@@ -29,7 +37,15 @@ sylius:
             min: Le prix initial ne peux pas être négatif.
     product_translation:
         short_description:
-            max: 'La description courte ne doit pas dépasser {{ limit }} caractères.'
+            max: La description courte ne doit pas dépasser {{ limit }} caractères.
+    taxon_image:
+        code:
+            unique: Code de l’image doit être unique au sein de ce taxon.
     user:
         email:
             unique: Cet e-mail est déjà utilisé.
+        username:
+            unique: Ce nom d'utilisateur est déjà utilisé.
+            not_blank: Veuillez entrer un nom d'utilisateur.
+        locale_code:
+            not_blank: S’il vous plaît choisissez une langue.

@@ -13,11 +13,11 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -154,21 +154,31 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given /^(his) shipping (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
+     * @Given /^(the customer) subscribed to the newsletter$/
      */
-    public function heHasShippingAddress(CustomerInterface $customer, AddressInterface $address)
+    public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer)
     {
-        $customer->setShippingAddress($address);
+        $customer->setSubscribedToNewsletter(true);
 
         $this->customerManager->flush();
     }
 
     /**
-     * @Given /^(his) billing (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
+     * @Given /^(this customer) verified their email$/
      */
-    public function heHasBillingAddress(CustomerInterface $customer, AddressInterface $address)
+    public function theCustomerVerifiedTheirEmail(CustomerInterface $customer)
     {
-        $customer->setBillingAddress($address);
+        $customer->getUser()->setVerifiedAt(new \DateTime());
+
+        $this->customerManager->flush();
+    }
+
+    /**
+     * @Given /^(the customer) belongs to (group "([^"]+)")$/
+     */
+    public function theCustomerBelongsToGroup(CustomerInterface $customer, CustomerGroupInterface $customerGroup)
+    {
+        $customer->setGroup($customerGroup);
 
         $this->customerManager->flush();
     }
@@ -228,15 +238,5 @@ final class CustomerContext implements Context
 
         $this->sharedStorage->set('customer', $customer);
         $this->customerRepository->add($customer);
-    }
-
-    /**
-     * @Given /^(the customer) subscribes to the newsletter$/
-     */
-    public function theCustomerSubscribesToTheNewsletter(CustomerInterface $customer)
-    {
-        $customer->setSubscribedToNewsletter(true);
-
-        $this->customerManager->flush();
     }
 }

@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Variation\Repository\OptionRepositoryInterface;
+use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -21,14 +21,14 @@ use Webmozart\Assert\Assert;
 final class ProductOptionContext implements Context
 {
     /**
-     * @var OptionRepositoryInterface
+     * @var ProductOptionRepositoryInterface
      */
     private $productOptionRepository;
 
     /**
-     * @param OptionRepositoryInterface $productOptionRepository
+     * @param ProductOptionRepositoryInterface $productOptionRepository
      */
-    public function __construct(OptionRepositoryInterface $productOptionRepository)
+    public function __construct(ProductOptionRepositoryInterface $productOptionRepository)
     {
         $this->productOptionRepository = $productOptionRepository;
     }
@@ -40,12 +40,14 @@ final class ProductOptionContext implements Context
      */
     public function getProductOptionByName($productOptionName)
     {
-        $productOption = $this->productOptionRepository->findOneByName($productOptionName);
-        Assert::notNull(
-            $productOption,
-            sprintf('Product option with name "%s" does not exist in the product option repository.', $productOptionName)
+        $productOptions = $this->productOptionRepository->findByName($productOptionName, 'en_US');
+
+        Assert::eq(
+            1,
+            count($productOptions),
+            sprintf('%d product options has been found with name "%s".', count($productOptions), $productOptionName)
         );
 
-        return $productOption;
+        return $productOptions[0];
     }
 }

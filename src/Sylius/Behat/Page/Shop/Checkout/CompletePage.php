@@ -146,6 +146,14 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getBaseCurrencyOrderTotal()
+    {
+        return $this->getBaseTotalFromString($this->getElement('base_order_total')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function addNotes($notes)
     {
         $this->getElement('extra_notes')->setValue($notes);
@@ -203,6 +211,22 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return $this->getElement('validation_errors')->getText() === $message;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function hasLocale($localeName)
+    {
+        return false !== strpos($this->getElement('locale')->getText(), $localeName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCurrency($currencyCode)
+    {
+        return false !== strpos($this->getElement('currency')->getText(), $currencyCode);
+    }
+
     public function confirmOrder()
     {
         $this->getDocument()->pressButton('Place order');
@@ -226,14 +250,37 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasShippingProvinceName($provinceName)
+    {
+        $shippingAddressText = $this->getElement('shipping_address')->getText();
+
+        return false !== stripos($shippingAddressText, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasBillingProvinceName($provinceName)
+    {
+        $billingAddressText = $this->getElement('billing_address')->getText();
+
+        return false !== stripos($billingAddressText, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'addressing_step_label' => '.steps a:contains("Address")',
             'billing_address' => '#billing-address',
+            'currency' => '#sylius-order-currency-code',
             'extra_notes' =>'#sylius_checkout_complete_notes',
             'items_table' => '#sylius-order',
+            'locale' => '#sylius-order-locale-name',
             'order_total' => 'td:contains("Total")',
+            'base_order_total' => '#base-total',
             'payment_method' => '#payment-method',
             'payment_step_label' => '.steps a:contains("Payment")',
             'product_row' => 'tbody tr:contains("%name%")',
@@ -322,6 +369,18 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     private function getTotalFromString($total)
     {
         $total = str_replace('Total:', '', $total);
+
+        return $this->getPriceFromString($total);
+    }
+
+    /**
+     * @param string $total
+     *
+     * @return int
+     */
+    private function getBaseTotalFromString($total)
+    {
+        $total = str_replace('Total in base currency:', '', $total);
 
         return $this->getPriceFromString($total);
     }

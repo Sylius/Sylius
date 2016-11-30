@@ -9,8 +9,14 @@ sylius:
             remember_me: Pamatuj si mě
         option:
             name: Jméno
+        notes: Další poznámky
+        variant:
+            tracked: Sledované
     ui:
+        abandoned: Opuštěné
         access_token: Přístupový token
+        access_your_store_account_or_create_a_new_one: Přihlaste se k vašemu účtu nebo vytvořte nový
+        account_credentials: Přihlašovací údaje k účtu
         action: Akce
         actions: Akce
         add: Přidat
@@ -33,17 +39,27 @@ sylius:
         adding_new_customer_groups: Přidání nové skupiny zákazníků
         adding_new_email: Přidání nového e-mailu
         adding_new_locale: Přidání nového národního prostředí (locale)
+        address: Adresa
         addressing_step: Krok řešení
         adjustments: Úpravy
         administration: Administrace
         administration_dashboard: Nástěnka administrace
+        all: Všechno
         all_your_addresses: Všechny adresy
-        amount: Částka
+        an_error_occurred: Vyskytla se chyba
+        api: Rozhraní API
+        apply_coupon: Použít poukaz
+        are_your_sure_you_want_to_perform_this_action: Jste si jisti, že chcete provést tuto operaci?
+        association: Asociace
+        association_types: Typy asociace
+        associations: Asociace
         assortment: Sortiment
         attributes: Atributy
         author: Autor
         availability: Dostupnost
+        available_for_channels: K dispozici pro kanály
         available_on: Dostupný od
+        available_until: Dostupné do
         back: Zpět
         backorder: Doobjednání
         balance_due: Nedoplatek
@@ -73,7 +89,6 @@ sylius:
         confirmation: Potvrzení
         confirmation_title: Potvrzení
         contain_variants: Obsahuje varianty
-        content: Obsah
         countries: Země
         country: Země
         country_details: Podrobnosti země
@@ -84,7 +99,6 @@ sylius:
         create_a_new_address: Vytvořit novou adresu
         create_country: Vytvořit zemi
         create_currency: Vytvořit měnu
-        create_group: Vytvořit skupinu
         create_imagine_block: Vytvořit imagine blok
         create_locale: Vytvořit národní prostředí (locale)
         create_menu: Vytvořit menu
@@ -98,8 +112,6 @@ sylius:
         create_product: Vytvořit produkt
         create_product_attribute: Vytvoření produktového atributu
         create_promotion: Vytvořit akci
-        create_redirect_route: Vytvořit přesměrování
-        create_route: Vytvořit URL směrování
         create_shipping_category: Vytvořit přepravní kategorie
         create_shipping_method: Vytvořit způsob dopravy
         create_simple_block: Vytvořit jednoduchý blok
@@ -118,8 +130,6 @@ sylius:
         creating_menu: Vytvoření menu
         creating_menu_node: Vytvoření položky menu
         creating_new_page: Vytvoření nové stránky
-        creating_redirect_route: Vytvoření přesměrování
-        creating_route: Vytvoření URL směrování
         creation_time: Čas vytvoření
         currencies: Měny
         currency: Měna
@@ -135,7 +145,7 @@ sylius:
         data: Údaje
         date: Datum
         default_billing_address: Výchozí fakturační adresa
-        default_currency: Výchozí měna
+        default_locale: Výchozí Jazyk
         default_shipping_address: Výchozí dodací adresa
         delete: Odstranit
         delete_image: Odstranit obrázek
@@ -143,7 +153,6 @@ sylius:
         description: Popis
         disable: Zakázat
         edit: Úpravy
-        edit_group: Upravit skupinu
         edit_locale: Upravit národní prostředí (locale)
         edit_my_address: Upravit adresu
         edit_your_personal_information: Upravit osobní údaje
@@ -164,9 +173,7 @@ sylius:
         editing_permission: Úpravy oprávnění
         editing_product: Úprava produktu
         editing_promotion: Konec akce
-        editing_redirect_route: Editace přesměrování
         editing_role: Editace role
-        editing_route: Úprava směrování
         editing_shipment: Editace dodávky
         editing_shipping_category: Úprava přepravní kategorie
         editing_shipping_method: Editace přepravní metody
@@ -190,9 +197,8 @@ sylius:
         exchange_rate: Směnný kurz
         exclusive: Exkluzivní
         existing_customer: Stávající zákazník
-        expires_at: Končí v
+        extra_notes: Další poznámky
         failed: Neúspěšné
-        filter: Filtr
         first_name: Křestní Jméno
         fulfill: Splnit
         gateway: Brána
@@ -204,11 +210,11 @@ sylius:
         generating_coupons: Generování kupónů
         go_to_dashboard: Přejít na dashboard
         grand_total: Celkem
-        groups: Skupiny
         guest: Neregistrovaný náštěvník
         guest_customer: Neregistrovaný náštěvník
         hide_deleted: Skrýt odstraněné
         home: Domů
+        hostname: Hostname
         id: ID
         image: Obrázek
         images: Obrázky
@@ -216,7 +222,7 @@ sylius:
         index_of_all_configured_locales: Seznam všech národních prostředí (locales)
         information: Informace
         inventory: Sklad
-        inventory_here_you_can_see_current_stock_levels: 'Zásoby <small>zde vidíte aktuální stav zásob</small>'
+        inventory_here_you_can_see_current_stock_levels: Zásoby <small>zde vidíte aktuální stav zásob</small>
         inventory_index: Sklad
         inventory_state: Stav zásob
         inventory_tracking: Sledování zásob
@@ -224,7 +230,6 @@ sylius:
         item: Položka
         items: Položky
         items_total: Celkem položek
-        label: Popisek
         last_login: Poslední přihlášení
         last_name: Příjmení
         last_update: Poslední aktualizace
@@ -290,7 +295,6 @@ sylius:
         new_zone: Nová zóna
         newest_products: Nejnovější produkty
         next: Další
-        "no": false
         no_comment: Žádné komentáře
         no_default_billing_address: Žádná výchozí fakturační adresa
         no_default_shipping_address: Žádná výchozí dodací adresu
@@ -299,7 +303,7 @@ sylius:
         no_results: Žádné výsledky
         no_shipping_category: Žádná přepravní kategorie
         no_shipping_charges: Nejsou aplikovány žádné poplatky za dopravu
-        no_short_description: '<i>Žádný krátký popis</i>'
+        no_short_description: <i>Žádný krátký popis</i>
         no_sku: Žádná balení
         no_tax_category: Žádná kategorie daně
         no_taxes: Nejsou aplikovány žádné daně
@@ -317,6 +321,7 @@ sylius:
         order_summary: Shrnutí objednávky
         order_value: Hodnota objednávky
         orders: Objednávky
+        original_price: Původní cena
         out_of_stock: Není skladam
         overview_of_your_store: Přehled obchodu
         page: Strana
@@ -342,13 +347,14 @@ sylius:
         priority: Priorita
         processing: Zpracovává se
         product: Produkt
+        product_association_index: Asociace
+        product_association_type_index: Typy asociace
         product_attributes: Atributy produktu
-        product_details_viewing_product_product: 'Podrobnosti produktu <small>zobrazení produktu "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Podrobnosti produktu <small>zobrazení produktu "<strong>%product%</strong>"</small>
         product_options: Volby produktů
-        products: Produkty
-        products_categorized_as_name: 'Produkty zařazené jako "%name%"'
-        products_categorized_under_taxon_taxon: 'Produkty <small>kategorizovány pod taxonem "%taxon%"</small>'
-        products_index_of_all_products_in_your_store: 'Produkty <small>seznam všech produktů v obchodě</small>'
+        products_categorized_as_name: Produkty zařazené jako "%name%"
+        products_categorized_under_taxon_taxon: Produkty <small>kategorizovány pod taxonem "%taxon%"</small>
+        products_index_of_all_products_in_your_store: Produkty <small>seznam všech produktů v obchodě</small>
         promotion_coupons: Kupóny
         promotion_details: Podrobnosti akce
         promotion_total: Akce celkem
@@ -362,11 +368,10 @@ sylius:
         ready: Připraven
         recent_orders: Poslední objednávky
         recent_users: Poslední uživatelé
-        redirect_routes: Přesměrovávací pravidla
         refunded: Platba vrácena
         register: Registrace
         register_button: Registrace
-        registration_create_an_account_in_store: 'Registrace, <small>Vytvořit účet v obchodě</small>'
+        registration_create_an_account_in_store: Registrace, <small>Vytvořit účet v obchodě</small>
         registration_date: Datum registrace
         release_inventory: Uvolnění zásob
         remember_me: Pamatuj si mě
@@ -377,7 +382,6 @@ sylius:
         returned: Vráceno
         revert: Vrátit
         roles: Role
-        routes: Cesty
         rules: Pravidla
         sales: Prodeje
         sales_this_month: Prodeje
@@ -406,7 +410,7 @@ sylius:
         shop_by: Nakupovat podle
         show_all: Zobrazit vše
         show_deleted: Zobrazit odstraněné
-        sign_in_to_the_store_or_create_new_account: 'Přihlášení do obchodu <small>nebo vytvoření nového účtu</small>'
+        sign_in_to_the_store_or_create_new_account: Přihlášení do obchodu <small>nebo vytvoření nového účtu</small>
         simple_blocks: Jednoduché bloky
         sku: SKU
         slideshow: Prezentace
@@ -426,7 +430,7 @@ sylius:
         taxation_categories: Typy zdanění
         taxation_settings: Nastavení zdanění
         taxes: DPH
-        taxons: Taxony
+        theme: Vzhled
         there_are_no_images_for_this_product: Pro tento produkt nejsou žádné obrázky
         there_are_no_options_for_this_product: Pro tento produkt nejsou žádné nastavení
         there_are_no_taxons_for_this_product: Tento produkt nemá žádné taxony
@@ -451,7 +455,7 @@ sylius:
         user_confirmation_name: Potvrzení uživatele
         user_details: Údaje o uživateli
         username: Uživatelské jméno
-        users_list_of_all_users_registered_in_store: 'Uživatelé <small>seznam všech uživatelů registrovaných v obchodě</small>'
+        users_list_of_all_users_registered_in_store: Uživatelé <small>seznam všech uživatelů registrovaných v obchodě</small>
         variant: Varianta
         variant_selection_method: Metoda výběru varianty
         variants: Varianty
@@ -460,8 +464,8 @@ sylius:
         void: Neplatné
         volume_based_pricing: Cena na základě objemu
         warning: Varování
+        welcome_to_our_store: Vítejte v našem obchodě
         welcome_to_your_space: Vítejte ve Vašem prostoru
-        "yes": true
         you_are_customer_since: Zákazníkem jste od
         you_have_no_new_orders: Nemáte žádné nové objednávky
         your_cart_is_empty: Váš košík je prázdný

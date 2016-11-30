@@ -14,11 +14,11 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
+use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -35,6 +35,11 @@ final class LoginContext implements Context
      * @var LoginPageInterface
      */
     private $loginPage;
+
+    /**
+     * @var RegisterPageInterface
+     */
+    private $registerPage;
 
     /**
      * @var ResetPasswordPageInterface
@@ -54,6 +59,7 @@ final class LoginContext implements Context
     /**
      * @param HomePageInterface $homePage
      * @param LoginPageInterface $loginPage
+     * @param RegisterPageInterface $registerPage
      * @param ResetPasswordPageInterface $resetPasswordPage
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
@@ -61,19 +67,21 @@ final class LoginContext implements Context
     public function __construct(
         HomePageInterface $homePage,
         LoginPageInterface $loginPage,
+        RegisterPageInterface $registerPage,
         ResetPasswordPageInterface $resetPasswordPage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
+        $this->registerPage = $registerPage;
         $this->resetPasswordPage = $resetPasswordPage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 
     /**
-     * @Given I want to log in
+     * @When I want to log in
      */
     public function iWantToLogIn()
     {
@@ -81,7 +89,7 @@ final class LoginContext implements Context
     }
 
     /**
-     * @Given I want to reset password
+     * @When I want to reset password
      */
     public function iWantToResetPassword()
     {
@@ -117,6 +125,7 @@ final class LoginContext implements Context
 
     /**
      * @When I log in
+     * @When I try to log in
      */
     public function iLogIn()
     {
@@ -125,6 +134,7 @@ final class LoginContext implements Context
 
     /**
      * @When I reset it
+     * @When I try to reset it
      */
     public function iResetIt()
     {
@@ -142,13 +152,31 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When I register with email :email and password :password
+     */
+    public function iRegisterWithEmailAndPassword($email, $password)
+    {
+        $this->registerPage->open();
+        $this->registerPage->specifyEmail($email);
+        $this->registerPage->specifyPassword($password);
+        $this->registerPage->verifyPassword($password);
+        $this->registerPage->specifyFirstName('Carrot');
+        $this->registerPage->specifyLastName('Ironfoundersson');
+        $this->registerPage->register();
+    }
+
+    /**
      * @Then I should be logged in
      */
     public function iShouldBeLoggedIn()
     {
         Assert::true(
+            $this->homePage->isOpen(),
+            'I should be on the homepage.'
+        );
+        Assert::true(
             $this->homePage->hasLogoutButton(),
-            'I should be on home page and, also i should be able to sign out.'
+            'I should be able to sign out.'
         );
     }
 
@@ -175,6 +203,17 @@ final class LoginContext implements Context
     }
 
     /**
+     * @Then I should be notified about disabled account
+     */
+    public function iShouldBeNotifiedAboutDisabledAccount()
+    {
+        Assert::true(
+            $this->loginPage->hasValidationErrorWith('Error Account is disabled.'),
+            'I should see validation error.'
+        );
+    }
+
+    /**
      * @Then I should be notified that email with reset instruction has been send
      */
     public function iShouldBeNotifiedThatEmailWithResetInstructionWasSend()
@@ -191,5 +230,18 @@ final class LoginContext implements Context
             $this->resetPasswordPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)),
             sprintf('The %s should be required.', $elementName)
         );
+    }
+
+    /**
+     * @Then I should be able to log in as :email with :password password
+     */
+    public function iShouldBeAbleToLogInAsWithPassword($email, $password)
+    {
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
+
+        $this->iShouldBeLoggedIn();
     }
 }

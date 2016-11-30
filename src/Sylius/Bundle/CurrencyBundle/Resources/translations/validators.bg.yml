@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    currency:
+        code:
+            exact_length: Кодът за валутата трябва да бъде точно 3 знака.
+            not_blank: Изберете код за валута.
+            unique: Кодът за валутата трябва да бъде уникален.
+        exchange_rate:
+            not_blank: Въведете обменния курс.

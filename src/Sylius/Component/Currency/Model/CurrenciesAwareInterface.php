@@ -24,11 +24,6 @@ interface CurrenciesAwareInterface
     public function getCurrencies();
 
     /**
-     * @param Collection $collection
-     */
-    public function setCurrencies(Collection $collection);
-
-    /**
      * @param CurrencyInterface $currency
      *
      * @return bool

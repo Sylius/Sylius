@@ -3,9 +3,8 @@ sylius_admin_order:
         alias: sylius.order
         section: admin
         templates: SyliusAdminBundle:Crud
-        except: ['create', 'update', 'show']
+        only: ['index']
         grid: sylius_admin_order
-        permission: true
         vars:
           all:
               subheader: sylius.ui.process_your_orders
@@ -22,6 +21,19 @@ sylius_admin_order_show:
             template: SyliusAdminBundle:Order:show.html.twig
             permission: true
 
+sylius_admin_order_update:
+    path: /orders/{id}/edit
+    methods: [GET, PATCH]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            section: admin
+            template: SyliusAdminBundle:Order:update.html.twig
+            form:
+                options:
+                    validation_groups:
+                        - sylius_shipping_address_update
+
 sylius_admin_order_cancel:
     path: /orders/{id}/cancel
     methods: [PUT]
@@ -32,7 +44,6 @@ sylius_admin_order_cancel:
                 graph: sylius_order
                 transition: cancel
             redirect: referer
-            permission: true
 
 sylius_admin_order_payment_complete:
     path: /orders/{orderId}/payments/{id}/complete
@@ -41,12 +52,28 @@ sylius_admin_order_payment_complete:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
         _sylius:
             repository:
-                method: findByOrderIdAndId
+                method: findOneByOrderId
                 arguments:
-                    orderId: $orderId
                     id: $id
+                    orderId: $orderId
             state_machine:
                 graph: sylius_payment
                 transition: complete
             redirect: referer
-            permission: true
+
+sylius_admin_order_payment_refund:
+    path: /orders/{orderId}/payments/{id}/refund
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _sylius:
+            repository:
+                method: findOneByOrderId
+                arguments:
+                    id: $id
+                    orderId: $orderId
+            state_machine:
+                graph: sylius_payment
+                transition: refund
+            redirect: referer
+            flash: sylius.payment.refunded

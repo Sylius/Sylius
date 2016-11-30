@@ -6,11 +6,11 @@ sylius:
         add_value: Додај вредност
         city: Град
         company: Компанија
+        country: Држава
         email: Е-пошта
         exchange_rate: Курс на конверзија
         members: Членови
         message: Порака
-        "no": false
         phone_number: Телефонски Број
         postcode: Поштенски Број
         presentation: Презентација
@@ -19,4 +19,4 @@ sylius:
         scope: Опсег
         street: Улица
         topic: Тема
-        "yes": true
+        type: Вид

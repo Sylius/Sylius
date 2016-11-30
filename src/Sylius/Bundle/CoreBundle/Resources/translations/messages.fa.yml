@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: قیمت واحد
-                quantity: تعداد
-                variant: ترکیب محصول
-            customer_group: گروه مشتری
         block:
             body: متن
             id: شناسه
@@ -22,8 +16,12 @@ sylius:
             shipping_method: روش ارسال
         promotion:
             channels: کانال های فروش
-        coupon:
-            per_customer_usage_limit: محدودیت استفاده (به عنوان مثال به ازای ... تعداد مشتری)
+        promotion_action:
+            add_product_configuration:
+                product: محصول
+            customer_group: گروه مشتری
+        promotion_coupon:
+            per_customer_usage_limit: محدودیت استفاده به ازای هر مشتری
         group:
             name: نام
             roles: نقش ها
@@ -31,14 +29,16 @@ sylius:
             taxonomies: رده بندی
             locale_default: زبان پیش فرض
             locales: زبان ها
-            currency_default: واحد پولی پیش‌فرض
+            currency_base: ارز پایه
             currencies: واحدهای پول
             shipping_methods: شیوه های ارسال
             payment_methods: روش‌های پرداخت
+            tax_calculation_strategy: استراتژی محاسبه مالیات
             tax_zone_default: منطقه مالیاتی پیش فرض
             theme: قالب
             hostname: نام میزبان
         image:
+            code: نام انگلیسی
             file: عکس
         locale:
             code: نام انگلیسی
@@ -56,6 +56,7 @@ sylius:
             id: شناسه
             title: عنوان
         product:
+            images: عکس ها
             restricted_zone: مناطق ممنوع
             shipping_category: نوع ارسال
             short_description: شرح کوتاه
@@ -68,20 +69,6 @@ sylius:
             code: نام انگلیسی
         product_variant:
             tax_category: نوع مالیات
-        settings:
-            general:
-                currency: واحد پولی پیش‌فرض
-                locale: زبان
-                meta_description: توضیحات سئو
-                meta_keywords: کلمات کلیدی
-                title: عنوان سایت
-                tracking_code:
-                    Tracking code (for example: کد گوگل آنالیتیک)
-            taxation:
-                default_tax_zone: منطقه مالیاتی پیش فرض
-                default_tax_calculation_strategy: استراتژی محاسبه مالیات پیش فرض
-            security:
-                enabled: فعال؟
         shipment_filter:
             created_at_from: از تاریخ
             created_at_to: تا تاریخ
@@ -97,7 +84,9 @@ sylius:
         shipping_method:
             zone: منطقه
         taxon:
+            code: نام انگلیسی
             file: انتخاب تصویر
+            images: عکس ها
         taxonomy:
             file: انتخاب تصویر
         user:
@@ -115,10 +104,8 @@ sylius:
         variant:
             depth: عمق
             height: طول
-            images: عکس ها
             on_hand: موجودی
             price: قیمت
-            original_price: قيمت ابتدایی
             sku: کد محصول
             weight: وزن
             width: عرض
@@ -133,18 +120,84 @@ sylius:
             type: نوع ارتباط
         product_association_type:
             name: نام
-        promotion_rule:
-            contains_taxon:
-                taxon: تاکسون
-                count: تعداد
+        promotion_filter:
+            product:
+                products: محصولات
             taxon:
-                taxons: رده ها
+                taxons: دسته بندی ها
+        promotion_rule:
+            has_taxon:
+                taxons: دسته بندی ها
+            product:
+                products: محصولات
             total_of_items_from_taxon:
                 taxon: تاکسون
-                amount: مبلغ
+                amount: مقدار
+        payment_method:
+            channels: کانال های فروش
+    installer:
+        extensions:
+            header: افزونه ها
+            accelerator:
+                header: شتاب دهنده
+                help: فعال سازی Zend OpCache (بسیار توصیه می شود).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: افزونه %extension% را نصب و فعال کنید.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Session
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: file system
+            cache:
+                header: cache
+                help: "برای افزودن اعتبار کد زیر را اجرا کنید:\nsudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            exists: وجود دارد
+            logs:
+                header: پیام های سیستم
+                help: "برای افزودن اعتبار کد زیر را اجرا کنید:\nsudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%"
+            not_exists: وجود ندارد
+            not_writable: غیرقابل رایت
+            parameters:
+                header: parameters.yml
+                help: "برای افزودن اعتبار کد زیر را اجرا کنید:\n sudo chmod a+w %path%"
+            vendors: vendors
+            writable: قابل رایت
+        settings:
+            header: ورژن PHP و تنظیمات
+            any: هر
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: معتبر
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: منطقه زمانی
+            timezone_deprecated:
+                header: منطقه زمانی نامعتبر
+                help: 'منطقه زمانی %timezone% نامعتبر است. لطفا تنظیمات مربوطه را در فایل php.ini اصلاح کنید (برای دیدن لیست منطقه های زمانی نامعتبر به آدرس http://php.net/manual/en/timezones.others.php مراجعه کنید).'
+            version: ورژن PHP
+            version_recommended: ورژن توصیه شده PHP
     email:
         order_confirmation:
             name: تایید سفارش
+            content: "شماره سفارش شما با مقدار %number% ثبت گردید.\n<br/><br/>\nبا تشکر از شما برای خرید در فروشگاه ما!"
         order_comment:
             name: یادداشت سفارش
         shipment_confirmation:
@@ -152,5 +205,16 @@ sylius:
         user_confirmation:
             name: تایید کاربر
             subject: به فروشگاه ما خوش آمدید
+            content: خوش آمدید به فروشگاه ما <br/> <br/> ثبت نام شما با موفقیت انجام شد. <br/> %username% متشکریم.
         password_reset:
             name: بازیابی کلمه عبور
+            content: <h3>سلام %username%</h3> برای تنظیم مجدد رمز عبور به آدرس - %url% مراجعه کنید <br/> <br/> با احترام تیم پشتیبانی.
+        verification:
+            name: تایید آدرس ایمیل
+            content: به منظور بررسی آدرس ایمیل به %url% مراجعه کنید
+    payum_gateway:
+        cash_on_delivery: پرداخت در محل
+        offline: آفلاین
+        paypal_express_checkout: پرداخت با پی پال
+    shipping_method_resolver:
+        by_zones_and_channel: توسط مناطق و کانال

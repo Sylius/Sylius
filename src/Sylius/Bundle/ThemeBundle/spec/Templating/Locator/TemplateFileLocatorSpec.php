@@ -23,8 +23,6 @@ use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @mixin TemplateFileLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TemplateFileLocatorSpec extends ObjectBehavior
@@ -40,7 +38,7 @@ final class TemplateFileLocatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateFileLocator');
+        $this->shouldHaveType(TemplateFileLocator::class);
     }
 
     function it_implements_file_locator_interface()

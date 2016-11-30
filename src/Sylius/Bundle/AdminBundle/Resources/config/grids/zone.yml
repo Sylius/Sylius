@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.zone.class%
+                    class: "%sylius.model.zone.class%"
             fields:
                 code:
                     type: string
@@ -16,7 +16,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.type
                     options:
-                        template: SyliusAdminBundle:Grid/Field:label.html.twig
+                        template: "@SyliusAdmin/Grid/Field/label.html.twig"
             filters:
                 name:
                     type: string

@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Taxon;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -51,4 +52,66 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         return $productPrice === $container->find('css', '.sylius-product-price')->getText();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countProductsItems()
+    {
+        $productsList = $this->getDocument()->find('css', '#products');
+        
+        $products = $productsList->findAll('css','.column > .card');
+        
+        return count($products);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isProductOnPageWithName($name)
+    {
+        return null !== $this->getDocument()->find('css', sprintf('.content > a:contains("%s")', $name));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFirstProductNameFromList()
+    {
+        $productsList = $this->getDocument()->find('css', '#products');
+
+        return $productsList->find('css', '.content > a')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function search($name)
+    {
+        $this->getDocument()->fillField('criteria_search_value', $name);
+        $this->getDocument()->pressButton('Search');
+    }
+
+    public function clearFilter()
+    {
+        $this->getDocument()->clickLink('Clear');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasProductsInOrder(array $productNames)
+    {
+        $productsList = $this->getDocument()->find('css', '#products');
+        $products = $productsList->findAll('css','.column  .content > .sylius-product-name');
+
+        foreach ($productNames as $key => $value) {
+            if($products[$key]->getText() !== $value) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 }

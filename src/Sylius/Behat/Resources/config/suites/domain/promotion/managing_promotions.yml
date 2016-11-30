@@ -4,12 +4,12 @@
 default:
     suites:
         domain_managing_promotions:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.shared_storage
-                - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product

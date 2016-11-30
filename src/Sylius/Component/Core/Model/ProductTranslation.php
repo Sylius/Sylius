@@ -26,16 +26,16 @@ class ProductTranslation extends BaseProductTranslation implements ProductTransl
     /**
      * {@inheritdoc}
      */
-    public function setShortDescription($shortDescription)
+    public function getShortDescription()
     {
-        $this->shortDescription = $shortDescription;
+        return $this->shortDescription;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getShortDescription()
+    public function setShortDescription($shortDescription)
     {
-        return $this->shortDescription;
+        $this->shortDescription = $shortDescription;
     }
 }

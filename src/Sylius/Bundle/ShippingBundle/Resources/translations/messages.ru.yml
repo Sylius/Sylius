@@ -6,6 +6,7 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Кол-во
+                equal: Равно
             type: Тип измерения
         shipment:
             state: Cтатус
@@ -41,9 +42,10 @@ sylius:
             calculator: Калькулятор
             category: Категория
             category_requirement: Условия категории
+            channels: Каналы
             configuration: Конфигурация
             description: Описание
             enabled: Активен
             name: Название
             tax_category: Категория налогов
-            translations: ﻿Переводы
+            translations: '﻿Переводы'

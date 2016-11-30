@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        promotion_action:
+            type: Tyyppi
+        promotion_rule:
+            contains_product_configuration:
+                variants: Tuotteet
+            shipping_country_configuration:
+                country: Maa
+            type: Tyyppi

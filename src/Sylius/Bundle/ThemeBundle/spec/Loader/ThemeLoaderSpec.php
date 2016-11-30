@@ -28,8 +28,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 use Zend\Hydrator\HydrationInterface;
 
 /**
- * @mixin ThemeLoader
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeLoaderSpec extends ObjectBehavior
@@ -54,7 +52,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Loader\ThemeLoader');
+        $this->shouldHaveType(ThemeLoader::class);
     }
 
     function it_implements_theme_loader_interface()

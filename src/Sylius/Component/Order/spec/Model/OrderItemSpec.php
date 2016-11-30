@@ -17,6 +17,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\AdjustableInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItem;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 
@@ -28,15 +29,15 @@ final class OrderItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Order\Model\OrderItem');
+        $this->shouldHaveType(OrderItem::class);
     }
 
-    function it_implements_Sylius_order_item_interface()
+    function it_implements_an_order_item_interface()
     {
         $this->shouldImplement(OrderItemInterface::class);
     }
 
-    function it_implements_sylius_adjustable_interface()
+    function it_implements_an_adjustable_interface()
     {
         $this->shouldImplement(AdjustableInterface::class);
     }
@@ -89,11 +90,11 @@ final class OrderItemSpec extends ObjectBehavior
         $this->setUnitPrice(4498);
         $this->getUnitPrice()->shouldReturn(4498);
         $this->getUnitPrice()->shouldBeInteger();
-        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(44.98 * 100);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice('4498');
-        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(round(44.98 * 100));
-        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice([4498]);
-        $this->shouldThrow('\InvalidArgumentException')->duringSetUnitPrice(new \stdClass());
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetUnitPrice(44.98 * 100);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetUnitPrice('4498');
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetUnitPrice(round(44.98 * 100));
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetUnitPrice([4498]);
+        $this->shouldThrow(\InvalidArgumentException::class)->duringSetUnitPrice(new \stdClass());
     }
 
     function it_has_total_equal_to_0_by_default()

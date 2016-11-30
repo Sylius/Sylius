@@ -20,8 +20,6 @@ use Sylius\Behat\Service\Setter\CookieSetter;
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
 
 /**
- * @mixin CookieSetter
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class CookieSetterSpec extends ObjectBehavior

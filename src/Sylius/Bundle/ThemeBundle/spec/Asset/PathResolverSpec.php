@@ -17,15 +17,13 @@ use Sylius\Bundle\ThemeBundle\Asset\PathResolverInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin PathResolver
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class PathResolverSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Asset\PathResolver');
+        $this->shouldHaveType(PathResolver::class);
     }
 
     function it_implements_path_resolver_interface()

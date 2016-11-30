@@ -19,13 +19,13 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.admin.shipping_method.create" class="%sylius.behat.page.admin.shipping_method.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.shipping_method.create" class="%sylius.behat.page.admin.shipping_method.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">shipping_method</argument>
         </service>
-        <service id="sylius.behat.page.admin.shipping_method.index" class="%sylius.behat.page.admin.shipping_method.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.shipping_method.index" class="%sylius.behat.page.admin.shipping_method.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">shipping_method</argument>
         </service>
-        <service id="sylius.behat.page.admin.shipping_method.update" class="%sylius.behat.page.admin.shipping_method.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.shipping_method.update" class="%sylius.behat.page.admin.shipping_method.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">shipping_method</argument>
         </service>
     </services>

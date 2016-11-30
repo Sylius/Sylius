@@ -14,9 +14,6 @@ namespace Sylius\Component\Shipping\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * This interface can be implemented by any object, which needs to be
- * evaluated by default shipping calculators and rule checkers.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ShippingSubjectInterface
@@ -42,8 +39,6 @@ interface ShippingSubjectInterface
     public function getShippingUnitTotal();
 
     /**
-     * Get collection of unique shippables.
-     *
      * @return Collection|ShippableInterface[]
      */
     public function getShippables();

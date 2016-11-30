@@ -13,7 +13,8 @@ namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\ProductOptionInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -41,12 +42,12 @@ interface ShowPageInterface extends PageInterface
     public function addToCartWithVariant($variant);
 
     /**
-     * @param OptionInterface $option
+     * @param ProductOptionInterface $option
      * @param string $optionValue
      *
      * @throws ElementNotFoundException
      */
-    public function addToCartWithOption(OptionInterface $option, $optionValue);
+    public function addToCartWithOption(ProductOptionInterface $option, $optionValue);
 
     /**
      * @return string
@@ -60,11 +61,27 @@ interface ShowPageInterface extends PageInterface
 
     /**
      * @param string $attributeName
-     * @param string $AttributeValue
+     *
+     * @return string
+     */
+    public function getAttributeByName($attributeName);
+
+    /**
+     * @return array
+     */
+    public function getAttributes();
+
+    /**
+     * @param ProductInterface $product
      *
      * @return bool
      */
-    public function hasAttributeWithValue($attributeName, $AttributeValue);
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product);
+
+    /**
+     * @param int $timeout
+     */
+    public function waitForValidationErrors($timeout);
 
     /**
      * @return bool
@@ -80,4 +97,52 @@ interface ShowPageInterface extends PageInterface
      * @return string
      */
     public function getPrice();
+
+    /**
+     * @return int
+     */
+    public function countReviews();
+
+    /**
+     * @return bool
+     */
+    public function isMainImageDisplayed();
+
+    /**
+     * @param string $title
+     *
+     * @return bool
+     */
+    public function hasReviewTitled($title);
+
+    /**
+     * @return float
+     */
+    public function getAverageRating();
+
+    /**
+     * @param string $optionName
+     * @param string $optionValue
+     */
+    public function selectOption($optionName, $optionValue);
+
+    /**
+     * @param string $variantName
+     */
+    public function selectVariant($variantName);
+
+    /**
+     * @param string $productAssociationName
+     *
+     * @return bool
+     */
+    public function hasAssociation($productAssociationName);
+
+    /**
+     * @param string $productName
+     * @param string $productAssociationName
+     *
+     * @return bool
+     */
+    public function hasProductInAssociation($productName, $productAssociationName);
 }

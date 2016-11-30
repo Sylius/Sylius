@@ -1,0 +1,71 @@
+{
+    "id": @integer@,
+    "items": @array@,
+    "items_total": @integer@,
+    "adjustments": @array@,
+    "adjustments_total": @integer@,
+    "total": @integer@,
+    "state": "cart",
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "channel": {
+        "id": @integer@,
+        "code": "CHANNEL",
+        "name": "Channel",
+        "description": "Lorem ipsum",
+        "hostname": "localhost",
+        "color": "black",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "enabled": true,
+        "tax_calculation_strategy": "order_items_based",
+        "_links": {
+            "self": {
+                "href": @string@
+            }
+        }
+    },
+    "shipping_address": @...@,
+    "billing_address": @...@,
+    "payments": @array@,
+    "shipments": [
+        {
+            "id": @integer@,
+            "state": "cart",
+            "method": {
+                "id": @integer@,
+                "code": "UPS",
+                "category_requirement": @integer@,
+                "calculator": "flat_rate",
+                "configuration": {
+                    "amount": 10
+                },
+                "created_at": "@string@.isDateTime()",
+                "updated_at": "@string@.isDateTime()",
+                "enabled": true,
+                "_links": {
+                    "self": {
+                        "href": @string@
+                    },
+                    "zone": {
+                        "href": @string@
+                    }
+                }
+            },
+            "created_at": "@string@.isDateTime()",
+            "updated_at": "@string@.isDateTime()",
+            "_links": {
+                "self": {
+                    "href": @string@
+                },
+                "method": {
+                    "href": @string@
+                },
+                "order": {
+                    "href": @string@
+                }
+            }
+        }
+    ],
+    "checkout_state": "shipping_selected"
+}

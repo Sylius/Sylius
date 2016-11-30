@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\AttributeBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValue;
+use Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValueValidator;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
 use Sylius\Component\Attribute\Model\AttributeInterface;
@@ -36,7 +37,7 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValueValidator');
+        $this->shouldHaveType(ValidAttributeValueValidator::class);
     }
 
     function it_is_constraint_validator()
@@ -45,10 +46,10 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
     }
 
     function it_validates_attribute_value_based_on_their_type(
-        $attributeTypesRegistry,
         AttributeInterface $attribute,
         AttributeTypeInterface $attributeType,
         AttributeValueInterface $attributeValue,
+        ServiceRegistryInterface $attributeTypesRegistry,
         ValidAttributeValue $attributeValueConstraint
     ) {
         $attributeValue->getType()->willReturn(TextAttributeType::TYPE);
@@ -61,8 +62,13 @@ final class ValidAttributeValueValidatorSpec extends ObjectBehavior
         $this->validate($attributeValue, $attributeValueConstraint);
     }
 
-    function it_throws_exception_if_validated_value_is_not_attribute_value(\DateTime $badObject, ValidAttributeValue $attributeValueConstraint)
-    {
-        $this->shouldThrow(new UnexpectedTypeException('\DateTime', AttributeValueInterface::class))->during('validate', [$badObject, $attributeValueConstraint]);
+    function it_throws_exception_if_validated_value_is_not_attribute_value(
+        \DateTime $badObject,
+        ValidAttributeValue $attributeValueConstraint
+    ) {
+        $this
+            ->shouldThrow(new UnexpectedTypeException('\DateTime', AttributeValueInterface::class))
+            ->during('validate', [$badObject, $attributeValueConstraint])
+        ;
     }
 }

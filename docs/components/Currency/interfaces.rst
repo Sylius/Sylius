@@ -66,20 +66,6 @@ the amount of money from one currency to another, according to their exchange ra
 
 .. _Sylius API CurrencyConverterInterface: http://api.sylius.org/Sylius/Component/Currency/Converter/CurrencyConverterInterface.html
 
-.. _component_currency_importer_importer-interface:
-
-ImporterInterface
-~~~~~~~~~~~~~~~~~
-
-Every currency data importer should implement this interface.
-It should configure the importer with data specific for given
-provider and import the up-to-date exchange rates of all managed currencies.
-
-.. note::
-   For more detailed information go to `Sylius API ImporterInterface`_.
-
-.. _Sylius API ImporterInterface: http://api.sylius.org/Sylius/Component/Currency/Importer/ImporterInterface.html
-
 .. _component_currency_provider_currency-provider-interface:
 
 CurrencyProviderInterface

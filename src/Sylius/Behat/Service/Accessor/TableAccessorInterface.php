@@ -31,6 +31,23 @@ interface TableAccessorInterface
 
     /**
      * @param NodeElement $table
+     * @param string $fieldName
+     *
+     * @return array
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function getIndexedColumn(NodeElement $table, $fieldName);
+
+    /**
+     * @param NodeElement $table
+     *
+     * @return NodeElement[]
+     */
+    public function getSortableHeaders(NodeElement $table);
+
+    /**
+     * @param NodeElement $table
      * @param NodeElement $row
      * @param string $field
      *

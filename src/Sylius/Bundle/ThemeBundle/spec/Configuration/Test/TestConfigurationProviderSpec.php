@@ -12,14 +12,11 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Test;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
-use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 use Sylius\Bundle\ThemeBundle\Configuration\Test\TestConfigurationProvider;
+use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 
 /**
- * @mixin TestConfigurationProvider
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TestConfigurationProviderSpec extends ObjectBehavior
@@ -31,7 +28,7 @@ final class TestConfigurationProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Test\TestConfigurationProvider');
+        $this->shouldHaveType(TestConfigurationProvider::class);
     }
 
     function it_implements_configuration_provider_interface()

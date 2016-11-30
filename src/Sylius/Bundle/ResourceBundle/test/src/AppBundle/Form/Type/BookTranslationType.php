@@ -12,25 +12,26 @@
 namespace AppBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class BookTranslationType extends AbstractResourceType
+final class BookTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('title', 'text');
+        $builder->add('title', TextType::class);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'app_book_translation';
     }

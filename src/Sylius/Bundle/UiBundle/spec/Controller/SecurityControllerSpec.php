@@ -23,8 +23,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
- * @mixin SecurityController
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class SecurityControllerSpec extends ObjectBehavior
@@ -36,7 +34,7 @@ final class SecurityControllerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UiBundle\Controller\SecurityController');
+        $this->shouldHaveType(SecurityController::class);
     }
 
     function it_renders_login_form(
@@ -53,8 +51,10 @@ final class SecurityControllerSpec extends ObjectBehavior
         $authenticationUtils->getLastUsername()->willReturn('john.doe');
 
         $request->attributes = $requestAttributes;
-        $requestAttributes->get('_sylius[template]', 'SyliusUiBundle:Security:login.html.twig', true)->willReturn('CustomTemplateName');
-        $requestAttributes->get('_sylius[form]', 'sylius_security_login', true)->willReturn('custom_form_type');
+        $requestAttributes->get('_sylius')->willReturn([
+            'template' => 'CustomTemplateName',
+            'form' => 'custom_form_type',
+        ]);
 
         $formFactory->createNamed('', 'custom_form_type')->willReturn($form);
         $form->createView()->willReturn($formView);

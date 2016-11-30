@@ -17,7 +17,7 @@ sylius:
             unique: Questo locale esiste già.
     product_variant:
         onHand:
-            min: 'La scorta di magazzino deve essere maggiore di {{ limit }}.'
+            min: La scorta di magazzino deve essere maggiore di {{ limit }}.
             not_blank: Per favore inserisci la scorta di magazzino.
         price:
             min: Il prezzo non può avere valore negativo.
@@ -26,7 +26,7 @@ sylius:
             min: Il prezzo originale non deve essere negativo.
     product_translation:
         short_description:
-            max: 'La descrizione breve non deve superare i {{ limit }} caratteri.'
+            max: La descrizione breve non deve superare i {{ limit }} caratteri.
     user:
         email:
             unique: Questa e-mail è già in uso.

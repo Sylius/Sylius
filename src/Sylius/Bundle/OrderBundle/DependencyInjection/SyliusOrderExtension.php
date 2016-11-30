@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusOrderExtension extends AbstractResourceExtension
+final class SyliusOrderExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -32,18 +32,10 @@ class SyliusOrderExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-            'templating.xml',
-            'twig.xml',
-            sprintf('driver/%s.xml', $config['driver']),
-        ];
+        $loader->load('services.xml');
+        $loader->load(sprintf('services/integrations/%s.xml', $config['driver']));
 
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
-
-        $orderItemType = $container->getDefinition('sylius.form.type.order_item');
-        $orderItemType->addArgument(new Reference('sylius.form.data_mapper.order_item_quantity'));
+        $container->setParameter('sylius_order.cart_expiration_period', $config['expiration']['cart']);
+        $container->setParameter('sylius_order.order_expiration_period', $config['expiration']['order']);
     }
 }

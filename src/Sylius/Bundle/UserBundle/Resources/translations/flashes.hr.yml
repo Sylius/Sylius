@@ -6,12 +6,7 @@ sylius:
         email:
             not_exist: Korisnik s ovom email adresom ne postoji.
         password:
-            invalid: Kriva lozinka.
-            request:
-                success: Upute za ponovno postavljanje lozinke poslane su na email!
             reset:
                 success: Vaša lozinka je uspješno postavljena!
             change:
                 success: Vaša lozinka je uspješno promijenjena!
-        reset_password:
-            requested: Ako email adresa koju ste unijeli postoji u našem sustavu, poslali smo vam upute za ponovno postavljanje lozinke.

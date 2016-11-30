@@ -47,6 +47,13 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @When /^I delete a ("([^"]+)" promotion)$/
+     */
+    public function iDeletePromotion(PromotionInterface $promotion)
+    {
+        $this->promotionRepository->remove($promotion);
+    }
+
+    /**
      * @When /^I try to delete a ("([^"]+)" promotion)$/
      */
     public function iTryToDeletePromotion(PromotionInterface $promotion)

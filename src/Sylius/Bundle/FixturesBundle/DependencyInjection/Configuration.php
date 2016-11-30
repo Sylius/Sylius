@@ -116,13 +116,21 @@ final class Configuration implements ConfigurationInterface
 
         $optionsNode
             ->validate()
-                ->ifTrue(function ($value) { return !is_array($value); })
+                ->ifTrue(function (array $values) {
+                    foreach ($values as $value) {
+                        if (!is_array($value)) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                })
                 ->thenInvalid('Options have to be an array!')
         ;
 
         $optionsNode
             ->beforeNormalization()
-                ->always(function ($value) { return is_array($value) ? [$value] : $value; })
+                ->always(function ($value) { return [$value]; })
         ;
 
         $optionsNode->prototype('variable')->cannotBeEmpty()->defaultValue([]);

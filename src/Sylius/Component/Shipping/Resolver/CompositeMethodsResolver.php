@@ -17,7 +17,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CompositeMethodsResolver implements ShippingMethodsResolverInterface
+final class CompositeMethodsResolver implements ShippingMethodsResolverInterface
 {
     /**
      * @var PrioritizedServiceRegistryInterface

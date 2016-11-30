@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TwigFieldType implements FieldTypeInterface
+final class TwigFieldType implements FieldTypeInterface
 {
     /**
      * @var DataExtractorInterface
@@ -58,15 +58,11 @@ class TwigFieldType implements FieldTypeInterface
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefined('vars');
+        $resolver->setRequired('template');
+        $resolver->setAllowedTypes('template', 'string');
 
-        $resolver->setRequired([
-            'template'
-        ]);
-        $resolver->setAllowedTypes([
-            'template' => ['string'],
-            'vars' => ['array'],
-        ]);
+        $resolver->setDefined('vars');
+        $resolver->setAllowedTypes('vars', 'array');
     }
 
     /**

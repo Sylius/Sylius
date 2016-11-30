@@ -12,16 +12,17 @@
 namespace spec\Sylius\Component\Channel\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Channel\Model\Channel;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 final class ChannelSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Channel\Model\Channel');
+        $this->shouldHaveType(Channel::class);
     }
 
-    function it_implements_Sylius_channel_interface()
+    function it_implements_channel_interface()
     {
         $this->shouldImplement(ChannelInterface::class);
     }

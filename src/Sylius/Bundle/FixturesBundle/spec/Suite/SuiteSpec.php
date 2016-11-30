@@ -18,8 +18,6 @@ use Sylius\Bundle\FixturesBundle\Suite\Suite;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 /**
- * @mixin Suite
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SuiteSpec extends ObjectBehavior

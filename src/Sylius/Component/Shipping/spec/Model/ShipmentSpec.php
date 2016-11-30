@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Shipping\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Shipping\Model\Shipment;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
@@ -23,7 +24,7 @@ final class ShipmentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Model\Shipment');
+        $this->shouldHaveType(Shipment::class);
     }
 
     function it_implements_Sylius_shipment_interface()

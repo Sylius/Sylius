@@ -23,30 +23,16 @@ class ProductRepository extends EntityRepository implements ProductRepositoryInt
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findByName($name, $locale)
     {
         return $this->createQueryBuilder('o')
-            ->addSelect('translation')
             ->leftJoin('o.translations', 'translation')
-            ->where('translation.name = :name')
+            ->andWhere('translation.name = :name')
+            ->andWhere('translation.locale = :locale')
             ->setParameter('name', $name)
+            ->setParameter('locale', $locale)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findOneBySlug($slug)
-    {
-        return $this->createQueryBuilder('o')
-            ->addSelect('translation')
-            ->leftJoin('o.translations', 'translation')
-            ->where('translation.slug = :slug')
-            ->setParameter('slug', $slug)
-            ->getQuery()
-            ->getOneOrNullResult()
+            ->getResult()
         ;
     }
 }

@@ -3,7 +3,6 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Templating;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Templating\TemplateNameParser;
 use Symfony\Bundle\FrameworkBundle\Templating\TemplateReference;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -11,8 +10,6 @@ use Symfony\Component\Templating\TemplateNameParserInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @mixin TemplateNameParser
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TemplateNameParserSpec extends ObjectBehavior

@@ -11,29 +11,20 @@
 
 namespace Sylius\Component\Mailer\Provider;
 
+use Sylius\Component\Mailer\Factory\EmailFactoryInterface;
 use Sylius\Component\Mailer\Model\EmailInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
- * Default email provider implementation.
- *
- * Looks in database and then configuration array.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
  */
-class EmailProvider implements EmailProviderInterface
+final class EmailProvider implements EmailProviderInterface
 {
     /**
-     * @var FactoryInterface
+     * @var EmailFactoryInterface
      */
     protected $emailFactory;
-
-    /**
-     * @var RepositoryInterface
-     */
-    protected $emailRepository;
 
     /**
      * @var array
@@ -41,14 +32,14 @@ class EmailProvider implements EmailProviderInterface
     protected $configuration;
 
     /**
-     * @param FactoryInterface $factory
-     * @param RepositoryInterface $emailRepository
-     * @param array               $configuration
+     * @param EmailFactoryInterface $emailFactory
+     * @param array $configuration
      */
-    public function __construct(FactoryInterface $emailFactory, RepositoryInterface $emailRepository, array $configuration)
-    {
+    public function __construct(
+        EmailFactoryInterface $emailFactory,
+        array $configuration
+    ) {
         $this->emailFactory = $emailFactory;
-        $this->emailRepository = $emailRepository;
         $this->configuration = $configuration;
     }
 
@@ -57,13 +48,7 @@ class EmailProvider implements EmailProviderInterface
      */
     public function getEmail($code)
     {
-        $email = $this->emailRepository->findOneBy(['code' => $code]);
-
-        if (null === $email) {
-            $email = $this->getEmailFromConfiguration($code);
-        }
-
-        return $email;
+        return $this->getEmailFromConfiguration($code);
     }
 
     /**
@@ -73,10 +58,9 @@ class EmailProvider implements EmailProviderInterface
      */
     private function getEmailFromConfiguration($code)
     {
-        if (!isset($this->configuration[$code])) {
-            throw new \InvalidArgumentException(sprintf('Email with code "%s" does not exist!', $code));
-        }
+        Assert::keyExists($this->configuration, $code, sprintf('Email with code "%s" does not exist!', $code));
 
+        /** @var EmailInterface $email */
         $email = $this->emailFactory->createNew();
         $configuration = $this->configuration[$code];
 

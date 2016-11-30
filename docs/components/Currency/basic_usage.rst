@@ -28,44 +28,7 @@ convert currency's code into a human friendly form.
 CurrencyContext
 ---------------
 
-The **CurrencyContext** is responsible for keeping the currently
-set and default currency names in a given :doc:`/components/Storage/index`.
-
-.. tip::
-   You can use a custom storage, as long as it implements the :ref:`component_storage_storage-interface`.
-
-In this example let's use the default :ref:`component_storage_session-storage`.
-
-.. code-block:: php
-
-   <?php
-
-   use Sylius\Component\Currency\Context\CurrencyContext;
-   use Sylius\Component\Storage\SessionStorage;
-   use Symfony\Component\HttpFoundation\Session\Session;
-
-   $session = new Session();
-   $session->start();
-   $sessionStorage = new SessionStorage($session);
-
-   $currencyCode = 'USD'; // The currency code which will be used by default in this context.
-
-   $currencyContext = new CurrencyContext($sessionStorage, $currencyCode);
-
-   $currencyContext->getDefaultCurrencyCode(); // Returns 'USD'.
-   $currencyContext->getCurrencyCode('GBP'); // Returns 'USD' as the given code is not in storage.
-   $currencyContext->setCurrencyCode('GBP');
-   $currencyContext->getCurrencyCode('GBP'); // Returns 'GBP' for now it's available in the storage.
-
-Be aware that setting the default currency is done only once while creating the context,
-afterwards you cannot change it.
-
-.. note::
-   This service implements the :ref:`component_currency_context_currency-context-interface`.
-
-   For more detailed information go to `Sylius API CurrencyContext`_.
-
-.. _Sylius API CurrencyContext: http://api.sylius.org/Sylius/Component/Currency/Context/CurrencyContext.html
+...
 
 .. _component_currency_converter_currency-converter:
 

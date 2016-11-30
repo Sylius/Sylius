@@ -27,7 +27,7 @@ use Gedmo\Tool\Wrapper\AbstractWrapper;
  * @author Gediminas Morkevicius <gediminas.morkevicius@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TranslationSlugHandler implements SlugHandlerInterface
+final class TranslationSlugHandler implements SlugHandlerInterface
 {
     const SEPARATOR = '/';
 

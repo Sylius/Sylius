@@ -51,14 +51,14 @@ class Channel implements ChannelInterface
      */
     protected $color;
 
-    /**
-     * Constructor
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
     }
 
+    /**
+     * @return string
+     */
     public function __toString()
     {
         return $this->name;

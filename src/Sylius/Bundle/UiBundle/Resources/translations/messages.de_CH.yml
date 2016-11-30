@@ -14,18 +14,16 @@ sylius:
         code: Code
         company: Firma
         content: Inhalt
+        country: Land
         coupon: Gutschein
-        default_currency: Standardwährung
         email: E-Mail
         enabled: Aktiviert
         first_name: Vorname
         id: ID
         image: Bild
-        label: Bezeichnung
         members: Mitglieder
         message: Nachricht
         name: Name
-        "no": false
         number: Nummer
         payment_state: Zahlungsstatus
         phone_number: Telefonnummber
@@ -41,8 +39,8 @@ sylius:
         tax_category: Steuerkategorie
         title: Titel
         topic: Betreff
+        type: Typ
         unit_price: Stückpreis
         variant: Variante
         variant_selection_method: Varianten
-        "yes": true
         zone: Zone

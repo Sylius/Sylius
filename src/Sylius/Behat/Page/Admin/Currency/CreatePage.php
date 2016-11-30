@@ -22,7 +22,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use ChoosesName;
 
     /**
-     * @param float $exchangeRate
+     * {@inheritdoc}
      */
     public function specifyExchangeRate($exchangeRate)
     {

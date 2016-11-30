@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: 单价
-                quantity: 数量
-                variant: 变量
-            customer_group: 客户组
         block:
             body: 正文
             id: ID
@@ -22,8 +16,9 @@ sylius:
             shipping_method: 配送方式
         promotion:
             channels: 频道
-        coupon:
-            per_customer_usage_limit: 每个客户使用限制
+        promotion_action:
+            add_product_configuration:
+                product: 产品
         group:
             name: 名称
             roles: 角色
@@ -31,7 +26,7 @@ sylius:
             taxonomies: 分类
             locale_default: 默认区域
             locales: 区域设置
-            currency_default: 默认货币：
+            currency_base: 基础货币
             currencies: 货币
             shipping_methods: 发货方式
             payment_methods: 支付方式
@@ -39,6 +34,7 @@ sylius:
             theme: 主题
             hostname: 主机名
         image:
+            code: 代码
             file: 图像
         locale:
             code: 代码
@@ -56,6 +52,7 @@ sylius:
             id: ID
             title: 标题
         product:
+            images: 图像
             restricted_zone: 限制的区
             shipping_category: 送货类别
             short_description: 简短说明：
@@ -68,20 +65,6 @@ sylius:
             code: 代码
         product_variant:
             tax_category: 税类别
-        settings:
-            general:
-                currency: 默认货币：
-                locale: 语言
-                meta_description: META描述
-                meta_keywords: Meta关键字：
-                title: 页标题
-                tracking_code:
-                    Tracking code (for example: Google Analytics 代码
-            taxation:
-                default_tax_zone: 默认税区
-                default_tax_calculation_strategy: 默认税计算策略
-            security:
-                enabled: 启用？
         shipment_filter:
             created_at_from: 从
             created_at_to: 到
@@ -97,7 +80,9 @@ sylius:
         shipping_method:
             zone: 区域
         taxon:
+            code: 代码
             file: 选择图像
+            images: 图像
         taxonomy:
             file: 选择图像
         user:
@@ -115,10 +100,8 @@ sylius:
         variant:
             depth: 深度
             height: 高度
-            images: 图像
             on_hand: 当前货架
             price: 价格
-            original_price: 原价
             sku: SKU
             weight: 重量
             width: 宽度
@@ -134,14 +117,64 @@ sylius:
         product_association_type:
             name: 名称
         promotion_rule:
-            contains_taxon:
-                taxon: 分类
-                count: 计数
-            taxon:
-                taxons: 分类
             total_of_items_from_taxon:
                 taxon: 分类
-                amount: 金额
+        payment_method:
+            channels: 频道
+    installer:
+        extensions:
+            header: 扩展组件
+            accelerator:
+                header: 加速器
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: 安装和启用 %extension%扩展。
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: 多字节字符串
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP XML
+            session_start: 'Session:'
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: 文件系统
+            cache:
+                header: 缓存
+            exists: 存在
+            logs:
+                header: 日志
+            not_exists: 不存在
+            not_writable: 不可写
+            parameters:
+                header: parameters.yml
+            vendors: 供应商
+            writable: 可写
+        settings:
+            header: PHP 版本和设置
+            any: 任何
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: 非弃用
+            "off": false
+            "on": true
+            register_globals: 注册的全局变量
+            session:
+                auto_start: session.auto_start
+            short_open_tag: 短的开放标签
+            timezone: 时区
+            timezone_deprecated:
+                header: 过时的时区
+                help: '时区%timezone%已被否决。修复您的 php.ini 文件 （不推荐使用的时区 http://php.net/manual/en/timezones.others.php 的列表）。'
+            version: PHP 版本
     email:
         order_confirmation:
             name: 订单确认

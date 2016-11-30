@@ -9,19 +9,21 @@ sylius_grid:
                 options:
                     class: "%sylius.model.order.class%"
                     repository:
-                        method: createByCustomerQueryBuilder
-                        arguments: [expr:service('sylius.context.customer').getCustomer()]
+                        method: createByCustomerIdQueryBuilder
+                        arguments: [expr:service('sylius.context.customer').getCustomer().getId()]
             sorting:
-                completedAt: desc
+                checkoutCompletedAt: desc
             fields:
                 number:
                     type: twig
                     label: sylius.ui.number
+                    sortable: ~
                     options:
                         template: SyliusShopBundle:Account/Order/Grid/Field:number.html.twig
-                completedAt:
+                checkoutCompletedAt:
                     type: datetime
                     label: sylius.ui.date
+                    sortable: ~
                     options:
                         format: m/d/Y
                 shippingAddress:
@@ -33,14 +35,22 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.total
                     path: .
+                    sortable: total
                     options:
                         template: SyliusShopBundle:Account/Order/Grid/Field:total.html.twig
                 state:
                     type: twig
                     label: sylius.ui.state
+                    sortable: ~
                     options:
                         template: SyliusShopBundle:Account/Order/Grid/Field:state.html.twig
             actions:
                 item:
                     show:
-                        type: show_order
+                        type: show
+                        options:
+                            link:
+                                parameters:
+                                    number: resource.number
+                    pay:
+                        type: pay_for_order

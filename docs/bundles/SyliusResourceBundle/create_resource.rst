@@ -90,7 +90,7 @@ or use directly a class.
 Passing Custom Options to Form
 ------------------------------
 
-What happend when you need pass some options to the form?.
+What happens when you need pass some options to the form?.
 Well, there's a configuration for that!
 
 Below you can see the usage for specifying a custom options, in this case, ``validation_groups``, but you can pass any option accepted by the form.

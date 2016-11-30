@@ -10,5 +10,5 @@ sylius:
             category: Categoría
             name: Nombre
             amount: Cantidad
-            included_in_price: ¿Incluido en el precio?
+            included_in_price: '¿Incluido en el precio?'
             calculator: Calculadora

@@ -19,13 +19,13 @@
     </parameters>
 
     <services>
-        <service id="sylius.behat.page.admin.promotion.create" class="%sylius.behat.page.admin.promotion.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.promotion.create" class="%sylius.behat.page.admin.promotion.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">promotion</argument>
         </service>
-        <service id="sylius.behat.page.admin.promotion.update" class="%sylius.behat.page.admin.promotion.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.promotion.update" class="%sylius.behat.page.admin.promotion.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">promotion</argument>
         </service>
-        <service id="sylius.behat.page.admin.promotion.index" class="%sylius.behat.page.admin.promotion.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.promotion.index" class="%sylius.behat.page.admin.promotion.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">promotion</argument>
         </service>
     </services>

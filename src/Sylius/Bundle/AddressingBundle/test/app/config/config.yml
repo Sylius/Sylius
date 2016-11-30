@@ -1,0 +1,43 @@
+imports:
+    - { resource: "@SyliusAddressingBundle/test/app/config/parameters.yml" }
+
+framework:
+    assets: false
+    translator: { fallbacks: ["%locale%"] }
+    secret: "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+    form: ~
+    csrf_protection: true
+    templating:
+        engines: ['twig']
+    default_locale: "%locale%"
+    session:
+        handler_id: ~
+    http_method_override: true
+    test: ~
+    session:
+        storage_id: session.storage.mock_file
+
+twig:
+    debug: "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+doctrine:
+    dbal:
+        driver: "%database_driver%"
+        path: "%database_path%"
+        charset: UTF8
+    orm:
+        entity_managers:
+            default:
+                auto_mapping: true
+
+fos_rest:
+    view:
+        formats:
+            json: true
+        empty_content: 204
+    format_listener:
+        rules:
+            - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: true }

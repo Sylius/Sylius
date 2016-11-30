@@ -20,10 +20,8 @@ use Sylius\Component\Mailer\Renderer\RenderedEmail;
 interface AdapterInterface
 {
     /**
-     * Render an e-mail.
-     *
      * @param EmailInterface $email
-     * @param array          $data
+     * @param array $data
      *
      * @return RenderedEmail
      */

@@ -17,7 +17,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\ThemeConfiguration;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
+final class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 

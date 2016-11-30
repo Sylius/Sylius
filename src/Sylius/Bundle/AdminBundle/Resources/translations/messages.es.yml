@@ -6,11 +6,12 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Tipos de asociación
                     attributes: Atributos
                     header: Catálogo
                     options: Opciones de producto
                     products: Productos
-                    taxons: Taxonomías
+                    taxons: Taxones
                 configuration:
                     admin_users: Administradores
                     channels: Canales
@@ -25,14 +26,12 @@ sylius:
                     zones: Zonas
                 marketing:
                     header: Marketing
+                    product_reviews: Reseñas de producto
                     promotions: Promociones
                 customers:
                     customers: Clientes
+                    groups: Grupos
                     header: Cliente
                 sales:
                     header: Ventas
                     orders: Pedidos
-                content:
-                    header: Contenido
-                    static_contents: Contenidos estáticos
-                    routes: Rutas

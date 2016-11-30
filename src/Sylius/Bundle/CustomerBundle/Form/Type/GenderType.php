@@ -13,12 +13,13 @@ namespace Sylius\Bundle\CustomerBundle\Form\Type;
 
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class GenderType extends AbstractType
+final class GenderType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -27,9 +28,9 @@ class GenderType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => [
-                CustomerInterface::UNKNOWN_GENDER => 'sylius.gender.unknown',
-                CustomerInterface::MALE_GENDER => 'sylius.gender.male',
-                CustomerInterface::FEMALE_GENDER => 'sylius.gender.female',
+                'sylius.gender.unknown' => CustomerInterface::UNKNOWN_GENDER,
+                'sylius.gender.male' => CustomerInterface::MALE_GENDER,
+                'sylius.gender.female' => CustomerInterface::FEMALE_GENDER,
             ],
         ]);
     }
@@ -39,13 +40,13 @@ class GenderType extends AbstractType
      */
     public function getParent()
     {
-        return 'choice';
+        return ChoiceType::class;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_gender';
     }

@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusAddressingExtension extends AbstractResourceExtension
+final class SyliusAddressingExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -32,64 +32,10 @@ class SyliusAddressingExtension extends AbstractResourceExtension
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
-
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-            'twig.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $container->setParameter('sylius.scope.zone', $config['scopes']);
-
-        $container
-            ->getDefinition('sylius.form.type.province_choice')
-            ->setArguments([
-                new Reference('sylius.repository.province'),
-            ])
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.province_code_choice')
-            ->setArguments([
-                new Reference('sylius.repository.province'),
-            ])
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.country_choice')
-            ->setArguments([
-                new Reference('sylius.repository.country'),
-            ])
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.country_code_choice')
-            ->setArguments([
-                new Reference('sylius.repository.country'),
-            ])
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.zone_code_choice')
-            ->setArguments([
-                new Reference('sylius.repository.zone'),
-            ])
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.address')
-            ->addArgument(new Reference('sylius.form.listener.address'))
-        ;
-
-        $container
-            ->getDefinition('sylius.form.type.zone')
-            ->addArgument(new Parameter('sylius.scope.zone'))
-        ;
     }
 }

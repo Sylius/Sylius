@@ -18,8 +18,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Abstract resource bundle.
- *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */

@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface
 use Symfony\Component\Finder\Finder;
 
 /**
- * @mixin TranslationFilesFinder
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TranslationFilesFinderSpec extends ObjectBehavior
@@ -31,7 +29,7 @@ final class TranslationFilesFinderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder');
+        $this->shouldHaveType(TranslationFilesFinder::class);
     }
 
     function it_implements_translation_resource_finder_interface()

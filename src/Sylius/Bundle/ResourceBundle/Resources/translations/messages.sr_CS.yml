@@ -4,4 +4,5 @@
 sylius:
     form:
         collection:
+            add: Dodaj
             delete: Obrisati

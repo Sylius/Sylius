@@ -74,7 +74,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Given I want to create a new zone consisting of :memberType
+     * @When I want to create a new zone consisting of :memberType
      */
     public function iWantToCreateANewZoneWithMembers($memberType)
     {
@@ -82,7 +82,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Given I want to see all zones in store
+     * @When I want to see all zones in store
      */
     public function iWantToSeeAllZonesInStore()
     {
@@ -90,7 +90,7 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Given /^I want to modify the (zone named "[^"]+")$/
+     * @When /^I want to modify the (zone named "[^"]+")$/
      */
     public function iWantToModifyAZoneNamed(ZoneInterface $zone)
     {
@@ -331,8 +331,8 @@ final class ManagingZonesContext implements Context
     {
         $resourcesOnPage = $this->indexPage->countItems();
 
-        Assert::eq(
-            $number,
+        Assert::same(
+            (int) $number,
             $resourcesOnPage,
             sprintf('On list should be %d zones but get %d', $number, $resourcesOnPage)
         );

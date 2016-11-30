@@ -12,5 +12,5 @@ sylius:
             mismatch: As senhas não são idênticas
             wrong_current: Senha fornecida é diferente do atual.
         password:
-            min: 'Senha deve ter pelo menos {{ limit }} caracteres.'
-            max: 'Senha não deve ter mais de {{ limit }} caracteres.'
+            min: Senha deve ter pelo menos {{ limit }} caracteres.
+            max: Senha não deve ter mais de {{ limit }} caracteres.

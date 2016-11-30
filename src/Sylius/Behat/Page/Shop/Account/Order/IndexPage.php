@@ -14,6 +14,7 @@ namespace Sylius\Behat\Page\Shop\Account\Order;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -59,6 +60,11 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         return $this->tableAccessor->countTableBodyRows($this->getElement('customer_orders'));
     }
 
+    public function openLastOrderPage()
+    {
+        $this->getElement('last_order')->click();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -78,12 +84,26 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function isItPossibleToChangePaymentMethodForOrder(OrderInterface $order)
+    {
+        $row = $this->tableAccessor->getRowWithFields(
+            $this->getElement('customer_orders'),
+            ['number' => $order->getNumber()]
+        );
+
+        return $row->hasLink('Change payment method');
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'customer_orders' => '#sylius-customer-orders',
+            'last_order' => '#sylius-customer-orders tbody tr:last-child a:contains("Show")',
         ]);
     }
 }

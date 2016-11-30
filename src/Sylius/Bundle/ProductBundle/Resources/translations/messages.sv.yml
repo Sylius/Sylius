@@ -19,3 +19,11 @@ sylius:
         association:
             type: Associationstyp
             product: Tillhörande produkt
+        variant:
+            name: Namn
+        option:
+            name: Namn
+            values: Möjliga värden
+        option_value:
+            add_value: Lägg till värde
+            value: Värde

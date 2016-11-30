@@ -9,8 +9,6 @@
  * file that was distributed with this source code.
  */
 
-use Composer\Autoload\ClassLoader;
-
 $loader = require __DIR__.'/../../../vendor/autoload.php';
 
 require __DIR__.'/AppKernel.php';

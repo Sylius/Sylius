@@ -32,6 +32,11 @@ class Action
     private $label;
 
     /**
+     * @var string
+     */
+    private $icon;
+
+    /**
      * @var array
      */
     private $options = [];
@@ -44,20 +49,17 @@ class Action
     {
         $this->name = $name;
         $this->type = $type;
-        $this->label = $name;
     }
 
     /**
      * @param string $name
      * @param string $type
      *
-     * @return Action
+     * @return self
      */
     public static function fromNameAndType($name, $type)
     {
-        $field = new Action($name, $type);
-
-        return $field;
+        return new self($name, $type);
     }
 
     /**
@@ -90,6 +92,22 @@ class Action
     public function setLabel($label)
     {
         $this->label = $label;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon()
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @param string $icon
+     */
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
     }
 
     /**

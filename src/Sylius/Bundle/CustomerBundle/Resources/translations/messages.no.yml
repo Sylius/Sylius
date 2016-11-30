@@ -3,16 +3,15 @@
 
 sylius:
     form:
-        group:
-            name: Navn
-            roles: Roller
         customer:
             first_name: Fornavn
-            groups: Grupper
             last_name: Etternavn
             email: E-post
             phone_number: Telefonnummer
             billing_address: Fakturaadresse
             different_billing_address: Bruk annen adresse for fakturering?
+        customer_group:
+            name: Navn
+            roles: Roller
     gender:
         unknown: Ukjent

@@ -44,4 +44,19 @@ interface SelectPaymentPageInterface extends SymfonyPageInterface
     public function changeShippingMethodByStepLabel();
 
     public function changeAddressByStepLabel();
+
+    /**
+     * @return bool
+     */
+    public function hasNoAvailablePaymentMethodsWarning();
+
+    /**
+     * @return bool
+     */
+    public function isNextStepButtonUnavailable();
+
+    /**
+     * @return string[]
+     */
+    public function getPaymentMethods();
 }

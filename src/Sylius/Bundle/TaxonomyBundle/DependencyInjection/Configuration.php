@@ -29,14 +29,9 @@ use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This class contains the configuration information for the bundle.
- *
- * This information is solely responsible for how the different configuration
- * sections are normalized, and merged.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -50,7 +45,8 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-            ->end();
+            ->end()
+        ;
 
         $this->addResourcesSection($rootNode);
 
@@ -79,36 +75,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
-                                        ->arrayNode('form')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->scalarNode('default')->defaultValue(TaxonType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('from_identifier')->defaultValue(ResourceFromIdentifierType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('to_identifier')->defaultValue(ResourceToIdentifierType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('to_hidden_identifier')->defaultValue(ResourceToHiddenIdentifierType::class)->cannotBeEmpty()->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('validation_groups')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                        ->end()
-                                        ->arrayNode('from_identifier')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                        ->end()
-                                            ->arrayNode('to_identifier')
-                                            ->prototype('scalar')->end()
-                                        ->defaultValue(['sylius'])
-                                        ->end()
-                                            ->arrayNode('to_hidden_identifier')
-                                            ->prototype('scalar')->end()
-                                        ->defaultValue(['sylius'])
-                                        ->end()
+                                        ->scalarNode('form')->defaultValue(TaxonType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
                                 ->arrayNode('translation')
@@ -123,21 +90,7 @@ class Configuration implements ConfigurationInterface
                                                 ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('repository')->cannotBeEmpty()->end()
                                                 ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                                ->arrayNode('form')
-                                                    ->addDefaultsIfNotSet()
-                                                    ->children()
-                                                        ->scalarNode('default')->defaultValue(TaxonTranslationType::class)->cannotBeEmpty()->end()
-                                                    ->end()
-                                                ->end()
-                                            ->end()
-                                        ->end()
-                                        ->arrayNode('validation_groups')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->arrayNode('default')
-                                                    ->prototype('scalar')->end()
-                                                    ->defaultValue(['sylius'])
-                                                ->end()
+                                                ->scalarNode('form')->defaultValue(TaxonTranslationType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

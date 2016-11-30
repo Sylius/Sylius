@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_managing_customer_groups:
+            contexts_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.customer_group
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.admin_security
+                - sylius.behat.context.setup.customer_group
+
+                - sylius.behat.context.ui.admin.managing_customer_groups
+                - sylius.behat.context.ui.admin.notification
+            filters:
+                tags: "@managing_customer_groups && @ui"

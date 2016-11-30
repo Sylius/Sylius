@@ -13,12 +13,11 @@ namespace Sylius\Component\Grid\Filter;
 
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Filtering\FilterInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BooleanFilter implements FilterInterface
+final class BooleanFilter implements FilterInterface
 {
     const TRUE  = 'true';
     const FALSE = 'false';

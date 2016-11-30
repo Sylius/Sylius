@@ -4,6 +4,6 @@
 sylius:
     form:
         channel:
-            name: Імя
             description: Апісанне
             enabled: Уключана
+            name: Імя

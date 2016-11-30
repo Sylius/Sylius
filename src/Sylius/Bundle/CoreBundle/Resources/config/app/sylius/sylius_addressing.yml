@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_addressing:
+    scopes:
+        shipping: shipping
+        content: content
+        price: price
+    resources:
+        address:
+            classes:
+                model: Sylius\Component\Core\Model\Address
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\AddressRepository

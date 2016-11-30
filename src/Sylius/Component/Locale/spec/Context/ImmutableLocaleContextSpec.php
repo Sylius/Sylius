@@ -16,8 +16,6 @@ use Sylius\Component\Locale\Context\ImmutableLocaleContext;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
- * @mixin ImmutableLocaleContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ImmutableLocaleContextSpec extends ObjectBehavior
@@ -32,7 +30,7 @@ final class ImmutableLocaleContextSpec extends ObjectBehavior
         $this->shouldHaveType(ImmutableLocaleContext::class);
     }
 
-    function it_is_Sylius_locale_context()
+    function it_is_a_locale_context()
     {
         $this->shouldImplement(LocaleContextInterface::class);
     }

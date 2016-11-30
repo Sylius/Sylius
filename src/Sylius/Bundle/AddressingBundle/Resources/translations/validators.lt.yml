@@ -9,6 +9,7 @@ sylius:
             not_blank: Įveskite miestą.
         country:
             not_blank: Pasirinkite šalį.
+            disabled: Pasirinkta šalis yra išjungta. Prašome pasirinkti kitą.
         first_name:
             max_length: Vardas neturėtų būti ilgesnis nei 255 simboliai|Vardas neturėtų būti ilgesnis nei 255 simboliai.
             min_length: Vardas turi būti ne trumpesnis nei 2 simbolių ilgio|Vardas turi būti ne trumpesnis nei 2 simbolių ilgio.
@@ -28,14 +29,32 @@ sylius:
             min_length: Gatvės pavadinimas turi būti bent 2 simbolių ilgio|Gatvės pavadinimas turi būti bent 2 simbolių ilgio.
             not_blank: Įveskite gatvę.
         not_shippable: Šis adresas nėra tinkamas pristatymui.
+    country:
+        code:
+            not_blank: Įveskite šalies ISO kodą.
+            unique: Šalies ISO kodas turi būti unikalus.
     province:
+        code:
+            min_length: Provincijos kodas turi būti bent 5 simboliai | Provincijos kodas turi būti ne mažiau kaip 5 simboliai.
+            not_blank: Prašome įvesti provincijos kodą.
+            regex: Provincijos kodas turėtų būti formato XX-XX (pvz., JAV-FL).
+            unique: Provincijos kodas turi būti unikalus.
         name:
             max_length: Provincijos pavadinimas neturi būti ilgesnis negu 255 simboliai|Provincijos pavadinimas neturi būti ilgesnis negu 255 simboliai.
             min_length: Provincijos pavadinimas turi būti ne mažiau kaip 2 simbolių ilgio|Provincijos pavadinimas turi būti ne mažiau kaip 2 simbolių ilgio.
             not_blank: Įveskite provincijos pavadinimą.
+            unique: Provincijos pavadinimas turi būti unikalus.
     zone:
+        code:
+            not_blank: Prašome įvesti zonos kodą.
+            unique: Zonos kodas turi būti unikalus.
         members:
-            min_count: 'Pridėkite bent {{ limit }} zonos valstybes.'
+            min_count: Pridėkite bent {{ limit }} zonos valstybes.
         name:
             max_length: Zonos pavadinimas neturi būti ilgesnis negu 255 simboliai|Zonos pavadinimas neturi būti ilgesnis negu 255 simboliai.
+            min_length: Zonos pavadinimas turi būti mažiausiai iš 2 simbolių | Zonos pavadinimas turi būti mažiausiai 2 simbolių ilgio.
             not_blank: Įveskite zonos pavadinimą.
+    zone_member:
+        code:
+            not_blank: Prašome pasirinkti zonos narį.
+        unique: Pasirinktas zonos narys jau yra šioje zonoje.

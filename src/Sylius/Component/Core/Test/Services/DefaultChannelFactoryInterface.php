@@ -19,8 +19,9 @@ interface DefaultChannelFactoryInterface
     /**
      * @param string|null $code
      * @param string|null $name
+     * @param string|null $currencyCode
      *
      * @return array
      */
-    public function create($code = null, $name = null);
+    public function create($code = null, $name = null, $currencyCode = null);
 }

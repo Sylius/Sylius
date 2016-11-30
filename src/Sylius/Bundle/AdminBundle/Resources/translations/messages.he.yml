@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        admin:
+            main:
+                catalog:
+                    attributes: מאפיינים
+                    options: אפשרויות

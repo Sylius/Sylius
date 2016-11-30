@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
@@ -23,8 +23,6 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
- * @mixin ShippingChargesProcessor
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ShippingChargesProcessorSpec extends ObjectBehavior
@@ -52,7 +50,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_doesnt_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order)
+    function it_does_not_apply_any_shipping_charge_if_order_has_no_shipments(OrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->shouldBeCalled();
         $order->getShipments()->willReturn([]);

@@ -16,7 +16,6 @@ use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameProvider;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
-use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 
@@ -50,8 +49,11 @@ final class UsernameProviderSpec extends ObjectBehavior
         $this->supportsClass(User::class)->shouldReturn(true);
     }
 
-    function it_loads_user_by_user_name($userRepository, $canonicalizer, User $user)
-    {
+    function it_loads_user_by_user_name(
+        UserRepositoryInterface $userRepository,
+        CanonicalizerInterface $canonicalizer,
+        User $user
+    ) {
         $canonicalizer->canonicalize('testUser')->willReturn('testuser');
 
         $userRepository->findOneBy(['usernameCanonical' => 'testuser'])->willReturn($user);
@@ -59,7 +61,7 @@ final class UsernameProviderSpec extends ObjectBehavior
         $this->loadUserByUsername('testUser')->shouldReturn($user);
     }
 
-    function it_updates_user_by_user_name($userRepository, User $user)
+    function it_updates_user_by_user_name(UserRepositoryInterface $userRepository, User $user)
     {
         $userRepository->find(1)->willReturn($user);
 

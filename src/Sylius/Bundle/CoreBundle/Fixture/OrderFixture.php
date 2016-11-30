@@ -17,6 +17,8 @@ use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\Repository\PaymentMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -26,7 +28,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class OrderFixture extends AbstractFixture
+class OrderFixture extends AbstractFixture
 {
     /**
      * @var FactoryInterface
@@ -69,6 +71,16 @@ final class OrderFixture extends AbstractFixture
     private $countryRepository;
 
     /**
+     * @var PaymentMethodRepositoryInterface
+     */
+    private $paymentMethodRepository;
+
+    /**
+     * @var ShippingMethodRepositoryInterface
+     */
+    private $shippingMethodRepository;
+
+    /**
      * @var FactoryInterface
      */
     private $addressFactory;
@@ -92,6 +104,8 @@ final class OrderFixture extends AbstractFixture
      * @param RepositoryInterface $customerRepository
      * @param RepositoryInterface $productRepository
      * @param RepositoryInterface $countryRepository
+     * @param PaymentMethodRepositoryInterface $paymentMethodRepository
+     * @param ShippingMethodRepositoryInterface $shippingMethodRepository
      * @param FactoryInterface $addressFactory
      * @param StateMachineFactoryInterface $stateMachineFactory
      */
@@ -104,6 +118,8 @@ final class OrderFixture extends AbstractFixture
         RepositoryInterface $customerRepository,
         RepositoryInterface $productRepository,
         RepositoryInterface $countryRepository,
+        PaymentMethodRepositoryInterface $paymentMethodRepository,
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
         FactoryInterface $addressFactory,
         StateMachineFactoryInterface $stateMachineFactory
     ) {
@@ -115,6 +131,8 @@ final class OrderFixture extends AbstractFixture
         $this->customerRepository = $customerRepository;
         $this->productRepository = $productRepository;
         $this->countryRepository = $countryRepository;
+        $this->paymentMethodRepository = $paymentMethodRepository;
+        $this->shippingMethodRepository = $shippingMethodRepository;
         $this->addressFactory = $addressFactory;
         $this->stateMachineFactory = $stateMachineFactory;
 
@@ -135,12 +153,14 @@ final class OrderFixture extends AbstractFixture
             $customer = $this->faker->randomElement($customers);
             $countryCode = $this->faker->randomElement($countries)->getCode();
 
-            $currencyCode = $this->faker->randomElement($channel->getCurrencies()->toArray())->getCode();
+            $currencyCode = $channel->getBaseCurrency()->getCode();
+            $localeCode = $this->faker->randomElement($channel->getLocales()->toArray())->getCode();
 
             $order = $this->orderFactory->createNew();
             $order->setChannel($channel);
             $order->setCustomer($customer);
             $order->setCurrencyCode($currencyCode);
+            $order->setLocaleCode($localeCode);
 
             $this->generateItems($order);
 
@@ -215,7 +235,7 @@ final class OrderFixture extends AbstractFixture
         $address->setPostcode($this->faker->postcode);
 
         $order->setShippingAddress($address);
-        $order->setBillingAddress($address);
+        $order->setBillingAddress(clone $address);
 
         $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
     }
@@ -225,9 +245,11 @@ final class OrderFixture extends AbstractFixture
      */
     private function selectShipping(OrderInterface $order)
     {
-        $shippingMethod = $this->faker->randomElement($order->getChannel()->getShippingMethods()->toArray());
-
-        Assert::notNull($shippingMethod);
+        $shippingMethod = $this
+            ->faker
+            ->randomElement($this->shippingMethodRepository->findEnabledForChannel($order->getChannel()))
+        ;
+        Assert::notNull($shippingMethod, 'Shipping method should not be null.');
 
         foreach ($order->getShipments() as $shipment) {
             $shipment->setMethod($shippingMethod);
@@ -241,9 +263,11 @@ final class OrderFixture extends AbstractFixture
      */
     private function selectPayment(OrderInterface $order)
     {
-        $paymentMethod = $this->faker->randomElement($order->getChannel()->getPaymentMethods()->toArray());
-
-        Assert::notNull($paymentMethod);
+        $paymentMethod = $this
+            ->faker
+            ->randomElement($this->paymentMethodRepository->findEnabledForChannel($order->getChannel()))
+        ;
+        Assert::notNull($paymentMethod, 'Payment method should not be null.');
 
         foreach ($order->getPayments() as $payment) {
             $payment->setMethod($paymentMethod);

@@ -25,8 +25,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin DefaultUnitedStatesChannelFactory
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
@@ -58,7 +56,6 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
             $localeFactory,
             $zoneFactory,
             $zoneMemberFactory,
-            'USD',
             'en_US'
         );
     }
@@ -68,12 +65,12 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         $this->shouldHaveType(DefaultUnitedStatesChannelFactory::class);
     }
 
-    function it_implements_default_channel_factory_interface()
+    function it_implements_a_default_channel_factory_interface()
     {
         $this->shouldImplement(DefaultChannelFactoryInterface::class);
     }
 
-    function it_creates_default_united_states_channel_with_country_zone_and_usd_as_default_currency(
+    function it_creates_a_default_united_states_channel_with_country_zone_and_usd_as_base_currency(
         RepositoryInterface $channelRepository,
         RepositoryInterface $countryRepository,
         RepositoryInterface $currencyRepository,
@@ -116,9 +113,8 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
 
         $currencyFactory->createNew()->willReturn($currency);
         $currency->setCode('USD')->shouldBeCalled();
-        $currency->setExchangeRate(1.00)->shouldBeCalled();
 
-        $channel->setDefaultCurrency($currency)->shouldBeCalled();
+        $channel->setBaseCurrency($currency)->shouldBeCalled();
         $channel->addCurrency($currency)->shouldBeCalled();
         $channel->setDefaultLocale($locale)->shouldBeCalled();
         $channel->addLocale($locale)->shouldBeCalled();

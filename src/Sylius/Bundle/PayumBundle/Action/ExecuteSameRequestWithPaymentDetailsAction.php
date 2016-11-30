@@ -17,7 +17,7 @@ use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\Generic;
 use Sylius\Component\Payment\Model\PaymentInterface;
 
-class ExecuteSameRequestWithPaymentDetailsAction extends GatewayAwareAction
+final class ExecuteSameRequestWithPaymentDetailsAction extends GatewayAwareAction
 {
     /**
      * {@inheritdoc}

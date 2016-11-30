@@ -12,14 +12,14 @@
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Credit Card Form Type.
- *
  * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
-class CreditCardType extends AbstractResourceType
+final class CreditCardType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -27,26 +27,28 @@ class CreditCardType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('type', 'choice', [
+            ->add('type', ChoiceType::class, [
                 'label' => 'sylius.form.credit_card.type',
                 'expanded' => true,
               ])
-              ->add('cardholderName', 'text', [
+              ->add('cardholderName', TextType::class, [
                 'label' => 'sylius.form.credit_card.cardholder_name',
               ])
-              ->add('number', 'text', [
+              ->add('number', TextType::class, [
                   'label' => 'sylius.form.credit_card.number',
               ])
-              ->add('securityCode', 'text', [
+              ->add('securityCode', TextType::class, [
                   'label' => 'sylius.form.credit_card.security_code',
               ])
-              ->add('expiryMonth', 'choice', [
-                  'label' => 'sylius.form.credit_card.expiry_month',
+              ->add('expiryMonth', ChoiceType::class, [
                   'choices' => $this->getMonthChoices(),
+                  'choice_translation_domain' => false,
+                  'label' => 'sylius.form.credit_card.expiry_month',
               ])
-              ->add('expiryYear', 'choice', [
-                  'label' => 'sylius.form.credit_card.expiry_year',
+              ->add('expiryYear', ChoiceType::class, [
                   'choices' => $this->getViableYears(),
+                  'choice_translation_domain' => false,
+                  'label' => 'sylius.form.credit_card.expiry_year',
               ])
         ;
     }
@@ -54,7 +56,7 @@ class CreditCardType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_credit_card';
     }
@@ -77,8 +79,6 @@ class CreditCardType extends AbstractResourceType
     }
 
     /**
-     * Get months to add as choices in expiryMonth.
-     *
      * @return array
      */
     private function getMonthChoices()
@@ -86,7 +86,7 @@ class CreditCardType extends AbstractResourceType
         $monthChoices = [];
 
         foreach (range(1, 12) as $month) {
-            $monthChoices[$month] = str_pad($month, 2, 0, STR_PAD_LEFT);
+            $monthChoices[str_pad($month, 2, 0, STR_PAD_LEFT)] = $month;
         }
 
         return $monthChoices;

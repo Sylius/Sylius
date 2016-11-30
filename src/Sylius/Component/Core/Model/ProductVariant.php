@@ -13,10 +13,9 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Pricing\Calculators;
-use Sylius\Component\Product\Model\Variant as BaseVariant;
+use Sylius\Component\Product\Model\ProductVariant as BaseVariant;
+use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -24,26 +23,6 @@ use Webmozart\Assert\Assert;
  */
 class ProductVariant extends BaseVariant implements ProductVariantInterface
 {
-    /**
-     * @var int
-     */
-    protected $price;
-
-    /**
-     * @var int
-     */
-    protected $originalPrice;
-
-    /**
-     * @var string
-     */
-    protected $pricingCalculator = Calculators::STANDARD;
-
-    /**
-     * @var array
-     */
-    protected $pricingConfiguration = [];
-
     /**
      * @var int
      */
@@ -55,19 +34,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $onHand = 0;
 
     /**
-     * @var int
-     */
-    protected $sold = 0;
-
-    /**
      * @var bool
      */
     protected $tracked = false;
-
-    /**
-     * @var Collection|ProductVariantImageInterface[]
-     */
-    protected $images;
 
     /**
      * @var float
@@ -94,11 +63,21 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     protected $taxCategory;
 
+    /**
+     * @var ShippingCategoryInterface
+     */
+    protected $shippingCategory;
+
+    /**
+     * @var Collection
+     */
+    protected $channelPricings;
+
     public function __construct()
     {
         parent::__construct();
 
-        $this->images = new ArrayCollection();
+        $this->channelPricings = new ArrayCollection();
     }
 
     /**
@@ -108,10 +87,10 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     {
         $string = $this->getProduct()->getName();
 
-        if (!$this->getOptions()->isEmpty()) {
+        if (!$this->getOptionValues()->isEmpty()) {
             $string .= '(';
 
-            foreach ($this->getOptions() as $option) {
+            foreach ($this->getOptionValues() as $option) {
                 $string .= $option->getOption()->getName().': '.$option->getValue().', ';
             }
 
@@ -119,94 +98,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
         }
 
         return $string;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMetadataClassIdentifier()
-    {
-        return self::METADATA_CLASS_IDENTIFIER;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMetadataIdentifier()
-    {
-        return $this->getMetadataClassIdentifier().'-'.$this->getId();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPrice($price)
-    {
-        if (!is_int($price)) {
-            throw new \InvalidArgumentException('Price must be an integer.');
-        }
-
-        $this->price = $price;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOriginalPrice($originalPrice)
-    {
-        if (null !== $originalPrice && !is_int($originalPrice)) {
-            throw new \InvalidArgumentException('Original price must be an integer.');
-        }
-
-        $this->originalPrice = $originalPrice;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOriginalPrice()
-    {
-        return $this->originalPrice;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPricingCalculator()
-    {
-        return $this->pricingCalculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPricingCalculator($calculator)
-    {
-        $this->pricingCalculator = $calculator;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPricingConfiguration()
-    {
-        return $this->pricingConfiguration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPricingConfiguration(array $configuration)
-    {
-        $this->pricingConfiguration = $configuration;
     }
 
     /**
@@ -252,17 +143,9 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function getSold()
+    public function isTracked()
     {
-        return $this->sold;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSold($sold)
-    {
-        $this->sold = (int) $sold;
+        return $this->tracked;
     }
 
     /**
@@ -278,14 +161,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function isTracked()
-    {
-        return $this->tracked;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getInventoryName()
     {
         return $this->getProduct()->getName();
@@ -296,55 +171,15 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      */
     public function getShippingCategory()
     {
-        return $this->getProduct()->getShippingCategory();
+        return $this->shippingCategory;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasImage(ProductVariantImageInterface $image)
+    public function setShippingCategory(ShippingCategoryInterface $category = null)
     {
-        return $this->images->contains($image);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImages()
-    {
-        return $this->images;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImage()
-    {
-        if ($this->images->isEmpty()) {
-            return null;
-        }
-
-        return $this->images->first();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addImage(ProductVariantImageInterface $image)
-    {
-        if (!$this->hasImage($image)) {
-            $image->setVariant($this);
-            $this->images->add($image);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeImage(ProductVariantImageInterface $image)
-    {
-        $image->setVariant(null);
-        $this->images->removeElement($image);
+        $this->shippingCategory = $category;
     }
 
     /**
@@ -454,14 +289,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function isPriceReduced()
-    {
-        return $this->originalPrice > $this->price;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTaxCategory()
     {
         return $this->taxCategory;
@@ -473,5 +300,65 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setTaxCategory(TaxCategoryInterface $category = null)
     {
         $this->taxCategory = $category;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannelPricings()
+    {
+        return $this->channelPricings;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannelPricingForChannel(ChannelInterface $channel)
+    {
+        foreach ($this->channelPricings as $channelPricing) {
+            if ($channel === $channelPricing->getChannel()) {
+                return $channelPricing;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasChannelPricingForChannel(ChannelInterface $channel)
+    {
+        return null !== $this->getChannelPricingForChannel($channel);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasChannelPricing(ChannelPricingInterface $channelPricing)
+    {
+        return $this->channelPricings->contains($channelPricing);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addChannelPricing(ChannelPricingInterface $channelPricing)
+    {
+        if (!$this->hasChannelPricing($channelPricing)) {
+            $channelPricing->setProductVariant($this);
+            $this->channelPricings->add($channelPricing);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeChannelPricing(ChannelPricingInterface $channelPricing)
+    {
+        if ($this->hasChannelPricing($channelPricing)) {
+            $channelPricing->setProductVariant(null);
+            $this->channelPricings->removeElement($channelPricing);
+        }
     }
 }

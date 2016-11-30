@@ -12,19 +12,20 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckboxAttributeType extends AbstractType
+final class CheckboxAttributeType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function getParent()
     {
-        return 'checkbox';
+        return CheckboxType::class;
     }
 
     /**
@@ -40,7 +41,7 @@ class CheckboxAttributeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_attribute_type_checkbox';
     }

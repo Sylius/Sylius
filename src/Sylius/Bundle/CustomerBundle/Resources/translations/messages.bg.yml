@@ -4,5 +4,13 @@
 sylius:
     form:
         customer:
+            first_name: Собствено име
+            last_name: Фамилно име
             email: Имейл
             phone_number: Телефонен номер
+            gender: Пол
+            birthday: Рожден ден
+    gender:
+        unknown: Неизвестно
+        male: Мъжки
+        female: Женски

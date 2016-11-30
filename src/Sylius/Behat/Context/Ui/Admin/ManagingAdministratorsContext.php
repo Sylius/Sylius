@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Administrator\CreatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -73,6 +74,7 @@ final class ManagingAdministratorsContext implements Context
 
     /**
      * @Given /^I want to edit (this administrator)$/
+     * @Given /^I am editing (my) details$/
      */
     public function iWantToEditThisAdministrator(AdminUserInterface $adminUser)
     {
@@ -119,6 +121,23 @@ final class ManagingAdministratorsContext implements Context
     public function iChangeItsEmailAs($email)
     {
         $this->updatePage->changeEmail($email);
+    }
+
+    /**
+     * @When I specify its locale to :localeCode
+     */
+    public function iSpecifyItsLocaleTo($localeCode)
+    {
+        $this->createPage->specifyLocale($localeCode);
+    }
+
+    /**
+     * @When I set my locale to :localeCode
+     */
+    public function iSetMyLocaleTo($localeCode)
+    {
+        $this->updatePage->changeLocale($localeCode);
+        $this->updatePage->saveChanges();
     }
 
     /**
@@ -208,7 +227,7 @@ final class ManagingAdministratorsContext implements Context
     {
         Assert::same(
             $this->indexPage->countItems(),
-            $number,
+            (int) $number,
             sprintf('There should be %s administrators, but got %s', $number, $this->indexPage->countItems())
         );
     }

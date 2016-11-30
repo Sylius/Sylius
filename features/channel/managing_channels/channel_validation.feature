@@ -26,12 +26,12 @@ Feature: Channel validation
         And channel with code "MOBILE" should not be added
 
     @ui
-    Scenario: Trying to add a new channel without default currency
+    Scenario: Trying to add a new channel without base currency
         Given I want to create a new channel
         When I specify its code as "MOBILE"
-        But I do not choose default currency
+        But I do not choose base currency
         And I try to add it
-        Then I should be notified that default currency is required
+        Then I should be notified that base currency is required
         And channel with code "MOBILE" should not be added
 
     @ui

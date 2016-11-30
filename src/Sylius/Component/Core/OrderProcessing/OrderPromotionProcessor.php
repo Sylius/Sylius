@@ -12,7 +12,10 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -35,8 +38,11 @@ final class OrderPromotionProcessor implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(OrderInterface $order)
+    public function process(BaseOrderInterface $order)
     {
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
+
         $this->promotionProcessor->process($order);
     }
 }

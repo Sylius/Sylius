@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Attribute\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
+use Sylius\Component\Attribute\Factory\AttributeFactory;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -30,7 +31,7 @@ final class AttributeFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Attribute\Factory\AttributeFactory');
+        $this->shouldHaveType(AttributeFactory::class);
     }
 
     function it_implements_attribute_factory_interface()
@@ -48,8 +49,12 @@ final class AttributeFactorySpec extends ObjectBehavior
         ;
     }
 
-    function it_creates_typed_attribute($attributeTypesRegistry, $factory, Attribute $typedAttribute, AttributeTypeInterface $attributeType)
-    {
+    function it_creates_typed_attribute(
+        Attribute $typedAttribute,
+        AttributeTypeInterface $attributeType,
+        FactoryInterface $factory,
+        ServiceRegistryInterface $attributeTypesRegistry
+    ) {
         $factory->createNew()->willReturn($typedAttribute);
 
         $attributeType->getStorageType()->willReturn('datetime');

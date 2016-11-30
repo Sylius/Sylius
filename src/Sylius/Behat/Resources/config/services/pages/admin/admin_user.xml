@@ -5,13 +5,13 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sylius.behat.page.admin.administrator.create" class="Sylius\Behat\Page\Admin\Administrator\CreatePage" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.administrator.create" class="Sylius\Behat\Page\Admin\Administrator\CreatePage" parent="sylius.behat.page.admin.crud.create" public="false">
             <argument type="string">admin_user</argument>
         </service>
-        <service id="sylius.behat.page.admin.administrator.index" class="Sylius\Behat\Page\Admin\Crud\IndexPage" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.administrator.index" class="Sylius\Behat\Page\Admin\Crud\IndexPage" parent="sylius.behat.page.admin.crud.index" public="false">
             <argument type="string">admin_user</argument>
         </service>
-        <service id="sylius.behat.page.admin.administrator.update" class="Sylius\Behat\Page\Admin\Administrator\UpdatePage" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.administrator.update" class="Sylius\Behat\Page\Admin\Administrator\UpdatePage" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">admin_user</argument>
         </service>
     </services>

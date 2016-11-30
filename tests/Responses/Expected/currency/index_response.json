@@ -18,21 +18,15 @@
         "items": [
             {
                 "id": @integer@,
-                "code": "USD",
-                "exchange_rate": 1,
-                "enabled": true
+                "code": "USD"
             },
             {
                 "id": @integer@,
-                "code": "GBP",
-                "exchange_rate": 0.69514,
-                "enabled": false
+                "code": "GBP"
             },
             {
                 "id": @integer@,
-                "code": "EUR",
-                "exchange_rate": 0.89688,
-                "enabled": true
+                "code": "EUR"
             }
         ]
     }

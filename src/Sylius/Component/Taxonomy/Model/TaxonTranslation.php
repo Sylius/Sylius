@@ -36,19 +36,14 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     /**
      * @var string
      */
-    protected $permalink;
-
-    /**
-     * @var string
-     */
     protected $description;
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
 
     /**
@@ -89,22 +84,6 @@ class TaxonTranslation extends AbstractTranslation implements TaxonTranslationIn
     public function setSlug($slug = null)
     {
         $this->slug = $slug;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPermalink()
-    {
-        return $this->permalink;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPermalink($permalink)
-    {
-        $this->permalink = $permalink;
     }
 
     /**

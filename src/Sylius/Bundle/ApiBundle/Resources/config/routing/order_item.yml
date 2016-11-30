@@ -17,8 +17,6 @@ sylius_api_order_item_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.order_item:createAction
-        _sylius:
-            form: sylius_api_order_item
 
 sylius_api_order_item_update:
     path: /{id}
@@ -37,3 +35,4 @@ sylius_api_order_item_delete:
         _sylius:
             criteria:
                 order: $orderId
+            csrf_protection: false

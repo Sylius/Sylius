@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface as BaseTaxonInterface;
 
 /**
@@ -32,14 +31,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     protected $variantSelectionMethod;
 
     /**
-     * @var Collection|BaseTaxonInterface[]
+     * @var Collection|ProductTaxonInterface[]
      */
-    protected $taxons;
-
-    /**
-     * @var ShippingCategoryInterface
-     */
-    protected $shippingCategory;
+    protected $productTaxons;
 
     /**
      * @var ChannelInterface[]|Collection
@@ -61,31 +55,21 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     protected $averageRating = 0;
 
+    /**
+     * @var Collection|ImageInterface[]
+     */
+    protected $images;
+
     public function __construct()
     {
         parent::__construct();
 
-        $this->taxons = new ArrayCollection();
+        $this->productTaxons = new ArrayCollection();
         $this->channels = new ArrayCollection();
         $this->reviews = new ArrayCollection();
+        $this->images = new ArrayCollection();
 
         $this->variantSelectionMethod = self::VARIANT_SELECTION_CHOICE;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMetadataClassIdentifier()
-    {
-        return self::METADATA_CLASS_IDENTIFIER;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getMetadataIdentifier()
-    {
-        return $this->getMetadataClassIdentifier().'-'.$this->getId();
     }
 
     /**
@@ -129,67 +113,48 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getTaxons($rootTaxonCode = null)
+    public function getProductTaxons()
     {
-        if (null !== $rootTaxonCode) {
-            return $this->taxons->filter(function (BaseTaxonInterface $taxon) use ($rootTaxonCode) {
-                return $rootTaxonCode === strtolower($taxon->getRoot()->getCode());
-            });
-        }
-
-        return $this->taxons;
+        return $this->productTaxons;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTaxons(Collection $taxons)
+    public function addProductTaxon(ProductTaxonInterface $productTaxon)
     {
-        $this->taxons = $taxons;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addTaxon(BaseTaxonInterface $taxon)
-    {
-        if (!$this->hasTaxon($taxon)) {
-            $this->taxons->add($taxon);
+        if (!$this->hasProductTaxon($productTaxon)) {
+            $this->productTaxons->add($productTaxon);
+            $productTaxon->setProduct($this);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeTaxon(BaseTaxonInterface $taxon)
+    public function removeProductTaxon(ProductTaxonInterface $productTaxon)
     {
-        if ($this->hasTaxon($taxon)) {
-            $this->taxons->removeElement($taxon);
+        if ($this->hasProductTaxon($productTaxon)) {
+            $this->productTaxons->removeElement($productTaxon);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasTaxon(BaseTaxonInterface $taxon)
+    public function hasProductTaxon(ProductTaxonInterface $productTaxon)
     {
-        return $this->taxons->contains($taxon);
+        return $this->productTaxons->contains($productTaxon);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getShippingCategory()
+    public function filterProductTaxonsByTaxon(TaxonInterface $taxon)
     {
-        return $this->shippingCategory;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingCategory(ShippingCategoryInterface $category = null)
-    {
-        $this->shippingCategory = $category;
+        return $this->productTaxons->filter(function ($productTaxon) use ($taxon) {
+             return $taxon === $productTaxon->getTaxon();
+        });
     }
 
     /**
@@ -198,14 +163,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     public function getChannels()
     {
         return $this->channels;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setChannels(Collection $channels)
-    {
-        $this->channels = $channels;
     }
 
     /**
@@ -252,7 +209,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function getShortDescription()
     {
-        return $this->translate()->getShortDescription();
+        return $this->getTranslation()->getShortDescription();
     }
 
     /**
@@ -260,7 +217,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function setShortDescription($shortDescription)
     {
-        $this->translate()->setShortDescription($shortDescription);
+        $this->getTranslation()->setShortDescription($shortDescription);
     }
 
     /**
@@ -306,14 +263,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function setAverageRating($averageRating)
-    {
-        $this->averageRating = $averageRating;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAverageRating()
     {
         return $this->averageRating;
@@ -322,37 +271,9 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getFirstVariant()
+    public function setAverageRating($averageRating)
     {
-        if ($this->variants->isEmpty()) {
-            return null;
-        }
-
-        return $this->variants->first();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPrice()
-    {
-        if (null === $this->getFirstVariant()) {
-            return null;
-        }
-
-        return $this->getFirstVariant()->getPrice();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImage()
-    {
-        if (null === $this->getFirstVariant()) {
-            return null;
-        }
-
-        return $this->getFirstVariant()->getImage();
+        $this->averageRating = $averageRating;
     }
 
     /**
@@ -360,10 +281,64 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function getImages()
     {
-        if (null === $this->getFirstVariant()) {
-            return new ArrayCollection();
+        return $this->images;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImageByCode($code)
+    {
+        foreach ($this->images as $image) {
+            if ($code === $image->getCode()) {
+                return $image;
+            }
         }
 
-        return $this->getFirstVariant()->getImages();
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasImages()
+    {
+        return !$this->images->isEmpty();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasImage(ImageInterface $image)
+    {
+        return $this->images->contains($image);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addImage(ImageInterface $image)
+    {
+        $image->setOwner($this);
+        $this->images->add($image);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeImage(ImageInterface $image)
+    {
+        if ($this->hasImage($image)) {
+            $image->setOwner(null);
+            $this->images->removeElement($image);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new ProductTranslation();
     }
 }

@@ -3,11 +3,11 @@
 
 sylius:
     review:
-        title:
-            not_blank: Titel recensie mag niet leeg.
-            min_length: Titel recensie moet uit minstens 2 tekens bestaan
-            max_length: Titel recensie mag maximaal 255 tekens bevatten
-        rating:
-            not_blank: Controleer de scoring van de beoordeling.
         author:
             already_exists: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.
+        comment:
+            not_blank: Beoordeling commentaar mag niet leeg zijn.
+        rating:
+            not_blank: Controleer de scoring van de beoordeling.
+        title:
+            not_blank: Titel recensie mag niet leeg.

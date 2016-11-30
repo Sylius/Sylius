@@ -13,7 +13,6 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface as BaseOrderItemUnitInterface;
-use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 /**

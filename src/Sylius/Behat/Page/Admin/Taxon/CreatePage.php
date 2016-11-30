@@ -11,8 +11,10 @@
 
 namespace Sylius\Behat\Page\Admin\Taxon;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -30,7 +32,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function countTaxons()
     {
-        return count($this->getLeafs());
+        return count($this->getLeaves());
     }
 
     /**
@@ -38,15 +40,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function countTaxonsByName($name)
     {
-        $matchedLeafsCounter = 0;
-        $leafs = $this->getLeafs();
-        foreach ($leafs as $leaf) {
-            if ($leaf->getText() === $name) {
-                $matchedLeafsCounter++;
+        $matchedLeavesCounter = 0;
+        $leaves = $this->getLeaves();
+        foreach ($leaves as $leaf) {
+            if (strpos($leaf->getText(), $name) !== false) {
+                $matchedLeavesCounter++;
             }
         }
 
-        return $matchedLeafsCounter;
+        return $matchedLeavesCounter;
     }
 
     /**
@@ -62,10 +64,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function deleteTaxonOnPageByName($name)
     {
-        $leafs = $this->getLeafs();
-        foreach ($leafs as $leaf) {
+        $leaves = $this->getLeaves();
+        foreach ($leaves as $leaf) {
             if ($leaf->getText() === $name) {
-                $leaf->getParent()->pressButton('Delete');
+                $leaf->getParent()->find('css', '.ui.red.button')->press();
 
                 return;
             }
@@ -95,15 +97,106 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function nameIt($name, $languageCode)
     {
-        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_name', $languageCode), $name);
+        $this->activateLanguageTab($languageCode);
+        $this->getElement('name', ['%language%' => $languageCode])->setValue($name);
+
+        $this->waitForSlugGenerationIfNecessary($languageCode);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function specifyPermalink($permalink, $languageCode)
+    public function specifySlug($slug, $languageCode)
     {
-        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_permalink', $languageCode), $permalink);
+        $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_slug', $languageCode), $slug);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attachImage($path, $code = null)
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        $this->getDocument()->find('css', '[data-form-collection="add"]')->click();
+
+        $imageForm = $this->getLastImageElement();
+        $imageForm->fillField('Code', $code);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function moveUp(TaxonInterface $taxon)
+    {
+        $this->moveLeaf($taxon, self::MOVE_DIRECTION_UP);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function moveDown(TaxonInterface $taxon)
+    {
+        $this->moveLeaf($taxon, self::MOVE_DIRECTION_DOWN);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLeafNameFromPosition($position, TaxonInterface $parentTaxon = null)
+    {
+        $firstTaxonElement = $this->getLeaves($parentTaxon)[0];
+
+        return $firstTaxonElement->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLeaves(TaxonInterface $parentTaxon = null)
+    {
+        $tree = $this->getElement('tree');
+        Assert::notNull($tree);
+        /** @var NodeElement[] $leaves */
+        $leaves = $tree->findAll('css', '.item > .content > .header > a');
+
+        if (null === $parentTaxon) {
+            return $leaves;
+        }
+
+        foreach ($leaves as $leaf) {
+            if ($leaf->getText() === $parentTaxon->getName()) {
+                return $leaf->findAll('css', '.item > .content > .header');
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function activateLanguageTab($locale)
+    {
+        if (!$this->getDriver() instanceof Selenium2Driver) {
+            return;
+        }
+
+        $languageTabTitle = $this->getElement('language_tab', ['%locale%' => $locale]);
+        if (!$languageTabTitle->hasClass('active')) {
+            $languageTabTitle->click();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getElement($name, array $parameters = [])
+    {
+        if (!isset($parameters['%language%'])) {
+            $parameters['%language%'] = 'en_US';
+        }
+
+        return parent::getElement($name, $parameters);
     }
 
     /**
@@ -113,24 +206,68 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_taxon_code',
-            'name' => '#sylius_taxon_translations_en_US_name',
-            'parent' => '#sylius_taxon_parent',
-            'permalink' => '#sylius_taxon_translations_en_US_permalink',
             'description' => '#sylius_taxon_translations_en_US_description',
+            'images' => '#sylius_taxon_images',
+            'language_tab' => '[data-locale="%locale%"] .title',
+            'name' => '#sylius_taxon_translations_%language%_name',
+            'parent' => '#sylius_taxon_parent',
+            'slug' => '#sylius_taxon_translations_%language%_slug',
             'tree' => '.ui.list',
         ]);
     }
 
     /**
-     * @return NodeElement[]
+     * @param TaxonInterface $taxon
+     * @param string $direction
      *
      * @throws ElementNotFoundException
      */
-    private function getLeafs()
+    private function moveLeaf(TaxonInterface $taxon, $direction)
     {
-        $tree = $this->getElement('tree');
-        Assert::notNull($tree);
+        Assert::oneOf($direction, [self::MOVE_DIRECTION_UP, self::MOVE_DIRECTION_DOWN]);
 
-        return $tree->findAll('css', '.item > .content > .header');
+        $leaves = $this->getLeaves();
+        foreach ($leaves as $leaf) {
+            if ($leaf->getText() === $taxon->getName()) {
+                $moveButton = $leaf->getParent()->find('css', sprintf('.sylius-taxon-move-%s', $direction));
+                $moveButton->click();
+
+                $moveButton->waitFor(5, function () use ($moveButton) {
+                    return $this->isOpen() && !$moveButton->hasClass('loading');
+                });
+
+                return;
+            }
+        }
+
+        throw new ElementNotFoundException(
+            $this->getDriver(),
+            sprintf('Move %s button for %s taxon', $direction, $taxon->getName())
+        );
+    }
+
+    /**
+     * @return NodeElement
+     */
+    private function getLastImageElement()
+    {
+        $images = $this->getElement('images');
+        $items = $images->findAll('css', 'div[data-form-collection="item"]');
+
+        Assert::notEmpty($items);
+
+        return end($items);
+    }
+
+    /**
+     * @param string $languageCode
+     */
+    private function waitForSlugGenerationIfNecessary($languageCode)
+    {
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $this->getDocument()->waitFor(10, function () use ($languageCode) {
+                return '' !== $this->getElement('slug', ['%language%' => $languageCode])->getValue();
+            });
+        }
     }
 }

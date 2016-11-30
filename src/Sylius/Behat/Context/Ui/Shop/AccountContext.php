@@ -84,7 +84,7 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Given I want to modify my profile
+     * @When I want to modify my profile
      */
     public function iWantToModifyMyProfile()
     {
@@ -110,10 +110,10 @@ final class AccountContext implements Context
     }
 
     /**
-     * @When I specify the email as :email
-     * @When I remove the email
+     * @When I specify the customer email as :email
+     * @When I remove the customer email
      */
-    public function iSpecifyTheEmail($email = null)
+    public function iSpecifyCustomerTheEmail($email = null)
     {
         $this->profileUpdatePage->specifyEmail($email);
     }
@@ -164,19 +164,27 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the ([^"]+) is required$/
+     * @Then /^I should be notified that the (email|password|city|street|first name|last name) is required$/
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, StringInflector::nameToCode($element), sprintf('Please enter your %s.', $element));
+        $this->assertFieldValidationMessage(
+            $this->profileUpdatePage,
+            StringInflector::nameToCode($element),
+            sprintf('Please enter your %s.', $element)
+        );
     }
 
     /**
-     * @Then /^I should be notified that the ([^"]+) is invalid$/
+     * @Then /^I should be notified that the (email) is invalid$/
      */
     public function iShouldBeNotifiedThatElementIsInvalid($element)
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, StringInflector::nameToCode($element), sprintf('This %s is invalid.', $element));
+        $this->assertFieldValidationMessage(
+            $this->profileUpdatePage,
+            StringInflector::nameToCode($element),
+            sprintf('This %s is invalid.', $element)
+        );
     }
 
     /**
@@ -242,7 +250,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'current_password', 'Provided password is different than the current one.');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'current_password',
+            'Provided password is different than the current one.'
+        );
     }
 
     /**
@@ -250,7 +262,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'new_password', 'The entered passwords don\'t match');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'new_password',
+            'The entered passwords don\'t match'
+        );
     }
 
     /**
@@ -258,7 +274,11 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
     {
-        $this->assertFieldValidationMessage($this->changePasswordPage, 'new_password', 'Password must be at least 4 characters long.');
+        $this->assertFieldValidationMessage(
+            $this->changePasswordPage,
+            'new_password',
+            'Password must be at least 4 characters long.'
+        );
     }
 
     /**
@@ -294,10 +314,20 @@ final class AccountContext implements Context
 
     /**
      * @When I view the summary of the order :order
+     * @When /^I am viewing the summary of (this order)$/
      */
     public function iViewTheSummaryOfTheOrder(OrderInterface $order)
     {
         $this->orderShowPage->open(['number' => $order->getNumber()]);
+    }
+
+    /**
+     * @When I am viewing the summary of my last order
+     */
+    public function iViewingTheSummaryOfMyLastOrder()
+    {
+        $this->orderIndexPage->open();
+        $this->orderIndexPage->openLastOrderPage();
     }
 
     /**
@@ -377,9 +407,9 @@ final class AccountContext implements Context
     public function iShouldSeeItemsInTheList($numberOfItems)
     {
         Assert::same(
-            $numberOfItems,
+            (int) $numberOfItems,
             $this->orderShowPage->countItems(),
-            '%s items should appear on order page, but %s rows has been found'
+            '%s items should appear on order page, but %s rows has been found.'
         );
     }
 
@@ -407,6 +437,58 @@ final class AccountContext implements Context
     }
 
     /**
+     * @When I subscribe to the newsletter
+     */
+    public function iSubscribeToTheNewsletter()
+    {
+        $this->profileUpdatePage->subscribeToTheNewsletter();
+    }
+
+    /**
+     * @Then I should be subscribed to the newsletter
+     */
+    public function iShouldBeSubscribedToTheNewsletter()
+    {
+        Assert::true(
+            $this->profileUpdatePage->isSubscribedToTheNewsletter(),
+            'I should be subscribed to the newsletter, but I am not.'
+        );
+    }
+
+    /**
+     * @Then I should see :provinceName as province in the shipping address
+     */
+    public function iShouldSeeAsProvinceInTheShippingAddress($provinceName)
+    {
+        Assert::true(
+            $this->orderShowPage->hasShippingProvinceName($provinceName),
+            sprintf('Cannot find shipping address with province %s', $provinceName)
+        );
+    }
+
+    /**
+     * @Then I should see :provinceName as province in the billing address
+     */
+    public function iShouldSeeAsProvinceInTheBillingAddress($provinceName)
+    {
+        Assert::true(
+            $this->orderShowPage->hasBillingProvinceName($provinceName),
+            sprintf('Cannot find shipping address with province %s', $provinceName)
+        );
+    }
+
+    /**
+     * @Then /^I should be able to change payment method for (this order)$/
+     */
+    public function iShouldBeAbleToChangePaymentMethodForThisOrder(OrderInterface $order)
+    {
+        Assert::true(
+            $this->orderIndexPage->isItPossibleToChangePaymentMethodForOrder($order),
+            sprintf('I should be able to change payment method for %s.', $order->getNumber())
+        );
+    }
+
+    /**
      * @param PageInterface $page
      * @param string $element
      * @param string $expectedMessage
@@ -416,25 +498,6 @@ final class AccountContext implements Context
         Assert::true(
             $page->checkValidationMessageFor($element, $expectedMessage),
             sprintf('There should be a message: "%s".', $expectedMessage)
-        );
-    }
-
-    /**
-     * @When I subscribe to the newsletter
-     */
-    public function iSubscribeToTheNewsletter()
-    {
-        $this->profileUpdatePage->subscribeToTheNewsletter();
-    }
-
-    /**
-     * @Then subscription to the newsletter should be enabled
-     */
-    public function subscriptionToTheNewsletterShouldBeEnabled()
-    {
-        Assert::true(
-            $this->profileUpdatePage->isSubscribedToTheNewsletter(),
-            'Subscription to the newsletter should be enabled'
         );
     }
 }

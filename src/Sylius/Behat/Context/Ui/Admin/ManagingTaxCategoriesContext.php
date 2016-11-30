@@ -126,7 +126,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         $this->indexPage->open();
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $taxCategoryName]),
+            $this->indexPage->isSingleResourceOnPage(['nameAndDescription' => $taxCategoryName]),
             sprintf('Tax category with name %s has not been found.', $taxCategoryName)
         );
     }
@@ -176,7 +176,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         $this->indexPage->open();
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode(), 'name' => $taxCategoryName]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode(), 'nameAndDescription' => $taxCategoryName]),
             sprintf('Tax category name %s was not assigned properly.', $taxCategoryName)
         );
     }

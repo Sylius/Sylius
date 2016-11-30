@@ -28,6 +28,8 @@ sylius_api_payment_delete:
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.payment:deleteAction
+        _sylius:
+            csrf_protection: false
 
 sylius_api_payment_show:
     path: /{id}

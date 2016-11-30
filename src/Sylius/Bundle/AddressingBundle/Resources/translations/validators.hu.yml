@@ -49,7 +49,7 @@ sylius:
             not_blank: Kérlek add meg a zóna kódot.
             unique: A zóna kódnak egyedinek kell lennie.
         members:
-            min_count: 'Kérjük, hogy adjon meg legalább {{limit}} zóna tagot.'
+            min_count: Kérjük, hogy adjon meg legalább {{limit}} zóna tagot.
         name:
             max_length: A zóna elnevezése nem lehet hosszabb 255 karakternél.
             min_length: A zóna nevének legalább 2 karakter hosszúnak kell lennie|A zóna nevének legalább 2 karakter hosszúnak kell lennie.

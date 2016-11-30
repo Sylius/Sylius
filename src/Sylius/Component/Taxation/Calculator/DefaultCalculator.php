@@ -17,7 +17,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class DefaultCalculator implements CalculatorInterface
+final class DefaultCalculator implements CalculatorInterface
 {
     /**
      * {@inheritdoc}

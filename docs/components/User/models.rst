@@ -26,7 +26,7 @@ concerning personal data and as default has the following properties:
 +----------------+---------------------------------------------------+---------------+
 | user           | Corresponding user object                         | UserInterface |
 +----------------+---------------------------------------------------+---------------+
-| groups         | Customer's groups                                 | Collection    |
+| group          | Customer's groups                                 | Collection    |
 +----------------+---------------------------------------------------+---------------+
 | createdAt      | Date of creation                                  | \DateTime     |
 +----------------+---------------------------------------------------+---------------+
@@ -35,7 +35,7 @@ concerning personal data and as default has the following properties:
 
 .. note::
 
-    This model implements ``CustomerInterface`` and ``GroupableInterface``
+    This model implements ``CustomerInterface``
 
 User
 ----
@@ -88,10 +88,10 @@ As default has the following properties:
 
     This model implements ``UserInterface``
 
-Group
------
+CustomerGroup
+-------------
 
-The customer group is represented as a **Group** instance. It can be used to classify customers.
+The customer group is represented as a **CustomerGroup** instance. It can be used to classify customers.
 As default has the following properties:
 
 +----------+------------------------+---------+
@@ -104,7 +104,7 @@ As default has the following properties:
 
 .. note::
 
-    This model implements ``GroupInterface``
+    This model implements ``CustomerGroupInterface``
 
 UserOAuth
 ---------

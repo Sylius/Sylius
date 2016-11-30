@@ -21,7 +21,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxonsToCodesTransformer implements DataTransformerInterface
+final class TaxonsToCodesTransformer implements DataTransformerInterface
 {
     /**
      * @var TaxonRepositoryInterface
@@ -41,7 +41,7 @@ class TaxonsToCodesTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        if (!is_array($value)) {
+        if (!is_array($value) && !is_null($value)) {
             throw new UnexpectedTypeException($value, 'array');
         }
 
@@ -49,26 +49,20 @@ class TaxonsToCodesTransformer implements DataTransformerInterface
             return new ArrayCollection();
         }
 
-        return new ArrayCollection($this->taxonRepository->findBy(['code' => $value['taxons']]));
+        return new ArrayCollection($this->taxonRepository->findBy(['code' => $value]));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($value)
+    public function reverseTransform($taxons)
     {
-        if (!$value instanceof Collection) {
-            throw new UnexpectedTypeException($value, Collection::class);
+        if (!$taxons instanceof Collection) {
+            throw new UnexpectedTypeException($taxons, Collection::class);
         }
-
-        $taxons = $value->get('taxons');
 
         if (null === $taxons) {
             return [];
-        }
-
-        if (!(is_array($taxons) || $taxons instanceof \Traversable)) {
-            throw new \InvalidArgumentException('"taxons" element of collection should be Traversable');
         }
 
         $taxonCodes = [];
@@ -78,6 +72,6 @@ class TaxonsToCodesTransformer implements DataTransformerInterface
             $taxonCodes[] = $taxon->getCode();
         }
 
-        return ['taxons' => $taxonCodes];
+        return $taxonCodes;
     }
 }

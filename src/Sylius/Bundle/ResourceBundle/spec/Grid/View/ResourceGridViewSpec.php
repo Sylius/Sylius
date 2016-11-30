@@ -12,7 +12,6 @@
 namespace spec\Sylius\Bundle\ResourceBundle\Grid\View;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Component\Grid\Definition\Grid;
@@ -21,24 +20,21 @@ use Sylius\Component\Grid\View\GridView;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 /**
- * @mixin ResourceGridView
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceGridViewSpec extends ObjectBehavior
 {
     function let(
         Grid $gridDefinition,
-        Parameters $parameters,
         MetadataInterface $resourceMetadata,
         RequestConfiguration $requestConfiguration
     ) {
-        $this->beConstructedWith(['foo', 'bar'], $gridDefinition, $parameters, $resourceMetadata, $requestConfiguration);
+        $this->beConstructedWith(['foo', 'bar'], $gridDefinition, new Parameters(), $resourceMetadata, $requestConfiguration);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView');
+        $this->shouldHaveType(ResourceGridView::class);
     }
 
     function it_extends_default_GridView()

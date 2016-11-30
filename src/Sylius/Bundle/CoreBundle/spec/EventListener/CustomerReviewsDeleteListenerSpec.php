@@ -12,7 +12,8 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ReviewBundle\Remover\ReviewerReviewsRemover;
+use Sylius\Bundle\CoreBundle\EventListener\CustomerReviewsDeleteListener;
+use Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -30,7 +31,7 @@ final class CustomerReviewsDeleteListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CustomerReviewsDeleteListener');
+        $this->shouldHaveType(CustomerReviewsDeleteListener::class);
     }
 
     function it_removes_soft_deleted_customer_reviews_and_recalculates_their_product_ratings(

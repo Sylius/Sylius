@@ -3,10 +3,15 @@
 
 sylius:
     form:
-        rule:
-            contains_product_configuration:
-                variants: Poroizvodi
         promotion:
             add_action: Dodajte akciju
             add_rule: Dodajte pravilo
             name: Ime
+        promotion_action:
+            type: Tip
+        promotion_rule:
+            contains_product_configuration:
+                variants: Proizvodi
+            shipping_country_configuration:
+                country: Zemlja
+            type: Tip

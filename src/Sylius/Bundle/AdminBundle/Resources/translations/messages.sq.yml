@@ -6,11 +6,11 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Tipi i lidhjes
                     attributes: Atributet
                     header: Katalogu
                     options: Opsionet
-                    products: Produktet
-                    taxons: Kategoritë
+                    taxons: Tipologjite
                 configuration:
                     channels: Kanalet
                     countries: Vendet
@@ -24,13 +24,12 @@ sylius:
                     zones: Zonat
                 marketing:
                     header: Marketingu
+                    product_reviews: Recensionet e produktit
                     promotions: Reklamat
                 customers:
                     customers: Blerësit
+                    groups: Grupet
                     header: Blerësi
                 sales:
                     header: Shitjet
                     orders: Porositë
-                content:
-                    header: Përmbajtja
-                    routes: Rrugët

@@ -34,8 +34,11 @@ final class ChannelCollector extends DataCollector
      * @param ChannelContextInterface $channelContext
      * @param bool $channelChangeSupport
      */
-    public function __construct(ChannelRepositoryInterface $channelRepository, ChannelContextInterface $channelContext, $channelChangeSupport = false)
-    {
+    public function __construct(
+        ChannelRepositoryInterface $channelRepository,
+        ChannelContextInterface $channelContext,
+        $channelChangeSupport = false
+    ) {
         $this->channelContext = $channelContext;
 
         $this->data = [
@@ -84,6 +87,6 @@ final class ChannelCollector extends DataCollector
      */
     public function getName()
     {
-        return 'sylius.collector.channel';
+        return 'sylius.channel_collector';
     }
 }

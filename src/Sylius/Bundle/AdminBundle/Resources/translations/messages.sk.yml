@@ -6,12 +6,12 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Typy priradenia
                     attributes: Vlastnosti
                     header: Katalóg
                     options: Voľby
-                    products: Produkty
-                    taxons: Kategórie
                 configuration:
+                    admin_users: Administrátor
                     channels: Kanály
                     countries: Krajiny
                     currencies: Meny
@@ -24,13 +24,12 @@ sylius:
                     zones: Zóny
                 marketing:
                     header: Marketing
+                    product_reviews: Produktové recenzie
                     promotions: Akcie
                 customers:
                     customers: Zákazníci
+                    groups: Zákaznícke skupiny
                     header: Zákazník
                 sales:
                     header: Predaj
                     orders: Objednávky
-                content:
-                    header: Obsah
-                    routes: URL cesty

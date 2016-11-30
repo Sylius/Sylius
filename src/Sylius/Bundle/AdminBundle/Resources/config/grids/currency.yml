@@ -4,31 +4,21 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.currency.class%
+                    class: "%sylius.model.currency.class%"
             sorting:
                 code: asc
             fields:
                 code:
                     type: string
                     label: sylius.ui.code
+                    sortable: ~
                 name:
                     type: string
                     label: sylius.ui.name
-                exchange_rate:
-                    type: string
-                    label: sylius.ui.exchange_rate
-                enabled:
-                    type: twig
-                    label: sylius.ui.enabled
-                    options:
-                        template: SyliusAdminBundle:Grid/Field:enabled.html.twig
             filters:
                 code:
                     type: string
                     label: sylius.ui.code
-                enabled:
-                    type: boolean
-                    label: sylius.ui.enabled
             actions:
                 main:
                     create:

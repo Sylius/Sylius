@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        product:
+            name: שם
+            description: תיאור
+            attributes: מאפיינים
+            options: אפשרויות
+            meta_keywords: מילות מפתח

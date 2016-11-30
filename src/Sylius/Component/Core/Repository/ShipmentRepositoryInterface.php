@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Repository;
 
-use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -21,25 +20,18 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ShipmentRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param mixed $orderId
      * @param mixed $id
+     * @param mixed $orderId
      *
      * @return ShipmentInterface|null
      */
-    public function findByOrderIdAndId($orderId, $id);
+    public function findOneByOrderId($id, $orderId);
 
     /**
      * @param string $name
+     * @param string $locale
      *
-     * @return ShipmentInterface|null
+     * @return ShipmentInterface[]
      */
-    public function findOneByName($name);
-
-    /**
-     * @param array $criteria
-     * @param array $sorting
-     *
-     * @return PagerfantaInterface
-     */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null);
+    public function findByName($name, $locale);
 }

@@ -1,15 +1,15 @@
-{% extends 'SyliusUiBundle:Layout:centered.html.twig' %}
+{% extends '@SyliusUi/Layout/centered.html.twig' %}
 
 {% block title %}Sylius | {{ 'sylius.ui.administration_panel_login'|trans }}{% endblock %}
 
 {% block stylesheets %}
-    {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
+    {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/admin/css/style.css'} %}
 {% endblock %}
 
 {% block content %}
-{% include 'SyliusUiBundle:Security:_login.html.twig' with {'action': path('sylius_admin_login_check'), 'logo_path': 'assets/admin/img/logo.png'} %}
+{% include '@SyliusUi/Security/_login.html.twig' with {'action': path('sylius_admin_login_check'), 'paths': {'logo': 'assets/admin/img/logo.png'}} %}
 {% endblock %}
 
 {% block javascripts %}
-    {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
+    {% include '@SyliusUi/_javascripts.html.twig' with {'path': 'assets/admin/js/app.js'} %}
 {% endblock %}

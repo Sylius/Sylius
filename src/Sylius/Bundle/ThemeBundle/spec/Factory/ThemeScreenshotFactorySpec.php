@@ -12,21 +12,18 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Factory;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactory;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 
 /**
- * @mixin ThemeScreenshotFactory
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ThemeScreenshotFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactory');
+        $this->shouldHaveType(ThemeScreenshotFactory::class);
     }
 
     function it_implements_theme_screenshot_factory_interface()

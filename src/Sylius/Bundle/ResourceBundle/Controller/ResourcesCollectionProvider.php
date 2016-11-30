@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourcesCollectionProvider implements ResourcesCollectionProviderInterface
+final class ResourcesCollectionProvider implements ResourcesCollectionProviderInterface
 {
     /**
      * @var ResourcesResolverInterface

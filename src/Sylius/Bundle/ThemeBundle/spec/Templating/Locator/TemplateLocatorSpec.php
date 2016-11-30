@@ -20,8 +20,6 @@ use Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocatorInterface;
 use Symfony\Component\Templating\TemplateReferenceInterface;
 
 /**
- * @mixin TemplateLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class TemplateLocatorSpec extends ObjectBehavior
@@ -33,7 +31,7 @@ final class TemplateLocatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Templating\Locator\TemplateLocator');
+        $this->shouldHaveType(TemplateLocator::class);
     }
 
     function it_implements_template_locator_interface()

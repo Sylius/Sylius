@@ -2,27 +2,29 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    group:
-        name:
-            max: 'Gruppenname darf nicht länger als {{ limit }} Zeichen sein.'
-            min: 'Gruppenname muss mindestens {{ limit }} Zeichen lang sein.'
-            not_blank: Bitte geben Sie einen Gruppennamen ein.
     customer:
         first_name:
-            max: 'Vorname darf nicht länger als {{ limit }} Zeichen sein.'
-            min: 'Vorname muss mindestens {{ limit }} Zeichen lang sein.'
+            max: Vorname darf nicht länger als {{ limit }} Zeichen sein.
+            min: Vorname muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie Ihren Vornamen ein.
         last_name:
-            max: 'Nachname darf nicht länger als {{ limit }} Zeichen sein.'
-            min: 'Nachname muss mindestens {{ limit }} Zeichen lang sein.'
+            max: Nachname darf nicht länger als {{ limit }} Zeichen sein.
+            min: Nachname muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie Ihren Nachnamen ein.
         gender:
             not_blank: Bitte wählen Sie Ihr Geschlecht.
         email:
             already_used: Diese E-Mail wird bereits verwendet, bitte loggen Sie sich ein oder benutzen Sie Passwort vergessen.
-            max: 'E-Mail darf nicht länger als {{ limit }} Zeichen sein.'
-            min: 'E-Mail muss mindestens {{ limit }} Zeichen lang sein.'
+            max: E-Mail darf nicht länger als {{ limit }} Zeichen sein.
+            min: E-Mail muss mindestens {{ limit }} Zeichen lang sein.
             not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
             invalid: Diese e-Mail ist ungültig.
             unique: Diese E-Mail-Adresse wird bereits verwendet.
-            registered: Diese E-Mail wird bereits verwendet, haben Sie ihr Passwort vergessen?
+            registered: Diese E-Mail wird bereits verwendet. Bitte melden Sie sich an oder benutzen Sie Passwort vergessen.
+    customer_group:
+        code:
+            unique: Code der Kundengruppe muss eindeutig sein.
+        name:
+            max: Name der Kundengruppe darf nicht länger als {{ limit }} Zeichen sein.
+            min: Name der Kundengruppe muss mindestens {{ limit }} Zeichen lang sein.
+            not_blank: Bitte geben Sie einen Namen der Kundengruppe an.

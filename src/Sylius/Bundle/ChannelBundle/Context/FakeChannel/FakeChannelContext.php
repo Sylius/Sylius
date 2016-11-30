@@ -69,6 +69,8 @@ final class FakeChannelContext implements ChannelContextInterface
 
     /**
      * @return Request
+     *
+     * @throws ChannelNotFoundException
      */
     private function getMasterRequest()
     {
@@ -82,6 +84,8 @@ final class FakeChannelContext implements ChannelContextInterface
 
     /**
      * @param ChannelInterface|null $channel
+     *
+     * @throws ChannelNotFoundException
      */
     private function assertChannelWasFound(ChannelInterface $channel = null)
     {

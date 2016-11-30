@@ -7,6 +7,6 @@ sylius:
             description: Описание
             name: Название
             parent: Родитель
-            permalink: Постоянная ссылка
+            slug: Псевдоним
         taxonomy:
             name: Название

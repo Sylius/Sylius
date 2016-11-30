@@ -46,6 +46,7 @@ final class AdminSecurityContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param SecurityServiceInterface $securityService
+     * @param ExampleFactoryInterface $userFactory
      * @param UserRepositoryInterface $userRepository
      */
     public function __construct(
@@ -65,12 +66,12 @@ final class AdminSecurityContext implements Context
      */
     public function iAmLoggedInAsAnAdministrator()
     {
-        $user = $this->userFactory->create();
+        $user = $this->userFactory->create(['email' => 'sylius@example.com', 'password' => 'sylius']);
         $this->userRepository->add($user);
 
         $this->securityService->logIn($user);
 
-        $this->sharedStorage->set('admin', $user);
+        $this->sharedStorage->set('administrator', $user);
     }
 
     /**
@@ -83,6 +84,6 @@ final class AdminSecurityContext implements Context
 
         $this->securityService->logIn($user);
 
-        $this->sharedStorage->set('admin', $user);
+        $this->sharedStorage->set('administrator', $user);
     }
 }

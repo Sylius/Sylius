@@ -11,16 +11,11 @@
 
 namespace Sylius\Component\Mailer\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
-use Sylius\Component\Resource\Model\ToggleableTrait;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Email implements EmailInterface
 {
-    use TimestampableTrait, ToggleableTrait;
-
     /**
      * @var mixed
      */
@@ -30,6 +25,11 @@ class Email implements EmailInterface
      * @var string
      */
     protected $code;
+
+    /**
+     * @var bool
+     */
+    protected $enabled = true;
 
     /**
      * @var string
@@ -62,7 +62,7 @@ class Email implements EmailInterface
     }
 
     /**
-     * @return mixed
+     * {@inheritdoc}
      */
     public function getId()
     {
@@ -83,6 +83,32 @@ class Email implements EmailInterface
     public function setCode($code)
     {
         $this->code = $code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param bool $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = (bool) $enabled;
+    }
+
+    public function enable()
+    {
+        $this->enabled = true;
+    }
+
+    public function disable()
+    {
+        $this->enabled = false;
     }
 
     /**

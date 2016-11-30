@@ -5,9 +5,28 @@ sylius:
     form:
         attribute:
             add: Pridėti
+            add_attributes: Pridėti atributus
             choices: Pasirinkimai
             code: Kodas
             name: Pavadinimas
+            translations: Vertimai
             type: Tipas
         attribute_type:
+            checkbox: Žymės langelis
             configuration: Konfigūracija
+            date: Data
+            datetime: Data ir laikas
+            integer: Sveikasis skaičius
+            percent: Procentai
+            text: Tekstas
+            textarea: Teksto laukas
+            title: Atributo tipai
+            validation: Validatorius
+        attribute_type_configuration:
+            datetime:
+                format: Formatas
+            date:
+                format: Formatas
+            text:
+                min: Minimalus ilgis
+                max: Maksimalus ilgis

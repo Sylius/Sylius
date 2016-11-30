@@ -6,17 +6,19 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Relatietypes
                     attributes: Attributen
                     header: Cataloog
                     options: Opties
                     products: Producten
-                    taxons: Taxons
+                    taxons: Taxa
                 configuration:
+                    admin_users: Beheerders
                     channels: Kanalen
                     countries: Landen
-                    currencies: "Valuta's"
+                    currencies: Valuta's
                     header: Configuratie
-                    locales: "Talen/Regio's"
+                    locales: Talen/Regio's
                     payment_methods: Betaalmethoden
                     shipping_methods: Verzendmethoden
                     tax_categories: Belastingcategorieën
@@ -24,14 +26,12 @@ sylius:
                     zones: Zones
                 marketing:
                     header: Marketing
+                    product_reviews: Productbeoordelingen
                     promotions: Promoties
                 customers:
                     customers: Klanten
+                    groups: Groepen
                     header: Klant
                 sales:
                     header: Verkoop
                     orders: Bestellingen
-                content:
-                    header: Inhoud
-                    static_contents: Statische content
-                    routes: Routes

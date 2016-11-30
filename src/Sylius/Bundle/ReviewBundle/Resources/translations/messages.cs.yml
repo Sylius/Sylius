@@ -4,8 +4,8 @@
 sylius:
     form:
         review:
-            title: Název
-            comment: Komentář
             author: Autor
+            comment: Komentář
             status:
                 new: Nový
+            title: Název

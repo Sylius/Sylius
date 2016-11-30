@@ -16,9 +16,6 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 
 /**
- * Service implementing this interface should be able to find
- * best matching zones for provided address model.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */

@@ -13,9 +13,12 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
+use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Http\SecurityEvents;
@@ -29,15 +32,15 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber');
+        $this->shouldHaveType(UserLastLoginSubscriber::class);
     }
 
     function it_is_subscriber()
     {
-        $this->shouldImplement('Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber');
+        $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_subscriber_to_event()
+    function its_subscribed_to_events()
     {
         $this::getSubscribedEvents()->shouldReturn([
             SecurityEvents::INTERACTIVE_LOGIN => 'onSecurityInteractiveLogin',
@@ -46,13 +49,15 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
     }
 
     function it_updates_user_last_login_on_security_interactive_login(
+        ObjectManager $userManager,
         InteractiveLoginEvent $event,
         TokenInterface $token,
-        UserInterface $user,
-        $userManager
+        UserInterface $user
     ) {
-        $event->getAuthenticationToken()->shouldBeCalled()->willReturn($token);
-        $token->getUser()->shouldBeCalled()->willReturn($user);
+        $event->getAuthenticationToken()->willReturn($token);
+        $token->getUser()->willReturn($user);
+
+        $user->setLastLogin(Argument::type(\DateTime::class))->shouldBeCalled();
 
         $userManager->persist($user)->shouldBeCalled();
         $userManager->flush()->shouldBeCalled();
@@ -60,9 +65,14 @@ final class UserLastLoginSubscriberSpec extends ObjectBehavior
         $this->onSecurityInteractiveLogin($event);
     }
 
-    function it_updates_user_last_login_on_implicit_login(UserEvent $event, UserInterface $user, $userManager)
-    {
-        $event->getUser()->shouldBeCalled()->willReturn($user);
+    function it_updates_user_last_login_on_implicit_login(
+        ObjectManager $userManager,
+        UserEvent $event,
+        UserInterface $user
+    ) {
+        $event->getUser()->willReturn($user);
+
+        $user->setLastLogin(Argument::type(\DateTime::class))->shouldBeCalled();
 
         $userManager->persist($user)->shouldBeCalled();
         $userManager->flush()->shouldBeCalled();

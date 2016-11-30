@@ -15,38 +15,45 @@ or you can even distinguish zones by the ZIP code ranges in the USA.
 
 Three different types of zones are available:
 
-* `country` zone, which consists of countries.
-* `province` zone, which is constructed from provinces.
-* `zone`, which is a group of other zones.
+* **country** zone, which consists of countries.
+* **province** zone, which is constructed from provinces.
+* **zone**, which is a group of other zones.
 
 How to add a Zone?
 ------------------
 
 Let's see how you can add a Zone to your system programmatically.
 
+Firstly you will need a factory for zones - There is a specific one.
+
 .. code-block:: php
 
-    <?php
+    /** @var ZoneFactoryInterface $zoneFactory */
+    $zoneFactory = $this->container->get('sylius.factory.zone');
 
-    // Firstly you will need a factory for zones - There is a specific one.
-    /** @var ZoneFactoryInterface $zoneFactory **/
-    $zoneFactory = $this->get('sylius.factory.zone');
+Using the ZoneFactory create a new zone with its members. Let's take the UK as an example.
 
-    // Using the ZoneFactory create a new zone with its members. Let's take the UK as an example.
+.. code-block:: php
+
     /** @var ZoneInterface $zone */
     $zone = $zoneFactory->createWithMembers(['GB_ENG', 'GB_NIR', 'GB_SCT'. 'GB_WLS']);
 
-    // Now give it a code, name and type
+Now give it a code, name and type:
+
+.. code-block:: php
+
     $zone->setCode('GB');
     $zone->setName('United Kingdom');
     // available types are the type constants from the ZoneInterface
     $zone->setType(ZoneInterface::TYPE_PROVINCE);
 
-    // Finally get the zones repository from the container
-    /** @var RepositoryInterface $zoneRepository */
-    $zoneRepository = $this->get('sylius.repository.zone');
+Finally get the zones repository from the container and add the newly created zone to the system.
 
-    // and add the newly created zone to the system
+.. code-block:: php
+
+    /** @var RepositoryInterface $zoneRepository */
+    $zoneRepository = $this->container->get('sylius.repository.zone');
+
     $zoneRepository->add($zone);
 
 Matching a Zone
@@ -57,8 +64,7 @@ A service implementing the `ZoneMatcherInterface` is responsible for matching th
 
 .. code-block:: php
 
-    <?php
-
+    /** @var ZoneMatcherInterface $zoneMatcher */
     $zoneMatcher = $this->get('sylius.zone_matcher');
     $zone = $zoneMatcher->match($user->getAddress());
 
@@ -66,8 +72,7 @@ ZoneMatcher can also return all matching zones. (not only the most suitable one)
 
 .. code-block:: php
 
-    <?php
-
+    /** @var ZoneMatcherInterface $zoneMatcher */
     $zoneMatcher = $this->get('sylius.zone_matcher');
     $zones = $zoneMatcher->matchAll($user->getAddress());
 

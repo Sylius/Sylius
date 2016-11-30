@@ -1,0 +1,7 @@
+<div class="ui basic segment">
+    <div class="ui buttons">
+        <button class="ui labeled icon primary button" type="submit" id="sylius_save_changes_button"><i class="save icon"></i> {{ 'sylius.ui.save_changes'|trans }}</button>
+        <div class="or" data-text="{{ 'sylius.ui.or'|trans }}"></div>
+        {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': paths.cancel|default(null)} %}
+    </div>
+</div>

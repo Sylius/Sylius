@@ -14,6 +14,7 @@ namespace Sylius\Behat\Page\Admin\Crud;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -44,7 +45,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
      */
     public function saveChanges()
     {
-        $this->getDocument()->pressButton('Save changes');
+        $this->getDocument()->pressButton('sylius_save_changes_button');
     }
 
     /**
@@ -57,9 +58,9 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
             throw new ElementNotFoundException($this->getSession(), 'Field element');
         }
 
-        $validationMessage = $foundElement->find('css', '.pointing');
+        $validationMessage = $foundElement->find('css', '.sylius-validation-error');
         if (null === $validationMessage) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
         }
 
         return $validationMessage->getText();
@@ -104,7 +105,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
      */
     private function getFieldElement($element)
     {
-        $element = $this->getElement($element);
+        $element = $this->getElement(StringInflector::nameToCode($element));
         while (null !== $element && !($element->hasClass('field'))) {
             $element = $element->getParent();
         }

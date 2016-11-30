@@ -30,3 +30,4 @@ sylius_api_adjustment_delete:
             filterable: true
             criteria:
                 order: $orderId
+            csrf_protection: false

@@ -7,6 +7,5 @@ sylius:
             description: شرح
             name: نام
             parent: رده پدر
-            permalink: نشانی وب
         taxonomy:
             name: نام

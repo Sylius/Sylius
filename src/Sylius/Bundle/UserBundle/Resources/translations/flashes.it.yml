@@ -4,23 +4,16 @@
 sylius:
     user:
         email:
-            not_exist: "L'Utente con questa E-mail non esiste."
+            not_exist: L'Utente con questa E-mail non esiste.
         password:
-            invalid: Password attuale errata.
-            request:
-                success: Ti abbiamo inviato una email con le istruzioni per resettare la tua password!
             reset:
                 success: La tua password è stata reimpostata correttamente!
             change:
                 success: La tua password è stata modificata correttamente!
-        reset_password:
-            requested: "Se l'e-mail che avete specificato esiste già nel nostro sistema, ti abbiamo inviato lì un'istruzione su come resettare la password."
         verification:
             error: Il token di verifica non è valido.
             notice:
                 verified: Il tuo indirizzo email è già stato verificato.
             success: Il tuo indirizzo email è stato verificato correttamente.
             request:
-                success: "Un' e-mail con il link di verifica è stato inviato al tuo indirizzo di posta elettronica."
-    customer:
-        register: "Grazie per la registrazione, controlla la tua e-mail per verificare l'account."
+                success: Un' e-mail con il link di verifica è stato inviato al tuo indirizzo di posta elettronica.

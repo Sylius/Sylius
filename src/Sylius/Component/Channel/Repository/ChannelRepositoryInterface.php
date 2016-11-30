@@ -36,7 +36,7 @@ interface ChannelRepositoryInterface extends RepositoryInterface
     /**
      * @param string $name
      *
-     * @return ChannelInterface|null
+     * @return ChannelInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name);
 }

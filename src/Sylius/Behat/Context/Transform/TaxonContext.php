@@ -42,13 +42,19 @@ final class TaxonContext implements Context
      * @Transform /^parent taxon to "([^"]+)"$/
      * @Transform /^taxon with "([^"]+)" name/
      * @Transform /^taxon "([^"]+)"$/
+     * @Transform :taxon
      */
     public function getTaxonByName($name)
     {
-        $taxon = $this->taxonRepository->findOneByName($name);
-        Assert::notNull($taxon, sprintf('Taxon with name "%s" does not exist.', $name));
+        $taxons = $this->taxonRepository->findByName($name, 'en_US');
 
-        return $taxon;
+        Assert::eq(
+            1,
+            count($taxons),
+            sprintf('%d taxons has been found with name "%s".', count($taxons), $name)
+        );
+
+        return $taxons[0];
     }
 
     /**

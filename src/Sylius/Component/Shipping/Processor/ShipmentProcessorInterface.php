@@ -21,13 +21,13 @@ interface ShipmentProcessorInterface
 {
     /**
      * @param ShipmentInterface[] $shipments
-     * @param string              $transition ShipmentTransitions::*
+     * @param string $transition
      */
     public function updateShipmentStates($shipments, $transition);
 
     /**
      * @param ShipmentUnitInterface[] $units
-     * @param string                  $transition ShipmentUnitTransitions::*
+     * @param string $transition
      */
     public function updateUnitStates($units, $transition);
 }

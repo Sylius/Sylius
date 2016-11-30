@@ -18,8 +18,6 @@ use Sylius\Bundle\ThemeBundle\Locator\ResourceLocatorInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
- * @mixin ResourceLocator
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ResourceLocatorSpec extends ObjectBehavior
@@ -33,7 +31,7 @@ final class ResourceLocatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Locator\ResourceLocator');
+        $this->shouldHaveType(ResourceLocator::class);
     }
 
     function it_implements_resource_locator_interface()

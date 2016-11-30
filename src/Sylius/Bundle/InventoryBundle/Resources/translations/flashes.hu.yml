@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    inventory_unit:
-        backorder: Leltári tétel előrendelve.
-        sell: Leltári tétel feltöltve.
-        return: Leltári tétel visszaérkeztetve.
-        transition_fail: A művelet nem hajtható végre, tekintettel a tétel jelenlegi állapotára

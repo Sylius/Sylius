@@ -11,13 +11,10 @@
 
 namespace spec\Sylius\Component\Grid\Definition;
 
-use Sylius\Component\Grid\Definition\Action;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
+use Sylius\Component\Grid\Definition\Action;
 
 /**
- * @mixin Action
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ActionSpec extends ObjectBehavior
@@ -29,7 +26,7 @@ final class ActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Definition\Action');
+        $this->shouldHaveType(Action::class);
     }
 
     function it_has_name()
@@ -42,12 +39,26 @@ final class ActionSpec extends ObjectBehavior
         $this->getType()->shouldReturn('link');
     }
 
-    function it_has_label_which_defaults_to_name()
+    function it_has_no_label_by_default()
     {
-        $this->getLabel()->shouldReturn('view');
+        $this->getLabel()->shouldReturn(null);
+    }
 
+    function its_label_is_mutable()
+    {
         $this->setLabel('Read book');
         $this->getLabel()->shouldReturn('Read book');
+    }
+
+    function it_has_no_icon_by_default()
+    {
+        $this->getIcon()->shouldReturn(null);
+    }
+
+    function its_icon_is_mutable()
+    {
+        $this->setIcon('checkmark');
+        $this->getIcon()->shouldReturn('checkmark');
     }
 
     function it_has_no_options_by_default()

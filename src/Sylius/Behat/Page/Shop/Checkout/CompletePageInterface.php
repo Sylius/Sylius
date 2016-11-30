@@ -20,7 +20,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface CompletePageInterface
+interface CompletePageInterface extends SymfonyPageInterface
 {
     /**
      * @param string $productName
@@ -115,6 +115,20 @@ interface CompletePageInterface
     public function hasProductUnitPrice(ProductInterface $product, $price);
 
     /**
+     * @param string $localeName
+     *
+     * @return bool
+     */
+    public function hasLocale($localeName);
+
+    /**
+     * @param string $currencyCode
+     *
+     * @return bool
+     */
+    public function hasCurrency($currencyCode);
+
+    /**
      * @param ProductInterface $product
      *
      * @return bool
@@ -128,4 +142,23 @@ interface CompletePageInterface
     public function changePaymentMethod();
 
     public function confirmOrder();
+
+    /**
+     * @param string $provinceName
+     *
+     * @return bool
+     */
+    public function hasShippingProvinceName($provinceName);
+
+    /**
+     * @param string $provinceName
+     *
+     * @return bool
+     */
+    public function hasBillingProvinceName($provinceName);
+
+    /**
+     * @return string
+     */
+    public function getBaseCurrencyOrderTotal();
 }

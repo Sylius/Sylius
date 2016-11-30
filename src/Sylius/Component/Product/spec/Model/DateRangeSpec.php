@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Product\Model\DateRange;
 
 final class DateRangeSpec extends ObjectBehavior
 {
@@ -22,29 +23,26 @@ final class DateRangeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Product\Model\DateRange');
+        $this->shouldHaveType(DateRange::class);
     }
 
-    function its_start_date_is_mutable()
+    function its_start_date_is_mutable(\DateTime $startDate)
     {
-        $date = new \DateTime('last year');
-
-        $this->setStart($date);
-        $this->getStart()->shouldReturn($date);
+        $this->setStart($startDate);
+        $this->getStart()->shouldReturn($startDate);
     }
 
-    function its_end_date_is_mutable()
+    function its_end_date_is_mutable(\DateTime $endDate)
     {
-        $date = new \DateTime('next year');
-
-        $this->setEnd($date);
-        $this->getEnd()->shouldReturn($date);
+        $this->setEnd($endDate);
+        $this->getEnd()->shouldReturn($endDate);
     }
 
     function it_checks_whether_current_datetime_is_in_range_of_start_and_end()
     {
         $start = new \DateTime('last year');
         $end = new \DateTime('next year');
+
         $this->setStart($start);
         $this->setEnd($end);
         $this->isInRange()->shouldReturn(true);

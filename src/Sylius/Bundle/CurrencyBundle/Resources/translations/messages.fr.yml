@@ -4,7 +4,7 @@
 sylius:
     form:
         currency:
-            exchange_rate: Taux de change
-            enabled: Activé
             base: Devise de référence
             code: Nom
+            enabled: Activé
+            exchange_rate: Taux de change

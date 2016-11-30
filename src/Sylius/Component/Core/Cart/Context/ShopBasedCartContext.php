@@ -11,13 +11,14 @@
 
 namespace Sylius\Component\Core\Cart\Context;
 
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
+use Sylius\Component\Locale\Context\LocaleNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -35,7 +36,7 @@ final class ShopBasedCartContext implements CartContextInterface
     private $shopperContext;
 
     /**
-     * @var CartInterface|null
+     * @var OrderInterface|null
      */
     private $cart;
 
@@ -62,15 +63,18 @@ final class ShopBasedCartContext implements CartContextInterface
         $cart = $this->cartContext->getCart();
 
         try {
-            $cart->setChannel($this->shopperContext->getChannel());
-        } catch (ChannelNotFoundException $exception) {
-            throw new CartNotFoundException('Sylius was not able to prepare the cart properly', $exception);
-        }
+            /** @var ChannelInterface $channel */
+            $channel = $this->shopperContext->getChannel();
 
-        try {
-            $cart->setCurrencyCode($this->shopperContext->getCurrencyCode());
+            $cart->setChannel($channel);
+            $cart->setCurrencyCode($channel->getBaseCurrency()->getCode());
+            $cart->setLocaleCode($this->shopperContext->getLocaleCode());
+        } catch (ChannelNotFoundException $exception) {
+            throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);
         } catch (CurrencyNotFoundException $exception) {
-            throw new CartNotFoundException($exception);
+            throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);
+        } catch (LocaleNotFoundException $exception) {
+            throw new CartNotFoundException('Sylius was not able to prepare the cart.', $exception);
         }
 
         $cart->setCustomer($this->shopperContext->getCustomer());

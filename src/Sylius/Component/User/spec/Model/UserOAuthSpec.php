@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\User\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\User\Model\UserOAuth;
 use Sylius\Component\User\Model\UserOAuthInterface;
 
 /**
@@ -21,7 +22,7 @@ final class UserOAuthSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\User\Model\UserOAuth');
+        $this->shouldHaveType(UserOAuth::class);
     }
 
     function it_implements_user_oauth_interface()

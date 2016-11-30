@@ -1,0 +1,19 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shipping:
+    resources:
+        shipment:
+            classes:
+                model: Sylius\Component\Core\Model\Shipment
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShipmentRepository
+        shipment_unit:
+            classes:
+                model: "%sylius.model.order_item_unit.class%"
+        shipping_method:
+            classes:
+                model: Sylius\Component\Core\Model\ShippingMethod
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShippingMethodRepository
+        shipping_category:
+            classes:
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ShippingCategoryRepository

@@ -6,11 +6,10 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Vrste združenj
                     attributes: Atributi
                     header: Katalog
                     options: Možnosti
-                    products: Izdelki
-                    taxons: Taksoni
                 configuration:
                     channels: Kanali
                     countries: Države
@@ -27,10 +26,8 @@ sylius:
                     promotions: Promocije
                 customers:
                     customers: Kupci
+                    groups: Skupine
                     header: Kupec
                 sales:
                     header: Prodaja
                     orders: Naročila
-                content:
-                    header: Vsebina
-                    routes: Poti

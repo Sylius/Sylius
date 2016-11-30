@@ -32,4 +32,4 @@ Only the logged in **AdminUsers** are eligible to enter these routes.
 Learn more
 ----------
 
-* :doc:`Customer & ShopUser - Documentation </book/users_and_groups>`
+* :doc:`Customer & ShopUser - Documentation </book/customer_and_shopuser>`

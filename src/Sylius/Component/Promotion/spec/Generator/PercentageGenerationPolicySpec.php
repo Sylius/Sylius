@@ -13,57 +13,56 @@ namespace spec\Sylius\Component\Promotion\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Generator\GenerationPolicyInterface;
-use Sylius\Component\Promotion\Generator\InstructionInterface;
+use Sylius\Component\Promotion\Generator\PromotionCouponGeneratorInstructionInterface;
 use Sylius\Component\Promotion\Generator\PercentageGenerationPolicy;
-use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
+use Sylius\Component\Promotion\Repository\PromotionCouponRepositoryInterface;
 
 /**
- * @mixin PercentageGenerationPolicy
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class PercentageGenerationPolicySpec extends ObjectBehavior
 {
-    function let(CouponRepositoryInterface $couponRepository)
+    function let(PromotionCouponRepositoryInterface $couponRepository)
     {
         $this->beConstructedWith($couponRepository, 0.5);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Generator\PercentageGenerationPolicy');
+        $this->shouldHaveType(PercentageGenerationPolicy::class);
     }
 
-    function it_implements_generator_validator_interface()
+    function it_implements_a_generator_validator_interface()
     {
         $this->shouldImplement(GenerationPolicyInterface::class);
     }
 
     function it_examine_possibility_of_coupon_generation(
-        InstructionInterface $instruction,
-        CouponRepositoryInterface $couponRepository
+        PromotionCouponGeneratorInstructionInterface $instruction,
+        PromotionCouponRepositoryInterface $couponRepository
     ) {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
-        $couponRepository->countCouponsByCodeLength(1)->shouldBeCalled();
+        $couponRepository->countByCodeLength(1)->shouldBeCalled();
 
         $this->isGenerationPossible($instruction)->shouldReturn(false);
     }
 
     function it_returns_possible_generation_amount(
-        InstructionInterface $instruction,
-        CouponRepositoryInterface $couponRepository
+        PromotionCouponGeneratorInstructionInterface $instruction,
+        PromotionCouponRepositoryInterface $couponRepository
     ) {
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
-        $couponRepository->countCouponsByCodeLength(1)->willReturn(1);
+        $couponRepository->countByCodeLength(1)->willReturn(1);
 
         $this->isGenerationPossible($instruction)->shouldReturn(false);
         $this->getPossibleGenerationAmount($instruction)->shouldReturn(7.0);
     }
 
-    function it_throws_invalid_argument_exception_when_expected_amount_is_null(InstructionInterface $instruction)
-    {
+    function it_throws_an_invalid_argument_exception_when_expected_amount_is_null(
+        PromotionCouponGeneratorInstructionInterface $instruction
+    ) {
         $instruction->getAmount()->willReturn(null);
         $instruction->getCodeLength()->willReturn(1);
 
@@ -71,8 +70,9 @@ final class PercentageGenerationPolicySpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('getPossibleGenerationAmount', [$instruction]);
     }
 
-    function it_throws_invalid_argument_exception_when_expecte_code_length_is_null(InstructionInterface $instruction)
-    {
+    function it_throws_an_invalid_argument_exception_when_expecte_code_length_is_null(
+        PromotionCouponGeneratorInstructionInterface $instruction
+    ) {
         $instruction->getAmount()->willReturn(18);
         $instruction->getCodeLength()->willReturn(null);
 

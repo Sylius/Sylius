@@ -16,6 +16,7 @@ use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -71,6 +72,25 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getColumnFields($columnName)
+    {
+        return $this->tableAccessor->getIndexedColumn($this->getElement('table'), $columnName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sortBy($fieldName)
+    {
+        $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));
+        Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" is not sortable.', $fieldName));
+
+        $sortableHeaders[$fieldName]->find('css', 'a')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isSingleResourceWithSpecificElementOnPage(array $parameters, $element)
     {
         try {
@@ -109,7 +129,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $table = $this->getElement('table');
 
         $deletedRow = $tableAccessor->getRowWithFields($table, $parameters);
-        $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'Actions');
+        $actionButtons = $tableAccessor->getFieldFromRow($table, $deletedRow, 'actions');
 
         $actionButtons->pressButton('Delete');
     }

@@ -14,10 +14,10 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
-use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Behat\Page\Shop\Order\ShowPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -36,9 +36,9 @@ final class PaypalContext implements Context
     private $paypalExpressCheckoutPage;
 
     /**
-     * @var ThankYouPageInterface
+     * @var ShowPageInterface
      */
-    private $thankYouPage;
+    private $orderDetails;
 
     /**
      * @var CompletePageInterface
@@ -58,7 +58,7 @@ final class PaypalContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
-     * @param ThankYouPageInterface $thankYouPage
+     * @param ShowPageInterface $orderDetails
      * @param CompletePageInterface $summaryPage
      * @param PaypalApiMocker $paypalApiMocker
      * @param OrderRepositoryInterface $orderRepository
@@ -66,26 +66,28 @@ final class PaypalContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
-        ThankYouPageInterface $thankYouPage,
+        ShowPageInterface $orderDetails,
         CompletePageInterface $summaryPage,
         PaypalApiMocker $paypalApiMocker,
         OrderRepositoryInterface $orderRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
-        $this->thankYouPage = $thankYouPage;
+        $this->orderDetails = $orderDetails;
         $this->summaryPage = $summaryPage;
         $this->paypalApiMocker = $paypalApiMocker;
         $this->orderRepository = $orderRepository;
     }
 
     /**
-     * @Given /^I confirm my order with paypal payment$/
+     * @When /^I confirm my order with paypal payment$/
+     * @Given /^I have confirmed my order with paypal payment$/
      */
     public function iConfirmMyOrderWithPaypalPayment()
     {
-        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->summaryPage->confirmOrder();
+        $this->paypalApiMocker->performActionInApiInitializeScope(function () {
+            $this->summaryPage->confirmOrder();
+        });
     }
 
     /**
@@ -101,8 +103,9 @@ final class PaypalContext implements Context
      */
     public function iSignInToPaypalAndPaySuccessfully()
     {
-        $this->paypalApiMocker->mockApiSuccessfulPaymentResponse();
-        $this->paypalExpressCheckoutPage->pay();
+        $this->paypalApiMocker->performActionInApiSuccessfulScope(function () {
+            $this->paypalExpressCheckoutPage->pay();
+        });
     }
 
     /**
@@ -120,7 +123,43 @@ final class PaypalContext implements Context
      */
     public function iTryToPayAgain()
     {
-        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->thankYouPage->pay();
+        $this->paypalApiMocker->performActionInApiInitializeScope(function () {
+            $this->orderDetails->pay();
+        });
+    }
+
+    /**
+     * @Then I should be notified that my payment has been cancelled
+     */
+    public function iShouldBeNotifiedThatMyPaymentHasBeenCancelled()
+    {
+        $this->assertNotification('Payment has been cancelled.');
+
+    }
+
+    /**
+     * @Then I should be notified that my payment has been completed
+     */
+    public function iShouldBeNotifiedThatMyPaymentHasBeenCompleted()
+    {
+        $this->assertNotification('Payment has been completed.');
+    }
+
+    /**
+     * @param string $expectedNotification
+     */
+    private function assertNotification($expectedNotification)
+    {
+        $notifications = $this->orderDetails->getNotifications();
+        $hasNotifications = '';
+
+        foreach ($notifications as $notification) {
+            $hasNotifications .= $notification;
+            if ($notification === $expectedNotification) {
+                return;
+            }
+        }
+
+        throw new \RuntimeException(sprintf('There is no notificaiton with "%s". Got "%s"', $expectedNotification, $hasNotifications));
     }
 }

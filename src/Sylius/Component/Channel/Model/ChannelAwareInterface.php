@@ -12,8 +12,6 @@
 namespace Sylius\Component\Channel\Model;
 
 /**
- * Interface implemented by models associated with a channel.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ChannelAwareInterface

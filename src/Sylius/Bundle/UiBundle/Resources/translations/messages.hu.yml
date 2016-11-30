@@ -51,7 +51,6 @@ sylius:
         admin_users: Adminisztrátorok
         all: Mind
         all_your_addresses: Minden Ön által megadott cím
-        amount: Összeg
         an_error_occurred: Hiba történt
         api: API
         apply_coupon: Kupon használata
@@ -73,6 +72,7 @@ sylius:
         backorder: Előrendelés
         backordered: Előrendelve
         balance_due: Esedékesség
+        base_currency: Alapértelmezett pénznem
         bill_to: Számlázási cím
         billing_address: Számlázási cím
         blocks: Tömbök
@@ -118,7 +118,6 @@ sylius:
         contact_us: Kapcsolat
         contain_variants: Változatokat tartalmaz
         contains: Tartalmaz
-        content: Tartalom
         countries: Országok
         country: Ország
         country_details: Ország részletek
@@ -133,7 +132,6 @@ sylius:
         create_country: Ország létrehozása
         create_currency: Pénznem létrehozása
         create_customer: Vevő létrehozása
-        create_group: Csoport létrehozása
         create_imagine_block: Kép blokk létrehozása
         create_locale: Terület létrehozása
         create_menu: Menü létehozása
@@ -150,9 +148,7 @@ sylius:
         create_product_association_type: Termék kapcsolat típus létrehozása
         create_product_attribute: Termék attribútum létrehozása
         create_promotion: Promóció létrehozása
-        create_redirect_route: Átirányítási útvonal létrehozása
         create_report: Jelentés létrehozása
-        create_route: Útvonal létrehozása
         create_shipping_category: Szállítási kategória létrehozása
         create_shipping_method: Szállítási mód létrehozása
         create_simple_block: Egyszerű blokk létrehozása
@@ -172,8 +168,6 @@ sylius:
         creating_menu: Menü létrehozása
         creating_menu_node: Menü csomópont létrehozása
         creating_new_page: Új oldal létrehozása
-        creating_redirect_route: Átirányítási útvonal létrehozása
-        creating_route: Útvonal létrehozása
         creation_date: Létrehozás ideje
         creation_time: Létrehozás időpontja
         currencies: Pénznemek
@@ -183,7 +177,6 @@ sylius:
         current_promotions: Aktuális promóciók
         current_stock: Aktuális készlet
         customer: Ügyfél
-        customer_can_login_to_the_store: A vevő betud jelentkezni az áruházba
         customer_care: Ügyfélszolgálat
         customer_details: A vásárló adatai
         customer_id: Vásárlói ID
@@ -193,7 +186,7 @@ sylius:
         customer_orders: Vevői megrendelések
         customer_since: Ügyfél amióta
         customers: Ügyfelek
-        customers_list_of_all_customers_in_store: 'Vevők<small>A webáruház összes ügyfelének listája</small>'
+        customers_list_of_all_customers_in_store: Vevők<small>A webáruház összes ügyfelének listája</small>
         customize_default_metadata: Alapértelmezett metaadat testreszabása
         customize_metadata: Metaadatok testreszabása
         customize_products_metadata: Termék metaadatok testreszabása
@@ -202,13 +195,12 @@ sylius:
         data: Adatok
         date: Dátum
         default_billing_address: Alapértelmezett számlázási cím
-        default_currency: Alapértelmezett pénznem
         default_locale: Alapértelmezett nyelv
         default_shipping_address: Alapértelmezett szállítási cím
         delete: Törlés
         delete_image: Kép törlése
         deleted: Törölve
-        delivery_and_shipping: 'Szállítmányozás & szállítás'
+        delivery_and_shipping: Szállítmányozás & szállítás
         description: Leírás
         details: Részletek
         disable: Letilt
@@ -222,7 +214,6 @@ sylius:
         edit_coupon: Kupon módosítása
         edit_currency: Pénznem módosítása
         edit_customer: Vevő módosítása
-        edit_group: Csoport szerkesztése
         edit_locale: Terület szerkesztése
         edit_my_address: Címem szerkesztése
         edit_payment_method: Fizetési mód módosítása
@@ -233,9 +224,7 @@ sylius:
         edit_promotion: Promóció módosítása
         edit_promotion_coupon: Promóciós kupon módosítása
         edit_report: Jelentés módosítása
-        edit_route: Útvonal módosítása
         edit_shipping_method: Szállítási módszer módosítása
-        edit_static_content: Állandó tartalom szerkesztése
         edit_tax_category: Adó-kategória módosítása
         edit_tax_rate: Adókulcs módosítása
         edit_taxon: Taxon módosítása
@@ -260,10 +249,8 @@ sylius:
         editing_permission: Jogosultság módosítása
         editing_product: Termék szerkesztése
         editing_promotion: Promóció szerkesztése
-        editing_redirect_route: Átirányítás módosíŧása
         editing_review: Értékelés módosítása
         editing_role: Szerepkör módosítása
-        editing_route: Útvonal módosítása
         editing_shipment: Szállítás szerkesztése
         editing_shipping_category: Szállítási kategória szerkesztése
         editing_shipping_method: Szállítási mód szerkesztése
@@ -292,16 +279,13 @@ sylius:
         exclusive: Exkluzív
         existing_customer: Meglévő ügyfél
         expiration_and_usage_limits: Lejárati és a használati korlát
-        expires_at: Lejárat
         extra_information: További információk
         extra_notes: További megjegyzések
         failed: Sikertelen
         faqs: GYIK
         female: Nő
-        filter: Szűrő
         filters: Szűrők
         first_name: Keresztnév
-        forgot_password: Elfelejtett jelszó
         fulfill: Teljesítés
         gateway: Átjáró
         general_info: Általános info
@@ -313,12 +297,10 @@ sylius:
         go: Mehet
         go_to_dashboard: Irány az irányítópult
         grand_total: Végösszeg
-        groups: Csoportok
         guest: Vendég
         guest_customer: Vendég ügyfél
-        have_an_account_already: Már van egy fiókod
         hello: Üdvözlünk
-        hello_name: 'Üdvözöljük <b>%name%</b>'
+        hello_name: Üdvözöljük <b>%name%</b>
         hide_deleted: Törölt elem elrejtése
         home: Főoldal
         hostname: Hoszt neve
@@ -335,7 +317,7 @@ sylius:
         info: Információ
         information: Információk
         inventory: Leltár
-        inventory_here_you_can_see_current_stock_levels: 'Leltár <small>Az aktuális raktárkészlet</small>'
+        inventory_here_you_can_see_current_stock_levels: Leltár <small>Az aktuális raktárkészlet</small>
         inventory_index: Leltár
         inventory_state: Leltár állapota
         inventory_tracking: Leltár követés
@@ -345,7 +327,6 @@ sylius:
         items: Elemek
         items_total: Tételek összesen
         jump_to_page: Ugrás az oldalra
-        label: Címke
         last_login: Utolsó bejelentkezés
         last_name: Vezetéknév
         last_update: Utolsó frissítés
@@ -361,10 +342,10 @@ sylius:
         locales: Területi beállítások
         lock: Zárol
         locked: Lezárt
-        logged_in_as: 'Bejelentkezve mint %username%'
+        logged_in_as: Bejelentkezve mint %username%
         login: Belépés
         login_button: Belépés
-        login_sylius_store: 'Bejelentkezés a <small>Sylius webáruházba</small>'
+        login_sylius_store: Bejelentkezés a <small>Sylius webáruházba</small>
         logout: Kilépés
         main_taxon: Fő taxonómia
         male: Férfi
@@ -442,10 +423,8 @@ sylius:
         new_promotion_coupon: Új promóciós kupon
         new_review: Új értékelés
         new_role: Új szerepkör
-        new_route: Új útvonal
         new_shipping_category: Új szállítási kategória
         new_shipping_method: Új szállítási mód
-        new_static_content: Új állandó tartalom
         new_tax_category: Új adókategória
         new_tax_rate: Új adókulcs
         new_taxon: Új taxon
@@ -453,7 +432,6 @@ sylius:
         new_zone: Új zóna
         newest_products: Legújabb termékek
         next: Következő
-        "no": false
         no_account: nincs fiók
         no_association_types_to_display: Nincsenek kapcsolat típusok meghatározva
         no_comment: Nincs megjegyzés
@@ -468,7 +446,7 @@ sylius:
         no_shipping_category: Nincs szállítási kategória
         no_shipping_charges: A szállítási díj nem lett alkalmazva
         no_shipping_methods_available: Jelenleg nem tudunk az általad megadott szállítási címre szállítást vállalni
-        no_short_description: '<i>Nincs rövid leírás</i>'
+        no_short_description: <i>Nincs rövid leírás</i>
         no_sku: Nincs SKU
         no_tax_category: Nincs adókategória
         no_taxes: Az adó nem kett alkalmazva
@@ -541,15 +519,14 @@ sylius:
         product_association_types: Termék asszocciáló típusok
         product_associations: Termék kapcsolatok
         product_attributes: Termék tulajdonságok
-        product_details_viewing_product_product: 'Termék részletei <small>Termék megtekintése - "<strong>%product%</strong>"</small>'
+        product_details_viewing_product_product: Termék részletei <small>Termék megtekintése - "<strong>%product%</strong>"</small>
         product_options: Termék opciók
         product_review: Termék értékelések
         product_reviews: Termék értékelések
         product_variants: Termék változatok
-        products: Termékek
         products_categorized_as_name: '"%name%" szerint kategorizált termékek'
-        products_categorized_under_taxon_taxon: 'Termékek <small>"%taxon%" taxon alatt kategorizálva</small>'
-        products_index_of_all_products_in_your_store: 'Products <small>Az áruház összes termékének indexe</small>'
+        products_categorized_under_taxon_taxon: Termékek <small>"%taxon%" taxon alatt kategorizálva</small>
+        products_index_of_all_products_in_your_store: Products <small>Az áruház összes termékének indexe</small>
         profile: Profil
         promotion_configuration: Promóció beállítása
         promotion_coupons: Kuponok
@@ -569,14 +546,14 @@ sylius:
         recent_customers: Legfrissebb vásárlók
         recent_orders: Legutóbbi rendelések
         recent_users: Legutóbbi felhasználók
-        redirect_routes: Átirányítás útvonalak
         refunded: Visszatérítve
         register: Regisztráció
         register_button: Regisztráció
         register_in_the_store: Regisztrálja az áruházban
         registered_customers: Regisztrált felhasználók
-        registration_create_an_account_in_store: 'Regisztráció <small>Hozzon létre egy fiókot áruházunkban</small>'
+        registration_create_an_account_in_store: Regisztráció <small>Hozzon létre egy fiókot áruházunkban</small>
         registration_date: Regisztráció dátuma
+        rejected: Elutasított
         release_inventory: Kibocsáthatható készlet
         remember_me: Emlékezzen rám
         remove_attribute: Tulajdonság törlése
@@ -596,7 +573,6 @@ sylius:
         review_details: Értékelés részletei
         reviews: Értékelések
         roles: Szerepek
-        routes: Útvonalak
         rules: Szabályok
         sales: Értékesítés
         sales_this_month: Értékesítés
@@ -638,7 +614,7 @@ sylius:
         show_metadata: Metaadatok megjelenítése
         sign_in: Bejelentkezés
         sign_in_here: Bejelentkezés itt
-        sign_in_to_the_store_or_create_new_account: 'Jelentkezzen be a webáruházba <small>, vagy hozzon létre új fiókot</small>'
+        sign_in_to_the_store_or_create_new_account: Jelentkezzen be a webáruházba <small>, vagy hozzon létre új fiókot</small>
         sign_out: Kijelentkezés
         simple_blocks: Egyszerű blokkok
         simple_product: Egyszerű termék
@@ -649,7 +625,6 @@ sylius:
         starts_at: Kezdődik
         starts_with: Ezzel kezdődik
         state: Állapot
-        static_contents: Állandó tartalom
         status: Állapot
         street: Utca
         string_blocks: Szöveges blokkok
@@ -668,7 +643,6 @@ sylius:
         taxation_settings: Adózás-beállítások
         taxes: Adók
         taxonomy: Taxonómia
-        taxons: Taxonok
         terms_and_conditions: Felhasználási feltételek
         thank_you: Köszönjük!
         thank_you_for_your_order: Köszönjük a rendelését
@@ -681,7 +655,6 @@ sylius:
         there_are_no_currencies_to_display: Nincsenek megjeleníthető pénznemek
         there_are_no_customers_to_display: Nincsenek megjeleníthető vevők
         there_are_no_emails_configured: Nincsenek bekonfigurált email címek
-        there_are_no_groups_to_display: Nincsnek megjeleníthető csoportok
         there_are_no_images_for_this_product: Nincs kép a termékről
         there_are_no_inventory_items_to_display: Nincsenek tételek raktárkészleten
         there_are_no_inventory_units_to_display: Nincsenek készletegységek a megjelenítéséhez
@@ -698,10 +671,8 @@ sylius:
         there_are_no_permissions_defined: Nincsenek jogosultságok meghatározva
         there_are_no_products_to_display: Nincsenek megjeleníthető termékek
         there_are_no_promotions_configured: Nincsenek beállított promóciók
-        there_are_no_redirect_routes_to_display: Nincs megjeleníthető átirányítási utvonal
         there_are_no_reports_created: Nincsenek létrehozott jelentések
         there_are_no_roles_defined: Nincsenek szerepkörök meghatározva
-        there_are_no_routes_to_display: Nincsenek megjeleníthető útvonalak
         there_are_no_shipments_to_display: Nincsenek megjeleníthető kiszállítások
         there_are_no_shipping_categories_configured: Nincsenek konfigurált szállítási kategóriák
         there_are_no_shipping_methods_configured: Nincsenek konfigurált szállítási módok
@@ -741,7 +712,7 @@ sylius:
         user_confirmation_name: Felhasználói megerősítés
         user_details: Felhasználói adatok
         username: Felhasználónév
-        users_list_of_all_users_registered_in_store: 'Felhasználók <small>Az áruházban regisztált felhasználók</small>'
+        users_list_of_all_users_registered_in_store: Felhasználók <small>Az áruházban regisztált felhasználók</small>
         values: Értékek
         variant: Változat
         variant_selection_method: Változat kiválasztási módszer
@@ -758,7 +729,6 @@ sylius:
         welcome: Üdözlünk
         welcome_to_our_store: Üdvözöljük áruházunkban
         welcome_to_your_space: Üdvözöljük az Ön tárhelyén
-        "yes": true
         you_are_customer_since: Ön ügyfél
         you_have_no_addresses_defined: Nincs címed meghatározva
         you_have_no_new_orders: Nincsenek új megrendelések

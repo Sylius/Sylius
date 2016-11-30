@@ -4,10 +4,11 @@
 default:
     suites:
         ui_managing_taxons:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.locale
+                - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.taxon
 
                 - sylius.behat.context.setup.locale

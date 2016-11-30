@@ -1,15 +1,20 @@
 sylius:
     channel:
-        default_currency:
-            not_blank: Please enter channel default currency.
+        base_currency:
+            not_blank: Please enter channel base currency.
         default_locale:
             not_blank: Please enter channel default locale.
     checkout:
         shipping_method:
             not_blank: Please select shipping method.
+    currency:
+        enabled:
+            cannot_disable_base: The base currency cannot be disabled.
     customer:
         currency_code:
             not_valid: The currency code you entered is invalid.
+    cart_item:
+        not_available: '%itemName% does not have sufficient stock.'
     order:
         currency_code:
             not_valid: The currency code you entered is invalid.
@@ -17,6 +22,18 @@ sylius:
         code:
             not_blank: Please enter locale code.
             unique: This locale already exists.
+        enabled:
+            cannot_disable_base: The base locale cannot be disabled.
+    product_attribute:
+        invalid: Position must be an integer.
+    product_image:
+        code:
+            not_blank: Please enter an image code.
+            regex: Image code can only be comprised of letters, numbers, dashes and underscores.
+            unique: Image code must be unique within this product.
+        file:
+            max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
+            upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: On hand must be greater than {{ limit }}.
@@ -26,12 +43,34 @@ sylius:
             not_blank: Please enter the price.
         original_price:
             min: Original price must not be negative.
+        weight:
+            min: Weight cannot be negative.
+            invalid: Weight must be a number.
+        width:
+            min: Width cannot be negative.
+            invalid: Width must be a number.
+        height:
+            min: Height cannot be negative.
+            invalid: Height must be a number.
+        depth:
+            min: Depth cannot be negative.
+            invalid: Depth must be a number.
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
+    taxon_image:
+        code:
+            not_blank: Please enter an image code.
+            regex: Image code can only be comprised of letters, numbers, dashes and underscores.
+            unique: Image code must be unique within this taxon.
+        file:
+            max_size: The image is too big - {{ size }}{{ suffix }}. Maximum allowed size is {{ limit }}{{ suffix }}.
+            upload_ini_size: The image is too big. Maximum allowed size is {{ limit }}{{ suffix }}.
     user:
         email:
             unique: This email is already used.
         username:
             unique: This username is already used.
             not_blank: Please enter your name.
+        locale_code:
+            not_blank: Please choose a locale.

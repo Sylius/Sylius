@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
@@ -57,7 +58,7 @@ final class AdminUserContext implements Context
      */
     public function thereIsAnAdministratorIdentifiedBy($email, $password = 'sylius')
     {
-        $adminUser = $this->userFactory->create(['email' => $email, 'password' => $password]);
+        $adminUser = $this->userFactory->create(['email' => $email, 'password' => $password, 'enabled' => true]);
         $this->userRepository->add($adminUser);
         $this->sharedStorage->set('administrator', $adminUser);
     }
@@ -69,6 +70,18 @@ final class AdminUserContext implements Context
     {
         $adminUser = $this->userFactory->create(['username' => $username]);
         $adminUser->setUsername($username);
+
+        $this->userRepository->add($adminUser);
+        $this->sharedStorage->set('administrator', $adminUser);
+    }
+
+    /**
+     * @Given /^(this administrator) is using ("[^"]+" locale)$/
+     * @Given /^(I) am using ("[^"]+" locale) for my panel$/
+     */
+    public function thisAdministratorIsUsingLocale(AdminUserInterface $adminUser, $localeCode)
+    {
+        $adminUser->setLocaleCode($localeCode);
 
         $this->userRepository->add($adminUser);
         $this->sharedStorage->set('administrator', $adminUser);

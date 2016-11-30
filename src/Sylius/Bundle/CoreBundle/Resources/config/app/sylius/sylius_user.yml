@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_user:
+    resources:
+        admin:
+            user:
+                classes:
+                    model: Sylius\Component\Core\Model\AdminUser
+                    repository: Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository
+                    form: Sylius\Bundle\CoreBundle\Form\Type\User\AdminUserType
+        shop:
+            user:
+                classes:
+                    model: Sylius\Component\Core\Model\ShopUser
+                    repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
+                    form: Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType
+        oauth:
+            user:
+                classes:
+                    model: Sylius\Component\User\Model\UserOAuth
+                    interface: Sylius\Component\User\Model\UserOAuthInterface
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController

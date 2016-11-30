@@ -6,9 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Tipovi poveznica
                     options: Opcije
-                    products: Proizvodi
-                    taxons: Taksoni
                 configuration:
                     channels: Kanali
                     countries: Države
@@ -20,13 +19,12 @@ sylius:
                     zones: Regije
                 marketing:
                     header: Marketing
+                    product_reviews: Recenzije proizvoda
                     promotions: Promocije
                 customers:
                     customers: Kupci
+                    groups: Grupe
                     header: Kupac
                 sales:
                     header: Prodaja
                     orders: Narudžbe
-                content:
-                    header: Sadržaj
-                    routes: Rute

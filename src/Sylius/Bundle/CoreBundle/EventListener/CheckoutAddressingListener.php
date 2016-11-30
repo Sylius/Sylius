@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  *
  * @author Liverbool <nukboon@gmail.com>
  */
-class CheckoutAddressingListener
+final class CheckoutAddressingListener
 {
     /**
      * @param GenericEvent $event
@@ -42,12 +42,8 @@ class CheckoutAddressingListener
             return;
         }
 
-        if (null === $customer->getShippingAddress()) {
-            $customer->setShippingAddress(clone $order->getShippingAddress());
-        }
-
-        if (null === $customer->getBillingAddress()) {
-            $customer->setBillingAddress(clone $order->getBillingAddress());
+        if (null === $customer->getDefaultAddress()) {
+            $customer->setDefaultAddress(clone $order->getShippingAddress());
         }
     }
 }

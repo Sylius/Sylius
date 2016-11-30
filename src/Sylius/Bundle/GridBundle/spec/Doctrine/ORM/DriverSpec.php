@@ -11,31 +11,29 @@
 
 namespace spec\Sylius\Bundle\GridBundle\Doctrine\ORM;
 
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\GridBundle\Doctrine\ORM\DataSource;
 use Sylius\Bundle\GridBundle\Doctrine\ORM\Driver;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
 /**
- * @mixin Driver
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class DriverSpec extends ObjectBehavior
 {
-    function let(EntityManagerInterface $entityManager)
+    function let(ManagerRegistry $managerRegistry)
     {
-        $this->beConstructedWith($entityManager);
+        $this->beConstructedWith($managerRegistry);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\GridBundle\Doctrine\ORM\Driver');
+        $this->shouldHaveType(Driver::class);
     }
 
     function it_implements_grid_driver()
@@ -43,23 +41,23 @@ final class DriverSpec extends ObjectBehavior
         $this->shouldImplement(DriverInterface::class);
     }
 
-    function it_throws_exception_if_class_is_undefined(Parameters $parameters)
+    function it_throws_exception_if_class_is_undefined()
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getDataSource', [[], $parameters]);
-        ;
+            ->during('getDataSource', [[], new Parameters()]);
     }
 
     function it_creates_data_source_via_doctrine_orm_query_builder(
+        ManagerRegistry $managerRegistry,
         EntityManagerInterface $entityManager,
         EntityRepository $entityRepository,
-        QueryBuilder $queryBuilder,
-        Parameters $parameters
+        QueryBuilder $queryBuilder
     ) {
+        $managerRegistry->getManagerForClass('App:Book')->willReturn($entityManager);
         $entityManager->getRepository('App:Book')->willReturn($entityRepository);
         $entityRepository->createQueryBuilder('o')->willReturn($queryBuilder);
 
-        $this->getDataSource(['class' => 'App:Book'], $parameters)->shouldHaveType(DataSource::class);
+        $this->getDataSource(['class' => 'App:Book'], new Parameters())->shouldHaveType(DataSource::class);
     }
 }

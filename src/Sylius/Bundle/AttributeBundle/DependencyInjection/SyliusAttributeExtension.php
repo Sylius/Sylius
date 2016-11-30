@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusAttributeExtension extends AbstractResourceExtension
+final class SyliusAttributeExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -29,41 +29,12 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $configFiles = [
-            'services.xml',
-            'attribute_types.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
-
-        foreach ($config['resources'] as $subjectName => $subjectConfig) {
-            foreach ($subjectConfig as $resourceName => $resourceConfig) {
-                if (!is_array($resourceConfig)) {
-                    continue;
-                }
-
-                $formDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName);
-                $formDefinition->addArgument($subjectName);
-
-                if (isset($resourceConfig['translation'])) {
-                    $formTranslationDefinition = $container->getDefinition('sylius.form.type.'.$subjectName.'_'.$resourceName.'_translation');
-                    $formTranslationDefinition->addArgument($subjectName);
-                }
-
-                if (false !== strpos($resourceName, 'value')) {
-                    $formDefinition->addArgument($container->getDefinition('sylius.repository.'.$subjectName.'_attribute'));
-                }
-            }
-        }
     }
 
     /**
-     * Resolve resources for every subject.
-     *
      * @param array $resources
      * @param ContainerBuilder $container
      *
@@ -71,16 +42,9 @@ class SyliusAttributeExtension extends AbstractResourceExtension
      */
     private function resolveResources(array $resources, ContainerBuilder $container)
     {
-        $subjects = [];
-
-        foreach ($resources as $subject => $parameters) {
-            $subjects[$subject] = $parameters;
-        }
-
-        $container->setParameter('sylius.attribute.subjects', $subjects);
+        $container->setParameter('sylius.attribute.subjects', $resources);
 
         $resolvedResources = [];
-
         foreach ($resources as $subjectName => $subjectConfig) {
             foreach ($subjectConfig as $resourceName => $resourceConfig) {
                 if (is_array($resourceConfig)) {

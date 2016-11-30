@@ -11,15 +11,17 @@
 
 namespace Sylius\Bundle\OrderBundle;
 
+use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
+use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Sales order management bundle.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-class SyliusOrderBundle extends AbstractResourceBundle
+final class SyliusOrderBundle extends AbstractResourceBundle
 {
     /**
      * {@inheritdoc}
@@ -29,6 +31,17 @@ class SyliusOrderBundle extends AbstractResourceBundle
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new RegisterProcessorsPass());
+        $container->addCompilerPass(new RegisterCartContextsPass());
     }
 
     /**

@@ -25,7 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @author Fabien Potencier <fabien@symfony.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class AssetsInstallCommand extends ContainerAwareCommand
+final class AssetsInstallCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}

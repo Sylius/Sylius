@@ -19,7 +19,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FiltersApplicator implements FiltersApplicatorInterface
+final class FiltersApplicator implements FiltersApplicatorInterface
 {
     /**
      * @var ServiceRegistryInterface

@@ -1,0 +1,63 @@
+{
+  "id": @integer@,
+  "items": @array@,
+  "items_total": @integer@,
+  "adjustments": @array@,
+  "adjustments_total": @integer@,
+  "total": @integer@,
+  "state": "cart",
+  "created_at": "@string@.isDateTime()",
+  "updated_at": "@string@.isDateTime()",
+  "channel": {
+    "id": @integer@,
+    "code": "CHANNEL",
+    "name": "Channel",
+    "description": "Lorem ipsum",
+    "hostname": "localhost",
+    "color": "black",
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "enabled": true,
+    "tax_calculation_strategy": "order_items_based",
+    "_links": {
+      "self": {
+        "href": @string@
+      }
+    }
+  },
+  "shipping_address": @...@,
+  "billing_address": @...@,
+  "payments": [
+    {
+      "id": @integer@,
+      "method": {
+        "id": @integer@,
+        "code": "Cash on delivery",
+        "created_at": "@string@.isDateTime()",
+        "updated_at": "@string@.isDateTime()",
+        "_links": {
+          "self": {
+            "href": @string@
+          }
+        }
+      },
+      "amount": @integer@,
+      "state": "new",
+      "created_at": "@string@.isDateTime()",
+      "updated_at": "@string@.isDateTime()",
+      "_links": {
+        "self": {
+          "href": @string@
+        },
+        "payment-method": {
+          "href": @string@
+        },
+        "order": {
+          "href": @string@
+        }
+      }
+    }
+  ],
+  "shipments": @array@,
+  "checkout_state": "payment_selected"
+}

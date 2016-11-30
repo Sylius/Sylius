@@ -1,0 +1,4 @@
+{
+    "code": 500,
+    "message": "Transition \"complete\" cannot be applied on state \"shipping_selected\" of object \"Sylius\\Component\\Core\\Model\\Order\" with graph \"sylius_order_checkout\""
+}

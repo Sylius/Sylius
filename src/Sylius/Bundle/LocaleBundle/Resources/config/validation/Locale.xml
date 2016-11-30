@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<constraint-mapping xmlns="http://symfony.com/schema/dic/constraint-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
+    <class name="Sylius\Component\Locale\Model\Locale">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">code</option>
+            <option name="message">sylius.locale.code.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">sylius.locale.code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Regex">
+                <option name="message">sylius.locale.code.regex</option>
+                <option name="pattern">/^[\w-]*$/</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+</constraint-mapping>

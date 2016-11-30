@@ -28,7 +28,7 @@ interface PromotionRepositoryInterface extends RepositoryInterface
     /**
      * @param string $name
      *
-     * @return PromotionInterface|null
+     * @return PromotionInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name);
 }

@@ -49,7 +49,7 @@ sylius:
             not_blank: Vui lòng nhập mã khu vực.
             unique: Mã khu vực phải là duy nhất.
         members:
-            min_count: 'Vui lòng thêm tối thiểu {{ limit }} thành viên cho khu vực này.'
+            min_count: Vui lòng thêm tối thiểu {{ limit }} thành viên cho khu vực này.
         name:
             max_length: Tên của Khu vực không được dài hơn 255 ký tự|Tên của Khu vực không được dài hơn 255 ký tự.
             min_length: Tên khu vực phải ít nhất 2 ký tự.|Tên khu vực phải ít nhất 2 ký tự.

@@ -13,6 +13,7 @@ sylius:
             postcode: PSČ
             street: Ulice
             province: Provincie
+            zone: Oblast
         country:
             add_province: Přidat provincii
             name: Jméno
@@ -21,6 +22,7 @@ sylius:
             enabled: Povoleno
         province:
             name: Jméno
+            abbreviation: Zkratka
             select: Vybrat
         zone:
             add_member: Přidat člena

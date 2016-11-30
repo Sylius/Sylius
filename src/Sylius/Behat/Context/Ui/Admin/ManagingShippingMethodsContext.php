@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\NotificationType;
+use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
@@ -83,7 +84,7 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Given I want to create a new shipping method
+     * @When I want to create a new shipping method
      */
     public function iWantToCreateANewShippingMethod()
     {
@@ -97,6 +98,15 @@ final class ManagingShippingMethodsContext implements Context
     public function iSpecifyItsCodeAs($code = null)
     {
         $this->createPage->specifyCode($code);
+    }
+
+    /**
+     * @When I specify its position as :position
+     * @When I do not specify its position
+     */
+    public function iSpecifyItsPositionAs($position = null)
+    {
+        $this->createPage->specifyPosition($position);
     }
 
     /**
@@ -125,11 +135,19 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @When I specify its amount as :amount
+     * @When I specify its amount as :amount for :channel channel
      */
-    public function iSpecifyItsAmountAs($amount)
+    public function iSpecifyItsAmountForChannel($amount, ChannelInterface $channel)
     {
-        $this->createPage->specifyAmount($amount);
+        $this->createPage->specifyAmountForChannel($channel->getCode(), $amount);
+    }
+
+    /**
+     * @When I make it available in channel :channelName
+     */
+    public function iMakeItAvailableInChannel($channelName)
+    {
+        $this->createPage->checkChannel($channelName);
     }
 
     /**
@@ -151,8 +169,8 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then the shipment method :shipmentMethod should appear in the registry
-     * @Then the shipment method :shipmentMethod should be in the registry
+     * @Then the shipping method :shipmentMethod should appear in the registry
+     * @Then the shipping method :shipmentMethod should be in the registry
      */
     public function theShipmentMethodShouldAppearInTheRegistry($shipmentMethodName)
     {
@@ -170,6 +188,21 @@ final class ManagingShippingMethodsContext implements Context
     public function thisShippingMethodShouldStillBeInTheRegistry(ShippingMethodInterface $shippingMethod)
     {
         $this->theShipmentMethodShouldAppearInTheRegistry($shippingMethod->getName());
+    }
+
+    /**
+     * @Then the shipping method :shippingMethod should be available in channel :channelName
+     */
+    public function theShippingMethodShouldBeAvailableInChannel(
+        ShippingMethodInterface $shippingMethod,
+        $channelName
+    ) {
+        $this->iWantToModifyAShippingMethod($shippingMethod);
+
+        Assert::true(
+            $this->updatePage->isAvailableInChannel($channelName),
+            sprintf('Shipping method should be available in channel "%s" but it does not.', $channelName)
+        );
     }
 
     /**
@@ -250,6 +283,17 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @Then I should be notified that code needs to contain only specific symbols
+     */
+    public function iShouldBeNotifiedThatCodeShouldContain()
+    {
+        $this->assertFieldValidationMessage(
+            'code',
+            'Shipping method code can only be comprised of letters, numbers, dashes and underscores.'
+        );
+    }
+
+    /**
      * @Then shipping method with :element :name should not be added
      */
     public function shippingMethodWithElementValueShouldNotBeAdded($element, $name)
@@ -295,18 +339,52 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that :field should not be blank
-     */
-    public function iShouldBeNotifiedThatAmountShouldNotBeBlank($field)
-    {
-        $this->assertFieldValidationMessage($field, 'This value should not be blank.');
-    }
-    /**
+     * @Given I am browsing shipping methods
      * @When I want to browse shipping methods
      */
     public function iWantToBrowseShippingMethods()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @Then the first shipping method on the list should have :field :value
+     */
+    public function theFirstShippingMethodOnTheListShouldHave($field, $value)
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = reset($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected first shipping method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @Then the last shipping method on the list should have :field :value
+     */
+    public function theLastShippingMethodOnTheListShouldHave($field, $value)
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = end($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected last shipping method\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @When I switch the way shipping methods are sorted by :field
+     * @When I start sorting shipping methods by :field
+     * @Given the shipping methods are already sorted by :field
+     */
+    public function iSortShippingMethodsBy($field)
+    {
+        $this->indexPage->sortBy($field);
     }
 
     /**
@@ -381,6 +459,20 @@ final class ManagingShippingMethodsContext implements Context
     public function iShouldBeNotifiedThatItIsInUse()
     {
         $this->notificationChecker->checkNotification('Cannot delete, the shipping method is in use.', NotificationType::failure());
+    }
+
+    /**
+     * @Then I should be notified that amount for :channel channel should not be blank
+     */
+    public function iShouldBeNotifiedThatAmountForChannelShouldNotBeBlank(ChannelInterface $channel)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        Assert::same(
+            $currentPage->getValidationMessageForAmount($channel->getCode()),
+            'This value should not be blank.'
+        );
     }
 
     /**

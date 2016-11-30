@@ -11,18 +11,18 @@
 
 namespace Sylius\Bundle\ResourceBundle\Command;
 
+use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Helper\Table;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
-use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class DebugResourceCommand extends Command
+final class DebugResourceCommand extends Command
 {
     /**
      * @var RegistryInterface
@@ -68,7 +68,9 @@ EOT
         $resource = $input->getArgument('resource');
 
         if (null === $resource) {
-            return $this->listResources($output);
+            $this->listResources($output);
+
+            return;
         }
 
         $metadata = $this->registry->get($resource);
@@ -83,12 +85,14 @@ EOT
     {
         $resources = $this->registry->getAll();
         ksort($resources);
+
         $table = new Table($output);
         $table->setHeaders(['Alias']);
 
         foreach ($resources as $resource) {
             $table->addRow([$resource->getAlias()]);
         }
+
         $table->render();
     }
 
@@ -122,6 +126,8 @@ EOT
      * @param array $parameters
      * @param array $flattened
      * @param string $prefix
+     *
+     * @return array
      */
     private function flattenParameters(array $parameters, array $flattened = [], $prefix = '')
     {

@@ -19,7 +19,7 @@ How to configure states? Let's see on the example from **Checkout** state machin
 
 .. code-block:: yaml
 
-   # CoreBundle/Resources/config/app/state_machine.yml
+   # CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml
    winzou_state_machine:
        sylius_order_checkout:
            # list of all possible states:
@@ -40,13 +40,13 @@ Having states configured we can have a transition between the ``cart`` state to 
 
 .. code-block:: yaml
 
-   # CoreBundle/Resources/config/app/state_machine.yml
+   # CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml
    winzou_state_machine:
        sylius_order_checkout:
            transitions:
                address:
-                   from: [cart]  # here you specify which state is the initial
-                   to: addressed # there you specify which state is final for that transition
+                   from: [cart, addressed, shipping_selected, payment_selected]  # here you specify which state is the initial 
+                   to: addressed                                                 # there you specify which state is final for that transition
 
 Callbacks
 ---------
@@ -58,16 +58,16 @@ Having a configured transition, you can attach a callback to it either before or
 
 .. code-block:: yaml
 
-   # CoreBundle/Resources/config/app/state_machine.yml
+   # CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml
    winzou_state_machine:
         sylius_order_checkout:
              callbacks:
                   # callbacks may be called before or after specified transitions, in the checkout state machine we've got callbacks only after transitions
                   after:
                        sylius_process_cart:
-                            on: ["address", "select_shipping"]
-                            do: ["@sylius.order_processing.order_processor", "process"]
-                            args: ["object"]
+                           on: ["address", "select_shipping", "select_payment"]
+                           do: ["@sylius.order_processing.order_processor", "process"]
+                           args: ["object"]
 
 Configuration
 -------------
@@ -83,11 +83,11 @@ would become ``shipping_selected``.
 
 .. code-block:: yaml
 
-   # CoreBundle/Resources/config/app/state_machine.yml
+   # CoreBundle/Resources/config/app/state_machine/sylius_order_checkout.yml
    winzou_state_machine:
        sylius_order_checkout:
            class: "%sylius.model.order.class%" # class of the domain object - in our case Order
-           property_path: checkoutState        #
+           property_path: checkoutState
            graph: sylius_order_checkout
            state_machine_class: "%sylius.state_machine.class%"
            # list of all possible states:
@@ -100,42 +100,37 @@ would become ``shipping_selected``.
            # list of all possible transitions:
            transitions:
                address:
-                   from: [cart]  # here you specify which state is the initial
-                   to: addressed # there you specify which state is final for that transition
-               readdress:
-                   from: [payment_selected, shipping_selected, addressed]
-                   to: cart
+                   from: [cart, addressed, shipping_selected, payment_selected] # here you specify which state is the initial
+                   to: addressed                                                # there you specify which state is final for that transition
                select_shipping:
-                   from: [addressed]
+                   from: [addressed, shipping_selected, payment_selected]
                    to: shipping_selected
-               reselect_shipping:
-                   from: [payment_selected, shipping_selected]
-                   to: addressed
                select_payment:
-                   from: [shipping_selected]
+                   from: [payment_selected, shipping_selected]
                    to: payment_selected
-               reselect_payment:
-                   from: [payment_selected]
-                   to: shipping_selected
                complete:
                    from: [payment_selected]
                    to: completed
            # list of all callbacks:
            callbacks:
-               # callbacks may be called before or after specified transitions, in the checkout state machine we've got callbacks only after transitions
+           # callbacks may be called before or after specified transitions, in the checkout state machine we've got callbacks only after transitions
                after:
                    sylius_process_cart:
-                       on: ["address", "select_shipping"]
+                       on: ["address", "select_shipping", "select_payment"]
                        do: ["@sylius.order_processing.order_processor", "process"]
-                       args: ["object"]
-                   sylius_recalculate_cart:
-                       on: ["address", "readdress", "select_shipping", "reselect_shipping", "select_payment", "reselect_payment"]
-                       do: ["@sylius.order_processing.order_recalculator", "recalculate"]
                        args: ["object"]
                    sylius_create_order:
                        on: ["complete"]
                        do: ["@sm.callback.cascade_transition", "apply"]
                        args: ["object", "event", "'create'", "'sylius_order'"]
+                   sylius_hold_inventory:
+                       on: ["complete"]
+                       do: ["@sylius.inventory.order_inventory_operator", "hold"]
+                       args: ["object"]
+                   sylius_assign_token:
+                       on: ["complete"]
+                       do: ["@sylius.unique_id_based_order_token_assigner", "assignTokenValue"]
+                       args: ["object"]
 
 Learn more
 ----------

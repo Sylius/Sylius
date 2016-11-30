@@ -19,8 +19,6 @@ use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
- * @mixin OrderNumberAssigner
- *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class OrderNumberAssignerSpec extends ObjectBehavior
@@ -32,15 +30,15 @@ final class OrderNumberAssignerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner');
+        $this->shouldHaveType(OrderNumberAssigner::class);
     }
 
-    function it_implements_order_number_assigner_interface()
+    function it_implements_an_order_number_assigner_interface()
     {
         $this->shouldImplement(OrderNumberAssignerInterface::class);
     }
 
-    function it_assigns_number_to_order(
+    function it_assigns_a_number_to_an_order(
         OrderInterface $order,
         OrderNumberGeneratorInterface $numberGenerator
     ) {
@@ -52,7 +50,7 @@ final class OrderNumberAssignerSpec extends ObjectBehavior
         $this->assignNumber($order);
     }
 
-    function it_does_not_assign_number_to_order_with_number(
+    function it_does_not_assign_a_number_to_an_order_with_number(
         OrderInterface $order,
         OrderNumberGeneratorInterface $numberGenerator
     ) {

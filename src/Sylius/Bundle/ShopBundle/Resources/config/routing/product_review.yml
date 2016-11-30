@@ -1,0 +1,34 @@
+sylius_shop_product_reviews_index:
+    path: /products/{slug}/reviews
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: SyliusShopBundle:Product/Review:index.html.twig
+            repository:
+                method: findAcceptedByProductSlugAndChannel
+                arguments:
+                    - $slug
+                    - '%locale%'
+                    - 'expr:service("sylius.context.channel").getChannel()'
+
+sylius_shop_product_reviews_create:
+    path: /products/{slug}/reviews/new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            template: SyliusShopBundle:Product/Review:create.html.twig
+            form:
+                options:
+                    validation_groups: ['sylius', 'sylius_review']
+            factory:
+                method: createForSubjectWithReviewer
+                arguments:
+                    - 'expr:service("sylius.repository.product").findOneBySlug($slug)'
+                    - 'expr:service("sylius.context.customer").getCustomer()'
+            redirect:
+                route: sylius_shop_product_show
+                parameters:
+                    slug: $slug
+            flash: sylius.review.wait_for_the_acceptation

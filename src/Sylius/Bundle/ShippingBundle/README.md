@@ -1,11 +1,11 @@
 SyliusShippingBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusShippingBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusShippingBundle)
 ====================
 
-Shipping component for [**Symfony2**](http://symfony.com) ecommerce applications.
+Shipping component integration for [**Symfony2**](http://symfony.com) eCommerce applications.
 It provides architecture for shipment management system.
 
 It includes flexible calculators engine, which already contains default
-calculators. Weight based, item count based and others...
+calculators. Weight based, item count based and others.
 
 You can also easily define your own pricing by implementing service with
 simple interface.
@@ -16,15 +16,9 @@ display right shipping methods to the customer.
 Sylius
 ------
 
-**Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
+![Sylius](http://sylius.org/assets/img/logo.png)
 
-[phpspec](http://phpspec.net) examples
---------------------------------------
-
-```bash
-$ composer install
-$ bin/phpspec run -fpretty
-```
+Sylius is an Open Source eCommerce solution built from decoupled components with powerful API and the highest quality code. [Read more on sylius.org](http://sylius.org).
 
 Documentation
 -------------
@@ -34,48 +28,27 @@ Documentation is available on [**docs.sylius.org**](http://docs.sylius.org/en/la
 Contributing
 ------------
 
-All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
+[This page](http://docs.sylius.org/en/latest/contributing/index.html) contains all the information about contributing to Sylius.
 
-Mailing lists
--------------
+Follow Sylius' Development
+--------------------------
 
-### Users
+If you want to keep up with the updates and latest features, follow us on the following channels:
 
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
-
-### Developers
-
-To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
-
-Sylius twitter account
-----------------------
-
-If you want to keep up with updates, [follow the official Sylius account on twitter](http://twitter.com/Sylius).
+* [Official Blog](https://sylius.org/blog)
+* [Sylius on Twitter](https://twitter.com/Sylius)
+* [Sylius on Facebook](https://facebook.com/SyliusEcommerce)
 
 Bug tracking
 ------------
 
-This bundle uses [GitHub issues](https://github.com/Sylius/Sylius/issues).
+Sylius uses [GitHub issues](https://github.com/Sylius/Sylius/issues).
 If you have found bug, please create an issue.
-
-Versioning
-----------
-
-Releases will be numbered with the format `major.minor.patch`.
-
-And constructed with the following guidelines.
-
-* Breaking backwards compatibility bumps the major.
-* New additions without breaking backwards compatibility bumps the minor.
-* Bug fixes and misc changes bump the patch.
-
-For more information on SemVer, please visit [semver.org website](http://semver.org/).  
-This versioning method is same for all **Sylius** bundles and applications.
 
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusShippingBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/Sylius/blob/master/LICENSE).
 
 Authors
 -------

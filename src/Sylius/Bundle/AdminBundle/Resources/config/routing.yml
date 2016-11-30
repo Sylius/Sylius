@@ -1,17 +1,26 @@
-sylius_admin_root:
-    path: /
+sylius_admin_partial:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial.yml"
+    prefix: /_partial
+
+sylius_admin_ajax:
+    resource: "@SyliusAdminBundle/Resources/config/routing/ajax.yml"
+    prefix: /ajax
     defaults:
-        _controller: FrameworkBundle:Redirect:redirect
-        route: sylius_admin_dashboard
-        permanent: true
+        _format: json
 
 sylius_admin_dashboard:
-    path: /dashboard
+    path: /
     defaults:
         _controller: sylius.controller.admin.dashboard:indexAction
 
-sylius_admin_administrator:
-    resource: "@SyliusAdminBundle/Resources/config/routing/administrator.yml"
+sylius_admin_impersonate_user:
+    path: /impersonate/{username}
+    defaults:
+        _controller: 'sylius.controller.impersonate_user:impersonateAction'
+        username: $username
+
+sylius_admin_admin_user:
+    resource: "@SyliusAdminBundle/Resources/config/routing/admin_user.yml"
 
 sylius_admin_channel:
     resource: "@SyliusAdminBundle/Resources/config/routing/channel.yml"
@@ -25,6 +34,12 @@ sylius_admin_currency:
 sylius_admin_customer:
     resource: "@SyliusAdminBundle/Resources/config/routing/customer.yml"
 
+sylius_admin_customer_group:
+    resource: "@SyliusAdminBundle/Resources/config/routing/customer_group.yml"
+
+sylius_admin_exchange_rate:
+    resource: "@SyliusAdminBundle/Resources/config/routing/exchange_rate.yml"
+
 sylius_admin_locale:
     resource: "@SyliusAdminBundle/Resources/config/routing/locale.yml"
 
@@ -37,11 +52,17 @@ sylius_admin_payment_method:
 sylius_admin_product:
     resource: "@SyliusAdminBundle/Resources/config/routing/product.yml"
 
+sylius_admin_product_association_type:
+    resource: "@SyliusAdminBundle/Resources/config/routing/product_association_type.yml"
+
 sylius_admin_product_attribute:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_attribute.yml"
 
 sylius_admin_product_option:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_option.yml"
+
+sylius_admin_product_review:
+    resource: "@SyliusAdminBundle/Resources/config/routing/product_review.yml"
 
 sylius_admin_product_variant:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_variant.yml"
@@ -54,23 +75,20 @@ sylius_admin_promotion_coupon:
     resource: "@SyliusAdminBundle/Resources/config/routing/promotion_coupon.yml"
     prefix: /promotions/{promotionId}/coupons/
 
-sylius_admin_route:
-    resource: "@SyliusAdminBundle/Resources/config/routing/route.yml"
-
 sylius_admin_security:
     resource: "@SyliusAdminBundle/Resources/config/routing/security.yml"
+
+sylius_admin_shipping_category:
+    resource: "@SyliusAdminBundle/Resources/config/routing/shipping_category.yml"
 
 sylius_admin_shipping_method:
     resource: "@SyliusAdminBundle/Resources/config/routing/shipping_method.yml"
 
-sylius_admin_static_content:
-    resource: "@SyliusAdminBundle/Resources/config/routing/static_content.yml"
-
 sylius_admin_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/taxon.yml"
 
-sylius_admin_user:
-    resource: "@SyliusAdminBundle/Resources/config/routing/user.yml"
+sylius_admin_shop_user:
+    resource: "@SyliusAdminBundle/Resources/config/routing/shop_user.yml"
 
 sylius_admin_tax_category:
     resource: "@SyliusAdminBundle/Resources/config/routing/tax_category.yml"
@@ -80,11 +98,3 @@ sylius_admin_tax_rate:
 
 sylius_admin_zone:
     resource: "@SyliusAdminBundle/Resources/config/routing/zone.yml"
-
-sylius_admin_partial:
-    resource: "@SyliusAdminBundle/Resources/config/routing/partial.yml"
-    prefix: /_partial
-
-sylius_admin_api_taxon:
-    resource: "@SyliusAdminBundle/Resources/config/routing/api/taxon.yml"
-    prefix: /api

@@ -12,22 +12,19 @@
 namespace spec\Sylius\Component\Grid\Filter;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 use Sylius\Component\Grid\Filter\BooleanFilter;
 use Sylius\Component\Grid\Filtering\FilterInterface;
 
 /**
- * @mixin BooleanFilter
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class BooleanFilterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Filter\BooleanFilter');
+        $this->shouldHaveType(BooleanFilter::class);
     }
 
     function it_implements_filter_interface()

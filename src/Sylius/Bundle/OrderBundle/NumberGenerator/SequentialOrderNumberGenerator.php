@@ -89,6 +89,7 @@ final class SequentialOrderNumberGenerator implements OrderNumberGeneratorInterf
      */
     private function getSequence()
     {
+        /** @var OrderSequenceInterface $sequence */
         $sequence = $this->sequenceRepository->findOneBy([]);
 
         if (null === $sequence) {

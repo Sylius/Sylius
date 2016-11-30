@@ -18,7 +18,10 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -60,8 +63,11 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function process(OrderInterface $order)
+    public function process(BaseOrderInterface $order)
     {
+        /** @var OrderInterface $order */
+        Assert::isInstanceOf($order, OrderInterface::class);
+
         $this->clearTaxes($order);
         if ($order->isEmpty()) {
             return;
@@ -102,9 +108,9 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param OrderInterface $order
+     * @param BaseOrderInterface $order
      */
-    private function clearTaxes(OrderInterface $order)
+    private function clearTaxes(BaseOrderInterface $order)
     {
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT);
         foreach ($order->getItems() as $item) {

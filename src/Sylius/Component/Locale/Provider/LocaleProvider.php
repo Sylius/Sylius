@@ -57,19 +57,6 @@ final class LocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getDefinedLocalesCodes()
-    {
-        $locales = $this->localeRepository->findAll();
-
-        return array_map(
-            function (LocaleInterface $locale) { return $locale->getCode(); },
-            $locales
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultLocaleCode()
     {
         return $this->defaultLocaleCode;

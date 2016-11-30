@@ -71,9 +71,9 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'confirmation' => '#sylius_user_change_password_newPassword_second',
             'current_password' => '#sylius_user_change_password_currentPassword',
             'new_password' => '#sylius_user_change_password_newPassword_first',
-            'confirmation' => '#sylius_user_change_password_newPassword_second',
         ]);
     }
 }

@@ -3,12 +3,6 @@
 
 sylius:
     form:
-        action:
-            add_product_configuration:
-                price: Stukprijs
-                quantity: Hoeveelheid
-                variant: Variant
-            customer_group: Gebruikersgroep
         block:
             body: Inhoud
             id: ID
@@ -22,7 +16,11 @@ sylius:
             shipping_method: Verzendmethode
         promotion:
             channels: Kanalen
-        coupon:
+        promotion_action:
+            add_product_configuration:
+                product: Product
+            customer_group: Gebruikersgroep
+        promotion_coupon:
             per_customer_usage_limit: Gebruikslimiet per klant
         group:
             name: Naam
@@ -30,9 +28,9 @@ sylius:
         channel:
             taxonomies: Taxonomieën
             locale_default: Standaardlandinstelling
-            locales: "Talen/Regio's"
-            currency_default: Standaard valuta
-            currencies: "Valuta's"
+            locales: Talen/Regio's
+            currency_base: Standaardvaluta
+            currencies: Valuta's
             shipping_methods: Verzendmethodes
             payment_methods: Betaalmethodes
             tax_calculation_strategy: Strategie voor berekening van de BTW
@@ -40,6 +38,7 @@ sylius:
             theme: Thema
             hostname: Hostnaam
         image:
+            code: Code
             file: Afbeelding
         locale:
             code: Code
@@ -57,6 +56,7 @@ sylius:
             id: ID
             title: Titel
         product:
+            images: Afbeeldingen
             restricted_zone: Beperkte zone
             shipping_category: Verzend categorie
             short_description: Korte omschrijving
@@ -69,20 +69,6 @@ sylius:
             code: Code
         product_variant:
             tax_category: Belasting categorie
-        settings:
-            general:
-                currency: Standaard valuta
-                locale: Taal
-                meta_description: Meta omschrijving
-                meta_keywords: Meta sleutelwoorden
-                title: Pagina titel
-                tracking_code:
-                    Tracking code (for example: Tracking Code (bijvoorbeeld Google Analytics)
-            taxation:
-                default_tax_zone: Standaard belastingzone
-                default_tax_calculation_strategy: Standaard belasting berekeningsstrategie
-            security:
-                enabled: Inschakelen?
         shipment_filter:
             created_at_from: Van
             created_at_to: Tot
@@ -98,7 +84,9 @@ sylius:
         shipping_method:
             zone: Zone
         taxon:
+            code: Code
             file: Selecteer afbeelding
+            images: Afbeeldingen
         taxonomy:
             file: Selecteer afbeelding
         user:
@@ -116,10 +104,8 @@ sylius:
         variant:
             depth: Diepte
             height: Hoogte
-            images: Afbeeldingen
             on_hand: Huidige voorraad
             price: Prijs
-            original_price: Oorspronkelijke prijs
             sku: SKU
             weight: Gewicht
             width: Breedte
@@ -134,15 +120,73 @@ sylius:
             type: Associatietype
         product_association_type:
             name: Naam
+        promotion_filter:
+            product:
+                products: Producten
         promotion_rule:
-            contains_taxon:
-                taxon: Categorie
-                count: Aantal
-            taxon:
-                taxons: Taxons
+            product:
+                products: Producten
             total_of_items_from_taxon:
                 taxon: Categorie
                 amount: Hoeveelheid
+        payment_method:
+            channels: Kanalen
+    installer:
+        extensions:
+            header: extensies
+            accelerator:
+                header: Accelerator
+                help: Activeer Zend OpCache (sterk aangeraden).
+            apc: APC
+            ctype: Ctype
+            gd: GD
+            help: Installeer en activeer de %extension% extensie.
+            iconv: Iconv
+            exif: Exif
+            fileinfo: Bestandsinfo
+            icu: ICU
+            intl: Intl
+            json_encode: JSON
+            mbstring: Multibyte String
+            "off": false
+            "on": true
+            pcre: PCRE
+            pdo: PDO
+            php_xml: PHP-XML
+            session_start: Sessie
+            simplexml_import_dom: SimpleXML
+            token_get_all: Tokenizer
+        filesystem:
+            header: bestandssysteem
+            cache:
+                header: cache
+            exists: bestaat
+            logs:
+                header: logs
+            not_exists: niet bestaand
+            not_writable: niet schrijfbaar
+            parameters:
+                header: parameters.yml
+            vendors: vendors
+            writable: schrijfbaar
+        settings:
+            header: PHP-versie en -instellingen
+            any: elke
+            detect_unicode: detect_unicode
+            magic_quotes_gpc: magic_quotes_gpc
+            non_deprecated: niet verouderd
+            "off": false
+            "on": true
+            register_globals: register_globals
+            session:
+                auto_start: session.auto_start
+            short_open_tag: short_open_tag
+            timezone: tijdzone
+            timezone_deprecated:
+                header: Verouderde tijdzone
+                help: 'Tijdzone %timezone% is verouderd. Fix je php.ini bestand (lijst met verouderde tijdzones http://php.net/manual/en/timezones.others.php).'
+            version: PHP versie
+            version_recommended: Aanbevolen PHP versie
     email:
         order_confirmation:
             name: Order bevestiging
@@ -150,17 +194,16 @@ sylius:
             name: Order Opmerkingen
         shipment_confirmation:
             name: Bevestiging van de verzending
-            content: 'Je bestelling werd verstuurd.<br/>Bedankt voor een geslaagde transactie.'
         user_confirmation:
             name: Bevestiging van de gebruiker
             subject: Welkom in jouw winkel
-            content: 'Wekom bij onze winkel<br/><br/>Je bent zonet geregistreerd.<br/>Bedankt %username%.'
+            content: Wekom bij onze winkel<br/><br/>Je bent zonet geregistreerd.<br/>Bedankt %username%.
         password_reset:
             name: Wachtwoord opnieuw instellen
-            content: '<h3>Dag %username%</h3>Bezoek %url% om je wachtwoord opnieuw in te stellen.<br/><br/>Met vriendelijke groeten, het Team.'
+            content: <h3>Dag %username%</h3>Bezoek %url% om je wachtwoord opnieuw in te stellen.<br/><br/>Met vriendelijke groeten, het Team.
         verification:
             name: E-mail adres verificatie
-            content: 'Bezoek %url% om je email adres te bevestigen'
+            content: Bezoek %url% om je email adres te bevestigen
     payum_gateway:
         cash_on_delivery: Onder rembours
         offline: Offline

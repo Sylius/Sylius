@@ -21,8 +21,9 @@ interface ShippingMethodRepositoryInterface extends RepositoryInterface
 {
     /**
      * @param string $name
+     * @param string $locale
      *
-     * @return ShippingMethodInterface|null
+     * @return ShippingMethodInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name, $locale);
 }

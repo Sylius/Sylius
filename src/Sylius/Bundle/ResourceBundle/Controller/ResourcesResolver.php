@@ -16,18 +16,18 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourcesResolver implements ResourcesResolverInterface
+final class ResourcesResolver implements ResourcesResolverInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getResources(RequestConfiguration $requestConfiguration, RepositoryInterface $repository)
     {
-        if (null !== $repositoryMethod = $requestConfiguration->getRepositoryMethod()) {
-            $callable = [$repository, $repositoryMethod];
-            $resources = call_user_func_array($callable, $requestConfiguration->getRepositoryArguments());
+        $repositoryMethod = $requestConfiguration->getRepositoryMethod();
+        if (null !== $repositoryMethod) {
+            $arguments = array_values($requestConfiguration->getRepositoryArguments());
 
-            return $resources;
+            return $repository->$repositoryMethod(...$arguments);
         }
 
         if (!$requestConfiguration->isPaginated() && !$requestConfiguration->isLimited()) {

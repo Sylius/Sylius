@@ -49,7 +49,7 @@ sylius:
             not_blank: Bitte geben Sie Ihre Vorwahl ein.
             unique: Die Vorwahl muss eindeutig sein.
         members:
-            min_count: 'Bitte geben Sie mindestens {{ limit }} Versandgebiete an.'
+            min_count: Bitte geben Sie mindestens {{ limit }} Versandgebiete an.
         name:
             max_length: Der Name eines Versandgebietes darf nicht länger als 255 Zeichen sein|Der Name eines Versandgebietes darf nicht länger als 255 Zeichen sein.
             min_length: Der Name eines Versandgebietes muss mindestens zwei Zeichen lang sein|Der Name eines Versandgebietes muss mindestens zwei Zeichen lang sein.

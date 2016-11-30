@@ -22,8 +22,6 @@ use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
 /**
- * @mixin ResourceLoader
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceLoaderSpec extends ObjectBehavior
@@ -35,7 +33,7 @@ final class ResourceLoaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Routing\ResourceLoader');
+        $this->shouldHaveType(ResourceLoader::class);
     }
 
     function it_is_a_Symfony_routing_loader()
@@ -770,6 +768,7 @@ EOT;
             '_controller' => 'sylius.controller.product:deleteAction',
             '_sylius'     => [
                 'permission' => false,
+                'csrf_protection' => false
             ],
         ];
         $routeFactory->createRoute('/products/{id}', $deleteDefaults, [], [], '', [], ['DELETE'])->willReturn($deleteRoute);

@@ -32,4 +32,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $password
      */
     public function changePassword($password);
+
+    /**
+     * @param string $localeCode
+     */
+    public function changeLocale($localeCode);
 }

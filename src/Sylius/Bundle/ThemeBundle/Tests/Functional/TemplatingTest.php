@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ThemeBundle\Tests\Functional;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TemplatingTest extends ThemeBundleTestCase
+final class TemplatingTest extends ThemeBundleTestCase
 {
     /**
      * @dataProvider getBundleTemplates

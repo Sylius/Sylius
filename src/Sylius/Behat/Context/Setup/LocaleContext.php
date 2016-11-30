@@ -14,8 +14,8 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -82,7 +82,8 @@ final class LocaleContext implements Context
 
     /**
      * @Given the store has locale :localeCode
-     * @Given the store is available in :localeCode
+     * @Given the store is( also) available in :localeCode
+     * @Given the locale :localeCode is enabled
      */
     public function theStoreHasLocale($localeCode)
     {
@@ -95,6 +96,7 @@ final class LocaleContext implements Context
      * @Given the store has disabled locale :localeCode
      * @Given the locale :localeCode is disabled (as well)
      * @Given the locale :localeCode gets disabled
+     * @Given language :localeCode is disabled
      */
     public function theStoreHasDisabledLocale($localeCode)
     {
@@ -105,27 +107,31 @@ final class LocaleContext implements Context
     }
 
     /**
+     * @Given the locale :localeCode does not exist in the store
+     */
+    public function theStoreDoesNotHaveLocale($localeCode)
+    {
+        /** @var LocaleInterface $locale */
+        $locale = $this->localeRepository->findOneBy(['code' => $localeCode]);
+        if (null !== $locale) {
+            $this->localeRepository->remove($locale);
+        }
+    }
+
+    /**
      * @Given /^(that channel) allows to shop using the "([^"]+)" locale$/
      * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" locales$/
      * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" locales$/
      */
-    public function thatChannelAllowsToShopUsingAndLocales(
-        ChannelInterface $channel,
-        $firstLocaleName,
-        $secondLocaleName = null,
-        $thirdLocaleName = null
-    ) {
-        $locales = new ArrayCollection();
-
-        foreach ([$firstLocaleName, $secondLocaleName, $thirdLocaleName] as $localeName) {
-            if (null === $localeName) {
-                break;
-            }
-
-            $locales[] = $this->provideLocale($this->localeConverter->convertNameToCode($localeName));
+    public function thatChannelAllowsToShopUsingAndLocales(ChannelInterface $channel, ...$localesNames)
+    {
+        foreach ($channel->getLocales() as $locale) {
+            $channel->removeLocale($locale);
         }
 
-        $channel->setLocales($locales);
+        foreach ($localesNames as $localeName) {
+            $channel->addLocale($this->provideLocale($this->localeConverter->convertNameToCode($localeName)));
+        }
 
         $this->channelManager->flush();
     }

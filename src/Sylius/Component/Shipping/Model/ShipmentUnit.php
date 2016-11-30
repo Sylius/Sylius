@@ -35,22 +35,17 @@ class ShipmentUnit implements ShipmentUnitInterface
      */
     protected $shippable;
 
-    /**
-     * @var string
-     */
-    protected $shippingState = ShipmentInterface::STATE_READY;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
-        return (string) $this->id;
+        return (string) $this->getId();
     }
 
     /**
@@ -91,21 +86,5 @@ class ShipmentUnit implements ShipmentUnitInterface
     public function setShippable(ShippableInterface $shippable)
     {
         $this->shippable = $shippable;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getShippingState()
-    {
-        return $this->shippingState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingState($state)
-    {
-        $this->shippingState = $state;
     }
 }

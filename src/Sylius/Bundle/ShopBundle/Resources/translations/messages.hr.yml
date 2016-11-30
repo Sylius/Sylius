@@ -5,5 +5,5 @@ sylius:
     menu:
         shop:
             account:
-                dashboard: Kontrolna ploča
                 change_password: Promijenite lozinku
+                dashboard: Kontrolna ploča

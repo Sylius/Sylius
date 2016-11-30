@@ -4,18 +4,18 @@
 sylius:
     attribute:
         name:
-            not_blank: "Veuillez entrer un nom d'attribut."
-            min_length: "Le nom d'attribut doit contenir au moins 1 caractère.|Le nom d'attribut doit contenir au moins {{ limit }} caractères."
-            max_length: "Le nom d'attribut ne peut pas contenir plus de 1 caractère.|Le nom d'attribut ne peut pas contenir plus de {{ limit }} caractères."
+            not_blank: Veuillez entrer un nom d'attribut.
+            min_length: Le nom d'attribut doit contenir au moins 1 caractère.|Le nom d'attribut doit contenir au moins {{ limit }} caractères.
+            max_length: Le nom d'attribut ne peut pas contenir plus de 1 caractère.|Le nom d'attribut ne peut pas contenir plus de {{ limit }} caractères.
         code:
-            not_blank: "Entrez le code de l'attribut."
+            not_blank: Entrez le code de l'attribut.
             unique: Ce code est déjà utilisé.
         presentation:
-            not_blank: "Veuillez entrer une description de l'attribut."
-            min_length: "La description de l'attribut doit contenir au moins 1 caractère.|La description de l'attribut doit contenir au moins {{ limit }} caractères."
-            max_length: "La description de l'attribut ne doit pas contenir plus de 1 caractère.|La description de l'attribut ne doit pas contenir plus de {{ limit }} caractères."
+            not_blank: Veuillez entrer une description de l'attribut.
+            min_length: La description de l'attribut doit contenir au moins 1 caractère.|La description de l'attribut doit contenir au moins {{ limit }} caractères.
+            max_length: La description de l'attribut ne doit pas contenir plus de 1 caractère.|La description de l'attribut ne doit pas contenir plus de {{ limit }} caractères.
     attribute_value:
         attribute:
             not_blank: Veuillez sélectionner un attribut.
         value:
-            not_blank: "Veuillez entrer une valeur d'attribut."
+            not_blank: Veuillez entrer une valeur d'attribut.

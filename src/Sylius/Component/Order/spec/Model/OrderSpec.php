@@ -11,10 +11,12 @@
 
 namespace spec\Sylius\Component\Order\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Order\Model\AdjustableInterface;
 use Sylius\Component\Order\Model\AdjustmentInterface;
+use Sylius\Component\Order\Model\Order;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -26,20 +28,20 @@ final class OrderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Order\Model\Order');
+        $this->shouldHaveType(Order::class);
     }
 
-    function it_implements_Sylius_order_interface()
+    function it_implements_an_order_interface()
     {
         $this->shouldImplement(OrderInterface::class);
     }
 
-    function it_implements_Sylius_adjustable_interface()
+    function it_implements_an_adjustable_interface()
     {
         $this->shouldImplement(AdjustableInterface::class);
     }
 
-    function it_implements_Sylius_timestampable_interface()
+    function it_implements_a_timestampable_interface()
     {
         $this->shouldImplement(TimestampableInterface::class);
     }
@@ -49,35 +51,35 @@ final class OrderSpec extends ObjectBehavior
         $this->getId()->shouldReturn(null);
     }
 
-    function it_is_not_completed_by_default()
+    function it_does_not_have_completed_checkout_by_default()
     {
-        $this->shouldNotBeCompleted();
+        $this->shouldNotBeCheckoutCompleted();
     }
 
-    function it_can_be_completed()
+    function its_checkout_can_be_completed()
     {
-        $this->complete();
-        $this->shouldBeCompleted();
+        $this->completeCheckout();
+        $this->shouldBeCheckoutCompleted();
     }
 
-    function it_is_completed_when_completion_date_is_set()
+    function it_has_checkout_completed_when_completion_date_is_set()
     {
-        $this->shouldNotBeCompleted();
-        $this->setCompletedAt(new \DateTime('2 days ago'));
-        $this->shouldBeCompleted();
+        $this->shouldNotBeCheckoutCompleted();
+        $this->setCheckoutCompletedAt(new \DateTime('2 days ago'));
+        $this->shouldBeCheckoutCompleted();
     }
 
-    function it_has_no_completion_date_by_default()
+    function it_has_no_checkout_completion_date_by_default()
     {
-        $this->getCompletedAt()->shouldReturn(null);
+        $this->getCheckoutCompletedAt()->shouldReturn(null);
     }
 
-    function its_completion_date_is_mutable()
+    function its_checkout_completion_date_is_mutable()
     {
         $date = new \DateTime('1 hour ago');
 
-        $this->setCompletedAt($date);
-        $this->getCompletedAt()->shouldReturn($date);
+        $this->setCheckoutCompletedAt($date);
+        $this->getCheckoutCompletedAt()->shouldReturn($date);
     }
 
     function it_has_no_number_by_default()
@@ -93,7 +95,7 @@ final class OrderSpec extends ObjectBehavior
 
     function it_creates_items_collection_by_default()
     {
-        $this->getItems()->shouldHaveType('Doctrine\\Common\\Collections\\Collection');
+        $this->getItems()->shouldHaveType(Collection::class);
     }
 
     function it_adds_items_properly(OrderItemInterface $item)
@@ -146,7 +148,7 @@ final class OrderSpec extends ObjectBehavior
 
     function it_creates_adjustments_collection_by_default()
     {
-        $this->getAdjustments()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getAdjustments()->shouldHaveType(Collection::class);
     }
 
     function it_adds_adjustments_properly(AdjustmentInterface $adjustment)
@@ -249,8 +251,11 @@ final class OrderSpec extends ObjectBehavior
         $this->getAdjustmentsTotal()->shouldReturn(0);
     }
 
-    function it_calculates_correct_adjustments_total(AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2, AdjustmentInterface $adjustment3)
-    {
+    function it_calculates_correct_adjustments_total(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2,
+        AdjustmentInterface $adjustment3
+    ) {
         $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->getAmount()->willReturn(-4999);
         $adjustment3->getAmount()->willReturn(1929);
@@ -315,8 +320,12 @@ final class OrderSpec extends ObjectBehavior
         $this->getTotalQuantity()->shouldReturn(40);
     }
 
-    function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
-    {
+    function it_calculates_correct_total(
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2
+    ) {
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
 
@@ -391,8 +400,12 @@ final class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(80000);
     }
 
-    function it_ignores_neutral_adjustments_when_calculating_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
-    {
+    function it_ignores_neutral_adjustments_when_calculating_total(
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2
+    ) {
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
 
@@ -418,8 +431,10 @@ final class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(70000);
     }
 
-    function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(OrderItemInterface $item, AdjustmentInterface $adjustment)
-    {
+    function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(
+        OrderItemInterface $item,
+        AdjustmentInterface $adjustment
+    ) {
         $item->getTotal()->willReturn(45000);
 
         $item->equals(Argument::any())->willReturn(false);
@@ -439,7 +454,7 @@ final class OrderSpec extends ObjectBehavior
 
     function it_initializes_creation_date_by_default()
     {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
+        $this->getCreatedAt()->shouldHaveType(\DateTime::class);
     }
 
     function it_has_no_last_update_date_by_default()
@@ -453,7 +468,7 @@ final class OrderSpec extends ObjectBehavior
         $this->shouldBeEmpty();
     }
 
-    function it_should_be_able_to_clear_items(OrderItemInterface $item)
+    function it_clears_items(OrderItemInterface $item)
     {
         $this->shouldBeEmpty();
         $this->addItem($item);

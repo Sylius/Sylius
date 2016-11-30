@@ -2,9 +2,11 @@
     <div class="column">
         <div class="ui segment">
             {{ form_errors(form) }}
-            <div class="two fields">
+            <div class="three fields">
                 {{ form_row(form.code) }}
+                {{ form_row(form.position) }}
                 {{ form_row(form.zone) }}
+                {{ form_row(form.channels) }}
             </div>
             {{ form_row(form.enabled) }}
             <h4 class="ui dividing header">{{ 'sylius.ui.category_requirements'|trans }}</h4>
@@ -12,8 +14,9 @@
             {% for categoryRequirementChoiceForm in form.categoryRequirement %}
                 {{ form_row(categoryRequirementChoiceForm) }}
             {% endfor %}
-            <h4 class="ui dividing header">{{ 'sylius.ui.charges_and_taxes'|trans }}</h4>
+            <h4 class="ui dividing header">{{ 'sylius.ui.taxes'|trans }}</h4>
             {{ form_row(form.taxCategory) }}
+            <h4 class="ui dividing header">{{ 'sylius.ui.shipping_charges'|trans }}</h4>
             {{ form_row(form.calculator) }}
             {% for name, calculatorConfigurationPrototype in form.vars.prototypes %}
                 <div id="{{ form.calculator.vars.id }}_{{ name }}" data-container=".configuration"

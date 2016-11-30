@@ -34,6 +34,7 @@ Don't worry, everything was automatically installed via Composer.
     public function registerBundles()
     {
         $bundles = array(
+            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
@@ -59,7 +60,6 @@ Put this configuration inside your ``app/config/config.yml``.
 .. code-block:: yaml
 
     sylius_mailer:
-        driver: doctrine/orm # Configure the doctrine orm driver used in the documentation.
         sender:
             name: My website
             address: no-reply@my-website.com

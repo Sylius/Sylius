@@ -28,7 +28,7 @@ sylius:
             weight_rate_configuration:
                 label: Viktbaserat pris
             volume_rate_configuration:
-                amount: Belopp
+                amount: Antal
         shipping_category:
             description: Beskrivning
             name: Namn
@@ -36,6 +36,7 @@ sylius:
             calculator: Kalkylator
             category: Kategori
             category_requirement: Kategorikrav
+            channels: Kanaler
             configuration: Konfiguration
             description: Beskrivning
             enabled: Aktiverad

@@ -20,7 +20,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ListCommand extends ContainerAwareCommand
+final class ListCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}

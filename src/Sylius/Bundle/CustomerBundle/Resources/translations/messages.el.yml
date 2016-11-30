@@ -3,15 +3,14 @@
 
 sylius:
     form:
-        group:
-            name: Ονομασία
-            roles: Ρόλοι
         customer:
             first_name: Όνομα
-            groups: Ομάδες
             last_name: Επώνυμο
             email: Ηλεκτρονικό ταχυδρομείο
             billing_address: Διεύθυνση τιμολόγησης
             different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
+        customer_group:
+            name: Ονομασία
+            roles: Ρόλοι
     gender:
         unknown: Άγνωστο

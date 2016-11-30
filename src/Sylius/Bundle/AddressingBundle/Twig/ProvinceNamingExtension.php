@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AddressingBundle\Twig;
 
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 
 /**
@@ -43,23 +44,23 @@ class ProvinceNamingExtension extends \Twig_Extension
     }
 
     /**
-     * @param string $provinceCode
+     * @param AddressInterface $address
      *
      * @return string
      */
-    public function getProvinceName($provinceCode)
+    public function getProvinceName(AddressInterface $address)
     {
-        return $this->provinceNamingProvider->getName($provinceCode);
+        return $this->provinceNamingProvider->getName($address);
     }
 
     /**
-     * @param string $provinceCode
+     * @param AddressInterface $address
      *
      * @return string
      */
-    public function getProvinceAbbreviation($provinceCode)
+    public function getProvinceAbbreviation(AddressInterface $address)
     {
-        return $this->provinceNamingProvider->getAbbreviation($provinceCode);
+        return $this->provinceNamingProvider->getAbbreviation($address);
     }
 
     /**

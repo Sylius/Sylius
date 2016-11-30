@@ -8,6 +8,5 @@ sylius:
             subject: Predmet
             sender_name: Meno odosielateľa
             sender_address: Adresa odosielateľa
-            content: Obsah
             template: Šablóna
             no_template: Použiť vlastnú šablónu

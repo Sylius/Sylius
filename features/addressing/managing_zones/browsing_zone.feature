@@ -11,6 +11,6 @@ Feature: Browsing zones
 
     @ui
     Scenario: Browsing zones in store
-        Given I want to see all zones in store
+        When I want to see all zones in store
         Then I should see 2 zones in the list
         And I should see the zone named "North America" in the list

@@ -4,10 +4,10 @@
 default:
     suites:
         ui_managing_promotions:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
-                - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.date_time
                 - sylius.behat.context.transform.lexical
@@ -18,6 +18,7 @@ default:
                 - sylius.behat.context.transform.shipping_method
 
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product

@@ -7,3 +7,4 @@ sylius:
             add: اضافة
             choices: الخيارات
             name: الاسم
+            type: نوع

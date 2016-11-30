@@ -59,6 +59,11 @@ class Attribute implements AttributeInterface
      */
     protected $storageType;
 
+    /**
+     * @var int
+     */
+    protected $position;
+
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -68,7 +73,7 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return string
      */
     public function __toString()
     {
@@ -104,7 +109,7 @@ class Attribute implements AttributeInterface
      */
     public function getName()
     {
-        return $this->translate()->getName();
+        return $this->getTranslation()->getName();
     }
 
     /**
@@ -112,7 +117,7 @@ class Attribute implements AttributeInterface
      */
     public function setName($name)
     {
-        $this->translate()->setName($name);
+        $this->getTranslation()->setName($name);
     }
 
     /**
@@ -156,7 +161,15 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     * @param string $storageType
+     * {@inheritdoc}
+     */
+    public function getStorageType()
+    {
+        return $this->storageType;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function setStorageType($storageType)
     {
@@ -164,10 +177,26 @@ class Attribute implements AttributeInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    public function getStorageType()
+    public function getPosition()
     {
-        return $this->storageType;
+        return $this->position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new AttributeTranslation();
     }
 }

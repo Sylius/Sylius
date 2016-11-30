@@ -5,15 +5,15 @@ sylius:
     attribute:
         name:
             not_blank: 请输入属性名称。
-            min_length: '属性名称必须是至少 1 个字符长。 |属性名称必须至少 {{limit}} 个字符长。'
-            max_length: '属性名称必须不能超过 1 个字符。 |属性名称不能长于 {{limit}} 字符。'
+            min_length: 属性名称必须是至少 1 个字符长。 |属性名称必须至少 {{limit}} 个字符长。
+            max_length: 属性名称必须不能超过 1 个字符。 |属性名称不能长于 {{limit}} 字符。
         code:
             not_blank: 请输入属性的编码。
             unique: 此编码已被使用。
         presentation:
             not_blank: 请输入属性介绍。
-            min_length: '属性介绍必须是至少 1 个字符长。 |属性介绍必须至少 {{limit}} 个字符长。'
-            max_length: '属性介绍必须不能超过 1 个字符。 |属性介绍不能长于 {{limit}} 字符。'
+            min_length: 属性介绍必须是至少 1 个字符长。 |属性介绍必须至少 {{limit}} 个字符长。
+            max_length: 属性介绍必须不能超过 1 个字符。 |属性介绍不能长于 {{limit}} 字符。
     attribute_value:
         attribute:
             not_blank: 请选择属性。

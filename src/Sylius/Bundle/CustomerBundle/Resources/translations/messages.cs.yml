@@ -3,16 +3,15 @@
 
 sylius:
     form:
-        group:
-            name: Jméno
-            roles: Role
         customer:
             first_name: Křestní Jméno
-            groups: Skupiny
             last_name: Příjmení
             email: Email
             phone_number: Telefonní číslo
             billing_address: Fakturační adresa
             different_billing_address: Použít jinou adresu pro fakturaci?
+        customer_group:
+            name: Jméno
+            roles: Role
     gender:
         unknown: Neznámý

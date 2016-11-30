@@ -62,26 +62,22 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     public function findNodesTreeSorted();
     
     /**
-     * @param string $permalink
+     * @param string $slug
      *
      * @return TaxonInterface|null
      */
-    public function findOneByPermalink($permalink);
+    public function findOneBySlug($slug);
 
     /**
      * @param string $name
+     * @param string $locale
      *
-     * @return TaxonInterface|null
+     * @return TaxonInterface[]
      */
-    public function findOneByName($name);
+    public function findByName($name, $locale);
 
     /**
      * @return QueryBuilder
      */
     public function createListQueryBuilder();
-
-    /**
-     * @return QueryBuilder
-     */
-    public function getFormQueryBuilder();
 }

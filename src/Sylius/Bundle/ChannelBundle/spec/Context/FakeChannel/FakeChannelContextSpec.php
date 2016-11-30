@@ -22,8 +22,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
- * @mixin FakeChannelContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FakeChannelContextSpec extends ObjectBehavior
@@ -38,7 +36,7 @@ final class FakeChannelContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ChannelBundle\Context\FakeChannel\FakeChannelContext');
+        $this->shouldHaveType(FakeChannelContext::class);
     }
 
     function it_implements_channel_context_interface()

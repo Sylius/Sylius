@@ -18,9 +18,9 @@ Some of the features worth mentioning:
 
     installation
     your_first_grid
-    column_types
-    column_configuration
+    field_types
+    field_configuration
     filters
-    custom_column_type
+    custom_field_type
     custom_filter
     configuration

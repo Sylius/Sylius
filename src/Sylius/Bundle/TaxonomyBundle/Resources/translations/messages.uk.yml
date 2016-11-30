@@ -6,7 +6,6 @@ sylius:
         taxon:
             description: Опис
             name: Назва
-            parent: "Батьківський об'єкт"
-            permalink: Постійне посилання
+            parent: Батьківський об'єкт
         taxonomy:
-            name: Ім’я
+            name: Назва

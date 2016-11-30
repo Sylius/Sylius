@@ -35,12 +35,12 @@ This interface should be implemented by models representing a **Promotion**.
 
 .. _component_promotion_model_action-interface:
 
-ActionInterface
-~~~~~~~~~~~~~~~
+PromotionActionInterface
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-This interface should be implemented by models representing an **Action**.
+This interface should be implemented by models representing an **PromotionAction**.
 
-An **ActionInterface** has two defined types by default:
+An **PromotionActionInterface** has two defined types by default:
 
 +--------------------------+---------------------+
 | Related constant         | Type                |
@@ -52,9 +52,9 @@ An **ActionInterface** has two defined types by default:
 
 .. note::
 
-    You will find more information about this interface in `Sylius API ActionInterface`_.
+    You will find more information about this interface in `Sylius API PromotionActionInterface`_.
 
-.. _Sylius API ActionInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/ActionInterface.html
+.. _Sylius API PromotionActionInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionActionInterface.html
 
 .. _component_promotion_model_coupon-interface:
 
@@ -74,12 +74,12 @@ This interface should be implemented by models representing a **Coupon**.
 
 .. _component_promotion_model_rule-interface:
 
-RuleInterface
-~~~~~~~~~~~~~
+PromotionRuleInterface
+~~~~~~~~~~~~~~~~~~~~~~
 
-This interface should be implemented by models representing a **Rule**.
+This interface should be implemented by models representing a **PromotionRule**.
 
-A **RuleInterface** has two defined types by default:
+A **PromotionRuleInterface** has two defined types by default:
 
 +-----------------------+------------+
 | Related constant      | Type       |
@@ -91,41 +91,41 @@ A **RuleInterface** has two defined types by default:
 
 .. note::
 
-    You will find more information about this interface in `Sylius API RuleInterface`_.
+    You will find more information about this interface in `Sylius API PromotionRuleInterface`_.
 
-.. _Sylius API RuleInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/RuleInterface.html
+.. _Sylius API PromotionRuleInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionRuleInterface.html
 
 .. _component_promotion_model_promotion-countable-subject-interface:
 
-PromotionCountableSubjectInterface
+CountablePromotionSubjectInterface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To be able to count the object's promotion subjects, the object class needs to implement
-the ``PromotionCountableSubjectInterface``.
+the ``CountablePromotionSubjectInterface``.
 
 .. note::
 
     This interface extends the :ref:`component_promotion_model_promotion-subject-interface`.
 
-    You will find more information about this interface in `Sylius API PromotionCountableSubjectInterface`_.
+    You will find more information about this interface in `Sylius API CountablePromotionSubjectInterface`_.
 
-.. _Sylius API PromotionCountableSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCountableSubjectInterface.html
+.. _Sylius API CountablePromotionSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/CountablePromotionSubjectInterface.html
 
 .. _component_promotion_model_promotion-coupon-aware-subject-interface:
 
-PromotionCouponAwareSubjectInterface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PromotionCouponAwarePromotionSubjectInterface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To make the object able to get its associated coupon, the object class needs to implement
-the ``PromotionCouponAwareSubjectInterface``.
+the ``PromotionCouponAwarePromotionSubjectInterface``.
 
 .. note::
 
     This interface extends the :ref:`component_promotion_model_promotion-subject-interface`.
 
-    You will find more information about this interface in `Sylius API PromotionCouponAwareSubjectInterface`_.
+    You will find more information about this interface in `Sylius API PromotionCouponAwarePromotionSubjectInterface`_.
 
-.. _Sylius API PromotionCouponAwareSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCouponAwareSubjectInterface.html
+.. _Sylius API PromotionCouponAwarePromotionSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCouponAwarePromotionSubjectInterface.html
 
 .. _component_promotion_model_promotion-coupons-aware-subject-interface:
 
@@ -215,26 +215,26 @@ In order to be able to find active promotions in your system you should create a
 
 .. _component_promotion_generator_coupon-generator-interface:
 
-CouponGeneratorInterface
-~~~~~~~~~~~~~~~~~~~~~~~~
+PromotionCouponGeneratorInterface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In order to automate the process of coupon generation your system needs to have a service that will implement this interface.
 
 .. note::
 
-    For more detailed information about this interface go to `Sylius API CouponGeneratorInterface`_.
+    For more detailed information about this interface go to `Sylius API PromotionCouponGeneratorInterface`_.
 
-.. _Sylius API CouponGeneratorInterface: http://api.sylius.org/Sylius/Component/Promotion/Generator/CouponGeneratorInterface.html
+.. _Sylius API PromotionCouponGeneratorInterface: http://api.sylius.org/Sylius/Component/Promotion/Generator/PromotionCouponGeneratorInterface.html
 
 .. _component_promotion_model_action-action-interface:
 
-PromotionActionInterface
-~~~~~~~~~~~~~~~~~~~~~~~~
+PromotionActionCommandInterface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This interface should be implemented by services that execute actions on the promotion subjects.
 
 .. note::
 
-    You will find more information about this interface in `Sylius API PromotionActionInterface`_.
+    You will find more information about this interface in `Sylius API PromotionActionCommandInterface`_.
 
-.. _Sylius API PromotionActionInterface: http://api.sylius.org/Sylius/Component/Promotion/Action/PromotionActionInterface.html
+.. _Sylius API PromotionActionCommandInterface: http://api.sylius.org/Sylius/Component/Promotion/Action/PromotionActionCommandInterface.html

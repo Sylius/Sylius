@@ -26,6 +26,10 @@ class RenderedEmail
      */
     protected $body;
 
+    /**
+     * @param string $subject
+     * @param string $body
+     */
     public function __construct($subject, $body)
     {
         $this->subject = $subject;
@@ -42,14 +46,10 @@ class RenderedEmail
 
     /**
      * @param string $subject
-     *
-     * @return $this
      */
     public function setSubject($subject)
     {
         $this->subject = $subject;
-
-        return $this;
     }
 
     /**
@@ -62,13 +62,9 @@ class RenderedEmail
 
     /**
      * @param string $body
-     *
-     * @return $this
      */
     public function setBody($body)
     {
         $this->body = $body;
-
-        return $this;
     }
 }

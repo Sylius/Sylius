@@ -3,12 +3,8 @@
 
 sylius:
     form:
-        group:
-            name: Név
-            roles: Szerepek
         customer:
             first_name: Keresztnév
-            groups: Csoportok
             last_name: Vezetéknév
             email: E-mail
             phone_number: Telefonszám
@@ -17,6 +13,9 @@ sylius:
             billing_address: Számlázási cím
             different_billing_address: A számlázási címe különbözik a megadott címtől?
             only_customer_registration: Fiók létrehozása?
+        customer_group:
+            name: Név
+            roles: Szerepek
     gender:
         unknown: Ismeretlen
         male: Férfi

@@ -15,11 +15,9 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 /**
- * @mixin OrderAdjustmentsClearer
- *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderAdjustmentsClearerSpec extends ObjectBehavior

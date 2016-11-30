@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
 use SM\Factory\FactoryInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StateMachine implements StateMachineInterface
+final class StateMachine implements StateMachineInterface
 {
     /**
      * @var FactoryInterface

@@ -12,5 +12,5 @@ sylius:
             mismatch: As palavras-passe inseridas não combinam
             wrong_current: A palavra-passe fornecida é diferente da atual.
         password:
-            min: 'A palavra-passe deve ter, pelo menos, {{ limit }} caracteres.'
-            max: 'A palavra-passe não pode ter mais que {{ limit }} caracteres.'
+            min: A palavra-passe deve ter, pelo menos, {{ limit }} caracteres.
+            max: A palavra-passe não pode ter mais que {{ limit }} caracteres.

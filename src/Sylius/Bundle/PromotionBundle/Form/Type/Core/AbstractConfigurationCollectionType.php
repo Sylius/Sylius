@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type\Core;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -28,6 +29,9 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
      */
     protected $registry;
 
+    /**
+     * @param ServiceRegistryInterface $registry
+     */
     public function __construct(ServiceRegistryInterface $registry)
     {
         $this->registry = $registry;
@@ -43,9 +47,9 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
         foreach (array_keys($this->registry->all()) as $type) {
             $prototypeOptions = array_replace(
                 ['configuration_type' => $type],
-                $options['options']
+                $options['entry_options']
             );
-            $form = $builder->create($options['prototype_name'], $options['type'], $prototypeOptions);
+            $form = $builder->create($options['prototype_name'], $options['entry_type'], $prototypeOptions);
 
             $prototypes[$type] = $form->getForm();
         }
@@ -72,7 +76,7 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'type' => $this->getFormTypeOption(),
+            'entry_type' => $this->getEntryType(),
             'allow_add' => true,
             'allow_delete' => true,
             'by_reference' => false,
@@ -84,11 +88,11 @@ abstract class AbstractConfigurationCollectionType extends AbstractType
      */
     public function getParent()
     {
-        return 'collection';
+        return CollectionType::class;
     }
 
     /**
      * @return string
      */
-    abstract public function getFormTypeOption();
+    abstract public function getEntryType();
 }

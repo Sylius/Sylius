@@ -15,12 +15,9 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Currency\Context\ProviderBasedCurrencyContext;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 
 /**
- * @mixin ProviderBasedCurrencyContext
- *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ProviderBasedCurrencyContextSpec extends ObjectBehavior
@@ -32,7 +29,7 @@ final class ProviderBasedCurrencyContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Currency\Context\ProviderBasedCurrencyContext');
+        $this->shouldHaveType(ProviderBasedCurrencyContext::class);
     }
 
     function it_is_a_currency_context()

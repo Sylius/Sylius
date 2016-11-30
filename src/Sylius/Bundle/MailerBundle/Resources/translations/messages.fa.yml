@@ -8,6 +8,6 @@ sylius:
             subject: عنوان
             sender_name: نام ارسال کننده
             sender_address: آدرس ارسال کننده
-            content: آیتم های محتوایی
+            content: محتوا
             template: تمپلت ایمیل
             no_template: استفاده از تمپلت اختصاصی

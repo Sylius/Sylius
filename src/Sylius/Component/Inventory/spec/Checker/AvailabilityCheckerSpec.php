@@ -17,8 +17,6 @@ use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * @mixin AvailabilityChecker
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class AvailabilityCheckerSpec extends ObjectBehavior
@@ -42,9 +40,8 @@ final class AvailabilityCheckerSpec extends ObjectBehavior
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
 
-    function it_recognizes_stockable_as_not_available_if_on_hand_quantity_is_equal_to_0(
-        StockableInterface $stockable
-    ) {
+    function it_recognizes_stockable_as_not_available_if_on_hand_quantity_is_equal_to_0(StockableInterface $stockable)
+    {
         $stockable->isTracked()->willReturn(true);
         $stockable->getOnHand()->willReturn(0);
         $stockable->getOnHold()->willReturn(0);

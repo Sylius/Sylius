@@ -4,7 +4,7 @@
 default:
     suites:
         ui_products_accessibility_in_multiple_channels:
-            contexts_as_services:
+            contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.transform.shared_storage

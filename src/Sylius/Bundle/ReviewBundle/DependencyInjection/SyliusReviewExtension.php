@@ -20,13 +20,8 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class SyliusReviewExtension extends AbstractResourceExtension
+final class SyliusReviewExtension extends AbstractResourceExtension
 {
-    /**
-     * @var array
-     */
-    private $reviewSubjects = [];
-
     /**
      * {@inheritdoc}
      */
@@ -37,21 +32,9 @@ class SyliusReviewExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
-        foreach ($config['resources'] as $name => $parameters) {
-            $this->addRequiredArgumentsToForms($name, $parameters, $container);
-        }
+        $loader->load('services.xml');
 
-        foreach ($this->reviewSubjects as $subject) {
-            $this->addProperTagToReviewDeleteListener($subject, $container);
-        }
-
-        $configFiles = [
-            'services.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $this->addProperTagToReviewDeleteListener($container);
     }
 
     /**
@@ -59,17 +42,9 @@ class SyliusReviewExtension extends AbstractResourceExtension
      */
     private function resolveResources(array $resources, ContainerBuilder $container)
     {
-        $subjects = [];
-
-        foreach ($resources as $subject => $parameters) {
-            $this->reviewSubjects[] = $subject;
-            $subjects[$subject] = $parameters;
-        }
-
-        $container->setParameter('sylius.review.subjects', $subjects);
+        $container->setParameter('sylius.review.subjects', $resources);
 
         $resolvedResources = [];
-
         foreach ($resources as $subjectName => $subjectConfig) {
             foreach ($subjectConfig as $resourceName => $resourceConfig) {
                 if (is_array($resourceConfig)) {
@@ -82,28 +57,9 @@ class SyliusReviewExtension extends AbstractResourceExtension
     }
 
     /**
-     * @param string $name
-     * @param array $parameters
      * @param ContainerBuilder $container
      */
-    private function addRequiredArgumentsToForms($name, array $parameters, ContainerBuilder $container)
-    {
-        if (!$container->hasDefinition('sylius.form.type.'.$name.'_review')) {
-            return;
-        }
-
-        foreach ($parameters['review']['classes']['form'] as $formName => $form) {
-            $formKey = ('default' === $formName) ? $name.'_review' : $name.'_review_'.$formName;
-            $formDefinition = $container->getDefinition('sylius.form.type.'.$formKey);
-            $formDefinition->addArgument($name);
-        }
-    }
-
-    /**
-     * @param string $resourceName
-     * @param ContainerBuilder $container
-     */
-    private function addProperTagToReviewDeleteListener($resourceName, ContainerBuilder $container)
+    private function addProperTagToReviewDeleteListener(ContainerBuilder $container)
     {
         if (!$container->hasDefinition('sylius.listener.review_delete')) {
             return;

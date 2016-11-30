@@ -1,0 +1,18 @@
+sylius_admin_customer_group:
+    resource: |
+        alias: sylius.customer_group
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show']
+        redirect: update
+        grid: sylius_admin_customer_group
+        permission: true
+        vars:
+            all:
+                header: sylius.ui.customer_groups
+                subheader: sylius.ui.manage_customer_groups
+                templates:
+                    form: SyliusAdminBundle:CustomerGroup:_form.html.twig
+            index:
+                icon: archive
+    type: sylius.resource

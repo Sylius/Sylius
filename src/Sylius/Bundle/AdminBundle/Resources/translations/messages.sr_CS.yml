@@ -6,14 +6,30 @@ sylius:
         admin:
             main:
                 catalog:
-                    products: Poroizvodi
+                    attributes: Atributi
+                    header: Katalog
+                    options: Opcije
+                    products: Proizvodi
                 configuration:
+                    admin_users: Administratori
+                    channels: Kanali
                     countries: Zemlje
-                    payment_methods: Opcije plaćanja
+                    currencies: Valute
+                    header: Konfiguracija
+                    locales: Lokalizacije
+                    payment_methods: Načini plaćanja
                     shipping_methods: Načini dostave
+                    tax_categories: Poreske kategorije
                     tax_rates: Poreske stope
                     zones: Zone
                 marketing:
+                    header: Marketing
+                    product_reviews: Opisi proizvoda
                     promotions: Promocije
+                customers:
+                    customers: Kupci
+                    groups: Grupe
+                    header: Kupac
                 sales:
+                    header: Akcije
                     orders: Narudžbine

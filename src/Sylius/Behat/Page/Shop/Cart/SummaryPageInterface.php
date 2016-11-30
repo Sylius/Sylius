@@ -28,6 +28,11 @@ interface SummaryPageInterface extends PageInterface
     /**
      * @return string
      */
+    public function getBaseGrandTotal();
+
+    /**
+     * @return string
+     */
     public function getTaxTotal();
 
     /**
@@ -97,6 +102,13 @@ interface SummaryPageInterface extends PageInterface
     public function hasItemNamed($name);
 
     /**
+     * @param string $code
+     *
+     * @return bool
+     */
+    public function hasItemWithCode($code);
+
+    /**
      * @param string $variantName
      *
      * @return bool
@@ -139,4 +151,14 @@ interface SummaryPageInterface extends PageInterface
     public function clearCart();
 
     public function updateCart();
+
+    /**
+     * @param int $timeout
+     */
+    public function waitForRedirect($timeout);
+
+    /**
+     * @return string
+     */
+    public function getPromotionCouponValidationMessage();
 }

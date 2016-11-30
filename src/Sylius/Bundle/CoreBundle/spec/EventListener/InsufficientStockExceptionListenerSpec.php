@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener;
+use Sylius\Component\Inventory\Exception\InsufficientStockException;
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Component\Inventory\Operator\InsufficientStockException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -24,8 +24,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * @mixin InsufficientStockExceptionListener
- *
  * @author Manuel Gonzalez <mgonyan@gmail.com>
  */
 final class InsufficientStockExceptionListenerSpec extends ObjectBehavior
@@ -66,7 +64,7 @@ final class InsufficientStockExceptionListenerSpec extends ObjectBehavior
         $event->setResponse(Argument::type(RedirectResponse::class))->shouldBeCalled();
 
         $translator->trans(
-            'sylius.checkout.out_of_stock',
+            'sylius.product.out_of_stock',
             [
                 '%quantity%' => '30',
                 '%name%' => 'Inventory Name',

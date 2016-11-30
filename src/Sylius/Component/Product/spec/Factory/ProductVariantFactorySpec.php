@@ -15,13 +15,10 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Factory\ProductVariantFactory;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Product\Model\VariantInterface;
+use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * @mixin ProductVariantFactory
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ProductVariantFactorySpec extends ObjectBehavior
@@ -46,17 +43,17 @@ final class ProductVariantFactorySpec extends ObjectBehavior
         $this->shouldImplement(ProductVariantFactoryInterface::class);
     }
 
-    function it_creates_new_variant(FactoryInterface $factory, VariantInterface $variant)
+    function it_creates_new_variant(FactoryInterface $factory, ProductVariantInterface $variant)
     {
         $factory->createNew()->willReturn($variant);
 
         $this->createNew()->shouldReturn($variant);
     }
 
-    function it_creates_a_variant_and_assigns_a_product_to_id(
+    function it_creates_a_variant_and_assigns_a_product_to_it(
         FactoryInterface $factory,
         ProductInterface $product,
-        VariantInterface $variant
+        ProductVariantInterface $variant
     ) {
         $factory->createNew()->willReturn($variant);
         $variant->setProduct($product)->shouldBeCalled();

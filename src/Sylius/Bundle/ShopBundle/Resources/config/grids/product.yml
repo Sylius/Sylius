@@ -40,4 +40,21 @@ sylius_grid:
                     type: elastica
                 taxons.code:
                     type: elastica
-
+            sorting:
+                position: asc
+            fields:
+                createdAt:
+                    type: datetime
+                    label: sylius.ui.date
+                    sortable: ~
+                    options:
+                        format: m/d/Y
+                position: 
+                    type: string  #not use but expected
+                    sortable: productTaxon.position
+            filters:
+                search:
+                    type: string
+                    template: "@SyliusShop/Grid/Filter/string.html.twig"
+                    options:
+                        fields: [translation.name]

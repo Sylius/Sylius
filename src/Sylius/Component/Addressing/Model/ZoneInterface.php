@@ -26,6 +26,11 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
     const TYPE_ZONE = 'zone';
 
     /**
+     * @return string[]
+     */
+    public static function getTypes();
+
+    /**
      * @return string
      */
     public function getName();
@@ -59,11 +64,6 @@ interface ZoneInterface extends ResourceInterface, CodeAwareInterface
      * @return Collection|ZoneMemberInterface[]
      */
     public function getMembers();
-
-    /**
-     * @param Collection|ZoneMemberInterface[] $members
-     */
-    public function setMembers(Collection $members);
 
     /**
      * @return bool

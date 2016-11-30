@@ -25,6 +25,11 @@ interface PromotionSubjectInterface
     public function getPromotionSubjectTotal();
 
     /**
+     * @return Collection|PromotionInterface[]
+     */
+    public function getPromotions();
+
+    /**
      * @param PromotionInterface $promotion
      *
      * @return bool
@@ -40,9 +45,4 @@ interface PromotionSubjectInterface
      * @param PromotionInterface $promotion
      */
     public function removePromotion(PromotionInterface $promotion);
-
-    /**
-     * @return Collection|PromotionInterface[]
-     */
-    public function getPromotions();
 }

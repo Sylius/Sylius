@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    inventory_unit:
-        backorder: Inventariseenheid in backorder geplaatst.
-        sell: Inventariseenheid vervuld.
-        return: Inventariseenheid geretourneerd.
-        transition_fail: De actie kon niet worden uitgevoerd gezien de huidige staat van het exemplaar

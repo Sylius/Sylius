@@ -4,15 +4,16 @@
 sylius:
     form:
         address:
-            city: จังหวัด
+            city: เขต/อำเภอ
             company: บริษัท
             country: ประเทศ
             first_name: ชื่อ
             last_name: นามสกุล
             phone_number: หมายเลขโทรศัพท์
             postcode: รหัสไปรษณีย์
-            street: ถนน
+            street: ที่อยู่
             province: จังหวัด
+            zone: โซน
         country:
             add_province: เพิ่มจังหวัด
             name: ชื่อ

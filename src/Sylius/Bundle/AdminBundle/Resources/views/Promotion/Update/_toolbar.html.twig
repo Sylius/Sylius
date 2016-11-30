@@ -1,0 +1,13 @@
+{% if promotion.couponBased %}
+<div class="ui right floated buttons">
+    <div class="ui floating labeled icon dropdown button link">
+        <i class="ticket icon"></i>
+        <span class="text">{{ 'sylius.ui.manage_coupons'|trans }}</span>
+        <div class="menu">
+            <a class="item" href="{{ path('sylius_admin_promotion_coupon_index', { promotionId: promotion.id }) }}"><i class="list icon"></i> {{ 'sylius.ui.list_coupons'|trans }}</a>
+            <a class="item" href="{{ path('sylius_admin_promotion_coupon_create', { promotionId: promotion.id }) }}"><i class="plus icon"></i> {{ 'sylius.ui.add'|trans }}</a>
+            <a class="item" href="{{ path('sylius_admin_promotion_coupon_generate', { promotionId: promotion.id }) }}"><i class="random icon"></i> {{ 'sylius.ui.generate'|trans }}</a>
+        </div>
+    </div>
+</div>
+{% endif %}

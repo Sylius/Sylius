@@ -8,12 +8,14 @@
                 {{ form_row(form.lastName) }}
             </div>
             {{ form_row(form.email) }}
+            {{ form_row(form.group) }}
         </div>
         <div class="ui segment">
             <h4 class="ui dividing header">{{ 'sylius.ui.extra_information'|trans }}</h4>
             {{ form_row(form.gender) }}
             {{ form_row(form.birthday) }}
             {{ form_row(form.phoneNumber) }}
+            {{ form_row(form.subscribedToNewsletter) }}
         </div>
     </div>
     <div class="column">
@@ -23,7 +25,7 @@
             <div class="field">
                 <div class="ui toggle checkbox">
                     <input type="checkbox" id="sylius_customer_create_user">
-                    <label for="sylius_customer_create_user">{{ 'sylius.ui.customer_can_login_to_the_store'|trans }}?</label>
+                    <label for="sylius_customer_create_user">{{ 'sylius.ui.customer_can_login_to_the_store'|trans }}</label>
                 </div>
             </div>
             {% endif %}

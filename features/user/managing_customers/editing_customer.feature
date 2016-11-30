@@ -27,3 +27,22 @@ Feature: Editing a customer
         Then I should be notified that it has been successfully edited
         And this customer should have an empty first name
         And this customer should have an empty last name
+
+    @ui
+    Scenario: Making an existing customer subscribed to the newsletter
+        Given the store has customer "Mike Ross" with email "ross@teammike.com"
+        When I want to edit this customer
+        And I make them subscribed to the newsletter
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this customer should be subscribed to the newsletter
+
+    @ui
+    Scenario: Selecting a group for an existing customer
+        Given the store has a customer group "Retail"
+        And the store has customer "Mike Ross" with email "ross@teammike.com"
+        When I want to edit this customer
+        And I select "Retail" as their group
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this customer should have "Retail" as their group

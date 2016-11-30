@@ -1,0 +1,18 @@
+<div class="ui large comments">
+    {% for review in product_reviews %}
+        <div class="comment">
+            <div class="content">
+                <a class="author">{{ review.author.firstName }}</a>
+                <div class="metadata">
+                    <div class="date">{{ review.createdAt|date('Y-m-d') }}</div>
+                    <div class="rating">
+                        <div class="ui star rating" data-rating="{{ review.rating }}" data-max-rating="5"></div>
+                    </div>
+                </div>
+                <div class="text">{{ review.comment }}</div>
+            </div>
+        </div>
+    {% else %}
+        {{ 'sylius.ui.there_are_no_reviews'|trans }}
+    {% endfor %}
+</div>

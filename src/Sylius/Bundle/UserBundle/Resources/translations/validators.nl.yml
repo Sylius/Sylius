@@ -12,5 +12,5 @@ sylius:
             mismatch: De ingevoerde wachtwoorden komen niet overeen
             wrong_current: Het opgegeven paswoord komt niet overeen.
         password:
-            min: 'Wachtwoord moet ten minste {{ limit }} tekens bevatten.'
-            max: 'Wachtwoord mag niet meer dan {{ limit }} tekens bevatten.'
+            min: Wachtwoord moet ten minste {{ limit }} tekens bevatten.
+            max: Wachtwoord mag niet meer dan {{ limit }} tekens bevatten.

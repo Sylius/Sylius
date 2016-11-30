@@ -7,6 +7,5 @@ sylius:
             description: Description
             name: Nom
             parent: Parent
-            permalink: Permalien
         taxonomy:
             name: Nom
