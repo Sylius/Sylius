@@ -72,7 +72,7 @@ final class CommandExecutor
         $exitCode = $this->application->run(new ArrayInput($parameters), $output ?: new NullOutput());
 
         if (1 === $exitCode) {
-            throw new RuntimeException('This command terminated with a permission error');
+            throw new RuntimeException('This command terminated with a permission error.');
         }
 
         if (0 !== $exitCode) {

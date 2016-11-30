@@ -58,9 +58,12 @@ final class CommandDirectoryChecker
         try {
             $this->changePermissionsRecursively($directory, $output);
         } catch (AccessDeniedException $exception) {
-            $output->writeln($this->createBadPermissionsMessage($exception->getMessage()));
+            $output->writeln('');
+            $output->writeln($this->createBadPermissionsMessage());
 
-            throw new \RuntimeException('Failed while trying to change directory permissions.');
+            throw new \RuntimeException(
+                sprintf('Set "%s" writable recursively and run command "<comment>%s</comment>"', $exception->getMessage(), $this->name)
+            );
         }
     }
 
@@ -73,7 +76,7 @@ final class CommandDirectoryChecker
     }
 
     /**
-     * @param string          $directory
+     * @param string $directory
      * @param OutputInterface $output
      */
     private function createDirectory($directory, OutputInterface $output)
@@ -81,16 +84,19 @@ final class CommandDirectoryChecker
         try {
             $this->filesystem->mkdir($directory, 0755);
         } catch (IOException $exception) {
-            $output->writeln($this->createUnexistingDirectoryMessage(getcwd().'/'.$directory));
+            $output->writeln('');
+            $output->writeln($this->createUnexistingDirectoryMessage());
 
-            throw new \RuntimeException('Failed while trying to create directory.');
+            throw new \RuntimeException(
+                sprintf('Create directory "%s" and run command "<comment>%s</comment>"', realpath($directory), $this->name)
+            );
         }
 
-        $output->writeln(sprintf('<comment>Created "%s" directory.</comment>', $directory));
+        $output->writeln(sprintf('<comment>Created "%s" directory.</comment>', realpath($directory)));
     }
 
     /**
-     * @param string          $directory
+     * @param string $directory
      * @param OutputInterface $output
      */
     private function changePermissionsRecursively($directory, OutputInterface $output)
@@ -113,7 +119,7 @@ final class CommandDirectoryChecker
     }
 
     /**
-     * @param string          $directory
+     * @param string $directory
      * @param OutputInterface $output
      *
      * @throws AccessDeniedException if directory/file permissions cannot be changed
@@ -123,35 +129,25 @@ final class CommandDirectoryChecker
         try {
             $this->filesystem->chmod($directory, 0755, 0000, true);
 
-            $output->writeln(sprintf('<comment>Changed "%s" permissions to 0755.</comment>', $directory));
+            $output->writeln(sprintf('<comment>Changed "%s" permissions to 0755.</comment>', realpath($directory)));
         } catch (IOException $exception) {
-            throw new AccessDeniedException(dirname($directory));
+            throw new AccessDeniedException(realpath(dirname($directory)));
         }
     }
 
     /**
-     * @param string $directory
-     *
      * @return string
      */
-    private function createUnexistingDirectoryMessage($directory)
+    private function createUnexistingDirectoryMessage()
     {
-        return
-            '<error>Cannot run command due to unexisting directory (tried to create it automatically, failed).</error>'.PHP_EOL.
-            sprintf('Create directory "%s" and run command "<comment>%s</comment>"', $directory, $this->name)
-        ;
+        return '<error>Cannot run command due to unexisting directory (tried to create it automatically, failed).</error>'.PHP_EOL;
     }
 
     /**
-     * @param string $directory
-     *
      * @return string
      */
-    private function createBadPermissionsMessage($directory)
+    private function createBadPermissionsMessage()
     {
-        return
-            '<error>Cannot run command due to bad directory permissions (tried to change permissions to 0755).</error>'.PHP_EOL.
-            sprintf('Set "%s" writable recursively and run command "<comment>%s</comment>"', $directory, $this->name)
-        ;
+        return '<error>Cannot run command due to bad directory permissions (tried to change permissions to 0755).</error>'.PHP_EOL;
     }
 }

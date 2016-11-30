@@ -49,7 +49,7 @@ EOT
             $this->getEnvironment()
         ));
 
-        if (!$questionHelper->ask($input, $output, new Question('Load sample data? (y/N)', false))) {
+        if (!$questionHelper->ask($input, $output, new Question('Load sample data? (y/N) ', false))) {
             $output->writeln('Cancelled loading sample data.');
 
             return 0;
