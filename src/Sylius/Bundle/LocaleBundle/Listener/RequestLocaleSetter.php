@@ -43,12 +43,7 @@ final class RequestLocaleSetter
     {
         $request = $event->getRequest();
 
-        try {
-            $request->setLocale($this->localeContext->getLocaleCode());
-        } catch (LocaleNotFoundException $exception) {}
-
-        try {
-            $request->setDefaultLocale($this->localeProvider->getDefaultLocaleCode());
-        } catch (LocaleNotFoundException $exception) {}
+        $request->setLocale($this->localeContext->getLocaleCode());
+        $request->setDefaultLocale($this->localeProvider->getDefaultLocaleCode());
     }
 }
