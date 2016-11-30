@@ -1,7 +1,11 @@
 {% import "@SyliusShop/Common/Macro/money.html.twig" as money %}
 
 <div id="sylius-cart-button" class="ui circular cart button">
-    <i class="cart icon"></i><span id="sylius-cart-total">{{ money.convertAndFormat(cart.itemsTotal) }}</span>{% if not cart.empty %}, {{ cart.items|length }} {{ 'sylius.ui.items'|trans|lower }}{% endif %}
+    <i class="cart icon"></i>
+    <span id="sylius-cart-total">
+        {{ money.convertAndFormat(cart.itemsTotal) }}
+    </span>
+    {% transchoice cart.items|length %}sylius.ui.item.choice{% endtranschoice %}
 </div>
 <div class="ui large flowing cart hidden popup">
     {% if cart.empty %}

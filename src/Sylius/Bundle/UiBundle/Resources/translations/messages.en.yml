@@ -370,6 +370,7 @@ sylius:
         it_seems_you_have_an_account_already: 'It seems you have an account already'
         item: 'Item'
         items: 'Items'
+        item.choice: "{0} |{1}, 1 item|]1,Inf], %count% items"
         items_total: 'Items total'
         jump_to_page: 'Jump to page'
         label: 'Label'
