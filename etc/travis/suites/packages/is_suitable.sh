@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
 
+# temporary disable packages tests
+print_header "Skipped suite" "Packages"
+print_warning "Temporary maintenance issues"
+exit 1
+
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../bash/common.lib.sh"
 
 if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
