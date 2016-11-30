@@ -31,7 +31,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function titleReview($title)
     {
-        $this->getElement('author')->setValue($title);
+        $this->getElement('title')->setValue($title);
     }
 
     /**

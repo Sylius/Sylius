@@ -34,7 +34,7 @@ function handleProductOptionsChange() {
         if ($price !== undefined) {
             $('#product-price').text($price);
         } else {
-            $('#product-price').text($('sylius-variants-pricing').attr('data-unavailable-text'));
+            $('#product-price').text($('#sylius-variants-pricing').attr('data-unavailable-text'));
         }
     });
 }
