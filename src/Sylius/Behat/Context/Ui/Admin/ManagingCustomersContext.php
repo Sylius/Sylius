@@ -124,7 +124,7 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @When I add them
-     * @When I try to add it
+     * @When I try to add them
      */
     public function iAddIt()
     {
@@ -411,7 +411,6 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I specify its password as :password
      * @When I specify their password as :password
      */
     public function iSpecifyItsPasswordAs($password)
@@ -646,7 +645,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given I do not specify any information
+     * @When I do not specify any information
      */
     public function iDoNotSpecifyAnyInformation()
     {
@@ -654,7 +653,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then I should not be able to specify it password
+     * @Then I should not be able to specify their password
      */
     public function iShouldNotBeAbleToSpecifyItPassword()
     {
@@ -687,7 +686,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then I should be able to specify it password
+     * @Then I should be able to specify their password
      */
     public function iShouldBeAbleToSpecifyItPassword()
     {
@@ -698,7 +697,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given /^I should not be able to select create account option$/
+     * @Then I should not be able to select create account option
      */
     public function iShouldNotBeAbleToSelectCreateAccountOption()
     {
@@ -709,7 +708,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given I do not choose create account option
+     * @When I do not choose create account option
      */
     public function iDoNotChooseCreateAccountOption()
     {

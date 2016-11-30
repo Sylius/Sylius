@@ -22,6 +22,7 @@ use Symfony\Component\Form\FormEvent;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class AddUserFormSubscriberSpec extends ObjectBehavior
 {
@@ -103,7 +104,6 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $form->get('createUser')->willReturn($createUserCheckForm);
         $createUserCheckForm->getViewData()->willReturn(null);
         
-
         $this->shouldThrow(\InvalidArgumentException::class)->during('submit', [$event]);
     }
 }
