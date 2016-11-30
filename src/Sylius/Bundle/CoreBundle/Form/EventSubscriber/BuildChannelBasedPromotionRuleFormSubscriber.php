@@ -110,6 +110,8 @@ final class BuildChannelBasedPromotionRuleFormSubscriber extends AbstractConfigu
             'currency' => $channel->getBaseCurrency()->getCode(),
         ];
 
+        $data = empty($data) ? $data : $data[$channel->getCode()];
+
         return $this->factory->createNamed($channel->getCode(), $configuration, $data, $config);
     }
 
