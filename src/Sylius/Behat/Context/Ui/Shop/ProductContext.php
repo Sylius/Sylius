@@ -57,7 +57,7 @@ final class ProductContext implements Context
     public function __construct(
         ShowPageInterface $showPage,
         TaxonShowPageInterface $taxonShowPage,
-        IndexPageInterface $productReviewsIndexPage,
+        IndexPageInterface $productReviewsIndexPage
         ElasticsearchCheckerInterface $elasticsearchChecker
     ) {
         $this->showPage = $showPage;

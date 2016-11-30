@@ -42,20 +42,21 @@ class DriverSpec extends ObjectBehavior
         $this->shouldImplement(DriverInterface::class);
     }
 
-    function it_throws_exception_if_type_is_undefined()
+    function it_throws_exception_if_type_is_undefined(Parameters $parameters)
     {
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('getDataSource', [[], new Parameters()])
+            ->during('getDataSource', [[], $parameters]);
         ;
     }
 
     function it_creates_data_source_via_elastica_type(
         Index $index,
-        SearchableInterface $type
+        SearchableInterface $type,
+        Parameters $parameters
     ) {
         $index->getType('App:Book')->willReturn($type);
 
-        $this->getDataSource(['type' => 'App:Book'], new Parameters())->shouldHaveType(DataSource::class);
+        $this->getDataSource(['type' => 'App:Book'], $parameters)->shouldHaveType(DataSource::class);
     }
 }
