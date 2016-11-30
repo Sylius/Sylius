@@ -23,5 +23,11 @@
             <argument type="collection"><argument>sylius</argument></argument>
             <tag name="form.type" />
         </service>
+
+        <service id="sylius.form.type.api_customer" class="Sylius\Bundle\ApiBundle\Form\Extension\ApiCustomerType">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

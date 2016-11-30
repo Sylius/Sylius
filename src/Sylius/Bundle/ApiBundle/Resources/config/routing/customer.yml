@@ -19,6 +19,8 @@ sylius_api_customer_show:
         _controller: sylius.controller.customer:showAction
         _sylius:
             serialization_groups: [Detailed]
+            form:
+                type: Sylius\Bundle\ApiBundle\Form\Extension\ApiCustomerType
 
 sylius_api_customer_create:
     path: /
@@ -27,12 +29,17 @@ sylius_api_customer_create:
         _controller: sylius.controller.customer:createAction
         _sylius:
             serialization_groups: [Detailed]
+            form:
+                type: Sylius\Bundle\ApiBundle\Form\Extension\ApiCustomerType
 
 sylius_api_customer_update:
     path: /{id}
     methods: [PUT, PATCH]
     defaults:
         _controller: sylius.controller.customer:updateAction
+        _sylius:
+            form:
+                type: Sylius\Bundle\ApiBundle\Form\Extension\ApiCustomerType
 
 sylius_api_customer_delete:
     path: /{id}
