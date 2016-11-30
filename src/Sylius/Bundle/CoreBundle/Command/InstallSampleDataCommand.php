@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Command;
 use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Question\Question;
 
 /**
@@ -49,7 +50,7 @@ EOT
             $this->getEnvironment()
         ));
 
-        if (!$questionHelper->ask($input, $output, new Question('Load sample data? (y/N) ', false))) {
+        if (!$questionHelper->ask($input, $output, new ConfirmationQuestion('Load sample data? (y/N) ', false))) {
             $output->writeln('Cancelled loading sample data.');
 
             return 0;
