@@ -16,6 +16,7 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterCurrencyHandle
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterLocaleHandlersPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterTaxCalculationStrategiesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass;
+use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\TranslatableEntityLocalePass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -49,6 +50,7 @@ final class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new RegisterTaxCalculationStrategiesPass());
         $container->addCompilerPass(new RegisterCurrencyHandlersPass());
         $container->addCompilerPass(new RegisterLocaleHandlersPass());
+        $container->addCompilerPass(new TranslatableEntityLocalePass());
     }
 
     /**

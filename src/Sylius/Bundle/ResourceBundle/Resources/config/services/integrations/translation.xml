@@ -13,7 +13,7 @@
 
 <container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://symfony.com/schema/dic/services" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.translation_locale_provider.immutable" class="Sylius\Component\Resource\Provider\ImmutableTranslationLocaleProvider">
+        <service id="sylius.translation_locale_provider.immutable" class="Sylius\Component\Resource\Translation\Provider\ImmutableTranslationLocaleProvider">
             <argument type="collection">
                 <argument>%locale%</argument>
             </argument>
@@ -29,6 +29,10 @@
         <service id="sylius.form.type.resource_translations" class="Sylius\Bundle\ResourceBundle\Form\Type\ResourceTranslationsType">
             <argument type="service" id="sylius.translation_locale_provider" />
             <tag name="form.type" />
+        </service>
+
+        <service id="sylius.translatable_entity_locale_assigner" class="Sylius\Component\Resource\Translation\TranslatableEntityLocaleAssigner">
+            <argument type="service" id="sylius.translation_locale_provider" />
         </service>
     </services>
 </container>

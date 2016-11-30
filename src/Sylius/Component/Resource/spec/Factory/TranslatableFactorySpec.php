@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Provider\TranslationLocaleProviderInterface;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

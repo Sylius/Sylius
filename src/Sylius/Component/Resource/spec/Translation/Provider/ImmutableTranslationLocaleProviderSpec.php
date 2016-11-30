@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Resource\Provider;
+namespace spec\Sylius\Component\Resource\Translation\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Resource\Provider\ImmutableTranslationLocaleProvider;
-use Sylius\Component\Resource\Provider\TranslationLocaleProviderInterface;
+use Sylius\Component\Resource\Translation\Provider\ImmutableTranslationLocaleProvider;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

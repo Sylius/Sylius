@@ -100,7 +100,7 @@ final class ProductContext implements Context
         Assert::same(
             $name,
             $this->showPage->getName(),
-            'Product should have name %2$s, but it has %s'
+            'Product should have name %s, but it has %s'
         );
     }
 

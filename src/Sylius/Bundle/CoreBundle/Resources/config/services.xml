@@ -123,11 +123,6 @@
             <argument type="string">%locale%</argument>
         </service>
 
-        <service id="sylius.translation.translatable_listener.doctrine.orm" class="Sylius\Bundle\CoreBundle\EventListener\ORMTranslatableListener">
-            <argument type="service" id="service_container" />
-            <tag name="doctrine.event_subscriber" connection="default" priority="100" />
-        </service>
-
         <service id="sylius.reviewer_reviews_remover" class="Sylius\Bundle\CoreBundle\Remover\ReviewerReviewsRemover">
             <argument type="service" id="sylius.repository.product_review" />
             <argument type="service" id="sylius.manager.product_review" />

@@ -12,8 +12,8 @@
 namespace Sylius\Component\Core\Provider;
 
 use Sylius\Component\Locale\Model\LocaleInterface;
-use Sylius\Component\Resource\Provider\TranslationLocaleProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>

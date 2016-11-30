@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
 use Sylius\Component\Resource\Model\TranslationInterface;
-use Sylius\Component\Resource\Provider\TranslationLocaleProviderInterface;
+use Sylius\Component\Resource\Translation\Provider\TranslationLocaleProviderInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
