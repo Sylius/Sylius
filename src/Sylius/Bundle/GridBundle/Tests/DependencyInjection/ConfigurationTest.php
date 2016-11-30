@@ -137,6 +137,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'sylius_admin_tax_category' => [
                     'sorting' => ['name' => 'desc'],
                 ],
+                'use_fos_elastica' => false
             ]],
             'grids.*.sorting'
         );

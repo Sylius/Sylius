@@ -24,6 +24,7 @@ final class SyliusGridBundle extends Bundle
 {
     const DRIVER_DOCTRINE_ORM = 'doctrine/orm';
     const DRIVER_DOCTRINE_PHPCR_ODM = 'doctrine/phpcr-odm';
+    const DRIVER_ELASTICA = 'elastica';
 
     /**
      * {@inheritdoc}
@@ -45,6 +46,7 @@ final class SyliusGridBundle extends Bundle
         return [
             self::DRIVER_DOCTRINE_ORM,
             self::DRIVER_DOCTRINE_PHPCR_ODM,
+            self::DRIVER_ELASTICA,
         ];
     }
 }
