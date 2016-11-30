@@ -26,7 +26,7 @@ sylius_shop_order_after_pay:
 
 sylius_shop_order_show:
     path: /{tokenValue}
-    methods: [GET, PATCH]
+    methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
