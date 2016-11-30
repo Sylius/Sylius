@@ -379,7 +379,7 @@
 
         <service id="sylius.behat.context.ui.shop.product" class="Sylius\Behat\Context\Ui\Shop\ProductContext">
             <argument type="service" id="sylius.behat.page.shop.product.show" />
-            <argument type="service" id="sylius.behat.page.shop.taxon.show" />
+            <argument type="service" id="sylius.behat.page.shop.product.index" />
             <argument type="service" id="sylius.behat.page.shop.product_reviews.index" />
             <tag name="fob.context_service" />
         </service>

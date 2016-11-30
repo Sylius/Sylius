@@ -12,7 +12,7 @@
             </div>
         </div>
     {% else %}
-        <a href="{{ path('sylius_shop_taxon_show', {'slug': taxon.slug}) }}" class="item">{{ taxon.name }}</a>
+        <a href="{{ path('sylius_shop_product_index', {'slug': taxon.slug}) }}" class="item">{{ taxon.name }}</a>
     {% endif %}
 {% endmacro %}
 

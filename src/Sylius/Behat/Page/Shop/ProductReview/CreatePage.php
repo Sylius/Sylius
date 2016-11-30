@@ -23,7 +23,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_shop_product_reviews_create';
+        return 'sylius_shop_product_review_create';
     }
 
     /**
@@ -31,7 +31,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function titleReview($title)
     {
-        $this->getDocument()->fillField('Title', $title);
+        $this->getElement('title')->setValue($title);
     }
 
     /**
@@ -39,7 +39,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function setComment($comment)
     {
-        $this->getDocument()->fillField('sylius_product_review_comment', $comment);
+        $this->getElement('comment')->setValue($comment);
     }
 
     /**
@@ -47,7 +47,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function setAuthor($author)
     {
-        $this->getDocument()->fillField('Author', $author);
+        $this->getElement('author')->setValue($author);
     }
 
     /**

@@ -67,6 +67,22 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
             ->getOneOrNullResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByTokenValue($tokenValue)
+    {
+        return $this->createQueryBuilder('o')
+            ->andWhere('o.state != :state')
+            ->andWhere('o.tokenValue = :tokenValue')
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('tokenValue', $tokenValue)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
     /**
      * {@inheritdoc}
      */

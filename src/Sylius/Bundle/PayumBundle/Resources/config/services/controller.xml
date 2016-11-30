@@ -6,8 +6,8 @@
     <services>
         <service id="sylius.controller.payum" class="Sylius\Bundle\PayumBundle\Controller\PayumController">
             <argument type="service" id="payum" />
-            <argument type="service" id="sylius.repository.payment" />
-            <argument type="expression" >service('sylius.resource_registry').get('sylius.payment')</argument>
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="expression" >service('sylius.resource_registry').get('sylius.order')</argument>
             <argument type="service" id="sylius.resource_controller.request_configuration_factory" />
             <argument type="service" id="sylius.resource_controller.view_handler" />
         </service>

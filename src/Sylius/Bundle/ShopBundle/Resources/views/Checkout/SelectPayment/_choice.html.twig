@@ -1,0 +1,15 @@
+<div class="item">
+    <div class="field">
+        <div class="ui radio checkbox">
+            {{ form_widget(form) }}
+        </div>
+    </div>
+    <div class="content">
+        <a class="header">{{ form_label(form) }}</a>
+        {% if method.description is not null %}
+            <div class="description">
+                <p>{{ method.description }}</p>
+            </div>
+        {% endif %}
+    </div>
+</div>

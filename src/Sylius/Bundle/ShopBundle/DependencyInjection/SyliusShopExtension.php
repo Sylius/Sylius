@@ -46,7 +46,6 @@ class SyliusShopExtension extends Extension
     private function configureCheckoutResolverIfNeeded(array $config, ContainerBuilder $container)
     {
         if (!$config['enabled']) {
-
             return;
         }
 

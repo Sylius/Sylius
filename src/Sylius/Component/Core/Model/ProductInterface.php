@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 
 /**
@@ -78,4 +79,9 @@ interface ProductInterface extends
      * @param TaxonInterface $mainTaxon
      */
     public function setMainTaxon(TaxonInterface $mainTaxon = null);
+
+    /**
+     * @return ReviewInterface[]
+     */
+    public function getAcceptedReviews();
 }

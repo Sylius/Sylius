@@ -69,7 +69,7 @@ final class LocaleSwitchController
      */
     public function renderAction()
     {
-        return $this->templatingEngine->renderResponse('@SyliusShop/Switch/_locale.html.twig', [
+        return $this->templatingEngine->renderResponse('@SyliusShop/_localeSwitch.html.twig', [
             'active' => $this->localeContext->getLocaleCode(),
             'locales' => $this->localeProvider->getAvailableLocalesCodes(),
         ]);
@@ -92,6 +92,6 @@ final class LocaleSwitchController
 
         $this->localeChangeHandler->handle($code);
 
-        return new RedirectResponse($request->headers->get('referer', $request->getBaseUrl()));
+        return new RedirectResponse($request->headers->get('referer', $request->getSchemeAndHttpHost()));
     }
 }

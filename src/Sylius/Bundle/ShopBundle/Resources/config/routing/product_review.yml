@@ -1,10 +1,13 @@
-sylius_shop_product_reviews_index:
-    path: /products/{slug}/reviews
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_product_review_index:
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.product_review:indexAction
         _sylius:
-            template: SyliusShopBundle:Product/Review:index.html.twig
+            template: "@SyliusShop/ProductReview/index.html.twig"
             repository:
                 method: findAcceptedByProductSlugAndChannel
                 arguments:
@@ -12,21 +15,21 @@ sylius_shop_product_reviews_index:
                     - '%locale%'
                     - 'expr:service("sylius.context.channel").getChannel()'
 
-sylius_shop_product_reviews_create:
-    path: /products/{slug}/reviews/new
+sylius_shop_product_review_create:
+    path: /new
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.product_review:createAction
         _sylius:
-            template: SyliusShopBundle:Product/Review:create.html.twig
+            template: "@SyliusShop/ProductReview/create.html.twig"
             form:
                 options:
                     validation_groups: ['sylius', 'sylius_review']
             factory:
                 method: createForSubjectWithReviewer
                 arguments:
-                    - 'expr:service("sylius.repository.product").findOneBySlug($slug)'
-                    - 'expr:service("sylius.context.customer").getCustomer()'
+                    - "expr:service('sylius.repository.product').findOneBySlug($slug)"
+                    - "expr:service('sylius.context.customer').getCustomer()"
             redirect:
                 route: sylius_shop_product_show
                 parameters:

@@ -5,6 +5,7 @@
 {% block content %}
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete'} %}
+
     <div class="ui padded segment">
         {% include '@SyliusShop/Checkout/Complete/_header.html.twig' %}
 
@@ -13,11 +14,9 @@
             <input type="hidden" name="_method" value="PUT" />
 
             {% include 'SyliusShopBundle:Common/Order:_summary.html.twig' %}
-
             <div class="ui hidden divider"></div>
             {% include '@SyliusShop/Checkout/Complete/_form.html.twig' %}
-
-            <button type="submit" class="ui huge primary fluid icon labeled button"><i class="check icon"></i> {{ 'sylius.ui.place_order'|trans }}</button>
+            {% include '@SyliusShop/Checkout/Complete/_navigation.html.twig' %}
 
             {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}

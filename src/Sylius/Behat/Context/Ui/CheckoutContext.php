@@ -1440,6 +1440,7 @@ final class CheckoutContext implements Context
             $this->addressPage,
             $this->selectPaymentPage,
             $this->selectShippingPage,
+            $this->completePage,
         ];
 
         return $this->currentPageResolver->getCurrentPageWithForm($possiblePages);

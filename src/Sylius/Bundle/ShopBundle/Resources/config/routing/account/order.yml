@@ -7,9 +7,9 @@ sylius_shop_account_order_index:
     defaults:
         _controller: sylius.controller.order:indexAction
         _sylius:
-            template: SyliusShopBundle:Account/Order:index.html.twig
-            grid: sylius_shop_account_order
             section: shop_account
+            template: "@SyliusShop/Account/Order/index.html.twig"
+            grid: sylius_shop_account_order
 
 sylius_shop_account_order_show:
     path: /{number}
@@ -17,11 +17,10 @@ sylius_shop_account_order_show:
     defaults:
         _controller: sylius.controller.order:showAction
         _sylius:
-            template: SyliusShopBundle:Account/Order:show.html.twig
-            grid: sylius_shop_account_order
             section: shop_account
+            template: "@SyliusShop/Account/Order/show.html.twig"
             repository:
                 method: findOneByNumberAndCustomer
                 arguments:
                     - $number
-                    - 'expr:service("sylius.context.customer").getCustomer()'
+                    - "expr:service('sylius.context.customer').getCustomer()"

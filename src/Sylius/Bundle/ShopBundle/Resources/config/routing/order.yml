@@ -1,8 +1,16 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_shop_order_thank_you:
+    path: /thank-you
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:thankYouAction
+        _sylius:
+            template: "@SyliusShop/Order/thankYou.html.twig"
+
 sylius_shop_order_pay:
-    path: /{paymentId}/pay
+    path: /{tokenValue}/pay
     methods: [GET]
     defaults:
         _controller: sylius.controller.payum:prepareCaptureAction
@@ -16,21 +24,19 @@ sylius_shop_order_after_pay:
     defaults:
         _controller: sylius.controller.payum:afterCaptureAction
 
-sylius_shop_order_thank_you:
-    path: /thank-you
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.order:thankYouAction
-        _sylius:
-            template: "@SyliusShop/Order/thankYou.html.twig"
-
 sylius_shop_order_show:
     path: /{tokenValue}
-    methods: [GET]
+    methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.order:showAction
+        _controller: sylius.controller.order:updateAction
         _sylius:
             template: "@SyliusShop/Order/show.html.twig"
             repository:
                 method: findOneBy
                 arguments: [tokenValue: $tokenValue]
+            form: Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType
+            redirect:
+                route: sylius_shop_order_pay
+                parameters:
+                    tokenValue: resource.tokenValue
+            flash: false

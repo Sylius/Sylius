@@ -93,7 +93,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             ['number' => $order->getNumber()]
         );
 
-        return $row->hasLink('Change payment method');
+        return $row->hasLink('Pay');
     }
 
     /**

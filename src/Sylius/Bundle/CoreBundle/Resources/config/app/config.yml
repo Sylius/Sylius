@@ -101,4 +101,4 @@ twig:
     strict_variables: "%kernel.debug%"
     exception_controller: "FOS\\RestBundle\\Controller\\ExceptionController::showAction"
     globals:
-        shopperContext: "@sylius.context.shopper"
+        sylius: "@sylius.context.shopper"

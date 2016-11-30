@@ -42,38 +42,4 @@ final class RequestLocaleSetterSpec extends ObjectBehavior
 
         $this->onKernelRequest($event);
     }
-
-    function it_sets_locale_on_request_even_if_locale_provider_fails(
-        LocaleContextInterface $localeContext,
-        LocaleProviderInterface $localeProvider,
-        GetResponseEvent $event,
-        Request $request
-    ) {
-        $event->getRequest()->willReturn($request);
-
-        $localeContext->getLocaleCode()->willReturn('pl_PL');
-        $localeProvider->getDefaultLocaleCode()->willThrow(LocaleNotFoundException::class);
-
-        $request->setLocale('pl_PL')->shouldBeCalled();
-        $request->setDefaultLocale(Argument::any())->shouldNotBeCalled();
-
-        $this->onKernelRequest($event);
-    }
-
-    function it_sets_default_locale_on_request_even_if_locale_context_fails(
-        LocaleContextInterface $localeContext,
-        LocaleProviderInterface $localeProvider,
-        GetResponseEvent $event,
-        Request $request
-    ) {
-        $event->getRequest()->willReturn($request);
-
-        $localeContext->getLocaleCode()->willThrow(LocaleNotFoundException::class);
-        $localeProvider->getDefaultLocaleCode()->willReturn('en_US');
-
-        $request->setLocale(Argument::any())->shouldNotBeCalled();
-        $request->setDefaultLocale('en_US')->shouldBeCalled();
-
-        $this->onKernelRequest($event);
-    }
 }

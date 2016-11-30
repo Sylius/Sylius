@@ -1,0 +1,5 @@
+<a class="item active" data-tab="details">{{ 'sylius.ui.details'|trans }}</a>
+{% if product.attributes|length > 0 %}
+    <a class="item" data-tab="attributes">{{ 'sylius.ui.attributes'|trans }}</a>
+{% endif %}
+<a class="item" data-tab="reviews">{{ 'sylius.ui.reviews'|trans }} ({{ product.acceptedReviews|length }})</a>

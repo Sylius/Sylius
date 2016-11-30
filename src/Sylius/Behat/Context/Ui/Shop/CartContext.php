@@ -335,7 +335,7 @@ final class CartContext implements Context
      */
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyAdded()
     {
-        $this->notificationChecker->checkNotification('Item has been added to cart.', NotificationType::success());
+        $this->notificationChecker->checkNotification('Item has been added to cart', NotificationType::success());
     }
 
     /**

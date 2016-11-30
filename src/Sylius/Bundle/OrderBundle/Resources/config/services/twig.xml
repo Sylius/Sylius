@@ -17,9 +17,5 @@
             <argument type="service" id="sylius.templating.helper.adjustment" />
             <tag name="twig.extension" />
         </service>
-        <service id="sylius.twig.extension.cart" class="Sylius\Bundle\OrderBundle\Twig\CartExtension" public="false">
-            <argument type="service" id="sylius.templating.helper.cart" />
-            <tag name="twig.extension" />
-        </service>
     </services>
 </container>

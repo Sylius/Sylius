@@ -8,22 +8,21 @@
             {{ 'sylius.ui.address_book'|trans }}
             <div class="sub header">{{ 'sylius.ui.add_address'|trans }}</div>
         </h1>
+
         {{ form_start(form, {'action': path('sylius_shop_account_address_book_create'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-
-        {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
-
-        <div class="ui two column grid">
-            <div class="column">
-                <a href="{{ path('sylius_shop_account_address_book_index') }}" class="ui large icon labeled button">
-                    <i class="left arrow icon"></i> {{ 'sylius.ui.cancel'|trans }}
-                </a>
+            {% include '@SyliusShop/Common/Form/_address.html.twig' with {'form': form} %}
+            <div class="ui two column grid">
+                <div class="column">
+                    <a href="{{ path('sylius_shop_account_address_book_index') }}" class="ui large icon labeled button">
+                        <i class="left arrow icon"></i> {{ 'sylius.ui.cancel'|trans }}
+                    </a>
+                </div>
+                <div class="right aligned column">
+                    <button type="submit" class="ui large icon labeled blue button">
+                        <i class="icon plus"></i> {{ 'sylius.ui.add'|trans }}
+                    </button>
+                </div>
             </div>
-            <div class="right aligned column">
-                <button type="submit" class="ui large icon labeled blue button">
-                    <i class="icon plus"></i> {{ 'sylius.ui.add'|trans }}
-                </button>
-            </div>
-        </div>
         {{ form_row(form._token) }}
         {{ form_end(form, {'render_rest': false}) }}
     </div>

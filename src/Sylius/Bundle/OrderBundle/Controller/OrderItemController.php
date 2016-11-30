@@ -20,10 +20,10 @@ use Sylius\Component\Order\CartActions;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,6 +47,8 @@ class OrderItemController extends ResourceController
         $this->isGrantedOr403($configuration, CartActions::ADD);
         /** @var OrderItemInterface $orderItem */
         $orderItem = $this->newResourceFactory->create($configuration, $this->factory);
+
+        $this->getQuantityModifier()->modify($orderItem, 1);
 
         $form = $this->getFormFactory()->create(
             $configuration->getFormType(),
@@ -77,10 +79,11 @@ class OrderItemController extends ResourceController
 
             $this->eventDispatcher->dispatchPostEvent(CartActions::ADD, $configuration, $orderItem);
 
-            if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($cart, Response::HTTP_CREATED));
-            }
             $this->flashHelper->addSuccessFlash($configuration, CartActions::ADD, $orderItem);
+
+            if ($request->isXmlHttpRequest()) {
+                return $this->viewHandler->handle($configuration, View::create([], Response::HTTP_CREATED));
+            }
 
             return $this->redirectHandler->redirectToResource($configuration, $orderItem);
         }
@@ -215,6 +218,14 @@ class OrderItemController extends ResourceController
     private function getFormFactory()
     {
         return $this->get('form.factory');
+    }
+
+    /**
+     * @return OrderItemQuantityModifierInterface
+     */
+    private function getQuantityModifier()
+    {
+        return $this->get('sylius.order_item_quantity_modifier');
     }
 
     /**

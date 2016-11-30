@@ -6,17 +6,18 @@
         <div class="center aligned sixteen wide column">
             <h1 class="ui icon header">
                 {% set lastPayment = order.payments.last() %}
-                    <i class="circular rocket icon"></i>
-                    <div class="content" id="sylius-thank-you">
-                        {{ 'sylius.ui.thank_you'|trans }}
-                        <div class="sub header">{{ 'sylius.ui.placed_an_order'|trans }}</div>
-                    </div>
-                {% if lastPayment.method.instructions is not null %}
-                    <div id="sylius-payment-method-instructions" class="sub header">
-                        {{ lastPayment.method.instructions }}
-                    </div>
-                {% endif %}
+                <i class="circular rocket icon"></i>
+                <div class="content" id="sylius-thank-you">
+                    {{ 'sylius.ui.thank_you'|trans }}
+                    <div class="sub header">{{ 'sylius.ui.placed_an_order'|trans }}</div>
+                </div>
             </h1>
+
+            {% if lastPayment.method.instructions is not null %}
+                <div id="sylius-payment-method-instructions" class="ui segment">
+                    {{ lastPayment.method.instructions }}
+                </div>
+            {% endif %}
             <div class="ui hidden divider"></div>
             <a href="{{ path('sylius_shop_order_show', {'tokenValue': order.tokenValue}) }}" class="ui large blue button">{{ 'sylius.ui.view_your_order_or_change_payment_method'|trans }}</a>
         </div>

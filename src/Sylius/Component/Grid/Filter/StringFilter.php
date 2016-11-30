@@ -39,6 +39,10 @@ final class StringFilter implements FilterInterface
     {
         $expressionBuilder = $dataSource->getExpressionBuilder();
 
+        if (is_array($data) && !isset($data['type'])) {
+            $data['type'] = isset($options['type']) ? $options['type'] : self::TYPE_CONTAINS;
+        }
+
         if (!is_array($data)) {
             $data = ['type' => self::TYPE_CONTAINS, 'value' => $data];
         }

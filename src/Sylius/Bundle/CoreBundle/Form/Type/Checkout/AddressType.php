@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddDefaultBillingAddressOnOrderFormSubscriber;
 use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;

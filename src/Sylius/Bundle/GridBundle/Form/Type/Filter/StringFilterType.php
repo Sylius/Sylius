@@ -28,20 +28,25 @@ final class StringFilterType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        if (!isset($options['type'])) {
+            $builder
+                ->add('type', ChoiceType::class, [
+                    'choices' => [
+                        'sylius.ui.contains' => StringFilter::TYPE_CONTAINS,
+                        'sylius.ui.not_contains' => StringFilter::TYPE_NOT_CONTAINS,
+                        'sylius.ui.equal' => StringFilter::TYPE_EQUAL,
+                        'sylius.ui.empty' => StringFilter::TYPE_EMPTY,
+                        'sylius.ui.not_empty' => StringFilter::TYPE_NOT_EMPTY,
+                        'sylius.ui.starts_with' => StringFilter::TYPE_STARTS_WITH,
+                        'sylius.ui.ends_with' => StringFilter::TYPE_ENDS_WITH,
+                        'sylius.ui.in' => StringFilter::TYPE_IN,
+                        'sylius.ui.not_in' => StringFilter::TYPE_NOT_IN,
+                    ],
+                ])
+            ;
+        }
+
         $builder
-            ->add('type', ChoiceType::class, [
-                'choices' => [
-                    'sylius.ui.contains' => StringFilter::TYPE_CONTAINS,
-                    'sylius.ui.not_contains' => StringFilter::TYPE_NOT_CONTAINS,
-                    'sylius.ui.equal' => StringFilter::TYPE_EQUAL,
-                    'sylius.ui.empty' => StringFilter::TYPE_EMPTY,
-                    'sylius.ui.not_empty' => StringFilter::TYPE_NOT_EMPTY,
-                    'sylius.ui.starts_with' => StringFilter::TYPE_STARTS_WITH,
-                    'sylius.ui.ends_with' => StringFilter::TYPE_ENDS_WITH,
-                    'sylius.ui.in' => StringFilter::TYPE_IN,
-                    'sylius.ui.not_in' => StringFilter::TYPE_NOT_IN,
-                ],
-            ])
             ->add('value', TextType::class, ['required' => false])
         ;
     }
@@ -57,6 +62,18 @@ final class StringFilterType extends AbstractType
             ])
             ->setDefined('fields')
             ->setAllowedTypes('fields', 'array')
+            ->setDefined('type')
+            ->setAllowedValues('type', [
+                StringFilter::TYPE_CONTAINS,
+                StringFilter::TYPE_NOT_CONTAINS,
+                StringFilter::TYPE_EQUAL,
+                StringFilter::TYPE_EMPTY,
+                StringFilter::TYPE_NOT_EMPTY,
+                StringFilter::TYPE_STARTS_WITH,
+                StringFilter::TYPE_ENDS_WITH,
+                StringFilter::TYPE_IN,
+                StringFilter::TYPE_NOT_IN
+            ])
         ;
     }
 

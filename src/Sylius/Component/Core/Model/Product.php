@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\Criteria;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Product\Model\Product as BaseProduct;
 use Sylius\Component\Review\Model\ReviewInterface;
@@ -242,6 +243,18 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     public function getReviews()
     {
         return $this->reviews;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAcceptedReviews()
+    {
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq('status', ReviewInterface::STATUS_ACCEPTED))
+        ;
+
+        return $this->reviews->matching($criteria);
     }
 
     /**

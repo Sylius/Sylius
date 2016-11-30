@@ -1,3 +1,7 @@
+{% if last_error %}
+    {{ messages.error(last_error.messageKey|trans(last_error.messageData, 'security')) }}
+{% endif %}
+
 {{ form_row(form._username) }}
 {{ form_row(form._password) }}
 {{ form_row(form._remember_me) }}

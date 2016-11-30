@@ -1,5 +1,0 @@
-{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
-
-{% if data.paymentState in ['awaiting_payment'] %}
-    {{ buttons.edit(path('sylius_shop_order_show', { 'tokenValue': data.tokenValue }), 'sylius.ui.change_payment_method'|trans) }}
-{% endif %}

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\OrderBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -34,7 +34,7 @@ final class OrderType extends AbstractResourceType
                 'by_reference' => false,
                 'label' => 'sylius.form.order.items',
             ])
-            ->add('notes', TextType::class, [
+            ->add('notes', TextareaType::class, [
                 'label' => 'sylius.ui.notes',
             ])
         ;

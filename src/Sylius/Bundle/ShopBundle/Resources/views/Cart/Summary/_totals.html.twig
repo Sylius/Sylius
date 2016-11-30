@@ -22,7 +22,7 @@
             <td>{{ 'sylius.ui.order_total'|trans }}:</td>
             <td id="sylius-cart-grand-total" class="right aligned">{{ money.convertAndFormat(cart.total) }}</td>
         </tr>
-        {% if cart.currencyCode is not same as(shopperContext.currencyCode) %}
+        {% if cart.currencyCode is not same as(sylius.currencyCode) %}
             <tr>
                 <td>{{ 'sylius.ui.base_currency_order_total'|trans }}:</td>
                 <td id="sylius-cart-base-grand-total" class="right aligned">{{ money.format(cart.total, cart.currencyCode) }}</td>

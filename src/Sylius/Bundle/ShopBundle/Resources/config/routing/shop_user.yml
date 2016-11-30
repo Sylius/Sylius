@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_user_request_verification_token:
+    path: /verify
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.shop_user:requestVerificationTokenAction
+
+sylius_shop_user_verification:
+    path: /verify/{token}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.shop_user:verifyAction
+        _sylius:
+            redirect: sylius_shop_homepage

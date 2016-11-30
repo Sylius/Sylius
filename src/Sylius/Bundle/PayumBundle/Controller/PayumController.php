@@ -15,17 +15,17 @@ use FOS\RestBundle\View\View;
 use Payum\Core\Payum;
 use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
-use Sylius\Bundle\PayumBundle\Request\AfterCapture;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
-use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Webmozart\Assert\Assert;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -38,14 +38,14 @@ final class PayumController
     private $payum;
 
     /**
-     * @var PaymentRepositoryInterface
+     * @var OrderRepositoryInterface
      */
-    private $paymentRepository;
+    private $orderRepository;
 
     /**
      * @var MetadataInterface
      */
-    private $paymentMetadata;
+    private $orderMetadata;
 
     /**
      * @var RequestConfigurationFactoryInterface
@@ -59,41 +59,49 @@ final class PayumController
 
     /**
      * @param Payum $payum
-     * @param PaymentRepositoryInterface $paymentRepository
-     * @param MetadataInterface $paymentMetadata
+     * @param OrderRepositoryInterface $orderRepository
+     * @param MetadataInterface $orderMetadata
      * @param RequestConfigurationFactoryInterface $requestConfigurationFactory
      * @param ViewHandlerInterface $viewHandler
      */
     public function __construct(
         Payum $payum,
-        PaymentRepositoryInterface $paymentRepository,
-        MetadataInterface $paymentMetadata,
+        OrderRepositoryInterface $orderRepository,
+        MetadataInterface $orderMetadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
         ViewHandlerInterface $viewHandler
     ) {
         $this->payum = $payum;
-        $this->paymentRepository = $paymentRepository;
-        $this->paymentMetadata = $paymentMetadata;
+        $this->orderRepository = $orderRepository;
+        $this->orderMetadata = $orderMetadata;
         $this->requestConfigurationFactory = $requestConfigurationFactory;
         $this->viewHandler = $viewHandler;
     }
 
     /**
      * @param Request $request
-     * @param mixed $paymentId
+     * @param mixed $tokenValue
      *
      * @return Response
      */
-    public function prepareCaptureAction(Request $request, $paymentId)
+    public function prepareCaptureAction(Request $request, $tokenValue)
     {
-        $configuration = $this->requestConfigurationFactory->create($this->paymentMetadata, $request);
+        $configuration = $this->requestConfigurationFactory->create($this->orderMetadata, $request);
 
-        $payment = $this->paymentRepository->find($paymentId);
-        Assert::notNull($payment);
+        $order = $this->orderRepository->findOneByTokenValue($tokenValue);
 
-        $request->getSession()->set('sylius_order_id', $payment->getOrder()->getId());
+        if (null === $order) {
+            throw new NotFoundHttpException(sprintf('Order with token "%s" does not exist.', $tokenValue));
+        }
 
+        $request->getSession()->set('sylius_order_id', $order->getId());
         $options = $configuration->getParameters()->get('redirect');
+
+        $payment = $order->getLastNewPayment();
+
+        if (null === $payment) {
+            throw new NotFoundHttpException(sprintf('Order with token "%s" has no pending payments.', $tokenValue));
+        }
 
         $captureToken = $this->getTokenFactory()->createCaptureToken(
             $payment->getMethod()->getGateway(),
@@ -114,7 +122,7 @@ final class PayumController
      */
     public function afterCaptureAction(Request $request)
     {
-        $configuration = $this->requestConfigurationFactory->create($this->paymentMetadata, $request);
+        $configuration = $this->requestConfigurationFactory->create($this->orderMetadata, $request);
 
         $token = $this->getHttpRequestVerifier()->verify($request);
 
@@ -125,7 +133,9 @@ final class PayumController
 
         $this->getHttpRequestVerifier()->invalidate($token);
 
-        $request->getSession()->getBag('flashes')->add('info', sprintf('sylius.payment.%s', $status->getValue()));
+        if (PaymentInterface::STATE_NEW !== $status->getValue()) {
+            $request->getSession()->getBag('flashes')->add('info', sprintf('sylius.payment.%s', $status->getValue()));
+        }
 
         return $this->viewHandler->handle(
             $configuration,

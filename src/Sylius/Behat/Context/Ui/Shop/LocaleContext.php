@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\HomePageInterface;
+use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Webmozart\Assert\Assert;
 
 /**
@@ -88,8 +89,9 @@ final class LocaleContext implements Context
      */
     public function iShouldNotBeAbleToShop()
     {
-        $this->homePage->tryToOpen();
-
-        Assert::false($this->homePage->isOpen(), 'Homepage should not be opened!');
+        try {
+            $this->homePage->tryToOpen();
+            throw new \Exception('The page should not be able to open.');
+        } catch (LocaleNotFoundException $e) { }
     }
 }

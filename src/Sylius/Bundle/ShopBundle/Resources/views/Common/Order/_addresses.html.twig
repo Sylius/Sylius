@@ -1,10 +1,10 @@
 <div class="ui segment">
     <div class="ui two column divided stackable grid">
-        <div class="column" id="shipping-address">
+        <div class="column" id="sylius-shipping-address">
             <div class="ui small dividing header">{{ 'sylius.ui.shipping_address'|trans }}</div>
             {% include '@SyliusShop/Common/_address.html.twig' with {'address': order.shippingAddress} %}
         </div>
-        <div class="column" id="billing-address">
+        <div class="column" id="sylius-billing-address">
             <div class="ui small dividing header">{{ 'sylius.ui.billing_address'|trans }}</div>
             {% include '@SyliusShop/Common/_address.html.twig' with {'address': order.billingAddress} %}
         </div>

@@ -64,10 +64,6 @@ final class SessionCartSubscriber implements EventSubscriberInterface
 
         /** @var Request $request */
         $request = $event->getRequest();
-        // Hacky hack. Until there is a better solution.
-        if (!$this->isHtmlRequest($request)) {
-            return;
-        }
 
         try {
             $cart = $this->cartContext->getCart();
@@ -83,15 +79,5 @@ final class SessionCartSubscriber implements EventSubscriberInterface
                 $cart->getId()
             );
         }
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return bool
-     */
-    private function isHtmlRequest(Request $request)
-    {
-        return 'html' === $request->getRequestFormat();
     }
 }

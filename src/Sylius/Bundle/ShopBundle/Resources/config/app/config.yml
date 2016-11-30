@@ -8,7 +8,10 @@ imports:
 sylius_grid:
     templates:
         action:
-            pay_for_order: "SyliusShopBundle:Grid/Action:pay_for_order.html.twig"
+            show: "@SyliusUi/Grid/Action/show.html.twig"
+            pay: "@SyliusShop/Account/Order/Grid/Action/pay.html.twig"
+        filter:
+            string: "@SyliusUi/Grid/Filter/string.html.twig"
 
 sylius_shop:
     checkout_resolver:
@@ -25,6 +28,7 @@ sylius_shop:
 
 liip_imagine:
     filter_sets:
+        sylius_shop_product_original: ~
         sylius_shop_product_tiny_thumbnail:
             filters:
                 thumbnail: { size: [64, 64], mode: outbound }

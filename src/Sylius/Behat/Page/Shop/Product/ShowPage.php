@@ -39,6 +39,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function addToCart()
     {
         $this->getDocument()->pressButton('Add to cart');
+
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            sleep(3); #TODO Kopytko
+        }
     }
 
     /**
@@ -48,6 +52,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $this->getDocument()->fillField('Quantity', $quantity);
         $this->getDocument()->pressButton('Add to cart');
+
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            sleep(3); #TODO Kopytko
+        }
     }
 
     /**
@@ -249,12 +257,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function hasProductInAssociation($productName, $productAssociationName)
     {
-        $associationHeader = $this->getElement('association', ['%association-name%' => $productAssociationName]);
-        $associations = $associationHeader->getParent()->find('css', '.four');
+        $products = $this->getElement('association', ['%association-name%' => $productAssociationName]);
 
-        Assert::notNull($associations);
+        Assert::notNull($products);
 
-        return null !== $associations->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
+        return null !== $products->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
     }
 
     /**
@@ -263,7 +270,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'association' => 'h4:contains("%association-name%")',
+            'association' => '#sylius-product-association-%association-name%',
             'attributes' => '#sylius-product-attributes',
             'average_rating' => '#average-rating',
             'main_image' => '#main-image',

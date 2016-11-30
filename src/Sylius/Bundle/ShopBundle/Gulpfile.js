@@ -23,6 +23,7 @@ var paths = {
         js: [
             nodeModulesPath + 'jquery/dist/jquery.min.js',
             nodeModulesPath + 'semantic-ui-css/semantic.min.js',
+            nodeModulesPath + 'lightbox2/dist/js/lightbox.js',
             vendorUiPath + 'Resources/private/js/**',
             vendorShopPath + 'Resources/private/js/**'
         ],
@@ -32,6 +33,7 @@ var paths = {
         ],
         css: [
             nodeModulesPath + 'semantic-ui-css/semantic.min.css',
+            nodeModulesPath + 'lightbox2/dist/css/lightbox.css',
             vendorUiPath + 'Resources/private/css/**',
             vendorShopPath + 'Resources/private/css/**',
             vendorShopPath + 'Resources/private/scss/**'
@@ -53,7 +55,7 @@ gulp.task('shop-js', function () {
 });
 
 gulp.task('shop-css', function() {
-    gulp.src([nodeModulesPath+'semantic-ui-css/themes/**/*']).pipe(gulp.dest(shopRootPath + 'css/themes/'));
+    gulp.src([nodeModulesPath + 'semantic-ui-css/themes/**/*']).pipe(gulp.dest(shopRootPath + 'css/themes/'));
 
     var cssStream = gulp.src(paths.shop.css)
             .pipe(concat('css-files.css'))
@@ -75,6 +77,8 @@ gulp.task('shop-css', function() {
 });
 
 gulp.task('shop-img', function() {
+    gulp.src([nodeModulesPath + 'lightbox2/dist/images/*']).pipe(gulp.dest(shopRootPath + 'images/'));
+
     return gulp.src(paths.shop.img)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(shopRootPath + 'img/'))
