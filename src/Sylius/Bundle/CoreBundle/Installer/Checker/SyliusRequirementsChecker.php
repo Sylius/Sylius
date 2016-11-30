@@ -21,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class RequirementsChecker
+final class SyliusRequirementsChecker implements RequirementsCheckerInterface
 {
     /**
      * @var SyliusRequirements
@@ -42,10 +42,7 @@ final class RequirementsChecker
     }
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function check(InputInterface $input, OutputInterface $output)
     {

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Command;
+namespace Sylius\Bundle\CoreBundle\Installer\Executor;
 
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;

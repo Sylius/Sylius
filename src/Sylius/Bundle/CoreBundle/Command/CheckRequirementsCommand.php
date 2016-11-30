@@ -39,7 +39,7 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $fulfilled = $this->get('sylius.installer.checker.requirements')->check($input, $output);
+        $fulfilled = $this->get('sylius.installer.checker.sylius_requirements')->check($input, $output);
 
         if (!$fulfilled) {
             throw new RuntimeException('Some system requirements are not fulfilled. Please check output messages and fix them.');

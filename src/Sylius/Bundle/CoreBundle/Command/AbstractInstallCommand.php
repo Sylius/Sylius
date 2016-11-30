@@ -11,14 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Command;
 
+use Sylius\Bundle\CoreBundle\Installer\Executor\CommandExecutor;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Helper\Table;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Validator\ConstraintViolationList;
 
 abstract class AbstractInstallCommand extends ContainerAwareCommand
 {

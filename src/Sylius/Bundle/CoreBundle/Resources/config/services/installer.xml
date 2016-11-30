@@ -16,8 +16,12 @@
         <service id="sylius.installer.checker.command_directory" class="Sylius\Bundle\CoreBundle\Installer\Checker\CommandDirectoryChecker">
             <argument type="service" id="filesystem" />
         </service>
-        <service id="sylius.installer.checker.requirements" class="Sylius\Bundle\CoreBundle\Installer\Checker\RequirementsChecker">
+        <service id="sylius.installer.checker.sylius_requirements" class="Sylius\Bundle\CoreBundle\Installer\Checker\SyliusRequirementsChecker">
             <argument type="service" id="sylius.requirements" />
+        </service>
+
+        <service id="sylius.commands_provider.database_setup" class="Sylius\Bundle\CoreBundle\Installer\Provider\DatabaseSetupCommandsProvider">
+            <argument type="service" id="doctrine" />
         </service>
     </services>
 </container>
