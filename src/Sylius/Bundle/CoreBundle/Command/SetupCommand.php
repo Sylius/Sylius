@@ -32,11 +32,6 @@ use Webmozart\Assert\Assert;
 final class SetupCommand extends AbstractInstallCommand
 {
     /**
-     * @var CurrencyInterface
-     */
-    private $currency;
-
-    /**
      * @var LocaleInterface
      */
     private $locale;
@@ -61,19 +56,20 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $this->currency = $this->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
-        $this->locale = $this->get('sylius.setup.locale')->setup($input, $output);
-        $this->setupChannel();
-        $this->setupAdministratorUser($input, $output);
+        $currency = $this->get('sylius.setup.currency')->setup($input, $output, $this->getHelper('question'));
+        $locale = $this->get('sylius.setup.locale')->setup($input, $output);
+        $this->get('sylius.setup.channel')->setup($locale, $currency);
+        $this->setupAdministratorUser($input, $output, $locale->getCode());
     }
 
     /**
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @param $localeCode
      *
      * @return int
      */
-    protected function setupAdministratorUser(InputInterface $input, OutputInterface $output)
+    protected function setupAdministratorUser(InputInterface $input, OutputInterface $output, $localeCode)
     {
         $output->writeln('Create your administrator account.');
 
@@ -87,38 +83,12 @@ EOT
         }
 
         $user->setEnabled(true);
-        $user->setLocaleCode($this->locale->getCode());
+        $user->setLocaleCode($localeCode);
 
         $userManager->persist($user);
         $userManager->flush();
 
         $output->writeln('Administrator account successfully registered.');
-    }
-
-    protected function setupChannel()
-    {
-        $channelRepository = $this->get('sylius.repository.channel');
-        $channelManager = $this->get('sylius.manager.channel');
-        $channelFactory = $this->get('sylius.factory.channel');
-
-        /** @var ChannelInterface $channel */
-        $channel = $channelRepository->findOneBy([]);
-
-        if (null === $channel) {
-            $channel = $channelFactory->createNew();
-            $channel->setCode('default');
-            $channel->setName('Default');
-            $channel->setTaxCalculationStrategy('order_items_based');
-
-            $channelManager->persist($channel);
-        }
-
-        $channel->addCurrency($this->currency);
-        $channel->setBaseCurrency($this->currency);
-        $channel->addLocale($this->locale);
-        $channel->setDefaultLocale($this->locale);
-
-        $channelManager->flush();
     }
 
     /**
