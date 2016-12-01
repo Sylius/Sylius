@@ -26,7 +26,8 @@ function handleProductOptionsChange() {
         $selector = '';
 
         $('#sylius-product-adding-to-cart select').each(function() {
-            $selector += '[data-' + $(this).attr('data-option') + '="' + $(this).find('option:selected').text() + '"]';
+            var option = $(this).find('option:selected').text().replace('\"', '\'');
+            $selector += '[data-' + $(this).attr('data-option') + '="' + option + '"]';
         });
 
         $price = $($selector).attr('data-value');
