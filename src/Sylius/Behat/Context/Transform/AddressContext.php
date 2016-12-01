@@ -62,7 +62,6 @@ final class AddressContext implements Context
         $this->countryNameConverter = $countryNameConverter;
         $this->addressRepository = $addressRepository;
         $this->countryRepository = $countryRepository;
-
     }
 
     /**
@@ -81,25 +80,12 @@ final class AddressContext implements Context
      * @Transform /^address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      * @Transform /^address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      */
-    public function createNewAddressWith(
-        $cityName,
-        $street,
-        $postcode,
-        $countryName,
-        $customerName,
-        $provinceName = null)
+    public function createNewAddressWith($city, $street, $postcode, $countryName, $customerName)
     {
         $countryCode = $this->countryNameConverter->convertToCode($countryName);
-        $customerName = explode(' ', $customerName);
+        list($firstName, $lastName) = explode(' ', $customerName);
 
-        return $this->createAddress($countryCode,
-            $customerName[0],
-            $customerName[1],
-            $cityName,
-            $street,
-            $postcode,
-            $provinceName
-        );
+        return $this->createAddress($countryCode, $firstName, $lastName, $city, $street, $postcode);
     }
 
     /**
@@ -122,9 +108,9 @@ final class AddressContext implements Context
     public function createNewAddressWithName($name, $street, $postcode, $city, $countryName, $provinceName = null)
     {
         $countryCode = $this->countryNameConverter->convertToCode($countryName);
-        $names = explode(" ", $name);
+        list($firstName, $lastName) = explode(' ', $name);
 
-        return $this->createAddress($countryCode, $names[0], $names[1], $city, $street, $postcode, $provinceName);
+        return $this->createAddress($countryCode, $firstName, $lastName, $city, $street, $postcode, $provinceName);
     }
 
     /**
@@ -167,15 +153,21 @@ final class AddressContext implements Context
         $address->setStreet($street);
         $address->setPostcode($postCode);
 
+        if (null === $provinceName) {
+            return $address;
+        }
+
         /** @var CountryInterface $country */
         $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
 
-        /** @var ProvinceInterface $province */
-        foreach ($country->getProvinces() as $province) {
-            if ($province->getName() === $provinceName) {
-                $address->setProvinceCode($province->getCode());
+        if (null !== $country) {
+            /** @var ProvinceInterface $province */
+            foreach ($country->getProvinces() as $province) {
+                if ($province->getName() === $provinceName) {
+                    $address->setProvinceCode($province->getCode());
 
-                return $address;
+                    return $address;
+                }
             }
         }
 

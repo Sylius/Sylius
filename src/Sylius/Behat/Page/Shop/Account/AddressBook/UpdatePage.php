@@ -90,9 +90,6 @@ final class UpdatePage extends SymfonyPage implements UpdatePageInterface
     public function saveChanges()
     {
         $this->getElement('save_button')->press();
-
-        $this->waitForElement(5, 'province_code');
-        $this->waitForElement(5, 'province_name');
     }
 
     /**

@@ -158,8 +158,9 @@ final class AddressBookContext implements Context
 
     /**
      * @When /^I change the ([^"]+) to "([^"]+)"$/
+     * @When /^I remove the ([^"]+)$/
      */
-    public function iChangeMyTo($field, $value)
+    public function iChangeMyTo($field, $value = null)
     {
         $this->addressBookUpdatePage->fillField($field, $value);
     }
@@ -246,6 +247,44 @@ final class AddressBookContext implements Context
         Assert::true(
             $this->addressBookCreatePage->isOpen(),
             'The address creation page should be opened.'
+        );
+    }
+
+    /**
+     * @Then I should still be on the :fullName address edit page
+     */
+    public function iShouldStillBeOnTheAddressEditPage($fullName)
+    {
+        $address = $this->getAddressOf($fullName);
+
+        Assert::true($this->addressBookUpdatePage->isOpen(['id' => $address->getId()]));
+    }
+
+    /**
+     * @Then I should still have :value as my specified province
+     */
+    public function iShouldStillHaveAsMySpecifiedProvince($value)
+    {
+        $actualValue = $this->addressBookUpdatePage->getSpecifiedProvince();
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Address\'s province should be %s, but is %s.', $value, $actualValue)
+        );
+    }
+
+    /**
+     * @Then I should still have :value as my chosen province
+     */
+    public function iShouldStillHaveAsMyChosenProvince($value)
+    {
+        $actualValue = $this->addressBookUpdatePage->getSelectedProvince();
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Address\'s province should be %s, but is %s.', $value, $actualValue)
         );
     }
 

@@ -25,6 +25,16 @@ interface UpdatePageInterface extends SymfonyPageInterface
     public function fillField($field, $value);
 
     /**
+     * @return string
+     */
+    public function getSpecifiedProvince();
+
+    /**
+     * @return string
+     */
+    public function getSelectedProvince();
+
+    /**
      * @param string $name
      */
     public function specifyProvince($name);
