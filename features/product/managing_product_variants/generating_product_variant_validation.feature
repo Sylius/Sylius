@@ -25,3 +25,36 @@ Feature: Generating product variant generation
         And I try to generate it
         Then I should be notified that code is required for the 1st variant
         And I should see 0 variants in the list
+
+    @ui
+    Scenario: Generation a product variants without specific required fields for second variant
+        Given I want to generate new variants for this product
+        When I specify that the 1st variant is identified by "WYBOROWA_ORANGE" code
+        And I specify that the 1st variant costs "$90" in "United States" channel
+        And I try to generate it
+        Then I should be notified that code is required for the 2st variant
+        Then I should be notified that prices in all channels must be defined for the 2st variant
+        And I should see 0 variants in the list
+
+    @ui
+    Scenario: Generation a product variants with the same code
+        Given I want to generate new variants for this product
+        When I specify that the 1st variant is identified by "WYBOROWA_TASTE" code
+        And I specify that the 1st variant costs "$90" in "United States" channel
+        And I specify that the 2st variant is identified by "WYBOROWA_TASTE" code
+        And I specify that the 2st variant costs "$90" in "United States" channel
+        And I try to generate it
+        Then I should be notified that variant code must be unique within this product for the 1st variant
+        And I should be notified that variant code must be unique within this product for the 2st variant
+        And I should see 0 variants in the list
+
+    @ui
+    Scenario: Generation a product variants without specific required fields for second variant
+        Given I want to generate new variants for this product
+        When I do not specify any information about variants
+        And I try to generate it
+        Then I should be notified that code is required for the 1st variant
+        And I should be notified that prices in all channels must be defined for the 1st variant
+        And I should be notified that code is required for the 2st variant
+        And I should be notified that prices in all channels must be defined for the 2st variant
+        And I should see 0 variants in the list

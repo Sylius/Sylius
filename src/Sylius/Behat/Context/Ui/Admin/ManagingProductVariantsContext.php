@@ -414,7 +414,7 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatCodeIsRequiredForVariant($position)
     {
         Assert::same(
-            $this->generatePage->getValidationMessage('code', $position),
+            $this->generatePage->getValidationMessage('code', $position - 1),
             'Please enter the code.'
         );
     }
@@ -425,8 +425,19 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position)
     {
         Assert::same(
-            $this->generatePage->getPricesValidationMessage($position-1),
+            $this->generatePage->getPricesValidationMessage($position - 1),
             'You must define price for every channel.'
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that variant code must be unique within this product for the (\d)(?:st|nd|rd|th) variant$/
+     */
+    public function iShouldBeNotifiedThatVariantCodeMustBeUniqueWithinThisProductForYheVariant($position)
+    {
+        Assert::same(
+            $this->generatePage->getValidationMessage('code', $position - 1),
+            'This code must be unique within this product.'
         );
     }
 
@@ -681,6 +692,14 @@ final class ManagingProductVariantsContext implements Context
     public function iSetItsShippingCategoryAs($shippingCategoryName)
     {
         $this->createPage->selectShippingCategory($shippingCategoryName);
+    }
+
+    /**
+     * @When I do not specify any information about variants
+     */
+    public function iDoNotSpecifyAnyInformationAboutVariants()
+    {
+        // Intentionally left blank to fulfill context expectation
     }
 
     /**
