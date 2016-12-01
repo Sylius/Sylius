@@ -81,15 +81,7 @@ final class TaxonChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => function (Options $options) {
-                    if (null !== $options['root']) {
-                        if (is_string($options['root'])) {
-                            $taxons = $this->taxonRepository->findChildrenByRootCode($options['root']);
-                        } else {
-                            $taxons = $this->taxonRepository->findChildren($options['root']);
-                        }
-                    } else {
-                        $taxons = $this->taxonRepository->findNodesTreeSorted();
-                    }
+                    $taxons = $this->taxonRepository->findNodesTreeSorted();
 
                     if (null !== $options['filter']) {
                         $taxons = array_filter($taxons, $options['filter']);

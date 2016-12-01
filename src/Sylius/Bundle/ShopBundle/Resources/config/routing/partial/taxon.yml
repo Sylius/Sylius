@@ -23,6 +23,6 @@ sylius_shop_partial_taxon_index_by_code:
         _sylius:
             template: $template
             repository:
-                method: findChildrenAsTreeByRootCode
+                method: findChildren
                 arguments:
                     - $code
