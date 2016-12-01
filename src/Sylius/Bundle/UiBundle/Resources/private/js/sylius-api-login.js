@@ -18,7 +18,6 @@
             var emailField = element.find('input[type=\'email\']');
             var signInButton = element.find('.button');
             var validationField = element.find('.red.label');
-            validationField.hide();
 
             signInButton.api({
                 method: apiSettings.method,
@@ -45,7 +44,7 @@
                 },
 
                 onFailure: function (response) {
-                    validationField.show();
+                    validationField.removeClass('hidden');
                     validationField.html(response.message);
                 }
             });
