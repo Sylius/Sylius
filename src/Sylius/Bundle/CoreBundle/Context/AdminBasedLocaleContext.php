@@ -44,11 +44,11 @@ final class AdminBasedLocaleContext implements LocaleContextInterface
             throw new LocaleNotFoundException();
         }
 
-        $adminUser = $token->getUser();
-        if (!$adminUser instanceof AdminUserInterface) {
+        $user = $token->getUser();
+        if (!$user instanceof AdminUserInterface) {
             throw new LocaleNotFoundException();
         }
 
-        return $adminUser->getLocaleCode();
+        return $user->getLocaleCode();
     }
 }
