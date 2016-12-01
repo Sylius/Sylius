@@ -5,10 +5,13 @@ sylius_shop_partial_cart_summary:
     path: /summary
     methods: [GET]
     defaults:
-        _controller: sylius.controller.order:summaryAction
+        _controller: sylius.controller.order:showAction
         _sylius:
             template: $template
-            form: Sylius\Bundle\OrderBundle\Form\Type\CartType
+            repository:
+                method: find
+                arguments:
+                    - "expr:service('sylius.context.cart').getCart()"
 
 sylius_shop_partial_cart_add_item:
     path: /add-item
