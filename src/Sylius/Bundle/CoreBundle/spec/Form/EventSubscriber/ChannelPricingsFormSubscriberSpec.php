@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\ChannelPricingsFormSubscriber;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
@@ -42,9 +43,14 @@ final class ChannelPricingsFormSubscriberSpec extends ObjectBehavior
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_listens_on_pre_set_data_event()
+    function it_listens_on_pre_set_data_and_submit_events()
     {
-        $this->getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData']);
+        $this->getSubscribedEvents()->shouldReturn(
+            [
+                FormEvents::PRE_SET_DATA => 'preSetData',
+                FormEvents::SUBMIT => 'submit',
+            ]
+        );
     }
 
     function it_adds_missing_channel_pricings_on_pre_set_data(
@@ -68,5 +74,28 @@ final class ChannelPricingsFormSubscriberSpec extends ObjectBehavior
         $productVariant->addChannelPricing($channelPricing)->shouldBeCalled();
 
         $this->preSetData($formEvent);
+    }
+
+    function it_removes_channel_pricings_with_not_specified_price_on_submit(
+        ChannelPricingInterface $channelPricingWithPrice,
+        ChannelPricingInterface $channelPricingWithoutPrice,
+        FormEvent $formEvent,
+        ProductVariantInterface $productVariant
+    ) {
+        $formEvent->getData()->willReturn($productVariant);
+
+        $productVariant->getChannelPricings()->willReturn(new ArrayCollection([
+                $channelPricingWithPrice->getWrappedObject(),
+                $channelPricingWithoutPrice->getWrappedObject(),
+        ]));;
+        $channelPricingWithoutPrice->getPrice()->willReturn(null);
+        $channelPricingWithPrice->getPrice()->willReturn(123);
+
+        $productVariant->removeChannelPricing($channelPricingWithoutPrice)->shouldBeCalled();
+        $channelPricingWithoutPrice->setProductVariant(null)->shouldBeCalled();
+        $productVariant->removeChannelPricing($channelPricingWithPrice)->shouldNotBeCalled();
+        $channelPricingWithPrice->setProductVariant(null)->shouldNotBeCalled();
+
+        $this->submit($formEvent);
     }
 }

@@ -189,16 +189,16 @@ final class ProductContext implements Context
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") in ("[^"]+" channel)$/
      */
-    public function storeHasAProductPricedAt($productName, $price = 0, ChannelInterface $channel = null)
+    public function storeHasAProductPricedAt($productName, $price = 100, ChannelInterface $channel = null)
     {
+        if (null === $channel && $this->sharedStorage->has('channel')) {
+            $channel = $this->sharedStorage->get('channel');
+        }
         $product = $this->createProduct($productName, $price, null, $channel);
-
         $product->setDescription('Awesome '.$productName);
 
         if (null !== $channel) {
             $product->addChannel($channel);
-        } else if ($this->sharedStorage->has('channel')) {
-            $product->addChannel($this->sharedStorage->get('channel'));
         }
 
         $this->saveProduct($product);
@@ -244,7 +244,7 @@ final class ProductContext implements Context
     /**
      * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+") available in (channel "[^"]+") and (channel "[^"]+")$/
      */
-    public function storeHasAProductPricedAtAvailableInChannels($productName, $price = 0, ...$channels)
+    public function storeHasAProductPricedAtAvailableInChannels($productName, $price = 100, ...$channels)
     {
         $product = $this->createProduct($productName, $price);
         /** @var ProductVariantInterface $productVariant */
@@ -768,7 +768,7 @@ final class ProductContext implements Context
      *
      * @return ProductInterface
      */
-    private function createProduct($productName, $price = 0, $date = null, ChannelInterface $channel = null)
+    private function createProduct($productName, $price = 100, $date = null, ChannelInterface $channel = null)
     {
         /** @var ProductInterface $product */
         $product = $this->productFactory->createWithVariant();
