@@ -318,7 +318,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         /** @var ProductVariantInterface $productVariant */
         foreach ($product->getVariants() as $productVariant) {
             $productVariant->setAvailableOn($this->faker->dateTimeThisYear);
-            $productVariant->setCode(sprintf('%s-variant#%d', $options['code'], $i));
+            $productVariant->setCode(sprintf('%s-variant-%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
 
             foreach ($this->channelRepository->findAll() as $channel) {
