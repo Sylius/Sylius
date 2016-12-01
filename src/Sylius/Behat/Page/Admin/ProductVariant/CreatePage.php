@@ -128,6 +128,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getFirstPriceValidationMessage()
+    {
+        return $this->getElement('first_price_validation_message')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -141,6 +149,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'price_calculator' => '#sylius_product_variant_pricingCalculator',
             'shipping_category' => '#sylius_product_variant_shippingCategory',
             'prices_validation_message' => '#sylius_product_variant_channelPricings ~ .sylius-validation-error',
+            'first_price_validation_message' => '#sylius_product_variant_channelPricings_0 .sylius-validation-error',
             'weight' => '#sylius_product_variant_weight',
             'width' => '#sylius_product_variant_width',
         ]);

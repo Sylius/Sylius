@@ -52,6 +52,7 @@ final class ChannelPricingsFormSubscriber implements EventSubscriberInterface
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::SUBMIT => 'submit',
         ];
     }
 
@@ -77,6 +78,21 @@ final class ChannelPricingsFormSubscriber implements EventSubscriberInterface
             $channelPricing = $this->channelPricingFactory->createNew();
             $channelPricing->setChannel($channel);
             $productVariant->addChannelPricing($channelPricing);
+        }
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function submit(FormEvent $event)
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $event->getData();
+        foreach ($productVariant->getChannelPricings() as $channelPricing) {
+            if (null === $channelPricing->getPrice()) {
+                $productVariant->removeChannelPricing($channelPricing);
+                $channelPricing->setProductVariant(null);
+            }
         }
     }
 }

@@ -23,6 +23,11 @@
                 <option name="minMessage">sylius.product_variant.onHand.min</option>
                 <option name="groups">sylius</option>
             </constraint>
+            <constraint name="Expression">
+                <option name="expression">this.getOnHand() >= this.getOnHold()</option>
+                <option name="message">sylius.product_variant.onHand.reserved</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </property>
         <property name="weight">
             <constraint name="Range">

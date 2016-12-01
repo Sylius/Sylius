@@ -387,14 +387,14 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then I should be notified that price cannot be lower than 0
+     * @Then I should be notified that price cannot be lower than 0.01
      */
     public function iShouldBeNotifiedThatPriceCannotBeLowerThen()
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::same($currentPage->getPricesValidationMessage(), 'Price must not be negative.');
+        Assert::same($currentPage->getFirstPriceValidationMessage(), 'Price must be at least 0.01.');
     }
 
     /**
