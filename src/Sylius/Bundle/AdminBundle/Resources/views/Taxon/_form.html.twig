@@ -24,7 +24,4 @@
         </div>
     {% endfor %}
 </div>
-<div class="ui segment">
-    <h3 class="ui dividing header">{{ 'sylius.ui.media'|trans }}</h3>
-    {{ form_row(form.images, {'label': false}) }}
-</div>
+{% include '@SyliusAdmin/Taxon/_media.html.twig' %}
