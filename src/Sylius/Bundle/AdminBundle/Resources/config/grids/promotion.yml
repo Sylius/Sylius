@@ -45,7 +45,7 @@ sylius_grid:
                         fields: [code, name]
                 couponBased:
                     type: boolean
-                    label: sylius.ui.coupons
+                    label: sylius.ui.coupon_based
             actions:
                 main:
                     create:
