@@ -45,7 +45,7 @@ final class ExchangeRateType extends AbstractResourceType
             $exchangeRate = $event->getData();
             $form = $event->getForm();
 
-            $disabled = null !== $exchangeRate->getSourceCurrency() && null !== $exchangeRate->getTargetCurrency();
+            $disabled = null !== $exchangeRate->getId();
 
             $form
                 ->add('sourceCurrency', CurrencyChoiceType::class, [

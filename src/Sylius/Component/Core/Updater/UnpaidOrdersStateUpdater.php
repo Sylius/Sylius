@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Order\Updater;
+namespace Sylius\Component\Core\Updater;
 
 use SM\Factory\Factory;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -62,7 +62,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
     /**
      * @param OrderInterface $expiredUnpaidOrder
      */
-    protected function cancelOrder(OrderInterface $expiredUnpaidOrder)
+    private function cancelOrder(OrderInterface $expiredUnpaidOrder)
     {
         $stateMachine = $this->stateMachineFactory->get($expiredUnpaidOrder, 'sylius_order');
         $stateMachine->apply(OrderTransitions::TRANSITION_CANCEL);

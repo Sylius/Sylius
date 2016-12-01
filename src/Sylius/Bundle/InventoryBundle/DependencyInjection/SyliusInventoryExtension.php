@@ -35,6 +35,5 @@ final class SyliusInventoryExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $container->setAlias('sylius.availability_checker', $config['checker']);
-        $container->setAlias('sylius.inventory_operator', $config['operator']);
     }
 }

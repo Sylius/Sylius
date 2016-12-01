@@ -58,11 +58,4 @@ interface OrderRepositoryInterface extends RepositoryInterface
      * @return OrderInterface[]
      */
     public function findCartsNotModifiedSince(\DateTime $terminalDate);
-
-    /**
-     * @param \DateTime $terminalDate
-     *
-     * @return OrderInterface[]
-     */
-    public function findOrdersUnpaidSince(\DateTime $terminalDate);
 }

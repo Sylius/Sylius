@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Order\Updater;
+namespace Sylius\Component\Core\Updater;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
