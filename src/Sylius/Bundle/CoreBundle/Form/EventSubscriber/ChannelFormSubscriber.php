@@ -42,12 +42,12 @@ final class ChannelFormSubscriber implements EventSubscriberInterface
         }
 
         $data['locales'] = $this->resolveLocales(
-            empty($data['locales']) ? [] : $data['locales'],
+            isset($data['locales']) ? $data['locales'] : [],
             $data['defaultLocale'])
         ;
 
         $data['currencies'] = $this->resolveCurrencies(
-            empty($data['currencies']) ? [] : $data['currencies'],
+            isset($data['currencies']) ? $data['currencies'] : [],
             $data['baseCurrency'])
         ;
 
