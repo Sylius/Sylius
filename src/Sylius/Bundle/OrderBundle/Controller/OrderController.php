@@ -57,6 +57,28 @@ class OrderController extends ResourceController
 
         return $this->viewHandler->handle($configuration, $view);
     }
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function widgetAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $cart = $this->getCurrentCart();
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($cart));
+        }
+
+        $view = View::create()
+            ->setTemplate($configuration->getTemplate('summary.html'))
+            ->setData(['cart' => $cart])
+        ;
+
+        return $this->viewHandler->handle($configuration, $view);
+    }
 
     /**
      * @param Request $request
