@@ -24,32 +24,11 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 interface TaxonRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @param TaxonInterface $taxon
+     * @param string $parentCode
      *
      * @return TaxonInterface[]
      */
-    public function findChildren(TaxonInterface $taxon);
-
-    /**
-     * @param TaxonInterface $taxon
-     *
-     * @return TaxonInterface[]
-     */
-    public function findChildrenAsTree(TaxonInterface $taxon);
-
-    /**
-     * @param string $code
-     *
-     * @return TaxonInterface[]
-     */
-    public function findChildrenByRootCode($code);
-
-    /**
-     * @param string $code
-     *
-     * @return TaxonInterface[]
-     */
-    public function findChildrenAsTreeByRootCode($code);
+    public function findChildren($parentCode);
 
     /**
      * @return TaxonInterface[]
