@@ -19,36 +19,21 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * @author Antonio Perić <antonio@locastic.com>
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-final class CustomerGroupType extends AbstractType
+final class CustomerGroupConfigurationType extends AbstractType
 {
-    /**
-     * @var RepositoryInterface
-     */
-    protected $groupRepository;
-
-    /**
-     * @param RepositoryInterface $groupRepository
-     */
-    public function __construct(RepositoryInterface $groupRepository)
-    {
-        $this->groupRepository = $groupRepository;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('group', CustomerGroupCodeChoiceType::class, [
-                'label' => 'sylius.form.promotion_action.customer_group',
-                'property' => 'name',
-                'class' => $this->groupRepository->getClassName(),
+            ->add('group_code', CustomerGroupCodeChoiceType::class, [
+                'label' => 'sylius.form.promotion_rule.customer_group.group',
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
-                    new Type(['type' => 'numeric', 'groups' => ['sylius']]),
+                    new Type(['type' => 'string', 'groups' => ['sylius']]),
                 ],
             ])
         ;

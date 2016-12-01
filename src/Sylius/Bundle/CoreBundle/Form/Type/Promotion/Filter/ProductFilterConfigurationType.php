@@ -23,24 +23,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 final class ProductFilterConfigurationType extends AbstractType
 {
     /**
-     * @var ProductRepositoryInterface
-     */
-    protected $productRepository;
-
-    /**
      * @var DataTransformerInterface
      */
     private $productsToCodesTransformer;
 
     /**
-     * @param ProductRepositoryInterface $productRepository
      * @param DataTransformerInterface $productsToCodesTransformer
      */
-    public function __construct(
-        ProductRepositoryInterface $productRepository,
-        DataTransformerInterface $productsToCodesTransformer
-    ) {
-        $this->productRepository = $productRepository;
+    public function __construct(DataTransformerInterface $productsToCodesTransformer) {
         $this->productsToCodesTransformer = $productsToCodesTransformer;
     }
 

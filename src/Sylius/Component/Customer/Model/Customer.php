@@ -222,7 +222,7 @@ class Customer implements CustomerInterface
     /**
      * {@inheritdoc}
      */
-    public function setGroup(CustomerGroupInterface $group)
+    public function setGroup(CustomerGroupInterface $group = null)
     {
         $this->group = $group;
     }

@@ -91,7 +91,7 @@ class ProductAttributeController extends ResourceController
      *
      * @return FormView
      */
-    private function getAttributeForm(AttributeInterface $attribute)
+    protected function getAttributeForm(AttributeInterface $attribute)
     {
         $attributeForm = $this->get('sylius.form_registry.attribute_type')->get($attribute->getType(), 'default');
 

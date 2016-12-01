@@ -110,7 +110,7 @@ interface CustomerInterface extends TimestampableInterface, ResourceInterface
     /**
      * @param CustomerGroupInterface $group
      */
-    public function setGroup(CustomerGroupInterface $group);
+    public function setGroup(CustomerGroupInterface $group = null);
 
     /**
      * @return string

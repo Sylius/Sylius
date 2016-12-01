@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
 use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonCodeChoiceType;
-use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,19 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class TotalOfItemsFromTaxonConfigurationType extends AbstractType
 {
-    /**
-     * @var TaxonRepositoryInterface
-     */
-    private $taxonRepository;
-
-    /**
-     * @param TaxonRepositoryInterface $taxonRepository
-     */
-    public function __construct(TaxonRepositoryInterface $taxonRepository)
-    {
-        $this->taxonRepository = $taxonRepository;
-    }
-
     /**
      * {@inheritdoc}
      */
