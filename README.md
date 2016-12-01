@@ -28,8 +28,8 @@ $ php composer.phar create-project -s alpha sylius/sylius-standard app
 $ cd app
 $ npm install
 $ npm run gulp
-$ php app/console sylius:install
-$ php app/console server:start
+$ php bin/console sylius:install
+$ php bin/console server:start
 $ open http://localhost:8000/
 ```
 
@@ -41,8 +41,8 @@ Troubleshooting
 If something goes wrong, errors & exceptions are logged at the application level:
 
 ```bash
-$ tail -f app/logs/prod.log
-$ tail -f app/logs/dev.log
+$ tail -f var/logs/prod.log
+$ tail -f var/logs/dev.log
 ```
 
 If you are using the supplied Vagrant development environment, please see the related [Troubleshooting guide](http://github.com/Sylius/Vagrant/README.md#Troubleshooting) for more information.
