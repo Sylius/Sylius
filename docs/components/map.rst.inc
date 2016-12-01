@@ -9,7 +9,6 @@
 * :doc:`/components/Mailer/index`
 * :doc:`/components/Order/index`
 * :doc:`/components/Payment/index`
-* :doc:`/components/Pricing/index`
 * :doc:`/components/Product/index`
 * :doc:`/components/Promotion/index`
 * :doc:`/components/Registry/index`

@@ -6,7 +6,6 @@
 * :doc:`/bundles/SyliusInventoryBundle/index`
 * :doc:`/bundles/SyliusMailerBundle/index`
 * :doc:`/bundles/SyliusOrderBundle/index`
-* :doc:`/bundles/SyliusPricingBundle/index`
 * :doc:`/bundles/SyliusProductBundle/index`
 * :doc:`/bundles/SyliusPromotionBundle/index`
 * :doc:`/bundles/SyliusResourceBundle/index`

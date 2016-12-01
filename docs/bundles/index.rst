@@ -12,7 +12,6 @@ Symfony Bundles
     SyliusInventoryBundle/index
     SyliusMailerBundle/index
     SyliusOrderBundle/index
-    SyliusPricingBundle/index
     SyliusProductBundle/index
     SyliusPromotionBundle/index
     SyliusResourceBundle/index
