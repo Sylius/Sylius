@@ -7,11 +7,11 @@ Currencies
 Sylius supports multiple currencies per store and makes it very easy to manage them.
 
 There are several approaches to processing several currencies, but we decided to use the simplest solution
-we are storing all money values in the **base currency** and convert them to other currencies with current rates or specific rates.
+we are storing all money values in the **base currency per channel** and convert them to other currencies with exchange rates.
 
 .. note::
 
-    The **base currency** is set during the installation of Sylius and it has the **exchange rate** equal to "1.000".
+    The **base currency** to the first channel is set during the installation of Sylius and it has the **exchange rate** equal to "1.000".
 
 .. tip::
 
@@ -41,20 +41,9 @@ Currency Converter
 
 The **Sylius\Component\Currency\Converter\CurrencyConverter** is a service available under the ``sylius.currency_converter`` id.
 
-It lets you to convert money values from the base currency to all the other currencies and backwards.
+It lets you to convert money values from one currency to another.
 
-.. code-block:: php
-
-    <?php
-
-    public function fooAction()
-    {
-        // convert 100 of the base currency (for instance 100$ if USD is your base) to PLN.
-        $this->get('sylius.currency_converter')->convertFromBase(100, 'PLN');
-
-        // or the other way - convert 100 PLN to amount in the base currency
-        $this->get('sylius.currency_converter')->convertToBase(100, 'PLN');
-    }
+This solution is used for displaying an *approximate* value of price when the desired currency is different from the base currency of the current channel.
 
 Available Currencies Provider
 -----------------------------
@@ -86,3 +75,4 @@ Learn more
 ----------
 
 * :doc:`Currency - Component Documentation </components/Currency/index>`
+* :doc:`Pricing Concept Documentation </book/pricing>`

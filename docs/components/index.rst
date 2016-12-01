@@ -24,7 +24,6 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
     Mailer/index
     Order/index
     Payment/index
-    Pricing/index
     Product/index
     Promotion/index
     Registry/index
