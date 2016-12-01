@@ -13,15 +13,6 @@ sylius_fixtures:
                 currency:
                     options:
                         currencies: ['USD']
-                geographical:
-                    options:
-                        countries:
-                            - "US"
-                        zones:
-                            US:
-                                name: "United States of America"
-                                countries:
-                                    - "US"
 
                 channel:
                     options:
@@ -35,6 +26,16 @@ sylius_fixtures:
                                     - "USD"
                                 enabled: true
                                 hostname: "localhost:8000"
+
+                geographical:
+                    options:
+                        countries:
+                            - "US"
+                        zones:
+                            US:
+                                name: "United States of America"
+                                countries:
+                                    - "US"
 
                 payment_method:
                     options:

@@ -179,7 +179,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
 
         /** @var ProductInterface $product */
         $product = $this->productFactory->createNew();
-        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
+        $product->setVariantSelectionMethod($options['variant_selection_method']);
         $product->setCode($options['code']);
         $product->setEnabled($options['enabled']);
         $product->setMainTaxon($options['main_taxon']);
@@ -232,6 +232,9 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setDefault('channels', LazyOption::randomOnes($this->channelRepository, 3))
             ->setAllowedTypes('channels', 'array')
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
+
+            ->setDefault('variant_selection_method', ProductInterface::VARIANT_SELECTION_MATCH)
+            ->setAllowedValues('variant_selection_method', [ProductInterface::VARIANT_SELECTION_MATCH, ProductInterface::VARIANT_SELECTION_CHOICE])
 
             ->setDefault('product_attributes', [])
             ->setAllowedTypes('product_attributes', 'array')

@@ -1,4 +1,6 @@
 {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+{% import '@SyliusUi/Macro/messages.html.twig' as messages %}
+
 {% import _self as tree %}
 
 {% macro render(taxons) %}
@@ -40,7 +42,11 @@
 </a>
 
 <div class="ui segment">
+    {% if taxons|length > 0 %}
     <div class="ui list sylius-sortable-list">
         {{ tree.render(taxons) }}
     </div>
+    {% else %}
+        {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
+    {% endif %}
 </div>

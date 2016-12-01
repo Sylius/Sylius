@@ -1,6 +1,5 @@
 ![Sylius](http://demo.sylius.org/assets/shop/img/logo.png)
 
-[![Gitter chat](https://badges.gitter.im/Sylius/Sylius.png)](https://gitter.im/Sylius/Sylius)
 [![License](https://img.shields.io/packagist/l/Sylius/Sylius.svg)](https://packagist.org/packages/sylius/sylius)
 [![Version](https://img.shields.io/packagist/v/Sylius/Sylius.svg)](https://packagist.org/packages/sylius/sylius)
 [![Build status on Linux](https://img.shields.io/travis/Sylius/Sylius/master.svg)](http://travis-ci.org/Sylius/Sylius)
@@ -24,7 +23,7 @@ Installation
 
 ```bash
 $ wget http://getcomposer.org/composer.phar
-$ php composer.phar create-project -s alpha sylius/sylius-standard app
+$ php composer.phar create-project -s beta sylius/sylius-standard app
 $ cd app
 $ npm install
 $ npm run gulp

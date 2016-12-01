@@ -12,8 +12,11 @@
     </div>
     {% if customer.user is not null %}
         <div class="right aligned column" id="actions">
-            {{ buttons.delete(path('sylius_admin_shop_user_delete', {'id': customer.user.id }), null, true, customer.id) }}
-            {{ buttons.show(path('sylius_admin_customer_order_index', {'id': customer.id}), 'sylius.ui.show_orders'|trans) }}
+            <div class="ui buttons">
+                {{ buttons.edit(path('sylius_admin_customer_update', {'id': customer.id})) }}
+                {{ buttons.show(path('sylius_admin_customer_order_index', {'id': customer.id}), 'sylius.ui.show_orders'|trans) }}
+                {{ buttons.delete(path('sylius_admin_shop_user_delete', {'id': customer.user.id }), null, true, customer.id) }}
+            </div>
         </div>
     {% else %}
         <div class="right aligned column" id="no-account">
