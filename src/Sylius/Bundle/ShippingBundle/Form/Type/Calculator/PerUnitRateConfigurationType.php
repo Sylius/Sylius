@@ -35,6 +35,7 @@ final class PerUnitRateConfigurationType extends AbstractType
                     new NotBlank(['groups' => ['sylius']]),
                     new Type(['type' => 'integer', 'groups' => ['sylius']]),
                 ],
+                'currency' => $options['currency'],
             ])
         ;
     }
@@ -48,6 +49,9 @@ final class PerUnitRateConfigurationType extends AbstractType
             ->setDefaults([
                 'data_class' => null,
             ])
+            ->setDefined(['currency'])
+            ->setAllowedTypes('currency', 'string')
+            ->setRequired(['currency'])
         ;
     }
 

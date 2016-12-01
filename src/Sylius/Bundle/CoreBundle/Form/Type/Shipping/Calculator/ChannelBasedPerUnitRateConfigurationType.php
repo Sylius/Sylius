@@ -47,6 +47,7 @@ final class ChannelBasedPerUnitRateConfigurationType extends AbstractType
             $builder
                 ->add($channel->getCode(), PerUnitRateConfigurationType::class, [
                     'label' => $channel->getName(),
+                    'currency' => $channel->getBaseCurrency()->getCode(),
                 ])
             ;
         }
