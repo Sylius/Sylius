@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Order\Updater;
+namespace spec\Sylius\Component\Core\Updater;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use SM\Factory\Factory;
 use SM\StateMachine\StateMachineInterface;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
+use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater;
+use Sylius\Component\Core\Updater\UnpaidOrdersStateUpdaterInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Order\Repository\OrderRepositoryInterface;
-use Sylius\Component\Order\Updater\UnpaidOrdersStateUpdater;
-use Sylius\Component\Order\Updater\UnpaidOrdersStateUpdaterInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

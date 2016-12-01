@@ -62,12 +62,6 @@
             <argument>%sylius_order.cart_expiration_period%</argument>
         </service>
 
-        <service id="sylius.unpaid_orders_state_updater" class="Sylius\Component\Order\Updater\UnpaidOrdersStateUpdater">
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sm.factory" />
-            <argument>%sylius_order.order_expiration_period%</argument>
-        </service>
-
         <service id="sylius.factory.add_to_cart_command" class="Sylius\Bundle\OrderBundle\Factory\AddToCartCommandFactory" />
     </services>
 </container>

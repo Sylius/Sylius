@@ -128,5 +128,11 @@
             <argument type="service" id="sylius.manager.product_review" />
             <argument type="service" id="sylius.average_rating_updater" />
         </service>
+
+        <service id="sylius.unpaid_orders_state_updater" class="Sylius\Component\Core\Updater\UnpaidOrdersStateUpdater">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sm.factory" />
+            <argument>%sylius_order.order_expiration_period%</argument>
+        </service>
     </services>
 </container>
