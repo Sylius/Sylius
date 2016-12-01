@@ -35,7 +35,7 @@ Sylius Platform
 This book is about our **full-stack e-commerce platform**, which is a standard Symfony application providing the most common webshop and a foundation for custom systems.
 
 Leveraging Symfony Bundles
----------------------------
+--------------------------
 
 If you prefer to build your very custom system step by step and from scratch, you can integrate the standalone Symfony bundles. For the installation instructions, please refer to the appropriate bundle documentation.
 

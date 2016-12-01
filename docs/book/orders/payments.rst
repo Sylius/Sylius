@@ -68,7 +68,7 @@ We cannot create a Payment without an Order, therefore let's assume that you hav
 
 .. tip::
 
-    Not familiar with the Order concept? Check :doc:`here </book/orders>`.
+    Not familiar with the Order concept? Check :doc:`here </book/orders/orders>`.
 
 Payment Methods
 ---------------

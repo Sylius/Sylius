@@ -89,4 +89,4 @@ And to save everything in the database you need to add the created association t
 Learn more:
 -----------
 
-* :doc:`Product - Concept Documentation </book/products>`
+* :doc:`Product - Concept Documentation </book/products/products>`

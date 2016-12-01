@@ -4,7 +4,7 @@
 Zones
 =====
 
-**Zones** are a part of the :doc:`Addressing </book/addresses>` concept.
+**Zones** are a part of the :doc:`Addressing </book/customers/addresses/addresses>` concept.
 
 Zones and ZoneMembers
 ---------------------

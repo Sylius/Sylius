@@ -17,7 +17,7 @@ we are storing all money values in the **base currency per channel** and convert
 
     In the dev environment you can easily check the base currency in the Symfony debug toolbar:
 
-    .. image:: ../_images/toolbar.png
+    .. image:: ../../_images/toolbar.png
         :align: center
 
 Currency Context
@@ -75,4 +75,4 @@ Learn more
 ----------
 
 * :doc:`Currency - Component Documentation </components/Currency/index>`
-* :doc:`Pricing Concept Documentation </book/pricing>`
+* :doc:`Pricing Concept Documentation </book/products/pricing>`

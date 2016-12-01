@@ -287,6 +287,6 @@ and change the **redirect route** in ``sylius_shop_checkout_address``. The rest 
 Learn more
 ----------
 
-* :doc:`Checkout - concept Documentation </book/checkout>`
-* :doc:`State Machine - concept Documentation </book/state_machine>`
+* :doc:`Checkout - concept Documentation </book/orders/checkout>`
+* :doc:`State Machine - concept Documentation </book/architecture/state_machine>`
 * :doc:`Customization Guide </customization/index>`

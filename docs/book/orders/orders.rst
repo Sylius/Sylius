@@ -114,7 +114,7 @@ Order has also its own state, which can have the following values:
 
 .. tip::
 
-    The state machine of order is an obvious extension to the :doc:`state machine of checkout </book/checkout>`.
+    The state machine of order is an obvious extension to the :doc:`state machine of checkout </book/orders/checkout>`.
 
 Shipments of an Order
 ---------------------
@@ -124,7 +124,7 @@ This lets you to divide an order into several different shipments that have own 
 
 .. tip::
 
-    If you are not familiar with the shipments concept :doc:`check the documentation</book/shipments>`.
+    If you are not familiar with the shipments concept :doc:`check the documentation</book/orders/shipments>`.
 
 How to add a Shipment to an Order?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -176,7 +176,7 @@ It lets you to divide paying for an order into several different methods that ha
 
 .. tip::
 
-    If you are not familiar with the Payments concept :doc:`check the documentation</book/payments>`.
+    If you are not familiar with the Payments concept :doc:`check the documentation</book/orders/payments>`.
 
 How to add a Payment to an Order?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

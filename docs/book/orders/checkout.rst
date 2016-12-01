@@ -53,7 +53,7 @@ together with the routing file for checkout: `checkout.yml <https://github.com/S
 
 .. note::
 
-    Before performing Checkout :doc:`you need to have an Order created </book/orders>`.
+    Before performing Checkout :doc:`you need to have an Order created </book/orders/orders>`.
 
 Addressing
 ~~~~~~~~~~
@@ -78,7 +78,7 @@ Firstly if the **Customer** is not yet set on the Order it will be assigned depe
 
 .. hint::
 
-    If you do not understand the Users and Customers concept in Sylius go to the :doc:`Users Concept documentation </book/customer_and_shopuser>`.
+    If you do not understand the Users and Customers concept in Sylius go to the :doc:`Users Concept documentation </book/customers/customer_and_shopuser>`.
 
 The typical **Address** consists of: country, city, street and postcode - to assign it to an Order either create it manually or retrieve from the repository.
 
@@ -132,7 +132,7 @@ How to perform the Selecting shipping Step programmatically?
 Before approaching this step be sure that your Order is in the ``addressed`` state. In this state your order
 will already have a default ShippingMethod assigned, but in this step you can change it and have everything recalculated automatically.
 
-Firstly either create new (see how in the `Shipments concept </book/shipments>`) or retrieve a **ShippingMethod**
+Firstly either create new (see how in the `Shipments concept </book/orders/shipments>`) or retrieve a **ShippingMethod**
 from the repository to assign it to your order's shipment created defaultly in the addressing step.
 
 .. code-block:: php
@@ -181,7 +181,7 @@ How to perform the Selecting payment step programmatically?
 Before this step your Order should be in the ``shipping_selected`` state. It will have a default Payment selected after the addressing step,
 but in this step you can change it.
 
-Firstly either create new (see how in the `Payments concept </book/payments`) or retrieve a **PaymentMethod**
+Firstly either create new (see how in the `Payments concept </book/orders/payments`) or retrieve a **PaymentMethod**
 from the repository to assign it to your order's payment created defaultly in the addressing step.
 
 .. code-block:: php
@@ -255,5 +255,5 @@ The Checkout is finished after that.
 Learn more
 ----------
 
-* :doc:`State Machine - Documentation </book/state_machine>`
-* :doc:`Orders - Concept Documentation </book/orders>`
+* :doc:`State Machine - Documentation </book/architecture/state_machine>`
+* :doc:`Orders - Concept Documentation </book/orders/orders>`

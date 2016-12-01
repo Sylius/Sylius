@@ -10,13 +10,13 @@ To support multiple languages we are using **Locales** in **Sylius**. Locales ar
 
     In the dev environment you can easily check what locale you are currently using in the Symfony debug toolbar:
 
-    .. image:: ../_images/toolbar.png
+    .. image:: ../../_images/toolbar.png
         :align: center
 
 Base Locale
 -----------
 
-During the :doc:`installation </book/installation>` you provided a default base locale. This is the language in which everything
+During the :doc:`installation </book/installation/installation>` you provided a default base locale. This is the language in which everything
 in your system will be saved in the database - all the product names, texts on website, e-mails etc.
 
 Locale Context

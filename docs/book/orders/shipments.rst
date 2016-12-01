@@ -11,7 +11,7 @@ How is a Shipment created for an Order?
 
 .. warning::
 
-    Read more about creating :doc:`Orders </book/orders>` where the process of assigning Shipments is clarified.
+    Read more about creating :doc:`Orders </book/orders/orders>` where the process of assigning Shipments is clarified.
 
 The Shipment State Machine
 --------------------------
