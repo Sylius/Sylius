@@ -102,7 +102,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories_for_filtering.yml');
 
-        $this->client->request('GET', '/api/tax-categories/', ['criteria' => ['name' => 'clothing']], [], [
+        $this->client->request('GET', '/api/tax-categories/', ['criteria' => ['search' => 'clothing']], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         ]);
 
@@ -115,7 +115,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories_for_filtering.yml');
 
-        $this->client->request('GET', '/api/tax-categories/', ['criteria' => ['code' => 'TC1']], [], [
+        $this->client->request('GET', '/api/tax-categories/', ['criteria' => ['search' => 'TC1']], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         ]);
 
