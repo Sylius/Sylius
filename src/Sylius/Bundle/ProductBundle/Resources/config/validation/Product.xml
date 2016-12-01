@@ -34,6 +34,10 @@
         </property>
         <getter property="variants">
             <constraint name="Valid" />
+            <constraint name="Sylius\Bundle\ResourceBundle\Validator\Constraints\WithinCollectionUniqueCode">
+                <option name="message">sylius.product_variant.code.within_product_unique</option>
+                <option name="groups">sylius</option>
+            </constraint>
         </getter>
 
         <property name="attributes">
