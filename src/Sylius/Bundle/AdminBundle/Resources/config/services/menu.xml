@@ -15,7 +15,6 @@
     <services>
         <service id="sylius.menu_builder.admin.main" class="Sylius\Bundle\AdminBundle\Menu\MainMenuBuilder"
                  parent="sylius.menu_builder" public="false">
-            <argument type="service" id="sylius.resource_controller.authorization_checker" />
         </service>
         <service id="sylius.menu.admin.main" class="Knp\Menu\MenuItem">
             <factory service="sylius.menu_builder.admin.main" method="createMenu" />

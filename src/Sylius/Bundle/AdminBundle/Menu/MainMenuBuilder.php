@@ -12,12 +12,13 @@
 namespace Sylius\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\ItemInterface;
+use Sylius\Bundle\UiBundle\Menu\AbstractMenuBuilder;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class MainMenuBuilder extends AbstractAdminMenuBuilder
+final class MainMenuBuilder extends AbstractMenuBuilder
 {
     const EVENT_NAME = 'sylius.menu.admin.main';
 
@@ -156,7 +157,7 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
         $configuration
             ->addChild('channels', ['route' => 'sylius_admin_channel_index'])
             ->setLabel('sylius.menu.admin.main.configuration.channels')
-            ->setLabelAttribute('icon', 'share alternate')
+            ->setLabelAttribute('icon', 'random')
         ;
 
         $configuration
@@ -217,12 +218,6 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->addChild('tax_rates', ['route' => 'sylius_admin_tax_rate_index'])
             ->setLabel('sylius.menu.admin.main.configuration.tax_rates')
             ->setLabelAttribute('icon', 'money')
-        ;
-
-        $configuration
-            ->addChild('channels', ['route' => 'sylius_admin_channel_index'])
-            ->setLabel('sylius.menu.admin.main.configuration.channels')
-            ->setLabelAttribute('icon', 'random')
         ;
 
         $configuration

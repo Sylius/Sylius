@@ -1,9 +1,0 @@
-<div class="ui labeled icon floating dropdown primary link button">
-    <i class="random icon"></i>
-    <span class="text">{{ 'sylius.ui.choose_channel'|trans }}</span>
-    <div class="menu">
-        {% for channel in channels %}
-            <a class="item" href="{{ path('sylius_admin_dashboard', {'channelCode': channel.code}) }}"><i class="share icon"></i> {{ channel.name }}</a>
-        {% endfor %}
-    </div>
-</div>

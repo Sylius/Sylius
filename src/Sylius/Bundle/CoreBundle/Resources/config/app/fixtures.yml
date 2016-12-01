@@ -34,6 +34,7 @@ sylius_fixtures:
                                 currencies:
                                     - "USD"
                                 enabled: true
+                                hostname: "localhost:8000"
 
                 payment_method:
                     options:

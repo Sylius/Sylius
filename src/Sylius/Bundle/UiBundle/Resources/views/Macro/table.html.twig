@@ -16,6 +16,7 @@
 {% endmacro %}
 
 {% macro row(grid, definition, row) %}
+    <tr class="item">
     {% for field in definition.fields %}
         {% if field.enabled %}
             <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
@@ -28,6 +29,15 @@
                     {{ sylius_grid_render_action(grid, action, row) }}
                 {% endfor %}
             </div>
+            {% if definition.actionGroups.subitem is defined and definition.getActions('subitem')|length > 0 %}
+            <div class="ui divider"></div>
+            <div class="ui buttons">
+                {% for action in definition.getActions('subitem') %}
+                    {{ sylius_grid_render_action(grid, action, row) }}
+                {% endfor %}
+            </div>
+            {% endif %}
         </td>
     {% endif %}
+    </tr>
 {% endmacro %}

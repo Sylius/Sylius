@@ -20,6 +20,16 @@
     {% endfor %}
 {% endmacro %}
 
+<div class="ui large fluid vertical buttons">
+    <a href="{{ path('sylius_admin_product_index') }}" class="ui primary labeled icon button">
+        <i class="search icon"></i>
+        {{ 'sylius.ui.browse_all_products'|trans }}
+    </a>
+    <a href="{{ path('sylius_admin_taxon_create') }}" class="ui labeled icon button">
+        <i class="sitemap icon"></i>
+        {{ 'sylius.ui.manage_taxons'|trans }}
+    </a>
+</div>
 
 <div class="ui segment">
     <div class="ui list">

@@ -102,8 +102,8 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'customer_orders' => '#sylius-customer-orders',
-            'last_order' => '#sylius-customer-orders tbody tr:last-child a:contains("Show")',
+            'customer_orders' => 'table',
+            'last_order' => 'table tbody tr:last-child a:contains("Show")',
         ]);
     }
 }

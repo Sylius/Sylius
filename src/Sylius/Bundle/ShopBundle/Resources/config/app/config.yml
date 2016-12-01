@@ -5,7 +5,13 @@ imports:
     - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
     - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
 
+sylius_resource:
+    drivers:
+        - doctrine/orm
+
 sylius_grid:
+    drivers:
+        - doctrine/orm
     templates:
         action:
             show: "@SyliusUi/Grid/Action/show.html.twig"

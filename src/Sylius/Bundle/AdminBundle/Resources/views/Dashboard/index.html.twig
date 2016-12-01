@@ -1,12 +1,9 @@
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
-{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
-
 {% block title %}{{ parent() }}{{ 'sylius.ui.dashboard'|trans }}{% endblock %}
 
 {% block content %}
-{{ headers.default('sylius.ui.dashboard'|trans, 'home', 'sylius.ui.overview_of_your_store'|trans) }}
-    {{ render(url('sylius_admin_partial_channel_index', {'template': '@SyliusAdmin/Dashboard/Partial/_chooseChannel.html.twig'})) }}
+{% include '@SyliusAdmin/Dashboard/_header.html.twig' %}
 {% include '@SyliusAdmin/Dashboard/_menu.html.twig' %}
 {% include '@SyliusAdmin/Dashboard/_statistics.html.twig' %}
 
@@ -18,5 +15,4 @@
         {{ render(path('sylius_admin_partial_order_latest_in_channel', {'channelCode': channel.code, 'count': 5, 'template': '@SyliusAdmin/Dashboard/_orders.html.twig'})) }}
     </div>
 </div>
-
 {% endblock %}

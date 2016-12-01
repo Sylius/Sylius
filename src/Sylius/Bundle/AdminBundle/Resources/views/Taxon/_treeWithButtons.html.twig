@@ -13,7 +13,8 @@
                     <a href="{{ path('sylius_admin_product_per_taxon_index', {'taxonId': taxon.id}) }}">
                         {{ taxon.name }}
                     </a>
-                    <div class="ui mini buttons">
+                    <br>
+                    <div class="ui mini buttons" style="margin-top: 5px;">
                         {{ buttons.create(path('sylius_admin_taxon_create_for_parent', { 'id': taxon.id }), 'sylius.ui.add'|trans) }}
                         {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id }), null, null, false) }}
                         {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), null, false, taxon.id) }}
@@ -33,7 +34,11 @@
     {% endfor %}
 {% endmacro %}
 
-{{ buttons.create(path('sylius_admin_taxon_create')) }}
+<a href="{{ path('sylius_admin_taxon_create') }}" class="ui large fluid labeled icon primary button">
+    <i class="plus icon"></i>
+    {{ 'sylius.ui.create'|trans }}
+</a>
+
 <div class="ui segment">
     <div class="ui list sylius-sortable-list">
         {{ tree.render(taxons) }}

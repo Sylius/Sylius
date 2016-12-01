@@ -16,7 +16,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.type
                     options:
-                        template: "@SyliusAdmin/Grid/Field/label.html.twig"
+                        template: "@SyliusUi/Grid/Field/label.html.twig"
             filters:
                 name:
                     type: string
@@ -27,7 +27,33 @@ sylius_grid:
             actions:
                 main:
                     create:
-                        type: create_zone
+                        type: links
+                        label: sylius.ui.create
+                        options:
+                            class: primary
+                            icon: plus
+                            header:
+                                icon: cube
+                                label: sylius.ui.type
+                            links:
+                                country:
+                                    label: sylius.ui.zone_consisting_of_countries
+                                    icon: plus
+                                    route: sylius_admin_zone_create
+                                    parameters:
+                                        type: country
+                                province:
+                                    label: sylius.ui.zone_consisting_of_provinces
+                                    icon: plus
+                                    route: sylius_admin_zone_create
+                                    parameters:
+                                        type: province
+                                zone:
+                                    label: sylius.ui.zone_consisting_of_other_zones
+                                    icon: plus
+                                    route: sylius_admin_zone_create
+                                    parameters:
+                                        type: zone
                 item:
                     update:
                         type: update

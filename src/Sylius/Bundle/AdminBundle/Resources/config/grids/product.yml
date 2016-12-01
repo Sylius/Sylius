@@ -29,7 +29,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.enabled
                     options:
-                        template: "@SyliusAdmin/Grid/Field/enabled.html.twig"
+                        template: "@SyliusUi/Grid/Field/enabled.html.twig"
             filters:
                 search:
                     type: string
@@ -42,11 +42,50 @@ sylius_grid:
             actions:
                 main:
                     create:
-                        type: create_product
+                        type: links
+                        label: sylius.ui.create
+                        options:
+                            class: primary
+                            icon: plus
+                            header:
+                                icon: cube
+                                label: sylius.ui.type
+                            links:
+                                simple:
+                                    label: sylius.ui.simple_product
+                                    icon: plus
+                                    route: sylius_admin_product_create_simple
+                                configurable:
+                                    label: sylius.ui.configurable_product
+                                    icon: plus
+                                    route: sylius_admin_product_create
                 item:
-                    manage_variants:
-                        type: manage_variants
                     update:
                         type: update
                     delete:
                         type: delete
+                subitem:
+                    variants:
+                        type: links
+                        label: sylius.ui.manage_variants
+                        options:
+                            icon: cubes
+                            links:
+                                index:
+                                    label: sylius.ui.list_variants
+                                    icon: list
+                                    route: sylius_admin_product_variant_index
+                                    parameters:
+                                        productId: resource.id
+                                create:
+                                    label: sylius.ui.create
+                                    icon: plus
+                                    route: sylius_admin_product_variant_create
+                                    parameters:
+                                        productId: resource.id
+                                generate:
+                                    label: sylius.ui.generate
+                                    icon: random
+                                    route: sylius_admin_product_variant_generate
+                                    parameters:
+                                        productId: resource.id
