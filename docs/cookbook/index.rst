@@ -18,5 +18,6 @@ Cookbook
     embedding-products
     taxons-menu
     facebook-login
+    cron-jobs
 
 .. include:: /cookbook/map.rst.inc
