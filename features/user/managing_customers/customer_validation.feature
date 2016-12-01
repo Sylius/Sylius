@@ -12,7 +12,7 @@ Feature: Customer validation
         Given I want to create a new customer
         When I specify their first name as "Luke"
         And I specify their last name as "Skywalker"
-        And I try to add it
+        And I try to add them
         Then I should be notified that email is required
 
     @ui
@@ -46,6 +46,6 @@ Feature: Customer validation
     Scenario: Trying to create customer with wrong email format
         Given I want to create a new customer
         When I specify their email as "wrongemail"
-        And I try to add it
+        And I try to add them
         Then I should be notified that email is not valid
         And the customer with email "wrongemail" should not appear in the store

@@ -115,15 +115,16 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @When I specify their email as :name
+     * @When I do not specify their email
      */
-    public function iSpecifyItsEmailAs($email)
+    public function iSpecifyItsEmailAs($email = null)
     {
         $this->createPage->specifyEmail($email);
     }
 
     /**
      * @When I add them
-     * @When I try to add it
+     * @When I try to add them
      */
     public function iAddIt()
     {
@@ -410,7 +411,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I specify its password as :password
+     * @When I specify their password as :password
      */
     public function iSpecifyItsPasswordAs($password)
     {
@@ -641,5 +642,95 @@ final class ManagingCustomersContext implements Context
             $this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]),
             sprintf('Cannot find order with number "%s" in the list.', $orderNumber)
         );
+    }
+
+    /**
+     * @When I do not specify any information
+     */
+    public function iDoNotSpecifyAnyInformation()
+    {
+        // Intentionally left blank.
+    }
+
+    /**
+     * @Then I should not be able to specify their password
+     */
+    public function iShouldNotBeAbleToSpecifyItPassword()
+    {
+        Assert::true(
+            $this->createPage->isUserFormHidden(),
+            'There should not be password field, but it is.'
+         );
+    }
+
+    /**
+     * @Then I should still be on the customer creation page
+     */
+    public function iShouldBeOnTheCustomerCreationPage()
+    {
+        Assert::true(
+            $this->createPage->isOpen(),
+            'The customer creation page should be open, but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be able to select create account option
+     */
+    public function iShouldBeAbleToSelectCreateAccountOption()
+    {
+        Assert::false(
+            $this->createPage->hasCheckedCreateOption(),
+            'The create account option should not be selected, but it is.'
+        );
+    }
+
+    /**
+     * @Then I should be able to specify their password
+     */
+    public function iShouldBeAbleToSpecifyItPassword()
+    {
+        Assert::true(
+            $this->createPage->hasPasswordField(),
+            'There should be password field, but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should not be able to select create account option
+     */
+    public function iShouldNotBeAbleToSelectCreateAccountOption()
+    {
+        Assert::true(
+            $this->createPage->hasCheckedCreateOption(),
+            'The create account option should be selected, but it is not.'
+        );
+    }
+
+    /**
+     * @When I do not choose create account option
+     */
+    public function iDoNotChooseCreateAccountOption()
+    {
+        // Intentionally left blank.
+    }
+
+    /**
+     * @Then I should not see create account option
+     */
+    public function iShouldNotSeeCreateAccountOption()
+    {
+        Assert::false(
+            $this->createPage->hasCreateOption(),
+            'The create account option should not be on customer creation page, but it is.'
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that the password must be at least (\d+) characters long$/
+     */
+    public function iShouldBeNotifiedThatThePasswordMustBeAtLeastCharactersLong($amountOfCharacters)
+    {
+        Assert::same($this->createPage->getValidationMessage('password'), sprintf('Password must be at least %d characters long.', $amountOfCharacters));
     }
 }

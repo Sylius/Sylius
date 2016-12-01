@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\Form\EventSubscriber;
+namespace Sylius\Bundle\ApiBundle\Form\EventSubscriber;
 
 use Sylius\Component\User\Model\UserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -27,7 +27,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
      * @var string
      */
     private $entryType;
-
+    
     /**
      * @param string $entryType
      */
@@ -35,7 +35,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     {
         $this->entryType = $entryType;
     }
-
+    
     /**
      * @return array
      */
@@ -46,7 +46,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
             FormEvents::PRE_SUBMIT => 'preSubmit',
         ];
     }
-
+    
     /**
      * @param FormEvent $event
      */
@@ -55,7 +55,7 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $form->add('user', $this->entryType, ['constraints' => [new Valid()]]);
     }
-
+    
     /**
      * @param FormEvent $event
      */
@@ -63,22 +63,18 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
         $normData = $event->getForm()->getNormData();
-
         if (!isset($data['user'])) {
             $this->removeUserField($event);
-
             return;
         }
-
         Assert::isInstanceOf($normData, UserAwareInterface::class);
-
         if ($this->isUserDataEmpty($data) && null === $normData->getUser()) {
             unset($data['user']);
             $event->setData($data);
             $this->removeUserField($event);
         }
     }
-
+    
     /**
      * @param array $data
      *
@@ -91,10 +87,9 @@ final class AddUserFormSubscriber implements EventSubscriberInterface
                 return false;
             }
         }
-
         return true;
     }
-
+    
     /**
      * @param FormEvent $event
      */

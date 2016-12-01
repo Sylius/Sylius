@@ -54,4 +54,19 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function chooseGroup($group);
 
     public function selectCreateAccount();
+
+    /**
+     * @return bool
+     */
+    public function hasPasswordField();
+
+    /**
+     * @return bool
+     */
+    public function hasCheckedCreateOption();
+
+    /**
+     * @return bool
+     */
+    public function isUserFormHidden();
 }

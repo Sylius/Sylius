@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\CoreBundle\Form\Type\User\ShopUserType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
-use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddUserFormSubscriber;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\FormBuilderInterface;
 

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\UserBundle\Form\EventSubscriber;
+namespace spec\Sylius\Bundle\ApiBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber;
+use Sylius\Bundle\ApiBundle\Form\EventSubscriber\AddUserFormSubscriber;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
