@@ -6,7 +6,6 @@ winzou_state_machine:
         class: "%sylius.model.shipment.class%"
         property_path: state
         graph: sylius_shipment
-        state_machine_class: "%sylius.state_machine.class%"
         states:
             cart: ~
             ready: ~

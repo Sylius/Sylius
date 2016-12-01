@@ -18,10 +18,6 @@
         <import resource="services/routing.xml" />
     </imports>
 
-    <parameters>
-        <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
-    </parameters>
-
     <services>
         <service id="sylius.form.type_extension.form.request_handler"
                  class="Sylius\Bundle\ResourceBundle\Form\Extension\HttpFoundation\HttpFoundationRequestHandler"

@@ -22,13 +22,6 @@
         <service id="sylius.listener.checkout_addressing" class="Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener">
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="setCustomerAddressing" />
         </service>
-        <service id="sylius.listener.insufficient_stock_exception" class="Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener">
-            <argument type="service" id="router" />
-            <argument type="service" id="session" />
-            <argument type="service" id="translator" />
-            <argument>sylius_cart_summary</argument>
-            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
-        </service>
         <service id="sylius.listener.channel" class="Sylius\Bundle\CoreBundle\EventListener\ChannelDeletionListener">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />

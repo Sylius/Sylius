@@ -62,7 +62,7 @@ final class UnpaidOrdersStateUpdater implements UnpaidOrdersStateUpdaterInterfac
     /**
      * @param OrderInterface $expiredUnpaidOrder
      */
-    protected function cancelOrder(OrderInterface $expiredUnpaidOrder)
+    private function cancelOrder(OrderInterface $expiredUnpaidOrder)
     {
         $stateMachine = $this->stateMachineFactory->get($expiredUnpaidOrder, 'sylius_order');
         $stateMachine->apply(OrderTransitions::TRANSITION_CANCEL);

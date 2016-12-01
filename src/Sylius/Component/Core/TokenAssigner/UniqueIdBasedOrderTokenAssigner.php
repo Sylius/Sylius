@@ -19,10 +19,20 @@ use Sylius\Component\Core\Model\OrderInterface;
 final class UniqueIdBasedOrderTokenAssigner implements OrderTokenAssignerInterface
 {
     /**
+     * @var UniqueTokenGenerator
+     */
+    private $tokenGenerator;
+
+    public function __construct()
+    {
+        $this->tokenGenerator = new UniqueTokenGenerator();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function assignTokenValue(OrderInterface $order)
     {
-        $order->setTokenValue(uniqid());
+        $order->setTokenValue($this->tokenGenerator->generate(10));
     }
 }

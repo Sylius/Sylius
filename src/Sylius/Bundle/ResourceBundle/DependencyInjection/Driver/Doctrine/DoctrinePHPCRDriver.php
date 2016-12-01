@@ -177,16 +177,6 @@ final class DoctrinePHPCRDriver extends AbstractDoctrineDriver
             $this->getClassMetadataDefinition($metadata),
         ]);
 
-        if ($metadata->hasParameter('translation')) {
-            $translationConfig = $metadata->getParameter('translation');
-
-            if (in_array(TranslatableRepositoryInterface::class, class_implements($repositoryClass))) {
-                if (isset($translationConfig['fields'])) {
-                    $definition->addMethodCall('setTranslatableFields', [$translationConfig['fields']]);
-                }
-            }
-        }
-
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }
 

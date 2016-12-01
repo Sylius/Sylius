@@ -3,7 +3,6 @@ winzou_state_machine:
         class: "%sylius.model.order.class%"
         property_path: paymentState
         graph: sylius_order_payment
-        state_machine_class: "%sylius.state_machine.class%"
         states:
             cart: ~
             awaiting_payment: ~
