@@ -5,7 +5,7 @@
 <div class="ui segment" id="sylius-product-selecting-variant">
     {{ form_start(form, {'action': path('sylius_shop_ajax_cart_add_item', {'productId': product.id}), 'attr': {'id': 'sylius-product-adding-to-cart', 'class': 'ui loadable form', 'novalidate': 'novalidate', 'data-redirect': path('sylius_shop_cart_summary')}}) }}
     {{ form_errors(form) }}
-    <div class="ui red label bottom pointing sylius-validation-error" id="sylius-cart-validation-error"></div>
+    <div class="ui red label bottom pointing hidden sylius-validation-error" id="sylius-cart-validation-error"></div>
     {% if not product.simple %}
         {% if product.variantSelectionMethodChoice %}
             {% include '@SyliusShop/Product/Show/_variants.html.twig' %}

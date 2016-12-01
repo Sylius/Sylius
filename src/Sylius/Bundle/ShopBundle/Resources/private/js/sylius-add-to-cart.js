@@ -12,20 +12,18 @@
 
     $.fn.extend({
         addToCart: function () {
-            var validationElement = $('#sylius-cart-validation-error');
-            validationElement.hide();
-
             $(this).on('submit', function(event) {
-                refresh(this, event, validationElement);
+                refresh(this, event);
             });
         }
     });
 
-    function refresh(element, event, validationElement) {
+    function refresh(element, event) {
         event.preventDefault();
         var data = $(element).serialize();
         var href = $(element).attr('action');
         var redirectUrl = $(element).data('redirect');
+        var validationElement = $('#sylius-cart-validation-error');
 
         $.ajax({
             type: "POST",
@@ -33,12 +31,16 @@
             data: data,
             cache: false,
             success: function (response) {
-                validationElement.hide();
+                validationElement.addClass('hidden');
                 window.location.replace(redirectUrl);
             },
             error: function (response) {
-                validationElement.show();
-                validationElement.html(response.responseJSON.errors.errors[0]);
+                validationElement.removeClass('hidden');
+                var validationMessage = '';
+                $.each(response.responseJSON.errors.errors, function (key, message) {
+                    validationMessage += message;
+                });
+                validationElement.html(validationMessage);
                 $(element).removeClass('loading');
             }
         })
