@@ -1,11 +1,8 @@
 Customizing Forms
 =================
 
-The forms in Sylius are placed in the ``Sylius\Bundle\*BundleName*\Form\Type`` namespaces.
-
-.. warning::
-    Many forms in Sylius are **extended in the CoreBundle**.
-    If the form you are willing to override exists in the ``CoreBundle`` your should be extending the one from Core, not the base form from the bundle.
+The forms in Sylius are placed in the ``Sylius\Bundle\*BundleName*\Form\Type`` namespaces and the extensions
+will be placed in `AppBundle\Form\Extension`.
 
 Why would you customize a Form?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -22,101 +19,110 @@ You can:
 How to customize a Form?
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you want to modify the form for the ``Address`` in your system there are a few steps that you should take.
+If you want to modify the form for the ``Customer Profile`` in your system there are a few steps that you should take.
 Assuming that you would like to (for example):
 
 * Add a ``contactHours`` field,
-* Remove the ``company`` field,
-* Change the label for the ``lastName`` from ``sylius.form.address.last_name`` to ``app.form.address.surname``
+* Remove the ``gender`` field,
+* Change the label for the ``lastName`` from ``sylius.form.customer.last_name`` to ``app.form.customer.surname``
 
 These will be the steps that you will have to take to achieve that:
 
 1. If your are planning to add new fields remember that beforehand they need to be added on the model that the form type is based on.
 
-    In case of our example if you need to have the ``contactHours`` on the model and the entity mapping for the ``Address`` resource.
+    In case of our example if you need to have the ``contactHours`` on the model and the entity mapping for the ``Customer`` resource.
     To get to know how to prepare that go :doc:`there </customization/model>`.
 
-2. Write your own form type class that will be extending the default one. Place it in your ``AppBundle\Form\Type`` directory.
+2. Create a **Form Extension**.
 
-Your new class has to extend a proper base class. How can you check that?
+Your form has to extend a proper base class. How can you check that?
 
-For the ``AddressType`` run:
+For the ``CustomerProfileType`` run:
 
 .. code-block:: bash
 
-    $ php app/console debug:container sylius.form.type.address
+    $ php app/console debug:container sylius.form.type.customer_profile
 
-As a result you will get the ``Sylius\Bundle\AddressingBundle\Form\Type\AddressType`` - this is the class that you need to be extending.
+As a result you will get the ``Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType`` - this is the class that you need to be extending.
 
 .. code-block:: php
 
     <?php
 
-    namespace AppBundle\Form\Type;
+    namespace AppBundle\Form\Extension;
 
-    use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as BaseAddressType;
+    use Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType;
+    use Symfony\Component\Form\AbstractTypeExtension;
+    use Symfony\Component\Form\Extension\Core\Type\TextType;
     use Symfony\Component\Form\FormBuilderInterface;
 
-    class AddressType extends BaseAddressType
+    final class CustomerProfileTypeExtension extends AbstractTypeExtension
     {
         /**
          * {@inheritdoc}
          */
         public function buildForm(FormBuilderInterface $builder, array $options)
         {
-            // Add default fields from the `BaseAddressType` that you are extending.
-            parent::buildForm($builder, $options);
-
-            // Adding new fields works just like in the parent form.
-            $builder->add('contactHours', 'text', [
+            // Adding new fields works just like in the parent form type.
+            $builder->add('contactHours', TextType::class, [
                 'required' => false,
-                'label' => 'app.form.address.contact_hours',
+                'label' => 'app.form.customer.contact_hours',
             ]);
 
             // To remove a field from a form simply call ->remove(`fieldName`).
-            $builder->remove('company');
+            $builder->remove('gender');
 
             // You can change the label by adding again the same field with a changed `label` parameter.
-            $builder->add('lastName', 'text', [
-                'label' => 'app.form.address.surname',
+            $builder->add('lastName', TextType::class, [
+                'label' => 'app.form.customer.surname',
             ]);
+        }
+
+        /**
+         * {@inheritdoc}
+         */
+        public function getExtendedType()
+        {
+            return CustomerProfileType::class;
         }
     }
 
-3. Define your newly created class in the ``app/config/config.yml``.
+Register this extension as a service:
 
 .. code-block:: yaml
 
-    sylius_addressing:
-        resources:
-            address:
-                classes:
-                    form:
-                        default: AppBundle\Form\Type\AddressType
+    services:
+        app.form.extension.type.customer_profile:
+            class: AppBundle\Form\Extension\CustomerProfileTypeExtension
+            tags:
+                - { name: form.type_extension, extended_type: Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType }
 
 .. note::
     Of course remember that you need to render the new fields you have created,
     and remove the rendering of the fields that you have removed **in your views**.
 
+In our case you will need a new template: `app/Resources/SyliusShopBundle/views/Account/profileUpdate.html.twig`.
+
 In **Twig** for example you can render your modified form in such a way:
 
 .. code-block:: html
 
-    <div id="addressForm">
-        {{ form_row(form.firstName) }}
-        {{ form_row(form.lastName) }}
-        {{ form_row(form.city) }}
-        {{ form_row(form.street) }}
-        {{ form_row(form.postcode) }}
-        {{ form_row(form.countryCode) }}
-        {{ form_row(form.provinceCode) }}
-        {{ form_row(form.phoneNumber) }}
-        {{ form_row(form.contactHours) }}
+    <div class="two fields">
+        <div class="field">{{ form_row(form.birthday) }}</div>
+        <div class="field">{{ form_row(form.contactHours) }}</div>
     </div>
 
-What happens while overriding Forms?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Need more information?
+----------------------
 
-* Parameter ``sylius.form.type.address.class`` contains the ``AppBundle\Form\Type\AddressType``.
-* ``sylius.form.type.address`` form type service uses your custom class.
-* ``sylius_address`` form type uses your new form everywhere.
+.. warning::
+
+    Some of the forms already have extensions in Sylius. Learn more about Extensions `here <http://symfony.com/doc/current/bundles/extension.html>`_.
+
+Overriding forms completely
+---------------------------
+
+.. tip::
+
+    If you need to create a new form type on top of an existing one -  create this new alternative form type and define `getParent()`
+    to the old one. `See details in the Symfony docs <http://symfony.com/doc/current/form/create_custom_field_type.html>`_.
