@@ -31,7 +31,7 @@
         <service id="sylius.setup.locale" class="Sylius\Bundle\CoreBundle\Installer\Setup\LocaleSetup">
             <argument type="service" id="sylius.repository.locale" />
             <argument type="service" id="sylius.factory.locale" />
-            <argument>%locale%%</argument>
+            <argument>%locale%</argument>
         </service>
         <service id="sylius.setup.channel" class="Sylius\Bundle\CoreBundle\Installer\Setup\ChannelSetup">
             <argument type="service" id="sylius.repository.channel" />

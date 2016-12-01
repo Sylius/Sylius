@@ -87,7 +87,7 @@ final class CheckoutResolver implements EventSubscriberInterface
             $event->setResponse(new RedirectResponse($this->urlGenerator->generate('sylius_shop_cart_summary')));
         }
 
-        $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
+        $stateMachine = $this->stateMachineFactory->get($order, $this->getRequestedGraph($request));
 
         if ($stateMachine->can($this->getRequestedTransition($request))) {
             return;
@@ -113,6 +113,16 @@ final class CheckoutResolver implements EventSubscriberInterface
     }
 
     /**
+     * @param Request $request
+     *
+     * @return string
+     */
+    private function getRequestedGraph(Request $request)
+    {
+        return $request->attributes->get('_sylius')['state_machine']['graph'];
+    }
+
+        /**
      * @param Request $request
      *
      * @return string

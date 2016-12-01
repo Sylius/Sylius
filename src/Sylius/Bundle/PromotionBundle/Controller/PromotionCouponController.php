@@ -35,7 +35,7 @@ class PromotionCouponController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        if (null === $promotionId = $request->get('promotionId')) {
+        if (null === $promotionId = $request->attributes->get('promotionId')) {
             throw new NotFoundHttpException('No promotion id given.');
         }
 
@@ -72,7 +72,7 @@ class PromotionCouponController extends ResourceController
     /**
      * @return PromotionCouponGeneratorInterface
      */
-    private function getGenerator()
+    protected function getGenerator()
     {
         return $this->container->get('sylius.promotion_coupon_generator');
     }

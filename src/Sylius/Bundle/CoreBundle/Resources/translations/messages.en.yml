@@ -16,8 +16,6 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Product
-            customer_group:
-                Customer group
         promotion_coupon:
             per_customer_usage_limit: Per-Customer Usage Limit
         group:
@@ -122,6 +120,8 @@ sylius:
             products: Products filter
             taxons: Taxons filter
         promotion_rule:
+            customer_group:
+                group: Customer group
             has_taxon:
                 taxons: Taxons
             product:

@@ -22,6 +22,9 @@
             <argument type="service" id="sylius.repository.promotion" />
         </service>
 
+        <service id="sylius.promotion_rule_checker.customer_group" class="Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker" public="false">
+            <tag name="sylius.promotion_rule_checker" type="customer_group" label="Customer group" />
+        </service>
         <service id="sylius.promotion_rule_checker.nth_order" class="Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker">
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
