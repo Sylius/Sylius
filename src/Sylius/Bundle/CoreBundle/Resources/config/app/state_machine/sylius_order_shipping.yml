@@ -3,6 +3,7 @@ winzou_state_machine:
         class: "%sylius.model.order.class%"
         property_path: shippingState
         graph: sylius_order_shipping
+        state_machine_class: "%sylius.state_machine.class%"
         states:
             cart: ~
             ready: ~
