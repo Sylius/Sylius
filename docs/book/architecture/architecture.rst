@@ -14,7 +14,7 @@ For deeper understanding of how Doctrine works, please refer to the `excellent d
 Fullstack Symfony
 -----------------
 
-.. image:: ../_images/symfonyfs.png
+.. image:: ../../_images/symfonyfs.png
     :scale: 15%
     :align: center
 
@@ -27,7 +27,7 @@ with the business rules, that is structured, maintainable and upgradable, but al
 Doctrine
 --------
 
-.. image:: ../_images/doctrine.png
+.. image:: ../../_images/doctrine.png
     :align: center
 
 **Doctrine** is a family of PHP libraries focused on providing data persistence layer.
@@ -39,7 +39,7 @@ To learn more about Doctrine - see `their documentation <http://www.doctrine-pro
 Twig
 ----
 
-.. image:: ../_images/twig.png
+.. image:: ../../_images/twig.png
     :scale: 30%
     :align: center
 

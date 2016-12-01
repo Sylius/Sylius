@@ -2,7 +2,7 @@ Customizing State Machines
 ==========================
 
 .. warning::
-    Not familiar with the State Machine concept? Read the docs :doc:`here </book/state_machine>`!
+    Not familiar with the State Machine concept? Read the docs :doc:`here </book/architecture/state_machine>`!
 
 How to customize a State Machine?
 ---------------------------------
@@ -21,7 +21,7 @@ How to customize a State Machine?
 How to add a new state?
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would like to add a new **state** to the state machine of :doc:`Order </book/orders>`.
+Let's assume that you would like to add a new **state** to the state machine of :doc:`Order </book/orders/orders>`.
 You will need to add these few lines to the ``state_machine.yml``:
 
 .. code-block:: yaml
@@ -37,7 +37,7 @@ After that your new step will be available alongside other steps that already we
 How to add a new transition?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would like to add a new **transition** to the state machine of :doc:`Order </book/orders>`,
+Let's assume that you would like to add a new **transition** to the state machine of :doc:`Order </book/orders/orders>`,
 that will allow moving from the ``cancelled`` state backwards to ``new``. Let's call it "restoring".
 
 You will need to add these few lines to the ``state_machine.yml``:
@@ -65,7 +65,7 @@ How to remove a state and its transitions?
 How to add a new callback?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would like to add a new **callback** to the state machine of :doc:`Order </book/orders>`,
+Let's assume that you would like to add a new **callback** to the state machine of :doc:`Order </book/orders/orders>`,
 that will do something on an already defined transition.
 
 You will need to add these few lines to the ``state_machine.yml``:
@@ -127,4 +127,4 @@ Learn more
 ----------
 
 * `Winzou StateMachine Bundle <https://github.com/winzou/StateMachineBundle>`_
-* :doc:`State Machine Concept </book/state_machine>`
+* :doc:`State Machine Concept </book/architecture/state_machine>`

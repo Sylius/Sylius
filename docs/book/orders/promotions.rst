@@ -168,10 +168,6 @@ Filters are really handy when you want to apply promotion's actions to groups of
 For example if you would like to apply actions only on products from a desired taxon - use the available by default
 `TaxonFilter <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/Promotion/Filter/TaxonFilter.php>`_.
 
-.. warning::
-
-   The concept of filters in Sylius is still in development.
-
 Learn more
 ----------
 

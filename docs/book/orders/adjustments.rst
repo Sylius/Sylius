@@ -4,7 +4,7 @@
 Adjustments
 ===========
 
-**Adjustment** is a resource closely connected to the :doc:`Orders' concept</book/orders>`. It **influences the order's total**.
+**Adjustment** is a resource closely connected to the :doc:`Orders' concept</book/orders/orders>`. It **influences the order's total**.
 
 Adjustments may appear on the Order, the OrderItems and the OrderItemUnits.
 
@@ -63,6 +63,6 @@ To see changes on the order you need to update it in the database.
 Learn more
 ----------
 
-* :doc:`Promotions - Concept Documentation </book/promotions>`
-* :doc:`Taxation - Concept Documentation </book/taxation>`
-* :doc:`Shipments - Concept Documentation </book/shipments>`
+* :doc:`Promotions - Concept Documentation </book/orders/promotions>`
+* :doc:`Taxation - Concept Documentation </book/orders/taxation>`
+* :doc:`Shipments - Concept Documentation </book/orders/shipments>`

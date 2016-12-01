@@ -64,6 +64,6 @@ Remember to flush the customer's manager to save this change.
 Learn more
 ----------
 
-* :doc:`Customer & ShopUser Concept Documentation </book/customer_and_shopuser>`
+* :doc:`Customer & ShopUser Concept Documentation </book/customers/customer_and_shopuser>`
 * :doc:`Addressing - Component Documentation </components/Addressing/index>`
 * :doc:`Addressing - Bundle Documentation </bundles/SyliusAddressingBundle/index>`

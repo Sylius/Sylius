@@ -23,7 +23,7 @@ In order to customize a resource flash in your project:
 .. note::
 
     You can create different files for different locales (languages). For example ``flashes.pl.yml`` should hold only polish flashes,
-    as they will be visible when the current locale is ``PL``. Check :doc:`Locales </book/locales>` docs for more information.
+    as they will be visible when the current locale is ``PL``. Check :doc:`Locales </book/architecture/locales>` docs for more information.
 
 2. In this file configure the desired flash key and give it a translation.
 

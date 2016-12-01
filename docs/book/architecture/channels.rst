@@ -32,7 +32,7 @@ In order to make the system more convenient for the administrator - there is jus
 
    In the dev environment you can easily check what channel you are currently on in the Symfony debug toolbar.
 
-   .. image:: ../_images/channel_toolbar.png
+   .. image:: ../../_images/channel_toolbar.png
          :align: center
 
 **How to get the current channel?**

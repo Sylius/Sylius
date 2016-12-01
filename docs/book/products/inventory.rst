@@ -40,6 +40,6 @@ How does Inventory work on examples?
 Learn more
 ----------
 
-* :doc:`Order concept documentation </book/orders>`
+* :doc:`Order concept documentation </book/orders/orders>`
 * :doc:`Inventory Bundle documentation </bundles/SyliusInventoryBundle/index>`
 * :doc:`Inventory Component documentation </components/Inventory/index>`

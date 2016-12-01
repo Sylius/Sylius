@@ -79,5 +79,5 @@ From now on Paypal Express will be available in Checkout in the channel you have
 Learn more
 ----------
 
-* :doc:`Payments concept documentation </book/payments>`
+* :doc:`Payments concept documentation </book/orders/payments>`
 * `Payum - Project Documentation <https://github.com/Payum/Payum/blob/master/src/Payum/Core/Resources/docs/index.md>`_

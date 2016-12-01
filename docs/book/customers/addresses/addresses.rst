@@ -19,7 +19,7 @@ It has a few important fields:
 
 .. note::
 
-   The Address has a relation to a **Customer** - which is really useful during the :doc:`Checkout addressing step </book/checkout>`.
+   The Address has a relation to a **Customer** - which is really useful during the :doc:`Checkout addressing step </book/orders/checkout>`.
 
 How to create an Address programmatically?
 ------------------------------------------

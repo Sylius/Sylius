@@ -4,7 +4,7 @@
 Countries
 =========
 
-**Countries** are a part of the :doc:`Addressing </book/addresses>` concept.
+**Countries** are a part of the :doc:`Addressing </book/customers/addresses/addresses>` concept.
 The **Country** entity represents a real country that your shop is willing to sell its goods in (for example the UK).
 It has an ISO code to be identified easily (`ISO 3166-1 alpha-2 <http://www.iso.org/iso/country_codes>`_).
 
