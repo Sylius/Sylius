@@ -6,7 +6,11 @@
             {{ form_widget(form.mainTaxon, {'attr': {'class' : 'autocomplete'}}) }}
             <i class="dropdown icon"></i>
             <div class="default text">{{'sylius.ui.select_taxon'|trans}}</div>
-            <div class="menu"></div>
+            <div class="menu">
+                {% if product.mainTaxon is not null %}
+                    <div class="item" data-value="{{ product.mainTaxon.id }}">{{ product.mainTaxon.name }}</div>
+                {% endif %}
+            </div>
         </div>
     </div>
     <div class="ui divider"></div>

@@ -40,7 +40,9 @@ final class ProductTypeExtension extends AbstractTypeExtension
                 'expanded' => true,
                 'label' => 'sylius.form.product.channels',
             ])
-            ->add('mainTaxon', TaxonChoiceType::class)
+            ->add('mainTaxon', TaxonChoiceType::class, [
+                'required' => false,
+            ])
             ->add('productTaxons', ProductTaxonChoiceType::class, [
                 'label' => 'sylius.form.product.taxons',
                 'multiple' => true,
