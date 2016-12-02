@@ -105,13 +105,16 @@ sylius:
         change_file: Datei ändern
         change_password: Passwort ändern
         change_payment_method: Zahlart ändern
+        change_position: Position ändern
         change_shipping_method: Versandart ändern
         change_your_password: Passwort ändern
         channel: Promotionskanäle
         channels: Ausgabekanäle
         charges_and_taxes: Steuern und Gebühren
+        checkbox: Kontrollkästchen
         checking_out_as: Bezahlen als
         checkout: Zur Kasse
+        choose_channel: Kanal wählen
         choose_file: Datei wählen
         choose_how_your_goods_will_be_delivered: Wie soll die Ware versendet werden
         choose_how_you_will_pay: Zahlungsart auswählen
@@ -158,7 +161,7 @@ sylius:
         create_new_page: Neue Seite erstellen
         create_new_report: Neuen Report erstellen
         create_option: Option erstellen
-        create_order: Bestellreihenfolge
+        create_order: Bestellung erstellen
         create_payment: Erstellen
         create_payment_method: Erstellen
         create_product: Produkt erstellen
@@ -214,6 +217,7 @@ sylius:
         dashboard: Dashboard
         data: Daten
         date: Datum
+        datetime: Datum / Zeit
         default: Standard
         default_address: Standardadresse
         default_billing_address: Standard-Rechnungsadresse
@@ -354,6 +358,7 @@ sylius:
         index_of_all_configured_locales: Übersicht der konfigurierten Gebietsschemen
         info: Info
         information: Hinweis
+        integer: Integer
         inventory: Lagerbestände
         inventory_here_you_can_see_current_stock_levels: Lagerbestand <small>Hier können Sie den aktuellen Lagerbestand sehen </small>
         inventory_index: Lagerbestände
@@ -418,6 +423,7 @@ sylius:
         manage_reviews_of_your_products: Produktbewertungen bearbeiten
         manage_shipments: Verwalten
         manage_shipping_categories: Versandkategorie verwalten
+        manage_shipping_categories_for_your_store: Versandkategorien verwalten
         manage_shipping_destinations: Verwaltung der Versendungs ziele
         manage_shipping_methods: Versandarten verwalten
         manage_shipping_methods_for_your_store: Verwalte die Versendungsmöglichkeiten in deinem Shop
@@ -456,6 +462,7 @@ sylius:
         new_currency: Neue Währung
         new_customer: Neuer Kunde
         new_customers: Neukunden
+        new_exchange_rate: Neuer Wechselkurs
         new_locale: Neue Lokalisierung
         new_order: Neue Bestellung
         new_orders: Aktuelle Bestellungen
@@ -518,7 +525,7 @@ sylius:
         on_hold: Angehalten
         options: Optionen
         or: oder
-        order: Reihenfolge
+        order: Bestellung
         order_comment_name: Kommentar
         order_comments: Kommentar
         order_confirmation_name: Bestellbestätigung
@@ -544,7 +551,7 @@ sylius:
         payment: Zahlung
         payment_details: Zahlungsdetails
         payment_method: Zahlungsweise
-        payment_methods: Zahlungsmethoden
+        payment_methods: Bezahlmethoden
         payment_mode: Zahlungsweise
         payment_ready_to_pay: Sie können jetzt Ihre Zahlung durchführen
         payment_state: Zahlungsstatus
@@ -553,6 +560,7 @@ sylius:
         pay_again: Klicke auf Bezahlen um es erneut zu versuchen
         pending: Ausstehend
         per_customer_usage_limit: Verbrauchslimit pro Kunde
+        percent: Prozent
         permissions: Berechtigungen
         personal_information: Persönliche Informationen
         phone_number: Telefonnummer
@@ -643,6 +651,7 @@ sylius:
         sales_this_month: Verkäufe
         save: Speichern
         save_changes: Änderungen speichern
+        save_positions: Positionen speichern
         scope: Umfang
         search: Suche
         security_settings: Sicherheitseinstellungen
@@ -664,7 +673,7 @@ sylius:
         shipping: Versandart
         shipping_address: Lieferadresse
         shipping_and_payment_methods: Versand und Zahlarten
-        shipping_categories: Versandgruppen
+        shipping_categories: Versandkategorien
         shipping_category: Versandkategorie
         shipping_charges: Versandkosten
         shipping_method: Lieferverfahren
@@ -691,6 +700,7 @@ sylius:
         slideshow: Slideshow
         slideshow_blocks: Slideshow Blöcke
         sort_by_date: Nach Datum sortieren
+        source_currency: Quellwährung
         start_date: Start–Datum
         starts_at: Beginnt am
         starts_with: Beginnt mit
@@ -706,6 +716,7 @@ sylius:
         summary_of_your_order: Zusammenfassung Ihrer Bestellung
         support: Support
         sylius_logo: Sylius
+        target_currency: Zielwährung
         tax: Steuer
         tax_categories: Steuerkategorien
         tax_category: Steuerkategorie
@@ -718,6 +729,8 @@ sylius:
         taxonomy: Klassifizierung
         taxons: Produktgruppen
         terms_and_conditions: Allgemeine Geschäfts- und Nutzungsbedingungen
+        text: Text
+        textarea: Textfeld
         thank_you: Vielen Dank!
         thank_you_for_your_order: Danke für Ihre Bestellung
         theme: Template
@@ -782,10 +795,10 @@ sylius:
         update_cart: Warenkorb aktualisieren
         update_product_association_type: Produktverbindungstyp aktualisieren
         updating_tax_rate: Steuersätze editieren
+        updating_date: Datum aktualisieren
         usage: Belegt
         usage_limit: Nutzungslimit
         used: Aktion wird verwendet
-        user_confirmation_name: Bestätigung durch den Benutzer
         user_details: Benutzer
         username: Benutzername
         users_list_of_all_users_registered_in_store: Benutzer

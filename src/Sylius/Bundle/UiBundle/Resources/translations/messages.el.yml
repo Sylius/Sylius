@@ -90,6 +90,7 @@ sylius:
         pages: Σελίδες
         password: Κωδικός πρόσβασης
         payment_method: Τρόπος πληρωμής
+        payment_methods: Τρόποι πληρωμής
         payment_state: Κατάσταση πληρωμής
         payments: Πληρωμές
         pending: Σε εκκρεμότητα

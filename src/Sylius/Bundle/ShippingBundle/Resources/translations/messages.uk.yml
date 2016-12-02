@@ -21,21 +21,8 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Фіксована ставка за доставку
-            flexible_rate_configuration:
-                label: Гнучкий тариф
-                additional_unit_cost: Вартість додаткової одиниці
-                additional_unit_limit: Ліміт додаткових одиниць
-                first_unit_cost: Вартість першої одиниці
             per_unit_rate_configuration:
                 label: Фіксована ставка за одиницю
-            weight_rate_configuration:
-                label: Тариф за вагою
-                fixed: Фіксована сума
-                variable: Змінна сума
-                division: Ділення
-            volume_rate_configuration:
-                label: Тариф за обсягом
-                division: Ділення
         shipping_category:
             description: Опис
             name: Назва

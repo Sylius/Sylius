@@ -54,7 +54,6 @@ sylius:
         product:
             images: Obrázky
             restricted_zone: Zóna s omezeným přístupem
-            shipping_category: Typ dopravy
             short_description: Stručný popis
             variant_selection_method: Metoda výběru varianty
             channels: Kanály
@@ -64,6 +63,7 @@ sylius:
             code: Kód
         product_variant:
             tax_category: Typ daně
+            shipping_category: Typ dopravy
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
@@ -170,23 +170,6 @@ sylius:
                 header: Zastaralé časové pásmo
                 help: 'Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).'
             version: Verze PHP
-    email:
-        order_confirmation:
-            name: Potvrzení objednávky
-        order_comment:
-            name: Poznámka k objednávce
-        shipment_confirmation:
-            name: Potvrzení odeslání
-        user_confirmation:
-            name: Potvrzení uživatele
-            subject: Vítejte v našem obchodě
-            content: Vítejte v našem obchodě <br/> <br/> jste se právě zaregistrovali. <br/> Děkujeme vám %username%.
-        password_reset:
-            name: Obnovení hesla
-            content: <h3>Dobrý den %username%</h3> Chcete-li obnovit vaše heslo - navštivte %url% <br/> <br/> S pozdravem, tým.
-        verification:
-            name: Ověření emailové adresy
-            content: Chcete-li ověřit svou e-mailovou adresu - prosím navštivte %url%
     payum_gateway:
         cash_on_delivery: Platba na dobírku
         offline: Offline

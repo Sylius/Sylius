@@ -22,23 +22,9 @@ sylius:
             flat_rate_configuration:
                 label: Pauschale pro Sendung
                 amount: Anzahl
-            flexible_rate_configuration:
-                label: Flexible Rate
-                additional_unit_cost: Kosten für weitere Artikel
-                additional_unit_limit: Weitere Artikel begrenzen
-                first_unit_cost: Kosten des ersten Artikels
             per_unit_rate_configuration:
                 label: Pauschale pro Artikel
                 amount: Anzahl
-            weight_rate_configuration:
-                label: Gewichtsbasierter Preis
-                fixed: Feste Pauschale
-                variable: Variable Pauschale
-                division: Division
-            volume_rate_configuration:
-                label: Volumenbasierte Pauschale
-                amount: Anzahl
-                division: Division
         shipping_category:
             description: Beschreibung
             name: Name

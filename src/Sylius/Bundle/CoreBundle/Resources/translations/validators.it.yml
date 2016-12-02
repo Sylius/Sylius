@@ -19,9 +19,6 @@ sylius:
         onHand:
             min: La scorta di magazzino deve essere maggiore di {{ limit }}.
             not_blank: Per favore inserisci la scorta di magazzino.
-        price:
-            min: Il prezzo non può avere valore negativo.
-            not_blank: Inserisci il prezzo.
         original_price:
             min: Il prezzo originale non deve essere negativo.
     product_translation:

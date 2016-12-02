@@ -17,6 +17,8 @@ sylius:
             starts_at: Prasideda
             usage_limit: Naudojimo limitas
         promotion_action:
+            fixed_discount_configuration:
+                amount: Suma
             type: Tipas
         promotion_coupon:
             usage_limit: Naudojimo limitas

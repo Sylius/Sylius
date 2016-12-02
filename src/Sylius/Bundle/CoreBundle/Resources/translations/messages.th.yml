@@ -19,7 +19,6 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: สินค้า
-            customer_group: กลุ่มลูกค้า
         promotion_coupon:
             per_customer_usage_limit: จำกัดการใช้งานสำหรับลูกค้าแต่ละคน
         group:
@@ -58,7 +57,6 @@ sylius:
         product:
             images: ภาพ
             restricted_zone: จำกัดโซน
-            shipping_category: ประเภทการจัดส่ง
             short_description: คำอธิบายโดยย่อ
             variant_selection_method: วิธีการเลือกตัวแปร
             main_taxon: หมวดหมู่หลัก
@@ -69,6 +67,7 @@ sylius:
             code: รหัส
         product_variant:
             tax_category: ประเภทภาษี
+            shipping_category: ประเภทการจัดส่ง
         shipment_filter:
             created_at_from: จาก
             created_at_to: ถึง
@@ -120,11 +119,6 @@ sylius:
             type: ชนิดสินค้าที่เกี่ยวข้อง
         product_association_type:
             name: ชื่อ
-        promotion_filter:
-            product:
-                products: สินค้า
-            taxon:
-                taxons: การจัดหมวดหมู่
         promotion_rule:
             has_taxon:
                 taxons: การจัดหมวดหมู่
@@ -196,25 +190,6 @@ sylius:
                 help: 'Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).'
             version: PHP เวอร์ชัน
             version_recommended: PHP เวอร์ชันที่แนะนำ
-    email:
-        order_confirmation:
-            name: รายละเอียดใบสั่งซื้อ
-            content: ได้รับหมายเลขใบสั่งซื้อของคุณ %number% เรียบร้อยแล้ว <br/> <br/> ขอบคุณสำหรับการช้อปปิ้งที่ร้านของเรา
-        order_comment:
-            name: ความเห็นเกี่ยวกับการสั่งซื้อ
-        shipment_confirmation:
-            name: รายละเอียดการจัดส่ง
-            content: หมายเลขใบสั่งของคุณ %number% ถูกจัดส่งด้วย %method% <br/> คุณสามารถตรวจสอบสถานะการจัดส่งโดยใช้รหัสติดตามการจัดส่งนี้ "%tracking%" <br/> <br/> ขอบคุณที่ใช้บริการ
-        user_confirmation:
-            name: ยืนยันการสั่งซื้อ
-            subject: ยินดีต้อนรับสู่ร้านของเรา
-            content: ยินดีต้อนรับสู่ร้าน <br/> <br/> คุณได้ทำการลงทะเบียนสำเร็จแล้ว <br/> ขอบคุณ %username%
-        password_reset:
-            name: ตั้งรหัสผ่านใหม่
-            content: <h3>สวัสดี %username%</h3> รีเซ็ตรหัสผ่าน - กดลิ้งค์ %url% <br/> <br/> ขอแสดงความนับถือ
-        verification:
-            name: ยืนยันอีเมล
-            content: ยืนยันอีเมลของคุณ - กดลิ้งค์ %url%
     payum_gateway:
         cash_on_delivery: ชำระด้วยเงินสด
         offline: ออฟไลน์

@@ -19,7 +19,6 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: محصول
-            customer_group: گروه مشتری
         promotion_coupon:
             per_customer_usage_limit: محدودیت استفاده به ازای هر مشتری
         group:
@@ -58,7 +57,6 @@ sylius:
         product:
             images: عکس ها
             restricted_zone: مناطق ممنوع
-            shipping_category: نوع ارسال
             short_description: شرح کوتاه
             variant_selection_method: انتخاب نوع ترکیب بندی
             main_taxon: رده اصلی
@@ -69,6 +67,7 @@ sylius:
             code: نام انگلیسی
         product_variant:
             tax_category: نوع مالیات
+            shipping_category: نوع ارسال
         shipment_filter:
             created_at_from: از تاریخ
             created_at_to: تا تاریخ
@@ -120,11 +119,6 @@ sylius:
             type: نوع ارتباط
         product_association_type:
             name: نام
-        promotion_filter:
-            product:
-                products: محصولات
-            taxon:
-                taxons: دسته بندی ها
         promotion_rule:
             has_taxon:
                 taxons: دسته بندی ها
@@ -194,24 +188,6 @@ sylius:
                 help: 'منطقه زمانی %timezone% نامعتبر است. لطفا تنظیمات مربوطه را در فایل php.ini اصلاح کنید (برای دیدن لیست منطقه های زمانی نامعتبر به آدرس http://php.net/manual/en/timezones.others.php مراجعه کنید).'
             version: ورژن PHP
             version_recommended: ورژن توصیه شده PHP
-    email:
-        order_confirmation:
-            name: تایید سفارش
-            content: "شماره سفارش شما با مقدار %number% ثبت گردید.\n<br/><br/>\nبا تشکر از شما برای خرید در فروشگاه ما!"
-        order_comment:
-            name: یادداشت سفارش
-        shipment_confirmation:
-            name: تایید ارسال
-        user_confirmation:
-            name: تایید کاربر
-            subject: به فروشگاه ما خوش آمدید
-            content: خوش آمدید به فروشگاه ما <br/> <br/> ثبت نام شما با موفقیت انجام شد. <br/> %username% متشکریم.
-        password_reset:
-            name: بازیابی کلمه عبور
-            content: <h3>سلام %username%</h3> برای تنظیم مجدد رمز عبور به آدرس - %url% مراجعه کنید <br/> <br/> با احترام تیم پشتیبانی.
-        verification:
-            name: تایید آدرس ایمیل
-            content: به منظور بررسی آدرس ایمیل به %url% مراجعه کنید
     payum_gateway:
         cash_on_delivery: پرداخت در محل
         offline: آفلاین

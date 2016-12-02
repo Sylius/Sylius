@@ -46,7 +46,6 @@ sylius:
         product:
             images: Billeder
             restricted_zone: Begrænset zone
-            shipping_category: Fragt kategori
             short_description: Kort beskrivelse
             variant_selection_method: Variant udvælgelsesmetode
             enabled: Aktiveret
@@ -55,6 +54,7 @@ sylius:
             code: Kode
         product_variant:
             tax_category: Momskategori
+            shipping_category: Fragt kategori
         shipment_filter:
             created_at_from: Fra
             created_at_to: Til

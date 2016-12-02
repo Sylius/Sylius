@@ -274,12 +274,11 @@ sylius:
         shipments: Forsendelser
         shipped: Sendt
         shipping_address: Leveringsadresse
-        shipping_categories: Fraktkategorier
         shipping_category: Fraktkategori
         shipping_charges: Fraktkostnader
         shipping_method: Fraktalternativ
         shipping_method_details: Fraktmetodedetaljer
-        shipping_methods: Fraktalternativ
+        shipping_methods: Leveringsmetoder
         shipping_state: Fraktstatus
         shipping_total: Frakt totalt
         shop_by: Butikk av

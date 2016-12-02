@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        cart_save_completed: カートに保存しました。
-        item_add_completed: 商品をカートに追加しました。
-        item_remove_completed: 商品をカートから削除しました。

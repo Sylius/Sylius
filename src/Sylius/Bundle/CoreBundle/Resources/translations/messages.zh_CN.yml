@@ -54,7 +54,6 @@ sylius:
         product:
             images: 图像
             restricted_zone: 限制的区
-            shipping_category: 送货类别
             short_description: 简短说明：
             variant_selection_method: 变量选择方法
             main_taxon: 主分类
@@ -65,6 +64,7 @@ sylius:
             code: 代码
         product_variant:
             tax_category: 税类别
+            shipping_category: 送货类别
         shipment_filter:
             created_at_from: 从
             created_at_to: 到
@@ -175,15 +175,3 @@ sylius:
                 header: 过时的时区
                 help: '时区%timezone%已被否决。修复您的 php.ini 文件 （不推荐使用的时区 http://php.net/manual/en/timezones.others.php 的列表）。'
             version: PHP 版本
-    email:
-        order_confirmation:
-            name: 订单确认
-        order_comment:
-            name: 订单的评论
-        shipment_confirmation:
-            name: 发货单确认
-        user_confirmation:
-            name: 用户确认
-            subject: 欢迎来到我们的商店
-        password_reset:
-            name: 重置密码

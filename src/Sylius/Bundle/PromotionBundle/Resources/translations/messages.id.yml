@@ -5,9 +5,12 @@ sylius:
     form:
         promotion:
             name: Nama
+            rules: Aturan
         promotion_action:
             type: Jenis
         promotion_rule:
+            contains_product_configuration:
+                variants: Produk
             shipping_country_configuration:
                 country: Negara
             type: Jenis

@@ -14,18 +14,28 @@ sylius:
                 different_billing_address: Folosiți o adresă de facturare diferită?
             payment_method: Metoda de plată
             shipping_method: Metoda de livrare
+        promotion:
+            channels: Canale
         promotion_action:
             add_product_configuration:
                 product: Produs
+        promotion_coupon:
+            per_customer_usage_limit: Limita de utilizare per client
         group:
             name: Nume
             roles: Roluri
         channel:
             taxonomies: Categorizări
+            locale_default: Setări regionale implicite
             locales: Setări regionale
+            currency_base: Monedă de bază
+            currencies: Valute
             shipping_methods: Metode de livrare
             payment_methods: Metode de plată
+            tax_calculation_strategy: Strategia de calculul impozitului
             tax_zone_default: Zona de taxă implicită
+            theme: Tematica
+            hostname: Hostname
         image:
             code: Cod
             file: Imagine
@@ -39,6 +49,7 @@ sylius:
             total_from: De la
             total_to: Până la
             payment_state: Status plată
+            channel: Toate canalele
         page:
             body: Corp
             id: Id
@@ -46,24 +57,29 @@ sylius:
         product:
             images: Imagini
             restricted_zone: Zonă cu restricție
-            shipping_category: Categoria de livrare
             short_description: Descriere scurtă
             variant_selection_method: Metoda de selectare a variantei
+            main_taxon: Taxonul principal
+            channels: Canale
             enabled: Activat
         product_filter:
             name: Nume
             code: Cod
         product_variant:
             tax_category: Categoria de taxă
+            shipping_category: Categoria de livrare
         shipment_filter:
             created_at_from: De la
             created_at_to: Până la
             number: Număr comandă
             shipping_address: Livrează la
+            channel: Toate canalele
         payment_filter:
             created_at_from: De la
             created_at_to: Până la
             number: Număr comandă
+            billing_address: Nume
+            channel: Toate canalele
         shipping_method:
             zone: Zonă
         taxon:
@@ -94,24 +110,43 @@ sylius:
             width: Lăţime
         attribute:
             product_attribute_value:
+                attribute: Atribut
                 value: Valoare
         guest:
             email: Adresă e-mail
+        product_association:
+            product: Produs asociat
+            type: Tipul de asociere
         product_association_type:
             name: Nume
+        promotion_filter:
+            products: Filtru produse
+            taxons: Filtru de taxoni
         promotion_rule:
+            has_taxon:
+                taxons: Taxoni
+            product:
+                products: Produse
             total_of_items_from_taxon:
+                taxon: Taxonul
                 amount: Sumă
+        payment_method:
+            channels: Canale
+        product_attribute:
+            position: Poziţie
     installer:
         extensions:
             header: extensii
             accelerator:
                 header: Accelerator
+                help: Activează Zend OpCache (recomandat).
             apc: APC
             ctype: Ctype
             gd: GD
             help: Instalaţi şi activaţi extensia %extension%.
             iconv: Iconv
+            exif: Exif
+            fileinfo: Fileinfo
             icu: ICU
             intl: Intl
             json_encode: JSON
@@ -128,13 +163,16 @@ sylius:
             header: file system
             cache:
                 header: cache
+                help: 'Pentru a seta permisiunile execută: sudo setfacl -R -m u:www-date: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-date: rwx -m u: ''whoami'': rwx %path%'
             exists: există
             logs:
                 header: logs
+                help: 'Pentru a seta permisiunile execută: sudo setfacl -R -m u:www-date: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-date: rwx -m u: ''whoami'': rwx %path%'
             not_exists: nu există
             not_writable: nu sunt drepturi de scriere
             parameters:
                 header: parameters.yml
+                help: 'Pentru a seta permisiunile executa: sudo chmod o + w %path%'
             vendors: vendors
             writable: are drepturi de scriere
         settings:
@@ -154,3 +192,10 @@ sylius:
                 header: Fus orar învechit
                 help: 'Fusul orar %timezone% este învechit. Corectează fişierul php.ini (lista fusuri orere învechite http://php.net/manual/en/timezones.others.php).'
             version: Versiunea PHP
+            version_recommended: Versiunea PHP recomandată
+    payum_gateway:
+        cash_on_delivery: Plată la livrare (ramburs)
+        offline: Offline
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: Zone şi canal

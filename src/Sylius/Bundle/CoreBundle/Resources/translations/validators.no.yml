@@ -10,6 +10,3 @@ sylius:
         onHand:
             min: Du må inneha mer enn {{ limit }}.
             not_blank: Vennlist angi din beholdning.
-        price:
-            min: Prisen kan ikke være mindre enn null.
-            not_blank: Vennligst skriv inn prisen.

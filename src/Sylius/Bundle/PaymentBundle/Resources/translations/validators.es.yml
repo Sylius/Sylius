@@ -41,4 +41,5 @@ sylius:
                 not_blank: Por favor, Introduzca el porcentaje de la cuota.
         code:
             not_blank: Por favor, introduzca el código de método de pago.
+            regex: El código de método de pago solo puede contener letras, números, guiones y guiones bajos.
             unique: Ya existe un método de pago con el código introducido.

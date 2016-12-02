@@ -13,9 +13,6 @@ sylius:
         onHand:
             min: Drejtimi duhet të jetë më i madh se {{ limit }}.
             not_blank: Shkruaj drejtimin.
-        price:
-            min: Çmimi nuk duhet të jetë negativ.
-            not_blank: Shkruaj çmimin.
         original_price:
             min: çmimi fillestar nuk mund të jetë negativ.
     product_translation:

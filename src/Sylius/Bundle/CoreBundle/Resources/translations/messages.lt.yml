@@ -19,7 +19,6 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Produktas
-            customer_group: Klientų grupės
         promotion_coupon:
             per_customer_usage_limit: Kliento naudojimosi ribos
         group:
@@ -56,7 +55,6 @@ sylius:
         product:
             images: Paveikslėliai
             restricted_zone: Apribota zona
-            shipping_category: Pristatymo kategorija
             short_description: Trumpas aprašymas
             variant_selection_method: Varianto pasirinkimo būdas
             channels: Kanalai
@@ -66,6 +64,7 @@ sylius:
             code: Kodas
         product_variant:
             tax_category: Mokesčių kategorija
+            shipping_category: Pristatymo kategorija
         shipment_filter:
             created_at_from: Nuo
             created_at_to: Iki
@@ -117,11 +116,6 @@ sylius:
             type: Sąryšio tipas
         product_association_type:
             name: Pavadinimas
-        promotion_filter:
-            product:
-                products: Prekės
-            taxon:
-                taxons: Taksonai
         promotion_rule:
             has_taxon:
                 taxons: Taksonai
@@ -190,24 +184,6 @@ sylius:
                 help: 'Laiko juosta %timezone% yra pasenusi. Pataisykite savo php.ini failą (pasenusių laiko juostų sąrašas http://php.net/manual/en/timezones.others.php).'
             version: PHP versija
             version_recommended: Rekomenduojama PHP versija
-    email:
-        order_confirmation:
-            name: Užsakymo patvirtinimas
-            content: Jūsų užsakymas Nr. %number% sėkmingai sukurtas.<br/><br/>Ačiū, kad pirkote mūsų parduotuvėje!
-        order_comment:
-            name: Užsakymo komentaras
-        shipment_confirmation:
-            name: Pristatymo patvirtinimas
-            content: Jūsų užsakymas Nr. %number% išsiųstas %method% būdu.<br/>Siuntos vietą galite patikrinti naudodami "%tracking%" kodą.<br/><br/>Dėkojame už sėkmingą operaciją.
-        user_confirmation:
-            name: Vartotojo patvirtinimas
-            subject: Sveiki atvykę į mūsų parduotuvę
-            content: Sveiki atvykę į mūsų parduotuvę<br/><br/>Jūs sėkmingai užsiregistravote.<br/>Ačiū %username%.
-        password_reset:
-            name: Slaptažodžio atstatymas
-        verification:
-            name: El. pašto adreso patvirtinimas
-            content: Norėdami patvirtinti savo elektroninio pašto adresą - apsilankykite %url%
     payum_gateway:
         cash_on_delivery: Grynaisiais pristatymo metu
         paypal_express_checkout: PayPal Express Checkout

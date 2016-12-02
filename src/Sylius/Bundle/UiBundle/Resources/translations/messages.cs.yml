@@ -76,6 +76,7 @@ sylius:
         change_your_password: Změnit heslo
         channel: Kanál
         channels: Kanály
+        checkbox: Zaškrt. pole
         checkout: Objednat
         choose_file: Vyberte soubor
         city: Město
@@ -144,6 +145,7 @@ sylius:
         dashboard: Nástěnka
         data: Údaje
         date: Datum
+        datetime: Datum a čas
         default_billing_address: Výchozí fakturační adresa
         default_locale: Výchozí Jazyk
         default_shipping_address: Výchozí dodací adresa
@@ -221,6 +223,7 @@ sylius:
         imagine_blocks: Imagine bloky
         index_of_all_configured_locales: Seznam všech národních prostředí (locales)
         information: Informace
+        integer: Číslo
         inventory: Sklad
         inventory_here_you_can_see_current_stock_levels: Zásoby <small>zde vidíte aktuální stav zásob</small>
         inventory_index: Sklad
@@ -331,10 +334,11 @@ sylius:
         payment: Platba
         payment_details: Detaily platby
         payment_method: Způsob platby
-        payment_methods: Způsoby platby
+        payment_methods: Způsoby plateb
         payment_state: Stav platby
         payments: Platby
         pending: Čekající
+        percent: Procent
         permissions: Oprávnění
         phone_number: Telefonní číslo
         place_order: Dokončit objednávku
@@ -399,7 +403,6 @@ sylius:
         shipments: Zásilky
         shipped: Dodáno
         shipping_address: Doručovací adresa
-        shipping_categories: Přepravní kategorie
         shipping_category: Typ dopravy
         shipping_charges: Přepravní poplatky
         shipping_method: Způsob dopravy
@@ -430,6 +433,8 @@ sylius:
         taxation_categories: Typy zdanění
         taxation_settings: Nastavení zdanění
         taxes: DPH
+        text: Text
+        textarea: Textové pole
         theme: Vzhled
         there_are_no_images_for_this_product: Pro tento produkt nejsou žádné obrázky
         there_are_no_options_for_this_product: Pro tento produkt nejsou žádné nastavení
@@ -452,7 +457,6 @@ sylius:
         updating_tax_rate: Aktualizace daňové sazby
         usage_limit: Omezení použití
         used: Použito
-        user_confirmation_name: Potvrzení uživatele
         user_details: Údaje o uživateli
         username: Uživatelské jméno
         users_list_of_all_users_registered_in_store: Uživatelé <small>seznam všech uživatelů registrovaných v obchodě</small>

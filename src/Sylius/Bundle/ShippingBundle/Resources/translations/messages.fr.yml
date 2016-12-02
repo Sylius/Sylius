@@ -22,23 +22,9 @@ sylius:
             flat_rate_configuration:
                 label: Prix fixe par envoi
                 amount: Montant
-            flexible_rate_configuration:
-                label: Taux variable
-                additional_unit_cost: Surcoût unitaire
-                additional_unit_limit: Limite d'unités supplémentaires
-                first_unit_cost: Premier coût unitaire
             per_unit_rate_configuration:
                 label: Montant forfaitaire par unité
                 amount: Montant
-            weight_rate_configuration:
-                label: Taux basé sur le poids
-                fixed: Montant fixe
-                variable: Montant variable
-                division: Division
-            volume_rate_configuration:
-                label: Taux basé sur la quantité
-                amount: Montant
-                division: Division
         shipping_category:
             description: Description
             name: Nom

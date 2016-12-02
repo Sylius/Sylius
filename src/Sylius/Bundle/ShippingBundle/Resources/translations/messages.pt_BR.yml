@@ -21,21 +21,8 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Taxa plana por remessa
-            flexible_rate_configuration:
-                label: Taxa flexível
-                additional_unit_cost: Custo adicional de unidade 
-                additional_unit_limit: Limite de unidades adicionais
-                first_unit_cost: Primeira unidade de custo
             per_unit_rate_configuration:
                 label: Taxa fixa por unidade
-            weight_rate_configuration:
-                label: Taxa de peso com base
-                fixed: Valor fixo
-                variable: Quantidade variável
-                division: Divisão
-            volume_rate_configuration:
-                label: Taxa de volume com base
-                division: Divisão
         shipping_category:
             description: Descrição
             name: Nome

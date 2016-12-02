@@ -109,6 +109,7 @@ sylius:
         channel: Canal
         channels: Canaux
         charges_and_taxes: Taxes et frais
+        checkbox: Case à cocher
         checking_out_as: Payer en tant que
         checkout: Paiement
         choose_file: Choisir un fichier
@@ -211,6 +212,7 @@ sylius:
         dashboard: Tableau de bord
         data: Données
         date: Date
+        datetime: Date et heure
         default: Défaut
         default_billing_address: Adresse de facturation par défaut
         default_locale: Paramètres régionaux par défaut
@@ -346,6 +348,7 @@ sylius:
         index_of_all_configured_locales: Index de tous les paramètres régionaux configurés
         info: Info
         information: Informations
+        integer: Entier
         inventory: Stock
         inventory_here_you_can_see_current_stock_levels: Inventaire <small>États des stocks</small>
         inventory_index: Stock
@@ -541,6 +544,7 @@ sylius:
         pay_again: Cliquez sur « Payer » pour essayer à nouveau
         pending: En attente
         per_customer_usage_limit: Limite d'utilisation par client
+        percent: Pourcentage
         permissions: Droits d'accès
         personal_information: Informations personnelles
         phone_number: Téléphone
@@ -701,6 +705,8 @@ sylius:
         taxonomy: Taxinomie
         taxons: Taxons
         terms_and_conditions: Conditions générales de vente
+        text: Texte
+        textarea: Zone de texte
         thank_you: Merci !
         thank_you_for_your_order: Merci pour votre commande
         theme: Thème
@@ -768,7 +774,6 @@ sylius:
         usage: Utilisation
         usage_limit: Limite d'utilisation
         used: Utilisé
-        user_confirmation_name: Confirmation de l'utilisateur
         user_details: Détails d'un utilisateur
         username: Identifiant
         users_list_of_all_users_registered_in_store: Utilisateurs

@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        cart_save_completed: Кошык быў абноўлены.
-        item_add_completed: Пакупка дададзена у кошык.
-        item_remove_completed: Тавар выдалены з кошыка.

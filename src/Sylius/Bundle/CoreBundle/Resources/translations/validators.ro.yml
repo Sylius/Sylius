@@ -2,14 +2,40 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        base_currency:
+            not_blank: Vă rugăm să introduceţi moneda de bază a canalului.
+        default_locale:
+            not_blank: Vă rugăm să introduceţi setări regionale implicite de canal.
+    checkout:
+        shipping_method:
+            not_blank: Vă rugăm să alegeți metoda de livrare.
+    currency:
+        enabled:
+            cannot_disable_base: Valuta de bază nu poate fi dezactivată.
+    customer:
+        currency_code:
+            not_valid: Codul de valută pe care le-aţi introdus nu este valid.
+    cart_item:
+        not_available: Nu există stoc suficient pentru %itemName%.
+    order:
+        currency_code:
+            not_valid: Codul de valută pe care l-aţi introdus nu este valid.
     locale:
         code:
             not_blank: Vă rugăm să completați codul localizării.
             unique: Acest cod de localizare există deja.
+        enabled:
+            cannot_disable_base: Setările regionale de bază nu pot fi dezactivate.
+    product_attribute:
+        invalid: Poziţia trebuie să fie un număr întreg.
+    product_image:
+        code:
+            not_blank: Vă rugăm să introduceţi un cod de imagine.
     product_variant:
         onHand:
             min: Stocul curent trebuie să fie mai mare decât {{ limit }}.
             not_blank: Vă rugăm să introduceţi stocul curent.
-        price:
-            min: Preţul nu poate fi negativ.
-            not_blank: Vă rugăm să completați preţul.
+    taxon_image:
+        code:
+            not_blank: Vă rugăm să introduceţi un cod de imagine.

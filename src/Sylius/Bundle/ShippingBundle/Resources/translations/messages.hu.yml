@@ -21,21 +21,8 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Átalánydíj szállítmányonként
-            flexible_rate_configuration:
-                label: Rugalmas díjszabás
-                additional_unit_cost: További elemek költsége
-                additional_unit_limit: További elemek limitje
-                first_unit_cost: Első elem költsége
             per_unit_rate_configuration:
                 label: Átalánydíj per elem
-            weight_rate_configuration:
-                label: Súlyalapú
-                fixed: Fix összeg
-                variable: Változó összeg
-                division: Részleg
-            volume_rate_configuration:
-                label: Térfogat alapú
-                division: Részleg
         shipping_category:
             description: Leírás
             name: Név

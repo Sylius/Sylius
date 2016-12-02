@@ -5,9 +5,28 @@ sylius:
     form:
         attribute:
             add: Adăugați
+            add_attributes: Adaugă atribut
             choices: Opțiuni
             code: Cod
             name: Nume
+            translations: Traduceri
             type: Tip
         attribute_type:
+            checkbox: Bifă
             configuration: Configurare
+            date: Dată
+            datetime: Dată și Oră
+            integer: Număr întreg
+            percent: Procentaj
+            text: Text
+            textarea: Zonă de text
+            title: Tipuri de atribut
+            validation: Validare
+        attribute_type_configuration:
+            datetime:
+                format: Format
+            date:
+                format: Format
+            text:
+                min: Lungime minimă
+                max: Lungime maximă

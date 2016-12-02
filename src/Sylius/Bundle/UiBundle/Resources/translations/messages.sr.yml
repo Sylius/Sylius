@@ -148,6 +148,7 @@ sylius:
         out_of_stock: Нема на лагеру
         overview_of_your_store: Преглед продавнице
         pages: Стране
+        payment_methods: Опције плаћања
         payment_state: Стање плаћања
         payments: Плаћања
         phone_number: Број телефона
@@ -182,10 +183,10 @@ sylius:
         shipment_details: Детаљи пошиљке
         shipment_state: Стање пошиљке
         shipments: Пошиљке
-        shipping_categories: Категорије слања
         shipping_charges: Цена испоруке
         shipping_method: Начин доставе
         shipping_method_details: Детаљи налина доставе
+        shipping_methods: Начини доставе
         shipping_state: Стање пошиљке
         shipping_total: Укупно испорука
         shop_by: Купујте по

@@ -25,9 +25,6 @@ sylius:
         onHand:
             min: Počet položiek na sklade musí byť viac ako {{ limit }}.
             not_blank: Prosím zadajte počet položiek na sklade.
-        price:
-            min: Cena nemôže obsahovať záporné hodnoty.
-            not_blank: Zadajte cenu.
         original_price:
             min: Pôvodná cena nesmie byť záporná.
     product_translation:

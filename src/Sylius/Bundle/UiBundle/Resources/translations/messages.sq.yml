@@ -79,6 +79,7 @@ sylius:
         channel: Kanali
         channels: Kanalet
         charges_and_taxes: Pagesat dhe taksat
+        checkbox: Checkbox
         checkout: Kontrolli
         choose_file: Përzgjidh fajlin
         city: Qyteti
@@ -168,6 +169,7 @@ sylius:
         dashboard: Paneli
         data: Të dhëna
         date: Data
+        datetime: Data dhe koha
         default_billing_address: Adresa kryesore e faturimit
         default_locale: Lokalizimi i parazgjedhur
         default_shipping_address: Adresa kryesore e dërgimit
@@ -274,6 +276,7 @@ sylius:
         index_of_all_configured_locales: Treguesi i të gjitha vendeve të konfiguruara
         info: Info
         information: Informacion
+        integer: Numër i plotë
         inventory: Gjendja e magazinës
         inventory_here_you_can_see_current_stock_levels: Inventari <small>Këtu mund të shikosh gjendjet aktuale të magazinës</small>
         inventory_index: Gjendja e magazinës
@@ -433,6 +436,7 @@ sylius:
         payment_state: Gjendja e pagesës
         payments: Pagesat
         pending: Në pritje
+        percent: Përqind
         permissions: Lejet
         phone_number: Numri i telefonit
         place_order: Shkruaj porosinë
@@ -516,12 +520,11 @@ sylius:
         shipments: Dërgesat
         shipped: Dërguar
         shipping_address: Adresa e dërgimit
-        shipping_categories: Kategoritë e dërgesës
         shipping_category: Kategoria e dërgesës
         shipping_charges: Pagesat e dërgimit
         shipping_method: Mënyra e dërgimit
         shipping_method_details: Hollësi të mënyrës së dërgimit
-        shipping_methods: Mënyrat e dërgesës
+        shipping_methods: Mënyrat e dërgesave
         shipping_state: Gjendja e dërgimit
         shipping_total: Pagesa totale e dërgimit
         shop_by: Bli me
@@ -557,6 +560,8 @@ sylius:
         taxation_settings: Parametrat e taksimit
         taxes: Taksat
         taxons: Tipologjite
+        text: Teksti
+        textarea: Hapsira e tekstit
         thank_you_for_your_order: Falmnderit për porosinë
         theme: Tema
         there_are_no_attributes_configured: Nuk ka asnjë atribut të konfiguruar
@@ -617,7 +622,6 @@ sylius:
         updating_tax_rate: Duke përditësuar normën e taksimit
         usage: Perdorimi
         used: I përdorur
-        user_confirmation_name: Konfirmimi i përdoruesit
         user_details: Hollësi të përdoruesit
         username: Username
         users_list_of_all_users_registered_in_store: Përdorues <small>Lista e të gjithë përdoruesve të regjistruar në arkiv</small>

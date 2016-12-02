@@ -19,7 +19,6 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Product
-            customer_group: Gebruikersgroep
         promotion_coupon:
             per_customer_usage_limit: Gebruikslimiet per klant
         group:
@@ -58,7 +57,6 @@ sylius:
         product:
             images: Afbeeldingen
             restricted_zone: Beperkte zone
-            shipping_category: Verzend categorie
             short_description: Korte omschrijving
             variant_selection_method: Variant selectie methode
             main_taxon: Hoofdcategorie
@@ -69,6 +67,7 @@ sylius:
             code: Code
         product_variant:
             tax_category: Belasting categorie
+            shipping_category: Verzend categorie
         shipment_filter:
             created_at_from: Van
             created_at_to: Tot
@@ -120,9 +119,6 @@ sylius:
             type: Associatietype
         product_association_type:
             name: Naam
-        promotion_filter:
-            product:
-                products: Producten
         promotion_rule:
             product:
                 products: Producten
@@ -187,23 +183,6 @@ sylius:
                 help: 'Tijdzone %timezone% is verouderd. Fix je php.ini bestand (lijst met verouderde tijdzones http://php.net/manual/en/timezones.others.php).'
             version: PHP versie
             version_recommended: Aanbevolen PHP versie
-    email:
-        order_confirmation:
-            name: Order bevestiging
-        order_comment:
-            name: Order Opmerkingen
-        shipment_confirmation:
-            name: Bevestiging van de verzending
-        user_confirmation:
-            name: Bevestiging van de gebruiker
-            subject: Welkom in jouw winkel
-            content: Wekom bij onze winkel<br/><br/>Je bent zonet geregistreerd.<br/>Bedankt %username%.
-        password_reset:
-            name: Wachtwoord opnieuw instellen
-            content: <h3>Dag %username%</h3>Bezoek %url% om je wachtwoord opnieuw in te stellen.<br/><br/>Met vriendelijke groeten, het Team.
-        verification:
-            name: E-mail adres verificatie
-            content: Bezoek %url% om je email adres te bevestigen
     payum_gateway:
         cash_on_delivery: Onder rembours
         offline: Offline

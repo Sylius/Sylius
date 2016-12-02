@@ -100,6 +100,7 @@ sylius:
         channel: Kanál
         channels: Kanály
         charges_and_taxes: Poplatky a dane
+        checkbox: Checkbox
         checking_out_as: Nakupujúci ako
         checkout: Košík
         choose_file: Vybrať súbor
@@ -198,6 +199,7 @@ sylius:
         dashboard: Administračný panel
         data: Údaje
         date: Dátum
+        datetime: Dátum a čas
         default_billing_address: Predvolená fakturačná adresa
         default_locale: Predvolený jazyk
         default_shipping_address: Predvolaná doručovacia adresa
@@ -323,6 +325,7 @@ sylius:
         index_of_all_configured_locales: Zoznam všetkých jazykov
         info: Info
         information: Informácia
+        integer: Číslo
         inventory: Skladové zásoby
         inventory_here_you_can_see_current_stock_levels: Skladové zásoby <small> prehľad skladových položiek</small>
         inventory_index: Skladové zásoby
@@ -512,6 +515,7 @@ sylius:
         pay_again: Kliknite zaplaiť pre zopakovanie platby
         pending: Čakajúca
         per_customer_usage_limit: Obmedzenie použitia pre zákazníka
+        percent: Percento
         permissions: Oprávnenia
         personal_information: Osobné údaje
         phone_number: Telefónne číslo
@@ -613,7 +617,6 @@ sylius:
         shipping: Doručenie
         shipping_address: Adresa doručenia
         shipping_and_payment_methods: Dodacie a platobné metódy
-        shipping_categories: Kategórie doručenia
         shipping_category: Kategória doručenia
         shipping_charges: Poplatky za dopravu
         shipping_method: Spôsob doručenia
@@ -661,6 +664,8 @@ sylius:
         taxes: Dane
         taxonomy: Kategorizácia
         terms_and_conditions: Podmienky používania
+        text: Text
+        textarea: Textové pole
         thank_you: Ďakujeme Vám!
         thank_you_for_your_order: Ďakujeme za vašu objednávku
         theme: Téma
@@ -726,7 +731,6 @@ sylius:
         usage: Použitie
         usage_limit: Limit použitia
         used: Použité
-        user_confirmation_name: Potvrdenie registrácie použivateľa
         user_details: Údaje o používateľovi
         username: Používateľské meno
         users_list_of_all_users_registered_in_store: Používatelia <small>Zoznam všetkých používateľov zaregistrovaných v obchode</small>

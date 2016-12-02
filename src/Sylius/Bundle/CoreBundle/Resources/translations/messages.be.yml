@@ -46,7 +46,6 @@ sylius:
         product:
             images: Малюнкі
             restricted_zone: Забароненая зона
-            shipping_category: Катэгорыя дастаўкі
             short_description: Кароткае апісанне
             variant_selection_method: Метад выбару варыянта
             enabled: Уключана
@@ -55,6 +54,7 @@ sylius:
             code: Код
         product_variant:
             tax_category: Катэгорыя падатку
+            shipping_category: Катэгорыя дастаўкі
         shipment_filter:
             created_at_from: З
             created_at_to: Да

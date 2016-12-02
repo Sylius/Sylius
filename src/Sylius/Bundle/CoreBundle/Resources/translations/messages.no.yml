@@ -46,7 +46,6 @@ sylius:
         product:
             images: Bilder
             restricted_zone: Begrenset sone
-            shipping_category: Fraktkategori
             short_description: Kort beskrivelse
             variant_selection_method: Metode for valg av variant
             enabled: Aktivert
@@ -55,6 +54,7 @@ sylius:
             code: Kode
         product_variant:
             tax_category: Skattekategori
+            shipping_category: Fraktkategori
         shipment_filter:
             created_at_from: Fra
             created_at_to: Til

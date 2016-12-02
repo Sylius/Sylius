@@ -3,7 +3,4 @@
 
 sylius:
     promotion_coupon:
-        eligible: Kupon promocyjny został wykorzystany w Twoim koszyku.
         generate: Kupony promocyjne zostały pomyślnie wygenerowane.
-        invalid: Ten kupon promocyjny jest nieprawidłowy.
-        not_eligible: W Twoim koszyku nie można skorzystać z tego kuponu promocyjnego.

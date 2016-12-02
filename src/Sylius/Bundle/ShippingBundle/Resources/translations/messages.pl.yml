@@ -22,22 +22,9 @@ sylius:
             flat_rate_configuration:
                 label: Jednolita stawka za dostawę
                 amount: Kwota
-            flexible_rate_configuration:
-                label: Zmienna stawka
-                additional_unit_cost: Dodatkowy koszt jednostki
-                first_unit_cost: Koszt pierwszej jednostki
             per_unit_rate_configuration:
                 label: Jednolita stawka za jednostkę
                 amount: Kwota
-            weight_rate_configuration:
-                label: Stawka zależna od wagi
-                fixed: Stała kwota
-                variable: Zmienna ilość
-                division: Podział
-            volume_rate_configuration:
-                label: Stawka zależna od ilości
-                amount: Kwota
-                division: Podział
         shipping_category:
             description: Opis
             name: Nazwa

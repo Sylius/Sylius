@@ -8,3 +8,7 @@ sylius:
             code: Nom
             enabled: Activé
             exchange_rate: Taux de change
+        exchange_rate:
+            source_currency: Devise d'origine
+            target_currency: Devise cible
+            ratio: Rapport

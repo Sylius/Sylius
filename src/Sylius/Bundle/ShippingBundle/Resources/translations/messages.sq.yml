@@ -21,21 +21,8 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Taksa fikse për dërgimin
-            flexible_rate_configuration:
-                label: Taksa e ndryshueshme
-                additional_unit_cost: Kosto shtese per njesi
-                additional_unit_limit: Kufizo njesine shtese
-                first_unit_cost: Kostoja per njesine e pare
             per_unit_rate_configuration:
                 label: Tarife fikse per njesi
-            weight_rate_configuration:
-                label: Taksa e bazuar te pesha
-                fixed: Shuma fikse
-                variable: Shuma e ndryshueshme
-                division: Ndarja
-            volume_rate_configuration:
-                label: Taksa e bazuar te vëllimi
-                division: Ndarja
         shipping_category:
             description: Përshkrimi
             name: Emri

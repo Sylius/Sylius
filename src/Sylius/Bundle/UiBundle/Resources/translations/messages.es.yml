@@ -105,13 +105,16 @@ sylius:
         change_file: Modificar fichero
         change_password: Cambiar contraseña
         change_payment_method: Cambiar modo de pago
+        change_position: Cambiar posición
         change_shipping_method: Cambiar método de envío
         change_your_password: Cambiar mi contraseña
         channel: Canal
         channels: Canales
         charges_and_taxes: Tasas e impuestos
+        checkbox: Casilla de verificación
         checking_out_as: Pagar como
         checkout: Completar pedido
+        choose_channel: Seleccionar canal
         choose_file: Seleccionar fichero
         choose_how_your_goods_will_be_delivered: Selecciona cómo se enviarán tus productos
         choose_how_you_will_pay: Selecciona la forma de pago
@@ -214,9 +217,11 @@ sylius:
         dashboard: Panel general
         data: Fecha
         date: Fecha
+        datetime: Fecha y hora
         default: Por defecto
         default_address: Dirección por defecto
         default_billing_address: sylius.account.address.default.billing
+        default_currency: Moneda por defecto
         default_locale: Configuración regional predeterminada
         default_shipping_address: sylius.account.address.default.shipping
         delete: Eliminar
@@ -238,6 +243,7 @@ sylius:
         edit_coupon: Editar cupón
         edit_currency: Editar moneda
         edit_customer: Editar cliente
+        edit_exchange_rate: Editar tipo de cambio
         edit_locale: Editar idioma
         edit_my_address: sylius.account.address.update
         edit_order: Modificar pedido
@@ -266,6 +272,7 @@ sylius:
         editing_currency: Editando moneda
         editing_customer: Editando cliente
         editing_email: Editando el correo electrónico
+        editing_exchange_rate: Editando tipo de cambio
         editing_imagine_block: Editar bloque de imagen
         editing_menu: Editando menu
         editing_menu_node: Editar nodo del menu
@@ -305,6 +312,7 @@ sylius:
         equal: Igual
         error: Error
         exchange_rate: Tasa de cambio
+        exchange_rates: Tipos de cambio
         exclusive: Exclusivo
         existing_customer: Cliente existente
         expiration_and_usage_limits: Vencimiento y límites de uso
@@ -349,12 +357,14 @@ sylius:
         image: Imagen
         images: Imágenes
         imagine_blocks: Bloque de imagen
+        impersonate: Impersonar
         in: En
         included_in_price: Incluido en el precio
         index_metadata: Metadatos
         index_of_all_configured_locales: Índice de todos los idiomas configurados
         info: Información
         information: Información
+        integer: Número entero
         inventory: Inventario
         inventory_here_you_can_see_current_stock_levels: Inventory <small>Aquí puede ver los niveles de stock actuales</small>
         inventory_index: Inventario
@@ -407,6 +417,7 @@ sylius:
         manage_customer_groups: Administrar grupos de clientes
         manage_discounts_and_promotional_campaigns: Administrar descuentos y campañas promocionales
         manage_emails: Administrar mensajes de correo electrónico
+        manage_exchange_rates: Administrar tasas de cambio
         manage_geographical_zones: Administrar zonas geográficas
         manage_languages_available_in_the_store: Administrar idiomas disponibles en la tienda
         manage_metadata: Administrar metadatos
@@ -420,6 +431,7 @@ sylius:
         manage_reviews_of_your_products: Administrar las reseñas de sus productos
         manage_shipments: Gestionar
         manage_shipping_categories: Gestionar
+        manage_shipping_categories_for_your_store: Administrar categorías de envío de tu tienda
         manage_shipping_destinations: Gestionar destinos de envío
         manage_shipping_methods: Gestionar
         manage_shipping_methods_for_your_store: Manejar métodos de envío para su tienda
@@ -458,6 +470,7 @@ sylius:
         new_currency: Nueva moneda
         new_customer: Nuevo cliente
         new_customers: Nuevos clientes
+        new_exchange_rate: Nueva tasa de cambio
         new_locale: Nueva traducción
         new_order: Nuevo pedido
         new_orders: Nuevos pedidos
@@ -531,6 +544,7 @@ sylius:
         order_state: Estado del pedido
         order_summary: Resumen del pedido
         order_total: Total del pedido
+        base_currency_order_total: Total del pedido en la moneda base
         order_value: Valor del pedido
         ordered: Pedido realizado
         orders: Pedidos
@@ -547,7 +561,7 @@ sylius:
         payment: Pago
         payment_details: Detalles de pago
         payment_method: Modo de pago
-        payment_methods: Métodos de pago
+        payment_methods: Modos de pago
         payment_mode: Modo de pago
         payment_ready_to_pay: Ahora puede hacer el pago
         payment_state: Estado del pago
@@ -556,6 +570,7 @@ sylius:
         pay_again: Haga clic en pagar para intentarlo de nuevo
         pending: Pendiente
         per_customer_usage_limit: Límite de uso por cliente
+        percent: Porcentaje
         permissions: Permisos
         personal_information: Datos personales
         phone_number: Teléfono
@@ -607,6 +622,7 @@ sylius:
         qty_min: Cantidad minima
         quantity: Cant.
         rating: Valoración
+        ratio: Ratio
         ready: Listo
         recent_customers: Clientes recientes
         recent_orders: Pedidos recientes
@@ -646,6 +662,7 @@ sylius:
         sales_this_month: Ventas
         save: Guardar
         save_changes: Guardar cambios
+        save_positions: Guardar posiciones
         scope: Ámbito
         search: Búsqueda
         security_settings: Ajustes de seguridad
@@ -695,6 +712,7 @@ sylius:
         slideshow: Presentación
         slideshow_blocks: Bloque de diapositivas
         sort_by_date: Ordenar por fecha
+        source_currency: Moneda origen
         start_date: Fecha de inicio
         starts_at: Empieza el
         starts_with: Comienza con
@@ -710,6 +728,7 @@ sylius:
         summary_of_your_order: Resumen de su pedido
         support: Soporte
         sylius_logo: Sylius
+        target_currency: Moneda destino
         tax: Impuestos
         tax_categories: Categorías de impuestos
         tax_category: Categoría de impuestos
@@ -722,6 +741,8 @@ sylius:
         taxonomy: Taxonomía
         taxons: Taxones
         terms_and_conditions: Términos y condiciones
+        text: Texto
+        textarea: Área de texto
         thank_you: '¡Gracias!'
         thank_you_for_your_order: Gracias por su pedido
         theme: Tema
@@ -769,6 +790,7 @@ sylius:
         title: Título
         topic: Asunto
         total: Total
+        total_in_base_currency: Total en la moneda base
         total_orders: Pedidos
         total_qty: Cant total
         total_records: Número de registros
@@ -786,10 +808,10 @@ sylius:
         update_cart: Actualizar carrito
         update_product_association_type: Actualizar tipo de asociación de producto
         updating_tax_rate: Actualizar
+        updating_date: Fecha de actualización
         usage: Utilización
         usage_limit: Límite de uso
         used: promoción utilizado
-        user_confirmation_name: Confirmación de usuario
         user_details: Mostrar
         username: Nombre usuario
         users_list_of_all_users_registered_in_store: Lista de todos los usuarios registrados en la tienda

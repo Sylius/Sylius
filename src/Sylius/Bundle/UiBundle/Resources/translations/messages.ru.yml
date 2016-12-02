@@ -103,6 +103,7 @@ sylius:
         channel: Канал
         channels: Каналы
         charges_and_taxes: Сборы и налоги
+        checkbox: Флажок
         checking_out_as: Проверить как
         checkout: Сверка
         choose_file: Выбрать файл
@@ -205,6 +206,7 @@ sylius:
         dashboard: Приборная панель
         data: Данные
         date: Дата
+        datetime: Дата и время
         default: По умолчанию
         default_address: Адрес по умолчанию
         default_billing_address: sylius.account.address.default.billing
@@ -341,6 +343,7 @@ sylius:
         index_of_all_configured_locales: Список всех настроенных языков
         info: Сведения
         information: Информация
+        integer: Целое число
         inventory: Запасы
         inventory_here_you_can_see_current_stock_levels: Склад <small>Здесь вы можете увидеть уровень запасов</small>
         inventory_index: Запасы
@@ -529,7 +532,7 @@ sylius:
         payment: Оплата
         payment_details: Детали платежа
         payment_method: Метод платежа
-        payment_methods: Список методов оплаты
+        payment_methods: Способы оплаты
         payment_mode: Способ оплаты
         payment_ready_to_pay: Теперь вы можете сделать платеж
         payment_state: Статус платежа
@@ -537,6 +540,7 @@ sylius:
         pay: Оплатить
         pay_again: Нажмите заплатить, чтобы повторить попытку
         pending: Ожидает
+        percent: Процент
         permissions: Права доступа
         personal_information: Личная информация
         phone_number: Контактный телефон
@@ -642,12 +646,12 @@ sylius:
         shipping: Способ доставки
         shipping_address: Адрес доставки
         shipping_and_payment_methods: Способы доставки и оплаты
-        shipping_categories: Список категорий доставки
+        shipping_categories: Категории доставки
         shipping_category: Категория доставки
         shipping_charges: Затраты на доставку
         shipping_method: Способ доставки
         shipping_method_details: Детали способа доставки
-        shipping_methods: Список способов доставки
+        shipping_methods: Способы доставки
         shipping_state: Статус доставки
         shipping_total: Стоимость доставки
         shop_by: Каталог товаров
@@ -694,6 +698,8 @@ sylius:
         taxes: Налоги
         taxonomy: Тип товара
         terms_and_conditions: Условия использования
+        text: Текст
+        textarea: Текстовая область
         thank_you: Спасибо!
         thank_you_for_your_order: Спасибо за Ваш заказ
         theme: Тема оформления
@@ -758,7 +764,6 @@ sylius:
         usage: Использование
         usage_limit: Предел использования
         used: Использован
-        user_confirmation_name: Подтверждение пользователя
         user_details: Детали пользователя
         username: Логин
         users_list_of_all_users_registered_in_store: Пользователи <small>список всех пользователей зарегистрированных в магазине</small>

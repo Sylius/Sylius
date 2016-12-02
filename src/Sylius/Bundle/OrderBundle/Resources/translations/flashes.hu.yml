@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        cart_save_completed: A kosár tartalmának módosítása megtörtént.
-        item_add_completed: A kiválasztott elem a kosárba került.
-        item_remove_completed: Az termék törölve lett a kosárból.

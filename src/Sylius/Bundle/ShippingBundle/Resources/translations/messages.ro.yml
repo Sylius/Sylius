@@ -21,11 +21,6 @@ sylius:
                 amount: Sumă
             per_unit_rate_configuration:
                 amount: Sumă
-            weight_rate_configuration:
-                division: Divizie
-            volume_rate_configuration:
-                amount: Sumă
-                division: Divizie
         shipping_category:
             description: Descriere
             name: Nume
@@ -33,8 +28,10 @@ sylius:
             calculator: Calculator
             category: Categorie
             category_requirement: Cerința categoriei
+            channels: Canale
             configuration: Configurare
             description: Descriere
             enabled: Activat
             name: Nume
             tax_category: Categoria de taxă
+            translations: Traduceri

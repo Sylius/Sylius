@@ -22,23 +22,9 @@ sylius:
             flat_rate_configuration:
                 label: Vast tarief per zending
                 amount: Hoeveelheid
-            flexible_rate_configuration:
-                label: Flexibele tarief
-                additional_unit_cost: Extra kost per eenheid
-                additional_unit_limit: Limiet extra eenheden
-                first_unit_cost: Kost voor eerste eenheid
             per_unit_rate_configuration:
                 label: Forfaitair bedrag per eenheid
                 amount: Hoeveelheid
-            weight_rate_configuration:
-                label: Gewicht gebasseerd tarief
-                fixed: Vast bedrag
-                variable: Variabele bedrag
-                division: Divisie
-            volume_rate_configuration:
-                label: Volume gebaseerd tarief
-                amount: Hoeveelheid
-                division: Divisie
         shipping_category:
             description: Omschrijving
             name: Naam

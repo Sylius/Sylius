@@ -9,6 +9,7 @@ sylius:
             not_blank: Por favor, introduzca el nombre de la categoría de envío.
         code:
             not_blank: Por favor, introduzca el nombre de la categoría de envío.
+            regex: El código de categoría de envío solo puede contener letras, números, guiones y guiones bajos.
             unique: Ya existe una categoría de envío con ese código.
     shipping_method:
         calculator:
@@ -21,6 +22,7 @@ sylius:
             not_blank: Por favor, introduzca el nombre del método de envío.
         code:
             not_blank: Por favor, introduzca el código de método de envío.
+            regex: El código del método de envío puede contener letras, números, guiones y guiones bajos.
             unique: Ya existe un método de envío con ese código.
         zone:
             not_blank: Por favor, introduzca la zona del método de envío.

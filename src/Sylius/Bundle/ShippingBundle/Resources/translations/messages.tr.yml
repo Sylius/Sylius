@@ -21,19 +21,8 @@ sylius:
             flat_rate_configuration:
                 label: Sevkıyat başına sabit oran
                 amount: Miktar
-            flexible_rate_configuration:
-                label: Esnek oranı
             per_unit_rate_configuration:
                 amount: Miktar
-            weight_rate_configuration:
-                label: Temel ağırlık oranı
-                fixed: Sabit tutar
-                variable: Değişken tutar
-                division: Bölüm
-            volume_rate_configuration:
-                label: Temel birim oranı
-                amount: Miktar
-                division: Bölüm
         shipping_category:
             description: Açıklama
             name: Ad

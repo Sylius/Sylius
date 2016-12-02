@@ -22,23 +22,9 @@ sylius:
             flat_rate_configuration:
                 label: Tariffa fissa di spedizione
                 amount: Importo
-            flexible_rate_configuration:
-                label: Tariffa flessibile
-                additional_unit_cost: Costo aggiuntivo di unità
-                additional_unit_limit: Limite di unità aggiuntive
-                first_unit_cost: Costo della prima unità
             per_unit_rate_configuration:
                 label: Tariffa fissa per unità
                 amount: Importo
-            weight_rate_configuration:
-                label: Tariffa basata sul peso
-                fixed: Importo fisso
-                variable: Quantità variabile
-                division: Divisione
-            volume_rate_configuration:
-                label: Tariffa basata sul volume
-                amount: Importo
-                division: Divisione
         shipping_category:
             description: Descrizione
             name: Nome

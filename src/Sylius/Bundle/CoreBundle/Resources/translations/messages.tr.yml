@@ -50,7 +50,6 @@ sylius:
         product:
             images: Resimleri
             restricted_zone: Kısıtlı bölge
-            shipping_category: Teslimat kategorisi
             short_description: Kısa açıklama
             variant_selection_method: Varyant seçme yöntemi
             channels: Kanallar
@@ -60,6 +59,7 @@ sylius:
             code: Kod
         product_variant:
             tax_category: Vergi kategorisi
+            shipping_category: Teslimat kategorisi
         shipment_filter:
             created_at_from: Kaynak
             created_at_to: Hedef
@@ -166,12 +166,3 @@ sylius:
                 header: Kullanılmayan Zaman Dilimi
                 help: '%timezone% zaman dilimi kaldırılmıştır. php.ini dosyanızda gerekli düzenlemeyi yapın. (Kaldırılan tüm zaman dilimleri http://php.net/manual/en/timezones.others.php).'
             version: PHP versiyon
-    email:
-        order_confirmation:
-            name: Sipariş Onayı
-        order_comment:
-            name: Sipariş yorumu
-        shipment_confirmation:
-            name: Sevk İrsaliyesi onay
-        user_confirmation:
-            name: Kullanıcı onayı

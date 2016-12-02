@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    payment:
-        complete: 已完成付款。
-        cancel: 付款已被取消。
-        transition_fail: 该操作无法执行在给定的付款的状态下执行

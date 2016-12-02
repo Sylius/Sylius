@@ -3,7 +3,4 @@
 
 sylius:
     promotion_coupon:
-        eligible: Vaš promocijski kupon je bil dodan v košarico.
         generate: Promocijski kuponi so bili uspešno ustvarjeni.
-        invalid: Vaš promocijski kupon ni veljaven.
-        not_eligible: Vaša košarica ni upravičena do tega promocijskega kupona.

@@ -110,6 +110,7 @@ sylius:
         channel: Канал
         channels: Канали
         charges_and_taxes: Збори та податки
+        checkbox: Позначка
         checking_out_as: Перевірити як
         checkout: Підрахунок
         choose_file: Обрати файл
@@ -214,6 +215,7 @@ sylius:
         dashboard: Панель керування
         data: Дані
         date: Дата
+        datetime: Дата й час
         default: Типово
         default_billing_address: Платіжна адреса за замовчуванням
         default_locale: Типова локаль
@@ -347,6 +349,7 @@ sylius:
         index_of_all_configured_locales: Список усіх сконфігурованих мов
         info: Довідка
         information: Інформація
+        integer: Ціле число
         inventory: Інвентаризація
         inventory_here_you_can_see_current_stock_levels: Інвентаризація <small>Тут ви можете побачити поточний рівень запасів</small>
         inventory_index: Інвентаризація
@@ -511,7 +514,7 @@ sylius:
         payment: Оплата
         payment_details: Деталі платежу
         payment_method: Спосіб оплати
-        payment_methods: Способи оплати
+        payment_methods: Методи оплати
         payment_mode: Форма оплати
         payment_ready_to_pay: Тепер ви можете здійснити вашу оплату
         payment_state: Статус платежу
@@ -520,6 +523,7 @@ sylius:
         pay_again: Клацніть сплатити, щоб спробувати знов
         pending: В очікуванні
         per_customer_usage_limit: Ліміт використання на клієнта
+        percent: Відсоток
         permissions: Дозволи
         personal_information: Особисті відомості
         phone_number: Номер телефону
@@ -595,7 +599,6 @@ sylius:
         shipments: Відправки
         shipped: Доставлене
         shipping_address: Адреса доставки
-        shipping_categories: Категорії доставки
         shipping_category: Категорія доставки
         shipping_charges: Націнки за доставку
         shipping_method: Метод доставки
@@ -629,6 +632,8 @@ sylius:
         taxonomy: Таксономія
         taxons: Таксони
         terms_and_conditions: Правила та умови
+        text: Текст
+        textarea: Текстове поле
         theme: Тема
         there_are_no_images_for_this_product: Немає зображень для цього товару
         there_are_no_options_for_this_product: Немає опцій для цього товару
@@ -652,7 +657,6 @@ sylius:
         updating_tax_rate: Оновлення ставки податку
         usage_limit: Обмеження використання
         used: Використано
-        user_confirmation_name: Підтвердження користувача
         user_details: Інформація про користувача
         username: Ім'я користувача
         variant: Різновид

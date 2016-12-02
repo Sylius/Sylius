@@ -17,6 +17,8 @@ sylius:
             starts_at: Commence le
             usage_limit: Limite d'utilisation
         promotion_action:
+            fixed_discount_configuration:
+                amount: Montant
             percentage_discount_configuration:
                 percentage: Pourcentage
             type: Type

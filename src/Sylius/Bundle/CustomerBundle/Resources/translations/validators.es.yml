@@ -23,6 +23,7 @@ sylius:
             registered: Este email ya está registrado, por favor ingresa o utiliza la opción de recuperación de contraseña.
     customer_group:
         code:
+            regex: El código de grupo de cliente solo puede contener letras, números, guiones y guiones bajos.
             unique: El código de grupo de clientes debe ser único.
         name:
             max: El nombre del grupo de clientes no puede tener más de {{ limit }} caracteres.

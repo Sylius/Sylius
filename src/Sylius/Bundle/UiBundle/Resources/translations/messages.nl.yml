@@ -109,6 +109,7 @@ sylius:
         channel: Kanalen
         channels: Kanalen
         charges_and_taxes: Heffingen en belastingen
+        checkbox: Selectievak
         checking_out_as: Afrekenen als
         checkout: Afrekenen
         choose_file: Kies bestand
@@ -211,6 +212,7 @@ sylius:
         dashboard: Dashboard
         data: Gegevens
         date: Datum
+        datetime: Datum / tijd
         default: Standaardinstelling
         default_billing_address: Standaard factuuradres
         default_locale: Standaardlandinstelling
@@ -342,6 +344,7 @@ sylius:
         index_of_all_configured_locales: Index van alle ingestelde locaties
         info: Info
         information: Informatie
+        integer: Geheel getal
         inventory: Locaties
         inventory_here_you_can_see_current_stock_levels: Voorraad<small>Hier kunt u de huidige voorraadniveaus zien</small>
         inventory_index: Locaties
@@ -512,7 +515,7 @@ sylius:
         payment: Betaling
         payment_details: Betalingsgegevens
         payment_method: Betaalmethode
-        payment_methods: Betaalmethodes
+        payment_methods: Betaalmethoden
         payment_mode: Betalingswijze
         payment_ready_to_pay: Je kan nu je betaling uitvoeren
         payment_state: Betaalstatus
@@ -521,6 +524,7 @@ sylius:
         pay_again: Klik op betalen om opnieuw te proberen
         pending: In behandeling
         per_customer_usage_limit: Gebruikslimiet per klant
+        percent: Percentage
         permissions: Machtigingen
         personal_information: Persoonlijke gegevens
         phone_number: Telefoonnummer
@@ -621,12 +625,11 @@ sylius:
         shipping: Verzending
         shipping_address: Bezorgadres
         shipping_and_payment_methods: Verzend- en betaal methoden
-        shipping_categories: Verzendcategorieën
         shipping_category: Verzend categorie
         shipping_charges: Verzendkosten
         shipping_method: Verzendmethode
         shipping_method_details: Verzendmethode details
-        shipping_methods: Verzendmethodes
+        shipping_methods: Verzendmethoden
         shipping_state: Verzendstatus
         shipping_total: Verzendkosten totaal
         shop_by: Filter op
@@ -668,6 +671,8 @@ sylius:
         taxes: Belastingen
         taxonomy: Taxonomie
         terms_and_conditions: Algemene Voorwaarden
+        text: Tekst
+        textarea: Tekstgebied
         thank_you: Bedankt!
         thank_you_for_your_order: Bedankt voor uw bestelling
         theme: Thema
@@ -733,7 +738,6 @@ sylius:
         usage: Gebruik
         usage_limit: Gebruikslimiet
         used: Gebruikt
-        user_confirmation_name: Bevestiging van de gebruiker
         user_details: Gebruikersdetails
         username: Gebruikersnaam
         users_list_of_all_users_registered_in_store: Gebruikers <small>Lijst van alle gebruikers in de winkel</small>

@@ -10,9 +10,6 @@ sylius:
         onHand:
             min: Na skladě musí být více než {{ limit }}.
             not_blank: Prosím zadejte sklad.
-        price:
-            min: Cena nesmí být záporná.
-            not_blank: Prosím vložte cenu.
     product_translation:
         short_description:
             max: Stručný popis nesmí být delší než {{ limit }} znaků.

@@ -17,9 +17,11 @@ sylius:
                     channels: Ausgabekanäle
                     countries: Länder
                     currencies: Währungen
+                    exchange_rates: Wechselkurse
                     header: Einstellung
                     locales: Gebietsschemata
                     payment_methods: Bezahlmethoden
+                    shipping_categories: Versandkategorien
                     shipping_methods: Versandmethoden
                     tax_categories: Steuerkategorien
                     tax_rates: Steuersätze

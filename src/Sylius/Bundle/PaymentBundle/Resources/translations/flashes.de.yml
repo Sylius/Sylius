@@ -3,6 +3,4 @@
 
 sylius:
     payment:
-        complete: Zahlung wurde abgeschlossen.
-        cancel: Zahlung wurde abgebrochen.
-        transition_fail: Die Aktion konnte mit dem aktuellen Zahlungsstatus nicht ausgeführt werden
+        refunded: Zahlung wurde erfolgreich erstattet.

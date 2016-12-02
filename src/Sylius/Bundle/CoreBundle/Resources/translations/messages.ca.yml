@@ -37,7 +37,6 @@ sylius:
         product:
             images: Imatges
             restricted_zone: Àrea restringida
-            shipping_category: Categoria d'enviament
             short_description: Descripció breu
             variant_selection_method: Mètode de selecció de variant
             enabled: Activat
@@ -46,6 +45,7 @@ sylius:
             code: Codi
         product_variant:
             tax_category: Categoria d'impost
+            shipping_category: Categoria d'enviament
         shipment_filter:
             created_at_from: Des de
             created_at_to: A

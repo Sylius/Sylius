@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        cart_save_completed: Koszyk został pomyślnie uaktualniony.
-        item_add_completed: Produkt został dodany do koszyka.
-        item_remove_completed: Produkt został usunięty z koszyka.

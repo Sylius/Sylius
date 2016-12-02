@@ -31,9 +31,6 @@ sylius:
         onHand:
             min: Dostępna ilość musi być większa niż {{ limit }}.
             not_blank: Należy wprowadzić dostępną ilość.
-        price:
-            min: Cena nie może być ujemna.
-            not_blank: Proszę podać cenę.
         original_price:
             min: Oryginalna cena nie może być ujemna.
     product_translation:

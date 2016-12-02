@@ -273,7 +273,6 @@ sylius:
         shipments: Дастаўка
         shipped: Дастаўлена
         shipping_address: Адрас дастаўкі
-        shipping_categories: Катэгорыі дастаўкі
         shipping_category: Катэгорыя дастаўкі
         shipping_charges: Тарыфы за дастаўку
         shipping_method: Метад дастаўкі

@@ -55,7 +55,6 @@ sylius:
         product:
             images: Obrázky
             restricted_zone: Zóna s obmedzeným prístupom
-            shipping_category: Kategória doručenia
             short_description: Krátky popis
             variant_selection_method: Spôsob výberu produktového variantu
             main_taxon: Hlavná kategória
@@ -66,6 +65,7 @@ sylius:
             code: Kód
         product_variant:
             tax_category: Daňová kategória
+            shipping_category: Kategória doručenia
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
@@ -178,25 +178,6 @@ sylius:
                 help: 'Časové pásmo %timezone% je zastaralé. Opravte si Váš súbor php.ini (zoznam zastaralých časových pasiem http://php.net/manual/en/timezones.others.php).'
             version: Verzia PHP
             version_recommended: Odporúčaná verzia PHP
-    email:
-        order_confirmation:
-            name: Potvrdenie objednávky
-            content: Vaša objednávka č. %number% bola úspešne vytvorená.<br/> <br/> Ďakujem vám za nákup v našom obchode!
-        order_comment:
-            name: Poznámka k objednávke
-        shipment_confirmation:
-            name: Potvrdenie odoslania zásielky
-            content: Vaša objednávka č. %number% bola odoslaná na %method%.<br/> Pomocou kódu %tracking%, môžete skontrolovať jej polohu.<br/><br/> Ďakujem vám za nákup v našom obchode.
-        user_confirmation:
-            name: Potvrdenie registrácie použivateľa
-            subject: Vitajte v našom obchode
-            content: Vitajte v našom obchode <br/> <br/> Boli ste úspešne zaregistrovaný.<br/> Ďakujem vám %username%.
-        password_reset:
-            name: Obnoviť heslo
-            content: <h3>Dobrý deň %username%</h3> Na obnovenie hesla prosím navštívte %url%.
-        verification:
-            name: Overenie e-mailovej adresy
-            content: Pre overenie e-mailovej adresy - prosím navštívte %url%
     payum_gateway:
         cash_on_delivery: Dobierka
         offline: Offline

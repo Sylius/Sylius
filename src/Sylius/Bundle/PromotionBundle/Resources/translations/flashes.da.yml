@@ -3,7 +3,4 @@
 
 sylius:
     promotion_coupon:
-        eligible: Din kampagne kode er blevet tilføjet til indkøbskurven.
         generate: Kampagne kuponer er succesfuldt blevet genereret.
-        invalid: Din kampagne kupon er ikke gyldig.
-        not_eligible: Din indkøbsvogn er ikke berettiget til denne kampagne kupon.
