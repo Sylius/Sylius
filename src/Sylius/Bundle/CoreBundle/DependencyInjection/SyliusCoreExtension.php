@@ -12,14 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Parameter;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -67,8 +64,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         if ('test' === $env || 'test_cached' === $env) {
             $loader->load('test_services.xml');
         }
-
-        $this->overwriteRuleFactory($container);
     }
 
     /**
@@ -89,18 +84,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $this->prependHwiOauth($container, $loader);
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    private function overwriteRuleFactory(ContainerBuilder $container)
-    {
-        $baseFactoryDefinition = new Definition(Factory::class, [new Parameter('sylius.model.promotion_rule.class')]);
-        $promotionRuleFactoryClass = $container->getParameter('sylius.factory.promotion_rule.class');
-        $decoratedPromotionRuleFactoryDefinition = new Definition($promotionRuleFactoryClass, [$baseFactoryDefinition]);
-
-        $container->setDefinition('sylius.factory.promotion_rule', $decoratedPromotionRuleFactoryDefinition);
     }
 
     /**

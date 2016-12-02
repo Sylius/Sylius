@@ -17,6 +17,10 @@
                  decorates="sylius.factory.promotion_action" public="false">
             <argument type="service" id="sylius.factory.promotion_action.decorated.inner" />
         </service>
+        <service id="sylius.factory.promotion_rule.decorated" class="Sylius\Component\Core\Factory\PromotionRuleFactory"
+                 decorates="sylius.factory.promotion_rule" public="false">
+            <argument type="service" id="sylius.factory.promotion_rule.decorated.inner" />
+        </service>
 
         <service id="sylius.active_promotions_provider" class="Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider">
             <argument type="service" id="sylius.repository.promotion" />
