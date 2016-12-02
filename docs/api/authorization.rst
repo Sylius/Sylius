@@ -22,7 +22,7 @@ Use Sylius command:
 
 .. code-block:: bash
 
-    php app/console sylius:oauth-server:create-client \
+    php bin/console sylius:oauth-server:create-client \
         --grant-type="password" \
         --grant-type="refresh_token" \
         --grant-type="token"

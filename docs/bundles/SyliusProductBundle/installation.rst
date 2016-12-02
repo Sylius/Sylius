@@ -72,7 +72,7 @@ Run the following command.
 
 .. code-block:: bash
 
-    $ php app/console doctrine:schema:update --force
+    $ php bin/console doctrine:schema:update --force
 
 .. warning::
 

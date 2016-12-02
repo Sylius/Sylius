@@ -72,7 +72,7 @@ Full JSON/XML CRUD API is ready to use. Sounds crazy? Spin up the built-in serve
 
 .. code-block:: bash
 
-    php app/console server:run
+    php bin/console server:run
 
 You should see something like:
 
@@ -104,7 +104,7 @@ Run the ``debug:router`` command to see available routes:
 
 .. code-block:: bash
 
-    php app/console debug:router
+    php bin/console debug:router
 
     [router] Current routes
     Name            Method        Scheme Host Path

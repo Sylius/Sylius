@@ -80,7 +80,7 @@ Remove the ``shipment_selected`` state, ``select_shipment`` transition. Remove t
 .. tip::
 
     To check if your new state machine configuration is overiding the old one run:
-    ``$ php app/console debug:config winzou_state_machine`` and check the configuration of ``sylius_order_checkout``.
+    ``$ php bin/console debug:config winzou_state_machine`` and check the configuration of ``sylius_order_checkout``.
 
 Adjust Checkout Resolver
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -282,7 +282,7 @@ and change the **redirect route** in ``sylius_shop_checkout_address``. The rest 
 
 .. tip::
 
-    If you do not see any changes run ``$ php app/console cache:clear``.
+    If you do not see any changes run ``$ php bin/console cache:clear``.
 
 Learn more
 ----------

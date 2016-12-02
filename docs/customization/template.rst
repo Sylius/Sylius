@@ -63,7 +63,7 @@ Copy the contents of the original template to make your work easier. And then mo
     </div>
     {% endblock %}
 
-Done! If you do not see any changes on the ``/shop/login`` url, clear your cache: ``$ php app/console cache:clear``.
+Done! If you do not see any changes on the ``/shop/login`` url, clear your cache: ``$ php bin/console cache:clear``.
 
 * **Admin** templates: Customization of the Country form view.
 
@@ -88,4 +88,4 @@ Copy the contents of the original template to make your work easier. And then mo
         {{ form_row(form.provinces, {'label': false}) }}
     </div>
 
-Done! If you do not see any changes on the ``/admin/countries/new`` url, clear your cache: ``$ php app/console cache:clear``.
+Done! If you do not see any changes on the ``/admin/countries/new`` url, clear your cache: ``$ php bin/console cache:clear``.
