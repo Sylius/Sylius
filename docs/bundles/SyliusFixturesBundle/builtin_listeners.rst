@@ -12,12 +12,12 @@ Provides output while running ``sylius:fixtures:load`` command.
 
     # Without logger
 
-    $ app/console sylius:fixtures:load my_suite
+    $ bin/console sylius:fixtures:load my_suite
     $ _
 
     # With logger
 
-    $ app/console sylius:fixtures:load my_suite
+    $ bin/console sylius:fixtures:load my_suite
     Running suite "my_suite"...
     Running fixture "country"...
     Running fixture "locale"...

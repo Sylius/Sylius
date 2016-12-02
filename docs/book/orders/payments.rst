@@ -135,7 +135,7 @@ You have most likely changed the PayPal credentials from ``config.yml`` during t
 
 .. code-block:: bash
 
-    app/console cache:clear
+    bin/console cache:clear
 
 Learn more
 ----------

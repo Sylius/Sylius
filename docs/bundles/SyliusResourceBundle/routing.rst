@@ -19,7 +19,7 @@ Results in the following routes:
 
 .. code-block:: bash
 
-    php app/console debug:router
+    php bin/console debug:router
 
     [router] Current routes
     Name            Method        Scheme Host Path
@@ -46,7 +46,7 @@ Results in the following routes:
 
 .. code-block:: bash
 
-    php app/console debug:router
+    php bin/console debug:router
 
     [router] Current routes
     Name            Method        Scheme Host Path
@@ -72,7 +72,7 @@ Results in the following routes:
 
 .. code-block:: bash
 
-    php app/console debug:router
+    php bin/console debug:router
 
     [router] Current routes
     Name            Method    Scheme Host Path
@@ -99,7 +99,7 @@ Results in the following routes:
 
 .. code-block:: bash
 
-    php app/console debug:router
+    php bin/console debug:router
 
     [router] Current routes
     Name            Method        Scheme Host Path
@@ -124,7 +124,7 @@ Results in the following routes:
 
 .. code-block:: bash
 
-    php app/console debug:router
+    php bin/console debug:router
 
     [router] Current routes
     Name            Method        Scheme Host Path
@@ -157,7 +157,7 @@ Results in the following routes:
 
 .. code-block:: bash
 
-    php app/console debug:router
+    php bin/console debug:router
 
     [router] Current routes
     Name                   Method        Scheme Host Path

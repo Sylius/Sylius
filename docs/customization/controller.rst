@@ -37,7 +37,7 @@ For the ``ProductController`` run:
 
 .. code-block:: bash
 
-    $ php app/console debug:container sylius.controller.product
+    $ php bin/console debug:container sylius.controller.product
 
 As a result you will get the ``Sylius\Bundle\CoreBundle\Controller\ProductController`` - this is the class that you need to extend.
 
@@ -113,7 +113,7 @@ Let's assume that you would like to send some kind of emails (which are not reso
 
 1. Create a new Controller class under the ``AppBundle/Controller/Frontend`` namespace.
 
-Run ``$ php app/console debug:container sylius.controller.frontend.order``.
+Run ``$ php bin/console debug:container sylius.controller.frontend.order``.
 
 Your class needs to extend this base class.
 

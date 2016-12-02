@@ -11,7 +11,7 @@ Creating OAuth client:
 
 .. code-block:: bash
 
-    $ php app/console sylius:oauth-server:create-client --grant-type="password" --grant-type="refresh_token" --grant-type="token"
+    $ php bin/console sylius:oauth-server:create-client --grant-type="password" --grant-type="refresh_token" --grant-type="token"
 
 It will give you such a response:
 
@@ -23,11 +23,11 @@ Run your application on a built-in server:
 
 .. code-block:: bash
 
-    $ php app/console server:start localhost:8000
+    $ php bin/console server:start localhost:8000
 
 .. tip::
 
-    If you have run Sylius fixtures(``$ php app/console sylius:fixtures:load``) you will have a default user for API already configured.
+    If you have run Sylius fixtures(``$ php bin/console sylius:fixtures:load``) you will have a default user for API already configured.
     It is the ``api@example.com`` user with password ``sylius-api``.
 
 To obtain authorization token for the default user run:
