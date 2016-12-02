@@ -13,6 +13,7 @@ sylius:
         actions: Acțiuni
         add: Adăugați
         add_action: Adaugă acţiune
+        add_attributes: Adaugă atribut
         add_coupon: Adaugă cod promoțional
         add_image: Adaugă imagine
         add_member: Adaugă membru
@@ -44,6 +45,8 @@ sylius:
         categorization: Categorizare
         category: Categorie
         change_your_password: Modificare parolă
+        channels: Canale
+        checkbox: Bifă
         checkout: Trimite comanda
         choose_file: Alege fișier
         city: Oraș
@@ -83,14 +86,20 @@ sylius:
         create_zone: Creeare zonă
         created_at: Creat la
         creation_time: Data creării
+        currencies: Valute
         currency: Monedă
         current_orders: Comenzi curente
         current_password: Parola actuală
         current_promotions: Promoţii actuale
         current_stock: Stoc curent
+        customer: Client
+        customers: Clienți
         dashboard: Panou de administrare
         data: Date
+        date: Dată
+        datetime: Dată și Oră
         default_billing_address: Adresă de facturare implicită
+        default_locale: Setări regionale implicite
         default_shipping_address: Adresă de livrare implicită
         delete: Șterge
         delete_image: Șterge imagine
@@ -134,11 +143,13 @@ sylius:
         grand_total: Total
         hide_deleted: Ascunde cele şterse
         home: Pagina principală
+        hostname: Hostname
         id: Id
         image: Imagine
         images: Imagini
         index_of_all_configured_locales: Indicele tuturor localizărilor configurate
         information: Informație
+        integer: Număr întreg
         inventory: Inventar
         inventory_here_you_can_see_current_stock_levels: Inventar <small>Aici puteţi vedea stocul actual</small>
         inventory_index: Inventar
@@ -159,6 +170,7 @@ sylius:
         login: Conectaţi-vă
         login_button: Conectaţi-vă
         logout: Deconectare
+        main_taxon: Taxonul principal
         manage: Gestionare
         manage_countries: Gestionare ţări
         manage_options: Gestionare opţiuni
@@ -172,6 +184,7 @@ sylius:
         manage_tax_categories: Gestionare categorii de taxe
         manage_tax_rates: Gestionare taxe
         manage_zones: Gestionarea zonelor
+        marketing: Marketing
         members: Membri
         menu_nodes: Noduri meniu
         message: Mesaj
@@ -228,6 +241,7 @@ sylius:
         payment_state: Status plată
         payments: Plăți
         pending: În așteptare
+        percent: Procentaj
         phone_number: Număr de telefon
         place_order: Plasare comandă
         placed_at: Plasată la
@@ -238,7 +252,9 @@ sylius:
         pricing: Calculator
         processing: În curs de procesare
         product: Produs
+        product_association_type_index: Tipul de asociere
         product_details_viewing_product_product: Detalii produs <small>Vizualizează produs "<strong>%product%</strong>"</small>
+        products: Produse
         products_categorized_as_name: Produse categorizate ca "%name%"
         products_categorized_under_taxon_taxon: Produse <small>din categoria "%taxon%"</small>
         products_index_of_all_products_in_your_store: Produse <small>Lista tuturor produselor din magazin</small>
@@ -302,6 +318,9 @@ sylius:
         taxation_categories: Categorii de taxe
         taxation_settings: Setări taxe
         taxes: Taxe
+        text: Text
+        textarea: Zonă de text
+        theme: Tematica
         there_are_no_images_for_this_product: Nu există imagini pentru acest produs
         there_are_no_options_for_this_product: Nu există opțiuni pentru acest produs
         there_are_no_taxons_for_this_product: Fără categorie
@@ -311,6 +330,7 @@ sylius:
         total_qty: Cantitate totală
         total_registrations: Total înregistrări
         tracking_number: Număr de urmărire
+        translations: Traduceri
         type: Tip
         unavailable: Indisponibil
         unit_price: Preț unitar

@@ -19,7 +19,6 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Verkäuflich
-            customer_group: Kundengruppe
         promotion_coupon:
             per_customer_usage_limit: Nutzungsbeschränkung pro Kunde
         group:
@@ -58,7 +57,6 @@ sylius:
         product:
             images: Fotos
             restricted_zone: Beschränktes Versandgebiet
-            shipping_category: Versandkategorie
             short_description: Kurzbeschreibung
             variant_selection_method: Variantenauswahlmethode
             main_taxon: Haupt-Produktgruppe
@@ -69,6 +67,7 @@ sylius:
             code: Code
         product_variant:
             tax_category: Steuerkategorie
+            shipping_category: Versandkategorie
         shipment_filter:
             created_at_from: Von
             created_at_to: Bis
@@ -120,11 +119,6 @@ sylius:
             type: Assoziationstyp
         product_association_type:
             name: Name
-        promotion_filter:
-            product:
-                products: Produkte
-            taxon:
-                taxons: Produktgruppen
         promotion_rule:
             has_taxon:
                 taxons: Produktgruppen
@@ -196,24 +190,6 @@ sylius:
                 help: 'Zeitzone %timezone% ist veraltet. Korriegiere die php.ini Datei (Liste der veralteten Zeitzonen: http://php.net/manual/en/timezones.others.php).'
             version: PHP Version
             version_recommended: Empfohlene PHP Version
-    email:
-        order_confirmation:
-            name: Bestellbestätigung
-        order_comment:
-            name: Kommentar
-        shipment_confirmation:
-            name: Versandbestätigung
-            content: Deine Bestellung mit der Nummer %number% wurde mit der %method% gesendet. <br/> Du kannst die Position, deiner Bestellung mit dieser %tracking% Sendeverfolgungsnummer einsehen.<br/><br/>Danke für deine erfolgreiche Bezahlung.
-        user_confirmation:
-            name: Bestätigung durch den Benutzer
-            subject: Willkommen Sie in unserem Shop
-            content: Wilkommen in unserem Shop<br /><br />Sie haben sich erfolgreich registriert<br />Vielen Dank %username%.
-        password_reset:
-            name: Passwort zurücksetzen
-            content: <h3>Hallo %username%</h3> Zum Zurücksetzen Ihres Passworts - besuchen Sie bitte %url% <br/> <br/> Grüße, das Team.
-        verification:
-            name: Email wiederholen
-            content: Zum Bestätigen Ihrer E-Mail-Adresse - besuchen Sie bitte %url%
     payum_gateway:
         cash_on_delivery: Nachnahme
         offline: Offline

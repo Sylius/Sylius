@@ -24,9 +24,6 @@ sylius:
             tax_category: Kategorija proizvoda
         product_association_type:
             name: Ime
-        promotion_filter:
-            product:
-                products: Proizvodi
         promotion_rule:
             product:
                 products: Proizvodi

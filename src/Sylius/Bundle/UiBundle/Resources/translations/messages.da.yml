@@ -267,7 +267,6 @@ sylius:
         shipments: Forsendelser
         shipped: Afsendt
         shipping_address: Leveringsadresse
-        shipping_categories: Forsendelses kategorier
         shipping_category: Fragt kategori
         shipping_charges: Forsendelsesomkostninger
         shipping_method: Fragtmetoder

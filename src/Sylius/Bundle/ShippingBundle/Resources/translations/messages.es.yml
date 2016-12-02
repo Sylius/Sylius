@@ -22,23 +22,9 @@ sylius:
             flat_rate_configuration:
                 label: Tarifa plana por envío
                 amount: Cantidad
-            flexible_rate_configuration:
-                label: Tarifa flexible
-                additional_unit_cost: Coste adicional por unidad
-                additional_unit_limit: Límite de artículos adicionales
-                first_unit_cost: Costo del primer artículo
             per_unit_rate_configuration:
                 label: Tarifa plana por artículo
                 amount: Cantidad
-            weight_rate_configuration:
-                label: Tarifa basada en peso
-                fixed: Cantidad fija
-                variable: Cantidad variable
-                division: División
-            volume_rate_configuration:
-                label: Tarifa basada en volumen
-                amount: Cantidad
-                division: División
         shipping_category:
             description: Descripción
             name: Nombre

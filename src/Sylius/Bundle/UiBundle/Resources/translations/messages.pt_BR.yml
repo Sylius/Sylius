@@ -100,6 +100,7 @@ sylius:
         channel: Canal
         channels: Canais
         charges_and_taxes: Encargos e impostos
+        checkbox: Caixa de seleção
         checking_out_as: Comprar como
         checkout: Finalizar compra
         choose_file: Escolha um arquivo
@@ -198,6 +199,7 @@ sylius:
         dashboard: Painel
         data: Dados
         date: Data
+        datetime: Data e Hora
         default_billing_address: Endereço de cobrança padrão
         default_locale: Localidade padrão
         default_shipping_address: Endereço de envio padrão
@@ -323,6 +325,7 @@ sylius:
         index_of_all_configured_locales: Índice de todas as localidades configuradas
         info: Informações
         information: Info
+        integer: Número inteiro
         inventory: Estoque
         inventory_here_you_can_see_current_stock_levels: Estoque <small>Aqui você pode ver os nível do estoque atual</small>
         inventory_index: Estoque
@@ -512,6 +515,7 @@ sylius:
         pay_again: Clique em pagar para tentar novamente
         pending: Pendente
         per_customer_usage_limit: Limite de uso por cliente
+        percent: Porcentagem
         permissions: Permissões
         personal_information: Dados pessoais
         phone_number: Número de Telefone
@@ -613,7 +617,6 @@ sylius:
         shipping: Entrega
         shipping_address: Endereço de entrega
         shipping_and_payment_methods: Métodos de envio e pagamento
-        shipping_categories: Categorias de envio
         shipping_category: Categoria de expedição
         shipping_charges: Taxas de envio
         shipping_method: Método de envio
@@ -661,6 +664,8 @@ sylius:
         taxes: Taxas
         taxonomy: Taxonomia
         terms_and_conditions: Termos e condições
+        text: Texto
+        textarea: Área de Texto
         thank_you: Obrigado!
         thank_you_for_your_order: Obrigado pelo seu pedido
         theme: ' Tema'
@@ -726,7 +731,6 @@ sylius:
         usage: Uso
         usage_limit: Limite de utilização
         used: Utilizado
-        user_confirmation_name: Confirmação do usuário
         user_details: Detalhes do usuários
         username: Login
         users_list_of_all_users_registered_in_store: Usuários <small>Lista de todos os usuários cadastros na loja</small>

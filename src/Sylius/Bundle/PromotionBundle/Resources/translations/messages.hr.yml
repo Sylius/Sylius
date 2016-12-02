@@ -16,6 +16,8 @@ sylius:
             starts_at: Počinje
             usage_limit: Ograničenje
         promotion_action:
+            fixed_discount_configuration:
+                amount: Iznos
             type: Vrsta
         promotion_coupon:
             usage_limit: Ograničenje

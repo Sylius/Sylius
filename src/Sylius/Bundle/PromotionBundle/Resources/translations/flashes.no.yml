@@ -3,7 +3,4 @@
 
 sylius:
     promotion_coupon:
-        eligible: Din kampanjekupong ble lagt til i handlekurven.
         generate: Kampanjekuponger ble generert uten feil.
-        invalid: Din kampanjekupong er ikke gyldig.
-        not_eligible: Din handlekurv er ikke kvalifisert for denne kampanjekupongen.

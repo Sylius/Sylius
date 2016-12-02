@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        cart_save_completed: Krepšelis buvo sėkmingai atnaujintas.
-        item_add_completed: Prekė įdėta į krepšelį.
-        item_remove_completed: Prekė pašalinta iš krepšelio.

@@ -110,6 +110,7 @@ sylius:
         channel: ช่องทางการจัดจำหน่าย
         channels: ช่องทางจำหน่าย
         charges_and_taxes: ค่าธรรมเนียมและภาษี
+        checkbox: ตัวเลือกประเภท Checkbox
         checking_out_as: กำลังชำระเงินด้วย
         checkout: ชำระเงิน
         choose_file: เลือกไฟล์
@@ -214,6 +215,7 @@ sylius:
         dashboard: แดชบอร์ด
         data: ข้อมูล
         date: วันที่
+        datetime: วันที่และเวลา
         default: ค่าเริ่มต้น
         default_address: ที่อยู่เริ่มต้น
         default_billing_address: ค่าเริ่มต้นที่อยู่เรียกเก็บเงิน
@@ -356,6 +358,7 @@ sylius:
         index_of_all_configured_locales: รายการทั้งหมด
         info: ข้อมูล
         information: ข้อมูล
+        integer: เลขจำนวนเต็ม
         inventory: คลังสินค้า
         inventory_here_you_can_see_current_stock_levels: คลังสินค้า <small>คุณสามารถดูสินค้าคงคลังได้ที่นี่</small>
         inventory_index: คลังสินค้า
@@ -557,6 +560,7 @@ sylius:
         pay_again: คลิก "ชำระ (Pay)" อีกครั้ง
         pending: อยู่ระหว่างดำเนินการ
         per_customer_usage_limit: จำกัดตามการใช้งานของลูกค้า
+        percent: เปอร์เซ็นต์
         permissions: สิทธิ์การเข้าถึง
         personal_information: ข้อมูลส่วนบุคคล
         phone_number: หมายเลขโทรศัพท์
@@ -669,7 +673,6 @@ sylius:
         shipping: จัดส่ง
         shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
         shipping_and_payment_methods: วิธีการจัดส่งและชำระเงิน
-        shipping_categories: ประเภทการจัดส่ง
         shipping_category: ประเภทการจัดส่ง
         shipping_charges: ค่าจัดส่ง
         shipping_method: วิธีการจัดส่ง
@@ -723,6 +726,8 @@ sylius:
         taxonomy: การจัดประเภท
         taxons: หมวดหมู่
         terms_and_conditions: ข้อกำหนดและเงื่อนไข
+        text: ข้อความ (Text)
+        textarea: กล่องข้อความ (Textarea)
         thank_you: ขอบคุณ!
         thank_you_for_your_order: ขอบคุณสำหรับการสั่งซื้อ
         theme: ธีม
@@ -790,7 +795,6 @@ sylius:
         usage: การใช้งาน
         usage_limit: ขีดจำกัดการใช้งาน
         used: ใช้
-        user_confirmation_name: ยืนยันการสั่งซื้อ
         user_details: รายละเอียดผู้ใช้
         username: ชื่อผู้ใช้
         users_list_of_all_users_registered_in_store: ผู้ใช้ <small>รายชื่อผู้ใช้ทั้งหมด</small>

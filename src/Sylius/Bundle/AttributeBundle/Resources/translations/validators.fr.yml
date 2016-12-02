@@ -9,6 +9,7 @@ sylius:
             max_length: Le nom d'attribut ne peut pas contenir plus de 1 caractère.|Le nom d'attribut ne peut pas contenir plus de {{ limit }} caractères.
         code:
             not_blank: Entrez le code de l'attribut.
+            regex: Le code de l'attribut peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
             unique: Ce code est déjà utilisé.
         presentation:
             not_blank: Veuillez entrer une description de l'attribut.

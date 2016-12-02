@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Por favor, introduzca el código ISO del país.
+            regex: El código de país solo puede contener letras, números, guiones y guiones bajos.
             unique: Código ISO del país debe ser único.
     province:
         code:
@@ -47,6 +48,7 @@ sylius:
     zone:
         code:
             not_blank: Por favor, introduzca el código de zona.
+            regex: El código de zona solo puede contener letras, números, guiones y guiones bajos.
             unique: El código de zona debe ser único.
         members:
             min_count: Por favor introduzca al menos {{ limit }} miembros de zona.
@@ -57,4 +59,5 @@ sylius:
     zone_member:
         code:
             not_blank: Por favor, elija un miembro de la zona.
+            regex: El código del miembro de zona solo puede contener letras, números, guiones y guiones bajos.
         unique: El miembro de zona elegido ya está en la zona.

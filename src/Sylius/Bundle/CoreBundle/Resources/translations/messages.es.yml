@@ -19,7 +19,6 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Producto
-            customer_group: Grupo de clientes
         promotion_coupon:
             per_customer_usage_limit: Límite de uso por cliente
         group:
@@ -58,7 +57,6 @@ sylius:
         product:
             images: Imágenes
             restricted_zone: Zona restringida
-            shipping_category: Categoría de envío
             short_description: Descripción breve
             variant_selection_method: Método de selección variante
             main_taxon: Taxón principal
@@ -69,6 +67,7 @@ sylius:
             code: Código
         product_variant:
             tax_category: Categoría de impuestos
+            shipping_category: Categoría de envío
         shipment_filter:
             created_at_from: Desde
             created_at_to: Hasta
@@ -121,10 +120,8 @@ sylius:
         product_association_type:
             name: Nombre
         promotion_filter:
-            product:
-                products: Productos
-            taxon:
-                taxons: Taxones
+            products: Filtro de productos
+            taxons: Filtro de taxones
         promotion_rule:
             has_taxon:
                 taxons: Taxones
@@ -196,25 +193,6 @@ sylius:
                 help: 'La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (Lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).'
             version: Versión de PHP
             version_recommended: Versión de PHP recomendada
-    email:
-        order_confirmation:
-            name: Confirmación de pedido
-            content: Tu pedido número %number% se ha completado correctamente.<br/><br/>¡Gracias por comprar en nuestra tienda!
-        order_comment:
-            name: Comentario del pedido
-        shipment_confirmation:
-            name: Confirmación del envío
-            content: Su pedido número %number% ha sido enviado mediante %method%.<br/>Puedes comprobar dónde se encuentra con el código de seguimiento "%tracking%".<br/><br/>Gracias por tu pedido.
-        user_confirmation:
-            name: Confirmación de usuario
-            subject: Bienvenido a nuestra tienda
-            content: Bienvenido a nuestra tienda<br/><br/>Usted se acaba de registrar.<br/>Gracias %username%.
-        password_reset:
-            name: Restablecer contraseña
-            content: <h3>Hola %username%</h3>Para restablecer su contraseña - visite %url% <br/><br/>Atentamente, el equipo.
-        verification:
-            name: Verificación de dirección de correo electrónico
-            content: Para verificar tu correo electrónico, por favor accede a %url%
     payum_gateway:
         cash_on_delivery: Pago contra reembolso
         offline: Desconectado

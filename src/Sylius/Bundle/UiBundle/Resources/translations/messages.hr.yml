@@ -460,7 +460,6 @@ sylius:
         shipments: Pošiljke
         shipped: Poslano
         shipping_address: Adresa za dostavu
-        shipping_categories: Kategorije pošiljki
         shipping_category: Kategorija pošiljke
         shipping_charges: Cijena dostave
         shipping_method: Način dostave
@@ -553,7 +552,6 @@ sylius:
         updating_tax_rate: Ažuriranje porezne stope
         usage_limit: Ograničenje
         used: Iskorišteno
-        user_confirmation_name: Potvrda korisnika
         user_details: Korisnički detalji
         username: Korisničko ime
         users_list_of_all_users_registered_in_store: Korisnici <small>Lista svih registriranih korisnika</small>

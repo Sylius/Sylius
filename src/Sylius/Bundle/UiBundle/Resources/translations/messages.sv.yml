@@ -82,6 +82,7 @@ sylius:
         channel: Kanal
         channels: Kanaler
         charges_and_taxes: Avgifter och skatter
+        checkbox: Kryssruta
         checking_out_as: Kolla in som
         checkout: Kassa
         choose_file: Välj fil
@@ -130,6 +131,7 @@ sylius:
         dashboard: Kontrollpanel
         data: Data
         date: Datum
+        datetime: Datum och tid
         default_billing_address: Standard faktureringsadress
         default_locale: Standardspråk
         delete: Radera
@@ -190,6 +192,7 @@ sylius:
         images: Bilder
         index_metadata: Metadata
         info: Info
+        integer: Heltal
         inventory: Lager
         inventory_index: Lager
         item: Artikel
@@ -273,6 +276,7 @@ sylius:
         payments: Betalningar
         pending: Väntande
         per_customer_usage_limit: Användningsbegränsning per kund
+        percent: Procent
         permissions: Rättigheter
         personal_information: Personuppgifter
         phone_number: Telefonnummer
@@ -352,6 +356,8 @@ sylius:
         taxonomy: Taxonomi
         taxons: Taxa
         terms_and_conditions: Allmänna villkor
+        text: Text
+        textarea: Textfält
         theme: Tema
         title: Titel
         topic: Ämne
@@ -363,7 +369,6 @@ sylius:
         unlimited: Obegränsat
         update_cart: Uppdatera varukorgen
         usage: Användning
-        user_confirmation_name: Användarbekräftelse
         username: Användarnanm
         values: Värden
         variant: Variant

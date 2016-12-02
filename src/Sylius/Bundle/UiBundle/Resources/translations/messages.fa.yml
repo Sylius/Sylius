@@ -98,6 +98,7 @@ sylius:
         channel: کانال فروش
         channels: کانال های فروش
         charges_and_taxes: هزینه و مالیات
+        checkbox: گزینشی
         checkout: پرداخت نشده
         choose_file: انتخاب فایل
         city: شهر
@@ -194,6 +195,7 @@ sylius:
         dashboard: داشبورد
         data: اطلاعات
         date: تاریخ
+        datetime: تاریخ و زمان
         default_billing_address: آدرس پیش فرض صورت حساب
         default_locale: زبان پیش فرض
         default_shipping_address: آدرس پیش فرض تحویل
@@ -296,6 +298,7 @@ sylius:
         index_of_all_configured_locales: فهرست تمام مناطق پیکربندی شده
         info: اطلاعات
         information: اطلاع رسانی
+        integer: عددی
         inventory: موجودی کالا
         inventory_here_you_can_see_current_stock_levels: موجودی کالا <small>در اینجا شما می توانید میزان موجودی کالا را ببینید</small>
         inventory_index: موجودی کالا
@@ -454,6 +457,7 @@ sylius:
         payments: پرداخت‌ها
         pay: پرداخت
         pending: پرداخت منتظر تایید
+        percent: درصدی
         permissions: دسترسی ها
         phone_number: شماره تلفن
         place_order: نهایی کردن خرید
@@ -538,12 +542,11 @@ sylius:
         shipments: ارسال محصول
         shipped: ارسال شده
         shipping_address: آدرس تحویل سفارش
-        shipping_categories: انواع ارسال
         shipping_category: نوع ارسال
         shipping_charges: هزینه ارسال
         shipping_method: شیوه ارسال
         shipping_method_details: جزئیات شیوه ارسال
-        shipping_methods: شیوه های ارسال
+        shipping_methods: روش‌های ارسال
         shipping_state: وضعیت ارسال
         shipping_total: هزینه ارسال
         shop_by: خرید با
@@ -579,6 +582,8 @@ sylius:
         taxation_settings: تنظیمات مالیات
         taxes: مالیات
         taxons: دسته بندی ها
+        text: متنی
+        textarea: متن طولانی
         thank_you_for_your_order: از سفارش شما سپاسگزاریم
         theme: قالب
         there_are_no_attributes_configured: قابلیتی پیکربندی نشده
@@ -638,7 +643,6 @@ sylius:
         updating_tax_rate: ویرایش نرخ مالیات
         usage_limit: محدودیت استفاده
         used: استفاده شده
-        user_confirmation_name: تایید کاربر
         user_details: اطلاعات کاربر
         username: نام کاربری
         users_list_of_all_users_registered_in_store: کاربران <small> لیست همه کاربران ثبت شده در این فروشگاه </small>

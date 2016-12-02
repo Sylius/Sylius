@@ -18,8 +18,7 @@ sylius:
             usage_limit: Limite de utilização
         promotion_action:
             fixed_discount_configuration:
-                amounts: Valores
-                base_amount: Valor base
+                amount: Quantia
             percentage_discount_configuration:
                 percentage: Percentagem
             type: Tipo

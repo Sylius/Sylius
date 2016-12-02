@@ -19,7 +19,6 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Produto
-            customer_group: Grupo de clientes
         group:
             name: Nome
             roles: Funções
@@ -56,7 +55,6 @@ sylius:
         product:
             images: Imagens
             restricted_zone: Zona restrita
-            shipping_category: Categoria de transporte
             short_description: Descrição breve
             variant_selection_method: Método de seleção de variantes
             main_taxon: Táxon principal
@@ -67,6 +65,7 @@ sylius:
             code: Código
         product_variant:
             tax_category: Categoria de imposto
+            shipping_category: Categoria de transporte
         shipment_filter:
             created_at_from: De
             created_at_to: Para
@@ -118,9 +117,6 @@ sylius:
             type: Tipo de associação
         product_association_type:
             name: Nome
-        promotion_filter:
-            product:
-                products: Produtos
         promotion_rule:
             product:
                 products: Produtos
@@ -175,24 +171,6 @@ sylius:
             short_open_tag: short_open_tag
             timezone: fuso horário
             version: Versão de PHP
-    email:
-        order_confirmation:
-            name: Confirmação de encomenda
-        order_comment:
-            name: Comentário de encomenda
-        shipment_confirmation:
-            name: Confirmação de envio
-            content: A encomenda nº%number% foi enviada por %method%.<br />Pode verificar a sua localização com o código %tracking%.<br /><br />Obrigado pela preferência.
-        user_confirmation:
-            name: Confirmação do utilizador
-            subject: Bem-vindo à nossa loja
-            content: Bem-vindo à nossa loja, %username%.<br/> <br/>Acabou de se registar.
-        password_reset:
-            name: Redefinir palavra-passe
-            content: <h3>Olá %username%</h3> Para redefinir a sua palavra-passe, por favor visite %url% <br/> <br/>Obrigado.
-        verification:
-            name: Verificação de endereço de e-mail
-            content: Para verificar o seu endereço de e-mail, por favor visite %url%
     payum_gateway:
         cash_on_delivery: Pagamento na entrega
         offline: Offline

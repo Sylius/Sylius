@@ -3,7 +3,4 @@
 
 sylius:
     promotion_coupon:
-        eligible: Kuponi yt i promocionit u shtua në kartë.
         generate: Kuponat e promocionit u gjeneruan me sukses.
-        invalid: Kuponi yt i promocionit nuk është i vlefshëm.
-        not_eligible: Karta jote nuk është e përshtatshme për këtë kupon promocioni.

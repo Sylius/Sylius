@@ -35,5 +35,5 @@ sylius:
             min_length: De naam van het gerelateerde type moet minimaal 1 teken bevatten. | De gerelateerde type naam moet ten minste {{ limit }} tekens bevatten.
             max_length: De naam van de associatie mag niet langer zijn dan 1 teken.|De naam van de associatie mag niet langer zijn dan {{ limit }} tekens.
         code:
-            unique: De associatie met de gegeven code bestaat al.
             not_blank: Voer a.u.b. een een code in voor het associatietype.
+            unique: De associatie met de gegeven code bestaat al.

@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        cart_save_completed: تم بنجاح تحديث العربة.
-        item_add_completed: تم إضافة العنصر إلى عربة التسوق.
-        item_remove_completed: وقد تم إزالة العنصر من سلة.

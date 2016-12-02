@@ -13,9 +13,6 @@ sylius:
         onHand:
             min: Na voljo mora biti večje od {{ limit }}.
             not_blank: Prosimo, vnesite na voljo.
-        price:
-            min: Cena ne sme biti negativna.
-            not_blank: Prosimo, vnesite ceno.
         original_price:
             min: Prvotna cena ne sme biti negativna.
     product_translation:

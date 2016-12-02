@@ -12,6 +12,7 @@ sylius:
         add_province: Tambah Provinsi
         billing_address: Alamat Penagihan
         body: Body
+        channels: Saluran
         city: Kota
         code: Kode
         company: Perusahaan
@@ -34,17 +35,22 @@ sylius:
         name: Nama
         number: Nomor
         password: Kata sandi
+        payment_methods: Metode Pembayaran
         phone_number: Nomor telepon
         postcode: Kode pos
         presentation: Presentasi
         price: Harga
+        products: Produk
         province: Provinsi
         provinces: Provinsi
         roles: Peran
+        rules: Aturan
         scope: Lingkup
         search: Cari
         shipping_address: Alamat pengiriman
+        shipping_categories: Kategori Pengiriman
         shipping_category: Kategori Pengiriman
+        shipping_methods: Metode Pengiriman
         sku: SKU
         street: Alamat
         tax_category: Kategori Pajak

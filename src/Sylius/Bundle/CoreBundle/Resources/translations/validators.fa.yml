@@ -30,9 +30,6 @@ sylius:
         onHand:
             min: میزان موجودی باید بیشتر از {{ limit }} باشد.
             not_blank: لطفا میزان موجودی را وارد کنید.
-        price:
-            min: قیمت نمی تواند منفی باشد.
-            not_blank: لطفا قیمت را وارد کنید.
         original_price:
             min: قیمت ابتدایی نمی تواند منفی باشد.
     product_translation:

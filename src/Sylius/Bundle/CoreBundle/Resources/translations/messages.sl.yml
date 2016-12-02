@@ -53,7 +53,6 @@ sylius:
         product:
             images: Slike
             restricted_zone: Območje z omejitvami
-            shipping_category: Kategorija dostave
             short_description: Kratek opis
             variant_selection_method: Način izbora variante
             main_taxon: Glavni takson
@@ -63,6 +62,7 @@ sylius:
             code: Koda
         product_variant:
             tax_category: Kategorija davka
+            shipping_category: Kategorija dostave
         shipment_filter:
             created_at_from: Od
             created_at_to: Za
@@ -165,15 +165,3 @@ sylius:
                 header: Opuščeni časovni pas
                 help: 'Časovni pas %timezone% je opuščen. Popravite vašo datoteko php.ini (seznam opuščenih časovni pasov http://php.net/manual/en/timezones.others.php).'
             version: Različica PHP
-    email:
-        order_confirmation:
-            name: Potrditev naročila
-        order_comment:
-            name: Opombe pri naročilu
-        shipment_confirmation:
-            name: Potrditev pošiljke
-        user_confirmation:
-            name: Potrditev uporabnika
-            subject: Dobrodošli v naši trgovini
-        password_reset:
-            name: Ponastavitev gesla

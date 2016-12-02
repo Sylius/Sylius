@@ -19,9 +19,6 @@ sylius:
         onHand:
             min: Atsargos turi būti didesnės nei {{ limit }}.
             not_blank: Įveskite atsargas.
-        price:
-            min: Kaina negali būti neigiama.
-            not_blank: Įveskite kainą.
         original_price:
             min: Pradinė kaina negali būti neigiama.
     product_translation:

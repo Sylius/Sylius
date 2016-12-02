@@ -48,7 +48,6 @@ sylius:
         product:
             images: Slike
             restricted_zone: Ograničena zona pristupa
-            shipping_category: Kategorija pošiljke
             short_description: Kratak opis
             variant_selection_method: Način odabira varijante
             channels: Kanali
@@ -58,6 +57,7 @@ sylius:
             code: ISO kod
         product_variant:
             tax_category: Kategorija artikla
+            shipping_category: Kategorija pošiljke
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
@@ -159,13 +159,3 @@ sylius:
                 header: Zastarjela vremenska zona
                 help: 'Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).'
             version: Verzija PHP-a
-    email:
-        order_confirmation:
-            name: Potvrda narudžbe
-        order_comment:
-            name: Komentar na narudžbu
-        shipment_confirmation:
-            name: Potvrda dostave
-        user_confirmation:
-            name: Potvrda korisnika
-            subject: Dobrodošli na našu trgovinu

@@ -3,6 +3,4 @@
 
 sylius:
     payment:
-        complete: Betaling is voltooid.
-        cancel: Betaling is geannuleerd.
-        transition_fail: De actie kon niet worden uitgevoerd gezien de huidige stand van betaling
+        refunded: Betaling is succesvol gestorneerd.

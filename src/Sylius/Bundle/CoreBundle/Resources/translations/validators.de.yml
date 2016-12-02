@@ -28,11 +28,19 @@ sylius:
         onHand:
             min: Menge muss größer sein als {{ limit }}.
             not_blank: Bitte verfügbare Menge eingeben.
-        price:
-            min: Preis darf nicht negativ sein.
-            not_blank: Bitte Preis eingeben.
         original_price:
             min: Ursprünglicher Preis darf nicht negativ sein.
+        weight:
+            invalid: Gewicht muss eine Zahl sein.
+        width:
+            min: Breite darf nicht negativ sein.
+            invalid: Breite muss eine Zahl sein.
+        height:
+            min: Höhe darf nicht negativ sein.
+            invalid: Gewicht muss eine Zahl sein.
+        depth:
+            min: Tiefe kann nicht negativ sein.
+            invalid: Tiefe muss eine Zahl sein.
     product_translation:
         short_description:
             max: Kurzbeschreibung darf nicht länger als {{ limit }} Zeichen sein.
@@ -40,6 +48,9 @@ sylius:
         code:
             not_blank: Bitte geben Sie einen Bild-Code an.
             unique: Bild-Code muss innerhalb dieser Produktgruppe eindeutig sein.
+        file:
+            max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
+            upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.
     user:
         email:
             unique: Diese E-Mail-Adresse wird bereits verwendet.

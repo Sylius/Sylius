@@ -5,4 +5,5 @@ sylius:
     locale:
         code:
             not_blank: Por favor, elija el código del idioma.
-            unique: El código local debe ser único.
+            regex: El código del idioma solo puede contener letras, números, guiones y guiones bajos.
+            unique: El código de idioma debe ser único.

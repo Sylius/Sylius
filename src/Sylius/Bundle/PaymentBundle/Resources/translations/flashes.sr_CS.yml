@@ -3,5 +3,4 @@
 
 sylius:
     payment:
-        complete: Betaling gennemført.
-        cancel: Betaling annulleret.
+        refunded: Uplata je uspešno refundirana.

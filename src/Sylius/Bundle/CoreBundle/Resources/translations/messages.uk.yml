@@ -55,7 +55,6 @@ sylius:
         product:
             images: Зображення
             restricted_zone: Заборонена зона
-            shipping_category: Категорія доставки
             short_description: Короткий опис
             variant_selection_method: Метод вибору варіанту
             main_taxon: Основний таксон
@@ -66,6 +65,7 @@ sylius:
             code: Код
         product_variant:
             tax_category: Категорія податку
+            shipping_category: Категорія доставки
         shipment_filter:
             created_at_from: Від
             created_at_to: До
@@ -117,9 +117,6 @@ sylius:
             type: Тип асоціювання
         product_association_type:
             name: Назва
-        promotion_filter:
-            product:
-                products: Продукція
         promotion_rule:
             product:
                 products: Продукція
@@ -184,25 +181,6 @@ sylius:
                 help: 'Часовий пояс %timezone% застарілий. Виправте ваш файл php.ini (перелік застарілих часових поясів http://php.net/manual/en/timezones.others.php).'
             version: Версія PHP
             version_recommended: Рекомендована версія PHP
-    email:
-        order_confirmation:
-            name: Підтвердження замовлення
-            content: Ваше замовлення № %number% було успішно розміщено.<br/><br/>Дякуємо вам за купівлю в нашій крамниці!
-        order_comment:
-            name: Коментар до замовлення
-        shipment_confirmation:
-            name: Підтвердження відправки товару
-            content: Ваше замовлення № %number% було відправлено за допомогою %method%.<br/>Ви можете перевіряти його розташування за допомогою коду відстеження "%tracking%".<br/><br/>Дякуємо вам за успішну угоду.
-        user_confirmation:
-            name: Підтвердження користувача
-            subject: Ласкаво просимо до нашої крамниці
-            content: Ласкаво просимо до нашої крамниці<br/><br/>Ви тільки-но зареєструвались.<br/>Дякуємо вам, %username%.
-        password_reset:
-            name: Відновлення паролю
-            content: <h3>Вітаємо, %username%</h3>Аби відновити ваш пароль - будь ласка, перейдіть за посиланням %url%<br/><br/>З повагою, команда крамниці.
-        verification:
-            name: Перевірка адреси електронної пошти
-            content: Для того, щоб підтвердити вашу адресу електронної пошти - будь ласка, перейдіть за посиланням %url%
     payum_gateway:
         cash_on_delivery: Накладений платіж
         offline: Автономний

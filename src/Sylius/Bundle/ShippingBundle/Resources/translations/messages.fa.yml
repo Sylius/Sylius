@@ -22,23 +22,9 @@ sylius:
             flat_rate_configuration:
                 label: نرخ ثابت به ازای هر ارسال
                 amount: مقدار
-            flexible_rate_configuration:
-                label: نرخ متغیر
-                additional_unit_cost: هزینه واحد اضافی
-                additional_unit_limit: حد مجاز واحدهای اضافی
-                first_unit_cost: هزینه ی اولین سفارش
             per_unit_rate_configuration:
                 label: هزینه ی ثابت به ازای هر سفارش
                 amount: مقدار
-            weight_rate_configuration:
-                label: هزینه ی ارسال به ازای وزن محصول
-                fixed: هزیه ی ثابت
-                variable: هزینه متغیر
-                division: معیار وزن (به عنوان مثال هر ۲ کیلوگرم)
-            volume_rate_configuration:
-                label: هزینه ارسال محصول به ازای حجم سفارش
-                amount: مقدار
-                division: معیار وزن (به عنوان مثال هر ۲ کیلوگرم)
         shipping_category:
             description: شرح
             name: نام

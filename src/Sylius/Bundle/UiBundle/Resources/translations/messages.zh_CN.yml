@@ -83,6 +83,7 @@ sylius:
         channel: 頻道
         channels: 频道
         charges_and_taxes: 费和税
+        checkbox: 复选框
         checkout: 结账
         choose_file: 选择文件
         city: 城市
@@ -177,6 +178,7 @@ sylius:
         dashboard: 仪表板
         data: 数据
         date: 日期
+        datetime: 日期
         default_billing_address: 默认帐单地址
         default_locale: 默认区域
         default_shipping_address: 默认的送货地址
@@ -291,6 +293,7 @@ sylius:
         index_of_all_configured_locales: 全部已配置的区域
         info: 信息
         information: 信息
+        integer: 整数
         inventory: 库存
         inventory_here_you_can_see_current_stock_levels: 库存，<small>在这里你可以看到当前的库存水平</small>
         inventory_index: 库存
@@ -455,12 +458,13 @@ sylius:
         payment: 付款
         payment_details: 付款详情
         payment_method: 付款方式：
-        payment_methods: 支付方式
+        payment_methods: 付款方法
         payment_mode: 付款模式
         payment_state: 付款状态
         payments: 付款
         pending: 等待中
         per_customer_usage_limit: 每位客户使用限制
+        percent: 百分比
         permissions: 权限
         phone_number: 电话
         place_order: 下订单
@@ -550,7 +554,6 @@ sylius:
         shipments: 发货
         shipped: 已发货
         shipping_address: 送货地址
-        shipping_categories: 发货类别
         shipping_category: 送货类别
         shipping_charges: 运费
         shipping_method: 发货方式
@@ -595,6 +598,8 @@ sylius:
         taxes: 税
         taxonomy: 分类
         terms_and_conditions: 服务条款
+        text: 文字
+        textarea: 多行文本框
         thank_you_for_your_order: 感谢您的下单。
         theme: 主题
         there_are_no_attributes_configured: 没有配置任何属性
@@ -656,7 +661,6 @@ sylius:
         updating_tax_rate: 更新税率
         usage: 统计
         used: 已被使用
-        user_confirmation_name: 用户确认
         user_details: 用户详情
         username: 用户名
         users_list_of_all_users_registered_in_store: 用户 <small>在该店铺中注册的所有用户列表</small>

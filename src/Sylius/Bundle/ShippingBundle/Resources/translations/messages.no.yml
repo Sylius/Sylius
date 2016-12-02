@@ -16,11 +16,6 @@ sylius:
                 returned: Returnert
                 cancelled: Avbrutt
             tracking_code: Sporingskode
-        shipping_calculator:
-            weight_rate_configuration:
-                division: Avdeling
-            volume_rate_configuration:
-                division: Avdeling
         shipping_category:
             description: Beskrivelse
             name: Navn

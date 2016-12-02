@@ -31,6 +31,7 @@ sylius:
         cancel: Otkaži
         categorization: Kategorizacija
         channels: Kanali
+        checkbox: Polje za potvrdu
         choose_file: Fajl
         city: Grad
         clear_cart: Izpraznite korpu
@@ -65,6 +66,7 @@ sylius:
         customers: Kupci
         dashboard: Komandna Tabla
         date: Datum
+        datetime: Datum i vreme
         default_billing_address: Podrazumevana adresa plaćanja
         default_shipping_address: Podrazumevana adresa isporuke
         delete: Obrisati
@@ -96,6 +98,7 @@ sylius:
         grand_total: Sveukupno
         id: ID
         information: Obaveštenje
+        integer: Ceo broj
         inventory_here_you_can_see_current_stock_levels: Lager <small>Pregled stanja zaliha</small>
         inventory_state: stanje zaliha
         inventory_tracking: Pracenje zaliha
@@ -159,8 +162,10 @@ sylius:
         orders: Narudžbine
         out_of_stock: Nema na lageru
         overview_of_your_store: Pregled prodavnice
+        payment_methods: Načini plaćanja
         payment_state: Stanje plaćanja
         payments: Plaćanja
+        percent: Procenat
         phone_number: Broj telefona
         place_order: Kreirajte narudžbinu
         postcode: Poštanski broj
@@ -192,10 +197,10 @@ sylius:
         shipment_details: Detalji pošiljke
         shipment_state: Stanje pošiljke
         shipments: Pošiljke
-        shipping_categories: Kategorije slanja
         shipping_charges: Cena isporuke
         shipping_method: Način dostave
         shipping_method_details: Detalji nalina dostave
+        shipping_methods: Načini dostave
         shipping_state: Stanje pošiljke
         shipping_total: Ukupno isporuka
         shop_by: Kupujte po
@@ -210,6 +215,8 @@ sylius:
         taxation_categories: Kategorije poreza
         taxation_settings: Podešavanja poreza
         taxes: Porezi
+        text: Тekst
+        textarea: Polje za tekst
         there_are_no_images_for_this_product: Nema slika za ovaj proizvod
         there_are_no_options_for_this_product: Nema opcija za ovaj proizvod
         there_are_no_taxons_for_this_product: sylius.product.no_taxons

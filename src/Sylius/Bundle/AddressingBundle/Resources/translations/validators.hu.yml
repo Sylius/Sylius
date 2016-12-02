@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Kérlek add meg az ország ISO kódját.
+            regex: Ország kód csak álló betűket, számokat, kötőjeleket és aláhúzásjeleket tartalmazhat.
             unique: Az ország ISO kódjának egyedinek kell lennie.
     province:
         code:
@@ -47,6 +48,7 @@ sylius:
     zone:
         code:
             not_blank: Kérlek add meg a zóna kódot.
+            regex: Övezet tagja kód csak álló betűket, számokat, kötőjelek és aláhúzásjelek tartalmazhat.
             unique: A zóna kódnak egyedinek kell lennie.
         members:
             min_count: Kérjük, hogy adjon meg legalább {{limit}} zóna tagot.
@@ -57,4 +59,5 @@ sylius:
     zone_member:
         code:
             not_blank: Kérlek válassz egy zóna tagot.
+            regex: Övezet tagja kód csak álló betűket, számokat, kötőjeleket és aláhúzásjelekettartalmazhat.
         unique: A választott zóna tag már a zónában van.

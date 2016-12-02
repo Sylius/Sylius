@@ -21,11 +21,6 @@ sylius:
                 amount: Iznos
             per_unit_rate_configuration:
                 amount: Iznos
-            weight_rate_configuration:
-                division: Odjel
-            volume_rate_configuration:
-                amount: Iznos
-                division: Odjel
         shipping_category:
             description: Opis
             name: Naziv

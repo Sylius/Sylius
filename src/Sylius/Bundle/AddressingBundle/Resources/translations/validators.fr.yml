@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Veuillez entrer le code ISO du pays.
+            regex: Le code du pays peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
             unique: Le code ISO du pays doit être unique.
     province:
         code:
@@ -47,14 +48,16 @@ sylius:
     zone:
         code:
             not_blank: Merci de saisir le code de la zone.
+            regex: Le code de la zone doit uniquement comprendre des lettres, chiffres, tirets et de tirets bas.
             unique: Le code de la zone doit être unique.
         members:
             min_count: Veuillez ajouter au moins {{limit}} zone(s) membre(s).
         name:
             max_length: Le nom de la zone ne doit pas dépasser les 255 caractères.
-            min_length: Le nom doit comporter au moins 2 caractères|Le nom doit comporter au moins 2 caractères.
+            min_length: Le nom de la zone doit comporter au moins 2 caractères.
             not_blank: Veuillez fournir le nom de la zone.
     zone_member:
         code:
             not_blank: Merci de choisir un membre de la zone.
+            regex: Le code de la zone du membre peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
         unique: Le membre choisi fait déjà partie de cette zone.

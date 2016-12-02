@@ -19,7 +19,6 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Produkt
-            customer_group: Grupa klientów
         promotion_coupon:
             per_customer_usage_limit: Limit użycia na 1 klienta
         group:
@@ -58,7 +57,6 @@ sylius:
         product:
             images: Zdjęcia
             restricted_zone: Strefa
-            shipping_category: Kategoria wysyłki
             short_description: Krótki opis
             variant_selection_method: Metody wyboru wariantu
             main_taxon: Główne grupy
@@ -69,6 +67,7 @@ sylius:
             code: Kod
         product_variant:
             tax_category: Kategoria podatkowa
+            shipping_category: Kategoria wysyłki
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
@@ -120,9 +119,6 @@ sylius:
             type: Rodzaj powiązania
         product_association_type:
             name: Nazwa
-        promotion_filter:
-            product:
-                products: Produkty
         promotion_rule:
             product:
                 products: Produkty
@@ -190,25 +186,6 @@ sylius:
                 help: 'Strefa czasowa %timezone% jest przestarzała. Popraw wpis w pliku php.ini (lista przestarzałych stref czasowych: http://php.net/manual/en/timezones.others.php).'
             version: Wersja PHP
             version_recommended: Rekomendowana wersja PHP
-    email:
-        order_confirmation:
-            name: Potwierdzenie zamówienia
-            content: Twoje zamówienie nr %number% zostało złożone.<br/> <br/> Dziękujemy za zakupy w naszym sklepie!
-        order_comment:
-            name: Uwagi dotyczące zamówienia
-        shipment_confirmation:
-            name: Potwierdzenie dostawy
-            content: Twoje zamówienie nr %number% zostało wysłane przy użyciu %method%. <br/> Możesz je namierzyć korzystając z kodu śledzenia "%tracking%". <br/> <br/> Dziękujemy za udaną transakcję.
-        user_confirmation:
-            name: Potwierdzenia przez użytkownika
-            subject: Zapraszamy do naszego sklepu
-            content: Zapraszamy do naszego sklepu <br/> <br/> Twoja rejestracja przebiegła pomyślnie. <br/> Dziękujemy %username%.
-        password_reset:
-            name: Resetowanie hasła
-            content: <h3>Witaj %username%</h3> Aby ustawić nowe hasło, odwiedź %url% <br/> <br/> Pozdrawiamy, zespół.
-        verification:
-            name: Weryfikacja adresu e-mail
-            content: Aby zweryfikować swój adres e-mail - proszę odwiedzić %url%
     payum_gateway:
         cash_on_delivery: Opłata za pobraniem
         offline: Tryb offline

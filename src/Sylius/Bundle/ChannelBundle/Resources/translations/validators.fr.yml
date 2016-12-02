@@ -5,6 +5,7 @@ sylius:
     channel:
         code:
             not_blank: Veuillez entrer le code du canal.
+            regex: Le code du canal peut uniquement être constitué de lettres, chiffres, tirets et de tirets bas.
             unique: Le code du canal doit être unique.
         name:
             not_blank: Veuillez saisir le nom du canal.

@@ -110,6 +110,7 @@ sylius:
         channel: Canal
         channels: Canais
         charges_and_taxes: Encargos e impostos
+        checkbox: Caixa de verificação
         checking_out_as: Encomendar como
         checkout: Finalizar compra
         choose_file: Escolha um arquivo
@@ -194,6 +195,7 @@ sylius:
         dashboard: Painel de Instrumentos
         data: Dados
         date: Data
+        datetime: DateTime
         default_billing_address: Endereço de cobrança padrão
         default_locale: Localidade padrão
         default_shipping_address: Endereço de envio padrão
@@ -301,6 +303,7 @@ sylius:
         index_metadata: Metadados
         info: Informação
         information: Info
+        integer: Número inteiro
         inventory: Inventário
         inventory_here_you_can_see_current_stock_levels: Inventário<small>Aqui pode verificar a disponibilidade de cada produto</small>
         inventory_index: Inventário
@@ -422,6 +425,7 @@ sylius:
         pay: Pagar
         pay_again: Clique em pagar para tentar novamente
         pending: Pendente
+        percent: Percentagem
         permissions: Permissões
         phone_number: Número de Telefone
         place_order: Fazer pedido
@@ -485,7 +489,6 @@ sylius:
         shipments: Envios
         shipped: Enviado
         shipping_address: Endereço de entrega
-        shipping_categories: Categorias de envio
         shipping_category: Categoria de transporte
         shipping_charges: Taxas de envio
         shipping_method: Método de envio
@@ -510,6 +513,8 @@ sylius:
         taxation_categories: Categorias de tributação
         taxation_settings: Configurações de taxas
         taxes: Taxas
+        text: Texto
+        textarea: Área de texto
         theme: Aparência
         there_are_no_images_for_this_product: Não há imagens para este produto
         there_are_no_options_for_this_product: Não há opções para este produto
@@ -526,7 +531,6 @@ sylius:
         updating_tax_rate: Atualizar imposto
         usage_limit: Limite de utilização
         used: Utilizado
-        user_confirmation_name: Confirmação do utilizador
         user_details: Detalhes do usuários
         username: Login
         users_list_of_all_users_registered_in_store: Usuários <small>Lista de todos os usuários cadastros na loja</small>

@@ -11,15 +11,17 @@ sylius:
                     header: Каталог
                     options: Список опций
                     products: Товары
-                    taxons: Налоги
+                    taxons: Таксоны
                 configuration:
                     admin_users: Администраторы
                     channels: Каналы
                     countries: Страны
                     currencies: Валюты
+                    exchange_rates: Курсы валют
                     header: Конфигурация
                     locales: Языки
                     payment_methods: Способы оплаты
+                    shipping_categories: Категории доставки
                     shipping_methods: Способы доставки
                     tax_categories: Список налоговых категорий
                     tax_rates: Налоговые ставки

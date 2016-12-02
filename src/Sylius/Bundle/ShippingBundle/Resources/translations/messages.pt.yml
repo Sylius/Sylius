@@ -22,23 +22,9 @@ sylius:
             flat_rate_configuration:
                 label: Taxa fixa por envio
                 amount: Quantia
-            flexible_rate_configuration:
-                label: Taxa flexível
-                additional_unit_cost: Custo por unidade adicional
-                additional_unit_limit: Limite de unidades adicionais
-                first_unit_cost: Custo da primeira unidade
             per_unit_rate_configuration:
                 label: Taxa fixa por unidade
                 amount: Quantia
-            weight_rate_configuration:
-                label: Taxa por peso
-                fixed: Montante fixo
-                variable: Montante variável
-                division: Divisão
-            volume_rate_configuration:
-                label: Taxa com base no volume
-                amount: Quantia
-                division: Divisão
         shipping_category:
             description: Descrição
             name: Nome

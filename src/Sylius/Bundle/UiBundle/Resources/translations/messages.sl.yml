@@ -68,6 +68,7 @@ sylius:
         change_your_password: Spremenite vaše geslo
         channel: Kanal
         channels: Kanali
+        checkbox: Potrdilno polje
         checkout: Plačilo
         choose_file: Izberite datoteko
         city: Mesto
@@ -153,6 +154,7 @@ sylius:
         dashboard: Nadzorna plošča
         data: Podatki
         date: Datum
+        datetime: Datum in čas
         default_billing_address: Privzeti naslov za izstavitev računa
         default_locale: Privzeto območje
         default_shipping_address: Privzeti naslov za pošiljanje
@@ -237,6 +239,7 @@ sylius:
         index_metadata: Metapodatki
         index_of_all_configured_locales: Indeks vseh konfiguriranih področnih nastavitev
         information: Informacije
+        integer: Celo število
         inventory: Inventar
         inventory_here_you_can_see_current_stock_levels: Zaloga <small>Tukaj lahko vidite trenutne ravni zaloge</small>
         inventory_index: Inventar
@@ -362,11 +365,12 @@ sylius:
         payment: Plačilo
         payment_details: Podrobnosti o plačilu
         payment_method: Način plačila
-        payment_methods: Načini plačil
+        payment_methods: Načini plačila
         payment_mode: Način plačila
         payment_state: Stanje plačila
         payments: Plačila
         pending: Na čakanju
+        percent: Odstotki
         permissions: Dovoljenja
         phone_number: Telefonska številka
         place_order: Oddaj naročilo
@@ -442,7 +446,6 @@ sylius:
         shipments: Pošiljke
         shipped: Poslano
         shipping_address: Naslov za dostavo
-        shipping_categories: Kategorije dostave
         shipping_category: Kategorija dostave
         shipping_charges: Stroški dostave
         shipping_method: Način dostave
@@ -478,6 +481,8 @@ sylius:
         taxation_categories: Kategorije obdavčitev
         taxation_settings: Nastavitve obdavčitve
         taxes: Davki
+        text: Tekst
+        textarea: Besedilno polje
         thank_you_for_your_order: Hvala za vaše naročilo
         theme: Tema
         there_are_no_attributes_configured: Na voljo ni nobenega nastavljenega atributa
@@ -536,7 +541,6 @@ sylius:
         update_product_association_type: Posodobite vrsto povezave izdelka
         updating_tax_rate: Posodabljanje davčne stopnje
         used: Uporabljeno
-        user_confirmation_name: Potrditev uporabnika
         user_details: Podrobnosti uporabnika
         username: Uporabniško ime
         users_list_of_all_users_registered_in_store: Uporabniki <small>Seznam vseh registriranih uporabnikov v trgovini</small>

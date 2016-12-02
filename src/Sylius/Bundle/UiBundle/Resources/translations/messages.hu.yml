@@ -96,6 +96,7 @@ sylius:
         channel: Csatorna
         channels: Csatornák
         charges_and_taxes: Díjak és adók
+        checkbox: Jelölőnégyzet
         checking_out_as: Fizetés mint
         checkout: Fizetés
         choose_file: Válassza ki a fájlt
@@ -194,6 +195,7 @@ sylius:
         dashboard: Vezérlőpult
         data: Adatok
         date: Dátum
+        datetime: Dátum/idő
         default_billing_address: Alapértelmezett számlázási cím
         default_locale: Alapértelmezett nyelv
         default_shipping_address: Alapértelmezett szállítási cím
@@ -316,6 +318,7 @@ sylius:
         index_of_all_configured_locales: Az összes konfigurált terület indexelése
         info: Információ
         information: Információk
+        integer: Egész szám
         inventory: Leltár
         inventory_here_you_can_see_current_stock_levels: Leltár <small>Az aktuális raktárkészlet</small>
         inventory_index: Leltár
@@ -497,6 +500,7 @@ sylius:
         pay_again: Kattints a fietésre az újrapróbálkozáshoz
         pending: Függőben
         per_customer_usage_limit: Vásárlónkénti felhasználási limit
+        percent: Százalék
         permissions: Engedélyek
         personal_information: Személyes információk
         phone_number: Telefonszám
@@ -597,7 +601,6 @@ sylius:
         shipping: Szállítás
         shipping_address: Szállítási cím
         shipping_and_payment_methods: Szállítási és fizetési módszerek
-        shipping_categories: Szállítási kategóriák
         shipping_category: Szállítási kategória
         shipping_charges: Szállítási díjak
         shipping_method: Szállítási mód
@@ -644,6 +647,8 @@ sylius:
         taxes: Adók
         taxonomy: Taxonómia
         terms_and_conditions: Felhasználási feltételek
+        text: Szöveg
+        textarea: Szövegmező
         thank_you: Köszönjük!
         thank_you_for_your_order: Köszönjük a rendelését
         theme: Téma
@@ -709,7 +714,6 @@ sylius:
         usage: Használat
         usage_limit: Felhasználhatóság korlátozása
         used: Használt
-        user_confirmation_name: Felhasználói megerősítés
         user_details: Felhasználói adatok
         username: Felhasználónév
         users_list_of_all_users_registered_in_store: Felhasználók <small>Az áruházban regisztált felhasználók</small>

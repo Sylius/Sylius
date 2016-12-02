@@ -55,7 +55,6 @@ sylius:
         product:
             images: Imagens
             restricted_zone: Zona restrita
-            shipping_category: Categoria de expedição
             short_description: Breve descrição
             variant_selection_method: Método de seleção da variação
             main_taxon: Táxon principal
@@ -66,6 +65,7 @@ sylius:
             code: Código
         product_variant:
             tax_category: Categoria de imposto
+            shipping_category: Categoria de expedição
         shipment_filter:
             created_at_from: De
             created_at_to: Para
@@ -178,25 +178,6 @@ sylius:
                 help: 'Fuso horário %timezone% está obsoleto. Corrija o seu arquivo php. ini (lista de fusos horários preterido http://php.net/manual/en/timezones.others.php).'
             version: Versão do PHP
             version_recommended: Versão recomendada do PHP
-    email:
-        order_confirmation:
-            name: Confirmação de compra
-            content: Seu pedido no. %number% foi recebido com sucesso.<br/><br/>Obrigado por comprar em nossa loja!
-        order_comment:
-            name: Comentários do pedido
-        shipment_confirmation:
-            name: Confirmação de postagem
-            content: Seu pedido n º %number% foi enviado usando o %method%. <br/> Você pode verificar a sua localização com o código de rastreamento "%tracking%". <br/> <br/> Obrigado poela preferência.
-        user_confirmation:
-            name: Confirmação do usuário
-            subject: Bem-vindo à nossa loja
-            content: Bem-vindo à nossa loja <br/> <br/> você acaba de ser registrado. <br/> Obrigado %username%.
-        password_reset:
-            name: Redefinir a senha
-            content: <h3>Olá %username%</h3> Para resetar sua senha - por favor, visite %url% <br/> <br/> Atenciosamente, equipe.
-        verification:
-            name: Verificação de endereço de e-mail
-            content: Para verificar o seu endereço de e-mail - por favor, visite %url%
     payum_gateway:
         cash_on_delivery: Pagamento em dinheiro na entrega
         offline: Desconectado

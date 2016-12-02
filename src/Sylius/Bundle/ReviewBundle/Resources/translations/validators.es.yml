@@ -6,7 +6,7 @@ sylius:
         author:
             already_exists: Este email ya está registrado, por favor ingresa o utiliza la opción de recuperación de contraseña.
         comment:
-            not_blank: El comentario de la revisión no debe estar vacío.
+            not_blank: El comentario de la reseña no debe estar vacío.
         rating:
             not_blank: Debe comprobar la valoración de la reseña.
         title:

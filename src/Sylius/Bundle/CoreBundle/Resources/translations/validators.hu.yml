@@ -19,9 +19,6 @@ sylius:
         onHand:
             min: A készletnek nagyobbnak kell lenni mint {{ limit }}.
             not_blank: Kérjük, adja meg a készletet.
-        price:
-            min: Az ár nem lehet negatív szám.
-            not_blank: Kérjük, írja be az árat.
         original_price:
             min: Az eredeti ár nem lehet negatív.
     product_translation:

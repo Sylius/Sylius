@@ -38,7 +38,6 @@ sylius:
         product:
             images: Εικόνες
             restricted_zone: Απαγορευμένη ζώνη
-            shipping_category: Κατηγορία αποστολής
             short_description: Σύντομη περιγραφή
             variant_selection_method: Μέθοδος επιλογής παραλλαγής
             enabled: Ενεργοποιημένο
@@ -47,6 +46,7 @@ sylius:
             code: Κώδικος
         product_variant:
             tax_category: Φορολογική κατηγορία
+            shipping_category: Κατηγορία αποστολής
         shipment_filter:
             created_at_from: Από
             created_at_to: Προς

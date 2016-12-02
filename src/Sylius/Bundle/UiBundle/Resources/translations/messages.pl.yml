@@ -101,6 +101,7 @@ sylius:
         channel: Kanał
         channels: Kanały
         charges_and_taxes: Opłaty i podatki
+        checkbox: Pole wyboru
         checkout: Koszyk
         choose_file: Wybierz plik
         city: Miejscowość
@@ -199,6 +200,7 @@ sylius:
         dashboard: Panel
         data: Dane
         date: Data
+        datetime: Data/godzina
         default_billing_address: Domyślny adres rozliczeniowy
         default_locale: Domyślne ustawienia regionalne
         default_shipping_address: Domyślny adres wysyłkowy
@@ -320,6 +322,7 @@ sylius:
         index_of_all_configured_locales: Spis wszystkich skonfigurowanych ustawień regionalnych
         info: Info
         information: Informacja
+        integer: Liczba całkowita
         inventory: Zapasy
         inventory_here_you_can_see_current_stock_levels: Magazyn <small>Tutaj możesz zobaczyć aktualne stany magazynowe</small>
         inventory_index: Zapasy
@@ -494,6 +497,7 @@ sylius:
         pay_again: Kliknij zapłać aby spróbować ponownie
         pending: Oczekujący
         per_customer_usage_limit: Limit użycia na klienta
+        percent: Procent
         permissions: Uprawnienia
         personal_information: Dane osobowe
         phone_number: Numer telefonu
@@ -580,12 +584,11 @@ sylius:
         shipments: Przesyłki
         shipped: Dostarczono
         shipping_address: Adres dostawy
-        shipping_categories: Kategorie wysyłki
         shipping_category: Kategoria wysyłki
         shipping_charges: Koszty przesyłki
         shipping_method: Metoda wysyłki
         shipping_method_details: Szczegóły metody wysyłki
-        shipping_methods: Metody wysyłki
+        shipping_methods: Sposób wysyłki
         shipping_state: Status wysyłki
         shipping_total: Koszt wysyłki
         shop_by: Przeglądaj
@@ -625,6 +628,8 @@ sylius:
         taxes: Podatki
         taxonomy: Taksonomia
         terms_and_conditions: Regulamin
+        text: Tekst
+        textarea: Pole tekstowe
         thank_you: Dziękujemy!
         thank_you_for_your_order: Dziękujemy za zamówienie
         theme: Motyw
@@ -672,7 +677,6 @@ sylius:
         updating_tax_rate: Edycja stawki podatkowej
         usage_limit: Limit użycia
         used: Użyto
-        user_confirmation_name: Potwierdzenia przez użytkownika
         user_details: Szczegóły użytkownika
         username: Nazwa użytkownika
         users_list_of_all_users_registered_in_store: Użytkownicy <small>Lista wszystkich zarejestrowanych użytkowników w sklepie</small>

@@ -104,6 +104,7 @@ sylius:
         channel: Kanalas
         channels: Kanalai
         charges_and_taxes: Mokesčiai ir rinkliavos
+        checkbox: Žymės langelis
         checkout: Apmokėjimas
         choose_file: Pasirinkite failą
         city: Miestas
@@ -174,6 +175,7 @@ sylius:
         customers: Klientai
         dashboard: Skydelis
         date: Data
+        datetime: Data ir laikas
         default_billing_address: Numatytasis atsiskaitymo adresas
         default_locale: Numatytoji lokalė
         default_shipping_address: Numatytasis pristatymo adresas
@@ -250,6 +252,7 @@ sylius:
         imagine_blocks: Paveikslėlių blokai
         index_of_all_configured_locales: Visų sukonfigūruotų lokalių indeksas
         information: Informacija
+        integer: Sveikasis skaičius
         inventory: Atsargos
         inventory_here_you_can_see_current_stock_levels: Atsargos <small>čia galite peržiūrėti dabartinius atsargų lygius</small>
         inventory_index: Atsargos
@@ -359,10 +362,11 @@ sylius:
         payment: Apmokėjimas
         payment_details: Apmokėjimo duomenys
         payment_method: Apmokėjimo būdas
-        payment_methods: Mokėjimo būdai
+        payment_methods: Apmokėjimo būdai
         payment_state: Apmokėjimo būsena
         payments: Mokėjimai
         pending: Laukiama
+        percent: Procentai
         permissions: Prieigos teisės
         phone_number: Telefono numeris
         place_order: Užsakyti
@@ -431,7 +435,6 @@ sylius:
         shipments: Pristatymai
         shipped: Pristatytas
         shipping_address: Pristatymo adresas
-        shipping_categories: Pristatymo kategorijos
         shipping_category: Pristatymo kategorija
         shipping_charges: Pristatymo mokesčiai
         shipping_method: Pristatymo būdas
@@ -465,6 +468,8 @@ sylius:
         taxation_settings: Apmokestinimo nustatymai
         taxes: Mokesčiai
         taxons: Taksonai
+        text: Tekstas
+        textarea: Teksto laukas
         theme: Tema
         there_are_no_images_for_this_product: Šis produktas neturi paveikslėlių
         there_are_no_options_for_this_product: Šis produktas neturi parinkčių
@@ -487,7 +492,6 @@ sylius:
         updating_tax_rate: Mokesčio tarifo atnaujinimas
         usage_limit: Naudojimo limitas
         used: Panaudotas
-        user_confirmation_name: Vartotojo patvirtinimas
         user_details: Vartotojo duomenys
         username: Vartotojo vardas
         users_list_of_all_users_registered_in_store: Vartotojai <small>visų registruotų vartotojų sąrašas</small>

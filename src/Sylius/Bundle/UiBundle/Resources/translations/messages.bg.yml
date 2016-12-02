@@ -34,6 +34,7 @@ sylius:
         cancel: Откажи
         categorization: Категоризация
         change_your_password: Смяна на парола
+        checkbox: Отметка
         choose_file: Избор на файл
         city: Град
         clear_cart: Изчисти кошницата
@@ -72,6 +73,7 @@ sylius:
         dashboard: Табло
         data: Данни
         date: Дата
+        datetime: Дата и час
         default_billing_address: По подразбиране адрес за фактуриране
         default_shipping_address: Адрес за доставка по подразбиране
         delete: Изтрий
@@ -112,6 +114,7 @@ sylius:
         home: Начална страница
         index_of_all_configured_locales: Индекс на всички конфигурирани локали
         information: Информация
+        integer: Целочислено
         inventory: Инвентар
         inventory_here_you_can_see_current_stock_levels: Запаси, <small>тук можете да видите текущите нива на запасите</small>
         inventory_index: Инвентар
@@ -189,9 +192,10 @@ sylius:
         overview_of_your_store: Преглед на вашия магазин
         pages: Страници
         payment: Плащане
-        payment_methods: Методи на плащане
+        payment_methods: Начин на плащане
         payment_state: Състояние на плащане
         payments: Плащания
+        percent: Процент
         phone_number: Телефонен номер
         place_order: Изпрати поръчка
         placed_at: Поставени в
@@ -231,7 +235,6 @@ sylius:
         shipment_details: Данни за пратката
         shipment_state: Състояние на пратка
         shipments: пратки
-        shipping_categories: Категории за доставка
         shipping_charges: Такси за експедиране
         shipping_method: Начин на доставка
         shipping_method_details: Детайли за методи за доставка
@@ -252,6 +255,7 @@ sylius:
         taxation_categories: Категории такси
         taxation_settings: Настройки на данъчно облагане
         taxes: Такси
+        text: Текст
         there_are_no_images_for_this_product: Няма изображения за този продукт
         there_are_no_options_for_this_product: Съществуват опции за този продукт
         there_are_no_taxons_for_this_product: Няма никакви класификации за този продукт

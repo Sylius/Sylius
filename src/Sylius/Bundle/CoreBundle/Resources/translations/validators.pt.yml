@@ -25,9 +25,6 @@ sylius:
         onHand:
             min: A disponibilidade deve ser maior que {{ limit }}.
             not_blank: Introduza a disponibilidade.
-        price:
-            min: O preço não deve ser negativo.
-            not_blank: Introduza o preço.
         original_price:
             min: O preço original não deve ser negativo.
         width:

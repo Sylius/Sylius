@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        cart_save_completed: Keranjang Belanja telah berhasil diperbarui.
-        item_add_completed: Item telah ditambahkan ke keranjang belanja.
-        item_remove_completed: Item dihapus dari keranjang belanja.

@@ -21,21 +21,8 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 label: Paušálna sadzba za zásielku
-            flexible_rate_configuration:
-                label: Flexibilná sadzba
-                additional_unit_cost: Dodatočné náklady na jednotku
-                additional_unit_limit: Obmedzeniť dodatočné položky
-                first_unit_cost: Cena prvej položky
             per_unit_rate_configuration:
                 label: Paušálna suma za položku
-            weight_rate_configuration:
-                label: Sadzba podľa hmotnosti
-                fixed: Pevná sadzba
-                variable: Variabilná suma
-                division: Delenie
-            volume_rate_configuration:
-                label: Sadzba podľa objemu
-                division: Delenie
         shipping_category:
             description: Popis
             name: Názov

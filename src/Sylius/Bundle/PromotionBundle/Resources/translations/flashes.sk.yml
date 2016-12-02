@@ -3,7 +3,4 @@
 
 sylius:
     promotion_coupon:
-        eligible: Váš akciový kupón bol pridaný do košíka.
         generate: Akciové kupóny boli úspešne vygenerované.
-        invalid: Váš akciový kupón je neplatný.
-        not_eligible: Váš košík neobsahuje položky na ktoré je možné uplatniť tento akciový kupón.

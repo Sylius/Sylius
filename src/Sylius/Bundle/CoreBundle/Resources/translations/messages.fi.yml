@@ -9,9 +9,6 @@ sylius:
             channels: Kanavat
         guest:
             email: Sähköpostiosoite
-        promotion_filter:
-            product:
-                products: Tuotteet
         promotion_rule:
             product:
                 products: Tuotteet

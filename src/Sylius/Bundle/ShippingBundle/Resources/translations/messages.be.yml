@@ -21,11 +21,6 @@ sylius:
                 amount: Сума
             per_unit_rate_configuration:
                 amount: Сума
-            weight_rate_configuration:
-                division: Падзел
-            volume_rate_configuration:
-                amount: Сума
-                division: Падзел
         shipping_category:
             description: Апісанне
             name: Назва

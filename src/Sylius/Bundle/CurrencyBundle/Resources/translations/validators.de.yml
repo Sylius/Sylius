@@ -9,3 +9,6 @@ sylius:
             unique: Währungscode muss eindeutig sein.
         exchange_rate:
             not_blank: Bitte Wechselkurs angeben.
+    exchange_rate:
+        source_currency:
+            not_blank: Bitte geben Sie an, aus welcher Währung der Wechselkurs abgeleitet werden soll.

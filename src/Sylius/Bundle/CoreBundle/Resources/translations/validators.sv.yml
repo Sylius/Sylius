@@ -10,9 +10,6 @@ sylius:
             not_blank: Var god ange språkkod.
             unique: Detta språk finns redan.
     product_variant:
-        price:
-            min: Priset får inte vara negativt.
-            not_blank: Var god ange priset.
         original_price:
             min: Ursprungliga priset får inte vara negativt.
     product_translation:

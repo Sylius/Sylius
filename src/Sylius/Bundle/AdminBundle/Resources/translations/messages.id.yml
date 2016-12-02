@@ -5,5 +5,20 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    attributes: Atribut
+                    header: Katalog
+                    products: Produk
+                configuration:
+                    admin_users: Administrator
+                    channels: Saluran
+                    countries: Negara
+                    currencies: Mata Uang
+                    exchange_rates: Kurs
+                    header: Konfigurasi
+                    locales: Lokal
+                    payment_methods: Metode Pembayaran
+                    shipping_categories: Kategori Pengiriman
+                    shipping_methods: Metode Pengiriman
                 customers:
                     groups: Kelompok

@@ -21,13 +21,7 @@ sylius:
         shipping_calculator:
             flat_rate_configuration:
                 amount: Antal
-            flexible_rate_configuration:
-                label: Flexibelt belopp
             per_unit_rate_configuration:
-                amount: Antal
-            weight_rate_configuration:
-                label: Viktbaserat pris
-            volume_rate_configuration:
                 amount: Antal
         shipping_category:
             description: Beskrivning

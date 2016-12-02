@@ -56,7 +56,6 @@ sylius:
         product:
             images: Immagini
             restricted_zone: Zona soggetta a restrizioni
-            shipping_category: Categoria di spedizione
             short_description: Descrizione breve
             variant_selection_method: Metodo di selezione delle varianti
             main_taxon: Taxon principale
@@ -67,6 +66,7 @@ sylius:
             code: Codice
         product_variant:
             tax_category: Categoria fiscale
+            shipping_category: Categoria di spedizione
         shipment_filter:
             created_at_from: Da
             created_at_to: A
@@ -118,9 +118,6 @@ sylius:
             type: Tipi di associazione
         product_association_type:
             name: Nome
-        promotion_filter:
-            product:
-                products: Prodotti
         promotion_rule:
             product:
                 products: Prodotti
@@ -185,23 +182,6 @@ sylius:
                 help: 'Il timezone %timezone% è deprecato. Correggi il tuo file php.ini (lista di timezone deprecati http://php.net/manual/en/timezones.others.php).'
             version: Versione PHP
             version_recommended: Versione PHP raccomandata
-    email:
-        order_confirmation:
-            name: Conferma dell'ordine
-        order_comment:
-            name: Commento dell'ordine
-        shipment_confirmation:
-            name: Informazioni di spedizione
-        user_confirmation:
-            name: Conferma dell'utente
-            subject: Benvenuto nel nostro negozio
-            content: Benvenuto nel nostro negozio <br/> <br/> Sei appena stato registrato. <br/> Grazie %username%.
-        password_reset:
-            name: Reimpostazione password
-            content: <h3>Ciao %username%</h3> Per reimpostare la password - si prega di visitare %url% <br/> <br/> Cordiali saluti, il Team.
-        verification:
-            name: Verifica dell'indirizzo di posta elettronica
-            content: Per verificare il tuo indirizzo email - ti preghiamo di visitare %url%
     payum_gateway:
         cash_on_delivery: Contanti alla cosegna
         offline: Disconnesso

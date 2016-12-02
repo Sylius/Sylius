@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        cart_save_completed: Die mandjie is suksesvol bygewerk.
-        item_add_completed: Item is toegevoeg aan die mandjie.
-        item_remove_completed: Item is verwijder uit die mandjie.

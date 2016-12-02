@@ -51,6 +51,7 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: Oletko varma, että haluat suorittaa tämän toiminnon?
         back: Edellinen
         channels: Kanavat
+        checkbox: Valintalaatikko
         checkout: Kassa
         choose_file: Valitse tiedosto
         city: Kaupunki
@@ -95,6 +96,7 @@ sylius:
         customers: Asiakkaat
         dashboard: Hallintapaneeli
         date: Päivämäärä
+        datetime: Päivämäärä ja aika
         default_billing_address: Oletusarvoinen laskutusosoite
         default_currency: Oletusvaluutta
         default_shipping_address: Oletusarvoinen toimitusosoite
@@ -130,6 +132,7 @@ sylius:
         next: Seuraava
         orders: Tilaukset
         parent: Vanhempi
+        payment_methods: Maksutavat
         phone_number: Puhelinnumero
         postcode: Postinumero
         pricing: Hinnoittelu
@@ -141,6 +144,7 @@ sylius:
         remember_me: Muista minut
         sales: Myynnit
         sales_this_month: Myynnit
+        shipping_methods: Toimitustavat
         street: Katuosoite
         topic: Aihe
         translations: Käännökset

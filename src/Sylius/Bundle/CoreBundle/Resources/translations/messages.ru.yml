@@ -19,7 +19,6 @@ sylius:
         promotion_action:
             add_product_configuration:
                 product: Товар
-            customer_group: Группа клиента
         promotion_coupon:
             per_customer_usage_limit: Лимит использования на клиента
         group:
@@ -58,7 +57,6 @@ sylius:
         product:
             images: Изображения
             restricted_zone: Зона ограничений
-            shipping_category: Категория доставки
             short_description: Короткое описание
             variant_selection_method: Метод выбора вариантов
             main_taxon: Основной таксон
@@ -69,6 +67,7 @@ sylius:
             code: Код
         product_variant:
             tax_category: Категория налогов
+            shipping_category: Категория доставки
         shipment_filter:
             created_at_from: От
             created_at_to: До
@@ -120,9 +119,6 @@ sylius:
             type: Типы взаимосвязи
         product_association_type:
             name: Название
-        promotion_filter:
-            product:
-                products: Товары
         promotion_rule:
             product:
                 products: Товары
@@ -188,25 +184,6 @@ sylius:
                 help: 'Часовой пояс %timezone% является устаревшим. Исправьте файл php.ini (список устаревших часовых поясов http://php.net/manual/en/timezones.others.php).'
             version: Версия PHP
             version_recommended: Рекомендуемая версия PHP
-    email:
-        order_confirmation:
-            name: Подтверждение заказа
-            content: Ваш заказ № %number% был успешно оформлен. <br/> <br/> Благодарим вас за покупку в нашем магазине!
-        order_comment:
-            name: Комментарий к заказу
-        shipment_confirmation:
-            name: Подтверждение посылки
-            content: Ваш заказ № %number% был отправлен с использованием %method%. <br/> Вы можете проверить эго местонахождение с помощью кода отслеживания «%tracking%». <br/> <br/> Благодарим вас за успешно выполненную транзакцию.
-        user_confirmation:
-            name: Подтверждение пользователя
-            subject: Добро пожаловать в наш магазин
-            content: Добро пожаловать в наш магазин<br/><br/>Вы только что были зарегистрированы. <br/>Спасибо %username%.
-        password_reset:
-            name: Сброс пароля
-            content: <h3>Здравствуйте, %username%</h3> Чтобы сбросить пароль - пожалуйста, пройдите по ссылке %url% <br/> <br/> с уважением, команда.
-        verification:
-            name: Проверка адреса электронной почты
-            content: Чтобы подтвердить ваш адрес электронной почты - пожалуйста, пройдите по ссылке %url%
     payum_gateway:
         cash_on_delivery: Наличными при доставке
         offline: Офлайн

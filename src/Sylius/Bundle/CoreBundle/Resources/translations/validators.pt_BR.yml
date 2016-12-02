@@ -22,9 +22,6 @@ sylius:
         onHand:
             min: O campo em mãos deve ser maior que {{limit}}.
             not_blank: Por favor digite o campo em mãos.
-        price:
-            min: Preço não pode ser negativo.
-            not_blank: Por favor, digite o preço.
         original_price:
             min: Preço original não deve ser negativo.
     product_translation:

@@ -54,7 +54,6 @@ sylius:
         product:
             images: Imazhet
             restricted_zone: Zonë e kufizuar
-            shipping_category: Kategoria e dërgesës
             short_description: Përshkrim i shkurtër
             variant_selection_method: Metoda rezervë e përzgjedhjes
             main_taxon: Tipologjia kryesore
@@ -65,6 +64,7 @@ sylius:
             code: Kodi
         product_variant:
             tax_category: Kategoria e taksimit
+            shipping_category: Kategoria e dërgesës
         shipment_filter:
             created_at_from: Nga (dërguesi)
             created_at_to: Për (marrësi)
@@ -116,9 +116,6 @@ sylius:
             type: Tipi i lidhjes
         product_association_type:
             name: Emri
-        promotion_filter:
-            taxon:
-                taxons: Tipologjite
         promotion_rule:
             has_taxon:
                 taxons: Tipologjite
@@ -180,15 +177,3 @@ sylius:
                 header: Zonë orare e papranueshme
                 help: 'Zona orare %timezone% nuk pranohet. is deprecated. Korrigjo php.ini file (lista e zonave orare të kundërshtuara http://php.net/manual/en/timezones.others.php).'
             version: Versioni PHP
-    email:
-        order_confirmation:
-            name: Konfirmimi i porosisë
-        order_comment:
-            name: Komenti i porosisë
-        shipment_confirmation:
-            name: Konfirmimi i dërgesës
-        user_confirmation:
-            name: Konfirmimi i përdoruesit
-            subject: Mirë se erdhët në arkivin tone
-        password_reset:
-            name: Ricakto Fjalëkalimin

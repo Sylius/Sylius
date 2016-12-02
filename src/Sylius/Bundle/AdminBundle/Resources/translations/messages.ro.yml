@@ -6,20 +6,34 @@ sylius:
         admin:
             main:
                 catalog:
+                    association_types: Tipuri de asociere
                     attributes: Atribute
+                    header: Catalog
                     options: Opţiuni
+                    products: Produse
+                    taxons: Taxoni
                 configuration:
+                    admin_users: Administratori
+                    channels: Canale
                     countries: Țări
+                    currencies: Valute
+                    exchange_rates: Rate de schimb
                     header: Configurare
                     locales: Setări regionale
                     payment_methods: Metode de plată
+                    shipping_categories: Categorii de livrare
                     shipping_methods: Metode de livrare
+                    tax_categories: Categorii de taxe
                     tax_rates: Taxe
                     zones: Zone
                 marketing:
+                    header: Marketing
+                    product_reviews: Recenzii despre produse
                     promotions: Promoţii
                 customers:
+                    customers: Clienți
                     groups: Grupuri
+                    header: Client
                 sales:
                     header: Vânzări
                     orders: Comenzi

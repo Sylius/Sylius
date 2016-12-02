@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    payment:
-        complete: Плащането е приключило.
-        cancel: Плащането е отменено.
-        transition_fail: Действието не можа да бъде изпълнено, предвид текущото състояние на плащане

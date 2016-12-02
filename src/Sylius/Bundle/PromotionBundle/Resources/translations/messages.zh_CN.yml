@@ -16,11 +16,27 @@ sylius:
             rules: 規則
             starts_at: 开始于
         promotion_action:
+            fixed_discount_configuration:
+                amount: 折扣金额
             type: 类型
+        promotion_coupon:
+            expires_at: 到期时间
+            usage_limit: 使用次数
+        promotion_coupon_generator_instruction:
+            amount: 优惠金额
+            code_length: 优惠码长度
+            expires_at: 到期时间
+            usage_limit: 使用次数
+        promotion_filter:
+            price_range: 价格区间过滤
         promotion_rule:
             cart_quantity_configuration:
                 count: 计数
                 equal: 等于
+            item_total_configuration:
+                amount: 金额
+            nth_order_configuration:
+                nth: 订单数
             shipping_country_configuration:
                 country: 国家
             type: 类型

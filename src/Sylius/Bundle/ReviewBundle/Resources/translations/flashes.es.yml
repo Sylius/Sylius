@@ -3,4 +3,6 @@
 
 sylius:
     review:
-        waiting_for_the_acceptation: Su reseña está a la espera de ser revisada.
+        accept: La reseña se ha aceptado correctamente.
+        reject: La reseña se ha rechazado correctamente.
+        wait_for_the_acceptation: Su reseña está a la espera de ser revisada.

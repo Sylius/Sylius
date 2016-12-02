@@ -14,6 +14,8 @@ sylius:
                 different_billing_address: Menggunakan alamat berbeda untuk penagihan?
             payment_method: Metode pembayaran
             shipping_method: Metode pengiriman
+        promotion:
+            channels: Saluran
         group:
             name: Nama
             roles: Peran
@@ -36,15 +38,16 @@ sylius:
         product:
             images: Gambar
             restricted_zone: Zona Terbatas
-            shipping_category: Kategori Pengiriman
             short_description: Deskripsi singkat
             variant_selection_method: Metode Pilih Varian
+            channels: Saluran
             enabled: Diaktifkan
         product_filter:
             name: Nama
             code: Kode
         product_variant:
             tax_category: Kategori Pajak
+            shipping_category: Kategori Pengiriman
         shipment_filter:
             created_at_from: Dari
             created_at_to: Untuk
@@ -86,6 +89,11 @@ sylius:
             email: Email
         product_association_type:
             name: Nama
+        promotion_rule:
+            product:
+                products: Produk
+        payment_method:
+            channels: Saluran
     installer:
         extensions:
             "off": false

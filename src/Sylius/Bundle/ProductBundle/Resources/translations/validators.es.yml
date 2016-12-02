@@ -8,6 +8,7 @@ sylius:
             unique: El SKU del producto debe ser único.
         code:
             not_blank: Por favor introduzca el código de producto.
+            regex: El código de producto solo puede contener letras, números, guiones y guiones bajos.
             unique: Código de producto debe ser único.
         name:
             not_blank: Por favor introduzca el nombre del producto.
@@ -15,9 +16,19 @@ sylius:
             max_length: El nombre de producto debe tener como máximo 1 carácter.|El nombre de producto no debe tener más de {{ limit }} caracteres.
         slug:
             not_blank: Por favor, introduzca un slug de producto.
+    product_variant:
+        combination: Ya existe una variante con esta combinación de opciones.
+        code:
+            not_blank: Por favor, introduzca el código.
+            regex: El código de la variante de producto solo puede contener letras, números, guiones y guiones bajos.
+            unique: El código de variante de producto debe ser único.
+    simple_product:
+        code:
+            unique: El código de producto simple debe ser único entre todos los productos y variantes de producto.
     option:
         code:
             not_blank: Por favor, introduzca el código de opción.
+            regex: El código de opción solo puede contener letras, números, guiones y guiones bajos.
             unique: Ya existe una opción con ese código.
         name:
             not_blank: Por favor, introduzca el nombre de la opción.
@@ -28,6 +39,7 @@ sylius:
     option_value:
         code:
             not_blank: Por favor, introduzca un valor de opción.
+            regex: El código de valor de opción solo puede contener letras, números, guiones y guiones bajos.
             unique: Ya existe un valor de opción con ese código.
         value:
             not_blank: Por favor, introduzca un valor de opción.
@@ -37,5 +49,6 @@ sylius:
             min_length: El nombre del tipo de asociación debe tener al menos 1 carácter.| El nombre del tipo de asociación debe tener al menos {{ limit }} caracteres.
             max_length: El nombre del tipo de asociación no debe tener más de 1 carácter.| El nombre del tipo de asociación no debe tener más de {{ limit }} caracteres.
         code:
-            unique: El tipo de asociación con el código dado ya existe.
             not_blank: Por favor, introduzca el código del tipo de asociación.
+            regex: El código de tipo de asociación solo puede contener letras, números, guiones y guiones bajos.
+            unique: El tipo de asociación con el código dado ya existe.

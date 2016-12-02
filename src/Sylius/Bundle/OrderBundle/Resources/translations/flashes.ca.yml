@@ -1,8 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    cart:
-        cart_save_completed: La cistella de la compra s'ha actualitzat correctament.
-        item_add_completed: El producte s'ha afegit a la cistella.
-        item_remove_completed: El producte s'ha esborrat de la cistella.

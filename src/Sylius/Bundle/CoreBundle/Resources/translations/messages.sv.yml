@@ -52,7 +52,6 @@ sylius:
         product:
             images: Bilder
             restricted_zone: Begränsat område
-            shipping_category: Kategori
             short_description: Kort beskrivning
             variant_selection_method: Metod för val av variant
             main_taxon: Huvudsaklig taxon
@@ -63,6 +62,7 @@ sylius:
             code: Kod
         product_variant:
             tax_category: Momskategori
+            shipping_category: Kategori
         shipment_filter:
             created_at_from: Från
             created_at_to: Till
@@ -113,11 +113,6 @@ sylius:
             type: Associationstyp
         product_association_type:
             name: Namn
-        promotion_filter:
-            product:
-                products: Produkter
-            taxon:
-                taxons: Taxa
         promotion_rule:
             has_taxon:
                 taxons: Taxa
@@ -183,23 +178,6 @@ sylius:
                 help: 'Tidszonen %timezone% är utgången. Åtgärda din php.ini fil (lista med utgångna tidzoner http://php.net/manual/en/timezones.others.php).'
             version: PHP-version
             version_recommended: Rekommenderad PHP-version
-    email:
-        order_confirmation:
-            name: Orderbekräftelse
-        order_comment:
-            name: Orderkommentar
-        shipment_confirmation:
-            name: Leveransbekräftelse
-        user_confirmation:
-            name: Användarbekräftelse
-            subject: Välkommen till vår butik
-            content: Välkommen till vår butik<br/><br/>du har precis registrerats.<br/>Tack %username%.
-        password_reset:
-            name: Återställ lösenord
-            content: <h3>Hej %username%</h3>För att återställa ditt lösenord - var god besök %url% <br/><br/>Hälsningar, the Team.
-        verification:
-            name: E-postadress verifikation
-            content: För att verifiera din e-postadress - var god besök %url%
     payum_gateway:
         cash_on_delivery: Postförskott
         offline: Offline

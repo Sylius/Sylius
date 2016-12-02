@@ -31,9 +31,6 @@ sylius:
         onHand:
             min: On hand ต้องมากกว่า {{ limit }}.
             not_blank: กรุณาระบุสินค้า on hand
-        price:
-            min: ราคาต้องไม่เป็นค่าลบ
-            not_blank: กรุณาระบุราคา
         original_price:
             min: ราคาทุนต้องไม่เป็นค่าลบ
         weight:

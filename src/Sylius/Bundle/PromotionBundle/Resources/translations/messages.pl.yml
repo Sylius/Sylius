@@ -17,6 +17,8 @@ sylius:
             starts_at: Data rozpoczęcia
             usage_limit: Limit użycia
         promotion_action:
+            fixed_discount_configuration:
+                amount: Kwota
             type: Typ
         promotion_coupon:
             usage_limit: Limit użycia

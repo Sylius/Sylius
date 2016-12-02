@@ -16,3 +16,6 @@ sylius:
             max_length: Numele metodei de livrare nu poate depăși {{ limit }} caractere.
             min_length: Numele metodei de livrare trebuie să conţină cel puţin {{ limit }} caractere.
             not_blank: Vă rugăm să completați numele metodei de livrare.
+    shipment:
+        shipping_method:
+            not_blank: Vă rugăm să alegeți metoda de livrare.
