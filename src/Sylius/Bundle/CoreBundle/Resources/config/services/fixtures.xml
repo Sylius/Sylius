@@ -78,6 +78,12 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
+        <service id="sylius.fixture.product_association_type" class="Sylius\Bundle\CoreBundle\Fixture\ProductAssociationTypeFixture">
+            <argument type="service" id="sylius.manager.product_association_type" />
+            <argument type="service" id="sylius.fixture.example_factory.product_association_type" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
         <service id="sylius.fixture.product_option" class="Sylius\Bundle\CoreBundle\Fixture\ProductOptionFixture">
             <argument type="service" id="sylius.manager.product_option" />
             <argument type="service" id="sylius.fixture.example_factory.product_option" />
