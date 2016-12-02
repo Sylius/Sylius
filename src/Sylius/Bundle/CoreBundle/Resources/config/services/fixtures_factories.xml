@@ -63,6 +63,7 @@
             <argument type="service" id="sylius.factory.product_review" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="sylius.repository.customer" />
+            <argument type="service" id="sm.factory" />
         </service>
 
         <service id="sylius.fixture.example_factory.tax_category" class="Sylius\Bundle\CoreBundle\Fixture\Factory\TaxCategoryExampleFactory">

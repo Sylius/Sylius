@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use SM\Factory\FactoryInterface;
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 use Sylius\Component\Review\Factory\ReviewFactoryInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -40,6 +42,11 @@ final class ProductReviewExampleFactory extends AbstractExampleFactory implement
     private $customerRepository;
 
     /**
+     * @var FactoryInterface
+     */
+    private $stateMachineFactory;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -53,15 +60,18 @@ final class ProductReviewExampleFactory extends AbstractExampleFactory implement
      * @param ReviewFactoryInterface $productReviewFactory
      * @param ProductRepositoryInterface $productRepository
      * @param CustomerRepositoryInterface $customerRepository
+     * @param FactoryInterface $stateMachineFactory
      */
     public function __construct(
         ReviewFactoryInterface $productReviewFactory,
         ProductRepositoryInterface $productRepository,
-        CustomerRepositoryInterface $customerRepository
+        CustomerRepositoryInterface $customerRepository,
+        FactoryInterface $stateMachineFactory
     ) {
         $this->productReviewFactory = $productReviewFactory;
         $this->productRepository = $productRepository;
         $this->customerRepository = $customerRepository;
+        $this->stateMachineFactory = $stateMachineFactory;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -84,10 +94,11 @@ final class ProductReviewExampleFactory extends AbstractExampleFactory implement
         $productReview->setTitle($options['title']);
         $productReview->setComment($options['comment']);
         $productReview->setRating($options['rating']);
-        $productReview->setStatus($this->getRandomStatus());
+        $options['product']->addReview($productReview);
+
+        $this->applyReviewTransition($productReview, $options['status'] ? $options['status'] : $this->getRandomStatus());
 
         return $productReview;
-
     }
 
     /**
@@ -109,7 +120,7 @@ final class ProductReviewExampleFactory extends AbstractExampleFactory implement
             ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
             ->setDefault('product', LazyOption::randomOne($this->productRepository))
             ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))
-            ->setDefault('status', ReviewInterface::STATUS_NEW)
+            ->setDefault('status', null)
         ;
     }
 
@@ -121,5 +132,20 @@ final class ProductReviewExampleFactory extends AbstractExampleFactory implement
         $statuses = [ReviewInterface::STATUS_NEW, ReviewInterface::STATUS_ACCEPTED, ReviewInterface::STATUS_REJECTED];
 
         return $statuses[(rand(0, 2))];
+    }
+
+    /**
+     * @param ReviewInterface $productReview
+     * @param string $targetState
+     */
+    private function applyReviewTransition(ReviewInterface $productReview, $targetState)
+    {
+        /** @var StateMachineInterface $stateMachine */
+        $stateMachine = $this->stateMachineFactory->get($productReview, 'sylius_product_review');
+        $transition = $stateMachine->getTransitionToState($targetState);
+
+        if (null !== $transition) {
+            $stateMachine->apply($transition);
+        }
     }
 }
