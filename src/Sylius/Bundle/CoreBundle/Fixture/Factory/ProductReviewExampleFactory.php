@@ -82,8 +82,9 @@ final class ProductReviewExampleFactory extends AbstractExampleFactory implement
             $options['author']
         );
         $productReview->setTitle($options['title']);
+        $productReview->setComment($options['comment']);
         $productReview->setRating($options['rating']);
-        $productReview->setStatus($options['status']);
+        $productReview->setStatus($this->getRandomStatus());
 
         return $productReview;
 
@@ -102,7 +103,7 @@ final class ProductReviewExampleFactory extends AbstractExampleFactory implement
                 return $this->faker->numberBetween(1, 5);
             })
             ->setDefault('comment', function (Options $options) {
-                return $this->faker->sentences(10, true);
+                return $this->faker->sentences(3, true);
             })
             ->setDefault('author', LazyOption::randomOne($this->customerRepository))
             ->setNormalizer('author', LazyOption::findOneBy($this->customerRepository, 'email'))
@@ -110,5 +111,15 @@ final class ProductReviewExampleFactory extends AbstractExampleFactory implement
             ->setNormalizer('product', LazyOption::findOneBy($this->productRepository, 'code'))
             ->setDefault('status', ReviewInterface::STATUS_NEW)
         ;
+    }
+
+    /**
+     * @return string
+     */
+    private function getRandomStatus()
+    {
+        $statuses = [ReviewInterface::STATUS_NEW, ReviewInterface::STATUS_ACCEPTED, ReviewInterface::STATUS_REJECTED];
+
+        return $statuses[(rand(0, 2))];
     }
 }

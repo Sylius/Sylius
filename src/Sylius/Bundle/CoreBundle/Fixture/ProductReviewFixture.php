@@ -33,12 +33,12 @@ final class ProductReviewFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-            ->scalarNode('title')->cannotBeEmpty()->end()
-            ->scalarNode('rating')->cannotBeEmpty()->end()
-            ->scalarNode('comment')->cannotBeEmpty()->end()
-            ->scalarNode('author')->cannotBeEmpty()->end()
-            ->booleanNode('product')->cannotBeEmpty()->end()
-            ->scalarNode('status')->end()
+                ->scalarNode('title')->cannotBeEmpty()->end()
+                ->scalarNode('rating')->cannotBeEmpty()->end()
+                ->scalarNode('comment')->cannotBeEmpty()->end()
+                ->scalarNode('author')->cannotBeEmpty()->end()
+                ->scalarNode('product')->cannotBeEmpty()->end()
+                ->scalarNode('status')->end()
         ;
     }
 }
