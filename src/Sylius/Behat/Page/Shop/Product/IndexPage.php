@@ -61,7 +61,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $productsList = $this->getDocument()->find('css', '#products');
         
-        $products = $productsList->findAll('css','.column > .card');
+        $products = $productsList->findAll('css', '.column > .card');
         
         return count($products);
     }
@@ -104,15 +104,14 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function hasProductsInOrder(array $productNames)
     {
         $productsList = $this->getDocument()->find('css', '#products');
-        $products = $productsList->findAll('css','.column  .content > .sylius-product-name');
+        $products = $productsList->findAll('css', '.column  .content > .sylius-product-name');
 
         foreach ($productNames as $key => $value) {
-            if($products[$key]->getText() !== $value) {
+            if ($products[$key]->getText() !== $value) {
                 return false;
             }
         }
 
         return true;
     }
-
 }

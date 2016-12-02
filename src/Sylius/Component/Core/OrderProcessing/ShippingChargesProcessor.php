@@ -68,7 +68,8 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
                 $adjustment->setLabel($shipment->getMethod()->getName());
 
                 $order->addAdjustment($adjustment);
-            } catch (UndefinedShippingMethodException $exception) {}
+            } catch (UndefinedShippingMethodException $exception) {
+            }
         }
     }
 }

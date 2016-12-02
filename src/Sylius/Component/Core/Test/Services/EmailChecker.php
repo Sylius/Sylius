@@ -137,7 +137,7 @@ final class EmailChecker implements EmailCheckerInterface
         $messages = [];
 
         /** @var SplFileInfo $file */
-        foreach($finder as $file) {
+        foreach ($finder as $file) {
             $messages[] = unserialize($file->getContents());
         }
 

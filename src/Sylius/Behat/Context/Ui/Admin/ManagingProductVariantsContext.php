@@ -473,7 +473,7 @@ final class ManagingProductVariantsContext implements Context
     {
         Assert::true(
             $this->indexPage->isSingleResourceWithSpecificElementOnPage(['name' => $productVariantName], sprintf('td > div.ui.label:contains("%s")', $quantity)),
-            sprintf('The product variant %s should have %s items on hand, but it does not.',$productVariantName, $quantity)
+            sprintf('The product variant %s should have %s items on hand, but it does not.', $productVariantName, $quantity)
         );
     }
 
@@ -486,7 +486,7 @@ final class ManagingProductVariantsContext implements Context
 
         Assert::true(
             $this->indexPage->isSingleResourceWithSpecificElementOnPage(['name' => $productVariantName], sprintf('td > div.ui.label:contains("%s")', $quantity)),
-            sprintf('The product variant %s should have %s items on hand, but it does not.',$productVariantName, $quantity)
+            sprintf('The product variant %s should have %s items on hand, but it does not.', $productVariantName, $quantity)
         );
     }
 

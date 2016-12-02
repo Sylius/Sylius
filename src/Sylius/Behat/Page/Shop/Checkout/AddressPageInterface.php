@@ -32,7 +32,7 @@ interface AddressPageInterface extends SymfonyPageInterface
     /**
      * @param string $element
      * @param string $message
-     * 
+     *
      * @return bool
      */
     public function checkValidationMessageFor($element, $message);

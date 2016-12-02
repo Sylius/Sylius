@@ -166,7 +166,7 @@ final class ManagingProductAttributesContext implements Context
      */
     public function theTypeFieldShouldBeDisabled()
     {
-       $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::true(
             $currentPage->isTypeDisabled(),

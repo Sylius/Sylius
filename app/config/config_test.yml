@@ -5,7 +5,6 @@ imports:
     - { resource: "config.yml" }
 
 parameters:
-    currency: USD
     locale: en_US
 
 framework:

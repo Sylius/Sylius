@@ -55,8 +55,7 @@ final class ManagingProductOptionsContext implements Context
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver
-    )
-    {
+    ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;

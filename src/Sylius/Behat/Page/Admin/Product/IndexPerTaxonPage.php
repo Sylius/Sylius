@@ -31,7 +31,7 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
         $productsOnPage = $this->getColumnFields('name');
 
         foreach ($productsOnPage as $key => $product) {
-            if($productNames[$key] !== $product) {
+            if ($productNames[$key] !== $product) {
                 return false;
             }
         }
@@ -55,9 +55,9 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
     {
         $this->getElement('save_configuration_button')->press();
 
-        $this->getDocument()->waitFor(5, function (){
+        $this->getDocument()->waitFor(5, function () {
             return false === $this->getElement('save_configuration_button')->hasClass('loading');
-        } );
+        });
     }
 
     /**
@@ -69,6 +69,4 @@ class IndexPerTaxonPage extends CrudIndexPage implements IndexPerTaxonPageInterf
             'save_configuration_button' => '.sylius-save-position',
         ]);
     }
-
-
 }

@@ -47,7 +47,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         array $parameters,
         RouterInterface $router,
         AddressFactoryInterface $addressFactory
-    ){
+    ) {
         parent::__construct($session, $parameters, $router);
 
         $this->addressFactory = $addressFactory;
@@ -427,7 +427,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     private function waitForElement($timeout, $elementName)
     {
-        return $this->getDocument()->waitFor($timeout, function () use ($elementName){
+        return $this->getDocument()->waitFor($timeout, function () use ($elementName) {
             return $this->hasElement($elementName);
         });
     }

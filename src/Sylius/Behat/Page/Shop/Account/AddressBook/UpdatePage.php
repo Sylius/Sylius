@@ -32,7 +32,7 @@ final class UpdatePage extends SymfonyPage implements UpdatePageInterface
      */
     public function fillField($field, $value)
     {
-        $field = $this->getElement(str_replace(' ', '_',strtolower($field)));
+        $field = $this->getElement(str_replace(' ', '_', strtolower($field)));
         $field->setValue($value);
     }
 
@@ -96,7 +96,7 @@ final class UpdatePage extends SymfonyPage implements UpdatePageInterface
      */
     private function waitForElement($timeout, $elementName)
     {
-        $this->getDocument()->waitFor($timeout, function () use ($elementName){
+        $this->getDocument()->waitFor($timeout, function () use ($elementName) {
             return $this->hasElement($elementName);
         });
     }

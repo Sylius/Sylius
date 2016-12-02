@@ -134,7 +134,6 @@ final class PaypalContext implements Context
     public function iShouldBeNotifiedThatMyPaymentHasBeenCancelled()
     {
         $this->assertNotification('Payment has been cancelled.');
-
     }
 
     /**

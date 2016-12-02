@@ -132,7 +132,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             );
 
             return 1 === count($rows);
-
         } catch (\InvalidArgumentException $exception) {
             return false;
         }

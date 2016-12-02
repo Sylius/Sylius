@@ -69,4 +69,3 @@ final class AddBaseCurrencySubscriber implements EventSubscriberInterface
         throw new UnexpectedTypeException($resource, ChannelInterface::class);
     }
 }
-

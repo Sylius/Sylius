@@ -22,7 +22,7 @@
     <td colspan="4" class="right aligned" style="font-size: 1.5em;" id="total">
         {{ 'sylius.ui.total'|trans }}: {{ money.format(order.total, order.currencyCode) }}
     </td>
-<\tr>
+</tr>
 {% if order.currencyCode is not same as(sylius.currencyCode) %}
 <tr>
     <td colspan="4" class="right aligned" id="base-total">

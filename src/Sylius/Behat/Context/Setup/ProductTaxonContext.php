@@ -72,7 +72,7 @@ final class ProductTaxonContext implements Context
         $productTaxon->setProduct($product);
         $productTaxon->setTaxon($taxon);
 
-        if(null !== $position) {
+        if (null !== $position) {
             $productTaxon->setPosition($position);
         }
 

@@ -40,7 +40,7 @@ final class ProductTaxonCollectionToTaxonCollectionTransformer implements DataTr
      */
     public function transform($productTaxonCollection)
     {
-        if(null === $productTaxonCollection) {
+        if (null === $productTaxonCollection) {
             return new ArrayCollection();
         }
 
@@ -62,7 +62,7 @@ final class ProductTaxonCollectionToTaxonCollectionTransformer implements DataTr
      */
     public function reverseTransform($taxonCollection)
     {
-        if(null === $taxonCollection) {
+        if (null === $taxonCollection) {
             return new ArrayCollection();
         }
 

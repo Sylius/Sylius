@@ -133,5 +133,4 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 
         return $element;
     }
-
 }

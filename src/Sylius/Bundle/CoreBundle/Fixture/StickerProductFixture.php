@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Attribute\AttributeType\TextAttributeType;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -127,6 +128,7 @@ class StickerProductFixture extends AbstractFixture
                 'code' => $this->faker->uuid,
                 'main_taxon' => 'stickers',
                 'taxons' => ['stickers'],
+                'variant_selection_method' => ProductInterface::VARIANT_SELECTION_CHOICE,
                 'product_attributes' => [
                     'sticker_paper' => sprintf('Paper from tree %s', $this->faker->randomElement(['Wung', 'Tanajno', 'Lemon-San', 'Me-Gusta'])),
                     'sticker_resolution' => $this->faker->randomElement(['JKM XD', '476DPI', 'FULL HD', '200DPI']),

@@ -25,7 +25,7 @@ interface SelectPaymentPageInterface extends SymfonyPageInterface
     
     /**
      * @param string $paymentMethodName
-     * 
+     *
      * @return bool
      */
     public function hasPaymentMethod($paymentMethodName);

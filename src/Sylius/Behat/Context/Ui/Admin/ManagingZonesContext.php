@@ -206,7 +206,7 @@ final class ManagingZonesContext implements Context
         Assert::eq(
             1,
             $this->updatePage->countMembers(),
-            sprintf('Zone %s should have only %s zone member',$zone->getName(), $zoneMember->getCode())
+            sprintf('Zone %s should have only %s zone member', $zone->getName(), $zoneMember->getCode())
         );
     }
 

@@ -74,7 +74,9 @@ class HomePage extends SymfonyPage implements HomePageInterface
     public function getAvailableCurrencies()
     {
         return array_map(
-            function (NodeElement $element) { return $element->getText(); },
+            function (NodeElement $element) {
+                return $element->getText();
+            },
             $this->getElement('currency_selector')->findAll('css', '.sylius-available-currency')
         );
     }
@@ -86,7 +88,8 @@ class HomePage extends SymfonyPage implements HomePageInterface
     {
         try {
             $this->getElement('currency_selector')->click(); // Needed for javascript scenarios
-        } catch (UnsupportedDriverActionException $exception) {}
+        } catch (UnsupportedDriverActionException $exception) {
+        }
 
         $this->getElement('currency_selector')->clickLink($currencyCode);
     }
@@ -105,7 +108,9 @@ class HomePage extends SymfonyPage implements HomePageInterface
     public function getAvailableLocales()
     {
         return array_map(
-            function (NodeElement $element) { return $element->getText(); },
+            function (NodeElement $element) {
+                return $element->getText();
+            },
             $this->getElement('locale_selector')->findAll('css', '.sylius-available-locale')
         );
     }
@@ -122,9 +127,12 @@ class HomePage extends SymfonyPage implements HomePageInterface
      * {@inheritdoc}
      */
     public function getLatestProductsNames()
-    {;
+    {
+        ;
         return array_map(
-            function (NodeElement $element) { return $element->getText(); },
+            function (NodeElement $element) {
+                return $element->getText();
+            },
             $this->getDocument()->findAll('css', '.sylius-product-name')
         );
     }

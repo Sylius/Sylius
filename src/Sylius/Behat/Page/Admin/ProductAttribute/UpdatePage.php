@@ -42,7 +42,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     protected function getCodeElement()
     {
-       return $this->getElement('code');
+        return $this->getElement('code');
     }
 
     /**

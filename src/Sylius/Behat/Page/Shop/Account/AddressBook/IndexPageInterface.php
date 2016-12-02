@@ -26,7 +26,7 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     /**
      * @param string $fullName
-     * 
+     *
      * @return bool
      */
     public function hasAddressOf($fullName);

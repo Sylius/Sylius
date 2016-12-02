@@ -79,7 +79,8 @@ final class ChannelCollector extends DataCollector
     {
         try {
             $this->data['channel'] = $this->channelContext->getChannel();
-        } catch (ChannelNotFoundException $exception) {}
+        } catch (ChannelNotFoundException $exception) {
+        }
     }
 
     /**

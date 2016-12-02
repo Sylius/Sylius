@@ -227,7 +227,7 @@ class ManagingShippingCategoriesContext implements Context
     public function iShouldBeNotifiedThatShippingCategoryWithThisCodeAlreadyExists()
     {
         Assert::same(
-            $this->createPage->getValidationMessage('code'), 
+            $this->createPage->getValidationMessage('code'),
             'The shipping category with given code already exists.'
         );
     }

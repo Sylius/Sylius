@@ -89,7 +89,7 @@ class ExpressionVisitor
      */
     public function walkCompositeExpression(CompositeExpression $expr, AbstractNode $parentNode)
     {
-        switch($expr->getType()) {
+        switch ($expr->getType()) {
             case CompositeExpression::TYPE_AND:
                 $node = $parentNode->andX();
                 break;
@@ -112,7 +112,7 @@ class ExpressionVisitor
                 break;
             }
 
-            switch($expr->getType()) {
+            switch ($expr->getType()) {
                 case CompositeExpression::TYPE_AND:
                     $parentNode = $parentNode->andX();
                     break;

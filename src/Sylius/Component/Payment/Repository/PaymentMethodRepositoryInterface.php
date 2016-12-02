@@ -28,4 +28,3 @@ interface PaymentMethodRepositoryInterface extends RepositoryInterface
      */
     public function findByName($name, $locale);
 }
-

@@ -61,7 +61,7 @@ final class ManagingPromotionCouponsContext implements Context
         try {
             $promotion->removeCoupon($coupon);
             $this->couponRepository->remove($coupon);
-        } catch(ForeignKeyConstraintViolationException $exception) {
+        } catch (ForeignKeyConstraintViolationException $exception) {
             $this->sharedStorage->set('last_exception', $exception);
         }
     }

@@ -49,7 +49,7 @@ final class ProductVariantsParityChecker implements ProductVariantsParityChecker
     {
         foreach ($variant->getOptionValues() as $option) {
             if (!$existingVariant->hasOptionValue($option)) {
-               return false;
+                return false;
             }
         }
 

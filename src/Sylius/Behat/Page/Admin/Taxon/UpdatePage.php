@@ -183,8 +183,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getValidationMessageForImageAtPlace($place) {
-        
+    public function getValidationMessageForImageAtPlace($place)
+    {
         $images = $this->getImageElements();
         
         $foundElement = $images[$place]->find('css', '.sylius-validation-error');

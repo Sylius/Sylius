@@ -84,5 +84,4 @@ final class RequestConfigurationFactory implements RequestConfigurationFactoryIn
 
         return array_merge($request->attributes->get('_sylius', []), $parameters);
     }
-
 }

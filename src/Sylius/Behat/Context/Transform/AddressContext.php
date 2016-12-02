@@ -69,7 +69,7 @@ final class AddressContext implements Context
      * @Transform /^address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      * @Transform /^address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      */
-    public function createNewAddressWith($cityName, $street, $postcode, $countryName, $customerName,  $provinceName = null)
+    public function createNewAddressWith($cityName, $street, $postcode, $countryName, $customerName, $provinceName = null)
     {
         $countryCode = $this->countryNameConverter->convertToCode($countryName);
         $customerName = explode(' ', $customerName);
@@ -108,7 +108,7 @@ final class AddressContext implements Context
     public function getByStreet($street)
     {
         $address = $this->addressRepository->findOneBy(['street' => $street]);
-        Assert::notNull($address, sprintf('Cannot find address by %s street' , $street));
+        Assert::notNull($address, sprintf('Cannot find address by %s street', $street));
 
         return $address;
     }

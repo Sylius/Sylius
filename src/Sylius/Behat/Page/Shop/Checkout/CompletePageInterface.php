@@ -68,7 +68,7 @@ interface CompletePageInterface extends SymfonyPageInterface
 
     /**
      * @param float $total
-     * 
+     *
      * @return bool
      */
     public function hasOrderTotal($total);
@@ -80,28 +80,28 @@ interface CompletePageInterface extends SymfonyPageInterface
 
     /**
      * @param string $promotionTotal
-     * 
+     *
      * @return bool
      */
     public function hasPromotionTotal($promotionTotal);
 
     /**
      * @param string $promotionName
-     * 
+     *
      * @return bool
      */
     public function hasPromotion($promotionName);
 
     /**
      * @param string $taxTotal
-     * 
+     *
      * @return bool
      */
     public function hasTaxTotal($taxTotal);
 
     /**
      * @param string $price
-     * 
+     *
      * @return bool
      */
     public function hasShippingTotal($price);

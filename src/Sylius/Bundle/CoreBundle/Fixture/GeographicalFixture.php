@@ -72,7 +72,6 @@ class GeographicalFixture extends AbstractFixture
         ZoneFactoryInterface $zoneFactory,
         ObjectManager $zoneManager
     ) {
-
         $this->countryFactory = $countryFactory;
         $this->countryManager = $countryManager;
         $this->provinceFactory = $provinceFactory;

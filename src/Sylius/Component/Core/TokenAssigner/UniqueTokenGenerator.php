@@ -70,7 +70,6 @@ final class UniqueTokenGenerator
         do {
             $rnd = hexdec(bin2hex(openssl_random_pseudo_bytes($bytes)));
             $rnd = $rnd & $filter;
-
         } while ($rnd >= $range);
 
         return ($min + $rnd);

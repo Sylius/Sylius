@@ -59,4 +59,3 @@ final class ProductCodeChoiceType extends AbstractType
         return 'sylius_product_code_choice';
     }
 }
-

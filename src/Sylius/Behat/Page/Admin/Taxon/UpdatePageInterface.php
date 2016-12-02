@@ -117,8 +117,8 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     /**
      * @param int $place
-     * 
-     * @return string 
+     *
+     * @return string
      *
      * @throws ElementNotFoundException
      */

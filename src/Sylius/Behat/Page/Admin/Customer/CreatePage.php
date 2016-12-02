@@ -87,7 +87,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function hasPasswordField()
     {
-       return null !== $this->getDocument()->find('css', '#sylius_customer_user_plainPassword');
+        return null !== $this->getDocument()->find('css', '#sylius_customer_user_plainPassword');
     }
 
     /**

@@ -777,7 +777,6 @@ final class ManagingOrdersContext implements Context
         $this->assertElementValidationMessage($type, $secondElement, sprintf('Please enter %s.', $secondElement));
         $this->assertElementValidationMessage($type, $thirdElement, sprintf('Please enter %s.', $thirdElement));
         $this->assertElementValidationMessage($type, $fourthElement, sprintf('Please enter %s.', $fourthElement));
-
     }
 
     /**

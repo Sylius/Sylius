@@ -123,11 +123,13 @@ final class SyliusCollector extends DataCollector
             $this->data['base_currency_code'] = $channel->getBaseCurrency()->getCode();
             $this->data['currency_code'] = $this->shopperContext->getCurrencyCode();
         } catch (ChannelNotFoundException $exception) {
-        } catch (CurrencyNotFoundException $exception) {}
+        } catch (CurrencyNotFoundException $exception) {
+        }
 
         try {
             $this->data['locale_code'] = $this->shopperContext->getLocaleCode();
-        } catch (LocaleNotFoundException $exception) {}
+        } catch (LocaleNotFoundException $exception) {
+        }
     }
 
     /**

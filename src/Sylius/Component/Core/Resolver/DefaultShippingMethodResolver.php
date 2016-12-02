@@ -51,7 +51,6 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
         $shippingMethods = $this->shippingMethodRepository->findEnabledForChannel($channel);
         if (empty($shippingMethods)) {
             throw new UnresolvedDefaultShippingMethodException();
-
         }
         
         return $shippingMethods[0];

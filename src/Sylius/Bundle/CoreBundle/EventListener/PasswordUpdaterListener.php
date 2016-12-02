@@ -40,5 +40,4 @@ final class PasswordUpdaterListener extends BasePasswordUpdaterListener
             $this->updateUserPassword($user);
         }
     }
-
 }

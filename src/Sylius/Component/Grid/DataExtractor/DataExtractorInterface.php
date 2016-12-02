@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Grid\DataExtractor;
+
 use Sylius\Component\Grid\Definition\Field;
 
 /**

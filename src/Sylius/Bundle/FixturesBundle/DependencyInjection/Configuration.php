@@ -130,7 +130,9 @@ final class Configuration implements ConfigurationInterface
 
         $optionsNode
             ->beforeNormalization()
-                ->always(function ($value) { return [$value]; })
+                ->always(function ($value) {
+                    return [$value];
+                })
         ;
 
         $optionsNode->prototype('variable')->cannotBeEmpty()->defaultValue([]);
