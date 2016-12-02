@@ -84,6 +84,19 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
+        <service id="sylius.fixture.product_association" class="Sylius\Bundle\CoreBundle\Fixture\ProductAssociationFixture">
+            <argument type="service" id="sylius.manager.product_association" />
+            <argument type="service" id="sylius.fixture.example_factory.product_association" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="sylius.fixture.similar_product_association" class="Sylius\Bundle\CoreBundle\Fixture\SimilarProductAssociationFixture">
+            <argument type="service" id="sylius.fixture.product_association_type" />
+            <argument type="service" id="sylius.fixture.product_association" />
+            <argument type="service" id="sylius.repository.product" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
         <service id="sylius.fixture.product_option" class="Sylius\Bundle\CoreBundle\Fixture\ProductOptionFixture">
             <argument type="service" id="sylius.manager.product_option" />
             <argument type="service" id="sylius.fixture.example_factory.product_option" />

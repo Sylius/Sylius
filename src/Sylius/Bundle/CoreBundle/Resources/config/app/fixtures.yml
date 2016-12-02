@@ -150,13 +150,6 @@ sylius_fixtures:
                                 category: "other"
                                 amount: 0.2
 
-                product_association_type:
-                    options:
-                        custom:
-                            similar_products:
-                                code: "similar_products"
-                                name: "Similar products"
-
                 mug_product:
                     options:
                         amount: 15
@@ -176,6 +169,10 @@ sylius_fixtures:
                 random_product_review:
                     options:
                         amount: 40
+
+                similar_product_association:
+                    options:
+                        amount: 10
 
                 order:
                     options:
