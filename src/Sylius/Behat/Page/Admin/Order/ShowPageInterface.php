@@ -240,7 +240,7 @@ interface ShowPageInterface extends SymfonyPageInterface
 
     /**
      * @param string $note
-     * 
+     *
      * @return bool
      */
     public function hasNote($note);

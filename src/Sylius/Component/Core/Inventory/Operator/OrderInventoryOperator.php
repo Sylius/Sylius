@@ -113,7 +113,6 @@ final class OrderInventoryOperator implements OrderInventoryOperatorInterface
             );
 
             $variant->setOnHold($variant->getOnHold() - $orderItem->getQuantity());
-
         }
     }
 

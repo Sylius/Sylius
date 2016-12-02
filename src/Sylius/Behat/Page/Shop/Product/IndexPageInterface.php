@@ -32,7 +32,7 @@ interface IndexPageInterface
     /**
      * @param string $productName
      * @param string $productPrice
-     * 
+     *
      * @return bool
      */
     public function isProductWithPriceOnList($productName, $productPrice);
@@ -44,7 +44,7 @@ interface IndexPageInterface
 
     /**
      * @param string $name
-     * 
+     *
      * @return bool
      */
     public function isProductOnPageWithName($name);
@@ -63,7 +63,7 @@ interface IndexPageInterface
 
     /**
      * @param array $productNames
-     * 
+     *
      * @return bool
      */
     public function hasProductsInOrder(array $productNames);

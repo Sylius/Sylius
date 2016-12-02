@@ -38,9 +38,8 @@ class ProductTaxonController extends ResourceController
         $productTaxons = $request->get('productTaxons');
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH'], true) && null !== $productTaxons) {
-            foreach($productTaxons as $productTaxon) {
-
-                if(!is_numeric($productTaxon['position'])) {
+            foreach ($productTaxons as $productTaxon) {
+                if (!is_numeric($productTaxon['position'])) {
                     throw new HttpException(
                         Response::HTTP_NOT_ACCEPTABLE,
                         sprintf('The productTaxon position "%s" is invalid.', $productTaxon['position'])

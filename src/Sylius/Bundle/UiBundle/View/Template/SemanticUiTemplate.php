@@ -18,7 +18,7 @@ use Pagerfanta\View\Template\Template;
  */
 class SemanticUiTemplate extends Template
 {
-    static protected $defaultOptions = array(
+    protected static $defaultOptions = array(
         'prev_message'        => '&larr; Previous',
         'next_message'        => 'Next &rarr;',
         'dots_message'        => '&hellip;',

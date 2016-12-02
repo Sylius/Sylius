@@ -48,7 +48,7 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
         }
 
         $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
-        Assert::notNull($province,sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
+        Assert::notNull($province, sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
 
         return $province->getName();
     }
@@ -67,7 +67,7 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
         }
 
         $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
-        Assert::notNull($province,sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
+        Assert::notNull($province, sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
 
         return $province->getAbbreviation() ?: $province->getName();
     }

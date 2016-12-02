@@ -43,7 +43,7 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
 
     /**
      * {@inheritdoc}
-     * 
+     *
      * @throws \LogicException
      */
     public function getCurrentPageWithForm(array $pages)

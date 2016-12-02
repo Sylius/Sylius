@@ -21,14 +21,14 @@ interface IndexPerTaxonPageInterface extends CrudIndexPageInterface
 {
     /**
      * @param array $productNames
-     * 
+     *
      * @return bool
      */
     public function hasProductsInOrder(array $productNames);
 
     /**
      * @param string $productName
-     * 
+     *
      * @param int $position
      */
     public function setPositionOfProduct($productName, $position);

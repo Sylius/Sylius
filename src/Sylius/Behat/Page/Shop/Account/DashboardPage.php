@@ -79,7 +79,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
 
     /**
      * @param $value
-     * 
+     *
      * @return bool
      */
     private function hasValueInCustomerSection($value)

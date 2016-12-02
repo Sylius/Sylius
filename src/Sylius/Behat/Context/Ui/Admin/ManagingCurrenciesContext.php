@@ -195,7 +195,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iChangeExchangeRateTo($exchangeRate)
     {
-       $this->updatePage->changeExchangeRate($exchangeRate);
+        $this->updatePage->changeExchangeRate($exchangeRate);
     }
 
     /**

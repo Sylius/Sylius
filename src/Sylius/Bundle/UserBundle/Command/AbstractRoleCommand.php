@@ -32,7 +32,7 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
             $email = $this->getHelper('dialog')->askAndValidate(
                 $output,
                 'Please enter an email:',
-                function($email) {
+                function ($email) {
                     if (empty($email)) {
                         throw new \Exception('Email can not be empty');
                     }

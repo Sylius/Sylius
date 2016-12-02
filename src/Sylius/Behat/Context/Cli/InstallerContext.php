@@ -168,7 +168,8 @@ final class InstallerContext implements Context
 
         try {
             $this->tester->execute(['command' => $name]);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
     }
 
     /**
@@ -182,6 +183,7 @@ final class InstallerContext implements Context
 
         try {
             $this->tester->execute(['command' => $name]);
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+        }
     }
 }

@@ -154,7 +154,7 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     public function filterProductTaxonsByTaxon(TaxonInterface $taxon)
     {
         return $this->productTaxons->filter(function ($productTaxon) use ($taxon) {
-             return $taxon === $productTaxon->getTaxon();
+            return $taxon === $productTaxon->getTaxon();
         });
     }
 

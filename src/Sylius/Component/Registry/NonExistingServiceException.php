@@ -25,7 +25,7 @@ class NonExistingServiceException extends \InvalidArgumentException
             '%s service "%s" does not exist, available %s services: "%s"',
             ucfirst($context),
             $type,
-            $context, 
+            $context,
             implode('", "', $existingServices)
         ));
     }

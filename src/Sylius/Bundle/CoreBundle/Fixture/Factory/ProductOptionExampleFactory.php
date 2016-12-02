@@ -98,7 +98,6 @@ class ProductOptionExampleFactory extends AbstractExampleFactory implements Exam
                 $productOptionValue->setFallbackLocale($localeCode);
 
                 $productOptionValue->setValue($value);
-
             }
 
             $productOption->addValue($productOptionValue);

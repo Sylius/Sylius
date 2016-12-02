@@ -29,7 +29,7 @@ interface PaymentMethodRepositoryInterface extends BasePaymentMethodRepositoryIn
 
     /**
      * @param ChannelInterface $channel
-     * 
+     *
      * @return array
      */
     public function findEnabledForChannel(ChannelInterface $channel);

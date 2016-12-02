@@ -52,8 +52,8 @@ final class ManagingTaxRateContext implements Context
      */
     public function __construct(
         IndexPageInterface $indexPage,
-        CreatePageInterface $createPage, 
-        UpdatePageInterface $updatePage, 
+        CreatePageInterface $createPage,
+        UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->indexPage = $indexPage;

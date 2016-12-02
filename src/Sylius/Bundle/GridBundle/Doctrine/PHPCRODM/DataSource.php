@@ -91,5 +91,5 @@ final class DataSource implements DataSourceInterface
         $paginator->setCurrentPage($parameters->get('page', 1));
 
         return $paginator;
-   }
+    }
 }

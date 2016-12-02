@@ -71,7 +71,7 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
 
     /**
      * @param string $shippingMethodName
-     * 
+     *
      * @return bool
      */
     public function hasShippingMethod($shippingMethodName);

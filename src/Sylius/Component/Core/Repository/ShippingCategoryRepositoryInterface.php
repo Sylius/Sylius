@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
- */ 
+ */
 interface ShippingCategoryRepositoryInterface extends RepositoryInterface
 {
     /**

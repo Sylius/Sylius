@@ -102,7 +102,6 @@ final class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
                     }
                 }
             }
-
         }
     }
 

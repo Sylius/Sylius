@@ -32,7 +32,7 @@ final class RegisterFieldTypesPass implements CompilerPassInterface
         $registry = $container->getDefinition('sylius.registry.grid_field');
 
         foreach ($container->findTaggedServiceIds('sylius.grid_field') as $id => $attributes) {
-            if (!isset($attributes[0]['type']))  {
+            if (!isset($attributes[0]['type'])) {
                 throw new \InvalidArgumentException('Tagged grid fields needs to have `type` attribute.');
             }
 

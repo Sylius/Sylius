@@ -77,7 +77,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
             );
 
             return 1 === count($rows);
-
         } catch (\InvalidArgumentException $exception) {
             return false;
         }

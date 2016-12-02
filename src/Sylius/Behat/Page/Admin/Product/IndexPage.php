@@ -35,5 +35,4 @@ final class IndexPage extends CrudIndexPage implements IndexPageInterface
             'taxon_filter' => '.item a:contains("%taxon%")',
         ]);
     }
-
 }

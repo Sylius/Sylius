@@ -320,7 +320,7 @@ final class ShippingContext implements Context
      * @Given /^(this shipping method) requires at least one unit matches to ("([^"]+)" shipping category)$/
      */
     public function thisShippingMethodRequiresAtLeastOneUnitMatchToShippingCategory(
-        ShippingMethodInterface $shippingMethod, 
+        ShippingMethodInterface $shippingMethod,
         ShippingCategoryInterface $shippingCategory
     ) {
         $shippingMethod->setCategory($shippingCategory);

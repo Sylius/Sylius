@@ -91,7 +91,7 @@ final class ShippingCategoryContext implements Context
         $shippingCategory->setName($shippingCategoryName);
         $shippingCategory->setCode($shippingCategoryCode);
 
-        if(null === $shippingCategoryCode) {
+        if (null === $shippingCategoryCode) {
             $shippingCategory->setCode(StringInflector::nameToCode($shippingCategoryName));
         }
 

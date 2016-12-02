@@ -162,7 +162,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function hasItemNamed($name)
     {
-       return $this->hasItemWith($name, '.sylius-product-name');
+        return $this->hasItemWith($name, '.sylius-product-name');
     }
 
     /**
@@ -170,7 +170,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function hasItemWithVariantNamed($variantName)
     {
-       return $this->hasItemWith($variantName, '.sylius-product-variant-name');
+        return $this->hasItemWith($variantName, '.sylius-product-variant-name');
     }
 
     /**
@@ -237,7 +237,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $cartTotalText = $this->getElement('cart_total')->getText();
 
-        if (strpos($cartTotalText, ',') !== false ) {
+        if (strpos($cartTotalText, ',') !== false) {
             return strstr($cartTotalText, ',', true);
         }
 

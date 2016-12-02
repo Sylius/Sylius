@@ -892,7 +892,7 @@ final class CheckoutContext implements Context
     {
         Assert::true(
             $this->completePage->hasShippingTotal($price),
-            sprintf('The shipping total should be %s, but it is not.',$price)
+            sprintf('The shipping total should be %s, but it is not.', $price)
         );
     }
 

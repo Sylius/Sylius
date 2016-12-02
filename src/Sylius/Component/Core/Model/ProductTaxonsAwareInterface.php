@@ -42,7 +42,7 @@ interface ProductTaxonsAwareInterface
 
     /**
      * @param TaxonInterface $taxon
-     * 
+     *
      * @return ProductTaxonInterface|null
      */
     public function filterProductTaxonsByTaxon(TaxonInterface $taxon);

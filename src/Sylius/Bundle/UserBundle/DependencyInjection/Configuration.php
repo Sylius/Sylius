@@ -77,7 +77,9 @@ final class Configuration implements ConfigurationInterface
                                                     ->scalarNode('field_name')
                                                         ->defaultValue('passwordResetToken')
                                                         ->validate()
-                                                        ->ifTrue(function ($tokenFieldName) { return !is_string($tokenFieldName); })
+                                                        ->ifTrue(function ($tokenFieldName) {
+                                                            return !is_string($tokenFieldName);
+                                                        })
                                                             ->thenInvalid('Invalid resetting token field "%s"')
                                                         ->end()
                                                     ->end()
@@ -93,7 +95,9 @@ final class Configuration implements ConfigurationInterface
                                                     ->scalarNode('field_name')
                                                         ->defaultValue('passwordResetToken')
                                                         ->validate()
-                                                        ->ifTrue(function ($passwordResetToken) { return !is_string($passwordResetToken); })
+                                                        ->ifTrue(function ($passwordResetToken) {
+                                                            return !is_string($passwordResetToken);
+                                                        })
                                                             ->thenInvalid('Invalid resetting pin field "%s"')
                                                         ->end()
                                                     ->end()
@@ -114,7 +118,9 @@ final class Configuration implements ConfigurationInterface
                                                     ->scalarNode('field_name')
                                                         ->defaultValue('emailVerificationToken')
                                                         ->validate()
-                                                        ->ifTrue(function ($emailVerificationToken) { return !is_string($emailVerificationToken); })
+                                                        ->ifTrue(function ($emailVerificationToken) {
+                                                            return !is_string($emailVerificationToken);
+                                                        })
                                                             ->thenInvalid('Invalid verification token field "%s"')
                                                         ->end()
                                                     ->end()

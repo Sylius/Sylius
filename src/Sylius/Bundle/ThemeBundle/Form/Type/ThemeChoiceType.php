@@ -67,4 +67,3 @@ final class ThemeChoiceType extends AbstractType
         return 'sylius_theme_choice';
     }
 }
-

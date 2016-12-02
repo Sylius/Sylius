@@ -431,7 +431,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasAttributeWithValue(ProductInterface $product, $productAttributeType, $productAttributeName, $value)
     {
-        $attribute = $this->createProductAttribute($productAttributeType,$productAttributeName);
+        $attribute = $this->createProductAttribute($productAttributeType, $productAttributeName);
         $attributeValue = $this->createProductAttributeValue($value, $attribute);
         $product->addAttribute($attributeValue);
 
@@ -443,7 +443,7 @@ final class ProductContext implements Context
      */
     public function thisProductHasPercentAttributeWithValue(ProductInterface $product, $productAttributeName, $value)
     {
-        $attribute = $this->createProductAttribute('percent',$productAttributeName);
+        $attribute = $this->createProductAttribute('percent', $productAttributeName);
         $attributeValue = $this->createProductAttributeValue($value/100, $attribute);
         $product->addAttribute($attributeValue);
 
@@ -468,9 +468,9 @@ final class ProductContext implements Context
      */
     public function thisProductHasPercentAttributeWithValueAtPosition(ProductInterface $product, $productAttributeName, $position)
     {
-        $attribute = $this->createProductAttribute('percent',$productAttributeName);
+        $attribute = $this->createProductAttribute('percent', $productAttributeName);
         $attribute->setPosition($position);
-        $attributeValue = $this->createProductAttributeValue(rand(1,100)/100, $attribute);
+        $attributeValue = $this->createProductAttributeValue(rand(1, 100)/100, $attribute);
 
         $product->addAttribute($attributeValue);
 

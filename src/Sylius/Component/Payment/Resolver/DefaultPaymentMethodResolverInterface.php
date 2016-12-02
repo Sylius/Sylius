@@ -21,7 +21,7 @@ interface DefaultPaymentMethodResolverInterface
 {
     /**
      * @param PaymentInterface $payment
-     * 
+     *
      * @return PaymentMethodInterface
      */
     public function getDefaultPaymentMethod(PaymentInterface $payment);

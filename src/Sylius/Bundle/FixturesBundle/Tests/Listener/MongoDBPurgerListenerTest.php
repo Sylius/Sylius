@@ -25,7 +25,7 @@ final class MongoDBPurgerListenerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    function managers_are_set_to_null_by_default()
+    public function managers_are_set_to_null_by_default()
     {
         $this->assertProcessedConfigurationEquals([[]], ['managers' => [null]], 'managers');
     }
@@ -33,7 +33,7 @@ final class MongoDBPurgerListenerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    function managers_are_optional()
+    public function managers_are_optional()
     {
         $this->assertProcessedConfigurationEquals([['managers' => ['custom']]], ['managers' => ['custom']], 'managers');
     }
