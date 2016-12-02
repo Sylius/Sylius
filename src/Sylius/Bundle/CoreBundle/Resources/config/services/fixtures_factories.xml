@@ -59,6 +59,11 @@
             <argument>%sylius.attribute.attribute_types%</argument>
         </service>
 
+        <service id="sylius.fixture.example_factory.product_review" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductReviewExampleFactory">
+            <argument type="service" id="sylius.factory.product_review" />
+            <argument type="service" id="sylius.repository.product_review" />
+        </service>
+
         <service id="sylius.fixture.example_factory.tax_category" class="Sylius\Bundle\CoreBundle\Fixture\Factory\TaxCategoryExampleFactory">
             <argument type="service" id="sylius.factory.tax_category" />
         </service>
