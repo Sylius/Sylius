@@ -9,6 +9,7 @@ default:
 
                 - sylius.behat.context.transform.address
                 - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.customer_group
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.payment
                 - sylius.behat.context.transform.product
@@ -18,6 +19,8 @@ default:
                 - sylius.behat.context.transform.user
 
                 - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.customer_group
                 - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product

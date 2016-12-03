@@ -267,6 +267,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I add the "Customer group" rule for :customerGroupName group
+     */
+    public function iAddTheCustomerGroupRuleConfiguredForGroup($customerGroupName)
+    {
+        $this->createPage->addRule('Customer group');
+        $this->createPage->selectRuleOption('Customer group', $customerGroupName);
+    }
+
+    /**
      * @Then /^there should be (\d+) promotion(?:|s)$/
      */
     public function thereShouldBePromotion($number)

@@ -21,7 +21,9 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
 use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Promotion\Factory\PromotionCouponFactoryInterface;
 use Sylius\Component\Promotion\Model\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
@@ -644,6 +646,21 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("[^"]+%") off the order for customers from ("[^"]*" group)$/
+     */
+    public function thePromotionGivesOffTheOrderForCustomersFromGroup(
+        PromotionInterface $promotion,
+        $discount,
+        CustomerGroupInterface $customerGroup
+    ) {
+        $rule = $this->ruleFactory->createNew();
+        $rule->setType(CustomerGroupRuleChecker::TYPE);
+        $rule->setConfiguration(['group_code' => $customerGroup->getCode()]);
+
+        $this->createPercentagePromotion($promotion, $discount, [], $rule);
+    }
+
+    /**
      * @param array $taxonCodes
      *
      * @return array
@@ -740,8 +757,12 @@ final class PromotionContext implements Context
      * @param array $configuration
      * @param PromotionRuleInterface $rule
      */
-    private function createPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], PromotionRuleInterface $rule = null)
-    {
+    private function createPercentagePromotion(
+        PromotionInterface $promotion,
+        $discount,
+        array $configuration = [],
+        PromotionRuleInterface $rule = null
+    ) {
         $this->persistPromotion($promotion, $this->actionFactory->createPercentageDiscount($discount), $configuration, $rule);
     }
 
