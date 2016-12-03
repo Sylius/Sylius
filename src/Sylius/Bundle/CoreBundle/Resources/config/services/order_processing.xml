@@ -13,43 +13,43 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.order_processing.order_adjustments_clearer" class="Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer">
+            <tag name="sylius.order_processor" priority="60"/>
+        </service>
+
         <service id="sylius.order_processing.order_shipment_processor" class="Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor">
             <argument type="service" id="sylius.resolver.default_shipping_method" />
             <argument type="service" id="sylius.factory.shipment" />
-            <tag name="sylius.order_processor" />
+            <tag name="sylius.order_processor" priority="50"/>
         </service>
 
-        <service id="sylius.order_processing.order_payment_processor" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
-            <argument type="service" id="sylius.factory.payment"/>
-            <argument type="service" id="sylius.payment_method_resolver.default" />
-            <tag name="sylius.order_processor" />
-        </service>
-
-        <service id="sylius.order_processing.order_adjustments_clearer" class="Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer">
-            <tag name="sylius.order_processor" />
+        <service id="sylius.order_processing.order_prices_recalculator" class="Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator">
+            <argument type="service" id="sylius.calculator.product_variant_price" />
+            <tag name="sylius.order_processor" priority="40"/>
         </service>
 
         <service id="sylius.order_processing.shipping_charges_processor" class="Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.shipping_calculator" />
-            <tag name="sylius.order_processor" />
-        </service>
-
-        <service id="sylius.order_processing.order_prices_recalculator" class="Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator">
-            <argument type="service" id="sylius.calculator.product_variant_price" />
-            <tag name="sylius.order_processor" />
+            <tag name="sylius.order_processor" priority="30"/>
         </service>
 
         <service id="sylius.order_processing.order_promotion_processor" class="Sylius\Component\Core\OrderProcessing\OrderPromotionProcessor">
             <argument type="service" id="sylius.promotion_processor" />
-            <tag name="sylius.order_processor" />
+            <tag name="sylius.order_processor" priority="20"/>
         </service>
 
         <service id="sylius.order_processing.order_taxes_processor" class="Sylius\Component\Core\OrderProcessing\OrderTaxesProcessor">
             <argument type="service" id="sylius.provider.channel_based_default_zone_provider" />
             <argument type="service" id="sylius.zone_matcher" />
             <argument type="service" id="sylius.registry.tax_calculation_strategy" />
-            <tag name="sylius.order_processor" />
+            <tag name="sylius.order_processor" priority="10"/>
+        </service>
+
+        <service id="sylius.order_processing.order_payment_processor" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
+            <argument type="service" id="sylius.factory.payment"/>
+            <argument type="service" id="sylius.payment_method_resolver.default" />
+            <tag name="sylius.order_processor" priority="0"/>
         </service>
     </services>
 </container>
