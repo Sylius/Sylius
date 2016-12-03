@@ -27,6 +27,7 @@ $ php composer.phar create-project -s beta sylius/sylius-standard app
 $ cd app
 $ npm install
 $ npm run gulp
+$ cd ..
 $ php bin/console sylius:install
 $ php bin/console server:start
 $ open http://localhost:8000/
