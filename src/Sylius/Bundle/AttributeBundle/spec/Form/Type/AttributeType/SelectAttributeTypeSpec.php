@@ -31,11 +31,11 @@ class SelectAttributeTypeSpec extends ObjectBehavior
 
     function it_has_parent()
     {
-        $this->getParent()->shouldReturn('choice');
+        $this->getParent()->shouldReturn('Symfony\Component\Form\Extension\Core\Type\ChoiceType');
     }
 
-    function it_has_name()
+    function it_has_block_prefix()
     {
-        $this->getName()->shouldReturn('sylius_attribute_type_select');
+        $this->getBlockPrefix()->shouldReturn('sylius_attribute_type_select');
     }
 }
