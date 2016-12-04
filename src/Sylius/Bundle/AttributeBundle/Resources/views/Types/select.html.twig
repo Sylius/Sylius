@@ -1,10 +1,8 @@
-<td>
-    {% if attribute.value is not null %}
-        {% set values = attribute.attribute.configuration.options %}
-        {% if attribute.value is iterable %}
-            {% for value in attribute.value %}<span class="label label-primary">{{ values[value] }}</span>{% endfor %}
-        {% else %}
-            {{ values[attribute.value] }}
-        {% endif %}
+{% if attribute.value is not null %}
+    {% set values = attribute.attribute.configuration.options %}
+    {% if attribute.value is iterable %}
+        {% for value in attribute.value %}<span class="label label-primary">{{ values[value] }}</span>{% endfor %}
+    {% else %}
+        {{ values[attribute.value] }}
     {% endif %}
-</td>
+{% endif %}

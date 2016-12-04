@@ -12,6 +12,9 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -25,14 +28,14 @@ class SelectAttributeConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('options', 'collection', [
-                'type' => 'text',
+            ->add('options', CollectionType::class, [
+                'entry_type' => TextType::class,
                 'label' => 'sylius.form.attribute_type_configuration.select.values',
                 'allow_add' => true,
                 'allow_delete' => true,
             ])
-            ->add('multiple', 'checkbox', [
-                'label' => 'sylius.form.attribute_type_configuration_select.multiple',
+            ->add('multiple', CheckboxType::class, [
+                'label' => 'sylius.form.attribute_type_configuration.select.multiple',
             ])
         ;
     }
@@ -40,7 +43,7 @@ class SelectAttributeConfigurationType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_attribute_type_configuration_select';
     }

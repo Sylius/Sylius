@@ -27,6 +27,7 @@ sylius:
                 format: Format
             select:
                 multiple: Multiple
+                values: Values
             text:
                 min: Min length
                 max: Max length

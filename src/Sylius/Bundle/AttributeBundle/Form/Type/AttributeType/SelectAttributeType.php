@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\AttributeBundle\Form\Type\AttributeType;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,12 +24,20 @@ class SelectAttributeType extends AbstractType
     /**
      * {@inheritdoc}
      */
+    public function getParent()
+    {
+        return ChoiceType::class;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setRequired('configuration')
             ->setNormalizer('choices', function(Options $options, $value){
-                return $options['configuration']['options'];
+                return array_flip($options['configuration']['options']);
             })
             ->setNormalizer('multiple', function(Options $options, $value){
                 return $options['configuration']['multiple'];
@@ -39,15 +48,7 @@ class SelectAttributeType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getParent()
-    {
-        return 'choice';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_attribute_type_select';
     }
