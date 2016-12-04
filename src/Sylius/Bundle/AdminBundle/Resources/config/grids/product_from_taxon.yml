@@ -5,12 +5,12 @@ sylius_grid:
             sorting:
                 position: asc
             fields:
-                position: 
-                    type: twig 
-                    label: sylius.ui.position 
+                position:
+                    type: twig
+                    label: sylius.ui.position
                     path: .
                     sortable: productTaxon.position
-                    options: 
+                    options:
                         template: "@SyliusAdmin/Product/Grid/Field/position.html.twig"
             actions:
                 main:
