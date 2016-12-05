@@ -166,6 +166,10 @@ sylius_fixtures:
                     options:
                         amount: 15
 
+                random_product_review:
+                    options:
+                        amount: 40
+
                 order:
                     options:
                         amount: 20

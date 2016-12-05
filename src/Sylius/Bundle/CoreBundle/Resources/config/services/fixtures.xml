@@ -91,6 +91,12 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
+        <service id="sylius.fixture.product_review" class="Sylius\Bundle\CoreBundle\Fixture\ProductReviewFixture">
+            <argument type="service" id="sylius.manager.product_review" />
+            <argument type="service" id="sylius.fixture.example_factory.product_review" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
         <service id="sylius.fixture.tax_category" class="Sylius\Bundle\CoreBundle\Fixture\TaxCategoryFixture">
             <argument type="service" id="sylius.manager.tax_category" />
             <argument type="service" id="sylius.fixture.example_factory.tax_category" />
@@ -143,6 +149,11 @@
             <argument type="service" id="sylius.fixture.product_attribute" />
             <argument type="service" id="sylius.fixture.product_option" />
             <argument type="service" id="sylius.fixture.product" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="sylius.fixture.random_reviews" class="Sylius\Bundle\CoreBundle\Fixture\RandomReviewsFixture">
+            <argument type="service" id="sylius.fixture.product_review" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
