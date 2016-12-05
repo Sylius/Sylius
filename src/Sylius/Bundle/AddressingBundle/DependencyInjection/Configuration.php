@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\AddressingBundle\DependencyInjection;
 
 use Sylius\Bundle\AddressingBundle\Controller\ProvinceController;
-use Sylius\Component\Addressing\Factory\ZoneFactory;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType;
 use Sylius\Bundle\AddressingBundle\Form\Type\CountryType;
 use Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType;
@@ -136,7 +135,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ZoneInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(ZoneFactory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(ZoneType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
