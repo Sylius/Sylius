@@ -36,16 +36,14 @@
 
 {% macro collection_item(form, allow_delete, button_delete_label, index) %}
     {% spaceless %}
-        <div class="column">
-            <div data-form-collection="item" data-form-collection-index="{{ index }}">
-                {{ form_widget(form) }}
-                {% if allow_delete %}
-                    <a href="#" data-form-collection="delete" class="ui red labeled icon button" style="margin-bottom: 1em;">
-                        <i class="trash icon"></i>
-                        {{ button_delete_label|trans }}
-                    </a>
-                {% endif %}
-            </div>
+        <div data-form-collection="item" data-form-collection-index="{{ index }}" class="column">
+            {{ form_widget(form) }}
+            {% if allow_delete %}
+                <a href="#" data-form-collection="delete" class="ui red labeled icon button" style="margin-bottom: 1em;">
+                    <i class="trash icon"></i>
+                    {{ button_delete_label|trans }}
+                </a>
+            {% endif %}
         </div>
     {% endspaceless %}
 {% endmacro %}
