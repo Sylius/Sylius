@@ -16,5 +16,6 @@ The Customization Guide is helpful while wanting to adapt Sylius to your persona
     translation
     flash
     state_machine
+    grid
 
 .. include:: /customization/map.rst.inc
