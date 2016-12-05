@@ -61,9 +61,11 @@ final class WithinCollectionUniqueCodeValidatorSpec extends ObjectBehavior
         $violationBuilder->atPath('[2].code')->shouldBeCalled()->willReturn($violationBuilder);
 
         $violationBuilder->addViolation()->shouldBeCalledTimes(2);
-
-
-        $this->validate([ $firstEntity->getWrappedObject(), $secondEntity->getWrappedObject(),  $thirdEntity->getWrappedObject()], $constraint);
+        
+        $this->validate(
+            [$firstEntity->getWrappedObject(), $secondEntity->getWrappedObject(), $thirdEntity->getWrappedObject()],
+            $constraint
+        );
     }
 
     function it_adds_violation_if_resources_in_collection_has_the_same_code_and_one_resource_not_have_code_at_all(
@@ -86,8 +88,10 @@ final class WithinCollectionUniqueCodeValidatorSpec extends ObjectBehavior
 
         $violationBuilder->addViolation()->shouldBeCalledTimes(2);
 
-
-        $this->validate([ $firstEntity->getWrappedObject(), $secondEntity->getWrappedObject(),  $thirdEntity->getWrappedObject()], $constraint);
+        $this->validate(
+            [$firstEntity->getWrappedObject(), $secondEntity->getWrappedObject(), $thirdEntity->getWrappedObject()],
+            $constraint
+        );
     }
 
     function it_does_not_add_violation_if_resources_in_collection_has_different_codes(

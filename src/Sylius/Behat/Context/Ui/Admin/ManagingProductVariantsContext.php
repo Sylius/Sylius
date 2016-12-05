@@ -276,8 +276,9 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should see :numberOfProductVariants variants in the list
      * @Then I should see :numberOfProductVariants variant in the list
+     * @Then I should not see variants in the list
      */
-    public function iShouldSeeProductVariantsInTheList($numberOfProductVariants)
+    public function iShouldSeeProductVariantsInTheList($numberOfProductVariants = 0)
     {
         $foundRows = $this->indexPage->countItems();
 
@@ -629,7 +630,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Given /^I want to generate new variants for (this product)$/
+     * @When /^I want to generate new variants for (this product)$/
      */
     public function iWantToGenerateNewVariantsForThisProduct(ProductInterface $product)
     {

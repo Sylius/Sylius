@@ -390,13 +390,13 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
-    public function getValidationMessageForImageAtPlace($place)
+    public function getValidationMessageForImageAtPosition($position)
     {
         $this->clickTabIfItsNotActive('media');
 
         $images = $this->getImageElements();
 
-        $foundElement = $images[$place]->find('css', '.sylius-validation-error');
+        $foundElement = $images[$position]->find('css', '.sylius-validation-error');
         if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.sylius-validation-error');
         }

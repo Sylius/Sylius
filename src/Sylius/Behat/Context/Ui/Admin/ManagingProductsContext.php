@@ -1029,7 +1029,7 @@ final class ManagingProductsContext implements Context
         preg_match_all('!\d+!', $imageNumber, $matches);
 
         Assert::same(
-            $this->updateSimpleProductPage->getValidationMessageForImageAtPlace(((int) $matches[0][0]) - 1),
+            $this->updateSimpleProductPage->getValidationMessageForImageAtPosition(((int) $matches[0][0]) - 1),
             'Image code must be unique within this product.'
         );
     }
