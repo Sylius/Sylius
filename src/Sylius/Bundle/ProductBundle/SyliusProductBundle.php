@@ -11,10 +11,8 @@
 
 namespace Sylius\Bundle\ProductBundle;
 
-use Sylius\Bundle\ProductBundle\DependencyInjection\Compiler\ServicesPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,16 +28,6 @@ final class SyliusProductBundle extends AbstractResourceBundle
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new ServicesPass());
     }
 
     /**
