@@ -14,16 +14,16 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ShopUserFixture extends AbstractResourceFixture
+class CustomerGroupFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'shop_user';
+        return 'customer_group';
     }
 
     /**
@@ -33,12 +33,8 @@ class ShopUserFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode('email')->cannotBeEmpty()->end()
-                ->scalarNode('first_name')->cannotBeEmpty()->end()
-                ->scalarNode('last_name')->cannotBeEmpty()->end()
-                ->booleanNode('enabled')->end()
-                ->scalarNode('password')->cannotBeEmpty()->end()
-                ->scalarNode('customer_group')->end()
+                ->scalarNode('name')->cannotBeEmpty()->end()
+                ->scalarNode('code')->cannotBeEmpty()->end()
         ;
     }
 }
