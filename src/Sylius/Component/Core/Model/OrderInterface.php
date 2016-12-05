@@ -158,9 +158,9 @@ interface OrderInterface extends
     public function setShippingState($state);
 
     /**
-     * @return null|PaymentInterface
+     * @return PaymentInterface|null
      */
-    public function getLastNewPayment();
+    public function getLastCartPayment();
 
     /**
      * @return int

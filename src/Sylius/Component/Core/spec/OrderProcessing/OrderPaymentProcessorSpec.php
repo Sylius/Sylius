@@ -56,7 +56,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getPayments()->willReturn($payments);
 
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn(null);
+        $order->getLastCartPayment()->willReturn(null);
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
@@ -84,7 +84,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getPayments()->willReturn($payments);
 
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn(null);
+        $order->getLastCartPayment()->willReturn(null);
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
@@ -112,7 +112,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getPayments()->willReturn($payments);
 
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn(null);
+        $order->getLastCartPayment()->willReturn(null);
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
@@ -140,7 +140,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getPayments()->willReturn($payments);
 
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn($newPaymentReadyToPay);
+        $order->getLastCartPayment()->willReturn($newPaymentReadyToPay);
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
@@ -162,7 +162,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getPayments()->willReturn($payments);
 
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn(null);
+        $order->getLastCartPayment()->willReturn(null);
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
@@ -189,7 +189,7 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getCurrencyCode()->willReturn('EUR');
 
         $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn($payment);
+        $order->getLastCartPayment()->willReturn($payment);
 
         $payment->setAmount(123)->shouldBeCalled();
         $payment->setCurrencyCode('EUR')->shouldBeCalled();
