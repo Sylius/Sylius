@@ -148,7 +148,6 @@
 
         <service id="sylius.fixture.random_reviews" class="Sylius\Bundle\CoreBundle\Fixture\RandomReviewsFixture">
             <argument type="service" id="sylius.fixture.product_review" />
-            <argument type="service" id="sylius.repository.product" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 

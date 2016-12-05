@@ -27,11 +27,6 @@ final class RandomReviewsFixture extends AbstractFixture
     private $productReviewFixture;
 
     /**
-     * @var ProductRepositoryInterface
-     */
-    private $productRepository;
-
-    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -43,14 +38,10 @@ final class RandomReviewsFixture extends AbstractFixture
 
     /**
      * @param AbstractResourceFixture $productReviewFixture
-     * @param ProductRepositoryInterface $productRepository
      */
-    public function __construct(
-        AbstractResourceFixture $productReviewFixture,
-        ProductRepositoryInterface $productRepository
-    ) {
+    public function __construct(AbstractResourceFixture $productReviewFixture)
+    {
         $this->productReviewFixture = $productReviewFixture;
-        $this->productRepository = $productRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver =
@@ -74,7 +65,7 @@ final class RandomReviewsFixture extends AbstractFixture
      */
     public function getName()
     {
-        return 'reviews';
+        return 'random_product_review';
     }
 
     /**
