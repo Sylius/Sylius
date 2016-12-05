@@ -23,6 +23,8 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 class CustomerGroupRuleChecker implements RuleCheckerInterface
 {
+    const TYPE = 'customer_group';
+
     /**
      * {@inheritdoc}
      */
