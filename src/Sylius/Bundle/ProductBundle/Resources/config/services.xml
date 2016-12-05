@@ -23,10 +23,10 @@
             </call>
         </service>
 
-        <service id="sylius.custom_factory.product_variant" class="Sylius\Component\Product\Factory\ProductVariantFactory" decorates="sylius.factory.product_variant">
+        <service id="sylius.custom_factory.product_variant" class="Sylius\Component\Product\Factory\ProductVariantFactory" decorates="sylius.factory.product_variant" public="false">
             <argument type="service" id="sylius.custom_factory.product_variant.inner" />
         </service>
-        <service id="sylius.custom_factory.product" class="Sylius\Component\Product\Factory\ProductFactory" decorates="sylius.factory.product">
+        <service id="sylius.custom_factory.product" class="Sylius\Component\Product\Factory\ProductFactory" decorates="sylius.factory.product" public="false">
             <argument type="service" id="sylius.custom_factory.product.inner" />
             <argument type="service" id="sylius.factory.product_variant" />
         </service>

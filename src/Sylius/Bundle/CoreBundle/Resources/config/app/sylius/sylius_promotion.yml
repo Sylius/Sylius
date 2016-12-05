@@ -10,9 +10,6 @@ sylius_promotion:
             classes:
                 model: Sylius\Component\Core\Model\Promotion
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PromotionRepository
-        promotion_rule:
-            classes:
-                factory: Sylius\Component\Core\Factory\PromotionRuleFactory
         promotion_coupon:
             classes:
                 model: Sylius\Component\Core\Model\PromotionCoupon

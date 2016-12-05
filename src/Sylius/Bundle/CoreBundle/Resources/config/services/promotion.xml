@@ -13,12 +13,10 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.factory.promotion_action.decorated" class="Sylius\Component\Core\Factory\PromotionActionFactory"
-                 decorates="sylius.factory.promotion_action" public="false">
+        <service id="sylius.factory.promotion_action.decorated" class="Sylius\Component\Core\Factory\PromotionActionFactory" decorates="sylius.factory.promotion_action" public="false">
             <argument type="service" id="sylius.factory.promotion_action.decorated.inner" />
         </service>
-        <service id="sylius.factory.promotion_rule.decorated" class="Sylius\Component\Core\Factory\PromotionRuleFactory"
-                 decorates="sylius.factory.promotion_rule" public="false">
+        <service id="sylius.factory.promotion_rule.decorated" class="Sylius\Component\Core\Factory\PromotionRuleFactory" decorates="sylius.factory.promotion_rule" public="false">
             <argument type="service" id="sylius.factory.promotion_rule.decorated.inner" />
         </service>
 
