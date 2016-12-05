@@ -69,3 +69,7 @@
 ### Behat
 
 * `Sylius\Behat\Page\Admin\Crud\IndexPage`, `Sylius\Behat\Page\Admin\Crud\CreatePage`, `Sylius\Behat\Page\Admin\Crud\UpdatePage` now accepts route name instead of resource name.
+
+* ImageUniqueCode and ImageUniqueCodeValidator was deleted and replaced by WithinCollectionUniqueCodeValidator, WithinCollectionUniqueCode form ResourceBundle.
+  To use it replace name of constraint in constraint mapping file from: `Sylius\Bundle\CoreBundle\Validator\Constraints\ImageUniqueCode`
+  to: `Sylius\Bundle\ResourceBundle\Validator\Constraints\WithinCollectionUniqueCode`
