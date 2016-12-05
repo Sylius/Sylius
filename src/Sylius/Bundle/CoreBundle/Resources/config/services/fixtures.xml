@@ -60,6 +60,12 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
+        <service id="sylius.fixture.customer_group" class="Sylius\Bundle\CoreBundle\Fixture\CustomerGroupFixture">
+            <argument type="service" id="sylius.manager.customer_group" />
+            <argument type="service" id="sylius.fixture.example_factory.customer_group" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
         <service id="sylius.fixture.shop_user" class="Sylius\Bundle\CoreBundle\Fixture\ShopUserFixture">
             <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="sylius.fixture.example_factory.shop_user" />

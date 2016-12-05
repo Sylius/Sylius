@@ -37,9 +37,14 @@
             <argument type="service" id="sylius.repository.currency" />
         </service>
 
+        <service id="sylius.fixture.example_factory.customer_group" class="Sylius\Bundle\CoreBundle\Fixture\Factory\CustomerGroupExampleFactory">
+            <argument type="service" id="sylius.factory.customer_group" />
+        </service>
+
         <service id="sylius.fixture.example_factory.shop_user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory">
             <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.repository.customer_group" />
         </service>
 
         <service id="sylius.fixture.example_factory.admin_user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory">

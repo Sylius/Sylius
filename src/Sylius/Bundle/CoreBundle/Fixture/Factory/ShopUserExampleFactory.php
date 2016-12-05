@@ -11,9 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
+use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Customer\Model\CustomerGroupInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -33,6 +36,11 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
     private $customerFactory;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $customerGroupRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -45,13 +53,16 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
     /**
      * @param FactoryInterface $userFactory
      * @param FactoryInterface $customerFactory
+     * @param RepositoryInterface $customerGroupRepository
      */
     public function __construct(
         FactoryInterface $userFactory,
-        FactoryInterface $customerFactory
+        FactoryInterface $customerFactory,
+        RepositoryInterface $customerGroupRepository
     ) {
         $this->userFactory = $userFactory;
         $this->customerFactory = $customerFactory;
+        $this->customerGroupRepository = $customerGroupRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -71,6 +82,7 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
         $customer->setEmail($options['email']);
         $customer->setFirstName($options['first_name']);
         $customer->setLastName($options['last_name']);
+        $customer->setGroup($options['customer_group']);
 
         /** @var ShopUserInterface $user */
         $user = $this->userFactory->createNew();
@@ -100,6 +112,9 @@ class ShopUserExampleFactory extends AbstractExampleFactory implements ExampleFa
             ->setDefault('enabled', true)
             ->setAllowedTypes('enabled', 'bool')
             ->setDefault('password', 'password123')
+            ->setDefault('customer_group', LazyOption::randomOneOrNull($this->customerGroupRepository, 100))
+            ->setAllowedTypes('customer_group', ['null', 'string', CustomerGroupInterface::class])
+            ->setNormalizer('customer_group', LazyOption::findOneBy($this->customerGroupRepository, 'code'))
         ;
     }
 }

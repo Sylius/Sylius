@@ -72,6 +72,16 @@ sylius_fixtures:
                                 channels:
                                     - "US_WEB"
 
+                customer_group:
+                    options:
+                        custom:
+                            retail:
+                                code: "retail"
+                                name: "Retail"
+                            wholesale:
+                                code: "wholesale"
+                                name: "Wholesale"
+
                 shop_user:
                     name: "shop_user"
                     options:
