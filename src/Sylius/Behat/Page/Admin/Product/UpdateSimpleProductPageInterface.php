@@ -45,6 +45,13 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      */
     public function nameItIn($name, $localeCode);
 
+    public function addSelectedAttributes();
+
+    /**
+     * @param string $attribute
+     */
+    public function removeAttribute($attribute);
+
     /**
      * @param string $attribute
      *

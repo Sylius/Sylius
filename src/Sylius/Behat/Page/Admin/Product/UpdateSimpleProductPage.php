@@ -48,6 +48,22 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         $this->getElement('price', ['%channel%' => $channelName])->setValue($price);
     }
 
+    public function addSelectedAttributes()
+    {
+        $this->clickTabIfItsNotActive('attributes');
+        $this->getDocument()->pressButton('Add attributes');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAttribute($attribute)
+    {
+        $this->clickTabIfItsNotActive('attributes');
+
+        $this->getElement('attribute_delete_button', ['%attribute%' => $attribute])->press();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -375,6 +391,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'association_dropdown_item' => '.field > label:contains("%association%") ~ .product-select > div.menu > div.item:contains("%item%")',
             'association_dropdown_item_selected' => '.field > label:contains("%association%") ~ .product-select > a.label:contains("%item%")',
             'attribute' => '.attribute .label:contains("%attribute%") ~ input',
+            'attribute_delete_button' => '.attribute .label:contains("%attribute%") ~ button',
             'code' => '#sylius_product_code',
             'images' => '#sylius_product_images',
             'language_tab' => '[data-locale="%locale%"] .title',

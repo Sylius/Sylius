@@ -516,6 +516,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I try to add new attributes
+     */
+    public function iTryToAddNewAttributes()
+    {
+        $this->updateSimpleProductPage->addSelectedAttributes();
+    }
+
+    /**
      * @Then /^attribute "([^"]+)" of (product "[^"]+") should be "([^"]+)"$/
      */
     public function itsAttributeShouldBe($attribute, ProductInterface $product, $value)
@@ -996,6 +1004,14 @@ final class ManagingProductsContext implements Context
         throw new \Exception(
             sprintf('Product "%s" should not have price defined for channel "%s".', $product->getName(), $channelName)
         );
+    }
+
+    /**
+     * @Then I should be notified that no new attributes has been selected
+     */
+    public function iShouldBeNotifiedThatNoNewAttributesHasBeenSelected()
+    {
+
     }
 
     /**
