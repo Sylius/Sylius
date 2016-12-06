@@ -365,6 +365,18 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^(this customer) has(?:| also) placed (an order "[^"]+") at "([^"]+)"$/
+     */
+    public function thisCustomerHasPlacedAnOrderAtDate(CustomerInterface $customer, $number, $checkoutCompletedAt)
+    {
+        $order = $this->createOrder($customer, $number);
+        $order->setCheckoutCompletedAt(new \DateTime($checkoutCompletedAt));
+        $order->setState(OrderInterface::STATE_NEW);
+
+        $this->orderRepository->add($order);
+    }
+
+    /**
      * @Given :numberOfCustomers customers have added products to the cart for total of :total
      */
     public function customersHaveAddedProductsToTheCartForTotalOf($numberOfCustomers, $total)

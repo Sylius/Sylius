@@ -56,4 +56,6 @@ interface IndexPageInterface extends SymfonyPageInterface
      * @return int
      */
     public function countItems();
+
+    public function filter();
 }

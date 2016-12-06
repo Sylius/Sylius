@@ -134,6 +134,11 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         $actionButtons->pressButton('Delete');
     }
 
+    public function filter()
+    {
+        $this->getElement('filter')->press();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -164,6 +169,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'filter' => 'button:contains("Filter")',
             'table' => '.table',
         ]);
     }
