@@ -8,3 +8,5 @@ sylius:
         add_address: La dirección se ha añadido correctamente.
         impersonate: Cliente %name% correctamente impersonado.
         set_address_as_default: La dirección se ha establecido como predeterminada.
+    product:
+        out_of_stock: Solo hay %quantity% unidades de este producto en stock.

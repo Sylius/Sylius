@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Voer een ISO landcode in.
+            regex: Land code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: De land ISO code moet uniek zijn.
     province:
         code:
@@ -47,6 +48,7 @@ sylius:
     zone:
         code:
             not_blank: Gelieve een code in te geven voor deze zone.
+            regex: Zone code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: De zone code moet uniek zijn.
         members:
             min_count: Voeg minstens {{ limit }} zone leden toe.
@@ -57,4 +59,5 @@ sylius:
     zone_member:
         code:
             not_blank: Kies een lid voor deze zone.
+            regex: De code van een lid van een zone kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
         unique: Het gekozen zonelid zit reeds in deze zone.

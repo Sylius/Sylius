@@ -22,6 +22,8 @@ sylius:
     payment:
         currency_code:
             not_valid: De valutacode die je hebt ingevoerd is ongeldig.
+        method:
+            not_blank: Selecteer een betalingsmethode.
     payment_method:
         gateway:
             not_blank: Selecteer een betaalmethode.
@@ -36,7 +38,8 @@ sylius:
             percent:
                 max_range: Percentage vergoeding kan niet groter zijn dan {{ limit }}.
                 min_range: Percentage vergoeding kan niet lager is dan {{ limit }}.
-                not_blank: Voer het percentage vergoeding in.
+                not_blank: Voer het vergoedingspercentage in.
         code:
             not_blank: Voer een betaalmethode code in.
+            regex: Betalingsmethode kan alleen bestaan uit letters, cijfers, strepen en liggende strepen.
             unique: De betaalmethode met gegeven code bestaat reeds.

@@ -5,6 +5,8 @@ sylius:
     review:
         author:
             already_exists: Ten e-mail jest już zarejestrowany, proszę się zalogować lub użyć opcji przypominania hasła.
+        comment:
+            not_blank: Opis opinii nie może być pusty.
         rating:
             not_blank: Nie może brakować oceny recenzji.
         title:

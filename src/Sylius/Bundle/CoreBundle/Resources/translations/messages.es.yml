@@ -123,6 +123,8 @@ sylius:
             products: Filtro de productos
             taxons: Filtro de taxones
         promotion_rule:
+            customer_group:
+                group: Grupo de clientes
             has_taxon:
                 taxons: Taxones
             product:

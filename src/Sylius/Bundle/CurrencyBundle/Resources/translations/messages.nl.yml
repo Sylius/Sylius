@@ -8,3 +8,7 @@ sylius:
             code: Naam
             enabled: Ingeschakeld
             exchange_rate: Wisselkoers
+        exchange_rate:
+            source_currency: Bronvaluta
+            target_currency: Doel valuta
+            ratio: Verhouding

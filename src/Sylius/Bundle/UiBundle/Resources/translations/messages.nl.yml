@@ -45,7 +45,7 @@ sylius:
         add_your_review: Voeg je beoordeling toe
         adding_new_customer_groups: Nieuwe klantgroepen toevoegen
         adding_new_email: Toevoegen van nieuwe E-mail
-        adding_new_locale: Nieuwe locatie toevoegen
+        adding_new_locale: Nieuwe landinstelling toevoegen
         additional_information: Aanvullende informatie
         address: Adres
         address_book: Adresboek
@@ -57,7 +57,7 @@ sylius:
         administration_panel_login: Beheer
         admin_users: Beheerders
         all: Alles
-        all_your_addresses: Al uw adressen
+        all_your_addresses: Uw adressen
         amount: Hoeveelheid
         an_error_occurred: Er deed zich een fout voor
         api: Api
@@ -72,14 +72,14 @@ sylius:
         availability: Beschikbaarheid
         available_for_channels: Beschikbaar voor kanalen
         available_on: Beschikbaar vanaf
-        available_on_hand: Uit de hand verkrijgbaar
+        available_on_hand: Uit voorraad beschikbaar
         available_until: Beschikbaar tot
         average_order_value: Gemiddelde bestelwaarde
-        awaiting_payment: Wachten op betaling
+        awaiting_payment: Wachtend op betaling
         back: Terug
         back_to_store: Terug naar de winkel
         back_to_details: Terug naar de details
-        backorder: Backorder
+        backorder: Nabestelling
         backordered: Nabesteld
         balance_due: Nog te betalen
         base_currency: Standaardvaluta
@@ -88,34 +88,40 @@ sylius:
         blocks: Blokken
         body: Inhoud
         browse_products: Bekijk producten
+        browse_all_products: Bekijk alle producten
         browse_your_addresses: Bekijk uw adressen
         browse_your_orders_from_the_past: Bekijk uw eerdere bestellingen
         build: Bouwen
+        by_position: Op positie
         calculator: Calculator
+        call_us: Bel ons!
         cancel: Annuleren
         cancelled: Geannuleerd
         cart: Winkelwagen
         cart_locked: Winkelwagen vergrendeld
-        cart_summary: Overzicht winkelwagen
+        cart_summary: Winkelwagen overzicht
         categorization: Categorisering
         category: Categorie
         category_requirements: Categorie vereisten
-        change_address: Wijzig adres
+        change_address: Adres wijzigen
         change_file: Bestand wijzigen
         change_password: Wijzig wachtwoord
-        change_payment_method: Wijzig betaalmethode
+        change_payment_method: Betaalmethode wijzigen
+        change_position: Positie wijzigen
         change_shipping_method: Verzendmethode wijzigen
         change_your_password: Verander uw wachtwoord
-        channel: Kanalen
+        channel: Kanaal
         channels: Kanalen
         charges_and_taxes: Heffingen en belastingen
         checkbox: Selectievak
         checking_out_as: Afrekenen als
         checkout: Afrekenen
+        choose_channel: Kanaal kiezen
         choose_file: Kies bestand
         choose_how_your_goods_will_be_delivered: Kies hoe uw bestellingen bezorgd moeten worden
         choose_how_you_will_pay: Kies hoe u wilt betalen
         city: Stad
+        clear: Wissen
         clear_cart: Winkelwagen leegmaken
         clear_filters: Wis filters
         code: Code
@@ -132,7 +138,7 @@ sylius:
         confirmation_title: Bevestiging
         confirmed: Bevestigd
         contact_us: Contacteer ons
-        contain_variants: Bevat Varianten
+        contain_variants: Bevat varianten
         contains: Bevat
         content: Inhoud
         countries: Landen
@@ -147,16 +153,16 @@ sylius:
         create_an_account: Een account aanmaken
         create_association_type: Nieuw relatietype
         create_country: Nieuw land
-        create_currency: Valuta maken
+        create_currency: Nieuwe valuta
         create_customer: Nieuwe klant
         create_imagine_block: Nieuw afbeeldingsblok
-        create_locale: Nieuwe locatie
+        create_locale: Nieuwe taalinstelling
         create_menu: Menu aanmaken
-        create_menu_node: Menu node aanmaken
+        create_menu_node: Nieuw menu item
         create_new_coupon: Nieuwe coupon toevoegen
         create_new_page: Nieuwe pagina
-        create_new_report: Nieuw rapport maken
-        create_option: Optie aanmaken
+        create_new_report: Nieuw rapport
+        create_option: Nieuwe optie
         create_order: Nieuwe bestelling
         create_payment: Nieuwe betaling
         create_payment_method: Nieuwe betaalmethode
@@ -187,6 +193,7 @@ sylius:
         creating_new_page: Nieuwe pagina aanmaken
         creation_date: Aangemaakt op
         creation_time: Aanmaakdatum
+        criteria: Criteria
         currencies: Valuta's
         currency: Valuta
         current_orders: Huidige bestellingen
@@ -194,6 +201,7 @@ sylius:
         current_promotions: Huidige promoties
         current_stock: Huidige voorraad
         customer: Klant
+        customer_can_login_to_the_store: Kan de klant inloggen op de winkel?
         customer_care: Klantendienst
         customer_details: Klantgegevens
         customer_groups: Klantgroepen
@@ -214,11 +222,13 @@ sylius:
         date: Datum
         datetime: Datum / tijd
         default: Standaardinstelling
+        default_address: Standaardadres
         default_billing_address: Standaard factuuradres
+        default_currency: Standaard valuta
         default_locale: Standaardlandinstelling
         default_shipping_address: Standaard verzendadres
         delete: Verwijderen
-        delete_image: Verwijder Afbeelding
+        delete_image: Verwijder afbeelding
         deleted: Verwijderd
         delivery_and_shipping: Verzending & Levering
         description: Omschrijving
@@ -227,6 +237,7 @@ sylius:
         disabled: Inactief
         discount: Korting
         discounted_unit_price: Eenheidsprijs na korting
+        display: Weergeven
         edit: Bewerken
         edit_admin_user: Beheerder bewerken
         edit_association_type: Bewerk relatietype
@@ -235,6 +246,7 @@ sylius:
         edit_coupon: Coupon bewerken
         edit_currency: Bewerk valuta
         edit_customer: Bewerk klant
+        edit_exchange_rate: Wisselkoers bewerken
         edit_locale: Bewerk locatie
         edit_my_address: Bewerk mijn adres
         edit_order: Bestelling bewerken
@@ -249,6 +261,7 @@ sylius:
         edit_promotion_coupon: Promotie coupon bewerken
         edit_report: Rapport bewerken
         edit_shipping_address: Verzendadres bewerken
+        edit_shipping_category: Verzendcategorie bewerken
         edit_shipping_method: Verzendmethode bewerken
         edit_tax_category: Bewerk belasting categorie
         edit_tax_rate: Bewerk belastingtarief
@@ -263,6 +276,7 @@ sylius:
         editing_currency: Valuta bewerken
         editing_customer: Klant bewerken
         editing_email: E-mail bewerken
+        editing_exchange_rate: Wisselkoers bewerken
         editing_imagine_block: Bewerk afbeeldingsblok
         editing_menu: Menu bewerken
         editing_menu_node: Bewerk menu node
@@ -289,6 +303,7 @@ sylius:
         editing_zone: Zone bewerken
         email: E-mail
         email_templates: E-mailsjablonen
+        email_verified: E-mailadres geverifieerd
         emails: E-mails
         empty: Leeg
         enable: Inschakelen
@@ -301,6 +316,7 @@ sylius:
         equal: Gelijk
         error: Fout
         exchange_rate: Wisselkoers
+        exchange_rates: Wisselkoersen
         exclusive: Exclusief
         existing_customer: Bestaande klant
         expiration_and_usage_limits: Vervaldatum en gebruiksbeperkingen
@@ -314,7 +330,11 @@ sylius:
         filters: Filters
         fill_in_your_billing_and_shipping_addresses: Voer uw factuur and verzend adres in
         first_name: Voornaam
+        forgot_password: Wachtwoord vergeten?
+        from_the_newest: Nieuwste
+        from_the_oldest: Oudste
         fulfill: Vervullen
+        fulfilled: Vervuld
         gateway: Gateway
         general_info: Algemene Info
         general_settings: Algemene instellingen
@@ -323,10 +343,13 @@ sylius:
         generate_variants: Genereer varianten
         generating_coupons: Genereer coupons
         go: Ga
+        go_level_up: Niveau omhoog
         go_to_dashboard: Ga naar dashboard
         grand_total: Totaal
+        group_membership: Groepslidmaatschap
         guest: Gast
         guest_customer: Gast klant
+        have_an_account_already: Heeft U reeds een account?
         hello: Hallo
         hello_name: Hallo <b>%name%</b>
         hide_deleted: Verberg verwijderd
@@ -338,6 +361,7 @@ sylius:
         image: Afbeelding
         images: Afbeeldingen
         imagine_blocks: Afbeeldingsblokken
+        impersonate: Log in als gebruiker
         in: In
         included_in_price: Inbegrepen in de prijs
         index_metadata: Metagegevens
@@ -352,10 +376,13 @@ sylius:
         inventory_tracking: Voorraadbeheer
         invoice: Factuur
         is_enabled: Is ingeschakeld
+        it_seems_you_have_an_account_already: U heeft reeds een account
         item: Artikel
         items: Items
+        item.choice: '{0} |{1}, 1 object |] 1, Inf], %count% items'
         items_total: Artikelen Totaal
         jump_to_page: Ga naar pagina
+        label: Label
         last_login: Laatst ingelogd
         last_name: Achternaam
         last_update: Laatst bijgewerkt
@@ -368,6 +395,7 @@ sylius:
         links: Links
         list_coupons: Lijst van coupons
         list_variants: Varianten
+        locale: Landinstelling
         locales: Talen/Regio's
         lock: Vergrendelen
         locked: Vergrendeld
@@ -377,9 +405,12 @@ sylius:
         login_sylius_store: Login <small>Sylius store</small>
         logout: Uitloggen
         main_taxon: Hoofdcategorie
+        male: Man
         manage: Beheer
         manage_adjustments: Aanpassingen beheren
+        manage_admin_users: Beheerders beheren
         manage_attributes: Beheer attributen
+        manage_association_types_of_your_products: Product relatietypes beheren
         manage_attributes_of_your_products: Beheer kenmerken van uw producten
         manage_categorization_of_your_products: Beheer categorisering van uw producten
         manage_channels: Kanalen beheren
@@ -388,8 +419,10 @@ sylius:
         manage_coupons: Beheer je coupons
         manage_currencies_available_in_the_store: Beheer beschikbare valuta's in de winkel
         manage_customers: Klanten beheren
+        manage_customer_groups: Klantengroepen beheren
         manage_discounts_and_promotional_campaigns: Beheer kortingen en promotionele campagnes
         manage_emails: E-mails beheren
+        manage_exchange_rates: Beheren van wisselkoersen
         manage_geographical_zones: Beheer geografische zones
         manage_languages_available_in_the_store: Beheren van beschikbare talen voor de winkel
         manage_metadata: Beheer metagegevens
@@ -400,19 +433,24 @@ sylius:
         manage_products: Beheer producten
         manage_promotions: Promoties beheren
         manage_reviews: Beheer van beoordelingen
+        manage_reviews_of_your_products: Beoordelingen voor uw producten beheren
         manage_shipments: Verzendingen beheren
         manage_shipping_categories: Beheer verzendcategorieën
+        manage_shipping_categories_for_your_store: Verzendcategorieën beheren
         manage_shipping_destinations: Beheer van bestemmingen voor verzending
         manage_shipping_methods: Beheer verzendmethodes
         manage_shipping_methods_for_your_store: Beheer verzendmethoden voor uw winkel
+        manage_taxons: Beheren van taxa
         manage_tax_categories: Belastingcategorieën beheren
         manage_tax_rates: Belastingtarieven beheren
         manage_taxation_of_your_products: Beheren van belastingen van uw producten
         manage_users: Beheer gebruikers
+        manage_users_able_to_access_administration_panel: Beheer gebruikers die toegang hebben tot het Administratiepaneel
         manage_variants: Beheer de varianten
         manage_your_customers: Klanten beheren
         manage_your_personal_information_and_preferences: Beheer je persoonlijke informatie en voorkeuren
         manage_your_product_catalog: Beheer je productcatalogus
+        manage_your_saved_addresses: Uw opgeslagen adressen beheren
         manage_zones: Zones beheren
         marketing: Marketing
         media: Media
@@ -428,7 +466,9 @@ sylius:
         my_account: Mijn account
         n_a: N/B
         name: Naam
+        need_assistance: Hulp nodig?
         new: Nieuw
+        new_admin_user: Nieuwe beheerder
         new_channel: Nieuw kanaal
         new_comment_posted_on_order: Nieuwe commentaar gepost op bestelling
         new_country: NIeuw land toevoegen
@@ -436,6 +476,7 @@ sylius:
         new_currency: Nieuwe valuta
         new_customer: Nieuwe klant
         new_customers: Nieuwe klanten
+        new_exchange_rate: Nieuwe wisselkoers
         new_locale: Nieuwe landinstelling
         new_order: Nieuwe bestelling toevoegen
         new_orders: Nieuwe bestellingen
@@ -444,6 +485,7 @@ sylius:
         new_payment_method: Nieuwe betaalmethode toevoegen
         new_permission: Nieuwe machtiging
         new_product: Nieuw product
+        new_product_association_type: Nieuw product relatietype
         new_product_attribute: Nieuw productattribuut
         new_product_option: Nieuwe product optie
         new_product_variant: Nieuwe productvariant
@@ -459,13 +501,17 @@ sylius:
         new_user: Nieuwe gebruiker toevoegen
         new_zone: Nieuwe zone toevoegen
         newest_products: Nieuwste producten
+        newest_first: Nieuwste eerst
         next: Volgende
+        no_label: Nee
         no_account: geen account
+        no_addresses: Er zijn geen adressen om weer te geven
         no_association_types_to_display: Er zijn geen relatie typen gedefinieerd
         no_comment: Geen commentaar
         no_default_billing_address: Geen standaard factuuradres
         no_default_shipping_address: Geen standaard verzendadres
         no_description: Geen omschrijving
+        no_payment_methods_available: Er zijn momenteel geen betalingsmethoden beschikbaar voor uw bestelling
         no_pricing_configuration: Geen prijsstelling geconfigureerd
         no_promotion: Geen promotie toegepast
         no_requirement: Geen vereiste
@@ -484,10 +530,13 @@ sylius:
         not_empty: Niet leeg
         not_in: Niet in
         not_verified: Niet geverifieerd
+        not_tracked: Geen stockopvolging
+        notes: Nota’s
         notify_customer: Klant informeren
         number: Nummer
         number_of_orders: Aantal bestellingen
         oauth_provider: OAuth Provider
+        oldest_first: Oudste eerst
         on_hold: In de wacht
         options: Opties
         or: of
@@ -501,6 +550,7 @@ sylius:
         order_state: Bestel status
         order_summary: Bestellingsoverzicht
         order_total: Ordertotaal
+        base_currency_order_total: Ordertotaal in basisvaluta
         order_value: Bestellingswaarde
         ordered: Besteld
         orders: Bestellingen
@@ -509,7 +559,9 @@ sylius:
         overview_of_your_store: Overzicht van uw winkel
         page: Pagina
         pages: Pagina's
+        paid: Betaald
         parent: Ouder
+        partially_paid: Gedeeltelijk betaald
         partially_shipped: Gedeeltelijk verzonden
         password: Wachtwoord
         payment: Betaling
@@ -529,9 +581,13 @@ sylius:
         personal_information: Persoonlijke gegevens
         phone_number: Telefoonnummer
         place_order: Plaats bestelling
+        placed_an_order: Uw bestelling werd geplaatst.
         placed_at: Geplaatst op
+        please_sign_in: Gelieve aan te melden
         postcode: Postcode
+        position: Positie
         powered_by: Mogelijk gemaakt door
+        preferences: Voorkeuren
         presentation: Weergave
         previous: Vorige
         price: Prijs
@@ -542,7 +598,7 @@ sylius:
         processing: Verwerken
         product: Product
         product_association_index: Relatie
-        product_association_type_index: Associatietype
+        product_association_type_index: Relatietype
         product_association_types: Product relatietypes
         product_associations: Product relaties
         product_attributes: Productattributen
@@ -559,9 +615,11 @@ sylius:
         promotion_configuration: Promotie configuratie
         promotion_coupons: Coupons
         promotion_details: Promotie details
+        promotion_discount: Promotie korting
         promotion_information: Promotie informatie
         promotion_total: Korting totaal
         promotions: Promoties
+        properties: Eigenschappen
         province: Provincie
         provinces: Provincies
         purchased_from: Gekocht bij
@@ -570,10 +628,13 @@ sylius:
         qty_min: Minimum aantal
         quantity: Hoeveelheid
         rating: Beoordeling
+        ratio: Verhouding
         ready: Klaar
         recent_customers: Recente klanten
         recent_orders: Recente bestellingen
         recent_users: Recente gebruikers
+        records: Records
+        refund: Terugbetalen
         refunded: Terugbetaald
         register: Registreren
         register_button: Registreren
@@ -581,6 +642,7 @@ sylius:
         registered_customers: Geregistreerde klanten
         registration_create_an_account_in_store: Registratie <small>Creëer een account in de winkel</small>
         registration_date: Aanmelddatum
+        reject: Weigeren
         rejected: Afgewezen
         release_inventory: Voorraad vrijgeven
         remember_me: Onthoud mijn gegevens
@@ -598,6 +660,7 @@ sylius:
         returned: Geretourneerd
         returns_policy: Retourbeleid
         revert: Terugkeren
+        review_and_confirm_your_order: Controleren en bevestigen van uw bestelling
         review_details: Beoordelingsdetails
         reviews: Beoordelingen
         roles: Rollen
@@ -606,11 +669,16 @@ sylius:
         sales_this_month: Verkoop
         save: Opslaan
         save_changes: Aanpassingen opslaan
+        save_positions: Posities opslaan
         scope: Bereik
         search: Zoeken
+        search_products: Zoek Producten
         security_settings: Beveiligingsinstellingen
+        select_address_from_book: Adres uit adressenboek selecteren
+        select_products: Selecteer producten
         select_taxon: Selecteer taxon
         set_a_new_password_for_your_account: Een nieuw wachtwoord voor je account instellen
+        set_as_default: Instellen als standaard
         set_as_default_billing_address: Instellen als standaard factuuradres
         set_as_default_shipping_address: Instellen als standaard verzendadres
         ship: Verzend
@@ -625,6 +693,7 @@ sylius:
         shipping: Verzending
         shipping_address: Bezorgadres
         shipping_and_payment_methods: Verzend- en betaal methoden
+        shipping_categories: Verzendcategorieën
         shipping_category: Verzend categorie
         shipping_charges: Verzendkosten
         shipping_method: Verzendmethode
@@ -639,6 +708,8 @@ sylius:
         show_deleted: Toon verwijderd
         show_in_store: Toon in winkel
         show_metadata: Toon metadata
+        show_order_details: Toon Orderinformatie
+        show_orders: Bestellingen tonen
         sign_in: Aanmelden
         sign_in_here: Hier inloggen
         sign_in_to_the_store_or_create_new_account: Inloggen <small>of maak een nieuw account</small>
@@ -648,6 +719,8 @@ sylius:
         sku: SKU
         slideshow: Slideshow
         slideshow_blocks: Slideshow blokken
+        sort_by_date: Sorteer op datum
+        source_currency: Bronvaluta
         start_date: Begindatum
         starts_at: Start op
         starts_with: Begint met
@@ -656,12 +729,16 @@ sylius:
         street: Straat
         string_blocks: Tekstblokken
         subject: Onderwerp
+        subscribed_to_newsletter: Geabonneerd op de nieuwsbrief
         subtotal: Subtotaal
         success: Succes
         summary: Samenvatting
+        summary_of_your_order: Overzicht van uw bestelling
         support: Helpdesk
         sylius_logo: Sylius
+        target_currency: Doel valuta
         tax: BTW
+        tax_categories: Belastingcategorieën
         tax_category: Belasting categorie
         tax_rate_details: Belastingtarief details
         tax_rates: Belasting Tarieven
@@ -670,12 +747,14 @@ sylius:
         taxation_settings: Belasting Instellingen
         taxes: Belastingen
         taxonomy: Taxonomie
+        taxons: Taxa
         terms_and_conditions: Algemene Voorwaarden
         text: Tekst
         textarea: Tekstgebied
         thank_you: Bedankt!
         thank_you_for_your_order: Bedankt voor uw bestelling
         theme: Thema
+        the_instructions_below_will_be_displayed_to_the_customer: De onderstaande instructies worden getoond aan de klant
         there_are_no_attributes_configured: Er zijn geen attributen geconfigureerd
         there_are_no_blocks_to_display: Er zijn geen blokken weer te geven
         there_are_no_channels_configured: Er zijn geen kanalen geconfigureerd
@@ -701,6 +780,7 @@ sylius:
         there_are_no_products_to_display: Er zijn geen producten om weer te geven
         there_are_no_promotions_configured: Er zijn geen promoties geconfigureerd
         there_are_no_reports_created: Er zijn geen rapporten gemaakt
+        there_are_no_reviews: Er zijn geen beoordelingen
         there_are_no_roles_defined: Er zijn geen rollen gedefinieerd
         there_are_no_shipments_to_display: Er zijn geen verzendingen om weer te geven
         there_are_no_shipping_categories_configured: Er zijn geen verzendcategorieën geconfigureerd
@@ -718,6 +798,7 @@ sylius:
         title: Titel
         topic: Onderwerp
         total: Totaal
+        total_in_base_currency: Totaal in de basisvaluta
         total_orders: Aantal bestellingen
         total_qty: Totale Hoeveelheid
         total_records: Aantal records
@@ -735,6 +816,7 @@ sylius:
         update_cart: Winkelwagen bijwerken
         update_product_association_type: Update van product koppelingstype
         updating_tax_rate: Belastingtarief bewerken
+        updating_date: Datum wordt bijgewerkt
         usage: Gebruik
         usage_limit: Gebruikslimiet
         used: Gebruikt
@@ -751,17 +833,24 @@ sylius:
         view_and_edit_cart: Winkelwagen bekijken en aanpassen
         view_more: Bekijk details
         view_product_details: Bekijk %product% details
+        view_your_order_or_change_payment_method: Bestelling bekijken of betalingsmethode wijzigen
+        view_your_store: Winkel bekijken
         void: Leeg
         volume_based_pricing: Volume gebaseerde prijzen
         warning: Waarschuwing
         welcome: Welkom
         welcome_to_our_store: Welkom in jouw winkel
         welcome_to_your_space: Welkom in uw account
+        write_your_own_review: Schrijf uw beoordeling
+        yes_label: Ja
         you_are_customer_since: U bent klant sinds
+        you_are_reviewing: U beoordeelt
+        you_can_no_longer_change_payment_method_of_this_order: U kunt niet langer de betaalmethode voor deze bestelling wijzingen
         you_have_no_addresses_defined: U heeft geen adressen gedefinieerd
         you_have_no_new_orders: U heeft geen nieuwe bestellingen
         you_may_also_like: Je bent misschien ook geïnteresseerd in
         your_cart_is_empty: Je winkelwagen is leeg
+        your_default_address: Uw standaardadres
         your_last_5_orders: Uw laatste 5 bestellingen
         your_order_has_been_shipped: Uw bestelling is verzonden
         your_products: Uw producten

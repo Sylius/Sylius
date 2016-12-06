@@ -32,6 +32,7 @@ sylius:
     country:
         code:
             not_blank: Lütfen ülke ISO kodunu yazın.
+            regex: Ülke kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.
             unique: Ülke ISO kodu benzersiz olmalıdır.
     province:
         code:
@@ -47,6 +48,7 @@ sylius:
     zone:
         code:
             not_blank: Bölge kodunu yazın.
+            regex: Alan kodu sadece harflerden, sayılardan, tire ve alt çizgi karakterlerinden oluşur.
             unique: Bölge kodu benzersiz olmalıdır.
         members:
             min_count: Lütfen en az {{ limit }} bölge üyesi ekleyiniz.

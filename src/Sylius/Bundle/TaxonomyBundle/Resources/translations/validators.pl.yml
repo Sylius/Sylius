@@ -5,6 +5,7 @@ sylius:
     taxon:
         code:
             not_blank: Proszę wprowadzić kod taksonu.
+            regex: Kod taxonu może być złożony tylko z liter, cyfr, myślników i podkreśleń.
             unique: Takson z podanym kodem już istnieje.
         name:
             max_length: Nazwa taksonomii nie może być dłuższa niż 255 znaków.

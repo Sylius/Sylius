@@ -44,6 +44,7 @@ sylius:
         adding_new_locale: Dodaj nowe ustawienia regionalne
         additional_information: Dodatkowe informacje
         address: Adres
+        address_book: Książka Adresowa
         addressing: Adresowanie
         addressing_step: Adres
         adjustments: Dostosowanie

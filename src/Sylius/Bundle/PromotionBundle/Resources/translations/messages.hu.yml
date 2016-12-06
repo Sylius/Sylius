@@ -26,6 +26,8 @@ sylius:
             cart_quantity_configuration:
                 count: Mennyiség
                 equal: Egyenlő
+            contains_product_configuration:
+                variants: Termékek
             shipping_country_configuration:
                 country: Ország
             type: Típus

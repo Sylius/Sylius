@@ -72,7 +72,7 @@ sylius:
         availability: Disponibilidad
         available_for_channels: Disponible para canales
         available_on: Disponible el
-        available_on_hand: Disponibles a mano
+        available_on_hand: Existencias disponibles
         available_until: Disponible hasta
         average_order_value: Valor de pedido promedio
         awaiting_payment: Esperando pago
@@ -88,9 +88,11 @@ sylius:
         blocks: Bloques
         body: Cuerpo
         browse_products: Ver los productos
-        browse_your_addresses: Ver tus direcciones
+        browse_all_products: Ver todos los productos
+        browse_your_addresses: Ver sus direcciones
         browse_your_orders_from_the_past: Ver sus pedidos anteriores
         build: sylius.breadcrumb.build
+        by_position: Por posición
         calculator: Calculadora
         call_us: '¡Llámanos!'
         cancel: Cancelar
@@ -191,6 +193,7 @@ sylius:
         creating_new_page: Crear nueva página
         creation_date: Fecha de creación
         creation_time: Fecha de creación
+        criteria: Criterio
         currencies: Monedas
         currency: Moneda
         current_orders: Pedidos en curso
@@ -258,6 +261,7 @@ sylius:
         edit_promotion_coupon: Editar el cupón de la promoción
         edit_report: Editar reporte
         edit_shipping_address: Editar dirección de envío
+        edit_shipping_category: Editar categoría de envío
         edit_shipping_method: Editar método de envío
         edit_tax_category: Editar categoría de impuesto
         edit_tax_rate: Editar tasa impositiva
@@ -375,6 +379,7 @@ sylius:
         it_seems_you_have_an_account_already: Parece que ya tiene una cuenta
         item: Producto
         items: Artículos
+        item.choice: '{0} |{1}, 1 item|]1,Inf], %count% productos'
         items_total: Total
         jump_to_page: Ir a la página
         label: Etiqueta
@@ -402,18 +407,18 @@ sylius:
         main_taxon: Taxón principal
         male: Hombre
         manage: Administrar
-        manage_adjustments: Manejar ajustes
-        manage_admin_users: Gestionar administradores
-        manage_attributes: Gestionar atributos
+        manage_adjustments: Administrar ajustes
+        manage_admin_users: Administrar administradores
+        manage_attributes: Administrar atributos
         manage_association_types_of_your_products: Administrar tipos de asociación de sus productos
         manage_attributes_of_your_products: Administrar atributos de los productos
         manage_categorization_of_your_products: Administrar categorización de productos
         manage_channels: Administrar canales
         manage_configuration_options_of_your_products: Administrar opciones de configuración para sus productos
-        manage_countries: Gestionar países
-        manage_coupons: Gestionar cupones
+        manage_countries: Administrar países
+        manage_coupons: Administrar cupones
         manage_currencies_available_in_the_store: Administrar monedas disponibles en tu tienda
-        manage_customers: Gestionar clientes
+        manage_customers: Administrar clientes
         manage_customer_groups: Administrar grupos de clientes
         manage_discounts_and_promotional_campaigns: Administrar descuentos y campañas promocionales
         manage_emails: Administrar mensajes de correo electrónico
@@ -421,31 +426,32 @@ sylius:
         manage_geographical_zones: Administrar zonas geográficas
         manage_languages_available_in_the_store: Administrar idiomas disponibles en la tienda
         manage_metadata: Administrar metadatos
-        manage_options: Gestionar opciones
-        manage_orders: Gestionar pedidos
+        manage_options: Administrar opciones
+        manage_orders: Administrar pedidos
         manage_payment_methods_available_to_your_customers: Administrar métodos de pago disponibles para sus clientes
         manage_payments: Administrar pagos
-        manage_products: Gestionar productos
-        manage_promotions: Gestionar promociones
-        manage_reviews: Gestionar reseñas
+        manage_products: Administrar productos
+        manage_promotions: Administrar promociones
+        manage_reviews: Administrar reseñas
         manage_reviews_of_your_products: Administrar las reseñas de sus productos
-        manage_shipments: Gestionar
-        manage_shipping_categories: Gestionar
-        manage_shipping_categories_for_your_store: Administrar categorías de envío de tu tienda
-        manage_shipping_destinations: Gestionar destinos de envío
-        manage_shipping_methods: Gestionar
-        manage_shipping_methods_for_your_store: Manejar métodos de envío para su tienda
-        manage_tax_categories: Gestionar
-        manage_tax_rates: Gestionar
+        manage_shipments: Administrar envíos
+        manage_shipping_categories: Administrar categorías de envíos
+        manage_shipping_categories_for_your_store: Administrar categorías de envío de su tienda
+        manage_shipping_destinations: Administrar destinos de envío
+        manage_shipping_methods: Administrar métodos de envío
+        manage_shipping_methods_for_your_store: Administrar métodos de envío para su tienda
+        manage_taxons: Administrar taxones
+        manage_tax_categories: Administrar categorías de impuestos
+        manage_tax_rates: Administrar tasas de impuestos
         manage_taxation_of_your_products: Administrar impuestos de sus productos
-        manage_users: Gestionar usuarios
-        manage_users_able_to_access_administration_panel: Gestionar usuarios capaces de acceder al panel de administración
-        manage_variants: Gestionar variantes
+        manage_users: Administrar usuarios
+        manage_users_able_to_access_administration_panel: Administrar usuarios capaces de acceder al panel de administración
+        manage_variants: Administrar variantes
         manage_your_customers: Administrar sus clientes
         manage_your_personal_information_and_preferences: Administre su información personal y preferencias
         manage_your_product_catalog: Administrar su catálogo de productos
         manage_your_saved_addresses: Administre sus direcciones guardadas
-        manage_zones: Gestionar zonas
+        manage_zones: Administrar zonas
         marketing: Marketing
         media: Imágenes
         members: Miembros
@@ -627,6 +633,7 @@ sylius:
         recent_customers: Clientes recientes
         recent_orders: Pedidos recientes
         recent_users: Usuario recientes
+        records: Registros
         refund: Reembolsar
         refunded: Reembolsado
         register: Registrarse
@@ -665,6 +672,7 @@ sylius:
         save_positions: Guardar posiciones
         scope: Ámbito
         search: Búsqueda
+        search_products: Buscar productos
         security_settings: Ajustes de seguridad
         select_address_from_book: Seleccionar dirección de mi libreta
         select_products: Seleccione productos
@@ -733,7 +741,7 @@ sylius:
         tax_categories: Categorías de impuestos
         tax_category: Categoría de impuestos
         tax_rate_details: Mostrar
-        tax_rates: Impuestos
+        tax_rates: Tasas de impuestos
         tax_total: Total impuestos
         taxation_categories: Categorías de impuestos
         taxation_settings: Configuración de impuestos
@@ -826,6 +834,7 @@ sylius:
         view_more: Ver más
         view_product_details: Ver detalles de %product%
         view_your_order_or_change_payment_method: Ver pedido o cambiar forma de pago
+        view_your_store: Ver su tienda
         void: Vacío
         volume_based_pricing: Precio por volumen
         warning: Advertencia
@@ -836,6 +845,7 @@ sylius:
         yes_label: Sí
         you_are_customer_since: Eres cliente desde
         you_are_reviewing: Está haciendo una reseña de
+        you_can_no_longer_change_payment_method_of_this_order: Ya no se puede cambiar el método de pago de este pedido
         you_have_no_addresses_defined: No tiene ninguna dirección definida
         you_have_no_new_orders: No tiene pedidos nuevos
         you_may_also_like: También te podría gustar

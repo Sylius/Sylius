@@ -582,6 +582,7 @@ sylius:
         save_changes: Salva cambiamenti
         scope: Ambito
         search: Ricerca
+        search_products: Producten zoeken
         security_settings: Impostazioni di sicurezza
         set_a_new_password_for_your_account: Imposta una nuova password per l'account
         set_as_default_billing_address: Imposta come indirizzo di fatturazione predefinito
@@ -719,6 +720,7 @@ sylius:
         view_and_edit_cart: Visualizzare e modificare il carrello
         view_more: Dettaglio
         view_product_details: Mostra dettagli %product%
+        view_your_store: Toon jouw winkel
         void: Nullo
         volume_based_pricing: Prezzi basati sul volume
         warning: Attenzione

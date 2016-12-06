@@ -528,6 +528,7 @@ sylius:
         product_review: Termék értékelések
         product_reviews: Termék értékelések
         product_variants: Termék változatok
+        products: Termékek
         products_categorized_as_name: '"%name%" szerint kategorizált termékek'
         products_categorized_under_taxon_taxon: Termékek <small>"%taxon%" taxon alatt kategorizálva</small>
         products_index_of_all_products_in_your_store: Products <small>Az áruház összes termékének indexe</small>
