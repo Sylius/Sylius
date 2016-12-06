@@ -21,6 +21,5 @@ man_pages = [
 sys.path.append(os.path.abspath('_exts'))
 lexers['php'] = PhpLexer(startinline=True)
 lexers['php-annotations'] = PhpLexer(startinline=True)
-primary_domain = 'php'
 rst_epilog = """
 """
