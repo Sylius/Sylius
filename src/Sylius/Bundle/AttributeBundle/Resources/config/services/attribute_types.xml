@@ -42,13 +42,13 @@
         <service id="sylius.attribute_type.datetime" class="Sylius\Component\Attribute\AttributeType\DatetimeAttributeType">
             <tag name="sylius.attribute.type" attribute-type="datetime" label="Datetime"
                  form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DatetimeAttributeType"
-                 configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Cofngiuration\DatetimeAttributeConfigurationType" />
+                 configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\DatetimeAttributeConfigurationType" />
         </service>
 
         <service id="sylius.attribute_type.date" class="Sylius\Component\Attribute\AttributeType\DateAttributeType">
             <tag name="sylius.attribute.type" attribute-type="date" label="Date"
                  form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\DateAttributeType"
-                 configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Cofngiuration\DateAttributeConfigurationType" />
+                 configuration-form-type="Sylius\Bundle\AttributeBundle\Form\Type\AttributeType\Configuration\DateAttributeConfigurationType" />
         </service>
     </services>
 </container>
