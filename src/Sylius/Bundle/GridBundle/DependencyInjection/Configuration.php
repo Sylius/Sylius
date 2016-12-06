@@ -112,6 +112,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('path')->cannotBeEmpty()->end()
                                         ->scalarNode('sortable')->end()
                                         ->scalarNode('enabled')->defaultTrue()->end()
+                                        ->scalarNode('position')->defaultNull()->end()
                                         ->arrayNode('options')
                                             ->prototype('variable')->end()
                                         ->end()

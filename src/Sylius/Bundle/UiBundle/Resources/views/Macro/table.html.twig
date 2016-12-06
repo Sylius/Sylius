@@ -1,7 +1,7 @@
 {% macro headers(grid, definition, requestAttributes) %}
     {% import 'SyliusUiBundle:Macro:sorting.html.twig' as sorting %}
 
-    {% for field in definition.fields %}
+    {% for field in definition.fields|sort_by('position', 'DESC') %}
         {% if field.enabled %}
             {% if field.isSortable %}
                 {{ sorting.tableHeader(grid, field, requestAttributes) }}
@@ -17,7 +17,7 @@
 
 {% macro row(grid, definition, row) %}
     <tr class="item">
-    {% for field in definition.fields %}
+    {% for field in definition.fields|sort_by('position', 'DESC') %}
         {% if field.enabled %}
             <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
         {% endif %}
