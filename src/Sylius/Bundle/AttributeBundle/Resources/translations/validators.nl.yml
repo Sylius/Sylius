@@ -9,6 +9,7 @@ sylius:
             max_length: Attribuutnaam mag niet langer zijn dan 1 teken. | Attribuutnaam mag niet meer dan {{ limit }} tekens bevatten.
         code:
             not_blank: Vul de attribuutcode in.
+            regex: Zone code kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
             unique: Deze code is al in gebruik.
         presentation:
             not_blank: Vul de attribuutweergave in.

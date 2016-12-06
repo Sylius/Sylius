@@ -3,5 +3,5 @@
 
 sylius:
     resource:
-        not_enabled: Gegeven resource is uitgeschakeld
-        not_disabled: Gegeven resource is ingeschakeld
+        not_enabled: Deze resource is uitgeschakeld
+        not_disabled: Deze resource is ingeschakeld

@@ -7,6 +7,10 @@ sylius:
             not_blank: Por favor, introduce la moneda base del canal.
         default_locale:
             not_blank: Por favor, introduzca el idioma por defecto del canal.
+    channel_pricing:
+        price:
+            min: El precio debe ser al menos {{ limit }}.
+            not_blank: Por favor, introduzca el precio.
     checkout:
         shipping_method:
             not_blank: Por favor seleccione el método de envío.
@@ -41,6 +45,7 @@ sylius:
         onHand:
             min: Las existencias deben ser mayores que {{ limit }}.
             not_blank: Por favor, introduzca las existencias.
+            reserved: Las existencias deben ser mayores que la cantidad de unidades retenidas
         original_price:
             min: El precio original no debe ser negativo.
         weight:

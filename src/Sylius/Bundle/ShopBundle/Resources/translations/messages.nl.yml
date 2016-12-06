@@ -8,6 +8,6 @@ sylius:
                 address_book: Adresboek
                 change_password: Wachtwoord wijzigen
                 dashboard: Dashboard
-                header: Je account
+                header: Uw account
                 order_history: Bestelgeschiedenis
                 personal_information: Persoonlijke gegevens

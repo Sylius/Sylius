@@ -3,14 +3,25 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Geef de basisvaluta van de kanaal.
         default_locale:
             not_blank: Voer a.u.b. een standaard taal in.
+    channel_pricing:
+        price:
+            min: Prijs moet ten minste {{ limit }} zijn.
+            not_blank: Voer de prijs in.
     checkout:
         shipping_method:
             not_blank: Gelieve een verzendmethode te kiezen.
+    currency:
+        enabled:
+            cannot_disable_base: De basisvaluta kan niet worden uitgeschakeld.
     customer:
         currency_code:
             not_valid: De valutacode die je hebt ingevoerd is ongeldig.
+    cart_item:
+        not_available: '%itemName% beschikt niet over voldoende voorraad.'
     order:
         currency_code:
             not_valid: De valutacode die je hebt ingevoerd is ongeldig.
@@ -18,15 +29,53 @@ sylius:
         code:
             not_blank: Voer een locatie code in.
             unique: Deze locatie bestaat al.
+        enabled:
+            cannot_disable_base: De basis landinstelling worden niet uitgeschakeld.
+    product_attribute:
+        invalid: Positie moet een geheel getal zijn.
+    product_image:
+        code:
+            not_blank: Voer een code voor de afbeelding in.
+            regex: Afbeeldingscode kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
+            unique: Afbeelding code moet uniek zijn voor dit product.
+        file:
+            max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
+            upload_ini_size: Het beeld is te groot. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: Verkoopbare voorraad moet groter zijn dan {{ limit }}.
             not_blank: Vul de verkoopbare voorraad in.
+            reserved: Aantal in voorraad dient groter zijn dan aantal gereserveerd
         original_price:
             min: De originele prijs mag niet negatief zijn.
+        weight:
+            min: Gewicht kan niet negatief zijn.
+            invalid: Gewicht moet een getal zijn.
+        width:
+            min: Breedte kan niet negatief zijn.
+            invalid: Breedte moet een getal zijn.
+        height:
+            min: Hoogte kan niet negatief zijn.
+            invalid: Gewicht moet een getal zijn.
+        depth:
+            min: Diepte kan niet negatief zijn.
+            invalid: Diepte moet een getal zijn.
     product_translation:
         short_description:
             max: Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.
+    taxon_image:
+        code:
+            not_blank: Voer een code voor de afbeelding in.
+            regex: Afbeeldingscode kan alleen bestaan uit letters, cijfers, streepjes en liggende streepjes.
+            unique: Afbeeldingscode moet uniek zijn voor dit taxon.
+        file:
+            max_size: De afbeelding is te groot - {{ size }}{{ suffix }}. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
+            upload_ini_size: Het beeld is te groot. Maximaal toegestane grootte is {{ limit }}{{ suffix }}.
     user:
         email:
             unique: Dit e-mailadres is al in gebruik.
+        username:
+            unique: Deze gebruikersnaam is al in gebruik.
+            not_blank: Voer je naam in.
+        locale_code:
+            not_blank: Kies een landinstelling.

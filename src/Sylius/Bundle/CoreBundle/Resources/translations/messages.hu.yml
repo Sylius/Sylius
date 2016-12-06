@@ -118,6 +118,8 @@ sylius:
         product_association_type:
             name: Név
         promotion_rule:
+            product:
+                products: Termékek
             total_of_items_from_taxon:
                 taxon: Taxonómia
         payment_method:

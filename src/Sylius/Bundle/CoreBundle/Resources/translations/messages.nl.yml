@@ -32,7 +32,7 @@ sylius:
             currencies: Valuta's
             shipping_methods: Verzendmethodes
             payment_methods: Betaalmethodes
-            tax_calculation_strategy: Strategie voor berekening van de BTW
+            tax_calculation_strategy: Belastingberekeningsstrategie
             tax_zone_default: Standaard belastingzone
             theme: Thema
             hostname: Hostnaam
@@ -116,17 +116,26 @@ sylius:
             email: E-mail
         product_association:
             product: Gerelateerd product
-            type: Associatietype
+            type: Relatietype
         product_association_type:
             name: Naam
+        promotion_filter:
+            products: Producten filteren
+            taxons: Taxa filter
         promotion_rule:
+            customer_group:
+                group: Klantengroep
+            has_taxon:
+                taxons: Taxa
             product:
                 products: Producten
             total_of_items_from_taxon:
-                taxon: Categorie
+                taxon: Taxon
                 amount: Hoeveelheid
         payment_method:
             channels: Kanalen
+        product_attribute:
+            position: Positie
     installer:
         extensions:
             header: extensies
@@ -156,13 +165,16 @@ sylius:
             header: bestandssysteem
             cache:
                 header: cache
+                help: 'Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: ''whoami'': rwx %path%'
             exists: bestaat
             logs:
                 header: logs
+                help: 'Machtigingen uitvoeren instellen: sudo setfacl -R -m u:www-gegevens: rwX -m u: ''whoami'': rwX %path% && sudo setfacl -dR -m u:www-gegevens: rwx -m u: ''whoami'': rwx %path%'
             not_exists: niet bestaand
             not_writable: niet schrijfbaar
             parameters:
                 header: parameters.yml
+                help: 'Machtigingen uitvoeren instellen: sudo chmod a + w %path%'
             vendors: vendors
             writable: schrijfbaar
         settings:
