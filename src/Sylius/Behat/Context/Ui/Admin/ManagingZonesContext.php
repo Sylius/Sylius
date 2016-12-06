@@ -205,11 +205,10 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Given /^(its) scope should be ("[^"]+")$/
+     * @Given its scope should be :scope
      */
-    public function itsScopeShouldBe(ZoneInterface $zone, $scope)
+    public function itsScopeShouldBe($scope)
     {
-        $this->updatePage->open(['id' => $zone->getId()]);
         $zoneScope = $this->updatePage->getScope();
 
         Assert::same(

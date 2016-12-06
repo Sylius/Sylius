@@ -103,7 +103,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_zone_code',
             'member' => '.one.field',
             'name' => '#sylius_zone_name',
-            'name' => '#sylius_zone_scope',
+            'scope' => '#sylius_zone_scope',
             'type' => '#sylius_zone_type',
             'zone_members' => '#sylius_zone_members',
         ]);
