@@ -39,4 +39,22 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
         $this->getDocument()->fillField('criteria_date_to_date', date('Y-m-d', $timestamp));
         $this->getDocument()->fillField('criteria_date_to_time', date('H:i', $timestamp));
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function chooseChannelFilter($channelName)
+    {
+        $this->getElement('filter_channel')->selectOption($channelName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'filter_channel' => '#criteria_entity_channel',
+        ]);
+    }
 }

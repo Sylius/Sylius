@@ -377,6 +377,17 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^(this customer) has(?:| also) placed (an order "[^"]+") on a (channel "[^"]+")$/
+     */
+    public function thisCustomerHasPlacedAnOrderOnAChannel(CustomerInterface $customer, $number, $channel)
+    {
+        $order = $this->createOrder($customer, $number, $channel);
+        $order->setState(OrderInterface::STATE_NEW);
+
+        $this->orderRepository->add($order);
+    }
+
+    /**
      * @Given :numberOfCustomers customers have added products to the cart for total of :total
      */
     public function customersHaveAddedProductsToTheCartForTotalOf($numberOfCustomers, $total)
