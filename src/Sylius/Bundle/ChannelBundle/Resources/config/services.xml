@@ -13,6 +13,10 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+        <service id="sylius.custom_factory.channel" class="Sylius\Component\Channel\Factory\ChannelFactory" decorates="sylius.factory.channel" public="false">
+            <argument type="service" id="sylius.custom_factory.channel.inner" />
+        </service>
+
         <service id="sylius.form.type.channel" class="Sylius\Bundle\ChannelBundle\Form\Type\ChannelType">
             <argument>%sylius.model.channel.class%</argument>
             <argument type="collection"><argument>sylius</argument></argument>

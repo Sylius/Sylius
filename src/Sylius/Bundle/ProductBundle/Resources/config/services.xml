@@ -23,6 +23,14 @@
             </call>
         </service>
 
+        <service id="sylius.custom_factory.product_variant" class="Sylius\Component\Product\Factory\ProductVariantFactory" decorates="sylius.factory.product_variant" public="false">
+            <argument type="service" id="sylius.custom_factory.product_variant.inner" />
+        </service>
+        <service id="sylius.custom_factory.product" class="Sylius\Component\Product\Factory\ProductFactory" decorates="sylius.factory.product" public="false">
+            <argument type="service" id="sylius.custom_factory.product.inner" />
+            <argument type="service" id="sylius.factory.product_variant" />
+        </service>
+
         <service id="sylius.validator.product_variant_combination" class="Sylius\Bundle\ProductBundle\Validator\ProductVariantCombinationValidator">
             <argument type="service" id="sylius.checker.product_variants_parity" />
             <tag name="validator.constraint_validator" alias="sylius.validator.product_variant_combination" />

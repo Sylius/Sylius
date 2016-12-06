@@ -24,8 +24,6 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Product\Factory\ProductFactory;
-use Sylius\Component\Product\Factory\ProductVariantFactory;
 use Sylius\Component\Product\Model\Product;
 use Sylius\Component\Product\Model\ProductAssociation;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
@@ -97,7 +95,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ProductInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->defaultValue(ProductRepository::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(ProductFactory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(TranslatableFactory::class)->end()
                                         ->scalarNode('form')->defaultValue(ProductType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()
@@ -131,7 +129,7 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ProductVariantInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->defaultValue(ProductVariantRepository::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(ProductVariantFactory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(ProductVariantType::class)->cannotBeEmpty()->end()
                                     ->end()
                                 ->end()

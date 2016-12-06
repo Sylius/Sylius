@@ -21,6 +21,10 @@
     </parameters>
 
     <services>
+        <service id="sylius.custom_factory.payment" class="Sylius\Component\Payment\Factory\PaymentFactory" decorates="sylius.factory.payment" public="false">
+            <argument type="service" id="sylius.custom_factory.payment.inner" />
+        </service>
+
         <service id="sylius.registry.payment_methods_resolver" class="Sylius\Component\Registry\PrioritizedServiceRegistry">
             <argument>%sylius.payment_methods_resolver.interface%</argument>
             <argument>Payment methods resolver</argument>
