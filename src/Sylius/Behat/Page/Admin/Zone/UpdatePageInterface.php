@@ -30,6 +30,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function countMembers();
 
     /**
+     * @return string
+     */
+    public function getScope();
+
+    /**
      * @param ZoneMemberInterface $zoneMember
      *
      * @return bool
