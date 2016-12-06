@@ -39,3 +39,19 @@ Boolean
 -------
 
 This filter checks if a value is true or false.
+
+Date
+----
+
+This filter checks if a chosen datetime field is between given dates.
+
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            app_order:
+                filters:
+                    date:
+                        type: date
+                        options:
+                            field: completedAt
