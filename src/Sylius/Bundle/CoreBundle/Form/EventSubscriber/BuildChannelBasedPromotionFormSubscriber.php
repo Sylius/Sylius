@@ -16,6 +16,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Promotion\Action\ChannelBasedPromotionActionCommandInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -24,7 +25,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class BuildChannelBasedPromotionFormSubscriber
+final class BuildChannelBasedPromotionFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ServiceRegistryInterface
@@ -44,24 +45,32 @@ final class BuildChannelBasedPromotionFormSubscriber
     /**
      * @var string
      */
-    private $subject;
+    private $typeSubject;
+
+    /**
+     * @var string
+     */
+    private $modelSubject;
 
     /**
      * @param ServiceRegistryInterface $registry
      * @param FormFactoryInterface $factory
      * @param ChannelRepositoryInterface $channelRepository
-     * @param string $subject
+     * @param string $typeSubject
+     * @param string $modelSubject
      */
     public function __construct(
         ServiceRegistryInterface $registry,
         FormFactoryInterface $factory,
         ChannelRepositoryInterface $channelRepository,
-        $subject
+        $typeSubject,
+        $modelSubject
     ) {
         $this->registry = $registry;
         $this->factory = $factory;
         $this->channelRepository = $channelRepository;
-        $this->subject = $subject;
+        $this->typeSubject = $typeSubject;
+        $this->modelSubject = $modelSubject;
     }
 
     /**
@@ -126,7 +135,7 @@ final class BuildChannelBasedPromotionFormSubscriber
      */
     private function getRegistryIdentifier($dynamicType, FormInterface $form)
     {
-        if ($dynamicType instanceof $this->subject && null !== $dynamicType->getType()) {
+        if ($this->isTypeValid($dynamicType) && null !== $dynamicType->getType()) {
             return $dynamicType->getType();
         }
 
@@ -144,7 +153,7 @@ final class BuildChannelBasedPromotionFormSubscriber
      */
     private function getConfiguration($dynamicType)
     {
-        if ($dynamicType instanceof $this->subject && null !== $dynamicType->getConfiguration()) {
+        if ($this->isTypeValid($dynamicType) && null !== $dynamicType->getConfiguration()) {
             return $dynamicType->getConfiguration();
         }
 
@@ -163,7 +172,7 @@ final class BuildChannelBasedPromotionFormSubscriber
             return;
         }
 
-        if (!$model instanceof ChannelBasedPromotionActionCommandInterface) {
+        if (!$this->isModelValid($model)) {
             $form->add($this->createConfigurationField($configuration, $data));
 
             return;
@@ -217,5 +226,24 @@ final class BuildChannelBasedPromotionFormSubscriber
             'auto_initialize' => false,
             'label' => false,
         ]);
+    }
+
+    /**
+     * @param string $dynamicType
+     *
+     * @return bool
+     */
+    private function isTypeValid($dynamicType)
+    {
+        return $dynamicType instanceof $this->typeSubject;
+    }
+
+    /**
+     * @param $model
+     * @return bool
+     */
+    private function isModelValid($model)
+    {
+        return $model instanceof $this->modelSubject;
     }
 }

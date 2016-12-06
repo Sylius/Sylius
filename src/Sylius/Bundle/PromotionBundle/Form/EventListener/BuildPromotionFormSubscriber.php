@@ -13,6 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\EventListener;
 
 use Sylius\Component\Promotion\Model\PromotionDynamicTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -25,7 +26,7 @@ use Symfony\Component\Form\FormInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-final class BuildPromotionFormSubscriber
+final class BuildPromotionFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ServiceRegistryInterface

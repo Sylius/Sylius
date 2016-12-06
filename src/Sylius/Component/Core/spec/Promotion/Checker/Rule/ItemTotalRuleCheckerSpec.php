@@ -25,11 +25,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 final class ItemTotalRuleCheckerSpec extends ObjectBehavior
 {
-    function let(RuleCheckerInterface $itemTotalRuleChecker)
-    {
-        $this->beConstructedWith($itemTotalRuleChecker);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType(ItemTotalRuleChecker::class);
@@ -45,17 +40,32 @@ final class ItemTotalRuleCheckerSpec extends ObjectBehavior
         $this->shouldImplement(ChannelBasedRuleCheckerInterface::class);
     }
 
-    function it_uses_decorated_checker_to_check_eligibility_for_order_channel(
+    function it_returns_true_if_order_cost_more_than_required_amount(
         ChannelInterface $channel,
         OrderInterface $order,
         RuleCheckerInterface $itemTotalRuleChecker
     ) {
         $order->getChannel()->willReturn($channel);
+        $order->getPromotionSubjectTotal()->willReturn(1500);
         $channel->getCode()->willReturn('WEB_US');
 
         $itemTotalRuleChecker->isEligible($order, ['amount' => 1000])->willReturn(true);
 
         $this->isEligible($order, ['WEB_US' => ['amount' => 1000]])->shouldReturn(true);
+    }
+
+    function it_returns_false_if_order_does_not_cost_more_than_required_amount(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        RuleCheckerInterface $itemTotalRuleChecker
+    ) {
+        $order->getChannel()->willReturn($channel);
+        $order->getPromotionSubjectTotal()->willReturn(500);
+        $channel->getCode()->willReturn('WEB_US');
+
+        $itemTotalRuleChecker->isEligible($order, ['amount' => 1000])->willReturn(true);
+
+        $this->isEligible($order, ['WEB_US' => ['amount' => 1000]])->shouldReturn(false);
     }
 
     function it_returns_false_if_there_is_no_configuration_for_order_channel(
