@@ -49,6 +49,7 @@
         <service id="sylius.order_processing.order_payment_processor" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
             <argument type="service" id="sylius.factory.payment"/>
             <argument type="service" id="sylius.payment_method_resolver.default" />
+            <argument type="service" id="sm.factory" />
             <tag name="sylius.order_processor" priority="0"/>
         </service>
     </services>

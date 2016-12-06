@@ -11,13 +11,16 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
@@ -39,15 +42,23 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     private $defaultPaymentMethodResolver;
 
     /**
+     * @var FactoryInterface
+     */
+    private $stateMachineFactory;
+
+    /**
      * @param PaymentFactoryInterface $paymentFactory
      * @param DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
+     * @param FactoryInterface $stateMachineFactory
      */
     public function __construct(
         PaymentFactoryInterface $paymentFactory,
-        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+        FactoryInterface $stateMachineFactory
     ) {
         $this->paymentFactory = $paymentFactory;
         $this->defaultPaymentMethodResolver = $defaultPaymentMethodResolver;
+        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     /**
@@ -93,6 +104,12 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         }
 
         $payment->setMethod($paymentMethod);
+
+        if (OrderCheckoutStates::STATE_COMPLETED === $order->getCheckoutState()) {
+            $stateMachine = $this->stateMachineFactory->get($payment, 'sylius_payment');
+            $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE);
+        }
+
         $order->addPayment($payment);
     }
 

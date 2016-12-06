@@ -302,7 +302,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function getLastNewPayment()
     {
-        return $this->getLastCartPayment();
+        return $this->getLastPaymentWithState(BasePaymentInterface::STATE_NEW);
     }
 
     /**
@@ -310,15 +310,7 @@ class Order extends BaseOrder implements OrderInterface
      */
     public function getLastCartPayment()
     {
-        if ($this->payments->isEmpty()) {
-            return null;
-        }
-
-        $payment = $this->payments->filter(function (BasePaymentInterface $payment) {
-            return $payment->getState() === BasePaymentInterface::STATE_CART;
-        })->last();
-
-        return $payment !== false ? $payment : null;
+        return $this->getLastPaymentWithState(BasePaymentInterface::STATE_CART);
     }
 
     /**
@@ -574,5 +566,23 @@ class Order extends BaseOrder implements OrderInterface
     public function setCustomerIp($customerIp)
     {
         $this->customerIp = $customerIp;
+    }
+
+    /**
+     * @param string $state
+     *
+     * @return BasePaymentInterface|null
+     */
+    private function getLastPaymentWithState($state)
+    {
+        if ($this->payments->isEmpty()) {
+            return null;
+        }
+
+        $payment = $this->payments->filter(function (BasePaymentInterface $payment) use ($state) {
+            return $payment->getState() === $state;
+        })->last();
+
+        return $payment !== false ? $payment : null;
     }
 }

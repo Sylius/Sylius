@@ -14,8 +14,11 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
@@ -30,9 +33,10 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 {
     function let(
         PaymentFactoryInterface $paymentFactory,
-        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+        FactoryInterface $stateMachineFactory
     ) {
-        $this->beConstructedWith($paymentFactory, $defaultPaymentMethodResolver);
+        $this->beConstructedWith($paymentFactory, $defaultPaymentMethodResolver, $stateMachineFactory);
     }
 
     function it_is_initializable()
@@ -63,7 +67,43 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
         $payment->setOrder($order);
 
+        $order->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_SHIPPING_SELECTED);
+
         $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->willReturn($paymentMethod);
+
+        $payment->setOrder($order)->shouldBeCalled();
+        $payment->setMethod($paymentMethod)->shouldBeCalled();
+        $order->addPayment($payment)->shouldBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_apply_create_transition_on_new_payment_if_order_is_already_completed(
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+        FactoryInterface $stateMachineFactory,
+        OrderInterface $order,
+        PaymentFactoryInterface $paymentFactory,
+        PaymentInterface $payment,
+        PaymentMethod $paymentMethod,
+        StateMachineInterface $stateMachine
+    ) {
+        $payments = new ArrayCollection();
+        $order->getPayments()->willReturn($payments);
+
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+        $order->getLastCartPayment()->willReturn(null);
+
+        $order->getTotal()->willReturn(1234);
+        $order->getCurrencyCode()->willReturn('EUR');
+        $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
+        $payment->setOrder($order);
+
+        $order->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_COMPLETED);
+
+        $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->willReturn($paymentMethod);
+
+        $stateMachineFactory->get($payment, 'sylius_payment')->willReturn($stateMachine);
+        $stateMachine->apply('create')->shouldBeCalled();
 
         $payment->setOrder($order)->shouldBeCalled();
         $payment->setMethod($paymentMethod)->shouldBeCalled();
@@ -89,6 +129,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
+
+        $order->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_SHIPPING_SELECTED);
 
         $cancelledPayment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
         $cancelledPayment->getMethod()->willReturn($paymentMethodFromLastCancelledPayment);
@@ -117,6 +159,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
+
+        $order->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_SHIPPING_SELECTED);
 
         $failedPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
         $failedPayment->getMethod()->willReturn($paymentMethodFromLastFailedPayment);
@@ -167,6 +211,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
+
+        $order->getCheckoutState()->willReturn(OrderCheckoutStates::STATE_SHIPPING_SELECTED);
 
         $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->shouldBeCalled();
 
