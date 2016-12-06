@@ -66,14 +66,16 @@
     }
 
     function setAttributeChoiceListener() {
-        $('#attributeChoice button').on('click', function(event) {
+        var $attributeChoice = $('#attributeChoice');
+        $attributeChoice.find('button').on('click', function(event) {
             var $attributesContainer = $('#attributesContainer');
             event.preventDefault();
 
+            var $attributeChoiceSelect = $attributeChoice.find('select');
             var data = '';
-            $('#sylius_product_attribute_choice').val().forEach(function(item) {
+            $attributeChoiceSelect.val().forEach(function(item) {
                 if (!isInTheAttributesContainer(item)) {
-                    data += 'sylius_product_attribute_choice[]=' + item + "&";
+                    data += $attributeChoiceSelect.prop('name') + '=' + item + "&";
                 }
             });
             data += "count=" + getNextIndex();
