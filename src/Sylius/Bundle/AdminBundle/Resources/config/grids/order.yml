@@ -80,6 +80,11 @@ sylius_grid:
                     label: sylius.ui.customer
                     options:
                         fields: [customer.email, customer.firstName, customer.lastName]
+                date:
+                    type: date
+                    label: sylius.ui.date
+                    options:
+                        field: checkoutCompletedAt
             actions:
                 item:
                     show:
