@@ -52,6 +52,16 @@
             <argument>%locale%</argument>
         </service>
 
+        <service id="sylius.fixture.example_factory.product_association_type" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductAssociationTypeExampleFactory">
+            <argument type="service" id="sylius.factory.product_association_type" />
+        </service>
+
+        <service id="sylius.fixture.example_factory.product_association" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductAssociationExampleFactory">
+            <argument type="service" id="sylius.factory.product_association" />
+            <argument type="service" id="sylius.repository.product_association_type" />
+            <argument type="service" id="sylius.repository.product" />
+        </service>
+
         <service id="sylius.fixture.example_factory.product_option" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductOptionExampleFactory">
             <argument type="service" id="sylius.factory.product_option" />
             <argument type="service" id="sylius.factory.product_option_value" />

@@ -170,6 +170,10 @@ sylius_fixtures:
                     options:
                         amount: 40
 
+                similar_product_association:
+                    options:
+                        amount: 10
+
                 order:
                     options:
                         amount: 20
