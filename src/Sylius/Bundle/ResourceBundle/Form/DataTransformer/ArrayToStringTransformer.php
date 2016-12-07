@@ -25,7 +25,7 @@ final class ArrayToStringTransformer implements DataTransformerInterface
     private $delimiter;
 
     /**
-     * {@inheritdoc}
+     * @param string $delimiter
      */
     public function __construct($delimiter)
     {
@@ -38,6 +38,9 @@ final class ArrayToStringTransformer implements DataTransformerInterface
     public function transform($value)
     {
         Assert::isArray($value);
+        if (empty($value)) {
+            return '';
+        }
 
         return implode($this->delimiter, $value);
     }
@@ -48,6 +51,9 @@ final class ArrayToStringTransformer implements DataTransformerInterface
     public function reverseTransform($value)
     {
         Assert::string($value);
+        if ('' === $value) {
+            return [];
+        }
 
         return explode($this->delimiter, $value);
     }

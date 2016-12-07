@@ -49,7 +49,7 @@ final class ResourceToIdentifierTransformer implements DataTransformerInterface
     public function transform($value)
     {
         if (null === $value) {
-            return '';
+            return null;
         }
 
         Assert::isInstanceOf($value, $this->repository->getClassName());

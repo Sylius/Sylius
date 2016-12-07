@@ -22,14 +22,14 @@ final class RecursiveTransformer implements DataTransformerInterface
     /**
      * @var DataTransformerInterface
      */
-    private $transformer;
+    private $decoratedTransformer;
 
     /**
-     * {@inheritdoc}
+     * @param DataTransformerInterface $decoratedTransformer
      */
-    public function __construct(DataTransformerInterface $transformer)
+    public function __construct(DataTransformerInterface $decoratedTransformer)
     {
-        $this->transformer = $transformer;
+        $this->decoratedTransformer = $decoratedTransformer;
     }
 
     /**
@@ -41,7 +41,7 @@ final class RecursiveTransformer implements DataTransformerInterface
 
         $transformedValues = [];
         foreach ($values as $value) {
-            $transformedValues[] = $this->transformer->transform($value);
+            $transformedValues[] = $this->decoratedTransformer->transform($value);
         }
 
         return $transformedValues;
@@ -56,7 +56,7 @@ final class RecursiveTransformer implements DataTransformerInterface
 
         $reverseTransformedValues = [];
         foreach ($values as $value) {
-            $reverseTransformedValues[] = $this->transformer->reverseTransform($value);
+            $reverseTransformedValues[] = $this->decoratedTransformer->reverseTransform($value);
         }
 
         return $reverseTransformedValues;

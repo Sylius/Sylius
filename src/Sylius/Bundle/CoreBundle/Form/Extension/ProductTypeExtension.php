@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CoreBundle\Form\Extension;
 
 use Sylius\Bundle\ChannelBundle\Form\Type\ChannelChoiceType;
 use Sylius\Bundle\CoreBundle\Form\Type\Product\ProductImageType;
-use Sylius\Bundle\CoreBundle\Form\Type\ProductTaxonChoiceType;
+use Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonChoiceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -40,10 +40,15 @@ final class ProductTypeExtension extends AbstractTypeExtension
                 'expanded' => true,
                 'label' => 'sylius.form.product.channels',
             ])
-            ->add('mainTaxon', TaxonChoiceType::class, [
-                'required' => false,
+            ->add('mainTaxon', ResourceAutocompleteChoiceType::class, [
+                'label' => 'sylius.form.product.main_taxon',
+                'remote_route' => 'sylius_admin_ajax_taxon_index',
+                'resource' => 'sylius.taxon',
+                'choice_name' => 'name',
+                'choice_value' => 'code',
+                'multiple' => false
             ])
-            ->add('productTaxons', ProductTaxonChoiceType::class, [
+            ->add('productTaxons', ProductTaxonAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.product.taxons',
                 'multiple' => true,
             ])

@@ -211,5 +211,10 @@
             <argument type="service" id="sylius.repository.channel" />
             <tag name="form.type" />
         </service>
+
+        <service id="sylius.form.type.autocomplete_product_taxon_choice" class="Sylius\Bundle\CoreBundle\Form\Type\Taxon\ProductTaxonAutocompleteChoiceType">
+            <argument type="service" id="sylius.factory.product_taxon" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

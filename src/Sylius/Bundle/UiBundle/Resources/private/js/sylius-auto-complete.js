@@ -11,8 +11,10 @@
     'use strict';
 
     $.fn.extend({
-        taxonAutoComplete: function () {
-            $(this).dropdown({
+        autoComplete: function () {
+            var element = $(this);
+
+            element.dropdown({
                 delay: {
                     search: 250,
                 },
@@ -28,11 +30,13 @@
                         return settings;
                     },
                     onResponse: function (response) {
+                        var choiceName = element.data('choice-name');
+                        var choiceValue = element.data('choice-value');
                         var myResults = [];
                         $.each(response._embedded.items, function (index, item) {
                             myResults.push({
-                                name: item.name,
-                                value: item.id
+                                name: item[choiceName],
+                                value: item[choiceValue]
                             });
                         });
 

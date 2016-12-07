@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
-use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
@@ -21,9 +20,9 @@ use Symfony\Component\Form\DataTransformerInterface;
  */
 final class RecursiveTransformerSpec extends ObjectBehavior
 {
-    function let(DataTransformerInterface $transformer)
+    function let(DataTransformerInterface $decoratedTransformer)
     {
-        $this->beConstructedWith($transformer);
+        $this->beConstructedWith($decoratedTransformer);
     }
 
     function it_is_initializable()
@@ -36,30 +35,22 @@ final class RecursiveTransformerSpec extends ObjectBehavior
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_transforms_recursively_using_configured_transformer(
-        DataTransformerInterface $transformer,
-        ResourceInterface $firstTaxon,
-        ResourceInterface $secondTaxon,
-        ResourceInterface $thirdTaxon
-    ) {
-        $transformer->transform($firstTaxon)->willReturn('abc');
-        $transformer->transform($secondTaxon)->willReturn('cde');
-        $transformer->transform($thirdTaxon)->willReturn('fgh');
+    function it_transforms_recursively_using_configured_transformer(DataTransformerInterface $decoratedTransformer)
+    {
+        $decoratedTransformer->transform('ABC')->willReturn('abc');
+        $decoratedTransformer->transform('CDE')->willReturn('cde');
+        $decoratedTransformer->transform('FGH')->willReturn('fgh');
 
-        $this->transform([$firstTaxon, $secondTaxon, $thirdTaxon])->shouldReturn(['abc', 'cde', 'fgh']);
+        $this->transform(['ABC', 'CDE', 'FGH'])->shouldReturn(['abc', 'cde', 'fgh']);
     }
 
-    function it_reverse_transforms_using_configured_transformer(
-        DataTransformerInterface $transformer,
-        ResourceInterface $firstTaxon,
-        ResourceInterface $secondTaxon,
-        ResourceInterface $thirdTaxon
-    ) {
-        $transformer->reverseTransform('abc')->willReturn($firstTaxon);
-        $transformer->reverseTransform('cde')->willReturn($secondTaxon);
-        $transformer->reverseTransform('fgh')->willReturn($thirdTaxon);
+    function it_reverse_transforms_using_configured_transformer(DataTransformerInterface $decoratedTransformer)
+    {
+        $decoratedTransformer->reverseTransform('abc')->willReturn('ABC');
+        $decoratedTransformer->reverseTransform('cde')->willReturn('CDE');
+        $decoratedTransformer->reverseTransform('fgh')->willReturn('FGH');
 
-        $this->reverseTransform(['abc', 'cde', 'fgh'])->shouldReturn([$firstTaxon, $secondTaxon, $thirdTaxon]);
+        $this->reverseTransform(['abc', 'cde', 'fgh'])->shouldReturn(['ABC', 'CDE', 'FGH']);
     }
 
     function it_throws_invalid_argument_exception_if_transform_argument_is_not_array()

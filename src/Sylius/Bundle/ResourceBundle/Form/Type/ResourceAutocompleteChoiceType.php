@@ -19,6 +19,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -44,27 +46,40 @@ class ResourceAutocompleteChoiceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('identifiers', HiddenType::class);
-
-        if ($options['multiple']) {
-            $builder->addModelTransformer(
-                new RecursiveTransformer(new ResourceToIdentifierTransformer(
-                    $this->resourceRepositoryRegistry->get($options['resource']),
-                    'code'
-                ))
-            );
-        }
-
         if (!$options['multiple']) {
             $builder->addModelTransformer(
                 new ResourceToIdentifierTransformer(
                     $this->resourceRepositoryRegistry->get($options['resource']),
-                    'code'
+                    $options['choice_value']
                 )
             );
         }
 
-        $builder->addViewTransformer(new ArrayToStringTransformer(','));
+        if ($options['multiple']) {
+            $builder
+                ->addModelTransformer(
+                    new RecursiveTransformer(
+                        new ResourceToIdentifierTransformer(
+                            $this->resourceRepositoryRegistry->get($options['resource']),
+                            $options['choice_value']
+                        )
+                    )
+                )
+                ->addViewTransformer(new ArrayToStringTransformer(','))
+            ;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        $view->vars['remote_route'] = $options['remote_route'];
+        $view->vars['multiple'] = $options['multiple'];
+        $view->vars['choice_name'] = $options['choice_name'];
+        $view->vars['choice_value'] = $options['choice_value'];
+        $view->vars['default_text'] = $options['default_text'];
     }
 
     /**
@@ -74,9 +89,18 @@ class ResourceAutocompleteChoiceType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'resource' => null
+                'resource' => null,
+                'remote_route' => null,
+                'multiple' => false,
+                'choice_name' => null,
+                'choice_value' => null,
+                'default_text' => null
             ])
-            ->setRequired(['resource'])
+            ->setAllowedTypes('resource', ['string'])
+            ->setAllowedTypes('remote_route', ['string'])
+            ->setAllowedTypes('multiple', ['bool'])
+            ->setAllowedTypes('choice_name', ['string'])
+            ->setAllowedTypes('choice_value', ['string'])
         ;
     }
 
@@ -85,7 +109,7 @@ class ResourceAutocompleteChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return ChoiceType::class;
+        return HiddenType::class;
     }
 
     /**
@@ -93,6 +117,6 @@ class ResourceAutocompleteChoiceType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'sylius_resource_choice';
+        return 'sylius_resource_autocomplete_choice';
     }
 }

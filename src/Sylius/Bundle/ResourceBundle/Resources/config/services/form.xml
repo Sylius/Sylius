@@ -8,5 +8,9 @@
             <argument type="service" id="sylius.registry.resource_repository" />
             <tag name="form.type" />
         </service>
+        <service id="sylius.form.type.resource_autocomplete_choice" class="Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType">
+            <argument type="service" id="sylius.registry.resource_repository" />
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
