@@ -599,6 +599,18 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then it should have order's payment state :orderPaymentState
+     */
+    public function itShouldHaveOrderPaymentState($orderPaymentState)
+    {
+        Assert::same(
+            $this->showPage->getPaymentState(),
+            $orderPaymentState,
+            'Order payment state should be %2$s, but it is %s.'
+        );
+    }
+    
+    /**
      * @Then it's payment state should be refunded
      */
     public function orderPaymentStateShouldBeRefunded()
@@ -976,6 +988,26 @@ final class ManagingOrdersContext implements Context
         Assert::same(
             (int) $count,
             $this->historyPage->countShippingAddressChanges()
+        );
+    }
+
+    /**
+     * @Then I should not be able to refund this payment
+     */
+    public function iShouldNotBeAbleToRefundThisPayment()
+    {
+        Assert::false($this->showPage->hasRefundButton());
+    }
+
+    /**
+     * @Then I should not see information about payments
+     */
+    public function iShouldNotSeeInformationAboutPayments()
+    {
+        Assert::same(
+            0,
+            $this->showPage->getPaymentsCount(),
+            'There should be no payments, but they are.'
         );
     }
 

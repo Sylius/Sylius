@@ -25,6 +25,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
@@ -268,6 +269,24 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^the customer chose ("[^"]+" shipping method)$/
+     */
+    public function theCustomerChoseShippingMethod(ShippingMethodInterface $shippingMethod) {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        foreach ($order->getShipments() as $shipment) {
+            $shipment->setMethod($shippingMethod);
+        }
+        
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
+        $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->apply(OrderPaymentTransitions::TRANSITION_PAY);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given the customer bought a single :product
      * @Given I bought a single :product
      */
@@ -343,18 +362,34 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(I) have already placed (\d+) orders choosing ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
+     * @Given /^(I) have already placed (\d+) orders choosing ("[^"]+" product), ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
      */
     public function iHaveAlreadyPlacedOrderNthTimes(
         UserInterface $user,
         $numberOfOrders,
+        ProductInterface $product,
         ShippingMethodInterface $shippingMethod,
         AddressInterface $address,
         PaymentMethodInterface $paymentMethod
     ) {
         $customer = $user->getCustomer();
         for ($i = 0; $i < $numberOfOrders; $i++) {
+            /** @var ProductVariantInterface $variant */
+            $variant = $this->variantResolver->getVariant($product);
+
+            /** @var ChannelPricingInterface $channelPricing */
+            $channelPricing = $variant->getChannelPricingForChannel($this->sharedStorage->get('channel'));
+
+            /** @var \Sylius\Component\Order\Model\OrderItemInterface $item */
+            $item = $this->orderItemFactory->createNew();
+            $item->setVariant($variant);
+            $item->setUnitPrice($channelPricing->getPrice());
+
+            $this->itemQuantityModifier->modify($item, 1);
+
             $order = $this->createOrder($customer, '#00000'.$i);
+            $order->addItem($item);
+
             $this->checkoutUsing($order, $shippingMethod, clone $address, $paymentMethod);
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
