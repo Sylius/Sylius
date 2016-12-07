@@ -1026,10 +1026,8 @@ final class ManagingProductsContext implements Context
      */
     public function iShouldBeNotifiedThatTheFirstImageShouldHaveAnUniqueCode($imageNumber)
     {
-        preg_match_all('!\d+!', $imageNumber, $matches);
-
         Assert::same(
-            $this->updateSimpleProductPage->getValidationMessageForImageAtPosition(((int) $matches[0][0]) - 1),
+            $this->updateSimpleProductPage->getValidationMessageForImageAtPosition((int) $imageNumber - 1),
             'Image code must be unique within this product.'
         );
     }

@@ -11,21 +11,29 @@
 
 namespace Sylius\Bundle\ResourceBundle\Validator\Constraints;
 
-use Sylius\Bundle\ResourceBundle\Validator\WithinCollectionUniqueCodeValidator;
+use Sylius\Bundle\ResourceBundle\Validator\UniqueWithinCollectionConstraintValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class WithinCollectionUniqueCode extends Constraint
+final class UniqueWithinCollectionConstraint extends Constraint
 {
+    /**
+     * @var string
+     */
     public $message = 'This code must be unique within this collection.';
+
+    /**
+     * @var string
+     */
+    public $attributePath = 'code';
 
     /**
      * {@inheritdoc}
      */
     public function validatedBy()
     {
-        return WithinCollectionUniqueCodeValidator::class;
+        return UniqueWithinCollectionConstraintValidator::class;
     }
 }

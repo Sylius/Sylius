@@ -31,7 +31,7 @@ interface GeneratePageInterface extends SymfonyPageInterface
      * @param int $nth
      * @param string $code
      */
-    public function nameCode($nth, $code);
+    public function specifyCode($nth, $code);
 
     /**
      * @param int $nth
