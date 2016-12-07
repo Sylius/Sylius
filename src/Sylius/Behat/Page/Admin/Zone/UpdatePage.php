@@ -39,6 +39,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getScope()
+    {
+        return $this->getElement('scope')->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasMember(ZoneMemberInterface $zoneMember)
     {
         $selectedZoneMembers = $this->getSelectedZoneMembers();
@@ -95,6 +103,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_zone_code',
             'member' => '.one.field',
             'name' => '#sylius_zone_name',
+            'scope' => '#sylius_zone_scope',
             'type' => '#sylius_zone_type',
             'zone_members' => '#sylius_zone_members',
         ]);

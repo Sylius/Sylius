@@ -172,6 +172,14 @@ final class ManagingZonesContext implements Context
     }
 
     /**
+     * @When I select its scope as :scope
+     */
+    public function iSelectItsScopeAs($scope)
+    {
+        $this->createPage->selectScope($scope);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -194,6 +202,20 @@ final class ManagingZonesContext implements Context
     public function theZoneWithTheCountryShouldAppearInTheRegistry(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
     {
         $this->assertZoneAndItsMember($zone, $zoneMember);
+    }
+
+    /**
+     * @Given its scope should be :scope
+     */
+    public function itsScopeShouldBe($scope)
+    {
+        $zoneScope = $this->updatePage->getScope();
+
+        Assert::same(
+            $scope,
+            $zoneScope,
+            sprintf('Zone should have scope "%s" but it has "%s".', $scope, $zoneScope)
+        );
     }
 
     /**

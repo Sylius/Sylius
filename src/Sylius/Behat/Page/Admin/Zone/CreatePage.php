@@ -63,6 +63,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function selectScope($scope)
+    {
+        $this->getDocument()->selectFieldOption('Scope', $scope);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasType($type)
     {
         $typeField = $this->getElement('type');

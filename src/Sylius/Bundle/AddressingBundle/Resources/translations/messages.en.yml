@@ -31,6 +31,9 @@ sylius:
                 province: Province
                 zone: Zone
             scope: Scope
+            scopes:
+                shipping: Shipping
+                tax: Tax
             select: Select
             select_scope: Select scope
         zone_member:
