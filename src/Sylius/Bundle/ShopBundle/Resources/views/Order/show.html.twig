@@ -19,7 +19,7 @@
             {{ form_row(form._token) }}
             {{ form_end(form, {'render_rest': false}) }}
         {% else %}
-            {{ messages.info('sylius.ui.you_can_no_longer_change_payment_method_of_this_order'|trans) }}
+            {{ messages.info('sylius.ui.you_can_no_longer_change_payment_method_of_this_order') }}
         {% endif %}
     </div>
 {% endblock %}
