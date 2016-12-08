@@ -33,5 +33,11 @@
         <service id="sylius.form.type.grid_filter.date" class="Sylius\Bundle\GridBundle\Form\Type\Filter\DateFilterType">
             <tag name="form.type" />
         </service>
+        <service id="sylius.grid_filter.entity" class="Sylius\Component\Grid\Filter\EntityFilter">
+            <tag name="sylius.grid_filter" type="entity" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\EntityFilterType" />
+        </service>
+        <service id="sylius.form.type.grid_filter.entity" class="Sylius\Bundle\GridBundle\Form\Type\Filter\EntityFilterType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
