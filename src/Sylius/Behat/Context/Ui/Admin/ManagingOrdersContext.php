@@ -162,6 +162,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I choose :channelName as a channel filter
+     */
+    public function iChooseChannelAsAChannelFilter($channelName)
+    {
+        $this->indexPage->chooseChannelFilter($channelName);
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter()

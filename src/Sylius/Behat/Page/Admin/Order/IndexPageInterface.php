@@ -27,4 +27,9 @@ interface IndexPageInterface extends BaseIndexPageInterface
      * @param \DateTime $dateTime
      */
     public function specifyFilterDateTo(\DateTime $dateTime);
+
+    /**
+     * @param string $channelName
+     */
+    public function chooseChannelFilter($channelName);
 }
