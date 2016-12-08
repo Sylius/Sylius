@@ -24,19 +24,19 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * @var string
      */
-    private $resourceName;
+    private $routeName;
 
     /**
      * @param Session $session
      * @param array $parameters
      * @param RouterInterface $router
-     * @param string $resourceName
+     * @param string $routeName
      */
-    public function __construct(Session $session, array $parameters, RouterInterface $router, $resourceName)
+    public function __construct(Session $session, array $parameters, RouterInterface $router, $routeName)
     {
         parent::__construct($session, $parameters, $router);
 
-        $this->resourceName = strtolower($resourceName);
+        $this->routeName = $routeName;
     }
 
     /**
@@ -70,7 +70,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function getRouteName()
     {
-        return sprintf('sylius_admin_%s_create', $this->resourceName);
+        return $this->routeName;
     }
 
     /**

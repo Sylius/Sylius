@@ -6,13 +6,13 @@
 
     <services>
         <service id="sylius.behat.page.admin.administrator.create" class="Sylius\Behat\Page\Admin\Administrator\CreatePage" parent="sylius.behat.page.admin.crud.create" public="false">
-            <argument type="string">admin_user</argument>
+            <argument type="string">sylius_admin_admin_user_create</argument>
         </service>
         <service id="sylius.behat.page.admin.administrator.index" class="Sylius\Behat\Page\Admin\Crud\IndexPage" parent="sylius.behat.page.admin.crud.index" public="false">
-            <argument type="string">admin_user</argument>
+            <argument type="string">sylius_admin_admin_user_index</argument>
         </service>
         <service id="sylius.behat.page.admin.administrator.update" class="Sylius\Behat\Page\Admin\Administrator\UpdatePage" parent="sylius.behat.page.admin.crud.update" public="false">
-            <argument type="string">admin_user</argument>
+            <argument type="string">sylius_admin_admin_user_update</argument>
         </service>
     </services>
 </container>

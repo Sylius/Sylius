@@ -21,14 +21,14 @@
 
     <services>
         <service id="sylius.behat.page.admin.promotion_coupon.create" class="%sylius.behat.page.admin.promotion_coupon.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
-            <argument type="string">promotion_coupon</argument>
+            <argument type="string">sylius_admin_promotion_coupon_create</argument>
         </service>
         <service id="sylius.behat.page.admin.promotion_coupon.generate" class="%sylius.behat.page.admin.promotion_coupon.generate.class%" parent="sylius.behat.symfony_page" public="false" />
         <service id="sylius.behat.page.admin.promotion_coupon.index" class="%sylius.behat.page.admin.promotion_coupon.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
-            <argument type="string">promotion_coupon</argument>
+            <argument type="string">sylius_admin_promotion_coupon_index</argument>
         </service>
         <service id="sylius.behat.page.admin.promotion_coupon.update" class="%sylius.behat.page.admin.promotion_coupon.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
-            <argument type="string">promotion_coupon</argument>
+            <argument type="string">sylius_admin_promotion_coupon_update</argument>
         </service>
     </services>
 </container>
