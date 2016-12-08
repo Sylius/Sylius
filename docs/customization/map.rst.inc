@@ -8,3 +8,4 @@
 * :doc:`/customization/translation`
 * :doc:`/customization/flash`
 * :doc:`/customization/state_machine`
+* :doc:`/customization/grid`
