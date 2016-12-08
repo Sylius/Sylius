@@ -6,13 +6,15 @@ Feature: Seeing the currency an order has been placed in on it's details page
 
     Background:
         Given the store ships to "British Virgin Islands"
-        And the store has a zone "English" with code "EN"
-        And this zone has the "British Virgin Islands" country member
+        And the store has a shipping zone "English Shipment" with code "EN-SHIPMENT"
+        And the store has a tax zone "English Tax" with code "EN-TAX"
+        And this shipping zone has the "British Virgin Islands" country member
+        And this tax zone has the "British Virgin Islands" country member
         And the store operates on a channel named "Web" in "USD" currency
         And that channel allows to shop using "USD" and "GBP" currencies
-        And the store has "Low VAT" tax rate of 10% for "Lowered EN services" within the "EN" zone
+        And the store has "Low VAT" tax rate of 10% for "Lowered EN services" within the "EN-TAX" zone
         And the store allows paying with "Cash on Delivery"
-        And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
+        And the store has "DHL" shipping method with "$20.00" fee within the "EN-SHIPMENT" zone
         And the store has a product "Angel T-Shirt" priced at "$20.00"
         And it belongs to "Lowered EN services" tax category
         And there is a promotion "Order's Extravaganza"

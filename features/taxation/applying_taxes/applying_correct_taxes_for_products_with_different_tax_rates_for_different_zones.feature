@@ -9,9 +9,9 @@ Feature: Apply correct taxes for products with different tax rates for different
         And there is a zone "The Rest of the World" containing all other countries
         And the store ships to "Germany"
         And the store ships everywhere for free
-        And default tax zone is "US"
-        And the store has "No tax" tax rate of 0% for "Clothes" within the "US" zone
-        And the store has "Low VAT" tax rate of 5% for "Mugs" within the "US" zone
+        And default tax zone is "US-TAX"
+        And the store has "No tax" tax rate of 0% for "Clothes" within the "US-TAX" zone
+        And the store has "Low VAT" tax rate of 5% for "Mugs" within the "US-TAX" zone
         And the store has "VAT" tax rate of 23% for "Clothes" for the rest of the world
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category

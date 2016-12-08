@@ -6,8 +6,8 @@ Feature: Apply correct taxes for items with the same tax rate
 
     Background:
         Given the store operates on a single channel in "United States"
-        And default tax zone is "US"
-        And the store has "VAT" tax rate of 23% for "Clothes" within the "US" zone
+        And default tax zone is "US-TAX"
+        And the store has "VAT" tax rate of 23% for "Clothes" within the "US-TAX" zone
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category
         And the store has a product "Symfony Hat" priced at "$30.00"

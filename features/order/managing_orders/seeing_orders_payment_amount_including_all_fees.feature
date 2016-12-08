@@ -6,7 +6,7 @@ Feature: Seeing order's payment amount including all fees
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has "VAT" tax rate of 23% for "Clothes" within the "US" zone
+        And the store has "VAT" tax rate of 23% for "Clothes" within the "US-TAX" zone
         And the store has a product "Angel T-Shirt" priced at "$39.00"
         And it belongs to "Clothes" tax category
         And the store has a product "Angel Mug" priced at "$19.00"

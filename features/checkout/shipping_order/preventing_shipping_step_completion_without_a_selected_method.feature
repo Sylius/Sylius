@@ -23,8 +23,8 @@ Feature: Preventing shipping step completion without a selected method
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store operates in "United States"
         And the store operates in "France"
-        And the store has a zone "Europe" with code "EU"
-        And this zone has the "France" country member
+        And the store has a shipping zone "Europe" with code "EU"
+        And this shipping zone has the "France" country member
         And the store has "DHL" shipping method with "$20.00" fee within the "EU" zone
         And I have product "PHP T-Shirt" in the cart
         When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
@@ -37,10 +37,10 @@ Feature: Preventing shipping step completion without a selected method
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store operates in "United States"
         And the store operates in "France"
-        And the store has a zone "Europe" with code "EU"
-        And this zone has the "France" country member
-        And the store has a zone "America" with code "AMR"
-        And this zone has the "United States" country member
+        And the store has a shipping zone "Europe" with code "EU"
+        And this shipping zone has the "France" country member
+        And the store has a shipping zone "America" with code "AMR"
+        And this shipping zone has the "United States" country member
         And the store has "DHL" shipping method with "$20.00" fee within the "EU" zone
         And the store has "UPS" shipping method with "$20.00" fee within the "AMR" zone
         And I have product "PHP T-Shirt" in the cart

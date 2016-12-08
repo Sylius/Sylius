@@ -15,13 +15,13 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShippingMethodExampleFactory;
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Calculator\DefaultCalculators;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface;
@@ -108,7 +108,7 @@ final class ShippingContext implements Context
     public function theStoreShipsEverywhereForFree()
     {
         /** @var ZoneInterface $zone */
-        foreach ($this->zoneRepository->findAll() as $zone) {
+        foreach ($this->zoneRepository->findBy(['scope' => Scope::SHIPPING]) as $zone) {
             $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
                 'name' => 'Free',
                 'code' => 'FREE-' . $zone->getCode(),
@@ -127,7 +127,7 @@ final class ShippingContext implements Context
      */
     public function theStoreShipsEverywhereForFreeForAllChannels(array $channels)
     {
-        foreach ($this->zoneRepository->findAll() as $zone) {
+        foreach ($this->zoneRepository->findBy(['scope' => Scope::SHIPPING]) as $zone) {
             $configuration = $this->getConfigurationByChannels($channels);
             $shippingMethod = $this->shippingMethodExampleFactory->create([
                 'name' => 'Free',
