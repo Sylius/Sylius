@@ -17,6 +17,7 @@
             <argument type="service" id="__symfony__.sylius.factory.address" />
             <argument type="service" id="__symfony__.sylius.converter.country_name" />
             <argument type="service" id="__symfony__.sylius.repository.address" />
+            <argument type="service" id="__symfony__.sylius.repository.country" />
             <tag name="fob.context_service" />
         </service>
 

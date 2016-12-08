@@ -39,6 +39,26 @@ final class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getSpecifiedProvince()
+    {
+        $this->waitForElement(5, 'province_name');
+
+        return $this->getElement('province_name')->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSelectedProvince()
+    {
+        $this->waitForElement(5, 'province_code');
+
+        return $this->getElement('selected_province')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function specifyProvince($name)
     {
         $this->waitForElement(5, 'province_name');
@@ -86,6 +106,7 @@ final class UpdatePage extends SymfonyPage implements UpdatePageInterface
             'province_name' => 'input[name="sylius_address[provinceName]"]',
             'province_code' => 'select[name="sylius_address[provinceCode]"]',
             'save_button' => 'button:contains("Save changes")',
+            'selected_province' => 'select[name="sylius_address[provinceCode]"] option[selected="selected"]',
             'street' => '#sylius_address_street',
         ]);
     }

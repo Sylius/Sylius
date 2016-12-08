@@ -12,63 +12,85 @@
 
     $.fn.extend({
         provinceField: function () {
-            $('select[name$="[countryCode]"]').on('change', function(event) {
-                var $select = $(event.currentTarget);
-                var $provinceContainer = $select.parents('.field').next('div.province-container');
+            var countrySelect = $('select[name$="[countryCode]"]');
 
-                var provinceSelectFieldName = $select.attr('name').replace('country', 'province');
-                var provinceInputFieldName = $select.attr('name').replace('countryCode', 'provinceName');
+            countrySelect.on('change', function(event) {
+                var select = $(event.currentTarget);
+                var provinceContainer = select.parents('.field').next('div.province-container');
 
-                if ('' === $select.val()) {
-                    $provinceContainer.fadeOut('slow', function () {
-                        $provinceContainer.html('');
+                var provinceSelectFieldName = select.attr('name').replace('country', 'province');
+                var provinceInputFieldName = select.attr('name').replace('countryCode', 'provinceName');
+
+                if ('' === select.val() || undefined == select.val()) {
+                    provinceContainer.fadeOut('slow', function () {
+                        provinceContainer.html('');
                     });
 
                     return;
                 }
 
-                $.get($provinceContainer.attr('data-url'), {countryCode: $(this).val()}, function (response) {
+                $.get(provinceContainer.attr('data-url'), {countryCode: $(this).val()}, function (response) {
                     if (!response.content) {
-                        $provinceContainer.fadeOut('slow', function () {
-                            $provinceContainer.html('');
+                        provinceContainer.fadeOut('slow', function () {
+                            provinceContainer.html('');
                         });
                     } else if (-1 !== response.content.indexOf('select')) {
-                        $provinceContainer.fadeOut('slow', function () {
-                            $provinceContainer.html(response.content.replace(
+                        provinceContainer.fadeOut('slow', function () {
+
+                            var provinceSelectValue = getProvinceInputValue(
+                                $(provinceContainer).find('select > option[selected$="selected"]').val()
+                            );
+
+                            provinceContainer.html(response.content.replace(
                                 'name="sylius_address_province"',
-                                'name="' + provinceSelectFieldName + '"'
+                                'name="' + provinceSelectFieldName + '"' + provinceSelectValue
+                            )
+                            .replace(
+                                'option value="" selected="selected"',
+                                'option value=""'
+                            )
+                            .replace(
+                                'option ' + provinceSelectValue,
+                                'option ' + provinceSelectValue + '" selected="selected"'
                             ));
 
-                            $provinceContainer.fadeIn();
+                            provinceContainer.fadeIn();
                         });
                     } else {
-                        $provinceContainer.fadeOut('slow', function () {
-                            $provinceContainer.html(response.content.replace(
+                        provinceContainer.fadeOut('slow', function () {
+
+                            var provinceInputValue = getProvinceInputValue($(provinceContainer).find('input').val());
+
+                            provinceContainer.html(response.content.replace(
                                 'name="sylius_address_province"',
-                                'name="' + provinceInputFieldName + '"'
+                                'name="' + provinceInputFieldName + '"' + provinceInputValue
                             ));
 
-                            $provinceContainer.fadeIn();
+                            provinceContainer.fadeIn();
                         });
                     }
                 });
             });
 
-            if('' !== $('select[name$="[countryCode]"]').val()) {
-                $('select[name$="[countryCode]"]').trigger('change');
+            if('' !== countrySelect.val()) {
+                countrySelect.trigger('change');
             }
 
             if('' === $.trim($('div.province-container').text())) {
                 $('select.country-select').trigger('change');
             }
 
-            var $billingAddressCheckbox  = $('input[type="checkbox"][name$="[differentBillingAddress]"]');
-            var $billingAddressContainer = $('#sylius-billing-address-container');
+            var billingAddressCheckbox = $('input[type="checkbox"][name$="[differentBillingAddress]"]');
+            var billingAddressContainer = $('#sylius-billing-address-container');
             var toggleBillingAddress = function() {
-                $billingAddressContainer.toggle($billingAddressCheckbox.prop('checked'));
+                billingAddressContainer.toggle(billingAddressCheckbox.prop('checked'));
             };
             toggleBillingAddress();
-            $billingAddressCheckbox.on('change', toggleBillingAddress);
+            billingAddressCheckbox.on('change', toggleBillingAddress);
+
+            var getProvinceInputValue = function (valueSelector) {
+                return undefined == valueSelector ? '' : 'value="'+ valueSelector +'"';
+            };
         }
     });
 })( jQuery );

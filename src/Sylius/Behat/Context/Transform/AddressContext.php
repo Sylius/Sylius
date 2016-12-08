@@ -13,9 +13,12 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Repository\AddressRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -39,18 +42,26 @@ final class AddressContext implements Context
     private $addressRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $countryRepository;
+
+    /**
      * @param FactoryInterface $addressFactory
      * @param CountryNameConverterInterface $countryNameConverter
      * @param AddressRepositoryInterface $addressRepository
+     * @param RepositoryInterface $countryRepository
      */
     public function __construct(
         FactoryInterface $addressFactory,
         CountryNameConverterInterface $countryNameConverter,
-        AddressRepositoryInterface $addressRepository
+        AddressRepositoryInterface $addressRepository,
+        RepositoryInterface $countryRepository
     ) {
         $this->addressFactory = $addressFactory;
         $this->countryNameConverter = $countryNameConverter;
         $this->addressRepository = $addressRepository;
+        $this->countryRepository = $countryRepository;
     }
 
     /**
@@ -69,12 +80,12 @@ final class AddressContext implements Context
      * @Transform /^address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      * @Transform /^address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      */
-    public function createNewAddressWith($cityName, $street, $postcode, $countryName, $customerName, $provinceName = null)
+    public function createNewAddressWith($city, $street, $postcode, $countryName, $customerName)
     {
         $countryCode = $this->countryNameConverter->convertToCode($countryName);
-        $customerName = explode(' ', $customerName);
+        list($firstName, $lastName) = explode(' ', $customerName);
 
-        return $this->createAddress($countryCode, $customerName[0], $customerName[1], $cityName, $street, $postcode, $provinceName);
+        return $this->createAddress($countryCode, $firstName, $lastName, $city, $street, $postcode);
     }
 
     /**
@@ -97,9 +108,9 @@ final class AddressContext implements Context
     public function createNewAddressWithName($name, $street, $postcode, $city, $countryName, $provinceName = null)
     {
         $countryCode = $this->countryNameConverter->convertToCode($countryName);
-        $names = explode(" ", $name);
+        list($firstName, $lastName) = explode(' ', $name);
 
-        return $this->createAddress($countryCode, $names[0], $names[1], $city, $street, $postcode, $provinceName);
+        return $this->createAddress($countryCode, $firstName, $lastName, $city, $street, $postcode, $provinceName);
     }
 
     /**
@@ -108,7 +119,7 @@ final class AddressContext implements Context
     public function getByStreet($street)
     {
         $address = $this->addressRepository->findOneBy(['street' => $street]);
-        Assert::notNull($address, sprintf('Cannot find address by %s street', $street));
+        Assert::notNull($address, sprintf('Cannot find address by %s street.', $street));
 
         return $address;
     }
@@ -141,6 +152,25 @@ final class AddressContext implements Context
         $address->setCity($city);
         $address->setStreet($street);
         $address->setPostcode($postCode);
+
+        if (null === $provinceName) {
+            return $address;
+        }
+
+        /** @var CountryInterface $country */
+        $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
+
+        if (null !== $country) {
+            /** @var ProvinceInterface $province */
+            foreach ($country->getProvinces() as $province) {
+                if ($province->getName() === $provinceName) {
+                    $address->setProvinceCode($province->getCode());
+
+                    return $address;
+                }
+            }
+        }
+
         $address->setProvinceName($provinceName);
 
         return $address;
