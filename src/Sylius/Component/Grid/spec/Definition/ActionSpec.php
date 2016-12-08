@@ -50,6 +50,16 @@ final class ActionSpec extends ObjectBehavior
         $this->getLabel()->shouldReturn('Read book');
     }
 
+    function it_is_toggleable()
+    {
+        $this->isEnabled()->shouldReturn(true);
+
+        $this->setEnabled(false);
+        $this->isEnabled()->shouldReturn(false);
+        $this->setEnabled(true);
+        $this->isEnabled()->shouldReturn(true);
+    }
+
     function it_has_no_icon_by_default()
     {
         $this->getIcon()->shouldReturn(null);

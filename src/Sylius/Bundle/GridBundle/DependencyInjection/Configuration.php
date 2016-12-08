@@ -142,6 +142,7 @@ final class Configuration implements ConfigurationInterface
                                         ->children()
                                             ->scalarNode('type')->isRequired()->end()
                                             ->scalarNode('label')->end()
+                                            ->scalarNode('enabled')->defaultTrue()->end()
                                             ->scalarNode('icon')->end()
                                             ->scalarNode('position')->defaultValue(100)->end()
                                             ->arrayNode('options')
