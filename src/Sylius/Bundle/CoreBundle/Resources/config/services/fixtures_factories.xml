@@ -114,5 +114,11 @@
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.locale" />
         </service>
+
+        <service id="sylius.fixture.example_factory.address" class="Sylius\Bundle\CoreBundle\Fixture\Factory\AddressExampleFactory">
+            <argument type="service" id="sylius.factory.address" />
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.repository.customer" />
+        </service>
     </services>
 </container>

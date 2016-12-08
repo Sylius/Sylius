@@ -177,3 +177,7 @@ sylius_fixtures:
                 order:
                     options:
                         amount: 20
+
+                address:
+                    options:
+                        random: 10

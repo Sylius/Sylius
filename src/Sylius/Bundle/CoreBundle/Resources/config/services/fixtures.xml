@@ -191,5 +191,11 @@
             <argument type="service" id="sm.factory" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.address" class="Sylius\Bundle\CoreBundle\Fixture\AddressFixture">
+            <argument type="service" id="sylius.manager.address" />
+            <argument type="service" id="sylius.fixture.example_factory.address" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>
