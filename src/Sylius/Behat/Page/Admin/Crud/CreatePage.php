@@ -74,14 +74,6 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     }
 
     /**
-     * @return string
-     */
-    protected function getResourceName()
-    {
-        return $this->resourceName;
-    }
-
-    /**
      * @param string $element
      *
      * @return \Behat\Mink\Element\NodeElement|null
