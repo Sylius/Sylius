@@ -36,7 +36,6 @@ sylius_fixtures:
                                 name: "United States of America"
                                 countries:
                                     - "US"
-
                 payment_method:
                     options:
                         custom:

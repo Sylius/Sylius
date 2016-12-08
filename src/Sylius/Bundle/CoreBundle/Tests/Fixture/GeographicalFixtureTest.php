@@ -105,6 +105,17 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function zones_can_have_scopes_based()
+    {
+        $this->assertConfigurationIsValid(
+            [['zones' => ['EU' => ['name' => 'Some EU countries', 'countries' => ['PL', 'DE', 'FR'], 'scope' => 'tax']]]],
+            'zones'
+        );
+    }
+
+    /**
+     * @test
+     */
     public function zones_can_be_defined_as_province_based()
     {
         $this->assertConfigurationIsValid(

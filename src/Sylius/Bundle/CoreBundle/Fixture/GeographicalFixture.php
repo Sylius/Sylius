@@ -145,6 +145,7 @@ class GeographicalFixture extends AbstractFixture
                 ->arrayNode('countries')->prototype('scalar')->end()->end()
                 ->arrayNode('zones')->prototype('scalar')->end()->end()
                 ->arrayNode('provinces')->prototype('scalar')->end()->end()
+                ->scalarNode('scope')->end()
         ;
 
         $zoneNode

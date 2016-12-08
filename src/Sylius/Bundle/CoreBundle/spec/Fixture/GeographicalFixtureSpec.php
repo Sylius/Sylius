@@ -125,6 +125,40 @@ final class GeographicalFixtureSpec extends ObjectBehavior
         ]]);
     }
 
+    function it_creates_and_persist_a_country_and_a_zone_with_scope_containing_it(
+        FactoryInterface $countryFactory,
+        ObjectManager $countryManager,
+        ZoneFactoryInterface $zoneFactory,
+        ObjectManager $zoneManager,
+        CountryInterface $country,
+        ZoneInterface $zone
+    ) {
+        $countryFactory->createNew()->willReturn($country);
+        $country->setCode('PL')->shouldBeCalled();
+        $country->enable()->shouldBeCalled();
+
+        $zoneFactory->createWithMembers(['PL'])->willReturn($zone);
+        $zone->setCode('POLAND')->shouldBeCalled();
+        $zone->setName('Poland')->shouldBeCalled();
+        $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
+
+        $countryManager->persist($country)->shouldBeCalled();
+        $zoneManager->persist($zone)->shouldBeCalled();
+
+        $countryManager->flush()->shouldBeCalled();
+        $zoneManager->flush()->shouldBeCalled();
+
+        $this->load(['countries' => ['PL'], 'provinces' => [], 'zones' => [
+            'POLAND' => [
+                'name' => 'Poland',
+                'countries' => ['PL'],
+                'provinces' => [],
+                'zones' => [],
+                'scope' => 'tax',
+            ],
+        ]]);
+    }
+
     function it_creates_and_persist_a_country_province_and_a_zone_containing_it(
         FactoryInterface $countryFactory,
         ObjectManager $countryManager,
