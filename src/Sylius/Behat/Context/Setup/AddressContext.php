@@ -45,8 +45,8 @@ final class AddressContext implements Context
     }
 
     /**
-     * @Given /^(their) default (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
-     * @Given /^(their) default (address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
+     * @Given /^(their) default (address is "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
+     * @Given /^(their) default (address is "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+")$/
      */
     public function theirDefaultAddressIs(CustomerInterface $customer, AddressInterface $address)
     {

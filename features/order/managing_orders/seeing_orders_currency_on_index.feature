@@ -21,8 +21,8 @@ Feature: Seeing the currency in which all orders have been placed
     Scenario: Seeing an order placed in the base currency
         Given there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Angel T-Shirt"
-        And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "United States"
-        And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "United States"
+        And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "British Virgin Islands"
+        And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "British Virgin Islands"
         And the customer chose "DHL" shipping method with "Cash on Delivery" payment
         When I browse orders
         Then I should see the order "#00000666" with total "$40.00"

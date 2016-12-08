@@ -6,7 +6,8 @@ Feature: Seeing a province on customer's details
 
     @ui
     Scenario: Seeing customer's addresses
-        Given I am logged in as an administrator
+        Given the store operates in "United Kingdom"
+        And I am logged in as an administrator
         And the store has customer "f.baggins@shire.me" with name "Frodo Baggins" since "2011-01-10 21:00"
         And their default address is "Frodo Baggins", "Bag End", "12-1321", "Hobbiton", "United Kingdom", "East of England"
         When I view details of the customer "f.baggins@shire.me"

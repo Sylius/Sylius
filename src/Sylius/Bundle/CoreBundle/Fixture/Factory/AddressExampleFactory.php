@@ -180,6 +180,6 @@ class AddressExampleFactory extends AbstractExampleFactory implements ExampleFac
     private function assertCountryHasNoProvinces($countryCode)
     {
         $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
-        Assert::allIsEmpty($country->getProvinces());
+        Assert::allIsEmpty($country->getProvinces(), 'Country should not have any provinces if you want to specify province name');
     }
 }
