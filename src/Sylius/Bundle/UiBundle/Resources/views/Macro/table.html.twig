@@ -25,14 +25,14 @@
     {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
         <td>
             <div class="ui buttons">
-                {% for action in definition.getActions('item') %}
+                {% for action in definition.getActions('item')|sort_by('position', 'DESC') %}
                     {{ sylius_grid_render_action(grid, action, row) }}
                 {% endfor %}
             </div>
             {% if definition.actionGroups.subitem is defined and definition.getActions('subitem')|length > 0 %}
             <div class="ui divider"></div>
             <div class="ui buttons">
-                {% for action in definition.getActions('subitem') %}
+                {% for action in definition.getActions('subitem')|sort_by('position', 'DESC') %}
                     {{ sylius_grid_render_action(grid, action, row) }}
                 {% endfor %}
             </div>

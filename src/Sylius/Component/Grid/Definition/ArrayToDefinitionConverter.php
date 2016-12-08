@@ -136,6 +136,9 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         if (array_key_exists('icon', $configuration)) {
             $action->setIcon($configuration['icon']);
         }
+        if (array_key_exists('position', $configuration)) {
+            $action->setPosition($configuration['position']);
+        }
         if (array_key_exists('options', $configuration)) {
             $action->setOptions($configuration['options']);
         }
