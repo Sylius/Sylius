@@ -48,8 +48,11 @@ class Filter
 
     /**
      * @var int
+     *
+     * Position equals to 100 to ensure that wile sorting filters by position ASC
+     * the filters positioned by default will be last
      */
-    private $position = 0;
+    private $position = 100;
 
     /**
      * @param string $name

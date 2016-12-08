@@ -43,8 +43,11 @@ class Action
 
     /**
      * @var int
+     *
+     * Position equals to 100 to ensure that wile sorting actions by position ASC
+     * the action buttons positioned by default will be last
      */
-    private $position = 0;
+    private $position = 100;
 
     /**
      * @param string $name

@@ -72,9 +72,9 @@ final class ActionSpec extends ObjectBehavior
         $this->getOptions()->shouldReturn(['route' => 'sylius_admin_product_update']);
     }
 
-    function it_has_no_position_by_default()
+    function it_has_last_position_by_default()
     {
-        $this->getPosition()->shouldReturn(0);
+        $this->getPosition()->shouldReturn(100);
     }
 
     function its_position_is_mutable()
