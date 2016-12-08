@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\FixturesBundle\Suite;
 
 use PhpSpec\ObjectBehavior;
+use PhpSpec\Wrapper\Collaborator;
 use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Suite\Suite;
@@ -29,7 +30,7 @@ final class SuiteSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\FixturesBundle\Suite\Suite');
+        $this->shouldHaveType(Suite::class);
     }
 
     function it_implements_suite_interface()
@@ -44,21 +45,21 @@ final class SuiteSpec extends ObjectBehavior
 
     function it_has_no_fixtures_by_default()
     {
-        $this->getFixtures()->shouldGenerate();
+        $this->getFixtures()->shouldIterateAs([]);
     }
 
     function it_allows_for_adding_a_fixture(FixtureInterface $fixture)
     {
         $this->addFixture($fixture, []);
 
-        $this->getFixtures()->shouldGenerateKeys($fixture);
+        $this->getFixtures()->shouldHaveKey($fixture);
     }
 
     function it_stores_a_fixture_with_its_options(FixtureInterface $fixture)
     {
         $this->addFixture($fixture, ['fixture_option' => 'fixture_name']);
 
-        $this->getFixtures()->shouldGenerate([$fixture, ['fixture_option' => 'fixture_name']]);
+        $this->getFixtures()->shouldHaveKeyWithValue($fixture, ['fixture_option' => 'fixture_name']);
     }
 
     function it_stores_multiple_fixtures_as_queue(FixtureInterface $firstFixture, FixtureInterface $secondFixture)
@@ -66,7 +67,7 @@ final class SuiteSpec extends ObjectBehavior
         $this->addFixture($firstFixture, []);
         $this->addFixture($secondFixture, []);
 
-        $this->getFixtures()->shouldGenerateKeys($firstFixture, $secondFixture);
+        $this->getFixtures()->shouldIterateAs($this->createGenerator($firstFixture, $secondFixture));
     }
 
     function it_keeps_the_priority_of_fixtures(
@@ -78,6 +79,17 @@ final class SuiteSpec extends ObjectBehavior
         $this->addFixture($higherPriorityFixture, [], 10);
         $this->addFixture($lowerPriorityFixture, [], -10);
 
-        $this->getFixtures()->shouldGenerateKeys($higherPriorityFixture, $regularFixture, $lowerPriorityFixture);
+        $this->getFixtures()->shouldIterateAs($this->createGenerator($higherPriorityFixture, $regularFixture, $lowerPriorityFixture));
+    }
+
+    /**
+     * @param Collaborator[] ...$collaborators
+     *
+     * @return \Generator
+     */
+    private function createGenerator(Collaborator ...$collaborators) {
+        foreach ($collaborators as $collaborator) {
+            yield $collaborator->getWrappedObject() => [];
+        }
     }
 }

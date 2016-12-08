@@ -85,7 +85,6 @@
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "mikey179/vfsStream": "^1.6",
-        "pamil/phpspec-generator-extension": "^0.4",
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^3.2",
         "phpunit/phpunit": "^5.6",

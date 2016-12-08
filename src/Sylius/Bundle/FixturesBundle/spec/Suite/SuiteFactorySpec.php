@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\FixturesBundle\Suite;
 
 use PhpSpec\ObjectBehavior;
+use PhpSpec\Wrapper\Collaborator;
 use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureRegistryInterface;
@@ -33,7 +34,7 @@ final class SuiteFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\FixturesBundle\Suite\SuiteFactory');
+        $this->shouldHaveType(SuiteFactory::class);
     }
 
     function it_implements_suite_factory_interface()
@@ -46,7 +47,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         $suite = $this->createSuite('suite_name', ['listeners' => [], 'fixtures' => []]);
 
         $suite->getName()->shouldReturn('suite_name');
-        $suite->getFixtures()->shouldGenerate();
+        $suite->getFixtures()->shouldIterateAs([]);
     }
 
     function it_creates_a_new_suite_with_fixtures(
@@ -67,7 +68,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         ]]);
 
         $suite->getName()->shouldReturn('suite_name');
-        $suite->getFixtures()->shouldGenerateKeys($firstFixture, $secondFixture);
+        $suite->getFixtures()->shouldIterateAs($this->createGenerator($firstFixture, $secondFixture));
     }
 
     function it_creates_a_new_suite_with_fixtures_based_on_its_name_rather_than_alias(
@@ -85,7 +86,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         ]]);
 
         $suite->getName()->shouldReturn('suite_name');
-        $suite->getFixtures()->shouldGenerateKeys($fixture);
+        $suite->getFixtures()->shouldIterateAs($this->createGenerator($fixture));
     }
 
     function it_creates_a_new_suite_with_prioritized_fixtures(
@@ -106,7 +107,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         ]]);
 
         $suite->getName()->shouldReturn('suite_name');
-        $suite->getFixtures()->shouldGenerateKeys($higherPriorityFixture, $fixture);
+        $suite->getFixtures()->shouldIterateAs($this->createGenerator($higherPriorityFixture, $fixture));
     }
 
     function it_creates_a_new_suite_with_customized_fixture(
@@ -123,7 +124,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         ]]);
 
         $suite->getName()->shouldReturn('suite_name');
-        $suite->getFixtures()->shouldGenerate([$fixture, ['fixture_option' => 'fixture_value']]);
+        $suite->getFixtures()->shouldHaveKeyWithValue($fixture, ['fixture_option' => 'fixture_value']);
     }
 
     function it_creates_a_new_suite_with_listeners(
@@ -144,7 +145,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         ]]);
 
         $suite->getName()->shouldReturn('suite_name');
-        $suite->getListeners()->shouldGenerateKeys($firstListener, $secondListener);
+        $suite->getListeners()->shouldIterateAs($this->createGenerator($firstListener, $secondListener));
     }
 
     function it_creates_a_new_suite_with_prioritized_listeners(
@@ -165,7 +166,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         ]]);
 
         $suite->getName()->shouldReturn('suite_name');
-        $suite->getListeners()->shouldGenerateKeys($higherPriorityListener, $listener);
+        $suite->getListeners()->shouldIterateAs($this->createGenerator($higherPriorityListener, $listener));
     }
 
     function it_creates_a_new_suite_with_customized_listener(
@@ -182,7 +183,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         ]]);
 
         $suite->getName()->shouldReturn('suite_name');
-        $suite->getListeners()->shouldGenerate([$listener, ['listener_option' => 'listener_value']]);
+        $suite->getListeners()->shouldHaveKeyWithValue($listener, ['listener_option' => 'listener_value']);
     }
 
     function it_throws_an_exception_if_suite_options_does_not_have_fixtures()
@@ -214,5 +215,16 @@ final class SuiteFactorySpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['fixtures' => [], 'listeners' => [
             'listener' => [],
         ]]]);
+    }
+
+    /**
+     * @param Collaborator[] ...$collaborators
+     *
+     * @return \Generator
+     */
+    private function createGenerator(Collaborator ...$collaborators) {
+        foreach ($collaborators as $collaborator) {
+            yield $collaborator->getWrappedObject() => [];
+        }
     }
 }
