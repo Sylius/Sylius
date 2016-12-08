@@ -168,12 +168,15 @@
             "Sylius\\Bundle\\": "src/Sylius/Bundle/",
             "Sylius\\Component\\": "src/Sylius/Component/"
         },
-        "classmap": ["app/AppKernel.php", "app/AppCache.php"]
+        "exclude-from-classmap": [
+            "src/Sylius/*/*/Tests/"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
             "Sylius\\Tests\\": "tests/"
-        }
+        },
+        "classmap": ["app/AppKernel.php", "app/AppCache.php"]
     },
     "config": {
         "bin-dir": "bin"
