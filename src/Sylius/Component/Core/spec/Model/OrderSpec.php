@@ -283,20 +283,7 @@ final class OrderSpec extends ObjectBehavior
         $this->shouldNotHavePayment($payment);
     }
 
-    function it_returns_last_cart_payment(PaymentInterface $payment1, PaymentInterface $payment2)
-    {
-        $payment1->getState()->willReturn(PaymentInterface::STATE_CART);
-        $payment1->setOrder($this)->shouldBeCalled();
-        $payment2->getState()->willReturn(PaymentInterface::STATE_CART);
-        $payment2->setOrder($this)->shouldBeCalled();
-
-        $this->addPayment($payment1);
-        $this->addPayment($payment2);
-
-        $this->getLastCartPayment()->shouldReturn($payment2);
-    }
-
-    function it_returns_last_cart_payment_from_payments_in_various_states(
+    function it_returns_last_payment_with_given_state(
         PaymentInterface $payment1,
         PaymentInterface $payment2,
         PaymentInterface $payment3,
@@ -319,12 +306,38 @@ final class OrderSpec extends ObjectBehavior
         $this->addPayment($payment3);
         $this->addPayment($payment4);
 
-        $this->getLastCartPayment()->shouldReturn($payment1);
+        $this->getLastPayment(OrderInterface::STATE_CART)->shouldReturn($payment1);
     }
 
-    function it_returns_a_null_if_there_is_no_payments_after_trying_to_get_new_payment()
+    function it_returns_a_null_if_there_is_no_payments_after_trying_to_get_last_payment()
     {
-        $this->getLastCartPayment()->shouldReturn(null);
+        $this->getLastPayment(OrderInterface::STATE_CART)->shouldReturn(null);
+    }
+
+    function it_returns_last_payment_with_any_state_if_there_is_no_target_state_specified(
+        PaymentInterface $payment1,
+        PaymentInterface $payment2,
+        PaymentInterface $payment3,
+        PaymentInterface $payment4
+    ) {
+        $payment1->getState()->willReturn(PaymentInterface::STATE_CART);
+        $payment1->setOrder($this)->shouldBeCalled();
+
+        $payment2->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
+        $payment2->setOrder($this)->shouldBeCalled();
+
+        $payment3->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
+        $payment3->setOrder($this)->shouldBeCalled();
+
+        $payment4->getState()->willReturn(PaymentInterface::STATE_FAILED);
+        $payment4->setOrder($this)->shouldBeCalled();
+
+        $this->addPayment($payment1);
+        $this->addPayment($payment2);
+        $this->addPayment($payment3);
+        $this->addPayment($payment4);
+
+        $this->getLastPayment()->shouldReturn($payment4);
     }
 
     function it_adds_and_removes_shipments(ShipmentInterface $shipment)
