@@ -3,6 +3,3 @@ suites:
         namespace: Sylius\Bundle\FixturesBundle
         psr4_prefix: Sylius\Bundle\FixturesBundle
         src_path: .
-
-extensions:
-    Pamil\PhpSpecGeneratorExtension\Extension: ~

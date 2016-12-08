@@ -54,4 +54,3 @@ suites:
 
 extensions:
     Akeneo\SkipExampleExtension: ~
-    Pamil\PhpSpecGeneratorExtension\Extension: ~
