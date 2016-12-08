@@ -27,5 +27,11 @@
         <service id="sylius.form.type.grid_filter.boolean" class="Sylius\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType">
             <tag name="form.type" />
         </service>
+        <service id="sylius.grid_filter.date" class="Sylius\Component\Grid\Filter\DateFilter">
+            <tag name="sylius.grid_filter" type="date" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\DateFilterType" />
+        </service>
+        <service id="sylius.form.type.grid_filter.date" class="Sylius\Bundle\GridBundle\Form\Type\Filter\DateFilterType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>

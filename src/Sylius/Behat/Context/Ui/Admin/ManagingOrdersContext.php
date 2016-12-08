@@ -13,14 +13,13 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Order\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Order\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -147,6 +146,30 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I specify filter date from as :dateTime
+     */
+    public function iSpecifyFilterDateFromAs($dateTime)
+    {
+        $this->indexPage->specifyFilterDateFrom(new \DateTime($dateTime));
+    }
+
+    /**
+     * @When I specify filter date to as :dateTime
+     */
+    public function iSpecifyFilterDateToAs($dateTime)
+    {
+        $this->indexPage->specifyFilterDateTo(new \DateTime($dateTime));
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter()
+    {
+        $this->indexPage->filter();
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer)
@@ -236,8 +259,10 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Then /^it should have (\d+) items$/
+     * @Then I should see :amount orders in the list
+     * @Then I should see a single order in the list
      */
-    public function itShouldHaveAmountOfItems($amount)
+    public function itShouldHaveAmountOfItems($amount = 1)
     {
         $itemsCount = $this->showPage->countItems();
 
@@ -649,6 +674,17 @@ final class ManagingOrdersContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]),
             sprintf('Cannot find order with "%s" number in the list.', $orderNumber)
+        );
+    }
+
+    /**
+     * @Then I should not see an order with :orderNumber number
+     */
+    public function iShouldNotSeeOrderWithNumber($orderNumber)
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]),
+            sprintf('Order with "%s" number should not be in the list.', $orderNumber)
         );
     }
 

@@ -206,6 +206,23 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     private function getParameterName($field)
     {
-        return str_replace('.', '_', $field);
+        $parameterName = str_replace('.', '_', $field);
+
+        $i = 1;
+        while ($this->hasParameterName($parameterName)) {
+            $parameterName .= $i;
+        }
+
+        return $parameterName;
+    }
+
+    /**
+     * @param string $parameterName
+     *
+     * @return bool
+     */
+    private function hasParameterName($parameterName)
+    {
+        return null !== $this->queryBuilder->getParameter($parameterName);
     }
 }
