@@ -11,6 +11,9 @@
 
 namespace Sylius\Bundle\ResourceBundle;
 
+use Doctrine\Bundle\DoctrineBundle\DependencyInjection\Compiler\DoctrineOrmMappingsPass;
+use Doctrine\Bundle\MongoDBBundle\DependencyInjection\Compiler\DoctrineMongoDBMappingsPass;
+use Doctrine\Bundle\PHPCRBundle\DependencyInjection\Compiler\DoctrinePhpcrMappingsPass;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Driver\Exception\UnknownDriverException;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\DependencyInjection\Container;
@@ -114,13 +117,13 @@ abstract class AbstractResourceBundle extends Bundle implements ResourceBundleIn
     {
         switch ($driverType) {
             case SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM:
-                $mappingsPassClassname = 'Doctrine\\Bundle\\MongoDBBundle\\DependencyInjection\\Compiler\\DoctrineMongoDBMappingsPass';
+                $mappingsPassClassname = DoctrineMongoDBMappingsPass::class;
                 break;
             case SyliusResourceBundle::DRIVER_DOCTRINE_ORM:
-                $mappingsPassClassname = 'Doctrine\\Bundle\\DoctrineBundle\\DependencyInjection\\Compiler\\DoctrineOrmMappingsPass';
+                $mappingsPassClassname = DoctrineOrmMappingsPass::class;
                 break;
             case SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM:
-                $mappingsPassClassname = 'Doctrine\\Bundle\\PHPCRBundle\\DependencyInjection\\Compiler\\DoctrinePhpcrMappingsPass';
+                $mappingsPassClassname = DoctrinePhpcrMappingsPass::class;
                 break;
             default:
                 throw new UnknownDriverException($driverType);
