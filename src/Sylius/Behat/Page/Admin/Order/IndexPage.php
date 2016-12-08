@@ -54,7 +54,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'filter_channel' => '#criteria_entity_channel',
+            'filter_channel' => '#criteria_channel_id',
         ]);
     }
 }

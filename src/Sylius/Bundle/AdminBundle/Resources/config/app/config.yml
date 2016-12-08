@@ -50,6 +50,7 @@ sylius_grid:
             string: "@SyliusUi/Grid/Filter/string.html.twig"
             boolean: "@SyliusUi/Grid/Filter/boolean.html.twig"
             date: "@SyliusUi/Grid/Filter/date.html.twig"
+            entity: "@SyliusUi/Grid/Filter/entity.html.twig"
 
 liip_imagine:
     filter_sets:
