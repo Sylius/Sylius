@@ -20,13 +20,13 @@
 
     <services>
         <service id="sylius.behat.page.admin.channel.create" class="%sylius.behat.page.admin.channel.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
-            <argument type="string">channel</argument>
+            <argument type="string">sylius_admin_channel_create</argument>
         </service>
         <service id="sylius.behat.page.admin.channel.index" class="%sylius.behat.page.admin.channel.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
-            <argument type="string">channel</argument>
+            <argument type="string">sylius_admin_channel_index</argument>
         </service>
         <service id="sylius.behat.page.admin.channel.update" class="%sylius.behat.page.admin.channel.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
-            <argument type="string">channel</argument>
+            <argument type="string">sylius_admin_channel_update</argument>
         </service>
     </services>
 </container>

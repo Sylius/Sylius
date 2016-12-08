@@ -20,13 +20,13 @@
 
     <services>
         <service id="sylius.behat.page.admin.customer_group.create" class="%sylius.behat.page.admin.customer_group.create.class%" parent="sylius.behat.page.admin.crud.create" public="false">
-            <argument type="string">customer_group</argument>
+            <argument type="string">sylius_admin_customer_group_create</argument>
         </service>
         <service id="sylius.behat.page.admin.customer_group.index" class="%sylius.behat.page.admin.customer_group.index.class%" parent="sylius.behat.page.admin.crud.index" public="false">
-            <argument type="string">customer_group</argument>
+            <argument type="string">sylius_admin_customer_group_index</argument>
         </service>
         <service id="sylius.behat.page.admin.customer_group.update" class="%sylius.behat.page.admin.customer_group.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
-            <argument type="string">customer_group</argument>
+            <argument type="string">sylius_admin_customer_group_update</argument>
         </service>
     </services>
 </container>
