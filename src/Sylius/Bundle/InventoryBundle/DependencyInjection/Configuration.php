@@ -55,7 +55,6 @@ final class Configuration implements ConfigurationInterface
         $node
             ->children()
                 ->arrayNode('resources')
-                    ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
                         ->arrayNode('inventory_unit')
