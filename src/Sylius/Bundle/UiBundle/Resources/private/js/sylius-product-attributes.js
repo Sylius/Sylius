@@ -73,28 +73,36 @@
 
             var $attributeChoiceSelect = $attributeChoice.find('select');
             var data = '';
-            $attributeChoiceSelect.val().forEach(function(item) {
-                if (!isInTheAttributesContainer(item)) {
-                    data += $attributeChoiceSelect.prop('name') + '=' + item + "&";
-                }
-            });
+            var $newAttributes = $attributeChoiceSelect.val();
+
+            if (null != $newAttributes) {
+                $attributeChoiceSelect.val().forEach(function(item) {
+                    if (!isInTheAttributesContainer(item)) {
+                        data += $attributeChoiceSelect.prop('name') + '=' + item + "&";
+                    }
+                });
+            }
             data += "count=" + getNextIndex();
 
             $.ajax({
                 type: 'GET',
                 url: $(this).parent().attr('data-action'),
                 data: data,
-                dataType: 'html'
-            }).done(function(data) {
-                var finalData = modifyAttributeForms($(data));
-                $attributesContainer.append(finalData);
+                dataType: 'html',
+                error: function() {
+                    $('form').removeClass('loading');
+                },
+                success: function(data) {
+                    var finalData = modifyAttributeForms($(data));
+                    $attributesContainer.append(finalData);
 
-                $('#sylius_product_attribute_choice').val('');
+                    $('#sylius_product_attribute_choice').val('');
 
-                addAttributesNumber($.grep($(finalData), function (a) { return $(a).hasClass('attribute'); }).length);
-                modifySelectorOnAttributesListElementDelete();
+                    addAttributesNumber($.grep($(finalData), function (a) { return $(a).hasClass('attribute'); }).length);
+                    modifySelectorOnAttributesListElementDelete();
 
-                $('form').removeClass('loading');
+                    $('form').removeClass('loading');
+                }
             });
         });
     }

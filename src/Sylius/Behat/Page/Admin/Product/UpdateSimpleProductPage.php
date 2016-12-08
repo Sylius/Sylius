@@ -52,6 +52,12 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     {
         $this->clickTabIfItsNotActive('attributes');
         $this->getDocument()->pressButton('Add attributes');
+
+        $form = $this->getDocument()->find('css', 'form');
+
+        $this->getDocument()->waitFor(1, function () use ($form) {
+            return $form->hasClass('loading');
+        });
     }
 
     /**
@@ -75,6 +81,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
         }
 
         return $this->getElement('attribute', ['%attribute%' => $attribute])->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNumberOfAttributes()
+    {
+        return count($this->getDocument()->findAll('css', '.attribute'));
     }
 
     /**

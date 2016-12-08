@@ -16,8 +16,10 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductAttributeChoiceType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -75,6 +77,10 @@ class ProductAttributeController extends ResourceController
         $form->handleRequest($request);
 
         $attributes = $form->getData();
+        if (null === $attributes) {
+            throw new BadRequestHttpException();
+        }
+
         foreach ($attributes as $attribute) {
             $forms[$attribute->getId()] = $this->getAttributeForm($attribute);
         }

@@ -551,6 +551,21 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then product :product should not have any attributes
+     * @Then product :product should have :count attribute
+     */
+    public function productShouldNotHaveAnyAttributes(ProductInterface $product, $count = 0)
+    {
+        $numberOfAttributes = $this->updateSimpleProductPage->getNumberOfAttributes();
+
+        Assert::same(
+            (int) $count,
+            $numberOfAttributes,
+            sprintf('Product "%s" should have %d attributes, but it has %d.', $product->getName(), $count, $numberOfAttributes)
+        );
+    }
+
+    /**
      * @Given product with :element :value should not be added
      */
     public function productWithNameShouldNotBeAdded($element, $value)
@@ -1004,14 +1019,6 @@ final class ManagingProductsContext implements Context
         throw new \Exception(
             sprintf('Product "%s" should not have price defined for channel "%s".', $product->getName(), $channelName)
         );
-    }
-
-    /**
-     * @Then I should be notified that no new attributes has been selected
-     */
-    public function iShouldBeNotifiedThatNoNewAttributesHasBeenSelected()
-    {
-
     }
 
     /**

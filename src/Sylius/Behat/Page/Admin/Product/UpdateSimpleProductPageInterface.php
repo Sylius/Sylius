@@ -60,6 +60,11 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
     public function getAttributeValue($attribute);
 
     /**
+     * @return int
+     */
+    public function getNumberOfAttributes();
+
+    /**
      * @param string $attribute
      *
      * @return bool
