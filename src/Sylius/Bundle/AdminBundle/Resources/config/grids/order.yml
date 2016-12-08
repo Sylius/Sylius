@@ -89,7 +89,7 @@ sylius_grid:
                     type: entity
                     label: sylius.ui.channel
                     options:
-                        class: Sylius\Component\Core\Model\Channel
+                        class: "%sylius.model.channel.class%"
             actions:
                 item:
                     show:
