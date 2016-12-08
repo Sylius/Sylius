@@ -89,14 +89,6 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     }
 
     /**
-     * @return string
-     */
-    protected function getResourceName()
-    {
-        return $this->resourceName;
-    }
-
-    /**
      * @param string $element
      *
      * @return \Behat\Mink\Element\NodeElement|null

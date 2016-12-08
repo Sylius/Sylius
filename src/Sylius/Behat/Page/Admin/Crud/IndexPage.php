@@ -148,14 +148,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     }
 
     /**
-     * @return string
-     */
-    protected function getResourceName()
-    {
-        return $this->resourceName;
-    }
-
-    /**
      * @return TableAccessorInterface
      */
     protected function getTableAccessor()
