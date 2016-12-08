@@ -47,6 +47,14 @@ class Filter
     private $options = [];
 
     /**
+     * @var int
+     *
+     * Position equals to 100 to ensure that wile sorting filters by position ASC
+     * the filters positioned by default will be last
+     */
+    private $position = 100;
+
+    /**
      * @param string $name
      * @param string $type
      */
@@ -147,5 +155,21 @@ class Filter
     public function setOptions($options)
     {
         $this->options = $options;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 }

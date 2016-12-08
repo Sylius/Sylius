@@ -52,6 +52,14 @@ class Field
     private $options = [];
 
     /**
+     * @var int
+     *
+     * Position equals to 100 to ensure that wile sorting fields by position ASC
+     * the fields positioned by default will be last
+     */
+    private $position = 100;
+
+    /**
      * @param string $name
      * @param string $type
      */
@@ -177,5 +185,21 @@ class Field
     public function setOptions(array $options)
     {
         $this->options = $options;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 }

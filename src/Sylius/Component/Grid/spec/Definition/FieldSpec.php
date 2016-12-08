@@ -91,4 +91,15 @@ final class FieldSpec extends ObjectBehavior
         $this->setOptions(['template' => 'SyliusUiBundle:Grid/Field:_status.html.twig']);
         $this->getOptions()->shouldReturn(['template' => 'SyliusUiBundle:Grid/Field:_status.html.twig']);
     }
+
+    function it_has_last_position_by_default()
+    {
+        $this->getPosition()->shouldReturn(100);
+    }
+
+    function its_position_is_mutable()
+    {
+        $this->setPosition(1);
+        $this->getPosition()->shouldReturn(1);
+    }
 }

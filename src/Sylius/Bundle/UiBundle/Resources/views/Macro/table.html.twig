@@ -1,7 +1,7 @@
 {% macro headers(grid, definition, requestAttributes) %}
     {% import 'SyliusUiBundle:Macro:sorting.html.twig' as sorting %}
 
-    {% for field in definition.fields %}
+    {% for field in definition.fields|sort_by('position') %}
         {% if field.enabled %}
             {% if field.isSortable %}
                 {{ sorting.tableHeader(grid, field, requestAttributes) }}
@@ -17,7 +17,7 @@
 
 {% macro row(grid, definition, row) %}
     <tr class="item">
-    {% for field in definition.fields %}
+    {% for field in definition.fields|sort_by('position') %}
         {% if field.enabled %}
             <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
         {% endif %}
@@ -25,14 +25,14 @@
     {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
         <td>
             <div class="ui buttons">
-                {% for action in definition.getActions('item') %}
+                {% for action in definition.getActions('item')|sort_by('position') %}
                     {{ sylius_grid_render_action(grid, action, row) }}
                 {% endfor %}
             </div>
             {% if definition.actionGroups.subitem is defined and definition.getActions('subitem')|length > 0 %}
             <div class="ui divider"></div>
             <div class="ui buttons">
-                {% for action in definition.getActions('subitem') %}
+                {% for action in definition.getActions('subitem')|sort_by('position') %}
                     {{ sylius_grid_render_action(grid, action, row) }}
                 {% endfor %}
             </div>

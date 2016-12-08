@@ -42,6 +42,14 @@ class Action
     private $options = [];
 
     /**
+     * @var int
+     *
+     * Position equals to 100 to ensure that wile sorting actions by position ASC
+     * the action buttons positioned by default will be last
+     */
+    private $position = 100;
+
+    /**
      * @param string $name
      * @param string $type
      */
@@ -124,5 +132,21 @@ class Action
     public function setOptions(array $options)
     {
         $this->options = $options;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param int $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 }
