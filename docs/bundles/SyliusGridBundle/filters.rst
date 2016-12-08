@@ -55,3 +55,19 @@ This filter checks if a chosen datetime field is between given dates.
                         type: date
                         options:
                             field: completedAt
+
+Entity
+------
+
+This type filters by a chosen entity.
+
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            app_order:
+                filters:
+                    some_entity:
+                        type: entity
+                        options:
+                            class: AppBundle\Model\SomeEntity
