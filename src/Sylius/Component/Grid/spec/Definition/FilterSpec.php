@@ -68,4 +68,15 @@ final class FilterSpec extends ObjectBehavior
         $this->setOptions(['fields' => ['firstName', 'lastName', 'email']]);
         $this->getOptions()->shouldReturn(['fields' => ['firstName', 'lastName', 'email']]);
     }
+
+    function it_has_no_position_by_default()
+    {
+        $this->getPosition()->shouldReturn(0);
+    }
+
+    function its_position_is_mutable()
+    {
+        $this->setPosition(1);
+        $this->getPosition()->shouldReturn(1);
+    }
 }

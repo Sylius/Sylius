@@ -93,6 +93,9 @@ final class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInte
         if (array_key_exists('enabled', $configuration)) {
             $filter->setEnabled($configuration['enabled']);
         }
+        if (array_key_exists('position', $configuration)) {
+            $filter->setPosition($configuration['position']);
+        }
         if (array_key_exists('options', $configuration)) {
             $filter->setOptions($configuration['options']);
         }
