@@ -32,14 +32,12 @@
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.repository.currency" />
             <argument type="service" id="sylius.repository.locale" />
-            <argument type="service" id="sylius.repository.zone_member" />
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.factory.channel" />
             <argument type="service" id="sylius.factory.country" />
             <argument type="service" id="sylius.factory.currency" />
             <argument type="service" id="sylius.factory.locale" />
             <argument type="service" id="sylius.factory.zone" />
-            <argument type="service" id="sylius.factory.zone_member" />
             <argument>%locale%</argument>
         </service>
         <service id="sylius.behat.factory.default_channel" class="Sylius\Component\Core\Test\Services\DefaultChannelFactory">

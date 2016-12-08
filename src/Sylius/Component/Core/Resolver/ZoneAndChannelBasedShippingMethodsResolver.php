@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
@@ -65,7 +66,7 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
         /** @var OrderInterface $order */
         $order = $subject->getOrder();
 
-        $zones = $this->zoneMatcher->matchAll($order->getShippingAddress());
+        $zones = $this->zoneMatcher->matchAll($order->getShippingAddress(), Scope::SHIPPING);
         if (empty($zones)) {
             return [];
         }
