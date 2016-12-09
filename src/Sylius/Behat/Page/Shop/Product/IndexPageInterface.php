@@ -18,6 +18,28 @@ namespace Sylius\Behat\Page\Shop\Product;
 interface IndexPageInterface
 {
     /**
+     * @return int
+     */
+    public function countProductsItems();
+
+    /**
+     * @return string
+     */
+    public function getFirstProductNameFromList();
+
+    /**
+     * @param string $name
+     */
+    public function search($name);
+
+    /**
+     * @param string $order
+     */
+    public function sort($order);
+
+    public function clearFilter();
+
+    /**
      * @param string $productName
      *
      * @return bool
@@ -38,28 +60,11 @@ interface IndexPageInterface
     public function isProductWithPriceOnList($productName, $productPrice);
 
     /**
-     * @return int
-     */
-    public function countProductsItems();
-
-    /**
      * @param string $name
      *
      * @return bool
      */
     public function isProductOnPageWithName($name);
-
-    /**
-     * @return string
-     */
-    public function getFirstProductNameFromList();
-
-    /**
-     * @param string $name
-     */
-    public function search($name);
-
-    public function clearFilter();
 
     /**
      * @param array $productNames
