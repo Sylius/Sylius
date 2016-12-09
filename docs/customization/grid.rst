@@ -64,6 +64,25 @@ If you would like to modify for instance a label of any field from grid, that's 
                     date:
                         label: "When was it added?"
 
+How to remove a filter from grid?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you would like to remove a filter for an existing Sylius grid, you will need to disable it in the `app/config/grids.yml`.
+
+Let's imagine that we would like to hide the **titles filter of product reviews** on the `sylius_admin_product_review` grid.
+
+.. code-block:: yaml
+
+    # app/config/grids.yml
+    sylius_grid:
+        grids:
+            sylius_admin_product_review:
+                filters:
+                    title:
+                        enabled: false
+
+That's all. Now the `title` filter will be disabled.
+
 How to remove an action from grid?
 ----------------------------------
 
@@ -80,6 +99,33 @@ If you would like to disable some actions for any grid you just need to set thei
                         delete:
                             type: delete
                             enabled: false
+
+How to modify positions of fields, filters and actions in grid?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For fields, filters and actions it is possible to easily change the order in which they are displayed in the grid.
+
+See an example of fields order modification on the `sylius_admin_product_review` grid below:
+
+.. code-block:: yaml
+
+    # app/config/grids.yml
+    sylius_grid:
+        grids:
+            sylius_admin_product_review:
+                fields:
+                    date:
+                        position: 5
+                    title:
+                        position: 6
+                    rating:
+                        position: 3
+                    status:
+                        position: 1
+                    reviewSubject:
+                        position: 2
+                    author:
+                        position: 4
 
 Learn more
 ----------
