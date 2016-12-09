@@ -202,6 +202,7 @@ sylius:
         extra_notes: Další poznámky
         failed: Neúspěšné
         first_name: Křestní Jméno
+        from: Od
         fulfill: Splnit
         gateway: Brána
         general_info: Obecné informace
@@ -442,6 +443,7 @@ sylius:
         this_months_statistics: Statistiky za tento měsíc
         this_product_has_no_attributes_defined: Tento produkt nemá definovány žádné atributy
         title: Název
+        to: Do
         topic: Téma
         total: Celkem
         total_orders: Celkem objednávek

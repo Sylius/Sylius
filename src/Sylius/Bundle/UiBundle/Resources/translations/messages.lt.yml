@@ -232,6 +232,7 @@ sylius:
         extra_notes: Papildomos pastabos
         failed: Nepavyko
         first_name: Vardas
+        from: Nuo
         fulfill: Išpildyti
         gateway: Apmokėjimo kanalas
         general_info: Bendroji informacija
@@ -477,6 +478,7 @@ sylius:
         this_months_statistics: Šio mėnesio statistika
         this_product_has_no_attributes_defined: Šis produktas neturi atributų
         title: Pavadinimas
+        to: Iki
         topic: Tema
         total: Iš viso
         total_orders: Viso užsakymų

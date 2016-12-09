@@ -214,6 +214,7 @@ sylius:
         exclusive: Izključno
         existing_customer: Obstoječa stranka
         failed: Ni uspelo
+        from: Od
         fulfill: Izpolnitev
         gateway: Prehod
         general_info: Splošne informacije
@@ -525,6 +526,7 @@ sylius:
         this_months_statistics: Statistika tega meseca
         this_product_has_no_attributes_defined: Ta izdelek nima definiranih atributov
         title: Naslov
+        to: Za
         topic: Tema
         total: Skupaj
         total_orders: Naročila skupaj

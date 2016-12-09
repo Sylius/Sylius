@@ -294,6 +294,7 @@ sylius:
         filter: Filtruj
         filters: Filtry
         first_name: Imię
+        from: Od
         fulfill: Uzupełnij
         gateway: Bramka
         general_info: Informacje ogólne
@@ -657,6 +658,7 @@ sylius:
         this_months_statistics: Statystyki bieżącego miesiąca
         this_product_has_no_attributes_defined: Ten produkt nie posiada żadnych zdefiniowanych cech
         title: Tytuł
+        to: Do
         topic: Temat wiadomości
         total: Łącznie
         total_orders: Zamówienia

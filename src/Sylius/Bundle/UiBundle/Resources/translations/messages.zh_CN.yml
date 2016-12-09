@@ -265,6 +265,7 @@ sylius:
         failed: 失败
         faqs: 常见问题
         first_name: 名字
+        from: 从
         fulfill: 完成
         gateway: 网关
         general_info: 常规信息
@@ -642,6 +643,7 @@ sylius:
         this_months_statistics: 这个月的统计数据
         this_product_has_no_attributes_defined: 该产品没有定义任何属性
         title: 标题
+        to: 到
         topic: 主题
         total: 共计
         total_orders: 订单总数

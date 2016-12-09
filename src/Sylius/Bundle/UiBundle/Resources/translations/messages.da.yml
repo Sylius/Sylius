@@ -116,6 +116,7 @@ sylius:
         existing_customer: Eksisterende kunde
         failed: Mislykkedes
         first_name: Fornavn
+        from: Fra
         fulfill: Udfør
         gateway: Gateway
         general_info: Generel info
@@ -296,6 +297,7 @@ sylius:
         there_are_no_taxons_for_this_product: Der er ingen taxons til dette produkt
         this_months_statistics: Statistik for denne måned
         title: Titel
+        to: Til
         topic: Emne
         total_orders: Totale ordrer
         total_qty: Samlet antal

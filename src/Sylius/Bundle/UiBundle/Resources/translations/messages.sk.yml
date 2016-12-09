@@ -294,6 +294,7 @@ sylius:
         female: Žena
         filters: Filtre
         first_name: Meno
+        from: Od
         fulfill: Vybaviť
         fulfilled: Vybavené
         gateway: Brána
@@ -709,6 +710,7 @@ sylius:
         this_months_statistics: Mesačná štatistika
         this_product_has_no_attributes_defined: Produkt nemá žiadne vlastnosti
         title: Názov
+        to: Do
         topic: Téma
         total: Spolu
         total_orders: Celkový počet objednávok

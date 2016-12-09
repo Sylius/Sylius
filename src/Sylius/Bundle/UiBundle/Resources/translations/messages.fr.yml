@@ -314,6 +314,7 @@ sylius:
         filters: Filtres
         fill_in_your_billing_and_shipping_addresses: Renseignez vos adresses de facturation et de livraison
         first_name: Prénom
+        from: De
         from_the_newest: De la plus récente
         from_the_oldest: Du plus ancien
         fulfill: Remplir
@@ -752,6 +753,7 @@ sylius:
         this_months_statistics: Les statistiques de ce mois
         this_product_has_no_attributes_defined: Ce produit ne comporte pas d'attributs
         title: Titre
+        to: À
         topic: Sujet
         total: Total
         total_orders: Nombre total de commandes

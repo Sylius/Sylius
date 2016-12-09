@@ -34,6 +34,9 @@ sylius:
                 province: Tartomány/állam
                 zone: Zóna
             scope: Hatókör
+            scopes:
+                shipping: Szállítás
+                tax: Adó
             select: Válassza ki
             select_scope: Hatókör kiválasztása
         zone_member:

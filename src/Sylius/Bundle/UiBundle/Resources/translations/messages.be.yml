@@ -120,6 +120,7 @@ sylius:
         existing_customer: Існуючы пакупнік
         failed: Памылка
         first_name: Імя
+        from: З
         fulfill: Выканаць
         gateway: Шлюз
         general_info: Агульная інфармацыя
@@ -301,6 +302,7 @@ sylius:
         there_are_no_options_for_this_product: Для гэтага тавару няма опцый
         there_are_no_taxons_for_this_product: Гэты тавар не абкладаецца падаткам
         title: Назва
+        to: Да
         total: Агулам
         total_orders: Усе замовы
         total_qty: Агульная колькасць

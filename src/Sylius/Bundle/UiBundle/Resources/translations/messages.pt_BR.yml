@@ -294,6 +294,7 @@ sylius:
         female: Feminino
         filters: Filtros
         first_name: Nome
+        from: De
         fulfill: Completar
         fulfilled: Completado
         gateway: Gateway
@@ -709,6 +710,7 @@ sylius:
         this_months_statistics: Estatísticas do mês
         this_product_has_no_attributes_defined: Este produto não tem atributos definidos
         title: Título
+        to: Para
         topic: Tópico
         total: Total
         total_orders: Total de pedidos

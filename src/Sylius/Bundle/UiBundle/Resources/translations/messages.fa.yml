@@ -271,6 +271,7 @@ sylius:
         extra_notes: یادداشت های اضافی
         failed: پرداخت ناموفق
         first_name: نام
+        from: از تاریخ
         fulfill: ارسال
         gateway: درگاه پرداخت
         general_info: اطلاعات کلی
@@ -626,6 +627,7 @@ sylius:
         this_months_statistics: آمار ماه جاری
         this_product_has_no_attributes_defined: برای این کالا قابلیتی تعریف نشده
         title: عنوان
+        to: تا تاریخ
         topic: عنوان
         total: قیمت کل
         total_orders: کل سفارش ها

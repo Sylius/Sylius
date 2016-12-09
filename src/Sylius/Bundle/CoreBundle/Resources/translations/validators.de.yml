@@ -5,6 +5,10 @@ sylius:
     channel:
         default_locale:
             not_blank: Bitte wählen Sie die Standardsprache für diesen Kanal.
+    channel_pricing:
+        price:
+            min: Preis muss mindestens {{ limit }} sein.
+            not_blank: Bitte Preis eingeben.
     checkout:
         shipping_method:
             not_blank: Bitte wählen Sie eine Versandart aus.
@@ -14,6 +18,8 @@ sylius:
     customer:
         currency_code:
             not_valid: Der eingegebene Währungscode ist ungültig.
+    cart_item:
+        not_available: '%itemName% hat keinen ausreichenden Vorrat.'
     order:
         currency_code:
             not_valid: Der eingegebene Währungscode ist ungültig.
@@ -21,9 +27,14 @@ sylius:
         code:
             not_blank: Bitte lokalen Code eingeben.
             unique: Locale existiert bereits.
+    product_attribute:
+        invalid: Position muss eine Ganzzahl sein.
     product_image:
         code:
             not_blank: Bitte geben Sie einen Bild-Code an.
+        file:
+            max_size: Das Bild ist zu groß - {{ size }}{{ suffix }}. Maximal zulässige Größe {{ limit }}{{ suffix }}.
+            upload_ini_size: Das Bild ist zu groß. Maximal zulässige Größe {{ limit }}{{ suffix }}.
     product_variant:
         onHand:
             min: Menge muss größer sein als {{ limit }}.
@@ -31,6 +42,7 @@ sylius:
         original_price:
             min: Ursprünglicher Preis darf nicht negativ sein.
         weight:
+            min: Gewicht darf nicht negativ sein.
             invalid: Gewicht muss eine Zahl sein.
         width:
             min: Breite darf nicht negativ sein.

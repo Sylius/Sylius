@@ -274,6 +274,7 @@ sylius:
         filters: Filtros
         first_name: Nome próprio
         forgot_password: Esqueceu-se da palavra-passe?
+        from: De
         fulfill: Preencher
         fulfilled: Cheio
         gateway: Gateway
@@ -520,6 +521,7 @@ sylius:
         there_are_no_options_for_this_product: Não há opções para este produto
         there_are_no_taxons_for_this_product: Sem táxons
         title: Título
+        to: Para
         topic: Assunto
         total_orders: Total de encomendas
         total_registrations: Total de registos

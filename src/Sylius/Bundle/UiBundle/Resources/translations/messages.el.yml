@@ -50,6 +50,7 @@ sylius:
         error: Σφάλμα
         existing_customer: Υφιστάμενος Πελάτης
         first_name: Όνομα
+        from: Από
         gateway: Πύλη
         general_settings: Γενικές ρυθμίσεις
         generate: Δημιουργία
@@ -133,6 +134,7 @@ sylius:
         tax_total: Σύνολο φόρων
         taxes: Φόροι
         title: Τίτλος
+        to: Προς
         total: Σύνολο
         type: Τύπος
         unit_price: Τιμή μονάδας

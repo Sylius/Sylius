@@ -29,6 +29,8 @@ sylius:
             amount: Anzahl
             expires_at: Verfällt am
             usage_limit: Nutzungslimit
+        promotion_filter:
+            price_range: Preisspanne Filter
         promotion_rule:
             cart_quantity_configuration:
                 count: Anzahl

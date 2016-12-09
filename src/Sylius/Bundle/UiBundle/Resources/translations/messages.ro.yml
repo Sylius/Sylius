@@ -132,6 +132,7 @@ sylius:
         existing_customer: Client existent
         failed: Eșuată
         first_name: Prenume
+        from: De la
         fulfill: Vânzare
         gateway: Gateway
         general_info: Informaţii generale
@@ -325,6 +326,7 @@ sylius:
         there_are_no_options_for_this_product: Nu există opțiuni pentru acest produs
         there_are_no_taxons_for_this_product: Fără categorie
         title: Titlu
+        to: Până la
         topic: Subiect
         total_orders: Număr comenzi
         total_qty: Cantitate totală

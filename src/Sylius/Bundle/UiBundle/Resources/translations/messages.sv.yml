@@ -181,6 +181,7 @@ sylius:
         faqs: FAQs
         filters: Filter
         first_name: Förnamn
+        from: Från
         gateway: Portal
         generate_coupons: Generera kuponger
         hello: Hej
@@ -360,6 +361,7 @@ sylius:
         textarea: Textfält
         theme: Tema
         title: Titel
+        to: Till
         topic: Ämne
         total_records: Totalt antal poster
         translations: Översättningar

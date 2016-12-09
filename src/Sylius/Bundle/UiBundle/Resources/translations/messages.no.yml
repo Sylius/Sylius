@@ -119,6 +119,7 @@ sylius:
         existing_customer: Eksisterende kunde
         failed: Mislyktes
         first_name: Fornavn
+        from: Fra
         fulfill: Oppfylle
         gateway: Rute
         general_info: Generell info
@@ -302,6 +303,7 @@ sylius:
         there_are_no_options_for_this_product: Det er ingen alternativer for dette produktet
         there_are_no_taxons_for_this_product: Det er ingen grupper for dette produktet
         title: Tittel
+        to: Til
         topic: Emne
         total: Totalt
         total_orders: Totale bestillinger

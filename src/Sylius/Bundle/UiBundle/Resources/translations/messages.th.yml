@@ -322,6 +322,7 @@ sylius:
         fill_in_your_billing_and_shipping_addresses: กรอกอยู่จัดส่ง และเรียกเก็บเงิน
         first_name: ชื่อ
         forgot_password: ลืมรหัสผ่านใช่ไหม?
+        from: จาก
         from_the_newest: จากใหม่ล่าสุด
         from_the_oldest: จากเก่าที่สุด
         fulfill: Fulfill
@@ -773,6 +774,7 @@ sylius:
         this_months_statistics: สถิติเดือนนี้
         this_product_has_no_attributes_defined: ผลิตภัณฑ์นี้ไม่ได้กำหนดคุณสมบัติไว้
         title: หัวข้อ
+        to: ถึง
         topic: หัวข้อ
         total: ผลรวม
         total_orders: ใบสั่งซื้อทั้งหมด

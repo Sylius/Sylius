@@ -221,6 +221,7 @@ sylius:
         faqs: Česta pitanja
         filters: Filteri
         first_name: Ime
+        from: Od
         fulfill: Ispunjeno
         gateway: Gateway
         general_info: sylius.promotion.general_info
@@ -535,6 +536,7 @@ sylius:
         this_months_statistics: Statistike ovog mjeseca
         this_product_has_no_attributes_defined: Ovaj proizvod nema definiranih atributa
         title: Naslov
+        to: Do
         topic: Tema
         total: Ukupno
         total_orders: Narudžbe u trenutnom mjesecu

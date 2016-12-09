@@ -308,6 +308,7 @@ sylius:
         fill_in_your_billing_and_shipping_addresses: Заполните ваши адреса для отправки счета-фактуры и доставки товара
         first_name: Имя
         forgot_password: Забыли пароль?
+        from: От
         from_the_newest: От новых к старым
         from_the_oldest: От старых к новым
         fulfill: Завершён
@@ -742,6 +743,7 @@ sylius:
         this_months_statistics: Статистика за этот месяц
         this_product_has_no_attributes_defined: Этот продукт не имеет определенных атрибутов
         title: Название
+        to: До
         topic: Тема
         total: Итого
         total_orders: Заказов в этом месяце
