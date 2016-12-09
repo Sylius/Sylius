@@ -72,6 +72,7 @@ class ZoneApiTest extends JsonApiTestCase
         {
             "code": "EU",
             "name": "European Union",
+            "scope": "all",
             "members": [
                 {
                     "code": "NL"
@@ -204,6 +205,7 @@ EOT;
 <<<EOT
         {
             "name": "European Union +",
+            "scope": "all",
             "members": [
                 {
                     "code": "PL"
