@@ -62,6 +62,40 @@
 
 ### UiBundle
 
+* `Sylius\Bundle\UiBundle\Menu\AbstractMenuBuilder` was removed, you should add the following code to classes previously extending it:
+  
+  ```php
+  use Knp\Menu\FactoryInterface;
+  use Symfony\Component\EventDispatcher\EventDispatcher;
+  
+  /**
+   * @var FactoryInterface
+   */
+  private $factory;
+  
+  /**
+   * @var EventDispatcher
+   */
+  private $eventDispatcher;
+  
+  /**
+   * @param FactoryInterface $factory
+   * @param EventDispatcher $eventDispatcher
+   */
+  public function __construct(FactoryInterface $factory, EventDispatcher $eventDispatcher)
+  {
+      $this->factory = $factory;
+      $this->eventDispatcher = $eventDispatcher;
+  }
+  ```
+  
+  Also `sylius.menu_builder` service was removed, you should add the following code to services previously extending it:
+  
+  ```xml
+  <argument type="service" id="knp_menu.factory" />
+  <argument type="service" id="event_dispatcher" />
+  ```
+
 ## Application:
 
 ### Configuration
