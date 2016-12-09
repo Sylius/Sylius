@@ -37,8 +37,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $this->beConstructedWith(
             $defaultPaymentMethodResolver,
             $paymentFactory,
-            $stateMachineFactory,
-            PaymentInterface::STATE_NEW
+            $stateMachineFactory
         );
     }
 
@@ -77,7 +76,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $stateMachine->getTransitionToState(PaymentInterface::STATE_NEW)->willReturn(PaymentTransitions::TRANSITION_CREATE);
         $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE)->shouldBeCalled();
 
-        $this->provideOrderPayment($order)->shouldReturn($newPayment);
+        $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
 
     function it_provides_payment_in_configured_state_with_payment_method_from_last_failed_payment(
@@ -106,7 +105,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $stateMachine->getTransitionToState(PaymentInterface::STATE_NEW)->willReturn(PaymentTransitions::TRANSITION_CREATE);
         $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE)->shouldBeCalled();
 
-        $this->provideOrderPayment($order)->shouldReturn($newPayment);
+        $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
 
     function it_provides_payment_in_configured_state_with_default_payment_method(
@@ -135,7 +134,7 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $stateMachine->getTransitionToState(PaymentInterface::STATE_NEW)->willReturn(PaymentTransitions::TRANSITION_CREATE);
         $stateMachine->apply(PaymentTransitions::TRANSITION_CREATE)->shouldBeCalled();
 
-        $this->provideOrderPayment($order)->shouldReturn($newPayment);
+        $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
 
     function it_does_not_apply_any_transition_if_target_state_is_the_same_as_new_payment(
@@ -164,10 +163,10 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $defaultPaymentMethodResolver->getDefaultPaymentMethod($newPayment)->willReturn($paymentMethod);
 
         $newPayment->setMethod($paymentMethod)->shouldBeCalled();
-        $newPayment->getState()->willReturn(PaymentInterface::STATE_CART);
+        $newPayment->getState()->willReturn(PaymentInterface::STATE_NEW);
 
         $stateMachineFactory->get(Argument::any())->shouldNotBeCalled();
 
-        $this->provideOrderPayment($order)->shouldReturn($newPayment);
+        $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
     }
 }

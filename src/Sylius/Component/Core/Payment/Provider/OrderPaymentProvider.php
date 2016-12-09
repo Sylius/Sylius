@@ -42,32 +42,24 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
     private $stateMachineFactory;
 
     /**
-     * @var string
-     */
-    private $targetState;
-
-    /**
      * @param DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
      * @param PaymentFactoryInterface $paymentFactory
      * @param StateMachineFactoryInterface $stateMachineFactory
-     * @param string $targetState
      */
     public function __construct(
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
         PaymentFactoryInterface $paymentFactory,
-        StateMachineFactoryInterface $stateMachineFactory,
-        $targetState = PaymentInterface::STATE_CART
+        StateMachineFactoryInterface $stateMachineFactory
     ) {
         $this->defaultPaymentMethodResolver = $defaultPaymentMethodResolver;
         $this->paymentFactory = $paymentFactory;
         $this->stateMachineFactory = $stateMachineFactory;
-        $this->targetState = $targetState;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function provideOrderPayment(OrderInterface $order)
+    public function provideOrderPayment(OrderInterface $order, $targetState)
     {
         /** @var $payment PaymentInterface */
         $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
@@ -84,7 +76,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
         }
 
         $payment->setMethod($paymentMethod);
-        $this->applyRequiredTransition($payment);
+        $this->applyRequiredTransition($payment, $targetState);
 
         return $payment;
     }
@@ -129,17 +121,18 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
 
     /**
      * @param PaymentInterface $payment
+     * @param string $targetState
      */
-    private function applyRequiredTransition(PaymentInterface $payment)
+    private function applyRequiredTransition(PaymentInterface $payment, $targetState)
     {
-        if ($this->targetState === $payment->getState()) {
+        if ($targetState === $payment->getState()) {
             return;
         }
 
         /** @var StateMachineInterface $stateMachine */
         $stateMachine = $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH);
 
-        $targetTransition = $stateMachine->getTransitionToState($this->targetState);
+        $targetTransition = $stateMachine->getTransitionToState($targetState);
         if (null !== $targetTransition) {
             $stateMachine->apply($targetTransition);
         }

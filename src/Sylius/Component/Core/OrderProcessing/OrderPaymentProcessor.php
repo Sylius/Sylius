@@ -13,12 +13,9 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
-use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -29,25 +26,25 @@ use Webmozart\Assert\Assert;
 final class OrderPaymentProcessor implements OrderProcessorInterface
 {
     /**
-     * @var PaymentFactoryInterface
+     * @var OrderPaymentProviderInterface
      */
-    private $paymentFactory;
+    private $orderPaymentProvider;
 
     /**
-     * @var DefaultPaymentMethodResolverInterface
+     * @var string
      */
-    private $defaultPaymentMethodResolver;
+    private $targetState;
 
     /**
-     * @param PaymentFactoryInterface $paymentFactory
-     * @param DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
+     * @param OrderPaymentProviderInterface $orderPaymentProvider
+     * @param string $targetState
      */
     public function __construct(
-        PaymentFactoryInterface $paymentFactory,
-        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
+        OrderPaymentProviderInterface $orderPaymentProvider,
+        $targetState = PaymentInterface::STATE_CART
     ) {
-        $this->paymentFactory = $paymentFactory;
-        $this->defaultPaymentMethodResolver = $defaultPaymentMethodResolver;
+        $this->orderPaymentProvider = $orderPaymentProvider;
+        $this->targetState = $targetState;
     }
 
     /**
@@ -62,88 +59,17 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
             return;
         }
 
-        $newPayment = $order->getLastCartPayment();
-        if (null !== $newPayment) {
-            $newPayment->setCurrencyCode($order->getCurrencyCode());
-            $newPayment->setAmount($order->getTotal());
+        $lastPayment = $order->getLastPayment($this->targetState);
+        if (null !== $lastPayment) {
+            $lastPayment->setCurrencyCode($order->getCurrencyCode());
+            $lastPayment->setAmount($order->getTotal());
 
             return;
         }
 
-        $newPayment = $this->createNewPayment($order);
+        $newPayment = $this->orderPaymentProvider->provideOrderPayment($order, $this->targetState);
         if (null !== $newPayment) {
             $order->addPayment($newPayment);
-        }
-    }
-
-    /**
-     * @param BaseOrderInterface $order
-     *
-     * @return PaymentInterface|null
-     */
-    protected function createNewPayment(BaseOrderInterface $order)
-    {
-        /** @var $payment PaymentInterface */
-        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
-
-        $paymentMethod = $this->getDefaultPaymentMethod($payment, $order);
-        $lastPayment = $this->getLastPayment($order);
-
-        if (null !== $lastPayment) {
-            $paymentMethod = $lastPayment->getMethod();
-        }
-
-        if (null === $paymentMethod) {
-            return null;
-        }
-
-        $payment->setMethod($paymentMethod);
-
-        return $payment;
-    }
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @return bool|PaymentInterface
-     */
-    private function getLastPayment(OrderInterface $order)
-    {
-        return $this
-            ->getLastPaymentWithState($order, PaymentInterface::STATE_CANCELLED) ?: $this->getLastPaymentWithState($order, PaymentInterface::STATE_FAILED)
-        ;
-    }
-
-    /**
-     * @param OrderInterface $order
-     * @param string $state
-     *
-     * @return null|PaymentInterface
-     */
-    private function getLastPaymentWithState(OrderInterface $order, $state)
-    {
-        $lastPayment = $order->getPayments()->filter(function (PaymentInterface $payment) use ($state) {
-            return $payment->getState() === $state;
-        })->last();
-
-        return $lastPayment !== false ? $lastPayment : null;
-    }
-
-    /**
-     * @param PaymentInterface $payment
-     * @param OrderInterface $order
-     *
-     * @return null|PaymentMethodInterface
-     */
-    private function getDefaultPaymentMethod(PaymentInterface $payment, OrderInterface $order)
-    {
-        try {
-            $payment->setOrder($order);
-            $paymentMethod = $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
-
-            return $paymentMethod;
-        } catch (UnresolvedDefaultPaymentMethodException $exception) {
-            return null;
         }
     }
 }
