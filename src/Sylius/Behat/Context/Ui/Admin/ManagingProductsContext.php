@@ -516,6 +516,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I try to add new attributes
+     */
+    public function iTryToAddNewAttributes()
+    {
+        $this->updateSimpleProductPage->addSelectedAttributes();
+    }
+
+    /**
      * @Then /^attribute "([^"]+)" of (product "[^"]+") should be "([^"]+)"$/
      */
     public function itsAttributeShouldBe($attribute, ProductInterface $product, $value)
@@ -539,6 +547,21 @@ final class ManagingProductsContext implements Context
         Assert::false(
             $this->updateSimpleProductPage->hasAttribute($attribute),
             sprintf('Product "%s" should not have attribute "%s" but it does.', $product->getName(), $attribute)
+        );
+    }
+
+    /**
+     * @Then product :product should not have any attributes
+     * @Then product :product should have :count attribute
+     */
+    public function productShouldNotHaveAnyAttributes(ProductInterface $product, $count = 0)
+    {
+        $numberOfAttributes = $this->updateSimpleProductPage->getNumberOfAttributes();
+
+        Assert::same(
+            (int) $count,
+            $numberOfAttributes,
+            sprintf('Product "%s" should have %d attributes, but it has %d.', $product->getName(), $count, $numberOfAttributes)
         );
     }
 
