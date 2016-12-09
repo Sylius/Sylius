@@ -163,20 +163,22 @@ sylius_fixtures:
                                 name: "New Year"
                                 usage_limit: 10
                                 priority: 2
-                                starts_at: "now"
+                                starts_at: "-7 day"
                                 ends_at: "7 day"
                                 channels:
                                     - "US_WEB"
                                 rules:
                                     -
                                         type: "item_total"
-                                        amount:
-                                            US_WEB: 10
+                                        configuration:
+                                            US_WEB:
+                                                amount: 100.00
                                 actions:
                                     -
                                         type: "order_fixed_discount"
-                                        amount:
-                                            US_WEB: 10
+                                        configuration:
+                                            US_WEB:
+                                                amount: 10.00
 
                 mug_product:
                     options:

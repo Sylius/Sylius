@@ -147,11 +147,19 @@ class PromotionExampleFactory extends AbstractExampleFactory implements ExampleF
             ->setNormalizer('channels', LazyOption::findBy($this->channelRepository, 'code'))
             ->setDefined('rules')
             ->setNormalizer('rules', function (Options $options, array $rules) {
-                return [0 => []];
+                if (empty($rules)) {
+                    return [[]];
+                }
+
+                return $rules;
             })
             ->setDefined('actions')
             ->setNormalizer('actions', function (Options $options, array $actions) {
-                return [0 => []];
+                if (empty($actions)) {
+                    return [[]];
+                }
+
+                return $actions;
             })
         ;
     }

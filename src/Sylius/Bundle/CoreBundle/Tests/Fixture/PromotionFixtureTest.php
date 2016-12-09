@@ -127,7 +127,9 @@ final class PromotionFixtureTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertConfigurationIsValid([['custom' => [['rules' => [[
             'type' => 'cart_quantity',
-            'count' => 5,
+            'configuration' => [
+                'count' => 5,
+            ],
         ]]]]]], 'custom.*.rules');
     }
 
@@ -138,7 +140,9 @@ final class PromotionFixtureTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertConfigurationIsValid([['custom' => [['actions' => [[
             'type' => 'order_percentage_discount',
-            'percentage' => 20,
+            'configuration' => [
+                'percentage' => 20,
+            ],
         ]]]]]], 'custom.*.actions');
     }
 

@@ -11,12 +11,17 @@
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Factory\PromotionRuleFactoryInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\CustomerGroupRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\HasTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ShippingCountryRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionRuleInterface;
+use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -30,11 +35,6 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
     private $promotionRuleFactory;
 
     /**
-     * @var ChannelRepositoryInterface
-     */
-    private $channelRepository;
-
-    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -46,14 +46,10 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
 
     /**
      * @param PromotionRuleFactoryInterface $promotionRuleFactory
-     * @param ChannelRepositoryInterface $channelRepository
      */
-    public function __construct(
-        PromotionRuleFactoryInterface $promotionRuleFactory,
-        ChannelRepositoryInterface $channelRepository
-    ) {
+    public function __construct(PromotionRuleFactoryInterface $promotionRuleFactory)
+    {
         $this->promotionRuleFactory = $promotionRuleFactory;
-        $this->channelRepository = $channelRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver = new OptionsResolver();
@@ -68,16 +64,12 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
     {
         $options = $this->optionsResolver->resolve($options);
 
-        if (ItemTotalRuleChecker::TYPE === $options['type']) {
-            /** @var PromotionRuleInterface $promotionRule */
-            $promotionRule = $this->promotionRuleFactory->createNew();
-            $promotionRule->setType(ItemTotalRuleChecker::TYPE);
-            $promotionRule->setConfiguration($this->getItemTotalConfiguration($options['amount']));
+        /** @var PromotionRuleInterface $promotionRule */
+        $promotionRule = $this->promotionRuleFactory->createNew();
+        $promotionRule->setType($options['type']);
+        $promotionRule->setConfiguration($options['configuration']);
 
-            return $promotionRule;
-        }
-
-        return $this->promotionRuleFactory->createCartQuantity($options['count']);
+        return $promotionRule;
     }
 
     /**
@@ -87,42 +79,19 @@ class PromotionRuleExampleFactory extends AbstractExampleFactory implements Exam
     {
         $resolver
             ->setDefault('type', CartQuantityRuleChecker::TYPE)
-            ->setAllowedValues('type', [
-                CartQuantityRuleChecker::TYPE,
-                ItemTotalRuleChecker::TYPE,
-            ])
             ->setAllowedTypes('type', 'string')
-            ->setDefault('count', $this->faker->randomNumber(1))
-            ->setAllowedTypes('count', 'integer')
-            ->setDefined('amount')
-            ->setAllowedTypes('amount', 'array')
+            ->setDefault('configuration', [
+                'count' => $this->faker->randomNumber(1),
+            ])
+            ->setNormalizer('configuration', function (Options $options, $configuration) {
+                foreach ($configuration as $channelCode => $channelConfiguration) {
+                    if (isset($channelConfiguration['amount'])) {
+                        $configuration[$channelCode]['amount'] *= 100;
+                    }
+                }
+
+                return $configuration;
+            })
         ;
-    }
-
-    /**
-     * @param array $options
-     *
-     * @return array
-     */
-    private function getItemTotalConfiguration(array $options)
-    {
-        $configuration = [];
-
-        if (!isset($options)) {
-            $channels = $this->channelRepository->findAll();
-
-            /** @var ChannelInterface $channel */
-            foreach ($channels as $channel) {
-                $configuration[$channel->getCode()] = ['amount' => $this->faker->randomNumber(4)];
-            }
-
-            return $configuration;
-        }
-
-        foreach ($options as $channelCode => $amount) {
-            $configuration[$channelCode] = ['amount' => $amount * 100];
-        }
-
-        return $configuration;
     }
 }
