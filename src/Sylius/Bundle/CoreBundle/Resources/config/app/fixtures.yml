@@ -150,6 +150,34 @@ sylius_fixtures:
                                 category: "other"
                                 amount: 0.2
 
+                promotion:
+                    options:
+                        custom:
+                            christmas:
+                                code: "christmas"
+                                name: "Christmas"
+                                channels:
+                                    - "US_WEB"
+                            new_year:
+                                code: "new_year"
+                                name: "New Year"
+                                usage_limit: 10
+                                priority: 2
+                                starts_at: "now"
+                                ends_at: "7 day"
+                                channels:
+                                    - "US_WEB"
+                                rules:
+                                    -
+                                        type: "item_total"
+                                        amount:
+                                            US_WEB: 10
+                                actions:
+                                    -
+                                        type: "order_fixed_discount"
+                                        amount:
+                                            US_WEB: 10
+
                 mug_product:
                     options:
                         amount: 15

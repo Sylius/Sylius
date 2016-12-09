@@ -128,6 +128,12 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
+        <service id="sylius.fixture.promotion" class="Sylius\Bundle\CoreBundle\Fixture\PromotionFixture">
+            <argument type="service" id="sylius.manager.promotion" />
+            <argument type="service" id="sylius.fixture.example_factory.promotion" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
         <service id="sylius.fixture.taxon" class="Sylius\Bundle\CoreBundle\Fixture\TaxonFixture">
             <argument type="service" id="sylius.manager.taxon" />
             <argument type="service" id="sylius.fixture.example_factory.taxon" />
