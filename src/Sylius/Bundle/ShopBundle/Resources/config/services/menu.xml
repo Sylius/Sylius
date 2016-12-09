@@ -13,11 +13,10 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.menu_builder.shop.account" class="Sylius\Bundle\ShopBundle\Menu\AccountMenuBuilder"
-                 parent="sylius.menu_builder" public="false" />
-        <service id="sylius.menu.shop.account" class="Knp\Menu\MenuItem">
-            <factory service="sylius.menu_builder.shop.account" method="createMenu" />
-            <tag name="knp_menu.menu" alias="sylius.shop.account" />
+        <service id="sylius.shop.menu_builder.account" class="Sylius\Bundle\ShopBundle\Menu\AccountMenuBuilder">
+            <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="knp_menu.menu_builder" method="createMenu" alias="sylius.shop.account" />
         </service>
     </services>
 </container>

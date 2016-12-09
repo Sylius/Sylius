@@ -11,21 +11,44 @@
 
 namespace Sylius\Bundle\AdminBundle\Menu;
 
+use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\UiBundle\Menu\AbstractMenuBuilder;
 use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class MainMenuBuilder extends AbstractMenuBuilder
+final class MainMenuBuilder
 {
     const EVENT_NAME = 'sylius.menu.admin.main';
 
     /**
+     * @var FactoryInterface
+     */
+    private $factory;
+
+    /**
+     * @var EventDispatcherInterface
+     */
+    private $eventDispatcher;
+
+    /**
+     * @param FactoryInterface $factory
+     * @param EventDispatcherInterface $eventDispatcher
+     */
+    public function __construct(FactoryInterface $factory, EventDispatcherInterface $eventDispatcher)
+    {
+        $this->factory = $factory;
+        $this->eventDispatcher = $eventDispatcher;
+    }
+
+    /**
+     * @param array $options
+     *
      * @return ItemInterface
      */
-    public function createMenu()
+    public function createMenu(array $options)
     {
         $menu = $this->factory->createItem('root');
 
