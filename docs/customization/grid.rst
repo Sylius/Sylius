@@ -64,6 +64,23 @@ If you would like to modify for instance a label of any field from grid, that's 
                     date:
                         label: "When was it added?"
 
+How to remove an action from grid?
+----------------------------------
+
+If you would like to disable some actions for any grid you just need to set their `enabled` option to `false` like below:
+
+.. code-block:: yaml
+
+    # app/config/grids.yml
+    sylius_grid:
+        grids:
+            sylius_admin_product_review:
+                actions:
+                    item:
+                        delete:
+                            type: delete
+                            enabled: false
+
 Learn more
 ----------
 
