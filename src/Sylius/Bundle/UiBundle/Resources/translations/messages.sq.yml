@@ -248,6 +248,7 @@ sylius:
         extra_information: Informacione shtese
         failed: Nuk u krye
         first_name: Emri
+        from: Nga (dërguesi)
         fulfill: Përmbyll
         gateway: Gateway
         general_info: Informacion i përgjithshëm
@@ -604,6 +605,7 @@ sylius:
         this_months_statistics: Statistikat e muajit në vazhdim
         this_product_has_no_attributes_defined: Ky produkt nuk ka atribute të përcaktuara
         title: Titulli
+        to: Për (marrësi)
         topic: Tema
         total: Totali
         total_orders: Porositë totale

@@ -288,6 +288,7 @@ sylius:
         female: Nő
         filters: Szűrők
         first_name: Keresztnév
+        from: '-tól'
         fulfill: Teljesítés
         gateway: Átjáró
         general_info: Általános info
@@ -693,6 +694,7 @@ sylius:
         this_months_statistics: Ennek a hónapnak a statisztikája
         this_product_has_no_attributes_defined: Ennek a terméknek nincsenek attribútumai
         title: Cím
+        to: '-ig'
         topic: Téma
         total: Összesen
         total_orders: Rendelések összesen

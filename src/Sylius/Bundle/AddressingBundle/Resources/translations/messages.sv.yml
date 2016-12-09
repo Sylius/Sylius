@@ -34,6 +34,9 @@ sylius:
                 province: Län
                 zone: Zon
             scope: Omfattning
+            scopes:
+                shipping: Leverans
+                tax: Skatt
             select: Välj
             select_scope: Välj omfattning
         zone_member:

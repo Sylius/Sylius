@@ -331,6 +331,7 @@ sylius:
         fill_in_your_billing_and_shipping_addresses: Rellena tu dirección de facturación y envío
         first_name: Nombre
         forgot_password: '¿Olvidó su contraseña?'
+        from: Desde
         from_the_newest: Desde el más reciente
         from_the_oldest: Desde la más antigua
         fulfill: Completo
@@ -796,6 +797,7 @@ sylius:
         this_months_statistics: Estadísticas del mes
         this_product_has_no_attributes_defined: Este producto no tiene atributos definidos
         title: Título
+        to: Hasta
         topic: Asunto
         total: Total
         total_in_base_currency: Total en la moneda base

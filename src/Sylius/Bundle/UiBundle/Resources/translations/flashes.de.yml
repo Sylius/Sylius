@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        delete_error: Der Kanal kann nicht gelöscht werden. Mindestens ein aktivierter Kanal ist erforderlich.
+    customer:
+        add_address: Adresse wurde erfolgreich hinzugefügt.
+        set_address_as_default: Adresse wurde als Standard gesetzt.

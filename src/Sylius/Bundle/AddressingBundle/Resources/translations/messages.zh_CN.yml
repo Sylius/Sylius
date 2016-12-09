@@ -34,6 +34,8 @@ sylius:
                 province: 省/直辖市/自治区
                 zone: 区域
             scope: 范围
+            scopes:
+                tax: 税收
             select: 请选择
             select_scope: 选择范围
         zone_member:

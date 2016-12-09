@@ -88,9 +88,11 @@ sylius:
         blocks: Blöcke
         body: Inhalt
         browse_products: Produkte durchsuchen
+        browse_all_products: Alle Produkte durchsuchen
         browse_your_addresses: Adressen durchsuchen
         browse_your_orders_from_the_past: Bestellungen aus der Vergangenheit durchsuchen
         build: Erstellen
+        by_position: Nach Position
         calculator: Rechner
         call_us: Rufen Sie uns an!
         cancel: Abbrechen
@@ -221,6 +223,7 @@ sylius:
         default: Standard
         default_address: Standardadresse
         default_billing_address: Standard-Rechnungsadresse
+        default_currency: Standardwährung
         default_locale: Standard Lokalisierung
         default_shipping_address: Standard-Lieferadresse
         delete: Löschen
@@ -242,6 +245,7 @@ sylius:
         edit_coupon: Gutscheincode bearbeiten
         edit_currency: Währung bearbeiten
         edit_customer: Kunde bearbeiten
+        edit_exchange_rate: Wechselkurs bearbeiten
         edit_locale: Gebietsschema bearbeiten
         edit_my_address: Adresse bearbeiten
         edit_order: Bestellung bearbeiten
@@ -255,6 +259,7 @@ sylius:
         edit_promotion_coupon: Aktionscode bearbeiten
         edit_report: Bericht editieren
         edit_shipping_address: Versandadresse bearbeiten
+        edit_shipping_category: Versand-Kategorie bearbeiten
         edit_shipping_method: Versandart bearbeiten
         edit_tax_category: Steuerkategorien bearbeiten
         edit_tax_rate: Steuersatz bearbeiten
@@ -269,6 +274,7 @@ sylius:
         editing_currency: Währung editieren
         editing_customer: Kunde bearbeiten
         editing_email: E-Mail editieren
+        editing_exchange_rate: Wechselkurs bearbeiten
         editing_imagine_block: Bild-Element editieren
         editing_menu: Menü editieren
         editing_menu_node: Menüpunkt editieren
@@ -308,6 +314,7 @@ sylius:
         equal: Gleich
         error: Fehler
         exchange_rate: Wechselkurs
+        exchange_rates: Wechselkurse
         exclusive: Exklusiv
         existing_customer: Existierender Benutzer
         expiration_and_usage_limits: Ablauf und maximale Anzahl
@@ -322,6 +329,7 @@ sylius:
         fill_in_your_billing_and_shipping_addresses: Rechungs.- und Lieferanschrift
         first_name: Vorname
         forgot_password: Passwort vergessen?
+        from: Von
         from_the_newest: Von dem neuesten
         from_the_oldest: Von dem ältesten
         fulfill: Zu erfüllen
@@ -369,6 +377,7 @@ sylius:
         it_seems_you_have_an_account_already: Es scheint, dass Sie bereits über ein Konto verfügen
         item: Produkt
         items: Artikel
+        item.choice: '{0} |{1}, 1 Artikel |] 1, Inf], %count% Artikel'
         items_total: Gesamtanzahl
         jump_to_page: Wechsel zur Seite
         label: Bezeichnung
@@ -410,6 +419,7 @@ sylius:
         manage_customer_groups: Kundengruppen verwalten
         manage_discounts_and_promotional_campaigns: Verwaltung der Rabatte und Promotionen
         manage_emails: E-Mails verwalten
+        manage_exchange_rates: Wechselkurse verwalten
         manage_geographical_zones: Länderverwaltung
         manage_languages_available_in_the_store: Verwaltung der verschiedene Sprachen in dem Shop
         manage_metadata: Metadaten verwalten
@@ -427,6 +437,7 @@ sylius:
         manage_shipping_destinations: Verwaltung der Versendungs ziele
         manage_shipping_methods: Versandarten verwalten
         manage_shipping_methods_for_your_store: Verwalte die Versendungsmöglichkeiten in deinem Shop
+        manage_taxons: Artikelgruppen verwalten
         manage_tax_categories: Steuerkategorie verwalten
         manage_tax_rates: Verwalten
         manage_taxation_of_your_products: Besteuerung der Produkte verwalten
@@ -535,6 +546,7 @@ sylius:
         order_state: Bestellstatus
         order_summary: Bestellübersicht
         order_total: Summe
+        base_currency_order_total: Bestellsumme in Basiswährung
         order_value: Bestellwert
         ordered: Bestellt
         orders: Aufträge
@@ -616,6 +628,7 @@ sylius:
         recent_customers: Neuste Kunden
         recent_orders: Letzte Bestellungen
         recent_users: Neueste Benutzer
+        records: Datensätze
         refund: Rückerstattung
         refunded: Rückerstattet
         register: Registrieren
@@ -654,6 +667,7 @@ sylius:
         save_positions: Positionen speichern
         scope: Umfang
         search: Suche
+        search_products: Artikel suchen
         security_settings: Sicherheitseinstellungen
         select_products: Produkt auswählen
         select_taxon: Klassifizierung wählen
@@ -776,8 +790,10 @@ sylius:
         this_months_statistics: Statistiken dieses Monats
         this_product_has_no_attributes_defined: Für dieses Produkt wurden keine Attribute definiert
         title: Titel
+        to: Bis
         topic: Thema
         total: Gesamt
+        total_in_base_currency: Gesamt in Basiswährung
         total_orders: Gesamtbestellungen
         total_qty: Stück Ges.
         total_records: Gesamt
@@ -813,6 +829,7 @@ sylius:
         view_more: Mehr anzeigen
         view_product_details: '%product% Details ansehen'
         view_your_order_or_change_payment_method: Bestellung anzeigen oder Zahlungsart ändern
+        view_your_store: Shop anzeigen
         void: Ungültig
         volume_based_pricing: Mengenbasierte Preise (Volume based)
         warning: Warnung
@@ -823,6 +840,7 @@ sylius:
         yes_label: Ja
         you_are_customer_since: Kunde seit
         you_are_reviewing: Bewertung für
+        you_can_no_longer_change_payment_method_of_this_order: Zahlungsweise dieser Bestellung kann nicht mehr geändert werden
         you_have_no_addresses_defined: Sie haben keine Adressen angelegt
         you_have_no_new_orders: Sie haben keine neuen Bestellungen
         you_may_also_like: Was Sie vielleicht auch interessieren könnte

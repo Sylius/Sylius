@@ -34,6 +34,9 @@ sylius:
                 province: Région
                 zone: Zone
             scope: Champ d'application
+            scopes:
+                shipping: Expédition
+                tax: TVA
             select: Sélectionner
             select_scope: Sélectionnez le champ d'application
         zone_member:

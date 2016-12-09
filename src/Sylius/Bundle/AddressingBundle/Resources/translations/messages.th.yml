@@ -34,6 +34,9 @@ sylius:
                 province: จังหวัด
                 zone: โซน
             scope: Scope
+            scopes:
+                shipping: จัดส่ง
+                tax: ภาษี
             select: เลือก
             select_scope: เลือกขอบเขต
         zone_member:

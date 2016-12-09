@@ -34,6 +34,9 @@ sylius:
                 province: Provincia
                 zone: Zóna
             scope: Rozsah
+            scopes:
+                shipping: Doručenie
+                tax: Daň
             select: Vyberte
             select_scope: Vyberte rozsah
         zone_member:

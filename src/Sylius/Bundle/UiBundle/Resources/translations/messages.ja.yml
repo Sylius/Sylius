@@ -82,6 +82,7 @@ sylius:
         error: エラー
         existing_customer: 登録済の顧客
         first_name: 名
+        from: 合計金額(下限)
         general_info: sylius.promotion.general_info
         general_settings: sylius.breadcrumb.general_settings
         generate: sylius.breadcrumb.generate
@@ -223,6 +224,7 @@ sylius:
         there_are_no_images_for_this_product: 画像未登録
         there_are_no_options_for_this_product: 商品オプション未設定
         there_are_no_taxons_for_this_product: カテゴリ未設定
+        to: 合計金額(上限)
         total: 小計
         total_orders: sylius.backend.statistics.orders_this_month
         total_registrations: sylius.backend.statistics.registrations_this_month

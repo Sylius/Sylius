@@ -24,6 +24,7 @@ sylius:
         email: Email
         enabled: Diaktifkan
         first_name: Nama Depan
+        from: Dari
         id: ID
         image: Gambar
         images: Gambar
@@ -55,6 +56,7 @@ sylius:
         street: Alamat
         tax_category: Kategori Pajak
         title: Judul
+        to: Untuk
         topic: Topik
         type: Jenis
         unit_price: Harga Satuan

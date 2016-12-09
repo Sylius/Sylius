@@ -34,6 +34,9 @@ sylius:
                 province: Provincia
                 zone: Zona
             scope: Alcance
+            scopes:
+                shipping: Gastos de envío
+                tax: Impuestos
             select: Seleccionar
             select_scope: Seleccione ámbito
         zone_member:

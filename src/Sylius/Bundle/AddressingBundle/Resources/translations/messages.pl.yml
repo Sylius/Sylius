@@ -34,6 +34,8 @@ sylius:
                 province: Województwo
                 zone: Strefa
             scope: Zakres
+            scopes:
+                tax: Podatek
             select: Wybierz
             select_scope: Wybierz zakres
         zone_member:

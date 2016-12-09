@@ -319,6 +319,7 @@ sylius:
         fill_in_your_billing_and_shipping_addresses: Заповніть ваші адреси для оплати й доставки
         first_name: Iм'я
         forgot_password: Забули пароль?
+        from: Від
         from_the_newest: Від найновіших
         from_the_oldest: Від найдавніших
         fulfill: Виконано
@@ -641,6 +642,7 @@ sylius:
         there_are_no_taxons_to_display: Немає таксонів для показу
         there_is_no_main_taxon_for_this_product: Для цього товару немає основного таксону
         title: Заголовок
+        to: До
         topic: Тема
         total: Усього
         total_orders: Всього замовлень

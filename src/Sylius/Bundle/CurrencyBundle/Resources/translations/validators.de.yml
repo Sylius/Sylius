@@ -12,3 +12,4 @@ sylius:
     exchange_rate:
         source_currency:
             not_blank: Bitte geben Sie an, aus welcher Währung der Wechselkurs abgeleitet werden soll.
+        different_source_target_currency: Quell- und Zielwährung muss unterschiedlich sein.

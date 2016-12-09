@@ -19,6 +19,7 @@ sylius:
         email: E-Mail
         enabled: Aktiviert
         first_name: Vorname
+        from: Von
         id: ID
         image: Bild
         members: Mitglieder
@@ -38,6 +39,7 @@ sylius:
         street: Strasse / Nr.
         tax_category: Steuerkategorie
         title: Titel
+        to: zu
         topic: Betreff
         type: Typ
         unit_price: Stückpreis

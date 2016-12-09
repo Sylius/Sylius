@@ -37,6 +37,7 @@ sylius:
         enabled: Activat
         failed: S'ha produït un error
         first_name: Nom
+        from: Des de
         gateway: Pasarel·la
         id: ID
         image: Imatge
@@ -83,6 +84,7 @@ sylius:
         success: Realitzat amb èxit
         tax_category: Categoria d'impost
         title: Títol
+        to: A
         tracking_number: Número de seguiment
         type: Tipus
         unit_price: Preu per unitat

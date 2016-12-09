@@ -119,7 +119,12 @@ sylius:
             type: Assoziationstyp
         product_association_type:
             name: Name
+        promotion_filter:
+            products: Artikel-Filter
+            taxons: Artikelgruppen Filter
         promotion_rule:
+            customer_group:
+                group: Kundengruppe
             has_taxon:
                 taxons: Produktgruppen
             product:

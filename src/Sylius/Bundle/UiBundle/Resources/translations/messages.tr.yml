@@ -189,6 +189,7 @@ sylius:
         existing_customer: Varolan Müşteri
         failed: Başarısız oldu
         first_name: Ad
+        from: Kaynak
         fulfill: Stokta
         gateway: Ağ Geçidi
         general_info: Genel Bilgi
@@ -428,6 +429,7 @@ sylius:
         this_months_statistics: Bu ayki istatistikler
         this_product_has_no_attributes_defined: Bu ürün tanımlanan öznitelikleri yoktur
         title: Başlık
+        to: Hedef
         topic: Konu
         total: Toplam
         total_orders: Toplam siparişler
