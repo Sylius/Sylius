@@ -1,8 +1,12 @@
 # UPGRADE FROM 1.0.0-beta.1 to 1.0.0-beta.2
 
-## Bundles with components:
+## Packages:
 
 ### Addressing / AddressingBundle
+
+### AdminBundle
+
+### ApiBundle
 
 ### Attribute / AttributeBundle
 
@@ -14,6 +18,8 @@
 
 ### Customer / CustomerBundle
 
+### FixturesBundle
+
 ### Grid / GridBundle
 
 ### Inventory / InventoryBundle
@@ -22,9 +28,13 @@
 
 ### Mailer / MailerBundle
 
+### MoneyBundle
+
 ### Order / OrderBundle
 
 ### Payment / PaymentBundle
+
+### PayumBundle
 
 ### Product / ProductBundle
 
@@ -38,25 +48,11 @@
 
 ### Shipping / ShippingBundle
 
+### ShopBundle
+
 ### Taxation / TaxationBundle
 
 ### Taxonomy / TaxonomyBundle
-
-### User / UserBundle
-
-## Standalone bundles:
-
-### AdminBundle
-
-### ApiBundle
-
-### FixturesBundle
-
-### MoneyBundle
-
-### PayumBundle
-
-### ShopBundle
 
 ### ThemeBundle
 
@@ -95,6 +91,8 @@
   <argument type="service" id="knp_menu.factory" />
   <argument type="service" id="event_dispatcher" />
   ```
+
+### User / UserBundle
 
 ## Application:
 
