@@ -37,20 +37,21 @@ final class ZoneMatcher implements ZoneMatcherInterface
     /**
      * @var array
      */
-    private $priorities = [
-        ZoneInterface::TYPE_PROVINCE,
-        ZoneInterface::TYPE_COUNTRY,
-        ZoneInterface::TYPE_ZONE,
-    ];
+    private $priorities = [];
 
     /**
      * @param RepositoryInterface $zoneRepository
      * @param AddressZoneResolverInterface $addressZoneResolver
+     * @param array $priorities
      */
-    public function __construct(RepositoryInterface $zoneRepository, AddressZoneResolverInterface $addressZoneResolver)
-    {
+    public function __construct(
+        RepositoryInterface $zoneRepository,
+        AddressZoneResolverInterface $addressZoneResolver,
+        array $priorities
+    ) {
         $this->zoneRepository = $zoneRepository;
         $this->addressZoneResolver = $addressZoneResolver;
+        $this->priorities = $priorities;
     }
 
     /**

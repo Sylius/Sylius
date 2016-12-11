@@ -28,7 +28,11 @@ final class ZoneMatcherSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository, AddressZoneResolverInterface $addressZoneResolver)
     {
-        $this->beConstructedWith($repository, $addressZoneResolver);
+        $this->beConstructedWith($repository, $addressZoneResolver, [
+            ZoneInterface::TYPE_PROVINCE,
+            ZoneInterface::TYPE_COUNTRY,
+            ZoneInterface::TYPE_ZONE,
+        ]);
     }
 
     function it_is_initializable()

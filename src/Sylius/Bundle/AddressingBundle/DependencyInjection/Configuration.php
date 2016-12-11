@@ -59,6 +59,7 @@ final class Configuration implements ConfigurationInterface
 
         $this->addResourcesSection($rootNode);
         $this->addScopesSection($rootNode);
+        $this->addZonePrioritiesSection($rootNode);
 
         return $treeBuilder;
     }
@@ -174,6 +175,21 @@ final class Configuration implements ConfigurationInterface
                 ->arrayNode('scopes')
                     ->useAttributeAsKey('name')
                     ->prototype('scalar')->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function addZonePrioritiesSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('zone_matcher_priorities')
+                    ->prototype('scalar')->end()
+                    ->defaultValue(['province', 'country', 'zone'])->end()
                 ->end()
             ->end()
         ;
