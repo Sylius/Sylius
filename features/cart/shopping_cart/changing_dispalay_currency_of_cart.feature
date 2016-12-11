@@ -8,9 +8,9 @@ Feature: Changing display currency of the cart
         Given the store operates on a single channel in "United States"
         And that channel allows to shop using the "GBP" currency
         When the exchange rate of "US Dollar" to "British Pound" is 2.0
-        And default tax zone is "US-TAX"
+        And default tax zone is "US"
         And the store has "Pigeon Mail" shipping method with "$5.00" fee
-        And the store has "Pugs" tax rate of 10% for "Mugs" within the "US-TAX" zone
+        And the store has "Pugs" tax rate of 10% for "Mugs" within the "US" zone
         And the store has a product "The Pug Mug" priced at "$10.00"
         And it belongs to "Mugs" tax category
 

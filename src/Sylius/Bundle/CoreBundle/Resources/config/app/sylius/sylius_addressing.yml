@@ -5,6 +5,7 @@ sylius_addressing:
     scopes:
         shipping: sylius.form.zone.scopes.shipping
         tax: sylius.form.zone.scopes.tax
+        all: sylius.form.zone.scopes.all
     resources:
         address:
             classes:

@@ -7,7 +7,7 @@ Feature: Deleting a tax rate
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a tax category "Sports gear"
-        And the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US-TAX" zone
+        And the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
         And I am logged in as an administrator
 
     @ui

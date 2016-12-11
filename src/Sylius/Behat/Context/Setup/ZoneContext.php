@@ -89,6 +89,7 @@ final class ZoneContext implements Context
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
         $zone->setCode('RoW');
         $zone->setName('The Rest of the World');
+        $zone->setScope(Scope::ALL);
 
         $this->zoneRepository->add($zone);
     }
@@ -123,7 +124,7 @@ final class ZoneContext implements Context
      */
     public function theStoreHasAZoneWithCode($zoneName, $code)
     {
-        $this->saveZone($this->setUpZone($zoneName, $code), 'zone');
+        $this->saveZone($this->setUpZone($zoneName, $code, Scope::ALL), 'zone');
     }
 
     /**
@@ -131,10 +132,7 @@ final class ZoneContext implements Context
      */
     public function theStoreHasAShippingZoneWithCode($scope, $zoneName, $code)
     {
-        $zone = $this->setUpZone($zoneName, $code);
-        $zone->setScope($scope);
-
-        $this->saveZone($zone, $scope . '_zone');
+        $this->saveZone($this->setUpZone($zoneName, $code, $scope), $scope . '_zone');
     }
 
     /**
@@ -199,14 +197,16 @@ final class ZoneContext implements Context
     /**
      * @param string $zoneName
      * @param string $code
+     * @param string $scope
      *
      * @return ZoneInterface
      */
-    private function setUpZone($zoneName, $code)
+    private function setUpZone($zoneName, $code, $scope)
     {
         $zone = $this->zoneFactory->createTyped(ZoneInterface::TYPE_ZONE);
         $zone->setCode($code);
         $zone->setName($zoneName);
+        $zone->setScope($scope);
 
         return $zone;
     }

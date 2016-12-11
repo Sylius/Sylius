@@ -78,8 +78,7 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,
         ZoneFactoryInterface $zoneFactory,
-        ZoneInterface $shippingZone,
-        ZoneInterface $taxZone,
+        ZoneInterface $zone,
         ChannelInterface $channel,
         CountryInterface $unitedStates,
         CurrencyInterface $currency,
@@ -91,20 +90,15 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         $localeFactory->createNew()->willReturn($locale);
         $locale->setCode('en_US')->shouldBeCalled();
 
-        $zoneFactory->createWithMembers(['US'])->willReturn($shippingZone, $taxZone);
+        $zoneFactory->createWithMembers(['US'])->willReturn($zone);
 
         $channel->setCode('WEB-US')->shouldBeCalled();
         $channel->setTaxCalculationStrategy('order_items_based')->shouldBeCalled();
 
-        $shippingZone->setCode('US-SHIPPING')->shouldBeCalled();
-        $shippingZone->setScope(Scope::SHIPPING)->shouldBeCalled();
-        $shippingZone->setName('United States')->shouldBeCalled();
-        $shippingZone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
-
-        $taxZone->setCode('US-TAX')->shouldBeCalled();
-        $taxZone->setScope(Scope::TAX)->shouldBeCalled();
-        $taxZone->setName('United States')->shouldBeCalled();
-        $taxZone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
+        $zone->setCode('US')->shouldBeCalled();
+        $zone->setScope(Scope::ALL)->shouldBeCalled();
+        $zone->setName('United States')->shouldBeCalled();
+        $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
 
         $countryFactory->createNew()->willReturn($unitedStates);
         $unitedStates->setCode('US')->shouldBeCalled();
@@ -125,8 +119,7 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
 
         $countryRepository->add($unitedStates)->shouldBeCalled();
         $channelRepository->add($channel)->shouldBeCalled();
-        $zoneRepository->add($shippingZone)->shouldBeCalled();
-        $zoneRepository->add($taxZone)->shouldBeCalled();
+        $zoneRepository->add($zone)->shouldBeCalled();
 
         $this->create();
     }

@@ -148,13 +148,11 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         $defaultData['country'] = $this->createCountry();
         $defaultData['currency'] = $currency;
         $defaultData['locale'] = $locale;
-        $defaultData['shipping_zone'] = $this->createZone(Scope::SHIPPING);
-        $defaultData['tax_zone'] = $this->createZone(Scope::TAX);
+        $defaultData['zone'] = $this->createZone();
 
         $this->channelRepository->add($channel);
         $this->countryRepository->add($defaultData['country']);
-        $this->zoneRepository->add($defaultData['shipping_zone']);
-        $this->zoneRepository->add($defaultData['tax_zone']);
+        $this->zoneRepository->add($defaultData['zone']);
 
         return $defaultData;
     }
@@ -221,18 +219,16 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     }
 
     /**
-     * @param string $scope
-     *
      * @return ZoneInterface
      */
-    private function createZone($scope)
+    private function createZone()
     {
         /** @var ZoneInterface $zone */
         $zone = $this->zoneFactory->createWithMembers([self::DEFAULT_ZONE_CODE]);
-        $zone->setCode(sprintf('%s-%s', self::DEFAULT_ZONE_CODE, StringInflector::nameToUppercaseCode($scope)));
+        $zone->setCode(self::DEFAULT_ZONE_CODE);
         $zone->setName(self::DEFAULT_ZONE_NAME);
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
-        $zone->setScope($scope);
+        $zone->setScope(Scope::ALL);
 
         return $zone;
     }
