@@ -210,7 +210,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.repository.shipping_method" />
             <argument type="service" id="__symfony__.sylius.repository.zone" />
-            <argument type="service" id="__symfony__.sylius.factory.shipping_method" />
+            <argument type="service" id="__symfony__.sylius.fixture.example_factory.shipping_method" />
             <argument type="service" id="__symfony__.sylius.factory.shipping_method_translation" />
             <argument type="service" id="__symfony__.sylius.manager.shipping_method" />
             <tag name="fob.context_service" />
