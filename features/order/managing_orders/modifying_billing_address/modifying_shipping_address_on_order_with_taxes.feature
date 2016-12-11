@@ -1,4 +1,4 @@
-@modifying_billing_address
+@modifying_address
 Feature: Modifying a customer's billing address on an order with taxes
     In order to ship an order's bill to a correct place
     As an Administrator
