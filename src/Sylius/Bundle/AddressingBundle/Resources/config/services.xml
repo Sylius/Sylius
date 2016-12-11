@@ -28,6 +28,9 @@
         <service id="sylius.zone_matcher" class="Sylius\Component\Addressing\Matcher\ZoneMatcher">
             <argument type="service" id="sylius.repository.zone" />
         </service>
+        <service id="sylius.resolver.address_zone_resolver" class="Sylius\Component\Addressing\Resolver\AddressZoneResolver">
+            <argument type="service" id="sylius.repository.zone" />
+        </service>
         <service id="sylius.converter.country_name" class="Sylius\Component\Addressing\Converter\CountryNameConverter" />
 
         <service id="sylius.address_comparator" class="Sylius\Component\Addressing\Comparator\AddressComparator"/>
