@@ -143,15 +143,11 @@
             <argument type="service" id="sylius.registry_promotion_action" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="string">Sylius\Component\Promotion\Model\PromotionActionInterface</argument>
-            <argument type="string">Sylius\Component\Core\Promotion\Action\ChannelBasedPromotionActionCommandInterface</argument>
         </service>
         <service id="sylius.form.event_subscriber.build_promotion_rule" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionFormSubscriber">
             <argument type="service" id="sylius.registry_promotion_rule_checker" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.repository.channel" />
-            <argument type="string">Sylius\Component\Promotion\Model\PromotionRuleCheckerInterface</argument>
-            <argument type="string">Sylius\Component\Core\Promotion\Checker\Rule\ChannelBasedRuleCheckerInterface</argument>
         </service>
 
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer">

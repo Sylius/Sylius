@@ -39,23 +39,15 @@ final class BuildPromotionFormSubscriber implements EventSubscriberInterface
     private $factory;
 
     /**
-     * @var string
-     */
-    private $subject;
-
-    /**
      * @param ServiceRegistryInterface $registry
      * @param FormFactoryInterface $factory
-     * @param string $subject
      */
     public function __construct(
         ServiceRegistryInterface $registry,
-        FormFactoryInterface $factory,
-        $subject
+        FormFactoryInterface $factory
     ) {
         $this->registry = $registry;
         $this->factory = $factory;
-        $this->subject = $subject;
     }
 
     /**
@@ -148,7 +140,7 @@ final class BuildPromotionFormSubscriber implements EventSubscriberInterface
      */
     protected function getRegistryIdentifier(PromotionDynamicTypeInterface $dynamicType = null, FormInterface $form)
     {
-        if ($dynamicType instanceof PromotionDynamicTypeInterface && null !== $dynamicType->getType()) {
+        if (null !== $dynamicType->getType()) {
             return $dynamicType->getType();
         }
 
@@ -166,7 +158,7 @@ final class BuildPromotionFormSubscriber implements EventSubscriberInterface
      */
     private function getConfiguration(PromotionDynamicTypeInterface $dynamicType = null)
     {
-        if ($dynamicType instanceof $this->subject && null !== $dynamicType->getConfiguration()) {
+        if (null !== $dynamicType->getConfiguration()) {
             return $dynamicType->getConfiguration();
         }
 
