@@ -15,6 +15,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\PaymentTransitions;
@@ -61,7 +62,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
      */
     public function provideOrderPayment(OrderInterface $order, $targetState)
     {
-        /** @var $payment PaymentInterface */
+        /** @var PaymentInterface $payment */
         $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
 
         $paymentMethod = $this->getDefaultPaymentMethod($payment, $order);
@@ -72,7 +73,7 @@ final class OrderPaymentProvider implements OrderPaymentProviderInterface
         }
 
         if (null === $paymentMethod) {
-            return null;
+            throw new NotProvidedOrderPaymentException();
         }
 
         $payment->setMethod($paymentMethod);

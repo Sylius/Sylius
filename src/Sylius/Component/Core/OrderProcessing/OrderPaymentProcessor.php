@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -67,9 +68,11 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
             return;
         }
 
-        $newPayment = $this->orderPaymentProvider->provideOrderPayment($order, $this->targetState);
-        if (null !== $newPayment) {
+        try {
+            $newPayment = $this->orderPaymentProvider->provideOrderPayment($order, $this->targetState);
             $order->addPayment($newPayment);
+        } catch (NotProvidedOrderPaymentException $exception) {
+            return;
         }
     }
 }

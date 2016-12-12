@@ -23,7 +23,7 @@ interface OrderPaymentProviderInterface
      * @param OrderInterface $order
      * @param string $targetState
      *
-     * @return PaymentInterface
+     * @return PaymentInterface|null
      */
     public function provideOrderPayment(OrderInterface $order, $targetState);
 }

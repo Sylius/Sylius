@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor;
+use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
@@ -86,14 +87,17 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->process($order);
     }
 
-    function it_does_not_set_provided_order_payment_if_it_is_null(
+    function it_does_not_set_order_payment_if_it_cannot_be_provided(
         OrderInterface $order,
         OrderPaymentProviderInterface $orderPaymentProvider
     ) {
         $order->getState()->willReturn(OrderInterface::STATE_CART);
         $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn(null);
 
-        $orderPaymentProvider->provideOrderPayment($order, PaymentInterface::STATE_CART)->willReturn(null);
+        $orderPaymentProvider
+            ->provideOrderPayment($order, PaymentInterface::STATE_CART)
+            ->willThrow(NotProvidedOrderPaymentException::class)
+        ;
         $order->addPayment(Argument::any())->shouldNotBeCalled();
 
         $this->process($order);

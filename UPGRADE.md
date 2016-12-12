@@ -18,7 +18,7 @@
   To use it replace name of constraint in constraint mapping file from: `Sylius\Bundle\CoreBundle\Validator\Constraints\ImageUniqueCode`
   to: `Sylius\Bundle\ResourceBundle\Validator\Constraints\UniqueWithinCollectionConstraint`
 
-* Renamed ``getLastNewPayment()`` on ``OrderInterface`` to ``getLastPayment($state)``, where ``$state`` is target last payment state.
+* Renamed ``getLastNewPayment()`` on ``OrderInterface`` to ``getLastPayment($state)``, where ``$state`` is target last payment state. Every ``getLastNewPayment()`` method should be replaced with ``getLastPayment(PaymentInterface::STATE_NEW)``.
 
 ### Currency / CurrencyBundle
 
@@ -40,7 +40,7 @@
 
 ### Payment / PaymentBundle
 
-* Changed default ``Payment`` ``$state`` from *new* to *cart*.
+* Changed default ``Payment::$state`` from *new* to *cart*.
 
 ### PayumBundle
 

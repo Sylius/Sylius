@@ -17,6 +17,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\PaymentMethodInterface;
+use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProvider;
 use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
@@ -168,5 +169,26 @@ final class OrderPaymentProviderSpec extends ObjectBehavior
         $stateMachineFactory->get(Argument::any())->shouldNotBeCalled();
 
         $this->provideOrderPayment($order, PaymentInterface::STATE_NEW)->shouldReturn($newPayment);
+    }
+    
+    function it_throws_exception_if_payment_method_cannot_be_resolved_for_provided_payment(
+        OrderInterface $order,
+        PaymentFactoryInterface $paymentFactory,
+        PaymentInterface $lastFailedPayment,
+        PaymentInterface $newPayment
+    ) {
+        $order->getTotal()->willReturn(1000);
+        $order->getCurrencyCode()->willReturn('USD');
+        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
+        $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn($lastFailedPayment);
+
+        $lastFailedPayment->getMethod()->willReturn(null);
+
+        $paymentFactory->createWithAmountAndCurrencyCode(1000, 'USD')->willReturn($newPayment);
+
+        $this
+            ->shouldThrow(NotProvidedOrderPaymentException::class)
+            ->during('provideOrderPayment', [$order, PaymentInterface::STATE_NEW])
+        ;
     }
 }

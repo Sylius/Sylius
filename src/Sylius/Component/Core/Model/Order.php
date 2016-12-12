@@ -308,12 +308,8 @@ class Order extends BaseOrder implements OrderInterface
             return null;
         }
 
-        if (null === $state) {
-            return $this->payments->last();
-        }
-
         $payment = $this->payments->filter(function (BasePaymentInterface $payment) use ($state) {
-            return $payment->getState() === $state;
+            return null === $state || $payment->getState() === $state;
         })->last();
 
         return $payment !== false ? $payment : null;
