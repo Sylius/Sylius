@@ -27,16 +27,13 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     public function it_has_default_configuration_for_checkout_resolver_node()
     {
         $this->assertProcessedConfigurationEquals(
-            [
-                [],
-            ],
-            [
-                'checkout_resolver' => [
+            [[]],
+            ['checkout_resolver' => [
                     'enabled' => true,
                     'pattern' => '/checkout/.+',
                     'route_map' => [],
-                ]
-            ]
+            ]],
+            'checkout_resolver'
         );
     }
 
@@ -45,37 +42,29 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function its_checkout_resolver_pattern_accept_only_string_value()
     {
-        $this->assertConfigurationIsInvalid(
-            [
-                'checkout_resolver' => [
-                    'pattern' => 1,
-                ],
-            ]
-        );
+        $this->assertConfigurationIsInvalid([[
+            'checkout_resolver' => [
+                'pattern' => 1,
+            ],
+        ]]);
 
-        $this->assertConfigurationIsInvalid(
-            [
-                'checkout_resolver' => [
-                    'pattern' => true,
-                ],
-            ]
-        );
+        $this->assertConfigurationIsInvalid([[
+            'checkout_resolver' => [
+                'pattern' => true,
+            ],
+        ]]);
 
-        $this->assertConfigurationIsInvalid(
-            [
-                'checkout_resolver' => [
-                    'pattern' => 1.24,
-                ],
-            ]
-        );
+        $this->assertConfigurationIsInvalid([[
+            'checkout_resolver' => [
+                'pattern' => 1.24,
+            ],
+        ]]);
 
-        $this->assertConfigurationIsInvalid(
-            [
-                'checkout_resolver' => [
-                    'pattern' => [],
-                ],
-            ]
-        );
+        $this->assertConfigurationIsInvalid([[
+            'checkout_resolver' => [
+                'pattern' => [],
+            ],
+        ]]);
     }
 
     /**
@@ -83,29 +72,24 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function its_checkout_route_map_it_is_configurable()
     {
-        $this->assertProcessedConfigurationEquals(
-            [
-                [
-                    'checkout_resolver' => [
-                        'route_map' => [
-                            'addressed' => [
-                                'route' => 'sylius_shop_checkout_select_shipping',
-                            ],
-                        ],
-                    ]
-                ]
-            ],
-            [
-                'checkout_resolver' => [
-                    'enabled' => true,
-                    'pattern' => '/checkout/.+',
-                    'route_map' => [
-                        'addressed' => [
-                            'route' => 'sylius_shop_checkout_select_shipping',
-                        ],
+        $this->assertProcessedConfigurationEquals([
+            ['checkout_resolver' => [
+                'route_map' => [
+                    'addressed' => [
+                        'route' => 'sylius_shop_checkout_select_shipping',
                     ],
-                ]
-            ]
+                ],
+            ]]],
+            ['checkout_resolver' => [
+                'enabled' => true,
+                'pattern' => '/checkout/.+',
+                'route_map' => [
+                    'addressed' => [
+                        'route' => 'sylius_shop_checkout_select_shipping',
+                    ],
+                ],
+            ]],
+            'checkout_resolver'
         );
     }
 
@@ -114,16 +98,13 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function its_checkout_route_map_route_cannot_be_empty()
     {
-        $this->assertConfigurationIsInvalid(
-            [
-                'checkout_resolver' => [
-                    'route_map' => [
-                        'addressed' => [
-                        ],
-                    ],
-                ]
+        $this->assertConfigurationIsInvalid([[
+            'checkout_resolver' => [
+                'route_map' => [
+                    'addressed' => [],
+                ],
             ]
-        );
+        ]]);
     }
 
     /**
