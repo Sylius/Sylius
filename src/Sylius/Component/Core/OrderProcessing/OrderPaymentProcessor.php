@@ -59,6 +59,10 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         if (OrderInterface::STATE_CANCELLED === $order->getState()) {
             return;
         }
+        
+        if (0 === $order->getTotal()) {
+            return;
+        }
 
         $lastPayment = $order->getLastPayment($this->targetState);
         if (null !== $lastPayment) {
