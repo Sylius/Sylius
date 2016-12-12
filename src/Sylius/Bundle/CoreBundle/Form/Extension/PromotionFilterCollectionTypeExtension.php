@@ -27,8 +27,14 @@ final class PromotionFilterCollectionTypeExtension extends AbstractTypeExtension
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('taxons_filter', TaxonFilterConfigurationType::class, ['required' => false]);
-        $builder->add('products_filter', ProductFilterConfigurationType::class, ['required' => false]);
+        $builder->add('taxons_filter', TaxonFilterConfigurationType::class, [
+            'label' => false,
+            'required' => false,
+        ]);
+        $builder->add('products_filter', ProductFilterConfigurationType::class, [
+            'label' => false,
+            'required' => false,
+        ]);
     }
 
     /**
