@@ -341,7 +341,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("[^"]+%") off every product (classified as "[^"]+")$/
+     * @Given /^([^"]+) gives(?:| another) ("[^"]+%") off every product (classified as "[^"]+")$/
      */
     public function itGivesPercentageOffEveryProductClassifiedAs(
         PromotionInterface $promotion,
@@ -352,7 +352,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product (classified as "[^"]+")$/
+     * @Given /^([^"]+) gives(?:| another) ("(?:€|£|\$)[^"]+") off on every product (classified as "[^"]+")$/
      */
     public function itGivesFixedOffEveryProductClassifiedAs(
         PromotionInterface $promotion,
