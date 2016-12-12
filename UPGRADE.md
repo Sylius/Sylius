@@ -1,8 +1,12 @@
 # UPGRADE FROM 1.0.0-beta.1 to 1.0.0-beta.2
 
-## Bundles with components:
+## Packages:
 
 ### Addressing / AddressingBundle
+
+### AdminBundle
+
+### ApiBundle
 
 ### Attribute / AttributeBundle
 
@@ -14,6 +18,8 @@
 
 ### Customer / CustomerBundle
 
+### FixturesBundle
+
 ### Grid / GridBundle
 
 ### Inventory / InventoryBundle
@@ -22,9 +28,13 @@
 
 ### Mailer / MailerBundle
 
+### MoneyBundle
+
 ### Order / OrderBundle
 
 ### Payment / PaymentBundle
+
+### PayumBundle
 
 ### Product / ProductBundle
 
@@ -38,29 +48,51 @@
 
 ### Shipping / ShippingBundle
 
+### ShopBundle
+
 ### Taxation / TaxationBundle
 
 ### Taxonomy / TaxonomyBundle
 
-### User / UserBundle
-
-## Standalone bundles:
-
-### AdminBundle
-
-### ApiBundle
-
-### FixturesBundle
-
-### MoneyBundle
-
-### PayumBundle
-
-### ShopBundle
-
 ### ThemeBundle
 
 ### UiBundle
+
+* `Sylius\Bundle\UiBundle\Menu\AbstractMenuBuilder` was removed, you should add the following code to classes previously extending it:
+  
+  ```php
+  use Knp\Menu\FactoryInterface;
+  use Symfony\Component\EventDispatcher\EventDispatcher;
+  
+  /**
+   * @var FactoryInterface
+   */
+  private $factory;
+  
+  /**
+   * @var EventDispatcher
+   */
+  private $eventDispatcher;
+  
+  /**
+   * @param FactoryInterface $factory
+   * @param EventDispatcher $eventDispatcher
+   */
+  public function __construct(FactoryInterface $factory, EventDispatcher $eventDispatcher)
+  {
+      $this->factory = $factory;
+      $this->eventDispatcher = $eventDispatcher;
+  }
+  ```
+  
+  Also `sylius.menu_builder` service was removed, you should add the following code to services previously extending it:
+  
+  ```xml
+  <argument type="service" id="knp_menu.factory" />
+  <argument type="service" id="event_dispatcher" />
+  ```
+
+### User / UserBundle
 
 ## Application:
 
