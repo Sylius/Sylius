@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\ExchangeRate\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ExchangeRate\UpdatePageInterface;
 use Sylius\Component\Currency\Model\ExchangeRateInterface;
@@ -72,6 +72,7 @@ final class ManagingExchangeRatesContext implements Context
 
     /**
      * @When I am browsing exchange rates of the store
+     * @When I browse exchange rates of the store
      */
     public function iWantToBrowseExchangeRatesOfTheStore()
     {
@@ -141,6 +142,22 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
+     * @When I choose :currencyName as a currency filter
+     */
+    public function iChooseCurrencyAsACurrencyFilter($currencyName)
+    {
+        $this->indexPage->chooseCurrencyFilter($currencyName);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter()
+    {
+        $this->indexPage->filter();
+    }
+
+    /**
      * @Then I should see :count exchange rates on the list
      * @Then there should be no exchange rates on the list
      */
@@ -170,7 +187,7 @@ final class ManagingExchangeRatesContext implements Context
     }
 
     /**
-     * @Then I should see an exchange rate between :sourceCurrencyName and :targetCurrencyName on the list
+     * @Then I should (also) see an exchange rate between :sourceCurrencyName and :targetCurrencyName on the list
      */
     public function iShouldSeeAnExchangeRateBetweenAndOnTheList($sourceCurrencyName, $targetCurrencyName)
     {
