@@ -13,19 +13,22 @@
     $.fn.extend({
         autoComplete: function () {
             var element = $(this);
+            var criteriaType = $(this).data('criteria-type');
+            var criteriaName = $(this).data('criteria-name');
 
             element.dropdown({
                 delay: {
-                    search: 250,
+                    search: 250
                 },
                 apiSettings: {
                     dataType: 'JSON',
                     cache: false,
                     data: {
-                        criteria: { name: { type: 'contains', value: '' } }
+                        criteria: {}
                     },
                     beforeSend: function(settings) {
-                        settings.data.criteria.name.value = settings.urlData.query;
+                        settings.data.criteria[criteriaName] = {type: criteriaType, value: ''};
+                        settings.data.criteria[criteriaName].value = settings.urlData.query;
 
                         return settings;
                     },

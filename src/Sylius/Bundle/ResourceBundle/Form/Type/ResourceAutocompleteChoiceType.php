@@ -76,6 +76,8 @@ class ResourceAutocompleteChoiceType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['remote_route'] = $options['remote_route'];
+        $view->vars['remote_criteria_type'] = $options['remote_criteria_type'];
+        $view->vars['remote_criteria_name'] = $options['remote_criteria_name'];
         $view->vars['multiple'] = $options['multiple'];
         $view->vars['choice_name'] = $options['choice_name'];
         $view->vars['choice_value'] = $options['choice_value'];
@@ -91,13 +93,17 @@ class ResourceAutocompleteChoiceType extends AbstractType
             ->setDefaults([
                 'resource' => null,
                 'remote_route' => null,
+                'remote_criteria_type' => null,
+                'remote_criteria_name' => null,
                 'multiple' => false,
                 'choice_name' => null,
                 'choice_value' => null,
-                'default_text' => null
+                'default_text' => null,
             ])
             ->setAllowedTypes('resource', ['string'])
             ->setAllowedTypes('remote_route', ['string'])
+            ->setAllowedTypes('remote_criteria_type', ['string'])
+            ->setAllowedTypes('remote_criteria_name', ['string'])
             ->setAllowedTypes('multiple', ['bool'])
             ->setAllowedTypes('choice_name', ['string'])
             ->setAllowedTypes('choice_value', ['string'])
