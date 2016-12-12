@@ -26,14 +26,18 @@
         <td>
             <div class="ui buttons">
                 {% for action in definition.getActions('item')|sort_by('position') %}
-                    {{ sylius_grid_render_action(grid, action, row) }}
+                    {% if action.enabled %}
+                        {{ sylius_grid_render_action(grid, action, row) }}
+                    {% endif %}
                 {% endfor %}
             </div>
             {% if definition.actionGroups.subitem is defined and definition.getActions('subitem')|length > 0 %}
             <div class="ui divider"></div>
             <div class="ui buttons">
                 {% for action in definition.getActions('subitem')|sort_by('position') %}
-                    {{ sylius_grid_render_action(grid, action, row) }}
+                    {% if action.enabled %}
+                        {{ sylius_grid_render_action(grid, action, row) }}
+                    {% endif %}
                 {% endfor %}
             </div>
             {% endif %}
