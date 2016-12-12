@@ -128,7 +128,6 @@ class HomePage extends SymfonyPage implements HomePageInterface
      */
     public function getLatestProductsNames()
     {
-        ;
         return array_map(
             function (NodeElement $element) {
                 return $element->getText();
