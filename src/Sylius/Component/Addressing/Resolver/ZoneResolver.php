@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Addressing\Matcher;
+namespace Sylius\Component\Addressing\Resolver;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Addressing\Resolver\AddressZoneResolverInterface;
+use Sylius\Component\Addressing\Matcher\AddressZoneMatcherInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -22,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-final class ZoneMatcher implements ZoneMatcherInterface
+final class ZoneResolver implements ZoneResolverInterface
 {
     /**
      * @var RepositoryInterface
@@ -30,23 +29,23 @@ final class ZoneMatcher implements ZoneMatcherInterface
     private $zoneRepository;
 
     /**
-     * @var AddressZoneResolverInterface
+     * @var AddressZoneMatcherInterface
      */
     private $addressZoneResolver;
 
     /**
      * @var array
      */
-    private $priorities = [];
+    private $priorities;
 
     /**
      * @param RepositoryInterface $zoneRepository
-     * @param AddressZoneResolverInterface $addressZoneResolver
+     * @param AddressZoneMatcherInterface $addressZoneResolver
      * @param array $priorities
      */
     public function __construct(
         RepositoryInterface $zoneRepository,
-        AddressZoneResolverInterface $addressZoneResolver,
+        AddressZoneMatcherInterface $addressZoneResolver,
         array $priorities
     ) {
         $this->zoneRepository = $zoneRepository;
@@ -62,7 +61,7 @@ final class ZoneMatcher implements ZoneMatcherInterface
         $zones = [];
 
         /* @var ZoneInterface $zone */
-        foreach ($availableZones = $this->getZones($scope) as $zone) {
+        foreach ($this->getZones($scope) as $zone) {
             if ($this->addressZoneResolver->addressBelongsToZone($address, $zone)) {
                 $zones[$zone->getType()] = $zone;
             }

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Addressing\Resolver;
+namespace Sylius\Component\Addressing\Matcher;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * @author Jan Góralski <jan.goralski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class AddressZoneResolver implements AddressZoneResolverInterface
+final class AddressZoneMatcher implements AddressZoneMatcherInterface
 {
     /**
      * @var RepositoryInterface
@@ -61,30 +61,20 @@ final class AddressZoneResolver implements AddressZoneResolverInterface
      */
     private function addressBelongsToZoneMember(AddressInterface $address, ZoneMemberInterface $member)
     {
-        switch ($type = $member->getBelongsTo()->getType()) {
-            case ZoneInterface::TYPE_PROVINCE:
-                return null !== $address->getProvinceCode() && $address->getProvinceCode() === $member->getCode();
+        $type = $member->getBelongsTo()->getType();
 
-            case ZoneInterface::TYPE_COUNTRY:
-                return null !== $address->getCountryCode() && $address->getCountryCode() === $member->getCode();
-
-            case ZoneInterface::TYPE_ZONE:
-                $zone = $this->getZoneByCode($member->getCode());
-
-                return $this->addressBelongsToZone($address, $zone);
-
-            default:
-                throw new \InvalidArgumentException(sprintf('Unexpected zone type "%s".', $type));
+        if ($type === ZoneInterface::TYPE_PROVINCE){
+            return null !== $address->getProvinceCode() && $address->getProvinceCode() === $member->getCode();
         }
-    }
 
-    /**
-     * @param string $code
-     *
-     * @return ZoneInterface
-     */
-    private function getZoneByCode($code)
-    {
-        return $this->zoneRepository->findOneBy(['code' => $code]);
+        if ($type === ZoneInterface::TYPE_COUNTRY) {
+            return null !== $address->getCountryCode() && $address->getCountryCode() === $member->getCode();
+        }
+
+        if ($type === ZoneInterface::TYPE_ZONE) {
+            return $this->addressBelongsToZone($address, $this->zoneRepository->findOneBy(['code' => $member->getCode()]));
+        }
+
+        throw new \InvalidArgumentException(sprintf('Unexpected zone type "%s".', $type));
     }
 }

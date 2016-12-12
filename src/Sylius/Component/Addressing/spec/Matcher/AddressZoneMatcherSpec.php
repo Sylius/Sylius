@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Addressing\Resolver;
+namespace spec\Sylius\Component\Addressing\Matcher;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Resolver\AddressZoneResolver;
-use Sylius\Component\Addressing\Resolver\AddressZoneResolverInterface;
+use Sylius\Component\Addressing\Matcher\AddressZoneMatcher;
+use Sylius\Component\Addressing\Matcher\AddressZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
@@ -25,8 +25,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Jan Góralski <jan.goralski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class AddressZoneResolverSpec extends ObjectBehavior
+final class AddressZoneMatcherSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {
@@ -35,12 +36,12 @@ final class AddressZoneResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(AddressZoneResolver::class);
+        $this->shouldHaveType(AddressZoneMatcher::class);
     }
 
-    function it_implements_zone_matcher_interface()
+    function it_implements_address_zone_matcher_interface()
     {
-        $this->shouldImplement(AddressZoneResolverInterface::class);
+        $this->shouldImplement(AddressZoneMatcherInterface::class);
     }
 
     function it_resolves_address_zone_by_province(

@@ -4,9 +4,10 @@
 
 ### Addressing / AddressingBundle
 
-* `Sylius\Component\Addressing\Matcher\ZoneMatcher` has been made final, and you can no longer extend this class. Also, `Sylius\Component\Addressing\Resolver\AddressZoneResolver` service has been introduced.
- If one has been extending a `Sylius\Component\Addressing\Matcher\ZoneMatcher` class please use appropriate pattern or provide your custom implementation. 
- `Sylius\Component\Addressing\Resolver\AddressZoneResolver` should make it easier to provide custom implementation with less overhead. 
+* `Sylius\Component\Addressing\Matcher\ZoneMatcher` has been renamed to `Sylius\Component\Addressing\Resolver\ZoneResolver` made final, so you can no longer extend this class. 
+Also, `Sylius\Component\Addressing\Matcher\AddressZoneMatcher` service has been introduced.
+ If one has been extending a `Sylius\Component\Addressing\Resolver\ZoneResolver` class please use appropriate pattern or provide your custom implementation. 
+ `Sylius\Component\Addressing\Matcher\AddressZoneMatcher` should make it easier to provide custom implementation with less overhead. 
  If the class has been overridden because of zones priority order, then no overriding would be required and priority can be defined in a yaml file as follows:
  ```yml
     sylius_addressing:

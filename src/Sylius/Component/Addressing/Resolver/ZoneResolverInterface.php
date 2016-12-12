@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Addressing\Matcher;
+namespace Sylius\Component\Addressing\Resolver;
 
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -19,7 +19,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ZoneMatcherInterface
+interface ZoneResolverInterface
 {
     /**
      * Returns the best matching zone for given address.

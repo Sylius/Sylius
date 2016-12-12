@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Addressing\Matcher;
+namespace spec\Sylius\Component\Addressing\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Matcher\ZoneMatcher;
-use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Matcher\AddressZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Resolver\AddressZoneResolverInterface;
+use Sylius\Component\Addressing\Resolver\ZoneResolver;
+use Sylius\Component\Addressing\Resolver\ZoneResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-final class ZoneMatcherSpec extends ObjectBehavior
+final class ZoneResolverSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $repository, AddressZoneResolverInterface $addressZoneResolver)
+    function let(RepositoryInterface $repository, AddressZoneMatcherInterface $addressZoneResolver)
     {
         $this->beConstructedWith($repository, $addressZoneResolver, [
             ZoneInterface::TYPE_PROVINCE,
@@ -37,12 +37,12 @@ final class ZoneMatcherSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ZoneMatcher::class);
+        $this->shouldHaveType(ZoneResolver::class);
     }
 
-    function it_implements_zone_matcher_interface()
+    function it_implements_zone_resolver_interface()
     {
-        $this->shouldImplement(ZoneMatcherInterface::class);
+        $this->shouldImplement(ZoneResolverInterface::class);
     }
 
     function it_returns_null_if_there_are_no_zones(RepositoryInterface $repository, AddressInterface $address)
@@ -52,7 +52,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
     }
 
     function it_should_match_address_by_zone(
-        AddressZoneResolverInterface $addressZoneResolver,
+        AddressZoneMatcherInterface $addressZoneResolver,
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneInterface $zone
@@ -65,7 +65,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
     }
 
     function it_should_match_address_by_zone_and_scope(
-        AddressZoneResolverInterface $addressZoneResolver,
+        AddressZoneMatcherInterface $addressZoneResolver,
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneInterface $zone
@@ -78,7 +78,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
     }
 
     function it_matches_address_from_province_when_many_are_found(
-        AddressZoneResolverInterface $addressZoneResolver,
+        AddressZoneMatcherInterface $addressZoneResolver,
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneInterface $zoneCountry,
@@ -96,7 +96,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
     }
 
     function it_matches_address_from_province_when_many_are_found_by_scope(
-        AddressZoneResolverInterface $addressZoneResolver,
+        AddressZoneMatcherInterface $addressZoneResolver,
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneInterface $zoneCountry,
@@ -114,7 +114,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
     }
 
     function it_matches_all_zones_with_given_address(
-        AddressZoneResolverInterface $addressZoneResolver,
+        AddressZoneMatcherInterface $addressZoneResolver,
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneInterface $zoneProvince,
@@ -135,7 +135,7 @@ final class ZoneMatcherSpec extends ObjectBehavior
     }
 
     function it_matches_all_zones_by_scope_when_one_zone_for_address_is_defined(
-        AddressZoneResolverInterface $addressZoneResolver,
+        AddressZoneMatcherInterface $addressZoneResolver,
         RepositoryInterface $repository,
         AddressInterface $address,
         ZoneInterface $zoneCountry

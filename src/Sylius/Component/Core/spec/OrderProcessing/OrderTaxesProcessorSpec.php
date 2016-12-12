@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Matcher\ZoneResolverInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -33,7 +33,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
 {
     function let(
         ZoneProviderInterface $defaultTaxZoneProvider,
-        ZoneMatcherInterface $zoneMatcher,
+        ZoneResolverInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry
     ) {
         $this->beConstructedWith($defaultTaxZoneProvider, $zoneMatcher, $strategyRegistry);
@@ -50,7 +50,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     }
 
     function it_processes_taxes_using_a_supported_tax_calculation_strategy(
-        ZoneMatcherInterface $zoneMatcher,
+        ZoneResolverInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
         OrderInterface $order,
         OrderItemInterface $orderItem,
@@ -79,7 +79,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
     }
 
     function it_throws_an_exception_if_there_are_no_supported_tax_calculation_strategies(
-        ZoneMatcherInterface $zoneMatcher,
+        ZoneResolverInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
         OrderInterface $order,
         OrderItemInterface $orderItem,
@@ -117,7 +117,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
 
     function it_does_not_process_taxes_if_there_is_no_tax_zone(
         ZoneProviderInterface $defaultTaxZoneProvider,
-        ZoneMatcherInterface $zoneMatcher,
+        ZoneResolverInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry,
         OrderInterface $order,
         OrderItemInterface $orderItem,

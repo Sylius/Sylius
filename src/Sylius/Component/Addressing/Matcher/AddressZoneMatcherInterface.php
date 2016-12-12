@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Addressing\Resolver;
+namespace Sylius\Component\Addressing\Matcher;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -18,7 +18,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface AddressZoneResolverInterface
+interface AddressZoneMatcherInterface
 {
     /**
      * @param AddressInterface $address
