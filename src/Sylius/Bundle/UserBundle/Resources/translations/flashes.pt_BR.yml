@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        verify_verified_email: Este e-mail já foi verificado.
