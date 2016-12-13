@@ -32,7 +32,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'filter_currency' => '#criteria_currency_id',
+            'filter_currency' => '#criteria_currency',
         ]);
     }
 }

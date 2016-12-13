@@ -24,32 +24,13 @@ final class EntityFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        $idOptions = [
-            'class' => $options['class'],
-            'label' => false,
-            'placeholder' => 'sylius.ui.all',
-        ];
-
-        if (null !== $options['choice_label']) {
-            $idOptions['choice_label'] = $options['choice_label'];
-        }
-
-        $builder
-            ->add('id', EntityType::class, $idOptions)
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
             ->setDefaults([
-                'choice_label' => null,
                 'class' => null,
+                'label' => false,
+                'placeholder' => 'sylius.ui.all',
             ])
             ->setRequired('class')
             ->setDefined('field')
@@ -57,6 +38,14 @@ final class EntityFilterType extends AbstractType
             ->setDefined('fields')
             ->setAllowedTypes('fields', 'array')
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return EntityType::class;
     }
 
     /**

@@ -24,7 +24,7 @@ final class EntityFilter implements FilterInterface
      */
     public function apply(DataSourceInterface $dataSource, $name, $data, array $options)
     {
-        if (empty($data) || empty($data['id'])) {
+        if (empty($data)) {
             return;
         }
 
@@ -35,7 +35,7 @@ final class EntityFilter implements FilterInterface
 
         $expressions = [];
         foreach ($fields as $field) {
-            $expressions[] = $expressionBuilder->equals($field, $data['id']);;
+            $expressions[] = $expressionBuilder->equals($field, $data);
         }
 
         $dataSource->restrict($expressionBuilder->orX(...$expressions));
