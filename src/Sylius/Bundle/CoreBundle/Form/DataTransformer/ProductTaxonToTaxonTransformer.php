@@ -15,7 +15,7 @@ use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
-use Webmozart\Assert\Assert;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -44,7 +44,7 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
             return null;
         }
 
-        Assert::isInstanceOf($productTaxon, ProductTaxonInterface::class);
+        $this->assertTransformationValueType($productTaxon, ProductTaxonInterface::class);
 
         return $productTaxon->getTaxon();
     }
@@ -58,11 +58,30 @@ final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
             return null;
         }
 
-        Assert::isInstanceOf($taxon, TaxonInterface::class);
+        $this->assertTransformationValueType($taxon, TaxonInterface::class);
 
         $productTaxon = $this->productTaxonFactory->createNew();
         $productTaxon->setTaxon($taxon);
 
         return $productTaxon;
+    }
+
+    /**
+     * @param string $value
+     * @param string $expectedType
+     *
+     * @throws TransformationFailedException
+     */
+    private function assertTransformationValueType($value, $expectedType)
+    {
+        if (!($value instanceof $expectedType)) {
+            throw new TransformationFailedException(
+                sprintf(
+                    'Expected "%s", but got "%s"',
+                    $expectedType,
+                    is_object($value) ? get_class($value) : gettype($value)
+                )
+            );
+        }
     }
 }

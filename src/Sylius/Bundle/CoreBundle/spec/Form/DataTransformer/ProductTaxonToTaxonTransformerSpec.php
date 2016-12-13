@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\ProductTaxonInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -32,7 +33,7 @@ final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
     {
         $this->shouldHaveType(ProductTaxonToTaxonTransformer::class);
     }
-    
+
     function it_implements_data_transformer_interface()
     {
         $this->shouldImplement(DataTransformerInterface::class);
@@ -68,9 +69,9 @@ final class ProductTaxonToTaxonTransformerSpec extends ObjectBehavior
         $this->reverseTransform(null)->shouldReturn(null);
     }
 
-    function it_throws_invalid_argument_exception_during_transforms()
+    function it_throws_transformation_failed_exception_during_transforms()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('transform', [new \stdClass()]);
-        $this->shouldThrow(\InvalidArgumentException::class)->during('reverseTransform', [new \stdClass()]);
+        $this->shouldThrow(TransformationFailedException::class)->during('transform', [new \stdClass()]);
+        $this->shouldThrow(TransformationFailedException::class)->during('reverseTransform', [new \stdClass()]);
     }
 }

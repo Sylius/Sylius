@@ -1,8 +1,8 @@
 <div class="ui tab" data-tab="taxonomy">
     <h3 class="ui dividing header">{{ 'sylius.ui.taxonomy'|trans }}</h3>
     <div class="field">
-        {{ form_row(form.mainTaxon) }}
+        {{ form_row(form.mainTaxon, {'remote_url': path('sylius_admin_ajax_taxon_index'), 'remote_criteria_type': 'contains', 'remote_criteria_name': 'name'}) }}
     </div>
     <div class="ui divider"></div>
-    {{ form_row(form.productTaxons) }}
+    {{ form_row(form.productTaxons, {'remote_url': path('sylius_admin_ajax_taxon_index'), 'remote_criteria_type': 'contains', 'remote_criteria_name': 'name'}) }}
 </div>

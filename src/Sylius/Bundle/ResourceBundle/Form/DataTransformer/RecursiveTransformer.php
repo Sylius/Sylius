@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\DataTransformerInterface;
-use Webmozart\Assert\Assert;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -38,7 +38,7 @@ final class RecursiveTransformer implements DataTransformerInterface
      */
     public function transform($values)
     {
-        Assert::isInstanceOf($values, Collection::class);
+        $this->assertTransformationValueType($values, Collection::class);
 
         return $values->map(function ($value) {
             return $this->decoratedTransformer->transform($value);
@@ -50,10 +50,29 @@ final class RecursiveTransformer implements DataTransformerInterface
      */
     public function reverseTransform($values)
     {
-        Assert::isInstanceOf($values, Collection::class);
+        $this->assertTransformationValueType($values, Collection::class);
 
         return $values->map(function ($value) {
             return $this->decoratedTransformer->reverseTransform($value);
         });
+    }
+
+    /**
+     * @param string $value
+     * @param string $expectedType
+     *
+     * @throws TransformationFailedException
+     */
+    private function assertTransformationValueType($value, $expectedType)
+    {
+        if (!($value instanceof $expectedType)) {
+            throw new TransformationFailedException(
+                sprintf(
+                    'Expected "%s", but got "%s"',
+                    $expectedType,
+                    is_object($value) ? get_class($value) : gettype($value)
+                )
+            );
+        }
     }
 }

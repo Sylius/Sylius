@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -54,9 +55,9 @@ final class RecursiveTransformerSpec extends ObjectBehavior
         $this->reverseTransform(new ArrayCollection(['abc', 'cde', 'fgh']))->shouldBeLike(new ArrayCollection(['ABC', 'CDE', 'FGH']));
     }
 
-    function it_throws_invalid_argument_exception_if_transform_argument_is_not_collection()
+    function it_throws_transformation_failed_exception_if_transform_argument_is_not_collection()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('transform', [new \stdClass()]);
-        $this->shouldThrow(\InvalidArgumentException::class)->during('reverseTransform', [new \stdClass()]);
+        $this->shouldThrow(TransformationFailedException::class)->during('transform', [new \stdClass()]);
+        $this->shouldThrow(TransformationFailedException::class)->during('reverseTransform', [new \stdClass()]);
     }
 }

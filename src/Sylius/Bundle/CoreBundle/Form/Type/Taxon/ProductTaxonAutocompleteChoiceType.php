@@ -63,9 +63,6 @@ final class ProductTaxonAutocompleteChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'remote_route' => 'sylius_admin_ajax_taxon_index',
-            'remote_criteria_type' => 'contains',
-            'remote_criteria_name' => 'name',
             'resource' => 'sylius.taxon',
             'choice_name' => 'name',
             'choice_value' => 'id',

@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\DataTransformerInterface;
-use Webmozart\Assert\Assert;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -39,7 +39,17 @@ final class CollectionToStringTransformer implements DataTransformerInterface
      */
     public function transform($values)
     {
-        Assert::isInstanceOf($values, Collection::class);
+        $expectedType = Collection::class;
+        if (!($values instanceof $expectedType)) {
+            throw new TransformationFailedException(
+                sprintf(
+                    'Expected "%s", but got "%s"',
+                    $expectedType,
+                    is_object($values) ? get_class($values) : gettype($values)
+                )
+            );
+        }
+
         if ($values->isEmpty()) {
             return '';
         }
@@ -52,7 +62,15 @@ final class CollectionToStringTransformer implements DataTransformerInterface
      */
     public function reverseTransform($value)
     {
-        Assert::string($value);
+        if (!is_string($value)) {
+            throw new TransformationFailedException(
+                sprintf(
+                    'Expected string, but got "%s"',
+                    is_object($value) ? get_class($value) : gettype($value)
+                )
+            );
+        }
+
         if ('' === $value) {
             return new ArrayCollection();
         }

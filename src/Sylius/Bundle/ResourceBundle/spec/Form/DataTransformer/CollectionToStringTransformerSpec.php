@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\CollectionToStringTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
+use Symfony\Component\Form\Exception\TransformationFailedException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -46,14 +47,14 @@ final class CollectionToStringTransformerSpec extends ObjectBehavior
         $this->reverseTransform('abc,def,ghi,jkl')->shouldBeLike(new ArrayCollection(['abc', 'def', 'ghi', 'jkl']));
     }
 
-    function it_throws_invalid_argument_exception_if_transform_argument_is_not_a_collection()
+    function it_throws_transformation_failed_exception_if_transform_argument_is_not_a_collection()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('transform', [new \stdClass()]);
+        $this->shouldThrow(TransformationFailedException::class)->during('transform', [new \stdClass()]);
     }
 
-    function it_throws_invalid_argument_exception_if_transform_argument_is_not_a_string()
+    function it_throws_transformation_failed_exception_if_transform_argument_is_not_a_string()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('reverseTransform', [new \stdClass()]);
+        $this->shouldThrow(TransformationFailedException::class)->during('reverseTransform', [new \stdClass()]);
     }
 
     function it_returns_empty_string_if_empty_collection_given()

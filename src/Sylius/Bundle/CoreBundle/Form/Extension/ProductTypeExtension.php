@@ -42,9 +42,6 @@ final class ProductTypeExtension extends AbstractTypeExtension
             ])
             ->add('mainTaxon', ResourceAutocompleteChoiceType::class, [
                 'label' => 'sylius.form.product.main_taxon',
-                'remote_route' => 'sylius_admin_ajax_taxon_index',
-                'remote_criteria_type' => 'contains',
-                'remote_criteria_name' => 'name',
                 'resource' => 'sylius.taxon',
                 'choice_name' => 'name',
                 'choice_value' => 'code',
