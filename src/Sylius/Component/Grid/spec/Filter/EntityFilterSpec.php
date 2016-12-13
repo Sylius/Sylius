@@ -44,13 +44,15 @@ final class EntityFilterSpec extends ObjectBehavior
     ) {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder->equals('entity', '7')->willReturn('EXPR');
+        $expressionBuilder->equals('entity', '7')->willReturn('EXPR1');
+        $expressionBuilder->orX('EXPR1')->willReturn('EXPR');
+
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
-        $this->apply($dataSource, 'entity', ['id' => '7'], []);
+        $this->apply($dataSource, 'entity', '7', []);
     }
 
-    function it_does_not_filters_when_data_is_not_defined(
+    function it_does_not_filters_when_data_id_is_not_defined(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ) {
@@ -59,18 +61,6 @@ final class EntityFilterSpec extends ObjectBehavior
         $expressionBuilder->equals('entity', Argument::any())->shouldNotBeCalled();
         $dataSource->restrict(Argument::any())->shouldNotBeCalled();
 
-        $this->apply($dataSource, 'entity', [], []);
-    }
-
-    function it_does_not_filters_when_id_is_not_defined(
-        DataSourceInterface $dataSource,
-        ExpressionBuilderInterface $expressionBuilder
-    ) {
-        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
-
-        $expressionBuilder->equals('entity', Argument::any())->shouldNotBeCalled();
-        $dataSource->restrict(Argument::any())->shouldNotBeCalled();
-
-        $this->apply($dataSource, 'entity', ['id' => ''], []);
+        $this->apply($dataSource, 'entity', '', []);
     }
 }

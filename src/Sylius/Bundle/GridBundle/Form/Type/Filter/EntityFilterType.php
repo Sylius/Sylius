@@ -24,30 +24,28 @@ final class EntityFilterType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $builder
-            ->add('id', EntityType::class, [
-                'class' => $options['class'],
+        $resolver
+            ->setDefaults([
+                'class' => null,
                 'label' => false,
                 'placeholder' => 'sylius.ui.all',
             ])
+            ->setRequired('class')
+            ->setDefined('field')
+            ->setAllowedTypes('field', 'string')
+            ->setDefined('fields')
+            ->setAllowedTypes('fields', 'array')
         ;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
+    public function getParent()
     {
-        $resolver
-            ->setDefaults([
-                'class' => null,
-                'data_class' => null,
-            ])
-            ->setDefined('class')
-            ->setRequired('class')
-        ;
+        return EntityType::class;
     }
 
     /**

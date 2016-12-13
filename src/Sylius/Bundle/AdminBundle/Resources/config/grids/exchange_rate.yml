@@ -28,6 +28,15 @@ sylius_grid:
                     type: string
                     label: sylius.ui.ratio
                     sortable: ~
+            filters:
+                currency:
+                    type: entity
+                    label: sylius.ui.currency
+                    options:
+                        class: "%sylius.model.currency.class%"
+                        choice_label: name
+                        fields: [sourceCurrency, targetCurrency]
+
             actions:
                 main:
                     create:

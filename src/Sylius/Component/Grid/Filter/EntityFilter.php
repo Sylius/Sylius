@@ -24,13 +24,21 @@ final class EntityFilter implements FilterInterface
      */
     public function apply(DataSourceInterface $dataSource, $name, $data, array $options)
     {
-        if (empty($data) || empty($data['id'])) {
+        if (empty($data)) {
             return;
         }
 
         $field = isset($options['field']) ? $options['field'] : $name;
+        $fields = isset($options['fields']) ? $options['fields'] : [$field];
 
-        $dataSource->restrict($dataSource->getExpressionBuilder()->equals($field, $data['id']));
+        $expressionBuilder = $dataSource->getExpressionBuilder();
+
+        $expressions = [];
+        foreach ($fields as $field) {
+            $expressions[] = $expressionBuilder->equals($field, $data);
+        }
+
+        $dataSource->restrict($expressionBuilder->orX(...$expressions));
     }
 
     /**
