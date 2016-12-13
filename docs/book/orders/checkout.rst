@@ -252,6 +252,31 @@ and apply a proper transition and flush the order via the manager.
 
 The Checkout is finished after that.
 
+Checkout related events
+-----------------------
+
+On each step of checkout a dedicated event is triggered.
+
++-----------------------------------------+
+| Event id                                |
++=========================================+
+| ``sylius.order.pre_address``            |
++-----------------------------------------+
+| ``sylius.order.post_address``           |
++-----------------------------------------+
+| ``sylius.order.pre_select_shipping``    |
++-----------------------------------------+
+| ``sylius.order.post_select_shipping``   |
++-----------------------------------------+
+| ``sylius.order.pre_payment``            |
++-----------------------------------------+
+| ``sylius.order.post_payment``           |
++-----------------------------------------+
+| ``sylius.order.pre_complete``           |
++-----------------------------------------+
+| ``sylius.order.post_complete``          |
++-----------------------------------------+
+
 Learn more
 ----------
 
