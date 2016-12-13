@@ -1,5 +1,5 @@
 @receiving_discount
-Feature: Receiving discount from a promotion with several actions
+Feature: Receiving discount from a promotion with multiple actions
     In order to pay less while buying goods
     As a Customer
     I want to receive discount for my purchase
