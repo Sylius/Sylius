@@ -32,8 +32,8 @@ final class EntityFilterType extends AbstractType
             'placeholder' => 'sylius.ui.all',
         ];
 
-        if (null !== $options['choiceLabel']) {
-            $idOptions['choice_label'] = $options['choiceLabel'];
+        if (null !== $options['choice_label']) {
+            $idOptions['choice_label'] = $options['choice_label'];
         }
 
         $builder
@@ -48,7 +48,7 @@ final class EntityFilterType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'choiceLabel' => null,
+                'choice_label' => null,
                 'class' => null,
             ])
             ->setRequired('class')
