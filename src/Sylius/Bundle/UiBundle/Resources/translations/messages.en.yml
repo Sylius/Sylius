@@ -812,6 +812,7 @@ sylius:
         translations: 'Translations'
         type: 'Type'
         unavailable: 'Unavailable'
+        unexpected_error_occurred: 'Unexpected error occurred.'
         unit_price: 'Unit price'
         unknown: 'Unknown'
         unlimited: 'Unlimited'
