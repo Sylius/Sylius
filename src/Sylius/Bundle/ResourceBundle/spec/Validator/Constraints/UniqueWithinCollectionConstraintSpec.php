@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Validator\Constraint;
+namespace spec\Sylius\Bundle\ResourceBundle\Validator\Constraints;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\ImageUniqueCode;
-use Sylius\Bundle\CoreBundle\Validator\Constraints\ImageUniqueCodeValidator;
+use Sylius\Bundle\ResourceBundle\Validator\Constraints\UniqueWithinCollectionConstraint;
+use Sylius\Bundle\ResourceBundle\Validator\UniqueWithinCollectionConstraintValidator;
 use Symfony\Component\Validator\Constraint;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class ImageUniqueCodeSpec extends ObjectBehavior
+final class UniqueWithinCollectionConstraintSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType(ImageUniqueCode::class);
+        $this->shouldHaveType(UniqueWithinCollectionConstraint::class);
     }
 
     function it_extends_symfony_constraint_class()
@@ -33,6 +33,6 @@ final class ImageUniqueCodeSpec extends ObjectBehavior
 
     function it_is_validate_by_unique_field_during_creation_validator()
     {
-        $this->validatedBy()->shouldReturn(ImageUniqueCodeValidator::class);
+        $this->validatedBy()->shouldReturn(UniqueWithinCollectionConstraintValidator::class);
     }
 }

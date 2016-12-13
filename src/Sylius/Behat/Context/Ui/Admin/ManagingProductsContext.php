@@ -1022,6 +1022,17 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should be notified that the :imageNumber image should have an unique code
+     */
+    public function iShouldBeNotifiedThatTheFirstImageShouldHaveAnUniqueCode($imageNumber)
+    {
+        Assert::same(
+            $this->updateSimpleProductPage->getValidationMessageForImageAtPosition((int) $imageNumber - 1),
+            'Image code must be unique within this product.'
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */

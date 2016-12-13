@@ -36,7 +36,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameCode($nth, $code)
+    public function specifyCode($nth, $code)
     {
         $this->getDocument()->fillField(sprintf('sylius_product_generate_variants_variants_%s_code', $nth), $code);
     }

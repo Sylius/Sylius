@@ -276,8 +276,9 @@ final class ManagingProductVariantsContext implements Context
     /**
      * @Then I should see :numberOfProductVariants variants in the list
      * @Then I should see :numberOfProductVariants variant in the list
+     * @Then I should not see any variants in the list
      */
-    public function iShouldSeeProductVariantsInTheList($numberOfProductVariants)
+    public function iShouldSeeProductVariantsInTheList($numberOfProductVariants = 0)
     {
         $foundRows = $this->indexPage->countItems();
 
@@ -414,7 +415,7 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatCodeIsRequiredForVariant($position)
     {
         Assert::same(
-            $this->generatePage->getValidationMessage('code', $position),
+            $this->generatePage->getValidationMessage('code', $position - 1),
             'Please enter the code.'
         );
     }
@@ -425,8 +426,19 @@ final class ManagingProductVariantsContext implements Context
     public function iShouldBeNotifiedThatPricesInAllChannelsMustBeDefinedForTheVariant($position)
     {
         Assert::same(
-            $this->generatePage->getPricesValidationMessage($position-1),
+            $this->generatePage->getPricesValidationMessage($position - 1),
             'You must define price for every channel.'
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that variant code must be unique within this product for the (\d)(?:st|nd|rd|th) variant$/
+     */
+    public function iShouldBeNotifiedThatVariantCodeMustBeUniqueWithinThisProductForYheVariant($position)
+    {
+        Assert::same(
+            $this->generatePage->getValidationMessage('code', $position - 1),
+            'This code must be unique within this product.'
         );
     }
 
@@ -618,7 +630,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Given /^I want to generate new variants for (this product)$/
+     * @When /^I want to generate new variants for (this product)$/
      */
     public function iWantToGenerateNewVariantsForThisProduct(ProductInterface $product)
     {
@@ -639,7 +651,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSpecifyThereAreVariantsIdentifiedByCodeWithCost($nthVariant, $code, $price, $channelName)
     {
-        $this->generatePage->nameCode($nthVariant - 1, $code);
+        $this->generatePage->specifyCode($nthVariant - 1, $code);
         $this->generatePage->specifyPrice($nthVariant - 1, $price, $channelName);
     }
 
@@ -648,7 +660,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iSpecifyThereAreVariantsIdentifiedByCode($nthVariant, $code)
     {
-        $this->generatePage->nameCode($nthVariant - 1, $code);
+        $this->generatePage->specifyCode($nthVariant - 1, $code);
     }
 
     /**
@@ -681,6 +693,14 @@ final class ManagingProductVariantsContext implements Context
     public function iSetItsShippingCategoryAs($shippingCategoryName)
     {
         $this->createPage->selectShippingCategory($shippingCategoryName);
+    }
+
+    /**
+     * @When I do not specify any information about variants
+     */
+    public function iDoNotSpecifyAnyInformationAboutVariants()
+    {
+        // Intentionally left blank to fulfill context expectation
     }
 
     /**

@@ -19,6 +19,7 @@ sylius:
             not_blank: Please enter the code.
             regex: Product variant code can only be comprised of letters, numbers, dashes and underscores.
             unique: Product variant code must be unique.
+            within_product_unique: This code must be unique within this product.
     simple_product:
         code:
             unique: Simple product code must be unique among all products and product variants.
