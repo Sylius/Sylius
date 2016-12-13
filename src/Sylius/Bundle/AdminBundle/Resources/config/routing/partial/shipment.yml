@@ -4,6 +4,7 @@ sylius_admin_partial_shipment_ship:
     defaults:
         _controller: sylius.controller.shipment:updateAction
         _sylius:
+            event: ship
             repository:
                 method: findOneByOrderId
                 arguments:
