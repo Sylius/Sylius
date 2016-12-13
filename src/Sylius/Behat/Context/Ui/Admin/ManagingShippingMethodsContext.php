@@ -323,6 +323,14 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I remove its zone
+     */
+    public function iRemoveItsZone()
+    {
+        $this->updatePage->removeZone();
+    }
+
+    /**
      * @Then I should be notified that :element has to be selected
      */
     public function iShouldBeNotifiedThatElementHasToBeSelected($element)

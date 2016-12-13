@@ -32,6 +32,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('channel', ['%channel%' => $channelName])->hasAttribute('checked');
     }
 
+    public function removeZone()
+    {
+        $this->getDocument()->selectFieldOption('Zone', 'Select');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -77,6 +82,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_shipping_method_code',
             'enabled' => '#sylius_shipping_method_enabled',
             'name' => '#sylius_shipping_method_translations_en_US_name',
+            'zone' => '#sylius_shipping_method_zone',
         ]);
     }
 }

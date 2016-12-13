@@ -35,6 +35,8 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     public function disable();
 
+    public function removeZone();
+
     /**
      * @param string $channelCode
      *

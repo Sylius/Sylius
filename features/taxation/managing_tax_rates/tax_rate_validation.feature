@@ -73,3 +73,11 @@ Feature: Tax rate validation
         And I try to save my changes
         Then I should be notified that name is required
         And this tax rate should still be named "United States Sales Tax"
+
+    @ui
+    Scenario: Trying to remove zone from existing tax rate
+        Given the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within the "US" zone
+        And I want to modify this tax rate
+        When I remove its zone
+        And I try to save my changes
+        Then I should be notified that zone has to be selected

@@ -35,7 +35,7 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function setZone(ZoneInterface $zone)
+    public function setZone(ZoneInterface $zone = null)
     {
         $this->zone = $zone;
     }

@@ -28,12 +28,12 @@ interface ShippingMethodInterface extends BaseShippingMethodInterface, TaxableIn
     public function getZone();
 
     /**
-     * @param ZoneInterface $zone
+     * @param ZoneInterface|null $zone
      */
-    public function setZone(ZoneInterface $zone);
+    public function setZone(ZoneInterface $zone = null);
 
     /**
-     * @param TaxCategoryInterface $category
+     * @param TaxCategoryInterface|null $category
      */
     public function setTaxCategory(TaxCategoryInterface $category = null);
 }

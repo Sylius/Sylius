@@ -291,6 +291,14 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
+     * @When I remove its zone
+     */
+    public function iRemoveItsZone()
+    {
+        $this->updatePage->removeZone();
+    }
+
+    /**
      * @When I do not specify related tax category
      */
     public function iDoNotSpecifyRelatedTaxCategory()
