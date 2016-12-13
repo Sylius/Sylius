@@ -137,6 +137,20 @@ You have most likely changed the PayPal credentials from ``config.yml`` during t
 
     bin/console cache:clear
 
+Payment complete events
+-----------------------
+
+There are two events that are triggered on the payment complete action:
+
++-------------------------------------+
+| Event id                            |
++=====================================+
+| ``sylius.payment.pre_complete``     |
++-------------------------------------+
+| ``sylius.payment.post_complete``    |
++-------------------------------------+
+
+
 Learn more
 ----------
 
