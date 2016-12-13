@@ -678,6 +678,7 @@ sylius:
         select_address_from_book: 'Select address from my book'
         select_products: 'Select products'
         select_taxon: 'Select taxon'
+        server_has_encountered_some_errors: 'Server has encountered some errors.'
         set_a_new_password_for_your_account: 'Set a new password for your account'
         set_as_default: 'Set as default'
         set_as_default_billing_address: 'Set as default billing address'
