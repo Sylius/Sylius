@@ -130,7 +130,7 @@ Default Tax Zone
 The **default tax zone** concept is used for situations when we want to show taxes included in price even when we do not know the
 address of the Customer, therefore we cannot choose a proper Zone, which will have proper TaxRates.
 
-Since we are using the concept of :doc:`Channels </book/architecture/channels>`, we will use **the Zone assigned to the Channel as default Zone for Taxation**.
+Since we are using the concept of :doc:`Channels </book/configuration/channels>`, we will use **the Zone assigned to the Channel as default Zone for Taxation**.
 
 .. note::
 

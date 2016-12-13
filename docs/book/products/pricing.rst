@@ -13,7 +13,7 @@ Pricing is a part of Sylius responsible for providing the product prices per cha
 Currency per Channel
 --------------------
 
-As you already know Sylius operates on :doc:`Channels </book/architecture/channels>`.
+As you already know Sylius operates on :doc:`Channels </book/configuration/channels>`.
 
 Each channel has a **base currency** in which all prices are saved.
 
@@ -34,4 +34,4 @@ Learn more
 ----------
 
 * :doc:`Currency - Component Documentation </components/Currency/index>`
-* :doc:`Currencies Concept Documentation </book/architecture/currencies>`
+* :doc:`Currencies Concept Documentation </book/configuration/currencies>`
