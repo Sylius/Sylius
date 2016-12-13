@@ -1398,6 +1398,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should be checking out as :email
+     */
+    public function iShouldBeCheckingOutAs($email)
+    {
+        Assert::same(
+            'Checking out as '.$email.'.',
+            $this->selectShippingPage->getPurchaserEmail()
+        );
+    }
+
+    /**
      * @return AddressInterface
      */
     private function createDefaultAddress()

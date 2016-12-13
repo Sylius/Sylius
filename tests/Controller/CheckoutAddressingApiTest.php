@@ -241,7 +241,10 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentBillingAddress": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
         }
 EOT;
 
@@ -297,7 +300,10 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentBillingAddress": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
         }
 EOT;
 
@@ -354,7 +360,10 @@ EOT;
                 "city": "’s-Hertogenbosch",
                 "postcode": "99-999"
             },
-            "differentBillingAddress": false
+            "differentBillingAddress": false,
+            "customer": {
+                "email": "john@doe.com"
+            }
         }
 EOT;
 

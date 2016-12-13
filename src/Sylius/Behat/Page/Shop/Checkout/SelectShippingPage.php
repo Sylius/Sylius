@@ -112,6 +112,14 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     /**
      * {@inheritdoc}
      */
+    public function getPurchaserEmail()
+    {
+        return $this->getElement('purchaser-email')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getValidationMessageForShipment()
     {
         $foundElement = $this->getElement('shipment');
@@ -168,6 +176,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             'checkout_subtotal' => '#sylius-checkout-subtotal',
             'next_step' => '#next-step',
             'order_cannot_be_shipped_message' => '#sylius-order-cannot-be-shipped',
+            'purchaser-email' => '#purchaser-email',
             'shipment' => '.items',
             'shipping_method' => '[name="sylius_checkout_select_shipping[shipments][0][method]"]',
             'shipping_method_fee' => '.item:contains("%shipping_method%") .fee',
