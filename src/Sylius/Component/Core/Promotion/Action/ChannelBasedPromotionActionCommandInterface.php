@@ -11,11 +11,12 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Component\Core\Promotion\ChannelBasedPromotionInterface;
 use Sylius\Component\Promotion\Action\PromotionActionCommandInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface ChannelBasedPromotionActionCommandInterface extends PromotionActionCommandInterface
+interface ChannelBasedPromotionActionCommandInterface extends PromotionActionCommandInterface, ChannelBasedPromotionInterface
 {
 }

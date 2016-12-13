@@ -23,19 +23,6 @@ use Webmozart\Assert\Assert;
 final class ItemTotalRuleChecker implements RuleCheckerInterface, ChannelBasedRuleCheckerInterface
 {
     /**
-     * @var RuleCheckerInterface
-     */
-    private $itemTotalRuleChecker;
-
-    /**
-     * @param RuleCheckerInterface $itemTotalRuleChecker
-     */
-    public function __construct(RuleCheckerInterface $itemTotalRuleChecker)
-    {
-        $this->itemTotalRuleChecker = $itemTotalRuleChecker;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
@@ -47,7 +34,7 @@ final class ItemTotalRuleChecker implements RuleCheckerInterface, ChannelBasedRu
             return false;
         }
 
-        return $this->itemTotalRuleChecker->isEligible($subject, $configuration[$channelCode]);
+        return $subject->getPromotionSubjectTotal() >= $configuration[$channelCode]['amount'];
     }
 
     /**

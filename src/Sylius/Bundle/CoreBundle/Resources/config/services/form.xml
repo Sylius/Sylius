@@ -139,12 +139,12 @@
             <argument type="service" id="sylius.form.type.data_transformer.products_to_codes" />
             <tag name="form.type" />
         </service>
-        <service id="sylius.form.event_subscriber.build_promotion_action" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionActionFormSubscriber">
+        <service id="sylius.form.event_subscriber.build_promotion_action" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionFormSubscriber">
             <argument type="service" id="sylius.registry_promotion_action" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.repository.channel" />
         </service>
-        <service id="sylius.form.event_subscriber.build_promotion_rule" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionRuleFormSubscriber">
+        <service id="sylius.form.event_subscriber.build_promotion_rule" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\BuildChannelBasedPromotionFormSubscriber">
             <argument type="service" id="sylius.registry_promotion_rule_checker" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.repository.channel" />

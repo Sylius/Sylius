@@ -20,19 +20,23 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
 /**
+ * This listener adds configuration form to a action,
+ * if selected action requires one.
+ *
+ * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-abstract class AbstractConfigurationSubscriber implements EventSubscriberInterface
+final class BuildPromotionFormSubscriber implements EventSubscriberInterface
 {
     /**
      * @var ServiceRegistryInterface
      */
-    protected $registry;
+    private $registry;
 
     /**
      * @var FormFactoryInterface
      */
-    protected $factory;
+    private $factory;
 
     /**
      * @param ServiceRegistryInterface $registry
@@ -102,8 +106,8 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
 
     /**
      * @param FormInterface $form
-     * @param string        $registryIdentifier
-     * @param array         $data
+     * @param string $registryIdentifier
+     * @param array $data
      */
     protected function addConfigurationFields(FormInterface $form, $registryIdentifier, array $data = [])
     {
@@ -129,15 +133,15 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     }
 
     /**
-     * @param PromotionDynamicTypeInterface|null $rule
+     * @param PromotionDynamicTypeInterface|null $dynamicType
      * @param FormInterface $form
      *
      * @return null|string
      */
-    protected function getRegistryIdentifier(PromotionDynamicTypeInterface $rule = null, FormInterface $form)
+    protected function getRegistryIdentifier(PromotionDynamicTypeInterface $dynamicType = null, FormInterface $form)
     {
-        if ($rule instanceof PromotionDynamicTypeInterface && null !== $rule->getType()) {
-            return $rule->getType();
+        if (null !== $dynamicType->getType()) {
+            return $dynamicType->getType();
         }
 
         if (null !== $form->getConfig()->hasOption('configuration_type')) {
@@ -148,7 +152,16 @@ abstract class AbstractConfigurationSubscriber implements EventSubscriberInterfa
     }
 
     /**
+     * @param PromotionDynamicTypeInterface|null $dynamicType
+     *
      * @return array
      */
-    abstract protected function getConfiguration($model);
+    private function getConfiguration(PromotionDynamicTypeInterface $dynamicType = null)
+    {
+        if (null !== $dynamicType->getConfiguration()) {
+            return $dynamicType->getConfiguration();
+        }
+
+        return [];
+    }
 }
