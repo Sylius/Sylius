@@ -50,5 +50,11 @@
 
         $(document).productSlugGenerator();
         $(document).taxonSlugGenerator();
+
+        $(document).on('collection-form-update', function (event, choice) {
+            $.each($('.sylius-autocomplete'), function (index, element) {
+                $(element).autoComplete();
+            });
+        });
     });
 })(jQuery);

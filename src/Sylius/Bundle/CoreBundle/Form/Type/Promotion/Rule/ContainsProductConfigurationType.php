@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Promotion\Rule;
 
-use Sylius\Bundle\ProductBundle\Form\Type\ProductCodeChoiceType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -29,7 +29,13 @@ final class ContainsProductConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('product_code', ProductCodeChoiceType::class, [
+            ->add('product_code', ResourceAutocompleteChoiceType::class, [
+                'remote_route' => 'sylius_admin_ajax_product_index',
+                'remote_criteria_type' => 'contains',
+                'remote_criteria_name' => 'search',
+                'choice_value' => 'id',
+                'choice_name' => 'name',
+                'resource' => 'sylius.product',
                 'label' => 'sylius.form.promotion_action.add_product_configuration.product',
                 'constraints' => [
                     new NotBlank(['groups' => ['sylius']]),
