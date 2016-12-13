@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as SyliusAddressType;
 use Sylius\Bundle\CoreBundle\Form\Type\Customer\CustomerGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -52,8 +53,13 @@ final class AddressType extends AbstractResourceType
                 $customer = $options['customer'];
 
                 Assert::isInstanceOf($resource, CustomerAwareInterface::class);
+                /** @var CustomerInterface $resourceCustomer */
+                $resourceCustomer = $resource->getCustomer();
 
-                if (null === $customer && null === $resource->getCustomer()) {
+                if (
+                    (null === $customer && null === $resourceCustomer) ||
+                    (null !== $resourceCustomer && null === $resourceCustomer->getUser())
+                ) {
                     $form->add('customer', CustomerGuestType::class, ['constraints' => [new Valid()]]);
                 }
             })
