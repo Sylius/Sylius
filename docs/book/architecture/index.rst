@@ -16,5 +16,6 @@ that you need to notice.
     currencies
     emails
     fixtures
+    events
 
 .. include:: /book/architecture/map.rst.inc

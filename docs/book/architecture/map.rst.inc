@@ -6,3 +6,4 @@
 * :doc:`/book/architecture/currencies`
 * :doc:`/book/architecture/emails`
 * :doc:`/book/architecture/fixtures`
+* :doc:`/book/architecture/events`
