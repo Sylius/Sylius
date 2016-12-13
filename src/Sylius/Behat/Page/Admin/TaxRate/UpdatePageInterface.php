@@ -22,4 +22,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isCodeDisabled();
+
+    public function removeZone();
 }
