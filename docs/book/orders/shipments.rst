@@ -110,6 +110,20 @@ ProductVariant Configuration
 In order to be able to calculate shipping costs basing on the volume and weight of products in an order
 the ProductVariant has the ``depth``, ``width``, ``height`` and ``weight`` fields.
 
+Shipment complete events
+------------------------
+
+There are two events that are triggered on the shipment ``ship`` action:
+
++-------------------------------------+
+| Event id                            |
++=====================================+
+| ``sylius.shipment.pre_ship``        |
++-------------------------------------+
+| ``sylius.shipment.post_ship``       |
++-------------------------------------+
+
+
 Learn more
 ----------
 
