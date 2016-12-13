@@ -11,14 +11,15 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ArrayToStringTransformer;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\CollectionToStringTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class ArrayToStringTransformerSpec extends ObjectBehavior
+final class CollectionToStringTransformerSpec extends ObjectBehavior
 {
     function let()
     {
@@ -27,7 +28,7 @@ final class ArrayToStringTransformerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ArrayToStringTransformer::class);
+        $this->shouldHaveType(CollectionToStringTransformer::class);
     }
 
     function it_is_data_transformer()
@@ -35,17 +36,17 @@ final class ArrayToStringTransformerSpec extends ObjectBehavior
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_transforms_array_to_string()
+    function it_transforms_collection_to_string()
     {
-        $this->transform(['abc', 'def', 'ghi', 'jkl'])->shouldReturn('abc,def,ghi,jkl');
+        $this->transform(new ArrayCollection(['abc', 'def', 'ghi', 'jkl']))->shouldReturn('abc,def,ghi,jkl');
     }
 
-    function it_transforms_string_to_array()
+    function it_transforms_string_to_collection()
     {
-        $this->reverseTransform('abc,def,ghi,jkl')->shouldReturn(['abc', 'def', 'ghi', 'jkl']);
+        $this->reverseTransform('abc,def,ghi,jkl')->shouldBeLike(new ArrayCollection(['abc', 'def', 'ghi', 'jkl']));
     }
 
-    function it_throws_invalid_argument_exception_if_transform_argument_is_not_a_array()
+    function it_throws_invalid_argument_exception_if_transform_argument_is_not_a_collection()
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('transform', [new \stdClass()]);
     }
@@ -53,5 +54,15 @@ final class ArrayToStringTransformerSpec extends ObjectBehavior
     function it_throws_invalid_argument_exception_if_transform_argument_is_not_a_string()
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('reverseTransform', [new \stdClass()]);
+    }
+
+    function it_returns_empty_string_if_empty_collection_given()
+    {
+        $this->transform(new ArrayCollection())->shouldReturn('');
+    }
+
+    function it_returns_empty_collection_if_empty_string_given()
+    {
+        $this->reverseTransform('')->shouldBeLike(new ArrayCollection());
     }
 }

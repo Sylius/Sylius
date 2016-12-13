@@ -11,13 +11,15 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\DataTransformerInterface;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class ArrayToStringTransformer implements DataTransformerInterface
+final class CollectionToStringTransformer implements DataTransformerInterface
 {
     /**
      * @var string
@@ -35,14 +37,14 @@ final class ArrayToStringTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transform($value)
+    public function transform($values)
     {
-        Assert::isArray($value);
-        if (empty($value)) {
+        Assert::isInstanceOf($values, Collection::class);
+        if ($values->isEmpty()) {
             return '';
         }
 
-        return implode($this->delimiter, $value);
+        return implode($this->delimiter, $values->toArray());
     }
 
     /**
@@ -52,9 +54,9 @@ final class ArrayToStringTransformer implements DataTransformerInterface
     {
         Assert::string($value);
         if ('' === $value) {
-            return [];
+            return new ArrayCollection();
         }
 
-        return explode($this->delimiter, $value);
+        return new ArrayCollection(explode($this->delimiter, $value));
     }
 }

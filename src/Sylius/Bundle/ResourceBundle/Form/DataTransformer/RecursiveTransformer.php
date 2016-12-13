@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Form\DataTransformerInterface;
 use Webmozart\Assert\Assert;
 
@@ -37,14 +38,11 @@ final class RecursiveTransformer implements DataTransformerInterface
      */
     public function transform($values)
     {
-        Assert::isArray($values);
+        Assert::isInstanceOf($values, Collection::class);
 
-        $transformedValues = [];
-        foreach ($values as $value) {
-            $transformedValues[] = $this->decoratedTransformer->transform($value);
-        }
-
-        return $transformedValues;
+        return $values->map(function ($value) {
+            return $this->decoratedTransformer->transform($value);
+        });
     }
 
     /**
@@ -52,13 +50,10 @@ final class RecursiveTransformer implements DataTransformerInterface
      */
     public function reverseTransform($values)
     {
-        Assert::isArray($values);
+        Assert::isInstanceOf($values, Collection::class);
 
-        $reverseTransformedValues = [];
-        foreach ($values as $value) {
-            $reverseTransformedValues[] = $this->decoratedTransformer->reverseTransform($value);
-        }
-
-        return $reverseTransformedValues;
+        return $values->map(function ($value) {
+            return $this->decoratedTransformer->reverseTransform($value);
+        });
     }
 }

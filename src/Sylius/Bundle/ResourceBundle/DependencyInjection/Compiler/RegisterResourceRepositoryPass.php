@@ -25,21 +25,20 @@ final class RegisterResourceRepositoryPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasParameter('sylius.resources')) {
+        if (!$container->hasParameter('sylius.resources') || !$container->has('sylius.registry.resource_repository')) {
             return;
         }
 
         $resources = $container->getParameter('sylius.resources');
 
-        if ($container->has('sylius.registry.resource_repository')) {
-            $repositoryRegistry = $container->findDefinition('sylius.registry.resource_repository');
+        $repositoryRegistry = $container->findDefinition('sylius.registry.resource_repository');
 
-            foreach ($resources as $alias => $configuration) {
-                $repositoryId = sprintf('sylius.repository.%s', str_replace('sylius.', '', $alias));
+        foreach ($resources as $alias => $configuration) {
+            list($applicationName, $resourceName) = explode('.', $alias, 2);
+            $repositoryId = sprintf('%s.repository.%s', $applicationName, $resourceName);
 
-                if ($container->has($repositoryId)) {
-                    $repositoryRegistry->addMethodCall('register', [$alias, new Reference($repositoryId)]);
-                }
+            if ($container->has($repositoryId)) {
+                $repositoryRegistry->addMethodCall('register', [$alias, new Reference($repositoryId)]);
             }
         }
     }

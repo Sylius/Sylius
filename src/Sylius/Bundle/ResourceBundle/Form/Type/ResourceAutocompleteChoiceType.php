@@ -11,12 +11,11 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ArrayToStringTransformer;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\CollectionToStringTransformer;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceToIdentifierTransformer;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -65,7 +64,7 @@ class ResourceAutocompleteChoiceType extends AbstractType
                         )
                     )
                 )
-                ->addViewTransformer(new ArrayToStringTransformer(','))
+                ->addViewTransformer(new CollectionToStringTransformer(','))
             ;
         }
     }
@@ -90,14 +89,16 @@ class ResourceAutocompleteChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
+            ->setRequired([
+                'resource',
+                'remote_route',
+                'remote_criteria_type',
+                'remote_criteria_name',
+                'choice_name',
+                'choice_value',
+            ])
             ->setDefaults([
-                'resource' => null,
-                'remote_route' => null,
-                'remote_criteria_type' => null,
-                'remote_criteria_name' => null,
                 'multiple' => false,
-                'choice_name' => null,
-                'choice_value' => null,
                 'default_text' => null,
             ])
             ->setAllowedTypes('resource', ['string'])

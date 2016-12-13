@@ -11,13 +11,16 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\DataTransformer;
 
+use Sylius\Component\Core\Model\ProductTaxonInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\DataTransformerInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class ProductTaxonsToTaxonsTransformer implements DataTransformerInterface
+final class ProductTaxonToTaxonTransformer implements DataTransformerInterface
 {
     /**
      * @var FactoryInterface
@@ -35,38 +38,31 @@ final class ProductTaxonsToTaxonsTransformer implements DataTransformerInterface
     /**
      * {@inheritdoc}
      */
-    public function transform($productTaxons)
+    public function transform($productTaxon)
     {
-        if(null === $productTaxons) {
-            return [];
+        if (null === $productTaxon) {
+            return null;
         }
 
-        $taxons = [];
+        Assert::isInstanceOf($productTaxon, ProductTaxonInterface::class);
 
-        foreach ($productTaxons as $productTaxon) {
-            $taxons[] = $productTaxon->getTaxon();
-        }
-
-        return $taxons;
+        return $productTaxon->getTaxon();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function reverseTransform($taxons)
+    public function reverseTransform($taxon)
     {
-        if(null === $taxons) {
-            return [];
+        if (null === $taxon) {
+            return null;
         }
 
-        $productTaxons = [];
+        Assert::isInstanceOf($taxon, TaxonInterface::class);
 
-        foreach ($taxons as $taxon) {
-            $productTaxon = $this->productTaxonFactory->createNew();
-            $productTaxon->setTaxon($taxon);
-            $productTaxons[] = $productTaxon;
-        }
+        $productTaxon = $this->productTaxonFactory->createNew();
+        $productTaxon->setTaxon($taxon);
 
-        return $productTaxons;
+        return $productTaxon;
     }
 }

@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Taxon;
 
-use Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductTaxonsToTaxonsTransformer;
+use Sylius\Bundle\CoreBundle\Form\DataTransformer\ProductTaxonToTaxonTransformer;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteChoiceType;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\AbstractType;
@@ -41,7 +42,19 @@ final class ProductTaxonAutocompleteChoiceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addModelTransformer(new ProductTaxonsToTaxonsTransformer($this->productTaxonFactory));
+        if ($options['multiple']) {
+            $builder->addModelTransformer(
+                new RecursiveTransformer(
+                    new ProductTaxonToTaxonTransformer($this->productTaxonFactory)
+                )
+            );
+        }
+
+        if (!$options['multiple']) {
+            $builder->addModelTransformer(
+                new ProductTaxonToTaxonTransformer($this->productTaxonFactory)
+            );
+        }
     }
 
     /**

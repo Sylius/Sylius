@@ -20,6 +20,7 @@
                 delay: {
                     search: 250
                 },
+                forceSelection: false,
                 apiSettings: {
                     dataType: 'JSON',
                     cache: false,

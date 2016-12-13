@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\ResourceBundle\Form\DataTransformer;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\RecursiveTransformer;
 use Symfony\Component\Form\DataTransformerInterface;
@@ -41,7 +42,7 @@ final class RecursiveTransformerSpec extends ObjectBehavior
         $decoratedTransformer->transform('CDE')->willReturn('cde');
         $decoratedTransformer->transform('FGH')->willReturn('fgh');
 
-        $this->transform(['ABC', 'CDE', 'FGH'])->shouldReturn(['abc', 'cde', 'fgh']);
+        $this->transform(new ArrayCollection(['ABC', 'CDE', 'FGH']))->shouldBeLike(new ArrayCollection(['abc', 'cde', 'fgh']));
     }
 
     function it_reverse_transforms_using_configured_transformer(DataTransformerInterface $decoratedTransformer)
@@ -50,10 +51,10 @@ final class RecursiveTransformerSpec extends ObjectBehavior
         $decoratedTransformer->reverseTransform('cde')->willReturn('CDE');
         $decoratedTransformer->reverseTransform('fgh')->willReturn('FGH');
 
-        $this->reverseTransform(['abc', 'cde', 'fgh'])->shouldReturn(['ABC', 'CDE', 'FGH']);
+        $this->reverseTransform(new ArrayCollection(['abc', 'cde', 'fgh']))->shouldBeLike(new ArrayCollection(['ABC', 'CDE', 'FGH']));
     }
 
-    function it_throws_invalid_argument_exception_if_transform_argument_is_not_array()
+    function it_throws_invalid_argument_exception_if_transform_argument_is_not_collection()
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('transform', [new \stdClass()]);
         $this->shouldThrow(\InvalidArgumentException::class)->during('reverseTransform', [new \stdClass()]);
