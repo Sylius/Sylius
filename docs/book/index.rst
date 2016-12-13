@@ -10,6 +10,7 @@ The Books helps to understand how Sylius works.
     introduction/index
     installation/index
     architecture/index
+    configuration/index
     customers/index
     products/index
     orders/index

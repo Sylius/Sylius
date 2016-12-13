@@ -27,7 +27,7 @@ In order to customize a translation in your project:
 .. note::
 
     You can create different files for different locales (languages). For example ``messages.pl.yml`` should hold only Polish translations,
-    as they will be visible when the current locale is ``PL``. Check the :doc:`Locales </book/architecture/locales>` docs for more information.
+    as they will be visible when the current locale is ``PL``. Check the :doc:`Locales </book/configuration/locales>` docs for more information.
 
 3. In this file, configure the desired key and give it a translation.
 

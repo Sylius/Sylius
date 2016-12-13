@@ -11,9 +11,6 @@ that you need to notice.
     architecture
     resource_layer
     state_machine
-    channels
-    locales
-    currencies
     emails
     fixtures
 
