@@ -29,8 +29,16 @@ final class EntityFilter implements FilterInterface
         }
 
         $field = isset($options['field']) ? $options['field'] : $name;
+        $fields = isset($options['fields']) ? $options['fields'] : [$field];
 
-        $dataSource->restrict($dataSource->getExpressionBuilder()->equals($field, $data['id']));
+        $expressionBuilder = $dataSource->getExpressionBuilder();
+
+        $expressions = [];
+        foreach ($fields as $field) {
+            $expressions[] = $expressionBuilder->equals($field, $data['id']);;
+        }
+
+        $dataSource->restrict($expressionBuilder->orX(...$expressions));
     }
 
     /**

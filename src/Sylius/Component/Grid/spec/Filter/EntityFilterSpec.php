@@ -44,7 +44,9 @@ final class EntityFilterSpec extends ObjectBehavior
     ) {
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
 
-        $expressionBuilder->equals('entity', '7')->willReturn('EXPR');
+        $expressionBuilder->equals('entity', '7')->willReturn('EXPR1');
+        $expressionBuilder->orX('EXPR1')->willReturn('EXPR');
+
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
         $this->apply($dataSource, 'entity', ['id' => '7'], []);
