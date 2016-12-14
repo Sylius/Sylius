@@ -170,6 +170,30 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I choose :currencyName as the filter currency
+     */
+    public function iChooseCurrencyAsTheFilterCurrency($currencyName)
+    {
+        $this->indexPage->chooseCurrencyFilter($currencyName);
+    }
+
+    /**
+     * @When I specify filter total being greater than :total
+     */
+    public function iSpecifyFilterTotalBeingGreaterThan($total)
+    {
+        $this->indexPage->specifyFilterTotalGreaterThan($total);
+    }
+
+    /**
+     * @When I specify filter total being less than :total
+     */
+    public function iSpecifyFilterTotalBeingLessThan($total)
+    {
+        $this->indexPage->specifyFilterTotalLessThan($total);
+    }
+
+    /**
      * @When I filter
      */
     public function iFilter()
@@ -693,6 +717,17 @@ final class ManagingOrdersContext implements Context
         Assert::false(
             $this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]),
             sprintf('Order with "%s" number should not be in the list.', $orderNumber)
+        );
+    }
+
+    /**
+     * @Then I should not see any orders with currency :currencyCode
+     */
+    public function iShouldNotSeeAnyOrderWithCurrency($currencyCode)
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['currencyCode' => $currencyCode]),
+            sprintf('Order with currency "%s" should not be on the list.', $currencyCode)
         );
     }
 
