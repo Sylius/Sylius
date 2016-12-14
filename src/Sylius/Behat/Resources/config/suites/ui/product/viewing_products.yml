@@ -11,6 +11,7 @@ default:
                 - sylius.behat.context.transform.currency
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_association_type
                 - sylius.behat.context.transform.shared_storage
@@ -19,6 +20,7 @@ default:
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.product_association
                 - sylius.behat.context.setup.product_review
@@ -27,6 +29,7 @@ default:
                 - sylius.behat.context.setup.taxonomy
 
                 - sylius.behat.context.ui.shop.current_channel
+                - sylius.behat.context.ui.shop.locale
                 - sylius.behat.context.ui.shop.product
             filters:
                 tags: "@viewing_products && @ui"

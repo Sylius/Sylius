@@ -179,6 +179,7 @@ final class ProductContext implements Context
         $this->productAttributeFactory = $productAttributeFactory;
         $this->attributeValueFactory = $attributeValueFactory;
         $this->productVariantFactory = $productVariantFactory;
+        $this->productVariantTranslationFactory = $productVariantTranslationFactory;
         $this->channelPricingFactory = $channelPricingFactory;
         $this->productOptionFactory = $productOptionFactory;
         $this->productOptionValueFactory = $productOptionValueFactory;
@@ -364,13 +365,17 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(it) has variant named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
+     * @Given /^(it|this product) has(?:| also) variant named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
      */
-    public function theItHasVariantNamedInAndIn(ProductInterface $product, $firstName, $firstLocale, $secondName, $secondLocale)
+    public function itHasVariantNamedInAndIn(ProductInterface $product, $firstName, $firstLocale, $secondName, $secondLocale)
     {
-        $productVariant = $this
-            ->createProductVariant($product, $firstName, 0, StringInflector::nameToUppercaseCode($firstName))
-        ;
+        $productVariant = $this->createProductVariant(
+            $product,
+            $firstName,
+            100,
+            StringInflector::nameToUppercaseCode($firstName),
+            $this->sharedStorage->get('channel')
+        );
 
         $names = [$firstName => $firstLocale, $secondName => $secondLocale];
         foreach ($names as $name => $locale) {
@@ -864,6 +869,8 @@ final class ProductContext implements Context
      * @param int $price
      * @param string $code
      * @param ChannelInterface $channel
+     *
+     * @return ProductVariantInterface
      */
     private function createProductVariant(
         ProductInterface $product,
@@ -885,8 +892,9 @@ final class ProductContext implements Context
         $product->addVariant($variant);
 
         $this->objectManager->flush();
-
         $this->sharedStorage->set('variant', $variant);
+
+        return $variant;
     }
 
     /**
