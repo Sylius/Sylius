@@ -84,3 +84,26 @@ This type filters by a chosen entity.
                         type: entity
                         form_options:
                             class: "%app.model.customer%"
+
+Money
+_____
+
+This filter checks if an amount is in range and in specific currency
+
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            app_order:
+                filters:
+                    total:
+                        type: money
+                        form_options:
+                            scale: 3
+                        options:
+                            currency_field: currencyCode
+                            scale: 3
+
+.. warning::
+
+    Providing different ``scale`` between **form_options** and **options** may cause unwanted, and plausibly volatile results.
