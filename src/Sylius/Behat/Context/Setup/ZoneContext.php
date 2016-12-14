@@ -130,7 +130,7 @@ final class ZoneContext implements Context
     /**
      * @Given the store has a :scope zone :zoneName with code :code
      */
-    public function theStoreHasAShippingZoneWithCode($scope, $zoneName, $code)
+    public function theStoreHasAScopedZoneWithCode($scope, $zoneName, $code)
     {
         $this->saveZone($this->setUpZone($zoneName, $code, $scope), $scope . '_zone');
     }

@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ShippingMethodExampleFactory;
 use Sylius\Component\Addressing\Model\Scope;
+use Sylius\Component\Core\Model\Scope as CoreScope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -108,7 +109,7 @@ final class ShippingContext implements Context
     public function theStoreShipsEverywhereForFree()
     {
         /** @var ZoneInterface $zone */
-        foreach ($this->zoneRepository->findBy(['scope' => [Scope::SHIPPING, Scope::ALL]]) as $zone) {
+        foreach ($this->zoneRepository->findBy(['scope' => [CoreScope::SHIPPING, Scope::ALL]]) as $zone) {
             $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
                 'name' => 'Free',
                 'code' => 'FREE-' . $zone->getCode(),
@@ -127,7 +128,7 @@ final class ShippingContext implements Context
      */
     public function theStoreShipsEverywhereForFreeForAllChannels(array $channels)
     {
-        foreach ($this->zoneRepository->findBy(['scope' => Scope::SHIPPING]) as $zone) {
+        foreach ($this->zoneRepository->findBy(['scope' => [CoreScope::SHIPPING, Scope::ALL]]) as $zone) {
             $configuration = $this->getConfigurationByChannels($channels);
             $shippingMethod = $this->shippingMethodExampleFactory->create([
                 'name' => 'Free',
@@ -159,7 +160,7 @@ final class ShippingContext implements Context
     {
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $name,
-            'zone' => $this->getZoneFromSharedStorage(),
+            'zone' => $this->getShippingZone(),
             'enabled' => true,
             'code' => $code,
         ]));
@@ -173,7 +174,7 @@ final class ShippingContext implements Context
         $shippingMethod = $this->shippingMethodExampleFactory->create([
             'name' => $name,
             'enabled' => true,
-            'zone' => $this->getZoneFromSharedStorage(),
+            'zone' => $this->getShippingZone(),
         ]);
 
         $shippingMethod->setPosition($position);
@@ -238,7 +239,7 @@ final class ShippingContext implements Context
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $shippingMethodName,
             'enabled' => true,
-            'zone' => $this->getZoneFromSharedStorage(),
+            'zone' => $this->getShippingZone(),
             'calculator' => [
                 'type' => DefaultCalculators::FLAT_RATE,
                 'configuration' => $configuration,
@@ -263,7 +264,7 @@ final class ShippingContext implements Context
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $shippingMethodName,
             'enabled' => true,
-            'zone' => $this->getZoneFromSharedStorage(),
+            'zone' => $this->getShippingZone(),
             'calculator' => [
                 'type' => DefaultCalculators::FLAT_RATE,
                 'configuration' => $configuration,
@@ -289,7 +290,7 @@ final class ShippingContext implements Context
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $shippingMethodName,
             'enabled' => true,
-            'zone' => $this->getZoneFromSharedStorage(),
+            'zone' => $this->getShippingZone(),
             'calculator' => [
                 'type' => DefaultCalculators::PER_UNIT_RATE,
                 'configuration' => $configuration,
@@ -309,7 +310,7 @@ final class ShippingContext implements Context
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $shippingMethodName,
             'enabled' => false,
-            'zone' => $this->getZoneFromSharedStorage(),
+            'zone' => $this->getShippingZone(),
             'calculator' => [
                 'type' => DefaultCalculators::FLAT_RATE,
                 'configuration' => $configuration,
@@ -329,7 +330,7 @@ final class ShippingContext implements Context
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $shippingMethodName,
             'enabled' => true,
-            'zone' => $this->getZoneFromSharedStorage(),
+            'zone' => $this->getShippingZone(),
             'calculator' => [
                 'type' => DefaultCalculators::PER_UNIT_RATE,
                 'configuration' => $configuration,
@@ -350,7 +351,7 @@ final class ShippingContext implements Context
         $this->saveShippingMethod($this->shippingMethodExampleFactory->create([
             'name' => $shippingMethodName,
             'enabled' => true,
-            'zone' => $this->getZoneFromSharedStorage(),
+            'zone' => $this->getShippingZone(),
             'calculator' => [
                 'type' => DefaultCalculators::FLAT_RATE,
                 'configuration' => $configuration,
@@ -452,7 +453,7 @@ final class ShippingContext implements Context
     /**
      * @return ZoneInterface
      */
-    private function getZoneFromSharedStorage()
+    private function getShippingZone()
     {
         if ($this->sharedStorage->has('shipping_zone')) {
             return  $this->sharedStorage->get('shipping_zone');
