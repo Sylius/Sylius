@@ -25,6 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 final class ChannelPricingType extends AbstractResourceType
 {
@@ -35,7 +36,11 @@ final class ChannelPricingType extends AbstractResourceType
     {
         $builder
             ->add('price', MoneyType::class, [
-                'label' => $options['channel']->getName(),
+                'label' => 'Price for ' . $options['channel']->getName(),
+                'currency' => $options['channel']->getBaseCurrency()->getCode(),
+            ])
+            ->add('originalPrice', MoneyType::class, [
+                'label' => 'Original price for ' .$options['channel']->getName(),
                 'currency' => $options['channel']->getBaseCurrency()->getCode(),
             ])
         ;

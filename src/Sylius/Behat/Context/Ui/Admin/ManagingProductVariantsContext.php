@@ -27,6 +27,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 final class ManagingProductVariantsContext implements Context
 {
@@ -165,6 +166,14 @@ final class ManagingProductVariantsContext implements Context
     public function iSetItsPriceTo($price = null, $channel = null)
     {
         $this->createPage->specifyPrice($price, (null === $channel) ? $this->sharedStorage->get('channel') :$channel);
+    }
+
+    /**
+     * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
+     */
+    public function iSetItsOriginalPriceTo($originalPrice = null, $channel = null)
+    {
+        $this->createPage->specifyOriginalPrice($originalPrice, (null === $channel) ? $this->sharedStorage->get('channel') :$channel);
     }
 
     /**

@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 final class ChannelPricingSpec extends ObjectBehavior
 {
@@ -48,5 +49,42 @@ final class ChannelPricingSpec extends ObjectBehavior
     {
         $this->setPrice(1000);
         $this->getPrice()->shouldReturn(1000);
+    }
+
+    function it_does_not_have_original_price_by_default()
+    {
+        $this->getOriginalPrice()->shouldReturn(null);
+    }
+
+    function its_original_price_should_be_mutable()
+    {
+        $this->setOriginalPrice(2000);
+        $this->getOriginalPrice()->shouldReturn(2000);
+    }
+
+    function its_original_price_should_not_be_lower_than_price()
+    {
+        $this->setPrice(2000);
+        $this->setOriginalPrice(1000);
+    }
+
+    function its_price_is_reduced()
+    {
+        $this->setPrice(1000);
+        $this->setOriginalPrice(2000);
+        $this->isPriceReduced()->shouldReturn(true);
+    }
+
+    function its_price_is_not_reduced_when_does_not_have_original_price()
+    {
+        $this->setPrice(2000);
+        $this->isPriceReduced()->shouldReturn(false);
+    }
+
+    function its_price_is_not_reduced_when_original_price_is_same_as_price()
+    {
+        $this->setPrice(2000);
+        $this->setOriginalPrice(2000);
+        $this->isPriceReduced()->shouldReturn(false);
     }
 }

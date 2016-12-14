@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 class ChannelPricing implements ChannelPricingInterface
 {
@@ -35,6 +36,11 @@ class ChannelPricing implements ChannelPricingInterface
      * @var int
      */
     protected $price;
+
+    /**
+     * @var int
+     */
+    protected $originalPrice;
 
     /**
      * {@inheritdoc}
@@ -98,5 +104,29 @@ class ChannelPricing implements ChannelPricingInterface
     public function setPrice($price)
     {
         $this->price = $price;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOriginalPrice()
+    {
+        return $this->originalPrice;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOriginalPrice($originalPrice)
+    {
+        $this->originalPrice = $originalPrice;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isPriceReduced()
+    {
+        return $this->originalPrice > $this->price;
     }
 }

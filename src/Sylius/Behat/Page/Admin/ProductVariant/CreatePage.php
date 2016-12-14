@@ -19,6 +19,7 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
@@ -29,7 +30,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function specifyPrice($price, $channel)
     {
-        $this->getDocument()->fillField($channel, $price);
+        $this->getDocument()->fillField('Price for ' . $channel, $price);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyOriginalPrice($originalPrice, $channel)
+    {
+        $this->getDocument()->fillField('Original price for ' . $channel, $originalPrice);
     }
 
     /**

@@ -23,6 +23,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProductPageInterface
 {
@@ -45,6 +46,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     public function specifyPrice($channelName, $price)
     {
         $this->getElement('price', ['%channel%' => $channelName])->setValue($price);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyOriginalPrice($channelName, $originalPrice)
+    {
+        $this->getElement('original_price', ['%channel%' => $channelName])->setValue($originalPrice);
     }
 
     public function addSelectedAttributes()
@@ -386,6 +395,14 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function getOriginalPriceForChannel($channelName)
+    {
+        return $this->getElement('original_price', ['%channel%' => $channelName])->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');
@@ -419,7 +436,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'language_tab' => '[data-locale="%locale%"] .title',
             'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
             'name' => '#sylius_product_translations_%locale%_name',
-            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input',
+            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input[name$="[price]"]',
+            'original_price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input[name$="[originalPrice]"]',
             'pricing_configuration' => '#sylius_calculator_container',
             'main_taxon' => '#sylius_product_mainTaxon',
             'slug' => '#sylius_product_translations_%locale%_slug',

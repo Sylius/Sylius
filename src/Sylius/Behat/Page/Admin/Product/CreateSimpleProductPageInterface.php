@@ -18,6 +18,7 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
 interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
 {
@@ -26,6 +27,12 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      * @param int $price
      */
     public function specifyPrice($channelName, $price);
+
+    /**
+     * @param string $channelName
+     * @param int $originalPrice
+     */
+    public function specifyOriginalPrice($channelName, $originalPrice);
 
     /**
      * @param string $name
