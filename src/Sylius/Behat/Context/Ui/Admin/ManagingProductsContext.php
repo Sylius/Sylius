@@ -456,7 +456,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I change its original price to (?:€|£|\$)([^"]+) for "([^"]+)" channel$/
+     * @When /^I change its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
     public function iChangeItsOriginalPriceTo($price, $channelName)
     {
@@ -859,8 +859,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^(its|this products) original price should be (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
-     * @Then /^(product "[^"]+") original price should be (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     * @Then /^(its|this products) original price should be "(?:€|£|\$)([^"]+)" for channel "([^"]+)"$/
      */
     public function itsOriginalPriceForChannel(ProductInterface $product, $originalPrice, $channelName)
     {

@@ -11,12 +11,7 @@
             <div class="two fields">
                 {{ form_row(form.shippingCategory) }}
             </div>
-            {% for pricing_form in form.channelPricings %}
-                <div class="two fields">
-                    {{ form_row(pricing_form.price) }}
-                    {{ form_row(pricing_form.originalPrice) }}
-                </div>
-            {% endfor %}
+            {{ form_row(form.channelPricings) }}
         </div>
         {% if form.optionValues is defined and form.optionValues|length > 0 %}
         <div class="ui hidden divider"></div>

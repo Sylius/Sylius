@@ -78,6 +78,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getOriginalPriceForChannel($channelName)
+    {
+        return $this->getElement('original_price', ['%channel%' => $channelName])->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getNameInLanguage($language)
     {
         return $this->getElement('name', ['%language%' => $language])->getValue();
@@ -90,7 +98,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $this->getElement('on_hand')->setValue($amount);
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -100,7 +108,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_product_variant_code',
             'name' => '#sylius_product_variant_translations_%language%_name',
             'on_hand' => '#sylius_product_variant_onHand',
-            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input',
+            'original_price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input[name$="[originalPrice]"]',
+            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input[name$="[price]"]',
             'pricing_configuration' => '#sylius_calculator_container',
             'tracked' => '#sylius_product_variant_tracked',
         ]);

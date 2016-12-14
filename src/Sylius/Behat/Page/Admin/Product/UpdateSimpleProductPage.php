@@ -45,7 +45,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
      */
     public function specifyPrice($channelName, $price)
     {
-        $this->getElement('price', ['%channel%' => $channelName])->setValue($price);
+        $this->getElement('price', ['%channelName%' => $channelName])->setValue($price);
     }
 
     /**
@@ -53,7 +53,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
      */
     public function specifyOriginalPrice($channelName, $originalPrice)
     {
-        $this->getElement('original_price', ['%channel%' => $channelName])->setValue($originalPrice);
+        $this->getElement('original_price', ['%channelName%' => $channelName])->setValue($originalPrice);
     }
 
     public function addSelectedAttributes()
@@ -389,7 +389,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
 
     public function getPriceForChannel($channelName)
     {
-        return $this->getElement('price', ['%channel%' => $channelName])->getValue();
+        return $this->getElement('price', ['%channelName%' => $channelName])->getValue();
     }
 
     /**
@@ -397,7 +397,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
      */
     public function getOriginalPriceForChannel($channelName)
     {
-        return $this->getElement('original_price', ['%channel%' => $channelName])->getValue();
+        return $this->getElement('original_price', ['%channelName%' => $channelName])->getValue();
     }
 
     /**
@@ -436,8 +436,8 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
             'language_tab' => '[data-locale="%locale%"] .title',
             'locale_tab' => '#attributesContainer .menu [data-tab="%localeCode%"]',
             'name' => '#sylius_product_translations_%locale%_name',
-            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input[name$="[price]"]',
-            'original_price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input[name$="[originalPrice]"]',
+            'original_price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channelName%") input[name$="[originalPrice]"]',
+            'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channelName%") input[name$="[price]"]',
             'pricing_configuration' => '#sylius_calculator_container',
             'main_taxon' => '#sylius_product_mainTaxon',
             'slug' => '#sylius_product_translations_%locale%_slug',

@@ -65,3 +65,5 @@ Feature: Adding a new product variant
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_EXQUISITE" variant of the "Wyborowa Vodka" product should appear in the store
+        And the variant with code "VODKA_WYBOROWA_EXQUISITE" should be priced at $100.00 for channel "United States"
+        And the variant with code "VODKA_WYBOROWA_EXQUISITE" should have an original price of $120.00 for channel "United States"

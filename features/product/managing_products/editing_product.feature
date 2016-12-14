@@ -34,11 +34,11 @@ Feature: Editing a product
     Scenario: Changing a simple product price
         Given I want to modify the "Dice Brewing" product
         When I change its price to $7.50 for "United States" channel
-        And I change its original price to $15.00 for "United States" channel
+        And I change its original price to "$15.00" for "United States" channel
         And I save my changes
         Then I should be notified that it has been successfully edited
         And it should be priced at $7.50 for channel "United States"
-        And its original price should be $15.00 for channel "United States"
+        And its original price should be "$15.00" for channel "United States"
 
     @ui
     Scenario: Renaming a configurable product

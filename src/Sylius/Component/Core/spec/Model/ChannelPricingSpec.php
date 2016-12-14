@@ -56,19 +56,13 @@ final class ChannelPricingSpec extends ObjectBehavior
         $this->getOriginalPrice()->shouldReturn(null);
     }
 
-    function its_original_price_should_be_mutable()
+    function its_original_price_is_mutable()
     {
         $this->setOriginalPrice(2000);
         $this->getOriginalPrice()->shouldReturn(2000);
     }
 
-    function its_original_price_should_not_be_lower_than_price()
-    {
-        $this->setPrice(2000);
-        $this->setOriginalPrice(1000);
-    }
-
-    function its_price_is_reduced()
+    function its_price_can_be_reduced()
     {
         $this->setPrice(1000);
         $this->setOriginalPrice(2000);

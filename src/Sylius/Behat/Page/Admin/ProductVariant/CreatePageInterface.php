@@ -23,15 +23,15 @@ interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**
      * @param int $price
-     * @param string $channel
+     * @param string $channelName
      */
-    public function specifyPrice($price, $channel);
+    public function specifyPrice($price, $channelName);
 
     /**
      * @param int $originalPrice
-     * @param string $channel
+     * @param string $channelName
      */
-    public function specifyOriginalPrice($originalPrice, $channel);
+    public function specifyOriginalPrice($originalPrice, $channelName);
 
     /**
      * @param int $height

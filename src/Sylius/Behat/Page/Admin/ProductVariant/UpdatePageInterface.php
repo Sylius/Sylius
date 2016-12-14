@@ -24,7 +24,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isCodeDisabled();
-    
+
     /**
      * @param int $price
      */
@@ -53,6 +53,13 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return string
      */
     public function getPriceForChannel($channelName);
+
+    /**
+     * @param string $channelName
+     *
+     * @return string
+     */
+    public function getOriginalPriceForChannel($channelName);
 
     /**
      * @param string $language

@@ -163,17 +163,17 @@ final class ManagingProductVariantsContext implements Context
      * @When /^I set its(?:| default) price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      * @When I do not set its price
      */
-    public function iSetItsPriceTo($price = null, $channel = null)
+    public function iSetItsPriceTo($price = null, $channelName = null)
     {
-        $this->createPage->specifyPrice($price, (null === $channel) ? $this->sharedStorage->get('channel') :$channel);
+        $this->createPage->specifyPrice($price, (null === $channelName) ? $this->sharedStorage->get('channel') :$channelName);
     }
 
     /**
      * @When /^I set its original price to "(?:€|£|\$)([^"]+)" for "([^"]+)" channel$/
      */
-    public function iSetItsOriginalPriceTo($originalPrice = null, $channel = null)
+    public function iSetItsOriginalPriceTo($originalPrice, $channelName)
     {
-        $this->createPage->specifyOriginalPrice($originalPrice, (null === $channel) ? $this->sharedStorage->get('channel') :$channel);
+        $this->createPage->specifyOriginalPrice($originalPrice, $channelName);
     }
 
     /**
@@ -286,6 +286,19 @@ final class ManagingProductVariantsContext implements Context
         $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
 
         Assert::same($this->updatePage->getNameInLanguage($language), $name);
+    }
+
+    /**
+     * @Then /^the (variant with code "[^"]+") should have an original price of (?:€|£|\$)([^"]+) for channel "([^"]+)"$/
+     */
+    public function theVariantWithCodeShouldHaveAnOriginalPriceOfForChannel(ProductVariantInterface $productVariant, $originalPrice, $channelName)
+    {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::same(
+            $this->updatePage->getOriginalPriceForChannel($channelName),
+            $originalPrice
+        );
     }
 
     /**
