@@ -1,6 +1,6 @@
 @managing_inventory
-Feature: Filtering inventory by a code
-    In order to filter tracked product variants by a name
+Feature: Filtering inventory by code
+    In order to filter tracked product variants by code
     As an Administrator
     I want to be able to filter tracked product variants on the list
 
@@ -15,10 +15,8 @@ Feature: Filtering inventory by a code
         And I am logged in as an administrator
 
     @ui
-    Scenario: Filtering tracked product variants by a name
+    Scenario: Filtering tracked product variants by code
         When I want to browse inventory
-        And I choose "Contains" as a filter code type
-        And I specify filter code as "iron"
-        And I filter
-        Then I should see a single tracked variant in the list
+        And I filter tracked variants with code containing "iron"
+        Then I should see only one tracked variant in the list
         And I should see that the "Iron Maiden T-Shirt" variant has 5 quantity on hand

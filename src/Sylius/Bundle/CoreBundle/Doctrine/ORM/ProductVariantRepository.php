@@ -22,12 +22,11 @@ class ProductVariantRepository extends BaseProductVariantRepository implements P
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderByTracked($tracked = true)
+    public function createInventoryListQueryBuilder()
     {
         return $this
             ->createQueryBuilder('o')
-            ->where('o.tracked = :tracked')
-            ->setParameter('tracked', $tracked)
+            ->where('o.tracked = true')
         ;
     }
 }

@@ -16,7 +16,7 @@ Feature: Browsing inventory
     @ui
     Scenario: Browsing only tracked product variants in the store
         When I want to browse inventory
-        Then I should see a single tracked variant in the list
+        Then I should see only one tracked variant in the list
 
     @ui
     Scenario: Being informed about on hand quantity of a product variant

@@ -20,9 +20,7 @@ use Sylius\Component\Product\Repository\ProductVariantRepositoryInterface as Bas
 interface ProductVariantRepositoryInterface extends BaseProductVariantRepositoryInterface
 {
     /**
-     * @param bool $tracked
-     *
      * @return QueryBuilder
      */
-    public function createQueryBuilderByTracked($tracked = true);
+    public function createInventoryListQueryBuilder();
 }

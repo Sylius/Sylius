@@ -42,56 +42,27 @@ final class ManagingInventoryContext implements Context
     }
 
     /**
-     * @When I specify filter name as :name
+     * @When /^I filter tracked variants with (code|name) containing "([^"]+)"/
      */
-    public function iSpecifyFilterNameAs($name)
+    public function iFilterTrackedVariantsWithCodeContaining($field, $value)
     {
-        $this->indexPage->specifyFilterValue('name', $name);
-    }
+        $this->indexPage->specifyFilterType($field, 'Contains');
+        $this->indexPage->specifyFilterValue($field, $value);
 
-    /**
-     * @When I specify filter code as :code
-     */
-    public function iSpecifyFilterCodeAs($code)
-    {
-        $this->indexPage->specifyFilterValue('code', $code);
-    }
-
-    /**
-     * @When I choose :type as a filter name type
-     */
-    public function iChooseTypeAsAFilterNameType($type)
-    {
-        $this->indexPage->specifyFilterType('name', $type);
-    }
-
-    /**
-     * @When I choose :type as a filter code type
-     */
-    public function iChooseTypeAsAFilterCodeType($type)
-    {
-        $this->indexPage->specifyFilterType('code', $type);
-    }
-
-    /**
-     * @When I filter
-     */
-    public function iFilter()
-    {
         $this->indexPage->filter();
     }
 
     /**
-     * @Then I should see a single tracked variant(s) in the list
+     * @Then I should see only one tracked variant in the list
      */
-    public function iShouldSeeASingleTrackedVariantsInTheList()
+    public function iShouldSeeOnlyOneTrackedVariantInTheList()
     {
         $foundRows = $this->indexPage->countItems();
 
         Assert::same(
             1,
             $foundRows,
-            '%s rows with tracked product variants should appear on page, %s rows has been found'
+            '%s rows with tracked product variants should appear on page, %s rows has been found.'
         );
     }
 
