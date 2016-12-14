@@ -21,6 +21,7 @@ use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductOptionValueType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -42,6 +43,8 @@ use Sylius\Component\Product\Model\ProductTranslation;
 use Sylius\Component\Product\Model\ProductTranslationInterface;
 use Sylius\Component\Product\Model\ProductVariant;
 use Sylius\Component\Product\Model\ProductVariantInterface;
+use Sylius\Component\Product\Model\ProductVariantTranslation;
+use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -131,6 +134,23 @@ final class Configuration implements ConfigurationInterface
                                         ->scalarNode('repository')->defaultValue(ProductVariantRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->scalarNode('form')->defaultValue(ProductVariantType::class)->cannotBeEmpty()->end()
+                                    ->end()
+                                ->end()
+                                ->arrayNode('translation')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->variableNode('options')->end()
+                                        ->arrayNode('classes')
+                                            ->addDefaultsIfNotSet()
+                                            ->children()
+                                                ->scalarNode('model')->defaultValue(ProductVariantTranslation::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('interface')->defaultValue(ProductVariantTranslationInterface::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('repository')->cannotBeEmpty()->end()
+                                                ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                                ->scalarNode('form')->defaultValue(ProductVariantTranslationType::class)->cannotBeEmpty()->end()
+                                            ->end()
+                                        ->end()
                                     ->end()
                                 ->end()
                             ->end()
