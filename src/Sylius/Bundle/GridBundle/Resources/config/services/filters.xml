@@ -42,5 +42,8 @@
         <service id="sylius.grid_filter.money" class="Sylius\Component\Grid\Filter\MoneyFilter">
             <tag name="sylius.grid_filter" type="money" form-type="Sylius\Bundle\GridBundle\Form\Type\Filter\MoneyFilterType" />
         </service>
+        <service id="sylius.form.type.grid_filter.money" class="Sylius\Bundle\GridBundle\Form\Type\Filter\MoneyFilterType">
+            <tag name="form.type" />
+        </service>
     </services>
 </container>
