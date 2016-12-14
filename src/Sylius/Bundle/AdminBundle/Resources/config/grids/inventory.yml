@@ -23,3 +23,27 @@ sylius_grid:
                     label: sylius.ui.inventory
                     options:
                         template: "@SyliusAdmin/ProductVariant/Grid/Field/inventory.html.twig"
+            actions:
+                item:
+                    update_product:
+                        type: update
+                        label: sylius.ui.edit_product
+                        options:
+                            link:
+                                route: sylius_admin_product_update
+                                parameters:
+                                    id: resource.product.id
+                    update:
+                        type: update
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: resource.product.id
+                    delete:
+                        type: delete
+                        options:
+                            link:
+                                parameters:
+                                    id: resource.id
+                                    productId: resource.product.id
