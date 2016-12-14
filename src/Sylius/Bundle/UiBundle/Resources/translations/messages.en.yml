@@ -422,6 +422,7 @@ sylius:
         manage_emails: 'Manage Emails'
         manage_exchange_rates: 'Manage exchange rates'
         manage_geographical_zones: 'Manage geographical zones'
+        manage_inventory: 'Manage inventory'
         manage_languages_available_in_the_store: 'Manage languages available in the store'
         manage_metadata: 'Manage metadata'
         manage_options: 'Manage options'

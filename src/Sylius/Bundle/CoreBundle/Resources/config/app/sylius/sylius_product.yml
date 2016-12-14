@@ -13,7 +13,7 @@ sylius_product:
         product_variant:
             classes:
                 model: Sylius\Component\Core\Model\ProductVariant
-                repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductVariantRepository
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductVariantRepository
         product_option:
             classes:
                 repository: Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductOptionRepository

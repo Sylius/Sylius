@@ -1,0 +1,25 @@
+sylius_grid:
+    grids:
+        sylius_admin_inventory:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_variant.class%"
+                    repository:
+                        method: createQueryBuilderByTracked
+            fields:
+                name:
+                    type: twig
+                    path: .
+                    label: sylius.ui.name
+                    options:
+                        template: "@SyliusAdmin/ProductVariant/Grid/Field/name.html.twig"
+                code:
+                    type: string
+                    label: sylius.ui.code
+                inventory:
+                    type: twig
+                    path: .
+                    label: sylius.ui.inventory
+                    options:
+                        template: "@SyliusAdmin/ProductVariant/Grid/Field/inventory.html.twig"

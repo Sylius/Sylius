@@ -7,6 +7,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/customer_group.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/customer_order.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/exchange_rate.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/inventory.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/locale.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/order.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/payment_method.yml" }
