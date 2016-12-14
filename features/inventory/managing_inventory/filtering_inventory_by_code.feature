@@ -14,7 +14,7 @@ Feature: Filtering inventory by a code
         And there are 25 units of product "RHCP T-Shirt" available in the inventory
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Filtering tracked product variants by a name
         When I want to browse inventory
         And I choose "Contains" as a filter code type

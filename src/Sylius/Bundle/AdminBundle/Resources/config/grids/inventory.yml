@@ -23,6 +23,15 @@ sylius_grid:
                     label: sylius.ui.inventory
                     options:
                         template: "@SyliusAdmin/ProductVariant/Grid/Field/inventory.html.twig"
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    options:
+                        fields: [name]
             actions:
                 item:
                     update_product:
