@@ -11,10 +11,10 @@
 
 namespace Sylius\Behat\Service\Mocker;
 
-use Guzzle\Http\Message\Response;
-use Guzzle\Stream\Stream;
 use Mockery\Mock;
-use Payum\Core\Bridge\Guzzle\HttpClient;
+use Payum\Core\HttpClientInterface;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 use Sylius\Behat\Service\ResponseLoaderInterface;
 
 /**
@@ -77,7 +77,7 @@ class PaypalApiMocker
         $getTransactionDetailsStream = $this->mockStream($mockedResponse['getTransactionDetails']);
         $getTransactionDetailsResponse = $this->mockHttpResponse(200, $getTransactionDetailsStream);
 
-        $this->mocker->mockService('sylius.payum.http_client', HttpClient::class)
+        $this->mocker->mockService('sylius.payum.http_client', HttpClientInterface::class)
             ->shouldReceive('send')
             ->times(4)
             ->andReturn($firstGetExpressCheckoutDetailsResponse, $doExpressCheckoutPaymentResponse, $secondGetExpressCheckoutDetailsResponse, $getTransactionDetailsResponse)
@@ -93,7 +93,7 @@ class PaypalApiMocker
         $getExpressCheckoutDetailsStream = $this->mockStream($mockedResponse['getExpressCheckoutDetails']);
         $getExpressCheckoutDetailsResponse = $this->mockHttpResponse(200, $getExpressCheckoutDetailsStream);
 
-        $this->mocker->mockService('sylius.payum.http_client', HttpClient::class)
+        $this->mocker->mockService('sylius.payum.http_client', HttpClientInterface::class)
             ->shouldReceive('send')
             ->twice()
             ->andReturn($setExpressCheckoutResponse, $getExpressCheckoutDetailsResponse)
@@ -107,7 +107,7 @@ class PaypalApiMocker
      */
     private function mockStream($content)
     {
-        $mockedStream = $this->mocker->mockCollaborator(Stream::class);
+        $mockedStream = $this->mocker->mockCollaborator(StreamInterface::class);
         $mockedStream->shouldReceive('getContents')->once()->andReturn($content);
         $mockedStream->shouldReceive('close')->once()->andReturn();
 
@@ -122,7 +122,7 @@ class PaypalApiMocker
      */
     private function mockHttpResponse($statusCode, $streamMock)
     {
-        $mockedHttpResponse = $this->mocker->mockCollaborator(Response::class);
+        $mockedHttpResponse = $this->mocker->mockCollaborator(ResponseInterface::class);
         $mockedHttpResponse->shouldReceive('getStatusCode')->once()->andReturn($statusCode);
         $mockedHttpResponse->shouldReceive('getBody')->once()->andReturn($streamMock);
 
