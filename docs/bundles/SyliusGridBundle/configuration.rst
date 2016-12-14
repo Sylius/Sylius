@@ -61,7 +61,7 @@ Here you will find all configuration options of ``sylius_grid``.
                         template: ~
                         position: 100
                         options:
-                            fields: { }
+                            fields: [channel]
                         form_options:
                             class: "%app.model.channel%"
                 actions:

@@ -32,7 +32,6 @@ final class EntityFilterType extends AbstractType
                 'label' => false,
                 'placeholder' => 'sylius.ui.all',
             ])
-            ->setRequired('class')
         ;
     }
 
