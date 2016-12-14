@@ -31,5 +31,6 @@ sylius_grid:
                     type: string
                     label: false
                     options:
-                        type: contains
                         fields: [translation.name]
+                    form_options:
+                        type: contains

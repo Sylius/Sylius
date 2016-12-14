@@ -36,8 +36,6 @@ final class BooleanFilterType extends AbstractType
                 'required' => false,
                 'placeholder' => 'sylius.ui.all',
             ])
-            ->setDefined('field')
-            ->setAllowedTypes('field', 'string')
         ;
     }
 

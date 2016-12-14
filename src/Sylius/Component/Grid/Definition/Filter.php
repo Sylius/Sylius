@@ -47,6 +47,11 @@ class Filter
     private $options = [];
 
     /**
+     * @var array
+     */
+    private $formOptions = [];
+
+    /**
      * @var int
      *
      * Position equals to 100 to ensure that wile sorting filters by position ASC
@@ -155,6 +160,22 @@ class Filter
     public function setOptions($options)
     {
         $this->options = $options;
+    }
+
+    /**
+     * @return array
+     */
+    public function getFormOptions()
+    {
+        return $this->formOptions;
+    }
+
+    /**
+     * @param array $formOptions
+     */
+    public function setFormOptions($formOptions)
+    {
+        $this->formOptions = $formOptions;
     }
 
     /**

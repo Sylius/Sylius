@@ -33,8 +33,6 @@ final class EntityFilterType extends AbstractType
                 'placeholder' => 'sylius.ui.all',
             ])
             ->setRequired('class')
-            ->setDefined('fields')
-            ->setAllowedTypes('fields', 'array')
         ;
     }
 
