@@ -581,8 +581,9 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @Then the promotion :promotion should be used :usage time(s)
+     * @Then the promotion :promotion should not be used
      */
-    public function thePromotionShouldBeUsedTime(PromotionInterface $promotion, $usage)
+    public function thePromotionShouldBeUsedTime(PromotionInterface $promotion, $usage = 0)
     {
         Assert::same(
             (int) $usage,

@@ -55,9 +55,13 @@ final class ShippingPercentageDiscountPromotionActionCommand implements Promotio
         }
 
         $adjustment = $this->createAdjustment($promotion);
-        $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
-        $adjustment->setAmount(-$adjustmentAmount);
 
+        $adjustmentAmount = (int) round($subject->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT) * $configuration['percentage']);
+        if (0 === $adjustmentAmount) {
+            return false;
+        }
+
+        $adjustment->setAmount(-$adjustmentAmount);
         $subject->addAdjustment($adjustment);
 
         return true;
