@@ -80,7 +80,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function getNameInLanguage($language)
     {
-        return $this->getElement('name', ['%language%' => $language])->getText();
+        return $this->getElement('name', ['%language%' => $language])->getValue();
     }
 
     /**

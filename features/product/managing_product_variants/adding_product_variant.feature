@@ -23,15 +23,18 @@ Feature: Adding a new product variant
 
     @ui
     Scenario: Adding a new product variant with name
-        Given I want to create a new variant of this product
+        Given the store is also available in "Polish (Poland)"
+        And I want to create a new variant of this product
         When I specify its code as "VODKA_WYBOROWA_PREMIUM"
         And I name it "Vodka Wyborowa Premium" in "English (United States)"
+        And I name it "Wódka Wyborowa Premium" in "Polish (Poland)"
         And I set its price to "$100.00" for "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
         And the variant with code "VODKA_WYBOROWA_PREMIUM" should be priced at $100.00 for channel "United States"
-        And the variant with code "VODKA_WYBOROWA_PREMIUM" should be named "Vodka Wyborowa Premium" in "English (United States)"
+        And the variant with code "VODKA_WYBOROWA_PREMIUM" should be named "Vodka Wyborowa Premium" in "English (United States)" locale
+        And the variant with code "VODKA_WYBOROWA_PREMIUM" should be named "Wódka Wyborowa Premium" in "Polish (Poland)" locale
 
     @ui
     Scenario: Adding a new product variant with specific option's value

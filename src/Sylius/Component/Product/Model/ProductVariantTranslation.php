@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Product\Model;
 
+use Sylius\Component\Resource\Model\AbstractTranslation;
+
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ProductVariantTranslation implements ProductVariantTranslationInterface
+final class ProductVariantTranslation extends AbstractTranslation implements ProductVariantTranslationInterface
 {
     /**
      * @var mixed

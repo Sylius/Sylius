@@ -265,7 +265,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then /^the (variant with code "[^"]+") should be named "([^"]+)" in "([^"]+)"$/
+     * @Then /^the (variant with code "[^"]+") should be named "([^"]+)" in ("([^"]+)" locale)$/
      */
     public function theVariantWithCodeShouldBeNamedIn(ProductVariantInterface $productVariant, $name, $language)
     {

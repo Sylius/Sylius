@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Product\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Product\Model\ProductVariantTranslation;
 use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
+use Sylius\Component\Resource\Model\AbstractTranslation;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -28,6 +29,11 @@ final class ProductVariantTranslationSpec extends ObjectBehavior
     function it_implements_product_variant_translation_interface()
     {
         $this->shouldImplement(ProductVariantTranslationInterface::class);
+    }
+
+    function it_is_translation()
+    {
+        $this->shouldHaveType(AbstractTranslation::class);
     }
 
     function it_has_no_name_by_default()

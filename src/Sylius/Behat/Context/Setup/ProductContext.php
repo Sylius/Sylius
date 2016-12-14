@@ -142,6 +142,7 @@ final class ProductContext implements Context
      * @param AttributeFactoryInterface $productAttributeFactory
      * @param FactoryInterface $attributeValueFactory
      * @param FactoryInterface $productVariantFactory
+     * @param FactoryInterface $productVariantTranslationFactory
      * @param FactoryInterface $channelPricingFactory
      * @param FactoryInterface $productOptionFactory
      * @param FactoryInterface $productOptionValueFactory
@@ -160,6 +161,7 @@ final class ProductContext implements Context
         AttributeFactoryInterface $productAttributeFactory,
         FactoryInterface $attributeValueFactory,
         FactoryInterface $productVariantFactory,
+        FactoryInterface $productVariantTranslationFactory,
         FactoryInterface $channelPricingFactory,
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,

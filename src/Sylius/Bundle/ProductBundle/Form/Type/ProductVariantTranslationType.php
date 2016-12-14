@@ -29,6 +29,7 @@ final class ProductVariantTranslationType extends AbstractResourceType
         $builder
             ->add('name', TextType::class, [
                 'label' => 'sylius.form.product_variant.name',
+                'required' => false,
             ])
         ;
     }
