@@ -40,6 +40,15 @@ Boolean
 
 This filter checks if a value is true or false.
 
+.. code-block:: yaml
+
+    sylius_grid:
+        grids:
+            app_channel:
+                filters:
+                    enabled:
+                        type: boolean
+
 Date
 ----
 
@@ -51,10 +60,10 @@ This filter checks if a chosen datetime field is between given dates.
         grids:
             app_order:
                 filters:
-                    date:
+                    createdAt:
                         type: date
-                        options:
-                            field: completedAt
+                    completedAt:
+                        type: date
 
 Entity
 ------
@@ -67,7 +76,11 @@ This type filters by a chosen entity.
         grids:
             app_order:
                 filters:
-                    some_entity:
+                    channel:
                         type: entity
-                        options:
-                            class: AppBundle\Model\SomeEntity
+                        form_options:
+                            class: "%app.model.channel%"
+                    customer:
+                        type: entity
+                        form_options:
+                            class: "%app.model.customer%"
