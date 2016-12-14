@@ -28,8 +28,7 @@ final class EntityFilter implements FilterInterface
             return;
         }
 
-        $field = isset($options['field']) ? $options['field'] : $name;
-        $fields = isset($options['fields']) ? $options['fields'] : [$field];
+        $fields = isset($options['fields']) ? $options['fields'] : [$name];
 
         $expressionBuilder = $dataSource->getExpressionBuilder();
 
