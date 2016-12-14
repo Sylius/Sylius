@@ -789,6 +789,7 @@ final class ProductContext implements Context
             $productVariant->addChannelPricing($this->createChannelPricingForChannel($price, $channel));
         }
         $productVariant->setCode($product->getCode());
+        $productVariant->setName($product->getName());
 
         return $product;
     }

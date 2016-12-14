@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Inventory\IndexPageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -34,11 +34,51 @@ final class ManagingInventoryContext implements Context
     }
 
     /**
-     * @Given I want to browse inventory
+     * @When I want to browse inventory
      */
     public function iWantToBrowseInventory()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When I specify filter name as :name
+     */
+    public function iSpecifyFilterNameAs($name)
+    {
+        $this->indexPage->specifyFilterValue('name', $name);
+    }
+
+    /**
+     * @When I specify filter code as :code
+     */
+    public function iSpecifyFilterCodeAs($code)
+    {
+        $this->indexPage->specifyFilterValue('code', $code);
+    }
+
+    /**
+     * @When I choose :type as a filter name type
+     */
+    public function iChooseTypeAsAFilterNameType($type)
+    {
+        $this->indexPage->specifyFilterType('name', $type);
+    }
+
+    /**
+     * @When I choose :type as a filter code type
+     */
+    public function iChooseTypeAsAFilterCodeType($type)
+    {
+        $this->indexPage->specifyFilterType('code', $type);
+    }
+
+    /**
+     * @When I filter
+     */
+    public function iFilter()
+    {
+        $this->indexPage->filter();
     }
 
     /**
