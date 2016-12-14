@@ -78,10 +78,19 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getNameInLanguage($language)
+    {
+        return $this->getElement('name', ['%language%' => $language])->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_variant_code',
+            'name' => '#sylius_product_variant_translations_%language%_name',
             'price' => '#sylius_product_variant_channelPricings [data-form-collection="item"]:contains("%channel%") input',
             'pricing_configuration' => '#sylius_calculator_container',
             'tracked' => '#sylius_product_variant_tracked',

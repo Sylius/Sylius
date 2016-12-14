@@ -21,7 +21,7 @@ Feature: Adding a new product variant
         And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the store
         And the variant with code "VODKA_WYBOROWA_PREMIUM" should be priced at $100.00 for channel "United States"
 
-    @ui @todo
+    @ui
     Scenario: Adding a new product variant with name
         Given I want to create a new variant of this product
         When I specify its code as "VODKA_WYBOROWA_PREMIUM"

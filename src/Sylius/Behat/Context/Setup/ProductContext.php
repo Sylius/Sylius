@@ -81,6 +81,11 @@ final class ProductContext implements Context
     /**
      * @var FactoryInterface
      */
+    private $productVariantTranslationFactory;
+
+    /**
+     * @var FactoryInterface
+     */
     private $channelPricingFactory;
 
     /**
@@ -353,6 +358,23 @@ final class ProductContext implements Context
             StringInflector::nameToUppercaseCode($productVariantName),
             (null !== $channel) ? $channel : $this->sharedStorage->get('channel')
         );
+    }
+
+    /**
+     * @Given /^(it) has variant named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
+     */
+    public function theItHasVariantNamedInAndIn(ProductInterface $product, $firstName, $firstLocale, $secondName, $secondLocale)
+    {
+        $productVariant = $this
+            ->createProductVariant($product, $firstName, 0, StringInflector::nameToUppercaseCode($firstName))
+        ;
+
+        $names = [$firstName => $firstLocale, $secondName => $secondLocale];
+        foreach ($names as $name => $locale) {
+            $this->addProductVariantTranslation($productVariant, $name, $locale);
+        }
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -878,6 +900,21 @@ final class ProductContext implements Context
         $translation->setSlug($this->slugGenerator->generate($name));
 
         $product->addTranslation($translation);
+    }
+
+    /**
+     * @param ProductVariantInterface $productVariant
+     * @param string $name
+     * @param string $locale
+     */
+    private function addProductVariantTranslation(ProductVariantInterface $productVariant, $name, $locale)
+    {
+        /** @var ProductVariantTranslationInterface|TranslationInterface $translation */
+        $translation = $this->productVariantTranslationFactory->createNew();
+        $translation->setLocale($locale);
+        $translation->setName($name);
+
+        $productVariant->addTranslation($translation);
     }
 
     /**

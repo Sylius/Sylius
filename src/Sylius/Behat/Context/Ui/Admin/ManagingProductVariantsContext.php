@@ -120,11 +120,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I name it :name
+     * @When I name it :name in :language
      */
-    public function iNameItIn($name)
+    public function iNameItIn($name, $language)
     {
-        $this->createPage->nameIt($name);
+        $this->createPage->nameItIn($name, $language);
     }
 
     /**
@@ -262,6 +262,16 @@ final class ManagingProductVariantsContext implements Context
             $this->updatePage->getPriceForChannel($channelName),
             $price
         );
+    }
+
+    /**
+     * @Then /^the (variant with code "[^"]+") should be named "([^"]+)" in "([^"]+)"$/
+     */
+    public function theVariantWithCodeShouldBeNamedIn(ProductVariantInterface $productVariant, $name, $language)
+    {
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
+
+        Assert::same($name, $this->updatePage->getNameInLanguage($language));
     }
 
     /**

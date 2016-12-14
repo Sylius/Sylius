@@ -99,6 +99,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getCurrentVariantName()
+    {
+        $currentVariantRow = $this->getElement('current_variant_input')->getParent()->getParent();
+
+        return $currentVariantRow->find('css', 'td:first-child')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getAttributeByName($name)
     {
         $attributesTable = $this->getElement('attributes');
@@ -273,6 +283,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'association' => '#sylius-product-association-%association-name%',
             'attributes' => '#sylius-product-attributes',
             'average_rating' => '#average-rating',
+            'current_variant_input' => '#sylius-product-variants td input:checked',
             'main_image' => '#main-image',
             'name' => '#sylius-product-name',
             'option_select' => '#sylius_add_to_cart_cartItem_variant_%option-name%',

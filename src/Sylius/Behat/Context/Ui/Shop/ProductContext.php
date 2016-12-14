@@ -295,6 +295,14 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then its current variant should be named :name
+     */
+    public function itsCurrentVariantShouldBeNamed($name)
+    {
+        Assert::same($name, $this->showPage->getCurrentVariantName());
+    }
+
+    /**
      * @Then I should see the product :productName with price :productPrice
      */
     public function iShouldSeeTheProductWithPrice($productName, $productPrice)

@@ -9,14 +9,14 @@ Feature: Viewing product's variants names
         And the store is available in "English (United States)"
         And the store is also available in "Polish (Poland)"
         And the store has a "Die Hard Movie" configurable product
-        And the it has variant named "Die Hard - Extended Cut" in "English (United States)" and "Szklana Pułapka - Wersja Reżyserska" in "Polish (Poland)"
+        And it has variant named "Die Hard - Extended Cut" in "English (United States)" locale and "Szklana Pułapka - Wersja Reżyserska" in "Polish (Poland)" locale
 
-    @ui @todo
+    @ui
     Scenario: Seeing variant's name in default locale
         When I view product "Wyborowa Vodka"
         Then its current variant should be named "Die Hard - Extended Cut"
 
-    @ui @todo
+    @ui
     Scenario: Seeing proper variant's name after locale change
         When I switch to the "Polish (Poland)" locale
         And I view product "Wyborowa Vodka"
