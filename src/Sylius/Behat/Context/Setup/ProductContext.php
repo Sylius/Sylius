@@ -810,6 +810,7 @@ final class ProductContext implements Context
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setName($productName);
 
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');

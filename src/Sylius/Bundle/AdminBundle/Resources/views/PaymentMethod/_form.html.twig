@@ -13,7 +13,6 @@
     <h4 class="ui dividing header">{{ 'sylius.ui.availability'|trans }}</h4>
     {{ form_row(form.channels) }}
 </div>
-{{ translationForm(form.translations) }}
 <div class="ui styled fluid accordion">
     {% for locale, translationForm in form.translations %}
         <div class="title{% if 0 == loop.index0 %} active{% endif %}">

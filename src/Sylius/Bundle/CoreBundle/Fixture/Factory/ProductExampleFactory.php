@@ -320,6 +320,7 @@ class ProductExampleFactory extends AbstractExampleFactory implements ExampleFac
         $i = 0;
         /** @var ProductVariantInterface $productVariant */
         foreach ($product->getVariants() as $productVariant) {
+            $productVariant->setName($this->faker->word);
             $productVariant->setAvailableOn($this->faker->dateTimeThisYear);
             $productVariant->setCode(sprintf('%s-variant-%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
