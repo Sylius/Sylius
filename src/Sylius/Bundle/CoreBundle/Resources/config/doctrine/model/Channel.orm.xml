@@ -19,6 +19,7 @@
     <mapped-superclass name="Sylius\Component\Core\Model\Channel" table="sylius_channel">
         <field name="themeName" column="theme_name" type="string" nullable="true" />
         <field name="taxCalculationStrategy" column="tax_calculation_strategy" type="string" />
+        <field name="contactEmail" column="contact_email" type="string" nullable="true" />
 
         <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface">
             <join-column name="default_locale_id" referenced-column-name="id" nullable="false" />

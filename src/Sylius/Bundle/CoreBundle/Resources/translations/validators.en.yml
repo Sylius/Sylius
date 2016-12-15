@@ -4,6 +4,10 @@ sylius:
             not_blank: Please enter channel base currency.
         default_locale:
             not_blank: Please enter channel default locale.
+        contact_email:
+            max: Email must not be longer than {{ limit }} characters.
+            min: Email must be at least {{ limit }} characters long.
+            invalid: This email is invalid.
     channel_pricing:
         price:
             min: Price must be at least {{ limit }}.

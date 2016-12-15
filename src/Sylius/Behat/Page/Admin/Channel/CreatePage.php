@@ -38,6 +38,14 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function setContactEmail($contactEmail)
+    {
+        $this->getDocument()->fillField('Contact email', $contactEmail);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function defineColor($color)
     {
         $this->getDocument()->fillField('Color', $color);
