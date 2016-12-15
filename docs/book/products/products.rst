@@ -117,21 +117,19 @@ Firstly let's learn how to prepare an exemplary Option and its values.
 
      // Prepare an array with values for your option, with codes, locale code and option values.
      $valuesData = [
-         'OV1' => ['en_US' => 'Red'],
-         'OV2' => ['en_US' => 'Blue'],
-         'OV3' => ['en_US' => 'Green'],
+         'OV1' => ['locale' => 'en_US', 'value' => 'Red'],
+         'OV2' => ['locale' => 'en_US', 'value' => 'Blue'],
+         'OV3' => ['locale' => 'en_US' => 'value' => 'Green'],
      ];
 
      foreach ($valuesData as $code => $values) {
          /* @var $values OptionValueInterface */
          $optionValue = $this->get('sylius.factory.product_option_value')->createNew();
-         $optionValue->setCode($code);
 
-         foreach ($values as $locale => $value) {
-             $optionValue->setFallbackLocale($locale);
-             $optionValue->setCurrentLocale($locale);
-             $optionValue->setValue($value);
-         }
+         $optionValue->setCode($code);
+         $optionValue->setFallbackLocale($values['locale']);
+         $optionValue->setCurrentLocale($values['locale']);
+         $optionValue->setValue($values['value']);
 
          $option->addValue($optionValue);
      }
