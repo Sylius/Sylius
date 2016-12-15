@@ -173,6 +173,16 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given /^(this channel) has contact email set as "([^"]+)"$/
+     * @Given /^(this channel) has no contact email set$/
+     */
+    public function thisChannelHasContactEmailSetAs(ChannelInterface $channel, $contactEmail = null)
+    {
+        $channel->setContactEmail($contactEmail);
+        $this->channelManager->flush();
+    }
+
+    /**
      * @param ChannelInterface $channel
      * @param bool $state
      */
