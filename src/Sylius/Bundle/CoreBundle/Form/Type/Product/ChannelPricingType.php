@@ -45,7 +45,7 @@ final class ChannelPricingType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'sylius_channel_pricing';
     }

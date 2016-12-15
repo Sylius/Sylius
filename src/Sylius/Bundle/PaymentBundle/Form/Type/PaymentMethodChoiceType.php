@@ -94,15 +94,6 @@ final class PaymentMethodChoiceType extends AbstractType
     {
         return ChoiceType::class;
     }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return 'sylius_payment_method_choice';
-    }
-
     /**
      * {@inheritdoc}
      */
