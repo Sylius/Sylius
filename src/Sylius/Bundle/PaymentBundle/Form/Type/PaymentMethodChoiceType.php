@@ -100,7 +100,7 @@ final class PaymentMethodChoiceType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_payment_method_choice';
+        retrun $this->getBlockPrefix();
     }
 
     /**
