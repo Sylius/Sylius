@@ -404,6 +404,20 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Then the last product on the list should have name :name
+     */
+    public function theLastProductOnTheListShouldHaveName($name)
+    {
+        $actualName = $this->indexPage->getLastProductNameFromList();
+
+        Assert::same(
+            $actualName,
+            $name,
+            sprintf('Expected last product\'s name to be "%s", but it is "%s".', $name, $actualName)
+        );
+    }
+
+    /**
      * @Then I should see :count product reviews
      */
     public function iShouldSeeProductReviews($count)

@@ -28,6 +28,11 @@ interface IndexPageInterface
     public function getFirstProductNameFromList();
 
     /**
+     * @return string
+     */
+    public function getLastProductNameFromList();
+
+    /**
      * @param string $name
      */
     public function search($name);

@@ -47,7 +47,17 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         $productsList = $this->getDocument()->find('css', '#products');
 
-        return $productsList->find('css', '.content > a')->getText();
+        return $productsList->find('css', '.column:first-child .content > a')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastProductNameFromList()
+    {
+        $productsList = $this->getDocument()->find('css', '#products');
+
+        return $productsList->find('css', '.column:last-child .content > a')->getText();
     }
 
     /**
