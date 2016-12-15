@@ -39,7 +39,7 @@ winzou_state_machine:
             after:
                 sylius_process_order:
                     on: ["fail", "cancel"]
-                    do: ["@sylius.order_processing.order_payment_processor", "process"]
+                    do: ["@sylius.order_processing.order_payment_processor.after_checkout", "process"]
                     args: ["object.getOrder()"]
                 sylius_resolve_state:
                     on: ["complete", "refund"]

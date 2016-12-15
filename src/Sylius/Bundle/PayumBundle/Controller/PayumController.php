@@ -20,6 +20,7 @@ use Sylius\Bundle\PayumBundle\Request\ResolveNextRoute;
 use Sylius\Bundle\ResourceBundle\Controller\FlashHelperInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfigurationFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -88,6 +89,7 @@ final class PayumController
     {
         $configuration = $this->requestConfigurationFactory->create($this->orderMetadata, $request);
 
+        /** @var OrderInterface $order */
         $order = $this->orderRepository->findOneByTokenValue($tokenValue);
 
         if (null === $order) {
@@ -97,7 +99,7 @@ final class PayumController
         $request->getSession()->set('sylius_order_id', $order->getId());
         $options = $configuration->getParameters()->get('redirect');
 
-        $payment = $order->getLastNewPayment();
+        $payment = $order->getLastPayment(PaymentInterface::STATE_NEW);
 
         if (null === $payment) {
             throw new NotFoundHttpException(sprintf('Order with token "%s" has no pending payments.', $tokenValue));

@@ -99,9 +99,9 @@ final class PaymentSpec extends ObjectBehavior
         $this->shouldThrow('\InvalidArgumentException')->duringSetAmount(new \stdClass());
     }
 
-    function it_has_new_state_by_default()
+    function it_has_cart_state_by_default()
     {
-        $this->getState()->shouldReturn(PaymentInterface::STATE_NEW);
+        $this->getState()->shouldReturn(PaymentInterface::STATE_CART);
     }
 
     function its_state_is_mutable()

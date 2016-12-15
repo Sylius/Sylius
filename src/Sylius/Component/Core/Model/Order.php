@@ -298,16 +298,18 @@ class Order extends BaseOrder implements OrderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param string|null $state
+     *
+     * @return BasePaymentInterface|null
      */
-    public function getLastNewPayment()
+    public function getLastPayment($state = null)
     {
         if ($this->payments->isEmpty()) {
             return null;
         }
 
-        $payment = $this->payments->filter(function (BasePaymentInterface $payment) {
-            return $payment->getState() === BasePaymentInterface::STATE_NEW;
+        $payment = $this->payments->filter(function (BasePaymentInterface $payment) use ($state) {
+            return null === $state || $payment->getState() === $state;
         })->last();
 
         return $payment !== false ? $payment : null;

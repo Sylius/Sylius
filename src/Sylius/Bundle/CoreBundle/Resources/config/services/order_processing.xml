@@ -46,10 +46,14 @@
             <tag name="sylius.order_processor" priority="10"/>
         </service>
 
-        <service id="sylius.order_processing.order_payment_processor" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
-            <argument type="service" id="sylius.factory.payment"/>
-            <argument type="service" id="sylius.payment_method_resolver.default" />
+        <service id="sylius.order_processing.order_payment_processor.checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
+            <argument type="service" id="sylius.order_payment_provider" />
+            <argument>cart</argument>
             <tag name="sylius.order_processor" priority="0"/>
+        </service>
+        <service id="sylius.order_processing.order_payment_processor.after_checkout" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
+            <argument type="service" id="sylius.order_payment_provider" />
+            <argument>new</argument>
         </service>
     </services>
 </container>

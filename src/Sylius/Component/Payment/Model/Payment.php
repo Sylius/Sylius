@@ -45,7 +45,7 @@ class Payment implements PaymentInterface
     /**
      * @var string
      */
-    protected $state = PaymentInterface::STATE_NEW;
+    protected $state = PaymentInterface::STATE_CART;
 
     /**
      * @var CreditCardInterface

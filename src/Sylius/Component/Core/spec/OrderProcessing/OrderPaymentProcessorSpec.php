@@ -11,28 +11,24 @@
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor;
+use Sylius\Component\Core\Payment\Exception\NotProvidedOrderPaymentException;
+use Sylius\Component\Core\Payment\Provider\OrderPaymentProviderInterface;
+use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
-use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
-use Sylius\Component\Payment\Model\PaymentMethod;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class OrderPaymentProcessorSpec extends ObjectBehavior
 {
-    function let(
-        PaymentFactoryInterface $paymentFactory,
-        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
-    ) {
-        $this->beConstructedWith($paymentFactory, $defaultPaymentMethodResolver);
+    function let(OrderPaymentProviderInterface $orderPaymentProvider)
+    {
+        $this->beConstructedWith($orderPaymentProvider, PaymentInterface::STATE_CART);
     }
 
     function it_is_initializable()
@@ -45,161 +41,63 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         $this->shouldImplement(OrderProcessorInterface::class);
     }
 
-    function it_sets_default_payment_method_during_processing_if_order_has_not_payment_in_state_cancelled_failed_or_new(
-        PaymentFactoryInterface $paymentFactory,
-        PaymentInterface $payment,
-        OrderInterface $order,
-        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
-        PaymentMethod $paymentMethod
-    ) {
-        $payments = new ArrayCollection();
-        $order->getPayments()->willReturn($payments);
+    function it_throws_exception_if_passed_order_is_not_core_order(BaseOrderInterface $order)
+    {
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('process', [$order])
+        ;
+    }
 
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn(null);
-
-        $order->getTotal()->willReturn(1234);
-        $order->getCurrencyCode()->willReturn('EUR');
-        $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
-        $payment->setOrder($order);
-
-        $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->willReturn($paymentMethod);
-
-        $payment->setOrder($order)->shouldBeCalled();
-        $payment->setMethod($paymentMethod)->shouldBeCalled();
-        $order->addPayment($payment)->shouldBeCalled();
+    function it_does_nothing_if_the_order_is_cancelled(OrderInterface $order)
+    {
+        $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
+        $order->getLastPayment(Argument::any())->shouldNotBeCalled();
 
         $this->process($order);
     }
 
-    function it_sets_payment_method_from_last_cancelled_payment_during_processing(
-        PaymentFactoryInterface $paymentFactory,
-        PaymentInterface $payment,
-        PaymentInterface $cancelledPayment,
-        OrderInterface $order,
-        PaymentMethodInterface $paymentMethodFromLastCancelledPayment
-    ) {
-        $payments = new ArrayCollection();
-        $payments->add($cancelledPayment->getWrappedObject());
-        $order->getPayments()->willReturn($payments);
-
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn(null);
-
-        $order->getTotal()->willReturn(1234);
-        $order->getCurrencyCode()->willReturn('EUR');
-        $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
-
-        $cancelledPayment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
-        $cancelledPayment->getMethod()->willReturn($paymentMethodFromLastCancelledPayment);
-
-        $payment->setMethod($paymentMethodFromLastCancelledPayment)->shouldBeCalled();
-        $payment->setOrder($order)->shouldBeCalled();
-        $order->addPayment($payment)->shouldBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_sets_payment_method_from_last_failed_payment_during_processing(
-        PaymentFactoryInterface $paymentFactory,
-        PaymentInterface $payment,
-        PaymentInterface $failedPayment,
-        OrderInterface $order,
-        PaymentMethodInterface $paymentMethodFromLastFailedPayment
-    ) {
-        $payments = new ArrayCollection();
-        $payments->add($failedPayment->getWrappedObject());
-        $order->getPayments()->willReturn($payments);
-
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn(null);
-
-        $order->getTotal()->willReturn(1234);
-        $order->getCurrencyCode()->willReturn('EUR');
-        $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
-
-        $failedPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
-        $failedPayment->getMethod()->willReturn($paymentMethodFromLastFailedPayment);
-
-        $payment->setMethod($paymentMethodFromLastFailedPayment)->shouldBeCalled();
-        $payment->setOrder($order)->shouldBeCalled();
-        $order->addPayment($payment)->shouldBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_does_not_add_payment_during_processing_if_new_payment_already_exists(
-        PaymentFactoryInterface $paymentFactory,
-        PaymentInterface $newPaymentReadyToPay,
-        PaymentInterface $cancelledPayment,
-        PaymentInterface $payment,
-        OrderInterface $order
-    ) {
-        $payments = new ArrayCollection();
-        $payments->add($cancelledPayment);
-        $order->getPayments()->willReturn($payments);
-
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn($newPaymentReadyToPay);
-
-        $order->getTotal()->willReturn(1234);
-        $order->getCurrencyCode()->willReturn('EUR');
-        $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
-
-        $payment->setMethod($cancelledPayment)->shouldNotBeCalled();
-        $order->addPayment($payment)->shouldNotBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_does_not_add_payment_method_to_payment_when_default_method_resolver_throw_an_exception(
-        PaymentFactoryInterface $paymentFactory,
-        PaymentInterface $payment,
-        OrderInterface $order,
-        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
-    ) {
-        $payments = new ArrayCollection();
-        $order->getPayments()->willReturn($payments);
-
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn(null);
-
-        $order->getTotal()->willReturn(1234);
-        $order->getCurrencyCode()->willReturn('EUR');
-        $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
-
-        $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->shouldBeCalled();
-
-        $payment->setOrder($order)->shouldBeCalled();
-        $payment->setMethod(Argument::any())->shouldNotBeCalled();
-        $order->addPayment($payment)->shouldNotBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_sets_orders_total_on_payment_amount_when_payment_is_new(
+    function it_sets_last_order_currency_with_target_state_currency_code_and_amount(
         OrderInterface $order,
         PaymentInterface $payment
     ) {
-        $payments = new ArrayCollection();
-        $order->getPayments()->willReturn($payments);
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+        $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn($payment);
 
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getTotal()->willReturn(123);
-        $order->getCurrencyCode()->willReturn('EUR');
+        $order->getCurrencyCode()->willReturn('PLN');
+        $order->getTotal()->willReturn(1000);
 
-        $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
-        $order->getLastNewPayment()->willReturn($payment);
-
-        $payment->setAmount(123)->shouldBeCalled();
-        $payment->setCurrencyCode('EUR')->shouldBeCalled();
+        $payment->setCurrencyCode('PLN')->shouldBeCalled();
+        $payment->setAmount(1000)->shouldBeCalled();
 
         $this->process($order);
     }
 
-    function it_does_not_add_a_new_payment_if_the_order_is_cancelled(OrderInterface $order)
-    {
-        $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
+    function it_sets_provided_order_payment_if_it_is_not_null(
+        OrderInterface $order,
+        OrderPaymentProviderInterface $orderPaymentProvider,
+        PaymentInterface $payment
+    ) {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+        $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn(null);
+
+        $orderPaymentProvider->provideOrderPayment($order, PaymentInterface::STATE_CART)->willReturn($payment);
+        $order->addPayment($payment)->shouldBeCalled();
+
+        $this->process($order);
+    }
+
+    function it_does_not_set_order_payment_if_it_cannot_be_provided(
+        OrderInterface $order,
+        OrderPaymentProviderInterface $orderPaymentProvider
+    ) {
+        $order->getState()->willReturn(OrderInterface::STATE_CART);
+        $order->getLastPayment(PaymentInterface::STATE_CART)->willReturn(null);
+
+        $orderPaymentProvider
+            ->provideOrderPayment($order, PaymentInterface::STATE_CART)
+            ->willThrow(NotProvidedOrderPaymentException::class)
+        ;
         $order->addPayment(Argument::any())->shouldNotBeCalled();
 
         $this->process($order);
