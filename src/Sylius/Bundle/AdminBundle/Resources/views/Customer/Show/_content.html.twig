@@ -43,4 +43,7 @@
             </div>
         </div>
     </div>
+    <div class="six wide column" id="statistics">
+        {{ render(path('sylius_admin_customer_orders_statistics', {'customerId': customer.id})) }}
+    </div>
 </div>

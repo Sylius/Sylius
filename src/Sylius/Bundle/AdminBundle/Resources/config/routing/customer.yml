@@ -40,3 +40,11 @@ sylius_admin_customer_order_index:
                         $customerId: $id
                 templates:
                     breadcrumb: '@SyliusAdmin/Customer/Order/Index/_breadcrumb.html.twig'
+
+sylius_admin_customer_orders_statistics:
+    path: /orders-statistics
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer_statistics:renderAction
+        _sylius:
+            section: admin
