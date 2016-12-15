@@ -14,14 +14,15 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor;
+use Sylius\Component\Core\Resolver\DefaultPaymentMethodResolverInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethod;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -50,7 +51,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order,
         DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
-        PaymentMethod $paymentMethod
+        PaymentMethod $paymentMethod,
+        ChannelInterface $channel
     ) {
         $payments = new ArrayCollection();
         $order->getPayments()->willReturn($payments);
@@ -60,12 +62,11 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
+        $order->getChannel()->willReturn($channel);
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
-        $payment->setOrder($order);
 
-        $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->willReturn($paymentMethod);
+        $defaultPaymentMethodResolver->getDefaultPaymentMethodByChannel($channel)->willReturn($paymentMethod);
 
-        $payment->setOrder($order)->shouldBeCalled();
         $payment->setMethod($paymentMethod)->shouldBeCalled();
         $order->addPayment($payment)->shouldBeCalled();
 
@@ -77,7 +78,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         PaymentInterface $cancelledPayment,
         OrderInterface $order,
-        PaymentMethodInterface $paymentMethodFromLastCancelledPayment
+        PaymentMethodInterface $paymentMethodFromLastCancelledPayment,
+        ChannelInterface $channel
     ) {
         $payments = new ArrayCollection();
         $payments->add($cancelledPayment->getWrappedObject());
@@ -88,13 +90,13 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
+        $order->getChannel()->willReturn($channel);
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
 
         $cancelledPayment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
         $cancelledPayment->getMethod()->willReturn($paymentMethodFromLastCancelledPayment);
 
         $payment->setMethod($paymentMethodFromLastCancelledPayment)->shouldBeCalled();
-        $payment->setOrder($order)->shouldBeCalled();
         $order->addPayment($payment)->shouldBeCalled();
 
         $this->process($order);
@@ -105,7 +107,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         PaymentInterface $failedPayment,
         OrderInterface $order,
-        PaymentMethodInterface $paymentMethodFromLastFailedPayment
+        PaymentMethodInterface $paymentMethodFromLastFailedPayment,
+        ChannelInterface $channel
     ) {
         $payments = new ArrayCollection();
         $payments->add($failedPayment->getWrappedObject());
@@ -116,13 +119,13 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
+        $order->getChannel()->willReturn($channel);
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
 
         $failedPayment->getState()->willReturn(PaymentInterface::STATE_FAILED);
         $failedPayment->getMethod()->willReturn($paymentMethodFromLastFailedPayment);
 
         $payment->setMethod($paymentMethodFromLastFailedPayment)->shouldBeCalled();
-        $payment->setOrder($order)->shouldBeCalled();
         $order->addPayment($payment)->shouldBeCalled();
 
         $this->process($order);
@@ -156,7 +159,8 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
         PaymentFactoryInterface $paymentFactory,
         PaymentInterface $payment,
         OrderInterface $order,
-        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver
+        DefaultPaymentMethodResolverInterface $defaultPaymentMethodResolver,
+        ChannelInterface $channel
     ) {
         $payments = new ArrayCollection();
         $order->getPayments()->willReturn($payments);
@@ -166,11 +170,11 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
 
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
+        $order->getChannel()->willReturn($channel);
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
 
-        $defaultPaymentMethodResolver->getDefaultPaymentMethod($payment)->shouldBeCalled();
+        $defaultPaymentMethodResolver->getDefaultPaymentMethodByChannel($channel)->shouldBeCalled();
 
-        $payment->setOrder($order)->shouldBeCalled();
         $payment->setMethod(Argument::any())->shouldNotBeCalled();
         $order->addPayment($payment)->shouldNotBeCalled();
 

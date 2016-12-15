@@ -12,13 +12,13 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Resolver\DefaultPaymentMethodResolverInterface;
 use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Payment\Exception\UnresolvedDefaultPaymentMethodException;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Resolver\DefaultPaymentMethodResolverInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -81,7 +81,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
         /** @var $payment PaymentInterface */
         $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
 
-        $paymentMethod = $this->getDefaultPaymentMethod($payment, $order);
+        $paymentMethod = $this->getDefaultPaymentMethod($order);
         $lastPayment = $this->getLastPayment($order);
 
         if (null !== $lastPayment) {
@@ -99,7 +99,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     /**
      * @param OrderInterface $order
      *
-     * @return bool|PaymentInterface
+     * @return PaymentInterface|null
      */
     private function getLastPayment(OrderInterface $order)
     {
@@ -112,7 +112,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
      * @param OrderInterface $order
      * @param string $state
      *
-     * @return null|PaymentInterface
+     * @return PaymentInterface|null
      */
     private function getLastPaymentWithState(OrderInterface $order, $state)
     {
@@ -124,18 +124,14 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param PaymentInterface $payment
      * @param OrderInterface $order
      *
-     * @return null|PaymentMethodInterface
+     * @return PaymentMethodInterface|null
      */
-    private function getDefaultPaymentMethod(PaymentInterface $payment, OrderInterface $order)
+    private function getDefaultPaymentMethod(OrderInterface $order)
     {
         try {
-            $payment->setOrder($order);
-            $paymentMethod = $this->defaultPaymentMethodResolver->getDefaultPaymentMethod($payment);
-
-            return $paymentMethod;
+            return $this->defaultPaymentMethodResolver->getDefaultPaymentMethodByChannel($order->getChannel());
         } catch (UnresolvedDefaultPaymentMethodException $exception) {
             return null;
         }
