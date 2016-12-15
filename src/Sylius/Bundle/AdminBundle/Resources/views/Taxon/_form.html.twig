@@ -1,3 +1,5 @@
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationFormWithSlug %}
+
 <div class="ui segment">
     {{ form_errors(form) }}
     <div class="two fields">
@@ -9,20 +11,6 @@
         {% endif %}
     </div>
 </div>
-<div class="ui styled fluid accordion">
-    {% for locale, translationForm in form.translations %}
-        <div data-locale="{{ locale }}">
-            <div class="title{% if 0 == loop.index0 %} active{% endif %}">
-                <i class="dropdown icon"></i>
-                <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
-            </div>
-            <div class="content{% if 0 == loop.index0 %} active{% endif %}">
-                {{ form_row(translationForm.name) }}
-                {% include '@SyliusAdmin/Taxon/_slugField.html.twig' with { 'slugField': translationForm.slug } %}
-                {{ form_row(translationForm.description) }}
-            </div>
-        </div>
-    {% endfor %}
-</div>
+{{ translationFormWithSlug(form.translations, '@SyliusAdmin/Taxon/_slugField.html.twig', taxon) }}
 
 {% include '@SyliusAdmin/Taxon/_media.html.twig' %}
