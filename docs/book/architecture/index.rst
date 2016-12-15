@@ -13,5 +13,6 @@ that you need to notice.
     state_machine
     emails
     fixtures
+    events
 
 .. include:: /book/architecture/map.rst.inc

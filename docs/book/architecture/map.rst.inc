@@ -3,3 +3,4 @@
 * :doc:`/book/architecture/state_machine`
 * :doc:`/book/architecture/emails`
 * :doc:`/book/architecture/fixtures`
+* :doc:`/book/architecture/events`

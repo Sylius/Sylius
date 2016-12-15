@@ -77,6 +77,40 @@ The already set password of a **ShopUser** can be easily changed via the ``setPl
    $user->setPlainPassword('resu1');
    // the password will now be 'resu1' and will become encrypted while saving the user in the database
 
+
+Customer related events
+-----------------------
+
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+| Event id                                    | Description                                                                             |
++=============================================+=========================================================================================+
+|``sylius.customer.post_register``            | dispatched when a new Customer is registered                                            |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.customer.pre_update``               | dispatched when a Customer is updated                                                   |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.oauth_user.post_create``            | dispatched when an OAuthUser is created                                                 |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.oauth_user.post_update``            | dispatched when an OAuthUser is updated                                                 |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.shop_user.post_create``             | dispatched when a User is created                                                       |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.shop_user.post_update``             | dispatched when a User is updated                                                       |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.shop_user.pre_delete``              | dispatched before a User is deleted                                                     |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.user.email_verification.token``     | dispatched when a verification token is requested                                       |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.user.password_reset.request.token`` | dispatched when a reset password token is requested                                     |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.user.pre_password_change``          | dispatched before user password is changed                                              |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.user.pre_password_reset``           | dispatched before user password is reset                                                |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``sylius.user.security.implicit_login``      | dispatched when an implicit login is done                                               |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+|``security.interactive_login``               | dispatched when an interactive login is done                                            |
++---------------------------------------------+-----------------------------------------------------------------------------------------+
+
 Learn more
 ----------
 

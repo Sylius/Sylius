@@ -51,6 +51,7 @@ sylius_admin_order_payment_complete:
     defaults:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
         _sylius:
+            event: complete
             repository:
                 method: findOneByOrderId
                 arguments:
