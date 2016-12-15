@@ -39,11 +39,6 @@ final class PromotionRuleChoiceType extends AbstractType
         return ChoiceType::class;
     }
 
-    public function getName()
-    {
-        return 'sylius_promotion_rule_choice';
-    }
-
     /**
      * {@inheritdoc}
      */
