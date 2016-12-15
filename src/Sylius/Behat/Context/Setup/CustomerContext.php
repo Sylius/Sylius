@@ -80,7 +80,7 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given the store has customer :email
+     * @Given the store (also )has customer :email
      */
     public function theStoreHasCustomer($email)
     {

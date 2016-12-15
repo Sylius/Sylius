@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Customer;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
 use Webmozart\Assert\Assert;
 
@@ -155,6 +156,70 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasCustomerPlacedAnyOrders()
+    {
+        return null !== $this->getElement('statistics')->find('css', '.sylius-orders-overall-count');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOverallOrdersCount()
+    {
+        $overallOrders = $this
+            ->getElement('statistics')
+            ->find('css', '.sylius-orders-overall-count')
+            ->getText()
+        ;
+
+        return (int) preg_replace('/[^0-9]/', '',$overallOrders);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrdersCountInChannel($channelName)
+    {
+        $ordersCountStatistic = $this
+            ->getStatisticsForChannel($channelName)
+            ->find('css', '.sylius-orders-count')
+            ->getText()
+        ;
+
+        return (int) $this->getStatisticValue($ordersCountStatistic);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrdersTotalInChannel($channelName)
+    {
+        $ordersCountStatistic = $this
+            ->getStatisticsForChannel($channelName)
+            ->find('css', '.sylius-orders-total')
+            ->getText()
+        ;
+
+        return $this->getStatisticValue($ordersCountStatistic);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAverageTotalInChannel($channelName)
+    {
+        $averageTotalStatistic = $this
+            ->getStatisticsForChannel($channelName)
+            ->find('css', '.sylius-order-average-total')
+            ->getText()
+        ;
+
+        return $this->getStatisticValue($averageTotalStatistic);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getSuccessFlashMessage()
     {
         return trim($this->getElement('flash_message')->getText());
@@ -182,9 +247,52 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'group' => '.group',
             'impersonate_button' => '#impersonate',
             'no_account' => '#no-account',
+            'statistics' => '#statistics',
             'registration_date' => '#info .content .date',
             'subscribed_to_newsletter' => '#subscribed-to-newsletter',
             'verified_email' => '#verified-email',
         ]);
+    }
+
+    /**
+     * @param string $channelName
+     *
+     * @return NodeElement
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function getStatisticsForChannel($channelName)
+    {
+        $statisticsRibs = $this->getElement('statistics')->findAll('css', '.accordion > .title');
+
+        $statisticsRibs = array_filter($statisticsRibs, function (NodeElement $statistic) use ($channelName) {
+            return $channelName === trim($statistic->getText());
+        });
+
+        $actualStatisticsCount = count($statisticsRibs);
+        Assert::same(
+            1,
+            $actualStatisticsCount,
+            sprintf(
+                'Expected a single statistic for channel "%s", but %d were found.',
+                $channelName,
+                $actualStatisticsCount
+            )
+        );
+
+        $statisticsContents = $this->getElement('statistics')->findAll('css', '.accordion > .content');
+        $contentIndexes = array_keys($statisticsRibs);
+
+        return $statisticsContents[reset($contentIndexes)];
+    }
+
+    /**
+     * @param string $statistic
+     *
+     * @return string
+     */
+    private function getStatisticValue($statistic)
+    {
+        return trim(substr($statistic, strpos($statistic, ':') + 1));
     }
 }

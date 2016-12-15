@@ -359,9 +359,11 @@ final class OrderContext implements Context
             $this->checkoutUsing($order, $shippingMethod, clone $address, $paymentMethod);
             $this->applyPaymentTransitionOnOrder($order, PaymentTransitions::TRANSITION_COMPLETE);
 
-            $this->orderRepository->add($order);
+            $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);
         }
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -388,6 +390,34 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^(customer "[^"]+"|this customer) has(?:| also) placed (\d+) orders on the ("[^"]+" channel) in each buying (\d+) ("[^"]+" products?)$/
+     */
+    public function thisCustomerPlacedOrdersOnChannelBuyingProducts(
+        CustomerInterface $customer,
+        $orderCount,
+        ChannelInterface $channel,
+        $productCount,
+        ProductInterface $product
+    ) {
+        for ($i = 0; $i < $orderCount; $i++) {
+            $order = $this->createOrder($customer, uniqid('#'), $channel, $channel->getBaseCurrency()->getCode());
+
+            $this->addProductVariantsToOrderWithChannelPrice(
+                $order,
+                $channel,
+                $this->variantResolver->getVariant($product),
+                $productCount
+            );
+
+            $order->setState(OrderInterface::STATE_NEW);
+
+            $this->objectManager->persist($order);
+        }
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given :numberOfCustomers customers have added products to the cart for total of :total
      */
     public function customersHaveAddedProductsToTheCartForTotalOf($numberOfCustomers, $total)
@@ -411,8 +441,10 @@ final class OrderContext implements Context
 
             $order->addItem($item);
 
-            $this->orderRepository->add($order);
+            $this->objectManager->persist($order);
         }
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -441,9 +473,11 @@ final class OrderContext implements Context
 
             $order->addItem($item);
 
-            $this->orderRepository->add($order);
+            $this->objectManager->persist($order);
             $this->sharedStorage->set('order', $order);
         }
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -472,8 +506,10 @@ final class OrderContext implements Context
 
             $order->addItem($item);
 
-            $this->orderRepository->add($order);
+            $this->objectManager->persist($order);
         }
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -562,19 +598,39 @@ final class OrderContext implements Context
     {
         $order = $this->sharedStorage->get('order');
 
+        $this->addProductVariantsToOrderWithChannelPrice(
+            $order,
+            $this->sharedStorage->get('channel'),
+            $productVariant,
+            $quantity
+        );
+
+        return $order;
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param ChannelInterface $channel
+     * @param ProductVariantInterface $productVariant
+     * @param int $quantity
+     */
+    private function addProductVariantsToOrderWithChannelPrice(
+        OrderInterface $order,
+        ChannelInterface $channel,
+        ProductVariantInterface $productVariant,
+        $quantity = 1
+    ) {
         /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();
         $item->setVariant($productVariant);
 
         /** @var ChannelPricingInterface $channelPricing */
-        $channelPricing = $productVariant->getChannelPricingForChannel($this->sharedStorage->get('channel'));
+        $channelPricing = $productVariant->getChannelPricingForChannel($channel);
         $item->setUnitPrice($channelPricing->getPrice());
 
         $this->itemQuantityModifier->modify($item, $quantity);
 
         $order->addItem($item);
-
-        return $order;
     }
 
     /**
