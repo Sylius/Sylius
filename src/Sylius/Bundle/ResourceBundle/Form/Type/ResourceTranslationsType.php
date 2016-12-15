@@ -56,17 +56,6 @@ final class ResourceTranslationsType extends AbstractType implements EventSubscr
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefaults([
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
         return [
