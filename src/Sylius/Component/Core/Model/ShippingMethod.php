@@ -38,7 +38,7 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     /**
      * @var Collection
      */
-    private $channels;
+    protected $channels;
 
     public function __construct()
     {
