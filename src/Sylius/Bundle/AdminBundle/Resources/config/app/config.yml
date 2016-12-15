@@ -26,13 +26,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/taxon.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/zone.yml" }
 
-sylius_resource:
-    drivers:
-        - doctrine/orm
-
 sylius_grid:
-    drivers:
-        - doctrine/orm
     templates:
         action:
             default: "@SyliusUi/Grid/Action/default.html.twig"
