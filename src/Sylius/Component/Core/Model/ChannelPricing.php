@@ -16,7 +16,7 @@ use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ChannelPricing implements ChannelPricingInterface
+class ChannelPricing implements ChannelPricingInterface
 {
     /**
      * @var int
