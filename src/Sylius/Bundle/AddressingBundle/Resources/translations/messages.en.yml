@@ -32,8 +32,6 @@ sylius:
                 zone: Zone
             scope: Scope
             scopes:
-                shipping: Shipping
-                tax: Tax
                 all: All
             select: Select
             select_scope: Select scope

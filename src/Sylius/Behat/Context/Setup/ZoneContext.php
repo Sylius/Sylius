@@ -89,7 +89,6 @@ final class ZoneContext implements Context
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
         $zone->setCode('RoW');
         $zone->setName('The Rest of the World');
-        $zone->setScope(Scope::ALL);
 
         $this->zoneRepository->add($zone);
     }

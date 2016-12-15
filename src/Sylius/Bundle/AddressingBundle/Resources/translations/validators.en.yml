@@ -43,6 +43,8 @@ sylius:
             not_blank: Please enter province name.
             unique: Province name must be unique.
     zone:
+        scope:
+            not_blank: Please enter the scope.
         code:
             not_blank: Please enter zone code.
             regex: Zone code can only be comprised of letters, numbers, dashes and underscores.

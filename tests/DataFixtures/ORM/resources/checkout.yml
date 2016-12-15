@@ -143,7 +143,6 @@ Sylius\Component\Addressing\Model\Zone:
         code: EU
         name: European Union
         type: country
-        scope: "shipping"
         members: ["@member_NL", "@member_BE"]
 
 Sylius\Component\Addressing\Model\ZoneMember:

@@ -96,7 +96,6 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         $channel->setTaxCalculationStrategy('order_items_based')->shouldBeCalled();
 
         $zone->setCode('US')->shouldBeCalled();
-        $zone->setScope(Scope::ALL)->shouldBeCalled();
         $zone->setName('United States')->shouldBeCalled();
         $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
 
