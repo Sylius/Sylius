@@ -6,6 +6,9 @@ sylius_mailer:
         name: Example.com
         address: no-reply@example.com
     emails:
+        contact_request:
+            subject: sylius.emails.contact_request.subject
+            template: "SyliusCoreBundle:Email:contactRequest.html.twig"
         order_confirmation:
             subject: sylius.emails.order_confirmation.subject
             template: "SyliusCoreBundle:Email:orderConfirmation.html.twig"
