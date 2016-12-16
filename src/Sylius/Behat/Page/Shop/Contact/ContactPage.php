@@ -24,7 +24,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_shop_contact';
+        return 'sylius_shop_contact_request';
     }
 
     /**
@@ -45,7 +45,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
 
     public function send()
     {
-        $this->getDocument()->pressButton('sylius_send_button');
+        $this->getDocument()->pressButton('Send');
     }
 
     /**

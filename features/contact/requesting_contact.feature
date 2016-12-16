@@ -8,7 +8,7 @@ Feature: Requesting contact
         Given the store operates on a single channel in "United States"
         And this channel has contact email set as "contact@goodshop.com"
 
-    @ui @email @todo
+    @ui @email
     Scenario: Requesting contact as a logged in customer
         Given there is a user "lucifer@morningstar.com" identified by "devil"
         And I am logged in as "lucifer@morningstar.com"
@@ -19,7 +19,7 @@ Feature: Requesting contact
         And the email with contact request should be sent to "contact@goodshop.com"
 
 
-    @ui @email @todo
+    @ui @email
     Scenario: Requesting contact as a guest
         When I want to request contact
         And I specify the email as "lucifer@morningstar.com"

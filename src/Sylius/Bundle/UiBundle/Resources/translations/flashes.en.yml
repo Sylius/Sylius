@@ -4,6 +4,9 @@
 sylius:
     channel:
         delete_error: 'The channel cannot be deleted. At least one enabled channel is required.'
+    contact:
+        request_success: 'Your contact request has been submitted successfully.'
+        request_error: 'There was a problem with sending a contact request. Please try again later.'
     customer:
         add_address: 'Address has been successfully added.'
         impersonate: 'Successfully impersonated customer %name%.'

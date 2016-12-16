@@ -86,7 +86,7 @@ final class ContactContext implements Context
     public function iShouldBeNotifiedThatTheContactRequestHasBeenSubmittedSuccessfully()
     {
         $this->notificationChecker->checkNotification(
-            'Your request contact has been submitted successfully.',
+            'Your contact request has been submitted successfully.',
             NotificationType::success()
         );
     }
