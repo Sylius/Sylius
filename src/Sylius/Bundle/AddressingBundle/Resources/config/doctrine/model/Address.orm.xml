@@ -19,14 +19,28 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="firstName" column="first_name" type="string" />
-        <field name="lastName" column="last_name" type="string" />
+        <field name="firstName" column="first_name" type="string">
+            <gedmo:versioned/>
+        </field>
+        <field name="lastName" column="last_name" type="string">
+            <gedmo:versioned/>
+        </field>
 
-        <field name="phoneNumber" column="phone_number" type="string" nullable="true" />
-        <field name="street" column="street" type="string" />
-        <field name="company" column="company" type="string" nullable="true" />
-        <field name="city" column="city" type="string" />
-        <field name="postcode" column="postcode" type="string" />
+        <field name="phoneNumber" column="phone_number" type="string" nullable="true">
+            <gedmo:versioned/>
+        </field>
+        <field name="street" column="street" type="string">
+            <gedmo:versioned/>
+        </field>
+        <field name="company" column="company" type="string" nullable="true">
+            <gedmo:versioned/>
+        </field>
+        <field name="city" column="city" type="string">
+            <gedmo:versioned/>
+        </field>
+        <field name="postcode" column="postcode" type="string">
+            <gedmo:versioned/>
+        </field>
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
@@ -35,9 +49,17 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <field name="countryCode" column="country_code" type="string" />
-        <field name="provinceCode" column="province_code" type="string" nullable="true" />
-        <field name="provinceName" column="province_name" type="string" nullable="true" />
+        <field name="countryCode" column="country_code" type="string">
+            <gedmo:versioned/>
+        </field>
+        <field name="provinceCode" column="province_code" type="string" nullable="true">
+            <gedmo:versioned/>
+        </field>
+        <field name="provinceName" column="province_name" type="string" nullable="true">
+            <gedmo:versioned/>
+        </field>
+
+        <gedmo:loggable log-entry-class="Gedmo\Loggable\Entity\LogEntry"/>
     </mapped-superclass>
 
 </doctrine-mapping>
