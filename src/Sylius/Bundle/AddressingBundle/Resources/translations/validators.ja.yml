@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            not_blank: 都市を入力してください。
+        country:
+            not_blank: 国を選択してください。
+        first_name:
+            not_blank: 名を入力してください。
+        last_name:
+            not_blank: 姓を入力してください。
+        postcode:
+            not_blank: 郵便番号を入力してください。
+    country:
+        code:
+            not_blank: 国の ISO コードを入力してください。
