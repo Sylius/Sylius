@@ -55,6 +55,11 @@ interface ShowPageInterface extends PageInterface
     public function getName();
 
     /**
+     * @return string
+     */
+    public function getCurrentVariantName();
+
+    /**
      * @param string $url
      */
     public function visit($url);

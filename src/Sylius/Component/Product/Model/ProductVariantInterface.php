@@ -15,11 +15,16 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ProductVariantInterface extends TimestampableInterface, ResourceInterface, CodeAwareInterface
+interface ProductVariantInterface extends
+    TimestampableInterface,
+    ResourceInterface,
+    CodeAwareInterface,
+    TranslatableInterface
 {
     /**
      * @return string

@@ -12,6 +12,7 @@
 namespace Sylius\Component\Product\Repository;
 
 use Doctrine\ORM\QueryBuilder;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -26,4 +27,21 @@ interface ProductVariantRepositoryInterface extends RepositoryInterface
      * @return QueryBuilder
      */
     public function createQueryBuilderByProductId($productId);
+
+    /**
+     * @param string $name
+     * @param string $locale
+     *
+     * @return ProductVariantInterface[]
+     */
+    public function findByName($name, $locale);
+
+    /**
+     * @param string $name
+     * @param string $locale
+     * @param ProductInterface $product
+     *
+     * @return ProductVariantInterface[]
+     */
+    public function findByNameAndProduct($name, $locale, ProductInterface $product);
 }

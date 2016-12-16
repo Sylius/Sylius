@@ -23,6 +23,12 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 final class ProductVariantSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(ProductVariant::class);

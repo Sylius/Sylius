@@ -1,4 +1,4 @@
-{% import '@SyliusUi/Macro/flags.html.twig' as flags %}
+{% from '@SyliusAdmin/Macro/translationForm.html.twig' import translationForm %}
 
 <div class="ui two column stackable grid">
     <div class="column">
@@ -36,17 +36,6 @@
         </div>
     </div>
     <div class="column">
-        <div class="ui styled fluid accordion">
-            {% for locale, translationForm in form.translations %}
-                <div class="title{% if 0 == loop.index0 %} active{% endif %}">
-                    <i class="dropdown icon"></i>
-                    {{ flags.fromLocaleCode(locale) }} {{ locale|sylius_locale_name }}
-                </div>
-                <div class="content{% if 0 == loop.index0 %} active{% endif %}">
-                    {{ form_row(translationForm.name) }}
-                    {{ form_row(translationForm.description) }}
-                </div>
-            {% endfor %}
-        </div>
+        {{ translationForm(form.translations) }}
     </div>
 </div>

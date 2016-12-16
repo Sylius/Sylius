@@ -33,6 +33,7 @@ use Sylius\Component\Product\Model\ProductAttributeInterface;
 use Sylius\Component\Product\Model\ProductAttributeValueInterface;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
+use Sylius\Component\Product\Model\ProductVariantTranslationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
@@ -77,6 +78,11 @@ final class ProductContext implements Context
      * @var FactoryInterface
      */
     private $productVariantFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $productVariantTranslationFactory;
 
     /**
      * @var FactoryInterface
@@ -136,6 +142,7 @@ final class ProductContext implements Context
      * @param AttributeFactoryInterface $productAttributeFactory
      * @param FactoryInterface $attributeValueFactory
      * @param FactoryInterface $productVariantFactory
+     * @param FactoryInterface $productVariantTranslationFactory
      * @param FactoryInterface $channelPricingFactory
      * @param FactoryInterface $productOptionFactory
      * @param FactoryInterface $productOptionValueFactory
@@ -154,6 +161,7 @@ final class ProductContext implements Context
         AttributeFactoryInterface $productAttributeFactory,
         FactoryInterface $attributeValueFactory,
         FactoryInterface $productVariantFactory,
+        FactoryInterface $productVariantTranslationFactory,
         FactoryInterface $channelPricingFactory,
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
@@ -171,6 +179,7 @@ final class ProductContext implements Context
         $this->productAttributeFactory = $productAttributeFactory;
         $this->attributeValueFactory = $attributeValueFactory;
         $this->productVariantFactory = $productVariantFactory;
+        $this->productVariantTranslationFactory = $productVariantTranslationFactory;
         $this->channelPricingFactory = $channelPricingFactory;
         $this->productOptionFactory = $productOptionFactory;
         $this->productOptionValueFactory = $productOptionValueFactory;
@@ -353,6 +362,27 @@ final class ProductContext implements Context
             StringInflector::nameToUppercaseCode($productVariantName),
             (null !== $channel) ? $channel : $this->sharedStorage->get('channel')
         );
+    }
+
+    /**
+     * @Given /^(it|this product) has(?:| also) variant named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
+     */
+    public function itHasVariantNamedInAndIn(ProductInterface $product, $firstName, $firstLocale, $secondName, $secondLocale)
+    {
+        $productVariant = $this->createProductVariant(
+            $product,
+            $firstName,
+            100,
+            StringInflector::nameToUppercaseCode($firstName),
+            $this->sharedStorage->get('channel')
+        );
+
+        $names = [$firstName => $firstLocale, $secondName => $secondLocale];
+        foreach ($names as $name => $locale) {
+            $this->addProductVariantTranslation($productVariant, $name, $locale);
+        }
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -780,6 +810,7 @@ final class ProductContext implements Context
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setName($productName);
 
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');
@@ -840,6 +871,8 @@ final class ProductContext implements Context
      * @param int $price
      * @param string $code
      * @param ChannelInterface $channel
+     *
+     * @return ProductVariantInterface
      */
     private function createProductVariant(
         ProductInterface $product,
@@ -861,8 +894,9 @@ final class ProductContext implements Context
         $product->addVariant($variant);
 
         $this->objectManager->flush();
-
         $this->sharedStorage->set('variant', $variant);
+
+        return $variant;
     }
 
     /**
@@ -879,6 +913,21 @@ final class ProductContext implements Context
         $translation->setSlug($this->slugGenerator->generate($name));
 
         $product->addTranslation($translation);
+    }
+
+    /**
+     * @param ProductVariantInterface $productVariant
+     * @param string $name
+     * @param string $locale
+     */
+    private function addProductVariantTranslation(ProductVariantInterface $productVariant, $name, $locale)
+    {
+        /** @var ProductVariantTranslationInterface|TranslationInterface $translation */
+        $translation = $this->productVariantTranslationFactory->createNew();
+        $translation->setLocale($locale);
+        $translation->setName($name);
+
+        $productVariant->addTranslation($translation);
     }
 
     /**

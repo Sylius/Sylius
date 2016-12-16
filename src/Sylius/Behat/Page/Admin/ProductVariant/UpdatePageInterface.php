@@ -53,4 +53,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return string
      */
     public function getPriceForChannel($channelName);
+
+    /**
+     * @param string $language
+     *
+     * @return string
+     */
+    public function getNameInLanguage($language);
 }

@@ -46,8 +46,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     /**
      * @param string $name
+     * @param string $language
      */
-    public function nameIt($name);
+    public function nameItIn($name, $language);
 
     /**
      * @param string $optionName

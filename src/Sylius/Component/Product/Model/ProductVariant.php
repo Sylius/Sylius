@@ -14,6 +14,8 @@ namespace Sylius\Component\Product\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\TranslatableTrait;
+use Sylius\Component\Resource\Model\TranslationInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -21,6 +23,9 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 class ProductVariant implements ProductVariantInterface
 {
     use TimestampableTrait;
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
 
     /**
      * @var mixed
@@ -31,11 +36,6 @@ class ProductVariant implements ProductVariantInterface
      * @var string
      */
     protected $code;
-
-    /**
-     * @var string
-     */
-    protected $name;
 
     /**
      * @var ProductInterface
@@ -59,6 +59,7 @@ class ProductVariant implements ProductVariantInterface
 
     public function __construct()
     {
+        $this->initializeTranslationsCollection();
         $this->optionValues = new ArrayCollection();
 
         $this->createdAt = new \DateTime();
@@ -94,7 +95,7 @@ class ProductVariant implements ProductVariantInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->getTranslation()->getName();
     }
 
     /**
@@ -102,7 +103,7 @@ class ProductVariant implements ProductVariantInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->getTranslation()->setName($name);
     }
 
     /**
@@ -195,5 +196,13 @@ class ProductVariant implements ProductVariantInterface
     public function setAvailableUntil(\DateTime $availableUntil = null)
     {
         $this->availableUntil = $availableUntil;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new ProductVariantTranslation();
     }
 }
