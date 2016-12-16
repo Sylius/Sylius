@@ -6,6 +6,7 @@ sylius:
                     association_types: Association types
                     attributes: Attributes
                     header: Catalog
+                    inventory: Inventory
                     options: Options
                     products: Products
                     taxons: Taxons

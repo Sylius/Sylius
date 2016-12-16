@@ -86,6 +86,12 @@ final class MainMenuBuilder
         ;
 
         $catalog
+            ->addChild('inventory', ['route' => 'sylius_admin_inventory_index'])
+            ->setLabel('sylius.menu.admin.main.catalog.inventory')
+            ->setLabelAttribute('icon', 'history')
+        ;
+
+        $catalog
             ->addChild('attributes', ['route' => 'sylius_admin_product_attribute_index'])
             ->setLabel('sylius.menu.admin.main.catalog.attributes')
             ->setLabelAttribute('icon', 'cubes')

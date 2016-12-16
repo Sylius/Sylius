@@ -1,0 +1,15 @@
+sylius_admin_inventory_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_variant:indexAction
+        _sylius:
+            template: "@SyliusAdmin/Crud/index.html.twig"
+            grid: sylius_admin_inventory
+            section: admin
+            vars:
+                icon: history
+                templates:
+                    breadcrumb: "@SyliusAdmin/Inventory/Index/_breadcrumb.html.twig"
+                header: sylius.ui.inventory
+                subheader: sylius.ui.manage_inventory

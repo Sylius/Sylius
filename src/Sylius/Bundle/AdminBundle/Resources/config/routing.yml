@@ -40,6 +40,10 @@ sylius_admin_customer_group:
 sylius_admin_exchange_rate:
     resource: "@SyliusAdminBundle/Resources/config/routing/exchange_rate.yml"
 
+sylius_admin_inventory:
+    resource: "@SyliusAdminBundle/Resources/config/routing/inventory.yml"
+    prefix: /inventory/
+
 sylius_admin_locale:
     resource: "@SyliusAdminBundle/Resources/config/routing/locale.yml"
 
