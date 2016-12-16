@@ -610,6 +610,7 @@ final class ProductContext implements Context
         $variant->addOptionValue($optionValue);
         $variant->addChannelPricing($this->createChannelPricingForChannel($price, $this->sharedStorage->get('channel')));
         $variant->setCode(sprintf("%s_%s", $product->getCode(), $optionValueName));
+        $variant->setName($product->getName());
 
         $product->addVariant($variant);
         $this->objectManager->flush();
@@ -810,7 +811,6 @@ final class ProductContext implements Context
 
         /** @var ProductVariantInterface $productVariant */
         $productVariant = $this->defaultVariantResolver->getVariant($product);
-        $productVariant->setName($productName);
 
         if (null === $channel && $this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');

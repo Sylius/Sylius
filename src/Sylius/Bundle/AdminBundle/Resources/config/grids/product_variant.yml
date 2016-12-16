@@ -7,8 +7,7 @@ sylius_grid:
                     class: "%sylius.model.product_variant.class%"
                     repository:
                         method: createQueryBuilderByProductId
-                        arguments:
-                            productId: $productId
+                        arguments: ["%locale%", $productId]
             fields:
                 name:
                     type: twig
@@ -33,7 +32,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                     options:
-                        fields: [name]
+                        fields: [translation.name]
             actions:
                 main:
                     generate:

@@ -22,11 +22,14 @@ class ProductVariantRepository extends BaseProductVariantRepository implements P
     /**
      * {@inheritdoc}
      */
-    public function createInventoryListQueryBuilder()
+    public function createInventoryListQueryBuilder($locale)
     {
         return $this
             ->createQueryBuilder('o')
-            ->where('o.tracked = true')
+            ->leftJoin('o.translations', 'translation')
+            ->andWhere('translation.locale = :locale')
+            ->andWhere('o.tracked = true')
+            ->setParameter('locale', $locale)
         ;
     }
 }
