@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\EmailManager;
 
 use Sylius\Bundle\CoreBundle\Mailer\Emails;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 /**
@@ -27,45 +25,19 @@ final class ContactEmailManager
     private $emailSender;
 
     /**
-     * @var ChannelContextInterface
-     */
-    private $channelContext;
-
-    /**
      * @param SenderInterface $emailSender
-     * @param ChannelContextInterface $channelContext
      */
-    public function __construct(SenderInterface $emailSender, ChannelContextInterface $channelContext)
+    public function __construct(SenderInterface $emailSender)
     {
         $this->emailSender = $emailSender;
-        $this->channelContext = $channelContext;
     }
 
     /**
      * @param array $data
-     *
-     * @return bool
+     * @param array $recipients
      */
-    public function sendContactRequest(array $data)
+    public function sendContactRequest(array $data, array $recipients)
     {
-        /** @var ChannelInterface $channel */
-        $channel = $this->channelContext->getChannel();
-
-        $contactEmail = $channel->getContactEmail();
-        if (null === $contactEmail) {
-            return false;
-        }
-
-        $this->emailSender->send(
-            Emails::CONTACT_REQUEST,
-            [
-                $contactEmail,
-            ],
-            [
-                'data' => $data,
-            ]
-        );
-
-        return true;
+        $this->emailSender->send(Emails::CONTACT_REQUEST, $recipients, ['data' => $data]);
     }
 }

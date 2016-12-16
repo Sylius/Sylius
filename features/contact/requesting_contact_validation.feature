@@ -2,7 +2,7 @@
 Feature: Requesting contact validation
     In order to avoid making mistakes when requesting contact
     As a Customer
-    I want to be prevented from making mistakes in my email address
+    I want to be prevented from making mistakes in my contact request
 
     Background:
         Given the store operates on a single channel in "United States"
@@ -41,4 +41,4 @@ Feature: Requesting contact validation
         And I specify the email as "lucifer@morningstar.com"
         And I specify the message as "Hi! I did not receive an item!"
         And I try to send it
-        Then I should be notified that there was a problem with sending a contact request
+        Then I should be notified that a problem occured while sending the contact request

@@ -104,24 +104,24 @@ final class ContactContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the (email) is invalid$/
+     * @Then I should be notified that the email is invalid
      */
-    public function iShouldBeNotifiedThatElementIsInvalid($element)
+    public function iShouldBeNotifiedThatEmailIsInvalid()
     {
         $this->assertFieldValidationMessage(
             $this->contactPage,
-            $element,
-            sprintf('This %s is invalid.', $element)
+            'email',
+            'This email is invalid.'
         );
     }
 
     /**
-     * @Then /^I should be notified that there was a problem with sending a contact request$/
+     * @Then I should be notified that a problem occured while sending the contact request
      */
-    public function iShouldBeNotifiedThatThereWasAProblemWithSendingAContactRequest()
+    public function iShouldBeNotifiedThatAProblemOccuredWhileSendingTheContactRequest()
     {
         $this->notificationChecker->checkNotification(
-            'There was a problem with sending a contact request. Please try again later.',
+            'A problem occurred while sending the contact request. Please try again later.',
             NotificationType::failure()
         );
     }
@@ -133,9 +133,12 @@ final class ContactContext implements Context
      */
     private function assertFieldValidationMessage(PageInterface $page, $element, $expectedMessage)
     {
-        Assert::true(
-            $page->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('There should be a message: "%s".', $expectedMessage)
+        $currentMessage = $page->getValidationMessageFor($element);
+
+        Assert::same(
+            $currentMessage,
+            $expectedMessage,
+            'There is a message: "%s", but should be: "%s".'
         );
     }
 }

@@ -7,5 +7,4 @@ sylius_shop_contact_request:
     defaults:
         _controller: sylius.controller.shop.contact:requestAction
         _sylius:
-            template: "@SyliusShop/Contact/request.html.twig"
             redirect: sylius_shop_homepage

@@ -13,8 +13,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EmailManager;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\EmailManager\ContactEmailManager;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Mailer\Sender\SenderInterface;
 
 /**
@@ -22,9 +20,9 @@ use Sylius\Component\Mailer\Sender\SenderInterface;
  */
 final class ContactEmailManagerSpec extends ObjectBehavior
 {
-    function let(SenderInterface $sender, ChannelContextInterface $channelContext)
+    function let(SenderInterface $sender)
     {
-        $this->beConstructedWith($sender, $channelContext);
+        $this->beConstructedWith($sender);
     }
 
     function it_is_initializable()
@@ -32,14 +30,8 @@ final class ContactEmailManagerSpec extends ObjectBehavior
         $this->shouldHaveType(ContactEmailManager::class);
     }
 
-    function it_sends_a_contact_request_email(
-        SenderInterface $sender,
-        ChannelContextInterface $channelContext,
-        ChannelInterface $channel
-    ) {
-        $channelContext->getChannel()->willReturn($channel);
-        $channel->getContactEmail()->willReturn('contact@example.com');
-
+    function it_sends_a_contact_request_email(SenderInterface $sender)
+    {
         $sender
             ->send(
                 'contact_request',
@@ -55,27 +47,13 @@ final class ContactEmailManagerSpec extends ObjectBehavior
         ;
 
         $this
-            ->sendContactRequest([
-                'email' => 'customer@example.com',
-                'message' => 'Hello!',
-            ])
-            ->shouldReturn(true);
-        ;
-    }
-
-    function it_does_not_send_a_contact_request_email_when_channel_has_no_contact_email_set(
-        ChannelContextInterface $channelContext,
-        ChannelInterface $channel
-    ) {
-        $channelContext->getChannel()->willReturn($channel);
-        $channel->getContactEmail()->willReturn(null);
-
-        $this
-            ->sendContactRequest([
-                'email' => 'customer@example.com',
-                'message' => 'Hello!',
-            ])
-            ->shouldReturn(false);
+            ->sendContactRequest(
+                [
+                    'email' => 'customer@example.com',
+                    'message' => 'Hello!',
+                ],
+                ['contact@example.com']
+            )
         ;
     }
 }

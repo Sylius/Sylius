@@ -15,7 +15,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
- * @author Grzegorz Sadowski <grzegorz.sadowksi@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ContactPage extends SymfonyPage implements ContactPageInterface
 {
@@ -53,7 +53,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
      *
      * @throws ElementNotFoundException
      */
-    public function checkValidationMessageFor($element, $message)
+    public function getValidationMessageFor($element)
     {
         $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
 
@@ -64,7 +64,7 @@ class ContactPage extends SymfonyPage implements ContactPageInterface
             ;
         }
 
-        return $message === $errorLabel->getText();
+        return $errorLabel->getText();
     }
 
     /**

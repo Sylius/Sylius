@@ -11,13 +11,13 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -26,19 +26,6 @@ use Symfony\Component\Validator\Constraints\NotBlank;
  */
 final class ContactType extends AbstractType
 {
-    /**
-     * @var CustomerContextInterface
-     */
-    private $customerContext;
-
-    /**
-     * @param CustomerContextInterface $customerContext
-     */
-    public function __construct(CustomerContextInterface $customerContext)
-    {
-        $this->customerContext = $customerContext;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -64,18 +51,29 @@ final class ContactType extends AbstractType
                     ]),
                 ],
             ])
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-                $customer = $this->customerContext->getCustomer();
-
-                if (null === $customer) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($options) {
+                $email = $options['email'];
+                if (null === $email) {
                     return;
                 }
 
                 $data = $event->getData();
-                $data['email'] = $customer->getEmail();
+                $data['email'] = $email;
 
                 $event->setData($data);
             })
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefaults([
+                'email' => null,
+            ])
         ;
     }
 

@@ -32,9 +32,8 @@ interface ContactPageInterface extends PageInterface
 
     /**
      * @param string $element
-     * @param string $message
      *
-     * @return bool
+     * @return string
      */
-    public function checkValidationMessageFor($element, $message);
+    public function getValidationMessageFor($element);
 }

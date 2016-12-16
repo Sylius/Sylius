@@ -35,7 +35,7 @@ final class ChannelSpec extends ObjectBehavior
         $this->shouldImplement(ChannelInterface::class);
     }
 
-    function it_extends_an_channel()
+    function it_extends_a_channel()
     {
         $this->shouldHaveType(BaseChannel::class);
     }
@@ -84,36 +84,38 @@ final class ChannelSpec extends ObjectBehavior
         $this->getTaxCalculationStrategy()->shouldReturn($taxCalculationStrategy);
     }
 
-    function it_initializes_currencies_collection_by_default()
+    function it_has_an_empty_collection_of_currencies_by_default()
     {
         $this->getCurrencies()->shouldHaveType(Collection::class);
+        $this->getCurrencies()->count()->shouldReturn(0);
     }
 
-    function it_adds_a_currency(CurrencyInterface $currency)
+    function it_can_have_a_currency_added(CurrencyInterface $currency)
     {
         $this->addCurrency($currency);
         $this->hasCurrency($currency)->shouldReturn(true);
     }
 
-    function it_removes_a_currency(CurrencyInterface $currency)
+    function it_can_have_a_currency_removed(CurrencyInterface $currency)
     {
         $this->addCurrency($currency);
         $this->removeCurrency($currency);
         $this->hasCurrency($currency)->shouldReturn(false);
     }
 
-    function it_initializes_locales_collection_by_default()
+    function it_has_an_empty_collection_of_locales_by_default()
     {
         $this->getLocales()->shouldHaveType(Collection::class);
+        $this->getLocales()->count()->shouldReturn(0);
     }
 
-    function it_adds_a_locale(LocaleInterface $locale)
+    function it_can_have_a_locale_added(LocaleInterface $locale)
     {
         $this->addLocale($locale);
         $this->hasLocale($locale)->shouldReturn(true);
     }
 
-    function it_removes_a_locale(LocaleInterface $locale)
+    function it_can_have_a_locale_removed(LocaleInterface $locale)
     {
         $this->addLocale($locale);
         $this->removeLocale($locale);
