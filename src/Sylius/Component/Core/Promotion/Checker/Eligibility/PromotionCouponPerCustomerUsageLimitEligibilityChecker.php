@@ -55,7 +55,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityChecker implements Pr
         }
 
         $customer = $promotionSubject->getCustomer();
-        if ($customer === null) {
+        if ($customer === null || $customer->getId() === null) {
             return true;
         }
 
