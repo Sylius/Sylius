@@ -47,6 +47,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends O
         CorePromotionCouponInterface $promotionCoupon,
         CustomerInterface $customer
     ) {
+        $customer->getId()->willReturn(1);
         $promotionSubject->getCustomer()->willReturn($customer);
         $promotionCoupon->getPerCustomerUsageLimit()->willReturn(42);
 
@@ -61,6 +62,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends O
         CorePromotionCouponInterface $promotionCoupon,
         CustomerInterface $customer
     ) {
+        $customer->getId()->willReturn(1);
         $promotionSubject->getCustomer()->willReturn($customer);
         $promotionCoupon->getPerCustomerUsageLimit()->willReturn(42);
 
