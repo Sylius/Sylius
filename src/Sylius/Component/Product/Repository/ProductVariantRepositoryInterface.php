@@ -22,11 +22,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ProductVariantRepositoryInterface extends RepositoryInterface
 {
     /**
+     * @param string $locale
      * @param mixed $productId
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilderByProductId($productId);
+    public function createQueryBuilderByProductId($locale, $productId);
 
     /**
      * @param string $name

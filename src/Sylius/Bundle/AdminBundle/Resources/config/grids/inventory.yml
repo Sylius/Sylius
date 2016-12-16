@@ -7,6 +7,7 @@ sylius_grid:
                     class: "%sylius.model.product_variant.class%"
                     repository:
                         method: createInventoryListQueryBuilder
+                        arguments: ["%locale%"]
             fields:
                 name:
                     type: twig
@@ -31,7 +32,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                     options:
-                        fields: [name]
+                        fields: [translation.name]
             actions:
                 item:
                     update_product:
