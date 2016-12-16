@@ -53,6 +53,9 @@ final class ResourcesCollectionProvider implements ResourcesCollectionProviderIn
             $resources->setMaxPerPage($requestConfiguration->getPaginationMaxPerPage());
             $resources->setCurrentPage($request->query->get('page', 1));
 
+            // This prevents Pagerfanta from querying database from a template
+            $resources->getCurrentPageResults();
+
             if (!$requestConfiguration->isHtmlRequest()) {
                 $route = new Route($request->attributes->get('_route'), array_merge($request->attributes->get('_route_params'), $request->query->all()));
 
