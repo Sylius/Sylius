@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\Admin\Order\HistoryPageInterface;
 use Sylius\Behat\Page\Admin\Order\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Order\UpdatePageInterface;
@@ -52,6 +53,11 @@ final class ManagingOrdersContext implements Context
     private $updatePage;
 
     /**
+     * @var HistoryPageInterface
+     */
+    private $historyPage;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -66,6 +72,7 @@ final class ManagingOrdersContext implements Context
      * @param IndexPageInterface $indexPage
      * @param ShowPageInterface $showPage
      * @param UpdatePageInterface $updatePage
+     * @param HistoryPageInterface $historyPage
      * @param NotificationCheckerInterface $notificationChecker
      * @param SharedSecurityServiceInterface $sharedSecurityService
      */
@@ -74,6 +81,7 @@ final class ManagingOrdersContext implements Context
         IndexPageInterface $indexPage,
         ShowPageInterface $showPage,
         UpdatePageInterface $updatePage,
+        HistoryPageInterface $historyPage,
         NotificationCheckerInterface $notificationChecker,
         SharedSecurityServiceInterface $sharedSecurityService
     ) {
@@ -81,6 +89,7 @@ final class ManagingOrdersContext implements Context
         $this->indexPage = $indexPage;
         $this->showPage = $showPage;
         $this->updatePage = $updatePage;
+        $this->historyPage = $historyPage;
         $this->notificationChecker = $notificationChecker;
         $this->sharedSecurityService = $sharedSecurityService;
     }
@@ -92,6 +101,14 @@ final class ManagingOrdersContext implements Context
     public function iBrowseOrders()
     {
         $this->indexPage->open();
+    }
+
+    /**
+     * @When I browse order's :order history
+     */
+    public function iBrowseOrderHistory(OrderInterface $order)
+    {
+        $this->historyPage->open(['id' => $order->getId()]);
     }
 
     /**
@@ -948,6 +965,17 @@ final class ManagingOrdersContext implements Context
                 sprintf('The order with total "%s" has not been found.', $total)
             );
         });
+    }
+
+    /**
+     * @Then there should be :count changes in the registry
+     */
+    public function thereShouldBeCountChangesInTheRegistry($count)
+    {
+        Assert::same(
+            (int) $count,
+            $this->historyPage->countChanges()
+        );
     }
 
     /**

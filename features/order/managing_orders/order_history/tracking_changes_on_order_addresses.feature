@@ -11,22 +11,21 @@ Feature: Tracking changes on order addresses
         And the store has a product "Italian suit" priced at "$4000.00"
         And there is a customer "barney@stinson.com" that placed an order "#00000001"
         And the customer bought a single "Italian suit"
+        When I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Browsing order's addresses history after changing it by customer
-        Given the customer "Barney Stinson" addressed it to "East 84st Street and 3rd Avenue", "10118" "New York" in the "United States"
+        Given the customer "Barney Stinson" addressed it to "East 84st Street and 3rd Avenue", "10118" "New York" in the "United States" with identical billing address
         And the customer changed shipping address' street to "211 Madison Avenue"
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
-        When I am logged in as an administrator
-        And I browse order "#00000001" historyg
-        Then there should be two changes in the registry
+        When I browse order's "#00000001" history
+        Then there should be 2 changes in the registry
 
-    @ui @todo
+    @ui
     Scenario: Browsing order's addresses history after changing it by administrator
-        Given the customer "Barney Stinson" addressed it to "East 84st Street and 3rd Avenue", "10118" "New York" in the "United States"
+        Given the customer "Barney Stinson" addressed it to "East 84st Street and 3rd Avenue", "10118" "New York" in the "United States" with identical billing address
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
-        When I am logged in as an administrator
-        And I want to modify a customer's shipping address of this order
+        When I want to modify a customer's shipping address of this order
         And I specify their shipping address as "New York", "150 W. 85th Street", "10028", "United States" for "Ted Mosby"
-        And I browse order "#00000001" history
-        Then there should be two changes in the registry
+        And I browse order's "#00000001" history
+        Then there should be 2 changes in the registry

@@ -16,6 +16,7 @@
         <parameter key="sylius.behat.page.admin.order.index.class">Sylius\Behat\Page\Admin\Order\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.order.show.class">Sylius\Behat\Page\Admin\Order\ShowPage</parameter>
         <parameter key="sylius.behat.page.admin.order.update.class">Sylius\Behat\Page\Admin\Order\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.order.history.class">Sylius\Behat\Page\Admin\Order\HistoryPage</parameter>
     </parameters>
 
     <services>
@@ -28,5 +29,6 @@
         <service id="sylius.behat.page.admin.order.update" class="%sylius.behat.page.admin.order.update.class%" parent="sylius.behat.page.admin.crud.update" public="false">
             <argument type="string">sylius_admin_order_update</argument>
         </service>
+        <service id="sylius.behat.page.admin.order.history" class="%sylius.behat.page.admin.order.history.class%" parent="sylius.behat.symfony_page" />
     </services>
 </container>
