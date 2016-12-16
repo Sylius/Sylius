@@ -191,3 +191,20 @@
         {% endfor %}
     </div>
 {%- endblock sylius_translations_row %}
+
+{% block sylius_resource_autocomplete_choice_row %}
+    {{- form_label(form) -}}
+    <div
+            class="sylius-autocomplete ui fluid search selection dropdown {% if multiple %}multiple{% endif %}"
+            data-url="{{ remote_url }}"
+            data-choice-name="{{ choice_name }}"
+            data-choice-value="{{ choice_value }}"
+            data-criteria-type="{{ remote_criteria_type }}"
+            data-criteria-name="{{ remote_criteria_name }}"
+    >
+        {{ form_row(form, {'attr': {'class' : 'autocomplete'}}) }}
+        <i class="dropdown icon"></i>
+        <div class="default text">{% if placeholder is defined %} {{ placeholder|trans }} {% endif %}</div>
+        <div class="menu"></div>
+    </div>
+{% endblock %}

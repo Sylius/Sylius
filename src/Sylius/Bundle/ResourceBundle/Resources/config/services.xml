@@ -15,6 +15,7 @@
     <imports>
         <import resource="services/console.xml" />
         <import resource="services/controller.xml" />
+        <import resource="services/form.xml" />
         <import resource="services/routing.xml" />
     </imports>
 
@@ -41,6 +42,11 @@
 
         <service id="sylius.form.extension.type.collection" class="Sylius\Bundle\ResourceBundle\Form\Extension\CollectionTypeExtension">
             <tag name="form.type_extension" extended-type="Symfony\Component\Form\Extension\Core\Type\CollectionType" />
+        </service>
+
+        <service id="sylius.registry.resource_repository" class="Sylius\Component\Registry\ServiceRegistry" public="false">
+            <argument>Sylius\Component\Resource\Repository\RepositoryInterface</argument>
+            <argument>resource repository</argument>
         </service>
     </services>
 </container>

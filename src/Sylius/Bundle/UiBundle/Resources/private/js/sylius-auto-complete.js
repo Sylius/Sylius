@@ -11,28 +11,36 @@
     'use strict';
 
     $.fn.extend({
-        taxonAutoComplete: function () {
-            $(this).dropdown({
+        autoComplete: function () {
+            var element = $(this);
+            var criteriaType = $(this).data('criteria-type');
+            var criteriaName = $(this).data('criteria-name');
+
+            element.dropdown({
                 delay: {
-                    search: 250,
+                    search: 250
                 },
+                forceSelection: false,
                 apiSettings: {
                     dataType: 'JSON',
                     cache: false,
                     data: {
-                        criteria: { name: { type: 'contains', value: '' } }
+                        criteria: {}
                     },
                     beforeSend: function(settings) {
-                        settings.data.criteria.name.value = settings.urlData.query;
+                        settings.data.criteria[criteriaName] = {type: criteriaType, value: ''};
+                        settings.data.criteria[criteriaName].value = settings.urlData.query;
 
                         return settings;
                     },
                     onResponse: function (response) {
+                        var choiceName = element.data('choice-name');
+                        var choiceValue = element.data('choice-value');
                         var myResults = [];
                         $.each(response._embedded.items, function (index, item) {
                             myResults.push({
-                                name: item.name,
-                                value: item.id
+                                name: item[choiceName],
+                                value: item[choiceValue]
                             });
                         });
 

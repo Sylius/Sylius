@@ -18,7 +18,9 @@
             $('#user-form').toggle();
         });
 
-        $('.taxon-select.ui.fluid.search.selection.dropdown').taxonAutoComplete('get taxons');
+        $.each($('.sylius-autocomplete'), function (index, element) {
+            $(element).autoComplete();
+        });
         $('.product-select.ui.fluid.multiple.search.selection.dropdown').productAutoComplete();
         $('div#attributeChoice > .ui.dropdown.search').productAttributes();
 

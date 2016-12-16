@@ -56,7 +56,7 @@ final class ResourceToIdentifierTransformerSpec extends ObjectBehavior
     {
         $repository->getClassName()->willReturn(ResourceInterface::class);
 
-        $this->transform(null)->shouldReturn('');
+        $this->transform(null)->shouldReturn(null);
     }
 
     function it_transforms_resource_in_identifier(RepositoryInterface $repository, ResourceInterface $resource)
