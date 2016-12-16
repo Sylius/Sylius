@@ -15,6 +15,7 @@ use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\CompositeChannelCon
 use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\CompositeRequestResolverPass;
 use Sylius\Bundle\ChannelBundle\DependencyInjection\Compiler\RegisterChannelFactoryPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
+use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterResourceRepositoryPass;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -42,6 +43,7 @@ final class SyliusChannelBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new CompositeChannelContextPass());
         $container->addCompilerPass(new CompositeRequestResolverPass());
+        $container->addCompilerPass(new RegisterResourceRepositoryPass());
     }
 
     /**

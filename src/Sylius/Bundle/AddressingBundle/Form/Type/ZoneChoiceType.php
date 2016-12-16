@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,27 +23,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 final class ZoneChoiceType extends AbstractType
 {
     /**
-     * @var RepositoryInterface
-     */
-    protected $zoneRepository;
-
-    /**
-     * @param RepositoryInterface $zoneRepository
-     */
-    public function __construct(RepositoryInterface $zoneRepository)
-    {
-        $this->zoneRepository = $zoneRepository;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'choices' => function (Options $options) {
-                return $this->zoneRepository->findAll();
+            'function' => function (RepositoryInterface $repository, Options $options) {
+                return $repository->findAll();
             },
+            'resource' => 'sylius.zone',
             'choice_value' => 'code',
             'choice_label' => 'name',
             'choice_translation_domain' => false,
@@ -57,7 +45,7 @@ final class ZoneChoiceType extends AbstractType
      */
     public function getParent()
     {
-        return ChoiceType::class;
+        return ResourceChoiceType::class;
     }
 
     /**

@@ -31,11 +31,6 @@
             <tag name="form.type" />
         </service>
 
-        <service id="sylius.form.type.country_choice" class="Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType">
-            <argument type="service" id="sylius.repository.country" />
-            <tag name="form.type" />
-        </service>
-
         <service id="sylius.form.type.country_code_choice" class="Sylius\Bundle\AddressingBundle\Form\Type\CountryCodeChoiceType">
             <argument type="service" id="sylius.repository.country" />
             <tag name="form.type" />
@@ -44,11 +39,6 @@
         <service id="sylius.form.type.province" class="Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType">
             <argument>%sylius.model.province.class%</argument>
             <argument type="collection"><argument>sylius</argument></argument>
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.province_choice" class="Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType">
-            <argument type="service" id="sylius.repository.province" />
             <tag name="form.type" />
         </service>
 
@@ -61,11 +51,6 @@
             <argument>%sylius.model.zone.class%</argument>
             <argument type="collection"><argument>sylius</argument></argument>
             <argument>%sylius.scope.zone%</argument>
-            <tag name="form.type" />
-        </service>
-
-        <service id="sylius.form.type.zone_choice" class="Sylius\Bundle\AddressingBundle\Form\Type\ZoneChoiceType">
-            <argument type="service" id="sylius.repository.zone" />
             <tag name="form.type" />
         </service>
 
