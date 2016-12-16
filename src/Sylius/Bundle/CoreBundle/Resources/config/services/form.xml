@@ -197,6 +197,11 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius.form.type.contact" class="Sylius\Bundle\CoreBundle\Form\Type\ContactType">
+            <argument type="service" id="sylius.context.customer" />
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.event_subscriber.channel_pricing" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\ChannelPricingsFormSubscriber">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.factory.channel_pricing" />
