@@ -31,6 +31,60 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
+    public function countProductsItems()
+    {
+        $productsList = $this->getDocument()->find('css', '#products');
+
+        $products = $productsList->findAll('css', '.column > .card');
+
+        return count($products);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFirstProductNameFromList()
+    {
+        $productsList = $this->getDocument()->find('css', '#products');
+
+        return $productsList->find('css', '.column:first-child .content > a')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastProductNameFromList()
+    {
+        $productsList = $this->getDocument()->find('css', '#products');
+
+        return $productsList->find('css', '.column:last-child .content > a')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function search($name)
+    {
+        $this->getDocument()->fillField('criteria_search_value', $name);
+        $this->getDocument()->pressButton('Search');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sort($order)
+    {
+        $this->getDocument()->clickLink($order);
+    }
+
+    public function clearFilter()
+    {
+        $this->getDocument()->clickLink('Clear');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isProductOnList($productName)
     {
         return null !== $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
@@ -57,45 +111,9 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function countProductsItems()
-    {
-        $productsList = $this->getDocument()->find('css', '#products');
-        
-        $products = $productsList->findAll('css', '.column > .card');
-        
-        return count($products);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isProductOnPageWithName($name)
     {
         return null !== $this->getDocument()->find('css', sprintf('.content > a:contains("%s")', $name));
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFirstProductNameFromList()
-    {
-        $productsList = $this->getDocument()->find('css', '#products');
-
-        return $productsList->find('css', '.content > a')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function search($name)
-    {
-        $this->getDocument()->fillField('criteria_search_value', $name);
-        $this->getDocument()->pressButton('Search');
-    }
-
-    public function clearFilter()
-    {
-        $this->getDocument()->clickLink('Clear');
     }
 
     /**

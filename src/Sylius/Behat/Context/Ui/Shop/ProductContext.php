@@ -45,7 +45,7 @@ final class ProductContext implements Context
     /**
      * @param ShowPageInterface $showPage
      * @param IndexPageInterface $indexPage
-     * @param IndexPageInterface $productReviewsIndexPage
+     * @param ProductReviewIndexPageInterface $productReviewsIndexPage
      */
     public function __construct(
         ShowPageInterface $showPage,
@@ -200,6 +200,22 @@ final class ProductContext implements Context
     public function iSearchForProductsWithName($name)
     {
         $this->indexPage->search($name);
+    }
+
+    /**
+     * @When I sort products by the lowest price first
+     */
+    public function iSortProductsByTheLowestPriceFirst()
+    {
+        $this->indexPage->sort('Cheapest first');
+    }
+
+    /**
+     * @When I sort products by the highest price first
+     */
+    public function iSortProductsByTheHighestPriceFisrt()
+    {
+        $this->indexPage->sort('Most expensive first');
     }
 
     /**
@@ -392,6 +408,20 @@ final class ProductContext implements Context
             $actualName,
             $name,
             sprintf('Expected first product\'s name to be "%s", but it is "%s".', $name, $actualName)
+        );
+    }
+
+    /**
+     * @Then the last product on the list should have name :name
+     */
+    public function theLastProductOnTheListShouldHaveName($name)
+    {
+        $actualName = $this->indexPage->getLastProductNameFromList();
+
+        Assert::same(
+            $actualName,
+            $name,
+            sprintf('Expected last product\'s name to be "%s", but it is "%s".', $name, $actualName)
         );
     }
 

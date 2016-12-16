@@ -1,7 +1,7 @@
 @viewing_products
 Feature: Sorting listed products
     In order to change the order in which products are displayed
-    As an Customer
+    As a Customer
     I want to be able to sort products
 
     Background:
@@ -31,18 +31,18 @@ Feature: Sorting listed products
         And I should see a product with name "Berserk Pug"
         But the first product on the list should have name "Xtreme Pug"
 
-    @todo
+    @ui
     Scenario: Sorting products by their prices with descending order
         When I browse products from taxon "Fluffy Pets"
-        And I start sorting products from the lowest price
+        And I sort products by the lowest price first
         Then I should see 3 products in the list
         And I should see a product with name "Xtreme Pug"
         But the first product on the list should have name "Berserk Pug"
 
-    @todo
+    @ui
     Scenario: Sorting products by their prices with ascending order
         When I browse products from taxon "Fluffy Pets"
-        And I start sorting products from the highest price
+        And I sort products by the highest price first
         Then I should see 3 products in the list
         And I should see a product with name "Xtreme Pug"
         But the first product on the list should have name "Pug of Love"
