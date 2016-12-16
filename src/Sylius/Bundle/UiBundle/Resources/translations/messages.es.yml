@@ -678,6 +678,7 @@ sylius:
         select_address_from_book: Seleccionar dirección de mi libreta
         select_products: Seleccione productos
         select_taxon: Seleccionar taxonomía
+        server_has_encountered_some_errors: El servidor ha encontrado algunos errores.
         set_a_new_password_for_your_account: Crear una nueva contraseña para su cuenta
         set_as_default: Establecer como predeterminado
         set_as_default_billing_address: Establecer como dirección de facturación por defecto
@@ -756,6 +757,7 @@ sylius:
         thank_you_for_your_order: Gracias por su pedido
         theme: Tema
         the_instructions_below_will_be_displayed_to_the_customer: Las instrucción que se ven a continuación se mostrarán al cliente
+        the_page_you_are_looking_for_does_not_exist: La página que buscas no existe.
         there_are_no_attributes_configured: No hay atributos configurados
         there_are_no_blocks_to_display: No hay bloques para mostrar
         there_are_no_channels_configured: No hay ningún canal configurado
@@ -810,6 +812,7 @@ sylius:
         translations: Traducciones
         type: Tipo
         unavailable: No disponible
+        unexpected_error_occurred: Ha ocurrido un error inesperado.
         unit_price: Precio unitario
         unknown: Desconocido
         unlimited: Ilimitado

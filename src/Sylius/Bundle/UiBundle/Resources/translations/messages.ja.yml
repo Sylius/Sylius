@@ -14,6 +14,7 @@ sylius:
         add_province: 都道府県を設定する
         add_rule: 条件を追加
         add_to_cart: カートに入れる
+        address_book: アドレス帳
         addressing_step: 配送先入力
         administration: 管理
         administration_dashboard: 管理者ダッシュボード
@@ -31,9 +32,12 @@ sylius:
         choose_file: ファイルを選択
         city: 市町村
         clear_cart: カートを空にする
+        code: コード
         company: 会社名
         countries: 国の設定
+        country: 国
         country_details: 国の詳細
+        coupon: クーポン
         coupons: sylius.breadcrumb.promotion_coupon.index
         create: 作成
         create_a_new_address: sylius.account.address.create
@@ -53,6 +57,7 @@ sylius:
         create_zone: ゾーンを登録する
         created_at: 登録日時
         creation_time: 登録日時
+        currencies: 通貨
         current_orders: 現在の注文
         current_password: 現在のパスワード
         current_promotions: 現在のプロモーション
@@ -91,6 +96,8 @@ sylius:
         generating_coupons: クーポンを作成
         grand_total: 総合計
         home: ホーム
+        hostname: ホスト名
+        id: ID
         image: 画像
         images: 画像
         information: 情報
@@ -171,6 +178,7 @@ sylius:
         payment_methods: 支払い方法の管理
         payment_state: 入金状況
         payments: 入金管理
+        phone_number: 電話番号
         place_order: 注文を確定する
         placed_at: sylius.account.order.created_at
         postcode: 郵便番号
@@ -221,9 +229,11 @@ sylius:
         taxation_categories: 税区分管理
         taxation_settings: sylius.breadcrumb.taxation_settings
         taxes: 税
+        theme: テーマ
         there_are_no_images_for_this_product: 画像未登録
         there_are_no_options_for_this_product: 商品オプション未設定
         there_are_no_taxons_for_this_product: カテゴリ未設定
+        title: タイトル
         to: 合計金額(上限)
         total: 小計
         total_orders: sylius.backend.statistics.orders_this_month

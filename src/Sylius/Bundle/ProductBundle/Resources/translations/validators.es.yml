@@ -22,6 +22,7 @@ sylius:
             not_blank: Por favor, introduzca el código.
             regex: El código de la variante de producto solo puede contener letras, números, guiones y guiones bajos.
             unique: El código de variante de producto debe ser único.
+            within_product_unique: Este código debe ser único dentro de este producto.
     simple_product:
         code:
             unique: El código de producto simple debe ser único entre todos los productos y variantes de producto.
