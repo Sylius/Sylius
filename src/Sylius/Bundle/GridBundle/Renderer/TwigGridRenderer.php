@@ -136,8 +136,15 @@ final class TwigGridRenderer implements GridRendererInterface
     {
         $template = $this->getFilterTemplate($filter);
 
-        $form = $this->formFactory->createNamed('criteria', FormType::class, [], ['csrf_protection' => false, 'required' => false]);
-        $form->add($filter->getName(), $this->formTypeRegistry->get($filter->getType(), 'default'), $filter->getOptions());
+        $form = $this->formFactory->createNamed('criteria', FormType::class, [], [
+            'csrf_protection' => false,
+            'required' => false
+        ]);
+        $form->add(
+            $filter->getName(),
+            $this->formTypeRegistry->get($filter->getType(), 'default'),
+            $filter->getFormOptions()
+        );
 
         $criteria = $gridView->getParameters()->get('criteria', []);
         $form->submit($criteria);

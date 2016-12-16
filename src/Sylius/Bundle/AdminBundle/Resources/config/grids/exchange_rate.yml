@@ -33,9 +33,10 @@ sylius_grid:
                     type: entity
                     label: sylius.ui.currency
                     options:
+                        fields: [sourceCurrency, targetCurrency]
+                    form_options:
                         class: "%sylius.model.currency.class%"
                         choice_label: name
-                        fields: [sourceCurrency, targetCurrency]
 
             actions:
                 main:

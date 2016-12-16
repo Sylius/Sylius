@@ -60,8 +60,6 @@ final class StringFilterType extends AbstractType
             ->setDefaults([
                 'data_class' => null,
             ])
-            ->setDefined('fields')
-            ->setAllowedTypes('fields', 'array')
             ->setDefined('type')
             ->setAllowedValues('type', [
                 StringFilter::TYPE_CONTAINS,

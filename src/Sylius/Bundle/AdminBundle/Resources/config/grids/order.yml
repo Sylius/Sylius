@@ -88,7 +88,7 @@ sylius_grid:
                 channel:
                     type: entity
                     label: sylius.ui.channel
-                    options:
+                    form_options:
                         class: "%sylius.model.channel.class%"
             actions:
                 item:

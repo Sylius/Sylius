@@ -28,6 +28,35 @@
 
 ### Grid / GridBundle
 
+* Custom options for filter form types was extracted from ``options`` to ``form_options`` in grid configuration.
+
+Before:
+```php
+    sylius_grid:
+        grids:
+            app_order:
+                filters:
+                    channel:
+                        type: entity
+                        options:
+                            class: "%app.model.channel%"
+                            fields: [channel]
+```
+
+After:
+```php
+    sylius_grid:
+        grids:
+            app_order:
+                filters:
+                    channel:
+                        type: entity
+                        options:
+                            fields: [channel]
+                        form_options:
+                            class: "%app.model.channel%"
+```
+
 ### Inventory / InventoryBundle
 
 ### Locale / LocaleBundle

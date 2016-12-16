@@ -54,8 +54,6 @@ final class DateFilterType extends AbstractType
             ->setDefaults([
                 'data_class' => null,
             ])
-            ->setDefined('field')
-            ->setAllowedTypes('field', 'string')
         ;
     }
 
