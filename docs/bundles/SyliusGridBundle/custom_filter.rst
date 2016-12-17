@@ -115,7 +115,7 @@ Now you can use your new filter type in the grid configuration!
                 driver: doctrine/orm
                 resource: app.tournament
                 filters:
-                    suppliers_statistics:
+                    stats:
                         type: tournament_statistics
                         options:
                             range: [0, 100]
