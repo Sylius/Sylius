@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ProductReviewExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
+class ProductReviewExampleFactory extends AbstractExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var ReviewFactoryInterface
