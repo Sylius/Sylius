@@ -32,8 +32,8 @@ doctrine:
                 mappings:
                     gedmo_loggable:
                         type: annotation
-                        prefix: Sylius\Component\Addressing\Model
-                        dir: "%kernel.root_dir%/../src/Sylius/Component/Addressing/Model"
+                        prefix: Sylius\Bundle\ResourceBundle\Model
+                        dir: "%kernel.root_dir%/../src/Sylius/Bundle/ResourceBundle/Model"
                         is_bundle: false
 
 doctrine_cache:
@@ -114,4 +114,4 @@ sylius_resource:
         sylius.address_log_entry:
             classes:
                 model: Sylius\Component\Addressing\Model\AddressLogEntry
-                repository: Sylius\Bundle\AddressingBundle\Doctrine\ORM\AddressLogEntryRepository
+                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceLogEntryRepository

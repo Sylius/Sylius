@@ -11,24 +11,11 @@
 
 namespace Sylius\Component\Addressing\Model;
 
-use Gedmo\Loggable\Entity\MappedSuperclass\AbstractLogEntry;
-use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Bundle\ResourceBundle\Model\ResourceLogEntry;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AddressLogEntry extends AbstractLogEntry implements ResourceInterface
+final class AddressLogEntry extends ResourceLogEntry
 {
-    /**
-     * @var string
-     */
-    protected $id;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }

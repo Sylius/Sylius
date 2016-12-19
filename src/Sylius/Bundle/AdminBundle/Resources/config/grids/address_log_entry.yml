@@ -9,8 +9,6 @@ sylius_grid:
                         method: createByObjectIdQueryBuilder
                         arguments:
                             objectId: $objectId
-#            sorting:
-#                loggedAt: desc
             fields:
                 action:
                     type: twig

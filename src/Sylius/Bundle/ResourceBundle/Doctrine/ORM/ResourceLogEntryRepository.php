@@ -9,14 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AddressingBundle\Doctrine\ORM;
-
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class AddressLogEntryRepository extends EntityRepository implements AddressLogEntryRepositoryInterface
+final class ResourceLogEntryRepository extends EntityRepository implements ResourceLogEntryRepositoryInterface
 {
     /**
      * {@inheritdoc}

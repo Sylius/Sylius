@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AddressingBundle\Doctrine\ORM;
+namespace Sylius\Bundle\ResourceBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface AddressLogEntryRepositoryInterface
+interface ResourceLogEntryRepositoryInterface
 {
     /**
      * @param string $objectId
