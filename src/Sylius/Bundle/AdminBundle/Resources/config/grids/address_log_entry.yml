@@ -13,10 +13,17 @@ sylius_grid:
 #                loggedAt: desc
             fields:
                 action:
-                    type: string
+                    type: twig
                     label: sylius.ui.action
+                    options:
+                        template: "@SyliusAdmin/Address/Grid/Field/action.html.twig"
                 loggedAt:
                     type: datetime
                     label: sylius.ui.logged_at
                     options:
                         format: d-m-Y H:i:s
+                data:
+                    type: twig
+                    label: sylius.ui.changes
+                    options:
+                        template: "@SyliusAdmin/Address/Grid/Field/logData.html.twig"

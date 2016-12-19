@@ -48,7 +48,7 @@ final class ArrayGridProvider implements GridProviderInterface
             throw new UndefinedGridException($code);
         }
 
-        return $this->grids[$code];
+        return clone $this->grids[$code];
     }
 
     private function extend(array $gridConfiguration, array $parentGridConfiguration)

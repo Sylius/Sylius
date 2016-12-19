@@ -108,6 +108,7 @@ sylius:
         change_position: 'Change position'
         change_shipping_method: 'Change shipping method'
         change_your_password: 'Change your password'
+        changes: 'Changes'
         channel: 'Channel'
         channels: 'Channels'
         charges_and_taxes: 'Charges and taxes'

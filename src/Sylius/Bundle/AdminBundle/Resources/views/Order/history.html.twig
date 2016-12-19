@@ -9,15 +9,18 @@
     <div class="twelve wide column">
         {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
     </div>
+    <div class="four wide right aligned column">
+        <a href="{{ path('sylius_admin_order_show', {'id': order.id}) }}" class="ui green labeled icon button"><i class="reply icon"></i>{{ 'sylius.ui.return'|trans }}</a>
+    </div>
 </div>
 {% include '@SyliusAdmin/Order/Show/_breadcrumb.html.twig' %}
 <div class="ui stackable grid">
     <div class="wide column">
-        <div id="shipping-address-changes">
+        <div id="shipping-address-changes" style="margin-top: 10px;">
             <h4>{{ 'sylius.ui.shipping_address_changes_history'|trans }}</h4>
             {{ render(url('sylius_admin_address_log_entry_index', {'objectId': order.shippingAddress.id})) }}
         </div>
-        <div id="billing-address-changes">
+        <div id="billing-address-changes" style="margin-top: 20px;">
             <h4>{{ 'sylius.ui.billing_address_changes_history'|trans }}</h4>
             {{ render(url('sylius_admin_address_log_entry_index', {'objectId': order.billingAddress.id})) }}
         </div>
