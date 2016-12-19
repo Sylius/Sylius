@@ -145,17 +145,6 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Then I should not be able to change exchange rate of this currency
-     */
-    public function iCannotChangeItsExchangeRate()
-    {
-        Assert::true(
-            $this->updatePage->canHaveExchangeRateChanged(),
-            'I should not be able to change exchange rate of this currency.'
-        );
-    }
-
-    /**
      * @When I save my changes
      * @When I try to save my changes
      */
@@ -187,30 +176,6 @@ final class ManagingCurrenciesContext implements Context
         Assert::true(
             $this->indexPage->isCurrencyEnabled($currency),
             sprintf('Currency %s should be enabled but it is not.', $currency->getCode())
-        );
-    }
-
-    /**
-     * @When I change exchange rate to :exchangeRate
-     */
-    public function iChangeExchangeRateTo($exchangeRate)
-    {
-        $this->updatePage->changeExchangeRate($exchangeRate);
-    }
-
-    /**
-     * @Then this currency should have exchange rate :exchangeRate
-     */
-    public function thisCurrencyShouldHaveExchangeRate($exchangeRate)
-    {
-        Assert::eq(
-            $exchangeRate,
-            $this->updatePage->getExchangeRateValue(),
-            sprintf(
-                'Currency exchange rate should be equal %s, but was %s.',
-                $exchangeRate,
-                $this->updatePage->getExchangeRateValue()
-            )
         );
     }
 
@@ -248,17 +213,6 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Then I should be notified that exchange rate is required
-     */
-    public function iShouldBeNotifiedThatExchangeRateIsRequired()
-    {
-        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
-
-        Assert::same($currentPage->getValidationMessage('exchangeRate'), 'Please enter exchange rate.');
-    }
-
-    /**
      * @Then the currency :currencyName should not be added
      */
     public function theCurrencyShouldNotBeAdded($currencyName)
@@ -268,32 +222,6 @@ final class ManagingCurrenciesContext implements Context
         Assert::false(
             $this->indexPage->isSingleResourceOnPage(['name' => $currencyName]),
             sprintf('Currency with name %s was created, but it should not.', $currencyName)
-        );
-    }
-
-    /**
-     * @When I remove its exchange rate
-     */
-    public function iRemoveItsExchangeRate()
-    {
-        $this->updatePage->changeExchangeRate('');
-    }
-
-    /**
-     * @Then /^(this currency) should still have exchange rate equal to ([0-9\.]+)$/
-     */
-    public function theCurrencyShouldStillHaveExchangeRateEquals(CurrencyInterface $currency, $exchangeRate)
-    {
-        $this->updatePage->open(['id' => $currency->getId()]);
-
-        Assert::eq(
-            $exchangeRate,
-            $this->updatePage->getExchangeRateValue(),
-            sprintf(
-                'Currency exchange rate should be equal %s, but was %s.',
-                $exchangeRate,
-                $this->updatePage->getExchangeRateValue()
-            )
         );
     }
 
