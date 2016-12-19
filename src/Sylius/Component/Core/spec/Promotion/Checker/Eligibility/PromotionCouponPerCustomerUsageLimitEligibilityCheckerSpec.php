@@ -47,6 +47,7 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends O
         CorePromotionCouponInterface $promotionCoupon,
         CustomerInterface $customer
     ) {
+        $customer->getId()->willReturn(1);
         $promotionSubject->getCustomer()->willReturn($customer);
         $promotionCoupon->getPerCustomerUsageLimit()->willReturn(42);
 
@@ -61,10 +62,23 @@ final class PromotionCouponPerCustomerUsageLimitEligibilityCheckerSpec extends O
         CorePromotionCouponInterface $promotionCoupon,
         CustomerInterface $customer
     ) {
+        $customer->getId()->willReturn(1);
         $promotionSubject->getCustomer()->willReturn($customer);
         $promotionCoupon->getPerCustomerUsageLimit()->willReturn(42);
 
         $orderRepository->countByCustomerAndCoupon($customer, $promotionCoupon)->willReturn(41);
+
+        $this->isEligible($promotionSubject, $promotionCoupon)->shouldReturn(true);
+    }
+
+    function it_returns_true_if_promotion_subject_has_customer_that_is_not_persisted(
+        OrderInterface $promotionSubject,
+        CorePromotionCouponInterface $promotionCoupon,
+        CustomerInterface $customer
+    ) {
+        $customer->getId()->willReturn(null);
+        $promotionSubject->getCustomer()->willReturn($customer);
+        $promotionCoupon->getPerCustomerUsageLimit()->willReturn(42);
 
         $this->isEligible($promotionSubject, $promotionCoupon)->shouldReturn(true);
     }
