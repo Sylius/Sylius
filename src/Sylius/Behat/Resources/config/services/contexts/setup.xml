@@ -262,9 +262,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.repository.shop_user" />
             <argument type="service" id="__symfony__.sylius.fixture.example_factory.shop_user" />
-            <argument type="service" id="__symfony__.sylius.factory.address" />
             <argument type="service" id="__symfony__.sylius.manager.shop_user" />
-            <argument type="service" id="__symfony__.sylius.converter.country_name" />
             <tag name="fob.context_service" />
         </service>
 
