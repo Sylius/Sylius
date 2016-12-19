@@ -32,8 +32,8 @@ doctrine:
                 mappings:
                     gedmo_loggable:
                         type: annotation
-                        prefix: Gedmo\Loggable\Entity
-                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
+                        prefix: Sylius\Component\Addressing\Model
+                        dir: "%kernel.root_dir%/../src/Sylius/Component/Addressing/Model"
                         is_bundle: false
 
 doctrine_cache:
@@ -108,3 +108,9 @@ twig:
     exception_controller: "FOS\\RestBundle\\Controller\\ExceptionController::showAction"
     globals:
         sylius: "@sylius.context.shopper"
+
+sylius_resource:
+    resources:
+        sylius.address_log_entry:
+            classes:
+                model: Sylius\Component\Addressing\Model\AddressLogEntry
