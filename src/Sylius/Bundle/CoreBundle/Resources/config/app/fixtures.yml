@@ -196,9 +196,9 @@ sylius_fixtures:
                     options:
                         amount: 15
 
-                random_product_review:
+                product_review:
                     options:
-                        amount: 40
+                        random: 40
 
                 similar_product_association:
                     options:

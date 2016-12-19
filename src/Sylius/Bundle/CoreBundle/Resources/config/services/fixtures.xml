@@ -177,11 +177,6 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
-        <service id="sylius.fixture.random_reviews" class="Sylius\Bundle\CoreBundle\Fixture\RandomReviewsFixture">
-            <argument type="service" id="sylius.fixture.product_review" />
-            <tag name="sylius_fixtures.fixture" />
-        </service>
-
         <service id="sylius.fixture.order" class="Sylius\Bundle\CoreBundle\Fixture\OrderFixture">
             <argument type="service" id="sylius.factory.order" />
             <argument type="service" id="sylius.factory.order_item" />
