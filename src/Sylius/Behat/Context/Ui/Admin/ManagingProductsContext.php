@@ -927,6 +927,23 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Then I should not be notified that simple product code has to be unique
+     */
+    public function iShouldNotBeNotifiedThatSimpleProductCodeHasToBeUnique()
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->resolveCurrentPage();
+
+        try {
+            $validationMessge = $currentPage->getValidationMessage('code');
+
+            Assert::notSame($validationMessge, 'Simple product code must be unique among all products and product variants.');
+        } catch (ElementNotFoundException $e) {
+            // intentionally left blank, as it could not have any validation at all
+        }
+    }
+
+    /**
      * @Then I should be notified that code has to be unique
      */
     public function iShouldBeNotifiedThatCodeHasToBeUnique()

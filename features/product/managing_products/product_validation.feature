@@ -107,3 +107,12 @@ Feature: Products validation
         And I try to save my changes
         Then I should be notified that name is required
         And this product should still be named "Dice Brewing"
+
+    @ui
+    Scenario: Not seeing validation error for duplicated code if product code has not been changed
+        Given the store has a "Dice Brewing" product
+        And I want to modify this product
+        When I remove its name from "English (United States)" translation
+        And I try to save my changes
+        Then I should not be notified that simple product code has to be unique
+        And this product should still be named "Dice Brewing"

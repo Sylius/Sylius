@@ -48,7 +48,9 @@ final class UniqueSimpleProductCodeValidator extends ConstraintValidator
             return;
         }
 
-        if (null !== $this->productVariantRepository->findOneBy(['code' => $value->getCode()])) {
+        $existingProductVariant = $this->productVariantRepository->findOneBy(['code' => $value->getCode()]);
+
+        if (null !== $existingProductVariant && $existingProductVariant->getProduct()->getId() !== $value->getId()) {
             $this->context->buildViolation($constraint->message)
                 ->atPath('code')
                 ->addViolation()
