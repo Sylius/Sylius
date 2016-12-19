@@ -16,7 +16,7 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ProductReviewFixture extends AbstractResourceFixture
+class ProductReviewFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
