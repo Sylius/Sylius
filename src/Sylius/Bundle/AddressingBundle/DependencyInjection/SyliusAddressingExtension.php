@@ -37,5 +37,6 @@ final class SyliusAddressingExtension extends AbstractResourceExtension
         $loader->load('services.xml');
 
         $container->setParameter('sylius.scope.zone', $config['scopes']);
+        $container->setParameter('sylius.zone.priorities', $config['zone_matcher_priorities']);
     }
 }

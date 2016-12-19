@@ -12,7 +12,7 @@
 namespace spec\Sylius\Component\Core\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Matcher\ZoneResolverInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -32,7 +32,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
 {
     function let(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneMatcherInterface $zoneMatcher,
+        ZoneResolverInterface $zoneMatcher,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ) {
         $this->beConstructedWith($shippingMethodRepository, $zoneMatcher, $eligibilityChecker);
@@ -59,7 +59,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ZoneInterface $firstZone,
         ZoneInterface $secondZone,
-        ZoneMatcherInterface $zoneMatcher
+        ZoneResolverInterface $zoneMatcher
     ) {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn($address);
@@ -84,7 +84,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         AddressInterface $address,
         ChannelInterface $channel,
         ShipmentInterface $shipment,
-        ZoneMatcherInterface $zoneMatcher
+        ZoneResolverInterface $zoneMatcher
     ) {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn($address);
@@ -106,7 +106,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ZoneInterface $firstZone,
         ZoneInterface $secondZone,
-        ZoneMatcherInterface $zoneMatcher
+        ZoneResolverInterface $zoneMatcher
     ) {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn($address);

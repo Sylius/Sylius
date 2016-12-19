@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Matcher\ZoneResolverInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -36,7 +36,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     private $defaultTaxZoneProvider;
 
     /**
-     * @var ZoneMatcherInterface
+     * @var ZoneResolverInterface
      */
     private $zoneMatcher;
 
@@ -47,12 +47,12 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
 
     /**
      * @param ZoneProviderInterface $defaultTaxZoneProvider
-     * @param ZoneMatcherInterface $zoneMatcher
+     * @param ZoneResolverInterface $zoneMatcher
      * @param PrioritizedServiceRegistryInterface $strategyRegistry
      */
     public function __construct(
         ZoneProviderInterface $defaultTaxZoneProvider,
-        ZoneMatcherInterface $zoneMatcher,
+        ZoneResolverInterface $zoneMatcher,
         PrioritizedServiceRegistryInterface $strategyRegistry
     ) {
         $this->defaultTaxZoneProvider = $defaultTaxZoneProvider;

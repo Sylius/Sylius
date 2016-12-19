@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Addressing\Matcher;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 
@@ -19,25 +18,13 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-interface ZoneMatcherInterface
+interface AddressZoneMatcherInterface
 {
     /**
-     * Returns the best matching zone for given address.
-     *
      * @param AddressInterface $address
-     * @param string|null      $scope
+     * @param ZoneInterface $zone
      *
-     * @return ZoneInterface|null
+     * @return bool
      */
-    public function match(AddressInterface $address, $scope = null);
-
-    /**
-     * Returns all matching zones for given address.
-     *
-     * @param AddressInterface $address
-     * @param string|null      $scope
-     *
-     * @return Collection|ZoneInterface[]
-     */
-    public function matchAll(AddressInterface $address, $scope = null);
+    public function addressBelongsToZone(AddressInterface $address, ZoneInterface $zone);
 }

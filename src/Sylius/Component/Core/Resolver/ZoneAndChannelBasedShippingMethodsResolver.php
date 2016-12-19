@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Resolver;
 
-use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
+use Sylius\Component\Addressing\Matcher\ZoneResolverInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
@@ -31,7 +31,7 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
     private $shippingMethodRepository;
 
     /**
-     * @var ZoneMatcherInterface
+     * @var ZoneResolverInterface
      */
     private $zoneMatcher;
 
@@ -42,12 +42,12 @@ class ZoneAndChannelBasedShippingMethodsResolver implements ShippingMethodsResol
 
     /**
      * @param ShippingMethodRepositoryInterface $shippingMethodRepository
-     * @param ZoneMatcherInterface $zoneMatcher
+     * @param ZoneResolverInterface $zoneMatcher
      * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
     public function __construct(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
-        ZoneMatcherInterface $zoneMatcher,
+        ZoneResolverInterface $zoneMatcher,
         ShippingMethodEligibilityCheckerInterface $eligibilityChecker
     ) {
         $this->shippingMethodRepository = $shippingMethodRepository;
