@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
 use Sylius\Component\Core\Model\PromotionCouponInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -403,13 +404,7 @@ final class OrderContext implements Context
             $price = $i === ($numberOfCustomers - 1) ? $total : rand(1, $total);
             $total -= $price;
 
-            $item = $this->orderItemFactory->createNew();
-            $item->setVariant($sampleProductVariant);
-            $item->setUnitPrice($price);
-
-            $this->itemQuantityModifier->modify($item, 1);
-
-            $order->addItem($item);
+            $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
 
             $this->orderRepository->add($order);
         }
@@ -433,13 +428,7 @@ final class OrderContext implements Context
             $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
             $total -= $price;
 
-            $item = $this->orderItemFactory->createNew();
-            $item->setVariant($sampleProductVariant);
-            $item->setUnitPrice($price);
-
-            $this->itemQuantityModifier->modify($item, 1);
-
-            $order->addItem($item);
+            $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
 
             $this->orderRepository->add($order);
             $this->sharedStorage->set('order', $order);
@@ -464,16 +453,28 @@ final class OrderContext implements Context
             $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
             $total -= $price;
 
-            $item = $this->orderItemFactory->createNew();
-            $item->setVariant($sampleProductVariant);
-            $item->setUnitPrice($price);
-
-            $this->itemQuantityModifier->modify($item, 1);
-
-            $order->addItem($item);
+            $this->addVariantWithPriceToOrder($order, $sampleProductVariant, $price);
 
             $this->orderRepository->add($order);
         }
+    }
+
+    /**
+     * @Given /^(this customer) has(?:| also) placed (an order "[^"]+") buying a single ("[^"]+" product) for ("[^"]+") in ("[^"]+" currency)$/
+     */
+    public function customerHasPlacedAnOrderBuyingASingleProductForInCurrency(
+        CustomerInterface $customer,
+        $orderNumber,
+        ProductInterface $product,
+        $total,
+        CurrencyInterface $currency
+    ) {
+        $order = $this->createOrder($customer, $orderNumber, null, $currency->getCode());
+        $order->setState(OrderInterface::STATE_NEW);
+
+        $this->addVariantWithPriceToOrder($order, $product->getVariants()->first(), $total);
+
+        $this->orderRepository->add($order);
     }
 
     /**
@@ -703,5 +704,21 @@ final class OrderContext implements Context
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param ProductVariantInterface $variant
+     * @param int $price
+     */
+    private function addVariantWithPriceToOrder(OrderInterface $order, ProductVariantInterface $variant, $price)
+    {
+        $item = $this->orderItemFactory->createNew();
+        $item->setVariant($variant);
+        $item->setUnitPrice($price);
+
+        $this->itemQuantityModifier->modify($item, 1);
+
+        $order->addItem($item);
     }
 }

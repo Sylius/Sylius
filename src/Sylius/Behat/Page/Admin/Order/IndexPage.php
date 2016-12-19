@@ -51,11 +51,35 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
+    public function chooseCurrencyFilter($currencyName)
+    {
+        $this->getElement('filter_currency')->selectOption($currencyName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyFilterTotalGreaterThan($total)
+    {
+        $this->getDocument()->fillField('criteria_total_greaterThan', $total);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyFilterTotalLessThan($total)
+    {
+        $this->getDocument()->fillField('criteria_total_lessThan', $total);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'filter_channel' => '#criteria_channel
-            ',
+            'filter_channel' => '#criteria_channel',
+            'filter_currency' => '#criteria_total_currency',
         ]);
     }
 }

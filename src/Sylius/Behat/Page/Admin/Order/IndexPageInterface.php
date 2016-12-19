@@ -32,4 +32,19 @@ interface IndexPageInterface extends BaseIndexPageInterface
      * @param string $channelName
      */
     public function chooseChannelFilter($channelName);
+
+    /**
+     * @param string $currencyName
+     */
+    public function chooseCurrencyFilter($currencyName);
+
+    /**
+     * @param string $total
+     */
+    public function specifyFilterTotalGreaterThan($total);
+
+    /**
+     * @param string $total
+     */
+    public function specifyFilterTotalLessThan($total);
 }

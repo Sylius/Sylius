@@ -46,6 +46,7 @@ sylius_grid:
             boolean: "@SyliusUi/Grid/Filter/boolean.html.twig"
             date: "@SyliusUi/Grid/Filter/date.html.twig"
             entity: "@SyliusUi/Grid/Filter/entity.html.twig"
+            money: "@SyliusUi/Grid/Filter/money.html.twig"
 
 liip_imagine:
     filter_sets:
