@@ -9,7 +9,7 @@ To add a new filter, we need to create an appropriate class and form type.
 
     <?php
 
-    namespace App\Grid\Filter;
+    namespace AppBundle\Grid\Filter;
 
     use Sylius\Component\Grid\Data\DataSourceInterface;
     use Sylius\Component\Grid\Filtering\FilterInterface;
@@ -21,6 +21,8 @@ To add a new filter, we need to create an appropriate class and form type.
         {
             // Your filtering logic. DataSource is kind of query builder.
             // $data['stats'] contains the submitted value!
+            // here is an example
+            $dataSource->restrict($dataSource->getExpressionBuilder()->equal('stats', $data['stats']));
         }
 
         public function setOptions(OptionsResolver $resolver)
@@ -74,7 +76,7 @@ And the form type:
 
         public function getName()
         {
-            return 'sylius_filter_tournament_statistics'; // The name is important to be sylius_filter_NAME
+            return 'sylius_grid_filter_tournament_statistics'; // The name is important to be sylius_grid_filter_NAME
         }
     }
 
