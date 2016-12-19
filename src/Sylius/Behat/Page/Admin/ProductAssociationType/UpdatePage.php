@@ -24,6 +24,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function nameItIn($name, $language)
+    {
+        $this->getDocument()->fillField(
+            sprintf('sylius_product_association_type_translations_%s_name', $language), $name
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function nameIt($name)
     {
         $this->getElement('name')->setValue($name);

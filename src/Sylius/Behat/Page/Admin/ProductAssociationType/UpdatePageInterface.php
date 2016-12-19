@@ -20,8 +20,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     /**
      * @param string $name
+     * @param string $languageCode
      */
-    public function nameIt($name);
+    public function nameItIn($name, $languageCode);
 
     /**
      * @return bool

@@ -12,11 +12,14 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
+use Sylius\Component\Product\Model\ProductAssociationTypeTranslationInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -37,6 +40,11 @@ final class ProductAssociationContext implements Context
     /**
      * @var FactoryInterface
      */
+    private $productAssociationTypeTranslationFactory;
+
+    /**
+     * @var FactoryInterface
+     */
     private $productAssociationFactory;
 
     /**
@@ -50,24 +58,35 @@ final class ProductAssociationContext implements Context
     private $productAssociationRepository;
 
     /**
+     * @var ObjectManager
+     */
+    private $objectManager;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $productAssociationTypeFactory
+     * @param FactoryInterface $productAssociationTypeTranslationFactory
      * @param FactoryInterface $productAssociationFactory
      * @param RepositoryInterface $productAssociationTypeRepository
      * @param RepositoryInterface $productAssociationRepository
+     * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $productAssociationTypeFactory,
+        FactoryInterface $productAssociationTypeTranslationFactory,
         FactoryInterface $productAssociationFactory,
         RepositoryInterface $productAssociationTypeRepository,
-        RepositoryInterface $productAssociationRepository
+        RepositoryInterface $productAssociationRepository,
+        ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productAssociationTypeFactory = $productAssociationTypeFactory;
+        $this->productAssociationTypeTranslationFactory = $productAssociationTypeTranslationFactory;
         $this->productAssociationFactory = $productAssociationFactory;
         $this->productAssociationTypeRepository = $productAssociationTypeRepository;
         $this->productAssociationRepository = $productAssociationRepository;
+        $this->objectManager = $objectManager;
     }
 
     /**
@@ -77,6 +96,21 @@ final class ProductAssociationContext implements Context
     public function theStoreHasAProductAssociationType($name, $code = null)
     {
         $this->createProductAssociationType($name, $code);
+    }
+
+    /**
+     * @Given /^the store has(?:| also) a product association type named "([^"]+)" in ("[^"]+" locale) and "([^"]+)" in ("[^"]+" locale)$/
+     */
+    public function itHasVariantNamedInAndIn($firstName, $firstLocale, $secondName, $secondLocale)
+    {
+        $productAssociationType = $this->createProductAssociationType($firstName);
+
+        $names = [$firstName => $firstLocale, $secondName => $secondLocale];
+        foreach ($names as $name => $locale) {
+            $this->addProductAssociationTypeTranslation($productAssociationType, $name, $locale);
+        }
+
+        $this->objectManager->flush();
     }
 
     /**
@@ -114,6 +148,8 @@ final class ProductAssociationContext implements Context
     /**
      * @param string $name
      * @param string|null $code
+     *
+     * @return ProductAssociationTypeInterface
      */
     private function createProductAssociationType($name, $code = null)
     {
@@ -128,6 +164,8 @@ final class ProductAssociationContext implements Context
 
         $this->productAssociationTypeRepository->add($productAssociationType);
         $this->sharedStorage->set('product_association_type', $productAssociationType);
+
+        return $productAssociationType;
     }
 
     /**
@@ -151,6 +189,24 @@ final class ProductAssociationContext implements Context
         $product->addAssociation($productAssociation);
 
         $this->productAssociationRepository->add($productAssociation);
+    }
+
+    /**
+     * @param ProductAssociationTypeInterface $productAssociationType
+     * @param string $name
+     * @param string $locale
+     */
+    private function addProductAssociationTypeTranslation(
+        ProductAssociationTypeInterface $productAssociationType,
+        $name,
+        $locale
+    ) {
+        /** @var ProductAssociationTypeTranslationInterface|TranslationInterface $translation */
+        $translation = $this->productAssociationTypeTranslationFactory->createNew();
+        $translation->setLocale($locale);
+        $translation->setName($name);
+
+        $productAssociationType->addTranslation($translation);
     }
 
     /**
