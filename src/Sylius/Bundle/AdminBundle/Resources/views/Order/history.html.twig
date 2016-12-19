@@ -1,0 +1,26 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% import '@SyliusUi/Macro/labels.html.twig' as label %}
+
+{% block title %}{{ parent() }} {{ 'sylius.ui.order'|trans ~' #'~ order.number }} - {{ 'sylius.ui.order_history'|trans }}{% endblock %}
+
+{% block content %}
+<div class="ui stackable two column grid">
+    <div class="twelve wide column">
+        {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
+    </div>
+</div>
+{% include '@SyliusAdmin/Order/Show/_breadcrumb.html.twig' %}
+<div class="ui stackable grid">
+    <div class="wide column">
+        <div id="shipping-address-changes">
+            <h4>{{ 'sylius.ui.shipping_address_changes_history'|trans }}</h4>
+            {{ render(url('sylius_admin_address_log_entry_index', {'objectId': order.shippingAddress.id})) }}
+        </div>
+        <div id="billing-address-changes">
+            <h4>{{ 'sylius.ui.billing_address_changes_history'|trans }}</h4>
+            {{ render(url('sylius_admin_address_log_entry_index', {'objectId': order.billingAddress.id})) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

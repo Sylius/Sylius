@@ -27,5 +27,6 @@ Feature: Tracking changes on order addresses
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         When I want to modify a customer's shipping address of this order
         And I specify their shipping address as "New York", "150 W. 85th Street", "10028", "United States" for "Ted Mosby"
+        And I save my changes
         And I browse order's "#00000001" history
         Then there should be 2 changes in the registry

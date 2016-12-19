@@ -1,0 +1,22 @@
+sylius_grid:
+    grids:
+        sylius_admin_address_log_entry:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.address_log_entry.class%"
+                    repository:
+                        method: createByObjectIdQueryBuilder
+                        arguments:
+                            objectId: $objectId
+#            sorting:
+#                loggedAt: desc
+            fields:
+                action:
+                    type: string
+                    label: sylius.ui.action
+                loggedAt:
+                    type: datetime
+                    label: sylius.ui.logged_at
+                    options:
+                        format: d-m-Y H:i:s

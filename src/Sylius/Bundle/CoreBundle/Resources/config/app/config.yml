@@ -114,3 +114,4 @@ sylius_resource:
         sylius.address_log_entry:
             classes:
                 model: Sylius\Component\Addressing\Model\AddressLogEntry
+                repository: Sylius\Bundle\AddressingBundle\Doctrine\ORM\AddressLogEntryRepository

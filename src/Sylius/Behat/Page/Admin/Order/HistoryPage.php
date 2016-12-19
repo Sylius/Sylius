@@ -31,6 +31,6 @@ final class HistoryPage extends SymfonyPage implements HistoryPageInterface
      */
     public function countChanges()
     {
-        return count($this->getDocument()->findAll('css', '#changes tr'));
+        return count($this->getDocument()->findAll('css', '#shipping-address-changes tbody tr'));
     }
 }

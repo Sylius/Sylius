@@ -231,7 +231,7 @@ final class OrderContext implements Context
     public function theCustomerAddressedItToWithIdenticalBillingAddress(AddressInterface $address)
     {
         $this->theCustomerAddressedItTo($address);
-        $this->forTheBillingAddressOf($address);
+        $this->forTheBillingAddressOf(clone $address);
     }
 
     /**
