@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Resolver;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -65,7 +66,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $order->getShippingAddress()->willReturn($address);
         $order->getChannel()->willReturn($channel);
 
-        $zoneMatcher->matchAll($address)->willReturn([$firstZone, $secondZone]);
+        $zoneMatcher->matchAll($address, Scope::SHIPPING)->willReturn([$firstZone, $secondZone]);
 
         $shippingMethodRepository
             ->findEnabledForZonesAndChannel([$firstZone, $secondZone], $channel)
@@ -90,7 +91,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $order->getShippingAddress()->willReturn($address);
         $order->getChannel()->willReturn($channel);
 
-        $zoneMatcher->matchAll($address)->willReturn([]);
+        $zoneMatcher->matchAll($address, Scope::SHIPPING)->willReturn([]);
 
         $this->getSupportedMethods($shipment)->shouldReturn([]);
     }
@@ -112,7 +113,7 @@ final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavio
         $order->getShippingAddress()->willReturn($address);
         $order->getChannel()->willReturn($channel);
 
-        $zoneMatcher->matchAll($address)->willReturn([$firstZone, $secondZone]);
+        $zoneMatcher->matchAll($address, Scope::SHIPPING)->willReturn([$firstZone, $secondZone]);
 
         $eligibilityChecker->isEligible($shipment, $firstShippingMethod)->willReturn(false);
         $eligibilityChecker->isEligible($shipment, $secondShippingMethod)->willReturn(true);

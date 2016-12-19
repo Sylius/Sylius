@@ -397,6 +397,10 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             $this->waitForElement(5, sprintf('%s_province', $type));
             $this->getElement(sprintf('%s_province', $type))->setValue($address->getProvinceName());
         }
+        if (null !== $address->getProvinceCode()) {
+            $this->waitForElement(5, sprintf('%s_country_province', $type));
+            $this->getElement(sprintf('%s_country_province', $type))->selectOption($address->getProvinceCode());
+        }
     }
 
     /**

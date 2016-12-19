@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -122,17 +123,22 @@ final class ZoneContext implements Context
      */
     public function theStoreHasAZoneWithCode($zoneName, $code)
     {
-        $zone = $this->zoneFactory->createTyped(ZoneInterface::TYPE_ZONE);
-        $zone->setCode($code);
-        $zone->setName($zoneName);
+        $this->saveZone($this->setUpZone($zoneName, $code, Scope::ALL), 'zone');
+    }
 
-        $this->sharedStorage->set('zone', $zone);
-        $this->zoneRepository->add($zone);
+    /**
+     * @Given the store has a :scope zone :zoneName with code :code
+     */
+    public function theStoreHasAScopedZoneWithCode($scope, $zoneName, $code)
+    {
+        $this->saveZone($this->setUpZone($zoneName, $code, $scope), $scope . '_zone');
     }
 
     /**
      * @Given /^(it)(?:| also) has the ("([^"]+)" country) member$/
      * @Given /^(this zone)(?:| also) has the ("([^"]+)" country) member$/
+     * @Given /^(this shipping zone)(?:| also) has the ("([^"]+)" country) member$/
+     * @Given /^(this tax zone)(?:| also) has the ("([^"]+)" country) member$/
      */
     public function itHasTheCountryMemberAndTheCountryMember(
         ZoneInterface $zone,
@@ -145,8 +151,8 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Given /^(it) has the ("([^"]+)" province) member$/
-     * @Given /^(it) also has the ("([^"]+)" province) member$/
+     * @Given /^(it) has the ("[^"]+" province) member$/
+     * @Given /^(it) also has the ("[^"]+" province) member$/
      */
     public function itHasTheProvinceMemberAndTheProvinceMember(
         ZoneInterface $zone,
@@ -185,5 +191,32 @@ final class ZoneContext implements Context
         $zoneMember->setCode($code);
 
         return $zoneMember;
+    }
+
+    /**
+     * @param string $zoneName
+     * @param string $code
+     * @param string $scope
+     *
+     * @return ZoneInterface
+     */
+    private function setUpZone($zoneName, $code, $scope)
+    {
+        $zone = $this->zoneFactory->createTyped(ZoneInterface::TYPE_ZONE);
+        $zone->setCode($code);
+        $zone->setName($zoneName);
+        $zone->setScope($scope);
+
+        return $zone;
+    }
+
+    /**
+     * @param ZoneInterface $zone
+     * @param string $key
+     */
+    private function saveZone($zone, $key)
+    {
+        $this->sharedStorage->set($key, $zone);
+        $this->zoneRepository->add($zone);
     }
 }

@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -67,7 +68,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
         $strategyRegistry->all()->willReturn([$strategyOne, $strategyTwo]);
-        $zoneMatcher->match($address)->willReturn($zone);
+        $zoneMatcher->match($address, Scope::TAX)->willReturn($zone);
 
         $strategyOne->supports($order, $zone)->willReturn(false);
         $strategyOne->applyTaxes($order, $zone)->shouldNotBeCalled();
@@ -94,7 +95,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
         $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
         $orderItem->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
-        $zoneMatcher->match($address)->willReturn($zone);
+        $zoneMatcher->match($address, Scope::TAX)->willReturn($zone);
 
         $strategyRegistry->all()->willReturn([$strategy]);
 
@@ -131,7 +132,7 @@ final class OrderTaxesProcessorSpec extends ObjectBehavior
 
         $order->getShippingAddress()->willReturn($address);
 
-        $zoneMatcher->match($address)->willReturn(null);
+        $zoneMatcher->match($address, Scope::TAX)->willReturn(null);
 
         $defaultTaxZoneProvider->getZone($order)->willReturn(null);
 

@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\Scope;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
@@ -101,7 +102,7 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
         $zone = null;
 
         if (null !== $shippingAddress) {
-            $zone = $this->zoneMatcher->match($shippingAddress);
+            $zone = $this->zoneMatcher->match($shippingAddress, Scope::TAX);
         }
 
         return $zone ?: $this->defaultTaxZoneProvider->getZone($order);

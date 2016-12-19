@@ -12,6 +12,7 @@
 namespace Sylius\Component\Addressing\Matcher;
 
 use Sylius\Component\Addressing\Model\AddressInterface;
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -139,7 +140,7 @@ class ZoneMatcher implements ZoneMatcherInterface
             return $this->zoneRepository->findAll();
         }
 
-        return $this->zoneRepository->findBy(['scope' => $scope]);
+        return $this->zoneRepository->findBy(['scope' => [$scope, Scope::ALL]]);
     }
 
     /**

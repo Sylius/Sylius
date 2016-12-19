@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Core\Test\Services;
 
+use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -56,11 +56,6 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     /**
      * @var RepositoryInterface
      */
-    private $zoneMemberRepository;
-
-    /**
-     * @var RepositoryInterface
-     */
     private $zoneRepository;
 
     /**
@@ -84,12 +79,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     private $localeFactory;
 
     /**
-     * @var FactoryInterface
-     */
-    private $zoneMemberFactory;
-
-    /**
-     * @var FactoryInterface
+     * @var ZoneFactoryInterface
      */
     private $zoneFactory;
 
@@ -103,14 +93,12 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
      * @param RepositoryInterface $countryRepository
      * @param RepositoryInterface $currencyRepository
      * @param RepositoryInterface $localeRepository
-     * @param RepositoryInterface $zoneMemberRepository
      * @param RepositoryInterface $zoneRepository
      * @param ChannelFactoryInterface $channelFactory
      * @param FactoryInterface $countryFactory
      * @param FactoryInterface $currencyFactory
      * @param FactoryInterface $localeFactory
-     * @param FactoryInterface $zoneFactory
-     * @param FactoryInterface $zoneMemberFactory
+     * @param ZoneFactoryInterface $zoneFactory
      * @param string $defaultLocaleCode
      */
     public function __construct(
@@ -118,27 +106,23 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         RepositoryInterface $countryRepository,
         RepositoryInterface $currencyRepository,
         RepositoryInterface $localeRepository,
-        RepositoryInterface $zoneMemberRepository,
         RepositoryInterface $zoneRepository,
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $countryFactory,
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,
-        FactoryInterface $zoneFactory,
-        FactoryInterface $zoneMemberFactory,
+        ZoneFactoryInterface $zoneFactory,
         $defaultLocaleCode
     ) {
         $this->channelRepository = $channelRepository;
         $this->countryRepository = $countryRepository;
         $this->currencyRepository = $currencyRepository;
         $this->localeRepository = $localeRepository;
-        $this->zoneMemberRepository = $zoneMemberRepository;
         $this->zoneRepository = $zoneRepository;
         $this->channelFactory = $channelFactory;
         $this->countryFactory = $countryFactory;
         $this->currencyFactory = $currencyFactory;
         $this->localeFactory = $localeFactory;
-        $this->zoneMemberFactory = $zoneMemberFactory;
         $this->zoneFactory = $zoneFactory;
         $this->defaultLocaleCode = $defaultLocaleCode;
     }
@@ -162,13 +146,11 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         $defaultData['country'] = $this->createCountry();
         $defaultData['currency'] = $currency;
         $defaultData['locale'] = $locale;
-        $defaultData['zone_member'] = $this->createZoneMember();
-        $defaultData['zone'] = $this->createZone($defaultData['zone_member']);
+        $defaultData['zone'] = $this->createZone();
 
         $this->channelRepository->add($channel);
         $this->countryRepository->add($defaultData['country']);
         $this->zoneRepository->add($defaultData['zone']);
-        $this->zoneMemberRepository->add($defaultData['zone_member']);
 
         return $defaultData;
     }
@@ -235,30 +217,15 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     }
 
     /**
-     * @return ZoneMemberInterface
-     */
-    private function createZoneMember()
-    {
-        /** @var ZoneMemberInterface $zoneMember */
-        $zoneMember = $this->zoneMemberFactory->createNew();
-        $zoneMember->setCode(self::DEFAULT_ZONE_CODE);
-
-        return $zoneMember;
-    }
-
-    /**
-     * @param ZoneMemberInterface $zoneMember
-     *
      * @return ZoneInterface
      */
-    private function createZone(ZoneMemberInterface $zoneMember)
+    private function createZone()
     {
         /** @var ZoneInterface $zone */
-        $zone = $this->zoneFactory->createNew();
+        $zone = $this->zoneFactory->createWithMembers([self::DEFAULT_ZONE_CODE]);
         $zone->setCode(self::DEFAULT_ZONE_CODE);
         $zone->setName(self::DEFAULT_ZONE_NAME);
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
-        $zone->addMember($zoneMember);
 
         return $zone;
     }

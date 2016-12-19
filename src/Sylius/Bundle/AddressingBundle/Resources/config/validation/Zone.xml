@@ -29,6 +29,12 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="scope">
+            <constraint name="NotBlank">
+                <option name="message">sylius.zone.scope.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.zone.name.not_blank</option>

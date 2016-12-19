@@ -43,7 +43,7 @@ class Zone implements ZoneInterface
     /**
      * @var string
      */
-    protected $scope;
+    protected $scope = Scope::ALL;
 
     /**
      * @var Collection|ZoneMemberInterface[]

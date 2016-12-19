@@ -12,9 +12,10 @@
 namespace spec\Sylius\Component\Core\Test\Services;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Factory\ZoneFactoryInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\Scope;
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
@@ -34,28 +35,24 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         RepositoryInterface $countryRepository,
         RepositoryInterface $currencyRepository,
         RepositoryInterface $localeRepository,
-        RepositoryInterface $zoneMemberRepository,
         RepositoryInterface $zoneRepository,
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $countryFactory,
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,
-        FactoryInterface $zoneFactory,
-        FactoryInterface $zoneMemberFactory
+        ZoneFactoryInterface $zoneFactory
     ) {
         $this->beConstructedWith(
             $channelRepository,
             $countryRepository,
             $currencyRepository,
             $localeRepository,
-            $zoneMemberRepository,
             $zoneRepository,
             $channelFactory,
             $countryFactory,
             $currencyFactory,
             $localeFactory,
             $zoneFactory,
-            $zoneMemberFactory,
             'en_US'
         );
     }
@@ -75,15 +72,12 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         RepositoryInterface $countryRepository,
         RepositoryInterface $currencyRepository,
         RepositoryInterface $localeRepository,
-        RepositoryInterface $zoneMemberRepository,
         RepositoryInterface $zoneRepository,
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $countryFactory,
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,
-        FactoryInterface $zoneFactory,
-        FactoryInterface $zoneMemberFactory,
-        ZoneMemberInterface $zoneMember,
+        ZoneFactoryInterface $zoneFactory,
         ZoneInterface $zone,
         ChannelInterface $channel,
         CountryInterface $unitedStates,
@@ -96,17 +90,14 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         $localeFactory->createNew()->willReturn($locale);
         $locale->setCode('en_US')->shouldBeCalled();
 
-        $zoneMemberFactory->createNew()->willReturn($zoneMember);
-        $zoneFactory->createNew()->willReturn($zone);
+        $zoneFactory->createWithMembers(['US'])->willReturn($zone);
 
         $channel->setCode('WEB-US')->shouldBeCalled();
         $channel->setTaxCalculationStrategy('order_items_based')->shouldBeCalled();
 
-        $zoneMember->setCode('US')->shouldBeCalled();
         $zone->setCode('US')->shouldBeCalled();
         $zone->setName('United States')->shouldBeCalled();
         $zone->setType(ZoneInterface::TYPE_COUNTRY)->shouldBeCalled();
-        $zone->addMember($zoneMember)->shouldBeCalled();
 
         $countryFactory->createNew()->willReturn($unitedStates);
         $unitedStates->setCode('US')->shouldBeCalled();
@@ -128,7 +119,6 @@ final class DefaultUnitedStatesChannelFactorySpec extends ObjectBehavior
         $countryRepository->add($unitedStates)->shouldBeCalled();
         $channelRepository->add($channel)->shouldBeCalled();
         $zoneRepository->add($zone)->shouldBeCalled();
-        $zoneMemberRepository->add($zoneMember)->shouldBeCalled();
 
         $this->create();
     }
