@@ -18,8 +18,10 @@ use Doctrine\ODM\PHPCR\Query\Builder\ConstraintOrx;
 use Doctrine\ODM\PHPCR\Query\Builder\OrderBy;
 use Doctrine\ODM\PHPCR\Query\Builder\Ordering;
 use Doctrine\ODM\PHPCR\Query\Builder\QueryBuilder;
+use Doctrine\ODM\PHPCR\Query\Query;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\DataSource;
 use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
 use Sylius\Component\Grid\Data\DataSourceInterface;
@@ -81,9 +83,17 @@ final class DataSourceSpec extends ObjectBehavior
     }
 
     function it_should_get_the_data(
-        ExpressionBuilder $expressionBuilder
+        QueryBuilder $queryBuilder,
+        ExpressionBuilder $expressionBuilder,
+        Query $query
     ) {
         $expressionBuilder->getOrderBys()->willReturn([]);
+
+        $queryBuilder->orderBy()->willReturn(null);
+        $queryBuilder->getQuery()->willReturn($query);
+        $query->setMaxResults(Argument::any())->willReturn($query);
+        $query->setFirstResult(Argument::any())->willReturn($query);
+        $query->execute()->willReturn([]);
 
         $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }
@@ -91,6 +101,7 @@ final class DataSourceSpec extends ObjectBehavior
     function it_should_set_the_order_on_the_query_builder(
         QueryBuilder $queryBuilder,
         ExpressionBuilder $expressionBuilder,
+        Query $query,
         OrderBy $orderBy,
         Ordering $ordering
     ) {
@@ -104,12 +115,18 @@ final class DataSourceSpec extends ObjectBehavior
         $ordering->field('o.foo')->shouldBeCalled();
         $ordering->field('o.bar')->shouldBeCalled();
 
+        $queryBuilder->getQuery()->willReturn($query);
+        $query->setMaxResults(Argument::any())->willReturn($query);
+        $query->setFirstResult(Argument::any())->willReturn($query);
+        $query->execute()->willReturn([]);
+
         $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }
 
     function it_should_set_the_order_on_the_query_builder_as_fields_only(
         QueryBuilder $queryBuilder,
         ExpressionBuilder $expressionBuilder,
+        Query $query,
         OrderBy $orderBy,
         Ordering $ordering
     ) {
@@ -122,6 +139,11 @@ final class DataSourceSpec extends ObjectBehavior
         $orderBy->asc()->willReturn($ordering);
         $ordering->field('o.foo')->shouldBeCalled();
         $ordering->field('o.bar')->shouldBeCalled();
+
+        $queryBuilder->getQuery()->willReturn($query);
+        $query->setMaxResults(Argument::any())->willReturn($query);
+        $query->setFirstResult(Argument::any())->willReturn($query);
+        $query->execute()->willReturn([]);
 
         $this->getData(new Parameters(['page' => 1]))->shouldHaveType(Pagerfanta::class);
     }

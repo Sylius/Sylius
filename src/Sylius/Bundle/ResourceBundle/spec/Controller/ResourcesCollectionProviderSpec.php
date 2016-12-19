@@ -79,6 +79,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $paginator->setMaxPerPage(5)->shouldBeCalled();
         $paginator->setCurrentPage(6)->shouldBeCalled();
+        $paginator->getCurrentPageResults()->shouldBeCalled();
 
         $this->get($requestConfiguration, $repository)->shouldReturn($paginator);
     }
@@ -109,6 +110,7 @@ final class ResourcesCollectionProviderSpec extends ObjectBehavior
 
         $paginator->setMaxPerPage(8)->shouldBeCalled();
         $paginator->setCurrentPage(6)->shouldBeCalled();
+        $paginator->getCurrentPageResults()->shouldBeCalled();
 
         $pagerfantaRepresentationFactory->createRepresentation($paginator, Argument::type(Route::class))->willReturn($paginatedRepresentation);
 
