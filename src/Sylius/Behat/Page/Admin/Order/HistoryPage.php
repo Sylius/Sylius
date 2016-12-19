@@ -16,7 +16,7 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class HistoryPage extends SymfonyPage implements HistoryPageInterface
+class HistoryPage extends SymfonyPage implements HistoryPageInterface
 {
     /**
      * {@inheritdoc}
@@ -29,7 +29,7 @@ final class HistoryPage extends SymfonyPage implements HistoryPageInterface
     /**
      * @return int
      */
-    public function countChanges()
+    public function countShippingAddressChanges()
     {
         return count($this->getDocument()->findAll('css', '#shipping-address-changes tbody tr'));
     }

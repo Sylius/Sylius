@@ -4,10 +4,9 @@ sylius_admin_address_log_entry_index:
     defaults:
         _controller: sylius.controller.address_log_entry:indexAction
         _sylius:
-            template: "@SyliusAdmin/Order/History/addressIndex.html.twig"
+            template: "@SyliusAdmin/Order/History/_address.html.twig"
             grid: sylius_admin_address_log_entry
             section: admin
-            permission: true
             vars:
                 route:
                     parameters:

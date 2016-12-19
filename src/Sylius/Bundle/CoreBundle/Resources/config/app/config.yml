@@ -108,10 +108,3 @@ twig:
     exception_controller: "FOS\\RestBundle\\Controller\\ExceptionController::showAction"
     globals:
         sylius: "@sylius.context.shopper"
-
-sylius_resource:
-    resources:
-        sylius.address_log_entry:
-            classes:
-                model: Sylius\Component\Addressing\Model\AddressLogEntry
-                repository: Sylius\Bundle\ResourceBundle\Doctrine\ORM\ResourceLogEntryRepository

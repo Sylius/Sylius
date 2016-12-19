@@ -48,6 +48,7 @@ final class ArrayGridProvider implements GridProviderInterface
             throw new UndefinedGridException($code);
         }
 
+        // Need to clone grid definition in case of displaying on one page two grids using the same grid definition
         return clone $this->grids[$code];
     }
 

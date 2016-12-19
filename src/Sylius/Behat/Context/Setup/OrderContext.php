@@ -18,7 +18,6 @@ use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
-use Sylius\Component\Core\Model\Order;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -193,18 +192,19 @@ final class OrderContext implements Context
     }
 
     /**
-     * @When the customer changed shipping address' street to :street
+     * @Given the customer changed shipping address' street to :street
      */
     public function theCustomerChangedShippingAddressStreetTo($street)
     {
+        /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
-        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
-        /** @var Order $order */
         $shippingAddress = $order->getShippingAddress();
         $shippingAddress->setStreet($street);
 
         $this->objectManager->flush();
+
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
     }
 
     /**

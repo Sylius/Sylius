@@ -2,7 +2,7 @@
 
 {% import '@SyliusUi/Macro/labels.html.twig' as label %}
 
-{% block title %}{{ parent() }} {{ 'sylius.ui.order'|trans ~' #'~ order.number }} - {{ 'sylius.ui.order_history'|trans }}{% endblock %}
+{% block title %}{{ parent() }} {{ 'sylius.ui.order'|trans }} #{{ order.number }} - {{ 'sylius.ui.order_history'|trans }}{% endblock %}
 
 {% block content %}
 <div class="ui stackable two column grid">

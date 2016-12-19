@@ -14,7 +14,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.action
                     options:
-                        template: "@SyliusAdmin/Address/Grid/Field/action.html.twig"
+                        template: "@SyliusUi/Grid/Field/logAction.html.twig"
                 loggedAt:
                     type: datetime
                     label: sylius.ui.logged_at
@@ -24,4 +24,4 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.changes
                     options:
-                        template: "@SyliusAdmin/Address/Grid/Field/logData.html.twig"
+                        template: "@SyliusUi/Grid/Field/logData.html.twig"

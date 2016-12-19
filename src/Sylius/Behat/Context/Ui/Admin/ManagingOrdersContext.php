@@ -263,6 +263,7 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Then it should be billed to :customerName, :street, :postcode, :city, :countryName
+     * @Then the order should be billed to :customerName, :street, :postcode, :city, :countryName
      * @Then /^(this order) bill should (?:|still )be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
     public function itShouldBeBilledTo(
@@ -974,7 +975,7 @@ final class ManagingOrdersContext implements Context
     {
         Assert::same(
             (int) $count,
-            $this->historyPage->countChanges()
+            $this->historyPage->countShippingAddressChanges()
         );
     }
 
