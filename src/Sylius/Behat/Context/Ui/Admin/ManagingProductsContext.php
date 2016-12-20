@@ -212,7 +212,7 @@ final class ManagingProductsContext implements Context
      */
     public function iAssignItToChannel($channel)
     {
-        // Temporary solution until we we'll make current page resolver work with product pages
+        // Temporary solution until we will make current page resolver work with product pages
         $this->updateConfigurableProductPage->checkChannel($channel);
     }
 

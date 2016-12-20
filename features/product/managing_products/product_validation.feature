@@ -120,8 +120,8 @@ Feature: Products validation
     @ui
     Scenario: Trying to assign new channel to an existing configurable product without specifying its all variant prices for this channel
         Given the store has a "7 Wonders" configurable product
-        And this product has "7 Wonders: Cities" variant priced at "$30" in "United States" channel
-        And this product has "7 Wonders: Leaders" variant priced at "$20" in "United States" channel
+        And this product has "7 Wonders: Cities" variant priced at "$30"
+        And this product has "7 Wonders: Leaders" variant priced at "$20"
         And the store operates on another channel named "Mobile Channel"
         When I want to modify the "7 Wonders" product
         And I assign it to channel "Mobile Channel"

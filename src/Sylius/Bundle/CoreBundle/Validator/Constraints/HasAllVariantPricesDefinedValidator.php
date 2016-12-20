@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -28,7 +29,7 @@ final class HasAllVariantPricesDefinedValidator extends ConstraintValidator
      */
     public function validate($product, Constraint $constraint)
     {
-        Assert::isInstanceOf($constraint, HasAllVariantPricesDefined::class);
+        Assert::isInstanceOf($product, ProductInterface::class);
 
         if ($product->isSimple()) {
             return;

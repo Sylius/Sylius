@@ -21,7 +21,7 @@ final class HasAllPricesDefined extends Constraint
     /**
      * @var string
      */
-    public $message = 'You must define price for every channel.';
+    public $message = 'sylius.product_variant.channel_pricing.all_defined';
 
     /**
      * {@inheritdoc}
