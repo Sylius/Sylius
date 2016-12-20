@@ -54,6 +54,11 @@ interface UpdateConfigurableProductPageInterface extends UpdatePageInterface
     public function selectMainTaxon(TaxonInterface $taxon);
 
     /**
+     * @param string $channelName
+     */
+    public function checkChannel($channelName);
+
+    /**
      * @param string $code
      *
      * @return bool
