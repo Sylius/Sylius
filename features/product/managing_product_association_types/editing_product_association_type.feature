@@ -9,7 +9,7 @@ Feature: Editing a product association type
         And the store has a product association type "Cross sell"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Changing a name of an existing product association type
         When I want to modify the "Cross sell" product association type
         And I rename it to "Up sell" in "English (United States)"

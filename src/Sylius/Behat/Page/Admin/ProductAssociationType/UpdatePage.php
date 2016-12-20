@@ -54,7 +54,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_association_type_code',
-            'name' => '#sylius_product_association_type_name',
+            'name' => '#sylius_product_association_type_translations_en_US_name',
         ]);
     }
 }

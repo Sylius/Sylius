@@ -88,11 +88,18 @@ final class ManagingProductAssociationTypesContext implements Context
 
     /**
      * @When I name it :name in :language
-     * @When I do not name it
      */
     public function iNameItIn($name, $language)
     {
         $this->createPage->nameItIn($name, $language);
+    }
+
+    /**
+     * @When I do not name it
+     */
+    public function iDoNotNameIt()
+    {
+        // Intentionally left blank to fulfill context expectation
     }
 
     /**

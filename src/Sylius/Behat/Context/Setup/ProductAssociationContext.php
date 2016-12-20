@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeTranslationInterface;
+use Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -48,7 +49,7 @@ final class ProductAssociationContext implements Context
     private $productAssociationFactory;
 
     /**
-     * @var RepositoryInterface
+     * @var ProductAssociationTypeRepositoryInterface
      */
     private $productAssociationTypeRepository;
 
@@ -67,7 +68,7 @@ final class ProductAssociationContext implements Context
      * @param FactoryInterface $productAssociationTypeFactory
      * @param FactoryInterface $productAssociationTypeTranslationFactory
      * @param FactoryInterface $productAssociationFactory
-     * @param RepositoryInterface $productAssociationTypeRepository
+     * @param ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository
      * @param RepositoryInterface $productAssociationRepository
      * @param ObjectManager $objectManager
      */
@@ -76,7 +77,7 @@ final class ProductAssociationContext implements Context
         FactoryInterface $productAssociationTypeFactory,
         FactoryInterface $productAssociationTypeTranslationFactory,
         FactoryInterface $productAssociationFactory,
-        RepositoryInterface $productAssociationTypeRepository,
+        ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
         RepositoryInterface $productAssociationRepository,
         ObjectManager $objectManager
     ) {

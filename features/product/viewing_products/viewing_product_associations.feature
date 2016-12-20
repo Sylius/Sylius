@@ -14,13 +14,13 @@ Feature: Viewing product's associations
         And the product "LG G3" has an association "Accessories" with products "LG headphones" and "LG earphones"
         And the product "LG G3" has also an association "Alternatives" with products "LG G4" and "LG G5"
 
-    @ui @todo
+    @ui
     Scenario: Viewing a detailed page with product's associations in default locale
         When I view product "LG G3"
         Then I should see the product association "Accessories" with products "LG headphones" and "LG earphones"
         And I should also see the product association "Alternatives" with products "LG G4" and "LG G5"
 
-    @ui @todo
+    @ui
     Scenario: Viewing a detailed page with product's associations after locale change
         When I switch to the "Polish (Poland)" locale
         And I view product "LG G3"
