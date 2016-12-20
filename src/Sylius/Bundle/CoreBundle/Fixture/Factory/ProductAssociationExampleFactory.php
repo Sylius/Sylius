@@ -16,8 +16,8 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Product\Model\ProductAssociationInterface;
 use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
+use Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -31,7 +31,7 @@ class ProductAssociationExampleFactory extends AbstractExampleFactory implements
     private $productAssociationFactory;
 
     /**
-     * @var RepositoryInterface
+     * @var ProductAssociationTypeRepositoryInterface
      */
     private $productAssociationTypeRepository;
 
@@ -47,12 +47,12 @@ class ProductAssociationExampleFactory extends AbstractExampleFactory implements
 
     /**
      * @param FactoryInterface $productAssociationFactory
-     * @param RepositoryInterface $productAssociationTypeRepository
+     * @param ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository
      * @param ProductRepositoryInterface $productRepository
      */
     public function __construct(
         FactoryInterface $productAssociationFactory,
-        RepositoryInterface $productAssociationTypeRepository,
+        ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository,
         ProductRepositoryInterface $productRepository
     ) {
         $this->productAssociationFactory = $productAssociationFactory;

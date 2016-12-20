@@ -69,6 +69,7 @@
 
         <service id="sylius.fixture.example_factory.product_association_type" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductAssociationTypeExampleFactory">
             <argument type="service" id="sylius.factory.product_association_type" />
+            <argument type="service" id="sylius.repository.locale" />
         </service>
 
         <service id="sylius.fixture.example_factory.product_association" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductAssociationExampleFactory">
