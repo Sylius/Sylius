@@ -13,11 +13,11 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.factory.promotion_action.decorated" class="Sylius\Component\Core\Factory\PromotionActionFactory" decorates="sylius.factory.promotion_action" public="false">
-            <argument type="service" id="sylius.factory.promotion_action.decorated.inner" />
+        <service id="sylius.custom_factory.promotion_action" class="Sylius\Component\Core\Factory\PromotionActionFactory" decorates="sylius.factory.promotion_action" public="false">
+            <argument type="service" id="sylius.custom_factory.promotion_action.inner" />
         </service>
-        <service id="sylius.factory.promotion_rule.decorated" class="Sylius\Component\Core\Factory\PromotionRuleFactory" decorates="sylius.factory.promotion_rule" public="false">
-            <argument type="service" id="sylius.factory.promotion_rule.decorated.inner" />
+        <service id="sylius.custom_factory.promotion_rule" class="Sylius\Component\Core\Factory\PromotionRuleFactory" decorates="sylius.factory.promotion_rule" public="false">
+            <argument type="service" id="sylius.custom_factory.promotion_rule.inner" />
         </service>
 
         <service id="sylius.active_promotions_provider" class="Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider">
@@ -45,7 +45,7 @@
         <service id="sylius.promotion_rule_checker.contains_product" class="Sylius\Component\Core\Promotion\Checker\Rule\ContainsProductRuleChecker">
             <tag name="sylius.promotion_rule_checker" type="contains_product" label="Contains product" />
         </service>
-        <service id="sylius.channel_aware_promotion_rule_checker.item_total" class="Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker" decorates="sylius.promotion_rule_checker.item_total">
+        <service id="sylius.channel_aware_promotion_rule_checker.item_total" class="Sylius\Component\Core\Promotion\Checker\Rule\ItemTotalRuleChecker" decorates="sylius.promotion_rule_checker.item_total" public="false">
             <argument type="service" id="sylius.channel_aware_promotion_rule_checker.item_total.inner" />
         </service>
 

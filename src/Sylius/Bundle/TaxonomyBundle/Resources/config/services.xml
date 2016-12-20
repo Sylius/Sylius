@@ -23,9 +23,8 @@
             </call>
         </service>
 
-        <service id="sylius.factory.taxon.decorated" class="Sylius\Component\Taxonomy\Factory\TaxonFactory"
-                 decorates="sylius.factory.taxon" public="false">
-            <argument type="service" id="sylius.factory.taxon.decorated.inner" />
+        <service id="sylius.custom_factory.taxon" class="Sylius\Component\Taxonomy\Factory\TaxonFactory" decorates="sylius.factory.taxon" public="false">
+            <argument type="service" id="sylius.custom_factory.taxon.inner" />
         </service>
 
         <service id="sylius.generator.taxon_slug" class="Sylius\Component\Taxonomy\Generator\TaxonSlugGenerator">
