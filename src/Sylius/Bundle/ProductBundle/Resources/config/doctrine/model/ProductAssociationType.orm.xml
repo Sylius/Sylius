@@ -20,7 +20,6 @@
         </id>
 
         <field name="code" column="code" type="string" unique="true" />
-        <field name="name" column="name" type="string" />
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
