@@ -133,6 +133,10 @@ sylius:
             channels: Canaux
         product_attribute:
             position: Emplacement
+        zone:
+            scopes:
+                shipping: Expédition
+                tax: TVA
     installer:
         extensions:
             header: Extensions

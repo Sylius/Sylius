@@ -126,6 +126,10 @@ sylius:
                 amount: Importo
         payment_method:
             channels: Canali
+        zone:
+            scopes:
+                shipping: Spese di spedizione
+                tax: Tasse
     installer:
         extensions:
             header: estensioni

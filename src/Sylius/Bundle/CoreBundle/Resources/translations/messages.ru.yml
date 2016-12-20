@@ -127,6 +127,10 @@ sylius:
                 amount: Сумма
         payment_method:
             channels: Каналы
+        zone:
+            scopes:
+                shipping: Способ доставки
+                tax: Налог
     installer:
         extensions:
             header: расширения

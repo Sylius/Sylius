@@ -3,6 +3,8 @@
 
 sylius:
     channel:
+        base_currency:
+            not_blank: Bitte geben Sie die Basiswährung für den Kanal an.
         default_locale:
             not_blank: Bitte wählen Sie die Standardsprache für diesen Kanal.
     channel_pricing:

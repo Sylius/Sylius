@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    inventory: sylius.breadcrumb.inventory.index
                     options: sylius.breadcrumb.option.index
                 configuration:
                     countries: 国の設定

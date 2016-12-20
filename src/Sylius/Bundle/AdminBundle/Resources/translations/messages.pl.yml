@@ -9,6 +9,7 @@ sylius:
                     association_types: Typy powiązań
                     attributes: Cechy
                     header: Katalog
+                    inventory: Zapasy
                     options: Warianty
                     products: Produkty
                     taxons: Podatki

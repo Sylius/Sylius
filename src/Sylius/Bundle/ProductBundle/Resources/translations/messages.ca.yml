@@ -8,6 +8,8 @@ sylius:
             description: Descripció
             meta_keywords: Meta keywords
             meta_description: Metadescripció
+        product_variant:
+            name: Nom
         association_type:
             name: Nom
         variant:

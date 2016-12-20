@@ -9,6 +9,7 @@ sylius:
                     association_types: Verbindungstypen
                     attributes: Attribute
                     header: Katalog
+                    inventory: Lagerbestände
                     options: Optionen
                     products: Produkte
                     taxons: Produktgruppen

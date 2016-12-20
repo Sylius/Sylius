@@ -123,6 +123,10 @@ sylius:
                 amount: Antal
         payment_method:
             channels: Kanaler
+        zone:
+            scopes:
+                shipping: Leverans
+                tax: Skatt
     installer:
         extensions:
             header: tillägg

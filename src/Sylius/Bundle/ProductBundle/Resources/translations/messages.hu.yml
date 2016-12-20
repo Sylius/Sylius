@@ -13,6 +13,7 @@ sylius:
         product_variant:
             available_on: A rendelkezésre álló
             available_until: Elérhető amíg
+            name: Név
         association_type:
             name: Név
         association:

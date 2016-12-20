@@ -9,6 +9,7 @@ sylius:
                     association_types: انواع ارتباط ها
                     attributes: ویژگی‌ها
                     header: فهرست
+                    inventory: موجودی کالا
                     options: گزینه‎ها
                     products: محصولات
                     taxons: دسته بندی ها

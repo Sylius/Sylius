@@ -7,6 +7,8 @@ sylius:
             name: Name
             meta_keywords: Meta-Stichwörter
             meta_description: Meta-Beschreibung
+        product_variant:
+            name: Name
         association_type:
             name: Name
         variant:

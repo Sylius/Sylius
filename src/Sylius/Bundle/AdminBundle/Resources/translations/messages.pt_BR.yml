@@ -9,6 +9,7 @@ sylius:
                     association_types: Tipos de associação
                     attributes: Atributos
                     header: Catálogo
+                    inventory: Estoque
                     options: Opções
                 configuration:
                     admin_users: Administradores

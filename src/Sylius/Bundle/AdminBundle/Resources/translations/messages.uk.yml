@@ -9,6 +9,7 @@ sylius:
                     association_types: Типи асоціювання
                     attributes: Атрибути
                     header: Каталог
+                    inventory: Інвентаризація
                     options: Опції
                     products: Продукція
                     taxons: Таксони

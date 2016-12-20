@@ -13,6 +13,7 @@ sylius:
         product_variant:
             available_on: Na voljo na
             available_until: Na voljo do
+            name: Ime
         association_type:
             name: Ime
         association:

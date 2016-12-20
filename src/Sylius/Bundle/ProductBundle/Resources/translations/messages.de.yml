@@ -15,6 +15,7 @@ sylius:
         product_variant:
             available_on: Verfügbar ab
             available_until: Verfügbar bis
+            name: Name
         association_type:
             name: Name
         association:

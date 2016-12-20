@@ -35,8 +35,7 @@ sylius:
                 zone: Zone
             scope: Champ d'application
             scopes:
-                shipping: Expédition
-                tax: TVA
+                all: Tous
             select: Sélectionner
             select_scope: Sélectionnez le champ d'application
         zone_member:

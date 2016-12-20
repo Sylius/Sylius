@@ -9,6 +9,7 @@ sylius:
                     association_types: Kapcsolódó típusok
                     attributes: Tulajdonságok
                     header: Katalógus
+                    inventory: Leltár
                     options: Beállítások
                     products: Termékek
                 configuration:

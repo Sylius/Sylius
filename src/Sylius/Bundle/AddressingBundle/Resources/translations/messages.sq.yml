@@ -33,6 +33,8 @@ sylius:
                 province: Rajoni
                 zone: Zona
             scope: Zona
+            scopes:
+                all: Të gjitha
             select: Zgjidh
             select_scope: Zgjidh zonën
         zone_member:

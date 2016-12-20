@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    inventory: Інвентар
                     options: Опцыі
                 configuration:
                     countries: Краіны

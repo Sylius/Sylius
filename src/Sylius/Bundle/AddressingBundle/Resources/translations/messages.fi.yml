@@ -32,6 +32,8 @@ sylius:
                 country: Maa
                 province: Lääni
                 zone: Alue
+            scopes:
+                all: Kaikki
             select: Valitse
         zone_member:
             select: Valitse

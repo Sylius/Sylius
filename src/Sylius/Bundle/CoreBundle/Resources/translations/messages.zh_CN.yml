@@ -121,6 +121,9 @@ sylius:
                 taxon: 分类
         payment_method:
             channels: 频道
+        zone:
+            scopes:
+                tax: 税收
     installer:
         extensions:
             header: 扩展组件

@@ -5,6 +5,8 @@ sylius:
     form:
         product:
             name: الاسم
+        product_variant:
+            name: الاسم
         association_type:
             name: الاسم
         variant:

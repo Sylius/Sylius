@@ -8,6 +8,7 @@ sylius:
                 catalog:
                     attributes: Attribut
                     header: Katalog
+                    inventory: Lager
                     options: Alternativ
                     products: Produkter
                     taxons: Taxa

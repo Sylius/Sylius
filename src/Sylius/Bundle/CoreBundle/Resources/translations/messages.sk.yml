@@ -122,6 +122,10 @@ sylius:
                 taxon: Kategória
         payment_method:
             channels: Kanály
+        zone:
+            scopes:
+                shipping: Doručenie
+                tax: Daň
     installer:
         extensions:
             header: Rozšírenia

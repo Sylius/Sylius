@@ -122,6 +122,10 @@ sylius:
                 taxon: Taxon
         payment_method:
             channels: Canais
+        zone:
+            scopes:
+                shipping: Entrega
+                tax: Taxa
     installer:
         extensions:
             header: extensões

@@ -131,6 +131,10 @@ sylius:
             channels: ช่องทางจำหน่าย
         product_attribute:
             position: ตำแหน่ง
+        zone:
+            scopes:
+                shipping: จัดส่ง
+                tax: ภาษี
     installer:
         extensions:
             header: ส่วนขยาย

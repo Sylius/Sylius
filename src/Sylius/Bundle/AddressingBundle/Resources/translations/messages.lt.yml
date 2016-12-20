@@ -34,6 +34,8 @@ sylius:
                 province: Provincija
                 zone: Zona
             scope: Apimtis
+            scopes:
+                all: Visi
             select: Pasirinkite
             select_scope: Pasirinkite sritį
         zone_member:

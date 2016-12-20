@@ -35,8 +35,7 @@ sylius:
                 zone: Região
             scope: Escopo
             scopes:
-                shipping: Entrega
-                tax: Taxa
+                all: Todos(as)
             select: Selecione
             select_scope: Selecione o escopo
         zone_member:
