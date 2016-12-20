@@ -46,6 +46,7 @@ final class EmailContext implements Context
     /**
      * @Then it should be sent to :recipient
      * @Then the email with reset token should be sent to :recipient
+     * @Then the email with contact request should be sent to :recipient
      */
     public function anEmailShouldBeSentTo($recipient)
     {

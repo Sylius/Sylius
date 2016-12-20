@@ -25,6 +25,7 @@ sylius:
             taxonomies: Taxonomies
             locale_default: Default locale
             locales: Locales
+            contact_email: Contact email
             currency_base: Base currency
             currencies: Currencies
             shipping_methods: Shipping Methods

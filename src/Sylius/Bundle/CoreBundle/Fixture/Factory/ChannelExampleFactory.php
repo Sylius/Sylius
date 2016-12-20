@@ -86,6 +86,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
         $channel->setColor($options['color']);
         $channel->setTaxCalculationStrategy($options['tax_calculation_strategy']);
         $channel->setThemeName($options['theme_name']);
+        $channel->setContactEmail($options['contact_email']);
 
         $channel->setDefaultLocale($options['default_locale']);
         foreach ($options['locales'] as $locale) {
@@ -141,6 +142,7 @@ class ChannelExampleFactory extends AbstractExampleFactory implements ExampleFac
             ->setAllowedTypes('currencies', 'array')
             ->setNormalizer('currencies', LazyOption::findBy($this->currencyRepository, 'code'))
             ->setDefault('theme_name', null)
+            ->setDefault('contact_email', null)
         ;
     }
 }

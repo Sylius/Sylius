@@ -16,6 +16,7 @@ namespace Sylius\Bundle\CoreBundle\Mailer;
  */
 final class Emails
 {
+    const CONTACT_REQUEST = 'contact_request';
     const ORDER_CONFIRMATION = 'order_confirmation';
     const SHIPMENT_CONFIRMATION = 'shipment_confirmation';
     const USER_REGISTRATION = 'user_registration';

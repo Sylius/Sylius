@@ -31,5 +31,22 @@
         <property name="taxCalculationStrategy">
             <constraint name="NotBlank" />
         </property>
+        <property name="contactEmail">
+            <constraint name="Length">
+                <option name="min">2</option>
+                <option name="minMessage">sylius.channel.contact_email.min</option>
+                <option name="max">254</option>
+                <option name="maxMessage">sylius.channel.contact_email.max</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+            <constraint name="Email">
+                <option name="message">sylius.channel.contact_email.invalid</option>
+                <option name="groups">
+                    <value>sylius</value>
+                </option>
+            </constraint>
+        </property>
     </class>
 </constraint-mapping>

@@ -9,7 +9,7 @@
             </div>
             {{ form_row(form.description) }}
             {{ form_row(form.enabled) }}
-            <div class="three fields">
+            <div class="two fields">
                 <div class="field">
                     {{ form_label(form.hostname) }}
                     <div class="ui labeled input">
@@ -18,6 +18,9 @@
                     </div>
                     {{ form_errors(form.hostname) }}
                 </div>
+                {{ form_row(form.contactEmail) }}
+            </div>
+            <div class="two fields">
                 {{ form_row(form.color) }}
                 {{ form_row(form.themeName) }}
             </div>

@@ -44,6 +44,7 @@ class ChannelFixture extends AbstractResourceFixture
                 ->scalarNode('base_currency')->cannotBeEmpty()->end()
                 ->arrayNode('currencies')->prototype('scalar')->end()->end()
                 ->scalarNode('theme_name')->end()
+                ->scalarNode('contact_email')->end()
         ;
     }
 }

@@ -75,4 +75,14 @@ interface ChannelInterface extends
      * @param string $themeName
      */
     public function setThemeName($themeName);
+
+    /**
+     * @return string
+     */
+    public function getContactEmail();
+
+    /**
+     * @param string $contactEmail
+     */
+    public function setContactEmail($contactEmail);
 }

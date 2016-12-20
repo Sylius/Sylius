@@ -167,6 +167,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I set its contact email as :contactEmail
+     */
+    public function iSetItsContactEmailAs($contactEmail)
+    {
+        $this->createPage->setContactEmail($contactEmail);
+    }
+
+    /**
      * @When I define its color as :color
      */
     public function iDefineItsColorAs($color)

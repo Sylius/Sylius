@@ -58,6 +58,11 @@ class Channel extends BaseChannel implements ChannelInterface
      */
     protected $themeName;
 
+    /**
+     * @var string
+     */
+    protected $contactEmail;
+
     public function __construct()
     {
         parent::__construct();
@@ -216,5 +221,21 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setThemeName($themeName)
     {
         $this->themeName = $themeName;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getContactEmail()
+    {
+        return $this->contactEmail;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setContactEmail($contactEmail)
+    {
+        $this->contactEmail = $contactEmail;
     }
 }

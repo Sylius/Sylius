@@ -43,6 +43,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function setHostname($hostname);
 
     /**
+     * @param string $contactEmail
+     */
+    public function setContactEmail($contactEmail);
+
+    /**
      * @param string $color
      */
     public function defineColor($color);

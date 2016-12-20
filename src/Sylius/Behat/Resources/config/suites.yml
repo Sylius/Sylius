@@ -28,6 +28,7 @@ imports:
     - suites/ui/channel/theming.yml
     - suites/ui/checkout/checkout.yml
     - suites/ui/checkout/paying_for_order.yml
+    - suites/ui/contact/requesting_contact.yml
     - suites/ui/currency/currencies.yml
     - suites/ui/currency/managing_currencies.yml
     - suites/ui/currency/managing_exchange_rates.yml

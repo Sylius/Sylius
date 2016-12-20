@@ -89,6 +89,17 @@ final class ChannelFixtureTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function channel_contact_email_is_optional()
+    {
+        $this->assertConfigurationIsValid(
+            [['custom' => [['contact_email' => 'contact@example.com']]]],
+            'custom.*.contact_email'
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getConfiguration()

@@ -20,6 +20,7 @@ use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType;
 use Sylius\Bundle\LocaleBundle\Form\Type\LocaleChoiceType;
 use Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType;
 use Symfony\Component\Form\AbstractTypeExtension;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -62,6 +63,10 @@ final class ChannelTypeExtension extends AbstractTypeExtension
                 'required' => false,
                 'empty_data' => null,
                 'placeholder' => 'sylius.ui.no_theme',
+            ])
+            ->add('contactEmail', EmailType::class, [
+                'label' => 'sylius.form.channel.contact_email',
+                'required' => false,
             ])
             ->addEventSubscriber(new AddBaseCurrencySubscriber())
             ->addEventSubscriber(new ChannelFormSubscriber())
