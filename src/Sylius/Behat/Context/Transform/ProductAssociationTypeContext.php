@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Product\Repository\ProductAssociationTypeRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -21,14 +21,14 @@ use Webmozart\Assert\Assert;
 final class ProductAssociationTypeContext implements Context
 {
     /**
-     * @var RepositoryInterface
+     * @var ProductAssociationTypeRepositoryInterface
      */
     private $productAssociationTypeRepository;
 
     /**
-     * @param RepositoryInterface $productAssociationTypeRepository
+     * @param ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository
      */
-    public function __construct(RepositoryInterface $productAssociationTypeRepository)
+    public function __construct(ProductAssociationTypeRepositoryInterface $productAssociationTypeRepository)
     {
         $this->productAssociationTypeRepository = $productAssociationTypeRepository;
     }
@@ -39,15 +39,21 @@ final class ProductAssociationTypeContext implements Context
      */
     public function getProductAssociationTypeByName($productAssociationTypeName)
     {
-        $productAssociationType = $this->productAssociationTypeRepository->findOneBy([
-            'name' => $productAssociationTypeName,
-        ]);
-
-        Assert::notNull(
-            $productAssociationType,
-            sprintf('Cannot find product association type with name %s', $productAssociationTypeName)
+        $productAssociationTypes = $this->productAssociationTypeRepository->findByName(
+            $productAssociationTypeName,
+            'en_US'
         );
 
-        return $productAssociationType;
+        Assert::eq(
+            1,
+            count($productAssociationTypes),
+            sprintf(
+                '%d product association types has been found with name "%s".',
+                count($productAssociationTypes),
+                $productAssociationTypeName
+            )
+        );
+
+        return $productAssociationTypes[0];
     }
 }

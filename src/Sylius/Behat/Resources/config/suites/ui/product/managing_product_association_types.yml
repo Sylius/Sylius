@@ -7,9 +7,11 @@ default:
             contexts_services:
                 - sylius.behat.context.hook.doctrine_orm
 
+                - sylius.behat.context.transform.locale
                 - sylius.behat.context.transform.product_association_type
                 - sylius.behat.context.transform.shared_storage
 
+                - sylius.behat.context.setup.locale
                 - sylius.behat.context.setup.product_association
                 - sylius.behat.context.setup.admin_security
 

@@ -12,6 +12,7 @@
 namespace Sylius\Component\Product\Model;
 
 use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\TranslatableTrait;
 
 /**
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
@@ -20,6 +21,9 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 class ProductAssociationType implements ProductAssociationTypeInterface
 {
     use TimestampableTrait;
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
 
     /**
      * @var int
@@ -38,6 +42,8 @@ class ProductAssociationType implements ProductAssociationTypeInterface
 
     public function __construct()
     {
+        $this->initializeTranslationsCollection();
+
         $this->createdAt = new \DateTime();
         $this->updatedAt = new \DateTime();
     }
@@ -79,7 +85,7 @@ class ProductAssociationType implements ProductAssociationTypeInterface
      */
     public function getName()
     {
-        return $this->name;
+        return $this->getTranslation()->getName();
     }
 
     /**
@@ -87,6 +93,14 @@ class ProductAssociationType implements ProductAssociationTypeInterface
      */
     public function setName($name)
     {
-        $this->name = $name;
+        $this->getTranslation()->setName($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function createTranslation()
+    {
+        return new ProductAssociationTypeTranslation();
     }
 }

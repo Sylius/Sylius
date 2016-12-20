@@ -9,23 +9,22 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\ProductAssociationType;
+namespace Sylius\Component\Product\Model;
 
-use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface CreatePageInterface extends BaseCreatePageInterface
+interface ProductAssociationTypeTranslationInterface extends ResourceInterface
 {
     /**
-     * @param string $code
+     * @return string
      */
-    public function specifyCode($code);
+    public function getName();
 
     /**
      * @param string $name
-     * @param string $language
      */
-    public function nameItIn($name, $language);
+    public function setName($name);
 }

@@ -25,6 +25,12 @@
             <tag name="form.type" />
         </service>
 
+        <service id="sylius.form.type.product_association_type_translation" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationTypeTranslationType">
+            <argument>%sylius.model.product_association_type_translation.class%</argument>
+            <argument type="collection"><argument>sylius</argument></argument>
+            <tag name="form.type" />
+        </service>
+
         <service id="sylius.form.type.product_association_type_choice" class="Sylius\Bundle\ProductBundle\Form\Type\ProductAssociationTypeChoiceType">
             <argument type="service" id="sylius.repository.product_association_type" />
             <tag name="form.type" />

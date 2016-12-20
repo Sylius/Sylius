@@ -22,6 +22,8 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
+                    options:
+                        fields: [translation.name]
             actions:
                 main:
                     create:

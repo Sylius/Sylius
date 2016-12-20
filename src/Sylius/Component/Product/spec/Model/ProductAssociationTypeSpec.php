@@ -21,6 +21,12 @@ use Sylius\Component\Product\Model\ProductAssociationTypeInterface;
  */
 final class ProductAssociationTypeSpec extends ObjectBehavior
 {
+    public function let()
+    {
+        $this->setCurrentLocale('en_US');
+        $this->setFallbackLocale('en_US');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType(ProductAssociationType::class);
@@ -29,11 +35,5 @@ final class ProductAssociationTypeSpec extends ObjectBehavior
     function it_implements_association_type_interface()
     {
         $this->shouldImplement(ProductAssociationTypeInterface::class);
-    }
-
-    function it_has_name()
-    {
-        $this->setName('Association type name');
-        $this->getName()->shouldBe('Association type name');
     }
 }

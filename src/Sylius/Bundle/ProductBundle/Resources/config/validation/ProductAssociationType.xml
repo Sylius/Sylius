@@ -36,18 +36,8 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <property name="name">
-            <constraint name="NotBlank">
-                <option name="message">sylius.association_type.name.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="min">2</option>
-                <option name="minMessage">sylius.association_type.name.min_length</option>
-                <option name="max">255</option>
-                <option name="maxMessage">sylius.association_type.name.max_length</option>
-                <option name="groups">sylius</option>
-            </constraint>
+        <property name="translations">
+            <constraint name="Valid" />
         </property>
     </class>
 </constraint-mapping>

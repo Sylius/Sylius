@@ -144,9 +144,11 @@
         <service id="sylius.behat.context.setup.product_association" class="Sylius\Behat\Context\Setup\ProductAssociationContext">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="__symfony__.sylius.factory.product_association_type" />
+            <argument type="service" id="__symfony__.sylius.factory.product_association_type_translation" />
             <argument type="service" id="__symfony__.sylius.factory.product_association" />
             <argument type="service" id="__symfony__.sylius.repository.product_association_type" />
             <argument type="service" id="__symfony__.sylius.repository.product_association" />
+            <argument type="service" id="__symfony__.doctrine.orm.entity_manager" />
             <tag name="fob.context_service" />
         </service>
 
