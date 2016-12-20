@@ -35,8 +35,7 @@ sylius:
                 zone: Zóna
             scope: Hatókör
             scopes:
-                shipping: Szállítás
-                tax: Adó
+                all: Mind
             select: Válassza ki
             select_scope: Hatókör kiválasztása
         zone_member:

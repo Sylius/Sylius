@@ -35,8 +35,7 @@ sylius:
                 zone: Versandgebiet
             scope: Umfang
             scopes:
-                shipping: Versandart
-                tax: Steuer
+                all: Alle
             select: Bundesland auswählen
             select_scope: Bereich wählen
         zone_member:

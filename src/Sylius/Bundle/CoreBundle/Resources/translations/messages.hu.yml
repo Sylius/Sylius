@@ -124,6 +124,10 @@ sylius:
                 taxon: Taxonómia
         payment_method:
             channels: Csatornák
+        zone:
+            scopes:
+                shipping: Szállítás
+                tax: Adó
     installer:
         extensions:
             header: kiegészítők

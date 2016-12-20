@@ -9,6 +9,7 @@ sylius:
                     association_types: Tipos de associação
                     attributes: Atributos
                     header: Catálogo
+                    inventory: Inventário
                     options: Opções
                     products: Produtos
                     taxons: Taxas

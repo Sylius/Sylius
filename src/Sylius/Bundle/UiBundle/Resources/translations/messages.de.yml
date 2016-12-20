@@ -421,6 +421,7 @@ sylius:
         manage_emails: E-Mails verwalten
         manage_exchange_rates: Wechselkurse verwalten
         manage_geographical_zones: Länderverwaltung
+        manage_inventory: Lagerbestand verwalten
         manage_languages_available_in_the_store: Verwaltung der verschiedene Sprachen in dem Shop
         manage_metadata: Metadaten verwalten
         manage_options: Produktoptionen verwalten
@@ -624,6 +625,7 @@ sylius:
         qty_min: Mindestanzahl
         quantity: Anzahl
         rating: Bewertung
+        ratio: Verhältnis
         ready: Bereit
         recent_customers: Neuste Kunden
         recent_orders: Letzte Bestellungen
@@ -749,6 +751,7 @@ sylius:
         thank_you_for_your_order: Danke für Ihre Bestellung
         theme: Template
         the_instructions_below_will_be_displayed_to_the_customer: Die folgenden Anweisungen werden dem Kunden angezeigt
+        the_page_you_are_looking_for_does_not_exist: Die gesuchte Seite existiert nicht.
         there_are_no_attributes_configured: Es wurden noch keine Attribute konfiguriert
         there_are_no_blocks_to_display: Keine Blocks zum anzeigen vorhanden
         there_are_no_channels_configured: Es wurden noch keine Channels konfiguriert
@@ -803,6 +806,7 @@ sylius:
         translations: Übersetzungen
         type: Typ
         unavailable: Nicht verfügbar
+        unexpected_error_occurred: Ein unerwarteter Fehler ist aufgetreten.
         unit_price: Stückpreis
         unknown: Unbekannt
         unlimited: Unbegrenzt

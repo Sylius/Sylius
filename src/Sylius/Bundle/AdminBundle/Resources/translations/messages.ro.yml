@@ -9,6 +9,7 @@ sylius:
                     association_types: Tipuri de asociere
                     attributes: Atribute
                     header: Catalog
+                    inventory: Inventar
                     options: Opţiuni
                     products: Produse
                     taxons: Taxoni

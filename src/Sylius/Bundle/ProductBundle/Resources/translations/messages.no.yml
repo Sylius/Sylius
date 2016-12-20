@@ -11,6 +11,7 @@ sylius:
             meta_description: Metabeskrivelse
         product_variant:
             available_on: Tilgjengelig
+            name: Navn
         association_type:
             name: Navn
         variant:

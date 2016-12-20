@@ -9,6 +9,7 @@ sylius:
                     association_types: 关联类型
                     attributes: 属性
                     header: 目录
+                    inventory: 库存
                     options: 选项
                     taxons: 分类
                 configuration:

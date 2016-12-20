@@ -35,8 +35,7 @@ sylius:
                 zone: Zóna
             scope: Rozsah
             scopes:
-                shipping: Doručenie
-                tax: Daň
+                all: Všetky
             select: Vyberte
             select_scope: Vyberte rozsah
         zone_member:

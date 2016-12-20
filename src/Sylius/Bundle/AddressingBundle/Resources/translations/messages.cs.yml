@@ -34,6 +34,8 @@ sylius:
                 province: Provincie
                 zone: Oblast
             scope: Rozsah
+            scopes:
+                all: Všechno
             select: Vybrat
             select_scope: Zvolte rozsah
         zone_member:

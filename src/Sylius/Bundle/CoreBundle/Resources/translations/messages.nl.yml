@@ -136,6 +136,10 @@ sylius:
             channels: Kanalen
         product_attribute:
             position: Positie
+        zone:
+            scopes:
+                shipping: Verzending
+                tax: BTW
     installer:
         extensions:
             header: extensies

@@ -35,8 +35,7 @@ sylius:
                 zone: Zon
             scope: Omfattning
             scopes:
-                shipping: Leverans
-                tax: Skatt
+                all: Alla
             select: Välj
             select_scope: Välj omfattning
         zone_member:

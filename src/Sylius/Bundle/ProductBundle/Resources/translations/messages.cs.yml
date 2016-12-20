@@ -12,6 +12,7 @@ sylius:
             meta_description: Meta popis
         product_variant:
             available_on: Dostupný od
+            name: Jméno
         association_type:
             name: Jméno
         variant:

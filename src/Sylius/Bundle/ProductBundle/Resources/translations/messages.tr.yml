@@ -12,6 +12,7 @@ sylius:
             meta_description: Meta açıklama
         product_variant:
             available_on: Mevcut üzerine
+            name: Ad
         association_type:
             name: Ad
         variant:

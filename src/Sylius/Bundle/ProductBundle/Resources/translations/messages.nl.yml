@@ -13,6 +13,7 @@ sylius:
         product_variant:
             available_on: Beschikbaar vanaf
             available_until: Beschikbaar tot
+            name: Naam
         association_type:
             name: Naam
         association:

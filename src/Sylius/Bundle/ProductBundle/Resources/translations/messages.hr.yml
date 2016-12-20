@@ -11,6 +11,7 @@ sylius:
             meta_description: Opis (Meta Description)
         product_variant:
             available_on: Dostupno
+            name: Naziv grupe
         association_type:
             name: Naziv grupe
         variant:

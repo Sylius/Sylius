@@ -9,6 +9,7 @@ sylius:
                     association_types: Sąryšių tipai
                     attributes: Atributai
                     header: Katalogas
+                    inventory: Atsargos
                     options: Parinktys
                     products: Prekės
                     taxons: Taksonai

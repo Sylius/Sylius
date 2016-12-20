@@ -14,6 +14,7 @@ sylius:
         product_variant:
             available_on: Gati më
             available_until: Në dispozicion deri në
+            name: Emri
         association_type:
             name: Emri
         association:

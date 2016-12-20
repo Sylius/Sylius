@@ -9,6 +9,7 @@ sylius:
                     association_types: Relatietypes
                     attributes: Attributen
                     header: Cataloog
+                    inventory: Locaties
                     options: Opties
                     products: Producten
                     taxons: Taxa

@@ -34,6 +34,8 @@ sylius:
                 province: Регіон
                 zone: Зона
             scope: Покриття
+            scopes:
+                all: Всі(-е)
             select: Виберіть
             select_scope: Виберіть покриття
         zone_member:

@@ -13,6 +13,7 @@ sylius:
         product_variant:
             available_on: Доступно на
             available_until: Доступно до
+            name: Назва
         association_type:
             name: Назва
         association:

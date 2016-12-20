@@ -9,6 +9,7 @@ sylius:
                     association_types: ชนิดความสัมพันธ์
                     attributes: คุณสมบัติ
                     header: แค็ตตาล็อก
+                    inventory: คลังสินค้า
                     options: ตัวเลือกสินค้า
                     products: สินค้า
                     taxons: การจัดหมวดหมู่

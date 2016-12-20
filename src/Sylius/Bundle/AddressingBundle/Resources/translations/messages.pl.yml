@@ -35,7 +35,7 @@ sylius:
                 zone: Strefa
             scope: Zakres
             scopes:
-                tax: Podatek
+                all: Wszystko
             select: Wybierz
             select_scope: Wybierz zakres
         zone_member:

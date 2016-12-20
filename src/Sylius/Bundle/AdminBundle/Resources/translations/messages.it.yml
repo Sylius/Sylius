@@ -9,6 +9,7 @@ sylius:
                     association_types: Tipi di associazione
                     attributes: Attributi
                     header: Catalogo
+                    inventory: Magazzino
                     options: Opzioni
                     products: Prodotti
                     taxons: Generi

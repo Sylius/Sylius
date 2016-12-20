@@ -35,8 +35,7 @@ sylius:
                 zone: Zone
             scope: Bereik
             scopes:
-                shipping: Verzending
-                tax: BTW
+                all: Alles
             select: Selecteer
             select_scope: Selecteer bereik
         zone_member:

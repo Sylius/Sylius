@@ -35,7 +35,7 @@ sylius:
                 zone: 区域
             scope: 范围
             scopes:
-                tax: 税收
+                all: 全部
             select: 请选择
             select_scope: 选择范围
         zone_member:

@@ -35,8 +35,7 @@ sylius:
                 zone: Zona
             scope: Alcance
             scopes:
-                shipping: Gastos de envío
-                tax: Impuestos
+                all: Todos
             select: Seleccionar
             select_scope: Seleccione ámbito
         zone_member:

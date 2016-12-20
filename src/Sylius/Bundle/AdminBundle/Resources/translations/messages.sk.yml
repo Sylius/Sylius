@@ -9,6 +9,7 @@ sylius:
                     association_types: Typy priradenia
                     attributes: Vlastnosti
                     header: Katalóg
+                    inventory: Skladové zásoby
                     options: Voľby
                 configuration:
                     admin_users: Administrátor

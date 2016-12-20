@@ -13,6 +13,7 @@ sylius:
         product_variant:
             available_on: Disponível em
             available_until: Disponível até
+            name: Nome
         association_type:
             name: Nome
         association:

@@ -35,8 +35,7 @@ sylius:
                 zone: Зона
             scope: Область
             scopes:
-                shipping: Способ доставки
-                tax: Налог
+                all: Все
             select: Выбрать
             select_scope: Выберите область
         zone_member:

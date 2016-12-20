@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    inventory: Lager
                     options: Indstillinger
                 configuration:
                     countries: Lande

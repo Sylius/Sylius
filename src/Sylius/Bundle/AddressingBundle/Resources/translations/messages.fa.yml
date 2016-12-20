@@ -34,6 +34,8 @@ sylius:
                 province: استان
                 zone: منطقه
             scope: محدوده
+            scopes:
+                all: همه
             select: انتخاب
             select_scope: انتخاب محدوده
         zone_member:

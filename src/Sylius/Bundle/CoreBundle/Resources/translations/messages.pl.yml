@@ -127,6 +127,9 @@ sylius:
                 amount: Kwota
         payment_method:
             channels: Kanały
+        zone:
+            scopes:
+                tax: Podatek
     installer:
         extensions:
             header: rozszerzenia

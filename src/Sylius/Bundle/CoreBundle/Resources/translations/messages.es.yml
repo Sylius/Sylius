@@ -136,6 +136,10 @@ sylius:
             channels: Canales
         product_attribute:
             position: Posición
+        zone:
+            scopes:
+                shipping: Gastos de envío
+                tax: Impuestos
     installer:
         extensions:
             header: extensiones

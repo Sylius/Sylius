@@ -34,6 +34,8 @@ sylius:
                 province: Pokrajina
                 zone: Regija
             scope: Djelokrug
+            scopes:
+                all: Sve
             select: Odaberite
             select_scope: Odaberite doseg
         zone_member:

@@ -6,6 +6,8 @@ sylius:
         product:
             name: Tên
             options: Tùy chọn
+        product_variant:
+            name: Tên
         association_type:
             name: Tên
         variant:
