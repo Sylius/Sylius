@@ -14,7 +14,7 @@ namespace Sylius\Behat\Page\Shop\Account;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
- * @author Grzegorz Sadowski <grzegorz.sadowksi@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
 {

@@ -15,7 +15,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
- * @author Grzegorz Sadowski <grzegorz.sadowksi@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterface
 {
