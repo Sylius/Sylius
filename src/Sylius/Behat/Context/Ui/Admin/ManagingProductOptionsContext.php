@@ -277,4 +277,33 @@ final class ManagingProductOptionsContext implements Context
             sprintf('%s is not a value of this product option.', $optionValue)
         );
     }
+
+    /**
+     * @Then the first product option in the list should have :field :value
+     */
+    public function theFirstProductOptionInTheListShouldHave($field, $value)
+    {
+        $actualValue = $this->indexPage->getColumnFields($field)[0];
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected first product option\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
+
+    /**
+     * @Then the last product option in the list should have :field :value
+     */
+    public function theLastProductOptionInTheListShouldHave($field, $value)
+    {
+        $fields = $this->indexPage->getColumnFields($field);
+        $actualValue = end($fields);
+
+        Assert::same(
+            $actualValue,
+            $value,
+            sprintf('Expected last product option\'s %s to be "%s", but it is "%s".', $field, $value, $actualValue)
+        );
+    }
 }

@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Product\Model\ProductOptionInterface;
 use Sylius\Component\Product\Model\ProductOptionValueInterface;
 use Sylius\Component\Product\Repository\ProductOptionRepositoryInterface;
@@ -71,16 +72,20 @@ final class ProductOptionContext implements Context
     }
 
     /**
-     * @Given the store has a product option :productOptionName with a code :productOptionCode
+     * @Given the store has a product option :name
+     * @Given the store has a product option :name with a code :code
      */
-    public function theStoreHasAProductOptionWithACode($productOptionName, $productOptionCode)
+    public function theStoreHasAProductOptionWithACode($name, $code = null)
     {
-        $productOption = $this->productOptionFactory->createNew();
-        $productOption->setCode($productOptionCode);
-        $productOption->setName($productOptionName);
+        $this->createProductOption($name, $code);
+    }
 
-        $this->sharedStorage->set('product_option', $productOption);
-        $this->productOptionRepository->add($productOption);
+    /**
+     * @Given /^the store has(?:| also) a product option "([^"]+)" at position ([^"]+)$/
+     */
+    public function theStoreHasAProductOptionAtPosition($name, $position)
+    {
+        $this->createProductOption($name, null, $position);
     }
 
     /**
@@ -98,6 +103,27 @@ final class ProductOptionContext implements Context
     }
 
     /**
+     * @param string $name
+     * @param string|null $code
+     * @param string|null $position
+     *
+     * @return ProductOptionInterface
+     */
+    private function createProductOption($name, $code = null, $position = null)
+    {
+        /** @var ProductOptionInterface $productOption */
+        $productOption = $this->productOptionFactory->createNew();
+        $productOption->setName($name);
+        $productOption->setCode($code ? $code : $this->generateCodeFromName($name));
+        $productOption->setPosition($position);
+
+        $this->sharedStorage->set('product_option', $productOption);
+        $this->productOptionRepository->add($productOption);
+
+        return $productOption;
+    }
+
+    /**
      * @param string $value
      * @param string $code
      *
@@ -105,10 +131,21 @@ final class ProductOptionContext implements Context
      */
     private function createProductOptionValue($value, $code)
     {
+        /** @var ProductOptionValueInterface $productOptionValue */
         $productOptionValue = $this->productOptionValueFactory->createNew();
         $productOptionValue->setValue($value);
         $productOptionValue->setCode($code);
 
         return $productOptionValue;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return string
+     */
+    private function generateCodeFromName($name)
+    {
+        return StringInflector::nameToCode($name);
     }
 }
