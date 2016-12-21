@@ -50,7 +50,7 @@ final class ProductAssociationTypeChoiceType extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function configureAssociations(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'choices' => function (Options $options) {
