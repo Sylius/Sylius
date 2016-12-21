@@ -1,0 +1,21 @@
+{% embed '@SyliusAdmin/Crud/create.html.twig' %}
+    {% block content %}
+        {% include '@SyliusAdmin/Crud/Create/_header.html.twig' %}
+        {% embed '@SyliusAdmin/Crud/Create/_content.html.twig' %}
+            {% block buttons %}
+                <div class="ui basic segment">
+                    <div class="ui buttons">
+                        <button class="ui labeled icon positive button" type="submit" formaction="{{ path('sylius_admin_promotion_create', {'redirect': 'referer'}) }}">
+                            <i class="exchange icon"></i>{{- 'sylius.ui.create_and_add_another'|trans -}}
+                        </button>
+                        <button class="ui labeled icon primary button" type="submit" formaction="{{ path('sylius_admin_promotion_create', {'redirect': 'sylius_admin_promotion_update'}) }}">
+                            <i class="plus icon"></i>{{- 'sylius.ui.create'|trans -}}
+                        </button>
+                        <div class="or" data-text="{{ 'sylius.ui.or'|trans }}"></div>
+                        {% include '@SyliusUi/Form/Buttons/_cancel.html.twig' with {'path': paths.cancel|default(null)} %}
+                    </div>
+                </div>
+            {% endblock %}
+        {% endembed %}
+    {% endblock %}
+{% endembed %}

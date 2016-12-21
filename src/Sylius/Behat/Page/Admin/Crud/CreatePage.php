@@ -50,9 +50,9 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function createAndReturn()
+    public function createAndAddAnother()
     {
-        $this->getDocument()->pressButton('Create and return');
+        $this->getDocument()->pressButton('Create and add another');
     }
 
     /**

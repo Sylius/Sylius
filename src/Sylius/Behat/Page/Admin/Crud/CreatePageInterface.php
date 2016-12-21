@@ -36,5 +36,5 @@ interface CreatePageInterface extends SymfonyPageInterface
     /**
      * @throws ElementNotFoundException
      */
-    public function createAndReturn();
+    public function createAndAddAnother();
 }

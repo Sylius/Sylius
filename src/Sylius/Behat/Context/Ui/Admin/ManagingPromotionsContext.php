@@ -156,7 +156,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iAddItWillingToAddAnotherOne()
     {
-        $this->createPage->createAndReturn();
+        $this->createPage->createAndAddAnother();
     }
 
     /**
