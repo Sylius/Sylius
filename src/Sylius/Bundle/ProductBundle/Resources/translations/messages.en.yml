@@ -23,6 +23,7 @@ sylius:
             name: Name
         option:
             name: Name
+            position: Position
             values: Possible values
         option_value:
             add_value: Add value

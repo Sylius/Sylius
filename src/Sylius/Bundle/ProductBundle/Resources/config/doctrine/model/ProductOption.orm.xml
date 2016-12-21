@@ -24,6 +24,10 @@
         </id>
 
         <field name="code" column="code" type="string" unique="true" />
+
+        <field name="position" type="integer">
+            <gedmo:sortable-position />
+        </field>
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>
         </field>
