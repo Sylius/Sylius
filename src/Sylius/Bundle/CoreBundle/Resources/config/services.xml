@@ -140,5 +140,10 @@
             <argument type="service" id="sylius.factory.payment" />
             <argument type="service" id="sm.factory" />
         </service>
+
+        <service id="sylius.customer_statistics_provider" class="Sylius\Component\Core\Customer\Statistics\CustomerStatisticsProvider">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.channel" />
+        </service>
     </services>
 </container>

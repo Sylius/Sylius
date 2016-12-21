@@ -20,16 +20,11 @@ use Sylius\Behat\Page\PageInterface;
 interface ShowPageInterface extends PageInterface
 {
     /**
-     * Checks if the customer on whose page we are currently on is registered,
-     * if not throws an exception.
-     *
      * @return bool
      */
     public function isRegistered();
 
     /**
-     * Deletes the user on whose show page we are currently on.
-     *
      * @throws ElementNotFoundException If there is no delete account button on the page
      */
     public function deleteAccount();
@@ -92,6 +87,37 @@ interface ShowPageInterface extends PageInterface
     public function hasImpersonateButton();
 
     public function impersonate();
+
+    /**
+     * @return bool
+     */
+    public function hasCustomerPlacedAnyOrders();
+
+    /**
+     * @return int
+     */
+    public function getOverallOrdersCount();
+
+    /**
+     * @param string $channelName
+     *
+     * @return int
+     */
+    public function getOrdersCountInChannel($channelName);
+
+    /**
+     * @param string $channelName
+     *
+     * @return string
+     */
+    public function getOrdersTotalInChannel($channelName);
+
+    /**
+     * @param string $channelName
+     *
+     * @return string
+     */
+    public function getAverageTotalInChannel($channelName);
 
     /**
      * @return string

@@ -247,7 +247,10 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldBeNotifiedThatFirstNameIsRequired($elementName)
     {
-        Assert::same($this->createPage->getValidationMessage($elementName), sprintf('Please enter your %s.', $elementName));
+        Assert::same(
+            $this->createPage->getValidationMessage($elementName),
+            sprintf('Please enter your %s.', $elementName)
+        );
     }
 
     /**
@@ -731,6 +734,73 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldBeNotifiedThatThePasswordMustBeAtLeastCharactersLong($amountOfCharacters)
     {
-        Assert::same($this->createPage->getValidationMessage('password'), sprintf('Password must be at least %d characters long.', $amountOfCharacters));
+        Assert::same(
+            $this->createPage->getValidationMessage('password'),
+            sprintf('Password must be at least %d characters long.', $amountOfCharacters)
+        );
+    }
+
+    /**
+     * @Then I should see the customer has not placed any orders yet
+     */
+    public function iShouldSeeTheCustomerHasNotYetPlacedAnyOrders()
+    {
+        Assert::false($this->showPage->hasCustomerPlacedAnyOrders(), 'The customer should not have any orders');
+    }
+
+    /**
+     * @Then /^I should see that they have placed (\d+) orders? across all channels$/
+     */
+    public function iShouldSeeThatTheyHavePlacedOrdersAcrossAllChannels($orderCount)
+    {
+        $actualOrdersCount = $this->showPage->getOverallOrdersCount();
+
+        Assert::same(
+            $actualOrdersCount,
+            (int) $orderCount,
+            'Expected orders count to be %2$d, but is %d instead.'
+        );
+    }
+
+    /**
+     * @Then /^I should see that they have placed (\d+) orders? in the "([^"]+)" channel$/
+     */
+    public function iShouldSeeThatTheyHavePlacedOrdersInTheChannel($ordersCount, $channelName)
+    {
+        $actualOrdersCount = $this->showPage->getOrdersCountInChannel($channelName);
+
+        Assert::same(
+            $actualOrdersCount,
+            (int) $ordersCount,
+            'Expected orders count to be %2$d, but is %d instead.'
+        );
+    }
+
+    /**
+     * @Then /^I should see that the overall total value of all their orders in the "([^"]+)" channel is "([^"]+)"$/
+     */
+    public function iShouldSeeThatTheOverallTotalValueOfAllTheirOrdersInTheChannelIs($channelName, $ordersValue)
+    {
+        $actualOrdersValue = $this->showPage->getOrdersTotalInChannel($channelName);
+
+        Assert::same(
+            $actualOrdersValue,
+            $ordersValue,
+            'Expected orders total value to be %2$s, but is %s instead.'
+        );
+    }
+
+    /**
+     * @Then /^I should see that the average total value of their order in the "([^"]+)" channel is "([^"]+)"$/
+     */
+    public function iShouldSeeThatTheAverageTotalValueOfTheirOrderInTheChannelIs($channelName, $ordersValue)
+    {
+        $actualOrdersValue = $this->showPage->getOrdersTotalInChannel($channelName);
+
+        Assert::same(
+            $actualOrdersValue,
+            $ordersValue,
+            'Expected order average total value to be %2$s, but is %s instead.'
+        );
     }
 }
