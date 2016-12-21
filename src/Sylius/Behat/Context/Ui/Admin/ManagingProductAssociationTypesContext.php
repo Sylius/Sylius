@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\ProductAssociationType\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductAssociationType\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductAssociationType\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -152,9 +152,21 @@ final class ManagingProductAssociationTypesContext implements Context
     }
 
     /**
-     * @Then I should see :amount product association types in the list
+     * @When /^I filter product association types with (code|name) containing "([^"]+)"/
      */
-    public function iShouldSeeCustomerGroupsInTheList($amount)
+    public function iFilterProductAssociationTypesWithFieldContaining($field, $value)
+    {
+        $this->indexPage->specifyFilterType($field, 'Contains');
+        $this->indexPage->specifyFilterValue($field, $value);
+
+        $this->indexPage->filter();
+    }
+
+    /**
+     * @Then I should see :amount product association types in the list
+     * @Then I should see only one product association type in the list
+     */
+    public function iShouldSeeProductAssociationTypesInTheList($amount = 1)
     {
         Assert::same(
             (int) $amount,
